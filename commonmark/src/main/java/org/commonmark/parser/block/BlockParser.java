@@ -21,7 +21,7 @@ public interface BlockParser {
 
     BlockContinue tryContinue(ParserState parserState);
 
-    void addLine(CharSequence line);
+    void addLine(CharSequence line, int lineStart, int lineEnd);
 
     void closeBlock();
 

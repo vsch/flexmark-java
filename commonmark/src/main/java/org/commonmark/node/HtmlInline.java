@@ -6,19 +6,15 @@ package org.commonmark.node;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public class HtmlInline extends Node {
+    public HtmlInline() {
+    }
 
-    private String literal;
+    public HtmlInline(int offsetInParent, int textLength) {
+        super(offsetInParent, textLength);
+    }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    public String getLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(String literal) {
-        this.literal = literal;
     }
 }

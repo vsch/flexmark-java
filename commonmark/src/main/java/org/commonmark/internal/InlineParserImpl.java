@@ -240,7 +240,7 @@ public class InlineParserImpl implements InlineParser {
         }
 
         if (!referenceMap.containsKey(normalizedLabel)) {
-            Link link = new Link(dest, title);
+            Link link = new Reference(dest, title);
             referenceMap.put(normalizedLabel, link);
         }
         return index - startIndex;

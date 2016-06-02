@@ -1,19 +1,30 @@
 package org.commonmark.node;
 
-public class IndentedCodeBlock extends Block {
+import org.commonmark.internal.BlockContent;
 
-    private String literal;
+public class IndentedCodeBlock extends Block {
+    public IndentedCodeBlock() {
+    }
+
+    public IndentedCodeBlock(int offsetInParent, int textLength) {
+        super(offsetInParent, textLength);
+    }
+
+    public IndentedCodeBlock(int offsetInParent, int textLength, int... segmentOffsets) {
+        super(offsetInParent, textLength, segmentOffsets);
+    }
+
+    public IndentedCodeBlock(BlockContent blockContent) {
+        super(blockContent);
+    }
+
+    public IndentedCodeBlock(int offsetInParent, int textLength, BlockContent blockContent) {
+        super(offsetInParent, textLength, blockContent);
+    }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
-    public String getLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(String literal) {
-        this.literal = literal;
-    }
 }

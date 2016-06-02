@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class DelimitedTest {
+public class SegmentedTest {
 
     @Test
     public void emphasisDelimiters() {
@@ -21,7 +21,7 @@ public class DelimitedTest {
         Parser parser = Parser.builder().build();
         Node document = parser.parse(input);
 
-        final List<Delimited> list = new ArrayList<>();
+        final List<DelimitedNode> list = new ArrayList<>();
         Visitor visitor = new AbstractVisitor() {
             @Override
             public void visit(Emphasis node) {
@@ -37,18 +37,18 @@ public class DelimitedTest {
 
         assertEquals(4, list.size());
 
-        Delimited emphasis = list.get(0);
-        Delimited strong = list.get(1);
-        Delimited important = list.get(2);
-        Delimited critical = list.get(3);
+        DelimitedNode emphasis = list.get(0);
+        DelimitedNode strong = list.get(1);
+        DelimitedNode important = list.get(2);
+        DelimitedNode critical = list.get(3);
 
-        assertEquals("*", emphasis.getOpeningDelimiter());
-        assertEquals("*", emphasis.getClosingDelimiter());
-        assertEquals("**", strong.getOpeningDelimiter());
-        assertEquals("**", strong.getClosingDelimiter());
-        assertEquals("_", important.getOpeningDelimiter());
-        assertEquals("_", important.getClosingDelimiter());
-        assertEquals("__", critical.getOpeningDelimiter());
-        assertEquals("__", critical.getClosingDelimiter());
+        assertEquals("*", String.valueOf(emphasis.getOpeningMarkerChars()));
+        assertEquals("*", String.valueOf(emphasis.getClosingMarkerChars()));
+        assertEquals("**", String.valueOf(strong.getOpeningMarkerChars()));
+        assertEquals("**", String.valueOf(strong.getClosingMarkerChars()));
+        assertEquals("_", String.valueOf(important.getOpeningMarkerChars()));
+        assertEquals("_", String.valueOf(important.getClosingMarkerChars()));
+        assertEquals("__", String.valueOf(critical.getOpeningMarkerChars()));
+        assertEquals("__", String.valueOf(critical.getClosingMarkerChars()));
     }
 }

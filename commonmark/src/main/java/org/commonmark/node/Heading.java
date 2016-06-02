@@ -1,8 +1,28 @@
 package org.commonmark.node;
 
-public class Heading extends Block {
+import org.commonmark.internal.BlockContent;
 
-    private int level;
+public abstract class Heading extends Block {
+    protected int level;
+
+    public Heading() {
+    }
+
+    public Heading(int offsetInParent, int textLength) {
+        super(offsetInParent, textLength);
+    }
+
+    public Heading(int offsetInParent, int textLength, int... segmentOffsets) {
+        super(offsetInParent, textLength, segmentOffsets);
+    }
+
+    public Heading(BlockContent blockContent) {
+        super(blockContent);
+    }
+
+    public Heading(int offsetInParent, int textLength, BlockContent blockContent) {
+        super(offsetInParent, textLength, blockContent);
+    }
 
     @Override
     public void accept(Visitor visitor) {

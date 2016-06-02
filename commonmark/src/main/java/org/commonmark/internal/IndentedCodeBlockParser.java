@@ -30,14 +30,14 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
-        content.add(line);
+    public void addLine(CharSequence line, int startLine, int endLine) {
+        content.add(line, startLine, endLine);
     }
 
     @Override
     public void closeBlock() {
         // add trailing newline
-        content.add("");
+        //content.add("");
         String contentString = content.getString();
         content = null;
 

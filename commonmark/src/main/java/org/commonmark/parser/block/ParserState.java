@@ -45,4 +45,18 @@ public interface ParserState {
      */
     BlockParser getActiveBlockParser();
 
+    /**
+     * @return The 0 based current line number within the input
+     */
+    int getLineNumber();
+
+  /**
+   * @return the start of line offset into the input stream corresponding to current index into the line
+   */
+    int getLineStart();
+
+  /**
+   * @return the end of line offset into the input stream corresponding to current index into the line, including the EOL
+   */
+    int getLineEnd();
 }

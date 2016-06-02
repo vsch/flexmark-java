@@ -1,28 +1,11 @@
 package org.commonmark.node;
 
-public class Emphasis extends Node implements Delimited {
-
-    private String delimiter;
-
+public class Emphasis extends DelimitedNode {
     public Emphasis() {
     }
 
-    public Emphasis(String delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    public void setDelimiter(String delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    @Override
-    public String getOpeningDelimiter() {
-        return delimiter;
-    }
-
-    @Override
-    public String getClosingDelimiter() {
-        return delimiter;
+    public Emphasis(int offsetInParent, int textLength, int contentOffset, int closeDelimiterOffset) {
+        super(offsetInParent, textLength, contentOffset, closeDelimiterOffset);
     }
 
     @Override

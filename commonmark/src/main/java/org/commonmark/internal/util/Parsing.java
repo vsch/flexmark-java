@@ -55,36 +55,6 @@ public class Parsing {
         return false;
     }
 
-    /**
-     * Prepares the input line replacing {@code \0}
-     */
-    public static CharSequence prepareLine(CharSequence line) {
-        // Avoid building a new string in the majority of cases (no \0)
-        StringBuilder sb = null;
-        for (int i = 0; i < line.length(); i++) {
-            char c = line.charAt(i);
-            switch (line.charAt(i)) {
-                case '\0':
-                    if (sb == null) {
-                        sb = new StringBuilder(line.length());
-                        sb.append(line, 0, i);
-                    }
-                    sb.append('\uFFFD');
-                    break;
-                default:
-                    if (sb != null) {
-                        sb.append(c);
-                    }
-            }
-        }
-
-        if (sb != null) {
-            return sb.toString();
-        } else {
-            return line;
-        }
-    }
-
     private static int findNonSpace(CharSequence s, int startIndex) {
         for (int i = startIndex; i < s.length(); i++) {
             switch (s.charAt(i)) {

@@ -169,7 +169,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Image image) {
-        String url = context.encodeUrl(image.getDestination());
+        String url = context.encodeUrl(image.getUrl());
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
         image.accept(altTextVisitor);

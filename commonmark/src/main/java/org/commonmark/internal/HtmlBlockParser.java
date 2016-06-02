@@ -88,8 +88,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
-        content.add(line);
+    public void addLine(CharSequence line, int startLine, int endLine) {
+        content.add(line, startLine, endLine);
 
         if (closingPattern != null && closingPattern.matcher(line).find()) {
             finished = true;

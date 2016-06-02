@@ -23,6 +23,8 @@ public interface Visitor {
 
     void visit(Heading heading);
 
+    void visit(Reference reference);
+
     void visit(ThematicBreak thematicBreak);
 
     void visit(HtmlInline htmlInline);
@@ -31,9 +33,13 @@ public interface Visitor {
 
     void visit(Image image);
 
+    void visit(ImageRef image);
+
     void visit(IndentedCodeBlock indentedCodeBlock);
 
     void visit(Link link);
+
+    void visit(LinkRef link);
 
     void visit(ListItem listItem);
 

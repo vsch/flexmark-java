@@ -28,8 +28,8 @@ public class ParagraphParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
-        content.add(line);
+    public void addLine(CharSequence line, int startLine, int endLine) {
+        content.add(line, startLine, endLine);
     }
 
     @Override
@@ -52,13 +52,6 @@ public class ParagraphParser extends AbstractBlockParser {
             content = null;
         } else {
             content = new BlockContent(contentString);
-        }
-    }
-
-    @Override
-    public void parseInlines(InlineParser inlineParser) {
-        if (content != null) {
-            inlineParser.parse(content.getString(), block);
         }
     }
 

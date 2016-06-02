@@ -1,14 +1,11 @@
 package org.commonmark.node;
 
 public class Text extends Node {
-
-    private String literal;
-
     public Text() {
     }
 
-    public Text(String literal) {
-        this.literal = literal;
+    public Text(int offsetInParent, int textLength) {
+        super(offsetInParent, textLength);
     }
 
     @Override
@@ -16,16 +13,9 @@ public class Text extends Node {
         visitor.visit(this);
     }
 
-    public String getLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(String literal) {
-        this.literal = literal;
-    }
-
     @Override
     protected String toStringAttributes() {
-        return "literal=" + literal;
+        CharSequence charSequence = getCharSequence();
+        return "text=" + getText(charSequence);
     }
 }

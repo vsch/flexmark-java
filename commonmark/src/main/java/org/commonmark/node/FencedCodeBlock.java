@@ -1,33 +1,61 @@
 package org.commonmark.node;
 
-public class FencedCodeBlock extends Block {
+import org.commonmark.internal.BlockContent;
 
-    private char fenceChar;
-    private int fenceLength;
+public class FencedCodeBlock extends Block {
     private int fenceIndent;
 
-    private String info;
-    private String literal;
+    public FencedCodeBlock() {
+    }
+
+    public FencedCodeBlock(int offsetInParent, int textLength, BlockContent blockContent) {
+        super(offsetInParent, textLength, blockContent);
+    }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 
-    public char getFenceChar() {
-        return fenceChar;
+    public int getInfoOffset() {
+        return getSegmentEndOffset(0);
     }
 
-    public void setFenceChar(char fenceChar) {
-        this.fenceChar = fenceChar;
+    public int getContentOffset() {
+        return getSegmentStartOffset(1);
+    }
+
+    public int getCloseFenceOffset() {
+        return getSegmentStartOffset(segmentOffsets.length);
+    }
+
+    public CharSequence getOpeningFence(CharSequence charSequence) {
+        return getSegmentChars(charSequence, 0);
+    }
+
+    /**
+     * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
+     */
+    public CharSequence getInfo(CharSequence charSequence) {
+        return getSegmentChars(charSequence, 1);
+    }
+
+    @Override
+    public CharSequence getContentChars(CharSequence charSequence) {
+        return charSequence.subSequence(getSegmentStartOffset(2), getSegmentEndOffset(segmentOffsets.length - 1));
+    }
+
+    public CharSequence getClosingFence(CharSequence charSequence) {
+        return getSegmentChars(charSequence, segmentOffsets.length);
+    }
+
+    @Override
+    public CharSequence getContentLineChars(CharSequence charSequence, int line) {
+        return getSegmentChars(charSequence, 1 + (line + 1) * 2);
     }
 
     public int getFenceLength() {
-        return fenceLength;
-    }
-
-    public void setFenceLength(int fenceLength) {
-        this.fenceLength = fenceLength;
+        return getInfoOffset();
     }
 
     public int getFenceIndent() {
@@ -36,24 +64,5 @@ public class FencedCodeBlock extends Block {
 
     public void setFenceIndent(int fenceIndent) {
         this.fenceIndent = fenceIndent;
-    }
-
-    /**
-     * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
-     */
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
-    public String getLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(String literal) {
-        this.literal = literal;
     }
 }

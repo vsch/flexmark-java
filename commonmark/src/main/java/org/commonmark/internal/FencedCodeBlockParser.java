@@ -16,11 +16,14 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
     private final FencedCodeBlock block = new FencedCodeBlock();
     private BlockContent content = new BlockContent();
+    private char fenceChar;
+    private int fenceLength;
+    private int fenceIndent;
 
     public FencedCodeBlockParser(char fenceChar, int fenceLength, int fenceIndent) {
-        block.setFenceChar(fenceChar);
-        block.setFenceLength(fenceLength);
-        block.setFenceIndent(fenceIndent);
+        this.fenceChar = fenceChar;
+        this.fenceLength = fenceLength;
+        this.fenceIndent = fenceIndent;
     }
 
     @Override
@@ -36,15 +39,15 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         Matcher matcher = null;
         boolean matches = (state.getIndent() <= 3 &&
                 nextNonSpace < line.length() &&
-                line.charAt(nextNonSpace) == block.getFenceChar() &&
+                line.charAt(nextNonSpace) == fenceChar &&
                 (matcher = CLOSING_FENCE.matcher(line.subSequence(nextNonSpace, line.length())))
                         .find());
-        if (matches && matcher.group(0).length() >= block.getFenceLength()) {
+        if (matches && matcher.group(0).length() >= fenceLength) {
             // closing fence - we're at end of line, so we can finalize now
             return BlockContinue.finished();
         } else {
             // skip optional spaces of fence indent
-            int i = block.getFenceIndent();
+            int i = fenceIndent;
             while (i > 0 && newIndex < line.length() && line.charAt(newIndex) == ' ') {
                 newIndex++;
                 i--;
@@ -54,26 +57,25 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
-        content.add(line);
+    public void addLine(CharSequence line, int startLine, int endLine) {
+        content.add(line, startLine, endLine);
     }
 
     @Override
     public void closeBlock() {
         boolean singleLine = content.hasSingleLine();
         // add trailing newline
-        content.add("");
+        //content.add("");
         String contentString = content.getString();
         content = null;
 
         // first line becomes info string
-        int firstNewline = contentString.indexOf('\n');
-        String firstLine = contentString.substring(0, firstNewline);
+        String firstLine = content.getLineString(0);
         block.setInfo(unescapeString(firstLine.trim()));
         if (singleLine) {
             block.setLiteral("");
         } else {
-            String literal = contentString.substring(firstNewline + 1);
+            String literal = content.getContentString(1, Integer.MAX_VALUE);
             block.setLiteral(literal);
         }
     }

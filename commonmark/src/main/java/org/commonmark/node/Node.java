@@ -1,5 +1,9 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SubSequence;
+import org.commonmark.internal.util.Substring;
+
 public abstract class Node {
 
     private Node parent = null;
@@ -7,11 +11,59 @@ public abstract class Node {
     private Node lastChild = null;
     private Node prev = null;
     private Node next = null;
+    protected int offsetInParent = -1;
+    protected int textLength = 0;
+
+    public Node() {
+    }
 
     public abstract void accept(Visitor visitor);
 
+    // full document char sequence
+    public CharSequence getCharSequence() {
+        return parent == null ? Substring.EMPTY : parent.getCharSequence();
+    }
+
+    public void setSourcePos(int offsetInParent, int textLength) {
+        this.offsetInParent  = offsetInParent;
+        this.textLength = textLength;
+    }
+
+    public Node(int offsetInParent, int textLength) {
+        this.offsetInParent = offsetInParent;
+        this.textLength = textLength;
+    }
+
     public Node getNext() {
         return next;
+    }
+
+    public int getOffsetInParent() {
+        return offsetInParent;
+    }
+
+    public int getTextLength() {
+        return textLength;
+    }
+
+    public int getEndOffset() {
+        return getOffset() + textLength;
+    }
+
+    public BasedSequence getText(CharSequence charSequence) {
+        int offset = getOffset();
+        return new SubSequence(charSequence, offset, offset + textLength);
+    }
+
+    public int getOffset() {
+        int offset = 0;
+        Node node = this;
+        do {
+            offset += node.offsetInParent;
+            node = node.parent;
+        } while (node != null);
+
+        return offset;
     }
 
     public Node getPrevious() {

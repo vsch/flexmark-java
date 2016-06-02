@@ -8,7 +8,14 @@ import org.commonmark.parser.block.ParserState;
 
 public class DocumentBlockParser extends AbstractBlockParser {
 
-    private final Document document = new Document();
+    private Document document;
+
+    public DocumentBlockParser() {
+    }
+
+    public void setDocument(CharSequence charSequence) {
+        document = new Document(charSequence);
+    }
 
     @Override
     public boolean isContainer() {
@@ -31,7 +38,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
+    public void addLine(CharSequence line, int startLine, int endLine) {
     }
 
 }

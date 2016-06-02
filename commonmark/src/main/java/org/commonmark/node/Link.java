@@ -1,16 +1,32 @@
 package org.commonmark.node;
 
-public class Link extends Node {
-
-    private String destination;
-    private String title;
-
-    public Link() {
+public class Link extends LinkNode {
+    public Link(int offsetInParent, int textLength, int textOpenOffset, int textOffset, int textCloseOffset, int linkOpenOffset, int linkUrlOffset, int titleOpenOffset, int titleTextOffset, int titleCloseOffset, int linkCloseOffset) {
+        super(offsetInParent, textLength,
+                textOpenOffset - offsetInParent,
+                textOffset - offsetInParent,
+                textCloseOffset - offsetInParent,
+                linkOpenOffset - offsetInParent,
+                linkUrlOffset - offsetInParent,
+                titleOpenOffset - offsetInParent,
+                titleTextOffset - offsetInParent,
+                titleCloseOffset - offsetInParent,
+                linkCloseOffset - offsetInParent
+        );
     }
 
-    public Link(String destination, String title) {
-        this.destination = destination;
-        this.title = title;
+    public Link(int offsetInParent, int textLength, int textOpenOffset, int textOffset, int textCloseOffset, int linkOpenOffset, int linkUrlOffset, int linkCloseOffset) {
+        super(offsetInParent, textLength,
+                textOpenOffset - offsetInParent,
+                textOffset - offsetInParent,
+                textCloseOffset - offsetInParent,
+                linkOpenOffset - offsetInParent,
+                linkUrlOffset - offsetInParent,
+                linkCloseOffset - offsetInParent, //titleOpenOffset
+                linkCloseOffset - offsetInParent, //titleTextOffset
+                linkCloseOffset - offsetInParent, //titleCloseOffset
+                linkCloseOffset - offsetInParent
+        );
     }
 
     @Override
@@ -18,24 +34,4 @@ public class Link extends Node {
         visitor.visit(this);
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    protected String toStringAttributes() {
-        return "destination=" + destination + ", title=" + title;
-    }
 }

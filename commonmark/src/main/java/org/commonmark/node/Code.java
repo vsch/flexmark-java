@@ -1,26 +1,15 @@
 package org.commonmark.node;
 
-public class Code extends Node {
-
-    private String literal;
-
+public class Code extends DelimitedNode {
     public Code() {
     }
 
-    public Code(String literal) {
-        this.literal = literal;
+    public Code(int offsetInParent, int textLength, int contentOffset, int closeDelimiterOffset) {
+        super(offsetInParent, textLength, contentOffset, closeDelimiterOffset);
     }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-    }
-
-    public String getLiteral() {
-        return literal;
-    }
-
-    public void setLiteral(String literal) {
-        this.literal = literal;
     }
 }

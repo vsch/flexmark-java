@@ -4,6 +4,23 @@ package org.commonmark.internal.util;
  * A CharSequence that avoids copying string data when getting a substring.
  */
 public class Substring implements CharSequence {
+    final public static CharSequence EMPTY = new CharSequence() {
+        @Override
+        public int length() {
+            return 0;
+        }
+
+        @Override
+        public char charAt(int i) {
+            throw new StringIndexOutOfBoundsException("String index out of range");
+        }
+
+        @Override
+        public CharSequence subSequence(int i, int i1) {
+            if (i == 0 && i1 == 0) return this;
+            throw new StringIndexOutOfBoundsException("EMPTY substring only subSequence(0, 0) is allowed");
+        }
+    };
 
     private final String base;
     private final int beginIndex;

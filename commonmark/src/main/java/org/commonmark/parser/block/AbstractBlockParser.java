@@ -5,6 +5,7 @@ import org.commonmark.parser.InlineParser;
 
 public abstract class AbstractBlockParser implements BlockParser {
 
+
     @Override
     public boolean isContainer() {
         return false;
@@ -16,7 +17,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
+    public void addLine(CharSequence line, int startLine, int endLine) {
     }
 
     @Override
