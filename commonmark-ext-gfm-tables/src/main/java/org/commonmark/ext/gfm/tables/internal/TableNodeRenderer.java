@@ -20,7 +20,7 @@ public class TableNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<>(Arrays.asList(
+        return new HashSet<Class<? extends Node>>(Arrays.asList(
                 TableBlock.class,
                 TableHead.class,
                 TableBody.class,

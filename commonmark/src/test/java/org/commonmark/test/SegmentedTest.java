@@ -42,13 +42,13 @@ public class SegmentedTest {
         DelimitedNode important = list.get(2);
         DelimitedNode critical = list.get(3);
 
-        assertEquals("*", String.valueOf(emphasis.getOpeningMarkerChars()));
-        assertEquals("*", String.valueOf(emphasis.getClosingMarkerChars()));
-        assertEquals("**", String.valueOf(strong.getOpeningMarkerChars()));
-        assertEquals("**", String.valueOf(strong.getClosingMarkerChars()));
-        assertEquals("_", String.valueOf(important.getOpeningMarkerChars()));
-        assertEquals("_", String.valueOf(important.getClosingMarkerChars()));
-        assertEquals("__", String.valueOf(critical.getOpeningMarkerChars()));
-        assertEquals("__", String.valueOf(critical.getClosingMarkerChars()));
+        assertEquals("*", String.valueOf(emphasis.getOpeningMarker()));
+        assertEquals("*", String.valueOf(emphasis.getClosingMarker()));
+        assertEquals("**", String.valueOf(strong.getOpeningMarker()));
+        assertEquals("**", String.valueOf(strong.getClosingMarker()));
+        assertEquals("_", String.valueOf(important.getOpeningMarker()));
+        assertEquals("_", String.valueOf(important.getClosingMarker()));
+        assertEquals("__", String.valueOf(critical.getOpeningMarker()));
+        assertEquals("__", String.valueOf(critical.getClosingMarker()));
     }
 }

@@ -1,17 +1,21 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Parsing;
 import org.commonmark.node.Block;
 import org.commonmark.node.Paragraph;
 import org.commonmark.parser.block.AbstractBlockParser;
 import org.commonmark.parser.block.BlockContinue;
-import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.ParserState;
 
 public class ParagraphParser extends AbstractBlockParser {
 
     private final Paragraph block = new Paragraph();
     private BlockContent content = new BlockContent();
+
+    public BlockContent getContent() {
+        return content;
+    }
 
     @Override
     public Block getBlock() {
@@ -28,8 +32,8 @@ public class ParagraphParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
-        content.add(line, startLine, endLine);
+    public void addLine(BasedSequence line) {
+        content.add(line);
     }
 
     @Override
@@ -37,25 +41,33 @@ public class ParagraphParser extends AbstractBlockParser {
     }
 
     public void closeBlock(InlineParserImpl inlineParser) {
-        String contentString = content.getString();
+        BasedSequence contentChars = content.getContents();
         boolean hasReferenceDefs = false;
 
         int pos;
+
         // try parsing the beginning as link reference definitions:
-        while (contentString.length() > 3 && contentString.charAt(0) == '[' &&
-                (pos = inlineParser.parseReference(contentString)) != 0) {
-            contentString = contentString.substring(pos);
+        while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
+            pos = inlineParser.parseReference(contentChars);
+            if (pos == 0) break;
+
+            contentChars = contentChars.subSequence(pos, contentChars.length());
             hasReferenceDefs = true;
         }
-        if (hasReferenceDefs && Parsing.isBlank(contentString)) {
+
+        if (hasReferenceDefs && Parsing.isBlank(contentChars)) {
             block.unlink();
             content = null;
         } else {
-            content = new BlockContent(contentString);
-        }
-    }
+            // skip lines that contained references
+            int iMax = content.getLineCount();
+            int i;
 
-    public String getContentString() {
-        return content.getString();
+            for (i = 0; i < iMax; i++) {
+                if (content.getLine(i).getStartOffset() >= contentChars.getStartOffset()) break;
+            }
+
+            content = new BlockContent(content, i, iMax);
+        }
     }
 }

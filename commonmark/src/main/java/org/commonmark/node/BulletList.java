@@ -1,6 +1,9 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class BulletList extends ListBlock {
     private char bulletMarker;
@@ -8,20 +11,16 @@ public class BulletList extends ListBlock {
     public BulletList() {
     }
 
-    public BulletList(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public BulletList(BasedSequence chars) {
+        super(chars);
     }
 
-    public BulletList(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public BulletList(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public BulletList(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public BulletList(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

@@ -3,6 +3,7 @@ package org.commonmark.ext.front.matter.internal;
 import org.commonmark.ext.front.matter.YamlFrontMatterBlock;
 import org.commonmark.ext.front.matter.YamlFrontMatterNode;
 import org.commonmark.internal.DocumentBlockParser;
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 import org.commonmark.parser.block.*;
@@ -39,7 +40,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line) {
+    public void addLine(BasedSequence line) {
     }
 
     @Override

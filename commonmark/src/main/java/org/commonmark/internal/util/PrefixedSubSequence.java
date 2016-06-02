@@ -8,12 +8,24 @@ public class PrefixedSubSequence extends SubSequence {
     private final String prefix;
     private final int prefixLength;
 
+    public PrefixedSubSequence(String prefix) {
+        this(prefix, SubSequence.EMPTY, 0, 0, NullCharacterMapper.INSTANCE);
+    }
+
     public PrefixedSubSequence(String prefix, CharSequence base) {
-        this(prefix, base, 0, base.length());
+        this(prefix, base, 0, base.length(), NullCharacterMapper.INSTANCE);
+    }
+
+    public PrefixedSubSequence(String prefix, CharSequence base, CharMapper mapper) {
+        this(prefix, base, 0, base.length(), mapper);
     }
 
     public PrefixedSubSequence(String prefix, CharSequence base, int startOffset, int endOffset) {
-        super(base, startOffset, endOffset);
+        this(prefix, base, startOffset, endOffset, NullCharacterMapper.INSTANCE);
+    }
+
+    public PrefixedSubSequence(String prefix, CharSequence base, int startOffset, int endOffset, CharMapper mapper) {
+        super(base, startOffset, endOffset, mapper);
 
         this.prefix = prefix;
         this.prefixLength = prefix.length();
@@ -40,10 +52,9 @@ public class PrefixedSubSequence extends SubSequence {
 
         if (index < prefixLength) {
             char c = prefix.charAt(index);
-            return c == '\0' ? '\uFFFD' : c;
+            return mapper.map(c, this, index);
         } else {
-            char c = base.charAt(index + startOffset - prefixLength);
-            return c == '\0' ? '\uFFFD' : c;
+            return super.charAt(index - prefixLength);
         }
     }
 
@@ -60,14 +71,14 @@ public class PrefixedSubSequence extends SubSequence {
         if (start < prefixLength) {
             if (end <= prefixLength) {
                 // all from prefix
-                return new PrefixedSubSequence(prefix.substring(start, end), base, startOffset, startOffset);
+                return new PrefixedSubSequence(prefix.substring(start, end), base, startOffset, startOffset, mapper);
             } else {
                 // some from prefix some from base
-                return new PrefixedSubSequence(prefix.substring(start), base, startOffset, startOffset + end - prefixLength);
+                return new PrefixedSubSequence(prefix.substring(start), base, startOffset, startOffset + end - prefixLength, mapper);
             }
         } else {
             // all from base
-            return new SubSequence(base, startOffset + start - prefixLength, startOffset + end - prefixLength);
+            return new SubSequence(base, startOffset + start - prefixLength, startOffset + end - prefixLength, mapper);
         }
     }
 

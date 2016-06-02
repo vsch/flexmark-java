@@ -1,11 +1,17 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.util.BasedSequence;
+
 public class Emphasis extends DelimitedNode {
     public Emphasis() {
     }
 
-    public Emphasis(int offsetInParent, int textLength, int contentOffset, int closeDelimiterOffset) {
-        super(offsetInParent, textLength, contentOffset, closeDelimiterOffset);
+    public Emphasis(BasedSequence chars) {
+        super(chars);
+    }
+
+    public Emphasis(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+        super(openingMarker, content, closingMarker);
     }
 
     @Override

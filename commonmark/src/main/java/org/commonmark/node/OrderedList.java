@@ -1,25 +1,25 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class OrderedList extends ListBlock {
+
     public OrderedList() {
     }
 
-    public OrderedList(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public OrderedList(BasedSequence chars) {
+        super(chars);
     }
 
-    public OrderedList(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public OrderedList(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public OrderedList(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public OrderedList(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     private int startNumber;

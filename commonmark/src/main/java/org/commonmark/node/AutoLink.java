@@ -2,11 +2,11 @@ package org.commonmark.node;
 
 import org.commonmark.internal.util.BasedSequence;
 
-public class SoftLineBreak extends Node {
-    public SoftLineBreak() {
+public class AutoLink extends Node {
+    public AutoLink() {
     }
 
-    public SoftLineBreak(BasedSequence chars) {
+    public AutoLink(BasedSequence chars) {
         super(chars);
     }
 

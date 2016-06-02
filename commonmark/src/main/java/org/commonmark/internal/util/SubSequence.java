@@ -1,11 +1,14 @@
 package org.commonmark.internal.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
-public class SubSequence implements BasedSequence {
-    final public static BasedSequence EMPTY = new BasedSequence() {
+public class SubSequence extends BasedSequenceImpl {
+    final public static BasedSequence EMPTY = new BasedSequenceImpl() {
         @Override
         public int length() {
             return 0;
@@ -36,9 +39,23 @@ public class SubSequence implements BasedSequence {
         public int getEndOffset() {
             return 0;
         }
+
+        @Override
+        public SourceRange getRange() {
+            return SourceRange.NULL;
+        }
+
+        @Override
+        public BasedSequence toMapped(CharMapper mapper) {
+            return this;
+        }
     };
 
+    final static public BasedSequence EOL = new PrefixedSubSequence("\n", SubSequence.EMPTY);
+    final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+
     protected final CharSequence base;
+    protected final CharMapper mapper;
     protected final int startOffset;
     protected final int endOffset;
 
@@ -55,10 +72,14 @@ public class SubSequence implements BasedSequence {
     }
 
     public SubSequence(CharSequence base) {
-        this(base, 0, base.length());
+        this(base, 0, base.length(), NullCharacterMapper.INSTANCE);
     }
 
     public SubSequence(CharSequence base, int startOffset, int endOffset) {
+        this(base, startOffset, endOffset, NullCharacterMapper.INSTANCE);
+    }
+
+    public SubSequence(CharSequence base, int startOffset, int endOffset, CharMapper mapper) {
         if (startOffset < 0) {
             throw new StringIndexOutOfBoundsException("beginIndex must be at least 0");
         }
@@ -72,8 +93,14 @@ public class SubSequence implements BasedSequence {
             throw new StringIndexOutOfBoundsException("endIndex must not be greater than length");
         }
         this.base = base;
+        this.mapper = mapper;
         this.startOffset = startOffset;
         this.endOffset = endOffset;
+    }
+
+    @Override
+    public BasedSequence toMapped(CharMapper mapper) {
+        return new SubSequence(base, startOffset, endOffset, mapper);
     }
 
     @Override
@@ -82,12 +109,17 @@ public class SubSequence implements BasedSequence {
     }
 
     @Override
+    public SourceRange getRange() {
+        return new SourceRange(startOffset, endOffset);
+    }
+
+    @Override
     public char charAt(int index) {
         if (index < 0 || startOffset + index >= endOffset) {
             throw new StringIndexOutOfBoundsException("String index out of range: " + index);
         }
         char c = base.charAt(index + startOffset);
-        return c == '\0' ? '\uFFFD' : c;
+        return mapper.map(c, this, index + startOffset);
     }
 
     @Override
@@ -98,7 +130,7 @@ public class SubSequence implements BasedSequence {
         if (end < 0 || startOffset + end > endOffset) {
             throw new StringIndexOutOfBoundsException("String index out of range: " + end);
         }
-        return new SubSequence(base, startOffset + start, startOffset + end);
+        return new SubSequence(base, startOffset + start, startOffset + end, mapper);
     }
 
     @Override

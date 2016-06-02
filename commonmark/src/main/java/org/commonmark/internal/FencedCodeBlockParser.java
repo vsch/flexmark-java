@@ -1,13 +1,12 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.node.FencedCodeBlock;
 import org.commonmark.parser.block.*;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.commonmark.internal.util.Escaping.unescapeString;
 
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
@@ -57,27 +56,14 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
-        content.add(line, startLine, endLine);
+    public void addLine(BasedSequence line) {
+        content.add(line);
     }
 
     @Override
     public void closeBlock() {
-        boolean singleLine = content.hasSingleLine();
-        // add trailing newline
-        //content.add("");
-        String contentString = content.getString();
+        block.setContent(content);
         content = null;
-
-        // first line becomes info string
-        String firstLine = content.getLineString(0);
-        block.setInfo(unescapeString(firstLine.trim()));
-        if (singleLine) {
-            block.setLiteral("");
-        } else {
-            String literal = content.getContentString(1, Integer.MAX_VALUE);
-            block.setLiteral(literal);
-        }
     }
 
     public static class Factory extends AbstractBlockParserFactory {

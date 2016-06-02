@@ -1,5 +1,6 @@
 package org.commonmark.parser.block;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 
@@ -21,7 +22,7 @@ public interface BlockParser {
 
     BlockContinue tryContinue(ParserState parserState);
 
-    void addLine(CharSequence line, int lineStart, int lineEnd);
+    void addLine(BasedSequence line);
 
     void closeBlock();
 

@@ -7,11 +7,11 @@ import org.commonmark.internal.util.BasedSequence;
  *
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
-public class HtmlInline extends Node {
-    public HtmlInline() {
+public class HtmlEntity extends Node {
+    public HtmlEntity() {
     }
 
-    public HtmlInline(BasedSequence chars) {
+    public HtmlEntity(BasedSequence chars) {
         super(chars);
     }
 

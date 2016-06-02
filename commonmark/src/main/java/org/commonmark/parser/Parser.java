@@ -1,13 +1,14 @@
 package org.commonmark.parser;
 
-import java.io.IOException;
-import java.io.Reader;
 import org.commonmark.Extension;
 import org.commonmark.internal.DocumentParser;
 import org.commonmark.internal.InlineParserImpl;
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Node;
 import org.commonmark.parser.block.BlockParserFactory;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
@@ -45,6 +46,21 @@ public class Parser {
      */
     public static Builder builder() {
         return new Builder();
+    }
+
+    /**
+     * Parse the specified input text into a tree of nodes.
+     * <p>
+     * Note that this method is thread-safe (a new parser state is used for each invocation).
+     *
+     * @param input the text to parse
+     * @return the root node
+     */
+    public Node parse(BasedSequence input) {
+        InlineParserImpl inlineParser = new InlineParserImpl(specialCharacters, delimiterCharacters, delimiterProcessors);
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
+        Node document = documentParser.parse(input);
+        return postProcess(document);
     }
 
     /**

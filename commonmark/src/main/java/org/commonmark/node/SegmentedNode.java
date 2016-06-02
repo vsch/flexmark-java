@@ -1,58 +1,64 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SegmentedSequence;
+import org.commonmark.internal.util.SubSequence;
+
+import java.util.List;
+
 public abstract class SegmentedNode extends Node implements Segmented {
-    protected int[] segmentOffsets;
+    protected List<BasedSequence> segments = SubSequence.EMPTY_LIST;
 
     public SegmentedNode() {
 
     }
 
-    public SegmentedNode(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength);
-        this.segmentOffsets = segmentOffsets;
+    public SegmentedNode(BasedSequence chars) {
+        super(chars);
+    }
+
+    public SegmentedNode(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars);
+        this.segments = segments;
+    }
+
+    public SegmentedNode(BlockContent blockContent) {
+        this(blockContent.getSpanningChars(), blockContent.getLines());
+    }
+
+    public void setContent(BasedSequence chars, List<BasedSequence> segments) {
+        setChars(chars);
+        this.segments = segments;
+    }
+
+    public void setContent(BlockContent blockContent) {
+        setChars(blockContent.getSpanningChars());
+        this.segments = blockContent.getLines();
     }
 
     @Override
-    public CharSequence getSegmentChars(CharSequence charSequence, int segmentIndex) {
-        int offsetInParent = getOffsetInParent();
-
-        if (segmentIndex == 0) {
-            return charSequence.subSequence(offsetInParent, offsetInParent + segmentOffsets[segmentIndex]);
-        } else if (segmentIndex >= segmentOffsets.length) {
-            return charSequence.subSequence(offsetInParent + segmentOffsets[segmentIndex - 1], offsetInParent + textLength);
-        } else {
-            return charSequence.subSequence(offsetInParent + segmentOffsets[segmentIndex - 1], offsetInParent + segmentOffsets[segmentIndex]);
-        }
+    public BasedSequence getSegmentChars(int index) {
+        return segments.get(index);
     }
 
     @Override
-    public int[] getSegmentOffsets() {
-        return segmentOffsets;
-    }
-
-    public void setSegmentOffsets(int[] segmentOffsets) {
-        this.segmentOffsets = segmentOffsets;
+    public List<BasedSequence> getContentCharsList() {
+        return getContentCharsList(0, segments.size());
     }
 
     @Override
-    public int getSegmentStartOffset(int segmentIndex) {
-        int offsetInParent = getOffsetInParent();
-        if (segmentIndex == 0) {
-            return offsetInParent;
-        } else {
-            return offsetInParent + segmentOffsets[segmentIndex - 1];
-        }
+    public List<BasedSequence> getContentCharsList(int startIndex, int endIndex) {
+        return segments.subList(startIndex, endIndex);
     }
 
     @Override
-    public int getSegmentEndOffset(int segmentIndex) {
-        int offsetInParent = getOffsetInParent();
-        if (segmentIndex == 0) {
-            return offsetInParent + segmentOffsets[segmentIndex];
-        } else if (segmentIndex >= segmentOffsets.length) {
-            return offsetInParent + textLength;
-        } else {
-            return offsetInParent + segmentOffsets[segmentIndex - 1];
-        }
+    public BasedSequence getContentChars() {
+        return new SegmentedSequence(getContentCharsList());
+    }
+
+    @Override
+    public BasedSequence getContentChars(int startIndex, int endIndex) {
+        return new SegmentedSequence(getContentCharsList(startIndex, endIndex));
     }
 }

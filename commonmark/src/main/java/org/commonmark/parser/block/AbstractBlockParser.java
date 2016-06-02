@@ -1,11 +1,10 @@
 package org.commonmark.parser.block;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.parser.InlineParser;
 
 public abstract class AbstractBlockParser implements BlockParser {
-
-
     @Override
     public boolean isContainer() {
         return false;
@@ -17,7 +16,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
+    public void addLine(BasedSequence line) {
     }
 
     @Override

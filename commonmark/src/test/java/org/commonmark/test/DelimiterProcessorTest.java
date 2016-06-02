@@ -7,6 +7,7 @@ import org.commonmark.html.renderer.NodeRendererFactory;
 import org.commonmark.node.CustomNode;
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
+import org.commonmark.node.Visitor;
 import org.commonmark.parser.DelimiterProcessor;
 import org.commonmark.parser.Parser;
 import org.junit.Test;
@@ -76,6 +77,10 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     private static class UpperCaseNode extends CustomNode {
+        @Override
+        public void accept(Visitor visitor) {
+
+        }
     }
 
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
@@ -105,7 +110,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
             for (Node child = upperCaseNode.getFirstChild(); child != null; child = child.getNext()) {
                 if (child instanceof Text) {
                     Text text = (Text) child;
-                    text.setLiteral(text.getLiteral().toUpperCase(Locale.ENGLISH));
+                    text.setChars(text.getChars().toUpperCase(Locale.ENGLISH));
                 }
                 context.render(child);
             }

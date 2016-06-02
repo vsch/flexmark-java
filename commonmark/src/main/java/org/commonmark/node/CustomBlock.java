@@ -1,25 +1,24 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public abstract class CustomBlock extends Block {
     public CustomBlock() {
     }
 
-    public CustomBlock(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public CustomBlock(BasedSequence chars) {
+        super(chars);
     }
 
-    public CustomBlock(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public CustomBlock(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public CustomBlock(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public CustomBlock(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

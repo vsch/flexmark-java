@@ -1,5 +1,7 @@
 package org.commonmark.ext.autolink.internal;
 
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.PrefixedSubSequence;
 import org.commonmark.node.*;
 import org.commonmark.parser.PostProcessor;
 import org.nibor.autolink.LinkExtractor;
@@ -22,32 +24,32 @@ public class AutolinkPostProcessor implements PostProcessor {
     }
 
     private void linkify(Text text) {
-        String literal = text.getLiteral();
+        BasedSequence literal = text.getChars();
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
 
         Node lastNode = text;
         int last = 0;
         for (LinkSpan link : links) {
-            String linkText = literal.substring(link.getBeginIndex(), link.getEndIndex());
+            BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
             if (link.getBeginIndex() != last) {
-                lastNode = insertNode(new Text(literal.substring(last, link.getBeginIndex())), lastNode);
+                lastNode = insertNode(new Text(literal.subSequence(last, link.getBeginIndex())), lastNode);
             }
             Text contentNode = new Text(linkText);
-            String destination = getDestination(link, linkText);
-            Link linkNode = new Link(destination, null);
+            BasedSequence destination = getDestination(link, linkText);
+            AutoLink linkNode = new AutoLink(destination);
             linkNode.appendChild(contentNode);
             lastNode = insertNode(linkNode, lastNode);
             last = link.getEndIndex();
         }
         if (last != literal.length()) {
-            insertNode(new Text(literal.substring(last)), lastNode);
+            insertNode(new Text(literal.subSequence(last, literal.length())), lastNode);
         }
         text.unlink();
     }
 
-    private static String getDestination(LinkSpan linkSpan, String linkText) {
+    private static BasedSequence getDestination(LinkSpan linkSpan, BasedSequence linkText) {
         if (linkSpan.getType() == LinkType.EMAIL) {
-            return "mailto:" + linkText;
+            return new PrefixedSubSequence("mailto:", linkText);
         } else {
             return linkText;
         }

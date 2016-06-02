@@ -37,7 +37,7 @@ public class UsageExampleTest {
             // This is called for all Text nodes. Override other visit methods for other node types.
 
             // Count words (this is just an example, don't actually do it this way for various reasons).
-            wordCount += text.getLiteral().split("\\W+").length;
+            wordCount += text.getChars().toString().split("\\W+").length;
 
             // Descend into children (could be omitted in this case because Text nodes don't have children).
             visitChildren(text);

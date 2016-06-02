@@ -25,7 +25,6 @@ The goal is to have a parser that can be easily extended to be compatible with:
 [MultiMarkdown][]  
 [PhpExtra][]  
 
-
 License
 -------
 

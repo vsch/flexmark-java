@@ -1,6 +1,8 @@
 package org.commonmark.ext.gfm.tables;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.CustomNode;
+import org.commonmark.node.Visitor;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
@@ -9,6 +11,18 @@ public class TableCell extends CustomNode {
 
     private boolean header;
     private Alignment alignment;
+
+    public TableCell() {
+    }
+
+    public TableCell(BasedSequence chars) {
+        super(chars);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 
     /**
      * @return whether the cell is a header or not

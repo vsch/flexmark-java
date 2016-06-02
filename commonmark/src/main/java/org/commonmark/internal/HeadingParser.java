@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.node.Heading;
 import org.commonmark.parser.InlineParser;
@@ -15,9 +16,9 @@ public class HeadingParser extends AbstractBlockParser {
     private static Pattern SETEXT_HEADING = Pattern.compile("^(?:=+|-+) *$");
 
     private final Heading block = new Heading();
-    private final String content;
+    private final BlockContent content;
 
-    public HeadingParser(int level, String content) {
+    public HeadingParser(int level, BlockContent content) {
         block.setLevel(level);
         this.content = content;
     }
@@ -35,7 +36,7 @@ public class HeadingParser extends AbstractBlockParser {
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-        inlineParser.parse(content, block);
+        inlineParser.parse(content.getContents(), block);
     }
 
     public static class Factory extends AbstractBlockParserFactory {
@@ -45,25 +46,31 @@ public class HeadingParser extends AbstractBlockParser {
             if (state.getIndent() >= 4) {
                 return BlockStart.none();
             }
-            CharSequence line = state.getLine();
+            BasedSequence line = state.getLine();
             int nextNonSpace = state.getNextNonSpaceIndex();
-            CharSequence paragraph = matchedBlockParser.getParagraphContent();
+            BasedSequence paragraph = matchedBlockParser.getParagraphContent();
             Matcher matcher;
             if ((matcher = ATX_HEADING.matcher(line.subSequence(nextNonSpace, line.length()))).find()) {
                 // ATX heading
                 int newOffset = nextNonSpace + matcher.group(0).length();
                 int level = matcher.group(0).trim().length(); // number of #s
+
+                BlockContent content = new BlockContent();
+                content.add(line.subSequence(newOffset, line.length()));
+
                 // remove trailing ###s:
-                String content = ATX_TRAILING.matcher(line.subSequence(newOffset, line.length())).replaceAll("");
+                //String content = ATX_TRAILING.matcher().;
+
                 return BlockStart.of(new HeadingParser(level, content))
                         .atIndex(line.length());
 
-            } else if (paragraph != null &&
-                    ((matcher = SETEXT_HEADING.matcher(line.subSequence(nextNonSpace, line.length()))).find())) {
+            } else if (paragraph != null && ((matcher = SETEXT_HEADING.matcher(line.subSequence(nextNonSpace, line.length()))).find())) {
                 // setext heading line
-
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
-                String content = paragraph.toString();
+
+                BlockContent content = new BlockContent();
+                content.addAll(matchedBlockParser.getParagraphLines());
+
                 return BlockStart.of(new HeadingParser(level, content))
                         .atIndex(line.length())
                         .replaceActiveBlockParser();

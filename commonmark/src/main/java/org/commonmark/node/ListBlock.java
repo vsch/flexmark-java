@@ -1,6 +1,9 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public abstract class ListBlock extends Block {
 
@@ -9,20 +12,16 @@ public abstract class ListBlock extends Block {
     public ListBlock() {
     }
 
-    public ListBlock(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public ListBlock(BasedSequence chars) {
+        super(chars);
     }
 
-    public ListBlock(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public ListBlock(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public ListBlock(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public ListBlock(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     public boolean isTight() {

@@ -1,6 +1,9 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class FencedCodeBlock extends Block {
     private int fenceIndent;
@@ -8,8 +11,16 @@ public class FencedCodeBlock extends Block {
     public FencedCodeBlock() {
     }
 
-    public FencedCodeBlock(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
+    public FencedCodeBlock(BasedSequence chars) {
+        super(chars);
+    }
+
+    public FencedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
+    }
+
+    public FencedCodeBlock(BlockContent blockContent) {
+        super(blockContent);
     }
 
     @Override
@@ -17,45 +28,28 @@ public class FencedCodeBlock extends Block {
         visitor.visit(this);
     }
 
-    public int getInfoOffset() {
-        return getSegmentEndOffset(0);
-    }
-
-    public int getContentOffset() {
-        return getSegmentStartOffset(1);
-    }
-
-    public int getCloseFenceOffset() {
-        return getSegmentStartOffset(segmentOffsets.length);
-    }
-
-    public CharSequence getOpeningFence(CharSequence charSequence) {
-        return getSegmentChars(charSequence, 0);
+    public BasedSequence getOpeningFence() {
+        return getSegmentChars(0);
     }
 
     /**
      * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
      */
-    public CharSequence getInfo(CharSequence charSequence) {
-        return getSegmentChars(charSequence, 1);
+    public BasedSequence getInfo() {
+        return getSegmentChars(1);
     }
 
     @Override
-    public CharSequence getContentChars(CharSequence charSequence) {
-        return charSequence.subSequence(getSegmentStartOffset(2), getSegmentEndOffset(segmentOffsets.length - 1));
+    public BasedSequence getContentChars() {
+        return getContentChars(1, segments.size());
     }
 
-    public CharSequence getClosingFence(CharSequence charSequence) {
-        return getSegmentChars(charSequence, segmentOffsets.length);
-    }
-
-    @Override
-    public CharSequence getContentLineChars(CharSequence charSequence, int line) {
-        return getSegmentChars(charSequence, 1 + (line + 1) * 2);
+    public BasedSequence getClosingFence() {
+        return getSegmentChars(segments.size());
     }
 
     public int getFenceLength() {
-        return getInfoOffset();
+        return getInfo().length();
     }
 
     public int getFenceIndent() {

@@ -1,25 +1,25 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class ThematicBreak extends Block {
+
     public ThematicBreak() {
     }
 
-    public ThematicBreak(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public ThematicBreak(BasedSequence chars) {
+        super(chars);
     }
 
-    public ThematicBreak(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public ThematicBreak(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public ThematicBreak(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public ThematicBreak(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

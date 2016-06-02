@@ -1,7 +1,10 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Parsing;
-import org.commonmark.node.*;
+import org.commonmark.node.Block;
+import org.commonmark.node.IndentedCodeBlock;
+import org.commonmark.node.Paragraph;
 import org.commonmark.parser.block.*;
 
 import java.util.regex.Pattern;
@@ -30,19 +33,15 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
-        content.add(line, startLine, endLine);
+    public void addLine(BasedSequence line) {
+        content.add(line);
     }
 
     @Override
     public void closeBlock() {
-        // add trailing newline
-        //content.add("");
-        String contentString = content.getString();
+        //String literal = TRAILING_BLANK_LINES.matcher(contentString).replaceFirst("\n");
+        block.setContent(content);
         content = null;
-
-        String literal = TRAILING_BLANK_LINES.matcher(contentString).replaceFirst("\n");
-        block.setLiteral(literal);
     }
 
     public static class Factory extends AbstractBlockParserFactory {

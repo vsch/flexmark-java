@@ -43,37 +43,37 @@ public class ParserTest {
         Node document = parser.parse("hey\n\n---\n");
 
         assertThat(document.getFirstChild(), instanceOf(Paragraph.class));
-        assertEquals("hey", ((Text) document.getFirstChild().getFirstChild()).getLiteral());
+        assertEquals("hey", ((Text) document.getFirstChild().getFirstChild()).getChars());
         assertThat(document.getLastChild(), instanceOf(DashBlock.class));
     }
-    
+
     @Test
     public void indentation() {
         String given = " - 1 space\n   - 3 spaces\n     - 5 spaces\n\t - tab + space";
         Parser parser = Parser.builder().build();
         Node document = parser.parse(given);
-        
+
         assertThat(document.getFirstChild(), instanceOf(BulletList.class));
-        
+
         Node list = document.getFirstChild(); // first level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("1 space", firstText(list.getFirstChild()));
-        
+
         list = list.getFirstChild().getLastChild(); // second level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("3 spaces", firstText(list.getFirstChild()));
-        
+
         list = list.getFirstChild().getLastChild(); // third level list
         assertEquals("5 spaces", firstText(list.getFirstChild()));
         assertEquals("tab + space", firstText(list.getFirstChild().getNext()));
     }
-    
+
     private String firstText(Node n) {
         while (!(n instanceof Text)) {
             assertThat(n, notNullValue());
             n = n.getFirstChild();
         }
-        return ((Text) n).getLiteral();
+        return n.getChars().toString();
     }
 
     private static class DashBlock extends CustomBlock {

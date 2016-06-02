@@ -7,13 +7,15 @@ import java.util.List;
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
-public class SegmentedSequence implements BasedSequence {
-    protected final CharSequence base;
-    protected final char[] chars;
-    protected final int charsOffset;
-    protected final int[] startOffsets;         // list of start/end indices
-    protected final int[] endOffsets;      // list of start/end indices
-    protected final int length;      // list of start/end indices
+public class SegmentedSequence extends BasedSequenceImpl {
+
+    final protected CharSequence base;
+    final protected CharMapper mapper;
+    final protected char[] chars;
+    final protected int charsOffset;
+    final protected int[] startOffsets;         // list of start/end indices
+    final protected int[] endOffsets;      // list of start/end indices
+    final protected int length;      // list of start/end indices
 
     public CharSequence getBase() {
         return base;
@@ -28,7 +30,13 @@ public class SegmentedSequence implements BasedSequence {
     }
 
     public SegmentedSequence(List<BasedSequence> basedSequences) {
+        this(basedSequences, NullCharacterMapper.INSTANCE);
+    }
+
+    public SegmentedSequence(List<BasedSequence> basedSequences, CharMapper mapper) {
         this.base = basedSequences.get(0);
+        this.mapper = mapper;
+
         int length = 0;
         for (BasedSequence basedSequence : basedSequences) {
             assert this.base == basedSequence.getBase() : "all segments must come from the same base sequence";
@@ -56,8 +64,9 @@ public class SegmentedSequence implements BasedSequence {
         }
     }
 
-    private SegmentedSequence(CharSequence base, char[] chars, int charsOffset, int[] startOffsets, int[] endOffsets, int length) {
+    private SegmentedSequence(CharSequence base, char[] chars, int charsOffset, int[] startOffsets, int[] endOffsets, int length, CharMapper mapper) {
         this.base = base;
+        this.mapper = mapper;
         this.chars = chars;
         this.charsOffset = charsOffset;
         this.startOffsets = startOffsets;
@@ -68,6 +77,11 @@ public class SegmentedSequence implements BasedSequence {
     @Override
     public int length() {
         return length;
+    }
+
+    @Override
+    public SourceRange getRange() {
+        return new SourceRange(getStartOffset(), getEndOffset());
     }
 
     @Override
@@ -115,7 +129,7 @@ public class SegmentedSequence implements BasedSequence {
 
         if (startIndex == endIndex) {
             // only one just return SubSequence
-            return new SubSequence(base, startOffset, endOffset);
+            return new SubSequence(base, startOffset, endOffset, mapper);
         }
 
         int[] startOffsets = new int[endIndex - startIndex + 1];
@@ -130,7 +144,12 @@ public class SegmentedSequence implements BasedSequence {
         startOffsets[endIndex] = this.startOffsets[endIndex];
         endOffsets[endIndex] = endOffset;
 
-        return new SegmentedSequence(base, this.chars, this.charsOffset + start, startOffsets, endOffsets, end - start);
+        return new SegmentedSequence(base, this.chars, this.charsOffset + start, startOffsets, endOffsets, end - start, mapper);
+    }
+
+    @Override
+    public BasedSequence toMapped(CharMapper mapper) {
+        return new SegmentedSequence(base, this.chars, this.charsOffset, startOffsets, endOffsets, length, mapper);
     }
 
     @Override

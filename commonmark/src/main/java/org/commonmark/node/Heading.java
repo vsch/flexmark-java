@@ -1,27 +1,26 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
 
-public abstract class Heading extends Block {
+import java.util.List;
+
+public class Heading extends Block {
     protected int level;
 
     public Heading() {
     }
 
-    public Heading(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public Heading(BasedSequence chars) {
+        super(chars);
     }
 
-    public Heading(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public Heading(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public Heading(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public Heading(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

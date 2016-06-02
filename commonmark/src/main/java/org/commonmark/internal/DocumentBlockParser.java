@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.node.Document;
 import org.commonmark.parser.block.AbstractBlockParser;
@@ -13,7 +14,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     public DocumentBlockParser() {
     }
 
-    public void setDocument(CharSequence charSequence) {
+    public void setDocument(BasedSequence charSequence) {
         document = new Document(charSequence);
     }
 
@@ -38,7 +39,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
+    public void addLine(BasedSequence line) {
     }
 
 }

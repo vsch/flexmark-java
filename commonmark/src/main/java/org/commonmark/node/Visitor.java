@@ -29,6 +29,12 @@ public interface Visitor {
 
     void visit(HtmlInline htmlInline);
 
+    void visit(MailLink mailLink);
+
+    void visit(HtmlEntity htmlEntity);
+
+    void visit(AutoLink autoLink);
+
     void visit(HtmlBlock htmlBlock);
 
     void visit(Image image);

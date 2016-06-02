@@ -1,6 +1,7 @@
 package org.commonmark.ext.front.matter;
 
 import org.commonmark.node.CustomNode;
+import org.commonmark.node.Visitor;
 
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class YamlFrontMatterNode extends CustomNode {
 
     public void setValues(List<String> values) {
         this.values = values;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

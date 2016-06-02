@@ -1,6 +1,9 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 /**
  * HTML block
@@ -11,20 +14,16 @@ public class HtmlBlock extends Block {
     public HtmlBlock() {
     }
 
-    public HtmlBlock(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public HtmlBlock(BasedSequence chars) {
+        super(chars);
     }
 
-    public HtmlBlock(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public HtmlBlock(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public HtmlBlock(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public HtmlBlock(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

@@ -70,8 +70,8 @@ public class StrikethroughTest extends RenderingTestCase {
     public void delimited() {
         Node document = PARSER.parse("~~foo~~");
         Strikethrough strikethrough = (Strikethrough) document.getFirstChild().getFirstChild();
-        assertEquals("~~", strikethrough.getOpeningDelimiter());
-        assertEquals("~~", strikethrough.getClosingDelimiter());
+        assertEquals("~~", strikethrough.getOpeningMarker().toString());
+        assertEquals("~~", strikethrough.getClosingMarker().toString());
     }
 
     @Override

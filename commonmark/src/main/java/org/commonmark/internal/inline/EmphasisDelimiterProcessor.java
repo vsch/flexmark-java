@@ -1,5 +1,6 @@
 package org.commonmark.internal.inline;
 
+import org.commonmark.internal.util.SubSequence;
 import org.commonmark.node.Emphasis;
 import org.commonmark.node.Node;
 import org.commonmark.node.StrongEmphasis;
@@ -44,8 +45,8 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     public void process(Text opener, Text closer, int delimiterUse) {
         String singleDelimiter = String.valueOf(getOpeningDelimiterChar());
         Node emphasis = delimiterUse == 1
-                ? new Emphasis(singleDelimiter)
-                : new StrongEmphasis(singleDelimiter + singleDelimiter);
+                ? new Emphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, opener.chars.subSequence(0, delimiterUse))
+                : new StrongEmphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, opener.chars.subSequence(0, delimiterUse));
 
         Node tmp = opener.getNext();
         while (tmp != null && tmp != closer) {
@@ -54,6 +55,7 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
             tmp = next;
         }
 
+        emphasis.setChars(opener.chars.subSequence(opener.getNext().getOffsetStart(), closer.getPrevious().getEndOffset()));
         opener.insertAfter(emphasis);
     }
 }

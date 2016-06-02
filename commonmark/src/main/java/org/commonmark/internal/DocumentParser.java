@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Parsing;
 import org.commonmark.internal.util.PrefixedSubSequence;
 import org.commonmark.internal.util.SubSequence;
@@ -22,7 +23,7 @@ public class DocumentParser implements ParserState {
             new ListBlockParser.Factory(),
             new IndentedCodeBlockParser.Factory());
 
-    private SubSequence line;
+    private BasedSequence line;
 
     /**
      * current line number in the input
@@ -87,7 +88,7 @@ public class DocumentParser implements ParserState {
      * The main parsing function. Returns a parsed document AST.
      */
     public Document parse(CharSequence source) {
-        SubSequence input = new SubSequence(source);
+        BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : new SubSequence(source);
         int lineStart = 0;
         int lineBreak;
         int lineEnd;
@@ -95,7 +96,7 @@ public class DocumentParser implements ParserState {
         documentBlockParser.setDocument(input);
 
         while ((lineBreak = Parsing.findLineBreak(input, lineStart)) != -1) {
-            SubSequence line = input.subSequence(lineStart, lineBreak);
+            BasedSequence line = input.subSequence(lineStart, lineBreak);
             if (lineBreak + 1 < input.length() && input.charAt(lineBreak) == '\r' && input.charAt(lineBreak + 1) == '\n') {
                 lineEnd = lineBreak + 2;
             } else {
@@ -119,35 +120,6 @@ public class DocumentParser implements ParserState {
         return finalizeAndProcess();
     }
 
-    private int readLine(StringBuilder line, BufferedReader bufferedReader) throws IOException {
-        int count = 0;
-        boolean hadCR = false;
-
-        while (true) {
-            int c = bufferedReader.read();
-            if (c == -1) break;
-
-            if (c == '\n') {
-                count++;
-                break;
-            }
-
-            if (hadCR) {
-                break;
-            }
-
-            count++;
-
-            if (c == '\r') {
-                hadCR = true;
-            } else {
-                line.appendCodePoint(c);
-            }
-        }
-
-        return count;
-    }
-
     public Document parse(Reader input) throws IOException {
         BufferedReader bufferedReader;
         if (input instanceof BufferedReader) {
@@ -156,22 +128,17 @@ public class DocumentParser implements ParserState {
             bufferedReader = new BufferedReader(input);
         }
 
-        lineNumber = 0;
-        lineStart = 0;
+        StringBuilder file = new StringBuilder();
+        char[] buffer = new char[16384];
 
         while (true) {
-            StringBuilder line = new StringBuilder();
-            int lineSize = readLine(line, bufferedReader);
-            if (lineSize == 0) break;
-            lineEnd = lineStart + lineSize;
-
-            incorporateLine(line);
-
-            lineNumber++;
-            lineStart = lineEnd;
+            int charsRead = bufferedReader.read(buffer);
+            file.append(buffer, 0, charsRead);
+            if (charsRead < buffer.length) break;
         }
 
-        return finalizeAndProcess();
+        BasedSequence source = new PrefixedSubSequence(file.toString(), SubSequence.EMPTY);
+        return parse(source);
     }
 
     @Override
@@ -190,7 +157,7 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
-    public SubSequence getLine() {
+    public BasedSequence getLine() {
         return line;
     }
 
@@ -228,7 +195,7 @@ public class DocumentParser implements ParserState {
      * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each
      * line of input, then finalizing the document.
      */
-    private void incorporateLine(SubSequence ln) {
+    private void incorporateLine(BasedSequence ln) {
         line = ln;
         index = 0;
         column = 0;
@@ -411,11 +378,11 @@ public class DocumentParser implements ParserState {
      * calling this.
      */
     private void addLine() {
-        SubSequence content;
+        BasedSequence content;
         if (columnIsInTab) {
             // Our column is in a partially consumed tab. Expand the remaining columns (to the next tab stop) to spaces.
             int afterTab = index + 1;
-            SubSequence rest = line.subSequence(afterTab, line.length());
+            BasedSequence rest = line.subSequence(afterTab, line.length());
             int spaces = Parsing.columnsToNextTabStop(column);
             StringBuilder sb = new StringBuilder(spaces + rest.length());
             for (int i = 0; i < spaces; i++) {
@@ -427,7 +394,7 @@ public class DocumentParser implements ParserState {
             content = line.subSequence(index, line.length());
         }
 
-        getActiveBlockParser().addLine(content, content.getStartOffset(), lineEnd);
+        getActiveBlockParser().addLine(content);
     }
 
     private BlockStartImpl findBlockStart(BlockParser blockParser) {
@@ -610,8 +577,16 @@ public class DocumentParser implements ParserState {
     }
 
     private static class MatchedBlockParserImpl implements MatchedBlockParser {
-
         private final BlockParser matchedBlockParser;
+
+        @Override
+        public List<BasedSequence> getParagraphLines() {
+            if (matchedBlockParser instanceof ParagraphParser) {
+                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
+                return paragraphParser.getContent().getLines();
+            }
+            return SubSequence.EMPTY_LIST;
+        }
 
         public MatchedBlockParserImpl(BlockParser matchedBlockParser) {
             this.matchedBlockParser = matchedBlockParser;
@@ -623,12 +598,12 @@ public class DocumentParser implements ParserState {
         }
 
         @Override
-        public CharSequence getParagraphContent() {
+        public BasedSequence getParagraphContent() {
             if (matchedBlockParser instanceof ParagraphParser) {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContentString();
+                return paragraphParser.getContent().getContents();
             }
-            return null;
+            return SubSequence.EMPTY;
         }
     }
 }

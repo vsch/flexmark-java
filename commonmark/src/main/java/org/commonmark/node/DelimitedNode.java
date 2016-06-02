@@ -1,39 +1,48 @@
 package org.commonmark.node;
 
-public abstract class DelimitedNode extends SegmentedNode {
-    public static int OPEN_MARKER_SEGMENT = 0;
-    public static int CONTENT_SEGMENT = 1;
-    public static int CLOSE_MARKER_SEGMENT = 2;
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SubSequence;
+
+public abstract class DelimitedNode extends Node {
+    protected BasedSequence openingMarker = SubSequence.EMPTY;
+    protected BasedSequence content = SubSequence.EMPTY;
+    protected BasedSequence closingMarker = SubSequence.EMPTY;
 
     public DelimitedNode() {
     }
 
-    public DelimitedNode(int offsetInParent, int textLength, int contentOffset, int closeDelimiterOffset) {
-        super(offsetInParent, textLength, contentOffset, closeDelimiterOffset);
+    public DelimitedNode(BasedSequence chars) {
+        super(chars);
     }
 
-    public CharSequence getOpeningMarkerChars(CharSequence charSequence) {
-        return getSegmentChars(charSequence, OPEN_MARKER_SEGMENT);
+    public DelimitedNode(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+        this.openingMarker = openingMarker;
+        this.content = content;
+        this.closingMarker = closingMarker;
     }
 
-    public CharSequence getContentChars(CharSequence charSequence) {
-        return getSegmentChars(charSequence, CONTENT_SEGMENT);
+    public BasedSequence getOpeningMarker() {
+        return openingMarker;
     }
 
-    public CharSequence getClosingMarkerChars(CharSequence charSequence) {
-        return getSegmentChars(charSequence, CLOSE_MARKER_SEGMENT);
+    public void setOpeningMarker(BasedSequence openingMarker) {
+        this.openingMarker = openingMarker;
     }
 
-    public CharSequence getOpeningMarkerChars() {
-        return getSegmentChars(getCharSequence(), OPEN_MARKER_SEGMENT);
+    public BasedSequence getContent() {
+        return content;
     }
 
-    public CharSequence getContentChars() {
-        return getSegmentChars(getCharSequence(), CONTENT_SEGMENT);
+    public void setContent(BasedSequence content) {
+        this.content = content;
     }
 
-    public CharSequence getClosingMarkerChars() {
-        return getSegmentChars(getCharSequence(), CLOSE_MARKER_SEGMENT);
+    public BasedSequence getClosingMarker() {
+        return closingMarker;
     }
 
+    public void setClosingMarker(BasedSequence closingMarker) {
+        this.closingMarker = closingMarker;
+    }
 }

@@ -1,5 +1,9 @@
 package org.commonmark.parser.block;
 
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
+
 /**
  * Open block parser that was last matched during the continue phase. This is different from the currently active
  * block parser, as an unmatched block is only closed when a new block is started.
@@ -15,6 +19,7 @@ public interface MatchedBlockParser {
      *
      * @return paragraph content or {@code null}
      */
-    CharSequence getParagraphContent();
+    BasedSequence getParagraphContent();
 
+    List<BasedSequence> getParagraphLines();
 }

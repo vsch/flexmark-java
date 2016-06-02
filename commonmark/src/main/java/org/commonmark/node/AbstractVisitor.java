@@ -6,7 +6,7 @@ package org.commonmark.node;
  * Can be used to only process certain nodes. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
  */
-public  class AbstractVisitor implements Visitor {
+public class AbstractVisitor implements Visitor {
 
     @Override
     public void visit(BlockQuote blockQuote) {
@@ -130,7 +130,22 @@ public  class AbstractVisitor implements Visitor {
 
     @Override
     public void visit(CustomNode customNode) {
-        visitChildren(customNode);
+        visitChildren((Node) customNode);
+    }
+
+    @Override
+    public void visit(MailLink mailLink) {
+        visitChildren(mailLink);
+    }
+
+    @Override
+    public void visit(HtmlEntity htmlEntity) {
+        visitChildren(htmlEntity);
+    }
+
+    @Override
+    public void visit(AutoLink autoLink) {
+        visitChildren(autoLink);
     }
 
     /**

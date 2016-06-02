@@ -1,11 +1,13 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.util.BasedSequence;
+
 public class HardLineBreak extends Node {
     public HardLineBreak() {
     }
 
-    public HardLineBreak(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public HardLineBreak(BasedSequence chars) {
+        super(chars);
     }
 
     @Override

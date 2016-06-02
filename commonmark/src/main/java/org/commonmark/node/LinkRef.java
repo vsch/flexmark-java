@@ -1,12 +1,33 @@
 package org.commonmark.node;
 
-public class LinkRef extends RefNode {
+import org.commonmark.internal.util.BasedSequence;
 
+public class LinkRef extends RefNode {
     public LinkRef() {
     }
 
-    public LinkRef(int offsetInParent, int textLength, int refOpenOffset, int refTextOffset, int refCloseOffset, int refIdOpenOffset, int refIdOffset, int refIdCloseOffset) {
-        super(offsetInParent, textLength, refOpenOffset, refTextOffset, refCloseOffset, refIdOpenOffset, refIdOffset, refIdCloseOffset);
+    public LinkRef(BasedSequence chars) {
+        super(chars);
+    }
+
+    public LinkRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence reference, BasedSequence referenceCloseMarker) {
+        super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, reference, referenceCloseMarker);
+    }
+
+    public LinkRef(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence reference, BasedSequence referenceCloseMarker) {
+        super(chars, textOpenMarker, text, textCloseMarker, referenceOpenMarker, reference, referenceCloseMarker);
+    }
+
+    public LinkRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker) {
+        super(textOpenMarker, text, textCloseMarker);
+    }
+
+    public LinkRef(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker) {
+        super(chars, textOpenMarker, text, textCloseMarker);
+    }
+
+    public LinkRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence referenceCloseMarker) {
+        super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, referenceCloseMarker);
     }
 
     @Override

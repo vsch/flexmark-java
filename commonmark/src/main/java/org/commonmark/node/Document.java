@@ -1,16 +1,25 @@
 package org.commonmark.node;
 
-public class Document extends Block {
-    private final CharSequence charSequence;
+import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
 
-    public Document(CharSequence charSequence) {
-        super(0, charSequence.length());
-        this.charSequence = charSequence;
+import java.util.List;
+
+public class Document extends Block {
+    public Document() {
     }
 
-    @Override
-    public CharSequence getCharSequence() {
-        return charSequence;
+    public Document(BasedSequence chars) {
+        super(chars);
+
+    }
+
+    public Document(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
+    }
+
+    public Document(BlockContent blockContent) {
+        super(blockContent);
     }
 
     @Override

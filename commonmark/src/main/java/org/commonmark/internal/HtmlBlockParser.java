@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Parsing;
 import org.commonmark.node.Block;
 import org.commonmark.node.HtmlBlock;
@@ -88,8 +89,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(CharSequence line, int startLine, int endLine) {
-        content.add(line, startLine, endLine);
+    public void addLine(BasedSequence line) {
+        content.add(line);
 
         if (closingPattern != null && closingPattern.matcher(line).find()) {
             finished = true;
@@ -98,7 +99,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock() {
-        block.setLiteral(content.getString());
+        block.setContent(content);
         content = null;
     }
 

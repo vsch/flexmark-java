@@ -1,25 +1,24 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class Paragraph extends Block {
     public Paragraph() {
     }
 
-    public Paragraph(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public Paragraph(BasedSequence chars) {
+        super(chars);
     }
 
-    public Paragraph(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public Paragraph(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public Paragraph(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public Paragraph(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

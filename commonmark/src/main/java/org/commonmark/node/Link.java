@@ -1,32 +1,29 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.util.BasedSequence;
+
 public class Link extends LinkNode {
-    public Link(int offsetInParent, int textLength, int textOpenOffset, int textOffset, int textCloseOffset, int linkOpenOffset, int linkUrlOffset, int titleOpenOffset, int titleTextOffset, int titleCloseOffset, int linkCloseOffset) {
-        super(offsetInParent, textLength,
-                textOpenOffset - offsetInParent,
-                textOffset - offsetInParent,
-                textCloseOffset - offsetInParent,
-                linkOpenOffset - offsetInParent,
-                linkUrlOffset - offsetInParent,
-                titleOpenOffset - offsetInParent,
-                titleTextOffset - offsetInParent,
-                titleCloseOffset - offsetInParent,
-                linkCloseOffset - offsetInParent
-        );
+    public Link() {
     }
 
-    public Link(int offsetInParent, int textLength, int textOpenOffset, int textOffset, int textCloseOffset, int linkOpenOffset, int linkUrlOffset, int linkCloseOffset) {
-        super(offsetInParent, textLength,
-                textOpenOffset - offsetInParent,
-                textOffset - offsetInParent,
-                textCloseOffset - offsetInParent,
-                linkOpenOffset - offsetInParent,
-                linkUrlOffset - offsetInParent,
-                linkCloseOffset - offsetInParent, //titleOpenOffset
-                linkCloseOffset - offsetInParent, //titleTextOffset
-                linkCloseOffset - offsetInParent, //titleCloseOffset
-                linkCloseOffset - offsetInParent
-        );
+    public Link(BasedSequence chars) {
+        super(chars);
+    }
+
+    public Link(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence titleOpenMarker, BasedSequence title, BasedSequence titleCloseMarker, BasedSequence linkCloseMarker) {
+        super(textOpenMarker, text, textCloseMarker, linkOpenMarker, url, titleOpenMarker, title, titleCloseMarker, linkCloseMarker);
+    }
+
+    public Link(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence titleOpenMarker, BasedSequence title, BasedSequence titleCloseMarker, BasedSequence linkCloseMarker) {
+        super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, titleOpenMarker, title, titleCloseMarker, linkCloseMarker);
+    }
+
+    public Link(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence linkCloseMarker) {
+        super(textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
+    }
+
+    public Link(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence linkCloseMarker) {
+        super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
     }
 
     @Override

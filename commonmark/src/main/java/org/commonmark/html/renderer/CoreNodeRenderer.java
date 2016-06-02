@@ -1,6 +1,7 @@
 package org.commonmark.html.renderer;
 
 import org.commonmark.html.HtmlWriter;
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.*;
 
 import java.util.*;
@@ -20,27 +21,35 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<>(Arrays.asList(
-                Document.class,
-                Heading.class,
-                Paragraph.class,
+        return new HashSet<Class<? extends Node>>(Arrays.asList(
+                AutoLink.class,
                 BlockQuote.class,
                 BulletList.class,
+                Code.class,
+                CustomBlock.class,
+                //CustomNode.class,
+                Document.class,
+                Emphasis.class,
                 FencedCodeBlock.class,
+                HardLineBreak.class,
+                Heading.class,
                 HtmlBlock.class,
-                ThematicBreak.class,
+                HtmlEntity.class,
+                HtmlInline.class,
+                Image.class,
+                ImageRef.class,
                 IndentedCodeBlock.class,
                 Link.class,
+                LinkRef.class,
                 ListItem.class,
+                MailLink.class,
                 OrderedList.class,
-                Image.class,
-                Emphasis.class,
+                Paragraph.class,
+                Reference.class,
+                SoftLineBreak.class,
                 StrongEmphasis.class,
                 Text.class,
-                Code.class,
-                HtmlInline.class,
-                SoftLineBreak.class,
-                HardLineBreak.class
+                ThematicBreak.class
         ));
     }
 
@@ -97,16 +106,16 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(FencedCodeBlock fencedCodeBlock) {
-        String literal = fencedCodeBlock.getLiteral();
+        String literal = fencedCodeBlock.getContentChars().toString();
         Map<String, String> attributes = new LinkedHashMap<>();
-        String info = fencedCodeBlock.getInfo();
+        BasedSequence info = fencedCodeBlock.getInfo();
         if (info != null && !info.isEmpty()) {
-            int space = info.indexOf(" ");
+            int space = info.countLeadingNot(" ");
             String language;
             if (space == -1) {
-                language = info;
+                language = info.toString();
             } else {
-                language = info.substring(0, space);
+                language = info.subSequence(0, space).toString();
             }
             attributes.put("class", "language-" + language);
         }
@@ -117,9 +126,9 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     public void visit(HtmlBlock htmlBlock) {
         html.line();
         if (context.shouldEscapeHtml()) {
-            html.text(htmlBlock.getLiteral());
+            html.text(htmlBlock.getContentChars().toString());
         } else {
-            html.raw(htmlBlock.getLiteral());
+            html.raw(htmlBlock.getChars().toString());
         }
         html.line();
     }
@@ -133,16 +142,16 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        renderCodeBlock(indentedCodeBlock.getLiteral(), getAttrs(indentedCodeBlock));
+        renderCodeBlock(indentedCodeBlock.getContentChars().toString(), getAttrs(indentedCodeBlock));
     }
 
     @Override
     public void visit(Link link) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(link.getDestination());
+        String url = context.encodeUrl(link.getUrl().toString());
         attrs.put("href", url);
         if (link.getTitle() != null) {
-            attrs.put("title", link.getTitle());
+            attrs.put("title", link.getTitle().toString());
         }
         html.tag("a", getAttrs(link, attrs));
         visitChildren(link);
@@ -169,7 +178,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Image image) {
-        String url = context.encodeUrl(image.getUrl());
+        String url = context.encodeUrl(image.getUrl().toString());
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
         image.accept(altTextVisitor);
@@ -179,7 +188,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         attrs.put("src", url);
         attrs.put("alt", altText);
         if (image.getTitle() != null) {
-            attrs.put("title", image.getTitle());
+            attrs.put("title", image.getTitle().toString());
         }
 
         html.tag("img", getAttrs(image, attrs), true);
@@ -201,22 +210,22 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Text text) {
-        html.text(text.getLiteral());
+        html.text(text.getChars().toString());
     }
 
     @Override
     public void visit(Code code) {
         html.tag("code");
-        html.text(code.getLiteral());
+        html.text(code.getContent().toString());
         html.tag("/code");
     }
 
     @Override
     public void visit(HtmlInline htmlInline) {
         if (context.shouldEscapeHtml()) {
-            html.text(htmlInline.getLiteral());
+            html.text(htmlInline.getChars().toString());
         } else {
-            html.raw(htmlInline.getLiteral());
+            html.raw(htmlInline.getChars().toString());
         }
     }
 
@@ -291,7 +300,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
         @Override
         public void visit(Text text) {
-            sb.append(text.getLiteral());
+            sb.append(text.getChars());
         }
 
         @Override

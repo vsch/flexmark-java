@@ -93,7 +93,7 @@ public class HtmlRendererTest {
                     // Remove the default attribute for info
                     attributes.remove("class");
                     // Put info in custom attribute instead
-                    attributes.put("data-custom", fencedCodeBlock.getInfo());
+                    attributes.put("data-custom", fencedCodeBlock.getInfo().toString());
                 }
             }
         };

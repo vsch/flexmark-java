@@ -1,25 +1,24 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class ListItem extends Block {
     public ListItem() {
     }
 
-    public ListItem(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public ListItem(BasedSequence chars) {
+        super(chars);
     }
 
-    public ListItem(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public ListItem(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public ListItem(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public ListItem(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override

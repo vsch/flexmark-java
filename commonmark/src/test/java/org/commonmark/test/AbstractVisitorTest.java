@@ -13,7 +13,7 @@ public class AbstractVisitorTest {
         Visitor visitor = new AbstractVisitor() {
             @Override
             public void visit(Text text) {
-                text.insertAfter(new Code(text.getLiteral()));
+                text.insertAfter(new Code(text.getChars()));
                 text.unlink();
             }
         };
@@ -33,6 +33,6 @@ public class AbstractVisitorTest {
     private static void assertCode(String expectedLiteral, Node node) {
         assertEquals("Expected node to be a Code node: " + node, Code.class, node.getClass());
         Code code = (Code) node;
-        assertEquals(expectedLiteral, code.getLiteral());
+        assertEquals(expectedLiteral, code.getChars());
     }
 }

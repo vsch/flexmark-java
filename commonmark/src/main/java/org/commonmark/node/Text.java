@@ -1,11 +1,18 @@
 package org.commonmark.node;
 
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.PrefixedSubSequence;
+
 public class Text extends Node {
     public Text() {
     }
 
-    public Text(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public Text(BasedSequence chars) {
+        super(chars);
+    }
+
+    public Text(String chars) {
+        super(new PrefixedSubSequence(chars));
     }
 
     @Override
@@ -15,7 +22,6 @@ public class Text extends Node {
 
     @Override
     protected String toStringAttributes() {
-        CharSequence charSequence = getCharSequence();
-        return "text=" + getText(charSequence);
+        return "text=" + chars;
     }
 }

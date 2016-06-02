@@ -28,14 +28,14 @@ public class SpecCoreTest extends SpecTestCase {
             @Override
             protected void visitChildren(Node parent) {
                 if (parent instanceof Text && parent.getFirstChild() != null) {
-                    fail("Text node is not allowed to have children, literal is \"" + ((Text) parent).getLiteral() + "\"");
+                    fail("Text node is not allowed to have children, literal is \"" + ((Text) parent).getChars() + "\"");
                 }
                 boolean lastText = false;
                 Node node = parent.getFirstChild();
                 while (node != null) {
                     if (node instanceof Text) {
                         if (lastText) {
-                            fail("Adjacent text nodes found, second node literal is \"" + ((Text) node).getLiteral() + "\", source:\n" + source);
+                            fail("Adjacent text nodes found, second node literal is \"" + ((Text) node).getChars() + "\", source:\n" + source);
                         }
                         lastText = true;
                     } else {

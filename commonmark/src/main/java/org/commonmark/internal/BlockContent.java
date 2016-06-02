@@ -14,6 +14,10 @@ public class BlockContent {
         return lines.get(line);
     }
 
+    public BasedSequence getSpanningChars() {
+        return lines != null ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : SubSequence.EMPTY;
+    }
+
     public List<BasedSequence> getLines() {
         return lines;
     }
@@ -52,8 +56,17 @@ public class BlockContent {
         lines.add(line);
     }
 
+    public void addAll(List<BasedSequence> lines) {
+        lines.addAll(lines);
+    }
+
     public boolean hasSingleLine() {
         return lines != null && lines.size() == 1;
+    }
+
+    public BasedSequence getContents() {
+        if (lines == null) return SubSequence.EMPTY;
+        return getContents(0, lines.size());
     }
 
     public BasedSequence getContents(int startLine, int endLine) {

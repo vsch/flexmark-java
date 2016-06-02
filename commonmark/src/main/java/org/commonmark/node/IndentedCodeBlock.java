@@ -1,25 +1,25 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
+import org.commonmark.internal.util.BasedSequence;
+
+import java.util.List;
 
 public class IndentedCodeBlock extends Block {
+
     public IndentedCodeBlock() {
     }
 
-    public IndentedCodeBlock(int offsetInParent, int textLength) {
-        super(offsetInParent, textLength);
+    public IndentedCodeBlock(BasedSequence chars) {
+        super(chars);
     }
 
-    public IndentedCodeBlock(int offsetInParent, int textLength, int... segmentOffsets) {
-        super(offsetInParent, textLength, segmentOffsets);
+    public IndentedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
+        super(chars, segments);
     }
 
     public IndentedCodeBlock(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    public IndentedCodeBlock(int offsetInParent, int textLength, BlockContent blockContent) {
-        super(offsetInParent, textLength, blockContent);
     }
 
     @Override
