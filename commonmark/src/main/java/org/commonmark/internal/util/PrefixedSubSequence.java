@@ -87,7 +87,7 @@ public class PrefixedSubSequence extends SubSequence {
 
         if (index < prefixLength) {
             char c = prefix.charAt(index);
-            return mapper.map(c, this, index);
+            return mapper.map(c);
         } else {
             return super.charAt(index - prefixLength);
         }

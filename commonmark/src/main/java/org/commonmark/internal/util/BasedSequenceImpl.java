@@ -64,6 +64,10 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence trim() {
         int trimStart = countChars(WHITESPACE_CHARS, 0, length());
+        if (trimStart == length()) {
+            return subSequence(trimStart, trimStart);
+        }
+
         int trimEnd = countCharsReversed(WHITESPACE_CHARS, 0, length());
         return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : this;
     }

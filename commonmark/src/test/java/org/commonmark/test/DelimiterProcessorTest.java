@@ -4,6 +4,8 @@ import org.commonmark.html.HtmlRenderer;
 import org.commonmark.html.renderer.NodeRenderer;
 import org.commonmark.html.renderer.NodeRendererContext;
 import org.commonmark.html.renderer.NodeRendererFactory;
+import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SubSequence;
 import org.commonmark.node.CustomNode;
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
@@ -65,21 +67,64 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public void process(Text opener, Text closer, int delimiterUse) {
-            UpperCaseNode content = new UpperCaseNode();
+            UpperCaseNode content = new UpperCaseNode(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse));
             Node tmp = opener.getNext();
             while (tmp != null && tmp != closer) {
                 Node next = tmp.getNext();
                 content.appendChild(tmp);
                 tmp = next;
             }
+            content.setContent(opener.chars.baseSubSequence(opener.getEndOffset(), closer.getStartOffset()));
             opener.insertAfter(content);
         }
     }
 
     private static class UpperCaseNode extends CustomNode {
+        protected BasedSequence openingMarker = SubSequence.EMPTY;
+        protected BasedSequence content = SubSequence.EMPTY;
+        protected BasedSequence closingMarker = SubSequence.EMPTY;
+
+        public UpperCaseNode() {
+        }
+
+        public UpperCaseNode(BasedSequence chars) {
+            super(chars);
+        }
+
+        public UpperCaseNode(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+            super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+            this.openingMarker = openingMarker;
+            this.content = content;
+            this.closingMarker = closingMarker;
+        }
+
+        public BasedSequence getOpeningMarker() {
+            return openingMarker;
+        }
+
+        public void setOpeningMarker(BasedSequence openingMarker) {
+            this.openingMarker = openingMarker;
+        }
+
+        public BasedSequence getContent() {
+            return content;
+        }
+
+        public void setContent(BasedSequence content) {
+            this.content = content;
+        }
+
+        public BasedSequence getClosingMarker() {
+            return closingMarker;
+        }
+
+        public void setClosingMarker(BasedSequence closingMarker) {
+            this.closingMarker = closingMarker;
+        }
+
         @Override
         public void accept(Visitor visitor) {
-
+            visitor.visit(this);
         }
     }
 

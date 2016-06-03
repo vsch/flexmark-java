@@ -803,7 +803,7 @@ public class InlineParserImpl implements InlineParser {
             return null;
         }
 
-        BasedSequence before = startIndex == 0 ? SubSequence.EOL : input.subSequence(startIndex - 1, startIndex);
+        String before = startIndex == 0 ? "\n" : String.valueOf(input.charAt(startIndex - 1));
 
         char charAfter = peek();
         String after = charAfter == '\0' ? "\n" : String.valueOf(charAfter);
@@ -897,12 +897,20 @@ public class InlineParserImpl implements InlineParser {
             // if opener has 0 delims, remove it and the inline
             if (opener.numDelims == 0) {
                 removeDelimiterAndNode(opener);
+            } else {
+                // adjust number of characters in the node by keeping outer of numDelims
+                opener.node.setChars(opener.node.getChars().subSequence(0, opener.numDelims));
             }
 
             if (closer.numDelims == 0) {
                 Delimiter next = closer.next;
                 removeDelimiterAndNode(closer);
                 closer = next;
+            } else {
+                // adjust number of characters in the node by keeping outer of numDelims
+                BasedSequence chars = closer.node.getChars();
+                int length = chars.length();
+                closer.node.setChars(chars.subSequence(length - closer.numDelims, length));
             }
         }
 

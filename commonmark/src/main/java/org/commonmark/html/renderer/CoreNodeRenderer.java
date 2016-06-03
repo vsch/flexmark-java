@@ -216,7 +216,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Text text) {
-        html.text(text.getChars().toString());
+        String text1 = text.getChars().toString();
+        html.text(Escaping.unescapeString(text1));
     }
 
     @Override
@@ -278,29 +279,42 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(ImageRef image) {
-        String url = context.encodeUrl(image.getLinkUrl());
+        if (image.getLinkUrl().isEmpty()) {
+            // empty ref
+            html.raw("![");
+            visitChildren(image);
+            html.raw("]");
+        } else {
+            String url = context.encodeUrl(image.getLinkUrl());
+            Map<String, String> attrs = new LinkedHashMap<>();
+            attrs.put("src", url);
+            attrs.put("alt", image.getLinkText());
+            if (image.getLinkTitle() != null) {
+                attrs.put("title", image.getLinkTitle());
+            }
 
-        Map<String, String> attrs = new LinkedHashMap<>();
-        attrs.put("src", url);
-        attrs.put("alt", image.getLinkText());
-        if (image.getLinkTitle() != null) {
-            attrs.put("title", image.getLinkTitle());
+            html.tag("img", getAttrs(image, attrs), true);
         }
-
-        html.tag("img", getAttrs(image, attrs), true);
     }
 
     @Override
     public void visit(LinkRef link) {
-        Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(link.getLinkUrl());
-        attrs.put("href", url);
-        if (link.getLinkTitle() != null) {
-            attrs.put("title", link.getLinkTitle());
+        if (link.getLinkUrl().isEmpty()) {
+            // empty ref
+            html.raw("[");
+            visitChildren(link);
+            html.raw("]");
+        } else {
+            Map<String, String> attrs = new LinkedHashMap<>();
+            String url = context.encodeUrl(link.getLinkUrl());
+            attrs.put("href", url);
+            if (link.getLinkTitle() != null) {
+                attrs.put("title", link.getLinkTitle());
+            }
+            html.tag("a", getAttrs(link, attrs));
+            visitChildren(link);
+            html.tag("/a");
         }
-        html.tag("a", getAttrs(link, attrs));
-        visitChildren(link);
-        html.tag("/a");
     }
 
     @Override
@@ -373,7 +387,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
         @Override
         public void visit(Text text) {
-            sb.append(text.getChars());
+            sb.append(text.getChars().trim());
         }
 
         @Override

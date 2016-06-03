@@ -43,7 +43,7 @@ public class ParserTest {
         Node document = parser.parse("hey\n\n---\n");
 
         assertThat(document.getFirstChild(), instanceOf(Paragraph.class));
-        assertEquals("hey", ((Text) document.getFirstChild().getFirstChild()).getChars());
+        assertEquals("hey", ((Text) document.getFirstChild().getFirstChild()).getChars().toString());
         assertThat(document.getLastChild(), instanceOf(DashBlock.class));
     }
 

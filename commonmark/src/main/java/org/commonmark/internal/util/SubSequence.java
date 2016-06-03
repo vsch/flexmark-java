@@ -129,7 +129,7 @@ public class SubSequence extends BasedSequenceImpl {
             throw new StringIndexOutOfBoundsException("String index out of range: " + index);
         }
         char c = base.charAt(index + startOffset);
-        return mapper.map(c, this, index + startOffset);
+        return mapper.map(c);
     }
 
     @Override

@@ -70,7 +70,7 @@ public abstract class InlineLinkNode extends LinkNode {
             int titleCharsLength = titleChars.length();
             titleOpeningMarker = titleChars.subSequence(0, 1);
             title = titleChars.subSequence(1, titleCharsLength - 1);
-            titleClosingMarker = titleChars.subSequence(titleCharsLength - 1, 1);
+            titleClosingMarker = titleChars.subSequence(titleCharsLength - 1, titleCharsLength);
         } else {
             titleOpeningMarker = SubSequence.EMPTY;
             title = SubSequence.EMPTY;

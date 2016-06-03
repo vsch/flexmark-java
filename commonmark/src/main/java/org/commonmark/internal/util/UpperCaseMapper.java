@@ -15,7 +15,7 @@ public class UpperCaseMapper implements CharMapper {
     }
 
     @Override
-    public char map(char c, CharSequence charSequence, int index) {
+    public char map(char c) {
         return c == '\0' ? '\uFFFD' : Character.toUpperCase(c);
     }
 }

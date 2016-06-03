@@ -65,8 +65,8 @@ public class BlockContent {
 
     public void addAll(List<BasedSequence> lines, List<BasedSequence> eols) {
         assert lines.size() == eols.size() : "lines and eols should be of the same size";
-        lines.addAll(lines);
-        eols.addAll(eols);
+        this.lines.addAll(lines);
+        this.eols.addAll(eols);
     }
 
     public boolean hasSingleLine() {

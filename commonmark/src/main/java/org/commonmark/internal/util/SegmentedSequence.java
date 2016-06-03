@@ -42,9 +42,9 @@ public class SegmentedSequence extends BasedSequenceImpl {
             BasedSequence eol = eols.get(i);
             if (eol.isEmpty()) {
                 segments.add(line);
-            } else if (line.getEndOffset() == eol.getStartOffset()) {
-                // combine them
-                segments.add(line.baseSubSequence(line.getStartOffset(), eol.getEndOffset()));
+                //} else if (line.getEndOffset() == eol.getStartOffset() && line.getMapper() == eol.getMapper()) {
+                //    // combine them
+                //    segments.add(line.baseSubSequence(line.getStartOffset(), eol.getEndOffset()));
             } else {
                 segments.add(line);
                 segments.add(eol);
@@ -64,7 +64,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
         int length = 0;
         for (BasedSequence basedSequence : segments) {
             assert this.base == basedSequence.getBase() : "all segments must come from the same base sequence";
-            assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start="+basedSequence.getStartOffset() + ", length="+length;
+            assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start=" + basedSequence.getStartOffset() + ", length=" + length;
             length += basedSequence.length();
         }
 
@@ -76,7 +76,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
         int i = 0;
         length = 0;
         for (BasedSequence basedSequence : segments) {
-            assert i == 0 || basedSequence.getStartOffset() >= this.endOffsets[i-1] : "segment start should be >= previous segment end";
+            assert i == 0 || basedSequence.getStartOffset() >= this.endOffsets[i - 1] : "segment start should be >= previous segment end";
             assert basedSequence.getStartOffset() <= basedSequence.getEndOffset() : "segment start should be <= segment end";
 
             this.startOffsets[i] = basedSequence.getStartOffset();
@@ -118,7 +118,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
             throw new StringIndexOutOfBoundsException("String index out of range: " + index);
         }
         char c = chars[charsOffset + index];
-        return c == '\0' ? '\uFFFD' : c;
+        return mapper.map(c);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
             endOffset = end - (length - (endOffsets[endIndex] - startOffsets[endIndex])) + startOffsets[endIndex];
         }
 
-        if (startOffset == this.endOffsets[startIndex]) {
+        if (startOffset < endOffset && startIndex < endIndex && startOffset == this.endOffsets[startIndex]) {
             // first one is blank
             startIndex++;
             startOffset = this.startOffsets[startIndex];
@@ -188,12 +188,12 @@ public class SegmentedSequence extends BasedSequenceImpl {
 
         startOffsets[0] = startOffset;
         endOffsets[0] = this.endOffsets[startIndex];
-        if (endIndex - startIndex - 2 > 0) {
-            System.arraycopy(this.startOffsets, startIndex, startOffsets, 1, endIndex - startIndex - 2);
-            System.arraycopy(this.endOffsets, endIndex, endOffsets, 1, endIndex - startIndex - 2);
+        if (endIndex - startIndex - 1 > 0) {
+            System.arraycopy(this.startOffsets, startIndex + 1, startOffsets, 1, endIndex - startIndex - 1);
+            System.arraycopy(this.endOffsets, startIndex + 1, endOffsets, 1, endIndex - startIndex - 1);
         }
-        startOffsets[endIndex] = this.startOffsets[endIndex];
-        endOffsets[endIndex] = endOffset;
+        startOffsets[endIndex - startIndex] = this.startOffsets[endIndex];
+        endOffsets[endIndex - startIndex] = endOffset;
 
         return new SegmentedSequence(base, this.chars, this.charsOffset + start, startOffsets, endOffsets, end - start, mapper);
     }
@@ -201,11 +201,6 @@ public class SegmentedSequence extends BasedSequenceImpl {
     @Override
     public BasedSequence toMapped(CharMapper mapper) {
         return new SegmentedSequence(base, this.chars, this.charsOffset, startOffsets, endOffsets, length, mapper);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(chars, charsOffset, length);
     }
 
     @Override

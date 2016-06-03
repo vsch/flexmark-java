@@ -40,10 +40,9 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public void process(Text opener, Text closer, int delimiterUse) {
-        String singleDelimiter = String.valueOf(getOpeningDelimiterChar());
         DelimitedNode emphasis = delimiterUse == 1
-                ? new Emphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, opener.chars.subSequence(0, delimiterUse))
-                : new StrongEmphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, opener.chars.subSequence(0, delimiterUse));
+                ? new Emphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse))
+                : new StrongEmphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse));
 
         Node tmp = opener.getNext();
         while (tmp != null && tmp != closer) {
