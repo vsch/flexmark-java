@@ -23,7 +23,7 @@ public abstract class Node {
 
     // full document char sequence
     public BasedSequence getChars() {
-        return parent == null ? SubSequence.EMPTY : parent.getChars();
+        return chars == null ? SubSequence.EMPTY : chars;
     }
 
     public void setChars(BasedSequence chars) {
@@ -34,16 +34,16 @@ public abstract class Node {
         return next;
     }
 
-    public int getOffsetStart() {
-        return chars.getStartOffset();
+    public int getStartOffset() {
+        return chars == null ? 0 : chars.getStartOffset();
     }
 
     public int getEndOffset() {
-        return chars.getEndOffset();
+        return chars == null ? 0 : chars.getEndOffset();
     }
 
     public int getTextLength() {
-        return chars.length();
+        return chars == null ? 0 : chars.length();
     }
 
     public Node getPrevious() {

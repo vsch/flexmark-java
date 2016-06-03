@@ -40,7 +40,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line) {
+    public void addLine(BasedSequence line, BasedSequence eol) {
     }
 
     @Override

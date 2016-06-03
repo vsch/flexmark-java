@@ -36,7 +36,7 @@ public class FencedCodeBlock extends Block {
      * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
      */
     public BasedSequence getInfo() {
-        return getSegmentChars(1);
+        return getSegmentChars(1).trim();
     }
 
     @Override

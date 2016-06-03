@@ -29,38 +29,66 @@ public class SegmentedSequence extends BasedSequenceImpl {
         return endOffsets[endOffsets.length - 1];
     }
 
-    public SegmentedSequence(List<BasedSequence> basedSequences) {
-        this(basedSequences, NullCharacterMapper.INSTANCE);
+    public SegmentedSequence(List<BasedSequence> segments) {
+        this(segments, NullCharacterMapper.INSTANCE);
     }
 
-    public SegmentedSequence(List<BasedSequence> basedSequences, CharMapper mapper) {
-        this.base = basedSequences.get(0);
+    public static List<BasedSequence> mergedList(List<BasedSequence> lines, List<BasedSequence> eols) {
+        assert lines.size() == eols.size() : "lines and eols must be of the same size";
+        List<BasedSequence> segments = new ArrayList<>(lines.size() * 2);
+        int iMax = lines.size();
+        for (int i = 0; i < iMax; i++) {
+            BasedSequence line = lines.get(i);
+            BasedSequence eol = eols.get(i);
+            if (eol.isEmpty()) {
+                segments.add(line);
+            } else if (line.getEndOffset() == eol.getStartOffset()) {
+                // combine them
+                segments.add(line.baseSubSequence(line.getStartOffset(), eol.getEndOffset()));
+            } else {
+                segments.add(line);
+                segments.add(eol);
+            }
+        }
+        return segments;
+    }
+
+    public SegmentedSequence(List<BasedSequence> lines, List<BasedSequence> eols) {
+        this(mergedList(lines, eols), NullCharacterMapper.INSTANCE);
+    }
+
+    public SegmentedSequence(List<BasedSequence> segments, CharMapper mapper) {
+        this.base = segments.get(0).getBase();
         this.mapper = mapper;
 
         int length = 0;
-        for (BasedSequence basedSequence : basedSequences) {
+        for (BasedSequence basedSequence : segments) {
             assert this.base == basedSequence.getBase() : "all segments must come from the same base sequence";
-            assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence";
+            assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start="+basedSequence.getStartOffset() + ", length="+length;
             length += basedSequence.length();
         }
 
         this.charsOffset = 0;
         this.length = length;
         this.chars = new char[length];
-        this.startOffsets = new int[basedSequences.size()];
-        this.endOffsets = new int[basedSequences.size()];
+        this.startOffsets = new int[segments.size()];
+        this.endOffsets = new int[segments.size()];
         int i = 0;
         length = 0;
-        for (BasedSequence basedSequence : basedSequences) {
+        for (BasedSequence basedSequence : segments) {
+            assert i == 0 || basedSequence.getStartOffset() >= this.endOffsets[i-1] : "segment start should be >= previous segment end";
+            assert basedSequence.getStartOffset() <= basedSequence.getEndOffset() : "segment start should be <= segment end";
+
             this.startOffsets[i] = basedSequence.getStartOffset();
             this.endOffsets[i] = basedSequence.getEndOffset();
             int ciMax = basedSequence.length();
 
-            for (int ci = 0; ci < ciMax; ci++){
-                 this.chars[ci+length] = basedSequence.charAt(ci);
+            for (int ci = 0; ci < ciMax; ci++) {
+                this.chars[ci + length] = basedSequence.charAt(ci);
             }
 
             length += ciMax;
+            i++;
         }
     }
 
@@ -94,6 +122,17 @@ public class SegmentedSequence extends BasedSequenceImpl {
     }
 
     @Override
+    public BasedSequence baseSubSequence(int start, int end) {
+        if (start < 0 || start > base.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+        }
+        if (end < 0 || end > base.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+        }
+        return new SubSequence(base, start, end, mapper);
+    }
+
+    @Override
     public BasedSequence subSequence(int start, int end) {
         if (start < 0 || start > length) {
             throw new StringIndexOutOfBoundsException("String index out of range: " + start);
@@ -103,28 +142,40 @@ public class SegmentedSequence extends BasedSequenceImpl {
         }
 
         // here we need to extract a list of sub-sequences
-        ArrayList<BasedSequence> subList = new ArrayList<>();
-        int startIndex = -1;
-        int endIndex = -1;
         int startOffset = 0;
         int endOffset = 0;
         int iMax = startOffsets.length;
         int i = 0;
         int length = 0;
+        int startIndex = -1;
+        int endIndex = -1;
 
         for (i = 0; i < iMax; i++) {
-            if (length >= start && startIndex == -1) {
+            int segmentLength = endOffsets[i] - startOffsets[i];
+
+            if (length + segmentLength >= start && startIndex == -1) {
                 startIndex = i;
                 startOffset = start - length + startOffsets[i];
             }
 
-            if (length >= end) {
+            if (length + segmentLength >= end) {
                 endIndex = i;
                 endOffset = end - length + startOffsets[i];
                 break;
             }
 
-            length += endOffsets[i] - startOffsets[i];
+            length += segmentLength;
+        }
+
+        if (endIndex == -1) {
+            endIndex = iMax - 1;
+            endOffset = end - (length - (endOffsets[endIndex] - startOffsets[endIndex])) + startOffsets[endIndex];
+        }
+
+        if (startOffset == this.endOffsets[startIndex]) {
+            // first one is blank
+            startIndex++;
+            startOffset = this.startOffsets[startIndex];
         }
 
         if (startIndex == endIndex) {
@@ -137,9 +188,9 @@ public class SegmentedSequence extends BasedSequenceImpl {
 
         startOffsets[0] = startOffset;
         endOffsets[0] = this.endOffsets[startIndex];
-        if (endIndex - startIndex - 1 > 0) {
-            System.arraycopy(this.startOffsets, startIndex, startOffsets, 1, endIndex - startIndex - 1);
-            System.arraycopy(this.endOffsets, endIndex, endOffsets, 1, endIndex - startIndex - 1);
+        if (endIndex - startIndex - 2 > 0) {
+            System.arraycopy(this.startOffsets, startIndex, startOffsets, 1, endIndex - startIndex - 2);
+            System.arraycopy(this.endOffsets, endIndex, endOffsets, 1, endIndex - startIndex - 2);
         }
         startOffsets[endIndex] = this.startOffsets[endIndex];
         endOffsets[endIndex] = endOffset;

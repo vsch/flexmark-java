@@ -2,7 +2,7 @@ package org.commonmark.node;
 
 import org.commonmark.internal.util.BasedSequence;
 
-public class Link extends LinkNode {
+public class Link extends InlineLinkNode {
     public Link() {
     }
 

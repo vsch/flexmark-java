@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.node.Block;
 import org.commonmark.node.ThematicBreak;
 import org.commonmark.parser.block.*;
@@ -31,7 +32,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
             int nextNonSpace = state.getNextNonSpaceIndex();
-            CharSequence line = state.getLine();
+            BasedSequence line = state.getLine();
             if (PATTERN.matcher(line.subSequence(nextNonSpace, line.length())).matches()) {
                 return BlockStart.of(new ThematicBreakParser()).atIndex(line.length());
             } else {

@@ -1,7 +1,7 @@
 package org.commonmark.node;
 
 import org.commonmark.internal.util.BasedSequence;
-import org.commonmark.internal.util.PrefixedSubSequence;
+import org.commonmark.internal.util.StringSequence;
 
 public class Text extends Node {
     public Text() {
@@ -12,7 +12,7 @@ public class Text extends Node {
     }
 
     public Text(String chars) {
-        super(new PrefixedSubSequence(chars));
+        super(new StringSequence(chars));
     }
 
     @Override

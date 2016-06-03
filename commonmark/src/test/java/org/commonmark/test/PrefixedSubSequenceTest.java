@@ -13,7 +13,7 @@ public class PrefixedSubSequenceTest {
 
     @Test
     public void testLength() {
-        assertEquals(4, substring.length());
+        assertEquals(7, substring.length());
     }
 
     @Test

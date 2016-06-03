@@ -8,22 +8,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockContent {
-    private ArrayList<BasedSequence> lines = null;
+    // list of line text
+    final private ArrayList<BasedSequence> lines = new ArrayList<>();
+    final private ArrayList<BasedSequence> eols = new ArrayList<>();
 
     public BasedSequence getLine(int line) {
         return lines.get(line);
     }
 
     public BasedSequence getSpanningChars() {
-        return lines != null ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : SubSequence.EMPTY;
+        return lines.size() > 0 ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), eols.get(eols.size() - 1).getEndOffset()) : SubSequence.EMPTY;
     }
 
     public List<BasedSequence> getLines() {
         return lines;
     }
 
+    public List<BasedSequence> getEols() {
+        return eols;
+    }
+
     public int getLineCount() {
-        return lines == null ? 0 : lines.size();
+        return lines.size() == 0 ? 0 : lines.size();
     }
 
     public BlockContent() {
@@ -31,46 +37,49 @@ public class BlockContent {
 
     public BlockContent(BlockContent other, int startLine, int endLine) {
         // copy content from other
-        if (other.lines != null) {
-            lines = new ArrayList<>(endLine - startLine);
+        assert lines.size() == eols.size() : "lines and eols should be of the same size";
+        assert other.lines.size() == other.eols.size() : "lines and eols should be of the same size";
 
-            for (int i = startLine; i < endLine; i++) {
-                lines.add(other.lines.get(i));
-            }
+        if (other.lines.size() > 0 && startLine < endLine) {
+            lines.addAll(other.lines.subList(startLine, endLine));
+            eols.addAll(other.eols.subList(startLine, endLine));
         }
     }
 
     public int getStartOffset() {
-        return lines != null ? lines.get(0).getStartOffset() : -1;
+        return lines.size() > 0 ? lines.get(0).getStartOffset() : -1;
     }
 
     public int getEndOffset() {
-        return lines != null ? lines.get(lines.size() - 1).getEndOffset() : -1;
+        return lines.size() > 0 ? eols.get(eols.size() - 1).getEndOffset() : -1;
     }
 
     public int getSourceLength() {
-        return lines != null ? lines.get(lines.size() - 1).getEndOffset() - lines.get(0).getStartOffset() : -1;
+        return lines.size() > 0 ? eols.get(eols.size() - 1).getEndOffset() - lines.get(0).getStartOffset() : -1;
     }
 
-    public void add(BasedSequence line) {
+    public void add(BasedSequence line, BasedSequence eol) {
         lines.add(line);
+        eols.add(eol);
     }
 
-    public void addAll(List<BasedSequence> lines) {
+    public void addAll(List<BasedSequence> lines, List<BasedSequence> eols) {
+        assert lines.size() == eols.size() : "lines and eols should be of the same size";
         lines.addAll(lines);
+        eols.addAll(eols);
     }
 
     public boolean hasSingleLine() {
-        return lines != null && lines.size() == 1;
+        return lines.size() > 0 && lines.size() == 1;
     }
 
     public BasedSequence getContents() {
-        if (lines == null) return SubSequence.EMPTY;
+        if (lines.size() == 0) return SubSequence.EMPTY;
         return getContents(0, lines.size());
     }
 
     public BasedSequence getContents(int startLine, int endLine) {
-        if (lines == null) return SubSequence.EMPTY;
+        if (lines.size() == 0) return SubSequence.EMPTY;
 
         if (startLine < 0) {
             throw new IndexOutOfBoundsException("startLine must be at least 0");
@@ -85,18 +94,18 @@ public class BlockContent {
             throw new IndexOutOfBoundsException("endLine must not be greater than line count");
         }
 
-        if (endLine - startLine == 1) {
-            return lines.get(startLine);
-        } else {
-            return new SegmentedSequence(lines.subList(startLine, endLine));
-        }
+        return new SegmentedSequence(lines.subList(startLine, endLine), eols.subList(startLine, endLine));
     }
 
     public String getString() {
-        if (lines == null) return "";
+        if (lines.size() == 0) return "";
 
         StringBuilder sb = new StringBuilder();
-        for (BasedSequence line : lines) sb.append(line);
+
+        for (BasedSequence line : lines) {
+            sb.append(line);
+            sb.append('\n');
+        }
 
         return sb.toString();
     }

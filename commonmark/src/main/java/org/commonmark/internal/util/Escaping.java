@@ -112,7 +112,7 @@ public class Escaping {
         // Strip '[' and ']', then trim
         BasedSequence stripped = input.subSequence(1, input.length() - 1).trim();
         BasedSequence lowercase = stripped.toLowerCase(Locale.ROOT);
-        return new PrefixedSubSequence(WHITESPACE.matcher(lowercase).replaceAll(" "));
+        return new StringSequence(WHITESPACE.matcher(lowercase).replaceAll(" "));
     }
 
     private static String replaceAll(Pattern p, String s, Replacer replacer) {

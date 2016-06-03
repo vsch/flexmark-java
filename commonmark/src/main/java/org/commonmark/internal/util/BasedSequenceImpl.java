@@ -202,4 +202,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countNotCharsReversed(String chars) {
         return countNotCharsReversed(chars, 0, chars.length());
     }
+
+    @Override
+    public BasedSequence subSequence(int start) {
+        return subSequence(start, length());
+    }
+
+    @Override
+    public String toString() {
+        int iMax = length();
+        StringBuilder sb = new StringBuilder(iMax);
+
+        for (int i = 0; i < iMax; i++) {
+            sb.append(charAt(i));
+        }
+
+        return sb.toString();
+    }
 }

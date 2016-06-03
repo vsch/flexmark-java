@@ -56,7 +56,7 @@ public class HeadingParser extends AbstractBlockParser {
                 int level = matcher.group(0).trim().length(); // number of #s
 
                 BlockContent content = new BlockContent();
-                content.add(line.subSequence(newOffset, line.length()));
+                content.add(line.subSequence(newOffset, line.length()), line.baseSubSequence(state.getLineEOL(), state.getLineEnd()));
 
                 // remove trailing ###s:
                 //String content = ATX_TRAILING.matcher().;
@@ -69,7 +69,7 @@ public class HeadingParser extends AbstractBlockParser {
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
 
                 BlockContent content = new BlockContent();
-                content.addAll(matchedBlockParser.getParagraphLines());
+                content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEOLs());
 
                 return BlockStart.of(new HeadingParser(level, content))
                         .atIndex(line.length())

@@ -3,13 +3,17 @@ package org.commonmark.node;
 import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 
-public abstract class RefNode extends Node {
+public abstract class RefNode extends LinkNode {
     public BasedSequence textOpeningMarker = SubSequence.EMPTY;
     public BasedSequence text = SubSequence.EMPTY;
     public BasedSequence textClosingMarker = SubSequence.EMPTY;
     public BasedSequence referenceOpeningMarker = SubSequence.EMPTY;
     public BasedSequence reference = SubSequence.EMPTY;
     public BasedSequence referenceClosingMarker = SubSequence.EMPTY;
+
+    public String linkUrl = "";
+    public String linkText = "";
+    public String linkTitle = null;
 
     public RefNode() {
     }
@@ -91,9 +95,32 @@ public abstract class RefNode extends Node {
         return reference;
     }
 
-    @Override
-    protected String toStringAttributes() {
-        return "text=" + text + ", reference=" + reference;
+    public String getLinkUrl() {
+        return linkUrl;
     }
 
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
+    }
+
+    public String getLinkText() {
+        return linkText;
+    }
+
+    public void setLinkText(String linkText) {
+        this.linkText = linkText;
+    }
+
+    public String getLinkTitle() {
+        return linkTitle;
+    }
+
+    public void setLinkTitle(String linkTitle) {
+        this.linkTitle = linkTitle;
+    }
+
+    @Override
+    protected String toStringAttributes() {
+        return "text=" + text + ", reference=" + reference + ", linkUrl=" + linkUrl + ", linkText=" + linkText;
+    }
 }

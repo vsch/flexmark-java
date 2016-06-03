@@ -61,18 +61,9 @@ public class AutolinkPostProcessor implements PostProcessor {
     }
 
     private class AutolinkVisitor extends AbstractVisitor {
-        int inLink = 0;
-
-        @Override
-        public void visit(Link link) {
-            inLink++;
-            super.visit(link);
-            inLink--;
-        }
-
         @Override
         public void visit(Text text) {
-            if (inLink == 0) {
+            if (!isVisiting(text, LinkNode.class)) {
                 linkify(text);
             }
         }

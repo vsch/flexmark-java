@@ -56,8 +56,8 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line) {
-        content.add(line);
+    public void addLine(BasedSequence line, BasedSequence eol) {
+        content.add(line, eol);
     }
 
     @Override

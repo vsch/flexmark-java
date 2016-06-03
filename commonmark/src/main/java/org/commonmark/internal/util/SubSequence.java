@@ -26,6 +26,11 @@ public class SubSequence extends BasedSequenceImpl {
         }
 
         @Override
+        public BasedSequence baseSubSequence(int start, int end) {
+            return subSequence(start, end);
+        }
+
+        @Override
         public CharSequence getBase() {
             return Substring.EMPTY;
         }
@@ -49,9 +54,14 @@ public class SubSequence extends BasedSequenceImpl {
         public BasedSequence toMapped(CharMapper mapper) {
             return this;
         }
+
+        @Override
+        public String toString() {
+            return "";
+        }
     };
 
-    final static public BasedSequence EOL = new PrefixedSubSequence("\n", SubSequence.EMPTY);
+    final static public BasedSequence EOL = new StringSequence("\n");
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
 
     protected final CharSequence base;
@@ -134,8 +144,14 @@ public class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public String toString() {
-        return String.valueOf(base.subSequence(startOffset, endOffset));
+    public BasedSequence baseSubSequence(int start, int end) {
+        if (start < 0 || start > base.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+        }
+        if (end < 0 || end > base.length()) {
+            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+        }
+        return new SubSequence(base, start, end, mapper);
     }
 
     @Override

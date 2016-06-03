@@ -24,7 +24,7 @@ public abstract class SegmentedNode extends Node implements Segmented {
     }
 
     public SegmentedNode(BlockContent blockContent) {
-        this(blockContent.getSpanningChars(), blockContent.getLines());
+        this(blockContent.getSpanningChars(), SegmentedSequence.mergedList(blockContent.getLines(), blockContent.getEols()));
     }
 
     public void setContent(BasedSequence chars, List<BasedSequence> segments) {
@@ -34,7 +34,7 @@ public abstract class SegmentedNode extends Node implements Segmented {
 
     public void setContent(BlockContent blockContent) {
         setChars(blockContent.getSpanningChars());
-        this.segments = blockContent.getLines();
+        this.segments = SegmentedSequence.mergedList(blockContent.getLines(), blockContent.getEols());
     }
 
     @Override

@@ -4,6 +4,7 @@ import org.commonmark.Extension;
 import org.commonmark.internal.DocumentParser;
 import org.commonmark.internal.InlineParserImpl;
 import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.StringSequence;
 import org.commonmark.node.Node;
 import org.commonmark.parser.block.BlockParserFactory;
 
@@ -74,7 +75,7 @@ public class Parser {
     public Node parse(String input) {
         InlineParserImpl inlineParser = new InlineParserImpl(specialCharacters, delimiterCharacters, delimiterProcessors);
         DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
-        Node document = documentParser.parse(input);
+        Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
     }
 

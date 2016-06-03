@@ -1,5 +1,6 @@
 package org.commonmark.internal;
 
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Parsing;
 import org.commonmark.node.*;
 import org.commonmark.parser.block.*;
@@ -48,8 +49,8 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    private static ListData parseListMarker(CharSequence line, final int markerIndex, final int markerColumn) {
-        CharSequence rest = line.subSequence(markerIndex, line.length());
+    private static ListData parseListMarker(BasedSequence line, final int markerIndex, final int markerColumn) {
+        BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = MARKER.matcher(rest);
         if (!matcher.find()) {
             return null;
@@ -121,7 +122,6 @@ public class ListBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory extends AbstractBlockParserFactory {
-
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getMatchedBlockParser();

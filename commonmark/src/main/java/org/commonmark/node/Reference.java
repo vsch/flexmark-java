@@ -28,6 +28,30 @@ public class Reference extends Node {
         }
     }
 
+    public BasedSequence getReference() {
+        return reference;
+    }
+
+    public void setReference(BasedSequence reference) {
+        this.reference = reference;
+    }
+
+    public BasedSequence getUrl() {
+        return url;
+    }
+
+    public void setUrl(BasedSequence url) {
+        this.url = url;
+    }
+
+    public BasedSequence getTitle() {
+        return title;
+    }
+
+    public void setTitle(BasedSequence title) {
+        this.title = title;
+    }
+
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);

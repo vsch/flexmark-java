@@ -97,6 +97,14 @@ public class InlineParserImpl implements InlineParser {
 
     private ArrayList<BasedSequence> currentText;
 
+    public ArrayList<BasedSequence> getCurrentText() {
+        if (currentText == null) {
+            currentText = new ArrayList<>();
+        }
+
+        return currentText;
+    }
+
     public InlineParserImpl(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
         this.delimiterProcessors = delimiterProcessors;
         this.delimiterCharacters = delimiterCharacters;
@@ -246,14 +254,11 @@ public class InlineParserImpl implements InlineParser {
     }
 
     private void appendText(BasedSequence text) {
-        currentText.add(text);
+        getCurrentText().add(text);
     }
 
     private void appendText(BasedSequence text, int beginIndex, int endIndex) {
-        if (currentText == null) {
-            currentText = new ArrayList<>(2);
-        }
-        currentText.add(text.subSequence(beginIndex, endIndex));
+        getCurrentText().add(text.subSequence(beginIndex, endIndex));
     }
 
     private void appendNode(Node node) {
@@ -565,6 +570,7 @@ public class InlineParserImpl implements InlineParser {
         BasedSequence title = null;
         BasedSequence ref = null;
         boolean isLinkOrImage = false;
+        boolean refIsBare = false;
 
         // Inline link?
         if (peek() == '(') {
@@ -591,6 +597,7 @@ public class InlineParserImpl implements InlineParser {
             } else if (!containsBracket) {
                 // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
                 ref = input.subSequence(opener.index, startIndex);
+                refIsBare = true;
             }
 
             if (ref != null) {
@@ -617,13 +624,28 @@ public class InlineParserImpl implements InlineParser {
 
             if (linkOrImage instanceof RefNode) {
                 // set up the parts
-                ((RefNode) linkOrImage).setReferenceChars(ref);
-                ((RefNode) linkOrImage).setTextChars(input.subSequence(opener.index, startIndex));
+                RefNode refNode = (RefNode) linkOrImage;
+                refNode.setReferenceChars(ref);
+
+                String label = refNode.reference.trim().toString();
+
+                if (!refIsBare) {
+                    refNode.setTextChars(input.subSequence(opener.index, startIndex));
+                    refNode.setLinkText(refNode.getText().toString());
+                } else {
+                    refNode.setLinkText(label);
+                }
+
+                if (referenceMap.containsKey(label.toLowerCase())) {
+                    Reference reference = referenceMap.get(label.toLowerCase());
+                    refNode.setLinkUrl(reference.getUrl().toString());
+                    if (reference.getTitle() != SubSequence.EMPTY) refNode.setLinkTitle(reference.getTitle().toString());
+                }
             } else {
                 // set dest and title
-                ((LinkNode) linkOrImage).url = dest;
-                ((LinkNode) linkOrImage).setTitleChars(title);
-                ((LinkNode) linkOrImage).setTextChars(input.subSequence(opener.index, startIndex));
+                ((InlineLinkNode) linkOrImage).url = dest;
+                ((InlineLinkNode) linkOrImage).setTitleChars(title);
+                ((InlineLinkNode) linkOrImage).setTextChars(input.subSequence(opener.index, startIndex));
             }
 
             // Process delimiters such as emphasis inside link/image
@@ -701,11 +723,11 @@ public class InlineParserImpl implements InlineParser {
     private boolean parseAutolink() {
         BasedSequence m;
         if ((m = match(EMAIL_AUTOLINK)) != null) {
-            MailLink node = new MailLink(m);
+            MailLink node = new MailLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
             appendNode(node);
             return true;
         } else if ((m = match(AUTOLINK)) != null) {
-            AutoLink node = new AutoLink(m);
+            AutoLink node = new AutoLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
             appendNode(node);
             return true;
         } else {
@@ -908,7 +930,7 @@ public class InlineParserImpl implements InlineParser {
         Text nextText = delim.getNextNonDelimiterTextNode();
         if (previousText != null && nextText != null) {
             // Merge adjacent text nodes
-            previousText.setChars(input.subSequence(previousText.getOffsetStart(), nextText.getEndOffset()));
+            previousText.setChars(input.subSequence(previousText.getStartOffset(), nextText.getEndOffset()));
             nextText.unlink();
         }
 
@@ -926,14 +948,14 @@ public class InlineParserImpl implements InlineParser {
         if (previousText != null || nextText != null) {
             // Merge adjacent text nodes into one
             if (nextText != null && previousText != null) {
-                node.setChars(input.subSequence(previousText.getOffsetStart(), nextText.getEndOffset()));
+                node.setChars(input.baseSubSequence(previousText.getStartOffset(), nextText.getEndOffset()));
                 previousText.unlink();
                 nextText.unlink();
             } else if (previousText != null) {
-                node.setChars(input.subSequence(previousText.getOffsetStart(), node.getEndOffset()));
+                node.setChars(input.baseSubSequence(previousText.getStartOffset(), node.getEndOffset()));
                 previousText.unlink();
-            } else  {
-                node.setChars(input.subSequence(node.getOffsetStart(), nextText.getEndOffset()));
+            } else {
+                node.setChars(input.baseSubSequence(node.getStartOffset(), nextText.getEndOffset()));
                 nextText.unlink();
             }
         }

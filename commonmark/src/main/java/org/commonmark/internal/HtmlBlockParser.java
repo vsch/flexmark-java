@@ -89,8 +89,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line) {
-        content.add(line);
+    public void addLine(BasedSequence line, BasedSequence eol) {
+        content.add(line, eol);
 
         if (closingPattern != null && closingPattern.matcher(line).find()) {
             finished = true;
@@ -108,7 +108,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
-            CharSequence line = state.getLine();
+            BasedSequence line = state.getLine();
 
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<') {
                 for (int blockType = 1; blockType <= 7; blockType++) {

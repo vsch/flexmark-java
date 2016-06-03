@@ -2,6 +2,8 @@ package org.commonmark.html.renderer;
 
 import org.commonmark.html.HtmlWriter;
 import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.Escaping;
+import org.commonmark.internal.util.SubSequence;
 import org.commonmark.node.*;
 
 import java.util.*;
@@ -109,7 +111,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         String literal = fencedCodeBlock.getContentChars().toString();
         Map<String, String> attributes = new LinkedHashMap<>();
         BasedSequence info = fencedCodeBlock.getInfo();
-        if (info != null && !info.isEmpty()) {
+        if (info != null && !info.isBlank()) {
             int space = info.countLeadingNot(" ");
             String language;
             if (space == -1) {
@@ -142,7 +144,11 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        renderCodeBlock(indentedCodeBlock.getContentChars().toString(), getAttrs(indentedCodeBlock));
+        String content = indentedCodeBlock.getContentChars().toString();
+        if (!content.endsWith("\n")) {
+            content += "\n";
+        }
+        renderCodeBlock(content, getAttrs(indentedCodeBlock));
     }
 
     @Override
@@ -150,7 +156,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         Map<String, String> attrs = new LinkedHashMap<>();
         String url = context.encodeUrl(link.getUrl().toString());
         attrs.put("href", url);
-        if (link.getTitle() != null) {
+        if (link.getTitle() != SubSequence.EMPTY) {
             attrs.put("title", link.getTitle().toString());
         }
         html.tag("a", getAttrs(link, attrs));
@@ -187,7 +193,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         Map<String, String> attrs = new LinkedHashMap<>();
         attrs.put("src", url);
         attrs.put("alt", altText);
-        if (image.getTitle() != null) {
+        if (image.getTitle() != SubSequence.EMPTY) {
             attrs.put("title", image.getTitle().toString());
         }
 
@@ -238,6 +244,73 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     public void visit(HardLineBreak hardLineBreak) {
         html.tag("br", null, true);
         html.line();
+    }
+
+    @Override
+    public void visit(Reference reference) {
+
+    }
+
+    @Override
+    public void visit(MailLink mailLink) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(mailLink.getContent().toString());
+        attrs.put("href", "mailto:" + url);
+        html.tag("a", getAttrs(mailLink, attrs));
+        visitChildren(mailLink);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(HtmlEntity htmlEntity) {
+        html.raw(Escaping.unescapeString(htmlEntity.getChars().toString()));
+    }
+
+    @Override
+    public void visit(AutoLink autoLink) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(autoLink.getContent().toString());
+        attrs.put("href", url);
+        html.tag("a", getAttrs(autoLink, attrs));
+        visitChildren(autoLink);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(ImageRef image) {
+        String url = context.encodeUrl(image.getLinkUrl());
+
+        Map<String, String> attrs = new LinkedHashMap<>();
+        attrs.put("src", url);
+        attrs.put("alt", image.getLinkText());
+        if (image.getLinkTitle() != null) {
+            attrs.put("title", image.getLinkTitle());
+        }
+
+        html.tag("img", getAttrs(image, attrs), true);
+    }
+
+    @Override
+    public void visit(LinkRef link) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(link.getLinkUrl());
+        attrs.put("href", url);
+        if (link.getLinkTitle() != null) {
+            attrs.put("title", link.getLinkTitle());
+        }
+        html.tag("a", getAttrs(link, attrs));
+        visitChildren(link);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(CustomBlock customBlock) {
+
+    }
+
+    @Override
+    public void visit(CustomNode customNode) {
+
     }
 
     @Override

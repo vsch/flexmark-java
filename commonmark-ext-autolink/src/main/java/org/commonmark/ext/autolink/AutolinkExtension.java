@@ -2,6 +2,7 @@ package org.commonmark.ext.autolink;
 
 import org.commonmark.Extension;
 import org.commonmark.ext.autolink.internal.AutolinkPostProcessor;
+import org.commonmark.node.Link;
 import org.commonmark.parser.Parser;
 
 /**
@@ -12,7 +13,7 @@ import org.commonmark.parser.Parser;
  * {@link org.commonmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed links are turned into normal {@link org.commonmark.node.Link} nodes.
+ * The parsed links are turned into normal {@link Link} nodes.
  * </p>
  */
 public class AutolinkExtension implements Parser.ParserExtension {

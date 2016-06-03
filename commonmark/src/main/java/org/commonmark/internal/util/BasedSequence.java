@@ -15,6 +15,9 @@ public interface BasedSequence extends CharSequence {
     @Override
     BasedSequence subSequence(int start, int end);
 
+    BasedSequence subSequence(int start);
+    BasedSequence baseSubSequence(int start, int end);
+
     int countLeading(String chars);
     int countLeadingNot(String chars);
     int countTrailing(String chars);

@@ -1,9 +1,6 @@
 package org.commonmark.internal;
 
-import org.commonmark.internal.util.BasedSequence;
-import org.commonmark.internal.util.Parsing;
-import org.commonmark.internal.util.PrefixedSubSequence;
-import org.commonmark.internal.util.SubSequence;
+import org.commonmark.internal.util.*;
 import org.commonmark.node.*;
 import org.commonmark.parser.block.*;
 
@@ -34,6 +31,11 @@ public class DocumentParser implements ParserState {
      * current start of line offset in the input
      */
     private int lineStart = 0;
+
+    /**
+     * current lines EOL sequence
+     */
+    private int lineEOL = 0;
 
     /**
      * current end of line offset in the input including EOL
@@ -91,12 +93,14 @@ public class DocumentParser implements ParserState {
         BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : new SubSequence(source);
         int lineStart = 0;
         int lineBreak;
+        int lineEOL;
         int lineEnd;
         lineNumber = 0;
         documentBlockParser.setDocument(input);
 
         while ((lineBreak = Parsing.findLineBreak(input, lineStart)) != -1) {
             BasedSequence line = input.subSequence(lineStart, lineBreak);
+            lineEOL = lineBreak;
             if (lineBreak + 1 < input.length() && input.charAt(lineBreak) == '\r' && input.charAt(lineBreak + 1) == '\n') {
                 lineEnd = lineBreak + 2;
             } else {
@@ -104,6 +108,7 @@ public class DocumentParser implements ParserState {
             }
 
             this.lineStart = lineStart;
+            this.lineEOL = lineEOL;
             this.lineEnd = lineEnd;
             incorporateLine(line);
             lineNumber++;
@@ -112,7 +117,8 @@ public class DocumentParser implements ParserState {
 
         if (input.length() > 0 && (lineStart == 0 || lineStart < input.length())) {
             this.lineStart = lineStart;
-            this.lineEnd = input.length();
+            this.lineEOL = input.length();
+            this.lineEnd = this.lineEOL;
             incorporateLine(input.subSequence(lineStart, input.length()));
             lineNumber++;
         }
@@ -137,7 +143,7 @@ public class DocumentParser implements ParserState {
             if (charsRead < buffer.length) break;
         }
 
-        BasedSequence source = new PrefixedSubSequence(file.toString(), SubSequence.EMPTY);
+        CharSequence source = new StringSequence(file.toString());
         return parse(source);
     }
 
@@ -159,6 +165,11 @@ public class DocumentParser implements ParserState {
     @Override
     public BasedSequence getLine() {
         return line;
+    }
+
+    @Override
+    public int getLineEOL() {
+        return lineEOL;
     }
 
     @Override
@@ -394,7 +405,9 @@ public class DocumentParser implements ParserState {
             content = line.subSequence(index, line.length());
         }
 
-        getActiveBlockParser().addLine(content);
+        //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));
+        BasedSequence eol = content.baseSubSequence(lineEOL < lineEnd ? lineEnd - 1 : lineEnd, lineEnd).toMapped(EolCharacterMapper.INSTANCE);
+        getActiveBlockParser().addLine(content, eol);
     }
 
     private BlockStartImpl findBlockStart(BlockParser blockParser) {
@@ -588,6 +601,14 @@ public class DocumentParser implements ParserState {
             return SubSequence.EMPTY_LIST;
         }
 
+        public List<BasedSequence> getParagraphEOLs() {
+            if (matchedBlockParser instanceof ParagraphParser) {
+                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
+                return paragraphParser.getContent().getEols();
+            }
+            return SubSequence.EMPTY_LIST;
+        }
+
         public MatchedBlockParserImpl(BlockParser matchedBlockParser) {
             this.matchedBlockParser = matchedBlockParser;
         }
@@ -603,7 +624,7 @@ public class DocumentParser implements ParserState {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
                 return paragraphParser.getContent().getContents();
             }
-            return SubSequence.EMPTY;
+            return null;
         }
     }
 }
