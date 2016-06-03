@@ -22,5 +22,5 @@ public interface MatchedBlockParser {
     BasedSequence getParagraphContent();
 
     List<BasedSequence> getParagraphLines();
-    List<BasedSequence> getParagraphEOLs();
+    List<Integer> getParagraphEolOffsets();
 }

@@ -4,6 +4,7 @@ import org.commonmark.html.HtmlRenderer;
 import org.commonmark.html.renderer.NodeRenderer;
 import org.commonmark.html.renderer.NodeRendererContext;
 import org.commonmark.html.renderer.NodeRendererFactory;
+import org.commonmark.internal.Delimiter;
 import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 import org.commonmark.node.CustomNode;
@@ -66,16 +67,16 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void process(Text opener, Text closer, int delimiterUse) {
-            UpperCaseNode content = new UpperCaseNode(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse));
-            Node tmp = opener.getNext();
-            while (tmp != null && tmp != closer) {
+        public void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse) {
+            UpperCaseNode content = new UpperCaseNode(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse));
+            Node tmp = opener.getNode().getNext();
+            while (tmp != null && tmp != closer.getNode()) {
                 Node next = tmp.getNext();
                 content.appendChild(tmp);
                 tmp = next;
             }
-            content.setContent(opener.chars.baseSubSequence(opener.getEndOffset(), closer.getStartOffset()));
-            opener.insertAfter(content);
+            content.setContent(input.subSequence(opener.getEndIndex(), closer.getStartIndex()));
+            opener.getNode().insertAfter(content);
         }
     }
 

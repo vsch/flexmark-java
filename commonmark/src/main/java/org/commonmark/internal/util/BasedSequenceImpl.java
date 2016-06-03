@@ -1,5 +1,8 @@
 package org.commonmark.internal.util;
 
+import org.commonmark.internal.util.mappers.LowerCaseMapper;
+import org.commonmark.internal.util.mappers.UpperCaseMapper;
+
 import java.util.Locale;
 
 /**
@@ -94,23 +97,28 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public BasedSequence toLowerCase() {
+    public MappedSequence toLowerCase() {
         return toMapped(LowerCaseMapper.INSTANCE);
     }
 
     @Override
-    public BasedSequence toUpperCase() {
+    public MappedSequence toUpperCase() {
         return toMapped(UpperCaseMapper.INSTANCE);
     }
 
     @Override
-    public BasedSequence toLowerCase(Locale locale) {
+    public MappedSequence toLowerCase(Locale locale) {
         return toMapped(new LowerCaseMapper(locale));
     }
 
     @Override
-    public BasedSequence toUpperCase(Locale locale) {
+    public MappedSequence toUpperCase(Locale locale) {
         return toMapped(new UpperCaseMapper(locale));
+    }
+
+    @Override
+    final public MappedSequence toMapped(CharMapper mapper) {
+        return new MappedSequence(this, mapper);
     }
 
     private static boolean contains(String chars, char c) {

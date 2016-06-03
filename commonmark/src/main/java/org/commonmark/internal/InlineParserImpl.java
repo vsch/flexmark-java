@@ -275,7 +275,7 @@ public class InlineParserImpl implements InlineParser {
 
     private void flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(new SegmentedSequence(currentText)));
+            block.appendChild(new Text(SegmentedSequence.of(currentText, SubSequence.EMPTY)));
             currentText = null;
         }
     }
@@ -892,7 +892,14 @@ public class InlineParserImpl implements InlineParser {
             closer.numDelims -= useDelims;
 
             removeDelimitersBetween(opener, closer);
-            delimiterProcessor.process(openerNode, closerNode, useDelims);
+
+            opener.numDelims += useDelims;
+            closer.numDelims += useDelims;
+
+            delimiterProcessor.process(input, opener, closer, useDelims);
+
+            opener.numDelims -= useDelims;
+            closer.numDelims -= useDelims;
 
             // if opener has 0 delims, remove it and the inline
             if (opener.numDelims == 0) {

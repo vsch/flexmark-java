@@ -10,6 +10,7 @@ public interface BasedSequence extends CharSequence {
     CharSequence getBase();
     int getStartOffset();
     int getEndOffset();
+    int getIndexOffset(int index);
     SourceRange getRange();
 
     @Override
@@ -30,6 +31,7 @@ public interface BasedSequence extends CharSequence {
     int countCharsReversed(String chars);
     int countNotChars(String chars);
     int countNotCharsReversed(String chars);
+
     BasedSequence trimStart(String chars);
     BasedSequence trimEnd(String chars);
     BasedSequence trim(String chars);
@@ -45,9 +47,9 @@ public interface BasedSequence extends CharSequence {
     boolean endsWith(String suffix);
     boolean startsWith(String prefix);
 
-    BasedSequence toLowerCase();
-    BasedSequence toUpperCase();
-    BasedSequence toLowerCase(Locale locale);
-    BasedSequence toUpperCase(Locale locale);
-    BasedSequence toMapped(CharMapper mapper);
+    MappedSequence toLowerCase();
+    MappedSequence toUpperCase();
+    MappedSequence toLowerCase(Locale locale);
+    MappedSequence toUpperCase(Locale locale);
+    MappedSequence toMapped(CharMapper mapper);
 }

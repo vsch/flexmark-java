@@ -3,10 +3,22 @@ package org.commonmark.internal;
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
 
-class Delimiter {
+public class Delimiter {
 
     final Text node;
     final int index;
+
+    public Text getNode() {
+        return node;
+    }
+
+    public int getStartIndex() {
+        return index;
+    }
+
+    public int getEndIndex() {
+        return index + numDelims;
+    }
 
     Delimiter previous;
     Delimiter next;
@@ -57,5 +69,4 @@ class Delimiter {
             return null;
         }
     }
-
 }

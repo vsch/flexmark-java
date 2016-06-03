@@ -1,11 +1,13 @@
-package org.commonmark.internal.util;
+package org.commonmark.internal.util.mappers;
+
+import org.commonmark.internal.util.CharMapper;
 
 import java.util.Locale;
 
 public class LowerCaseMapper implements CharMapper {
     final public static LowerCaseMapper INSTANCE = new LowerCaseMapper();
 
-    Locale locale = null;
+    Locale locale = Locale.ROOT;
 
     public LowerCaseMapper() {
     }

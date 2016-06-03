@@ -33,8 +33,8 @@ public class ParagraphParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line, BasedSequence eol) {
-        content.add(line, eol);
+    public void addLine(BasedSequence line, int eolLength) {
+        content.add(line, eolLength);
     }
 
     @Override

@@ -108,11 +108,9 @@ public class Escaping {
         return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
     }
 
-    public static BasedSequence normalizeReference(BasedSequence input) {
-        // Strip '[' and ']', then trim
-        BasedSequence stripped = input.subSequence(1, input.length() - 1).trim();
-        BasedSequence lowercase = stripped.toLowerCase(Locale.ROOT);
-        return new StringSequence(WHITESPACE.matcher(lowercase).replaceAll(" "));
+    public static String normalizeReference(BasedSequence input) {
+        // Strip '[' and ']', then trim and convert to lowercase
+        return input.subSequence(1, input.length() - 1).toString().trim().toLowerCase(Locale.ROOT);
     }
 
     private static String replaceAll(Pattern p, String s, Replacer replacer) {

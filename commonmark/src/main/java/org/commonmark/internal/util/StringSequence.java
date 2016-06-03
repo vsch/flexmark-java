@@ -4,7 +4,7 @@ package org.commonmark.internal.util;
  * A CharSequence that references original string and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base string
  */
-public class StringSequence extends BasedSequenceImpl  {
+public class StringSequence extends BasedSequenceImpl {
     protected final String base;
 
     public CharSequence getBase() {
@@ -26,11 +26,6 @@ public class StringSequence extends BasedSequenceImpl  {
     }
 
     @Override
-    public BasedSequence toMapped(CharMapper mapper) {
-        return new SubSequence(this, 0, length(), mapper);
-    }
-
-    @Override
     public int length() {
         return base.length();
     }
@@ -41,24 +36,33 @@ public class StringSequence extends BasedSequenceImpl  {
     }
 
     @Override
+    public int getIndexOffset(int index) {
+        if (index < 0 || index > base.length()) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+        return index;
+    }
+
+    @Override
     public char charAt(int index) {
-        return base.charAt(index);
+        char c = base.charAt(index);
+        return c == '\0' ? '\uFFFD' : c;
     }
 
     @Override
     public BasedSequence subSequence(int start, int end) {
-        return new SubSequence(this, start, end, NullCharacterMapper.INSTANCE);
+        return new SubSequence(this, start, end);
     }
 
     @Override
     public BasedSequence baseSubSequence(int start, int end) {
         if (start < 0 || start > base.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+            throw new StringIndexOutOfBoundsException("String index: " + start + " out of range: 0, " + length());
         }
         if (end < 0 || end > base.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+            throw new StringIndexOutOfBoundsException("String index: " + end + " out of range: 0, " + length());
         }
-        return new SubSequence(this, start, end, NullCharacterMapper.INSTANCE);
+        return new SubSequence(this, start, end);
     }
 
     @Override

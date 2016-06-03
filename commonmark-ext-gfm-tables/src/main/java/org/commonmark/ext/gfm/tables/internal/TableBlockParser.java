@@ -46,7 +46,7 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line, BasedSequence eol) {
+    public void addLine(BasedSequence line, int eolLength) {
         if (nextIsSeparatorLine) {
             nextIsSeparatorLine = false;
             separatorLine = line;

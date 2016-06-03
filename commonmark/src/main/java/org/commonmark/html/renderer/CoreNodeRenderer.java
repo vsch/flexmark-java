@@ -387,7 +387,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
         @Override
         public void visit(Text text) {
-            sb.append(text.getChars().trim());
+            sb.append(text.getChars());
         }
 
         @Override

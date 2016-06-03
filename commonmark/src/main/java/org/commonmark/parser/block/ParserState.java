@@ -60,7 +60,7 @@ public interface ParserState {
   /**
    * @return the EOL offset into the input stream corresponding to current index into the line
    */
-    int getLineEOL();
+    int getLineEolLength();
 
   /**
    * @return the end of line offset into the input stream corresponding to current index into the line, including the EOL

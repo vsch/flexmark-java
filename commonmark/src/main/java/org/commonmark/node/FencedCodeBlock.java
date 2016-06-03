@@ -1,12 +1,15 @@
 package org.commonmark.node;
 
-import org.commonmark.internal.BlockContent;
 import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SubSequence;
 
 import java.util.List;
 
 public class FencedCodeBlock extends Block {
     private int fenceIndent;
+    private BasedSequence openingMarker = SubSequence.EMPTY;
+    private BasedSequence closingMarker = null;
+    private BasedSequence info = null;
 
     public FencedCodeBlock() {
     }
@@ -15,12 +18,31 @@ public class FencedCodeBlock extends Block {
         super(chars);
     }
 
-    public FencedCodeBlock(BasedSequence chars, List<BasedSequence> segments) {
+    public FencedCodeBlock(BasedSequence chars, BasedSequence openingMarker, BasedSequence info, List<BasedSequence> segments, BasedSequence closingMarker) {
         super(chars, segments);
+        this.openingMarker = openingMarker;
+        this.info = info;
+        this.closingMarker = closingMarker;
     }
 
-    public FencedCodeBlock(BlockContent blockContent) {
-        super(blockContent);
+    public BasedSequence getOpeningMarker() {
+        return openingMarker;
+    }
+
+    public void setOpeningMarker(BasedSequence openingMarker) {
+        this.openingMarker = openingMarker;
+    }
+
+    public void setInfo(BasedSequence info) {
+        this.info = info;
+    }
+
+    public BasedSequence getClosingMarker() {
+        return closingMarker;
+    }
+
+    public void setClosingMarker(BasedSequence closingMarker) {
+        this.closingMarker = closingMarker;
     }
 
     @Override
@@ -29,23 +51,18 @@ public class FencedCodeBlock extends Block {
     }
 
     public BasedSequence getOpeningFence() {
-        return getSegmentChars(0);
+        return this.openingMarker;
     }
 
     /**
      * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
      */
     public BasedSequence getInfo() {
-        return getSegmentChars(1).trim();
-    }
-
-    @Override
-    public BasedSequence getContentChars() {
-        return getContentChars(1, segments.size());
+        return info;
     }
 
     public BasedSequence getClosingFence() {
-        return getSegmentChars(segments.size());
+        return this.closingMarker;
     }
 
     public int getFenceLength() {

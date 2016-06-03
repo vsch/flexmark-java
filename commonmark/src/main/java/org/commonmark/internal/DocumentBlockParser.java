@@ -39,7 +39,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line, BasedSequence eol) {
+    public void addLine(BasedSequence line, int eolLength) {
     }
 
 }

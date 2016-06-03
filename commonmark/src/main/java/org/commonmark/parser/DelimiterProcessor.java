@@ -1,6 +1,7 @@
 package org.commonmark.parser;
 
-import org.commonmark.node.Text;
+import org.commonmark.internal.Delimiter;
+import org.commonmark.internal.util.BasedSequence;
 
 /**
  * Custom delimiter processor for additional delimiters besides {@code _} and {@code *}.
@@ -42,10 +43,11 @@ public interface DelimiterProcessor {
      * <p>
      * Note that removal of the delimiter from the delimiter nodes and unlinking them is done by the caller.
      *
-     * @param opener the text node that contained the opening delimiter
-     * @param closer the text node that contained the closing delimiter
+     * @param input the current input string from which the delimiters are taken
+     * @param opener the delimiter with text node that contained the opening delimiter
+     * @param closer the delimiter with text node that contained the closing delimiter
      * @param delimiterUse the number of delimiters that were used
      */
-    void process(Text opener, Text closer, int delimiterUse);
+    void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse);
 
 }

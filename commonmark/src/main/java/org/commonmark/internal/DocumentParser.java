@@ -168,8 +168,8 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
-    public int getLineEOL() {
-        return lineEOL;
+    public int getLineEolLength() {
+        return lineEnd - lineEOL;
     }
 
     @Override
@@ -389,25 +389,22 @@ public class DocumentParser implements ParserState {
      * calling this.
      */
     private void addLine() {
-        BasedSequence content;
+        BasedSequence content = line.baseSubSequence(line.getStartOffset() + index, lineEnd);
         if (columnIsInTab) {
             // Our column is in a partially consumed tab. Expand the remaining columns (to the next tab stop) to spaces.
-            int afterTab = index + 1;
-            BasedSequence rest = line.subSequence(afterTab, line.length());
+            BasedSequence rest = content.subSequence(1, content.length());
             int spaces = Parsing.columnsToNextTabStop(column);
             StringBuilder sb = new StringBuilder(spaces + rest.length());
             for (int i = 0; i < spaces; i++) {
                 sb.append(' ');
             }
-            sb.append(rest);
+            //sb.append(rest);
             content = new PrefixedSubSequence(sb.toString(), rest);
-        } else {
-            content = line.subSequence(index, line.length());
         }
 
         //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));
-        BasedSequence eol = content.baseSubSequence(lineEOL < lineEnd ? lineEnd - 1 : lineEnd, lineEnd).toMapped(EolCharacterMapper.INSTANCE);
-        getActiveBlockParser().addLine(content, eol);
+        //BasedSequence eol = content.baseSubSequence(lineEOL < lineEnd ? lineEnd - 1 : lineEnd, lineEnd).toMapped(EolCharacterMapper.INSTANCE);
+        getActiveBlockParser().addLine(content, lineEnd - lineEOL);
     }
 
     private BlockStartImpl findBlockStart(BlockParser blockParser) {
@@ -601,12 +598,12 @@ public class DocumentParser implements ParserState {
             return SubSequence.EMPTY_LIST;
         }
 
-        public List<BasedSequence> getParagraphEOLs() {
+        public List<Integer> getParagraphEolOffsets() {
             if (matchedBlockParser instanceof ParagraphParser) {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContent().getEols();
+                return paragraphParser.getContent().getEolLengths();
             }
-            return SubSequence.EMPTY_LIST;
+            return BlockContent.EMPTY_EOL_OFFSETS;
         }
 
         public MatchedBlockParserImpl(BlockParser matchedBlockParser) {

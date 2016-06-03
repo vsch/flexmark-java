@@ -15,8 +15,14 @@ public class SubSequence extends BasedSequenceImpl {
         }
 
         @Override
-        public char charAt(int i) {
-            throw new StringIndexOutOfBoundsException("String index out of range");
+        public char charAt(int index) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+
+        @Override
+        public int getIndexOffset(int index) {
+            if (index == 0) return 0;
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
         }
 
         @Override
@@ -51,11 +57,6 @@ public class SubSequence extends BasedSequenceImpl {
         }
 
         @Override
-        public BasedSequence toMapped(CharMapper mapper) {
-            return this;
-        }
-
-        @Override
         public String toString() {
             return "";
         }
@@ -65,7 +66,6 @@ public class SubSequence extends BasedSequenceImpl {
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
 
     protected final CharSequence base;
-    protected final CharMapper mapper;
     protected final int startOffset;
     protected final int endOffset;
 
@@ -82,35 +82,25 @@ public class SubSequence extends BasedSequenceImpl {
     }
 
     public SubSequence(CharSequence base) {
-        this(base, 0, base.length(), NullCharacterMapper.INSTANCE);
+        this(base, 0, base.length());
     }
 
     public SubSequence(CharSequence base, int startOffset, int endOffset) {
-        this(base, startOffset, endOffset, NullCharacterMapper.INSTANCE);
-    }
-
-    public SubSequence(CharSequence base, int startOffset, int endOffset, CharMapper mapper) {
         if (startOffset < 0) {
-            throw new StringIndexOutOfBoundsException("beginIndex must be at least 0");
+            throw new StringIndexOutOfBoundsException("beginIndex:" + startOffset + " must be at least 0");
         }
         if (endOffset < 0) {
-            throw new StringIndexOutOfBoundsException("endIndex must be at least 0");
+            throw new StringIndexOutOfBoundsException("endIndex:" + endOffset + " must be at least 0");
         }
         if (endOffset < startOffset) {
-            throw new StringIndexOutOfBoundsException("endIndex must not be less than beginIndex");
+            throw new StringIndexOutOfBoundsException("endIndex:" + endOffset + " must not be less than beginIndex:" + startOffset);
         }
         if (endOffset > base.length()) {
-            throw new StringIndexOutOfBoundsException("endIndex must not be greater than length");
+            throw new StringIndexOutOfBoundsException("endIndex:" + endOffset + " must not be greater than length");
         }
         this.base = base;
-        this.mapper = mapper;
         this.startOffset = startOffset;
         this.endOffset = endOffset;
-    }
-
-    @Override
-    public BasedSequence toMapped(CharMapper mapper) {
-        return new SubSequence(base, startOffset, endOffset, mapper);
     }
 
     @Override
@@ -124,34 +114,42 @@ public class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
+    public int getIndexOffset(int index) {
+        if (index < 0 || startOffset + index > endOffset) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+        return startOffset + index;
+    }
+
+    @Override
     public char charAt(int index) {
         if (index < 0 || startOffset + index >= endOffset) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + index);
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
         }
         char c = base.charAt(index + startOffset);
-        return mapper.map(c);
+        return c == '\0' ? '\uFFFD' : c;
     }
 
     @Override
     public BasedSequence subSequence(int start, int end) {
         if (start < 0 || startOffset + start > endOffset) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+            throw new StringIndexOutOfBoundsException("String index: " + start + " out of range: 0, " + length());
         }
         if (end < 0 || startOffset + end > endOffset) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+            throw new StringIndexOutOfBoundsException("String index: " + end + " out of range: 0, " + length());
         }
-        return new SubSequence(base, startOffset + start, startOffset + end, mapper);
+        return new SubSequence(base, startOffset + start, startOffset + end);
     }
 
     @Override
     public BasedSequence baseSubSequence(int start, int end) {
         if (start < 0 || start > base.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + start);
+            throw new StringIndexOutOfBoundsException("String index: " + start + " out of range: 0, " + length());
         }
         if (end < 0 || end > base.length()) {
-            throw new StringIndexOutOfBoundsException("String index out of range: " + end);
+            throw new StringIndexOutOfBoundsException("String index: " + end + " out of range: 0, " + length());
         }
-        return new SubSequence(base, start, end, mapper);
+        return new SubSequence(base, start, end);
     }
 
     @Override

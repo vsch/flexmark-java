@@ -1,7 +1,12 @@
 package org.commonmark.internal.inline;
 
+import org.commonmark.internal.Delimiter;
+import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
-import org.commonmark.node.*;
+import org.commonmark.node.DelimitedNode;
+import org.commonmark.node.Emphasis;
+import org.commonmark.node.Node;
+import org.commonmark.node.StrongEmphasis;
 import org.commonmark.parser.DelimiterProcessor;
 
 public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
@@ -39,19 +44,19 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public void process(Text opener, Text closer, int delimiterUse) {
+    public void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse) {
         DelimitedNode emphasis = delimiterUse == 1
-                ? new Emphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse))
-                : new StrongEmphasis(opener.chars.subSequence(opener.chars.length()-delimiterUse, opener.chars.length()), SubSequence.EMPTY, closer.chars.subSequence(0, delimiterUse));
+                ? new Emphasis(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse))
+                : new StrongEmphasis(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse));
 
-        Node tmp = opener.getNext();
-        while (tmp != null && tmp != closer) {
+        Node tmp = opener.getNode().getNext();
+        while (tmp != null && tmp != closer.getNode()) {
             Node next = tmp.getNext();
             emphasis.appendChild(tmp);
             tmp = next;
         }
 
-        emphasis.setContent(opener.chars.baseSubSequence(opener.getEndOffset(), closer.getStartOffset()));
-        opener.insertAfter(emphasis);
+        emphasis.setContent(input.subSequence(opener.getEndIndex(), closer.getStartIndex()));
+        opener.getNode().insertAfter(emphasis);
     }
 }
