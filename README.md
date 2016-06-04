@@ -88,7 +88,7 @@ Ratio of performance:
 * [hang-pegdown.md] is a file containing a single line of 17 characters `[[[[[[[[[[[[[[[[[`
   which causes pegdown to go into a hyper-exponential parse time.
 * [hang-pegdown2.md] a file containing a single line of 18 characters `[[[[[[[[[[[[[[[[[[` which
-  causes pegdown to go into an hyper-exponential parse time.
+  causes pegdown to go into a hyper-exponential parse time.
 * [wrap.md] is a file I was using to test wrap on typing performance only to discover that it
   has nothing to do with the wrap on typing code when 0.1 seconds is taken by pegdown to parse
   the file. In the plugin the parsing may happen more than once: syntax highlighter pass, psi
