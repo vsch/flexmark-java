@@ -86,7 +86,7 @@ Ratio of performance:
   evaluation.
 * [spec.txt] commonmark spec markdown file in the [commonmark-java] project
 * [hang-pegdown.md] is a file containing a single line of 17 characters `[[[[[[[[[[[[[[[[[`
-  which causes pegdown to go into an hyper-exponential parse time.
+  which causes pegdown to go into a hyper-exponential parse time.
 * [hang-pegdown2.md] a file containing a single line of 18 characters `[[[[[[[[[[[[[[[[[[` which
   causes pegdown to go into an hyper-exponential parse time.
 * [wrap.md] is a file I was using to test wrap on typing performance only to discover that it
