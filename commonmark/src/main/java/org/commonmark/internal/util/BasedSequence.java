@@ -1,5 +1,7 @@
 package org.commonmark.internal.util;
 
+import org.commonmark.internal.util.mappers.CharMapper;
+
 import java.util.Locale;
 
 /**
@@ -40,6 +42,8 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trim();
     boolean isEmpty();
     boolean isBlank();
+    boolean isNull();
+    boolean isNotNull();
 
     boolean matchChars(String chars, int startIndex);
     boolean matchCharsReversed(String chars, int endIndex);

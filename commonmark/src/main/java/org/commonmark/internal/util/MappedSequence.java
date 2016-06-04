@@ -1,5 +1,7 @@
 package org.commonmark.internal.util;
 
+import org.commonmark.internal.util.mappers.CharMapper;
+
 /**
  * A CharSequence that maps characters according to CharMapper
  */

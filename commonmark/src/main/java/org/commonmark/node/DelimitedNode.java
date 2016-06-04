@@ -4,9 +4,9 @@ import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 
 public abstract class DelimitedNode extends Node {
-    protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence content = SubSequence.EMPTY;
-    protected BasedSequence closingMarker = SubSequence.EMPTY;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence content = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
 
     public DelimitedNode() {
     }

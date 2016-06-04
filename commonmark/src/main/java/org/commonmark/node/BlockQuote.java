@@ -7,7 +7,7 @@ import org.commonmark.internal.util.SubSequence;
 import java.util.List;
 
 public class BlockQuote extends Block {
-    private BasedSequence marker = SubSequence.EMPTY;
+    private BasedSequence marker = SubSequence.NULL;
 
     public BlockQuote() {
     }

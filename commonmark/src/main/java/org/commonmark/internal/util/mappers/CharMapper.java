@@ -1,4 +1,4 @@
-package org.commonmark.internal.util;
+package org.commonmark.internal.util.mappers;
 
 public interface CharMapper {
     char map(char c);

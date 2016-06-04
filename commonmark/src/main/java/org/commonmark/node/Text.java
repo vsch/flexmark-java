@@ -22,6 +22,6 @@ public class Text extends Node {
 
     @Override
     protected String toStringAttributes() {
-        return "text=" + chars;
+        return "text=" + getChars();
     }
 }

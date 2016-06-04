@@ -10,7 +10,7 @@ public abstract class Node {
     private Node lastChild = null;
     private Node prev = null;
     private Node next = null;
-    public BasedSequence chars = null;
+    private BasedSequence chars = SubSequence.NULL;
 
     public Node() {
     }
@@ -23,11 +23,11 @@ public abstract class Node {
 
     // full document char sequence
     public BasedSequence getChars() {
-        return chars == null ? SubSequence.EMPTY : chars;
+        return chars;
     }
 
     public void setChars(BasedSequence chars) {
-        this.chars = chars;
+        this.chars = chars == null ? SubSequence.NULL : chars;
     }
 
     public Node getNext() {

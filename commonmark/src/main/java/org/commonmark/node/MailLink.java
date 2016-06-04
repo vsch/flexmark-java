@@ -17,9 +17,9 @@ public class MailLink extends LinkNode {
         visitor.visit(this);
     }
 
-    protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence content = SubSequence.EMPTY;
-    protected BasedSequence closingMarker = SubSequence.EMPTY;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence content = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
 
     public MailLink(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));

@@ -4,12 +4,12 @@ import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 
 public abstract class RefNode extends LinkNode {
-    public BasedSequence textOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence text = SubSequence.EMPTY;
-    public BasedSequence textClosingMarker = SubSequence.EMPTY;
-    public BasedSequence referenceOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence reference = SubSequence.EMPTY;
-    public BasedSequence referenceClosingMarker = SubSequence.EMPTY;
+    public BasedSequence textOpeningMarker = SubSequence.NULL;
+    public BasedSequence text = SubSequence.NULL;
+    public BasedSequence textClosingMarker = SubSequence.NULL;
+    public BasedSequence referenceOpeningMarker = SubSequence.NULL;
+    public BasedSequence reference = SubSequence.NULL;
+    public BasedSequence referenceClosingMarker = SubSequence.NULL;
 
     public String linkUrl = "";
     public String linkText = "";
@@ -80,11 +80,11 @@ public abstract class RefNode extends LinkNode {
     }
 
     public boolean isReferenceTextCombined() {
-        return reference == SubSequence.EMPTY;
+        return reference == SubSequence.NULL;
     }
 
     public boolean isDummyReference() {
-        return referenceOpeningMarker != SubSequence.EMPTY && reference == SubSequence.EMPTY && referenceClosingMarker != SubSequence.EMPTY;
+        return referenceOpeningMarker != SubSequence.NULL && reference == SubSequence.NULL && referenceClosingMarker != SubSequence.NULL;
     }
 
     public BasedSequence getText() {

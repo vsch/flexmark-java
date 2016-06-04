@@ -7,9 +7,9 @@ import java.util.List;
 
 public class FencedCodeBlock extends Block {
     private int fenceIndent;
-    private BasedSequence openingMarker = SubSequence.EMPTY;
-    private BasedSequence closingMarker = null;
-    private BasedSequence info = null;
+    private BasedSequence openingMarker = SubSequence.NULL;
+    private BasedSequence closingMarker = SubSequence.NULL;
+    private BasedSequence info = SubSequence.NULL;
 
     public FencedCodeBlock() {
     }

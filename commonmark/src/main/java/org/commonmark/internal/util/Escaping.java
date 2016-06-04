@@ -1,7 +1,6 @@
 package org.commonmark.internal.util;
 
 import java.nio.charset.Charset;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,7 +27,7 @@ public class Escaping {
             Pattern.compile("(%[a-fA-F0-9]{0,2}|[^:/?#@!$&'()*+,;=a-zA-Z0-9\\-._~])");
 
     private static final char[] HEX_DIGITS =
-            new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+            new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
     private static final Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
 
@@ -108,9 +107,55 @@ public class Escaping {
         return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
     }
 
-    public static String normalizeReference(BasedSequence input) {
+    public static String extractReference(CharSequence input) {
         // Strip '[' and ']', then trim and convert to lowercase
-        return input.subSequence(1, input.length() - 1).toString().trim().toLowerCase(Locale.ROOT);
+        int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
+        return Escaping.collapseWhitespace(input.subSequence(1, input.length() - stripEnd).toString(), true);
+    }
+
+    public static String normalizeReference(CharSequence input) {
+        // Strip '[' and ']', then trim and convert to lowercase
+        return extractReference(input).toLowerCase();
+    }
+
+    public static String collapseWhitespace(CharSequence input, boolean trim) {
+        StringBuilder sb = new StringBuilder(input.length());
+        int iMax = input.length();
+        boolean hadSpace = false;
+
+        for (int i = 0; i < iMax; i++) {
+            char c = input.charAt(i);
+            if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+                hadSpace = true;
+            } else {
+                if (hadSpace && (!trim || sb.length() > 0)) sb.append(' ');
+                sb.append(c);
+                hadSpace = false;
+            }
+        }
+        if (hadSpace && !trim) sb.append(' ');
+        return sb.toString();
+    }
+
+    public static String normalizeEOL(CharSequence input) {
+        StringBuilder sb = new StringBuilder(input.length());
+        int iMax = input.length();
+        boolean hadCr = false;
+
+        for (int i = 0; i < iMax; i++) {
+            char c = input.charAt(i);
+            if (c == '\r') {
+                //sb.append("\n");
+                //hadCr = true;
+            } else if (c == '\n') {
+                if (!hadCr) sb.append("\n");
+                hadCr = false;
+            } else {
+                sb.append(c);
+                hadCr = false;
+            }
+        }
+        return sb.toString();
     }
 
     private static String replaceAll(Pattern p, String s, Replacer replacer) {

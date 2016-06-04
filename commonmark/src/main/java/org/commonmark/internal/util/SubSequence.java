@@ -8,61 +8,10 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public class SubSequence extends BasedSequenceImpl {
-    final public static BasedSequence EMPTY = new BasedSequenceImpl() {
-        @Override
-        public int length() {
-            return 0;
-        }
+    final public static BasedSequence EMPTY = new EmptyBasedSequence();
+    final public static BasedSequence NULL = new EmptyBasedSequence();
 
-        @Override
-        public char charAt(int index) {
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-        }
-
-        @Override
-        public int getIndexOffset(int index) {
-            if (index == 0) return 0;
-            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
-        }
-
-        @Override
-        public BasedSequence subSequence(int i, int i1) {
-            if (i == 0 && i1 == 0) return this;
-            throw new StringIndexOutOfBoundsException("EMPTY substring only subSequence(0, 0) is allowed");
-        }
-
-        @Override
-        public BasedSequence baseSubSequence(int start, int end) {
-            return subSequence(start, end);
-        }
-
-        @Override
-        public CharSequence getBase() {
-            return Substring.EMPTY;
-        }
-
-        @Override
-        public int getStartOffset() {
-            return 0;
-        }
-
-        @Override
-        public int getEndOffset() {
-            return 0;
-        }
-
-        @Override
-        public SourceRange getRange() {
-            return SourceRange.NULL;
-        }
-
-        @Override
-        public String toString() {
-            return "";
-        }
-    };
-
-    final static public BasedSequence EOL = new StringSequence("\n");
+    final public static BasedSequence EOL = new StringSequence("\n");
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
 
     protected final CharSequence base;
@@ -161,4 +110,59 @@ public class SubSequence extends BasedSequenceImpl {
     public boolean equals(Object obj) {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
     }
+
+    private static class EmptyBasedSequence extends BasedSequenceImpl {
+        @Override
+        public int length() {
+            return 0;
+        }
+
+        @Override
+        public char charAt(int index) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+
+        @Override
+        public int getIndexOffset(int index) {
+            if (index == 0) return 0;
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+
+        @Override
+        public BasedSequence subSequence(int i, int i1) {
+            if (i == 0 && i1 == 0) return this;
+            throw new StringIndexOutOfBoundsException("EMPTY substring only subSequence(0, 0) is allowed");
+        }
+
+        @Override
+        public BasedSequence baseSubSequence(int start, int end) {
+            return subSequence(start, end);
+        }
+
+        @Override
+        public CharSequence getBase() {
+            return Substring.EMPTY;
+        }
+
+        @Override
+        public int getStartOffset() {
+            return 0;
+        }
+
+        @Override
+        public int getEndOffset() {
+            return 0;
+        }
+
+        @Override
+        public SourceRange getRange() {
+            return SourceRange.NULL;
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+    }
+
 }

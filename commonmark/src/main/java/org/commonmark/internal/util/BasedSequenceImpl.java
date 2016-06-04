@@ -1,5 +1,6 @@
 package org.commonmark.internal.util;
 
+import org.commonmark.internal.util.mappers.CharMapper;
 import org.commonmark.internal.util.mappers.LowerCaseMapper;
 import org.commonmark.internal.util.mappers.UpperCaseMapper;
 
@@ -84,6 +85,16 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public boolean isBlank() {
         int trim = countChars(WHITESPACE_CHARS, 0, length());
         return trim == length();
+    }
+
+    @Override
+    public boolean isNull() {
+        return this == SubSequence.NULL;
+    }
+
+    @Override
+    public boolean isNotNull() {
+        return this != SubSequence.NULL;
     }
 
     @Override
@@ -263,4 +274,5 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
         return sb.toString();
     }
+
 }

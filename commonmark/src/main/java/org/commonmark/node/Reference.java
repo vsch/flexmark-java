@@ -4,15 +4,15 @@ import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 
 public class Reference extends Node {
-    public BasedSequence openingMarker = SubSequence.EMPTY;
-    public BasedSequence reference = SubSequence.EMPTY;
-    public BasedSequence closingMarker = SubSequence.EMPTY;
-    public BasedSequence urlOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence url = SubSequence.EMPTY;
-    public BasedSequence urlClosingMarker = SubSequence.EMPTY;
-    public BasedSequence titleOpenMarker = SubSequence.EMPTY;
-    public BasedSequence title = SubSequence.EMPTY;
-    public BasedSequence titleCloseMarker = SubSequence.EMPTY;
+    public BasedSequence openingMarker = SubSequence.NULL;
+    public BasedSequence reference = SubSequence.NULL;
+    public BasedSequence closingMarker = SubSequence.NULL;
+    public BasedSequence urlOpeningMarker = SubSequence.NULL;
+    public BasedSequence url = SubSequence.NULL;
+    public BasedSequence urlClosingMarker = SubSequence.NULL;
+    public BasedSequence titleOpenMarker = SubSequence.NULL;
+    public BasedSequence title = SubSequence.NULL;
+    public BasedSequence titleCloseMarker = SubSequence.NULL;
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
         super(new SubSequence(label.getBase().subSequence(label.getStartOffset(), (title != null ? title.getEndOffset() : (url != null ? url.getEndOffset() : label.getEndOffset())))));

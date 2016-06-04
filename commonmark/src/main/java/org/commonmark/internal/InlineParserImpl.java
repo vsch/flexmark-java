@@ -241,15 +241,14 @@ public class InlineParserImpl implements InlineParser {
             return 0;
         }
 
-        String normalizedLabel = rawLabel.subSequence(1, rawLabel.length() - 2).trim().toLowerCase().toString();
+        String normalizedLabel = Escaping.normalizeReference(rawLabel);
         if (normalizedLabel.isEmpty()) {
             return 0;
         }
 
-        String escapedLabel = Escaping.unescapeString(normalizedLabel);
-        if (!referenceMap.containsKey(escapedLabel)) {
+        if (!referenceMap.containsKey(normalizedLabel)) {
             Reference link = new Reference(rawLabel, dest, title);
-            referenceMap.put(escapedLabel, link);
+            referenceMap.put(normalizedLabel, link);
         }
         return index - startIndex;
     }
@@ -395,7 +394,7 @@ public class InlineParserImpl implements InlineParser {
             Matcher matcher = FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
-            lastChild.setChars(lastChild.chars.trimEnd());
+            lastChild.setChars(lastChild.getChars().trimEnd());
         } else {
             appendNode(new SoftLineBreak(input.subSequence(index - 1, index)));
         }
@@ -573,10 +572,15 @@ public class InlineParserImpl implements InlineParser {
         BasedSequence ref = null;
         boolean isLinkOrImage = false;
         boolean refIsBare = false;
+        BasedSequence linkOpeningMarker = null;
+        BasedSequence linkClosingMarker = null;
+        String label = null;
+        Reference reference = null;
 
         // Inline link?
         if (peek() == '(') {
             index++;
+            linkOpeningMarker = input.subSequence(index - 1, index);
             spnl();
             if ((dest = parseLinkDestination()) != null) {
                 spnl();
@@ -587,6 +591,7 @@ public class InlineParserImpl implements InlineParser {
                 }
                 if (peek() == ')') {
                     index++;
+                    linkClosingMarker = input.subSequence(index - 1, index);
                     isLinkOrImage = true;
                 }
             }
@@ -603,7 +608,12 @@ public class InlineParserImpl implements InlineParser {
             }
 
             if (ref != null) {
-                isLinkOrImage = true;
+                label = Escaping.extractReference(ref);
+                String normalizedLabel = Escaping.normalizeReference(ref);
+                if (referenceMap.containsKey(normalizedLabel)) {
+                    reference = referenceMap.get(normalizedLabel);
+                    isLinkOrImage = true;
+                }
             }
         }
 
@@ -629,8 +639,6 @@ public class InlineParserImpl implements InlineParser {
                 RefNode refNode = (RefNode) linkOrImage;
                 refNode.setReferenceChars(ref);
 
-                String label = Escaping.unescapeString(refNode.reference.trim().toString());
-
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
                     refNode.setLinkText(refNode.getText().toString());
@@ -638,16 +646,16 @@ public class InlineParserImpl implements InlineParser {
                     refNode.setLinkText(label);
                 }
 
-                if (referenceMap.containsKey(label.toLowerCase())) {
-                    Reference reference = referenceMap.get(label.toLowerCase());
+                if (reference != null) {
                     refNode.setLinkUrl(reference.getUrl().toString());
-                    if (reference.getTitle() != SubSequence.EMPTY) refNode.setLinkTitle(reference.getTitle().toString());
+                    if (reference.getTitle() != SubSequence.NULL) refNode.setLinkTitle(reference.getTitle().toString());
                 }
             } else {
                 // set dest and title
-                ((InlineLinkNode) linkOrImage).url = dest;
-                ((InlineLinkNode) linkOrImage).setTitleChars(title);
-                ((InlineLinkNode) linkOrImage).setTextChars(input.subSequence(opener.index, startIndex));
+                InlineLinkNode inlineLinkNode = (InlineLinkNode) linkOrImage;
+                inlineLinkNode.setUrlChars(dest);
+                inlineLinkNode.setTitleChars(title);
+                inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
             }
 
             // Process delimiters such as emphasis inside link/image
@@ -668,11 +676,11 @@ public class InlineParserImpl implements InlineParser {
 
             return true;
         } else { // no link or image
+            index = startIndex;
             appendText(input.subSequence(index - 1, index));
             // We could remove the opener now, but that would complicate text node merging.
             // E.g. `[link] (/uri)` isn't a link because of the space, so we want to keep appending text.
             opener.matched = true;
-            index = startIndex;
             return true;
         }
     }

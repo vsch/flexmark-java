@@ -3,7 +3,6 @@ package org.commonmark.html.renderer;
 import org.commonmark.html.HtmlWriter;
 import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.Escaping;
-import org.commonmark.internal.util.SubSequence;
 import org.commonmark.node.*;
 
 import java.util.*;
@@ -111,7 +110,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         String literal = fencedCodeBlock.getContentChars().toString();
         Map<String, String> attributes = new LinkedHashMap<>();
         BasedSequence info = fencedCodeBlock.getInfo();
-        if (info != null && !info.isBlank()) {
+        if (info.isNotNull() && !info.isBlank()) {
             int space = info.countLeadingNot(" ");
             String language;
             if (space == -1) {
@@ -128,9 +127,9 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     public void visit(HtmlBlock htmlBlock) {
         html.line();
         if (context.shouldEscapeHtml()) {
-            html.text(htmlBlock.getContentChars().toString());
+            html.text(Escaping.normalizeEOL(htmlBlock.getContentChars()));
         } else {
-            html.raw(htmlBlock.getContentChars().toString());
+            html.raw(Escaping.normalizeEOL(htmlBlock.getContentChars()));
         }
         html.line();
     }
@@ -153,19 +152,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(Link link) {
-        Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(link.getUrl().toString()));
-        attrs.put("href", url);
-        if (link.getTitle() != SubSequence.EMPTY) {
-            attrs.put("title", Escaping.unescapeString(link.getTitle().toString()));
-        }
-        html.tag("a", getAttrs(link, attrs));
-        visitChildren(link);
-        html.tag("/a");
-    }
-
-    @Override
     public void visit(ListItem listItem) {
         html.tag("li", getAttrs(listItem));
         visitChildren(listItem);
@@ -184,24 +170,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(Image image) {
-        String url = context.encodeUrl(Escaping.unescapeString(image.getUrl().toString()));
-
-        AltTextVisitor altTextVisitor = new AltTextVisitor();
-        image.accept(altTextVisitor);
-        String altText = altTextVisitor.getAltText();
-
-        Map<String, String> attrs = new LinkedHashMap<>();
-        attrs.put("src", url);
-        attrs.put("alt", altText);
-        if (image.getTitle() != SubSequence.EMPTY) {
-            attrs.put("title", Escaping.unescapeString(image.getTitle().toString()));
-        }
-
-        html.tag("img", getAttrs(image, attrs), true);
-    }
-
-    @Override
     public void visit(Emphasis emphasis) {
         html.tag("em");
         visitChildren(emphasis);
@@ -217,24 +185,23 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Text text) {
-        String text1 = text.getChars().toString();
-        html.text(Escaping.unescapeString(text1));
+        html.text(Escaping.unescapeString(Escaping.normalizeEOL(text.getChars())));
     }
 
     @Override
     public void visit(Code code) {
         // TODO: collapse multiple spaces into 1
         html.tag("code");
-        html.text(code.getContent().trim().toString());
+        html.text(Escaping.collapseWhitespace(code.getContent(), true));
         html.tag("/code");
     }
 
     @Override
     public void visit(HtmlInline htmlInline) {
         if (context.shouldEscapeHtml()) {
-            html.text(htmlInline.getChars().toString());
+            html.text(Escaping.normalizeEOL(htmlInline.getChars()));
         } else {
-            html.raw(htmlInline.getChars().toString());
+            html.raw(Escaping.normalizeEOL(htmlInline.getChars()));
         }
     }
 
@@ -255,16 +222,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(MailLink mailLink) {
-        Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getContent().toString()));
-        attrs.put("href", "mailto:" + url);
-        html.tag("a", getAttrs(mailLink, attrs));
-        visitChildren(mailLink);
-        html.tag("/a");
-    }
-
-    @Override
     public void visit(HtmlEntity htmlEntity) {
         html.text(Escaping.unescapeString(htmlEntity.getChars().toString()));
     }
@@ -276,7 +233,17 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         String url = context.encodeUrl(text);
         attrs.put("href", url);
         html.tag("a", getAttrs(autoLink, attrs));
-        html.raw(text);
+        html.text(text);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(MailLink mailLink) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getContent().toString()));
+        attrs.put("href", "mailto:" + url);
+        html.tag("a", getAttrs(mailLink, attrs));
+        html.text(url);
         html.tag("/a");
     }
 
@@ -291,13 +258,49 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             String url = context.encodeUrl(Escaping.unescapeString(image.getLinkUrl()));
             Map<String, String> attrs = new LinkedHashMap<>();
             attrs.put("src", url);
-            attrs.put("alt", image.getLinkText());
+
+            AltTextVisitor altTextVisitor = new AltTextVisitor();
+            image.accept(altTextVisitor);
+            String altText = altTextVisitor.getAltText();
+
+            attrs.put("alt", altText);
             if (image.getLinkTitle() != null) {
                 attrs.put("title", Escaping.unescapeString(image.getLinkTitle()));
             }
 
             html.tag("img", getAttrs(image, attrs), true);
         }
+    }
+
+    @Override
+    public void visit(Link link) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(Escaping.unescapeString(link.getUrl().toString()));
+        attrs.put("href", url);
+        if (link.getTitle().isNotNull()) {
+            attrs.put("title", Escaping.unescapeString(link.getTitle().toString()));
+        }
+        html.tag("a", getAttrs(link, attrs));
+        visitChildren(link);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(Image image) {
+        String url = context.encodeUrl(Escaping.unescapeString(image.getUrl().toString()));
+
+        AltTextVisitor altTextVisitor = new AltTextVisitor();
+        image.accept(altTextVisitor);
+        String altText = altTextVisitor.getAltText();
+
+        Map<String, String> attrs = new LinkedHashMap<>();
+        attrs.put("src", url);
+        attrs.put("alt", altText);
+        if (image.getTitle().isNotNull()) {
+            attrs.put("title", Escaping.unescapeString(image.getTitle().toString()));
+        }
+
+        html.tag("img", getAttrs(image, attrs), true);
     }
 
     @Override
@@ -344,7 +347,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         html.line();
         html.tag("pre");
         html.tag("code", attributes);
-        html.text(literal);
+        html.text(Escaping.normalizeEOL(literal));
         html.tag("/code");
         html.tag("/pre");
         html.line();
@@ -391,6 +394,11 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         @Override
         public void visit(Text text) {
             sb.append(text.getChars());
+        }
+
+        @Override
+        public void visit(HtmlEntity htmlEntity) {
+            sb.append(Escaping.unescapeString(htmlEntity.getChars().toString()));
         }
 
         @Override

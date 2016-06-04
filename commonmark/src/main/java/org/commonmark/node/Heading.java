@@ -2,14 +2,15 @@ package org.commonmark.node;
 
 import org.commonmark.internal.BlockContent;
 import org.commonmark.internal.util.BasedSequence;
+import org.commonmark.internal.util.SubSequence;
 
 import java.util.List;
 
 public class Heading extends Block {
     protected int level;
-    protected BasedSequence openingMarker = null;
-    protected BasedSequence text = null;
-    protected BasedSequence closingMarker = null;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
 
     public Heading() {
     }
@@ -32,11 +33,11 @@ public class Heading extends Block {
     }
 
     public boolean isAtxHeading() {
-        return openingMarker != null;
+        return openingMarker != SubSequence.NULL;
     }
 
     public boolean isSetextHeading() {
-        return openingMarker == null && closingMarker != null;
+        return openingMarker == SubSequence.NULL && closingMarker != SubSequence.NULL;
     }
 
     public BasedSequence getOpeningMarker() {

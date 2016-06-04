@@ -4,15 +4,17 @@ import org.commonmark.internal.util.BasedSequence;
 import org.commonmark.internal.util.SubSequence;
 
 public abstract class InlineLinkNode extends LinkNode {
-    public BasedSequence textOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence text = SubSequence.EMPTY;
-    public BasedSequence textClosingMarker = SubSequence.EMPTY;
-    public BasedSequence linkOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence url = SubSequence.EMPTY;
-    public BasedSequence titleOpeningMarker = SubSequence.EMPTY;
-    public BasedSequence title = SubSequence.EMPTY;
-    public BasedSequence titleClosingMarker = SubSequence.EMPTY;
-    public BasedSequence linkClosingMarker = SubSequence.EMPTY;
+    protected BasedSequence textOpeningMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence textClosingMarker = SubSequence.NULL;
+    protected BasedSequence linkOpeningMarker = SubSequence.NULL;
+    protected BasedSequence urlOpeningMarker = SubSequence.NULL;
+    protected BasedSequence url = SubSequence.NULL;
+    protected BasedSequence urlClosingMarker = SubSequence.NULL;
+    protected BasedSequence titleOpeningMarker = SubSequence.NULL;
+    protected BasedSequence title = SubSequence.NULL;
+    protected BasedSequence titleClosingMarker = SubSequence.NULL;
+    protected BasedSequence linkClosingMarker = SubSequence.NULL;
 
     public InlineLinkNode() {
     }
@@ -66,15 +68,15 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     public void setTitleChars(BasedSequence titleChars) {
-        if (titleChars != null) {
+        if (titleChars != null && titleChars != SubSequence.NULL) {
             int titleCharsLength = titleChars.length();
             titleOpeningMarker = titleChars.subSequence(0, 1);
             title = titleChars.subSequence(1, titleCharsLength - 1);
             titleClosingMarker = titleChars.subSequence(titleCharsLength - 1, titleCharsLength);
         } else {
-            titleOpeningMarker = SubSequence.EMPTY;
-            title = SubSequence.EMPTY;
-            titleClosingMarker = SubSequence.EMPTY;
+            titleOpeningMarker = SubSequence.NULL;
+            title = SubSequence.NULL;
+            titleClosingMarker = SubSequence.NULL;
         }
     }
 
@@ -83,6 +85,29 @@ public abstract class InlineLinkNode extends LinkNode {
         this.textOpeningMarker = textChars.subSequence(0, 1);
         this.text = textChars.subSequence(1, textCharsLength - 1).trim();
         this.textClosingMarker = textChars.subSequence(textCharsLength - 1, textCharsLength);
+    }
+
+    public void setUrl(BasedSequence linkOpeningMarker, BasedSequence url, BasedSequence linkClosingMarker) {
+        this.linkOpeningMarker = linkOpeningMarker;
+        this.setUrlChars(url);
+        this.linkClosingMarker = linkClosingMarker;
+    }
+
+    public void setUrlChars(BasedSequence url) {
+        if (url != null && url != SubSequence.NULL) {
+            // strip off <> wrapping
+            if (url.startsWith("<") && url.endsWith(">")) {
+                urlOpeningMarker = url.subSequence(0, 1);
+                this.url = url.subSequence(1, url.length() - 1);
+                urlClosingMarker = url.subSequence(url.length() - 1);
+            } else {
+                this.url = url;
+            }
+        } else {
+            this.urlOpeningMarker = SubSequence.NULL;
+            this.url = SubSequence.NULL;
+            this.urlClosingMarker = SubSequence.NULL;
+        }
     }
 
     public BasedSequence getText() {
@@ -101,5 +126,4 @@ public abstract class InlineLinkNode extends LinkNode {
     protected String toStringAttributes() {
         return "text=" + text + ", url=" + url + ", title=" + title;
     }
-
 }
