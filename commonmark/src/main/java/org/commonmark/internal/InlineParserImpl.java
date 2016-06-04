@@ -246,9 +246,10 @@ public class InlineParserImpl implements InlineParser {
             return 0;
         }
 
-        if (!referenceMap.containsKey(normalizedLabel)) {
+        String escapedLabel = Escaping.unescapeString(normalizedLabel);
+        if (!referenceMap.containsKey(escapedLabel)) {
             Reference link = new Reference(rawLabel, dest, title);
-            referenceMap.put(normalizedLabel, link);
+            referenceMap.put(escapedLabel, link);
         }
         return index - startIndex;
     }
@@ -394,6 +395,7 @@ public class InlineParserImpl implements InlineParser {
             Matcher matcher = FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
+            lastChild.setChars(lastChild.chars.trimEnd());
         } else {
             appendNode(new SoftLineBreak(input.subSequence(index - 1, index)));
         }
@@ -415,7 +417,7 @@ public class InlineParserImpl implements InlineParser {
             appendNode(new HardLineBreak());
             index++;
         } else if (index < input.length() && ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
-            appendText(input, index, index + 1);
+            appendText(input, index - 1, index + 1);
             index++;
         } else {
             appendText(input.subSequence(index - 1, index));
@@ -627,7 +629,7 @@ public class InlineParserImpl implements InlineParser {
                 RefNode refNode = (RefNode) linkOrImage;
                 refNode.setReferenceChars(ref);
 
-                String label = refNode.reference.trim().toString();
+                String label = Escaping.unescapeString(refNode.reference.trim().toString());
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));

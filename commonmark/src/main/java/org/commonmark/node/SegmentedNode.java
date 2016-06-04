@@ -54,7 +54,7 @@ public abstract class SegmentedNode extends Node implements Segmented {
 
     @Override
     public BasedSequence getContentChars() {
-        return SegmentedSequence.of(segments, getChars());
+        return SegmentedSequence.of(segments, getChars().subSequence(getChars().length()));
     }
 
     @Override

@@ -21,6 +21,7 @@ public class DocumentParser implements ParserState {
             new IndentedCodeBlockParser.Factory());
 
     private BasedSequence line;
+    private BasedSequence lineWithEOL;
 
     /**
      * current line number in the input
@@ -35,12 +36,12 @@ public class DocumentParser implements ParserState {
     /**
      * current lines EOL sequence
      */
-    private int lineEOL = 0;
+    private int lineEOLIndex = 0;
 
     /**
      * current end of line offset in the input including EOL
      */
-    private int lineEnd = 0;
+    private int lineEndIndex = 0;
 
     /**
      * current index (offset) in input line (0-based)
@@ -107,19 +108,21 @@ public class DocumentParser implements ParserState {
                 lineEnd = lineBreak + 1;
             }
 
+            this.lineWithEOL = input.subSequence(lineStart, lineEnd);
             this.lineStart = lineStart;
-            this.lineEOL = lineEOL;
-            this.lineEnd = lineEnd;
+            this.lineEOLIndex = lineEOL;
+            this.lineEndIndex = lineEnd;
             incorporateLine(line);
             lineNumber++;
             lineStart = lineEnd;
         }
 
         if (input.length() > 0 && (lineStart == 0 || lineStart < input.length())) {
+            this.lineWithEOL = input.subSequence(lineStart, input.length());
             this.lineStart = lineStart;
-            this.lineEOL = input.length();
-            this.lineEnd = this.lineEOL;
-            incorporateLine(input.subSequence(lineStart, input.length()));
+            this.lineEOLIndex = input.length();
+            this.lineEndIndex = this.lineEOLIndex;
+            incorporateLine(lineWithEOL);
             lineNumber++;
         }
 
@@ -157,9 +160,8 @@ public class DocumentParser implements ParserState {
         return lineStart;
     }
 
-    @Override
-    public int getLineEnd() {
-        return lineEnd;
+    public int getLineEndIndex() {
+        return lineEndIndex;
     }
 
     @Override
@@ -168,8 +170,13 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
+    public BasedSequence getLineWithEOL() {
+        return lineWithEOL;
+    }
+
+    @Override
     public int getLineEolLength() {
-        return lineEnd - lineEOL;
+        return lineEndIndex - lineEOLIndex;
     }
 
     @Override
@@ -389,10 +396,10 @@ public class DocumentParser implements ParserState {
      * calling this.
      */
     private void addLine() {
-        BasedSequence content = line.baseSubSequence(line.getStartOffset() + index, lineEnd);
+        BasedSequence content = lineWithEOL.subSequence(index);
         if (columnIsInTab) {
             // Our column is in a partially consumed tab. Expand the remaining columns (to the next tab stop) to spaces.
-            BasedSequence rest = content.subSequence(1, content.length());
+            BasedSequence rest = content.subSequence(1);
             int spaces = Parsing.columnsToNextTabStop(column);
             StringBuilder sb = new StringBuilder(spaces + rest.length());
             for (int i = 0; i < spaces; i++) {
@@ -404,7 +411,7 @@ public class DocumentParser implements ParserState {
 
         //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));
         //BasedSequence eol = content.baseSubSequence(lineEOL < lineEnd ? lineEnd - 1 : lineEnd, lineEnd).toMapped(EolCharacterMapper.INSTANCE);
-        getActiveBlockParser().addLine(content, lineEnd - lineEOL);
+        getActiveBlockParser().addLine(content, lineEndIndex - lineEOLIndex);
     }
 
     private BlockStartImpl findBlockStart(BlockParser blockParser) {

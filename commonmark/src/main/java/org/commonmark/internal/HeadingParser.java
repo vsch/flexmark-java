@@ -36,7 +36,7 @@ public class HeadingParser extends AbstractBlockParser {
 
     @Override
     public void parseInlines(InlineParser inlineParser) {
-        inlineParser.parse(content.getContents(), block);
+        inlineParser.parse(block.getText(), block);
     }
 
     public static class Factory extends AbstractBlockParserFactory {
@@ -50,28 +50,51 @@ public class HeadingParser extends AbstractBlockParser {
             int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence paragraph = matchedBlockParser.getParagraphContent();
             Matcher matcher;
-            if ((matcher = ATX_HEADING.matcher(line.subSequence(nextNonSpace, line.length()))).find()) {
+            BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
+            if ((matcher = ATX_HEADING.matcher(trySequence)).find()) {
                 // ATX heading
                 int newOffset = nextNonSpace + matcher.group(0).length();
-                int level = matcher.group(0).trim().length(); // number of #s
+                int openingStart = matcher.start();
+                int openingEnd = matcher.end();
+                BasedSequence openingMarker = trySequence.subSequence(openingStart, openingEnd).trim();
+                int level = openingMarker.length(); // number of #s
 
                 BlockContent content = new BlockContent();
-                content.add(line.baseSubSequence(line.getStartOffset() + newOffset, state.getLineEnd()), state.getLineEolLength());
+                content.add(state.getLineWithEOL().subSequence(newOffset), state.getLineEolLength());
 
-                // remove trailing ###s:
-                //String content = ATX_TRAILING.matcher().;
+                BasedSequence headerText = trySequence.subSequence(openingEnd);
+                BasedSequence closingMarker = null;
+                matcher = ATX_TRAILING.matcher(headerText);
+                if (matcher.find()) {
+                    // remove trailing ###s:
+                    int closingStart = matcher.start();
+                    int closingEnd = matcher.end();
+                    closingMarker = headerText.subSequence(closingStart, closingEnd).trim();
+                    headerText = headerText.subSequence(0, closingStart);
+                }
 
-                return BlockStart.of(new HeadingParser(level, content))
+                HeadingParser headingParser = new HeadingParser(level, content);
+                headingParser.block.setOpeningMarker(openingMarker);
+                headingParser.block.setText(headerText);
+                headingParser.block.setClosingMarker(closingMarker);
+
+                return BlockStart.of(headingParser)
                         .atIndex(line.length());
 
-            } else if (paragraph != null && ((matcher = SETEXT_HEADING.matcher(line.subSequence(nextNonSpace, line.length()))).find())) {
+            } else if (paragraph != null && ((matcher = SETEXT_HEADING.matcher(trySequence)).find())) {
                 // setext heading line
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
 
                 BlockContent content = new BlockContent();
                 content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolOffsets());
+                BasedSequence headingText = content.getContents().trim();
+                BasedSequence closingMarker = line.trim();
 
-                return BlockStart.of(new HeadingParser(level, content))
+                HeadingParser headingParser = new HeadingParser(level, content);
+                headingParser.block.setText(headingText);
+                headingParser.block.setClosingMarker(closingMarker);
+
+                return BlockStart.of(headingParser)
                         .atIndex(line.length())
                         .replaceActiveBlockParser();
             } else {

@@ -52,4 +52,7 @@ public interface BasedSequence extends CharSequence {
     MappedSequence toLowerCase(Locale locale);
     MappedSequence toUpperCase(Locale locale);
     MappedSequence toMapped(CharMapper mapper);
+
+    BasedSequence trimTailBlankLines();
+    BasedSequence trimLeadBlankLines();
 }

@@ -14,6 +14,11 @@ public interface ParserState {
     BasedSequence getLine();
 
     /**
+     * @return the current line with EOL
+     */
+    BasedSequence getLineWithEOL();
+
+    /**
      * @return the current index within the line (0-based)
      */
     int getIndex();
@@ -65,6 +70,6 @@ public interface ParserState {
   /**
    * @return the end of line offset into the input stream corresponding to current index into the line, including the EOL
    */
-    int getLineEnd();
+    int getLineEndIndex();
 
 }

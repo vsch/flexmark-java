@@ -1,5 +1,6 @@
 package org.commonmark.internal.util;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,12 +35,12 @@ public class SegmentedSequence extends BasedSequenceImpl {
         int iMax = baseOffsets.length;
 
         if (nonBaseChars != null) {
-            for (int i = iMax; i-- > baseStartOffset;) {
+            for (int i = iMax; i-- > baseStartOffset; ) {
                 if (baseOffsets[i] >= 0) return baseOffsets[i];
             }
             return 0;
         }
-        return iMax > 0 ? baseOffsets[iMax-1] : 0;
+        return iMax > 0 ? baseOffsets[iMax - 1] : 0;
     }
 
     public int[] getBaseOffsets() {
@@ -77,34 +78,38 @@ public class SegmentedSequence extends BasedSequenceImpl {
         }
 
         BasedSequence lastSegment = null;
-        boolean contiguous = true;
         BasedSequence firstSegment = segments.get(0);
         CharSequence base = firstSegment.getBase();
+        ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
 
         for (BasedSequence basedSequence : segments) {
             assert base == basedSequence.getBase() : "all segments must come from the same base sequence";
 
             if (basedSequence instanceof PrefixedSubSequence || basedSequence instanceof SegmentedSequence) {
-                contiguous = false;
-                break;
-            }
-
-            if (lastSegment == null) {
-                lastSegment = basedSequence;
+                if (lastSegment != null) mergedSequences.add(lastSegment);
+                mergedSequences.add(basedSequence);
+                lastSegment = null;
             } else {
-                if (lastSegment.getEndOffset() != basedSequence.getStartOffset()) {
-                    contiguous = false;
-                    break;
+                if (lastSegment == null) {
+                    lastSegment = basedSequence;
+                } else {
+                    if (lastSegment.getEndOffset() != basedSequence.getStartOffset()) {
+                        mergedSequences.add(lastSegment);
+                        lastSegment = basedSequence;
+                    } else {
+                        lastSegment = lastSegment.baseSubSequence(lastSegment.getStartOffset(), basedSequence.getEndOffset());
+                    }
                 }
             }
         }
 
-        if (contiguous) {
-            lastSegment = segments.get(segments.size() - 1);
-            return firstSegment.baseSubSequence(firstSegment.getStartOffset(), lastSegment.getEndOffset());
+        if (lastSegment != null) mergedSequences.add(lastSegment);
+
+        if (mergedSequences.size() == 1) {
+            return mergedSequences.get(0);
         }
 
-        return new SegmentedSequence(segments);
+        return new SegmentedSequence(mergedSequences);
     }
 
     private SegmentedSequence(List<BasedSequence> segments) {

@@ -119,7 +119,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             } else {
                 language = info.subSequence(0, space).toString();
             }
-            attributes.put("class", "language-" + language);
+            attributes.put("class", "language-" + Escaping.unescapeString(language));
         }
         renderCodeBlock(literal, getAttrs(fencedCodeBlock, attributes));
     }
@@ -130,7 +130,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         if (context.shouldEscapeHtml()) {
             html.text(htmlBlock.getContentChars().toString());
         } else {
-            html.raw(htmlBlock.getChars().toString());
+            html.raw(htmlBlock.getContentChars().toString());
         }
         html.line();
     }
@@ -144,7 +144,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(IndentedCodeBlock indentedCodeBlock) {
-        String content = indentedCodeBlock.getContentChars().toString();
+        BasedSequence chars = indentedCodeBlock.getContentChars();
+        String content = chars.trimTailBlankLines().toString();
         if (!content.endsWith("\n")) {
             content += "\n";
         }
@@ -154,10 +155,10 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     public void visit(Link link) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(link.getUrl().toString());
+        String url = context.encodeUrl(Escaping.unescapeString(link.getUrl().toString()));
         attrs.put("href", url);
         if (link.getTitle() != SubSequence.EMPTY) {
-            attrs.put("title", link.getTitle().toString());
+            attrs.put("title", Escaping.unescapeString(link.getTitle().toString()));
         }
         html.tag("a", getAttrs(link, attrs));
         visitChildren(link);
@@ -184,7 +185,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Image image) {
-        String url = context.encodeUrl(image.getUrl().toString());
+        String url = context.encodeUrl(Escaping.unescapeString(image.getUrl().toString()));
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
         image.accept(altTextVisitor);
@@ -194,7 +195,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         attrs.put("src", url);
         attrs.put("alt", altText);
         if (image.getTitle() != SubSequence.EMPTY) {
-            attrs.put("title", image.getTitle().toString());
+            attrs.put("title", Escaping.unescapeString(image.getTitle().toString()));
         }
 
         html.tag("img", getAttrs(image, attrs), true);
@@ -222,8 +223,9 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Code code) {
+        // TODO: collapse multiple spaces into 1
         html.tag("code");
-        html.text(code.getContent().toString());
+        html.text(code.getContent().trim().toString());
         html.tag("/code");
     }
 
@@ -255,7 +257,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     public void visit(MailLink mailLink) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(mailLink.getContent().toString());
+        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getContent().toString()));
         attrs.put("href", "mailto:" + url);
         html.tag("a", getAttrs(mailLink, attrs));
         visitChildren(mailLink);
@@ -264,16 +266,17 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlEntity htmlEntity) {
-        html.raw(Escaping.unescapeString(htmlEntity.getChars().toString()));
+        html.text(Escaping.unescapeString(htmlEntity.getChars().toString()));
     }
 
     @Override
     public void visit(AutoLink autoLink) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(autoLink.getContent().toString());
+        String text = autoLink.getContent().toString();
+        String url = context.encodeUrl(text);
         attrs.put("href", url);
         html.tag("a", getAttrs(autoLink, attrs));
-        visitChildren(autoLink);
+        html.raw(text);
         html.tag("/a");
     }
 
@@ -285,12 +288,12 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             visitChildren(image);
             html.raw("]");
         } else {
-            String url = context.encodeUrl(image.getLinkUrl());
+            String url = context.encodeUrl(Escaping.unescapeString(image.getLinkUrl()));
             Map<String, String> attrs = new LinkedHashMap<>();
             attrs.put("src", url);
             attrs.put("alt", image.getLinkText());
             if (image.getLinkTitle() != null) {
-                attrs.put("title", image.getLinkTitle());
+                attrs.put("title", Escaping.unescapeString(image.getLinkTitle()));
             }
 
             html.tag("img", getAttrs(image, attrs), true);
@@ -306,10 +309,10 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             html.raw("]");
         } else {
             Map<String, String> attrs = new LinkedHashMap<>();
-            String url = context.encodeUrl(link.getLinkUrl());
+            String url = context.encodeUrl(Escaping.unescapeString(link.getLinkUrl()));
             attrs.put("href", url);
             if (link.getLinkTitle() != null) {
-                attrs.put("title", link.getLinkTitle());
+                attrs.put("title", Escaping.unescapeString(link.getLinkTitle()));
             }
             html.tag("a", getAttrs(link, attrs));
             visitChildren(link);

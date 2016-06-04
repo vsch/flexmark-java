@@ -221,6 +221,38 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence trimTailBlankLines() {
+        int iMax = length();
+        int lastEOL = iMax;
+        int i;
+
+        for (i = iMax; i-- > 0; ) {
+            char c = charAt(i);
+            if (c == '\n') lastEOL = i + 1;
+            else if (lastEOL == iMax || (c != ' ' && c != '\t')) break;
+        }
+        if (i < 0) return subSequence(0, 0);
+        if (lastEOL != iMax) return subSequence(0, lastEOL);
+        return this;
+    }
+
+    @Override
+    public BasedSequence trimLeadBlankLines() {
+        int iMax = length();
+        int lastEOL = 0;
+        int i;
+
+        for (i = 0; i < iMax; i++) {
+            char c = charAt(i);
+            if (c == '\n') lastEOL = i + 1;
+            else if (c != ' ' && c != '\t') break;
+        }
+        if (i == iMax) return subSequence(iMax, iMax);
+        if (lastEOL != 0) return subSequence(lastEOL);
+        return this;
+    }
+
+    @Override
     public String toString() {
         int iMax = length();
         StringBuilder sb = new StringBuilder(iMax);
