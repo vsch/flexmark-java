@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.PrefixedSubSequence;
+import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
 import org.nibor.autolink.LinkExtractor;
@@ -24,35 +24,42 @@ public class AutolinkPostProcessor implements PostProcessor {
     }
 
     private void linkify(Text text) {
-        BasedSequence literal = text.getChars();
+        BasedSequence original = text.getChars();
+        BasedSequence literal = Escaping.unescapeSequence(original);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
 
         Node lastNode = text;
-        int last = 0;
+        int lastEscaped = 0;
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
-            if (link.getBeginIndex() != last) {
-                lastNode = insertNode(new Text(literal.subSequence(last, link.getBeginIndex())), lastNode);
+            if (link.getBeginIndex() != lastEscaped) {
+                // need to map unescaped index to original index
+                BasedSequence escapedChars = original.subSequence(lastEscaped, link.getBeginIndex());
+                lastNode = insertNode(new Text(escapedChars), lastNode);
             }
+
             Text contentNode = new Text(linkText);
-            BasedSequence destination = getDestination(link, linkText);
-            AutoLink linkNode = new AutoLink(destination);
+            LinkNode linkNode;
+
+            if (link.getType() == LinkType.EMAIL) {
+                linkNode = new MailLink();
+                ((MailLink) linkNode).setContent(linkText);
+            } else {
+                linkNode = new AutoLink();
+                ((AutoLink) linkNode).setContent(linkText);
+            }
+
             linkNode.appendChild(contentNode);
             lastNode = insertNode(linkNode, lastNode);
-            last = link.getEndIndex();
+            lastEscaped = link.getEndIndex();
         }
-        if (last != literal.length()) {
-            insertNode(new Text(literal.subSequence(last, literal.length())), lastNode);
+
+        if (lastEscaped != original.length()) {
+            // need to map unescaped index to original index
+            BasedSequence escapedChars = original.subSequence(lastEscaped, original.getEndOffset());
+            insertNode(new Text(escapedChars), lastNode);
         }
         text.unlink();
-    }
-
-    private static BasedSequence getDestination(LinkSpan linkSpan, BasedSequence linkText) {
-        if (linkSpan.getType() == LinkType.EMAIL) {
-            return new PrefixedSubSequence("mailto:", linkText);
-        } else {
-            return linkText;
-        }
     }
 
     private static Node insertNode(Node node, Node insertAfterNode) {

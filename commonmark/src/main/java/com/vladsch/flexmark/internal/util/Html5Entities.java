@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -35,6 +36,31 @@ public class Html5Entities {
             String s = NAMED_CHARACTER_REFERENCES.get(name);
             if (s != null) {
                 return s;
+            } else {
+                return input;
+            }
+        }
+    }
+
+    public static BasedSequence entityToSequence(BasedSequence input) {
+        Matcher matcher = NUMERIC_PATTERN.matcher(input);
+
+        if (matcher.find()) {
+            int base = matcher.end() == 2 ? 10 : 16;
+            try {
+                int codePoint = Integer.parseInt(input.subSequence(matcher.end(), input.length() - 1).toString(), base);
+                if (codePoint == 0) {
+                    return new PrefixedSubSequence("\uFFFD", SubSequence.EMPTY);
+                }
+                return new PrefixedSubSequence(Arrays.toString(Character.toChars(codePoint)), SubSequence.EMPTY);
+            } catch (IllegalArgumentException e) {
+                return new PrefixedSubSequence("\uFFFD", SubSequence.EMPTY);
+            }
+        } else {
+            String name = input.subSequence(1, input.length() - 1).toString();
+            String s = NAMED_CHARACTER_REFERENCES.get(name);
+            if (s != null) {
+                return new PrefixedSubSequence(s, SubSequence.EMPTY);
             } else {
                 return input;
             }
