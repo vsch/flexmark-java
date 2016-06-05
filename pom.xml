@@ -2,36 +2,35 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.atlassian.pom</groupId>
+        <groupId>com.vladsch.pom</groupId>
         <artifactId>central-pom</artifactId>
-        <version>3.0.98</version>
+        <version>0.0.1</version>
     </parent>
 
     <packaging>pom</packaging>
 
-    <groupId>com.atlassian.commonmark</groupId>
-    <artifactId>commonmark-parent</artifactId>
-    <version>0.5.2-SNAPSHOT</version>
-    <name>commonmark-java parent</name>
+    <groupId>com.vladsch.flexmark</groupId>
+    <artifactId>flexmark-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>flexmark-java parent</name>
     <description>
-        Java implementation of CommonMark, a specification of the Markdown format for turning plain text into formatted
-        text.
+        Java re-implementation of commonmark-java based parser, with AST.
     </description>
-    <url>https://github.com/atlassian/commonmark-java</url>
+    <url>https://github.com/vladsch/flexmark-java</url>
 
     <modules>
-        <module>commonmark</module>
-        <module>commonmark-ext-autolink</module>
-        <module>commonmark-ext-gfm-strikethrough</module>
-        <module>commonmark-ext-gfm-tables</module>
-        <module>commonmark-ext-yaml-front-matter</module>
-        <module>commonmark-integration-test</module>
-        <module>commonmark-test-util</module>
+        <module>flexmark</module>
+        <module>flexmark-ext-autolink</module>
+        <module>flexmark-ext-gfm-strikethrough</module>
+        <module>flexmark-ext-gfm-tables</module>
+        <module>flexmark-ext-yaml-front-matter</module>
+        <module>flexmark-integration-test</module>
+        <module>flexmark-test-util</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <commonmark.javadoc.location>${project.basedir}/../commonmark/target/apidocs/</commonmark.javadoc.location>
+        <flexmark.javadoc.location>${project.basedir}/../flexmark/target/apidocs/</flexmark.javadoc.location>
         <!-- Don't automatically publish artifacts to Central, we might want to inspect them first. -->
         <nexus.staging.autoRelease>false</nexus.staging.autoRelease>
     </properties>
@@ -57,8 +56,8 @@
                         <detectOfflineLinks>false</detectOfflineLinks>
                         <offlineLinks>
                             <offlineLink>
-                                <url>http://static.javadoc.io/com.atlassian.commonmark/commonmark/${project.version}/</url>
-                                <location>${commonmark.javadoc.location}</location>
+                                <url>http://static.javadoc.io/com.vladsch.flexmark/flexmark/${project.version}/</url>
+                                <location>${flexmark.javadoc.location}</location>
                             </offlineLink>
                         </offlineLinks>
                     </configuration>
@@ -82,34 +81,34 @@
         <dependencies>
             <!-- For dependencies between modules -->
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark-ext-autolink</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-autolink</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark-ext-gfm-strikethrough</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark-ext-gfm-tables</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-gfm-tables</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark-ext-yaml-front-matter</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-yaml-front-matter</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.atlassian.commonmark</groupId>
-                <artifactId>commonmark-test-util</artifactId>
-                <version>0.5.2-SNAPSHOT</version>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-test-util</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
             <!-- Common test dependencies -->
@@ -149,9 +148,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:atlassian/commonmark-java.git</connection>
-        <developerConnection>scm:git:git@github.com:atlassian/commonmark-java.git</developerConnection>
-        <url>https://github.com/atlassian/commonmark-java</url>
+        <connection>scm:git:git@github.com:atlassian/flexmark-java.git</connection>
+        <developerConnection>scm:git:git@github.com:atlassian/flexmark-java.git</developerConnection>
+        <url>https://github.com/atlassian/flexmark-java</url>
         <tag>HEAD</tag>
     </scm>
 
