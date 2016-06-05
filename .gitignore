@@ -2,6 +2,7 @@
 .project
 .classpath
 .settings/
+out/
 
 # IntelliJ IDEA
 .idea
