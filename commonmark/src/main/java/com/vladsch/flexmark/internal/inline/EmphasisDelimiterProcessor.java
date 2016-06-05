@@ -1,11 +1,9 @@
 package com.vladsch.flexmark.internal.inline;
 
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
-import com.vladsch.flexmark.node.DelimitedNode;
+import com.vladsch.flexmark.node.DelimitedNodeImpl;
 import com.vladsch.flexmark.node.Emphasis;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.StrongEmphasis;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 
@@ -44,19 +42,11 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse) {
-        DelimitedNode emphasis = delimiterUse == 1
-                ? new Emphasis(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse))
-                : new StrongEmphasis(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse));
+    public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+        DelimitedNodeImpl emphasis = delimiterUse == 1
+                ? new Emphasis(opener.getTailChars(delimiterUse), SubSequence.EMPTY, closer.getLeadChars(delimiterUse))
+                : new StrongEmphasis(opener.getTailChars(delimiterUse), SubSequence.EMPTY, closer.getLeadChars(delimiterUse));
 
-        Node tmp = opener.getNode().getNext();
-        while (tmp != null && tmp != closer.getNode()) {
-            Node next = tmp.getNext();
-            emphasis.appendChild(tmp);
-            tmp = next;
-        }
-
-        emphasis.setContent(input.subSequence(opener.getEndIndex(), closer.getStartIndex()));
-        opener.getNode().insertAfter(emphasis);
+        opener.moveNodesBetweenDelimitersTo(emphasis, closer);
     }
 }

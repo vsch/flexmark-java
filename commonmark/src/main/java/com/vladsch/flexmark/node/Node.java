@@ -26,6 +26,15 @@ public abstract class Node {
         return chars;
     }
 
+    public Document getDocument() {
+        Node node = this;
+        while (node != null && !(node instanceof Document)) {
+            node = node.getParent();
+        }
+
+        return (Document) node;
+    }
+
     public void setChars(BasedSequence chars) {
         this.chars = chars == null ? SubSequence.NULL : chars;
     }

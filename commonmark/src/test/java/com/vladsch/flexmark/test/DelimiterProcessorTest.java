@@ -7,10 +7,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
-import com.vladsch.flexmark.node.Visitor;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
@@ -67,20 +64,13 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse) {
-            UpperCaseNode content = new UpperCaseNode(input.subSequence(opener.getEndIndex()-delimiterUse, opener.getEndIndex()), SubSequence.EMPTY, input.subSequence(closer.getStartIndex(), closer.getStartIndex() + delimiterUse));
-            Node tmp = opener.getNode().getNext();
-            while (tmp != null && tmp != closer.getNode()) {
-                Node next = tmp.getNext();
-                content.appendChild(tmp);
-                tmp = next;
-            }
-            content.setContent(input.subSequence(opener.getEndIndex(), closer.getStartIndex()));
-            opener.getNode().insertAfter(content);
+        public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimiterUse), SubSequence.EMPTY, closer.getLeadChars(delimiterUse));
+            opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }
 
-    private static class UpperCaseNode extends CustomNode {
+    private static class UpperCaseNode extends CustomNode implements DelimitedNode {
         protected BasedSequence openingMarker = SubSequence.EMPTY;
         protected BasedSequence content = SubSequence.EMPTY;
         protected BasedSequence closingMarker = SubSequence.EMPTY;

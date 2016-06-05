@@ -97,7 +97,9 @@ public class DocumentParser implements ParserState {
         int lineEOL;
         int lineEnd;
         lineNumber = 0;
+
         documentBlockParser.setDocument(input);
+        inlineParser.setDocument(documentBlockParser.getBlock());
 
         while ((lineBreak = Parsing.findLineBreak(input, lineStart)) != -1) {
             BasedSequence line = input.subSequence(lineStart, lineBreak);

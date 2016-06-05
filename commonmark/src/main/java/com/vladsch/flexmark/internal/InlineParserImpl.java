@@ -75,10 +75,12 @@ public class InlineParserImpl implements InlineParser {
     private final BitSet delimiterCharacters;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
 
+    public final PropertyKey<HashMap<String, Reference>> REFERENCE_MAP_KEY = new PropertyKey<>("REFERENCE_MAP_KEY", new HashMap<String, Reference>());
+
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
      */
-    private Map<String, Reference> referenceMap = new HashMap<>();
+    private HashMap<String, Reference> referenceMap = new HashMap<>();
 
     private Node block;
 
@@ -97,6 +99,16 @@ public class InlineParserImpl implements InlineParser {
 
     private ArrayList<BasedSequence> currentText;
 
+    private Document document;
+
+    @Override
+    public void setDocument(Document document) {
+        this.document = document;
+
+        // set references in document
+        this.document.setProperty(REFERENCE_MAP_KEY, referenceMap);
+    }
+
     public ArrayList<BasedSequence> getCurrentText() {
         if (currentText == null) {
             currentText = new ArrayList<>();
@@ -104,6 +116,7 @@ public class InlineParserImpl implements InlineParser {
 
         return currentText;
     }
+
 
     public InlineParserImpl(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
         this.delimiterProcessors = delimiterProcessors;
@@ -465,7 +478,7 @@ public class InlineParserImpl implements InlineParser {
         Text node = appendSeparateText(input.subSequence(startIndex, index));
 
         // Add entry to stack for this opener
-        this.delimiter = new Delimiter(node, this.delimiter, startIndex);
+        this.delimiter = new Delimiter(input, node, this.delimiter, startIndex);
         this.delimiter.delimiterChar = delimiterChar;
         this.delimiter.numDelims = numDelims;
         this.delimiter.canOpen = res.canOpen;
@@ -487,7 +500,7 @@ public class InlineParserImpl implements InlineParser {
         Text node = appendSeparateText(input.subSequence(index - 1, index));
 
         // Add entry to stack for this opener
-        this.delimiter = new Delimiter(node, this.delimiter, startIndex);
+        this.delimiter = new Delimiter(input, node, this.delimiter, startIndex);
         this.delimiter.delimiterChar = '[';
         this.delimiter.numDelims = 1;
         this.delimiter.canOpen = true;
@@ -513,7 +526,7 @@ public class InlineParserImpl implements InlineParser {
             Text node = appendSeparateText(input.subSequence(index - 2, index));
 
             // Add entry to stack for this opener
-            this.delimiter = new Delimiter(node, this.delimiter, startIndex + 1);
+            this.delimiter = new Delimiter(input, node, this.delimiter, startIndex + 1);
             this.delimiter.delimiterChar = '!';
             this.delimiter.numDelims = 1;
             this.delimiter.canOpen = true;
@@ -906,7 +919,7 @@ public class InlineParserImpl implements InlineParser {
             opener.numDelims += useDelims;
             closer.numDelims += useDelims;
 
-            delimiterProcessor.process(input, opener, closer, useDelims);
+            delimiterProcessor.process(opener, closer, useDelims);
 
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;

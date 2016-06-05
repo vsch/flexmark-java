@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.BasedSequence;
 
 /**
  * Custom delimiter processor for additional delimiters besides {@code _} and {@code *}.
@@ -42,12 +41,10 @@ public interface DelimiterProcessor {
      * a new node after the opener.
      * <p>
      * Note that removal of the delimiter from the delimiter nodes and unlinking them is done by the caller.
-     *
-     * @param input the current input string from which the delimiters are taken
-     * @param opener the delimiter with text node that contained the opening delimiter
+     *  @param opener the delimiter with text node that contained the opening delimiter
      * @param closer the delimiter with text node that contained the closing delimiter
      * @param delimiterUse the number of delimiters that were used
      */
-    void process(BasedSequence input, Delimiter opener, Delimiter closer, int delimiterUse);
+    void process(Delimiter opener, Delimiter closer, int delimiterUse);
 
 }

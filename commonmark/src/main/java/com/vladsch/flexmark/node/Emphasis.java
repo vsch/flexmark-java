@@ -2,7 +2,7 @@ package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 
-public class Emphasis extends DelimitedNode {
+public class Emphasis extends DelimitedNodeImpl {
     public Emphasis() {
     }
 

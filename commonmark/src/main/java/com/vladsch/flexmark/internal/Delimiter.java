@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
 
@@ -7,6 +9,7 @@ public class Delimiter {
 
     final Text node;
     final int index;
+    final BasedSequence input;
 
     public Text getNode() {
         return node;
@@ -18,6 +21,14 @@ public class Delimiter {
 
     public int getEndIndex() {
         return index + numDelims;
+    }
+
+    public BasedSequence getTailChars(int delimiterUse) {
+        return input.subSequence(getEndIndex() - delimiterUse, getEndIndex());
+    }
+
+    public BasedSequence getLeadChars(int delimiterUse) {
+        return input.subSequence(getStartIndex(), getStartIndex() + delimiterUse);
     }
 
     Delimiter previous;
@@ -46,7 +57,8 @@ public class Delimiter {
      */
     boolean matched = false;
 
-    Delimiter(Text node, Delimiter previous, int index) {
+    Delimiter(BasedSequence input, Text node, Delimiter previous, int index) {
+        this.input = input;
         this.node = node;
         this.previous = previous;
         this.index = index;
@@ -68,5 +80,17 @@ public class Delimiter {
         } else {
             return null;
         }
+    }
+
+    public void moveNodesBetweenDelimitersTo(DelimitedNode delimitedNode, Delimiter closer) {
+        Node tmp = getNode().getNext();
+        while (tmp != null && tmp != closer.getNode()) {
+            Node next = tmp.getNext();
+            ((Node)delimitedNode).appendChild(tmp);
+            tmp = next;
+        }
+
+        delimitedNode.setContent(input.subSequence(getEndIndex(), closer.getStartIndex()));
+        getNode().insertAfter((Node) delimitedNode);
     }
 }

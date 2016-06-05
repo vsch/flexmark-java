@@ -21,7 +21,7 @@ public class SegmentedTest {
         Parser parser = Parser.builder().build();
         Node document = parser.parse(input);
 
-        final List<DelimitedNode> list = new ArrayList<>();
+        final List<DelimitedNodeImpl> list = new ArrayList<>();
         Visitor visitor = new AbstractVisitor() {
             @Override
             public void visit(Emphasis node) {
@@ -37,10 +37,10 @@ public class SegmentedTest {
 
         assertEquals(4, list.size());
 
-        DelimitedNode emphasis = list.get(0);
-        DelimitedNode strong = list.get(1);
-        DelimitedNode important = list.get(2);
-        DelimitedNode critical = list.get(3);
+        DelimitedNodeImpl emphasis = list.get(0);
+        DelimitedNodeImpl strong = list.get(1);
+        DelimitedNodeImpl important = list.get(2);
+        DelimitedNodeImpl critical = list.get(3);
 
         assertEquals("*", String.valueOf(emphasis.getOpeningMarker()));
         assertEquals("*", String.valueOf(emphasis.getClosingMarker()));

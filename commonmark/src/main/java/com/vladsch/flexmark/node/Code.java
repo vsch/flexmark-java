@@ -2,7 +2,7 @@ package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 
-public class Code extends DelimitedNode {
+public class Code extends DelimitedNodeImpl {
     public Code() {
     }
 
