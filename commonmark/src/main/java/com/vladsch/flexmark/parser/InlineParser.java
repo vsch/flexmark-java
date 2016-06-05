@@ -18,4 +18,5 @@ public interface InlineParser {
      */
     void parse(BasedSequence input, Node node);
 
+    int parseReference(BasedSequence s);
 }

@@ -42,8 +42,35 @@ public class ListBlockParser extends AbstractBlockParser {
         return BlockContinue.atIndex(state.getIndex());
     }
 
-    public void setTight(boolean tight) {
+    private void setTight(boolean tight) {
         block.setTight(tight);
+    }
+
+    @Override
+    public void closeBlock(ParserState parserState) {
+       finalizeListTight(parserState);
+    }
+
+    private void finalizeListTight(ParserState parserState) {
+        Node item = getBlock().getFirstChild();
+        while (item != null) {
+            // check for non-final list item ending with blank line:
+            if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
+                setTight(false);
+                break;
+            }
+            // recurse into children of list item, to see if there are
+            // spaces between any of them:
+            Node subItem = item.getFirstChild();
+            while (subItem != null) {
+                if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                    setTight(false);
+                    break;
+                }
+                subItem = subItem.getNext();
+            }
+            item = item.getNext();
+        }
     }
 
     /**

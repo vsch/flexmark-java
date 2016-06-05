@@ -2,6 +2,7 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.io.BufferedReader;
@@ -64,14 +65,14 @@ public class DocumentParser implements ParserState {
     private boolean blank;
 
     private final List<BlockParserFactory> blockParserFactories;
-    private final InlineParserImpl inlineParser;
+    private final InlineParser inlineParser;
     private final DocumentBlockParser documentBlockParser;
 
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
     private Set<BlockParser> allBlockParsers = new HashSet<>();
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
 
-    public DocumentParser(List<BlockParserFactory> blockParserFactories, InlineParserImpl inlineParser) {
+    public DocumentParser(List<BlockParserFactory> blockParserFactories, InlineParser inlineParser) {
         this.blockParserFactories = blockParserFactories;
         this.inlineParser = inlineParser;
 
@@ -85,6 +86,11 @@ public class DocumentParser implements ParserState {
         list.addAll(customBlockParserFactories);
         list.addAll(DocumentParser.CORE_FACTORIES);
         return list;
+    }
+
+    @Override
+    public InlineParser getInlineParser() {
+        return inlineParser;
     }
 
     /**
@@ -437,15 +443,7 @@ public class DocumentParser implements ParserState {
             deactivateBlockParser();
         }
 
-        blockParser.closeBlock();
-
-        if (blockParser instanceof ParagraphParser) {
-            ParagraphParser paragraphParser = (ParagraphParser) blockParser;
-            paragraphParser.closeBlock(inlineParser);
-        } else if (blockParser instanceof ListBlockParser) {
-            ListBlockParser listBlockParser = (ListBlockParser) blockParser;
-            finalizeListTight(listBlockParser);
-        }
+        blockParser.closeBlock(this);
     }
 
     /**
@@ -457,29 +455,8 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private void finalizeListTight(ListBlockParser listBlockParser) {
-        Node item = listBlockParser.getBlock().getFirstChild();
-        while (item != null) {
-            // check for non-final list item ending with blank line:
-            if (endsWithBlankLine(item) && item.getNext() != null) {
-                listBlockParser.setTight(false);
-                break;
-            }
-            // recurse into children of list item, to see if there are
-            // spaces between any of them:
-            Node subItem = item.getFirstChild();
-            while (subItem != null) {
-                if (endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                    listBlockParser.setTight(false);
-                    break;
-                }
-                subItem = subItem.getNext();
-            }
-            item = item.getNext();
-        }
-    }
-
-    private boolean endsWithBlankLine(Node block) {
+    @Override
+    public boolean endsWithBlankLine(Node block) {
         while (block != null) {
             if (isLastLineBlank(block)) {
                 return true;
@@ -573,7 +550,8 @@ public class DocumentParser implements ParserState {
         lastLineBlank.put(node, value);
     }
 
-    private boolean isLastLineBlank(Node node) {
+    @Override
+    public boolean isLastLineBlank(Node node) {
         Boolean value = lastLineBlank.get(node);
         return value != null && value;
     }

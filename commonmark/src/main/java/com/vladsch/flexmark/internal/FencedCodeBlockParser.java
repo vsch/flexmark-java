@@ -70,7 +70,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock() {
+    public void closeBlock(ParserState parserState) {
         // first line, if not blank, has the info string
         List<BasedSequence> lines = content.getLines();
         if (lines.size() > 0) {

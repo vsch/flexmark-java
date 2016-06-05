@@ -20,7 +20,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    public void closeBlock() {
+    public void closeBlock(ParserState parserState) {
     }
 
     @Override

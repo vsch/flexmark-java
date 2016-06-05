@@ -24,7 +24,7 @@ public interface BlockParser {
 
     void addLine(BasedSequence line, int eolLength);
 
-    void closeBlock();
+    void closeBlock(ParserState parserState);
 
     void parseInlines(InlineParser inlineParser);
 

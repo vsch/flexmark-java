@@ -38,7 +38,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock() {
+    public void closeBlock(ParserState parserState) {
         //String literal = TRAILING_BLANK_LINES.matcher(contentString).replaceFirst("\n");
         block.setContent(content);
         content = null;

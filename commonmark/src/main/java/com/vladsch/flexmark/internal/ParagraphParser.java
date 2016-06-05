@@ -37,11 +37,7 @@ public class ParagraphParser extends AbstractBlockParser {
         content.add(line, eolLength);
     }
 
-    @Override
-    public void closeBlock() {
-    }
-
-    public void closeBlock(InlineParserImpl inlineParser) {
+    public void closeBlock(ParserState parserState) {
         BasedSequence contentChars = content.getContents();
         boolean hasReferenceDefs = false;
 
@@ -49,7 +45,7 @@ public class ParagraphParser extends AbstractBlockParser {
 
         // try parsing the beginning as link reference definitions:
         while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
-            pos = inlineParser.parseReference(contentChars);
+            pos = parserState.getInlineParser().parseReference(contentChars);
             if (pos == 0) break;
 
             contentChars = contentChars.subSequence(pos, contentChars.length());

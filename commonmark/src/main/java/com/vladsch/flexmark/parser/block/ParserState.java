@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.parser.InlineParser;
 
 /**
  * State of the parser that is used in block parsers.
@@ -52,6 +54,7 @@ public interface ParserState {
      */
     BlockParser getActiveBlockParser();
 
+    InlineParser getInlineParser();
     /**
      * @return The 0 based current line number within the input
      */
@@ -72,4 +75,6 @@ public interface ParserState {
    */
     int getLineEndIndex();
 
+    boolean endsWithBlankLine(Node block);
+    boolean isLastLineBlank(Node node);
 }

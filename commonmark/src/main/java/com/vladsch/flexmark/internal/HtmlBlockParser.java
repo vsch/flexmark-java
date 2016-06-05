@@ -98,7 +98,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock() {
+    public void closeBlock(ParserState parserState) {
         block.setContent(content);
         content = null;
     }

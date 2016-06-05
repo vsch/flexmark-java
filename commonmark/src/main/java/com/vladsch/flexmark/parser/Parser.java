@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.internal.CommonmarkInlineParser;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.util.BasedSequence;
@@ -58,7 +59,20 @@ public class Parser {
      * @return the root node
      */
     public Node parse(BasedSequence input) {
-        InlineParserImpl inlineParser = new InlineParserImpl(specialCharacters, delimiterCharacters, delimiterProcessors);
+       return parse(input, null);
+    }
+
+    /**
+     * Parse the specified input text into a tree of nodes.
+     * <p>
+     * Note that this method is thread-safe (a new parser state is used for each invocation).
+     *
+     * @param input the text to parse
+     * @param inlineParser inline parser to use for parsing inlines
+     * @return the root node
+     */
+    public Node parse(BasedSequence input, InlineParser inlineParser) {
+        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
         DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
         Node document = documentParser.parse(input);
         return postProcess(document);
@@ -73,7 +87,20 @@ public class Parser {
      * @return the root node
      */
     public Node parse(String input) {
-        InlineParserImpl inlineParser = new InlineParserImpl(specialCharacters, delimiterCharacters, delimiterProcessors);
+        return parse(input, null);
+    }
+
+    /**
+     * Parse the specified input text into a tree of nodes.
+     * <p>
+     * Note that this method is thread-safe (a new parser state is used for each invocation).
+     *
+     * @param input the text to parse
+     * @param inlineParser inline parser to use for parsing inlines
+     * @return the root node
+     */
+    public Node parse(String input, InlineParser inlineParser) {
+        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
         DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
         Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
@@ -89,7 +116,21 @@ public class Parser {
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {
-        InlineParserImpl inlineParser = new InlineParserImpl(specialCharacters, delimiterCharacters, delimiterProcessors);
+        return parseReader(input, null);
+    }
+
+    /**
+     * Parse the specified reader into a tree of nodes. The caller is responsible for closing the reader.
+     * <p>
+     * Note that this method is thread-safe (a new parser state is used for each invocation).
+     *
+     * @param input the reader to parse
+     * @param inlineParser inline parser to use for parsing inlines
+     * @return the root node
+     * @throws IOException when reading throws an exception
+     */
+    public Node parseReader(Reader input, InlineParser inlineParser) throws IOException {
+        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
         DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
         Node document = documentParser.parse(input);
         return postProcess(document);

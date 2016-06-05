@@ -14,92 +14,92 @@ import java.util.regex.Pattern;
 
 public class InlineParserImpl implements InlineParser {
 
-    private static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
-    private static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
-    private static final String IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
-    private static final String HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
-    private static final String PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
-    private static final String DECLARATION = "<![A-Z]+" + "\\s+[^>]*>";
-    private static final String CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
-    private static final String HTMLTAG = "(?:" + Parsing.OPENTAG + "|" + Parsing.CLOSETAG + "|" + HTMLCOMMENT
+    protected static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
+    protected static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
+    protected static final String IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
+    protected static final String HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
+    protected static final String PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
+    protected static final String DECLARATION = "<![A-Z]+" + "\\s+[^>]*>";
+    protected static final String CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
+    protected static final String HTMLTAG = "(?:" + Parsing.OPENTAG + "|" + Parsing.CLOSETAG + "|" + HTMLCOMMENT
             + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
-    private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
+    protected static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 
-    private static final String ASCII_PUNCTUATION = "'!\"#\\$%&\\(\\)\\*\\+,\\-\\./:;<=>\\?@\\[\\\\\\]\\^_`\\{\\|\\}~";
-    private static final Pattern PUNCTUATION = Pattern
+    protected static final String ASCII_PUNCTUATION = "'!\"#\\$%&\\(\\)\\*\\+,\\-\\./:;<=>\\?@\\[\\\\\\]\\^_`\\{\\|\\}~";
+    protected static final Pattern PUNCTUATION = Pattern
             .compile("^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
 
-    private static final Pattern HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
+    protected static final Pattern HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern LINK_TITLE = Pattern.compile(
+    protected static final Pattern LINK_TITLE = Pattern.compile(
             "^(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
                     '|' +
                     "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
                     '|' +
                     "\\((" + ESCAPED_CHAR + "|[^)\\x00])*\\))");
 
-    private static final Pattern LINK_DESTINATION_BRACES = Pattern.compile(
+    protected static final Pattern LINK_DESTINATION_BRACES = Pattern.compile(
             "^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
 
-    private static final Pattern LINK_DESTINATION = Pattern.compile(
+    protected static final Pattern LINK_DESTINATION = Pattern.compile(
             "^(?:" + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
 
-    private static final Pattern LINK_LABEL = Pattern
+    protected static final Pattern LINK_LABEL = Pattern
             .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,1000}\\]");
 
-    private static final Pattern ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
+    protected static final Pattern ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
 
-    private static final Pattern ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
+    protected static final Pattern ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
 
-    private static final Pattern TICKS = Pattern.compile("`+");
+    protected static final Pattern TICKS = Pattern.compile("`+");
 
-    private static final Pattern TICKS_HERE = Pattern.compile("^`+");
+    protected static final Pattern TICKS_HERE = Pattern.compile("^`+");
 
-    private static final Pattern EMAIL_AUTOLINK = Pattern
+    protected static final Pattern EMAIL_AUTOLINK = Pattern
             .compile("^<([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*)>");
 
-    private static final Pattern AUTOLINK = Pattern
+    protected static final Pattern AUTOLINK = Pattern
             .compile("^<[a-zA-Z][a-zA-Z0-9.+-]{1,31}:[^<>\u0000-\u0020]*>");
 
-    private static final Pattern SPNL = Pattern.compile("^ *(?:\n *)?");
+    protected static final Pattern SPNL = Pattern.compile("^ *(?:\n *)?");
 
-    private static final Pattern UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
+    protected static final Pattern UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
 
-    private static final Pattern WHITESPACE = Pattern.compile("\\s+");
+    protected static final Pattern WHITESPACE = Pattern.compile("\\s+");
 
-    private static final Pattern FINAL_SPACE = Pattern.compile(" *$");
+    protected static final Pattern FINAL_SPACE = Pattern.compile(" *$");
 
-    private static final Pattern LINE_END = Pattern.compile("^ *(?:\n|$)");
+    protected static final Pattern LINE_END = Pattern.compile("^ *(?:\n|$)");
 
-    private final BitSet specialCharacters;
-    private final BitSet delimiterCharacters;
-    private final Map<Character, DelimiterProcessor> delimiterProcessors;
+    protected final BitSet specialCharacters;
+    protected final BitSet delimiterCharacters;
+    protected final Map<Character, DelimiterProcessor> delimiterProcessors;
 
     public final PropertyKey<HashMap<String, Reference>> REFERENCE_MAP_KEY = new PropertyKey<>("REFERENCE_MAP_KEY", new HashMap<String, Reference>());
 
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
      */
-    private HashMap<String, Reference> referenceMap = new HashMap<>();
+    protected HashMap<String, Reference> referenceMap = new HashMap<>();
 
-    private Node block;
+    protected Node block;
 
-    private BasedSequence input;
-    private int index;
+    protected BasedSequence input;
+    protected int index;
 
     /**
      * Stack of delimiters (emphasis, strong emphasis).
      */
-    private Delimiter delimiter;
+    protected Delimiter delimiter;
 
     /**
      * Earliest possible bracket delimiter to go back to when searching for opener.
      */
-    private Delimiter bracketDelimiterBottom = null;
+    protected Delimiter bracketDelimiterBottom = null;
 
-    private ArrayList<BasedSequence> currentText;
+    protected ArrayList<BasedSequence> currentText;
 
-    private Document document;
+    protected Document document;
 
     @Override
     public void setDocument(Document document) {
@@ -196,6 +196,7 @@ public class InlineParserImpl implements InlineParser {
      *
      * @return how many characters were parsed as a reference, {@code 0} if none
      */
+    @Override
     public int parseReference(BasedSequence s) {
         this.input = s;
         this.index = 0;
@@ -266,27 +267,27 @@ public class InlineParserImpl implements InlineParser {
         return index - startIndex;
     }
 
-    private void appendText(BasedSequence text) {
+    protected void appendText(BasedSequence text) {
         getCurrentText().add(text);
     }
 
-    private void appendText(BasedSequence text, int beginIndex, int endIndex) {
+    protected void appendText(BasedSequence text, int beginIndex, int endIndex) {
         getCurrentText().add(text.subSequence(beginIndex, endIndex));
     }
 
-    private void appendNode(Node node) {
+    protected void appendNode(Node node) {
         flushTextNode();
         block.appendChild(node);
     }
 
     // In some cases, we don't want the text to be appended to an existing node, we need it separate
-    private Text appendSeparateText(BasedSequence text) {
+    protected Text appendSeparateText(BasedSequence text) {
         Text node = new Text(text);
         appendNode(node);
         return node;
     }
 
-    private void flushTextNode() {
+    protected void flushTextNode() {
         if (currentText != null) {
             block.appendChild(new Text(SegmentedSequence.of(currentText, SubSequence.EMPTY)));
             currentText = null;
@@ -298,7 +299,7 @@ public class InlineParserImpl implements InlineParser {
      * On success, add the result to block's children and return true.
      * On failure, return false.
      */
-    private boolean parseInline() {
+    protected boolean parseInline() {
         boolean res;
         char c = peek();
         if (c == '\0') {
@@ -354,7 +355,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * If RE matches at current index in the input, advance index and return the match; otherwise return null.
      */
-    private BasedSequence match(Pattern re) {
+    protected BasedSequence match(Pattern re) {
         if (index >= input.length()) {
             return null;
         }
@@ -373,7 +374,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Returns the char at the current input index, or {@code '\0'} in case there are no more characters.
      */
-    private char peek() {
+    protected char peek() {
         if (index < input.length()) {
             return input.charAt(index);
         } else {
@@ -392,7 +393,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Parse a newline. If it was preceded by two spaces, return a hard line break; otherwise a soft line break.
      */
-    private boolean parseNewline() {
+    protected boolean parseNewline() {
         index++; // assume we're at a \n
 
         // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
@@ -423,7 +424,7 @@ public class InlineParserImpl implements InlineParser {
      * Parse a backslash-escaped special character, adding either the escaped  character, a hard line break
      * (if the backslash is followed by a newline), or a literal backslash to the block's children.
      */
-    private boolean parseBackslash() {
+    protected boolean parseBackslash() {
         index++;
         if (peek() == '\n') {
             appendNode(new HardLineBreak());
@@ -440,7 +441,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse backticks, adding either a backtick code span or a literal sequence of backticks.
      */
-    private boolean parseBackticks() {
+    protected boolean parseBackticks() {
         BasedSequence ticks = match(TICKS_HERE);
         if (ticks == null) {
             return false;
@@ -466,7 +467,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse delimiters like emphasis, strong emphasis or custom delimiters.
      */
-    private boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+    protected boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         DelimiterRun res = scanDelimiters(delimiterProcessor, delimiterChar);
         if (res == null) {
             return false;
@@ -493,7 +494,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Add open bracket to delimiter stack and add a text node to block's children.
      */
-    private boolean parseOpenBracket() {
+    protected boolean parseOpenBracket() {
         int startIndex = index;
         index++;
 
@@ -517,7 +518,7 @@ public class InlineParserImpl implements InlineParser {
      * If next character is [, and ! delimiter to delimiter stack and add a text node to block's children.
      * Otherwise just add a text node.
      */
-    private boolean parseBang() {
+    protected boolean parseBang() {
         int startIndex = index;
         index++;
         if (peek() == '[') {
@@ -545,7 +546,7 @@ public class InlineParserImpl implements InlineParser {
      * Try to match close bracket against an opening in the delimiter stack. Add either a link or image, or a
      * plain [ character, to block's children. If there is a matching delimiter, remove it from the delimiter stack.
      */
-    private boolean parseCloseBracket() {
+    protected boolean parseCloseBracket() {
         index++;
         int startIndex = index;
 
@@ -701,7 +702,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse link destination, returning the string or null if no match.
      */
-    private BasedSequence parseLinkDestination() {
+    protected BasedSequence parseLinkDestination() {
         BasedSequence res = match(LINK_DESTINATION_BRACES);
         if (res != null) { // chop off surrounding <..>:
             if (res.length() == 2) {
@@ -722,7 +723,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse link title (sans quotes), returning the string or null if no match.
      */
-    private BasedSequence parseLinkTitle() {
+    protected BasedSequence parseLinkTitle() {
         BasedSequence title = match(LINK_TITLE);
         if (title != null) {
             // chop off quotes from title and unescape:
@@ -735,7 +736,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse a link label, returning number of characters parsed.
      */
-    private int parseLinkLabel() {
+    protected int parseLinkLabel() {
         BasedSequence m = match(LINK_LABEL);
         return m == null ? 0 : m.length();
     }
@@ -743,7 +744,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse an autolink (URL or email in pointy brackets).
      */
-    private boolean parseAutolink() {
+    protected boolean parseAutolink() {
         BasedSequence m;
         if ((m = match(EMAIL_AUTOLINK)) != null) {
             MailLink node = new MailLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
@@ -761,7 +762,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse inline HTML.
      */
-    private boolean parseHtmlInline() {
+    protected boolean parseHtmlInline() {
         BasedSequence m = match(HTML_TAG);
         if (m != null) {
             HtmlInline node = new HtmlInline(m);
@@ -775,7 +776,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Attempt to parse an entity, return Entity object if successful.
      */
-    private boolean parseEntity() {
+    protected boolean parseEntity() {
         BasedSequence m;
         if ((m = match(ENTITY_HERE)) != null) {
             HtmlEntity node = new HtmlEntity(m);
@@ -789,7 +790,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Parse a run of ordinary characters, or a single character with a special meaning in markdown, as a plain string.
      */
-    private boolean parseString() {
+    protected boolean parseString() {
         int begin = index;
         int length = input.length();
         while (index != length) {
@@ -806,13 +807,18 @@ public class InlineParserImpl implements InlineParser {
         }
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
     /**
      * Scan a sequence of characters with code delimiterChar, and return information about the number of delimiters
      * and whether they are positioned such that they can open and/or close emphasis or strong emphasis.
      *
      * @return information about delimiter run, or {@code null}
      */
-    private DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+     DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         int startIndex = index;
 
         int delimiterCount = 0;
@@ -857,7 +863,7 @@ public class InlineParserImpl implements InlineParser {
         return new DelimiterRun(delimiterCount, canOpen, canClose);
     }
 
-    private void processDelimiters(Delimiter stackBottom) {
+    protected void processDelimiters(Delimiter stackBottom) {
         Map<Character, Delimiter> openersBottom = new HashMap<>();
 
         // find first closer above stackBottom:
@@ -950,7 +956,7 @@ public class InlineParserImpl implements InlineParser {
         }
     }
 
-    private void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
+    protected void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
         Delimiter delimiter = closer.previous;
         while (delimiter != null && delimiter != opener) {
             Delimiter previousDelimiter = delimiter.previous;
@@ -962,7 +968,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Remove the delimiter and the corresponding text node. For used delimiters, e.g. `*` in `*foo*`.
      */
-    private void removeDelimiterAndNode(Delimiter delim) {
+    protected void removeDelimiterAndNode(Delimiter delim) {
         Text node = delim.node;
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -979,7 +985,7 @@ public class InlineParserImpl implements InlineParser {
     /**
      * Remove the delimiter but keep the corresponding node as text. For unused delimiters such as `_` in `foo_bar`.
      */
-    private void removeDelimiterKeepNode(Delimiter delim) {
+    protected void removeDelimiterKeepNode(Delimiter delim) {
         Text node = delim.node;
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -1001,7 +1007,7 @@ public class InlineParserImpl implements InlineParser {
         removeDelimiter(delim);
     }
 
-    private void removeDelimiter(Delimiter delim) {
+    protected void removeDelimiter(Delimiter delim) {
         if (delim.previous != null) {
             delim.previous.next = delim.next;
         }
