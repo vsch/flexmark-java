@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.internal.util;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,22 +53,22 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence input, ArrayList<BasedSequence> sb) {
+        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
             switch (input.toString()) {
                 case "&":
-                    sb.add(new PrefixedSubSequence("&amp;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&amp;", SubSequence.EMPTY));
                     break;
                 case "<":
-                    sb.add(new PrefixedSubSequence("&lt;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&lt;", SubSequence.EMPTY));
                     break;
                 case ">":
-                    sb.add(new PrefixedSubSequence("&gt;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&gt;", SubSequence.EMPTY));
                     break;
                 case "\"":
-                    sb.add(new PrefixedSubSequence("&quot;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&quot;", SubSequence.EMPTY));
                     break;
                 default:
-                    sb.add(input);
+                    textMapper.addOriginalText(input);
             }
         }
     };
@@ -85,11 +84,11 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence input, ArrayList<BasedSequence> sb) {
+        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
             if (input.charAt(0) == '\\') {
-                sb.add(input.subSequence(1, input.length()));
+                textMapper.addReplacedText(input, input.subSequence(1, input.length()));
             } else {
-                sb.add(Html5Entities.entityToSequence(input));
+                textMapper.addReplacedText(input, Html5Entities.entityToSequence(input));
             }
         }
     };
@@ -117,26 +116,27 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence input, ArrayList<BasedSequence> sb) {
+        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
             if (input.startsWith("%")) {
                 if (input.length() == 3) {
                     // Already percent-encoded, preserve
-                    sb.add(input);
+                    textMapper.addOriginalText(input);
                 } else {
                     // %25 is the percent-encoding for %
-                    sb.add(new PrefixedSubSequence("%25", SubSequence.EMPTY));
-                    sb.add(input.subSequence(1, input.length()));
+                    textMapper.addReplacedText(input.subSequence(0, 1), new PrefixedSubSequence("%25", SubSequence.EMPTY));
+                    textMapper.addOriginalText(input.subSequence(1, input.length()));
                 }
             } else {
                 byte[] bytes = input.toString().getBytes(Charset.forName("UTF-8"));
+                StringBuilder sbItem = new StringBuilder();
+
                 for (byte b : bytes) {
-                    StringBuilder sbItem = new StringBuilder();
                     sbItem.append('%');
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
 
-                    sb.add(new PrefixedSubSequence(sbItem.toString(), SubSequence.EMPTY));
                 }
+                textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), SubSequence.EMPTY));
             }
         }
     };
@@ -144,6 +144,11 @@ public class Escaping {
     public static String escapeHtml(String input, boolean preserveEntities) {
         Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
         return replaceAll(p, input, UNSAFE_CHAR_REPLACER);
+    }
+
+    public static BasedSequence escapeHtml(BasedSequence input, boolean preserveEntities, ReplacedTextMapper textMapper) {
+        Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
+        return replaceAll(p, input, UNSAFE_CHAR_REPLACER, textMapper);
     }
 
     /**
@@ -160,9 +165,9 @@ public class Escaping {
     /**
      * Replace entities and backslash escapes with literal characters.
      */
-    public static BasedSequence unescapeSequence(BasedSequence s) {
+    public static BasedSequence unescapeSequence(BasedSequence s, ReplacedTextMapper textMapper) {
         if (BACKSLASH_OR_AMP.matcher(s).find()) {
-            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
+            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
         } else {
             return s;
         }
@@ -244,30 +249,30 @@ public class Escaping {
         return sb.toString();
     }
 
-    private static BasedSequence replaceAll(Pattern p, BasedSequence s, Replacer replacer) {
+    private static BasedSequence replaceAll(Pattern p, BasedSequence s, Replacer replacer, ReplacedTextMapper textMapper) {
         Matcher matcher = p.matcher(s);
 
         if (!matcher.find()) {
+            textMapper.addOriginalText(s);
             return s;
         }
 
-        ArrayList<BasedSequence> sb = new ArrayList<>();
         int lastEnd = 0;
         do {
-            sb.add(s.subSequence(lastEnd, matcher.start()));
-            replacer.replace(s.subSequence(matcher.start(), matcher.end()), sb);
+            textMapper.addOriginalText(s.subSequence(lastEnd, matcher.start()));
+            replacer.replace(s.subSequence(matcher.start(), matcher.end()), textMapper);
             lastEnd = matcher.end();
         } while (matcher.find());
 
         if (lastEnd != s.length()) {
-            sb.add(s.subSequence(lastEnd, s.length()));
+            textMapper.addOriginalText(s.subSequence(lastEnd, s.length()));
         }
 
-        return SegmentedSequence.of(sb, s.subSequence(0, 0));
+        return textMapper.getReplacedSequence();
     }
 
     private interface Replacer {
         void replace(String input, StringBuilder sb);
-        void replace(BasedSequence input, ArrayList<BasedSequence> sb);
+        void replace(BasedSequence input, ReplacedTextMapper replacedTextMapper);
     }
 }

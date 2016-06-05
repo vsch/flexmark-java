@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.autolink.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
 import org.nibor.autolink.LinkExtractor;
@@ -25,16 +26,18 @@ public class AutolinkPostProcessor implements PostProcessor {
 
     private void linkify(Text text) {
         BasedSequence original = text.getChars();
-        BasedSequence literal = Escaping.unescapeSequence(original);
+        ReplacedTextMapper textMapper = new ReplacedTextMapper();
+        BasedSequence literal = Escaping.unescapeSequence(original, textMapper);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
 
         Node lastNode = text;
         int lastEscaped = 0;
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
-            if (link.getBeginIndex() != lastEscaped) {
-                // need to map unescaped index to original index
-                BasedSequence escapedChars = original.subSequence(lastEscaped, link.getBeginIndex());
+            int index = textMapper.originalOffset(link.getBeginIndex());
+
+            if (index != lastEscaped) {
+                BasedSequence escapedChars = original.subSequence(lastEscaped, index);
                 lastNode = insertNode(new Text(escapedChars), lastNode);
             }
 
@@ -51,12 +54,12 @@ public class AutolinkPostProcessor implements PostProcessor {
 
             linkNode.appendChild(contentNode);
             lastNode = insertNode(linkNode, lastNode);
-            lastEscaped = link.getEndIndex();
+
+            lastEscaped = textMapper.originalOffset(link.getEndIndex());
         }
 
         if (lastEscaped != original.length()) {
-            // need to map unescaped index to original index
-            BasedSequence escapedChars = original.subSequence(lastEscaped, original.getEndOffset());
+            BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
             insertNode(new Text(escapedChars), lastNode);
         }
         text.unlink();
