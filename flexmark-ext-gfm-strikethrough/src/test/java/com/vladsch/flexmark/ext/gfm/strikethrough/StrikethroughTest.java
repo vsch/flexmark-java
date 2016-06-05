@@ -75,7 +75,12 @@ public class StrikethroughTest extends RenderingTestCase {
     }
 
     @Override
-    protected String render(String source) {
-        return RENDERER.render(PARSER.parse(source));
+    protected Node parse(String source) {
+        return PARSER.parse(source);
+    }
+
+    @Override
+    protected String render(Node node) {
+        return RENDERER.render(node);
     }
 }

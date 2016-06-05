@@ -29,11 +29,6 @@ public class Document extends Block implements PropertyHolder {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
-    @Override
     public HashMap<PropertyKey, Object> getProperties() {return propertyHolder.getProperties();}
 
     @Override
@@ -47,4 +42,9 @@ public class Document extends Block implements PropertyHolder {
 
     @Override
     public <T> void setProperty(PropertyKey<T> key, T value) {propertyHolder.setProperty(key, value);}
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

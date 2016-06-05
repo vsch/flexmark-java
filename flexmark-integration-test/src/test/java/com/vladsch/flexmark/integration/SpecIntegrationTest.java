@@ -6,6 +6,7 @@ import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.SpecTestCase;
@@ -47,8 +48,13 @@ public class SpecIntegrationTest extends SpecTestCase {
     }
 
     @Override
-    protected String render(String source) {
-        return RENDERER.render(PARSER.parse(source));
+    protected Node parse(String source) {
+        return PARSER.parse(source);
+    }
+
+    @Override
+    protected String render(Node node) {
+        return RENDERER.render(node);
     }
 
     private static Map<String, String> getOverriddenExamples() {
@@ -78,5 +84,4 @@ public class SpecIntegrationTest extends SpecTestCase {
 
         return m;
     }
-
 }

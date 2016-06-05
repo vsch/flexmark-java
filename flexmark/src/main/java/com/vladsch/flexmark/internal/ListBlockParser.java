@@ -48,7 +48,8 @@ public class ListBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
-       finalizeListTight(parserState);
+        finalizeListTight(parserState);
+        block.setCharsFromChildren();
     }
 
     private void finalizeListTight(ParserState parserState) {

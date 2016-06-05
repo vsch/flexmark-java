@@ -24,143 +24,143 @@ public class AbstractVisitor implements Visitor {
     }
 
     @Override
-    public void visit(BlockQuote blockQuote) {
-        visitChildren(blockQuote);
+    public void visit(BlockQuote node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(BulletList bulletList) {
-        visitChildren(bulletList);
+    public void visit(BulletList node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Code code) {
-        visitChildren(code);
+    public void visit(Code node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Document document) {
-        visitChildren(document);
+    public void visit(Document node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Emphasis emphasis) {
-        visitChildren(emphasis);
+    public void visit(Emphasis node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(FencedCodeBlock fencedCodeBlock) {
-        visitChildren(fencedCodeBlock);
+    public void visit(FencedCodeBlock node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(HardLineBreak hardLineBreak) {
-        visitChildren(hardLineBreak);
+    public void visit(HardLineBreak node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Heading heading) {
-        visitChildren(heading);
+    public void visit(Heading node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(ThematicBreak thematicBreak) {
-        visitChildren(thematicBreak);
+    public void visit(ThematicBreak node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(HtmlInline htmlInline) {
-        visitChildren(htmlInline);
+    public void visit(HtmlInline node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(HtmlBlock htmlBlock) {
-        visitChildren(htmlBlock);
+    public void visit(HtmlBlock node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Image image) {
-        visitChildren(image);
+    public void visit(Image node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(ImageRef image) {
-        visitChildren(image);
+    public void visit(ImageRef node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(IndentedCodeBlock indentedCodeBlock) {
-        visitChildren(indentedCodeBlock);
+    public void visit(IndentedCodeBlock node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Link link) {
-        visitChildren(link);
+    public void visit(Link node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(LinkRef link) {
-        visitChildren(link);
+    public void visit(LinkRef node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(ListItem listItem) {
-        visitChildren(listItem);
+    public void visit(ListItem node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(OrderedList orderedList) {
-        visitChildren(orderedList);
+    public void visit(OrderedList node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Paragraph paragraph) {
-        visitChildren(paragraph);
+    public void visit(Paragraph node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Reference reference) {
-        visitChildren(reference);
+    public void visit(Reference node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(SoftLineBreak softLineBreak) {
-        visitChildren(softLineBreak);
+    public void visit(SoftLineBreak node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(StrongEmphasis strongEmphasis) {
-        visitChildren(strongEmphasis);
+    public void visit(StrongEmphasis node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Text text) {
-        visitChildren(text);
+    public void visit(Text node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(CustomBlock customBlock) {
-        visitChildren(customBlock);
+    public void visit(CustomBlock node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(CustomNode customNode) {
-        visitChildren((Node) customNode);
+    public void visit(CustomNode node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(MailLink mailLink) {
-        visitChildren(mailLink);
+    public void visit(MailLink node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(HtmlEntity htmlEntity) {
-        visitChildren(htmlEntity);
+    public void visit(HtmlEntity node) {
+        visitChildren(node);
     }
 
     @Override
-    public void visit(AutoLink autoLink) {
-        visitChildren(autoLink);
+    public void visit(AutoLink node) {
+        visitChildren(node);
     }
 
     /**

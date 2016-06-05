@@ -23,11 +23,6 @@ public class BulletList extends ListBlock {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public char getBulletMarker() {
         return bulletMarker;
     }
@@ -36,4 +31,8 @@ public class BulletList extends ListBlock {
         this.bulletMarker = bulletMarker;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

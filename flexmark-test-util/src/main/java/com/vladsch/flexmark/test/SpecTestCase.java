@@ -21,17 +21,20 @@ public abstract class SpecTestCase extends RenderingTestCase {
 
     @Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples();
+        List<SpecExample> examples = SpecReader.readExamples(null);
         List<Object[]> data = new ArrayList<>();
         for (SpecExample example : examples) {
-            data.add(new Object[]{example});
+            data.add(new Object[] { example });
         }
         return data;
     }
 
     @Test
     public void testHtmlRendering() {
-        assertRendering(example.getSource(), example.getHtml());
+        if (example.getAst() != null) {
+            assertRenderingAst(example.getSource(), example.getHtml(), example.getAst());
+        } else {
+            assertRendering(example.getSource(), example.getHtml());
+        }
     }
-
 }

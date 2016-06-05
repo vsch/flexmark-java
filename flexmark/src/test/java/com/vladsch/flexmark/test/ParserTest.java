@@ -22,13 +22,13 @@ public class ParserTest {
     public void ioReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
 
-        InputStream input1 = SpecReader.getSpecInputStream();
+        InputStream input1 = SpecReader.getSpecInputStream(null);
         Node document1;
         try (InputStreamReader reader = new InputStreamReader(input1)) {
             document1 = parser.parseReader(reader);
         }
 
-        String spec = SpecReader.readSpec();
+        String spec = SpecReader.readSpec(null);
         Node document2 = parser.parse(spec);
 
         HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();

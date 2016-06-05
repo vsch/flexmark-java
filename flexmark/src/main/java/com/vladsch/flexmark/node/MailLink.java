@@ -12,11 +12,6 @@ public class MailLink extends LinkNode {
         super(chars);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence content = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -52,4 +47,8 @@ public class MailLink extends LinkNode {
         this.closingMarker = closingMarker;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

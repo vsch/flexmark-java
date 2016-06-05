@@ -30,5 +30,4 @@ public class Link extends InlineLinkNode {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

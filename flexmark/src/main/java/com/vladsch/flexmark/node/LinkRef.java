@@ -34,5 +34,4 @@ public class LinkRef extends RefNode {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

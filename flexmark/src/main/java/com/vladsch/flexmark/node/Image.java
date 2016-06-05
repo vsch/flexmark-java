@@ -30,5 +30,4 @@ public class Image extends InlineLinkNode {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

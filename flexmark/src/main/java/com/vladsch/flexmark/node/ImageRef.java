@@ -34,5 +34,4 @@ public class ImageRef extends RefNode {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

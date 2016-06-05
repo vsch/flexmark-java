@@ -45,11 +45,6 @@ public class FencedCodeBlock extends Block {
         this.closingMarker = closingMarker;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public BasedSequence getOpeningFence() {
         return this.openingMarker;
     }
@@ -75,5 +70,10 @@ public class FencedCodeBlock extends Block {
 
     public void setFenceIndent(int fenceIndent) {
         this.fenceIndent = fenceIndent;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

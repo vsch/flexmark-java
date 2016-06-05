@@ -11,11 +11,6 @@ public class AutoLink extends LinkNode {
         super(chars);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence content = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -51,4 +46,8 @@ public class AutoLink extends LinkNode {
         this.closingMarker = closingMarker;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

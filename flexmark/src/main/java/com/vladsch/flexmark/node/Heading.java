@@ -27,11 +27,6 @@ public class Heading extends Block {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public boolean isAtxHeading() {
         return openingMarker != SubSequence.NULL;
     }
@@ -70,5 +65,10 @@ public class Heading extends Block {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

@@ -16,12 +16,12 @@ public class Text extends Node {
     }
 
     @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
+    protected String toStringAttributes() {
+        return "text=" + getChars();
     }
 
     @Override
-    protected String toStringAttributes() {
-        return "text=" + getChars();
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 }

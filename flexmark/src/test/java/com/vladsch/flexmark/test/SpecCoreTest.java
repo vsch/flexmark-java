@@ -6,7 +6,12 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.Test;
+import org.junit.runners.Parameterized;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.fail;
 
@@ -18,6 +23,16 @@ public class SpecCoreTest extends SpecTestCase {
 
     public SpecCoreTest(SpecExample example) {
         super(example);
+    }
+
+    @Parameterized.Parameters(name = "{0}")
+    public static List<Object[]> data() {
+        List<SpecExample> examples = SpecReader.readExamples(null);
+        List<Object[]> data = new ArrayList<>();
+        for (SpecExample example : examples) {
+            data.add(new Object[] { example });
+        }
+        return data;
     }
 
     @Test
@@ -49,7 +64,12 @@ public class SpecCoreTest extends SpecTestCase {
     }
 
     @Override
-    protected String render(String source) {
-        return RENDERER.render(PARSER.parse(source));
+    protected Node parse(String source) {
+        return PARSER.parse(source);
+    }
+
+    @Override
+    protected String render(Node node) {
+        return RENDERER.render(node);
     }
 }

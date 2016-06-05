@@ -36,6 +36,11 @@ public class ListItemParser extends AbstractBlockParser {
     }
 
     @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromChildren();
+    }
+
+    @Override
     public BlockContinue tryContinue(ParserState state) {
         if (state.isBlank()) {
             if (block.getFirstChild() == null) {

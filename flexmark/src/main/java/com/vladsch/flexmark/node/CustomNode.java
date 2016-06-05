@@ -9,4 +9,9 @@ public abstract class CustomNode extends Node {
     public CustomNode(BasedSequence chars) {
         super(chars);
     }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }

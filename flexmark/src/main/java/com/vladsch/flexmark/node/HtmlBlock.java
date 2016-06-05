@@ -30,5 +30,4 @@ public class HtmlBlock extends Block {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

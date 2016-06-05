@@ -25,11 +25,6 @@ public class OrderedList extends ListBlock {
     private int startNumber;
     private char delimiter;
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
     public int getStartNumber() {
         return startNumber;
     }
@@ -46,4 +41,8 @@ public class OrderedList extends ListBlock {
         this.delimiter = delimiter;
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
 }
