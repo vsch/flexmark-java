@@ -16,6 +16,15 @@ public class MailLink extends LinkNode {
     protected BasedSequence content = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
+    public BasedSequence getLeadSegment() {
+        return SubSequence.firstNonNull(openingMarker, content);
+    }
+
+    @Override
+    public BasedSequence getTrailSegment() {
+        return SubSequence.firstNonNull(closingMarker, content);
+    }
+
     public MailLink(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;

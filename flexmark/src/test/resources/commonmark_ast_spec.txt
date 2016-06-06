@@ -310,8 +310,8 @@ Document[0, 16]
 </ul>
 .
 Document[0, 14]
-  BulletList[4, 14]
-    ListItem[4, 14]
+  BulletList[2, 14]
+    ListItem[2, 14] open:[2, 3]
       Paragraph[4, 8]
         Text[4, 7]
       Paragraph[10, 14]
@@ -332,8 +332,8 @@ Document[0, 14]
 </ul>
 .
 Document[0, 13]
-  BulletList[2, 13]
-    ListItem[2, 13]
+  BulletList[0, 13]
+    ListItem[0, 13] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       IndentedCodeBlock[9, 13]
@@ -348,7 +348,7 @@ Document[0, 13]
 </blockquote>
 .
 Document[0, 7]
-  BlockQuote[0, 7]
+  BlockQuote[0, 7] marker:[0, 1]
     IndentedCodeBlock[3, 7]
 ````````````````````````````````
 
@@ -363,8 +363,8 @@ Document[0, 7]
 </ul>
 .
 Document[0, 7]
-  BulletList[3, 7]
-    ListItem[3, 7]
+  BulletList[0, 7]
+    ListItem[0, 7] open:[0, 1]
       IndentedCodeBlock[3, 7]
 ````````````````````````````````
 
@@ -399,16 +399,16 @@ Document[0, 13]
 </ul>
 .
 Document[0, 24]
-  BulletList[3, 24]
-    ListItem[3, 24]
+  BulletList[1, 24]
+    ListItem[1, 24] open:[1, 2]
       Paragraph[3, 7]
         Text[3, 6]
-      BulletList[12, 24]
-        ListItem[12, 24]
+      BulletList[10, 24]
+        ListItem[10, 24] open:[10, 11]
           Paragraph[12, 16]
             Text[12, 15]
-          BulletList[20, 24]
-            ListItem[20, 24]
+          BulletList[18, 24]
+            ListItem[18, 24] open:[18, 19]
               Paragraph[20, 24]
                 Text[20, 23]
 ````````````````````````````````
@@ -445,11 +445,11 @@ two items, not a list with one item containing a code span:
 </ul>
 .
 Document[0, 14]
-  BulletList[2, 14]
-    ListItem[2, 7]
+  BulletList[0, 14]
+    ListItem[0, 7] open:[0, 1]
       Paragraph[2, 7]
         Text[2, 6]
-    ListItem[9, 14]
+    ListItem[7, 14] open:[7, 8]
       Paragraph[9, 14]
         Text[9, 13]
 ````````````````````````````````
@@ -493,9 +493,9 @@ ___
 <hr />
 .
 Document[0, 12]
-  ThematicBreak[0, 4]
-  ThematicBreak[4, 8]
-  ThematicBreak[8, 12]
+  ThematicBreak[0, 3]
+  ThematicBreak[4, 7]
+  ThematicBreak[8, 11]
 ````````````````````````````````
 
 
@@ -556,9 +556,9 @@ One to three spaces indent are allowed:
 <hr />
 .
 Document[0, 18]
-  ThematicBreak[1, 5]
-  ThematicBreak[7, 11]
-  ThematicBreak[15, 18]
+  ThematicBreak[0, 4]
+  ThematicBreak[5, 10]
+  ThematicBreak[11, 17]
 ````````````````````````````````
 
 
@@ -584,8 +584,8 @@ Foo
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Text[0, 3]
-    SoftLineBreak[3, 4]
+    Text[0, 11]
+    SoftLineBreak[3, 11]
     Text[8, 11]
 ````````````````````````````````
 
@@ -598,7 +598,7 @@ _____________________________________
 <hr />
 .
 Document[0, 38]
-  ThematicBreak[0, 38]
+  ThematicBreak[0, 37]
 ````````````````````````````````
 
 
@@ -610,7 +610,7 @@ Spaces are allowed between the characters:
 <hr />
 .
 Document[0, 7]
-  ThematicBreak[0, 7]
+  ThematicBreak[0, 6]
 ````````````````````````````````
 
 
@@ -620,7 +620,7 @@ Document[0, 7]
 <hr />
 .
 Document[0, 20]
-  ThematicBreak[0, 20]
+  ThematicBreak[0, 19]
 ````````````````````````````````
 
 
@@ -630,7 +630,7 @@ Document[0, 20]
 <hr />
 .
 Document[0, 22]
-  ThematicBreak[0, 22]
+  ThematicBreak[0, 21]
 ````````````````````````````````
 
 
@@ -642,7 +642,7 @@ Spaces are allowed at the end:
 <hr />
 .
 Document[0, 12]
-  ThematicBreak[0, 12]
+  ThematicBreak[0, 11]
 ````````````````````````````````
 
 
@@ -679,7 +679,7 @@ So, this is not a thematic break:
 .
 Document[0, 5]
   Paragraph[1, 5]
-    Emphasis[1, 4]
+    Emphasis[1, 4] open:[1, 2] close:[3, 4]
       Text[2, 3]
 ````````````````````````````````
 
@@ -700,13 +700,13 @@ Thematic breaks do not need blank lines before or after:
 </ul>
 .
 Document[0, 16]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-  ThematicBreak[0, 0]
-  BulletList[12, 16]
-    ListItem[12, 16]
+  ThematicBreak[6, 9]
+  BulletList[10, 16]
+    ListItem[10, 16] open:[10, 11]
       Paragraph[12, 16]
         Text[12, 15]
 ````````````````````````````````
@@ -726,7 +726,7 @@ bar
 Document[0, 12]
   Paragraph[0, 4]
     Text[0, 3]
-  ThematicBreak[0, 0]
+  ThematicBreak[4, 7]
   Paragraph[8, 12]
     Text[8, 11]
 ````````````````````````````````
@@ -747,7 +747,7 @@ bar
 <p>bar</p>
 .
 Document[0, 12]
-  Heading[0, 8]
+  Heading[0, 0] marker:[4, 7]
     Text[0, 3]
   Paragraph[8, 12]
     Text[8, 11]
@@ -771,13 +771,13 @@ interpretations of a line, the thematic break takes precedence:
 </ul>
 .
 Document[0, 18]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-  ThematicBreak[0, 0]
-  BulletList[14, 18]
-    ListItem[14, 18]
+  ThematicBreak[6, 11]
+  BulletList[12, 18]
+    ListItem[12, 18] open:[12, 13]
       Paragraph[14, 18]
         Text[14, 17]
 ````````````````````````````````
@@ -797,12 +797,12 @@ If you want a thematic break in a list item, use a different bullet:
 </ul>
 .
 Document[0, 14]
-  BulletList[0, 0]
-    ListItem[2, 6]
+  BulletList[0, 13]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[0, 0]
-      ThematicBreak[0, 0]
+    ListItem[6, 13] open:[6, 7]
+      ThematicBreak[6, 13]
 ````````````````````````````````
 
 
@@ -926,7 +926,7 @@ Contents are parsed as inlines:
 Document[0, 20]
   Heading[0, 0] marker:[0, 1]
     Text[2, 6]
-    Emphasis[6, 11]
+    Emphasis[6, 11] open:[6, 7] close:[10, 11]
       Text[7, 10]
     Text[11, 19]
 ````````````````````````````````
@@ -1104,10 +1104,10 @@ lines, and they can interrupt paragraphs:
 <hr />
 .
 Document[0, 17]
-  ThematicBreak[0, 0]
+  ThematicBreak[0, 4]
   Heading[0, 0] marker:[5, 7]
     Text[8, 11]
-  ThematicBreak[0, 0]
+  ThematicBreak[12, 16]
 ````````````````````````````````
 
 
@@ -1193,11 +1193,11 @@ Foo *bar*
 Document[0, 41]
   Heading[0, 0] marker:[10, 19]
     Text[0, 4]
-    Emphasis[4, 9]
+    Emphasis[4, 9] open:[4, 5] close:[8, 9]
       Text[5, 8]
   Heading[0, 0] marker:[31, 40]
     Text[21, 25]
-    Emphasis[25, 30]
+    Emphasis[25, 30] open:[25, 26] close:[29, 30]
       Text[26, 29]
 ````````````````````````````````
 
@@ -1215,7 +1215,7 @@ baz</em></h1>
 Document[0, 19]
   Heading[0, 0] marker:[14, 18]
     Text[0, 4]
-    Emphasis[4, 13]
+    Emphasis[4, 13] open:[4, 5] close:[12, 13]
       Text[5, 8]
       SoftLineBreak[8, 9]
       Text[9, 12]
@@ -1287,7 +1287,7 @@ Foo
 .
 Document[0, 29]
   IndentedCodeBlock[4, 25]
-  ThematicBreak[0, 0]
+  ThematicBreak[25, 28]
 ````````````````````````````````
 
 
@@ -1344,7 +1344,7 @@ Document[0, 19]
     Text[4, 7]
   Paragraph[9, 13]
     Text[9, 12]
-  ThematicBreak[0, 0]
+  ThematicBreak[13, 18]
 ````````````````````````````````
 
 
@@ -1418,10 +1418,10 @@ line] in a list item or block quote:
 <hr />
 .
 Document[0, 10]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
-  ThematicBreak[0, 0]
+  ThematicBreak[6, 9]
 ````````````````````````````````
 
 
@@ -1437,7 +1437,7 @@ bar
 </blockquote>
 .
 Document[0, 14]
-  BlockQuote[0, 0]
+  BlockQuote[0, 14] marker:[0, 1]
     Paragraph[2, 14]
       Text[2, 5]
       SoftLineBreak[5, 6]
@@ -1457,11 +1457,11 @@ Document[0, 14]
 <hr />
 .
 Document[0, 10]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-  ThematicBreak[0, 0]
+  ThematicBreak[6, 9]
 ````````````````````````````````
 
 
@@ -1502,7 +1502,7 @@ Baz
 <p>Baz</p>
 .
 Document[0, 24]
-  ThematicBreak[0, 0]
+  ThematicBreak[0, 3]
   Heading[0, 0] marker:[8, 11]
     Text[4, 7]
   Heading[0, 0] marker:[16, 19]
@@ -1538,8 +1538,8 @@ in these examples gets interpreted as a thematic break:
 <hr />
 .
 Document[0, 8]
-  ThematicBreak[0, 0]
-  ThematicBreak[0, 0]
+  ThematicBreak[0, 3]
+  ThematicBreak[4, 7]
 ````````````````````````````````
 
 
@@ -1553,11 +1553,11 @@ Document[0, 8]
 <hr />
 .
 Document[0, 12]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-  ThematicBreak[0, 0]
+  ThematicBreak[6, 11]
 ````````````````````````````````
 
 
@@ -1571,7 +1571,7 @@ Document[0, 12]
 .
 Document[0, 12]
   IndentedCodeBlock[4, 8]
-  ThematicBreak[0, 0]
+  ThematicBreak[8, 11]
 ````````````````````````````````
 
 
@@ -1585,10 +1585,10 @@ Document[0, 12]
 <hr />
 .
 Document[0, 12]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
-  ThematicBreak[0, 0]
+  ThematicBreak[6, 11]
 ````````````````````````````````
 
 
@@ -1672,7 +1672,7 @@ Document[0, 18]
     Text[0, 3]
     SoftLineBreak[3, 4]
     Text[4, 7]
-  ThematicBreak[0, 0]
+  ThematicBreak[9, 12]
   Paragraph[14, 18]
     Text[14, 17]
 ````````````````````````````````
@@ -1697,7 +1697,7 @@ Document[0, 18]
     Text[0, 3]
     SoftLineBreak[3, 4]
     Text[4, 7]
-  ThematicBreak[0, 0]
+  ThematicBreak[8, 13]
   Paragraph[14, 18]
     Text[14, 17]
 ````````````````````````````````
@@ -1773,8 +1773,8 @@ item][list items], the list item interpretation takes precedence:
 </ul>
 .
 Document[0, 17]
-  BulletList[4, 17]
-    ListItem[4, 17]
+  BulletList[2, 17]
+    ListItem[2, 17] open:[2, 3]
       Paragraph[4, 8]
         Text[4, 7]
       Paragraph[13, 17]
@@ -1797,12 +1797,12 @@ Document[0, 17]
 </ol>
 .
 Document[0, 19]
-  OrderedList[4, 19]
-    ListItem[4, 19]
+  OrderedList[0, 19]
+    ListItem[0, 19] open:[0, 2]
       Paragraph[4, 8]
         Text[4, 7]
-      BulletList[15, 19]
-        ListItem[15, 19]
+      BulletList[13, 19]
+        ListItem[13, 19] open:[13, 14]
           Paragraph[15, 19]
             Text[15, 18]
 ````````````````````````````````
@@ -1930,13 +1930,13 @@ Heading
 <hr />
 .
 Document[0, 46]
-  Heading[0, 0]
+  Heading[0, 0] marker:[0, 1]
     Text[2, 9]
   IndentedCodeBlock[14, 18]
-  Heading[0, 0]
+  Heading[0, 0] marker:[26, 32]
     Text[18, 25]
   IndentedCodeBlock[37, 41]
-  ThematicBreak[0, 0]
+  ThematicBreak[41, 45]
 ````````````````````````````````
 
 
@@ -2044,7 +2044,7 @@ Here is a simple example with backticks:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -2061,7 +2061,7 @@ With tildes:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -2079,7 +2079,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -2094,7 +2094,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -2111,7 +2111,7 @@ aaa
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[4, 5]
+  FencedCodeBlock[4, 5] open:[0, 4] info:[0, 0] close:[13, 19]
 ````````````````````````````````
 
 
@@ -2126,7 +2126,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[4, 5]
+  FencedCodeBlock[4, 5] open:[0, 4] info:[0, 0] close:[13, 17]
 ````````````````````````````````
 
 
@@ -2139,7 +2139,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2155,7 +2155,7 @@ aaa
 </code></pre>
 .
 Document[0, 15]
-  FencedCodeBlock[5, 6]
+  FencedCodeBlock[5, 6] open:[0, 5] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2172,8 +2172,8 @@ bbb
 <p>bbb</p>
 .
 Document[0, 17]
-  BlockQuote[0, 0]
-    FencedCodeBlock[5, 6]
+  BlockQuote[0, 6] marker:[0, 1]
+    FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[0, 0]
   Paragraph[13, 17]
     Text[13, 16]
 ````````````````````````````````
@@ -2192,7 +2192,7 @@ A code block can have all empty lines as its content:
 </code></pre>
 .
 Document[0, 12]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[8, 11]
 ````````````````````````````````
 
 
@@ -2205,7 +2205,7 @@ A code block can be empty:
 <pre><code></code></pre>
 .
 Document[0, 8]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[4, 7]
 ````````````````````````````````
 
 
@@ -2224,7 +2224,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[4, 5]
+  FencedCodeBlock[4, 5] open:[1, 4] info:[0, 0] close:[14, 17]
 ````````````````````````````````
 
 
@@ -2241,7 +2241,7 @@ aaa
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[5, 6]
+  FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[22, 25]
 ````````````````````````````````
 
 
@@ -2258,7 +2258,7 @@ aaa
 </code></pre>
 .
 Document[0, 35]
-  FencedCodeBlock[6, 7]
+  FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[31, 34]
 ````````````````````````````````
 
 
@@ -2291,7 +2291,7 @@ aaa
 </code></pre>
 .
 Document[0, 14]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[10, 13]
 ````````````````````````````````
 
 
@@ -2304,7 +2304,7 @@ aaa
 </code></pre>
 .
 Document[0, 17]
-  FencedCodeBlock[6, 7]
+  FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[13, 16]
 ````````````````````````````````
 
 
@@ -2320,7 +2320,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2336,7 +2336,7 @@ aaa</p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Code[0, 7]
+    Code[0, 7] open:[0, 3] close:[4, 7]
     SoftLineBreak[7, 8]
     Text[8, 11]
 ````````````````````````````````
@@ -2352,7 +2352,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[6, 7]
+  FencedCodeBlock[6, 7] open:[0, 6] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2374,7 +2374,7 @@ baz
 Document[0, 20]
   Paragraph[0, 4]
     Text[0, 3]
-  FencedCodeBlock[7, 8]
+  FencedCodeBlock[7, 8] open:[4, 7] info:[0, 0] close:[12, 15]
   Paragraph[16, 20]
     Text[16, 19]
 ````````````````````````````````
@@ -2397,10 +2397,10 @@ bar
 <h1>baz</h1>
 .
 Document[0, 26]
-  Heading[0, 0]
+  Heading[0, 0] marker:[4, 7]
     Text[0, 3]
-  FencedCodeBlock[11, 12]
-  Heading[0, 0]
+  FencedCodeBlock[11, 12] open:[8, 11] info:[0, 0] close:[16, 19]
+  Heading[0, 0] marker:[20, 21]
     Text[22, 25]
 ````````````````````````````````
 
@@ -2423,7 +2423,7 @@ end
 </code></pre>
 .
 Document[0, 38]
-  FencedCodeBlock[3, 8]
+  FencedCodeBlock[3, 8] open:[0, 3] info:[3, 7] close:[34, 37]
 ````````````````````````````````
 
 
@@ -2440,7 +2440,7 @@ end
 </code></pre>
 .
 Document[0, 65]
-  FencedCodeBlock[4, 31]
+  FencedCodeBlock[4, 31] open:[0, 4] info:[8, 30] close:[57, 64]
 ````````````````````````````````
 
 
@@ -2451,7 +2451,7 @@ Document[0, 65]
 <pre><code class="language-;"></code></pre>
 .
 Document[0, 11]
-  FencedCodeBlock[4, 6]
+  FencedCodeBlock[4, 6] open:[0, 4] info:[4, 5] close:[6, 10]
 ````````````````````````````````
 
 
@@ -2466,7 +2466,7 @@ foo</p>
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Code[0, 10]
+    Code[0, 10] open:[0, 3] close:[7, 10]
     SoftLineBreak[10, 11]
     Text[11, 14]
 ````````````````````````````````
@@ -2483,7 +2483,7 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -2622,7 +2622,7 @@ Here we have two HTML blocks with a Markdown paragraph between them:
 Document[0, 38]
   HtmlBlock[0, 18]
   Paragraph[19, 30]
-    Emphasis[19, 29]
+    Emphasis[19, 29] open:[19, 20] close:[28, 29]
       Text[20, 28]
   HtmlBlock[31, 38]
 ````````````````````````````````
@@ -2673,7 +2673,7 @@ An open tag need not be closed:
 Document[0, 19]
   HtmlBlock[0, 12]
   Paragraph[13, 19]
-    Emphasis[13, 18]
+    Emphasis[13, 18] open:[13, 14] close:[17, 18]
       Text[14, 17]
 ````````````````````````````````
 
@@ -2868,7 +2868,7 @@ line).  So the contents get interpreted as CommonMark:
 Document[0, 21]
   HtmlBlock[0, 6]
   Paragraph[7, 13]
-    Emphasis[7, 12]
+    Emphasis[7, 12] open:[7, 8] close:[11, 12]
       Text[8, 11]
   HtmlBlock[14, 21]
 ````````````````````````````````
@@ -2887,7 +2887,7 @@ rather than an [HTML block].)
 Document[0, 17]
   Paragraph[0, 17]
     HtmlInline[0, 5]
-    Emphasis[5, 10]
+    Emphasis[5, 10] open:[5, 6] close:[9, 10]
       Text[6, 9]
     HtmlInline[10, 16]
 ````````````````````````````````
@@ -2997,7 +2997,7 @@ foo
 <p>bar</p>
 .
 Document[0, 19]
-  BlockQuote[0, 0]
+  BlockQuote[0, 14] marker:[0, 1]
     HtmlBlock[2, 14]
   Paragraph[15, 19]
     Text[15, 18]
@@ -3016,10 +3016,10 @@ Document[0, 19]
 </ul>
 .
 Document[0, 14]
-  BulletList[2, 14]
-    ListItem[2, 8]
+  BulletList[0, 14]
+    ListItem[0, 8] open:[0, 1]
       HtmlBlock[2, 8]
-    ListItem[10, 14]
+    ListItem[8, 14] open:[8, 9]
       Paragraph[10, 14]
         Text[10, 13]
 ````````````````````````````````
@@ -3037,7 +3037,7 @@ The end tag can occur on the same line as the start tag:
 Document[0, 35]
   HtmlBlock[0, 29]
   Paragraph[29, 35]
-    Emphasis[29, 34]
+    Emphasis[29, 34] open:[29, 30] close:[33, 34]
       Text[30, 33]
 ````````````````````````````````
 
@@ -3052,7 +3052,7 @@ Document[0, 35]
 Document[0, 24]
   HtmlBlock[0, 18]
   Paragraph[18, 24]
-    Emphasis[18, 23]
+    Emphasis[18, 23] open:[18, 19] close:[22, 23]
       Text[19, 22]
 ````````````````````````````````
 
@@ -3296,7 +3296,7 @@ Compare:
 Document[0, 34]
   HtmlBlock[0, 6]
   Paragraph[7, 26]
-    Emphasis[7, 19]
+    Emphasis[7, 19] open:[7, 8] close:[18, 19]
       Text[8, 18]
     Text[19, 25]
   HtmlBlock[27, 34]
@@ -3426,7 +3426,7 @@ them.
 .
 Document[0, 27]
   Paragraph[21, 27]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[25, 26]
       Text[22, 25]
 ````````````````````````````````
 
@@ -3442,7 +3442,7 @@ Document[0, 27]
 .
 Document[0, 56]
   Paragraph[50, 56]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[54, 55]
       Text[51, 54]
 ````````````````````````````````
 
@@ -3456,7 +3456,7 @@ Document[0, 56]
 .
 Document[0, 56]
   Paragraph[44, 56]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[54, 55]
       Text[45, 54]
 ````````````````````````````````
 
@@ -3472,7 +3472,7 @@ Document[0, 56]
 .
 Document[0, 41]
   Paragraph[31, 41]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[39, 40]
       Text[32, 39]
 ````````````````````````````````
 
@@ -3496,7 +3496,7 @@ line2
 .
 Document[0, 41]
   Paragraph[35, 41]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[39, 40]
       Text[36, 39]
 ````````````````````````````````
 
@@ -3536,7 +3536,7 @@ The title may be omitted:
 .
 Document[0, 19]
   Paragraph[13, 19]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[17, 18]
       Text[14, 17]
 ````````````````````````````````
 
@@ -3571,7 +3571,7 @@ and literal backslashes:
 .
 Document[0, 43]
   Paragraph[37, 43]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[41, 42]
       Text[38, 41]
 ````````````````````````````````
 
@@ -3587,7 +3587,7 @@ A link can come before its corresponding definition:
 .
 Document[0, 18]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -3605,7 +3605,7 @@ precedence:
 .
 Document[0, 34]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -3622,7 +3622,7 @@ case-insensitive (see [matches]).
 .
 Document[0, 19]
   Paragraph[13, 19]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[17, 18]
       Text[14, 17]
 ````````````````````````````````
 
@@ -3636,7 +3636,7 @@ Document[0, 19]
 .
 Document[0, 19]
   Paragraph[13, 19]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[17, 18]
       Text[14, 17]
 ````````````````````````````````
 
@@ -3730,7 +3730,7 @@ a code block:
 <p>[foo]</p>
 .
 Document[0, 27]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[16, 19]
   Paragraph[21, 27]
     Text[21, 26]
 ````````````````````````````````
@@ -3772,10 +3772,10 @@ and thematic breaks, and it need not be followed by a blank line.
 </blockquote>
 .
 Document[0, 26]
-  Heading[0, 0]
-    LinkRef[0, 0]
+  Heading[0, 0] marker:[0, 1]
+    LinkRef[0, 0] open:[0, 0] close:[6, 7]
       Text[3, 6]
-  BlockQuote[0, 0]
+  BlockQuote[20, 26] marker:[20, 21]
     Paragraph[22, 26]
       Text[22, 25]
 ````````````````````````````````
@@ -3800,15 +3800,15 @@ can occur one after another, without intervening blank lines.
 .
 Document[0, 83]
   Paragraph[63, 83]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[67, 68]
       Text[64, 67]
     Text[68, 69]
     SoftLineBreak[69, 70]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[74, 75]
       Text[71, 74]
     Text[75, 76]
     SoftLineBreak[76, 77]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[81, 82]
       Text[78, 81]
 ````````````````````````````````
 
@@ -3829,9 +3829,9 @@ are defined:
 .
 Document[0, 21]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
-  BlockQuote[0, 0]
+  BlockQuote[0, 0] marker:[7, 8]
 ````````````````````````````````
 
 
@@ -4023,7 +4023,7 @@ aaa
 Document[0, 22]
   Paragraph[4, 8]
     Text[4, 7]
-  Heading[0, 0]
+  Heading[0, 0] marker:[12, 13]
     Text[14, 17]
 ````````````````````````````````
 
@@ -4091,8 +4091,8 @@ baz</p>
 </blockquote>
 .
 Document[0, 20]
-  BlockQuote[0, 0]
-    Heading[0, 0]
+  BlockQuote[0, 20] marker:[0, 1]
+    Heading[0, 0] marker:[2, 3]
       Text[4, 7]
     Paragraph[10, 20]
       Text[10, 19]
@@ -4115,8 +4115,8 @@ baz</p>
 </blockquote>
 .
 Document[0, 18]
-  BlockQuote[0, 0]
-    Heading[0, 0]
+  BlockQuote[0, 18] marker:[0, 1]
+    Heading[0, 0] marker:[1, 2]
       Text[3, 6]
     Paragraph[8, 18]
       Text[8, 17]
@@ -4139,8 +4139,8 @@ baz</p>
 </blockquote>
 .
 Document[0, 27]
-  BlockQuote[0, 0]
-    Heading[0, 0]
+  BlockQuote[3, 27] marker:[3, 4]
+    Heading[0, 0] marker:[5, 6]
       Text[7, 10]
     Paragraph[16, 27]
       Text[16, 26]
@@ -4181,8 +4181,8 @@ baz</p>
 </blockquote>
 .
 Document[0, 18]
-  BlockQuote[0, 0]
-    Heading[0, 0]
+  BlockQuote[0, 18] marker:[0, 1]
+    Heading[0, 0] marker:[2, 3]
       Text[4, 7]
     Paragraph[10, 18]
       Text[10, 13]
@@ -4206,7 +4206,7 @@ foo</p>
 </blockquote>
 .
 Document[0, 16]
-  BlockQuote[0, 0]
+  BlockQuote[0, 16] marker:[0, 1]
     Paragraph[2, 16]
       Text[2, 15]
       SoftLineBreak[5, 15]
@@ -4237,10 +4237,10 @@ without changing the meaning:
 <hr />
 .
 Document[0, 10]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
-  ThematicBreak[0, 0]
+  ThematicBreak[6, 9]
 ````````````````````````````````
 
 
@@ -4267,13 +4267,13 @@ then the block quote ends after the first line:
 </ul>
 .
 Document[0, 14]
-  BlockQuote[0, 0]
-    BulletList[4, 8]
-      ListItem[4, 8]
+  BlockQuote[0, 8] marker:[0, 1]
+    BulletList[2, 8]
+      ListItem[2, 8] open:[2, 3]
         Paragraph[4, 8]
           Text[4, 7]
-  BulletList[10, 14]
-    ListItem[10, 14]
+  BulletList[8, 14]
+    ListItem[8, 14] open:[8, 9]
       Paragraph[10, 14]
         Text[10, 13]
 ````````````````````````````````
@@ -4294,7 +4294,7 @@ subsequent lines of an indented or fenced code block:
 </code></pre>
 .
 Document[0, 18]
-  BlockQuote[0, 0]
+  BlockQuote[0, 10] marker:[0, 1]
     IndentedCodeBlock[6, 10]
   IndentedCodeBlock[14, 18]
 ````````````````````````````````
@@ -4312,11 +4312,11 @@ foo
 <pre><code></code></pre>
 .
 Document[0, 14]
-  BlockQuote[0, 0]
-    FencedCodeBlock[5, 6]
+  BlockQuote[0, 6] marker:[0, 1]
+    FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[0, 0]
   Paragraph[6, 10]
     Text[6, 9]
-  FencedCodeBlock[13, 14]
+  FencedCodeBlock[13, 14] open:[10, 13] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -4333,7 +4333,7 @@ continuation line:
 </blockquote>
 .
 Document[0, 16]
-  BlockQuote[0, 0]
+  BlockQuote[0, 16] marker:[0, 1]
     Paragraph[2, 16]
       Text[2, 15]
       SoftLineBreak[5, 15]
@@ -4361,7 +4361,7 @@ A block quote can be empty:
 </blockquote>
 .
 Document[0, 2]
-  BlockQuote[0, 0]
+  BlockQuote[0, 0] marker:[0, 1]
 ````````````````````````````````
 
 
@@ -4374,7 +4374,7 @@ Document[0, 2]
 </blockquote>
 .
 Document[0, 9]
-  BlockQuote[0, 0]
+  BlockQuote[0, 0] marker:[0, 1]
 ````````````````````````````````
 
 
@@ -4390,7 +4390,7 @@ A block quote can have initial or final blank lines:
 </blockquote>
 .
 Document[0, 12]
-  BlockQuote[0, 0]
+  BlockQuote[0, 8] marker:[0, 1]
     Paragraph[4, 8]
       Text[4, 7]
 ````````````````````````````````
@@ -4411,10 +4411,10 @@ A blank line always separates block quotes:
 </blockquote>
 .
 Document[0, 13]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
-  BlockQuote[0, 0]
+  BlockQuote[7, 13] marker:[7, 8]
     Paragraph[9, 13]
       Text[9, 12]
 ````````````````````````````````
@@ -4438,7 +4438,7 @@ bar</p>
 </blockquote>
 .
 Document[0, 12]
-  BlockQuote[0, 0]
+  BlockQuote[0, 12] marker:[0, 1]
     Paragraph[2, 12]
       Text[2, 11]
       SoftLineBreak[5, 11]
@@ -4459,7 +4459,7 @@ To get a block quote with two paragraphs, use:
 </blockquote>
 .
 Document[0, 14]
-  BlockQuote[0, 0]
+  BlockQuote[0, 14] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
     Paragraph[10, 14]
@@ -4481,7 +4481,7 @@ foo
 Document[0, 10]
   Paragraph[0, 4]
     Text[0, 3]
-  BlockQuote[0, 0]
+  BlockQuote[4, 10] marker:[4, 5]
     Paragraph[6, 10]
       Text[6, 9]
 ````````````````````````````````
@@ -4504,11 +4504,11 @@ quotes:
 </blockquote>
 .
 Document[0, 16]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
-  ThematicBreak[0, 0]
-  BlockQuote[0, 0]
+  ThematicBreak[6, 9]
+  BlockQuote[10, 16] marker:[10, 11]
     Paragraph[12, 16]
       Text[12, 15]
 ````````````````````````````````
@@ -4527,7 +4527,7 @@ baz</p>
 </blockquote>
 .
 Document[0, 10]
-  BlockQuote[0, 0]
+  BlockQuote[0, 10] marker:[0, 1]
     Paragraph[2, 10]
       Text[2, 5]
       SoftLineBreak[5, 6]
@@ -4546,7 +4546,7 @@ baz
 <p>baz</p>
 .
 Document[0, 11]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
   Paragraph[7, 11]
@@ -4565,7 +4565,7 @@ baz
 <p>baz</p>
 .
 Document[0, 12]
-  BlockQuote[0, 0]
+  BlockQuote[0, 6] marker:[0, 1]
     Paragraph[2, 6]
       Text[2, 5]
   Paragraph[8, 12]
@@ -4591,9 +4591,9 @@ bar</p>
 </blockquote>
 .
 Document[0, 14]
-  BlockQuote[0, 0]
-    BlockQuote[0, 0]
-      BlockQuote[0, 0]
+  BlockQuote[0, 14] marker:[0, 1]
+    BlockQuote[2, 14] marker:[2, 3]
+      BlockQuote[4, 14] marker:[4, 5]
         Paragraph[6, 14]
           Text[6, 9]
           SoftLineBreak[9, 10]
@@ -4617,9 +4617,9 @@ baz</p>
 </blockquote>
 .
 Document[0, 20]
-  BlockQuote[0, 0]
-    BlockQuote[0, 0]
-      BlockQuote[0, 0]
+  BlockQuote[0, 20] marker:[0, 1]
+    BlockQuote[1, 20] marker:[1, 2]
+      BlockQuote[2, 20] marker:[2, 3]
         Paragraph[4, 20]
           Text[4, 19]
           SoftLineBreak[7, 19]
@@ -4648,9 +4648,9 @@ the `>`:
 </blockquote>
 .
 Document[0, 26]
-  BlockQuote[0, 0]
+  BlockQuote[0, 11] marker:[0, 1]
     IndentedCodeBlock[6, 11]
-  BlockQuote[0, 0]
+  BlockQuote[12, 26] marker:[12, 13]
     Paragraph[17, 26]
       Text[17, 25]
 ````````````````````````````````
@@ -4708,7 +4708,7 @@ Document[0, 65]
     SoftLineBreak[11, 12]
     Text[12, 27]
   IndentedCodeBlock[33, 48]
-  BlockQuote[0, 0]
+  BlockQuote[48, 65] marker:[48, 49]
     Paragraph[50, 65]
       Text[50, 64]
 ````````````````````````````````
@@ -4739,14 +4739,14 @@ with two lines.</p>
 </ol>
 .
 Document[0, 81]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[0, 81]
+    ListItem[0, 81] open:[0, 2]
       Paragraph[4, 36]
         Text[4, 35]
         SoftLineBreak[15, 35]
         Text[20, 35]
       IndentedCodeBlock[45, 60]
-      BlockQuote[0, 0]
+      BlockQuote[64, 81] marker:[64, 65]
         Paragraph[66, 81]
           Text[66, 80]
 ````````````````````````````````
@@ -4774,8 +4774,8 @@ put under the list item:
 <p>two</p>
 .
 Document[0, 12]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
   Paragraph[8, 12]
@@ -4796,8 +4796,8 @@ Document[0, 12]
 </ul>
 .
 Document[0, 13]
-  BulletList[2, 13]
-    ListItem[2, 13]
+  BulletList[0, 13]
+    ListItem[0, 13] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       Paragraph[9, 13]
@@ -4817,8 +4817,8 @@ Document[0, 13]
 </code></pre>
 .
 Document[0, 20]
-  BulletList[6, 10]
-    ListItem[6, 10]
+  BulletList[1, 10]
+    ListItem[1, 10] open:[1, 2]
       Paragraph[6, 10]
         Text[6, 9]
   IndentedCodeBlock[15, 20]
@@ -4838,8 +4838,8 @@ Document[0, 20]
 </ul>
 .
 Document[0, 21]
-  BulletList[6, 21]
-    ListItem[6, 21]
+  BulletList[1, 21]
+    ListItem[1, 21] open:[1, 2]
       Paragraph[6, 10]
         Text[6, 9]
       Paragraph[17, 21]
@@ -4872,10 +4872,10 @@ this example:
 </blockquote>
 .
 Document[0, 29]
-  BlockQuote[0, 0]
-    BlockQuote[0, 0]
-      OrderedList[11, 29]
-        ListItem[11, 29]
+  BlockQuote[3, 29] marker:[3, 4]
+    BlockQuote[5, 29] marker:[5, 6]
+      OrderedList[7, 29]
+        ListItem[7, 29] open:[7, 9]
           Paragraph[11, 15]
             Text[11, 14]
           Paragraph[25, 29]
@@ -4907,10 +4907,10 @@ far enough past the blockquote marker:
 </blockquote>
 .
 Document[0, 22]
-  BlockQuote[0, 0]
-    BlockQuote[0, 0]
-      BulletList[4, 8]
-        ListItem[4, 8]
+  BlockQuote[0, 22] marker:[0, 1]
+    BlockQuote[1, 22] marker:[1, 2]
+      BulletList[2, 8]
+        ListItem[2, 8] open:[2, 3]
           Paragraph[4, 8]
             Text[4, 7]
       Paragraph[18, 22]
@@ -5000,26 +5000,26 @@ bar
 </ul>
 .
 Document[0, 97]
-  BulletList[2, 20]
-    ListItem[2, 13]
+  BulletList[0, 20]
+    ListItem[0, 13] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       Paragraph[9, 13]
         Text[9, 12]
-    ListItem[16, 20]
+    ListItem[14, 20] open:[14, 15]
       Paragraph[16, 20]
         Text[16, 19]
   Paragraph[24, 28]
     Text[24, 27]
-  BulletList[34, 71]
-    ListItem[34, 35]
-      FencedCodeBlock[34, 35]
-    ListItem[58, 71]
+  BulletList[29, 71]
+    ListItem[29, 35] open:[29, 30]
+      FencedCodeBlock[34, 35] open:[31, 34] info:[0, 0] close:[51, 54]
+    ListItem[56, 71] open:[56, 57]
       Paragraph[58, 62]
         Text[58, 61]
-      BulletList[70, 71]
-        ListItem[70, 71]
-          FencedCodeBlock[70, 71]
+      BulletList[65, 71]
+        ListItem[65, 71] open:[65, 66]
+          FencedCodeBlock[70, 71] open:[67, 70] info:[0, 0] close:[93, 96]
 ````````````````````````````````
 
 
@@ -5049,14 +5049,14 @@ A list item may contain any kind of block:
 </ol>
 .
 Document[0, 53]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[0, 53]
+    ListItem[0, 53] open:[0, 2]
       Paragraph[4, 8]
         Text[4, 7]
-      FencedCodeBlock[16, 17]
+      FencedCodeBlock[16, 17] open:[13, 16] info:[0, 0] close:[29, 32]
       Paragraph[38, 42]
         Text[38, 41]
-      BlockQuote[0, 0]
+      BlockQuote[47, 53] marker:[47, 48]
         Paragraph[49, 53]
           Text[49, 52]
 ````````````````````````````````
@@ -5085,8 +5085,8 @@ baz
 </ul>
 .
 Document[0, 28]
-  BulletList[2, 28]
-    ListItem[2, 28]
+  BulletList[0, 28]
+    ListItem[0, 28] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       IndentedCodeBlock[13, 28]
@@ -5112,8 +5112,8 @@ Document[0, 28]
 </code></pre>
 .
 Document[0, 29]
-  BulletList[2, 18]
-    ListItem[2, 18]
+  BulletList[0, 18]
+    ListItem[0, 18] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       IndentedCodeBlock[13, 18]
@@ -5131,8 +5131,8 @@ Note that ordered list start numbers must be nine digits or less:
 </ol>
 .
 Document[0, 14]
-  OrderedList[11, 14]
-    ListItem[11, 14]
+  OrderedList[0, 14]
+    ListItem[0, 14] open:[0, 10]
       Paragraph[11, 14]
         Text[11, 13]
 ````````````````````````````````
@@ -5159,8 +5159,8 @@ A start number may begin with 0s:
 </ol>
 .
 Document[0, 6]
-  OrderedList[3, 6]
-    ListItem[3, 6]
+  OrderedList[0, 6]
+    ListItem[0, 6] open:[0, 2]
       Paragraph[3, 6]
         Text[3, 5]
 ````````````````````````````````
@@ -5174,8 +5174,8 @@ Document[0, 6]
 </ol>
 .
 Document[0, 8]
-  OrderedList[5, 8]
-    ListItem[5, 8]
+  OrderedList[0, 8]
+    ListItem[0, 8] open:[0, 4]
       Paragraph[5, 8]
         Text[5, 7]
 ````````````````````````````````
@@ -5225,8 +5225,8 @@ In the following case that is 6 spaces:
 </ul>
 .
 Document[0, 17]
-  BulletList[2, 17]
-    ListItem[2, 17]
+  BulletList[0, 17]
+    ListItem[0, 17] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
       IndentedCodeBlock[13, 17]
@@ -5249,8 +5249,8 @@ And in this case it is 11 spaces:
 </ol>
 .
 Document[0, 27]
-  OrderedList[7, 27]
-    ListItem[7, 27]
+  OrderedList[2, 27]
+    ListItem[2, 27] open:[2, 5]
       Paragraph[7, 11]
         Text[7, 10]
       IndentedCodeBlock[23, 27]
@@ -5300,8 +5300,8 @@ Document[0, 44]
 </ol>
 .
 Document[0, 53]
-  OrderedList[7, 53]
-    ListItem[7, 53]
+  OrderedList[0, 53]
+    ListItem[0, 53] open:[0, 2]
       IndentedCodeBlock[7, 22]
       Paragraph[25, 35]
         Text[25, 34]
@@ -5330,8 +5330,8 @@ inside the code block:
 </ol>
 .
 Document[0, 54]
-  OrderedList[7, 54]
-    ListItem[7, 54]
+  OrderedList[0, 54]
+    ListItem[0, 54] open:[0, 2]
       IndentedCodeBlock[7, 23]
       Paragraph[26, 36]
         Text[26, 35]
@@ -5374,8 +5374,8 @@ Document[0, 12]
 <p>bar</p>
 .
 Document[0, 16]
-  BulletList[5, 9]
-    ListItem[5, 9]
+  BulletList[0, 9]
+    ListItem[0, 9] open:[0, 1]
       Paragraph[5, 9]
         Text[5, 8]
   Paragraph[12, 16]
@@ -5401,8 +5401,8 @@ the above case:
 </ul>
 .
 Document[0, 15]
-  BulletList[3, 15]
-    ListItem[3, 15]
+  BulletList[0, 15]
+    ListItem[0, 15] open:[0, 1]
       Paragraph[3, 7]
         Text[3, 6]
       Paragraph[11, 15]
@@ -5447,13 +5447,13 @@ Here are some list items that start with a blank line but are not empty:
 </ul>
 .
 Document[0, 40]
-  BulletList[4, 40]
-    ListItem[4, 8]
+  BulletList[0, 40]
+    ListItem[0, 8] open:[0, 1]
       Paragraph[4, 8]
         Text[4, 7]
-    ListItem[15, 16]
-      FencedCodeBlock[15, 16]
-    ListItem[36, 40]
+    ListItem[8, 16] open:[8, 9]
+      FencedCodeBlock[15, 16] open:[12, 15] info:[0, 0] close:[24, 27]
+    ListItem[28, 40] open:[28, 29]
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
 
@@ -5474,7 +5474,7 @@ item:
 .
 Document[0, 9]
   BulletList[0, 0]
-    ListItem[0, 0]
+    ListItem[0, 0] open:[0, 1]
   Paragraph[5, 9]
     Text[5, 8]
 ````````````````````````````````
@@ -5494,12 +5494,12 @@ Here is an empty bullet list item:
 </ul>
 .
 Document[0, 14]
-  BulletList[2, 14]
-    ListItem[2, 6]
+  BulletList[0, 14]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[0, 0]
-    ListItem[10, 14]
+    ListItem[0, 0] open:[6, 7]
+    ListItem[8, 14] open:[8, 9]
       Paragraph[10, 14]
         Text[10, 13]
 ````````````````````````````````
@@ -5519,12 +5519,12 @@ It does not matter whether there are spaces following the [list marker]:
 </ul>
 .
 Document[0, 17]
-  BulletList[2, 17]
-    ListItem[2, 6]
+  BulletList[0, 17]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[0, 0]
-    ListItem[13, 17]
+    ListItem[0, 0] open:[6, 7]
+    ListItem[11, 17] open:[11, 12]
       Paragraph[13, 17]
         Text[13, 16]
 ````````````````````````````````
@@ -5544,12 +5544,12 @@ Here is an empty ordered list item:
 </ol>
 .
 Document[0, 17]
-  OrderedList[3, 17]
-    ListItem[3, 7]
+  OrderedList[0, 17]
+    ListItem[0, 7] open:[0, 2]
       Paragraph[3, 7]
         Text[3, 6]
-    ListItem[0, 0]
-    ListItem[13, 17]
+    ListItem[0, 0] open:[7, 9]
+    ListItem[10, 17] open:[10, 12]
       Paragraph[13, 17]
         Text[13, 16]
 ````````````````````````````````
@@ -5566,7 +5566,7 @@ A list may start or end with an empty list item:
 .
 Document[0, 2]
   BulletList[0, 0]
-    ListItem[0, 0]
+    ListItem[0, 0] open:[0, 1]
 ````````````````````````````````
 
 
@@ -5600,14 +5600,14 @@ with two lines.</p>
 </ol>
 .
 Document[0, 85]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[1, 85]
+    ListItem[1, 85] open:[1, 3]
       Paragraph[5, 38]
         Text[5, 37]
         SoftLineBreak[16, 37]
         Text[22, 37]
       IndentedCodeBlock[48, 63]
-      BlockQuote[0, 0]
+      BlockQuote[68, 85] marker:[68, 69]
         Paragraph[70, 85]
           Text[70, 84]
 ````````````````````````````````
@@ -5636,14 +5636,14 @@ with two lines.</p>
 </ol>
 .
 Document[0, 89]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[2, 89]
+    ListItem[2, 89] open:[2, 4]
       Paragraph[6, 40]
         Text[6, 39]
         SoftLineBreak[17, 39]
         Text[24, 39]
       IndentedCodeBlock[51, 66]
-      BlockQuote[0, 0]
+      BlockQuote[72, 89] marker:[72, 73]
         Paragraph[74, 89]
           Text[74, 88]
 ````````````````````````````````
@@ -5672,14 +5672,14 @@ with two lines.</p>
 </ol>
 .
 Document[0, 93]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[3, 93]
+    ListItem[3, 93] open:[3, 5]
       Paragraph[7, 42]
         Text[7, 41]
         SoftLineBreak[18, 41]
         Text[26, 41]
       IndentedCodeBlock[54, 69]
-      BlockQuote[0, 0]
+      BlockQuote[76, 93] marker:[76, 77]
         Paragraph[78, 93]
           Text[78, 92]
 ````````````````````````````````
@@ -5741,14 +5741,14 @@ with two lines.</p>
 </ol>
 .
 Document[0, 83]
-  OrderedList[0, 0]
-    ListItem[0, 0]
+  OrderedList[2, 83]
+    ListItem[2, 83] open:[2, 4]
       Paragraph[6, 34]
         Text[6, 17]
         SoftLineBreak[17, 18]
         Text[18, 33]
       IndentedCodeBlock[45, 60]
-      BlockQuote[0, 0]
+      BlockQuote[66, 83] marker:[66, 67]
         Paragraph[68, 83]
           Text[68, 82]
 ````````````````````````````````
@@ -5766,8 +5766,8 @@ with two lines.</li>
 </ol>
 .
 Document[0, 38]
-  OrderedList[6, 38]
-    ListItem[6, 38]
+  OrderedList[2, 38]
+    ListItem[2, 38] open:[2, 4]
       Paragraph[6, 38]
         Text[6, 37]
         SoftLineBreak[17, 37]
@@ -5793,10 +5793,10 @@ continued here.</p>
 </blockquote>
 .
 Document[0, 34]
-  BlockQuote[0, 0]
-    OrderedList[0, 0]
-      ListItem[0, 0]
-        BlockQuote[0, 0]
+  BlockQuote[0, 34] marker:[0, 1]
+    OrderedList[2, 34]
+      ListItem[2, 34] open:[2, 4]
+        BlockQuote[5, 34] marker:[5, 6]
           Paragraph[7, 34]
             Text[7, 17]
             SoftLineBreak[17, 18]
@@ -5820,10 +5820,10 @@ continued here.</p>
 </blockquote>
 .
 Document[0, 36]
-  BlockQuote[0, 0]
-    OrderedList[0, 0]
-      ListItem[0, 0]
-        BlockQuote[0, 0]
+  BlockQuote[0, 36] marker:[0, 1]
+    OrderedList[2, 36]
+      ListItem[2, 36] open:[2, 4]
+        BlockQuote[5, 36] marker:[5, 6]
           Paragraph[7, 36]
             Text[7, 35]
             SoftLineBreak[17, 35]
@@ -5859,16 +5859,16 @@ So, in this case we need two spaces indent:
 </ul>
 .
 Document[0, 24]
-  BulletList[2, 24]
-    ListItem[2, 24]
+  BulletList[0, 24]
+    ListItem[0, 24] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-      BulletList[10, 24]
-        ListItem[10, 24]
+      BulletList[8, 24]
+        ListItem[8, 24] open:[8, 9]
           Paragraph[10, 14]
             Text[10, 13]
-          BulletList[20, 24]
-            ListItem[20, 24]
+          BulletList[18, 24]
+            ListItem[18, 24] open:[18, 19]
               Paragraph[20, 24]
                 Text[20, 23]
 ````````````````````````````````
@@ -5888,14 +5888,14 @@ One is not enough:
 </ul>
 .
 Document[0, 21]
-  BulletList[2, 21]
-    ListItem[2, 6]
+  BulletList[0, 21]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[9, 13]
+    ListItem[7, 13] open:[7, 8]
       Paragraph[9, 13]
         Text[9, 12]
-    ListItem[17, 21]
+    ListItem[15, 21] open:[15, 16]
       Paragraph[17, 21]
         Text[17, 20]
 ````````````````````````````````
@@ -5916,12 +5916,12 @@ Here we need four, because the list marker is wider:
 </ol>
 .
 Document[0, 18]
-  OrderedList[4, 18]
-    ListItem[4, 18]
+  OrderedList[0, 18]
+    ListItem[0, 18] open:[0, 3]
       Paragraph[4, 8]
         Text[4, 7]
-      BulletList[14, 18]
-        ListItem[14, 18]
+      BulletList[12, 18]
+        ListItem[12, 18] open:[12, 13]
           Paragraph[14, 18]
             Text[14, 17]
 ````````````````````````````````
@@ -5941,12 +5941,12 @@ Three is not enough:
 </ul>
 .
 Document[0, 17]
-  OrderedList[4, 8]
-    ListItem[4, 8]
+  OrderedList[0, 8]
+    ListItem[0, 8] open:[0, 3]
       Paragraph[4, 8]
         Text[4, 7]
-  BulletList[13, 17]
-    ListItem[13, 17]
+  BulletList[11, 17]
+    ListItem[11, 17] open:[11, 12]
       Paragraph[13, 17]
         Text[13, 16]
 ````````````````````````````````
@@ -5966,10 +5966,10 @@ A list may be the first block in a list item:
 </ul>
 .
 Document[0, 8]
-  BulletList[4, 8]
-    ListItem[4, 8]
-      BulletList[4, 8]
-        ListItem[4, 8]
+  BulletList[0, 8]
+    ListItem[0, 8] open:[0, 1]
+      BulletList[2, 8]
+        ListItem[2, 8] open:[2, 3]
           Paragraph[4, 8]
             Text[4, 7]
 ````````````````````````````````
@@ -5991,12 +5991,12 @@ Document[0, 8]
 </ol>
 .
 Document[0, 12]
-  OrderedList[8, 12]
-    ListItem[8, 12]
-      BulletList[8, 12]
-        ListItem[8, 12]
-          OrderedList[8, 12]
-            ListItem[8, 12]
+  OrderedList[0, 12]
+    ListItem[0, 12] open:[0, 2]
+      BulletList[3, 12]
+        ListItem[3, 12] open:[3, 4]
+          OrderedList[5, 12]
+            ListItem[5, 12] open:[5, 7]
               Paragraph[8, 12]
                 Text[8, 11]
 ````````````````````````````````
@@ -6021,11 +6021,11 @@ baz</li>
 .
 Document[0, 26]
   BulletList[0, 0]
-    ListItem[0, 0]
-      Heading[0, 0]
+    ListItem[0, 0] open:[0, 1]
+      Heading[0, 0] marker:[2, 3]
         Text[4, 7]
-    ListItem[0, 0]
-      Heading[0, 0]
+    ListItem[8, 26] open:[8, 9]
+      Heading[0, 0] marker:[16, 19]
         Text[10, 13]
       Paragraph[22, 26]
         Text[22, 25]
@@ -6266,15 +6266,15 @@ Changing the bullet or ordered list delimiter starts a new list:
 </ul>
 .
 Document[0, 18]
-  BulletList[2, 12]
-    ListItem[2, 6]
+  BulletList[0, 12]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[8, 12]
+    ListItem[6, 12] open:[6, 7]
       Paragraph[8, 12]
         Text[8, 11]
-  BulletList[14, 18]
-    ListItem[14, 18]
+  BulletList[12, 18]
+    ListItem[12, 18] open:[12, 13]
       Paragraph[14, 18]
         Text[14, 17]
 ````````````````````````````````
@@ -6294,15 +6294,15 @@ Document[0, 18]
 </ol>
 .
 Document[0, 21]
-  OrderedList[3, 14]
-    ListItem[3, 7]
+  OrderedList[0, 14]
+    ListItem[0, 7] open:[0, 2]
       Paragraph[3, 7]
         Text[3, 6]
-    ListItem[10, 14]
+    ListItem[7, 14] open:[7, 9]
       Paragraph[10, 14]
         Text[10, 13]
-  OrderedList[17, 21]
-    ListItem[17, 21]
+  OrderedList[14, 21]
+    ListItem[14, 21] open:[14, 16]
       Paragraph[17, 21]
         Text[17, 20]
 ````````````````````````````````
@@ -6326,11 +6326,11 @@ Foo
 Document[0, 16]
   Paragraph[0, 4]
     Text[0, 3]
-  BulletList[6, 16]
-    ListItem[6, 10]
+  BulletList[4, 16]
+    ListItem[4, 10] open:[4, 5]
       Paragraph[6, 10]
         Text[6, 9]
-    ListItem[12, 16]
+    ListItem[10, 16] open:[10, 11]
       Paragraph[12, 16]
         Text[12, 15]
 ````````````````````````````````
@@ -6351,8 +6351,8 @@ The number of windows in my house is
 Document[0, 68]
   Paragraph[0, 37]
     Text[0, 36]
-  OrderedList[42, 68]
-    ListItem[42, 68]
+  OrderedList[37, 68]
+    ListItem[37, 68] open:[37, 40]
       Paragraph[42, 68]
         Text[42, 67]
 ````````````````````````````````
@@ -6434,15 +6434,15 @@ a list:
 </ul>
 .
 Document[0, 21]
-  BulletList[2, 13]
-    ListItem[2, 6]
+  BulletList[0, 13]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[9, 13]
+    ListItem[7, 13] open:[7, 8]
       Paragraph[9, 13]
         Text[9, 12]
-  BulletList[17, 21]
-    ListItem[17, 21]
+  BulletList[15, 21]
+    ListItem[15, 21] open:[15, 16]
       Paragraph[17, 21]
         Text[17, 20]
 ````````````````````````````````
@@ -6468,14 +6468,14 @@ list:
 </ul>
 .
 Document[0, 20]
-  BulletList[2, 6]
-    ListItem[2, 6]
+  BulletList[0, 6]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
   Paragraph[10, 14]
     Text[10, 13]
-  BulletList[16, 20]
-    ListItem[16, 20]
+  BulletList[14, 20]
+    ListItem[14, 20] open:[14, 15]
       Paragraph[16, 20]
         Text[16, 19]
 ````````````````````````````````
@@ -6506,16 +6506,16 @@ Indeed, two blank lines will end *all* containing lists:
 </code></pre>
 .
 Document[0, 36]
-  BulletList[2, 24]
-    ListItem[2, 24]
+  BulletList[0, 24]
+    ListItem[0, 24] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-      BulletList[10, 24]
-        ListItem[10, 24]
+      BulletList[8, 24]
+        ListItem[8, 24] open:[8, 9]
           Paragraph[10, 14]
             Text[10, 13]
-          BulletList[20, 24]
-            ListItem[20, 24]
+          BulletList[18, 24]
+            ListItem[18, 24] open:[18, 19]
               Paragraph[20, 24]
                 Text[20, 23]
   IndentedCodeBlock[30, 36]
@@ -6545,18 +6545,18 @@ item:
 </ul>
 .
 Document[0, 26]
-  BulletList[2, 12]
-    ListItem[2, 6]
+  BulletList[0, 12]
+    ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[8, 12]
+    ListItem[6, 12] open:[6, 7]
       Paragraph[8, 12]
         Text[8, 11]
-  BulletList[16, 26]
-    ListItem[16, 20]
+  BulletList[14, 26]
+    ListItem[14, 20] open:[14, 15]
       Paragraph[16, 20]
         Text[16, 19]
-    ListItem[22, 26]
+    ListItem[20, 26] open:[20, 21]
       Paragraph[22, 26]
         Text[22, 25]
 ````````````````````````````````
@@ -6585,13 +6585,13 @@ Document[0, 26]
 </code></pre>
 .
 Document[0, 41]
-  BulletList[4, 30]
-    ListItem[4, 21]
+  BulletList[0, 30]
+    ListItem[0, 21] open:[0, 1]
       Paragraph[4, 8]
         Text[4, 7]
       Paragraph[13, 21]
         Text[13, 20]
-    ListItem[26, 30]
+    ListItem[22, 30] open:[22, 23]
       Paragraph[26, 30]
         Text[26, 29]
   IndentedCodeBlock[36, 41]
@@ -6627,32 +6627,32 @@ item:
 </ul>
 .
 Document[0, 52]
-  BulletList[2, 52]
-    ListItem[2, 4]
+  BulletList[0, 52]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[7, 9]
+    ListItem[5, 9] open:[5, 6]
       Paragraph[7, 9]
         Text[7, 8]
-    ListItem[13, 15]
+    ListItem[11, 15] open:[11, 12]
       Paragraph[13, 15]
         Text[13, 14]
-    ListItem[20, 22]
+    ListItem[18, 22] open:[18, 19]
       Paragraph[20, 22]
         Text[20, 21]
-    ListItem[28, 30]
+    ListItem[26, 30] open:[26, 27]
       Paragraph[28, 30]
         Text[28, 29]
-    ListItem[35, 37]
+    ListItem[33, 37] open:[33, 34]
       Paragraph[35, 37]
         Text[35, 36]
-    ListItem[41, 43]
+    ListItem[39, 43] open:[39, 40]
       Paragraph[41, 43]
         Text[41, 42]
-    ListItem[46, 48]
+    ListItem[44, 48] open:[44, 45]
       Paragraph[46, 48]
         Text[46, 47]
-    ListItem[50, 52]
+    ListItem[48, 52] open:[48, 49]
       Paragraph[50, 52]
         Text[50, 51]
 ````````````````````````````````
@@ -6678,14 +6678,14 @@ Document[0, 52]
 </ol>
 .
 Document[0, 23]
-  OrderedList[3, 23]
-    ListItem[3, 5]
+  OrderedList[0, 23]
+    ListItem[0, 5] open:[0, 2]
       Paragraph[3, 5]
         Text[3, 4]
-    ListItem[11, 13]
+    ListItem[8, 13] open:[8, 10]
       Paragraph[11, 13]
         Text[11, 12]
-    ListItem[21, 23]
+    ListItem[18, 23] open:[18, 20]
       Paragraph[21, 23]
         Text[21, 22]
 ````````````````````````````````
@@ -6713,14 +6713,14 @@ two of the list items:
 </ul>
 .
 Document[0, 13]
-  BulletList[2, 13]
-    ListItem[2, 4]
+  BulletList[0, 13]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[6, 8]
+    ListItem[4, 8] open:[4, 5]
       Paragraph[6, 8]
         Text[6, 7]
-    ListItem[11, 13]
+    ListItem[9, 13] open:[9, 10]
       Paragraph[11, 13]
         Text[11, 12]
 ````````````````````````````````
@@ -6745,12 +6745,12 @@ So is this, with a empty second item:
 </ul>
 .
 Document[0, 11]
-  BulletList[2, 11]
-    ListItem[2, 4]
+  BulletList[0, 11]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[0, 0]
-    ListItem[9, 11]
+    ListItem[0, 0] open:[4, 5]
+    ListItem[7, 11] open:[7, 8]
       Paragraph[9, 11]
         Text[9, 10]
 ````````````````````````````````
@@ -6781,16 +6781,16 @@ with a blank line between them:
 </ul>
 .
 Document[0, 17]
-  BulletList[2, 17]
-    ListItem[2, 4]
+  BulletList[0, 17]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[6, 13]
+    ListItem[4, 13] open:[4, 5]
       Paragraph[6, 8]
         Text[6, 7]
       Paragraph[11, 13]
         Text[11, 12]
-    ListItem[15, 17]
+    ListItem[13, 17] open:[13, 14]
       Paragraph[15, 17]
         Text[15, 16]
 ````````````````````````````````
@@ -6816,14 +6816,14 @@ Document[0, 17]
 </ul>
 .
 Document[0, 27]
-  BulletList[2, 27]
-    ListItem[2, 4]
+  BulletList[0, 27]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[6, 8]
+    ListItem[4, 8] open:[4, 5]
       Paragraph[6, 8]
         Text[6, 7]
-    ListItem[25, 27]
+    ListItem[23, 27] open:[23, 24]
       Paragraph[25, 27]
         Text[25, 26]
 ````````````````````````````````
@@ -6852,13 +6852,13 @@ This is a tight list, because the blank lines are in a code block:
 </ul>
 .
 Document[0, 26]
-  BulletList[2, 26]
-    ListItem[2, 4]
+  BulletList[0, 26]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[9, 10]
-      FencedCodeBlock[9, 10]
-    ListItem[24, 26]
+    ListItem[4, 10] open:[4, 5]
+      FencedCodeBlock[9, 10] open:[6, 9] info:[0, 0] close:[18, 21]
+    ListItem[22, 26] open:[22, 23]
       Paragraph[24, 26]
         Text[24, 25]
 ````````````````````````````````
@@ -6888,17 +6888,17 @@ the outer list is tight:
 </ul>
 .
 Document[0, 21]
-  BulletList[2, 21]
-    ListItem[2, 17]
+  BulletList[0, 21]
+    ListItem[0, 17] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-      BulletList[8, 17]
-        ListItem[8, 17]
+      BulletList[6, 17]
+        ListItem[6, 17] open:[6, 7]
           Paragraph[8, 10]
             Text[8, 9]
           Paragraph[15, 17]
             Text[15, 16]
-    ListItem[19, 21]
+    ListItem[17, 21] open:[17, 18]
       Paragraph[19, 21]
         Text[19, 20]
 ````````````````````````````````
@@ -6923,14 +6923,14 @@ block quote:
 </ul>
 .
 Document[0, 18]
-  BulletList[0, 0]
-    ListItem[0, 0]
+  BulletList[0, 18]
+    ListItem[0, 10] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-      BlockQuote[0, 0]
+      BlockQuote[6, 10] marker:[6, 7]
         Paragraph[8, 10]
           Text[8, 9]
-    ListItem[16, 18]
+    ListItem[14, 18] open:[14, 15]
       Paragraph[16, 18]
         Text[16, 17]
 ````````````````````````````````
@@ -6959,15 +6959,15 @@ are not separated by blank lines:
 </ul>
 .
 Document[0, 30]
-  BulletList[2, 30]
-    ListItem[2, 16]
+  BulletList[0, 30]
+    ListItem[0, 16] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-      BlockQuote[0, 0]
+      BlockQuote[6, 10] marker:[6, 7]
         Paragraph[8, 10]
           Text[8, 9]
-      FencedCodeBlock[15, 16]
-    ListItem[28, 30]
+      FencedCodeBlock[15, 16] open:[12, 15] info:[0, 0] close:[22, 25]
+    ListItem[26, 30] open:[26, 27]
       Paragraph[28, 30]
         Text[28, 29]
 ````````````````````````````````
@@ -6983,8 +6983,8 @@ A single-paragraph list is tight:
 </ul>
 .
 Document[0, 4]
-  BulletList[2, 4]
-    ListItem[2, 4]
+  BulletList[0, 4]
+    ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
 ````````````````````````````````
@@ -7003,12 +7003,12 @@ Document[0, 4]
 </ul>
 .
 Document[0, 10]
-  BulletList[2, 10]
-    ListItem[2, 10]
+  BulletList[0, 10]
+    ListItem[0, 10] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-      BulletList[8, 10]
-        ListItem[8, 10]
+      BulletList[6, 10]
+        ListItem[6, 10] open:[6, 7]
           Paragraph[8, 10]
             Text[8, 9]
 ````````````````````````````````
@@ -7033,9 +7033,9 @@ two block elements in the list item:
 </ol>
 .
 Document[0, 29]
-  OrderedList[6, 29]
-    ListItem[6, 29]
-      FencedCodeBlock[6, 7]
+  OrderedList[0, 29]
+    ListItem[0, 29] open:[0, 2]
+      FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[17, 20]
       Paragraph[25, 29]
         Text[25, 28]
 ````````````````````````````````
@@ -7060,12 +7060,12 @@ Here the outer list is loose, the inner list tight:
 </ul>
 .
 Document[0, 21]
-  BulletList[2, 21]
-    ListItem[2, 21]
+  BulletList[0, 21]
+    ListItem[0, 21] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-      BulletList[10, 14]
-        ListItem[10, 14]
+      BulletList[8, 14]
+        ListItem[8, 14] open:[8, 9]
           Paragraph[10, 14]
             Text[10, 13]
       Paragraph[17, 21]
@@ -7100,25 +7100,25 @@ Document[0, 21]
 </ul>
 .
 Document[0, 33]
-  BulletList[2, 33]
-    ListItem[2, 16]
+  BulletList[0, 33]
+    ListItem[0, 16] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-      BulletList[8, 16]
-        ListItem[8, 10]
+      BulletList[6, 16]
+        ListItem[6, 10] open:[6, 7]
           Paragraph[8, 10]
             Text[8, 9]
-        ListItem[14, 16]
+        ListItem[12, 16] open:[12, 13]
           Paragraph[14, 16]
             Text[14, 15]
-    ListItem[19, 33]
+    ListItem[17, 33] open:[17, 18]
       Paragraph[19, 21]
         Text[19, 20]
-      BulletList[25, 33]
-        ListItem[25, 27]
+      BulletList[23, 33]
+        ListItem[23, 27] open:[23, 24]
           Paragraph[25, 27]
             Text[25, 26]
-        ListItem[31, 33]
+        ListItem[29, 33] open:[29, 30]
           Paragraph[31, 33]
             Text[31, 32]
 ````````````````````````````````
@@ -7137,7 +7137,7 @@ Thus, for example, in
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Code[0, 4]
+    Code[0, 4] open:[0, 1] close:[3, 4]
     Text[4, 7]
 ````````````````````````````````
 
@@ -7226,7 +7226,7 @@ If a backslash is itself escaped, the following character is not:
 Document[0, 13]
   Paragraph[0, 13]
     Text[0, 2]
-    Emphasis[2, 12]
+    Emphasis[2, 12] open:[2, 3] close:[11, 12]
       Text[3, 11]
 ````````````````````````````````
 
@@ -7258,7 +7258,7 @@ raw HTML:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Code[0, 10]
+    Code[0, 10] open:[0, 2] close:[8, 10]
 ````````````````````````````````
 
 
@@ -7282,7 +7282,7 @@ Document[0, 9]
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4]
+  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -7293,7 +7293,7 @@ Document[0, 13]
 .
 Document[0, 29]
   Paragraph[0, 29]
-    AutoLink[0, 28]
+    AutoLink[0, 28] open:[0, 1] close:[27, 28]
 ````````````````````````````````
 
 
@@ -7317,7 +7317,7 @@ link references, and [info strings] in [fenced code blocks]:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 4]
 ````````````````````````````````
 
@@ -7331,7 +7331,7 @@ Document[0, 24]
 .
 Document[0, 31]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -7345,7 +7345,7 @@ foo
 </code></pre>
 .
 Document[0, 21]
-  FencedCodeBlock[3, 13]
+  FencedCodeBlock[3, 13] open:[0, 3] info:[4, 12] close:[17, 20]
 ````````````````````````````````
 
 
@@ -7515,7 +7515,7 @@ Document[0, 29]
 .
 Document[0, 38]
   Paragraph[0, 38]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 4]
 ````````````````````````````````
 
@@ -7529,7 +7529,7 @@ Document[0, 38]
 .
 Document[0, 45]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -7543,7 +7543,7 @@ foo
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[3, 18]
+  FencedCodeBlock[3, 18] open:[0, 3] info:[4, 17] close:[22, 25]
 ````````````````````````````````
 
 
@@ -7557,7 +7557,7 @@ text in code spans and code blocks:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Code[0, 15]
+    Code[0, 15] open:[0, 1] close:[14, 15]
 ````````````````````````````````
 
 
@@ -7593,7 +7593,7 @@ This is a simple code span:
 .
 Document[0, 6]
   Paragraph[0, 6]
-    Code[0, 5]
+    Code[0, 5] open:[0, 1] close:[4, 5]
 ````````````````````````````````
 
 
@@ -7607,7 +7607,7 @@ This example also illustrates stripping of leading and trailing spaces:
 .
 Document[0, 17]
   Paragraph[0, 17]
-    Code[0, 16]
+    Code[0, 16] open:[0, 2] close:[14, 16]
 ````````````````````````````````
 
 
@@ -7621,7 +7621,7 @@ spaces:
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Code[0, 6]
+    Code[0, 6] open:[0, 1] close:[5, 6]
 ````````````````````````````````
 
 
@@ -7636,7 +7636,7 @@ foo
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Code[0, 9]
+    Code[0, 9] open:[0, 2] close:[7, 9]
 ````````````````````````````````
 
 
@@ -7651,7 +7651,7 @@ single spaces, just as they would be by a browser:
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Code[0, 17]
+    Code[0, 17] open:[0, 17] close:[16, 17]
 ````````````````````````````````
 
 
@@ -7675,7 +7675,7 @@ targeted.)
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Code[0, 12]
+    Code[0, 12] open:[0, 1] close:[11, 12]
 ````````````````````````````````
 
 
@@ -7689,7 +7689,7 @@ are treated literally:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Code[0, 6]
+    Code[0, 6] open:[0, 1] close:[5, 6]
     Text[6, 10]
 ````````````````````````````````
 
@@ -7711,7 +7711,7 @@ span:
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4]
-    Code[4, 7]
+    Code[4, 7] open:[4, 5] close:[6, 7]
 ````````````````````````````````
 
 
@@ -7725,7 +7725,7 @@ And this is not parsed as a link:
 Document[0, 21]
   Paragraph[0, 21]
     Text[0, 7]
-    Code[7, 19]
+    Code[7, 19] open:[7, 8] close:[18, 19]
     Text[19, 20]
 ````````````````````````````````
 
@@ -7740,7 +7740,7 @@ Thus, this is code:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Code[0, 11]
+    Code[0, 11] open:[0, 1] close:[10, 11]
     Text[11, 14]
 ````````````````````````````````
 
@@ -7768,7 +7768,7 @@ And this is code:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Code[0, 18]
+    Code[0, 18] open:[0, 1] close:[17, 18]
     Text[18, 23]
 ````````````````````````````````
 
@@ -7782,7 +7782,7 @@ But this is an autolink:
 .
 Document[0, 23]
   Paragraph[0, 23]
-    AutoLink[0, 21]
+    AutoLink[0, 21] open:[0, 1] close:[20, 21]
     Text[21, 22]
 ````````````````````````````````
 
@@ -8022,7 +8022,7 @@ Rule 1:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9]
+    Emphasis[0, 9] open:[0, 1] close:[8, 9]
       Text[1, 8]
 ````````````````````````````````
 
@@ -8079,7 +8079,7 @@ foo*bar*
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3]
-    Emphasis[3, 8]
+    Emphasis[3, 8] open:[3, 4] close:[7, 8]
       Text[4, 7]
 ````````````````````````````````
 
@@ -8092,7 +8092,7 @@ Document[0, 9]
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1]
-    Emphasis[1, 4]
+    Emphasis[1, 4] open:[1, 2] close:[3, 4]
       Text[2, 3]
     Text[4, 6]
 ````````````````````````````````
@@ -8107,7 +8107,7 @@ _foo bar_
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9]
+    Emphasis[0, 9] open:[0, 1] close:[8, 9]
       Text[1, 8]
 ````````````````````````````````
 
@@ -8201,7 +8201,7 @@ foo-_(bar)_
 Document[0, 12]
   Paragraph[0, 12]
     Text[0, 4]
-    Emphasis[4, 11]
+    Emphasis[4, 11] open:[4, 5] close:[10, 11]
       Text[5, 10]
 ````````````````````````````````
 
@@ -8251,7 +8251,7 @@ Document[0, 11]
   Paragraph[0, 9]
     Text[0, 8]
   BulletList[0, 0]
-    ListItem[0, 0]
+    ListItem[0, 0] open:[9, 10]
 ````````````````````````````````
 
 
@@ -8280,9 +8280,9 @@ with this example:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9]
+    Emphasis[0, 9] open:[0, 1] close:[8, 9]
       Text[1, 2]
-      Emphasis[2, 7]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 8]
 ````````````````````````````````
@@ -8297,7 +8297,7 @@ Intraword emphasis with `*` is allowed:
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
     Text[5, 8]
 ````````````````````````````````
@@ -8343,9 +8343,9 @@ _(_foo_)_
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9]
+    Emphasis[0, 9] open:[0, 1] close:[8, 9]
       Text[1, 2]
-      Emphasis[2, 7]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 8]
 ````````````````````````````````
@@ -8382,7 +8382,7 @@ _foo_bar_baz_
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 13]
+    Emphasis[0, 13] open:[0, 1] close:[12, 13]
       Text[1, 12]
 ````````````````````````````````
 
@@ -8398,7 +8398,7 @@ _(bar)_.
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 7]
+    Emphasis[0, 7] open:[0, 1] close:[6, 7]
       Text[1, 6]
     Text[7, 8]
 ````````````````````````````````
@@ -8413,7 +8413,7 @@ Rule 5:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11]
+    StrongEmphasis[0, 11] open:[0, 2] close:[9, 11]
       Text[2, 9]
 ````````````````````````````````
 
@@ -8457,7 +8457,7 @@ foo**bar**
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 3]
-    StrongEmphasis[3, 10]
+    StrongEmphasis[3, 10] open:[3, 5] close:[8, 10]
       Text[5, 8]
 ````````````````````````````````
 
@@ -8471,7 +8471,7 @@ __foo bar__
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11]
+    StrongEmphasis[0, 11] open:[0, 2] close:[9, 11]
       Text[2, 9]
 ````````````````````````````````
 
@@ -8562,9 +8562,9 @@ __foo, __bar__, baz__
 .
 Document[0, 22]
   Paragraph[0, 22]
-    StrongEmphasis[0, 21]
+    StrongEmphasis[0, 21] open:[0, 2] close:[19, 21]
       Text[2, 7]
-      StrongEmphasis[7, 14]
+      StrongEmphasis[7, 14] open:[7, 9] close:[12, 14]
         Text[9, 12]
       Text[14, 19]
 ````````````````````````````````
@@ -8582,7 +8582,7 @@ foo-__(bar)__
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 4]
-    StrongEmphasis[4, 13]
+    StrongEmphasis[4, 13] open:[4, 6] close:[11, 13]
       Text[6, 11]
 ````````````````````````````````
 
@@ -8631,9 +8631,9 @@ with these examples:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11]
+    Emphasis[0, 11] open:[0, 1] close:[10, 11]
       Text[1, 2]
-      StrongEmphasis[2, 9]
+      StrongEmphasis[2, 9] open:[2, 4] close:[7, 9]
         Text[4, 7]
       Text[9, 10]
 ````````````````````````````````
@@ -8648,13 +8648,13 @@ Document[0, 12]
 .
 Document[0, 75]
   Paragraph[0, 75]
-    StrongEmphasis[0, 74]
+    StrongEmphasis[0, 74] open:[0, 2] close:[72, 74]
       Text[2, 16]
-      Emphasis[16, 42]
+      Emphasis[16, 42] open:[16, 17] close:[41, 42]
         Text[17, 41]
       Text[42, 48]
       SoftLineBreak[48, 49]
-      Emphasis[49, 71]
+      Emphasis[49, 71] open:[49, 50] close:[70, 71]
         Text[50, 70]
       Text[71, 72]
 ````````````````````````````````
@@ -8667,9 +8667,9 @@ Document[0, 75]
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19]
+    StrongEmphasis[0, 19] open:[0, 2] close:[17, 19]
       Text[2, 7]
-      Emphasis[7, 12]
+      Emphasis[7, 12] open:[7, 8] close:[11, 12]
         Text[8, 11]
       Text[12, 17]
 ````````````````````````````````
@@ -8684,7 +8684,7 @@ Intraword emphasis:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    StrongEmphasis[0, 7]
+    StrongEmphasis[0, 7] open:[0, 2] close:[5, 7]
       Text[2, 5]
     Text[7, 10]
 ````````````````````````````````
@@ -8730,9 +8730,9 @@ _(__foo__)_
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11]
+    Emphasis[0, 11] open:[0, 1] close:[10, 11]
       Text[1, 2]
-      StrongEmphasis[2, 9]
+      StrongEmphasis[2, 9] open:[2, 4] close:[7, 9]
         Text[4, 7]
       Text[9, 10]
 ````````````````````````````````
@@ -8769,7 +8769,7 @@ __foo__bar__baz__
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17]
+    StrongEmphasis[0, 17] open:[0, 2] close:[15, 17]
       Text[2, 15]
 ````````````````````````````````
 
@@ -8785,7 +8785,7 @@ __(bar)__.
 .
 Document[0, 11]
   Paragraph[0, 11]
-    StrongEmphasis[0, 9]
+    StrongEmphasis[0, 9] open:[0, 2] close:[7, 9]
       Text[2, 7]
     Text[9, 10]
 ````````````````````````````````
@@ -8803,9 +8803,9 @@ emphasized span.
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17]
+    Emphasis[0, 17] open:[0, 1] close:[16, 17]
       Text[1, 5]
-      Link[0, 0]
+      Link[0, 0] open:[5, 6] close:[0, 0]
         Text[6, 9]
 ````````````````````````````````
 
@@ -8819,7 +8819,7 @@ bar</em></p>
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9]
+    Emphasis[0, 9] open:[0, 1] close:[8, 9]
       Text[1, 4]
       SoftLineBreak[4, 5]
       Text[5, 8]
@@ -8836,9 +8836,9 @@ _foo __bar__ baz_
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17]
+    Emphasis[0, 17] open:[0, 1] close:[16, 17]
       Text[1, 5]
-      StrongEmphasis[5, 12]
+      StrongEmphasis[5, 12] open:[5, 7] close:[10, 12]
         Text[7, 10]
       Text[12, 16]
 ````````````````````````````````
@@ -8851,9 +8851,9 @@ _foo _bar_ baz_
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 15]
+    Emphasis[0, 15] open:[0, 1] close:[14, 15]
       Text[1, 5]
-      Emphasis[5, 10]
+      Emphasis[5, 10] open:[5, 6] close:[9, 10]
         Text[6, 9]
       Text[10, 14]
 ````````````````````````````````
@@ -8866,8 +8866,8 @@ __foo_ bar_
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11]
-      Emphasis[1, 6]
+    Emphasis[0, 11] open:[0, 1] close:[10, 11]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
       Text[6, 10]
 ````````````````````````````````
@@ -8880,9 +8880,9 @@ Document[0, 12]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 10]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
       Text[1, 5]
-      Emphasis[5, 10]
+      Emphasis[5, 10] open:[5, 6] close:[9, 10]
         Text[6, 9]
 ````````````````````````````````
 
@@ -8894,9 +8894,9 @@ Document[0, 12]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17]
+    Emphasis[0, 17] open:[0, 1] close:[16, 17]
       Text[1, 5]
-      StrongEmphasis[5, 12]
+      StrongEmphasis[5, 12] open:[5, 7] close:[10, 12]
         Text[7, 10]
       Text[12, 16]
 ````````````````````````````````
@@ -8911,11 +8911,11 @@ But note:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
-    Emphasis[4, 10]
+    Emphasis[4, 10] open:[4, 5] close:[9, 10]
       Text[6, 9]
-    Emphasis[9, 15]
+    Emphasis[9, 15] open:[9, 10] close:[14, 15]
       Text[11, 14]
 ````````````````````````````````
 
@@ -8930,8 +8930,8 @@ The difference is that in the preceding case, the internal delimiters
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 13]
-      StrongEmphasis[1, 8]
+    Emphasis[0, 13] open:[0, 1] close:[12, 13]
+      StrongEmphasis[1, 8] open:[1, 3] close:[6, 8]
         Text[3, 6]
       Text[8, 12]
 ````````````````````````````````
@@ -8944,9 +8944,9 @@ Document[0, 14]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 11]
+    Emphasis[0, 11] open:[0, 1] close:[10, 11]
       Text[1, 5]
-      StrongEmphasis[5, 12]
+      StrongEmphasis[5, 12] open:[5, 7] close:[10, 12]
         Text[7, 10]
 ````````````````````````````````
 
@@ -8962,9 +8962,9 @@ emphasis, because the opening delimiter is closed by the first
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
-    Emphasis[4, 10]
+    Emphasis[4, 10] open:[4, 5] close:[9, 10]
       Text[6, 9]
     Text[10, 12]
 ````````````````````````````````
@@ -8980,11 +8980,11 @@ Indefinite levels of nesting are possible:
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Emphasis[0, 27]
+    Emphasis[0, 27] open:[0, 1] close:[26, 27]
       Text[1, 5]
-      StrongEmphasis[5, 22]
+      StrongEmphasis[5, 22] open:[5, 7] close:[20, 22]
         Text[7, 11]
-        Emphasis[11, 16]
+        Emphasis[11, 16] open:[11, 12] close:[15, 16]
           Text[12, 15]
         Text[16, 20]
       Text[22, 26]
@@ -8998,10 +8998,10 @@ Document[0, 28]
 .
 Document[0, 20]
   Paragraph[0, 20]
-    Emphasis[0, 19]
+    Emphasis[0, 19] open:[0, 1] close:[18, 19]
       Text[1, 5]
-      Link[0, 0]
-        Emphasis[6, 11]
+      Link[0, 0] open:[5, 6] close:[0, 0]
+        Emphasis[6, 11] open:[6, 7] close:[10, 11]
           Text[7, 10]
 ````````````````````````````````
 
@@ -9043,9 +9043,9 @@ strongly emphasized span.
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19]
+    StrongEmphasis[0, 19] open:[0, 2] close:[17, 19]
       Text[2, 6]
-      Link[0, 0]
+      Link[0, 0] open:[6, 7] close:[0, 0]
         Text[7, 10]
 ````````````````````````````````
 
@@ -9059,7 +9059,7 @@ bar</strong></p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11]
+    StrongEmphasis[0, 11] open:[0, 2] close:[9, 11]
       Text[2, 5]
       SoftLineBreak[5, 6]
       Text[6, 9]
@@ -9076,9 +9076,9 @@ __foo _bar_ baz__
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17]
+    StrongEmphasis[0, 17] open:[0, 2] close:[15, 17]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
       Text[11, 15]
 ````````````````````````````````
@@ -9091,9 +9091,9 @@ __foo __bar__ baz__
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19]
+    StrongEmphasis[0, 19] open:[0, 2] close:[17, 19]
       Text[2, 6]
-      StrongEmphasis[6, 13]
+      StrongEmphasis[6, 13] open:[6, 8] close:[11, 13]
         Text[8, 11]
       Text[13, 17]
 ````````````````````````````````
@@ -9106,8 +9106,8 @@ ____foo__ bar__
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 15]
-      StrongEmphasis[2, 9]
+    StrongEmphasis[0, 15] open:[0, 2] close:[13, 15]
+      StrongEmphasis[2, 9] open:[2, 4] close:[7, 9]
         Text[4, 7]
       Text[9, 13]
 ````````````````````````````````
@@ -9120,9 +9120,9 @@ Document[0, 16]
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 13]
+    StrongEmphasis[0, 13] open:[0, 2] close:[11, 13]
       Text[2, 6]
-      StrongEmphasis[6, 13]
+      StrongEmphasis[6, 13] open:[6, 8] close:[11, 13]
         Text[8, 11]
 ````````````````````````````````
 
@@ -9134,9 +9134,9 @@ Document[0, 16]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17]
+    StrongEmphasis[0, 17] open:[0, 2] close:[15, 17]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
       Text[11, 15]
 ````````````````````````````````
@@ -9151,8 +9151,8 @@ But note:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10]
-      Emphasis[1, 6]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
       Text[6, 9]
     Text[10, 15]
@@ -9169,8 +9169,8 @@ The difference is that in the preceding case, the internal delimiters
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 13]
-      Emphasis[2, 7]
+    StrongEmphasis[0, 13] open:[0, 2] close:[11, 13]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 11]
 ````````````````````````````````
@@ -9183,9 +9183,9 @@ Document[0, 14]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 12]
+    StrongEmphasis[0, 12] open:[0, 2] close:[10, 12]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
 ````````````````````````````````
 
@@ -9201,11 +9201,11 @@ bim</em> bop</strong></p>
 .
 Document[0, 30]
   Paragraph[0, 30]
-    StrongEmphasis[0, 29]
+    StrongEmphasis[0, 29] open:[0, 2] close:[27, 29]
       Text[2, 6]
-      Emphasis[6, 23]
+      Emphasis[6, 23] open:[6, 7] close:[22, 23]
         Text[7, 11]
-        StrongEmphasis[11, 18]
+        StrongEmphasis[11, 18] open:[11, 13] close:[16, 18]
           Text[13, 16]
         SoftLineBreak[18, 19]
         Text[19, 22]
@@ -9220,10 +9220,10 @@ Document[0, 30]
 .
 Document[0, 22]
   Paragraph[0, 22]
-    StrongEmphasis[0, 21]
+    StrongEmphasis[0, 21] open:[0, 2] close:[19, 21]
       Text[2, 6]
-      Link[0, 0]
-        Emphasis[7, 12]
+      Link[0, 0] open:[6, 7] close:[0, 0]
+        Emphasis[7, 12] open:[7, 8] close:[11, 12]
           Text[8, 11]
 ````````````````````````````````
 
@@ -9274,7 +9274,7 @@ foo *\**
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 4]
-    Emphasis[4, 8]
+    Emphasis[4, 8] open:[4, 5] close:[7, 8]
       Text[5, 7]
 ````````````````````````````````
 
@@ -9287,7 +9287,7 @@ foo *_*
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4]
-    Emphasis[4, 7]
+    Emphasis[4, 7] open:[4, 5] close:[6, 7]
       Text[5, 6]
 ````````````````````````````````
 
@@ -9311,7 +9311,7 @@ foo **\***
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 4]
-    StrongEmphasis[4, 10]
+    StrongEmphasis[4, 10] open:[4, 6] close:[8, 10]
       Text[6, 8]
 ````````````````````````````````
 
@@ -9324,7 +9324,7 @@ foo **_**
 Document[0, 10]
   Paragraph[0, 10]
     Text[0, 4]
-    StrongEmphasis[4, 9]
+    StrongEmphasis[4, 9] open:[4, 6] close:[7, 9]
       Text[6, 7]
 ````````````````````````````````
 
@@ -9341,7 +9341,7 @@ emphasis, rather than inside it:
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1]
-    Emphasis[1, 6]
+    Emphasis[1, 6] open:[1, 2] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -9353,7 +9353,7 @@ Document[0, 7]
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
     Text[5, 6]
 ````````````````````````````````
@@ -9367,7 +9367,7 @@ Document[0, 7]
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 1]
-    StrongEmphasis[1, 8]
+    StrongEmphasis[1, 8] open:[1, 3] close:[6, 8]
       Text[3, 6]
 ````````````````````````````````
 
@@ -9380,7 +9380,7 @@ Document[0, 9]
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3]
-    Emphasis[3, 8]
+    Emphasis[3, 8] open:[3, 4] close:[7, 8]
       Text[4, 7]
 ````````````````````````````````
 
@@ -9392,7 +9392,7 @@ Document[0, 9]
 .
 Document[0, 9]
   Paragraph[0, 9]
-    StrongEmphasis[0, 7]
+    StrongEmphasis[0, 7] open:[0, 2] close:[5, 7]
       Text[2, 5]
     Text[7, 8]
 ````````````````````````````````
@@ -9405,7 +9405,7 @@ Document[0, 9]
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
     Text[5, 8]
 ````````````````````````````````
@@ -9433,7 +9433,7 @@ foo _\__
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 4]
-    Emphasis[4, 8]
+    Emphasis[4, 8] open:[4, 5] close:[7, 8]
       Text[5, 7]
 ````````````````````````````````
 
@@ -9446,7 +9446,7 @@ foo _*_
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4]
-    Emphasis[4, 7]
+    Emphasis[4, 7] open:[4, 5] close:[6, 7]
       Text[5, 6]
 ````````````````````````````````
 
@@ -9470,7 +9470,7 @@ foo __\___
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 4]
-    StrongEmphasis[4, 10]
+    StrongEmphasis[4, 10] open:[4, 6] close:[8, 10]
       Text[6, 8]
 ````````````````````````````````
 
@@ -9483,7 +9483,7 @@ foo __*__
 Document[0, 10]
   Paragraph[0, 10]
     Text[0, 4]
-    StrongEmphasis[4, 9]
+    StrongEmphasis[4, 9] open:[4, 6] close:[7, 9]
       Text[6, 7]
 ````````````````````````````````
 
@@ -9496,7 +9496,7 @@ __foo_
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1]
-    Emphasis[1, 6]
+    Emphasis[1, 6] open:[1, 2] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -9512,7 +9512,7 @@ _foo__
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
     Text[5, 6]
 ````````````````````````````````
@@ -9526,7 +9526,7 @@ ___foo__
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 1]
-    StrongEmphasis[1, 8]
+    StrongEmphasis[1, 8] open:[1, 3] close:[6, 8]
       Text[3, 6]
 ````````````````````````````````
 
@@ -9539,7 +9539,7 @@ ____foo_
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3]
-    Emphasis[3, 8]
+    Emphasis[3, 8] open:[3, 4] close:[7, 8]
       Text[4, 7]
 ````````````````````````````````
 
@@ -9551,7 +9551,7 @@ __foo___
 .
 Document[0, 9]
   Paragraph[0, 9]
-    StrongEmphasis[0, 7]
+    StrongEmphasis[0, 7] open:[0, 2] close:[5, 7]
       Text[2, 5]
     Text[7, 8]
 ````````````````````````````````
@@ -9564,7 +9564,7 @@ _foo____
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5]
+    Emphasis[0, 5] open:[0, 1] close:[4, 5]
       Text[1, 4]
     Text[5, 8]
 ````````````````````````````````
@@ -9580,7 +9580,7 @@ emphasis, you must use different delimiters:
 .
 Document[0, 8]
   Paragraph[0, 8]
-    StrongEmphasis[0, 7]
+    StrongEmphasis[0, 7] open:[0, 2] close:[5, 7]
       Text[2, 5]
 ````````````````````````````````
 
@@ -9592,8 +9592,8 @@ Document[0, 8]
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7]
-      Emphasis[1, 6]
+    Emphasis[0, 7] open:[0, 1] close:[6, 7]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
 ````````````````````````````````
 
@@ -9605,7 +9605,7 @@ __foo__
 .
 Document[0, 8]
   Paragraph[0, 8]
-    StrongEmphasis[0, 7]
+    StrongEmphasis[0, 7] open:[0, 2] close:[5, 7]
       Text[2, 5]
 ````````````````````````````````
 
@@ -9617,8 +9617,8 @@ _*foo*_
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7]
-      Emphasis[1, 6]
+    Emphasis[0, 7] open:[0, 1] close:[6, 7]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
 ````````````````````````````````
 
@@ -9633,8 +9633,8 @@ switching delimiters:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 9]
-      StrongEmphasis[2, 9]
+    StrongEmphasis[0, 9] open:[0, 2] close:[7, 9]
+      StrongEmphasis[2, 9] open:[2, 4] close:[7, 9]
         Text[4, 7]
 ````````````````````````````````
 
@@ -9646,8 +9646,8 @@ ____foo____
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 9]
-      StrongEmphasis[2, 9]
+    StrongEmphasis[0, 9] open:[0, 2] close:[7, 9]
+      StrongEmphasis[2, 9] open:[2, 4] close:[7, 9]
         Text[4, 7]
 ````````````````````````````````
 
@@ -9663,9 +9663,9 @@ delimiters:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 11]
-      StrongEmphasis[2, 11]
-        StrongEmphasis[4, 11]
+    StrongEmphasis[0, 11] open:[0, 2] close:[9, 11]
+      StrongEmphasis[2, 11] open:[2, 4] close:[9, 11]
+        StrongEmphasis[4, 11] open:[4, 6] close:[9, 11]
           Text[6, 9]
 ````````````````````````````````
 
@@ -9679,8 +9679,8 @@ Rule 14:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    StrongEmphasis[0, 8]
-      Emphasis[2, 7]
+    StrongEmphasis[0, 8] open:[0, 2] close:[6, 8]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
 ````````````````````````````````
 
@@ -9692,9 +9692,9 @@ _____foo_____
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 10]
-      StrongEmphasis[2, 10]
-        Emphasis[4, 9]
+    StrongEmphasis[0, 10] open:[0, 2] close:[8, 10]
+      StrongEmphasis[2, 10] open:[2, 4] close:[8, 10]
+        Emphasis[4, 9] open:[4, 5] close:[8, 9]
           Text[5, 8]
 ````````````````````````````````
 
@@ -9708,7 +9708,7 @@ Rule 15:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
       Text[1, 9]
     Text[10, 15]
 ````````````````````````````````
@@ -9721,8 +9721,8 @@ Document[0, 16]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 10]
-      Emphasis[1, 6]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
       Text[6, 9]
     Text[10, 11]
@@ -9736,9 +9736,9 @@ Document[0, 12]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    Emphasis[0, 26]
+    Emphasis[0, 26] open:[0, 1] close:[25, 26]
       Text[1, 5]
-      StrongEmphasis[5, 21]
+      StrongEmphasis[5, 21] open:[5, 7] close:[19, 21]
         Text[7, 19]
       Text[21, 25]
 ````````````````````````````````
@@ -9754,7 +9754,7 @@ Rule 16:
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 6]
-    StrongEmphasis[6, 17]
+    StrongEmphasis[6, 17] open:[6, 8] close:[15, 17]
       Text[8, 15]
 ````````````````````````````````
 
@@ -9767,7 +9767,7 @@ Document[0, 18]
 Document[0, 15]
   Paragraph[0, 15]
     Text[0, 5]
-    Emphasis[5, 14]
+    Emphasis[5, 14] open:[5, 6] close:[13, 14]
       Text[6, 13]
 ````````````````````````````````
 
@@ -9782,7 +9782,7 @@ Rule 17:
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 1]
-    Link[0, 0]
+    Link[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 6]
 ````````````````````````````````
 
@@ -9795,7 +9795,7 @@ _foo [bar_](/url)
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 5]
-    Link[0, 0]
+    Link[0, 0] open:[5, 6] close:[0, 0]
       Text[6, 10]
 ````````````````````````````````
 
@@ -9843,9 +9843,9 @@ Document[0, 16]
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7]
+    Emphasis[0, 7] open:[0, 1] close:[6, 7]
       Text[1, 3]
-      Code[3, 6]
+      Code[3, 6] open:[3, 4] close:[5, 6]
 ````````````````````````````````
 
 
@@ -9856,9 +9856,9 @@ _a `_`_
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7]
+    Emphasis[0, 7] open:[0, 1] close:[6, 7]
       Text[1, 3]
-      Code[3, 6]
+      Code[3, 6] open:[3, 4] close:[5, 6]
 ````````````````````````````````
 
 
@@ -9870,7 +9870,7 @@ Document[0, 8]
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3]
-    AutoLink[3, 25]
+    AutoLink[3, 25] open:[3, 4] close:[24, 25]
 ````````````````````````````````
 
 
@@ -9882,7 +9882,7 @@ __a<http://foo.bar/?q=__>
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3]
-    AutoLink[3, 25]
+    AutoLink[3, 25] open:[3, 4] close:[24, 25]
 ````````````````````````````````
 
 
@@ -9966,7 +9966,7 @@ Here is a simple inline link:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -9980,7 +9980,7 @@ The title may be omitted:
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -9994,7 +9994,7 @@ Both the title and the destination may be omitted:
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10006,7 +10006,7 @@ Document[0, 9]
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10074,7 +10074,7 @@ Parentheses inside the link destination may be escaped:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10087,7 +10087,7 @@ One level of balanced parentheses is allowed without escaping:
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10112,7 +10112,7 @@ Document[0, 22]
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10124,7 +10124,7 @@ Document[0, 24]
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10139,7 +10139,7 @@ in Markdown:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10159,13 +10159,13 @@ A link can contain fragment identifiers and queries:
 .
 Document[0, 94]
   Paragraph[0, 18]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
   Paragraph[19, 55]
-    Link[0, 0]
+    Link[0, 0] open:[19, 20] close:[0, 0]
       Text[20, 24]
   Paragraph[56, 94]
-    Link[0, 0]
+    Link[0, 0] open:[56, 57] close:[0, 0]
       Text[57, 61]
 ````````````````````````````````
 
@@ -10180,7 +10180,7 @@ just a backslash:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10201,7 +10201,7 @@ about how to escape or normalize URLs in the output.
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10217,7 +10217,7 @@ get unexpected results:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10235,13 +10235,13 @@ Titles may be in single quotes, double quotes, or parentheses:
 .
 Document[0, 63]
   Paragraph[0, 63]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
     SoftLineBreak[20, 21]
-    Link[0, 0]
+    Link[0, 0] open:[21, 22] close:[0, 0]
       Text[22, 26]
     SoftLineBreak[41, 42]
-    Link[0, 0]
+    Link[0, 0] open:[42, 43] close:[0, 0]
       Text[43, 47]
 ````````````````````````````````
 
@@ -10256,7 +10256,7 @@ may be used in titles:
 .
 Document[0, 30]
   Paragraph[0, 30]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10283,7 +10283,7 @@ But it is easy to work around this by using a different quote type:
 .
 Document[0, 33]
   Paragraph[0, 33]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 5]
 ````````````````````````````````
 
@@ -10313,7 +10313,7 @@ the same way in inline links and link reference definitions.)
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Link[0, 0]
+    Link[0, 0] open:[0, 27] close:[0, 0]
       Text[1, 27]
 ````````````````````````````````
 
@@ -10342,7 +10342,7 @@ unless they are escaped:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 17]
 ````````````````````````````````
 
@@ -10366,7 +10366,7 @@ Document[0, 18]
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 6]
-    Link[0, 0]
+    Link[0, 0] open:[6, 7] close:[0, 0]
       Text[7, 10]
 ````````````````````````````````
 
@@ -10378,7 +10378,7 @@ Document[0, 18]
 .
 Document[0, 19]
   Paragraph[0, 19]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 11]
 ````````````````````````````````
 
@@ -10392,14 +10392,14 @@ The link text may contain inline content:
 .
 Document[0, 31]
   Paragraph[0, 31]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 6]
-      Emphasis[6, 23]
+      Emphasis[6, 23] open:[6, 7] close:[22, 23]
         Text[7, 11]
-        StrongEmphasis[11, 18]
+        StrongEmphasis[11, 18] open:[11, 13] close:[16, 18]
           Text[13, 16]
         Text[18, 19]
-        Code[19, 22]
+        Code[19, 22] open:[19, 20] close:[21, 22]
 ````````````````````````````````
 
 
@@ -10410,8 +10410,8 @@ Document[0, 31]
 .
 Document[0, 26]
   Paragraph[0, 26]
-    Link[0, 0]
-      Image[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
+      Image[0, 0] open:[2, 3] close:[0, 0]
         Text[3, 7]
 ````````````````````````````````
 
@@ -10426,7 +10426,7 @@ However, links may not contain other links, at any level of nesting.
 Document[0, 24]
   Paragraph[0, 24]
     Text[0, 5]
-    Link[0, 0]
+    Link[0, 0] open:[5, 6] close:[0, 0]
       Text[6, 9]
     Text[16, 23]
 ````````````````````````````````
@@ -10440,9 +10440,9 @@ Document[0, 24]
 Document[0, 38]
   Paragraph[0, 38]
     Text[0, 5]
-    Emphasis[5, 30]
+    Emphasis[5, 30] open:[5, 6] close:[29, 30]
       Text[6, 11]
-      Link[0, 0]
+      Link[0, 0] open:[11, 12] close:[0, 0]
         Text[12, 15]
       Text[22, 29]
     Text[30, 37]
@@ -10456,9 +10456,9 @@ Document[0, 38]
 .
 Document[0, 29]
   Paragraph[0, 29]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 3]
-      Link[0, 0]
+      Link[0, 0] open:[3, 4] close:[0, 0]
         Text[4, 7]
       Text[14, 21]
 ````````````````````````````````
@@ -10475,7 +10475,7 @@ emphasis grouping:
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 1]
-    Link[0, 0]
+    Link[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 6]
 ````````````````````````````````
 
@@ -10487,7 +10487,7 @@ Document[0, 14]
 .
 Document[0, 17]
   Paragraph[0, 17]
-    Link[0, 0]
+    Link[0, 0] open:[0, 1] close:[0, 0]
       Text[1, 9]
 ````````````````````````````````
 
@@ -10502,7 +10502,7 @@ precedence:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
       Text[1, 9]
     Text[10, 15]
 ````````````````````````````````
@@ -10531,7 +10531,7 @@ Document[0, 25]
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 4]
-    Code[4, 13]
+    Code[4, 13] open:[4, 5] close:[12, 13]
 ````````````````````````````````
 
 
@@ -10543,7 +10543,7 @@ Document[0, 14]
 Document[0, 40]
   Paragraph[0, 40]
     Text[0, 4]
-    AutoLink[4, 39]
+    AutoLink[4, 39] open:[4, 5] close:[38, 39]
 ````````````````````````````````
 
 
@@ -10584,7 +10584,7 @@ Here is a simple example:
 .
 Document[0, 32]
   Paragraph[0, 11]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[9, 10]
       Text[1, 4]
 ````````````````````````````````
 
@@ -10604,7 +10604,7 @@ unless they are escaped:
 .
 Document[0, 37]
   Paragraph[0, 24]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[22, 23]
       Text[1, 17]
 ````````````````````````````````
 
@@ -10618,7 +10618,7 @@ Document[0, 37]
 .
 Document[0, 31]
   Paragraph[0, 18]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[16, 17]
       Text[1, 11]
 ````````````````````````````````
 
@@ -10634,14 +10634,14 @@ The link text may contain inline content:
 .
 Document[0, 43]
   Paragraph[0, 30]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[28, 29]
       Text[1, 6]
-      Emphasis[6, 23]
+      Emphasis[6, 23] open:[6, 7] close:[22, 23]
         Text[7, 11]
-        StrongEmphasis[11, 18]
+        StrongEmphasis[11, 18] open:[11, 13] close:[16, 18]
           Text[13, 16]
         Text[18, 19]
-        Code[19, 22]
+        Code[19, 22] open:[19, 20] close:[21, 22]
 ````````````````````````````````
 
 
@@ -10654,8 +10654,8 @@ Document[0, 43]
 .
 Document[0, 38]
   Paragraph[0, 25]
-    LinkRef[0, 0]
-      Image[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[23, 24]
+      Image[0, 0] open:[2, 3] close:[0, 0]
         Text[3, 7]
 ````````````````````````````````
 
@@ -10672,10 +10672,10 @@ However, links may not contain other links, at any level of nesting.
 Document[0, 36]
   Paragraph[0, 23]
     Text[0, 5]
-    Link[0, 0]
+    Link[0, 0] open:[5, 6] close:[0, 0]
       Text[6, 9]
     Text[16, 17]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[21, 22]
       Text[18, 21]
 ````````````````````````````````
 
@@ -10690,12 +10690,12 @@ Document[0, 36]
 Document[0, 41]
   Paragraph[0, 28]
     Text[0, 5]
-    Emphasis[5, 21]
+    Emphasis[5, 21] open:[5, 6] close:[20, 21]
       Text[6, 10]
-      LinkRef[0, 0]
+      LinkRef[0, 0] open:[10, 11] close:[19, 20]
         Text[11, 14]
     Text[21, 22]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[26, 27]
       Text[23, 26]
 ````````````````````````````````
 
@@ -10716,7 +10716,7 @@ emphasis grouping:
 Document[0, 26]
   Paragraph[0, 13]
     Text[0, 1]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[1, 2] close:[11, 12]
       Text[2, 6]
 ````````````````````````````````
 
@@ -10730,7 +10730,7 @@ Document[0, 26]
 .
 Document[0, 29]
   Paragraph[0, 16]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[14, 15]
       Text[1, 9]
 ````````````````````````````````
 
@@ -10762,7 +10762,7 @@ Document[0, 38]
 Document[0, 26]
   Paragraph[0, 13]
     Text[0, 4]
-    Code[4, 12]
+    Code[4, 12] open:[4, 5] close:[11, 12]
 ````````````````````````````````
 
 
@@ -10776,7 +10776,7 @@ Document[0, 26]
 Document[0, 53]
   Paragraph[0, 40]
     Text[0, 4]
-    AutoLink[4, 39]
+    AutoLink[4, 39] open:[4, 5] close:[38, 39]
 ````````````````````````````````
 
 
@@ -10791,7 +10791,7 @@ Matching is case-insensitive:
 .
 Document[0, 32]
   Paragraph[0, 11]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[9, 10]
       Text[1, 4]
 ````````````````````````````````
 
@@ -10807,7 +10807,7 @@ Unicode case fold is used:
 .
 Document[0, 52]
   Paragraph[0, 36]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[15, 16]
       Text[1, 7]
     Text[16, 35]
 ````````````````````````````````
@@ -10826,7 +10826,7 @@ purposes of determining matching:
 .
 Document[0, 34]
   Paragraph[19, 34]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[19, 20] close:[32, 33]
       Text[20, 23]
 ````````````````````````````````
 
@@ -10844,7 +10844,7 @@ No [whitespace] is allowed between the [link text] and the
 Document[0, 33]
   Paragraph[0, 12]
     Text[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[10, 11]
       Text[7, 10]
 ````````````````````````````````
 
@@ -10862,7 +10862,7 @@ Document[0, 33]
   Paragraph[0, 12]
     Text[0, 5]
     SoftLineBreak[5, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[10, 11]
       Text[7, 10]
 ````````````````````````````````
 
@@ -10908,7 +10908,7 @@ the first is used:
 .
 Document[0, 39]
   Paragraph[28, 39]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[28, 29] close:[37, 38]
       Text[29, 32]
 ````````````````````````````````
 
@@ -10990,7 +10990,7 @@ Document[0, 27]
 .
 Document[0, 28]
   Paragraph[0, 13]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[11, 12]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11006,7 +11006,7 @@ Note that in this example `]` is not backslash-escaped:
 .
 Document[0, 23]
   Paragraph[15, 23]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[21, 22]
       Text[16, 21]
 ````````````````````````````````
 
@@ -11071,7 +11071,7 @@ provided by the matching reference link definition.  Thus,
 .
 Document[0, 29]
   Paragraph[0, 8]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11085,8 +11085,8 @@ Document[0, 29]
 .
 Document[0, 41]
   Paragraph[0, 14]
-    LinkRef[0, 0]
-      Emphasis[1, 6]
+    LinkRef[0, 0] open:[0, 0] close:[10, 11]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
       Text[6, 10]
 ````````````````````````````````
@@ -11103,7 +11103,7 @@ The link labels are case-insensitive:
 .
 Document[0, 29]
   Paragraph[0, 8]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11123,9 +11123,9 @@ allowed between the two sets of brackets:
 .
 Document[0, 31]
   Paragraph[0, 10]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
-    Text[5, 5]
+    Text[5, 6]
     SoftLineBreak[6, 7]
     Text[7, 9]
 ````````````````````````````````
@@ -11149,7 +11149,7 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 Document[0, 27]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11163,8 +11163,8 @@ Document[0, 27]
 .
 Document[0, 39]
   Paragraph[0, 12]
-    LinkRef[0, 0]
-      Emphasis[1, 6]
+    LinkRef[0, 0] open:[0, 0] close:[10, 11]
+      Emphasis[1, 6] open:[1, 2] close:[5, 6]
         Text[2, 5]
       Text[6, 10]
 ````````````````````````````````
@@ -11180,8 +11180,8 @@ Document[0, 39]
 Document[0, 41]
   Paragraph[0, 14]
     Text[0, 1]
-    LinkRef[0, 0]
-      Emphasis[2, 7]
+    LinkRef[0, 0] open:[0, 0] close:[11, 12]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 11]
     Text[12, 13]
@@ -11198,7 +11198,7 @@ Document[0, 41]
 Document[0, 25]
   Paragraph[0, 12]
     Text[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[10, 11]
       Text[7, 10]
 ````````````````````````````````
 
@@ -11214,7 +11214,7 @@ The link labels are case-insensitive:
 .
 Document[0, 27]
   Paragraph[0, 6]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11230,7 +11230,7 @@ A space after the link text should be preserved:
 .
 Document[0, 23]
   Paragraph[0, 10]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
     Text[5, 9]
 ````````````````````````````````
@@ -11265,7 +11265,7 @@ following closing bracket:
 Document[0, 22]
   Paragraph[14, 22]
     Text[14, 15]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[20, 21]
       Text[16, 20]
 ````````````````````````````````
 
@@ -11282,7 +11282,7 @@ Full references take precedence over shortcut references:
 .
 Document[0, 38]
   Paragraph[0, 11]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[9, 10]
       Text[1, 4]
 ````````````````````````````````
 
@@ -11300,7 +11300,7 @@ In the following case `[bar][baz]` is parsed as a reference,
 Document[0, 29]
   Paragraph[0, 16]
     Text[0, 5]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[5, 6] close:[14, 15]
       Text[6, 9]
 ````````````````````````````````
 
@@ -11318,9 +11318,9 @@ Here, though, `[foo][bar]` is parsed as a reference, since
 .
 Document[0, 43]
   Paragraph[0, 16]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 1] close:[9, 10]
       Text[1, 4]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[14, 15]
       Text[11, 14]
 ````````````````````````````````
 
@@ -11339,7 +11339,7 @@ is followed by a link label (even though `[bar]` is not defined):
 Document[0, 43]
   Paragraph[0, 16]
     Text[0, 5]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[5, 6] close:[14, 15]
       Text[6, 9]
 ````````````````````````````````
 
@@ -11364,24 +11364,27 @@ this is standardly used as the image's `alt` attribute.
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 5]
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example
-![foo *bar*]
+![foo *bar*]Disconnected from the target VM, address: '127.0.0.1:60137', transport: 'socket'
+
 
 [foo *bar*]: train.jpg "train & tracks"
 .
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
-Document[0, 54]
-  Paragraph[0, 13]
-    ImageRef[0, 0]
+Document[0, 135]
+  Paragraph[0, 93]
+    ImageRef[0, 0] open:[0, 0] close:[11, 12]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
+    Text[12, 92]
 ````````````````````````````````
 
 
@@ -11392,9 +11395,9 @@ Document[0, 54]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 6]
-      Image[0, 0]
+      Image[0, 0] open:[7, 8] close:[0, 0]
         Text[8, 11]
 ````````````````````````````````
 
@@ -11406,9 +11409,9 @@ Document[0, 27]
 .
 Document[0, 26]
   Paragraph[0, 26]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 6]
-      Link[0, 0]
+      Link[0, 0] open:[6, 7] close:[0, 0]
         Text[7, 10]
 ````````````````````````````````
 
@@ -11429,9 +11432,9 @@ content is rendered, without formatting.
 .
 Document[0, 56]
   Paragraph[0, 15]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[11, 12]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
 ````````````````````````````````
 
@@ -11445,9 +11448,9 @@ Document[0, 56]
 .
 Document[0, 59]
   Paragraph[0, 21]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[1, 2] close:[19, 20]
       Text[2, 6]
-      Emphasis[6, 11]
+      Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
 ````````````````````````````````
 
@@ -11459,7 +11462,7 @@ Document[0, 59]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11472,7 +11475,7 @@ My ![foo bar](/path/to/train.jpg  "title"   )
 Document[0, 46]
   Paragraph[0, 46]
     Text[0, 3]
-    Image[0, 0]
+    Image[0, 0] open:[4, 5] close:[0, 0]
       Text[5, 12]
 ````````````````````````````````
 
@@ -11484,7 +11487,7 @@ Document[0, 46]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11496,7 +11499,7 @@ Document[0, 14]
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Image[0, 0]
+    Image[0, 0] open:[1, 2] close:[0, 0]
 ````````````````````````````````
 
 
@@ -11511,7 +11514,7 @@ Reference-style:
 .
 Document[0, 25]
   Paragraph[0, 12]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[1, 2] close:[10, 11]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11525,7 +11528,7 @@ Document[0, 25]
 .
 Document[0, 25]
   Paragraph[0, 12]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[1, 2] close:[10, 11]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11541,7 +11544,7 @@ Collapsed:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11555,8 +11558,8 @@ Document[0, 30]
 .
 Document[0, 42]
   Paragraph[0, 15]
-    ImageRef[0, 0]
-      Emphasis[2, 7]
+    ImageRef[0, 0] open:[0, 0] close:[11, 12]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 11]
 ````````````````````````````````
@@ -11573,7 +11576,7 @@ The labels are case-insensitive:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11592,9 +11595,9 @@ between the two sets of brackets:
 .
 Document[0, 32]
   Paragraph[0, 11]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
-    Text[6, 6]
+    Text[6, 7]
     SoftLineBreak[7, 8]
     Text[8, 10]
 ````````````````````````````````
@@ -11611,7 +11614,7 @@ Shortcut:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11625,8 +11628,8 @@ Document[0, 28]
 .
 Document[0, 40]
   Paragraph[0, 13]
-    ImageRef[0, 0]
-      Emphasis[2, 7]
+    ImageRef[0, 0] open:[0, 0] close:[11, 12]
+      Emphasis[2, 7] open:[2, 3] close:[6, 7]
         Text[3, 6]
       Text[7, 11]
 ````````````````````````````````
@@ -11661,7 +11664,7 @@ The link labels are case-insensitive:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[0, 0]
+    ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
 ````````````````````````````````
 
@@ -11695,7 +11698,7 @@ If you want a link after a literal `!`, backslash-escape the
 Document[0, 29]
   Paragraph[0, 8]
     Text[0, 2]
-    LinkRef[0, 0]
+    LinkRef[0, 0] open:[0, 0] close:[6, 7]
       Text[3, 6]
 ````````````````````````````````
 
@@ -11731,7 +11734,7 @@ Here are some valid autolinks:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20]
+    AutoLink[0, 20] open:[0, 1] close:[19, 20]
 ````````````````````````````````
 
 
@@ -11742,7 +11745,7 @@ Document[0, 21]
 .
 Document[0, 48]
   Paragraph[0, 48]
-    AutoLink[0, 47]
+    AutoLink[0, 47] open:[0, 1] close:[46, 47]
 ````````````````````````````````
 
 
@@ -11753,7 +11756,7 @@ Document[0, 48]
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24]
+    AutoLink[0, 24] open:[0, 1] close:[23, 24]
 ````````````````````````````````
 
 
@@ -11766,7 +11769,7 @@ Uppercase is also fine:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20]
+    AutoLink[0, 20] open:[0, 1] close:[19, 20]
 ````````````````````````````````
 
 
@@ -11782,7 +11785,7 @@ with their syntax:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    AutoLink[0, 9]
+    AutoLink[0, 9] open:[0, 1] close:[8, 9]
 ````````````````````````````````
 
 
@@ -11793,7 +11796,7 @@ Document[0, 10]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    AutoLink[0, 26]
+    AutoLink[0, 26] open:[0, 1] close:[25, 26]
 ````````````````````````````````
 
 
@@ -11804,7 +11807,7 @@ Document[0, 27]
 .
 Document[0, 13]
   Paragraph[0, 13]
-    AutoLink[0, 12]
+    AutoLink[0, 12] open:[0, 1] close:[11, 12]
 ````````````````````````````````
 
 
@@ -11815,7 +11818,7 @@ Document[0, 13]
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20]
+    AutoLink[0, 20] open:[0, 1] close:[19, 20]
 ````````````````````````````````
 
 
@@ -11841,7 +11844,7 @@ Backslash-escapes do not work inside autolinks:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24]
+    AutoLink[0, 24] open:[0, 1] close:[23, 24]
 ````````````````````````````````
 
 
@@ -11867,7 +11870,7 @@ Examples of email autolinks:
 .
 Document[0, 22]
   Paragraph[0, 22]
-    MailLink[0, 21]
+    MailLink[0, 21] open:[0, 1] close:[20, 21]
 ````````````````````````````````
 
 
@@ -11878,7 +11881,7 @@ Document[0, 22]
 .
 Document[0, 31]
   Paragraph[0, 31]
-    MailLink[0, 30]
+    MailLink[0, 30] open:[0, 1] close:[29, 30]
 ````````````````````````````````
 
 
@@ -12401,8 +12404,8 @@ bar</p>
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Text[0, 3]
-    HardLineBreak[3, 4]
+    Text[0, 14]
+    HardLineBreak[3, 14]
     Text[11, 14]
 ````````````````````````````````
 
@@ -12434,7 +12437,7 @@ bar</em></p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11]
+    Emphasis[0, 11] open:[0, 1] close:[10, 11]
       Text[1, 4]
       HardLineBreak[4, 7]
       Text[7, 10]
@@ -12450,7 +12453,7 @@ bar</em></p>
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Emphasis[0, 10]
+    Emphasis[0, 10] open:[0, 1] close:[9, 10]
       Text[1, 4]
       HardLineBreak[0, 0]
       Text[6, 9]
@@ -12467,7 +12470,7 @@ span`
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Code[0, 13]
+    Code[0, 13] open:[0, 1] close:[12, 13]
 ````````````````````````````````
 
 
@@ -12479,7 +12482,7 @@ span`
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Code[0, 12]
+    Code[0, 12] open:[0, 1] close:[11, 12]
 ````````````````````````````````
 
 
@@ -12905,6 +12908,7 @@ through the stack for an opening `[` or `![` delimiter.
   delimiter from the stack, and return a literal text node `]`.
 
 - If we find one and it's active, then we parse ahead to see if
+Disconnected from the target VM, address: '127.0.0.1:60610', transport: 'socket'
   we have an inline link/image, reference link/image, compact reference
   link/image, or shortcut reference link/image.
 

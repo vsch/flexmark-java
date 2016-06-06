@@ -13,9 +13,18 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
     private final ThematicBreak block = new ThematicBreak();
 
+    public ThematicBreakParser(BasedSequence line) {
+        block.setChars(line);
+    }
+
     @Override
     public Block getBlock() {
         return block;
+    }
+
+    @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromContent();
     }
 
     @Override
@@ -34,7 +43,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
             int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence line = state.getLine();
             if (PATTERN.matcher(line.subSequence(nextNonSpace, line.length())).matches()) {
-                return BlockStart.of(new ThematicBreakParser()).atIndex(line.length());
+                return BlockStart.of(new ThematicBreakParser(line)).atIndex(line.length());
             } else {
                 return BlockStart.none();
             }

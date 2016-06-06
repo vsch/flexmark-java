@@ -10,9 +10,19 @@ public class Reference extends Node {
     public BasedSequence urlOpeningMarker = SubSequence.NULL;
     public BasedSequence url = SubSequence.NULL;
     public BasedSequence urlClosingMarker = SubSequence.NULL;
-    public BasedSequence titleOpenMarker = SubSequence.NULL;
+    public BasedSequence titleOpeningMarker = SubSequence.NULL;
     public BasedSequence title = SubSequence.NULL;
-    public BasedSequence titleCloseMarker = SubSequence.NULL;
+    public BasedSequence titleClosingMarker = SubSequence.NULL;
+
+    @Override
+    public BasedSequence getLeadSegment() {
+        return openingMarker;
+    }
+
+    @Override
+    public BasedSequence getTrailSegment() {
+        return SubSequence.firstNonNull(titleClosingMarker, urlClosingMarker, url, closingMarker);
+    }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
         super(new SubSequence(label.getBase().subSequence(label.getStartOffset(), (title != null ? title.getEndOffset() : (url != null ? url.getEndOffset() : label.getEndOffset())))));
@@ -33,9 +43,9 @@ public class Reference extends Node {
         }
 
         if (title != null) {
-            this.titleOpenMarker = title.subSequence(0, 1);
+            this.titleOpeningMarker = title.subSequence(0, 1);
             this.title = title.subSequence(1, title.length() - 1);
-            this.titleCloseMarker = title.subSequence(title.length() - 1, title.length());
+            this.titleClosingMarker = title.subSequence(title.length() - 1, title.length());
         }
     }
 
@@ -71,20 +81,20 @@ public class Reference extends Node {
         this.urlClosingMarker = urlClosingMarker;
     }
 
-    public BasedSequence getTitleOpenMarker() {
-        return titleOpenMarker;
+    public BasedSequence getTitleOpeningMarker() {
+        return titleOpeningMarker;
     }
 
-    public void setTitleOpenMarker(BasedSequence titleOpenMarker) {
-        this.titleOpenMarker = titleOpenMarker;
+    public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
+        this.titleOpeningMarker = titleOpeningMarker;
     }
 
-    public BasedSequence getTitleCloseMarker() {
-        return titleCloseMarker;
+    public BasedSequence getTitleClosingMarker() {
+        return titleClosingMarker;
     }
 
-    public void setTitleCloseMarker(BasedSequence titleCloseMarker) {
-        this.titleCloseMarker = titleCloseMarker;
+    public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
+        this.titleClosingMarker = titleClosingMarker;
     }
 
     public BasedSequence getReference() {
@@ -110,7 +120,7 @@ public class Reference extends Node {
     public void setTitle(BasedSequence title) {
         this.title = title;
     }
-
+    
     @Override
     protected String toStringAttributes() {
         return "reference=" + reference + ", url=" + url;

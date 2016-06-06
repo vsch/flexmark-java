@@ -16,6 +16,16 @@ public abstract class InlineLinkNode extends LinkNode {
     protected BasedSequence titleClosingMarker = SubSequence.NULL;
     protected BasedSequence linkClosingMarker = SubSequence.NULL;
 
+    @Override
+    public BasedSequence getLeadSegment() {
+        return textOpeningMarker;
+    }
+
+    @Override
+    public BasedSequence getTrailSegment() {
+        return linkClosingMarker;
+    }
+
     public InlineLinkNode() {
     }
 
@@ -120,6 +130,82 @@ public abstract class InlineLinkNode extends LinkNode {
 
     public BasedSequence getTitle() {
         return title;
+    }
+
+    public BasedSequence getTextOpeningMarker() {
+        return textOpeningMarker;
+    }
+
+    public void setTextOpeningMarker(BasedSequence textOpeningMarker) {
+        this.textOpeningMarker = textOpeningMarker;
+    }
+
+    public void setText(BasedSequence text) {
+        this.text = text;
+    }
+
+    public BasedSequence getTextClosingMarker() {
+        return textClosingMarker;
+    }
+
+    public void setTextClosingMarker(BasedSequence textClosingMarker) {
+        this.textClosingMarker = textClosingMarker;
+    }
+
+    public BasedSequence getLinkOpeningMarker() {
+        return linkOpeningMarker;
+    }
+
+    public void setLinkOpeningMarker(BasedSequence linkOpeningMarker) {
+        this.linkOpeningMarker = linkOpeningMarker;
+    }
+
+    public BasedSequence getUrlOpeningMarker() {
+        return urlOpeningMarker;
+    }
+
+    public void setUrlOpeningMarker(BasedSequence urlOpeningMarker) {
+        this.urlOpeningMarker = urlOpeningMarker;
+    }
+
+    public void setUrl(BasedSequence url) {
+        this.url = url;
+    }
+
+    public BasedSequence getUrlClosingMarker() {
+        return urlClosingMarker;
+    }
+
+    public void setUrlClosingMarker(BasedSequence urlClosingMarker) {
+        this.urlClosingMarker = urlClosingMarker;
+    }
+
+    public BasedSequence getTitleOpeningMarker() {
+        return titleOpeningMarker;
+    }
+
+    public void setTitleOpeningMarker(BasedSequence titleOpeningMarker) {
+        this.titleOpeningMarker = titleOpeningMarker;
+    }
+
+    public void setTitle(BasedSequence title) {
+        this.title = title;
+    }
+
+    public BasedSequence getTitleClosingMarker() {
+        return titleClosingMarker;
+    }
+
+    public void setTitleClosingMarker(BasedSequence titleClosingMarker) {
+        this.titleClosingMarker = titleClosingMarker;
+    }
+
+    public BasedSequence getLinkClosingMarker() {
+        return linkClosingMarker;
+    }
+
+    public void setLinkClosingMarker(BasedSequence linkClosingMarker) {
+        this.linkClosingMarker = linkClosingMarker;
     }
 
     @Override

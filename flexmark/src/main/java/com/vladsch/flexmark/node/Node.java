@@ -153,4 +153,23 @@ public abstract class Node {
     protected String toStringAttributes() {
         return "";
     }
+
+    public BasedSequence getLeadSegment() {
+        return getFirstChild() != null ? getFirstChild().getChars() : SubSequence.NULL;
+    }
+
+    public BasedSequence getTrailSegment() {
+        return getLastChild() != null ? getLastChild().getChars() : SubSequence.NULL;
+    }
+
+    public void setCharsFromContent() {
+        BasedSequence leadSegment = getLeadSegment();
+        BasedSequence trailSegment = getTrailSegment();
+
+        if (leadSegment != SubSequence.NULL && trailSegment != SubSequence.NULL) {
+            int startOffset = leadSegment.getStartOffset();
+            int endOffset = trailSegment.getEndOffset();
+            setChars(leadSegment.baseSubSequence(startOffset > endOffset ? endOffset : startOffset, endOffset));
+        }
+    }
 }

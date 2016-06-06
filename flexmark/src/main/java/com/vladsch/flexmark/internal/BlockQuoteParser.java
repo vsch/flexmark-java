@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.BlockQuote;
@@ -8,6 +9,10 @@ import com.vladsch.flexmark.parser.block.*;
 public class BlockQuoteParser extends AbstractBlockParser {
 
     private final BlockQuote block = new BlockQuote();
+
+    public BlockQuoteParser(BasedSequence marker) {
+        block.setMarker(marker);
+    }
 
     @Override
     public boolean isContainer() {
@@ -22,6 +27,11 @@ public class BlockQuoteParser extends AbstractBlockParser {
     @Override
     public BlockQuote getBlock() {
         return block;
+    }
+    
+    @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromContent();
     }
 
     @Override
@@ -53,7 +63,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
                 if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
                     newColumn++;
                 }
-                return BlockStart.of(new BlockQuoteParser()).atColumn(newColumn);
+                return BlockStart.of(new BlockQuoteParser(state.getLine().subSequence(nextNonSpace, nextNonSpace +1))).atColumn(newColumn);
             } else {
                 return BlockStart.none();
             }

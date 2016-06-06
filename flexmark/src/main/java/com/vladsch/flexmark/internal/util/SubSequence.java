@@ -13,10 +13,20 @@ public class SubSequence extends BasedSequenceImpl {
 
     final public static BasedSequence EOL = new StringSequence("\n");
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+    
+    public static BasedSequence firstNonNull(BasedSequence...sequences) {
+        for (BasedSequence sequence : sequences) {
+            if (sequence != NULL) return sequence; 
+        }
+        
+        return NULL;
+    }
 
     protected final CharSequence base;
     protected final int startOffset;
     protected final int endOffset;
+    
+    
 
     public CharSequence getBase() {
         return base;

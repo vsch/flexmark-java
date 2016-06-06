@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
@@ -81,11 +82,21 @@ public class ParserTest {
 
     private static class DashBlockParser extends AbstractBlockParser {
 
-        private DashBlock dash = new DashBlock();
+        private DashBlock dash;
+        
+        public DashBlockParser(BasedSequence line) {
+            dash = new DashBlock();
+            dash.setChars(line);
+        }
 
         @Override
         public Block getBlock() {
             return dash;
+        }
+
+        @Override
+        public void closeBlock(ParserState parserState) {
+            dash.setCharsFromContent();
         }
 
         @Override
@@ -99,7 +110,7 @@ public class ParserTest {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             if (state.getLine().equals("---")) {
-                return BlockStart.of(new DashBlockParser());
+                return BlockStart.of(new DashBlockParser(state.getLine()));
             }
             return BlockStart.none();
         }

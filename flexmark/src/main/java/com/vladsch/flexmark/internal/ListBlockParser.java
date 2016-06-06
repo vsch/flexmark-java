@@ -49,7 +49,7 @@ public class ListBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         finalizeListTight(parserState);
-        block.setCharsFromChildren();
+        block.setCharsFromContent();
     }
 
     private void finalizeListTight(ParserState parserState) {
@@ -112,7 +112,7 @@ public class ListBlockParser extends AbstractBlockParser {
             contentColumn = columnAfterMarker + 1;
         }
 
-        return new ListData(listBlock, contentColumn);
+        return new ListData(listBlock, contentColumn, rest.subSequence(matcher.start(), matcher.end()));
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -164,7 +164,7 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             int newColumn = listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(newColumn - state.getColumn());
+            ListItemParser listItemParser = new ListItemParser(newColumn - state.getColumn(), listData.listMarker);
 
             // prepend the list block if needed
             if (!(matched instanceof ListBlockParser) ||
@@ -183,10 +183,12 @@ public class ListBlockParser extends AbstractBlockParser {
     private static class ListData {
         final ListBlock listBlock;
         final int contentColumn;
+        final BasedSequence listMarker;
 
-        ListData(ListBlock listBlock, int contentColumn) {
+        ListData(ListBlock listBlock, int contentColumn, BasedSequence listMarker) {
             this.listBlock = listBlock;
             this.contentColumn = contentColumn;
+            this.listMarker = listMarker;
         }
     }
 }

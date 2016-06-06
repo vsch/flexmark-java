@@ -11,6 +11,16 @@ public abstract class RefNode extends LinkNode {
     public BasedSequence reference = SubSequence.NULL;
     public BasedSequence referenceClosingMarker = SubSequence.NULL;
 
+    @Override
+    public BasedSequence getLeadSegment() {
+        return textOpeningMarker;
+    }
+
+    @Override
+    public BasedSequence getTrailSegment() {
+        return SubSequence.firstNonNull(referenceClosingMarker, textClosingMarker);
+    }
+
     public String linkUrl = "";
     public String linkText = "";
     public String linkTitle = null;
@@ -117,6 +127,46 @@ public abstract class RefNode extends LinkNode {
 
     public void setLinkTitle(String linkTitle) {
         this.linkTitle = linkTitle;
+    }
+
+    public BasedSequence getTextOpeningMarker() {
+        return textOpeningMarker;
+    }
+
+    public void setTextOpeningMarker(BasedSequence textOpeningMarker) {
+        this.textOpeningMarker = textOpeningMarker;
+    }
+
+    public void setText(BasedSequence text) {
+        this.text = text;
+    }
+
+    public BasedSequence getTextClosingMarker() {
+        return textClosingMarker;
+    }
+
+    public void setTextClosingMarker(BasedSequence textClosingMarker) {
+        this.textClosingMarker = textClosingMarker;
+    }
+
+    public BasedSequence getReferenceOpeningMarker() {
+        return referenceOpeningMarker;
+    }
+
+    public void setReferenceOpeningMarker(BasedSequence referenceOpeningMarker) {
+        this.referenceOpeningMarker = referenceOpeningMarker;
+    }
+
+    public void setReference(BasedSequence reference) {
+        this.reference = reference;
+    }
+
+    public BasedSequence getReferenceClosingMarker() {
+        return referenceClosingMarker;
+    }
+
+    public void setReferenceClosingMarker(BasedSequence referenceClosingMarker) {
+        this.referenceClosingMarker = referenceClosingMarker;
     }
 
     @Override

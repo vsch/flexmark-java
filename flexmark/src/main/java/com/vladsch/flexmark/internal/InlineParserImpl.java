@@ -117,7 +117,6 @@ public class InlineParserImpl implements InlineParser {
         return currentText;
     }
 
-
     public InlineParserImpl(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
         this.delimiterProcessors = delimiterProcessors;
         this.delimiterCharacters = delimiterCharacters;
@@ -408,7 +407,9 @@ public class InlineParserImpl implements InlineParser {
             Matcher matcher = FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
-            lastChild.setChars(lastChild.getChars().trimEnd());
+            if (spaces >= 2) {
+                lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
+            }
         } else {
             appendNode(new SoftLineBreak(input.subSequence(index - 1, index)));
         }
@@ -818,7 +819,7 @@ public class InlineParserImpl implements InlineParser {
      *
      * @return information about delimiter run, or {@code null}
      */
-     DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+    DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         int startIndex = index;
 
         int delimiterCount = 0;

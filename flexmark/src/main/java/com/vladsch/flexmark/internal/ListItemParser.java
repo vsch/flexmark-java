@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.ListItem;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
@@ -16,8 +17,9 @@ public class ListItemParser extends AbstractBlockParser {
      */
     private int contentIndent;
 
-    public ListItemParser(int contentIndent) {
+    public ListItemParser(int contentIndent, BasedSequence marker) {
         this.contentIndent = contentIndent;
+        block.setOpeningMarker(marker);
     }
 
     @Override
@@ -37,7 +39,7 @@ public class ListItemParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
-        block.setCharsFromChildren();
+        block.setCharsFromContent();
     }
 
     @Override

@@ -24,12 +24,17 @@ public class BlockQuote extends Block {
         super(blockContent);
     }
 
-    public BasedSequence getMarker() {
+    public BasedSequence getOpeningMarker() {
         return marker;
     }
 
     public void setMarker(BasedSequence marker) {
         this.marker = marker;
+    }
+
+    @Override
+    public BasedSequence getLeadSegment() {
+        return marker != SubSequence.NULL ? marker : super.getLeadSegment();
     }
 
     @Override

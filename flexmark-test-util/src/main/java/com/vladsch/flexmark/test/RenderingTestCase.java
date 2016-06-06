@@ -31,7 +31,7 @@ public abstract class RenderingTestCase {
         String ast = ast(node);
 
         // include source for better assertion errors
-        String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n" + expectedHtml) + SpecReader.TYPE_BREAK + expectedAst + "\n" + SpecReader.EXAMPLE_BREAK + "\n\n";
+        String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n" + expectedHtml) + SpecReader.TYPE_BREAK + "\n" + expectedAst + SpecReader.EXAMPLE_BREAK + "\n\n";
         String actual = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n" + html) + SpecReader.TYPE_BREAK + "\n" + ast + SpecReader.EXAMPLE_BREAK + "\n\n";
         assertEquals(expected, actual);
     }
@@ -41,8 +41,8 @@ public abstract class RenderingTestCase {
         String ast = ast(node);
 
         // include source for better assertion errors
-        String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n") + "\n" + SpecReader.TYPE_BREAK + expectedAst + SpecReader.EXAMPLE_BREAK + "\n\n";
-        String actual = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n") + "\n" + SpecReader.TYPE_BREAK + ast + SpecReader.EXAMPLE_BREAK + "\n\n";
+        String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n") + SpecReader.TYPE_BREAK + "\n" + expectedAst + SpecReader.EXAMPLE_BREAK + "\n\n";
+        String actual = SpecReader.EXAMPLE_START + "\n" + showTabs(source + SpecReader.TYPE_BREAK + "\n") + SpecReader.TYPE_BREAK + "\n" + ast + SpecReader.EXAMPLE_BREAK + "\n\n";
         assertEquals(expected, actual);
     }
 

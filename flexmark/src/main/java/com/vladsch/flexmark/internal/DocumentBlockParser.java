@@ -42,4 +42,8 @@ public class DocumentBlockParser extends AbstractBlockParser {
     public void addLine(BasedSequence line, int eolLength) {
     }
 
+    @Override
+    public void closeBlock(ParserState parserState) {
+    }
+
 }

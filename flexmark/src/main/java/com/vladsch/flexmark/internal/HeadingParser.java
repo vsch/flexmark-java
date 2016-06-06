@@ -39,6 +39,11 @@ public class HeadingParser extends AbstractBlockParser {
         inlineParser.parse(block.getText(), block);
     }
 
+    @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromContent();
+    }
+
     public static class Factory extends AbstractBlockParserFactory {
 
         @Override

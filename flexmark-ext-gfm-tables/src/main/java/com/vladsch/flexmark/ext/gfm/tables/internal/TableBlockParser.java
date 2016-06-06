@@ -56,6 +56,11 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromContent();
+    }
+
+    @Override
     public void parseInlines(InlineParser inlineParser) {
         Node section = new TableHead();
         block.appendChild(section);

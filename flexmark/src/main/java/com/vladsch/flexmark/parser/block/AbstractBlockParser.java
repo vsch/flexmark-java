@@ -20,10 +20,6 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
-    }
-
-    @Override
     public void parseInlines(InlineParser inlineParser) {
     }
 

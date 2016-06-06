@@ -44,6 +44,11 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
+    public void closeBlock(ParserState parserState) {
+        block.setCharsFromContent();
+    }
+
+    @Override
     public BlockContinue tryContinue(ParserState parserState) {
         final CharSequence line = parserState.getLine();
 
