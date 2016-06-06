@@ -7,6 +7,11 @@ import java.util.List;
 
 public class OrderedList extends ListBlock {
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public OrderedList() {
     }
 

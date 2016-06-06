@@ -12,6 +12,11 @@ import java.util.List;
 public class Document extends Block implements PropertyHolder {
     final private PropertyHolderImpl propertyHolder = new PropertyHolderImpl();
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public Document() {
 
     }

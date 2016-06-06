@@ -15,13 +15,18 @@ public class Reference extends Node {
     public BasedSequence titleClosingMarker = SubSequence.NULL;
 
     @Override
-    public BasedSequence getLeadSegment() {
-        return openingMarker;
-    }
-
-    @Override
-    public BasedSequence getTrailSegment() {
-        return SubSequence.firstNonNull(titleClosingMarker, urlClosingMarker, url, closingMarker);
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] {
+                openingMarker,
+                reference,
+                closingMarker,
+                urlOpeningMarker,
+                url,
+                urlClosingMarker,
+                titleOpeningMarker,
+                title,
+                titleClosingMarker
+        };
     }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
@@ -120,7 +125,7 @@ public class Reference extends Node {
     public void setTitle(BasedSequence title) {
         this.title = title;
     }
-    
+
     @Override
     protected String toStringAttributes() {
         return "reference=" + reference + ", url=" + url;

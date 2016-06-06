@@ -16,7 +16,7 @@ public class SubSequence extends BasedSequenceImpl {
     
     public static BasedSequence firstNonNull(BasedSequence...sequences) {
         for (BasedSequence sequence : sequences) {
-            if (sequence != NULL) return sequence; 
+            if (sequence != null && sequence != NULL) return sequence; 
         }
         
         return NULL;

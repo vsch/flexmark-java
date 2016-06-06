@@ -11,8 +11,13 @@ import com.vladsch.flexmark.node.Visitor;
  */
 public class Strikethrough extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence content = SubSequence.EMPTY;
+    protected BasedSequence text = SubSequence.EMPTY;
     protected BasedSequence closingMarker = SubSequence.EMPTY;
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, text, closingMarker };
+    }
 
     public Strikethrough() {
     }
@@ -21,10 +26,10 @@ public class Strikethrough extends CustomNode implements DelimitedNode {
         super(chars);
     }
 
-    public Strikethrough(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+    public Strikethrough(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;
-        this.content = content;
+        this.text = text;
         this.closingMarker = closingMarker;
     }
 
@@ -36,12 +41,12 @@ public class Strikethrough extends CustomNode implements DelimitedNode {
         this.openingMarker = openingMarker;
     }
 
-    public BasedSequence getContent() {
-        return content;
+    public BasedSequence getText() {
+        return text;
     }
 
-    public void setContent(BasedSequence content) {
-        this.content = content;
+    public void setText(BasedSequence text) {
+        this.text = text;
     }
 
     public BasedSequence getClosingMarker() {

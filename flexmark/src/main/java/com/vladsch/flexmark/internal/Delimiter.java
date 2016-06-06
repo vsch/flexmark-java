@@ -90,7 +90,7 @@ public class Delimiter {
             tmp = next;
         }
 
-        delimitedNode.setContent(input.subSequence(getEndIndex(), closer.getStartIndex()));
+        delimitedNode.setText(input.subSequence(getEndIndex(), closer.getStartIndex()));
         getNode().insertAfter((Node) delimitedNode);
     }
 }

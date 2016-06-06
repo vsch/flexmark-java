@@ -12,6 +12,11 @@ public class Heading extends Block {
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, text, closingMarker };
+    }
+
     public Heading() {
     }
 
@@ -40,7 +45,7 @@ public class Heading extends Block {
     }
 
     public void setOpeningMarker(BasedSequence openingMarker) {
-        this.openingMarker = openingMarker;
+        this.openingMarker = openingMarker == null ? SubSequence.NULL : openingMarker;
     }
 
     public BasedSequence getText() {
@@ -48,7 +53,7 @@ public class Heading extends Block {
     }
 
     public void setText(BasedSequence text) {
-        this.text = text;
+        this.text = text == null ? SubSequence.NULL : text;
     }
 
     public BasedSequence getClosingMarker() {
@@ -56,7 +61,7 @@ public class Heading extends Block {
     }
 
     public void setClosingMarker(BasedSequence closingMarker) {
-        this.closingMarker = closingMarker;
+        this.closingMarker = closingMarker == null ? SubSequence.NULL : closingMarker;
     }
 
     public int getLevel() {

@@ -11,7 +11,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     private final BlockQuote block = new BlockQuote();
 
     public BlockQuoteParser(BasedSequence marker) {
-        block.setMarker(marker);
+        block.setOpeningMarker(marker);
     }
 
     @Override

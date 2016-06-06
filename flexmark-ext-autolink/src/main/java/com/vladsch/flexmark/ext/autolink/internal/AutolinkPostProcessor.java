@@ -45,12 +45,13 @@ public class AutolinkPostProcessor implements PostProcessor {
 
             if (link.getType() == LinkType.EMAIL) {
                 linkNode = new MailLink();
-                ((MailLink) linkNode).setContent(linkText);
+                ((MailLink) linkNode).setText(linkText);
             } else {
                 linkNode = new AutoLink();
                 ((AutoLink) linkNode).setContent(linkText);
             }
 
+            linkNode.setCharsFromContent();
             linkNode.appendChild(contentNode);
             lastNode = insertNode(linkNode, lastNode);
 

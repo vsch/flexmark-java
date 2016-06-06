@@ -53,33 +53,33 @@ Here are some basic benchmarking results:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:-----------------|----------------:|--------------:|------------------:|-----------:|
-| commonMarkSpec   |        42.343ms |      72.332ms |         588.993ms |  622.279ms |
-| hang-pegdown     |         0.012ms |       0.024ms |           0.028ms |  653.111ms |
-| table-format     |         1.324ms |       1.658ms |           3.419ms |   25.505ms |
-| VERSION          |         1.234ms |       1.625ms |           3.582ms |   49.494ms |
-| README-SLOW      |         0.702ms |       0.906ms |           1.634ms |   17.338ms |
-| hang-pegdown2    |         0.013ms |       0.016ms |           0.027ms | 1300.878ms |
-| wrap             |         4.479ms |       9.088ms |          14.649ms |   95.989ms |
-| markdown_example |        21.056ms |      26.393ms |         210.310ms | 1085.997ms |
-| spec             |         8.703ms |      12.056ms |          35.188ms |  332.175ms |
-| table            |         0.125ms |       0.144ms |           0.676ms |    4.169ms |
+| README-SLOW      |         0.685ms |       0.953ms |           1.593ms |   17.173ms |
+| VERSION          |         1.217ms |       1.704ms |           3.557ms |   46.600ms |
+| commonMarkSpec   |        41.038ms |      70.285ms |         590.881ms |  622.080ms |
+| hang-pegdown     |         0.023ms |       0.019ms |           0.030ms |  653.358ms |
+| hang-pegdown2    |         0.012ms |       0.018ms |           0.027ms | 1301.373ms |
+| markdown_example |        19.438ms |      25.620ms |         209.787ms | 1076.305ms |
+| spec             |         8.700ms |      11.959ms |          34.147ms |  326.479ms |
+| table            |         0.110ms |       0.135ms |           0.665ms |    4.266ms |
+| table-format     |         1.335ms |       1.696ms |           3.467ms |   26.116ms |
+| wrap             |         4.409ms |       8.977ms |          15.243ms |   94.709ms |
 
 Ratio of performance:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| commonMarkSpec   |            1.00 |          1.71 |             13.91 |     14.70 |
-| hang-pegdown     |            1.00 |          1.98 |              2.30 |  53102.74 |
-| table-format     |            1.00 |          1.25 |              2.58 |     19.27 |
-| VERSION          |            1.00 |          1.32 |              2.90 |     40.12 |
-| README-SLOW      |            1.00 |          1.29 |              2.33 |     24.70 |
-| hang-pegdown2    |            1.00 |          1.28 |              2.15 | 102738.72 |
-| wrap             |            1.00 |          2.03 |              3.27 |     21.43 |
-| markdown_example |            1.00 |          1.25 |              9.99 |     51.58 |
-| spec             |            1.00 |          1.39 |              4.04 |     38.17 |
-| table            |            1.00 |          1.15 |              5.42 |     33.47 |
-| ---------------- | --------------- | ------------- | ----------------- | --------- |
-| overall          |            1.00 |          1.55 |             10.73 |     52.34 |
+| README-SLOW      |            1.00 |          1.39 |              2.32 |     25.06 |
+| VERSION          |            1.00 |          1.40 |              2.92 |     38.29 |
+| commonMarkSpec   |            1.00 |          1.71 |             14.40 |     15.16 |
+| hang-pegdown     |            1.19 |          1.00 |              1.56 |  34217.96 |
+| hang-pegdown2    |            1.00 |          1.44 |              2.20 | 104201.57 |
+| markdown_example |            1.00 |          1.32 |             10.79 |     55.37 |
+| spec             |            1.00 |          1.37 |              3.93 |     37.53 |
+| table            |            1.00 |          1.23 |              6.05 |     38.77 |
+| table-format     |            1.00 |          1.27 |              2.60 |     19.56 |
+| wrap             |            1.00 |          2.04 |              3.46 |     21.48 |
+| -----------      |       --------- |     --------- |         --------- | --------- |
+| overall          |            1.00 |          1.58 |             11.17 |     54.16 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance

@@ -17,7 +17,7 @@ import java.util.List;
 @State(Scope.Benchmark)
 public class SpecBenchmark {
 
-    private static final String SPEC = SpecReader.readSpec(null);
+    private static final String SPEC = SpecReader.readSpec();
     private static final List<String> SPEC_EXAMPLES = SpecReader.readExamplesAsString();
     private static final Parser PARSER = Parser.builder().build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();

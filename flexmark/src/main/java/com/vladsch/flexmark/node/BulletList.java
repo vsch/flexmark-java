@@ -6,7 +6,12 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import java.util.List;
 
 public class BulletList extends ListBlock {
-    private char bulletMarker;
+    private char openingMarker;
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
 
     public BulletList() {
     }
@@ -23,12 +28,12 @@ public class BulletList extends ListBlock {
         super(blockContent);
     }
 
-    public char getBulletMarker() {
-        return bulletMarker;
+    public char getOpeningMarker() {
+        return openingMarker;
     }
 
-    public void setBulletMarker(char bulletMarker) {
-        this.bulletMarker = bulletMarker;
+    public void setOpeningMarker(char openingMarker) {
+        this.openingMarker = openingMarker;
     }
 
     @Override

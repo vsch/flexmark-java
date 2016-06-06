@@ -8,6 +8,11 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public class HtmlInline extends Node {
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public HtmlInline() {
     }
 

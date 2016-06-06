@@ -7,7 +7,12 @@ import com.vladsch.flexmark.internal.util.SubSequence;
 import java.util.List;
 
 public class BlockQuote extends Block {
-    private BasedSequence marker = SubSequence.NULL;
+    private BasedSequence openingMarker = SubSequence.NULL;
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker };
+    }
 
     public BlockQuote() {
     }
@@ -25,16 +30,11 @@ public class BlockQuote extends Block {
     }
 
     public BasedSequence getOpeningMarker() {
-        return marker;
+        return openingMarker;
     }
 
-    public void setMarker(BasedSequence marker) {
-        this.marker = marker;
-    }
-
-    @Override
-    public BasedSequence getLeadSegment() {
-        return marker != SubSequence.NULL ? marker : super.getLeadSegment();
+    public void setOpeningMarker(BasedSequence openingMarker) {
+        this.openingMarker = openingMarker;
     }
 
     @Override

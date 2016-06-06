@@ -1,0 +1,1092 @@
+---
+title: Gfm Tables Extension Spec
+author: Vladimir Schneider
+version: 0.1
+date: '2016-06-06'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## Gfm Tables Extension 
+
+Converts pipe separated tables to html tables  
+
+The tests here are converted to commonmark spec.txt format and AST expected 
+results added.
+
+
+```````````````````````````````` example
+Abc|Def
+.
+<p>Abc|Def</p>
+.
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc | Def
+.
+<p>Abc | Def</p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+-|-
+.
+<p>Abc|Def
+-|-</p>
+.
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 11]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+--|--
+.
+<p>Abc|Def
+--|--</p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 13]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+ |---|---
+.
+<p>Abc|Def
+|---|---</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 17]
+    SoftLineBreak[7, 17]
+    Text[9, 17]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+No
+Abc|Def
+---|---
+.
+<p>No
+Abc|Def
+---|---</p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Text[0, 2]
+    SoftLineBreak[2, 3]
+    Text[3, 10]
+    SoftLineBreak[10, 11]
+    Text[11, 18]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+.
+Document[0, 16]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[0, 0]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc
+|---
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+.
+Document[0, 10]
+  TableBlock[0, 0]
+    TableHead[1, 4]
+      TableRow[1, 4]
+        TableCell[1, 4]
+          Text[1, 4]
+    TableSeparator[6, 9]
+      TableRow[6, 9]
+        TableCell[6, 9]
+          Text[6, 9]
+    TableBody[0, 0]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc|
+|---|
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+.
+Document[0, 12]
+  TableBlock[0, 0]
+    TableHead[1, 4]
+      TableRow[1, 4]
+        TableCell[1, 4]
+          Text[1, 4]
+    TableSeparator[7, 10]
+      TableRow[7, 10]
+        TableCell[7, 10]
+          Text[7, 10]
+    TableBody[0, 0]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|
+---|
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+.
+Document[0, 10]
+  TableBlock[0, 0]
+    TableHead[0, 3]
+      TableRow[0, 3]
+        TableCell[0, 3]
+          Text[0, 3]
+    TableSeparator[5, 8]
+      TableRow[5, 8]
+        TableCell[5, 8]
+          Text[5, 8]
+    TableBody[0, 0]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc
+---
+.
+<h2>|Abc</h2>
+.
+Document[0, 9]
+  Heading[0, 8] marker:[5, 8]
+    Text[0, 4]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc
+|---
+.
+<p>Abc
+|---</p>
+.
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 8]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc
+|---
+|1
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td></tr>
+</tbody>
+</table>
+.
+Document[0, 13]
+  TableBlock[0, 0]
+    TableHead[1, 4]
+      TableRow[1, 4]
+        TableCell[1, 4]
+          Text[1, 4]
+    TableSeparator[6, 9]
+      TableRow[6, 9]
+        TableCell[6, 9]
+          Text[6, 9]
+    TableBody[11, 12]
+      TableRow[11, 12]
+        TableCell[11, 12]
+          Text[11, 12]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc|
+|---|
+|1|
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td></tr>
+</tbody>
+</table>
+.
+Document[0, 16]
+  TableBlock[0, 0]
+    TableHead[1, 4]
+      TableRow[1, 4]
+        TableCell[1, 4]
+          Text[1, 4]
+    TableSeparator[7, 10]
+      TableRow[7, 10]
+        TableCell[7, 10]
+          Text[7, 10]
+    TableBody[13, 14]
+      TableRow[13, 14]
+        TableCell[13, 14]
+          Text[13, 14]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|
+---|
+1|
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td></tr>
+</tbody>
+</table>
+.
+Document[0, 13]
+  TableBlock[0, 0]
+    TableHead[0, 3]
+      TableRow[0, 3]
+        TableCell[0, 3]
+          Text[0, 3]
+    TableSeparator[5, 8]
+      TableRow[5, 8]
+        TableCell[5, 8]
+          Text[5, 8]
+    TableBody[10, 11]
+      TableRow[10, 11]
+        TableCell[10, 11]
+          Text[10, 11]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc
+---
+|1
+.
+<h2>|Abc</h2>
+<p>|1</p>
+.
+Document[0, 12]
+  Heading[0, 8] marker:[5, 8]
+    Text[0, 4]
+  Paragraph[9, 12]
+    Text[9, 11]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc
+|---
+1
+.
+<table>
+<thead>
+<tr><th>Abc</th></tr>
+</thead>
+<tbody></tbody>
+</table>
+<p>1</p>
+.
+Document[0, 12]
+  TableBlock[0, 0]
+    TableHead[1, 4]
+      TableRow[1, 4]
+        TableCell[1, 4]
+          Text[1, 4]
+    TableSeparator[6, 9]
+      TableRow[6, 9]
+        TableCell[6, 9]
+          Text[6, 9]
+    TableBody[0, 0]
+  Paragraph[10, 12]
+    Text[10, 11]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+1|2
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 20]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[16, 19]
+      TableRow[16, 19]
+        TableCell[16, 17]
+          Text[16, 17]
+        TableCell[18, 19]
+          Text[18, 19]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def|Ghi
+---|---
+1|2|3
+.
+<p>Abc|Def|Ghi
+---|---
+1|2|3</p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 11]
+    SoftLineBreak[11, 12]
+    Text[12, 19]
+    SoftLineBreak[19, 20]
+    Text[20, 25]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+ Abc  | Def 
+ --- | --- 
+ 1 | 2 
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 33]
+  TableBlock[0, 0]
+    TableHead[1, 11]
+      TableRow[1, 11]
+        TableCell[1, 4]
+          Text[1, 4]
+        TableCell[8, 11]
+          Text[8, 11]
+    TableSeparator[14, 23]
+      TableRow[14, 23]
+        TableCell[14, 17]
+          Text[14, 17]
+        TableCell[20, 23]
+          Text[20, 23]
+    TableBody[26, 31]
+      TableRow[26, 31]
+        TableCell[26, 27]
+          Text[26, 27]
+        TableCell[30, 31]
+          Text[30, 31]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+    1|2
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 24]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[20, 23]
+      TableRow[20, 23]
+        TableCell[20, 21]
+          Text[20, 21]
+        TableCell[22, 23]
+          Text[22, 23]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+|Abc|Def|
+|---|---|
+|1|2|
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 26]
+  TableBlock[0, 0]
+    TableHead[1, 8]
+      TableRow[1, 8]
+        TableCell[1, 4]
+          Text[1, 4]
+        TableCell[5, 8]
+          Text[5, 8]
+    TableSeparator[11, 18]
+      TableRow[11, 18]
+        TableCell[11, 14]
+          Text[11, 14]
+        TableCell[15, 18]
+          Text[15, 18]
+    TableBody[21, 24]
+      TableRow[21, 24]
+        TableCell[21, 22]
+          Text[21, 22]
+        TableCell[23, 24]
+          Text[23, 24]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+*Abc*|Def
+---|---
+1|2
+.
+<table>
+<thead>
+<tr><th><em>Abc</em></th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 22]
+  TableBlock[0, 0]
+    TableHead[0, 9]
+      TableRow[0, 9]
+        TableCell[0, 5]
+          Emphasis[0, 5] open:[0, 1] close:[4, 5]
+            Text[1, 4]
+        TableCell[6, 9]
+          Text[6, 9]
+    TableSeparator[10, 17]
+      TableRow[10, 17]
+        TableCell[10, 13]
+          Text[10, 13]
+        TableCell[14, 17]
+          Text[14, 17]
+    TableBody[18, 21]
+      TableRow[18, 21]
+        TableCell[18, 19]
+          Text[18, 19]
+        TableCell[20, 21]
+          Text[20, 21]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+1\\|2|20
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1\</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 25]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[16, 21]
+      TableRow[16, 21]
+        TableCell[16, 19]
+          Text[16, 19]
+        TableCell[20, 21]
+          Text[20, 21]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+1\\\\|2
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1\\</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 24]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[16, 23]
+      TableRow[16, 23]
+        TableCell[16, 21]
+          Text[16, 21]
+        TableCell[22, 23]
+          Text[22, 23]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+:---|---
+1|2
+.
+<table>
+<thead>
+<tr><th align="left">Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td align="left">1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 21]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 16]
+      TableRow[8, 16]
+        TableCell[8, 12]
+          Text[8, 12]
+        TableCell[13, 16]
+          Text[13, 16]
+    TableBody[17, 20]
+      TableRow[17, 20]
+        TableCell[17, 18]
+          Text[17, 18]
+        TableCell[19, 20]
+          Text[19, 20]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---:|---
+1|2
+.
+<table>
+<thead>
+<tr><th align="right">Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td align="right">1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 21]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 16]
+      TableRow[8, 16]
+        TableCell[8, 12]
+          Text[8, 12]
+        TableCell[13, 16]
+          Text[13, 16]
+    TableBody[17, 20]
+      TableRow[17, 20]
+        TableCell[17, 18]
+          Text[17, 18]
+        TableCell[19, 20]
+          Text[19, 20]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+:---:|---
+1|2
+.
+<table>
+<thead>
+<tr><th align="center">Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td align="center">1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 22]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 17]
+      TableRow[8, 17]
+        TableCell[8, 13]
+          Text[8, 13]
+        TableCell[14, 17]
+          Text[14, 17]
+    TableBody[18, 21]
+      TableRow[18, 21]
+        TableCell[18, 19]
+          Text[18, 19]
+        TableCell[20, 21]
+          Text[20, 21]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|:---:
+1|2
+.
+<table>
+<thead>
+<tr><th>Abc</th><th align="center">Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td align="center">2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 22]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 17]
+      TableRow[8, 17]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 17]
+          Text[12, 17]
+    TableBody[18, 21]
+      TableRow[18, 21]
+        TableCell[18, 19]
+          Text[18, 19]
+        TableCell[20, 21]
+          Text[20, 21]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+ :--- |---
+1|2
+.
+<table>
+<thead>
+<tr><th align="left">Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td align="left">1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 23]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[9, 18]
+      TableRow[9, 18]
+        TableCell[9, 13]
+          Text[9, 13]
+        TableCell[15, 18]
+          Text[15, 18]
+    TableBody[19, 22]
+      TableRow[19, 22]
+        TableCell[19, 20]
+          Text[19, 20]
+        TableCell[21, 22]
+          Text[21, 22]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+: ---|---
+.
+<p>Abc|Def
+: ---|---</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 17]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+--- :|---
+.
+<p>Abc|Def
+--- :|---</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 17]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|: ---
+.
+<p>Abc|Def
+---|: ---</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 17]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|--- :
+.
+<p>Abc|Def
+---|--- :</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 17]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+1|2|3
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+.
+Document[0, 22]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[16, 19]
+      TableRow[16, 19]
+        TableCell[16, 17]
+          Text[16, 17]
+        TableCell[18, 19]
+          Text[18, 19]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def|Ghi
+---|---|---
+1|2
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th><th>Ghi</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td><td></td></tr>
+</tbody>
+</table>
+.
+Document[0, 28]
+  TableBlock[0, 0]
+    TableHead[0, 11]
+      TableRow[0, 11]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+        TableCell[8, 11]
+          Text[8, 11]
+    TableSeparator[12, 23]
+      TableRow[12, 23]
+        TableCell[12, 15]
+          Text[12, 15]
+        TableCell[16, 19]
+          Text[16, 19]
+        TableCell[20, 23]
+          Text[20, 23]
+    TableBody[24, 25]
+      TableRow[24, 25]
+        TableCell[24, 25]
+          Text[24, 25]
+        TableCell[26, 27]
+          Text[26, 27]
+        TableCell[0, 0]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+> Abc|Def
+> ---|---
+> 1|2
+.
+<blockquote>
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+</blockquote>
+.
+Document[0, 26]
+  BlockQuote[0, 1] marker:[0, 1]
+    TableBlock[0, 0]
+      TableHead[2, 9]
+        TableRow[2, 9]
+          TableCell[2, 5]
+            Text[2, 5]
+          TableCell[6, 9]
+            Text[6, 9]
+      TableSeparator[12, 19]
+        TableRow[12, 19]
+          TableCell[12, 15]
+            Text[12, 15]
+          TableCell[16, 19]
+            Text[16, 19]
+      TableBody[22, 25]
+        TableRow[22, 25]
+          TableCell[22, 23]
+            Text[22, 23]
+          TableCell[24, 25]
+            Text[24, 25]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+Abc|Def
+---|---
+1|2
+table, you are over
+.
+<table>
+<thead>
+<tr><th>Abc</th><th>Def</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>2</td></tr>
+</tbody>
+</table>
+<p>table, you are over</p>
+.
+Document[0, 40]
+  TableBlock[0, 0]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[0, 3]
+          Text[0, 3]
+        TableCell[4, 7]
+          Text[4, 7]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 11]
+          Text[8, 11]
+        TableCell[12, 15]
+          Text[12, 15]
+    TableBody[16, 19]
+      TableRow[16, 19]
+        TableCell[16, 17]
+          Text[16, 17]
+        TableCell[18, 19]
+          Text[18, 19]
+  Paragraph[20, 40]
+    Text[20, 39]
+````````````````````````````````
+
+

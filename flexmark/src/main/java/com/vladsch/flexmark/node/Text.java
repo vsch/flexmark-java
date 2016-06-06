@@ -4,6 +4,11 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.StringSequence;
 
 public class Text extends Node {
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public Text() {
     }
 

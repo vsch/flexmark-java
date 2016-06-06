@@ -13,22 +13,22 @@ public class MailLink extends LinkNode {
     }
 
     protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence content = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
-    public BasedSequence getLeadSegment() {
-        return SubSequence.firstNonNull(openingMarker, content);
-    }
-
     @Override
-    public BasedSequence getTrailSegment() {
-        return SubSequence.firstNonNull(closingMarker, content);
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
-    public MailLink(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+    public BasedSequence getLeadSegment() {
+        return SubSequence.firstNonNull(openingMarker, text);
+    }
+
+    public MailLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;
-        this.content = content;
+        this.text = text;
         this.closingMarker = closingMarker;
     }
 
@@ -40,12 +40,12 @@ public class MailLink extends LinkNode {
         this.openingMarker = openingMarker;
     }
 
-    public BasedSequence getContent() {
-        return content;
+    public BasedSequence getText() {
+        return text;
     }
 
-    public void setContent(BasedSequence content) {
-        this.content = content;
+    public void setText(BasedSequence text) {
+        this.text = text;
     }
 
     public BasedSequence getClosingMarker() {

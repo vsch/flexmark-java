@@ -17,7 +17,7 @@ import java.util.List;
 @State(Scope.Benchmark)
 public class PegDownBenchmark {
 
-    private static final String SPEC = SpecReader.readSpec(null);
+    private static final String SPEC = SpecReader.readSpec();
     private static final List<String> SPEC_EXAMPLES = SpecReader.readExamplesAsString();
     private static final PegDownProcessor PROCESSOR = new PegDownProcessor(Extensions.FENCED_CODE_BLOCKS);
 

@@ -8,6 +8,11 @@ import com.vladsch.flexmark.node.Visitor;
  * Body part of a {@link TableBlock} containing {@link TableRow TableRows}.
  */
 public class TableBody extends CustomNode {
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public TableBody() {
     }
 
@@ -19,5 +24,4 @@ public class TableBody extends CustomNode {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
-
 }

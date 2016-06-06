@@ -15,6 +15,11 @@ public class AutoLink extends LinkNode {
     protected BasedSequence content = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, content, closingMarker };
+    }
+
     public AutoLink(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;

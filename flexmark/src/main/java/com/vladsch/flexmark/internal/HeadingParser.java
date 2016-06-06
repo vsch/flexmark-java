@@ -80,8 +80,9 @@ public class HeadingParser extends AbstractBlockParser {
 
                 HeadingParser headingParser = new HeadingParser(level, content);
                 headingParser.block.setOpeningMarker(openingMarker);
-                headingParser.block.setText(headerText);
+                headingParser.block.setText(headerText.trim());
                 headingParser.block.setClosingMarker(closingMarker);
+                headingParser.block.setCharsFromContent();
 
                 return BlockStart.of(headingParser)
                         .atIndex(line.length());
@@ -98,6 +99,7 @@ public class HeadingParser extends AbstractBlockParser {
                 HeadingParser headingParser = new HeadingParser(level, content);
                 headingParser.block.setText(headingText);
                 headingParser.block.setClosingMarker(closingMarker);
+                headingParser.block.setCharsFromContent();
 
                 return BlockStart.of(headingParser)
                         .atIndex(line.length())

@@ -67,6 +67,10 @@ public class SpecReader {
         return result;
     }
 
+    public static String readSpec() {
+        return readSpec(null);
+    }
+
     public static String readSpec(String specResource) {
         StringBuilder sb = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(specResource), Charset.forName("UTF-8")))) {
@@ -81,10 +85,15 @@ public class SpecReader {
         }
     }
 
+    public static InputStream getSpecInputStream() {
+        return getSpecInputStream(null);
+    }
+
     public static InputStream getSpecInputStream(String specResource) {
-        InputStream stream = SpecReader.class.getResourceAsStream(specResource != null ? specResource : "/spec.txt");
+        String specPath = specResource != null ? specResource : "/spec.txt";
+        InputStream stream = SpecReader.class.getResourceAsStream(specPath);
         if (stream == null) {
-            throw new IllegalStateException("Could not load spec.txt classpath resource");
+            throw new IllegalStateException("Could not load " + specResource + " classpath resource");
         }
 
         return stream;

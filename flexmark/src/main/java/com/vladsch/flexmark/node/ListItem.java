@@ -9,22 +9,17 @@ import java.util.List;
 public class ListItem extends Block {
     protected BasedSequence openingMarker = SubSequence.NULL;
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker };
+    }
+
     public BasedSequence getOpeningMarker() {
         return openingMarker;
     }
 
     public void setOpeningMarker(BasedSequence openingMarker) {
         this.openingMarker = openingMarker;
-    }
-
-    @Override
-    public BasedSequence getLeadSegment() {
-        return openingMarker != SubSequence.NULL ? openingMarker : super.getLeadSegment();
-    }
-
-    @Override
-    public BasedSequence getTrailSegment() {
-        return super.getTrailSegment();
     }
 
     public ListItem() {

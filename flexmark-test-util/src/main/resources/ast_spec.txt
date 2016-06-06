@@ -747,7 +747,7 @@ bar
 <p>bar</p>
 .
 Document[0, 12]
-  Heading[0, 0] marker:[4, 7]
+  Heading[0, 7] marker:[4, 7]
     Text[0, 3]
   Paragraph[8, 12]
     Text[8, 11]
@@ -838,17 +838,17 @@ Simple headings:
 <h6>foo</h6>
 .
 Document[0, 51]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 5] marker:[0, 1]
     Text[2, 5]
-  Heading[0, 0] marker:[6, 8]
+  Heading[6, 12] marker:[6, 8]
     Text[9, 12]
-  Heading[0, 0] marker:[13, 16]
+  Heading[13, 20] marker:[13, 16]
     Text[17, 20]
-  Heading[0, 0] marker:[21, 25]
+  Heading[21, 29] marker:[21, 25]
     Text[26, 29]
-  Heading[0, 0] marker:[30, 35]
+  Heading[30, 39] marker:[30, 35]
     Text[36, 39]
-  Heading[0, 0] marker:[40, 46]
+  Heading[40, 50] marker:[40, 46]
     Text[47, 50]
 ````````````````````````````````
 
@@ -924,7 +924,7 @@ Contents are parsed as inlines:
 <h1>foo <em>bar</em> *baz*</h1>
 .
 Document[0, 20]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 19] marker:[0, 1]
     Text[2, 6]
     Emphasis[6, 11] open:[6, 7] close:[10, 11]
       Text[7, 10]
@@ -940,7 +940,7 @@ Leading and trailing blanks are ignored in parsing inline content:
 <h1>foo</h1>
 .
 Document[0, 44]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 22] marker:[0, 1]
     Text[19, 22]
 ````````````````````````````````
 
@@ -957,11 +957,11 @@ One to three spaces indentation are allowed:
 <h1>foo</h1>
 .
 Document[0, 27]
-  Heading[0, 0] marker:[1, 4]
+  Heading[1, 8] marker:[1, 4]
     Text[5, 8]
-  Heading[0, 0] marker:[11, 13]
+  Heading[11, 17] marker:[11, 13]
     Text[14, 17]
-  Heading[0, 0] marker:[21, 22]
+  Heading[21, 26] marker:[21, 22]
     Text[23, 26]
 ````````````````````````````````
 
@@ -1004,9 +1004,9 @@ A closing sequence of `#` characters is optional:
 <h3>bar</h3>
 .
 Document[0, 29]
-  Heading[0, 0] marker:[0, 2]
+  Heading[0, 9] marker:[0, 2]
     Text[3, 6]
-  Heading[0, 0] marker:[12, 15]
+  Heading[12, 28] marker:[12, 15]
     Text[18, 21]
 ````````````````````````````````
 
@@ -1021,9 +1021,9 @@ It need not be the same length as the opening sequence:
 <h5>foo</h5>
 .
 Document[0, 54]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 40] marker:[0, 1]
     Text[2, 5]
-  Heading[0, 0] marker:[41, 46]
+  Heading[41, 53] marker:[41, 46]
     Text[47, 50]
 ````````````````````````````````
 
@@ -1036,7 +1036,7 @@ Spaces are allowed after the closing sequence:
 <h3>foo</h3>
 .
 Document[0, 17]
-  Heading[0, 0] marker:[0, 3]
+  Heading[0, 11] marker:[0, 3]
     Text[4, 7]
 ````````````````````````````````
 
@@ -1051,7 +1051,7 @@ heading:
 <h3>foo ### b</h3>
 .
 Document[0, 14]
-  Heading[0, 0] marker:[0, 3]
+  Heading[0, 13] marker:[0, 3]
     Text[4, 13]
 ````````````````````````````````
 
@@ -1064,7 +1064,7 @@ The closing sequence must be preceded by a space:
 <h1>foo#</h1>
 .
 Document[0, 7]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 6] marker:[0, 1]
     Text[2, 6]
 ````````````````````````````````
 
@@ -1082,11 +1082,11 @@ of the closing sequence:
 <h1>foo #</h1>
 .
 Document[0, 34]
-  Heading[0, 0] marker:[0, 3]
+  Heading[0, 12] marker:[0, 3]
     Text[4, 12]
-  Heading[0, 0] marker:[13, 15]
+  Heading[13, 24] marker:[13, 15]
     Text[16, 24]
-  Heading[0, 0] marker:[25, 26]
+  Heading[25, 33] marker:[25, 26]
     Text[27, 33]
 ````````````````````````````````
 
@@ -1105,7 +1105,7 @@ lines, and they can interrupt paragraphs:
 .
 Document[0, 17]
   ThematicBreak[0, 4]
-  Heading[0, 0] marker:[5, 7]
+  Heading[5, 11] marker:[5, 7]
     Text[8, 11]
   ThematicBreak[12, 16]
 ````````````````````````````````
@@ -1123,7 +1123,7 @@ Bar foo
 Document[0, 22]
   Paragraph[0, 8]
     Text[0, 7]
-  Heading[0, 0] marker:[8, 9]
+  Heading[8, 13] marker:[8, 9]
     Text[10, 13]
   Paragraph[14, 22]
     Text[14, 21]
@@ -1142,9 +1142,9 @@ ATX headings can be empty:
 <h3></h3>
 .
 Document[0, 14]
-  Heading[0, 0] marker:[0, 2]
-  Heading[0, 0] marker:[4, 5]
-  Heading[0, 0] marker:[6, 9]
+  Heading[0, 3] marker:[0, 2]
+  Heading[4, 5] marker:[4, 5]
+  Heading[6, 13] marker:[6, 9]
 ````````````````````````````````
 
 
@@ -1191,11 +1191,11 @@ Foo *bar*
 <h2>Foo <em>bar</em></h2>
 .
 Document[0, 41]
-  Heading[0, 0] marker:[10, 19]
+  Heading[0, 19] marker:[10, 19]
     Text[0, 4]
     Emphasis[4, 9] open:[4, 5] close:[8, 9]
       Text[5, 8]
-  Heading[0, 0] marker:[31, 40]
+  Heading[21, 40] marker:[31, 40]
     Text[21, 25]
     Emphasis[25, 30] open:[25, 26] close:[29, 30]
       Text[26, 29]
@@ -1213,7 +1213,7 @@ baz*
 baz</em></h1>
 .
 Document[0, 19]
-  Heading[0, 0] marker:[14, 18]
+  Heading[0, 18] marker:[14, 18]
     Text[0, 4]
     Emphasis[4, 13] open:[4, 5] close:[12, 13]
       Text[5, 8]
@@ -1235,9 +1235,9 @@ Foo
 <h1>Foo</h1>
 .
 Document[0, 37]
-  Heading[0, 0] marker:[4, 29]
+  Heading[0, 29] marker:[4, 29]
     Text[0, 3]
-  Heading[0, 0] marker:[35, 36]
+  Heading[31, 36] marker:[35, 36]
     Text[31, 34]
 ````````````````````````````````
 
@@ -1260,11 +1260,11 @@ not line up with the underlining:
 <h1>Foo</h1>
 .
 Document[0, 37]
-  Heading[0, 0] marker:[7, 10]
+  Heading[3, 10] marker:[7, 10]
     Text[3, 6]
-  Heading[0, 0] marker:[18, 23]
+  Heading[14, 23] marker:[18, 23]
     Text[14, 17]
-  Heading[0, 0] marker:[33, 36]
+  Heading[27, 36] marker:[33, 36]
     Text[27, 30]
 ````````````````````````````````
 
@@ -1301,7 +1301,7 @@ Foo
 <h2>Foo</h2>
 .
 Document[0, 18]
-  Heading[0, 0] marker:[7, 11]
+  Heading[0, 11] marker:[7, 11]
     Text[0, 3]
 ````````````````````````````````
 
@@ -1357,7 +1357,7 @@ Foo
 <h2>Foo</h2>
 .
 Document[0, 12]
-  Heading[0, 0] marker:[6, 11]
+  Heading[0, 11] marker:[6, 11]
     Text[0, 3]
 ````````````````````````````````
 
@@ -1371,7 +1371,7 @@ Foo\
 <h2>Foo\</h2>
 .
 Document[0, 10]
-  Heading[0, 0] marker:[5, 9]
+  Heading[0, 9] marker:[5, 9]
     Text[0, 4]
 ````````````````````````````````
 
@@ -1394,11 +1394,11 @@ of dashes"/>
 <p>of dashes&quot;/&gt;</p>
 .
 Document[0, 46]
-  Heading[0, 0] marker:[5, 9]
+  Heading[0, 9] marker:[5, 9]
     Text[0, 4]
   Paragraph[10, 12]
     Text[10, 11]
-  Heading[0, 0] marker:[29, 32]
+  Heading[13, 32] marker:[29, 32]
     Text[13, 28]
   Paragraph[33, 46]
     Text[33, 45]
@@ -1478,7 +1478,7 @@ Bar
 Bar</h2>
 .
 Document[0, 12]
-  Heading[0, 0] marker:[8, 11]
+  Heading[0, 11] marker:[8, 11]
     Text[0, 3]
     SoftLineBreak[3, 4]
     Text[4, 7]
@@ -1503,9 +1503,9 @@ Baz
 .
 Document[0, 24]
   ThematicBreak[0, 3]
-  Heading[0, 0] marker:[8, 11]
+  Heading[4, 11] marker:[8, 11]
     Text[4, 7]
-  Heading[0, 0] marker:[16, 19]
+  Heading[12, 19] marker:[16, 19]
     Text[12, 15]
   Paragraph[20, 24]
     Text[20, 23]
@@ -1602,7 +1602,7 @@ use backslash escapes:
 <h2>&gt; foo</h2>
 .
 Document[0, 14]
-  Heading[0, 0] marker:[7, 13]
+  Heading[0, 13] marker:[7, 13]
     Text[0, 6]
 ````````````````````````````````
 
@@ -1644,7 +1644,7 @@ baz
 Document[0, 17]
   Paragraph[0, 4]
     Text[0, 3]
-  Heading[0, 0] marker:[9, 12]
+  Heading[5, 12] marker:[9, 12]
     Text[5, 8]
   Paragraph[13, 17]
     Text[13, 16]
@@ -1930,10 +1930,10 @@ Heading
 <hr />
 .
 Document[0, 46]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 9] marker:[0, 1]
     Text[2, 9]
   IndentedCodeBlock[14, 18]
-  Heading[0, 0] marker:[26, 32]
+  Heading[18, 32] marker:[26, 32]
     Text[18, 25]
   IndentedCodeBlock[37, 41]
   ThematicBreak[41, 45]
@@ -2044,7 +2044,7 @@ Here is a simple example with backticks:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
+  FencedCodeBlock[0, 12] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -2061,7 +2061,7 @@ With tildes:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
+  FencedCodeBlock[0, 12] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -2079,7 +2079,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
+  FencedCodeBlock[0, 15] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -2094,7 +2094,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
+  FencedCodeBlock[0, 15] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -2111,7 +2111,7 @@ aaa
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[4, 5] open:[0, 4] info:[0, 0] close:[13, 19]
+  FencedCodeBlock[0, 19] open:[0, 4] info:[0, 0] close:[13, 19]
 ````````````````````````````````
 
 
@@ -2126,7 +2126,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[4, 5] open:[0, 4] info:[0, 0] close:[13, 17]
+  FencedCodeBlock[0, 17] open:[0, 4] info:[0, 0] close:[13, 17]
 ````````````````````````````````
 
 
@@ -2139,7 +2139,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[0, 0]
+  FencedCodeBlock[0, 3] open:[0, 3] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2155,7 +2155,7 @@ aaa
 </code></pre>
 .
 Document[0, 15]
-  FencedCodeBlock[5, 6] open:[0, 5] info:[0, 0] close:[0, 0]
+  FencedCodeBlock[0, 5] open:[0, 5] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2172,8 +2172,8 @@ bbb
 <p>bbb</p>
 .
 Document[0, 17]
-  BlockQuote[0, 6] marker:[0, 1]
-    FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[0, 0]
+  BlockQuote[0, 5] marker:[0, 1]
+    FencedCodeBlock[2, 5] open:[2, 5] info:[0, 0] close:[0, 0]
   Paragraph[13, 17]
     Text[13, 16]
 ````````````````````````````````
@@ -2192,7 +2192,7 @@ A code block can have all empty lines as its content:
 </code></pre>
 .
 Document[0, 12]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[8, 11]
+  FencedCodeBlock[0, 11] open:[0, 3] info:[0, 0] close:[8, 11]
 ````````````````````````````````
 
 
@@ -2205,7 +2205,7 @@ A code block can be empty:
 <pre><code></code></pre>
 .
 Document[0, 8]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[4, 7]
+  FencedCodeBlock[0, 7] open:[0, 3] info:[0, 0] close:[4, 7]
 ````````````````````````````````
 
 
@@ -2224,7 +2224,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[4, 5] open:[1, 4] info:[0, 0] close:[14, 17]
+  FencedCodeBlock[1, 17] open:[1, 4] info:[0, 0] close:[14, 17]
 ````````````````````````````````
 
 
@@ -2241,7 +2241,7 @@ aaa
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[22, 25]
+  FencedCodeBlock[2, 25] open:[2, 5] info:[0, 0] close:[22, 25]
 ````````````````````````````````
 
 
@@ -2258,7 +2258,7 @@ aaa
 </code></pre>
 .
 Document[0, 35]
-  FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[31, 34]
+  FencedCodeBlock[3, 34] open:[3, 6] info:[0, 0] close:[31, 34]
 ````````````````````````````````
 
 
@@ -2291,7 +2291,7 @@ aaa
 </code></pre>
 .
 Document[0, 14]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[10, 13]
+  FencedCodeBlock[0, 13] open:[0, 3] info:[0, 0] close:[10, 13]
 ````````````````````````````````
 
 
@@ -2304,7 +2304,7 @@ aaa
 </code></pre>
 .
 Document[0, 17]
-  FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[13, 16]
+  FencedCodeBlock[3, 16] open:[3, 6] info:[0, 0] close:[13, 16]
 ````````````````````````````````
 
 
@@ -2320,7 +2320,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[0, 0]
+  FencedCodeBlock[0, 3] open:[0, 3] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2352,7 +2352,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[6, 7] open:[0, 6] info:[0, 0] close:[0, 0]
+  FencedCodeBlock[0, 6] open:[0, 6] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2374,7 +2374,7 @@ baz
 Document[0, 20]
   Paragraph[0, 4]
     Text[0, 3]
-  FencedCodeBlock[7, 8] open:[4, 7] info:[0, 0] close:[12, 15]
+  FencedCodeBlock[4, 15] open:[4, 7] info:[0, 0] close:[12, 15]
   Paragraph[16, 20]
     Text[16, 19]
 ````````````````````````````````
@@ -2397,10 +2397,10 @@ bar
 <h1>baz</h1>
 .
 Document[0, 26]
-  Heading[0, 0] marker:[4, 7]
+  Heading[0, 7] marker:[4, 7]
     Text[0, 3]
-  FencedCodeBlock[11, 12] open:[8, 11] info:[0, 0] close:[16, 19]
-  Heading[0, 0] marker:[20, 21]
+  FencedCodeBlock[8, 19] open:[8, 11] info:[0, 0] close:[16, 19]
+  Heading[20, 25] marker:[20, 21]
     Text[22, 25]
 ````````````````````````````````
 
@@ -2423,7 +2423,7 @@ end
 </code></pre>
 .
 Document[0, 38]
-  FencedCodeBlock[3, 8] open:[0, 3] info:[3, 7] close:[34, 37]
+  FencedCodeBlock[0, 37] open:[0, 3] info:[3, 7] close:[34, 37]
 ````````````````````````````````
 
 
@@ -2440,7 +2440,7 @@ end
 </code></pre>
 .
 Document[0, 65]
-  FencedCodeBlock[4, 31] open:[0, 4] info:[8, 30] close:[57, 64]
+  FencedCodeBlock[0, 64] open:[0, 4] info:[8, 30] close:[57, 64]
 ````````````````````````````````
 
 
@@ -2451,7 +2451,7 @@ Document[0, 65]
 <pre><code class="language-;"></code></pre>
 .
 Document[0, 11]
-  FencedCodeBlock[4, 6] open:[0, 4] info:[4, 5] close:[6, 10]
+  FencedCodeBlock[0, 10] open:[0, 4] info:[4, 5] close:[6, 10]
 ````````````````````````````````
 
 
@@ -2483,7 +2483,7 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[12, 15]
+  FencedCodeBlock[0, 15] open:[0, 3] info:[0, 0] close:[12, 15]
 ````````````````````````````````
 
 
@@ -3730,7 +3730,7 @@ a code block:
 <p>[foo]</p>
 .
 Document[0, 27]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[16, 19]
+  FencedCodeBlock[0, 19] open:[0, 3] info:[0, 0] close:[16, 19]
   Paragraph[21, 27]
     Text[21, 26]
 ````````````````````````````````
@@ -3772,7 +3772,7 @@ and thematic breaks, and it need not be followed by a blank line.
 </blockquote>
 .
 Document[0, 26]
-  Heading[0, 0] marker:[0, 1]
+  Heading[0, 7] marker:[0, 1]
     LinkRef[0, 0] open:[0, 0] close:[6, 7]
       Text[3, 6]
   BlockQuote[20, 26] marker:[20, 21]
@@ -3831,7 +3831,7 @@ Document[0, 21]
   Paragraph[0, 6]
     LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
-  BlockQuote[0, 0] marker:[7, 8]
+  BlockQuote[7, 8] marker:[7, 8]
 ````````````````````````````````
 
 
@@ -4023,7 +4023,7 @@ aaa
 Document[0, 22]
   Paragraph[4, 8]
     Text[4, 7]
-  Heading[0, 0] marker:[12, 13]
+  Heading[12, 17] marker:[12, 13]
     Text[14, 17]
 ````````````````````````````````
 
@@ -4092,7 +4092,7 @@ baz</p>
 .
 Document[0, 20]
   BlockQuote[0, 20] marker:[0, 1]
-    Heading[0, 0] marker:[2, 3]
+    Heading[2, 7] marker:[2, 3]
       Text[4, 7]
     Paragraph[10, 20]
       Text[10, 19]
@@ -4116,7 +4116,7 @@ baz</p>
 .
 Document[0, 18]
   BlockQuote[0, 18] marker:[0, 1]
-    Heading[0, 0] marker:[1, 2]
+    Heading[1, 6] marker:[1, 2]
       Text[3, 6]
     Paragraph[8, 18]
       Text[8, 17]
@@ -4140,7 +4140,7 @@ baz</p>
 .
 Document[0, 27]
   BlockQuote[3, 27] marker:[3, 4]
-    Heading[0, 0] marker:[5, 6]
+    Heading[5, 10] marker:[5, 6]
       Text[7, 10]
     Paragraph[16, 27]
       Text[16, 26]
@@ -4182,7 +4182,7 @@ baz</p>
 .
 Document[0, 18]
   BlockQuote[0, 18] marker:[0, 1]
-    Heading[0, 0] marker:[2, 3]
+    Heading[2, 7] marker:[2, 3]
       Text[4, 7]
     Paragraph[10, 18]
       Text[10, 13]
@@ -4312,11 +4312,11 @@ foo
 <pre><code></code></pre>
 .
 Document[0, 14]
-  BlockQuote[0, 6] marker:[0, 1]
-    FencedCodeBlock[5, 6] open:[2, 5] info:[0, 0] close:[0, 0]
+  BlockQuote[0, 5] marker:[0, 1]
+    FencedCodeBlock[2, 5] open:[2, 5] info:[0, 0] close:[0, 0]
   Paragraph[6, 10]
     Text[6, 9]
-  FencedCodeBlock[13, 14] open:[10, 13] info:[0, 0] close:[0, 0]
+  FencedCodeBlock[10, 13] open:[10, 13] info:[0, 0] close:[0, 0]
 ````````````````````````````````
 
 
@@ -4361,7 +4361,7 @@ A block quote can be empty:
 </blockquote>
 .
 Document[0, 2]
-  BlockQuote[0, 0] marker:[0, 1]
+  BlockQuote[0, 1] marker:[0, 1]
 ````````````````````````````````
 
 
@@ -4374,7 +4374,7 @@ Document[0, 2]
 </blockquote>
 .
 Document[0, 9]
-  BlockQuote[0, 0] marker:[0, 1]
+  BlockQuote[0, 1] marker:[0, 1]
 ````````````````````````````````
 
 
@@ -5011,15 +5011,15 @@ Document[0, 97]
         Text[16, 19]
   Paragraph[24, 28]
     Text[24, 27]
-  BulletList[29, 71]
-    ListItem[29, 35] open:[29, 30]
-      FencedCodeBlock[34, 35] open:[31, 34] info:[0, 0] close:[51, 54]
-    ListItem[56, 71] open:[56, 57]
+  BulletList[29, 96]
+    ListItem[29, 54] open:[29, 30]
+      FencedCodeBlock[31, 54] open:[31, 34] info:[0, 0] close:[51, 54]
+    ListItem[56, 96] open:[56, 57]
       Paragraph[58, 62]
         Text[58, 61]
-      BulletList[65, 71]
-        ListItem[65, 71] open:[65, 66]
-          FencedCodeBlock[70, 71] open:[67, 70] info:[0, 0] close:[93, 96]
+      BulletList[65, 96]
+        ListItem[65, 96] open:[65, 66]
+          FencedCodeBlock[67, 96] open:[67, 70] info:[0, 0] close:[93, 96]
 ````````````````````````````````
 
 
@@ -5053,7 +5053,7 @@ Document[0, 53]
     ListItem[0, 53] open:[0, 2]
       Paragraph[4, 8]
         Text[4, 7]
-      FencedCodeBlock[16, 17] open:[13, 16] info:[0, 0] close:[29, 32]
+      FencedCodeBlock[13, 32] open:[13, 16] info:[0, 0] close:[29, 32]
       Paragraph[38, 42]
         Text[38, 41]
       BlockQuote[47, 53] marker:[47, 48]
@@ -5451,8 +5451,8 @@ Document[0, 40]
     ListItem[0, 8] open:[0, 1]
       Paragraph[4, 8]
         Text[4, 7]
-    ListItem[8, 16] open:[8, 9]
-      FencedCodeBlock[15, 16] open:[12, 15] info:[0, 0] close:[24, 27]
+    ListItem[8, 27] open:[8, 9]
+      FencedCodeBlock[12, 27] open:[12, 15] info:[0, 0] close:[24, 27]
     ListItem[28, 40] open:[28, 29]
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
@@ -5473,8 +5473,8 @@ item:
 <p>foo</p>
 .
 Document[0, 9]
-  BulletList[0, 0]
-    ListItem[0, 0] open:[0, 1]
+  BulletList[0, 1]
+    ListItem[0, 1] open:[0, 1]
   Paragraph[5, 9]
     Text[5, 8]
 ````````````````````````````````
@@ -5498,7 +5498,7 @@ Document[0, 14]
     ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[0, 0] open:[6, 7]
+    ListItem[6, 7] open:[6, 7]
     ListItem[8, 14] open:[8, 9]
       Paragraph[10, 14]
         Text[10, 13]
@@ -5523,7 +5523,7 @@ Document[0, 17]
     ListItem[0, 6] open:[0, 1]
       Paragraph[2, 6]
         Text[2, 5]
-    ListItem[0, 0] open:[6, 7]
+    ListItem[6, 7] open:[6, 7]
     ListItem[11, 17] open:[11, 12]
       Paragraph[13, 17]
         Text[13, 16]
@@ -5548,7 +5548,7 @@ Document[0, 17]
     ListItem[0, 7] open:[0, 2]
       Paragraph[3, 7]
         Text[3, 6]
-    ListItem[0, 0] open:[7, 9]
+    ListItem[7, 9] open:[7, 9]
     ListItem[10, 17] open:[10, 12]
       Paragraph[13, 17]
         Text[13, 16]
@@ -5565,8 +5565,8 @@ A list may start or end with an empty list item:
 </ul>
 .
 Document[0, 2]
-  BulletList[0, 0]
-    ListItem[0, 0] open:[0, 1]
+  BulletList[0, 1]
+    ListItem[0, 1] open:[0, 1]
 ````````````````````````````````
 
 
@@ -6020,12 +6020,12 @@ baz</li>
 </ul>
 .
 Document[0, 26]
-  BulletList[0, 0]
-    ListItem[0, 0] open:[0, 1]
-      Heading[0, 0] marker:[2, 3]
+  BulletList[0, 26]
+    ListItem[0, 7] open:[0, 1]
+      Heading[2, 7] marker:[2, 3]
         Text[4, 7]
     ListItem[8, 26] open:[8, 9]
-      Heading[0, 0] marker:[16, 19]
+      Heading[10, 19] marker:[16, 19]
         Text[10, 13]
       Paragraph[22, 26]
         Text[22, 25]
@@ -6749,7 +6749,7 @@ Document[0, 11]
     ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[0, 0] open:[4, 5]
+    ListItem[4, 5] open:[4, 5]
     ListItem[7, 11] open:[7, 8]
       Paragraph[9, 11]
         Text[9, 10]
@@ -6856,8 +6856,8 @@ Document[0, 26]
     ListItem[0, 4] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
-    ListItem[4, 10] open:[4, 5]
-      FencedCodeBlock[9, 10] open:[6, 9] info:[0, 0] close:[18, 21]
+    ListItem[4, 21] open:[4, 5]
+      FencedCodeBlock[6, 21] open:[6, 9] info:[0, 0] close:[18, 21]
     ListItem[22, 26] open:[22, 23]
       Paragraph[24, 26]
         Text[24, 25]
@@ -6960,13 +6960,13 @@ are not separated by blank lines:
 .
 Document[0, 30]
   BulletList[0, 30]
-    ListItem[0, 16] open:[0, 1]
+    ListItem[0, 25] open:[0, 1]
       Paragraph[2, 4]
         Text[2, 3]
       BlockQuote[6, 10] marker:[6, 7]
         Paragraph[8, 10]
           Text[8, 9]
-      FencedCodeBlock[15, 16] open:[12, 15] info:[0, 0] close:[22, 25]
+      FencedCodeBlock[12, 25] open:[12, 15] info:[0, 0] close:[22, 25]
     ListItem[26, 30] open:[26, 27]
       Paragraph[28, 30]
         Text[28, 29]
@@ -7035,7 +7035,7 @@ two block elements in the list item:
 Document[0, 29]
   OrderedList[0, 29]
     ListItem[0, 29] open:[0, 2]
-      FencedCodeBlock[6, 7] open:[3, 6] info:[0, 0] close:[17, 20]
+      FencedCodeBlock[3, 20] open:[3, 6] info:[0, 0] close:[17, 20]
       Paragraph[25, 29]
         Text[25, 28]
 ````````````````````````````````
@@ -7282,7 +7282,7 @@ Document[0, 9]
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[3, 4] open:[0, 3] info:[0, 0] close:[9, 12]
+  FencedCodeBlock[0, 12] open:[0, 3] info:[0, 0] close:[9, 12]
 ````````````````````````````````
 
 
@@ -7345,7 +7345,7 @@ foo
 </code></pre>
 .
 Document[0, 21]
-  FencedCodeBlock[3, 13] open:[0, 3] info:[4, 12] close:[17, 20]
+  FencedCodeBlock[0, 20] open:[0, 3] info:[4, 12] close:[17, 20]
 ````````````````````````````````
 
 
@@ -7543,7 +7543,7 @@ foo
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[3, 18] open:[0, 3] info:[4, 17] close:[22, 25]
+  FencedCodeBlock[0, 25] open:[0, 3] info:[4, 17] close:[22, 25]
 ````````````````````````````````
 
 
@@ -8250,8 +8250,8 @@ A newline also counts as whitespace:
 Document[0, 11]
   Paragraph[0, 9]
     Text[0, 8]
-  BulletList[0, 0]
-    ListItem[0, 0] open:[9, 10]
+  BulletList[9, 10]
+    ListItem[9, 10] open:[9, 10]
 ````````````````````````````````
 
 
@@ -11125,7 +11125,6 @@ Document[0, 31]
   Paragraph[0, 10]
     LinkRef[0, 0] open:[0, 0] close:[4, 5]
       Text[1, 4]
-    Text[5, 6]
     SoftLineBreak[6, 7]
     Text[7, 9]
 ````````````````````````````````
@@ -11371,20 +11370,19 @@ Document[0, 21]
 
 
 ```````````````````````````````` example
-![foo *bar*]Disconnected from the target VM, address: '127.0.0.1:60137', transport: 'socket'
+![foo *bar*]
 
 
 [foo *bar*]: train.jpg "train & tracks"
 .
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
-Document[0, 135]
-  Paragraph[0, 93]
+Document[0, 55]
+  Paragraph[0, 13]
     ImageRef[0, 0] open:[0, 0] close:[11, 12]
       Text[2, 6]
       Emphasis[6, 11] open:[6, 7] close:[10, 11]
         Text[7, 10]
-    Text[12, 92]
 ````````````````````````````````
 
 
@@ -11597,7 +11595,6 @@ Document[0, 32]
   Paragraph[0, 11]
     ImageRef[0, 0] open:[0, 0] close:[5, 6]
       Text[2, 5]
-    Text[6, 7]
     SoftLineBreak[7, 8]
     Text[8, 10]
 ````````````````````````````````
@@ -12546,7 +12543,7 @@ Document[0, 6]
 <h3>foo\</h3>
 .
 Document[0, 9]
-  Heading[0, 0] marker:[0, 3]
+  Heading[0, 8] marker:[0, 3]
     Text[4, 8]
 ````````````````````````````````
 
@@ -12557,7 +12554,7 @@ Document[0, 9]
 <h3>foo</h3>
 .
 Document[0, 10]
-  Heading[0, 0] marker:[0, 3]
+  Heading[0, 7] marker:[0, 3]
     Text[4, 7]
 ````````````````````````````````
 
@@ -12908,7 +12905,6 @@ through the stack for an opening `[` or `![` delimiter.
   delimiter from the stack, and return a literal text node `]`.
 
 - If we find one and it's active, then we parse ahead to see if
-Disconnected from the target VM, address: '127.0.0.1:60610', transport: 'socket'
   we have an inline link/image, reference link/image, compact reference
   link/image, or shortcut reference link/image.
 
@@ -12987,4 +12983,3 @@ closers:
 
 After we're done, we remove all delimiters above `stack_bottom` from the
 delimiter stack.
-

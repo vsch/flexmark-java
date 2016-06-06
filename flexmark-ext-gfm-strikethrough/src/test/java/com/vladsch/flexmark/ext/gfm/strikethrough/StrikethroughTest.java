@@ -56,14 +56,12 @@ public class StrikethroughTest extends RenderingTestCase {
 
     @Test
     public void strikethroughWholeParagraphWithOtherDelimiters() {
-        assertRendering("~~Paragraph with *emphasis* and __strong emphasis__~~",
-                "<p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>\n");
+        assertRendering("~~Paragraph with *emphasis* and __strong emphasis__~~", "<p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>\n");
     }
 
     @Test
     public void insideBlockQuote() {
-        assertRendering("> strike ~~that~~",
-                "<blockquote>\n<p>strike <del>that</del></p>\n</blockquote>\n");
+        assertRendering("> strike ~~that~~", "<blockquote>\n<p>strike <del>that</del></p>\n</blockquote>\n");
     }
 
     @Test

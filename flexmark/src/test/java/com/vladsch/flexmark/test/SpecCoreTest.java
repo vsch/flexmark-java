@@ -55,7 +55,7 @@ public class SpecCoreTest extends SpecTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        List<SpecExample> examples = SpecReader.readExamples("/commonmark_ast_spec.txt");
+        List<SpecExample> examples = SpecReader.readExamples("/ast_spec.txt");
         List<Object[]> data = new ArrayList<>();
         for (SpecExample example : examples) {
             data.add(new Object[] { example });

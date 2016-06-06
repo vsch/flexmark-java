@@ -7,6 +7,11 @@ import java.util.List;
 
 public class IndentedCodeBlock extends Block {
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public IndentedCodeBlock() {
     }
 

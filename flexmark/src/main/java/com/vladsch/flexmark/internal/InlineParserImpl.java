@@ -407,8 +407,12 @@ public class InlineParserImpl implements InlineParser {
             Matcher matcher = FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
-            if (spaces >= 2) {
-                lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
+            if (spaces > 0) {
+                if (literal.length() > spaces) {
+                    lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
+                } else {
+                    lastChild.unlink();
+                }
             }
         } else {
             appendNode(new SoftLineBreak(input.subSequence(index - 1, index)));

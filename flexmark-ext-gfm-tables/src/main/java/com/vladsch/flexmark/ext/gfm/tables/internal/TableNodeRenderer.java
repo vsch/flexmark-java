@@ -23,6 +23,7 @@ public class TableNodeRenderer implements NodeRenderer {
         return new HashSet<Class<? extends Node>>(Arrays.asList(
                 TableBlock.class,
                 TableHead.class,
+                TableSeparator.class,
                 TableBody.class,
                 TableRow.class,
                 TableCell.class
@@ -35,6 +36,8 @@ public class TableNodeRenderer implements NodeRenderer {
             renderBlock((TableBlock) node);
         } else if (node instanceof TableHead) {
             renderHead((TableHead) node);
+        } else if (node instanceof TableSeparator) {
+            renderSeparator((TableSeparator) node);
         } else if (node instanceof TableBody) {
             renderBody((TableBody) node);
         } else if (node instanceof TableRow) {
@@ -58,6 +61,10 @@ public class TableNodeRenderer implements NodeRenderer {
         renderChildren(tableHead);
         htmlWriter.tag("/thead");
         htmlWriter.line();
+    }
+
+    private void renderSeparator(TableSeparator tableSeparator) {
+        
     }
 
     private void renderBody(TableBody tableBody) {

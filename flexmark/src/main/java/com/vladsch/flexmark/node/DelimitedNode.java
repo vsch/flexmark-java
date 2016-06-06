@@ -5,8 +5,8 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 public interface DelimitedNode {
     BasedSequence getOpeningMarker();
     void setOpeningMarker(BasedSequence openingMarker);
-    BasedSequence getContent();
-    void setContent(BasedSequence content);
+    BasedSequence getText();
+    void setText(BasedSequence text);
     BasedSequence getClosingMarker();
     void setClosingMarker(BasedSequence closingMarker);
 }

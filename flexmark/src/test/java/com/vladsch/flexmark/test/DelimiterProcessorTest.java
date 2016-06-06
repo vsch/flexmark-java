@@ -76,8 +76,13 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
     private static class UpperCaseNode extends CustomNode implements DelimitedNode {
         protected BasedSequence openingMarker = SubSequence.EMPTY;
-        protected BasedSequence content = SubSequence.EMPTY;
+        protected BasedSequence text = SubSequence.EMPTY;
         protected BasedSequence closingMarker = SubSequence.EMPTY;
+        
+        @Override
+        public BasedSequence[] getSegments() {
+            return new BasedSequence[] { openingMarker, text, closingMarker };
+        }
 
         public UpperCaseNode() {
         }
@@ -86,10 +91,10 @@ public class DelimiterProcessorTest extends RenderingTestCase {
             super(chars);
         }
 
-        public UpperCaseNode(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
+        public UpperCaseNode(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
             super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
             this.openingMarker = openingMarker;
-            this.content = content;
+            this.text = text;
             this.closingMarker = closingMarker;
         }
 
@@ -101,12 +106,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
             this.openingMarker = openingMarker;
         }
 
-        public BasedSequence getContent() {
-            return content;
+        public BasedSequence getText() {
+            return text;
         }
 
-        public void setContent(BasedSequence content) {
-            this.content = content;
+        public void setText(BasedSequence text) {
+            this.text = text;
         }
 
         public BasedSequence getClosingMarker() {

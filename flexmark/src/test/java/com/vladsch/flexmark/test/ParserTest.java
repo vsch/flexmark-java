@@ -23,13 +23,13 @@ public class ParserTest {
     public void ioReaderTest() throws IOException {
         Parser parser = Parser.builder().build();
 
-        InputStream input1 = SpecReader.getSpecInputStream(null);
+        InputStream input1 = SpecReader.getSpecInputStream();
         Node document1;
         try (InputStreamReader reader = new InputStreamReader(input1)) {
             document1 = parser.parseReader(reader);
         }
 
-        String spec = SpecReader.readSpec(null);
+        String spec = SpecReader.readSpec();
         Node document2 = parser.parse(spec);
 
         HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
@@ -78,6 +78,10 @@ public class ParserTest {
     }
 
     private static class DashBlock extends CustomBlock {
+        @Override
+        public BasedSequence[] getSegments() {
+            return EMPTY_SEGMENTS;
+        }
     }
 
     private static class DashBlockParser extends AbstractBlockParser {

@@ -8,8 +8,13 @@ import java.util.List;
 public class FencedCodeBlock extends Block {
     private int fenceIndent;
     private BasedSequence openingMarker = SubSequence.NULL;
-    private BasedSequence closingMarker = SubSequence.NULL;
     private BasedSequence info = SubSequence.NULL;
+    private BasedSequence closingMarker = SubSequence.NULL;
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, info, closingMarker };
+    }
 
     public FencedCodeBlock() {
     }

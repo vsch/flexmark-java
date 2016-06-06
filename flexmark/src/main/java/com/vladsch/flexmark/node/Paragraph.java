@@ -6,6 +6,11 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import java.util.List;
 
 public class Paragraph extends Block {
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public Paragraph() {
     }
 

@@ -12,6 +12,11 @@ public class TableCell extends CustomNode {
     private boolean header;
     private Alignment alignment;
 
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
     public TableCell() {
     }
 

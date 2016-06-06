@@ -91,6 +91,8 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         } else {
             block.setContent(content);
         }
+        
+        block.setCharsFromContent();
         content = null;
     }
 

@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
 
 public abstract class Node {
+    final static public BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
 
     private Node parent = null;
     private Node firstChild = null;
@@ -154,22 +155,87 @@ public abstract class Node {
         return "";
     }
 
-    public BasedSequence getLeadSegment() {
-        return getFirstChild() != null ? getFirstChild().getChars() : SubSequence.NULL;
+    public abstract BasedSequence[] getSegments();
+
+    public static BasedSequence getLeadSegment(BasedSequence[] segments) {
+        for (BasedSequence segment : segments) {
+            if (segment != null && segment != SubSequence.NULL) return segment;
+        }
+
+        return SubSequence.NULL;
     }
 
-    public BasedSequence getTrailSegment() {
-        return getLastChild() != null ? getLastChild().getChars() : SubSequence.NULL;
+    public static BasedSequence getTrailSegment(BasedSequence[] segments) {
+        int iMax = segments.length;
+
+        for (int i = iMax; i-- > 0; ) {
+            BasedSequence segment = segments[i];
+            if (segment != null && segment != SubSequence.NULL) return segment;
+        }
+
+        return SubSequence.NULL;
+    }
+
+    public static BasedSequence spanningChars(BasedSequence... segments) {
+        int startOffset = Integer.MAX_VALUE;
+        int endOffset = 0;
+        BasedSequence firstSequence = null;
+        BasedSequence lastSequence = null;
+        for (BasedSequence segment : segments) {
+            if (segment != null && segment != SubSequence.NULL) {
+                if (startOffset > segment.getStartOffset()) {
+                    startOffset = segment.getStartOffset();
+                    firstSequence = segment;
+                }
+
+                if (endOffset <= segment.getEndOffset()) {
+                    endOffset = segment.getEndOffset();
+                    lastSequence = segment;
+                }
+            }
+        }
+
+        if (firstSequence != null && lastSequence != null) {
+            return firstSequence.baseSubSequence(firstSequence.getStartOffset(), lastSequence.getEndOffset());
+        } else {
+            return SubSequence.NULL;
+        }
     }
 
     public void setCharsFromContent() {
-        BasedSequence leadSegment = getLeadSegment();
-        BasedSequence trailSegment = getTrailSegment();
+        BasedSequence[] segments = getSegments();
+        if (segments.length > 0) {
+            BasedSequence leadSegment = getLeadSegment(segments);
+            BasedSequence trailSegment = getTrailSegment(segments);
 
-        if (leadSegment != SubSequence.NULL && trailSegment != SubSequence.NULL) {
-            int startOffset = leadSegment.getStartOffset();
-            int endOffset = trailSegment.getEndOffset();
-            setChars(leadSegment.baseSubSequence(startOffset > endOffset ? endOffset : startOffset, endOffset));
+            if (firstChild == null || lastChild == null) {
+                BasedSequence[] sequences = new BasedSequence[] {
+                        leadSegment,
+                        trailSegment
+                };
+
+                setChars(spanningChars(sequences));
+            } else {
+                BasedSequence[] sequences = new BasedSequence[] {
+                        leadSegment,
+                        trailSegment,
+                        firstChild.chars,
+                        lastChild.chars
+                };
+
+                setChars(spanningChars(sequences));
+            }
+        } else if (firstChild != null && lastChild != null) {
+            BasedSequence[] sequences = new BasedSequence[] {
+                    firstChild.chars,
+                    lastChild.chars
+            };
+
+            setChars(spanningChars(sequences));
         }
+    }
+
+    protected BasedSequence deNullify(BasedSequence nullable) {
+        return nullable == null ? SubSequence.NULL : nullable;
     }
 }

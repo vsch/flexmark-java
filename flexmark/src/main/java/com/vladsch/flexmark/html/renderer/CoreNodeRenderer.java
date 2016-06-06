@@ -192,7 +192,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     public void visit(Code code) {
         // TODO: collapse multiple spaces into 1
         html.tag("code");
-        html.text(Escaping.collapseWhitespace(code.getContent(), true));
+        html.text(Escaping.collapseWhitespace(code.getText(), true));
         html.tag("/code");
     }
 
@@ -240,7 +240,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     public void visit(MailLink mailLink) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getContent().toString()));
+        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getText().toString()));
         attrs.put("href", "mailto:" + url);
         html.tag("a", getAttrs(mailLink, attrs));
         html.text(url);

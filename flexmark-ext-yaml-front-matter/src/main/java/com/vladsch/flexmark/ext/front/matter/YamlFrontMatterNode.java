@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.front.matter;
 
+import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.Visitor;
 
@@ -8,6 +9,11 @@ import java.util.List;
 public class YamlFrontMatterNode extends CustomNode {
     private String key;
     private List<String> values;
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
 
     public YamlFrontMatterNode(String key, List<String> values) {
         this.key = key;

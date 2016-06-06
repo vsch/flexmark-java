@@ -17,13 +17,20 @@ public abstract class InlineLinkNode extends LinkNode {
     protected BasedSequence linkClosingMarker = SubSequence.NULL;
 
     @Override
-    public BasedSequence getLeadSegment() {
-        return textOpeningMarker;
-    }
-
-    @Override
-    public BasedSequence getTrailSegment() {
-        return linkClosingMarker;
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] {
+                textOpeningMarker,
+                text,
+                textClosingMarker,
+                linkOpeningMarker,
+                urlOpeningMarker,
+                url,
+                urlClosingMarker,
+                titleOpeningMarker,
+                title,
+                titleClosingMarker,
+                linkClosingMarker
+        };
     }
 
     public InlineLinkNode() {

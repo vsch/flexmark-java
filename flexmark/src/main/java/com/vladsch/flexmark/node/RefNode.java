@@ -12,14 +12,17 @@ public abstract class RefNode extends LinkNode {
     public BasedSequence referenceClosingMarker = SubSequence.NULL;
 
     @Override
-    public BasedSequence getLeadSegment() {
-        return textOpeningMarker;
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] {
+                textOpeningMarker,
+                text,
+                textClosingMarker,
+                referenceOpeningMarker,
+                reference,
+                referenceClosingMarker
+        };
     }
 
-    @Override
-    public BasedSequence getTrailSegment() {
-        return SubSequence.firstNonNull(referenceClosingMarker, textClosingMarker);
-    }
 
     public String linkUrl = "";
     public String linkText = "";

@@ -119,7 +119,7 @@ public class ListBlockParser extends AbstractBlockParser {
         String bullet = matcher.group(1);
         if (bullet != null) {
             BulletList bulletList = new BulletList();
-            bulletList.setBulletMarker(bullet.charAt(0));
+            bulletList.setOpeningMarker(bullet.charAt(0));
             return bulletList;
         } else {
             String digit = matcher.group(2);
@@ -138,7 +138,7 @@ public class ListBlockParser extends AbstractBlockParser {
      */
     private static boolean listsMatch(ListBlock a, ListBlock b) {
         if (a instanceof BulletList && b instanceof BulletList) {
-            return equals(((BulletList) a).getBulletMarker(), ((BulletList) b).getBulletMarker());
+            return equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker());
         } else if (a instanceof OrderedList && b instanceof OrderedList) {
             return equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter());
         }

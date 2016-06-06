@@ -18,8 +18,8 @@ import static org.junit.Assert.assertThat;
 public class TablesTest extends RenderingTestCase {
 
     private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create());
-    private static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+    static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     @Test
     public void mustHaveHeaderAndSeparator() {
