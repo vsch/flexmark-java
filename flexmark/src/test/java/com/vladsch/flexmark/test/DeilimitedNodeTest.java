@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SegmentedTest {
+public class DeilimitedNodeTest {
 
     @Test
     public void emphasisDelimiters() {

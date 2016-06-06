@@ -268,6 +268,8 @@ by spaces with a tab stop of 4 characters.
 <pre><code>foo→baz→→bim
 </code></pre>
 .
+Document[0, 14]
+  IndentedCodeBlock[1, 14]
 ````````````````````````````````
 
 
@@ -277,6 +279,8 @@ by spaces with a tab stop of 4 characters.
 <pre><code>foo→baz→→bim
 </code></pre>
 .
+Document[0, 16]
+  IndentedCodeBlock[3, 16]
 ````````````````````````````````
 
 
@@ -288,6 +292,8 @@ by spaces with a tab stop of 4 characters.
 ὐ→a
 </code></pre>
 .
+Document[0, 16]
+  IndentedCodeBlock[4, 16]
 ````````````````````````````````
 
 
@@ -303,6 +309,13 @@ by spaces with a tab stop of 4 characters.
 </li>
 </ul>
 .
+Document[0, 14]
+  BulletList[4, 14]
+    ListItem[4, 14]
+      Paragraph[4, 8]
+        Text[4, 7]
+      Paragraph[10, 14]
+        Text[10, 13]
 ````````````````````````````````
 
 ```````````````````````````````` example
@@ -318,6 +331,12 @@ by spaces with a tab stop of 4 characters.
 </li>
 </ul>
 .
+Document[0, 13]
+  BulletList[2, 13]
+    ListItem[2, 13]
+      Paragraph[2, 6]
+        Text[2, 5]
+      IndentedCodeBlock[9, 13]
 ````````````````````````````````
 
 ```````````````````````````````` example
@@ -328,6 +347,9 @@ by spaces with a tab stop of 4 characters.
 </code></pre>
 </blockquote>
 .
+Document[0, 7]
+  BlockQuote[0, 7]
+    IndentedCodeBlock[3, 7]
 ````````````````````````````````
 
 ```````````````````````````````` example
@@ -340,6 +362,10 @@ by spaces with a tab stop of 4 characters.
 </li>
 </ul>
 .
+Document[0, 7]
+  BulletList[3, 7]
+    ListItem[3, 7]
+      IndentedCodeBlock[3, 7]
 ````````````````````````````````
 
 
@@ -351,6 +377,8 @@ by spaces with a tab stop of 4 characters.
 bar
 </code></pre>
 .
+Document[0, 13]
+  IndentedCodeBlock[4, 13]
 ````````````````````````````````
 
 ```````````````````````````````` example
@@ -370,6 +398,19 @@ bar
 </li>
 </ul>
 .
+Document[0, 24]
+  BulletList[3, 24]
+    ListItem[3, 24]
+      Paragraph[3, 7]
+        Text[3, 6]
+      BulletList[12, 24]
+        ListItem[12, 24]
+          Paragraph[12, 16]
+            Text[12, 15]
+          BulletList[20, 24]
+            ListItem[20, 24]
+              Paragraph[20, 24]
+                Text[20, 23]
 ````````````````````````````````
 
 
@@ -403,6 +444,14 @@ two items, not a list with one item containing a code span:
 <li>two`</li>
 </ul>
 .
+Document[0, 14]
+  BulletList[2, 14]
+    ListItem[2, 7]
+      Paragraph[2, 7]
+        Text[2, 6]
+    ListItem[9, 14]
+      Paragraph[9, 14]
+        Text[9, 13]
 ````````````````````````````````
 
 
@@ -443,6 +492,10 @@ ___
 <hr />
 <hr />
 .
+Document[0, 12]
+  ThematicBreak[0, 4]
+  ThematicBreak[4, 8]
+  ThematicBreak[8, 12]
 ````````````````````````````````
 
 
@@ -453,6 +506,9 @@ Wrong characters:
 .
 <p>+++</p>
 .
+Document[0, 4]
+  Paragraph[0, 4]
+    Text[0, 3]
 ````````````````````````````````
 
 
@@ -461,6 +517,9 @@ Wrong characters:
 .
 <p>===</p>
 .
+Document[0, 4]
+  Paragraph[0, 4]
+    Text[0, 3]
 ````````````````````````````````
 
 
@@ -475,6 +534,13 @@ __
 **
 __</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 2]
+    SoftLineBreak[2, 3]
+    Text[3, 5]
+    SoftLineBreak[5, 6]
+    Text[6, 8]
 ````````````````````````````````
 
 
@@ -489,6 +555,10 @@ One to three spaces indent are allowed:
 <hr />
 <hr />
 .
+Document[0, 18]
+  ThematicBreak[1, 5]
+  ThematicBreak[7, 11]
+  ThematicBreak[15, 18]
 ````````````````````````````````
 
 
@@ -500,6 +570,8 @@ Four spaces is too many:
 <pre><code>***
 </code></pre>
 .
+Document[0, 8]
+  IndentedCodeBlock[4, 8]
 ````````````````````````````````
 
 
@@ -510,6 +582,11 @@ Foo
 <p>Foo
 ***</p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -520,6 +597,8 @@ _____________________________________
 .
 <hr />
 .
+Document[0, 38]
+  ThematicBreak[0, 38]
 ````````````````````````````````
 
 
@@ -530,6 +609,8 @@ Spaces are allowed between the characters:
 .
 <hr />
 .
+Document[0, 7]
+  ThematicBreak[0, 7]
 ````````````````````````````````
 
 
@@ -538,6 +619,8 @@ Spaces are allowed between the characters:
 .
 <hr />
 .
+Document[0, 20]
+  ThematicBreak[0, 20]
 ````````````````````````````````
 
 
@@ -546,16 +629,20 @@ Spaces are allowed between the characters:
 .
 <hr />
 .
+Document[0, 22]
+  ThematicBreak[0, 22]
 ````````````````````````````````
 
 
 Spaces are allowed at the end:
 
 ```````````````````````````````` example
-- - - -
+- - - -    
 .
 <hr />
 .
+Document[0, 12]
+  ThematicBreak[0, 12]
 ````````````````````````````````
 
 
@@ -572,6 +659,13 @@ a------
 <p>a------</p>
 <p>---a---</p>
 .
+Document[0, 28]
+  Paragraph[0, 10]
+    Text[0, 9]
+  Paragraph[11, 19]
+    Text[11, 18]
+  Paragraph[20, 28]
+    Text[20, 27]
 ````````````````````````````````
 
 
@@ -583,6 +677,10 @@ So, this is not a thematic break:
 .
 <p><em>-</em></p>
 .
+Document[0, 5]
+  Paragraph[1, 5]
+    Emphasis[1, 4]
+      Text[2, 3]
 ````````````````````````````````
 
 
@@ -601,6 +699,16 @@ Thematic breaks do not need blank lines before or after:
 <li>bar</li>
 </ul>
 .
+Document[0, 16]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  ThematicBreak[0, 0]
+  BulletList[12, 16]
+    ListItem[12, 16]
+      Paragraph[12, 16]
+        Text[12, 15]
 ````````````````````````````````
 
 
@@ -615,6 +723,12 @@ bar
 <hr />
 <p>bar</p>
 .
+Document[0, 12]
+  Paragraph[0, 4]
+    Text[0, 3]
+  ThematicBreak[0, 0]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -632,6 +746,11 @@ bar
 <h2>Foo</h2>
 <p>bar</p>
 .
+Document[0, 12]
+  Heading[0, 8]
+    Text[0, 3]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -651,6 +770,16 @@ interpretations of a line, the thematic break takes precedence:
 <li>Bar</li>
 </ul>
 .
+Document[0, 18]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  ThematicBreak[0, 0]
+  BulletList[14, 18]
+    ListItem[14, 18]
+      Paragraph[14, 18]
+        Text[14, 17]
 ````````````````````````````````
 
 
@@ -667,6 +796,13 @@ If you want a thematic break in a list item, use a different bullet:
 </li>
 </ul>
 .
+Document[0, 14]
+  BulletList[0, 0]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[0, 0]
+      ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -701,6 +837,19 @@ Simple headings:
 <h5>foo</h5>
 <h6>foo</h6>
 .
+Document[0, 51]
+  Heading[0, 0] marker:[0, 1]
+    Text[2, 5]
+  Heading[0, 0] marker:[6, 8]
+    Text[9, 12]
+  Heading[0, 0] marker:[13, 16]
+    Text[17, 20]
+  Heading[0, 0] marker:[21, 25]
+    Text[26, 29]
+  Heading[0, 0] marker:[30, 35]
+    Text[36, 39]
+  Heading[0, 0] marker:[40, 46]
+    Text[47, 50]
 ````````````````````````````````
 
 
@@ -711,6 +860,9 @@ More than six `#` characters is not a heading:
 .
 <p>####### foo</p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 11]
 ````````````````````````````````
 
 
@@ -730,6 +882,11 @@ headings:
 <p>#5 bolt</p>
 <p>#hashtag</p>
 .
+Document[0, 18]
+  Paragraph[0, 8]
+    Text[0, 7]
+  Paragraph[9, 18]
+    Text[9, 17]
 ````````````````````````````````
 
 
@@ -740,6 +897,9 @@ A tab will not work:
 .
 <p>#→foo</p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Text[0, 5]
 ````````````````````````````````
 
 
@@ -750,6 +910,9 @@ This is not a heading, because the first `#` is escaped:
 .
 <p>## foo</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -760,16 +923,25 @@ Contents are parsed as inlines:
 .
 <h1>foo <em>bar</em> *baz*</h1>
 .
+Document[0, 20]
+  Heading[0, 0] marker:[0, 1]
+    Text[2, 6]
+    Emphasis[6, 11]
+      Text[7, 10]
+    Text[11, 19]
 ````````````````````````````````
 
 
 Leading and trailing blanks are ignored in parsing inline content:
 
 ```````````````````````````````` example
-#                  foo
+#                  foo                     
 .
 <h1>foo</h1>
 .
+Document[0, 44]
+  Heading[0, 0] marker:[0, 1]
+    Text[19, 22]
 ````````````````````````````````
 
 
@@ -784,6 +956,13 @@ One to three spaces indentation are allowed:
 <h2>foo</h2>
 <h1>foo</h1>
 .
+Document[0, 27]
+  Heading[0, 0] marker:[1, 4]
+    Text[5, 8]
+  Heading[0, 0] marker:[11, 13]
+    Text[14, 17]
+  Heading[0, 0] marker:[21, 22]
+    Text[23, 26]
 ````````````````````````````````
 
 
@@ -795,6 +974,8 @@ Four spaces are too much:
 <pre><code># foo
 </code></pre>
 .
+Document[0, 10]
+  IndentedCodeBlock[4, 10]
 ````````````````````````````````
 
 
@@ -805,6 +986,11 @@ foo
 <p>foo
 # bar</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13]
+    SoftLineBreak[3, 13]
+    Text[8, 13]
 ````````````````````````````````
 
 
@@ -817,6 +1003,11 @@ A closing sequence of `#` characters is optional:
 <h2>foo</h2>
 <h3>bar</h3>
 .
+Document[0, 29]
+  Heading[0, 0] marker:[0, 2]
+    Text[3, 6]
+  Heading[0, 0] marker:[12, 15]
+    Text[18, 21]
 ````````````````````````````````
 
 
@@ -829,16 +1020,24 @@ It need not be the same length as the opening sequence:
 <h1>foo</h1>
 <h5>foo</h5>
 .
+Document[0, 54]
+  Heading[0, 0] marker:[0, 1]
+    Text[2, 5]
+  Heading[0, 0] marker:[41, 46]
+    Text[47, 50]
 ````````````````````````````````
 
 
 Spaces are allowed after the closing sequence:
 
 ```````````````````````````````` example
-### foo ###
+### foo ###     
 .
 <h3>foo</h3>
 .
+Document[0, 17]
+  Heading[0, 0] marker:[0, 3]
+    Text[4, 7]
 ````````````````````````````````
 
 
@@ -851,6 +1050,9 @@ heading:
 .
 <h3>foo ### b</h3>
 .
+Document[0, 14]
+  Heading[0, 0] marker:[0, 3]
+    Text[4, 13]
 ````````````````````````````````
 
 
@@ -861,6 +1063,9 @@ The closing sequence must be preceded by a space:
 .
 <h1>foo#</h1>
 .
+Document[0, 7]
+  Heading[0, 0] marker:[0, 1]
+    Text[2, 6]
 ````````````````````````````````
 
 
@@ -876,6 +1081,13 @@ of the closing sequence:
 <h2>foo ###</h2>
 <h1>foo #</h1>
 .
+Document[0, 34]
+  Heading[0, 0] marker:[0, 3]
+    Text[4, 12]
+  Heading[0, 0] marker:[13, 15]
+    Text[16, 24]
+  Heading[0, 0] marker:[25, 26]
+    Text[27, 33]
 ````````````````````````````````
 
 
@@ -891,6 +1103,11 @@ lines, and they can interrupt paragraphs:
 <h2>foo</h2>
 <hr />
 .
+Document[0, 17]
+  ThematicBreak[0, 0]
+  Heading[0, 0] marker:[5, 7]
+    Text[8, 11]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -903,13 +1120,20 @@ Bar foo
 <h1>baz</h1>
 <p>Bar foo</p>
 .
+Document[0, 22]
+  Paragraph[0, 8]
+    Text[0, 7]
+  Heading[0, 0] marker:[8, 9]
+    Text[10, 13]
+  Paragraph[14, 22]
+    Text[14, 21]
 ````````````````````````````````
 
 
 ATX headings can be empty:
 
 ```````````````````````````````` example
-##
+## 
 #
 ### ###
 .
@@ -917,6 +1141,10 @@ ATX headings can be empty:
 <h1></h1>
 <h3></h3>
 .
+Document[0, 14]
+  Heading[0, 0] marker:[0, 2]
+  Heading[0, 0] marker:[4, 5]
+  Heading[0, 0] marker:[6, 9]
 ````````````````````````````````
 
 
@@ -962,6 +1190,15 @@ Foo *bar*
 <h1>Foo <em>bar</em></h1>
 <h2>Foo <em>bar</em></h2>
 .
+Document[0, 41]
+  Heading[0, 0] marker:[10, 19]
+    Text[0, 4]
+    Emphasis[4, 9]
+      Text[5, 8]
+  Heading[0, 0] marker:[31, 40]
+    Text[21, 25]
+    Emphasis[25, 30]
+      Text[26, 29]
 ````````````````````````````````
 
 
@@ -975,6 +1212,13 @@ baz*
 <h1>Foo <em>bar
 baz</em></h1>
 .
+Document[0, 19]
+  Heading[0, 0] marker:[14, 18]
+    Text[0, 4]
+    Emphasis[4, 13]
+      Text[5, 8]
+      SoftLineBreak[8, 9]
+      Text[9, 12]
 ````````````````````````````````
 
 
@@ -990,6 +1234,11 @@ Foo
 <h2>Foo</h2>
 <h1>Foo</h1>
 .
+Document[0, 37]
+  Heading[0, 0] marker:[4, 29]
+    Text[0, 3]
+  Heading[0, 0] marker:[35, 36]
+    Text[31, 34]
 ````````````````````````````````
 
 
@@ -1010,6 +1259,13 @@ not line up with the underlining:
 <h2>Foo</h2>
 <h1>Foo</h1>
 .
+Document[0, 37]
+  Heading[0, 0] marker:[7, 10]
+    Text[3, 6]
+  Heading[0, 0] marker:[18, 23]
+    Text[14, 17]
+  Heading[0, 0] marker:[33, 36]
+    Text[27, 30]
 ````````````````````````````````
 
 
@@ -1029,6 +1285,9 @@ Foo
 </code></pre>
 <hr />
 .
+Document[0, 29]
+  IndentedCodeBlock[4, 25]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1037,10 +1296,13 @@ may have trailing spaces:
 
 ```````````````````````````````` example
 Foo
-   ----
+   ----      
 .
 <h2>Foo</h2>
 .
+Document[0, 18]
+  Heading[0, 0] marker:[7, 11]
+    Text[0, 3]
 ````````````````````````````````
 
 
@@ -1053,6 +1315,11 @@ Foo
 <p>Foo
 ---</p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 11]
+    SoftLineBreak[3, 11]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -1070,17 +1337,28 @@ Foo
 <p>Foo</p>
 <hr />
 .
+Document[0, 19]
+  Paragraph[0, 8]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
+  Paragraph[9, 13]
+    Text[9, 12]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
 Trailing spaces in the content line do not cause a line break:
 
 ```````````````````````````````` example
-Foo
+Foo  
 -----
 .
 <h2>Foo</h2>
 .
+Document[0, 12]
+  Heading[0, 0] marker:[6, 11]
+    Text[0, 3]
 ````````````````````````````````
 
 
@@ -1092,6 +1370,9 @@ Foo\
 .
 <h2>Foo\</h2>
 .
+Document[0, 10]
+  Heading[0, 0] marker:[5, 9]
+    Text[0, 4]
 ````````````````````````````````
 
 
@@ -1112,6 +1393,15 @@ of dashes"/>
 <h2>&lt;a title=&quot;a lot</h2>
 <p>of dashes&quot;/&gt;</p>
 .
+Document[0, 46]
+  Heading[0, 0] marker:[5, 9]
+    Text[0, 4]
+  Paragraph[10, 12]
+    Text[10, 11]
+  Heading[0, 0] marker:[29, 32]
+    Text[13, 28]
+  Paragraph[33, 46]
+    Text[33, 45]
 ````````````````````````````````
 
 
@@ -1127,6 +1417,11 @@ line] in a list item or block quote:
 </blockquote>
 <hr />
 .
+Document[0, 10]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1141,6 +1436,14 @@ bar
 ===</p>
 </blockquote>
 .
+Document[0, 14]
+  BlockQuote[0, 0]
+    Paragraph[2, 14]
+      Text[2, 5]
+      SoftLineBreak[5, 6]
+      Text[6, 9]
+      SoftLineBreak[9, 10]
+      Text[10, 13]
 ````````````````````````````````
 
 
@@ -1153,6 +1456,12 @@ bar
 </ul>
 <hr />
 .
+Document[0, 10]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1168,6 +1477,11 @@ Bar
 <h2>Foo
 Bar</h2>
 .
+Document[0, 12]
+  Heading[0, 0] marker:[8, 11]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
 ````````````````````````````````
 
 
@@ -1187,6 +1501,14 @@ Baz
 <h2>Bar</h2>
 <p>Baz</p>
 .
+Document[0, 24]
+  ThematicBreak[0, 0]
+  Heading[0, 0] marker:[8, 11]
+    Text[4, 7]
+  Heading[0, 0] marker:[16, 19]
+    Text[12, 15]
+  Paragraph[20, 24]
+    Text[20, 23]
 ````````````````````````````````
 
 
@@ -1198,6 +1520,9 @@ Setext headings cannot be empty:
 .
 <p>====</p>
 .
+Document[0, 6]
+  Paragraph[1, 6]
+    Text[1, 5]
 ````````````````````````````````
 
 
@@ -1212,6 +1537,9 @@ in these examples gets interpreted as a thematic break:
 <hr />
 <hr />
 .
+Document[0, 8]
+  ThematicBreak[0, 0]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1224,6 +1552,12 @@ in these examples gets interpreted as a thematic break:
 </ul>
 <hr />
 .
+Document[0, 12]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1235,6 +1569,9 @@ in these examples gets interpreted as a thematic break:
 </code></pre>
 <hr />
 .
+Document[0, 12]
+  IndentedCodeBlock[4, 8]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1247,6 +1584,11 @@ in these examples gets interpreted as a thematic break:
 </blockquote>
 <hr />
 .
+Document[0, 12]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1259,6 +1601,9 @@ use backslash escapes:
 .
 <h2>&gt; foo</h2>
 .
+Document[0, 14]
+  Heading[0, 0] marker:[7, 13]
+    Text[0, 6]
 ````````````````````````````````
 
 
@@ -1296,6 +1641,13 @@ baz
 <h2>bar</h2>
 <p>baz</p>
 .
+Document[0, 17]
+  Paragraph[0, 4]
+    Text[0, 3]
+  Heading[0, 0] marker:[9, 12]
+    Text[5, 8]
+  Paragraph[13, 17]
+    Text[13, 16]
 ````````````````````````````````
 
 
@@ -1315,6 +1667,14 @@ bar</p>
 <hr />
 <p>baz</p>
 .
+Document[0, 18]
+  Paragraph[0, 8]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
+  ThematicBreak[0, 0]
+  Paragraph[14, 18]
+    Text[14, 17]
 ````````````````````````````````
 
 
@@ -1332,6 +1692,14 @@ bar</p>
 <hr />
 <p>baz</p>
 .
+Document[0, 18]
+  Paragraph[0, 8]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
+  ThematicBreak[0, 0]
+  Paragraph[14, 18]
+    Text[14, 17]
 ````````````````````````````````
 
 
@@ -1348,6 +1716,15 @@ bar
 ---
 baz</p>
 .
+Document[0, 17]
+  Paragraph[0, 17]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 12]
+    SoftLineBreak[12, 13]
+    Text[13, 16]
 ````````````````````````````````
 
 
@@ -1374,6 +1751,8 @@ paragraph.)
   indented code block
 </code></pre>
 .
+Document[0, 39]
+  IndentedCodeBlock[4, 39]
 ````````````````````````````````
 
 
@@ -1393,6 +1772,13 @@ item][list items], the list item interpretation takes precedence:
 </li>
 </ul>
 .
+Document[0, 17]
+  BulletList[4, 17]
+    ListItem[4, 17]
+      Paragraph[4, 8]
+        Text[4, 7]
+      Paragraph[13, 17]
+        Text[13, 16]
 ````````````````````````````````
 
 
@@ -1410,6 +1796,15 @@ item][list items], the list item interpretation takes precedence:
 </li>
 </ol>
 .
+Document[0, 19]
+  OrderedList[4, 19]
+    ListItem[4, 19]
+      Paragraph[4, 8]
+        Text[4, 7]
+      BulletList[15, 19]
+        ListItem[15, 19]
+          Paragraph[15, 19]
+            Text[15, 18]
 ````````````````````````````````
 
 
@@ -1429,6 +1824,8 @@ as Markdown:
 - one
 </code></pre>
 .
+Document[0, 29]
+  IndentedCodeBlock[4, 29]
 ````````````````````````````````
 
 
@@ -1438,9 +1835,9 @@ Here we have three chunks separated by blank lines:
     chunk1
 
     chunk2
-
-
-
+  
+ 
+ 
     chunk3
 .
 <pre><code>chunk1
@@ -1452,6 +1849,8 @@ chunk2
 chunk3
 </code></pre>
 .
+Document[0, 41]
+  IndentedCodeBlock[4, 41]
 ````````````````````````````````
 
 
@@ -1460,14 +1859,16 @@ in interior blank lines:
 
 ```````````````````````````````` example
     chunk1
-
+      
       chunk2
 .
 <pre><code>chunk1
-
+  
   chunk2
 </code></pre>
 .
+Document[0, 31]
+  IndentedCodeBlock[4, 31]
 ````````````````````````````````
 
 
@@ -1482,6 +1883,11 @@ Foo
 <p>Foo
 bar</p>
 .
+Document[0, 13]
+  Paragraph[0, 12]
+    Text[0, 11]
+    SoftLineBreak[3, 11]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -1497,6 +1903,10 @@ bar
 </code></pre>
 <p>bar</p>
 .
+Document[0, 12]
+  IndentedCodeBlock[4, 8]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -1519,6 +1929,14 @@ Heading
 </code></pre>
 <hr />
 .
+Document[0, 46]
+  Heading[0, 0]
+    Text[2, 9]
+  IndentedCodeBlock[14, 18]
+  Heading[0, 0]
+    Text[18, 25]
+  IndentedCodeBlock[37, 41]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -1532,6 +1950,8 @@ The first line can be indented more than four spaces:
 bar
 </code></pre>
 .
+Document[0, 20]
+  IndentedCodeBlock[4, 20]
 ````````````````````````````````
 
 
@@ -1540,25 +1960,29 @@ are not included in it:
 
 ```````````````````````````````` example
 
-
+    
     foo
-
+    
 
 .
 <pre><code>foo
 </code></pre>
 .
+Document[0, 20]
+  IndentedCodeBlock[10, 20]
 ````````````````````````````````
 
 
 Trailing spaces are included in the code block's content:
 
 ```````````````````````````````` example
-    foo
+    foo  
 .
-<pre><code>foo
+<pre><code>foo  
 </code></pre>
 .
+Document[0, 10]
+  IndentedCodeBlock[4, 10]
 ````````````````````````````````
 
 
@@ -1619,6 +2043,8 @@ Here is a simple example with backticks:
  &gt;
 </code></pre>
 .
+Document[0, 13]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1634,6 +2060,8 @@ With tildes:
  &gt;
 </code></pre>
 .
+Document[0, 13]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1650,6 +2078,8 @@ aaa
 ~~~
 </code></pre>
 .
+Document[0, 16]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1663,6 +2093,8 @@ aaa
 ```
 </code></pre>
 .
+Document[0, 16]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1678,6 +2110,8 @@ aaa
 ```
 </code></pre>
 .
+Document[0, 20]
+  FencedCodeBlock[4, 5]
 ````````````````````````````````
 
 
@@ -1691,6 +2125,8 @@ aaa
 ~~~
 </code></pre>
 .
+Document[0, 18]
+  FencedCodeBlock[4, 5]
 ````````````````````````````````
 
 
@@ -1702,6 +2138,8 @@ Unclosed code blocks are closed by the end of the document
 .
 <pre><code></code></pre>
 .
+Document[0, 4]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1716,6 +2154,8 @@ aaa
 aaa
 </code></pre>
 .
+Document[0, 15]
+  FencedCodeBlock[5, 6]
 ````````````````````````````````
 
 
@@ -1731,6 +2171,11 @@ bbb
 </blockquote>
 <p>bbb</p>
 .
+Document[0, 17]
+  BlockQuote[0, 0]
+    FencedCodeBlock[5, 6]
+  Paragraph[13, 17]
+    Text[13, 16]
 ````````````````````````````````
 
 
@@ -1739,13 +2184,15 @@ A code block can have all empty lines as its content:
 ```````````````````````````````` example
 ```
 
-
+  
 ```
 .
 <pre><code>
-
+  
 </code></pre>
 .
+Document[0, 12]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1757,6 +2204,8 @@ A code block can be empty:
 .
 <pre><code></code></pre>
 .
+Document[0, 8]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1774,6 +2223,8 @@ aaa
 aaa
 </code></pre>
 .
+Document[0, 18]
+  FencedCodeBlock[4, 5]
 ````````````````````````````````
 
 
@@ -1789,6 +2240,8 @@ aaa
 aaa
 </code></pre>
 .
+Document[0, 26]
+  FencedCodeBlock[5, 6]
 ````````````````````````````````
 
 
@@ -1804,6 +2257,8 @@ aaa
 aaa
 </code></pre>
 .
+Document[0, 35]
+  FencedCodeBlock[6, 7]
 ````````````````````````````````
 
 
@@ -1819,6 +2274,8 @@ aaa
 ```
 </code></pre>
 .
+Document[0, 24]
+  IndentedCodeBlock[4, 24]
 ````````````````````````````````
 
 
@@ -1833,6 +2290,8 @@ aaa
 <pre><code>aaa
 </code></pre>
 .
+Document[0, 14]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1844,6 +2303,8 @@ aaa
 <pre><code>aaa
 </code></pre>
 .
+Document[0, 17]
+  FencedCodeBlock[6, 7]
 ````````````````````````````````
 
 
@@ -1858,6 +2319,8 @@ aaa
     ```
 </code></pre>
 .
+Document[0, 16]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -1871,6 +2334,11 @@ aaa
 <p><code></code>
 aaa</p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Code[0, 7]
+    SoftLineBreak[7, 8]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -1883,6 +2351,8 @@ aaa
 ~~~ ~~
 </code></pre>
 .
+Document[0, 18]
+  FencedCodeBlock[6, 7]
 ````````````````````````````````
 
 
@@ -1901,6 +2371,12 @@ baz
 </code></pre>
 <p>baz</p>
 .
+Document[0, 20]
+  Paragraph[0, 4]
+    Text[0, 3]
+  FencedCodeBlock[7, 8]
+  Paragraph[16, 20]
+    Text[16, 19]
 ````````````````````````````````
 
 
@@ -1920,6 +2396,12 @@ bar
 </code></pre>
 <h1>baz</h1>
 .
+Document[0, 26]
+  Heading[0, 0]
+    Text[0, 3]
+  FencedCodeBlock[11, 12]
+  Heading[0, 0]
+    Text[22, 25]
 ````````````````````````````````
 
 
@@ -1940,6 +2422,8 @@ end
 end
 </code></pre>
 .
+Document[0, 38]
+  FencedCodeBlock[3, 8]
 ````````````````````````````````
 
 
@@ -1955,6 +2439,8 @@ end
 end
 </code></pre>
 .
+Document[0, 65]
+  FencedCodeBlock[4, 31]
 ````````````````````````````````
 
 
@@ -1964,6 +2450,8 @@ end
 .
 <pre><code class="language-;"></code></pre>
 .
+Document[0, 11]
+  FencedCodeBlock[4, 6]
 ````````````````````````````````
 
 
@@ -1976,6 +2464,11 @@ foo
 <p><code>aa</code>
 foo</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Code[0, 10]
+    SoftLineBreak[10, 11]
+    Text[11, 14]
 ````````````````````````````````
 
 
@@ -1989,6 +2482,8 @@ Closing code fences cannot have [info strings]:
 <pre><code>``` aaa
 </code></pre>
 .
+Document[0, 16]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -2076,6 +2571,10 @@ okay.
 </table>
 <p>okay.</p>
 .
+Document[0, 72]
+  HtmlBlock[0, 65]
+  Paragraph[66, 72]
+    Text[66, 71]
 ````````````````````````````````
 
 
@@ -2088,6 +2587,8 @@ okay.
   *hello*
          <foo><a>
 .
+Document[0, 35]
+  HtmlBlock[0, 35]
 ````````````````````````````````
 
 
@@ -2100,6 +2601,8 @@ A block can also start with a closing tag:
 </div>
 *foo*
 .
+Document[0, 13]
+  HtmlBlock[0, 13]
 ````````````````````````````````
 
 
@@ -2116,6 +2619,12 @@ Here we have two HTML blocks with a Markdown paragraph between them:
 <p><em>Markdown</em></p>
 </DIV>
 .
+Document[0, 38]
+  HtmlBlock[0, 18]
+  Paragraph[19, 30]
+    Emphasis[19, 29]
+      Text[20, 28]
+  HtmlBlock[31, 38]
 ````````````````````````````````
 
 
@@ -2131,6 +2640,8 @@ as it is split where there would be whitespace:
   class="bar">
 </div>
 .
+Document[0, 36]
+  HtmlBlock[0, 36]
 ````````````````````````````````
 
 
@@ -2143,6 +2654,8 @@ as it is split where there would be whitespace:
   baz">
 </div>
 .
+Document[0, 40]
+  HtmlBlock[0, 40]
 ````````````````````````````````
 
 
@@ -2157,6 +2670,11 @@ An open tag need not be closed:
 *foo*
 <p><em>bar</em></p>
 .
+Document[0, 19]
+  HtmlBlock[0, 12]
+  Paragraph[13, 19]
+    Emphasis[13, 18]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -2171,6 +2689,8 @@ in, garbage out):
 <div id="foo"
 *hi*
 .
+Document[0, 19]
+  HtmlBlock[0, 19]
 ````````````````````````````````
 
 
@@ -2181,6 +2701,8 @@ foo
 <div class
 foo
 .
+Document[0, 15]
+  HtmlBlock[0, 15]
 ````````````````````````````````
 
 
@@ -2194,6 +2716,8 @@ tag, as long as it starts like one:
 <div *???-&&&-<---
 *foo*
 .
+Document[0, 25]
+  HtmlBlock[0, 25]
 ````````````````````````````````
 
 
@@ -2205,6 +2729,8 @@ itself:
 .
 <div><a href="bar">*foo*</a></div>
 .
+Document[0, 35]
+  HtmlBlock[0, 35]
 ````````````````````````````````
 
 
@@ -2217,6 +2743,8 @@ foo
 foo
 </td></tr></table>
 .
+Document[0, 39]
+  HtmlBlock[0, 39]
 ````````````````````````````````
 
 
@@ -2237,6 +2765,8 @@ int x = 33;
 int x = 33;
 ```
 .
+Document[0, 34]
+  HtmlBlock[0, 34]
 ````````````````````````````````
 
 
@@ -2253,6 +2783,8 @@ itself on the first line (and it must be complete):
 *bar*
 </a>
 .
+Document[0, 26]
+  HtmlBlock[0, 26]
 ````````````````````````````````
 
 
@@ -2267,6 +2799,8 @@ In type 7 blocks, the [tag name] can be anything:
 *bar*
 </Warning>
 .
+Document[0, 27]
+  HtmlBlock[0, 27]
 ````````````````````````````````
 
 
@@ -2279,6 +2813,8 @@ In type 7 blocks, the [tag name] can be anything:
 *bar*
 </i>
 .
+Document[0, 27]
+  HtmlBlock[0, 27]
 ````````````````````````````````
 
 
@@ -2289,6 +2825,8 @@ In type 7 blocks, the [tag name] can be anything:
 </ins>
 *bar*
 .
+Document[0, 13]
+  HtmlBlock[0, 13]
 ````````````````````````````````
 
 
@@ -2307,6 +2845,8 @@ HTML block, because the `<del>` tag is on a line by itself:
 *foo*
 </del>
 .
+Document[0, 19]
+  HtmlBlock[0, 19]
 ````````````````````````````````
 
 
@@ -2325,6 +2865,12 @@ line).  So the contents get interpreted as CommonMark:
 <p><em>foo</em></p>
 </del>
 .
+Document[0, 21]
+  HtmlBlock[0, 6]
+  Paragraph[7, 13]
+    Emphasis[7, 12]
+      Text[8, 11]
+  HtmlBlock[14, 21]
 ````````````````````````````````
 
 
@@ -2338,6 +2884,12 @@ rather than an [HTML block].)
 .
 <p><del><em>foo</em></del></p>
 .
+Document[0, 17]
+  Paragraph[0, 17]
+    HtmlInline[0, 5]
+    Emphasis[5, 10]
+      Text[6, 9]
+    HtmlInline[10, 16]
 ````````````````````````````````
 
 
@@ -2365,6 +2917,8 @@ main :: IO ()
 main = print $ parseTags tags
 </code></pre>
 .
+Document[0, 115]
+  HtmlBlock[0, 115]
 ````````````````````````````````
 
 
@@ -2383,6 +2937,8 @@ document.getElementById("demo").innerHTML = "Hello JavaScript!";
 document.getElementById("demo").innerHTML = "Hello JavaScript!";
 </script>
 .
+Document[0, 130]
+  HtmlBlock[0, 130]
 ````````````````````````````````
 
 
@@ -2403,6 +2959,8 @@ h1 {color:red;}
 p {color:blue;}
 </style>
 .
+Document[0, 68]
+  HtmlBlock[0, 68]
 ````````````````````````````````
 
 
@@ -2421,6 +2979,8 @@ foo
 
 foo
 .
+Document[0, 31]
+  HtmlBlock[0, 31]
 ````````````````````````````````
 
 
@@ -2436,6 +2996,11 @@ foo
 </blockquote>
 <p>bar</p>
 .
+Document[0, 19]
+  BlockQuote[0, 0]
+    HtmlBlock[2, 14]
+  Paragraph[15, 19]
+    Text[15, 18]
 ````````````````````````````````
 
 
@@ -2450,6 +3015,13 @@ foo
 <li>foo</li>
 </ul>
 .
+Document[0, 14]
+  BulletList[2, 14]
+    ListItem[2, 8]
+      HtmlBlock[2, 8]
+    ListItem[10, 14]
+      Paragraph[10, 14]
+        Text[10, 13]
 ````````````````````````````````
 
 
@@ -2462,6 +3034,11 @@ The end tag can occur on the same line as the start tag:
 <style>p{color:red;}</style>
 <p><em>foo</em></p>
 .
+Document[0, 35]
+  HtmlBlock[0, 29]
+  Paragraph[29, 35]
+    Emphasis[29, 34]
+      Text[30, 33]
 ````````````````````````````````
 
 
@@ -2472,6 +3049,11 @@ The end tag can occur on the same line as the start tag:
 <!-- foo -->*bar*
 <p><em>baz</em></p>
 .
+Document[0, 24]
+  HtmlBlock[0, 18]
+  Paragraph[18, 24]
+    Emphasis[18, 23]
+      Text[19, 22]
 ````````````````````````````````
 
 
@@ -2487,6 +3069,8 @@ foo
 foo
 </script>1. *bar*
 .
+Document[0, 31]
+  HtmlBlock[0, 31]
 ````````````````````````````````
 
 
@@ -2503,6 +3087,8 @@ bar
 bar
    baz -->
 .
+Document[0, 25]
+  HtmlBlock[0, 25]
 ````````````````````````````````
 
 
@@ -2522,6 +3108,8 @@ A processing instruction (type 3):
 
 ?>
 .
+Document[0, 23]
+  HtmlBlock[0, 23]
 ````````````````````````````````
 
 
@@ -2532,6 +3120,8 @@ A declaration (type 4):
 .
 <!DOCTYPE html>
 .
+Document[0, 16]
+  HtmlBlock[0, 16]
 ````````````````````````````````
 
 
@@ -2564,6 +3154,8 @@ function matchwo(a,b)
 }
 ]]>
 .
+Document[0, 114]
+  HtmlBlock[0, 114]
 ````````````````````````````````
 
 
@@ -2578,6 +3170,9 @@ The opening tag can be indented 1-3 spaces, but not 4:
 <pre><code>&lt;!-- foo --&gt;
 </code></pre>
 .
+Document[0, 33]
+  HtmlBlock[0, 15]
+  IndentedCodeBlock[20, 33]
 ````````````````````````````````
 
 
@@ -2590,6 +3185,9 @@ The opening tag can be indented 1-3 spaces, but not 4:
 <pre><code>&lt;div&gt;
 </code></pre>
 .
+Document[0, 19]
+  HtmlBlock[0, 8]
+  IndentedCodeBlock[13, 19]
 ````````````````````````````````
 
 
@@ -2607,6 +3205,10 @@ bar
 bar
 </div>
 .
+Document[0, 21]
+  Paragraph[0, 4]
+    Text[0, 3]
+  HtmlBlock[4, 21]
 ````````````````````````````````
 
 
@@ -2624,6 +3226,8 @@ bar
 </div>
 *foo*
 .
+Document[0, 23]
+  HtmlBlock[0, 23]
 ````````````````````````````````
 
 
@@ -2638,6 +3242,13 @@ baz
 <a href="bar">
 baz</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    HtmlInline[4, 18]
+    SoftLineBreak[18, 19]
+    Text[19, 22]
 ````````````````````````````````
 
 
@@ -2682,6 +3293,13 @@ Compare:
 <p><em>Emphasized</em> text.</p>
 </div>
 .
+Document[0, 34]
+  HtmlBlock[0, 6]
+  Paragraph[7, 26]
+    Emphasis[7, 19]
+      Text[8, 18]
+    Text[19, 25]
+  HtmlBlock[27, 34]
 ````````````````````````````````
 
 
@@ -2694,6 +3312,8 @@ Compare:
 *Emphasized* text.
 </div>
 .
+Document[0, 32]
+  HtmlBlock[0, 32]
 ````````````````````````````````
 
 
@@ -2729,6 +3349,12 @@ Hi
 </tr>
 </table>
 .
+Document[0, 46]
+  HtmlBlock[0, 8]
+  HtmlBlock[9, 14]
+  HtmlBlock[15, 29]
+  HtmlBlock[30, 36]
+  HtmlBlock[37, 46]
 ````````````````````````````````
 
 
@@ -2758,6 +3384,12 @@ an indented code block:
   </tr>
 </table>
 .
+Document[0, 64]
+  HtmlBlock[0, 8]
+  HtmlBlock[9, 16]
+  IndentedCodeBlock[21, 46]
+  HtmlBlock[46, 54]
+  HtmlBlock[55, 64]
 ````````````````````````````````
 
 
@@ -2792,18 +3424,26 @@ them.
 .
 <p><a href="/url" title="title">foo</a></p>
 .
+Document[0, 27]
+  Paragraph[21, 27]
+    LinkRef[0, 0]
+      Text[22, 25]
 ````````````````````````````````
 
 
 ```````````````````````````````` example
-   [foo]:
-      /url
-           'the title'
+   [foo]: 
+      /url  
+           'the title'  
 
 [foo]
 .
 <p><a href="/url" title="the title">foo</a></p>
 .
+Document[0, 56]
+  Paragraph[50, 56]
+    LinkRef[0, 0]
+      Text[51, 54]
 ````````````````````````````````
 
 
@@ -2814,6 +3454,10 @@ them.
 .
 <p><a href="my_(url)" title="title (with parens)">Foo*bar]</a></p>
 .
+Document[0, 56]
+  Paragraph[44, 56]
+    LinkRef[0, 0]
+      Text[45, 54]
 ````````````````````````````````
 
 
@@ -2826,6 +3470,10 @@ them.
 .
 <p><a href="my%20url" title="title">Foo bar</a></p>
 .
+Document[0, 41]
+  Paragraph[31, 41]
+    LinkRef[0, 0]
+      Text[32, 39]
 ````````````````````````````````
 
 
@@ -2846,6 +3494,10 @@ line1
 line2
 ">foo</a></p>
 .
+Document[0, 41]
+  Paragraph[35, 41]
+    LinkRef[0, 0]
+      Text[36, 39]
 ````````````````````````````````
 
 
@@ -2862,6 +3514,13 @@ with blank line'
 <p>with blank line'</p>
 <p>[foo]</p>
 .
+Document[0, 44]
+  Paragraph[0, 19]
+    Text[0, 18]
+  Paragraph[20, 37]
+    Text[20, 36]
+  Paragraph[38, 44]
+    Text[38, 43]
 ````````````````````````````````
 
 
@@ -2875,6 +3534,10 @@ The title may be omitted:
 .
 <p><a href="/url">foo</a></p>
 .
+Document[0, 19]
+  Paragraph[13, 19]
+    LinkRef[0, 0]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -2888,6 +3551,11 @@ The link destination may not be omitted:
 <p>[foo]:</p>
 <p>[foo]</p>
 .
+Document[0, 14]
+  Paragraph[0, 7]
+    Text[0, 6]
+  Paragraph[8, 14]
+    Text[8, 13]
 ````````````````````````````````
 
 
@@ -2901,6 +3569,10 @@ and literal backslashes:
 .
 <p><a href="/url%5Cbar*baz" title="foo&quot;bar\baz">foo</a></p>
 .
+Document[0, 43]
+  Paragraph[37, 43]
+    LinkRef[0, 0]
+      Text[38, 41]
 ````````````````````````````````
 
 
@@ -2913,6 +3585,10 @@ A link can come before its corresponding definition:
 .
 <p><a href="url">foo</a></p>
 .
+Document[0, 18]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -2927,6 +3603,10 @@ precedence:
 .
 <p><a href="first">foo</a></p>
 .
+Document[0, 34]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -2940,6 +3620,10 @@ case-insensitive (see [matches]).
 .
 <p><a href="/url">Foo</a></p>
 .
+Document[0, 19]
+  Paragraph[13, 19]
+    LinkRef[0, 0]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -2950,6 +3634,10 @@ case-insensitive (see [matches]).
 .
 <p><a href="/%CF%86%CE%BF%CF%85">αγω</a></p>
 .
+Document[0, 19]
+  Paragraph[13, 19]
+    LinkRef[0, 0]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -2960,6 +3648,7 @@ It contributes nothing to the document.
 [foo]: /url
 .
 .
+Document[0, 12]
 ````````````````````````````````
 
 
@@ -2973,6 +3662,9 @@ bar
 .
 <p>bar</p>
 .
+Document[0, 18]
+  Paragraph[14, 18]
+    Text[14, 17]
 ````````````````````````````````
 
 
@@ -2984,6 +3676,9 @@ This is not a link reference definition, because there are
 .
 <p>[foo]: /url &quot;title&quot; ok</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    Text[0, 22]
 ````````````````````````````````
 
 
@@ -2995,6 +3690,9 @@ This is a link reference definition, but it has no title:
 .
 <p>&quot;title&quot; ok</p>
 .
+Document[0, 23]
+  Paragraph[12, 23]
+    Text[12, 22]
 ````````````````````````````````
 
 
@@ -3010,6 +3708,10 @@ four spaces:
 </code></pre>
 <p>[foo]</p>
 .
+Document[0, 31]
+  IndentedCodeBlock[4, 25]
+  Paragraph[25, 31]
+    Text[25, 30]
 ````````````````````````````````
 
 
@@ -3027,6 +3729,10 @@ a code block:
 </code></pre>
 <p>[foo]</p>
 .
+Document[0, 27]
+  FencedCodeBlock[3, 4]
+  Paragraph[21, 27]
+    Text[21, 26]
 ````````````````````````````````
 
 
@@ -3042,6 +3748,13 @@ Foo
 [bar]: /baz</p>
 <p>[bar]</p>
 .
+Document[0, 23]
+  Paragraph[0, 16]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 15]
+  Paragraph[17, 23]
+    Text[17, 22]
 ````````````````````````````````
 
 
@@ -3058,6 +3771,13 @@ and thematic breaks, and it need not be followed by a blank line.
 <p>bar</p>
 </blockquote>
 .
+Document[0, 26]
+  Heading[0, 0]
+    LinkRef[0, 0]
+      Text[3, 6]
+  BlockQuote[0, 0]
+    Paragraph[22, 26]
+      Text[22, 25]
 ````````````````````````````````
 
 
@@ -3078,6 +3798,18 @@ can occur one after another, without intervening blank lines.
 <a href="/bar-url" title="bar">bar</a>,
 <a href="/baz-url">baz</a></p>
 .
+Document[0, 83]
+  Paragraph[63, 83]
+    LinkRef[0, 0]
+      Text[64, 67]
+    Text[68, 69]
+    SoftLineBreak[69, 70]
+    LinkRef[0, 0]
+      Text[71, 74]
+    Text[75, 76]
+    SoftLineBreak[76, 77]
+    LinkRef[0, 0]
+      Text[78, 81]
 ````````````````````````````````
 
 
@@ -3095,6 +3827,11 @@ are defined:
 <blockquote>
 </blockquote>
 .
+Document[0, 21]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
+  BlockQuote[0, 0]
 ````````````````````````````````
 
 
@@ -3118,6 +3855,11 @@ bbb
 <p>aaa</p>
 <p>bbb</p>
 .
+Document[0, 9]
+  Paragraph[0, 4]
+    Text[0, 3]
+  Paragraph[5, 9]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -3135,6 +3877,15 @@ bbb</p>
 <p>ccc
 ddd</p>
 .
+Document[0, 17]
+  Paragraph[0, 8]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
+  Paragraph[9, 17]
+    Text[9, 12]
+    SoftLineBreak[12, 13]
+    Text[13, 16]
 ````````````````````````````````
 
 
@@ -3149,6 +3900,11 @@ bbb
 <p>aaa</p>
 <p>bbb</p>
 .
+Document[0, 10]
+  Paragraph[0, 4]
+    Text[0, 3]
+  Paragraph[6, 10]
+    Text[6, 9]
 ````````````````````````````````
 
 
@@ -3161,6 +3917,11 @@ Leading spaces are skipped:
 <p>aaa
 bbb</p>
 .
+Document[0, 11]
+  Paragraph[2, 11]
+    Text[2, 10]
+    SoftLineBreak[5, 10]
+    Text[7, 10]
 ````````````````````````````````
 
 
@@ -3176,6 +3937,13 @@ aaa
 bbb
 ccc</p>
 .
+Document[0, 64]
+  Paragraph[0, 64]
+    Text[0, 63]
+    SoftLineBreak[3, 63]
+    Text[17, 63]
+    SoftLineBreak[20, 63]
+    Text[60, 63]
 ````````````````````````````````
 
 
@@ -3189,6 +3957,11 @@ bbb
 <p>aaa
 bbb</p>
 .
+Document[0, 11]
+  Paragraph[3, 11]
+    Text[3, 6]
+    SoftLineBreak[6, 7]
+    Text[7, 10]
 ````````````````````````````````
 
 
@@ -3200,6 +3973,10 @@ bbb
 </code></pre>
 <p>bbb</p>
 .
+Document[0, 12]
+  IndentedCodeBlock[4, 8]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -3208,12 +3985,17 @@ that ends with two or more spaces will not end with a [hard line
 break]:
 
 ```````````````````````````````` example
-aaa
-bbb
+aaa     
+bbb     
 .
 <p>aaa<br />
 bbb</p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 3]
+    HardLineBreak[6, 9]
+    Text[9, 12]
 ````````````````````````````````
 
 
@@ -3226,18 +4008,23 @@ is [tight] or [loose].
 Blank lines at the beginning and end of the document are also ignored.
 
 ```````````````````````````````` example
-
+  
 
 aaa
-
+  
 
 # aaa
 
-
+  
 .
 <p>aaa</p>
 <h1>aaa</h1>
 .
+Document[0, 22]
+  Paragraph[4, 8]
+    Text[4, 7]
+  Heading[0, 0]
+    Text[14, 17]
 ````````````````````````````````
 
 
@@ -3303,6 +4090,14 @@ Here is a simple example:
 baz</p>
 </blockquote>
 .
+Document[0, 20]
+  BlockQuote[0, 0]
+    Heading[0, 0]
+      Text[4, 7]
+    Paragraph[10, 20]
+      Text[10, 19]
+      SoftLineBreak[13, 19]
+      Text[16, 19]
 ````````````````````````````````
 
 
@@ -3319,6 +4114,14 @@ The spaces after the `>` characters can be omitted:
 baz</p>
 </blockquote>
 .
+Document[0, 18]
+  BlockQuote[0, 0]
+    Heading[0, 0]
+      Text[3, 6]
+    Paragraph[8, 18]
+      Text[8, 17]
+      SoftLineBreak[11, 17]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -3335,6 +4138,14 @@ The `>` characters can be indented 1-3 spaces:
 baz</p>
 </blockquote>
 .
+Document[0, 27]
+  BlockQuote[0, 0]
+    Heading[0, 0]
+      Text[7, 10]
+    Paragraph[16, 27]
+      Text[16, 26]
+      SoftLineBreak[19, 26]
+      Text[23, 26]
 ````````````````````````````````
 
 
@@ -3350,6 +4161,8 @@ Four spaces gives us a code block:
 &gt; baz
 </code></pre>
 .
+Document[0, 32]
+  IndentedCodeBlock[4, 32]
 ````````````````````````````````
 
 
@@ -3367,6 +4180,14 @@ baz
 baz</p>
 </blockquote>
 .
+Document[0, 18]
+  BlockQuote[0, 0]
+    Heading[0, 0]
+      Text[4, 7]
+    Paragraph[10, 18]
+      Text[10, 13]
+      SoftLineBreak[13, 14]
+      Text[14, 17]
 ````````````````````````````````
 
 
@@ -3384,6 +4205,14 @@ baz
 foo</p>
 </blockquote>
 .
+Document[0, 16]
+  BlockQuote[0, 0]
+    Paragraph[2, 16]
+      Text[2, 15]
+      SoftLineBreak[5, 15]
+      Text[6, 15]
+      SoftLineBreak[9, 15]
+      Text[12, 15]
 ````````````````````````````````
 
 
@@ -3407,6 +4236,11 @@ without changing the meaning:
 </blockquote>
 <hr />
 .
+Document[0, 10]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  ThematicBreak[0, 0]
 ````````````````````````````````
 
 
@@ -3432,6 +4266,16 @@ then the block quote ends after the first line:
 <li>bar</li>
 </ul>
 .
+Document[0, 14]
+  BlockQuote[0, 0]
+    BulletList[4, 8]
+      ListItem[4, 8]
+        Paragraph[4, 8]
+          Text[4, 7]
+  BulletList[10, 14]
+    ListItem[10, 14]
+      Paragraph[10, 14]
+        Text[10, 13]
 ````````````````````````````````
 
 
@@ -3449,6 +4293,10 @@ subsequent lines of an indented or fenced code block:
 <pre><code>bar
 </code></pre>
 .
+Document[0, 18]
+  BlockQuote[0, 0]
+    IndentedCodeBlock[6, 10]
+  IndentedCodeBlock[14, 18]
 ````````````````````````````````
 
 
@@ -3463,6 +4311,12 @@ foo
 <p>foo</p>
 <pre><code></code></pre>
 .
+Document[0, 14]
+  BlockQuote[0, 0]
+    FencedCodeBlock[5, 6]
+  Paragraph[6, 10]
+    Text[6, 9]
+  FencedCodeBlock[13, 14]
 ````````````````````````````````
 
 
@@ -3478,6 +4332,12 @@ continuation line:
 - bar</p>
 </blockquote>
 .
+Document[0, 16]
+  BlockQuote[0, 0]
+    Paragraph[2, 16]
+      Text[2, 15]
+      SoftLineBreak[5, 15]
+      Text[10, 15]
 ````````````````````````````````
 
 
@@ -3500,17 +4360,21 @@ A block quote can be empty:
 <blockquote>
 </blockquote>
 .
+Document[0, 2]
+  BlockQuote[0, 0]
 ````````````````````````````````
 
 
 ```````````````````````````````` example
 >
->
->
+>  
+> 
 .
 <blockquote>
 </blockquote>
 .
+Document[0, 9]
+  BlockQuote[0, 0]
 ````````````````````````````````
 
 
@@ -3519,12 +4383,16 @@ A block quote can have initial or final blank lines:
 ```````````````````````````````` example
 >
 > foo
->
+>  
 .
 <blockquote>
 <p>foo</p>
 </blockquote>
 .
+Document[0, 12]
+  BlockQuote[0, 0]
+    Paragraph[4, 8]
+      Text[4, 7]
 ````````````````````````````````
 
 
@@ -3542,6 +4410,13 @@ A blank line always separates block quotes:
 <p>bar</p>
 </blockquote>
 .
+Document[0, 13]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  BlockQuote[0, 0]
+    Paragraph[9, 13]
+      Text[9, 12]
 ````````````````````````````````
 
 
@@ -3562,6 +4437,12 @@ we get a single block quote:
 bar</p>
 </blockquote>
 .
+Document[0, 12]
+  BlockQuote[0, 0]
+    Paragraph[2, 12]
+      Text[2, 11]
+      SoftLineBreak[5, 11]
+      Text[8, 11]
 ````````````````````````````````
 
 
@@ -3577,6 +4458,12 @@ To get a block quote with two paragraphs, use:
 <p>bar</p>
 </blockquote>
 .
+Document[0, 14]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+    Paragraph[10, 14]
+      Text[10, 13]
 ````````````````````````````````
 
 
@@ -3591,6 +4478,12 @@ foo
 <p>bar</p>
 </blockquote>
 .
+Document[0, 10]
+  Paragraph[0, 4]
+    Text[0, 3]
+  BlockQuote[0, 0]
+    Paragraph[6, 10]
+      Text[6, 9]
 ````````````````````````````````
 
 
@@ -3610,6 +4503,14 @@ quotes:
 <p>bbb</p>
 </blockquote>
 .
+Document[0, 16]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  ThematicBreak[0, 0]
+  BlockQuote[0, 0]
+    Paragraph[12, 16]
+      Text[12, 15]
 ````````````````````````````````
 
 
@@ -3625,6 +4526,12 @@ baz
 baz</p>
 </blockquote>
 .
+Document[0, 10]
+  BlockQuote[0, 0]
+    Paragraph[2, 10]
+      Text[2, 5]
+      SoftLineBreak[5, 6]
+      Text[6, 9]
 ````````````````````````````````
 
 
@@ -3638,6 +4545,12 @@ baz
 </blockquote>
 <p>baz</p>
 .
+Document[0, 11]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  Paragraph[7, 11]
+    Text[7, 10]
 ````````````````````````````````
 
 
@@ -3651,6 +4564,12 @@ baz
 </blockquote>
 <p>baz</p>
 .
+Document[0, 12]
+  BlockQuote[0, 0]
+    Paragraph[2, 6]
+      Text[2, 5]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -3671,6 +4590,14 @@ bar</p>
 </blockquote>
 </blockquote>
 .
+Document[0, 14]
+  BlockQuote[0, 0]
+    BlockQuote[0, 0]
+      BlockQuote[0, 0]
+        Paragraph[6, 14]
+          Text[6, 9]
+          SoftLineBreak[9, 10]
+          Text[10, 13]
 ````````````````````````````````
 
 
@@ -3689,6 +4616,16 @@ baz</p>
 </blockquote>
 </blockquote>
 .
+Document[0, 20]
+  BlockQuote[0, 0]
+    BlockQuote[0, 0]
+      BlockQuote[0, 0]
+        Paragraph[4, 20]
+          Text[4, 19]
+          SoftLineBreak[7, 19]
+          Text[10, 19]
+          SoftLineBreak[13, 19]
+          Text[16, 19]
 ````````````````````````````````
 
 
@@ -3710,6 +4647,12 @@ the `>`:
 <p>not code</p>
 </blockquote>
 .
+Document[0, 26]
+  BlockQuote[0, 0]
+    IndentedCodeBlock[6, 11]
+  BlockQuote[0, 0]
+    Paragraph[17, 26]
+      Text[17, 25]
 ````````````````````````````````
 
 
@@ -3759,6 +4702,15 @@ with two lines.</p>
 <p>A block quote.</p>
 </blockquote>
 .
+Document[0, 65]
+  Paragraph[0, 28]
+    Text[0, 11]
+    SoftLineBreak[11, 12]
+    Text[12, 27]
+  IndentedCodeBlock[33, 48]
+  BlockQuote[0, 0]
+    Paragraph[50, 65]
+      Text[50, 64]
 ````````````````````````````````
 
 
@@ -3786,6 +4738,17 @@ with two lines.</p>
 </li>
 </ol>
 .
+Document[0, 81]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[4, 36]
+        Text[4, 35]
+        SoftLineBreak[15, 35]
+        Text[20, 35]
+      IndentedCodeBlock[45, 60]
+      BlockQuote[0, 0]
+        Paragraph[66, 81]
+          Text[66, 80]
 ````````````````````````````````
 
 
@@ -3810,6 +4773,13 @@ put under the list item:
 </ul>
 <p>two</p>
 .
+Document[0, 12]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -3825,6 +4795,13 @@ put under the list item:
 </li>
 </ul>
 .
+Document[0, 13]
+  BulletList[2, 13]
+    ListItem[2, 13]
+      Paragraph[2, 6]
+        Text[2, 5]
+      Paragraph[9, 13]
+        Text[9, 12]
 ````````````````````````````````
 
 
@@ -3839,6 +4816,12 @@ put under the list item:
 <pre><code> two
 </code></pre>
 .
+Document[0, 20]
+  BulletList[6, 10]
+    ListItem[6, 10]
+      Paragraph[6, 10]
+        Text[6, 9]
+  IndentedCodeBlock[15, 20]
 ````````````````````````````````
 
 
@@ -3854,6 +4837,13 @@ put under the list item:
 </li>
 </ul>
 .
+Document[0, 21]
+  BulletList[6, 21]
+    ListItem[6, 21]
+      Paragraph[6, 10]
+        Text[6, 9]
+      Paragraph[17, 21]
+        Text[17, 20]
 ````````````````````````````````
 
 
@@ -3881,6 +4871,15 @@ this example:
 </blockquote>
 </blockquote>
 .
+Document[0, 29]
+  BlockQuote[0, 0]
+    BlockQuote[0, 0]
+      OrderedList[11, 29]
+        ListItem[11, 29]
+          Paragraph[11, 15]
+            Text[11, 14]
+          Paragraph[25, 29]
+            Text[25, 28]
 ````````````````````````````````
 
 
@@ -3907,6 +4906,15 @@ far enough past the blockquote marker:
 </blockquote>
 </blockquote>
 .
+Document[0, 22]
+  BlockQuote[0, 0]
+    BlockQuote[0, 0]
+      BulletList[4, 8]
+        ListItem[4, 8]
+          Paragraph[4, 8]
+            Text[4, 7]
+      Paragraph[18, 22]
+        Text[18, 21]
 ````````````````````````````````
 
 
@@ -3921,6 +4929,11 @@ any following content, so these are not list items:
 <p>-one</p>
 <p>2.two</p>
 .
+Document[0, 12]
+  Paragraph[0, 5]
+    Text[0, 4]
+  Paragraph[6, 12]
+    Text[6, 11]
 ````````````````````````````````
 
 
@@ -3986,6 +4999,27 @@ bar
 </li>
 </ul>
 .
+Document[0, 97]
+  BulletList[2, 20]
+    ListItem[2, 13]
+      Paragraph[2, 6]
+        Text[2, 5]
+      Paragraph[9, 13]
+        Text[9, 12]
+    ListItem[16, 20]
+      Paragraph[16, 20]
+        Text[16, 19]
+  Paragraph[24, 28]
+    Text[24, 27]
+  BulletList[34, 71]
+    ListItem[34, 35]
+      FencedCodeBlock[34, 35]
+    ListItem[58, 71]
+      Paragraph[58, 62]
+        Text[58, 61]
+      BulletList[70, 71]
+        ListItem[70, 71]
+          FencedCodeBlock[70, 71]
 ````````````````````````````````
 
 
@@ -4014,6 +5048,17 @@ A list item may contain any kind of block:
 </li>
 </ol>
 .
+Document[0, 53]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[4, 8]
+        Text[4, 7]
+      FencedCodeBlock[16, 17]
+      Paragraph[38, 42]
+        Text[38, 41]
+      BlockQuote[0, 0]
+        Paragraph[49, 53]
+          Text[49, 52]
 ````````````````````````````````
 
 
@@ -4039,6 +5084,12 @@ baz
 </li>
 </ul>
 .
+Document[0, 28]
+  BulletList[2, 28]
+    ListItem[2, 28]
+      Paragraph[2, 6]
+        Text[2, 5]
+      IndentedCodeBlock[13, 28]
 ````````````````````````````````
 
 
@@ -4060,6 +5111,13 @@ baz
 <pre><code>  baz
 </code></pre>
 .
+Document[0, 29]
+  BulletList[2, 18]
+    ListItem[2, 18]
+      Paragraph[2, 6]
+        Text[2, 5]
+      IndentedCodeBlock[13, 18]
+  IndentedCodeBlock[23, 29]
 ````````````````````````````````
 
 
@@ -4072,6 +5130,11 @@ Note that ordered list start numbers must be nine digits or less:
 <li>ok</li>
 </ol>
 .
+Document[0, 14]
+  OrderedList[11, 14]
+    ListItem[11, 14]
+      Paragraph[11, 14]
+        Text[11, 13]
 ````````````````````````````````
 
 
@@ -4080,6 +5143,9 @@ Note that ordered list start numbers must be nine digits or less:
 .
 <p>1234567890. not ok</p>
 .
+Document[0, 19]
+  Paragraph[0, 19]
+    Text[0, 18]
 ````````````````````````````````
 
 
@@ -4092,6 +5158,11 @@ A start number may begin with 0s:
 <li>ok</li>
 </ol>
 .
+Document[0, 6]
+  OrderedList[3, 6]
+    ListItem[3, 6]
+      Paragraph[3, 6]
+        Text[3, 5]
 ````````````````````````````````
 
 
@@ -4102,6 +5173,11 @@ A start number may begin with 0s:
 <li>ok</li>
 </ol>
 .
+Document[0, 8]
+  OrderedList[5, 8]
+    ListItem[5, 8]
+      Paragraph[5, 8]
+        Text[5, 7]
 ````````````````````````````````
 
 
@@ -4112,6 +5188,9 @@ A start number may not be negative:
 .
 <p>-1. not ok</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -4145,6 +5224,12 @@ In the following case that is 6 spaces:
 </li>
 </ul>
 .
+Document[0, 17]
+  BulletList[2, 17]
+    ListItem[2, 17]
+      Paragraph[2, 6]
+        Text[2, 5]
+      IndentedCodeBlock[13, 17]
 ````````````````````````````````
 
 
@@ -4163,6 +5248,12 @@ And in this case it is 11 spaces:
 </li>
 </ol>
 .
+Document[0, 27]
+  OrderedList[7, 27]
+    ListItem[7, 27]
+      Paragraph[7, 11]
+        Text[7, 10]
+      IndentedCodeBlock[23, 27]
 ````````````````````````````````
 
 
@@ -4183,6 +5274,11 @@ paragraph
 <pre><code>more code
 </code></pre>
 .
+Document[0, 44]
+  IndentedCodeBlock[4, 19]
+  Paragraph[19, 29]
+    Text[19, 28]
+  IndentedCodeBlock[34, 44]
 ````````````````````````````````
 
 
@@ -4203,6 +5299,13 @@ paragraph
 </li>
 </ol>
 .
+Document[0, 53]
+  OrderedList[7, 53]
+    ListItem[7, 53]
+      IndentedCodeBlock[7, 22]
+      Paragraph[25, 35]
+        Text[25, 34]
+      IndentedCodeBlock[43, 53]
 ````````````````````````````````
 
 
@@ -4226,6 +5329,13 @@ inside the code block:
 </li>
 </ol>
 .
+Document[0, 54]
+  OrderedList[7, 54]
+    ListItem[7, 54]
+      IndentedCodeBlock[7, 23]
+      Paragraph[26, 36]
+        Text[26, 35]
+      IndentedCodeBlock[44, 54]
 ````````````````````````````````
 
 
@@ -4245,6 +5355,11 @@ bar
 <p>foo</p>
 <p>bar</p>
 .
+Document[0, 12]
+  Paragraph[3, 7]
+    Text[3, 6]
+  Paragraph[8, 12]
+    Text[8, 11]
 ````````````````````````````````
 
 
@@ -4258,6 +5373,13 @@ bar
 </ul>
 <p>bar</p>
 .
+Document[0, 16]
+  BulletList[5, 9]
+    ListItem[5, 9]
+      Paragraph[5, 9]
+        Text[5, 8]
+  Paragraph[12, 16]
+    Text[12, 15]
 ````````````````````````````````
 
 
@@ -4278,6 +5400,13 @@ the above case:
 </li>
 </ul>
 .
+Document[0, 15]
+  BulletList[3, 15]
+    ListItem[3, 15]
+      Paragraph[3, 7]
+        Text[3, 6]
+      Paragraph[11, 15]
+        Text[11, 14]
 ````````````````````````````````
 
 
@@ -4317,6 +5446,15 @@ Here are some list items that start with a blank line but are not empty:
 </li>
 </ul>
 .
+Document[0, 40]
+  BulletList[4, 40]
+    ListItem[4, 8]
+      Paragraph[4, 8]
+        Text[4, 7]
+    ListItem[15, 16]
+      FencedCodeBlock[15, 16]
+    ListItem[36, 40]
+      IndentedCodeBlock[36, 40]
 ````````````````````````````````
 
 
@@ -4334,6 +5472,11 @@ item:
 </ul>
 <p>foo</p>
 .
+Document[0, 9]
+  BulletList[0, 0]
+    ListItem[0, 0]
+  Paragraph[5, 9]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -4350,6 +5493,15 @@ Here is an empty bullet list item:
 <li>bar</li>
 </ul>
 .
+Document[0, 14]
+  BulletList[2, 14]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[0, 0]
+    ListItem[10, 14]
+      Paragraph[10, 14]
+        Text[10, 13]
 ````````````````````````````````
 
 
@@ -4357,7 +5509,7 @@ It does not matter whether there are spaces following the [list marker]:
 
 ```````````````````````````````` example
 - foo
--
+-   
 - bar
 .
 <ul>
@@ -4366,6 +5518,15 @@ It does not matter whether there are spaces following the [list marker]:
 <li>bar</li>
 </ul>
 .
+Document[0, 17]
+  BulletList[2, 17]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[0, 0]
+    ListItem[13, 17]
+      Paragraph[13, 17]
+        Text[13, 16]
 ````````````````````````````````
 
 
@@ -4382,6 +5543,15 @@ Here is an empty ordered list item:
 <li>bar</li>
 </ol>
 .
+Document[0, 17]
+  OrderedList[3, 17]
+    ListItem[3, 7]
+      Paragraph[3, 7]
+        Text[3, 6]
+    ListItem[0, 0]
+    ListItem[13, 17]
+      Paragraph[13, 17]
+        Text[13, 16]
 ````````````````````````````````
 
 
@@ -4394,6 +5564,9 @@ A list may start or end with an empty list item:
 <li></li>
 </ul>
 .
+Document[0, 2]
+  BulletList[0, 0]
+    ListItem[0, 0]
 ````````````````````````````````
 
 
@@ -4426,6 +5599,17 @@ with two lines.</p>
 </li>
 </ol>
 .
+Document[0, 85]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[5, 38]
+        Text[5, 37]
+        SoftLineBreak[16, 37]
+        Text[22, 37]
+      IndentedCodeBlock[48, 63]
+      BlockQuote[0, 0]
+        Paragraph[70, 85]
+          Text[70, 84]
 ````````````````````````````````
 
 
@@ -4451,6 +5635,17 @@ with two lines.</p>
 </li>
 </ol>
 .
+Document[0, 89]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[6, 40]
+        Text[6, 39]
+        SoftLineBreak[17, 39]
+        Text[24, 39]
+      IndentedCodeBlock[51, 66]
+      BlockQuote[0, 0]
+        Paragraph[74, 89]
+          Text[74, 88]
 ````````````````````````````````
 
 
@@ -4476,6 +5671,17 @@ with two lines.</p>
 </li>
 </ol>
 .
+Document[0, 93]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[7, 42]
+        Text[7, 41]
+        SoftLineBreak[18, 41]
+        Text[26, 41]
+      IndentedCodeBlock[54, 69]
+      BlockQuote[0, 0]
+        Paragraph[78, 93]
+          Text[78, 92]
 ````````````````````````````````
 
 
@@ -4497,6 +5703,8 @@ Four spaces indent gives a code block:
     &gt; A block quote.
 </code></pre>
 .
+Document[0, 97]
+  IndentedCodeBlock[4, 97]
 ````````````````````````````````
 
 
@@ -4532,6 +5740,17 @@ with two lines.</p>
 </li>
 </ol>
 .
+Document[0, 83]
+  OrderedList[0, 0]
+    ListItem[0, 0]
+      Paragraph[6, 34]
+        Text[6, 17]
+        SoftLineBreak[17, 18]
+        Text[18, 33]
+      IndentedCodeBlock[45, 60]
+      BlockQuote[0, 0]
+        Paragraph[68, 83]
+          Text[68, 82]
 ````````````````````````````````
 
 
@@ -4546,6 +5765,13 @@ Indentation can be partially deleted:
 with two lines.</li>
 </ol>
 .
+Document[0, 38]
+  OrderedList[6, 38]
+    ListItem[6, 38]
+      Paragraph[6, 38]
+        Text[6, 37]
+        SoftLineBreak[17, 37]
+        Text[22, 37]
 ````````````````````````````````
 
 
@@ -4566,6 +5792,15 @@ continued here.</p>
 </ol>
 </blockquote>
 .
+Document[0, 34]
+  BlockQuote[0, 0]
+    OrderedList[0, 0]
+      ListItem[0, 0]
+        BlockQuote[0, 0]
+          Paragraph[7, 34]
+            Text[7, 17]
+            SoftLineBreak[17, 18]
+            Text[18, 33]
 ````````````````````````````````
 
 
@@ -4584,6 +5819,15 @@ continued here.</p>
 </ol>
 </blockquote>
 .
+Document[0, 36]
+  BlockQuote[0, 0]
+    OrderedList[0, 0]
+      ListItem[0, 0]
+        BlockQuote[0, 0]
+          Paragraph[7, 36]
+            Text[7, 35]
+            SoftLineBreak[17, 35]
+            Text[20, 35]
 ````````````````````````````````
 
 
@@ -4614,6 +5858,19 @@ So, in this case we need two spaces indent:
 </li>
 </ul>
 .
+Document[0, 24]
+  BulletList[2, 24]
+    ListItem[2, 24]
+      Paragraph[2, 6]
+        Text[2, 5]
+      BulletList[10, 24]
+        ListItem[10, 24]
+          Paragraph[10, 14]
+            Text[10, 13]
+          BulletList[20, 24]
+            ListItem[20, 24]
+              Paragraph[20, 24]
+                Text[20, 23]
 ````````````````````````````````
 
 
@@ -4630,6 +5887,17 @@ One is not enough:
 <li>baz</li>
 </ul>
 .
+Document[0, 21]
+  BulletList[2, 21]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[9, 13]
+      Paragraph[9, 13]
+        Text[9, 12]
+    ListItem[17, 21]
+      Paragraph[17, 21]
+        Text[17, 20]
 ````````````````````````````````
 
 
@@ -4647,6 +5915,15 @@ Here we need four, because the list marker is wider:
 </li>
 </ol>
 .
+Document[0, 18]
+  OrderedList[4, 18]
+    ListItem[4, 18]
+      Paragraph[4, 8]
+        Text[4, 7]
+      BulletList[14, 18]
+        ListItem[14, 18]
+          Paragraph[14, 18]
+            Text[14, 17]
 ````````````````````````````````
 
 
@@ -4663,6 +5940,15 @@ Three is not enough:
 <li>bar</li>
 </ul>
 .
+Document[0, 17]
+  OrderedList[4, 8]
+    ListItem[4, 8]
+      Paragraph[4, 8]
+        Text[4, 7]
+  BulletList[13, 17]
+    ListItem[13, 17]
+      Paragraph[13, 17]
+        Text[13, 16]
 ````````````````````````````````
 
 
@@ -4679,6 +5965,13 @@ A list may be the first block in a list item:
 </li>
 </ul>
 .
+Document[0, 8]
+  BulletList[4, 8]
+    ListItem[4, 8]
+      BulletList[4, 8]
+        ListItem[4, 8]
+          Paragraph[4, 8]
+            Text[4, 7]
 ````````````````````````````````
 
 
@@ -4697,6 +5990,15 @@ A list may be the first block in a list item:
 </li>
 </ol>
 .
+Document[0, 12]
+  OrderedList[8, 12]
+    ListItem[8, 12]
+      BulletList[8, 12]
+        ListItem[8, 12]
+          OrderedList[8, 12]
+            ListItem[8, 12]
+              Paragraph[8, 12]
+                Text[8, 11]
 ````````````````````````````````
 
 
@@ -4717,6 +6019,16 @@ A list item can contain a heading:
 baz</li>
 </ul>
 .
+Document[0, 26]
+  BulletList[0, 0]
+    ListItem[0, 0]
+      Heading[0, 0]
+        Text[4, 7]
+    ListItem[0, 0]
+      Heading[0, 0]
+        Text[10, 13]
+      Paragraph[22, 26]
+        Text[22, 25]
 ````````````````````````````````
 
 
@@ -4880,7 +6192,7 @@ is not indented as far as the first paragraph `foo`:
 ``` markdown
  10. foo
 
-   bar
+   bar  
 ```
 
 Arguably this text does read like a list item with `bar` as a subparagraph,
@@ -4953,6 +6265,18 @@ Changing the bullet or ordered list delimiter starts a new list:
 <li>baz</li>
 </ul>
 .
+Document[0, 18]
+  BulletList[2, 12]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[8, 12]
+      Paragraph[8, 12]
+        Text[8, 11]
+  BulletList[14, 18]
+    ListItem[14, 18]
+      Paragraph[14, 18]
+        Text[14, 17]
 ````````````````````````````````
 
 
@@ -4969,6 +6293,18 @@ Changing the bullet or ordered list delimiter starts a new list:
 <li>baz</li>
 </ol>
 .
+Document[0, 21]
+  OrderedList[3, 14]
+    ListItem[3, 7]
+      Paragraph[3, 7]
+        Text[3, 6]
+    ListItem[10, 14]
+      Paragraph[10, 14]
+        Text[10, 13]
+  OrderedList[17, 21]
+    ListItem[17, 21]
+      Paragraph[17, 21]
+        Text[17, 20]
 ````````````````````````````````
 
 
@@ -4987,6 +6323,16 @@ Foo
 <li>baz</li>
 </ul>
 .
+Document[0, 16]
+  Paragraph[0, 4]
+    Text[0, 3]
+  BulletList[6, 16]
+    ListItem[6, 10]
+      Paragraph[6, 10]
+        Text[6, 9]
+    ListItem[12, 16]
+      Paragraph[12, 16]
+        Text[12, 15]
 ````````````````````````````````
 
 
@@ -5002,6 +6348,13 @@ The number of windows in my house is
 <li>The number of doors is 6.</li>
 </ol>
 .
+Document[0, 68]
+  Paragraph[0, 37]
+    Text[0, 36]
+  OrderedList[42, 68]
+    ListItem[42, 68]
+      Paragraph[42, 68]
+        Text[42, 67]
 ````````````````````````````````
 
 
@@ -5080,6 +6433,18 @@ a list:
 <li>baz</li>
 </ul>
 .
+Document[0, 21]
+  BulletList[2, 13]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[9, 13]
+      Paragraph[9, 13]
+        Text[9, 12]
+  BulletList[17, 21]
+    ListItem[17, 21]
+      Paragraph[17, 21]
+        Text[17, 20]
 ````````````````````````````````
 
 
@@ -5102,6 +6467,17 @@ list:
 <li>baz</li>
 </ul>
 .
+Document[0, 20]
+  BulletList[2, 6]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+  Paragraph[10, 14]
+    Text[10, 13]
+  BulletList[16, 20]
+    ListItem[16, 20]
+      Paragraph[16, 20]
+        Text[16, 19]
 ````````````````````````````````
 
 
@@ -5129,6 +6505,20 @@ Indeed, two blank lines will end *all* containing lists:
 <pre><code>  bim
 </code></pre>
 .
+Document[0, 36]
+  BulletList[2, 24]
+    ListItem[2, 24]
+      Paragraph[2, 6]
+        Text[2, 5]
+      BulletList[10, 24]
+        ListItem[10, 24]
+          Paragraph[10, 14]
+            Text[10, 13]
+          BulletList[20, 24]
+            ListItem[20, 24]
+              Paragraph[20, 24]
+                Text[20, 23]
+  IndentedCodeBlock[30, 36]
 ````````````````````````````````
 
 
@@ -5154,6 +6544,21 @@ item:
 <li>bim</li>
 </ul>
 .
+Document[0, 26]
+  BulletList[2, 12]
+    ListItem[2, 6]
+      Paragraph[2, 6]
+        Text[2, 5]
+    ListItem[8, 12]
+      Paragraph[8, 12]
+        Text[8, 11]
+  BulletList[16, 26]
+    ListItem[16, 20]
+      Paragraph[16, 20]
+        Text[16, 19]
+    ListItem[22, 26]
+      Paragraph[22, 26]
+        Text[22, 25]
 ````````````````````````````````
 
 
@@ -5179,6 +6584,17 @@ item:
 <pre><code>code
 </code></pre>
 .
+Document[0, 41]
+  BulletList[4, 30]
+    ListItem[4, 21]
+      Paragraph[4, 8]
+        Text[4, 7]
+      Paragraph[13, 21]
+        Text[13, 20]
+    ListItem[26, 30]
+      Paragraph[26, 30]
+        Text[26, 29]
+  IndentedCodeBlock[36, 41]
 ````````````````````````````````
 
 
@@ -5210,6 +6626,35 @@ item:
 <li>i</li>
 </ul>
 .
+Document[0, 52]
+  BulletList[2, 52]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[7, 9]
+      Paragraph[7, 9]
+        Text[7, 8]
+    ListItem[13, 15]
+      Paragraph[13, 15]
+        Text[13, 14]
+    ListItem[20, 22]
+      Paragraph[20, 22]
+        Text[20, 21]
+    ListItem[28, 30]
+      Paragraph[28, 30]
+        Text[28, 29]
+    ListItem[35, 37]
+      Paragraph[35, 37]
+        Text[35, 36]
+    ListItem[41, 43]
+      Paragraph[41, 43]
+        Text[41, 42]
+    ListItem[46, 48]
+      Paragraph[46, 48]
+        Text[46, 47]
+    ListItem[50, 52]
+      Paragraph[50, 52]
+        Text[50, 51]
 ````````````````````````````````
 
 
@@ -5232,6 +6677,17 @@ item:
 </li>
 </ol>
 .
+Document[0, 23]
+  OrderedList[3, 23]
+    ListItem[3, 5]
+      Paragraph[3, 5]
+        Text[3, 4]
+    ListItem[11, 13]
+      Paragraph[11, 13]
+        Text[11, 12]
+    ListItem[21, 23]
+      Paragraph[21, 23]
+        Text[21, 22]
 ````````````````````````````````
 
 
@@ -5256,6 +6712,17 @@ two of the list items:
 </li>
 </ul>
 .
+Document[0, 13]
+  BulletList[2, 13]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[6, 8]
+      Paragraph[6, 8]
+        Text[6, 7]
+    ListItem[11, 13]
+      Paragraph[11, 13]
+        Text[11, 12]
 ````````````````````````````````
 
 
@@ -5277,6 +6744,15 @@ So is this, with a empty second item:
 </li>
 </ul>
 .
+Document[0, 11]
+  BulletList[2, 11]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[0, 0]
+    ListItem[9, 11]
+      Paragraph[9, 11]
+        Text[9, 10]
 ````````````````````````````````
 
 
@@ -5304,6 +6780,19 @@ with a blank line between them:
 </li>
 </ul>
 .
+Document[0, 17]
+  BulletList[2, 17]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[6, 13]
+      Paragraph[6, 8]
+        Text[6, 7]
+      Paragraph[11, 13]
+        Text[11, 12]
+    ListItem[15, 17]
+      Paragraph[15, 17]
+        Text[15, 16]
 ````````````````````````````````
 
 
@@ -5326,6 +6815,17 @@ with a blank line between them:
 </li>
 </ul>
 .
+Document[0, 27]
+  BulletList[2, 27]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[6, 8]
+      Paragraph[6, 8]
+        Text[6, 7]
+    ListItem[25, 27]
+      Paragraph[25, 27]
+        Text[25, 26]
 ````````````````````````````````
 
 
@@ -5351,6 +6851,16 @@ This is a tight list, because the blank lines are in a code block:
 <li>c</li>
 </ul>
 .
+Document[0, 26]
+  BulletList[2, 26]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
+    ListItem[9, 10]
+      FencedCodeBlock[9, 10]
+    ListItem[24, 26]
+      Paragraph[24, 26]
+        Text[24, 25]
 ````````````````````````````````
 
 
@@ -5377,6 +6887,20 @@ the outer list is tight:
 <li>d</li>
 </ul>
 .
+Document[0, 21]
+  BulletList[2, 21]
+    ListItem[2, 17]
+      Paragraph[2, 4]
+        Text[2, 3]
+      BulletList[8, 17]
+        ListItem[8, 17]
+          Paragraph[8, 10]
+            Text[8, 9]
+          Paragraph[15, 17]
+            Text[15, 16]
+    ListItem[19, 21]
+      Paragraph[19, 21]
+        Text[19, 20]
 ````````````````````````````````
 
 
@@ -5398,6 +6922,17 @@ block quote:
 <li>c</li>
 </ul>
 .
+Document[0, 18]
+  BulletList[0, 0]
+    ListItem[0, 0]
+      Paragraph[2, 4]
+        Text[2, 3]
+      BlockQuote[0, 0]
+        Paragraph[8, 10]
+          Text[8, 9]
+    ListItem[16, 18]
+      Paragraph[16, 18]
+        Text[16, 17]
 ````````````````````````````````
 
 
@@ -5423,6 +6958,18 @@ are not separated by blank lines:
 <li>d</li>
 </ul>
 .
+Document[0, 30]
+  BulletList[2, 30]
+    ListItem[2, 16]
+      Paragraph[2, 4]
+        Text[2, 3]
+      BlockQuote[0, 0]
+        Paragraph[8, 10]
+          Text[8, 9]
+      FencedCodeBlock[15, 16]
+    ListItem[28, 30]
+      Paragraph[28, 30]
+        Text[28, 29]
 ````````````````````````````````
 
 
@@ -5435,6 +6982,11 @@ A single-paragraph list is tight:
 <li>a</li>
 </ul>
 .
+Document[0, 4]
+  BulletList[2, 4]
+    ListItem[2, 4]
+      Paragraph[2, 4]
+        Text[2, 3]
 ````````````````````````````````
 
 
@@ -5450,6 +7002,15 @@ A single-paragraph list is tight:
 </li>
 </ul>
 .
+Document[0, 10]
+  BulletList[2, 10]
+    ListItem[2, 10]
+      Paragraph[2, 4]
+        Text[2, 3]
+      BulletList[8, 10]
+        ListItem[8, 10]
+          Paragraph[8, 10]
+            Text[8, 9]
 ````````````````````````````````
 
 
@@ -5471,6 +7032,12 @@ two block elements in the list item:
 </li>
 </ol>
 .
+Document[0, 29]
+  OrderedList[6, 29]
+    ListItem[6, 29]
+      FencedCodeBlock[6, 7]
+      Paragraph[25, 29]
+        Text[25, 28]
 ````````````````````````````````
 
 
@@ -5492,6 +7059,17 @@ Here the outer list is loose, the inner list tight:
 </li>
 </ul>
 .
+Document[0, 21]
+  BulletList[2, 21]
+    ListItem[2, 21]
+      Paragraph[2, 6]
+        Text[2, 5]
+      BulletList[10, 14]
+        ListItem[10, 14]
+          Paragraph[10, 14]
+            Text[10, 13]
+      Paragraph[17, 21]
+        Text[17, 20]
 ````````````````````````````````
 
 
@@ -5521,6 +7099,28 @@ Here the outer list is loose, the inner list tight:
 </li>
 </ul>
 .
+Document[0, 33]
+  BulletList[2, 33]
+    ListItem[2, 16]
+      Paragraph[2, 4]
+        Text[2, 3]
+      BulletList[8, 16]
+        ListItem[8, 10]
+          Paragraph[8, 10]
+            Text[8, 9]
+        ListItem[14, 16]
+          Paragraph[14, 16]
+            Text[14, 15]
+    ListItem[19, 33]
+      Paragraph[19, 21]
+        Text[19, 20]
+      BulletList[25, 33]
+        ListItem[25, 27]
+          Paragraph[25, 27]
+            Text[25, 26]
+        ListItem[31, 33]
+          Paragraph[31, 33]
+            Text[31, 32]
 ````````````````````````````````
 
 
@@ -5535,6 +7135,10 @@ Thus, for example, in
 .
 <p><code>hi</code>lo`</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Code[0, 4]
+    Text[4, 7]
 ````````````````````````````````
 
 
@@ -5550,6 +7154,9 @@ Any ASCII punctuation character may be backslash-escaped:
 .
 <p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</p>
 .
+Document[0, 65]
+  Paragraph[0, 65]
+    Text[0, 64]
 ````````````````````````````````
 
 
@@ -5561,6 +7168,9 @@ backslashes:
 .
 <p>\→\A\a\ \3\φ\«</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Text[0, 14]
 ````````````````````````````````
 
 
@@ -5586,6 +7196,23 @@ not have their usual Markdown meanings:
 # not a heading
 [foo]: /url &quot;not a reference&quot;</p>
 .
+Document[0, 144]
+  Paragraph[0, 144]
+    Text[0, 17]
+    SoftLineBreak[17, 18]
+    Text[18, 34]
+    SoftLineBreak[34, 35]
+    Text[35, 54]
+    SoftLineBreak[54, 55]
+    Text[55, 66]
+    SoftLineBreak[66, 67]
+    Text[67, 81]
+    SoftLineBreak[81, 82]
+    Text[82, 95]
+    SoftLineBreak[95, 96]
+    Text[96, 112]
+    SoftLineBreak[112, 113]
+    Text[113, 143]
 ````````````````````````````````
 
 
@@ -5596,6 +7223,11 @@ If a backslash is itself escaped, the following character is not:
 .
 <p>\<em>emphasis</em></p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 2]
+    Emphasis[2, 12]
+      Text[3, 11]
 ````````````````````````````````
 
 
@@ -5608,6 +7240,11 @@ bar
 <p>foo<br />
 bar</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    HardLineBreak[0, 0]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -5619,6 +7256,9 @@ raw HTML:
 .
 <p><code>\[\`</code></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Code[0, 10]
 ````````````````````````````````
 
 
@@ -5628,6 +7268,8 @@ raw HTML:
 <pre><code>\[\]
 </code></pre>
 .
+Document[0, 9]
+  IndentedCodeBlock[4, 9]
 ````````````````````````````````
 
 
@@ -5639,6 +7281,8 @@ raw HTML:
 <pre><code>\[\]
 </code></pre>
 .
+Document[0, 13]
+  FencedCodeBlock[3, 4]
 ````````````````````````````````
 
 
@@ -5647,6 +7291,9 @@ raw HTML:
 .
 <p><a href="http://example.com?find=%5C*">http://example.com?find=\*</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 29]
+    AutoLink[0, 28]
 ````````````````````````````````
 
 
@@ -5655,6 +7302,8 @@ raw HTML:
 .
 <a href="/bar\/)">
 .
+Document[0, 19]
+  HtmlBlock[0, 19]
 ````````````````````````````````
 
 
@@ -5666,6 +7315,10 @@ link references, and [info strings] in [fenced code blocks]:
 .
 <p><a href="/bar*" title="ti*tle">foo</a></p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Link[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -5676,6 +7329,10 @@ link references, and [info strings] in [fenced code blocks]:
 .
 <p><a href="/bar*" title="ti*tle">foo</a></p>
 .
+Document[0, 31]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -5687,6 +7344,8 @@ foo
 <pre><code class="language-foo+bar">foo
 </code></pre>
 .
+Document[0, 21]
+  FencedCodeBlock[3, 13]
 ````````````````````````````````
 
 
@@ -5716,6 +7375,27 @@ references and their corresponding code points.
 ¾ ℋ ⅆ
 ∲ ≧̸</p>
 .
+Document[0, 110]
+  Paragraph[0, 110]
+    HtmlEntity[0, 6]
+    Text[6, 7]
+    HtmlEntity[7, 12]
+    Text[12, 13]
+    HtmlEntity[13, 19]
+    Text[19, 20]
+    HtmlEntity[20, 27]
+    Text[27, 28]
+    HtmlEntity[28, 36]
+    SoftLineBreak[36, 37]
+    HtmlEntity[37, 45]
+    Text[45, 46]
+    HtmlEntity[46, 60]
+    Text[60, 61]
+    HtmlEntity[61, 76]
+    SoftLineBreak[76, 77]
+    HtmlEntity[77, 103]
+    Text[103, 104]
+    HtmlEntity[104, 109]
 ````````````````````````````````
 
 
@@ -5732,6 +7412,17 @@ the code point `U+0000` will also be replaced by `U+FFFD`.
 .
 <p># Ӓ Ϡ � �</p>
 .
+Document[0, 38]
+  Paragraph[0, 38]
+    HtmlEntity[0, 5]
+    Text[5, 6]
+    HtmlEntity[6, 13]
+    Text[13, 14]
+    HtmlEntity[14, 20]
+    Text[20, 21]
+    HtmlEntity[21, 32]
+    Text[32, 33]
+    HtmlEntity[33, 37]
 ````````````````````````````````
 
 
@@ -5746,6 +7437,13 @@ time specified with a hexadecimal numeral instead of decimal).
 .
 <p>&quot; ആ ಫ</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    HtmlEntity[0, 6]
+    Text[6, 7]
+    HtmlEntity[7, 14]
+    Text[14, 15]
+    HtmlEntity[15, 22]
 ````````````````````````````````
 
 
@@ -5758,6 +7456,12 @@ Here are some nonentities:
 <p>&amp;nbsp &amp;x; &amp;#; &amp;#x;
 &amp;ThisIsNotDefined; &amp;hi?;</p>
 .
+Document[0, 44]
+  Paragraph[0, 44]
+    Text[0, 18]
+    SoftLineBreak[18, 19]
+    HtmlEntity[19, 37]
+    Text[37, 43]
 ````````````````````````````````
 
 
@@ -5770,6 +7474,9 @@ recognized here, because it makes the grammar too ambiguous:
 .
 <p>&amp;copy</p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Text[0, 5]
 ````````````````````````````````
 
 
@@ -5781,6 +7488,9 @@ recognized as entity references either:
 .
 <p>&amp;MadeUpEntity;</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    HtmlEntity[0, 14]
 ````````````````````````````````
 
 
@@ -5793,6 +7503,8 @@ URLs, [link titles], and [fenced code block][] [info strings]:
 .
 <a href="&ouml;&ouml;.html">
 .
+Document[0, 29]
+  HtmlBlock[0, 29]
 ````````````````````````````````
 
 
@@ -5801,6 +7513,10 @@ URLs, [link titles], and [fenced code block][] [info strings]:
 .
 <p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
 .
+Document[0, 38]
+  Paragraph[0, 38]
+    Link[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -5811,6 +7527,10 @@ URLs, [link titles], and [fenced code block][] [info strings]:
 .
 <p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
 .
+Document[0, 45]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -5822,6 +7542,8 @@ foo
 <pre><code class="language-föö">foo
 </code></pre>
 .
+Document[0, 26]
+  FencedCodeBlock[3, 18]
 ````````````````````````````````
 
 
@@ -5833,6 +7555,9 @@ text in code spans and code blocks:
 .
 <p><code>f&amp;ouml;&amp;ouml;</code></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Code[0, 15]
 ````````````````````````````````
 
 
@@ -5842,6 +7567,8 @@ text in code spans and code blocks:
 <pre><code>f&amp;ouml;f&amp;ouml;
 </code></pre>
 .
+Document[0, 19]
+  IndentedCodeBlock[4, 19]
 ````````````````````````````````
 
 
@@ -5864,6 +7591,9 @@ This is a simple code span:
 .
 <p><code>foo</code></p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Code[0, 5]
 ````````````````````````````````
 
 
@@ -5875,6 +7605,9 @@ This example also illustrates stripping of leading and trailing spaces:
 .
 <p><code>foo ` bar</code></p>
 .
+Document[0, 17]
+  Paragraph[0, 17]
+    Code[0, 16]
 ````````````````````````````````
 
 
@@ -5886,6 +7619,9 @@ spaces:
 .
 <p><code>``</code></p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Code[0, 6]
 ````````````````````````````````
 
 
@@ -5898,6 +7634,9 @@ foo
 .
 <p><code>foo</code></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Code[0, 9]
 ````````````````````````````````
 
 
@@ -5910,6 +7649,9 @@ single spaces, just as they would be by a browser:
 .
 <p><code>foo bar baz</code></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Code[0, 17]
 ````````````````````````````````
 
 
@@ -5931,6 +7673,9 @@ targeted.)
 .
 <p><code>foo `` bar</code></p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Code[0, 12]
 ````````````````````````````````
 
 
@@ -5942,6 +7687,10 @@ are treated literally:
 .
 <p><code>foo\</code>bar`</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Code[0, 6]
+    Text[6, 10]
 ````````````````````````````````
 
 
@@ -5959,6 +7708,10 @@ span:
 .
 <p>*foo<code>*</code></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 4]
+    Code[4, 7]
 ````````````````````````````````
 
 
@@ -5969,6 +7722,11 @@ And this is not parsed as a link:
 .
 <p>[not a <code>link](/foo</code>)</p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 7]
+    Code[7, 19]
+    Text[19, 20]
 ````````````````````````````````
 
 
@@ -5980,6 +7738,10 @@ Thus, this is code:
 .
 <p><code>&lt;a href=&quot;</code>&quot;&gt;`</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Code[0, 11]
+    Text[11, 14]
 ````````````````````````````````
 
 
@@ -5990,6 +7752,10 @@ But this is an HTML tag:
 .
 <p><a href="`">`</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    HtmlInline[0, 12]
+    Text[12, 13]
 ````````````````````````````````
 
 
@@ -6000,6 +7766,10 @@ And this is code:
 .
 <p><code>&lt;http://foo.bar.</code>baz&gt;`</p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Code[0, 18]
+    Text[18, 23]
 ````````````````````````````````
 
 
@@ -6010,6 +7780,10 @@ But this is an autolink:
 .
 <p><a href="http://foo.bar.%60baz">http://foo.bar.`baz</a>`</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    AutoLink[0, 21]
+    Text[21, 22]
 ````````````````````````````````
 
 
@@ -6021,6 +7795,9 @@ we just have literal backticks:
 .
 <p>```foo``</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6029,6 +7806,9 @@ we just have literal backticks:
 .
 <p>`foo</p>
 .
+Document[0, 5]
+  Paragraph[0, 5]
+    Text[0, 4]
 ````````````````````````````````
 
 
@@ -6240,6 +8020,10 @@ Rule 1:
 .
 <p><em>foo bar</em></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9]
+      Text[1, 8]
 ````````````````````````````````
 
 
@@ -6251,6 +8035,9 @@ a * foo bar*
 .
 <p>a * foo bar*</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -6263,6 +8050,9 @@ a*"foo"*
 .
 <p>a*&quot;foo&quot;*</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6273,6 +8063,9 @@ Unicode nonbreaking spaces count as whitespace, too:
 .
 <p>* a *</p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Text[0, 5]
 ````````````````````````````````
 
 
@@ -6283,6 +8076,11 @@ foo*bar*
 .
 <p>foo<em>bar</em></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    Emphasis[3, 8]
+      Text[4, 7]
 ````````````````````````````````
 
 
@@ -6291,6 +8089,12 @@ foo*bar*
 .
 <p>5<em>6</em>78</p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Text[0, 1]
+    Emphasis[1, 4]
+      Text[2, 3]
+    Text[4, 6]
 ````````````````````````````````
 
 
@@ -6301,6 +8105,10 @@ _foo bar_
 .
 <p><em>foo bar</em></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9]
+      Text[1, 8]
 ````````````````````````````````
 
 
@@ -6312,6 +8120,9 @@ _ foo bar_
 .
 <p>_ foo bar_</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6323,6 +8134,9 @@ a_"foo"_
 .
 <p>a_&quot;foo&quot;_</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6333,6 +8147,9 @@ foo_bar_
 .
 <p>foo_bar_</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6341,6 +8158,9 @@ foo_bar_
 .
 <p>5_6_78</p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Text[0, 6]
 ````````````````````````````````
 
 
@@ -6349,6 +8169,9 @@ foo_bar_
 .
 <p>пристаням_стремятся_</p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 20]
 ````````````````````````````````
 
 
@@ -6360,6 +8183,9 @@ aa_"bb"_cc
 .
 <p>aa_&quot;bb&quot;_cc</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6372,6 +8198,11 @@ foo-_(bar)_
 .
 <p>foo-<em>(bar)</em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 4]
+    Emphasis[4, 11]
+      Text[5, 10]
 ````````````````````````````````
 
 
@@ -6385,6 +8216,9 @@ _foo*
 .
 <p>_foo*</p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Text[0, 5]
 ````````````````````````````````
 
 
@@ -6396,6 +8230,9 @@ whitespace:
 .
 <p>*foo bar *</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6410,6 +8247,11 @@ A newline also counts as whitespace:
 <li></li>
 </ul>
 .
+Document[0, 11]
+  Paragraph[0, 9]
+    Text[0, 8]
+  BulletList[0, 0]
+    ListItem[0, 0]
 ````````````````````````````````
 
 
@@ -6422,6 +8264,9 @@ preceded by punctuation and followed by an alphanumeric
 .
 <p>*(*foo)</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -6433,6 +8278,13 @@ with this example:
 .
 <p><em>(<em>foo</em>)</em></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9]
+      Text[1, 2]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 8]
 ````````````````````````````````
 
 
@@ -6443,6 +8295,11 @@ Intraword emphasis with `*` is allowed:
 .
 <p><em>foo</em>bar</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -6457,6 +8314,9 @@ _foo bar _
 .
 <p>_foo bar _</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6468,6 +8328,9 @@ _(_foo)
 .
 <p>_(_foo)</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -6478,6 +8341,13 @@ _(_foo_)_
 .
 <p><em>(<em>foo</em>)</em></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9]
+      Text[1, 2]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 8]
 ````````````````````````````````
 
 
@@ -6488,6 +8358,9 @@ _foo_bar
 .
 <p>_foo_bar</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6496,6 +8369,9 @@ _пристаням_стремятся
 .
 <p>_пристаням_стремятся</p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 20]
 ````````````````````````````````
 
 
@@ -6504,6 +8380,10 @@ _foo_bar_baz_
 .
 <p><em>foo_bar_baz</em></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Emphasis[0, 13]
+      Text[1, 12]
 ````````````````````````````````
 
 
@@ -6516,6 +8396,11 @@ _(bar)_.
 .
 <p><em>(bar)</em>.</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Emphasis[0, 7]
+      Text[1, 6]
+    Text[7, 8]
 ````````````````````````````````
 
 
@@ -6526,6 +8411,10 @@ Rule 5:
 .
 <p><strong>foo bar</strong></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 11]
+      Text[2, 9]
 ````````````````````````````````
 
 
@@ -6537,6 +8426,9 @@ followed by whitespace:
 .
 <p>** foo bar**</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -6549,6 +8441,9 @@ a**"foo"**
 .
 <p>a**&quot;foo&quot;**</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6559,6 +8454,11 @@ foo**bar**
 .
 <p>foo<strong>bar</strong></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 3]
+    StrongEmphasis[3, 10]
+      Text[5, 8]
 ````````````````````````````````
 
 
@@ -6569,6 +8469,10 @@ __foo bar__
 .
 <p><strong>foo bar</strong></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 11]
+      Text[2, 9]
 ````````````````````````````````
 
 
@@ -6580,6 +8484,9 @@ __ foo bar__
 .
 <p>__ foo bar__</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -6591,6 +8498,11 @@ foo bar__
 <p>__
 foo bar__</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 2]
+    SoftLineBreak[2, 3]
+    Text[3, 12]
 ````````````````````````````````
 
 
@@ -6602,6 +8514,9 @@ a__"foo"__
 .
 <p>a__&quot;foo&quot;__</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6612,6 +8527,9 @@ foo__bar__
 .
 <p>foo__bar__</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6620,6 +8538,9 @@ foo__bar__
 .
 <p>5__6__78</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -6628,6 +8549,9 @@ foo__bar__
 .
 <p>пристаням__стремятся__</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    Text[0, 22]
 ````````````````````````````````
 
 
@@ -6636,6 +8560,13 @@ __foo, __bar__, baz__
 .
 <p><strong>foo, <strong>bar</strong>, baz</strong></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    StrongEmphasis[0, 21]
+      Text[2, 7]
+      StrongEmphasis[7, 14]
+        Text[9, 12]
+      Text[14, 19]
 ````````````````````````````````
 
 
@@ -6648,6 +8579,11 @@ foo-__(bar)__
 .
 <p>foo-<strong>(bar)</strong></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 4]
+    StrongEmphasis[4, 13]
+      Text[6, 11]
 ````````````````````````````````
 
 
@@ -6662,6 +8598,9 @@ by whitespace:
 .
 <p>**foo bar **</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -6676,6 +8615,9 @@ preceded by punctuation and followed by an alphanumeric:
 .
 <p>**(**foo)</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
 ````````````````````````````````
 
 
@@ -6687,6 +8629,13 @@ with these examples:
 .
 <p><em>(<strong>foo</strong>)</em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 11]
+      Text[1, 2]
+      StrongEmphasis[2, 9]
+        Text[4, 7]
+      Text[9, 10]
 ````````````````````````````````
 
 
@@ -6697,6 +8646,17 @@ with these examples:
 <p><strong>Gomphocarpus (<em>Gomphocarpus physocarpus</em>, syn.
 <em>Asclepias physocarpa</em>)</strong></p>
 .
+Document[0, 75]
+  Paragraph[0, 75]
+    StrongEmphasis[0, 74]
+      Text[2, 16]
+      Emphasis[16, 42]
+        Text[17, 41]
+      Text[42, 48]
+      SoftLineBreak[48, 49]
+      Emphasis[49, 71]
+        Text[50, 70]
+      Text[71, 72]
 ````````````````````````````````
 
 
@@ -6705,6 +8665,13 @@ with these examples:
 .
 <p><strong>foo &quot;<em>bar</em>&quot; foo</strong></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    StrongEmphasis[0, 19]
+      Text[2, 7]
+      Emphasis[7, 12]
+        Text[8, 11]
+      Text[12, 17]
 ````````````````````````````````
 
 
@@ -6715,6 +8682,11 @@ Intraword emphasis:
 .
 <p><strong>foo</strong>bar</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    StrongEmphasis[0, 7]
+      Text[2, 5]
+    Text[7, 10]
 ````````````````````````````````
 
 
@@ -6728,6 +8700,9 @@ __foo bar __
 .
 <p>__foo bar __</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -6739,6 +8714,9 @@ __(__foo)
 .
 <p>__(__foo)</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
 ````````````````````````````````
 
 
@@ -6750,6 +8728,13 @@ _(__foo__)_
 .
 <p><em>(<strong>foo</strong>)</em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 11]
+      Text[1, 2]
+      StrongEmphasis[2, 9]
+        Text[4, 7]
+      Text[9, 10]
 ````````````````````````````````
 
 
@@ -6760,6 +8745,9 @@ __foo__bar
 .
 <p>__foo__bar</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 10]
 ````````````````````````````````
 
 
@@ -6768,6 +8756,9 @@ __пристаням__стремятся
 .
 <p>__пристаням__стремятся</p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    Text[0, 22]
 ````````````````````````````````
 
 
@@ -6776,6 +8767,10 @@ __foo__bar__baz__
 .
 <p><strong>foo__bar__baz</strong></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    StrongEmphasis[0, 17]
+      Text[2, 15]
 ````````````````````````````````
 
 
@@ -6788,6 +8783,11 @@ __(bar)__.
 .
 <p><strong>(bar)</strong>.</p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    StrongEmphasis[0, 9]
+      Text[2, 7]
+    Text[9, 10]
 ````````````````````````````````
 
 
@@ -6801,6 +8801,12 @@ emphasized span.
 .
 <p><em>foo <a href="/url">bar</a></em></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Emphasis[0, 17]
+      Text[1, 5]
+      Link[0, 0]
+        Text[6, 9]
 ````````````````````````````````
 
 
@@ -6811,6 +8817,12 @@ bar*
 <p><em>foo
 bar</em></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9]
+      Text[1, 4]
+      SoftLineBreak[4, 5]
+      Text[5, 8]
 ````````````````````````````````
 
 
@@ -6822,6 +8834,13 @@ _foo __bar__ baz_
 .
 <p><em>foo <strong>bar</strong> baz</em></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Emphasis[0, 17]
+      Text[1, 5]
+      StrongEmphasis[5, 12]
+        Text[7, 10]
+      Text[12, 16]
 ````````````````````````````````
 
 
@@ -6830,6 +8849,13 @@ _foo _bar_ baz_
 .
 <p><em>foo <em>bar</em> baz</em></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Emphasis[0, 15]
+      Text[1, 5]
+      Emphasis[5, 10]
+        Text[6, 9]
+      Text[10, 14]
 ````````````````````````````````
 
 
@@ -6838,6 +8864,12 @@ __foo_ bar_
 .
 <p><em><em>foo</em> bar</em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 11]
+      Emphasis[1, 6]
+        Text[2, 5]
+      Text[6, 10]
 ````````````````````````````````
 
 
@@ -6846,6 +8878,12 @@ __foo_ bar_
 .
 <p><em>foo <em>bar</em></em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 10]
+      Text[1, 5]
+      Emphasis[5, 10]
+        Text[6, 9]
 ````````````````````````````````
 
 
@@ -6854,6 +8892,13 @@ __foo_ bar_
 .
 <p><em>foo <strong>bar</strong> baz</em></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Emphasis[0, 17]
+      Text[1, 5]
+      StrongEmphasis[5, 12]
+        Text[7, 10]
+      Text[12, 16]
 ````````````````````````````````
 
 
@@ -6864,6 +8909,14 @@ But note:
 .
 <p><em>foo</em><em>bar</em><em>baz</em></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Emphasis[4, 10]
+      Text[6, 9]
+    Emphasis[9, 15]
+      Text[11, 14]
 ````````````````````````````````
 
 
@@ -6875,6 +8928,12 @@ The difference is that in the preceding case, the internal delimiters
 .
 <p><em><strong>foo</strong> bar</em></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Emphasis[0, 13]
+      StrongEmphasis[1, 8]
+        Text[3, 6]
+      Text[8, 12]
 ````````````````````````````````
 
 
@@ -6883,6 +8942,12 @@ The difference is that in the preceding case, the internal delimiters
 .
 <p><em>foo <strong>bar</strong></em></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Emphasis[0, 11]
+      Text[1, 5]
+      StrongEmphasis[5, 12]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -6895,6 +8960,13 @@ emphasis, because the opening delimiter is closed by the first
 .
 <p><em>foo</em><em>bar</em>**</p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Emphasis[4, 10]
+      Text[6, 9]
+    Text[10, 12]
 ````````````````````````````````
 
 
@@ -6906,6 +8978,16 @@ Indefinite levels of nesting are possible:
 .
 <p><em>foo <strong>bar <em>baz</em> bim</strong> bop</em></p>
 .
+Document[0, 28]
+  Paragraph[0, 28]
+    Emphasis[0, 27]
+      Text[1, 5]
+      StrongEmphasis[5, 22]
+        Text[7, 11]
+        Emphasis[11, 16]
+          Text[12, 15]
+        Text[16, 20]
+      Text[22, 26]
 ````````````````````````````````
 
 
@@ -6914,6 +8996,13 @@ Indefinite levels of nesting are possible:
 .
 <p><em>foo <a href="/url"><em>bar</em></a></em></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    Emphasis[0, 19]
+      Text[1, 5]
+      Link[0, 0]
+        Emphasis[6, 11]
+          Text[7, 10]
 ````````````````````````````````
 
 
@@ -6924,6 +9013,9 @@ There can be no empty emphasis or strong emphasis:
 .
 <p>** is not an empty emphasis</p>
 .
+Document[0, 28]
+  Paragraph[0, 28]
+    Text[0, 27]
 ````````````````````````````````
 
 
@@ -6932,6 +9024,9 @@ There can be no empty emphasis or strong emphasis:
 .
 <p>**** is not an empty strong emphasis</p>
 .
+Document[0, 37]
+  Paragraph[0, 37]
+    Text[0, 36]
 ````````````````````````````````
 
 
@@ -6946,6 +9041,12 @@ strongly emphasized span.
 .
 <p><strong>foo <a href="/url">bar</a></strong></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    StrongEmphasis[0, 19]
+      Text[2, 6]
+      Link[0, 0]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -6956,6 +9057,12 @@ bar**
 <p><strong>foo
 bar</strong></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 11]
+      Text[2, 5]
+      SoftLineBreak[5, 6]
+      Text[6, 9]
 ````````````````````````````````
 
 
@@ -6967,6 +9074,13 @@ __foo _bar_ baz__
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    StrongEmphasis[0, 17]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
+      Text[11, 15]
 ````````````````````````````````
 
 
@@ -6975,6 +9089,13 @@ __foo __bar__ baz__
 .
 <p><strong>foo <strong>bar</strong> baz</strong></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    StrongEmphasis[0, 19]
+      Text[2, 6]
+      StrongEmphasis[6, 13]
+        Text[8, 11]
+      Text[13, 17]
 ````````````````````````````````
 
 
@@ -6983,6 +9104,12 @@ ____foo__ bar__
 .
 <p><strong><strong>foo</strong> bar</strong></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    StrongEmphasis[0, 15]
+      StrongEmphasis[2, 9]
+        Text[4, 7]
+      Text[9, 13]
 ````````````````````````````````
 
 
@@ -6991,6 +9118,12 @@ ____foo__ bar__
 .
 <p><strong>foo <strong>bar</strong></strong></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    StrongEmphasis[0, 13]
+      Text[2, 6]
+      StrongEmphasis[6, 13]
+        Text[8, 11]
 ````````````````````````````````
 
 
@@ -6999,6 +9132,13 @@ ____foo__ bar__
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    StrongEmphasis[0, 17]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
+      Text[11, 15]
 ````````````````````````````````
 
 
@@ -7009,6 +9149,13 @@ But note:
 .
 <p><em><em>foo</em>bar</em>baz**</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Emphasis[0, 10]
+      Emphasis[1, 6]
+        Text[2, 5]
+      Text[6, 9]
+    Text[10, 15]
 ````````````````````````````````
 
 
@@ -7020,6 +9167,12 @@ The difference is that in the preceding case, the internal delimiters
 .
 <p><strong><em>foo</em> bar</strong></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    StrongEmphasis[0, 13]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 11]
 ````````````````````````````````
 
 
@@ -7028,6 +9181,12 @@ The difference is that in the preceding case, the internal delimiters
 .
 <p><strong>foo <em>bar</em></strong></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    StrongEmphasis[0, 12]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -7040,6 +9199,17 @@ bim* bop**
 <p><strong>foo <em>bar <strong>baz</strong>
 bim</em> bop</strong></p>
 .
+Document[0, 30]
+  Paragraph[0, 30]
+    StrongEmphasis[0, 29]
+      Text[2, 6]
+      Emphasis[6, 23]
+        Text[7, 11]
+        StrongEmphasis[11, 18]
+          Text[13, 16]
+        SoftLineBreak[18, 19]
+        Text[19, 22]
+      Text[23, 27]
 ````````````````````````````````
 
 
@@ -7048,6 +9218,13 @@ bim</em> bop</strong></p>
 .
 <p><strong>foo <a href="/url"><em>bar</em></a></strong></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    StrongEmphasis[0, 21]
+      Text[2, 6]
+      Link[0, 0]
+        Emphasis[7, 12]
+          Text[8, 11]
 ````````````````````````````````
 
 
@@ -7058,6 +9235,9 @@ __ is not an empty emphasis
 .
 <p>__ is not an empty emphasis</p>
 .
+Document[0, 28]
+  Paragraph[0, 28]
+    Text[0, 27]
 ````````````````````````````````
 
 
@@ -7066,6 +9246,9 @@ ____ is not an empty strong emphasis
 .
 <p>____ is not an empty strong emphasis</p>
 .
+Document[0, 37]
+  Paragraph[0, 37]
+    Text[0, 36]
 ````````````````````````````````
 
 
@@ -7077,6 +9260,9 @@ foo ***
 .
 <p>foo ***</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -7085,6 +9271,11 @@ foo *\**
 .
 <p>foo <em>*</em></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 4]
+    Emphasis[4, 8]
+      Text[5, 7]
 ````````````````````````````````
 
 
@@ -7093,6 +9284,11 @@ foo *_*
 .
 <p>foo <em>_</em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 4]
+    Emphasis[4, 7]
+      Text[5, 6]
 ````````````````````````````````
 
 
@@ -7101,6 +9297,9 @@ foo *****
 .
 <p>foo *****</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
 ````````````````````````````````
 
 
@@ -7109,6 +9308,11 @@ foo **\***
 .
 <p>foo <strong>*</strong></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 4]
+    StrongEmphasis[4, 10]
+      Text[6, 8]
 ````````````````````````````````
 
 
@@ -7117,6 +9321,11 @@ foo **_**
 .
 <p>foo <strong>_</strong></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 4]
+    StrongEmphasis[4, 9]
+      Text[6, 7]
 ````````````````````````````````
 
 
@@ -7129,6 +9338,11 @@ emphasis, rather than inside it:
 .
 <p>*<em>foo</em></p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Text[0, 1]
+    Emphasis[1, 6]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -7137,6 +9351,11 @@ emphasis, rather than inside it:
 .
 <p><em>foo</em>*</p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Text[5, 6]
 ````````````````````````````````
 
 
@@ -7145,6 +9364,11 @@ emphasis, rather than inside it:
 .
 <p>*<strong>foo</strong></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 1]
+    StrongEmphasis[1, 8]
+      Text[3, 6]
 ````````````````````````````````
 
 
@@ -7153,6 +9377,11 @@ emphasis, rather than inside it:
 .
 <p>***<em>foo</em></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    Emphasis[3, 8]
+      Text[4, 7]
 ````````````````````````````````
 
 
@@ -7161,6 +9390,11 @@ emphasis, rather than inside it:
 .
 <p><strong>foo</strong>*</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    StrongEmphasis[0, 7]
+      Text[2, 5]
+    Text[7, 8]
 ````````````````````````````````
 
 
@@ -7169,6 +9403,11 @@ emphasis, rather than inside it:
 .
 <p><em>foo</em>***</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -7180,6 +9419,9 @@ foo ___
 .
 <p>foo ___</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -7188,6 +9430,11 @@ foo _\__
 .
 <p>foo <em>_</em></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 4]
+    Emphasis[4, 8]
+      Text[5, 7]
 ````````````````````````````````
 
 
@@ -7196,6 +9443,11 @@ foo _*_
 .
 <p>foo <em>*</em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 4]
+    Emphasis[4, 7]
+      Text[5, 6]
 ````````````````````````````````
 
 
@@ -7204,6 +9456,9 @@ foo _____
 .
 <p>foo _____</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
 ````````````````````````````````
 
 
@@ -7212,6 +9467,11 @@ foo __\___
 .
 <p>foo <strong>_</strong></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Text[0, 4]
+    StrongEmphasis[4, 10]
+      Text[6, 8]
 ````````````````````````````````
 
 
@@ -7220,6 +9480,11 @@ foo __*__
 .
 <p>foo <strong>*</strong></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 4]
+    StrongEmphasis[4, 9]
+      Text[6, 7]
 ````````````````````````````````
 
 
@@ -7228,6 +9493,11 @@ __foo_
 .
 <p>_<em>foo</em></p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Text[0, 1]
+    Emphasis[1, 6]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -7240,6 +9510,11 @@ _foo__
 .
 <p><em>foo</em>_</p>
 .
+Document[0, 7]
+  Paragraph[0, 7]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Text[5, 6]
 ````````````````````````````````
 
 
@@ -7248,6 +9523,11 @@ ___foo__
 .
 <p>_<strong>foo</strong></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 1]
+    StrongEmphasis[1, 8]
+      Text[3, 6]
 ````````````````````````````````
 
 
@@ -7256,6 +9536,11 @@ ____foo_
 .
 <p>___<em>foo</em></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    Emphasis[3, 8]
+      Text[4, 7]
 ````````````````````````````````
 
 
@@ -7264,6 +9549,11 @@ __foo___
 .
 <p><strong>foo</strong>_</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    StrongEmphasis[0, 7]
+      Text[2, 5]
+    Text[7, 8]
 ````````````````````````````````
 
 
@@ -7272,6 +9562,11 @@ _foo____
 .
 <p><em>foo</em>___</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Emphasis[0, 5]
+      Text[1, 4]
+    Text[5, 8]
 ````````````````````````````````
 
 
@@ -7283,6 +9578,10 @@ emphasis, you must use different delimiters:
 .
 <p><strong>foo</strong></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    StrongEmphasis[0, 7]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -7291,6 +9590,11 @@ emphasis, you must use different delimiters:
 .
 <p><em><em>foo</em></em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Emphasis[0, 7]
+      Emphasis[1, 6]
+        Text[2, 5]
 ````````````````````````````````
 
 
@@ -7299,6 +9603,10 @@ __foo__
 .
 <p><strong>foo</strong></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    StrongEmphasis[0, 7]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -7307,6 +9615,11 @@ _*foo*_
 .
 <p><em><em>foo</em></em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Emphasis[0, 7]
+      Emphasis[1, 6]
+        Text[2, 5]
 ````````````````````````````````
 
 
@@ -7318,6 +9631,11 @@ switching delimiters:
 .
 <p><strong><strong>foo</strong></strong></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 9]
+      StrongEmphasis[2, 9]
+        Text[4, 7]
 ````````````````````````````````
 
 
@@ -7326,6 +9644,11 @@ ____foo____
 .
 <p><strong><strong>foo</strong></strong></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 9]
+      StrongEmphasis[2, 9]
+        Text[4, 7]
 ````````````````````````````````
 
 
@@ -7338,6 +9661,12 @@ delimiters:
 .
 <p><strong><strong><strong>foo</strong></strong></strong></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    StrongEmphasis[0, 11]
+      StrongEmphasis[2, 11]
+        StrongEmphasis[4, 11]
+          Text[6, 9]
 ````````````````````````````````
 
 
@@ -7348,6 +9677,11 @@ Rule 14:
 .
 <p><strong><em>foo</em></strong></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    StrongEmphasis[0, 8]
+      Emphasis[2, 7]
+        Text[3, 6]
 ````````````````````````````````
 
 
@@ -7356,6 +9690,12 @@ _____foo_____
 .
 <p><strong><strong><em>foo</em></strong></strong></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    StrongEmphasis[0, 10]
+      StrongEmphasis[2, 10]
+        Emphasis[4, 9]
+          Text[5, 8]
 ````````````````````````````````
 
 
@@ -7366,6 +9706,11 @@ Rule 15:
 .
 <p><em>foo _bar</em> baz_</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Emphasis[0, 10]
+      Text[1, 9]
+    Text[10, 15]
 ````````````````````````````````
 
 
@@ -7374,6 +9719,13 @@ Rule 15:
 .
 <p><em><em>foo</em>bar</em>*</p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 10]
+      Emphasis[1, 6]
+        Text[2, 5]
+      Text[6, 9]
+    Text[10, 11]
 ````````````````````````````````
 
 
@@ -7382,6 +9734,13 @@ Rule 15:
 .
 <p><em>foo <strong>bar *baz bim</strong> bam</em></p>
 .
+Document[0, 27]
+  Paragraph[0, 27]
+    Emphasis[0, 26]
+      Text[1, 5]
+      StrongEmphasis[5, 21]
+        Text[7, 19]
+      Text[21, 25]
 ````````````````````````````````
 
 
@@ -7392,6 +9751,11 @@ Rule 16:
 .
 <p>**foo <strong>bar baz</strong></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 6]
+    StrongEmphasis[6, 17]
+      Text[8, 15]
 ````````````````````````````````
 
 
@@ -7400,6 +9764,11 @@ Rule 16:
 .
 <p>*foo <em>bar baz</em></p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Text[0, 5]
+    Emphasis[5, 14]
+      Text[6, 13]
 ````````````````````````````````
 
 
@@ -7410,6 +9779,11 @@ Rule 17:
 .
 <p>*<a href="/url">bar*</a></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 1]
+    Link[0, 0]
+      Text[2, 6]
 ````````````````````````````````
 
 
@@ -7418,6 +9792,11 @@ _foo [bar_](/url)
 .
 <p>_foo <a href="/url">bar_</a></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 5]
+    Link[0, 0]
+      Text[6, 10]
 ````````````````````````````````
 
 
@@ -7426,6 +9805,10 @@ _foo [bar_](/url)
 .
 <p>*<img src="foo" title="*"/></p>
 .
+Document[0, 28]
+  Paragraph[0, 28]
+    Text[0, 1]
+    HtmlInline[1, 27]
 ````````````````````````````````
 
 
@@ -7434,6 +9817,10 @@ _foo [bar_](/url)
 .
 <p>**<a href="**"></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 2]
+    HtmlInline[2, 15]
 ````````````````````````````````
 
 
@@ -7442,6 +9829,10 @@ __<a href="__">
 .
 <p>__<a href="__"></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 2]
+    HtmlInline[2, 15]
 ````````````````````````````````
 
 
@@ -7450,6 +9841,11 @@ __<a href="__">
 .
 <p><em>a <code>*</code></em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Emphasis[0, 7]
+      Text[1, 3]
+      Code[3, 6]
 ````````````````````````````````
 
 
@@ -7458,6 +9854,11 @@ _a `_`_
 .
 <p><em>a <code>_</code></em></p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Emphasis[0, 7]
+      Text[1, 3]
+      Code[3, 6]
 ````````````````````````````````
 
 
@@ -7466,6 +9867,10 @@ _a `_`_
 .
 <p>**a<a href="http://foo.bar/?q=**">http://foo.bar/?q=**</a></p>
 .
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 3]
+    AutoLink[3, 25]
 ````````````````````````````````
 
 
@@ -7474,6 +9879,10 @@ __a<http://foo.bar/?q=__>
 .
 <p>__a<a href="http://foo.bar/?q=__">http://foo.bar/?q=__</a></p>
 .
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 3]
+    AutoLink[3, 25]
 ````````````````````````````````
 
 
@@ -7555,6 +9964,10 @@ Here is a simple inline link:
 .
 <p><a href="/uri" title="title">link</a></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7565,6 +9978,10 @@ The title may be omitted:
 .
 <p><a href="/uri">link</a></p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7575,6 +9992,10 @@ Both the title and the destination may be omitted:
 .
 <p><a href="">link</a></p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7583,6 +10004,10 @@ Both the title and the destination may be omitted:
 .
 <p><a href="">link</a></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7594,6 +10019,9 @@ even if enclosed in pointy brackets:
 .
 <p>[link](/my uri)</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 15]
 ````````````````````````````````
 
 
@@ -7602,6 +10030,9 @@ even if enclosed in pointy brackets:
 .
 <p>[link](&lt;/my uri&gt;)</p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 17]
 ````````````````````````````````
 
 
@@ -7612,6 +10043,11 @@ bar)
 <p>[link](foo
 bar)</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 10]
+    SoftLineBreak[10, 11]
+    Text[11, 15]
 ````````````````````````````````
 
 
@@ -7622,6 +10058,11 @@ bar>)
 <p>[link](<foo
 bar>)</p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 7]
+    HtmlInline[7, 16]
+    Text[16, 17]
 ````````````````````````````````
 
 Parentheses inside the link destination may be escaped:
@@ -7631,6 +10072,10 @@ Parentheses inside the link destination may be escaped:
 .
 <p><a href="(foo)">link</a></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 One level of balanced parentheses is allowed without escaping:
@@ -7640,6 +10085,10 @@ One level of balanced parentheses is allowed without escaping:
 .
 <p><a href="(foo)and(bar)">link</a></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 However, if you have parentheses within parentheses, you need to escape
@@ -7650,6 +10099,9 @@ or use the `<...>` form:
 .
 <p>[link](foo(and(bar)))</p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 21]
 ````````````````````````````````
 
 
@@ -7658,6 +10110,10 @@ or use the `<...>` form:
 .
 <p><a href="foo(and(bar))">link</a></p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7666,6 +10122,10 @@ or use the `<...>` form:
 .
 <p><a href="foo(and(bar))">link</a></p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7677,6 +10137,10 @@ in Markdown:
 .
 <p><a href="foo):">link</a></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7693,6 +10157,16 @@ A link can contain fragment identifiers and queries:
 <p><a href="http://example.com#fragment">link</a></p>
 <p><a href="http://example.com?foo=3#frag">link</a></p>
 .
+Document[0, 94]
+  Paragraph[0, 18]
+    Link[0, 0]
+      Text[1, 5]
+  Paragraph[19, 55]
+    Link[0, 0]
+      Text[20, 24]
+  Paragraph[56, 94]
+    Link[0, 0]
+      Text[57, 61]
 ````````````````````````````````
 
 
@@ -7704,6 +10178,10 @@ just a backslash:
 .
 <p><a href="foo%5Cbar">link</a></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7721,6 +10199,10 @@ about how to escape or normalize URLs in the output.
 .
 <p><a href="foo%20b%C3%A4">link</a></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7733,6 +10215,10 @@ get unexpected results:
 .
 <p><a href="%22title%22">link</a></p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7747,6 +10233,16 @@ Titles may be in single quotes, double quotes, or parentheses:
 <a href="/url" title="title">link</a>
 <a href="/url" title="title">link</a></p>
 .
+Document[0, 63]
+  Paragraph[0, 63]
+    Link[0, 0]
+      Text[1, 5]
+    SoftLineBreak[20, 21]
+    Link[0, 0]
+      Text[22, 26]
+    SoftLineBreak[41, 42]
+    Link[0, 0]
+      Text[43, 47]
 ````````````````````````````````
 
 
@@ -7758,6 +10254,10 @@ may be used in titles:
 .
 <p><a href="/url" title="title &quot;&quot;">link</a></p>
 .
+Document[0, 30]
+  Paragraph[0, 30]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7768,6 +10268,9 @@ Nested balanced quotes are not allowed without escaping:
 .
 <p>[link](/url &quot;title &quot;and&quot; title&quot;)</p>
 .
+Document[0, 33]
+  Paragraph[0, 33]
+    Text[0, 32]
 ````````````````````````````````
 
 
@@ -7778,6 +10281,10 @@ But it is easy to work around this by using a different quote type:
 .
 <p><a href="/url" title="title &quot;and&quot; title">link</a></p>
 .
+Document[0, 33]
+  Paragraph[0, 33]
+    Link[0, 0]
+      Text[1, 5]
 ````````````````````````````````
 
 
@@ -7804,6 +10311,10 @@ the same way in inline links and link reference definitions.)
 .
 <p><a href="/uri" title="title">link</a></p>
 .
+Document[0, 28]
+  Paragraph[0, 28]
+    Link[0, 0]
+      Text[1, 27]
 ````````````````````````````````
 
 
@@ -7815,6 +10326,9 @@ following parenthesis:
 .
 <p>[link] (/uri)</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13]
 ````````````````````````````````
 
 
@@ -7826,6 +10340,10 @@ unless they are escaped:
 .
 <p><a href="/uri">link [foo [bar]]</a></p>
 .
+Document[0, 25]
+  Paragraph[0, 25]
+    Link[0, 0]
+      Text[1, 17]
 ````````````````````````````````
 
 
@@ -7834,6 +10352,9 @@ unless they are escaped:
 .
 <p>[link] bar](/uri)</p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 17]
 ````````````````````````````````
 
 
@@ -7842,6 +10363,11 @@ unless they are escaped:
 .
 <p>[link <a href="/uri">bar</a></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 6]
+    Link[0, 0]
+      Text[7, 10]
 ````````````````````````````````
 
 
@@ -7850,6 +10376,10 @@ unless they are escaped:
 .
 <p><a href="/uri">link [bar</a></p>
 .
+Document[0, 19]
+  Paragraph[0, 19]
+    Link[0, 0]
+      Text[1, 11]
 ````````````````````````````````
 
 
@@ -7860,6 +10390,16 @@ The link text may contain inline content:
 .
 <p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
 .
+Document[0, 31]
+  Paragraph[0, 31]
+    Link[0, 0]
+      Text[1, 6]
+      Emphasis[6, 23]
+        Text[7, 11]
+        StrongEmphasis[11, 18]
+          Text[13, 16]
+        Text[18, 19]
+        Code[19, 22]
 ````````````````````````````````
 
 
@@ -7868,6 +10408,11 @@ The link text may contain inline content:
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
 .
+Document[0, 26]
+  Paragraph[0, 26]
+    Link[0, 0]
+      Image[0, 0]
+        Text[3, 7]
 ````````````````````````````````
 
 
@@ -7878,6 +10423,12 @@ However, links may not contain other links, at any level of nesting.
 .
 <p>[foo <a href="/uri">bar</a>](/uri)</p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 5]
+    Link[0, 0]
+      Text[6, 9]
+    Text[16, 23]
 ````````````````````````````````
 
 
@@ -7886,6 +10437,15 @@ However, links may not contain other links, at any level of nesting.
 .
 <p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
 .
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5]
+    Emphasis[5, 30]
+      Text[6, 11]
+      Link[0, 0]
+        Text[12, 15]
+      Text[22, 29]
+    Text[30, 37]
 ````````````````````````````````
 
 
@@ -7894,6 +10454,13 @@ However, links may not contain other links, at any level of nesting.
 .
 <p><img src="uri3" alt="[foo](uri2)" /></p>
 .
+Document[0, 29]
+  Paragraph[0, 29]
+    Image[0, 0]
+      Text[2, 3]
+      Link[0, 0]
+        Text[4, 7]
+      Text[14, 21]
 ````````````````````````````````
 
 
@@ -7905,6 +10472,11 @@ emphasis grouping:
 .
 <p>*<a href="/uri">foo*</a></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 1]
+    Link[0, 0]
+      Text[2, 6]
 ````````````````````````````````
 
 
@@ -7913,6 +10485,10 @@ emphasis grouping:
 .
 <p><a href="baz*">foo *bar</a></p>
 .
+Document[0, 17]
+  Paragraph[0, 17]
+    Link[0, 0]
+      Text[1, 9]
 ````````````````````````````````
 
 
@@ -7924,6 +10500,11 @@ precedence:
 .
 <p><em>foo [bar</em> baz]</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Emphasis[0, 10]
+      Text[1, 9]
+    Text[10, 15]
 ````````````````````````````````
 
 
@@ -7935,6 +10516,10 @@ and autolinks over link grouping:
 .
 <p>[foo <bar attr="](baz)"></p>
 .
+Document[0, 25]
+  Paragraph[0, 25]
+    Text[0, 5]
+    HtmlInline[5, 24]
 ````````````````````````````````
 
 
@@ -7943,6 +10528,10 @@ and autolinks over link grouping:
 .
 <p>[foo<code>](/uri)</code></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 4]
+    Code[4, 13]
 ````````````````````````````````
 
 
@@ -7951,6 +10540,10 @@ and autolinks over link grouping:
 .
 <p>[foo<a href="http://example.com/?search=%5D(uri)">http://example.com/?search=](uri)</a></p>
 .
+Document[0, 40]
+  Paragraph[0, 40]
+    Text[0, 4]
+    AutoLink[4, 39]
 ````````````````````````````````
 
 
@@ -7989,6 +10582,10 @@ Here is a simple example:
 .
 <p><a href="/url" title="title">foo</a></p>
 .
+Document[0, 32]
+  Paragraph[0, 11]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8005,6 +10602,10 @@ unless they are escaped:
 .
 <p><a href="/uri">link [foo [bar]]</a></p>
 .
+Document[0, 37]
+  Paragraph[0, 24]
+    LinkRef[0, 0]
+      Text[1, 17]
 ````````````````````````````````
 
 
@@ -8015,6 +10616,10 @@ unless they are escaped:
 .
 <p><a href="/uri">link [bar</a></p>
 .
+Document[0, 31]
+  Paragraph[0, 18]
+    LinkRef[0, 0]
+      Text[1, 11]
 ````````````````````````````````
 
 
@@ -8027,6 +10632,16 @@ The link text may contain inline content:
 .
 <p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
 .
+Document[0, 43]
+  Paragraph[0, 30]
+    LinkRef[0, 0]
+      Text[1, 6]
+      Emphasis[6, 23]
+        Text[7, 11]
+        StrongEmphasis[11, 18]
+          Text[13, 16]
+        Text[18, 19]
+        Code[19, 22]
 ````````````````````````````````
 
 
@@ -8037,6 +10652,11 @@ The link text may contain inline content:
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
 .
+Document[0, 38]
+  Paragraph[0, 25]
+    LinkRef[0, 0]
+      Image[0, 0]
+        Text[3, 7]
 ````````````````````````````````
 
 
@@ -8049,6 +10669,14 @@ However, links may not contain other links, at any level of nesting.
 .
 <p>[foo <a href="/uri">bar</a>]<a href="/uri">ref</a></p>
 .
+Document[0, 36]
+  Paragraph[0, 23]
+    Text[0, 5]
+    Link[0, 0]
+      Text[6, 9]
+    Text[16, 17]
+    LinkRef[0, 0]
+      Text[18, 21]
 ````````````````````````````````
 
 
@@ -8059,6 +10687,16 @@ However, links may not contain other links, at any level of nesting.
 .
 <p>[foo <em>bar <a href="/uri">baz</a></em>]<a href="/uri">ref</a></p>
 .
+Document[0, 41]
+  Paragraph[0, 28]
+    Text[0, 5]
+    Emphasis[5, 21]
+      Text[6, 10]
+      LinkRef[0, 0]
+        Text[11, 14]
+    Text[21, 22]
+    LinkRef[0, 0]
+      Text[23, 26]
 ````````````````````````````````
 
 
@@ -8075,6 +10713,11 @@ emphasis grouping:
 .
 <p>*<a href="/uri">foo*</a></p>
 .
+Document[0, 26]
+  Paragraph[0, 13]
+    Text[0, 1]
+    LinkRef[0, 0]
+      Text[2, 6]
 ````````````````````````````````
 
 
@@ -8085,6 +10728,10 @@ emphasis grouping:
 .
 <p><a href="/uri">foo *bar</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 16]
+    LinkRef[0, 0]
+      Text[1, 9]
 ````````````````````````````````
 
 
@@ -8098,6 +10745,10 @@ and autolinks over link grouping:
 .
 <p>[foo <bar attr="][ref]"></p>
 .
+Document[0, 38]
+  Paragraph[0, 25]
+    Text[0, 5]
+    HtmlInline[5, 24]
 ````````````````````````````````
 
 
@@ -8108,6 +10759,10 @@ and autolinks over link grouping:
 .
 <p>[foo<code>][ref]</code></p>
 .
+Document[0, 26]
+  Paragraph[0, 13]
+    Text[0, 4]
+    Code[4, 12]
 ````````````````````````````````
 
 
@@ -8118,6 +10773,10 @@ and autolinks over link grouping:
 .
 <p>[foo<a href="http://example.com/?search=%5D%5Bref%5D">http://example.com/?search=][ref]</a></p>
 .
+Document[0, 53]
+  Paragraph[0, 40]
+    Text[0, 4]
+    AutoLink[4, 39]
 ````````````````````````````````
 
 
@@ -8130,6 +10789,10 @@ Matching is case-insensitive:
 .
 <p><a href="/url" title="title">foo</a></p>
 .
+Document[0, 32]
+  Paragraph[0, 11]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8142,6 +10805,11 @@ Unicode case fold is used:
 .
 <p><a href="/url">Толпой</a> is a Russian word.</p>
 .
+Document[0, 52]
+  Paragraph[0, 36]
+    LinkRef[0, 0]
+      Text[1, 7]
+    Text[16, 35]
 ````````````````````````````````
 
 
@@ -8156,6 +10824,10 @@ purposes of determining matching:
 .
 <p><a href="/url">Baz</a></p>
 .
+Document[0, 34]
+  Paragraph[19, 34]
+    LinkRef[0, 0]
+      Text[20, 23]
 ````````````````````````````````
 
 
@@ -8169,6 +10841,11 @@ No [whitespace] is allowed between the [link text] and the
 .
 <p>[foo] <a href="/url" title="title">bar</a></p>
 .
+Document[0, 33]
+  Paragraph[0, 12]
+    Text[0, 6]
+    LinkRef[0, 0]
+      Text[7, 10]
 ````````````````````````````````
 
 
@@ -8181,6 +10858,12 @@ No [whitespace] is allowed between the [link text] and the
 <p>[foo]
 <a href="/url" title="title">bar</a></p>
 .
+Document[0, 33]
+  Paragraph[0, 12]
+    Text[0, 5]
+    SoftLineBreak[5, 6]
+    LinkRef[0, 0]
+      Text[7, 10]
 ````````````````````````````````
 
 
@@ -8223,6 +10906,10 @@ the first is used:
 .
 <p><a href="/url1">bar</a></p>
 .
+Document[0, 39]
+  Paragraph[28, 39]
+    LinkRef[0, 0]
+      Text[29, 32]
 ````````````````````````````````
 
 
@@ -8237,6 +10924,9 @@ labels define equivalent inline content:
 .
 <p>[bar][foo!]</p>
 .
+Document[0, 27]
+  Paragraph[0, 13]
+    Text[0, 12]
 ````````````````````````````````
 
 
@@ -8251,6 +10941,11 @@ backslash-escaped:
 <p>[foo][ref[]</p>
 <p>[ref[]: /uri</p>
 .
+Document[0, 26]
+  Paragraph[0, 12]
+    Text[0, 11]
+  Paragraph[13, 26]
+    Text[13, 25]
 ````````````````````````````````
 
 
@@ -8262,6 +10957,11 @@ backslash-escaped:
 <p>[foo][ref[bar]]</p>
 <p>[ref[bar]]: /uri</p>
 .
+Document[0, 34]
+  Paragraph[0, 16]
+    Text[0, 15]
+  Paragraph[17, 34]
+    Text[17, 33]
 ````````````````````````````````
 
 
@@ -8273,6 +10973,11 @@ backslash-escaped:
 <p>[[[foo]]]</p>
 <p>[[[foo]]]: /url</p>
 .
+Document[0, 27]
+  Paragraph[0, 10]
+    Text[0, 9]
+  Paragraph[11, 27]
+    Text[11, 26]
 ````````````````````````````````
 
 
@@ -8283,6 +10988,10 @@ backslash-escaped:
 .
 <p><a href="/uri">foo</a></p>
 .
+Document[0, 28]
+  Paragraph[0, 13]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8295,6 +11004,10 @@ Note that in this example `]` is not backslash-escaped:
 .
 <p><a href="/uri">bar\</a></p>
 .
+Document[0, 23]
+  Paragraph[15, 23]
+    LinkRef[0, 0]
+      Text[16, 21]
 ````````````````````````````````
 
 
@@ -8308,6 +11021,11 @@ A [link label] must contain at least one [non-whitespace character]:
 <p>[]</p>
 <p>[]: /uri</p>
 .
+Document[0, 13]
+  Paragraph[0, 3]
+    Text[0, 2]
+  Paragraph[4, 13]
+    Text[4, 12]
 ````````````````````````````````
 
 
@@ -8323,6 +11041,15 @@ A [link label] must contain at least one [non-whitespace character]:
 <p>[
 ]: /uri</p>
 .
+Document[0, 17]
+  Paragraph[0, 5]
+    Text[0, 4]
+    SoftLineBreak[1, 4]
+    Text[3, 4]
+  Paragraph[6, 17]
+    Text[6, 16]
+    SoftLineBreak[7, 16]
+    Text[9, 15]
 ````````````````````````````````
 
 
@@ -8342,6 +11069,10 @@ provided by the matching reference link definition.  Thus,
 .
 <p><a href="/url" title="title">foo</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 8]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8352,6 +11083,12 @@ provided by the matching reference link definition.  Thus,
 .
 <p><a href="/url" title="title"><em>foo</em> bar</a></p>
 .
+Document[0, 41]
+  Paragraph[0, 14]
+    LinkRef[0, 0]
+      Emphasis[1, 6]
+        Text[2, 5]
+      Text[6, 10]
 ````````````````````````````````
 
 
@@ -8364,6 +11101,10 @@ The link labels are case-insensitive:
 .
 <p><a href="/url" title="title">Foo</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 8]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8372,7 +11113,7 @@ As with full reference links, [whitespace] is not
 allowed between the two sets of brackets:
 
 ```````````````````````````````` example
-[foo]
+[foo] 
 []
 
 [foo]: /url "title"
@@ -8380,6 +11121,13 @@ allowed between the two sets of brackets:
 <p><a href="/url" title="title">foo</a>
 []</p>
 .
+Document[0, 31]
+  Paragraph[0, 10]
+    LinkRef[0, 0]
+      Text[1, 4]
+    Text[5, 5]
+    SoftLineBreak[6, 7]
+    Text[7, 9]
 ````````````````````````````````
 
 
@@ -8399,6 +11147,10 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 <p><a href="/url" title="title">foo</a></p>
 .
+Document[0, 27]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8409,6 +11161,12 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 <p><a href="/url" title="title"><em>foo</em> bar</a></p>
 .
+Document[0, 39]
+  Paragraph[0, 12]
+    LinkRef[0, 0]
+      Emphasis[1, 6]
+        Text[2, 5]
+      Text[6, 10]
 ````````````````````````````````
 
 
@@ -8419,6 +11177,14 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
 .
+Document[0, 41]
+  Paragraph[0, 14]
+    Text[0, 1]
+    LinkRef[0, 0]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 11]
+    Text[12, 13]
 ````````````````````````````````
 
 
@@ -8429,6 +11195,11 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 <p>[[bar <a href="/url">foo</a></p>
 .
+Document[0, 25]
+  Paragraph[0, 12]
+    Text[0, 6]
+    LinkRef[0, 0]
+      Text[7, 10]
 ````````````````````````````````
 
 
@@ -8441,6 +11212,10 @@ The link labels are case-insensitive:
 .
 <p><a href="/url" title="title">Foo</a></p>
 .
+Document[0, 27]
+  Paragraph[0, 6]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8453,6 +11228,11 @@ A space after the link text should be preserved:
 .
 <p><a href="/url">foo</a> bar</p>
 .
+Document[0, 23]
+  Paragraph[0, 10]
+    LinkRef[0, 0]
+      Text[1, 4]
+    Text[5, 9]
 ````````````````````````````````
 
 
@@ -8466,6 +11246,9 @@ opening bracket to avoid links:
 .
 <p>[foo]</p>
 .
+Document[0, 28]
+  Paragraph[0, 7]
+    Text[0, 6]
 ````````````````````````````````
 
 
@@ -8479,6 +11262,11 @@ following closing bracket:
 .
 <p>*<a href="/url">foo*</a></p>
 .
+Document[0, 22]
+  Paragraph[14, 22]
+    Text[14, 15]
+    LinkRef[0, 0]
+      Text[16, 20]
 ````````````````````````````````
 
 
@@ -8492,6 +11280,10 @@ Full references take precedence over shortcut references:
 .
 <p><a href="/url2">foo</a></p>
 .
+Document[0, 38]
+  Paragraph[0, 11]
+    LinkRef[0, 0]
+      Text[1, 4]
 ````````````````````````````````
 
 
@@ -8505,6 +11297,11 @@ In the following case `[bar][baz]` is parsed as a reference,
 .
 <p>[foo]<a href="/url">bar</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 16]
+    Text[0, 5]
+    LinkRef[0, 0]
+      Text[6, 9]
 ````````````````````````````````
 
 
@@ -8519,6 +11316,12 @@ Here, though, `[foo][bar]` is parsed as a reference, since
 .
 <p><a href="/url2">foo</a><a href="/url1">baz</a></p>
 .
+Document[0, 43]
+  Paragraph[0, 16]
+    LinkRef[0, 0]
+      Text[1, 4]
+    LinkRef[0, 0]
+      Text[11, 14]
 ````````````````````````````````
 
 
@@ -8533,6 +11336,11 @@ is followed by a link label (even though `[bar]` is not defined):
 .
 <p>[foo]<a href="/url1">bar</a></p>
 .
+Document[0, 43]
+  Paragraph[0, 16]
+    Text[0, 5]
+    LinkRef[0, 0]
+      Text[6, 9]
 ````````````````````````````````
 
 
@@ -8554,6 +11362,10 @@ this is standardly used as the image's `alt` attribute.
 .
 <p><img src="/url" alt="foo" title="title" /></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    Image[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8564,6 +11376,12 @@ this is standardly used as the image's `alt` attribute.
 .
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
+Document[0, 54]
+  Paragraph[0, 13]
+    ImageRef[0, 0]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -8572,6 +11390,12 @@ this is standardly used as the image's `alt` attribute.
 .
 <p><img src="/url2" alt="foo bar" /></p>
 .
+Document[0, 27]
+  Paragraph[0, 27]
+    Image[0, 0]
+      Text[2, 6]
+      Image[0, 0]
+        Text[8, 11]
 ````````````````````````````````
 
 
@@ -8580,6 +11404,12 @@ this is standardly used as the image's `alt` attribute.
 .
 <p><img src="/url2" alt="foo bar" /></p>
 .
+Document[0, 26]
+  Paragraph[0, 26]
+    Image[0, 0]
+      Text[2, 6]
+      Link[0, 0]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -8597,6 +11427,12 @@ content is rendered, without formatting.
 .
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
+Document[0, 56]
+  Paragraph[0, 15]
+    ImageRef[0, 0]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -8607,6 +11443,12 @@ content is rendered, without formatting.
 .
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
+Document[0, 59]
+  Paragraph[0, 21]
+    ImageRef[0, 0]
+      Text[2, 6]
+      Emphasis[6, 11]
+        Text[7, 10]
 ````````````````````````````````
 
 
@@ -8615,6 +11457,10 @@ content is rendered, without formatting.
 .
 <p><img src="train.jpg" alt="foo" /></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Image[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8623,6 +11469,11 @@ My ![foo bar](/path/to/train.jpg  "title"   )
 .
 <p>My <img src="/path/to/train.jpg" alt="foo bar" title="title" /></p>
 .
+Document[0, 46]
+  Paragraph[0, 46]
+    Text[0, 3]
+    Image[0, 0]
+      Text[5, 12]
 ````````````````````````````````
 
 
@@ -8631,6 +11482,10 @@ My ![foo bar](/path/to/train.jpg  "title"   )
 .
 <p><img src="url" alt="foo" /></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Image[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8639,6 +11494,9 @@ My ![foo bar](/path/to/train.jpg  "title"   )
 .
 <p><img src="/url" alt="" /></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Image[0, 0]
 ````````````````````````````````
 
 
@@ -8651,6 +11509,10 @@ Reference-style:
 .
 <p><img src="/url" alt="foo" /></p>
 .
+Document[0, 25]
+  Paragraph[0, 12]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8661,6 +11523,10 @@ Reference-style:
 .
 <p><img src="/url" alt="foo" /></p>
 .
+Document[0, 25]
+  Paragraph[0, 12]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8673,6 +11539,10 @@ Collapsed:
 .
 <p><img src="/url" alt="foo" title="title" /></p>
 .
+Document[0, 30]
+  Paragraph[0, 9]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8683,6 +11553,12 @@ Collapsed:
 .
 <p><img src="/url" alt="foo bar" title="title" /></p>
 .
+Document[0, 42]
+  Paragraph[0, 15]
+    ImageRef[0, 0]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 11]
 ````````````````````````````````
 
 
@@ -8695,6 +11571,10 @@ The labels are case-insensitive:
 .
 <p><img src="/url" alt="Foo" title="title" /></p>
 .
+Document[0, 30]
+  Paragraph[0, 9]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8702,7 +11582,7 @@ As with reference links, [whitespace] is not allowed
 between the two sets of brackets:
 
 ```````````````````````````````` example
-![foo]
+![foo] 
 []
 
 [foo]: /url "title"
@@ -8710,6 +11590,13 @@ between the two sets of brackets:
 <p><img src="/url" alt="foo" title="title" />
 []</p>
 .
+Document[0, 32]
+  Paragraph[0, 11]
+    ImageRef[0, 0]
+      Text[2, 5]
+    Text[6, 6]
+    SoftLineBreak[7, 8]
+    Text[8, 10]
 ````````````````````````````````
 
 
@@ -8722,6 +11609,10 @@ Shortcut:
 .
 <p><img src="/url" alt="foo" title="title" /></p>
 .
+Document[0, 28]
+  Paragraph[0, 7]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8732,6 +11623,12 @@ Shortcut:
 .
 <p><img src="/url" alt="foo bar" title="title" /></p>
 .
+Document[0, 40]
+  Paragraph[0, 13]
+    ImageRef[0, 0]
+      Emphasis[2, 7]
+        Text[3, 6]
+      Text[7, 11]
 ````````````````````````````````
 
 
@@ -8745,6 +11642,11 @@ Note that link labels cannot contain unescaped brackets:
 <p>![[foo]]</p>
 <p>[[foo]]: /url &quot;title&quot;</p>
 .
+Document[0, 32]
+  Paragraph[0, 9]
+    Text[0, 8]
+  Paragraph[10, 32]
+    Text[10, 31]
 ````````````````````````````````
 
 
@@ -8757,6 +11659,10 @@ The link labels are case-insensitive:
 .
 <p><img src="/url" alt="Foo" title="title" /></p>
 .
+Document[0, 28]
+  Paragraph[0, 7]
+    ImageRef[0, 0]
+      Text[2, 5]
 ````````````````````````````````
 
 
@@ -8770,6 +11676,9 @@ opening `!` and `[`:
 .
 <p>![foo]</p>
 .
+Document[0, 30]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -8783,6 +11692,11 @@ If you want a link after a literal `!`, backslash-escape the
 .
 <p>!<a href="/url" title="title">foo</a></p>
 .
+Document[0, 29]
+  Paragraph[0, 8]
+    Text[0, 2]
+    LinkRef[0, 0]
+      Text[3, 6]
 ````````````````````````````````
 
 
@@ -8815,6 +11729,9 @@ Here are some valid autolinks:
 .
 <p><a href="http://foo.bar.baz">http://foo.bar.baz</a></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    AutoLink[0, 20]
 ````````````````````````````````
 
 
@@ -8823,6 +11740,9 @@ Here are some valid autolinks:
 .
 <p><a href="http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean">http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean</a></p>
 .
+Document[0, 48]
+  Paragraph[0, 48]
+    AutoLink[0, 47]
 ````````````````````````````````
 
 
@@ -8831,6 +11751,9 @@ Here are some valid autolinks:
 .
 <p><a href="irc://foo.bar:2233/baz">irc://foo.bar:2233/baz</a></p>
 .
+Document[0, 25]
+  Paragraph[0, 25]
+    AutoLink[0, 24]
 ````````````````````````````````
 
 
@@ -8841,6 +11764,9 @@ Uppercase is also fine:
 .
 <p><a href="MAILTO:FOO@BAR.BAZ">MAILTO:FOO@BAR.BAZ</a></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    AutoLink[0, 20]
 ````````````````````````````````
 
 
@@ -8854,6 +11780,9 @@ with their syntax:
 .
 <p><a href="a+b+c:d">a+b+c:d</a></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    AutoLink[0, 9]
 ````````````````````````````````
 
 
@@ -8862,6 +11791,9 @@ with their syntax:
 .
 <p><a href="made-up-scheme://foo,bar">made-up-scheme://foo,bar</a></p>
 .
+Document[0, 27]
+  Paragraph[0, 27]
+    AutoLink[0, 26]
 ````````````````````````````````
 
 
@@ -8870,6 +11802,9 @@ with their syntax:
 .
 <p><a href="http://../">http://../</a></p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    AutoLink[0, 12]
 ````````````````````````````````
 
 
@@ -8878,6 +11813,9 @@ with their syntax:
 .
 <p><a href="localhost:5001/foo">localhost:5001/foo</a></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    AutoLink[0, 20]
 ````````````````````````````````
 
 
@@ -8888,6 +11826,9 @@ Spaces are not allowed in autolinks:
 .
 <p>&lt;http://foo.bar/baz bim&gt;</p>
 .
+Document[0, 25]
+  Paragraph[0, 25]
+    Text[0, 24]
 ````````````````````````````````
 
 
@@ -8898,6 +11839,9 @@ Backslash-escapes do not work inside autolinks:
 .
 <p><a href="http://example.com/%5C%5B%5C">http://example.com/\[\</a></p>
 .
+Document[0, 25]
+  Paragraph[0, 25]
+    AutoLink[0, 24]
 ````````````````````````````````
 
 
@@ -8921,6 +11865,9 @@ Examples of email autolinks:
 .
 <p><a href="mailto:foo@bar.example.com">foo@bar.example.com</a></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    MailLink[0, 21]
 ````````````````````````````````
 
 
@@ -8929,6 +11876,9 @@ Examples of email autolinks:
 .
 <p><a href="mailto:foo+special@Bar.baz-bar0.com">foo+special@Bar.baz-bar0.com</a></p>
 .
+Document[0, 31]
+  Paragraph[0, 31]
+    MailLink[0, 30]
 ````````````````````````````````
 
 
@@ -8939,6 +11889,9 @@ Backslash-escapes do not work inside email autolinks:
 .
 <p>&lt;foo+@bar.example.com&gt;</p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 23]
 ````````````````````````````````
 
 
@@ -8949,6 +11902,9 @@ These are not autolinks:
 .
 <p>&lt;&gt;</p>
 .
+Document[0, 3]
+  Paragraph[0, 3]
+    Text[0, 2]
 ````````````````````````````````
 
 
@@ -8957,6 +11913,9 @@ These are not autolinks:
 .
 <p>&lt; http://foo.bar &gt;</p>
 .
+Document[0, 19]
+  Paragraph[0, 19]
+    Text[0, 18]
 ````````````````````````````````
 
 
@@ -8965,6 +11924,9 @@ These are not autolinks:
 .
 <p>&lt;m:abc&gt;</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 7]
 ````````````````````````````````
 
 
@@ -8973,6 +11935,9 @@ These are not autolinks:
 .
 <p>&lt;foo.bar.baz&gt;</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13]
 ````````````````````````````````
 
 
@@ -8981,6 +11946,9 @@ http://example.com
 .
 <p>http://example.com</p>
 .
+Document[0, 19]
+  Paragraph[0, 19]
+    Text[0, 18]
 ````````````````````````````````
 
 
@@ -8989,6 +11957,9 @@ foo@bar.example.com
 .
 <p>foo@bar.example.com</p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 19]
 ````````````````````````````````
 
 
@@ -9072,6 +12043,11 @@ Here are some simple open tags:
 .
 <p><a><bab><c2c></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    HtmlInline[0, 3]
+    HtmlInline[3, 8]
+    HtmlInline[8, 13]
 ````````````````````````````````
 
 
@@ -9082,6 +12058,10 @@ Empty elements:
 .
 <p><a/><b2/></p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    HtmlInline[0, 4]
+    HtmlInline[4, 9]
 ````````````````````````````````
 
 
@@ -9094,6 +12074,10 @@ data="foo" >
 <p><a  /><b2
 data="foo" ></p>
 .
+Document[0, 23]
+  Paragraph[0, 23]
+    HtmlInline[0, 6]
+    HtmlInline[6, 22]
 ````````````````````````````````
 
 
@@ -9106,6 +12090,9 @@ _boolean zoop:33=zoop:33 />
 <p><a foo="bar" bam = 'baz <em>"</em>'
 _boolean zoop:33=zoop:33 /></p>
 .
+Document[0, 64]
+  Paragraph[0, 64]
+    HtmlInline[0, 63]
 ````````````````````````````````
 
 
@@ -9116,6 +12103,10 @@ Foo <responsive-image src="foo.jpg" />
 .
 <p>Foo <responsive-image src="foo.jpg" /></p>
 .
+Document[0, 39]
+  Paragraph[0, 39]
+    Text[0, 4]
+    HtmlInline[4, 38]
 ````````````````````````````````
 
 
@@ -9126,6 +12117,9 @@ Illegal tag names, not parsed as HTML:
 .
 <p>&lt;33&gt; &lt;__&gt;</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
 ````````````````````````````````
 
 
@@ -9136,6 +12130,9 @@ Illegal attribute names:
 .
 <p>&lt;a h*#ref=&quot;hi&quot;&gt;</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 15]
 ````````````````````````````````
 
 
@@ -9146,6 +12143,9 @@ Illegal attribute values:
 .
 <p>&lt;a href=&quot;hi'&gt; &lt;a href=hi'&gt;</p>
 .
+Document[0, 27]
+  Paragraph[0, 27]
+    Text[0, 26]
 ````````````````````````````````
 
 
@@ -9158,6 +12158,11 @@ foo><bar/ >
 <p>&lt; a&gt;&lt;
 foo&gt;&lt;bar/ &gt;</p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 5]
+    SoftLineBreak[5, 6]
+    Text[6, 17]
 ````````````````````````````````
 
 
@@ -9168,6 +12173,9 @@ Missing [whitespace]:
 .
 <p>&lt;a href='bar'title=title&gt;</p>
 .
+Document[0, 26]
+  Paragraph[0, 26]
+    Text[0, 25]
 ````````````````````````````````
 
 
@@ -9178,6 +12186,10 @@ Closing tags:
 .
 <p></a></foo ></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    HtmlInline[0, 4]
+    HtmlInline[4, 11]
 ````````````````````````````````
 
 
@@ -9188,6 +12200,9 @@ Illegal attributes in closing tag:
 .
 <p>&lt;/a href=&quot;foo&quot;&gt;</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 15]
 ````````````````````````````````
 
 
@@ -9200,6 +12215,10 @@ comment - with hyphen -->
 <p>foo <!-- this is a
 comment - with hyphen --></p>
 .
+Document[0, 45]
+  Paragraph[0, 45]
+    Text[0, 4]
+    HtmlInline[4, 44]
 ````````````````````````````````
 
 
@@ -9208,6 +12227,9 @@ foo <!-- not a comment -- two hyphens -->
 .
 <p>foo &lt;!-- not a comment -- two hyphens --&gt;</p>
 .
+Document[0, 42]
+  Paragraph[0, 42]
+    Text[0, 41]
 ````````````````````````````````
 
 
@@ -9221,6 +12243,11 @@ foo <!-- foo--->
 <p>foo &lt;!--&gt; foo --&gt;</p>
 <p>foo &lt;!-- foo---&gt;</p>
 .
+Document[0, 36]
+  Paragraph[0, 18]
+    Text[0, 17]
+  Paragraph[19, 36]
+    Text[19, 35]
 ````````````````````````````````
 
 
@@ -9231,6 +12258,10 @@ foo <?php echo $a; ?>
 .
 <p>foo <?php echo $a; ?></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 4]
+    HtmlInline[4, 21]
 ````````````````````````````````
 
 
@@ -9241,6 +12272,10 @@ foo <!ELEMENT br EMPTY>
 .
 <p>foo <!ELEMENT br EMPTY></p>
 .
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 4]
+    HtmlInline[4, 23]
 ````````````````````````````````
 
 
@@ -9251,6 +12286,10 @@ foo <![CDATA[>&<]]>
 .
 <p>foo <![CDATA[>&<]]></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 4]
+    HtmlInline[4, 19]
 ````````````````````````````````
 
 
@@ -9262,6 +12301,10 @@ foo <a href="&ouml;">
 .
 <p>foo <a href="&ouml;"></p>
 .
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 4]
+    HtmlInline[4, 21]
 ````````````````````````````````
 
 
@@ -9272,6 +12315,10 @@ foo <a href="\*">
 .
 <p>foo <a href="\*"></p>
 .
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 4]
+    HtmlInline[4, 17]
 ````````````````````````````````
 
 
@@ -9280,6 +12327,9 @@ foo <a href="\*">
 .
 <p>&lt;a href=&quot;&quot;&quot;&gt;</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13]
 ````````````````````````````````
 
 
@@ -9291,12 +12341,17 @@ is parsed as a [hard line break](@) (rendered
 in HTML as a `<br />` tag):
 
 ```````````````````````````````` example
-foo
+foo  
 baz
 .
 <p>foo<br />
 baz</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 3]
+    HardLineBreak[3, 6]
+    Text[6, 9]
 ````````````````````````````````
 
 
@@ -9310,30 +12365,45 @@ baz
 <p>foo<br />
 baz</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 3]
+    HardLineBreak[0, 0]
+    Text[5, 8]
 ````````````````````````````````
 
 
 More than two spaces can be used:
 
 ```````````````````````````````` example
-foo
+foo       
 baz
 .
 <p>foo<br />
 baz</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Text[0, 3]
+    HardLineBreak[8, 11]
+    Text[11, 14]
 ````````````````````````````````
 
 
 Leading spaces at the beginning of the next line are ignored:
 
 ```````````````````````````````` example
-foo
+foo  
      bar
 .
 <p>foo<br />
 bar</p>
 .
+Document[0, 15]
+  Paragraph[0, 15]
+    Text[0, 3]
+    HardLineBreak[3, 4]
+    Text[11, 14]
 ````````````````````````````````
 
 
@@ -9344,6 +12414,11 @@ foo\
 <p>foo<br />
 bar</p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13]
+    HardLineBreak[0, 0]
+    Text[10, 13]
 ````````````````````````````````
 
 
@@ -9351,12 +12426,18 @@ Line breaks can occur inside emphasis, links, and other constructs
 that allow inline content:
 
 ```````````````````````````````` example
-*foo
+*foo  
 bar*
 .
 <p><em>foo<br />
 bar</em></p>
 .
+Document[0, 12]
+  Paragraph[0, 12]
+    Emphasis[0, 11]
+      Text[1, 4]
+      HardLineBreak[4, 7]
+      Text[7, 10]
 ````````````````````````````````
 
 
@@ -9367,17 +12448,26 @@ bar*
 <p><em>foo<br />
 bar</em></p>
 .
+Document[0, 11]
+  Paragraph[0, 11]
+    Emphasis[0, 10]
+      Text[1, 4]
+      HardLineBreak[0, 0]
+      Text[6, 9]
 ````````````````````````````````
 
 
 Line breaks do not occur inside code spans
 
 ```````````````````````````````` example
-`code
+`code  
 span`
 .
 <p><code>code span</code></p>
 .
+Document[0, 14]
+  Paragraph[0, 14]
+    Code[0, 13]
 ````````````````````````````````
 
 
@@ -9387,18 +12477,24 @@ span`
 .
 <p><code>code\ span</code></p>
 .
+Document[0, 13]
+  Paragraph[0, 13]
+    Code[0, 12]
 ````````````````````````````````
 
 
 or HTML tags:
 
 ```````````````````````````````` example
-<a href="foo
+<a href="foo  
 bar">
 .
-<p><a href="foo
+<p><a href="foo  
 bar"></p>
 .
+Document[0, 21]
+  Paragraph[0, 21]
+    HtmlInline[0, 20]
 ````````````````````````````````
 
 
@@ -9409,6 +12505,9 @@ bar">
 <p><a href="foo\
 bar"></p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    HtmlInline[0, 19]
 ````````````````````````````````
 
 
@@ -9421,14 +12520,20 @@ foo\
 .
 <p>foo\</p>
 .
+Document[0, 5]
+  Paragraph[0, 5]
+    Text[0, 4]
 ````````````````````````````````
 
 
 ```````````````````````````````` example
-foo
+foo  
 .
 <p>foo</p>
 .
+Document[0, 6]
+  Paragraph[0, 6]
+    Text[0, 3]
 ````````````````````````````````
 
 
@@ -9437,14 +12542,20 @@ foo
 .
 <h3>foo\</h3>
 .
+Document[0, 9]
+  Heading[0, 0] marker:[0, 3]
+    Text[4, 8]
 ````````````````````````````````
 
 
 ```````````````````````````````` example
-### foo
+### foo  
 .
 <h3>foo</h3>
 .
+Document[0, 10]
+  Heading[0, 0] marker:[0, 3]
+    Text[4, 7]
 ````````````````````````````````
 
 
@@ -9463,6 +12574,11 @@ baz
 <p>foo
 baz</p>
 .
+Document[0, 8]
+  Paragraph[0, 8]
+    Text[0, 3]
+    SoftLineBreak[3, 4]
+    Text[4, 7]
 ````````````````````````````````
 
 
@@ -9470,12 +12586,17 @@ Spaces at the end of the line and beginning of the next line are
 removed:
 
 ```````````````````````````````` example
-foo
+foo 
  baz
 .
 <p>foo
 baz</p>
 .
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 9]
+    SoftLineBreak[4, 9]
+    Text[6, 9]
 ````````````````````````````````
 
 
@@ -9495,6 +12616,9 @@ hello $.;'there
 .
 <p>hello $.;'there</p>
 .
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 15]
 ````````````````````````````````
 
 
@@ -9503,6 +12627,9 @@ Foo χρῆν
 .
 <p>Foo χρῆν</p>
 .
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 8]
 ````````````````````````````````
 
 
@@ -9513,6 +12640,9 @@ Multiple     spaces
 .
 <p>Multiple     spaces</p>
 .
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 19]
 ````````````````````````````````
 
 

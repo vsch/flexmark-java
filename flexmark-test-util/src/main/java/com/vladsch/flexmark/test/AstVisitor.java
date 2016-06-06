@@ -84,7 +84,14 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Heading node) {
-        visitNode(node);
+        String extra;
+
+        if (node.isAtxHeading()) {
+            extra = " marker:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
+        } else {
+            extra = " marker:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
+        }
+        visitNode(node, extra);
     }
 
     @Override

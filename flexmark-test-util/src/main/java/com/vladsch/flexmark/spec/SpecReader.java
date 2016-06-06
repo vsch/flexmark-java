@@ -31,16 +31,35 @@ public class SpecReader {
         this.inputStream = stream;
     }
 
+    public static List<SpecExample> readExamples() {
+        return readExamples(null, null);
+    }
+
     public static List<SpecExample> readExamples(String specResource) {
+        return readExamples(specResource, null);
+    }
+
+    public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
         try (InputStream stream = getSpecInputStream(specResource)) {
-            return new SpecReader(stream).read();
+            SpecReader reader;
+            if (readerFactory == null) reader = new SpecReader(stream);
+            else reader = readerFactory.create(stream);
+            return reader.read();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public static List<String> readExamplesAsString() {
+        return readExamplesAsString(null, null);
+    }
+
     public static List<String> readExamplesAsString(String specResource) {
-        List<SpecExample> examples = SpecReader.readExamples(specResource);
+        return readExamplesAsString(specResource, null);
+    }
+
+    public static List<String> readExamplesAsString(String specResource, SpecReaderFactory readerFactory) {
+        List<SpecExample> examples = SpecReader.readExamples(specResource, readerFactory);
         List<String> result = new ArrayList<>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
@@ -85,48 +104,70 @@ public class SpecReader {
         return examples;
     }
 
+    // can use these to generate spec from source
+    protected void addSpecLine(String line) {
+
+    }
+
+    protected void addSpecExample(SpecExample example) {
+        examples.add(example);
+    }
+
     protected void processLine(String line) {
+        boolean lineAbsorbed = false;
+
         switch (state) {
             case BEFORE:
                 Matcher matcher = SECTION_PATTERN.matcher(line);
                 if (matcher.matches()) {
                     section = matcher.group(1);
                     exampleNumber = 0;
-                }
-                if (line.equals(EXAMPLE_START)) {
+                } else if (line.equals(EXAMPLE_START)) {
                     state = State.SOURCE;
                     exampleNumber++;
+                    lineAbsorbed = true;
                 }
                 break;
             case SOURCE:
                 if (line.equals(TYPE_BREAK)) {
                     state = State.HTML;
+                    lineAbsorbed = true;
                 } else {
                     // examples use "rightwards arrow" to show tab
                     String processedLine = line.replace('\u2192', '\t');
                     source.append(processedLine).append('\n');
+                    lineAbsorbed = true;
                 }
                 break;
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    examples.add(new SpecExample(section, exampleNumber, source.toString(), html.toString(), null));
+                    addSpecExample(new SpecExample(section, exampleNumber, source.toString(), html.toString(), null));
                     resetContents();
+                    lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
                     state = State.AST;
+                    lineAbsorbed = true;
                 } else {
                     html.append(line).append('\n');
+                    lineAbsorbed = true;
                 }
                 break;
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    examples.add(new SpecExample(section, exampleNumber, source.toString(), html.toString(), ast.toString()));
+                    addSpecExample(new SpecExample(section, exampleNumber, source.toString(), html.toString(), ast.toString()));
                     resetContents();
+                    lineAbsorbed = true;
                 } else {
                     ast.append(line).append('\n');
+                    lineAbsorbed = true;
                 }
                 break;
+        }
+
+        if (!lineAbsorbed) {
+            addSpecLine(line);
         }
     }
 

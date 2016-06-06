@@ -46,7 +46,7 @@ public abstract class RenderingTestCase {
         assertEquals(expected, actual);
     }
 
-    private static String showTabs(String s) {
+    public static String showTabs(String s) {
         // Tabs are shown as "rightwards arrow" for easier comparison
         return s.replace("\t", "\u2192");
     }
