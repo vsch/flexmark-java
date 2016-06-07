@@ -25,6 +25,49 @@ The goal is to have a parser that can be easily extended to be compatible with:
 [MultiMarkdown][]  
 [PhpExtra][]  
 
+Latest Benchmarks
+-----------------
+
+Here are some basic benchmarking results:
+
+| File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
+|:-----------------|----------------:|--------------:|------------------:|-----------:|
+| README-SLOW      |         0.820ms |       1.027ms |           1.836ms |   18.632ms |
+| VERSION          |         1.305ms |       1.670ms |           3.754ms |   47.021ms |
+| commonMarkSpec   |        44.896ms |      76.843ms |         635.071ms |  641.881ms |
+| markdown_example |        20.586ms |      29.454ms |         215.564ms | 1102.196ms |
+| spec             |         9.091ms |      12.442ms |          38.830ms |  346.646ms |
+| table            |         0.257ms |       0.214ms |           0.663ms |    4.177ms |
+| table-format     |         1.450ms |       1.780ms |           3.794ms |   26.014ms |
+| wrap             |         4.725ms |       9.794ms |          14.934ms |  103.871ms |
+
+| File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
+|:-----------------|----------------:|--------------:|------------------:|----------:|
+| README-SLOW      |            1.00 |          1.25 |              2.24 |     22.73 |
+| VERSION          |            1.00 |          1.28 |              2.88 |     36.04 |
+| commonMarkSpec   |            1.00 |          1.71 |             14.15 |     14.30 |
+| markdown_example |            1.00 |          1.43 |             10.47 |     53.54 |
+| spec             |            1.00 |          1.37 |              4.27 |     38.13 |
+| table            |            1.20 |          1.00 |              3.10 |     19.53 |
+| table-format     |            1.00 |          1.23 |              2.62 |     17.94 |
+| wrap             |            1.00 |          2.07 |              3.16 |     21.98 |
+| -----------      |       --------- |     --------- |         --------- | --------- |
+| overall          |            1.00 |          1.60 |             11.01 |     27.57 |
+
+| File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
+|:-----------------|----------------:|--------------:|------------------:|----------:|
+| README-SLOW      |            0.80 |          1.00 |              1.79 |     18.13 |
+| VERSION          |            0.78 |          1.00 |              2.25 |     28.16 |
+| commonMarkSpec   |            0.58 |          1.00 |              8.26 |      8.35 |
+| markdown_example |            0.70 |          1.00 |              7.32 |     37.42 |
+| spec             |            0.73 |          1.00 |              3.12 |     27.86 |
+| table            |            1.20 |          1.00 |              3.10 |     19.53 |
+| table-format     |            0.81 |          1.00 |              2.13 |     14.62 |
+| wrap             |            0.48 |          1.00 |              1.52 |     10.61 |
+| -----------      |       --------- |     --------- |         --------- | --------- |
+| overall          |            0.62 |          1.00 |              6.86 |     17.19 |
+
+
 Progress so far
 ---------------
 
@@ -77,37 +120,6 @@ Overall, I am very pleased with the results and my initial choice of basing the 
 development mode. I did not get around to renaming the project or the extensions but this will
 happen soon.
 
-Here are some basic benchmarking results:
-
-| File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
-|:-----------------|----------------:|--------------:|------------------:|-----------:|
-| README-SLOW      |         0.685ms |       0.953ms |           1.593ms |   17.173ms |
-| VERSION          |         1.217ms |       1.704ms |           3.557ms |   46.600ms |
-| commonMarkSpec   |        41.038ms |      70.285ms |         590.881ms |  622.080ms |
-| hang-pegdown     |         0.023ms |       0.019ms |           0.030ms |  653.358ms |
-| hang-pegdown2    |         0.012ms |       0.018ms |           0.027ms | 1301.373ms |
-| markdown_example |        19.438ms |      25.620ms |         209.787ms | 1076.305ms |
-| spec             |         8.700ms |      11.959ms |          34.147ms |  326.479ms |
-| table            |         0.110ms |       0.135ms |           0.665ms |    4.266ms |
-| table-format     |         1.335ms |       1.696ms |           3.467ms |   26.116ms |
-| wrap             |         4.409ms |       8.977ms |          15.243ms |   94.709ms |
-
-Ratio of performance:
-
-| File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
-|:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.39 |              2.32 |     25.06 |
-| VERSION          |            1.00 |          1.40 |              2.92 |     38.29 |
-| commonMarkSpec   |            1.00 |          1.71 |             14.40 |     15.16 |
-| hang-pegdown     |            1.19 |          1.00 |              1.56 |  34217.96 |
-| hang-pegdown2    |            1.00 |          1.44 |              2.20 | 104201.57 |
-| markdown_example |            1.00 |          1.32 |             10.79 |     55.37 |
-| spec             |            1.00 |          1.37 |              3.93 |     37.53 |
-| table            |            1.00 |          1.23 |              6.05 |     38.77 |
-| table-format     |            1.00 |          1.27 |              2.60 |     19.56 |
-| wrap             |            1.00 |          2.04 |              3.46 |     21.48 |
-| -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.58 |             11.17 |     54.16 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance
