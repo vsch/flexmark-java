@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/flexmark-test-suite">
+      <sourceFolder url="file://$MODULE_DIR$/flexmark-test-suite/src/test/java" isTestSource="true" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="flexmark" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-parent" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="library" scope="TEST" name="junit-4.12" level="application" />
+  </component>
+</module>
