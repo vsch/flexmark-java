@@ -13,10 +13,12 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
 
     private final NodeRendererContext context;
     private final HtmlWriter html;
+    private final boolean useLinks;
 
-    public AbbreviationNodeRenderer(NodeRendererContext context) {
+    public AbbreviationNodeRenderer(NodeRendererContext context, boolean useLinks) {
         this.context = context;
         this.html = context.getHtmlWriter();
+        this.useLinks = useLinks;
     }
 
     @Override
@@ -45,12 +47,19 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
         Map<String, String> attrs = new LinkedHashMap<>();
         String text = node.getChars().toString();
         String abbreviation = node.getAbbreviation();
-        attrs.put("href", "#");
+        String tag;
+        
+        if (useLinks) {
+            attrs.put("href", "#");
+            tag = "a";
+        } else {
+            tag = "abbr";
+        }
+        
         attrs.put("title", abbreviation);
-        html.tag("abbr", getAttrs(node, attrs));
+        html.tag(tag, getAttrs(node, attrs));
         html.text(text);
-        html.tag("/abbr");
-
+        html.tag("/" + tag);
     }
 
     private Map<String, String> getAttrs(Node node) {

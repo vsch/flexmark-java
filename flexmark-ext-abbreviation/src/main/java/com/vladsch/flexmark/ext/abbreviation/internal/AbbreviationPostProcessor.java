@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
+import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
@@ -8,83 +9,91 @@ import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationPostProcessor implements PostProcessor {
     private Pattern abbreviations = null;
-    private boolean initialized = false;
+    private HashMap<String, String> abbreviationMap = null;
 
-    private void initAbbreviations(Node node) {
-        initialized = true;
+    private void initializeNode(Node node) {
         Document document = node.getDocument();
         HashMap<String, AbbreviationBlock> abbrMap = document.getValueOrDefault(AbbreviationBlockParser.ABBREVIATION_MAP_KEY);
-        
+
         if (!abbrMap.isEmpty()) {
+            abbreviationMap = new HashMap<>();
             StringBuilder sb = new StringBuilder();
             for (String abbr : abbrMap.keySet()) {
                 AbbreviationBlock abbreviationBlock = abbrMap.get(abbr);
                 BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
                 if (!abbreviation.isEmpty()) {
+                    abbreviationMap.put(abbr, abbreviation.toString());
+
                     if (sb.length() > 0) sb.append("|");
-                    sb.append("\\b\\Q").append(abbr).append("\\E\\b");
+
+                    if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
+                    sb.append("\\Q").append(abbr).append("\\E");
+                    if (Character.isLetterOrDigit(abbr.charAt(abbr.length()-1))) sb.append("\\b");
                 }
             }
+
+            if (sb.length() > 0) abbreviations = Pattern.compile(sb.toString());
         }
     }
 
     public Node process(Node node) {
-        if (!initialized) {
-            initAbbreviations(node);
-        }
+        initializeNode(node);
 
         if (abbreviations != null) {
             AbbreviationVisitor visitor = new AbbreviationVisitor();
             node.accept(visitor);
         }
+
+        finalizeNode(node);
         return node;
     }
 
-    private void linkify(Text text) {
-        BasedSequence original = text.getChars();
+    private void finalizeNode(Node node) {
+        abbreviations = null;
+        abbreviationMap = null;
+    }
+
+    private void linkify(Text node) {
+        BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper();
         BasedSequence literal = Escaping.unescapeSequence(original, textMapper);
-        
-        Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-        //
-        //Node lastNode = text;
-        //int lastEscaped = 0;
-        //for (LinkSpan link : links) {
-        //    BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
-        //    int index = textMapper.originalOffset(link.getBeginIndex());
-        //
-        //    if (index != lastEscaped) {
-        //        BasedSequence escapedChars = original.subSequence(lastEscaped, index);
-        //        lastNode = insertNode(new Text(escapedChars), lastNode);
-        //    }
-        //
-        //    Text contentNode = new Text(linkText);
-        //    LinkNode linkNode;
-        //
-        //    if (link.getType() == LinkType.EMAIL) {
-        //        linkNode = new MailLink();
-        //        ((MailLink) linkNode).setText(linkText);
-        //    } else {
-        //        linkNode = new AutoLink();
-        //        ((AutoLink) linkNode).setContent(linkText);
-        //    }
-        //
-        //    linkNode.setCharsFromContent();
-        //    linkNode.appendChild(contentNode);
-        //    lastNode = insertNode(linkNode, lastNode);
-        //
-        //    lastEscaped = textMapper.originalOffset(link.getEndIndex());
-        //}
-        //
-        //if (lastEscaped != original.length()) {
-        //    BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-        //    insertNode(new Text(escapedChars), lastNode);
-        //}
-        //text.unlink();
+
+        Matcher m = abbreviations.matcher(literal);
+        Node lastNode = node;
+        int lastEscaped = 0;
+
+        while (m.find()) {
+            //String found = m.group();
+            if (abbreviationMap.containsKey(m.group(0))) {
+                String abbreviation = abbreviationMap.get(m.group(0));
+
+                BasedSequence abbrText = literal.subSequence(m.start(0), m.end(0));
+                int startOffset = textMapper.originalOffset(m.start(0));
+                int endOffset = textMapper.originalOffset(m.end(0));
+
+                if (startOffset != lastEscaped) {
+                    BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
+                    lastNode = insertNode(new Text(escapedChars), lastNode);
+                }
+
+                BasedSequence origAbbrText = original.subSequence(startOffset, endOffset);
+                Abbreviation abbrNode = new Abbreviation(origAbbrText, abbreviation);
+                lastNode = insertNode(abbrNode, lastNode);
+
+                lastEscaped = endOffset;
+            }
+        }
+
+        if (lastEscaped != original.length()) {
+            BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
+            insertNode(new Text(escapedChars), lastNode);
+        }
+        node.unlink();
     }
 
     private static Node insertNode(Node node, Node insertAfterNode) {
@@ -95,7 +104,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
     private class AbbreviationVisitor extends AbstractVisitor {
         @Override
         public void visit(Text text) {
-            if (!isVisiting(text, LinkNode.class)) {
+            if (!isVisiting(text, LinkNode.class, Abbreviation.class)) {
                 linkify(text);
             }
         }

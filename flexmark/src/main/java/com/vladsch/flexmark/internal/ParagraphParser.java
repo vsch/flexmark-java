@@ -45,7 +45,7 @@ public class ParagraphParser extends AbstractBlockParser {
 
         // try parsing the beginning as link reference definitions:
         while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
-            pos = parserState.getInlineParser().parseReference(contentChars);
+            pos = parserState.getInlineParser().parseReference(block, contentChars);
             if (pos == 0) break;
 
             contentChars = contentChars.subSequence(pos, contentChars.length());

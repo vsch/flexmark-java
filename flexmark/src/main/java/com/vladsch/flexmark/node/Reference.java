@@ -60,6 +60,7 @@ public class Reference extends Node {
             this.title = title.subSequence(1, title.length() - 1);
             this.titleClosingMarker = title.subSequence(title.length() - 1, title.length());
         }
+        setCharsFromContent();
     }
 
     public BasedSequence getOpeningMarker() {

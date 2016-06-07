@@ -23,12 +23,18 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    final private boolean useLinks;
 
-    private AbbreviationExtension() {
+    public AbbreviationExtension(boolean useLinks) {
+        this.useLinks = useLinks;
     }
 
     public static Extension create() {
-        return new AbbreviationExtension();
+        return new AbbreviationExtension(false);
+    }
+
+    public static Extension create(boolean useLinks) {
+        return new AbbreviationExtension(useLinks);
     }
 
     @Override
@@ -42,7 +48,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
         rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
             @Override
             public NodeRenderer create(NodeRendererContext context) {
-                return new AbbreviationNodeRenderer(context);
+                return new AbbreviationNodeRenderer(context, useLinks);
             }
         });
     }

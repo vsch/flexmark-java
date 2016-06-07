@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
@@ -18,5 +19,5 @@ public interface InlineParser {
      */
     void parse(BasedSequence input, Node node);
 
-    int parseReference(BasedSequence s);
+    int parseReference(Block block, BasedSequence s);
 }

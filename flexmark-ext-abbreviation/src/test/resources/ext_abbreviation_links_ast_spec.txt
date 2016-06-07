@@ -1,0 +1,75 @@
+---
+title: Abbreviation Extension Spec
+author: Vladimir Schneider
+version: 0.1
+date: '2016-06-06'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## Abbreviation Links
+
+flexmark-java extension for defining abbreviations and turning appearance of 
+these abbreviations in text into link tags with titles consisting of the expansion 
+of the abbreviation.
+
+
+```````````````````````````````` example
+*[Abbr]:Abbreviation
+.
+.
+Document[0, 21]
+  AbbreviationBlock[0, 20] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[8, 20]
+````````````````````````````````
+
+
+```````````````````````````````` example
+*[Abbr]:Abbreviation
+
+This has an Abbr embedded in it.
+.
+<p>This has an <a href="#" title="Abbreviation">Abbr</a> embedded in it.</p>
+.
+Document[0, 55]
+  AbbreviationBlock[0, 20] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[8, 20]
+  Paragraph[22, 55]
+    Text[22, 34]
+    Abbreviation[34, 38]
+    Text[38, 54]
+````````````````````````````````
+
+
+```````````````````````````````` example
+*[Abbr]: Abbreviation 1
+*[Abbre]: Abbreviation 2
+.
+.
+Document[0, 49]
+  AbbreviationBlock[0, 23] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 23]
+  AbbreviationBlock[24, 48] open:[24, 26] text:[26, 31] close:[31, 33] abbreviation:[34, 48]
+````````````````````````````````
+
+
+```````````````````````````````` example
+*[Abbr]: Abbreviation 1
+*[Abbre]: Abbreviation 2
+
+This has an Abbre embedded in it.
+And this has another Abbr embedded in it.
+.
+<p>This has an <a href="#" title="Abbreviation 2">Abbre</a> embedded in it.
+And this has another <a href="#" title="Abbreviation 1">Abbr</a> embedded in it.</p>
+.
+Document[0, 126]
+  AbbreviationBlock[0, 23] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 23]
+  AbbreviationBlock[24, 48] open:[24, 26] text:[26, 31] close:[31, 33] abbreviation:[34, 48]
+  Paragraph[50, 126]
+    Text[50, 62]
+    Abbreviation[62, 67]
+    Text[67, 83]
+    SoftLineBreak[83, 84]
+    Text[84, 105]
+    Abbreviation[105, 109]
+    Text[109, 125]
+````````````````````````````````
+
+

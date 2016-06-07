@@ -196,7 +196,7 @@ public class InlineParserImpl implements InlineParser {
      * @return how many characters were parsed as a reference, {@code 0} if none
      */
     @Override
-    public int parseReference(BasedSequence s) {
+    public int parseReference(Block block, BasedSequence s) {
         this.input = s;
         this.index = 0;
         BasedSequence dest;
@@ -259,10 +259,14 @@ public class InlineParserImpl implements InlineParser {
             return 0;
         }
 
+        Reference reference = new Reference(rawLabel, dest, title);
+        
         if (!referenceMap.containsKey(normalizedLabel)) {
-            Reference link = new Reference(rawLabel, dest, title);
-            referenceMap.put(normalizedLabel, link);
+            referenceMap.put(normalizedLabel, reference);
         }
+        
+        block.insertBefore(reference);
+        
         return index - startIndex;
     }
 

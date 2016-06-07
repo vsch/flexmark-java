@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class AbbreviationBlockParser extends AbstractBlockParser {
     public static final PropertyKey<HashMap<String, AbbreviationBlock>> ABBREVIATION_MAP_KEY = new PropertyKey<>("ABBREVIATION_MAP_KEY", new HashMap<String, AbbreviationBlock>());
 
-    private static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*[^ \t\n]*\\s*\\]:");
+    private static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*.*\\s*\\]:");
     
     private final AbbreviationBlock block = new AbbreviationBlock();
 
