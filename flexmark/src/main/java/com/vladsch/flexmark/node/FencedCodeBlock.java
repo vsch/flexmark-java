@@ -12,6 +12,13 @@ public class FencedCodeBlock extends Block {
     private BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
+    public String getAstExtra() {
+        return segmentSpan(openingMarker, "open")
+                + segmentSpan(info, "info")
+                + segmentSpan(closingMarker, "close");
+    }
+
+    @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, info, closingMarker };
     }

@@ -15,6 +15,12 @@ public class Code extends DelimitedNodeImpl {
     }
 
     @Override
+    public String getAstExtra() {
+        return segmentSpan(openingMarker, "open")
+                + segmentSpan(closingMarker, "close");
+    }
+
+    @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }

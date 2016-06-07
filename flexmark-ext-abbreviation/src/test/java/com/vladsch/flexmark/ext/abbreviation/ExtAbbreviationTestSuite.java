@@ -19,24 +19,14 @@
  * under the License.
  */
 
-package com.vladsch.flexmark;
+package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
-import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
-import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
-import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
-import com.vladsch.flexmark.integration.IntegrationTestSuite;
-import com.vladsch.flexmark.test.CoreTestSuite;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CoreTestSuite.class,
-        ExtAutolinkTestSuite.class,
-        ExtGfmStrikethroughTestSuite.class,
-        ExtGfmTablesTestSuite.class,
-        ExtYamlFrontMatterTestSuite.class,
-        IntegrationTestSuite.class,
+    AbbreviationFullSpecTest.class,
+    AbbreviationSpecTest.class
 })
-public class TestTestSuite {
+public class ExtAbbreviationTestSuite {
 }

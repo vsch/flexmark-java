@@ -19,13 +19,15 @@
  * under the License.
  */
 
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.autolink;
 
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    YamlFrontMatterTest.class
+    AutolinkTest.class,
+    AutolinkFullSpecTest.class,
+    AutolinkSpecTest.class
 })
-public class TestSuite {
+public class ExtAutolinkTestSuite {
 }

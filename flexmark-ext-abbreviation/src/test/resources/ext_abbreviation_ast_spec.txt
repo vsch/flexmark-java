@@ -1,0 +1,30 @@
+---
+title: Abbreviation Extension Spec
+author: Vladimir Schneider
+version: 0.1
+date: '2016-06-06'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## Abbreviation 
+
+flexmark-java extension for defining abbreviations and turning appearance of 
+these abbreviations in text into abbr tags with titles consisting of the expansion 
+of the abbreviation.
+
+
+```````````````````````````````` example
+*[Abbr]:Abbreviation
+.
+
+.
+Document[0, 21]
+  AbbreviationBlock[0, 20]
+    Text[0, 4]
+    AutoLink[4, 19] open:[0, 0] close:[0, 0]
+      Text[4, 19]
+    Text[19, 24]
+    AutoLink[24, 39] open:[0, 0] close:[0, 0]
+      Text[24, 39]
+````````````````````````````````
+

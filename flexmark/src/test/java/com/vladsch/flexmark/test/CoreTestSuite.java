@@ -19,15 +19,24 @@
  * under the License.
  */
 
-package com.vladsch.flexmark.ext.gfm.strikethrough;
+package com.vladsch.flexmark.test;
 
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    StrikethroughTest.class,
-    StrikethroughFullSpecTest.class,
-    StrikethroughSpecTest.class
+    AbstractVisitorTest.class,
+    DeilimitedNodeTest.class,
+    DelimiterProcessorTest.class,
+    HtmlRendererTest.class,
+    ParserTest.class,
+    PathologicalTest.class,
+    PrefixedSubSequenceTest.class,
+    SpecCoreTest.class,
+    FullSpecCoreTest.class,
+    SpecialInputTest.class,
+    SubstringTest.class,
+    UsageExampleTest.class
 })
-public class TestSuite {
+public class CoreTestSuite {
 }

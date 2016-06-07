@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.PropertyHolder;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
 
@@ -77,4 +78,6 @@ public interface ParserState {
 
     boolean endsWithBlankLine(Node block);
     boolean isLastLineBlank(Node node);
+
+    PropertyHolder getPropertyHolder();
 }

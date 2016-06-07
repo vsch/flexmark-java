@@ -10,6 +10,11 @@ public class BlockQuote extends Block {
     private BasedSequence openingMarker = SubSequence.NULL;
 
     @Override
+    public String getAstExtra() {
+        return segmentSpan(openingMarker, "marker");
+    }
+
+    @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker };
     }

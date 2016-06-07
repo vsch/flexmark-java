@@ -27,6 +27,10 @@ public abstract class Node {
         return chars;
     }
 
+    public String getAstExtra() {
+        return "";
+    }
+
     public Document getDocument() {
         Node node = this;
         while (node != null && !(node instanceof Document)) {
@@ -237,5 +241,13 @@ public abstract class Node {
 
     protected BasedSequence deNullify(BasedSequence nullable) {
         return nullable == null ? SubSequence.NULL : nullable;
+    }
+
+    public static String segmentSpan(int startOffset, int endOffset, String name) {
+        return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + "]";
+    }
+    
+    public static String segmentSpan(BasedSequence sequence, String name) {
+        return segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name);
     }
 }

@@ -60,29 +60,29 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(Document document) {
+    public void visit(Document node) {
         // No rendering itself
-        visitChildren(document);
+        visitChildren(node);
     }
 
     @Override
-    public void visit(Heading heading) {
-        String htag = "h" + heading.getLevel();
+    public void visit(Heading node) {
+        String htag = "h" + node.getLevel();
         html.line();
-        html.tag(htag, getAttrs(heading));
-        visitChildren(heading);
+        html.tag(htag, getAttrs(node));
+        visitChildren(node);
         html.tag('/' + htag);
         html.line();
     }
 
     @Override
-    public void visit(Paragraph paragraph) {
-        boolean inTightList = isInTightList(paragraph);
+    public void visit(Paragraph node) {
+        boolean inTightList = isInTightList(node);
         if (!inTightList) {
             html.line();
-            html.tag("p", getAttrs(paragraph));
+            html.tag("p", getAttrs(node));
         }
-        visitChildren(paragraph);
+        visitChildren(node);
         if (!inTightList) {
             html.tag("/p");
             html.line();
@@ -90,26 +90,26 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(BlockQuote blockQuote) {
+    public void visit(BlockQuote node) {
         html.line();
-        html.tag("blockquote", getAttrs(blockQuote));
+        html.tag("blockquote", getAttrs(node));
         html.line();
-        visitChildren(blockQuote);
+        visitChildren(node);
         html.line();
         html.tag("/blockquote");
         html.line();
     }
 
     @Override
-    public void visit(BulletList bulletList) {
-        renderListBlock(bulletList, "ul", getAttrs(bulletList));
+    public void visit(BulletList node) {
+        renderListBlock(node, "ul", getAttrs(node));
     }
 
     @Override
-    public void visit(FencedCodeBlock fencedCodeBlock) {
-        String literal = fencedCodeBlock.getContentChars().toString();
+    public void visit(FencedCodeBlock node) {
+        String literal = node.getContentChars().toString();
         Map<String, String> attributes = new LinkedHashMap<>();
-        BasedSequence info = fencedCodeBlock.getInfo();
+        BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.countLeadingNot(" ");
             String language;
@@ -120,216 +120,216 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             }
             attributes.put("class", "language-" + Escaping.unescapeString(language));
         }
-        renderCodeBlock(literal, getAttrs(fencedCodeBlock, attributes));
+        renderCodeBlock(literal, getAttrs(node, attributes));
     }
 
     @Override
-    public void visit(HtmlBlock htmlBlock) {
+    public void visit(HtmlBlock node) {
         html.line();
         if (context.shouldEscapeHtml()) {
-            html.text(Escaping.normalizeEOL(htmlBlock.getContentChars()));
+            html.text(Escaping.normalizeEOL(node.getContentChars()));
         } else {
-            html.raw(Escaping.normalizeEOL(htmlBlock.getContentChars()));
+            html.raw(Escaping.normalizeEOL(node.getContentChars()));
         }
         html.line();
     }
 
     @Override
-    public void visit(ThematicBreak thematicBreak) {
+    public void visit(ThematicBreak node) {
         html.line();
-        html.tag("hr", getAttrs(thematicBreak), true);
+        html.tag("hr", getAttrs(node), true);
         html.line();
     }
 
     @Override
-    public void visit(IndentedCodeBlock indentedCodeBlock) {
-        BasedSequence chars = indentedCodeBlock.getContentChars();
+    public void visit(IndentedCodeBlock node) {
+        BasedSequence chars = node.getContentChars();
         String content = chars.trimTailBlankLines().toString();
         if (!content.endsWith("\n")) {
             content += "\n";
         }
-        renderCodeBlock(content, getAttrs(indentedCodeBlock));
+        renderCodeBlock(content, getAttrs(node));
     }
 
     @Override
-    public void visit(ListItem listItem) {
-        html.tag("li", getAttrs(listItem));
-        visitChildren(listItem);
+    public void visit(ListItem node) {
+        html.tag("li", getAttrs(node));
+        visitChildren(node);
         html.tag("/li");
         html.line();
     }
 
     @Override
-    public void visit(OrderedList orderedList) {
-        int start = orderedList.getStartNumber();
+    public void visit(OrderedList node) {
+        int start = node.getStartNumber();
         Map<String, String> attrs = new LinkedHashMap<>();
         if (start != 1) {
             attrs.put("start", String.valueOf(start));
         }
-        renderListBlock(orderedList, "ol", getAttrs(orderedList, attrs));
+        renderListBlock(node, "ol", getAttrs(node, attrs));
     }
 
     @Override
-    public void visit(Emphasis emphasis) {
+    public void visit(Emphasis node) {
         html.tag("em");
-        visitChildren(emphasis);
+        visitChildren(node);
         html.tag("/em");
     }
 
     @Override
-    public void visit(StrongEmphasis strongEmphasis) {
+    public void visit(StrongEmphasis node) {
         html.tag("strong");
-        visitChildren(strongEmphasis);
+        visitChildren(node);
         html.tag("/strong");
     }
 
     @Override
-    public void visit(Text text) {
-        html.text(Escaping.unescapeString(Escaping.normalizeEOL(text.getChars())));
+    public void visit(Text node) {
+        html.text(Escaping.unescapeString(Escaping.normalizeEOL(node.getChars())));
     }
 
     @Override
-    public void visit(Code code) {
+    public void visit(Code node) {
         // TODO: collapse multiple spaces into 1
         html.tag("code");
-        html.text(Escaping.collapseWhitespace(code.getText(), true));
+        html.text(Escaping.collapseWhitespace(node.getText(), true));
         html.tag("/code");
     }
 
     @Override
-    public void visit(HtmlInline htmlInline) {
+    public void visit(HtmlInline node) {
         if (context.shouldEscapeHtml()) {
-            html.text(Escaping.normalizeEOL(htmlInline.getChars()));
+            html.text(Escaping.normalizeEOL(node.getChars()));
         } else {
-            html.raw(Escaping.normalizeEOL(htmlInline.getChars()));
+            html.raw(Escaping.normalizeEOL(node.getChars()));
         }
     }
 
     @Override
-    public void visit(SoftLineBreak softLineBreak) {
+    public void visit(SoftLineBreak node) {
         html.raw(context.getSoftbreak());
     }
 
     @Override
-    public void visit(HardLineBreak hardLineBreak) {
+    public void visit(HardLineBreak node) {
         html.tag("br", null, true);
         html.line();
     }
 
     @Override
-    public void visit(Reference reference) {
+    public void visit(Reference node) {
 
     }
 
     @Override
-    public void visit(HtmlEntity htmlEntity) {
-        html.text(Escaping.unescapeString(htmlEntity.getChars().toString()));
+    public void visit(HtmlEntity node) {
+        html.text(Escaping.unescapeString(node.getChars().toString()));
     }
 
     @Override
-    public void visit(AutoLink autoLink) {
+    public void visit(AutoLink node) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String text = autoLink.getContent().toString();
+        String text = node.getText().toString();
         String url = context.encodeUrl(text);
         attrs.put("href", url);
-        html.tag("a", getAttrs(autoLink, attrs));
+        html.tag("a", getAttrs(node, attrs));
         html.text(text);
         html.tag("/a");
     }
 
     @Override
-    public void visit(MailLink mailLink) {
+    public void visit(MailLink node) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(mailLink.getText().toString()));
+        String url = context.encodeUrl(Escaping.unescapeString(node.getText().toString()));
         attrs.put("href", "mailto:" + url);
-        html.tag("a", getAttrs(mailLink, attrs));
+        html.tag("a", getAttrs(node, attrs));
         html.text(url);
         html.tag("/a");
     }
 
     @Override
-    public void visit(ImageRef image) {
-        if (image.getLinkUrl().isEmpty()) {
+    public void visit(ImageRef node) {
+        if (node.getLinkUrl().isEmpty()) {
             // empty ref
             html.raw("![");
-            visitChildren(image);
+            visitChildren(node);
             html.raw("]");
         } else {
-            String url = context.encodeUrl(Escaping.unescapeString(image.getLinkUrl()));
+            String url = context.encodeUrl(Escaping.unescapeString(node.getLinkUrl()));
             Map<String, String> attrs = new LinkedHashMap<>();
             attrs.put("src", url);
 
             AltTextVisitor altTextVisitor = new AltTextVisitor();
-            image.accept(altTextVisitor);
+            node.accept(altTextVisitor);
             String altText = altTextVisitor.getAltText();
 
             attrs.put("alt", altText);
-            if (image.getLinkTitle() != null) {
-                attrs.put("title", Escaping.unescapeString(image.getLinkTitle()));
+            if (node.getLinkTitle() != null) {
+                attrs.put("title", Escaping.unescapeString(node.getLinkTitle()));
             }
 
-            html.tag("img", getAttrs(image, attrs), true);
+            html.tag("img", getAttrs(node, attrs), true);
         }
     }
 
     @Override
-    public void visit(Link link) {
+    public void visit(Link node) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(link.getUrl().toString()));
+        String url = context.encodeUrl(Escaping.unescapeString(node.getUrl().toString()));
         attrs.put("href", url);
-        if (link.getTitle().isNotNull()) {
-            attrs.put("title", Escaping.unescapeString(link.getTitle().toString()));
+        if (node.getTitle().isNotNull()) {
+            attrs.put("title", Escaping.unescapeString(node.getTitle().toString()));
         }
-        html.tag("a", getAttrs(link, attrs));
-        visitChildren(link);
+        html.tag("a", getAttrs(node, attrs));
+        visitChildren(node);
         html.tag("/a");
     }
 
     @Override
-    public void visit(Image image) {
-        String url = context.encodeUrl(Escaping.unescapeString(image.getUrl().toString()));
+    public void visit(Image node) {
+        String url = context.encodeUrl(Escaping.unescapeString(node.getUrl().toString()));
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
-        image.accept(altTextVisitor);
+        node.accept(altTextVisitor);
         String altText = altTextVisitor.getAltText();
 
         Map<String, String> attrs = new LinkedHashMap<>();
         attrs.put("src", url);
         attrs.put("alt", altText);
-        if (image.getTitle().isNotNull()) {
-            attrs.put("title", Escaping.unescapeString(image.getTitle().toString()));
+        if (node.getTitle().isNotNull()) {
+            attrs.put("title", Escaping.unescapeString(node.getTitle().toString()));
         }
 
-        html.tag("img", getAttrs(image, attrs), true);
+        html.tag("img", getAttrs(node, attrs), true);
     }
 
     @Override
-    public void visit(LinkRef link) {
-        if (link.getLinkUrl().isEmpty()) {
+    public void visit(LinkRef node) {
+        if (node.getLinkUrl().isEmpty()) {
             // empty ref
             html.raw("[");
-            visitChildren(link);
+            visitChildren(node);
             html.raw("]");
         } else {
             Map<String, String> attrs = new LinkedHashMap<>();
-            String url = context.encodeUrl(Escaping.unescapeString(link.getLinkUrl()));
+            String url = context.encodeUrl(Escaping.unescapeString(node.getLinkUrl()));
             attrs.put("href", url);
-            if (link.getLinkTitle() != null) {
-                attrs.put("title", Escaping.unescapeString(link.getLinkTitle()));
+            if (node.getLinkTitle() != null) {
+                attrs.put("title", Escaping.unescapeString(node.getLinkTitle()));
             }
-            html.tag("a", getAttrs(link, attrs));
-            visitChildren(link);
+            html.tag("a", getAttrs(node, attrs));
+            visitChildren(node);
             html.tag("/a");
         }
     }
 
     @Override
-    public void visit(CustomBlock customBlock) {
+    public void visit(CustomBlock node) {
 
     }
 
     @Override
-    public void visit(CustomNode customNode) {
+    public void visit(CustomNode node) {
 
     }
 
@@ -363,8 +363,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         html.line();
     }
 
-    private boolean isInTightList(Paragraph paragraph) {
-        Node parent = paragraph.getParent();
+    private boolean isInTightList(Paragraph node) {
+        Node parent = node.getParent();
         if (parent != null) {
             Node gramps = parent.getParent();
             if (gramps != null && gramps instanceof ListBlock) {
@@ -392,22 +392,22 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         }
 
         @Override
-        public void visit(Text text) {
-            sb.append(text.getChars());
+        public void visit(Text node) {
+            sb.append(node.getChars());
         }
 
         @Override
-        public void visit(HtmlEntity htmlEntity) {
-            sb.append(Escaping.unescapeString(htmlEntity.getChars().toString()));
+        public void visit(HtmlEntity node) {
+            sb.append(Escaping.unescapeString(node.getChars().toString()));
         }
 
         @Override
-        public void visit(SoftLineBreak softLineBreak) {
+        public void visit(SoftLineBreak node) {
             sb.append('\n');
         }
 
         @Override
-        public void visit(HardLineBreak hardLineBreak) {
+        public void visit(HardLineBreak node) {
             sb.append('\n');
         }
     }

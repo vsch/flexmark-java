@@ -29,6 +29,14 @@ public class Reference extends Node {
         };
     }
 
+    @Override
+    public String getAstExtra() {
+        return segmentSpan(openingMarker, "open")
+                + segmentSpan(closingMarker, "close")
+                + segmentSpan(url, "url")
+                + segmentSpan(getTitleOpeningMarker().getStartOffset(), getTitleClosingMarker().getEndOffset(), "title");
+    }
+
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
         super(new SubSequence(label.getBase().subSequence(label.getStartOffset(), (title != null ? title.getEndOffset() : (url != null ? url.getEndOffset() : label.getEndOffset())))));
 

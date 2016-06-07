@@ -21,6 +21,12 @@ public class MailLink extends LinkNode {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
+    @Override
+    public String getAstExtra() {
+        return segmentSpan(openingMarker, "open")
+                + segmentSpan(closingMarker, "close");
+    }
+
     public BasedSequence getLeadSegment() {
         return SubSequence.firstNonNull(openingMarker, text);
     }

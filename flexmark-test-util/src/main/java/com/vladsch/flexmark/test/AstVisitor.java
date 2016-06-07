@@ -29,7 +29,7 @@ class AstVisitor extends AbstractVisitor {
     }
 
     public void visitNode(Node node) {
-        visitNode(node, "");
+        visitNode(node, node.getAstExtra());
     }
 
     public void visitNode(Node node, String appendNodeData) {
@@ -46,11 +46,10 @@ class AstVisitor extends AbstractVisitor {
             indent--;
         }
     }
-
+    
     @Override
     public void visit(BlockQuote node) {
-        String extra = " marker:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -60,9 +59,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Code node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-         extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -72,17 +69,12 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Emphasis node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
     public void visit(FencedCodeBlock node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " info:[" + node.getInfo().getStartOffset() + ", " + node.getInfo().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -92,14 +84,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Heading node) {
-        String extra;
-
-        if (node.isAtxHeading()) {
-            extra = " marker:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        } else {
-            extra = " marker:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        }
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -119,16 +104,12 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Image node) {
-        String extra = " open:[" + node.getTextOpeningMarker().getStartOffset() + ", " + node.getTextOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getLinkClosingMarker().getStartOffset() + ", " + node.getLinkClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
     public void visit(ImageRef node) {
-        String extra = " open:[" + node.getTextOpeningMarker().getStartOffset() + ", " + node.getTextOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getReferenceClosingMarker().getStartOffset() + ", " + node.getReferenceClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -138,22 +119,17 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Link node) {
-        String extra = " open:[" + node.getTextOpeningMarker().getStartOffset() + ", " + node.getTextOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getLinkClosingMarker().getStartOffset() + ", " + node.getLinkClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
     public void visit(LinkRef node) {
-        String extra = " open:[" + node.getTextOpeningMarker().getStartOffset() + ", " + node.getTextOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getReferenceClosingMarker().getStartOffset() + ", " + node.getReferenceClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
     public void visit(ListItem node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -168,11 +144,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(Reference node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        extra += " url:[" + node.getUrl().getStartOffset() + ", " + node.getUrl().getEndOffset() + "]";
-        extra += " title:[" + node.getTitleOpeningMarker().getStartOffset() + ", " + node.getTitleClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -182,9 +154,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(StrongEmphasis node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override
@@ -204,9 +174,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(MailLink node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override

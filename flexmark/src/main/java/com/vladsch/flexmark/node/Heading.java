@@ -13,6 +13,15 @@ public class Heading extends Block {
     protected BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
+    public String getAstExtra() {
+        if (isAtxHeading()) {
+            return segmentSpan(openingMarker, "marker");
+        } else {
+            return segmentSpan(closingMarker, "marker");
+        }
+    }
+
+    @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }

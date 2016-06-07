@@ -28,5 +28,5 @@ import org.junit.runners.Suite;
     BoundsIntegrationTest.class,
     SpecIntegrationTest.class
 })
-public class TestSuite {
+public class IntegrationTestSuite {
 }

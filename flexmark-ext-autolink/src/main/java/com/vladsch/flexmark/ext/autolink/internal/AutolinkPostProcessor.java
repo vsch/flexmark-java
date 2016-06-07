@@ -48,7 +48,7 @@ public class AutolinkPostProcessor implements PostProcessor {
                 ((MailLink) linkNode).setText(linkText);
             } else {
                 linkNode = new AutoLink();
-                ((AutoLink) linkNode).setContent(linkText);
+                ((AutoLink) linkNode).setText(linkText);
             }
 
             linkNode.setCharsFromContent();

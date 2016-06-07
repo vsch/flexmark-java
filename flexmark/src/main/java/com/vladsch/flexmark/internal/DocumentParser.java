@@ -80,6 +80,11 @@ public class DocumentParser implements ParserState {
         activateBlockParser(this.documentBlockParser);
     }
 
+    @Override
+    public PropertyHolder getPropertyHolder() {
+        return documentBlockParser.getBlock();
+    }
+
     public static List<BlockParserFactory> calculateBlockParserFactories(List<BlockParserFactory> customBlockParserFactories) {
         List<BlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.

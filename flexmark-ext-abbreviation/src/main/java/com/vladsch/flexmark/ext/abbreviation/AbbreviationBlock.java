@@ -1,42 +1,37 @@
-package com.vladsch.flexmark.ext.gfm.strikethrough;
+package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
+import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class Strikethrough extends CustomNode implements DelimitedNode {
+public class AbbreviationBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.EMPTY;
     protected BasedSequence text = SubSequence.EMPTY;
     protected BasedSequence closingMarker = SubSequence.EMPTY;
-
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, text, closingMarker };
-    }
+    protected BasedSequence abbreviation = SubSequence.EMPTY;
 
     @Override
     public String getAstExtra() {
         return segmentSpan(openingMarker, "open")
-                + segmentSpan(closingMarker, "close");
+                + segmentSpan(text, "text")
+                + segmentSpan(closingMarker, "close")
+                + segmentSpan(abbreviation, "abbreviation");
     }
 
-    public Strikethrough() {
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, text, closingMarker, abbreviation };
     }
 
-    public Strikethrough(BasedSequence chars) {
+    public AbbreviationBlock() {
+    }
+
+    public AbbreviationBlock(BasedSequence chars) {
         super(chars);
-    }
-
-    public Strikethrough(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
-        this.openingMarker = openingMarker;
-        this.text = text;
-        this.closingMarker = closingMarker;
     }
 
     public BasedSequence getOpeningMarker() {
@@ -61,6 +56,14 @@ public class Strikethrough extends CustomNode implements DelimitedNode {
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
+    }
+
+    public BasedSequence getAbbreviation() {
+        return abbreviation;
+    }
+
+    public void setAbbreviation(BasedSequence abbreviation) {
+        this.abbreviation = abbreviation;
     }
 
     @Override

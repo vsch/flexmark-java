@@ -23,6 +23,12 @@ public abstract class RefNode extends LinkNode {
         };
     }
 
+    @Override
+    public String getAstExtra() {
+        String extra = segmentSpan(textOpeningMarker, "open");
+        extra += segmentSpan(referenceClosingMarker, "close");
+        return extra;
+    }
 
     public String linkUrl = "";
     public String linkText = "";

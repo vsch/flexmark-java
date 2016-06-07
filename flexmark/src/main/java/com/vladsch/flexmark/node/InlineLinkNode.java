@@ -33,6 +33,12 @@ public abstract class InlineLinkNode extends LinkNode {
         };
     }
 
+    @Override
+    public String getAstExtra() {
+        return segmentSpan(textOpeningMarker, "open")
+                + segmentSpan(linkClosingMarker, "close");
+    }
+
     public InlineLinkNode() {
     }
 
