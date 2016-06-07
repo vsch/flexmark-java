@@ -25,6 +25,58 @@ The goal is to have a parser that can be easily extended to be compatible with:
 [MultiMarkdown][]  
 [PhpExtra][]  
 
+Progress so far
+---------------
+
+##### One Week later
+
+All the tests are modified to validate the AST not just the html. The AST contains all parsed
+elements with their source location available for every part of the node, not just the node
+itself. For example a link will have:
+
+1. `[` textOpeningMarker
+2. text
+3. `]` textClosingMarker
+4. `(` urlOpeningMarker
+5. url
+6. `"` titleOpeningMarker
+7. title
+8. `"` titleClosingMarker
+9. `)` urlClosingMarker
+
+That way all the bits and pieces are marked if they are needed for syntax highlighting or
+anything else.
+
+Whitespace is left out. So all spans of text not in a node are implicitly white space.
+
+I am very pleased that I decided to switch to commonmark-java based parser. Even though I had to
+do major surgery on its innards to get full source position tracking and AST that matches the
+source, it was a pleasure to work with it and is now a pleasure to extend a parser based ot its
+original design.
+
+#### Four days later
+ 
+I have the parser converted and passing all tests. Nothing is optimized in the new code but I
+decided to run the primitive benchmark to see how much performance was lost.
+
+The new parser is only 1.6 times slower overall from the original [commonmark-java] parser and
+about 7 times faster than [intellij-markdown] which is why I chose to work with commonmark-java
+in the first place.
+
+Now I have an easily extensible, in theory, parser that tracks original source position with no
+great effort. To map a part of a node to the original source only requires that a
+`subSequence()` of the text making it up be stored.
+
+I still have to implement tests to validate that all nodes store the correct location. The
+original tests are only concerned with the right characters being generated. I also have to
+implement a pegdown compatible parser extensions but that is just effort of writing the code and
+porting the pegdown tests to this project.
+
+Overall, I am very pleased with the results and my initial choice of basing the new parser for
+[Markdown Navigator] on commonmark-java. The [flexmark-java] project is still in its initial
+development mode. I did not get around to renaming the project or the extensions but this will
+happen soon.
+
 Latest Benchmarks
 -----------------
 
@@ -66,59 +118,6 @@ Here are some basic benchmarking results:
 | wrap             |            0.48 |          1.00 |              1.52 |     10.61 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
 | overall          |            0.62 |          1.00 |              6.86 |     17.19 |
-
-
-Progress so far
----------------
-
-##### One Week later
-
-All the tests are modified to validate the AST not just the html. The AST contains all parsed
-elements with their source location available for every part of the node, not just the node
-itself. For example a link will have:
-
-1. `[` textOpeningMarker
-2. text
-3. `]` textClisingMarker
-4. `(` urlOpeningMarker
-5. url
-6. `"` titleOpeningMarker
-7. title
-8. `"` titleClosingMarker
-9. `)` urlClosingMarker
-
-That way all the bits and pieces are marked if they are needed for syntax highlighting or
-anything else.
-
-Whitespace is left out. So all spans of text not in a node are implicitly white space.
-
-I am very pleased that I decided to switch to commonmark-java based parser. Even though I had to
-do major surgery on its innards to get full source position tracking and AST that matches the
-source, it was a pleasure to work with it and is now a pleasure to extend a parser based ot its
-original design.
-
-#### Four days later
- 
-I have the parser converted and passing all tests. Nothing is optimized in the new code but I
-decided to run the primitive benchmark to see how much performance was lost.
-
-The new parser is only 1.6 times slower overall from the original [commonmark-java] parser and
-about 7 times faster than [intellij-markdown] which is why I chose to work with commonmark-java
-in the first place.
-
-Now I have an easily extensible, in theory, parser that tracks original source position with no
-great effort. To map a part of a node to the original source only requires that a
-`subSequence()` of the text making it up be stored.
-
-I still have to implement tests to validate that all nodes store the correct location. The
-original tests are only concerned with the right characters being generated. I also have to
-implement a pegdown compatible parser extensions but that is just effort of writing the code and
-porting the pegdown tests to this project.
-
-Overall, I am very pleased with the results and my initial choice of basing the new parser for
-[Markdown Navigator] on commonmark-java. The [flexmark-java] project is still in its initial
-development mode. I did not get around to renaming the project or the extensions but this will
-happen soon.
 
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
@@ -168,7 +167,6 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [GitHub Issues page]: ../../issues
-[GitHub wiki in IntelliJ IDE]: ../../wiki/Adding-GitHub-Wiki-to-IntelliJ-Project
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [intellij-markdown]: https://github.com/valich/intellij-markdown 
@@ -190,8 +188,6 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [RubyMine]: http://www.jetbrains.com/ruby
 [Semantic Versioning]: http://semver.org/
 [sirthias]: https://github.com/sirthias
-[Version Notes]: resources/META-INF/VERSION.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
-[Wiki]: ../../wiki
 
