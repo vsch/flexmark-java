@@ -39,7 +39,7 @@ Progress so far
     Each node has `getChars()` property which returns a BasedSequence character sequence which
     spans the contents of the node, with start/end offsets into the original source.
 
-    Additionally, each node can provide other `BaseSequence` properties that parcel out pieces
+    Additionally, each node can provide other `BasedSequence` properties that parcel out pieces
     of the node's characters, independent of child node breakdown.
 
 - Add `PropertyHolder` interface to store document global properties for things like references,
@@ -48,9 +48,11 @@ Progress so far
 - Add `NodeRepository<T>` abstract class to make it easier to create collections of nodes
   indexed by a string like one used for references.
 
-- ParserState a few new mthods:
-    - `getPropertyHolder()` returns the property holder for the parse session. Current document
-      parser.
+- ParserState a few new methods:
+    - `getPropertyHolder()` returns the property holder for the parse session. This is the
+      current document parser. After parsing the property holder is the Document node which can
+      be obtained from via `Node::getDocument()` method. Implementation is to traverse node
+      parents until a Document node is reached.
 
     - `getInlineParser()` returns the current parse session's inline processor
 
@@ -60,25 +62,26 @@ Progress so far
     - `getLineEolLength()` returns the current line's EOL length, usually 1 but can be 2 if
       `"\r\n"` is the current line's sequence.
 
-    - Implements `ParagraphProcessor` interface
+    - Implements `BlockPreProcessor` interface to handle pre-processing of blocks as was done in
+      paragraph blocks to remove reference definitions from the beginning of a paragraph block.
 
 - `AbstractBlockParser::closeBlock()` now takes a `ParserState` argument so that any block can
   do processing similar to Paragraph processing of leading References by using the
-  `ParagraphProcessor::processParagraph()` method.
+  `BlockPreProcessor::preProcessBlock()` method.
 
 - Add `Builder::customInlineParserFactory()` method to allow switching of inline parser.
 
-- Add `Builder::customParagraphProcessor()` method to allow adding custom processing similar to
+- Add `Builder::blockPreProcessor()` method to allow adding custom processing similar to
   `Reference` processing done previously in `ParagraphParser`.
 
 - `InlineParserImpl` has all previously `private` fields and methods set to `protected` so that
   it can be sub-classed for customizations.
 
 - Special processing in document parser for ParagraphParser removed, now can be done by each
-  Parser since ParserState.
+  Parser since ParserState is passed to `closeBlock()` method.
 
 - Special processing of references was removed from `ParagraphParser::closeBlock()` now it is
-  done by a call to `ParserState::processParagraph()`
+  done by a call to `ParserState::preProcessBlock()`
 
 - Special processing in document parser for ListParser removed, now it is done in the ListParser
   so that it can be customized.

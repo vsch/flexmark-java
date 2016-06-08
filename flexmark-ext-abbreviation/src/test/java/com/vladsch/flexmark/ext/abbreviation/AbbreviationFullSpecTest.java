@@ -12,8 +12,8 @@ import java.util.Set;
 public class AbbreviationFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_abbreviation_ast_spec.txt";
     private static final Set<Extension> EXTENSIONS = Collections.singleton(AbbreviationExtension.create());
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     @Override
     protected String getSpecResourceName() {

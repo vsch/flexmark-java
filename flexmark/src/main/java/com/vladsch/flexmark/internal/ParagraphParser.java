@@ -41,7 +41,7 @@ public class ParagraphParser extends AbstractBlockParser {
         block.setContent(content);
         BasedSequence oldContentChars = block.getChars();
 
-        parserState.processParagraph(block, parserState);
+        parserState.preProcessBlock(block, parserState);
 
         if (block.getChars().isBlank()) {
             block.unlink();

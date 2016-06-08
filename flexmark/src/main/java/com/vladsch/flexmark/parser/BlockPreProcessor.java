@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.block.ParserState;
 
-public interface ParagraphProcessor {
+public interface BlockPreProcessor {
 
     /**
      * Process Paragraph Content on closing of the paragraph block to remove non-text lines.
@@ -12,10 +12,8 @@ public interface ParagraphProcessor {
      * to other blocks
      * 
      * by Default leading lines that define references are removed and Reference nodes are inserted before.
-     * 
-     * @param block     paragraph node to process  
-     * @param state     parser state
-     */
+     *  @param block     paragraph node to process  
+     * @param state     parser state*/
     
-    void processParagraph(Paragraph block, ParserState state);
+    void preProcessBlock(Block block, ParserState state);
 }

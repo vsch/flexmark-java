@@ -2,10 +2,10 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.BlockPreProcessor;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserFactory;
-import com.vladsch.flexmark.parser.ParagraphProcessor;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.io.BufferedReader;
@@ -24,16 +24,16 @@ public class DocumentParser implements ParserState {
             new ListBlockParser.Factory(),
             new IndentedCodeBlockParser.Factory());
 
-    private static class CommonmarkParagraphProcessor implements ParagraphProcessor {
+    private static class CommonMarkBlockPreProcessor implements BlockPreProcessor {
         @Override
-        public void processParagraph(Paragraph block, ParserState state) {
+        public void preProcessBlock(Block block, ParserState state) {
             if (state.getInlineParser() instanceof InlineParserImpl)
-                ((InlineParserImpl) state.getInlineParser()).processParagraph(block, state);
+                ((InlineParserImpl) state.getInlineParser()).preProcessBlock(block, state);
         }
     }
 
-    private static List<ParagraphProcessor> CORE_PARAGRAPH_PROCESSORS = Collections.<ParagraphProcessor>singletonList(
-            new CommonmarkParagraphProcessor()
+    private static List<BlockPreProcessor> CORE_BLOCK_PRE_PROCESSORS = Collections.<BlockPreProcessor>singletonList(
+            new CommonMarkBlockPreProcessor()
     );
 
     private BasedSequence line;
@@ -81,7 +81,7 @@ public class DocumentParser implements ParserState {
     private boolean inProcessParagraph = false;
 
     private final List<BlockParserFactory> blockParserFactories;
-    private final List<ParagraphProcessor> paragraphProcessors;
+    private final List<BlockPreProcessor> blockPreProcessors;
     private final InlineParser inlineParser;
     private final DocumentBlockParser documentBlockParser;
 
@@ -89,9 +89,9 @@ public class DocumentParser implements ParserState {
     private Set<BlockParser> allBlockParsers = new HashSet<>();
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
 
-    public DocumentParser(List<BlockParserFactory> blockParserFactories, List<ParagraphProcessor> paragraphProcessors, InlineParser inlineParser) {
+    public DocumentParser(List<BlockParserFactory> blockParserFactories, List<BlockPreProcessor> blockPreProcessors, InlineParser inlineParser) {
         this.blockParserFactories = blockParserFactories;
-        this.paragraphProcessors = paragraphProcessors;
+        this.blockPreProcessors = blockPreProcessors;
         this.inlineParser = inlineParser;
 
         this.documentBlockParser = new DocumentBlockParser();
@@ -111,11 +111,11 @@ public class DocumentParser implements ParserState {
         return list;
     }
 
-    public static List<ParagraphProcessor> calculateParagraphProcessors(List<ParagraphProcessor> paragraphProcessors) {
-        List<ParagraphProcessor> list = new ArrayList<>();
+    public static List<BlockPreProcessor> calculateParagraphProcessors(List<BlockPreProcessor> blockPreProcessors) {
+        List<BlockPreProcessor> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(paragraphProcessors);
-        list.addAll(CORE_PARAGRAPH_PROCESSORS);
+        list.addAll(blockPreProcessors);
+        list.addAll(CORE_BLOCK_PRE_PROCESSORS);
         return list;
     }
 
@@ -133,20 +133,20 @@ public class DocumentParser implements ParserState {
      * @param state     parser state
      */
     @Override
-    public void processParagraph(Paragraph block, ParserState state) {
+    public void preProcessBlock(Block block, ParserState state) {
         if (inProcessParagraph) return;
         inProcessParagraph = true;
 
         boolean hadChanges = true;
         while (hadChanges) {
             SourceRange range = block.getChars().getSourceRange();
-            for (ParagraphProcessor processor : paragraphProcessors) {
+            for (BlockPreProcessor processor : blockPreProcessors) {
 
                 if (block.getChars().isBlank()) break;
-                processor.processParagraph(block, state);
+                processor.preProcessBlock(block, state);
             }
             
-            hadChanges = paragraphProcessors.size() > 1 && block.getChars().isEmpty() && !range.equals(block.getChars().getSourceRange());
+            hadChanges = blockPreProcessors.size() > 1 && block.getChars().isEmpty() && !range.equals(block.getChars().getSourceRange());
         }
 
         inProcessParagraph = false;

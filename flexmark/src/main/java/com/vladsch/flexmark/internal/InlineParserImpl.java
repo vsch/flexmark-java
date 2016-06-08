@@ -4,9 +4,9 @@ import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.BlockPreProcessor;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.ParagraphProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
@@ -14,7 +14,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InlineParserImpl implements InlineParser, ParagraphProcessor {
+public class InlineParserImpl implements InlineParser, BlockPreProcessor {
 
     protected static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
     protected static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
@@ -189,7 +189,7 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
     }
 
     @Override
-    public void processParagraph(Paragraph block, ParserState state) {
+    public void preProcessBlock(Block block, ParserState state) {
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:

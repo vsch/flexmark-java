@@ -31,12 +31,12 @@ public class Parser {
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
     private final List<PostProcessor> postProcessors;
-    private final List<ParagraphProcessor> paragraphProcessors;
+    private final List<BlockPreProcessor> blockPreProcessors;
     private final InlineParserFactory inlineParserFactory;
 
     private Parser(Builder builder) {
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(builder.blockParserFactories);
-        this.paragraphProcessors = DocumentParser.calculateParagraphProcessors(builder.paragraphProcessors);
+        this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(builder.blockPreProcessors);
         this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(builder.delimiterProcessors);
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(delimiterProcessors.keySet());
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(delimiterCharacters);
@@ -62,7 +62,7 @@ public class Parser {
      * @return the root node
      */
     public Node parse(BasedSequence input) {
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, blockPreProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -76,7 +76,7 @@ public class Parser {
      * @return the root node
      */
     public Node parse(String input) {
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, blockPreProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
     }
@@ -91,7 +91,7 @@ public class Parser {
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, blockPreProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -110,7 +110,7 @@ public class Parser {
         private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
         private final List<PostProcessor> postProcessors = new ArrayList<>();
-        private final List<ParagraphProcessor> paragraphProcessors = new ArrayList<>();
+        private final List<BlockPreProcessor> blockPreProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
 
         /**
@@ -167,8 +167,8 @@ public class Parser {
             return this;
         }
 
-        public Builder paragraphProcessor(ParagraphProcessor paragraphProcessor) {
-            paragraphProcessors.add(paragraphProcessor);
+        public Builder blockPreProcessor(BlockPreProcessor blockPreProcessor) {
+            blockPreProcessors.add(blockPreProcessor);
             return this;
         }
     }
