@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
@@ -18,6 +17,4 @@ public interface InlineParser {
      * @param node the node to append resulting nodes to (as children)
      */
     void parse(BasedSequence input, Node node);
-
-    int parseReference(Block block, BasedSequence s);
 }

@@ -46,6 +46,9 @@ public class Document extends Block implements PropertyHolder {
     public <T> T getValueOrDefault(PropertyKey<T> key) {return propertyHolder.getValueOrDefault(key);}
 
     @Override
+    public <T> T getValueOrNew(PropertyKey<T> key) {return propertyHolder.getValueOrNew(key);}
+
+    @Override
     public <T> void setProperty(PropertyKey<T> key, T value) {propertyHolder.setProperty(key, value);}
 
     @Override

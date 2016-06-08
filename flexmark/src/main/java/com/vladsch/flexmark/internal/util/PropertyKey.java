@@ -2,19 +2,32 @@ package com.vladsch.flexmark.internal.util;
 
 public class PropertyKey<T> {
     final private String name;
+    final private ValueFactory<T> defaultValueFactory;
     final private T defaultValue;
 
-    public PropertyKey(String name, T defaultValue) {
+    public PropertyKey(String name, ValueFactory<T> defaultValueFactory) {
+        this.name = name;
+        this.defaultValueFactory = defaultValueFactory;
+        this.defaultValue = defaultValueFactory.value();
+    }
+
+    public PropertyKey(String name, final T defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;
+        this.defaultValueFactory = new ValueFactory<T>() {
+            @Override
+            public T value() {
+                return defaultValue;
+            }
+        };
     }
 
     public String getName() {
         return name;
     }
 
-    public T getDefaultValue() {
-        return defaultValue;
+    public ValueFactory<T> getDefaultValueFactory() {
+        return defaultValueFactory;
     }
 
     public T getValue(Object value) {
@@ -28,6 +41,10 @@ public class PropertyKey<T> {
         if (defaultValue.getClass().isInstance(value)) {
             return (T)value;
         }
+        return defaultValueFactory.value();
+    }
+
+    public T getDefaultValue() {
         return defaultValue;
     }
 }

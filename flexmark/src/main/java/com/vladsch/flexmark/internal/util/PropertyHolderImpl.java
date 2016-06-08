@@ -37,6 +37,15 @@ public class PropertyHolderImpl implements PropertyHolder {
     }
 
     @Override
+    public <T> T getValueOrNew(PropertyKey<T> key) {
+        if (properties.containsKey(key)) {
+            return key.getValueOrDefault(properties.get(key));
+        }
+
+        return key.getDefaultValueFactory().value();
+    }
+
+    @Override
     public <T> void setProperty(PropertyKey<T> key, T value) {
         properties.put(key, value);
     }

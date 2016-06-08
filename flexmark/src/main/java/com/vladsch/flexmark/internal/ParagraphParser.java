@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -37,37 +36,30 @@ public class ParagraphParser extends AbstractBlockParser {
         content.add(line, eolLength);
     }
 
+    @Override
     public void closeBlock(ParserState parserState) {
-        BasedSequence contentChars = content.getContents();
-        boolean hasReferenceDefs = false;
+        block.setContent(content);
+        BasedSequence oldContentChars = block.getChars();
 
-        int pos;
+        parserState.processParagraph(block, parserState);
 
-        // try parsing the beginning as link reference definitions:
-        while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
-            pos = parserState.getInlineParser().parseReference(block, contentChars);
-            if (pos == 0) break;
-
-            contentChars = contentChars.subSequence(pos, contentChars.length());
-            hasReferenceDefs = true;
-        }
-
-        if (hasReferenceDefs && Parsing.isBlank(contentChars)) {
+        if (block.getChars().isBlank()) {
             block.unlink();
             content = null;
         } else {
-            // skip lines that contained references
-            int iMax = content.getLineCount();
-            int i = 0;
+            BasedSequence contentChars = block.getChars();
+            if (oldContentChars.getStartOffset() != contentChars.getStartOffset() || oldContentChars.getEndOffset() != contentChars.getEndOffset()) {
+                // skip lines that contained references
+                int iMax = content.getLineCount();
+                int i = 0;
 
-            if (hasReferenceDefs) {
                 for (i = 0; i < iMax; i++) {
                     if (content.getLine(i).getStartOffset() >= contentChars.getStartOffset()) break;
                 }
-            }
 
-            content = new BlockContent(content, i, iMax);
-            block.setContent(content);
+                content = new BlockContent(content, i, iMax);
+                block.setContent(content);
+            }
         }
     }
 

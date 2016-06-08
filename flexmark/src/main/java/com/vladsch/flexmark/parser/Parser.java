@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.internal.CommonmarkInlineParser;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.util.BasedSequence;
@@ -32,13 +31,17 @@ public class Parser {
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
     private final List<PostProcessor> postProcessors;
+    private final List<ParagraphProcessor> paragraphProcessors;
+    private final InlineParserFactory inlineParserFactory;
 
     private Parser(Builder builder) {
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(builder.blockParserFactories);
+        this.paragraphProcessors = DocumentParser.calculateParagraphProcessors(builder.paragraphProcessors);
         this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(builder.delimiterProcessors);
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(delimiterProcessors.keySet());
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(delimiterCharacters);
         this.postProcessors = builder.postProcessors;
+        this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.inlineParserFactory() : builder.inlineParserFactory;
     }
 
     /**
@@ -55,25 +58,11 @@ public class Parser {
      * <p>
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
-     * @param input the text to parse
+     * @param input        the text to parse
      * @return the root node
      */
     public Node parse(BasedSequence input) {
-       return parse(input, null);
-    }
-
-    /**
-     * Parse the specified input text into a tree of nodes.
-     * <p>
-     * Note that this method is thread-safe (a new parser state is used for each invocation).
-     *
-     * @param input the text to parse
-     * @param inlineParser inline parser to use for parsing inlines
-     * @return the root node
-     */
-    public Node parse(BasedSequence input, InlineParser inlineParser) {
-        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -83,25 +72,11 @@ public class Parser {
      * <p>
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
-     * @param input the text to parse
+     * @param input        the text to parse
      * @return the root node
      */
     public Node parse(String input) {
-        return parse(input, null);
-    }
-
-    /**
-     * Parse the specified input text into a tree of nodes.
-     * <p>
-     * Note that this method is thread-safe (a new parser state is used for each invocation).
-     *
-     * @param input the text to parse
-     * @param inlineParser inline parser to use for parsing inlines
-     * @return the root node
-     */
-    public Node parse(String input, InlineParser inlineParser) {
-        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
     }
@@ -116,22 +91,7 @@ public class Parser {
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {
-        return parseReader(input, null);
-    }
-
-    /**
-     * Parse the specified reader into a tree of nodes. The caller is responsible for closing the reader.
-     * <p>
-     * Note that this method is thread-safe (a new parser state is used for each invocation).
-     *
-     * @param input the reader to parse
-     * @param inlineParser inline parser to use for parsing inlines
-     * @return the root node
-     * @throws IOException when reading throws an exception
-     */
-    public Node parseReader(Reader input, InlineParser inlineParser) throws IOException {
-        if (inlineParser == null) inlineParser = new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
-        DocumentParser documentParser = new DocumentParser(blockParserFactories, inlineParser);
+        DocumentParser documentParser = new DocumentParser(blockParserFactories, paragraphProcessors, inlineParserFactory.inlineParser(specialCharacters, delimiterCharacters, delimiterProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -150,6 +110,8 @@ public class Parser {
         private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
         private final List<PostProcessor> postProcessors = new ArrayList<>();
+        private final List<ParagraphProcessor> paragraphProcessors = new ArrayList<>();
+        private InlineParserFactory inlineParserFactory = null;
 
         /**
          * @return the configured {@link Parser}
@@ -187,6 +149,14 @@ public class Parser {
             return this;
         }
 
+        public Builder customInlineParserFactory(InlineParserFactory blockParserFactory) {
+            if (inlineParserFactory != null) {
+                throw new IllegalStateException("custom inline parser factory is already set to " + inlineParserFactory.getClass().getName());
+            }
+            inlineParserFactory = blockParserFactory;
+            return this;
+        }
+
         public Builder customDelimiterProcessor(DelimiterProcessor delimiterProcessor) {
             delimiterProcessors.add(delimiterProcessor);
             return this;
@@ -194,6 +164,11 @@ public class Parser {
 
         public Builder postProcessor(PostProcessor postProcessor) {
             postProcessors.add(postProcessor);
+            return this;
+        }
+
+        public Builder paragraphProcessor(ParagraphProcessor paragraphProcessor) {
+            paragraphProcessors.add(paragraphProcessor);
             return this;
         }
     }

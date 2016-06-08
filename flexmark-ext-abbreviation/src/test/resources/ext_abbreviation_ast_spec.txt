@@ -127,7 +127,7 @@ This is an Abbr and this is not [Abbr].
 .
 Document[0, 88]
   AbbreviationBlock[0, 21] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 21]
-  Reference[0, 23] open:[22, 23] close:[27, 29] url:[30, 45] title:[0, 0]
+  Reference[22, 45] open:[22, 23] close:[27, 29] url:[30, 45] title:[0, 0]
   Paragraph[47, 87]
     Text[47, 58]
     Abbreviation[58, 62]
@@ -137,4 +137,21 @@ Document[0, 88]
     Text[85, 86]
 ````````````````````````````````
 
+
+A reference that is not on the first line is just text.
+
+```````````````````````````````` example
+Paragraph with second line having a reference
+[test]: /url
+
+.
+<p>Paragraph with second line having a reference
+[test]: /url</p>
+.
+Document[0, 60]
+  Paragraph[0, 59]
+    Text[0, 45]
+    SoftLineBreak[45, 46]
+    Text[46, 58]
+````````````````````````````````
 

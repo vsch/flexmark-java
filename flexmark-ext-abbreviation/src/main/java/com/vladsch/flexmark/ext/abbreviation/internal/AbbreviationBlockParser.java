@@ -44,7 +44,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
         // add it to the map
         HashMap<String, AbbreviationBlock> abbreviationMap = parserState.getPropertyHolder().getValue(ABBREVIATION_MAP_KEY);
         if (abbreviationMap == null) {
-            abbreviationMap = new HashMap<String, AbbreviationBlock>();
+            abbreviationMap = new HashMap<>();
             parserState.getPropertyHolder().setProperty(ABBREVIATION_MAP_KEY, abbreviationMap);
         }
 

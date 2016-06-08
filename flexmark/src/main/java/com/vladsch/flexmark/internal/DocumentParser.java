@@ -2,7 +2,10 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.InlineParserFactory;
+import com.vladsch.flexmark.parser.ParagraphProcessor;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.io.BufferedReader;
@@ -20,6 +23,18 @@ public class DocumentParser implements ParserState {
             new ThematicBreakParser.Factory(),
             new ListBlockParser.Factory(),
             new IndentedCodeBlockParser.Factory());
+
+    private static class CommonmarkParagraphProcessor implements ParagraphProcessor {
+        @Override
+        public void processParagraph(Paragraph block, ParserState state) {
+            if (state.getInlineParser() instanceof InlineParserImpl)
+                ((InlineParserImpl) state.getInlineParser()).processParagraph(block, state);
+        }
+    }
+
+    private static List<ParagraphProcessor> CORE_PARAGRAPH_PROCESSORS = Collections.<ParagraphProcessor>singletonList(
+            new CommonmarkParagraphProcessor()
+    );
 
     private BasedSequence line;
     private BasedSequence lineWithEOL;
@@ -63,8 +78,10 @@ public class DocumentParser implements ParserState {
     private int nextNonSpaceColumn = 0;
     private int indent = 0;
     private boolean blank;
+    private boolean inProcessParagraph = false;
 
     private final List<BlockParserFactory> blockParserFactories;
+    private final List<ParagraphProcessor> paragraphProcessors;
     private final InlineParser inlineParser;
     private final DocumentBlockParser documentBlockParser;
 
@@ -72,8 +89,9 @@ public class DocumentParser implements ParserState {
     private Set<BlockParser> allBlockParsers = new HashSet<>();
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
 
-    public DocumentParser(List<BlockParserFactory> blockParserFactories, InlineParser inlineParser) {
+    public DocumentParser(List<BlockParserFactory> blockParserFactories, List<ParagraphProcessor> paragraphProcessors, InlineParser inlineParser) {
         this.blockParserFactories = blockParserFactories;
+        this.paragraphProcessors = paragraphProcessors;
         this.inlineParser = inlineParser;
 
         this.documentBlockParser = new DocumentBlockParser();
@@ -89,13 +107,49 @@ public class DocumentParser implements ParserState {
         List<BlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
-        list.addAll(DocumentParser.CORE_FACTORIES);
+        list.addAll(CORE_FACTORIES);
+        return list;
+    }
+
+    public static List<ParagraphProcessor> calculateParagraphProcessors(List<ParagraphProcessor> paragraphProcessors) {
+        List<ParagraphProcessor> list = new ArrayList<>();
+        // By having the custom factories come first, extensions are able to change behavior of core syntax.
+        list.addAll(paragraphProcessors);
+        list.addAll(CORE_PARAGRAPH_PROCESSORS);
         return list;
     }
 
     @Override
     public InlineParser getInlineParser() {
         return inlineParser;
+    }
+
+    /**
+     * Process paragraph block for non-text prefix lines
+     * 
+     * Will loop through all paragraph processors until no changes are made to the block
+     * 
+     * @param block     paragraph node to process  
+     * @param state     parser state
+     */
+    @Override
+    public void processParagraph(Paragraph block, ParserState state) {
+        if (inProcessParagraph) return;
+        inProcessParagraph = true;
+
+        boolean hadChanges = true;
+        while (hadChanges) {
+            SourceRange range = block.getChars().getSourceRange();
+            for (ParagraphProcessor processor : paragraphProcessors) {
+
+                if (block.getChars().isBlank()) break;
+                processor.processParagraph(block, state);
+            }
+            
+            hadChanges = paragraphProcessors.size() > 1 && block.getChars().isEmpty() && !range.equals(block.getChars().getSourceRange());
+        }
+
+        inProcessParagraph = false;
     }
 
     /**
@@ -328,7 +382,7 @@ public class DocumentParser implements ParserState {
             if (!blockParser.isContainer()) {
                 addLine();
             } else if (!isBlank()) {
-                // create paragraph container for line
+                // inlineParser paragraph container for line
                 addChild(new ParagraphParser());
                 addLine();
             }
@@ -576,6 +630,15 @@ public class DocumentParser implements ParserState {
         finalizeBlocks(this.activeBlockParsers);
         this.processInlines();
         return this.documentBlockParser.getBlock();
+    }
+
+    public static InlineParserFactory inlineParserFactory() {
+        return new InlineParserFactory() {
+            @Override
+            public InlineParser inlineParser(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+                return new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
+            }
+        };
     }
 
     private static class MatchedBlockParserImpl implements MatchedBlockParser {

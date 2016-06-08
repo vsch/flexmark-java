@@ -6,13 +6,15 @@ import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.ParagraphProcessor;
+import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InlineParserImpl implements InlineParser {
+public class InlineParserImpl implements InlineParser, ParagraphProcessor {
 
     protected static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
     protected static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
@@ -190,13 +192,26 @@ public class InlineParserImpl implements InlineParser {
         processDelimiters(null);
     }
 
+    @Override
+    public void processParagraph(Paragraph block, ParserState state) {
+        BasedSequence contentChars = block.getChars();
+
+        // try parsing the beginning as link reference definitions:
+        while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
+            int pos = parseReference(block, contentChars);
+            if (pos == 0) break;
+            contentChars = contentChars.subSequence(pos, contentChars.length());
+        }
+        
+        block.setChars(contentChars);
+    }
+
     /**
      * Attempt to parse a link reference, modifying the internal reference map.
      *
      * @return how many characters were parsed as a reference, {@code 0} if none
      */
-    @Override
-    public int parseReference(Block block, BasedSequence s) {
+    protected int parseReference(Block block, BasedSequence s) {
         this.input = s;
         this.index = 0;
         BasedSequence dest;
@@ -260,13 +275,13 @@ public class InlineParserImpl implements InlineParser {
         }
 
         Reference reference = new Reference(rawLabel, dest, title);
-        
+
         if (!referenceMap.containsKey(normalizedLabel)) {
             referenceMap.put(normalizedLabel, reference);
         }
-        
+
         block.insertBefore(reference);
-        
+
         return index - startIndex;
     }
 
@@ -635,6 +650,9 @@ public class InlineParserImpl implements InlineParser {
                 String normalizedLabel = Escaping.normalizeReference(ref);
                 if (referenceMap.containsKey(normalizedLabel)) {
                     reference = referenceMap.get(normalizedLabel);
+                    isLinkOrImage = true;
+                } else if (opener.previous == null) {
+                    // it is the outermost ref
                     isLinkOrImage = true;
                 }
             }

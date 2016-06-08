@@ -4,12 +4,13 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.PropertyHolder;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.ParagraphProcessor;
 
 /**
  * State of the parser that is used in block parsers.
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
-public interface ParserState {
+public interface ParserState extends ParagraphProcessor {
 
     /**
      * @return the current line

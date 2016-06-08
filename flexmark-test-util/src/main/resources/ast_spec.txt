@@ -3442,7 +3442,7 @@ Document[0, 27]
 <p><a href="/url" title="the title">foo</a></p>
 .
 Document[0, 56]
-  Reference[3, 48] open:[3, 48] close:[7, 48] url:[17, 48] title:[35, 48]
+  Reference[3, 46] open:[3, 4] close:[7, 9] url:[17, 21] title:[35, 46]
   Paragraph[50, 56]
     LinkRef[0, 0] open:[0, 0] close:[54, 55]
       Text[51, 54]
@@ -3815,9 +3815,9 @@ can occur one after another, without intervening blank lines.
 <a href="/baz-url">baz</a></p>
 .
 Document[0, 83]
-  Reference[0, 61] open:[0, 61] close:[4, 61] url:[7, 61] title:[16, 61]
-  Reference[22, 61] open:[22, 61] close:[26, 61] url:[29, 61] title:[40, 61]
-  Reference[46, 61] open:[46, 61] close:[50, 61] url:[53, 61] title:[0, 0]
+  Reference[0, 21] open:[0, 1] close:[4, 6] url:[7, 15] title:[16, 21]
+  Reference[22, 45] open:[22, 23] close:[26, 28] url:[29, 37] title:[40, 45]
+  Reference[46, 61] open:[46, 47] close:[50, 52] url:[53, 61] title:[0, 0]
   Paragraph[63, 83]
     LinkRef[0, 0] open:[0, 0] close:[67, 68]
       Text[64, 67]
@@ -10862,7 +10862,7 @@ purposes of determining matching:
 <p><a href="/url">Baz</a></p>
 .
 Document[0, 34]
-  Reference[0, 17] open:[0, 17] close:[10, 17] url:[13, 17] title:[0, 0]
+  Reference[0, 17] open:[0, 1] close:[10, 12] url:[13, 17] title:[0, 0]
   Paragraph[19, 34]
     LinkRef[0, 0] open:[19, 20] close:[32, 33]
       Text[20, 23]

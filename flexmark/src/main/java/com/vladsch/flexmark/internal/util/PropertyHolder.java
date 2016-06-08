@@ -7,5 +7,6 @@ public interface PropertyHolder {
     boolean contains(PropertyKey key);
     <T> T getValue(PropertyKey<T> key);
     <T> T getValueOrDefault(PropertyKey<T> key);
+    <T> T getValueOrNew(PropertyKey<T> key);
     <T> void setProperty(PropertyKey<T> key, T value);
 }

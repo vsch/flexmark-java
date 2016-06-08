@@ -21,6 +21,7 @@
 
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
@@ -36,6 +37,7 @@ import org.junit.runners.Suite;
         ExtGfmStrikethroughTestSuite.class,
         ExtGfmTablesTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
+        ExtAbbreviationTestSuite.class,
         IntegrationTestSuite.class,
 })
 public class TestTestSuite {
