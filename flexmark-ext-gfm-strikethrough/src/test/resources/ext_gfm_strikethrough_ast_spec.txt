@@ -128,10 +128,10 @@ Document[0, 54]
   Paragraph[0, 54]
     Strikethrough[0, 53] open:[0, 2] close:[51, 53]
       Text[2, 17]
-      Emphasis[17, 27] open:[17, 18] close:[26, 27]
+      Emphasis[17, 27] textOpen:[17, 18] text:[18, 26] textClose:[26, 27]
         Text[18, 26]
       Text[27, 32]
-      StrongEmphasis[32, 51] open:[32, 34] close:[49, 51]
+      StrongEmphasis[32, 51] textOpen:[32, 34] text:[34, 49] textClose:[49, 51]
         Text[34, 49]
 ````````````````````````````````
 

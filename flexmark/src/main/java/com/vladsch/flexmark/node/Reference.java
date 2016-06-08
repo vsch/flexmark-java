@@ -4,15 +4,15 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
 
 public class Reference extends Node {
-    public BasedSequence openingMarker = SubSequence.NULL;
-    public BasedSequence reference = SubSequence.NULL;
-    public BasedSequence closingMarker = SubSequence.NULL;
-    public BasedSequence urlOpeningMarker = SubSequence.NULL;
-    public BasedSequence url = SubSequence.NULL;
-    public BasedSequence urlClosingMarker = SubSequence.NULL;
-    public BasedSequence titleOpeningMarker = SubSequence.NULL;
-    public BasedSequence title = SubSequence.NULL;
-    public BasedSequence titleClosingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence reference = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence urlOpeningMarker = SubSequence.NULL;
+    protected BasedSequence url = SubSequence.NULL;
+    protected BasedSequence urlClosingMarker = SubSequence.NULL;
+    protected BasedSequence titleOpeningMarker = SubSequence.NULL;
+    protected BasedSequence title = SubSequence.NULL;
+    protected BasedSequence titleClosingMarker = SubSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -31,10 +31,9 @@ public class Reference extends Node {
 
     @Override
     public String getAstExtra() {
-        return segmentSpan(openingMarker, "open")
-                + segmentSpan(closingMarker, "close")
-                + segmentSpan(url, "url")
-                + segmentSpan(getTitleOpeningMarker().getStartOffset(), getTitleClosingMarker().getEndOffset(), "title");
+        return delimitedSegmentSpan(openingMarker, reference, closingMarker, "ref")
+                + delimitedSegmentSpan(urlOpeningMarker, url, urlClosingMarker, "url")
+                + delimitedSegmentSpan(titleOpeningMarker, title, titleClosingMarker, "title");
     }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {

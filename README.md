@@ -30,17 +30,23 @@ Progress so far
     - Image
     - LinkRef
     - ImageRef
-    - Autolink
+    - AutoLink
     - MailLink
     - Emphasis
     - StrongEmphasis
     - HtmlEntity
 
-- Each node has getChars() property which returns a BasedSequence character sequence from which
-  you can get start/end offsets into the original source.
+    Each node has `getChars()` property which returns a BasedSequence character sequence which
+    spans the contents of the node, with start/end offsets into the original source.
+
+    Additionally, each node can provide other `BaseSequence` properties that parcel out pieces
+    of the node's characters, independent of child node breakdown.
 
 - Add `PropertyHolder` interface to store document global properties for things like references,
   abbreviations, footnotes, or anything else that is parsed from the source.
+
+- Add `NodeRepository<T>` abstract class to make it easier to create collections of nodes
+  indexed by a string like one used for references.
 
 - ParserState a few new mthods:
     - `getPropertyHolder()` returns the property holder for the parse session. Current document
@@ -80,6 +86,24 @@ Progress so far
 - `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
   AST so that the generated AST can be validated.
 
+        ```````````````````````````````` example
+        [[*foo* bar]]
+        
+        [*foo* bar]: /url "title"
+        .
+        <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
+        .
+        Document[0, 41]
+          Paragraph[0, 14]
+            Text[0, 1]
+            LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2] reference:[2, 11] referenceClose:[11, 12]
+              Emphasis[2, 7] textOpen:[2, 3] text:[3, 6] textClose:[6, 7]
+                Text[3, 6]
+              Text[7, 11]
+            Text[12, 13]
+          Reference[15, 40] refOpen:[15, 16] ref:[16, 25] refClose:[25, 27] urlOpen:[0, 0] url:[28, 32] urlClose:[0, 0] titleOpen:[33, 34] title:[34, 39] titleClose:[39, 40]
+        ````````````````````````````````
+    
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 
@@ -88,7 +112,7 @@ Progress so far
   the original file to the generated one. Makes it easy to copy actual and do a diff or paste it
   into the expected document for updating the expected values.
 
-- Add `FullSpecTestCase` derived tests to all extensions
+- Add `FullSpecTestCase` derived tests added to all extensions
 
 - Add `flexmark-ext-abbreviation` to implement abbreviations processing. The extension `create`
   function can take an optional `boolean`, which if true will generate HTML abbreviations as `<a
@@ -99,7 +123,7 @@ Progress so far
 
 All the tests are modified to validate the AST not just the html. The AST contains all parsed
 elements with their source location available for every part of the node, not just the node
-itself. For example a link will have:
+itself. For example a link has the following properties:
 
 1. `[` textOpeningMarker
 2. text
@@ -112,7 +136,8 @@ itself. For example a link will have:
 9. `)` urlClosingMarker
 
 That way all the bits and pieces are marked if they are needed for syntax highlighting or
-anything else.
+anything else. Each of these is a `BasedSequence` with `getStartOffset()` and `getEndOffset()`
+to get the source offsets.
 
 Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
@@ -185,7 +210,6 @@ Here are some basic benchmarking results:
 | wrap             |            0.50 |          1.00 |              1.60 |     10.20 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
 | overall          |            0.65 |          1.00 |              6.96 |     17.77 |
-
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance

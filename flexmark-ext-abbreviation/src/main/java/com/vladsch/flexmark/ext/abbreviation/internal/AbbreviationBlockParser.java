@@ -2,18 +2,14 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.PropertyKey;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationBlockParser extends AbstractBlockParser {
-    public static final PropertyKey<HashMap<String, AbbreviationBlock>> ABBREVIATION_MAP_KEY = new PropertyKey<>("ABBREVIATION_MAP_KEY", new HashMap<String, AbbreviationBlock>());
-
     private static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*.*\\s*\\]:");
     
     private final AbbreviationBlock block = new AbbreviationBlock();
@@ -39,16 +35,9 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
-        block.setCharsFromContent();
-
         // add it to the map
-        HashMap<String, AbbreviationBlock> abbreviationMap = parserState.getPropertyHolder().getValue(ABBREVIATION_MAP_KEY);
-        if (abbreviationMap == null) {
-            abbreviationMap = new HashMap<>();
-            parserState.getPropertyHolder().setProperty(ABBREVIATION_MAP_KEY, abbreviationMap);
-        }
-
-        abbreviationMap.put(block.getText().toString(), block);
+        AbbreviationRepository abbreviationMap = parserState.getPropertyHolder().getValueOrNew(AbbreviationRepository.PROPERTY_KEY);
+        abbreviationMap.put(abbreviationMap.normalizeKey(block.getText()), block);
     }
 
     @Override
@@ -81,7 +70,6 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
                 BasedSequence openingMarker = trySequence.subSequence(openingStart, openingStart + 2);
                 BasedSequence text = trySequence.subSequence(openingStart + 2, openingEnd - 2).trim();
                 BasedSequence closingMarker = trySequence.subSequence(openingEnd - 2, openingEnd);
-                int level = openingMarker.length(); // number of #s
 
                 AbbreviationBlockParser abbreviationBlock = new AbbreviationBlockParser();
                 abbreviationBlock.block.setOpeningMarker(openingMarker);

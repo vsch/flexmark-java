@@ -77,12 +77,10 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
 
-    public final PropertyKey<HashMap<String, Reference>> REFERENCE_MAP_KEY = new PropertyKey<>("REFERENCE_MAP_KEY", new HashMap<String, Reference>());
-
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
      */
-    protected HashMap<String, Reference> referenceMap = new HashMap<>();
+    protected ReferenceRepository referenceRepository;
 
     protected Node block;
 
@@ -106,9 +104,7 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
     @Override
     public void setDocument(Document document) {
         this.document = document;
-
-        // set references in document
-        this.document.setProperty(REFERENCE_MAP_KEY, referenceMap);
+        this.referenceRepository = document.getValueOrNew(ReferenceRepository.PROPERTY_KEY);
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -202,7 +198,7 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, contentChars.length());
         }
-        
+
         block.setChars(contentChars);
     }
 
@@ -276,9 +272,9 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
 
         Reference reference = new Reference(rawLabel, dest, title);
 
-        if (!referenceMap.containsKey(normalizedLabel)) {
-            referenceMap.put(normalizedLabel, reference);
-        }
+        // NOTE: whether first or last reference is kept is defined by the repository modify behavior setting
+        // for CommonMark this is set in the setDocument() function of the inline parser
+        referenceRepository.putRawKey(normalizedLabel, reference);
 
         block.insertBefore(reference);
 
@@ -646,14 +642,26 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
             }
 
             if (ref != null) {
-                label = Escaping.extractReference(ref);
                 String normalizedLabel = Escaping.normalizeReference(ref);
-                if (referenceMap.containsKey(normalizedLabel)) {
-                    reference = referenceMap.get(normalizedLabel);
+                if (referenceRepository.containsKey(normalizedLabel)) {
+                    reference = referenceRepository.get(normalizedLabel);
                     isLinkOrImage = true;
                 } else if (opener.previous == null) {
-                    // it is the outermost ref
-                    isLinkOrImage = true;
+                    // it is the outermost ref and is bare, if not bare then we treat
+                    if (!refIsBare && peek() == '[') {
+                        int beforeNext = index;
+                        int nextLength = parseLinkLabel();
+                        if (nextLength > 0) {
+                            // not bare and not defined and followed by another [], roll back to before the label and make it just text
+                            index = beforeLabel;
+                        } else {
+                            ref = input.subSequence(opener.index, startIndex);
+                            refIsBare = true;
+                            isLinkOrImage = true;
+                        }
+                    } else {
+                        isLinkOrImage = true;
+                    }
                 }
             }
         }
@@ -682,21 +690,15 @@ public class InlineParserImpl implements InlineParser, ParagraphProcessor {
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
-                    refNode.setLinkText(refNode.getText().toString());
-                } else {
-                    refNode.setLinkText(label);
                 }
-
-                if (reference != null) {
-                    refNode.setLinkUrl(reference.getUrl().toString());
-                    if (reference.getTitle() != SubSequence.NULL) refNode.setLinkTitle(reference.getTitle().toString());
-                }
+                refNode.setCharsFromContent();
             } else {
                 // set dest and title
                 InlineLinkNode inlineLinkNode = (InlineLinkNode) linkOrImage;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
                 inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
+                inlineLinkNode.setCharsFromContent();
             }
 
             // Process delimiters such as emphasis inside link/image

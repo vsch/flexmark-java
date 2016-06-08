@@ -22,8 +22,7 @@ public class AutoLink extends LinkNode {
 
     @Override
     public String getAstExtra() {
-        return segmentSpan(openingMarker, "open")
-                + segmentSpan(closingMarker, "close");
+        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
     }
 
     public AutoLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {

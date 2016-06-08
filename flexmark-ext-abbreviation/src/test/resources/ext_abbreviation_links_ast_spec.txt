@@ -73,3 +73,88 @@ Document[0, 126]
 ````````````````````````````````
 
 
+
+```````````````````````````````` example
+*[U.S.A.]: United States of America
+*[US of A]: United States of America
+
+U.S.A. is an abbreviation and so is US of A, an abbreviation.
+.
+<p><a href="#" title="United States of America">U.S.A.</a> is an abbreviation and so is <a href="#" title="United States of America">US of A</a>, an abbreviation.</p>
+.
+Document[0, 136]
+  AbbreviationBlock[0, 35] open:[0, 2] text:[2, 8] close:[8, 10] abbreviation:[11, 35]
+  AbbreviationBlock[36, 72] open:[36, 38] text:[38, 45] close:[45, 47] abbreviation:[48, 72]
+  Paragraph[74, 136]
+    Abbreviation[74, 80]
+    Text[80, 110]
+    Abbreviation[110, 117]
+    Text[117, 135]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+*[US]: United States
+*[U.S.A.]: United States of America
+*[US of A]: United States of America
+
+U.S.A., US of A, and US are all abbreviations.
+.
+<p><a href="#" title="United States of America">U.S.A.</a>, <a href="#" title="United States of America">US of A</a>, and <a href="#" title="United States">US</a> are all abbreviations.</p>
+.
+Document[0, 142]
+  AbbreviationBlock[0, 20] open:[0, 2] text:[2, 4] close:[4, 6] abbreviation:[7, 20]
+  AbbreviationBlock[21, 56] open:[21, 23] text:[23, 29] close:[29, 31] abbreviation:[32, 56]
+  AbbreviationBlock[57, 93] open:[57, 59] text:[59, 66] close:[66, 68] abbreviation:[69, 93]
+  Paragraph[95, 142]
+    Abbreviation[95, 101]
+    Text[101, 103]
+    Abbreviation[103, 110]
+    Text[110, 116]
+    Abbreviation[116, 118]
+    Text[118, 141]
+````````````````````````````````
+
+
+```````````````````````````````` example
+*[Abbr]: Abbreviation
+[Abbr]: http://test.com
+
+This is an Abbr and this is not [Abbr].
+
+.
+<p>This is an <a href="#" title="Abbreviation">Abbr</a> and this is not <a href="http://test.com">Abbr</a>.</p>
+.
+Document[0, 88]
+  AbbreviationBlock[0, 21] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 21]
+  Reference[22, 45] refOpen:[22, 23] ref:[23, 27] refClose:[27, 29] urlOpen:[0, 0] url:[30, 45] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Paragraph[47, 87]
+    Text[47, 58]
+    Abbreviation[58, 62]
+    Text[62, 79]
+    LinkRef[79, 85] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[79, 80] reference:[80, 84] referenceClose:[84, 85]
+      Text[80, 84]
+    Text[85, 86]
+````````````````````````````````
+
+
+A reference that is not on the first line is just text.
+
+```````````````````````````````` example
+Paragraph with second line having a reference
+[test]: /url
+
+.
+<p>Paragraph with second line having a reference
+[test]: /url</p>
+.
+Document[0, 60]
+  Paragraph[0, 59]
+    Text[0, 45]
+    SoftLineBreak[45, 46]
+    LinkRef[46, 52] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[46, 47] reference:[47, 51] referenceClose:[51, 52]
+      Text[47, 51]
+    Text[52, 58]
+````````````````````````````````
+

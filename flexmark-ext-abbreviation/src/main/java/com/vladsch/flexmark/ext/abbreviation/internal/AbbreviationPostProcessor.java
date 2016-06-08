@@ -18,13 +18,13 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
     private void initializeNode(Node node) {
         Document document = node.getDocument();
-        HashMap<String, AbbreviationBlock> abbrMap = document.getValueOrDefault(AbbreviationBlockParser.ABBREVIATION_MAP_KEY);
+        AbbreviationRepository abbrRepository = document.getValueOrDefault(AbbreviationRepository.PROPERTY_KEY);
 
-        if (!abbrMap.isEmpty()) {
+        if (!abbrRepository.isEmpty()) {
             abbreviationMap = new HashMap<>();
             StringBuilder sb = new StringBuilder();
-            for (String abbr : abbrMap.keySet()) {
-                AbbreviationBlock abbreviationBlock = abbrMap.get(abbr);
+            for (String abbr : abbrRepository.keySet()) {
+                AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
                 BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
                 if (!abbreviation.isEmpty()) {
                     abbreviationMap.put(abbr, abbreviation.toString());

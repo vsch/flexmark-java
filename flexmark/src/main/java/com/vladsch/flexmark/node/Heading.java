@@ -14,11 +14,7 @@ public class Heading extends Block {
 
     @Override
     public String getAstExtra() {
-        if (isAtxHeading()) {
-            return segmentSpan(openingMarker, "marker");
-        } else {
-            return segmentSpan(closingMarker, "marker");
-        }
+        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
     }
 
     @Override

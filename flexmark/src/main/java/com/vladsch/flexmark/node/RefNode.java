@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.SubSequence;
 
 public abstract class RefNode extends LinkNode {
@@ -25,14 +26,9 @@ public abstract class RefNode extends LinkNode {
 
     @Override
     public String getAstExtra() {
-        String extra = segmentSpan(textOpeningMarker, "open");
-        extra += segmentSpan(referenceClosingMarker, "close");
-        return extra;
+        return delimitedSegmentSpan(textOpeningMarker, text, textClosingMarker, "text")
+                + delimitedSegmentSpan(referenceOpeningMarker, reference, referenceClosingMarker, "reference");
     }
-
-    public String linkUrl = "";
-    public String linkText = "";
-    public String linkTitle = null;
 
     public RefNode() {
     }
@@ -99,11 +95,11 @@ public abstract class RefNode extends LinkNode {
     }
 
     public boolean isReferenceTextCombined() {
-        return reference == SubSequence.NULL;
+        return text == SubSequence.NULL;
     }
 
     public boolean isDummyReference() {
-        return referenceOpeningMarker != SubSequence.NULL && reference == SubSequence.NULL && referenceClosingMarker != SubSequence.NULL;
+        return textOpeningMarker != SubSequence.NULL && text == SubSequence.NULL && textClosingMarker != SubSequence.NULL;
     }
 
     public BasedSequence getText() {
@@ -113,29 +109,10 @@ public abstract class RefNode extends LinkNode {
     public BasedSequence getReference() {
         return reference;
     }
-
-    public String getLinkUrl() {
-        return linkUrl;
-    }
-
-    public void setLinkUrl(String linkUrl) {
-        this.linkUrl = linkUrl;
-    }
-
-    public String getLinkText() {
-        return linkText;
-    }
-
-    public void setLinkText(String linkText) {
-        this.linkText = linkText;
-    }
-
-    public String getLinkTitle() {
-        return linkTitle;
-    }
-
-    public void setLinkTitle(String linkTitle) {
-        this.linkTitle = linkTitle;
+    
+    public Reference getReferenceNode() {
+        ReferenceRepository repository = getDocument().getValue(ReferenceRepository.PROPERTY_KEY);
+        return repository == null ? null : repository.get(repository.normalizeKey(reference));
     }
 
     public BasedSequence getTextOpeningMarker() {
@@ -180,6 +157,7 @@ public abstract class RefNode extends LinkNode {
 
     @Override
     protected String toStringAttributes() {
-        return "text=" + text + ", reference=" + reference + ", linkUrl=" + linkUrl + ", linkText=" + linkText;
+        Reference node = getReferenceNode();
+        return "text=" + text + ", reference=" + reference + ", referenceNode=" + (node == null ? "null" : node.toStringAttributes());
     }
 }

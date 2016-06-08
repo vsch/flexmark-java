@@ -45,7 +45,7 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
 
     private void renderAbbreviation(Abbreviation node) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String text = node.getChars().toString();
+        String text = node.getChars().unescaped();
         String abbreviation = node.getAbbreviation();
         String tag;
         

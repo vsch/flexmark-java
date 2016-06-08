@@ -246,8 +246,15 @@ public abstract class Node {
     public static String segmentSpan(int startOffset, int endOffset, String name) {
         return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + "]";
     }
-    
+
     public static String segmentSpan(BasedSequence sequence, String name) {
         return segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name);
+    }
+
+    public static String delimitedSegmentSpan(BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+        return segmentSpan(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open")
+                + segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name)
+                + segmentSpan(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close")
+                ;
     }
 }

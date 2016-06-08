@@ -221,7 +221,7 @@ Document[0, 10]
 <h2>|Abc</h2>
 .
 Document[0, 9]
-  Heading[0, 8] marker:[5, 8]
+  Heading[0, 8] textOpen:[0, 0] text:[0, 4] textClose:[5, 8]
     Text[0, 4]
 ````````````````````````````````
 
@@ -348,7 +348,7 @@ Document[0, 13]
 <p>|1</p>
 .
 Document[0, 12]
-  Heading[0, 8] marker:[5, 8]
+  Heading[0, 8] textOpen:[0, 0] text:[0, 4] textClose:[5, 8]
     Text[0, 4]
   Paragraph[9, 12]
     Text[9, 11]
@@ -577,7 +577,7 @@ Document[0, 22]
     TableHead[0, 9]
       TableRow[0, 9]
         TableCell[0, 5]
-          Emphasis[0, 5] open:[0, 1] close:[4, 5]
+          Emphasis[0, 5] textOpen:[0, 1] text:[1, 4] textClose:[4, 5]
             Text[1, 4]
         TableCell[6, 9]
           Text[6, 9]

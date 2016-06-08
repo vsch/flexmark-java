@@ -112,13 +112,13 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.countLeadingNot(" ");
-            String language;
+            BasedSequence language;
             if (space == -1) {
-                language = info.toString();
+                language = info;
             } else {
-                language = info.subSequence(0, space).toString();
+                language = info.subSequence(0, space);
             }
-            attributes.put("class", "language-" + Escaping.unescapeString(language));
+            attributes.put("class", "language-" + language.unescaped());
         }
         renderCodeBlock(literal, getAttrs(node, attributes));
     }
@@ -185,7 +185,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Text node) {
-        html.text(Escaping.unescapeString(Escaping.normalizeEOL(node.getChars())));
+        html.text(Escaping.normalizeEOL(node.getChars().unescaped()));
     }
 
     @Override
@@ -223,7 +223,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlEntity node) {
-        html.text(Escaping.unescapeString(node.getChars().toString()));
+        html.text(node.getChars().unescaped());
     }
 
     @Override
@@ -240,7 +240,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     public void visit(MailLink node) {
         Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(node.getText().toString()));
+        String url = context.encodeUrl(node.getText().unescaped());
         attrs.put("href", "mailto:" + url);
         html.tag("a", getAttrs(node, attrs));
         html.text(url);
@@ -248,46 +248,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(ImageRef node) {
-        if (node.getLinkUrl().isEmpty()) {
-            // empty ref
-            html.raw("![");
-            visitChildren(node);
-            html.raw("]");
-        } else {
-            String url = context.encodeUrl(Escaping.unescapeString(node.getLinkUrl()));
-            Map<String, String> attrs = new LinkedHashMap<>();
-            attrs.put("src", url);
-
-            AltTextVisitor altTextVisitor = new AltTextVisitor();
-            node.accept(altTextVisitor);
-            String altText = altTextVisitor.getAltText();
-
-            attrs.put("alt", altText);
-            if (node.getLinkTitle() != null) {
-                attrs.put("title", Escaping.unescapeString(node.getLinkTitle()));
-            }
-
-            html.tag("img", getAttrs(node, attrs), true);
-        }
-    }
-
-    @Override
-    public void visit(Link node) {
-        Map<String, String> attrs = new LinkedHashMap<>();
-        String url = context.encodeUrl(Escaping.unescapeString(node.getUrl().toString()));
-        attrs.put("href", url);
-        if (node.getTitle().isNotNull()) {
-            attrs.put("title", Escaping.unescapeString(node.getTitle().toString()));
-        }
-        html.tag("a", getAttrs(node, attrs));
-        visitChildren(node);
-        html.tag("/a");
-    }
-
-    @Override
     public void visit(Image node) {
-        String url = context.encodeUrl(Escaping.unescapeString(node.getUrl().toString()));
+        String url = context.encodeUrl(node.getUrl().unescaped());
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
         node.accept(altTextVisitor);
@@ -304,18 +266,61 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
+    public void visit(Link node) {
+        Map<String, String> attrs = new LinkedHashMap<>();
+        String url = context.encodeUrl(node.getUrl().unescaped());
+        attrs.put("href", url);
+        if (node.getTitle().isNotNull()) {
+            attrs.put("title", Escaping.unescapeString(node.getTitle().toString()));
+        }
+        html.tag("a", getAttrs(node, attrs));
+        visitChildren(node);
+        html.tag("/a");
+    }
+
+    @Override
+    public void visit(ImageRef node) {
+        Reference reference = node.getReferenceNode();
+        if (reference == null) {
+            // empty ref, we treat it as text
+            html.text(node.getChars().unescaped());
+        } else {
+            String url = context.encodeUrl(reference.getUrl().unescaped());
+            Map<String, String> attrs = new LinkedHashMap<>();
+            attrs.put("src", url);
+
+            AltTextVisitor altTextVisitor = new AltTextVisitor();
+            node.accept(altTextVisitor);
+            String altText = altTextVisitor.getAltText();
+
+            attrs.put("alt", altText);
+            if (reference.getTitle().isNotNull()) {
+                attrs.put("title", reference.getTitle().unescaped());
+            }
+
+            html.tag("img", getAttrs(node, attrs), true);
+        }
+    }
+
+    @Override
     public void visit(LinkRef node) {
-        if (node.getLinkUrl().isEmpty()) {
-            // empty ref
+        Reference reference = node.getReferenceNode();
+        if (reference == null) {
+            // empty ref, we treat it as text
             html.raw("[");
             visitChildren(node);
             html.raw("]");
+            if (!node.isReferenceTextCombined()) {
+                html.raw("[");
+                html.raw(node.reference.unescaped());
+                html.raw("]");
+            }
         } else {
             Map<String, String> attrs = new LinkedHashMap<>();
-            String url = context.encodeUrl(Escaping.unescapeString(node.getLinkUrl()));
+            String url = context.encodeUrl(reference.getUrl().unescaped());
             attrs.put("href", url);
-            if (node.getLinkTitle() != null) {
-                attrs.put("title", Escaping.unescapeString(node.getLinkTitle()));
+            if (reference.getTitle().isNotNull()) {
+                attrs.put("title", reference.getTitle().unescaped());
             }
             html.tag("a", getAttrs(node, attrs));
             visitChildren(node);

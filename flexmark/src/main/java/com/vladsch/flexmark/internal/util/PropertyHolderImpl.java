@@ -42,7 +42,9 @@ public class PropertyHolderImpl implements PropertyHolder {
             return key.getValueOrDefault(properties.get(key));
         }
 
-        return key.getDefaultValueFactory().value();
+        T value = key.getDefaultValueFactory().value();
+        properties.put(key, value);
+        return value;
     }
 
     @Override

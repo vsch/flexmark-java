@@ -134,7 +134,6 @@ public class Escaping {
                     sbItem.append('%');
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
-
                 }
                 textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), SubSequence.EMPTY));
             }
@@ -179,8 +178,11 @@ public class Escaping {
 
     public static String extractReference(CharSequence input) {
         // Strip '[' and ']', then trim and convert to lowercase
-        int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
-        return Escaping.collapseWhitespace(input.subSequence(1, input.length() - stripEnd).toString(), true);
+        if (input.length() > 1) {
+            int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
+            return Escaping.collapseWhitespace(input.subSequence(1, input.length() - stripEnd).toString(), true);
+        }
+        return input.toString();
     }
 
     public static String normalizeReference(CharSequence input) {

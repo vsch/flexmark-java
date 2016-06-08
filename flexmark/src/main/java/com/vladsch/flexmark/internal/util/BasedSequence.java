@@ -44,6 +44,9 @@ public interface BasedSequence extends CharSequence {
     boolean isBlank();
     boolean isNull();
     boolean isNotNull();
+    
+    String unescaped();
+    BasedSequence unescaped(ReplacedTextMapper textMapper);
 
     boolean matchChars(String chars, int startIndex);
     boolean matchCharsReversed(String chars, int endIndex);

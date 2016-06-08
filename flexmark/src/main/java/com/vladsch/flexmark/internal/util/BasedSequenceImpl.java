@@ -275,4 +275,13 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return sb.toString();
     }
 
+    @Override
+    public String unescaped() {
+        return Escaping.unescapeString(toString());
+    }
+
+    @Override
+    public BasedSequence unescaped(ReplacedTextMapper textMapper) {
+        return Escaping.unescapeSequence(this, textMapper);
+    }
 }

@@ -11,6 +11,12 @@ public class PropertyKey<T> {
         this.defaultValue = defaultValueFactory.value();
     }
 
+    public PropertyKey(String name, final T defaultValue, ValueFactory<T> defaultValueFactory) {
+        this.name = name;
+        this.defaultValueFactory = defaultValueFactory;
+        this.defaultValue = defaultValue;
+    }
+
     public PropertyKey(String name, final T defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;
