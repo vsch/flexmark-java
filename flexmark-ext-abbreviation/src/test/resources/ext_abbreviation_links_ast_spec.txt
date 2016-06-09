@@ -37,6 +37,23 @@ Document[0, 55]
     Text[38, 54]
 ````````````````````````````````
 
+No inline processing in expansion text.
+
+```````````````````````````````` example
+*[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
+
+This has an Abbr embedded in it.
+.
+<p>This has an <a href="#" title="Abbreviation has *emphasis*, **bold** or `code`">Abbr</a> embedded in it.</p>
+.
+Document[0, 91]
+  AbbreviationBlock[0, 56] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 56]
+  Paragraph[58, 91]
+    Text[58, 70]
+    Abbreviation[70, 74]
+    Text[74, 90]
+````````````````````````````````
+
 
 ```````````````````````````````` example
 *[Abbr]: Abbreviation 1
