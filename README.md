@@ -25,6 +25,37 @@ used to re-create the source.
 Progress so far
 ---------------
 
+- Parser options to be implemented:
+    - GitHub Extensions
+        - [x] Auto links
+        - [x] Fenced code blocks
+        - [ ] Anchor links for headers with auto id generation
+        - [ ] Table Spans option to be implemented for gfm-tables extension
+        - [ ] Wiki Links with GitHub and Creole syntax
+        - [ ] Emoji Shortcuts with use GitHub emoji URL option
+    - GitHub Syntax
+        - [x] Strikethrough
+        - [ ] Task Lists
+        - [ ] No Atx Header Space
+        - [ ] Hard Wraps
+        - [ ] Relaxed HR Rules
+        - [ ] Wiki links
+    - Publishing
+        - [x] Abbreviations
+        - [ ] Footnotes
+        - [ ] Definitions
+        - [ ] Table of Contents
+    - Typographic
+        - [ ] Quotes
+        - [ ] Smarts
+    - Suppress
+        - [ ] inline HTML
+        - [ ] HTML blocks
+    - Processor Extensions
+        - [ ] Jekyll front matter
+        - [ ] GitBook link URL encoding
+        - [ ] HTML comment nodes
+
 - AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
     - Reference
     - Image
@@ -36,35 +67,6 @@ Progress so far
     - StrongEmphasis
     - HtmlEntity
 
-    Each node has `getChars()` property which returns a BasedSequence character sequence which
-    spans the contents of the node, with start/end offsets into the original source.
-
-    Additionally, each node can provide other `BasedSequence` properties that parcel out pieces
-    of the node's characters, independent of child node breakdown.
-
-- Add `PropertyHolder` interface to store document global properties for things like references,
-  abbreviations, footnotes, or anything else that is parsed from the source.
-
-- Add `NodeRepository<T>` abstract class to make it easier to create collections of nodes
-  indexed by a string like one used for references.
-
-- ParserState a few new methods:
-    - `getPropertyHolder()` returns the property holder for the parse session. This is the
-      current document parser. After parsing the property holder is the Document node which can
-      be obtained from via `Node::getDocument()` method. Implementation is to traverse node
-      parents until a Document node is reached.
-
-    - `getInlineParser()` returns the current parse session's inline processor
-
-    - `getLine()` and `getLineWithEOL()` return the current line being parsed. With or without
-      the EOL.
-
-    - `getLineEolLength()` returns the current line's EOL length, usually 1 but can be 2 if
-      `"\r\n"` is the current line's sequence.
-
-    - Implements `BlockPreProcessor` interface to handle pre-processing of blocks as was done in
-      paragraph blocks to remove reference definitions from the beginning of a paragraph block.
-
 - `AbstractBlockParser::closeBlock()` now takes a `ParserState` argument so that any block can
   do processing similar to Paragraph processing of leading References by using the
   `BlockPreProcessor::preProcessBlock()` method.
@@ -73,9 +75,6 @@ Progress so far
 
 - Add `Builder::blockPreProcessor()` method to allow adding custom processing similar to
   `Reference` processing done previously in `ParagraphParser`.
-
-- `InlineParserImpl` has all previously `private` fields and methods set to `protected` so that
-  it can be sub-classed for customizations.
 
 - Special processing in document parser for ParagraphParser removed, now can be done by each
   Parser since ParserState is passed to `closeBlock()` method.
@@ -128,19 +127,23 @@ All the tests are modified to validate the AST not just the html. The AST contai
 elements with their source location available for every part of the node, not just the node
 itself. For example a link has the following properties:
 
-1. `[` textOpeningMarker
-2. text
-3. `]` textClosingMarker
-4. `(` urlOpeningMarker
-5. url
-6. `"` titleOpeningMarker
-7. title
-8. `"` titleClosingMarker
-9. `)` urlClosingMarker
+ 1. `[` textOpeningMarker
+ 2. text
+ 3. `]` textClosingMarker
+ 4. `(` linkOpeningMarker
+ 5. `<` urlOpeningMarker
+ 6. url
+ 7. `>` urlClosingMarker
+ 8. `"` titleOpeningMarker
+ 9. title
+10. `"` titleClosingMarker
+11. `)` linkClosingMarker
 
 That way all the bits and pieces are marked if they are needed for syntax highlighting or
 anything else. Each of these is a `BasedSequence` with `getStartOffset()` and `getEndOffset()`
-to get the source offsets.
+to get the source offsets. If an element is not present then it will be equal to
+`SubSequence.NULL` and can be tested via `BasedSequence::isNull()` and
+`BasedSequence::isNotNull()` methods.
 
 Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
