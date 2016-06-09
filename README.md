@@ -127,15 +127,15 @@ All the tests are modified to validate the AST not just the html. The AST contai
 elements with their source location available for every part of the node, not just the node
 itself. For example a link has the following properties:
 
- 1. `[` textOpeningMarker
- 2. text
- 3. `]` textClosingMarker
- 4. `(` linkOpeningMarker
- 5. `<` urlOpeningMarker
- 6. url
- 7. `>` urlClosingMarker
- 8. `"` titleOpeningMarker
- 9. title
+1. `[` textOpeningMarker
+2. text
+3. `]` textClosingMarker
+4. `(` linkOpeningMarker
+5. `<` urlOpeningMarker
+6. url
+7. `>` urlClosingMarker
+8. `"` titleOpeningMarker
+9. title
 10. `"` titleClosingMarker
 11. `)` linkClosingMarker
 
