@@ -8,18 +8,17 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.node.Link;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
- * Extension for automatically turning plain URLs and email addresses into links.
+ * Extension for adding abbreviations to markdown
  * <p>
- * Create it with {@link #create()} and then configure it on the builders
+ * Create it with {@link #create()} or optionally with {@link #create(boolean useLinks)} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed links are turned into normal {@link Link} nodes.
+ * The parsed abbreviations are turned into abbr tags by default or a links as an option by passing true to {@link #create()} when initializing the extension.
  * </p>
  */
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {

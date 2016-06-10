@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.gfm.strikethrough;
+package com.vladsch.flexmark.ext.emoji;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
@@ -9,7 +9,7 @@ import com.vladsch.flexmark.node.Visitor;
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class Strikethrough extends CustomNode implements DelimitedNode {
+public class Emoji extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.EMPTY;
     protected BasedSequence text = SubSequence.EMPTY;
     protected BasedSequence closingMarker = SubSequence.EMPTY;
@@ -24,14 +24,14 @@ public class Strikethrough extends CustomNode implements DelimitedNode {
         return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
     }
 
-    public Strikethrough() {
+    public Emoji() {
     }
 
-    public Strikethrough(BasedSequence chars) {
+    public Emoji(BasedSequence chars) {
         super(chars);
     }
 
-    public Strikethrough(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
+    public Emoji(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;
         this.text = text;

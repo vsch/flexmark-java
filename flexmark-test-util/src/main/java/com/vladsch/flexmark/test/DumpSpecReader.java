@@ -30,7 +30,7 @@ class DumpSpecReader extends SpecReader {
         String html = testCase.useActualHtml() ? testCase.render(node) : example.getHtml();
         String ast = testCase.ast(node);
 
-        // include source so that diff can be used to update spece
+        // include source so that diff can be used to update spec
         String actual;
         
         if (example.getAst() != null) {
