@@ -32,7 +32,7 @@ Progress so far
         - [ ] Anchor links for headers with auto id generation
         - [ ] Table Spans option to be implemented for gfm-tables extension
         - [ ] Wiki Links with GitHub and Creole syntax
-        - [ ] Emoji Shortcuts with use GitHub emoji URL option
+        - [x] Emoji Shortcuts with use GitHub emoji URL option
     - GitHub Syntax
         - [x] Strikethrough
         - [ ] Task Lists

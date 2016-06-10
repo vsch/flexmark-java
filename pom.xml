@@ -22,6 +22,7 @@
         <module>flexmark</module>
         <module>flexmark-ext-abbreviation</module>
         <module>flexmark-ext-emoji</module>
+        <module>flexmark-ext-footnotes</module>
         <module>flexmark-ext-autolink</module>
         <module>flexmark-ext-gfm-strikethrough</module>
         <module>flexmark-ext-gfm-tables</module>
@@ -95,6 +96,21 @@
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-abbreviations</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-emoji</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-footnotes</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
@@ -143,17 +159,17 @@
 
     <developers>
         <developer>
-            <name>Robin Stocker</name>
-            <email>rstocker@atlassian.com</email>
-            <organization>Atlassian</organization>
-            <organizationUrl>https://www.atlassian.com/</organizationUrl>
+            <name>Vladimir Schneider</name>
+            <email>vladimir@vladsch.com</email>
+            <organization>vladsch.com</organization>
+            <organizationUrl>https://vladsch.com/</organizationUrl>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git@github.com:atlassian/flexmark-java.git</connection>
-        <developerConnection>scm:git:git@github.com:atlassian/flexmark-java.git</developerConnection>
-        <url>https://github.com/atlassian/flexmark-java</url>
+        <connection>scm:git:git@github.com:vsch/flexmark-java.git</connection>
+        <developerConnection>scm:git:git@github.com:vsch/flexmark-java.git</developerConnection>
+        <url>https://github.com/vsch/flexmark-java</url>
         <tag>HEAD</tag>
     </scm>
 
