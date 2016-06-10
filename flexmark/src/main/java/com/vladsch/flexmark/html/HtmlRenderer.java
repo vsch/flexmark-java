@@ -24,6 +24,7 @@ public class HtmlRenderer {
     private final String softbreak;
     private final boolean escapeHtml;
     private final boolean percentEncodeUrls;
+    private final int indentSize;
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;
 
@@ -32,6 +33,7 @@ public class HtmlRenderer {
         this.escapeHtml = builder.escapeHtml;
         this.percentEncodeUrls = builder.percentEncodeUrls;
         this.attributeProviders = builder.attributeProviders;
+        this.indentSize = builder.indentSize;
 
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
@@ -44,6 +46,10 @@ public class HtmlRenderer {
         });
     }
 
+    public int getIndentSize() {
+        return indentSize;
+    }
+
     /**
      * Create a new builder for configuring an {@link HtmlRenderer}.
      *
@@ -54,7 +60,7 @@ public class HtmlRenderer {
     }
 
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(new HtmlWriter(output));
+        MainNodeRenderer renderer = new MainNodeRenderer(new HtmlWriter(output, indentSize));
         renderer.render(node);
     }
 
@@ -77,6 +83,7 @@ public class HtmlRenderer {
         private String softbreak = "\n";
         private boolean escapeHtml = false;
         private boolean percentEncodeUrls = false;
+        private int indentSize = 0;
         private List<AttributeProvider> attributeProviders = new ArrayList<>();
         private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
 
@@ -100,6 +107,17 @@ public class HtmlRenderer {
          */
         public Builder softbreak(String softbreak) {
             this.softbreak = softbreak;
+            return this;
+        }
+
+        /**
+         * The size of the indent to use for hierarchical elements, default 0, means no indent, also fastest rendering
+         *
+         * @param indentSize number of spaces per indent
+         * @return {@code this}
+         */
+        public Builder indentSize(int indentSize) {
+            this.indentSize = indentSize;
             return this;
         }
 
@@ -254,7 +272,7 @@ public class HtmlRenderer {
             if (node instanceof Document) {
                 // here we render multiple phases
                 for (RenderingPhase phase : RenderingPhase.values()) {
-                    if (phase != RenderingPhase.BODY && !renderingPhases.contains(phase)) continue;
+                    if (phase != RenderingPhase.BODY && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
 
                     if (phase == RenderingPhase.BODY) {

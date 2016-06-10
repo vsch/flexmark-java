@@ -55,35 +55,32 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             Document document = node.getDocument();
             FootnoteRepository footnoteRepository = document.getValueOrDefault(FootnoteRepository.PROPERTY_KEY);
-            boolean hadFootnote = false;
 
-            for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
-                int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
-                if (footnoteOrdinal > 0) {
-                    // output this one
-                    if (!hadFootnote) {
-                        hadFootnote = true;
-                        html.attr("class", "footnotes").tag("div").indent()
-                            .tag("hr", null, true).line()
-                            .tag("ol").indent();
-                    }
-
-                    html.attr("id", "fn-" + footnoteOrdinal)
-                        .tag("li", () -> {
+            if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
+                html.attr("class", "footnotes").tag("div", () -> {
+                    html.indent()
+                        .tag("hr", null, true).line()
+                        .tag("ol", () -> {
                             html.indent();
-                            context.renderChildren(footnoteBlock);
-                            html.attr("href", "#fnref-" + footnoteOrdinal)
-                                .attr("class", "footnote-backref")
-                                .tag("a", () -> {
-                                    html.raw("&#8617;");
-                                });
-                        });
-                }
-            }
+                            for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
+                                int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
+                                if (footnoteOrdinal > 0) {
+                                    // output this one
 
-            if (hadFootnote) {
-                html.unIndent().tag("/ol").line();
-                html.unIndent().tag("/div").line();
+                                    html.attr("id", "fn-" + footnoteOrdinal)
+                                        .tag("li", () -> {
+                                            html.indent();
+                                            context.renderChildren(footnoteBlock);
+                                            html.attr("href", "#fnref-" + footnoteOrdinal)
+                                                .attr("class", "footnote-backref")
+                                                .tag("a", () -> {
+                                                    html.raw("&#8617;");
+                                                });
+                                        });
+                                }
+                            }
+                        });
+                });
             }
         }
     }

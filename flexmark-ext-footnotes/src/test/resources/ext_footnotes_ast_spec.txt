@@ -236,7 +236,8 @@ with continuation text. Inline _italic_ and
       <li>item 2</li>
       </ul>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
-    </li><li id="fn-2">
+    </li>
+    <li id="fn-2">
       <p>This is the body of the unused footnote.
       with continuation text. Inline <em>italic</em> and
       <strong>bold</strong>.</p>
