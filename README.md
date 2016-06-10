@@ -4,19 +4,14 @@ flexmark-java
 Rework of [commonmark-java] to generate AST which allows recreating the original source, full
 source position references for all nodes and easier JetBrains Open API PsiTree generation.
 
-Main use is as the parser for [Markdown Navigator] plugin.
+Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
 
-Improve the ability of extensions to modify the behaviour of the parser so that any dialect of
-markdown could be implemented through the extension mechanism.
+[commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
+The goal was to ensure that adding source position tracking in the AST would not change the ease
+of parsing and generating the AST. 
 
-The goal is to have a parser that can be easily extended to be compatible with:
-
-[pegdown][]  
-[CommonMark][]  
-[GitHub Flavoured Markdown][]  
-[Kramdown][]  
-[MultiMarkdown][]  
-[PhpExtra][]  
+The other goal was to improve the ability of extensions to modify the behaviour of the parser so
+that any dialect of markdown could be implemented through the extension mechanism.
 
 This is a work in progress. No attempt is made to keep backward compatibility to the original
 project since it does not have a mechanism for full source references and an AST which can be
@@ -24,6 +19,10 @@ used to re-create the source.
 
 Progress so far
 ---------------
+
+- Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated page.
+- Enhance HtmlWriter to make it easier to generate formatted html and eliminate the need to
+  implement attribute and render childrent handlers. 
 
 - Parser options to be implemented:
     - GitHub Extensions
@@ -42,7 +41,7 @@ Progress so far
         - [ ] Wiki links
     - Publishing
         - [x] Abbreviations
-        - [ ] Footnotes
+        - [x] Footnotes
         - [ ] Definitions
         - [ ] Table of Contents
     - Typographic
@@ -231,6 +230,21 @@ Here are some basic benchmarking results:
   tree building pass, external annotator.
 * markdown_example.md a file with 10,000+ lines containing 500kB+ of text.
 
+Contributing
+------------
+
+Pull requests, issues and comments welcome :smile:. For pull requests:
+
+* Add tests for new features and bug fixes, preferably in the ast_spec.txt format
+* Follow the existing style (always use braces, 4 space indent)
+* Separate unrelated changes into multiple pull requests
+
+See the existing "help wanted" issues for things to start contributing.
+
+For bigger changes, make sure you start a discussion first by creating
+an issue and explaining the intended change.
+
+
 * * * 
 
 License
@@ -242,15 +256,6 @@ Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see LICENSE.txt file.
 
-[idea-markdown]: https://github.com/nicoulaj/idea-markdown
-[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
-[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
-[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
-[table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
-[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
-[wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
-[flexmark-java]: https://github.com/vsch/flexmark-java
 [.gitignore]: http://hsz.mobi
 [Android Studio]: http://developer.android.com/sdk/installing/studio.html
 [AppCode]: http://www.jetbrains.com/objc
@@ -259,12 +264,17 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonmark.js]: https://github.com/jgm/commonmark.js
 [CommonMark]: http://commonmark.org/
+[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [Craig's List]: http://montreal.en.craigslist.ca/
 [DataGrip]: https://www.jetbrains.com/datagrip
+[flexmark-java]: https://github.com/vsch/flexmark-java
 [gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [GitHub Issues page]: ../../issues
 [GitHub]: https://github.com/vsch/laravel-translation-manager
+[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
+[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
+[idea-markdown]: https://github.com/nicoulaj/idea-markdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [intellij-markdown]: https://github.com/valich/intellij-markdown 
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
@@ -285,6 +295,10 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [RubyMine]: http://www.jetbrains.com/ruby
 [Semantic Versioning]: http://semver.org/
 [sirthias]: https://github.com/sirthias
+[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
+[table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
+[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
+[wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
 

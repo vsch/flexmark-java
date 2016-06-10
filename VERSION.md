@@ -4,7 +4,34 @@ Version
 0.1.1
 -----
 
+- Add `PhasedNodeRenderer` which is an extension of `NodeRenderer` with additional methods to
+  allow rendering for specific parts of the HTML document.
 
+- Add html rendering phases to allow generating for different parts of the document.  
+    - `HEAD_TOP`
+    - `HEAD`
+    - `HEAD_CSS`
+    - `HEAD_SCRIPTS`
+    - `HEAD_BOTTOM`
+
+    - `BODY_TOP`
+    - `BODY`
+    - `BODY_BOTTOM`
+    - `BODY_LOAD_SCRIPTS`
+    - `BODY_SCRIPTS`
+
+- Add `FootnoteExtension` which converts `[^footnote]` to footnote references and `[^footnote]:
+  footnote text` footnote definitions. With referenced footnotes added to the bottom of the
+  generated HTML.
+
+- Add a few HtmlWriter methods and enhancements to allow:
+    - indenting HTML 
+    - methods return `this` so methods could be chained
+    - invocation with lambda to eliminate the need to close a tag 
+    - `renderChildren()` to eliminate the need for each renderer to roll its own
+    - `attr(String, String)` method to accumulate attributes to be used on the next `tag()`
+      invocation. Eliminating the need to roll your own attribute methods. Accumulated
+      attributes are merged, or overwritten by ones passed in as an argument to `tag()`
 
 0.1.0
 -----

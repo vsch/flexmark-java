@@ -43,5 +43,4 @@ public class UsageExampleTest {
             visitChildren(text);
         }
     }
-
 }
