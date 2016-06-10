@@ -11,34 +11,29 @@ public class HtmlWriter {
     private static final Map<String, String> NO_ATTRIBUTES = Collections.emptyMap();
 
     private final Appendable buffer;
+    private final int indentSize;
+    private final String indentSizePrefix;
+    
     private char lastChar = 0;
     private int indent;
-    private int indentSize = 2;
     private String indentPrefix = "";
-    private String indentSizePrefix = "  ";
     private LinkedHashMap<String, String> currentAttributes;
 
     public HtmlWriter(Appendable out) {
+        this(out, 0);
+    }
+
+    public HtmlWriter(Appendable out, int indentSize) {
         this.buffer = out;
+        this.indentSize = indentSize;
+
+        StringBuilder sb = new StringBuilder(indentSize);
+        for (int i = 0; i < indentSize; i++) sb.append(' ');
+        indentSizePrefix = sb.toString();
     }
 
     public int getIndentSize() {
         return indentSize;
-    }
-
-    public void setIndentSize(int indentSize) {
-        this.indentSize = indentSize;
-        if (indentSizePrefix.length() != indentSize) {
-            StringBuilder sb = new StringBuilder(indentSize);
-            for (int i = 0; i < indentSize; i++) sb.append(' ');
-            indentSizePrefix = sb.toString();
-
-            if (indent > 0) {
-                StringBuilder sbi = new StringBuilder(indent * indentSize);
-                for (int i = 0; i < indent; i++) sbi.append(sb);
-                indentPrefix = sbi.toString();
-            }
-        }
     }
 
     public HtmlWriter raw(String s) {
@@ -109,10 +104,14 @@ public class HtmlWriter {
         tag(name, attrs, false);
         int indentLevel = indent;
         runnable.run();
+        boolean hadIndent = indentLevel < indent;
         while (indentLevel < indent) unIndent();
         append("</");
         append(name);
         append(">");
+
+        if (hadIndent) line();
+
         return this;
     }
 
