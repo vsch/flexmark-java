@@ -28,6 +28,7 @@
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-test-util</module>
+        <module>flexmark-test-suite</module>
     </modules>
 
     <properties>

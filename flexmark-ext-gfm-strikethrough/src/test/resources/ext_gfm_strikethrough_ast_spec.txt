@@ -33,7 +33,7 @@ Document[0, 6]
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Strikethrough[0, 7] open:[0, 2] close:[5, 7]
+    Strikethrough[0, 7] textOpen:[0, 2] text:[2, 5] textClose:[5, 7]
       Text[2, 5]
 ````````````````````````````````
 
@@ -83,7 +83,7 @@ Document[0, 6]
 Document[0, 10]
   Paragraph[0, 10]
     Text[0, 1]
-    Strikethrough[1, 8] open:[1, 3] close:[6, 8]
+    Strikethrough[1, 8] textOpen:[1, 3] text:[3, 6] textClose:[6, 8]
       Text[3, 6]
     Text[6, 7]
 ````````````````````````````````
@@ -97,7 +97,7 @@ Document[0, 10]
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Strikethrough[0, 7] open:[0, 2] close:[5, 7]
+    Strikethrough[0, 7] textOpen:[0, 2] text:[2, 5] textClose:[5, 7]
       Text[2, 5]
     Text[7, 8]
 ````````````````````````````````
@@ -111,9 +111,9 @@ Document[0, 9]
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Strikethrough[0, 7] open:[0, 2] close:[5, 7]
+    Strikethrough[0, 7] textOpen:[0, 2] text:[2, 5] textClose:[5, 7]
       Text[2, 5]
-    Strikethrough[5, 14] open:[5, 7] close:[12, 14]
+    Strikethrough[5, 14] textOpen:[5, 7] text:[7, 12] textClose:[12, 14]
       Text[9, 12]
 ````````````````````````````````
 
@@ -126,7 +126,7 @@ Document[0, 15]
 .
 Document[0, 54]
   Paragraph[0, 54]
-    Strikethrough[0, 53] open:[0, 2] close:[51, 53]
+    Strikethrough[0, 53] textOpen:[0, 2] text:[2, 51] textClose:[51, 53]
       Text[2, 17]
       Emphasis[17, 27] textOpen:[17, 18] text:[18, 26] textClose:[26, 27]
         Text[18, 26]
@@ -148,7 +148,7 @@ Document[0, 18]
   BlockQuote[0, 18] marker:[0, 1]
     Paragraph[2, 18]
       Text[2, 9]
-      Strikethrough[9, 17] open:[9, 11] close:[15, 17]
+      Strikethrough[9, 17] textOpen:[9, 11] text:[11, 15] textClose:[15, 17]
         Text[11, 15]
 ````````````````````````````````
 
