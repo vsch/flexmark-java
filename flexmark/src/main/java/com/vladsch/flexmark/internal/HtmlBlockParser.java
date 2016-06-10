@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 
 public class HtmlBlockParser extends AbstractBlockParser {
 
-    private static final Pattern[][] BLOCK_PATTERNS = new Pattern[][]{
-            {null, null}, // not used (no type 0)
+    private static final Pattern[][] BLOCK_PATTERNS = new Pattern[][] {
+            { null, null }, // not used (no type 0)
             {
                     Pattern.compile("^<(?:script|pre|style)(?:\\s|>|$)", Pattern.CASE_INSENSITIVE),
                     Pattern.compile("</(?:script|pre|style)>", Pattern.CASE_INSENSITIVE)
