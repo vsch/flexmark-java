@@ -24,6 +24,7 @@ package com.vladsch.flexmark;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
+import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
@@ -40,6 +41,7 @@ import org.junit.runners.Suite;
         ExtYamlFrontMatterTestSuite.class,
         ExtAbbreviationTestSuite.class,
         ExtEmojiTestSuite.class,
+        ExtFootnotesTestSuite.class,
         IntegrationTestSuite.class,
 })
 public class TestTestSuite {

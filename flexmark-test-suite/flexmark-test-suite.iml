@@ -18,5 +18,6 @@
     <orderEntry type="library" scope="TEST" name="junit-4.12" level="application" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
   </component>
 </module>
