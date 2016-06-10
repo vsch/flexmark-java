@@ -10,13 +10,13 @@ Motivation for this was the need to replace [pegdown] parser in [Markdown Naviga
 pathological input either hangs or practically hangs during parsing.
 
 My reasons for choosing [commonmark-java] as the parser are detailed in
-[Pegdown - Achilles heel of the MultiMarkdown plugin](http://vladsch.com/blog/15). Now that I
-have reworked the core and added a few extensions I am extremely satisfied with my choice.
-[commonmark-java] is an excellent library to use and a pleasure to work with its source. 
+[Pegdown - Achilles heel of the Markdown Navigator plugin](http://vladsch.com/blog/15). Now that
+I have reworked the core and added a few extensions I am extremely satisfied with my choice.
+[commonmark-java] is an excellent library to use and a pleasure to work with its source.
 
 [commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
 The goal was to ensure that adding source position tracking in the AST would not change the ease
-of parsing and generating the AST. 
+of parsing and generating the AST.
 
 The other goal was to improve the ability of extensions to modify the behaviour of the parser so
 that any dialect of markdown could be implemented through the extension mechanism.
@@ -33,7 +33,7 @@ Progress so far
   HTML document.
 
 - Enhance HtmlWriter to make it easier to generate indented html and eliminate the need to
-  implement attribute map and render children handlers. 
+  implement attribute map and render children handlers.
 
 - Parser options to be implemented:
     - GitHub Extensions
