@@ -312,7 +312,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             html.raw("]");
             if (!node.isReferenceTextCombined()) {
                 html.raw("[");
-                html.raw(node.reference.unescaped());
+                html.raw(node.getReference().unescaped());
                 html.raw("]");
             }
         } else {

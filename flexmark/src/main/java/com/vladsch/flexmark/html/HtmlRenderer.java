@@ -1,11 +1,9 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;
 import com.vladsch.flexmark.node.Node;
@@ -76,7 +74,6 @@ public class HtmlRenderer {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder {
-
         private String softbreak = "\n";
         private boolean escapeHtml = false;
         private boolean percentEncodeUrls = false;
@@ -188,13 +185,17 @@ public class HtmlRenderer {
     }
 
     private class MainNodeRenderer implements NodeRendererContext {
-
         private final HtmlWriter htmlWriter;
         private final Map<Class<? extends Node>, NodeRenderer> renderers;
+        private final List<PhasedNodeRenderer> phasedRenderers;
+        private final Set<RenderingPhase> renderingPhases;
+        private RenderingPhase phase;
 
         private MainNodeRenderer(HtmlWriter htmlWriter) {
             this.htmlWriter = htmlWriter;
             this.renderers = new HashMap<>(32);
+            this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
+            this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
 
             // The first node renderer for a node type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
@@ -204,7 +205,17 @@ public class HtmlRenderer {
                     // Overwrite existing renderer
                     renderers.put(nodeType, nodeRenderer);
                 }
+
+                if (nodeRenderer instanceof PhasedNodeRenderer) {
+                    this.renderingPhases.addAll(((PhasedNodeRenderer) nodeRenderer).getRenderingPhases());
+                    this.phasedRenderers.add((PhasedNodeRenderer) nodeRenderer);
+                }
             }
+        }
+
+        @Override
+        public RenderingPhase getRenderingPhase() {
+            return phase;
         }
 
         @Override
@@ -240,9 +251,42 @@ public class HtmlRenderer {
 
         @Override
         public void render(Node node) {
-            NodeRenderer nodeRenderer = renderers.get(node.getClass());
-            if (nodeRenderer != null) {
-                nodeRenderer.render(node);
+            if (node instanceof Document) {
+                // here we render multiple phases
+                for (RenderingPhase phase : RenderingPhase.values()) {
+                    if (phase != RenderingPhase.BODY && !renderingPhases.contains(phase)) continue;
+                    this.phase = phase;
+
+                    if (phase == RenderingPhase.BODY) {
+                        NodeRenderer nodeRenderer = renderers.get(node.getClass());
+                        if (nodeRenderer != null) {
+                            nodeRenderer.render(node);
+                        }
+                    } else {
+                        // go through all renderers that want this phase
+                        for (PhasedNodeRenderer phasedRenderer : phasedRenderers) {
+                            this.phase = phase;
+                            if (phasedRenderer.getRenderingPhases().contains(phase)) {
+                                phasedRenderer.render(node, phase);
+                            }
+                        }
+                    }
+                }
+            } else {
+                NodeRenderer nodeRenderer = renderers.get(node.getClass());
+                if (nodeRenderer != null) {
+                    nodeRenderer.render(node);
+                }
+            }
+        }
+
+        @Override
+        public void renderChildren(Node parent) {
+            Node node = parent.getFirstChild();
+            while (node != null) {
+                Node next = node.getNext();
+                render(node);
+                node = next;
             }
         }
 

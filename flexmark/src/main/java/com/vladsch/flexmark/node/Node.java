@@ -257,4 +257,31 @@ public abstract class Node {
                 + segmentSpan(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close")
                 ;
     }
+
+    public void takeChildren(Node node) {
+        if (node.firstChild != null) {
+            Node firstChild = node.firstChild;
+            Node lastChild = node.lastChild;
+
+            if (lastChild != firstChild) {
+                node.firstChild = null;
+                node.lastChild = null;
+
+                firstChild.parent = this;
+                lastChild.parent = this;
+
+                if (this.lastChild != null) {
+                    this.lastChild.next = firstChild;
+                    firstChild.prev = this.lastChild;
+                } else {
+                    this.firstChild = firstChild;
+                }
+
+                this.lastChild = lastChild;
+            } else {
+                // just a single child
+                appendChild(firstChild);
+            }
+        }
+    }
 }

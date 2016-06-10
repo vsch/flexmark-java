@@ -5,12 +5,12 @@ import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.SubSequence;
 
 public abstract class RefNode extends LinkNode {
-    public BasedSequence textOpeningMarker = SubSequence.NULL;
-    public BasedSequence text = SubSequence.NULL;
-    public BasedSequence textClosingMarker = SubSequence.NULL;
-    public BasedSequence referenceOpeningMarker = SubSequence.NULL;
-    public BasedSequence reference = SubSequence.NULL;
-    public BasedSequence referenceClosingMarker = SubSequence.NULL;
+    protected BasedSequence textOpeningMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence textClosingMarker = SubSequence.NULL;
+    protected BasedSequence referenceOpeningMarker = SubSequence.NULL;
+    protected BasedSequence reference = SubSequence.NULL;
+    protected BasedSequence referenceClosingMarker = SubSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {

@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.ext.footnotes;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.footnotes.internal.FootnoteDelimiterProcessor;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnoteBlockParser;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteNodeRenderer;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnotePostProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -10,7 +11,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
- * Extension for emoji shortcuts using Emoji-Cheat-Sheet.com.
+ * Extension for footnotes
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
@@ -30,7 +31,8 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customDelimiterProcessor(new FootnoteDelimiterProcessor());
+        parserBuilder.customBlockParserFactory(new FootnoteBlockParser.Factory());
+        parserBuilder.postProcessor(new FootnotePostProcessor());
     }
 
     @Override

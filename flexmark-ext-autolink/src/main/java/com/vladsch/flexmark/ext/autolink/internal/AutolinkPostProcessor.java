@@ -73,7 +73,7 @@ public class AutolinkPostProcessor implements PostProcessor {
     private class AutolinkVisitor extends AbstractVisitor {
         @Override
         public void visit(Text text) {
-            if (!isVisiting(text, LinkNode.class)) {
+            if (!isVisiting(text, DoNotLinkify.class)) {
                 linkify(text);
             }
         }

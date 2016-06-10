@@ -7,14 +7,14 @@ package com.vladsch.flexmark.node;
  * call {@link #visitChildren}.
  */
 public class AbstractVisitor implements Visitor {
-    public static boolean isNodeOfType(Node node, Class<? extends Node>... classes) {
-        for (Class<? extends Node> nodeType : classes) {
+    public static boolean isNodeOfType(Node node, Class... classes) {
+        for (Class nodeType : classes) {
             if (nodeType.isInstance(node)) return true;
         }
         return false;
     }
 
-    public boolean isVisiting(Node node, Class<? extends Node>... classes) {
+    public boolean isVisiting(Node node, Class... classes) {
         while (node != null) {
             if (isNodeOfType(node, classes)) return true;
             node = node.getParent();

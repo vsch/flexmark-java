@@ -44,6 +44,17 @@ public interface NodeRendererContext {
     void render(Node node);
 
     /**
+     * Render the children of the node, used by custom renderers
+     * @param parent
+     */
+    void renderChildren(Node parent);
+
+    /**
+     * @return current rendering phase
+     */
+    RenderingPhase getRenderingPhase();
+
+    /**
      * @return whether HTML blocks and tags should be escaped or not
      */
     boolean shouldEscapeHtml();

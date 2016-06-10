@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class AbbreviationBlockParser extends AbstractBlockParser {
     private static Pattern ABBREVIATION_BLOCK = Pattern.compile("^\\*\\[\\s*.*\\s*\\]:");
-    
+
     private final AbbreviationBlock block = new AbbreviationBlock();
 
     @Override
@@ -21,11 +21,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        if (state.getLine().toString().contains("|")) {
-            return BlockContinue.atIndex(state.getIndex());
-        } else {
-            return BlockContinue.none();
-        }
+        return BlockContinue.none();
     }
 
     @Override
@@ -47,7 +43,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return true;
+        return false;
     }
 
     public static class Factory extends AbstractBlockParserFactory {

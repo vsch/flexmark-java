@@ -104,7 +104,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
     private class AbbreviationVisitor extends AbstractVisitor {
         @Override
         public void visit(Text text) {
-            if (!isVisiting(text, LinkNode.class, Abbreviation.class)) {
+            if (!isVisiting(text, DoNotLinkify.class)) {
                 linkify(text);
             }
         }

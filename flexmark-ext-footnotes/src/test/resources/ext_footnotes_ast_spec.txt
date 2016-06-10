@@ -1,71 +1,293 @@
 ---
-title: Emoji Extension Spec
+title: Footnotes Extension Spec
 author: Vladimir Schneider
 version: 0.1
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-## Emoji
+## Footnotes
 
-Converts :warning: to its emoji image 
-
-
-```````````````````````````````` example
-:warning:
-.
-<p><img src="/img/warning.png" alt="emoji places:warning" /></p>
-.
-Document[0, 10]
-  Paragraph[0, 10]
-    Emoji[0, 9] textOpen:[0, 1] text:[1, 8] textClose:[8, 9]
-      Text[1, 8]
-````````````````````````````````
-
-
-Should work in links
+Converts footnote references and definitions to footnotes in the HTML page 
 
 ```````````````````````````````` example
-[:warning:](/url)
+This paragraph has a footnote[^footnote].
+
+[^footnote]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists.
+    
+    - item 1
+    - item 2
 .
-<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <p>Multiple paragraphs are supported as other
+      markdown elements such as lists.</p>
+      <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      </ul>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
 .
-Document[0, 18]
-  Paragraph[0, 18]
-    Link[0, 16] textOpen:[0, 1] text:[1, 10] textClose:[10, 11] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-      Emoji[1, 10] textOpen:[1, 2] text:[2, 9] textClose:[9, 10]
-        Text[2, 9]
+Document[0, 262]
+  Paragraph[0, 42]
+    Text[0, 29]
+    Footnote[29, 40] ordinal: 1  textOpen:[29, 31] text:[31, 39] textClose:[39, 40]
+    Text[40, 41]
+  FootnoteBlock[43, 89] open:[43, 45] text:[45, 53] close:[53, 55] footnote:[56, 89]
+    Paragraph[56, 145]
+      Text[56, 89]
+      SoftLineBreak[89, 90]
+      Text[90, 121]
+      Emphasis[121, 129] textOpen:[121, 122] text:[122, 128] textClose:[128, 129]
+        Text[122, 128]
+      Text[129, 133]
+      SoftLineBreak[134, 135]
+      StrongEmphasis[135, 143] textOpen:[135, 137] text:[137, 141] textClose:[141, 143]
+        Text[137, 141]
+      Text[143, 144]
+    Paragraph[150, 231]
+      Text[150, 230]
+      SoftLineBreak[193, 230]
+      Text[198, 230]
+    BulletList[240, 262]
+      ListItem[240, 249] open:[240, 241]
+        Paragraph[242, 249]
+          Text[242, 248]
+      ListItem[253, 262] open:[253, 254]
+        Paragraph[255, 262]
+          Text[255, 261]
 ````````````````````````````````
 
-
-
-Unknown shortcuts are converted to text
+Unused footnotes are not used and do not show up on the page.
 
 ```````````````````````````````` example
-:warnings:
+This paragraph has a footnote[^2].
+
+[^1]: This is the body of the unused footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+[^2]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists.
+    
+    - item 1
+    - item 2
 .
-<p>:warnings:</p>
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <p>Multiple paragraphs are supported as other
+      markdown elements such as lists.</p>
+      <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      </ul>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
 .
-Document[0, 11]
-  Paragraph[0, 11]
-    Emoji[0, 10] textOpen:[0, 1] text:[1, 9] textClose:[9, 10]
-      Text[1, 9]
+Document[0, 351]
+  Paragraph[0, 35]
+    Text[0, 29]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31] text:[31, 32] textClose:[32, 33]
+    Text[33, 34]
+  FootnoteBlock[36, 82] open:[36, 38] text:[38, 39] close:[39, 41] footnote:[42, 82]
+    Paragraph[42, 138]
+      Text[42, 82]
+      SoftLineBreak[82, 83]
+      Text[83, 114]
+      Emphasis[114, 122] textOpen:[114, 115] text:[115, 121] textClose:[121, 122]
+        Text[115, 121]
+      Text[122, 126]
+      SoftLineBreak[127, 128]
+      StrongEmphasis[128, 136] textOpen:[128, 130] text:[130, 134] textClose:[134, 136]
+        Text[130, 134]
+      Text[136, 137]
+  FootnoteBlock[139, 178] open:[139, 141] text:[141, 142] close:[142, 144] footnote:[145, 178]
+    Paragraph[145, 234]
+      Text[145, 178]
+      SoftLineBreak[178, 179]
+      Text[179, 210]
+      Emphasis[210, 218] textOpen:[210, 211] text:[211, 217] textClose:[217, 218]
+        Text[211, 217]
+      Text[218, 222]
+      SoftLineBreak[223, 224]
+      StrongEmphasis[224, 232] textOpen:[224, 226] text:[226, 230] textClose:[230, 232]
+        Text[226, 230]
+      Text[232, 233]
+    Paragraph[239, 320]
+      Text[239, 319]
+      SoftLineBreak[282, 319]
+      Text[287, 319]
+    BulletList[329, 351]
+      ListItem[329, 338] open:[329, 330]
+        Paragraph[331, 338]
+          Text[331, 337]
+      ListItem[342, 351] open:[342, 343]
+        Paragraph[344, 351]
+          Text[344, 350]
 ````````````````````````````````
 
-
-
-Unknown shortcuts are converted to text with inline emphasis parsing
+Undefined footnotes are rendered as if they were text, with emphasis left as is. 
 
 ```````````````````````````````` example
-:**warnings**:
+This paragraph has a footnote[^**footnote**].
+
+[^footnote]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists.
+    
+    - item 1
+    - item 2
 .
-<p>:<strong>warnings</strong>:</p>
+<p>This paragraph has a footnote[^<strong>footnote</strong>].</p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
-    Emoji[0, 14] textOpen:[0, 1] text:[1, 13] textClose:[13, 14]
-      StrongEmphasis[1, 13] textOpen:[1, 3] text:[3, 11] textClose:[11, 13]
-        Text[3, 11]
+Document[0, 266]
+  Paragraph[0, 46]
+    Text[0, 29]
+    Footnote[29, 44] ordinal: 0  textOpen:[29, 31] text:[31, 43] textClose:[43, 44]
+      Text[31, 31]
+      StrongEmphasis[31, 43] textOpen:[31, 33] text:[33, 41] textClose:[41, 43]
+        Text[33, 41]
+    Text[44, 45]
+  FootnoteBlock[47, 93] open:[47, 49] text:[49, 57] close:[57, 59] footnote:[60, 93]
+    Paragraph[60, 149]
+      Text[60, 93]
+      SoftLineBreak[93, 94]
+      Text[94, 125]
+      Emphasis[125, 133] textOpen:[125, 126] text:[126, 132] textClose:[132, 133]
+        Text[126, 132]
+      Text[133, 137]
+      SoftLineBreak[138, 139]
+      StrongEmphasis[139, 147] textOpen:[139, 141] text:[141, 145] textClose:[145, 147]
+        Text[141, 145]
+      Text[147, 148]
+    Paragraph[154, 235]
+      Text[154, 234]
+      SoftLineBreak[197, 234]
+      Text[202, 234]
+    BulletList[244, 266]
+      ListItem[244, 253] open:[244, 245]
+        Paragraph[246, 253]
+          Text[246, 252]
+      ListItem[257, 266] open:[257, 258]
+        Paragraph[259, 266]
+          Text[259, 265]
 ````````````````````````````````
+
+Footnote numbers are assigned in order of their reference in the document
+
+```````````````````````````````` example
+This paragraph has a footnote[^2]. Followed by another[^1]. 
+
+[^1]: This is the body of the unused footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+[^2]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists.
+    
+    - item 1
+    - item 2
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>. Followed by another<sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <p>Multiple paragraphs are supported as other
+      markdown elements such as lists.</p>
+      <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      </ul>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li><li id="fn-2">
+      <p>This is the body of the unused footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <a href="#fnref-2" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 377]
+  Paragraph[0, 61]
+    Text[0, 29]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31] text:[31, 32] textClose:[32, 33]
+    Text[33, 54]
+    Footnote[54, 58] ordinal: 2  textOpen:[54, 56] text:[56, 57] textClose:[57, 58]
+    Text[58, 59]
+  FootnoteBlock[62, 108] open:[62, 64] text:[64, 65] close:[65, 67] footnote:[68, 108]
+    Paragraph[68, 164]
+      Text[68, 108]
+      SoftLineBreak[108, 109]
+      Text[109, 140]
+      Emphasis[140, 148] textOpen:[140, 141] text:[141, 147] textClose:[147, 148]
+        Text[141, 147]
+      Text[148, 152]
+      SoftLineBreak[153, 154]
+      StrongEmphasis[154, 162] textOpen:[154, 156] text:[156, 160] textClose:[160, 162]
+        Text[156, 160]
+      Text[162, 163]
+  FootnoteBlock[165, 204] open:[165, 167] text:[167, 168] close:[168, 170] footnote:[171, 204]
+    Paragraph[171, 260]
+      Text[171, 204]
+      SoftLineBreak[204, 205]
+      Text[205, 236]
+      Emphasis[236, 244] textOpen:[236, 237] text:[237, 243] textClose:[243, 244]
+        Text[237, 243]
+      Text[244, 248]
+      SoftLineBreak[249, 250]
+      StrongEmphasis[250, 258] textOpen:[250, 252] text:[252, 256] textClose:[256, 258]
+        Text[252, 256]
+      Text[258, 259]
+    Paragraph[265, 346]
+      Text[265, 345]
+      SoftLineBreak[308, 345]
+      Text[313, 345]
+    BulletList[355, 377]
+      ListItem[355, 364] open:[355, 356]
+        Paragraph[357, 364]
+          Text[357, 363]
+      ListItem[368, 377] open:[368, 369]
+        Paragraph[370, 377]
+          Text[370, 376]
+````````````````````````````````
+
 
 

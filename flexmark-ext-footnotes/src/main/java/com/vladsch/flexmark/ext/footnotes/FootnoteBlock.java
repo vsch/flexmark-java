@@ -2,50 +2,45 @@ package com.vladsch.flexmark.ext.footnotes;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify {
+public class FootnoteBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.EMPTY;
     protected BasedSequence text = SubSequence.EMPTY;
     protected BasedSequence closingMarker = SubSequence.EMPTY;
-    protected FootnoteBlock footnoteBlock;
+    protected BasedSequence footnote = SubSequence.EMPTY;
+    private int footnoteOrdinal = 0;
 
-    public FootnoteBlock getFootnoteBlock() {
-        return footnoteBlock;
+    public int getFootnoteOrdinal() {
+        return footnoteOrdinal;
     }
 
-    public void setFootnoteBlock(FootnoteBlock footnoteBlock) {
-        this.footnoteBlock = footnoteBlock;
-    }
-
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, text, closingMarker };
+    public void setFootnoteOrdinal(int footnoteOrdinal) {
+        this.footnoteOrdinal = footnoteOrdinal;
     }
 
     @Override
     public String getAstExtra() {
-        return " ordinal: " + (footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0) + " " + delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+        return segmentSpan(openingMarker, "open")
+                + segmentSpan(text, "text")
+                + segmentSpan(closingMarker, "close")
+                + segmentSpan(footnote, "footnote");
     }
 
-    public Footnote() {
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, text, closingMarker, footnote };
     }
 
-    public Footnote(BasedSequence chars) {
+    public FootnoteBlock() {
+    }
+
+    public FootnoteBlock(BasedSequence chars) {
         super(chars);
-    }
-
-    public Footnote(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
-        this.openingMarker = openingMarker;
-        this.text = text;
-        this.closingMarker = closingMarker;
     }
 
     public BasedSequence getOpeningMarker() {
@@ -70,6 +65,14 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify 
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
+    }
+
+    public BasedSequence getFootnote() {
+        return footnote;
+    }
+
+    public void setFootnote(BasedSequence footnote) {
+        this.footnote = footnote;
     }
 
     @Override
