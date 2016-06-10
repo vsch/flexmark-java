@@ -1,10 +1,18 @@
 flexmark-java
 =============
 
-Rework of [commonmark-java] to generate AST which allows recreating the original source, full
-source position references for all nodes and easier JetBrains Open API PsiTree generation.
+A rework of [commonmark-java] to generate AST which allows recreating the original source, full
+source position references for all elements in the source and easier JetBrains Open API PsiTree
+generation.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
+[pegdown] has a great feature set but its speed in general is not gread and in the case of
+pathological input either hangs or practically hangs during parsing.
+
+My reasons for choosing [commonmark-java] as the parser are detailed in
+[Pegdown - Achilles heel of the MultiMarkdown plugin](http://vladsch.com/blog/15). Now that I
+have reworked the core and added a few extensions I am extremely satisfied with my choice.
+[commonmark-java] is an excellent library to use and a pleasure to work with its source. 
 
 [commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
 The goal was to ensure that adding source position tracking in the AST would not change the ease
@@ -14,15 +22,18 @@ The other goal was to improve the ability of extensions to modify the behaviour 
 that any dialect of markdown could be implemented through the extension mechanism.
 
 This is a work in progress. No attempt is made to keep backward compatibility to the original
-project since it does not have a mechanism for full source references and an AST which can be
-used to re-create the source.
+project since it does not have a mechanism for full source references nor an AST which can be
+used to re-create the source. It is missing some flexibility in its extension mechanism and is
+missing non-display elements from its AST.
 
 Progress so far
 ---------------
 
-- Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated page.
-- Enhance HtmlWriter to make it easier to generate formatted html and eliminate the need to
-  implement attribute and render childrent handlers. 
+- Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated
+  HTML document.
+
+- Enhance HtmlWriter to make it easier to generate indented html and eliminate the need to
+  implement attribute map and render children handlers. 
 
 - Parser options to be implemented:
     - GitHub Extensions
@@ -236,14 +247,7 @@ Contributing
 Pull requests, issues and comments welcome :smile:. For pull requests:
 
 * Add tests for new features and bug fixes, preferably in the ast_spec.txt format
-* Follow the existing style (always use braces, 4 space indent)
-* Separate unrelated changes into multiple pull requests
-
-See the existing "help wanted" issues for things to start contributing.
-
-For bigger changes, make sure you start a discussion first by creating
-an issue and explaining the intended change.
-
+* Follow the existing style to make merging easier, as much as possible: 4 space indent.  
 
 * * * 
 
