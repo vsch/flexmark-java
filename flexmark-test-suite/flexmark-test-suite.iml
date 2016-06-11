@@ -19,5 +19,6 @@
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-tables" />
   </component>
 </module>

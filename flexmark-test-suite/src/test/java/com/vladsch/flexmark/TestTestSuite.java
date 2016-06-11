@@ -28,6 +28,7 @@ import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
+import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import org.junit.runners.Suite;
@@ -41,6 +42,7 @@ import org.junit.runners.Suite;
         ExtFootnotesTestSuite.class,
         ExtGfmStrikethroughTestSuite.class,
         ExtGfmTablesTestSuite.class,
+        ExtTablesTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
         IntegrationTestSuite.class,
 })

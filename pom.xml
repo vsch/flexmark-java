@@ -26,6 +26,7 @@
         <module>flexmark-ext-autolink</module>
         <module>flexmark-ext-gfm-strikethrough</module>
         <module>flexmark-ext-gfm-tables</module>
+        <module>flexmark-ext-tables</module>
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-test-util</module>
@@ -117,6 +118,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tables</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-tables</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
