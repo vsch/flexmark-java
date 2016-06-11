@@ -111,10 +111,11 @@ Abc|Def
 ---|---
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody></tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 .
 Document[0, 16]
@@ -141,10 +142,11 @@ Document[0, 16]
 |---
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody></tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 .
 Document[0, 10]
@@ -167,10 +169,11 @@ Document[0, 10]
 |---|
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody></tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 .
 Document[0, 12]
@@ -193,10 +196,11 @@ Abc|
 ---|
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody></tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 .
 Document[0, 10]
@@ -249,12 +253,12 @@ Document[0, 9]
 |1
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 13]
@@ -281,12 +285,12 @@ Document[0, 13]
 |1|
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 16]
@@ -313,12 +317,12 @@ Abc|
 1|
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 13]
@@ -362,10 +366,11 @@ Document[0, 12]
 1
 .
 <table>
-<thead>
-<tr><th>Abc</th></tr>
-</thead>
-<tbody></tbody>
+  <thead>
+    <tr><th>Abc</th></tr>
+  </thead>
+  <tbody>
+  </tbody>
 </table>
 <p>1</p>
 .
@@ -392,12 +397,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 20]
@@ -450,12 +455,12 @@ Document[0, 26]
  1 | 2 
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 33]
@@ -488,12 +493,12 @@ Abc|Def
     1|2
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 24]
@@ -526,12 +531,12 @@ Document[0, 24]
 |1|2|
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 26]
@@ -564,12 +569,12 @@ Document[0, 26]
 1|2
 .
 <table>
-<thead>
-<tr><th><em>Abc</em></th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th><em>Abc</em></th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 22]
@@ -603,12 +608,12 @@ Abc|Def
 1\\|2|20
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1\</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1\</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 25]
@@ -641,12 +646,12 @@ Abc|Def
 1\\\\|2
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1\\</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1\\</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 24]
@@ -679,12 +684,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th align="left">Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td align="left">1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th align="left">Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 21]
@@ -717,12 +722,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th align="right">Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td align="right">1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th align="right">Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="right">1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 21]
@@ -755,12 +760,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th align="center">Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td align="center">1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th align="center">Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="center">1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 22]
@@ -793,12 +798,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th>Abc</th><th align="center">Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td align="center">2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th align="center">Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td align="center">2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 22]
@@ -831,12 +836,12 @@ Abc|Def
 1|2
 .
 <table>
-<thead>
-<tr><th align="left">Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td align="left">1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th align="left">Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 23]
@@ -933,12 +938,12 @@ Abc|Def
 1|2|3
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 .
 Document[0, 22]
@@ -971,12 +976,12 @@ Abc|Def|Ghi
 1|2
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th><th>Ghi</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td><td></td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th><th>Ghi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td><td></td></tr>
+  </tbody>
 </table>
 .
 Document[0, 28]
@@ -1014,14 +1019,14 @@ Document[0, 28]
 > 1|2
 .
 <blockquote>
-<table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
-</table>
+  <table>
+    <thead>
+      <tr><th>Abc</th><th>Def</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>2</td></tr>
+    </tbody>
+  </table>
 </blockquote>
 .
 Document[0, 26]
@@ -1056,12 +1061,12 @@ Abc|Def
 table, you are over
 .
 <table>
-<thead>
-<tr><th>Abc</th><th>Def</th></tr>
-</thead>
-<tbody>
-<tr><td>1</td><td>2</td></tr>
-</tbody>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td></tr>
+  </tbody>
 </table>
 <p>table, you are over</p>
 .

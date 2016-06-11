@@ -44,20 +44,19 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     private void renderAbbreviation(Abbreviation node) {
-        Map<String, String> attrs = new LinkedHashMap<>();
         String text = node.getChars().unescaped();
         String abbreviation = node.getAbbreviation();
         String tag;
         
         if (useLinks) {
-            attrs.put("href", "#");
+            html.attr("href", "#");
             tag = "a";
         } else {
             tag = "abbr";
         }
-        
-        attrs.put("title", abbreviation);
-        html.tag(tag, getAttrs(node, attrs));
+
+        html.attr("title", abbreviation);
+        html.withAttr().tag(tag);
         html.text(text);
         html.tag("/" + tag);
     }

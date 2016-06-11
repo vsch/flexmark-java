@@ -43,7 +43,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean isContainer() {
-        return false;
+        return true;
     }
 
     public static class Factory extends AbstractBlockParserFactory {

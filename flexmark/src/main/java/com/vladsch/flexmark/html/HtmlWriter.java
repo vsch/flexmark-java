@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.html;
 
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.internal.util.Escaping;
 
 import java.io.IOException;
@@ -13,11 +14,13 @@ public class HtmlWriter {
     private final Appendable buffer;
     private final int indentSize;
     private final String indentSizePrefix;
-    
+    private NodeRendererContext context;
+
     private char lastChar = 0;
     private int indent;
     private String indentPrefix = "";
     private LinkedHashMap<String, String> currentAttributes;
+    private boolean useAttributes = false;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -30,6 +33,10 @@ public class HtmlWriter {
         StringBuilder sb = new StringBuilder(indentSize);
         for (int i = 0; i < indentSize; i++) sb.append(' ');
         indentSizePrefix = sb.toString();
+    }
+
+    void setContext(NodeRendererContext context) {
+        this.context = context;
     }
 
     public int getIndentSize() {
@@ -55,27 +62,49 @@ public class HtmlWriter {
     }
 
     public HtmlWriter tag(String name) {
-        return tag(name, NO_ATTRIBUTES);
+        return tag(name, null, false, false);
     }
 
     public HtmlWriter tag(String name, Map<String, String> attrs) {
-        return tag(name, attrs, false);
+        return tag(name, attrs, false, false);
     }
 
-    public HtmlWriter tag(String name, boolean voidElement) {
-        return tag(name, null, voidElement);
+    public HtmlWriter tagVoid(String name) {
+        return tag(name, null, true, false);
     }
 
-    public HtmlWriter tag(String name, Map<String, String> attrs, boolean voidElement) {
-        if (currentAttributes != null) {
-            if (attrs != null) {
-                currentAttributes.putAll(attrs);
+    public HtmlWriter tagVoidLine(String name) {
+        return tag(name, null, true, true);
+    }
+
+    public HtmlWriter withAttr() {
+        useAttributes = true;
+        return this;
+    }
+
+    public HtmlWriter tag(String name, Map<String, String> attrs, boolean voidElement, boolean voidWithLine) {
+        if (useAttributes || attrs != null) {
+            if (currentAttributes != null) {
+                if (attrs != null) {
+                    // assume attrs have already been extended
+                    currentAttributes.putAll(attrs);
+                    attrs = currentAttributes;
+                } else {
+                    attrs = context.extendRenderingNodeAttributes(currentAttributes);
+                }
+            } else if (attrs == null) {
+                attrs = context.extendRenderingNodeAttributes(Collections.<String, String>emptyMap());
             }
-            attrs = currentAttributes;
+
+            currentAttributes = null;
+            useAttributes = false;
         }
+
+        if (voidElement && voidWithLine) line();
 
         append("<");
         append(name);
+
         if (attrs != null && !attrs.isEmpty()) {
             for (Map.Entry<String, String> attrib : attrs.entrySet()) {
                 append(" ");
@@ -87,30 +116,43 @@ public class HtmlWriter {
         }
 
         if (voidElement) {
-            append(" /");
+            append(" />");
+            if (voidWithLine) line();
+        } else {
+            append(">");
         }
-
-        append(">");
-        currentAttributes = null;
 
         return this;
     }
 
     public HtmlWriter tag(String name, Runnable runnable) {
-        return tag(name, null, runnable);
+        return tag(name, null, false, false, runnable);
     }
 
-    public HtmlWriter tag(String name, Map<String, String> attrs, Runnable runnable) {
-        tag(name, attrs, false);
+    public HtmlWriter tagIndent(String name, Runnable runnable) {
+        return tag(name, null, true, false, runnable);
+    }
+
+    public HtmlWriter tagLine(String name, Runnable runnable) {
+        return tag(name, null, false, true, runnable);
+    }
+
+    public HtmlWriter tag(String name, Map<String, String> attrs, boolean indentTag, boolean withLine, Runnable runnable) {
         int indentLevel = indent;
+
+        if (withLine || indentTag) line();
+        tag(name, attrs, false, false);
+        if (indentTag) indent();
+
         runnable.run();
+
         boolean hadIndent = indentLevel < indent;
-        while (indentLevel < indent) unIndent();
+        if (hadIndent) while (indentLevel < indent) unIndent();
+
         append("</");
         append(name);
         append(">");
-
-        if (hadIndent) line();
+        if (hadIndent || withLine) line();
 
         return this;
     }

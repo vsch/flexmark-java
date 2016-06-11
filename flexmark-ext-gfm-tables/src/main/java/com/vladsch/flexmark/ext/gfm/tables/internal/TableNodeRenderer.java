@@ -6,15 +6,17 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.node.Node;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TableNodeRenderer implements NodeRenderer {
 
-    private final HtmlWriter htmlWriter;
+    private final HtmlWriter html;
     private final NodeRendererContext context;
 
     public TableNodeRenderer(NodeRendererContext context) {
-        this.htmlWriter = context.getHtmlWriter();
+        this.html = context.getHtmlWriter();
         this.context = context;
     }
 
@@ -48,58 +50,41 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void renderBlock(TableBlock tableBlock) {
-        htmlWriter.line();
-        htmlWriter.tag("table", getAttributes(tableBlock));
-        renderChildren(tableBlock);
-        htmlWriter.tag("/table");
-        htmlWriter.line();
+        html.withAttr().tagIndent("table", () -> {
+            context.renderChildren(tableBlock);
+        });
     }
 
     private void renderHead(TableHead tableHead) {
-        htmlWriter.line();
-        htmlWriter.tag("thead", getAttributes(tableHead));
-        renderChildren(tableHead);
-        htmlWriter.tag("/thead");
-        htmlWriter.line();
+        html.withAttr().tagIndent("thead", () -> {
+            context.renderChildren(tableHead);
+        });
     }
 
     private void renderSeparator(TableSeparator tableSeparator) {
-        
+
     }
 
     private void renderBody(TableBody tableBody) {
-        htmlWriter.line();
-        htmlWriter.tag("tbody", getAttributes(tableBody));
-        renderChildren(tableBody);
-        htmlWriter.tag("/tbody");
-        htmlWriter.line();
+        html.withAttr().tagIndent("tbody", () -> {
+            context.renderChildren(tableBody);
+        });
     }
 
     private void renderRow(TableRow tableRow) {
-        htmlWriter.line();
-        htmlWriter.tag("tr", getAttributes(tableRow));
-        renderChildren(tableRow);
-        htmlWriter.tag("/tr");
-        htmlWriter.line();
+        html.withAttr().tagLine("tr", () -> {
+            context.renderChildren(tableRow);
+        });
     }
 
     private void renderCell(TableCell tableCell) {
         String tag = tableCell.isHeader() ? "th" : "td";
-        htmlWriter.tag(tag, getCellAttributes(tableCell));
-        renderChildren(tableCell);
-        htmlWriter.tag("/" + tag);
-    }
-
-    private Map<String, String> getAttributes(Node node) {
-        return context.extendAttributes(node, Collections.<String, String>emptyMap());
-    }
-
-    private Map<String, String> getCellAttributes(TableCell tableCell) {
         if (tableCell.getAlignment() != null) {
-            return context.extendAttributes(tableCell, Collections.singletonMap("align", getAlignValue(tableCell.getAlignment())));
-        } else {
-            return context.extendAttributes(tableCell, Collections.<String, String>emptyMap());
+            html.attr("align", getAlignValue(tableCell.getAlignment()));
         }
+        html.withAttr().tag(tag);
+        context.renderChildren(tableCell);
+        html.tag("/" + tag);
     }
 
     private static String getAlignValue(TableCell.Alignment alignment) {
@@ -112,14 +97,5 @@ public class TableNodeRenderer implements NodeRenderer {
                 return "right";
         }
         throw new IllegalStateException("Unknown alignment: " + alignment);
-    }
-
-    private void renderChildren(Node parent) {
-        Node node = parent.getFirstChild();
-        while (node != null) {
-            Node next = node.getNext();
-            context.render(node);
-            node = next;
-        }
     }
 }

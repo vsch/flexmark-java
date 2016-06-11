@@ -32,7 +32,7 @@ public class PathologicalTest extends CoreRenderingTestCase {
     @Test
     public void nestedStrongEmphasis() {
         // this is limited by the stack size because visitor is recursive
-        x = 500;
+        x = 400;
         assertRendering(
                 repeat("*a **a ", x) + "b" + repeat(" a** a*", x),
                 "<p>" + repeat("<em>a <strong>a ", x) + "b" +
@@ -91,7 +91,7 @@ public class PathologicalTest extends CoreRenderingTestCase {
     @Test
     public void nestedBlockQuotes() {
         // this is limited by the stack size because visitor is recursive
-        x = 1000;
+        x = 750;
         assertRendering(
                 repeat("> ", x) + "a\n",
                 repeat("<blockquote>\n", x) + "<p>a</p>\n" +

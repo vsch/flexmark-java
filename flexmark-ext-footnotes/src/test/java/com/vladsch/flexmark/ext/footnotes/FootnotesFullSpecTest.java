@@ -12,7 +12,7 @@ import java.util.Set;
 public class FootnotesFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_footnotes_ast_spec.txt";
     private static final Set<Extension> EXTENSIONS = Collections.singleton(FootnoteExtension.create());
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder().indentSize(2).extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
 
     @Override

@@ -40,10 +40,20 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trimStart();
     BasedSequence trimEnd();
     BasedSequence trim();
+
     boolean isEmpty();
     boolean isBlank();
     boolean isNull();
     boolean isNotNull();
+
+    int indexOf(char c);
+    int lastIndexOf(char c);
+    int indexOf(String s);
+    int lastIndexOf(String s);
+    int indexOf(char c, int index);
+    int lastIndexOf(char c, int index);
+    int indexOf(String s, int index);
+    int lastIndexOf(String s, int index);
     
     String unescaped();
     BasedSequence unescaped(ReplacedTextMapper textMapper);

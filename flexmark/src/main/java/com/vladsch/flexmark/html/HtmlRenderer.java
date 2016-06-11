@@ -208,12 +208,14 @@ public class HtmlRenderer {
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
         private RenderingPhase phase;
+        private Node renderingNode;
 
         private MainNodeRenderer(HtmlWriter htmlWriter) {
             this.htmlWriter = htmlWriter;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
+            htmlWriter.setContext(this);
 
             // The first node renderer for a node type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
@@ -251,6 +253,11 @@ public class HtmlRenderer {
         }
 
         @Override
+        public Map<String, String> extendRenderingNodeAttributes(Map<String, String> attributes) {
+            return extendAttributes(renderingNode, attributes);
+        }
+
+        @Override
         public Map<String, String> extendAttributes(Node node, Map<String, String> attributes) {
             Map<String, String> attrs = new LinkedHashMap<>(attributes);
             setCustomAttributes(node, attrs);
@@ -278,14 +285,18 @@ public class HtmlRenderer {
                     if (phase == RenderingPhase.BODY) {
                         NodeRenderer nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
+                            renderingNode = node;
                             nodeRenderer.render(node);
+                            renderingNode = null;
                         }
                     } else {
                         // go through all renderers that want this phase
                         for (PhasedNodeRenderer phasedRenderer : phasedRenderers) {
                             this.phase = phase;
                             if (phasedRenderer.getRenderingPhases().contains(phase)) {
+                                renderingNode = node;
                                 phasedRenderer.render(node, phase);
+                                renderingNode = null;
                             }
                         }
                     }
@@ -293,7 +304,10 @@ public class HtmlRenderer {
             } else {
                 NodeRenderer nodeRenderer = renderers.get(node.getClass());
                 if (nodeRenderer != null) {
+                    Node oldNode = renderingNode;
+                    renderingNode = node;
                     nodeRenderer.render(node);
+                    renderingNode = oldNode;
                 }
             }
         }

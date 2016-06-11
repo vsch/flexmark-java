@@ -34,8 +34,8 @@ with continuation text. Inline _italic_ and
       <p>Multiple paragraphs are supported as other
       markdown elements such as lists.</p>
       <ul>
-      <li>item 1</li>
-      <li>item 2</li>
+        <li>item 1</li>
+        <li>item 2</li>
       </ul>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>
@@ -102,8 +102,8 @@ with continuation text. Inline _italic_ and
       <p>Multiple paragraphs are supported as other
       markdown elements such as lists.</p>
       <ul>
-      <li>item 1</li>
-      <li>item 2</li>
+        <li>item 1</li>
+        <li>item 2</li>
       </ul>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>
@@ -232,8 +232,8 @@ with continuation text. Inline _italic_ and
       <p>Multiple paragraphs are supported as other
       markdown elements such as lists.</p>
       <ul>
-      <li>item 1</li>
-      <li>item 2</li>
+        <li>item 1</li>
+        <li>item 2</li>
       </ul>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>

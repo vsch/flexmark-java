@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 public class StrikethroughNodeRenderer implements NodeRenderer {
@@ -27,18 +26,8 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
 
     @Override
     public void render(Node node) {
-        Map<String, String> attributes = context.extendAttributes(node, Collections.<String, String>emptyMap());
-        html.tag("del", attributes);
-        renderChildren(node);
+        html.withAttr().tag("del");
+        context.renderChildren(node);
         html.tag("/del");
-    }
-
-    private void renderChildren(Node parent) {
-        Node node = parent.getFirstChild();
-        while (node != null) {
-            Node next = node.getNext();
-            context.render(node);
-            node = next;
-        }
     }
 }

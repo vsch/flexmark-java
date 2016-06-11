@@ -284,4 +284,78 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public BasedSequence unescaped(ReplacedTextMapper textMapper) {
         return Escaping.unescapeSequence(this, textMapper);
     }
+
+    @Override
+    public int indexOf(char c) {
+        return indexOf(c, 0);
+    }
+
+    @Override
+    public int lastIndexOf(char c) {
+        return lastIndexOf(c, length());
+    }
+
+    @Override
+    public int indexOf(String s) {
+        return indexOf(s, 0);
+    }
+
+    @Override
+    public int lastIndexOf(String s) {
+        return lastIndexOf(s, length());
+    }
+
+    @Override
+    public int indexOf(char c, int index) {
+        int iMax = length();
+        for (int i = index; i < iMax; i++) {
+            if (charAt(i) == c) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(char c, int index) {
+        for (int i = index; i-- > 0; i++) {
+            if (charAt(i) == c) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int indexOf(String s, int index) {
+        int sMax = s.length();
+        if (sMax == 0) return index;
+
+        int iMax = length();
+        char firstChar = s.charAt(0);
+        int pos = index;
+
+        do {
+            pos = indexOf(firstChar, pos);
+            if (pos < 0 || pos + sMax > iMax) break;
+            if (matchChars(s, pos)) return pos;
+            pos++;
+        } while (pos + sMax < iMax);
+
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(String s, int index) {
+        int sMax = s.length();
+        if (sMax == 0) return index;
+
+        int pos = index;
+        char lastChar = s.charAt(s.length() - 1);
+
+        do {
+            pos = lastIndexOf(lastChar, pos);
+            if (pos < sMax) break;
+            if (matchCharsReversed(s, pos + 1)) return pos - sMax;
+            pos--;
+        } while (pos >= sMax);
+
+        return -1;
+    }
 }

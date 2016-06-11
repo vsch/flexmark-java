@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 public class TablesFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_gfm_tables_ast_spec.txt";
     private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create());
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder().indentSize(2).extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
 
     @Override
