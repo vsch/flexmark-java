@@ -4,7 +4,9 @@ import com.vladsch.flexmark.internal.util.mappers.CharMapper;
 import com.vladsch.flexmark.internal.util.mappers.LowerCaseMapper;
 import com.vladsch.flexmark.internal.util.mappers.UpperCaseMapper;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
@@ -357,5 +359,31 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         } while (pos >= sMax);
 
         return -1;
+    }
+
+    public static final Map<Character, String> visibleSpacesMap;
+    static {
+        HashMap<Character, String> charMap = new HashMap<>();
+        visibleSpacesMap = charMap;
+        charMap.put('\n', "\\n");
+        charMap.put('\r', "\\r");
+        charMap.put('\f', "\\f");
+        charMap.put('\t', "\\u2192");
+    }
+    @Override
+    public String toVisibleWhitespaceString() {
+        StringBuilder sb = new StringBuilder();
+        int iMax = length();
+        for (int i = 0; i < iMax; i++) {
+            char c = charAt(i);
+            String s = visibleSpacesMap.get(c);
+
+            if (s != null) {
+                sb.append(s);
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
     }
 }

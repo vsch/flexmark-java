@@ -8,6 +8,11 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public class HtmlEntity extends Node {
+    @Override
+    public String getAstExtra() {
+        return getChars().isEmpty() ? "" : "\"" + getChars() + "\"";
+    }
+
     // TODO: add opening and closing marker with intermediate text so that completions can be easily done
     @Override
     public BasedSequence[] getSegments() {

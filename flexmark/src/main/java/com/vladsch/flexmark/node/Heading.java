@@ -14,7 +14,7 @@ public class Heading extends Block {
 
     @Override
     public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+        return delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
     }
 
     @Override

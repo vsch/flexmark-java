@@ -303,7 +303,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
 
     protected void flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(currentText, SubSequence.EMPTY)));
+            block.appendChild(new Text(SegmentedSequence.of(currentText, SubSequence.NULL)));
             currentText = null;
         }
     }
@@ -447,7 +447,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected boolean parseBackslash() {
         index++;
         if (peek() == '\n') {
-            appendNode(new HardLineBreak());
+            appendNode(new HardLineBreak(input.subSequence(index, index + 1)));
             index++;
         } else if (index < input.length() && ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
             appendText(input, index - 1, index + 1);
@@ -691,15 +691,14 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
                 }
-                refNode.setCharsFromContent();
             } else {
                 // set dest and title
                 InlineLinkNode inlineLinkNode = (InlineLinkNode) linkOrImage;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
                 inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
-                inlineLinkNode.setCharsFromContent();
             }
+            linkOrImage.setCharsFromContent();
 
             // Process delimiters such as emphasis inside link/image
             processDelimiters(opener);

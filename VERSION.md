@@ -33,6 +33,17 @@ Version
       invocation. Eliminating the need to roll your own attribute methods. Accumulated
       attributes are merged, or overwritten by ones passed in as an argument to `tag()`
 
+- Fix `SegmentedSequence::getEndOffset()` for sub-sequences would return end offset of the full
+  sequence and not its `subSequence()`.  
+
+- Fix footnotes embedded in other footnotes would not be assigned the right source offsets nor
+  character sequences.
+
+- Add characters to be dumped as part of the AST for opening and closing sequences for easy
+  validation. For some nodes also dump the text. 
+
+- Fix table extension to include open/close pipe as part of TableCell node markers
+
 0.1.0
 -----
 
@@ -110,12 +121,12 @@ Version
         Document[0, 41]
           Paragraph[0, 14]
             Text[0, 1]
-            LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2] reference:[2, 11] referenceClose:[11, 12]
-              Emphasis[2, 7] textOpen:[2, 3] text:[3, 6] textClose:[6, 7]
+            LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+              Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
                 Text[3, 6]
               Text[7, 11]
             Text[12, 13]
-          Reference[15, 40] refOpen:[15, 16] ref:[16, 25] refClose:[25, 27] urlOpen:[0, 0] url:[28, 32] urlClose:[0, 0] titleOpen:[33, 34] title:[34, 39] titleClose:[39, 40]
+          Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
     
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier

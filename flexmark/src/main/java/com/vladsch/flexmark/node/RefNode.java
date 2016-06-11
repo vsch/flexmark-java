@@ -26,8 +26,8 @@ public abstract class RefNode extends LinkNode {
 
     @Override
     public String getAstExtra() {
-        return delimitedSegmentSpan(textOpeningMarker, text, textClosingMarker, "text")
-                + delimitedSegmentSpan(referenceOpeningMarker, reference, referenceClosingMarker, "reference");
+        return delimitedSegmentSpanChars(textOpeningMarker, text, textClosingMarker, "text")
+                + delimitedSegmentSpanChars(referenceOpeningMarker, reference, referenceClosingMarker, "reference");
     }
 
     public RefNode() {

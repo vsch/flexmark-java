@@ -10,9 +10,9 @@ import com.vladsch.flexmark.node.Visitor;
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class Emoji extends CustomNode implements DelimitedNode {
-    protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence text = SubSequence.EMPTY;
-    protected BasedSequence closingMarker = SubSequence.EMPTY;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -21,7 +21,7 @@ public class Emoji extends CustomNode implements DelimitedNode {
 
     @Override
     public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+        return delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
     }
 
     public Emoji() {

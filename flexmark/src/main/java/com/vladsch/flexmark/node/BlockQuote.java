@@ -11,7 +11,7 @@ public class BlockQuote extends Block {
 
     @Override
     public String getAstExtra() {
-        return segmentSpan(openingMarker, "marker");
+        return segmentSpanChars(openingMarker, "marker");
     }
 
     @Override

@@ -25,7 +25,7 @@ public class TableBlockParser extends AbstractBlockParser {
     private final List<BasedSequence> rowLines = new ArrayList<>();
 
     private boolean nextIsSeparatorLine = true;
-    private BasedSequence separatorLine = SubSequence.EMPTY;
+    private BasedSequence separatorLine = SubSequence.NULL;
     private int separatorLineNumber = 0;
 
     public static boolean bodyColumnsFilledToHead = true;
@@ -90,7 +90,7 @@ public class TableBlockParser extends AbstractBlockParser {
             List<BasedSequence> cells = split(rowLine);
             TableRow tableRow = new TableRow();
 
-            int rowCells = cells.size();
+            int rowCells = countCells(cells);
             int maxColumns = rowCells;
 
             if (rowNumber < separatorLineNumber || headerColumns == -1) {
@@ -107,13 +107,35 @@ public class TableBlockParser extends AbstractBlockParser {
                 else if (bodyColumnsFilledToHead && maxColumns < headerColumns) maxColumns = headerColumns;
             }
 
+            int segmentOffset = 0;
+            BasedSequence openingMarker = SubSequence.NULL;
+
             for (int i = 0; i < maxColumns; i++) {
-                BasedSequence cell = i < rowCells ? cells.get(i) : SubSequence.EMPTY;
+                BasedSequence cell = i < rowCells ? cells.get(i + segmentOffset) : SubSequence.NULL;
+                if (!isCell(cell)) {
+                    openingMarker = cell;
+                    segmentOffset++;
+                    cell = i < rowCells ? cells.get(i + segmentOffset) : SubSequence.NULL;
+                }
+
                 TableCell.Alignment alignment = i < alignments.size() ? alignments.get(i) : null;
                 TableCell tableCell = new TableCell();
                 tableCell.setHeader(rowNumber < separatorLineNumber);
                 tableCell.setAlignment(alignment);
-                inlineParser.parse(cell.trim(), tableCell);
+                tableCell.setOpeningMarker(openingMarker);
+                openingMarker = SubSequence.NULL;
+
+                // if the next one is not a cell then it is our closing marker
+                if (i + segmentOffset + 1 < cells.size()) {
+                    BasedSequence closingMarker = cells.get(i + segmentOffset + 1);
+                    if (!isCell(closingMarker)) {
+                        segmentOffset++;
+                        tableCell.setClosingMarker(closingMarker);
+                    }
+                }
+                BasedSequence trimmed = cell.trim();
+                tableCell.setText(trimmed);
+                inlineParser.parse(trimmed, tableCell);
                 tableCell.setCharsFromContent();
                 tableRow.appendChild(tableCell);
             }
@@ -129,6 +151,19 @@ public class TableBlockParser extends AbstractBlockParser {
         }
 
         section.setCharsFromContent();
+    }
+
+    private int countCells(List<BasedSequence> segments) {
+        int cells = 0;
+        for (BasedSequence segment : segments) {
+            if (isCell(segment)) cells++;
+        }
+
+        return cells;
+    }
+
+    private boolean isCell(BasedSequence segment) {
+        return segment.length() != 1 || segment.charAt(0) != '|';
     }
 
     private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
@@ -147,12 +182,14 @@ public class TableBlockParser extends AbstractBlockParser {
     private static List<BasedSequence> split(BasedSequence input) {
         BasedSequence line = input.trim();
         int lineLength = line.length();
+        List<BasedSequence> segments = new ArrayList<>();
+
         if (line.startsWith("|")) {
+            segments.add(line.subSequence(0, 1));
             line = line.subSequence(1, lineLength);
             lineLength--;
         }
 
-        List<BasedSequence> cells = new ArrayList<>();
         boolean escape = false;
         int lastPos = 0;
         int cellChars = 0;
@@ -169,7 +206,8 @@ public class TableBlockParser extends AbstractBlockParser {
                         cellChars++;
                         break;
                     case '|':
-                        cells.add(line.subSequence(lastPos, i));
+                        segments.add(line.subSequence(lastPos, i));
+                        segments.add(line.subSequence(i, i + 1));
                         lastPos = i + 1;
                         cellChars = 0;
                         break;
@@ -180,9 +218,9 @@ public class TableBlockParser extends AbstractBlockParser {
         }
 
         if (cellChars > 0) {
-            cells.add(line.subSequence(lastPos, lineLength));
+            segments.add(line.subSequence(lastPos, lineLength));
         }
-        return cells;
+        return segments;
     }
 
     private static TableCell.Alignment getAlignment(boolean left, boolean right) {

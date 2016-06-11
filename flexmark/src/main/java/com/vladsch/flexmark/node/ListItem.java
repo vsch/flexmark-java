@@ -11,7 +11,7 @@ public class ListItem extends Block {
 
     @Override
     public String getAstExtra() {
-        return segmentSpan(openingMarker, "open");
+        return segmentSpanChars(openingMarker, "open");
     }
 
     @Override

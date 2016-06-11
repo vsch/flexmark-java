@@ -31,9 +31,9 @@ public class Reference extends Node {
 
     @Override
     public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, reference, closingMarker, "ref")
-                + delimitedSegmentSpan(urlOpeningMarker, url, urlClosingMarker, "url")
-                + delimitedSegmentSpan(titleOpeningMarker, title, titleClosingMarker, "title");
+        return delimitedSegmentSpanChars(openingMarker, reference, closingMarker, "ref")
+                + delimitedSegmentSpanChars(urlOpeningMarker, url, urlClosingMarker, "url")
+                + delimitedSegmentSpanChars(titleOpeningMarker, title, titleClosingMarker, "title");
     }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {

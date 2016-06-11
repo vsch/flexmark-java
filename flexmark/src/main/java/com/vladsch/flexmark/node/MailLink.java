@@ -23,7 +23,7 @@ public class MailLink extends LinkNode {
 
     @Override
     public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+        return delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
     }
 
     public BasedSequence getLeadSegment() {

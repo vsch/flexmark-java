@@ -9,10 +9,10 @@ import com.vladsch.flexmark.node.Visitor;
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class FootnoteBlock extends CustomBlock {
-    protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence text = SubSequence.EMPTY;
-    protected BasedSequence closingMarker = SubSequence.EMPTY;
-    protected BasedSequence footnote = SubSequence.EMPTY;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence footnote = SubSequence.NULL;
     private int footnoteOrdinal = 0;
 
     public int getFootnoteOrdinal() {
@@ -25,7 +25,8 @@ public class FootnoteBlock extends CustomBlock {
 
     @Override
     public String getAstExtra() {
-        return segmentSpan(openingMarker, "open")
+        return " ordinal: " + footnoteOrdinal + " "
+                + segmentSpan(openingMarker, "open")
                 + segmentSpan(text, "text")
                 + segmentSpan(closingMarker, "close")
                 + segmentSpan(footnote, "footnote");

@@ -15,10 +15,10 @@ public class FencedCodeBlock extends Block {
     public String getAstExtra() {
         BasedSequence content = getContentChars();
         int lines = getSegments().length;
-        return segmentSpan(openingMarker, "open")
-                + segmentSpan(info, "info")
+        return segmentSpanChars(openingMarker, "open")
+                + segmentSpanChars(info, "info")
                 + segmentSpan(content, "content") + " lines[" + lines + "]"
-                + segmentSpan(closingMarker, "close");
+                + segmentSpanChars(closingMarker, "close");
     }
 
     @Override

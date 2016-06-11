@@ -40,7 +40,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
             }
             return 0;
         }
-        return iMax > 0 ? baseOffsets[iMax - 1] : 0;
+        return iMax > 0 ? baseOffsets[baseStartOffset + length - 1] + 1 : 0;
     }
 
     public int[] getBaseOffsets() {

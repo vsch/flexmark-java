@@ -35,13 +35,13 @@ import org.junit.runners.Suite;
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
         CoreTestSuite.class,
+        ExtAbbreviationTestSuite.class,
         ExtAutolinkTestSuite.class,
+        ExtEmojiTestSuite.class,
+        ExtFootnotesTestSuite.class,
         ExtGfmStrikethroughTestSuite.class,
         ExtGfmTablesTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
-        ExtAbbreviationTestSuite.class,
-        ExtEmojiTestSuite.class,
-        ExtFootnotesTestSuite.class,
         IntegrationTestSuite.class,
 })
 public class TestTestSuite {

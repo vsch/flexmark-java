@@ -27,10 +27,6 @@ public abstract class Node {
         return chars;
     }
 
-    public String getAstExtra() {
-        return "";
-    }
-
     public Document getDocument() {
         Node node = this;
         while (node != null && !(node instanceof Document)) {
@@ -155,6 +151,10 @@ public abstract class Node {
         return getClass().getSimpleName() + "{" + toStringAttributes() + "}";
     }
 
+    public String getAstExtra() {
+        return "";
+    }
+
     protected String toStringAttributes() {
         return "";
     }
@@ -247,14 +247,29 @@ public abstract class Node {
         return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + "]";
     }
 
+    public static String segmentSpanChars(int startOffset, int endOffset, String name, String chars) {
+        return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + (startOffset < endOffset ? ", \"" + chars + "\"" : "") + "]";
+    }
+
     public static String segmentSpan(BasedSequence sequence, String name) {
         return segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name);
     }
 
+    public static String segmentSpanChars(BasedSequence sequence, String name) {
+        return segmentSpanChars(sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
+    }
+
     public static String delimitedSegmentSpan(BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
-        return segmentSpan(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open")
+        return segmentSpanChars(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString())
                 + segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name)
-                + segmentSpan(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close")
+                + segmentSpanChars(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString())
+                ;
+    }
+
+    public static String delimitedSegmentSpanChars(BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+        return segmentSpanChars(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString())
+                + segmentSpanChars(sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString())
+                + segmentSpanChars(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString())
                 ;
     }
 

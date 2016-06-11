@@ -56,16 +56,16 @@ public class Escaping {
         public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
             switch (input.toString()) {
                 case "&":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&amp;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&amp;", SubSequence.NULL));
                     break;
                 case "<":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&lt;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&lt;", SubSequence.NULL));
                     break;
                 case ">":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&gt;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&gt;", SubSequence.NULL));
                     break;
                 case "\"":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&quot;", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&quot;", SubSequence.NULL));
                     break;
                 default:
                     textMapper.addOriginalText(input);
@@ -123,7 +123,7 @@ public class Escaping {
                     textMapper.addOriginalText(input);
                 } else {
                     // %25 is the percent-encoding for %
-                    textMapper.addReplacedText(input.subSequence(0, 1), new PrefixedSubSequence("%25", SubSequence.EMPTY));
+                    textMapper.addReplacedText(input.subSequence(0, 1), new PrefixedSubSequence("%25", SubSequence.NULL));
                     textMapper.addOriginalText(input.subSequence(1, input.length()));
                 }
             } else {
@@ -135,7 +135,7 @@ public class Escaping {
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
                 }
-                textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), SubSequence.EMPTY));
+                textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), SubSequence.NULL));
             }
         }
     };

@@ -159,10 +159,15 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(ListItem node) {
-        html.tag("li");
-        visitChildren(node);
-        html.tag("/li");
-        html.line();
+        if (node.getFirstChild() == null || isTightList(node.getParent())) {
+            html.withCondIndent().tagLine("li", () -> {
+                visitChildren(node);
+            });
+        } else {
+            html.tagIndent("li", () -> {
+                visitChildren(node);
+            });
+        }
     }
 
     @Override
@@ -380,10 +385,15 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         Node parent = node.getParent();
         if (parent != null) {
             Node gramps = parent.getParent();
-            if (gramps != null && gramps instanceof ListBlock) {
-                ListBlock list = (ListBlock) gramps;
-                return list.isTight();
-            }
+            return isTightList(gramps);
+        }
+        return false;
+    }
+
+    private Boolean isTightList(Node node) {
+        if (node != null && node instanceof ListBlock) {
+            ListBlock list = (ListBlock) node;
+            return list.isTight();
         }
         return false;
     }

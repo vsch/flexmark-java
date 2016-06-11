@@ -11,9 +11,9 @@ import com.vladsch.flexmark.node.Visitor;
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify {
-    protected BasedSequence openingMarker = SubSequence.EMPTY;
-    protected BasedSequence text = SubSequence.EMPTY;
-    protected BasedSequence closingMarker = SubSequence.EMPTY;
+    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence closingMarker = SubSequence.NULL;
     protected FootnoteBlock footnoteBlock;
 
     public FootnoteBlock getFootnoteBlock() {
@@ -31,7 +31,7 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify 
 
     @Override
     public String getAstExtra() {
-        return " ordinal: " + (footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0) + " " + delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+        return " ordinal: " + (footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0) + " " + delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
     }
 
     public Footnote() {

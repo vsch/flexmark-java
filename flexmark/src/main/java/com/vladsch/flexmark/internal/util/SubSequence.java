@@ -8,25 +8,23 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public class SubSequence extends BasedSequenceImpl {
-    final public static BasedSequence EMPTY = new EmptyBasedSequence();
+    //final public static BasedSequence EMPTY = new EmptyBasedSequence();
     final public static BasedSequence NULL = new EmptyBasedSequence();
 
     final public static BasedSequence EOL = new StringSequence("\n");
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
-    
-    public static BasedSequence firstNonNull(BasedSequence...sequences) {
+
+    public static BasedSequence firstNonNull(BasedSequence... sequences) {
         for (BasedSequence sequence : sequences) {
-            if (sequence != null && sequence != NULL) return sequence; 
+            if (sequence != null && sequence != NULL) return sequence;
         }
-        
+
         return NULL;
     }
 
     protected final CharSequence base;
     protected final int startOffset;
     protected final int endOffset;
-    
-    
 
     public CharSequence getBase() {
         return base;
@@ -141,7 +139,7 @@ public class SubSequence extends BasedSequenceImpl {
         @Override
         public BasedSequence subSequence(int i, int i1) {
             if (i == 0 && i1 == 0) return this;
-            throw new StringIndexOutOfBoundsException("EMPTY substring only subSequence(0, 0) is allowed");
+            throw new StringIndexOutOfBoundsException("EMPTY subSequence(" + i + "," + i1 + ") only subSequence(0, 0) is allowed");
         }
 
         @Override
@@ -174,5 +172,4 @@ public class SubSequence extends BasedSequenceImpl {
             return "";
         }
     }
-
 }

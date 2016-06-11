@@ -25,18 +25,20 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    AbstractVisitorTest.class,
-    DeilimitedNodeTest.class,
-    DelimiterProcessorTest.class,
-    HtmlRendererTest.class,
-    ParserTest.class,
-    PathologicalTest.class,
-    PrefixedSubSequenceTest.class,
-    SpecCoreTest.class,
-    FullSpecCoreTest.class,
-    SpecialInputTest.class,
-    SubstringTest.class,
-    UsageExampleTest.class
+        AbstractVisitorTest.class,
+        DeilimitedNodeTest.class,
+        DelimiterProcessorTest.class,
+        HtmlRendererTest.class,
+        ParserTest.class,
+        PathologicalTest.class,
+        PrefixedSubSequenceTest.class,
+        FullSpecCoreTest.class,
+        SpecCoreTest.class,
+        FullExtraSpecTest.class,
+        ExtraSpecTest.class,
+        SpecialInputTest.class,
+        SubstringTest.class,
+        UsageExampleTest.class
 })
 public class CoreTestSuite {
 }

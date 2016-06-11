@@ -96,9 +96,9 @@ public class FootnoteBlockParser extends AbstractBlockParser {
                 // abbreviation definition
                 int openingStart = nextNonSpace + matcher.start();
                 int openingEnd = nextNonSpace + matcher.end();
-                BasedSequence openingMarker = trySequence.subSequence(openingStart, openingStart + 2);
-                BasedSequence text = trySequence.subSequence(openingStart + 2, openingEnd - 2).trim();
-                BasedSequence closingMarker = trySequence.subSequence(openingEnd - 2, openingEnd);
+                BasedSequence openingMarker = line.subSequence(openingStart, openingStart + 2);
+                BasedSequence text = line.subSequence(openingStart + 2, openingEnd - 2).trim();
+                BasedSequence closingMarker = line.subSequence(openingEnd - 2, openingEnd);
 
                 FootnoteBlockParser footnoteBlockParser = new FootnoteBlockParser(state.getIndent() + 4);
                 footnoteBlockParser.block.setOpeningMarker(openingMarker);

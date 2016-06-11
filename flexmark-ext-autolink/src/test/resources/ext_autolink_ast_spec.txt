@@ -42,7 +42,7 @@ Document[0, 51]
     AutoLink[4, 19] open:[0, 0] close:[0, 0]
       Text[4, 19]
     Text[19, 24]
-    Code[24, 30] textOpen:[24, 25] text:[25, 29] textClose:[29, 30]
+    Code[24, 30] textOpen:[24, 25, "`"] text:[25, 29] textClose:[29, 30, "`"]
     Text[30, 35]
     AutoLink[35, 50] open:[0, 0] close:[0, 0]
       Text[35, 50]
@@ -74,7 +74,7 @@ foo@example.com
 .
 Document[0, 16]
   Paragraph[0, 16]
-    MailLink[0, 15] textOpen:[0, 0] text:[0, 15] textClose:[0, 0]
+    MailLink[0, 15] textOpen:[0, 0] text:[0, 15, "foo@example.com"] textClose:[0, 0]
       Text[0, 15]
 ````````````````````````````````
 

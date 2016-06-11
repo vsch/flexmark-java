@@ -69,15 +69,15 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
-            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimiterUse), SubSequence.EMPTY, closer.getLeadChars(delimiterUse));
+            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
             opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }
 
     private static class UpperCaseNode extends CustomNode implements DelimitedNode {
-        protected BasedSequence openingMarker = SubSequence.EMPTY;
-        protected BasedSequence text = SubSequence.EMPTY;
-        protected BasedSequence closingMarker = SubSequence.EMPTY;
+        protected BasedSequence openingMarker = SubSequence.NULL;
+        protected BasedSequence text = SubSequence.NULL;
+        protected BasedSequence closingMarker = SubSequence.NULL;
         
         @Override
         public BasedSequence[] getSegments() {

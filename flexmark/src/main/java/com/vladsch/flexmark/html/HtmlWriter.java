@@ -21,6 +21,9 @@ public class HtmlWriter {
     private String indentPrefix = "";
     private LinkedHashMap<String, String> currentAttributes;
     private boolean useAttributes = false;
+    private int appendCount = 0;
+    private boolean delayedIndent = false;
+    private boolean indentIndentingChildren = false;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -82,6 +85,11 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter withCondIndent() {
+        indentIndentingChildren = true;
+        return this;
+    }
+
     public HtmlWriter tag(String name, Map<String, String> attrs, boolean voidElement, boolean voidWithLine) {
         if (useAttributes || attrs != null) {
             if (currentAttributes != null) {
@@ -139,20 +147,48 @@ public class HtmlWriter {
 
     public HtmlWriter tag(String name, Map<String, String> attrs, boolean indentTag, boolean withLine, Runnable runnable) {
         int indentLevel = indent;
+        int preIndentLevel = indent;
 
+        boolean delayedIndent = this.delayedIndent;
+        this.delayedIndent = false;
+
+        if (delayedIndent) {
+            delayedIndent = false;
+            if (indentTag) {
+                indent();
+                preIndentLevel = indent;
+            }
+        }
+        
         if (withLine || indentTag) line();
         tag(name, attrs, false, false);
         if (indentTag) indent();
 
+        if (indentIndentingChildren) {
+            this.delayedIndent = true;
+            indentIndentingChildren = false;
+        }
+
         runnable.run();
 
-        boolean hadIndent = indentLevel < indent;
-        if (hadIndent) while (indentLevel < indent) unIndent();
+        // if not used then not needed
+        this.delayedIndent = false;
+
+        boolean hadPreIndent = preIndentLevel < indent;
+        if (hadPreIndent) {
+            while (preIndentLevel < indent) unIndent();
+        }
 
         append("</");
         append(name);
         append(">");
-        if (hadIndent || withLine) line();
+
+        boolean hadIndent = indentLevel < indent;
+        if (hadIndent) {
+            while (indentLevel < indent) unIndent();
+        }
+
+        if (hadIndent || hadPreIndent || withLine) line();
 
         return this;
     }
@@ -182,9 +218,17 @@ public class HtmlWriter {
     }
 
     protected void append(String s) {
+        if (s.length() == 0) return;
+        appendCount++;
+
         if (indentPrefix.length() > 0) {
             // convert \n to \n + indent except for the last one 
             // also if the last is \n then prefix indent size
+            //if (delayedLine) {
+            //    delayedLine = false;
+            //    if (s.charAt(0) != '\n') append("\n");
+            //}
+
             try {
                 int lastPos = 0;
                 boolean lastWasEOL = lastChar == '\n';

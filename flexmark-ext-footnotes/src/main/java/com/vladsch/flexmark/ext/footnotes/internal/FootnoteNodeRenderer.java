@@ -58,25 +58,21 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
                 html.attr("class", "footnotes").withAttr().tagIndent("div", () -> {
-                    html.tagVoidLine("hr")
-                            .tagIndent("ol", () -> {
-                                for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
-                                    int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
-                                    if (footnoteOrdinal > 0) {
-                                        // output this one
-
-                                        html.attr("id", "fn-" + footnoteOrdinal)
-                                                .withAttr().tagIndent("li", () -> {
-                                            context.renderChildren(footnoteBlock);
-                                            html.attr("href", "#fnref-" + footnoteOrdinal);
-                                            html.attr("class", "footnote-backref");
-                                            html.withAttr().tag("a");
-                                            html.raw("&#8617;");
-                                            html.tag("/a");
-                                        });
-                                    }
-                                }
+                    html.tagVoidLine("hr");
+                    html.tagIndent("ol", () -> {
+                        for (FootnoteBlock footnoteBlock : footnoteRepository.getReferencedFootnoteBlocks()) {
+                            int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
+                            html.attr("id", "fn-" + footnoteOrdinal);
+                            html.withAttr().tagIndent("li", () -> {
+                                context.renderChildren(footnoteBlock);
+                                html.attr("href", "#fnref-" + footnoteOrdinal);
+                                html.attr("class", "footnote-backref");
+                                html.withAttr().tag("a");
+                                html.raw("&#8617;");
+                                html.tag("/a");
                             });
+                        }
+                    });
                 });
             }
         }
@@ -91,11 +87,11 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             html.raw("]");
         } else {
             int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
-            html.attr("id", "fnref-" + footnoteOrdinal)
-                    .withAttr().tag("sup", () -> {
-                html.attr("class", "footnote-ref")
-                        .attr("href", "#fn-" + footnoteOrdinal)
-                        .withAttr().tag("a");
+            html.attr("id", "fnref-" + footnoteOrdinal);
+            html.withAttr().tag("sup", () -> {
+                html.attr("class", "footnote-ref");
+                html.attr("href", "#fn-" + footnoteOrdinal);
+                html.withAttr().tag("a");
                 html.raw(String.valueOf(footnoteOrdinal));
                 html.tag("/a");
             });

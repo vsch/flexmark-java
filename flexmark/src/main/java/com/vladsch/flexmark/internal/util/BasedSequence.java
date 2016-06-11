@@ -72,4 +72,5 @@ public interface BasedSequence extends CharSequence {
 
     BasedSequence trimTailBlankLines();
     BasedSequence trimLeadBlankLines();
+    String toVisibleWhitespaceString();
 }

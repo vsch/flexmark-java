@@ -145,12 +145,12 @@ This is an Abbr and this is not [Abbr].
 .
 Document[0, 88]
   AbbreviationBlock[0, 21] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 21]
-  Reference[22, 45] refOpen:[22, 23] ref:[23, 27] refClose:[27, 29] urlOpen:[0, 0] url:[30, 45] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[22, 45] refOpen:[22, 23, "["] ref:[23, 27, "Abbr"] refClose:[27, 29, "]:"] urlOpen:[0, 0] url:[30, 45, "http://test.com"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
   Paragraph[47, 87]
     Text[47, 58]
     Abbreviation[58, 62]
     Text[62, 79]
-    LinkRef[79, 85] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[79, 80] reference:[80, 84] referenceClose:[84, 85]
+    LinkRef[79, 85] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[79, 80, "["] reference:[80, 84, "Abbr"] referenceClose:[84, 85, "]"]
       Text[80, 84]
     Text[85, 86]
 ````````````````````````````````
@@ -170,7 +170,7 @@ Document[0, 60]
   Paragraph[0, 59]
     Text[0, 45]
     SoftLineBreak[45, 46]
-    LinkRef[46, 52] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[46, 47] reference:[47, 51] referenceClose:[51, 52]
+    LinkRef[46, 52] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[46, 47, "["] reference:[47, 51, "test"] referenceClose:[51, 52, "]"]
       Text[47, 51]
     Text[52, 58]
 ````````````````````````````````

@@ -18,7 +18,7 @@ Converts :warning: to its emoji image
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emoji[0, 9] textOpen:[0, 1] text:[1, 8] textClose:[8, 9]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8]
 ````````````````````````````````
 
@@ -32,8 +32,8 @@ Should work in links
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Link[0, 16] textOpen:[0, 1] text:[1, 10] textClose:[10, 11] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-      Emoji[1, 10] textOpen:[1, 2] text:[2, 9] textClose:[9, 10]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
         Text[2, 9]
 ````````````````````````````````
 
@@ -48,7 +48,7 @@ Unknown shortcuts are converted to text
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Emoji[0, 10] textOpen:[0, 1] text:[1, 9] textClose:[9, 10]
+    Emoji[0, 10] textOpen:[0, 1, ":"] text:[1, 9, "warnings"] textClose:[9, 10, ":"]
       Text[1, 9]
 ````````````````````````````````
 
@@ -63,8 +63,8 @@ Unknown shortcuts are converted to text with inline emphasis parsing
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Emoji[0, 14] textOpen:[0, 1] text:[1, 13] textClose:[13, 14]
-      StrongEmphasis[1, 13] textOpen:[1, 3] text:[3, 11] textClose:[11, 13]
+    Emoji[0, 14] textOpen:[0, 1, ":"] text:[1, 13, "**warnings**"] textClose:[13, 14, ":"]
+      StrongEmphasis[1, 13] textOpen:[1, 3, "**"] text:[3, 11] textClose:[11, 13, "**"]
         Text[3, 11]
 ````````````````````````````````
 
