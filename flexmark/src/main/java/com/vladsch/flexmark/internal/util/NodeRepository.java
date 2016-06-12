@@ -7,19 +7,14 @@ import java.util.Set;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
     final private Map<String, T> nodeMap = new HashMap<>();
-    private ModificationBehavior modifyBehavior;
+    final private KeepType keepType;
 
-    public NodeRepository(ModificationBehavior modifyBehavior) {
-        this.modifyBehavior = modifyBehavior;
+    public abstract DataKey<? extends NodeRepository<T>> getDataKey();
+    public abstract DataKey<KeepType> getKeepDataKey();
+
+    public NodeRepository(DataHolder options) {
+        this.keepType = options == null ? KeepType.LOCKED : options.get(getKeepDataKey());
     }
-
-    public void setModifyBehavior(ModificationBehavior modifyBehavior) {
-        if (this.modifyBehavior == ModificationBehavior.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
-        //if (modifyBehavior != ModifyBehavior.FAIL_ON_MODIFY && modifyBehavior != ModifyBehavior.FAIL_ON_DUPLICATE) throw new IllegalStateException("Only allowed to modify non-empty repository modifyBehavior to FAIL_ON_MODIFY and FAIL_ON_DUPLICATE");
-        this.modifyBehavior = modifyBehavior;
-    }
-
-    public abstract PropertyKey<? extends NodeRepository<T>> getPropertyKey();
 
     public String normalizeKey(CharSequence key) {
         return key.toString();
@@ -35,11 +30,11 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     @Override
     public T put(String s, T t) {
-        if (modifyBehavior == ModificationBehavior.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
-        if (modifyBehavior != ModificationBehavior.KEEP_LAST) {
+        if (keepType == KeepType.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
+        if (keepType != KeepType.LAST) {
             T another = nodeMap.get(s);
             if (another != null) {
-                if (modifyBehavior == ModificationBehavior.FAIL_ON_DUPLICATE) throw new IllegalStateException("Duplicate key " + s);
+                if (keepType == KeepType.FAIL) throw new IllegalStateException("Duplicate key " + s);
                 return another;
             }
         }
@@ -48,8 +43,8 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     @Override
     public void putAll(Map<? extends String, ? extends T> map) {
-        if (modifyBehavior == ModificationBehavior.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
-        if (modifyBehavior != ModificationBehavior.KEEP_LAST) {
+        if (keepType == KeepType.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
+        if (keepType != KeepType.LAST) {
             for (String key : map.keySet()) {
                 nodeMap.put(key, map.get(key));
             }
@@ -60,13 +55,13 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     @Override
     public T remove(Object o) {
-        if (modifyBehavior == ModificationBehavior.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
+        if (keepType == KeepType.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
         return nodeMap.remove(o);
     }
 
     @Override
     public void clear() {
-        if (modifyBehavior == ModificationBehavior.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
+        if (keepType == KeepType.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
         nodeMap.clear();
     }
 

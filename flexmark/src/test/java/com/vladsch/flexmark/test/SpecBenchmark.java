@@ -48,5 +48,4 @@ public class SpecBenchmark {
         }
         return length;
     }
-
 }

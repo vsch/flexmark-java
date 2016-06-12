@@ -3,10 +3,7 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.MutableOptions;
-import com.vladsch.flexmark.internal.util.Options;
-import com.vladsch.flexmark.internal.util.StringSequence;
+import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockParserFactory;
 
@@ -27,6 +24,18 @@ import java.util.Map;
  * </code></pre>
  */
 public class Parser {
+    final static public DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
+    final static public DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
+    final static public DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
+    final static public DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
+    final static public DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
+    final static public DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
+    final static public DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
+    final static public DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
+    final static public DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
+    final static public DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
+    public final static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
+    public final static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
 
     private final List<BlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -35,10 +44,10 @@ public class Parser {
     private final List<PostProcessor> postProcessors;
     private final List<BlockPreProcessor> blockPreProcessors;
     private final InlineParserFactory inlineParserFactory;
-    private final Options options;
+    private final DataHolder options;
 
     private Parser(Builder builder) {
-        this.options = builder.options.getReadOnlyCopy();
+        this.options = new DataSet(builder);
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
         this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(this.options, builder.blockPreProcessors);
         this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(this.options, builder.delimiterProcessors);
@@ -57,7 +66,7 @@ public class Parser {
         return new Builder();
     }
 
-    public static Builder builder(Options options) {
+    public static Builder builder(DataHolder options) {
         return new Builder(options);
     }
 
@@ -114,20 +123,19 @@ public class Parser {
     /**
      * Builder for configuring a {@link Parser}.
      */
-    public static class Builder {
-        public final MutableOptions options;
+    public static class Builder extends MutableDataSet {
         private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
         private final List<PostProcessor> postProcessors = new ArrayList<>();
         private final List<BlockPreProcessor> blockPreProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
 
-        public Builder(Options options) {
-            this.options = new MutableOptions(options);
+        public Builder(DataHolder options) {
+            super(options);
         }
 
         public Builder() {
-            options = new MutableOptions();
+            super();
         }
 
         /**

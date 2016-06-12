@@ -2,29 +2,29 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.BlockPreProcessor;
-import com.vladsch.flexmark.parser.DelimiterProcessor;
-import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.InlineParserFactory;
+import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DocumentParser implements ParserState {
 
-    private static List<BlockParserFactory> CORE_FACTORIES = Arrays.<BlockParserFactory>asList(
-            new BlockQuoteParser.Factory(),
-            new HeadingParser.Factory(),
-            new FencedCodeBlockParser.Factory(),
-            new HtmlBlockParser.Factory(),
-            new ThematicBreakParser.Factory(),
-            new ListBlockParser.Factory(),
-            new IndentedCodeBlockParser.Factory());
+    private static HashMap<DataKey<Boolean>, BlockParserFactory> CORE_FACTORIES = new HashMap<>();
+    static {
+        CORE_FACTORIES.put(Parser.BLOCK_QUOTE_PARSER, new BlockQuoteParser.Factory());
+        CORE_FACTORIES.put(Parser.HEADING_PARSER, new HeadingParser.Factory());
+        CORE_FACTORIES.put(Parser.FENCED_CODE_BLOCK_PARSER, new FencedCodeBlockParser.Factory());
+        CORE_FACTORIES.put(Parser.HTML_BLOCK_PARSER, new HtmlBlockParser.Factory());
+        CORE_FACTORIES.put(Parser.THEMATIC_BREAK_PARSER, new ThematicBreakParser.Factory());
+        CORE_FACTORIES.put(Parser.LIST_BLOCK_PARSER, new ListBlockParser.Factory());
+        CORE_FACTORIES.put(Parser.INDENTED_CODE_BLOCK_PARSER, new IndentedCodeBlockParser.Factory());
+    }
 
-    private static class CommonMarkBlockPreProcessor implements BlockPreProcessor {
+    private static class ReferencePreProcessor implements BlockPreProcessor {
         @Override
         public void preProcessBlock(Block block, ParserState state) {
             if (state.getInlineParser() instanceof InlineParserImpl)
@@ -32,9 +32,10 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static List<BlockPreProcessor> CORE_BLOCK_PRE_PROCESSORS = Collections.<BlockPreProcessor>singletonList(
-            new CommonMarkBlockPreProcessor()
-    );
+    private static HashMap<DataKey<Boolean>, BlockPreProcessor> CORE_BLOCK_PRE_PROCESSORS = new HashMap<>();
+    static {
+        CORE_BLOCK_PRE_PROCESSORS.put(Parser.REFERENCE_BLOCK_PRE_PROCESSOR, new ReferencePreProcessor());
+    }
 
     private BasedSequence line;
     private BasedSequence lineWithEOL;
@@ -88,9 +89,9 @@ public class DocumentParser implements ParserState {
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
     private Set<BlockParser> allBlockParsers = new HashSet<>();
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
-    final private Options options;
+    final private DataHolder options;
 
-    public DocumentParser(Options options, List<BlockParserFactory> blockParserFactories, List<BlockPreProcessor> blockPreProcessors, InlineParser inlineParser) {
+    public DocumentParser(DataHolder options, List<BlockParserFactory> blockParserFactories, List<BlockPreProcessor> blockPreProcessors, InlineParser inlineParser) {
         this.options = options;
         this.blockParserFactories = blockParserFactories;
         this.blockPreProcessors = blockPreProcessors;
@@ -101,23 +102,23 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
-    public MutablePropertyHolder getPropertyHolder() {
+    public MutableDataHolder getProperties() {
         return documentBlockParser.getBlock();
     }
 
-    public static List<BlockParserFactory> calculateBlockParserFactories(Options options, List<BlockParserFactory> customBlockParserFactories) {
+    public static List<BlockParserFactory> calculateBlockParserFactories(DataHolder options, List<BlockParserFactory> customBlockParserFactories) {
         List<BlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
-        list.addAll(CORE_FACTORIES);
+        list.addAll(CORE_FACTORIES.keySet().stream().filter(options::get).map(key -> CORE_FACTORIES.get(key)).collect(Collectors.toList()));
         return list;
     }
 
-    public static List<BlockPreProcessor> calculateParagraphProcessors(Options options, List<BlockPreProcessor> blockPreProcessors) {
+    public static List<BlockPreProcessor> calculateParagraphProcessors(DataHolder options, List<BlockPreProcessor> blockPreProcessors) {
         List<BlockPreProcessor> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(blockPreProcessors);
-        list.addAll(CORE_BLOCK_PRE_PROCESSORS);
+        list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
         return list;
     }
 
@@ -128,11 +129,11 @@ public class DocumentParser implements ParserState {
 
     /**
      * Process paragraph block for non-text prefix lines
-     * 
+     * <p>
      * Will loop through all paragraph processors until no changes are made to the block
-     * 
-     * @param block     paragraph node to process  
-     * @param state     parser state
+     *
+     * @param block paragraph node to process
+     * @param state parser state
      */
     @Override
     public void preProcessBlock(Block block, ParserState state) {
@@ -147,7 +148,7 @@ public class DocumentParser implements ParserState {
                 if (block.getChars().isBlank()) break;
                 processor.preProcessBlock(block, state);
             }
-            
+
             hadChanges = blockPreProcessors.size() > 1 && block.getChars().isEmpty() && !range.equals(block.getChars().getSourceRange());
         }
 
@@ -165,8 +166,8 @@ public class DocumentParser implements ParserState {
         int lineEnd;
         lineNumber = 0;
 
-        documentBlockParser.setDocument(input);
-        inlineParser.setDocument(documentBlockParser.getBlock());
+        documentBlockParser.initializeDocument(options, input);
+        inlineParser.initializeDocument(documentBlockParser.getBlock());
 
         while ((lineBreak = Parsing.findLineBreak(input, lineStart)) != -1) {
             BasedSequence line = input.subSequence(lineStart, lineBreak);
@@ -637,7 +638,7 @@ public class DocumentParser implements ParserState {
     public static InlineParserFactory inlineParserFactory() {
         return new InlineParserFactory() {
             @Override
-            public InlineParser inlineParser(Options options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+            public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
                 return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors);
             }
         };

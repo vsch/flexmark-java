@@ -2,10 +2,7 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.MutableOptions;
-import com.vladsch.flexmark.internal.util.Options;
-import com.vladsch.flexmark.internal.util.PropertyKey;
+import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;
@@ -23,10 +20,10 @@ import java.util.*;
  * </code></pre>
  */
 public class HtmlRenderer {
-    final static public PropertyKey<String> SOFTBREAK = new PropertyKey<>("HTML.SOFT_BREAK", "\n");
-    final static public PropertyKey<Boolean> ESCAPE_HTML = new PropertyKey<>("HTML.ESCAPE_HTML", false);
-    final static public PropertyKey<Boolean> PERCENT_ENCODE_URLS = new PropertyKey<>("HTML.ESCAPE_HTML", false);
-    final static public PropertyKey<Integer> INDENT_SIZE = new PropertyKey<>("HTML.INDENT", 0);
+    final static public DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
+    final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
+    final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
+    final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
 
     static class HtmlRendererOptions {
         public final String softbreak;
@@ -34,21 +31,21 @@ public class HtmlRenderer {
         public final boolean percentEncodeUrls;
         public final int indentSize;
 
-        public HtmlRendererOptions(Options options) {
-            softbreak = options.getOrDefault(SOFTBREAK);
-            escapeHtml = options.getOrDefault(ESCAPE_HTML);
-            percentEncodeUrls = options.getOrDefault(PERCENT_ENCODE_URLS);
-            indentSize = options.getOrDefault(INDENT_SIZE);
+        public HtmlRendererOptions(DataHolder options) {
+            softbreak = options.get(SOFT_BREAK);
+            escapeHtml = options.get(ESCAPE_HTML);
+            percentEncodeUrls = options.get(PERCENT_ENCODE_URLS);
+            indentSize = options.get(INDENT_SIZE);
         }
     }
 
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;
     private final HtmlRendererOptions htmlOptions;
-    private final Options options;
+    private final DataHolder options;
 
     private HtmlRenderer(Builder builder) {
-        this.options = builder.options.getReadOnlyCopy();
+        this.options = new DataSet(builder);
         this.htmlOptions = new HtmlRendererOptions(this.options);
 
         this.attributeProviders = builder.attributeProviders;
@@ -81,7 +78,7 @@ public class HtmlRenderer {
      *
      * @return a builder
      */
-    public static Builder builder(Options options) {
+    public static Builder builder(DataHolder options) {
         return new Builder(options);
     }
 
@@ -105,17 +102,16 @@ public class HtmlRenderer {
     /**
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
-    public static class Builder {
-        public final MutableOptions options;
+    public static class Builder extends MutableDataSet {
         private List<AttributeProvider> attributeProviders = new ArrayList<>();
         private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
 
         public Builder() {
-            options = new MutableOptions();
+            super();
         }
 
-        public Builder(Options options) {
-            this.options = new MutableOptions(options);
+        public Builder(DataHolder options) {
+            super(options);
         }
 
         /**
@@ -137,7 +133,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder softbreak(String softbreak) {
-            this.options.set(SOFTBREAK, softbreak);
+            this.set(SOFT_BREAK, softbreak);
             return this;
         }
 
@@ -148,7 +144,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder indentSize(int indentSize) {
-            this.options.set(INDENT_SIZE, indentSize);
+            this.set(INDENT_SIZE, indentSize);
             return this;
         }
 
@@ -162,7 +158,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder escapeHtml(boolean escapeHtml) {
-            this.options.set(ESCAPE_HTML, escapeHtml);
+            this.set(ESCAPE_HTML, escapeHtml);
             return this;
         }
 
@@ -181,7 +177,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder percentEncodeUrls(boolean percentEncodeUrls) {
-            this.options.set(PERCENT_ENCODE_URLS, percentEncodeUrls);
+            this.set(PERCENT_ENCODE_URLS, percentEncodeUrls);
             return this;
         }
 

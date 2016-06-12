@@ -3,6 +3,7 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.parser.Parser;
 
 public abstract class RefNode extends LinkNode {
     protected BasedSequence textOpeningMarker = SubSequence.NULL;
@@ -111,7 +112,7 @@ public abstract class RefNode extends LinkNode {
     }
     
     public Reference getReferenceNode() {
-        ReferenceRepository repository = getDocument().get(ReferenceRepository.PROPERTY_KEY);
+        ReferenceRepository repository = getDocument().get(Parser.REFERENCES);
         return repository == null ? null : repository.get(repository.normalizeKey(reference));
     }
 

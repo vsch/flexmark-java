@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.internal.util.Options;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -17,10 +17,10 @@ public class TableNodeRenderer implements NodeRenderer {
     private final NodeRendererContext context;
     private final TableParserOptions options;
 
-    public TableNodeRenderer(NodeRendererContext context, Options options) {
+    public TableNodeRenderer(DataHolder options, NodeRendererContext context) {
+        this.options = new TableParserOptions(options);
         this.html = context.getHtmlWriter();
         this.context = context;
-        this.options = new TableParserOptions(options);
     }
 
     @Override

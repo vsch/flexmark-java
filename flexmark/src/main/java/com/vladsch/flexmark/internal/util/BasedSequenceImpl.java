@@ -278,13 +278,33 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public String unescaped() {
+    public String unescape() {
         return Escaping.unescapeString(toString());
     }
 
     @Override
-    public BasedSequence unescaped(ReplacedTextMapper textMapper) {
-        return Escaping.unescapeSequence(this, textMapper);
+    public BasedSequence unescape(ReplacedTextMapper textMapper) {
+        return Escaping.unescape(this, textMapper);
+    }
+
+    @Override
+    public String normalizeEOL() {
+        return Escaping.normalizeEOL(toString());
+    }
+
+    @Override
+    public BasedSequence normalizeEOL(ReplacedTextMapper textMapper) {
+        return Escaping.normalizeEOL(this, textMapper);
+    }
+
+    @Override
+    public String normalizeEndWithEOL() {
+        return Escaping.normalizeEndWithEOL(toString());
+    }
+
+    @Override
+    public BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper) {
+        return Escaping.normalizeEndWithEOL(this, textMapper);
     }
 
     @Override

@@ -54,9 +54,14 @@ public interface BasedSequence extends CharSequence {
     int lastIndexOf(char c, int index);
     int indexOf(String s, int index);
     int lastIndexOf(String s, int index);
-    
-    String unescaped();
-    BasedSequence unescaped(ReplacedTextMapper textMapper);
+
+    String unescape();
+    BasedSequence unescape(ReplacedTextMapper textMapper);
+    String normalizeEOL();
+    BasedSequence normalizeEOL(ReplacedTextMapper textMapper);
+
+    String normalizeEndWithEOL();
+    BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper);
 
     boolean matchChars(String chars, int startIndex);
     boolean matchCharsReversed(String chars, int endIndex);

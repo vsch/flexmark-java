@@ -1,5 +1,5 @@
 ---
-title: Footnotes Extension Spec
+title: Core Extra Test Spec
 author: Vladimir Schneider
 version: 0.1
 date: '2016-06-06'

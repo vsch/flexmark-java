@@ -26,7 +26,7 @@ public class AutolinkPostProcessor implements PostProcessor {
     private void linkify(Text text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper();
-        BasedSequence literal = Escaping.unescapeSequence(original, textMapper);
+        BasedSequence literal = Escaping.unescape(original, textMapper);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
 
         Node lastNode = text;

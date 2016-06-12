@@ -4,10 +4,13 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationBlockParser;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationPostProcessor;
+import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.internal.util.DataKey;
+import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -22,6 +25,8 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public final static DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
+    public final static DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
     final private boolean useLinks;
 
     public AbbreviationExtension(boolean useLinks) {

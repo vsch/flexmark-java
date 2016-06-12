@@ -7,6 +7,7 @@ import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.BlockPreProcessor;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
@@ -100,12 +101,12 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected ArrayList<BasedSequence> currentText;
 
     protected Document document;
-    final protected Options options;
+    final protected DataHolder options;
 
     @Override
-    public void setDocument(Document document) {
+    public void initializeDocument(Document document) {
         this.document = document;
-        this.referenceRepository = document.getOrNew(ReferenceRepository.PROPERTY_KEY);
+        this.referenceRepository = document.get(Parser.REFERENCES);
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -116,14 +117,14 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return currentText;
     }
 
-    public InlineParserImpl(Options options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+    public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
         this.options = options;
         this.delimiterProcessors = delimiterProcessors;
         this.delimiterCharacters = delimiterCharacters;
         this.specialCharacters = specialCharacters;
     }
 
-    public static BitSet calculateDelimiterCharacters(Options options, Set<Character> characters) {
+    public static BitSet calculateDelimiterCharacters(DataHolder options, Set<Character> characters) {
         BitSet bitSet = new BitSet();
         for (Character character : characters) {
             bitSet.set(character);
@@ -131,7 +132,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return bitSet;
     }
 
-    public static BitSet calculateSpecialCharacters(Options options, BitSet delimiterCharacters) {
+    public static BitSet calculateSpecialCharacters(DataHolder options, BitSet delimiterCharacters) {
         BitSet bitSet = new BitSet();
         bitSet.or(delimiterCharacters);
         bitSet.set('\n');
@@ -145,9 +146,13 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return bitSet;
     }
 
-    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(Options options, List<DelimiterProcessor> delimiterProcessors) {
+    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
         Map<Character, DelimiterProcessor> map = new HashMap<>();
-        addDelimiterProcessors(Arrays.<DelimiterProcessor>asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
+        //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
+        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR))
+            addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor()), map);
+        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR))
+            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map); 
         addDelimiterProcessors(delimiterProcessors, map);
         return map;
     }
@@ -275,7 +280,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         Reference reference = new Reference(rawLabel, dest, title);
 
         // NOTE: whether first or last reference is kept is defined by the repository modify behavior setting
-        // for CommonMark this is set in the setDocument() function of the inline parser
+        // for CommonMark this is set in the initializeDocument() function of the inline parser
         referenceRepository.putRawKey(normalizedLabel, reference);
 
         block.insertBefore(reference);
@@ -638,7 +643,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             if (labelLength > 2) {
                 ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
             } else if (!containsBracket) {
-                // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
+                // Empty or missing second label can only be a reference if there's no unescape bracket in it.
                 ref = input.subSequence(opener.index, startIndex);
                 refIsBare = true;
             }

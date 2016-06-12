@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
@@ -11,7 +12,7 @@ public class FootnotePostProcessor implements PostProcessor {
 
     private void initializeNode(Node node) {
         Document document = node.getDocument();
-        footnoteRepository = document.getOrDefault(FootnoteRepository.PROPERTY_KEY);
+        footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
     }
 
     public Node process(Node node) {

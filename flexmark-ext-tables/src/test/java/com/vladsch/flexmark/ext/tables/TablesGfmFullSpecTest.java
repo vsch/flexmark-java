@@ -3,7 +3,8 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.MutableOptions;
+import com.vladsch.flexmark.internal.util.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.FullSpecTestCase;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertThat;
 
 public class TablesGfmFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_tables_gfm_ast_spec.txt";
-    static final MutableOptions OPTIONS = new MutableOptions()
+    static final MutableDataHolder OPTIONS = new MutableDataSet()
             .set(TablesExtension.COLUMN_SPANS, false)
             .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
             .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)

@@ -4,10 +4,13 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteBlockParser;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteNodeRenderer;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnotePostProcessor;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.internal.util.DataKey;
+import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -22,6 +25,9 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public final static DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", FootnoteRepository::new);
+    public final static DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
+
     private FootnoteExtension() {
     }
 

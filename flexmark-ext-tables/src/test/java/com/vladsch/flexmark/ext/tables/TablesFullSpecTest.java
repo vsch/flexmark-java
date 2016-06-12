@@ -3,7 +3,8 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.MutableOptions;
+import com.vladsch.flexmark.internal.util.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.FullSpecTestCase;
@@ -18,8 +19,10 @@ import static org.junit.Assert.assertThat;
 
 public class TablesFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_tables_ast_spec.txt";
-    static final MutableOptions OPTIONS = new MutableOptions()
+
+    static final MutableDataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2);
+
     private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create(OPTIONS));
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder(OPTIONS).extensions(EXTENSIONS).build();

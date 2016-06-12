@@ -164,12 +164,101 @@ public class Escaping {
     /**
      * Replace entities and backslash escapes with literal characters.
      */
-    public static BasedSequence unescapeSequence(BasedSequence s, ReplacedTextMapper textMapper) {
+    public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
         if (BACKSLASH_OR_AMP.matcher(s).find()) {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
         } else {
             return s;
         }
+    }
+
+    /**
+     * Normalize after parsing: this means that any CR at the end of text should be removed it was converted to SoftBreak during parsing
+     * embedded \r and \r\n are converted to \n
+     *
+     * @param input sequence to convert
+     * @return converted sequence
+     */
+    public static String normalizeEndWithEOL(CharSequence input) {
+        return normalizeEOL(input, true);
+    }
+
+    public static String normalizeEOL(CharSequence input) {
+        return normalizeEOL(input, false);
+    }
+
+    public static String normalizeEOL(CharSequence input, boolean endWithEOL) {
+        StringBuilder sb = new StringBuilder(input.length());
+        int iMax = input.length();
+        boolean hadCR = false;
+        boolean hadEOL = false;
+
+        for (int i = 0; i < iMax; i++) {
+            char c = input.charAt(i);
+            if (c == '\r') {
+                hadCR = true;
+            } else if (c == '\n') {
+                sb.append("\n");
+                hadCR = false;
+                hadEOL = true;
+            } else {
+                if (hadCR) sb.append('\n');
+                sb.append(c);
+                hadCR = false;
+                hadEOL = false;
+            }
+        }
+        if (endWithEOL && !hadEOL) sb.append('\n');
+        return sb.toString();
+    }
+
+    public static BasedSequence normalizeEndWithEOL(BasedSequence input, ReplacedTextMapper textMapper) {
+        return normalizeEOL(input, textMapper, true);
+    }
+
+    public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper) {
+        return normalizeEOL(input, textMapper, false);
+    }
+
+    public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper, boolean endWithEOL) {
+        int iMax = input.length();
+        int lastPos = 0;
+        boolean hadCR = false;
+        boolean hadEOL = false;
+
+        for (int i = 0; i < iMax; i++) {
+            char c = input.charAt(i);
+            if (c == '\r') {
+                hadCR = true;
+            } else if (c == '\n') {
+                if (hadCR) {
+                    // previous was CR, need to take preceding chars
+                    if (lastPos < i - 1) textMapper.addOriginalText(input.subSequence(lastPos, i - 1));
+                    lastPos = i;
+                    hadCR = false;
+                    hadEOL = true;
+                }
+            } else {
+                if (hadCR) {
+                    if (lastPos < i - 1) textMapper.addOriginalText(input.subSequence(lastPos, i + 1));
+                    textMapper.addReplacedText(input.subSequence(i - 1, i), SubSequence.EOL);
+                    lastPos = i;
+                    hadCR = false;
+                    hadEOL = false;
+                }
+            }
+        }
+
+        if (!hadCR) {
+            //    // previous was CR, need to take preceding chars
+            //    if (lastPos < iMax - 1) textMapper.addOriginalText(input.subSequence(lastPos, iMax - 1));
+            //    textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
+            //} else {
+            if (lastPos < iMax) textMapper.addOriginalText(input.subSequence(lastPos, iMax));
+            if (!hadEOL && endWithEOL) textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
+        }
+
+        return textMapper.getReplacedSequence();
     }
 
     public static String percentEncodeUrl(String s) {
@@ -206,27 +295,6 @@ public class Escaping {
             }
         }
         if (hadSpace && !trim) sb.append(' ');
-        return sb.toString();
-    }
-
-    public static String normalizeEOL(CharSequence input) {
-        StringBuilder sb = new StringBuilder(input.length());
-        int iMax = input.length();
-        boolean hadCr = false;
-
-        for (int i = 0; i < iMax; i++) {
-            char c = input.charAt(i);
-            if (c == '\r') {
-                //sb.append("\n");
-                //hadCr = true;
-            } else if (c == '\n') {
-                if (!hadCr) sb.append("\n");
-                hadCr = false;
-            } else {
-                sb.append(c);
-                hadCr = false;
-            }
-        }
         return sb.toString();
     }
 

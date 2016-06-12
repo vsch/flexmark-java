@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.tables.internal;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.Options;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.SubSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
@@ -31,7 +31,7 @@ public class TableBlockParser extends AbstractBlockParser {
 
     private final TableParserOptions options;
 
-    private TableBlockParser(Options options) {
+    private TableBlockParser(DataHolder options) {
         this.options = new TableParserOptions(options);
     }
 
@@ -257,7 +257,7 @@ public class TableBlockParser extends AbstractBlockParser {
     public static class Factory extends AbstractBlockParserFactory {
         final private TableParserOptions options;
 
-        public Factory(Options options) {
+        public Factory(DataHolder options) {
             this.options = new TableParserOptions(options);
         }
 

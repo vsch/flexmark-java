@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
@@ -14,8 +15,8 @@ public class DocumentBlockParser extends AbstractBlockParser {
     public DocumentBlockParser() {
     }
 
-    public void setDocument(BasedSequence charSequence) {
-        document = new Document(charSequence);
+    public void initializeDocument(DataHolder options, BasedSequence charSequence) {
+        document = new Document(options, charSequence);
     }
 
     @Override

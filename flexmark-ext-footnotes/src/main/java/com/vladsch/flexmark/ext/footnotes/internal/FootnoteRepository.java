@@ -1,22 +1,17 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
-import com.vladsch.flexmark.internal.util.ModificationBehavior;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
+import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.DataKey;
+import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.NodeRepository;
-import com.vladsch.flexmark.internal.util.PropertyKey;
-import com.vladsch.flexmark.internal.util.ValueFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("WeakerAccess")
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
-    public final static FootnoteRepository NULL = new FootnoteRepository(ModificationBehavior.LOCKED);
-    public final static PropertyKey<FootnoteRepository> PROPERTY_KEY = new PropertyKey<>("FOOTNOTES", NULL, new ValueFactory<FootnoteRepository>() {
-        @Override
-        public FootnoteRepository value() {
-            return new FootnoteRepository(ModificationBehavior.DEFAULT);
-        }
-    });
 
     private ArrayList<FootnoteBlock> referencedFootnoteBlocks = new ArrayList<>();
 
@@ -32,12 +27,17 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
         return referencedFootnoteBlocks;
     }
 
-    public FootnoteRepository(ModificationBehavior modifyBehavior) {
-        super(modifyBehavior);
+    public FootnoteRepository(DataHolder options) {
+        super(options);
     }
 
     @Override
-    public PropertyKey<FootnoteRepository> getPropertyKey() {
-        return PROPERTY_KEY;
+    public DataKey<FootnoteRepository> getDataKey() {
+        return FootnoteExtension.FOOTNOTES;
+    }
+
+    @Override
+    public DataKey<KeepType> getKeepDataKey() {
+        return FootnoteExtension.FOOTNOTES_KEEP;
     }
 }

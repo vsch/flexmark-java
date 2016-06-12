@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
+import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
@@ -18,7 +19,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
     private void initializeNode(Node node) {
         Document document = node.getDocument();
-        AbbreviationRepository abbrRepository = document.getOrDefault(AbbreviationRepository.PROPERTY_KEY);
+        AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {
             abbreviationMap = new HashMap<>();
@@ -61,7 +62,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
     private void linkify(Text node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper();
-        BasedSequence literal = Escaping.unescapeSequence(original, textMapper);
+        BasedSequence literal = Escaping.unescape(original, textMapper);
 
         Matcher m = abbreviations.matcher(literal);
         Node lastNode = node;

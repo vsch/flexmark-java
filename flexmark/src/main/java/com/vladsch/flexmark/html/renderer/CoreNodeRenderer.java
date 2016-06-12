@@ -100,7 +100,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(FencedCodeBlock node) {
-        String literal = node.getContentChars().toString();
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.indexOf(' ');
@@ -110,13 +109,13 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             } else {
                 language = info.subSequence(0, space);
             }
-            html.attr("class", "language-" + language.unescaped());
+            html.attr("class", "language-" + language.unescape());
         }
 
         html.line();
         html.tag("pre");
         html.withAttr().tag("code");
-        html.text(Escaping.normalizeEOL(literal));
+        html.text(node.getContentChars().normalizeEOL());
         html.tag("/code");
         html.tag("/pre");
         html.line();
@@ -126,32 +125,24 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     public void visit(HtmlBlock node) {
         html.line();
         if (context.shouldEscapeHtml()) {
-            html.text(Escaping.normalizeEOL(node.getContentChars()));
+            html.text(node.getContentChars().normalizeEOL());
         } else {
-            html.raw(Escaping.normalizeEOL(node.getContentChars()));
+            html.raw(node.getContentChars().normalizeEOL());
         }
         html.line();
     }
 
     @Override
     public void visit(ThematicBreak node) {
-        //html.line();
-        //html.tag("hr", getAttrs(node), true);
-        //html.line();
         html.withAttr().tagVoidLine("hr");
     }
 
     @Override
     public void visit(IndentedCodeBlock node) {
-        BasedSequence chars = node.getContentChars();
-        String content = chars.trimTailBlankLines().toString();
-        if (!content.endsWith("\n")) {
-            content += "\n";
-        }
         html.line();
         html.tag("pre");
         html.tag("code");
-        html.text(Escaping.normalizeEOL(content));
+        html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
         html.tag("/code");
         html.tag("/pre");
         html.line();
@@ -172,12 +163,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(OrderedList node) {
-        //int start = node.getStartNumber();
-        //Map<String, String> attrs = new LinkedHashMap<>();
-        //if (start != 1) {
-        //    attrs.put("start", String.valueOf(start));
-        //}
-        //renderListBlock(node, "ol", getAttrs(node, attrs));
         int start = node.getStartNumber();
         if (start != 1) html.attr("start", String.valueOf(start));
         html.withAttr().tagIndent("ol", () -> {
@@ -201,7 +186,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Text node) {
-        html.text(Escaping.normalizeEOL(node.getChars().unescaped()));
+        html.text(Escaping.normalizeEOL(node.getChars().unescape()));
     }
 
     @Override
@@ -214,9 +199,9 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     public void visit(HtmlInline node) {
         if (context.shouldEscapeHtml()) {
-            html.text(Escaping.normalizeEOL(node.getChars()));
+            html.text(node.getChars().normalizeEOL());
         } else {
-            html.raw(Escaping.normalizeEOL(node.getChars()));
+            html.raw(node.getChars().normalizeEOL());
         }
     }
 
@@ -237,18 +222,11 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlEntity node) {
-        html.text(node.getChars().unescaped());
+        html.text(node.getChars().unescape());
     }
 
     @Override
     public void visit(AutoLink node) {
-        //Map<String, String> attrs = new LinkedHashMap<>();
-        //String text = node.getText().toString();
-        //String url = context.encodeUrl(text);
-        //attrs.put("href", url);
-        //html.tag("a", getAttrs(node, attrs));
-        //html.text(text);
-        //html.tag("/a");
         String text = node.getText().toString();
         html.attr("href", context.encodeUrl(text))
                 .withAttr()
@@ -259,13 +237,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(MailLink node) {
-        //Map<String, String> attrs = new LinkedHashMap<>();
-        //String url = context.encodeUrl(node.getText().unescaped());
-        //attrs.put("href", "mailto:" + url);
-        //html.tag("a", getAttrs(node, attrs));
-        //html.text(url);
-        //html.tag("/a");
-        String url = context.encodeUrl(node.getText().unescaped());
+        String url = context.encodeUrl(node.getText().unescape());
         html.attr("href", "mailto:" + url)
                 .withAttr()
                 .tag("a")
@@ -275,7 +247,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Image node) {
-        String url = context.encodeUrl(node.getUrl().unescaped());
+        String url = context.encodeUrl(node.getUrl().unescape());
 
         AltTextVisitor altTextVisitor = new AltTextVisitor();
         node.accept(altTextVisitor);
@@ -284,16 +256,16 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         html.attr("src", url);
         html.attr("alt", altText);
         if (node.getTitle().isNotNull()) {
-            html.attr("title", Escaping.unescapeString(node.getTitle().toString()));
+            html.attr("title", node.getTitle().unescape());
         }
         html.withAttr().tagVoid("img");
     }
 
     @Override
     public void visit(Link node) {
-        html.attr("href", context.encodeUrl(node.getUrl().unescaped()));
+        html.attr("href", context.encodeUrl(node.getUrl().unescape()));
         if (node.getTitle().isNotNull()) {
-            html.attr("title", Escaping.unescapeString(node.getTitle().toString()));
+            html.attr("title", node.getTitle().unescape());
         }
         html.withAttr().tag("a");
         visitChildren(node);
@@ -305,18 +277,18 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         Reference reference = node.getReferenceNode();
         if (reference == null) {
             // empty ref, we treat it as text
-            html.text(node.getChars().unescaped());
+            html.text(node.getChars().unescape());
         } else {
             AltTextVisitor altTextVisitor = new AltTextVisitor();
             node.accept(altTextVisitor);
             String altText = altTextVisitor.getAltText();
 
-            html.attr("src", context.encodeUrl(reference.getUrl().unescaped()));
+            html.attr("src", context.encodeUrl(reference.getUrl().unescape()));
             html.attr("alt", altText);
 
             BasedSequence title = reference.getTitle();
             if (title.isNotNull()) {
-                html.attr("title", title.unescaped());
+                html.attr("title", title.unescape());
             }
 
             html.withAttr().tagVoid("img");
@@ -334,15 +306,15 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
             if (!node.isReferenceTextCombined()) {
                 html.raw("[");
-                html.raw(node.getReference().unescaped());
+                html.raw(node.getReference().unescape());
                 html.raw("]");
             }
         } else {
-            String url = context.encodeUrl(reference.getUrl().unescaped());
+            String url = context.encodeUrl(reference.getUrl().unescape());
             html.attr("href", url);
             BasedSequence title = reference.getTitle();
             if (title.isNotNull()) {
-                html.attr("title", title.unescaped());
+                html.attr("title", title.unescape());
             }
             html.withAttr().tag("a");
             visitChildren(node);
@@ -363,23 +335,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     protected void visitChildren(Node parent) {
         context.renderChildren(parent);
-        //Node node = parent.getFirstChild();
-        //while (node != null) {
-        //    Node next = node.getNext();
-        //    context.render(node);
-        //    node = next;
-        //}
     }
-
-    //private void renderListBlock(ListBlock listBlock, String tagName) {
-    //    //html.line();
-    //    //html.tag(tagName, attributes);
-    //    //html.line();
-    //    //visitChildren(listBlock);
-    //    //html.line();
-    //    //html.tag('/' + tagName);
-    //    //html.line();
-    //}
 
     private boolean isInTightList(Paragraph node) {
         Node parent = node.getParent();
@@ -407,7 +363,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     private static class AltTextVisitor extends AbstractVisitor {
-
         private final StringBuilder sb = new StringBuilder();
 
         String getAltText() {
@@ -421,7 +376,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
         @Override
         public void visit(HtmlEntity node) {
-            sb.append(Escaping.unescapeString(node.getChars().toString()));
+            sb.append(node.getChars().unescape());
         }
 
         @Override

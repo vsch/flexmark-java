@@ -44,7 +44,7 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     private void renderAbbreviation(Abbreviation node) {
-        String text = node.getChars().unescaped();
+        String text = node.getChars().unescape();
         String abbreviation = node.getAbbreviation();
         String tag;
         

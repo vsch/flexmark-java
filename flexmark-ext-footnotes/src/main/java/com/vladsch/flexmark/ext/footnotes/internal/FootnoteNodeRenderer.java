@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
@@ -54,7 +55,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             Document document = node.getDocument();
-            FootnoteRepository footnoteRepository = document.getOrDefault(FootnoteRepository.PROPERTY_KEY);
+            FootnoteRepository footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
 
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
                 html.attr("class", "footnotes").withAttr().tagIndent("div", () -> {

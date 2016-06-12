@@ -4,7 +4,7 @@ Version History
 0.1.2
 -----
 
-- Add `MutableOptions` to be used as a building set for various Parser/Renderer options that all
+- Add `MutableData` to be used as a building set for various Parser/Renderer options that all
   extensions can hook into using `PropertyKey` instances. Moved all builder options to use this
   mechanism. Now can set options for all extensions in one place and the extensions can query
   these to get their configuration parameters.
@@ -12,7 +12,11 @@ Version History
 - Add `flexmark-ext-tables` to implement tables per pegdown with GFM limitations configurable in
   options.
 
-- Add spanning columns parsing
+- Add spanning columns parsing for flexmark-ext-tables
+
+- Make all core processors optional to allow disabling core functionality. 
+
+- Make all core delimiters optional to allow disabling core functionality. 
 
 0.1.1
 -----

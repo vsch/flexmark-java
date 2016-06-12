@@ -1,25 +1,23 @@
 package com.vladsch.flexmark.internal.util;
 
 import com.vladsch.flexmark.node.Reference;
+import com.vladsch.flexmark.parser.Parser;
 
 import java.util.Locale;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
-    public final static ReferenceRepository NULL = new ReferenceRepository(ModificationBehavior.LOCKED);
-    public final static PropertyKey<ReferenceRepository> PROPERTY_KEY = new PropertyKey<>("REFERENCES", NULL, new ValueFactory<ReferenceRepository>() {
-        @Override
-        public ReferenceRepository value() {
-            return new ReferenceRepository(ModificationBehavior.DEFAULT);
-        }
-    });
-
-    public ReferenceRepository(ModificationBehavior onDuplicate) {
-        super(onDuplicate);
+    public ReferenceRepository(DataHolder options) {
+        super(options);
     }
 
     @Override
-    public PropertyKey<ReferenceRepository> getPropertyKey() {
-        return PROPERTY_KEY;
+    public DataKey<ReferenceRepository> getDataKey() {
+        return Parser.REFERENCES;
+    }
+
+    @Override
+    public DataKey<KeepType> getKeepDataKey() {
+        return Parser.REFERENCES_KEEP;
     }
 
     @Override

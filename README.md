@@ -6,28 +6,32 @@ source position references for all elements in the source and easier JetBrains O
 generation.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
-[pegdown] has a great feature set but its speed in general is not gread and in the case of
-pathological input either hangs or practically hangs during parsing.
-
-My reasons for choosing [commonmark-java] as the parser are detailed in
-[Pegdown - Achilles heel of the Markdown Navigator plugin](http://vladsch.com/blog/15). Now that
-I have reworked the core and added a few extensions I am extremely satisfied with my choice.
-[commonmark-java] is an excellent library to use and a pleasure to work with its source.
+[pegdown] has a great feature set but its speed in general is not great and for pathological
+input either hangs or practically hangs during parsing.
 
 [commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
 The goal was to ensure that adding source position tracking in the AST would not change the ease
-of parsing and generating the AST.
+of parsing and generating the AST more than absolutely necessary.
 
-The other goal was to improve the ability of extensions to modify the behaviour of the parser so
-that any dialect of markdown could be implemented through the extension mechanism.
+Reasons for choosing [commonmark-java] as the parser are detailed in
+[Pegdown - Achilles heel of the Markdown Navigator plugin]. Now that I have reworked the core
+and added a few extensions I am extremely satisfied with my choice.
 
-This is a work in progress. No attempt is made to keep backward compatibility to the original
-project since it does not have a mechanism for full source references nor an AST which can be
-used to re-create the source. It is missing some flexibility in its extension mechanism and is
-missing non-display elements from its AST.
+Another goal was to improve the ability of extensions to modify the behaviour of the parser so
+that any dialect of markdown could be implemented through the extension mechanism. This included
+adding an easily extensible options mechanism that would allow setting of all options in one
+place and having the parser, renderer and extensions use these options to modify behavior,
+including disabling some core block parsers.
+
+This is a work in progress with many API changes.
+
+No attempt is made to keep backward compatibility to the original project.
 
 Progress so far
 ---------------
+
+- Add options pass through from `Parser.builder()` and `HtmlRenderer.builder()` all the way to
+  document and extensions factories. 
 
 - Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated
   HTML document.
@@ -305,4 +309,5 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
+[Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 

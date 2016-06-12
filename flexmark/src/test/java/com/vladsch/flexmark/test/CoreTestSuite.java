@@ -36,6 +36,8 @@ import org.junit.runners.Suite;
         SpecCoreTest.class,
         FullExtraSpecTest.class,
         ExtraSpecTest.class,
+        FullKeepFirstSpecTest.class,
+        FullKeepLastSpecTest.class,
         SpecialInputTest.class,
         SubstringTest.class,
         UsageExampleTest.class

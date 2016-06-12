@@ -7,14 +7,14 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.internal.util.Options;
-import com.vladsch.flexmark.internal.util.PropertyKey;
+import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
  * Extension for GFM tables using "|" pipes (GitHub Flavored Markdown).
  * <p>
- * Create it with {@link #create(Options)} and then configure it on the builders
+ * Create it with {@link #create(DataHolder options)} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
@@ -23,18 +23,18 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final static public PropertyKey<Integer> MAX_HEADER_ROWS = new PropertyKey<>("TABLE.MAX_HEADER_ROWS", Integer.MAX_VALUE);
-    final static public PropertyKey<Boolean> APPEND_MISSING_COLUMNS = new PropertyKey<>("TABLE.APPEND_MISSING_COLUMNS", false);
-    final static public PropertyKey<Boolean> DISCARD_EXTRA_COLUMNS = new PropertyKey<>("TABLE.DISCARD_EXTRA_COLUMNS", false);
-    final static public PropertyKey<Boolean> COLUMN_SPANS = new PropertyKey<>("TABLE.COLUMN_SPANS", true);
+    final static public DataKey<Integer> MAX_HEADER_ROWS = new DataKey<>("TABLE.MAX_HEADER_ROWS", Integer.MAX_VALUE);
+    final static public DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<>("TABLE.APPEND_MISSING_COLUMNS", false);
+    final static public DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<>("TABLE.DISCARD_EXTRA_COLUMNS", false);
+    final static public DataKey<Boolean> COLUMN_SPANS = new DataKey<>("TABLE.COLUMN_SPANS", true);
 
-    private final Options options;
+    private final DataHolder options;
 
-    public TablesExtension(Options options) {
+    public TablesExtension(DataHolder options) {
         this.options = options;
     }
 
-    public static Extension create(Options options) {
+    public static Extension create(DataHolder options) {
         return new TablesExtension(options);
     }
 
@@ -48,7 +48,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
             @Override
             public NodeRenderer create(NodeRendererContext context) {
-                return new TableNodeRenderer(context, options);
+                return new TableNodeRenderer(options, context);
             }
         });
     }

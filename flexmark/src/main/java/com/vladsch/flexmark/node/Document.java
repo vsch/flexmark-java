@@ -1,57 +1,33 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.*;
 
-import java.util.List;
 import java.util.Map;
 
-public class Document extends Block implements MutablePropertyHolder {
-    final private MutablePropertyHolderImpl propertyHolder = new MutablePropertyHolderImpl();
+public class Document extends Block implements MutableDataHolder {
+    final private MutableDataSet dataSet;
 
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
     }
 
-    public Document() {
-
-    }
-
-    public Document(BasedSequence chars) {
+    public Document(DataHolder options, BasedSequence chars) {
         super(chars);
-    }
-
-    public Document(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
-    }
-
-    public Document(BlockContent blockContent) {
-        super(blockContent);
+        dataSet = new MutableDataSet(options);
     }
 
     @Override
-    public PropertyHolder getReadOnlyCopy() {
-        return new PropertyHolderImpl(this);
-    }
+    public Map<DataKey, Object> getAll() {return dataSet.getAll();}
 
     @Override
-    public Map<PropertyKey, Object> getProperties() {return propertyHolder.getProperties();}
+    public boolean contains(DataKey key) {return dataSet.contains(key);}
 
     @Override
-    public boolean contains(PropertyKey key) {return propertyHolder.contains(key);}
+    public <T> T get(DataKey<T> key) {return dataSet.get(key);}
 
     @Override
-    public <T> T get(PropertyKey<T> key) {return propertyHolder.get(key);}
-
-    @Override
-    public <T> T getOrDefault(PropertyKey<T> key) {return propertyHolder.getOrDefault(key);}
-
-    @Override
-    public <T> T getOrNew(PropertyKey<T> key) {return propertyHolder.getOrNew(key);}
-
-    @Override
-    public <T> MutablePropertyHolder set(PropertyKey<T> key, T value) { return propertyHolder.set(key, value);}
+    public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
 
     @Override
     public void accept(Visitor visitor) {

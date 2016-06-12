@@ -10,7 +10,7 @@ import com.vladsch.flexmark.node.Node;
  */
 public interface InlineParser {
 
-    void setDocument(Document document);
+    void initializeDocument(Document document);
 
     /**
      * @param input the content to parse as inline

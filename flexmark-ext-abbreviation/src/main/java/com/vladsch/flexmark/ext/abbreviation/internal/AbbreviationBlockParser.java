@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
+import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -32,7 +33,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         // add it to the map
-        AbbreviationRepository abbreviationMap = parserState.getPropertyHolder().getOrNew(AbbreviationRepository.PROPERTY_KEY);
+        AbbreviationRepository abbreviationMap = parserState.getProperties().get(AbbreviationExtension.ABBREVIATIONS);
         abbreviationMap.put(abbreviationMap.normalizeKey(block.getText()), block);
     }
 

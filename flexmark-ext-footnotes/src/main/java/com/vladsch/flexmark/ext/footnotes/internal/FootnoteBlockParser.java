@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
@@ -58,7 +59,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         // add it to the map
-        FootnoteRepository footnoteMap = parserState.getPropertyHolder().getOrNew(FootnoteRepository.PROPERTY_KEY);
+        FootnoteRepository footnoteMap = parserState.getProperties().get(FootnoteExtension.FOOTNOTES);
         footnoteMap.put(footnoteMap.normalizeKey(block.getText()), block);
     }
 

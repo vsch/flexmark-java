@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.internal.util.Options;
+import com.vladsch.flexmark.internal.util.DataHolder;
 
 class TableParserOptions {
     final public int maxHeaderRows;
@@ -9,11 +9,11 @@ class TableParserOptions {
     final public boolean discardExtraColumns;
     final public boolean columnSpans;
 
-    TableParserOptions(Options options) {
-        this.maxHeaderRows = options.getOrDefault(TablesExtension.MAX_HEADER_ROWS);
-        this.appendMissingColumns = options.getOrDefault(TablesExtension.APPEND_MISSING_COLUMNS);
-        this.discardExtraColumns = options.getOrDefault(TablesExtension.DISCARD_EXTRA_COLUMNS);
-        this.columnSpans = options.getOrDefault(TablesExtension.COLUMN_SPANS);
+    TableParserOptions(DataHolder options) {
+        this.maxHeaderRows = options.get(TablesExtension.MAX_HEADER_ROWS);
+        this.appendMissingColumns = options.get(TablesExtension.APPEND_MISSING_COLUMNS);
+        this.discardExtraColumns = options.get(TablesExtension.DISCARD_EXTRA_COLUMNS);
+        this.columnSpans = options.get(TablesExtension.COLUMN_SPANS);
     }
 
     TableParserOptions(TableParserOptions other) {
