@@ -11468,7 +11468,7 @@ Document[0, 21]
 .
 Document[0, 55]
   Paragraph[0, 13]
-    ImageRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
         Text[7, 10]
@@ -11520,7 +11520,7 @@ content is rendered, without formatting.
 .
 Document[0, 56]
   Paragraph[0, 15]
-    ImageRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
         Text[7, 10]
@@ -11636,7 +11636,7 @@ Collapsed:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[1, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5]
   Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[22, 23, """] title:[23, 28, "title"] titleClose:[28, 29, """]
 ````````````````````````````````
@@ -11651,7 +11651,7 @@ Document[0, 30]
 .
 Document[0, 42]
   Paragraph[0, 15]
-    ImageRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
         Text[3, 6]
       Text[7, 11]
@@ -11670,7 +11670,7 @@ The labels are case-insensitive:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[1, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
       Text[2, 5]
   Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[22, 23, """] title:[23, 28, "title"] titleClose:[28, 29, """]
 ````````````````````````````````
@@ -11690,7 +11690,7 @@ between the two sets of brackets:
 .
 Document[0, 32]
   Paragraph[0, 11]
-    ImageRef[1, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5]
     SoftLineBreak[7, 8]
     LinkRef[8, 10] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[8, 9, "["] reference:[9, 9] referenceClose:[9, 10, "]"]
@@ -11709,7 +11709,7 @@ Shortcut:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[1, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5]
   Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[20, 21, """] title:[21, 26, "title"] titleClose:[26, 27, """]
 ````````````````````````````````
@@ -11724,7 +11724,7 @@ Document[0, 28]
 .
 Document[0, 40]
   Paragraph[0, 13]
-    ImageRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
         Text[3, 6]
       Text[7, 11]
@@ -11761,7 +11761,7 @@ The link labels are case-insensitive:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[1, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
       Text[2, 5]
   Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[20, 21, """] title:[21, 26, "title"] titleClose:[26, 27, """]
 ````````````````````````````````

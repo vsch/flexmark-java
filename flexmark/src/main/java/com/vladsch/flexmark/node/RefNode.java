@@ -83,8 +83,9 @@ public abstract class RefNode extends LinkNode {
 
     public void setReferenceChars(BasedSequence referenceChars) {
         int referenceCharsLength = referenceChars.length();
-        this.referenceOpeningMarker = referenceChars.subSequence(0, 1);
-        this.reference = referenceChars.subSequence(1, referenceCharsLength - 1).trim();
+        int openingOffset = referenceChars.charAt(0) == '!' ? 2 : 1;
+        this.referenceOpeningMarker = referenceChars.subSequence(0, openingOffset);
+        this.reference = referenceChars.subSequence(openingOffset, referenceCharsLength - 1).trim();
         this.referenceClosingMarker = referenceChars.subSequence(referenceCharsLength - 1, referenceCharsLength);
     }
 

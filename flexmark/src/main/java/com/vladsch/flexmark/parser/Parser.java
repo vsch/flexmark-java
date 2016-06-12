@@ -34,6 +34,8 @@ public class Parser {
     final static public DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final static public DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
     final static public DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
+    final static public DataKey<Boolean> WIKI_LINKS = new DataKey<>("WIKI_LINKS", false);
+    final static public DataKey<Boolean> WIKI_LINKS_LINK_FIRST = new DataKey<>("WIKI_LINKS_LINK_FIRST", false);
     public final static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
     public final static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
 

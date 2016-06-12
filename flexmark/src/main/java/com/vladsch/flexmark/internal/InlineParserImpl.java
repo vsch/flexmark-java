@@ -152,7 +152,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR))
             addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor()), map);
         if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR))
-            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map); 
+            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map);
         addDelimiterProcessors(delimiterProcessors, map);
         return map;
     }
@@ -617,6 +617,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         BasedSequence linkClosingMarker = null;
         String label = null;
         Reference reference = null;
+        boolean isWiki = false;
 
         // Inline link?
         if (peek() == '(') {
@@ -643,15 +644,19 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             if (labelLength > 2) {
                 ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
             } else if (!containsBracket) {
-                // Empty or missing second label can only be a reference if there's no unescape bracket in it.
-                ref = input.subSequence(opener.index, startIndex);
+                // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
+                if (opener.delimiterChar == '!') {
+                    // this one has index off by one for the leading !
+                    ref = input.subSequence(opener.index - 1, startIndex);
+                } else {
+                    ref = input.subSequence(opener.index, startIndex);
+                }
                 refIsBare = true;
             }
 
             if (ref != null) {
                 String normalizedLabel = Escaping.normalizeReference(ref);
                 if (referenceRepository.containsKey(normalizedLabel)) {
-                    reference = referenceRepository.get(normalizedLabel);
                     isLinkOrImage = true;
                 } else if (opener.previous == null) {
                     // it is the outermost ref and is bare, if not bare then we treat
@@ -669,6 +674,12 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                     } else {
                         isLinkOrImage = true;
                     }
+                } else if (refIsBare && opener.previous.delimiterChar == '[' && opener.previous.previous == null) {
+                    // outermost Wiki Link
+                    if (options.get(Parser.WIKI_LINKS)) {
+                        isWiki = true;
+                        isLinkOrImage = true;
+                    }
                 }
             }
         }
@@ -676,7 +687,10 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         if (isLinkOrImage) {
             // If we got here, open is a potential opener
             boolean isImage = opener.delimiterChar == '!';
-            Node linkOrImage = ref != null ? isImage ? new ImageRef() : new LinkRef() : isImage ? new Image() : new Link();
+            if (isImage && ref != null) {
+                int tmp = 0;
+            }
+            Node linkOrImage = isWiki ? new WikiLink(options.get(Parser.WIKI_LINKS)) : (ref != null ? (isImage ? new ImageRef() : new LinkRef()) : (isImage ? new Image() : new Link()));
 
             // Flush text now. We don't need to worry about combining it with adjacent text nodes, as we'll wrap it in a
             // link or image node.
@@ -698,12 +712,16 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
                 }
-            } else {
+            } else if (linkOrImage instanceof InlineLinkNode) {
                 // set dest and title
                 InlineLinkNode inlineLinkNode = (InlineLinkNode) linkOrImage;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
                 inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
+            } else {
+                WikiLink wikiLink = (WikiLink) linkOrImage;
+                // parse out the separator if it is in the 
+                wikiLink.setLinkChars(ref);
             }
             linkOrImage.setCharsFromContent();
 
