@@ -15,8 +15,8 @@ public class Code extends DelimitedNodeImpl {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
     }
 
     @Override

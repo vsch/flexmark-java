@@ -29,24 +29,20 @@ class AstVisitor extends AbstractVisitor {
     }
 
     public void visitNode(Node node) {
-        visitNode(node, node.getAstExtra());
-    }
-
-    public void visitNode(Node node, String appendNodeData) {
         appendIndent();
-        output.append(node.getClass().getName().substring(node.getClass().getPackage().getName().length() + 1))
-                .append("[").append(node.getStartOffset()).append(", ").append(node.getEndOffset()).append("]")
-                .append(appendNodeData)
-                .append(EOL);
-
+        output.append(node.getClass().getName().substring(node.getClass().getPackage().getName().length() + 1));
+        output.append("[").append(node.getStartOffset()).append(", ").append(node.getEndOffset()).append("]");
+        node.getAstExtra(output);
+        output.append(EOL);
         indent++;
+
         try {
             super.visitChildren(node);
         } finally {
             indent--;
         }
     }
-    
+
     @Override
     public void visit(BlockQuote node) {
         visitNode(node);
@@ -184,9 +180,7 @@ class AstVisitor extends AbstractVisitor {
 
     @Override
     public void visit(AutoLink node) {
-        String extra = " open:[" + node.getOpeningMarker().getStartOffset() + ", " + node.getOpeningMarker().getEndOffset() + "]";
-        extra += " close:[" + node.getClosingMarker().getStartOffset() + ", " + node.getClosingMarker().getEndOffset() + "]";
-        visitNode(node, extra);
+        visitNode(node);
     }
 
     @Override

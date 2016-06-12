@@ -15,11 +15,11 @@ public class AbbreviationBlock extends CustomBlock {
     protected BasedSequence abbreviation = SubSequence.NULL;
 
     @Override
-    public String getAstExtra() {
-        return segmentSpan(openingMarker, "open")
-                + segmentSpan(text, "text")
-                + segmentSpan(closingMarker, "close")
-                + segmentSpan(abbreviation, "abbreviation");
+    public void getAstExtra(StringBuilder out) {
+        segmentSpan(out, openingMarker, "open");
+        segmentSpan(out, text, "text");
+        segmentSpan(out, closingMarker, "close");
+        segmentSpan(out, abbreviation, "abbreviation");
     }
 
     @Override

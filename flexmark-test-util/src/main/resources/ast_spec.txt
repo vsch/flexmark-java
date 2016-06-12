@@ -2139,7 +2139,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[0, 3] open:[0, 3, "```"] info:[0, 0] content:[3, 3] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] info:[0, 0] content:[4, 4] lines[3] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2155,7 +2155,7 @@ aaa
 </code></pre>
 .
 Document[0, 15]
-  FencedCodeBlock[0, 5] open:[0, 5, "`````"] info:[0, 0] content:[6, 15] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 6] open:[0, 5, "`````"] info:[0, 0] content:[6, 15] lines[3] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2172,8 +2172,8 @@ bbb
 <p>bbb</p>
 .
 Document[0, 17]
-  BlockQuote[0, 5] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 5] open:[2, 5, "```"] info:[0, 0] content:[8, 12] lines[3] close:[0, 0]
+  BlockQuote[0, 6] marker:[0, 1, ">"]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] info:[0, 0] content:[8, 12] lines[3] close:[0, 0]
   Paragraph[13, 17]
     Text[13, 16]
 ````````````````````````````````
@@ -2320,7 +2320,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 3] open:[0, 3, "```"] info:[0, 0] content:[4, 16] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] info:[0, 0] content:[4, 16] lines[3] close:[0, 0]
 ````````````````````````````````
 
 
@@ -2352,7 +2352,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 6] open:[0, 6, "~~~~~~"] info:[0, 0] content:[7, 18] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 7] open:[0, 6, "~~~~~~"] info:[0, 0] content:[7, 18] lines[3] close:[0, 0]
 ````````````````````````````````
 
 
@@ -4345,11 +4345,11 @@ foo
 <pre><code></code></pre>
 .
 Document[0, 14]
-  BlockQuote[0, 5] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 5] open:[2, 5, "```"] info:[0, 0] content:[5, 5] lines[3] close:[0, 0]
+  BlockQuote[0, 6] marker:[0, 1, ">"]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] info:[0, 0] content:[6, 6] lines[3] close:[0, 0]
   Paragraph[6, 10]
     Text[6, 9]
-  FencedCodeBlock[10, 13] open:[10, 13, "```"] info:[0, 0] content:[13, 13] lines[3] close:[0, 0]
+  FencedCodeBlock[10, 14] open:[10, 13, "```"] info:[0, 0] content:[14, 14] lines[3] close:[0, 0]
 ````````````````````````````````
 
 
@@ -7327,7 +7327,7 @@ Document[0, 13]
 .
 Document[0, 29]
   Paragraph[0, 29]
-    AutoLink[0, 28] open:[0, 1] close:[27, 28]
+    AutoLink[0, 28] textOpen:[0, 1, "<"] text:[1, 27, "http://example.com?find=\*"] textClose:[27, 28, ">"]
 ````````````````````````````````
 
 
@@ -7412,25 +7412,25 @@ references and their corresponding code points.
 .
 Document[0, 110]
   Paragraph[0, 110]
-    HtmlEntity[0, 6]
+    HtmlEntity[0, 6] "&nbsp;"
     Text[6, 7]
-    HtmlEntity[7, 12]
+    HtmlEntity[7, 12] "&amp;"
     Text[12, 13]
-    HtmlEntity[13, 19]
+    HtmlEntity[13, 19] "&copy;"
     Text[19, 20]
-    HtmlEntity[20, 27]
+    HtmlEntity[20, 27] "&AElig;"
     Text[27, 28]
-    HtmlEntity[28, 36]
+    HtmlEntity[28, 36] "&Dcaron;"
     SoftLineBreak[36, 37]
-    HtmlEntity[37, 45]
+    HtmlEntity[37, 45] "&frac34;"
     Text[45, 46]
-    HtmlEntity[46, 60]
+    HtmlEntity[46, 60] "&HilbertSpace;"
     Text[60, 61]
-    HtmlEntity[61, 76]
+    HtmlEntity[61, 76] "&DifferentialD;"
     SoftLineBreak[76, 77]
-    HtmlEntity[77, 103]
+    HtmlEntity[77, 103] "&ClockwiseContourIntegral;"
     Text[103, 104]
-    HtmlEntity[104, 109]
+    HtmlEntity[104, 109] "&ngE;"
 ````````````````````````````````
 
 
@@ -7449,15 +7449,15 @@ the code point `U+0000` will also be replaced by `U+FFFD`.
 .
 Document[0, 38]
   Paragraph[0, 38]
-    HtmlEntity[0, 5]
+    HtmlEntity[0, 5] "&#35;"
     Text[5, 6]
-    HtmlEntity[6, 13]
+    HtmlEntity[6, 13] "&#1234;"
     Text[13, 14]
-    HtmlEntity[14, 20]
+    HtmlEntity[14, 20] "&#992;"
     Text[20, 21]
-    HtmlEntity[21, 32]
+    HtmlEntity[21, 32] "&#98765432;"
     Text[32, 33]
-    HtmlEntity[33, 37]
+    HtmlEntity[33, 37] "&#0;"
 ````````````````````````````````
 
 
@@ -7474,11 +7474,11 @@ time specified with a hexadecimal numeral instead of decimal).
 .
 Document[0, 23]
   Paragraph[0, 23]
-    HtmlEntity[0, 6]
+    HtmlEntity[0, 6] "&#X22;"
     Text[6, 7]
-    HtmlEntity[7, 14]
+    HtmlEntity[7, 14] "&#XD06;"
     Text[14, 15]
-    HtmlEntity[15, 22]
+    HtmlEntity[15, 22] "&#xcab;"
 ````````````````````````````````
 
 
@@ -7495,7 +7495,7 @@ Document[0, 44]
   Paragraph[0, 44]
     Text[0, 18]
     SoftLineBreak[18, 19]
-    HtmlEntity[19, 37]
+    HtmlEntity[19, 37] "&ThisIsNotDefined;"
     Text[37, 43]
 ````````````````````````````````
 
@@ -7525,7 +7525,7 @@ recognized as entity references either:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    HtmlEntity[0, 14]
+    HtmlEntity[0, 14] "&MadeUpEntity;"
 ````````````````````````````````
 
 
@@ -7818,7 +7818,7 @@ But this is an autolink:
 .
 Document[0, 23]
   Paragraph[0, 23]
-    AutoLink[0, 21] open:[0, 1] close:[20, 21]
+    AutoLink[0, 21] textOpen:[0, 1, "<"] text:[1, 20, "http://foo.bar.`baz"] textClose:[20, 21, ">"]
     Text[21, 22]
 ````````````````````````````````
 
@@ -9906,7 +9906,7 @@ Document[0, 8]
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3]
-    AutoLink[3, 25] open:[3, 4] close:[24, 25]
+    AutoLink[3, 25] textOpen:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=**"] textClose:[24, 25, ">"]
 ````````````````````````````````
 
 
@@ -9918,7 +9918,7 @@ __a<http://foo.bar/?q=__>
 Document[0, 26]
   Paragraph[0, 26]
     Text[0, 3]
-    AutoLink[3, 25] open:[3, 4] close:[24, 25]
+    AutoLink[3, 25] textOpen:[3, 4, "<"] text:[4, 24, "http://foo.bar/?q=__"] textClose:[24, 25, ">"]
 ````````````````````````````````
 
 
@@ -10583,7 +10583,7 @@ Document[0, 14]
 Document[0, 40]
   Paragraph[0, 40]
     Text[0, 4]
-    AutoLink[4, 39] open:[4, 5] close:[38, 39]
+    AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=](uri)"] textClose:[38, 39, ">"]
 ````````````````````````````````
 
 
@@ -10827,7 +10827,7 @@ Document[0, 26]
 Document[0, 53]
   Paragraph[0, 40]
     Text[0, 4]
-    AutoLink[4, 39] open:[4, 5] close:[38, 39]
+    AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=][ref]"] textClose:[38, 39, ">"]
   Reference[41, 52] refOpen:[41, 42, "["] ref:[42, 45, "ref"] refClose:[45, 47, "]:"] urlOpen:[0, 0] url:[48, 52, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
@@ -11834,7 +11834,7 @@ Here are some valid autolinks:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] open:[0, 1] close:[19, 20]
+    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "http://foo.bar.baz"] textClose:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -11845,7 +11845,7 @@ Document[0, 21]
 .
 Document[0, 48]
   Paragraph[0, 48]
-    AutoLink[0, 47] open:[0, 1] close:[46, 47]
+    AutoLink[0, 47] textOpen:[0, 1, "<"] text:[1, 46, "http://foo.bar.baz/test?q=hello&id=22&boolean"] textClose:[46, 47, ">"]
 ````````````````````````````````
 
 
@@ -11856,7 +11856,7 @@ Document[0, 48]
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24] open:[0, 1] close:[23, 24]
+    AutoLink[0, 24] textOpen:[0, 1, "<"] text:[1, 23, "irc://foo.bar:2233/baz"] textClose:[23, 24, ">"]
 ````````````````````````````````
 
 
@@ -11869,7 +11869,7 @@ Uppercase is also fine:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] open:[0, 1] close:[19, 20]
+    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "MAILTO:FOO@BAR.BAZ"] textClose:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -11885,7 +11885,7 @@ with their syntax:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    AutoLink[0, 9] open:[0, 1] close:[8, 9]
+    AutoLink[0, 9] textOpen:[0, 1, "<"] text:[1, 8, "a+b+c:d"] textClose:[8, 9, ">"]
 ````````````````````````````````
 
 
@@ -11896,7 +11896,7 @@ Document[0, 10]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    AutoLink[0, 26] open:[0, 1] close:[25, 26]
+    AutoLink[0, 26] textOpen:[0, 1, "<"] text:[1, 25, "made-up-scheme://foo,bar"] textClose:[25, 26, ">"]
 ````````````````````````````````
 
 
@@ -11907,7 +11907,7 @@ Document[0, 27]
 .
 Document[0, 13]
   Paragraph[0, 13]
-    AutoLink[0, 12] open:[0, 1] close:[11, 12]
+    AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://../"] textClose:[11, 12, ">"]
 ````````````````````````````````
 
 
@@ -11918,7 +11918,7 @@ Document[0, 13]
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] open:[0, 1] close:[19, 20]
+    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "localhost:5001/foo"] textClose:[19, 20, ">"]
 ````````````````````````````````
 
 
@@ -11944,7 +11944,7 @@ Backslash-escapes do not work inside autolinks:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    AutoLink[0, 24] open:[0, 1] close:[23, 24]
+    AutoLink[0, 24] textOpen:[0, 1, "<"] text:[1, 23, "http://example.com/\[\"] textClose:[23, 24, ">"]
 ````````````````````````````````
 
 

@@ -20,8 +20,8 @@ public class Emoji extends CustomNode implements DelimitedNode {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     public Emoji() {

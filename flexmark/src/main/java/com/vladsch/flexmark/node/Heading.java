@@ -13,8 +13,8 @@ public class Heading extends Block {
     protected BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     @Override

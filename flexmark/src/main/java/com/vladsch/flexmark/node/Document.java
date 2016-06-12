@@ -1,16 +1,13 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.PropertyHolder;
-import com.vladsch.flexmark.internal.util.PropertyHolderImpl;
-import com.vladsch.flexmark.internal.util.PropertyKey;
+import com.vladsch.flexmark.internal.util.*;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Document extends Block implements PropertyHolder {
-    final private PropertyHolderImpl propertyHolder = new PropertyHolderImpl();
+public class Document extends Block implements MutablePropertyHolder {
+    final private MutablePropertyHolderImpl propertyHolder = new MutablePropertyHolderImpl();
 
     @Override
     public BasedSequence[] getSegments() {
@@ -34,22 +31,27 @@ public class Document extends Block implements PropertyHolder {
     }
 
     @Override
-    public HashMap<PropertyKey, Object> getProperties() {return propertyHolder.getProperties();}
+    public PropertyHolder getReadOnlyCopy() {
+        return new PropertyHolderImpl(this);
+    }
+
+    @Override
+    public Map<PropertyKey, Object> getProperties() {return propertyHolder.getProperties();}
 
     @Override
     public boolean contains(PropertyKey key) {return propertyHolder.contains(key);}
 
     @Override
-    public <T> T getValue(PropertyKey<T> key) {return propertyHolder.getValue(key);}
+    public <T> T get(PropertyKey<T> key) {return propertyHolder.get(key);}
 
     @Override
-    public <T> T getValueOrDefault(PropertyKey<T> key) {return propertyHolder.getValueOrDefault(key);}
+    public <T> T getOrDefault(PropertyKey<T> key) {return propertyHolder.getOrDefault(key);}
 
     @Override
-    public <T> T getValueOrNew(PropertyKey<T> key) {return propertyHolder.getValueOrNew(key);}
+    public <T> T getOrNew(PropertyKey<T> key) {return propertyHolder.getOrNew(key);}
 
     @Override
-    public <T> void setProperty(PropertyKey<T> key, T value) {propertyHolder.setProperty(key, value);}
+    public <T> MutablePropertyHolder set(PropertyKey<T> key, T value) { return propertyHolder.set(key, value);}
 
     @Override
     public void accept(Visitor visitor) {

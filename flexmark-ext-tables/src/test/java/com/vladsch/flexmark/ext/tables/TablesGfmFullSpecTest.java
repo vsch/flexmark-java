@@ -16,10 +16,14 @@ import java.util.Set;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-public class TablesFullSpecTest extends FullSpecTestCase {
-    static final String SPEC_RESOURCE = "/ext_tables_ast_spec.txt";
+public class TablesGfmFullSpecTest extends FullSpecTestCase {
+    static final String SPEC_RESOURCE = "/ext_tables_gfm_ast_spec.txt";
     static final MutableOptions OPTIONS = new MutableOptions()
+            .set(TablesExtension.COLUMN_SPANS, false)
+            .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
+            .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
             .set(HtmlRenderer.INDENT_SIZE, 2);
+
     private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create(OPTIONS));
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder(OPTIONS).extensions(EXTENSIONS).build();

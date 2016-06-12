@@ -24,12 +24,12 @@ public class FootnoteBlock extends CustomBlock {
     }
 
     @Override
-    public String getAstExtra() {
-        return " ordinal: " + footnoteOrdinal + " "
-                + segmentSpan(openingMarker, "open")
-                + segmentSpan(text, "text")
-                + segmentSpan(closingMarker, "close")
-                + segmentSpan(footnote, "footnote");
+    public void getAstExtra(StringBuilder out) {
+        out.append(" ordinal: " + footnoteOrdinal + " ");
+        segmentSpan(out, openingMarker, "open");
+        segmentSpan(out, text, "text");
+        segmentSpan(out, closingMarker, "close");
+        segmentSpan(out, footnote, "footnote");
     }
 
     @Override

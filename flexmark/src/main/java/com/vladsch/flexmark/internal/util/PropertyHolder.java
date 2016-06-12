@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.internal.util;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface PropertyHolder {
-    HashMap<PropertyKey, Object> getProperties();
+    Map<PropertyKey, Object> getProperties();
     boolean contains(PropertyKey key);
-    <T> T getValue(PropertyKey<T> key);
-    <T> T getValueOrDefault(PropertyKey<T> key);
-    <T> T getValueOrNew(PropertyKey<T> key);
-    <T> void setProperty(PropertyKey<T> key, T value);
+    <T> T get(PropertyKey<T> key);
+    <T> T getOrDefault(PropertyKey<T> key);
+    <T> T getOrNew(PropertyKey<T> key);
 }

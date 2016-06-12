@@ -34,12 +34,12 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpanChars(textOpeningMarker, text, textClosingMarker, "text")
-                + segmentSpanChars(linkOpeningMarker, "linkOpen")
-                + delimitedSegmentSpanChars(urlOpeningMarker, url, urlClosingMarker, "url")
-                + delimitedSegmentSpanChars(titleOpeningMarker, title, titleClosingMarker, "title")
-                + segmentSpanChars(linkClosingMarker, "linkClose");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
+        segmentSpanChars(out, linkOpeningMarker, "linkOpen");
+        delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
+        delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
+        segmentSpanChars(out, linkClosingMarker, "linkClose");
     }
 
     public InlineLinkNode() {

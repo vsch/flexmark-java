@@ -88,8 +88,10 @@ public class DocumentParser implements ParserState {
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
     private Set<BlockParser> allBlockParsers = new HashSet<>();
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
+    final private Options options;
 
-    public DocumentParser(List<BlockParserFactory> blockParserFactories, List<BlockPreProcessor> blockPreProcessors, InlineParser inlineParser) {
+    public DocumentParser(Options options, List<BlockParserFactory> blockParserFactories, List<BlockPreProcessor> blockPreProcessors, InlineParser inlineParser) {
+        this.options = options;
         this.blockParserFactories = blockParserFactories;
         this.blockPreProcessors = blockPreProcessors;
         this.inlineParser = inlineParser;
@@ -99,11 +101,11 @@ public class DocumentParser implements ParserState {
     }
 
     @Override
-    public PropertyHolder getPropertyHolder() {
+    public MutablePropertyHolder getPropertyHolder() {
         return documentBlockParser.getBlock();
     }
 
-    public static List<BlockParserFactory> calculateBlockParserFactories(List<BlockParserFactory> customBlockParserFactories) {
+    public static List<BlockParserFactory> calculateBlockParserFactories(Options options, List<BlockParserFactory> customBlockParserFactories) {
         List<BlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
@@ -111,7 +113,7 @@ public class DocumentParser implements ParserState {
         return list;
     }
 
-    public static List<BlockPreProcessor> calculateParagraphProcessors(List<BlockPreProcessor> blockPreProcessors) {
+    public static List<BlockPreProcessor> calculateParagraphProcessors(Options options, List<BlockPreProcessor> blockPreProcessors) {
         List<BlockPreProcessor> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(blockPreProcessors);
@@ -635,8 +637,8 @@ public class DocumentParser implements ParserState {
     public static InlineParserFactory inlineParserFactory() {
         return new InlineParserFactory() {
             @Override
-            public InlineParser inlineParser(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
-                return new CommonmarkInlineParser(specialCharacters, delimiterCharacters, delimiterProcessors);
+            public InlineParser inlineParser(Options options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+                return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors);
             }
         };
     }
@@ -653,7 +655,7 @@ public class DocumentParser implements ParserState {
             return SubSequence.EMPTY_LIST;
         }
 
-        public List<Integer> getParagraphEolOffsets() {
+        public List<Integer> getParagraphEolLengths() {
             if (matchedBlockParser instanceof ParagraphParser) {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
                 return paragraphParser.getContent().getEolLengths();

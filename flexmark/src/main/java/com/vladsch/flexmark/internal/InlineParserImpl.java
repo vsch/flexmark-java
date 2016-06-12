@@ -100,11 +100,12 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected ArrayList<BasedSequence> currentText;
 
     protected Document document;
+    final protected Options options;
 
     @Override
     public void setDocument(Document document) {
         this.document = document;
-        this.referenceRepository = document.getValueOrNew(ReferenceRepository.PROPERTY_KEY);
+        this.referenceRepository = document.getOrNew(ReferenceRepository.PROPERTY_KEY);
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -115,13 +116,14 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return currentText;
     }
 
-    public InlineParserImpl(BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+    public InlineParserImpl(Options options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
+        this.options = options;
         this.delimiterProcessors = delimiterProcessors;
         this.delimiterCharacters = delimiterCharacters;
         this.specialCharacters = specialCharacters;
     }
 
-    public static BitSet calculateDelimiterCharacters(Set<Character> characters) {
+    public static BitSet calculateDelimiterCharacters(Options options, Set<Character> characters) {
         BitSet bitSet = new BitSet();
         for (Character character : characters) {
             bitSet.set(character);
@@ -129,7 +131,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return bitSet;
     }
 
-    public static BitSet calculateSpecialCharacters(BitSet delimiterCharacters) {
+    public static BitSet calculateSpecialCharacters(Options options, BitSet delimiterCharacters) {
         BitSet bitSet = new BitSet();
         bitSet.or(delimiterCharacters);
         bitSet.set('\n');
@@ -143,7 +145,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return bitSet;
     }
 
-    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(List<DelimiterProcessor> delimiterProcessors) {
+    public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(Options options, List<DelimiterProcessor> delimiterProcessors) {
         Map<Character, DelimiterProcessor> map = new HashMap<>();
         addDelimiterProcessors(Arrays.<DelimiterProcessor>asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
         addDelimiterProcessors(delimiterProcessors, map);

@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.Options;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -14,10 +15,12 @@ public class TableNodeRenderer implements NodeRenderer {
 
     private final HtmlWriter html;
     private final NodeRendererContext context;
+    private final TableParserOptions options;
 
-    public TableNodeRenderer(NodeRendererContext context) {
+    public TableNodeRenderer(NodeRendererContext context, Options options) {
         this.html = context.getHtmlWriter();
         this.context = context;
+        this.options = new TableParserOptions(options);
     }
 
     @Override
@@ -49,15 +52,15 @@ public class TableNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void renderBlock(TableBlock tableBlock) {
+    private void renderBlock(TableBlock node) {
         html.withAttr().tagIndent("table", () -> {
-            context.renderChildren(tableBlock);
+            context.renderChildren(node);
         });
     }
 
-    private void renderHead(TableHead tableHead) {
+    private void renderHead(TableHead node) {
         html.withAttr().tagIndent("thead", () -> {
-            context.renderChildren(tableHead);
+            context.renderChildren(node);
         });
     }
 
@@ -65,25 +68,30 @@ public class TableNodeRenderer implements NodeRenderer {
 
     }
 
-    private void renderBody(TableBody tableBody) {
+    private void renderBody(TableBody node) {
         html.withAttr().tagIndent("tbody", () -> {
-            context.renderChildren(tableBody);
+            context.renderChildren(node);
         });
     }
 
-    private void renderRow(TableRow tableRow) {
+    private void renderRow(TableRow node) {
         html.withAttr().tagLine("tr", () -> {
-            context.renderChildren(tableRow);
+            context.renderChildren(node);
         });
     }
 
-    private void renderCell(TableCell tableCell) {
-        String tag = tableCell.isHeader() ? "th" : "td";
-        if (tableCell.getAlignment() != null) {
-            html.attr("align", getAlignValue(tableCell.getAlignment()));
+    private void renderCell(TableCell node) {
+        String tag = node.isHeader() ? "th" : "td";
+        if (node.getAlignment() != null) {
+            html.attr("align", getAlignValue(node.getAlignment()));
         }
+
+        if (options.columnSpans && node.getSpan() > 1) {
+            html.attr("colspan", String.valueOf(node.getSpan()));
+        }
+        
         html.withAttr().tag(tag);
-        context.renderChildren(tableCell);
+        context.renderChildren(node);
         html.tag("/" + tag);
     }
 

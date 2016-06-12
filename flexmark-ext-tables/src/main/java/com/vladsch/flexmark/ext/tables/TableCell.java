@@ -62,11 +62,11 @@ public class TableCell extends CustomNode implements DelimitedNode {
     }
 
     @Override
-    public String getAstExtra() {
-        if (getParent() != null && getParent().getParent() instanceof TableSeparator) {
-            return (alignment != null ? " " + alignment : "") + (header ? " header" : "") + delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
-        }
-        return (alignment != null ? " " + alignment : "") + (header ? " header" : "") + delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        if (alignment != null) out.append(" ").append(alignment);
+        if (header) out.append(" header");
+        if (span > 1) out.append(" span");
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     public TableCell() {

@@ -18,7 +18,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
     private void initializeNode(Node node) {
         Document document = node.getDocument();
-        AbbreviationRepository abbrRepository = document.getValueOrDefault(AbbreviationRepository.PROPERTY_KEY);
+        AbbreviationRepository abbrRepository = document.getOrDefault(AbbreviationRepository.PROPERTY_KEY);
 
         if (!abbrRepository.isEmpty()) {
             abbreviationMap = new HashMap<>();

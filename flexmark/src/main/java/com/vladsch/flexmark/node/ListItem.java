@@ -10,8 +10,8 @@ public class ListItem extends Block {
     protected BasedSequence openingMarker = SubSequence.NULL;
 
     @Override
-    public String getAstExtra() {
-        return segmentSpanChars(openingMarker, "open");
+    public void getAstExtra(StringBuilder out) {
+        segmentSpanChars(out, openingMarker, "open");
     }
 
     @Override

@@ -27,7 +27,9 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         //TablesTest.class,
         TablesFullSpecTest.class,
-        TablesSpecTest.class
+        TablesSpecTest.class,
+        TablesGfmFullSpecTest.class,
+        TablesGfmSpecTest.class,
 })
 public class ExtTablesTestSuite {
 }

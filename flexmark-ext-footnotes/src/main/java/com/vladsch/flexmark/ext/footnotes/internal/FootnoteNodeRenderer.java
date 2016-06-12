@@ -54,7 +54,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             Document document = node.getDocument();
-            FootnoteRepository footnoteRepository = document.getValueOrDefault(FootnoteRepository.PROPERTY_KEY);
+            FootnoteRepository footnoteRepository = document.getOrDefault(FootnoteRepository.PROPERTY_KEY);
 
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
                 html.attr("class", "footnotes").withAttr().tagIndent("div", () -> {

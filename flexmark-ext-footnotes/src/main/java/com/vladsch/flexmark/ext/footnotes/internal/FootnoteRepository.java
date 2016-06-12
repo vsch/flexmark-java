@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
-import com.vladsch.flexmark.internal.util.ModifyBehavior;
+import com.vladsch.flexmark.internal.util.ModificationBehavior;
 import com.vladsch.flexmark.internal.util.NodeRepository;
 import com.vladsch.flexmark.internal.util.PropertyKey;
 import com.vladsch.flexmark.internal.util.ValueFactory;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
-    public final static FootnoteRepository NULL = new FootnoteRepository(ModifyBehavior.LOCKED);
+    public final static FootnoteRepository NULL = new FootnoteRepository(ModificationBehavior.LOCKED);
     public final static PropertyKey<FootnoteRepository> PROPERTY_KEY = new PropertyKey<>("FOOTNOTES", NULL, new ValueFactory<FootnoteRepository>() {
         @Override
         public FootnoteRepository value() {
-            return new FootnoteRepository(ModifyBehavior.DEFAULT);
+            return new FootnoteRepository(ModificationBehavior.DEFAULT);
         }
     });
 
@@ -32,7 +32,7 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
         return referencedFootnoteBlocks;
     }
 
-    public FootnoteRepository(ModifyBehavior modifyBehavior) {
+    public FootnoteRepository(ModificationBehavior modifyBehavior) {
         super(modifyBehavior);
     }
 

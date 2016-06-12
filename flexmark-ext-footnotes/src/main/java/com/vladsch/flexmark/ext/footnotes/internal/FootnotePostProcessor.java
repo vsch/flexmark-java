@@ -11,7 +11,7 @@ public class FootnotePostProcessor implements PostProcessor {
 
     private void initializeNode(Node node) {
         Document document = node.getDocument();
-        footnoteRepository = document.getValueOrDefault(FootnoteRepository.PROPERTY_KEY);
+        footnoteRepository = document.getOrDefault(FootnoteRepository.PROPERTY_KEY);
     }
 
     public Node process(Node node) {

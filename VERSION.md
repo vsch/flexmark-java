@@ -1,5 +1,18 @@
-Version
-=======
+Version History
+===============
+
+0.1.2
+-----
+
+- Add `MutableOptions` to be used as a building set for various Parser/Renderer options that all
+  extensions can hook into using `PropertyKey` instances. Moved all builder options to use this
+  mechanism. Now can set options for all extensions in one place and the extensions can query
+  these to get their configuration parameters.
+
+- Add `flexmark-ext-tables` to implement tables per pegdown with GFM limitations configurable in
+  options.
+
+- Add spanning columns parsing
 
 0.1.1
 -----
@@ -13,7 +26,6 @@ Version
     - `HEAD_CSS`
     - `HEAD_SCRIPTS`
     - `HEAD_BOTTOM`
-
     - `BODY_TOP`
     - `BODY`
     - `BODY_BOTTOM`
@@ -25,9 +37,9 @@ Version
   generated HTML.
 
 - Add a few HtmlWriter methods and enhancements to allow:
-    - indenting HTML 
+    - indenting HTML
     - methods return `this` so methods could be chained
-    - invocation with lambda to eliminate the need to close a tag 
+    - invocation with lambda to eliminate the need to close a tag
     - `renderChildren()` to eliminate the need for each renderer to roll its own
     - `attr(String, String)` method to accumulate attributes to be used on the next `tag()`
       invocation. Eliminating the need to roll your own attribute methods. Accumulated
@@ -40,7 +52,7 @@ Version
   character sequences.
 
 - Add characters to be dumped as part of the AST for opening and closing sequences for easy
-  validation. For some nodes also dump the text. 
+  validation. For some nodes also dump the text.
 
 - Fix table extension to include open/close pipe as part of TableCell node markers
 

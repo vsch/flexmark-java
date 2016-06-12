@@ -9,6 +9,6 @@ import com.vladsch.flexmark.node.CustomBlock;
 public class TableBlock extends CustomBlock {
     @Override
     public BasedSequence[] getSegments() {
-        return EMPTY_SEGMENTS;
+        return new BasedSequence[0];
     }
 }

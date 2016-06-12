@@ -1,16 +1,22 @@
 package com.vladsch.flexmark.internal.util;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class PropertyHolderImpl implements PropertyHolder {
-    final private HashMap<PropertyKey, Object> properties;
+    final protected HashMap<PropertyKey, Object> properties;
 
     public PropertyHolderImpl() {
         properties = new HashMap<>();
     }
 
+    public PropertyHolderImpl(PropertyHolder other) {
+        properties = new HashMap<>();
+        properties.putAll(other.getProperties());
+    }
+
     @Override
-    public HashMap<PropertyKey, Object> getProperties() {
+    public Map<PropertyKey, Object> getProperties() {
         return properties;
     }
 
@@ -20,7 +26,7 @@ public class PropertyHolderImpl implements PropertyHolder {
     }
 
     @Override
-    public <T> T getValue(PropertyKey<T> key) {
+    public <T> T get(PropertyKey<T> key) {
         if (properties.containsKey(key)) {
             return key.getValue(properties.get(key));
         }
@@ -28,7 +34,7 @@ public class PropertyHolderImpl implements PropertyHolder {
     }
 
     @Override
-    public <T> T getValueOrDefault(PropertyKey<T> key) {
+    public <T> T getOrDefault(PropertyKey<T> key) {
         if (properties.containsKey(key)) {
             return key.getValueOrDefault(properties.get(key));
         }
@@ -37,7 +43,7 @@ public class PropertyHolderImpl implements PropertyHolder {
     }
 
     @Override
-    public <T> T getValueOrNew(PropertyKey<T> key) {
+    public <T> T getOrNew(PropertyKey<T> key) {
         if (properties.containsKey(key)) {
             return key.getValueOrDefault(properties.get(key));
         }
@@ -45,10 +51,5 @@ public class PropertyHolderImpl implements PropertyHolder {
         T value = key.getDefaultValueFactory().value();
         properties.put(key, value);
         return value;
-    }
-
-    @Override
-    public <T> void setProperty(PropertyKey<T> key, T value) {
-        properties.put(key, value);
     }
 }

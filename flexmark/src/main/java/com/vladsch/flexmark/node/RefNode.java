@@ -25,9 +25,9 @@ public abstract class RefNode extends LinkNode {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpanChars(textOpeningMarker, text, textClosingMarker, "text")
-                + delimitedSegmentSpanChars(referenceOpeningMarker, reference, referenceClosingMarker, "reference");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
+        delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
     }
 
     public RefNode() {
@@ -111,7 +111,7 @@ public abstract class RefNode extends LinkNode {
     }
     
     public Reference getReferenceNode() {
-        ReferenceRepository repository = getDocument().getValue(ReferenceRepository.PROPERTY_KEY);
+        ReferenceRepository repository = getDocument().get(ReferenceRepository.PROPERTY_KEY);
         return repository == null ? null : repository.get(repository.normalizeKey(reference));
     }
 

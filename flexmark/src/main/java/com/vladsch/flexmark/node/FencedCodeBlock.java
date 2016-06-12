@@ -12,13 +12,14 @@ public class FencedCodeBlock extends Block {
     private BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
-    public String getAstExtra() {
+    public void getAstExtra(StringBuilder out) {
         BasedSequence content = getContentChars();
         int lines = getSegments().length;
-        return segmentSpanChars(openingMarker, "open")
-                + segmentSpanChars(info, "info")
-                + segmentSpan(content, "content") + " lines[" + lines + "]"
-                + segmentSpanChars(closingMarker, "close");
+        segmentSpanChars(out, openingMarker, "open");
+        segmentSpanChars(out, info, "info");
+        segmentSpan(out, content, "content");
+        out.append(" lines[").append(lines).append("]");
+        segmentSpanChars(out, closingMarker, "close");
     }
 
     @Override

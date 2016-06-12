@@ -3,6 +3,9 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.MutableOptions;
+import com.vladsch.flexmark.internal.util.Options;
+import com.vladsch.flexmark.internal.util.PropertyKey;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;
@@ -20,21 +23,35 @@ import java.util.*;
  * </code></pre>
  */
 public class HtmlRenderer {
+    final static public PropertyKey<String> SOFTBREAK = new PropertyKey<>("HTML.SOFT_BREAK", "\n");
+    final static public PropertyKey<Boolean> ESCAPE_HTML = new PropertyKey<>("HTML.ESCAPE_HTML", false);
+    final static public PropertyKey<Boolean> PERCENT_ENCODE_URLS = new PropertyKey<>("HTML.ESCAPE_HTML", false);
+    final static public PropertyKey<Integer> INDENT_SIZE = new PropertyKey<>("HTML.INDENT", 0);
 
-    private final String softbreak;
-    private final boolean escapeHtml;
-    private final boolean percentEncodeUrls;
-    private final int indentSize;
+    static class HtmlRendererOptions {
+        public final String softbreak;
+        public final boolean escapeHtml;
+        public final boolean percentEncodeUrls;
+        public final int indentSize;
+
+        public HtmlRendererOptions(Options options) {
+            softbreak = options.getOrDefault(SOFTBREAK);
+            escapeHtml = options.getOrDefault(ESCAPE_HTML);
+            percentEncodeUrls = options.getOrDefault(PERCENT_ENCODE_URLS);
+            indentSize = options.getOrDefault(INDENT_SIZE);
+        }
+    }
+
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;
+    private final HtmlRendererOptions htmlOptions;
+    private final Options options;
 
     private HtmlRenderer(Builder builder) {
-        this.softbreak = builder.softbreak;
-        this.escapeHtml = builder.escapeHtml;
-        this.percentEncodeUrls = builder.percentEncodeUrls;
-        this.attributeProviders = builder.attributeProviders;
-        this.indentSize = builder.indentSize;
+        this.options = builder.options.getReadOnlyCopy();
+        this.htmlOptions = new HtmlRendererOptions(this.options);
 
+        this.attributeProviders = builder.attributeProviders;
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
         // Add as last. This means clients can override the rendering of core nodes if they want.
@@ -47,7 +64,7 @@ public class HtmlRenderer {
     }
 
     public int getIndentSize() {
-        return indentSize;
+        return htmlOptions.indentSize;
     }
 
     /**
@@ -59,8 +76,17 @@ public class HtmlRenderer {
         return new Builder();
     }
 
+    /**
+     * Create a new builder for configuring an {@link HtmlRenderer}.
+     *
+     * @return a builder
+     */
+    public static Builder builder(Options options) {
+        return new Builder(options);
+    }
+
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(new HtmlWriter(output, indentSize));
+        MainNodeRenderer renderer = new MainNodeRenderer(new HtmlWriter(output, htmlOptions.indentSize));
         renderer.render(node);
     }
 
@@ -80,12 +106,17 @@ public class HtmlRenderer {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder {
-        private String softbreak = "\n";
-        private boolean escapeHtml = false;
-        private boolean percentEncodeUrls = false;
-        private int indentSize = 0;
+        public final MutableOptions options;
         private List<AttributeProvider> attributeProviders = new ArrayList<>();
         private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+
+        public Builder() {
+            options = new MutableOptions();
+        }
+
+        public Builder(Options options) {
+            this.options = new MutableOptions(options);
+        }
 
         /**
          * @return the configured {@link HtmlRenderer}
@@ -106,7 +137,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder softbreak(String softbreak) {
-            this.softbreak = softbreak;
+            this.options.set(SOFTBREAK, softbreak);
             return this;
         }
 
@@ -117,7 +148,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder indentSize(int indentSize) {
-            this.indentSize = indentSize;
+            this.options.set(INDENT_SIZE, indentSize);
             return this;
         }
 
@@ -131,7 +162,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder escapeHtml(boolean escapeHtml) {
-            this.escapeHtml = escapeHtml;
+            this.options.set(ESCAPE_HTML, escapeHtml);
             return this;
         }
 
@@ -150,7 +181,7 @@ public class HtmlRenderer {
          * @return {@code this}
          */
         public Builder percentEncodeUrls(boolean percentEncodeUrls) {
-            this.percentEncodeUrls = percentEncodeUrls;
+            this.options.set(PERCENT_ENCODE_URLS, percentEncodeUrls);
             return this;
         }
 
@@ -240,12 +271,12 @@ public class HtmlRenderer {
 
         @Override
         public boolean shouldEscapeHtml() {
-            return escapeHtml;
+            return htmlOptions.escapeHtml;
         }
 
         @Override
         public String encodeUrl(String url) {
-            if (percentEncodeUrls) {
+            if (htmlOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
                 return url;
@@ -271,7 +302,7 @@ public class HtmlRenderer {
 
         @Override
         public String getSoftbreak() {
-            return softbreak;
+            return htmlOptions.softbreak;
         }
 
         @Override

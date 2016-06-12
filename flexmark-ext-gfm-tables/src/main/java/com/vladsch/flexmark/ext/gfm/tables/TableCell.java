@@ -16,7 +16,6 @@ public class TableCell extends CustomNode implements DelimitedNode {
 
     private boolean header;
     private Alignment alignment;
-    private int span = 1;
 
     @Override
     public BasedSequence getOpeningMarker() {
@@ -48,25 +47,16 @@ public class TableCell extends CustomNode implements DelimitedNode {
         this.closingMarker = closingMarker;
     }
 
-    public int getSpan() {
-        return span;
-    }
-
-    public void setSpan(int span) {
-        this.span = span;
-    }
-
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
     @Override
-    public String getAstExtra() {
-        if (getParent() != null && getParent().getParent() instanceof TableSeparator) {
-            return (alignment != null ? " " + alignment : "") + (header ? " header" : "") + delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
-        }
-        return (alignment != null ? " " + alignment : "") + (header ? " header" : "") + delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        if (alignment != null) out.append(" ").append(alignment);
+        if (header) out.append(" header");
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     public TableCell() {

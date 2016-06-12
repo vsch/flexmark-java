@@ -92,7 +92,7 @@ public class HeadingParser extends AbstractBlockParser {
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
 
                 BlockContent content = new BlockContent();
-                content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolOffsets());
+                content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolLengths());
                 BasedSequence headingText = content.getContents().trim();
                 BasedSequence closingMarker = line.trim();
 

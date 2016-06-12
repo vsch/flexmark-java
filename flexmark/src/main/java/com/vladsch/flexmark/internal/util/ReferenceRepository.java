@@ -5,15 +5,15 @@ import com.vladsch.flexmark.node.Reference;
 import java.util.Locale;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
-    public final static ReferenceRepository NULL = new ReferenceRepository(ModifyBehavior.LOCKED);
+    public final static ReferenceRepository NULL = new ReferenceRepository(ModificationBehavior.LOCKED);
     public final static PropertyKey<ReferenceRepository> PROPERTY_KEY = new PropertyKey<>("REFERENCES", NULL, new ValueFactory<ReferenceRepository>() {
         @Override
         public ReferenceRepository value() {
-            return new ReferenceRepository(ModifyBehavior.DEFAULT);
+            return new ReferenceRepository(ModificationBehavior.DEFAULT);
         }
     });
 
-    public ReferenceRepository(ModifyBehavior onDuplicate) {
+    public ReferenceRepository(ModificationBehavior onDuplicate) {
         super(onDuplicate);
     }
 

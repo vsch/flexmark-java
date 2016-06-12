@@ -58,7 +58,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         // add it to the map
-        FootnoteRepository footnoteMap = parserState.getPropertyHolder().getValueOrNew(FootnoteRepository.PROPERTY_KEY);
+        FootnoteRepository footnoteMap = parserState.getPropertyHolder().getOrNew(FootnoteRepository.PROPERTY_KEY);
         footnoteMap.put(footnoteMap.normalizeKey(block.getText()), block);
     }
 

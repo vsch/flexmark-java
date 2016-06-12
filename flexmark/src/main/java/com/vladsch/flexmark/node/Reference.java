@@ -30,14 +30,14 @@ public class Reference extends Node {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpanChars(openingMarker, reference, closingMarker, "ref")
-                + delimitedSegmentSpanChars(urlOpeningMarker, url, urlClosingMarker, "url")
-                + delimitedSegmentSpanChars(titleOpeningMarker, title, titleClosingMarker, "title");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpanChars(out, openingMarker, reference, closingMarker, "ref");
+        delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
+        delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
     }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
-        super(new SubSequence(label.getBase().subSequence(label.getStartOffset(), (title != null ? title.getEndOffset() : (url != null ? url.getEndOffset() : label.getEndOffset())))));
+        super(SubSequence.NULL);
 
         this.openingMarker = label.subSequence(0, 1);
         this.reference = label.subSequence(1, label.length() - 2).trim();

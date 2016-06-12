@@ -9,8 +9,8 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
  */
 public class HtmlEntity extends Node {
     @Override
-    public String getAstExtra() {
-        return getChars().isEmpty() ? "" : "\"" + getChars() + "\"";
+    public void getAstExtra(StringBuilder out) {
+        if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");
     }
 
     // TODO: add opening and closing marker with intermediate text so that completions can be easily done

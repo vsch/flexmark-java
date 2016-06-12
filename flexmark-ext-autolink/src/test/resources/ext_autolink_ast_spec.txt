@@ -23,10 +23,10 @@ foo http://one.org/ bar http://two.org/
 Document[0, 40]
   Paragraph[0, 40]
     Text[0, 4]
-    AutoLink[4, 19] open:[0, 0] close:[0, 0]
+    AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
       Text[4, 19]
     Text[19, 24]
-    AutoLink[24, 39] open:[0, 0] close:[0, 0]
+    AutoLink[24, 39] textOpen:[0, 0] text:[24, 39, "http://two.org/"] textClose:[0, 0]
       Text[24, 39]
 ````````````````````````````````
 
@@ -39,12 +39,12 @@ foo http://one.org/ bar `code` baz http://two.org/
 Document[0, 51]
   Paragraph[0, 51]
     Text[0, 4]
-    AutoLink[4, 19] open:[0, 0] close:[0, 0]
+    AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
       Text[4, 19]
     Text[19, 24]
     Code[24, 30] textOpen:[24, 25, "`"] text:[25, 29] textClose:[29, 30, "`"]
     Text[30, 35]
-    AutoLink[35, 50] open:[0, 0] close:[0, 0]
+    AutoLink[35, 50] textOpen:[0, 0] text:[35, 50, "http://two.org/"] textClose:[0, 0]
       Text[35, 50]
 ````````````````````````````````
 
@@ -56,13 +56,13 @@ http://example.com/one. Example 2 (see http://example.com/two). Example 3: http:
 .
 Document[0, 104]
   Paragraph[0, 104]
-    AutoLink[0, 22] open:[0, 0] close:[0, 0]
+    AutoLink[0, 22] textOpen:[0, 0] text:[0, 22, "http://example.com/one"] textClose:[0, 0]
       Text[0, 22]
     Text[22, 39]
-    AutoLink[39, 61] open:[0, 0] close:[0, 0]
+    AutoLink[39, 61] textOpen:[0, 0] text:[39, 61, "http://example.com/two"] textClose:[0, 0]
       Text[39, 61]
     Text[61, 75]
-    AutoLink[75, 103] open:[0, 0] close:[0, 0]
+    AutoLink[75, 103] textOpen:[0, 0] text:[75, 103, "http://example.com/foo_(bar)"] textClose:[0, 0]
       Text[75, 103]
 ````````````````````````````````
 
@@ -93,7 +93,7 @@ foo@com
 .
 Document[0, 21]
   Paragraph[0, 21]
-    AutoLink[0, 20] open:[0, 1] close:[19, 20]
+    AutoLink[0, 20] textOpen:[0, 1, "<"] text:[1, 19, "http://example.com"] textClose:[19, 20, ">"]
 ````````````````````````````````
 
 

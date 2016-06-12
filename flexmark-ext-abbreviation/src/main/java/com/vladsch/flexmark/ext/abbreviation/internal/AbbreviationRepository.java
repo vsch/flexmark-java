@@ -1,21 +1,21 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
-import com.vladsch.flexmark.internal.util.ModifyBehavior;
+import com.vladsch.flexmark.internal.util.ModificationBehavior;
 import com.vladsch.flexmark.internal.util.NodeRepository;
 import com.vladsch.flexmark.internal.util.PropertyKey;
 import com.vladsch.flexmark.internal.util.ValueFactory;
 
 public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
-    public final static AbbreviationRepository NULL = new AbbreviationRepository(ModifyBehavior.LOCKED);
+    public final static AbbreviationRepository NULL = new AbbreviationRepository(ModificationBehavior.LOCKED);
     public final static PropertyKey<AbbreviationRepository> PROPERTY_KEY = new PropertyKey<>("ABBREVIATIONS", NULL, new ValueFactory<AbbreviationRepository>() {
         @Override
         public AbbreviationRepository value() {
-            return new AbbreviationRepository(ModifyBehavior.DEFAULT);
+            return new AbbreviationRepository(ModificationBehavior.DEFAULT);
         }
     });
 
-    public AbbreviationRepository(ModifyBehavior modifyBehavior) {
+    public AbbreviationRepository(ModificationBehavior modifyBehavior) {
         super(modifyBehavior);
     }
 

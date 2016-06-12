@@ -119,7 +119,7 @@ Abc|Def
 </table>
 .
 Document[0, 16]
-  TableBlock[0, 0]
+  TableBlock[0, 16]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -150,7 +150,7 @@ Document[0, 16]
 </table>
 .
 Document[0, 10]
-  TableBlock[0, 0]
+  TableBlock[0, 10]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[0, 0]
@@ -177,7 +177,7 @@ Document[0, 10]
 </table>
 .
 Document[0, 12]
-  TableBlock[0, 0]
+  TableBlock[0, 12]
     TableHead[0, 5]
       TableRow[0, 5]
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -204,7 +204,7 @@ Abc|
 </table>
 .
 Document[0, 10]
-  TableBlock[0, 0]
+  TableBlock[0, 10]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -262,7 +262,7 @@ Document[0, 9]
 </table>
 .
 Document[0, 13]
-  TableBlock[0, 0]
+  TableBlock[0, 13]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[0, 0]
@@ -294,7 +294,7 @@ Document[0, 13]
 </table>
 .
 Document[0, 16]
-  TableBlock[0, 0]
+  TableBlock[0, 16]
     TableHead[0, 5]
       TableRow[0, 5]
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -326,7 +326,7 @@ Abc|
 </table>
 .
 Document[0, 13]
-  TableBlock[0, 0]
+  TableBlock[0, 13]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -375,7 +375,7 @@ Document[0, 12]
 <p>1</p>
 .
 Document[0, 12]
-  TableBlock[0, 0]
+  TableBlock[0, 10]
     TableHead[0, 4]
       TableRow[0, 4]
         TableCell[0, 4] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[0, 0]
@@ -406,7 +406,7 @@ Abc|Def
 </table>
 .
 Document[0, 20]
-  TableBlock[0, 0]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -464,24 +464,24 @@ Document[0, 26]
 </table>
 .
 Document[0, 33]
-  TableBlock[0, 0]
-    TableHead[1, 11]
-      TableRow[1, 11]
+  TableBlock[1, 33]
+    TableHead[1, 12]
+      TableRow[1, 12]
         TableCell[1, 7] header textOpen:[0, 0] text:[1, 4, "Abc"] textClose:[6, 7, "|"]
           Text[1, 4]
-        TableCell[8, 11] header textOpen:[0, 0] text:[8, 11, "Def"] textClose:[0, 0]
+        TableCell[7, 11] header textOpen:[0, 0] text:[8, 11, "Def"] textClose:[0, 0]
           Text[8, 11]
-    TableSeparator[14, 23]
-      TableRow[14, 23]
+    TableSeparator[13, 24]
+      TableRow[13, 24]
         TableCell[14, 19] textOpen:[0, 0] text:[14, 17, "---"] textClose:[18, 19, "|"]
           Text[14, 17]
-        TableCell[20, 23] textOpen:[0, 0] text:[20, 23, "---"] textClose:[0, 0]
+        TableCell[19, 23] textOpen:[0, 0] text:[20, 23, "---"] textClose:[0, 0]
           Text[20, 23]
-    TableBody[26, 31]
-      TableRow[26, 31]
+    TableBody[25, 32]
+      TableRow[25, 32]
         TableCell[26, 29] textOpen:[0, 0] text:[26, 27, "1"] textClose:[28, 29, "|"]
           Text[26, 27]
-        TableCell[30, 31] textOpen:[0, 0] text:[30, 31, "2"] textClose:[0, 0]
+        TableCell[29, 31] textOpen:[0, 0] text:[30, 31, "2"] textClose:[0, 0]
           Text[30, 31]
 ````````````````````````````````
 
@@ -502,7 +502,7 @@ Abc|Def
 </table>
 .
 Document[0, 24]
-  TableBlock[0, 0]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -515,8 +515,8 @@ Document[0, 24]
           Text[8, 11]
         TableCell[12, 15] textOpen:[0, 0] text:[12, 15, "---"] textClose:[0, 0]
           Text[12, 15]
-    TableBody[20, 23]
-      TableRow[20, 23]
+    TableBody[16, 23]
+      TableRow[16, 23]
         TableCell[20, 22] textOpen:[0, 0] text:[20, 21, "1"] textClose:[21, 22, "|"]
           Text[20, 21]
         TableCell[22, 23] textOpen:[0, 0] text:[22, 23, "2"] textClose:[0, 0]
@@ -540,7 +540,7 @@ Document[0, 24]
 </table>
 .
 Document[0, 26]
-  TableBlock[0, 0]
+  TableBlock[0, 26]
     TableHead[0, 9]
       TableRow[0, 9]
         TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
@@ -578,7 +578,7 @@ Document[0, 26]
 </table>
 .
 Document[0, 22]
-  TableBlock[0, 0]
+  TableBlock[0, 22]
     TableHead[0, 9]
       TableRow[0, 9]
         TableCell[0, 6] header textOpen:[0, 0] text:[0, 5, "*Abc*"] textClose:[5, 6, "|"]
@@ -617,7 +617,7 @@ Abc|Def
 </table>
 .
 Document[0, 25]
-  TableBlock[0, 0]
+  TableBlock[0, 25]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -630,8 +630,8 @@ Document[0, 25]
           Text[8, 11]
         TableCell[12, 15] textOpen:[0, 0] text:[12, 15, "---"] textClose:[0, 0]
           Text[12, 15]
-    TableBody[16, 22]
-      TableRow[16, 22]
+    TableBody[16, 24]
+      TableRow[16, 24]
         TableCell[16, 20] textOpen:[0, 0] text:[16, 19, "1\\"] textClose:[19, 20, "|"]
           Text[16, 19]
         TableCell[20, 22] textOpen:[0, 0] text:[20, 21, "2"] textClose:[21, 22, "|"]
@@ -655,7 +655,7 @@ Abc|Def
 </table>
 .
 Document[0, 24]
-  TableBlock[0, 0]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -693,7 +693,7 @@ Abc|Def
 </table>
 .
 Document[0, 21]
-  TableBlock[0, 0]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] LEFT header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -731,7 +731,7 @@ Abc|Def
 </table>
 .
 Document[0, 21]
-  TableBlock[0, 0]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] RIGHT header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -769,7 +769,7 @@ Abc|Def
 </table>
 .
 Document[0, 22]
-  TableBlock[0, 0]
+  TableBlock[0, 22]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] CENTER header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -807,7 +807,7 @@ Abc|Def
 </table>
 .
 Document[0, 22]
-  TableBlock[0, 0]
+  TableBlock[0, 22]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -845,15 +845,15 @@ Abc|Def
 </table>
 .
 Document[0, 23]
-  TableBlock[0, 0]
+  TableBlock[0, 23]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] LEFT header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
           Text[0, 3]
         TableCell[4, 7] header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[0, 0]
           Text[4, 7]
-    TableSeparator[9, 18]
-      TableRow[9, 18]
+    TableSeparator[8, 18]
+      TableRow[8, 18]
         TableCell[9, 15] LEFT textOpen:[0, 0] text:[9, 13, ":---"] textClose:[14, 15, "|"]
           Text[9, 13]
         TableCell[15, 18] textOpen:[0, 0] text:[15, 18, "---"] textClose:[0, 0]
@@ -947,7 +947,7 @@ Abc|Def
 </table>
 .
 Document[0, 22]
-  TableBlock[0, 0]
+  TableBlock[0, 22]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -960,8 +960,8 @@ Document[0, 22]
           Text[8, 11]
         TableCell[12, 15] textOpen:[0, 0] text:[12, 15, "---"] textClose:[0, 0]
           Text[12, 15]
-    TableBody[16, 20]
-      TableRow[16, 20]
+    TableBody[16, 21]
+      TableRow[16, 21]
         TableCell[16, 18] textOpen:[0, 0] text:[16, 17, "1"] textClose:[17, 18, "|"]
           Text[16, 17]
         TableCell[18, 20] textOpen:[0, 0] text:[18, 19, "2"] textClose:[19, 20, "|"]
@@ -985,7 +985,7 @@ Abc|Def|Ghi
 </table>
 .
 Document[0, 28]
-  TableBlock[0, 0]
+  TableBlock[0, 28]
     TableHead[0, 11]
       TableRow[0, 11]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1002,8 +1002,8 @@ Document[0, 28]
           Text[16, 19]
         TableCell[20, 23] textOpen:[0, 0] text:[20, 23, "---"] textClose:[0, 0]
           Text[20, 23]
-    TableBody[24, 26]
-      TableRow[24, 26]
+    TableBody[24, 27]
+      TableRow[24, 27]
         TableCell[24, 26] textOpen:[0, 0] text:[24, 25, "1"] textClose:[25, 26, "|"]
           Text[24, 25]
         TableCell[26, 27] textOpen:[0, 0] text:[26, 27, "2"] textClose:[0, 0]
@@ -1030,8 +1030,8 @@ Document[0, 28]
 </blockquote>
 .
 Document[0, 26]
-  BlockQuote[0, 1] marker:[0, 1, ">"]
-    TableBlock[0, 0]
+  BlockQuote[0, 26] marker:[0, 1, ">"]
+    TableBlock[2, 26]
       TableHead[2, 9]
         TableRow[2, 9]
           TableCell[2, 6] header textOpen:[0, 0] text:[2, 5, "Abc"] textClose:[5, 6, "|"]
@@ -1071,7 +1071,7 @@ table, you are over
 <p>table, you are over</p>
 .
 Document[0, 40]
-  TableBlock[0, 0]
+  TableBlock[0, 20]
     TableHead[0, 7]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1115,7 +1115,7 @@ table, you are over
 <p>table, you are over</p>
 .
 Document[0, 68]
-  TableBlock[0, 0]
+  TableBlock[0, 35]
     TableHead[0, 13]
       TableRow[0, 13]
         TableCell[0, 8] header textOpen:[0, 0] text:[0, 7, "**Abc**"] textClose:[7, 8, "|"]

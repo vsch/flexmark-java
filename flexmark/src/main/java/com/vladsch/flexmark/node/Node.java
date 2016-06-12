@@ -151,8 +151,8 @@ public abstract class Node {
         return getClass().getSimpleName() + "{" + toStringAttributes() + "}";
     }
 
-    public String getAstExtra() {
-        return "";
+    public void getAstExtra(StringBuilder out) {
+        return;
     }
 
     protected String toStringAttributes() {
@@ -208,6 +208,8 @@ public abstract class Node {
 
     public void setCharsFromContent() {
         BasedSequence[] segments = getSegments();
+        BasedSequence spanningChars = null;
+        
         if (segments.length > 0) {
             BasedSequence leadSegment = getLeadSegment(segments);
             BasedSequence trailSegment = getTrailSegment(segments);
@@ -218,7 +220,7 @@ public abstract class Node {
                         trailSegment
                 };
 
-                setChars(spanningChars(sequences));
+                spanningChars = spanningChars(sequences);
             } else {
                 BasedSequence[] sequences = new BasedSequence[] {
                         leadSegment,
@@ -227,7 +229,7 @@ public abstract class Node {
                         lastChild.chars
                 };
 
-                setChars(spanningChars(sequences));
+                spanningChars = spanningChars(sequences);
             }
         } else if (firstChild != null && lastChild != null) {
             BasedSequence[] sequences = new BasedSequence[] {
@@ -235,7 +237,18 @@ public abstract class Node {
                     lastChild.chars
             };
 
-            setChars(spanningChars(sequences));
+            spanningChars = spanningChars(sequences);
+        }
+
+        if (spanningChars != null) {
+            // see if these are greater than already assigned chars
+            if (chars.isNull()) {
+                setChars(spanningChars);
+            } else {
+                int start = Integer.min(chars.getStartOffset(), spanningChars.getStartOffset());
+                int end = Integer.max(chars.getEndOffset(), spanningChars.getEndOffset());
+                setChars(chars.baseSubSequence(start, end));
+            }
         }
     }
 
@@ -243,34 +256,36 @@ public abstract class Node {
         return nullable == null ? SubSequence.NULL : nullable;
     }
 
-    public static String segmentSpan(int startOffset, int endOffset, String name) {
-        return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + "]";
+    public static void segmentSpan(StringBuilder out, int startOffset, int endOffset, String name) {
+        if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
+        out.append("[").append(startOffset).append(", ").append(endOffset).append("]");
     }
 
-    public static String segmentSpanChars(int startOffset, int endOffset, String name, String chars) {
-        return (name != null && !name.trim().isEmpty() ? " " + name + ":" : "") + "[" + startOffset + ", " + endOffset + (startOffset < endOffset ? ", \"" + chars + "\"" : "") + "]";
+    public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars) {
+        if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
+        out.append("[").append(startOffset).append(", ").append(endOffset);
+        if (startOffset < endOffset) out.append(", \"").append(chars).append("\"");
+        out.append("]");
     }
 
-    public static String segmentSpan(BasedSequence sequence, String name) {
-        return segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name);
+    public static void segmentSpan(StringBuilder out, BasedSequence sequence, String name) {
+        segmentSpan(out, sequence.getStartOffset(), sequence.getEndOffset(), name);
     }
 
-    public static String segmentSpanChars(BasedSequence sequence, String name) {
-        return segmentSpanChars(sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
+    public static void segmentSpanChars(StringBuilder out, BasedSequence sequence, String name) {
+        segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
     }
 
-    public static String delimitedSegmentSpan(BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
-        return segmentSpanChars(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString())
-                + segmentSpan(sequence.getStartOffset(), sequence.getEndOffset(), name)
-                + segmentSpanChars(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString())
-                ;
+    public static void delimitedSegmentSpan(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+        segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
+        segmentSpan(out, sequence.getStartOffset(), sequence.getEndOffset(), name);
+        segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 
-    public static String delimitedSegmentSpanChars(BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
-        return segmentSpanChars(openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString())
-                + segmentSpanChars(sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString())
-                + segmentSpanChars(closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString())
-                ;
+    public static void delimitedSegmentSpanChars(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
+        segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
+        segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
+        segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 
     public void takeChildren(Node node) {

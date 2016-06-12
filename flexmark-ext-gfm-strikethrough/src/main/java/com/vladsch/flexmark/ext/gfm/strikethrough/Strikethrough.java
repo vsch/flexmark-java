@@ -20,8 +20,8 @@ public class Strikethrough extends CustomNode implements DelimitedNode {
     }
 
     @Override
-    public String getAstExtra() {
-        return delimitedSegmentSpan(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
     }
 
     public Strikethrough() {

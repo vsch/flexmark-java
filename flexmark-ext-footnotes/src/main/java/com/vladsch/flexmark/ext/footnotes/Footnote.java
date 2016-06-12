@@ -30,8 +30,9 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify 
     }
 
     @Override
-    public String getAstExtra() {
-        return " ordinal: " + (footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0) + " " + delimitedSegmentSpanChars(openingMarker, text, closingMarker, "text");
+    public void getAstExtra(StringBuilder out) {
+        out.append(" ordinal: ").append(footnoteBlock != null ? footnoteBlock.getFootnoteOrdinal() : 0).append(" ");
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     public Footnote() {
