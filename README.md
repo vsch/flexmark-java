@@ -39,6 +39,9 @@ Progress so far
 - Enhance HtmlWriter to make it easier to generate indented html and eliminate the need to
   implement attribute map and render children handlers.
 
+- Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
+  such as footnotes `[^]` and wiki links `[[]]`. 
+
 - Parser options to be implemented:
     - GitHub Extensions
         - [x] Auto links

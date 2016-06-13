@@ -13,6 +13,7 @@ public class SubSequence extends BasedSequenceImpl {
 
     final public static BasedSequence EOL = new StringSequence("\n");
     final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+    final public static BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
 
     public static BasedSequence firstNonNull(BasedSequence... sequences) {
         for (BasedSequence sequence : sequences) {

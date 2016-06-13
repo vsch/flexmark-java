@@ -12,6 +12,7 @@ public abstract class RefNode extends LinkNode {
     protected BasedSequence referenceOpeningMarker = SubSequence.NULL;
     protected BasedSequence reference = SubSequence.NULL;
     protected BasedSequence referenceClosingMarker = SubSequence.NULL;
+    protected boolean isDefined = false;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -100,6 +101,14 @@ public abstract class RefNode extends LinkNode {
         return text == SubSequence.NULL;
     }
 
+    public boolean isDefined() {
+        return isDefined;
+    }
+
+    public void setDefined(boolean defined) {
+        isDefined = defined;
+    }
+
     public boolean isDummyReference() {
         return textOpeningMarker != SubSequence.NULL && text == SubSequence.NULL && textClosingMarker != SubSequence.NULL;
     }
@@ -111,9 +120,9 @@ public abstract class RefNode extends LinkNode {
     public BasedSequence getReference() {
         return reference;
     }
-    
-    public Reference getReferenceNode() {
-        ReferenceRepository repository = getDocument().get(Parser.REFERENCES);
+
+    public Reference getReferenceNode(Document document) {
+        ReferenceRepository repository = document.get(Parser.REFERENCES);
         return repository == null ? null : repository.get(repository.normalizeKey(reference));
     }
 
@@ -159,7 +168,6 @@ public abstract class RefNode extends LinkNode {
 
     @Override
     protected String toStringAttributes() {
-        Reference node = getReferenceNode();
-        return "text=" + text + ", reference=" + reference + ", referenceNode=" + (node == null ? "null" : node.toStringAttributes());
+        return "text=" + text + ", reference=" + reference;
     }
 }

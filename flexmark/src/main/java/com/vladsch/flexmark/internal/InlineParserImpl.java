@@ -174,7 +174,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
             addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map);
         }
-        
+
         addDelimiterProcessors(delimiterProcessors, map);
         return map;
     }
@@ -752,6 +752,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         boolean isLinkOrImage = false;
         boolean refIsBare = false;
         ReferenceProcessorMatch linkRefProcessorMatch = null;
+        boolean refIsDefined = false;
 
         // Inline link?
         if (peek() == '(') {
@@ -816,7 +817,6 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 if (labelLength > 2) {
                     ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
                 } else if (!containsBrackets) {
-                    // here we need to see if could be a wiki link if it is an inner delimiter with outer one being '[' and followed by ']' 
                     // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
                     if (opener.delimiterChar == '!') {
                         // this one has index off by one for the leading !
@@ -830,9 +830,16 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 if (ref != null) {
                     String normalizedLabel = Escaping.normalizeReference(ref);
                     if (referenceRepository.containsKey(normalizedLabel)) {
-                        isLinkOrImage = true;
-                    } else /*if (opener.previous == null || opener.previous.delimiterChar != '[')*/ {
+                        BasedSequence sequence = input.subSequence(opener.index, startIndex);
+                        boolean containsLinks = containsLinkRefs(refIsBare ? ref : sequence, opener.node.getNext(), true);
+                        isLinkOrImage = !containsLinks;
+                        refIsDefined = true;
+                    } else if (!isInterruptingDelimiters(opener, ref)) {
+                        // TODO: here need to test if we are cutting in the middle of some other delimiters matching, if we are not then we will make this into a tentative
+                        // TODO: if we have an opening that is matched by closing delimiter inside our char span [] then we do not create a link ref.
+                        // link ref, otherwise we will break
                         // it is the innermost ref and is bare, if not bare then we treat it as a ref
+
                         if (!refIsBare && peek() == '[') {
                             int beforeNext = index;
                             int nextLength = parseLinkLabel();
@@ -840,12 +847,19 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                                 // not bare and not defined and followed by another [], roll back to before the label and make it just text
                                 index = beforeLabel;
                             } else {
-                                ref = input.subSequence(opener.index, startIndex);
-                                refIsBare = true;
-                                isLinkOrImage = true;
+                                // undefined ref, create a tentative one but only if does not contain any other link refs
+                                boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
+                                if (!containsLinks) {
+                                    refIsBare = true;
+                                    isLinkOrImage = true;
+                                }
                             }
                         } else {
-                            isLinkOrImage = true;
+                            // undefined ref, bare of followed by empty [], create a tentative link ref but only if does not contain any other link refs
+                            boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
+                            if (!containsLinks) {
+                                isLinkOrImage = true;
+                            }
                         }
                     }
                 }
@@ -861,16 +875,18 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             flushTextNode();
 
             Node insertNode;
+            boolean isImage = opener.delimiterChar == '!';
+
             if (linkRefProcessorMatch != null) {
-                if (!linkRefProcessorMatch.wantExclamation && opener.delimiterChar == '!') {
+                if (!linkRefProcessorMatch.wantExclamation && isImage) {
                     appendText(input.subSequence(opener.index - 1, opener.index));
                     opener.node.setChars(opener.node.getChars().subSequence(1));
                     opener.delimiterChar = '[';
+                    isImage = false;
                 }
 
                 insertNode = linkRefProcessorMatch.processor.createNode(linkRefProcessorMatch.nodeChars);
             } else {
-                boolean isImage = opener.delimiterChar == '!';
                 insertNode = ref != null ? isImage ? new ImageRef() : new LinkRef() : isImage ? new Image() : new Link();
             }
 
@@ -884,13 +900,14 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             if (linkRefProcessorMatch != null) {
                 // may need to adjust children's text because some characters were part of the processor's opener/closer
                 linkRefProcessorMatch.processor.adjustInlineText(insertNode);
-            }  
+            }
             appendNode(insertNode);
 
             if (insertNode instanceof RefNode) {
                 // set up the parts
                 RefNode refNode = (RefNode) insertNode;
                 refNode.setReferenceChars(ref);
+                refNode.setDefined(refIsDefined);
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
@@ -910,7 +927,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             removeDelimiterAndNode(opener);
 
             // Links within links are not allowed. We found this link, so there can be no other link around it.
-            if (!(insertNode instanceof Image)) {
+            if (insertNode instanceof Link) {
                 Delimiter delim = this.delimiter;
                 while (delim != null) {
                     if (delim.delimiterChar == '[') {
@@ -919,6 +936,13 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                     }
                     delim = delim.previous;
                 }
+
+                // collapse any link refs contained in this link, they are duds, link takes precedence
+                // TODO: add a test to see if all link refs should be collapsed or just undefined ones
+                collapseLinkRefChildren(insertNode, null);
+            } else if (insertNode instanceof RefNode) {
+                // have a link ref, collapse to text any tentative ones contained in it, they are duds
+                collapseLinkRefChildren(insertNode, false);
             }
 
             return true;
@@ -930,6 +954,72 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             opener.matched = true;
             return true;
         }
+    }
+
+    private boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
+        int startOffset = nodeChars.getStartOffset();
+        int endOffset = nodeChars.getEndOffset();
+        while (next != null) {
+            if (next instanceof LinkRef && (isDefined == null || ((LinkRef) next).isDefined() == isDefined) && !(next.getChars().getStartOffset() >= endOffset || next.getChars().getEndOffset() <= startOffset)) {
+                return true;
+            }
+            next = next.getNext();
+        }
+        return false;
+    }
+
+    boolean isInterruptingDelimiters(Delimiter opener, BasedSequence nodeChars) {
+        // first see if we have any closers in our span
+        int startOffset = nodeChars.getStartOffset();
+        int endOffset = nodeChars.getEndOffset();
+        Delimiter inner = opener.next;
+        while (inner != null) {
+            int innerOffset = inner.index + input.getStartOffset();
+            if (innerOffset >= endOffset) break;
+            if (innerOffset >= startOffset) {
+                // have potential closer, see where the opener is
+                if (inner.delimiterChar == '[' || inner.delimiterChar == ']' || inner.delimiterChar == '!') {
+                    int tmp = 0;
+                }
+                if (!inner.matched) return true;
+            }
+            inner = inner.next;
+        }
+        return false;
+    }
+
+    void collapseLinkRefChildren(Node node, Boolean isDefined) {
+        Node child = node.getFirstChild();
+        TextNodeMergingList list = new TextNodeMergingList();
+
+        while (child != null) {
+            Node nextChild = child.getNext();
+            if (child instanceof LinkRef && (isDefined == null || isDefined == ((LinkRef) child).isDefined())) {
+                // need to collapse this one, moving its text contents to text  
+                LinkRef linkRef = (LinkRef) child;
+                collapseLinkRefChildren(child, isDefined);
+
+                if (linkRef.isDummyReference() || !linkRef.isReferenceTextCombined()) {
+                    list.add(linkRef.getTextOpeningMarker());
+                    list.addChildrenOf(linkRef); // this is the text
+                    list.add(linkRef.getTextClosingMarker());
+                    list.add(linkRef.getReferenceOpeningMarker());
+                    list.add(linkRef.getReference());
+                    list.add(linkRef.getReferenceClosingMarker());
+                } else {
+                    list.add(linkRef.getReferenceOpeningMarker());
+                    list.addChildrenOf(linkRef); // this is the reference
+                    list.add(linkRef.getReferenceClosingMarker());
+                }
+                linkRef.unlink();
+            } else {
+                list.add(child);
+            }
+            child = nextChild;
+        }
+
+        node.removeChildren();
+        list.appendAsChildrenTo(node);
     }
 
     /**

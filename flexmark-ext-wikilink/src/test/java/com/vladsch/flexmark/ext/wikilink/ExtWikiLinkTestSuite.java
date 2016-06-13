@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         WikiLinkFullSpecTest.class,
         WikiLinkSpecTest.class,
+        WikiLinkCreoleFullSpecTest.class,
 })
 public class ExtWikiLinkTestSuite {
 }

@@ -32,12 +32,18 @@ class DumpSpecReader extends SpecReader {
 
         // include source so that diff can be used to update spec
         if (example.getAst() != null) {
-            sb.append(SpecReader.EXAMPLE_START + " ").append(example.getSection()).append(": ").append(example.getExampleNumber()).append("\n")
+            sb.append(SpecReader.EXAMPLE_START);
+            if (testCase.includeExampleCoords())
+                sb.append(" ").append(example.getSection()).append(": ").append(example.getExampleNumber());
+            sb.append("\n")
                     .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.TYPE_BREAK).append("\n")
                     .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            sb.append(SpecReader.EXAMPLE_START + " ").append(example.getSection()).append(": ").append(example.getExampleNumber()).append("\n")
+            sb.append(SpecReader.EXAMPLE_START);
+            if (testCase.includeExampleCoords())
+                sb.append(" ").append(example.getSection()).append(": ").append(example.getExampleNumber());
+            sb.append("\n")
                     .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }

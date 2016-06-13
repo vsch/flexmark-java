@@ -38,6 +38,10 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         return false;
     }
 
+    protected boolean includeExampleCoords() {
+        return true;
+    }
+
     @Test
     public void testFullSpec() throws Exception {
         String specResourcePath = getSpecResourceName();

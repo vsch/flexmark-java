@@ -679,7 +679,7 @@ So, this is not a thematic break:
 .
 Document[0, 5]
   Paragraph[1, 5]
-    Emphasis[1, 4] textOpen:[1, 2, "*"] text:[2, 3] textClose:[3, 4, "*"]
+    Emphasis[1, 4] textOpen:[1, 2, "*"] text:[2, 3, "-"] textClose:[3, 4, "*"]
       Text[2, 3] chars:[2, 3, "-"]
 ````````````````````````````````
 
@@ -926,7 +926,7 @@ Contents are parsed as inlines:
 Document[0, 20]
   Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "foo *bar* \*baz\*"] textClose:[0, 0]
     Text[2, 6] chars:[2, 6, "foo "]
-    Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+    Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
       Text[7, 10] chars:[7, 10, "bar"]
     Text[11, 19] chars:[11, 19, " \*baz\*"]
 ````````````````````````````````
@@ -1193,11 +1193,11 @@ Foo *bar*
 Document[0, 41]
   Heading[0, 19] textOpen:[0, 0] text:[0, 9, "Foo *bar*"] textClose:[10, 19, "========="]
     Text[0, 4] chars:[0, 4, "Foo "]
-    Emphasis[4, 9] textOpen:[4, 5, "*"] text:[5, 8] textClose:[8, 9, "*"]
+    Emphasis[4, 9] textOpen:[4, 5, "*"] text:[5, 8, "bar"] textClose:[8, 9, "*"]
       Text[5, 8] chars:[5, 8, "bar"]
   Heading[21, 40] textOpen:[0, 0] text:[21, 30, "Foo *bar*"] textClose:[31, 40, "---------"]
     Text[21, 25] chars:[21, 25, "Foo "]
-    Emphasis[25, 30] textOpen:[25, 26, "*"] text:[26, 29] textClose:[29, 30, "*"]
+    Emphasis[25, 30] textOpen:[25, 26, "*"] text:[26, 29, "bar"] textClose:[29, 30, "*"]
       Text[26, 29] chars:[26, 29, "bar"]
 ````````````````````````````````
 
@@ -1215,7 +1215,7 @@ baz</em></h1>
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 0] text:[0, 13, "Foo *bar\nbaz*"] textClose:[14, 18, "===="]
     Text[0, 4] chars:[0, 4, "Foo "]
-    Emphasis[4, 13] textOpen:[4, 5, "*"] text:[5, 12] textClose:[12, 13, "*"]
+    Emphasis[4, 13] textOpen:[4, 5, "*"] text:[5, 12, "bar\nbaz"] textClose:[12, 13, "*"]
       Text[5, 8] chars:[5, 8, "bar"]
       SoftLineBreak[8, 9]
       Text[9, 12] chars:[9, 12, "baz"]
@@ -2336,7 +2336,7 @@ aaa</p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Code[0, 7] textOpen:[0, 3, "```"] text:[3, 4] textClose:[4, 7, "```"]
+    Code[0, 7] textOpen:[0, 3, "```"] text:[3, 4, " "] textClose:[4, 7, "```"]
     SoftLineBreak[7, 8]
     Text[8, 11] chars:[8, 11, "aaa"]
 ````````````````````````````````
@@ -2466,7 +2466,7 @@ foo</p>
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Code[0, 10] textOpen:[0, 3, "```"] text:[3, 7] textClose:[7, 10, "```"]
+    Code[0, 10] textOpen:[0, 3, "```"] text:[3, 7, " aa "] textClose:[7, 10, "```"]
     SoftLineBreak[10, 11]
     Text[11, 14] chars:[11, 14, "foo"]
 ````````````````````````````````
@@ -2622,7 +2622,7 @@ Here we have two HTML blocks with a Markdown paragraph between them:
 Document[0, 38]
   HtmlBlock[0, 18]
   Paragraph[19, 30]
-    Emphasis[19, 29] textOpen:[19, 20, "*"] text:[20, 28] textClose:[28, 29, "*"]
+    Emphasis[19, 29] textOpen:[19, 20, "*"] text:[20, 28, "Markdown"] textClose:[28, 29, "*"]
       Text[20, 28] chars:[20, 28, "Markdown"]
   HtmlBlock[31, 38]
 ````````````````````````````````
@@ -2673,7 +2673,7 @@ An open tag need not be closed:
 Document[0, 19]
   HtmlBlock[0, 12]
   Paragraph[13, 19]
-    Emphasis[13, 18] textOpen:[13, 14, "*"] text:[14, 17] textClose:[17, 18, "*"]
+    Emphasis[13, 18] textOpen:[13, 14, "*"] text:[14, 17, "bar"] textClose:[17, 18, "*"]
       Text[14, 17] chars:[14, 17, "bar"]
 ````````````````````````````````
 
@@ -2868,7 +2868,7 @@ line).  So the contents get interpreted as CommonMark:
 Document[0, 21]
   HtmlBlock[0, 6]
   Paragraph[7, 13]
-    Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11] textClose:[11, 12, "*"]
+    Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "foo"] textClose:[11, 12, "*"]
       Text[8, 11] chars:[8, 11, "foo"]
   HtmlBlock[14, 21]
 ````````````````````````````````
@@ -2887,7 +2887,7 @@ rather than an [HTML block].)
 Document[0, 17]
   Paragraph[0, 17]
     HtmlInline[0, 5]
-    Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9] textClose:[9, 10, "*"]
+    Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9, "foo"] textClose:[9, 10, "*"]
       Text[6, 9] chars:[6, 9, "foo"]
     HtmlInline[10, 16]
 ````````````````````````````````
@@ -3037,7 +3037,7 @@ The end tag can occur on the same line as the start tag:
 Document[0, 35]
   HtmlBlock[0, 29]
   Paragraph[29, 35]
-    Emphasis[29, 34] textOpen:[29, 30, "*"] text:[30, 33] textClose:[33, 34, "*"]
+    Emphasis[29, 34] textOpen:[29, 30, "*"] text:[30, 33, "foo"] textClose:[33, 34, "*"]
       Text[30, 33] chars:[30, 33, "foo"]
 ````````````````````````````````
 
@@ -3052,7 +3052,7 @@ Document[0, 35]
 Document[0, 24]
   HtmlBlock[0, 18]
   Paragraph[18, 24]
-    Emphasis[18, 23] textOpen:[18, 19, "*"] text:[19, 22] textClose:[22, 23, "*"]
+    Emphasis[18, 23] textOpen:[18, 19, "*"] text:[19, 22, "baz"] textClose:[22, 23, "*"]
       Text[19, 22] chars:[19, 22, "baz"]
 ````````````````````````````````
 
@@ -3296,7 +3296,7 @@ Compare:
 Document[0, 34]
   HtmlBlock[0, 6]
   Paragraph[7, 26]
-    Emphasis[7, 19] textOpen:[7, 8, "*"] text:[8, 18] textClose:[18, 19, "*"]
+    Emphasis[7, 19] textOpen:[7, 8, "*"] text:[8, 18, "Emphasized"] textClose:[18, 19, "*"]
       Text[8, 18] chars:[8, 18, "Emphasized"]
     Text[19, 25] chars:[19, 25, " text."]
   HtmlBlock[27, 34]
@@ -7171,7 +7171,7 @@ Thus, for example, in
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Code[0, 4] textOpen:[0, 1, "`"] text:[1, 3] textClose:[3, 4, "`"]
+    Code[0, 4] textOpen:[0, 1, "`"] text:[1, 3, "hi"] textClose:[3, 4, "`"]
     Text[4, 7] chars:[4, 7, "lo`"]
 ````````````````````````````````
 
@@ -7204,7 +7204,7 @@ backslashes:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Text[0, 14] chars:[0, 14, "\	\A\"..."3\φ\«"]
+    Text[0, 14] chars:[0, 14, "\\u2192\A\"..."3\φ\«"]
 ````````````````````````````````
 
 
@@ -7260,7 +7260,7 @@ If a backslash is itself escaped, the following character is not:
 Document[0, 13]
   Paragraph[0, 13]
     Text[0, 2] chars:[0, 2, "\\"]
-    Emphasis[2, 12] textOpen:[2, 3, "*"] text:[3, 11] textClose:[11, 12, "*"]
+    Emphasis[2, 12] textOpen:[2, 3, "*"] text:[3, 11, "emphasis"] textClose:[11, 12, "*"]
       Text[3, 11] chars:[3, 11, "emphasis"]
 ````````````````````````````````
 
@@ -7292,7 +7292,7 @@ raw HTML:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Code[0, 10] textOpen:[0, 2, "``"] text:[2, 8] textClose:[8, 10, "``"]
+    Code[0, 10] textOpen:[0, 2, "``"] text:[2, 8, " \[\` "] textClose:[8, 10, "``"]
 ````````````````````````````````
 
 
@@ -7593,7 +7593,7 @@ text in code spans and code blocks:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Code[0, 15] textOpen:[0, 1, "`"] text:[1, 14] textClose:[14, 15, "`"]
+    Code[0, 15] textOpen:[0, 1, "`"] text:[1, 14, "f&oum"..."l;&ouml;"] textClose:[14, 15, "`"]
 ````````````````````````````````
 
 
@@ -7629,7 +7629,7 @@ This is a simple code span:
 .
 Document[0, 6]
   Paragraph[0, 6]
-    Code[0, 5] textOpen:[0, 1, "`"] text:[1, 4] textClose:[4, 5, "`"]
+    Code[0, 5] textOpen:[0, 1, "`"] text:[1, 4, "foo"] textClose:[4, 5, "`"]
 ````````````````````````````````
 
 
@@ -7643,7 +7643,7 @@ This example also illustrates stripping of leading and trailing spaces:
 .
 Document[0, 17]
   Paragraph[0, 17]
-    Code[0, 16] textOpen:[0, 2, "``"] text:[2, 14] textClose:[14, 16, "``"]
+    Code[0, 16] textOpen:[0, 2, "``"] text:[2, 14, " foo "..."` bar  "] textClose:[14, 16, "``"]
 ````````````````````````````````
 
 
@@ -7657,7 +7657,7 @@ spaces:
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5] textClose:[5, 6, "`"]
+    Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5, " `` "] textClose:[5, 6, "`"]
 ````````````````````````````````
 
 
@@ -7672,7 +7672,7 @@ foo
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Code[0, 9] textOpen:[0, 2, "``"] text:[2, 7] textClose:[7, 9, "``"]
+    Code[0, 9] textOpen:[0, 2, "``"] text:[2, 7, "\nfoo\n"] textClose:[7, 9, "``"]
 ````````````````````````````````
 
 
@@ -7687,7 +7687,7 @@ single spaces, just as they would be by a browser:
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Code[0, 17] textOpen:[0, 1, "`"] text:[1, 16] textClose:[16, 17, "`"]
+    Code[0, 17] textOpen:[0, 1, "`"] text:[1, 16, "foo  "..." bar\nbaz"] textClose:[16, 17, "`"]
 ````````````````````````````````
 
 
@@ -7711,7 +7711,7 @@ targeted.)
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11] textClose:[11, 12, "`"]
+    Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "foo `` bar"] textClose:[11, 12, "`"]
 ````````````````````````````````
 
 
@@ -7725,7 +7725,7 @@ are treated literally:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5] textClose:[5, 6, "`"]
+    Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5, "foo\"] textClose:[5, 6, "`"]
     Text[6, 10] chars:[6, 10, "bar`"]
 ````````````````````````````````
 
@@ -7747,7 +7747,7 @@ span:
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "*foo"]
-    Code[4, 7] textOpen:[4, 5, "`"] text:[5, 6] textClose:[6, 7, "`"]
+    Code[4, 7] textOpen:[4, 5, "`"] text:[5, 6, "*"] textClose:[6, 7, "`"]
 ````````````````````````````````
 
 
@@ -7761,7 +7761,7 @@ And this is not parsed as a link:
 Document[0, 21]
   Paragraph[0, 21]
     Text[0, 7] chars:[0, 7, "[not a "]
-    Code[7, 19] textOpen:[7, 8, "`"] text:[8, 18] textClose:[18, 19, "`"]
+    Code[7, 19] textOpen:[7, 8, "`"] text:[8, 18, "link](/foo"] textClose:[18, 19, "`"]
     Text[19, 20] chars:[19, 20, ")"]
 ````````````````````````````````
 
@@ -7776,7 +7776,7 @@ Thus, this is code:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Code[0, 11] textOpen:[0, 1, "`"] text:[1, 10] textClose:[10, 11, "`"]
+    Code[0, 11] textOpen:[0, 1, "`"] text:[1, 10, "<a href=""] textClose:[10, 11, "`"]
     Text[11, 14] chars:[11, 14, "">`"]
 ````````````````````````````````
 
@@ -7804,7 +7804,7 @@ And this is code:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17] textClose:[17, 18, "`"]
+    Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "<http"..."://foo.bar."] textClose:[17, 18, "`"]
     Text[18, 23] chars:[18, 23, "baz>`"]
 ````````````````````````````````
 
@@ -8058,7 +8058,7 @@ Rule 1:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8] textClose:[8, 9, "*"]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "foo bar"] textClose:[8, 9, "*"]
       Text[1, 8] chars:[1, 8, "foo bar"]
 ````````````````````````````````
 
@@ -8115,7 +8115,7 @@ foo*bar*
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3] chars:[0, 3, "foo"]
-    Emphasis[3, 8] textOpen:[3, 4, "*"] text:[4, 7] textClose:[7, 8, "*"]
+    Emphasis[3, 8] textOpen:[3, 4, "*"] text:[4, 7, "bar"] textClose:[7, 8, "*"]
       Text[4, 7] chars:[4, 7, "bar"]
 ````````````````````````````````
 
@@ -8128,7 +8128,7 @@ Document[0, 9]
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1] chars:[0, 1, "5"]
-    Emphasis[1, 4] textOpen:[1, 2, "*"] text:[2, 3] textClose:[3, 4, "*"]
+    Emphasis[1, 4] textOpen:[1, 2, "*"] text:[2, 3, "6"] textClose:[3, 4, "*"]
       Text[2, 3] chars:[2, 3, "6"]
     Text[4, 6] chars:[4, 6, "78"]
 ````````````````````````````````
@@ -8143,7 +8143,7 @@ _foo bar_
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9] textOpen:[0, 1, "_"] text:[1, 8] textClose:[8, 9, "_"]
+    Emphasis[0, 9] textOpen:[0, 1, "_"] text:[1, 8, "foo bar"] textClose:[8, 9, "_"]
       Text[1, 8] chars:[1, 8, "foo bar"]
 ````````````````````````````````
 
@@ -8237,7 +8237,7 @@ foo-_(bar)_
 Document[0, 12]
   Paragraph[0, 12]
     Text[0, 4] chars:[0, 4, "foo-"]
-    Emphasis[4, 11] textOpen:[4, 5, "_"] text:[5, 10] textClose:[10, 11, "_"]
+    Emphasis[4, 11] textOpen:[4, 5, "_"] text:[5, 10, "(bar)"] textClose:[10, 11, "_"]
       Text[5, 10] chars:[5, 10, "(bar)"]
 ````````````````````````````````
 
@@ -8316,9 +8316,9 @@ with this example:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8] textClose:[8, 9, "*"]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "(*foo*)"] textClose:[8, 9, "*"]
       Text[1, 2] chars:[1, 2, "("]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 8] chars:[7, 8, ")"]
 ````````````````````````````````
@@ -8333,7 +8333,7 @@ Intraword emphasis with `*` is allowed:
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4] textClose:[4, 5, "*"]
+    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 8] chars:[5, 8, "bar"]
 ````````````````````````````````
@@ -8379,9 +8379,9 @@ _(_foo_)_
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9] textOpen:[0, 1, "_"] text:[1, 8] textClose:[8, 9, "_"]
+    Emphasis[0, 9] textOpen:[0, 1, "_"] text:[1, 8, "(_foo_)"] textClose:[8, 9, "_"]
       Text[1, 2] chars:[1, 2, "("]
-      Emphasis[2, 7] textOpen:[2, 3, "_"] text:[3, 6] textClose:[6, 7, "_"]
+      Emphasis[2, 7] textOpen:[2, 3, "_"] text:[3, 6, "foo"] textClose:[6, 7, "_"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 8] chars:[7, 8, ")"]
 ````````````````````````````````
@@ -8418,7 +8418,7 @@ _foo_bar_baz_
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 13] textOpen:[0, 1, "_"] text:[1, 12] textClose:[12, 13, "_"]
+    Emphasis[0, 13] textOpen:[0, 1, "_"] text:[1, 12, "foo_bar_baz"] textClose:[12, 13, "_"]
       Text[1, 12] chars:[1, 12, "foo_b"..."r_baz"]
 ````````````````````````````````
 
@@ -8434,7 +8434,7 @@ _(bar)_.
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6] textClose:[6, 7, "_"]
+    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6, "(bar)"] textClose:[6, 7, "_"]
       Text[1, 6] chars:[1, 6, "(bar)"]
     Text[7, 8] chars:[7, 8, "."]
 ````````````````````````````````
@@ -8449,7 +8449,7 @@ Rule 5:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9] textClose:[9, 11, "**"]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "foo bar"] textClose:[9, 11, "**"]
       Text[2, 9] chars:[2, 9, "foo bar"]
 ````````````````````````````````
 
@@ -8493,7 +8493,7 @@ foo**bar**
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 3] chars:[0, 3, "foo"]
-    StrongEmphasis[3, 10] textOpen:[3, 5, "**"] text:[5, 8] textClose:[8, 10, "**"]
+    StrongEmphasis[3, 10] textOpen:[3, 5, "**"] text:[5, 8, "bar"] textClose:[8, 10, "**"]
       Text[5, 8] chars:[5, 8, "bar"]
 ````````````````````````````````
 
@@ -8507,7 +8507,7 @@ __foo bar__
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11] textOpen:[0, 2, "__"] text:[2, 9] textClose:[9, 11, "__"]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "__"] text:[2, 9, "foo bar"] textClose:[9, 11, "__"]
       Text[2, 9] chars:[2, 9, "foo bar"]
 ````````````````````````````````
 
@@ -8598,9 +8598,9 @@ __foo, __bar__, baz__
 .
 Document[0, 22]
   Paragraph[0, 22]
-    StrongEmphasis[0, 21] textOpen:[0, 2, "__"] text:[2, 19] textClose:[19, 21, "__"]
+    StrongEmphasis[0, 21] textOpen:[0, 2, "__"] text:[2, 19, "foo, __bar__, baz"] textClose:[19, 21, "__"]
       Text[2, 7] chars:[2, 7, "foo, "]
-      StrongEmphasis[7, 14] textOpen:[7, 9, "__"] text:[9, 12] textClose:[12, 14, "__"]
+      StrongEmphasis[7, 14] textOpen:[7, 9, "__"] text:[9, 12, "bar"] textClose:[12, 14, "__"]
         Text[9, 12] chars:[9, 12, "bar"]
       Text[14, 19] chars:[14, 19, ", baz"]
 ````````````````````````````````
@@ -8618,7 +8618,7 @@ foo-__(bar)__
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 4] chars:[0, 4, "foo-"]
-    StrongEmphasis[4, 13] textOpen:[4, 6, "__"] text:[6, 11] textClose:[11, 13, "__"]
+    StrongEmphasis[4, 13] textOpen:[4, 6, "__"] text:[6, 11, "(bar)"] textClose:[11, 13, "__"]
       Text[6, 11] chars:[6, 11, "(bar)"]
 ````````````````````````````````
 
@@ -8667,9 +8667,9 @@ with these examples:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10] textClose:[10, 11, "*"]
+    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10, "(**foo**)"] textClose:[10, 11, "*"]
       Text[1, 2] chars:[1, 2, "("]
-      StrongEmphasis[2, 9] textOpen:[2, 4, "**"] text:[4, 7] textClose:[7, 9, "**"]
+      StrongEmphasis[2, 9] textOpen:[2, 4, "**"] text:[4, 7, "foo"] textClose:[7, 9, "**"]
         Text[4, 7] chars:[4, 7, "foo"]
       Text[9, 10] chars:[9, 10, ")"]
 ````````````````````````````````
@@ -8684,13 +8684,13 @@ Document[0, 12]
 .
 Document[0, 75]
   Paragraph[0, 75]
-    StrongEmphasis[0, 74] textOpen:[0, 2, "**"] text:[2, 72] textClose:[72, 74, "**"]
+    StrongEmphasis[0, 74] textOpen:[0, 2, "**"] text:[2, 72, "Gomphocarpus (*Gomphocarpus physocarpus*, syn.\n*Asclepias physocarpa*)"] textClose:[72, 74, "**"]
       Text[2, 16] chars:[2, 16, "Gomph"..."pus ("]
-      Emphasis[16, 42] textOpen:[16, 17, "*"] text:[17, 41] textClose:[41, 42, "*"]
+      Emphasis[16, 42] textOpen:[16, 17, "*"] text:[17, 41, "Gomphocarpus physocarpus"] textClose:[41, 42, "*"]
         Text[17, 41] chars:[17, 41, "Gomph"..."arpus"]
       Text[42, 48] chars:[42, 48, ", syn."]
       SoftLineBreak[48, 49]
-      Emphasis[49, 71] textOpen:[49, 50, "*"] text:[50, 70] textClose:[70, 71, "*"]
+      Emphasis[49, 71] textOpen:[49, 50, "*"] text:[50, 70, "Asclepias physocarpa"] textClose:[70, 71, "*"]
         Text[50, 70] chars:[50, 70, "Ascle"..."carpa"]
       Text[71, 72] chars:[71, 72, ")"]
 ````````````````````````````````
@@ -8703,9 +8703,9 @@ Document[0, 75]
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17] textClose:[17, 19, "**"]
+    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17, "foo "*bar*" foo"] textClose:[17, 19, "**"]
       Text[2, 7] chars:[2, 7, "foo ""]
-      Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11] textClose:[11, 12, "*"]
+      Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "bar"] textClose:[11, 12, "*"]
         Text[8, 11] chars:[8, 11, "bar"]
       Text[12, 17] chars:[12, 17, "" foo"]
 ````````````````````````````````
@@ -8720,7 +8720,7 @@ Intraword emphasis:
 .
 Document[0, 11]
   Paragraph[0, 11]
-    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5] textClose:[5, 7, "**"]
+    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5, "foo"] textClose:[5, 7, "**"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
@@ -8766,9 +8766,9 @@ _(__foo__)_
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11] textOpen:[0, 1, "_"] text:[1, 10] textClose:[10, 11, "_"]
+    Emphasis[0, 11] textOpen:[0, 1, "_"] text:[1, 10, "(__foo__)"] textClose:[10, 11, "_"]
       Text[1, 2] chars:[1, 2, "("]
-      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7] textClose:[7, 9, "__"]
+      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7, "foo"] textClose:[7, 9, "__"]
         Text[4, 7] chars:[4, 7, "foo"]
       Text[9, 10] chars:[9, 10, ")"]
 ````````````````````````````````
@@ -8805,7 +8805,7 @@ __foo__bar__baz__
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17] textOpen:[0, 2, "__"] text:[2, 15] textClose:[15, 17, "__"]
+    StrongEmphasis[0, 17] textOpen:[0, 2, "__"] text:[2, 15, "foo__bar__baz"] textClose:[15, 17, "__"]
       Text[2, 15] chars:[2, 15, "foo__"..."__baz"]
 ````````````````````````````````
 
@@ -8821,7 +8821,7 @@ __(bar)__.
 .
 Document[0, 11]
   Paragraph[0, 11]
-    StrongEmphasis[0, 9] textOpen:[0, 2, "__"] text:[2, 7] textClose:[7, 9, "__"]
+    StrongEmphasis[0, 9] textOpen:[0, 2, "__"] text:[2, 7, "(bar)"] textClose:[7, 9, "__"]
       Text[2, 7] chars:[2, 7, "(bar)"]
     Text[9, 10] chars:[9, 10, "."]
 ````````````````````````````````
@@ -8839,7 +8839,7 @@ emphasized span.
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16] textClose:[16, 17, "*"]
+    Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16, "foo [bar](/url)"] textClose:[16, 17, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
       Link[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
         Text[6, 9] chars:[6, 9, "bar"]
@@ -8855,7 +8855,7 @@ bar</em></p>
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8] textClose:[8, 9, "*"]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "foo\nbar"] textClose:[8, 9, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
       SoftLineBreak[4, 5]
       Text[5, 8] chars:[5, 8, "bar"]
@@ -8872,9 +8872,9 @@ _foo __bar__ baz_
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17] textOpen:[0, 1, "_"] text:[1, 16] textClose:[16, 17, "_"]
+    Emphasis[0, 17] textOpen:[0, 1, "_"] text:[1, 16, "foo __bar__ baz"] textClose:[16, 17, "_"]
       Text[1, 5] chars:[1, 5, "foo "]
-      StrongEmphasis[5, 12] textOpen:[5, 7, "__"] text:[7, 10] textClose:[10, 12, "__"]
+      StrongEmphasis[5, 12] textOpen:[5, 7, "__"] text:[7, 10, "bar"] textClose:[10, 12, "__"]
         Text[7, 10] chars:[7, 10, "bar"]
       Text[12, 16] chars:[12, 16, " baz"]
 ````````````````````````````````
@@ -8887,9 +8887,9 @@ _foo _bar_ baz_
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 15] textOpen:[0, 1, "_"] text:[1, 14] textClose:[14, 15, "_"]
+    Emphasis[0, 15] textOpen:[0, 1, "_"] text:[1, 14, "foo _bar_ baz"] textClose:[14, 15, "_"]
       Text[1, 5] chars:[1, 5, "foo "]
-      Emphasis[5, 10] textOpen:[5, 6, "_"] text:[6, 9] textClose:[9, 10, "_"]
+      Emphasis[5, 10] textOpen:[5, 6, "_"] text:[6, 9, "bar"] textClose:[9, 10, "_"]
         Text[6, 9] chars:[6, 9, "bar"]
       Text[10, 14] chars:[10, 14, " baz"]
 ````````````````````````````````
@@ -8902,8 +8902,8 @@ __foo_ bar_
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11] textOpen:[0, 1, "_"] text:[1, 10] textClose:[10, 11, "_"]
-      Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5] textClose:[5, 6, "_"]
+    Emphasis[0, 11] textOpen:[0, 1, "_"] text:[1, 10, "_foo_ bar"] textClose:[10, 11, "_"]
+      Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5, "foo"] textClose:[5, 6, "_"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 10] chars:[6, 10, " bar"]
 ````````````````````````````````
@@ -8916,9 +8916,9 @@ Document[0, 12]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9] textClose:[9, 10, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo *bar"] textClose:[9, 10, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9] textClose:[9, 10, "*"]
+      Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9, "bar"] textClose:[9, 10, "*"]
         Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
 
@@ -8930,9 +8930,9 @@ Document[0, 12]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16] textClose:[16, 17, "*"]
+    Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16, "foo **bar** baz"] textClose:[16, 17, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      StrongEmphasis[5, 12] textOpen:[5, 7, "**"] text:[7, 10] textClose:[10, 12, "**"]
+      StrongEmphasis[5, 12] textOpen:[5, 7, "**"] text:[7, 10, "bar"] textClose:[10, 12, "**"]
         Text[7, 10] chars:[7, 10, "bar"]
       Text[12, 16] chars:[12, 16, " baz"]
 ````````````````````````````````
@@ -8947,11 +8947,11 @@ But note:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4] textClose:[4, 5, "*"]
+    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9] textClose:[9, 10, "*"]
+    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9, "*bar"] textClose:[9, 10, "*"]
       Text[6, 9] chars:[6, 9, "bar"]
-    Emphasis[9, 15] textOpen:[9, 10, "*"] text:[10, 14] textClose:[14, 15, "*"]
+    Emphasis[9, 15] textOpen:[9, 10, "*"] text:[10, 14, "*baz"] textClose:[14, 15, "*"]
       Text[11, 14] chars:[11, 14, "baz"]
 ````````````````````````````````
 
@@ -8966,8 +8966,8 @@ The difference is that in the preceding case, the internal delimiters
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 13] textOpen:[0, 1, "*"] text:[1, 12] textClose:[12, 13, "*"]
-      StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6] textClose:[6, 8, "**"]
+    Emphasis[0, 13] textOpen:[0, 1, "*"] text:[1, 12, "**foo** bar"] textClose:[12, 13, "*"]
+      StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6, "foo"] textClose:[6, 8, "**"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[8, 12] chars:[8, 12, " bar"]
 ````````````````````````````````
@@ -8980,9 +8980,9 @@ Document[0, 14]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10] textClose:[10, 11, "*"]
+    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10, "foo **bar"] textClose:[10, 11, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      StrongEmphasis[5, 12] textOpen:[5, 7, "**"] text:[7, 10] textClose:[10, 12, "**"]
+      StrongEmphasis[5, 12] textOpen:[5, 7, "**"] text:[7, 10, "bar"] textClose:[10, 12, "**"]
         Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -8998,9 +8998,9 @@ emphasis, because the opening delimiter is closed by the first
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4] textClose:[4, 5, "*"]
+    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9] textClose:[9, 10, "*"]
+    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9, "*bar"] textClose:[9, 10, "*"]
       Text[6, 9] chars:[6, 9, "bar"]
     Text[10, 12] chars:[10, 12, "**"]
 ````````````````````````````````
@@ -9016,11 +9016,11 @@ Indefinite levels of nesting are possible:
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Emphasis[0, 27] textOpen:[0, 1, "*"] text:[1, 26] textClose:[26, 27, "*"]
+    Emphasis[0, 27] textOpen:[0, 1, "*"] text:[1, 26, "foo **bar *baz* bim** bop"] textClose:[26, 27, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      StrongEmphasis[5, 22] textOpen:[5, 7, "**"] text:[7, 20] textClose:[20, 22, "**"]
+      StrongEmphasis[5, 22] textOpen:[5, 7, "**"] text:[7, 20, "bar *baz* bim"] textClose:[20, 22, "**"]
         Text[7, 11] chars:[7, 11, "bar "]
-        Emphasis[11, 16] textOpen:[11, 12, "*"] text:[12, 15] textClose:[15, 16, "*"]
+        Emphasis[11, 16] textOpen:[11, 12, "*"] text:[12, 15, "baz"] textClose:[15, 16, "*"]
           Text[12, 15] chars:[12, 15, "baz"]
         Text[16, 20] chars:[16, 20, " bim"]
       Text[22, 26] chars:[22, 26, " bop"]
@@ -9034,10 +9034,10 @@ Document[0, 28]
 .
 Document[0, 20]
   Paragraph[0, 20]
-    Emphasis[0, 19] textOpen:[0, 1, "*"] text:[1, 18] textClose:[18, 19, "*"]
+    Emphasis[0, 19] textOpen:[0, 1, "*"] text:[1, 18, "foo [*bar*](/url)"] textClose:[18, 19, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
       Link[5, 17] textOpen:[5, 6, "["] text:[6, 11, "*bar*"] textClose:[11, 12, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[13, 17, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-        Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+        Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
           Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -9079,7 +9079,7 @@ strongly emphasized span.
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17] textClose:[17, 19, "**"]
+    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17, "foo [bar](/url)"] textClose:[17, 19, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
       Link[6, 16] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
         Text[7, 10] chars:[7, 10, "bar"]
@@ -9095,7 +9095,7 @@ bar</strong></p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9] textClose:[9, 11, "**"]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "foo\nbar"] textClose:[9, 11, "**"]
       Text[2, 5] chars:[2, 5, "foo"]
       SoftLineBreak[5, 6]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -9112,9 +9112,9 @@ __foo _bar_ baz__
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17] textOpen:[0, 2, "__"] text:[2, 15] textClose:[15, 17, "__"]
+    StrongEmphasis[0, 17] textOpen:[0, 2, "__"] text:[2, 15, "foo _bar_ baz"] textClose:[15, 17, "__"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "_"] text:[7, 10] textClose:[10, 11, "_"]
+      Emphasis[6, 11] textOpen:[6, 7, "_"] text:[7, 10, "bar"] textClose:[10, 11, "_"]
         Text[7, 10] chars:[7, 10, "bar"]
       Text[11, 15] chars:[11, 15, " baz"]
 ````````````````````````````````
@@ -9127,9 +9127,9 @@ __foo __bar__ baz__
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19] textOpen:[0, 2, "__"] text:[2, 17] textClose:[17, 19, "__"]
+    StrongEmphasis[0, 19] textOpen:[0, 2, "__"] text:[2, 17, "foo __bar__ baz"] textClose:[17, 19, "__"]
       Text[2, 6] chars:[2, 6, "foo "]
-      StrongEmphasis[6, 13] textOpen:[6, 8, "__"] text:[8, 11] textClose:[11, 13, "__"]
+      StrongEmphasis[6, 13] textOpen:[6, 8, "__"] text:[8, 11, "bar"] textClose:[11, 13, "__"]
         Text[8, 11] chars:[8, 11, "bar"]
       Text[13, 17] chars:[13, 17, " baz"]
 ````````````````````````````````
@@ -9142,8 +9142,8 @@ ____foo__ bar__
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 15] textOpen:[0, 2, "__"] text:[2, 13] textClose:[13, 15, "__"]
-      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7] textClose:[7, 9, "__"]
+    StrongEmphasis[0, 15] textOpen:[0, 2, "__"] text:[2, 13, "__foo__ bar"] textClose:[13, 15, "__"]
+      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7, "foo"] textClose:[7, 9, "__"]
         Text[4, 7] chars:[4, 7, "foo"]
       Text[9, 13] chars:[9, 13, " bar"]
 ````````````````````````````````
@@ -9156,9 +9156,9 @@ Document[0, 16]
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11] textClose:[11, 13, "**"]
+    StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11, "foo **bar"] textClose:[11, 13, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      StrongEmphasis[6, 13] textOpen:[6, 8, "**"] text:[8, 11] textClose:[11, 13, "**"]
+      StrongEmphasis[6, 13] textOpen:[6, 8, "**"] text:[8, 11, "bar"] textClose:[11, 13, "**"]
         Text[8, 11] chars:[8, 11, "bar"]
 ````````````````````````````````
 
@@ -9170,9 +9170,9 @@ Document[0, 16]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    StrongEmphasis[0, 17] textOpen:[0, 2, "**"] text:[2, 15] textClose:[15, 17, "**"]
+    StrongEmphasis[0, 17] textOpen:[0, 2, "**"] text:[2, 15, "foo *bar* baz"] textClose:[15, 17, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
       Text[11, 15] chars:[11, 15, " baz"]
 ````````````````````````````````
@@ -9187,8 +9187,8 @@ But note:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9] textClose:[9, 10, "*"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "*foo*bar"] textClose:[9, 10, "*"]
+      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 9] chars:[6, 9, "bar"]
     Text[10, 15] chars:[10, 15, "baz**"]
@@ -9205,8 +9205,8 @@ The difference is that in the preceding case, the internal delimiters
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11] textClose:[11, 13, "**"]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+    StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11, "*foo* bar"] textClose:[11, 13, "**"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
 ````````````````````````````````
@@ -9219,9 +9219,9 @@ Document[0, 14]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 12] textOpen:[0, 2, "**"] text:[2, 10] textClose:[10, 12, "**"]
+    StrongEmphasis[0, 12] textOpen:[0, 2, "**"] text:[2, 10, "foo *bar"] textClose:[10, 12, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -9237,11 +9237,11 @@ bim</em> bop</strong></p>
 .
 Document[0, 30]
   Paragraph[0, 30]
-    StrongEmphasis[0, 29] textOpen:[0, 2, "**"] text:[2, 27] textClose:[27, 29, "**"]
+    StrongEmphasis[0, 29] textOpen:[0, 2, "**"] text:[2, 27, "foo *bar **baz**\nbim* bop"] textClose:[27, 29, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22] textClose:[22, 23, "*"]
+      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22, "bar **baz**\nbim"] textClose:[22, 23, "*"]
         Text[7, 11] chars:[7, 11, "bar "]
-        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16] textClose:[16, 18, "**"]
+        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16, "baz"] textClose:[16, 18, "**"]
           Text[13, 16] chars:[13, 16, "baz"]
         SoftLineBreak[18, 19]
         Text[19, 22] chars:[19, 22, "bim"]
@@ -9256,10 +9256,10 @@ Document[0, 30]
 .
 Document[0, 22]
   Paragraph[0, 22]
-    StrongEmphasis[0, 21] textOpen:[0, 2, "**"] text:[2, 19] textClose:[19, 21, "**"]
+    StrongEmphasis[0, 21] textOpen:[0, 2, "**"] text:[2, 19, "foo [*bar*](/url)"] textClose:[19, 21, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
       Link[6, 18] textOpen:[6, 7, "["] text:[7, 12, "*bar*"] textClose:[12, 13, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[14, 18, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-        Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11] textClose:[11, 12, "*"]
+        Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "bar"] textClose:[11, 12, "*"]
           Text[8, 11] chars:[8, 11, "bar"]
 ````````````````````````````````
 
@@ -9310,7 +9310,7 @@ foo *\**
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 4] chars:[0, 4, "foo "]
-    Emphasis[4, 8] textOpen:[4, 5, "*"] text:[5, 7] textClose:[7, 8, "*"]
+    Emphasis[4, 8] textOpen:[4, 5, "*"] text:[5, 7, "\*"] textClose:[7, 8, "*"]
       Text[5, 7] chars:[5, 7, "\*"]
 ````````````````````````````````
 
@@ -9323,7 +9323,7 @@ foo *_*
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "foo "]
-    Emphasis[4, 7] textOpen:[4, 5, "*"] text:[5, 6] textClose:[6, 7, "*"]
+    Emphasis[4, 7] textOpen:[4, 5, "*"] text:[5, 6, "_"] textClose:[6, 7, "*"]
       Text[5, 6] chars:[5, 6, "_"]
 ````````````````````````````````
 
@@ -9347,7 +9347,7 @@ foo **\***
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 4] chars:[0, 4, "foo "]
-    StrongEmphasis[4, 10] textOpen:[4, 6, "**"] text:[6, 8] textClose:[8, 10, "**"]
+    StrongEmphasis[4, 10] textOpen:[4, 6, "**"] text:[6, 8, "\*"] textClose:[8, 10, "**"]
       Text[6, 8] chars:[6, 8, "\*"]
 ````````````````````````````````
 
@@ -9360,7 +9360,7 @@ foo **_**
 Document[0, 10]
   Paragraph[0, 10]
     Text[0, 4] chars:[0, 4, "foo "]
-    StrongEmphasis[4, 9] textOpen:[4, 6, "**"] text:[6, 7] textClose:[7, 9, "**"]
+    StrongEmphasis[4, 9] textOpen:[4, 6, "**"] text:[6, 7, "_"] textClose:[7, 9, "**"]
       Text[6, 7] chars:[6, 7, "_"]
 ````````````````````````````````
 
@@ -9377,7 +9377,7 @@ emphasis, rather than inside it:
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1] chars:[0, 1, "*"]
-    Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+    Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9389,7 +9389,7 @@ Document[0, 7]
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4] textClose:[4, 5, "*"]
+    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, "*"]
 ````````````````````````````````
@@ -9403,7 +9403,7 @@ Document[0, 7]
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 1] chars:[0, 1, "*"]
-    StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6] textClose:[6, 8, "**"]
+    StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6, "foo"] textClose:[6, 8, "**"]
       Text[3, 6] chars:[3, 6, "foo"]
 ````````````````````````````````
 
@@ -9416,7 +9416,7 @@ Document[0, 9]
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3] chars:[0, 3, "***"]
-    Emphasis[3, 8] textOpen:[3, 4, "*"] text:[4, 7] textClose:[7, 8, "*"]
+    Emphasis[3, 8] textOpen:[3, 4, "*"] text:[4, 7, "foo"] textClose:[7, 8, "*"]
       Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -9428,7 +9428,7 @@ Document[0, 9]
 .
 Document[0, 9]
   Paragraph[0, 9]
-    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5] textClose:[5, 7, "**"]
+    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5, "foo"] textClose:[5, 7, "**"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 8] chars:[7, 8, "*"]
 ````````````````````````````````
@@ -9441,7 +9441,7 @@ Document[0, 9]
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4] textClose:[4, 5, "*"]
+    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 8] chars:[5, 8, "***"]
 ````````````````````````````````
@@ -9469,7 +9469,7 @@ foo _\__
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 4] chars:[0, 4, "foo "]
-    Emphasis[4, 8] textOpen:[4, 5, "_"] text:[5, 7] textClose:[7, 8, "_"]
+    Emphasis[4, 8] textOpen:[4, 5, "_"] text:[5, 7, "\_"] textClose:[7, 8, "_"]
       Text[5, 7] chars:[5, 7, "\_"]
 ````````````````````````````````
 
@@ -9482,7 +9482,7 @@ foo _*_
 Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "foo "]
-    Emphasis[4, 7] textOpen:[4, 5, "_"] text:[5, 6] textClose:[6, 7, "_"]
+    Emphasis[4, 7] textOpen:[4, 5, "_"] text:[5, 6, "*"] textClose:[6, 7, "_"]
       Text[5, 6] chars:[5, 6, "*"]
 ````````````````````````````````
 
@@ -9506,7 +9506,7 @@ foo __\___
 Document[0, 11]
   Paragraph[0, 11]
     Text[0, 4] chars:[0, 4, "foo "]
-    StrongEmphasis[4, 10] textOpen:[4, 6, "__"] text:[6, 8] textClose:[8, 10, "__"]
+    StrongEmphasis[4, 10] textOpen:[4, 6, "__"] text:[6, 8, "\_"] textClose:[8, 10, "__"]
       Text[6, 8] chars:[6, 8, "\_"]
 ````````````````````````````````
 
@@ -9519,7 +9519,7 @@ foo __*__
 Document[0, 10]
   Paragraph[0, 10]
     Text[0, 4] chars:[0, 4, "foo "]
-    StrongEmphasis[4, 9] textOpen:[4, 6, "__"] text:[6, 7] textClose:[7, 9, "__"]
+    StrongEmphasis[4, 9] textOpen:[4, 6, "__"] text:[6, 7, "*"] textClose:[7, 9, "__"]
       Text[6, 7] chars:[6, 7, "*"]
 ````````````````````````````````
 
@@ -9532,7 +9532,7 @@ __foo_
 Document[0, 7]
   Paragraph[0, 7]
     Text[0, 1] chars:[0, 1, "_"]
-    Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5] textClose:[5, 6, "_"]
+    Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5, "foo"] textClose:[5, 6, "_"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9548,7 +9548,7 @@ _foo__
 .
 Document[0, 7]
   Paragraph[0, 7]
-    Emphasis[0, 5] textOpen:[0, 1, "_"] text:[1, 4] textClose:[4, 5, "_"]
+    Emphasis[0, 5] textOpen:[0, 1, "_"] text:[1, 4, "foo"] textClose:[4, 5, "_"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, "_"]
 ````````````````````````````````
@@ -9562,7 +9562,7 @@ ___foo__
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 1] chars:[0, 1, "_"]
-    StrongEmphasis[1, 8] textOpen:[1, 3, "__"] text:[3, 6] textClose:[6, 8, "__"]
+    StrongEmphasis[1, 8] textOpen:[1, 3, "__"] text:[3, 6, "foo"] textClose:[6, 8, "__"]
       Text[3, 6] chars:[3, 6, "foo"]
 ````````````````````````````````
 
@@ -9575,7 +9575,7 @@ ____foo_
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3] chars:[0, 3, "___"]
-    Emphasis[3, 8] textOpen:[3, 4, "_"] text:[4, 7] textClose:[7, 8, "_"]
+    Emphasis[3, 8] textOpen:[3, 4, "_"] text:[4, 7, "foo"] textClose:[7, 8, "_"]
       Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -9587,7 +9587,7 @@ __foo___
 .
 Document[0, 9]
   Paragraph[0, 9]
-    StrongEmphasis[0, 7] textOpen:[0, 2, "__"] text:[2, 5] textClose:[5, 7, "__"]
+    StrongEmphasis[0, 7] textOpen:[0, 2, "__"] text:[2, 5, "foo"] textClose:[5, 7, "__"]
       Text[2, 5] chars:[2, 5, "foo"]
     Text[7, 8] chars:[7, 8, "_"]
 ````````````````````````````````
@@ -9600,7 +9600,7 @@ _foo____
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Emphasis[0, 5] textOpen:[0, 1, "_"] text:[1, 4] textClose:[4, 5, "_"]
+    Emphasis[0, 5] textOpen:[0, 1, "_"] text:[1, 4, "foo"] textClose:[4, 5, "_"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 8] chars:[5, 8, "___"]
 ````````````````````````````````
@@ -9616,7 +9616,7 @@ emphasis, you must use different delimiters:
 .
 Document[0, 8]
   Paragraph[0, 8]
-    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5] textClose:[5, 7, "**"]
+    StrongEmphasis[0, 7] textOpen:[0, 2, "**"] text:[2, 5, "foo"] textClose:[5, 7, "**"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9628,8 +9628,8 @@ Document[0, 8]
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7] textOpen:[0, 1, "*"] text:[1, 6] textClose:[6, 7, "*"]
-      Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5] textClose:[5, 6, "_"]
+    Emphasis[0, 7] textOpen:[0, 1, "*"] text:[1, 6, "_foo_"] textClose:[6, 7, "*"]
+      Emphasis[1, 6] textOpen:[1, 2, "_"] text:[2, 5, "foo"] textClose:[5, 6, "_"]
         Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9641,7 +9641,7 @@ __foo__
 .
 Document[0, 8]
   Paragraph[0, 8]
-    StrongEmphasis[0, 7] textOpen:[0, 2, "__"] text:[2, 5] textClose:[5, 7, "__"]
+    StrongEmphasis[0, 7] textOpen:[0, 2, "__"] text:[2, 5, "foo"] textClose:[5, 7, "__"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9653,8 +9653,8 @@ _*foo*_
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6] textClose:[6, 7, "_"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6, "*foo*"] textClose:[6, 7, "_"]
+      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -9669,8 +9669,8 @@ switching delimiters:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 9] textOpen:[0, 2, "**"] text:[2, 7] textClose:[7, 9, "**"]
-      StrongEmphasis[2, 9] textOpen:[2, 4, "**"] text:[4, 7] textClose:[7, 9, "**"]
+    StrongEmphasis[0, 9] textOpen:[0, 2, "**"] text:[2, 7, "**foo"] textClose:[7, 9, "**"]
+      StrongEmphasis[2, 9] textOpen:[2, 4, "**"] text:[4, 7, "foo"] textClose:[7, 9, "**"]
         Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -9682,8 +9682,8 @@ ____foo____
 .
 Document[0, 12]
   Paragraph[0, 12]
-    StrongEmphasis[0, 9] textOpen:[0, 2, "__"] text:[2, 7] textClose:[7, 9, "__"]
-      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7] textClose:[7, 9, "__"]
+    StrongEmphasis[0, 9] textOpen:[0, 2, "__"] text:[2, 7, "__foo"] textClose:[7, 9, "__"]
+      StrongEmphasis[2, 9] textOpen:[2, 4, "__"] text:[4, 7, "foo"] textClose:[7, 9, "__"]
         Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -9699,9 +9699,9 @@ delimiters:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9] textClose:[9, 11, "**"]
-      StrongEmphasis[2, 11] textOpen:[2, 4, "**"] text:[4, 9] textClose:[9, 11, "**"]
-        StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9] textClose:[9, 11, "**"]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "****foo"] textClose:[9, 11, "**"]
+      StrongEmphasis[2, 11] textOpen:[2, 4, "**"] text:[4, 9, "**foo"] textClose:[9, 11, "**"]
+        StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9, "foo"] textClose:[9, 11, "**"]
           Text[6, 9] chars:[6, 9, "foo"]
 ````````````````````````````````
 
@@ -9715,8 +9715,8 @@ Rule 14:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    StrongEmphasis[0, 8] textOpen:[0, 2, "**"] text:[2, 6] textClose:[6, 8, "**"]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+    StrongEmphasis[0, 8] textOpen:[0, 2, "**"] text:[2, 6, "*foo"] textClose:[6, 8, "**"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
 ````````````````````````````````
 
@@ -9728,9 +9728,9 @@ _____foo_____
 .
 Document[0, 14]
   Paragraph[0, 14]
-    StrongEmphasis[0, 10] textOpen:[0, 2, "__"] text:[2, 8] textClose:[8, 10, "__"]
-      StrongEmphasis[2, 10] textOpen:[2, 4, "__"] text:[4, 8] textClose:[8, 10, "__"]
-        Emphasis[4, 9] textOpen:[4, 5, "_"] text:[5, 8] textClose:[8, 9, "_"]
+    StrongEmphasis[0, 10] textOpen:[0, 2, "__"] text:[2, 8, "___foo"] textClose:[8, 10, "__"]
+      StrongEmphasis[2, 10] textOpen:[2, 4, "__"] text:[4, 8, "_foo"] textClose:[8, 10, "__"]
+        Emphasis[4, 9] textOpen:[4, 5, "_"] text:[5, 8, "foo"] textClose:[8, 9, "_"]
           Text[5, 8] chars:[5, 8, "foo"]
 ````````````````````````````````
 
@@ -9744,7 +9744,7 @@ Rule 15:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9] textClose:[9, 10, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo _bar"] textClose:[9, 10, "*"]
       Text[1, 9] chars:[1, 9, "foo _bar"]
     Text[10, 15] chars:[10, 15, " baz_"]
 ````````````````````````````````
@@ -9757,8 +9757,8 @@ Document[0, 16]
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9] textClose:[9, 10, "*"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "*foo*bar"] textClose:[9, 10, "*"]
+      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 9] chars:[6, 9, "bar"]
     Text[10, 11] chars:[10, 11, "*"]
@@ -9772,9 +9772,9 @@ Document[0, 12]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    Emphasis[0, 26] textOpen:[0, 1, "*"] text:[1, 25] textClose:[25, 26, "*"]
+    Emphasis[0, 26] textOpen:[0, 1, "*"] text:[1, 25, "foo __bar *baz bim__ bam"] textClose:[25, 26, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      StrongEmphasis[5, 21] textOpen:[5, 7, "__"] text:[7, 19] textClose:[19, 21, "__"]
+      StrongEmphasis[5, 21] textOpen:[5, 7, "__"] text:[7, 19, "bar *baz bim"] textClose:[19, 21, "__"]
         Text[7, 19] chars:[7, 19, "bar *"..."z bim"]
       Text[21, 25] chars:[21, 25, " bam"]
 ````````````````````````````````
@@ -9790,7 +9790,7 @@ Rule 16:
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 6] chars:[0, 6, "**foo "]
-    StrongEmphasis[6, 17] textOpen:[6, 8, "**"] text:[8, 15] textClose:[15, 17, "**"]
+    StrongEmphasis[6, 17] textOpen:[6, 8, "**"] text:[8, 15, "bar baz"] textClose:[15, 17, "**"]
       Text[8, 15] chars:[8, 15, "bar baz"]
 ````````````````````````````````
 
@@ -9803,7 +9803,7 @@ Document[0, 18]
 Document[0, 15]
   Paragraph[0, 15]
     Text[0, 5] chars:[0, 5, "*foo "]
-    Emphasis[5, 14] textOpen:[5, 6, "*"] text:[6, 13] textClose:[13, 14, "*"]
+    Emphasis[5, 14] textOpen:[5, 6, "*"] text:[6, 13, "bar baz"] textClose:[13, 14, "*"]
       Text[6, 13] chars:[6, 13, "bar baz"]
 ````````````````````````````````
 
@@ -9879,9 +9879,9 @@ Document[0, 16]
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7] textOpen:[0, 1, "*"] text:[1, 6] textClose:[6, 7, "*"]
+    Emphasis[0, 7] textOpen:[0, 1, "*"] text:[1, 6, "a `*`"] textClose:[6, 7, "*"]
       Text[1, 3] chars:[1, 3, "a "]
-      Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5] textClose:[5, 6, "`"]
+      Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5, "*"] textClose:[5, 6, "`"]
 ````````````````````````````````
 
 
@@ -9892,9 +9892,9 @@ _a `_`_
 .
 Document[0, 8]
   Paragraph[0, 8]
-    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6] textClose:[6, 7, "_"]
+    Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6, "a `_`"] textClose:[6, 7, "_"]
       Text[1, 3] chars:[1, 3, "a "]
-      Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5] textClose:[5, 6, "`"]
+      Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5, "_"] textClose:[5, 6, "`"]
 ````````````````````````````````
 
 
@@ -10380,10 +10380,8 @@ unless they are escaped:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    Text[0, 11] chars:[0, 11, "[link"..."[foo "]
-    LinkRef[11, 16] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[11, 12, "["] reference:[12, 15, "bar"] referenceClose:[15, 16, "]"]
-      Text[12, 15] chars:[12, 15, "bar"]
-    Text[16, 24] chars:[16, 24, "]](/uri)"]
+    Link[0, 23] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[19, 23, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Text[1, 17] chars:[1, 17, "link "..."bar]]"]
 ````````````````````````````````
 
 
@@ -10436,12 +10434,12 @@ Document[0, 31]
   Paragraph[0, 31]
     Link[0, 29] textOpen:[0, 1, "["] text:[1, 23, "link *foo **bar** `#`*"] textClose:[23, 24, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[25, 29, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
       Text[1, 6] chars:[1, 6, "link "]
-      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22] textClose:[22, 23, "*"]
+      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22, "foo **bar** `#`"] textClose:[22, 23, "*"]
         Text[7, 11] chars:[7, 11, "foo "]
-        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16] textClose:[16, 18, "**"]
+        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16, "bar"] textClose:[16, 18, "**"]
           Text[13, 16] chars:[13, 16, "bar"]
         Text[18, 19] chars:[18, 19, " "]
-        Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21] textClose:[21, 22, "`"]
+        Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21, "#"] textClose:[21, 22, "`"]
 ````````````````````````````````
 
 
@@ -10482,7 +10480,7 @@ Document[0, 24]
 Document[0, 38]
   Paragraph[0, 38]
     Text[0, 5] chars:[0, 5, "[foo "]
-    Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29] textClose:[29, 30, "*"]
+    Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29, "[bar [baz](/uri)](/uri)"] textClose:[29, 30, "*"]
       Text[6, 11] chars:[6, 11, "[bar "]
       Link[11, 21] textOpen:[11, 12, "["] text:[12, 15, "baz"] textClose:[15, 16, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[17, 21, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
         Text[12, 15] chars:[12, 15, "baz"]
@@ -10544,9 +10542,9 @@ precedence:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 5] chars:[0, 5, "*foo "]
-    LinkRef[5, 15] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[5, 6, "["] reference:[6, 14, "bar* baz"] referenceClose:[14, 15, "]"]
-      Text[6, 14] chars:[6, 14, "bar* baz"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo [bar"] textClose:[9, 10, "*"]
+      Text[1, 9] chars:[1, 9, "foo [bar"]
+    Text[10, 15] chars:[10, 15, " baz]"]
 ````````````````````````````````
 
 
@@ -10573,7 +10571,7 @@ Document[0, 25]
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 4] chars:[0, 4, "[foo"]
-    Code[4, 13] textOpen:[4, 5, "`"] text:[5, 12] textClose:[12, 13, "`"]
+    Code[4, 13] textOpen:[4, 5, "`"] text:[5, 12, "](/uri)"] textClose:[12, 13, "`"]
 ````````````````````````````````
 
 
@@ -10647,12 +10645,8 @@ unless they are escaped:
 .
 Document[0, 37]
   Paragraph[0, 24]
-    Text[0, 11] chars:[0, 11, "[link"..."[foo "]
-    LinkRef[11, 16] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[11, 12, "["] reference:[12, 15, "bar"] referenceClose:[15, 16, "]"]
-      Text[12, 15] chars:[12, 15, "bar"]
-    Text[16, 18] chars:[16, 18, "]]"]
-    LinkRef[18, 23] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[18, 19, "["] reference:[19, 22, "ref"] referenceClose:[22, 23, "]"]
-      Text[19, 22] chars:[19, 22, "ref"]
+    LinkRef[0, 23] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] referenceOpen:[18, 19, "["] reference:[19, 22, "ref"] referenceClose:[22, 23, "]"]
+      Text[1, 17] chars:[1, 17, "link "..."bar]]"]
   Reference[25, 36] refOpen:[25, 26, "["] ref:[26, 29, "ref"] refClose:[29, 31, "]:"] urlOpen:[0, 0] url:[32, 36, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
@@ -10685,12 +10679,12 @@ Document[0, 43]
   Paragraph[0, 30]
     LinkRef[0, 29] textOpen:[0, 1, "["] text:[1, 23, "link *foo **bar** `#`*"] textClose:[23, 24, "]"] referenceOpen:[24, 25, "["] reference:[25, 28, "ref"] referenceClose:[28, 29, "]"]
       Text[1, 6] chars:[1, 6, "link "]
-      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22] textClose:[22, 23, "*"]
+      Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22, "foo **bar** `#`"] textClose:[22, 23, "*"]
         Text[7, 11] chars:[7, 11, "foo "]
-        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16] textClose:[16, 18, "**"]
+        StrongEmphasis[11, 18] textOpen:[11, 13, "**"] text:[13, 16, "bar"] textClose:[16, 18, "**"]
           Text[13, 16] chars:[13, 16, "bar"]
         Text[18, 19] chars:[18, 19, " "]
-        Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21] textClose:[21, 22, "`"]
+        Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21, "#"] textClose:[21, 22, "`"]
   Reference[31, 42] refOpen:[31, 32, "["] ref:[32, 35, "ref"] refClose:[35, 37, "]:"] urlOpen:[0, 0] url:[38, 42, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
@@ -10742,7 +10736,7 @@ Document[0, 36]
 Document[0, 41]
   Paragraph[0, 28]
     Text[0, 5] chars:[0, 5, "[foo "]
-    Emphasis[5, 21] textOpen:[5, 6, "*"] text:[6, 20] textClose:[20, 21, "*"]
+    Emphasis[5, 21] textOpen:[5, 6, "*"] text:[6, 20, "bar [baz][ref]"] textClose:[20, 21, "*"]
       Text[6, 10] chars:[6, 10, "bar "]
       LinkRef[10, 20] textOpen:[10, 11, "["] text:[11, 14, "baz"] textClose:[14, 15, "]"] referenceOpen:[15, 16, "["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"]
         Text[11, 14] chars:[11, 14, "baz"]
@@ -10818,7 +10812,7 @@ Document[0, 38]
 Document[0, 26]
   Paragraph[0, 13]
     Text[0, 4] chars:[0, 4, "[foo"]
-    Code[4, 12] textOpen:[4, 5, "`"] text:[5, 11] textClose:[11, 12, "`"]
+    Code[4, 12] textOpen:[4, 5, "`"] text:[5, 11, "][ref]"] textClose:[11, 12, "`"]
   Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] urlOpen:[0, 0] url:[21, 25, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
@@ -11178,7 +11172,7 @@ Document[0, 29]
 Document[0, 41]
   Paragraph[0, 14]
     LinkRef[0, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 10] chars:[6, 10, " bar"]
   Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
@@ -11259,7 +11253,7 @@ Document[0, 27]
 Document[0, 39]
   Paragraph[0, 12]
     LinkRef[0, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5] textClose:[5, 6, "*"]
+      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 10] chars:[6, 10, " bar"]
   Reference[13, 38] refOpen:[13, 14, "["] ref:[14, 23, "*foo* bar"] refClose:[23, 25, "]:"] urlOpen:[0, 0] url:[26, 30, "/url"] urlClose:[0, 0] titleOpen:[31, 32, """] title:[32, 37, "title"] titleClose:[37, 38, """]
@@ -11277,7 +11271,7 @@ Document[0, 41]
   Paragraph[0, 14]
     Text[0, 1] chars:[0, 1, "["]
     LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
     Text[12, 13] chars:[12, 13, "]"]
@@ -11491,7 +11485,7 @@ Document[0, 55]
   Paragraph[0, 13]
     ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
   Reference[15, 54] refOpen:[15, 16, "["] ref:[16, 25, "foo *bar*"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 37, "train.jpg"] urlClose:[0, 0] titleOpen:[38, 39, """] title:[39, 53, "train & tracks"] titleClose:[53, 54, """]
 ````````````````````````````````
@@ -11543,7 +11537,7 @@ Document[0, 56]
   Paragraph[0, 15]
     ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
   Reference[16, 55] refOpen:[16, 17, "["] ref:[17, 26, "foo *bar*"] refClose:[26, 28, "]:"] urlOpen:[0, 0] url:[29, 38, "train.jpg"] urlClose:[0, 0] titleOpen:[39, 40, """] title:[40, 54, "train & tracks"] titleClose:[54, 55, """]
 ````````````````````````````````
@@ -11560,7 +11554,7 @@ Document[0, 59]
   Paragraph[0, 21]
     ImageRef[1, 20] textOpen:[1, 2, "["] text:[2, 11, "foo *bar*"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 19, "foobar"] referenceClose:[19, 20, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10] textClose:[10, 11, "*"]
+      Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
   Reference[22, 58] refOpen:[22, 23, "["] ref:[23, 29, "FOOBAR"] refClose:[29, 31, "]:"] urlOpen:[0, 0] url:[32, 41, "train.jpg"] urlClose:[0, 0] titleOpen:[42, 43, """] title:[43, 57, "train & tracks"] titleClose:[57, 58, """]
 ````````````````````````````````
@@ -11673,7 +11667,7 @@ Document[0, 30]
 Document[0, 42]
   Paragraph[0, 15]
     ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
   Reference[16, 41] refOpen:[16, 17, "["] ref:[17, 26, "*foo* bar"] refClose:[26, 28, "]:"] urlOpen:[0, 0] url:[29, 33, "/url"] urlClose:[0, 0] titleOpen:[34, 35, """] title:[35, 40, "title"] titleClose:[40, 41, """]
@@ -11746,7 +11740,7 @@ Document[0, 28]
 Document[0, 40]
   Paragraph[0, 13]
     ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
-      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
   Reference[14, 39] refOpen:[14, 15, "["] ref:[15, 24, "*foo* bar"] refClose:[24, 26, "]:"] urlOpen:[0, 0] url:[27, 31, "/url"] urlClose:[0, 0] titleOpen:[32, 33, """] title:[33, 38, "title"] titleClose:[38, 39, """]
@@ -11765,9 +11759,10 @@ Note that link labels cannot contain unescaped brackets:
 .
 Document[0, 32]
   Paragraph[0, 9]
-    ImageRef[0, 8] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 7, "[foo]"] referenceClose:[7, 8, "]"]
-      LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
-        Text[3, 6] chars:[3, 6, "foo"]
+    Text[0, 2] chars:[0, 2, "!["]
+    LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
+      Text[3, 6] chars:[3, 6, "foo"]
+    Text[7, 8] chars:[7, 8, "]"]
   Paragraph[10, 32]
     Text[10, 11] chars:[10, 11, "["]
     LinkRef[11, 16] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[11, 12, "["] reference:[12, 15, "foo"] referenceClose:[15, 16, "]"]
@@ -12563,7 +12558,7 @@ bar</em></p>
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10] textClose:[10, 11, "*"]
+    Emphasis[0, 11] textOpen:[0, 1, "*"] text:[1, 10, "foo  \nbar"] textClose:[10, 11, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
       HardLineBreak[4, 7]
       Text[7, 10] chars:[7, 10, "bar"]
@@ -12579,7 +12574,7 @@ bar</em></p>
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9] textClose:[9, 10, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo\\nbar"] textClose:[9, 10, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
       HardLineBreak[5, 6]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -12596,7 +12591,7 @@ span`
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Code[0, 13] textOpen:[0, 1, "`"] text:[1, 12] textClose:[12, 13, "`"]
+    Code[0, 13] textOpen:[0, 1, "`"] text:[1, 12, "code "..." \nspan"] textClose:[12, 13, "`"]
 ````````````````````````````````
 
 
@@ -12608,7 +12603,7 @@ span`
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11] textClose:[11, 12, "`"]
+    Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "code\\nspan"] textClose:[11, 12, "`"]
 ````````````````````````````````
 
 

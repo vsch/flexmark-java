@@ -28,11 +28,11 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
     @Override
     public void getAstExtra(StringBuilder out) {
         if (linkIsFirst) {
-            segmentSpanChars(out, openingMarker, "open");
+            segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, text, "text");
             segmentSpanChars(out, textSeparatorMarker, "textSep");
             segmentSpanChars(out, link, "link");
-            segmentSpanChars(out, closingMarker, "close");
+            segmentSpanChars(out, closingMarker, "linkClose");
         } else {
             segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, link, "link");

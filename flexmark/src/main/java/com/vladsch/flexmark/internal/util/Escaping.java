@@ -269,7 +269,8 @@ public class Escaping {
         // Strip '[' and ']', then trim and convert to lowercase
         if (input.length() > 1) {
             int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
-            return Escaping.collapseWhitespace(input.subSequence(1, input.length() - stripEnd).toString(), true);
+            int stripStart = input.charAt(0) == '!' ? 2 : 1;
+            return Escaping.collapseWhitespace(input.subSequence(stripStart, input.length() - stripEnd).toString(), true);
         }
         return input.toString();
     }

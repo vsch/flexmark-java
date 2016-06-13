@@ -4,8 +4,8 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 
-public class FullSpecCoreTest extends FullSpecTestCase {
-    static final String SPEC_RESOURCE = "/ast_spec.txt";
+public class FullOrigSpecCoreTest extends FullSpecTestCase {
+    static final String SPEC_RESOURCE = "/spec.txt";
     static final Parser PARSER = Parser.builder().build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
     static final HtmlRenderer RENDERER = HtmlRenderer.builder().percentEncodeUrls(true).build();
@@ -18,6 +18,11 @@ public class FullSpecCoreTest extends FullSpecTestCase {
     @Override
     protected Node parse(String source) {
         return PARSER.parse(source);
+    }
+
+    @Override
+    protected boolean includeExampleCoords() {
+        return false;
     }
 
     @Override

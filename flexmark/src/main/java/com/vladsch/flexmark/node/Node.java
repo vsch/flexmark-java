@@ -4,7 +4,7 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
 
 public abstract class Node {
-    final static public BasedSequence[] EMPTY_SEGMENTS = new BasedSequence[0];
+    final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
 
     private Node parent = null;
     private Node firstChild = null;
@@ -25,6 +25,15 @@ public abstract class Node {
     // full document char sequence
     public BasedSequence getChars() {
         return chars;
+    }
+
+    public void removeChildren() {
+        Node child = firstChild;
+        while (child != null) {
+            Node nextChild = child.getNext();
+            child.unlink();
+            child = nextChild;
+        }
     }
 
     public Document getDocument() {
@@ -209,7 +218,7 @@ public abstract class Node {
     public void setCharsFromContent() {
         BasedSequence[] segments = getSegments();
         BasedSequence spanningChars = null;
-        
+
         if (segments.length > 0) {
             BasedSequence leadSegment = getLeadSegment(segments);
             BasedSequence trailSegment = getTrailSegment(segments);
@@ -278,7 +287,12 @@ public abstract class Node {
 
     public static void delimitedSegmentSpan(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
         segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
-        segmentSpan(out, sequence.getStartOffset(), sequence.getEndOffset(), name);
+        if (sequence.length() <= 10) {
+            segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
+        } else {
+            // give the first 5 and last 5
+            segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + sequence.endSequence(sequence.length() - 5).toVisibleWhitespaceString());
+        }
         segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 

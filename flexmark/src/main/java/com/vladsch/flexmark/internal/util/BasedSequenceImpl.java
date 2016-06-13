@@ -450,4 +450,10 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public boolean isContinuationOf(BasedSequence other) {
         return other.length() > 0 && length() > 0 && other.getBase() == getBase() && other.getEndOffset() == getStartOffset();
     }
+
+    @Override
+    public BasedSequence spliceAtEnd(BasedSequence other) {
+        assert isContinuedBy(other) : "sequence[" + getStartOffset() + ", " + getEndOffset() + "] is not continued by other[" + other.getStartOffset() + ", " + other.getEndOffset() + "]";
+        return baseSubSequence(getStartOffset(), other.getEndOffset());
+    }
 }

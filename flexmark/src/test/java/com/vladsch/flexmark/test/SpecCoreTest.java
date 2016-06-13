@@ -1,10 +1,8 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.node.AbstractVisitor;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.Test;
@@ -17,10 +15,6 @@ import static org.junit.Assert.fail;
 
 public class SpecCoreTest extends SpecTestCase {
 
-    private static final Parser PARSER = Parser.builder().build();
-    // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final HtmlRenderer RENDERER = HtmlRenderer.builder().percentEncodeUrls(true).build();
-
     public SpecCoreTest(SpecExample example) {
         super(example);
     }
@@ -28,7 +22,7 @@ public class SpecCoreTest extends SpecTestCase {
     @Test
     public void testTextNodesContiguous() {
         final String source = example.getSource();
-        Node node = PARSER.parse(source);
+        Node node = FullSpecCoreTest.PARSER.parse(source);
         node.accept(new AbstractVisitor() {
             @Override
             protected void visitChildren(Node parent) {
@@ -65,11 +59,11 @@ public class SpecCoreTest extends SpecTestCase {
 
     @Override
     protected Node parse(String source) {
-        return PARSER.parse(source);
+        return FullSpecCoreTest.PARSER.parse(source);
     }
 
     @Override
     protected String render(Node node) {
-        return RENDERER.render(node);
+        return FullSpecCoreTest.RENDERER.render(node);
     }
 }

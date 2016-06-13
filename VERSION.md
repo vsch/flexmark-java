@@ -40,6 +40,12 @@ Version History
 - Add section and example number printing to `FullSpecTestCase` for cross referencing to test
   run results.
 
+- Add output of text for delimited nodes if <= 10 then the full string, else 5 chars from start
+  and end of the characters to make visual validation easier.
+
+- Fix parsing to make undefined link refs tentative which are replaced by equivalent text if
+  they are included in a label of a defined ref or link.
+
 0.1.1
 -----
 

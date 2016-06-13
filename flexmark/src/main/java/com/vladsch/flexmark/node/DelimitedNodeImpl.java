@@ -10,7 +10,7 @@ public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
+        delimitedSegmentSpanChars(out, openingMarker, text, closingMarker, "text");
     }
 
     @Override

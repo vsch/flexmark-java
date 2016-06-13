@@ -276,11 +276,13 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(ImageRef node) {
-        Reference reference = node.getReferenceNode();
-        if (reference == null) {
+        if (!node.isDefined()) {
             // empty ref, we treat it as text
+            assert !node.isDefined();
             html.text(node.getChars().unescape());
         } else {
+            Reference reference = node.getReferenceNode(context.getDocument());
+            assert reference != null;
             AltTextVisitor altTextVisitor = new AltTextVisitor();
             node.accept(altTextVisitor);
             String altText = altTextVisitor.getAltText();
@@ -299,9 +301,9 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(LinkRef node) {
-        Reference reference = node.getReferenceNode();
-        if (reference == null) {
+        if (!node.isDefined()) {
             // empty ref, we treat it as text
+            assert !node.isDefined();
             html.raw("[");
             visitChildren(node);
             html.raw("]");
@@ -312,6 +314,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
                 html.raw("]");
             }
         } else {
+            Reference reference = node.getReferenceNode(context.getDocument());
+            assert reference != null;
             String url = context.encodeUrl(reference.getUrl().unescape());
             html.attr("href", url);
             BasedSequence title = reference.getTitle();

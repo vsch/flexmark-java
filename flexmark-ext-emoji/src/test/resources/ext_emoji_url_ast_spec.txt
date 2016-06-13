@@ -64,7 +64,7 @@ Unknown shortcuts are converted to text with inline emphasis parsing
 Document[0, 15]
   Paragraph[0, 15]
     Emoji[0, 14] textOpen:[0, 1, ":"] text:[1, 13, "**warnings**"] textClose:[13, 14, ":"]
-      StrongEmphasis[1, 13] textOpen:[1, 3, "**"] text:[3, 11] textClose:[11, 13, "**"]
+      StrongEmphasis[1, 13] textOpen:[1, 3, "**"] text:[3, 11, "warnings"] textClose:[11, 13, "**"]
         Text[3, 11] chars:[3, 11, "warnings"]
 ````````````````````````````````
 

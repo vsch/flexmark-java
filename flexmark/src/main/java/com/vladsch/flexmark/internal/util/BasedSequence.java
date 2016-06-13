@@ -94,4 +94,6 @@ public interface BasedSequence extends CharSequence {
 
     boolean isContinuedBy(BasedSequence other);
     boolean isContinuationOf(BasedSequence other);
+
+    BasedSequence spliceAtEnd(BasedSequence other);
 }

@@ -32,6 +32,7 @@ import org.junit.runners.Suite;
         ParserTest.class,
         PathologicalTest.class,
         PrefixedSubSequenceTest.class,
+        FullOrigSpecCoreTest.class,
         FullSpecCoreTest.class,
         SpecCoreTest.class,
         FullExtraSpecTest.class,
