@@ -1,0 +1,111 @@
+---
+title: WikiLinks Extension Spec
+author: Vladimir Schneider
+version: 0.1
+date: '2016-06-06'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+...
+
+## WikiLinks
+
+Converts wikilink of the forms: [[link]], [[link|text]] and [[text|link]] to links in the HTML page.  
+
+```````````````````````````````` example
+[[wikilink]] [^footnote][ref] [[^footnote]] [[wiki]][ref]
+.
+<p><a><a href="wikilink">wikilink</a></a> [^footnote][ref] [[^footnote]] [[wiki]][ref]</p>
+.
+Document[0, 58]
+  Paragraph[0, 58]
+    WikiLink[0, 12] linkOpen:[0, 2, "[["] link:[2, 10, "wikilink"] textSep:[0, 0] text:[0, 0] linkClose:[10, 12, "]]"]
+    Text[12, 13] chars:[12, 13, " "]
+    LinkRef[13, 29] textOpen:[13, 14, "["] text:[14, 23, "^footnote"] textClose:[23, 24, "]"] referenceOpen:[24, 25, "["] reference:[25, 28, "ref"] referenceClose:[28, 29, "]"]
+      Text[14, 23] chars:[14, 23, "^footnote"]
+    Text[29, 31] chars:[29, 31, " ["]
+    LinkRef[31, 42] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[31, 32, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
+      Text[32, 41] chars:[32, 41, "^footnote"]
+    Text[42, 44] chars:[42, 44, "] "]
+    LinkRef[44, 57] textOpen:[44, 45, "["] text:[45, 51, "[wiki]"] textClose:[51, 52, "]"] referenceOpen:[52, 53, "["] reference:[53, 56, "ref"] referenceClose:[56, 57, "]"]
+      Text[45, 51] chars:[45, 51, "[wiki]"]
+````````````````````````````````
+
+
+
+```````````````````````````````` example
+![[wikilink]] [^footnote][ref] [[^footnote]] [[wiki]][ref]
+.
+<p><a><a href="wikilink">wikilink</a></a> [^footnote][ref] [[^footnote]] [[wiki]][ref]</p>
+.
+Document[0, 58]
+  Paragraph[0, 58]
+    WikiLink[0, 12] linkOpen:[0, 2, "[["] link:[2, 10, "wikilink"] textSep:[0, 0] text:[0, 0] linkClose:[10, 12, "]]"]
+    Text[12, 13] chars:[12, 13, " "]
+    LinkRef[13, 29] textOpen:[13, 14, "["] text:[14, 23, "^footnote"] textClose:[23, 24, "]"] referenceOpen:[24, 25, "["] reference:[25, 28, "ref"] referenceClose:[28, 29, "]"]
+      Text[14, 23] chars:[14, 23, "^footnote"]
+    Text[29, 31] chars:[29, 31, " ["]
+    LinkRef[31, 42] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[31, 32, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
+      Text[32, 41] chars:[32, 41, "^footnote"]
+    Text[42, 44] chars:[42, 44, "] "]
+    LinkRef[44, 57] textOpen:[44, 45, "["] text:[45, 51, "[wiki]"] textClose:[51, 52, "]"] referenceOpen:[52, 53, "["] reference:[53, 56, "ref"] referenceClose:[56, 57, "]"]
+      Text[45, 51] chars:[45, 51, "[wiki]"]
+````````````````````````````````
+
+no spaces between brackets
+
+```````````````````````````````` example
+[ [wikilink]]
+.
+<p>[ [wikilink]]</p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 2] chars:[0, 2, "[ "]
+    LinkRef[2, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 11, "wikilink"] referenceClose:[11, 12, "]"]
+      Text[3, 11] chars:[3, 11, "wikilink"]
+    Text[12, 13] chars:[12, 13, "]"]
+````````````````````````````````
+
+no spaces between brackets
+
+```````````````````````````````` example
+[[wikilink] ]
+.
+<p>[[wikilink] ]</p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 1] chars:[0, 1, "["]
+    LinkRef[1, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 10, "wikilink"] referenceClose:[10, 11, "]"]
+      Text[2, 10] chars:[2, 10, "wikilink"]
+    Text[11, 13] chars:[11, 13, " ]"]
+````````````````````````````````
+
+
+no reference following
+
+```````````````````````````````` example
+[[wikilink]][ref]
+.
+<p>[[wikilink]][ref]</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    LinkRef[0, 17] textOpen:[0, 1, "["] text:[1, 11, "[wikilink]"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 16, "ref"] referenceClose:[16, 17, "]"]
+      Text[1, 11] chars:[1, 11, "[wikilink]"]
+````````````````````````````````
+
+
+
+no dummy reference following
+
+```````````````````````````````` example
+[[wikilink]][]
+.
+<p><a><a href="wikilink">wikilink</a></a></p>
+.
+Document[0, 15]
+  Paragraph[0, 15]
+    WikiLink[0, 12] linkOpen:[0, 2, "[["] link:[2, 10, "wikilink"] textSep:[0, 0] text:[0, 0] linkClose:[10, 12, "]]"]
+````````````````````````````````
+
+
