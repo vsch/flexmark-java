@@ -10,7 +10,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public <T> MutableDataHolder set(DataKey<T> key, T value) {
+    public <T> MutableDataSet set(DataKey<T> key, T value) {
         dataSet.put(key, value);
         return this;
     }

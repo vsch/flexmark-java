@@ -1,9 +1,12 @@
-package com.vladsch.flexmark.node;
+package com.vladsch.flexmark.ext.wikilink;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.node.CustomNode;
+import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.Visitor;
 
-public class WikiLink extends LinkNode {
+public class WikiLink extends CustomNode implements DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence link = SubSequence.NULL;
     protected BasedSequence textSeparatorMarker = SubSequence.NULL;
@@ -50,6 +53,7 @@ public class WikiLink extends LinkNode {
     public WikiLink(BasedSequence chars, boolean linkIsFirst) {
         super(chars);
         this.linkIsFirst = linkIsFirst;
+        setLinkChars(chars);
     }
 
     public BasedSequence getOpeningMarker() {

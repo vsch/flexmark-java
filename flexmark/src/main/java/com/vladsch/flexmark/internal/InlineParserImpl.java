@@ -4,10 +4,7 @@ import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.BlockPreProcessor;
-import com.vladsch.flexmark.parser.DelimiterProcessor;
-import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
@@ -77,6 +74,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected final BitSet specialCharacters;
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
+    protected final ReferenceLinkProcessorData referenceLinkProcessors;
 
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
@@ -101,7 +99,16 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected ArrayList<BasedSequence> currentText;
 
     protected Document document;
-    final protected DataHolder options;
+
+    static class InlineParserOptions {
+        final public int wantLinkRefsWithMaxBrackets;
+
+        public InlineParserOptions(DataHolder options) {
+            wantLinkRefsWithMaxBrackets = options.get(Parser.WANT_LINK_REFS_WITH_BRACKETS);
+        }
+    }
+
+    final protected InlineParserOptions options;
 
     @Override
     public void initializeDocument(Document document) {
@@ -117,9 +124,10 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return currentText;
     }
 
-    public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
-        this.options = options;
+    public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, ReferenceLinkProcessorData referenceLinkProcessors) {
+        this.options = new InlineParserOptions(options);
         this.delimiterProcessors = delimiterProcessors;
+        this.referenceLinkProcessors = referenceLinkProcessors;
         this.delimiterCharacters = delimiterCharacters;
         this.specialCharacters = specialCharacters;
     }
@@ -155,6 +163,47 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map);
         addDelimiterProcessors(delimiterProcessors, map);
         return map;
+    }
+
+    // nothing to add, this is for extensions.
+    public static ReferenceLinkProcessorData calculateReferenceLinkProcessors(DataHolder options, List<ReferenceLinkProcessor> referenceLinkProcessors) {
+        if (referenceLinkProcessors.size() > 0) {
+            List<ReferenceLinkProcessor> sortedLinkProcessors = new ArrayList<>(referenceLinkProcessors.size());
+            sortedLinkProcessors.addAll(referenceLinkProcessors);
+
+            final int[] maxNestingLevelRef = new int[] { 0 };
+
+            sortedLinkProcessors.sort(new Comparator<ReferenceLinkProcessor>() {
+                @Override
+                public int compare(ReferenceLinkProcessor p1, ReferenceLinkProcessor p2) {
+                    int lv1 = p1.getNestingLevel();
+                    int lv2 = p2.getNestingLevel();
+                    if (maxNestingLevelRef[0] < lv1) maxNestingLevelRef[0] = lv1;
+                    if (maxNestingLevelRef[0] < lv2) maxNestingLevelRef[0] = lv2;
+                    return lv1 - lv2;
+                }
+            });
+
+            int maxNestingLevel = maxNestingLevelRef[0];
+
+            int maxReferenceLinkNesting = maxNestingLevel;
+            int[] nestingLookup = new int[maxNestingLevel + 1];
+
+            maxNestingLevel = -1;
+            int index = 0;
+            for (ReferenceLinkProcessor linkProcessor : sortedLinkProcessors) {
+                if (maxNestingLevel < linkProcessor.getNestingLevel()) {
+                    maxNestingLevel = linkProcessor.getNestingLevel();
+                    nestingLookup[maxNestingLevel] = index;
+                    if (maxNestingLevel == maxReferenceLinkNesting) break;
+                }
+                index++;
+            }
+
+            return new ReferenceLinkProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
+        } else {
+            return new ReferenceLinkProcessorData(referenceLinkProcessors, 0, new int[0]);
+        }
     }
 
     private static void addDelimiterProcessors(Iterable<DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
@@ -403,6 +452,14 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         }
     }
 
+    protected char peek(int ahead) {
+        if (index + ahead < input.length()) {
+            return input.charAt(index + ahead);
+        } else {
+            return '\0';
+        }
+    }
+
     /**
      * Parse zero or more space characters, including at most one newline.
      */
@@ -577,7 +634,8 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         index++;
         int startIndex = index;
 
-        boolean containsBracket = false;
+        boolean containsBrackets = false;
+
         // look through stack of delimiters for a [ or ![
         Delimiter opener = this.delimiter;
         while (opener != bracketDelimiterBottom) {
@@ -585,7 +643,8 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 if (!opener.matched) {
                     break;
                 }
-                containsBracket = true;
+
+                containsBrackets = true;
             }
             opener = opener.previous;
         }
@@ -618,6 +677,8 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         String label = null;
         Reference reference = null;
         boolean isWiki = false;
+        boolean stripBang = false;
+        Node wantedMatch = null;
 
         // Inline link?
         if (peek() == '(') {
@@ -637,93 +698,152 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                     isLinkOrImage = true;
                 }
             }
-        } else { // maybe reference link
-            // See if there's a link label
-            int beforeLabel = index;
-            int labelLength = parseLinkLabel();
-            if (labelLength > 2) {
-                ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
-            } else if (!containsBracket) {
-                // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
-                if (opener.delimiterChar == '!') {
-                    // this one has index off by one for the leading !
-                    ref = input.subSequence(opener.index - 1, startIndex);
-                } else {
-                    ref = input.subSequence(opener.index, startIndex);
+        } else {
+            // maybe reference link, need to see if need to skip this reference because it will be processed on the next char
+            // as something else, like a wiki link
+            boolean wantNextMatch = false;
+
+            // need to figure out max nesting we should test based on what is max processor desire and max available
+            // nested inner ones are always only []
+            int maxWanted = referenceLinkProcessors.maxNesting;
+            int maxAvail = 0;
+
+            if (maxWanted > 0) {
+                // need to see what is available
+                Delimiter nested = opener;
+                while (nested.previous != null && nested.previous.delimiterChar == '[' && nested.index == nested.previous.index + 1 && peek(maxAvail) == ']') {
+                    nested = nested.previous;
+                    maxAvail++;
+                    if (maxAvail == maxWanted) break;
                 }
-                refIsBare = true;
             }
 
-            if (ref != null) {
-                String normalizedLabel = Escaping.normalizeReference(ref);
-                if (referenceRepository.containsKey(normalizedLabel)) {
-                    isLinkOrImage = true;
-                } else if (opener.previous == null) {
-                    // it is the outermost ref and is bare, if not bare then we treat
-                    if (!refIsBare && peek() == '[') {
-                        int beforeNext = index;
-                        int nextLength = parseLinkLabel();
-                        if (nextLength > 0) {
-                            // not bare and not defined and followed by another [], roll back to before the label and make it just text
-                            index = beforeLabel;
+            for (int nesting = maxAvail + 1; nesting-- > 0; ) {
+                BasedSequence textNoBang = null;
+                BasedSequence textWithBang = null;
+                boolean wantBang;
+
+                for (ReferenceLinkProcessor linkProcessor : referenceLinkProcessors.processors) {
+                    BasedSequence nodeChars;
+                    wantBang = linkProcessor.getWantExclamationPrefix();
+
+                    // preview the link ref
+                    if (opener.delimiterChar == '!' && wantBang) {
+                        // this one has index off by one for the leading !
+                        if (textWithBang == null) textWithBang = input.subSequence(opener.index - 1 - nesting, startIndex + nesting);
+                        nodeChars = textWithBang;
+                    } else {
+                        if (textNoBang == null) textNoBang = input.subSequence(opener.index - nesting, startIndex + nesting);
+                        nodeChars = textNoBang;
+                    }
+
+                    if (linkProcessor.isMatch(nodeChars)) {
+                        if (nesting > 0) {
+                            wantNextMatch = true;
                         } else {
-                            ref = input.subSequence(opener.index, startIndex);
-                            refIsBare = true;
+                            wantedMatch = linkProcessor.createNode(nodeChars);
+                            stripBang = !wantBang;
+                        }
+                        break;
+                    }
+                }
+
+                if (wantedMatch != null || wantNextMatch) break;
+            }
+
+            if (wantNextMatch) {
+                // next one will be a match so we skip this one
+            } else if (wantedMatch != null) {
+            } else {
+                // See if there's a link label
+                int beforeLabel = index;
+                int labelLength = parseLinkLabel();
+                if (labelLength > 2) {
+                    ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
+                } else if (!containsBrackets) {
+                    // here we need to see if could be a wiki link if it is an inner delimiter with outer one being '[' and followed by ']' 
+                    // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
+                    if (opener.delimiterChar == '!') {
+                        // this one has index off by one for the leading !
+                        ref = input.subSequence(opener.index - 1, startIndex);
+                    } else {
+                        ref = input.subSequence(opener.index, startIndex);
+                    }
+                    refIsBare = true;
+                }
+
+                if (ref != null) {
+                    String normalizedLabel = Escaping.normalizeReference(ref);
+                    if (referenceRepository.containsKey(normalizedLabel)) {
+                        isLinkOrImage = true;
+                    } else /*if (opener.previous == null || opener.previous.delimiterChar != '[')*/ {
+                        // it is the innermost ref and is bare, if not bare then we treat it as a ref
+                        if (!refIsBare && peek() == '[') {
+                            int beforeNext = index;
+                            int nextLength = parseLinkLabel();
+                            if (nextLength > 0) {
+                                // not bare and not defined and followed by another [], roll back to before the label and make it just text
+                                index = beforeLabel;
+                            } else {
+                                ref = input.subSequence(opener.index, startIndex);
+                                refIsBare = true;
+                                isLinkOrImage = true;
+                            }
+                        } else {
                             isLinkOrImage = true;
                         }
-                    } else {
-                        isLinkOrImage = true;
-                    }
-                } else if (refIsBare && opener.previous.delimiterChar == '[' && opener.previous.previous == null) {
-                    // outermost Wiki Link
-                    if (options.get(Parser.WIKI_LINKS)) {
-                        isWiki = true;
-                        isLinkOrImage = true;
                     }
                 }
             }
         }
 
-        if (isLinkOrImage) {
+        if (isLinkOrImage || wantedMatch != null) {
             // If we got here, open is a potential opener
-            boolean isImage = opener.delimiterChar == '!';
-            if (isImage && ref != null) {
-                int tmp = 0;
-            }
-            Node linkOrImage = isWiki ? new WikiLink(options.get(Parser.WIKI_LINKS)) : (ref != null ? (isImage ? new ImageRef() : new LinkRef()) : (isImage ? new Image() : new Link()));
+            boolean isImage = !stripBang && opener.delimiterChar == '!';
+            //Node linkOrImage = isWiki ? new WikiLink(options.get(Parser.WIKI_LINKS)) : (ref != null ? (isImage ? new ImageRef() : new LinkRef()) : (isImage ? new Image() : new Link()));
 
             // Flush text now. We don't need to worry about combining it with adjacent text nodes, as we'll wrap it in a
             // link or image node.
             flushTextNode();
 
+            if (stripBang && opener.delimiterChar == '!') {
+                appendText(input.subSequence(opener.index - 1, opener.index));
+                opener.node.setChars(opener.node.getChars().subSequence(1));
+                opener.delimiterChar = '[';
+            }
+
+            Node insertNode;
+            if (wantedMatch != null) {
+                insertNode = wantedMatch;
+            } else {
+                insertNode = ref != null ? isImage ? new ImageRef() : new LinkRef() : isImage ? new Image() : new Link();
+            }
+
             Node node = opener.node.getNext();
             while (node != null) {
                 Node next = node.getNext();
-                linkOrImage.appendChild(node);
+                insertNode.appendChild(node);
                 node = next;
             }
-            appendNode(linkOrImage);
+            appendNode(insertNode);
 
-            if (linkOrImage instanceof RefNode) {
+            if (insertNode instanceof RefNode) {
                 // set up the parts
-                RefNode refNode = (RefNode) linkOrImage;
+                RefNode refNode = (RefNode) insertNode;
                 refNode.setReferenceChars(ref);
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
                 }
-            } else if (linkOrImage instanceof InlineLinkNode) {
+                insertNode.setCharsFromContent();
+            } else if (insertNode instanceof InlineLinkNode) {
                 // set dest and title
-                InlineLinkNode inlineLinkNode = (InlineLinkNode) linkOrImage;
+                InlineLinkNode inlineLinkNode = (InlineLinkNode) insertNode;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
                 inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
-            } else {
-                WikiLink wikiLink = (WikiLink) linkOrImage;
-                // parse out the separator if it is in the 
-                wikiLink.setLinkChars(ref);
+                insertNode.setCharsFromContent();
             }
-            linkOrImage.setCharsFromContent();
 
             // Process delimiters such as emphasis inside link/image
             processDelimiters(opener);
@@ -755,6 +875,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     /**
      * Attempt to parse link destination, returning the string or null if no match.
      */
+
     protected BasedSequence parseLinkDestination() {
         BasedSequence res = match(LINK_DESTINATION_BRACES);
         if (res != null) { // chop off surrounding <..>:

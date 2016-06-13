@@ -638,8 +638,8 @@ public class DocumentParser implements ParserState {
     public static InlineParserFactory inlineParserFactory() {
         return new InlineParserFactory() {
             @Override
-            public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors) {
-                return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors);
+            public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, ReferenceLinkProcessorData referenceLinkProcessors) {
+                return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors);
             }
         };
     }

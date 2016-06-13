@@ -52,9 +52,6 @@ public class AbstractVisitor implements Visitor {
     @Override public void visit(StrongEmphasis node) { visitChildren(node); } 
     @Override public void visit(Text node) { visitChildren(node); } 
     @Override public void visit(ThematicBreak node) { visitChildren(node); }
-
-    @Override
-    public void visit(WikiLink node) { visitChildren(node); }
     // @formatter:on
 
     /**

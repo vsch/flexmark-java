@@ -83,7 +83,7 @@ public class HtmlRenderer {
     }
 
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(new HtmlWriter(output, htmlOptions.indentSize));
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize));
         renderer.render(node);
     }
 
@@ -234,10 +234,12 @@ public class HtmlRenderer {
         private final Map<Class<? extends Node>, NodeRenderer> renderers;
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
+        private final DataHolder options;
         private RenderingPhase phase;
         private Node renderingNode;
 
-        private MainNodeRenderer(HtmlWriter htmlWriter) {
+        private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter) {
+            this.options = options;
             this.htmlWriter = htmlWriter;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
@@ -258,6 +260,11 @@ public class HtmlRenderer {
                     this.phasedRenderers.add((PhasedNodeRenderer) nodeRenderer);
                 }
             }
+        }
+
+        @Override
+        public DataHolder getOptions() {
+            return options;
         }
 
         @Override

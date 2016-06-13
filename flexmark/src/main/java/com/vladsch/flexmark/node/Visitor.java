@@ -34,5 +34,4 @@ public interface Visitor {
     void visit(StrongEmphasis node);
     void visit(Text node);
     void visit(ThematicBreak node);
-    void visit(WikiLink node);
 }

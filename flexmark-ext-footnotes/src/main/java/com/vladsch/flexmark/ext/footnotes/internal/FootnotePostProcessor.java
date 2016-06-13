@@ -69,14 +69,18 @@ public class FootnotePostProcessor implements PostProcessor {
     private class FootnoteVisitor extends AbstractVisitor {
         @Override
         public void visit(ImageRef node) {
-            if (!node.isDummyReference() && node.isReferenceTextCombined() && node.getReference().startsWith("^")) {
+            if (!node.isDummyReference() && node.isReferenceTextCombined() &&
+                    node.getReferenceOpeningMarker().isContinuedBy(node.getReference()) &&
+                    node.getReference().startsWith("^")) {
                 replaceNode(node);
             }
         }
 
         @Override
         public void visit(LinkRef node) {
-            if (!node.isDummyReference() && node.isReferenceTextCombined() && node.getReference().startsWith("^")) {
+            if (!node.isDummyReference() && node.isReferenceTextCombined() &&
+                    node.getReferenceOpeningMarker().isContinuedBy(node.getReference()) &&
+                    node.getReference().startsWith("^")) {
                 replaceNode(node);
             }
         }

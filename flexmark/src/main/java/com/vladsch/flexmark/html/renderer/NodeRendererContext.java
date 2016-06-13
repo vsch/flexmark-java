@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Map;
@@ -66,4 +67,6 @@ public interface NodeRendererContext {
      * @return whether HTML blocks and tags should be escaped or not
      */
     boolean shouldEscapeHtml();
+
+    DataHolder getOptions();
 }

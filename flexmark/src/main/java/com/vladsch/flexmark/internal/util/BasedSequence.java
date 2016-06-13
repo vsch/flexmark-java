@@ -78,4 +78,7 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trimTailBlankLines();
     BasedSequence trimLeadBlankLines();
     String toVisibleWhitespaceString();
+
+    boolean isContinuedBy(BasedSequence other);
+    boolean isContinuationOf(BasedSequence other);
 }

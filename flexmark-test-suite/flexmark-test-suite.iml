@@ -20,5 +20,6 @@
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" />
+    <orderEntry type="module" module-name="flexmark-ext-wikilink" />
   </component>
 </module>

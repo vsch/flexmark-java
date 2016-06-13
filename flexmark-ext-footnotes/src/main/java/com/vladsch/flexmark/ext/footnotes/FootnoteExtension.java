@@ -21,7 +21,8 @@ import com.vladsch.flexmark.parser.Parser;
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed emoji shortcuts text regions are turned into {@link Footnote} nodes.
+ * The parsed footnote references in text regions are turned into {@link Footnote} nodes.
+ * The parsed footnote definitions are turned into {@link FootnoteBlock} nodes.
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {

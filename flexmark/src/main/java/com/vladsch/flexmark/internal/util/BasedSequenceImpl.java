@@ -406,4 +406,14 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         }
         return sb.toString();
     }
+
+    @Override
+    public boolean isContinuedBy(BasedSequence other) {
+        return other.length() > 0 && length() > 0 && other.getBase() == getBase() && other.getStartOffset() == getEndOffset();
+    }
+
+    @Override
+    public boolean isContinuationOf(BasedSequence other) {
+        return other.length() > 0 && length() > 0 && other.getBase() == getBase() && other.getEndOffset() == getStartOffset();
+    }
 }

@@ -77,6 +77,54 @@ Document[0, 262]
           Text[255, 261]
 ````````````````````````````````
 
+Not a footnote nor a footnote definition if space between [ and ^.
+
+```````````````````````````````` example
+This paragraph has no footnote[ ^footnote].
+
+[ ^footnote]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists.
+    
+    - item 1
+    - item 2
+.
+<p>This paragraph has no footnote[ ^footnote].</p>
+<p>[ ^footnote]: This is the body of the footnote.
+with continuation text. Inline <em>italic</em> and
+<strong>bold</strong>.</p>
+<pre><code>Multiple paragraphs are supported as other 
+markdown elements such as lists.
+
+- item 1
+- item 2
+</code></pre>
+.
+Document[0, 265]
+  Paragraph[0, 44]
+    Text[0, 30]
+    LinkRef[30, 42] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[30, 31, "["] reference:[32, 41, "^footnote"] referenceClose:[41, 42, "]"]
+      Text[31, 41]
+    Text[42, 43]
+  Paragraph[45, 148]
+    LinkRef[45, 57] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[45, 46, "["] reference:[47, 56, "^footnote"] referenceClose:[56, 57, "]"]
+      Text[46, 56]
+    Text[57, 92]
+    SoftLineBreak[92, 93]
+    Text[93, 124]
+    Emphasis[124, 132] textOpen:[124, 125, "_"] text:[125, 131] textClose:[131, 132, "_"]
+      Text[125, 131]
+    Text[132, 136]
+    SoftLineBreak[137, 138]
+    StrongEmphasis[138, 146] textOpen:[138, 140, "**"] text:[140, 144] textClose:[144, 146, "**"]
+      Text[140, 144]
+    Text[146, 147]
+  IndentedCodeBlock[153, 265]
+````````````````````````````````
+
 Unused footnotes are not used and do not show up on the page.
 
 ```````````````````````````````` example
