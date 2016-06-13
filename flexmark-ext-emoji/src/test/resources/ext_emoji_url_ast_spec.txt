@@ -11,7 +11,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 Converts :warning: to its emoji image 
 
 
-```````````````````````````````` example
+```````````````````````````````` example Emoji: 1
 :warning:
 .
 <p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" /></p>
@@ -19,13 +19,13 @@ Converts :warning: to its emoji image
 Document[0, 10]
   Paragraph[0, 10]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8]
+      Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
 
 
 Should work in links
 
-```````````````````````````````` example
+```````````````````````````````` example Emoji: 2
 [:warning:](/url)
 .
 <p><a href="/url"><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" /></a></p>
@@ -34,14 +34,14 @@ Document[0, 18]
   Paragraph[0, 18]
     Link[0, 16] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
       Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
-        Text[2, 9]
+        Text[2, 9] chars:[2, 9, "warning"]
 ````````````````````````````````
 
 
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example
+```````````````````````````````` example Emoji: 3
 :warnings:
 .
 <p>:warnings:</p>
@@ -49,14 +49,14 @@ Unknown shortcuts are converted to text
 Document[0, 11]
   Paragraph[0, 11]
     Emoji[0, 10] textOpen:[0, 1, ":"] text:[1, 9, "warnings"] textClose:[9, 10, ":"]
-      Text[1, 9]
+      Text[1, 9] chars:[1, 9, "warnings"]
 ````````````````````````````````
 
 
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example
+```````````````````````````````` example Emoji: 4
 :**warnings**:
 .
 <p>:<strong>warnings</strong>:</p>
@@ -65,7 +65,7 @@ Document[0, 15]
   Paragraph[0, 15]
     Emoji[0, 14] textOpen:[0, 1, ":"] text:[1, 13, "**warnings**"] textClose:[13, 14, ":"]
       StrongEmphasis[1, 13] textOpen:[1, 3, "**"] text:[3, 11] textClose:[11, 13, "**"]
-        Text[3, 11]
+        Text[3, 11] chars:[3, 11, "warnings"]
 ````````````````````````````````
 
 

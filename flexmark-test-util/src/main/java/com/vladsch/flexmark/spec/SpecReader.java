@@ -131,7 +131,7 @@ public class SpecReader {
                 if (matcher.matches()) {
                     section = matcher.group(1);
                     exampleNumber = 0;
-                } else if (line.equals(EXAMPLE_START)) {
+                } else if (line.startsWith(EXAMPLE_START)) {
                     state = State.SOURCE;
                     exampleNumber++;
                     lineAbsorbed = true;

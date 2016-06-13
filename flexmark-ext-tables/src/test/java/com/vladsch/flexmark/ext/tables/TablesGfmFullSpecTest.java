@@ -48,7 +48,7 @@ public class TablesGfmFullSpecTest extends FullSpecTestCase {
     public void attributeProviderIsApplied() {
         AttributeProvider attributeProvider = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, Map<String, String> attributes) {
+            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
                 if (node instanceof TableBlock) {
                     attributes.put("test", "block");
                 } else if (node instanceof TableHead) {

@@ -5,7 +5,9 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.node.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
@@ -352,14 +354,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             return list.isTight();
         }
         return false;
-    }
-
-    private Map<String, String> getAttrs(Node node) {
-        return context.extendAttributes(node, Collections.<String, String>emptyMap());
-    }
-
-    private Map<String, String> getAttrs(Node node, Map<String, String> defaultAttributes) {
-        return context.extendAttributes(node, defaultAttributes);
     }
 
     private static class AltTextVisitor extends AbstractVisitor {

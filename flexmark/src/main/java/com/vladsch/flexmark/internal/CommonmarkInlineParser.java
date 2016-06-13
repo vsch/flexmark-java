@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CommonmarkInlineParser extends InlineParserImpl {
     public CommonmarkInlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters,
-            Map<Character, DelimiterProcessor> delimiterProcessors, ReferenceLinkProcessorData referenceLinkProcessors) {
+            Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData referenceLinkProcessors) {
         super(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors);
     }
 

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.wikilink;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
-import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkPostProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -33,7 +33,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postProcessor(new WikiLinkPostProcessor());
+        parserBuilder.linkRefProcessor(new WikiLinkLinkRefProcessor());
     }
 
     @Override

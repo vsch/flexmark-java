@@ -21,6 +21,19 @@ public interface BasedSequence extends CharSequence {
     BasedSequence subSequence(int start);
     BasedSequence baseSubSequence(int start, int end);
 
+    // start and end are offsets from the end of the sequence
+    BasedSequence endSequence(int start, int end);
+    BasedSequence endSequence(int start);
+    // index from the end of the sequence
+    char endCharAt(int index);
+
+    // start and end when >=0 are offsets from the start of the sequence, when <0 from the end of sequence
+    BasedSequence midSequence(int start, int end);
+    BasedSequence midSequence(int start);
+
+    // when index >= from the start of the sequence, when <0 then from the end
+    char midCharAt(int index);
+
     int countLeading(String chars);
     int countLeadingNot(String chars);
     int countTrailing(String chars);

@@ -13,15 +13,26 @@ import java.util.stream.Collectors;
 
 public class DocumentParser implements ParserState {
 
-    private static HashMap<DataKey<Boolean>, BlockParserFactory> CORE_FACTORIES = new HashMap<>();
+    private static HashMap<BlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
     static {
-        CORE_FACTORIES.put(Parser.BLOCK_QUOTE_PARSER, new BlockQuoteParser.Factory());
-        CORE_FACTORIES.put(Parser.HEADING_PARSER, new HeadingParser.Factory());
-        CORE_FACTORIES.put(Parser.FENCED_CODE_BLOCK_PARSER, new FencedCodeBlockParser.Factory());
-        CORE_FACTORIES.put(Parser.HTML_BLOCK_PARSER, new HtmlBlockParser.Factory());
-        CORE_FACTORIES.put(Parser.THEMATIC_BREAK_PARSER, new ThematicBreakParser.Factory());
-        CORE_FACTORIES.put(Parser.LIST_BLOCK_PARSER, new ListBlockParser.Factory());
-        CORE_FACTORIES.put(Parser.INDENTED_CODE_BLOCK_PARSER, new IndentedCodeBlockParser.Factory());
+        CORE_FACTORIES_DATA_KEYS.put(new BlockQuoteParser.Factory(), Parser.BLOCK_QUOTE_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new HeadingParser.Factory(), Parser.HEADING_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new FencedCodeBlockParser.Factory(), Parser.FENCED_CODE_BLOCK_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new HtmlBlockParser.Factory(), Parser.HTML_BLOCK_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new ThematicBreakParser.Factory(), Parser.THEMATIC_BREAK_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new ListBlockParser.Factory(), Parser.LIST_BLOCK_PARSER);
+        CORE_FACTORIES_DATA_KEYS.put(new IndentedCodeBlockParser.Factory(), Parser.INDENTED_CODE_BLOCK_PARSER);
+    }
+
+    private static List<BlockParserFactory> CORE_FACTORIES = new ArrayList<>();
+    static {
+        CORE_FACTORIES.add(new BlockQuoteParser.Factory());
+        CORE_FACTORIES.add(new HeadingParser.Factory());
+        CORE_FACTORIES.add(new FencedCodeBlockParser.Factory());
+        CORE_FACTORIES.add(new HtmlBlockParser.Factory());
+        CORE_FACTORIES.add(new ThematicBreakParser.Factory());
+        CORE_FACTORIES.add(new ListBlockParser.Factory());
+        CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
     }
 
     private static class ReferencePreProcessor implements BlockPreProcessor {
@@ -110,7 +121,15 @@ public class DocumentParser implements ParserState {
         List<BlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
-        list.addAll(CORE_FACTORIES.keySet().stream().filter(options::get).map(key -> CORE_FACTORIES.get(key)).collect(Collectors.toList()));
+
+        // need to keep core parsers in the right order
+        for (BlockParserFactory factory : CORE_FACTORIES) {
+            DataKey<Boolean> key = CORE_FACTORIES_DATA_KEYS.get(factory);
+
+            if (key == null || options.get(key)) {
+                list.add(factory);
+            }
+        }
         return list;
     }
 
@@ -632,14 +651,16 @@ public class DocumentParser implements ParserState {
     private Document finalizeAndProcess() {
         finalizeBlocks(this.activeBlockParsers);
         this.processInlines();
-        return this.documentBlockParser.getBlock();
+        Document document = this.documentBlockParser.getBlock();
+        inlineParser.finalizeDocument(document);
+        return document;
     }
 
     public static InlineParserFactory inlineParserFactory() {
         return new InlineParserFactory() {
             @Override
-            public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, ReferenceLinkProcessorData referenceLinkProcessors) {
-                return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors);
+            public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessors) {
+                return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors);
             }
         };
     }

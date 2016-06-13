@@ -17,6 +17,40 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public static final String WHITESPACE_CHARS = " \t\n";
 
     @Override
+    public BasedSequence endSequence(int start, int end) {
+        int length = length();
+        return subSequence(length - start, length - end);
+    }
+
+    @Override
+    public BasedSequence endSequence(int start) {
+        int length = length();
+        return subSequence(length - start, length);
+    }
+
+    @Override
+    public char endCharAt(int index) {
+        return charAt(length() - index);
+    }
+
+    @Override
+    public BasedSequence midSequence(int start, int end) {
+        int length = length();
+        return subSequence(start < 0 ? length + start : start, end < 0 ? length + end : end);
+    }
+
+    @Override
+    public BasedSequence midSequence(int start) {
+        int length = length();
+        return subSequence(start < 0 ? length + start : start, length);
+    }
+
+    @Override
+    public char midCharAt(int index) {
+        return charAt(index < 0 ? length() + index : index);
+    }
+
+    @Override
     public int countLeading(String chars) {
         return countChars(chars, 0, length());
     }

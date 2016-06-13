@@ -87,7 +87,7 @@ public class HtmlRendererTest {
     public void attributeProviderForCodeBlock() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, Map<String, String> attributes) {
+            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
                 if (node instanceof FencedCodeBlock) {
                     FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
                     // Remove the default attribute for info
@@ -110,7 +110,7 @@ public class HtmlRendererTest {
     public void attributeProviderForImage() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, Map<String, String> attributes) {
+            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
                 if (node instanceof Image) {
                     attributes.remove("alt");
                     attributes.put("test", "hey");

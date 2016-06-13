@@ -83,7 +83,7 @@ public class HtmlRenderer {
     }
 
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize));
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
         renderer.render(node);
     }
 
@@ -231,6 +231,7 @@ public class HtmlRenderer {
 
     private class MainNodeRenderer implements NodeRendererContext {
         private final HtmlWriter htmlWriter;
+        private final Document document;
         private final Map<Class<? extends Node>, NodeRenderer> renderers;
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
@@ -238,9 +239,10 @@ public class HtmlRenderer {
         private RenderingPhase phase;
         private Node renderingNode;
 
-        private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter) {
+        private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             this.options = options;
             this.htmlWriter = htmlWriter;
+            this.document = document;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
@@ -268,6 +270,11 @@ public class HtmlRenderer {
         }
 
         @Override
+        public Document getDocument() {
+            return document;
+        }
+
+        @Override
         public RenderingPhase getRenderingPhase() {
             return phase;
         }
@@ -287,15 +294,12 @@ public class HtmlRenderer {
         }
 
         @Override
-        public Map<String, String> extendRenderingNodeAttributes(Map<String, String> attributes) {
-            return extendAttributes(renderingNode, attributes);
-        }
-
-        @Override
-        public Map<String, String> extendAttributes(Node node, Map<String, String> attributes) {
-            Map<String, String> attrs = new LinkedHashMap<>(attributes);
-            setCustomAttributes(node, attrs);
-            return attrs;
+        public Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes) {
+            Map<String, String> attr = new LinkedHashMap<>(attributes);
+            for (AttributeProvider attributeProvider : attributeProviders) {
+                attributeProvider.setAttributes(renderingNode, tag, attr);
+            }
+            return attr;
         }
 
         @Override
@@ -353,12 +357,6 @@ public class HtmlRenderer {
                 Node next = node.getNext();
                 render(node);
                 node = next;
-            }
-        }
-
-        private void setCustomAttributes(Node node, Map<String, String> attrs) {
-            for (AttributeProvider attributeProvider : attributeProviders) {
-                attributeProvider.setAttributes(node, attrs);
             }
         }
     }

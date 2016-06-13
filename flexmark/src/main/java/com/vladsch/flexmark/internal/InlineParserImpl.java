@@ -74,7 +74,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected final BitSet specialCharacters;
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
-    protected final ReferenceLinkProcessorData referenceLinkProcessors;
+    protected final LinkRefProcessorData linkRefProcessorsData;
 
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
@@ -101,10 +101,10 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     protected Document document;
 
     static class InlineParserOptions {
-        final public int wantLinkRefsWithMaxBrackets;
+        final public boolean matchLookaheadFirst;
 
         public InlineParserOptions(DataHolder options) {
-            wantLinkRefsWithMaxBrackets = options.get(Parser.WANT_LINK_REFS_WITH_BRACKETS);
+            matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
         }
     }
 
@@ -114,6 +114,17 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     public void initializeDocument(Document document) {
         this.document = document;
         this.referenceRepository = document.get(Parser.REFERENCES);
+
+        for (LinkRefProcessor processor : linkRefProcessorsData.processors) {
+            processor.initializeDocument(document);
+        }
+    }
+
+    @Override
+    public void finalizeDocument(Document document) {
+        for (LinkRefProcessor processor : linkRefProcessorsData.processors) {
+            processor.finalize(document);
+        }
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -124,10 +135,10 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return currentText;
     }
 
-    public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, ReferenceLinkProcessorData referenceLinkProcessors) {
+    public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessorsData) {
         this.options = new InlineParserOptions(options);
         this.delimiterProcessors = delimiterProcessors;
-        this.referenceLinkProcessors = referenceLinkProcessors;
+        this.linkRefProcessorsData = linkRefProcessorsData;
         this.delimiterCharacters = delimiterCharacters;
         this.specialCharacters = specialCharacters;
     }
@@ -157,31 +168,39 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
         Map<Character, DelimiterProcessor> map = new HashMap<>();
         //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
-        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR))
+        if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
             addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor()), map);
-        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR))
+        }
+        if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
             addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map);
+        }
+        
         addDelimiterProcessors(delimiterProcessors, map);
         return map;
     }
 
     // nothing to add, this is for extensions.
-    public static ReferenceLinkProcessorData calculateReferenceLinkProcessors(DataHolder options, List<ReferenceLinkProcessor> referenceLinkProcessors) {
-        if (referenceLinkProcessors.size() > 0) {
-            List<ReferenceLinkProcessor> sortedLinkProcessors = new ArrayList<>(referenceLinkProcessors.size());
-            sortedLinkProcessors.addAll(referenceLinkProcessors);
+    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessor> linkRefProcessors) {
+        if (linkRefProcessors.size() > 1) {
+            List<LinkRefProcessor> sortedLinkProcessors = new ArrayList<>(linkRefProcessors.size());
+            sortedLinkProcessors.addAll(linkRefProcessors);
 
             final int[] maxNestingLevelRef = new int[] { 0 };
 
-            sortedLinkProcessors.sort(new Comparator<ReferenceLinkProcessor>() {
-                @Override
-                public int compare(ReferenceLinkProcessor p1, ReferenceLinkProcessor p2) {
-                    int lv1 = p1.getNestingLevel();
-                    int lv2 = p2.getNestingLevel();
-                    if (maxNestingLevelRef[0] < lv1) maxNestingLevelRef[0] = lv1;
-                    if (maxNestingLevelRef[0] < lv2) maxNestingLevelRef[0] = lv2;
-                    return lv1 - lv2;
+            sortedLinkProcessors.sort((p1, p2) -> {
+                int lv1 = p1.getNestingLevel();
+                int lv2 = p2.getNestingLevel();
+                int maxLevel = maxNestingLevelRef[0];
+                if (maxLevel < lv1) maxLevel = lv1;
+                if (maxLevel < lv2) maxLevel = lv2;
+                maxNestingLevelRef[0] = maxLevel;
+
+                if (lv1 == lv2) {
+                    // processors that want exclamation before the [ have higher priority
+                    if (!p1.getWantExclamationPrefix()) lv1++;
+                    if (!p2.getWantExclamationPrefix()) lv2++;
                 }
+                return lv1 - lv2;
             });
 
             int maxNestingLevel = maxNestingLevelRef[0];
@@ -191,7 +210,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
 
             maxNestingLevel = -1;
             int index = 0;
-            for (ReferenceLinkProcessor linkProcessor : sortedLinkProcessors) {
+            for (LinkRefProcessor linkProcessor : sortedLinkProcessors) {
                 if (maxNestingLevel < linkProcessor.getNestingLevel()) {
                     maxNestingLevel = linkProcessor.getNestingLevel();
                     nestingLookup[maxNestingLevel] = index;
@@ -200,9 +219,13 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 index++;
             }
 
-            return new ReferenceLinkProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
+            return new LinkRefProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
+        } else if (linkRefProcessors.size() > 0) {
+            int maxNesting = linkRefProcessors.get(0).getNestingLevel();
+            int[] nestingLookup = new int[maxNesting + 1];
+            return new LinkRefProcessorData(linkRefProcessors, maxNesting, nestingLookup);
         } else {
-            return new ReferenceLinkProcessorData(referenceLinkProcessors, 0, new int[0]);
+            return new LinkRefProcessorData(linkRefProcessors, 0, new int[0]);
         }
     }
 
@@ -626,6 +649,54 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return true;
     }
 
+    static class ReferenceProcessorMatch {
+        final public LinkRefProcessor processor;
+        final public BasedSequence nodeChars;
+        final public boolean wantExclamation;
+
+        public ReferenceProcessorMatch(LinkRefProcessor processor, boolean wantExclamation, BasedSequence nodeChars) {
+            this.processor = processor;
+            this.nodeChars = nodeChars;
+            this.wantExclamation = wantExclamation;
+        }
+    }
+
+    private ReferenceProcessorMatch matchLinkRef(Delimiter opener, int startIndex, int lookAhead, int nesting) {
+        if (linkRefProcessorsData.nestingIndex.length == 0) return null;
+
+        ReferenceProcessorMatch match = null;
+        BasedSequence textNoBang = null;
+        BasedSequence textWithBang = null;
+        boolean wantBang;
+
+        int iMax = linkRefProcessorsData.processors.size();
+        int startProc = linkRefProcessorsData.nestingIndex[lookAhead + nesting];
+        for (int i = startProc; i < iMax; i++) {
+            LinkRefProcessor linkProcessor = linkRefProcessorsData.processors.get(i);
+            BasedSequence nodeChars;
+
+            if (lookAhead + nesting < linkProcessor.getNestingLevel()) break;
+
+            wantBang = linkProcessor.getWantExclamationPrefix();
+
+            // preview the link ref
+            if (opener.delimiterChar == '!' && wantBang) {
+                // this one has index off by one for the leading !
+                if (textWithBang == null) textWithBang = input.subSequence(opener.index - 1 - lookAhead, startIndex + lookAhead);
+                nodeChars = textWithBang;
+            } else {
+                if (textNoBang == null) textNoBang = input.subSequence(opener.index - lookAhead, startIndex + lookAhead);
+                nodeChars = textNoBang;
+            }
+
+            if (linkProcessor.isMatch(nodeChars)) {
+                match = new ReferenceProcessorMatch(linkProcessor, wantBang, nodeChars);
+                break;
+            }
+        }
+        return match;
+    }
+
     /**
      * Try to match close bracket against an opening in the delimiter stack. Add either a link or image, or a
      * plain [ character, to block's children. If there is a matching delimiter, remove it from the delimiter stack.
@@ -635,17 +706,25 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         int startIndex = index;
 
         boolean containsBrackets = false;
+        int nestedBrackets = 0;
+        boolean hadBang = false;
 
         // look through stack of delimiters for a [ or ![
         Delimiter opener = this.delimiter;
+        Delimiter nextDelimiter = null;
         while (opener != bracketDelimiterBottom) {
             if (opener.delimiterChar == '[' || opener.delimiterChar == '!') {
                 if (!opener.matched) {
                     break;
                 }
 
+                if (!hadBang && (nextDelimiter == null || opener.index + 1 == nextDelimiter.index)) {
+                    nestedBrackets++;
+                }
+                if (opener.delimiterChar == '!') hadBang = true;
                 containsBrackets = true;
             }
+            nextDelimiter = opener;
             opener = opener.previous;
         }
 
@@ -672,18 +751,11 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         BasedSequence ref = null;
         boolean isLinkOrImage = false;
         boolean refIsBare = false;
-        BasedSequence linkOpeningMarker = null;
-        BasedSequence linkClosingMarker = null;
-        String label = null;
-        Reference reference = null;
-        boolean isWiki = false;
-        boolean stripBang = false;
-        Node wantedMatch = null;
+        ReferenceProcessorMatch linkRefProcessorMatch = null;
 
         // Inline link?
         if (peek() == '(') {
             index++;
-            linkOpeningMarker = input.subSequence(index - 1, index);
             spnl();
             if ((dest = parseLinkDestination()) != null) {
                 spnl();
@@ -694,67 +766,50 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 }
                 if (peek() == ')') {
                     index++;
-                    linkClosingMarker = input.subSequence(index - 1, index);
                     isLinkOrImage = true;
                 }
             }
         } else {
-            // maybe reference link, need to see if need to skip this reference because it will be processed on the next char
+            // maybe reference link, need to see if it matches a custom pocessor or need to skip this reference because it will be processed on the next char
             // as something else, like a wiki link
             boolean wantNextMatch = false;
 
-            // need to figure out max nesting we should test based on what is max processor desire and max available
-            // nested inner ones are always only []
-            int maxWanted = referenceLinkProcessors.maxNesting;
-            int maxAvail = 0;
-
-            if (maxWanted > 0) {
-                // need to see what is available
-                Delimiter nested = opener;
-                while (nested.previous != null && nested.previous.delimiterChar == '[' && nested.index == nested.previous.index + 1 && peek(maxAvail) == ']') {
-                    nested = nested.previous;
-                    maxAvail++;
-                    if (maxAvail == maxWanted) break;
-                }
+            if (!options.matchLookaheadFirst) {
+                linkRefProcessorMatch = matchLinkRef(opener, startIndex, 0, nestedBrackets);
             }
 
-            for (int nesting = maxAvail + 1; nesting-- > 0; ) {
-                BasedSequence textNoBang = null;
-                BasedSequence textWithBang = null;
-                boolean wantBang;
+            if (linkRefProcessorMatch != null) {
+                // have a match, then no look ahead for next matches 
+            } else {
+                // need to figure out max nesting we should test based on what is max processor desire and max available
+                // nested inner ones are always only []
+                int maxWanted = linkRefProcessorsData.maxNesting;
+                int maxAvail = 0;
 
-                for (ReferenceLinkProcessor linkProcessor : referenceLinkProcessors.processors) {
-                    BasedSequence nodeChars;
-                    wantBang = linkProcessor.getWantExclamationPrefix();
-
-                    // preview the link ref
-                    if (opener.delimiterChar == '!' && wantBang) {
-                        // this one has index off by one for the leading !
-                        if (textWithBang == null) textWithBang = input.subSequence(opener.index - 1 - nesting, startIndex + nesting);
-                        nodeChars = textWithBang;
-                    } else {
-                        if (textNoBang == null) textNoBang = input.subSequence(opener.index - nesting, startIndex + nesting);
-                        nodeChars = textNoBang;
+                if (maxWanted > nestedBrackets) {
+                    // need to see what is available
+                    Delimiter nested = opener;
+                    while (nested.previous != null && (nested.previous.delimiterChar == '[' || nested.previous.delimiterChar == '!') && nested.index == nested.previous.index + 1 && peek(maxAvail) == ']') {
+                        nested = nested.previous;
+                        maxAvail++;
+                        if (maxAvail + nestedBrackets == maxWanted || nested.delimiterChar == '!') break;
                     }
+                }
 
-                    if (linkProcessor.isMatch(nodeChars)) {
+                for (int nesting = maxAvail + 1; nesting-- > 0; ) {
+                    linkRefProcessorMatch = matchLinkRef(opener, startIndex, nesting, nestedBrackets);
+
+                    if (linkRefProcessorMatch != null) {
                         if (nesting > 0) {
                             wantNextMatch = true;
-                        } else {
-                            wantedMatch = linkProcessor.createNode(nodeChars);
-                            stripBang = !wantBang;
+                            linkRefProcessorMatch = null;
                         }
                         break;
                     }
                 }
-
-                if (wantedMatch != null || wantNextMatch) break;
             }
 
-            if (wantNextMatch) {
-                // next one will be a match so we skip this one
-            } else if (wantedMatch != null) {
-            } else {
+            if (!wantNextMatch && linkRefProcessorMatch == null) {
                 // See if there's a link label
                 int beforeLabel = index;
                 int labelLength = parseLinkLabel();
@@ -794,28 +849,28 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                         }
                     }
                 }
+            } else {
+                // next one will be a match so we skip this one
             }
         }
 
-        if (isLinkOrImage || wantedMatch != null) {
+        if (isLinkOrImage || linkRefProcessorMatch != null) {
             // If we got here, open is a potential opener
-            boolean isImage = !stripBang && opener.delimiterChar == '!';
-            //Node linkOrImage = isWiki ? new WikiLink(options.get(Parser.WIKI_LINKS)) : (ref != null ? (isImage ? new ImageRef() : new LinkRef()) : (isImage ? new Image() : new Link()));
-
             // Flush text now. We don't need to worry about combining it with adjacent text nodes, as we'll wrap it in a
             // link or image node.
             flushTextNode();
 
-            if (stripBang && opener.delimiterChar == '!') {
-                appendText(input.subSequence(opener.index - 1, opener.index));
-                opener.node.setChars(opener.node.getChars().subSequence(1));
-                opener.delimiterChar = '[';
-            }
-
             Node insertNode;
-            if (wantedMatch != null) {
-                insertNode = wantedMatch;
+            if (linkRefProcessorMatch != null) {
+                if (!linkRefProcessorMatch.wantExclamation && opener.delimiterChar == '!') {
+                    appendText(input.subSequence(opener.index - 1, opener.index));
+                    opener.node.setChars(opener.node.getChars().subSequence(1));
+                    opener.delimiterChar = '[';
+                }
+
+                insertNode = linkRefProcessorMatch.processor.createNode(linkRefProcessorMatch.nodeChars);
             } else {
+                boolean isImage = opener.delimiterChar == '!';
                 insertNode = ref != null ? isImage ? new ImageRef() : new LinkRef() : isImage ? new Image() : new Link();
             }
 
@@ -825,6 +880,11 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 insertNode.appendChild(node);
                 node = next;
             }
+
+            if (linkRefProcessorMatch != null) {
+                // may need to adjust children's text because some characters were part of the processor's opener/closer
+                linkRefProcessorMatch.processor.adjustInlineText(insertNode);
+            }  
             appendNode(insertNode);
 
             if (insertNode instanceof RefNode) {
@@ -850,7 +910,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             removeDelimiterAndNode(opener);
 
             // Links within links are not allowed. We found this link, so there can be no other link around it.
-            if (!isImage) {
+            if (!(insertNode instanceof Image)) {
                 Delimiter delim = this.delimiter;
                 while (delim != null) {
                     if (delim.delimiterChar == '[') {

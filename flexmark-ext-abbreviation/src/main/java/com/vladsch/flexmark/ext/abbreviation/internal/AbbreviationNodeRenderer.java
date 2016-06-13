@@ -7,10 +7,11 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.node.Node;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AbbreviationNodeRenderer implements NodeRenderer {
-
     private final NodeRendererContext context;
     private final HtmlWriter html;
     private final boolean useLinks;
@@ -59,22 +60,5 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
         html.withAttr().tag(tag);
         html.text(text);
         html.tag("/" + tag);
-    }
-
-    private Map<String, String> getAttrs(Node node) {
-        return context.extendAttributes(node, Collections.<String, String>emptyMap());
-    }
-
-    private Map<String, String> getAttrs(Node node, Map<String, String> defaultAttributes) {
-        return context.extendAttributes(node, defaultAttributes);
-    }
-
-    private void renderChildren(Node parent) {
-        Node node = parent.getFirstChild();
-        while (node != null) {
-            Node next = node.getNext();
-            context.render(node);
-            node = next;
-        }
     }
 }

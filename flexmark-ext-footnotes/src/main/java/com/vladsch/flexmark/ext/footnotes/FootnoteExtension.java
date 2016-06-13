@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.footnotes;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteBlockParser;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnoteLinkRefProcessor;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteNodeRenderer;
-import com.vladsch.flexmark.ext.footnotes.internal.FootnotePostProcessor;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -39,7 +39,7 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new FootnoteBlockParser.Factory());
-        parserBuilder.postProcessor(new FootnotePostProcessor());
+        parserBuilder.linkRefProcessor(new FootnoteLinkRefProcessor());
     }
 
     @Override

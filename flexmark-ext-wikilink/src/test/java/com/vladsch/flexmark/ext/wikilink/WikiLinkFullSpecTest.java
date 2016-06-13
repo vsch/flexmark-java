@@ -13,7 +13,6 @@ import java.util.Set;
 public class WikiLinkFullSpecTest extends FullSpecTestCase {
     final static String SPEC_RESOURCE = "/ext_wikilink_ast_spec.txt";
     final static private MutableDataSet OPTIONS = new MutableDataSet()
-            .set(Parser.WANT_LINK_REFS_WITH_BRACKETS, 1)
             .set(HtmlRenderer.INDENT_SIZE, 2);
 
     final static private Set<Extension> EXTENSIONS = Collections.singleton(WikiLinkExtension.create());

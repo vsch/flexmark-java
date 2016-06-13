@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Map;
@@ -18,21 +19,14 @@ public interface NodeRendererContext {
     String encodeUrl(String url);
 
     /**
-     * Extend the attributes by extensions.
-     *
-     * @param node       the node for which the attributes are applied
-     * @param attributes the attributes that were calculated by the renderer
-     * @return the extended attributes with added/updated/removed entries
-     */
-    Map<String, String> extendAttributes(Node node, Map<String, String> attributes);
-
-    /**
      * Extend the attributes by extensions for the node being currently rendered.
      *
+     *
+     * @param tag        the tag of the node being rendered, some nodes render multiple tags with attributes
      * @param attributes the attributes that were calculated by the renderer
      * @return the extended attributes with added/updated/removed entries
      */
-    Map<String, String> extendRenderingNodeAttributes(Map<String, String> attributes);
+    Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes);
 
     /**
      * @return the HTML writer to use
@@ -69,4 +63,6 @@ public interface NodeRendererContext {
     boolean shouldEscapeHtml();
 
     DataHolder getOptions();
+
+    Document getDocument();
 }

@@ -14,9 +14,31 @@ Version History
 
 - Add spanning columns parsing for flexmark-ext-tables
 
-- Make all core processors optional to allow disabling core functionality. 
+- Make all core block parser processors optional to allow disabling core functionality. 
 
-- Make all core delimiters optional to allow disabling core functionality. 
+- Make all core delimiter processors optional to allow disabling core functionality. 
+
+- Add `LinkRefProcessor` and associated registration methods for extensions to allow flexible
+  parsing of elements that start from link references, such as footnotes `[^]` and wiki links
+  `[[]]`. Otherwise, there is no way to properly control generation of link refs and custom
+  nodes. Additionally, this allows processing of these nodes during inline parsing instead of
+  each extension having to traverse the AST and transform it. 
+
+- Change Attribute provider interface to include `tag` being generated since custom nodes can
+  have more than one tag which require attributes, for example footnotes.
+
+- Remove previous attribute handling which did not take a `tag` and was done in the node
+  rendering code.
+
+- Change `WikiLinkExtension` and `FootnoteExtension` to use `LinkRefProcessor` instead of
+  `PostProcessor`. 
+
+- Change `SpecReader` to recognize lines starting with EXAMPLE_START, that way each example
+  start line can be augmented with section and example number for cross reference to failed
+  tests.  
+
+- Add section and example number printing to `FullSpecTestCase` for cross referencing to test
+  run results.
 
 0.1.1
 -----

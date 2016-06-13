@@ -1,13 +1,14 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]
  * This includes footnote references [^...] and wiki links [[...]]
  */
-public interface ReferenceLinkProcessor {
+public interface LinkRefProcessor {
     /**
      * Whether the image ref is desired, if not then ! will be stripped off the prefix and treated as plain text
      *
@@ -31,16 +32,25 @@ public interface ReferenceLinkProcessor {
      * time for each nesting level. Last call for the actual match, all others to pre-match to prevent a non-nested element from being
      * created.
      *
-     * @param chars text to match, including []
+     * @param nodeChars text to match, including []
      * @return true if it is a match
      */
-    boolean isMatch(BasedSequence chars);
+    boolean isMatch(BasedSequence nodeChars);
+
+    void initializeDocument(Document document);
+    void finalize(Document document);
 
     /**
      * Create the desired element that was previously matched with isMatch
      *
-     * @param chars
+     * @param nodeChars    char sequence from which to create the node
      * @return Node element to be inserted into the tree
      */
-    Node createNode(BasedSequence chars);
+    Node createNode(BasedSequence nodeChars);
+
+    /**
+     * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
+     * or if the children are not desired then remove them.
+     */
+    void adjustInlineText(Node node);
 }

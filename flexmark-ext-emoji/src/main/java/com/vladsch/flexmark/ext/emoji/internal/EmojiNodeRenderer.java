@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 public class EmojiNodeRenderer implements NodeRenderer {
@@ -23,7 +22,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<Class<? extends Node>> getNodeTypes() {
-        return Collections.<Class<? extends Node>>singleton(Emoji.class);
+        return Collections.singleton(Emoji.class);
     }
 
     @Override
@@ -41,13 +40,5 @@ public class EmojiNodeRenderer implements NodeRenderer {
             html.withAttr();
             html.tagVoid("img");
         }
-    }
-
-    private Map<String, String> getAttrs(Node node) {
-        return context.extendAttributes(node, Collections.<String, String>emptyMap());
-    }
-
-    private Map<String, String> getAttrs(Node node, Map<String, String> defaultAttributes) {
-        return context.extendAttributes(node, defaultAttributes);
     }
 }

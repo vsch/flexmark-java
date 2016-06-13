@@ -65,19 +65,15 @@ public class HtmlWriter {
     }
 
     public HtmlWriter tag(String name) {
-        return tag(name, null, false, false);
-    }
-
-    public HtmlWriter tag(String name, Map<String, String> attrs) {
-        return tag(name, attrs, false, false);
+        return tag(name, false, false);
     }
 
     public HtmlWriter tagVoid(String name) {
-        return tag(name, null, true, false);
+        return tag(name, true, false);
     }
 
     public HtmlWriter tagVoidLine(String name) {
-        return tag(name, null, true, true);
+        return tag(name, true, true);
     }
 
     public HtmlWriter withAttr() {
@@ -90,18 +86,14 @@ public class HtmlWriter {
         return this;
     }
 
-    public HtmlWriter tag(String name, Map<String, String> attrs, boolean voidElement, boolean voidWithLine) {
-        if (useAttributes || attrs != null) {
+    public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
+        Map<String, String> attr = null;
+
+        if (useAttributes) {
             if (currentAttributes != null) {
-                if (attrs != null) {
-                    // assume attrs have already been extended
-                    currentAttributes.putAll(attrs);
-                    attrs = currentAttributes;
-                } else {
-                    attrs = context.extendRenderingNodeAttributes(currentAttributes);
-                }
-            } else if (attrs == null) {
-                attrs = context.extendRenderingNodeAttributes(Collections.<String, String>emptyMap());
+                attr = context.extendRenderingNodeAttributes(name, currentAttributes);
+            } else {
+                attr = context.extendRenderingNodeAttributes(name, Collections.emptyMap());
             }
 
             currentAttributes = null;
@@ -113,12 +105,12 @@ public class HtmlWriter {
         append("<");
         append(name);
 
-        if (attrs != null && !attrs.isEmpty()) {
-            for (Map.Entry<String, String> attrib : attrs.entrySet()) {
+        if (attr != null && !attr.isEmpty()) {
+            for (Map.Entry<String, String> entry : attr.entrySet()) {
                 append(" ");
-                append(Escaping.escapeHtml(attrib.getKey(), true));
+                append(Escaping.escapeHtml(entry.getKey(), true));
                 append("=\"");
-                append(Escaping.escapeHtml(attrib.getValue(), true));
+                append(Escaping.escapeHtml(entry.getValue(), true));
                 append("\"");
             }
         }
@@ -134,18 +126,18 @@ public class HtmlWriter {
     }
 
     public HtmlWriter tag(String name, Runnable runnable) {
-        return tag(name, null, false, false, runnable);
+        return tag(name, false, false, runnable);
     }
 
     public HtmlWriter tagIndent(String name, Runnable runnable) {
-        return tag(name, null, true, false, runnable);
+        return tag(name, true, false, runnable);
     }
 
     public HtmlWriter tagLine(String name, Runnable runnable) {
-        return tag(name, null, false, true, runnable);
+        return tag(name, false, true, runnable);
     }
 
-    public HtmlWriter tag(String name, Map<String, String> attrs, boolean indentTag, boolean withLine, Runnable runnable) {
+    public HtmlWriter tag(String name, boolean indentTag, boolean withLine, Runnable runnable) {
         int indentLevel = indent;
         int preIndentLevel = indent;
 
@@ -161,7 +153,7 @@ public class HtmlWriter {
         }
         
         if (withLine || indentTag) line();
-        tag(name, attrs, false, false);
+        tag(name, false, false);
         if (indentTag) indent();
 
         if (indentIndentingChildren) {

@@ -31,14 +31,15 @@ class DumpSpecReader extends SpecReader {
         String ast = testCase.ast(node);
 
         // include source so that diff can be used to update spec
-        String actual;
-        
         if (example.getAst() != null) {
-            actual = SpecReader.EXAMPLE_START + "\n" + RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html) + SpecReader.TYPE_BREAK + "\n" + ast + SpecReader.EXAMPLE_BREAK + "\n";
+            sb.append(SpecReader.EXAMPLE_START + " ").append(example.getSection()).append(": ").append(example.getExampleNumber()).append("\n")
+                    .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+                    .append(SpecReader.TYPE_BREAK).append("\n")
+                    .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            actual = SpecReader.EXAMPLE_START + "\n" + RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html) + SpecReader.EXAMPLE_BREAK + "\n";
+            sb.append(SpecReader.EXAMPLE_START + " ").append(example.getSection()).append(": ").append(example.getExampleNumber()).append("\n")
+                    .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+                    .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }
-        
-        sb.append(actual);
     }
 }

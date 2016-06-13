@@ -3,7 +3,7 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
-import com.vladsch.flexmark.internal.ReferenceLinkProcessorData;
+import com.vladsch.flexmark.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockParserFactory;
@@ -35,7 +35,7 @@ public class Parser {
     final static public DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final static public DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
     final static public DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
-    final static public DataKey<Integer> WANT_LINK_REFS_WITH_BRACKETS = new DataKey<>("WANT_LINK_REFS_WITH_BRACKETS", 0);
+    final static public DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     public final static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
     public final static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
 
@@ -45,7 +45,7 @@ public class Parser {
     private final BitSet specialCharacters;
     private final List<PostProcessor> postProcessors;
     private final List<BlockPreProcessor> blockPreProcessors;
-    private final ReferenceLinkProcessorData referenceLinkProcessors;
+    private final LinkRefProcessorData linkRefProcessors;
     private final InlineParserFactory inlineParserFactory;
     private final DataHolder options;
 
@@ -55,7 +55,7 @@ public class Parser {
         this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(this.options, builder.blockPreProcessors);
         this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(this.options, builder.delimiterProcessors);
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(this.options, delimiterProcessors.keySet());
-        this.referenceLinkProcessors = InlineParserImpl.calculateReferenceLinkProcessors(this.options, builder.referenceLinkProcessors);
+        this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
         this.postProcessors = builder.postProcessors;
         this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.inlineParserFactory() : builder.inlineParserFactory;
@@ -84,7 +84,7 @@ public class Parser {
      */
     public Node parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
-                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors));
+                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -99,7 +99,7 @@ public class Parser {
      */
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
-                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors));
+                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
     }
@@ -115,7 +115,7 @@ public class Parser {
      */
     public Node parseReader(Reader input) throws IOException {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
-                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, referenceLinkProcessors));
+                inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -135,7 +135,7 @@ public class Parser {
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
         private final List<PostProcessor> postProcessors = new ArrayList<>();
         private final List<BlockPreProcessor> blockPreProcessors = new ArrayList<>();
-        private final List<ReferenceLinkProcessor> referenceLinkProcessors = new ArrayList<>();
+        private final List<LinkRefProcessor> linkRefProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
 
         public Builder(DataHolder options) {
@@ -205,8 +205,8 @@ public class Parser {
             return this;
         }
 
-        public Builder referenceLinkProcessor(ReferenceLinkProcessor referenceLinkProcessor) {
-            referenceLinkProcessors.add(referenceLinkProcessor);
+        public Builder linkRefProcessor(LinkRefProcessor linkRefProcessor) {
+            linkRefProcessors.add(linkRefProcessor);
             return this;
         }
     }

@@ -7,7 +7,6 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
-import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -18,10 +17,13 @@ import java.util.Set;
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     private final NodeRendererContext context;
     private final HtmlWriter html;
+    private final FootnoteRepository footnoteRepository;
 
     public FootnoteNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
+        this.footnoteRepository = context.getDocument().get(FootnoteExtension.FOOTNOTES);
+        this.footnoteRepository.resolveFootnoteOrdinals();
     }
 
     @Override
@@ -54,9 +56,6 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     public void render(Node node, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
-            Document document = node.getDocument();
-            FootnoteRepository footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
-
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
                 html.attr("class", "footnotes").withAttr().tagIndent("div", () -> {
                     html.tagVoidLine("hr");
