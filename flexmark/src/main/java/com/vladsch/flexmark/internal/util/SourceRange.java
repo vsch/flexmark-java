@@ -27,6 +27,22 @@ public class SourceRange {
         return startOffset <= index && index < endOffset;
     }
 
+    public boolean leads(int index) {
+        return endOffset <= index;
+    }
+
+    public boolean trails(int index) {
+        return startOffset > index;
+    }
+
+    public boolean leadBy(int index) {
+        return startOffset <= index && index < endOffset;
+    }
+
+    public boolean trailedBy(int index) {
+        return startOffset <= index && index < endOffset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

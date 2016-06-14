@@ -1,6 +1,29 @@
 Version History
 ===============
 
+0.1.4
+-----
+
+- Remove options argument from flexmark-ext-tables `TablesExtension::create()`
+
+- Fix `ReferenceRepository` to use `Escaping::normalizeReference` for reference normalization.
+
+- Fix `CoreNodeRenderer` to use `SUPPRESS_HTML_BLOCK` instead of `SUPPRESS_INLINE_HTML`
+
+- Add `HtmlWriter::withCondLine()` to make next tag output an EOL only if there is child text
+  between the opening and closing tags. Only works for methods that take a `Runnable` argument
+  for output child text.
+
+- Fix ext-gfm-tables for incorrect separator line parsing, introduced right before ext-gfm-tables
+  and ext-tables split.
+
+- Fix ext-tables to handle multi-line headers or no line headers with options MIN_HEADER_ROWS,
+  MAX_HEADER_ROWS. 
+
+- Add ext-tables option HEADER_SEPARATOR_COLUMNS, if true will only recognize tables whose
+  headers contain no more columns than the separator line. Default false, any number of columns
+  in header lines will be accepted.
+
 0.1.3
 -----
 

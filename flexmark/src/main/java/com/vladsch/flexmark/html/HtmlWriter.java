@@ -23,7 +23,9 @@ public class HtmlWriter {
     private boolean useAttributes = false;
     private int appendCount = 0;
     private boolean delayedIndent = false;
+    private boolean delayedEOL = false;
     private boolean indentIndentingChildren = false;
+    private boolean lineOnChildText = false;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -86,6 +88,11 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter withCondLine() {
+        lineOnChildText = true;
+        return this;
+    }
+
     public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
         Map<String, String> attr = null;
 
@@ -130,11 +137,11 @@ public class HtmlWriter {
     }
 
     public HtmlWriter tagIndent(String name, Runnable runnable) {
-        return tag(name, true, false, runnable);
+        return tag(name, !indentIndentingChildren, false, runnable);
     }
 
     public HtmlWriter tagLine(String name, Runnable runnable) {
-        return tag(name, false, true, runnable);
+        return tag(name, false, !lineOnChildText, runnable);
     }
 
     public HtmlWriter tag(String name, boolean indentTag, boolean withLine, Runnable runnable) {
@@ -145,15 +152,20 @@ public class HtmlWriter {
         this.delayedIndent = false;
 
         if (delayedIndent) {
-            delayedIndent = false;
             if (indentTag) {
                 indent();
                 preIndentLevel = indent;
             }
         }
-        
+
         if (withLine || indentTag) line();
         tag(name, false, false);
+
+        if (lineOnChildText) {
+            delayedEOL = true;
+            lineOnChildText = false;
+        }
+
         if (indentTag) indent();
 
         if (indentIndentingChildren) {
@@ -171,6 +183,9 @@ public class HtmlWriter {
             while (preIndentLevel < indent) unIndent();
         }
 
+        // if not used then not needed
+        this.delayedEOL = false;
+
         append("</");
         append(name);
         append(">");
@@ -186,7 +201,7 @@ public class HtmlWriter {
     }
 
     public HtmlWriter line() {
-        if (lastChar != 0 && lastChar != '\n') {
+        if (lastChar != 0 && lastChar != '\n' && !delayedEOL) {
             append("\n");
         }
         return this;
@@ -213,13 +228,14 @@ public class HtmlWriter {
         if (s.length() == 0) return;
         appendCount++;
 
+        if (delayedEOL) {
+            delayedEOL = false;
+            if (s.charAt(0) != '\n') append("\n");
+        }
+
         if (indentPrefix.length() > 0) {
-            // convert \n to \n + indent except for the last one 
+            // convert \n to \n + indent except for the last one
             // also if the last is \n then prefix indent size
-            //if (delayedLine) {
-            //    delayedLine = false;
-            //    if (s.charAt(0) != '\n') append("\n");
-            //}
 
             try {
                 int lastPos = 0;

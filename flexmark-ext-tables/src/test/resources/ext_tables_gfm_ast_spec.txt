@@ -6,15 +6,15 @@ date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-## Gfm Tables Extension 
+## Gfm Tables Extension
 
-Converts pipe separated tables to html tables  
+Converts pipe separated tables to html tables
 
-The tests here are converted to commonmark spec.txt format and AST expected 
+The tests here are converted to commonmark spec.txt format and AST expected
 results added.
 
 
-```````````````````````````````` example Gfm Tables Extension : 1
+```````````````````````````````` example Gfm Tables Extension: 1
 Abc|Def
 .
 <p>Abc|Def</p>
@@ -26,7 +26,7 @@ Document[0, 8]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 2
+```````````````````````````````` example Gfm Tables Extension: 2
 Abc | Def
 .
 <p>Abc | Def</p>
@@ -38,7 +38,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 3
+```````````````````````````````` example Gfm Tables Extension: 3
 Abc|Def
 -|-
 .
@@ -54,7 +54,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 4
+```````````````````````````````` example Gfm Tables Extension: 4
 Abc|Def
 --|--
 .
@@ -70,7 +70,7 @@ Document[0, 14]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 5
+```````````````````````````````` example Gfm Tables Extension: 5
 Abc|Def
  |---|---
 .
@@ -86,7 +86,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 6
+```````````````````````````````` example Gfm Tables Extension: 6
 No
 Abc|Def
 ---|---
@@ -106,7 +106,7 @@ Document[0, 19]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 7
+```````````````````````````````` example Gfm Tables Extension: 7
 Abc|Def
 ---|---
 .
@@ -114,8 +114,7 @@ Abc|Def
   <thead>
     <tr><th>Abc</th><th>Def</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -137,7 +136,7 @@ Document[0, 16]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 8
+```````````````````````````````` example Gfm Tables Extension: 8
 |Abc
 |---
 .
@@ -145,8 +144,7 @@ Document[0, 16]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -164,7 +162,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 9
+```````````````````````````````` example Gfm Tables Extension: 9
 |Abc|
 |---|
 .
@@ -172,8 +170,7 @@ Document[0, 10]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 12]
@@ -191,7 +188,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 10
+```````````````````````````````` example Gfm Tables Extension: 10
 Abc|
 ---|
 .
@@ -199,8 +196,7 @@ Abc|
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -218,7 +214,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 11
+```````````````````````````````` example Gfm Tables Extension: 11
 |Abc
 ---
 .
@@ -231,7 +227,7 @@ Document[0, 9]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 12
+```````````````````````````````` example Gfm Tables Extension: 12
 Abc
 |---
 .
@@ -247,7 +243,7 @@ Document[0, 9]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 13
+```````````````````````````````` example Gfm Tables Extension: 13
 |Abc
 |---
 |1
@@ -279,7 +275,7 @@ Document[0, 13]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 14
+```````````````````````````````` example Gfm Tables Extension: 14
 |Abc|
 |---|
 |1|
@@ -311,7 +307,7 @@ Document[0, 16]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 15
+```````````````````````````````` example Gfm Tables Extension: 15
 Abc|
 ---|
 1|
@@ -343,7 +339,7 @@ Document[0, 13]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 16
+```````````````````````````````` example Gfm Tables Extension: 16
 |Abc
 ---
 |1
@@ -360,7 +356,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 17
+```````````````````````````````` example Gfm Tables Extension: 17
 |Abc
 |---
 1
@@ -369,8 +365,7 @@ Document[0, 12]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 <p>1</p>
 .
@@ -391,7 +386,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 18
+```````````````````````````````` example Gfm Tables Extension: 18
 Abc|Def
 ---|---
 1|2
@@ -429,7 +424,7 @@ Document[0, 20]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 19
+```````````````````````````````` example Gfm Tables Extension: 19
 Abc|Def|Ghi
 ---|---
 1|2|3
@@ -449,10 +444,10 @@ Document[0, 26]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 20
- Abc  | Def 
- --- | --- 
- 1 | 2 
+```````````````````````````````` example Gfm Tables Extension: 20
+ Abc  | Def
+ --- | ---
+ 1 | 2
 .
 <table>
   <thead>
@@ -463,31 +458,31 @@ Document[0, 26]
   </tbody>
 </table>
 .
-Document[0, 33]
-  TableBlock[1, 33]
-    TableHead[1, 12]
-      TableRow[1, 12]
+Document[0, 30]
+  TableBlock[1, 30]
+    TableHead[1, 11]
+      TableRow[1, 11]
         TableCell[1, 7] header textOpen:[0, 0] text:[1, 4, "Abc"] textClose:[6, 7, "|"]
           Text[1, 4] chars:[1, 4, "Abc"]
         TableCell[7, 11] header textOpen:[0, 0] text:[8, 11, "Def"] textClose:[0, 0]
           Text[8, 11] chars:[8, 11, "Def"]
-    TableSeparator[13, 24]
-      TableRow[13, 24]
-        TableCell[14, 19] textOpen:[0, 0] text:[14, 17, "---"] textClose:[18, 19, "|"]
-          Text[14, 17] chars:[14, 17, "---"]
-        TableCell[19, 23] textOpen:[0, 0] text:[20, 23, "---"] textClose:[0, 0]
-          Text[20, 23] chars:[20, 23, "---"]
-    TableBody[25, 32]
-      TableRow[25, 32]
-        TableCell[26, 29] textOpen:[0, 0] text:[26, 27, "1"] textClose:[28, 29, "|"]
-          Text[26, 27] chars:[26, 27, "1"]
-        TableCell[29, 31] textOpen:[0, 0] text:[30, 31, "2"] textClose:[0, 0]
-          Text[30, 31] chars:[30, 31, "2"]
+    TableSeparator[12, 22]
+      TableRow[12, 22]
+        TableCell[13, 18] textOpen:[0, 0] text:[13, 16, "---"] textClose:[17, 18, "|"]
+          Text[13, 16] chars:[13, 16, "---"]
+        TableCell[18, 22] textOpen:[0, 0] text:[19, 22, "---"] textClose:[0, 0]
+          Text[19, 22] chars:[19, 22, "---"]
+    TableBody[23, 29]
+      TableRow[23, 29]
+        TableCell[24, 27] textOpen:[0, 0] text:[24, 25, "1"] textClose:[26, 27, "|"]
+          Text[24, 25] chars:[24, 25, "1"]
+        TableCell[27, 29] textOpen:[0, 0] text:[28, 29, "2"] textClose:[0, 0]
+          Text[28, 29] chars:[28, 29, "2"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 21
+```````````````````````````````` example Gfm Tables Extension: 21
 Abc|Def
 ---|---
     1|2
@@ -525,7 +520,7 @@ Document[0, 24]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 22
+```````````````````````````````` example Gfm Tables Extension: 22
 |Abc|Def|
 |---|---|
 |1|2|
@@ -563,7 +558,7 @@ Document[0, 26]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 23
+```````````````````````````````` example Gfm Tables Extension: 23
 *Abc*|Def
 ---|---
 1|2
@@ -602,7 +597,7 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 24
+```````````````````````````````` example Gfm Tables Extension: 24
 Abc|Def
 ---|---
 1\\|2|20
@@ -640,7 +635,7 @@ Document[0, 25]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 25
+```````````````````````````````` example Gfm Tables Extension: 25
 Abc|Def
 ---|---
 1\\\\|2
@@ -678,7 +673,7 @@ Document[0, 24]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 26
+```````````````````````````````` example Gfm Tables Extension: 26
 Abc|Def
 :---|---
 1|2
@@ -716,7 +711,7 @@ Document[0, 21]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 27
+```````````````````````````````` example Gfm Tables Extension: 27
 Abc|Def
 ---:|---
 1|2
@@ -754,7 +749,7 @@ Document[0, 21]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 28
+```````````````````````````````` example Gfm Tables Extension: 28
 Abc|Def
 :---:|---
 1|2
@@ -792,17 +787,17 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 29
+```````````````````````````````` example Gfm Tables Extension: 29
 Abc|Def
 ---|:---:
 1|2
 .
 <table>
   <thead>
-    <tr><th>Abc</th><th>Def</th></tr>
+    <tr><th>Abc</th><th align="center">Def</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>2</td></tr>
+    <tr><td>1</td><td align="center">2</td></tr>
   </tbody>
 </table>
 .
@@ -812,25 +807,25 @@ Document[0, 22]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
           Text[0, 3] chars:[0, 3, "Abc"]
-        TableCell[4, 7] header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[0, 0]
+        TableCell[4, 7] CENTER header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[0, 0]
           Text[4, 7] chars:[4, 7, "Def"]
     TableSeparator[8, 17]
       TableRow[8, 17]
         TableCell[8, 12] textOpen:[0, 0] text:[8, 11, "---"] textClose:[11, 12, "|"]
           Text[8, 11] chars:[8, 11, "---"]
-        TableCell[12, 17] textOpen:[0, 0] text:[12, 17, ":---:"] textClose:[0, 0]
+        TableCell[12, 17] CENTER textOpen:[0, 0] text:[12, 17, ":---:"] textClose:[0, 0]
           Text[12, 17] chars:[12, 17, ":---:"]
     TableBody[18, 21]
       TableRow[18, 21]
         TableCell[18, 20] textOpen:[0, 0] text:[18, 19, "1"] textClose:[19, 20, "|"]
           Text[18, 19] chars:[18, 19, "1"]
-        TableCell[20, 21] textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
+        TableCell[20, 21] CENTER textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
           Text[20, 21] chars:[20, 21, "2"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 30
+```````````````````````````````` example Gfm Tables Extension: 30
 Abc|Def
  :--- |---
 1|2
@@ -868,7 +863,7 @@ Document[0, 23]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 31
+```````````````````````````````` example Gfm Tables Extension: 31
 Abc|Def
 : ---|---
 .
@@ -884,7 +879,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 32
+```````````````````````````````` example Gfm Tables Extension: 32
 Abc|Def
 --- :|---
 .
@@ -900,7 +895,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 33
+```````````````````````````````` example Gfm Tables Extension: 33
 Abc|Def
 ---|: ---
 .
@@ -916,7 +911,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 34
+```````````````````````````````` example Gfm Tables Extension: 34
 Abc|Def
 ---|--- :
 .
@@ -932,7 +927,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 35
+```````````````````````````````` example Gfm Tables Extension: 35
 Abc|Def
 ---|---
 1|2|3
@@ -970,7 +965,7 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 36
+```````````````````````````````` example Gfm Tables Extension: 36
 Abc|Def|Ghi
 ---|---|---
 1|2
@@ -1013,7 +1008,7 @@ Document[0, 28]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 37
+```````````````````````````````` example Gfm Tables Extension: 37
 > Abc|Def
 > ---|---
 > 1|2
@@ -1054,7 +1049,7 @@ Document[0, 26]
 
 
 
-```````````````````````````````` example Gfm Tables Extension : 38
+```````````````````````````````` example Gfm Tables Extension: 38
 Abc|Def
 ---|---
 1|2
@@ -1096,7 +1091,7 @@ Document[0, 40]
 
 inlines should be processed
 
-```````````````````````````````` example Gfm Tables Extension : 39
+```````````````````````````````` example Gfm Tables Extension: 39
 **Abc**|_Def_
 ---|---
 [ref]|`code`

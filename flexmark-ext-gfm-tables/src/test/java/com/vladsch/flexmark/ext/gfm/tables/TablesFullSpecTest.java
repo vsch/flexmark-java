@@ -54,12 +54,12 @@ public class TablesFullSpecTest extends FullSpecTestCase {
                 }
             }
         };
-        
+
         HtmlRenderer renderer = HtmlRenderer.builder()
                 .attributeProvider(attributeProvider)
                 .extensions(EXTENSIONS)
                 .build();
-        
+
         String rendered = renderer.render(PARSER.parse("Abc|Def\n---|---\n1|2"));
         assertThat(rendered, is("<table test=\"block\">\n" +
                 "<thead test=\"head\">\n" +

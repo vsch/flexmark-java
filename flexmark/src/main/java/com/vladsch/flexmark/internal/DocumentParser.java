@@ -674,7 +674,7 @@ public class DocumentParser implements ParserState {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
                 return paragraphParser.getContent().getLines();
             }
-            return SubSequence.EMPTY_LIST;
+            return null;
         }
 
         public List<Integer> getParagraphEolLengths() {
@@ -682,7 +682,7 @@ public class DocumentParser implements ParserState {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
                 return paragraphParser.getContent().getEolLengths();
             }
-            return BlockContent.EMPTY_EOL_OFFSETS;
+            return null;
         }
 
         public MatchedBlockParserImpl(BlockParser matchedBlockParser) {
@@ -699,6 +699,15 @@ public class DocumentParser implements ParserState {
             if (matchedBlockParser instanceof ParagraphParser) {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
                 return paragraphParser.getContent().getContents();
+            }
+            return null;
+        }
+
+        @Override
+        public MutableDataHolder getParagraphDataHolder() {
+            if (matchedBlockParser instanceof ParagraphParser) {
+                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
+                return paragraphParser.getDataHolder();
             }
             return null;
         }

@@ -265,19 +265,19 @@ public class Escaping {
         return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
     }
 
-    public static String extractReference(CharSequence input) {
+    public static String normalizeReference(CharSequence input, boolean changeCase) {
+        if (changeCase) return Escaping.collapseWhitespace(input.toString(), true).toLowerCase();
+        else return Escaping.collapseWhitespace(input.toString(), true);
+    }
+
+    public static String normalizeReferenceChars(CharSequence input, boolean changeCase) {
         // Strip '[' and ']', then trim and convert to lowercase
         if (input.length() > 1) {
             int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
             int stripStart = input.charAt(0) == '!' ? 2 : 1;
-            return Escaping.collapseWhitespace(input.subSequence(stripStart, input.length() - stripEnd).toString(), true);
+            return normalizeReference(input.subSequence(stripStart, input.length() - stripEnd), changeCase);
         }
         return input.toString();
-    }
-
-    public static String normalizeReference(CharSequence input) {
-        // Strip '[' and ']', then trim and convert to lowercase
-        return extractReference(input).toLowerCase();
     }
 
     public static String collapseWhitespace(CharSequence input, boolean trim) {

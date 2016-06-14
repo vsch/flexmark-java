@@ -6,12 +6,12 @@ date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-## Tables Extension 
+## Tables Extension
 
-Converts pipe separated tables to html tables with optional column spans 
-and multiple header lines and table caption.  
+Converts pipe separated tables to html tables with optional column spans
+and multiple header lines and table caption.
 
-```````````````````````````````` example Tables Extension : 1
+```````````````````````````````` example Tables Extension: 1
 Abc|Def
 .
 <p>Abc|Def</p>
@@ -23,7 +23,7 @@ Document[0, 8]
 
 
 
-```````````````````````````````` example Tables Extension : 2
+```````````````````````````````` example Tables Extension: 2
 Abc | Def
 .
 <p>Abc | Def</p>
@@ -35,7 +35,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Tables Extension : 3
+```````````````````````````````` example Tables Extension: 3
 Abc|Def
 -|-
 .
@@ -51,7 +51,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Tables Extension : 4
+```````````````````````````````` example Tables Extension: 4
 Abc|Def
 --|--
 .
@@ -67,7 +67,7 @@ Document[0, 14]
 
 
 
-```````````````````````````````` example Tables Extension : 5
+```````````````````````````````` example Tables Extension: 5
 Abc|Def
  |---|---
 .
@@ -83,7 +83,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Tables Extension : 6
+```````````````````````````````` example Tables Extension: 6
 No
 Abc|Def
 ---|---
@@ -103,7 +103,7 @@ Document[0, 19]
 
 
 
-```````````````````````````````` example Tables Extension : 7
+```````````````````````````````` example Tables Extension: 7
 Abc|Def
 ---|---
 .
@@ -111,8 +111,7 @@ Abc|Def
   <thead>
     <tr><th>Abc</th><th>Def</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -135,7 +134,7 @@ Document[0, 16]
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables Extension : 8
+```````````````````````````````` example Tables Extension: 8
 Abc|Def
 :--|---
 .
@@ -143,8 +142,7 @@ Abc|Def
   <thead>
     <tr><th align="left">Abc</th><th>Def</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -168,7 +166,7 @@ Document[0, 16]
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables Extension : 9
+```````````````````````````````` example Tables Extension: 9
 Abc|Def
 --:|---
 .
@@ -176,8 +174,7 @@ Abc|Def
   <thead>
     <tr><th align="right">Abc</th><th>Def</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -199,7 +196,7 @@ Document[0, 16]
 
 
 
-```````````````````````````````` example Tables Extension : 10
+```````````````````````````````` example Tables Extension: 10
 Abc|Def
 :-:|---
 .
@@ -207,8 +204,7 @@ Abc|Def
   <thead>
     <tr><th align="center">Abc</th><th>Def</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -230,7 +226,7 @@ Document[0, 16]
 
 
 
-```````````````````````````````` example Tables Extension : 11
+```````````````````````````````` example Tables Extension: 11
 |Abc
 |---
 .
@@ -238,8 +234,7 @@ Document[0, 16]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -257,7 +252,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Tables Extension : 12
+```````````````````````````````` example Tables Extension: 12
 |Abc|
 |---|
 .
@@ -265,8 +260,7 @@ Document[0, 10]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 12]
@@ -284,7 +278,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Tables Extension : 13
+```````````````````````````````` example Tables Extension: 13
 Abc|
 ---|
 .
@@ -292,8 +286,7 @@ Abc|
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -311,7 +304,7 @@ Document[0, 10]
 
 
 
-```````````````````````````````` example Tables Extension : 14
+```````````````````````````````` example Tables Extension: 14
 |Abc
 ---
 .
@@ -324,7 +317,7 @@ Document[0, 9]
 
 
 
-```````````````````````````````` example Tables Extension : 15
+```````````````````````````````` example Tables Extension: 15
 Abc
 |---
 .
@@ -340,7 +333,7 @@ Document[0, 9]
 
 
 
-```````````````````````````````` example Tables Extension : 16
+```````````````````````````````` example Tables Extension: 16
 |Abc
 |---
 |1
@@ -372,7 +365,7 @@ Document[0, 13]
 
 
 
-```````````````````````````````` example Tables Extension : 17
+```````````````````````````````` example Tables Extension: 17
 |Abc|
 |---|
 |1|
@@ -404,7 +397,7 @@ Document[0, 16]
 
 
 
-```````````````````````````````` example Tables Extension : 18
+```````````````````````````````` example Tables Extension: 18
 Abc|
 ---|
 1|
@@ -436,7 +429,7 @@ Document[0, 13]
 
 
 
-```````````````````````````````` example Tables Extension : 19
+```````````````````````````````` example Tables Extension: 19
 |Abc
 ---
 |1
@@ -453,7 +446,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Tables Extension : 20
+```````````````````````````````` example Tables Extension: 20
 |Abc
 |---
 1
@@ -462,8 +455,7 @@ Document[0, 12]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody>
-  </tbody>
+  <tbody></tbody>
 </table>
 <p>1</p>
 .
@@ -484,7 +476,7 @@ Document[0, 12]
 
 
 
-```````````````````````````````` example Tables Extension : 21
+```````````````````````````````` example Tables Extension: 21
 Abc|Def
 ---|---
 1|2
@@ -522,30 +514,52 @@ Document[0, 20]
 
 
 
-```````````````````````````````` example Tables Extension : 22
+```````````````````````````````` example Tables Extension: 22
 Abc|Def|Ghi
 ---|---
 1|2|3
 .
-<p>Abc|Def|Ghi
----|---
-1|2|3</p>
+<table>
+  <thead>
+    <tr><th>Abc</th><th>Def</th><th>Ghi</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td><td>3</td></tr>
+  </tbody>
+</table>
 .
 Document[0, 26]
-  Paragraph[0, 26]
-    Text[0, 11] chars:[0, 11, "Abc|D"..."f|Ghi"]
-    SoftLineBreak[11, 12]
-    Text[12, 19] chars:[12, 19, "---|---"]
-    SoftLineBreak[19, 20]
-    Text[20, 25] chars:[20, 25, "1|2|3"]
+  TableBlock[0, 26]
+    TableHead[0, 11]
+      TableRow[0, 11]
+        TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
+          Text[0, 3] chars:[0, 3, "Abc"]
+        TableCell[4, 8] header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[7, 8, "|"]
+          Text[4, 7] chars:[4, 7, "Def"]
+        TableCell[8, 11] header textOpen:[0, 0] text:[8, 11, "Ghi"] textClose:[0, 0]
+          Text[8, 11] chars:[8, 11, "Ghi"]
+    TableSeparator[12, 19]
+      TableRow[12, 19]
+        TableCell[12, 16] textOpen:[0, 0] text:[12, 15, "---"] textClose:[15, 16, "|"]
+          Text[12, 15] chars:[12, 15, "---"]
+        TableCell[16, 19] textOpen:[0, 0] text:[16, 19, "---"] textClose:[0, 0]
+          Text[16, 19] chars:[16, 19, "---"]
+    TableBody[20, 25]
+      TableRow[20, 25]
+        TableCell[20, 22] textOpen:[0, 0] text:[20, 21, "1"] textClose:[21, 22, "|"]
+          Text[20, 21] chars:[20, 21, "1"]
+        TableCell[22, 24] textOpen:[0, 0] text:[22, 23, "2"] textClose:[23, 24, "|"]
+          Text[22, 23] chars:[22, 23, "2"]
+        TableCell[24, 25] textOpen:[0, 0] text:[24, 25, "3"] textClose:[0, 0]
+          Text[24, 25] chars:[24, 25, "3"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Tables Extension : 23
- Abc  | Def 
- --- | --- 
- 1 | 2 
+```````````````````````````````` example Tables Extension: 23
+ Abc  | Def
+ --- | ---
+ 1 | 2
 .
 <table>
   <thead>
@@ -556,31 +570,31 @@ Document[0, 26]
   </tbody>
 </table>
 .
-Document[0, 33]
-  TableBlock[1, 33]
-    TableHead[1, 12]
-      TableRow[1, 12]
+Document[0, 30]
+  TableBlock[1, 30]
+    TableHead[1, 11]
+      TableRow[1, 11]
         TableCell[1, 7] header textOpen:[0, 0] text:[1, 4, "Abc"] textClose:[6, 7, "|"]
           Text[1, 4] chars:[1, 4, "Abc"]
         TableCell[7, 11] header textOpen:[0, 0] text:[8, 11, "Def"] textClose:[0, 0]
           Text[8, 11] chars:[8, 11, "Def"]
-    TableSeparator[13, 24]
-      TableRow[13, 24]
-        TableCell[14, 19] textOpen:[0, 0] text:[14, 17, "---"] textClose:[18, 19, "|"]
-          Text[14, 17] chars:[14, 17, "---"]
-        TableCell[19, 23] textOpen:[0, 0] text:[20, 23, "---"] textClose:[0, 0]
-          Text[20, 23] chars:[20, 23, "---"]
-    TableBody[25, 32]
-      TableRow[25, 32]
-        TableCell[26, 29] textOpen:[0, 0] text:[26, 27, "1"] textClose:[28, 29, "|"]
-          Text[26, 27] chars:[26, 27, "1"]
-        TableCell[29, 31] textOpen:[0, 0] text:[30, 31, "2"] textClose:[0, 0]
-          Text[30, 31] chars:[30, 31, "2"]
+    TableSeparator[12, 22]
+      TableRow[12, 22]
+        TableCell[13, 18] textOpen:[0, 0] text:[13, 16, "---"] textClose:[17, 18, "|"]
+          Text[13, 16] chars:[13, 16, "---"]
+        TableCell[18, 22] textOpen:[0, 0] text:[19, 22, "---"] textClose:[0, 0]
+          Text[19, 22] chars:[19, 22, "---"]
+    TableBody[23, 29]
+      TableRow[23, 29]
+        TableCell[24, 27] textOpen:[0, 0] text:[24, 25, "1"] textClose:[26, 27, "|"]
+          Text[24, 25] chars:[24, 25, "1"]
+        TableCell[27, 29] textOpen:[0, 0] text:[28, 29, "2"] textClose:[0, 0]
+          Text[28, 29] chars:[28, 29, "2"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Tables Extension : 24
+```````````````````````````````` example Tables Extension: 24
 Abc|Def
 ---|---
     1|2
@@ -618,7 +632,7 @@ Document[0, 24]
 
 
 
-```````````````````````````````` example Tables Extension : 25
+```````````````````````````````` example Tables Extension: 25
 |Abc|Def|
 |---|---|
 |1|2|
@@ -656,7 +670,7 @@ Document[0, 26]
 
 
 
-```````````````````````````````` example Tables Extension : 26
+```````````````````````````````` example Tables Extension: 26
 *Abc*|Def
 ---|---
 1|2
@@ -695,7 +709,7 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Tables Extension : 27
+```````````````````````````````` example Tables Extension: 27
 Abc|Def
 ---|---
 1\\|2|20
@@ -735,7 +749,7 @@ Document[0, 25]
 
 
 
-```````````````````````````````` example Tables Extension : 28
+```````````````````````````````` example Tables Extension: 28
 Abc|Def
 ---|---
 1\\\\|2
@@ -773,7 +787,7 @@ Document[0, 24]
 
 
 
-```````````````````````````````` example Tables Extension : 29
+```````````````````````````````` example Tables Extension: 29
 Abc|Def
 :---|---
 1|2
@@ -811,7 +825,7 @@ Document[0, 21]
 
 
 
-```````````````````````````````` example Tables Extension : 30
+```````````````````````````````` example Tables Extension: 30
 Abc|Def
 ---:|---
 1|2
@@ -849,7 +863,7 @@ Document[0, 21]
 
 
 
-```````````````````````````````` example Tables Extension : 31
+```````````````````````````````` example Tables Extension: 31
 Abc|Def
 :---:|---
 1|2
@@ -887,17 +901,17 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Tables Extension : 32
+```````````````````````````````` example Tables Extension: 32
 Abc|Def
 ---|:---:
 1|2
 .
 <table>
   <thead>
-    <tr><th>Abc</th><th>Def</th></tr>
+    <tr><th>Abc</th><th align="center">Def</th></tr>
   </thead>
   <tbody>
-    <tr><td>1</td><td>2</td></tr>
+    <tr><td>1</td><td align="center">2</td></tr>
   </tbody>
 </table>
 .
@@ -907,25 +921,25 @@ Document[0, 22]
       TableRow[0, 7]
         TableCell[0, 4] header textOpen:[0, 0] text:[0, 3, "Abc"] textClose:[3, 4, "|"]
           Text[0, 3] chars:[0, 3, "Abc"]
-        TableCell[4, 7] header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[0, 0]
+        TableCell[4, 7] CENTER header textOpen:[0, 0] text:[4, 7, "Def"] textClose:[0, 0]
           Text[4, 7] chars:[4, 7, "Def"]
     TableSeparator[8, 17]
       TableRow[8, 17]
         TableCell[8, 12] textOpen:[0, 0] text:[8, 11, "---"] textClose:[11, 12, "|"]
           Text[8, 11] chars:[8, 11, "---"]
-        TableCell[12, 17] textOpen:[0, 0] text:[12, 17, ":---:"] textClose:[0, 0]
+        TableCell[12, 17] CENTER textOpen:[0, 0] text:[12, 17, ":---:"] textClose:[0, 0]
           Text[12, 17] chars:[12, 17, ":---:"]
     TableBody[18, 21]
       TableRow[18, 21]
         TableCell[18, 20] textOpen:[0, 0] text:[18, 19, "1"] textClose:[19, 20, "|"]
           Text[18, 19] chars:[18, 19, "1"]
-        TableCell[20, 21] textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
+        TableCell[20, 21] CENTER textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
           Text[20, 21] chars:[20, 21, "2"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Tables Extension : 33
+```````````````````````````````` example Tables Extension: 33
 Abc|Def
  :--- |---
 1|2
@@ -963,7 +977,7 @@ Document[0, 23]
 
 
 
-```````````````````````````````` example Tables Extension : 34
+```````````````````````````````` example Tables Extension: 34
 Abc|Def
 : ---|---
 .
@@ -979,7 +993,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Tables Extension : 35
+```````````````````````````````` example Tables Extension: 35
 Abc|Def
 --- :|---
 .
@@ -995,7 +1009,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Tables Extension : 36
+```````````````````````````````` example Tables Extension: 36
 Abc|Def
 ---|: ---
 .
@@ -1011,7 +1025,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Tables Extension : 37
+```````````````````````````````` example Tables Extension: 37
 Abc|Def
 ---|--- :
 .
@@ -1027,7 +1041,7 @@ Document[0, 18]
 
 
 
-```````````````````````````````` example Tables Extension : 38
+```````````````````````````````` example Tables Extension: 38
 Abc|Def
 ---|---
 1|2|3
@@ -1067,7 +1081,7 @@ Document[0, 22]
 
 
 
-```````````````````````````````` example Tables Extension : 39
+```````````````````````````````` example Tables Extension: 39
 Abc|Def|Ghi
 ---|---|---
 1|2
@@ -1109,7 +1123,7 @@ Document[0, 28]
 
 
 
-```````````````````````````````` example Tables Extension : 40
+```````````````````````````````` example Tables Extension: 40
 > Abc|Def
 > ---|---
 > 1|2
@@ -1150,7 +1164,7 @@ Document[0, 26]
 
 
 
-```````````````````````````````` example Tables Extension : 41
+```````````````````````````````` example Tables Extension: 41
 Abc|Def
 ---|---
 1|2
@@ -1192,7 +1206,7 @@ Document[0, 40]
 
 inlines should be processed
 
-```````````````````````````````` example Tables Extension : 42
+```````````````````````````````` example Tables Extension: 42
 **Abc**|_Def_
 ---|---
 [ref]|`code`
@@ -1240,7 +1254,7 @@ Document[0, 68]
 
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Tables Extension : 43
+```````````````````````````````` example Tables Extension: 43
 |Abc|Def
 |---|---|
 | span ||
@@ -1274,5 +1288,110 @@ Document[0, 29]
           Text[21, 25] chars:[21, 25, "span"]
 ````````````````````````````````
 
+
+Now we try varying the header lines and make sure we get the right output
+
+```````````````````````````````` example Tables Extension: 44
+|Abc|Def
+|Hij|Lmn
+|---|---|
+| span ||
+.
+<table>
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+    <tr><th>Hij</th><th>Lmn</th></tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="2">span</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 38]
+  TableBlock[0, 38]
+    TableHead[0, 17]
+      TableRow[0, 8]
+        TableCell[0, 5] header textOpen:[0, 1, "|"] text:[1, 4, "Abc"] textClose:[4, 5, "|"]
+          Text[1, 4] chars:[1, 4, "Abc"]
+        TableCell[5, 8] header textOpen:[0, 0] text:[5, 8, "Def"] textClose:[0, 0]
+          Text[5, 8] chars:[5, 8, "Def"]
+      TableRow[9, 17]
+        TableCell[9, 14] header textOpen:[9, 10, "|"] text:[10, 13, "Hij"] textClose:[13, 14, "|"]
+          Text[10, 13] chars:[10, 13, "Hij"]
+        TableCell[14, 17] header textOpen:[0, 0] text:[14, 17, "Lmn"] textClose:[0, 0]
+          Text[14, 17] chars:[14, 17, "Lmn"]
+    TableSeparator[18, 27]
+      TableRow[18, 27]
+        TableCell[18, 23] textOpen:[18, 19, "|"] text:[19, 22, "---"] textClose:[22, 23, "|"]
+          Text[19, 22] chars:[19, 22, "---"]
+        TableCell[23, 27] textOpen:[0, 0] text:[23, 26, "---"] textClose:[26, 27, "|"]
+          Text[23, 26] chars:[23, 26, "---"]
+    TableBody[28, 37]
+      TableRow[28, 37]
+        TableCell[28, 37] span textOpen:[28, 29, "|"] text:[30, 34, "span"] textClose:[35, 37, "||"]
+          Text[30, 34] chars:[30, 34, "span"]
+````````````````````````````````
+
+
+No header lines
+
+```````````````````````````````` example Tables Extension: 45
+|---|---|
+| col1 | col2|
+.
+<table>
+  <thead></thead>
+  <tbody>
+    <tr><td>col1</td><td>col2</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 25]
+  TableBlock[0, 25]
+    TableHead[0, 0]
+    TableSeparator[0, 9]
+      TableRow[0, 9]
+        TableCell[0, 5] textOpen:[0, 1, "|"] text:[1, 4, "---"] textClose:[4, 5, "|"]
+          Text[1, 4] chars:[1, 4, "---"]
+        TableCell[5, 9] textOpen:[0, 0] text:[5, 8, "---"] textClose:[8, 9, "|"]
+          Text[5, 8] chars:[5, 8, "---"]
+    TableBody[10, 24]
+      TableRow[10, 24]
+        TableCell[10, 18] textOpen:[10, 11, "|"] text:[12, 16, "col1"] textClose:[17, 18, "|"]
+          Text[12, 16] chars:[12, 16, "col1"]
+        TableCell[18, 24] textOpen:[0, 0] text:[19, 23, "col2"] textClose:[23, 24, "|"]
+          Text[19, 23] chars:[19, 23, "col2"]
+````````````````````````````````
+
+
+No body lines
+
+```````````````````````````````` example Tables Extension: 46
+| col1 | col2|
+|---|---|
+.
+<table>
+  <thead>
+    <tr><th>col1</th><th>col2</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+.
+Document[0, 25]
+  TableBlock[0, 25]
+    TableHead[0, 14]
+      TableRow[0, 14]
+        TableCell[0, 8] header textOpen:[0, 1, "|"] text:[2, 6, "col1"] textClose:[7, 8, "|"]
+          Text[2, 6] chars:[2, 6, "col1"]
+        TableCell[8, 14] header textOpen:[0, 0] text:[9, 13, "col2"] textClose:[13, 14, "|"]
+          Text[9, 13] chars:[9, 13, "col2"]
+    TableSeparator[15, 24]
+      TableRow[15, 24]
+        TableCell[15, 20] textOpen:[15, 16, "|"] text:[16, 19, "---"] textClose:[19, 20, "|"]
+          Text[16, 19] chars:[16, 19, "---"]
+        TableCell[20, 24] textOpen:[0, 0] text:[20, 23, "---"] textClose:[23, 24, "|"]
+          Text[20, 23] chars:[20, 23, "---"]
+    TableBody[0, 0]
+````````````````````````````````
 
 

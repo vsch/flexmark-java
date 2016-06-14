@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.SubSequence;
 import com.vladsch.flexmark.parser.Parser;
 
-public abstract class RefNode extends LinkNode {
+public abstract class RefNode extends LinkNode implements LinkRefDerived {
     protected BasedSequence textOpeningMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence textClosingMarker = SubSequence.NULL;
@@ -109,6 +109,11 @@ public abstract class RefNode extends LinkNode {
         isDefined = defined;
     }
 
+    @Override
+    public boolean isTentative() {
+        return !isDefined;
+    }
+
     public boolean isDummyReference() {
         return textOpeningMarker != SubSequence.NULL && text == SubSequence.NULL && textClosingMarker != SubSequence.NULL;
     }
@@ -123,7 +128,9 @@ public abstract class RefNode extends LinkNode {
 
     public Reference getReferenceNode(Document document) {
         ReferenceRepository repository = document.get(Parser.REFERENCES);
-        return repository == null ? null : repository.get(repository.normalizeKey(reference));
+        if (repository == null) return null;
+        String normalizeRef = repository.normalizeKey(reference);
+        return repository.get(normalizeRef);
     }
 
     public BasedSequence getTextOpeningMarker() {

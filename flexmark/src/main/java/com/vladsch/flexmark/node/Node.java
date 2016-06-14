@@ -328,4 +328,22 @@ public abstract class Node {
             }
         }
     }
+
+    public void astString(StringBuilder out, boolean withExtra) {
+        out.append(getClass().getName().substring(getClass().getPackage().getName().length() + 1));
+        out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
+        if (withExtra) getAstExtra(out);
+    }
+
+    public String toAstString(boolean withExtra) {
+        StringBuilder sb = new StringBuilder();
+        astString(sb, withExtra);
+        return sb.toString();
+    }
+
+    public static String toSegmentSpan(BasedSequence sequence, String name) {
+        StringBuilder out = new StringBuilder();
+        segmentSpan(out, sequence, name);
+        return out.toString();
+    }
 }

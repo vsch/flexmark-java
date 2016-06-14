@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.MutableDataHolder;
 
 import java.util.List;
 
@@ -23,4 +24,5 @@ public interface MatchedBlockParser {
 
     List<BasedSequence> getParagraphLines();
     List<Integer> getParagraphEolLengths();
+    MutableDataHolder getParagraphDataHolder();
 }

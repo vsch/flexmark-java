@@ -35,6 +35,11 @@ public class DataKey<T> {
     }
 
     @Override
+    public String toString() {
+        return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         return false;

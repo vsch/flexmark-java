@@ -122,6 +122,8 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
 
     @Override
     public void finalizeDocument(Document document) {
+        assert this.referenceRepository == document.get(Parser.REFERENCES);
+
         for (LinkRefProcessor processor : linkRefProcessorsData.processors) {
             processor.finalize(document);
         }
@@ -344,7 +346,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             return 0;
         }
 
-        String normalizedLabel = Escaping.normalizeReference(rawLabel);
+        String normalizedLabel = Escaping.normalizeReferenceChars(rawLabel, true);
         if (normalizedLabel.isEmpty()) {
             return 0;
         }
@@ -353,7 +355,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
 
         // NOTE: whether first or last reference is kept is defined by the repository modify behavior setting
         // for CommonMark this is set in the initializeDocument() function of the inline parser
-        referenceRepository.putRawKey(normalizedLabel, reference);
+        referenceRepository.put(normalizedLabel, reference);
 
         block.insertBefore(reference);
 
@@ -780,7 +782,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             }
 
             if (linkRefProcessorMatch != null) {
-                // have a match, then no look ahead for next matches 
+                // have a match, then no look ahead for next matches
             } else {
                 // need to figure out max nesting we should test based on what is max processor desire and max available
                 // nested inner ones are always only []
@@ -828,37 +830,38 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 }
 
                 if (ref != null) {
-                    String normalizedLabel = Escaping.normalizeReference(ref);
+                    String normalizedLabel = Escaping.normalizeReferenceChars(ref, true);
                     if (referenceRepository.containsKey(normalizedLabel)) {
                         BasedSequence sequence = input.subSequence(opener.index, startIndex);
                         boolean containsLinks = containsLinkRefs(refIsBare ? ref : sequence, opener.node.getNext(), true);
                         isLinkOrImage = !containsLinks;
                         refIsDefined = true;
-                    } else if (!isInterruptingDelimiters(opener, ref)) {
-                        // TODO: here need to test if we are cutting in the middle of some other delimiters matching, if we are not then we will make this into a tentative
-                        // TODO: if we have an opening that is matched by closing delimiter inside our char span [] then we do not create a link ref.
-                        // link ref, otherwise we will break
-                        // it is the innermost ref and is bare, if not bare then we treat it as a ref
+                    } else {
+                        // need to test if we are cutting in the middle of some other delimiters matching, if we are not then we will make this into a tentative
+                        if (!opener.isStraddling(ref)) {
+                            // link ref, otherwise we will break
+                            // it is the innermost ref and is bare, if not bare then we treat it as a ref
 
-                        if (!refIsBare && peek() == '[') {
-                            int beforeNext = index;
-                            int nextLength = parseLinkLabel();
-                            if (nextLength > 0) {
-                                // not bare and not defined and followed by another [], roll back to before the label and make it just text
-                                index = beforeLabel;
+                            if (!refIsBare && peek() == '[') {
+                                int beforeNext = index;
+                                int nextLength = parseLinkLabel();
+                                if (nextLength > 0) {
+                                    // not bare and not defined and followed by another [], roll back to before the label and make it just text
+                                    index = beforeLabel;
+                                } else {
+                                    // undefined ref, create a tentative one but only if does not contain any other link refs
+                                    boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
+                                    if (!containsLinks) {
+                                        refIsBare = true;
+                                        isLinkOrImage = true;
+                                    }
+                                }
                             } else {
-                                // undefined ref, create a tentative one but only if does not contain any other link refs
+                                // undefined ref, bare of followed by empty [], create a tentative link ref but only if does not contain any other link refs
                                 boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
                                 if (!containsLinks) {
-                                    refIsBare = true;
                                     isLinkOrImage = true;
                                 }
-                            }
-                        } else {
-                            // undefined ref, bare of followed by empty [], create a tentative link ref but only if does not contain any other link refs
-                            boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
-                            if (!containsLinks) {
-                                isLinkOrImage = true;
                             }
                         }
                     }
@@ -907,7 +910,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 // set up the parts
                 RefNode refNode = (RefNode) insertNode;
                 refNode.setReferenceChars(ref);
-                refNode.setDefined(refIsDefined);
+                if (refIsDefined) refNode.setDefined(refIsDefined);
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
@@ -942,7 +945,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
                 collapseLinkRefChildren(insertNode, null);
             } else if (insertNode instanceof RefNode) {
                 // have a link ref, collapse to text any tentative ones contained in it, they are duds
-                collapseLinkRefChildren(insertNode, false);
+                collapseLinkRefChildren(insertNode, true);
             }
 
             return true;
@@ -968,58 +971,25 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return false;
     }
 
-    protected boolean isInterruptingDelimiters(Delimiter opener, BasedSequence nodeChars) {
-        // first see if we have any closers in our span
-        int startOffset = nodeChars.getStartOffset();
-        int endOffset = nodeChars.getEndOffset();
-        Delimiter inner = opener.next;
-        while (inner != null) {
-            int innerOffset = inner.index + input.getStartOffset();
-            if (innerOffset >= endOffset) break;
-            if (innerOffset >= startOffset) {
-                // have potential closer, see where the opener is
-                if (inner.delimiterChar == '[' || inner.delimiterChar == ']' || inner.delimiterChar == '!') {
-                    int tmp = 0;
-                }
-                if (!inner.matched) return true;
-            }
-            inner = inner.next;
-        }
-        return false;
-    }
-
-    protected void collapseLinkRefChildren(Node node, Boolean isDefined) {
+    protected void collapseLinkRefChildren(Node node, Boolean isTentative) {
         Node child = node.getFirstChild();
-        TextNodeMergingList list = new TextNodeMergingList();
-
+        boolean hadCollapse = false;
         while (child != null) {
             Node nextChild = child.getNext();
-            if (child instanceof LinkRef && (isDefined == null || isDefined == ((LinkRef) child).isDefined())) {
-                // need to collapse this one, moving its text contents to text  
-                LinkRef linkRef = (LinkRef) child;
-                collapseLinkRefChildren(child, isDefined);
+            if (child instanceof LinkRefDerived && (isTentative == null || isTentative == ((LinkRef) child).isTentative())) {
+                // need to collapse this one, moving its text contents to text
+                collapseLinkRefChildren(child, isTentative);
+                child.unlink();
 
-                if (linkRef.isDummyReference() || !linkRef.isReferenceTextCombined()) {
-                    list.add(linkRef.getTextOpeningMarker());
-                    list.addChildrenOf(linkRef); // this is the text
-                    list.add(linkRef.getTextClosingMarker());
-                    list.add(linkRef.getReferenceOpeningMarker());
-                    list.add(linkRef.getReference());
-                    list.add(linkRef.getReferenceClosingMarker());
-                } else {
-                    list.add(linkRef.getReferenceOpeningMarker());
-                    list.addChildrenOf(linkRef); // this is the reference
-                    list.add(linkRef.getReferenceClosingMarker());
-                }
-                linkRef.unlink();
-            } else {
-                list.add(child);
+                TextNodeConverter list = new TextNodeConverter(child.getChars());
+                list.addChildrenOf(child);
+                list.insertMergedBefore(nextChild);
+                hadCollapse = true;
             }
             child = nextChild;
         }
 
-        node.removeChildren();
-        list.appendMergedTo(node);
+        if (hadCollapse) TextNodeConverter.mergeTextNodes(node);
     }
 
     /**

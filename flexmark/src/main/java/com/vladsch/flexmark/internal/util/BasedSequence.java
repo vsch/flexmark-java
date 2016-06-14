@@ -96,4 +96,12 @@ public interface BasedSequence extends CharSequence {
     boolean isContinuationOf(BasedSequence other);
 
     BasedSequence spliceAtEnd(BasedSequence other);
+
+    /**
+     * start/end offset based containment, not textual
+     *
+     * @param other based sequence from the same parent
+     * @return true if other is contained in this
+     */
+    boolean contains(BasedSequence other);
 }

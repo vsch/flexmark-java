@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.tables.internal;
 
 import com.vladsch.flexmark.ext.gfm.tables.*;
+import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
 import com.vladsch.flexmark.node.Block;
@@ -22,9 +23,9 @@ public class TableBlockParser extends AbstractBlockParser {
                     "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
 
     private final TableBlock block = new TableBlock();
-    private final List<BasedSequence> rowLines = new ArrayList<>();
+    private final BlockContent content = new BlockContent();
 
-    private boolean nextIsSeparatorLine = true;
+    private boolean nextIsSeparatorLine = false;
     private BasedSequence separatorLine = SubSequence.NULL;
     private int separatorLineNumber = 0;
 
@@ -32,8 +33,7 @@ public class TableBlockParser extends AbstractBlockParser {
     public static boolean bodyColumnsTruncatedToHead = true;
     public static int maxHeaderRows = 1;
 
-    private TableBlockParser(BasedSequence headerLine) {
-        rowLines.add(headerLine);
+    private TableBlockParser() {
     }
 
     @Override
@@ -55,16 +55,14 @@ public class TableBlockParser extends AbstractBlockParser {
         if (nextIsSeparatorLine) {
             nextIsSeparatorLine = false;
             separatorLine = line;
-            separatorLineNumber = rowLines.size();
-            rowLines.add(line);
-        } else {
-            rowLines.add(line);
+            separatorLineNumber = content.getLineCount();
         }
+        content.add(line, eolLength);
     }
 
     @Override
     public void closeBlock(ParserState parserState) {
-        block.setCharsFromContent();
+        block.setContent(content);
     }
 
     @Override
@@ -75,8 +73,9 @@ public class TableBlockParser extends AbstractBlockParser {
         List<TableCell.Alignment> alignments = parseAlignment(separatorLine);
 
         int rowNumber = 0;
-        int headerColumns = -1;
-        for (BasedSequence rowLine : rowLines) {
+        int separatorColumns = alignments.size();
+
+        for (BasedSequence rowLine : content.getLines()) {
             if (rowNumber == separatorLineNumber) {
                 section.setCharsFromContent();
                 section = new TableSeparator();
@@ -88,23 +87,15 @@ public class TableBlockParser extends AbstractBlockParser {
             }
 
             List<BasedSequence> cells = split(rowLine);
-            TableRow tableRow = new TableRow();
+            TableRow tableRow = new TableRow(rowLine.subSequence(0, rowLine.length() - content.getEolLength()));
 
             int rowCells = countCells(cells);
             int maxColumns = rowCells;
 
-            if (rowNumber < separatorLineNumber || headerColumns == -1) {
-                if (headerColumns == -1) {
-                    headerColumns = rowCells;
-                } else if (headerColumns < rowCells) {
-                    headerColumns = rowCells;
-                }
-            }
-
-            if (bodyColumnsTruncatedToHead && maxColumns > headerColumns) maxColumns = headerColumns;
+            if (bodyColumnsTruncatedToHead && maxColumns > separatorColumns) maxColumns = separatorColumns;
             if (rowNumber >= separatorLineNumber) {
                 if (!bodyColumnsFilledToHead && rowCells < maxColumns) maxColumns = rowCells;
-                else if (bodyColumnsFilledToHead && maxColumns < headerColumns) maxColumns = headerColumns;
+                else if (bodyColumnsFilledToHead && maxColumns < separatorColumns) maxColumns = separatorColumns;
             }
 
             int segmentOffset = 0;
@@ -185,7 +176,7 @@ public class TableBlockParser extends AbstractBlockParser {
         List<BasedSequence> segments = new ArrayList<>();
 
         if (line.startsWith("|")) {
-            segments.add(line.subSequence(0, 1));
+            //segments.add(line.subSequence(0, 1));
             line = line.subSequence(1, lineLength);
             lineLength--;
         }
@@ -207,7 +198,7 @@ public class TableBlockParser extends AbstractBlockParser {
                         break;
                     case '|':
                         segments.add(line.subSequence(lastPos, i));
-                        segments.add(line.subSequence(i, i + 1));
+                        //segments.add(line.subSequence(i, i + 1));
                         lastPos = i + 1;
                         cellChars = 0;
                         break;
@@ -248,7 +239,11 @@ public class TableBlockParser extends AbstractBlockParser {
                     List<BasedSequence> headParts = split(paragraph);
                     List<BasedSequence> separatorParts = split(separatorLine);
                     if (separatorParts.size() >= headParts.size()) {
-                        return BlockStart.of(new TableBlockParser(paragraph))
+                        TableBlockParser tableBlockParser = new TableBlockParser();
+                        tableBlockParser.addLine(paragraph, matchedBlockParser.getParagraphEolLengths().get(0));
+                        tableBlockParser.nextIsSeparatorLine = true;
+
+                        return BlockStart.of(tableBlockParser)
                                 .atIndex(state.getIndex())
                                 .replaceActiveBlockParser();
                     }

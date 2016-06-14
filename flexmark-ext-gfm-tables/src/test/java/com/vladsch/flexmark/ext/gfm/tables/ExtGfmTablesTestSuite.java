@@ -25,7 +25,7 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        //TablesTest.class,
+        TablesTest.class,
     TablesFullSpecTest.class,
     TablesSpecTest.class
 })

@@ -30,9 +30,7 @@ class AstVisitor extends AbstractVisitor {
 
     public void visitNode(Node node) {
         appendIndent();
-        output.append(node.getClass().getName().substring(node.getClass().getPackage().getName().length() + 1));
-        output.append("[").append(node.getStartOffset()).append(", ").append(node.getEndOffset()).append("]");
-        node.getAstExtra(output);
+        node.astString(output, true);
         output.append(EOL);
         indent++;
 

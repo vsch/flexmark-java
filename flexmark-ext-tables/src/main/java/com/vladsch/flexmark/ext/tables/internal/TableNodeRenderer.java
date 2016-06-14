@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -17,8 +16,8 @@ public class TableNodeRenderer implements NodeRenderer {
     private final NodeRendererContext context;
     private final TableParserOptions options;
 
-    public TableNodeRenderer(DataHolder options, NodeRendererContext context) {
-        this.options = new TableParserOptions(options);
+    public TableNodeRenderer(NodeRendererContext context) {
+        this.options = new TableParserOptions(context.getOptions());
         this.html = context.getHtmlWriter();
         this.context = context;
     }
@@ -59,7 +58,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void renderHead(TableHead node) {
-        html.withAttr().tagIndent("thead", () -> {
+        html.withAttr().withCondLine().tagIndent("thead", () -> {
             context.renderChildren(node);
         });
     }
@@ -69,7 +68,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void renderBody(TableBody node) {
-        html.withAttr().tagIndent("tbody", () -> {
+        html.withAttr().withCondLine().tagIndent("tbody", () -> {
             context.renderChildren(node);
         });
     }
@@ -89,7 +88,7 @@ public class TableNodeRenderer implements NodeRenderer {
         if (options.columnSpans && node.getSpan() > 1) {
             html.attr("colspan", String.valueOf(node.getSpan()));
         }
-        
+
         html.withAttr().tag(tag);
         context.renderChildren(node);
         html.tag("/" + tag);

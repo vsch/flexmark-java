@@ -2,9 +2,7 @@ package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.DataHolder;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -22,6 +20,8 @@ public class TableBlockParser extends AbstractBlockParser {
                     COL + "\\|\\s*" + "|" +
                     "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
 
+    private static DataKey<Boolean> NON_TABLE_PARAGRAPH = new DataKey<Boolean>("NON_TABLE_PARAGRAPH", false);
+
     private final BlockContent content = new BlockContent();
     private final TableBlock block = new TableBlock();
 
@@ -36,7 +36,7 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     private TableBlockParser(TableParserOptions options) {
-        this.options = new TableParserOptions(options);
+        this.options = options;
     }
 
     @Override
@@ -76,7 +76,8 @@ public class TableBlockParser extends AbstractBlockParser {
         List<TableCell.Alignment> alignments = parseAlignment(separatorLine);
 
         int rowNumber = 0;
-        int headerColumns = -1;
+        int separatorColumns = alignments.size();
+
         for (BasedSequence rowLine : content.getLines()) {
             if (rowNumber == separatorLineNumber) {
                 section.setCharsFromContent();
@@ -88,24 +89,16 @@ public class TableBlockParser extends AbstractBlockParser {
                 block.appendChild(section);
             }
 
-            List<BasedSequence> cells = split(rowLine, rowNumber != separatorLineNumber && options.columnSpans);
+            List<BasedSequence> cells = split(rowLine, rowNumber != separatorLineNumber && options.columnSpans, true);
             TableRow tableRow = new TableRow(rowLine.subSequence(0, rowLine.length() - content.getEolLength()));
 
             int rowCells = countCells(cells);
             int maxColumns = rowCells;
 
-            if (rowNumber < separatorLineNumber || headerColumns == -1) {
-                if (headerColumns == -1) {
-                    headerColumns = rowCells;
-                } else if (headerColumns < rowCells) {
-                    headerColumns = rowCells;
-                }
-            }
-
-            if (options.discardExtraColumns && maxColumns > headerColumns) maxColumns = headerColumns;
+            if (options.discardExtraColumns && maxColumns > separatorColumns) maxColumns = separatorColumns;
             if (rowNumber >= separatorLineNumber) {
                 if (!options.appendMissingColumns && rowCells < maxColumns) maxColumns = rowCells;
-                else if (options.appendMissingColumns && maxColumns < headerColumns) maxColumns = headerColumns;
+                else if (options.appendMissingColumns && maxColumns < separatorColumns) maxColumns = separatorColumns;
             }
 
             int segmentOffset = 0;
@@ -172,7 +165,7 @@ public class TableBlockParser extends AbstractBlockParser {
         section.setCharsFromContent();
     }
 
-    private int countCells(List<BasedSequence> segments) {
+    private static int countCells(List<BasedSequence> segments) {
         int cells = 0;
         for (BasedSequence segment : segments) {
             if (isCell(segment)) cells++;
@@ -181,12 +174,12 @@ public class TableBlockParser extends AbstractBlockParser {
         return cells;
     }
 
-    private boolean isCell(BasedSequence segment) {
+    private static boolean isCell(BasedSequence segment) {
         return segment.length() != 1 || segment.charAt(0) != '|';
     }
 
     private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {
-        List<BasedSequence> parts = split(separatorLine, false);
+        List<BasedSequence> parts = split(separatorLine, false, false);
         List<TableCell.Alignment> alignments = new ArrayList<>();
         for (BasedSequence part : parts) {
             BasedSequence trimmed = part.trim();
@@ -198,13 +191,13 @@ public class TableBlockParser extends AbstractBlockParser {
         return alignments;
     }
 
-    private static List<BasedSequence> split(BasedSequence input, boolean columnSpans) {
+    private static List<BasedSequence> split(BasedSequence input, boolean columnSpans, boolean wantPipes) {
         BasedSequence line = input.trim();
         int lineLength = line.length();
         List<BasedSequence> segments = new ArrayList<>();
 
         if (line.startsWith("|")) {
-            segments.add(line.subSequence(0, 1));
+            if (wantPipes) segments.add(line.subSequence(0, 1));
             line = line.subSequence(1, lineLength);
             lineLength--;
         }
@@ -226,7 +219,7 @@ public class TableBlockParser extends AbstractBlockParser {
                         break;
                     case '|':
                         if (!columnSpans || lastPos < i) segments.add(line.subSequence(lastPos, i));
-                        segments.add(line.subSequence(i, i + 1));
+                        if (wantPipes) segments.add(line.subSequence(i, i + 1));
                         lastPos = i + 1;
                         cellChars = 0;
                         break;
@@ -264,22 +257,60 @@ public class TableBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BasedSequence line = state.getLine();
-            List<BasedSequence> paragraphLines = matchedBlockParser.getParagraphLines();
-            if (paragraphLines != null && paragraphLines.size() >= 1 && paragraphLines.size() <= options.maxHeaderRows && paragraphLines.get(0).toString().contains("|")) {
-                BasedSequence separatorLine = line.subSequence(state.getIndex(), line.length());
-                if (TABLE_HEADER_SEPARATOR.matcher(separatorLine).matches()) {
-                    BasedSequence paragraph = paragraphLines.get(0);
-                    List<BasedSequence> headParts = split(paragraph, options.columnSpans);
-                    List<BasedSequence> separatorParts = split(separatorLine, false);
-                    if (separatorParts.size() >= headParts.size()) {
-                        TableBlockParser tableBlockParser = new TableBlockParser(options);
-                        Integer length = matchedBlockParser.getParagraphEolLengths().get(0);
-                        tableBlockParser.addLine(paragraph, length);
-                        tableBlockParser.nextIsSeparatorLine = true;
+            MutableDataHolder paragraphData = matchedBlockParser.getParagraphDataHolder();
+            if (paragraphData == null || !paragraphData.get(NON_TABLE_PARAGRAPH)) {
+                List<BasedSequence> paragraphLines = paragraphData == null ? null : matchedBlockParser.getParagraphLines();
+                int paragraphLineCount = paragraphLines == null ? 0 : paragraphLines.size();
+                if (paragraphLineCount <= options.maxHeaderRows && paragraphLineCount >= options.minHeaderRows && line.indexOf('|') >= 0) {
+                    BasedSequence separatorLine = line.subSequence(state.getIndex(), line.length());
+                    if (TABLE_HEADER_SEPARATOR.matcher(separatorLine).matches()) {
+                        List<BasedSequence> separatorParts = split(separatorLine, false, false);
+                        if (separatorParts.size() > 0) {
+                            boolean allHeaders = true;
+                            if (paragraphLineCount > 0) {
+                                for (BasedSequence headerLine : paragraphLines) {
+                                    if (headerLine.indexOf('|') < 0) {
+                                        allHeaders = false;
+                                        break;
+                                    }
 
-                        return BlockStart.of(tableBlockParser)
-                                .atIndex(state.getIndex())
-                                .replaceActiveBlockParser();
+                                    if (options.headerSeparatorColumns) {
+                                        // need to see that separator column count >= header column count
+                                        List<BasedSequence> headerParts = split(headerLine, false, false);
+                                        if (separatorParts.size() < headerParts.size()) {
+                                            allHeaders = false;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (allHeaders) {
+                                TableBlockParser tableBlockParser = new TableBlockParser(options);
+
+                                if (paragraphLines != null) {
+                                    List<Integer> lengths = matchedBlockParser.getParagraphEolLengths();
+                                    int iMax = paragraphLines.size();
+                                    for (int i = 0; i < iMax; i++) {
+                                        tableBlockParser.addLine(paragraphLines.get(i), lengths.get(i));
+                                    }
+                                }
+
+                                tableBlockParser.nextIsSeparatorLine = true;
+
+                                if (paragraphLines != null) {
+                                    return BlockStart.of(tableBlockParser)
+                                            .atIndex(state.getIndex())
+                                            .replaceActiveBlockParser();
+                                } else {
+                                    return BlockStart.of(tableBlockParser)
+                                            .atIndex(state.getIndex());
+                                }
+                            }
+
+                            // not a table paragraph, we mark it as not one we want so we don't waste time trying again
+                            paragraphData.set(NON_TABLE_PARAGRAPH, true);
+                        }
                     }
                 }
             }

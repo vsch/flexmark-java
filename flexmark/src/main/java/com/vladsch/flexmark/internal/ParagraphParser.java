@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -12,6 +14,7 @@ public class ParagraphParser extends AbstractBlockParser {
 
     private final Paragraph block = new Paragraph();
     private BlockContent content = new BlockContent();
+    private MutableDataHolder mutableDataHolder = null;
 
     public BlockContent getContent() {
         return content;
@@ -61,6 +64,8 @@ public class ParagraphParser extends AbstractBlockParser {
                 block.setContent(content);
             }
         }
+
+        mutableDataHolder = null;
     }
 
     @Override
@@ -68,5 +73,12 @@ public class ParagraphParser extends AbstractBlockParser {
         if (content != null) {
             inlineParser.parse(content.getContents(), block);
         }
+    }
+
+    public MutableDataHolder getDataHolder() {
+        if (mutableDataHolder == null) {
+            mutableDataHolder = new MutableDataSet();
+        }
+        return mutableDataHolder;
     }
 }

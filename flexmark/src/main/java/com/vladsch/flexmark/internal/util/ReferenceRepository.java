@@ -3,8 +3,6 @@ package com.vladsch.flexmark.internal.util;
 import com.vladsch.flexmark.node.Reference;
 import com.vladsch.flexmark.parser.Parser;
 
-import java.util.Locale;
-
 public class ReferenceRepository extends NodeRepository<Reference> {
     public ReferenceRepository(DataHolder options) {
         super(options);
@@ -22,6 +20,6 @@ public class ReferenceRepository extends NodeRepository<Reference> {
 
     @Override
     public String normalizeKey(CharSequence key) {
-        return super.normalizeKey(key).toLowerCase(Locale.ROOT);
+        return Escaping.normalizeReference(key, true);
     }
 }

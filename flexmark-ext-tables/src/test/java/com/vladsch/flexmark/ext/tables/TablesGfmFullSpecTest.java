@@ -23,9 +23,10 @@ public class TablesGfmFullSpecTest extends FullSpecTestCase {
             .set(TablesExtension.COLUMN_SPANS, false)
             .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
             .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
+            .set(TablesExtension.HEADER_SEPARATOR_COLUMNS, true)
             .set(HtmlRenderer.INDENT_SIZE, 2);
 
-    private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create(OPTIONS));
+    private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create());
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder(OPTIONS).extensions(EXTENSIONS).build();
 

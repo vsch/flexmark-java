@@ -10,34 +10,20 @@ public class PrefixedSubSequence extends SubSequence {
 
     public PrefixedSubSequence(String prefix, CharSequence base) {
         this(prefix, base, 0, base.length());
-        if (base.length() == 0) {
-            int tmp = 0;
-        }
     }
 
     public PrefixedSubSequence(String prefix, CharSequence base, int startOffset, int endOffset) {
         super(base, startOffset, endOffset);
-        if (base.length() == 0) {
-            int tmp = 0;
-        }
-
         this.prefix = prefix;
         this.prefixLength = prefix.length();
     }
 
     public PrefixedSubSequence(String prefix, BasedSequence charSequence) {
         this(prefix, charSequence.getBase(), charSequence.getStartOffset(), charSequence.getEndOffset());
-        if (charSequence.length() == 0) {
-            int tmp = 0;
-        }
     }
 
     public PrefixedSubSequence(String prefix, BasedSequence charSequence, int startOffset, int endOffset) {
         super(charSequence.getBase(), startOffset, endOffset);
-        if (charSequence.length() == 0) {
-            int tmp = 0;
-        }
-
         this.prefix = prefix;
         this.prefixLength = prefix.length();
     }

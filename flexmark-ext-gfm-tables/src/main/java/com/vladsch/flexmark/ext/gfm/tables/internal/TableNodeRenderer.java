@@ -56,7 +56,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void renderHead(TableHead tableHead) {
-        html.withAttr().tagIndent("thead", () -> {
+        html.withAttr().withCondLine().tagIndent("thead", () -> {
             context.renderChildren(tableHead);
         });
     }
@@ -66,7 +66,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void renderBody(TableBody tableBody) {
-        html.withAttr().tagIndent("tbody", () -> {
+        html.withAttr().withCondLine().tagIndent("tbody", () -> {
             context.renderChildren(tableBody);
         });
     }

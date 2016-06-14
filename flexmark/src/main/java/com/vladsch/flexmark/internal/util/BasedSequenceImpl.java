@@ -456,4 +456,9 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         assert isContinuedBy(other) : "sequence[" + getStartOffset() + ", " + getEndOffset() + "] is not continued by other[" + other.getStartOffset() + ", " + other.getEndOffset() + "]";
         return baseSubSequence(getStartOffset(), other.getEndOffset());
     }
+
+    @Override
+    public boolean contains(BasedSequence other) {
+        return getBase() == other.getBase() && !(getStartOffset() >= other.getEndOffset() || getEndOffset() <= other.getStartOffset());
+    }
 }

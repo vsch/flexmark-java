@@ -93,4 +93,21 @@ public class Delimiter {
         delimitedNode.setText(input.subSequence(getEndIndex(), closer.getStartIndex()));
         getNode().insertAfter((Node) delimitedNode);
     }
+
+    public boolean isStraddling(BasedSequence nodeChars) {
+        // first see if we have any closers in our span
+        int startOffset = nodeChars.getStartOffset();
+        int endOffset = nodeChars.getEndOffset();
+        Delimiter inner = this.next;
+        while (inner != null) {
+            int innerOffset = inner.getEndIndex();
+            if (innerOffset >= endOffset) break;
+            if (innerOffset >= startOffset) {
+                // inside our region, if unmatched then we are straddling the region
+                if (!inner.matched) return true;
+            }
+            inner = inner.next;
+        }
+        return false;
+    }
 }

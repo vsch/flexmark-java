@@ -132,8 +132,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlBlock node) {
-        if (suppressInlineHtml) return;
-        
+        if (suppressHtmlBlocks) return;
+
         html.line();
         if (context.shouldEscapeHtml()) {
             html.text(node.getContentChars().normalizeEOL());
@@ -209,8 +209,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlInline node) {
-        if (suppressInlineHtml) return; 
-        
+        if (suppressInlineHtml) return;
+
         if (context.shouldEscapeHtml()) {
             html.text(node.getChars().normalizeEOL());
         } else {
