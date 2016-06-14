@@ -47,14 +47,14 @@ Progress so far
         - [x] Auto links
         - [x] Fenced code blocks
         - [ ] Anchor links for headers with auto id generation
-        - [ ] Table Spans option to be implemented for gfm-tables extension
-        - [ ] Wiki Links with GitHub and Creole syntax
+        - [x] Table Spans option to be implemented for gfm-tables extension
+        - [x] Wiki Links with GitHub and Creole syntax
         - [x] Emoji Shortcuts with use GitHub emoji URL option
     - GitHub Syntax
         - [x] Strikethrough
         - [ ] Task Lists
         - [ ] No Atx Header Space
-        - [ ] Hard Wraps
+        - [x] Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
         - [ ] Relaxed HR Rules
         - [x] Wiki links
     - Publishing
@@ -66,8 +66,8 @@ Progress so far
         - [ ] Quotes
         - [ ] Smarts
     - Suppress
-        - [ ] inline HTML
-        - [ ] HTML blocks
+        - [x] inline HTML
+        - [x] HTML blocks
     - Processor Extensions
         - [ ] Jekyll front matter
         - [ ] GitBook link URL encoding
