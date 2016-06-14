@@ -7,12 +7,13 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
  * Extension for emoji shortcuts using Emoji-Cheat-Sheet.com.
  * <p>
- * Create it with {@link #create(String rootImagePath)} and then configure it on the builders
+ * Create it with {@link #create()} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
@@ -21,14 +22,14 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    private final String rootImagePath;
+    final public static DataKey<String> ROOT_IMAGE_PATH = new DataKey<String>("ROOT_IMAGE_PATH", "/img/");
+    final public static DataKey<Boolean> USE_IMAGE_URLS = new DataKey<Boolean>("USE_IMAGE_URLS", false);
 
-    private EmojiExtension(String rootImagePath) {
-        this.rootImagePath = rootImagePath;
+    private EmojiExtension() {
     }
 
-    public static Extension create(String rootImagePath) {
-        return new EmojiExtension(rootImagePath);
+    public static Extension create() {
+        return new EmojiExtension();
     }
 
     @Override
@@ -41,7 +42,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
         rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
             @Override
             public NodeRenderer create(NodeRendererContext context) {
-                return new EmojiNodeRenderer(context, rootImagePath);
+                return new EmojiNodeRenderer(context);
             }
         });
     }

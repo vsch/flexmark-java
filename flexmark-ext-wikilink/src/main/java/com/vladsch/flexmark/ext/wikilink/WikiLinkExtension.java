@@ -23,6 +23,7 @@ import com.vladsch.flexmark.parser.Parser;
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     final static public DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
+    final static public DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", ".md");
 
     private WikiLinkExtension() {
     }

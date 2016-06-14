@@ -24,18 +24,24 @@ public class HtmlRenderer {
     final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
+    final static public DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DataKey<>("SUPPRESS_HTML_BLOCKS", false);
+    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DataKey<>("SUPPRESS_INLINE_HTML", false);
 
     static class HtmlRendererOptions {
-        public final String softbreak;
+        public final String softBreak;
         public final boolean escapeHtml;
         public final boolean percentEncodeUrls;
         public final int indentSize;
+        public final boolean suppressHtmlBlocks;
+        public final boolean suppressInlineHtml;
 
         public HtmlRendererOptions(DataHolder options) {
-            softbreak = options.get(SOFT_BREAK);
+            softBreak = options.get(SOFT_BREAK);
             escapeHtml = options.get(ESCAPE_HTML);
             percentEncodeUrls = options.get(PERCENT_ENCODE_URLS);
             indentSize = options.get(INDENT_SIZE);
+            suppressHtmlBlocks = options.get(SUPPRESS_HTML_BLOCKS);
+            suppressInlineHtml = options.get(SUPPRESS_INLINE_HTML);
         }
     }
 
@@ -308,8 +314,8 @@ public class HtmlRenderer {
         }
 
         @Override
-        public String getSoftbreak() {
-            return htmlOptions.softbreak;
+        public String getSoftBreak() {
+            return htmlOptions.softBreak;
         }
 
         @Override

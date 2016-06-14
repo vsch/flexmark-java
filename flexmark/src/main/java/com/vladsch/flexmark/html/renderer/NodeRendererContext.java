@@ -36,7 +36,7 @@ public interface NodeRendererContext {
     /**
      * @return HTML that should be rendered for a soft line break
      */
-    String getSoftbreak();
+    String getSoftBreak();
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child

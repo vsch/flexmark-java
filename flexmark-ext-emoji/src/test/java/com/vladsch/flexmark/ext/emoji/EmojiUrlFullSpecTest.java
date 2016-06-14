@@ -2,6 +2,8 @@ package com.vladsch.flexmark.ext.emoji;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.test.FullSpecTestCase;
@@ -14,9 +16,12 @@ import static org.junit.Assert.assertEquals;
 
 public class EmojiUrlFullSpecTest extends FullSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_emoji_url_ast_spec.txt";
-    private static final Set<Extension> EXTENSIONS = Collections.singleton(EmojiExtension.create(null));
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
-    static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
+    private static final Set<Extension> EXTENSIONS = Collections.singleton(EmojiExtension.create());
+    private static final DataHolder OPTIONS = new MutableDataSet()
+            .set(EmojiExtension.USE_IMAGE_URLS, true);
+
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).extensions(EXTENSIONS).build();
+    static final Parser PARSER = Parser.builder(OPTIONS).extensions(EXTENSIONS).build();
 
     @Override
     protected String getSpecResourceName() {

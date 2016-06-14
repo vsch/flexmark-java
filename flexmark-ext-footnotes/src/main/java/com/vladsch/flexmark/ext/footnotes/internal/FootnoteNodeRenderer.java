@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -15,15 +16,23 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
-    private final FootnoteRepository footnoteRepository;
+
+    final private NodeRendererContext context;
+    final private HtmlWriter html;
+    final private FootnoteRepository footnoteRepository;
+    final private String footnoteRefPrefix;
+    final private String footnoteRefSuffix;
+    final private String footnoteBackRefString;
 
     public FootnoteNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        this.footnoteRepository = context.getDocument().get(FootnoteExtension.FOOTNOTES);
+        Document document = context.getDocument();
+        this.footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
         this.footnoteRepository.resolveFootnoteOrdinals();
+        this.footnoteRefPrefix = document.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
+        this.footnoteRefSuffix = document.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
+        this.footnoteBackRefString = document.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
     }
 
     @Override
@@ -68,7 +77,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                                 html.attr("href", "#fnref-" + footnoteOrdinal);
                                 html.attr("class", "footnote-backref");
                                 html.withAttr().tag("a");
-                                html.raw("&#8617;");
+                                html.raw(footnoteBackRefString);
                                 html.tag("/a");
                             });
                         }
@@ -92,7 +101,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                 html.attr("class", "footnote-ref");
                 html.attr("href", "#fn-" + footnoteOrdinal);
                 html.withAttr().tag("a");
-                html.raw(String.valueOf(footnoteOrdinal));
+                html.raw(footnoteRefPrefix + String.valueOf(footnoteOrdinal) + footnoteRefSuffix);
                 html.tag("/a");
             });
         }

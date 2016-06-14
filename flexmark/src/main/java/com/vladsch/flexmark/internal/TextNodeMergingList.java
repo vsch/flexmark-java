@@ -32,7 +32,7 @@ public class TextNodeMergingList {
         }
     }
 
-    public void appendAsChildrenTo(Node parent) {
+    public void appendMergedTo(Node parent) {
         mergeList();
         for (Node child : list) {
             parent.appendChild(child);

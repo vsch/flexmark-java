@@ -1,6 +1,15 @@
 Version History
 ===============
 
+0.1.3
+-----
+
+- Update Emoji extension to use the universal options mechanism.
+
+- Add WikiLink file link extension string option to append to generated links 
+
+- Add Suppress HTML in addition to escape option, with separate options for blocks and inline html
+
 0.1.2
 -----
 

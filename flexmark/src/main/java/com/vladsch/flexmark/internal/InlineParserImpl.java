@@ -956,7 +956,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         }
     }
 
-    private boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
+    protected boolean containsLinkRefs(BasedSequence nodeChars, Node next, Boolean isDefined) {
         int startOffset = nodeChars.getStartOffset();
         int endOffset = nodeChars.getEndOffset();
         while (next != null) {
@@ -968,7 +968,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return false;
     }
 
-    boolean isInterruptingDelimiters(Delimiter opener, BasedSequence nodeChars) {
+    protected boolean isInterruptingDelimiters(Delimiter opener, BasedSequence nodeChars) {
         // first see if we have any closers in our span
         int startOffset = nodeChars.getStartOffset();
         int endOffset = nodeChars.getEndOffset();
@@ -988,7 +988,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         return false;
     }
 
-    void collapseLinkRefChildren(Node node, Boolean isDefined) {
+    protected void collapseLinkRefChildren(Node node, Boolean isDefined) {
         Node child = node.getFirstChild();
         TextNodeMergingList list = new TextNodeMergingList();
 
@@ -1019,7 +1019,7 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
         }
 
         node.removeChildren();
-        list.appendAsChildrenTo(node);
+        list.appendMergedTo(node);
     }
 
     /**

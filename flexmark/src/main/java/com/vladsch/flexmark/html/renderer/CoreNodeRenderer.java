@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.node.*;
 
@@ -16,10 +18,15 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     protected final NodeRendererContext context;
     private final HtmlWriter html;
+    private final boolean suppressHtmlBlocks;
+    private final boolean suppressInlineHtml;
 
     public CoreNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
+        DataHolder options = context.getOptions();
+        this.suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
+        this.suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
     }
 
     @Override
@@ -125,6 +132,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlBlock node) {
+        if (suppressInlineHtml) return;
+        
         html.line();
         if (context.shouldEscapeHtml()) {
             html.text(node.getContentChars().normalizeEOL());
@@ -200,6 +209,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(HtmlInline node) {
+        if (suppressInlineHtml) return; 
+        
         if (context.shouldEscapeHtml()) {
             html.text(node.getChars().normalizeEOL());
         } else {
@@ -209,7 +220,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(SoftLineBreak node) {
-        html.raw(context.getSoftbreak());
+        html.raw(context.getSoftBreak());
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     FootnotesFullSpecTest.class,
     FootnotesSpecTest.class,
+        FootnoteOptionsTest.class,
 })
 public class ExtFootnotesTestSuite {
 }

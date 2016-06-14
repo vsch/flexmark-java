@@ -56,7 +56,7 @@ Progress so far
         - [ ] No Atx Header Space
         - [ ] Hard Wraps
         - [ ] Relaxed HR Rules
-        - [ ] Wiki links
+        - [x] Wiki links
     - Publishing
         - [x] Abbreviations
         - [x] Footnotes

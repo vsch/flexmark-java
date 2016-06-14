@@ -28,6 +28,9 @@ import com.vladsch.flexmark.parser.Parser;
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public final static DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", FootnoteRepository::new);
     public final static DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
+    final public static DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
+    final public static DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
+    final public static DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
 
     private FootnoteExtension() {
     }

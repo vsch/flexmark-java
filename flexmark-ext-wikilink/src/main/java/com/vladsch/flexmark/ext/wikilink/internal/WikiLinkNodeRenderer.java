@@ -18,12 +18,12 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
 
     private final NodeRendererContext context;
     private final HtmlWriter html;
-    private final boolean isLinkFirst;
+    private final String linkFileExtension;
 
     public WikiLinkNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        this.isLinkFirst = context.getOptions().get(WikiLinkExtension.LINK_FIRST_SYNTAX);
+        this.linkFileExtension = context.getOptions().get(WikiLinkExtension.LINK_FILE_EXTENSION);
     }
 
     @Override
@@ -51,6 +51,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
             }
         }
 
+        sb.append(linkFileExtension);
         return sb.toString();
     }
 
