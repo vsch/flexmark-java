@@ -439,4 +439,95 @@ Document[0, 385]
 ````````````````````````````````
 
 
+Customized strings
+
+```````````````````````````````` example(Footnotes: 7) options(custom)
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+with continuation text. Inline _italic_ and 
+**bold**.
+
+    Multiple paragraphs are supported as other 
+    markdown elements such as lists and footnotes[^1].
+    
+    - item 1
+    - item 2
+    
+    [^1]: This is the body of a nested footnote.
+    with continuation text. Inline _italic_ and 
+    **bold**.
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">[1]</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <p>Multiple paragraphs are supported as other
+      markdown elements such as lists and footnotes<sup id="fnref-2"><a class="footnote-ref" href="#fn-2">[2]</a></sup>.</p>
+      <ul>
+        <li>item 1</li>
+        <li>item 2</li>
+      </ul>
+      <a href="#fnref-1" class="footnote-backref">&lt;back&gt;</a>
+    </li>
+    <li id="fn-2">
+      <p>This is the body of a nested footnote.
+      with continuation text. Inline <em>italic</em> and
+      <strong>bold</strong>.</p>
+      <a href="#fnref-2" class="footnote-backref">&lt;back&gt;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 385]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This "..."tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 133]
+      Text[44, 77] chars:[44, 77, "This "..."note."]
+      SoftLineBreak[77, 78]
+      Text[78, 109] chars:[78, 109, "with "..."line "]
+      Emphasis[109, 117] textOpen:[109, 110, "_"] text:[110, 116, "italic"] textClose:[116, 117, "_"]
+        Text[110, 116] chars:[110, 116, "italic"]
+      Text[117, 121] chars:[117, 121, " and"]
+      SoftLineBreak[122, 123]
+      StrongEmphasis[123, 131] textOpen:[123, 125, "**"] text:[125, 129, "bold"] textClose:[129, 131, "**"]
+        Text[125, 129] chars:[125, 129, "bold"]
+      Text[131, 132] chars:[131, 132, "."]
+    Paragraph[138, 237]
+      Text[138, 180] chars:[138, 180, "Multi"..."other"]
+      SoftLineBreak[181, 182]
+      Text[186, 231] chars:[186, 231, "markd"..."notes"]
+      Footnote[231, 235] ordinal: 2  textOpen:[231, 233, "[^"] text:[233, 234, "1"] textClose:[234, 235, "]"]
+        Text[233, 234] chars:[233, 234, "1"]
+      Text[235, 236] chars:[235, 236, "."]
+    BulletList[246, 268]
+      ListItem[246, 255] open:[246, 247, "-"]
+        Paragraph[248, 255]
+          Text[248, 254] chars:[248, 254, "item 1"]
+      ListItem[259, 268] open:[259, 260, "-"]
+        Paragraph[261, 268]
+          Text[261, 267] chars:[261, 267, "item 2"]
+    FootnoteBlock[277, 321] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 321]
+      Paragraph[283, 385]
+        Text[283, 321] chars:[283, 321, "This "..."note."]
+        SoftLineBreak[321, 322]
+        Text[326, 357] chars:[326, 357, "with "..."line "]
+        Emphasis[357, 365] textOpen:[357, 358, "_"] text:[358, 364, "italic"] textClose:[364, 365, "_"]
+          Text[358, 364] chars:[358, 364, "italic"]
+        Text[365, 369] chars:[365, 369, " and"]
+        SoftLineBreak[370, 371]
+        StrongEmphasis[375, 383] textOpen:[375, 377, "**"] text:[377, 381, "bold"] textClose:[381, 383, "**"]
+          Text[377, 381] chars:[377, 381, "bold"]
+        Text[383, 384] chars:[383, 384, "."]
+````````````````````````````````
+
+
 

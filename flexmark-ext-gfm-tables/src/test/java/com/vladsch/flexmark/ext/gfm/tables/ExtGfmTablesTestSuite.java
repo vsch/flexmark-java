@@ -26,8 +26,7 @@ import org.junit.runners.Suite;
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
         TablesTest.class,
-    TablesFullSpecTest.class,
-    TablesSpecTest.class
+        ComboTablesSpecTest.class,
 })
 public class ExtGfmTablesTestSuite {
 }

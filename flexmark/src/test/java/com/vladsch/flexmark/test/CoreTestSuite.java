@@ -33,10 +33,8 @@ import org.junit.runners.Suite;
         PathologicalTest.class,
         PrefixedSubSequenceTest.class,
         FullOrigSpecCoreTest.class,
-        FullSpecCoreTest.class,
-        SpecCoreTest.class,
-        FullExtraSpecTest.class,
-        ExtraSpecTest.class,
+        ComboCoreSpecTest.class,
+        ComboExtraSpecTest.class,
         SpecialInputTest.class,
         SubstringTest.class,
         UsageExampleTest.class

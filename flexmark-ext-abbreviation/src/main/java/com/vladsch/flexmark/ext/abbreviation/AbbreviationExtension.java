@@ -6,9 +6,6 @@ import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationPostProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.parser.Parser;
@@ -41,11 +38,6 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-            @Override
-            public NodeRenderer create(NodeRendererContext context) {
-                return new AbbreviationNodeRenderer(context);
-            }
-        });
+        rendererBuilder.nodeRendererFactory(AbbreviationNodeRenderer::new);
     }
 }

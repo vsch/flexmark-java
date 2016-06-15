@@ -12,11 +12,11 @@ class TableParserOptions {
     final public boolean headerSeparatorColumns;
 
     TableParserOptions(DataHolder options) {
-        this.maxHeaderRows = options.get(TablesExtension.MAX_HEADER_ROWS);
-        this.minHeaderRows = options.get(TablesExtension.MIN_HEADER_ROWS);
-        this.appendMissingColumns = options.get(TablesExtension.APPEND_MISSING_COLUMNS);
-        this.discardExtraColumns = options.get(TablesExtension.DISCARD_EXTRA_COLUMNS);
-        this.columnSpans = options.get(TablesExtension.COLUMN_SPANS);
-        this.headerSeparatorColumns = options.get(TablesExtension.HEADER_SEPARATOR_COLUMNS);
+        this.maxHeaderRows = TablesExtension.MAX_HEADER_ROWS.getFrom(options);
+        this.minHeaderRows = TablesExtension.MIN_HEADER_ROWS.getFrom(options);
+        this.appendMissingColumns = TablesExtension.APPEND_MISSING_COLUMNS.getFrom(options);
+        this.discardExtraColumns = TablesExtension.DISCARD_EXTRA_COLUMNS.getFrom(options);
+        this.columnSpans = TablesExtension.COLUMN_SPANS.getFrom(options);
+        this.headerSeparatorColumns = TablesExtension.HEADER_SEPARATOR_COLUMNS.getFrom(options);
     }
 }

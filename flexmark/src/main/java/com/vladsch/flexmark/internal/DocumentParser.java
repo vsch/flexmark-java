@@ -525,6 +525,8 @@ public class DocumentParser implements ParserState {
         }
 
         blockParser.closeBlock(this);
+
+        blockParser.finalizeClosedBlock();
     }
 
     /**

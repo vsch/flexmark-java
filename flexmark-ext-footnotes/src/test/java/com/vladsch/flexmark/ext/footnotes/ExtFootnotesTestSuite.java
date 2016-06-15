@@ -4,9 +4,7 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    FootnotesFullSpecTest.class,
-    FootnotesSpecTest.class,
-        FootnoteOptionsTest.class,
+        ComboFootnotesSpecTest.class,
 })
 public class ExtFootnotesTestSuite {
 }

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.spec;
 
 public class SpecExample {
+    final static public SpecExample NULL = new SpecExample(null, "", 0, "", "");
 
     private final String optionsSet;
     private final String section;
@@ -10,23 +11,38 @@ public class SpecExample {
     private final String ast;
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
-        String trimmedSet = optionsSet.trim();
-        this.optionsSet = trimmedSet.isEmpty() ? null : trimmedSet;
-        this.section = section;
-        this.exampleNumber = exampleNumber;
-        this.source = source;
-        this.html = html;
-        this.ast = null;
+        this(optionsSet, section, exampleNumber, source, html, null);
     }
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast) {
-        String trimmedSet = optionsSet.trim();
-        this.optionsSet = trimmedSet.isEmpty() ? null : trimmedSet;
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
         this.html = html;
         this.ast = ast;
+
+        if (optionsSet == null) {
+            this.optionsSet = null;
+        } else {
+            String trimmedSet = optionsSet.trim();
+            this.optionsSet = trimmedSet.isEmpty() ? null : trimmedSet;
+        }
+    }
+
+    public boolean isFullSpecExample() {
+        return this == NULL;
+    }
+
+    public boolean isNull() {
+        return this == NULL;
+    }
+
+    public boolean isSpecExample() {
+        return this != NULL;
+    }
+
+    public boolean isNotNull() {
+        return this != NULL;
     }
 
     public String getOptionsSet() {
@@ -55,6 +71,10 @@ public class SpecExample {
 
     @Override
     public String toString() {
-        return "Section \"" + section + "\" example " + exampleNumber;
+        if (this == NULL) {
+            return "Full Spec Test";
+        } else {
+            return "Section \"" + section + "\" example " + exampleNumber;
+        }
     }
 }

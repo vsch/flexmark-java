@@ -28,7 +28,12 @@ public class Document extends Block implements MutableDataHolder {
     public boolean contains(DataKey key) {return dataSet.contains(key);}
 
     @Override
-    public <T> T get(DataKey<T> key) {return dataSet.get(key);}
+    public <T> T get(DataKey<T> key) {
+        return dataSet.get(key);
+    }
+
+    @Override
+    public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) { return dataSet.getOrCompute(key, factory); }
 
     @Override
     public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}

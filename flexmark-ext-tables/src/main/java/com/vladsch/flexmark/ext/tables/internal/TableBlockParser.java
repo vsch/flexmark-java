@@ -20,7 +20,8 @@ public class TableBlockParser extends AbstractBlockParser {
                     COL + "\\|\\s*" + "|" +
                     "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
 
-    private static DataKey<Boolean> NON_TABLE_PARAGRAPH = new DataKey<Boolean>("NON_TABLE_PARAGRAPH", false);
+    private static DataKey<Boolean> NON_TABLE_PARAGRAPH = new DataKey<>("NON_TABLE_PARAGRAPH", false);
+    private static DataKey<TableParserOptions> CACHED_TABLE_OPTIONS = new DataKey<>("CACHED_TABLE_OPTIONS", TableParserOptions::new);
 
     private final BlockContent content = new BlockContent();
     private final TableBlock block = new TableBlock();
@@ -248,12 +249,6 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory extends AbstractBlockParserFactory {
-        final private TableParserOptions options;
-
-        public Factory(DataHolder options) {
-            this.options = new TableParserOptions(options);
-        }
-
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BasedSequence line = state.getLine();
@@ -261,6 +256,8 @@ public class TableBlockParser extends AbstractBlockParser {
             if (paragraphData == null || !paragraphData.get(NON_TABLE_PARAGRAPH)) {
                 List<BasedSequence> paragraphLines = paragraphData == null ? null : matchedBlockParser.getParagraphLines();
                 int paragraphLineCount = paragraphLines == null ? 0 : paragraphLines.size();
+                MutableDataHolder properties = state.getProperties();
+                TableParserOptions options = properties.get(CACHED_TABLE_OPTIONS);
                 if (paragraphLineCount <= options.maxHeaderRows && paragraphLineCount >= options.minHeaderRows && line.indexOf('|') >= 0) {
                     BasedSequence separatorLine = line.subSequence(state.getIndex(), line.length());
                     if (TABLE_HEADER_SEPARATOR.matcher(separatorLine).matches()) {

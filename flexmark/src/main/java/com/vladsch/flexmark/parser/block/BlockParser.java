@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.MutableDataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 
@@ -26,6 +27,13 @@ public interface BlockParser {
 
     void closeBlock(ParserState parserState);
 
+    /**
+     * Used to clean up and prepare for the next parsing run of the AbstractBlockParser
+     * for internal parser house keeping not for BlockParser implementors
+     */
+    void finalizeClosedBlock();
+
     void parseInlines(InlineParser inlineParser);
 
+    MutableDataHolder getDataHolder();
 }

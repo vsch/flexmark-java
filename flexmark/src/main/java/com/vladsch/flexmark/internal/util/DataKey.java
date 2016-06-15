@@ -2,11 +2,11 @@ package com.vladsch.flexmark.internal.util;
 
 public class DataKey<T> {
     final private String name;
-    final private Factory<T> factory;
+    final private DataValueFactory<T> factory;
 
     final private T defaultValue;
 
-    public DataKey(String name, Factory<T> factory) {
+    public DataKey(String name, DataValueFactory<T> factory) {
         this.name = name;
         this.defaultValue = factory.create(null);
         this.factory = factory;
@@ -22,7 +22,7 @@ public class DataKey<T> {
         return name;
     }
 
-    public Factory<T> getFactory() {
+    public DataValueFactory<T> getFactory() {
         return factory;
     }
 
@@ -34,9 +34,18 @@ public class DataKey<T> {
         return (T) value;
     }
 
+    public T getFrom(DataHolder holder) {
+        return holder == null ? defaultValue : holder.get(this);
+    }
+
     @Override
     public String toString() {
-        return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+        if (defaultValue != null) {
+            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+        } else {
+            T defaultValue = factory.create(null);
+            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+        }
     }
 
     @Override
@@ -50,7 +59,7 @@ public class DataKey<T> {
         int result = super.hashCode();
         result = 31 * result + name.hashCode();
         result = 31 * result + factory.hashCode();
-        result = 31 * result + defaultValue.hashCode();
+        result = 31 * result + (defaultValue == null ? 0 : defaultValue.hashCode());
         return result;
     }
 }

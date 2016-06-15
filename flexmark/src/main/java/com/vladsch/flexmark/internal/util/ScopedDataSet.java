@@ -71,7 +71,7 @@ public class ScopedDataSet extends DataSet {
 
     @Override
     public <T> T get(DataKey<T> key) {
-        if (parent == null || super.contains(key)) {
+        if (parent == null || super.contains(key) || !parent.contains(key)) {
             return super.get(key);
         } else {
             return parent.get(key);

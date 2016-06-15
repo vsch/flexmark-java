@@ -4,9 +4,6 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
@@ -39,11 +36,6 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-            @Override
-            public NodeRenderer create(NodeRendererContext context) {
-                return new WikiLinkNodeRenderer(context);
-            }
-        });
+        rendererBuilder.nodeRendererFactory(WikiLinkNodeRenderer::new);
     }
 }

@@ -4,9 +4,6 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughDelimiterProcessor;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -36,11 +33,6 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-            @Override
-            public NodeRenderer create(NodeRendererContext context) {
-                return new StrikethroughNodeRenderer(context);
-            }
-        });
+        rendererBuilder.nodeRendererFactory(StrikethroughNodeRenderer::new);
     }
 }

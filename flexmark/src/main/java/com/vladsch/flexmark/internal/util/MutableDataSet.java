@@ -24,10 +24,15 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
 
     @Override
     public <T> T get(DataKey<T> key) {
+        return getOrCompute(key, key.getFactory());
+    }
+
+    @Override
+    public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) {
         if (dataSet.containsKey(key)) {
             return key.getValue(dataSet.get(key));
         } else {
-            T newValue = key.getFactory().create(this);
+            T newValue = factory.create(this);
             dataSet.put(key, newValue);
             return newValue;
         }

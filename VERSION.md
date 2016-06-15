@@ -1,6 +1,21 @@
 Version History
 ===============
 
+0.1.6
+-----
+
+- Add `ComboSpecTestCase` to flexmark-test-util than combines `FullSpecTestCase` and
+  `SpecTestCase` functionality so that only one test class needs to be created to get both
+  individual spec example results and the full file result.
+
+- Change all tests that used `FullSpecTestCase` and `SpecTestCase` to use `ComboSpecTestCase`
+  and modify their ast_spec.txt to use options to test for extension options handling.
+
+- Fix table extension factory to be stateless and use `ParserState::getProperties()` for its
+  state storage.
+
+- Update [Writing Extensions](../../wiki/Writing-Extensions) wiki
+
 0.1.5
 -----
 

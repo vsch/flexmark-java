@@ -6,9 +6,6 @@ import com.vladsch.flexmark.ext.footnotes.internal.FootnoteLinkRefProcessor;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteNodeRenderer;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.parser.Parser;
@@ -47,11 +44,6 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-            @Override
-            public NodeRenderer create(NodeRendererContext context) {
-                return new FootnoteNodeRenderer(context);
-            }
-        });
+        rendererBuilder.nodeRendererFactory(FootnoteNodeRenderer::new);
     }
 }

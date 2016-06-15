@@ -4,9 +4,10 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        WikiLinkFullSpecTest.class,
-        WikiLinkSpecTest.class,
-        WikiLinkCreoleFullSpecTest.class,
+        ComboWikiLinkSpecTest.class,
+        //WikiLinkFullSpecTest.class,
+        //WikiLinkSpecTest.class,
+        //WikiLinkCreoleFullSpecTest.class,
 })
 public class ExtWikiLinkTestSuite {
 }

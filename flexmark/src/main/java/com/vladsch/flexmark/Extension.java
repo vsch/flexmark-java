@@ -2,7 +2,6 @@ package com.vladsch.flexmark;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,5 +13,5 @@ import java.util.Set;
  */
 public interface Extension {
     Set<Extension> EMPTY_SET = new HashSet<>();
-    List<Extension> EMPTY_LIST = new ArrayList<>();
+    Iterable<? extends Extension> EMPTY_LIST = new ArrayList<>();
 }
