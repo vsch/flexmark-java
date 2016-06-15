@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -23,6 +24,11 @@ public class ExtraSpecTest extends SpecTestCase {
             data.add(new Object[] { example });
         }
         return data;
+    }
+
+    @Override
+    protected DataHolder options(String optionSet) {
+        return FullExtraSpecTest.optionsSet(optionSet);
     }
 
     @Override
