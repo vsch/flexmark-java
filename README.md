@@ -25,13 +25,25 @@ including disabling some core block parsers.
 
 This is a work in progress with many API changes.
 
-No attempt is made to keep backward compatibility to the original project.
+No attempt is made to keep backward API compatibility to the original project.
 
 Progress so far
 ---------------
 
-- Add options pass through from `Parser.builder()` and `HtmlRenderer.builder()` all the way to
-  document and extensions factories. 
+- Wiki added [flexmark-java wiki]
+
+- Unified options architecture to configure: parser, renderer and any custom extensions. This
+  includes the list of extensions to use. Making a single argument configure the environment.
+  These are also available during parsing and rendering phases for use by extensions.
+
+- Test architecture based on original spec.txt augmented:
+    - with expected AST to be validated
+    - options can be specified for individual tests so that one file can validate all options
+      available for the extension.  
+    - full spec file with expected HTML and AST replaced with generated counterparts to make
+      updating expected test results easier for new or modified tests. This also adds section
+      and example number to each example opening line for cross referencing test results to test
+      source.
 
 - Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated
   HTML document.
@@ -39,8 +51,12 @@ Progress so far
 - Enhance HtmlWriter to make it easier to generate indented html and eliminate the need to
   implement attribute map and render children handlers.
 
+- Add BlockPreProcessor interface to allow customizing of block close processing of paragraph
+  blocks on closing. Effectively, the mechanism of removing reference definitions from the start
+  of the paragraph was generalized to be usable by any block and extensible.
+
 - Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
-  such as footnotes `[^]` and wiki links `[[]]`. 
+  such as footnotes `[^]` and wiki links `[[]]`.
 
 - Parser options to be implemented:
     - GitHub Extensions
@@ -84,116 +100,29 @@ Progress so far
     - StrongEmphasis
     - HtmlEntity
 
-- `AbstractBlockParser::closeBlock()` now takes a `ParserState` argument so that any block can
-  do processing similar to Paragraph processing of leading References by using the
-  `BlockPreProcessor::preProcessBlock()` method.
-
-- Add `Builder::customInlineParserFactory()` method to allow switching of inline parser.
-
-- Add `Builder::blockPreProcessor()` method to allow adding custom processing similar to
-  `Reference` processing done previously in `ParagraphParser`.
-
-- Special processing in document parser for ParagraphParser removed, now can be done by each
-  Parser since ParserState is passed to `closeBlock()` method.
-
-- Special processing of references was removed from `ParagraphParser::closeBlock()` now it is
-  done by a call to `ParserState::preProcessBlock()`
-
-- Special processing in document parser for ListParser removed, now it is done in the ListParser
-  so that it can be customized.
-
 - `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
   AST so that the generated AST can be validated.
 
-        ```````````````````````````````` example
-        [[*foo* bar]]
-        
-        [*foo* bar]: /url "title"
+        ```````````````````````````````` example Links: 35
+        [foo *bar](baz*)
         .
-        <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
+        <p><a href="baz*">foo *bar</a></p>
         .
-        Document[0, 41]
-          Paragraph[0, 14]
-            Text[0, 1]
-            LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2] reference:[2, 11] referenceClose:[11, 12]
-              Emphasis[2, 7] textOpen:[2, 3] text:[3, 6] textClose:[6, 7]
-                Text[3, 6]
-              Text[7, 11]
-            Text[12, 13]
-          Reference[15, 40] refOpen:[15, 16] ref:[16, 25] refClose:[25, 27] urlOpen:[0, 0] url:[28, 32] urlClose:[0, 0] titleOpen:[33, 34] title:[34, 39] titleClose:[39, 40]
+        Document[0, 17]
+          Paragraph[0, 17]
+            Link[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "baz*"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+              Text[1, 9] chars:[1, 9, "foo *bar"]
         ````````````````````````````````
     
-- Convert all extension tests to spec.txt style driven testing to make generating tests easier
-  and to also test for the generated AST
-
-- Add `FullSpecTestCase` to be sub-classed, this one takes the original spec text file and
-  replaces the expected html and ast sections with actual ones, then compares the full text of
-  the original file to the generated one. Makes it easy to copy actual and do a diff or paste it
-  into the expected document for updating the expected values.
-
-- Add `FullSpecTestCase` derived tests added to all extensions
-
-- Add `flexmark-ext-abbreviation` to implement abbreviations processing. The extension `create`
-  function can take an optional `boolean`, which if true will generate HTML abbreviations as `<a
-  href="#" title"Abbreviation Expansion Text">Abbreviation</a>`, otherwise will generate `<abbr
-  title"Abbreviation Expansion Text">Abbreviation</abbr>`.  
-
-##### One Week later
-
-All the tests are modified to validate the AST not just the html. The AST contains all parsed
-elements with their source location available for every part of the node, not just the node
-itself. For example a link has the following properties:
-
-1. `[` textOpeningMarker
-2. text
-3. `]` textClosingMarker
-4. `(` linkOpeningMarker
-5. `<` urlOpeningMarker
-6. url
-7. `>` urlClosingMarker
-8. `"` titleOpeningMarker
-9. title
-10. `"` titleClosingMarker
-11. `)` linkClosingMarker
-
-That way all the bits and pieces are marked if they are needed for syntax highlighting or
-anything else. Each of these is a `BasedSequence` with `getStartOffset()` and `getEndOffset()`
-to get the source offsets. If an element is not present then it will be equal to
-`SubSequence.NULL` and can be tested via `BasedSequence::isNull()` and
-`BasedSequence::isNotNull()` methods.
-
 Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
 I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
 had to do major surgery on its innards to get full source position tracking and AST that matches
-the source, it was a pleasure to work with it and is now a pleasure to extend a parser based ot
+source elements, it is a pleasure to work with and is now a pleasure to extend a parser based ot
 its original design.
 
-#### Four days later
-
-I have the parser converted and passing all tests. Nothing is optimized in the new code but I
-decided to run the primitive benchmark to see how much performance was lost.
-
-The new parser is only 1.6 times slower overall from the original [commonmark-java] parser and
-about 7 times faster than [intellij-markdown] which is why I chose to work with commonmark-java
-in the first place.
-
-Now I have an easily extensible, in theory, parser that tracks original source position with no
-great effort. To map a part of a node to the original source only requires that a
-`subSequence()` of the text making it up be stored.
-
-I still have to implement tests to validate that all nodes store the correct location. The
-original tests are only concerned with the right characters being generated. I also have to
-implement a pegdown compatible parser extensions but that is just effort of writing the code and
-porting the pegdown tests to this project.
-
-Overall, I am very pleased with the results and my initial choice of basing the new parser for
-[Markdown Navigator] on commonmark-java. The [flexmark-java] project is still in its initial
-development mode. I did not get around to renaming the project or the extensions but this will
-happen soon.
-
-Latest Benchmarks
------------------
+Benchmarks
+----------
 
 Here are some basic benchmarking results:
 
@@ -313,4 +242,4 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [WebStorm]: http://www.jetbrains.com/webstorm
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
-
+[flexmark-java wiki]: ../../wiki
