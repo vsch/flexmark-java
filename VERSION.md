@@ -1,6 +1,12 @@
 Version History
 ===============
 
+0.1.7
+-----
+
+- Fix parser and renderer to store builder copies for re-use in `withOptions()` methods without
+  possible side effects from original builder being modified after assignment.
+
 0.1.6
 -----
 

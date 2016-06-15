@@ -53,7 +53,7 @@ public class HtmlRenderer {
     private final Builder builder;
 
     private HtmlRenderer(Builder builder) {
-        this.builder = builder;
+        this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.htmlOptions = new HtmlRendererOptions(this.options);
 
@@ -132,12 +132,16 @@ public class HtmlRenderer {
             }
         }
 
-        public Builder(Builder other, DataHolder options) {
+        public Builder(Builder other) {
             super(other);
 
             this.attributeProviders.addAll(other.attributeProviders);
             this.nodeRendererFactories.addAll(other.nodeRendererFactories);
             this.loadedExtensions.addAll(other.loadedExtensions);
+        }
+
+        public Builder(Builder other, DataHolder options) {
+            this(other);
 
             if (options != null) {
                 setAll(options);

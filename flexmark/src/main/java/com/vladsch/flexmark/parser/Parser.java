@@ -22,20 +22,20 @@ import java.util.*;
  * </code></pre>
  */
 public class Parser {
-    final static public DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
-    final static public DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
-    final static public DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
-    final static public DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
-    final static public DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
-    final static public DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
-    final static public DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
-    final static public DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
-    final static public DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
-    final static public DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
-    final static public DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
-    public final static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
-    public final static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    public final static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
+    final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
+    final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
+    final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
+    final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
+    final public static DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
+    final public static DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
+    final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
+    final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
+    final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
+    final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     private final List<BlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -49,7 +49,7 @@ public class Parser {
     private final DataHolder options;
 
     private Parser(Builder builder) {
-        this.builder = builder;
+        this.builder = new Builder(builder); // make a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
         this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(this.options, builder.blockPreProcessors);
@@ -155,7 +155,7 @@ public class Parser {
             super();
         }
 
-        private Builder(Builder other, DataHolder options) {
+        public Builder(Builder other) {
             super(other);
             blockParserFactories.addAll(other.blockParserFactories);
             delimiterProcessors.addAll(other.delimiterProcessors);
@@ -164,6 +164,10 @@ public class Parser {
             linkRefProcessors.addAll(other.linkRefProcessors);
             inlineParserFactory = other.inlineParserFactory;
             loadedExtensions.addAll(other.loadedExtensions);
+        }
+
+        public Builder(Builder other, DataHolder options) {
+            this(other);
 
             if (options != null) {
                 setAll(options);
