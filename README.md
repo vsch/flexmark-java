@@ -36,7 +36,7 @@ Progress so far
   includes the list of extensions to use. Making a single argument configure the environment.
   These are also available during parsing and rendering phases for use by extensions.
 
-- Test architecture based on original spec.txt augmented:
+- Test architecture based on original `spec.txt` augmented:
     - with expected AST to be validated
     - options can be specified for individual tests so that one file can validate all options
       available for the extension.  
@@ -45,13 +45,13 @@ Progress so far
       and example number to each example opening line for cross referencing test results to test
       source.
 
-- Rework HtmlRenderer to allow inserting rendered HTML into different parts of the generated
+- Rework `HtmlRenderer` to allow inserting rendered HTML into different parts of the generated
   HTML document.
 
-- Enhance HtmlWriter to make it easier to generate indented html and eliminate the need to
+- Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
   implement attribute map and render children handlers.
 
-- Add BlockPreProcessor interface to allow customizing of block close processing of paragraph
+- Add `BlockPreProcessor` interface to allow customizing of block close processing of paragraph
   blocks on closing. Effectively, the mechanism of removing reference definitions from the start
   of the paragraph was generalized to be usable by any block and extensible.
 
@@ -90,15 +90,15 @@ Progress so far
         - [ ] HTML comment nodes
 
 - AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
-    - Reference
-    - Image
-    - LinkRef
-    - ImageRef
-    - AutoLink
-    - MailLink
-    - Emphasis
-    - StrongEmphasis
-    - HtmlEntity
+    - `Reference`
+    - `Image`
+    - `LinkRef`
+    - `ImageRef`
+    - `AutoLink`
+    - `MailLink`
+    - `Emphasis`
+    - `StrongEmphasis`
+    - `HtmlEntity`
 
 - `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
   AST so that the generated AST can be validated.
