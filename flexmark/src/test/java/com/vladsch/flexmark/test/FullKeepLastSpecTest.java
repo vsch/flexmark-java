@@ -4,7 +4,6 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.MutableDataSet;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 
 public class FullKeepLastSpecTest extends FullSpecTestCase {
@@ -25,12 +24,12 @@ public class FullKeepLastSpecTest extends FullSpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return PARSER.parse(source);
+    protected Parser parser() {
+        return PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return RENDERER;
     }
 }

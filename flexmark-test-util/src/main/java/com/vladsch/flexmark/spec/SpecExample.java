@@ -2,13 +2,16 @@ package com.vladsch.flexmark.spec;
 
 public class SpecExample {
 
+    private final String optionsSet;
     private final String section;
     private final int exampleNumber;
     private final String source;
     private final String html;
     private final String ast;
 
-    public SpecExample(String section, int exampleNumber, String source, String html) {
+    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
+        String trimmedSet = optionsSet.trim();
+        this.optionsSet = trimmedSet.isEmpty() ? null : trimmedSet;
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
@@ -16,12 +19,18 @@ public class SpecExample {
         this.ast = null;
     }
 
-    public SpecExample(String section, int exampleNumber, String source, String html, String ast) {
+    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast) {
+        String trimmedSet = optionsSet.trim();
+        this.optionsSet = trimmedSet.isEmpty() ? null : trimmedSet;
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
         this.html = html;
         this.ast = ast;
+    }
+
+    public String getOptionsSet() {
+        return optionsSet;
     }
 
     public String getSource() {

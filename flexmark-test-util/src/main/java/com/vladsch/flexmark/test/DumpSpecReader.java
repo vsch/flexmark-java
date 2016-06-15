@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -26,25 +27,42 @@ class DumpSpecReader extends SpecReader {
 
     @Override
     protected void addSpecExample(SpecExample example) {
-        Node node = testCase.parse(example.getSource());
-        String html = testCase.useActualHtml() ? testCase.render(node) : example.getHtml();
-        String ast = testCase.ast(node);
+        DataHolder options = testCase.options(example.getOptionsSet());
+        Node node = testCase.parser().withOptions(options).parse(example.getSource());
+        String html = testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
+        String ast = example.getAst() == null ? null : testCase.ast(node);
 
         // include source so that diff can be used to update spec
-        if (example.getAst() != null) {
-            sb.append(SpecReader.EXAMPLE_START);
-            if (testCase.includeExampleCoords())
-                sb.append(" ").append(example.getSection()).append(": ").append(example.getExampleNumber());
-            sb.append("\n")
-                    .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+        addSpecExample(sb, example.getSource(), html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());
+    }
+
+    public static String addSpecExample(String source, String html, String ast, String optionsSet) {
+        StringBuilder sb = new StringBuilder();
+        addSpecExample(sb, source, html, ast, optionsSet, false, "", 0);
+        return sb.toString();
+    }
+
+    public static void addSpecExample(StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
+        // include source so that diff can be used to update spec
+        sb.append(SpecReader.EXAMPLE_START);
+        if (includeExampleCoords) {
+            if (optionsSet != null) {
+                sb.append("(").append(section).append(": ").append(number).append(")");
+            } else {
+                sb.append(" ").append(section).append(": ").append(number);
+            }
+        }
+        if (optionsSet != null) {
+            sb.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
+        }
+        sb.append("\n");
+
+        if (ast != null) {
+            sb.append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.TYPE_BREAK).append("\n")
                     .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            sb.append(SpecReader.EXAMPLE_START);
-            if (testCase.includeExampleCoords())
-                sb.append(" ").append(example.getSection()).append(": ").append(example.getExampleNumber());
-            sb.append("\n")
-                    .append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+            sb.append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }
     }

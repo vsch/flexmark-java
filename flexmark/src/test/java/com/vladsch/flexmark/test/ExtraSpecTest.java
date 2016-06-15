@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.runners.Parameterized;
@@ -25,12 +26,12 @@ public class ExtraSpecTest extends SpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return FullExtraSpecTest.PARSER.parse(source);
+    protected Parser parser() {
+        return FullExtraSpecTest.PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return FullExtraSpecTest.RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return FullExtraSpecTest.RENDERER;
     }
 }

@@ -27,8 +27,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     AbbreviationFullSpecTest.class,
     AbbreviationSpecTest.class,
-    AbbreviationLinksFullSpecTest.class,
-    AbbreviationLinksSpecTest.class
 })
 public class ExtAbbreviationTestSuite {
 }

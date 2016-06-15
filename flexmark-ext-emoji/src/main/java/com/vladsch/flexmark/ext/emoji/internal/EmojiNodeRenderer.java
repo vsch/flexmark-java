@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
@@ -20,10 +19,8 @@ public class EmojiNodeRenderer implements NodeRenderer {
     public EmojiNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        Document document = context.getDocument();
-
-        this.rootImagePath = document.get(EmojiExtension.ROOT_IMAGE_PATH);
-        this.useImageURL = document.get(EmojiExtension.USE_IMAGE_URLS);
+        this.rootImagePath = context.getOptions().get(EmojiExtension.ROOT_IMAGE_PATH);
+        this.useImageURL = context.getOptions().get(EmojiExtension.USE_IMAGE_URLS);
     }
 
     @Override

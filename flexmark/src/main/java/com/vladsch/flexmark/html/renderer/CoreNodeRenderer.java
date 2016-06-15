@@ -5,7 +5,9 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.Parser;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,6 +22,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     private final HtmlWriter html;
     private final boolean suppressHtmlBlocks;
     private final boolean suppressInlineHtml;
+    private final ReferenceRepository referenceRepository;
 
     public CoreNodeRenderer(NodeRendererContext context) {
         this.context = context;
@@ -27,6 +30,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         DataHolder options = context.getOptions();
         this.suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
         this.suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
+        this.referenceRepository = options.get(Parser.REFERENCES);
     }
 
     @Override
@@ -292,7 +296,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
             assert !node.isDefined();
             html.text(node.getChars().unescape());
         } else {
-            Reference reference = node.getReferenceNode(context.getDocument());
+            Reference reference = node.getReferenceNode(referenceRepository);
             assert reference != null;
             AltTextVisitor altTextVisitor = new AltTextVisitor();
             node.accept(altTextVisitor);
@@ -325,7 +329,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
                 html.raw("]");
             }
         } else {
-            Reference reference = node.getReferenceNode(context.getDocument());
+            Reference reference = node.getReferenceNode(referenceRepository);
             assert reference != null;
             String url = context.encodeUrl(reference.getUrl().unescape());
             html.attr("href", url);

@@ -36,13 +36,13 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return PARSER.parse(source);
+    protected Parser parser() {
+        return PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return RENDERER;
     }
 
     private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
@@ -78,7 +78,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         protected BasedSequence openingMarker = SubSequence.NULL;
         protected BasedSequence text = SubSequence.NULL;
         protected BasedSequence closingMarker = SubSequence.NULL;
-        
+
         @Override
         public BasedSequence[] getSegments() {
             return new BasedSequence[] { openingMarker, text, closingMarker };

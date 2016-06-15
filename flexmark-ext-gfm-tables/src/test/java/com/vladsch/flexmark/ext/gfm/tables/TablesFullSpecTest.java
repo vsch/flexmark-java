@@ -27,13 +27,13 @@ public class TablesFullSpecTest extends FullSpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return PARSER.parse(source);
+    protected Parser parser() {
+        return PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return RENDERER;
     }
 
     @Test

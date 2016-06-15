@@ -1,6 +1,20 @@
 Version History
 ===============
 
+0.1.5
+-----
+
+- Add `Parser.EXTENSIONS` data key to hold a list of Extensions so extensions can be part of the
+  universal options passing. Now there is no need to explicitly call `builder().extensions()` if
+  you set the extensions key to the list of desired extensions.
+
+- Change spec test related classes to handle option sets specified in the spec per example. That
+  way multiple extension/option combinations can be validated within the same spec file,
+  eliminating the need to have separate spec file and test classes for each extension/option
+  combination.
+
+- Change tests using multiple test classes and spec files to use the options mechanism.
+
 0.1.4
 -----
 
@@ -14,11 +28,11 @@ Version History
   between the opening and closing tags. Only works for methods that take a `Runnable` argument
   for output child text.
 
-- Fix ext-gfm-tables for incorrect separator line parsing, introduced right before ext-gfm-tables
-  and ext-tables split.
+- Fix ext-gfm-tables for incorrect separator line parsing, introduced right before
+  ext-gfm-tables and ext-tables split.
 
 - Fix ext-tables to handle multi-line headers or no line headers with options MIN_HEADER_ROWS,
-  MAX_HEADER_ROWS. 
+  MAX_HEADER_ROWS.
 
 - Add ext-tables option HEADER_SEPARATOR_COLUMNS, if true will only recognize tables whose
   headers contain no more columns than the separator line. Default false, any number of columns
@@ -29,9 +43,10 @@ Version History
 
 - Update Emoji extension to use the universal options mechanism.
 
-- Add WikiLink file link extension string option to append to generated links 
+- Add WikiLink file link extension string option to append to generated links
 
-- Add Suppress HTML in addition to escape option, with separate options for blocks and inline html
+- Add Suppress HTML in addition to escape option, with separate options for blocks and inline
+  html
 
 0.1.2
 -----
@@ -46,15 +61,15 @@ Version History
 
 - Add spanning columns parsing for flexmark-ext-tables
 
-- Make all core block parser processors optional to allow disabling core functionality. 
+- Make all core block parser processors optional to allow disabling core functionality.
 
-- Make all core delimiter processors optional to allow disabling core functionality. 
+- Make all core delimiter processors optional to allow disabling core functionality.
 
 - Add `LinkRefProcessor` and associated registration methods for extensions to allow flexible
   parsing of elements that start from link references, such as footnotes `[^]` and wiki links
   `[[]]`. Otherwise, there is no way to properly control generation of link refs and custom
   nodes. Additionally, this allows processing of these nodes during inline parsing instead of
-  each extension having to traverse the AST and transform it. 
+  each extension having to traverse the AST and transform it.
 
 - Change Attribute provider interface to include `tag` being generated since custom nodes can
   have more than one tag which require attributes, for example footnotes.
@@ -63,7 +78,7 @@ Version History
   rendering code.
 
 - Change `WikiLinkExtension` and `FootnoteExtension` to use `LinkRefProcessor` instead of
-  `PostProcessor`. 
+  `PostProcessor`.
 
 - Change `SpecReader` to recognize lines starting with EXAMPLE_START, that way each example
   start line can be augmented with section and example number for cross reference to failed

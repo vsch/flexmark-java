@@ -10,10 +10,7 @@ import com.vladsch.flexmark.parser.block.BlockParserFactory;
 
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.BitSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Parses input text to a tree of nodes.
@@ -38,11 +35,13 @@ public class Parser {
     final static public DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     public final static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
     public final static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
+    public final static DataKey<List<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     private final List<BlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
+    private final Builder builder;
     private final List<PostProcessor> postProcessors;
     private final List<BlockPreProcessor> blockPreProcessors;
     private final LinkRefProcessorData linkRefProcessors;
@@ -50,6 +49,7 @@ public class Parser {
     private final DataHolder options;
 
     private Parser(Builder builder) {
+        this.builder = builder;
         this.options = new DataSet(builder);
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
         this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(this.options, builder.blockPreProcessors);
@@ -79,7 +79,7 @@ public class Parser {
      * <p>
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
-     * @param input        the text to parse
+     * @param input the text to parse
      * @return the root node
      */
     public Node parse(BasedSequence input) {
@@ -94,7 +94,7 @@ public class Parser {
      * <p>
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
-     * @param input        the text to parse
+     * @param input the text to parse
      * @return the root node
      */
     public Node parse(String input) {
@@ -127,6 +127,10 @@ public class Parser {
         return document;
     }
 
+    public Parser withOptions(DataHolder options) {
+        return options == null ? this : new Parser(new Builder(builder, options));
+    }
+
     /**
      * Builder for configuring a {@link Parser}.
      */
@@ -137,13 +141,37 @@ public class Parser {
         private final List<BlockPreProcessor> blockPreProcessors = new ArrayList<>();
         private final List<LinkRefProcessor> linkRefProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
+        private final HashSet<ParserExtension> loadedExtensions = new HashSet<>();
 
         public Builder(DataHolder options) {
             super(options);
+
+            if (contains(Parser.EXTENSIONS)) {
+                extensions(get(Parser.EXTENSIONS));
+            }
         }
 
         public Builder() {
             super();
+        }
+
+        private Builder(Builder other, DataHolder options) {
+            super(other);
+            blockParserFactories.addAll(other.blockParserFactories);
+            delimiterProcessors.addAll(other.delimiterProcessors);
+            postProcessors.addAll(other.postProcessors);
+            blockPreProcessors.addAll(other.blockPreProcessors);
+            linkRefProcessors.addAll(other.linkRefProcessors);
+            inlineParserFactory = other.inlineParserFactory;
+            loadedExtensions.addAll(other.loadedExtensions);
+
+            if (options != null) {
+                setAll(options);
+
+                if (options.contains(Parser.EXTENSIONS)) {
+                    extensions(get(Parser.EXTENSIONS));
+                }
+            }
         }
 
         /**
@@ -160,8 +188,11 @@ public class Parser {
         public Builder extensions(Iterable<? extends Extension> extensions) {
             for (Extension extension : extensions) {
                 if (extension instanceof ParserExtension) {
-                    ParserExtension parserExtension = (ParserExtension) extension;
-                    parserExtension.extend(this);
+                    if (!loadedExtensions.contains(extension)) {
+                        ParserExtension parserExtension = (ParserExtension) extension;
+                        parserExtension.extend(this);
+                        loadedExtensions.add(parserExtension);
+                    }
                 }
             }
             return this;

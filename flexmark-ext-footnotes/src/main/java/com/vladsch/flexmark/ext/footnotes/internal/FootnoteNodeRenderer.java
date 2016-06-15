@@ -7,7 +7,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
-import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -27,12 +27,12 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     public FootnoteNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        Document document = context.getDocument();
-        this.footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
+        DataHolder options = context.getOptions();
+        this.footnoteRepository = options.get(FootnoteExtension.FOOTNOTES);
         this.footnoteRepository.resolveFootnoteOrdinals();
-        this.footnoteRefPrefix = document.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
-        this.footnoteRefSuffix = document.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
-        this.footnoteBackRefString = document.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
+        this.footnoteRefPrefix = options.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
+        this.footnoteRefSuffix = options.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
+        this.footnoteBackRefString = options.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal.util;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +19,11 @@ public class DataSet implements DataHolder {
     @Override
     public Map<DataKey, Object> getAll() {
         return dataSet;
+    }
+
+    @Override
+    public Collection<DataKey> keySet() {
+        return dataSet.keySet();
     }
 
     @Override

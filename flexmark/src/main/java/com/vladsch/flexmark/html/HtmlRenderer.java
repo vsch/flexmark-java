@@ -7,6 +7,7 @@ import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;
 import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.parser.Parser;
 
 import java.util.*;
 
@@ -49,8 +50,10 @@ public class HtmlRenderer {
     private final List<NodeRendererFactory> nodeRendererFactories;
     private final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
+    private final Builder builder;
 
     private HtmlRenderer(Builder builder) {
+        this.builder = builder;
         this.options = new DataSet(builder);
         this.htmlOptions = new HtmlRendererOptions(this.options);
 
@@ -105,12 +108,17 @@ public class HtmlRenderer {
         return sb.toString();
     }
 
+    public HtmlRenderer withOptions(DataHolder options) {
+        return options == null ? this : new HtmlRenderer(new Builder(builder, options));
+    }
+
     /**
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder extends MutableDataSet {
         private List<AttributeProvider> attributeProviders = new ArrayList<>();
         private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+        private final HashSet<HtmlRendererExtension> loadedExtensions = new HashSet<>();
 
         public Builder() {
             super();
@@ -118,6 +126,26 @@ public class HtmlRenderer {
 
         public Builder(DataHolder options) {
             super(options);
+
+            if (options.contains(Parser.EXTENSIONS)) {
+                extensions(get(Parser.EXTENSIONS));
+            }
+        }
+
+        public Builder(Builder other, DataHolder options) {
+            super(other);
+
+            this.attributeProviders.addAll(other.attributeProviders);
+            this.nodeRendererFactories.addAll(other.nodeRendererFactories);
+            this.loadedExtensions.addAll(other.loadedExtensions);
+
+            if (options != null) {
+                setAll(options);
+
+                if (options.contains(Parser.EXTENSIONS)) {
+                    extensions(get(Parser.EXTENSIONS));
+                }
+            }
         }
 
         /**
@@ -135,11 +163,11 @@ public class HtmlRenderer {
          * <p>
          * Set it to {@code " "} to ignore line wrapping in the source.
          *
-         * @param softbreak HTML for softbreak
+         * @param softBreak HTML for softbreak
          * @return {@code this}
          */
-        public Builder softbreak(String softbreak) {
-            this.set(SOFT_BREAK, softbreak);
+        public Builder softBreak(String softBreak) {
+            this.set(SOFT_BREAK, softBreak);
             return this;
         }
 
@@ -220,8 +248,11 @@ public class HtmlRenderer {
         public Builder extensions(Iterable<? extends Extension> extensions) {
             for (Extension extension : extensions) {
                 if (extension instanceof HtmlRendererExtension) {
-                    HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                    htmlRendererExtension.extend(this);
+                    if (!loadedExtensions.contains(extension)) {
+                        HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
+                        htmlRendererExtension.extend(this);
+                        loadedExtensions.add(htmlRendererExtension);
+                    }
                 }
             }
             return this;
@@ -246,7 +277,7 @@ public class HtmlRenderer {
         private Node renderingNode;
 
         private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
-            this.options = options;
+            this.options = new ScopedDataSet(options, document);
             this.htmlWriter = htmlWriter;
             this.document = document;
             this.renderers = new HashMap<>(32);

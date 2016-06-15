@@ -1,5 +1,10 @@
 package com.vladsch.flexmark;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Base interface for a parser/renderer extension.
  * <p>
@@ -8,4 +13,6 @@ package com.vladsch.flexmark;
  * used for configuring both the parser and renderer in the same way.
  */
 public interface Extension {
+    Set<Extension> EMPTY_SET = new HashSet<>();
+    List<Extension> EMPTY_LIST = new ArrayList<>();
 }

@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.SpecTestCase;
@@ -26,12 +28,17 @@ public class EmojiSpecTest extends SpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return EmojiFullSpecTest.PARSER.parse(source);
+    protected DataHolder options(String optionSet) {
+        return EmojiFullSpecTest.optionsSet(optionSet);
     }
 
     @Override
-    protected String render(Node node) {
-        return EmojiFullSpecTest.RENDERER.render(node);
+    protected Parser parser() {
+        return EmojiFullSpecTest.PARSER;
+    }
+
+    @Override
+    protected HtmlRenderer renderer() {
+        return EmojiFullSpecTest.RENDERER;
     }
 }

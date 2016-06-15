@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.node.AbstractVisitor;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.Test;
@@ -58,12 +60,12 @@ public class SpecCoreTest extends SpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return FullSpecCoreTest.PARSER.parse(source);
+    protected Parser parser() {
+        return FullSpecCoreTest.PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return FullSpecCoreTest.RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return FullSpecCoreTest.RENDERER;
     }
 }

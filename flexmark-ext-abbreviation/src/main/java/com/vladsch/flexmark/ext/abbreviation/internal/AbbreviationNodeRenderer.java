@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
+import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -16,10 +17,10 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     private final HtmlWriter html;
     private final boolean useLinks;
 
-    public AbbreviationNodeRenderer(NodeRendererContext context, boolean useLinks) {
+    public AbbreviationNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        this.useLinks = useLinks;
+        this.useLinks = context.getOptions().get(AbbreviationExtension.USE_LINKS);
     }
 
     @Override
@@ -41,14 +42,14 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     private void renderAbbreviationBlock(AbbreviationBlock node) {
-        
+
     }
 
     private void renderAbbreviation(Abbreviation node) {
         String text = node.getChars().unescape();
         String abbreviation = node.getAbbreviation();
         String tag;
-        
+
         if (useLinks) {
             html.attr("href", "#");
             tag = "a";

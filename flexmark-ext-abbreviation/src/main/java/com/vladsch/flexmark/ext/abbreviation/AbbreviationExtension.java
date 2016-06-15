@@ -16,7 +16,7 @@ import com.vladsch.flexmark.parser.Parser;
 /**
  * Extension for adding abbreviations to markdown
  * <p>
- * Create it with {@link #create()} or optionally with {@link #create(boolean useLinks)} and then configure it on the builders
+ * Create it with {@link #create()} then configure builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
@@ -27,18 +27,10 @@ import com.vladsch.flexmark.parser.Parser;
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public final static DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
     public final static DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
-    final private boolean useLinks;
-
-    public AbbreviationExtension(boolean useLinks) {
-        this.useLinks = useLinks;
-    }
+    public final static DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
 
     public static Extension create() {
-        return new AbbreviationExtension(false);
-    }
-
-    public static Extension create(boolean useLinks) {
-        return new AbbreviationExtension(useLinks);
+        return new AbbreviationExtension();
     }
 
     @Override
@@ -52,7 +44,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
         rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
             @Override
             public NodeRenderer create(NodeRendererContext context) {
-                return new AbbreviationNodeRenderer(context, useLinks);
+                return new AbbreviationNodeRenderer(context);
             }
         });
     }

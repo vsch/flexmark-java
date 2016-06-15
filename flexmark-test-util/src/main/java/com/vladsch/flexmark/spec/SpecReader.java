@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 
 public class SpecReader {
     public static final String EXAMPLE_START = "```````````````````````````````` example";
+    public static final String OPTIONS_STRING = " options";
+    public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*\\Q" + OPTIONS_STRING + "\\E\\s*\\(\\s*(.*)\\s*\\)\\s*");
     public static final String TYPE_BREAK = ".";
     public static final String EXAMPLE_BREAK = "````````````````````````````````";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} *(.*)");
@@ -20,6 +22,7 @@ public class SpecReader {
 
     protected State state = State.BEFORE;
     protected String section;
+    protected String optionsSet;
     protected StringBuilder source;
     protected StringBuilder html;
     protected StringBuilder ast;
@@ -132,6 +135,11 @@ public class SpecReader {
                     section = matcher.group(1);
                     exampleNumber = 0;
                 } else if (line.startsWith(EXAMPLE_START)) {
+                    Matcher option_matcher = OPTIONS_PATTERN.matcher(line.subSequence(EXAMPLE_START.length(), line.length()));
+                    if (option_matcher.matches()) {
+                        optionsSet = option_matcher.group(1);
+                    }
+
                     state = State.SOURCE;
                     exampleNumber++;
                     lineAbsorbed = true;
@@ -151,7 +159,7 @@ public class SpecReader {
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(section, exampleNumber, source.toString(), html.toString(), null));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null));
                     resetContents();
                     lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
@@ -165,7 +173,7 @@ public class SpecReader {
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(section, exampleNumber, source.toString(), html.toString(), ast.toString()));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString()));
                     resetContents();
                     lineAbsorbed = true;
                 } else {
@@ -175,12 +183,15 @@ public class SpecReader {
                 break;
         }
 
-        if (!lineAbsorbed) {
+        if (!lineAbsorbed)
+
+        {
             addSpecLine(line);
         }
     }
 
     protected void resetContents() {
+        optionsSet = "";
         source = new StringBuilder();
         html = new StringBuilder();
         ast = new StringBuilder();

@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 
 public class FullOrigSpecCoreTest extends FullSpecTestCase {
@@ -16,8 +15,8 @@ public class FullOrigSpecCoreTest extends FullSpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return PARSER.parse(source);
+    protected Parser parser() {
+        return PARSER;
     }
 
     @Override
@@ -26,7 +25,7 @@ public class FullOrigSpecCoreTest extends FullSpecTestCase {
     }
 
     @Override
-    protected String render(Node node) {
-        return RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return RENDERER;
     }
 }

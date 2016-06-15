@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.autolink;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.SpecTestCase;
@@ -26,12 +27,12 @@ public class AutolinkSpecTest extends SpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return AutolinkFullSpecTest.PARSER.parse(source);
+    protected Parser parser() {
+        return AutolinkFullSpecTest.PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return AutolinkFullSpecTest.RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return AutolinkFullSpecTest.RENDERER;
     }
 }

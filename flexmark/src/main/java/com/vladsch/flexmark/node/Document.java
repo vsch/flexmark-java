@@ -2,6 +2,7 @@ package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.util.*;
 
+import java.util.Collection;
 import java.util.Map;
 
 public class Document extends Block implements MutableDataHolder {
@@ -21,6 +22,9 @@ public class Document extends Block implements MutableDataHolder {
     public Map<DataKey, Object> getAll() {return dataSet.getAll();}
 
     @Override
+    public Collection<DataKey> keySet() { return dataSet.keySet(); }
+
+    @Override
     public boolean contains(DataKey key) {return dataSet.contains(key);}
 
     @Override
@@ -28,6 +32,9 @@ public class Document extends Block implements MutableDataHolder {
 
     @Override
     public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
+
+    @Override
+    public void setAll(DataHolder other) {dataSet.setAll(other);}
 
     @Override
     public void accept(Visitor visitor) {

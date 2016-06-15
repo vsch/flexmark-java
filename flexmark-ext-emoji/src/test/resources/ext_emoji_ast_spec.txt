@@ -8,7 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Emoji
 
-Converts :warning: to its emoji image 
+Converts :warning: to its emoji image
 
 
 ```````````````````````````````` example Emoji: 1
@@ -39,9 +39,37 @@ Document[0, 18]
 
 
 
+```````````````````````````````` example(Emoji: 3) options(url)
+:warning:
+.
+<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" /></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
+      Text[1, 8] chars:[1, 8, "warning"]
+````````````````````````````````
+
+
+Should work in links
+
+```````````````````````````````` example Emoji: 4
+[:warning:](/url)
+.
+<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
+        Text[2, 9] chars:[2, 9, "warning"]
+````````````````````````````````
+
+
+
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 3
+```````````````````````````````` example Emoji: 5
 :warnings:
 .
 <p>:warnings:</p>
@@ -56,7 +84,7 @@ Document[0, 11]
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example Emoji: 6
 :**warnings**:
 .
 <p>:<strong>warnings</strong>:</p>

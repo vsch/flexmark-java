@@ -16,6 +16,13 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
+    public void setAll(DataHolder other) {
+        for (DataKey key : other.keySet()) {
+            set(key, other.get(key));
+        }
+    }
+
+    @Override
     public <T> T get(DataKey<T> key) {
         if (dataSet.containsKey(key)) {
             return key.getValue(dataSet.get(key));

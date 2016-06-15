@@ -6,8 +6,6 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
     EmojiFullSpecTest.class,
     EmojiSpecTest.class,
-    EmojiUrlFullSpecTest.class,
-    EmojiUrlSpecTest.class
 })
 public class ExtEmojiTestSuite {
 }

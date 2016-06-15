@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.SpecTestCase;
@@ -26,12 +27,12 @@ public class FootnotesSpecTest extends SpecTestCase {
     }
 
     @Override
-    protected Node parse(String source) {
-        return FootnotesFullSpecTest.PARSER.parse(source);
+    protected Parser parser() {
+        return FootnotesFullSpecTest.PARSER;
     }
 
     @Override
-    protected String render(Node node) {
-        return FootnotesFullSpecTest.RENDERER.render(node);
+    protected HtmlRenderer renderer() {
+        return FootnotesFullSpecTest.RENDERER;
     }
 }

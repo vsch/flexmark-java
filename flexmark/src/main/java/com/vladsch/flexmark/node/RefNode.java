@@ -127,7 +127,10 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public Reference getReferenceNode(Document document) {
-        ReferenceRepository repository = document.get(Parser.REFERENCES);
+        return getReferenceNode(document.get(Parser.REFERENCES));
+    }
+
+    public Reference getReferenceNode(ReferenceRepository repository) {
         if (repository == null) return null;
         String normalizeRef = repository.normalizeKey(reference);
         return repository.get(normalizeRef);
