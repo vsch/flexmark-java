@@ -16,7 +16,7 @@ Version History
 - Change more tests using multiple test classes and spec files to use the options mechanism. On
   the todo list:
     - Wiki link extension with creole vs gfm syntax tests
-    - Table extension for gfm and non-gfm table testing, need to add tests for various options. 
+    - Table extension for gfm and non-gfm table testing, need to add tests for various options.
 
 0.1.4
 -----
