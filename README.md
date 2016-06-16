@@ -36,31 +36,35 @@ Progress so far
   includes the list of extensions to use. Making a single argument configure the environment.
   These are also available during parsing and rendering phases for use by extensions.
 
-- Test architecture based on original `spec.txt` augmented:
-    - with expected AST to be validated
+- Test architecture based on original `spec.txt` augmented with:
+
+    - expected AST so it is validated by tests
+
     - options can be specified for individual tests so that one file can validate all options
-      available for the extension.  
-    - full spec file with expected HTML and AST replaced with generated counterparts to make
-      updating expected test results easier for new or modified tests. This also adds section
-      and example number to each example opening line for cross referencing test results to test
-      source.
+      available for the extension/core feature.  
+
+    - full spec file generated with expected HTML and AST replaced with generated counterparts
+      to make updating expected test results easier for new or modified tests.
+
+    - section and example number added to each example opening line for cross referencing test
+      results to test source.
 
 - Rework `HtmlRenderer` to allow inserting rendered HTML into different parts of the generated
-  HTML document.
+  HTML document. Now can generate HTML for top/bottom of document.
 
 - Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
-  implement attribute map and render children handlers.
+  implement attribute map and boiler plate render children method in custom node renderers.
 
-- Add `BlockPreProcessor` interface to allow customizing of block close processing of paragraph
-  blocks on closing. Effectively, the mechanism of removing reference definitions from the start
-  of the paragraph was generalized to be usable by any block and extensible.
+- Add `BlockPreProcessor` interface to allow customizing of block processing of paragraph blocks
+  on closing. Effectively, the mechanism of removing reference definitions from the start of the
+  paragraph was generalized to be usable by any block and extensible.
 
 - Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
-  such as footnotes `[^]` and wiki links `[[]]`.
+  such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done
+  with a post processor extension.
 
 - Parser options to be implemented:
     - GitHub Extensions
-        - [x] Auto links
         - [x] Fenced code blocks
         - [ ] Anchor links for headers with auto id generation
         - [x] Table Spans option to be implemented for gfm-tables extension
@@ -128,40 +132,42 @@ Here are some basic benchmarking results:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:-----------------|----------------:|--------------:|------------------:|-----------:|
-| README-SLOW      |         0.733ms |       0.907ms |           1.849ms |   17.046ms |
-| VERSION          |         1.265ms |       1.638ms |           3.837ms |   46.608ms |
-| commonMarkSpec   |        42.768ms |      71.486ms |         583.770ms |  610.797ms |
-| markdown_example |        19.889ms |      25.544ms |         209.726ms | 1061.904ms |
-| spec             |         8.613ms |      11.752ms |          33.912ms |  318.577ms |
-| table            |         0.238ms |       0.225ms |           0.664ms |    4.220ms |
-| table-format     |         1.452ms |       1.802ms |           3.983ms |   24.965ms |
-| wrap             |         4.590ms |       9.153ms |          14.637ms |   93.394ms |
+| README-SLOW      |         0.715ms |       1.000ms |           1.696ms |   16.823ms |
+| VERSION          |         1.242ms |       1.618ms |           3.467ms |   44.950ms |
+| commonMarkSpec   |        42.357ms |      71.312ms |         583.142ms |  616.430ms |
+| markdown_example |        19.522ms |      25.025ms |         207.381ms | 1046.346ms |
+| spec             |         8.642ms |      11.801ms |          33.733ms |  317.981ms |
+| table            |         0.143ms |       0.302ms |           0.644ms |    3.964ms |
+| table-format     |         1.417ms |       1.755ms |           3.795ms |   24.867ms |
+| wrap             |         4.605ms |       8.767ms |          14.768ms |   91.417ms |
+
+Ratios of above:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.24 |              2.52 |     23.24 |
-| VERSION          |            1.00 |          1.29 |              3.03 |     36.85 |
-| commonMarkSpec   |            1.00 |          1.67 |             13.65 |     14.28 |
-| markdown_example |            1.00 |          1.28 |             10.54 |     53.39 |
-| spec             |            1.00 |          1.36 |              3.94 |     36.99 |
-| table            |            1.06 |          1.00 |              2.95 |     18.75 |
-| table-format     |            1.00 |          1.24 |              2.74 |     17.19 |
-| wrap             |            1.00 |          1.99 |              3.19 |     20.35 |
+| README-SLOW      |            1.00 |          1.40 |              2.37 |     23.54 |
+| VERSION          |            1.00 |          1.30 |              2.79 |     36.19 |
+| commonMarkSpec   |            1.00 |          1.68 |             13.77 |     14.55 |
+| markdown_example |            1.00 |          1.28 |             10.62 |     53.60 |
+| spec             |            1.00 |          1.37 |              3.90 |     36.79 |
+| table            |            1.00 |          2.11 |              4.51 |     27.76 |
+| table-format     |            1.00 |          1.24 |              2.68 |     17.55 |
+| wrap             |            1.00 |          1.90 |              3.21 |     19.85 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.54 |             10.72 |     27.38 |
+| overall          |            1.00 |          1.55 |             10.79 |     27.50 |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.81 |          1.00 |              2.04 |     18.79 |
-| VERSION          |            0.77 |          1.00 |              2.34 |     28.45 |
-| commonMarkSpec   |            0.60 |          1.00 |              8.17 |      8.54 |
-| markdown_example |            0.78 |          1.00 |              8.21 |     41.57 |
-| spec             |            0.73 |          1.00 |              2.89 |     27.11 |
-| table            |            1.06 |          1.00 |              2.95 |     18.75 |
-| table-format     |            0.81 |          1.00 |              2.21 |     13.85 |
-| wrap             |            0.50 |          1.00 |              1.60 |     10.20 |
+| README-SLOW      |            0.71 |          1.00 |              1.70 |     16.83 |
+| VERSION          |            0.77 |          1.00 |              2.14 |     27.78 |
+| commonMarkSpec   |            0.59 |          1.00 |              8.18 |      8.64 |
+| markdown_example |            0.78 |          1.00 |              8.29 |     41.81 |
+| spec             |            0.73 |          1.00 |              2.86 |     26.95 |
+| table            |            0.47 |          1.00 |              2.13 |     13.14 |
+| table-format     |            0.81 |          1.00 |              2.16 |     14.17 |
+| wrap             |            0.53 |          1.00 |              1.68 |     10.43 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.65 |          1.00 |              6.96 |     17.77 |
+| overall          |            0.65 |          1.00 |              6.98 |     17.79 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance
