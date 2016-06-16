@@ -60,8 +60,8 @@ Progress
   paragraph was generalized to be usable by any block and extensible.
 
 - Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
-  such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done
-  with a post processor extension.
+  such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done with
+  a post processor extension.
 
 - Parser options to be implemented:
     - GitHub Extensions
@@ -168,6 +168,28 @@ Ratios of above:
 | wrap             |            0.53 |          1.00 |              1.68 |     10.43 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
 | overall          |            0.65 |          1.00 |              6.98 |     17.79 |
+
+Because these two files represent the pathological input for pegdown, I no longer run them
+as part of the benchmark to prevent skewing of the results. The results are here for posterity.
+
+| File          | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
+|:--------------|----------------:|--------------:|------------------:|-----------:|
+| hang-pegdown  |         0.099ms |       0.194ms |           0.353ms |  646.659ms |
+| hang-pegdown2 |         0.061ms |       0.113ms |           0.220ms | 1297.536ms |
+
+| File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
+|:--------------|----------------:|--------------:|------------------:|----------:|
+| hang-pegdown  |            1.00 |          1.96 |              3.56 |   6524.52 |
+| hang-pegdown2 |            1.00 |          1.85 |              3.61 |  21230.71 |
+| -----------   |       --------- |     --------- |         --------- | --------- |
+| overall       |            1.00 |          1.92 |              3.58 |  12133.93 |
+
+| File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
+|:--------------|----------------:|--------------:|------------------:|----------:|
+| hang-pegdown  |            0.51 |          1.00 |              1.81 |   3325.63 |
+| hang-pegdown2 |            0.54 |          1.00 |              1.95 |  11488.93 |
+| -----------   |       --------- |     --------- |         --------- | --------- |
+| overall       |            0.52 |          1.00 |              1.86 |   6324.95 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance
