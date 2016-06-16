@@ -27,8 +27,8 @@ This is a work in progress with many API changes.
 
 No attempt is made to keep backward API compatibility to the original project.
 
-Progress so far
----------------
+Progress
+--------
 
 - Wiki added [flexmark-java wiki]
 
