@@ -55,7 +55,7 @@ Progress
 - Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
   implement attribute map and boiler plate render children method in custom node renderers.
 
-- Add `BlockPreProcessor` interface to allow customizing of block processing of paragraph blocks
+- Add `ParagraphPreProcessor` interface to allow customizing of block processing of paragraph blocks
   on closing. Effectively, the mechanism of removing reference definitions from the start of the
   paragraph was generalized to be usable by any block and extensible.
 

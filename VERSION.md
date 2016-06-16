@@ -1,6 +1,15 @@
 Version History
 ===============
 
+0.1.8
+-----
+
+- Change: `BlockPreProcessor` to `ParagraphPreProcessor` interface and paragraph pre-processing
+  to allow dependencies between paragraph pre-processors and have some pre-processors to be
+  executed against all paragraph blocks before running dependents on it. That way document
+  global properties like `ReferenceRepository` will be updated before other pre-processors
+  dependent on it will be run.
+
 0.1.7
 -----
 

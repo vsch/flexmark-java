@@ -23,7 +23,7 @@ public class TableBlockParser extends AbstractBlockParser {
                     "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
 
     private final TableBlock block = new TableBlock();
-    private final BlockContent content = new BlockContent();
+    private BlockContent content = new BlockContent();
 
     private boolean nextIsSeparatorLine = false;
     private BasedSequence separatorLine = SubSequence.NULL;
@@ -63,6 +63,7 @@ public class TableBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         block.setContent(content);
+        content = null;
     }
 
     @Override
@@ -75,7 +76,7 @@ public class TableBlockParser extends AbstractBlockParser {
         int rowNumber = 0;
         int separatorColumns = alignments.size();
 
-        for (BasedSequence rowLine : content.getLines()) {
+        for (BasedSequence rowLine : block.getContentLines()) {
             if (rowNumber == separatorLineNumber) {
                 section.setCharsFromContent();
                 section = new TableSeparator();
@@ -87,7 +88,7 @@ public class TableBlockParser extends AbstractBlockParser {
             }
 
             List<BasedSequence> cells = split(rowLine);
-            TableRow tableRow = new TableRow(rowLine.subSequence(0, rowLine.length() - content.getEolLength()));
+            TableRow tableRow = new TableRow(rowLine.trimEOL());
 
             int rowCells = countCells(cells);
             int maxColumns = rowCells;

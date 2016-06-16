@@ -29,7 +29,7 @@ public class Parser {
     final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
     final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
     final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> REFERENCE_BLOCK_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
+    final public static DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final public static DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
     final public static DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
     final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
@@ -43,7 +43,7 @@ public class Parser {
     private final BitSet specialCharacters;
     private final Builder builder;
     private final List<PostProcessor> postProcessors;
-    private final List<BlockPreProcessor> blockPreProcessors;
+    private final DocumentParser.BlockPreProcessorFactories paragraphPreProcessorFactories;
     private final LinkRefProcessorData linkRefProcessors;
     private final InlineParserFactory inlineParserFactory;
     private final DataHolder options;
@@ -52,13 +52,13 @@ public class Parser {
         this.builder = new Builder(builder); // make a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.blockParserFactories = DocumentParser.calculateBlockParserFactories(this.options, builder.blockParserFactories);
-        this.blockPreProcessors = DocumentParser.calculateParagraphProcessors(this.options, builder.blockPreProcessors);
+        this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.INLINE_PARSER_FACTORY : builder.inlineParserFactory;
+        this.paragraphPreProcessorFactories = DocumentParser.calculateBlockPreProcessors(this.options, builder.paragraphPreProcessorFactories, this.inlineParserFactory);
         this.delimiterProcessors = InlineParserImpl.calculateDelimiterProcessors(this.options, builder.delimiterProcessors);
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(this.options, delimiterProcessors.keySet());
         this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
         this.postProcessors = builder.postProcessors;
-        this.inlineParserFactory = builder.inlineParserFactory == null ? DocumentParser.inlineParserFactory() : builder.inlineParserFactory;
     }
 
     /**
@@ -83,7 +83,7 @@ public class Parser {
      * @return the root node
      */
     public Node parse(BasedSequence input) {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
+        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
@@ -98,7 +98,7 @@ public class Parser {
      * @return the root node
      */
     public Node parse(String input) {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
+        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
@@ -114,7 +114,7 @@ public class Parser {
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {
-        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, blockPreProcessors,
+        DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
         Node document = documentParser.parse(input);
         return postProcess(document);
@@ -138,7 +138,7 @@ public class Parser {
         private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
         private final List<PostProcessor> postProcessors = new ArrayList<>();
-        private final List<BlockPreProcessor> blockPreProcessors = new ArrayList<>();
+        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
         private final List<LinkRefProcessor> linkRefProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
         private final HashSet<ParserExtension> loadedExtensions = new HashSet<>();
@@ -160,7 +160,7 @@ public class Parser {
             blockParserFactories.addAll(other.blockParserFactories);
             delimiterProcessors.addAll(other.delimiterProcessors);
             postProcessors.addAll(other.postProcessors);
-            blockPreProcessors.addAll(other.blockPreProcessors);
+            paragraphPreProcessorFactories.addAll(other.paragraphPreProcessorFactories);
             linkRefProcessors.addAll(other.linkRefProcessors);
             inlineParserFactory = other.inlineParserFactory;
             loadedExtensions.addAll(other.loadedExtensions);
@@ -235,8 +235,8 @@ public class Parser {
             return this;
         }
 
-        public Builder blockPreProcessor(BlockPreProcessor blockPreProcessor) {
-            blockPreProcessors.add(blockPreProcessor);
+        public Builder blockPreProcessorFactory(ParagraphPreProcessorFactory paragraphPreProcessorFactory) {
+            paragraphPreProcessorFactories.add(paragraphPreProcessorFactory);
             return this;
         }
 

@@ -5,7 +5,6 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Matcher;
@@ -61,13 +60,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
         // add it to the map
         FootnoteRepository footnoteMap = parserState.getProperties().get(FootnoteExtension.FOOTNOTES);
         footnoteMap.put(footnoteMap.normalizeKey(block.getText()), block);
-    }
-
-    @Override
-    public void parseInlines(InlineParser inlineParser) {
-        if (content != null) {
-            inlineParser.parse(content.getContents(), block);
-        }
+        content = null;
     }
 
     @Override
@@ -109,7 +102,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
                 footnoteBlockParser.block.setCharsFromContent();
 
                 return BlockStart.of(footnoteBlockParser)
-                                 .atIndex(openingEnd);
+                        .atIndex(openingEnd);
             } else {
                 return BlockStart.none();
             }

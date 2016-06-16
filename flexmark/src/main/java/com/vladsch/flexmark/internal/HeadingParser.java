@@ -16,11 +16,9 @@ public class HeadingParser extends AbstractBlockParser {
     private static Pattern SETEXT_HEADING = Pattern.compile("^(?:=+|-+) *$");
 
     private final Heading block = new Heading();
-    private final BlockContent content;
 
-    public HeadingParser(int level, BlockContent content) {
+    public HeadingParser(int level) {
         block.setLevel(level);
-        this.content = content;
     }
 
     @Override
@@ -41,7 +39,6 @@ public class HeadingParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
-        block.setCharsFromContent();
     }
 
     public static class Factory extends AbstractBlockParserFactory {
@@ -78,7 +75,7 @@ public class HeadingParser extends AbstractBlockParser {
                     headerText = headerText.subSequence(0, closingStart);
                 }
 
-                HeadingParser headingParser = new HeadingParser(level, content);
+                HeadingParser headingParser = new HeadingParser(level);
                 headingParser.block.setOpeningMarker(openingMarker);
                 headingParser.block.setText(headerText.trim());
                 headingParser.block.setClosingMarker(closingMarker);
@@ -96,7 +93,7 @@ public class HeadingParser extends AbstractBlockParser {
                 BasedSequence headingText = content.getContents().trim();
                 BasedSequence closingMarker = line.trim();
 
-                HeadingParser headingParser = new HeadingParser(level, content);
+                HeadingParser headingParser = new HeadingParser(level);
                 headingParser.block.setText(headingText);
                 headingParser.block.setClosingMarker(closingMarker);
                 headingParser.block.setCharsFromContent();

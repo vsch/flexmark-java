@@ -14,7 +14,8 @@ import java.util.Map;
  */
 public abstract class BasedSequenceImpl implements BasedSequence {
 
-    public static final String WHITESPACE_CHARS = " \t\n";
+    public static final String WHITESPACE_CHARS = " \t\r\n";
+    public static final String EOL_CHARS = "\r\n";
 
     @Override
     public BasedSequence endSequence(int start, int end) {
@@ -98,6 +99,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence trimEnd() {
         int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
+        return trim > 0 ? subSequence(0, length() - trim) : this;
+    }
+
+    @Override
+    public BasedSequence trimEOL() {
+        int trim = countCharsReversed(EOL_CHARS, 0, length());
         return trim > 0 ? subSequence(0, length() - trim) : this;
     }
 

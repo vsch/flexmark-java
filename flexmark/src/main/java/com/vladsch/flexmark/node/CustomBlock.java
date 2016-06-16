@@ -13,8 +13,12 @@ public abstract class CustomBlock extends Block {
         super(chars);
     }
 
-    public CustomBlock(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
+    public CustomBlock(BasedSequence chars, List<BasedSequence> lineSegments) {
+        super(chars, lineSegments);
+    }
+
+    public CustomBlock(List<BasedSequence> lineSegments) {
+        super(lineSegments);
     }
 
     public CustomBlock(BlockContent blockContent) {

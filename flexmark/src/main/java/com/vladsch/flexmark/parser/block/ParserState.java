@@ -3,14 +3,13 @@ package com.vladsch.flexmark.parser.block;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.MutableDataHolder;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.BlockPreProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
 
 /**
  * State of the parser that is used in block parsers.
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
-public interface ParserState extends BlockPreProcessor {
+public interface ParserState {
 
     /**
      * @return the current line

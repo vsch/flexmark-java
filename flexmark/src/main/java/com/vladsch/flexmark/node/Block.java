@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 
 import java.util.List;
 
-public abstract class Block extends SegmentedNode {
+public abstract class Block extends ContentNode {
     public Block() {
     }
 
@@ -13,8 +13,12 @@ public abstract class Block extends SegmentedNode {
         super(chars);
     }
 
-    public Block(BasedSequence chars, List<BasedSequence> segments) {
-        super(chars, segments);
+    public Block(BasedSequence chars, List<BasedSequence> lineSegments) {
+        super(chars, lineSegments);
+    }
+
+    public Block(List<BasedSequence> lineSegments) {
+        super(lineSegments);
     }
 
     public Block(BlockContent blockContent) {

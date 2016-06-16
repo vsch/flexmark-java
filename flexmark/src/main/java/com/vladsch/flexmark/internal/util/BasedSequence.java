@@ -53,6 +53,7 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trimStart();
     BasedSequence trimEnd();
     BasedSequence trim();
+    BasedSequence trimEOL();
 
     boolean isEmpty();
     boolean isBlank();

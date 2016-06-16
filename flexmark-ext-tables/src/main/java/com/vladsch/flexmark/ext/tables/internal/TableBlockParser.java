@@ -23,7 +23,7 @@ public class TableBlockParser extends AbstractBlockParser {
     private static DataKey<Boolean> NON_TABLE_PARAGRAPH = new DataKey<>("NON_TABLE_PARAGRAPH", false);
     private static DataKey<TableParserOptions> CACHED_TABLE_OPTIONS = new DataKey<>("CACHED_TABLE_OPTIONS", TableParserOptions::new);
 
-    private final BlockContent content = new BlockContent();
+    private BlockContent content = new BlockContent();
     private final TableBlock block = new TableBlock();
 
     private boolean nextIsSeparatorLine = false;
@@ -67,6 +67,7 @@ public class TableBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState parserState) {
         block.setContent(content);
+        content = null;
     }
 
     @Override
@@ -79,7 +80,7 @@ public class TableBlockParser extends AbstractBlockParser {
         int rowNumber = 0;
         int separatorColumns = alignments.size();
 
-        for (BasedSequence rowLine : content.getLines()) {
+        for (BasedSequence rowLine : block.getContentLines()) {
             if (rowNumber == separatorLineNumber) {
                 section.setCharsFromContent();
                 section = new TableSeparator();
@@ -91,7 +92,7 @@ public class TableBlockParser extends AbstractBlockParser {
             }
 
             List<BasedSequence> cells = split(rowLine, rowNumber != separatorLineNumber && options.columnSpans, true);
-            TableRow tableRow = new TableRow(rowLine.subSequence(0, rowLine.length() - content.getEolLength()));
+            TableRow tableRow = new TableRow(rowLine.trimEOL());
 
             int rowCells = countCells(cells);
             int maxColumns = rowCells;

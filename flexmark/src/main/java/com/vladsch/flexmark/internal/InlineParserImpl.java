@@ -12,7 +12,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InlineParserImpl implements InlineParser, BlockPreProcessor {
+public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, ParagraphPreProcessorFactory {
 
     protected static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
     protected static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
@@ -270,7 +270,25 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
     }
 
     @Override
-    public void preProcessBlock(Block block, ParserState state) {
+    public boolean getAffectsDocumentProperties() {
+        return true;
+    }
+
+    @Override
+    public Set<Class<? extends ParagraphPreProcessorFactory>> getRunAfter() {
+        return null;
+    }
+
+    @Override
+    public ParagraphPreProcessor create(ParserState state) {
+        return this;
+    }
+
+    /*
+         *  BlockPreProcessor implementation
+         */
+    @Override
+    public int preProcessBlock(Paragraph block, ParserState state) {
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:
@@ -280,11 +298,11 @@ public class InlineParserImpl implements InlineParser, BlockPreProcessor {
             contentChars = contentChars.subSequence(pos, contentChars.length());
         }
 
-        block.setChars(contentChars);
+        return contentChars.getStartOffset() - block.getChars().getStartOffset();
     }
 
     /**
-     * Attempt to parse a link reference, modifying the internal reference map.
+     * Attempt to parse a reference definition, modifying the internal reference map.
      *
      * @return how many characters were parsed as a reference, {@code 0} if none
      */
