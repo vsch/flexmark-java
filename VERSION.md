@@ -1,6 +1,17 @@
 Version History
 ===============
 
+0.2.1
+-----
+
+- Update integration test to check some basic file parsing
+
+- Move wrap.md parsing from ex-table to integration test so that all extensions could be
+  enabled.
+
+- Add unimplemented inline parser option to use GFM emphasis parsing rules,
+  `Parser.RELAXED_INLINE_EMPHASIS` boolean options, default false.
+
 0.2.0
 -----
 

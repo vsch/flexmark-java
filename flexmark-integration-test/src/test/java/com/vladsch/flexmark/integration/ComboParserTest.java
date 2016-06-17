@@ -1,32 +1,33 @@
-package com.vladsch.flexmark.test;
+package com.vladsch.flexmark.integration;
 
+import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
-import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.test.ComboSpecTestCase;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class ComboExtraSpecTest extends ComboSpecTestCase {
-    static final String SPEC_RESOURCE = "/extra_ast_spec.txt";
+public class ComboParserTest extends ComboSpecTestCase {
+    static final String SPEC_RESOURCE = "/ext_integration_ast_spec.txt";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
+            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
+            .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), EmojiExtension.create(), FootnoteExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("keep-last", new MutableDataSet()
-                .set(Parser.REFERENCES_KEEP, KeepType.LAST)
-        );
-        optionsMap.put("relaxed-emphasis", new MutableDataSet()
-                .set(Parser.RELAXED_INLINE_EMPHASIS, true)
+        optionsMap.put("gfm", new MutableDataSet()
+                .set(TablesExtension.COLUMN_SPANS, false)
+                .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
+                .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
+                .set(TablesExtension.HEADER_SEPARATOR_COLUMNS, true)
         );
     }
 
@@ -35,10 +36,12 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     static DataHolder optionsSet(String optionSet) {
+        if (optionSet == null) return null;
+
         return optionsMap.get(optionSet);
     }
 
-    public ComboExtraSpecTest(SpecExample example) {
+    public ComboParserTest(SpecExample example) {
         super(example);
     }
 
@@ -74,5 +77,18 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     @Override
     protected HtmlRenderer renderer() {
         return RENDERER;
+    }
+
+    //@Test
+    public void testWrap() throws Exception {
+        if (!example.isFullSpecExample()) return;
+
+        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        final Parser PARSER = Parser.builder(OPTIONS).build();
+
+        String source = readResource("/wrap.md");
+        String html = readResource("/wrap.html");
+
+        assertRendering(source, html);
     }
 }

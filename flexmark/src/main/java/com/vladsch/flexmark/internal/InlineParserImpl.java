@@ -26,8 +26,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
     protected static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 
     protected static final String ASCII_PUNCTUATION = "'!\"#\\$%&\\(\\)\\*\\+,\\-\\./:;<=>\\?@\\[\\\\\\]\\^_`\\{\\|\\}~";
-    protected static final Pattern PUNCTUATION = Pattern
-            .compile("^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
+    protected static final Pattern PUNCTUATION = Pattern.compile(
+            "^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
 
     protected static final Pattern HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
@@ -55,11 +55,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
 
     protected static final Pattern TICKS_HERE = Pattern.compile("^`+");
 
-    protected static final Pattern EMAIL_AUTOLINK = Pattern
-            .compile("^<([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*)>");
+    protected static final Pattern EMAIL_AUTOLINK = Pattern.compile(
+            "^<([a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*)>");
 
-    protected static final Pattern AUTOLINK = Pattern
-            .compile("^<[a-zA-Z][a-zA-Z0-9.+-]{1,31}:[^<>\u0000-\u0020]*>");
+    protected static final Pattern AUTOLINK = Pattern.compile(
+            "^<[a-zA-Z][a-zA-Z0-9.+-]{1,31}:[^<>\u0000-\u0020]*>");
 
     protected static final Pattern SPNL = Pattern.compile("^ *(?:\n *)?");
 
@@ -108,9 +108,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
 
     static class InlineParserOptions {
         final public boolean matchLookaheadFirst;
+        final public boolean relaxedEmphasis;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
+            relaxedEmphasis = options.get(Parser.RELAXED_INLINE_EMPHASIS);
         }
     }
 
@@ -1197,7 +1199,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
      *
      * @return information about delimiter run, or {@code null}
      */
-    DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+    protected DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         int startIndex = index;
 
         int delimiterCount = 0;
@@ -1291,9 +1293,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
                 // nope
                 useDelims = 1;
             }
-
-            Text openerNode = opener.node;
-            Text closerNode = closer.node;
 
             // remove used delimiters from stack elts and inlines
             opener.numDelims -= useDelims;

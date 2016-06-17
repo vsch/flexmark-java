@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.MutableDataSet;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -11,10 +10,6 @@ import com.vladsch.flexmark.test.ComboSpecTestCase;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.*;
 
 public class ComboTablesSpecTest extends ComboSpecTestCase {
@@ -83,40 +78,15 @@ public class ComboTablesSpecTest extends ComboSpecTestCase {
     }
 
     @Test
-    public void testWrap() throws Exception {
-        if (!example.isFullSpecExample()) return;
-
-        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-        final Parser PARSER = Parser.builder(OPTIONS).build();
-
-        InputStream inputStream = SpecReader.class.getResourceAsStream("/wrap.md");
-        if (inputStream == null) {
-            throw new IllegalStateException("Could not load /wrap.md classpath resource");
-        }
-
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream, Charset.forName("UTF-8")))) {
-            Node node = PARSER.parseReader(reader);
-            String html = RENDERER.render(node);
-        }
-    }
-
-    @Test
     public void testTable() throws Exception {
         if (!example.isFullSpecExample()) return;
 
         final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
         final Parser PARSER = Parser.builder(OPTIONS).build();
 
-        InputStream inputStream = SpecReader.class.getResourceAsStream("/table.md");
-        if (inputStream == null) {
-            throw new IllegalStateException("Could not load /table.md classpath resource");
-        }
+        String source = readResource("/table.md");
+        String html = readResource("/table.html");
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream, Charset.forName("UTF-8")))) {
-            Node node = PARSER.parseReader(reader);
-            String html = RENDERER.render(node);
-        }
+        assertRendering(source, html);
     }
 }

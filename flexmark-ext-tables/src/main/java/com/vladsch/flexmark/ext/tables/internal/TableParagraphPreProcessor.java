@@ -88,28 +88,21 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     public int preProcessBlock(Paragraph block, ParserState state) {
         InlineParser inlineParser = state.getInlineParser();
 
-        ArrayList<TableRow> tableRows = new ArrayList<>();
         ArrayList<BasedSequence> tableLines = new ArrayList<>();
         int separatorLineNumber = -1;
         BasedSequence separatorLine = null;
         int blockIndent = block.getLineIndent(0);
 
         for (BasedSequence rowLine : block.getContentLines()) {
-            int rowNumber = tableRows.size();
+            int rowNumber = tableLines.size();
             if (separatorLineNumber == -1 && rowNumber > options.maxHeaderRows) return 0;    // too many header rows
 
-            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
-            TableRow tableRow = new TableRow(fullRowLine);
-
-            List<Node> sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
-
-            if (sepList == null) {
+            if (rowLine.indexOf('|') < 0) {
                 if (separatorLineNumber == -1) return 0;
-
-                // table is done
                 break;
             }
 
+            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
             if (separatorLineNumber == -1 && rowNumber >= options.minHeaderRows
                     && (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|')
                     && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
@@ -118,13 +111,30 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 separatorLine = rowLine;
             }
 
-            tableRows.add(tableRow);
             tableLines.add(rowLine);
         }
 
         if (separatorLineNumber == -1) return 0;
 
-        Node tableBlock = new TableBlock(tableLines);
+        ArrayList<TableRow> tableRows = new ArrayList<>();
+        for (BasedSequence rowLine : tableLines) {
+            int rowNumber = tableRows.size();
+
+            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
+            TableRow tableRow = new TableRow(fullRowLine);
+
+            List<Node> sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
+
+            if (sepList == null) {
+                if (rowNumber <= separatorLineNumber) return 0;
+                break;
+            }
+
+            tableRows.add(tableRow);
+        }
+
+        // table is done, could be earlier than the lines tested earlier, may need to truncate lines
+        Node tableBlock = new TableBlock(tableLines.subList(0, tableRows.size()));
         Node section = new TableHead();
         tableBlock.appendChild(section);
 

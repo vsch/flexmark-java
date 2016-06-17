@@ -6,7 +6,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +68,28 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
 
     protected boolean includeExampleCoords() {
         return true;
+    }
+
+    protected String readResource(String resourcePath) {
+        try (InputStream stream = ComboSpecTestCase.class.getResourceAsStream(resourcePath)) {
+            return readStream(stream);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected String readStream(InputStream stream) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")))) {
+            String line;
+            StringBuilder out = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                out.append(line).append('\n');
+            }
+
+            return out.toString();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Test
