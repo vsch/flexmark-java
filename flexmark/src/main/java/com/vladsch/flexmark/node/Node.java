@@ -346,4 +346,12 @@ public abstract class Node {
         segmentSpan(out, sequence, name);
         return out.toString();
     }
+
+    public BasedSequence childChars() {
+        if (firstChild == null || lastChild == null) {
+            return SubSequence.NULL;
+        }
+
+        return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+    }
 }

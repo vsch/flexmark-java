@@ -71,10 +71,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
 
     protected static final Pattern LINE_END = Pattern.compile("^ *(?:\n|$)");
 
-    protected final BitSet specialCharacters;
+    protected final BitSet originalSpecialCharacters;
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
     protected final LinkRefProcessorData linkRefProcessorsData;
+
+    // used to temporarily override handling of special characters by custom ParagraphPreProcessors
+    protected BitSet specialCharacters;
+    protected BitSet customCharacters = null;
+    protected Map<Character, CharacterNodeFactory> customSpecialCharacterFactoryMap = null;
+    protected ArrayList<Node> customSpecialCharacterNodes = null;
 
     /**
      * Link references by ID, needs to be built up using parseReference before calling parse.
@@ -142,6 +148,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
         this.delimiterProcessors = delimiterProcessors;
         this.linkRefProcessorsData = linkRefProcessorsData;
         this.delimiterCharacters = delimiterCharacters;
+        this.originalSpecialCharacters = specialCharacters;
         this.specialCharacters = specialCharacters;
     }
 
@@ -247,6 +254,19 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
         if (existing != null) {
             throw new IllegalArgumentException("Delimiter processor conflict with delimiter char '" + delimiterChar + "'");
         }
+    }
+
+    @Override
+    public List<Node> parseCustom(BasedSequence input, Node node, BitSet customCharacters, Map<Character, CharacterNodeFactory> nodeFactoryMap) {
+        this.customCharacters = customCharacters;
+        this.specialCharacters.or(customCharacters);
+        this.customSpecialCharacterFactoryMap = nodeFactoryMap;
+        this.customSpecialCharacterNodes = null;
+        parse(input, node);
+        this.specialCharacters = this.originalSpecialCharacters;
+        this.customSpecialCharacterFactoryMap = null;
+        this.customCharacters = null;
+        return this.customSpecialCharacterNodes;
     }
 
     /**
@@ -419,6 +439,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
             return false;
         }
 
+        if (customCharacters != null && customCharacters.get(c)) {
+            processCustomCharacters();
+            return true;
+        }
+
         switch (c) {
             case '\n':
                 res = parseNewline();
@@ -445,6 +470,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
                 res = parseEntity();
                 break;
             default:
+                // first we check custom special characters
                 boolean isDelimiter = delimiterCharacters.get(c);
                 if (isDelimiter) {
                     DelimiterProcessor delimiterProcessor = delimiterProcessors.get(c);
@@ -463,6 +489,47 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
         }
 
         return true;
+    }
+
+    private void processCustomCharacters() {
+        char c = peek();
+        CharacterNodeFactory factory = customSpecialCharacterFactoryMap.get(c);
+        Node node = factory.create();
+        node.setChars(input.subSequence(index, index + 1));
+
+        if (currentText != null) {
+            BasedSequence prevText = SegmentedSequence.of(currentText, SubSequence.NULL);
+            currentText = null;
+
+            // see if need to trim some off the end
+            int pos = prevText.length();
+            BasedSequence skipped = null;
+            while (pos > 0 && factory.skipPrev(prevText.charAt(pos - 1))) pos--;
+            if (pos < prevText.length()) {
+                skipped = prevText.subSequence(pos);
+                prevText = prevText.subSequence(0, pos);
+            }
+
+            block.appendChild(new Text(prevText));
+            if (skipped != null && factory.wantSkippedWhitespace()) {
+                block.appendChild(new WhiteSpace(skipped));
+            }
+        }
+
+        appendNode(node);
+        if (customSpecialCharacterNodes == null) customSpecialCharacterNodes = new ArrayList<>();
+        customSpecialCharacterNodes.add(node);
+
+        int pos = index + 1;
+        do {
+            index++;
+            c = peek();
+        }
+        while (c != '\0' && factory.skipNext(c));
+
+        if (pos < index && factory.wantSkippedWhitespace()) {
+            block.appendChild(new WhiteSpace(input.subSequence(pos, index)));
+        }
     }
 
     /**

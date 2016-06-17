@@ -42,7 +42,7 @@ public class DocumentParser implements ParserState {
         CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
     }
 
-    private static class ReferencePreProcessorFactory implements ParagraphPreProcessorFactory {
+    public static class ReferencePreProcessorFactory implements ParagraphPreProcessorFactory {
         @Override
         public boolean getAffectsDocumentProperties() {
             return true;
@@ -217,6 +217,10 @@ public class DocumentParser implements ParserState {
                     throw new IllegalStateException("have dependent global processors with circular or non-global dependencies " + dependentGlobalProcessors);
                 }
 
+                for (ParagraphPreProcessorFactory preProcessor : stageProcessors) {
+                    dependentGlobalProcessors.remove(preProcessor.getClass());
+                    independentProcessors.add(preProcessor.getClass());
+                }
                 preProcessingStages.add(stageProcessors);
             }
 
@@ -236,6 +240,10 @@ public class DocumentParser implements ParserState {
                     throw new IllegalStateException("have dependent processors with circular dependencies " + dependentProcessors);
                 }
 
+                for (ParagraphPreProcessorFactory preProcessor : stageProcessors) {
+                    dependentProcessors.remove(preProcessor.getClass());
+                    independentProcessors.add(preProcessor.getClass());
+                }
                 preProcessingStages.add(stageProcessors);
             }
 
@@ -463,12 +471,10 @@ public class DocumentParser implements ParserState {
         // appropriate block.
 
         // First check for a lazy paragraph continuation:
-        if (!allClosed && !isBlank() &&
-                getActiveBlockParser() instanceof ParagraphParser) {
+        if (!allClosed && !isBlank() && getActiveBlockParser() instanceof ParagraphParser) {
             // lazy paragraph continuation
             addLine();
         } else {
-
             // finalize any blocks not matched
             if (!allClosed) {
                 finalizeBlocks(unmatchedBlockParsers);

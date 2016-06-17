@@ -235,7 +235,7 @@ public class Parser {
             return this;
         }
 
-        public Builder blockPreProcessorFactory(ParagraphPreProcessorFactory paragraphPreProcessorFactory) {
+        public Builder paragraphPreProcessorFactory(ParagraphPreProcessorFactory paragraphPreProcessorFactory) {
             paragraphPreProcessorFactories.add(paragraphPreProcessorFactory);
             return this;
         }

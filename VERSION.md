@@ -1,6 +1,14 @@
 Version History
 ===============
 
+0.1.9
+-----
+
+- Change: flexmark-ext-table extension to use paragraph pre-processor interface and perform
+  inline parsing on a line of a table before splitting into columns so that pipes embedded
+  in inline elements will not be treated as column breaks. Partially complete. Need to
+  preserve original line's indentation information in a paragraph block.
+
 0.1.8
 -----
 

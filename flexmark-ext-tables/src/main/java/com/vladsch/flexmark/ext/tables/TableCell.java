@@ -2,9 +2,7 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Visitor;
+import com.vladsch.flexmark.node.*;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
@@ -17,6 +15,22 @@ public class TableCell extends CustomNode implements DelimitedNode {
     private boolean header;
     private Alignment alignment;
     private int span = 1;
+
+    public void trimWhiteSpace() {
+        Node child = getFirstChild();
+        while (child != null && child instanceof WhiteSpace) {
+            Node next = child.getNext();
+            child.unlink();
+            child = next;
+        }
+
+        child = getLastChild();
+        while (child != null && child instanceof WhiteSpace) {
+            Node next = child.getPrevious();
+            child.unlink();
+            child = next;
+        }
+    }
 
     @Override
     public BasedSequence getOpeningMarker() {

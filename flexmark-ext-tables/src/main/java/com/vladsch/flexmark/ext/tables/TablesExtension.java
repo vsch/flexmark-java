@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.tables.internal.TableBlockParser;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
+import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -32,7 +32,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new TableBlockParser.Factory());
+        parserBuilder.paragraphPreProcessorFactory(TableParagraphPreProcessor.Factory());
     }
 
     @Override

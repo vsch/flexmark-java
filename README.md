@@ -32,6 +32,10 @@ Progress
 
 - Wiki added [flexmark-java wiki]
 
+- Add dependencies between paragraph pre processors so that their order is defined by the
+  extension. That way a paragraph pre-processor can be sure that a pre-processor on whose output
+  it depends on has been run before it is invoked.
+
 - Unified options architecture to configure: parser, renderer and any custom extensions. This
   includes the list of extensions to use. Making a single argument configure the environment.
   These are also available during parsing and rendering phases for use by extensions.
@@ -55,9 +59,9 @@ Progress
 - Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
   implement attribute map and boiler plate render children method in custom node renderers.
 
-- Add `ParagraphPreProcessor` interface to allow customizing of block processing of paragraph blocks
-  on closing. Effectively, the mechanism of removing reference definitions from the start of the
-  paragraph was generalized to be usable by any block and extensible.
+- Add `ParagraphPreProcessor` interface to allow customizing of block processing of paragraph
+  blocks on closing. Effectively, the mechanism of removing reference definitions from the start
+  of the paragraph was generalized to be usable by any block and extensible.
 
 - Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
   such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done with
@@ -132,45 +136,45 @@ Here are some basic benchmarking results:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:-----------------|----------------:|--------------:|------------------:|-----------:|
-| README-SLOW      |         0.715ms |       1.000ms |           1.696ms |   16.823ms |
-| VERSION          |         1.242ms |       1.618ms |           3.467ms |   44.950ms |
-| commonMarkSpec   |        42.357ms |      71.312ms |         583.142ms |  616.430ms |
-| markdown_example |        19.522ms |      25.025ms |         207.381ms | 1046.346ms |
-| spec             |         8.642ms |      11.801ms |          33.733ms |  317.981ms |
-| table            |         0.143ms |       0.302ms |           0.644ms |    3.964ms |
-| table-format     |         1.417ms |       1.755ms |           3.795ms |   24.867ms |
-| wrap             |         4.605ms |       8.767ms |          14.768ms |   91.417ms |
+| README-SLOW      |         0.709ms |       1.184ms |           1.708ms |   17.096ms |
+| VERSION          |         1.248ms |       1.801ms |           3.610ms |   46.655ms |
+| commonMarkSpec   |        41.686ms |      77.253ms |         617.420ms |  617.716ms |
+| markdown_example |        19.559ms |      27.133ms |         211.419ms | 1097.560ms |
+| spec             |         8.681ms |      12.373ms |          33.972ms |  318.471ms |
+| table            |         0.152ms |       0.542ms |           0.660ms |    4.032ms |
+| table-format     |         1.350ms |       2.795ms |           3.949ms |   25.941ms |
+| wrap             |         4.610ms |       9.484ms |          14.809ms |   94.446ms |
 
 Ratios of above:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.40 |              2.37 |     23.54 |
-| VERSION          |            1.00 |          1.30 |              2.79 |     36.19 |
-| commonMarkSpec   |            1.00 |          1.68 |             13.77 |     14.55 |
-| markdown_example |            1.00 |          1.28 |             10.62 |     53.60 |
-| spec             |            1.00 |          1.37 |              3.90 |     36.79 |
-| table            |            1.00 |          2.11 |              4.51 |     27.76 |
-| table-format     |            1.00 |          1.24 |              2.68 |     17.55 |
-| wrap             |            1.00 |          1.90 |              3.21 |     19.85 |
+| README-SLOW      |            1.00 |          1.67 |              2.41 |     24.11 |
+| VERSION          |            1.00 |          1.44 |              2.89 |     37.39 |
+| commonMarkSpec   |            1.00 |          1.85 |             14.81 |     14.82 |
+| markdown_example |            1.00 |          1.39 |             10.81 |     56.11 |
+| spec             |            1.00 |          1.43 |              3.91 |     36.68 |
+| table            |            1.00 |          3.57 |              4.35 |     26.60 |
+| table-format     |            1.00 |          2.07 |              2.93 |     19.22 |
+| wrap             |            1.00 |          2.06 |              3.21 |     20.49 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.55 |             10.79 |     27.50 |
+| overall          |            1.00 |          1.70 |             11.38 |     28.49 |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.71 |          1.00 |              1.70 |     16.83 |
-| VERSION          |            0.77 |          1.00 |              2.14 |     27.78 |
-| commonMarkSpec   |            0.59 |          1.00 |              8.18 |      8.64 |
-| markdown_example |            0.78 |          1.00 |              8.29 |     41.81 |
-| spec             |            0.73 |          1.00 |              2.86 |     26.95 |
-| table            |            0.47 |          1.00 |              2.13 |     13.14 |
-| table-format     |            0.81 |          1.00 |              2.16 |     14.17 |
-| wrap             |            0.53 |          1.00 |              1.68 |     10.43 |
+| README-SLOW      |            0.60 |          1.00 |              1.44 |     14.43 |
+| VERSION          |            0.69 |          1.00 |              2.00 |     25.91 |
+| commonMarkSpec   |            0.54 |          1.00 |              7.99 |      8.00 |
+| markdown_example |            0.72 |          1.00 |              7.79 |     40.45 |
+| spec             |            0.70 |          1.00 |              2.75 |     25.74 |
+| table            |            0.28 |          1.00 |              1.22 |      7.44 |
+| table-format     |            0.48 |          1.00 |              1.41 |      9.28 |
+| wrap             |            0.49 |          1.00 |              1.56 |      9.96 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.65 |          1.00 |              6.98 |     17.79 |
+| overall          |            0.59 |          1.00 |              6.70 |     16.76 |
 
-Because these two files represent the pathological input for pegdown, I no longer run them
-as part of the benchmark to prevent skewing of the results. The results are here for posterity.
+Because these two files represent the pathological input for pegdown, I no longer run them as
+part of the benchmark to prevent skewing of the results. The results are here for posterity.
 
 | File          | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:--------------|----------------:|--------------:|------------------:|-----------:|
