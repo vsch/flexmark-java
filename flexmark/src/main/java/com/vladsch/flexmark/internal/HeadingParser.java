@@ -62,7 +62,7 @@ public class HeadingParser extends AbstractBlockParser {
                 int level = openingMarker.length(); // number of #s
 
                 BlockContent content = new BlockContent();
-                content.add(state.getLineWithEOL().subSequence(newOffset), state.getLineEolLength());
+                content.add(state.getLineWithEOL().subSequence(newOffset), state.getIndent());
 
                 BasedSequence headerText = trySequence.subSequence(openingEnd);
                 BasedSequence closingMarker = null;

@@ -54,6 +54,7 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trimEnd();
     BasedSequence trim();
     BasedSequence trimEOL();
+    int eolLength();
 
     boolean isEmpty();
     boolean isBlank();

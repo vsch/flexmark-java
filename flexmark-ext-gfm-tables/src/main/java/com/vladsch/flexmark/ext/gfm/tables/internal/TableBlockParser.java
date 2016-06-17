@@ -51,13 +51,13 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line, int eolLength) {
+    public void addLine(ParserState state, BasedSequence line) {
         if (nextIsSeparatorLine) {
             nextIsSeparatorLine = false;
             separatorLine = line;
             separatorLineNumber = content.getLineCount();
         }
-        content.add(line, eolLength);
+        content.add(line, state.getIndent());
     }
 
     @Override
@@ -241,7 +241,7 @@ public class TableBlockParser extends AbstractBlockParser {
                     List<BasedSequence> separatorParts = split(separatorLine);
                     if (separatorParts.size() >= headParts.size()) {
                         TableBlockParser tableBlockParser = new TableBlockParser();
-                        tableBlockParser.addLine(paragraph, matchedBlockParser.getParagraphEolLengths().get(0));
+                        tableBlockParser.addLine(state, paragraph);
                         tableBlockParser.nextIsSeparatorLine = true;
 
                         return BlockStart.of(tableBlockParser)

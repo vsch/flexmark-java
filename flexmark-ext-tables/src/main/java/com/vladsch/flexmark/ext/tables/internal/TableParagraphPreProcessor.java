@@ -92,14 +92,16 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         ArrayList<BasedSequence> tableLines = new ArrayList<>();
         int separatorLineNumber = -1;
         BasedSequence separatorLine = null;
+        int blockIndent = block.getLineIndent(0);
 
         for (BasedSequence rowLine : block.getContentLines()) {
             int rowNumber = tableRows.size();
             if (separatorLineNumber == -1 && rowNumber > options.maxHeaderRows) return 0;    // too many header rows
 
-            TableRow tableRow = new TableRow(rowLine.trimEOL());
+            BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
+            TableRow tableRow = new TableRow(fullRowLine);
 
-            List<Node> sepList = inlineParser.parseCustom(rowLine.trim(), tableRow, pipeCharacters, pipeNodeMap);
+            List<Node> sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
 
             if (sepList == null) {
                 if (separatorLineNumber == -1) return 0;
@@ -108,7 +110,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 break;
             }
 
-            if (separatorLineNumber == -1 && rowNumber >= options.minHeaderRows && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
+            if (separatorLineNumber == -1 && rowNumber >= options.minHeaderRows
+                    && (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|')
+                    && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
                 // must start with | or cell, whitespace means its not a separator line
                 separatorLineNumber = rowNumber;
                 separatorLine = rowLine;

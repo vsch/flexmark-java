@@ -26,7 +26,7 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void addLine(BasedSequence line, int eolLength) {
+    public void addLine(ParserState state, BasedSequence line) {
         throw new IllegalStateException("Abbreviation Blocks hold a single line");
     }
 

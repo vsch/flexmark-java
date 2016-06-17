@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockContent {
-    public static final List<Integer> EMPTY_EOL_OFFSETS = new ArrayList<>();
-
     // list of line text
     final private ArrayList<BasedSequence> lines = new ArrayList<>();
-    final private ArrayList<Integer> eolLengths = new ArrayList<>();
+    final private ArrayList<Integer> lineIndents = new ArrayList<>();
 
     public BasedSequence getLine(int line) {
         return lines.get(line);
@@ -26,8 +24,8 @@ public class BlockContent {
         return lines;
     }
 
-    public List<Integer> getEolLengths() {
-        return eolLengths;
+    public List<Integer> getLineIndents() {
+        return lineIndents;
     }
 
     public int getLineCount() {
@@ -37,14 +35,14 @@ public class BlockContent {
     public BlockContent() {
     }
 
-    public BlockContent(BlockContent other, int startLine, int endLine) {
+    public BlockContent(BlockContent other, int startLine, int lineIndent) {
         // copy content from other
-        assert lines.size() == eolLengths.size() : "lines and eols should be of the same size";
-        assert other.lines.size() == other.eolLengths.size() : "lines and eols should be of the same size";
+        assert lines.size() == lineIndents.size() : "lines and eols should be of the same size";
+        assert other.lines.size() == other.lineIndents.size() : "lines and eols should be of the same size";
 
-        if (other.lines.size() > 0 && startLine < endLine) {
-            lines.addAll(other.lines.subList(startLine, endLine));
-            eolLengths.addAll(other.eolLengths.subList(startLine, endLine));
+        if (other.lines.size() > 0 && startLine < lineIndent) {
+            lines.addAll(other.lines.subList(startLine, lineIndent));
+            lineIndents.addAll(other.lineIndents.subList(startLine, lineIndent));
         }
     }
 
@@ -56,23 +54,23 @@ public class BlockContent {
         return lines.size() > 0 ? lines.get(lines.size() - 1).getEndOffset() : -1;
     }
 
-    public int getEolLength() {
-        return lines.size() > 0 ? eolLengths.get(lines.size() - 1) : 0;
+    public int getLineIndent() {
+        return lines.size() > 0 ? lineIndents.get(0) : 0;
     }
 
     public int getSourceLength() {
         return lines.size() > 0 ? lines.get(lines.size() - 1).getEndOffset() - lines.get(0).getStartOffset() : -1;
     }
 
-    public void add(BasedSequence line, int eolOffset) {
-        lines.add(line);
-        eolLengths.add(eolOffset);
+    public void add(BasedSequence lineWithEOL, int lineIndent) {
+        lines.add(lineWithEOL);
+        lineIndents.add(lineIndent);
     }
 
-    public void addAll(List<BasedSequence> lines, List<Integer> eolOffsets) {
-        assert lines.size() == eolOffsets.size() : "lines and eolOffsets should be of the same size";
+    public void addAll(List<BasedSequence> lines, List<Integer> lineIndents) {
+        assert lines.size() == lineIndents.size() : "lines and lineIndents should be of the same size";
         this.lines.addAll(lines);
-        this.eolLengths.addAll(eolOffsets);
+        this.lineIndents.addAll(lineIndents);
     }
 
     public boolean hasSingleLine() {
@@ -82,6 +80,10 @@ public class BlockContent {
     public BasedSequence getContents() {
         if (lines.size() == 0) return SubSequence.NULL;
         return getContents(0, lines.size());
+    }
+
+    public BlockContent subContents(int startLine, int endLine) {
+        return new BlockContent(this, startLine, endLine);
     }
 
     public BasedSequence getContents(int startLine, int endLine) {
@@ -109,7 +111,7 @@ public class BlockContent {
         StringBuilder sb = new StringBuilder();
 
         for (BasedSequence line : lines) {
-            sb.append(line);
+            sb.append(line.trimEOL());
             sb.append('\n');
         }
 

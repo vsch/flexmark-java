@@ -23,7 +23,7 @@ public interface BlockParser {
 
     BlockContinue tryContinue(ParserState parserState);
 
-    void addLine(BasedSequence line, int eolLength);
+    void addLine(ParserState state, BasedSequence line);
 
     void closeBlock(ParserState parserState);
 

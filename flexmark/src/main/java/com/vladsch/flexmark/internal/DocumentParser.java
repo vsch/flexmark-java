@@ -580,7 +580,7 @@ public class DocumentParser implements ParserState {
 
         //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));
         //BasedSequence eol = content.baseSubSequence(lineEOL < lineEnd ? lineEnd - 1 : lineEnd, lineEnd).toMapped(EolCharacterMapper.INSTANCE);
-        getActiveBlockParser().addLine(content, lineEndIndex - lineEOLIndex);
+        getActiveBlockParser().addLine(this, content);
     }
 
     private BlockStartImpl findBlockStart(BlockParser blockParser) {
@@ -759,7 +759,7 @@ public class DocumentParser implements ParserState {
                             if (block.getLineChars(i).getStartOffset() >= contentChars.getStartOffset()) break;
                         }
 
-                        block.setContent(block.getContentLines(i, iMax));
+                        block.setContent(block, i, iMax);
                     }
                 }
             }
@@ -818,7 +818,7 @@ public class DocumentParser implements ParserState {
         public List<Integer> getParagraphEolLengths() {
             if (matchedBlockParser instanceof ParagraphParser) {
                 ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContent().getEolLengths();
+                return paragraphParser.getContent().getLineIndents();
             }
             return null;
         }

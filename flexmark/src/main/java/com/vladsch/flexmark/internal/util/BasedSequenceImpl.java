@@ -103,8 +103,13 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public int eolLength() {
+        return countCharsReversed(EOL_CHARS, 0, length());
+    }
+
+    @Override
     public BasedSequence trimEOL() {
-        int trim = countCharsReversed(EOL_CHARS, 0, length());
+        int trim = eolLength();
         return trim > 0 ? subSequence(0, length() - trim) : this;
     }
 
