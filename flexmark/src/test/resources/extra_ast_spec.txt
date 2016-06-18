@@ -178,7 +178,7 @@ Document[0, 46]
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example Emphasis tests: 1 options(relaxed-emphasis)
+```````````````````````````````` example(Emphasis tests: 1) options(relaxed-emphasis, ignore)
 **bold*bold-italic*bold**
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
@@ -195,7 +195,7 @@ Document[0, 26]
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example Emphasis tests: 2 
+```````````````````````````````` example Emphasis tests: 2
 **bold *bold-italic* bold**
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>
@@ -207,6 +207,130 @@ Document[0, 28]
       Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
         Text[8, 19] chars:[8, 19, "bold-"..."talic"]
       Text[20, 25] chars:[20, 25, " bold"]
+````````````````````````````````
+
+## ATX Header options
+
+Allow atx headers without a space between # and the title
+
+```````````````````````````````` example(ATX Header options: 1) options(hdr-no-atx-space)
+#Heading                                                                            
+##Heading                                                                            
+###Heading                                                                            
+####Heading                                                                            
+#####Heading                                                                            
+######Heading                                                                            
+
+#Heading #                                                                            
+##Heading #                                                                            
+###Heading #                                                                            
+####Heading #                                                                            
+#####Heading #                                                                            
+######Heading #                                                                            
+.
+<h1>Heading</h1>
+<h2>Heading</h2>
+<h3>Heading</h3>
+<h4>Heading</h4>
+<h5>Heading</h5>
+<h6>Heading</h6>
+<h1>Heading</h1>
+<h2>Heading</h2>
+<h3>Heading</h3>
+<h4>Heading</h4>
+<h5>Heading</h5>
+<h6>Heading</h6>
+.
+Document[0, 1063]
+  Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[0, 0]
+    Text[1, 8] chars:[1, 8, "Heading"]
+  Heading[85, 94] textOpen:[85, 87, "##"] text:[87, 94, "Heading"] textClose:[0, 0]
+    Text[87, 94] chars:[87, 94, "Heading"]
+  Heading[171, 181] textOpen:[171, 174, "###"] text:[174, 181, "Heading"] textClose:[0, 0]
+    Text[174, 181] chars:[174, 181, "Heading"]
+  Heading[258, 269] textOpen:[258, 262, "####"] text:[262, 269, "Heading"] textClose:[0, 0]
+    Text[262, 269] chars:[262, 269, "Heading"]
+  Heading[346, 358] textOpen:[346, 351, "#####"] text:[351, 358, "Heading"] textClose:[0, 0]
+    Text[351, 358] chars:[351, 358, "Heading"]
+  Heading[435, 448] textOpen:[435, 441, "######"] text:[441, 448, "Heading"] textClose:[0, 0]
+    Text[441, 448] chars:[441, 448, "Heading"]
+  Heading[526, 536] textOpen:[526, 527, "#"] text:[527, 534, "Heading"] textClose:[535, 536, "#"]
+    Text[527, 534] chars:[527, 534, "Heading"]
+  Heading[613, 624] textOpen:[613, 615, "##"] text:[615, 622, "Heading"] textClose:[623, 624, "#"]
+    Text[615, 622] chars:[615, 622, "Heading"]
+  Heading[701, 713] textOpen:[701, 704, "###"] text:[704, 711, "Heading"] textClose:[712, 713, "#"]
+    Text[704, 711] chars:[704, 711, "Heading"]
+  Heading[790, 803] textOpen:[790, 794, "####"] text:[794, 801, "Heading"] textClose:[802, 803, "#"]
+    Text[794, 801] chars:[794, 801, "Heading"]
+  Heading[880, 894] textOpen:[880, 885, "#####"] text:[885, 892, "Heading"] textClose:[893, 894, "#"]
+    Text[885, 892] chars:[885, 892, "Heading"]
+  Heading[971, 986] textOpen:[971, 977, "######"] text:[977, 984, "Heading"] textClose:[985, 986, "#"]
+    Text[977, 984] chars:[977, 984, "Heading"]
+````````````````````````````````
+
+Don't allow leading spaces 
+
+```````````````````````````````` example(ATX Header options: 2) options(hdr-no-lead-space)
+ # Heading
+ ## Heading
+ ### Heading
+ #### Heading
+ ##### Heading
+ ###### Heading
+.
+<p># Heading
+## Heading
+### Heading
+#### Heading
+##### Heading
+###### Heading</p>
+.
+Document[0, 81]
+  Paragraph[1, 81]
+    Text[1, 10] chars:[1, 10, "# Heading"]
+    SoftLineBreak[10, 11]
+    Text[12, 22] chars:[12, 22, "## Heading"]
+    SoftLineBreak[22, 23]
+    Text[24, 35] chars:[24, 35, "### H"..."ading"]
+    SoftLineBreak[35, 36]
+    Text[37, 49] chars:[37, 49, "#### "..."ading"]
+    SoftLineBreak[49, 50]
+    Text[51, 64] chars:[51, 64, "#####"..."ading"]
+    SoftLineBreak[64, 65]
+    Text[66, 80] chars:[66, 80, "#####"..."ading"]
+````````````````````````````````
+
+
+Don't allow leading spaces 
+
+```````````````````````````````` example(ATX Header options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
+ # Heading
+ ## Heading
+ ### Heading
+ #### Heading
+ ##### Heading
+ ###### Heading
+.
+<p># Heading
+## Heading
+### Heading
+#### Heading
+##### Heading
+###### Heading</p>
+.
+Document[0, 81]
+  Paragraph[1, 81]
+    Text[1, 10] chars:[1, 10, "# Heading"]
+    SoftLineBreak[10, 11]
+    Text[12, 22] chars:[12, 22, "## Heading"]
+    SoftLineBreak[22, 23]
+    Text[24, 35] chars:[24, 35, "### H"..."ading"]
+    SoftLineBreak[35, 36]
+    Text[37, 49] chars:[37, 49, "#### "..."ading"]
+    SoftLineBreak[49, 50]
+    Text[51, 64] chars:[51, 64, "#####"..."ading"]
+    SoftLineBreak[64, 65]
+    Text[66, 80] chars:[66, 80, "#####"..."ading"]
 ````````````````````````````````
 
 

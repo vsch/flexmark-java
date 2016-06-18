@@ -1,6 +1,29 @@
 Version History
 ===============
 
+0.2.2
+-----
+
+- Change spec test `options()` to take a comma separated list of option set names and use the
+  combined option set of individual sets to run the test case. This is implemented in the
+  `RenderingTestCase` and does not require modification of the tests. 
+
+- Add `ignore` as one of the `options()` passed. If present the test case will be ignored by
+  throwing AssumptionViolatedException(). To allow future compatibility tests to remain in
+  the spec but be ignored not to pollute the test results. 
+
+- Add Heading allow no space after # for atx and do not allow non-indent spaces before
+  heading options: 
+    - `Parser.HEADERS_NO_ATX_SPACE`
+    - `Parser.HEADERS_NO_LEAD_SPACE`
+
+- Add Relaxed inline emphasis parsing option. No code behind the option yet. 
+    - `Parser.INLINE_RELAXED_EMPHASIS`
+
+- Add footnote link class options for footnote ref link and footnote back link: 
+    - `FootnoteExtension.FOOTNOTE_LINK_REF_CLASS`
+    - `FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS`
+
 0.2.1
 -----
 

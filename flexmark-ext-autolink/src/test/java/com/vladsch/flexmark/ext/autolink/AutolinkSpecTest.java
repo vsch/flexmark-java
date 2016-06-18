@@ -16,6 +16,11 @@ public class AutolinkSpecTest extends SpecTestCase {
         super(example);
     }
 
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
+
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(AutolinkFullSpecTest.SPEC_RESOURCE);

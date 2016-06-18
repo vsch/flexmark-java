@@ -35,6 +35,11 @@ public class SpecIntegrationTest extends SpecTestCase {
         super(example);
     }
 
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
+
     @Test
     @Override
     public void testHtmlRendering() {

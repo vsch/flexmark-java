@@ -112,7 +112,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
-            relaxedEmphasis = options.get(Parser.RELAXED_INLINE_EMPHASIS);
+            relaxedEmphasis = options.get(Parser.INLINE_RELAXED_EMPHASIS);
         }
     }
 

@@ -28,6 +28,8 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     final public static DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
     final public static DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
     final public static DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
+    final public static DataKey<String> FOOTNOTE_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_LINK_REF_CLASS", "footnote-ref");
+    final public static DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
 
     private FootnoteExtension() {
     }

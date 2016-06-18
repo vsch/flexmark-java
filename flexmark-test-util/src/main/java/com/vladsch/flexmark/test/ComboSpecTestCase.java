@@ -32,6 +32,10 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         this.example = example;
     }
 
+    protected SpecExample example() {
+        return example;
+    }
+
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples();

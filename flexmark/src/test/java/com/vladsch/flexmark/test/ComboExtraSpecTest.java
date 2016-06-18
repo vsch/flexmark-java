@@ -26,7 +26,13 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
                 .set(Parser.REFERENCES_KEEP, KeepType.LAST)
         );
         optionsMap.put("relaxed-emphasis", new MutableDataSet()
-                .set(Parser.RELAXED_INLINE_EMPHASIS, true)
+                .set(Parser.INLINE_RELAXED_EMPHASIS, true)
+        );
+        optionsMap.put("hdr-no-atx-space", new MutableDataSet()
+                .set(Parser.HEADERS_NO_ATX_SPACE, true)
+        );
+        optionsMap.put("hdr-no-lead-space", new MutableDataSet()
+                .set(Parser.HEADERS_NO_LEAD_SPACE, true)
         );
     }
 

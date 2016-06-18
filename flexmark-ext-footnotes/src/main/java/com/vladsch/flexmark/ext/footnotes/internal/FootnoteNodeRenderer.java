@@ -23,6 +23,8 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     final private String footnoteRefPrefix;
     final private String footnoteRefSuffix;
     final private String footnoteBackRefString;
+    final private String footnoteLinkRefClass;
+    final private String footnoteBackLinkRefClass;
 
     public FootnoteNodeRenderer(NodeRendererContext context) {
         this.context = context;
@@ -33,6 +35,8 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         this.footnoteRefPrefix = options.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
         this.footnoteRefSuffix = options.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
         this.footnoteBackRefString = options.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
+        this.footnoteLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS);
+        this.footnoteBackLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                             html.withAttr().tagIndent("li", () -> {
                                 context.renderChildren(footnoteBlock);
                                 html.attr("href", "#fnref-" + footnoteOrdinal);
-                                html.attr("class", "footnote-backref");
+                                if (!footnoteBackLinkRefClass.isEmpty()) html.attr("class", footnoteBackLinkRefClass);
                                 html.withAttr().tag("a");
                                 html.raw(footnoteBackRefString);
                                 html.tag("/a");
@@ -98,7 +102,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             html.attr("id", "fnref-" + footnoteOrdinal);
             html.withAttr().tag("sup", () -> {
-                html.attr("class", "footnote-ref");
+                if (!footnoteLinkRefClass.isEmpty()) html.attr("class", footnoteLinkRefClass);
                 html.attr("href", "#fn-" + footnoteOrdinal);
                 html.withAttr().tag("a");
                 html.raw(footnoteRefPrefix + String.valueOf(footnoteOrdinal) + footnoteRefSuffix);

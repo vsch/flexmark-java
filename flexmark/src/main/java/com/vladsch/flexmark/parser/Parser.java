@@ -35,7 +35,9 @@ public class Parser {
     final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
     final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    final public static DataKey<Boolean> RELAXED_INLINE_EMPHASIS = new DataKey<>("RELAXED_INLINE_EMPHASIS", false);
+    final public static DataKey<Boolean> INLINE_RELAXED_EMPHASIS = new DataKey<>("INLINE_RELAXED_EMPHASIS", false);
+    final public static DataKey<Boolean> HEADERS_NO_ATX_SPACE = new DataKey<>("HEADERS_NO_ATX_SPACE", false);
+    final public static DataKey<Boolean> HEADERS_NO_LEAD_SPACE = new DataKey<>("HEADERS_NO_LEAD_SPACE", false);
     final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     private final List<BlockParserFactory> blockParserFactories;

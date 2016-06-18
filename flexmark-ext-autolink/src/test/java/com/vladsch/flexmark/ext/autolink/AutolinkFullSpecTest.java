@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.autolink;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.FullSpecTestCase;
 
 import java.util.Collections;
@@ -13,6 +14,11 @@ public class AutolinkFullSpecTest extends FullSpecTestCase {
     private static final Set<Extension> EXTENSIONS = Collections.singleton(AutolinkExtension.create());
     static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
     static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
+
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
 
     @Override
     protected String getSpecResourceName() {

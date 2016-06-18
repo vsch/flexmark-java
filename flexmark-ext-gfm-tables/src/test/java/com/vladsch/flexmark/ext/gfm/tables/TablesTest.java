@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
 import org.junit.Test;
 
@@ -20,6 +21,11 @@ public class TablesTest extends RenderingTestCase {
     private static final Set<Extension> EXTENSIONS = Collections.singleton(TablesExtension.create());
     static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
 
     @Test
     public void mustHaveHeaderAndSeparator() {

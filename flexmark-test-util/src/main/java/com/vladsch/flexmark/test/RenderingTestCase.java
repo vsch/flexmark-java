@@ -2,15 +2,19 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import org.junit.AssumptionViolatedException;
 
 import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase {
     protected abstract Parser parser();
     protected abstract HtmlRenderer renderer();
+    protected abstract SpecExample example();
 
     /**
      * Customize options for an example
@@ -21,6 +25,43 @@ public abstract class RenderingTestCase {
     protected DataHolder options(String optionSet) {
         assert optionSet == null;
         return null;
+    }
+
+    /**
+     * process comma separated list of option sets and combine them for final set to use
+     *
+     * @param optionSets comma separate list of option set names
+     * @return combined set from applying these options together
+     */
+    protected DataHolder getOptions(SpecExample example, String optionSets) {
+        if (optionSets == null) return null;
+        String[] optionNames = optionSets.split(",");
+        DataHolder options = null;
+        boolean isFirst = true;
+        for (String optionName : optionNames) {
+            String optionSet = optionName.trim();
+            if (optionSet.isEmpty()) continue;
+            if (optionSet.equals("ignore")) {
+                if (example == null)
+                    throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using ignore option");
+                else
+                    throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using ignore option");
+            }
+
+            if (options == null) {
+                options = options(optionSet);
+            } else {
+                DataHolder dataSet = options(optionSet);
+                if (dataSet != null) {
+                    if (isFirst) {
+                        options = new MutableDataSet(options);
+                        isFirst = false;
+                    }
+                    ((MutableDataSet) options).setAll(dataSet);
+                }
+            }
+        }
+        return options;
     }
 
     protected String ast(Node node) {
@@ -34,7 +75,7 @@ public abstract class RenderingTestCase {
     }
 
     protected void assertRendering(String source, String expectedHtml, String optionsSet) {
-        DataHolder options = optionsSet == null ? null : options(optionsSet);
+        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         Node node = parser().withOptions(options).parse(source);
         String html = renderer().withOptions(options).render(node);
 
@@ -49,7 +90,7 @@ public abstract class RenderingTestCase {
     //}
 
     protected void assertRenderingAst(String source, String expectedHtml, String expectedAst, String optionsSet) {
-        DataHolder options = optionsSet == null ? null : options(optionsSet);
+        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
         Node node = parser().withOptions(options).parse(source);
         String html = renderer().withOptions(options).render(node);
@@ -66,7 +107,7 @@ public abstract class RenderingTestCase {
     //}
 
     protected void assertAst(String source, String expectedAst, String optionsSet) {
-        DataHolder options = optionsSet == null ? null : options(optionsSet);
+        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         Node node = parser().withOptions(options).parse(source);
         String ast = ast(node);
 

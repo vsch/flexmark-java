@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
 
@@ -27,10 +28,18 @@ class DumpSpecReader extends SpecReader {
 
     @Override
     protected void addSpecExample(SpecExample example) {
-        DataHolder options = testCase.options(example.getOptionsSet());
+        DataHolder options;
+        boolean ignoredCase = false;
+        try {
+            options = testCase.getOptions(example, example.getOptionsSet());
+        } catch (AssumptionViolatedException ignored) {
+            ignoredCase = true;
+            options = null;
+        }
+
         Node node = testCase.parser().withOptions(options).parse(example.getSource());
-        String html = testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
-        String ast = example.getAst() == null ? null : testCase.ast(node);
+        String html = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
+        String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
 
         // include source so that diff can be used to update spec
         addSpecExample(sb, example.getSource(), html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());

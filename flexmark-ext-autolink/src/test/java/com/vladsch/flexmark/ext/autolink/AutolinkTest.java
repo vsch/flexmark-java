@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.autolink;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
 import org.junit.Test;
 
@@ -14,6 +15,11 @@ public class AutolinkTest extends RenderingTestCase {
     private static final Set<Extension> EXTENSIONS = Collections.singleton(AutolinkExtension.create());
     private static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
+
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
 
     @Test
     public void oneTextNode() {

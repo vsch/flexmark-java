@@ -10,6 +10,7 @@ import com.vladsch.flexmark.internal.util.SubSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.spec.SpecExample;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -20,6 +21,11 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
     private static final Parser PARSER = Parser.builder().customDelimiterProcessor(new AsymmetricDelimiterProcessor()).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
+
+    @Override
+    protected SpecExample example() {
+        return null;
+    }
 
     @Test
     public void asymmetricDelimiter() {

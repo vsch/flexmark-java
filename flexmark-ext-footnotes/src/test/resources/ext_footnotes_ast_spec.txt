@@ -531,3 +531,64 @@ Document[0, 385]
 
 
 
+Customized link ref class
+
+```````````````````````````````` example(Footnotes: 8) options(link-class-none, back-link-class-text)
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.</p>
+      <a href="#fnref-1" class="text">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 78]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This "..."tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 78]
+      Text[44, 77] chars:[44, 77, "This "..."note."]
+````````````````````````````````
+
+
+
+Customized link ref class
+
+```````````````````````````````` example(Footnotes: 9) options(link-class-text, back-link-class-none)
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="text" href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.</p>
+      <a href="#fnref-1">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 78]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This "..."tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 78]
+      Text[44, 77] chars:[44, 77, "This "..."note."]
+````````````````````````````````
+
+

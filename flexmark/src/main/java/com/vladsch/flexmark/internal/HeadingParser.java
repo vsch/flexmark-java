@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Matcher;
@@ -12,6 +13,7 @@ import java.util.regex.Pattern;
 public class HeadingParser extends AbstractBlockParser {
 
     private static Pattern ATX_HEADING = Pattern.compile("^#{1,6}(?: +|$)");
+    private static Pattern RELAXED_ATX_HEADING = Pattern.compile("^#{1,6}(?: *|$)");
     private static Pattern ATX_TRAILING = Pattern.compile("(^| ) *#+ *$");
     private static Pattern SETEXT_HEADING = Pattern.compile("^(?:=+|-+) *$");
 
@@ -45,7 +47,7 @@ public class HeadingParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4) {
+            if (state.getIndent() >= 4 || state.getProperties().get(Parser.HEADERS_NO_LEAD_SPACE) && state.getIndent() >= 1) {
                 return BlockStart.none();
             }
             BasedSequence line = state.getLine();
@@ -53,7 +55,8 @@ public class HeadingParser extends AbstractBlockParser {
             BasedSequence paragraph = matchedBlockParser.getParagraphContent();
             Matcher matcher;
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
-            if ((matcher = ATX_HEADING.matcher(trySequence)).find()) {
+            matcher = (state.getProperties().get(Parser.HEADERS_NO_ATX_SPACE) ? RELAXED_ATX_HEADING : ATX_HEADING).matcher(trySequence);
+            if (matcher.find()) {
                 // ATX heading
                 int newOffset = nextNonSpace + matcher.group(0).length();
                 int openingStart = matcher.start();
