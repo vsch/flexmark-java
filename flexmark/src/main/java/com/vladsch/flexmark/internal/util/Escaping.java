@@ -165,8 +165,11 @@ public class Escaping {
      * Replace entities and backslash escapes with literal characters.
      */
     public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
-        if (BACKSLASH_OR_AMP.matcher(s).find()) {
-            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
+        int indexOfAny = s.indexOfAny('\\', '&');
+        if (indexOfAny != -1) {
+            // all before are not part of it so we can skip it 
+            textMapper.addOriginalText(s.subSequence(0, indexOfAny));
+            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s.subSequence(indexOfAny), UNESCAPE_REPLACER, textMapper);
         } else {
             return s;
         }

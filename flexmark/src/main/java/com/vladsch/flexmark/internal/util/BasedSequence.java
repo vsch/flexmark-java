@@ -66,6 +66,8 @@ public interface BasedSequence extends CharSequence {
     int indexOf(String s);
     int lastIndexOf(String s);
     int indexOf(char c, int index);
+    int indexOfAny(char c1, char c2);
+    int indexOfAny(char c1, char c2, int index);
     int lastIndexOf(char c, int index);
     int indexOf(String s, int index);
     int lastIndexOf(String s, int index);

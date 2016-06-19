@@ -383,6 +383,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public int indexOfAny(char c1, char c2) {
+        return indexOfAny(c1, c2, 0);
+    }
+
+    @Override
+    public int indexOfAny(char c1, char c2, int index) {
+        int iMax = length();
+        for (int i = index; i < iMax; i++) {
+            char c = charAt(i);
+            if (c == c1 || c == c2) return i;
+        }
+        return -1;
+    }
+
+    @Override
     public int lastIndexOf(char c, int index) {
         for (int i = index; i-- > 0; i++) {
             if (charAt(i) == c) return i;

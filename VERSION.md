@@ -1,6 +1,14 @@
 Version History
 ===============
 
+0.2.4
+-----
+
+- Fix Optimized `Escaping.unescape()` to pre-search for `\` or `&` not using regex but
+  dedicated character search and if found start processing from that position, to save time.
+  Approximate gain of 22% reduction in processing time for a large file (500k) of mostly
+  text.
+
 0.2.3
 -----
 
