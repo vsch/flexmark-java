@@ -87,6 +87,7 @@ public class ListBlockParser extends AbstractBlockParser {
         ListBlock listBlock = createListBlock(matcher);
 
         int markerLength = matcher.end() - matcher.start();
+        boolean isNumberedList = !"+-*".contains(matcher.group());
         int indexAfterMarker = markerIndex + markerLength;
         // marker doesn't include tabs, so counting them as columns directly is ok
         int columnAfterMarker = markerColumn + markerLength;
@@ -112,7 +113,7 @@ public class ListBlockParser extends AbstractBlockParser {
             contentColumn = columnAfterMarker + 1;
         }
 
-        return new ListData(listBlock, contentColumn, rest.subSequence(matcher.start(), matcher.end()));
+        return new ListData(listBlock, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -164,7 +165,7 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             int newColumn = listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(newColumn - state.getColumn(), listData.listMarker);
+            ListItemParser listItemParser = new ListItemParser(newColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
 
             // prepend the list block if needed
             if (!(matched instanceof ListBlockParser) ||
@@ -184,11 +185,13 @@ public class ListBlockParser extends AbstractBlockParser {
         final ListBlock listBlock;
         final int contentColumn;
         final BasedSequence listMarker;
+        final boolean isNumberedList;
 
-        ListData(ListBlock listBlock, int contentColumn, BasedSequence listMarker) {
+        ListData(ListBlock listBlock, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
             this.listBlock = listBlock;
             this.contentColumn = contentColumn;
             this.listMarker = listMarker;
+            this.isNumberedList = isNumberedList;
         }
     }
 }

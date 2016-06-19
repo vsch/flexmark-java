@@ -31,4 +31,10 @@ public abstract class ListBlock extends Block {
     public void setTight(boolean tight) {
         this.tight = tight;
     }
+
+    @Override
+    public void getAstExtra(StringBuilder out) {
+        super.getAstExtra(out);
+        out.append(" isTight=").append(tight);
+    }
 }

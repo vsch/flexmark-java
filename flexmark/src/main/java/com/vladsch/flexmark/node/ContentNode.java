@@ -84,4 +84,9 @@ public abstract class ContentNode extends Node implements Content {
     public BasedSequence getContentChars(int startLine, int endLine) {
         return SegmentedSequence.of(getContentLines(startLine, endLine), getChars());
     }
+
+    public void setContentLines(List<BasedSequence> contentLines) {
+        this.lineSegments = contentLines;
+    }
+
 }

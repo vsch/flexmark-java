@@ -36,7 +36,7 @@ public class DataSet implements DataHolder {
         if (dataSet.containsKey(key)) {
             return key.getValue(dataSet.get(key));
         } else {
-            return key.getDefaultValue();
+            return key.getDefaultValue(this);
         }
     }
 }

@@ -1,7 +1,6 @@
-package com.vladsch.flexmark.parser;
+package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.node.Paragraph;
-import com.vladsch.flexmark.parser.block.ParserState;
 
 public interface ParagraphPreProcessor {
     /**

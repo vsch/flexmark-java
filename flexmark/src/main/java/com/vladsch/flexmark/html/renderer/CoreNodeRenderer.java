@@ -55,7 +55,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
                 IndentedCodeBlock.class,
                 Link.class,
                 LinkRef.class,
-                ListItem.class,
+                BulletListItem.class,
+                OrderedListItem.class,
                 MailLink.class,
                 OrderedList.class,
                 Paragraph.class,
@@ -87,7 +88,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(Paragraph node) {
-        boolean inTightList = isInTightList(node);
+        boolean inTightList = node.isInTightList();
         if (!inTightList) {
             html.tagLine("p", () -> {
                 visitChildren(node);
@@ -164,13 +165,22 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(ListItem node) {
-        if (node.getFirstChild() == null || isTightList(node.getParent())) {
-            html.withCondIndent().tagLine("li", () -> {
+    public void visit(BulletListItem node) {
+        visit((ListItem) node);
+    }
+
+    @Override
+    public void visit(OrderedListItem node) {
+        visit((ListItem) node);
+    }
+
+    protected void visit(ListItem node) {
+        if (node.getFirstChild() == null || node.isInTightList()) {
+            html.withAttr().withCondIndent().tagLine("li", () -> {
                 visitChildren(node);
             });
         } else {
-            html.tagIndent("li", () -> {
+            html.withAttr().tagIndent("li", () -> {
                 visitChildren(node);
             });
         }
@@ -247,9 +257,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         String text = node.getText().toString();
         html.attr("href", context.encodeUrl(text))
                 .withAttr()
-                .tag("a", () -> {
-                    html.text(text);
-                });
+                .tag("a", () -> html.text(text));
     }
 
     @Override
@@ -356,23 +364,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     @Override
     protected void visitChildren(Node parent) {
         context.renderChildren(parent);
-    }
-
-    private boolean isInTightList(Paragraph node) {
-        Node parent = node.getParent();
-        if (parent != null) {
-            Node gramps = parent.getParent();
-            return isTightList(gramps);
-        }
-        return false;
-    }
-
-    private Boolean isTightList(Node node) {
-        if (node != null && node instanceof ListBlock) {
-            ListBlock list = (ListBlock) node;
-            return list.isTight();
-        }
-        return false;
     }
 
     private static class AltTextVisitor extends AbstractVisitor {

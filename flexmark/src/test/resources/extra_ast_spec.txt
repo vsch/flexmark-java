@@ -62,18 +62,18 @@ Make sure indentation is properly implemented
 .
 Document[0, 54]
   BlockQuote[0, 54] marker:[0, 1, ">"]
-    BulletList[2, 54]
-      ListItem[2, 11] open:[2, 3, "-"]
+    BulletList[2, 54] isTight=true
+      BulletListItem[2, 11] open:[2, 3, "-"]
         Paragraph[4, 11]
           Text[4, 10] chars:[4, 10, "item 1"]
-      ListItem[13, 54] open:[13, 14, "-"]
+      BulletListItem[13, 54] open:[13, 14, "-"]
         Paragraph[15, 22]
           Text[15, 21] chars:[15, 21, "item 2"]
-        OrderedList[28, 54]
-          ListItem[28, 38] open:[28, 30, "1."]
+        OrderedList[28, 54] isTight=true
+          OrderedListItem[28, 38] open:[28, 30, "1."]
             Paragraph[31, 38]
               Text[31, 37] chars:[31, 37, "item 1"]
-          ListItem[44, 54] open:[44, 46, "2."]
+          OrderedListItem[44, 54] open:[44, 46, "2."]
             Paragraph[47, 54]
               Text[47, 53] chars:[47, 53, "item 2"]
 ````````````````````````````````
@@ -111,18 +111,18 @@ Make sure indentation is properly implemented
 .
 Document[0, 60]
   BlockQuote[0, 60] marker:[0, 1, ">"]
-    BulletList[2, 60]
-      ListItem[2, 11] open:[2, 3, "-"]
+    BulletList[2, 60] isTight=false
+      BulletListItem[2, 11] open:[2, 3, "-"]
         Paragraph[4, 11]
           Text[4, 10] chars:[4, 10, "item 1"]
-      ListItem[15, 60] open:[15, 16, "-"]
+      BulletListItem[15, 60] open:[15, 16, "-"]
         Paragraph[17, 24]
           Text[17, 23] chars:[17, 23, "item 2"]
-        OrderedList[32, 60]
-          ListItem[32, 42] open:[32, 34, "1."]
+        OrderedList[32, 60] isTight=false
+          OrderedListItem[32, 42] open:[32, 34, "1."]
             Paragraph[35, 42]
               Text[35, 41] chars:[35, 41, "item 1"]
-          ListItem[50, 60] open:[50, 52, "2."]
+          OrderedListItem[50, 60] open:[50, 52, "2."]
             Paragraph[53, 60]
               Text[53, 59] chars:[53, 59, "item 2"]
 ````````````````````````````````

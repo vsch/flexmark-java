@@ -25,7 +25,8 @@ public interface Visitor {
     void visit(IndentedCodeBlock node);
     void visit(Link node);
     void visit(LinkRef node);
-    void visit(ListItem node);
+    void visit(BulletListItem node);
+    void visit(OrderedListItem node);
     void visit(MailLink node);
     void visit(OrderedList node);
     void visit(Paragraph node);

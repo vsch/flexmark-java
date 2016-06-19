@@ -26,7 +26,7 @@ public class DataKey<T> {
         return factory;
     }
 
-    public T getDefaultValue() {
+    public T getDefaultValue(DataHolder holder) {
         return defaultValue;
     }
 

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ext.tables.*;
-import com.vladsch.flexmark.internal.DocumentParser;
+import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.NodeIterator;
@@ -9,8 +9,8 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.ParagraphPreProcessor;
-import com.vladsch.flexmark.parser.ParagraphPreProcessorFactory;
+import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
+import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
@@ -58,13 +58,18 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     public static ParagraphPreProcessorFactory Factory() {
         return new ParagraphPreProcessorFactory() {
             @Override
-            public boolean getAffectsDocumentProperties() {
+            public boolean affectsGlobalScope() {
                 return false;
             }
 
             @Override
-            public Set<Class<? extends ParagraphPreProcessorFactory>> getRunAfter() {
-                return Collections.singleton(DocumentParser.ReferencePreProcessorFactory.class);
+            public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
+                return Collections.singleton(ReferencePreProcessorFactory.class);
+            }
+
+            @Override
+            public Set<Class<? extends ParagraphPreProcessorFactory>> getBeforeDependents() {
+                return null;
             }
 
             @Override

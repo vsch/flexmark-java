@@ -19,7 +19,8 @@
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-tables" />
-    <orderEntry type="module" module-name="flexmark-ext-wikilink" />
+    <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
   </component>
 </module>

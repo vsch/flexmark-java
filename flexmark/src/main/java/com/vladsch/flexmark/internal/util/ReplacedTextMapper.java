@@ -3,11 +3,13 @@ package com.vladsch.flexmark.internal.util;
 import java.util.ArrayList;
 
 public class ReplacedTextMapper {
+    final private BasedSequence original;
     private ArrayList<ReplacedTextRegion> regions = new ArrayList<>();
     private ArrayList<BasedSequence> replacedSegments = new ArrayList<>();
     private int replacedLength = 0;
 
-    public ReplacedTextMapper() {
+    public ReplacedTextMapper(BasedSequence original) {
+        this.original = original;
     }
 
     public void addReplacedText(BasedSequence originalSegment, BasedSequence replacedSequence) {
@@ -41,6 +43,8 @@ public class ReplacedTextMapper {
     }
 
     public int originalOffset(int replacedIndex) {
+        if (regions.isEmpty()) return replacedIndex; 
+        
         int originalIndex = replacedIndex;
 
         for (ReplacedTextRegion region : regions) {
@@ -50,11 +54,12 @@ public class ReplacedTextMapper {
                     originalIndex = region.getOriginal().getEndOffset();
                 }
 
+                originalIndex -= original.getStartOffset();
                 break;
             }
 
             if (region == regions.get(regions.size() - 1) && region.getReplaced().getEndOffset() == replacedIndex) {
-                originalIndex = region.getOriginal().getEndOffset();
+                originalIndex = region.getOriginal().getEndOffset() - original.getStartOffset();
                 break;
             }
         }

@@ -122,7 +122,12 @@ class AstVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(ListItem node) {
+    public void visit(BulletListItem node) {
+        visitNode(node);
+    }
+
+    @Override
+    public void visit(OrderedListItem node) {
         visitNode(node);
     }
 

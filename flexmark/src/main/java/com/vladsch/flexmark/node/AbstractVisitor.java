@@ -42,8 +42,13 @@ public class AbstractVisitor implements Visitor {
     @Override public void visit(ImageRef node) { visitChildren(node); } 
     @Override public void visit(IndentedCodeBlock node) { visitChildren(node); } 
     @Override public void visit(Link node) { visitChildren(node); } 
-    @Override public void visit(LinkRef node) { visitChildren(node); } 
-    @Override public void visit(ListItem node) { visitChildren(node); } 
+    @Override public void visit(LinkRef node) { visitChildren(node); }
+
+    @Override
+    public void visit(BulletListItem node) { visitChildren(node); }
+
+    @Override
+    public void visit(OrderedListItem node) { visitChildren(node); } 
     @Override public void visit(MailLink node) { visitChildren(node); } 
     @Override public void visit(OrderedList node) { visitChildren(node); } 
     @Override public void visit(Paragraph node) { visitChildren(node); } 

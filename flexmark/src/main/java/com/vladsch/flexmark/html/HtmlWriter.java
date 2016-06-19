@@ -114,6 +114,8 @@ public class HtmlWriter {
 
         if (attr != null && !attr.isEmpty()) {
             for (Map.Entry<String, String> entry : attr.entrySet()) {
+                if (entry.getKey().equals("class") && entry.getValue().isEmpty()) continue; 
+                
                 append(" ");
                 append(Escaping.escapeHtml(entry.getKey(), true));
                 append("=\"");

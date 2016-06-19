@@ -1,27 +1,27 @@
 flexmark-java
 =============
 
-A rework of [commonmark-java] to generate AST which allows recreating the original source, full
-source position references for all elements in the source and easier JetBrains Open API PsiTree
-generation.
+A rework of [commonmark-java] to generate AST which allows recreating the original source,
+full source position references for all elements in the source and easier JetBrains Open API
+PsiTree generation.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
 [pegdown] has a great feature set but its speed in general is not great and for pathological
 input either hangs or practically hangs during parsing.
 
-[commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
-The goal was to ensure that adding source position tracking in the AST would not change the ease
-of parsing and generating the AST more than absolutely necessary.
+[commonmark-java] has an excellent parsing architecture that is easy to understand and
+extend. The goal was to ensure that adding source position tracking in the AST would not
+change the ease of parsing and generating the AST more than absolutely necessary.
 
 Reasons for choosing [commonmark-java] as the parser are detailed in
-[Pegdown - Achilles heel of the Markdown Navigator plugin]. Now that I have reworked the core
-and added a few extensions I am extremely satisfied with my choice.
+[Pegdown - Achilles heel of the Markdown Navigator plugin]. Now that I have reworked the
+core and added a few extensions I am extremely satisfied with my choice.
 
-Another goal was to improve the ability of extensions to modify the behaviour of the parser so
-that any dialect of markdown could be implemented through the extension mechanism. This included
-adding an easily extensible options mechanism that would allow setting of all options in one
-place and having the parser, renderer and extensions use these options to modify behavior,
-including disabling some core block parsers.
+Another goal was to improve the ability of extensions to modify the behaviour of the parser
+so that any dialect of markdown could be implemented through the extension mechanism. This
+included adding an easily extensible options mechanism that would allow setting of all
+options in one place and having the parser, renderer and extensions use these options to
+modify behavior, including disabling some core block parsers.
 
 This is a work in progress with many API changes.
 
@@ -32,52 +32,61 @@ Progress
 
 - Wiki added [flexmark-java wiki]
 
-- Add dependencies between paragraph pre processors so that their order is defined by the
-  extension. That way a paragraph pre-processor can be sure that a pre-processor on whose output
-  it depends on has been run before it is invoked.
+- Add generic `Dependent` and `DependencyResolver` to handle dependent processors, with
+  before and after dependencies and global scope option.
 
-- Unified options architecture to configure: parser, renderer and any custom extensions. This
-  includes the list of extensions to use. Making a single argument configure the environment.
-  These are also available during parsing and rendering phases for use by extensions.
+- Add `BlockPreProcessor` interface for efficient node replacement before inline processing
+  is done. Could be handled with `PostProcessor` but would require each one traverse the
+  full AST. This way they are run only on the required nodes.
+
+- Add dependencies between paragraph pre processors so that their order is defined by the
+  extension. That way a paragraph pre-processor can be sure that a pre-processor on whose
+  output it depends on has been run before it is invoked.
+
+- Unified options architecture to configure: parser, renderer and any custom extensions.
+  This includes the list of extensions to use. Making a single argument configure the
+  environment. These are also available during parsing and rendering phases for use by
+  extensions.
 
 - Test architecture based on original `spec.txt` augmented with:
 
     - expected AST so it is validated by tests
 
-    - options can be specified for individual tests so that one file can validate all options
-      available for the extension/core feature.  
+    - options can be specified for individual tests so that one file can validate all
+      options available for the extension/core feature.  
 
-    - full spec file generated with expected HTML and AST replaced with generated counterparts
-      to make updating expected test results easier for new or modified tests.
+    - full spec file generated with expected HTML and AST replaced with generated
+      counterparts to make updating expected test results easier for new or modified tests.
 
-    - section and example number added to each example opening line for cross referencing test
-      results to test source.
+    - section and example number added to each example opening line for cross referencing
+      test results to test source.
 
-- Rework `HtmlRenderer` to allow inserting rendered HTML into different parts of the generated
-  HTML document. Now can generate HTML for top/bottom of document.
+- Rework `HtmlRenderer` to allow inserting rendered HTML into different parts of the
+  generated HTML document. Now can generate HTML for top/bottom of document.
 
 - Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
   implement attribute map and boiler plate render children method in custom node renderers.
 
-- Add `ParagraphPreProcessor` interface to allow customizing of block processing of paragraph
-  blocks on closing. Effectively, the mechanism of removing reference definitions from the start
-  of the paragraph was generalized to be usable by any block and extensible.
+- Add `ParagraphPreProcessor` interface to allow customizing of block processing of
+  paragraph blocks on closing. Effectively, the mechanism of removing reference definitions
+  from the start of the paragraph was generalized to be usable by any block and extensible.
 
-- Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
-  such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done with
-  a post processor extension.
+- Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom
+  nodes, such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not
+  be done with a post processor extension.
 
 - Parser options to be implemented:
     - GitHub Extensions
         - [x] Fenced code blocks
         - [ ] Anchor links for headers with auto id generation
-        - [x] Table Spans option to be implemented for gfm-tables extension
+        - [x] Table Spans option to be implemented for tables extension
         - [x] Wiki Links with GitHub and Creole syntax
         - [x] Emoji Shortcuts with use GitHub emoji URL option
     - GitHub Syntax
         - [x] Strikethrough
-        - [ ] Task Lists
-        - [ ] No Atx Header Space
+        - [x] Task Lists
+        - [x] No Atx Header Space
+        - [x] No Header indents
         - [x] Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
         - [ ] Relaxed HR Rules
         - [x] Wiki links
@@ -96,6 +105,13 @@ Progress
         - [ ] Jekyll front matter
         - [ ] GitBook link URL encoding
         - [ ] HTML comment nodes
+    - Commonmark Syntax suppression
+        - [ ] Manual loose lists
+        - [ ] Numbered lists always start with 1.
+        - [ ] Fixed list item indent, items must be indented by at least 4 spaces
+        - [ ] Relaxed list item start, allow lists to start when not preceded by a blank
+              line.
+        - [ ] Multi-line Image URLs
 
 - AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
     - `Reference`
@@ -108,8 +124,8 @@ Progress
     - `StrongEmphasis`
     - `HtmlEntity`
 
-- `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
-  AST so that the generated AST can be validated.
+- `spec.txt` now `ast_spec_txt` with an added section to each example that contains the
+  expected AST so that the generated AST can be validated.
 
         ```````````````````````````````` example Links: 35
         [foo *bar](baz*)
@@ -124,57 +140,65 @@ Progress
     
 Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
-I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
-had to do major surgery on its innards to get full source position tracking and AST that matches
-source elements, it is a pleasure to work with and is now a pleasure to extend a parser based ot
-its original design.
+I am very pleased with the decision to switch to [commonmark-java] based parser. Even though
+I had to do major surgery on its innards to get full source position tracking and AST that
+matches source elements, it is a pleasure to work with and is now a pleasure to extend a
+parser based ot its original design.
 
 Benchmarks
 ----------
 
-Here are some basic benchmarking results:
+I realized that previous results had the code running commonmark-java and flexmark-java
+parsing and rendering, while intellij-markdown and pegdown were only running parsing. Also,
+commonmark-java was only running with ext-gfm-tables but to make it more fair to pegdown I
+added ext-gfm-strikethrough and disabled auto-link extension for all parsers that have the
+option since it causes significant parser slow-down for all parsers:
 
-| File             | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
-|:-----------------|----------------:|--------------:|------------------:|-----------:|
-| README-SLOW      |         0.709ms |       1.184ms |           1.708ms |   17.096ms |
-| VERSION          |         1.248ms |       1.801ms |           3.610ms |   46.655ms |
-| commonMarkSpec   |        41.686ms |      77.253ms |         617.420ms |  617.716ms |
-| markdown_example |        19.559ms |      27.133ms |         211.419ms | 1097.560ms |
-| spec             |         8.681ms |      12.373ms |          33.972ms |  318.471ms |
-| table            |         0.152ms |       0.542ms |           0.660ms |    4.032ms |
-| table-format     |         1.350ms |       2.795ms |           3.949ms |   25.941ms |
-| wrap             |         4.610ms |       9.484ms |          14.809ms |   94.446ms |
+I also added a flexmark-java configured with all extensions, except for auto-links, for an
+idea of how extra extensions affect performance.
+
+| File             | commonmark-java | flexmark-java | flexmark-java-all | intellij-markdown |   pegdown |
+|:-----------------|----------------:|--------------:|------------------:|------------------:|----------:|
+| README-SLOW      |         0.464ms |       0.767ms |           0.795ms |           1.616ms |  14.467ms |
+| VERSION          |         0.785ms |       1.013ms |           1.157ms |           3.537ms |  41.189ms |
+| commonMarkSpec   |        31.755ms |      50.024ms |          52.125ms |         584.271ms | 559.061ms |
+| markdown_example |         8.927ms |       9.509ms |          10.026ms |         206.310ms | 928.091ms |
+| spec             |         4.911ms |       6.149ms |           6.631ms |          33.870ms | 286.549ms |
+| table            |         0.228ms |       0.564ms |           0.595ms |           0.653ms |   3.269ms |
+| table-format     |         1.245ms |       1.934ms |           2.673ms |           3.602ms |  22.231ms |
+| wrap             |         3.298ms |       6.951ms |           7.403ms |          14.687ms |  80.052ms |
 
 Ratios of above:
 
-| File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
-|:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.67 |              2.41 |     24.11 |
-| VERSION          |            1.00 |          1.44 |              2.89 |     37.39 |
-| commonMarkSpec   |            1.00 |          1.85 |             14.81 |     14.82 |
-| markdown_example |            1.00 |          1.39 |             10.81 |     56.11 |
-| spec             |            1.00 |          1.43 |              3.91 |     36.68 |
-| table            |            1.00 |          3.57 |              4.35 |     26.60 |
-| table-format     |            1.00 |          2.07 |              2.93 |     19.22 |
-| wrap             |            1.00 |          2.06 |              3.21 |     20.49 |
-| -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.70 |             11.38 |     28.49 |
+| File             | commonmark-java | flexmark-java | flexmark-java-all | intellij-markdown |   pegdown |
+|:-----------------|----------------:|--------------:|------------------:|------------------:|----------:|
+| README-SLOW      |            1.00 |          1.65 |              1.71 |              3.48 |     31.20 |
+| VERSION          |            1.00 |          1.29 |              1.47 |              4.50 |     52.46 |
+| commonMarkSpec   |            1.00 |          1.58 |              1.64 |             18.40 |     17.61 |
+| markdown_example |            1.00 |          1.07 |              1.12 |             23.11 |    103.96 |
+| spec             |            1.00 |          1.25 |              1.35 |              6.90 |     58.35 |
+| table            |            1.00 |          2.47 |              2.61 |              2.86 |     14.35 |
+| table-format     |            1.00 |          1.55 |              2.15 |              2.89 |     17.86 |
+| wrap             |            1.00 |          2.11 |              2.24 |              4.45 |     24.27 |
+| -----------      |       --------- |     --------- |         --------- |         --------- | --------- |
+| overall          |            1.00 |          1.49 |              1.58 |             16.44 |     37.49 |
 
-| File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
-|:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.60 |          1.00 |              1.44 |     14.43 |
-| VERSION          |            0.69 |          1.00 |              2.00 |     25.91 |
-| commonMarkSpec   |            0.54 |          1.00 |              7.99 |      8.00 |
-| markdown_example |            0.72 |          1.00 |              7.79 |     40.45 |
-| spec             |            0.70 |          1.00 |              2.75 |     25.74 |
-| table            |            0.28 |          1.00 |              1.22 |      7.44 |
-| table-format     |            0.48 |          1.00 |              1.41 |      9.28 |
-| wrap             |            0.49 |          1.00 |              1.56 |      9.96 |
-| -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.59 |          1.00 |              6.70 |     16.76 |
+| File             | commonmark-java | flexmark-java | flexmark-java-all | intellij-markdown |   pegdown |
+|:-----------------|----------------:|--------------:|------------------:|------------------:|----------:|
+| README-SLOW      |            0.60 |          1.00 |              1.04 |              2.11 |     18.86 |
+| VERSION          |            0.77 |          1.00 |              1.14 |              3.49 |     40.65 |
+| commonMarkSpec   |            0.63 |          1.00 |              1.04 |             11.68 |     11.18 |
+| markdown_example |            0.94 |          1.00 |              1.05 |             21.70 |     97.61 |
+| spec             |            0.80 |          1.00 |              1.08 |              5.51 |     46.60 |
+| table            |            0.40 |          1.00 |              1.06 |              1.16 |      5.80 |
+| table-format     |            0.64 |          1.00 |              1.38 |              1.86 |     11.49 |
+| wrap             |            0.47 |          1.00 |              1.06 |              2.11 |     11.52 |
+| -----------      |       --------- |     --------- |         --------- |         --------- | --------- |
+| overall          |            0.67 |          1.00 |              1.06 |             11.03 |     25.16 |
 
-Because these two files represent the pathological input for pegdown, I no longer run them as
-part of the benchmark to prevent skewing of the results. The results are here for posterity.
+Because these two files represent the pathological input for pegdown, I no longer run them
+as part of the benchmark to prevent skewing of the results. The results are here for
+posterity.
 
 | File          | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:--------------|----------------:|--------------:|------------------:|-----------:|
@@ -196,17 +220,17 @@ part of the benchmark to prevent skewing of the results. The results are here fo
 | overall       |            0.52 |          1.00 |              1.86 |   6324.95 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
-* [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance
-  evaluation.
+* [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for
+  performance evaluation.
 * [spec.txt] commonmark spec markdown file in the [commonmark-java] project
 * [hang-pegdown.md] is a file containing a single line of 17 characters `[[[[[[[[[[[[[[[[[`
   which causes pegdown to go into a hyper-exponential parse time.
-* [hang-pegdown2.md] a file containing a single line of 18 characters `[[[[[[[[[[[[[[[[[[` which
-  causes pegdown to go into a hyper-exponential parse time.
-* [wrap.md] is a file I was using to test wrap on typing performance only to discover that it
-  has nothing to do with the wrap on typing code when 0.1 seconds is taken by pegdown to parse
-  the file. In the plugin the parsing may happen more than once: syntax highlighter pass, psi
-  tree building pass, external annotator.
+* [hang-pegdown2.md] a file containing a single line of 18 characters `[[[[[[[[[[[[[[[[[[`
+  which causes pegdown to go into a hyper-exponential parse time.
+* [wrap.md] is a file I was using to test wrap on typing performance only to discover that
+  it has nothing to do with the wrap on typing code when 0.1 seconds is taken by pegdown to
+  parse the file. In the plugin the parsing may happen more than once: syntax highlighter
+  pass, psi tree building pass, external annotator.
 * markdown_example.md a file with 10,000+ lines containing 500kB+ of text.
 
 Contributing

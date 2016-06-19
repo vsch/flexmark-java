@@ -5,6 +5,7 @@ import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.*;
+import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.*;
@@ -12,7 +13,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, ParagraphPreProcessorFactory {
+public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     protected static final String ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
     protected static final String REG_CHAR = "[^\\\\()\\x00-\\x20]";
@@ -291,24 +292,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor, Pa
         processDelimiters(null);
     }
 
-    @Override
-    public boolean getAffectsDocumentProperties() {
-        return true;
-    }
-
-    @Override
-    public Set<Class<? extends ParagraphPreProcessorFactory>> getRunAfter() {
-        return null;
-    }
-
-    @Override
-    public ParagraphPreProcessor create(ParserState state) {
-        return this;
-    }
-
     /*
-         *  BlockPreProcessor implementation
-         */
+     *  ParagraphPreProcessor implementation
+     */
     @Override
     public int preProcessBlock(Paragraph block, ParserState state) {
         BasedSequence contentChars = block.getChars();

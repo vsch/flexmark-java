@@ -6,7 +6,7 @@ import com.vladsch.flexmark.internal.util.SubSequence;
 
 import java.util.List;
 
-public class ListItem extends Block {
+public abstract class ListItem extends Block {
     protected BasedSequence openingMarker = SubSequence.NULL;
 
     @Override
@@ -27,6 +27,14 @@ public class ListItem extends Block {
         this.openingMarker = openingMarker;
     }
 
+    public boolean isInTightList() {
+        return getParent() instanceof ListBlock && ((ListBlock) getParent()).isTight();
+    }
+
+    public boolean isParagraphInTightList() {
+        return getParent() instanceof ListBlock && ((ListBlock) getParent()).isTight();
+    }
+
     public ListItem() {
     }
 
@@ -40,10 +48,5 @@ public class ListItem extends Block {
 
     public ListItem(BlockContent blockContent) {
         super(blockContent);
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
     }
 }

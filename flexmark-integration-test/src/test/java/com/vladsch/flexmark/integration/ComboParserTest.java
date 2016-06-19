@@ -1,15 +1,22 @@
 package com.vladsch.flexmark.integration;
 
+import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
+import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.MutableDataSet;
+import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import org.junit.Test;
 import org.junit.runners.Parameterized;
 
 import java.util.*;
@@ -19,7 +26,16 @@ public class ComboParserTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), EmojiExtension.create(), FootnoteExtension.create()));
+            .set(Parser.EXTENSIONS, Arrays.asList(
+                    TablesExtension.create(),
+                    TaskListExtension.create(),
+                    FootnoteExtension.create(),
+                    WikiLinkExtension.create(),
+                    AutolinkExtension.create(),
+                    AbbreviationExtension.create(),
+                    EmojiExtension.create(),
+                    StrikethroughExtension.create()
+            ));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
@@ -91,4 +107,18 @@ public class ComboParserTest extends ComboSpecTestCase {
 
         assertRendering(source, html);
     }
+
+    @Test
+    public void testSpecTxt() throws Exception {
+        if (!example.isFullSpecExample()) return;
+
+        final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+        final Parser PARSER = Parser.builder(OPTIONS).build();
+
+        String source = readResource("/commonMarkSpec.md");
+        Node node = PARSER.parse(source);
+        //String html = readResource("/table.html");
+        //assertRendering(source, html);
+    }
+
 }

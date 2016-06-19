@@ -1,26 +1,48 @@
 Version History
 ===============
 
+0.2.3
+-----
+
+- Add `BlockPreProcessorFactory` and `BlockPreProcessor` interfaces for block node
+  substitution before inline processing.
+
+- Add generic `Dependent`, `DependencyResolver` and `ResolvedDependencies` to handle
+  resolving dependencies between processors. Need to add `PostProcessor` dependency
+  declaration so that interdependent extensions can automatically control execution order
+  where it matters.
+
+- Add [GFM Task List extension](../../wiki/Extensions#gfm-tasklist)
+
+- Change ext-autolink to use `ComboSpecTestCase`, was the last one left using two test
+  classes. This extension needs attention, it has serious impact on parsing performance due
+  to un-escaping text and mapping it back to source positions.
+
+- Add separate nodes for `BulletListItem` and `OrderedListItem`
+
+- Fix bug in `ReplacedTextMapper` forgetting to return original index as offset from the
+  start of the string. Would return offset into original source.
+
 0.2.2
 -----
 
-- Change spec test `options()` to take a comma separated list of option set names and use the
-  combined option set of individual sets to run the test case. This is implemented in the
-  `RenderingTestCase` and does not require modification of the tests. 
+- Change spec test `options()` to take a comma separated list of option set names and use
+  the combined option set of individual sets to run the test case. This is implemented in
+  the `RenderingTestCase` and does not require modification of the tests.
 
 - Add `ignore` as one of the `options()` passed. If present the test case will be ignored by
-  throwing AssumptionViolatedException(). To allow future compatibility tests to remain in
-  the spec but be ignored not to pollute the test results. 
+  throwing `AssumptionViolatedException()`. To allow future compatibility tests to remain in
+  the spec but be ignored not to pollute the test results.
 
 - Add Heading allow no space after # for atx and do not allow non-indent spaces before
-  heading options: 
+  heading options:
     - `Parser.HEADERS_NO_ATX_SPACE`
     - `Parser.HEADERS_NO_LEAD_SPACE`
 
-- Add Relaxed inline emphasis parsing option. No code behind the option yet. 
+- Add Relaxed inline emphasis parsing option. No code behind the option yet.
     - `Parser.INLINE_RELAXED_EMPHASIS`
 
-- Add footnote link class options for footnote ref link and footnote back link: 
+- Add footnote link class options for footnote ref link and footnote back link:
     - `FootnoteExtension.FOOTNOTE_LINK_REF_CLASS`
     - `FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS`
 

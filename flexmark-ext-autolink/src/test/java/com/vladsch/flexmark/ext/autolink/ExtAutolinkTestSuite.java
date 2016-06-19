@@ -4,9 +4,8 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    AutolinkTest.class,
-    AutolinkFullSpecTest.class,
-    AutolinkSpecTest.class
+        AutolinkTest.class,
+        ComboAutolinkSpecTest.class,
 })
 public class ExtAutolinkTestSuite {
 }

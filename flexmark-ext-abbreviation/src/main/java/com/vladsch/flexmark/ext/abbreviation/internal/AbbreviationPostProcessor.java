@@ -61,7 +61,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
     private void linkify(Text node) {
         BasedSequence original = node.getChars();
-        ReplacedTextMapper textMapper = new ReplacedTextMapper();
+        ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
 
         Matcher m = abbreviations.matcher(literal);

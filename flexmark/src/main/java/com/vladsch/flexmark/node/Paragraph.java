@@ -28,6 +28,13 @@ public class Paragraph extends Block {
         setLineIndents(lineIndents);
     }
 
+    public Paragraph(BasedSequence chars, List<BasedSequence> lineSegments, int[] lineIndents) {
+        super(chars, lineSegments);
+        if (lineSegments.size() != lineIndents.length)
+            throw new IllegalArgumentException("line segments and line indents have to be of the same size");
+        this.lineIndents = lineIndents;
+    }
+
     public Paragraph(BlockContent blockContent) {
         super(blockContent);
         setLineIndents(blockContent.getLineIndents());
@@ -45,6 +52,11 @@ public class Paragraph extends Block {
     @Deprecated
     public void setContent(BasedSequence chars, List<BasedSequence> lineSegments) {
         super.setContent(chars, lineSegments);
+    }
+
+    public boolean isInTightList() {
+        Node parent = getParent();
+        return parent != null && parent instanceof ListItem && ((ListItem) parent).isParagraphInTightList();
     }
 
     public void setContent(BasedSequence chars, List<BasedSequence> lineSegments, List<Integer> lineIndents) {
@@ -80,6 +92,10 @@ public class Paragraph extends Block {
         } else {
             this.lineIndents = EMPTY_INDENTS;
         }
+    }
+
+    public void setLineIndents(int[] lineIndents) {
+        this.lineIndents = lineIndents;
     }
 
     public int getLineIndent(int line) {
