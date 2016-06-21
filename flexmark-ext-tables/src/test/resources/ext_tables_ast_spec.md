@@ -8,8 +8,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Tables Extension
 
-Converts pipe separated tables to html tables with optional column spans
-and multiple header lines and table caption.
+Converts pipe separated tables to html tables with optional column spans and multiple header
+lines and table caption.
 
 ```````````````````````````````` example Tables Extension: 1
 Abc|Def
@@ -22,7 +22,6 @@ Document[0, 8]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 2
 Abc | Def
 .
@@ -32,7 +31,6 @@ Document[0, 10]
   Paragraph[0, 10]
     Text[0, 9] chars:[0, 9, "Abc | Def"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 3
@@ -50,7 +48,6 @@ Document[0, 12]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 4
 Abc|Def
 --|--
@@ -66,7 +63,6 @@ Document[0, 14]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 5
 Abc|Def
  |---|---
@@ -80,7 +76,6 @@ Document[0, 18]
     SoftLineBreak[7, 8]
     Text[9, 17] chars:[9, 17, "|---|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 6
@@ -100,7 +95,6 @@ Document[0, 19]
     SoftLineBreak[10, 11]
     Text[11, 18] chars:[11, 18, "---|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 7
@@ -163,7 +157,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 Separator columns need to be at least 3 characters, not 3 dashes
 
 ```````````````````````````````` example Tables Extension: 9
@@ -195,7 +188,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 10
 Abc|Def
 :-:|---
@@ -225,7 +217,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 11
 |Abc
 |---
@@ -249,7 +240,6 @@ Document[0, 10]
           Text[6, 9] chars:[6, 9, "---"]
     TableBody[0, 0]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 12
@@ -277,7 +267,6 @@ Document[0, 12]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 13
 Abc|
 ---|
@@ -303,7 +292,6 @@ Document[0, 10]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 14
 |Abc
 ---
@@ -314,7 +302,6 @@ Document[0, 9]
   Heading[0, 8] textOpen:[0, 0] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 15
@@ -330,7 +317,6 @@ Document[0, 9]
     SoftLineBreak[3, 4]
     Text[4, 8] chars:[4, 8, "|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 16
@@ -364,7 +350,6 @@ Document[0, 13]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 17
 |Abc|
 |---|
@@ -394,7 +379,6 @@ Document[0, 16]
         TableCell[12, 15] textOpen:[12, 13, "|"] text:[13, 14, "1"] textClose:[14, 15, "|"]
           Text[13, 14] chars:[13, 14, "1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 18
@@ -428,7 +412,6 @@ Document[0, 13]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 19
 |Abc
 ---
@@ -443,7 +426,6 @@ Document[0, 12]
   Paragraph[9, 12]
     Text[9, 11] chars:[9, 11, "|1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 20
@@ -473,7 +455,6 @@ Document[0, 12]
   Paragraph[10, 12]
     Text[10, 11] chars:[10, 11, "1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 21
@@ -511,7 +492,6 @@ Document[0, 20]
         TableCell[18, 19] textOpen:[0, 0] text:[18, 19, "2"] textClose:[0, 0]
           Text[18, 19] chars:[18, 19, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 22
@@ -555,7 +535,6 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 23
  Abc  | Def
  --- | ---
@@ -593,7 +572,6 @@ Document[0, 30]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 24
 Abc|Def
 ---|---
@@ -629,7 +607,6 @@ Document[0, 24]
         TableCell[22, 23] textOpen:[0, 0] text:[22, 23, "2"] textClose:[0, 0]
           Text[22, 23] chars:[22, 23, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 25
@@ -748,7 +725,6 @@ Document[0, 25]
 ````````````````````````````````
 
 
-
 unclosed delimiters in cells
 
 ```````````````````````````````` example Tables Extension: 28
@@ -786,7 +762,6 @@ Document[0, 28]
         TableCell[23, 27] textOpen:[0, 0] text:[24, 27, "abc"] textClose:[0, 0]
           Text[24, 27] chars:[24, 27, "abc"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 29
@@ -827,7 +802,6 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 30
 Abc|Def
 ---|---
@@ -865,6 +839,7 @@ Document[0, 25]
         TableCell[22, 24] textOpen:[0, 0] text:[22, 24, "20"] textClose:[0, 0]
           Text[22, 24] chars:[22, 24, "20"]
 ````````````````````````````````
+
 
 Extra column should be truncated when GFM compatibility is selected
 
@@ -905,8 +880,6 @@ Document[0, 25]
 ````````````````````````````````
 
 
-
-
 ```````````````````````````````` example Tables Extension: 32
 Abc|Def
 ---|---
@@ -942,7 +915,6 @@ Document[0, 24]
         TableCell[22, 23] textOpen:[0, 0] text:[22, 23, "2"] textClose:[0, 0]
           Text[22, 23] chars:[22, 23, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 33
@@ -982,7 +954,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 34
 Abc|Def
 ---:|---
@@ -1018,7 +989,6 @@ Document[0, 21]
         TableCell[19, 20] textOpen:[0, 0] text:[19, 20, "2"] textClose:[0, 0]
           Text[19, 20] chars:[19, 20, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 35
@@ -1058,7 +1028,6 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 36
 Abc|Def
 ---|:---:
@@ -1094,7 +1063,6 @@ Document[0, 22]
         TableCell[20, 21] CENTER textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
           Text[20, 21] chars:[20, 21, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Tables Extension: 37
@@ -1134,24 +1102,14 @@ Document[0, 23]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Tables Extension: 38
 Abc|Def
-: ---|---
-.
-<p>Abc|Def
-: ---|---</p>
-.
-Document[0, 18]
-  Paragraph[0, 18]
-    Text[0, 7] chars:[0, 7, "Abc|Def"]
-    SoftLineBreak[7, 8]
-    Text[8, 17] chars:[8, 17, ": ---|---"]
-````````````````````````````````
+: ---|--- . <p>Abc|Def
+: ---|---</p> . Document[0, 18] Paragraph[0, 18] Text[0, 7] chars:[0, 7, "Abc|Def"]
+  SoftLineBreak[7, 8] Text[8, 17] chars:[8, 17, ": ---|---"]
+  ````````````````````````````````
 
-
-
-```````````````````````````````` example Tables Extension: 39
+```````````````````````````````` example Tables Extension: 38
 Abc|Def
 --- :|---
 .
@@ -1166,8 +1124,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 40
+```````````````````````````````` example Tables Extension: 39
 Abc|Def
 ---|: ---
 .
@@ -1182,8 +1139,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 41
+```````````````````````````````` example Tables Extension: 40
 Abc|Def
 ---|--- :
 .
@@ -1198,8 +1154,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 42
+```````````````````````````````` example Tables Extension: 41
 Abc|Def
 ---|---
 1|2|3
@@ -1237,9 +1192,10 @@ Document[0, 22]
           Text[20, 21] chars:[20, 21, "3"]
 ````````````````````````````````
 
+
 Extra columns truncated with GFM compatibility on.
 
-```````````````````````````````` example(Tables Extension: 43) options(gfm)
+```````````````````````````````` example(Tables Extension: 42) options(gfm)
 Abc|Def
 ---|---
 1|2|3
@@ -1276,8 +1232,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 44
+```````````````````````````````` example Tables Extension: 43
 Abc|Def|Ghi
 ---|---|---
 1|2
@@ -1318,8 +1273,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 45
+```````````````````````````````` example Tables Extension: 44
 > Abc|Def
 > ---|---
 > 1|2
@@ -1359,8 +1313,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Tables Extension: 46
+```````````````````````````````` example Tables Extension: 45
 Abc|Def
 ---|---
 1|2
@@ -1400,9 +1353,10 @@ Document[0, 40]
     Text[20, 39] chars:[20, 39, "table"..." over"]
 ````````````````````````````````
 
+
 inlines should be processed
 
-```````````````````````````````` example Tables Extension: 47
+```````````````````````````````` example Tables Extension: 46
 **Abc**|_Def_
 ---|---
 [ref]|`code`
@@ -1448,9 +1402,10 @@ Document[0, 68]
   Reference[56, 67] refOpen:[56, 57, "["] ref:[57, 60, "ref"] refClose:[60, 62, "]:"] urlOpen:[0, 0] url:[63, 67, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
+
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Tables Extension: 48
+```````````````````````````````` example Tables Extension: 47
 |Abc|Def
 |---|---|
 | span ||
@@ -1487,7 +1442,7 @@ Document[0, 29]
 
 Now we try varying the header lines and make sure we get the right output
 
-```````````````````````````````` example Tables Extension: 49
+```````````````````````````````` example Tables Extension: 48
 |Abc|Def
 |Hij|Lmn
 |---|---|
@@ -1531,7 +1486,7 @@ Document[0, 38]
 
 No header lines
 
-```````````````````````````````` example Tables Extension: 50
+```````````````````````````````` example Tables Extension: 49
 |---|---|
 | col1 | col2|
 .
@@ -1562,7 +1517,7 @@ Document[0, 25]
 
 No body lines
 
-```````````````````````````````` example Tables Extension: 51
+```````````````````````````````` example Tables Extension: 50
 | col1 | col2|
 |---|---|
 .
@@ -1593,7 +1548,7 @@ Document[0, 25]
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 52
+```````````````````````````````` example Tables Extension: 51
 not a table, followed by a table
 
 | col1 | col2|

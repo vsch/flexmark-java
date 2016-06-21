@@ -44,6 +44,7 @@ public class ReplacedTextMapper {
 
     public int originalOffset(int replacedIndex) {
         if (regions.isEmpty()) return replacedIndex; 
+        if (replacedIndex == replacedLength) return original.length(); 
         
         int originalIndex = replacedIndex;
 
@@ -58,10 +59,10 @@ public class ReplacedTextMapper {
                 break;
             }
 
-            if (region == regions.get(regions.size() - 1) && region.getReplaced().getEndOffset() == replacedIndex) {
-                originalIndex = region.getOriginal().getEndOffset() - original.getStartOffset();
-                break;
-            }
+            //if (region == regions.get(regions.size() - 1) && region.getReplaced().getEndOffset() == replacedIndex) {
+            //    originalIndex = region.getOriginal().getEndOffset() - original.getStartOffset();
+            //    break;
+            //}
         }
 
         return originalIndex;

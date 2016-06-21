@@ -28,6 +28,11 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
+    public boolean breakOutOnDoubleBlankLine() {
+        return false;
+    }
+
+    @Override
     final public void finalizeClosedBlock() {
         mutableData = null;
     }

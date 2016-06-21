@@ -10,7 +10,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts :warning: to its emoji image
 
-
 ```````````````````````````````` example Emoji: 1
 :warning:
 .
@@ -36,7 +35,6 @@ Document[0, 18]
       Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
         Text[2, 9] chars:[2, 9, "warning"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example(Emoji: 3) options(url)
@@ -66,7 +64,6 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
 Unknown shortcuts are converted to text
 
 ```````````````````````````````` example Emoji: 5
@@ -79,7 +76,6 @@ Document[0, 11]
     Emoji[0, 10] textOpen:[0, 1, ":"] text:[1, 9, "warnings"] textClose:[9, 10, ":"]
       Text[1, 9] chars:[1, 9, "warnings"]
 ````````````````````````````````
-
 
 
 Unknown shortcuts are converted to text with inline emphasis parsing

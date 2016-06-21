@@ -40,6 +40,10 @@ public class Parser {
     final public static DataKey<Boolean> INLINE_RELAXED_EMPHASIS = new DataKey<>("INLINE_RELAXED_EMPHASIS", false);
     final public static DataKey<Boolean> HEADERS_NO_ATX_SPACE = new DataKey<>("HEADERS_NO_ATX_SPACE", false);
     final public static DataKey<Boolean> HEADERS_NO_LEAD_SPACE = new DataKey<>("HEADERS_NO_LEAD_SPACE", false);
+    final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", true);
+    final public static DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
+    final public static DataKey<Boolean> LISTS_BULLET_MATCH = new DataKey<>("LISTS_BULLET_MATCH", true);
+    final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
     final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     private final List<BlockParserFactory> blockParserFactories;

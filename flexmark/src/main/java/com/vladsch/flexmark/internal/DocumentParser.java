@@ -662,7 +662,7 @@ public class DocumentParser implements ParserState {
         int lastList = -1;
         for (int i = blockParsers.size() - 1; i >= 0; i--) {
             BlockParser blockParser = blockParsers.get(i);
-            if (blockParser instanceof ListBlockParser) {
+            if (blockParser.breakOutOnDoubleBlankLine()) {
                 lastList = i;
             }
         }

@@ -6,6 +6,8 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemMarker;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.ListOptions;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -20,15 +22,18 @@ public class TaskListNodeRenderer implements NodeRenderer {
     private final String itemClass;
     private final String looseItemClass;
     private final String paragraphClass;
+    private final ListOptions listOptions;
 
     public TaskListNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
-        this.doneMarker = context.getOptions().get(TaskListExtension.ITEM_DONE_MARKER);
-        this.notDoneMarker = context.getOptions().get(TaskListExtension.ITEM_NOT_DONE_MARKER);
-        this.itemClass = context.getOptions().get(TaskListExtension.ITEM_CLASS);
-        this.looseItemClass = context.getOptions().get(TaskListExtension.LOOSE_ITEM_CLASS);
-        this.paragraphClass = context.getOptions().get(TaskListExtension.PARAGRAPH_CLASS);
+        DataHolder options = context.getOptions();
+        this.doneMarker = options.get(TaskListExtension.ITEM_DONE_MARKER);
+        this.notDoneMarker = options.get(TaskListExtension.ITEM_NOT_DONE_MARKER);
+        this.itemClass = options.get(TaskListExtension.ITEM_CLASS);
+        this.looseItemClass = options.get(TaskListExtension.LOOSE_ITEM_CLASS);
+        this.paragraphClass = options.get(TaskListExtension.PARAGRAPH_CLASS);
+        this.listOptions = new ListOptions(options);
     }
 
     @Override
@@ -49,7 +54,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
     }
 
     private void render(TaskListItem taskItem) {
-        if (taskItem.getFirstChild() == null || taskItem.isInTightList()) {
+        if (listOptions.isTightListItem(taskItem)) {
             html.withAttr().attr("class", itemClass).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(taskItem);
             });

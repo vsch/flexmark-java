@@ -27,6 +27,7 @@ public class HtmlRenderer {
     final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
     final static public DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DataKey<>("SUPPRESS_HTML_BLOCKS", false);
     final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DataKey<>("SUPPRESS_INLINE_HTML", false);
+    final public static DataKey<Boolean> LISTS_ORDERED_START = new DataKey<>("LISTS_ORDERED_START", true);
 
     static class HtmlRendererOptions {
         public final String softBreak;

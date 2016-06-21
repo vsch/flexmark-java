@@ -2,6 +2,7 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.Escaping;
@@ -23,6 +24,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     private final boolean suppressHtmlBlocks;
     private final boolean suppressInlineHtml;
     private final ReferenceRepository referenceRepository;
+    private final ListOptions listOptions;
 
     public CoreNodeRenderer(NodeRendererContext context) {
         this.context = context;
@@ -31,6 +33,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         this.suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
         this.suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
         this.referenceRepository = options.get(Parser.REFERENCES);
+        this.listOptions = new ListOptions(options);
     }
 
     @Override
@@ -87,27 +90,8 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(Paragraph node) {
-        boolean inTightList = node.isInTightList();
-        if (!inTightList) {
-            html.tagLine("p", () -> {
-                visitChildren(node);
-            });
-        } else {
-            visitChildren(node);
-        }
-    }
-
-    @Override
     public void visit(BlockQuote node) {
         html.withAttr().tagIndent("blockquote", () -> {
-            visitChildren(node);
-        });
-    }
-
-    @Override
-    public void visit(BulletList node) {
-        html.withAttr().tagIndent("ul", () -> {
             visitChildren(node);
         });
     }
@@ -165,6 +149,22 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
+    public void visit(BulletList node) {
+        html.withAttr().tagIndent("ul", () -> {
+            visitChildren(node);
+        });
+    }
+
+    @Override
+    public void visit(OrderedList node) {
+        int start = node.getStartNumber();
+        if (listOptions.orderedStart && start != 1) html.attr("start", String.valueOf(start));
+        html.withAttr().tagIndent("ol", () -> {
+            visitChildren(node);
+        });
+    }
+
+    @Override
     public void visit(BulletListItem node) {
         visit((ListItem) node);
     }
@@ -175,7 +175,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     protected void visit(ListItem node) {
-        if (node.getFirstChild() == null || node.isInTightList()) {
+        if (node.getFirstChild() == null || listOptions.isTightListItem(node)) {
             html.withAttr().withCondIndent().tagLine("li", () -> {
                 visitChildren(node);
             });
@@ -187,12 +187,15 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(OrderedList node) {
-        int start = node.getStartNumber();
-        if (start != 1) html.attr("start", String.valueOf(start));
-        html.withAttr().tagIndent("ol", () -> {
+    public void visit(Paragraph node) {
+        boolean inTightList = listOptions.isInTightListItem(node);
+        if (!inTightList) {
+            html.tagLine("p", () -> {
+                visitChildren(node);
+            });
+        } else {
             visitChildren(node);
-        });
+        }
     }
 
     @Override

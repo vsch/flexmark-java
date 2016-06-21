@@ -22,18 +22,14 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("keep-last", new MutableDataSet()
-                .set(Parser.REFERENCES_KEEP, KeepType.LAST)
-        );
-        optionsMap.put("relaxed-emphasis", new MutableDataSet()
-                .set(Parser.INLINE_RELAXED_EMPHASIS, true)
-        );
-        optionsMap.put("hdr-no-atx-space", new MutableDataSet()
-                .set(Parser.HEADERS_NO_ATX_SPACE, true)
-        );
-        optionsMap.put("hdr-no-lead-space", new MutableDataSet()
-                .set(Parser.HEADERS_NO_LEAD_SPACE, true)
-        );
+        optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
+        optionsMap.put("relaxed-emphasis", new MutableDataSet().set(Parser.INLINE_RELAXED_EMPHASIS, true));
+        optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADERS_NO_ATX_SPACE, true));
+        optionsMap.put("hdr-no-lead-space", new MutableDataSet().set(Parser.HEADERS_NO_LEAD_SPACE, true));
+        optionsMap.put("list-fixed-indent", new MutableDataSet().set(Parser.LISTS_FIXED_INDENT, 4));
+        optionsMap.put("list-no-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, false));
+        optionsMap.put("list-no-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
+        optionsMap.put("list-no-start", new MutableDataSet().set(HtmlRenderer.LISTS_ORDERED_START, false));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

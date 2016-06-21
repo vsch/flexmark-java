@@ -8,7 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Gfm Task List Core
 
-
 not task lis items
 
 ```````````````````````````````` example Gfm Task List Core: 1
@@ -396,7 +395,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-loose task list item class 
+loose task list item class
 
 ```````````````````````````````` example(Gfm Task List Options: 3) options(loose-class)
 - [ ] task
@@ -449,7 +448,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-task list item class and p class 
+task list item class and p class
 
 ```````````````````````````````` example(Gfm Task List Options: 5) options(item-class, p-class)
 - [ ] task
@@ -502,7 +501,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-custom marker task list item class and p class 
+custom marker task list item class and p class
 
 ```````````````````````````````` example(Gfm Task List Options: 7) options(item-class, p-class, done)
 - [ ] task
@@ -555,7 +554,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-custom marker task list item class and p class 
+custom marker task list item class and p class
 
 ```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class, done, not-done)
 - [ ] task

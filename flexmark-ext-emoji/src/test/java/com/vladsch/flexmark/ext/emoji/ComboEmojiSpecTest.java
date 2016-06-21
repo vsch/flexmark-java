@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboEmojiSpecTest extends ComboSpecTestCase {
-    static final String SPEC_RESOURCE = "/ext_emoji_ast_spec.txt";
+    static final String SPEC_RESOURCE = "/ext_emoji_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)

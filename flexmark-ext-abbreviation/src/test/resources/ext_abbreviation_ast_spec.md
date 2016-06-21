@@ -8,10 +8,9 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Abbreviation
 
-flexmark-java extension for defining abbreviations and turning appearance of
-these abbreviations in text into abbr tags with titles consisting of the expansion
-of the abbreviation.
-
+flexmark-java extension for defining abbreviations and turning appearance of these
+abbreviations in text into abbr tags with titles consisting of the expansion of the
+abbreviation.
 
 ```````````````````````````````` example Abbreviation: 1
 *[Abbr]:Abbreviation
@@ -36,6 +35,7 @@ Document[0, 55]
     Abbreviation[34, 38] chars:[34, 38, "Abbr"]
     Text[38, 54] chars:[38, 54, " embe"..."n it."]
 ````````````````````````````````
+
 
 No inline processing in expansion text.
 
@@ -106,7 +106,6 @@ Document[0, 126]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Abbreviation: 7
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -124,7 +123,6 @@ Document[0, 136]
     Abbreviation[110, 117] chars:[110, 117, "US of A"]
     Text[117, 135] chars:[117, 135, ", an "..."tion."]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Abbreviation: 8
@@ -190,4 +188,5 @@ Document[0, 60]
       Text[47, 51] chars:[47, 51, "test"]
     Text[52, 58] chars:[52, 58, ": /url"]
 ````````````````````````````````
+
 

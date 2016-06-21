@@ -15,9 +15,19 @@ public class ListBlockParser extends AbstractBlockParser {
                     "|^(\\d{1,9})([.)])(?= |\t|$)");
 
     private final ListBlock block;
+    private final ListOptions options;
+    private final int itemIndent;
+    private final boolean isNumberedList;
 
-    public ListBlockParser(ListBlock block) {
-        this.block = block;
+    public ListBlockParser(ListOptions options, ListData listData) {
+        this.options = options;
+        this.block = listData.listBlock;
+        this.itemIndent = listData.indent;
+        this.isNumberedList = listData.isNumberedList;
+    }
+
+    public ListOptions getOptions() {
+        return options;
     }
 
     @Override
@@ -52,23 +62,38 @@ public class ListBlockParser extends AbstractBlockParser {
         block.setCharsFromContent();
     }
 
+    @Override
+    public boolean breakOutOnDoubleBlankLine() {
+        return true;
+    }
+
     private void finalizeListTight(ParserState parserState) {
         Node item = getBlock().getFirstChild();
         while (item != null) {
             // check for non-final list item ending with blank line:
             if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
-                setTight(false);
+                if (item instanceof ListItem) {
+                    // set the item's tight setting
+                    ((ListItem) item).setTight(false);
+                }
+
+                if (options.autoLoose) {
+                    setTight(false);
+                }
                 break;
             }
+
             // recurse into children of list item, to see if there are
             // spaces between any of them:
-            Node subItem = item.getFirstChild();
-            while (subItem != null) {
-                if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                    setTight(false);
-                    break;
+            if (options.autoLoose) {
+                Node subItem = item.getFirstChild();
+                while (subItem != null) {
+                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                        setTight(false);
+                        break;
+                    }
+                    subItem = subItem.getNext();
                 }
-                subItem = subItem.getNext();
             }
             item = item.getNext();
         }
@@ -77,7 +102,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    private static ListData parseListMarker(BasedSequence line, final int markerIndex, final int markerColumn) {
+    private static ListData parseListMarker(BasedSequence line, int indent, final int markerIndex, final int markerColumn) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = MARKER.matcher(rest);
         if (!matcher.find()) {
@@ -112,8 +137,7 @@ public class ListBlockParser extends AbstractBlockParser {
             // If this line is blank or has a code block, default to 1 space after marker
             contentColumn = columnAfterMarker + 1;
         }
-
-        return new ListData(listBlock, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
+        return new ListData(listBlock, indent, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -158,20 +182,29 @@ public class ListBlockParser extends AbstractBlockParser {
             if (state.getIndent() >= Parsing.CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
                 return BlockStart.none();
             }
-            int nextNonSpace = state.getNextNonSpaceIndex();
-            ListData listData = parseListMarker(state.getLine(), nextNonSpace, state.getColumn() + state.getIndent());
+
+            ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
+
+            ListOptions options = new ListOptions(state.getProperties());
+
+            if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemIndent + options.fixedIndent) {
+                return BlockStart.none();
+            }
+
+            int markerIndex = state.getNextNonSpaceIndex();
+
+            ListData listData = parseListMarker(state.getLine(), state.getIndent(), markerIndex, state.getColumn() + state.getIndent());
             if (listData == null) {
                 return BlockStart.none();
             }
 
+            int newContentColumn = options.fixedIndent > 0 ? state.getColumn() + options.fixedIndent : listData.contentColumn;
+            ListItemParser listItemParser = new ListItemParser(newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
+
             int newColumn = listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(newColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
-
             // prepend the list block if needed
-            if (!(matched instanceof ListBlockParser) ||
-                    !(listsMatch((ListBlock) matched.getBlock(), listData.listBlock))) {
-
-                ListBlockParser listBlockParser = new ListBlockParser(listData.listBlock);
+            if (listBlockParser == null || !options.bulletMatch || !listsMatch((ListBlock) matched.getBlock(), listData.listBlock)) {
+                listBlockParser = new ListBlockParser(options, listData);
                 listBlockParser.setTight(true);
 
                 return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
@@ -184,11 +217,13 @@ public class ListBlockParser extends AbstractBlockParser {
     private static class ListData {
         final ListBlock listBlock;
         final int contentColumn;
+        final int indent;
         final BasedSequence listMarker;
         final boolean isNumberedList;
 
-        ListData(ListBlock listBlock, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
+        ListData(ListBlock listBlock, int indent, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
             this.listBlock = listBlock;
+            this.indent = indent;
             this.contentColumn = contentColumn;
             this.listMarker = listMarker;
             this.isNumberedList = isNumberedList;

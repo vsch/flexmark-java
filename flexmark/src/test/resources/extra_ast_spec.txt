@@ -333,4 +333,298 @@ Document[0, 81]
     Text[66, 80] chars:[66, 80, "#####"..."ading"]
 ````````````````````````````````
 
+## List Options
+
+Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to
+change the behavior of list parser and renderer
+
+Default processing 
+
+```````````````````````````````` example List Options: 1
+* item 1
+ * item 2
+  * item 3
+   * item 4
+    * sub item 1
+     * sub item 2
+      * sub item 3
+       * sub item 4
+        * sub sub item 1
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4</li>
+  <li>sub item 1</li>
+  <li>sub item 2</li>
+  <li>sub item 3</li>
+  <li>sub item 4</li>
+  <li>sub sub item 1</li>
+</ul>
+.
+Document[0, 141]
+  BulletList[0, 141] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"]
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 30] open:[21, 22, "*"]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+    BulletListItem[33, 42] open:[33, 34, "*"]
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 4"]
+    BulletListItem[46, 59] open:[46, 47, "*"]
+      Paragraph[48, 59]
+        Text[48, 58] chars:[48, 58, "sub item 1"]
+    BulletListItem[64, 77] open:[64, 65, "*"]
+      Paragraph[66, 77]
+        Text[66, 76] chars:[66, 76, "sub item 2"]
+    BulletListItem[83, 96] open:[83, 84, "*"]
+      Paragraph[85, 96]
+        Text[85, 95] chars:[85, 95, "sub item 3"]
+    BulletListItem[103, 116] open:[103, 104, "*"]
+      Paragraph[105, 116]
+        Text[105, 115] chars:[105, 115, "sub item 4"]
+    BulletListItem[124, 141] open:[124, 125, "*"]
+      Paragraph[126, 141]
+        Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
+````````````````````````````````
+
+Fixed indentation only (4 spaces) 
+
+```````````````````````````````` example(List Options: 2) options(list-fixed-indent)
+* item 1
+ * item 2
+  * item 3
+   * item 4
+    * sub item 1
+     * sub item 2
+      * sub item 3
+       * sub item 4
+        * sub sub item 1
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+      <li>sub item 3</li>
+      <li>sub item 4
+        <ul>
+          <li>sub sub item 1</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 141]
+  BulletList[0, 141] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"]
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 30] open:[21, 22, "*"]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+    BulletListItem[33, 141] open:[33, 34, "*"]
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 4"]
+      BulletList[46, 141] isTight=true
+        BulletListItem[46, 59] open:[46, 47, "*"]
+          Paragraph[48, 59]
+            Text[48, 58] chars:[48, 58, "sub item 1"]
+        BulletListItem[64, 77] open:[64, 65, "*"]
+          Paragraph[66, 77]
+            Text[66, 76] chars:[66, 76, "sub item 2"]
+        BulletListItem[83, 96] open:[83, 84, "*"]
+          Paragraph[85, 96]
+            Text[85, 95] chars:[85, 95, "sub item 3"]
+        BulletListItem[103, 141] open:[103, 104, "*"]
+          Paragraph[105, 116]
+            Text[105, 115] chars:[105, 115, "sub item 4"]
+          BulletList[124, 141] isTight=true
+            BulletListItem[124, 141] open:[124, 125, "*"]
+              Paragraph[126, 141]
+                Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
+````````````````````````````````
+
+Fixed indentation with code blocks 
+
+```````````````````````````````` example(List Options: 3) options(list-fixed-indent)
+* item 1
+    
+    this is not code
+    
+        this is code
+ * item 2
+    
+    this is not code
+    
+        this is code
+  * item 3
+    
+    this is not code
+    
+        this is code
+   * item 4
+    
+    this is not code
+    
+        this is code
+    * sub item 1
+    
+        this is not code
+    
+            this is code
+     * sub item 2
+    
+        this is not code
+    
+            this is code
+      * sub item 3
+    
+        this is not code
+    
+            this is code
+       * sub item 4
+    
+        this is not code
+    
+            this is code
+        * sub sub item 1
+    
+            this is not code
+        
+                this is code
+.
+<ul>
+  <li>
+    <p>item 1</p>
+    <p>this is not code</p>
+    <pre><code>this is code
+    </code></pre>
+  </li>
+  <li>
+    <p>item 2</p>
+    <p>this is not code</p>
+    <pre><code>this is code
+    </code></pre>
+  </li>
+  <li>
+    <p>item 3</p>
+    <p>this is not code</p>
+    <pre><code>this is code
+    </code></pre>
+  </li>
+  <li>
+    <p>item 4</p>
+    <p>this is not code</p>
+    <pre><code>this is code
+    </code></pre>
+    <ul>
+      <li>
+        <p>sub item 1</p>
+        <p>this is not code</p>
+        <pre><code>this is code
+        </code></pre>
+      </li>
+      <li>
+        <p>sub item 2</p>
+        <p>this is not code</p>
+        <pre><code>this is code
+        </code></pre>
+      </li>
+      <li>
+        <p>sub item 3</p>
+        <p>this is not code</p>
+        <pre><code>this is code
+        </code></pre>
+      </li>
+      <li>
+        <p>sub item 4</p>
+        <p>this is not code</p>
+        <pre><code>this is code
+        </code></pre>
+        <ul>
+          <li>
+            <p>sub sub item 1</p>
+            <p>this is not code</p>
+            <pre><code>this is code
+            </code></pre>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 661]
+  BulletList[0, 661] isTight=false
+    BulletListItem[0, 61] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      Paragraph[18, 35]
+        Text[18, 34] chars:[18, 34, "this "..." code"]
+      IndentedCodeBlock[48, 61]
+    BulletListItem[62, 123] open:[62, 63, "*"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 2"]
+      Paragraph[80, 97]
+        Text[80, 96] chars:[80, 96, "this "..." code"]
+      IndentedCodeBlock[110, 123]
+    BulletListItem[125, 186] open:[125, 126, "*"]
+      Paragraph[127, 134]
+        Text[127, 133] chars:[127, 133, "item 3"]
+      Paragraph[143, 160]
+        Text[143, 159] chars:[143, 159, "this "..." code"]
+      IndentedCodeBlock[173, 186]
+    BulletListItem[189, 661] open:[189, 190, "*"]
+      Paragraph[191, 198]
+        Text[191, 197] chars:[191, 197, "item 4"]
+      Paragraph[207, 224]
+        Text[207, 223] chars:[207, 223, "this "..." code"]
+      IndentedCodeBlock[237, 250]
+      BulletList[254, 661] isTight=false
+        BulletListItem[254, 327] open:[254, 255, "*"]
+          Paragraph[256, 267]
+            Text[256, 266] chars:[256, 266, "sub item 1"]
+          Paragraph[280, 297]
+            Text[280, 296] chars:[280, 296, "this "..." code"]
+          IndentedCodeBlock[314, 327]
+        BulletListItem[332, 405] open:[332, 333, "*"]
+          Paragraph[334, 345]
+            Text[334, 344] chars:[334, 344, "sub item 2"]
+          Paragraph[358, 375]
+            Text[358, 374] chars:[358, 374, "this "..." code"]
+          IndentedCodeBlock[392, 405]
+        BulletListItem[411, 484] open:[411, 412, "*"]
+          Paragraph[413, 424]
+            Text[413, 423] chars:[413, 423, "sub item 3"]
+          Paragraph[437, 454]
+            Text[437, 453] chars:[437, 453, "this "..." code"]
+          IndentedCodeBlock[471, 484]
+        BulletListItem[491, 661] open:[491, 492, "*"]
+          Paragraph[493, 504]
+            Text[493, 503] chars:[493, 503, "sub item 4"]
+          Paragraph[517, 534]
+            Text[517, 533] chars:[517, 533, "this "..." code"]
+          IndentedCodeBlock[551, 564]
+          BulletList[572, 661] isTight=false
+            BulletListItem[572, 661] open:[572, 573, "*"]
+              Paragraph[574, 589]
+                Text[574, 588] chars:[574, 588, "sub s"..."tem 1"]
+              Paragraph[606, 623]
+                Text[606, 622] chars:[606, 622, "this "..." code"]
+              IndentedCodeBlock[648, 661]
+````````````````````````````````
 

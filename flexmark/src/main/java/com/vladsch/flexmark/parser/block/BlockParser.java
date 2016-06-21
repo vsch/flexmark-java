@@ -28,6 +28,11 @@ public interface BlockParser {
     void closeBlock(ParserState parserState);
 
     /**
+     * @return  true if Double blank line should finalize this block parser and its children and reset to parent 
+     */
+    boolean breakOutOnDoubleBlankLine();
+
+    /**
      * Used to clean up and prepare for the next parsing run of the AbstractBlockParser
      * for internal parser house keeping not for BlockParser implementors
      */

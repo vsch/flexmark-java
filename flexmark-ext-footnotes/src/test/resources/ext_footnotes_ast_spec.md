@@ -8,12 +8,11 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Footnotes
 
-Converts footnote references and definitions to footnotes in the HTML page.  
-A footnote is a link reference starting with a ^ with the definition being the 
-same: [^ref]: footnote.
+Converts footnote references and definitions to footnotes in the HTML page. A footnote is a
+link reference starting with a ^ with the definition being the same: [^ref]: footnote.
 
-A footnote definition is a container block that can contain any element as long as it 
-is indented by 4 spaces or a tab from the indent level of the footnote.
+A footnote definition is a container block that can contain any element as long as it is
+indented by 4 spaces or a tab from the indent level of the footnote.
 
 ```````````````````````````````` example Footnotes: 1
 This paragraph has a footnote[^footnote].
@@ -78,6 +77,7 @@ Document[0, 262]
           Text[255, 261] chars:[255, 261, "item 2"]
 ````````````````````````````````
 
+
 Not a footnote nor a footnote definition if space between [ and ^.
 
 ```````````````````````````````` example Footnotes: 2
@@ -125,6 +125,7 @@ Document[0, 265]
     Text[146, 147] chars:[146, 147, "."]
   IndentedCodeBlock[153, 265]
 ````````````````````````````````
+
 
 Unused footnotes are not used and do not show up on the page.
 
@@ -207,7 +208,8 @@ Document[0, 351]
           Text[344, 350] chars:[344, 350, "item 2"]
 ````````````````````````````````
 
-Undefined footnotes are rendered as if they were text, with emphasis left as is. 
+
+Undefined footnotes are rendered as if they were text, with emphasis left as is.
 
 ```````````````````````````````` example Footnotes: 4
 This paragraph has a footnote[^**footnote**].
@@ -255,6 +257,7 @@ Document[0, 266]
         Paragraph[259, 266]
           Text[259, 265] chars:[259, 265, "item 2"]
 ````````````````````````````````
+
 
 Footnote numbers are assigned in order of their reference in the document
 
@@ -345,7 +348,6 @@ Document[0, 377]
         Paragraph[370, 377]
           Text[370, 376] chars:[370, 376, "item 2"]
 ````````````````````````````````
-
 
 
 Footnotes can contain references to other footnotes.
@@ -530,7 +532,6 @@ Document[0, 385]
 ````````````````````````````````
 
 
-
 Customized link ref class
 
 ```````````````````````````````` example(Footnotes: 8) options(link-class-none, back-link-class-text)
@@ -559,7 +560,6 @@ Document[0, 78]
     Paragraph[44, 78]
       Text[44, 77] chars:[44, 77, "This "..."note."]
 ````````````````````````````````
-
 
 
 Customized link ref class

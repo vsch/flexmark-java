@@ -10,9 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts pipe separated tables to html tables
 
-The tests here are converted to commonmark spec.txt format and AST expected
-results added.
-
+The tests here are converted to commonmark spec.txt format and AST expected results added.
 
 ```````````````````````````````` example Gfm Tables Extension: 1
 Abc|Def
@@ -25,7 +23,6 @@ Document[0, 8]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 2
 Abc | Def
 .
@@ -35,7 +32,6 @@ Document[0, 10]
   Paragraph[0, 10]
     Text[0, 9] chars:[0, 9, "Abc | Def"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 3
@@ -53,7 +49,6 @@ Document[0, 12]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 4
 Abc|Def
 --|--
@@ -69,7 +64,6 @@ Document[0, 14]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 5
 Abc|Def
  |---|---
@@ -83,7 +77,6 @@ Document[0, 18]
     SoftLineBreak[7, 8]
     Text[9, 17] chars:[9, 17, "|---|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 6
@@ -103,7 +96,6 @@ Document[0, 19]
     SoftLineBreak[10, 11]
     Text[11, 18] chars:[11, 18, "---|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 7
@@ -135,7 +127,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 8
 |Abc
 |---
@@ -159,7 +150,6 @@ Document[0, 10]
           Text[6, 9] chars:[6, 9, "---"]
     TableBody[0, 0]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 9
@@ -187,7 +177,6 @@ Document[0, 12]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 10
 Abc|
 ---|
@@ -213,7 +202,6 @@ Document[0, 10]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 11
 |Abc
 ---
@@ -224,7 +212,6 @@ Document[0, 9]
   Heading[0, 8] textOpen:[0, 0] text:[0, 4, "|Abc"] textClose:[5, 8, "---"]
     Text[0, 4] chars:[0, 4, "|Abc"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 12
@@ -240,7 +227,6 @@ Document[0, 9]
     SoftLineBreak[3, 4]
     Text[4, 8] chars:[4, 8, "|---"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 13
@@ -274,7 +260,6 @@ Document[0, 13]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 14
 |Abc|
 |---|
@@ -304,7 +289,6 @@ Document[0, 16]
         TableCell[13, 14] textOpen:[0, 0] text:[13, 14, "1"] textClose:[0, 0]
           Text[13, 14] chars:[13, 14, "1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 15
@@ -338,7 +322,6 @@ Document[0, 13]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 16
 |Abc
 ---
@@ -353,7 +336,6 @@ Document[0, 12]
   Paragraph[9, 12]
     Text[9, 11] chars:[9, 11, "|1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 17
@@ -383,7 +365,6 @@ Document[0, 12]
   Paragraph[10, 12]
     Text[10, 11] chars:[10, 11, "1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 18
@@ -423,7 +404,6 @@ Document[0, 20]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 19
 Abc|Def|Ghi
 ---|---
@@ -441,7 +421,6 @@ Document[0, 26]
     SoftLineBreak[19, 20]
     Text[20, 25] chars:[20, 25, "1|2|3"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 20
@@ -481,7 +460,6 @@ Document[0, 30]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 21
 Abc|Def
 ---|---
@@ -519,7 +497,6 @@ Document[0, 24]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 22
 |Abc|Def|
 |---|---|
@@ -555,7 +532,6 @@ Document[0, 26]
         TableCell[23, 24] textOpen:[0, 0] text:[23, 24, "2"] textClose:[0, 0]
           Text[23, 24] chars:[23, 24, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 23
@@ -596,7 +572,6 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 24
 Abc|Def
 ---|---
@@ -632,7 +607,6 @@ Document[0, 25]
         TableCell[20, 21] textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
           Text[20, 21] chars:[20, 21, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 25
@@ -672,7 +646,6 @@ Document[0, 24]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 26
 Abc|Def
 :---|---
@@ -708,7 +681,6 @@ Document[0, 21]
         TableCell[19, 20] textOpen:[0, 0] text:[19, 20, "2"] textClose:[0, 0]
           Text[19, 20] chars:[19, 20, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 27
@@ -748,7 +720,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 28
 Abc|Def
 :---:|---
@@ -784,7 +755,6 @@ Document[0, 22]
         TableCell[20, 21] textOpen:[0, 0] text:[20, 21, "2"] textClose:[0, 0]
           Text[20, 21] chars:[20, 21, "2"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Gfm Tables Extension: 29
@@ -824,7 +794,6 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 30
 Abc|Def
  :--- |---
@@ -862,24 +831,14 @@ Document[0, 23]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Gfm Tables Extension: 31
 Abc|Def
-: ---|---
-.
-<p>Abc|Def
-: ---|---</p>
-.
-Document[0, 18]
-  Paragraph[0, 18]
-    Text[0, 7] chars:[0, 7, "Abc|Def"]
-    SoftLineBreak[7, 8]
-    Text[8, 17] chars:[8, 17, ": ---|---"]
-````````````````````````````````
+: ---|--- . <p>Abc|Def
+: ---|---</p> . Document[0, 18] Paragraph[0, 18] Text[0, 7] chars:[0, 7, "Abc|Def"]
+  SoftLineBreak[7, 8] Text[8, 17] chars:[8, 17, ": ---|---"]
+  ````````````````````````````````
 
-
-
-```````````````````````````````` example Gfm Tables Extension: 32
+```````````````````````````````` example Gfm Tables Extension: 31
 Abc|Def
 --- :|---
 .
@@ -894,8 +853,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 33
+```````````````````````````````` example Gfm Tables Extension: 32
 Abc|Def
 ---|: ---
 .
@@ -910,8 +868,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 34
+```````````````````````````````` example Gfm Tables Extension: 33
 Abc|Def
 ---|--- :
 .
@@ -926,8 +883,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 35
+```````````````````````````````` example Gfm Tables Extension: 34
 Abc|Def
 ---|---
 1|2|3
@@ -964,8 +920,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 36
+```````````````````````````````` example Gfm Tables Extension: 35
 Abc|Def|Ghi
 ---|---|---
 1|2
@@ -1007,8 +962,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 37
+```````````````````````````````` example Gfm Tables Extension: 36
 > Abc|Def
 > ---|---
 > 1|2
@@ -1048,8 +1002,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
-```````````````````````````````` example Gfm Tables Extension: 38
+```````````````````````````````` example Gfm Tables Extension: 37
 Abc|Def
 ---|---
 1|2
@@ -1089,9 +1042,10 @@ Document[0, 40]
     Text[20, 39] chars:[20, 39, "table"..." over"]
 ````````````````````````````````
 
+
 inlines should be processed
 
-```````````````````````````````` example Gfm Tables Extension: 39
+```````````````````````````````` example Gfm Tables Extension: 38
 **Abc**|_Def_
 ---|---
 [ref]|`code`

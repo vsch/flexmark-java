@@ -8,6 +8,7 @@ import java.util.List;
 
 public abstract class ListItem extends Block {
     protected BasedSequence openingMarker = SubSequence.NULL;
+    private Boolean tight = true;
 
     @Override
     public void getAstExtra(StringBuilder out) {
@@ -27,12 +28,20 @@ public abstract class ListItem extends Block {
         this.openingMarker = openingMarker;
     }
 
-    public boolean isInTightList() {
-        return getParent() instanceof ListBlock && ((ListBlock) getParent()).isTight();
+    public void setTight(boolean tight) {
+        this.tight = tight;
     }
 
-    public boolean isParagraphInTightList() {
-        return getParent() instanceof ListBlock && ((ListBlock) getParent()).isTight();
+    public boolean isTight() {
+        return tight && isInTightList();
+    }
+    
+    public boolean isInTightList() {
+        return !(getParent() instanceof ListBlock) || ((ListBlock) getParent()).isTight();
+    }
+
+    public boolean isParagraphInTightListItem() {
+        return isTight();
     }
 
     public ListItem() {
@@ -49,4 +58,5 @@ public abstract class ListItem extends Block {
     public ListItem(BlockContent blockContent) {
         super(blockContent);
     }
+
 }

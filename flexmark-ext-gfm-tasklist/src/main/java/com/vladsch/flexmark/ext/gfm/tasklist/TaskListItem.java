@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class TaskListItem extends BulletListItem {
     @Override
-    public boolean isParagraphInTightList() {
+    public boolean isParagraphInTightListItem() {
         // we handle our own paragraph wrapping
         return true;
     }
