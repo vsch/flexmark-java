@@ -172,42 +172,6 @@ Document[0, 46]
 ````````````````````````````````
 
 
-## Emphasis tests
-
-Some weird commonmark processing of emphasis
-
-```````````````````````````````` example(Emphasis tests: 1) options(relaxed-emphasis, IGNORE)
-**bold*bold-italic*bold**
-.
-<p><strong>bold<em>bold-italic</em>bold</strong></p>
-.
-Document[0, 26]
-  Paragraph[0, 26]
-    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 23, "bold*bold-italic*bold"] textClose:[23, 25, "*"]
-      Text[2, 6] chars:[2, 6, "bold"]
-      Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
-        Text[8, 19] chars:[7, 18, "bold-"..."talic"]
-      Text[19, 23] chars:[19, 23, "bold"]
-````````````````````````````````
-
-
-Some weird commonmark processing of emphasis
-
-```````````````````````````````` example Emphasis tests: 2
-**bold *bold-italic* bold**
-.
-<p><strong>bold <em>bold-italic</em> bold</strong></p>
-.
-Document[0, 28]
-  Paragraph[0, 28]
-    StrongEmphasis[0, 27] textOpen:[0, 2, "**"] text:[2, 25, "bold *bold-italic* bold"] textClose:[25, 27, "**"]
-      Text[2, 7] chars:[2, 7, "bold "]
-      Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
-        Text[8, 19] chars:[8, 19, "bold-"..."talic"]
-      Text[20, 25] chars:[20, 25, " bold"]
-````````````````````````````````
-
-
 ## ATX Header options
 
 Allow atx headers without a space between # and the title
@@ -1013,6 +977,64 @@ Document[0, 30]
     OrderedListItem[20, 30] open:[20, 22, "1."]
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
+````````````````````````````````
+
+
+## GFM compatibility
+
+### GFM Emphasis
+
+Emphasis around inline code spans
+
+```````````````````````````````` example GFM Emphasis: 1
+please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )`
+.
+<p>please add  <code>add_gtest(</code><strong><code>your_unittest</code></strong><code></code><strong><code>your_unittest_unittest.cc</code></strong><code>)</code></p>
+.
+Document[0, 82]
+  Paragraph[0, 82]
+    Text[0, 12] chars:[0, 12, "pleas"..."add  "]
+    Code[12, 24] textOpen:[12, 13, "`"] text:[13, 23, "add_gtest("] textClose:[23, 24, "`"]
+    StrongEmphasis[24, 43] textOpen:[24, 26, "**"] text:[26, 41, "`your_unittest`"] textClose:[41, 43, "**"]
+      Code[26, 41] textOpen:[26, 27, "`"] text:[27, 40, "your_"..."unittest"] textClose:[40, 41, "`"]
+    Code[43, 46] textOpen:[43, 44, "`"] text:[44, 45, " "] textClose:[45, 46, "`"]
+    StrongEmphasis[46, 77] textOpen:[46, 48, "**"] text:[48, 75, "`your_unittest_unittest.cc`"] textClose:[75, 77, "**"]
+      Code[48, 75] textOpen:[48, 49, "`"] text:[49, 74, "your_"..."unittest_unittest.cc"] textClose:[74, 75, "`"]
+    Code[77, 81] textOpen:[77, 78, "`"] text:[78, 80, " )"] textClose:[80, 81, "`"]
+````````````````````````````````
+
+
+Some weird commonmark processing of emphasis
+
+```````````````````````````````` example(GFM Emphasis: 2) options(relaxed-emphasis, IGNORE)
+**bold*bold-italic*bold**
+.
+<p><strong>bold<em>bold-italic</em>bold</strong></p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 23, "bold*bold-italic*bold"] textClose:[23, 25, "*"]
+      Text[2, 6] chars:[2, 6, "bold"]
+      Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
+        Text[8, 19] chars:[7, 18, "bold-"..."talic"]
+      Text[19, 23] chars:[19, 23, "bold"]
+````````````````````````````````
+
+
+This works as expected:
+
+```````````````````````````````` example GFM Emphasis: 3
+**bold *bold-italic* bold**
+.
+<p><strong>bold <em>bold-italic</em> bold</strong></p>
+.
+Document[0, 28]
+  Paragraph[0, 28]
+    StrongEmphasis[0, 27] textOpen:[0, 2, "**"] text:[2, 25, "bold *bold-italic* bold"] textClose:[25, 27, "**"]
+      Text[2, 7] chars:[2, 7, "bold "]
+      Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
+        Text[8, 19] chars:[8, 19, "bold-"..."talic"]
+      Text[20, 25] chars:[20, 25, " bold"]
 ````````````````````````````````
 
 
