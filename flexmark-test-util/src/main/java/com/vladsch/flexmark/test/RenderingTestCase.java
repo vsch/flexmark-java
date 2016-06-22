@@ -12,6 +12,9 @@ import org.junit.AssumptionViolatedException;
 import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase {
+
+    public static final String IGNORE = "IGNORE";
+
     protected abstract Parser parser();
     protected abstract HtmlRenderer renderer();
     protected abstract SpecExample example();
@@ -41,9 +44,9 @@ public abstract class RenderingTestCase {
         for (String optionName : optionNames) {
             String optionSet = optionName.trim();
             if (optionSet.isEmpty()) continue;
-            if (optionSet.equals("ignore")) {
+            if (optionSet.equals(IGNORE)) {
                 if (example == null)
-                    throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using ignore option");
+                    throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using IGNORE option");
                 else
                     throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using ignore option");
             }

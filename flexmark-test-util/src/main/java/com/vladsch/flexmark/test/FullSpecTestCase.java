@@ -9,7 +9,7 @@ import java.io.InputStream;
 import static org.junit.Assert.assertEquals;
 
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecReaderFactory {
-    public static final String SPEC_RESOURCE = "/ast_spec.txt";
+    public static final String SPEC_RESOURCE = "/ast_spec.md";
 
     private DumpSpecReader dumpSpecReader;
 

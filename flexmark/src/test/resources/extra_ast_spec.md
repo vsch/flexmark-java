@@ -10,7 +10,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts footnote references and definitions to footnotes in the HTML page
 
-
 Code fence starting with setext header marker
 
 ```````````````````````````````` example Extra tests: 1
@@ -24,7 +23,6 @@ Code fence starting with setext header marker
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Extra tests: 2
@@ -150,6 +148,7 @@ Document[0, 46]
   Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] urlOpen:[0, 0] url:[40, 45, "/url3"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
+
 ## Reference Repository Keep Last tests
 
 Test repository KEEP_LAST behavior, meaning the last reference def is used
@@ -173,12 +172,11 @@ Document[0, 46]
 ````````````````````````````````
 
 
-
 ## Emphasis tests
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example(Emphasis tests: 1) options(relaxed-emphasis, ignore)
+```````````````````````````````` example(Emphasis tests: 1) options(relaxed-emphasis, IGNORE)
 **bold*bold-italic*bold**
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
@@ -208,6 +206,7 @@ Document[0, 28]
         Text[8, 19] chars:[8, 19, "bold-"..."talic"]
       Text[20, 25] chars:[20, 25, " bold"]
 ````````````````````````````````
+
 
 ## ATX Header options
 
@@ -268,7 +267,8 @@ Document[0, 1063]
     Text[977, 984] chars:[977, 984, "Heading"]
 ````````````````````````````````
 
-Don't allow leading spaces 
+
+Don't allow leading spaces
 
 ```````````````````````````````` example(ATX Header options: 2) options(hdr-no-lead-space)
  # Heading
@@ -301,7 +301,7 @@ Document[0, 81]
 ````````````````````````````````
 
 
-Don't allow leading spaces 
+Don't allow leading spaces
 
 ```````````````````````````````` example(ATX Header options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
  # Heading
@@ -333,14 +333,17 @@ Document[0, 81]
     Text[66, 80] chars:[66, 80, "#####"..."ading"]
 ````````````````````````````````
 
+
 ## List Options
 
-Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to
-change the behavior of list parser and renderer
+### List - Fixed Indent
 
-Default processing 
+Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to change
+the behavior of list parser and renderer
 
-```````````````````````````````` example List Options: 1
+Default processing
+
+```````````````````````````````` example List - Fixed Indent: 1
 * item 1
  * item 2
   * item 3
@@ -394,9 +397,10 @@ Document[0, 141]
         Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
 ````````````````````````````````
 
-Fixed indentation only (4 spaces) 
 
-```````````````````````````````` example(List Options: 2) options(list-fixed-indent)
+Fixed indentation only (4 spaces)
+
+```````````````````````````````` example(List - Fixed Indent: 2) options(list-fixed-indent)
 * item 1
  * item 2
   * item 3
@@ -458,9 +462,10 @@ Document[0, 141]
                 Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
 ````````````````````````````````
 
-Fixed indentation with code blocks 
 
-```````````````````````````````` example(List Options: 3) options(list-fixed-indent)
+Fixed indentation with code blocks
+
+```````````````````````````````` example(List - Fixed Indent: 3) options(list-fixed-indent)
 * item 1
     
     this is not code
@@ -627,4 +632,387 @@ Document[0, 661]
                 Text[606, 622] chars:[606, 622, "this "..." code"]
               IndentedCodeBlock[648, 661]
 ````````````````````````````````
+
+
+### List - No Auto Loose
+
+With auto loose setting for list
+
+```````````````````````````````` example List - No Auto Loose: 1
+* item 1
+* item 2
+* item 3
+    * sub item 1
+    
+    * sub item 2
+    
+    * sub item 3
+* item 4
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3
+    <ul>
+      <li>
+        <p>sub item 1</p>
+      </li>
+      <li>
+        <p>sub item 2</p>
+      </li>
+      <li>
+        <p>sub item 3</p>
+      </li>
+    </ul>
+  </li>
+  <li>item 4</li>
+</ul>
+.
+Document[0, 97]
+  BulletList[0, 97] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 18] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[18, 88] open:[18, 19, "*"]
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 3"]
+      BulletList[31, 88] isTight=false
+        BulletListItem[31, 44] open:[31, 32, "*"]
+          Paragraph[33, 44]
+            Text[33, 43] chars:[33, 43, "sub item 1"]
+        BulletListItem[53, 66] open:[53, 54, "*"]
+          Paragraph[55, 66]
+            Text[55, 65] chars:[55, 65, "sub item 2"]
+        BulletListItem[75, 88] open:[75, 76, "*"]
+          Paragraph[77, 88]
+            Text[77, 87] chars:[77, 87, "sub item 3"]
+    BulletListItem[88, 97] open:[88, 89, "*"]
+      Paragraph[90, 97]
+        Text[90, 96] chars:[90, 96, "item 4"]
+````````````````````````````````
+
+
+Without auto loose setting for list
+
+```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
+* item 1
+* item 2
+* item 3
+    * sub item 1
+    
+    * sub item 2
+    
+    * sub item 3
+* item 4
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3
+    <ul>
+      <li>
+        <p>sub item 1</p>
+      </li>
+      <li>sub item 2</li>
+      <li>sub item 3</li>
+    </ul>
+  </li>
+  <li>item 4</li>
+</ul>
+.
+Document[0, 97]
+  BulletList[0, 97] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 18] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[18, 88] open:[18, 19, "*"]
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 3"]
+      BulletList[31, 88] isTight=true
+        BulletListItem[31, 44] open:[31, 32, "*"]
+          Paragraph[33, 44]
+            Text[33, 43] chars:[33, 43, "sub item 1"]
+        BulletListItem[53, 66] open:[53, 54, "*"]
+          Paragraph[55, 66]
+            Text[55, 65] chars:[55, 65, "sub item 2"]
+        BulletListItem[75, 88] open:[75, 76, "*"]
+          Paragraph[77, 88]
+            Text[77, 87] chars:[77, 87, "sub item 3"]
+    BulletListItem[88, 97] open:[88, 89, "*"]
+      Paragraph[90, 97]
+        Text[90, 96] chars:[90, 96, "item 4"]
+````````````````````````````````
+
+
+### List - No Break on Double Blank Line
+
+With break all lists on two blank lines
+
+```````````````````````````````` example List - No Break on Double Blank Line: 1
+* item 1
+* item 2
+    * sub item 1
+    * sub item 2
+    
+    
+* item 4
+* item 5
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+    </ul>
+  </li>
+</ul>
+<ul>
+  <li>item 4</li>
+  <li>item 5</li>
+</ul>
+.
+Document[0, 80]
+  BulletList[0, 52] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 52] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+      BulletList[22, 52] isTight=true
+        BulletListItem[22, 35] open:[22, 23, "*"]
+          Paragraph[24, 35]
+            Text[24, 34] chars:[24, 34, "sub item 1"]
+        BulletListItem[39, 52] open:[39, 40, "*"]
+          Paragraph[41, 52]
+            Text[41, 51] chars:[41, 51, "sub item 2"]
+  BulletList[62, 80] isTight=true
+    BulletListItem[62, 71] open:[62, 63, "*"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 4"]
+    BulletListItem[71, 80] open:[71, 72, "*"]
+      Paragraph[73, 80]
+        Text[73, 79] chars:[73, 79, "item 5"]
+````````````````````````````````
+
+
+Without break all lists on two blank lines
+
+```````````````````````````````` example(List - No Break on Double Blank Line: 2) options(list-no-break)
+* item 1
+* item 2
+    * sub item 1
+    * sub item 2
+    
+    
+* item 4
+* item 5
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+    </ul>
+  </li>
+  <li>item 4</li>
+  <li>item 5</li>
+</ul>
+.
+Document[0, 80]
+  BulletList[0, 52] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 52] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+      BulletList[22, 52] isTight=true
+        BulletListItem[22, 35] open:[22, 23, "*"]
+          Paragraph[24, 35]
+            Text[24, 34] chars:[24, 34, "sub item 1"]
+        BulletListItem[39, 52] open:[39, 40, "*"]
+          Paragraph[41, 52]
+            Text[41, 51] chars:[41, 51, "sub item 2"]
+  BulletList[62, 80] isTight=true
+    BulletListItem[62, 71] open:[62, 63, "*"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 4"]
+    BulletListItem[71, 80] open:[71, 72, "*"]
+      Paragraph[73, 80]
+        Text[73, 79] chars:[73, 79, "item 5"]
+````````````````````````````````
+
+
+With break all lists on two blank lines
+
+```````````````````````````````` example List - No Break on Double Blank Line: 3
+* item 1
+* item 2
+    * sub item 1
+    * sub item 2
+    
+    
+    * sub item 3
+    * sub item 4
+* item 4
+* item 5
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+    </ul>
+  </li>
+</ul>
+<pre><code>* sub item 3
+* sub item 4
+</code></pre>
+<ul>
+  <li>item 4</li>
+  <li>item 5</li>
+</ul>
+.
+Document[0, 114]
+  BulletList[0, 52] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 52] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+      BulletList[22, 52] isTight=true
+        BulletListItem[22, 35] open:[22, 23, "*"]
+          Paragraph[24, 35]
+            Text[24, 34] chars:[24, 34, "sub item 1"]
+        BulletListItem[39, 52] open:[39, 40, "*"]
+          Paragraph[41, 52]
+            Text[41, 51] chars:[41, 51, "sub item 2"]
+  IndentedCodeBlock[66, 96]
+  BulletList[96, 114] isTight=true
+    BulletListItem[96, 105] open:[96, 97, "*"]
+      Paragraph[98, 105]
+        Text[98, 104] chars:[98, 104, "item 4"]
+    BulletListItem[105, 114] open:[105, 106, "*"]
+      Paragraph[107, 114]
+        Text[107, 113] chars:[107, 113, "item 5"]
+````````````````````````````````
+
+
+Without break on two blank lines
+
+```````````````````````````````` example(List - No Break on Double Blank Line: 4) options(list-no-break)
+* item 1
+* item 2
+    * sub item 1
+    * sub item 2
+    
+    
+    * sub item 3
+    * sub item 4
+* item 4
+* item 5
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+    </ul>
+  </li>
+  <li>item 4</li>
+  <li>item 5</li>
+</ul>
+.
+Document[0, 114]
+  BulletList[0, 52] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 52] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+      BulletList[22, 52] isTight=true
+        BulletListItem[22, 35] open:[22, 23, "*"]
+          Paragraph[24, 35]
+            Text[24, 34] chars:[24, 34, "sub item 1"]
+        BulletListItem[39, 52] open:[39, 40, "*"]
+          Paragraph[41, 52]
+            Text[41, 51] chars:[41, 51, "sub item 2"]
+  BulletList[96, 114] isTight=true
+    BulletListItem[96, 105] open:[96, 97, "*"]
+      Paragraph[98, 105]
+        Text[98, 104] chars:[98, 104, "item 4"]
+    BulletListItem[105, 114] open:[105, 106, "*"]
+      Paragraph[107, 114]
+        Text[107, 113] chars:[107, 113, "item 5"]
+````````````````````````````````
+
+
+### List - No Manual Start Numbering
+
+With start
+
+```````````````````````````````` example List - No Manual Start Numbering: 1
+2. item 1
+1. item 1
+1. item 1
+.
+<ol start="2">
+  <li>item 1</li>
+  <li>item 1</li>
+  <li>item 1</li>
+</ol>
+.
+Document[0, 30]
+  OrderedList[0, 30] isTight=true
+    OrderedListItem[0, 10] open:[0, 2, "2."]
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+    OrderedListItem[10, 20] open:[10, 12, "1."]
+      Paragraph[13, 20]
+        Text[13, 19] chars:[13, 19, "item 1"]
+    OrderedListItem[20, 30] open:[20, 22, "1."]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 1"]
+````````````````````````````````
+
+
+Without start
+
+```````````````````````````````` example(List - No Manual Start Numbering: 2) options(list-no-start)
+2. item 1
+1. item 1
+1. item 1
+.
+<ol>
+  <li>item 1</li>
+  <li>item 1</li>
+  <li>item 1</li>
+</ol>
+.
+Document[0, 30]
+  OrderedList[0, 30] isTight=true
+    OrderedListItem[0, 10] open:[0, 2, "2."]
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+    OrderedListItem[10, 20] open:[10, 12, "1."]
+      Paragraph[13, 20]
+        Text[13, 19] chars:[13, 19, "item 1"]
+    OrderedListItem[20, 30] open:[20, 22, "1."]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 1"]
+````````````````````````````````
+
 

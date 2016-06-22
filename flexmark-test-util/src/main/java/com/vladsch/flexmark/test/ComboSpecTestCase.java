@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public abstract class ComboSpecTestCase extends FullSpecTestCase {
-    public static final String SPEC_RESOURCE = "/ast_spec.txt";
+    public static final String SPEC_RESOURCE = "/ast_spec.md";
 
     private DumpSpecReader dumpSpecReader;
     protected final SpecExample example;

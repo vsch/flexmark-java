@@ -56,9 +56,9 @@ class DumpSpecReader extends SpecReader {
         sb.append(SpecReader.EXAMPLE_START);
         if (includeExampleCoords) {
             if (optionsSet != null) {
-                sb.append("(").append(section).append(": ").append(number).append(")");
+                sb.append("(").append(section.trim()).append(": ").append(number).append(")");
             } else {
-                sb.append(" ").append(section).append(": ").append(number);
+                sb.append(" ").append(section.trim()).append(": ").append(number);
             }
         }
         if (optionsSet != null) {

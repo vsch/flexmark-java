@@ -1,6 +1,17 @@
 Version History
 ===============
 
+0.2.5
+-----
+
+- Change built in ignore test option to `IGNORE`.
+
+- Change spec files to `.md` extension so that Markdown Navigator could be used to edit it
+  to add completions of options, annotations of options and option declarations, structure
+  view and formatting. 
+
+- [ ] To Fix List Option no break out of lists on two blank lines.
+
 0.2.4
 -----
 

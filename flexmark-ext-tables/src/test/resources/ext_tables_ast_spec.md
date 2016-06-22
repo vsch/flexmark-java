@@ -1104,13 +1104,6 @@ Document[0, 23]
 
 ```````````````````````````````` example Tables Extension: 38
 Abc|Def
-: ---|--- . <p>Abc|Def
-: ---|---</p> . Document[0, 18] Paragraph[0, 18] Text[0, 7] chars:[0, 7, "Abc|Def"]
-  SoftLineBreak[7, 8] Text[8, 17] chars:[8, 17, ": ---|---"]
-  ````````````````````````````````
-
-```````````````````````````````` example Tables Extension: 38
-Abc|Def
 --- :|---
 .
 <p>Abc|Def

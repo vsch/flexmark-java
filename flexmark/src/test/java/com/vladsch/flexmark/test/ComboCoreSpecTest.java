@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboCoreSpecTest extends ComboSpecTestCase {
-    static final String SPEC_RESOURCE = "/ast_spec.txt";
+    static final String SPEC_RESOURCE = "/ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 0)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
