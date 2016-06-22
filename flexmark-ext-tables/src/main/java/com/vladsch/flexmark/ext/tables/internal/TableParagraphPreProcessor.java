@@ -5,6 +5,7 @@ import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.NodeIterator;
+import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.CharacterNodeFactory;
@@ -139,7 +140,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         }
 
         // table is done, could be earlier than the lines tested earlier, may need to truncate lines
-        Node tableBlock = new TableBlock(tableLines.subList(0, tableRows.size()));
+        Block tableBlock = new TableBlock(tableLines.subList(0, tableRows.size()));
         Node section = new TableHead();
         tableBlock.appendChild(section);
 
@@ -229,26 +230,16 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         section.setCharsFromContent();
 
         if (section instanceof TableSeparator) {
-            tableBlock.appendChild(new TableBody());
+            TableBody tableBody = new TableBody();
+            tableBlock.appendChild(tableBody);
         }
 
         tableBlock.setCharsFromContent();
 
         block.insertBefore(tableBlock);
+        state.blockAdded(tableBlock, null);
+
         return tableBlock.getChars().length();
-    }
-
-    private static int countCells(List<BasedSequence> segments) {
-        int cells = 0;
-        for (BasedSequence segment : segments) {
-            if (isCell(segment)) cells++;
-        }
-
-        return cells;
-    }
-
-    private static boolean isCell(BasedSequence segment) {
-        return segment.length() != 1 || segment.charAt(0) != '|';
     }
 
     private static List<TableCell.Alignment> parseAlignment(BasedSequence separatorLine) {

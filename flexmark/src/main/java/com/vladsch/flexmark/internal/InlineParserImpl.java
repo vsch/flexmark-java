@@ -384,7 +384,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         referenceRepository.put(normalizedLabel, reference);
 
         block.insertBefore(reference);
-
+        
         return index - startIndex;
     }
 

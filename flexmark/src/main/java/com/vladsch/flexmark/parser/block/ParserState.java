@@ -2,6 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.MutableDataHolder;
+import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
 
@@ -61,23 +62,41 @@ public interface ParserState {
      */
     int getLineNumber();
 
-  /**
-   * @return the start of line offset into the input stream corresponding to current index into the line
-   */
+    /**
+     * @return the start of line offset into the input stream corresponding to current index into the line
+     */
     int getLineStart();
 
-  /**
-   * @return the EOL offset into the input stream corresponding to current index into the line
-   */
+    /**
+     * @return the EOL offset into the input stream corresponding to current index into the line
+     */
     int getLineEolLength();
 
-  /**
-   * @return the end of line offset into the input stream corresponding to current index into the line, including the EOL
-   */
+    /**
+     * @return the end of line offset into the input stream corresponding to current index into the line, including the EOL
+     */
     int getLineEndIndex();
 
     boolean endsWithBlankLine(Node block);
     boolean isLastLineBlank(Node node);
 
     MutableDataHolder getProperties();
+
+    ParserPhase getParserPhase();
+
+    /**
+     * Used by Paragraph and Block pre-processors to inform parser of additions/removals to allow updating optimization structures
+     *
+     * @param block       block that was added
+     * @param blockParser block parser instance whose block() method returns the block, or null if none.
+     *                    if not null then the blockParser's parseInlines() method will be called during the PARSE_INLINES phase
+     */
+    void blockAdded(Block block, BlockParser blockParser);
+
+    /**
+     * Used by Paragraph and Block pre-processors to inform parser of additions/removals to allow updating optimization structures
+     *
+     * @param block block to be removed. NOTE: The block will be unlinked.
+     */
+    void removeBlock(Block block);
 }

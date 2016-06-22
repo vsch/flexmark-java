@@ -1,6 +1,17 @@
 Version History
 ===============
 
+0.2.6
+-----
+
+- Fix List Option no break out of lists on two blank lines.
+
+- Add `blockAdded()` and `removeBlock()` to `ParserState` to allow custom processor created
+  blocks to be included in optimization structures used by block pre-processing handling.
+
+- Change ext-table `TableBlock` to use `blockAdded()` method to allow preProcessing of table
+  blocks by custom block pre-processors. 
+
 0.2.5
 -----
 

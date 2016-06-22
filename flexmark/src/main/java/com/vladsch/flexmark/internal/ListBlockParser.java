@@ -64,7 +64,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean breakOutOnDoubleBlankLine() {
-        return true;
+        return options.endOnDoubleBlank;
     }
 
     private void finalizeListTight(ParserState parserState) {

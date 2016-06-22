@@ -115,6 +115,12 @@ public class DocumentParser implements ParserState {
 
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
     final private DataHolder options;
+    private ParserPhase currentPhase = ParserPhase.NONE;
+
+    @Override
+    public ParserPhase getParserPhase() {
+        return currentPhase;
+    }
 
     public static class ParagraphPreProcessorDependencies extends ResolvedDependencies<ParagraphPreProcessorDependencyStage> {
         public ParagraphPreProcessorDependencies(List<ParagraphPreProcessorDependencyStage> dependentStages) {
@@ -224,6 +230,7 @@ public class DocumentParser implements ParserState {
 
         this.documentBlockParser = new DocumentBlockParser();
         activateBlockParser(this.documentBlockParser);
+        this.currentPhase = ParserPhase.STARTING;
     }
 
     @Override
@@ -290,6 +297,8 @@ public class DocumentParser implements ParserState {
 
         documentBlockParser.initializeDocument(options, input);
         inlineParser.initializeDocument(documentBlockParser.getBlock());
+
+        currentPhase = ParserPhase.PARSE_BLOCKS;
 
         while ((lineBreak = Parsing.findLineBreak(input, lineStart)) != -1) {
             BasedSequence line = input.subSequence(lineStart, lineBreak);
@@ -699,15 +708,15 @@ public class DocumentParser implements ParserState {
                     allParagraphsList.add((Paragraph) block);
                 }
 
-                addPreProcessableBlock(block, blockParser);
-                allBlocksParserMap.put(block, blockParser);
+                blockAdded(block, blockParser);
             }
 
             allBlockParsers.add(blockParser);
         }
     }
 
-    private void addPreProcessableBlock(Block block, BlockParser blockParser) {
+    @Override
+    public void blockAdded(Block block, BlockParser blockParser) {
         if (!blockPreProcessorDependencies.isEmpty()) {
             Class<? extends Block> blockClass = block.getClass();
             if (blockPreProcessorDependencies.getBlockTypes().contains(blockClass)) {
@@ -715,6 +724,19 @@ public class DocumentParser implements ParserState {
                 allPreProcessBlocks.get(blockClass).add(block);
             }
         }
+
+        allBlocksParserMap.put(block, blockParser);
+    }
+
+    @Override
+    public void removeBlock(Block block) {
+        BlockParser blockParser = allBlocksParserMap.get(block);
+        if (blockParser != null) {
+            allBlockParsers.remove(blockParser);
+        }
+
+        allBlocksParserMap.remove(block);
+        block.unlink();
     }
 
     private void deactivateBlockParser() {
@@ -800,8 +822,7 @@ public class DocumentParser implements ParserState {
 
                     if (contentChars.isBlank()) {
                         // all used up
-                        block.unlink();
-                        allBlocksParserMap.remove(block);
+                        removeBlock(block);
                         return;
                     } else {
                         // skip lines that were removed
@@ -887,11 +908,9 @@ public class DocumentParser implements ParserState {
                                             allBlockParsers.remove(blockParser);
                                         }
 
-                                        allBlocksParserMap.remove(block);
-                                        addPreProcessableBlock(newBlock, null);
-
                                         block.insertAfter(newBlock);
-                                        block.unlink();
+                                        blockAdded(newBlock, null);
+                                        removeBlock(block);
 
                                         if (block.getClass() != newBlock.getClass()) {
                                             // class changed, we will rerun for this one
@@ -913,12 +932,16 @@ public class DocumentParser implements ParserState {
         finalizeBlocks(this.activeBlockParsers);
 
         // need to run block pre-processors at this point, before inline processing
+        currentPhase = ParserPhase.PRE_PROCESS_PARAGRAPHS;
         this.preProcessParagraphs();
+        currentPhase = ParserPhase.PRE_PROCESS_BLOCKS;
         this.preProcessBlocks();
 
         // can naw run inline processing
+        currentPhase = ParserPhase.PARSE_INLINES;
         this.processInlines();
 
+        currentPhase = ParserPhase.DONE;
         Document document = this.documentBlockParser.getBlock();
         inlineParser.finalizeDocument(document);
         return document;

@@ -780,19 +780,26 @@ Without break all lists on two blank lines
 * item 5
 .
 <ul>
-  <li>item 1</li>
-  <li>item 2
+  <li>
+    <p>item 1</p>
+  </li>
+  <li>
+    <p>item 2</p>
     <ul>
       <li>sub item 1</li>
       <li>sub item 2</li>
     </ul>
   </li>
-  <li>item 4</li>
-  <li>item 5</li>
+  <li>
+    <p>item 4</p>
+  </li>
+  <li>
+    <p>item 5</p>
+  </li>
 </ul>
 .
 Document[0, 80]
-  BulletList[0, 52] isTight=true
+  BulletList[0, 80] isTight=false
     BulletListItem[0, 9] open:[0, 1, "*"]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -806,7 +813,55 @@ Document[0, 80]
         BulletListItem[39, 52] open:[39, 40, "*"]
           Paragraph[41, 52]
             Text[41, 51] chars:[41, 51, "sub item 2"]
-  BulletList[62, 80] isTight=true
+    BulletListItem[62, 71] open:[62, 63, "*"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 4"]
+    BulletListItem[71, 80] open:[71, 72, "*"]
+      Paragraph[73, 80]
+        Text[73, 79] chars:[73, 79, "item 5"]
+````````````````````````````````
+
+
+Without break all lists on two blank lines no auto loose
+
+```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
+* item 1
+* item 2
+    * sub item 1
+    * sub item 2
+    
+    
+* item 4
+* item 5
+.
+<ul>
+  <li>item 1</li>
+  <li>
+    <p>item 2</p>
+    <ul>
+      <li>sub item 1</li>
+      <li>sub item 2</li>
+    </ul>
+  </li>
+  <li>item 4</li>
+  <li>item 5</li>
+</ul>
+.
+Document[0, 80]
+  BulletList[0, 80] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "*"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 52] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+      BulletList[22, 52] isTight=true
+        BulletListItem[22, 35] open:[22, 23, "*"]
+          Paragraph[24, 35]
+            Text[24, 34] chars:[24, 34, "sub item 1"]
+        BulletListItem[39, 52] open:[39, 40, "*"]
+          Paragraph[41, 52]
+            Text[41, 51] chars:[41, 51, "sub item 2"]
     BulletListItem[62, 71] open:[62, 63, "*"]
       Paragraph[64, 71]
         Text[64, 70] chars:[64, 70, "item 4"]
@@ -818,7 +873,7 @@ Document[0, 80]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example List - No Break on Double Blank Line: 3
+```````````````````````````````` example List - No Break on Double Blank Line: 4
 * item 1
 * item 2
     * sub item 1
@@ -875,7 +930,7 @@ Document[0, 114]
 
 Without break on two blank lines
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 4) options(list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 5) options(list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -891,8 +946,18 @@ Without break on two blank lines
   <li>item 1</li>
   <li>item 2
     <ul>
-      <li>sub item 1</li>
-      <li>sub item 2</li>
+      <li>
+        <p>sub item 1</p>
+      </li>
+      <li>
+        <p>sub item 2</p>
+      </li>
+      <li>
+        <p>sub item 3</p>
+      </li>
+      <li>
+        <p>sub item 4</p>
+      </li>
     </ul>
   </li>
   <li>item 4</li>
@@ -900,21 +965,26 @@ Without break on two blank lines
 </ul>
 .
 Document[0, 114]
-  BulletList[0, 52] isTight=true
+  BulletList[0, 114] isTight=true
     BulletListItem[0, 9] open:[0, 1, "*"]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[9, 52] open:[9, 10, "*"]
+    BulletListItem[9, 96] open:[9, 10, "*"]
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 2"]
-      BulletList[22, 52] isTight=true
+      BulletList[22, 96] isTight=false
         BulletListItem[22, 35] open:[22, 23, "*"]
           Paragraph[24, 35]
             Text[24, 34] chars:[24, 34, "sub item 1"]
         BulletListItem[39, 52] open:[39, 40, "*"]
           Paragraph[41, 52]
             Text[41, 51] chars:[41, 51, "sub item 2"]
-  BulletList[96, 114] isTight=true
+        BulletListItem[66, 79] open:[66, 67, "*"]
+          Paragraph[68, 79]
+            Text[68, 78] chars:[68, 78, "sub item 3"]
+        BulletListItem[83, 96] open:[83, 84, "*"]
+          Paragraph[85, 96]
+            Text[85, 95] chars:[85, 95, "sub item 4"]
     BulletListItem[96, 105] open:[96, 97, "*"]
       Paragraph[98, 105]
         Text[98, 104] chars:[98, 104, "item 4"]
