@@ -203,7 +203,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
             int newColumn = listData.contentColumn;
             // prepend the list block if needed
-            if (listBlockParser == null || !options.bulletMatch || !listsMatch((ListBlock) matched.getBlock(), listData.listBlock)) {
+            if (listBlockParser == null || (options.bulletMatch && !listsMatch((ListBlock) matched.getBlock(), listData.listBlock))) {
                 listBlockParser = new ListBlockParser(options, listData);
                 listBlockParser.setTight(true);
 

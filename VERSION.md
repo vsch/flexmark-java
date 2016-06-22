@@ -6,6 +6,8 @@ Version History
 
 - Fix List Option no break out of lists on two blank lines.
 
+- Fix List Option no bullet match for starting a new list.
+
 - Add `blockAdded()` and `removeBlock()` to `ParserState` to allow custom processor created
   blocks to be included in optimization structures used by block pre-processing handling.
 
@@ -20,8 +22,6 @@ Version History
 - Change spec files to `.md` extension so that Markdown Navigator could be used to edit it
   to add completions of options, annotations of options and option declarations, structure
   view and formatting. 
-
-- [ ] To Fix List Option no break out of lists on two blank lines.
 
 0.2.4
 -----

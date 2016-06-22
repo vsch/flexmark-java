@@ -994,19 +994,81 @@ Document[0, 114]
 ````````````````````````````````
 
 
+### List - No Bullet Match
+
+With bullet matching for items within a list
+
+```````````````````````````````` example List - No Bullet Match: 1
+- item 1
+* item 1
++ item 1
+.
+<ul>
+  <li>item 1</li>
+</ul>
+<ul>
+  <li>item 1</li>
+</ul>
+<ul>
+  <li>item 1</li>
+</ul>
+.
+Document[0, 27]
+  BulletList[0, 9] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "-"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+  BulletList[9, 18] isTight=true
+    BulletListItem[9, 18] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 1"]
+  BulletList[18, 27] isTight=true
+    BulletListItem[18, 27] open:[18, 19, "+"]
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 1"]
+````````````````````````````````
+
+
+Without bullet matching for items within a list
+
+```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
+- item 1
+* item 2
++ item 3
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+</ul>
+.
+Document[0, 27]
+  BulletList[0, 27] isTight=true
+    BulletListItem[0, 9] open:[0, 1, "-"]
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 18] open:[9, 10, "*"]
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[18, 27] open:[18, 19, "+"]
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 3"]
+````````````````````````````````
+
+
 ### List - No Manual Start Numbering
 
 With start
 
 ```````````````````````````````` example List - No Manual Start Numbering: 1
 2. item 1
-1. item 1
-1. item 1
+1. item 2
+3. item 3
 .
 <ol start="2">
   <li>item 1</li>
-  <li>item 1</li>
-  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
 </ol>
 .
 Document[0, 30]
@@ -1016,10 +1078,10 @@ Document[0, 30]
         Text[3, 9] chars:[3, 9, "item 1"]
     OrderedListItem[10, 20] open:[10, 12, "1."]
       Paragraph[13, 20]
-        Text[13, 19] chars:[13, 19, "item 1"]
-    OrderedListItem[20, 30] open:[20, 22, "1."]
+        Text[13, 19] chars:[13, 19, "item 2"]
+    OrderedListItem[20, 30] open:[20, 22, "3."]
       Paragraph[23, 30]
-        Text[23, 29] chars:[23, 29, "item 1"]
+        Text[23, 29] chars:[23, 29, "item 3"]
 ````````````````````````````````
 
 
