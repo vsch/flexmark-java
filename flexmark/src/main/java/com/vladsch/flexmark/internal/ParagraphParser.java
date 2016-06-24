@@ -12,7 +12,7 @@ public class ParagraphParser extends AbstractBlockParser {
     private final Paragraph block = new Paragraph();
     private BlockContent content = new BlockContent();
 
-    public BlockContent getContent() {
+    public BlockContent getBlockContent() {
         return content;
     }
 
@@ -33,6 +33,11 @@ public class ParagraphParser extends AbstractBlockParser {
     @Override
     public void addLine(ParserState state, BasedSequence line) {
         content.add(line, state.getIndent());
+    }
+
+    @Override
+    public boolean isParagraphParser() {
+        return true;
     }
 
     @Override

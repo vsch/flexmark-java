@@ -18,8 +18,10 @@ public interface Visitor {
     void visit(HardLineBreak node);
     void visit(Heading node);
     void visit(HtmlBlock node);
+    void visit(HtmlCommentBlock node);
     void visit(HtmlEntity node);
     void visit(HtmlInline node);
+    void visit(HtmlInlineComment node);
     void visit(Image node);
     void visit(ImageRef node);
     void visit(IndentedCodeBlock node);

@@ -87,12 +87,22 @@ class AstVisitor extends AbstractVisitor {
     }
 
     @Override
+    public void visit(HtmlBlock node) {
+        visitNode(node);
+    }
+
+    @Override
+    public void visit(HtmlCommentBlock node) {
+        visitNode(node);
+    }
+
+    @Override
     public void visit(HtmlInline node) {
         visitNode(node);
     }
 
     @Override
-    public void visit(HtmlBlock node) {
+    public void visit(HtmlInlineComment node) {
         visitNode(node);
     }
 

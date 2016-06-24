@@ -22,30 +22,19 @@ import java.util.*;
  */
 public class HtmlRenderer {
     final static public DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
-    final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
-    final static public DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DataKey<>("SUPPRESS_HTML_BLOCKS", false);
-    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DataKey<>("SUPPRESS_INLINE_HTML", false);
     final public static DataKey<Boolean> LISTS_ORDERED_START = new DataKey<>("LISTS_ORDERED_START", true);
-
-    static class HtmlRendererOptions {
-        public final String softBreak;
-        public final boolean escapeHtml;
-        public final boolean percentEncodeUrls;
-        public final int indentSize;
-        public final boolean suppressHtmlBlocks;
-        public final boolean suppressInlineHtml;
-
-        public HtmlRendererOptions(DataHolder options) {
-            softBreak = options.get(SOFT_BREAK);
-            escapeHtml = options.get(ESCAPE_HTML);
-            percentEncodeUrls = options.get(PERCENT_ENCODE_URLS);
-            indentSize = options.get(INDENT_SIZE);
-            suppressHtmlBlocks = options.get(SUPPRESS_HTML_BLOCKS);
-            suppressInlineHtml = options.get(SUPPRESS_INLINE_HTML);
-        }
-    }
+    final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
+    final static public DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML::getFrom);
+    final static public DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS::getFrom);
+    final static public DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML::getFrom);
+    final static public DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<>("ESCAPE_INLINE_HTML_COMMENTS", ESCAPE_INLINE_HTML::getFrom);
+    final static public DataKey<Boolean> SUPPRESS_HTML = new DataKey<>("SUPPRESS_HTML", false);
+    final static public DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_BLOCKS", SUPPRESS_HTML::getFrom);
+    final static public DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS::getFrom);
+    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML::getFrom);
+    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENT = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML_COMMENT", SUPPRESS_INLINE_HTML::getFrom);
 
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;
@@ -68,10 +57,6 @@ public class HtmlRenderer {
                 return new CoreNodeRenderer(context);
             }
         });
-    }
-
-    public int getIndentSize() {
-        return htmlOptions.indentSize;
     }
 
     /**
@@ -312,6 +297,11 @@ public class HtmlRenderer {
         }
 
         @Override
+        public HtmlRendererOptions getHtmlOptions() {
+            return htmlOptions;
+        }
+
+        @Override
         public Document getDocument() {
             return document;
         }
@@ -319,11 +309,6 @@ public class HtmlRenderer {
         @Override
         public RenderingPhase getRenderingPhase() {
             return phase;
-        }
-
-        @Override
-        public boolean shouldEscapeHtml() {
-            return htmlOptions.escapeHtml;
         }
 
         @Override
@@ -347,11 +332,6 @@ public class HtmlRenderer {
         @Override
         public HtmlWriter getHtmlWriter() {
             return htmlWriter;
-        }
-
-        @Override
-        public String getSoftBreak() {
-            return htmlOptions.softBreak;
         }
 
         @Override

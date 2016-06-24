@@ -2886,10 +2886,10 @@ rather than an [HTML block].)
 .
 Document[0, 17]
   Paragraph[0, 17]
-    HtmlInline[0, 5]
+    HtmlInline[0, 5] chars:[0, 5, "<del>"]
     Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9, "foo"] textClose:[9, 10, "*"]
       Text[6, 9] chars:[6, 9, "foo"]
-    HtmlInline[10, 16]
+    HtmlInline[10, 16] chars:[10, 16, "</del>"]
 ````````````````````````````````
 
 
@@ -3050,7 +3050,7 @@ Document[0, 35]
 <p><em>baz</em></p>
 .
 Document[0, 24]
-  HtmlBlock[0, 18]
+  HtmlCommentBlock[0, 18]
   Paragraph[18, 24]
     Emphasis[18, 23] textOpen:[18, 19, "*"] text:[19, 22, "baz"] textClose:[22, 23, "*"]
       Text[19, 22] chars:[19, 22, "baz"]
@@ -3088,7 +3088,7 @@ bar
    baz -->
 .
 Document[0, 25]
-  HtmlBlock[0, 25]
+  HtmlCommentBlock[0, 25]
 ````````````````````````````````
 
 
@@ -3171,7 +3171,7 @@ The opening tag can be indented 1-3 spaces, but not 4:
 </code></pre>
 .
 Document[0, 33]
-  HtmlBlock[0, 15]
+  HtmlCommentBlock[0, 15]
   IndentedCodeBlock[20, 33]
 ````````````````````````````````
 
@@ -3246,7 +3246,7 @@ Document[0, 23]
   Paragraph[0, 23]
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
-    HtmlInline[4, 18]
+    HtmlInline[4, 18] chars:[4, 18, "<a hr"..."bar">"]
     SoftLineBreak[18, 19]
     Text[19, 22] chars:[19, 22, "baz"]
 ````````````````````````````````
@@ -7790,7 +7790,7 @@ But this is an HTML tag:
 .
 Document[0, 14]
   Paragraph[0, 14]
-    HtmlInline[0, 12]
+    HtmlInline[0, 12] chars:[0, 12, "<a hr"..."="`">"]
     Text[12, 13] chars:[12, 13, "`"]
 ````````````````````````````````
 
@@ -9844,7 +9844,7 @@ Document[0, 18]
 Document[0, 28]
   Paragraph[0, 28]
     Text[0, 1] chars:[0, 1, "*"]
-    HtmlInline[1, 27]
+    HtmlInline[1, 27] chars:[1, 27, "<img "...""*"/>"]
 ````````````````````````````````
 
 
@@ -9856,7 +9856,7 @@ Document[0, 28]
 Document[0, 16]
   Paragraph[0, 16]
     Text[0, 2] chars:[0, 2, "**"]
-    HtmlInline[2, 15]
+    HtmlInline[2, 15] chars:[2, 15, "<a hr"...""**">"]
 ````````````````````````````````
 
 
@@ -9868,7 +9868,7 @@ __<a href="__">
 Document[0, 16]
   Paragraph[0, 16]
     Text[0, 2] chars:[0, 2, "__"]
-    HtmlInline[2, 15]
+    HtmlInline[2, 15] chars:[2, 15, "<a hr"...""__">"]
 ````````````````````````````````
 
 
@@ -10097,7 +10097,8 @@ bar>)</p>
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 7] chars:[0, 7, "[link]("]
-    HtmlInline[7, 16]
+    HtmlInline[7, 16] chars:[7, 16, "<foo
+bar>"]
     Text[16, 17] chars:[16, 17, ")"]
 ````````````````````````````````
 
@@ -10559,7 +10560,7 @@ and autolinks over link grouping:
 Document[0, 25]
   Paragraph[0, 25]
     Text[0, 5] chars:[0, 5, "[foo "]
-    HtmlInline[5, 24]
+    HtmlInline[5, 24] chars:[5, 24, "<bar "..."az)">"]
 ````````````````````````````````
 
 
@@ -10797,7 +10798,7 @@ and autolinks over link grouping:
 Document[0, 38]
   Paragraph[0, 25]
     Text[0, 5] chars:[0, 5, "[foo "]
-    HtmlInline[5, 24]
+    HtmlInline[5, 24] chars:[5, 24, "<bar "..."ef]">"]
   Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] urlOpen:[0, 0] url:[33, 37, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
 ````````````````````````````````
 
@@ -12169,9 +12170,9 @@ Here are some simple open tags:
 .
 Document[0, 14]
   Paragraph[0, 14]
-    HtmlInline[0, 3]
-    HtmlInline[3, 8]
-    HtmlInline[8, 13]
+    HtmlInline[0, 3] chars:[0, 3, "<a>"]
+    HtmlInline[3, 8] chars:[3, 8, "<bab>"]
+    HtmlInline[8, 13] chars:[8, 13, "<c2c>"]
 ````````````````````````````````
 
 
@@ -12184,8 +12185,8 @@ Empty elements:
 .
 Document[0, 10]
   Paragraph[0, 10]
-    HtmlInline[0, 4]
-    HtmlInline[4, 9]
+    HtmlInline[0, 4] chars:[0, 4, "<a/>"]
+    HtmlInline[4, 9] chars:[4, 9, "<b2/>"]
 ````````````````````````````````
 
 
@@ -12200,8 +12201,8 @@ data="foo" ></p>
 .
 Document[0, 23]
   Paragraph[0, 23]
-    HtmlInline[0, 6]
-    HtmlInline[6, 22]
+    HtmlInline[0, 6] chars:[0, 6, "<a  />"]
+    HtmlInline[6, 22] chars:[6, 22, "<b2\nd"..."oo" >"]
 ````````````````````````````````
 
 
@@ -12216,7 +12217,7 @@ _boolean zoop:33=zoop:33 /></p>
 .
 Document[0, 64]
   Paragraph[0, 64]
-    HtmlInline[0, 63]
+    HtmlInline[0, 63] chars:[0, 63, "<a fo"..."33 />"]
 ````````````````````````````````
 
 
@@ -12230,7 +12231,7 @@ Foo <responsive-image src="foo.jpg" />
 Document[0, 39]
   Paragraph[0, 39]
     Text[0, 4] chars:[0, 4, "Foo "]
-    HtmlInline[4, 38]
+    HtmlInline[4, 38] chars:[4, 38, "<resp"..."g" />"]
 ````````````````````````````````
 
 
@@ -12312,8 +12313,8 @@ Closing tags:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    HtmlInline[0, 4]
-    HtmlInline[4, 11]
+    HtmlInline[0, 4] chars:[0, 4, "</a>"]
+    HtmlInline[4, 11] chars:[4, 11, "</foo >"]
 ````````````````````````````````
 
 
@@ -12342,7 +12343,7 @@ comment - with hyphen --></p>
 Document[0, 45]
   Paragraph[0, 45]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 44]
+    HtmlInlineComment[4, 44] chars:[4, 44, "<!-- "..."n -->"]
 ````````````````````````````````
 
 
@@ -12385,7 +12386,7 @@ foo <?php echo $a; ?>
 Document[0, 22]
   Paragraph[0, 22]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 21]
+    HtmlInline[4, 21] chars:[4, 21, "<?php"..."a; ?>"]
 ````````````````````````````````
 
 
@@ -12399,7 +12400,7 @@ foo <!ELEMENT br EMPTY>
 Document[0, 24]
   Paragraph[0, 24]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 23]
+    HtmlInline[4, 23] chars:[4, 23, "<!ELE"..."MPTY>"]
 ````````````````````````````````
 
 
@@ -12413,7 +12414,7 @@ foo <![CDATA[>&<]]>
 Document[0, 20]
   Paragraph[0, 20]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 19]
+    HtmlInline[4, 19] chars:[4, 19, "<![CD"..."&<]]>"]
 ````````````````````````````````
 
 
@@ -12428,7 +12429,7 @@ foo <a href="&ouml;">
 Document[0, 22]
   Paragraph[0, 22]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 21]
+    HtmlInline[4, 21] chars:[4, 21, "<a hr"..."ml;">"]
 ````````````````````````````````
 
 
@@ -12442,7 +12443,7 @@ foo <a href="\*">
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 17]
+    HtmlInline[4, 17] chars:[4, 17, "<a hr"...""\*">"]
 ````````````````````````````````
 
 
@@ -12618,7 +12619,7 @@ bar"></p>
 .
 Document[0, 21]
   Paragraph[0, 21]
-    HtmlInline[0, 20]
+    HtmlInline[0, 20] chars:[0, 20, "<a hr"..."bar">"]
 ````````````````````````````````
 
 
@@ -12631,7 +12632,7 @@ bar"></p>
 .
 Document[0, 20]
   Paragraph[0, 20]
-    HtmlInline[0, 19]
+    HtmlInline[0, 19] chars:[0, 19, "<a hr"..."bar">"]
 ````````````````````````````````
 
 

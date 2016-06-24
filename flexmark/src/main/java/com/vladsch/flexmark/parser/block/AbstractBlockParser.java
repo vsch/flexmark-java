@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
+import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.MutableDataSet;
@@ -17,6 +18,16 @@ public abstract class AbstractBlockParser implements BlockParser {
     @Override
     public boolean canContain(Block block) {
         return false;
+    }
+
+    @Override
+    public boolean isParagraphParser() {
+        return false;
+    }
+
+    @Override
+    public BlockContent getBlockContent() {
+        return null;
     }
 
     @Override

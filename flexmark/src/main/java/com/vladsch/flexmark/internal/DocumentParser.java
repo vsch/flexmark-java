@@ -952,17 +952,15 @@ public class DocumentParser implements ParserState {
 
         @Override
         public List<BasedSequence> getParagraphLines() {
-            if (matchedBlockParser instanceof ParagraphParser) {
-                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContent().getLines();
+            if (matchedBlockParser.isParagraphParser()) {
+                return matchedBlockParser.getBlockContent().getLines();
             }
             return null;
         }
 
         public List<Integer> getParagraphEolLengths() {
-            if (matchedBlockParser instanceof ParagraphParser) {
-                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContent().getLineIndents();
+            if (matchedBlockParser.isParagraphParser()) {
+                return matchedBlockParser.getBlockContent().getLineIndents();
             }
             return null;
         }
@@ -978,18 +976,16 @@ public class DocumentParser implements ParserState {
 
         @Override
         public BasedSequence getParagraphContent() {
-            if (matchedBlockParser instanceof ParagraphParser) {
-                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getContent().getContents();
+            if (matchedBlockParser.isParagraphParser()) {
+                return matchedBlockParser.getBlockContent().getContents();
             }
             return null;
         }
 
         @Override
         public MutableDataHolder getParagraphDataHolder() {
-            if (matchedBlockParser instanceof ParagraphParser) {
-                ParagraphParser paragraphParser = (ParagraphParser) matchedBlockParser;
-                return paragraphParser.getDataHolder();
+            if (matchedBlockParser.isParagraphParser()) {
+                return matchedBlockParser.getDataHolder();
             }
             return null;
         }

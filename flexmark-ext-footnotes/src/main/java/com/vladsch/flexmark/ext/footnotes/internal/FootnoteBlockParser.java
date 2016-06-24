@@ -23,7 +23,7 @@ public class FootnoteBlockParser extends AbstractBlockParser {
         this.contentIndent = contentIndent;
     }
 
-    public BlockContent getContent() {
+    public BlockContent getBlockContent() {
         return content;
     }
 

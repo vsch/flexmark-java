@@ -8,8 +8,6 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Extra tests
 
-Converts footnote references and definitions to footnotes in the HTML page
-
 Code fence starting with setext header marker
 
 ```````````````````````````````` example Extra tests: 1
@@ -1109,6 +1107,637 @@ Document[0, 30]
     OrderedListItem[20, 30] open:[20, 22, "1."]
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
+````````````````````````````````
+
+
+### List - Relaxed Item Start
+
+With relaxed start. Lists can start without preceding blank lines.
+
+```````````````````````````````` example List - Relaxed Item Start: 1
+This is a paragraph
+2. item 1
+1. item 2
+
+This is a paragraph 
+- item 1
+- item 2
+.
+<p>This is a paragraph</p>
+<ol start="2">
+  <li>item 1</li>
+  <li>item 2</li>
+</ol>
+<p>This is a paragraph</p>
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+</ul>
+.
+Document[0, 80]
+  Paragraph[0, 20]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+  OrderedList[20, 40] isTight=true
+    OrderedListItem[20, 30] open:[20, 22, "2."]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 1"]
+    OrderedListItem[30, 40] open:[30, 32, "1."]
+      Paragraph[33, 40]
+        Text[33, 39] chars:[33, 39, "item 2"]
+  Paragraph[41, 62]
+    Text[41, 60] chars:[41, 60, "This "..."graph"]
+  BulletList[62, 80] isTight=true
+    BulletListItem[62, 71] open:[62, 63, "-"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 1"]
+    BulletListItem[71, 80] open:[71, 72, "-"]
+      Paragraph[73, 80]
+        Text[73, 79] chars:[73, 79, "item 2"]
+````````````````````````````````
+
+
+Without relaxed start. Lists start only if preceded by a blank line.
+
+```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
+This is a paragraph
+2. item 1
+1. item 2
+
+This is a paragraph 
+- item 1
+- item 2
+
+- this is a list
+- item 1
+- item 2
+.
+<p>This is a paragraph
+2. item 1
+1. item 2</p>
+<p>This is a paragraph
+- item 1
+- item 2</p>
+<ul>
+  <li>this is a list</li>
+  <li>item 1</li>
+  <li>item 2</li>
+</ul>
+.
+Document[0, 116]
+  Paragraph[0, 40]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    SoftLineBreak[19, 20]
+    Text[20, 29] chars:[20, 29, "2. item 1"]
+    SoftLineBreak[29, 30]
+    Text[30, 39] chars:[30, 39, "1. item 2"]
+  Paragraph[41, 80]
+    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    SoftLineBreak[61, 62]
+    Text[62, 70] chars:[62, 70, "- item 1"]
+    SoftLineBreak[70, 71]
+    Text[71, 79] chars:[71, 79, "- item 2"]
+  BulletList[81, 116] isTight=true
+    BulletListItem[81, 98] open:[81, 82, "-"]
+      Paragraph[83, 98]
+        Text[83, 97] chars:[83, 97, "this "..." list"]
+    BulletListItem[98, 107] open:[98, 99, "-"]
+      Paragraph[100, 107]
+        Text[100, 106] chars:[100, 106, "item 1"]
+    BulletListItem[107, 116] open:[107, 108, "-"]
+      Paragraph[109, 116]
+        Text[109, 115] chars:[109, 115, "item 2"]
+````````````````````````````````
+
+
+Without start
+
+```````````````````````````````` example(List - Relaxed Item Start: 3) options(list-no-start)
+2. item 1
+1. item 1
+1. item 1
+.
+<ol>
+  <li>item 1</li>
+  <li>item 1</li>
+  <li>item 1</li>
+</ol>
+.
+Document[0, 30]
+  OrderedList[0, 30] isTight=true
+    OrderedListItem[0, 10] open:[0, 2, "2."]
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+    OrderedListItem[10, 20] open:[10, 12, "1."]
+      Paragraph[13, 20]
+        Text[13, 19] chars:[13, 19, "item 1"]
+    OrderedListItem[20, 30] open:[20, 22, "1."]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 1"]
+````````````````````````````````
+
+
+### List - Relaxed Item Start
+
+With relaxed start. Lists can start without preceding blank lines.
+
+```````````````````````````````` example List - Relaxed Item Start: 1
+This is a paragraph
+2. item 1
+1. item 2
+
+This is a paragraph 
+- item 1
+- item 2
+.
+<p>This is a paragraph</p>
+<ol start="2">
+  <li>item 1</li>
+  <li>item 2</li>
+</ol>
+<p>This is a paragraph</p>
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+</ul>
+.
+Document[0, 80]
+  Paragraph[0, 20]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+  OrderedList[20, 40] isTight=true
+    OrderedListItem[20, 30] open:[20, 22, "2."]
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 1"]
+    OrderedListItem[30, 40] open:[30, 32, "1."]
+      Paragraph[33, 40]
+        Text[33, 39] chars:[33, 39, "item 2"]
+  Paragraph[41, 62]
+    Text[41, 60] chars:[41, 60, "This "..."graph"]
+  BulletList[62, 80] isTight=true
+    BulletListItem[62, 71] open:[62, 63, "-"]
+      Paragraph[64, 71]
+        Text[64, 70] chars:[64, 70, "item 1"]
+    BulletListItem[71, 80] open:[71, 72, "-"]
+      Paragraph[73, 80]
+        Text[73, 79] chars:[73, 79, "item 2"]
+````````````````````````````````
+
+
+Without relaxed start. Lists start only if preceded by a blank line.
+
+```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
+This is a paragraph
+2. item 1
+1. item 2
+
+This is a paragraph 
+- item 1
+- item 2
+
+- this is a list
+- item 1
+- item 2
+.
+<p>This is a paragraph
+2. item 1
+1. item 2</p>
+<p>This is a paragraph
+- item 1
+- item 2</p>
+<ul>
+  <li>this is a list</li>
+  <li>item 1</li>
+  <li>item 2</li>
+</ul>
+.
+Document[0, 116]
+  Paragraph[0, 40]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    SoftLineBreak[19, 20]
+    Text[20, 29] chars:[20, 29, "2. item 1"]
+    SoftLineBreak[29, 30]
+    Text[30, 39] chars:[30, 39, "1. item 2"]
+  Paragraph[41, 80]
+    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    SoftLineBreak[61, 62]
+    Text[62, 70] chars:[62, 70, "- item 1"]
+    SoftLineBreak[70, 71]
+    Text[71, 79] chars:[71, 79, "- item 2"]
+  BulletList[81, 116] isTight=true
+    BulletListItem[81, 98] open:[81, 82, "-"]
+      Paragraph[83, 98]
+        Text[83, 97] chars:[83, 97, "this "..." list"]
+    BulletListItem[98, 107] open:[98, 99, "-"]
+      Paragraph[100, 107]
+        Text[100, 106] chars:[100, 106, "item 1"]
+    BulletListItem[107, 116] open:[107, 108, "-"]
+      Paragraph[109, 116]
+        Text[109, 115] chars:[109, 115, "item 2"]
+````````````````````````````````
+
+
+### Thematic Break - No Relaxed Rules
+
+With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
+non-dashed thematic break, dashes are a heading.
+
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
+This is a paragraph
+***
+.
+<p>This is a paragraph</p>
+<hr />
+.
+Document[0, 24]
+  Paragraph[0, 20]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+  ThematicBreak[20, 23]
+````````````````````````````````
+
+
+Without relaxed rules. Thematic break must be preceded by a blank line. Applies to
+non-dashed thematic break, dashes are a heading.
+
+```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(hr-no-relaxed-start)
+This is a paragraph
+***
+.
+<p>This is a paragraph
+***</p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    SoftLineBreak[19, 20]
+    Text[20, 23] chars:[20, 23, "***"]
+````````````````````````````````
+
+
+### HTML Options
+
+#### HTML Encode Options
+
+Default pass it all through
+
+```````````````````````````````` example HTML Encode Options: 1
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<!-- html comment block -->
+<p>paragraph</p>
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Encode all html
+
+```````````````````````````````` example(HTML Encode Options: 2) options(escape-html)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+&lt;div&gt;
+&lt;p&gt;paragraph&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- html comment block --&gt;
+&lt;p&gt;paragraph&lt;/p&gt;
+<p>This is a paragraph with html &lt;span style=&quot;color:red;&quot;&gt;Test&lt;/span&gt; and an html comment &lt;!-- comment --&gt; embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Encode html blocks
+
+```````````````````````````````` example(HTML Encode Options: 3) options(escape-html-blocks)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+&lt;div&gt;
+&lt;p&gt;paragraph&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- html comment block --&gt;
+&lt;p&gt;paragraph&lt;/p&gt;
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Encode html block comments
+
+```````````````````````````````` example(HTML Encode Options: 4) options(escape-html-comment-blocks)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+&lt;!-- html comment block --&gt;
+<p>paragraph</p>
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Encode inline html
+
+```````````````````````````````` example(HTML Encode Options: 5) options(escape-inline-html)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<!-- html comment block -->
+<p>paragraph</p>
+<p>This is a paragraph with html &lt;span style=&quot;color:red;&quot;&gt;Test&lt;/span&gt; and an html comment &lt;!-- comment --&gt; embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Encode inline html comments
+
+```````````````````````````````` example(HTML Encode Options: 6) options(escape-inline-html-comments)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<!-- html comment block -->
+<p>paragraph</p>
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment &lt;!-- comment --&gt; embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+#### HTML Suppress Options
+
+Suppress all html
+
+```````````````````````````````` example(HTML Suppress Options: 1) options(suppress-html)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<p>This is a paragraph with html Test and an html comment  embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Suppress html blocks
+
+```````````````````````````````` example(HTML Suppress Options: 2) options(suppress-html-blocks)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Suppress html comment blocks
+
+```````````````````````````````` example(HTML Suppress Options: 3) options(suppress-html-comment-blocks)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<p>paragraph</p>
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Suppress inline html
+
+```````````````````````````````` example(HTML Suppress Options: 4) options(suppress-inline-html)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<!-- html comment block -->
+<p>paragraph</p>
+<p>This is a paragraph with html Test and an html comment  embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+````````````````````````````````
+
+
+Suppress inline html comments
+
+```````````````````````````````` example(HTML Suppress Options: 5) options(suppress-inline-html-comments)
+<div>
+<p>paragraph</p>
+</div>
+
+<!-- html comment block -->
+<p>paragraph</p>
+
+This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
+.
+<div>
+<p>paragraph</p>
+</div>
+<!-- html comment block -->
+<p>paragraph</p>
+<p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment  embedded in it.</p>
+.
+Document[0, 197]
+  HtmlBlock[0, 30]
+  HtmlCommentBlock[31, 59]
+  HtmlBlock[59, 76]
+  Paragraph[77, 197]
+    Text[77, 107] chars:[77, 107, "This "..."html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[132, 136] chars:[132, 136, "Test"]
+    HtmlInline[136, 143] chars:[136, 143, "</span>"]
+    Text[143, 164] chars:[143, 164, " and "..."ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
+    Text[180, 196] chars:[180, 196, " embe"..."n it."]
 ````````````````````````````````
 
 

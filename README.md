@@ -32,12 +32,13 @@ Progress
 
 - Wiki added [flexmark-java wiki]
 
-- Add generic `Dependent` and `DependencyResolver` to handle dependent processors, with
-  before and after dependencies and global scope option.
-
 - Add `BlockPreProcessor` interface for efficient node replacement before inline processing
   is done. Could be handled with `PostProcessor` but would require each one traverse the
   full AST. This way they are run only on the required nodes.
+
+- Add `ParagraphPreProcessor` interface for generic removal of definitions/other nodes from
+  beginnings of paragraphs, like reference definitions are done in [commonmark-java] but
+  made generic to be extensible and accessible to extensions.
 
 - Add dependencies between paragraph pre processors so that their order is defined by the
   extension. That way a paragraph pre-processor can be sure that a pre-processor on whose
@@ -88,7 +89,7 @@ Progress
         - [x] No Atx Header Space
         - [x] No Header indents
         - [x] Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
-        - [ ] Relaxed HR Rules
+        - [x] Relaxed HR Rules Option
         - [x] Wiki links
     - Publishing
         - [x] Abbreviations
@@ -99,19 +100,19 @@ Progress
         - [ ] Quotes
         - [ ] Smarts
     - Suppress
-        - [x] inline HTML
-        - [x] HTML blocks
+        - [x] inline HTML: all, non-comments, comments 
+        - [x] HTML blocks: all, non-comments, comments
     - Processor Extensions
         - [ ] Jekyll front matter
         - [ ] GitBook link URL encoding
-        - [ ] HTML comment nodes
-    - Commonmark Syntax suppression
-        - [ ] Manual loose lists
-        - [ ] Numbered lists always start with 1.
-        - [ ] Fixed list item indent, items must be indented by at least 4 spaces
-        - [ ] Relaxed list item start, allow lists to start when not preceded by a blank
-              line.
+        - [x] HTML comment nodes: Block and Inline
         - [ ] Multi-line Image URLs
+    - Commonmark Syntax suppression
+        - [x] Manual loose lists
+        - [x] Numbered lists always start with 1.
+        - [x] Fixed list item indent, items must be indented by at least 4 spaces
+        - [x] Relaxed list start option, allow lists to start when not preceded by a blank
+              line.
 
 - AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
     - `Reference`

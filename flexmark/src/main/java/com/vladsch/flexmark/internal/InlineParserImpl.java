@@ -384,7 +384,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         referenceRepository.put(normalizedLabel, reference);
 
         block.insertBefore(reference);
-        
+
         return index - startIndex;
     }
 
@@ -1132,7 +1132,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected boolean parseHtmlInline() {
         BasedSequence m = match(HTML_TAG);
         if (m != null) {
-            HtmlInline node = new HtmlInline(m);
+            // separate HTML comment from herd
+            HtmlInline node;
+            if (m.startsWith("<!--") && m.endsWith("-->")) {
+                node = new HtmlInlineComment(m);
+            } else {
+                node = new HtmlInline(m);
+            }
             appendNode(node);
             return true;
         } else {

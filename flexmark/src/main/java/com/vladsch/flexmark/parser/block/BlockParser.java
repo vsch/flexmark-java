@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
+import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.MutableDataHolder;
 import com.vladsch.flexmark.node.Block;
@@ -31,6 +32,8 @@ public interface BlockParser {
      * @return  true if Double blank line should finalize this block parser and its children and reset to parent 
      */
     boolean breakOutOnDoubleBlankLine();
+    boolean isParagraphParser();
+    BlockContent getBlockContent();
 
     /**
      * Used to clean up and prepare for the next parsing run of the AbstractBlockParser

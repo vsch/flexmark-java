@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.BasedSequence;
@@ -21,19 +21,17 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     protected final NodeRendererContext context;
     private final HtmlWriter html;
-    private final boolean suppressHtmlBlocks;
-    private final boolean suppressInlineHtml;
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
+    private final HtmlRendererOptions htmlOptions;
 
     public CoreNodeRenderer(NodeRendererContext context) {
         this.context = context;
         this.html = context.getHtmlWriter();
         DataHolder options = context.getOptions();
-        this.suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
-        this.suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
         this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = new ListOptions(options);
+        this.htmlOptions = context.getHtmlOptions();
     }
 
     @Override
@@ -51,8 +49,10 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
                 HardLineBreak.class,
                 Heading.class,
                 HtmlBlock.class,
+                HtmlCommentBlock.class,
                 HtmlEntity.class,
                 HtmlInline.class,
+                HtmlInlineComment.class,
                 Image.class,
                 ImageRef.class,
                 IndentedCodeBlock.class,
@@ -116,19 +116,6 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
         html.text(node.getContentChars().normalizeEOL());
         html.tag("/code");
         html.tag("/pre");
-        html.line();
-    }
-
-    @Override
-    public void visit(HtmlBlock node) {
-        if (suppressHtmlBlocks) return;
-
-        html.line();
-        if (context.shouldEscapeHtml()) {
-            html.text(node.getContentChars().normalizeEOL());
-        } else {
-            html.raw(node.getContentChars().normalizeEOL());
-        }
         html.line();
     }
 
@@ -225,10 +212,41 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
     }
 
     @Override
-    public void visit(HtmlInline node) {
-        if (suppressInlineHtml) return;
+    public void visit(HtmlBlock node) {
+        renderHtmlBlock( node, htmlOptions.suppressHtmlBlocks, htmlOptions.escapeHtmlBlocks);
+    }
 
-        if (context.shouldEscapeHtml()) {
+    @Override
+    public void visit(HtmlCommentBlock node) {
+        renderHtmlBlock( node, htmlOptions.suppressHtmlCommentBlocks, htmlOptions.escapeHtmlCommentBlocks);
+    }
+
+    public void renderHtmlBlock(HtmlBlock node, boolean suppress, boolean escape) {
+        if (suppress) return;
+
+        html.line();
+        if (escape) {
+            html.text(node.getContentChars().normalizeEOL());
+        } else {
+            html.raw(node.getContentChars().normalizeEOL());
+        }
+        html.line();
+    }
+
+    @Override
+    public void visit(HtmlInline node) {
+        renderInlineHtml( node, htmlOptions.suppressInlineHtml, htmlOptions.escapeInlineHtml);
+    }
+
+    @Override
+    public void visit(HtmlInlineComment node) {
+        renderInlineHtml( node, htmlOptions.suppressInlineHtmlComments, htmlOptions.escapeInlineHtmlComments);
+    }
+
+    public void renderInlineHtml(HtmlInline node, boolean suppress, boolean escape) {
+        if (suppress) return;
+
+        if (escape) {
             html.text(node.getChars().normalizeEOL());
         } else {
             html.raw(node.getChars().normalizeEOL());
@@ -237,7 +255,7 @@ public class CoreNodeRenderer extends AbstractVisitor implements NodeRenderer {
 
     @Override
     public void visit(SoftLineBreak node) {
-        html.raw(context.getSoftBreak());
+        html.raw(htmlOptions.softBreak);
     }
 
     @Override

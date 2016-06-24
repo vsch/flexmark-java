@@ -13,6 +13,7 @@ public class ListOptions {
     final public boolean orderedStart;
     final public boolean bulletMatch;
     final public int fixedIndent;
+    final public boolean relaxedStart;
 
     public ListOptions(DataHolder options) {
         this.endOnDoubleBlank = options.get(Parser.LISTS_END_ON_DOUBLE_BLANK);
@@ -20,6 +21,7 @@ public class ListOptions {
         this.orderedStart = options.get(HtmlRenderer.LISTS_ORDERED_START);
         this.fixedIndent = options.get(Parser.LISTS_FIXED_INDENT);
         this.bulletMatch = options.get(Parser.LISTS_BULLET_MATCH);
+        this.relaxedStart = options.get(Parser.LISTS_RELAXED_START);
     }
     
     public boolean isTightListItem(ListItem node) {

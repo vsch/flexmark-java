@@ -3,6 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.ThematicBreak;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Pattern;
@@ -37,7 +38,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4) {
+            if (state.getIndent() >= 4 || matchedBlockParser.getMatchedBlockParser().isParagraphParser() && !state.getProperties().get(Parser.THEMATIC_BREAK_RELAXED_START)) {
                 return BlockStart.none();
             }
             int nextNonSpace = state.getNextNonSpaceIndex();

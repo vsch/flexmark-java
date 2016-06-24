@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.HtmlBlock;
+import com.vladsch.flexmark.node.HtmlCommentBlock;
 import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.block.*;
 
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class HtmlBlockParser extends AbstractBlockParser {
 
+    private static final int COMMENT_PATTERN_INDEX = 2;
     private static final Pattern[][] BLOCK_PATTERNS = new Pattern[][] {
             { null, null }, // not used (no type 0)
             {
@@ -59,14 +61,15 @@ public class HtmlBlockParser extends AbstractBlockParser {
             }
     };
 
-    private final HtmlBlock block = new HtmlBlock();
+    private final HtmlBlock block;
     private final Pattern closingPattern;
 
     private boolean finished = false;
     private BlockContent content = new BlockContent();
 
-    private HtmlBlockParser(Pattern closingPattern) {
+    private HtmlBlockParser(Pattern closingPattern, boolean isComment) {
         this.closingPattern = closingPattern;
+        this.block = isComment ?  new HtmlCommentBlock() : new HtmlBlock();
     }
 
     @Override
@@ -120,7 +123,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     Pattern closer = BLOCK_PATTERNS[blockType][1];
                     boolean matches = opener.matcher(line.subSequence(nextNonSpace, line.length())).find();
                     if (matches) {
-                        return BlockStart.of(new HtmlBlockParser(closer)).atIndex(state.getIndex());
+                        return BlockStart.of(new HtmlBlockParser(closer, blockType == COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Document;
@@ -34,11 +35,6 @@ public interface NodeRendererContext {
     HtmlWriter getHtmlWriter();
 
     /**
-     * @return HTML that should be rendered for a soft line break
-     */
-    String getSoftBreak();
-
-    /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
      * nodes; be careful not to pass the node that is being rendered, that would result in an endless loop.
      *
@@ -57,12 +53,9 @@ public interface NodeRendererContext {
      */
     RenderingPhase getRenderingPhase();
 
-    /**
-     * @return whether HTML blocks and tags should be escaped or not
-     */
-    boolean shouldEscapeHtml();
-
     DataHolder getOptions();
+    
+    HtmlRendererOptions getHtmlOptions();
 
     Document getDocument();
 }

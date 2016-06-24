@@ -183,9 +183,13 @@ public class ListBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
-
             ListOptions options = new ListOptions(state.getProperties());
+
+            if (!options.relaxedStart && matched.isParagraphParser()) {
+                return BlockStart.none();
+            }
+            
+            ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
 
             if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemIndent + options.fixedIndent) {
                 return BlockStart.none();

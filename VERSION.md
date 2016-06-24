@@ -1,6 +1,19 @@
 Version History
 ===============
 
+0.2.7
+-----
+
+- Add `Parser.LISTS_RELAXED_START` option to allow lists to start only if preceded by a
+  blank line, when false. Default true.
+
+- Add `Parser.THEMATIC_BREAK_RELAXED_START` to allow thematic breaks only if preceded by a
+  blank line when false. Default true.
+
+- Add Html comment nodes for blocks and inline
+
+- Add separate options for escaping and suppressing comments
+
 0.2.6
 -----
 
@@ -12,7 +25,7 @@ Version History
   blocks to be included in optimization structures used by block pre-processing handling.
 
 - Change ext-table `TableBlock` to use `blockAdded()` method to allow preProcessing of table
-  blocks by custom block pre-processors. 
+  blocks by custom block pre-processors.
 
 0.2.5
 -----
@@ -21,7 +34,7 @@ Version History
 
 - Change spec files to `.md` extension so that Markdown Navigator could be used to edit it
   to add completions of options, annotations of options and option declarations, structure
-  view and formatting. 
+  view and formatting.
 
 0.2.4
 -----

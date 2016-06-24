@@ -36,8 +36,10 @@ public class AbstractVisitor implements Visitor {
     @Override public void visit(HardLineBreak node) { visitChildren(node); } 
     @Override public void visit(Heading node) { visitChildren(node); } 
     @Override public void visit(HtmlBlock node) { visitChildren(node); } 
+    @Override public void visit(HtmlCommentBlock node) { visitChildren(node); } 
     @Override public void visit(HtmlEntity node) { visitChildren(node); } 
     @Override public void visit(HtmlInline node) { visitChildren(node); } 
+    @Override public void visit(HtmlInlineComment node) { visitChildren(node); } 
     @Override public void visit(Image node) { visitChildren(node); } 
     @Override public void visit(ImageRef node) { visitChildren(node); } 
     @Override public void visit(IndentedCodeBlock node) { visitChildren(node); } 

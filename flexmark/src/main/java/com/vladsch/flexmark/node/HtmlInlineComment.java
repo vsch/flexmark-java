@@ -3,11 +3,11 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 
 /**
- * Inline HTML element.
+ * Inline HTML comment element.
  *
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
-public class HtmlInline extends Node {
+public class HtmlInlineComment extends HtmlInline {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -22,11 +22,11 @@ public class HtmlInline extends Node {
             segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
         }
     }
-    
-    public HtmlInline() {
+
+    public HtmlInlineComment() {
     }
 
-    public HtmlInline(BasedSequence chars) {
+    public HtmlInlineComment(BasedSequence chars) {
         super(chars);
     }
 
