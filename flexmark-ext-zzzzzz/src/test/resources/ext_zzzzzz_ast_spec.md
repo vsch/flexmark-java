@@ -1,18 +1,18 @@
 ---
-title: Module Extension Spec
+title: Zzzzzz Extension Spec
 author: 
 version: 
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-## Module  
+## Zzzzzz  
 
-Converts module text to Module nodes.  
+Converts zzzzzz text to Zzzzzz nodes.  
 
 uno spaces between brackets
 
-```````````````````````````````` example Module: 1  options option1, IGNORE
+```````````````````````````````` example Zzzzzz: 1  options option1, IGNORE
 Sample  text
 .
 <p>Expected rendered HTML</p>

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.wikilink;
+package com.vladsch.flexmark.ext.zzzzzz;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
@@ -11,17 +11,17 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboModuleSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/ext_module_ast_spec.md";
+public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
+    private static final String SPEC_RESOURCE = "/ext_$zzzzzz$_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(ModuleExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singleton(ZzzzzzExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("option1", new MutableDataSet()
-                .set(ModuleExtension.MODULE_OPTION1, true)
+                .set(ZzzzzzExtension.ZZZZZZ_OPTION1, true)
         );
     }
 
@@ -34,7 +34,7 @@ public class ComboModuleSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboModuleSpecTest(SpecExample example) {
+    public ComboZzzzzzSpecTest(SpecExample example) {
         super(example);
     }
 
