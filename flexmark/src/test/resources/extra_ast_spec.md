@@ -1755,7 +1755,6 @@ please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )
 .
 Document[0, 82]
   Paragraph[0, 82]
-  
     Text[0, 12] chars:[0, 12, "pleas"..."add  "]
     Code[12, 24] textOpen:[12, 13, "`"] text:[13, 23, "add_gtest("] textClose:[23, 24, "`"]
     StrongEmphasis[24, 43] textOpen:[24, 26, "**"] text:[26, 41, "`your_unittest`"] textClose:[41, 43, "**"]
