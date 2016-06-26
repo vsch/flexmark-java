@@ -20,23 +20,16 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     final private NodeRendererContext context;
     final private HtmlWriter html;
     final private FootnoteRepository footnoteRepository;
-    final private String footnoteRefPrefix;
-    final private String footnoteRefSuffix;
-    final private String footnoteBackRefString;
-    final private String footnoteLinkRefClass;
-    final private String footnoteBackLinkRefClass;
+    private final FootnoteOptions options;
 
     public FootnoteNodeRenderer(NodeRendererContext context) {
+        DataHolder options = context.getOptions();
+        
         this.context = context;
         this.html = context.getHtmlWriter();
-        DataHolder options = context.getOptions();
         this.footnoteRepository = options.get(FootnoteExtension.FOOTNOTES);
         this.footnoteRepository.resolveFootnoteOrdinals();
-        this.footnoteRefPrefix = options.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
-        this.footnoteRefSuffix = options.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
-        this.footnoteBackRefString = options.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
-        this.footnoteLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS);
-        this.footnoteBackLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS);
+        this.options = new FootnoteOptions(context.getOptions());
     }
 
     @Override
@@ -79,9 +72,9 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                             html.withAttr().tagIndent("li", () -> {
                                 context.renderChildren(footnoteBlock);
                                 html.attr("href", "#fnref-" + footnoteOrdinal);
-                                if (!footnoteBackLinkRefClass.isEmpty()) html.attr("class", footnoteBackLinkRefClass);
+                                if (!options.footnoteBackLinkRefClass.isEmpty()) html.attr("class", options.footnoteBackLinkRefClass);
                                 html.withAttr().tag("a");
-                                html.raw(footnoteBackRefString);
+                                html.raw(options.footnoteBackRefString);
                                 html.tag("/a");
                             });
                         }
@@ -102,10 +95,10 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
             int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             html.attr("id", "fnref-" + footnoteOrdinal);
             html.withAttr().tag("sup", () -> {
-                if (!footnoteLinkRefClass.isEmpty()) html.attr("class", footnoteLinkRefClass);
+                if (!options.footnoteLinkRefClass.isEmpty()) html.attr("class", options.footnoteLinkRefClass);
                 html.attr("href", "#fn-" + footnoteOrdinal);
                 html.withAttr().tag("a");
-                html.raw(footnoteRefPrefix + String.valueOf(footnoteOrdinal) + footnoteRefSuffix);
+                html.raw(options.footnoteRefPrefix + String.valueOf(footnoteOrdinal) + options.footnoteRefSuffix);
                 html.tag("/a");
             });
         }

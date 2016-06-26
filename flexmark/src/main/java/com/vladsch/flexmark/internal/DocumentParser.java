@@ -25,7 +25,7 @@ public class DocumentParser implements ParserState {
         }
     };
 
-    private static HashMap<BlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
+    private static HashMap<CustomBlockParserFactory, DataKey<Boolean>> CORE_FACTORIES_DATA_KEYS = new HashMap<>();
     static {
         CORE_FACTORIES_DATA_KEYS.put(new BlockQuoteParser.Factory(), Parser.BLOCK_QUOTE_PARSER);
         CORE_FACTORIES_DATA_KEYS.put(new HeadingParser.Factory(), Parser.HEADING_PARSER);
@@ -36,7 +36,7 @@ public class DocumentParser implements ParserState {
         CORE_FACTORIES_DATA_KEYS.put(new IndentedCodeBlockParser.Factory(), Parser.INDENTED_CODE_BLOCK_PARSER);
     }
 
-    private static List<BlockParserFactory> CORE_FACTORIES = new ArrayList<>();
+    private static List<CustomBlockParserFactory> CORE_FACTORIES = new ArrayList<>();
     static {
         CORE_FACTORIES.add(new BlockQuoteParser.Factory());
         CORE_FACTORIES.add(new HeadingParser.Factory());
@@ -221,8 +221,14 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    public DocumentParser(DataHolder options, List<BlockParserFactory> blockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
+    public DocumentParser(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
         this.options = options;
+        
+        ArrayList<BlockParserFactory> blockParserFactories = new ArrayList<>(customBlockParserFactories.size());
+        for (CustomBlockParserFactory factory : customBlockParserFactories) {
+            blockParserFactories.add(factory.create(options));
+        }
+        
         this.blockParserFactories = blockParserFactories;
         this.paragraphPreProcessorDependencies = paragraphPreProcessorDependencies;
         this.blockPreProcessorDependencies = blockPreProcessorDependencies;
@@ -238,13 +244,13 @@ public class DocumentParser implements ParserState {
         return documentBlockParser.getBlock();
     }
 
-    public static List<BlockParserFactory> calculateBlockParserFactories(DataHolder options, List<BlockParserFactory> customBlockParserFactories) {
-        List<BlockParserFactory> list = new ArrayList<>();
+    public static List<CustomBlockParserFactory> calculateBlockParserFactories(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories) {
+        List<CustomBlockParserFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
 
         // need to keep core parsers in the right order
-        for (BlockParserFactory factory : CORE_FACTORIES) {
+        for (CustomBlockParserFactory factory : CORE_FACTORIES) {
             DataKey<Boolean> key = CORE_FACTORIES_DATA_KEYS.get(factory);
 
             if (key == null || options.get(key)) {

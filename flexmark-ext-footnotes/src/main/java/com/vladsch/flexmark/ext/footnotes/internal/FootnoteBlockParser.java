@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.block.*;
 
@@ -73,7 +74,20 @@ public class FootnoteBlockParser extends AbstractBlockParser {
         return true;
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private final FootnoteOptions options;
+
+        private BlockFactory(DataHolder options) {
+            super(options);
+            this.options = new FootnoteOptions(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

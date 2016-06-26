@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.*;
@@ -174,7 +175,21 @@ public class ListBlockParser extends AbstractBlockParser {
         return (a == null) ? (b == null) : a.equals(b);
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private final ListOptions options;
+
+        private BlockFactory(DataHolder options) {
+            super(options);
+            this.options = new ListOptions(options);
+        }
+
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getMatchedBlockParser();
@@ -183,12 +198,10 @@ public class ListBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            ListOptions options = new ListOptions(state.getProperties());
-
             if (!options.relaxedStart && matched.isParagraphParser()) {
                 return BlockStart.none();
             }
-            
+
             ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
 
             if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemIndent + options.fixedIndent) {

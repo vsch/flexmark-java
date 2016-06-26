@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Matcher;
@@ -43,11 +43,24 @@ public class HeadingParser extends AbstractBlockParser {
     public void closeBlock(ParserState parserState) {
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private final HeadingOptions options;
+
+        private BlockFactory(DataHolder options) {
+            super(options);
+            this.options = new HeadingOptions(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4 || state.getProperties().get(Parser.HEADERS_NO_LEAD_SPACE) && state.getIndent() >= 1) {
+            if (state.getIndent() >= 4 || options.headersNoLeadSpace && state.getIndent() >= 1) {
                 return BlockStart.none();
             }
             BasedSequence line = state.getLine();
@@ -55,7 +68,7 @@ public class HeadingParser extends AbstractBlockParser {
             BasedSequence paragraph = matchedBlockParser.getParagraphContent();
             Matcher matcher;
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
-            matcher = (state.getProperties().get(Parser.HEADERS_NO_ATX_SPACE) ? RELAXED_ATX_HEADING : ATX_HEADING).matcher(trySequence);
+            matcher = (options.headersNoAtxSpace ? RELAXED_ATX_HEADING : ATX_HEADING).matcher(trySequence);
             if (matcher.find()) {
                 // ATX heading
                 int newOffset = nextNonSpace + matcher.group(0).length();
@@ -86,7 +99,6 @@ public class HeadingParser extends AbstractBlockParser {
 
                 return BlockStart.of(headingParser)
                         .atIndex(line.length());
-
             } else if (paragraph != null && ((matcher = SETEXT_HEADING.matcher(trySequence)).find())) {
                 // setext heading line
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;

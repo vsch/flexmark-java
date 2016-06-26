@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.ThematicBreak;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Pattern;
@@ -34,11 +34,24 @@ public class ThematicBreakParser extends AbstractBlockParser {
         return BlockContinue.none();
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        final private ThematicBreakOptions options;
+        
+        private BlockFactory(DataHolder options) {
+            super(options);
+            this.options = new ThematicBreakOptions(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4 || matchedBlockParser.getMatchedBlockParser().isParagraphParser() && !state.getProperties().get(Parser.THEMATIC_BREAK_RELAXED_START)) {
+            if (state.getIndent() >= 4 || matchedBlockParser.getMatchedBlockParser().isParagraphParser() && !options.relaxedStart) {
                 return BlockStart.none();
             }
             int nextNonSpace = state.getNextNonSpaceIndex();

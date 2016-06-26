@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.SubSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.FencedCodeBlock;
@@ -96,7 +97,17 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         content = null;
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private BlockFactory(DataHolder options) {
+            super(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

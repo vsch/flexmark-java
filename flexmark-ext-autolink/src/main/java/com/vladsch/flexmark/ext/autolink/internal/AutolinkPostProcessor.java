@@ -5,17 +5,22 @@ import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
+import com.vladsch.flexmark.parser.PostProcessorFactory;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 
 import java.util.EnumSet;
 
-public class AutolinkPostProcessor implements PostProcessor {
+public class AutolinkPostProcessor extends AbstractVisitor implements PostProcessor {
 
     private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.EMAIL))
             .build();
+
+    public AutolinkPostProcessor(Document document) {
+        
+    }
 
     public Node process(Node node) {
         AutolinkVisitor autolinkVisitor = new AutolinkVisitor();
@@ -23,7 +28,7 @@ public class AutolinkPostProcessor implements PostProcessor {
         return node;
     }
 
-    private void linkify(Text text) {
+    private void processTextNode(Text text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -37,7 +42,9 @@ public class AutolinkPostProcessor implements PostProcessor {
 
             if (index != lastEscaped) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, index);
-                lastNode = insertNode(new Text(escapedChars), lastNode);
+                Node node = new Text(escapedChars);
+                lastNode.insertAfter(node);
+                lastNode = node;
             }
 
             Text contentNode = new Text(linkText);
@@ -53,29 +60,33 @@ public class AutolinkPostProcessor implements PostProcessor {
 
             linkNode.setCharsFromContent();
             linkNode.appendChild(contentNode);
-            lastNode = insertNode(linkNode, lastNode);
+            lastNode.insertAfter(linkNode);
+            lastNode = linkNode;
 
             lastEscaped = textMapper.originalOffset(link.getEndIndex());
         }
 
         if (lastEscaped != original.length()) {
             BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            insertNode(new Text(escapedChars), lastNode);
+            Node node = new Text(escapedChars);
+            lastNode.insertAfter(node);
         }
         text.unlink();
-    }
-
-    private static Node insertNode(Node node, Node insertAfterNode) {
-        insertAfterNode.insertAfter(node);
-        return node;
     }
 
     private class AutolinkVisitor extends AbstractVisitor {
         @Override
         public void visit(Text text) {
             if (!isVisiting(text, DoNotLinkify.class)) {
-                linkify(text);
+                processTextNode(text);
             }
+        }
+    }
+
+    public static class Factory implements PostProcessorFactory {
+        @Override
+        public PostProcessor create(Document document) {
+            return new AutolinkPostProcessor(document);
         }
     }
 }

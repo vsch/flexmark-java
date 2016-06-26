@@ -33,7 +33,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new AbbreviationBlockParser.Factory());
-        parserBuilder.postProcessor(new AbbreviationPostProcessor());
+        parserBuilder.postFactoryProcessor(new AbbreviationPostProcessor.Factory());
     }
 
     @Override

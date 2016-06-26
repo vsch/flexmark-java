@@ -29,5 +29,5 @@ import org.junit.runners.Suite;
         ExtYamlFrontMatterTestSuite.class,
         IntegrationTestSuite.class,
 })
-public class TestTestSuite {
+public class FlexmarkTestSuite {
 }

@@ -15,15 +15,15 @@ import com.vladsch.flexmark.parser.Parser;
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed emoji shortcuts text regions are turned into {@link Zzzzzz} nodes.
+ * The parsed zzzzzz text is turned into {@link Zzzzzz} nodes.
  * </p>
  */
 public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final public static DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new);
-    public final static DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST);
-    final public static DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false);
-    final public static DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default");
-    final public static DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE);
+    final public static DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) custom node repository
+    final public static DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates 
+    final public static DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES) custom boolean option
+    final public static DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES) custom string option
+    final public static DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES) custom integer option
 
     private ZzzzzzExtension() {
     }
@@ -34,15 +34,27 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new ZzzzzzBlockParser.Factory());
-        parserBuilder.customDelimiterProcessor(new ZzzzzzDelimiterProcessor());
-        parserBuilder.linkRefProcessor(new ZzzzzzLinkRefProcessor(parserBuilder));
-        parserBuilder.postProcessor(new ZzzzzzPostProcessor());
-        parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessorFactory());
+        // zzzoptionszzz(REMOVE, BLOCK_PARSER)
+        // zzzoptionszzz(BLOCK_PRE_PROCESSOR)
+        // zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
+        // zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
+        // zzzoptionszzz(NODE_RENDERER)
+        // zzzoptionszzz(CUSTOM_PROPERTIES)
+        // zzzoptionszzz(PARAGRAPH_PRE_PROCESSOR)
+        // zzzoptionszzz(POST_PROCESSOR)
+        // zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+        // zzzoptionszzz(CUSTOM_NODE)
+        // zzzoptionszzz(CUSTOM_BLOCK_NODE)
+        parserBuilder.customBlockParserFactory(new ZzzzzzBlockParser.Factory());//zzzoptionszzz(REMOVE, BLOCK_PARSER)
+        parserBuilder.paragraphPreProcessorFactory(ZzzzzzParagraphPreProcessor.Factory());//zzzoptionszzz(REMOVE, PARAGRAPH_PRE_PROCESSOR)
+        parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessorFactory());//zzzoptionszzz(REMOVE, BLOCK_PRE_PROCESSOR)
+        parserBuilder.customDelimiterProcessor(new ZzzzzzDelimiterProcessor());//zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
+        parserBuilder.linkRefProcessor(new ZzzzzzLinkRefProcessor(parserBuilder));//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
+        parserBuilder.postFactoryProcessor(new ZzzzzzPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);
+        rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER)
     }
 }

@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterBlock;
 import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterNode;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
@@ -107,7 +108,18 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     public void parseInlines(InlineParser inlineParser) {
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private BlockFactory(DataHolder options) {
+            super(options);
+        }
+
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             CharSequence line = state.getLine();

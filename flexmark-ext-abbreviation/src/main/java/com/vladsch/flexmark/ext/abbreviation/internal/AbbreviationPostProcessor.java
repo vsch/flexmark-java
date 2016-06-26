@@ -8,6 +8,7 @@ import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
+import com.vladsch.flexmark.parser.PostProcessorFactory;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
@@ -17,8 +18,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
 
-    private void initializeNode(Node node) {
-        Document document = node.getDocument();
+    private AbbreviationPostProcessor(Document document) {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {
@@ -34,7 +34,7 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
                     if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
                     sb.append("\\Q").append(abbr).append("\\E");
-                    if (Character.isLetterOrDigit(abbr.charAt(abbr.length()-1))) sb.append("\\b");
+                    if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
                 }
             }
 
@@ -43,23 +43,16 @@ public class AbbreviationPostProcessor implements PostProcessor {
     }
 
     public Node process(Node node) {
-        initializeNode(node);
-
+        assert !(node instanceof Text);
+        
         if (abbreviations != null) {
             AbbreviationVisitor visitor = new AbbreviationVisitor();
             node.accept(visitor);
         }
-
-        finalizeNode(node);
         return node;
     }
 
-    private void finalizeNode(Node node) {
-        abbreviations = null;
-        abbreviationMap = null;
-    }
-
-    private void linkify(Text node) {
+    private void process(Text node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -79,12 +72,15 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
                 if (startOffset != lastEscaped) {
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
-                    lastNode = insertNode(new Text(escapedChars), lastNode);
+                    Node node1 = new Text(escapedChars);
+                    lastNode.insertAfter(node1);
+                    lastNode = node1;
                 }
 
                 BasedSequence origAbbrText = original.subSequence(startOffset, endOffset);
                 Abbreviation abbrNode = new Abbreviation(origAbbrText, abbreviation);
-                lastNode = insertNode(abbrNode, lastNode);
+                lastNode.insertAfter(abbrNode);
+                lastNode = abbrNode;
 
                 lastEscaped = endOffset;
             }
@@ -92,22 +88,25 @@ public class AbbreviationPostProcessor implements PostProcessor {
 
         if (lastEscaped != original.length()) {
             BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            insertNode(new Text(escapedChars), lastNode);
+            Node node1 = new Text(escapedChars);
+            lastNode.insertAfter(node1);
         }
         node.unlink();
-    }
-
-    private static Node insertNode(Node node, Node insertAfterNode) {
-        insertAfterNode.insertAfter(node);
-        return node;
     }
 
     private class AbbreviationVisitor extends AbstractVisitor {
         @Override
         public void visit(Text text) {
             if (!isVisiting(text, DoNotLinkify.class)) {
-                linkify(text);
+                process(text);
             }
+        }
+    }
+    
+    public static class Factory implements PostProcessorFactory {
+        @Override
+        public PostProcessor create(Document document) {
+            return new AbbreviationPostProcessor(document);
         }
     }
 }

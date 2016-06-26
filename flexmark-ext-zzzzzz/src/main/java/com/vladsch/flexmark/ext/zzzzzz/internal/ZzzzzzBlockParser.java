@@ -52,7 +52,20 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
     public void parseInlines(InlineParser inlineParser) {
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private final ZzzzzzOptions options;
+
+        private BlockFactory(DataHolder options) {
+            super(options);
+            this.options = new ZzzzzzOptions(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

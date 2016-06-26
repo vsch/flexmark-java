@@ -6,8 +6,8 @@ import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.block.BlockParserFactory;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
+import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 
 import java.io.IOException;
@@ -48,12 +48,12 @@ public class Parser {
     final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
     final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
-    private final List<BlockParserFactory> blockParserFactories;
+    private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
     private final Builder builder;
-    private final List<PostProcessor> postProcessors;
+    private final List<PostProcessorFactory> postProcessorFactories;
     private final DocumentParser.ParagraphPreProcessorDependencies paragraphPreProcessorFactories;
     private final DocumentParser.BlockPreProcessorDependencies blockPreProcessorDependencies;
     private final LinkRefProcessorData linkRefProcessors;
@@ -71,7 +71,7 @@ public class Parser {
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(this.options, delimiterProcessors.keySet());
         this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
-        this.postProcessors = builder.postProcessors;
+        this.postProcessorFactories = builder.postProcessorFactories;
     }
 
     /**
@@ -133,11 +133,11 @@ public class Parser {
         return postProcess(document);
     }
 
-    private Node postProcess(Node document) {
-        for (PostProcessor postProcessor : postProcessors) {
-            document = postProcessor.process(document);
+    private Node postProcess(Node node) {
+        for (PostProcessorFactory postProcessorFactory : postProcessorFactories) {
+            node = postProcessorFactory.create(node.getDocument()).process(node);
         }
-        return document;
+        return node;
     }
 
     public Parser withOptions(DataHolder options) {
@@ -148,9 +148,9 @@ public class Parser {
      * Builder for configuring a {@link Parser}.
      */
     public static class Builder extends MutableDataSet {
-        private final List<BlockParserFactory> blockParserFactories = new ArrayList<>();
+        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
         private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
-        private final List<PostProcessor> postProcessors = new ArrayList<>();
+        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
         private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
         private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
         private final List<LinkRefProcessor> linkRefProcessors = new ArrayList<>();
@@ -173,7 +173,7 @@ public class Parser {
             super(other);
             blockParserFactories.addAll(other.blockParserFactories);
             delimiterProcessors.addAll(other.delimiterProcessors);
-            postProcessors.addAll(other.postProcessors);
+            postProcessorFactories.addAll(other.postProcessorFactories);
             paragraphPreProcessorFactories.addAll(other.paragraphPreProcessorFactories);
             blockPreProcessorFactories.addAll(other.blockPreProcessorFactories);
             linkRefProcessors.addAll(other.linkRefProcessors);
@@ -227,7 +227,7 @@ public class Parser {
          * @param blockParserFactory a block parser factory implementation
          * @return {@code this}
          */
-        public Builder customBlockParserFactory(BlockParserFactory blockParserFactory) {
+        public Builder customBlockParserFactory(CustomBlockParserFactory blockParserFactory) {
             blockParserFactories.add(blockParserFactory);
             return this;
         }
@@ -245,8 +245,8 @@ public class Parser {
             return this;
         }
 
-        public Builder postProcessor(PostProcessor postProcessor) {
-            postProcessors.add(postProcessor);
+        public Builder postFactoryProcessor(PostProcessorFactory postProcessorFactory) {
+            postProcessorFactories.add(postProcessorFactory);
             return this;
         }
 

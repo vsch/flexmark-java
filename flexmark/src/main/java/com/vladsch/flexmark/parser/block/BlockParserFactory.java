@@ -6,7 +6,5 @@ package com.vladsch.flexmark.parser.block;
  * Implementations should subclass {@link AbstractBlockParserFactory} instead of implementing this directly.
  */
 public interface BlockParserFactory {
-
     BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser);
-
 }

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.BlockQuote;
@@ -54,7 +55,18 @@ public class BlockQuoteParser extends AbstractBlockParser {
         return state.getIndent() < Parsing.CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '>';
     }
 
-    public static class Factory extends AbstractBlockParserFactory {
+    public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+    
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private BlockFactory(DataHolder options) {
+            super(options);
+        }
+
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
             if (isMarker(state, nextNonSpace)) {

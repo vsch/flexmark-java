@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
@@ -109,7 +110,17 @@ public class ParserTest {
         }
     }
 
-    private static class DashBlockParserFactory extends AbstractBlockParserFactory {
+    public static class DashBlockParserFactory implements CustomBlockParserFactory {
+        @Override
+        public BlockParserFactory create(DataHolder options) {
+            return new BlockFactory(options);
+        }
+    }
+
+    private static class BlockFactory extends AbstractBlockParserFactory {
+        private BlockFactory(DataHolder options) {
+            super(options);
+        }
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {

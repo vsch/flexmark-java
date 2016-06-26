@@ -1,11 +1,21 @@
 Version History
 ===============
 
+0.2.9
+-----
+
+- Change `AbstractBlockParserFactory` to require a data holder argument in the constructor
+  so that options can be instantiated in `AbstractBlockParser`.  
+
+- Change builder to use `PostProcessorFactory` which takes a `Document` argument in create
+  allowing creation of document specific post processors that can be re-used on any node of
+  that document.  
+
 0.2.8
 -----
 
 - Add ext-zzzzzz module to hold a skeleton of an extension module, until I complete the
-  plugin to handle all the extension configuration.
+  plugin to handle all the extension configuration and stabilize the API.
 
 - Add project icon
 
