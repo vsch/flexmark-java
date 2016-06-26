@@ -1,6 +1,14 @@
 Version History
 ===============
 
+0.2.8
+-----
+
+- Add ext-zzzzzz module to hold a skeleton of an extension module, until I complete the
+  plugin to handle all the extension configuration.
+
+- Add project icon
+
 0.2.7
 -----
 
