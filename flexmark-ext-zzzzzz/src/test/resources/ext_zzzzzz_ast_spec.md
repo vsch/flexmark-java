@@ -12,7 +12,7 @@ Converts zzzzzz text to Zzzzzz nodes.
 
 uno spaces between brackets
 
-```````````````````````````````` example Zzzzzz: 1  options option1, IGNORE
+```````````````````````````````` example(Zzzzzz: 1) options(option1, IGNORE)
 Sample  text
 .
 <p>Expected rendered HTML</p>

@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/ext_$zzzzzz$_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/ext_zzzzzz_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
