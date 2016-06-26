@@ -30,6 +30,10 @@ No attempt is made to keep backward API compatibility to the original project.
 Progress
 --------
 
+- Took a few days to add some flexmark-java extension related functionality to Markdown
+  Navigator to make working with test spec files and extension modules easier. I will move
+  this out into a separate plugin but for now it serves the bill.  
+
 - Wiki added [flexmark-java wiki]
 
 - Add `BlockPreProcessor` interface for efficient node replacement before inline processing
