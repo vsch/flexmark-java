@@ -27,6 +27,7 @@ public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotLinkify {
 
     @Override
     public BasedSequence[] getSegments() {
+        //return EMPTY_SEGMENTS;
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 

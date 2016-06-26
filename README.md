@@ -32,7 +32,7 @@ Progress
 
 - Took a few days to add some flexmark-java extension related functionality to Markdown
   Navigator to make working with test spec files and extension modules easier. I will move
-  this out into a separate plugin but for now it serves the bill.  
+  this out into a separate plugin. 
 
 - Wiki added [flexmark-java wiki]
 
@@ -83,7 +83,7 @@ Progress
 - Parser options to be implemented:
     - GitHub Extensions
         - [x] Fenced code blocks
-        - [ ] Anchor links for headers with auto id generation
+        - [x] Anchor links for headers with auto id generation
         - [x] Table Spans option to be implemented for tables extension
         - [x] Wiki Links with GitHub and Creole syntax
         - [x] Emoji Shortcuts with use GitHub emoji URL option

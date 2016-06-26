@@ -1,6 +1,11 @@
 Version History
 ===============
 
+0.3.0
+-----
+
+- Add AnchorLinks extension to automatically generate anchor links for headers.
+
 0.2.9
 -----
 

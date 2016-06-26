@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts zzzzzz text to Zzzzzz nodes.  
 
-uno spaces between brackets
+no spaces between brackets
 
 ```````````````````````````````` example(Zzzzzz: 1) options(option1, IGNORE)
 Sample  text

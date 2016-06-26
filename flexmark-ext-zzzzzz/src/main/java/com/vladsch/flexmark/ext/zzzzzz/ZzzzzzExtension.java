@@ -19,11 +19,11 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final public static DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) custom node repository
+    final public static DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
     final public static DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates 
-    final public static DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES) custom boolean option
-    final public static DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES) custom string option
-    final public static DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES) custom integer option
+    final public static DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
+    final public static DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
+    final public static DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES)
 
     private ZzzzzzExtension() {
     }

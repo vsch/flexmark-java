@@ -1,0 +1,22 @@
+package com.vladsch.flexmark.ext.anchorlink.internal;
+
+import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
+import com.vladsch.flexmark.internal.util.DataHolder;
+
+class AnchorLinkOptions {
+    final public boolean noWrap;
+    final public String textPrefix;
+    final public String textSuffix;
+    final public String anchorClass;
+    final public boolean setName;
+    final public boolean setId;
+
+    public AnchorLinkOptions(DataHolder options) {
+        this.noWrap = options.get(AnchorLinkExtension.ANCHORLINKS_NO_WRAP_TEXT);
+        this.textPrefix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_PREFIX);
+        this.textSuffix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_SUFFIX);
+        this.anchorClass = options.get(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS);
+        this.setName = options.get(AnchorLinkExtension.ANCHORLINKS_SET_NAME);
+        this.setId = options.get(AnchorLinkExtension.ANCHORLINKS_SET_ID);
+    }
+}

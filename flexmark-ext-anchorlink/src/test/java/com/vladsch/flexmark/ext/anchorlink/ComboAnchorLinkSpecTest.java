@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.zzzzzz;
+package com.vladsch.flexmark.ext.anchorlink;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.DataHolder;
@@ -11,16 +11,24 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/ext_zzzzzz_ast_spec.md";
+public class ComboAnchorLinkSpecTest extends ComboSpecTestCase {
+    private static final String SPEC_RESOURCE = "/ext_anchorlink_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
+            .set(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS, "anchor")
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(ZzzzzzExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singleton(AnchorLinkExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("option1", new MutableDataSet().set(ZzzzzzExtension.ZZZZZZ_OPTION1, true));
+        optionsMap.put("no-wrap", new MutableDataSet().set(AnchorLinkExtension.ANCHORLINKS_NO_WRAP_TEXT, true));
+        optionsMap.put("set-name", new MutableDataSet().set(AnchorLinkExtension.ANCHORLINKS_SET_NAME, true));
+        optionsMap.put("no-id", new MutableDataSet().set(AnchorLinkExtension.ANCHORLINKS_SET_ID, false));
+        optionsMap.put("no-class", new MutableDataSet().set(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS, ""));
+        optionsMap.put("prefix-suffix", new MutableDataSet()
+                .set(AnchorLinkExtension.ANCHORLINKS_TEXT_PREFIX, "<span class=\"anchor\">")
+                .set(AnchorLinkExtension.ANCHORLINKS_TEXT_SUFFIX, "</span>")
+        );
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -32,7 +40,7 @@ public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboZzzzzzSpecTest(SpecExample example) {
+    public ComboAnchorLinkSpecTest(SpecExample example) {
         super(example);
     }
 
