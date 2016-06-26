@@ -1,5 +1,5 @@
-flexmark-java
-=============
+![](/assets/images/flexmark-icon-logo%402x.png) flexmark-java 
+==================================================================
 
 A rework of [commonmark-java] to generate AST which allows recreating the original source,
 full source position references for all elements in the source and easier JetBrains Open API
