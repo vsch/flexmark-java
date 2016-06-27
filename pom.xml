@@ -4,23 +4,24 @@
     <parent>
         <groupId>com.vladsch.pom</groupId>
         <artifactId>central-pom</artifactId>
-        <version>0.0.1</version>
+        <version>0.3.0</version>
     </parent>
 
     <packaging>pom</packaging>
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.3.0-SNAPSHOT</version>
     <name>flexmark-java parent</name>
     <description>
-        Java re-implementation of commonmark-java based parser, with AST.
+        Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
     </description>
     <url>https://github.com/vladsch/flexmark-java</url>
 
     <modules>
         <module>flexmark</module>
         <module>flexmark-ext-abbreviation</module>
+        <module>flexmark-ext-anchorlink</module>
         <module>flexmark-ext-emoji</module>
         <module>flexmark-ext-footnotes</module>
         <module>flexmark-ext-autolink</module>
@@ -88,52 +89,57 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-anchorlink</artifactId>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-autolink</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-abbreviations</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-emoji</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-footnotes</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tables</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-yaml-front-matter</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-test-util</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>0.3.0-SNAPSHOT</version>
             </dependency>
 
             <!-- Common test dependencies -->

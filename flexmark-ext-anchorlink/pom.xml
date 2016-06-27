@@ -8,8 +8,8 @@
     </parent>
 
     <artifactId>flexmark-ext-abbreviation</artifactId>
-    <name>flexmark-java extension for abbreviations in text</name>
-    <description>flexmark-java extension for defining abbreviations and turning appearance of these abbreviations in text into links with titles consisting of the expansion of the abbreviation</description>
+    <name>flexmark-java extension to generate anchor links for headers</name>
+    <description>flexmark-java extension for generating anchor links for headings using GitHub compatible algorithm</description>
 
     <dependencies>
         <dependency>
