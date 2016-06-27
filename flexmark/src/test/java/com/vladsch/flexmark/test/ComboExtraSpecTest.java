@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.KeepType;
-import com.vladsch.flexmark.internal.util.MutableDataSet;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;

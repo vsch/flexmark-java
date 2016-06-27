@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.collection;
 
 import java.util.Collection;
 import java.util.Map;

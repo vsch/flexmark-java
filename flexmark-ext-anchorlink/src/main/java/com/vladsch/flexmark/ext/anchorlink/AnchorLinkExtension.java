@@ -4,7 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkPostProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataKey;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -35,7 +35,8 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postFactoryProcessor(new AnchorLinkPostProcessor.Factory());
+        //parserBuilder.blockPreProcessorFactory(new AnchorLinkBlockPreProcessor.Factory());
+        parserBuilder.postProcessorFactory(new AnchorLinkPostProcessor.Factory());
     }
 
     @Override

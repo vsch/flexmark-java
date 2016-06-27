@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
-import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -18,12 +17,12 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
 
     private final NodeRendererContext context;
     private final HtmlWriter html;
-    private final String linkFileExtension;
+    private final WikiLinkOptions options;
 
     public WikiLinkNodeRenderer(NodeRendererContext context) {
+        options = new WikiLinkOptions(context.getOptions());
         this.context = context;
         this.html = context.getHtmlWriter();
-        this.linkFileExtension = context.getOptions().get(WikiLinkExtension.LINK_FILE_EXTENSION);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
             }
         }
 
-        sb.append(linkFileExtension);
+        sb.append(options.linkFileExtension);
         return sb.toString();
     }
 

@@ -3,8 +3,8 @@ package com.vladsch.flexmark.ext.tables.internal;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.NodeIterator;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Paragraph;
@@ -170,8 +170,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 TableCell tableCell = new TableCell();
 
                 if (firstCell && nodes.peek() instanceof TableColumnSeparator) {
-                    tableCell.setOpeningMarker(nodes.peek().getChars());
-                    nodes.next().unlink();
+                    Node columnSep = nodes.next();
+                    tableCell.setOpeningMarker(columnSep.getChars());
+                    columnSep.unlink();
                     firstCell = false;
                 }
 

@@ -1,9 +1,11 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.internal.util.UtilsTestSuite;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
+        UtilsTestSuite.class,
         AbstractVisitorTest.class,
         DeilimitedNodeTest.class,
         DelimiterProcessorTest.class,

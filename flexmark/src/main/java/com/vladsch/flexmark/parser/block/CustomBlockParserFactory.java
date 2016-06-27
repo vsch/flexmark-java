@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
 /**
  * Custom block parser factory to create parser instance specific block parser factory 

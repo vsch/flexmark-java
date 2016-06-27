@@ -3,8 +3,8 @@ package com.vladsch.flexmark.ext.zzzzzz;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.zzzzzz.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.internal.util.KeepType;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -47,10 +47,10 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         // zzzoptionszzz(CUSTOM_BLOCK_NODE)
         parserBuilder.customBlockParserFactory(new ZzzzzzBlockParser.Factory());//zzzoptionszzz(REMOVE, BLOCK_PARSER)
         parserBuilder.paragraphPreProcessorFactory(ZzzzzzParagraphPreProcessor.Factory());//zzzoptionszzz(REMOVE, PARAGRAPH_PRE_PROCESSOR)
-        parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessorFactory());//zzzoptionszzz(REMOVE, BLOCK_PRE_PROCESSOR)
+        parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessor.Factory());//zzzoptionszzz(REMOVE, BLOCK_PRE_PROCESSOR)
         parserBuilder.customDelimiterProcessor(new ZzzzzzDelimiterProcessor());//zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
-        parserBuilder.linkRefProcessor(new ZzzzzzLinkRefProcessor(parserBuilder));//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
-        parserBuilder.postFactoryProcessor(new ZzzzzzPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
+        parserBuilder.linkRefProcessorFactory(new ZzzzzzLinkRefProcessor.Factory());//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
+        parserBuilder.postProcessorFactory(new ZzzzzzPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
     }
 
     @Override

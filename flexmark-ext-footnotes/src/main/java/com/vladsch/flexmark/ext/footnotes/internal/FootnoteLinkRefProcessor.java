@@ -7,33 +7,32 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
+import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
 
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
-    private FootnoteRepository footnoteRepository = null;
+    final static boolean WANT_EXCLAMATION_PREFIX = false;
+    final static int BRACKET_NESTING_LEVEL = 0;
+    
+    final private FootnoteRepository footnoteRepository;
+
+    public FootnoteLinkRefProcessor(Document document) {
+        this.footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
+    }
 
     @Override
     public boolean getWantExclamationPrefix() {
-        return false;
+        return WANT_EXCLAMATION_PREFIX;
     }
 
     @Override
-    public int getNestingLevel() {
-        return 0;
+    public int getBracketNestingLevel() {
+        return BRACKET_NESTING_LEVEL;
     }
+
 
     @Override
     public boolean isMatch(BasedSequence nodeChars) {
         return nodeChars.length() >= 3 && nodeChars.charAt(0) == '[' && nodeChars.charAt(1) == '^' && nodeChars.endCharAt(1) == ']';
-    }
-
-    @Override
-    public void initializeDocument(Document document) {
-        footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);
-    }
-
-    @Override
-    public void finalize(Document document) {
-        footnoteRepository = null;
     }
 
     @Override
@@ -61,4 +60,22 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
             }
         }
     }
+
+    public static class Factory implements LinkRefProcessorFactory {
+        @Override
+        public LinkRefProcessor create(Document document) {
+            return new FootnoteLinkRefProcessor(document);
+        }
+
+        @Override
+        public boolean getWantExclamationPrefix() {
+            return WANT_EXCLAMATION_PREFIX;
+        }
+
+        @Override
+        public int getBracketNestingLevel() {
+            return BRACKET_NESTING_LEVEL;
+        }
+    }
+
 }

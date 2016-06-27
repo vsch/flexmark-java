@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal.util.dependency;
 
+import com.vladsch.flexmark.internal.util.collection.OrderedMap;
+import com.vladsch.flexmark.internal.util.collection.ReversibleIterator;
 import com.vladsch.flexmark.node.Block;
 
 import java.util.*;
@@ -21,20 +23,20 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
         } else {
             // resolve dependencies and node processing lists
             int dependentCount = dependentsList.size();
-            ArrayList<DependentItem<D>> dependentItems = new ArrayList<>(dependentCount);
-            HashMap<Class<? extends D>, DependentItem<D>> dependentItemMap = new HashMap<>(dependentCount);
+            OrderedMap<Class<? extends D>, DependentItem<D>> dependentItemMap = new OrderedMap<>(dependentCount);
 
             for (D dependent : dependentsList) {
                 Class<? extends D> dependentClass = getDependentClass(dependent);
                 if (dependentItemMap.containsKey(dependentClass)) {
                     throw new IllegalStateException("Dependent class " + dependentClass + " is duplicated. Only one instance can be present in the list");
                 }
-                DependentItem<D> item = new DependentItem<>(dependentItems.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
+                DependentItem<D> item = new DependentItem<>(dependentItemMap.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
                 dependentItemMap.put(dependentClass, item);
-                dependentItems.add(item);
             }
 
-            for (DependentItem<D> item : dependentItems) {
+            ReversibleIterator<DependentItem<D>> dependentItems = dependentItemMap.valueIterator();
+            while (dependentItems.hasNext()) {
+                DependentItem<D> item = dependentItems.next(); 
                 Set<Class<? extends D>> afterDependencies = item.dependent.getAfterDependents();
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
@@ -60,14 +62,16 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
             }
 
             BitSet newReady = new BitSet(dependentCount);
-            for (DependentItem<D> item : dependentItems) {
+            dependentItems = dependentItemMap.valueIterator();
+            while (dependentItems.hasNext()) {
+                DependentItem<D> item = dependentItems.next();
                 if (!item.hasDependencies()) {
                     newReady.set(item.index);
                 }
             }
 
             BitSet dependents = new BitSet(dependentCount);
-            dependents.set(0, dependentItems.size());
+            dependents.set(0, dependentItemMap.size());
 
             ArrayList<S> dependencyStages = new ArrayList<>();
 
@@ -82,7 +86,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                     if (i < 0) break;
 
                     newReady.clear(i);
-                    DependentItem<D> item = dependentItems.get(i);
+                    DependentItem<D> item = dependentItemMap.getValue(i);
 
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
@@ -94,7 +98,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                             if (j < 0) break;
 
                             item.dependents.clear(j);
-                            DependentItem<D> dependentItem = dependentItems.get(j);
+                            DependentItem<D> dependentItem = dependentItemMap.getValue(j);
 
                             if (!dependentItem.removeDependency(item)) {
                                 if (item.isGlobalScope) {

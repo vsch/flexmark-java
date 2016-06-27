@@ -1,38 +1,67 @@
 package com.vladsch.flexmark.internal.util;
 
+import com.vladsch.flexmark.internal.util.collection.ReversibleIterator;
 import com.vladsch.flexmark.node.Node;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class NodeIterator implements Iterator<Node> {
+public class NodeIterator implements ReversibleIterator<Node> {
+    final boolean reversed;
     final Node firstNode;
     final Node lastNode;
     Node node;
-    Node next;
+    Node result;
 
     /**
-     * stream nodes until null
+     * iterate nodes until last node is iterated over or null
      *
      * @param firstNode
      */
     public NodeIterator(Node firstNode) {
-        this(firstNode, null);
+        this(firstNode, null, false);
     }
 
     /**
-     * stream nodes until null
+     * iterate nodes until last node is iterated over or null
+     *
+     * @param firstNode
+     */
+    public NodeIterator(Node firstNode, boolean reversed) {
+        this(firstNode, null, reversed);
+    }
+
+    /**
+     * iterate nodes until last node is iterated over or null
      *
      * @param firstNode
      */
     public NodeIterator(Node firstNode, Node lastNode) {
+        this(firstNode, lastNode, false);
+    }
+
+    /**
+     * iterate nodes until null or last node is iterated over
+     *
+     * @param firstNode
+     */
+    public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
         Objects.requireNonNull(firstNode);
 
+        this.reversed = reversed;
         this.firstNode = firstNode;
         this.lastNode = lastNode;
-        this.node = firstNode;
-        this.next = firstNode.getNext();
+        this.node = reversed ? lastNode : firstNode;
+    }
+
+    @Override
+    public NodeIterator reversed() {
+        return new NodeIterator(firstNode, lastNode, !reversed);
+    }
+
+    @Override
+    public boolean isReversed() {
+        return reversed;
     }
 
     @Override
@@ -42,14 +71,13 @@ public class NodeIterator implements Iterator<Node> {
 
     @Override
     public Node next() {
+        result = null;
         if (node != null) {
-            Node result = node;
-            node = next;
-            if (node == null || node == lastNode) next = null;
-            else next = node.getNext();
-            return result;
+            result = node;
+            node = reversed ? node.getPrevious() : node.getNext();
+            if (node == null || result == (reversed ? firstNode : lastNode)) node = null;
         }
-        return null;
+        return result;
     }
 
     public Node peek() {
@@ -61,7 +89,11 @@ public class NodeIterator implements Iterator<Node> {
 
     @Override
     public void remove() {
-        throw new UnsupportedOperationException("remove");
+        if (result == null) {
+            throw new IllegalStateException("Either next() was not called yet or the element was remove()");
+        }
+        result.unlink();
+        result = null;
     }
 
     @Override

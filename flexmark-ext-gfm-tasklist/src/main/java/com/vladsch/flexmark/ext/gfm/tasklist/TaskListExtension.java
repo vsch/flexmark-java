@@ -4,8 +4,8 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeRenderer;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListParagraphPreProcessorFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataKey;
-import com.vladsch.flexmark.internal.util.DynamicDefaultKey;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**

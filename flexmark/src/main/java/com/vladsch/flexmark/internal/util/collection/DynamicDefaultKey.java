@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.collection;
 
 public class DynamicDefaultKey<T> extends DataKey<T> {
     public DynamicDefaultKey(String name, DataValueFactory<T> factory) {

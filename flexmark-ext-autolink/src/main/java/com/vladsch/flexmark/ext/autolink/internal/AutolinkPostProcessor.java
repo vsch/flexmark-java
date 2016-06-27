@@ -22,12 +22,18 @@ public class AutolinkPostProcessor extends AbstractVisitor implements PostProces
         
     }
 
-    public Node process(Node node) {
-        AutolinkVisitor autolinkVisitor = new AutolinkVisitor();
-        node.accept(autolinkVisitor);
-        return node;
+    public Node process(Node Node) {
+        Node.accept(this);
+        return Node;
     }
 
+    @Override
+    public void visit(Text text) {
+        if (!isVisiting(text, DoNotLinkify.class)) {
+            processTextNode(text);
+        }
+    }
+    
     private void processTextNode(Text text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
@@ -72,15 +78,6 @@ public class AutolinkPostProcessor extends AbstractVisitor implements PostProces
             lastNode.insertAfter(node);
         }
         text.unlink();
-    }
-
-    private class AutolinkVisitor extends AbstractVisitor {
-        @Override
-        public void visit(Text text) {
-            if (!isVisiting(text, DoNotLinkify.class)) {
-                processTextNode(text);
-            }
-        }
     }
 
     public static class Factory implements PostProcessorFactory {

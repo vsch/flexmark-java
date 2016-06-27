@@ -6,6 +6,13 @@ Version History
 
 - Add AnchorLinks extension to automatically generate anchor links for headers.
 
+- Refactor directory structure.
+
+- Add some helper classes to handle ordered sets and ordered maps.
+
+- Add initial code to support text node post processors to make it more efficient to post
+  process text nodes instead of each extension traversing the full document tree.
+
 0.2.9
 -----
 

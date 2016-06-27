@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AbbreviationPostProcessor implements PostProcessor {
+public class AbbreviationPostProcessor extends AbstractVisitor implements PostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
 
@@ -42,17 +42,22 @@ public class AbbreviationPostProcessor implements PostProcessor {
         }
     }
 
-    public Node process(Node node) {
-        assert !(node instanceof Text);
-        
+    @Override
+    public Node process(Node Node) {
         if (abbreviations != null) {
-            AbbreviationVisitor visitor = new AbbreviationVisitor();
-            node.accept(visitor);
+            Node.accept(this);
         }
-        return node;
+        return Node;
     }
 
-    private void process(Text node) {
+    @Override
+    public void visit(Text text) {
+        if (!isVisiting(text, DoNotLinkify.class)) {
+            process(text);
+        }
+    }
+    
+    private Node process(Text node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -91,18 +96,12 @@ public class AbbreviationPostProcessor implements PostProcessor {
             Node node1 = new Text(escapedChars);
             lastNode.insertAfter(node1);
         }
+        
+        lastNode = node.getNext();
         node.unlink();
+        return lastNode;
     }
 
-    private class AbbreviationVisitor extends AbstractVisitor {
-        @Override
-        public void visit(Text text) {
-            if (!isVisiting(text, DoNotLinkify.class)) {
-                process(text);
-            }
-        }
-    }
-    
     public static class Factory implements PostProcessorFactory {
         @Override
         public PostProcessor create(Document document) {

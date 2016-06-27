@@ -3,10 +3,10 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
-import com.vladsch.flexmark.internal.util.DataHolder;
-import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.NodeRepository;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 
 import java.util.ArrayList;
 import java.util.List;

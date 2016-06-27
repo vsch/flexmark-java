@@ -3,6 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
@@ -76,6 +77,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
     protected final LinkRefProcessorData linkRefProcessorsData;
+    protected List<LinkRefProcessor> linkRefProcessors = null;
 
     // used to temporarily override handling of special characters by custom ParagraphPreProcessors
     protected BitSet specialCharacters;
@@ -124,18 +126,15 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         this.document = document;
         this.referenceRepository = document.get(Parser.REFERENCES);
 
-        for (LinkRefProcessor processor : linkRefProcessorsData.processors) {
-            processor.initializeDocument(document);
+        linkRefProcessors = new ArrayList<>(linkRefProcessorsData.processors.size());
+        for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
+            linkRefProcessors.add(factory.create(document));
         }
     }
 
     @Override
     public void finalizeDocument(Document document) {
         assert this.referenceRepository == document.get(Parser.REFERENCES);
-
-        for (LinkRefProcessor processor : linkRefProcessorsData.processors) {
-            processor.finalize(document);
-        }
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -192,16 +191,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     // nothing to add, this is for extensions.
-    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessor> linkRefProcessors) {
+    public static LinkRefProcessorData calculateLinkRefProcessors(DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
         if (linkRefProcessors.size() > 1) {
-            List<LinkRefProcessor> sortedLinkProcessors = new ArrayList<>(linkRefProcessors.size());
+            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<>(linkRefProcessors.size());
             sortedLinkProcessors.addAll(linkRefProcessors);
 
             final int[] maxNestingLevelRef = new int[] { 0 };
 
             sortedLinkProcessors.sort((p1, p2) -> {
-                int lv1 = p1.getNestingLevel();
-                int lv2 = p2.getNestingLevel();
+                int lv1 = p1.getBracketNestingLevel();
+                int lv2 = p2.getBracketNestingLevel();
                 int maxLevel = maxNestingLevelRef[0];
                 if (maxLevel < lv1) maxLevel = lv1;
                 if (maxLevel < lv2) maxLevel = lv2;
@@ -222,9 +221,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
             maxNestingLevel = -1;
             int index = 0;
-            for (LinkRefProcessor linkProcessor : sortedLinkProcessors) {
-                if (maxNestingLevel < linkProcessor.getNestingLevel()) {
-                    maxNestingLevel = linkProcessor.getNestingLevel();
+            for (LinkRefProcessorFactory linkProcessor : sortedLinkProcessors) {
+                if (maxNestingLevel < linkProcessor.getBracketNestingLevel()) {
+                    maxNestingLevel = linkProcessor.getBracketNestingLevel();
                     nestingLookup[maxNestingLevel] = index;
                     if (maxNestingLevel == maxReferenceLinkNesting) break;
                 }
@@ -233,7 +232,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
             return new LinkRefProcessorData(sortedLinkProcessors, maxReferenceLinkNesting, nestingLookup);
         } else if (linkRefProcessors.size() > 0) {
-            int maxNesting = linkRefProcessors.get(0).getNestingLevel();
+            int maxNesting = linkRefProcessors.get(0).getBracketNestingLevel();
             int[] nestingLookup = new int[maxNesting + 1];
             return new LinkRefProcessorData(linkRefProcessors, maxNesting, nestingLookup);
         } else {
@@ -747,10 +746,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         int iMax = linkRefProcessorsData.processors.size();
         int startProc = linkRefProcessorsData.nestingIndex[lookAhead + nesting];
         for (int i = startProc; i < iMax; i++) {
-            LinkRefProcessor linkProcessor = linkRefProcessorsData.processors.get(i);
+            LinkRefProcessor linkProcessor = linkRefProcessors.get(i);
             BasedSequence nodeChars;
 
-            if (lookAhead + nesting < linkProcessor.getNestingLevel()) break;
+            if (lookAhead + nesting < linkProcessor.getBracketNestingLevel()) break;
 
             wantBang = linkProcessor.getWantExclamationPrefix();
 

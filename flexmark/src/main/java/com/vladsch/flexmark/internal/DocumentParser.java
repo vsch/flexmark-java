@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.*;
@@ -905,7 +908,7 @@ public class DocumentParser implements ParserState {
                                         blockPreProcessors.put(factory, blockPreProcessor);
                                     }
 
-                                    Block newBlock = blockPreProcessor.preProcess(block);
+                                    Block newBlock = blockPreProcessor.preProcess(this, block);
 
                                     if (newBlock != block) {
                                         // needs to be replaced

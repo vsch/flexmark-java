@@ -2,7 +2,8 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.collection.*;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;

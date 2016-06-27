@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.internal.util;
 
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;

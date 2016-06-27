@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 /**
@@ -25,7 +24,7 @@ public interface LinkRefProcessor {
      *
      * @return nesting level for references, >0 for nesting
      */
-    int getNestingLevel();
+    int getBracketNestingLevel();
 
     /**
      * Test whether the element matches desired one. For processors that allow nesting this will be called one additional.
@@ -36,9 +35,6 @@ public interface LinkRefProcessor {
      * @return true if it is a match
      */
     boolean isMatch(BasedSequence nodeChars);
-
-    void initializeDocument(Document document);
-    void finalize(Document document);
 
     /**
      * Create the desired element that was previously matched with isMatch

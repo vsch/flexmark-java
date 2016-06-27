@@ -2,7 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 

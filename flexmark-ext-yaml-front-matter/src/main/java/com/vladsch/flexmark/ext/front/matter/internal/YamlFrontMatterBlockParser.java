@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterBlock;
 import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterNode;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;

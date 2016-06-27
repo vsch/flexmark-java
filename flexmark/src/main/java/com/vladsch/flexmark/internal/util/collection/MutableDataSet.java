@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.collection;
 
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {

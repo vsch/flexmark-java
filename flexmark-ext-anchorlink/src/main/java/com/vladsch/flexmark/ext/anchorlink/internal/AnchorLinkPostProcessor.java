@@ -1,14 +1,11 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
-import com.vladsch.flexmark.node.AbstractVisitor;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Heading;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 
-public class AnchorLinkPostProcessor implements PostProcessor {
+public class AnchorLinkPostProcessor extends AbstractVisitor implements PostProcessor {
     final private GitHubHeaderIdGenerator generator;
     final private AnchorLinkOptions options;
 
@@ -17,10 +14,16 @@ public class AnchorLinkPostProcessor implements PostProcessor {
         this.options = new AnchorLinkOptions(document);
     }
 
-    public Node process(Node node) {
-        AnchorLinksVisitor visitor = new AnchorLinksVisitor();
-        node.accept(visitor);
-        return node;
+    public Node process(Node Node) {
+        Node.accept(this);
+        return Node;
+    }
+
+    @Override
+    public void visit(Heading node) {
+        if (!isVisiting(node, DoNotLinkify.class)) {
+            processNode(node);
+        }
     }
 
     private void processNode(Heading node) {
@@ -38,18 +41,6 @@ public class AnchorLinkPostProcessor implements PostProcessor {
                 anchor.takeChildren(node);
                 node.appendChild(anchor);
             }
-        }
-    }
-
-    private static Node insertNode(Node node, Node insertAfterNode) {
-        insertAfterNode.insertAfter(node);
-        return node;
-    }
-
-    private class AnchorLinksVisitor extends AbstractVisitor {
-        @Override
-        public void visit(Heading text) {
-            processNode(text);
         }
     }
 

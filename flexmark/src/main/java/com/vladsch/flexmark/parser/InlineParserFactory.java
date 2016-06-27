@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
-import com.vladsch.flexmark.internal.util.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
 import java.util.BitSet;
 import java.util.Map;

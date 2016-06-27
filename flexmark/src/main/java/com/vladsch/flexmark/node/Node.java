@@ -20,6 +20,24 @@ public abstract class Node {
         this.chars = chars;
     }
 
+    public static boolean isNodeOfType(Node node, Class... classes) {
+        for (Class nodeType : classes) {
+            if (nodeType.isInstance(node)) return true;
+        }
+        return false;
+    }
+
+    public boolean isOrDescendantOfType(Class... classes) {
+        Node node = this;
+        while (node != null) {
+            if (Node.isNodeOfType(node, classes)) return true;
+            node = node.getParent();
+        }
+        return false;
+    }
+
+
+
     public abstract void accept(Visitor visitor);
 
     // full document char sequence

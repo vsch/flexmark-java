@@ -4,7 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiDelimiterProcessor;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataKey;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**

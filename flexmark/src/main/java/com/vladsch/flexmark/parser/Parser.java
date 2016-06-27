@@ -4,7 +4,14 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
-import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.KeepType;
+import com.vladsch.flexmark.internal.util.ReferenceRepository;
+import com.vladsch.flexmark.internal.util.StringSequence;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.collection.DataSet;
+import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
@@ -153,7 +160,7 @@ public class Parser {
         private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
         private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
         private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
-        private final List<LinkRefProcessor> linkRefProcessors = new ArrayList<>();
+        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
         private final HashSet<ParserExtension> loadedExtensions = new HashSet<>();
 
@@ -245,7 +252,7 @@ public class Parser {
             return this;
         }
 
-        public Builder postFactoryProcessor(PostProcessorFactory postProcessorFactory) {
+        public Builder postProcessorFactory(PostProcessorFactory postProcessorFactory) {
             postProcessorFactories.add(postProcessorFactory);
             return this;
         }
@@ -260,7 +267,7 @@ public class Parser {
             return this;
         }
 
-        public Builder linkRefProcessor(LinkRefProcessor linkRefProcessor) {
+        public Builder linkRefProcessorFactory(LinkRefProcessorFactory linkRefProcessor) {
             linkRefProcessors.add(linkRefProcessor);
             return this;
         }

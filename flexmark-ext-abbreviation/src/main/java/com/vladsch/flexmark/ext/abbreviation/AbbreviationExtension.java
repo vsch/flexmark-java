@@ -6,8 +6,8 @@ import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationPostProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.DataKey;
 import com.vladsch.flexmark.internal.util.KeepType;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -33,7 +33,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new AbbreviationBlockParser.Factory());
-        parserBuilder.postFactoryProcessor(new AbbreviationPostProcessor.Factory());
+        parserBuilder.postProcessorFactory(new AbbreviationPostProcessor.Factory());
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.DataHolder;
 import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.parser.block.*;
