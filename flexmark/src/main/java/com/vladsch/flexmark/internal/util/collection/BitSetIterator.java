@@ -5,6 +5,18 @@ import java.util.BitSet;
 public class BitSetIterator extends AbstractBitSetIterator<Integer> {
     final private int maxSize;
 
+    public BitSetIterator(BitSet bitSet) {
+        this(bitSet, false);
+    }
+
+    public BitSetIterator(BitSet bitSet, boolean bitTypes) {
+        this(bitSet, bitTypes, false);
+    }
+
+    public BitSetIterator(BitSet bitSet, boolean bitTypes, boolean reversed) {
+        this(bitSet, -1, bitTypes, reversed);
+    }
+
     public BitSetIterator(BitSet bitSet, int maxSize, boolean bitTypes, boolean reversed) {
         super(bitSet, bitTypes, reversed);
         this.maxSize = maxSize;
@@ -12,7 +24,7 @@ public class BitSetIterator extends AbstractBitSetIterator<Integer> {
 
     @Override
     protected int maxSize() {
-        return maxSize;
+        return maxSize >= 0 ? maxSize : bitSet.size();
     }
 
     @Override

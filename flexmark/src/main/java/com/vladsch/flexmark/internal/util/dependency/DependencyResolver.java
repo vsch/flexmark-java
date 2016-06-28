@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal.util.dependency;
 
+import com.vladsch.flexmark.internal.util.Ref;
 import com.vladsch.flexmark.internal.util.collection.OrderedMap;
-import com.vladsch.flexmark.internal.util.collection.ReversibleIterator;
 import com.vladsch.flexmark.node.Block;
 
 import java.util.*;
@@ -34,9 +34,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                 dependentItemMap.put(dependentClass, item);
             }
 
-            ReversibleIterator<DependentItem<D>> dependentItems = dependentItemMap.valueIterator();
-            while (dependentItems.hasNext()) {
-                DependentItem<D> item = dependentItems.next(); 
+            dependentItemMap.valueIterator().forEachRemaining(item -> {
                 Set<Class<? extends D>> afterDependencies = item.dependent.getAfterDependents();
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
@@ -59,16 +57,15 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                         }
                     }
                 }
-            }
+            }); 
 
             BitSet newReady = new BitSet(dependentCount);
-            dependentItems = dependentItemMap.valueIterator();
-            while (dependentItems.hasNext()) {
-                DependentItem<D> item = dependentItems.next();
+            final Ref<BitSet> newReadyRef = new Ref<>(newReady);
+            dependentItemMap.valueIterator().forEachRemaining(item -> {
                 if (!item.hasDependencies()) {
-                    newReady.set(item.index);
+                    newReadyRef.value.set(item.index);
                 }
-            }
+            });
 
             BitSet dependents = new BitSet(dependentCount);
             dependents.set(0, dependentItemMap.size());

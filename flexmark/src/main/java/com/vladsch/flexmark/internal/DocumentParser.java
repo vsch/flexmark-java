@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.*;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
-import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.collection.*;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.*;
@@ -110,7 +108,94 @@ public class DocumentParser implements ParserState {
     private final DocumentBlockParser documentBlockParser;
 
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
-    private Set<BlockParser> allBlockParsers = new HashSet<>();
+
+
+    private static class BlockParserMapper implements Computable<Block, BlockParser> {
+        final public static BlockParserMapper INSTANCE = new BlockParserMapper();
+
+        private BlockParserMapper() {
+        }
+
+        @Override
+        public Block compute(BlockParser value) {
+            return value.getBlock();
+        }
+    }
+
+    private static class ObjectClassifier implements Computable<Class<?>, Object> {
+        final public static ObjectClassifier INSTANCE = new ObjectClassifier();
+
+        private ObjectClassifier() {
+        }
+
+        @Override
+        public Class<?> compute(Object value) {
+            return value.getClass();
+        }
+    }
+
+    private static class NodeClassifier implements Computable<Class<? extends Node>, Node> {
+        final public static NodeClassifier INSTANCE = new NodeClassifier();
+
+        private NodeClassifier() {
+        }
+
+        @Override
+        public Class<? extends Node> compute(Node value) {
+            return value.getClass();
+        }
+    }
+
+    private static class BlockClassifier implements Computable<Class<? extends Block>, Block> {
+        final public static BlockClassifier INSTANCE = new BlockClassifier();
+
+        private BlockClassifier() {
+        }
+
+        @Override
+        public Class<? extends Block> compute(Block value) {
+            return value.getClass();
+        }
+    }
+
+    private class BlockParserOrderedSetHost implements OrderedSetHost<BlockParser> {
+
+        public BlockParserOrderedSetHost() {
+        }
+
+        @Override
+        public void adding(int index, BlockParser parser, Object v) {
+            Block block = parser.getBlock();
+            if (block != null) classifiedBlockBag.add(block);
+        }
+
+        @Override
+        public Object removing(int index, BlockParser parser) {
+            Block block = parser.getBlock();
+            if (block != null) classifiedBlockBag.remove(block);
+            return null;
+        }
+
+        @Override
+        public void clearing() {
+             classifiedBlockBag.clear();
+        }
+
+        @Override
+        public void addingNull(int index) {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public boolean hostInUpdate() {
+            return false;
+        }
+    }
+
+    private OrderedSet<BlockParser> allBlockParsers = new OrderedSet<>();
+    
+    private ClassifiedBag<Class<? extends Block>, Block> classifiedBlockBag = new ClassifiedBag<Class<? extends Block>, Block>(BlockClassifier.INSTANCE);
+    
     private Map<Block, BlockParser> allBlocksParserMap = new HashMap<>();
 
     private Map<Class<? extends Block>, List<Block>> allPreProcessBlocks = new HashMap<>();

@@ -1,7 +1,5 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.collection;
 
-import com.vladsch.flexmark.internal.util.collection.OrderedMap;
-import com.vladsch.flexmark.internal.util.collection.OrderedSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -64,7 +62,8 @@ public class OrderedMapTest {
         for (int j = 10; j-- > 0; ) {
             Assert.assertEquals((Integer)j, orderedMap.remove(String.valueOf(j)));
 
-            Assert.assertEquals(j, orderedMap.keySet().getValueList().size());
+            // hosted sets don't shrink
+            Assert.assertEquals(orderedMap.size() == 0 ? 0: 10, orderedMap.keySet().getValueList().size());
 
             int lastJ = 0;
             for (Map.Entry<String,Integer> it : orderedMap.entrySet()) {
@@ -230,7 +229,8 @@ public class OrderedMapTest {
             Map.Entry<String,Integer> item = iterator.next();
             iterator.remove();
 
-            Assert.assertEquals(j, orderedMap.keySet().getValueList().size());
+            // hosted sets don't shrink until empty
+            Assert.assertEquals(orderedMap.size() == 0 ? 0: 10, orderedMap.keySet().getValueList().size());
 
             int lastJ = 0;
             for (Map.Entry<String,Integer> it : orderedMap.entrySet()) {
@@ -273,7 +273,8 @@ public class OrderedMapTest {
             Map.Entry<String,Integer> item = iterator.next();
             iterator.remove();
 
-            Assert.assertEquals(j, orderedMap.keySet().getValueList().size());
+            // hosted sets don't shrink
+            Assert.assertEquals(orderedMap.size() == 0 ? 0: 10, orderedMap.keySet().getValueList().size());
 
             int lastJ = 0;
             for (Map.Entry<String,Integer> it : orderedMap.entrySet()) {

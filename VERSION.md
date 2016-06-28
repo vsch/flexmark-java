@@ -13,6 +13,10 @@ Version History
 - Add initial code to support text node post processors to make it more efficient to post
   process text nodes instead of each extension traversing the full document tree.
 
+- Add a few helper classes for theoretically faster node processing than visitor, in large
+  documents and with many post processing extensions. Not validated with benchmarking yet,
+  incomplete code. 
+
 0.2.9
 -----
 

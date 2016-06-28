@@ -20,14 +20,65 @@ public class PostProcessorManager {
     }
 
     private final DependentPostProcessorDependencies postProcessorDependencies;
-    private OrderedSet<Node> allPostProcessNodes;
+    private OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
+    private HashMap<Class<? extends Node>, BitSet> nodeClassIndices = new HashMap<>(); // stores the indices for the blocks in allPostProcessNodes by node class 
 
-    public PostProcessorManager(Document document) {
+    public PostProcessorManager(Document document, DependentPostProcessorDependencies postProcessorDependencies) {
         // collect all nodes of interest
-        postProcessorDependencies = new DependentPostProcessorDependencies(new ArrayList<>());
+        this.postProcessorDependencies = postProcessorDependencies;
 
         // instantiate the needed post processors
     }
+
+    private void preProcessBlocks() {
+        //// here we run preProcessing stages
+        //if (allPostProcessNodes.size() > 0) {
+        //    HashMap<DependentPostProcessorFactory, PostProcessor> blockPreProcessors = new HashMap<>(postProcessorDependencies.getDependentStages().size());
+        //
+        //    for (DependentPostProcessorDependencyStage preProcessorStage : postProcessorDependencies.getDependentStages()) {
+        //        for (Map.Entry<Class<? extends Node>, List<DependentPostProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
+        //            List<Node> blockList = allPostProcessNodes.get(entry.getKey());
+        //            List<DependentPostProcessorFactory> factoryList = entry.getValue();
+        //
+        //            if (blockList != null && factoryList != null) {
+        //                for (Node block : blockList) {
+        //                    if (allBlocksParserMap.containsKey(block)) {
+        //                        for (DependentPostProcessorFactory factory : factoryList) {
+        //                            PostProcessor blockPreProcessor = blockPreProcessors.get(factory);
+        //                            if (blockPreProcessor == null) {
+        //                                blockPreProcessor = factory.create(this);
+        //                                blockPreProcessors.put(factory, blockPreProcessor);
+        //                            }
+        //
+        //                            Block newBlock = blockPreProcessor.preProcess(this, block);
+        //
+        //                            if (newBlock != block) {
+        //                                // needs to be replaced
+        //                                BlockParser blockParser = allBlocksParserMap.get(block);
+        //                                if (blockParser != null) {
+        //                                    allBlockParsers.remove(blockParser);
+        //                                }
+        //
+        //                                block.insertAfter(newBlock);
+        //                                blockAdded(newBlock, null);
+        //                                removeBlock(block);
+        //
+        //                                if (block.getClass() != newBlock.getClass()) {
+        //                                    // class changed, we will rerun for this one
+        //                                    break;
+        //                                }
+        //
+        //                                block = newBlock;
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+    }
+
 
     public static class DependentPostProcessorDependencyStage {
         final private Map<Class<? extends Node>, List<DependentPostProcessorFactory>> factoryMap;
@@ -108,52 +159,4 @@ public class PostProcessorManager {
         return resolver.resolveDependencies(list);
     }
 
-    //private void preProcessBlocks() {
-    //    // here we run preProcessing stages
-    //    if (allPostProcessNodes.size() > 0) {
-    //        HashMap<DependentPostProcessorFactory, PostProcessor> blockPreProcessors = new HashMap<>(postProcessorDependencies.getDependentStages().size());
-    //
-    //        for (DependentPostProcessorDependencyStage preProcessorStage : postProcessorDependencies.getDependentStages()) {
-    //            for (Map.Entry<Class<? extends Block>, List<DependentPostProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
-    //                List<Block> blockList = allPostProcessNodes.get(entry.getKey());
-    //                List<DependentPostProcessorFactory> factoryList = entry.getValue();
-    //
-    //                if (blockList != null && factoryList != null) {
-    //                    for (Block block : blockList) {
-    //                        if (allBlocksParserMap.containsKey(block)) {
-    //                            for (DependentPostProcessorFactory factory : factoryList) {
-    //                                PostProcessor blockPreProcessor = blockPreProcessors.get(factory);
-    //                                if (blockPreProcessor == null) {
-    //                                    blockPreProcessor = factory.create(this);
-    //                                    blockPreProcessors.put(factory, blockPreProcessor);
-    //                                }
-    //
-    //                                Block newBlock = blockPreProcessor.preProcess(this, block);
-    //
-    //                                if (newBlock != block) {
-    //                                    // needs to be replaced
-    //                                    BlockParser blockParser = allBlocksParserMap.get(block);
-    //                                    if (blockParser != null) {
-    //                                        allBlockParsers.remove(blockParser);
-    //                                    }
-    //
-    //                                    block.insertAfter(newBlock);
-    //                                    blockAdded(newBlock, null);
-    //                                    removeBlock(block);
-    //
-    //                                    if (block.getClass() != newBlock.getClass()) {
-    //                                        // class changed, we will rerun for this one
-    //                                        break;
-    //                                    }
-    //
-    //                                    block = newBlock;
-    //                                }
-    //                            }
-    //                        }
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
 }

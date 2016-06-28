@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Map;
 
 public class OrderedMap<K, V> implements Map<K, V> {
-    final private OrderedSet<K> orderedSet;
+    final private OrderedSet<K> keySet;
     final private ArrayList<V> valueList;
 
     public OrderedMap() {
@@ -14,7 +14,7 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     public OrderedMap(int capacity) {
         this.valueList = new ArrayList<V>(capacity);
-        this.orderedSet = new OrderedSet<K>(capacity, new OrderedSetHost<K>() {
+        this.keySet = new OrderedSet<K>(capacity, new OrderedSetHost<K>() {
             @Override
             public void adding(int index, K k, Object v) {
                 OrderedMap.this.adding(index, k, v);
@@ -28,6 +28,17 @@ public class OrderedMap<K, V> implements Map<K, V> {
             @Override
             public void clearing() {
                 OrderedMap.this.clearing();
+            }
+
+            @Override
+            public void addingNull(int index) {
+                // can add anything, it will not be accessed, its a dummy holder
+                while (valueList.size() <= index) valueList.add(null);
+            }
+
+            @Override
+            public boolean hostInUpdate() {
+                return false;
             }
         });
     }
@@ -50,36 +61,36 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     @Override
     public int size() {
-        return orderedSet.size();
+        return keySet.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return orderedSet.isEmpty();
+        return keySet.isEmpty();
     }
 
     @Override
     public boolean containsKey(Object o) {
-        return orderedSet.contains(o);
+        return keySet.contains(o);
     }
 
     @Override
     public boolean containsValue(Object o) {
         int index = valueList.indexOf(o);
-        return orderedSet.isValidIndex(index);
+        return keySet.isValidIndex(index);
     }
 
     @Override
     public V get(Object o) {
-        int index = orderedSet.indexOf(o);
+        int index = keySet.indexOf(o);
         return index == -1 ? null : valueList.get(index);
     }
 
     @Override
     public V put(K k, V v) {
-        int index = orderedSet.indexOf(k);
+        int index = keySet.indexOf(k);
         if (index == -1) {
-            orderedSet.add(k, v);
+            keySet.add(k, v);
             return null;
         }
 
@@ -90,7 +101,7 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     @Override
     public V remove(Object o) {
-        return (V) orderedSet.removeHosted(o);
+        return (V) keySet.removeHosted(o);
     }
 
     @Override
@@ -102,22 +113,22 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-        orderedSet.clear();
+        keySet.clear();
     }
 
     @Override
     public OrderedSet<K> keySet() {
-        return orderedSet;
+        return keySet;
     }
 
     @Override
     public Collection<V> values() {
-        if (!orderedSet.isSparse()) {
+        if (!keySet.isSparse()) {
             return valueList;
         }
 
-        ArrayList<V> values = new ArrayList<V>(orderedSet.size());
-        SparseIterator<Integer> iterator = orderedSet.indexIterator();
+        ArrayList<V> values = new ArrayList<V>(keySet.size());
+        SparseIterator<Integer> iterator = keySet.indexIterator();
         while (iterator.hasNext()) {
             values.add(valueList.get(iterator.getIndex()));
         }
@@ -125,12 +136,12 @@ public class OrderedMap<K, V> implements Map<K, V> {
     }
 
     public K getKey(int index) {
-        if (!orderedSet.isValidIndex(index)) return null;
-        return orderedSet.getValueList().get(index);
+        if (!keySet.isValidIndex(index)) return null;
+        return keySet.getValueList().get(index);
     }
 
     public V getValue(int index) {
-        if (!orderedSet.isValidIndex(index)) return null;
+        if (!keySet.isValidIndex(index)) return null;
         return valueList.get(index);
     }
 
@@ -189,35 +200,45 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     @Override
     public OrderedSet<Map.Entry<K, V>> entrySet() {
-        final boolean[] hostActivated = new boolean[] { false };
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(orderedSet.size(), new OrderedSetHost<Map.Entry<K, V>>() {
+        // create it with inHostUpdate already set so we can populate it without callbacks
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), true, new OrderedSetHost<Map.Entry<K, V>>() {
             @Override
             public void adding(int index, Map.Entry<K, V> entry, Object v) {
                 assert v == null;
-                if (hostActivated[0]) {
-                    OrderedMap.this.orderedSet.add(entry.getKey(), entry.getValue());
-                }
+                    OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
             }
 
             @Override
             public Object removing(int index, Map.Entry<K, V> entry) {
-                OrderedMap.this.orderedSet.remove(index);
+                OrderedMap.this.keySet.remove(index);
                 return entry;
             }
 
             @Override
             public void clearing() {
-                OrderedMap.this.orderedSet.clear();
+                OrderedMap.this.keySet.clear();
+            }
+            
+            @Override
+            public void addingNull(int index) {
+                OrderedMap.this.keySet.addNull(index);
+            }
+
+            @Override
+            public boolean hostInUpdate() {
+                return false;
             }
         });
 
-        SparseIterator<Integer> iterator = orderedSet.indexIterator();
+        SparseIterator<Integer> iterator = keySet.indexIterator();
         while (iterator.hasNext()) {
             iterator.next();
             values.add(new Entry<K, V>(this, iterator.getIndex()));
         }
+        
+        // release it for host update
+        values.leaveHostUpdate();
 
-        hostActivated[0] = true;
         return values;
     }
 
@@ -229,7 +250,7 @@ public class OrderedMap<K, V> implements Map<K, V> {
         }
 
         public AbstractIterator(OrderedMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap.orderedSet, reversed);
+            super(orderedMap.keySet, reversed);
             this.orderedMap = orderedMap;
         }
     }
@@ -332,7 +353,7 @@ public class OrderedMap<K, V> implements Map<K, V> {
 
     @Override
     public int hashCode() {
-        int result = orderedSet.hashCode();
+        int result = keySet.hashCode();
         result = 31 * result + valueList.hashCode();
         return result;
     }

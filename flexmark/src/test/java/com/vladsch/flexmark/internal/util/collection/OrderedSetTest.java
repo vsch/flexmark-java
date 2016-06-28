@@ -1,6 +1,5 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.collection;
 
-import com.vladsch.flexmark.internal.util.collection.OrderedSet;
 import org.junit.Assert;
 import org.junit.Test;
 

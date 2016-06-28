@@ -8,6 +8,7 @@ public class OrderedSet<E> implements Set<E> {
     final private ArrayList<E> valueList;
     final private OrderedSetHost<E> host;
     private BitSet removedIndices;
+    private int inHostUpdate;
 
     public OrderedSet() {
         this(0);
@@ -17,11 +18,41 @@ public class OrderedSet<E> implements Set<E> {
         this(capacity, null);
     }
 
+    public OrderedSet(OrderedSetHost<E> host) {
+        this(0, host);
+    }
+
     public OrderedSet(int capacity, OrderedSetHost<E> host) {
+        this(capacity, false, host);
+    }
+
+    public OrderedSet(int capacity, boolean inHostUpdate, OrderedSetHost<E> host) {
         this.keyMap = new HashMap<E, Integer>(capacity);
         this.valueList = new ArrayList<E>(capacity);
         this.removedIndices = new BitSet();
         this.host = host;
+        this.inHostUpdate = inHostUpdate && host != null ? 1 : 0;
+    }
+
+    public boolean inHostUpdate() {
+        return inHostUpdate != 0;
+    }
+
+    public void enterHostUpdate() {
+        if (host == null) throw new IllegalStateException("Cannot enter host update when unhosted");
+        inHostUpdate++;
+    }
+
+    public void leaveHostUpdate() {
+        if (host == null) throw new IllegalStateException("Cannot leave host update when un-hosted");
+        if (inHostUpdate <= 0) throw new IllegalStateException("Cannot leave host update when not entered one");
+        inHostUpdate--;
+    }
+
+    protected void enteringHostUpdate() {
+        if (host == null) throw new IllegalStateException("Entering host update when un-hosted");
+        if (inHostUpdate > 1) throw new IllegalStateException("Entering host update when already entered " + inHostUpdate + " times");
+        enterHostUpdate();
     }
 
     public static <T1> T1 ifNull(T1 o, T1 nullValue) {
@@ -34,6 +65,13 @@ public class OrderedSet<E> implements Set<E> {
 
     public boolean isValidIndex(int index) {
         return index >= 0 && index < valueList.size() && !removedIndices.get(index);
+    }
+
+    public E getValue(int index) {
+        if (!isValidIndex(index)) {
+            throw new IndexOutOfBoundsException("Index " + index + " is not valid, size=" + valueList.size() + " removedIndices[" + index + "]=" + removedIndices.get(index));
+        }
+        return valueList.get(index);
     }
 
     @Override
@@ -59,13 +97,32 @@ public class OrderedSet<E> implements Set<E> {
         return removedIndices.nextSetBit(0) != -1;
     }
 
+    public void addNull() {
+        addNull(valueList.size());
+    }
+
+    public void addNull(int index) {
+        assert index >= valueList.size();
+
+        if (host != null && !host.hostInUpdate()) {
+            enteringHostUpdate();
+            if (inHostUpdate == 1) {
+                host.addingNull(index);
+            }
+            leaveHostUpdate();
+        }
+        int start = valueList.size();
+        removedIndices.set(start, index + 1);
+        while (valueList.size() <= index) valueList.add(null);
+    }
+
     public abstract static class AbstractIndexedIterator<T, V> extends AbstractBitSetIterator<V> {
         final protected OrderedSet<T> orderedSet;
 
         public AbstractIndexedIterator(OrderedSet<T> orderedSet) {
             this(orderedSet, false);
         }
-        
+
         public AbstractIndexedIterator(OrderedSet<T> orderedSet, boolean reversed) {
             super(orderedSet.removedIndices, false, reversed);
             this.orderedSet = orderedSet;
@@ -86,7 +143,7 @@ public class OrderedSet<E> implements Set<E> {
         public IndexIterator(OrderedSet<T> orderedSet) {
             this(orderedSet, false);
         }
-        
+
         public IndexIterator(OrderedSet<T> orderedSet, boolean reversed) {
             super(orderedSet, reversed);
         }
@@ -106,7 +163,7 @@ public class OrderedSet<E> implements Set<E> {
         public ValueIterator(OrderedSet<T> orderedSet) {
             this(orderedSet, false);
         }
-        
+
         public ValueIterator(OrderedSet<T> orderedSet, boolean reversed) {
             super(orderedSet, reversed);
         }
@@ -121,7 +178,6 @@ public class OrderedSet<E> implements Set<E> {
             return orderedSet.getValueList().get(index);
         }
     }
-
 
     public SparseIterator<Integer> indexIterator() {
         return new IndexIterator<E>(this);
@@ -182,7 +238,13 @@ public class OrderedSet<E> implements Set<E> {
         if (keyMap.containsKey(e)) return false;
 
         int i = valueList.size();
-        if (host != null) host.adding(i, e, o);
+        if (host != null && !host.hostInUpdate()) {
+            enteringHostUpdate();
+            if (inHostUpdate == 1) {
+                host.adding(i, e, o);
+            }
+            leaveHostUpdate();
+        }
 
         keyMap.put(e, i);
         valueList.add(e);
@@ -197,16 +259,28 @@ public class OrderedSet<E> implements Set<E> {
         if (!isValidIndex(index)) return null;
         Object r = null;
         E o = valueList.get(index);
-        if (host != null) r = host.removing(index, o);
-        else r = o;
+        if (host != null && !host.hostInUpdate()) {
+            enteringHostUpdate();
+            if (inHostUpdate == 1) {
+                r = host.removing(index, o);
+            }
+            leaveHostUpdate();
+        } else r = o;
 
         keyMap.remove(o);
 
         if (keyMap.size() == 0) {
+            if (host != null && !host.hostInUpdate()) {
+                enteringHostUpdate();
+                if (inHostUpdate == 1) {
+                    host.clearing();
+                }
+                leaveHostUpdate();
+            }
             valueList.clear();
             removedIndices.clear();
         } else {
-            if (index == valueList.size() - 1) {
+            if (host == null && index == valueList.size() - 1) {
                 valueList.remove((int) index);
                 removedIndices.clear(index);
             } else {
@@ -285,7 +359,13 @@ public class OrderedSet<E> implements Set<E> {
 
     @Override
     public void clear() {
-        if (host != null) host.clearing();
+        if (host != null && !host.hostInUpdate()) {
+            enteringHostUpdate();
+            if (inHostUpdate == 1) {
+                host.clearing();
+            }
+            leaveHostUpdate();
+        }
         keyMap.clear();
         valueList.clear();
         removedIndices.clear();
