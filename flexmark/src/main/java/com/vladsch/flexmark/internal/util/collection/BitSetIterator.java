@@ -23,6 +23,11 @@ public class BitSetIterator extends AbstractBitSetIterator<Integer> {
     }
 
     @Override
+    protected void checkConcurrentMods() {
+        
+    }
+
+    @Override
     protected int maxSize() {
         return maxSize >= 0 ? maxSize : bitSet.size();
     }

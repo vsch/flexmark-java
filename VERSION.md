@@ -8,14 +8,26 @@ Version History
 
 - Refactor directory structure.
 
-- Add some helper classes to handle ordered sets and ordered maps.
+- Add `CountingBitSet` subclass of `BitSet` which efficiently counts bits which are set in a
+  range.
 
-- Add initial code to support text node post processors to make it more efficient to post
-  process text nodes instead of each extension traversing the full document tree.
+- Add `OrderedSet`, `OrderedMap` and `OrderedMultiMap` which combine the functions of set,
+  map and the latter of a one to one bi-directional map, i.e. key->value and value->key,
+  allowing for either key or value to be null. All of these are iterable and have iterators
+  for indices, values, keys, and entries, including reversed and reversible iterators.
 
-- Add a few helper classes for theoretically faster node processing than visitor, in large
-  documents and with many post processing extensions. Not validated with benchmarking yet,
-  incomplete code. 
+    Additionally, these have can be in hosted mode, in which they make callbacks on changes
+    allowing to keep tandem structures in sync. `OrderedMap` and `OrderedMultiMap` use
+    `OrderedSet` in this way.
+
+- [ ] Add `TextPostProcessor` to support more efficient text node post processing than each
+      post processor traversing to post process text nodes instead of each extension
+      traversing the full document tree.
+
+- [ ] 
+
+- [ ] Change document parser to use helper classes for block parser and block pre-processor
+      optimiztions.
 
 0.2.9
 -----

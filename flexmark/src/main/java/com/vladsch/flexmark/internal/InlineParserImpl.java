@@ -773,7 +773,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Try to match close bracket against an opening in the delimiter stack. Add either a link or image, or a
-     * plain [ character, to block's children. If there is a matching delimiter, remove it from the delimiter stack.
+     * plain [ character, to block's children. If there is a matching delimiter, removeIndex it from the delimiter stack.
      */
     protected boolean parseCloseBracket() {
         index++;
@@ -814,7 +814,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             // Matching opener but it's not allowed, just return a literal.
             appendText(input.subSequence(index - 1, index));
 
-            // We could remove the opener now, but that would complicate text node merging. So just skip it next time.
+            // We could removeIndex the opener now, but that would complicate text node merging. So just skip it next time.
             opener.matched = true;
             return true;
         }
@@ -1024,7 +1024,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         } else { // no link or image
             index = startIndex;
             appendText(input.subSequence(index - 1, index));
-            // We could remove the opener now, but that would complicate text node merging.
+            // We could removeIndex the opener now, but that would complicate text node merging.
             // E.g. `[link] (/uri)` isn't a link because of the space, so we want to keep appending text.
             opener.matched = true;
             return true;
@@ -1271,7 +1271,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 // Set lower bound for future searches for openers:
                 openersBottom.put(delimiterChar, closer.previous);
                 if (!closer.canOpen) {
-                    // We can remove a closer that can't be an opener,
+                    // We can removeIndex a closer that can't be an opener,
                     // once we've seen there's no matching opener:
                     removeDelimiterKeepNode(closer);
                 }
@@ -1285,7 +1285,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 useDelims = 1;
             }
 
-            // remove used delimiters from stack elts and inlines
+            // removeIndex used delimiters from stack elts and inlines
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
@@ -1299,7 +1299,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
-            // if opener has 0 delims, remove it and the inline
+            // if opener has 0 delims, removeIndex it and the inline
             if (opener.numDelims == 0) {
                 removeDelimiterAndNode(opener);
             } else {
@@ -1319,7 +1319,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             }
         }
 
-        // remove all delimiters
+        // removeIndex all delimiters
         while (delimiter != null && delimiter != stackBottom) {
             removeDelimiterKeepNode(delimiter);
         }

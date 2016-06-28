@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.internal.util;
 
-import com.vladsch.flexmark.internal.util.collection.ClassifiedBagTest;
-import com.vladsch.flexmark.internal.util.collection.CountingBitSetTest;
-import com.vladsch.flexmark.internal.util.collection.OrderedMapTest;
-import com.vladsch.flexmark.internal.util.collection.OrderedSetTest;
+import com.vladsch.flexmark.internal.util.collection.*;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -11,6 +8,7 @@ import org.junit.runners.Suite;
         CountingBitSetTest.class,
         OrderedSetTest.class,
         OrderedMapTest.class,
+        OrderedMultiMapTest.class,
         ClassifiedBagTest.class,
 })
 public class UtilsTestSuite {

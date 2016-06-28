@@ -12,7 +12,7 @@ public class ClassifiedBag<K, V> {
     }
     
     public ClassifiedBag(int capacity, Computable<K, V> mapper) {
-        this.myItems = new OrderedSet<V>(capacity, new OrderedSetHost<V>() {
+        this.myItems = new OrderedSet<V>(capacity, new CollectionHost<V>() {
             @Override
             public void adding(int index, V v, Object v2) {
                 K category = myMapper.compute(v);
@@ -33,13 +33,17 @@ public class ClassifiedBag<K, V> {
             }
             
             @Override
-            public void addingNull(int index) {
+            public void addingNulls(int index) {
                 // nothing to be done, we're good
             }
 
             @Override
-            public boolean hostInUpdate() {
+            public boolean skipHostUpdate() {
                 return false;
+            }
+            @Override
+            public int getIteratorModificationCount() {
+                return myItems.getModificationCount();
             }
         });
 
@@ -56,7 +60,7 @@ public class ClassifiedBag<K, V> {
     }
 
     public boolean remove(int index) {
-        return myItems.remove(index);
+        return myItems.removeIndex(index);
     }
 
     public boolean contains(V item) {

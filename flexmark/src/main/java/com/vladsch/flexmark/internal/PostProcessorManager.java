@@ -56,7 +56,7 @@ public class PostProcessorManager {
         //                                // needs to be replaced
         //                                BlockParser blockParser = allBlocksParserMap.get(block);
         //                                if (blockParser != null) {
-        //                                    allBlockParsers.remove(blockParser);
+        //                                    allBlockParsers.removeIndex(blockParser);
         //                                }
         //
         //                                block.insertAfter(newBlock);

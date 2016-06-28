@@ -4,7 +4,7 @@ import com.vladsch.flexmark.node.Paragraph;
 
 public interface ParagraphPreProcessor {
     /**
-     * Process Paragraph Content on closing of the paragraph block to remove non-text lines.
+     * Process Paragraph Content on closing of the paragraph block to removeIndex non-text lines.
      * <p>
      * This is used by extensions to take leading lines from a paragraph and convert them
      * to other blocks

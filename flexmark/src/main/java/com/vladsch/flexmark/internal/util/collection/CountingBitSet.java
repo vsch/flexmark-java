@@ -68,29 +68,31 @@ public class CountingBitSet extends BitSet {
             if (end > lastBit) end = lastBit;
 
             if (start <= end && length() > 0) {
-                int firstByte = nextSetBit(0) >> 3;
-                int lastByte = previousSetBit(length()) >> 3;
-                int startByte = (start >> 3);
-                int endByte = (end >> 3);
-                int startMask = (0xff << (start & 7)) & 0xff; // 0-FF, 1-FE, 2-FC, 3-FE, 4-F0.... 
-                int endMask = (~(0xff << (end & 7))) & 0xff; // 0-0, 1-01, 2-03, 3-07
+                int startIndex = (start >> 6);
+                int endIndex = (end >> 6);
+                long startMask = -1L << (start & 63); // 0-FF, 1-FE, 2-FC, 3-FE, 4-F0.... 
+                long endMask = ~(-1L << (end & 63)); // 0-0, 1-01, 2-03, 3-07
 
                 if (endMask == 0) {
-                    endByte--;
-                    endMask = 0xff;
+                    endIndex--;
+                    endMask = -1L;
                 }
-                
-                byte[] bytes = this.toByteArray();
-                for (int i = startByte; i <= endByte; i++) {
-                    if (i >= bytes.length) {
-                        int tmp = 0;
-                    }
-                    int aByte = bytes[i] & 0xff;
 
-                    if (i == startByte) aByte &= startMask;
-                    if (i == endByte) aByte &= endMask;
+                long[] words = this.toLongArray();
+                for (int i = startIndex; i <= endIndex; i++) {
+                    long word = words[i];
 
-                    count += bitCounts[aByte];
+                    if (i == startIndex) word &= startMask;
+                    if (i == endIndex) word &= endMask;
+
+                    count += bitCounts[(int) ((word) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
+                    count += bitCounts[(int) ((word >>= 8) & 0xffL)];
                 }
             }
         }

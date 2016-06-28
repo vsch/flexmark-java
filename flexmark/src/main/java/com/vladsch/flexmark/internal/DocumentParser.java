@@ -158,11 +158,7 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private class BlockParserOrderedSetHost implements OrderedSetHost<BlockParser> {
-
-        public BlockParserOrderedSetHost() {
-        }
-
+    private OrderedSet<BlockParser> allBlockParsers = new OrderedSet<>(new CollectionHost<BlockParser>() {
         @Override
         public void adding(int index, BlockParser parser, Object v) {
             Block block = parser.getBlock();
@@ -178,21 +174,24 @@ public class DocumentParser implements ParserState {
 
         @Override
         public void clearing() {
-             classifiedBlockBag.clear();
+            classifiedBlockBag.clear();
         }
 
         @Override
-        public void addingNull(int index) {
+        public void addingNulls(int index) {
             throw new UnsupportedOperationException();
         }
 
         @Override
-        public boolean hostInUpdate() {
+        public boolean skipHostUpdate() {
             return false;
         }
-    }
 
-    private OrderedSet<BlockParser> allBlockParsers = new OrderedSet<>();
+        @Override
+        public int getIteratorModificationCount() {
+            return allBlockParsers.getModificationCount();
+        }
+    });
     
     private ClassifiedBag<Class<? extends Block>, Block> classifiedBlockBag = new ClassifiedBag<Class<? extends Block>, Block>(BlockClassifier.INSTANCE);
     

@@ -3,12 +3,12 @@ package com.vladsch.flexmark.internal.util.collection;
 import java.lang.reflect.Array;
 import java.util.*;
 
-public class OrderedSet<E> implements Set<E> {
+public class OrderedSet<E> implements Set<E>, Iterable<E> {
     final private HashMap<E, Integer> keyMap;
     final private ArrayList<E> valueList;
-    final private OrderedSetHost<E> host;
+    final private CollectionHost<E> host;
     private BitSet removedIndices;
-    private int inHostUpdate;
+    private int modificationCount;
 
     public OrderedSet() {
         this(0);
@@ -18,45 +18,32 @@ public class OrderedSet<E> implements Set<E> {
         this(capacity, null);
     }
 
-    public OrderedSet(OrderedSetHost<E> host) {
+    public OrderedSet(CollectionHost<E> host) {
         this(0, host);
     }
 
-    public OrderedSet(int capacity, OrderedSetHost<E> host) {
-        this(capacity, false, host);
-    }
-
-    public OrderedSet(int capacity, boolean inHostUpdate, OrderedSetHost<E> host) {
+    public OrderedSet(int capacity, CollectionHost<E> host) {
         this.keyMap = new HashMap<E, Integer>(capacity);
         this.valueList = new ArrayList<E>(capacity);
         this.removedIndices = new BitSet();
         this.host = host;
-        this.inHostUpdate = inHostUpdate && host != null ? 1 : 0;
+        this.modificationCount = Integer.MIN_VALUE;
     }
 
-    public boolean inHostUpdate() {
-        return inHostUpdate != 0;
+    public int getModificationCount() {
+        return modificationCount;
     }
 
-    public void enterHostUpdate() {
-        if (host == null) throw new IllegalStateException("Cannot enter host update when unhosted");
-        inHostUpdate++;
-    }
-
-    public void leaveHostUpdate() {
-        if (host == null) throw new IllegalStateException("Cannot leave host update when un-hosted");
-        if (inHostUpdate <= 0) throw new IllegalStateException("Cannot leave host update when not entered one");
-        inHostUpdate--;
-    }
-
-    protected void enteringHostUpdate() {
-        if (host == null) throw new IllegalStateException("Entering host update when un-hosted");
-        if (inHostUpdate > 1) throw new IllegalStateException("Entering host update when already entered " + inHostUpdate + " times");
-        enterHostUpdate();
+    private int getIteratorModificationCount() {
+        return host != null ? host.getIteratorModificationCount() : modificationCount;
     }
 
     public static <T1> T1 ifNull(T1 o, T1 nullValue) {
         return o == null ? nullValue : o;
+    }
+
+    public boolean inHostUpdate() {
+        return host != null && host.skipHostUpdate();
     }
 
     public int indexOf(Object element) {
@@ -67,10 +54,14 @@ public class OrderedSet<E> implements Set<E> {
         return index >= 0 && index < valueList.size() && !removedIndices.get(index);
     }
 
-    public E getValue(int index) {
+    public void validateIndex(int index) {
         if (!isValidIndex(index)) {
             throw new IndexOutOfBoundsException("Index " + index + " is not valid, size=" + valueList.size() + " removedIndices[" + index + "]=" + removedIndices.get(index));
         }
+    }
+
+    public E getValue(int index) {
+        validateIndex(index);
         return valueList.get(index);
     }
 
@@ -93,90 +84,56 @@ public class OrderedSet<E> implements Set<E> {
         return valueList;
     }
 
+    public boolean setValueAt(int index, E value, Object o) {
+        // if index is after end then we add nulls
+        int indexOf = indexOf(value);
+        if (indexOf != -1) {
+            if (index != indexOf) {
+                throw new IllegalStateException("Trying to add existing element " + value + "[" + indexOf + "] at index " + index);
+            }
+            // same index, same element, nothing to update
+            return false;
+        } else {
+            if (index < valueList.size()) {
+                if (!removedIndices.get(index)) {
+                    // already have another element at index
+                    throw new IllegalStateException("Trying to add new element " + value + " at index " + index + ", already occupied by " + valueList.get(index));
+                }
+                // old element was removed, just replace
+            } else {
+                if (index > valueList.size()) addNulls(index - 1);
+            }
+        }
+
+        if (host != null && !host.skipHostUpdate()) {
+            host.adding(index, value, o);
+        }
+        
+        keyMap.put(value, index);
+        valueList.set(index, value);
+        
+        return true;
+    }
+
     public boolean isSparse() {
         return removedIndices.nextSetBit(0) != -1;
     }
 
     public void addNull() {
-        addNull(valueList.size());
+        addNulls(valueList.size());
     }
 
-    public void addNull(int index) {
+    public void addNulls(int index) {
         assert index >= valueList.size();
 
-        if (host != null && !host.hostInUpdate()) {
-            enteringHostUpdate();
-            if (inHostUpdate == 1) {
-                host.addingNull(index);
-            }
-            leaveHostUpdate();
+        if (host != null && !host.skipHostUpdate()) {
+            host.addingNulls(index);
         }
+        
         int start = valueList.size();
+        ++modificationCount;
         removedIndices.set(start, index + 1);
         while (valueList.size() <= index) valueList.add(null);
-    }
-
-    public abstract static class AbstractIndexedIterator<T, V> extends AbstractBitSetIterator<V> {
-        final protected OrderedSet<T> orderedSet;
-
-        public AbstractIndexedIterator(OrderedSet<T> orderedSet) {
-            this(orderedSet, false);
-        }
-
-        public AbstractIndexedIterator(OrderedSet<T> orderedSet, boolean reversed) {
-            super(orderedSet.removedIndices, false, reversed);
-            this.orderedSet = orderedSet;
-        }
-
-        @Override
-        protected int maxSize() {
-            return orderedSet.valueList.size();
-        }
-
-        @Override
-        protected void remove(int index) {
-            orderedSet.remove(index);
-        }
-    }
-
-    public static class IndexIterator<T> extends AbstractIndexedIterator<T, Integer> {
-        public IndexIterator(OrderedSet<T> orderedSet) {
-            this(orderedSet, false);
-        }
-
-        public IndexIterator(OrderedSet<T> orderedSet, boolean reversed) {
-            super(orderedSet, reversed);
-        }
-
-        @Override
-        public SparseIterator<Integer> reversed() {
-            return new IndexIterator<T>(orderedSet, !isReversed());
-        }
-
-        @Override
-        protected Integer getValueAt(int index) {
-            return index;
-        }
-    }
-
-    public static class ValueIterator<T> extends AbstractIndexedIterator<T, T> {
-        public ValueIterator(OrderedSet<T> orderedSet) {
-            this(orderedSet, false);
-        }
-
-        public ValueIterator(OrderedSet<T> orderedSet, boolean reversed) {
-            super(orderedSet, reversed);
-        }
-
-        @Override
-        public SparseIterator<T> reversed() {
-            return new ValueIterator<T>(orderedSet, !isReversed());
-        }
-
-        @Override
-        protected T getValueAt(int index) {
-            return orderedSet.getValueList().get(index);
-        }
     }
 
     public SparseIterator<Integer> indexIterator() {
@@ -238,44 +195,39 @@ public class OrderedSet<E> implements Set<E> {
         if (keyMap.containsKey(e)) return false;
 
         int i = valueList.size();
-        if (host != null && !host.hostInUpdate()) {
-            enteringHostUpdate();
-            if (inHostUpdate == 1) {
-                host.adding(i, e, o);
-            }
-            leaveHostUpdate();
+        
+        if (host != null && !host.skipHostUpdate()) {
+            host.adding(i, e, o);
         }
 
+        ++modificationCount;
         keyMap.put(e, i);
         valueList.add(e);
         return true;
     }
 
-    public boolean remove(int index) {
-        return this.removeHosted(index) != null;
+    public boolean removeIndex(int index) {
+        return this.removeIndexHosted(index) != null;
     }
 
-    public Object removeHosted(int index) {
-        if (!isValidIndex(index)) return null;
-        Object r = null;
+    public Object removeIndexHosted(int index) {
+        validateIndex(index);
+        
         E o = valueList.get(index);
-        if (host != null && !host.hostInUpdate()) {
-            enteringHostUpdate();
-            if (inHostUpdate == 1) {
-                r = host.removing(index, o);
-            }
-            leaveHostUpdate();
-        } else r = o;
+        Object r = null;
+        if (host != null && !host.skipHostUpdate()) {
+            r = host.removing(index, o);
+        }
+        else {
+            r = o;
+        }
 
+        ++modificationCount;
         keyMap.remove(o);
 
         if (keyMap.size() == 0) {
-            if (host != null && !host.hostInUpdate()) {
-                enteringHostUpdate();
-                if (inHostUpdate == 1) {
-                    host.clearing();
-                }
-                leaveHostUpdate();
+            if (host != null && !host.skipHostUpdate()) {
+                host.clearing();
             }
             valueList.clear();
             removedIndices.clear();
@@ -287,6 +239,7 @@ public class OrderedSet<E> implements Set<E> {
                 removedIndices.set(index);
             }
         }
+        
         return r;
     }
 
@@ -298,7 +251,7 @@ public class OrderedSet<E> implements Set<E> {
     public Object removeHosted(Object o) {
         Integer index = keyMap.get(o);
         if (index == null) return null;
-        return removeHosted((int) index);
+        return removeIndexHosted((int) index);
     }
 
     @Override
@@ -351,7 +304,7 @@ public class OrderedSet<E> implements Set<E> {
         boolean changed = false;
         for (Object o : collection) {
             if (keyMap.containsKey(o)) {
-                if (remove(0)) changed = true;
+                if (remove(o)) changed = true;
             }
         }
         return changed;
@@ -359,16 +312,87 @@ public class OrderedSet<E> implements Set<E> {
 
     @Override
     public void clear() {
-        if (host != null && !host.hostInUpdate()) {
-            enteringHostUpdate();
-            if (inHostUpdate == 1) {
-                host.clearing();
-            }
-            leaveHostUpdate();
+        if (host != null && !host.skipHostUpdate()) {
+            host.clearing();
         }
+        
+        ++modificationCount;
         keyMap.clear();
         valueList.clear();
         removedIndices.clear();
+    }
+    
+    public abstract static class AbstractIndexedIterator<T, V> extends AbstractBitSetIterator<V> {
+        final protected OrderedSet<T> orderedSet;
+        protected int modificationCount;
+
+        public AbstractIndexedIterator(OrderedSet<T> orderedSet) {
+            this(orderedSet, false);
+        }
+
+        public AbstractIndexedIterator(OrderedSet<T> orderedSet, boolean reversed) {
+            super(orderedSet.removedIndices, false, reversed);
+            this.orderedSet = orderedSet;
+            this.modificationCount = orderedSet.getIteratorModificationCount();
+        }
+
+        @Override
+        protected int maxSize() {
+            return orderedSet.valueList.size();
+        }
+
+        @Override
+        protected void checkConcurrentMods() {
+            if (modificationCount != orderedSet.getIteratorModificationCount()) {
+                throw new ConcurrentModificationException();
+            }
+        }
+
+        @Override
+        protected void remove(int index) {
+            orderedSet.removeIndex(index);
+            modificationCount = orderedSet.getIteratorModificationCount();
+        }
+    }
+
+    public static class IndexIterator<T> extends AbstractIndexedIterator<T, Integer> {
+        public IndexIterator(OrderedSet<T> orderedSet) {
+            this(orderedSet, false);
+        }
+
+        public IndexIterator(OrderedSet<T> orderedSet, boolean reversed) {
+            super(orderedSet, reversed);
+        }
+
+        @Override
+        public SparseIterator<Integer> reversed() {
+            return new IndexIterator<T>(orderedSet, !isReversed());
+        }
+
+        @Override
+        protected Integer getValueAt(int index) {
+            return index;
+        }
+    }
+
+    public static class ValueIterator<T> extends AbstractIndexedIterator<T, T> {
+        public ValueIterator(OrderedSet<T> orderedSet) {
+            this(orderedSet, false);
+        }
+
+        public ValueIterator(OrderedSet<T> orderedSet, boolean reversed) {
+            super(orderedSet, reversed);
+        }
+
+        @Override
+        public SparseIterator<T> reversed() {
+            return new ValueIterator<T>(orderedSet, !isReversed());
+        }
+
+        @Override
+        protected T getValueAt(int index) {
+            return orderedSet.getValueList().get(index);
+        }
     }
 
     @Override

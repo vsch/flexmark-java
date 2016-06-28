@@ -46,7 +46,7 @@ public interface LinkRefProcessor {
 
     /**
      * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
-     * or if the children are not desired then remove them.
+     * or if the children are not desired then removeIndex them.
      */
     void adjustInlineText(Node node);
 }

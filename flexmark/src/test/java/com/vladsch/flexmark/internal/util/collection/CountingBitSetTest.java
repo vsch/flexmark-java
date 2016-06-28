@@ -9,16 +9,17 @@ public class CountingBitSetTest {
     public void testBasic() throws Exception {
 
         int iMax = 128;
-        int jMax = 32;
+        int jMax = 128;
         for (int i = 0; i < iMax; i++) {
             for (int j = 0; j < jMax; j++) {
                 CountingBitSet bits = new CountingBitSet();
                 bits.set(i, i + j);
 
-                if (i == 8 && j == 1) {
+                if (i == 0 && j == 8) {
                     int tmp = 0;
                 }
-                Assert.assertEquals("i:" + i + " j:" + j, j, bits.count());
+                int count = bits.count();
+                Assert.assertEquals("i:" + i + " j:" + j, j, count);
 
                 for (int k = 0; k < j; k++) {
                     Assert.assertEquals("i:" + i + " j:" + j + " k:" + k, j - k, bits.count(i + k));

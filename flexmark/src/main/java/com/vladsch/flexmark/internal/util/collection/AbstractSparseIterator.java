@@ -14,6 +14,7 @@ public abstract class AbstractSparseIterator<E> implements SparseIterator<E> {
     protected abstract E getValueAt(int index);
     protected abstract int maxSize();
     protected abstract void remove(int index);
+    protected abstract void checkConcurrentMods();
 
     public AbstractSparseIterator(boolean reversed) {
         this.reversed = reversed;
@@ -26,7 +27,7 @@ public abstract class AbstractSparseIterator<E> implements SparseIterator<E> {
     }
 
     public int getIndex() {
-        if (lastIndex == -1) throw new IllegalStateException("Either next() was not called yet or the element was remove()");
+        if (lastIndex == -1) throw new IllegalStateException("Either next() was not called yet or the element was removeIndex()");
         return lastIndex;
     }
 
@@ -62,6 +63,7 @@ public abstract class AbstractSparseIterator<E> implements SparseIterator<E> {
 
     @Override
     public E next() {
+        checkConcurrentMods();
         int maxSize = maxSize();
         
         if (index == Integer.MIN_VALUE) {
@@ -81,13 +83,16 @@ public abstract class AbstractSparseIterator<E> implements SparseIterator<E> {
     @Override
     public void remove() {
         if (lastIndex == -1) throw new IllegalStateException();
+        checkConcurrentMods();
         remove(lastIndex);
     }
 
     @Override
     public void forEachRemaining(Consumer<? super E> consumer) {
+        checkConcurrentMods();
         while (hasNext()) {
             consumer.accept(next());
         }
+        checkConcurrentMods();
     }
 }

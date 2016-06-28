@@ -33,7 +33,7 @@ public class ClassifiedBagTest {
         Assert.assertEquals(true, bag.containsCategory(String.class));
         Assert.assertEquals(10, bag.getCategoryCount(String.class));
         
-        // now we remove them 
+        // now we removeIndex them 
         for (int i = 0; i < 10; i+=2) {
             item = (Integer) i;
             bag.remove(item);
@@ -45,7 +45,7 @@ public class ClassifiedBagTest {
         Assert.assertEquals(true, bag.containsCategory(String.class));
         Assert.assertEquals(10, bag.getCategoryCount(String.class));
 
-        // now we remove them 
+        // now we removeIndex them 
         for (int i = 0; i < 10; i+=2) {
             item = String.valueOf(i);
             bag.remove(item);
@@ -57,7 +57,7 @@ public class ClassifiedBagTest {
         Assert.assertEquals(true, bag.containsCategory(String.class));
         Assert.assertEquals(5, bag.getCategoryCount(String.class));
 
-        // now we remove them 
+        // now we removeIndex them 
         for (int i = 1; i < 10; i+=2) {
             item = (Integer) i;
             bag.remove(item);
@@ -69,7 +69,7 @@ public class ClassifiedBagTest {
         Assert.assertEquals(true, bag.containsCategory(String.class));
         Assert.assertEquals(5, bag.getCategoryCount(String.class));
 
-        // now we remove them 
+        // now we removeIndex them 
         for (int i = 1; i < 10; i+=2) {
             item = String.valueOf(i);
             bag.remove(item);

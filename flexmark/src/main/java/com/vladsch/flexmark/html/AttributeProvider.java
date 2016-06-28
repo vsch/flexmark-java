@@ -12,7 +12,7 @@ public interface AttributeProvider {
     /**
      * Set the attributes for the node by modifying the provided map.
      * <p>
-     * This allows to change or even remove default attributes. With great power comes great responsibility.
+     * This allows to change or even removeIndex default attributes. With great power comes great responsibility.
      * <p>
      * The attribute key and values will be escaped (preserving character entities), so don't escape them here,
      * otherwise they will be double-escaped.

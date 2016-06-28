@@ -2,19 +2,32 @@ package com.vladsch.flexmark.internal.util.collection;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.function.Consumer;
 
-public class OrderedMap<K, V> implements Map<K, V> {
+public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final private OrderedSet<K> keySet;
     final private ArrayList<V> valueList;
+    final private CollectionHost<K> host;
+    private boolean inUpdate;
 
     public OrderedMap() {
-        this(0);
+        this(0, null);
     }
 
     public OrderedMap(int capacity) {
+        this(capacity, null);
+    }
+
+    public OrderedMap(CollectionHost<K> host) {
+        this(0, host);
+    }
+
+    public OrderedMap(int capacity, CollectionHost<K> host) {
         this.valueList = new ArrayList<V>(capacity);
-        this.keySet = new OrderedSet<K>(capacity, new OrderedSetHost<K>() {
+        this.host = host;
+        this.keySet = new OrderedSet<K>(capacity, new CollectionHost<K>() {
             @Override
             public void adding(int index, K k, Object v) {
                 OrderedMap.this.adding(index, k, v);
@@ -31,31 +44,53 @@ public class OrderedMap<K, V> implements Map<K, V> {
             }
 
             @Override
-            public void addingNull(int index) {
+            public void addingNulls(int index) {
                 // can add anything, it will not be accessed, its a dummy holder
-                while (valueList.size() <= index) valueList.add(null);
+                OrderedMap.this.addingNull(index);
             }
 
             @Override
-            public boolean hostInUpdate() {
-                return false;
+            public boolean skipHostUpdate() {
+                return inUpdate;
+            }
+
+            @Override
+            public int getIteratorModificationCount() {
+                return OrderedMap.this.getModificationCount();
             }
         });
     }
 
+    public int getModificationCount() {
+        return keySet.getModificationCount();
+    }
+
     void adding(int index, K k, Object v) {
         if (v == null) throw new IllegalArgumentException();
+        if (host != null && !host.skipHostUpdate()) {
+            host.adding(index, k, v);
+        }
         valueList.add((V) v);
     }
 
+    void addingNull(int index) {
+        if (host != null && !host.skipHostUpdate()) {
+            host.addingNulls(index);
+        }
+        addNulls(index);
+    }
+
     Object removing(int index, K k) {
-        if (index == valueList.size() - 1) {
-            return valueList.remove(index);
+        if (host != null && !host.skipHostUpdate()) {
+            host.removing(index, k);
         }
         return valueList.get(index);
     }
 
     void clearing() {
+        if (host != null && !host.skipHostUpdate()) {
+            host.clearing();
+        }
         valueList.clear();
     }
 
@@ -78,6 +113,16 @@ public class OrderedMap<K, V> implements Map<K, V> {
     public boolean containsValue(Object o) {
         int index = valueList.indexOf(o);
         return keySet.isValidIndex(index);
+    }
+
+    public void addNull() {
+        addNulls(valueList.size());
+    }
+
+    public void addNulls(int index) {
+        if (index < valueList.size())
+            throw new IllegalArgumentException("addNulls(" + index + ") called when valueList size is " + valueList.size());
+        while (valueList.size() <= index) valueList.add(null);
     }
 
     @Override
@@ -201,16 +246,17 @@ public class OrderedMap<K, V> implements Map<K, V> {
     @Override
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), true, new OrderedSetHost<Map.Entry<K, V>>() {
+        inUpdate = true;
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new CollectionHost<Map.Entry<K, V>>() {
             @Override
             public void adding(int index, Map.Entry<K, V> entry, Object v) {
                 assert v == null;
-                    OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
+                OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
             }
 
             @Override
             public Object removing(int index, Map.Entry<K, V> entry) {
-                OrderedMap.this.keySet.remove(index);
+                OrderedMap.this.keySet.removeIndex(index);
                 return entry;
             }
 
@@ -218,15 +264,20 @@ public class OrderedMap<K, V> implements Map<K, V> {
             public void clearing() {
                 OrderedMap.this.keySet.clear();
             }
-            
+
             @Override
-            public void addingNull(int index) {
-                OrderedMap.this.keySet.addNull(index);
+            public void addingNulls(int index) {
+                OrderedMap.this.keySet.addNulls(index);
             }
 
             @Override
-            public boolean hostInUpdate() {
-                return false;
+            public boolean skipHostUpdate() {
+                return inUpdate;
+            }
+
+            @Override
+            public int getIteratorModificationCount() {
+                return OrderedMap.this.getModificationCount();
             }
         });
 
@@ -235,11 +286,56 @@ public class OrderedMap<K, V> implements Map<K, V> {
             iterator.next();
             values.add(new Entry<K, V>(this, iterator.getIndex()));
         }
-        
+
         // release it for host update
-        values.leaveHostUpdate();
+        inUpdate = false;
 
         return values;
+    }
+
+    public ReversibleIterator<V> valueIterator() {
+        return new ValueIterator<K, V>(this);
+    }
+
+    public ReversibleIterator<V> reversedValueIterator() {
+        return new ValueIterator<K, V>(this, true);
+    }
+
+    public ReversibleIterator<K> keyIterator() {
+        return new KeyIterator<K, V>(this);
+    }
+
+    public ReversibleIterator<K> reversedKeyIterator() {
+        return new KeyIterator<K, V>(this, true);
+    }
+
+    public ReversibleIterator<Map.Entry<K, V>> entryIterator() {
+        return new EntryIterator<K, V>(this);
+    }
+
+    public ReversibleIterator<Map.Entry<K, V>> reversedEntryIterator() {
+        return new EntryIterator<K, V>(this, true);
+    }
+
+    public ReversibleIterator<Map.Entry<K, V>> reversedIterator() {
+        return new EntryIterator<K, V>(this, true);
+    }
+
+    /*
+     * Iterable
+     */
+
+    @Override
+    public ReversibleIterator<Map.Entry<K, V>> iterator() {
+        return new EntryIterator<K, V>(this);
+    }
+
+    @Override
+    public void forEach(Consumer<? super Map.Entry<K, V>> consumer) {
+        Iterator<Map.Entry<K, V>> iterator = iterator();
+        while (iterator.hasNext()) {
+            consumer.accept(iterator.next());
+        }
     }
 
     public static abstract class AbstractIterator<T, E, X> extends OrderedSet.AbstractIndexedIterator<T, X> {
@@ -295,7 +391,7 @@ public class OrderedMap<K, V> implements Map<K, V> {
         }
     }
 
-    public static class EntryIterator<T, E> extends AbstractIterator<T, E, Entry<T,E>> {
+    public static class EntryIterator<T, E> extends AbstractIterator<T, E, Map.Entry<T, E>> {
         public EntryIterator(OrderedMap<T, E> orderedMap) {
             this(orderedMap, false);
         }
@@ -305,38 +401,14 @@ public class OrderedMap<K, V> implements Map<K, V> {
         }
 
         @Override
-        public SparseIterator<Entry<T,E>> reversed() {
+        public SparseIterator<Map.Entry<T, E>> reversed() {
             return new EntryIterator<T, E>(orderedMap, !isReversed());
         }
 
         @Override
-        protected Entry<T,E> getValueAt(int index) {
+        protected Map.Entry<T, E> getValueAt(int index) {
             return new Entry<T, E>(orderedMap, index);
         }
-    }
-
-    public ReversibleIterator<V> valueIterator() {
-        return new ValueIterator<K, V>(this);
-    }
-
-    public ReversibleIterator<V> reversedValueIterator() {
-        return new ValueIterator<K, V>(this, true);
-    }
-
-    public ReversibleIterator<K> keyIterator() {
-        return new KeyIterator<K, V>(this);
-    }
-
-    public ReversibleIterator<K> reversedKeyIterator() {
-        return new KeyIterator<K, V>(this, true);
-    }
-
-    public ReversibleIterator<Entry<K,V>> entryIterator() {
-        return new EntryIterator<K, V>(this);
-    }
-
-    public ReversibleIterator<Entry<K,V>> reversedEntryIterator() {
-        return new EntryIterator<K, V>(this, true);
     }
 
     @Override

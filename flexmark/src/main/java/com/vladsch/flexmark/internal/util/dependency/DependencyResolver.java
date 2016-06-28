@@ -34,7 +34,8 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                 dependentItemMap.put(dependentClass, item);
             }
 
-            dependentItemMap.valueIterator().forEachRemaining(item -> {
+            for (Map.Entry<Class<? extends D>, DependentItem<D>> entry : dependentItemMap) {
+                DependentItem<D> item = entry.getValue();
                 Set<Class<? extends D>> afterDependencies = item.dependent.getAfterDependents();
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
@@ -57,7 +58,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                         }
                     }
                 }
-            }); 
+            } 
 
             BitSet newReady = new BitSet(dependentCount);
             final Ref<BitSet> newReadyRef = new Ref<>(newReady);
@@ -88,7 +89,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
 
-                    // remove it from dependent's dependencies 
+                    // removeIndex it from dependent's dependencies 
                     if (item.hasDependents()) {
                         while (true) {
                             int j = item.dependents.nextSetBit(0);

@@ -84,7 +84,7 @@ public class HeadingParser extends AbstractBlockParser {
                 BasedSequence closingMarker = null;
                 matcher = ATX_TRAILING.matcher(headerText);
                 if (matcher.find()) {
-                    // remove trailing ###s:
+                    // removeIndex trailing ###s:
                     int closingStart = matcher.start();
                     int closingEnd = matcher.end();
                     closingMarker = headerText.subSequence(closingStart, closingEnd).trim();

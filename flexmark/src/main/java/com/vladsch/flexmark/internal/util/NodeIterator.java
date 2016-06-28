@@ -90,7 +90,7 @@ public class NodeIterator implements ReversibleIterator<Node> {
     @Override
     public void remove() {
         if (result == null) {
-            throw new IllegalStateException("Either next() was not called yet or the element was remove()");
+            throw new IllegalStateException("Either next() was not called yet or the element was removeIndex()");
         }
         result.unlink();
         result = null;

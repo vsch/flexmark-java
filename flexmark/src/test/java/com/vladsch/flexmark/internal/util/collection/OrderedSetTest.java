@@ -1,11 +1,17 @@
 package com.vladsch.flexmark.internal.util.collection;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 public class OrderedSetTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void testAddRemove() throws Exception {
         OrderedSet<String> orderedSet = new OrderedSet<String>();
@@ -174,5 +180,39 @@ public class OrderedSetTest {
             Assert.assertEquals(lastJ, j);
             j--;
         }
+    }
+
+    @Test
+    public void testConcurrentMod() throws Exception {
+        OrderedSet<String> orderedSet = new OrderedSet<String>();
+
+        for (int i = 0; i < 10; i++) {
+            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
+            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+        }
+
+        Assert.assertEquals(false, orderedSet.addAll(orderedSet));
+
+        int i = 0;
+        Iterator<String> iterator = orderedSet.iterator();
+        while (iterator.hasNext()) {
+            orderedSet.removeIndex(0);
+            thrown.expect(ConcurrentModificationException.class);
+            String it = iterator.next();
+            Assert.assertEquals("ConcurrentModificationException was not thrown on modification", false, true);
+        }
+    }
+
+    @Test
+    public void testSetConflict() throws Exception {
+        OrderedSet<String> orderedSet = new OrderedSet<String>();
+
+        for (int i = 0; i < 10; i++) {
+            Assert.assertEquals(true, orderedSet.add(String.valueOf(i)));
+            Assert.assertEquals(false, orderedSet.add(String.valueOf(i)));
+        }
+
+        thrown.expect(IllegalStateException.class);
+        Assert.assertEquals(false, orderedSet.setValueAt(0, String.valueOf(1), "1"));
     }
 }
