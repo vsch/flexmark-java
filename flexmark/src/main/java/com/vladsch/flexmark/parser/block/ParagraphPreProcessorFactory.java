@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.parser.block;
 
+import com.vladsch.flexmark.internal.util.ComputableFactory;
 import com.vladsch.flexmark.internal.util.dependency.Dependent;
 
-public interface ParagraphPreProcessorFactory extends Dependent<ParagraphPreProcessorFactory> {
+public interface ParagraphPreProcessorFactory extends ComputableFactory<ParagraphPreProcessor, ParserState>, Dependent<ParagraphPreProcessorFactory> {
 
     /**
      * Create a paragraph pre processor for the document
@@ -10,5 +11,5 @@ public interface ParagraphPreProcessorFactory extends Dependent<ParagraphPreProc
      * @param state parser state, document blocks have already been parsed at this stage
      * @return block pre-processor
      */
-    ParagraphPreProcessor create(ParserState state);
+    @Override ParagraphPreProcessor create(ParserState state);
 }

@@ -1,15 +1,16 @@
 package com.vladsch.flexmark.internal.util;
 
-import com.vladsch.flexmark.internal.util.collection.ReversibleIterator;
+import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterator;
 import com.vladsch.flexmark.node.Node;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-public class NodeIterator implements ReversibleIterator<Node> {
-    final boolean reversed;
+public class NodeIterator implements ReversiblePeekingIterator<Node> {
     final Node firstNode;
     final Node lastNode;
+    final boolean reversed;
     Node node;
     Node result;
 
@@ -48,9 +49,9 @@ public class NodeIterator implements ReversibleIterator<Node> {
     public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
         Objects.requireNonNull(firstNode);
 
-        this.reversed = reversed;
         this.firstNode = firstNode;
         this.lastNode = lastNode;
+        this.reversed = reversed;
         this.node = reversed ? lastNode : firstNode;
     }
 
@@ -72,11 +73,14 @@ public class NodeIterator implements ReversibleIterator<Node> {
     @Override
     public Node next() {
         result = null;
-        if (node != null) {
-            result = node;
-            node = reversed ? node.getPrevious() : node.getNext();
-            if (node == null || result == (reversed ? firstNode : lastNode)) node = null;
+
+        if (node == null) {
+            throw new NoSuchElementException();
         }
+
+        result = node;
+        node = reversed ? node.getPrevious() : node.getNext();
+        if (node == null || result == (reversed ? firstNode : lastNode)) node = null;
         return result;
     }
 
@@ -90,7 +94,7 @@ public class NodeIterator implements ReversibleIterator<Node> {
     @Override
     public void remove() {
         if (result == null) {
-            throw new IllegalStateException("Either next() was not called yet or the element was removeIndex()");
+            throw new IllegalStateException("Either next() was not called yet or the node was removed");
         }
         result.unlink();
         result = null;
@@ -104,4 +108,31 @@ public class NodeIterator implements ReversibleIterator<Node> {
             consumer.accept(next());
         }
     }
+
+    public final static ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
+        @Override
+        public ReversiblePeekingIterator<Node> reversed() {
+            return this;
+        }
+
+        @Override
+        public boolean isReversed() {
+            return false;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Node next() {
+            throw new NoSuchElementException();
+        }
+
+        @Override
+        public Node peek() {
+            return null;
+        }
+    };
 }

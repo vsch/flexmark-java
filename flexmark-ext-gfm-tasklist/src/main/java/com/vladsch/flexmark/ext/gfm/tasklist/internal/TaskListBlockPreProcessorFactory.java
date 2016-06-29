@@ -37,13 +37,18 @@ public class TaskListBlockPreProcessorFactory implements BlockPreProcessorFactor
     public BlockPreProcessor create(ParserState state) {
         return new BlockPreProcessor() {
             @Override
-            public Block preProcess(ParserState state, Block block) {
+            public void preProcess(ParserState state, Block block) {
                 Node taskListMarker = block.getFirstChild();
                 if (taskListMarker instanceof TaskListItemMarker) {
                     // convert it to a task list item
-                    return new TaskListItem((BulletListItem) block);
+                    TaskListItem newBlock = new TaskListItem((BulletListItem) block);
+
+                    block.insertBefore(newBlock);
+                    block.unlink();
+
+                    state.added(newBlock, false, false);
+                    state.removed(block, false, false);
                 }
-                return block;
             }
         };
     }

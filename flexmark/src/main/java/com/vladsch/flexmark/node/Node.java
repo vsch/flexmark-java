@@ -1,7 +1,8 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterable;
+import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterator;
 
 public abstract class Node {
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
@@ -36,7 +37,47 @@ public abstract class Node {
         return false;
     }
 
+    public ReversiblePeekingIterable<Node> getChildren() {
+        if (firstChild == null) {
+            return NodeIterable.EMPTY;
+        }
+        return new NodeIterable(firstChild, lastChild, false);
+    }
 
+    public ReversiblePeekingIterable<Node> getReversedChildren() {
+        if (firstChild == null) {
+            return NodeIterable.EMPTY;
+        }
+        return new NodeIterable(firstChild, lastChild, true);
+    }
+
+    public ReversiblePeekingIterable<Node> getDescendants() {
+        if (firstChild == null) {
+            return NodeIterable.EMPTY;
+        }
+        return new DescendantNodeIterable(getChildren());
+    }
+
+    public ReversiblePeekingIterable<Node> getReversedDescendants() {
+        if (firstChild == null) {
+            return NodeIterable.EMPTY;
+        }
+        return new DescendantNodeIterable(getReversedChildren());
+    }
+
+    public ReversiblePeekingIterator<Node> getChildIterator() {
+        if (firstChild == null) {
+            return NodeIterator.EMPTY;
+        }
+        return new NodeIterator(firstChild, lastChild, false);
+    }
+
+    public ReversiblePeekingIterator<Node> getReversedChildIterator() {
+        if (firstChild == null) {
+            return NodeIterator.EMPTY;
+        }
+        return new NodeIterator(firstChild, lastChild, true);
+    }
 
     public abstract void accept(Visitor visitor);
 
@@ -52,6 +93,10 @@ public abstract class Node {
             child.unlink();
             child = nextChild;
         }
+    }
+
+    public boolean hasChildren() {
+        return firstChild != null;
     }
 
     public Document getDocument() {

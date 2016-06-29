@@ -60,8 +60,8 @@ public class PostProcessorManager {
         //                                }
         //
         //                                block.insertAfter(newBlock);
-        //                                blockAdded(newBlock, null);
-        //                                removeBlock(block);
+        //                                added(newBlock, null);
+        //                                removed(block);
         //
         //                                if (block.getClass() != newBlock.getClass()) {
         //                                    // class changed, we will rerun for this one

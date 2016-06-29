@@ -9,7 +9,6 @@ public interface BlockPreProcessor {
      *
      * @param state parser state
      * @param block the block node to pre-process
-     * @return result of block processing. If the resulting block is not the original block then it will replace the original in the AST
      */
-    Block preProcess(ParserState state, Block block);
+    void preProcess(ParserState state, Block block);
 }

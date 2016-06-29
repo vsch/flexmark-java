@@ -22,7 +22,7 @@ public class AnchorLinkBlockPreProcessor implements BlockPreProcessor {
     }
 
     @Override
-    public Block preProcess(ParserState state, Block block) {
+    public void preProcess(ParserState state, Block block) {
         if (block instanceof Heading) {
             Heading node = (Heading) block;
             if (node.getText().isNotNull()) {
@@ -39,9 +39,10 @@ public class AnchorLinkBlockPreProcessor implements BlockPreProcessor {
                     anchor.takeChildren(node);
                     node.appendChild(anchor);
                 }
+
+                state.added(anchor, false, false);
             }
         }
-        return block;
     }
 
     public static class Factory implements BlockPreProcessorFactory {
@@ -70,5 +71,4 @@ public class AnchorLinkBlockPreProcessor implements BlockPreProcessor {
             return new AnchorLinkBlockPreProcessor(state.getProperties());
         }
     }
-
 }

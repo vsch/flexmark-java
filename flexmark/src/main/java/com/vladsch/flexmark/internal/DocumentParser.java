@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.internal.util.collection.*;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.internal.util.mappers.NodeClassifier;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -109,7 +110,6 @@ public class DocumentParser implements ParserState {
 
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
 
-
     private static class BlockParserMapper implements Computable<Block, BlockParser> {
         final public static BlockParserMapper INSTANCE = new BlockParserMapper();
 
@@ -122,59 +122,23 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static class ObjectClassifier implements Computable<Class<?>, Object> {
-        final public static ObjectClassifier INSTANCE = new ObjectClassifier();
-
-        private ObjectClassifier() {
+    private OrderedMultiMap<BlockParser, Block> allBlocksParserMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
+        @Override
+        public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
+            Block block = paired.getSecond();
+            if (block != null) classifiedNodeBag.add(block);
         }
 
         @Override
-        public Class<?> compute(Object value) {
-            return value.getClass();
-        }
-    }
-
-    private static class NodeClassifier implements Computable<Class<? extends Node>, Node> {
-        final public static NodeClassifier INSTANCE = new NodeClassifier();
-
-        private NodeClassifier() {
-        }
-
-        @Override
-        public Class<? extends Node> compute(Node value) {
-            return value.getClass();
-        }
-    }
-
-    private static class BlockClassifier implements Computable<Class<? extends Block>, Block> {
-        final public static BlockClassifier INSTANCE = new BlockClassifier();
-
-        private BlockClassifier() {
-        }
-
-        @Override
-        public Class<? extends Block> compute(Block value) {
-            return value.getClass();
-        }
-    }
-
-    private OrderedSet<BlockParser> allBlockParsers = new OrderedSet<>(new CollectionHost<BlockParser>() {
-        @Override
-        public void adding(int index, BlockParser parser, Object v) {
-            Block block = parser.getBlock();
-            if (block != null) classifiedBlockBag.add(block);
-        }
-
-        @Override
-        public Object removing(int index, BlockParser parser) {
-            Block block = parser.getBlock();
-            if (block != null) classifiedBlockBag.remove(block);
-            return null;
+        public Object removing(int index, Paired<BlockParser, Block> paired) {
+            Block block = paired.getSecond();
+            if (block != null) classifiedNodeBag.remove(block);
+            return paired;
         }
 
         @Override
         public void clearing() {
-            classifiedBlockBag.clear();
+            classifiedNodeBag.clear();
         }
 
         @Override
@@ -189,16 +153,73 @@ public class DocumentParser implements ParserState {
 
         @Override
         public int getIteratorModificationCount() {
-            return allBlockParsers.getModificationCount();
+            return allBlocksParserMap.getModificationCount();
         }
     });
-    
-    private ClassifiedBag<Class<? extends Block>, Block> classifiedBlockBag = new ClassifiedBag<Class<? extends Block>, Block>(BlockClassifier.INSTANCE);
-    
-    private Map<Block, BlockParser> allBlocksParserMap = new HashMap<>();
 
-    private Map<Class<? extends Block>, List<Block>> allPreProcessBlocks = new HashMap<>();
-    private ArrayList<Paragraph> allParagraphsList = new ArrayList<>();
+    private ClassifiedBag<Class<? extends Node>, Node> classifiedNodeBag = new ClassifiedBag<Class<? extends Node>, Node>(NodeClassifier.INSTANCE);
+
+    @Override
+    public void added(BlockParser blockParser) {
+        allBlocksParserMap.putKeyValue(blockParser, blockParser.getBlock());
+    }
+
+    @Override
+    public void removed(BlockParser blockParser) {
+        allBlocksParserMap.removeKey(blockParser);
+    }
+
+    @Override
+    public void added(Block node, boolean withChildren, boolean withDescendants) {
+        allBlocksParserMap.putValueKey(node, null);
+
+        if ((withChildren || withDescendants) && node.hasChildren()) {
+            ReversiblePeekingIterable<Node> nodes = withDescendants ? node.getDescendants() : node.getChildren();
+            for (Node child : nodes) {
+                if (child instanceof Block) {
+                    allBlocksParserMap.putValueKey((Block) child, null);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void removed(Block node, boolean withChildren, boolean withDescendants) {
+        allBlocksParserMap.removeValue(node);
+
+        if ((withChildren || withDescendants) && node.hasChildren()) {
+            ReversiblePeekingIterable<Node> nodes = withDescendants ? node.getDescendants() : node.getChildren();
+            for (Node child : nodes) {
+                if (child instanceof Block) {
+                    allBlocksParserMap.removeValue((Block) child);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void added(Node node, boolean withChildren, boolean withDescendants) {
+        classifiedNodeBag.add(node);
+
+        if ((withChildren || withDescendants) && node.hasChildren()) {
+            ReversiblePeekingIterable<Node> nodes = withDescendants ? node.getDescendants() : node.getChildren();
+            for (Node child : nodes) {
+                classifiedNodeBag.add(child);
+            }
+        }
+    }
+
+    @Override
+    public void removed(Node node, boolean withChildren, boolean withDescendants) {
+        classifiedNodeBag.remove(node);
+
+        if ((withChildren || withDescendants) && node.hasChildren()) {
+            ReversiblePeekingIterable<Node> nodes = withDescendants ? node.getDescendants() : node.getChildren();
+            for (Node child : nodes) {
+                classifiedNodeBag.remove(child);
+            }
+        }
+    }
 
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
     final private DataHolder options;
@@ -310,12 +331,12 @@ public class DocumentParser implements ParserState {
 
     public DocumentParser(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
         this.options = options;
-        
+
         ArrayList<BlockParserFactory> blockParserFactories = new ArrayList<>(customBlockParserFactories.size());
         for (CustomBlockParserFactory factory : customBlockParserFactories) {
             blockParserFactories.add(factory.create(options));
         }
-        
+
         this.blockParserFactories = blockParserFactories;
         this.paragraphPreProcessorDependencies = paragraphPreProcessorDependencies;
         this.blockPreProcessorDependencies = blockPreProcessorDependencies;
@@ -736,7 +757,7 @@ public class DocumentParser implements ParserState {
      * Walk through a block & children recursively, parsing string content into inline content where appropriate.
      */
     private void processInlines() {
-        for (BlockParser blockParser : allBlockParsers) {
+        for (BlockParser blockParser : allBlocksParserMap.keySet()) {
             blockParser.parseInlines(inlineParser);
         }
     }
@@ -791,45 +812,9 @@ public class DocumentParser implements ParserState {
 
     private void activateBlockParser(BlockParser blockParser) {
         activeBlockParsers.add(blockParser);
-
-        if (!allBlockParsers.contains(blockParser)) {
-            // document parser has a null block at this point
-            Block block = blockParser.getBlock();
-
-            if (block != null) {
-                if (blockParser instanceof ParagraphParser) {
-                    allParagraphsList.add((Paragraph) block);
-                }
-
-                blockAdded(block, blockParser);
-            }
-
-            allBlockParsers.add(blockParser);
+        if (!allBlocksParserMap.containsKey(blockParser)) {
+            allBlocksParserMap.putKeyValue(blockParser, blockParser.getBlock());
         }
-    }
-
-    @Override
-    public void blockAdded(Block block, BlockParser blockParser) {
-        if (!blockPreProcessorDependencies.isEmpty()) {
-            Class<? extends Block> blockClass = block.getClass();
-            if (blockPreProcessorDependencies.getBlockTypes().contains(blockClass)) {
-                if (!allPreProcessBlocks.containsKey(blockClass)) allPreProcessBlocks.put(blockClass, new ArrayList<>());
-                allPreProcessBlocks.get(blockClass).add(block);
-            }
-        }
-
-        allBlocksParserMap.put(block, blockParser);
-    }
-
-    @Override
-    public void removeBlock(Block block) {
-        BlockParser blockParser = allBlocksParserMap.get(block);
-        if (blockParser != null) {
-            allBlockParsers.remove(blockParser);
-        }
-
-        allBlocksParserMap.remove(block);
-        block.unlink();
     }
 
     private void deactivateBlockParser() {
@@ -840,9 +825,7 @@ public class DocumentParser implements ParserState {
         BlockParser old = getActiveBlockParser();
         deactivateBlockParser();
 
-        allBlockParsers.remove(old);
-        allBlocksParserMap.remove(old.getBlock());
-
+        allBlocksParserMap.removeKey(old);
         old.getBlock().unlink();
     }
 
@@ -915,7 +898,8 @@ public class DocumentParser implements ParserState {
 
                     if (contentChars.isBlank()) {
                         // all used up
-                        removeBlock(block);
+                        block.unlink();
+                        removed(block, false, false);
                         return;
                     } else {
                         // skip lines that were removed
@@ -952,7 +936,7 @@ public class DocumentParser implements ParserState {
 
     private void preProcessParagraphs() {
         // here we run preProcessing stages
-        if (allParagraphsList.size() > 0) {
+        if (classifiedNodeBag.containsCategory(Paragraph.class)) {
             List<List<ParagraphPreProcessor>> paragraphPreProcessorStages = new ArrayList<>(paragraphPreProcessorDependencies.getDependentStages().size());
             for (ParagraphPreProcessorDependencyStage factoryStage : paragraphPreProcessorDependencies.getDependentStages()) {
                 ArrayList<ParagraphPreProcessor> stagePreProcessors = new ArrayList<>(factoryStage.dependents.size());
@@ -963,10 +947,8 @@ public class DocumentParser implements ParserState {
             }
 
             for (List<ParagraphPreProcessor> preProcessorStage : paragraphPreProcessorStages) {
-                for (Paragraph paragraph : allParagraphsList) {
-                    if (allBlocksParserMap.containsKey(paragraph)) {
-                        preProcessParagraph(paragraph, preProcessorStage);
-                    }
+                for (Paragraph paragraph : classifiedNodeBag.getCategoryItems(Paragraph.class, Paragraph.class)) {
+                    preProcessParagraph(paragraph, preProcessorStage);
                 }
             }
         }
@@ -974,45 +956,25 @@ public class DocumentParser implements ParserState {
 
     private void preProcessBlocks() {
         // here we run preProcessing stages
-        if (allPreProcessBlocks.size() > 0) {
+        CountingBitSet preProcessBitSet = classifiedNodeBag.categoriesBitSet(blockPreProcessorDependencies.blockTypes);
+        if (!preProcessBitSet.isEmpty()) {
             HashMap<BlockPreProcessorFactory, BlockPreProcessor> blockPreProcessors = new HashMap<>(blockPreProcessorDependencies.getDependentStages().size());
 
             for (BlockPreProcessorDependencyStage preProcessorStage : blockPreProcessorDependencies.getDependentStages()) {
                 for (Map.Entry<Class<? extends Block>, List<BlockPreProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
-                    List<Block> blockList = allPreProcessBlocks.get(entry.getKey());
+                    ReversibleIterable<Block> blockList = classifiedNodeBag.getCategoryItems(Block.class, entry.getKey());
                     List<BlockPreProcessorFactory> factoryList = entry.getValue();
 
-                    if (blockList != null && factoryList != null) {
-                        for (Block block : blockList) {
-                            if (allBlocksParserMap.containsKey(block)) {
-                                for (BlockPreProcessorFactory factory : factoryList) {
-                                    BlockPreProcessor blockPreProcessor = blockPreProcessors.get(factory);
-                                    if (blockPreProcessor == null) {
-                                        blockPreProcessor = factory.create(this);
-                                        blockPreProcessors.put(factory, blockPreProcessor);
-                                    }
+                    if (factoryList != null) {
+                        for (BlockPreProcessorFactory factory : factoryList) {
+                            BlockPreProcessor blockPreProcessor = blockPreProcessors.get(factory);
+                            if (blockPreProcessor == null) {
+                                blockPreProcessor = factory.create(this);
+                                blockPreProcessors.put(factory, blockPreProcessor);
+                            }
 
-                                    Block newBlock = blockPreProcessor.preProcess(this, block);
-
-                                    if (newBlock != block) {
-                                        // needs to be replaced
-                                        BlockParser blockParser = allBlocksParserMap.get(block);
-                                        if (blockParser != null) {
-                                            allBlockParsers.remove(blockParser);
-                                        }
-
-                                        block.insertAfter(newBlock);
-                                        blockAdded(newBlock, null);
-                                        removeBlock(block);
-
-                                        if (block.getClass() != newBlock.getClass()) {
-                                            // class changed, we will rerun for this one
-                                            break;
-                                        }
-
-                                        block = newBlock;
-                                    }
-                                }
+                            for (Block block : blockList) {
+                                blockPreProcessor.preProcess(this, block);
                             }
                         }
                     }

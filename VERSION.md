@@ -20,14 +20,12 @@ Version History
     allowing to keep tandem structures in sync. `OrderedMap` and `OrderedMultiMap` use
     `OrderedSet` in this way.
 
+- [ ] Change document parser to use helper classes for block parser and block pre-processor
+      optimizations.
+
 - [ ] Add `TextPostProcessor` to support more efficient text node post processing than each
       post processor traversing to post process text nodes instead of each extension
       traversing the full document tree.
-
-- [ ] 
-
-- [ ] Change document parser to use helper classes for block parser and block pre-processor
-      optimiztions.
 
 0.2.9
 -----

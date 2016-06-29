@@ -18,8 +18,7 @@ public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
     }
 
     @Override
-    public Block preProcess(ParserState state, Block block) {
-        return block;
+    public void preProcess(ParserState state, Block block) {
     }
 
     public static class Factory implements BlockPreProcessorFactory {

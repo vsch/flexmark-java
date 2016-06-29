@@ -260,8 +260,13 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(keySet.getValueList().size(), new Pair<>(k, v), null);
             }
-            keySet.add(k, v);
-            valueSet.add(v, k);
+            
+            if (k == null) keySet.addNull();
+            else keySet.add(k, v);
+            
+            if (k == null) valueSet.addNull();
+            else valueSet.add(v, k);
+            
             inValueUpdate = false;
             inKeyUpdate = false;
 
@@ -274,7 +279,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(valueIndex, new Pair<>(k, v), null);
             }
-            keySet.setValueAt(valueIndex, k, v);
+            
+            if (k == null) keySet.removeIndex(valueIndex); 
+            else keySet.setValueAt(valueIndex, k, v);
+            
             inValueUpdate = false;
             inKeyUpdate = false;
             return true;
@@ -286,7 +294,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(keyIndex, new Pair<>(k, v), null);
             }
-            valueSet.setValueAt(keyIndex, v, k);
+            
+            if (k == null) valueSet.removeIndex(valueIndex);
+            else valueSet.setValueAt(keyIndex, v, k);
+            
             inValueUpdate = false;
             inValueUpdate = false;
             return true;

@@ -2,15 +2,17 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
-import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.parser.BlockParserTracker;
+import com.vladsch.flexmark.parser.BlockTracker;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.NodeTracker;
 
 /**
  * State of the parser that is used in block parsers.
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
-public interface ParserState {
+public interface ParserState extends NodeTracker, BlockTracker, BlockParserTracker {
 
     /**
      * @return the current line
@@ -84,19 +86,4 @@ public interface ParserState {
 
     ParserPhase getParserPhase();
 
-    /**
-     * Used by Paragraph and Block pre-processors to inform parser of additions/removals to allow updating optimization structures
-     *
-     * @param block       block that was added
-     * @param blockParser block parser instance whose block() method returns the block, or null if none.
-     *                    if not null then the blockParser's parseInlines() method will be called during the PARSE_INLINES phase
-     */
-    void blockAdded(Block block, BlockParser blockParser);
-
-    /**
-     * Used by Paragraph and Block pre-processors to inform parser of additions/removals to allow updating optimization structures
-     *
-     * @param block block to be removed. NOTE: The block will be unlinked.
-     */
-    void removeBlock(Block block);
 }
