@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.BlockParserTracker;
+import com.vladsch.flexmark.internal.util.BlockTracker;
 import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.BlockParserTracker;
-import com.vladsch.flexmark.parser.BlockTracker;
 import com.vladsch.flexmark.parser.InlineParser;
 
 /**

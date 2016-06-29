@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.parser;
+package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.Factory;
 import com.vladsch.flexmark.node.Node;

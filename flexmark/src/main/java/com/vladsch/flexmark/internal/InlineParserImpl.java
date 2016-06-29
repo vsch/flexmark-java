@@ -6,6 +6,7 @@ import com.vladsch.flexmark.internal.util.*;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.*;
+import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
 

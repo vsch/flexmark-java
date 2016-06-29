@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
+import com.vladsch.flexmark.internal.util.NodeTracker;
 import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.NodeTracker;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 

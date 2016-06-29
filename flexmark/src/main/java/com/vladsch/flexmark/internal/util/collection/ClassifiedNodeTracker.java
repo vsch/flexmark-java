@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.NodeTracker;
 import com.vladsch.flexmark.internal.util.mappers.NodeClassifier;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.NodeTracker;
 
 public class ClassifiedNodeTracker implements NodeTracker {
     final protected ClassifiedBag<Class<? extends Node>, Node> classifiedNodeBag = new ClassifiedBag<Class<? extends Node>, Node>(NodeClassifier.INSTANCE);

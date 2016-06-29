@@ -8,8 +8,8 @@ import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Paragraph;
-import com.vladsch.flexmark.parser.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
@@ -56,6 +56,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
         });
     }
+    
     public static ParagraphPreProcessorFactory Factory() {
         return new ParagraphPreProcessorFactory() {
             @Override

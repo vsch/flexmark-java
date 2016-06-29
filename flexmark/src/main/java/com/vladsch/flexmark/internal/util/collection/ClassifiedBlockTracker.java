@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.BlockParserTracker;
+import com.vladsch.flexmark.internal.util.BlockTracker;
 import com.vladsch.flexmark.internal.util.mappers.NodeClassifier;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.BlockParserTracker;
-import com.vladsch.flexmark.parser.BlockTracker;
 import com.vladsch.flexmark.parser.block.BlockParser;
 
 public class ClassifiedBlockTracker implements BlockTracker, BlockParserTracker {

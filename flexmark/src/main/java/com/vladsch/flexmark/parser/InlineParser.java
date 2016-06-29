@@ -3,6 +3,7 @@ package com.vladsch.flexmark.parser;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 
 import java.util.BitSet;
 import java.util.List;
