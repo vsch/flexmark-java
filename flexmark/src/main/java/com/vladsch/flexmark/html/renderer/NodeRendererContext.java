@@ -25,7 +25,7 @@ public interface NodeRendererContext {
      *
      * @param tag        the tag of the node being rendered, some nodes render multiple tags with attributes
      * @param attributes the attributes that were calculated by the renderer
-     * @return the extended attributes with added/updated/removed entries
+     * @return the extended attributes with added/updated/blockRemoved entries
      */
     Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes);
 

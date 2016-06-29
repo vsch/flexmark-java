@@ -28,7 +28,7 @@ public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
         if (openerCount >= 2 && closerCount >= 2) {
             return 2;
         } else {
-            // Can happen if a run had 3 delimiters before, and we removed 2 of them in an earlier processing step.
+            // Can happen if a run had 3 delimiters before, and we blockRemoved 2 of them in an earlier processing step.
             // So just use 1 of them, see corresponding handling in process method.
             return 1;
         }

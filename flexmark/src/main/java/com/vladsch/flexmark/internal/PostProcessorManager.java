@@ -7,14 +7,14 @@ import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.DependentPostProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParserFactory;
+import com.vladsch.flexmark.parser.PostProcessorFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class PostProcessorManager {
-    private static HashMap<DataKey<Boolean>, DependentPostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
+    private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
     static {
         //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
     }
@@ -33,17 +33,17 @@ public class PostProcessorManager {
     private void preProcessBlocks() {
         //// here we run preProcessing stages
         //if (allPostProcessNodes.size() > 0) {
-        //    HashMap<DependentPostProcessorFactory, PostProcessor> blockPreProcessors = new HashMap<>(postProcessorDependencies.getDependentStages().size());
+        //    HashMap<PostProcessorFactory, PostProcessor> blockPreProcessors = new HashMap<>(postProcessorDependencies.getDependentStages().size());
         //
         //    for (DependentPostProcessorDependencyStage preProcessorStage : postProcessorDependencies.getDependentStages()) {
-        //        for (Map.Entry<Class<? extends Node>, List<DependentPostProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
+        //        for (Map.Entry<Class<? extends Node>, List<PostProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
         //            List<Node> blockList = allPostProcessNodes.get(entry.getKey());
-        //            List<DependentPostProcessorFactory> factoryList = entry.getValue();
+        //            List<PostProcessorFactory> factoryList = entry.getValue();
         //
         //            if (blockList != null && factoryList != null) {
         //                for (Node block : blockList) {
         //                    if (allBlocksParserMap.containsKey(block)) {
-        //                        for (DependentPostProcessorFactory factory : factoryList) {
+        //                        for (PostProcessorFactory factory : factoryList) {
         //                            PostProcessor blockPreProcessor = blockPreProcessors.get(factory);
         //                            if (blockPreProcessor == null) {
         //                                blockPreProcessor = factory.create(this);
@@ -61,7 +61,7 @@ public class PostProcessorManager {
         //
         //                                block.insertAfter(newBlock);
         //                                added(newBlock, null);
-        //                                removed(block);
+        //                                blockRemoved(block);
         //
         //                                if (block.getClass() != newBlock.getClass()) {
         //                                    // class changed, we will rerun for this one
@@ -81,17 +81,17 @@ public class PostProcessorManager {
 
 
     public static class DependentPostProcessorDependencyStage {
-        final private Map<Class<? extends Node>, List<DependentPostProcessorFactory>> factoryMap;
-        final private List<DependentPostProcessorFactory> dependents;
+        final private Map<Class<? extends Node>, List<PostProcessorFactory>> factoryMap;
+        final private List<PostProcessorFactory> dependents;
 
-        public DependentPostProcessorDependencyStage(List<DependentPostProcessorFactory> dependents) {
+        public DependentPostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
-            HashMap<Class<? extends Node>, List<DependentPostProcessorFactory>> map = new HashMap<>();
+            HashMap<Class<? extends Node>, List<PostProcessorFactory>> map = new HashMap<>();
 
-            for (DependentPostProcessorFactory dependent : dependents) {
-                Set<Class<? extends Node>> blockTypes = dependent.getNodeTypes();
+            for (PostProcessorFactory dependent : dependents) {
+                Set<Class<? extends Node>> blockTypes = dependent instanceof PostProcessorFactory ? ((PostProcessorFactory) dependent).getNodeTypes() : Collections.EMPTY_SET;
                 for (Class<? extends Node> blockType : blockTypes) {
-                    List<DependentPostProcessorFactory> factories = map.get(blockType);
+                    List<PostProcessorFactory> factories = map.get(blockType);
                     if (factories == null) {
                         factories = new ArrayList<>();
                         map.put(blockType, factories);
@@ -107,12 +107,12 @@ public class PostProcessorManager {
 
     public static class DependentPostProcessorDependencies extends ResolvedDependencies<DependentPostProcessorDependencyStage> {
         final private Set<Class<? extends Node>> blockTypes;
-        final private Set<DependentPostProcessorFactory> DependentPostProcessorFactories;
+        final private Set<PostProcessorFactory> DependentPostProcessorFactories;
 
         public DependentPostProcessorDependencies(List<DependentPostProcessorDependencyStage> dependentStages) {
             super(dependentStages);
             Set<Class<? extends Node>> blockTypes = new HashSet<>();
-            Set<DependentPostProcessorFactory> DependentPostProcessorFactories = new HashSet<>();
+            Set<PostProcessorFactory> DependentPostProcessorFactories = new HashSet<>();
             for (DependentPostProcessorDependencyStage stage : dependentStages) {
                 blockTypes.addAll(stage.factoryMap.keySet());
                 DependentPostProcessorFactories.addAll(stage.dependents);
@@ -125,14 +125,14 @@ public class PostProcessorManager {
             return blockTypes;
         }
 
-        public Set<DependentPostProcessorFactory> getDependentPostProcessorFactories() {
+        public Set<PostProcessorFactory> getDependentPostProcessorFactories() {
             return DependentPostProcessorFactories;
         }
     }
 
-    private static class BlockDependencyResolver extends DependencyResolver<DependentPostProcessorFactory, DependentPostProcessorDependencyStage, DependentPostProcessorDependencies> {
+    private static class BlockDependencyResolver extends DependencyResolver<PostProcessorFactory, DependentPostProcessorDependencyStage, DependentPostProcessorDependencies> {
         @Override
-        protected Class<? extends DependentPostProcessorFactory> getDependentClass(DependentPostProcessorFactory dependent) {
+        protected Class<? extends PostProcessorFactory> getDependentClass(PostProcessorFactory dependent) {
             return dependent.getClass();
         }
 
@@ -142,13 +142,13 @@ public class PostProcessorManager {
         }
 
         @Override
-        protected DependentPostProcessorDependencyStage createStage(List<DependentPostProcessorFactory> dependents) {
+        protected DependentPostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
             return new DependentPostProcessorDependencyStage(dependents);
         }
     }
 
-    public static DependentPostProcessorDependencies calculateDependentPostProcessors(DataHolder options, List<DependentPostProcessorFactory> blockPreProcessors, InlineParserFactory inlineParserFactory) {
-        List<DependentPostProcessorFactory> list = new ArrayList<>();
+    public static DependentPostProcessorDependencies calculateDependentPostProcessors(DataHolder options, List<PostProcessorFactory> blockPreProcessors, InlineParserFactory inlineParserFactory) {
+        List<PostProcessorFactory> list = new ArrayList<>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(blockPreProcessors);
 

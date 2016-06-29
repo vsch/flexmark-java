@@ -94,7 +94,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     @Override
     public void remove() {
         if (result == null) {
-            throw new IllegalStateException("Either next() was not called yet or the node was removed");
+            throw new IllegalStateException("Either next() was not called yet or the node was blockRemoved");
         }
         result.unlink();
         result = null;

@@ -98,8 +98,16 @@ public class ClassifiedBag<K, V> {
         return new ItemIterable<>(myItems.getValueList(), categoriesBitSet(categories), false);
     }
     
+    public final <X extends V> ReversibleIterable<X> getCategoryItems(Class<X> xClass, Collection<? extends K> categories) {
+        return new ItemIterable<>(myItems.getValueList(), categoriesBitSet(categories), false);
+    }
+    
     @SafeVarargs
     public final <X extends V> ReversibleIterable<X> getCategoryItemsReversed(Class<X> xClass, K... categories) {
+        return new ItemIterable<>(myItems.getValueList(), categoriesBitSet(categories), true);
+    }
+
+    public final <X extends V> ReversibleIterable<X> getCategoryItemsReversed(Class<X> xClass, Collection<? extends K> categories) {
         return new ItemIterable<>(myItems.getValueList(), categoriesBitSet(categories), true);
     }
 

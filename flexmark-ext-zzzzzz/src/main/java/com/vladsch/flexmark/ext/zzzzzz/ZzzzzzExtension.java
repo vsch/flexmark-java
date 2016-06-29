@@ -50,7 +50,8 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessor.Factory());//zzzoptionszzz(REMOVE, BLOCK_PRE_PROCESSOR)
         parserBuilder.customDelimiterProcessor(new ZzzzzzDelimiterProcessor());//zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
         parserBuilder.linkRefProcessorFactory(new ZzzzzzLinkRefProcessor.Factory());//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
-        parserBuilder.postProcessorFactory(new ZzzzzzPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
+        parserBuilder.postProcessorFactory(new ZzzzzzNodePostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
+        parserBuilder.postProcessorFactory(new ZzzzzzDocumentPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
     }
 
     @Override

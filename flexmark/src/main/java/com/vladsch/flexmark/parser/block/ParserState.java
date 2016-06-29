@@ -6,13 +6,12 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.BlockParserTracker;
 import com.vladsch.flexmark.parser.BlockTracker;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.NodeTracker;
 
 /**
  * State of the parser that is used in block parsers.
  * <p><em>This interface is not intended to be implemented by clients.</em></p>
  */
-public interface ParserState extends NodeTracker, BlockTracker, BlockParserTracker {
+public interface ParserState extends BlockTracker, BlockParserTracker {
 
     /**
      * @return the current line

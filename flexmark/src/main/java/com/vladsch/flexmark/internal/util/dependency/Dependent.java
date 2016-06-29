@@ -2,20 +2,20 @@ package com.vladsch.flexmark.internal.util.dependency;
 
 import java.util.Set;
 
-public interface Dependent<T> {
+public interface Dependent<S> {
     /**
      * @return null or a list of processors that must be executed before calling this one
      * if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      * before this pre processor is called.
      */
-    Set<Class<? extends T>> getAfterDependents();
+    Set<Class<? extends S>> getAfterDependents();
 
     /**
      * @return null or a list of processors before which this has to be run
      * if any of the blocks in the list affect global state then these will be run on ALL blocks of the document
      * before this pre processor is called.
      */
-    Set<Class<? extends T>> getBeforeDependents();
+    Set<Class<? extends S>> getBeforeDependents();
 
     /**
      * @return true if this dependent affects the global scope, which means that any that depend on it have to

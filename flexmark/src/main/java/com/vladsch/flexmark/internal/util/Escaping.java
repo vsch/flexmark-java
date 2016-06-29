@@ -176,7 +176,7 @@ public class Escaping {
     }
 
     /**
-     * Normalize after parsing: this means that any CR at the end of text should be removed it was converted to SoftBreak during parsing
+     * Normalize after parsing: this means that any CR at the end of text should be blockRemoved it was converted to SoftBreak during parsing
      * embedded \r and \r\n are converted to \n
      *
      * @param input sequence to convert

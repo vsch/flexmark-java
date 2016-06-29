@@ -4,27 +4,27 @@ import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.PostProcessor;
-import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 
 import java.util.EnumSet;
 
-public class AutolinkPostProcessor extends AbstractVisitor implements PostProcessor {
+public class AutolinkPostProcessor extends DocumentPostProcessor {
 
     private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.EMAIL))
             .build();
 
     public AutolinkPostProcessor(Document document) {
-        
+
     }
 
-    public Node process(Node Node) {
-        Node.accept(this);
-        return Node;
+    public Document processDocument(Document document) {
+        document.accept(this);
+        return document;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class AutolinkPostProcessor extends AbstractVisitor implements PostProces
             processTextNode(text);
         }
     }
-    
+
     private void processTextNode(Text text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
@@ -80,9 +80,9 @@ public class AutolinkPostProcessor extends AbstractVisitor implements PostProces
         text.unlink();
     }
 
-    public static class Factory implements PostProcessorFactory {
+    public static class Factory extends DocumentPostProcessorFactory {
         @Override
-        public PostProcessor create(Document document) {
+        public DocumentPostProcessor create(Document document) {
             return new AutolinkPostProcessor(document);
         }
     }

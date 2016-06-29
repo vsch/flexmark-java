@@ -419,8 +419,6 @@ public class OrderedMapTest {
                     .onCond(j == 1).expectClearing()
                     .test(() -> {
                         orderedMap.keySet().remove(String.valueOf(finalJ));
-
-                        System.out.println(validator.expectations());
                     });
         }
     }

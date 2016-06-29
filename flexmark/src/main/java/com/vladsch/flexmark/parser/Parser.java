@@ -12,6 +12,7 @@ import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.internal.util.collection.DataSet;
 import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
@@ -105,7 +106,7 @@ public class Parser {
     public Node parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
-        Node document = documentParser.parse(input);
+        Document document = documentParser.parse(input);
         return postProcess(document);
     }
 
@@ -120,7 +121,7 @@ public class Parser {
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
-        Node document = documentParser.parse(new StringSequence(input));
+        Document document = documentParser.parse(new StringSequence(input));
         return postProcess(document);
     }
 
@@ -136,15 +137,15 @@ public class Parser {
     public Node parseReader(Reader input) throws IOException {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
-        Node document = documentParser.parse(input);
+        Document document = documentParser.parse(input);
         return postProcess(document);
     }
 
-    private Node postProcess(Node node) {
+    private Node postProcess(Document document) {
         for (PostProcessorFactory postProcessorFactory : postProcessorFactories) {
-            node = postProcessorFactory.create(node.getDocument()).process(node);
+            document = postProcessorFactory.create(document).processDocument(document);
         }
-        return node;
+        return document;
     }
 
     public Parser withOptions(DataHolder options) {

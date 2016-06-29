@@ -7,9 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ItemFactoryMap<K, I, P> implements Map<K, ComputableFactory<I, P>> {
-    final protected HashMap<K, ComputableFactory<I, P>> factoryMap;
-    final protected HashMap<K, I> itemMap;
+public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
+    final protected HashMap<ComputableFactory<I, P>, I> itemMap;
     final protected P param;
 
     public ItemFactoryMap(P param) {
@@ -17,59 +16,57 @@ public class ItemFactoryMap<K, I, P> implements Map<K, ComputableFactory<I, P>> 
     }
 
     public ItemFactoryMap(P param, int capacity) {
-        this.factoryMap = new HashMap<K, ComputableFactory<I, P>>(capacity);
-        this.itemMap = new HashMap<K, I>();
+        this.itemMap = new HashMap<>(capacity);
         this.param = param;
     }
 
-    public I getItem(K key) {
-        I item = itemMap.get(key);
-
+    public I getItem(ComputableFactory<I, P> factory) {
+        I item = itemMap.get(factory);
         if (item == null) {
-            ComputableFactory<I, P> factory = factoryMap.get(key);
-            if (factory == null) {
-                throw new IllegalStateException("Factory for key: " + key + " is not defined");
-            }
             item = factory.create(param);
-            itemMap.put(key, item);
-        }                          
-        
+            itemMap.put(factory, item);
+        }
         return item;
     }
 
     @Override
-    public int size() {return factoryMap.size();}
+    public I get(Object o) {
+        if (o instanceof ComputableFactory) {
+            return getItem((ComputableFactory<I, P>) o);
+        }
+        return null;
+    }
 
     @Override
-    public boolean isEmpty() {return factoryMap.isEmpty();}
+    public int size() {return itemMap.size();}
 
     @Override
-    public ComputableFactory<I, P> get(Object o) {return factoryMap.get(o);}
+    public boolean isEmpty() {return itemMap.isEmpty();}
 
     @Override
-    public boolean containsKey(Object o) {return factoryMap.containsKey(o);}
+    public boolean containsKey(Object o) {return itemMap.containsKey(o);}
 
     @Override
-    public ComputableFactory<I, P> put(K k, ComputableFactory<I, P> factory) {return factoryMap.put(k, factory);}
+    public I put(ComputableFactory<I, P> factory, I i) {return itemMap.put(factory, i);}
 
     @Override
-    public void putAll(Map<? extends K, ? extends ComputableFactory<I, P>> map) {factoryMap.putAll(map);}
+    public void putAll(Map<? extends ComputableFactory<I, P>, ? extends I> map) {itemMap.putAll(map);}
 
     @Override
-    public ComputableFactory<I, P> remove(Object o) {return factoryMap.remove(o);}
+    public I remove(Object o) {return itemMap.remove(o);}
 
     @Override
-    public void clear() {factoryMap.clear();}
+    public void clear() {itemMap.clear();}
 
     @Override
-    public boolean containsValue(Object o) {return factoryMap.containsValue(o);}
+    public boolean containsValue(Object o) {return itemMap.containsValue(o);}
 
     @Override
-    public Set<K> keySet() {return factoryMap.keySet();}
+    public Set<ComputableFactory<I, P>> keySet() {return itemMap.keySet();}
 
     @Override
-    public Collection<ComputableFactory<I, P>> values() {return factoryMap.values();}
+    public Collection<I> values() {return itemMap.values();}
 
     @Override
-    public Set<Entry<K, ComputableFactory<I, P>>> entrySet() {return factoryMap.entrySet();}
+    public Set<Entry<ComputableFactory<I, P>, I>> entrySet() {return itemMap.entrySet();}
 }

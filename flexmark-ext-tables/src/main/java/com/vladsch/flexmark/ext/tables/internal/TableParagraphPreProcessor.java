@@ -238,7 +238,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         tableBlock.setCharsFromContent();
 
         block.insertBefore(tableBlock);
-        state.added(tableBlock, false, false);
+        state.blockAdded(tableBlock);
         return tableBlock.getChars().length();
     }
 

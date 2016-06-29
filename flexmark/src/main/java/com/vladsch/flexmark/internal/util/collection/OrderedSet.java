@@ -99,7 +99,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
                     // already have another element at index
                     throw new IllegalStateException("Trying to add new element " + value + " at index " + index + ", already occupied by " + valueList.get(index));
                 }
-                // old element was removed, just replace
+                // old element was blockRemoved, just replace
             } else {
                 if (index > valueList.size()) addNulls(index - 1);
             }

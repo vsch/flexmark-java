@@ -6,15 +6,18 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
-import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.PostProcessor;
-import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AbbreviationPostProcessor extends AbstractVisitor implements PostProcessor {
+public class AbbreviationPostProcessor extends DocumentPostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
 
@@ -43,11 +46,11 @@ public class AbbreviationPostProcessor extends AbstractVisitor implements PostPr
     }
 
     @Override
-    public Node process(Node Node) {
+    public Document processDocument(Document document) {
         if (abbreviations != null) {
-            Node.accept(this);
+            document.accept(this);
         }
-        return Node;
+        return document;
     }
 
     @Override
@@ -102,9 +105,9 @@ public class AbbreviationPostProcessor extends AbstractVisitor implements PostPr
         return lastNode;
     }
 
-    public static class Factory implements PostProcessorFactory {
+    public static class Factory extends DocumentPostProcessorFactory {
         @Override
-        public PostProcessor create(Document document) {
+        public DocumentPostProcessor create(Document document) {
             return new AbbreviationPostProcessor(document);
         }
     }

@@ -1,11 +1,14 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
-import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.PostProcessor;
-import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.node.Heading;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
+import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
-public class AnchorLinkPostProcessor extends AbstractVisitor implements PostProcessor {
+public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     final private GitHubHeaderIdGenerator generator;
     final private AnchorLinkOptions options;
 
@@ -14,9 +17,10 @@ public class AnchorLinkPostProcessor extends AbstractVisitor implements PostProc
         this.options = new AnchorLinkOptions(document);
     }
 
-    public Node process(Node Node) {
-        Node.accept(this);
-        return Node;
+    @Override
+    public Document processDocument(Document document) {
+        document.accept(this);
+        return document;
     }
 
     @Override
@@ -44,9 +48,9 @@ public class AnchorLinkPostProcessor extends AbstractVisitor implements PostProc
         }
     }
 
-    public static class Factory implements PostProcessorFactory {
+    public static class Factory extends DocumentPostProcessorFactory {
         @Override
-        public PostProcessor create(Document document) {
+        public DocumentPostProcessor create(Document document) {
             return new AnchorLinkPostProcessor(document);
         }
     }

@@ -11,6 +11,10 @@ Version History
 - Add `CountingBitSet` subclass of `BitSet` which efficiently counts bits which are set in a
   range.
 
+- Add `NodeIterator` and `NodeIterable` and `DescendantNodeIterator` and
+  `DescendantNodeIterable` for quick and easy traversal of nodes depth first, both can be
+  reversed. Descendant iterator processes parent then children. 
+
 - Add `OrderedSet`, `OrderedMap` and `OrderedMultiMap` which combine the functions of set,
   map and the latter of a one to one bi-directional map, i.e. key->value and value->key,
   allowing for either key or value to be null. All of these are iterable and have iterators
@@ -19,11 +23,18 @@ Version History
     Additionally, these have can be in hosted mode, in which they make callbacks on changes
     allowing to keep tandem structures in sync. `OrderedMap` and `OrderedMultiMap` use
     `OrderedSet` in this way.
-
-- [ ] Change document parser to use helper classes for block parser and block pre-processor
+    
+- [x] Change document parser to use helper classes for block parser and block pre-processor
       optimizations.
 
-- [ ] Add `TextPostProcessor` to support more efficient text node post processing than each
+- [x] Add separate abstract classes for node post processors that work on certain nodes and
+      document post processors that will traverse the whole AST and potentially return a new
+      document node.
+
+- [ ] Add `PostProcessorManager` to handle dependency resolution for document post processors
+      and node post processors.   
+
+- [ ] Add `NodePostProcessor` to support more efficient text node post processing than each
       post processor traversing to post process text nodes instead of each extension
       traversing the full document tree.
 

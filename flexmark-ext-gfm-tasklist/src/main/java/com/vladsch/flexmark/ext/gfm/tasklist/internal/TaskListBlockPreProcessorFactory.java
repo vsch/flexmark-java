@@ -46,8 +46,8 @@ public class TaskListBlockPreProcessorFactory implements BlockPreProcessorFactor
                     block.insertBefore(newBlock);
                     block.unlink();
 
-                    state.added(newBlock, false, false);
-                    state.removed(block, false, false);
+                    state.blockAdded(newBlock);
+                    state.blockRemoved(block);
                 }
             }
         };
