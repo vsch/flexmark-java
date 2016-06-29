@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.internal.util.collection;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
@@ -12,6 +9,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     final private CollectionHost<Paired<K, V>> host;
     private boolean inKeyUpdate;
     private boolean inValueUpdate;
+    private Indexed<Map.Entry<K, V>> myIndexedProxy;
 
     public OrderedMultiMap() {
         this(0, null);
@@ -27,6 +25,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
     public OrderedMultiMap(int capacity, CollectionHost<Paired<K, V>> host) {
         this.host = host;
+        this.myIndexedProxy = null;
         this.valueSet = new OrderedSet<V>(capacity, new CollectionHost<V>() {
             @Override
             public void adding(int index, V v, Object k) {
@@ -90,6 +89,42 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
                 return OrderedMultiMap.this.getModificationCount();
             }
         });
+    }
+
+    public Indexed<Map.Entry<K, V>> getIndexedProxy() {
+        if (myIndexedProxy != null) return myIndexedProxy;
+        myIndexedProxy = new Indexed<Map.Entry<K, V>>() {
+            @Override
+            public Map.Entry<K, V> get(int index) {
+                return OrderedMultiMap.this.getEntry(index);
+            }
+
+            @Override
+            public void set(int index, Map.Entry<K, V> item) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void removeAt(int index) {
+                OrderedMultiMap.this.removeEntryIndex(index);
+            }
+
+            @Override
+            public int size() {
+                return OrderedMultiMap.this.size();
+            }
+
+            @Override
+            public int modificationCount() {
+                return OrderedMultiMap.this.getModificationCount();
+            }
+        };
+
+        return myIndexedProxy;
+    }
+
+    private Map.Entry<K, V> getEntry(int index) {
+        return new MapEntry<K, V>(keySet.getValueOrNull(index), valueSet.getValueOrNull(index));
     }
 
     public int getModificationCount() {
@@ -260,13 +295,13 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(keySet.getValueList().size(), new Pair<>(k, v), null);
             }
-            
+
             if (k == null) keySet.addNull();
             else keySet.add(k, v);
-            
+
             if (k == null) valueSet.addNull();
             else valueSet.add(v, k);
-            
+
             inValueUpdate = false;
             inKeyUpdate = false;
 
@@ -279,10 +314,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(valueIndex, new Pair<>(k, v), null);
             }
-            
-            if (k == null) keySet.removeIndex(valueIndex); 
+
+            if (k == null) keySet.removeIndex(valueIndex);
             else keySet.setValueAt(valueIndex, k, v);
-            
+
             inValueUpdate = false;
             inKeyUpdate = false;
             return true;
@@ -294,10 +329,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             if (host != null && !host.skipHostUpdate()) {
                 host.adding(keyIndex, new Pair<>(k, v), null);
             }
-            
+
             if (k == null) valueSet.removeIndex(valueIndex);
             else valueSet.setValueAt(keyIndex, v, k);
-            
+
             inValueUpdate = false;
             inValueUpdate = false;
             return true;
@@ -318,6 +353,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     public Map.Entry<K, V> removeEntry(Map.Entry<K, V> e) {
         boolean b = removeEntryIndex(-1, e.getKey(), e.getValue());
         return b ? e : null;
+    }
+
+    private boolean removeEntryIndex(int index) {
+        return removeEntryIndex(index, keySet.getValueOrNull(index), valueSet.getValueOrNull(index));
     }
 
     private boolean removeEntryIndex(int index, K k, V v) {
@@ -417,7 +456,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         }
 
         ArrayList<V> values = new ArrayList<V>(keySet.size());
-        SparseIterator<V> iterator = valueSet.iterator();
+        ReversibleIndexedIterator<V> iterator = valueSet.iterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
         }
@@ -434,7 +473,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         }
 
         ArrayList<K> values = new ArrayList<K>(valueSet.size());
-        SparseIterator<K> iterator = keySet.iterator();
+        ReversibleIndexedIterator<K> iterator = keySet.iterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
         }
@@ -456,44 +495,70 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return keyValueEntrySet();
     }
 
-    public ReversibleIterator<V> valueIterator() {
-        return new ValueIterator<K, V>(this);
+    public ReversibleIndexedIterator<V> valueIterator() {
+        return valueSet.iterator();
     }
 
-    public ReversibleIterator<V> reversedValueIterator() {
-        return new ValueIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<V> reversedValueIterator() {
+        return valueSet.reversedIterator();
     }
 
-    public ReversibleIterator<K> keyIterator() {
-        return new KeyIterator<K, V>(this);
+    public ReversibleIterable<V> valueIterable() {
+        return new IndexedIterable<>(valueSet.getIndexedProxy(), valueSet.indexIterable());
     }
 
-    public ReversibleIterator<K> reversedKeyIterator() {
-        return new KeyIterator<K, V>(this, true);
+    public ReversibleIterable<V> reversedValueIterable() {
+        return new IndexedIterable<>(valueSet.getIndexedProxy(), valueSet.reversedIndexIterable());
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> entryIterator() {
-        return keyValueEntryIterator();
+    public ReversibleIndexedIterator<K> keyIterator() {
+        return keySet().iterator();
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> reversedEntryIterator() {
-        return reversedKeyValueEntryIterator();
+    public ReversibleIndexedIterator<K> reversedKeyIterator() {
+        return keySet().reversedIterator();
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> keyValueEntryIterator() {
-        return new KeyValueEntryIterator<K, V>(this);
+    public ReversibleIterable<K> keyIterable() {
+        return new IndexedIterable<>(keySet.getIndexedProxy(), keySet.indexIterable());
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> reversedKeyValueEntryIterator() {
-        return new KeyValueEntryIterator<K, V>(this, true);
+    public ReversibleIterable<K> reversedKeyIterable() {
+        return new IndexedIterable<>(keySet.getIndexedProxy(), keySet.reversedIndexIterable());
     }
 
-    public ReversibleIterator<ValueKeyEntry<K, V>> valueKeyEntryIterator() {
-        return new ValueKeyEntryIterator<K, V>(this);
+    public ReversibleIndexedIterator<Entry<K, V>> entrySetIterator() {
+        BitSet bitSet = getKeyValueUnionSet();
+        return new IndexedIterator<>(getIndexedProxy(), new BitSetIterator(bitSet));
     }
 
-    public ReversibleIterator<ValueKeyEntry<K, V>> reversedValueKeyEntryIterator() {
-        return new ValueKeyEntryIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<Entry<K, V>> reversedEntrySetIterator() {
+        BitSet bitSet = getKeyValueUnionSet();
+        return new IndexedIterator<>(getIndexedProxy(), new BitSetIterator(bitSet, true));
+    }
+
+    public ReversibleIterable<Entry<K, V>> entrySetIterable() {
+        BitSet bitSet = getKeyValueUnionSet();
+        return new IndexedIterable<>(getIndexedProxy(), new BitSetIterable(bitSet));
+    }
+
+    public ReversibleIterable<Entry<K, V>> reversedEntrySetIterable() {
+        BitSet bitSet = getKeyValueUnionSet();
+        return new IndexedIterable<>(getIndexedProxy(), new BitSetIterable(bitSet));
+    }
+
+    private BitSet getKeyValueUnionSet() {
+        BitSet bitSet = new BitSet(keySet.size());
+        bitSet.or(keySet.getValidIndices());
+        bitSet.or(valueSet.getValidIndices());
+        return bitSet;
+    }
+
+    private BitSet getKeyValueIntersectionSet() {
+        BitSet bitSet = new BitSet(keySet.size());
+        bitSet.or(keySet.getValidIndices());
+        bitSet.and(valueSet.getValidIndices());
+        return bitSet;
     }
 
     /*
@@ -502,12 +567,12 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
     @Override
     public Iterator<Map.Entry<K, V>> iterator() {
-        return entryIterator();
+        return entrySetIterator();
     }
 
     @Override
     public void forEach(Consumer<? super Map.Entry<K, V>> consumer) {
-        Iterator<Map.Entry<K, V>> iterator = entryIterator();
+        Iterator<Map.Entry<K, V>> iterator = entrySetIterator();
         while (iterator.hasNext()) {
             consumer.accept(iterator.next());
         }
@@ -552,10 +617,10 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             }
         });
 
-        SparseIterator<Integer> iterator = keySet.indexIterator();
+        BitSet bitSet = getKeyValueUnionSet();
+        Iterator<Map.Entry<K, V>> iterator = entrySetIterator();
         while (iterator.hasNext()) {
-            iterator.next();
-            values.add(new Entry<K, V>(this, iterator.getIndex()));
+            values.add(iterator.next());
         }
 
         // release it for host update
@@ -563,253 +628,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         inKeyUpdate = false;
 
         return values;
-    }
-
-    public OrderedSet<Map.Entry<V, K>> valueKeyEntrySet() {
-        // create it with inHostUpdate already set so we can populate it without callbacks
-        inValueUpdate = true;
-        inKeyUpdate = true;
-        OrderedSet<Map.Entry<V, K>> values = new OrderedSet<>(valueSet.size(), new CollectionHost<Map.Entry<V, K>>() {
-            @Override
-            public void adding(int index, Map.Entry<V, K> entry, Object k) {
-                assert k == null;
-                OrderedMultiMap.this.putKeyValue(entry.getValue(), entry.getKey());
-            }
-
-            @Override
-            public Object removing(int index, Map.Entry<V, K> entry) {
-                boolean b = OrderedMultiMap.this.removeEntryIndex(index, entry.getValue(), entry.getKey());
-                return b ? entry : null;
-            }
-
-            @Override
-            public void clearing() {
-                OrderedMultiMap.this.clear();
-            }
-
-            @Override
-            public void addingNulls(int index) {
-                OrderedMultiMap.this.addNullEntry(index);
-            }
-
-            @Override
-            public boolean skipHostUpdate() {
-                return inKeyUpdate || inValueUpdate;
-            }
-
-            @Override
-            public int getIteratorModificationCount() {
-                return OrderedMultiMap.this.getModificationCount();
-            }
-        });
-
-        SparseIterator<Integer> iterator = keySet.indexIterator();
-        while (iterator.hasNext()) {
-            iterator.next();
-            values.add(new ValueKeyEntry<K, V>(this, iterator.getIndex()));
-        }
-
-        // release it for host update
-        inValueUpdate = false;
-        inKeyUpdate = false;
-
-        return values;
-    }
-
-    public static class Entry<T, E> implements Map.Entry<T, E> {
-        final private OrderedMultiMap<T, E> orderedMap;
-        final private int index;
-        final private T key;
-        private E value;
-
-        public Entry(OrderedMultiMap<T, E> orderedMap, int index) {
-            assert orderedMap.keySet().isValidIndex(index);
-
-            this.orderedMap = orderedMap;
-            this.index = index;
-            this.key = orderedMap.getKey(index);
-            this.value = orderedMap.getValue(index);
-        }
-
-        @Override
-        public T getKey() {
-            return key;
-        }
-
-        @Override
-        public E getValue() {
-            return value;
-        }
-
-        @Override
-        public E setValue(E value) {
-            throw new UnsupportedOperationException("Cannot set value on a two way map entry");
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Entry<?, ?> entry = (Entry<?, ?>) o;
-
-            if (!key.equals(entry.key)) return false;
-            if (!value.equals(entry.value)) return false;
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = key.hashCode();
-            result = 31 * result + value.hashCode();
-            return result;
-        }
-    }
-
-    public static class ValueKeyEntry<T, E> implements Map.Entry<E, T> {
-        final private OrderedMultiMap<T, E> orderedMap;
-        final private int index;
-        final private E key;
-        private T value;
-
-        public ValueKeyEntry(OrderedMultiMap<T, E> orderedMap, int index) {
-            assert orderedMap.keySet().isValidIndex(index);
-
-            this.orderedMap = orderedMap;
-            this.index = index;
-            this.key = orderedMap.getValue(index);
-            this.value = orderedMap.getKey(index);
-        }
-
-        @Override
-        public E getKey() {
-            return key;
-        }
-
-        @Override
-        public T getValue() {
-            return value;
-        }
-
-        @Override
-        public T setValue(T value) {
-            throw new UnsupportedOperationException("Cannot set value on a two way map entry");
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Entry<?, ?> entry = (Entry<?, ?>) o;
-
-            if (!key.equals(entry.key)) return false;
-            if (!value.equals(entry.value)) return false;
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            if (key == null) {
-                int tmp = 0;
-            }
-            int result = key.hashCode();
-            result = 31 * result + value.hashCode();
-            return result;
-        }
-    }
-
-    public static abstract class AbstractIterator<T, E, X> extends OrderedSet.AbstractIndexedIterator<T, X> {
-        protected final OrderedMultiMap<T, E> orderedMap;
-
-        public AbstractIterator(OrderedMultiMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public AbstractIterator(OrderedMultiMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap.keySet, reversed);
-            this.orderedMap = orderedMap;
-        }
-    }
-
-    public static class ValueIterator<T, E> extends AbstractIterator<T, E, E> {
-        public ValueIterator(OrderedMultiMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public ValueIterator(OrderedMultiMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<E> reversed() {
-            return new ValueIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected E getValueAt(int index) {
-            return orderedMap.getValue(index);
-        }
-    }
-
-    public static class KeyIterator<T, E> extends AbstractIterator<T, E, T> {
-        public KeyIterator(OrderedMultiMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public KeyIterator(OrderedMultiMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<T> reversed() {
-            return new KeyIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected T getValueAt(int index) {
-            return orderedMap.getKey(index);
-        }
-    }
-
-    public static class KeyValueEntryIterator<T, E> extends AbstractIterator<T, E, Map.Entry<T, E>> {
-        public KeyValueEntryIterator(OrderedMultiMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public KeyValueEntryIterator(OrderedMultiMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<Map.Entry<T, E>> reversed() {
-            return new KeyValueEntryIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected Entry<T, E> getValueAt(int index) {
-            return new Entry<T, E>(orderedMap, index);
-        }
-    }
-
-    public static class ValueKeyEntryIterator<T, E> extends AbstractIterator<T, E, ValueKeyEntry<T, E>> {
-        public ValueKeyEntryIterator(OrderedMultiMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public ValueKeyEntryIterator(OrderedMultiMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<ValueKeyEntry<T, E>> reversed() {
-            return new ValueKeyEntryIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected ValueKeyEntry<T, E> getValueAt(int index) {
-            return new ValueKeyEntry<T, E>(orderedMap, index);
-        }
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboExtraSpecTest extends ComboSpecTestCase {
-    static final String SPEC_RESOURCE = "/extra_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/extra_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
@@ -45,11 +45,11 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENT, true));
     }
 
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
+    private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+    private static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
-    static DataHolder optionsSet(String optionSet) {
+    private static DataHolder optionsSet(String optionSet) {
         return optionsMap.get(optionSet);
     }
 

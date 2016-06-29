@@ -27,15 +27,17 @@ public class Pair<K, V> implements Paired<K, V> {
     public String toString() {
         StringBuilder out = new StringBuilder();
         out.append('(');
-        
+
         if (myFirst == null) out.append("null");
-        else out.append(myFirst.getClass().getName().substring(myFirst.getClass().getPackage().getName().length() + 1)).append(' ').append(myFirst);
-        
+        else
+            out.append(myFirst.getClass().getName().substring(myFirst.getClass().getPackage().getName().length() + 1)).append(' ').append(myFirst);
+
         out.append(", ");
-        
+
         if (mySecond == null) out.append("null");
-        else out.append(mySecond.getClass().getName().substring(mySecond.getClass().getPackage().getName().length() + 1)).append(' ').append(mySecond);
-        
+        else
+            out.append(mySecond.getClass().getName().substring(mySecond.getClass().getPackage().getName().length() + 1)).append(' ').append(mySecond);
+
         out.append(')');
         return out.toString();
     }

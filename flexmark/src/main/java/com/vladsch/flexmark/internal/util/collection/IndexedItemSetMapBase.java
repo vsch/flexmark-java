@@ -5,38 +5,50 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class CollectingBag<K, S, V> implements Map<K, S> {
-    private final HashMap<K, S> myBag;
+public abstract class IndexedItemSetMapBase<K, S, M> implements IndexedItemSetMap<K, S, M> {
+    protected final HashMap<K, S> myBag;
 
-    public CollectingBag() {
+    public IndexedItemSetMapBase() {
         this(0);
     }
 
-    public CollectingBag(int capacity) {
+    public IndexedItemSetMapBase(int capacity) {
         this.myBag = new HashMap<K, S>();
     }
 
-    protected abstract S newSet();
-    protected abstract boolean addSetItem(S s, V item);
-    protected abstract boolean removeSetItem(S s, V item);
-    protected abstract boolean containsSetItem(S s, V item);
+    @Override
+    public abstract K mapKey(M key);
+    @Override
+    public abstract S newSet();
+    @Override
+    public abstract boolean addSetItem(S s, int item);
+    @Override
+    public abstract boolean removeSetItem(S s, int item);
+    @Override
+    public abstract boolean containsSetItem(S s, int item);
 
-    public boolean add(K key, V item) {
-        S itemSet = myBag.get(key);
+    @Override
+    public boolean addItem(M key, int item) {
+        K mapKey = mapKey(key);
+        S itemSet = myBag.get(mapKey);
         if (itemSet == null) {
             itemSet = newSet();
-            myBag.put(key, itemSet);
+            myBag.put(mapKey, itemSet);
         }
         return addSetItem(itemSet, item);
     }
 
-    public boolean removeItem(K key, V item) {
-        S itemSet = myBag.get(key);
+    @Override
+    public boolean removeItem(M key, int item) {
+        K mapKey = mapKey(key);
+        S itemSet = myBag.get(mapKey);
         return itemSet != null && removeSetItem(itemSet, item);
     }
 
-    public boolean containsItem(K key, V item) {
-        S itemSet = myBag.get(key);
+    @Override
+    public boolean containsItem(M key, int item) {
+        K mapKey = mapKey(key);
+        S itemSet = myBag.get(mapKey);
         return itemSet != null && containsSetItem(itemSet, item);
     }
 

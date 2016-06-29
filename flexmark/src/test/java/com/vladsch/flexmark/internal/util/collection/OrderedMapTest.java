@@ -178,7 +178,7 @@ public class OrderedMapTest {
         orderedMap.putAll(orderedMap);
         Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
-        Iterator<Map.Entry<String, Integer>> iterator = orderedMap.reversedIterator().reversed();
+        Iterator<Map.Entry<String, Integer>> iterator = orderedMap.reversedIterable().reversed().iterator();
         int i = 0;
         while (iterator.hasNext()) {
             Map.Entry<String, Integer> it = iterator.next();
@@ -187,7 +187,7 @@ public class OrderedMapTest {
             i++;
         }
 
-        iterator = orderedMap.reversedIterator().reversed();
+        iterator = orderedMap.reversedIterable().reversedIterator();
         int j = 0;
         while (iterator.hasNext()) {
             Map.Entry<String, Integer> item = iterator.next();
@@ -262,7 +262,7 @@ public class OrderedMapTest {
         orderedMap.putAll(orderedMap);
         Assert.assertEquals(true, orderedMap.equals(orderedMap));
 
-        Iterator<Map.Entry<String, Integer>> iterator = orderedMap.iterator().reversed();
+        Iterator<Map.Entry<String, Integer>> iterator = orderedMap.entryIterable().reversed().reversed().reversedIterator();
         int i = 9;
         while (iterator.hasNext()) {
             Map.Entry<String, Integer> it = iterator.next();
@@ -273,7 +273,7 @@ public class OrderedMapTest {
 
         Assert.assertEquals(-1, i);
 
-        iterator = orderedMap.iterator().reversed();
+        iterator = orderedMap.entryIterable().reversed().reversed().reversedIterator();
         int j = 9;
         while (iterator.hasNext()) {
             Map.Entry<String, Integer> item = iterator.next();

@@ -11,6 +11,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final private ArrayList<V> valueList;
     final private CollectionHost<K> host;
     private boolean inUpdate;
+    private Indexed<Map.Entry<K, V>> myIndexedEntryProxy;
+    private Indexed<V> myIndexedValueProxy;
 
     public OrderedMap() {
         this(0, null);
@@ -27,6 +29,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public OrderedMap(int capacity, CollectionHost<K> host) {
         this.valueList = new ArrayList<V>(capacity);
         this.host = host;
+        this.myIndexedEntryProxy = null;
+        this.myIndexedValueProxy = null;
         this.keySet = new OrderedSet<K>(capacity, new CollectionHost<K>() {
             @Override
             public void adding(int index, K k, Object v) {
@@ -59,6 +63,74 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
                 return OrderedMap.this.getModificationCount();
             }
         });
+    }
+
+    public Indexed<Map.Entry<K, V>> getIndexedEntryProxy() {
+        if (myIndexedEntryProxy != null) return myIndexedEntryProxy;
+        myIndexedEntryProxy = new Indexed<Map.Entry<K, V>>() {
+            @Override
+            public Map.Entry<K, V> get(int index) {
+                return OrderedMap.this.getEntry(index);
+            }
+
+            @Override
+            public void set(int index, Map.Entry<K, V> item) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void removeAt(int index) {
+                OrderedMap.this.keySet.removeIndexHosted(index);
+            }
+
+            @Override
+            public int size() {
+                return OrderedMap.this.size();
+            }
+
+            @Override
+            public int modificationCount() {
+                return OrderedMap.this.getModificationCount();
+            }
+        };
+
+        return myIndexedEntryProxy;
+    }
+
+    public Indexed<V> getIndexedValueProxy() {
+        if (myIndexedValueProxy != null) return myIndexedValueProxy;
+        myIndexedValueProxy = new Indexed<V>() {
+            @Override
+            public V get(int index) {
+                return OrderedMap.this.getValue(index);
+            }
+
+            @Override
+            public void set(int index, V item) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
+            public void removeAt(int index) {
+                OrderedMap.this.keySet.removeIndexHosted(index);
+            }
+
+            @Override
+            public int size() {
+                return OrderedMap.this.size();
+            }
+
+            @Override
+            public int modificationCount() {
+                return OrderedMap.this.getModificationCount();
+            }
+        };
+
+        return myIndexedValueProxy;
+    }
+
+    private Map.Entry<K, V> getEntry(int index) {
+        return new MapEntry<K, V>(keySet.getValue(index), valueList.get(index));
     }
 
     public int getModificationCount() {
@@ -173,9 +245,9 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         }
 
         ArrayList<V> values = new ArrayList<V>(keySet.size());
-        SparseIterator<Integer> iterator = keySet.indexIterator();
+        Iterator<Integer> iterator = keySet.indexIterator();
         while (iterator.hasNext()) {
-            values.add(valueList.get(iterator.getIndex()));
+            values.add(valueList.get(iterator.next()));
         }
         return values;
     }
@@ -188,59 +260,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public V getValue(int index) {
         if (!keySet.isValidIndex(index)) return null;
         return valueList.get(index);
-    }
-
-    public static class Entry<T, E> implements Map.Entry<T, E> {
-        final private OrderedMap<T, E> orderedMap;
-        final private int index;
-        final private T key;
-        private E value;
-
-        public Entry(OrderedMap<T, E> orderedMap, int index) {
-            assert orderedMap.keySet().isValidIndex(index);
-
-            this.orderedMap = orderedMap;
-            this.index = index;
-            this.key = orderedMap.getKey(index);
-            this.value = orderedMap.getValue(index);
-        }
-
-        @Override
-        public T getKey() {
-            return key;
-        }
-
-        @Override
-        public E getValue() {
-            return value;
-        }
-
-        @Override
-        public E setValue(E value) {
-            E old = value;
-            orderedMap.valueList.set(index, value);
-            this.value = value;
-            return old;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            Entry<?, ?> entry = (Entry<?, ?>) o;
-
-            if (!key.equals(entry.key)) return false;
-            if (!value.equals(entry.value)) return false;
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = key.hashCode();
-            result = 31 * result + value.hashCode();
-            return result;
-        }
     }
 
     @Override
@@ -281,10 +300,9 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
             }
         });
 
-        SparseIterator<Integer> iterator = keySet.indexIterator();
+        Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
-            iterator.next();
-            values.add(new Entry<K, V>(this, iterator.getIndex()));
+            values.add(iterator.next());
         }
 
         // release it for host update
@@ -293,32 +311,60 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return values;
     }
 
-    public ReversibleIterator<V> valueIterator() {
-        return new ValueIterator<K, V>(this);
+    public ReversibleIndexedIterator<V> valueIterator() {
+        return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
     }
 
-    public ReversibleIterator<V> reversedValueIterator() {
-        return new ValueIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<V> reversedValueIterator() {
+        return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
     }
 
-    public ReversibleIterator<K> keyIterator() {
-        return new KeyIterator<K, V>(this);
+    public ReversibleIndexedIterator<K> keyIterator() {
+        return keySet.iterator();
     }
 
-    public ReversibleIterator<K> reversedKeyIterator() {
-        return new KeyIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<K> reversedKeyIterator() {
+        return keySet.reversedIterator();
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> entryIterator() {
-        return new EntryIterator<K, V>(this);
+    public ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
+        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> reversedEntryIterator() {
-        return new EntryIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
+        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
     }
 
-    public ReversibleIterator<Map.Entry<K, V>> reversedIterator() {
-        return new EntryIterator<K, V>(this, true);
+    public ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
+        return reversedEntryIterator();
+    }
+
+    public ReversibleIterable<V> valueIterable() {
+        return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
+    }
+
+    public ReversibleIterable<V> reversedValueIterable() {
+        return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
+    }
+
+    public ReversibleIterable<K> keyIterable() {
+        return keySet.iterable();
+    }
+
+    public ReversibleIterable<K> reversedKeyIterable() {
+        return keySet.reversedIterable();
+    }
+
+    public ReversibleIterable<Map.Entry<K, V>> entryIterable() {
+        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.indexIterable());
+    }
+
+    public ReversibleIterable<Map.Entry<K, V>> reversedEntryIterable() {
+        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
+    }
+
+    public ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
+        return reversedEntryIterable();
     }
 
     /*
@@ -326,8 +372,8 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
      */
 
     @Override
-    public ReversibleIterator<Map.Entry<K, V>> iterator() {
-        return new EntryIterator<K, V>(this);
+    public ReversibleIndexedIterator<Map.Entry<K, V>> iterator() {
+        return entryIterator();
     }
 
     @Override
@@ -335,79 +381,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         Iterator<Map.Entry<K, V>> iterator = iterator();
         while (iterator.hasNext()) {
             consumer.accept(iterator.next());
-        }
-    }
-
-    public static abstract class AbstractIterator<T, E, X> extends OrderedSet.AbstractIndexedIterator<T, X> {
-        protected final OrderedMap<T, E> orderedMap;
-
-        public AbstractIterator(OrderedMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public AbstractIterator(OrderedMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap.keySet, reversed);
-            this.orderedMap = orderedMap;
-        }
-    }
-
-    public static class ValueIterator<T, E> extends AbstractIterator<T, E, E> {
-        public ValueIterator(OrderedMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public ValueIterator(OrderedMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<E> reversed() {
-            return new ValueIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected E getValueAt(int index) {
-            return orderedMap.getValue(index);
-        }
-    }
-
-    public static class KeyIterator<T, E> extends AbstractIterator<T, E, T> {
-        public KeyIterator(OrderedMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public KeyIterator(OrderedMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<T> reversed() {
-            return new KeyIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected T getValueAt(int index) {
-            return orderedMap.getKey(index);
-        }
-    }
-
-    public static class EntryIterator<T, E> extends AbstractIterator<T, E, Map.Entry<T, E>> {
-        public EntryIterator(OrderedMap<T, E> orderedMap) {
-            this(orderedMap, false);
-        }
-
-        public EntryIterator(OrderedMap<T, E> orderedMap, boolean reversed) {
-            super(orderedMap, reversed);
-        }
-
-        @Override
-        public SparseIterator<Map.Entry<T, E>> reversed() {
-            return new EntryIterator<T, E>(orderedMap, !isReversed());
-        }
-
-        @Override
-        protected Map.Entry<T, E> getValueAt(int index) {
-            return new Entry<T, E>(orderedMap, index);
         }
     }
 

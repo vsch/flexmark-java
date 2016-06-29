@@ -3,10 +3,10 @@ package com.vladsch.flexmark.internal.util.collection;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ClassifiedBagTest {
+public class ClassificationBagTest {
     @Test
     public void testBasic() throws Exception {
-        ClassifiedBag<Class<?>, Object> bag = new ClassifiedBag<>(new Computable<Class<?>, Object>() {
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<>(new Computable<Class<?>, Object>() {
             @Override
             public Class<?> compute(Object value) {
                 return value.getClass();
@@ -85,7 +85,7 @@ public class ClassifiedBagTest {
     
     @Test
     public void testInterleave() throws Exception {
-        ClassifiedBag<Class<?>, Object> bag = new ClassifiedBag<>(new Computable<Class<?>, Object>() {
+        ClassificationBag<Class<?>, Object> bag = new ClassificationBag<>(new Computable<Class<?>, Object>() {
             @Override
             public Class<?> compute(Object value) {
                 return value.getClass();

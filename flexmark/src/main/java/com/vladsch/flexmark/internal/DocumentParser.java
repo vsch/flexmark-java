@@ -17,7 +17,7 @@ import java.io.Reader;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DocumentParser extends ClassifiedBlockTracker implements ParserState {
+public class DocumentParser implements ParserState {
 
     public static final InlineParserFactory INLINE_PARSER_FACTORY = new InlineParserFactory() {
         @Override
@@ -108,6 +108,40 @@ public class DocumentParser extends ClassifiedBlockTracker implements ParserStat
     private final DocumentBlockParser documentBlockParser;
 
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
+
+    private final ClassifyingBlockTracker blockTracker = new ClassifyingBlockTracker();
+    
+    public void blockParserAdded(BlockParser blockParser) {
+        blockTracker.blockParserAdded(blockParser);
+    }
+
+    public void blockParserRemoved(BlockParser blockParser) {
+        blockTracker.blockParserRemoved(blockParser);
+    }
+
+    public void blockAdded(Block node) {
+        blockTracker.blockAdded(node);
+    }
+
+    public void blockAddedWithChildren(Block node) {
+        blockTracker.blockAddedWithChildren(node);
+    }
+
+    public void blockAddedWithDescendants(Block node) {
+        blockTracker.blockAddedWithDescendants(node);
+    }
+
+    public void blockRemoved(Block node) {
+        blockTracker.blockRemoved(node);
+    }
+
+    public void blockRemovedWithChildren(Block node) {
+        blockTracker.blockRemovedWithChildren(node);
+    }
+
+    public void blockRemovedWithDescendants(Block node) {
+        blockTracker.blockRemovedWithDescendants(node);
+    }
 
     private static class BlockParserMapper implements Computable<Block, BlockParser> {
         final public static BlockParserMapper INSTANCE = new BlockParserMapper();
@@ -649,7 +683,7 @@ public class DocumentParser extends ClassifiedBlockTracker implements ParserStat
      * Walk through a block & children recursively, parsing string content into inline content where appropriate.
      */
     private void processInlines() {
-        for (BlockParser blockParser : allBlocksParserMap.keySet()) {
+        for (BlockParser blockParser : blockTracker.allBlockParsers()) {
             blockParser.parseInlines(inlineParser);
         }
     }
@@ -704,7 +738,7 @@ public class DocumentParser extends ClassifiedBlockTracker implements ParserStat
 
     private void activateBlockParser(BlockParser blockParser) {
         activeBlockParsers.add(blockParser);
-        if (!allBlocksParserMap.containsKey(blockParser)) {
+        if (!blockTracker.containsKey(blockParser)) {
             blockParserAdded(blockParser);
         }
     }
@@ -840,11 +874,11 @@ public class DocumentParser extends ClassifiedBlockTracker implements ParserStat
 
     private void preProcessParagraphs() {
         // here we run preProcessing stages
-        if (classifiedNodeBag.containsCategory(Paragraph.class)) {
+        if (blockTracker.getNodeClassifier().containsCategory(Paragraph.class)) {
             ParagraphPreProcessorCache processorMap = new ParagraphPreProcessorCache(this);
             for (ParagraphPreProcessorDependencyStage factoryStage : paragraphPreProcessorDependencies.getDependentStages()) {
 
-                for (Paragraph paragraph : classifiedNodeBag.getCategoryItems(Paragraph.class, Paragraph.class)) {
+                for (Paragraph paragraph : blockTracker.getNodeClassifier().getCategoryItems(Paragraph.class, Paragraph.class)) {
                     preProcessParagraph(paragraph, factoryStage, processorMap);
                 }
             }
@@ -853,11 +887,11 @@ public class DocumentParser extends ClassifiedBlockTracker implements ParserStat
 
     private void preProcessBlocks() {
         // here we run preProcessing stages
-        CountingBitSet preProcessBitSet = classifiedNodeBag.categoriesBitSet(blockPreProcessorDependencies.blockTypes);
+        BitSet preProcessBitSet = blockTracker.getNodeClassifier().categoriesBitSet(blockPreProcessorDependencies.blockTypes);
         if (!preProcessBitSet.isEmpty()) {
             for (BlockPreProcessorDependencyStage preProcessorStage : blockPreProcessorDependencies.getDependentStages()) {
                 for (BlockPreProcessorFactory factory : preProcessorStage.dependents) {
-                    ReversibleIterable<Block> blockList = classifiedNodeBag.getCategoryItems(Block.class, factory.getBlockTypes());
+                    ReversibleIterable<Block> blockList = blockTracker.getNodeClassifier().getCategoryItems(Block.class, factory.getBlockTypes());
                     BlockPreProcessor blockPreProcessor = factory.create(this);
 
                     for (Block block : blockList) {

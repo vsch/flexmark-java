@@ -5,11 +5,11 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        CountingBitSetTest.class,
+        IntegerBitSetTest.class,
         OrderedSetTest.class,
         OrderedMapTest.class,
         OrderedMultiMapTest.class,
-        ClassifiedBagTest.class,
+        ClassificationBagTest.class,
 })
 public class UtilsTestSuite {
 }

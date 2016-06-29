@@ -7,25 +7,25 @@ import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockParser;
 
-public class ClassifiedBlockTracker implements BlockTracker, BlockParserTracker {
-    final protected ClassifiedBag<Class<? extends Node>, Node> classifiedNodeBag = new ClassifiedBag<Class<? extends Node>, Node>(NodeClassifier.INSTANCE);
-    final protected OrderedMultiMap<BlockParser, Block> allBlocksParserMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
+public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
+    final protected ClassificationBag<Class<? extends Node>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
+    final protected OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
         @Override
         public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
             Block block = paired.getSecond();
-            if (block != null) classifiedNodeBag.add(block);
+            if (block != null) nodeClassifier.add(block);
         }
 
         @Override
         public Object removing(int index, Paired<BlockParser, Block> paired) {
             Block block = paired.getSecond();
-            if (block != null) classifiedNodeBag.remove(block);
+            if (block != null) nodeClassifier.remove(block);
             return paired;
         }
 
         @Override
         public void clearing() {
-            classifiedNodeBag.clear();
+            nodeClassifier.clear();
         }
 
         @Override
@@ -40,68 +40,87 @@ public class ClassifiedBlockTracker implements BlockTracker, BlockParserTracker 
 
         @Override
         public int getIteratorModificationCount() {
-            return allBlocksParserMap.getModificationCount();
+            return allBlockParsersMap.getModificationCount();
         }
     });
 
+    public OrderedSet<BlockParser> allBlockParsers() {
+        return allBlockParsersMap.keySet();
+    }
+
+    public OrderedSet<Block> allBlocks() {
+        return allBlockParsersMap.valueSet();
+    }
+
+    public boolean containsKey(BlockParser parser) {
+        return allBlockParsersMap.containsKey(parser);
+    }
+
+    public boolean containsValue(Block parser) {
+        return allBlockParsersMap.containsValue(parser);
+    }
+
+    public ClassificationBag<Class<? extends Node>, Node> getNodeClassifier() {
+        return nodeClassifier;
+    }
+
     @Override
     public void blockParserAdded(BlockParser blockParser) {
-        allBlocksParserMap.putKeyValue(blockParser, blockParser.getBlock());
+        allBlockParsersMap.putKeyValue(blockParser, blockParser.getBlock());
     }
 
     @Override
     public void blockParserRemoved(BlockParser blockParser) {
-        allBlocksParserMap.removeKey(blockParser);
+        allBlockParsersMap.removeKey(blockParser);
     }
-    
+
     @Override
     public void blockAdded(Block node) {
-        allBlocksParserMap.putValueKey(node, null);
+        allBlockParsersMap.putValueKey(node, null);
     }
 
     @Override
     public void blockAddedWithChildren(Block node) {
-        allBlocksParserMap.putValueKey(node, null);
+        allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getChildren());
     }
 
     @Override
     public void blockAddedWithDescendants(Block node) {
-        allBlocksParserMap.putValueKey(node, null);
+        allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getDescendants());
     }
 
     private void addBlocks(ReversiblePeekingIterable<Node> nodes) {
         for (Node child : nodes) {
             if (child instanceof Block) {
-                allBlocksParserMap.putValueKey((Block) child, null);
+                allBlockParsersMap.putValueKey((Block) child, null);
             }
         }
     }
 
     @Override
     public void blockRemoved(Block node) {
-        allBlocksParserMap.removeValue(node);
+        allBlockParsersMap.removeValue(node);
     }
 
     @Override
     public void blockRemovedWithChildren(Block node) {
-        allBlocksParserMap.removeValue(node);
+        allBlockParsersMap.removeValue(node);
         removeBlocks(node.getChildren());
     }
 
     @Override
     public void blockRemovedWithDescendants(Block node) {
-        allBlocksParserMap.removeValue(node);
+        allBlockParsersMap.removeValue(node);
         removeBlocks(node.getDescendants());
     }
 
     private void removeBlocks(ReversiblePeekingIterable<Node> nodes) {
         for (Node child : nodes) {
             if (child instanceof Block) {
-                allBlocksParserMap.removeValue(child);
+                allBlockParsersMap.removeValue(child);
             }
         }
     }
-
 }

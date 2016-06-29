@@ -22,6 +22,7 @@ public interface MutableDataHolder extends DataHolder {
 
     /**
      * Copy all values from one data holder to this data holder
+     *
      * @param other data holder from which to copy all values
      */
     void setAll(DataHolder other);

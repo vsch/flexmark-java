@@ -13,7 +13,7 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-parent" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-java" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="junit-4.12" level="application" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />

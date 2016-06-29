@@ -1,54 +1,60 @@
 package com.vladsch.flexmark.internal.util.collection;
 
 import java.util.BitSet;
+import java.util.NoSuchElementException;
+import java.util.function.Consumer;
 
-public class BitSetIterator extends AbstractBitSetIterator<Integer> {
-    final private int maxSize;
+public class BitSetIterator implements ReversibleIterator<Integer> {
+    final private BitSet myBitSet;
+    final private boolean myIsReversed;
+    private int myNext;
+    private int myLast;
 
     public BitSetIterator(BitSet bitSet) {
         this(bitSet, false);
     }
 
-    public BitSetIterator(BitSet bitSet, boolean bitTypes) {
-        this(bitSet, bitTypes, false);
-    }
-
-    public BitSetIterator(BitSet bitSet, boolean bitTypes, boolean reversed) {
-        this(bitSet, -1, bitTypes, reversed);
-    }
-
-    public BitSetIterator(BitSet bitSet, int maxSize, boolean bitTypes, boolean reversed) {
-        super(bitSet, bitTypes, reversed);
-        this.maxSize = maxSize;
+    public BitSetIterator(BitSet bitSet, boolean reversed) {
+        myBitSet = bitSet;
+        myIsReversed = reversed;
+        myNext = reversed ? bitSet.previousSetBit(bitSet.length()) : bitSet.nextSetBit(0);
+        myLast = -1;
     }
 
     @Override
-    protected void checkConcurrentMods() {
-        
+    public boolean isReversed() {
+        return myIsReversed;
     }
 
     @Override
-    protected int maxSize() {
-        return maxSize >= 0 ? maxSize : bitSet.size();
+    public boolean hasNext() {
+        return myNext != -1;
     }
 
     @Override
-    protected void remove(int index) {
-        if (bitTypes) {
-            bitSet.clear(index);
-        } else {
-            bitSet.set(index);
+    public Integer next() {
+        if (myNext == -1) {
+            throw new NoSuchElementException();
+        }
+
+        myLast = myNext;
+        myNext = myIsReversed ? (myNext == 0 ? -1 : myBitSet.previousSetBit(myNext - 1)) : myBitSet.nextSetBit(myNext + 1);
+        return myLast;
+    }
+
+    @Override
+    public void remove() {
+        if (myLast == -1) {
+            throw new NoSuchElementException();
+        }
+
+        myBitSet.clear(myLast);
+    }
+
+    @Override
+    public void forEachRemaining(Consumer<? super Integer> consumer) {
+        while (hasNext()) {
+            consumer.accept(next());
         }
     }
-
-    @Override
-    public SparseIterator<Integer> reversed() {
-        return new BitSetIterator(bitSet, maxSize, bitTypes, !isReversed());
-    }
-
-    @Override
-    protected Integer getValueAt(int index) {
-        return index;
-    }
-
 }

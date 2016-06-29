@@ -56,11 +56,6 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     @Override
-    public NodeIterator reversed() {
-        return new NodeIterator(firstNode, lastNode, !reversed);
-    }
-
-    @Override
     public boolean isReversed() {
         return reversed;
     }
@@ -110,11 +105,6 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     public final static ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
-        @Override
-        public ReversiblePeekingIterator<Node> reversed() {
-            return this;
-        }
-
         @Override
         public boolean isReversed() {
             return false;

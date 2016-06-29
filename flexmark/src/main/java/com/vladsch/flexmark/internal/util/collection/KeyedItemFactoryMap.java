@@ -32,8 +32,8 @@ public class KeyedItemFactoryMap<K, I, P> implements Map<K, ComputableFactory<I,
             }
             item = factory.create(param);
             itemMap.put(key, item);
-        }                          
-        
+        }
+
         return item;
     }
 

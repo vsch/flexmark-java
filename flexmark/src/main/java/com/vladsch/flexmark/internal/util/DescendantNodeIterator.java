@@ -26,11 +26,6 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     @Override
-    public ReversiblePeekingIterator<Node> reversed() {
-        return new DescendantNodeIterator(iterator.reversed());
-    }
-
-    @Override
     public boolean isReversed() {
         return isReversed;
     }
