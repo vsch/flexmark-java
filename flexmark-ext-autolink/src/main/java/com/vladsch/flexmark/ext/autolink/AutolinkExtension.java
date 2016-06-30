@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.autolink;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.autolink.internal.AutolinkPostProcessor;
+import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.node.Link;
 import com.vladsch.flexmark.parser.Parser;
 
@@ -26,7 +26,8 @@ public class AutolinkExtension implements Parser.ParserExtension {
     }
 
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postProcessorFactory(new AutolinkPostProcessor.Factory());
+        //parserBuilder.postProcessorFactory(new AutolinkPostProcessor.Factory());
+        parserBuilder.postProcessorFactory(new AutolinkNodePostProcessor.Factory());
     }
 
 }

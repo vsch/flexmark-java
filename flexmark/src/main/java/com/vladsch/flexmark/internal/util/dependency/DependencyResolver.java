@@ -106,6 +106,10 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                                 }
                             }
                         }
+                    } else if (item.isGlobalScope) {
+                        // globals go in their own stage
+                        nextDependents.or(newReady);
+                        break;
                     }
                 }
 

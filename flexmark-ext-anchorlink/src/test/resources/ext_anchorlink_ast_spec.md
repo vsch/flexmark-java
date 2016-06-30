@@ -19,7 +19,7 @@ Basic, anchor links wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 18] headerId: enhanced-edition 
       Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -35,10 +35,10 @@ Basic, duplicates
 .
 Document[0, 38]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 18] headerId: enhanced-edition 
       Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
   Heading[19, 37] textOpen:[19, 20, "#"] text:[21, 37, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition-1 
+    AnchorLink[21, 37] headerId: enhanced-edition-1 
       Text[21, 37] chars:[21, 37, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -56,13 +56,13 @@ Basic, duplicates, no look-ahead
 .
 Document[0, 59]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 18] headerId: enhanced-edition 
       Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
   Heading[19, 37] textOpen:[19, 20, "#"] text:[21, 37, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition-1 
+    AnchorLink[21, 37] headerId: enhanced-edition-1 
       Text[21, 37] chars:[21, 37, "Enhan"..."ition"]
   Heading[38, 58] textOpen:[38, 39, "#"] text:[40, 58, "Enhanced Edition-1"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition-1 
+    AnchorLink[40, 58] headerId: enhanced-edition-1 
       Text[40, 58] chars:[40, 58, "Enhan"..."ion-1"]
 ````````````````````````````````
 
@@ -76,7 +76,7 @@ Basic, anchor links do not wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 2] headerId: enhanced-edition 
     Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -90,7 +90,7 @@ With prefix/suffix, anchor links wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 18] headerId: enhanced-edition 
       Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -104,7 +104,7 @@ With prefix/suffix, anchor links do not wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 2] headerId: enhanced-edition 
     Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -118,7 +118,7 @@ With prefix/suffix, anchor links do not wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 2] headerId: enhanced-edition 
     Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -132,7 +132,7 @@ Set name, with prefix/suffix, anchor links do not wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 2] headerId: enhanced-edition 
     Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
 ````````````````````````````````
 
@@ -146,8 +146,24 @@ Set name, no id, with prefix/suffix, anchor links do not wrap header text
 .
 Document[0, 19]
   Heading[0, 18] textOpen:[0, 1, "#"] text:[2, 18, "Enhanced Edition"] textClose:[0, 0]
-    AnchorLink[0, 0] headerId: enhanced-edition 
+    AnchorLink[2, 2] headerId: enhanced-edition 
     Text[2, 18] chars:[2, 18, "Enhan"..."ition"]
+````````````````````````````````
+
+
+Just to test postProcessor exclusions
+
+```````````````````````````````` example(AnchorLinks: 10) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
+> # Enhanced Edition
+.
+<blockquote>
+  <h1>Enhanced Edition</h1>
+</blockquote>
+.
+Document[0, 21]
+  BlockQuote[0, 20] marker:[0, 1, ">"]
+    Heading[2, 20] textOpen:[2, 3, "#"] text:[4, 20, "Enhanced Edition"] textClose:[0, 0]
+      Text[4, 20] chars:[4, 20, "Enhan"..."ition"]
 ````````````````````````````````
 
 

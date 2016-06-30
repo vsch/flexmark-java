@@ -62,6 +62,9 @@ public class PostProcessorManager {
                     // assume it no longer reflects reality;
                     classifyingNodeTracker = null;
                 } else {
+                    if (hadGlobal) {
+                        int tmp = 0;
+                    }
                     assert !hadGlobal;
 
                     if (classifyingNodeTracker == null) {
@@ -80,13 +83,16 @@ public class PostProcessorManager {
                     ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
                     for (Node node : nodes) {
                         // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
+                        int index = -1;
+                        BitSet nodeAncestors = null;
+                        BitSet nodeExclusions = null;
                         Set<Class<?>> excluded = dependentNodeTypes.get(node.getClass());
                         if (excluded != null) {
-                            int index = classifyingNodeTracker.getItems().indexOf(node.getClass());
+                            index = classifyingNodeTracker.getItems().indexOf(node);
                             if (index != -1) {
-                                BitSet nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
+                                 nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
                                 if (nodeAncestors != null) {
-                                    BitSet nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
+                                    nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
                                     nodeExclusions.and(nodeAncestors);
                                     if (!nodeExclusions.isEmpty()) {
                                         // has excluded ancestor

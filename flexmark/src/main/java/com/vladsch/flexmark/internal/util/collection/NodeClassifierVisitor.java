@@ -2,6 +2,7 @@ package com.vladsch.flexmark.internal.util.collection;
 
 import com.vladsch.flexmark.internal.util.NodeTracker;
 import com.vladsch.flexmark.node.AbstractVisitor;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.*;
@@ -64,10 +65,7 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
 
     void pushNodeAncestry() {
         if (!myExclusionMap.isEmpty()) {
-            if (!myNodeAncestryBitSet.getPeek().isEmpty()) {
-                // have something in the set
-                myNodeAncestryBitSetStack.push(myNodeAncestryBitSet.getImmutable());
-            }
+            myNodeAncestryBitSetStack.push(myNodeAncestryBitSet.getImmutable());
         }
     }
 
@@ -76,30 +74,32 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
     }
 
     boolean updateNodeAncestry(Node node, CopyOnWriteRef<BitSet> nodeAncestryBitSet) {
-        if (!myExclusionMap.isEmpty()) {
+        Node parent = node.getParent();
+        if (!myExclusionMap.isEmpty() && !(node instanceof Document)) {
             // add flags if needed
             node.getClass();
             BitSet bitSet = nodeAncestryBitSet.getPeek();
 
-            Set<Class<?>> excludedAncestors = myExclusionMap.get(node.getClass());
-            Iterator<Class<?>> iterator = excludedAncestors.iterator();
-
-            while (iterator.hasNext()) {
-                Class<?> nodeType = iterator.next();
-                if (nodeType.isInstance(node)) {
-                    // get the index of this exclusion
-                    int i = myExclusionSet.indexOf(nodeType);
-                    assert i != -1;
-                    if (!bitSet.get(i) && !nodeAncestryBitSet.isMutable()) {
-                        bitSet = nodeAncestryBitSet.getMutable();
-                        bitSet.set(i);
-                    }
-                }
-            }
-
             int index = myClassifyingNodeTracker.getItems().indexOf(node);
             if (index == -1) {
                 throw new IllegalStateException("Node: " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
+            }
+
+            if (myExclusionSet != null && !myExclusionSet.isEmpty()) {
+                Iterator<Class<?>> iterator = ((Set<Class<?>>) myExclusionSet).iterator();
+
+                while (iterator.hasNext()) {
+                    Class<?> nodeType = iterator.next();
+                    if (nodeType.isInstance(node)) {
+                        // get the index of this exclusion
+                        int i = myExclusionSet.indexOf(nodeType);
+                        assert i != -1;
+                        if (!bitSet.get(i) && !nodeAncestryBitSet.isMutable()) {
+                            bitSet = nodeAncestryBitSet.getMutable();
+                            bitSet.set(i);
+                        }
+                    }
+                }
             }
 
             if (myClassificationDone && myNodeAncestryBitSetStack.size() > 1) {

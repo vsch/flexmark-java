@@ -9,6 +9,10 @@ import java.util.*;
 public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     private final HashMap<Class<? extends Node>, Set<Class<?>>> NODE_MAP = new HashMap<>();
 
+    // added to force constructor
+    public NodePostProcessorFactory(boolean ignored) {
+    }
+
     @Override
     public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
         return null;

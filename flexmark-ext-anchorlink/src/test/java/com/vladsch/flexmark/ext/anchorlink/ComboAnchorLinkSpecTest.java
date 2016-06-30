@@ -16,6 +16,7 @@ public class ComboAnchorLinkSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS, "anchor")
             .set(HtmlRenderer.INDENT_SIZE, 2)
+            .set(AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE, true)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(AnchorLinkExtension.create()));
 

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.anchorlink;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodePostProcessor;
 import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkNodeRenderer;
-import com.vladsch.flexmark.ext.anchorlink.internal.AnchorLinkPostProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -25,6 +25,7 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
     final public static DataKey<String> ANCHORLINKS_ANCHOR_CLASS = new DataKey<>("ANCHORLINKS_ANCHOR_CLASS", "");
     final public static DataKey<Boolean> ANCHORLINKS_SET_NAME = new DataKey<>("ANCHORLINKS_SET_NAME", false);
     final public static DataKey<Boolean> ANCHORLINKS_SET_ID = new DataKey<>("ANCHORLINKS_SET_ID", true);
+    final public static DataKey<Boolean> ANCHORLINKS_NO_BLOCK_QUOTE = new DataKey<>("ANCHORLINKS_NO_BLOCK_QUOTE", false);
 
     private AnchorLinkExtension() {
     }
@@ -36,7 +37,7 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
     @Override
     public void extend(Parser.Builder parserBuilder) {
         //parserBuilder.blockPreProcessorFactory(new AnchorLinkBlockPreProcessor.Factory());
-        parserBuilder.postProcessorFactory(new AnchorLinkPostProcessor.Factory());
+        parserBuilder.postProcessorFactory(new AnchorLinkNodePostProcessor.Factory(parserBuilder));
     }
 
     @Override

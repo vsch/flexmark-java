@@ -10,6 +10,7 @@ class AnchorLinkOptions {
     final public String anchorClass;
     final public boolean setName;
     final public boolean setId;
+    final public boolean noBlockQuotes;
 
     public AnchorLinkOptions(DataHolder options) {
         this.noWrap = options.get(AnchorLinkExtension.ANCHORLINKS_NO_WRAP_TEXT);
@@ -18,5 +19,6 @@ class AnchorLinkOptions {
         this.anchorClass = options.get(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS);
         this.setName = options.get(AnchorLinkExtension.ANCHORLINKS_SET_NAME);
         this.setId = options.get(AnchorLinkExtension.ANCHORLINKS_SET_ID);
+        this.noBlockQuotes = options.get(AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE);
     }
 }
