@@ -1,5 +1,6 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
+import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.mappers.CharMapper;
 import com.vladsch.flexmark.internal.util.mappers.LowerCaseMapper;
 import com.vladsch.flexmark.internal.util.mappers.UpperCaseMapper;

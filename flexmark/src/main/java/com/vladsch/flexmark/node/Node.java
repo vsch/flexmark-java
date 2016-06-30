@@ -1,8 +1,12 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.*;
-import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterable;
-import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterator;
+import com.vladsch.flexmark.internal.util.DescendantNodeIterable;
+import com.vladsch.flexmark.internal.util.NodeIterable;
+import com.vladsch.flexmark.internal.util.NodeIterator;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterator;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public abstract class Node {
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;

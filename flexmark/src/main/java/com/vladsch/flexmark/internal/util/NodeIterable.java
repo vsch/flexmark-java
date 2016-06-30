@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.internal.util;
 
-import com.vladsch.flexmark.internal.util.collection.ReversibleIterator;
-import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterable;
-import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterator;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterator;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.function.Consumer;

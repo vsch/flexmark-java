@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.LinkRefProcessor;

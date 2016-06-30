@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.emoji.internal;
 
 import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 
 public class EmojiDelimiterProcessor implements DelimiterProcessor {

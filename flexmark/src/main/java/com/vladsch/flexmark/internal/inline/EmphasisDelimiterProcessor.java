@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal.inline;
 
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.DelimitedNodeImpl;
 import com.vladsch.flexmark.node.Emphasis;
 import com.vladsch.flexmark.node.StrongEmphasis;

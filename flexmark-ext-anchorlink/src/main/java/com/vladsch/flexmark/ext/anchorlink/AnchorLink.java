@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.anchorlink;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.Visitor;
 

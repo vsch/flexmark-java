@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
 /**
  * A CharSequence that references original string and maps '\0' to '\uFFFD'

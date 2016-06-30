@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
 

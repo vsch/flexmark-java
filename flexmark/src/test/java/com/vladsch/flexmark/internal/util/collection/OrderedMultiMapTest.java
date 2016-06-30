@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.Pair;
+import com.vladsch.flexmark.internal.util.Paired;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

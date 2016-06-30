@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.footnotes.internal;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.LinkRefProcessor;

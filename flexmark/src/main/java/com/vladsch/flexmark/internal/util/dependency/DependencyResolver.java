@@ -59,6 +59,9 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
                     }
                 }
             } 
+            
+            dependentItemMap = prioritize(dependentItemMap);
+            dependentCount = dependentItemMap.size();
 
             BitSet newReady = new BitSet(dependentCount);
             final Ref<BitSet> newReadyRef = new Ref<>(newReady);
@@ -124,5 +127,9 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
 
             return createResolvedDependencies(dependencyStages);
         }
+    }
+
+    protected OrderedMap<Class<? extends D>, DependentItem<D>> prioritize(OrderedMap<Class<? extends D>, DependentItem<D>> dependentMap) {
+        return dependentMap;
     }
 }

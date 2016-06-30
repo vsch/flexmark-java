@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.internal.util.collection;
 
 import com.vladsch.flexmark.internal.util.NodeTracker;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.internal.util.mappers.NodeClassifier;
 import com.vladsch.flexmark.node.Node;
 

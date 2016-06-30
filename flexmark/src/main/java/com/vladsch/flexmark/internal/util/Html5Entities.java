@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.internal.util;
 
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;

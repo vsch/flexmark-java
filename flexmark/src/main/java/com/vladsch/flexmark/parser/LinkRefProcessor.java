@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Node;
 
 /**

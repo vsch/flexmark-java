@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.collection.iteration.*;
+
 import java.lang.reflect.Array;
 import java.util.*;
 

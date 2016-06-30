@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util.collection.iteration;
 
 import java.util.BitSet;
 import java.util.NoSuchElementException;

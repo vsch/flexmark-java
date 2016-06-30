@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.ReplacedTextMapper;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;

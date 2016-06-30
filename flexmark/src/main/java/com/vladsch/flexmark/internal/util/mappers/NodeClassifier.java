@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.internal.util.mappers;
 
-import com.vladsch.flexmark.internal.util.collection.Computable;
+import com.vladsch.flexmark.internal.util.Computable;
 import com.vladsch.flexmark.node.Node;
 
 public class NodeClassifier implements Computable<Class<?>, Node> {

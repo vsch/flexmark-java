@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.Collection;
 import java.util.Map;

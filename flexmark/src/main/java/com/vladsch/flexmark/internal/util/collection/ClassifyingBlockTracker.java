@@ -2,6 +2,8 @@ package com.vladsch.flexmark.internal.util.collection;
 
 import com.vladsch.flexmark.internal.util.BlockParserTracker;
 import com.vladsch.flexmark.internal.util.BlockTracker;
+import com.vladsch.flexmark.internal.util.Paired;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.internal.util.mappers.NodeClassifier;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;

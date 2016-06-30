@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 import java.util.List;
 

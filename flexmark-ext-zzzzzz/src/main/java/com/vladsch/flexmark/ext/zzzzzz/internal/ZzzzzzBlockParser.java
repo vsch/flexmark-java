@@ -2,8 +2,8 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;

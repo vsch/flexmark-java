@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public abstract class InlineLinkNode extends LinkNode {
     protected BasedSequence textOpeningMarker = SubSequence.NULL;

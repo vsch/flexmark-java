@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
 /**
  * A CharSequence that avoids copying string data when getting a substring.

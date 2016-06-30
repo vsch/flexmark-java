@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.Pair;
+import com.vladsch.flexmark.internal.util.Paired;
+import com.vladsch.flexmark.internal.util.collection.iteration.*;
+
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -9,7 +13,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     final private CollectionHost<Paired<K, V>> myHost;
     private boolean myInKeyUpdate;
     private boolean myInValueUpdate;
-    private Indexed<Map.Entry<K, V>> myIndexedProxy;
+    private Indexed<Entry<K, V>> myIndexedProxy;
 
     public OrderedMultiMap() {
         this(0, null);

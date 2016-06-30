@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.parser.Parser;
 
 public abstract class RefNode extends LinkNode implements LinkRefDerived {

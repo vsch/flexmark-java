@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Visitor;

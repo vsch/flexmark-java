@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.internal.util;
 
-import com.vladsch.flexmark.internal.util.collection.ReversiblePeekingIterator;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.NoSuchElementException;

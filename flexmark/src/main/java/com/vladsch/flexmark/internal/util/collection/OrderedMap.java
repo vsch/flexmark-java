@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.collection.iteration.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -11,7 +13,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final private ArrayList<V> valueList;
     final private CollectionHost<K> host;
     private boolean inUpdate;
-    private Indexed<Map.Entry<K, V>> myIndexedEntryProxy;
+    private Indexed<Entry<K, V>> myIndexedEntryProxy;
     private Indexed<V> myIndexedValueProxy;
 
     public OrderedMap() {

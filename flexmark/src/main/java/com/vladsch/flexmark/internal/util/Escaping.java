@@ -1,5 +1,10 @@
 package com.vladsch.flexmark.internal.util;
 
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
+
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

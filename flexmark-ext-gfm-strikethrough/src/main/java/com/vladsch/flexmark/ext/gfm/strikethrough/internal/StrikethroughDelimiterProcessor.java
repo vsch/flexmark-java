@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.gfm.strikethrough.internal;
 
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 

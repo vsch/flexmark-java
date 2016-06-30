@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
 public class SourceText {
     final public static SourceText NULL = new SourceText(Substring.EMPTY, -1, -1);

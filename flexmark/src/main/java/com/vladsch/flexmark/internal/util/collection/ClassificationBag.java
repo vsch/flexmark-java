@@ -1,5 +1,10 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.Computable;
+import com.vladsch.flexmark.internal.util.collection.iteration.BitSetIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.IndexedIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
+
 import java.util.BitSet;
 import java.util.Collection;
 import java.util.Map;

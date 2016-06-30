@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.DoNotLinkify;
 import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.node.Visitor;

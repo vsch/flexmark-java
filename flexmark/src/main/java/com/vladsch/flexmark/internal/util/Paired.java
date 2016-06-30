@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util;
 
 public interface Paired<K, V> {
     K getFirst();

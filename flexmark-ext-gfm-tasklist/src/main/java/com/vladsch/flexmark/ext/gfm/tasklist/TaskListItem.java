@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.BulletListItem;
 import com.vladsch.flexmark.node.Node;
 

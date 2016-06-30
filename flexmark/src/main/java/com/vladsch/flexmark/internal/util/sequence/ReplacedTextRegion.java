@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
 public class ReplacedTextRegion {
     final private SourceRange original;

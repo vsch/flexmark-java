@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 public class Emphasis extends DelimitedNodeImpl {
     public Emphasis() {

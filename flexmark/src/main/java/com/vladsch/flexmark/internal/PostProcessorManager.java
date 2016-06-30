@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
+import com.vladsch.flexmark.internal.util.dependency.DependentItem;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
@@ -110,55 +112,6 @@ public class PostProcessorManager {
         return document;
     }
 
-    private void preProcessBlocks() {
-        //// here we run preProcessing stages
-        //if (allPostProcessNodes.size() > 0) {
-        //    HashMap<PostProcessorFactory, PostProcessor> blockPreProcessors = new HashMap<>(postProcessorDependencies.getDependentStages().size());
-        //
-        //    for (DependentPostProcessorDependencyStage preProcessorStage : postProcessorDependencies.getDependentStages()) {
-        //        for (Map.Entry<Class<? extends Node>, List<PostProcessorFactory>> entry : preProcessorStage.factoryMap.entrySet()) {
-        //            List<Node> blockList = allPostProcessNodes.get(entry.getKey());
-        //            List<PostProcessorFactory> factoryList = entry.getValue();
-        //
-        //            if (blockList != null && factoryList != null) {
-        //                for (Node block : blockList) {
-        //                    if (allBlocksParserMap.containsKey(block)) {
-        //                        for (PostProcessorFactory factory : factoryList) {
-        //                            PostProcessor blockPreProcessor = blockPreProcessors.get(factory);
-        //                            if (blockPreProcessor == null) {
-        //                                blockPreProcessor = factory.create(this);
-        //                                blockPreProcessors.put(factory, blockPreProcessor);
-        //                            }
-        //
-        //                            Block newBlock = blockPreProcessor.preProcess(this, block);
-        //
-        //                            if (newBlock != block) {
-        //                                // needs to be replaced
-        //                                BlockParser blockParser = allBlocksParserMap.get(block);
-        //                                if (blockParser != null) {
-        //                                    allBlockParsers.removeIndex(blockParser);
-        //                                }
-        //
-        //                                block.insertAfter(newBlock);
-        //                                added(newBlock, null);
-        //                                blockRemoved(block);
-        //
-        //                                if (block.getClass() != newBlock.getClass()) {
-        //                                    // class changed, we will rerun for this one
-        //                                    break;
-        //                                }
-        //
-        //                                block = newBlock;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
-    }
-
     public static class PostProcessorDependencyStage {
         final private Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
         final private boolean myWithExclusions;
@@ -229,6 +182,13 @@ public class PostProcessorManager {
         @Override
         protected PostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
             return new PostProcessorDependencyStage(dependents);
+        }
+
+        @Override
+        protected OrderedMap<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> prioritize(OrderedMap<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> dependentMap) {
+            // put globals last
+            
+            return super.prioritize(dependentMap);
         }
     }
 }

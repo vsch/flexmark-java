@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.collection.iteration.BitSetIterator;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterator;
+
 import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.nio.LongBuffer;

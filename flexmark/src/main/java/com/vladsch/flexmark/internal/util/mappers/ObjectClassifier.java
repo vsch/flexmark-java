@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.internal.util.mappers;
 
-import com.vladsch.flexmark.internal.util.collection.Computable;
+import com.vladsch.flexmark.internal.util.Computable;
 
 public class ObjectClassifier implements Computable<Class<?>, Object> {
     final public static ObjectClassifier INSTANCE = new ObjectClassifier();

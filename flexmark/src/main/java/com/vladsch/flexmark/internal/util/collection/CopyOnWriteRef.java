@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.Computable;
+
 public class CopyOnWriteRef<T> {
     private T myValue; 
     private int myReferenceCount;

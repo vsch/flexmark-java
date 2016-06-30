@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.DoNotLinkify;

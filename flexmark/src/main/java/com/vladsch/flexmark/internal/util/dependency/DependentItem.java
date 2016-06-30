@@ -2,7 +2,7 @@ package com.vladsch.flexmark.internal.util.dependency;
 
 import java.util.BitSet;
 
-class DependentItem<D> {
+public class DependentItem<D> {
     public final int index;
     public final D dependent;
     public final Class<? extends D> dependentClass;

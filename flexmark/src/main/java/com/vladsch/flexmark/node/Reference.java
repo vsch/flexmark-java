@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public class Reference extends Node {
     protected BasedSequence openingMarker = SubSequence.NULL;

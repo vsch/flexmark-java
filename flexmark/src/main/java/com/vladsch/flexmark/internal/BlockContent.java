@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.BasedSequence;
-import com.vladsch.flexmark.internal.util.SegmentedSequence;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;

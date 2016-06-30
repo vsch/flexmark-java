@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.Computable;
 import org.junit.Assert;
 import org.junit.Test;
 

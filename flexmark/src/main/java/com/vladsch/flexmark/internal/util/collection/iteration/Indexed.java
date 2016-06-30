@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util.collection.iteration;
 
 public interface Indexed<E> {
     E get(int index);

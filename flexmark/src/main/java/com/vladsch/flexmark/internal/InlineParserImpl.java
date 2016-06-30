@@ -2,8 +2,13 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
-import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.Parsing;
+import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;

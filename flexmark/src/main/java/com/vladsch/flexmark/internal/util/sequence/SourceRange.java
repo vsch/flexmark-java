@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util;
+package com.vladsch.flexmark.internal.util.sequence;
 
 public class SourceRange {
     final public static SourceRange NULL = new SourceRange(0, 0);

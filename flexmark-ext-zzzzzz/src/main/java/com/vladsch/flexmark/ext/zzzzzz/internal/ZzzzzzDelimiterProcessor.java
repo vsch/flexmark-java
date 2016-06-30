@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.SubSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 
 public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {

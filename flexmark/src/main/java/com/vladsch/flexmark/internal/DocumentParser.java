@@ -1,9 +1,12 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.*;
+import com.vladsch.flexmark.internal.util.Computable;
+import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.internal.util.sequence.*;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;

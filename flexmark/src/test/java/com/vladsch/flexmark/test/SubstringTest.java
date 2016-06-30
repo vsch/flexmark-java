@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.Substring;
+import com.vladsch.flexmark.internal.util.sequence.Substring;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;

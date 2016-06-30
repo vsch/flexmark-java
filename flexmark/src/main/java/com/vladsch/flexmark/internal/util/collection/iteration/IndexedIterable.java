@@ -1,6 +1,6 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util.collection.iteration;
 
-public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implements ReversibleIterable<R> {
+public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implements ReversibleIndexedIterable<R> {
     final private ReversibleIterable<Integer> myIterable;
     final private Indexed<S> myItems;
 
@@ -20,7 +20,7 @@ public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implem
     }
 
     @Override
-    public ReversibleIterable<R> reversed() {
+    public ReversibleIndexedIterable<R> reversed() {
         return new IndexedIterable<R, S, ReversibleIterable<Integer>>(myItems, myIterable.reversed());
     }
 
