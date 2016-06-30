@@ -31,7 +31,7 @@ Progress
 --------
 
 - Optimized post processor processing to eliminate each processor from having to traverse the
-  AST looking for nodes of interest. Parse time for large file (500k bytes, 30k lines) went from
+  AST looking for nodes of interest. Parse time for large file (500k bytes, 10k lines) went from
   1.39x commonmark-java down to 1.05x.
 
 - Took a few days to add some flexmark-java extension related functionality to Markdown
