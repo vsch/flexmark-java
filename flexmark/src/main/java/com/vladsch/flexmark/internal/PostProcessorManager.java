@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
-import com.vladsch.flexmark.internal.util.collection.OrderedSet;
+import com.vladsch.flexmark.internal.util.collection.*;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.InlineParserFactory;
+import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 
 import java.util.*;
+import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 public class PostProcessorManager {
@@ -19,15 +18,90 @@ public class PostProcessorManager {
         //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
     }
 
-    private final DependentPostProcessorDependencies postProcessorDependencies;
+    private final PostProcessorDependencies postProcessorDependencies;
     private OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
-    private HashMap<Class<? extends Node>, BitSet> nodeClassIndices = new HashMap<>(); // stores the indices for the blocks in allPostProcessNodes by node class 
 
-    public PostProcessorManager(Document document, DependentPostProcessorDependencies postProcessorDependencies) {
-        // collect all nodes of interest
+    public PostProcessorManager(PostProcessorDependencies postProcessorDependencies) {
         this.postProcessorDependencies = postProcessorDependencies;
+    }
 
-        // instantiate the needed post processors
+    public static PostProcessorDependencies calculatePostProcessors(DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
+        List<PostProcessorFactory> list = new ArrayList<>();
+        // By having the custom factories come first, extensions are able to change behavior of core syntax.
+        list.addAll(postProcessorFactories);
+
+        // add core block preprocessors
+        list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
+
+        PostProcessDependencyResolver resolver = new PostProcessDependencyResolver();
+        return resolver.resolveDependencies(list);
+    }
+
+    public static Document processDocument(Document document, PostProcessorDependencies processorDependencies) {
+        if (!processorDependencies.isEmpty()) {
+            PostProcessorManager manager = new PostProcessorManager(processorDependencies);
+            document = manager.postProcess(document);
+        }
+        return document;
+    }
+
+    public Document postProcess(Document document) {
+        // first initialize node tracker if 
+        ClassifyingNodeTracker classifyingNodeTracker = null;
+
+        classifyingNodeTracker = null;
+        for (PostProcessorDependencyStage stage : postProcessorDependencies.getDependentStages()) {
+            // idiosyncrasy of post processors the last dependency can be global, in which case it processes the whole document and no ancestry info is 
+            // provided
+            //new ClassifyingNodeTracker()
+            boolean hadGlobal = false;
+            for (PostProcessorFactory dependent : stage.dependents) {
+                if (dependent.affectsGlobalScope()) {
+                    document = dependent.create(document).processDocument(document);
+                    hadGlobal = true;
+                    // assume it no longer reflects reality;
+                    classifyingNodeTracker = null;
+                } else {
+                    assert !hadGlobal;
+
+                    if (classifyingNodeTracker == null) {
+                        // build the node type information by traversing the document tree
+                        classifyingNodeTracker = new NodeClassifierVisitor(stage.myNodeMap).classify(document);
+                    }
+
+                    Map<Class<? extends Node>, Set<Class<?>>> dependentNodeTypes = dependent.getNodeTypes();
+                    PostProcessor postProcessor = dependent.create(document);
+                    BitSet exclusionSet = new BitSet();
+                    for (Set<Class<?>> excluded : dependentNodeTypes.values()) {
+                        BitSet mapped = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
+                        exclusionSet.or(mapped);
+                    }
+
+                    ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
+                    for (Node node : nodes) {
+                        // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
+                        Set<Class<?>> excluded = dependentNodeTypes.get(node.getClass());
+                        if (excluded != null) {
+                            int index = classifyingNodeTracker.getItems().indexOf(node.getClass());
+                            if (index != -1) {
+                                BitSet nodeAncestors = classifyingNodeTracker.getNodeAncestryMap().get(index);
+                                if (nodeAncestors != null) {
+                                    BitSet nodeExclusions = classifyingNodeTracker.getExclusionSet().indexBitSet(excluded);
+                                    nodeExclusions.and(nodeAncestors);
+                                    if (!nodeExclusions.isEmpty()) {
+                                        // has excluded ancestor
+                                        continue;
+                                    }
+                                }
+                            }
+                        }
+                        postProcessor.process(classifyingNodeTracker, node);
+                    }
+                }
+            }
+        }
+
+        return document;
     }
 
     private void preProcessBlocks() {
@@ -79,84 +153,76 @@ public class PostProcessorManager {
         //}
     }
 
-
-    public static class DependentPostProcessorDependencyStage {
-        final private Map<Class<? extends Node>, List<PostProcessorFactory>> factoryMap;
+    public static class PostProcessorDependencyStage {
+        final private Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
+        final private boolean myWithExclusions;
         final private List<PostProcessorFactory> dependents;
 
-        public DependentPostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
+        public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
-            HashMap<Class<? extends Node>, List<PostProcessorFactory>> map = new HashMap<>();
+            HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
+            final boolean[] haveExclusions = { false };
 
             for (PostProcessorFactory dependent : dependents) {
-                Set<Class<? extends Node>> blockTypes = dependent instanceof PostProcessorFactory ? ((PostProcessorFactory) dependent).getNodeTypes() : Collections.EMPTY_SET;
-                for (Class<? extends Node> blockType : blockTypes) {
-                    List<PostProcessorFactory> factories = map.get(blockType);
-                    if (factories == null) {
-                        factories = new ArrayList<>();
-                        map.put(blockType, factories);
+                Map<Class<? extends Node>, Set<Class<?>>> types = dependent.getNodeTypes();
+                if ((types == null || types.isEmpty()) && !dependent.affectsGlobalScope()) {
+                    throw new IllegalStateException("PostProcessorFactory " + dependent + " is not document post processor and has empty node map, does nothing, should not be registered.");
+                }
+
+                if (types != null) {
+                    for (Map.Entry<Class<? extends Node>, Set<Class<?>>> entry : types.entrySet()) {
+                        nodeMap.merge(entry.getKey(), entry.getValue(), new BiFunction<Set<Class<?>>, Set<Class<?>>, Set<Class<?>>>() {
+                            @Override
+                            public Set<Class<?>> apply(Set<Class<?>> classes, Set<Class<?>> classes2) {
+                                classes.addAll(classes2);
+                                if (!classes.isEmpty()) haveExclusions[0] = true;
+                                return classes;
+                            }
+                        });
                     }
-                    factories.add(dependent);
                 }
             }
 
             this.dependents = dependents;
-            this.factoryMap = map;
+            this.myNodeMap = nodeMap;
+            this.myWithExclusions = haveExclusions[0];
         }
     }
 
-    public static class DependentPostProcessorDependencies extends ResolvedDependencies<DependentPostProcessorDependencyStage> {
-        final private Set<Class<? extends Node>> blockTypes;
-        final private Set<PostProcessorFactory> DependentPostProcessorFactories;
+    public static class PostProcessorDependencies extends ResolvedDependencies<PostProcessorDependencyStage> {
+        private final boolean myWithExclusions;
 
-        public DependentPostProcessorDependencies(List<DependentPostProcessorDependencyStage> dependentStages) {
+        public PostProcessorDependencies(List<PostProcessorDependencyStage> dependentStages) {
             super(dependentStages);
-            Set<Class<? extends Node>> blockTypes = new HashSet<>();
-            Set<PostProcessorFactory> DependentPostProcessorFactories = new HashSet<>();
-            for (DependentPostProcessorDependencyStage stage : dependentStages) {
-                blockTypes.addAll(stage.factoryMap.keySet());
-                DependentPostProcessorFactories.addAll(stage.dependents);
+            boolean haveExclusions = false;
+            for (PostProcessorDependencyStage stage : dependentStages) {
+                if (stage.myWithExclusions) {
+                    haveExclusions = true;
+                    break;
+                }
             }
-            this.DependentPostProcessorFactories = DependentPostProcessorFactories;
-            this.blockTypes = blockTypes;
+            myWithExclusions = haveExclusions;
         }
 
-        public Set<Class<? extends Node>> getBlockTypes() {
-            return blockTypes;
-        }
-
-        public Set<PostProcessorFactory> getDependentPostProcessorFactories() {
-            return DependentPostProcessorFactories;
+        public boolean isWithExclusions() {
+            return myWithExclusions;
         }
     }
 
-    private static class BlockDependencyResolver extends DependencyResolver<PostProcessorFactory, DependentPostProcessorDependencyStage, DependentPostProcessorDependencies> {
+    private static class PostProcessDependencyResolver extends DependencyResolver<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
         @Override
         protected Class<? extends PostProcessorFactory> getDependentClass(PostProcessorFactory dependent) {
             return dependent.getClass();
         }
 
         @Override
-        protected DependentPostProcessorDependencies createResolvedDependencies(List<DependentPostProcessorDependencyStage> stages) {
-            return new DependentPostProcessorDependencies(stages);
+        protected PostProcessorDependencies createResolvedDependencies(List<PostProcessorDependencyStage> stages) {
+            return new PostProcessorDependencies(stages);
         }
 
         @Override
-        protected DependentPostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
-            return new DependentPostProcessorDependencyStage(dependents);
+        protected PostProcessorDependencyStage createStage(List<PostProcessorFactory> dependents) {
+            return new PostProcessorDependencyStage(dependents);
         }
     }
-
-    public static DependentPostProcessorDependencies calculateDependentPostProcessors(DataHolder options, List<PostProcessorFactory> blockPreProcessors, InlineParserFactory inlineParserFactory) {
-        List<PostProcessorFactory> list = new ArrayList<>();
-        // By having the custom factories come first, extensions are able to change behavior of core syntax.
-        list.addAll(blockPreProcessors);
-
-        // add core block preprocessors
-        list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
-
-        BlockDependencyResolver resolver = new BlockDependencyResolver();
-        return resolver.resolveDependencies(list);
-    }
-
 }

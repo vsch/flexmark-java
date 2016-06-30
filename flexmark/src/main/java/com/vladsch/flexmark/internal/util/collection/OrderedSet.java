@@ -34,6 +34,17 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
         this.myAllowConcurrentModsIndexedProxy = null;
     }
 
+    public BitSet indexBitSet(Set<E> excluded) {
+        BitSet bitSet = new BitSet();
+        for (E element : excluded) {
+            int i = indexOf(element);
+            if (i != -1) {
+                bitSet.set(i);
+            }
+        }
+        return bitSet;
+    }
+
     private class IndexedProxy implements Indexed<E> {
         private final boolean myAllowConcurrentMods;
 

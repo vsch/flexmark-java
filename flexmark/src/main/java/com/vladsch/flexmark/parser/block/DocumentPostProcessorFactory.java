@@ -3,6 +3,7 @@ package com.vladsch.flexmark.parser.block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 
+import java.util.Map;
 import java.util.Set;
 
 public abstract class DocumentPostProcessorFactory implements PostProcessorFactory {
@@ -12,12 +13,7 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
      * @return set of block node types
      */
     @Override
-    final public Set<Class<? extends Node>> getNodeTypes() {
-        return null;
-    }
-
-    @Override
-    public Set<Class<? extends Node>> getExcludeDescendantsOfTypes() {
+    final public Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes() {
         return null;
     }
 

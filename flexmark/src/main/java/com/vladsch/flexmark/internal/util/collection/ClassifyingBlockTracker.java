@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockParser;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
-    final protected ClassificationBag<Class<? extends Node>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
+    final protected ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
     final protected OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
         @Override
         public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
@@ -60,7 +60,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
         return allBlockParsersMap.containsValue(parser);
     }
 
-    public ClassificationBag<Class<? extends Node>, Node> getNodeClassifier() {
+    public ClassificationBag<Class<?>, Node> getNodeClassifier() {
         return nodeClassifier;
     }
 

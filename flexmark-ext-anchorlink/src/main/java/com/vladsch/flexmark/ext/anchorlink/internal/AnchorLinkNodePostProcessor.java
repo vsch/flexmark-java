@@ -9,9 +9,6 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 
-import java.util.Collections;
-import java.util.Set;
-
 public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     final private GitHubHeaderIdGenerator generator;
     final private AnchorLinkOptions options;
@@ -46,14 +43,8 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     }
 
     public static class Factory extends NodePostProcessorFactory {
-        @Override
-        public Set<Class<? extends Node>> getNodeTypes() {
-            return Collections.singleton(Heading.class);
-        }
-
-        @Override
-        public Set<Class<? extends Node>> getExcludeDescendantsOfTypes() {
-            return null;
+        public Factory() {
+            addNodes(Heading.class);
         }
 
         @Override

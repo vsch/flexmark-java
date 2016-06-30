@@ -7,32 +7,46 @@ import java.util.Map;
 public class ClassificationBag<K, V> {
     private final OrderedSet<V> myItems;
     private final IndexedItemBitSetMap<K, V> myBag;
+    private final CollectionHost<V> myHost;
 
     public ClassificationBag(Computable<K, V> mapper) {
         this(0, mapper);
     }
 
+    public ClassificationBag(Computable<K, V> mapper, CollectionHost<V> host) {
+        this(0, mapper, host);
+    }
+
     public ClassificationBag(int capacity, Computable<K, V> mapper) {
+        this(capacity, mapper, null);
+    }
+
+    public ClassificationBag(int capacity, Computable<K, V> mapper, CollectionHost<V> host) {
+        this.myHost = host;
         this.myItems = new OrderedSet<V>(capacity, new CollectionHost<V>() {
             @Override
             public void adding(int index, V v, Object v2) {
+                if (myHost != null && !myHost.skipHostUpdate()) myHost.adding(index, v, v2);
                 myBag.addItem(v, index);
             }
 
             @Override
             public Object removing(int index, V v) {
+                if (myHost != null && !myHost.skipHostUpdate()) myHost.removing(index, v);
                 myBag.removeItem(v, index);
                 return null;
             }
 
             @Override
             public void clearing() {
+                if (myHost != null && !myHost.skipHostUpdate()) myHost.clearing();
                 myBag.clear();
             }
 
             @Override
             public void addingNulls(int index) {
                 // nothing to be done, we're good
+                if (myHost != null && !myHost.skipHostUpdate()) myHost.addingNulls(index);
             }
 
             @Override
@@ -42,11 +56,19 @@ public class ClassificationBag<K, V> {
 
             @Override
             public int getIteratorModificationCount() {
-                return myItems.getModificationCount();
+                return getModificationCount();
             }
         });
 
         this.myBag = new IndexedItemBitSetMap<K, V>(mapper);
+    }
+
+    public OrderedSet<V> getItems() {
+        return myItems;
+    }
+
+    public int getModificationCount() {
+        return myItems.getModificationCount();
     }
 
     public boolean add(V item) {
@@ -88,20 +110,20 @@ public class ClassificationBag<K, V> {
     }
 
     @SafeVarargs
-    public final <X extends V> ReversibleIterable<X> getCategoryItems(Class<X> xClass, K... categories) {
+    public final <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
-    public final <X extends V> ReversibleIterable<X> getCategoryItems(Class<X> xClass, Collection<? extends K> categories) {
+    public final <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, Collection<? extends K> categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
 
     @SafeVarargs
-    public final <X extends V> ReversibleIterable<X> getCategoryItemsReversed(Class<X> xClass, K... categories) {
+    public final <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 
-    public final <X extends V> ReversibleIterable<X> getCategoryItemsReversed(Class<X> xClass, Collection<? extends K> categories) {
+    public final <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, Collection<? extends K> categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
 

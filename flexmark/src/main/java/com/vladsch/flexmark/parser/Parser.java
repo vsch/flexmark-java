@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
+import com.vladsch.flexmark.internal.PostProcessorManager;
 import com.vladsch.flexmark.internal.util.BasedSequence;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
@@ -61,7 +62,7 @@ public class Parser {
     private final BitSet delimiterCharacters;
     private final BitSet specialCharacters;
     private final Builder builder;
-    private final List<PostProcessorFactory> postProcessorFactories;
+    private final PostProcessorManager.PostProcessorDependencies postProcessorDependencies;
     private final DocumentParser.ParagraphPreProcessorDependencies paragraphPreProcessorFactories;
     private final DocumentParser.BlockPreProcessorDependencies blockPreProcessorDependencies;
     private final LinkRefProcessorData linkRefProcessors;
@@ -79,7 +80,7 @@ public class Parser {
         this.delimiterCharacters = InlineParserImpl.calculateDelimiterCharacters(this.options, delimiterProcessors.keySet());
         this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
-        this.postProcessorFactories = builder.postProcessorFactories;
+        this.postProcessorDependencies = PostProcessorManager.calculatePostProcessors(this.options, builder.postProcessorFactories);
     }
 
     /**
@@ -142,9 +143,7 @@ public class Parser {
     }
 
     private Node postProcess(Document document) {
-        for (PostProcessorFactory postProcessorFactory : postProcessorFactories) {
-            document = postProcessorFactory.create(document).processDocument(document);
-        }
+        document = PostProcessorManager.processDocument(document, postProcessorDependencies);
         return document;
     }
 

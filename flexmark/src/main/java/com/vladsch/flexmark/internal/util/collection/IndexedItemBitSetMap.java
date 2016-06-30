@@ -14,6 +14,10 @@ public class IndexedItemBitSetMap<K, M> extends IndexedItemSetMapBase<K, BitSet,
         this.myComputable = computable;
     }
 
+    public Computable<K, M> getComputable() {
+        return myComputable;
+    }
+
     @Override
     public K mapKey(M key) {
         return myComputable.compute(key);
