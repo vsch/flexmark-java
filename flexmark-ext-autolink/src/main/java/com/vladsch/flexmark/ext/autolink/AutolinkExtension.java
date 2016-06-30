@@ -29,5 +29,4 @@ public class AutolinkExtension implements Parser.ParserExtension {
         //parserBuilder.postProcessorFactory(new AutolinkPostProcessor.Factory());
         parserBuilder.postProcessorFactory(new AutolinkNodePostProcessor.Factory());
     }
-
 }

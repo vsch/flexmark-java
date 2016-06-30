@@ -36,8 +36,8 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        //parserBuilder.blockPreProcessorFactory(new AnchorLinkBlockPreProcessor.Factory());
         parserBuilder.postProcessorFactory(new AnchorLinkNodePostProcessor.Factory(parserBuilder));
+        //parserBuilder.postProcessorFactory(new AnchorLinkPostProcessor.Factory());
     }
 
     @Override

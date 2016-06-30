@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.collection.*;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.DependentItem;
+import com.vladsch.flexmark.internal.util.dependency.DependentItemMap;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
@@ -185,10 +186,27 @@ public class PostProcessorManager {
         }
 
         @Override
-        protected OrderedMap<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> prioritize(OrderedMap<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> dependentMap) {
+        protected DependentItemMap<PostProcessorFactory> prioritize(final DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
+            List<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries(); 
+            prioritized.sort(new Comparator<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>>() {
+                @Override
+                public int compare(DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e2) {
+                    int g1 = e1.getValue().isGlobalScope ? 1 : 0; 
+                    int g2 = e2.getValue().isGlobalScope ? 1 : 0; 
+                    return g1 - g2;
+                }
+            });
             
-            return super.prioritize(dependentMap);
+            BitSet dependentMapSet = dependentMap.keySet().keyDifferenceBitSet(prioritized);
+            if (dependentMapSet.isEmpty()) {
+                return dependentMap;
+            } 
+            
+            DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<>(prioritized.size());
+            prioritizedMap.addAll(prioritized);
+            
+            return prioritizedMap;
         }
     }
 }

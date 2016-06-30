@@ -36,13 +36,68 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
         this.myAllowConcurrentModsIndexedProxy = null;
     }
 
-    public BitSet indexBitSet(Set<E> excluded) {
+    public BitSet indexBitSet(Iterable<? extends E> items) {
         BitSet bitSet = new BitSet();
-        for (E element : excluded) {
+        for (E element : items) {
             int i = indexOf(element);
             if (i != -1) {
                 bitSet.set(i);
             }
+        }
+        return bitSet;
+    }
+
+    public BitSet differenceBitSet(Iterable<? extends E> items) {
+       return differenceBitSet(items.iterator()); 
+    }
+    
+    public BitSet differenceBitSet(Iterator<? extends E> items) {
+        BitSet bitSet = new BitSet();
+        int j = 0;
+        while (items.hasNext()) {
+            E element = items.next();
+
+            int i = indexOf(element);
+            if (i != j) {
+                bitSet.set(i);
+            }
+            j++;
+        }
+        return bitSet;
+    }
+
+    public BitSet keyDifferenceBitSet(Iterable<? extends Map.Entry<? extends E, ?>> items) {
+        return keyDifferenceBitSet(items.iterator());
+    }
+    
+    public BitSet keyDifferenceBitSet(Iterator<? extends Map.Entry<? extends E, ?>> items) {
+        BitSet bitSet = new BitSet();
+        int j = 0;
+        while (items.hasNext()) {
+            Map.Entry<? extends E, ?> entry = items.next();
+            int i = indexOf(entry.getKey());
+            if (i != j) {
+                bitSet.set(i);
+            }
+            j++;
+        }
+        return bitSet;
+    }
+
+    public BitSet valueDifferenceBitSet(Iterable<? extends Map.Entry<?, ? extends E>> items) {
+        return valueDifferenceBitSet(items.iterator());
+    }
+    
+    public BitSet valueDifferenceBitSet(Iterator<? extends Map.Entry<?, ? extends E>> items) {
+        BitSet bitSet = new BitSet();
+        int j = 0;
+        while (items.hasNext()) {
+            Map.Entry<?, ? extends E> entry = items.next();
+            int i = indexOf(entry.getValue());
+            if (i != j) {
+                bitSet.set(i);
+            }
+            j++;
         }
         return bitSet;
     }
@@ -148,6 +203,13 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
 
     public List<E> getValueList() {
         return myValueList;
+    }
+
+    public List<E> values() {
+        if (!isSparse()) return myValueList;
+        List<E> list = new ArrayList<E>();
+        for (E item : iterable()) list.add(item);
+        return list;
     }
 
     public boolean setValueAt(int index, E value, Object o) {

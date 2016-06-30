@@ -2,10 +2,7 @@ package com.vladsch.flexmark.internal.util.collection;
 
 import com.vladsch.flexmark.internal.util.collection.iteration.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
@@ -230,6 +227,12 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         }
     }
 
+    public void addAll(Collection<? extends Map.Entry<? extends K, ? extends V>> entries) {
+        for (Map.Entry<? extends K, ? extends V> entry : entries) {
+            put(entry.getKey(), entry.getValue());
+        }
+    }
+
     @Override
     public void clear() {
         keySet.clear();
@@ -268,40 +271,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         inUpdate = true;
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new CollectionHost<Map.Entry<K, V>>() {
-            @Override
-            public void adding(int index, Map.Entry<K, V> entry, Object v) {
-                assert v == null;
-                OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
-            }
-
-            @Override
-            public Object removing(int index, Map.Entry<K, V> entry) {
-                OrderedMap.this.keySet.removeIndex(index);
-                return entry;
-            }
-
-            @Override
-            public void clearing() {
-                OrderedMap.this.keySet.clear();
-            }
-
-            @Override
-            public void addingNulls(int index) {
-                OrderedMap.this.keySet.addNulls(index);
-            }
-
-            @Override
-            public boolean skipHostUpdate() {
-                return inUpdate;
-            }
-
-            @Override
-            public int getIteratorModificationCount() {
-                return OrderedMap.this.getModificationCount();
-            }
-        });
-
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new EntryCollectionHost<K, V>());
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
@@ -311,6 +281,21 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         inUpdate = false;
 
         return values;
+    }
+
+    public List<Entry<K, V>> entries() {
+        // create it with inHostUpdate already set so we can populate it without callbacks
+        List<Map.Entry<K, V>> values = new ArrayList<>();
+        Iterator<Map.Entry<K, V>> iterator = entryIterator();
+        while (iterator.hasNext()) {
+            values.add(iterator.next());
+        }
+        return values;
+    }
+
+    public List<K> keys() {
+        // create it with inHostUpdate already set so we can populate it without callbacks
+        return keySet.values();
     }
 
     public ReversibleIndexedIterator<V> valueIterator() {
@@ -403,5 +388,39 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         int result = keySet.hashCode();
         result = 31 * result + valueList.hashCode();
         return result;
+    }
+
+    private class EntryCollectionHost<KK extends K, VV extends V> implements CollectionHost<Map.Entry<KK, VV>> {
+        @Override
+        public void adding(int index, Entry<KK, VV> entry, Object v) {
+            assert v == null;
+            OrderedMap.this.keySet.add(entry.getKey(), entry.getValue());
+        }
+
+        @Override
+        public Object removing(int index, Entry<KK, VV> entry) {
+            OrderedMap.this.keySet.removeIndex(index);
+            return entry;
+        }
+
+        @Override
+        public void clearing() {
+            OrderedMap.this.keySet.clear();
+        }
+
+        @Override
+        public void addingNulls(int index) {
+            OrderedMap.this.keySet.addNulls(index);
+        }
+
+        @Override
+        public boolean skipHostUpdate() {
+            return inUpdate;
+        }
+
+        @Override
+        public int getIteratorModificationCount() {
+            return OrderedMap.this.getModificationCount();
+        }
     }
 }

@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.internal.util.dependency;
 
 import com.vladsch.flexmark.internal.util.Ref;
-import com.vladsch.flexmark.internal.util.collection.OrderedMap;
 import com.vladsch.flexmark.node.Block;
 
 import java.util.*;
@@ -23,7 +22,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
         } else {
             // resolve dependencies and node processing lists
             int dependentCount = dependentsList.size();
-            OrderedMap<Class<? extends D>, DependentItem<D>> dependentItemMap = new OrderedMap<>(dependentCount);
+            DependentItemMap<D> dependentItemMap = new DependentItemMap<>(dependentCount);
 
             for (D dependent : dependentsList) {
                 Class<? extends D> dependentClass = getDependentClass(dependent);
@@ -129,7 +128,7 @@ public abstract class DependencyResolver<D extends Dependent<D>, S, R extends Re
         }
     }
 
-    protected OrderedMap<Class<? extends D>, DependentItem<D>> prioritize(OrderedMap<Class<? extends D>, DependentItem<D>> dependentMap) {
+    protected DependentItemMap<D> prioritize(DependentItemMap<D> dependentMap) {
         return dependentMap;
     }
 }

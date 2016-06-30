@@ -1,6 +1,14 @@
 Version History
 ===============
 
+0.3.1
+-----
+
+- Add ability to prioritize dependents, affects only dependents not constrained by dependencies. 
+
+- Change document post processors are run after node post processors unless constrained by
+  dependencies provided.
+
 0.3.0
 -----
 
