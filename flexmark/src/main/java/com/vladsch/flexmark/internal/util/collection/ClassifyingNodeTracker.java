@@ -47,14 +47,22 @@ public class ClassifyingNodeTracker implements NodeTracker {
         return myNodeClassifier;
     }
 
+    private void validateLinked(Node node) {
+        if (node.getNext() == null && node.getParent() == null) {
+            throw new IllegalStateException("Added block " + node + " is not linked into the AST");
+        }
+    }
+
     @Override
     public void nodeAdded(Node node) {
+        validateLinked(node);
         myNodeClassifier.add(node);
         if (myHost != null) myHost.nodeAdded(node);
     }
 
     @Override
     public void nodeAddedWithChildren(Node node) {
+        validateLinked(node);
         myNodeClassifier.add(node);
         addNodes(node.getChildren());
         if (myHost != null) myHost.nodeAddedWithChildren(node);
@@ -62,6 +70,7 @@ public class ClassifyingNodeTracker implements NodeTracker {
 
     @Override
     public void nodeAddedWithDescendants(Node node) {
+        validateLinked(node);
         myNodeClassifier.add(node);
         addNodes(node.getDescendants());
         if (myHost != null) myHost.nodeAddedWithDescendants(node);
@@ -73,21 +82,32 @@ public class ClassifyingNodeTracker implements NodeTracker {
         }
     }
 
+    private void validateUnlinked(Node node) {
+        if (!(node.getNext() == null && node.getParent() == null)) {
+            throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
+        }
+    }
+
     @Override
     public void nodeRemoved(Node node) {
-        myNodeClassifier.remove(node);
-        if (myHost != null) myHost.nodeRemoved(node);
+        nodeRemovedWithDescendants(node);
+        //validateUnlinked(node);
+        //myNodeClassifier.remove(node);
+        //if (myHost != null) myHost.nodeRemoved(node);
     }
 
     @Override
     public void nodeRemovedWithChildren(Node node) {
-        myNodeClassifier.add(node);
-        removeNodes(node.getChildren());
-        if (myHost != null) myHost.nodeRemovedWithChildren(node);
+        nodeRemovedWithDescendants(node);
+        //validateUnlinked(node);
+        //myNodeClassifier.add(node);
+        //removeNodes(node.getChildren());
+        //if (myHost != null) myHost.nodeRemovedWithChildren(node);
     }
 
     @Override
     public void nodeRemovedWithDescendants(Node node) {
+        validateUnlinked(node);
         myNodeClassifier.add(node);
         removeNodes(node.getDescendants());
         if (myHost != null) myHost.nodeRemovedWithDescendants(node);

@@ -76,19 +76,28 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
         allBlockParsersMap.removeKey(blockParser);
     }
 
+    private void validateLinked(Node node) {
+        if (node.getNext() == null && node.getParent() == null) {
+            throw new IllegalStateException("Added block " + node + " is not linked into the AST");
+        }
+    }
+    
     @Override
     public void blockAdded(Block node) {
+        validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
     }
 
     @Override
     public void blockAddedWithChildren(Block node) {
+        validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getChildren());
     }
 
     @Override
     public void blockAddedWithDescendants(Block node) {
+        validateLinked(node);
         allBlockParsersMap.putValueKey(node, null);
         addBlocks(node.getDescendants());
     }
@@ -101,19 +110,28 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
         }
     }
 
+    private void validateUnlinked(Node node) {
+        if (!(node.getNext() == null && node.getParent() == null)) {
+            throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
+        }
+    }
+    
     @Override
     public void blockRemoved(Block node) {
+        validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
     }
 
     @Override
     public void blockRemovedWithChildren(Block node) {
+        validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
         removeBlocks(node.getChildren());
     }
 
     @Override
     public void blockRemovedWithDescendants(Block node) {
+        validateUnlinked(node);
         allBlockParsersMap.removeValue(node);
         removeBlocks(node.getDescendants());
     }

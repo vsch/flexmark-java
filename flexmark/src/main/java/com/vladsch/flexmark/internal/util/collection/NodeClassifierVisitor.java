@@ -129,7 +129,9 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
     protected void visitChildren(Node parent) {
         if (!myClassificationDone) {
             // initial collection phase
-            myClassifyingNodeTracker.nodeAdded(parent);
+            if (!(parent instanceof Document)) {
+                myClassifyingNodeTracker.nodeAdded(parent);
+            }
         } else {
             // postProcessor modification update phase
         }

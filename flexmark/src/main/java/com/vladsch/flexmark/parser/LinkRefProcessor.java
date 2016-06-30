@@ -31,7 +31,7 @@ public interface LinkRefProcessor {
      * time for each nesting level. Last call for the actual match, all others to pre-match to prevent a non-nested element from being
      * created.
      *
-     * @param nodeChars text to match, including []
+     * @param nodeChars text to match, including [] or ![]
      * @return true if it is a match
      */
     boolean isMatch(BasedSequence nodeChars);
