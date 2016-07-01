@@ -1,9 +1,12 @@
 ![](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 =============================================================
 
-A rework of [commonmark-java] to generate AST which allows recreating the original source, full
-source position references for all elements in the source and easier JetBrains Open API PsiTree
-generation.
+flexmark-java is a fork of [commonmark-java] project, modified to generate an AST which reflects
+all the elements in the original source, full source position tracking for all elements in the
+AST and easier JetBrains Open API PsiTree generation.
+
+The API was changed to allow more granular control of the parsing process and optimized for
+parsing with a large number of installed extensions.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
 [pegdown] has a great feature set but its speed in general is not great and for pathological

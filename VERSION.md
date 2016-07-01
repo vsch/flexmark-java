@@ -9,6 +9,9 @@ Version History
 - Change document post processors are run after node post processors unless constrained by
   dependencies provided.
 
+- Add TOC extension as per pegdown. Need to finish renderer, add options and possibly other
+  syntax formats.
+
 0.3.0
 -----
 

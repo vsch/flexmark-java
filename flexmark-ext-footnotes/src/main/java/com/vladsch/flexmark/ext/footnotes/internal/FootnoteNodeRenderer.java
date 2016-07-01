@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -59,7 +60,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void render(Node node, RenderingPhase phase) {
+    public void render(Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {

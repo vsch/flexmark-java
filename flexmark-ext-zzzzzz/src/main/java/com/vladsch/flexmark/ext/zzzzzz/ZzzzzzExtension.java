@@ -41,7 +41,8 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         // zzzoptionszzz(NODE_RENDERER)
         // zzzoptionszzz(CUSTOM_PROPERTIES)
         // zzzoptionszzz(PARAGRAPH_PRE_PROCESSOR)
-        // zzzoptionszzz(POST_PROCESSOR)
+        // zzzoptionszzz(DOCUMENT_POST_PROCESSOR)
+        // zzzoptionszzz(NODE_POST_PROCESSOR)
         // zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
         // zzzoptionszzz(CUSTOM_NODE)
         // zzzoptionszzz(CUSTOM_BLOCK_NODE)
@@ -50,12 +51,12 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         parserBuilder.blockPreProcessorFactory(new ZzzzzzBlockPreProcessor.Factory());//zzzoptionszzz(REMOVE, BLOCK_PRE_PROCESSOR)
         parserBuilder.customDelimiterProcessor(new ZzzzzzDelimiterProcessor());//zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
         parserBuilder.linkRefProcessorFactory(new ZzzzzzLinkRefProcessor.Factory());//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
-        parserBuilder.postProcessorFactory(new ZzzzzzNodePostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
-        parserBuilder.postProcessorFactory(new ZzzzzzDocumentPostProcessor.Factory());//zzzoptionszzz(REMOVE, POST_PROCESSOR)
+        parserBuilder.postProcessorFactory(new ZzzzzzNodePostProcessor.Factory());//zzzoptionszzz(REMOVE, NODE_POST_PROCESSOR)
+        parserBuilder.postProcessorFactory(new ZzzzzzDocumentPostProcessor.Factory());//zzzoptionszzz(REMOVE, DOCUMENT_POST_PROCESSOR)
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER)
+        rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
     }
 }

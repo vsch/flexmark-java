@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Document;
 
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public interface PhasedNodeRenderer extends NodeRenderer {
     /**
      * Render the specified node.
      *
-     * @param node the node to render, will be an instance of one of {@link #getNodeTypes()}
+     * @param document the node to render, will be an instance of one of {@link #getNodeTypes()}
      */
-    void render(Node node, RenderingPhase phase);
+    void render(Document document, RenderingPhase phase);
 }

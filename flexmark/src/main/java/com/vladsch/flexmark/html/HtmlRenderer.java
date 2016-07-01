@@ -356,7 +356,7 @@ public class HtmlRenderer {
                             this.phase = phase;
                             if (phasedRenderer.getRenderingPhases().contains(phase)) {
                                 renderingNode = node;
-                                phasedRenderer.render(node, phase);
+                                phasedRenderer.render((Document) node, phase);
                                 renderingNode = null;
                             }
                         }
