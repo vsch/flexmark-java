@@ -280,7 +280,7 @@ public class HtmlRenderer {
 
     private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
         private final Document document;
-        private final Map<Class<? extends Node>, NodeRenderer> renderers;
+        private final Map<Class<?>, NodeRenderingHandler> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
@@ -305,9 +305,9 @@ public class HtmlRenderer {
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
-                for (Class<? extends Node> nodeType : nodeRenderer.getNodeTypes()) {
+                for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderers()) {
                     // Overwrite existing renderer
-                    renderers.put(nodeType, nodeRenderer);
+                    renderers.put(nodeType.getNodeType(), nodeType);
                 }
 
                 if (nodeRenderer instanceof PhasedNodeRenderer) {
@@ -384,11 +384,11 @@ public class HtmlRenderer {
                     this.phase = phase;
                     // here we render multiple phases
                     if (getRenderingPhase() == RenderingPhase.BODY) {
-                        NodeRenderer nodeRenderer = renderers.get(node.getClass());
+                        NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.doNotRenderLinksNesting = documentDoNotRenderLinksNesting;
                             subContext.renderingNode = node;
-                            nodeRenderer.render(subContext, subContext.htmlWriter, node);
+                            nodeRenderer.render(node, subContext, subContext.htmlWriter);
                             subContext.renderingNode = null;
                             subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
                         }
@@ -406,12 +406,12 @@ public class HtmlRenderer {
                     }
                 }
             } else {
-                NodeRenderer nodeRenderer = renderers.get(node.getClass());
+                NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;
                     int oldDoNotRenderLinksNesting = subContext.doNotRenderLinksNesting;
                     subContext.renderingNode = node;
-                    nodeRenderer.render(subContext, subContext.htmlWriter, node);
+                    nodeRenderer.render(node, subContext, subContext.htmlWriter);
                     subContext.renderingNode = oldNode;
                     subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
                 }

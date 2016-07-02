@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
@@ -15,6 +16,7 @@ import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -132,12 +134,13 @@ public class HtmlRendererTest {
             public NodeRenderer create(final DataHolder options) {
                 return new NodeRenderer() {
                     @Override
-                    public Set<Class<? extends Node>> getNodeTypes() {
-                        return Collections.<Class<? extends Node>>singleton(Link.class);
+                    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+                        return new HashSet<>(Collections.singletonList(
+                                new NodeRenderingHandler<>(Link.class, this::render)
+                        ));
                     }
 
-                    @Override
-                    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
+                    private void render(Link node, NodeRendererContext context, HtmlWriter html) {
                         context.getHtmlWriter().text("test");
                     }
                 };

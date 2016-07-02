@@ -1,6 +1,15 @@
 Version History
 ===============
 
+0.3.2
+-----
+
+- More API rework to make core rendering and extension rendering identical in performance and
+  ease of implementation. NodeRenderer interface changed to provide a map of node classes to
+  single node renderer. In the implementation it becomes a method reference, with the right node
+  class and no need to have a slew of `if (node instance of ...) do(...)`. Just implement a
+  `render(YourNode, NodeRendererContext, HtmlWriter)` and add an entry into the map.  
+
 0.3.1
 -----
 

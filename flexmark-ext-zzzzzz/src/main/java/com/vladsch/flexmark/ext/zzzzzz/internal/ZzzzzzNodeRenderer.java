@@ -3,13 +3,9 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
-import com.vladsch.flexmark.html.renderer.RenderingPhase;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,10 +25,10 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
         return new HashSet<>(Arrays.asList(
-                Zzzzzz.class,
-                ZzzzzzBlock.class
+                new NodeRenderingHandler<>(Zzzzzz.class, this::render),
+                new NodeRenderingHandler<>(ZzzzzzBlock.class, this::render)
         ));
     }
 
@@ -45,16 +41,7 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
     }//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)
     
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof Zzzzzz) {
-            renderZzzzzz(context, html, (Zzzzzz) node);
-        } else if (node instanceof ZzzzzzBlock) {
-            renderZzzzzzBlock(context, html, (ZzzzzzBlock) node);
-        }
-    }
-
-    private void renderZzzzzz(NodeRendererContext context, HtmlWriter html, Zzzzzz node) {
+    private void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) {
         if (options.zzzzzzOption1) html.attr("href", context.encodeUrl(options.zzzzzzOption2));
 
         html.withAttr().tag("a");
@@ -62,7 +49,7 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
         html.tag("/a");
     }
 
-    private void renderZzzzzzBlock(NodeRendererContext context, HtmlWriter html, ZzzzzzBlock node) {
+    private void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) {
         if (options.zzzzzzOption1) html.attr("href", context.encodeUrl(options.zzzzzzOption2));
 
         html.withAttr().tag("a");

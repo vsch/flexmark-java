@@ -4,14 +4,17 @@ import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
-import com.vladsch.flexmark.internal.util.AbstractBlockVisitor;
+import com.vladsch.flexmark.internal.util.HeadingCollectingVisitor;
 import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Heading;
-import com.vladsch.flexmark.node.Node;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TocNodeRenderer implements NodeRenderer {
     private final TocOptions options;
@@ -21,20 +24,13 @@ public class TocNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<>(Arrays.asList(
-                TocBlock.class
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderingHandler<>(TocBlock.class, this::render)
         ));
     }
 
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof TocBlock) {
-            renderTocBlock(context, html, (TocBlock) node);
-        }
-    }
-
-    private void renderTocBlock(NodeRendererContext context, HtmlWriter html, TocBlock node) {
+    private void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
         if (node.getLevel() < 1 || node.getLevel() > 6) {
             html.raw("<p>").raw(node.getChars().toString()).raw("</p>").line();
         } else {
@@ -92,7 +88,7 @@ public class TocNodeRenderer implements NodeRenderer {
                 headerText = out.getHtml();
                 isRaw = true;
             }
-            
+
             html.line().tag("li");
             String headerId = context.getNodeId(header);
             if (headerId == null || context.isDoNotRenderLinks()) {
@@ -112,29 +108,5 @@ public class TocNodeRenderer implements NodeRenderer {
             html.tag("/li").unIndent().tag("/ul");
         }
         html.line();
-    }
-
-    private static class HeadingCollectingVisitor extends AbstractBlockVisitor {
-        final private int level;
-        private ArrayList<Heading> headings;
-
-        public HeadingCollectingVisitor(int level) {
-            this.level = level;
-            this.headings = null;
-        }
-
-        public ArrayList<Heading> getHeadings() {
-            return headings;
-        }
-
-        @Override
-        public void visit(Heading node) {
-            if (node.getLevel() <= level) {
-                if (headings == null) {
-                    headings = new ArrayList<>();
-                }
-                headings.add(node);
-            }
-        }
     }
 }

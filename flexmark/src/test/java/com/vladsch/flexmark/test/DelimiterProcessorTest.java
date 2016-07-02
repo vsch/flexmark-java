@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
@@ -16,6 +17,7 @@ import com.vladsch.flexmark.spec.SpecExample;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
@@ -149,14 +151,15 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public Set<Class<? extends Node>> getNodeTypes() {
-            return Collections.<Class<? extends Node>>singleton(UpperCaseNode.class);
+        public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+            return new HashSet<>(Collections.singletonList(
+                    new NodeRenderingHandler<>(UpperCaseNode.class, this::render)
+            ));
         }
 
-        @Override
-        public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-            UpperCaseNode upperCaseNode = (UpperCaseNode) node;
-            for (Node child = upperCaseNode.getFirstChild(); child != null; child = child.getNext()) {
+
+        private void render(UpperCaseNode node, NodeRendererContext context, HtmlWriter html) {
+            for (Node child = node.getFirstChild(); child != null; child = child.getNext()) {
                 if (child instanceof Text) {
                     Text text = (Text) child;
                     text.setChars(text.getChars().toUpperCase(Locale.ENGLISH));

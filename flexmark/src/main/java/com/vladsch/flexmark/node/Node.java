@@ -8,7 +8,7 @@ import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeeking
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
-public abstract class Node<T extends Node> {
+public abstract class Node {
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
 
     private Node parent = null;

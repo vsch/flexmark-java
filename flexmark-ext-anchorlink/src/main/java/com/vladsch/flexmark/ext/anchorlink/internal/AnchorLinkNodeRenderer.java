@@ -4,8 +4,8 @@ import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -19,18 +19,13 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<>(Collections.singletonList(AnchorLink.class));
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderingHandler<>(AnchorLink.class, this::render)
+        ));
     }
 
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof AnchorLink) {
-            renderAnchorLinks(context, html, (AnchorLink) node);
-        }
-    }
-
-    private void renderAnchorLinks(NodeRendererContext context, HtmlWriter html, AnchorLink node) {
+    private void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             if (!options.noWrap) {
                 context.renderChildren(node);

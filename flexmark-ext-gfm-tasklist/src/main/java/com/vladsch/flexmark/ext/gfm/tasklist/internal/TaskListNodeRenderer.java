@@ -6,9 +6,9 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemMarker;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -32,23 +32,14 @@ public class TaskListNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<Class<? extends Node>>(Arrays.asList(
-                TaskListItem.class,
-                TaskListItemMarker.class
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(TaskListItem.class, this::render),
+                new NodeRenderingHandler<>(TaskListItemMarker.class, this::render)
         ));
     }
 
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof TaskListItem) {
-            render(context, html, (TaskListItem) node);
-        } else if (node instanceof TaskListItemMarker) {
-            render(context, html, (TaskListItemMarker) node);
-        }
-    }
-
-    private void render(NodeRendererContext context, HtmlWriter html, TaskListItem taskItem) {
+    private void render(TaskListItem taskItem, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(taskItem)) {
             html.withAttr().attr("class", itemClass).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(taskItem);
@@ -62,7 +53,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void render(NodeRendererContext context, HtmlWriter html, TaskListItemMarker taskListItemMarker) {
+    private void render(TaskListItemMarker taskListItemMarker, NodeRendererContext context, HtmlWriter html) {
         html.raw(taskListItemMarker.isItemDoneMarker() ? doneMarker : notDoneMarker);
     }
 }

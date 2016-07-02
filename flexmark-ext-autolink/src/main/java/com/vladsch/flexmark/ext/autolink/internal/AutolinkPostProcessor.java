@@ -29,7 +29,7 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
 
     @Override
     public void visit(Text text) {
-        if (!isVisiting(text, DoNotLinkify.class)) {
+        if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             processTextNode(text);
         }
     }

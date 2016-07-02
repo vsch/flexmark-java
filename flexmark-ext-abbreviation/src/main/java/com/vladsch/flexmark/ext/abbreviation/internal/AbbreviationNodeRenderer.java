@@ -5,8 +5,8 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -20,28 +20,19 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<Class<? extends Node>>(Arrays.asList(
-                Abbreviation.class,
-                AbbreviationBlock.class
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Arrays.asList(
+                new NodeRenderingHandler<>(Abbreviation.class, this::render),
+                new NodeRenderingHandler<>(AbbreviationBlock.class, this::render)
         ));
     }
 
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof Abbreviation) {
-            renderAbbreviation(context, html, (Abbreviation) node);
-        } else if (node instanceof AbbreviationBlock) {
-            renderAbbreviationBlock(context, html, (AbbreviationBlock) node);
-        }
+
+    private void render(AbbreviationBlock node, NodeRendererContext context, HtmlWriter html) {
 
     }
 
-    private void renderAbbreviationBlock(NodeRendererContext context, HtmlWriter html, AbbreviationBlock node) {
-
-    }
-
-    private void renderAbbreviation(NodeRendererContext context, HtmlWriter html, Abbreviation node) {
+    private void render(Abbreviation node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getChars().unescape();
         String abbreviation = node.getAbbreviation();
         String tag;

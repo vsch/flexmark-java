@@ -5,11 +5,11 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -28,29 +28,17 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
         return new HashSet<>(Arrays.asList(
-                Footnote.class,
-                FootnoteBlock.class
+                new NodeRenderingHandler<>(Footnote.class, this::render),
+                new NodeRenderingHandler<>(FootnoteBlock.class, this::render)
         ));
     }
+
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
         return new HashSet<>(Collections.singletonList(RenderingPhase.BODY_BOTTOM));
-    }
-
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof Footnote) {
-            renderFootnote(context, html, (Footnote) node);
-        } else if (node instanceof FootnoteBlock) {
-            renderFootnoteBlock(context, html, (FootnoteBlock) node);
-        }
-    }
-
-    private void renderFootnoteBlock(NodeRendererContext context, HtmlWriter html, FootnoteBlock node) {
-
     }
 
     @Override
@@ -79,7 +67,11 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         }
     }
 
-    private void renderFootnote(NodeRendererContext context, HtmlWriter html, Footnote node) {
+    private void render(FootnoteBlock node, NodeRendererContext context, HtmlWriter html) {
+
+    }
+
+    private void render(Footnote node, NodeRendererContext context, HtmlWriter html) {
         FootnoteBlock footnoteBlock = node.getFootnoteBlock();
         if (footnoteBlock == null) {
             //just text

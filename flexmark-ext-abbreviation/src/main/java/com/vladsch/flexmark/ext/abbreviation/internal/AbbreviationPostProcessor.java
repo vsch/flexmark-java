@@ -55,7 +55,7 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
 
     @Override
     public void visit(Text text) {
-        if (!isVisiting(text, DoNotLinkify.class)) {
+        if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             process(text);
         }
     }

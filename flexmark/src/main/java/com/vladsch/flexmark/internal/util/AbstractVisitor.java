@@ -9,47 +9,41 @@ import com.vladsch.flexmark.node.*;
  * call {@link #visitChildren}.
  */
 public class AbstractVisitor implements Visitor {
-
-    public boolean isVisiting(Node node, Class... classes) {
-        return node.isOrDescendantOfType(classes);
-    }
-
     // @formatter:off
-    @Override public void visit(AutoLink node) { visitChildren(node); } 
+    // blocks
     @Override public void visit(BlockQuote node) { visitChildren(node); } 
     @Override public void visit(BulletList node) { visitChildren(node); } 
-    @Override public void visit(Code node) { visitChildren(node); } 
+    @Override public void visit(BulletListItem node) { visitChildren(node); }
     @Override public void visit(CustomBlock node) { visitChildren(node); } 
     @Override public void visit(CustomNode node) { visitChildren(node); } 
     @Override public void visit(Document node) { visitChildren(node); } 
-    @Override public void visit(Emphasis node) { visitChildren(node); } 
     @Override public void visit(FencedCodeBlock node) { visitChildren(node); } 
-    @Override public void visit(HardLineBreak node) { visitChildren(node); } 
     @Override public void visit(Heading node) { visitChildren(node); } 
     @Override public void visit(HtmlBlock node) { visitChildren(node); } 
     @Override public void visit(HtmlCommentBlock node) { visitChildren(node); } 
+    @Override public void visit(IndentedCodeBlock node) { visitChildren(node); } 
+    @Override public void visit(OrderedList node) { visitChildren(node); } 
+    @Override public void visit(OrderedListItem node) { visitChildren(node); } 
+    @Override public void visit(Paragraph node) { visitChildren(node); } 
+    @Override public void visit(ThematicBreak node) { visitChildren(node); }
+    
+    // inlines
+    @Override public void visit(AutoLink node) { visitChildren(node); } 
+    @Override public void visit(Code node) { visitChildren(node); } 
+    @Override public void visit(Emphasis node) { visitChildren(node); } 
+    @Override public void visit(HardLineBreak node) { visitChildren(node); } 
     @Override public void visit(HtmlEntity node) { visitChildren(node); } 
     @Override public void visit(HtmlInline node) { visitChildren(node); } 
     @Override public void visit(HtmlInlineComment node) { visitChildren(node); } 
     @Override public void visit(Image node) { visitChildren(node); } 
     @Override public void visit(ImageRef node) { visitChildren(node); } 
-    @Override public void visit(IndentedCodeBlock node) { visitChildren(node); } 
     @Override public void visit(Link node) { visitChildren(node); } 
     @Override public void visit(LinkRef node) { visitChildren(node); }
-
-    @Override
-    public void visit(BulletListItem node) { visitChildren(node); }
-
-    @Override
-    public void visit(OrderedListItem node) { visitChildren(node); } 
     @Override public void visit(MailLink node) { visitChildren(node); } 
-    @Override public void visit(OrderedList node) { visitChildren(node); } 
-    @Override public void visit(Paragraph node) { visitChildren(node); } 
     @Override public void visit(Reference node) { visitChildren(node); } 
     @Override public void visit(SoftLineBreak node) { visitChildren(node); } 
     @Override public void visit(StrongEmphasis node) { visitChildren(node); } 
     @Override public void visit(Text node) { visitChildren(node); } 
-    @Override public void visit(ThematicBreak node) { visitChildren(node); }
     // @formatter:on
 
     /**

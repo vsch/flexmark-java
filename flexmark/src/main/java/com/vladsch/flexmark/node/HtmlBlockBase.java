@@ -10,24 +10,25 @@ import java.util.List;
  *
  * @see <a href="http://spec.commonmark.org/0.18/#html-blocks">CommonMark Spec</a>
  */
-public class HtmlCommentBlock extends HtmlBlockBase {
-    public HtmlCommentBlock() {
+public abstract class HtmlBlockBase extends Block {
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
     }
 
-    public HtmlCommentBlock(BasedSequence chars) {
+    public HtmlBlockBase() {
+    }
+
+    public HtmlBlockBase(BasedSequence chars) {
         super(chars);
     }
 
-    public HtmlCommentBlock(BasedSequence chars, List<BasedSequence> segments) {
+    public HtmlBlockBase(BasedSequence chars, List<BasedSequence> segments) {
         super(chars, segments);
     }
 
-    public HtmlCommentBlock(BlockContent blockContent) {
+    public HtmlBlockBase(BlockContent blockContent) {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

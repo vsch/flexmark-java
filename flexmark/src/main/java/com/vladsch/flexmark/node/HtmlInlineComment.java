@@ -7,7 +7,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
  *
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
-public class HtmlInlineComment extends HtmlInline {
+public class HtmlInlineComment extends HtmlInlineBase {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

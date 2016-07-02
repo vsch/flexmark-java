@@ -29,4 +29,5 @@ public class Abbreviation extends Text implements DoNotLinkify {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
 }

@@ -7,7 +7,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
  *
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
-public class HtmlInline extends HtmlInlineBase {
+public abstract class HtmlInlineBase extends Node {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -23,16 +23,10 @@ public class HtmlInline extends HtmlInlineBase {
         }
     }
     
-    public HtmlInline() {
+    public HtmlInlineBase() {
     }
 
-    public HtmlInline(BasedSequence chars) {
+    public HtmlInlineBase(BasedSequence chars) {
         super(chars);
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
-
 }

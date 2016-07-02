@@ -1139,7 +1139,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         BasedSequence m = match(HTML_TAG);
         if (m != null) {
             // separate HTML comment from herd
-            HtmlInline node;
+            HtmlInlineBase node;
             if (m.startsWith("<!--") && m.endsWith("-->")) {
                 node = new HtmlInlineComment(m);
             } else {

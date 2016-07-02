@@ -2,7 +2,7 @@ package com.vladsch.flexmark.internal.inline;
 
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.DelimitedNodeImpl;
+import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.Emphasis;
 import com.vladsch.flexmark.node.StrongEmphasis;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
@@ -43,7 +43,7 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
-        DelimitedNodeImpl emphasis = delimiterUse == 1
+        DelimitedNode emphasis = delimiterUse == 1
                 ? new Emphasis(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse))
                 : new StrongEmphasis(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
 

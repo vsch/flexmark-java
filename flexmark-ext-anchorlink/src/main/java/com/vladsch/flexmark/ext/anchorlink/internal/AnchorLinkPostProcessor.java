@@ -26,7 +26,7 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
 
     @Override
     public void visit(Heading node) {
-        if (!isVisiting(node, DoNotLinkify.class)) {
+        if (!node.isOrDescendantOfType(DoNotLinkify.class)) {
             processNode(node);
         }
     }

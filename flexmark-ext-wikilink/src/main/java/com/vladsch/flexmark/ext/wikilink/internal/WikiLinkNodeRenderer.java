@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,15 +23,18 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<Class<? extends Node>> getNodeTypes() {
-        return new HashSet<>(Collections.singletonList(WikiLink.class));
+    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderingHandler<>(WikiLink.class, this::render)
+        ));
     }
 
-    @Override
-    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
-        if (node instanceof WikiLink) {
-            renderWikiLink(context, html, (WikiLink) node);
-        }
+    private void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
+        String url = wikiLinkToUrl(node.getLink());
+        html.attr("href", context.encodeUrl(url));
+        html.withAttr().tag("a");
+        html.text(node.getText().isNotNull() ? node.getText().toString() : node.getLink().toString());
+        html.tag("/a");
     }
 
     private String wikiLinkToUrl(BasedSequence wikiLink) {
@@ -49,13 +52,5 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
 
         sb.append(options.linkFileExtension);
         return sb.toString();
-    }
-
-    private void renderWikiLink(NodeRendererContext context, HtmlWriter html, WikiLink node) {
-        String url = wikiLinkToUrl(node.getLink());
-        html.attr("href", context.encodeUrl(url));
-        html.withAttr().tag("a");
-        html.text(node.getText().isNotNull() ? node.getText().toString() : node.getLink().toString());
-        html.tag("/a");
     }
 }

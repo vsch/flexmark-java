@@ -3,10 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.HtmlBlock;
-import com.vladsch.flexmark.node.HtmlCommentBlock;
-import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.regex.Pattern;
@@ -62,7 +59,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             }
     };
 
-    private final HtmlBlock block;
+    private final HtmlBlockBase block;
     private final Pattern closingPattern;
 
     private boolean finished = false;
