@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal;
+package com.vladsch.flexmark.internal.util;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Node;

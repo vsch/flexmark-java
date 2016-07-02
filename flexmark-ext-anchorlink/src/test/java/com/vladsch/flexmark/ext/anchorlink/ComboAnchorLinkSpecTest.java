@@ -17,6 +17,8 @@ public class ComboAnchorLinkSpecTest extends ComboSpecTestCase {
             .set(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS, "anchor")
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE, true)
+            .set(HtmlRenderer.RENDER_HEADER_ID, false)
+            .set(HtmlRenderer.GENERATE_HEADER_ID, true)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(AnchorLinkExtension.create()));
 

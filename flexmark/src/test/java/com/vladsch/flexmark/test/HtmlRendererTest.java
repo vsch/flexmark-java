@@ -2,9 +2,11 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
 import com.vladsch.flexmark.node.Link;
@@ -127,7 +129,7 @@ public class HtmlRendererTest {
     public void overrideNodeRender() {
         NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(final NodeRendererContext context) {
+            public NodeRenderer create(final DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<Class<? extends Node>> getNodeTypes() {
@@ -135,7 +137,7 @@ public class HtmlRendererTest {
                     }
 
                     @Override
-                    public void render(Node node) {
+                    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
                         context.getHtmlWriter().text("test");
                     }
                 };

@@ -1,4 +1,6 @@
-package com.vladsch.flexmark.node;
+package com.vladsch.flexmark.internal.util;
+
+import com.vladsch.flexmark.node.*;
 
 /**
  * Abstract visitor that visits all children by default.

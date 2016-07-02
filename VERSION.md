@@ -9,8 +9,45 @@ Version History
 - Change document post processors are run after node post processors unless constrained by
   dependencies provided.
 
-- Add TOC extension as per pegdown. Need to finish renderer, add options and possibly other
-  syntax formats.
+- Add AbstractBlockVisitor, that does not visit children of `Paragraph` or any of the inline
+  nodes to allow efficient block collection while ignoring non-blocks.
+
+- Add do not render links condition to `NodeRendererContext` to allow disabling of link
+  rendering in children.
+
+- Add `NodeRendererContext` and `HtmlWriter` arguments to `NodeRenderer.render()` method so that
+  node renderers are not linked to a specific context or html writer, only document.
+
+- Add `RenderingVisitor` class which handles passing extra rendering parameters to overloaded
+  node methods while using the `Visitor.visit()` plumbing.   
+
+- Add `NodeRendererContext.getSubContext()` allowing a renderer to get html rendered to be
+  processed or inserted as needed. The sub-context has its own html writer and do not render
+  links state.  
+
+- Add TOC extension as per pegdown, with options to not claim the `[TOC level=#]` line when # is
+  not valid: 0, 1, 2. Another option to only use header text for rendering the links, default
+  will use inline emphasis and other non-link generated html.
+
+- Change header id generation is now part of the core that can be turned on and used by the
+  extensions via `NodeRenderingContext.getNodeId(Node)`, can be null if no id was generated for
+  the node in question.
+
+- Add `HtmlIdGenerator` and `HtmlIdGeneratorFactory` to allow extending/replacing the header id
+  generator in the core. Default is not to add id's to headers. With appropriate
+  `HtmlRenderer.Builder.htmlIdGeneratorFactory()` method to register a custom generator. If id
+  generation is enabled but no custom generator is registered then GitHub compatible rules are
+  used to generate header ids.
+
+- Add `HtmlRenderer.RENDER_HEADER_ID` option, default false. When enabled will render a header
+  id attribute for headers using the configured `HtmlIdGenerator`
+
+- Add `HtmlRenderer.GENERATE_HEADER_ID` option, default false. When enabled will generate a
+  header id attribute using the configured `HtmlIdGenerator` but not render it. Use this when an
+  extension needs a header id, like AnchorLinksExtension and TocExtension. 
+
+- Add `HtmlRenderer.DO_NOT_RENDER_LINKS` option, default false. When enabled will disable link
+  rendering in the document. This will cause sub-contexts to also have link rendering disabled.
 
 0.3.0
 -----

@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Node;
 
@@ -15,14 +16,10 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     private static String fromChars = " +/<>";
     private static String toChars = "-----";
 
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
     private final WikiLinkOptions options;
 
-    public WikiLinkNodeRenderer(NodeRendererContext context) {
-        options = new WikiLinkOptions(context.getOptions());
-        this.context = context;
-        this.html = context.getHtmlWriter();
+    public WikiLinkNodeRenderer(DataHolder options) {
+        this.options = new WikiLinkOptions(options);
     }
 
     @Override
@@ -31,9 +28,9 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         if (node instanceof WikiLink) {
-            renderWikiLink((WikiLink) node);
+            renderWikiLink(context, html, (WikiLink) node);
         }
     }
 
@@ -54,7 +51,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
         return sb.toString();
     }
 
-    private void renderWikiLink(WikiLink node) {
+    private void renderWikiLink(NodeRendererContext context, HtmlWriter html, WikiLink node) {
         String url = wikiLinkToUrl(node.getLink());
         html.attr("href", context.encodeUrl(url));
         html.withAttr().tag("a");

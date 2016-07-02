@@ -13,11 +13,9 @@ import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 import static com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE;
 
 public class AnchorLinkNodePostProcessor extends NodePostProcessor {
-    final private GitHubHeaderIdGenerator generator;
     final private AnchorLinkOptions options;
 
     public AnchorLinkNodePostProcessor(DataHolder options) {
-        this.generator = new GitHubHeaderIdGenerator();
         this.options = new AnchorLinkOptions(options);
     }
 
@@ -29,8 +27,7 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
             }
             Heading heading = (Heading) node;
             if (heading.getText().isNotNull()) {
-                String headerId = generator.generate(heading.getText());
-                Node anchor = new AnchorLink(headerId);
+                Node anchor = new AnchorLink();
 
                 if (options.noWrap) {
                     if (heading.getFirstChild() == null) {

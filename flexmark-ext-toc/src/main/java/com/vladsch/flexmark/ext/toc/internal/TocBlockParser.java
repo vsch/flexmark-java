@@ -10,6 +10,8 @@ import com.vladsch.flexmark.parser.block.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.parser.block.BlockStart.none;
+
 public class TocBlockParser extends AbstractBlockParser {
     private static Pattern TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+(level=\\d))?\\]\\s*$");
     private static Pattern TOC_BLOCK_CONTINUE = Pattern.compile("");
@@ -83,13 +85,22 @@ public class TocBlockParser extends AbstractBlockParser {
                     levelChars = trySequence.subSequence(levelStart, levelEnd);
                 }
 
+                if (levelChars != null && !options.parseInvalidLevel) {
+                    try {
+                        int level = Integer.valueOf(levelChars.toString());
+                        if (level < 1 || level > 6) return BlockStart.none();
+                    } catch (NumberFormatException ignored) {
+                        return BlockStart.none();
+                    }
+                }
+                
                 TocBlockParser tocBlockParser = new TocBlockParser(state.getProperties(), tocChars, levelChars);
                 return BlockStart.of(tocBlockParser)
                         .atIndex(state.getIndex())
                         //.replaceActiveBlockParser()
                         ;
             }
-            return BlockStart.none();
+            return none();
         }
     }
 }

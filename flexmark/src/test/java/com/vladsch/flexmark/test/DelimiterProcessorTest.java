@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.*;
@@ -137,17 +139,13 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
 
         @Override
-        public NodeRenderer create(NodeRendererContext context) {
-            return new UpperCaseNodeRenderer(context);
+        public NodeRenderer create(DataHolder options) {
+            return new UpperCaseNodeRenderer(options);
         }
     }
 
     private static class UpperCaseNodeRenderer implements NodeRenderer {
-
-        private final NodeRendererContext context;
-
-        private UpperCaseNodeRenderer(NodeRendererContext context) {
-            this.context = context;
+        private UpperCaseNodeRenderer(DataHolder options) {
         }
 
         @Override
@@ -156,7 +154,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void render(Node node) {
+        public void render(NodeRendererContext context, HtmlWriter html, Node node) {
             UpperCaseNode upperCaseNode = (UpperCaseNode) node;
             for (Node child = upperCaseNode.getFirstChild(); child != null; child = child.getNext()) {
                 if (child instanceof Text) {

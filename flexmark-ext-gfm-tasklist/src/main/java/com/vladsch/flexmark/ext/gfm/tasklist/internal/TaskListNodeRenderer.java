@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TaskListNodeRenderer implements NodeRenderer {
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
     private final String doneMarker;
     private final String notDoneMarker;
     private final String itemClass;
@@ -24,10 +22,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
     private final String paragraphClass;
     private final ListOptions listOptions;
 
-    public TaskListNodeRenderer(NodeRendererContext context) {
-        this.context = context;
-        this.html = context.getHtmlWriter();
-        DataHolder options = context.getOptions();
+    public TaskListNodeRenderer(DataHolder options) {
         this.doneMarker = options.get(TaskListExtension.ITEM_DONE_MARKER);
         this.notDoneMarker = options.get(TaskListExtension.ITEM_NOT_DONE_MARKER);
         this.itemClass = options.get(TaskListExtension.ITEM_CLASS);
@@ -45,15 +40,15 @@ public class TaskListNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         if (node instanceof TaskListItem) {
-            render((TaskListItem) node);
+            render(context, html, (TaskListItem) node);
         } else if (node instanceof TaskListItemMarker) {
-            render((TaskListItemMarker) node);
+            render(context, html, (TaskListItemMarker) node);
         }
     }
 
-    private void render(TaskListItem taskItem) {
+    private void render(NodeRendererContext context, HtmlWriter html, TaskListItem taskItem) {
         if (listOptions.isTightListItem(taskItem)) {
             html.withAttr().attr("class", itemClass).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(taskItem);
@@ -67,7 +62,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void render(TaskListItemMarker taskListItemMarker) {
+    private void render(NodeRendererContext context, HtmlWriter html, TaskListItemMarker taskListItemMarker) {
         html.raw(taskListItemMarker.isItemDoneMarker() ? doneMarker : notDoneMarker);
     }
 }

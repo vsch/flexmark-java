@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Set;
@@ -17,7 +18,9 @@ public interface NodeRenderer {
     /**
      * Render the specified node.
      *
+     * @param context
+     * @param html
      * @param node the node to render, will be an instance of one of {@link #getNodeTypes()}
      */
-    void render(Node node);
+    void render(NodeRendererContext context, HtmlWriter html, Node node);
 }

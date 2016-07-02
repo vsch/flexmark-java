@@ -8,7 +8,7 @@ import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeeking
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
-public abstract class Node {
+public abstract class Node<T extends Node> {
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
 
     private Node parent = null;
@@ -25,20 +25,26 @@ public abstract class Node {
         this.chars = chars;
     }
 
-    public static boolean isNodeOfType(Node node, Class... classes) {
+    public static int getNodeOfTypeIndex(Node node, Class... classes) {
+        int i = 0;
         for (Class nodeType : classes) {
-            if (nodeType.isInstance(node)) return true;
+            if (nodeType.isInstance(node)) return i;
+            i++;
         }
-        return false;
+        return -1;
     }
 
     public boolean isOrDescendantOfType(Class... classes) {
         Node node = this;
         while (node != null) {
-            if (Node.isNodeOfType(node, classes)) return true;
+            if (node.getNodeOfTypeIndex(classes) != -1) return true;
             node = node.getParent();
         }
         return false;
+    }
+
+    public int getNodeOfTypeIndex(Class... classes) {
+        return Node.getNodeOfTypeIndex(this, classes);
     }
 
     public ReversiblePeekingIterable<Node> getChildren() {

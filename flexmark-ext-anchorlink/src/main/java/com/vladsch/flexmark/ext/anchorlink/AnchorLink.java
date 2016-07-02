@@ -8,14 +8,7 @@ import com.vladsch.flexmark.node.Visitor;
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class AnchorLink extends CustomNode {
-    private final String headerId;
-
-    public String getHeaderId() {
-        return headerId;
-    }
-
-    public AnchorLink(String headerId) {
-        this.headerId = headerId;
+    public AnchorLink() {
     }
 
     @Override
@@ -25,7 +18,6 @@ public class AnchorLink extends CustomNode {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        out.append(" headerId: ").append(headerId).append(" ");
     }
 
     @Override

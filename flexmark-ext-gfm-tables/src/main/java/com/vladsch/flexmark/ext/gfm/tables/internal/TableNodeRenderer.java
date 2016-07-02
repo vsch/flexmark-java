@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gfm.tables.*;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -12,12 +13,7 @@ import java.util.Set;
 
 public class TableNodeRenderer implements NodeRenderer {
 
-    private final HtmlWriter html;
-    private final NodeRendererContext context;
-
-    public TableNodeRenderer(NodeRendererContext context) {
-        this.html = context.getHtmlWriter();
-        this.context = context;
+    public TableNodeRenderer(DataHolder options) {
     }
 
     @Override
@@ -33,51 +29,51 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         if (node instanceof TableBlock) {
-            renderBlock((TableBlock) node);
+            renderBlock(context, html, (TableBlock) node);
         } else if (node instanceof TableHead) {
-            renderHead((TableHead) node);
+            renderHead(context, html, (TableHead) node);
         } else if (node instanceof TableSeparator) {
-            renderSeparator((TableSeparator) node);
+            renderSeparator(context, html, (TableSeparator) node);
         } else if (node instanceof TableBody) {
-            renderBody((TableBody) node);
+            renderBody(context, html, (TableBody) node);
         } else if (node instanceof TableRow) {
-            renderRow((TableRow) node);
+            renderRow(context, html, (TableRow) node);
         } else if (node instanceof TableCell) {
-            renderCell((TableCell) node);
+            renderCell(context, html, (TableCell) node);
         }
     }
 
-    private void renderBlock(TableBlock tableBlock) {
+    private void renderBlock(NodeRendererContext context, HtmlWriter html, TableBlock tableBlock) {
         html.withAttr().tagIndent("table", () -> {
             context.renderChildren(tableBlock);
         });
     }
 
-    private void renderHead(TableHead tableHead) {
+    private void renderHead(NodeRendererContext context, HtmlWriter html, TableHead tableHead) {
         html.withAttr().withCondLine().tagIndent("thead", () -> {
             context.renderChildren(tableHead);
         });
     }
 
-    private void renderSeparator(TableSeparator tableSeparator) {
+    private void renderSeparator(NodeRendererContext context, HtmlWriter html, TableSeparator tableSeparator) {
 
     }
 
-    private void renderBody(TableBody tableBody) {
+    private void renderBody(NodeRendererContext context, HtmlWriter html, TableBody tableBody) {
         html.withAttr().withCondLine().tagIndent("tbody", () -> {
             context.renderChildren(tableBody);
         });
     }
 
-    private void renderRow(TableRow tableRow) {
+    private void renderRow(NodeRendererContext context, HtmlWriter html, TableRow tableRow) {
         html.withAttr().tagLine("tr", () -> {
             context.renderChildren(tableRow);
         });
     }
 
-    private void renderCell(TableCell tableCell) {
+    private void renderCell(NodeRendererContext context, HtmlWriter html, TableCell tableCell) {
         String tag = tableCell.isHeader() ? "th" : "td";
         if (tableCell.getAlignment() != null) {
             html.attr("align", getAlignValue(tableCell.getAlignment()));

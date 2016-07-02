@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.node.*;
 
 class AstVisitor extends AbstractVisitor {

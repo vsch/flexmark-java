@@ -21,7 +21,7 @@ public class HtmlWriter {
     private String indentPrefix = "";
     private LinkedHashMap<String, String> currentAttributes;
     private boolean useAttributes = false;
-    private int appendCount = 0;
+    //private int appendCount = 0;
     private boolean delayedIndent = false;
     private boolean delayedEOL = false;
     private boolean indentIndentingChildren = false;
@@ -29,6 +29,15 @@ public class HtmlWriter {
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
+    }
+    
+    public HtmlWriter(HtmlWriter other, Appendable out, boolean inheritIndent) {
+        this(out, other.indentSize);
+        
+        if (inheritIndent) {
+            indent = other.indent;
+            indentPrefix = other.indentPrefix;
+        }
     }
 
     public HtmlWriter(Appendable out, int indentSize) {
@@ -228,7 +237,7 @@ public class HtmlWriter {
 
     protected void append(String s) {
         if (s.length() == 0) return;
-        appendCount++;
+        //appendCount++;
 
         if (delayedEOL) {
             delayedEOL = false;

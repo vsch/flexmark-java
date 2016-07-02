@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
@@ -11,12 +12,7 @@ import java.util.Set;
 
 public class StrikethroughNodeRenderer implements NodeRenderer {
 
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
-
-    public StrikethroughNodeRenderer(NodeRendererContext context) {
-        this.context = context;
-        this.html = context.getHtmlWriter();
+    public StrikethroughNodeRenderer(DataHolder options) {
     }
 
     @Override
@@ -25,7 +21,7 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         html.withAttr().tag("del");
         context.renderChildren(node);
         html.tag("/del");

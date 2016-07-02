@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.node.AbstractVisitor;
+import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.Parser;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.internal.util.NodeTracker;
-import com.vladsch.flexmark.node.AbstractVisitor;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 

@@ -15,12 +15,14 @@ public class ComboTocSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/ext_toc_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(TocExtension.create()));
+            .set(HtmlRenderer.RENDER_HEADER_ID, true)
+            .set(TocExtension.PARSE_INVALID_LEVEL, true)
+            .set(Parser.EXTENSIONS, Collections.singletonList(TocExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        //optionsMap.put("option1", new MutableDataSet().set(TocExtension.TOC_OPTION1, true));
+        optionsMap.put("only-valid", new MutableDataSet().set(TocExtension.PARSE_INVALID_LEVEL, false));
+        optionsMap.put("text-only", new MutableDataSet().set(TocExtension.HEADER_TEXT_ONLY, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

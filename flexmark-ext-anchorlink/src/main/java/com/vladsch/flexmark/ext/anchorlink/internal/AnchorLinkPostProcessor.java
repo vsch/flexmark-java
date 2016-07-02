@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
+import com.vladsch.flexmark.html.renderer.GitHubHeaderIdGenerator;
 import com.vladsch.flexmark.node.DoNotLinkify;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Heading;
@@ -32,8 +33,7 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
 
     private void processNode(Heading node) {
         if (node.getText().isNotNull()) {
-            String headerId = generator.generate(node.getText());
-            Node anchor = new AnchorLink(headerId);
+            Node anchor = new AnchorLink();
 
             if (options.noWrap) {
                 if (node.getFirstChild() == null) {

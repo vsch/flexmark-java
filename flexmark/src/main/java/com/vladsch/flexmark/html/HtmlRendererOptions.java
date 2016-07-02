@@ -14,6 +14,9 @@ public class HtmlRendererOptions {
     public final boolean suppressHtmlCommentBlocks;
     public final boolean suppressInlineHtml;
     public final boolean suppressInlineHtmlComments;
+    public final boolean doNotRenderLinksInDocument;
+    public final boolean renderHeaderId;
+    public final boolean generateHeaderIds;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = options.get(HtmlRenderer.SOFT_BREAK);
@@ -27,5 +30,8 @@ public class HtmlRendererOptions {
         suppressHtmlCommentBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS);
         suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
         suppressInlineHtmlComments = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENT);
+        doNotRenderLinksInDocument = options.get(HtmlRenderer.DO_NOT_RENDER_LINKS);
+        renderHeaderId = options.get(HtmlRenderer.RENDER_HEADER_ID);
+        generateHeaderIds = options.get(HtmlRenderer.GENERATE_HEADER_ID);
     }
 }

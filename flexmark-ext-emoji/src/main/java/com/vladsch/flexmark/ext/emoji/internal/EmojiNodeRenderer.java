@@ -5,22 +5,19 @@ import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
 import java.util.Set;
 
 public class EmojiNodeRenderer implements NodeRenderer {
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
     private final String rootImagePath;
     private final boolean useImageURL;
 
-    public EmojiNodeRenderer(NodeRendererContext context) {
-        this.context = context;
-        this.html = context.getHtmlWriter();
-        this.rootImagePath = context.getOptions().get(EmojiExtension.ROOT_IMAGE_PATH);
-        this.useImageURL = context.getOptions().get(EmojiExtension.USE_IMAGE_URLS);
+    public EmojiNodeRenderer(DataHolder options) {
+        this.rootImagePath = options.get(EmojiExtension.ROOT_IMAGE_PATH);
+        this.useImageURL = options.get(EmojiExtension.USE_IMAGE_URLS);
     }
 
     @Override
@@ -29,7 +26,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         Emoji emoji = (Emoji) node;
         EmojiCheatSheet.EmojiShortcut shortcut = EmojiCheatSheet.shortCutMap.get(emoji.getText().toString());
         if (shortcut == null) {

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.node;
 
+import com.vladsch.flexmark.internal.util.AbstractVisitor;
+
 /**
  * Node visitor.
  * <p>

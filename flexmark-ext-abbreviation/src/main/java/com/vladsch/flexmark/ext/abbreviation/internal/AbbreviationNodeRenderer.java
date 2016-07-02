@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Arrays;
@@ -12,15 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AbbreviationNodeRenderer implements NodeRenderer {
-    private final NodeRendererContext context;
-    private final HtmlWriter html;
     private final AbbreviationOptions options;
 
-    public AbbreviationNodeRenderer(NodeRendererContext context) {
-        options = new AbbreviationOptions(context.getOptions());
-        
-        this.context = context;
-        this.html = context.getHtmlWriter();
+    public AbbreviationNodeRenderer(DataHolder options) {
+        this.options = new AbbreviationOptions(options);
     }
 
     @Override
@@ -32,20 +28,20 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         if (node instanceof Abbreviation) {
-            renderAbbreviation((Abbreviation) node);
+            renderAbbreviation(context, html, (Abbreviation) node);
         } else if (node instanceof AbbreviationBlock) {
-            renderAbbreviationBlock((AbbreviationBlock) node);
+            renderAbbreviationBlock(context, html, (AbbreviationBlock) node);
         }
 
     }
 
-    private void renderAbbreviationBlock(AbbreviationBlock node) {
+    private void renderAbbreviationBlock(NodeRendererContext context, HtmlWriter html, AbbreviationBlock node) {
 
     }
 
-    private void renderAbbreviation(Abbreviation node) {
+    private void renderAbbreviation(NodeRendererContext context, HtmlWriter html, Abbreviation node) {
         String text = node.getChars().unescape();
         String abbreviation = node.getAbbreviation();
         String tag;

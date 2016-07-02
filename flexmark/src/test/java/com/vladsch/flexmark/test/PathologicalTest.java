@@ -91,7 +91,7 @@ public class PathologicalTest extends CoreRenderingTestCase {
     @Test
     public void nestedBlockQuotes() {
         // this is limited by the stack size because visitor is recursive
-        x = 800;
+        x = 500;
         assertRendering(
                 repeat("> ", x) + "a\n",
                 repeat("<blockquote>\n", x) + "<p>a</p>\n" +

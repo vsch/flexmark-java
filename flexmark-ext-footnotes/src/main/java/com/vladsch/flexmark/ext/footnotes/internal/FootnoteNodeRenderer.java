@@ -18,19 +18,13 @@ import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
-    final private NodeRendererContext context;
-    final private HtmlWriter html;
     final private FootnoteRepository footnoteRepository;
     private final FootnoteOptions options;
 
-    public FootnoteNodeRenderer(NodeRendererContext context) {
-        DataHolder options = context.getOptions();
-        
-        this.context = context;
-        this.html = context.getHtmlWriter();
+    public FootnoteNodeRenderer(DataHolder options) {
+        this.options = new FootnoteOptions(options);
         this.footnoteRepository = options.get(FootnoteExtension.FOOTNOTES);
         this.footnoteRepository.resolveFootnoteOrdinals();
-        this.options = new FootnoteOptions(context.getOptions());
     }
 
     @Override
@@ -47,20 +41,20 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public void render(Node node) {
+    public void render(NodeRendererContext context, HtmlWriter html, Node node) {
         if (node instanceof Footnote) {
-            renderFootnote((Footnote) node);
+            renderFootnote(context, html, (Footnote) node);
         } else if (node instanceof FootnoteBlock) {
-            renderFootnoteBlock((FootnoteBlock) node);
+            renderFootnoteBlock(context, html, (FootnoteBlock) node);
         }
     }
 
-    private void renderFootnoteBlock(FootnoteBlock node) {
+    private void renderFootnoteBlock(NodeRendererContext context, HtmlWriter html, FootnoteBlock node) {
 
     }
 
     @Override
-    public void render(Document document, RenderingPhase phase) {
+    public void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase) {
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
@@ -85,7 +79,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         }
     }
 
-    private void renderFootnote(Footnote node) {
+    private void renderFootnote(NodeRendererContext context, HtmlWriter html, Footnote node) {
         FootnoteBlock footnoteBlock = node.getFootnoteBlock();
         if (footnoteBlock == null) {
             //just text
