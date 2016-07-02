@@ -9,5 +9,5 @@ public interface NodeRenderer {
     /**
      * @return the mapping of nodes this renderer handles to rendering function
      */
-    Set<NodeRenderingHandler<?>> getNodeRenderers();
+    Set<NodeRenderHandler<?>> getNodeRenderers();
 }

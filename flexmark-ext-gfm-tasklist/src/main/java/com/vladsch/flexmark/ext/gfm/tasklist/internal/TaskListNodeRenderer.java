@@ -4,9 +4,9 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemMarker;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
@@ -32,10 +32,10 @@ public class TaskListNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderHandler<?>> getNodeRenderers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(TaskListItem.class, this::render),
-                new NodeRenderingHandler<>(TaskListItemMarker.class, this::render)
+                new NodeRenderHandler<>(TaskListItem.class, this::render),
+                new NodeRenderHandler<>(TaskListItemMarker.class, this::render)
         ));
     }
 

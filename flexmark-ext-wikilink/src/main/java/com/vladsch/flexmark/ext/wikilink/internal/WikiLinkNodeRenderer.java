@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
@@ -23,9 +23,9 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderHandler<?>> getNodeRenderers() {
         return new HashSet<>(Collections.singletonList(
-                new NodeRenderingHandler<>(WikiLink.class, this::render)
+                new NodeRenderHandler<>(WikiLink.class, this::render)
         ));
     }
 

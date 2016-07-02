@@ -16,10 +16,13 @@ public interface AttributeProvider {
      * <p>
      * The attribute key and values will be escaped (preserving character entities), so don't escape them here,
      * otherwise they will be double-escaped.
-     *  @param node the node to set attributes for
-     * @param tag
+     * 
+     * Also used to get the id attribute for the node. Specifically for heading nodes. When the tag parameter 
+     * is null only need to check and provide an id attribute.
+     *
+     * @param node       the node to set attributes for
+     * @param tag        attributes for the specific tag being generated for the node, will be null when requesting id attribute for the node.
      * @param attributes the attributes, with any default attributes already set in the map
      */
     void setAttributes(Node node, String tag, Map<String, String> attributes);
-
 }

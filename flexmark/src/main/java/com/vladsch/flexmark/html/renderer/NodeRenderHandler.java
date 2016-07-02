@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.SingleNodeRenderer;
 import com.vladsch.flexmark.node.Node;
 
-public class NodeRenderingHandler<N extends Node> implements SingleNodeRenderer<N> {
+public class NodeRenderHandler<N extends Node> implements CustomNodeRenderer<N> {
     final Class<? extends N> myClass;
-    final SingleNodeRenderer<N> myRender;
+    final CustomNodeRenderer<N> myRender;
 
-    public NodeRenderingHandler(Class<? extends N> aClass, SingleNodeRenderer<N> render) {
+    public NodeRenderHandler(Class<? extends N> aClass, CustomNodeRenderer<N> render) {
         myClass = aClass;
         myRender = render;
     }
@@ -17,7 +17,7 @@ public class NodeRenderingHandler<N extends Node> implements SingleNodeRenderer<
         return myClass;
     }
 
-    public SingleNodeRenderer<N> getNodeRenderer() {
+    public CustomNodeRenderer<N> getNodeRenderer() {
         return myRender;
     }
 
@@ -31,7 +31,7 @@ public class NodeRenderingHandler<N extends Node> implements SingleNodeRenderer<
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NodeRenderingHandler<?> entry = (NodeRenderingHandler<?>) o;
+        NodeRenderHandler<?> entry = (NodeRenderHandler<?>) o;
 
         if (!myClass.equals(entry.myClass)) return false;
         return myRender.equals(entry.myRender);

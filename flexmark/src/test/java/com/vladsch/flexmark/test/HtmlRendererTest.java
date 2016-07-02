@@ -3,10 +3,10 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
@@ -134,9 +134,9 @@ public class HtmlRendererTest {
             public NodeRenderer create(final DataHolder options) {
                 return new NodeRenderer() {
                     @Override
-                    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+                    public Set<NodeRenderHandler<?>> getNodeRenderers() {
                         return new HashSet<>(Collections.singletonList(
-                                new NodeRenderingHandler<>(Link.class, this::render)
+                                new NodeRenderHandler<>(Link.class, this::render)
                         ));
                     }
 

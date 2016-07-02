@@ -5,10 +5,21 @@ Version History
 -----
 
 - More API rework to make core rendering and extension rendering identical in performance and
-  ease of implementation. NodeRenderer interface changed to provide a map of node classes to
-  single node renderer. In the implementation it becomes a method reference, with the right node
-  class and no need to have a slew of `if (node instance of ...) do(...)`. Just implement a
-  `render(YourNode, NodeRendererContext, HtmlWriter)` and add an entry into the map.  
+  ease of implementation. `NodeRenderer` interface changed. Now it provides a map of node
+  classes to `NodeRenderingHandler` instance. In the implementation it becomes a new instance
+  creation with class and lambda method reference. The method already has the right node class
+  eliminating the need to have a slew of `if (node instance of ...) do((cast)...)`. Just
+  implement a `render(YourNodeType, NodeRendererContext, HtmlWriter)` and add an entry into the
+  map.  
+
+- Add `AbstractCustomVisitor` constructor takes a collection or vararg of `NodeVisitingHandler`
+  instances and uses these to map visitation of `CustomNode` and `CustomBlock` to specific
+  classes of nodes and their corresponding visit handlers, like custom node rendering allows to
+  create custom node class specific `visit()` methods. Similar to `AbstractVisitor` any node
+  specific methods not overridden will `visitChildren()` of that node. 
+
+- Add `AbstractCustomBlockVisitor` similar to `AbstractCustomVisitor` but will only visit
+  children of block elements except `Paragraph`.
 
 0.3.1
 -----
@@ -46,7 +57,8 @@ Version History
   generator in the core. Default is not to add id's to headers. With appropriate
   `HtmlRenderer.Builder.htmlIdGeneratorFactory()` method to register a custom generator. If id
   generation is enabled but no custom generator is registered then GitHub compatible rules are
-  used to generate header ids.
+  used to generate header ids. These can be overridden by `AttributeProvider` by changing or
+  removing the `id` from the map.
 
 - Add `HtmlRenderer.RENDER_HEADER_ID` option, default false. When enabled will render a header
   id attribute for headers using the configured `HtmlIdGenerator`
@@ -86,8 +98,7 @@ Version History
   that should not process text nodes that are part of links can just add `DoNotLinkify.class` to
   the exclusion list.   
 
-- Add `PostProcessorManager` to handle dependency resolution for document post processors and
-  node post processors.   
+- Add `` to handle dependency resolution for document post processors and node post processors.   
 
 - Add `NodePostProcessor` to support more efficient text node post processing than each post
   processor traversing to post process text nodes instead of each extension traversing the full
@@ -140,7 +151,7 @@ Version History
 0.2.5
 -----
 
-- Change built in ignore test option to `IGNORE`.
+- Change built in ignore test option to `IGNORE`. `Parser.THEMATIC_BREAK_RELAXED_START.`
 
 - Change spec files to `.md` extension so that Markdown Navigator could be used to edit it to
   add completions of options, annotations of options and option declarations, structure view and

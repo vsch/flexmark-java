@@ -15,7 +15,6 @@ public class AbstractVisitor implements Visitor {
     @Override public void visit(BulletList node) { visitChildren(node); } 
     @Override public void visit(BulletListItem node) { visitChildren(node); }
     @Override public void visit(CustomBlock node) { visitChildren(node); } 
-    @Override public void visit(CustomNode node) { visitChildren(node); } 
     @Override public void visit(Document node) { visitChildren(node); } 
     @Override public void visit(FencedCodeBlock node) { visitChildren(node); } 
     @Override public void visit(Heading node) { visitChildren(node); } 
@@ -30,6 +29,7 @@ public class AbstractVisitor implements Visitor {
     // inlines
     @Override public void visit(AutoLink node) { visitChildren(node); } 
     @Override public void visit(Code node) { visitChildren(node); } 
+    @Override public void visit(CustomNode node) { visitChildren(node); } 
     @Override public void visit(Emphasis node) { visitChildren(node); } 
     @Override public void visit(HardLineBreak node) { visitChildren(node); } 
     @Override public void visit(HtmlEntity node) { visitChildren(node); } 

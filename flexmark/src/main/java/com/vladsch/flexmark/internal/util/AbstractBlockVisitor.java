@@ -15,7 +15,6 @@ public class AbstractBlockVisitor extends AbstractVisitor {
     //@Override public void visit(BulletList node) { visitChildren(node); } 
     //@Override public void visit(BulletListItem node) { visitChildren(node); }
     //@Override public void visit(CustomBlock node) { visitChildren(node); } 
-    //@Override public void visit(CustomNode node) { visitChildren(node); } 
     //@Override public void visit(Document node) { visitChildren(node); } 
     //@Override public void visit(FencedCodeBlock node) { visitChildren(node); } 
     //@Override public void visit(Heading node) { visitChildren(node); } 
@@ -31,6 +30,7 @@ public class AbstractBlockVisitor extends AbstractVisitor {
     // inlines
     @Override public void visit(AutoLink node) {  } 
     @Override public void visit(Code node) {  } 
+    @Override public void visit(CustomNode node) {  } 
     @Override public void visit(Emphasis node) {  } 
     @Override public void visit(HardLineBreak node) {  } 
     @Override public void visit(HtmlEntity node) {  } 
@@ -43,8 +43,6 @@ public class AbstractBlockVisitor extends AbstractVisitor {
     @Override public void visit(MailLink node) {  } 
     @Override public void visit(Reference node) {  } 
     @Override public void visit(SoftLineBreak node) {  } 
-    @Override public void visit(StrongEmphasis node) {  } 
-    @Override public void visit(Text node) {  } 
-    
+    @Override public void visit(StrongEmphasis node) {  }
     // @formatter:on
 }

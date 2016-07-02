@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.gfm.strikethrough.internal;
 
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
 import java.util.Collections;
@@ -17,9 +17,9 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderingHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderHandler<?>> getNodeRenderers() {
         return new HashSet<>(Collections.singletonList(
-                new NodeRenderingHandler<>(Strikethrough.class, this::render)
+                new NodeRenderHandler<>(Strikethrough.class, this::render)
         ));
     }
 

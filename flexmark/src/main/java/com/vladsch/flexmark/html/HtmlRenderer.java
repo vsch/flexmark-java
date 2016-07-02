@@ -280,7 +280,7 @@ public class HtmlRenderer {
 
     private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
         private final Document document;
-        private final Map<Class<?>, NodeRenderingHandler> renderers;
+        private final Map<Class<?>, NodeRenderHandler> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
@@ -298,14 +298,14 @@ public class HtmlRenderer {
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : (!(htmlOptions.renderHeaderId || htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new GitHubHeaderIdGenerator.Factory().create(this));
-            
+
             htmlWriter.setContext(this);
 
             // The first node renderer for a node type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
-                for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderers()) {
+                for (NodeRenderHandler nodeType : nodeRenderer.getNodeRenderers()) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -319,7 +319,18 @@ public class HtmlRenderer {
 
         @Override
         public String getNodeId(Node node) {
-            return htmlIdGenerator.getId(node);
+            String id = htmlIdGenerator.getId(node);
+            if (attributeProviders.size() != 0) {
+
+                Map<String, String> attr = new LinkedHashMap<>(1);
+                if (id != null) attr.put("id", id);
+
+                for (AttributeProvider attributeProvider : attributeProviders) {
+                    attributeProvider.setAttributes(this.renderingNode, null, attr);
+                }
+                id = attr.get("id");
+            }
+            return id;
         }
 
         @Override
@@ -384,7 +395,7 @@ public class HtmlRenderer {
                     this.phase = phase;
                     // here we render multiple phases
                     if (getRenderingPhase() == RenderingPhase.BODY) {
-                        NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
+                        NodeRenderHandler nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.doNotRenderLinksNesting = documentDoNotRenderLinksNesting;
                             subContext.renderingNode = node;
@@ -406,7 +417,7 @@ public class HtmlRenderer {
                     }
                 }
             } else {
-                NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
+                NodeRenderHandler nodeRenderer = renderers.get(node.getClass());
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;
                     int oldDoNotRenderLinksNesting = subContext.doNotRenderLinksNesting;
