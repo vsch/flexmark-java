@@ -105,7 +105,7 @@ Progress
         - [x] Abbreviations
         - [x] Footnotes
         - [ ] Definitions
-        - [ ] Table of Contents
+        - [x] Table of Contents
     - Typographic
         - [ ] Quotes
         - [ ] Smarts

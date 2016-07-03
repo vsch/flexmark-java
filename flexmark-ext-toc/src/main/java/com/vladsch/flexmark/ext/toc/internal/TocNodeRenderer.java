@@ -49,28 +49,33 @@ public class TocNodeRenderer implements NodeRenderer {
         int lastLevel = headings.get(0).getLevel();
 
         html.withAttr().line().tag("ul").indent();
+        boolean[] openedItems = new boolean[7];
 
         for (int i = 0; i < headings.size(); ++i) {
             Heading header = headings.get(i);
+            int headerLevel = header.getLevel();
 
             // ignore the level less than toc limit
-            if (header.getLevel() > level) {
+            if (headerLevel > level) {
                 continue;
             }
 
-            if (lastLevel < header.getLevel()) {
-                for (int lv = lastLevel; lv < header.getLevel(); ++lv) {
-                    html.withAttr().indent().tag("ul");
+            if (lastLevel < headerLevel) {
+                for (int lv = lastLevel; lv < headerLevel; ++lv) {
+                    html.withAttr().line().tag("ul").indent();
+                    openedItems[lv+1] = false;
                 }
-            } else if (lastLevel == header.getLevel()) {
+            } else if (lastLevel == headerLevel) {
                 if (i != 0) {
-                    html.line().tag("/li");
+                    html.tag("/li").line();
+                    openedItems[lastLevel] = false;
                 }
             } else {
                 html.tag("/li");
-                for (int lv = header.getLevel(); lv < lastLevel; ++lv) {
+                for (int lv = lastLevel; lv > headerLevel; lv--) {
                     html.unIndent().tag("/ul")
-                            .line().tag("/li");
+                            .tag("/li").line();
+                    openedItems[lv] = false;
                 }
             }
 
@@ -90,6 +95,7 @@ public class TocNodeRenderer implements NodeRenderer {
             }
 
             html.line().tag("li");
+            openedItems[headerLevel] = true;
             String headerId = context.getNodeId(header);
             if (headerId == null || context.isDoNotRenderLinks()) {
                 // just text
@@ -101,11 +107,12 @@ public class TocNodeRenderer implements NodeRenderer {
                 else html.text(headerText);
                 html.tag("/a");
             }
-            lastLevel = header.getLevel();
+            lastLevel = headerLevel;
         }
 
-        for (int i = initLevel - 1; i < lastLevel; ++i) {
-            html.tag("/li").unIndent().tag("/ul");
+        for (int i = lastLevel; i >= initLevel; i--) {
+            if (openedItems[i]) html.tag("/li");
+            html.unIndent().tag("/ul");
         }
         html.line();
     }

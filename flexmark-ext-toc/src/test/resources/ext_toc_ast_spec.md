@@ -117,26 +117,21 @@ Default rendering
 .
 <ul>
   <li><a href="#heading-1">Heading 1</a>
-    <ul>
+  <ul>
     <li><a href="#heading-11">Heading 1.1</a>
-      <ul>
-      <li><a href="#heading-111">Heading 1.1.1</a>
-      </li>
-      <li><a href="#heading-112">Heading 1.1.2</a></li>
-    </ul>
-    </li>
-    <li><a href="#heading-12">Heading 1.2</a>
-    </li>
-    <li><a href="#heading-13">Heading 1.3</a></li>
-  </ul>
-  </li>
-  <li><a href="#heading-2">Heading 2</a>
     <ul>
-      <ul>
-      <li><a href="#heading-201">Heading 2.0.1</a>
-      </li>
-      <li><a href="#heading-202">Heading 2.0.2</a></li>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
+      <li><a href="#heading-112">Heading 1.1.2</a></li>
     </ul></li>
+    <li><a href="#heading-12">Heading 1.2</a></li>
+    <li><a href="#heading-13">Heading 1.3</a></li>
+  </ul></li>
+  <li><a href="#heading-2">Heading 2</a>
+  <ul>
+    <ul>
+      <li><a href="#heading-201">Heading 2.0.1</a></li>
+      <li><a href="#heading-202">Heading 2.0.2</a></li>
+    </ul>
   </ul></li>
 </ul>
 <h1 id="heading-1">Heading 1</h1>
@@ -185,11 +180,10 @@ Default rendering with emphasis
 .
 <ul>
   <li><a href="#heading-some-bold-1">Heading <strong>some bold</strong> 1</a>
-    <ul>
+  <ul>
     <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
-      <ul>
-      <li><a href="#heading-111">Heading 1.1.1</a>
-      </li>
+    <ul>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
       <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
     </ul></li>
   </ul></li>
@@ -241,21 +235,17 @@ Set levels rendering
 
 .
 <ul>
-  <li><a href="#heading-1">Heading 1</a>
-  </li>
+  <li><a href="#heading-1">Heading 1</a></li>
   <li><a href="#heading-2">Heading 2</a></li>
 </ul>
 <hr />
 <ul>
   <li><a href="#heading-1">Heading 1</a>
-    <ul>
-    <li><a href="#heading-11">Heading 1.1</a>
-    </li>
-    <li><a href="#heading-12">Heading 1.2</a>
-    </li>
+  <ul>
+    <li><a href="#heading-11">Heading 1.1</a></li>
+    <li><a href="#heading-12">Heading 1.2</a></li>
     <li><a href="#heading-13">Heading 1.3</a></li>
-  </ul>
-  </li>
+  </ul></li>
   <li><a href="#heading-2">Heading 2</a></li>
 </ul>
 <h1 id="heading-1">Heading 1</h1>
@@ -375,11 +365,10 @@ Text only rendering
 .
 <ul>
   <li><a href="#heading-some-bold-1">Heading some bold 1</a>
-    <ul>
+  <ul>
     <li><a href="#heading-11-some-italic">Heading 1.1 some italic</a>
-      <ul>
-      <li><a href="#heading-111">Heading 1.1.1</a>
-      </li>
+    <ul>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
       <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  some bold italic</a></li>
     </ul></li>
   </ul></li>

@@ -1,6 +1,13 @@
 Version History
 ===============
 
+0.4.0
+-----
+
+- Add simulated table of contents option that will generate an AST, if converted back to
+  markdown, will result in a table of contents that will generate HTML with a table of contents
+  on parsers that interpret the table of contents element as a link reference.  
+
 0.3.2
 -----
 
