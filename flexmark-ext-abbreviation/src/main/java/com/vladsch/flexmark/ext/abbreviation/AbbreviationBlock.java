@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A block node that contains the abbreviation definition
  */
 public class AbbreviationBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A node containing the abbreviated text that will be rendered as an abbr tag or a link with title attribute
  */
 public class Abbreviation extends Text implements DoNotLinkify {
     protected final String abbreviation;

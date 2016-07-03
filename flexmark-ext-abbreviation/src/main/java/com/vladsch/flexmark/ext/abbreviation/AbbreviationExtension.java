@@ -18,12 +18,23 @@ import com.vladsch.flexmark.parser.Parser;
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed abbreviations are turned into abbr tags by default or a links as an option by passing true to {@link #create()} when initializing the extension.
+ * The parsed abbreviations are turned into abbr tags by default or a links as an option by setting the {@link AbbreviationExtension#USE_LINKS} key to true in option used to create the {@link Parser.Builder} via {@code Parser.builder(options)}
  * </p>
  */
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    /**
+     * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
+     */
     public final static DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
+
+    /**
+     * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
+     */
     public final static DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<>("ABBREVIATIONS_KEEP", KeepType.FIRST);
+
+    /**
+     * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.
+     */
     public final static DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
 
     public static Extension create() {
