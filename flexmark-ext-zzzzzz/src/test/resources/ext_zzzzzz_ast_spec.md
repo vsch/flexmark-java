@@ -16,11 +16,14 @@ no spaces between brackets
 Sample  text
 .
 <p>Expected rendered HTML</p>
-.
-Document[0, 19]
-  Paragraph[0, 19]
-    Text[0, 2] chars:[0, 2, "[ "]
-    Text[17, 18] chars:[17, 18, "]"]
 ````````````````````````````````
+
+
+```````````````````````````````` example Zzzzzz: 2
+&#X01; &#X234564;
+.
+<p> �</p>
+````````````````````````````````
+
 
 

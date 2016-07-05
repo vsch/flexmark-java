@@ -24,5 +24,6 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" />
     <orderEntry type="module" module-name="flexmark-ext-toc" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
   </component>
 </module>

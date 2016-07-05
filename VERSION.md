@@ -1,12 +1,14 @@
-Version History
-===============
+flexmark-java Version History
+=============================
 
 0.4.0
 -----
 
-- Add simulated table of contents option that will generate an AST, if converted back to
-  markdown, will result in a table of contents that will generate HTML with a table of contents
-  on parsers that interpret the table of contents element as a link reference.  
+- [ ] Add TOC syntax as per Markdown Navigator updating TOC element.   
+
+- Add Zzzzzz module to test suite so that the archetype also gets to run for sanitiy testing of
+  basic extension module.
+
 
 0.3.2
 -----
@@ -16,8 +18,8 @@ Version History
   classes to `NodeRenderingHandler` instance. In the implementation it becomes a new instance
   creation with class and lambda method reference. The method already has the right node class
   eliminating the need to have a slew of `if (node instance of ...) do((cast)...)`. Just
-  implement a `render(YourNodeType, NodeRendererContext, HtmlWriter)` and add an entry into the
-  map.  
+  implement a `NodeRenderHandler.render(YourNode, NodeRendererContext, HtmlWriter)` and add an
+  entry into the map.  
 
 - Add `AbstractCustomVisitor` constructor takes a collection or vararg of `NodeVisitingHandler`
   instances and uses these to map visitation of `CustomNode` and `CustomBlock` to specific

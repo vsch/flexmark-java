@@ -12,6 +12,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
+import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import org.junit.runners.Suite;
@@ -32,6 +33,7 @@ import org.junit.runners.Suite;
         IntegrationTestSuite.class,
         ExtAnchorLinkTestSuite.class,
         ExtTocTestSuite.class,
+        ExtZzzzzzTestSuite.class,
 })
 public class FlexmarkTestSuite {
 }

@@ -9,26 +9,26 @@ The API was changed to allow more granular control of the parsing process and op
 parsing with a large number of installed extensions.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
-[pegdown] has a great feature set but its speed in general is not great and for pathological
-input either hangs or practically hangs during parsing.
+[pegdown] has a great feature set but its speed in general is less than ideal and for
+pathological input either hangs or practically hangs during parsing.
 
 [commonmark-java] has an excellent parsing architecture that is easy to understand and extend.
 The goal was to ensure that adding source position tracking in the AST would not change the ease
 of parsing and generating the AST more than absolutely necessary.
 
-Reasons for choosing [commonmark-java] as the parser are detailed in
-[Pegdown - Achilles heel of the Markdown Navigator plugin]. Now that I have reworked the core
-and added a few extensions I am extremely satisfied with my choice.
+Reasons for choosing [commonmark-java] as the parser are: speed, ease of understanding, ease of
+extending and are detailed in [Pegdown - Achilles heel of the Markdown Navigator plugin]. Now
+that I have reworked the core and added a few extensions I am extremely satisfied with my
+choice.
 
-Another goal was to improve the ability of extensions to modify the behaviour of the parser so
-that any dialect of markdown could be implemented through the extension mechanism. This included
-adding an easily extensible options mechanism that would allow setting of all options in one
-place and having the parser, renderer and extensions use these options to modify behavior,
-including disabling some core block parsers.
+Another goal was to improve the ability of extensions to modify parser behavior so that any
+dialect of markdown could be implemented through the extension mechanism. An extensible options
+API was added to allow setting of all options in one place. Parser, renderer and extensions use
+these options for configuration, including disabling some core block parsers.
 
-This is a work in progress with many API changes.
-
-No attempt is made to keep backward API compatibility to the original project.
+This is a work in progress with many API changes. No attempt is made to keep backward API
+compatibility to the original project and until the feature set is mostly complete, not even to
+earlier versions of this project. 
 
 Progress
 --------
