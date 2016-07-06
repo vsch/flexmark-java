@@ -5,17 +5,20 @@ version: 0.1
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Footnotes
 
-Converts footnote references and definitions to footnotes in the HTML page. A footnote is a
-link reference starting with a ^ with the definition being the same: [^ref]: footnote.
+Converts footnote references and definitions to footnotes in the HTML
+page. A footnote is a link reference starting with a ^ with the
+definition being the same: [^ref]: footnote.
 
-A footnote definition is a container block that can contain any element as long as it is
-indented by 4 spaces or a tab from the indent level of the footnote.
+A footnote definition is a container block that can contain any element
+as long as it is indented by 4 spaces or a tab from the indent level of
+the footnote.
 
-```````````````````````````````` example Footnotes: 1
+```````````````````````````````` example Footnotes: 1
 This paragraph has a footnote[^footnote].
 
 [^footnote]: This is the body of the footnote.
@@ -81,7 +84,7 @@ Document[0, 262]
 
 Not a footnote nor a footnote definition if space between [ and ^.
 
-```````````````````````````````` example Footnotes: 2
+```````````````````````````````` example Footnotes: 2
 This paragraph has no footnote[ ^footnote].
 
 [ ^footnote]: This is the body of the footnote.
@@ -130,7 +133,7 @@ Document[0, 265]
 
 Unused footnotes are not used and do not show up on the page.
 
-```````````````````````````````` example Footnotes: 3
+```````````````````````````````` example Footnotes: 3
 This paragraph has a footnote[^2].
 
 [^1]: This is the body of the unused footnote.
@@ -210,9 +213,10 @@ Document[0, 351]
 ````````````````````````````````
 
 
-Undefined footnotes are rendered as if they were text, with emphasis left as is.
+Undefined footnotes are rendered as if they were text, with emphasis
+left as is.
 
-```````````````````````````````` example Footnotes: 4
+```````````````````````````````` example Footnotes: 4
 This paragraph has a footnote[^**footnote**].
 
 [^footnote]: This is the body of the footnote.
@@ -260,9 +264,10 @@ Document[0, 266]
 ````````````````````````````````
 
 
-Footnote numbers are assigned in order of their reference in the document
+Footnote numbers are assigned in order of their reference in the
+document
 
-```````````````````````````````` example Footnotes: 5
+```````````````````````````````` example Footnotes: 5
 This paragraph has a footnote[^2]. Followed by another[^1]. 
 
 [^1]: This is the body of the unused footnote.
@@ -353,7 +358,7 @@ Document[0, 377]
 
 Footnotes can contain references to other footnotes.
 
-```````````````````````````````` example Footnotes: 6
+```````````````````````````````` example Footnotes: 6
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -444,7 +449,7 @@ Document[0, 385]
 
 Customized strings
 
-```````````````````````````````` example(Footnotes: 7) options(custom)
+```````````````````````````````` example(Footnotes: 7) options(custom)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -535,7 +540,7 @@ Document[0, 385]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 8) options(link-class-none, back-link-class-text)
+```````````````````````````````` example(Footnotes: 8) options(link-class-none, back-link-class-text)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -565,7 +570,7 @@ Document[0, 78]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 9) options(link-class-text, back-link-class-none)
+```````````````````````````````` example(Footnotes: 9) options(link-class-text, back-link-class-none)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.

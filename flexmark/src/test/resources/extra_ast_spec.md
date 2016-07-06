@@ -5,14 +5,14 @@ version: 0.1
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Extra tests
 
 Code fence starting with setext header marker
 
-
-```````````````````````````````` example Extra tests: 1
+```````````````````````````````` example Extra tests: 1
 ```markdown
 ---
 ```
@@ -25,7 +25,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Extra tests: 2
+```````````````````````````````` example Extra tests: 2
 ```markdown
 ===
 ```
@@ -40,7 +40,7 @@ Document[0, 20]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 3
+```````````````````````````````` example Extra tests: 3
 > - item 1
 > - item 2
 >     1. item 1
@@ -79,7 +79,7 @@ Document[0, 54]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 4
+```````````````````````````````` example Extra tests: 4
 > - item 1
 >
 > - item 2
@@ -128,9 +128,10 @@ Document[0, 60]
 
 ## Reference Repository Keep First tests
 
-Test repository KEEP_FIRST behavior, meaning the first reference def is used
+Test repository KEEP_FIRST behavior, meaning the first reference def is
+used
 
-```````````````````````````````` example Reference Repository Keep First tests: 1
+```````````````````````````````` example Reference Repository Keep First tests: 1
 [ref]
 
 [ref]: /url1
@@ -151,9 +152,10 @@ Document[0, 46]
 
 ## Reference Repository Keep Last tests
 
-Test repository KEEP_LAST behavior, meaning the last reference def is used
+Test repository KEEP_LAST behavior, meaning the last reference def is
+used
 
-```````````````````````````````` example(Reference Repository Keep Last tests: 1) options(keep-last)
+```````````````````````````````` example(Reference Repository Keep Last tests: 1) options(keep-last)
 [ref]
 
 [ref]: /url1
@@ -176,7 +178,7 @@ Document[0, 46]
 
 Allow atx headers without a space between # and the title
 
-```````````````````````````````` example(ATX Header options: 1) options(hdr-no-atx-space)
+```````````````````````````````` example(ATX Header options: 1) options(hdr-no-atx-space)
 #Heading                                                                            
 ##Heading                                                                            
 ###Heading                                                                            
@@ -234,7 +236,7 @@ Document[0, 1063]
 
 Don't allow leading spaces
 
-```````````````````````````````` example(ATX Header options: 2) options(hdr-no-lead-space)
+```````````````````````````````` example(ATX Header options: 2) options(hdr-no-lead-space)
  # Heading
  ## Heading
  ### Heading
@@ -267,7 +269,7 @@ Document[0, 81]
 
 Don't allow leading spaces
 
-```````````````````````````````` example(ATX Header options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
+```````````````````````````````` example(ATX Header options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
  # Heading
  ## Heading
  ### Heading
@@ -302,12 +304,12 @@ Document[0, 81]
 
 ### List - Fixed Indent
 
-Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to change
-the behavior of list parser and renderer
+Options defined: list-fixed-indent, list-no-break, list-no-loose,
+list-no-start to change the behavior of list parser and renderer
 
 Default processing
 
-```````````````````````````````` example List - Fixed Indent: 1
+```````````````````````````````` example List - Fixed Indent: 1
 * item 1
  * item 2
   * item 3
@@ -364,7 +366,7 @@ Document[0, 141]
 
 Fixed indentation only (4 spaces)
 
-```````````````````````````````` example(List - Fixed Indent: 2) options(list-fixed-indent)
+```````````````````````````````` example(List - Fixed Indent: 2) options(list-fixed-indent)
 * item 1
  * item 2
   * item 3
@@ -429,7 +431,7 @@ Document[0, 141]
 
 Fixed indentation with code blocks
 
-```````````````````````````````` example(List - Fixed Indent: 3) options(list-fixed-indent)
+```````````````````````````````` example(List - Fixed Indent: 3) options(list-fixed-indent)
 * item 1
     
     this is not code
@@ -602,7 +604,7 @@ Document[0, 661]
 
 With auto loose setting for list
 
-```````````````````````````````` example List - No Auto Loose: 1
+```````````````````````````````` example List - No Auto Loose: 1
 * item 1
 * item 2
 * item 3
@@ -661,7 +663,7 @@ Document[0, 97]
 
 Without auto loose setting for list
 
-```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
+```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
 * item 1
 * item 2
 * item 3
@@ -718,7 +720,7 @@ Document[0, 97]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example List - No Break on Double Blank Line: 1
+```````````````````````````````` example List - No Break on Double Blank Line: 1
 * item 1
 * item 2
     * sub item 1
@@ -769,7 +771,7 @@ Document[0, 80]
 
 Without break all lists on two blank lines
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 2) options(list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 2) options(list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -824,7 +826,7 @@ Document[0, 80]
 
 Without break all lists on two blank lines no auto loose
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -873,7 +875,7 @@ Document[0, 80]
 
 With break all lists on two blank lines
 
-```````````````````````````````` example List - No Break on Double Blank Line: 4
+```````````````````````````````` example List - No Break on Double Blank Line: 4
 * item 1
 * item 2
     * sub item 1
@@ -930,7 +932,7 @@ Document[0, 114]
 
 Without break on two blank lines
 
-```````````````````````````````` example(List - No Break on Double Blank Line: 5) options(list-no-break)
+```````````````````````````````` example(List - No Break on Double Blank Line: 5) options(list-no-break)
 * item 1
 * item 2
     * sub item 1
@@ -998,7 +1000,7 @@ Document[0, 114]
 
 With bullet matching for items within a list
 
-```````````````````````````````` example List - No Bullet Match: 1
+```````````````````````````````` example List - No Bullet Match: 1
 - item 1
 * item 1
 + item 1
@@ -1031,7 +1033,7 @@ Document[0, 27]
 
 Without bullet matching for items within a list
 
-```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
+```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
 - item 1
 * item 2
 + item 3
@@ -1060,7 +1062,7 @@ Document[0, 27]
 
 With start
 
-```````````````````````````````` example List - No Manual Start Numbering: 1
+```````````````````````````````` example List - No Manual Start Numbering: 1
 2. item 1
 1. item 2
 3. item 3
@@ -1087,7 +1089,7 @@ Document[0, 30]
 
 Without start
 
-```````````````````````````````` example(List - No Manual Start Numbering: 2) options(list-no-start)
+```````````````````````````````` example(List - No Manual Start Numbering: 2) options(list-no-start)
 2. item 1
 1. item 1
 1. item 1
@@ -1116,7 +1118,7 @@ Document[0, 30]
 
 With relaxed start. Lists can start without preceding blank lines.
 
-```````````````````````````````` example List - Relaxed Item Start: 1
+```````````````````````````````` example List - Relaxed Item Start: 1
 This is a paragraph
 2. item 1
 1. item 2
@@ -1160,7 +1162,7 @@ Document[0, 80]
 
 Without relaxed start. Lists start only if preceded by a blank line.
 
-```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
+```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1213,7 +1215,7 @@ Document[0, 116]
 
 Without start
 
-```````````````````````````````` example(List - Relaxed Item Start: 3) options(list-no-start)
+```````````````````````````````` example(List - Relaxed Item Start: 3) options(list-no-start)
 2. item 1
 1. item 1
 1. item 1
@@ -1242,7 +1244,7 @@ Document[0, 30]
 
 With relaxed start. Lists can start without preceding blank lines.
 
-```````````````````````````````` example List - Relaxed Item Start: 1
+```````````````````````````````` example List - Relaxed Item Start: 1
 This is a paragraph
 2. item 1
 1. item 2
@@ -1286,7 +1288,7 @@ Document[0, 80]
 
 Without relaxed start. Lists start only if preceded by a blank line.
 
-```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
+```````````````````````````````` example(List - Relaxed Item Start: 2) options(list-no-relaxed-start)
 This is a paragraph
 2. item 1
 1. item 2
@@ -1339,10 +1341,10 @@ Document[0, 116]
 
 ### Thematic Break - No Relaxed Rules
 
-With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
-non-dashed thematic break, dashes are a heading.
+With relaxed rules. Thematic break can occur without a preceding blank
+line. Applies to non-dashed thematic break, dashes are a heading.
 
-```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
 This is a paragraph
 ***
 .
@@ -1356,10 +1358,10 @@ Document[0, 24]
 ````````````````````````````````
 
 
-Without relaxed rules. Thematic break must be preceded by a blank line. Applies to
-non-dashed thematic break, dashes are a heading.
+Without relaxed rules. Thematic break must be preceded by a blank line.
+Applies to non-dashed thematic break, dashes are a heading.
 
-```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
+```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
 This is a paragraph
 ***
 .
@@ -1380,7 +1382,7 @@ Document[0, 24]
 
 Default pass it all through
 
-```````````````````````````````` example HTML Encode Options: 1
+```````````````````````````````` example HTML Encode Options: 1
 <div>
 <p>paragraph</p>
 </div>
@@ -1414,7 +1416,7 @@ Document[0, 197]
 
 Encode all html
 
-```````````````````````````````` example(HTML Encode Options: 2) options(escape-html)
+```````````````````````````````` example(HTML Encode Options: 2) options(escape-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -1448,7 +1450,7 @@ Document[0, 197]
 
 Encode html blocks
 
-```````````````````````````````` example(HTML Encode Options: 3) options(escape-html-blocks)
+```````````````````````````````` example(HTML Encode Options: 3) options(escape-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -1482,7 +1484,7 @@ Document[0, 197]
 
 Encode html block comments
 
-```````````````````````````````` example(HTML Encode Options: 4) options(escape-html-comment-blocks)
+```````````````````````````````` example(HTML Encode Options: 4) options(escape-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -1516,7 +1518,7 @@ Document[0, 197]
 
 Encode inline html
 
-```````````````````````````````` example(HTML Encode Options: 5) options(escape-inline-html)
+```````````````````````````````` example(HTML Encode Options: 5) options(escape-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -1550,7 +1552,7 @@ Document[0, 197]
 
 Encode inline html comments
 
-```````````````````````````````` example(HTML Encode Options: 6) options(escape-inline-html-comments)
+```````````````````````````````` example(HTML Encode Options: 6) options(escape-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -1586,7 +1588,7 @@ Document[0, 197]
 
 Suppress all html
 
-```````````````````````````````` example(HTML Suppress Options: 1) options(suppress-html)
+```````````````````````````````` example(HTML Suppress Options: 1) options(suppress-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -1615,7 +1617,7 @@ Document[0, 197]
 
 Suppress html blocks
 
-```````````````````````````````` example(HTML Suppress Options: 2) options(suppress-html-blocks)
+```````````````````````````````` example(HTML Suppress Options: 2) options(suppress-html-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -1644,7 +1646,7 @@ Document[0, 197]
 
 Suppress html comment blocks
 
-```````````````````````````````` example(HTML Suppress Options: 3) options(suppress-html-comment-blocks)
+```````````````````````````````` example(HTML Suppress Options: 3) options(suppress-html-comment-blocks)
 <div>
 <p>paragraph</p>
 </div>
@@ -1677,7 +1679,7 @@ Document[0, 197]
 
 Suppress inline html
 
-```````````````````````````````` example(HTML Suppress Options: 4) options(suppress-inline-html)
+```````````````````````````````` example(HTML Suppress Options: 4) options(suppress-inline-html)
 <div>
 <p>paragraph</p>
 </div>
@@ -1711,7 +1713,7 @@ Document[0, 197]
 
 Suppress inline html comments
 
-```````````````````````````````` example(HTML Suppress Options: 5) options(suppress-inline-html-comments)
+```````````````````````````````` example(HTML Suppress Options: 5) options(suppress-inline-html-comments)
 <div>
 <p>paragraph</p>
 </div>
@@ -1749,7 +1751,7 @@ Document[0, 197]
 
 Emphasis around inline code spans
 
-```````````````````````````````` example GFM Emphasis: 1
+```````````````````````````````` example GFM Emphasis: 1
 please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )`
 .
 <p>please add  <code>add_gtest(</code><strong><code>your_unittest</code></strong><code></code><strong><code>your_unittest_unittest.cc</code></strong><code>)</code></p>
@@ -1769,7 +1771,7 @@ Document[0, 82]
 
 Some weird commonmark processing of emphasis
 
-```````````````````````````````` example(GFM Emphasis: 2) options(relaxed-emphasis, IGNORE)
+```````````````````````````````` example(GFM Emphasis: 2) options(relaxed-emphasis, IGNORE)
 **bold*bold-italic*bold**
 .
 <p><strong>bold<em>bold-italic</em>bold</strong></p>
@@ -1786,7 +1788,7 @@ Document[0, 26]
 
 This works as expected:
 
-```````````````````````````````` example GFM Emphasis: 3
+```````````````````````````````` example GFM Emphasis: 3
 **bold *bold-italic* bold**
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>

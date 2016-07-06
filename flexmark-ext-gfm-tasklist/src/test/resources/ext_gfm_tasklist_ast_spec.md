@@ -5,13 +5,14 @@ version: 0.1
 date: '2016-06-18'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Gfm Task List Core
 
 not task lis items
 
-```````````````````````````````` example Gfm Task List Core: 1
+```````````````````````````````` example Gfm Task List Core: 1
 - []
 - [x ]
 - [ x]
@@ -97,7 +98,7 @@ Document[0, 96]
 
 empty task list items
 
-```````````````````````````````` example Gfm Task List Core: 2
+```````````````````````````````` example Gfm Task List Core: 2
 - [ ]
 -  [X]
 -    [x]
@@ -161,7 +162,7 @@ Document[0, 62]
 
 non empty task list items
 
-```````````````````````````````` example Gfm Task List Core: 3
+```````````````````````````````` example Gfm Task List Core: 3
 - [ ] task
 - [X] task
 - [x] task
@@ -243,7 +244,7 @@ Document[0, 103]
 
 non empty task list items with inlines
 
-```````````````````````````````` example Gfm Task List Core: 4
+```````````````````````````````` example Gfm Task List Core: 4
 - [ ] task **emphasis**
 - [X] task **emphasis**
 - [x] task **emphasis**
@@ -345,7 +346,7 @@ Document[0, 220]
 
 task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 1) options(item-class)
+```````````````````````````````` example(Gfm Task List Options: 1) options(item-class)
 - [ ] task
 - [x] task
 .
@@ -369,7 +370,7 @@ Document[0, 22]
 
 task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 2) options(item-class)
+```````````````````````````````` example(Gfm Task List Options: 2) options(item-class)
 - [ ] task
 
 - [x] task
@@ -398,7 +399,7 @@ Document[0, 23]
 
 loose task list item class
 
-```````````````````````````````` example(Gfm Task List Options: 3) options(loose-class)
+```````````````````````````````` example(Gfm Task List Options: 3) options(loose-class)
 - [ ] task
 - [x] task
 .
@@ -422,7 +423,7 @@ Document[0, 22]
 
 loose task list item class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 4) options(loose-class)
+```````````````````````````````` example(Gfm Task List Options: 4) options(loose-class)
 - [ ] task
 
 - [x] task
@@ -451,7 +452,7 @@ Document[0, 23]
 
 task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 5) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 5) options(item-class, p-class)
 - [ ] task
 - [x] task
 .
@@ -475,7 +476,7 @@ Document[0, 22]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 6) options(item-class, p-class)
+```````````````````````````````` example(Gfm Task List Options: 6) options(item-class, p-class)
 - [ ] task
 
 - [x] task
@@ -504,7 +505,7 @@ Document[0, 23]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 7) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 7) options(item-class, p-class, done)
 - [ ] task
 - [x] task
 .
@@ -528,7 +529,7 @@ Document[0, 22]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 8) options(item-class, p-class, done)
+```````````````````````````````` example(Gfm Task List Options: 8) options(item-class, p-class, done)
 - [ ] task
 
 - [x] task
@@ -557,7 +558,7 @@ Document[0, 23]
 
 custom marker task list item class and p class
 
-```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 9) options(item-class, p-class, done, not-done)
 - [ ] task
 - [x] task
 .
@@ -581,7 +582,7 @@ Document[0, 22]
 
 task list item class and p class on loose list
 
-```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class, done, not-done)
+```````````````````````````````` example(Gfm Task List Options: 10) options(item-class, p-class, done, not-done)
 - [ ] task
 
 - [x] task

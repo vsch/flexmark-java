@@ -5,17 +5,18 @@ version:
 date: '2016-06-30'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Toc  
 
-Converts `[TOC level=#]` text to TocBlock nodes. Where level= followed by a digit is optional
-and specifies the maximum heading level to render in the table of contents. If omitted defaults
-to 3.
+Converts `[TOC level=#]` text to TocBlock nodes. Where level= followed
+by a digit is optional and specifies the maximum heading level to render
+in the table of contents. If omitted defaults to 3.
 
 no spaces between brackets
 
-```````````````````````````````` example Toc: 1
+```````````````````````````````` example Toc: 1
 [ TOC]  
 
 [ TOC ] 
@@ -41,7 +42,7 @@ Document[0, 28]
 
 Invalid level
 
-```````````````````````````````` example Toc: 2
+```````````````````````````````` example Toc: 2
 [TOC level=0]  
 
 [TOC level=7]  
@@ -102,7 +103,7 @@ Document[0, 209]
 
 Default rendering
 
-```````````````````````````````` example Toc: 3
+```````````````````````````````` example Toc: 3
 [TOC]  
 
 # Heading 1
@@ -170,7 +171,7 @@ Document[0, 151]
 
 Default rendering with emphasis
 
-```````````````````````````````` example Toc: 4
+```````````````````````````````` example Toc: 4
 [TOC]  
 
 # Heading **some bold** 1
@@ -217,7 +218,7 @@ Document[0, 125]
 
 Set levels rendering
 
-```````````````````````````````` example Toc: 5
+```````````````````````````````` example Toc: 5
 [TOC level=1]  
 
 ---
@@ -286,7 +287,7 @@ Document[0, 181]
 
 Invalid level
 
-```````````````````````````````` example(Toc: 6) options(only-valid)
+```````````````````````````````` example(Toc: 6) options(only-valid)
 [TOC level=0]  
 
 [TOC level=7]  
@@ -355,7 +356,7 @@ Document[0, 209]
 
 Text only rendering
 
-```````````````````````````````` example(Toc: 7) options(text-only)
+```````````````````````````````` example(Toc: 7) options(text-only)
 [TOC]  
 
 # Heading **some bold** 1

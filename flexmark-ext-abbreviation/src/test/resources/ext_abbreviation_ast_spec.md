@@ -5,15 +5,16 @@ version: 0.1
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Abbreviation
 
-flexmark-java extension for defining abbreviations and turning appearance of these
-abbreviations in text into abbr tags with titles consisting of the expansion of the
-abbreviation.
+flexmark-java extension for defining abbreviations and turning
+appearance of these abbreviations in text into abbr tags with titles
+consisting of the expansion of the abbreviation.
 
-```````````````````````````````` example Abbreviation: 1
+```````````````````````````````` example Abbreviation: 1
 *[Abbr]:Abbreviation
 .
 .
@@ -22,7 +23,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 2
+```````````````````````````````` example Abbreviation: 2
 *[Abbr]:Abbreviation
 
 This has an Abbr embedded in it.
@@ -40,7 +41,7 @@ Document[0, 55]
 
 No inline processing in expansion text.
 
-```````````````````````````````` example Abbreviation: 3
+```````````````````````````````` example Abbreviation: 3
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -56,7 +57,7 @@ Document[0, 91]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 4) options(links)
+```````````````````````````````` example(Abbreviation: 4) options(links)
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -72,7 +73,7 @@ Document[0, 91]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 5
+```````````````````````````````` example Abbreviation: 5
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 .
@@ -83,7 +84,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 6
+```````````````````````````````` example Abbreviation: 6
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
@@ -107,7 +108,7 @@ Document[0, 126]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 7
+```````````````````````````````` example Abbreviation: 7
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
 
@@ -126,7 +127,7 @@ Document[0, 136]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 8
+```````````````````````````````` example Abbreviation: 8
 *[US]: United States
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -149,7 +150,7 @@ Document[0, 142]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 9
+```````````````````````````````` example Abbreviation: 9
 *[Abbr]: Abbreviation
 [Abbr]: http://test.com
 
@@ -173,7 +174,7 @@ Document[0, 88]
 
 A reference that is not on the first line is just text.
 
-```````````````````````````````` example Abbreviation: 10
+```````````````````````````````` example Abbreviation: 10
 Paragraph with second line having a reference
 [test]: /url
 

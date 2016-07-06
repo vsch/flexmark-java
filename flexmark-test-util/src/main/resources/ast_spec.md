@@ -263,7 +263,7 @@ in contexts where indentation is significant for the
 document's structure, tabs behave as if they were replaced
 by spaces with a tab stop of 4 characters.
 
-```````````````````````````````` example Tabs: 1
+```````````````````````````````` example Tabs: 1
 →foo→baz→→bim
 .
 <pre><code>foo→baz→→bim
@@ -274,7 +274,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tabs: 2
+```````````````````````````````` example Tabs: 2
   →foo→baz→→bim
 .
 <pre><code>foo→baz→→bim
@@ -285,7 +285,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tabs: 3
+```````````````````````````````` example Tabs: 3
     a→a
     ὐ→a
 .
@@ -298,7 +298,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tabs: 4
+```````````````````````````````` example Tabs: 4
   - foo
 
 →bar
@@ -319,7 +319,7 @@ Document[0, 14]
         Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
-```````````````````````````````` example Tabs: 5
+```````````````````````````````` example Tabs: 5
 - foo
 
 →→bar
@@ -340,7 +340,7 @@ Document[0, 13]
       IndentedCodeBlock[9, 13]
 ````````````````````````````````
 
-```````````````````````````````` example Tabs: 6
+```````````````````````````````` example Tabs: 6
 >→→foo
 .
 <blockquote>
@@ -353,7 +353,7 @@ Document[0, 7]
     IndentedCodeBlock[3, 7]
 ````````````````````````````````
 
-```````````````````````````````` example Tabs: 7
+```````````````````````````````` example Tabs: 7
 -→→foo
 .
 <ul>
@@ -370,7 +370,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tabs: 8
+```````````````````````````````` example Tabs: 8
     foo
 →bar
 .
@@ -382,7 +382,7 @@ Document[0, 13]
   IndentedCodeBlock[4, 13]
 ````````````````````````````````
 
-```````````````````````````````` example Tabs: 9
+```````````````````````````````` example Tabs: 9
  - foo
    - bar
 → - baz
@@ -436,7 +436,7 @@ Indicators of block structure always take precedence over indicators
 of inline structure.  So, for example, the following is a list with
 two items, not a list with one item containing a code span:
 
-```````````````````````````````` example Precedence: 1
+```````````````````````````````` example Precedence: 1
 - `one
 - two`
 .
@@ -484,7 +484,7 @@ of three or more matching `-`, `_`, or `*` characters, each followed
 optionally by any number of spaces, forms a
 [thematic break](@).
 
-```````````````````````````````` example Thematic breaks: 1
+```````````````````````````````` example Thematic breaks: 1
 ***
 ---
 ___
@@ -502,7 +502,7 @@ Document[0, 12]
 
 Wrong characters:
 
-```````````````````````````````` example Thematic breaks: 2
+```````````````````````````````` example Thematic breaks: 2
 +++
 .
 <p>+++</p>
@@ -513,7 +513,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example Thematic breaks: 3
+```````````````````````````````` example Thematic breaks: 3
 ===
 .
 <p>===</p>
@@ -526,7 +526,7 @@ Document[0, 4]
 
 Not enough characters:
 
-```````````````````````````````` example Thematic breaks: 4
+```````````````````````````````` example Thematic breaks: 4
 --
 **
 __
@@ -547,7 +547,7 @@ Document[0, 9]
 
 One to three spaces indent are allowed:
 
-```````````````````````````````` example Thematic breaks: 5
+```````````````````````````````` example Thematic breaks: 5
  ***
   ***
    ***
@@ -565,7 +565,7 @@ Document[0, 18]
 
 Four spaces is too many:
 
-```````````````````````````````` example Thematic breaks: 6
+```````````````````````````````` example Thematic breaks: 6
     ***
 .
 <pre><code>***
@@ -576,7 +576,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Thematic breaks: 7
+```````````````````````````````` example Thematic breaks: 7
 Foo
     ***
 .
@@ -593,7 +593,7 @@ Document[0, 12]
 
 More than three characters may be used:
 
-```````````````````````````````` example Thematic breaks: 8
+```````````````````````````````` example Thematic breaks: 8
 _____________________________________
 .
 <hr />
@@ -605,7 +605,7 @@ Document[0, 38]
 
 Spaces are allowed between the characters:
 
-```````````````````````````````` example Thematic breaks: 9
+```````````````````````````````` example Thematic breaks: 9
  - - -
 .
 <hr />
@@ -615,7 +615,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Thematic breaks: 10
+```````````````````````````````` example Thematic breaks: 10
  **  * ** * ** * **
 .
 <hr />
@@ -625,7 +625,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Thematic breaks: 11
+```````````````````````````````` example Thematic breaks: 11
 -     -      -      -
 .
 <hr />
@@ -637,7 +637,7 @@ Document[0, 22]
 
 Spaces are allowed at the end:
 
-```````````````````````````````` example Thematic breaks: 12
+```````````````````````````````` example Thematic breaks: 12
 - - - -    
 .
 <hr />
@@ -649,7 +649,7 @@ Document[0, 12]
 
 However, no other characters may occur in the line:
 
-```````````````````````````````` example Thematic breaks: 13
+```````````````````````````````` example Thematic breaks: 13
 _ _ _ _ a
 
 a------
@@ -673,7 +673,7 @@ Document[0, 28]
 It is required that all of the [non-whitespace characters] be the same.
 So, this is not a thematic break:
 
-```````````````````````````````` example Thematic breaks: 14
+```````````````````````````````` example Thematic breaks: 14
  *-*
 .
 <p><em>-</em></p>
@@ -687,7 +687,7 @@ Document[0, 5]
 
 Thematic breaks do not need blank lines before or after:
 
-```````````````````````````````` example Thematic breaks: 15
+```````````````````````````````` example Thematic breaks: 15
 - foo
 ***
 - bar
@@ -715,7 +715,7 @@ Document[0, 16]
 
 Thematic breaks can interrupt a paragraph:
 
-```````````````````````````````` example Thematic breaks: 16
+```````````````````````````````` example Thematic breaks: 16
 Foo
 ***
 bar
@@ -739,7 +739,7 @@ heading], the interpretation as a
 [setext heading] takes precedence. Thus, for example,
 this is a setext heading, not a paragraph followed by a thematic break:
 
-```````````````````````````````` example Thematic breaks: 17
+```````````````````````````````` example Thematic breaks: 17
 Foo
 ---
 bar
@@ -758,7 +758,7 @@ Document[0, 12]
 When both a thematic break and a list item are possible
 interpretations of a line, the thematic break takes precedence:
 
-```````````````````````````````` example Thematic breaks: 18
+```````````````````````````````` example Thematic breaks: 18
 * Foo
 * * *
 * Bar
@@ -786,7 +786,7 @@ Document[0, 18]
 
 If you want a thematic break in a list item, use a different bullet:
 
-```````````````````````````````` example Thematic breaks: 19
+```````````````````````````````` example Thematic breaks: 19
 - Foo
 - * * *
 .
@@ -823,7 +823,7 @@ characters in the opening sequence.
 
 Simple headings:
 
-```````````````````````````````` example ATX headings: 1
+```````````````````````````````` example ATX headings: 1
 # foo
 ## foo
 ### foo
@@ -856,7 +856,7 @@ Document[0, 51]
 
 More than six `#` characters is not a heading:
 
-```````````````````````````````` example ATX headings: 2
+```````````````````````````````` example ATX headings: 2
 ####### foo
 .
 <p>####### foo</p>
@@ -875,7 +875,7 @@ space was required by the
 and it helps prevent things like the following from being parsed as
 headings:
 
-```````````````````````````````` example ATX headings: 3
+```````````````````````````````` example ATX headings: 3
 #5 bolt
 
 #hashtag
@@ -893,7 +893,7 @@ Document[0, 18]
 
 A tab will not work:
 
-```````````````````````````````` example ATX headings: 4
+```````````````````````````````` example ATX headings: 4
 #→foo
 .
 <p>#→foo</p>
@@ -906,7 +906,7 @@ Document[0, 6]
 
 This is not a heading, because the first `#` is escaped:
 
-```````````````````````````````` example ATX headings: 5
+```````````````````````````````` example ATX headings: 5
 \## foo
 .
 <p>## foo</p>
@@ -919,7 +919,7 @@ Document[0, 8]
 
 Contents are parsed as inlines:
 
-```````````````````````````````` example ATX headings: 6
+```````````````````````````````` example ATX headings: 6
 # foo *bar* \*baz\*
 .
 <h1>foo <em>bar</em> *baz*</h1>
@@ -935,7 +935,7 @@ Document[0, 20]
 
 Leading and trailing blanks are ignored in parsing inline content:
 
-```````````````````````````````` example ATX headings: 7
+```````````````````````````````` example ATX headings: 7
 #                  foo                     
 .
 <h1>foo</h1>
@@ -948,7 +948,7 @@ Document[0, 44]
 
 One to three spaces indentation are allowed:
 
-```````````````````````````````` example ATX headings: 8
+```````````````````````````````` example ATX headings: 8
  ### foo
   ## foo
    # foo
@@ -969,7 +969,7 @@ Document[0, 27]
 
 Four spaces are too much:
 
-```````````````````````````````` example ATX headings: 9
+```````````````````````````````` example ATX headings: 9
     # foo
 .
 <pre><code># foo
@@ -980,7 +980,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example ATX headings: 10
+```````````````````````````````` example ATX headings: 10
 foo
     # bar
 .
@@ -997,7 +997,7 @@ Document[0, 14]
 
 A closing sequence of `#` characters is optional:
 
-```````````````````````````````` example ATX headings: 11
+```````````````````````````````` example ATX headings: 11
 ## foo ##
   ###   bar    ###
 .
@@ -1014,7 +1014,7 @@ Document[0, 29]
 
 It need not be the same length as the opening sequence:
 
-```````````````````````````````` example ATX headings: 12
+```````````````````````````````` example ATX headings: 12
 # foo ##################################
 ##### foo ##
 .
@@ -1031,7 +1031,7 @@ Document[0, 54]
 
 Spaces are allowed after the closing sequence:
 
-```````````````````````````````` example ATX headings: 13
+```````````````````````````````` example ATX headings: 13
 ### foo ###     
 .
 <h3>foo</h3>
@@ -1046,7 +1046,7 @@ A sequence of `#` characters with anything but [spaces] following it
 is not a closing sequence, but counts as part of the contents of the
 heading:
 
-```````````````````````````````` example ATX headings: 14
+```````````````````````````````` example ATX headings: 14
 ### foo ### b
 .
 <h3>foo ### b</h3>
@@ -1059,7 +1059,7 @@ Document[0, 14]
 
 The closing sequence must be preceded by a space:
 
-```````````````````````````````` example ATX headings: 15
+```````````````````````````````` example ATX headings: 15
 # foo#
 .
 <h1>foo#</h1>
@@ -1073,7 +1073,7 @@ Document[0, 7]
 Backslash-escaped `#` characters do not count as part
 of the closing sequence:
 
-```````````````````````````````` example ATX headings: 16
+```````````````````````````````` example ATX headings: 16
 ### foo \###
 ## foo #\##
 # foo \#
@@ -1095,7 +1095,7 @@ Document[0, 34]
 ATX headings need not be separated from surrounding content by blank
 lines, and they can interrupt paragraphs:
 
-```````````````````````````````` example ATX headings: 17
+```````````````````````````````` example ATX headings: 17
 ****
 ## foo
 ****
@@ -1112,7 +1112,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example ATX headings: 18
+```````````````````````````````` example ATX headings: 18
 Foo bar
 # baz
 Bar foo
@@ -1133,7 +1133,7 @@ Document[0, 22]
 
 ATX headings can be empty:
 
-```````````````````````````````` example ATX headings: 19
+```````````````````````````````` example ATX headings: 19
 ## 
 #
 ### ###
@@ -1181,7 +1181,7 @@ them.
 
 Simple examples:
 
-```````````````````````````````` example Setext headings: 1
+```````````````````````````````` example Setext headings: 1
 Foo *bar*
 =========
 
@@ -1205,7 +1205,7 @@ Document[0, 41]
 
 The content of the header may span more than one line:
 
-```````````````````````````````` example Setext headings: 2
+```````````````````````````````` example Setext headings: 2
 Foo *bar
 baz*
 ====
@@ -1225,7 +1225,7 @@ Document[0, 19]
 
 The underlining can be any length:
 
-```````````````````````````````` example Setext headings: 3
+```````````````````````````````` example Setext headings: 3
 Foo
 -------------------------
 
@@ -1246,7 +1246,7 @@ Document[0, 37]
 The heading content can be indented up to three spaces, and need
 not line up with the underlining:
 
-```````````````````````````````` example Setext headings: 4
+```````````````````````````````` example Setext headings: 4
    Foo
 ---
 
@@ -1272,7 +1272,7 @@ Document[0, 37]
 
 Four spaces indent is too much:
 
-```````````````````````````````` example Setext headings: 5
+```````````````````````````````` example Setext headings: 5
     Foo
     ---
 
@@ -1295,7 +1295,7 @@ Document[0, 29]
 The setext heading underline can be indented up to three spaces, and
 may have trailing spaces:
 
-```````````````````````````````` example Setext headings: 6
+```````````````````````````````` example Setext headings: 6
 Foo
    ----      
 .
@@ -1309,7 +1309,7 @@ Document[0, 18]
 
 Four spaces is too much:
 
-```````````````````````````````` example Setext headings: 7
+```````````````````````````````` example Setext headings: 7
 Foo
     ---
 .
@@ -1326,7 +1326,7 @@ Document[0, 12]
 
 The setext heading underline cannot contain internal spaces:
 
-```````````````````````````````` example Setext headings: 8
+```````````````````````````````` example Setext headings: 8
 Foo
 = =
 
@@ -1351,7 +1351,7 @@ Document[0, 19]
 
 Trailing spaces in the content line do not cause a line break:
 
-```````````````````````````````` example Setext headings: 9
+```````````````````````````````` example Setext headings: 9
 Foo  
 -----
 .
@@ -1365,7 +1365,7 @@ Document[0, 12]
 
 Nor does a backslash at the end:
 
-```````````````````````````````` example Setext headings: 10
+```````````````````````````````` example Setext headings: 10
 Foo\
 ----
 .
@@ -1380,7 +1380,7 @@ Document[0, 10]
 Since indicators of block structure take precedence over
 indicators of inline structure, the following are setext headings:
 
-```````````````````````````````` example Setext headings: 11
+```````````````````````````````` example Setext headings: 11
 `Foo
 ----
 `
@@ -1409,7 +1409,7 @@ Document[0, 46]
 The setext heading underline cannot be a [lazy continuation
 line] in a list item or block quote:
 
-```````````````````````````````` example Setext headings: 12
+```````````````````````````````` example Setext headings: 12
 > Foo
 ---
 .
@@ -1426,7 +1426,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Setext headings: 13
+```````````````````````````````` example Setext headings: 13
 > foo
 bar
 ===
@@ -1448,7 +1448,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Setext headings: 14
+```````````````````````````````` example Setext headings: 14
 - Foo
 ---
 .
@@ -1470,7 +1470,7 @@ A blank line is needed between a paragraph and a following
 setext heading, since otherwise the paragraph becomes part
 of the heading's content:
 
-```````````````````````````````` example Setext headings: 15
+```````````````````````````````` example Setext headings: 15
 Foo
 Bar
 ---
@@ -1489,7 +1489,7 @@ Document[0, 12]
 But in general a blank line is not required before or after
 setext headings:
 
-```````````````````````````````` example Setext headings: 16
+```````````````````````````````` example Setext headings: 16
 ---
 Foo
 ---
@@ -1515,7 +1515,7 @@ Document[0, 24]
 
 Setext headings cannot be empty:
 
-```````````````````````````````` example Setext headings: 17
+```````````````````````````````` example Setext headings: 17
 
 ====
 .
@@ -1531,7 +1531,7 @@ Setext heading text lines must not be interpretable as block
 constructs other than paragraphs.  So, the line of dashes
 in these examples gets interpreted as a thematic break:
 
-```````````````````````````````` example Setext headings: 18
+```````````````````````````````` example Setext headings: 18
 ---
 ---
 .
@@ -1544,7 +1544,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Setext headings: 19
+```````````````````````````````` example Setext headings: 19
 - foo
 -----
 .
@@ -1562,7 +1562,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Setext headings: 20
+```````````````````````````````` example Setext headings: 20
     foo
 ---
 .
@@ -1576,7 +1576,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Setext headings: 21
+```````````````````````````````` example Setext headings: 21
 > foo
 -----
 .
@@ -1596,7 +1596,7 @@ Document[0, 12]
 If you want a heading with `> foo` as its literal text, you can
 use backslash escapes:
 
-```````````````````````````````` example Setext headings: 22
+```````````````````````````````` example Setext headings: 22
 \> foo
 ------
 .
@@ -1631,7 +1631,7 @@ increases the expressive power of CommonMark, by allowing
 multiline headings.  Authors who want interpretation 1 can
 put a blank line after the first paragraph:
 
-```````````````````````````````` example Setext headings: 23
+```````````````````````````````` example Setext headings: 23
 Foo
 
 bar
@@ -1655,7 +1655,7 @@ Document[0, 17]
 Authors who want interpretation 2 can put blank lines around
 the thematic break,
 
-```````````````````````````````` example Setext headings: 24
+```````````````````````````````` example Setext headings: 24
 Foo
 bar
 
@@ -1682,7 +1682,7 @@ Document[0, 18]
 or use a thematic break that cannot count as a [setext heading
 underline], such as
 
-```````````````````````````````` example Setext headings: 25
+```````````````````````````````` example Setext headings: 25
 Foo
 bar
 * * *
@@ -1706,7 +1706,7 @@ Document[0, 18]
 
 Authors who want interpretation 3 can use backslash escapes:
 
-```````````````````````````````` example Setext headings: 26
+```````````````````````````````` example Setext headings: 26
 Foo
 bar
 \---
@@ -1744,7 +1744,7 @@ a blank line between a paragraph and a following indented code block.
 (A blank line is not needed, however, between a code block and a following
 paragraph.)
 
-```````````````````````````````` example Indented code blocks: 1
+```````````````````````````````` example Indented code blocks: 1
     a simple
       indented code block
 .
@@ -1761,7 +1761,7 @@ If there is any ambiguity between an interpretation of indentation
 as a code block and as indicating that material belongs to a [list
 item][list items], the list item interpretation takes precedence:
 
-```````````````````````````````` example Indented code blocks: 2
+```````````````````````````````` example Indented code blocks: 2
   - foo
 
     bar
@@ -1783,7 +1783,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Indented code blocks: 3
+```````````````````````````````` example Indented code blocks: 3
 1.  foo
 
     - bar
@@ -1813,7 +1813,7 @@ Document[0, 19]
 The contents of a code block are literal text, and do not get parsed
 as Markdown:
 
-```````````````````````````````` example Indented code blocks: 4
+```````````````````````````````` example Indented code blocks: 4
     <a/>
     *hi*
 
@@ -1832,7 +1832,7 @@ Document[0, 29]
 
 Here we have three chunks separated by blank lines:
 
-```````````````````````````````` example Indented code blocks: 5
+```````````````````````````````` example Indented code blocks: 5
     chunk1
 
     chunk2
@@ -1858,7 +1858,7 @@ Document[0, 41]
 Any initial spaces beyond four will be included in the content, even
 in interior blank lines:
 
-```````````````````````````````` example Indented code blocks: 6
+```````````````````````````````` example Indented code blocks: 6
     chunk1
       
       chunk2
@@ -1876,7 +1876,7 @@ Document[0, 31]
 An indented code block cannot interrupt a paragraph.  (This
 allows hanging indents and the like.)
 
-```````````````````````````````` example Indented code blocks: 7
+```````````````````````````````` example Indented code blocks: 7
 Foo
     bar
 
@@ -1896,7 +1896,7 @@ However, any non-blank line with fewer than four leading spaces ends
 the code block immediately.  So a paragraph may occur immediately
 after indented code:
 
-```````````````````````````````` example Indented code blocks: 8
+```````````````````````````````` example Indented code blocks: 8
     foo
 bar
 .
@@ -1914,7 +1914,7 @@ Document[0, 12]
 And indented code can occur immediately before and after other kinds of
 blocks:
 
-```````````````````````````````` example Indented code blocks: 9
+```````````````````````````````` example Indented code blocks: 9
 # Heading
     foo
 Heading
@@ -1943,7 +1943,7 @@ Document[0, 46]
 
 The first line can be indented more than four spaces:
 
-```````````````````````````````` example Indented code blocks: 10
+```````````````````````````````` example Indented code blocks: 10
         foo
     bar
 .
@@ -1959,7 +1959,7 @@ Document[0, 20]
 Blank lines preceding or following an indented code block
 are not included in it:
 
-```````````````````````````````` example Indented code blocks: 11
+```````````````````````````````` example Indented code blocks: 11
 
     
     foo
@@ -1976,7 +1976,7 @@ Document[0, 20]
 
 Trailing spaces are included in the code block's content:
 
-```````````````````````````````` example Indented code blocks: 12
+```````````````````````````````` example Indented code blocks: 12
     foo  
 .
 <pre><code>foo  
@@ -2034,7 +2034,7 @@ particular treatment of the [info string].
 
 Here is a simple example with backticks:
 
-```````````````````````````````` example Fenced code blocks: 1
+```````````````````````````````` example Fenced code blocks: 1
 ```
 <
  >
@@ -2051,7 +2051,7 @@ Document[0, 13]
 
 With tildes:
 
-```````````````````````````````` example Fenced code blocks: 2
+```````````````````````````````` example Fenced code blocks: 2
 ~~~
 <
  >
@@ -2069,7 +2069,7 @@ Document[0, 13]
 The closing code fence must use the same character as the opening
 fence:
 
-```````````````````````````````` example Fenced code blocks: 3
+```````````````````````````````` example Fenced code blocks: 3
 ```
 aaa
 ~~~
@@ -2084,7 +2084,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 4
+```````````````````````````````` example Fenced code blocks: 4
 ~~~
 aaa
 ```
@@ -2101,7 +2101,7 @@ Document[0, 16]
 
 The closing code fence must be at least as long as the opening fence:
 
-```````````````````````````````` example Fenced code blocks: 5
+```````````````````````````````` example Fenced code blocks: 5
 ````
 aaa
 ```
@@ -2116,7 +2116,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 6
+```````````````````````````````` example Fenced code blocks: 6
 ~~~~
 aaa
 ~~~
@@ -2134,7 +2134,7 @@ Document[0, 18]
 Unclosed code blocks are closed by the end of the document
 (or the enclosing [block quote][block quotes] or [list item][list items]):
 
-```````````````````````````````` example Fenced code blocks: 7
+```````````````````````````````` example Fenced code blocks: 7
 ```
 .
 <pre><code></code></pre>
@@ -2144,7 +2144,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 8
+```````````````````````````````` example Fenced code blocks: 8
 `````
 
 ```
@@ -2160,7 +2160,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 9
+```````````````````````````````` example Fenced code blocks: 9
 > ```
 > aaa
 
@@ -2182,7 +2182,7 @@ Document[0, 17]
 
 A code block can have all empty lines as its content:
 
-```````````````````````````````` example Fenced code blocks: 10
+```````````````````````````````` example Fenced code blocks: 10
 ```
 
   
@@ -2199,7 +2199,7 @@ Document[0, 12]
 
 A code block can be empty:
 
-```````````````````````````````` example Fenced code blocks: 11
+```````````````````````````````` example Fenced code blocks: 11
 ```
 ```
 .
@@ -2214,7 +2214,7 @@ Fences can be indented.  If the opening fence is indented,
 content lines will have equivalent opening indentation removed,
 if present:
 
-```````````````````````````````` example Fenced code blocks: 12
+```````````````````````````````` example Fenced code blocks: 12
  ```
  aaa
 aaa
@@ -2229,7 +2229,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 13
+```````````````````````````````` example Fenced code blocks: 13
   ```
 aaa
   aaa
@@ -2246,7 +2246,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 14
+```````````````````````````````` example Fenced code blocks: 14
    ```
    aaa
     aaa
@@ -2265,7 +2265,7 @@ Document[0, 35]
 
 Four spaces indentation produces an indented code block:
 
-```````````````````````````````` example Fenced code blocks: 15
+```````````````````````````````` example Fenced code blocks: 15
     ```
     aaa
     ```
@@ -2283,7 +2283,7 @@ Document[0, 24]
 Closing fences may be indented by 0-3 spaces, and their indentation
 need not match that of the opening fence:
 
-```````````````````````````````` example Fenced code blocks: 16
+```````````````````````````````` example Fenced code blocks: 16
 ```
 aaa
   ```
@@ -2296,7 +2296,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 17
+```````````````````````````````` example Fenced code blocks: 17
    ```
 aaa
   ```
@@ -2311,7 +2311,7 @@ Document[0, 17]
 
 This is not a closing fence, because it is indented 4 spaces:
 
-```````````````````````````````` example Fenced code blocks: 18
+```````````````````````````````` example Fenced code blocks: 18
 ```
 aaa
     ```
@@ -2328,7 +2328,7 @@ Document[0, 16]
 
 Code fences (opening and closing) cannot contain internal spaces:
 
-```````````````````````````````` example Fenced code blocks: 19
+```````````````````````````````` example Fenced code blocks: 19
 ``` ```
 aaa
 .
@@ -2343,7 +2343,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 20
+```````````````````````````````` example Fenced code blocks: 20
 ~~~~~~
 aaa
 ~~~ ~~
@@ -2360,7 +2360,7 @@ Document[0, 18]
 Fenced code blocks can interrupt paragraphs, and can be followed
 directly by paragraphs, without a blank line between:
 
-```````````````````````````````` example Fenced code blocks: 21
+```````````````````````````````` example Fenced code blocks: 21
 foo
 ```
 bar
@@ -2384,7 +2384,7 @@ Document[0, 20]
 Other blocks can also occur before and after fenced code blocks
 without an intervening blank line:
 
-```````````````````````````````` example Fenced code blocks: 22
+```````````````````````````````` example Fenced code blocks: 22
 foo
 ---
 ~~~
@@ -2411,7 +2411,7 @@ Opening and closing spaces will be stripped, and the first word, prefixed
 with `language-`, is used as the value for the `class` attribute of the
 `code` element within the enclosing `pre` element.
 
-```````````````````````````````` example Fenced code blocks: 23
+```````````````````````````````` example Fenced code blocks: 23
 ```ruby
 def foo(x)
   return 3
@@ -2428,7 +2428,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 24
+```````````````````````````````` example Fenced code blocks: 24
 ~~~~    ruby startline=3 $%@#$
 def foo(x)
   return 3
@@ -2445,7 +2445,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
-```````````````````````````````` example Fenced code blocks: 25
+```````````````````````````````` example Fenced code blocks: 25
 ````;
 ````
 .
@@ -2458,7 +2458,7 @@ Document[0, 11]
 
 [Info strings] for backtick code blocks cannot contain backticks:
 
-```````````````````````````````` example Fenced code blocks: 26
+```````````````````````````````` example Fenced code blocks: 26
 ``` aa ```
 foo
 .
@@ -2475,7 +2475,7 @@ Document[0, 15]
 
 Closing code fences cannot have [info strings]:
 
-```````````````````````````````` example Fenced code blocks: 27
+```````````````````````````````` example Fenced code blocks: 27
 ```
 ``` aaa
 ```
@@ -2552,7 +2552,7 @@ of long tags inside a wrapped paragraph as starting HTML blocks.)
 Some simple examples follow.  Here are some basic HTML blocks
 of type 6:
 
-```````````````````````````````` example HTML blocks: 1
+```````````````````````````````` example HTML blocks: 1
 <table>
   <tr>
     <td>
@@ -2579,7 +2579,7 @@ Document[0, 72]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 2
+```````````````````````````````` example HTML blocks: 2
  <div>
   *hello*
          <foo><a>
@@ -2595,7 +2595,7 @@ Document[0, 35]
 
 A block can also start with a closing tag:
 
-```````````````````````````````` example HTML blocks: 3
+```````````````````````````````` example HTML blocks: 3
 </div>
 *foo*
 .
@@ -2609,7 +2609,7 @@ Document[0, 13]
 
 Here we have two HTML blocks with a Markdown paragraph between them:
 
-```````````````````````````````` example HTML blocks: 4
+```````````````````````````````` example HTML blocks: 4
 <DIV CLASS="foo">
 
 *Markdown*
@@ -2632,7 +2632,7 @@ Document[0, 38]
 The tag on the first line can be partial, as long
 as it is split where there would be whitespace:
 
-```````````````````````````````` example HTML blocks: 5
+```````````````````````````````` example HTML blocks: 5
 <div id="foo"
   class="bar">
 </div>
@@ -2646,7 +2646,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 6
+```````````````````````````````` example HTML blocks: 6
 <div id="foo" class="bar
   baz">
 </div>
@@ -2661,7 +2661,7 @@ Document[0, 40]
 
 
 An open tag need not be closed:
-```````````````````````````````` example HTML blocks: 7
+```````````````````````````````` example HTML blocks: 7
 <div>
 *foo*
 
@@ -2683,7 +2683,7 @@ Document[0, 19]
 A partial tag need not even be completed (garbage
 in, garbage out):
 
-```````````````````````````````` example HTML blocks: 8
+```````````````````````````````` example HTML blocks: 8
 <div id="foo"
 *hi*
 .
@@ -2695,7 +2695,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 9
+```````````````````````````````` example HTML blocks: 9
 <div class
 foo
 .
@@ -2710,7 +2710,7 @@ Document[0, 15]
 The initial tag doesn't even need to be a valid
 tag, as long as it starts like one:
 
-```````````````````````````````` example HTML blocks: 10
+```````````````````````````````` example HTML blocks: 10
 <div *???-&&&-<---
 *foo*
 .
@@ -2725,7 +2725,7 @@ Document[0, 25]
 In type 6 blocks, the initial tag need not be on a line by
 itself:
 
-```````````````````````````````` example HTML blocks: 11
+```````````````````````````````` example HTML blocks: 11
 <div><a href="bar">*foo*</a></div>
 .
 <div><a href="bar">*foo*</a></div>
@@ -2735,7 +2735,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 12
+```````````````````````````````` example HTML blocks: 12
 <table><tr><td>
 foo
 </td></tr></table>
@@ -2755,7 +2755,7 @@ example, what looks like a Markdown code block
 is actually part of the HTML block, which continues until a blank
 line or the end of the document is reached:
 
-```````````````````````````````` example HTML blocks: 13
+```````````````````````````````` example HTML blocks: 13
 <div></div>
 ``` c
 int x = 33;
@@ -2775,7 +2775,7 @@ To start an [HTML block] with a tag that is *not* in the
 list of block-level tags in (6), you must put the tag by
 itself on the first line (and it must be complete):
 
-```````````````````````````````` example HTML blocks: 14
+```````````````````````````````` example HTML blocks: 14
 <a href="foo">
 *bar*
 </a>
@@ -2791,7 +2791,7 @@ Document[0, 26]
 
 In type 7 blocks, the [tag name] can be anything:
 
-```````````````````````````````` example HTML blocks: 15
+```````````````````````````````` example HTML blocks: 15
 <Warning>
 *bar*
 </Warning>
@@ -2805,7 +2805,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 16
+```````````````````````````````` example HTML blocks: 16
 <i class="foo">
 *bar*
 </i>
@@ -2819,7 +2819,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 17
+```````````````````````````````` example HTML blocks: 17
 </ins>
 *bar*
 .
@@ -2837,7 +2837,7 @@ The `<del>` tag is a nice example.  We can surround content with
 `<del>` tags in three different ways.  In this case, we get a raw
 HTML block, because the `<del>` tag is on a line by itself:
 
-```````````````````````````````` example HTML blocks: 18
+```````````````````````````````` example HTML blocks: 18
 <del>
 *foo*
 </del>
@@ -2855,7 +2855,7 @@ In this case, we get a raw HTML block that just includes
 the `<del>` tag (because it ends with the following blank
 line).  So the contents get interpreted as CommonMark:
 
-```````````````````````````````` example HTML blocks: 19
+```````````````````````````````` example HTML blocks: 19
 <del>
 
 *foo*
@@ -2880,7 +2880,7 @@ as [raw HTML] *inside* the CommonMark paragraph.  (Because
 the tag is not on a line by itself, we get inline HTML
 rather than an [HTML block].)
 
-```````````````````````````````` example HTML blocks: 20
+```````````````````````````````` example HTML blocks: 20
 <del>*foo*</del>
 .
 <p><del><em>foo</em></del></p>
@@ -2903,7 +2903,7 @@ As a result, these blocks can contain blank lines:
 
 A pre tag (type 1):
 
-```````````````````````````````` example HTML blocks: 21
+```````````````````````````````` example HTML blocks: 21
 <pre language="haskell"><code>
 import Text.HTML.TagSoup
 
@@ -2925,7 +2925,7 @@ Document[0, 115]
 
 A script tag (type 1):
 
-```````````````````````````````` example HTML blocks: 22
+```````````````````````````````` example HTML blocks: 22
 <script type="text/javascript">
 // JavaScript example
 
@@ -2945,7 +2945,7 @@ Document[0, 130]
 
 A style tag (type 1):
 
-```````````````````````````````` example HTML blocks: 23
+```````````````````````````````` example HTML blocks: 23
 <style
   type="text/css">
 h1 {color:red;}
@@ -2969,7 +2969,7 @@ If there is no matching end tag, the block will end at the
 end of the document (or the enclosing [block quote][block quotes]
 or [list item][list items]):
 
-```````````````````````````````` example HTML blocks: 24
+```````````````````````````````` example HTML blocks: 24
 <style
   type="text/css">
 
@@ -2985,7 +2985,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 25
+```````````````````````````````` example HTML blocks: 25
 > <div>
 > foo
 
@@ -3005,7 +3005,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 26
+```````````````````````````````` example HTML blocks: 26
 - <div>
 - foo
 .
@@ -3028,7 +3028,7 @@ Document[0, 14]
 
 The end tag can occur on the same line as the start tag:
 
-```````````````````````````````` example HTML blocks: 27
+```````````````````````````````` example HTML blocks: 27
 <style>p{color:red;}</style>
 *foo*
 .
@@ -3043,7 +3043,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 28
+```````````````````````````````` example HTML blocks: 28
 <!-- foo -->*bar*
 *baz*
 .
@@ -3061,7 +3061,7 @@ Document[0, 24]
 Note that anything on the last line after the
 end tag will be included in the [HTML block]:
 
-```````````````````````````````` example HTML blocks: 29
+```````````````````````````````` example HTML blocks: 29
 <script>
 foo
 </script>1. *bar*
@@ -3077,7 +3077,7 @@ Document[0, 31]
 
 A comment (type 2):
 
-```````````````````````````````` example HTML blocks: 30
+```````````````````````````````` example HTML blocks: 30
 <!-- Foo
 
 bar
@@ -3096,7 +3096,7 @@ Document[0, 25]
 
 A processing instruction (type 3):
 
-```````````````````````````````` example HTML blocks: 31
+```````````````````````````````` example HTML blocks: 31
 <?php
 
   echo '>';
@@ -3116,7 +3116,7 @@ Document[0, 23]
 
 A declaration (type 4):
 
-```````````````````````````````` example HTML blocks: 32
+```````````````````````````````` example HTML blocks: 32
 <!DOCTYPE html>
 .
 <!DOCTYPE html>
@@ -3128,7 +3128,7 @@ Document[0, 16]
 
 CDATA (type 5):
 
-```````````````````````````````` example HTML blocks: 33
+```````````````````````````````` example HTML blocks: 33
 <![CDATA[
 function matchwo(a,b)
 {
@@ -3162,7 +3162,7 @@ Document[0, 114]
 
 The opening tag can be indented 1-3 spaces, but not 4:
 
-```````````````````````````````` example HTML blocks: 34
+```````````````````````````````` example HTML blocks: 34
   <!-- foo -->
 
     <!-- foo -->
@@ -3177,7 +3177,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 35
+```````````````````````````````` example HTML blocks: 35
   <div>
 
     <div>
@@ -3195,7 +3195,7 @@ Document[0, 19]
 An HTML block of types 1--6 can interrupt a paragraph, and need not be
 preceded by a blank line.
 
-```````````````````````````````` example HTML blocks: 36
+```````````````````````````````` example HTML blocks: 36
 Foo
 <div>
 bar
@@ -3216,7 +3216,7 @@ Document[0, 21]
 However, a following blank line is needed, except at the end of
 a document, and except for blocks of types 1--5, above:
 
-```````````````````````````````` example HTML blocks: 37
+```````````````````````````````` example HTML blocks: 37
 <div>
 bar
 </div>
@@ -3234,7 +3234,7 @@ Document[0, 23]
 
 HTML blocks of type 7 cannot interrupt a paragraph:
 
-```````````````````````````````` example HTML blocks: 38
+```````````````````````````````` example HTML blocks: 38
 Foo
 <a href="bar">
 baz
@@ -3283,7 +3283,7 @@ simply separate the Markdown from the HTML using blank lines:
 
 Compare:
 
-```````````````````````````````` example HTML blocks: 39
+```````````````````````````````` example HTML blocks: 39
 <div>
 
 *Emphasized* text.
@@ -3304,7 +3304,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example HTML blocks: 40
+```````````````````````````````` example HTML blocks: 40
 <div>
 *Emphasized* text.
 </div>
@@ -3329,7 +3329,7 @@ blocks into Markdown documents with 100% reliability.  However,
 *in most cases* this will work fine, because the blank lines in
 HTML are usually followed by HTML block tags.  For example:
 
-```````````````````````````````` example HTML blocks: 41
+```````````````````````````````` example HTML blocks: 41
 <table>
 
 <tr>
@@ -3363,7 +3363,7 @@ There are problems, however, if the inner tags are indented
 *and* separated by spaces, as then they will be interpreted as
 an indented code block:
 
-```````````````````````````````` example HTML blocks: 42
+```````````````````````````````` example HTML blocks: 42
 <table>
 
   <tr>
@@ -3418,7 +3418,7 @@ and reference-style [images] elsewhere in the document.  [Link
 reference definitions] can come either before or after the links that use
 them.
 
-```````````````````````````````` example Link reference definitions: 1
+```````````````````````````````` example Link reference definitions: 1
 [foo]: /url "title"
 
 [foo]
@@ -3433,7 +3433,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Link reference definitions: 2
+```````````````````````````````` example Link reference definitions: 2
    [foo]: 
       /url  
            'the title'  
@@ -3450,7 +3450,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Link reference definitions: 3
+```````````````````````````````` example Link reference definitions: 3
 [Foo*bar\]]:my_(url) 'title (with parens)'
 
 [Foo*bar\]]
@@ -3465,7 +3465,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Link reference definitions: 4
+```````````````````````````````` example Link reference definitions: 4
 [Foo bar]:
 <my%20url>
 'title'
@@ -3484,7 +3484,7 @@ Document[0, 41]
 
 The title may extend over multiple lines:
 
-```````````````````````````````` example Link reference definitions: 5
+```````````````````````````````` example Link reference definitions: 5
 [foo]: /url '
 title
 line1
@@ -3509,7 +3509,7 @@ Document[0, 41]
 
 However, it may not contain a [blank line]:
 
-```````````````````````````````` example Link reference definitions: 6
+```````````````````````````````` example Link reference definitions: 6
 [foo]: /url 'title
 
 with blank line'
@@ -3535,7 +3535,7 @@ Document[0, 44]
 
 The title may be omitted:
 
-```````````````````````````````` example Link reference definitions: 7
+```````````````````````````````` example Link reference definitions: 7
 [foo]:
 /url
 
@@ -3553,7 +3553,7 @@ Document[0, 19]
 
 The link destination may not be omitted:
 
-```````````````````````````````` example Link reference definitions: 8
+```````````````````````````````` example Link reference definitions: 8
 [foo]:
 
 [foo]
@@ -3575,7 +3575,7 @@ Document[0, 14]
 Both title and destination can contain backslash escapes
 and literal backslashes:
 
-```````````````````````````````` example Link reference definitions: 9
+```````````````````````````````` example Link reference definitions: 9
 [foo]: /url\bar\*baz "foo\"bar\baz"
 
 [foo]
@@ -3592,7 +3592,7 @@ Document[0, 43]
 
 A link can come before its corresponding definition:
 
-```````````````````````````````` example Link reference definitions: 10
+```````````````````````````````` example Link reference definitions: 10
 [foo]
 
 [foo]: url
@@ -3610,7 +3610,7 @@ Document[0, 18]
 If there are several matching definitions, the first one takes
 precedence:
 
-```````````````````````````````` example Link reference definitions: 11
+```````````````````````````````` example Link reference definitions: 11
 [foo]
 
 [foo]: first
@@ -3630,7 +3630,7 @@ Document[0, 34]
 As noted in the section on [Links], matching of labels is
 case-insensitive (see [matches]).
 
-```````````````````````````````` example Link reference definitions: 12
+```````````````````````````````` example Link reference definitions: 12
 [FOO]: /url
 
 [Foo]
@@ -3645,7 +3645,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Link reference definitions: 13
+```````````````````````````````` example Link reference definitions: 13
 [ΑΓΩ]: /φου
 
 [αγω]
@@ -3663,7 +3663,7 @@ Document[0, 19]
 Here is a link reference definition with no corresponding link.
 It contributes nothing to the document.
 
-```````````````````````````````` example Link reference definitions: 14
+```````````````````````````````` example Link reference definitions: 14
 [foo]: /url
 .
 .
@@ -3674,7 +3674,7 @@ Document[0, 12]
 
 Here is another one:
 
-```````````````````````````````` example Link reference definitions: 15
+```````````````````````````````` example Link reference definitions: 15
 [
 foo
 ]: /url
@@ -3692,7 +3692,7 @@ Document[0, 18]
 This is not a link reference definition, because there are
 [non-whitespace characters] after the title:
 
-```````````````````````````````` example Link reference definitions: 16
+```````````````````````````````` example Link reference definitions: 16
 [foo]: /url "title" ok
 .
 <p>[foo]: /url &quot;title&quot; ok</p>
@@ -3707,7 +3707,7 @@ Document[0, 23]
 
 This is a link reference definition, but it has no title:
 
-```````````````````````````````` example Link reference definitions: 17
+```````````````````````````````` example Link reference definitions: 17
 [foo]: /url
 "title" ok
 .
@@ -3723,7 +3723,7 @@ Document[0, 23]
 This is not a link reference definition, because it is indented
 four spaces:
 
-```````````````````````````````` example Link reference definitions: 18
+```````````````````````````````` example Link reference definitions: 18
     [foo]: /url "title"
 
 [foo]
@@ -3743,7 +3743,7 @@ Document[0, 31]
 This is not a link reference definition, because it occurs inside
 a code block:
 
-```````````````````````````````` example Link reference definitions: 19
+```````````````````````````````` example Link reference definitions: 19
 ```
 [foo]: /url
 ```
@@ -3764,7 +3764,7 @@ Document[0, 27]
 
 A [link reference definition] cannot interrupt a paragraph.
 
-```````````````````````````````` example Link reference definitions: 20
+```````````````````````````````` example Link reference definitions: 20
 Foo
 [bar]: /baz
 
@@ -3790,7 +3790,7 @@ Document[0, 23]
 However, it can directly follow other block elements, such as headings
 and thematic breaks, and it need not be followed by a blank line.
 
-```````````````````````````````` example Link reference definitions: 21
+```````````````````````````````` example Link reference definitions: 21
 # [Foo]
 [foo]: /url
 > bar
@@ -3814,7 +3814,7 @@ Document[0, 26]
 Several [link reference definitions]
 can occur one after another, without intervening blank lines.
 
-```````````````````````````````` example Link reference definitions: 22
+```````````````````````````````` example Link reference definitions: 22
 [foo]: /foo-url "foo"
 [bar]: /bar-url
   "bar"
@@ -3851,7 +3851,7 @@ inside block containers, like lists and block quotations.  They
 affect the entire document, not just the container in which they
 are defined:
 
-```````````````````````````````` example Link reference definitions: 23
+```````````````````````````````` example Link reference definitions: 23
 [foo]
 
 > [foo]: /url
@@ -3881,7 +3881,7 @@ is formed by concatenating the lines and removing initial and final
 
 A simple example with two paragraphs:
 
-```````````````````````````````` example Paragraphs: 1
+```````````````````````````````` example Paragraphs: 1
 aaa
 
 bbb
@@ -3899,7 +3899,7 @@ Document[0, 9]
 
 Paragraphs can contain multiple lines, but no blank lines:
 
-```````````````````````````````` example Paragraphs: 2
+```````````````````````````````` example Paragraphs: 2
 aaa
 bbb
 
@@ -3925,7 +3925,7 @@ Document[0, 17]
 
 Multiple blank lines between paragraph have no effect:
 
-```````````````````````````````` example Paragraphs: 3
+```````````````````````````````` example Paragraphs: 3
 aaa
 
 
@@ -3944,7 +3944,7 @@ Document[0, 10]
 
 Leading spaces are skipped:
 
-```````````````````````````````` example Paragraphs: 4
+```````````````````````````````` example Paragraphs: 4
   aaa
  bbb
 .
@@ -3962,7 +3962,7 @@ Document[0, 11]
 Lines after the first may be indented any amount, since indented
 code blocks cannot interrupt paragraphs.
 
-```````````````````````````````` example Paragraphs: 5
+```````````````````````````````` example Paragraphs: 5
 aaa
              bbb
                                        ccc
@@ -3984,7 +3984,7 @@ Document[0, 64]
 However, the first line may be indented at most three spaces,
 or an indented code block will be triggered:
 
-```````````````````````````````` example Paragraphs: 6
+```````````````````````````````` example Paragraphs: 6
    aaa
 bbb
 .
@@ -3999,7 +3999,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 7
+```````````````````````````````` example Paragraphs: 7
     aaa
 bbb
 .
@@ -4018,7 +4018,7 @@ Final spaces are stripped before inline parsing, so a paragraph
 that ends with two or more spaces will not end with a [hard line
 break]:
 
-```````````````````````````````` example Paragraphs: 8
+```````````````````````````````` example Paragraphs: 8
 aaa     
 bbb     
 .
@@ -4041,7 +4041,7 @@ is [tight] or [loose].
 
 Blank lines at the beginning and end of the document are also ignored.
 
-```````````````````````````````` example Blank lines: 1
+```````````````````````````````` example Blank lines: 1
   
 
 aaa
@@ -4113,7 +4113,7 @@ Nothing else counts as a [block quote](#block-quotes).
 
 Here is a simple example:
 
-```````````````````````````````` example Block quotes: 1
+```````````````````````````````` example Block quotes: 1
 > # Foo
 > bar
 > baz
@@ -4137,7 +4137,7 @@ Document[0, 20]
 
 The spaces after the `>` characters can be omitted:
 
-```````````````````````````````` example Block quotes: 2
+```````````````````````````````` example Block quotes: 2
 ># Foo
 >bar
 > baz
@@ -4161,7 +4161,7 @@ Document[0, 18]
 
 The `>` characters can be indented 1-3 spaces:
 
-```````````````````````````````` example Block quotes: 3
+```````````````````````````````` example Block quotes: 3
    > # Foo
    > bar
  > baz
@@ -4185,7 +4185,7 @@ Document[0, 27]
 
 Four spaces gives us a code block:
 
-```````````````````````````````` example Block quotes: 4
+```````````````````````````````` example Block quotes: 4
     > # Foo
     > bar
     > baz
@@ -4203,7 +4203,7 @@ Document[0, 32]
 The Laziness clause allows us to omit the `>` before a
 paragraph continuation line:
 
-```````````````````````````````` example Block quotes: 5
+```````````````````````````````` example Block quotes: 5
 > # Foo
 > bar
 baz
@@ -4228,7 +4228,7 @@ Document[0, 18]
 A block quote can contain some lazy and some non-lazy
 continuation lines:
 
-```````````````````````````````` example Block quotes: 6
+```````````````````````````````` example Block quotes: 6
 > bar
 baz
 > foo
@@ -4261,7 +4261,7 @@ For example, the `> ` cannot be omitted in the second line of
 
 without changing the meaning:
 
-```````````````````````````````` example Block quotes: 7
+```````````````````````````````` example Block quotes: 7
 > foo
 ---
 .
@@ -4287,7 +4287,7 @@ Similarly, if we omit the `> ` in the second line of
 
 then the block quote ends after the first line:
 
-```````````````````````````````` example Block quotes: 8
+```````````````````````````````` example Block quotes: 8
 > - foo
 - bar
 .
@@ -4316,7 +4316,7 @@ Document[0, 14]
 For the same reason, we can't omit the `> ` in front of
 subsequent lines of an indented or fenced code block:
 
-```````````````````````````````` example Block quotes: 9
+```````````````````````````````` example Block quotes: 9
 >     foo
     bar
 .
@@ -4334,7 +4334,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quotes: 10
+```````````````````````````````` example Block quotes: 10
 > ```
 foo
 ```
@@ -4357,7 +4357,7 @@ Document[0, 14]
 Note that in the following case, we have a paragraph
 continuation line:
 
-```````````````````````````````` example Block quotes: 11
+```````````````````````````````` example Block quotes: 11
 > foo
     - bar
 .
@@ -4388,7 +4388,7 @@ interrupt paragraphs, so it is a [paragraph continuation line].
 
 A block quote can be empty:
 
-```````````````````````````````` example Block quotes: 12
+```````````````````````````````` example Block quotes: 12
 >
 .
 <blockquote>
@@ -4399,7 +4399,7 @@ Document[0, 2]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quotes: 13
+```````````````````````````````` example Block quotes: 13
 >
 >  
 > 
@@ -4414,7 +4414,7 @@ Document[0, 9]
 
 A block quote can have initial or final blank lines:
 
-```````````````````````````````` example Block quotes: 14
+```````````````````````````````` example Block quotes: 14
 >
 > foo
 >  
@@ -4432,7 +4432,7 @@ Document[0, 12]
 
 A blank line always separates block quotes:
 
-```````````````````````````````` example Block quotes: 15
+```````````````````````````````` example Block quotes: 15
 > foo
 
 > bar
@@ -4462,7 +4462,7 @@ whether two block quotes or one are wanted.)
 Consecutiveness means that if we put these block quotes together,
 we get a single block quote:
 
-```````````````````````````````` example Block quotes: 16
+```````````````````````````````` example Block quotes: 16
 > foo
 > bar
 .
@@ -4482,7 +4482,7 @@ Document[0, 12]
 
 To get a block quote with two paragraphs, use:
 
-```````````````````````````````` example Block quotes: 17
+```````````````````````````````` example Block quotes: 17
 > foo
 >
 > bar
@@ -4503,7 +4503,7 @@ Document[0, 14]
 
 Block quotes can interrupt paragraphs:
 
-```````````````````````````````` example Block quotes: 18
+```````````````````````````````` example Block quotes: 18
 foo
 > bar
 .
@@ -4524,7 +4524,7 @@ Document[0, 10]
 In general, blank lines are not needed before or after block
 quotes:
 
-```````````````````````````````` example Block quotes: 19
+```````````````````````````````` example Block quotes: 19
 > aaa
 ***
 > bbb
@@ -4551,7 +4551,7 @@ Document[0, 16]
 However, because of laziness, a blank line is needed between
 a block quote and a following paragraph:
 
-```````````````````````````````` example Block quotes: 20
+```````````````````````````````` example Block quotes: 20
 > bar
 baz
 .
@@ -4569,7 +4569,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quotes: 21
+```````````````````````````````` example Block quotes: 21
 > bar
 
 baz
@@ -4588,7 +4588,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quotes: 22
+```````````````````````````````` example Block quotes: 22
 > bar
 >
 baz
@@ -4611,7 +4611,7 @@ It is a consequence of the Laziness rule that any number
 of initial `>`s may be omitted on a continuation line of a
 nested block quote:
 
-```````````````````````````````` example Block quotes: 23
+```````````````````````````````` example Block quotes: 23
 > > > foo
 bar
 .
@@ -4635,7 +4635,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Block quotes: 24
+```````````````````````````````` example Block quotes: 24
 >>> foo
 > bar
 >>baz
@@ -4668,7 +4668,7 @@ remember that the [block quote marker] includes
 both the `>` and a following space.  So *five spaces* are needed after
 the `>`:
 
-```````````````````````````````` example Block quotes: 25
+```````````````````````````````` example Block quotes: 25
 >     code
 
 >    not code
@@ -4720,7 +4720,7 @@ The following rules define [list items]:
 
 For example, let *Ls* be the lines
 
-```````````````````````````````` example List items: 1
+```````````````````````````````` example List items: 1
 A paragraph
 with two lines.
 
@@ -4752,7 +4752,7 @@ And let *M* be the marker `1.`, and *N* = 2.  Then rule #1 says
 that the following is an ordered list item with start number 1,
 and the same contents as *Ls*:
 
-```````````````````````````````` example List items: 2
+```````````````````````````````` example List items: 2
 1.  A paragraph
     with two lines.
 
@@ -4797,7 +4797,7 @@ item.
 Here are some examples showing how far content must be indented to be
 put under the list item:
 
-```````````````````````````````` example List items: 3
+```````````````````````````````` example List items: 3
 - one
 
  two
@@ -4817,7 +4817,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 4
+```````````````````````````````` example List items: 4
 - one
 
   two
@@ -4839,7 +4839,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 5
+```````````````````````````````` example List items: 5
  -    one
 
      two
@@ -4859,7 +4859,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 6
+```````````````````````````````` example List items: 6
  -    one
 
       two
@@ -4889,7 +4889,7 @@ is needed.  Which column this indentation reaches will depend on
 how the list item is embedded in other constructions, as shown by
 this example:
 
-```````````````````````````````` example List items: 7
+```````````````````````````````` example List items: 7
    > > 1.  one
 >>
 >>     two
@@ -4926,7 +4926,7 @@ occurs far to the right of the initial text of the list item, `one`, but
 it is not considered part of the list item, because it is not indented
 far enough past the blockquote marker:
 
-```````````````````````````````` example List items: 8
+```````````````````````````````` example List items: 8
 >>- one
 >>
   >  > two
@@ -4955,7 +4955,7 @@ Document[0, 22]
 Note that at least one space is needed between the list marker and
 any following content, so these are not list items:
 
-```````````````````````````````` example List items: 9
+```````````````````````````````` example List items: 9
 -one
 
 2.two
@@ -4975,7 +4975,7 @@ A list item may not contain blocks that are separated by more than
 one blank line.  Thus, two blank lines will end a list, unless the
 two blanks are contained in a [fenced code block].
 
-```````````````````````````````` example List items: 10
+```````````````````````````````` example List items: 10
 - foo
 
   bar
@@ -5059,7 +5059,7 @@ Document[0, 97]
 
 A list item may contain any kind of block:
 
-```````````````````````````````` example List items: 11
+```````````````````````````````` example List items: 11
 1.  foo
 
     ```
@@ -5101,7 +5101,7 @@ empty lines within the code block verbatim, unless there are two
 or more empty lines in a row (since as described above, two
 blank lines end the list):
 
-```````````````````````````````` example List items: 12
+```````````````````````````````` example List items: 12
 - Foo
 
       bar
@@ -5127,7 +5127,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 13
+```````````````````````````````` example List items: 13
 - Foo
 
       bar
@@ -5157,7 +5157,7 @@ Document[0, 29]
 
 Note that ordered list start numbers must be nine digits or less:
 
-```````````````````````````````` example List items: 14
+```````````````````````````````` example List items: 14
 123456789. ok
 .
 <ol start="123456789">
@@ -5172,7 +5172,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 15
+```````````````````````````````` example List items: 15
 1234567890. not ok
 .
 <p>1234567890. not ok</p>
@@ -5185,7 +5185,7 @@ Document[0, 19]
 
 A start number may begin with 0s:
 
-```````````````````````````````` example List items: 16
+```````````````````````````````` example List items: 16
 0. ok
 .
 <ol start="0">
@@ -5200,7 +5200,7 @@ Document[0, 6]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 17
+```````````````````````````````` example List items: 17
 003. ok
 .
 <ol start="3">
@@ -5217,7 +5217,7 @@ Document[0, 8]
 
 A start number may not be negative:
 
-```````````````````````````````` example List items: 18
+```````````````````````````````` example List items: 18
 -1. not ok
 .
 <p>-1. not ok</p>
@@ -5245,7 +5245,7 @@ An indented code block will have to be indented four spaces beyond
 the edge of the region where text will be included in the list item.
 In the following case that is 6 spaces:
 
-```````````````````````````````` example List items: 19
+```````````````````````````````` example List items: 19
 - foo
 
       bar
@@ -5269,7 +5269,7 @@ Document[0, 17]
 
 And in this case it is 11 spaces:
 
-```````````````````````````````` example List items: 20
+```````````````````````````````` example List items: 20
   10.  foo
 
            bar
@@ -5295,7 +5295,7 @@ If the *first* block in the list item is an indented code block,
 then by rule #2, the contents must be indented *one* space after the
 list marker:
 
-```````````````````````````````` example List items: 21
+```````````````````````````````` example List items: 21
     indented code
 
 paragraph
@@ -5316,7 +5316,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 22
+```````````````````````````````` example List items: 22
 1.     indented code
 
    paragraph
@@ -5346,7 +5346,7 @@ Document[0, 53]
 Note that an additional space indent is interpreted as space
 inside the code block:
 
-```````````````````````````````` example List items: 23
+```````````````````````````````` example List items: 23
 1.      indented code
 
    paragraph
@@ -5381,7 +5381,7 @@ block.  In a case like the following, where the first block begins with
 a three-space indent, the rules do not allow us to form a list item by
 indenting the whole thing and prepending a list marker:
 
-```````````````````````````````` example List items: 24
+```````````````````````````````` example List items: 24
    foo
 
 bar
@@ -5397,7 +5397,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 25
+```````````````````````````````` example List items: 25
 -    foo
 
   bar
@@ -5422,7 +5422,7 @@ with 1-3 spaces indent, the indentation can always be removed without
 a change in interpretation, allowing rule #1 to be applied.  So, in
 the above case:
 
-```````````````````````````````` example List items: 26
+```````````````````````````````` example List items: 26
 -  foo
 
    bar
@@ -5458,7 +5458,7 @@ Document[0, 15]
 
 Here are some list items that start with a blank line but are not empty:
 
-```````````````````````````````` example List items: 27
+```````````````````````````````` example List items: 27
 -
   foo
 -
@@ -5496,7 +5496,7 @@ A list item can begin with at most one blank line.
 In the following example, `foo` is not part of the list
 item:
 
-```````````````````````````````` example List items: 28
+```````````````````````````````` example List items: 28
 -
 
   foo
@@ -5516,7 +5516,7 @@ Document[0, 9]
 
 Here is an empty bullet list item:
 
-```````````````````````````````` example List items: 29
+```````````````````````````````` example List items: 29
 - foo
 -
 - bar
@@ -5541,7 +5541,7 @@ Document[0, 14]
 
 It does not matter whether there are spaces following the [list marker]:
 
-```````````````````````````````` example List items: 30
+```````````````````````````````` example List items: 30
 - foo
 -   
 - bar
@@ -5566,7 +5566,7 @@ Document[0, 17]
 
 Here is an empty ordered list item:
 
-```````````````````````````````` example List items: 31
+```````````````````````````````` example List items: 31
 1. foo
 2.
 3. bar
@@ -5591,7 +5591,7 @@ Document[0, 17]
 
 A list may start or end with an empty list item:
 
-```````````````````````````````` example List items: 32
+```````````````````````````````` example List items: 32
 *
 .
 <ul>
@@ -5613,7 +5613,7 @@ Document[0, 2]
 
 Indented one space:
 
-```````````````````````````````` example List items: 33
+```````````````````````````````` example List items: 33
  1.  A paragraph
      with two lines.
 
@@ -5649,7 +5649,7 @@ Document[0, 85]
 
 Indented two spaces:
 
-```````````````````````````````` example List items: 34
+```````````````````````````````` example List items: 34
   1.  A paragraph
       with two lines.
 
@@ -5685,7 +5685,7 @@ Document[0, 89]
 
 Indented three spaces:
 
-```````````````````````````````` example List items: 35
+```````````````````````````````` example List items: 35
    1.  A paragraph
        with two lines.
 
@@ -5721,7 +5721,7 @@ Document[0, 93]
 
 Four spaces indent gives a code block:
 
-```````````````````````````````` example List items: 36
+```````````````````````````````` example List items: 36
     1.  A paragraph
         with two lines.
 
@@ -5754,7 +5754,7 @@ Document[0, 97]
 
 Here is an example with [lazy continuation lines]:
 
-```````````````````````````````` example List items: 37
+```````````````````````````````` example List items: 37
   1.  A paragraph
 with two lines.
 
@@ -5790,7 +5790,7 @@ Document[0, 83]
 
 Indentation can be partially deleted:
 
-```````````````````````````````` example List items: 38
+```````````````````````````````` example List items: 38
   1.  A paragraph
     with two lines.
 .
@@ -5811,7 +5811,7 @@ Document[0, 38]
 
 These examples show how laziness can work in nested structures:
 
-```````````````````````````````` example List items: 39
+```````````````````````````````` example List items: 39
 > 1. > Blockquote
 continued here.
 .
@@ -5838,7 +5838,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 40
+```````````````````````````````` example List items: 40
 > 1. > Blockquote
 > continued here.
 .
@@ -5875,7 +5875,7 @@ in order to be included in the list item.
 
 So, in this case we need two spaces indent:
 
-```````````````````````````````` example List items: 41
+```````````````````````````````` example List items: 41
 - foo
   - bar
     - baz
@@ -5910,7 +5910,7 @@ Document[0, 24]
 
 One is not enough:
 
-```````````````````````````````` example List items: 42
+```````````````````````````````` example List items: 42
 - foo
  - bar
   - baz
@@ -5937,7 +5937,7 @@ Document[0, 21]
 
 Here we need four, because the list marker is wider:
 
-```````````````````````````````` example List items: 43
+```````````````````````````````` example List items: 43
 10) foo
     - bar
 .
@@ -5963,7 +5963,7 @@ Document[0, 18]
 
 Three is not enough:
 
-```````````````````````````````` example List items: 44
+```````````````````````````````` example List items: 44
 10) foo
    - bar
 .
@@ -5988,7 +5988,7 @@ Document[0, 17]
 
 A list may be the first block in a list item:
 
-```````````````````````````````` example List items: 45
+```````````````````````````````` example List items: 45
 - - foo
 .
 <ul>
@@ -6009,7 +6009,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 46
+```````````````````````````````` example List items: 46
 1. - 2. foo
 .
 <ol>
@@ -6038,7 +6038,7 @@ Document[0, 12]
 
 A list item can contain a heading:
 
-```````````````````````````````` example List items: 47
+```````````````````````````````` example List items: 47
 - # Foo
 - Bar
   ---
@@ -6286,7 +6286,7 @@ wrapped in `<p>` tags, while paragraphs in a tight list are not.)
 
 Changing the bullet or ordered list delimiter starts a new list:
 
-```````````````````````````````` example Lists: 1
+```````````````````````````````` example Lists: 1
 - foo
 - bar
 + baz
@@ -6314,7 +6314,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 2
+```````````````````````````````` example Lists: 2
 1. foo
 2. bar
 3) baz
@@ -6346,7 +6346,7 @@ In CommonMark, a list can interrupt a paragraph. That is,
 no blank line is needed to separate a paragraph from a following
 list:
 
-```````````````````````````````` example Lists: 3
+```````````````````````````````` example Lists: 3
 Foo
 - bar
 - baz
@@ -6373,7 +6373,7 @@ Document[0, 16]
 `Markdown.pl` does not allow this, through fear of triggering a list
 via a numeral in a hard-wrapped line:
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` example Lists: 4
 The number of windows in my house is
 14.  The number of doors is 6.
 .
@@ -6447,7 +6447,7 @@ seems more consistent with established practice with Markdown.
 There can be blank lines between items, but two blank lines end
 a list:
 
-```````````````````````````````` example Lists: 5
+```````````````````````````````` example Lists: 5
 - foo
 
 - bar
@@ -6486,7 +6486,7 @@ As illustrated above in the section on [list items],
 two blank lines between blocks *within* a list item will also end a
 list:
 
-```````````````````````````````` example Lists: 6
+```````````````````````````````` example Lists: 6
 - foo
 
 
@@ -6517,7 +6517,7 @@ Document[0, 20]
 
 Indeed, two blank lines will end *all* containing lists:
 
-```````````````````````````````` example Lists: 7
+```````````````````````````````` example Lists: 7
 - foo
   - bar
     - baz
@@ -6561,7 +6561,7 @@ the same type, or to separate a list from an indented code block
 that would otherwise be parsed as a subparagraph of the final list
 item:
 
-```````````````````````````````` example Lists: 8
+```````````````````````````````` example Lists: 8
 - foo
 - bar
 
@@ -6596,7 +6596,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 9
+```````````````````````````````` example Lists: 9
 -   foo
 
     notcode
@@ -6637,7 +6637,7 @@ list items will be treated as items at the same list level,
 since none is indented enough to belong to the previous list
 item:
 
-```````````````````````````````` example Lists: 10
+```````````````````````````````` example Lists: 10
 - a
  - b
   - c
@@ -6692,7 +6692,7 @@ Document[0, 52]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 11
+```````````````````````````````` example Lists: 11
 1. a
 
   2. b
@@ -6728,7 +6728,7 @@ Document[0, 23]
 This is a loose list, because there is a blank line between
 two of the list items:
 
-```````````````````````````````` example Lists: 12
+```````````````````````````````` example Lists: 12
 - a
 - b
 
@@ -6762,7 +6762,7 @@ Document[0, 13]
 
 So is this, with a empty second item:
 
-```````````````````````````````` example Lists: 13
+```````````````````````````````` example Lists: 13
 * a
 *
 
@@ -6794,7 +6794,7 @@ These are loose lists, even though there is no space between the items,
 because one of the items directly contains two block-level elements
 with a blank line between them:
 
-```````````````````````````````` example Lists: 14
+```````````````````````````````` example Lists: 14
 - a
 - b
 
@@ -6830,7 +6830,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 15
+```````````````````````````````` example Lists: 15
 - a
 - b
 
@@ -6866,7 +6866,7 @@ Document[0, 27]
 
 This is a tight list, because the blank lines are in a code block:
 
-```````````````````````````````` example Lists: 16
+```````````````````````````````` example Lists: 16
 - a
 - ```
   b
@@ -6903,7 +6903,7 @@ This is a tight list, because the blank line is between two
 paragraphs of a sublist.  So the sublist is loose while
 the outer list is tight:
 
-```````````````````````````````` example Lists: 17
+```````````````````````````````` example Lists: 17
 - a
   - b
 
@@ -6942,7 +6942,7 @@ Document[0, 21]
 This is a tight list, because the blank line is inside the
 block quote:
 
-```````````````````````````````` example Lists: 18
+```````````````````````````````` example Lists: 18
 * a
   > b
   >
@@ -6974,7 +6974,7 @@ Document[0, 18]
 This list is tight, because the consecutive block elements
 are not separated by blank lines:
 
-```````````````````````````````` example Lists: 19
+```````````````````````````````` example Lists: 19
 - a
   > b
   ```
@@ -7010,7 +7010,7 @@ Document[0, 30]
 
 A single-paragraph list is tight:
 
-```````````````````````````````` example Lists: 20
+```````````````````````````````` example Lists: 20
 - a
 .
 <ul>
@@ -7025,7 +7025,7 @@ Document[0, 4]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 21
+```````````````````````````````` example Lists: 21
 - a
   - b
 .
@@ -7052,7 +7052,7 @@ Document[0, 10]
 This list is loose, because of the blank line between the
 two block elements in the list item:
 
-```````````````````````````````` example Lists: 22
+```````````````````````````````` example Lists: 22
 1. ```
    foo
    ```
@@ -7078,7 +7078,7 @@ Document[0, 29]
 
 Here the outer list is loose, the inner list tight:
 
-```````````````````````````````` example Lists: 23
+```````````````````````````````` example Lists: 23
 * foo
   * bar
 
@@ -7108,7 +7108,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Lists: 24
+```````````````````````````````` example Lists: 24
 - a
   - b
   - c
@@ -7165,7 +7165,7 @@ Inlines are parsed sequentially from the beginning of the character
 stream to the end (left to right, in left-to-right languages).
 Thus, for example, in
 
-```````````````````````````````` example Inlines: 1
+```````````````````````````````` example Inlines: 1
 `hi`lo`
 .
 <p><code>hi</code>lo`</p>
@@ -7184,7 +7184,7 @@ backtick.
 
 Any ASCII punctuation character may be backslash-escaped:
 
-```````````````````````````````` example Backslash escapes: 1
+```````````````````````````````` example Backslash escapes: 1
 \!\"\#\$\%\&\'\(\)\*\+\,\-\.\/\:\;\<\=\>\?\@\[\\\]\^\_\`\{\|\}\~
 .
 <p>!&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~</p>
@@ -7198,7 +7198,7 @@ Document[0, 65]
 Backslashes before other characters are treated as literal
 backslashes:
 
-```````````````````````````````` example Backslash escapes: 2
+```````````````````````````````` example Backslash escapes: 2
 \→\A\a\ \3\φ\«
 .
 <p>\→\A\a\ \3\φ\«</p>
@@ -7212,7 +7212,7 @@ Document[0, 15]
 Escaped characters are treated as regular characters and do
 not have their usual Markdown meanings:
 
-```````````````````````````````` example Backslash escapes: 3
+```````````````````````````````` example Backslash escapes: 3
 \*not emphasized*
 \<br/> not a tag
 \[not a link](/foo)
@@ -7253,7 +7253,7 @@ Document[0, 144]
 
 If a backslash is itself escaped, the following character is not:
 
-```````````````````````````````` example Backslash escapes: 4
+```````````````````````````````` example Backslash escapes: 4
 \\*emphasis*
 .
 <p>\<em>emphasis</em></p>
@@ -7268,7 +7268,7 @@ Document[0, 13]
 
 A backslash at the end of the line is a [hard line break]:
 
-```````````````````````````````` example Backslash escapes: 5
+```````````````````````````````` example Backslash escapes: 5
 foo\
 bar
 .
@@ -7286,7 +7286,7 @@ Document[0, 9]
 Backslash escapes do not work in code blocks, code spans, autolinks, or
 raw HTML:
 
-```````````````````````````````` example Backslash escapes: 6
+```````````````````````````````` example Backslash escapes: 6
 `` \[\` ``
 .
 <p><code>\[\`</code></p>
@@ -7297,7 +7297,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 7
+```````````````````````````````` example Backslash escapes: 7
     \[\]
 .
 <pre><code>\[\]
@@ -7308,7 +7308,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 8
+```````````````````````````````` example Backslash escapes: 8
 ~~~
 \[\]
 ~~~
@@ -7321,7 +7321,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 9
+```````````````````````````````` example Backslash escapes: 9
 <http://example.com?find=\*>
 .
 <p><a href="http://example.com?find=%5C*">http://example.com?find=\*</a></p>
@@ -7332,7 +7332,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 10
+```````````````````````````````` example Backslash escapes: 10
 <a href="/bar\/)">
 .
 <a href="/bar\/)">
@@ -7345,7 +7345,7 @@ Document[0, 19]
 But they work in all other contexts, including URLs and link titles,
 link references, and [info strings] in [fenced code blocks]:
 
-```````````````````````````````` example Backslash escapes: 11
+```````````````````````````````` example Backslash escapes: 11
 [foo](/bar\* "ti\*tle")
 .
 <p><a href="/bar*" title="ti*tle">foo</a></p>
@@ -7357,7 +7357,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 12
+```````````````````````````````` example Backslash escapes: 12
 [foo]
 
 [foo]: /bar\* "ti\*tle"
@@ -7372,7 +7372,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Backslash escapes: 13
+```````````````````````````````` example Backslash escapes: 13
 ``` foo\+bar
 foo
 ```
@@ -7402,7 +7402,7 @@ document <https://html.spec.whatwg.org/multipage/entities.json>
 is used as an authoritative source for the valid entity
 references and their corresponding code points.
 
-```````````````````````````````` example Entity and numeric character references: 1
+```````````````````````````````` example Entity and numeric character references: 1
 &nbsp; &amp; &copy; &AElig; &Dcaron;
 &frac34; &HilbertSpace; &DifferentialD;
 &ClockwiseContourIntegral; &ngE;
@@ -7443,7 +7443,7 @@ Unicode character. Invalid Unicode code points will be replaced by
 the REPLACEMENT CHARACTER (`U+FFFD`).  For security reasons,
 the code point `U+0000` will also be replaced by `U+FFFD`.
 
-```````````````````````````````` example Entity and numeric character references: 2
+```````````````````````````````` example Entity and numeric character references: 2
 &#35; &#1234; &#992; &#98765432; &#0;
 .
 <p># Ӓ Ϡ � �</p>
@@ -7468,7 +7468,7 @@ either `X` or `x` + a string of 1-8 hexadecimal digits + `;`.
 They too are parsed as the corresponding Unicode character (this
 time specified with a hexadecimal numeral instead of decimal).
 
-```````````````````````````````` example Entity and numeric character references: 3
+```````````````````````````````` example Entity and numeric character references: 3
 &#X22; &#XD06; &#xcab;
 .
 <p>&quot; ആ ಫ</p>
@@ -7485,7 +7485,7 @@ Document[0, 23]
 
 Here are some nonentities:
 
-```````````````````````````````` example Entity and numeric character references: 4
+```````````````````````````````` example Entity and numeric character references: 4
 &nbsp &x; &#; &#x;
 &ThisIsNotDefined; &hi?;
 .
@@ -7505,7 +7505,7 @@ Although HTML5 does accept some entity references
 without a trailing semicolon (such as `&copy`), these are not
 recognized here, because it makes the grammar too ambiguous:
 
-```````````````````````````````` example Entity and numeric character references: 5
+```````````````````````````````` example Entity and numeric character references: 5
 &copy
 .
 <p>&amp;copy</p>
@@ -7519,7 +7519,7 @@ Document[0, 6]
 Strings that are not on the list of HTML5 named entities are not
 recognized as entity references either:
 
-```````````````````````````````` example Entity and numeric character references: 6
+```````````````````````````````` example Entity and numeric character references: 6
 &MadeUpEntity;
 .
 <p>&amp;MadeUpEntity;</p>
@@ -7534,7 +7534,7 @@ Entity and numeric character references are recognized in any
 context besides code spans or code blocks, including
 URLs, [link titles], and [fenced code block][] [info strings]:
 
-```````````````````````````````` example Entity and numeric character references: 7
+```````````````````````````````` example Entity and numeric character references: 7
 <a href="&ouml;&ouml;.html">
 .
 <a href="&ouml;&ouml;.html">
@@ -7544,7 +7544,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Entity and numeric character references: 8
+```````````````````````````````` example Entity and numeric character references: 8
 [foo](/f&ouml;&ouml; "f&ouml;&ouml;")
 .
 <p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
@@ -7556,7 +7556,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Entity and numeric character references: 9
+```````````````````````````````` example Entity and numeric character references: 9
 [foo]
 
 [foo]: /f&ouml;&ouml; "f&ouml;&ouml;"
@@ -7571,7 +7571,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Entity and numeric character references: 10
+```````````````````````````````` example Entity and numeric character references: 10
 ``` f&ouml;&ouml;
 foo
 ```
@@ -7587,7 +7587,7 @@ Document[0, 26]
 Entity and numeric character references are treated as literal
 text in code spans and code blocks:
 
-```````````````````````````````` example Entity and numeric character references: 11
+```````````````````````````````` example Entity and numeric character references: 11
 `f&ouml;&ouml;`
 .
 <p><code>f&amp;ouml;&amp;ouml;</code></p>
@@ -7598,7 +7598,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Entity and numeric character references: 12
+```````````````````````````````` example Entity and numeric character references: 12
     f&ouml;f&ouml;
 .
 <pre><code>f&amp;ouml;f&amp;ouml;
@@ -7623,7 +7623,7 @@ trailing spaces and [line endings] removed, and
 
 This is a simple code span:
 
-```````````````````````````````` example Code spans: 1
+```````````````````````````````` example Code spans: 1
 `foo`
 .
 <p><code>foo</code></p>
@@ -7637,7 +7637,7 @@ Document[0, 6]
 Here two backticks are used, because the code contains a backtick.
 This example also illustrates stripping of leading and trailing spaces:
 
-```````````````````````````````` example Code spans: 2
+```````````````````````````````` example Code spans: 2
 `` foo ` bar  ``
 .
 <p><code>foo ` bar</code></p>
@@ -7651,7 +7651,7 @@ Document[0, 17]
 This example shows the motivation for stripping leading and trailing
 spaces:
 
-```````````````````````````````` example Code spans: 3
+```````````````````````````````` example Code spans: 3
 ` `` `
 .
 <p><code>``</code></p>
@@ -7664,7 +7664,7 @@ Document[0, 7]
 
 [Line endings] are treated like spaces:
 
-```````````````````````````````` example Code spans: 4
+```````````````````````````````` example Code spans: 4
 ``
 foo
 ``
@@ -7680,7 +7680,7 @@ Document[0, 10]
 Interior spaces and [line endings] are collapsed into
 single spaces, just as they would be by a browser:
 
-```````````````````````````````` example Code spans: 5
+```````````````````````````````` example Code spans: 5
 `foo   bar
   baz`
 .
@@ -7705,7 +7705,7 @@ span will cause an unintended line break in the output.  Others just
 leave internal spaces as they are, which is fine if only HTML is being
 targeted.)
 
-```````````````````````````````` example Code spans: 6
+```````````````````````````````` example Code spans: 6
 `foo `` bar`
 .
 <p><code>foo `` bar</code></p>
@@ -7719,7 +7719,7 @@ Document[0, 13]
 Note that backslash escapes do not work in code spans. All backslashes
 are treated literally:
 
-```````````````````````````````` example Code spans: 7
+```````````````````````````````` example Code spans: 7
 `foo\`bar`
 .
 <p><code>foo\</code>bar`</p>
@@ -7740,7 +7740,7 @@ constructs except HTML tags and autolinks.  Thus, for example, this is
 not parsed as emphasized text, since the second `*` is part of a code
 span:
 
-```````````````````````````````` example Code spans: 8
+```````````````````````````````` example Code spans: 8
 *foo`*`
 .
 <p>*foo<code>*</code></p>
@@ -7754,7 +7754,7 @@ Document[0, 8]
 
 And this is not parsed as a link:
 
-```````````````````````````````` example Code spans: 9
+```````````````````````````````` example Code spans: 9
 [not a `link](/foo`)
 .
 <p>[not a <code>link](/foo</code>)</p>
@@ -7770,7 +7770,7 @@ Document[0, 21]
 Code spans, HTML tags, and autolinks have the same precedence.
 Thus, this is code:
 
-```````````````````````````````` example Code spans: 10
+```````````````````````````````` example Code spans: 10
 `<a href="`">`
 .
 <p><code>&lt;a href=&quot;</code>&quot;&gt;`</p>
@@ -7784,7 +7784,7 @@ Document[0, 15]
 
 But this is an HTML tag:
 
-```````````````````````````````` example Code spans: 11
+```````````````````````````````` example Code spans: 11
 <a href="`">`
 .
 <p><a href="`">`</p>
@@ -7798,7 +7798,7 @@ Document[0, 14]
 
 And this is code:
 
-```````````````````````````````` example Code spans: 12
+```````````````````````````````` example Code spans: 12
 `<http://foo.bar.`baz>`
 .
 <p><code>&lt;http://foo.bar.</code>baz&gt;`</p>
@@ -7812,7 +7812,7 @@ Document[0, 24]
 
 But this is an autolink:
 
-```````````````````````````````` example Code spans: 13
+```````````````````````````````` example Code spans: 13
 <http://foo.bar.`baz>`
 .
 <p><a href="http://foo.bar.%60baz">http://foo.bar.`baz</a>`</p>
@@ -7827,7 +7827,7 @@ Document[0, 23]
 When a backtick string is not closed by a matching backtick string,
 we just have literal backticks:
 
-```````````````````````````````` example Code spans: 14
+```````````````````````````````` example Code spans: 14
 ```foo``
 .
 <p>```foo``</p>
@@ -7838,7 +7838,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Code spans: 15
+```````````````````````````````` example Code spans: 15
 `foo
 .
 <p>`foo</p>
@@ -8052,7 +8052,7 @@ These rules can be illustrated through a series of examples.
 
 Rule 1:
 
-```````````````````````````````` example Emphasis and strong emphasis: 1
+```````````````````````````````` example Emphasis and strong emphasis: 1
 *foo bar*
 .
 <p><em>foo bar</em></p>
@@ -8067,7 +8067,7 @@ Document[0, 10]
 This is not emphasis, because the opening `*` is followed by
 whitespace, and hence not part of a [left-flanking delimiter run]:
 
-```````````````````````````````` example Emphasis and strong emphasis: 2
+```````````````````````````````` example Emphasis and strong emphasis: 2
 a * foo bar*
 .
 <p>a * foo bar*</p>
@@ -8082,7 +8082,7 @@ This is not emphasis, because the opening `*` is preceded
 by an alphanumeric and followed by punctuation, and hence
 not part of a [left-flanking delimiter run]:
 
-```````````````````````````````` example Emphasis and strong emphasis: 3
+```````````````````````````````` example Emphasis and strong emphasis: 3
 a*"foo"*
 .
 <p>a*&quot;foo&quot;*</p>
@@ -8095,7 +8095,7 @@ Document[0, 9]
 
 Unicode nonbreaking spaces count as whitespace, too:
 
-```````````````````````````````` example Emphasis and strong emphasis: 4
+```````````````````````````````` example Emphasis and strong emphasis: 4
 * a *
 .
 <p>* a *</p>
@@ -8108,7 +8108,7 @@ Document[0, 6]
 
 Intraword emphasis with `*` is permitted:
 
-```````````````````````````````` example Emphasis and strong emphasis: 5
+```````````````````````````````` example Emphasis and strong emphasis: 5
 foo*bar*
 .
 <p>foo<em>bar</em></p>
@@ -8121,7 +8121,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 6
+```````````````````````````````` example Emphasis and strong emphasis: 6
 5*6*78
 .
 <p>5<em>6</em>78</p>
@@ -8137,7 +8137,7 @@ Document[0, 7]
 
 Rule 2:
 
-```````````````````````````````` example Emphasis and strong emphasis: 7
+```````````````````````````````` example Emphasis and strong emphasis: 7
 _foo bar_
 .
 <p><em>foo bar</em></p>
@@ -8152,7 +8152,7 @@ Document[0, 10]
 This is not emphasis, because the opening `_` is followed by
 whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 8
+```````````````````````````````` example Emphasis and strong emphasis: 8
 _ foo bar_
 .
 <p>_ foo bar_</p>
@@ -8166,7 +8166,7 @@ Document[0, 11]
 This is not emphasis, because the opening `_` is preceded
 by an alphanumeric and followed by punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 9
+```````````````````````````````` example Emphasis and strong emphasis: 9
 a_"foo"_
 .
 <p>a_&quot;foo&quot;_</p>
@@ -8179,7 +8179,7 @@ Document[0, 9]
 
 Emphasis with `_` is not allowed inside words:
 
-```````````````````````````````` example Emphasis and strong emphasis: 10
+```````````````````````````````` example Emphasis and strong emphasis: 10
 foo_bar_
 .
 <p>foo_bar_</p>
@@ -8190,7 +8190,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 11
+```````````````````````````````` example Emphasis and strong emphasis: 11
 5_6_78
 .
 <p>5_6_78</p>
@@ -8201,7 +8201,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 12
+```````````````````````````````` example Emphasis and strong emphasis: 12
 пристаням_стремятся_
 .
 <p>пристаням_стремятся_</p>
@@ -8215,7 +8215,7 @@ Document[0, 21]
 Here `_` does not generate emphasis, because the first delimiter run
 is right-flanking and the second left-flanking:
 
-```````````````````````````````` example Emphasis and strong emphasis: 13
+```````````````````````````````` example Emphasis and strong emphasis: 13
 aa_"bb"_cc
 .
 <p>aa_&quot;bb&quot;_cc</p>
@@ -8230,7 +8230,7 @@ This is emphasis, even though the opening delimiter is
 both left- and right-flanking, because it is preceded by
 punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 14
+```````````````````````````````` example Emphasis and strong emphasis: 14
 foo-_(bar)_
 .
 <p>foo-<em>(bar)</em></p>
@@ -8248,7 +8248,7 @@ Rule 3:
 This is not emphasis, because the closing delimiter does
 not match the opening delimiter:
 
-```````````````````````````````` example Emphasis and strong emphasis: 15
+```````````````````````````````` example Emphasis and strong emphasis: 15
 _foo*
 .
 <p>_foo*</p>
@@ -8262,7 +8262,7 @@ Document[0, 6]
 This is not emphasis, because the closing `*` is preceded by
 whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 16
+```````````````````````````````` example Emphasis and strong emphasis: 16
 *foo bar *
 .
 <p>*foo bar *</p>
@@ -8275,7 +8275,7 @@ Document[0, 11]
 
 A newline also counts as whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 17
+```````````````````````````````` example Emphasis and strong emphasis: 17
 *foo bar
 *
 .
@@ -8296,7 +8296,7 @@ This is not emphasis, because the second `*` is
 preceded by punctuation and followed by an alphanumeric
 (hence it is not part of a [right-flanking delimiter run]:
 
-```````````````````````````````` example Emphasis and strong emphasis: 18
+```````````````````````````````` example Emphasis and strong emphasis: 18
 *(*foo)
 .
 <p>*(*foo)</p>
@@ -8310,7 +8310,7 @@ Document[0, 8]
 The point of this restriction is more easily appreciated
 with this example:
 
-```````````````````````````````` example Emphasis and strong emphasis: 19
+```````````````````````````````` example Emphasis and strong emphasis: 19
 *(*foo*)*
 .
 <p><em>(<em>foo</em>)</em></p>
@@ -8327,7 +8327,7 @@ Document[0, 10]
 
 Intraword emphasis with `*` is allowed:
 
-```````````````````````````````` example Emphasis and strong emphasis: 20
+```````````````````````````````` example Emphasis and strong emphasis: 20
 *foo*bar
 .
 <p><em>foo</em>bar</p>
@@ -8346,7 +8346,7 @@ Rule 4:
 This is not emphasis, because the closing `_` is preceded by
 whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 21
+```````````````````````````````` example Emphasis and strong emphasis: 21
 _foo bar _
 .
 <p>_foo bar _</p>
@@ -8360,7 +8360,7 @@ Document[0, 11]
 This is not emphasis, because the second `_` is
 preceded by punctuation and followed by an alphanumeric:
 
-```````````````````````````````` example Emphasis and strong emphasis: 22
+```````````````````````````````` example Emphasis and strong emphasis: 22
 _(_foo)
 .
 <p>_(_foo)</p>
@@ -8373,7 +8373,7 @@ Document[0, 8]
 
 This is emphasis within emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 23
+```````````````````````````````` example Emphasis and strong emphasis: 23
 _(_foo_)_
 .
 <p><em>(<em>foo</em>)</em></p>
@@ -8390,7 +8390,7 @@ Document[0, 10]
 
 Intraword emphasis is disallowed for `_`:
 
-```````````````````````````````` example Emphasis and strong emphasis: 24
+```````````````````````````````` example Emphasis and strong emphasis: 24
 _foo_bar
 .
 <p>_foo_bar</p>
@@ -8401,7 +8401,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 25
+```````````````````````````````` example Emphasis and strong emphasis: 25
 _пристаням_стремятся
 .
 <p>_пристаням_стремятся</p>
@@ -8412,7 +8412,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 26
+```````````````````````````````` example Emphasis and strong emphasis: 26
 _foo_bar_baz_
 .
 <p><em>foo_bar_baz</em></p>
@@ -8428,7 +8428,7 @@ This is emphasis, even though the closing delimiter is
 both left- and right-flanking, because it is followed by
 punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 27
+```````````````````````````````` example Emphasis and strong emphasis: 27
 _(bar)_.
 .
 <p><em>(bar)</em>.</p>
@@ -8443,7 +8443,7 @@ Document[0, 9]
 
 Rule 5:
 
-```````````````````````````````` example Emphasis and strong emphasis: 28
+```````````````````````````````` example Emphasis and strong emphasis: 28
 **foo bar**
 .
 <p><strong>foo bar</strong></p>
@@ -8458,7 +8458,7 @@ Document[0, 12]
 This is not strong emphasis, because the opening delimiter is
 followed by whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 29
+```````````````````````````````` example Emphasis and strong emphasis: 29
 ** foo bar**
 .
 <p>** foo bar**</p>
@@ -8473,7 +8473,7 @@ This is not strong emphasis, because the opening `**` is preceded
 by an alphanumeric and followed by punctuation, and hence
 not part of a [left-flanking delimiter run]:
 
-```````````````````````````````` example Emphasis and strong emphasis: 30
+```````````````````````````````` example Emphasis and strong emphasis: 30
 a**"foo"**
 .
 <p>a**&quot;foo&quot;**</p>
@@ -8486,7 +8486,7 @@ Document[0, 11]
 
 Intraword strong emphasis with `**` is permitted:
 
-```````````````````````````````` example Emphasis and strong emphasis: 31
+```````````````````````````````` example Emphasis and strong emphasis: 31
 foo**bar**
 .
 <p>foo<strong>bar</strong></p>
@@ -8501,7 +8501,7 @@ Document[0, 11]
 
 Rule 6:
 
-```````````````````````````````` example Emphasis and strong emphasis: 32
+```````````````````````````````` example Emphasis and strong emphasis: 32
 __foo bar__
 .
 <p><strong>foo bar</strong></p>
@@ -8516,7 +8516,7 @@ Document[0, 12]
 This is not strong emphasis, because the opening delimiter is
 followed by whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 33
+```````````````````````````````` example Emphasis and strong emphasis: 33
 __ foo bar__
 .
 <p>__ foo bar__</p>
@@ -8528,7 +8528,7 @@ Document[0, 13]
 
 
 A newline counts as whitespace:
-```````````````````````````````` example Emphasis and strong emphasis: 34
+```````````````````````````````` example Emphasis and strong emphasis: 34
 __
 foo bar__
 .
@@ -8546,7 +8546,7 @@ Document[0, 13]
 This is not strong emphasis, because the opening `__` is preceded
 by an alphanumeric and followed by punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 35
+```````````````````````````````` example Emphasis and strong emphasis: 35
 a__"foo"__
 .
 <p>a__&quot;foo&quot;__</p>
@@ -8559,7 +8559,7 @@ Document[0, 11]
 
 Intraword strong emphasis is forbidden with `__`:
 
-```````````````````````````````` example Emphasis and strong emphasis: 36
+```````````````````````````````` example Emphasis and strong emphasis: 36
 foo__bar__
 .
 <p>foo__bar__</p>
@@ -8570,7 +8570,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 37
+```````````````````````````````` example Emphasis and strong emphasis: 37
 5__6__78
 .
 <p>5__6__78</p>
@@ -8581,7 +8581,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 38
+```````````````````````````````` example Emphasis and strong emphasis: 38
 пристаням__стремятся__
 .
 <p>пристаням__стремятся__</p>
@@ -8592,7 +8592,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 39
+```````````````````````````````` example Emphasis and strong emphasis: 39
 __foo, __bar__, baz__
 .
 <p><strong>foo, <strong>bar</strong>, baz</strong></p>
@@ -8611,7 +8611,7 @@ This is strong emphasis, even though the opening delimiter is
 both left- and right-flanking, because it is preceded by
 punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 40
+```````````````````````````````` example Emphasis and strong emphasis: 40
 foo-__(bar)__
 .
 <p>foo-<strong>(bar)</strong></p>
@@ -8630,7 +8630,7 @@ Rule 7:
 This is not strong emphasis, because the closing delimiter is preceded
 by whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 41
+```````````````````````````````` example Emphasis and strong emphasis: 41
 **foo bar **
 .
 <p>**foo bar **</p>
@@ -8647,7 +8647,7 @@ Rule 11.)
 This is not strong emphasis, because the second `**` is
 preceded by punctuation and followed by an alphanumeric:
 
-```````````````````````````````` example Emphasis and strong emphasis: 42
+```````````````````````````````` example Emphasis and strong emphasis: 42
 **(**foo)
 .
 <p>**(**foo)</p>
@@ -8661,7 +8661,7 @@ Document[0, 10]
 The point of this restriction is more easily appreciated
 with these examples:
 
-```````````````````````````````` example Emphasis and strong emphasis: 43
+```````````````````````````````` example Emphasis and strong emphasis: 43
 *(**foo**)*
 .
 <p><em>(<strong>foo</strong>)</em></p>
@@ -8676,7 +8676,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 44
+```````````````````````````````` example Emphasis and strong emphasis: 44
 **Gomphocarpus (*Gomphocarpus physocarpus*, syn.
 *Asclepias physocarpa*)**
 .
@@ -8697,7 +8697,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 45
+```````````````````````````````` example Emphasis and strong emphasis: 45
 **foo "*bar*" foo**
 .
 <p><strong>foo &quot;<em>bar</em>&quot; foo</strong></p>
@@ -8714,7 +8714,7 @@ Document[0, 20]
 
 Intraword emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 46
+```````````````````````````````` example Emphasis and strong emphasis: 46
 **foo**bar
 .
 <p><strong>foo</strong>bar</p>
@@ -8732,7 +8732,7 @@ Rule 8:
 This is not strong emphasis, because the closing delimiter is
 preceded by whitespace:
 
-```````````````````````````````` example Emphasis and strong emphasis: 47
+```````````````````````````````` example Emphasis and strong emphasis: 47
 __foo bar __
 .
 <p>__foo bar __</p>
@@ -8746,7 +8746,7 @@ Document[0, 13]
 This is not strong emphasis, because the second `__` is
 preceded by punctuation and followed by an alphanumeric:
 
-```````````````````````````````` example Emphasis and strong emphasis: 48
+```````````````````````````````` example Emphasis and strong emphasis: 48
 __(__foo)
 .
 <p>__(__foo)</p>
@@ -8760,7 +8760,7 @@ Document[0, 10]
 The point of this restriction is more easily appreciated
 with this example:
 
-```````````````````````````````` example Emphasis and strong emphasis: 49
+```````````````````````````````` example Emphasis and strong emphasis: 49
 _(__foo__)_
 .
 <p><em>(<strong>foo</strong>)</em></p>
@@ -8777,7 +8777,7 @@ Document[0, 12]
 
 Intraword strong emphasis is forbidden with `__`:
 
-```````````````````````````````` example Emphasis and strong emphasis: 50
+```````````````````````````````` example Emphasis and strong emphasis: 50
 __foo__bar
 .
 <p>__foo__bar</p>
@@ -8788,7 +8788,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 51
+```````````````````````````````` example Emphasis and strong emphasis: 51
 __пристаням__стремятся
 .
 <p>__пристаням__стремятся</p>
@@ -8799,7 +8799,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 52
+```````````````````````````````` example Emphasis and strong emphasis: 52
 __foo__bar__baz__
 .
 <p><strong>foo__bar__baz</strong></p>
@@ -8815,7 +8815,7 @@ This is strong emphasis, even though the closing delimiter is
 both left- and right-flanking, because it is followed by
 punctuation:
 
-```````````````````````````````` example Emphasis and strong emphasis: 53
+```````````````````````````````` example Emphasis and strong emphasis: 53
 __(bar)__.
 .
 <p><strong>(bar)</strong>.</p>
@@ -8833,7 +8833,7 @@ Rule 9:
 Any nonempty sequence of inline elements can be the contents of an
 emphasized span.
 
-```````````````````````````````` example Emphasis and strong emphasis: 54
+```````````````````````````````` example Emphasis and strong emphasis: 54
 *foo [bar](/url)*
 .
 <p><em>foo <a href="/url">bar</a></em></p>
@@ -8847,7 +8847,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 55
+```````````````````````````````` example Emphasis and strong emphasis: 55
 *foo
 bar*
 .
@@ -8866,7 +8866,7 @@ Document[0, 10]
 In particular, emphasis and strong emphasis can be nested
 inside emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 56
+```````````````````````````````` example Emphasis and strong emphasis: 56
 _foo __bar__ baz_
 .
 <p><em>foo <strong>bar</strong> baz</em></p>
@@ -8881,7 +8881,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 57
+```````````````````````````````` example Emphasis and strong emphasis: 57
 _foo _bar_ baz_
 .
 <p><em>foo <em>bar</em> baz</em></p>
@@ -8896,7 +8896,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 58
+```````````````````````````````` example Emphasis and strong emphasis: 58
 __foo_ bar_
 .
 <p><em><em>foo</em> bar</em></p>
@@ -8910,7 +8910,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 59
+```````````````````````````````` example Emphasis and strong emphasis: 59
 *foo *bar**
 .
 <p><em>foo <em>bar</em></em></p>
@@ -8924,7 +8924,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 60
+```````````````````````````````` example Emphasis and strong emphasis: 60
 *foo **bar** baz*
 .
 <p><em>foo <strong>bar</strong> baz</em></p>
@@ -8941,7 +8941,7 @@ Document[0, 18]
 
 But note:
 
-```````````````````````````````` example Emphasis and strong emphasis: 61
+```````````````````````````````` example Emphasis and strong emphasis: 61
 *foo**bar**baz*
 .
 <p><em>foo</em><em>bar</em><em>baz</em></p>
@@ -8960,7 +8960,7 @@ Document[0, 16]
 The difference is that in the preceding case, the internal delimiters
 [can close emphasis], while in the cases with spaces, they cannot.
 
-```````````````````````````````` example Emphasis and strong emphasis: 62
+```````````````````````````````` example Emphasis and strong emphasis: 62
 ***foo** bar*
 .
 <p><em><strong>foo</strong> bar</em></p>
@@ -8974,7 +8974,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 63
+```````````````````````````````` example Emphasis and strong emphasis: 63
 *foo **bar***
 .
 <p><em>foo <strong>bar</strong></em></p>
@@ -8992,7 +8992,7 @@ Note, however, that in the following case we get no strong
 emphasis, because the opening delimiter is closed by the first
 `*` before `bar`:
 
-```````````````````````````````` example Emphasis and strong emphasis: 64
+```````````````````````````````` example Emphasis and strong emphasis: 64
 *foo**bar***
 .
 <p><em>foo</em><em>bar</em>**</p>
@@ -9010,7 +9010,7 @@ Document[0, 13]
 
 Indefinite levels of nesting are possible:
 
-```````````````````````````````` example Emphasis and strong emphasis: 65
+```````````````````````````````` example Emphasis and strong emphasis: 65
 *foo **bar *baz* bim** bop*
 .
 <p><em>foo <strong>bar <em>baz</em> bim</strong> bop</em></p>
@@ -9028,7 +9028,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 66
+```````````````````````````````` example Emphasis and strong emphasis: 66
 *foo [*bar*](/url)*
 .
 <p><em>foo <a href="/url"><em>bar</em></a></em></p>
@@ -9045,7 +9045,7 @@ Document[0, 20]
 
 There can be no empty emphasis or strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 67
+```````````````````````````````` example Emphasis and strong emphasis: 67
 ** is not an empty emphasis
 .
 <p>** is not an empty emphasis</p>
@@ -9056,7 +9056,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 68
+```````````````````````````````` example Emphasis and strong emphasis: 68
 **** is not an empty strong emphasis
 .
 <p>**** is not an empty strong emphasis</p>
@@ -9073,7 +9073,7 @@ Rule 10:
 Any nonempty sequence of inline elements can be the contents of an
 strongly emphasized span.
 
-```````````````````````````````` example Emphasis and strong emphasis: 69
+```````````````````````````````` example Emphasis and strong emphasis: 69
 **foo [bar](/url)**
 .
 <p><strong>foo <a href="/url">bar</a></strong></p>
@@ -9087,7 +9087,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 70
+```````````````````````````````` example Emphasis and strong emphasis: 70
 **foo
 bar**
 .
@@ -9106,7 +9106,7 @@ Document[0, 12]
 In particular, emphasis and strong emphasis can be nested
 inside strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 71
+```````````````````````````````` example Emphasis and strong emphasis: 71
 __foo _bar_ baz__
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
@@ -9121,7 +9121,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 72
+```````````````````````````````` example Emphasis and strong emphasis: 72
 __foo __bar__ baz__
 .
 <p><strong>foo <strong>bar</strong> baz</strong></p>
@@ -9136,7 +9136,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 73
+```````````````````````````````` example Emphasis and strong emphasis: 73
 ____foo__ bar__
 .
 <p><strong><strong>foo</strong> bar</strong></p>
@@ -9150,7 +9150,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 74
+```````````````````````````````` example Emphasis and strong emphasis: 74
 **foo **bar****
 .
 <p><strong>foo <strong>bar</strong></strong></p>
@@ -9164,7 +9164,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 75
+```````````````````````````````` example Emphasis and strong emphasis: 75
 **foo *bar* baz**
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
@@ -9181,7 +9181,7 @@ Document[0, 18]
 
 But note:
 
-```````````````````````````````` example Emphasis and strong emphasis: 76
+```````````````````````````````` example Emphasis and strong emphasis: 76
 **foo*bar*baz**
 .
 <p><em><em>foo</em>bar</em>baz**</p>
@@ -9199,7 +9199,7 @@ Document[0, 16]
 The difference is that in the preceding case, the internal delimiters
 [can close emphasis], while in the cases with spaces, they cannot.
 
-```````````````````````````````` example Emphasis and strong emphasis: 77
+```````````````````````````````` example Emphasis and strong emphasis: 77
 ***foo* bar**
 .
 <p><strong><em>foo</em> bar</strong></p>
@@ -9213,7 +9213,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 78
+```````````````````````````````` example Emphasis and strong emphasis: 78
 **foo *bar***
 .
 <p><strong>foo <em>bar</em></strong></p>
@@ -9229,7 +9229,7 @@ Document[0, 14]
 
 Indefinite levels of nesting are possible:
 
-```````````````````````````````` example Emphasis and strong emphasis: 79
+```````````````````````````````` example Emphasis and strong emphasis: 79
 **foo *bar **baz**
 bim* bop**
 .
@@ -9250,7 +9250,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 80
+```````````````````````````````` example Emphasis and strong emphasis: 80
 **foo [*bar*](/url)**
 .
 <p><strong>foo <a href="/url"><em>bar</em></a></strong></p>
@@ -9267,7 +9267,7 @@ Document[0, 22]
 
 There can be no empty emphasis or strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 81
+```````````````````````````````` example Emphasis and strong emphasis: 81
 __ is not an empty emphasis
 .
 <p>__ is not an empty emphasis</p>
@@ -9278,7 +9278,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 82
+```````````````````````````````` example Emphasis and strong emphasis: 82
 ____ is not an empty strong emphasis
 .
 <p>____ is not an empty strong emphasis</p>
@@ -9292,7 +9292,7 @@ Document[0, 37]
 
 Rule 11:
 
-```````````````````````````````` example Emphasis and strong emphasis: 83
+```````````````````````````````` example Emphasis and strong emphasis: 83
 foo ***
 .
 <p>foo ***</p>
@@ -9303,7 +9303,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 84
+```````````````````````````````` example Emphasis and strong emphasis: 84
 foo *\**
 .
 <p>foo <em>*</em></p>
@@ -9316,7 +9316,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 85
+```````````````````````````````` example Emphasis and strong emphasis: 85
 foo *_*
 .
 <p>foo <em>_</em></p>
@@ -9329,7 +9329,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 86
+```````````````````````````````` example Emphasis and strong emphasis: 86
 foo *****
 .
 <p>foo *****</p>
@@ -9340,7 +9340,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 87
+```````````````````````````````` example Emphasis and strong emphasis: 87
 foo **\***
 .
 <p>foo <strong>*</strong></p>
@@ -9353,7 +9353,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 88
+```````````````````````````````` example Emphasis and strong emphasis: 88
 foo **_**
 .
 <p>foo <strong>_</strong></p>
@@ -9370,7 +9370,7 @@ Note that when delimiters do not match evenly, Rule 11 determines
 that the excess literal `*` characters will appear outside of the
 emphasis, rather than inside it:
 
-```````````````````````````````` example Emphasis and strong emphasis: 89
+```````````````````````````````` example Emphasis and strong emphasis: 89
 **foo*
 .
 <p>*<em>foo</em></p>
@@ -9383,7 +9383,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 90
+```````````````````````````````` example Emphasis and strong emphasis: 90
 *foo**
 .
 <p><em>foo</em>*</p>
@@ -9396,7 +9396,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 91
+```````````````````````````````` example Emphasis and strong emphasis: 91
 ***foo**
 .
 <p>*<strong>foo</strong></p>
@@ -9409,7 +9409,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 92
+```````````````````````````````` example Emphasis and strong emphasis: 92
 ****foo*
 .
 <p>***<em>foo</em></p>
@@ -9422,7 +9422,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 93
+```````````````````````````````` example Emphasis and strong emphasis: 93
 **foo***
 .
 <p><strong>foo</strong>*</p>
@@ -9435,7 +9435,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 94
+```````````````````````````````` example Emphasis and strong emphasis: 94
 *foo****
 .
 <p><em>foo</em>***</p>
@@ -9451,7 +9451,7 @@ Document[0, 9]
 
 Rule 12:
 
-```````````````````````````````` example Emphasis and strong emphasis: 95
+```````````````````````````````` example Emphasis and strong emphasis: 95
 foo ___
 .
 <p>foo ___</p>
@@ -9462,7 +9462,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 96
+```````````````````````````````` example Emphasis and strong emphasis: 96
 foo _\__
 .
 <p>foo <em>_</em></p>
@@ -9475,7 +9475,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 97
+```````````````````````````````` example Emphasis and strong emphasis: 97
 foo _*_
 .
 <p>foo <em>*</em></p>
@@ -9488,7 +9488,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 98
+```````````````````````````````` example Emphasis and strong emphasis: 98
 foo _____
 .
 <p>foo _____</p>
@@ -9499,7 +9499,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 99
+```````````````````````````````` example Emphasis and strong emphasis: 99
 foo __\___
 .
 <p>foo <strong>_</strong></p>
@@ -9512,7 +9512,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 100
+```````````````````````````````` example Emphasis and strong emphasis: 100
 foo __*__
 .
 <p>foo <strong>*</strong></p>
@@ -9525,7 +9525,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 101
+```````````````````````````````` example Emphasis and strong emphasis: 101
 __foo_
 .
 <p>_<em>foo</em></p>
@@ -9542,7 +9542,7 @@ Note that when delimiters do not match evenly, Rule 12 determines
 that the excess literal `_` characters will appear outside of the
 emphasis, rather than inside it:
 
-```````````````````````````````` example Emphasis and strong emphasis: 102
+```````````````````````````````` example Emphasis and strong emphasis: 102
 _foo__
 .
 <p><em>foo</em>_</p>
@@ -9555,7 +9555,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 103
+```````````````````````````````` example Emphasis and strong emphasis: 103
 ___foo__
 .
 <p>_<strong>foo</strong></p>
@@ -9568,7 +9568,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 104
+```````````````````````````````` example Emphasis and strong emphasis: 104
 ____foo_
 .
 <p>___<em>foo</em></p>
@@ -9581,7 +9581,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 105
+```````````````````````````````` example Emphasis and strong emphasis: 105
 __foo___
 .
 <p><strong>foo</strong>_</p>
@@ -9594,7 +9594,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 106
+```````````````````````````````` example Emphasis and strong emphasis: 106
 _foo____
 .
 <p><em>foo</em>___</p>
@@ -9610,7 +9610,7 @@ Document[0, 9]
 Rule 13 implies that if you want emphasis nested directly inside
 emphasis, you must use different delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 107
+```````````````````````````````` example Emphasis and strong emphasis: 107
 **foo**
 .
 <p><strong>foo</strong></p>
@@ -9622,7 +9622,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 108
+```````````````````````````````` example Emphasis and strong emphasis: 108
 *_foo_*
 .
 <p><em><em>foo</em></em></p>
@@ -9635,7 +9635,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 109
+```````````````````````````````` example Emphasis and strong emphasis: 109
 __foo__
 .
 <p><strong>foo</strong></p>
@@ -9647,7 +9647,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 110
+```````````````````````````````` example Emphasis and strong emphasis: 110
 _*foo*_
 .
 <p><em><em>foo</em></em></p>
@@ -9663,7 +9663,7 @@ Document[0, 8]
 However, strong emphasis within strong emphasis is possible without
 switching delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 111
+```````````````````````````````` example Emphasis and strong emphasis: 111
 ****foo****
 .
 <p><strong><strong>foo</strong></strong></p>
@@ -9676,7 +9676,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 112
+```````````````````````````````` example Emphasis and strong emphasis: 112
 ____foo____
 .
 <p><strong><strong>foo</strong></strong></p>
@@ -9693,7 +9693,7 @@ Document[0, 12]
 Rule 13 can be applied to arbitrarily long sequences of
 delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 113
+```````````````````````````````` example Emphasis and strong emphasis: 113
 ******foo******
 .
 <p><strong><strong><strong>foo</strong></strong></strong></p>
@@ -9709,7 +9709,7 @@ Document[0, 16]
 
 Rule 14:
 
-```````````````````````````````` example Emphasis and strong emphasis: 114
+```````````````````````````````` example Emphasis and strong emphasis: 114
 ***foo***
 .
 <p><strong><em>foo</em></strong></p>
@@ -9722,7 +9722,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 115
+```````````````````````````````` example Emphasis and strong emphasis: 115
 _____foo_____
 .
 <p><strong><strong><em>foo</em></strong></strong></p>
@@ -9738,7 +9738,7 @@ Document[0, 14]
 
 Rule 15:
 
-```````````````````````````````` example Emphasis and strong emphasis: 116
+```````````````````````````````` example Emphasis and strong emphasis: 116
 *foo _bar* baz_
 .
 <p><em>foo _bar</em> baz_</p>
@@ -9751,7 +9751,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 117
+```````````````````````````````` example Emphasis and strong emphasis: 117
 **foo*bar**
 .
 <p><em><em>foo</em>bar</em>*</p>
@@ -9766,7 +9766,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 118
+```````````````````````````````` example Emphasis and strong emphasis: 118
 *foo __bar *baz bim__ bam*
 .
 <p><em>foo <strong>bar *baz bim</strong> bam</em></p>
@@ -9783,7 +9783,7 @@ Document[0, 27]
 
 Rule 16:
 
-```````````````````````````````` example Emphasis and strong emphasis: 119
+```````````````````````````````` example Emphasis and strong emphasis: 119
 **foo **bar baz**
 .
 <p>**foo <strong>bar baz</strong></p>
@@ -9796,7 +9796,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 120
+```````````````````````````````` example Emphasis and strong emphasis: 120
 *foo *bar baz*
 .
 <p>*foo <em>bar baz</em></p>
@@ -9811,7 +9811,7 @@ Document[0, 15]
 
 Rule 17:
 
-```````````````````````````````` example Emphasis and strong emphasis: 121
+```````````````````````````````` example Emphasis and strong emphasis: 121
 *[bar*](/url)
 .
 <p>*<a href="/url">bar*</a></p>
@@ -9824,7 +9824,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 122
+```````````````````````````````` example Emphasis and strong emphasis: 122
 _foo [bar_](/url)
 .
 <p>_foo <a href="/url">bar_</a></p>
@@ -9837,7 +9837,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 123
+```````````````````````````````` example Emphasis and strong emphasis: 123
 *<img src="foo" title="*"/>
 .
 <p>*<img src="foo" title="*"/></p>
@@ -9849,7 +9849,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 124
+```````````````````````````````` example Emphasis and strong emphasis: 124
 **<a href="**">
 .
 <p>**<a href="**"></p>
@@ -9861,7 +9861,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 125
+```````````````````````````````` example Emphasis and strong emphasis: 125
 __<a href="__">
 .
 <p>__<a href="__"></p>
@@ -9873,7 +9873,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 126
+```````````````````````````````` example Emphasis and strong emphasis: 126
 *a `*`*
 .
 <p><em>a <code>*</code></em></p>
@@ -9886,7 +9886,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 127
+```````````````````````````````` example Emphasis and strong emphasis: 127
 _a `_`_
 .
 <p><em>a <code>_</code></em></p>
@@ -9899,7 +9899,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 128
+```````````````````````````````` example Emphasis and strong emphasis: 128
 **a<http://foo.bar/?q=**>
 .
 <p>**a<a href="http://foo.bar/?q=**">http://foo.bar/?q=**</a></p>
@@ -9911,7 +9911,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 129
+```````````````````````````````` example Emphasis and strong emphasis: 129
 __a<http://foo.bar/?q=__>
 .
 <p>__a<a href="http://foo.bar/?q=__">http://foo.bar/?q=__</a></p>
@@ -9996,7 +9996,7 @@ above.
 
 Here is a simple inline link:
 
-```````````````````````````````` example Links: 1
+```````````````````````````````` example Links: 1
 [link](/uri "title")
 .
 <p><a href="/uri" title="title">link</a></p>
@@ -10010,7 +10010,7 @@ Document[0, 21]
 
 The title may be omitted:
 
-```````````````````````````````` example Links: 2
+```````````````````````````````` example Links: 2
 [link](/uri)
 .
 <p><a href="/uri">link</a></p>
@@ -10024,7 +10024,7 @@ Document[0, 13]
 
 Both the title and the destination may be omitted:
 
-```````````````````````````````` example Links: 3
+```````````````````````````````` example Links: 3
 [link]()
 .
 <p><a href="">link</a></p>
@@ -10036,7 +10036,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 4
+```````````````````````````````` example Links: 4
 [link](<>)
 .
 <p><a href="">link</a></p>
@@ -10051,7 +10051,7 @@ Document[0, 11]
 The destination cannot contain spaces or line breaks,
 even if enclosed in pointy brackets:
 
-```````````````````````````````` example Links: 5
+```````````````````````````````` example Links: 5
 [link](/my uri)
 .
 <p>[link](/my uri)</p>
@@ -10062,7 +10062,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 6
+```````````````````````````````` example Links: 6
 [link](</my uri>)
 .
 <p>[link](&lt;/my uri&gt;)</p>
@@ -10073,7 +10073,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 7
+```````````````````````````````` example Links: 7
 [link](foo
 bar)
 .
@@ -10088,7 +10088,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 8
+```````````````````````````````` example Links: 8
 [link](<foo
 bar>)
 .
@@ -10105,7 +10105,7 @@ bar>"]
 
 Parentheses inside the link destination may be escaped:
 
-```````````````````````````````` example Links: 9
+```````````````````````````````` example Links: 9
 [link](\(foo\))
 .
 <p><a href="(foo)">link</a></p>
@@ -10118,7 +10118,7 @@ Document[0, 16]
 
 One level of balanced parentheses is allowed without escaping:
 
-```````````````````````````````` example Links: 10
+```````````````````````````````` example Links: 10
 [link]((foo)and(bar))
 .
 <p><a href="(foo)and(bar)">link</a></p>
@@ -10132,7 +10132,7 @@ Document[0, 22]
 However, if you have parentheses within parentheses, you need to escape
 or use the `<...>` form:
 
-```````````````````````````````` example Links: 11
+```````````````````````````````` example Links: 11
 [link](foo(and(bar)))
 .
 <p>[link](foo(and(bar)))</p>
@@ -10143,7 +10143,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 12
+```````````````````````````````` example Links: 12
 [link](foo(and\(bar\)))
 .
 <p><a href="foo(and(bar))">link</a></p>
@@ -10155,7 +10155,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 13
+```````````````````````````````` example Links: 13
 [link](<foo(and(bar))>)
 .
 <p><a href="foo(and(bar))">link</a></p>
@@ -10170,7 +10170,7 @@ Document[0, 24]
 Parentheses and other symbols can also be escaped, as usual
 in Markdown:
 
-```````````````````````````````` example Links: 14
+```````````````````````````````` example Links: 14
 [link](foo\)\:)
 .
 <p><a href="foo):">link</a></p>
@@ -10184,7 +10184,7 @@ Document[0, 16]
 
 A link can contain fragment identifiers and queries:
 
-```````````````````````````````` example Links: 15
+```````````````````````````````` example Links: 15
 [link](#fragment)
 
 [link](http://example.com#fragment)
@@ -10211,7 +10211,7 @@ Document[0, 94]
 Note that a backslash before a non-escapable character is
 just a backslash:
 
-```````````````````````````````` example Links: 16
+```````````````````````````````` example Links: 16
 [link](foo\bar)
 .
 <p><a href="foo%5Cbar">link</a></p>
@@ -10232,7 +10232,7 @@ does not enforce any particular policy for rendering URLs in
 HTML or other formats.  Renderers may make different decisions
 about how to escape or normalize URLs in the output.
 
-```````````````````````````````` example Links: 17
+```````````````````````````````` example Links: 17
 [link](foo%20b&auml;)
 .
 <p><a href="foo%20b%C3%A4">link</a></p>
@@ -10248,7 +10248,7 @@ Note that, because titles can often be parsed as destinations,
 if you try to omit the destination and keep the title, you'll
 get unexpected results:
 
-```````````````````````````````` example Links: 18
+```````````````````````````````` example Links: 18
 [link]("title")
 .
 <p><a href="%22title%22">link</a></p>
@@ -10262,7 +10262,7 @@ Document[0, 16]
 
 Titles may be in single quotes, double quotes, or parentheses:
 
-```````````````````````````````` example Links: 19
+```````````````````````````````` example Links: 19
 [link](/url "title")
 [link](/url 'title')
 [link](/url (title))
@@ -10287,7 +10287,7 @@ Document[0, 63]
 Backslash escapes and entity and numeric character references
 may be used in titles:
 
-```````````````````````````````` example Links: 20
+```````````````````````````````` example Links: 20
 [link](/url "title \"&quot;")
 .
 <p><a href="/url" title="title &quot;&quot;">link</a></p>
@@ -10301,7 +10301,7 @@ Document[0, 30]
 
 Nested balanced quotes are not allowed without escaping:
 
-```````````````````````````````` example Links: 21
+```````````````````````````````` example Links: 21
 [link](/url "title "and" title")
 .
 <p>[link](/url &quot;title &quot;and&quot; title&quot;)</p>
@@ -10314,7 +10314,7 @@ Document[0, 33]
 
 But it is easy to work around this by using a different quote type:
 
-```````````````````````````````` example Links: 22
+```````````````````````````````` example Links: 22
 [link](/url 'title "and" title')
 .
 <p><a href="/url" title="title &quot;and&quot; title">link</a></p>
@@ -10343,7 +10343,7 @@ the same way in inline links and link reference definitions.)
 
 [Whitespace] is allowed around the destination and title:
 
-```````````````````````````````` example Links: 23
+```````````````````````````````` example Links: 23
 [link](   /uri
   "title"  )
 .
@@ -10359,7 +10359,7 @@ Document[0, 28]
 But it is not allowed between the link text and the
 following parenthesis:
 
-```````````````````````````````` example Links: 24
+```````````````````````````````` example Links: 24
 [link] (/uri)
 .
 <p>[link] (/uri)</p>
@@ -10375,7 +10375,7 @@ Document[0, 14]
 The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:
 
-```````````````````````````````` example Links: 25
+```````````````````````````````` example Links: 25
 [link [foo [bar]]](/uri)
 .
 <p><a href="/uri">link [foo [bar]]</a></p>
@@ -10387,7 +10387,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 26
+```````````````````````````````` example Links: 26
 [link] bar](/uri)
 .
 <p>[link] bar](/uri)</p>
@@ -10400,7 +10400,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 27
+```````````````````````````````` example Links: 27
 [link [bar](/uri)
 .
 <p>[link <a href="/uri">bar</a></p>
@@ -10413,7 +10413,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 28
+```````````````````````````````` example Links: 28
 [link \[bar](/uri)
 .
 <p><a href="/uri">link [bar</a></p>
@@ -10427,7 +10427,7 @@ Document[0, 19]
 
 The link text may contain inline content:
 
-```````````````````````````````` example Links: 29
+```````````````````````````````` example Links: 29
 [link *foo **bar** `#`*](/uri)
 .
 <p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
@@ -10445,7 +10445,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 30
+```````````````````````````````` example Links: 30
 [![moon](moon.jpg)](/uri)
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
@@ -10460,7 +10460,7 @@ Document[0, 26]
 
 However, links may not contain other links, at any level of nesting.
 
-```````````````````````````````` example Links: 31
+```````````````````````````````` example Links: 31
 [foo [bar](/uri)](/uri)
 .
 <p>[foo <a href="/uri">bar</a>](/uri)</p>
@@ -10474,7 +10474,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 32
+```````````````````````````````` example Links: 32
 [foo *[bar [baz](/uri)](/uri)*](/uri)
 .
 <p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
@@ -10491,7 +10491,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 33
+```````````````````````````````` example Links: 33
 ![[[foo](uri1)](uri2)](uri3)
 .
 <p><img src="uri3" alt="[foo](uri2)" /></p>
@@ -10509,7 +10509,7 @@ Document[0, 29]
 These cases illustrate the precedence of link text grouping over
 emphasis grouping:
 
-```````````````````````````````` example Links: 34
+```````````````````````````````` example Links: 34
 *[foo*](/uri)
 .
 <p>*<a href="/uri">foo*</a></p>
@@ -10522,7 +10522,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 35
+```````````````````````````````` example Links: 35
 [foo *bar](baz*)
 .
 <p><a href="baz*">foo *bar</a></p>
@@ -10537,7 +10537,7 @@ Document[0, 17]
 Note that brackets that *aren't* part of links do not take
 precedence:
 
-```````````````````````````````` example Links: 36
+```````````````````````````````` example Links: 36
 *foo [bar* baz]
 .
 <p><em>foo [bar</em> baz]</p>
@@ -10553,7 +10553,7 @@ Document[0, 16]
 These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:
 
-```````````````````````````````` example Links: 37
+```````````````````````````````` example Links: 37
 [foo <bar attr="](baz)">
 .
 <p>[foo <bar attr="](baz)"></p>
@@ -10565,7 +10565,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 38
+```````````````````````````````` example Links: 38
 [foo`](/uri)`
 .
 <p>[foo<code>](/uri)</code></p>
@@ -10577,7 +10577,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 39
+```````````````````````````````` example Links: 39
 [foo<http://example.com/?search=](uri)>
 .
 <p>[foo<a href="http://example.com/?search=%5D(uri)">http://example.com/?search=](uri)</a></p>
@@ -10617,7 +10617,7 @@ matching [link reference definition].
 
 Here is a simple example:
 
-```````````````````````````````` example Links: 40
+```````````````````````````````` example Links: 40
 [foo][bar]
 
 [bar]: /url "title"
@@ -10638,7 +10638,7 @@ The rules for the [link text] are the same as with
 The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:
 
-```````````````````````````````` example Links: 41
+```````````````````````````````` example Links: 41
 [link [foo [bar]]][ref]
 
 [ref]: /uri
@@ -10653,7 +10653,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 42
+```````````````````````````````` example Links: 42
 [link \[bar][ref]
 
 [ref]: /uri
@@ -10670,7 +10670,7 @@ Document[0, 31]
 
 The link text may contain inline content:
 
-```````````````````````````````` example Links: 43
+```````````````````````````````` example Links: 43
 [link *foo **bar** `#`*][ref]
 
 [ref]: /uri
@@ -10691,7 +10691,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 44
+```````````````````````````````` example Links: 44
 [![moon](moon.jpg)][ref]
 
 [ref]: /uri
@@ -10709,7 +10709,7 @@ Document[0, 38]
 
 However, links may not contain other links, at any level of nesting.
 
-```````````````````````````````` example Links: 45
+```````````````````````````````` example Links: 45
 [foo [bar](/uri)][ref]
 
 [ref]: /uri
@@ -10728,7 +10728,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 46
+```````````````````````````````` example Links: 46
 [foo *bar [baz][ref]*][ref]
 
 [ref]: /uri
@@ -10755,7 +10755,7 @@ instead of one [full reference link].)
 The following cases illustrate the precedence of link text grouping over
 emphasis grouping:
 
-```````````````````````````````` example Links: 47
+```````````````````````````````` example Links: 47
 *[foo*][ref]
 
 [ref]: /uri
@@ -10771,7 +10771,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 48
+```````````````````````````````` example Links: 48
 [foo *bar][ref]
 
 [ref]: /uri
@@ -10789,7 +10789,7 @@ Document[0, 29]
 These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:
 
-```````````````````````````````` example Links: 49
+```````````````````````````````` example Links: 49
 [foo <bar attr="][ref]">
 
 [ref]: /uri
@@ -10804,7 +10804,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 50
+```````````````````````````````` example Links: 50
 [foo`][ref]`
 
 [ref]: /uri
@@ -10819,7 +10819,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 51
+```````````````````````````````` example Links: 51
 [foo<http://example.com/?search=][ref]>
 
 [ref]: /uri
@@ -10836,7 +10836,7 @@ Document[0, 53]
 
 Matching is case-insensitive:
 
-```````````````````````````````` example Links: 52
+```````````````````````````````` example Links: 52
 [foo][BaR]
 
 [bar]: /url "title"
@@ -10853,7 +10853,7 @@ Document[0, 32]
 
 Unicode case fold is used:
 
-```````````````````````````````` example Links: 53
+```````````````````````````````` example Links: 53
 [Толпой][Толпой] is a Russian word.
 
 [ТОЛПОЙ]: /url
@@ -10872,7 +10872,7 @@ Document[0, 52]
 Consecutive internal [whitespace] is treated as one space for
 purposes of determining matching:
 
-```````````````````````````````` example Links: 54
+```````````````````````````````` example Links: 54
 [Foo
   bar]: /url
 
@@ -10891,7 +10891,7 @@ Document[0, 34]
 No [whitespace] is allowed between the [link text] and the
 [link label]:
 
-```````````````````````````````` example Links: 55
+```````````````````````````````` example Links: 55
 [foo] [bar]
 
 [bar]: /url "title"
@@ -10909,7 +10909,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 56
+```````````````````````````````` example Links: 56
 [foo]
 [bar]
 
@@ -10959,7 +10959,7 @@ unintended results.)
 When there are multiple matching [link reference definitions],
 the first is used:
 
-```````````````````````````````` example Links: 57
+```````````````````````````````` example Links: 57
 [foo]: /url1
 
 [foo]: /url2
@@ -10981,7 +10981,7 @@ Note that matching is performed on normalized strings, not parsed
 inline content.  So the following does not match, even though the
 labels define equivalent inline content:
 
-```````````````````````````````` example Links: 58
+```````````````````````````````` example Links: 58
 [bar][foo\!]
 
 [foo!]: /url
@@ -10999,7 +10999,7 @@ Document[0, 27]
 [Link labels] cannot contain brackets, unless they are
 backslash-escaped:
 
-```````````````````````````````` example Links: 59
+```````````````````````````````` example Links: 59
 [foo][ref[]
 
 [ref[]: /uri
@@ -11020,7 +11020,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 60
+```````````````````````````````` example Links: 60
 [foo][ref[bar]]
 
 [ref[bar]]: /uri
@@ -11044,7 +11044,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 61
+```````````````````````````````` example Links: 61
 [[[foo]]]
 
 [[[foo]]]: /url
@@ -11066,7 +11066,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 62
+```````````````````````````````` example Links: 62
 [foo][ref\[]
 
 [ref\[]: /uri
@@ -11083,7 +11083,7 @@ Document[0, 28]
 
 Note that in this example `]` is not backslash-escaped:
 
-```````````````````````````````` example Links: 63
+```````````````````````````````` example Links: 63
 [bar\\]: /uri
 
 [bar\\]
@@ -11100,7 +11100,7 @@ Document[0, 23]
 
 A [link label] must contain at least one [non-whitespace character]:
 
-```````````````````````````````` example Links: 64
+```````````````````````````````` example Links: 64
 []
 
 []: /uri
@@ -11117,7 +11117,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 65
+```````````````````````````````` example Links: 65
 [
  ]
 
@@ -11149,7 +11149,7 @@ which are used as the link's text.  The link's URI and title are
 provided by the matching reference link definition.  Thus,
 `[foo][]` is equivalent to `[foo][foo]`.
 
-```````````````````````````````` example Links: 66
+```````````````````````````````` example Links: 66
 [foo][]
 
 [foo]: /url "title"
@@ -11164,7 +11164,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 67
+```````````````````````````````` example Links: 67
 [*foo* bar][]
 
 [*foo* bar]: /url "title"
@@ -11183,7 +11183,7 @@ Document[0, 41]
 
 The link labels are case-insensitive:
 
-```````````````````````````````` example Links: 68
+```````````````````````````````` example Links: 68
 [Foo][]
 
 [foo]: /url "title"
@@ -11202,7 +11202,7 @@ Document[0, 29]
 As with full reference links, [whitespace] is not
 allowed between the two sets of brackets:
 
-```````````````````````````````` example Links: 69
+```````````````````````````````` example Links: 69
 [foo] 
 []
 
@@ -11230,7 +11230,7 @@ which are used as the link's text.  the link's URI and title
 are provided by the matching link reference definition.
 Thus, `[foo]` is equivalent to `[foo][]`.
 
-```````````````````````````````` example Links: 70
+```````````````````````````````` example Links: 70
 [foo]
 
 [foo]: /url "title"
@@ -11245,7 +11245,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 71
+```````````````````````````````` example Links: 71
 [*foo* bar]
 
 [*foo* bar]: /url "title"
@@ -11262,7 +11262,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 72
+```````````````````````````````` example Links: 72
 [[*foo* bar]]
 
 [*foo* bar]: /url "title"
@@ -11281,7 +11281,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 73
+```````````````````````````````` example Links: 73
 [[bar [foo]
 
 [foo]: /url
@@ -11299,7 +11299,7 @@ Document[0, 25]
 
 The link labels are case-insensitive:
 
-```````````````````````````````` example Links: 74
+```````````````````````````````` example Links: 74
 [Foo]
 
 [foo]: /url "title"
@@ -11316,7 +11316,7 @@ Document[0, 27]
 
 A space after the link text should be preserved:
 
-```````````````````````````````` example Links: 75
+```````````````````````````````` example Links: 75
 [foo] bar
 
 [foo]: /url
@@ -11335,7 +11335,7 @@ Document[0, 23]
 If you just want bracketed text, you can backslash-escape the
 opening bracket to avoid links:
 
-```````````````````````````````` example Links: 76
+```````````````````````````````` example Links: 76
 \[foo]
 
 [foo]: /url "title"
@@ -11352,7 +11352,7 @@ Document[0, 28]
 Note that this is a link, because a link label ends with the first
 following closing bracket:
 
-```````````````````````````````` example Links: 77
+```````````````````````````````` example Links: 77
 [foo*]: /url
 
 *[foo*]
@@ -11370,7 +11370,7 @@ Document[0, 22]
 
 Full references take precedence over shortcut references:
 
-```````````````````````````````` example Links: 78
+```````````````````````````````` example Links: 78
 [foo][bar]
 
 [foo]: /url1
@@ -11390,7 +11390,7 @@ Document[0, 38]
 In the following case `[bar][baz]` is parsed as a reference,
 `[foo]` as normal text:
 
-```````````````````````````````` example Links: 79
+```````````````````````````````` example Links: 79
 [foo][bar][baz]
 
 [baz]: /url
@@ -11409,7 +11409,7 @@ Document[0, 29]
 Here, though, `[foo][bar]` is parsed as a reference, since
 `[bar]` is defined:
 
-```````````````````````````````` example Links: 80
+```````````````````````````````` example Links: 80
 [foo][bar][baz]
 
 [baz]: /url1
@@ -11431,7 +11431,7 @@ Document[0, 43]
 Here `[foo]` is not parsed as a shortcut reference, because it
 is followed by a link label (even though `[bar]` is not defined):
 
-```````````````````````````````` example Links: 81
+```````````````````````````````` example Links: 81
 [foo][bar][baz]
 
 [baz]: /url1
@@ -11462,7 +11462,7 @@ An image description has inline elements
 as its contents.  When an image is rendered to HTML,
 this is standardly used as the image's `alt` attribute.
 
-```````````````````````````````` example Images: 1
+```````````````````````````````` example Images: 1
 ![foo](/url "title")
 .
 <p><img src="/url" alt="foo" title="title" /></p>
@@ -11475,7 +11475,7 @@ Document[0, 21]
 
 
 
-```````````````````````````````` example Images: 2
+```````````````````````````````` example Images: 2
 ![foo *bar*]
 
 
@@ -11493,7 +11493,7 @@ Document[0, 55]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 3
+```````````````````````````````` example Images: 3
 ![foo ![bar](/url)](/url2)
 .
 <p><img src="/url2" alt="foo bar" /></p>
@@ -11507,7 +11507,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 4
+```````````````````````````````` example Images: 4
 ![foo [bar](/url)](/url2)
 .
 <p><img src="/url2" alt="foo bar" /></p>
@@ -11528,7 +11528,7 @@ the above example, the alt attribute's value is `foo bar`, not `foo
 [bar](/url)` or `foo <a href="/url">bar</a>`.  Only the plain string
 content is rendered, without formatting.
 
-```````````````````````````````` example Images: 5
+```````````````````````````````` example Images: 5
 ![foo *bar*][]
 
 [foo *bar*]: train.jpg "train & tracks"
@@ -11545,7 +11545,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 6
+```````````````````````````````` example Images: 6
 ![foo *bar*][foobar]
 
 [FOOBAR]: train.jpg "train & tracks"
@@ -11562,7 +11562,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 7
+```````````````````````````````` example Images: 7
 ![foo](train.jpg)
 .
 <p><img src="train.jpg" alt="foo" /></p>
@@ -11574,7 +11574,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 8
+```````````````````````````````` example Images: 8
 My ![foo bar](/path/to/train.jpg  "title"   )
 .
 <p>My <img src="/path/to/train.jpg" alt="foo bar" title="title" /></p>
@@ -11587,7 +11587,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 9
+```````````````````````````````` example Images: 9
 ![foo](<url>)
 .
 <p><img src="url" alt="foo" /></p>
@@ -11599,7 +11599,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 10
+```````````````````````````````` example Images: 10
 ![](/url)
 .
 <p><img src="/url" alt="" /></p>
@@ -11612,7 +11612,7 @@ Document[0, 10]
 
 Reference-style:
 
-```````````````````````````````` example Images: 11
+```````````````````````````````` example Images: 11
 ![foo][bar]
 
 [bar]: /url
@@ -11627,7 +11627,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 12
+```````````````````````````````` example Images: 12
 ![foo][bar]
 
 [BAR]: /url
@@ -11644,7 +11644,7 @@ Document[0, 25]
 
 Collapsed:
 
-```````````````````````````````` example Images: 13
+```````````````````````````````` example Images: 13
 ![foo][]
 
 [foo]: /url "title"
@@ -11659,7 +11659,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 14
+```````````````````````````````` example Images: 14
 ![*foo* bar][]
 
 [*foo* bar]: /url "title"
@@ -11678,7 +11678,7 @@ Document[0, 42]
 
 The labels are case-insensitive:
 
-```````````````````````````````` example Images: 15
+```````````````````````````````` example Images: 15
 ![Foo][]
 
 [foo]: /url "title"
@@ -11696,7 +11696,7 @@ Document[0, 30]
 As with reference links, [whitespace] is not allowed
 between the two sets of brackets:
 
-```````````````````````````````` example Images: 16
+```````````````````````````````` example Images: 16
 ![foo] 
 []
 
@@ -11717,7 +11717,7 @@ Document[0, 32]
 
 Shortcut:
 
-```````````````````````````````` example Images: 17
+```````````````````````````````` example Images: 17
 ![foo]
 
 [foo]: /url "title"
@@ -11732,7 +11732,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Images: 18
+```````````````````````````````` example Images: 18
 ![*foo* bar]
 
 [*foo* bar]: /url "title"
@@ -11751,7 +11751,7 @@ Document[0, 40]
 
 Note that link labels cannot contain unescaped brackets:
 
-```````````````````````````````` example Images: 19
+```````````````````````````````` example Images: 19
 ![[foo]]
 
 [[foo]]: /url "title"
@@ -11775,7 +11775,7 @@ Document[0, 32]
 
 The link labels are case-insensitive:
 
-```````````````````````````````` example Images: 20
+```````````````````````````````` example Images: 20
 ![Foo]
 
 [foo]: /url "title"
@@ -11793,7 +11793,7 @@ Document[0, 28]
 If you just want bracketed text, you can backslash-escape the
 opening `!` and `[`:
 
-```````````````````````````````` example Images: 21
+```````````````````````````````` example Images: 21
 \!\[foo]
 
 [foo]: /url "title"
@@ -11810,7 +11810,7 @@ Document[0, 30]
 If you want a link after a literal `!`, backslash-escape the
 `!`:
 
-```````````````````````````````` example Images: 22
+```````````````````````````````` example Images: 22
 \![foo]
 
 [foo]: /url "title"
@@ -11850,7 +11850,7 @@ by any combination of ASCII letters, digits, or the symbols plus
 
 Here are some valid autolinks:
 
-```````````````````````````````` example Autolinks: 1
+```````````````````````````````` example Autolinks: 1
 <http://foo.bar.baz>
 .
 <p><a href="http://foo.bar.baz">http://foo.bar.baz</a></p>
@@ -11861,7 +11861,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 2
+```````````````````````````````` example Autolinks: 2
 <http://foo.bar.baz/test?q=hello&id=22&boolean>
 .
 <p><a href="http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean">http://foo.bar.baz/test?q=hello&amp;id=22&amp;boolean</a></p>
@@ -11872,7 +11872,7 @@ Document[0, 48]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 3
+```````````````````````````````` example Autolinks: 3
 <irc://foo.bar:2233/baz>
 .
 <p><a href="irc://foo.bar:2233/baz">irc://foo.bar:2233/baz</a></p>
@@ -11885,7 +11885,7 @@ Document[0, 25]
 
 Uppercase is also fine:
 
-```````````````````````````````` example Autolinks: 4
+```````````````````````````````` example Autolinks: 4
 <MAILTO:FOO@BAR.BAZ>
 .
 <p><a href="MAILTO:FOO@BAR.BAZ">MAILTO:FOO@BAR.BAZ</a></p>
@@ -11901,7 +11901,7 @@ purposes of this spec are not valid URIs, because their
 schemes are not registered or because of other problems
 with their syntax:
 
-```````````````````````````````` example Autolinks: 5
+```````````````````````````````` example Autolinks: 5
 <a+b+c:d>
 .
 <p><a href="a+b+c:d">a+b+c:d</a></p>
@@ -11912,7 +11912,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 6
+```````````````````````````````` example Autolinks: 6
 <made-up-scheme://foo,bar>
 .
 <p><a href="made-up-scheme://foo,bar">made-up-scheme://foo,bar</a></p>
@@ -11923,7 +11923,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 7
+```````````````````````````````` example Autolinks: 7
 <http://../>
 .
 <p><a href="http://../">http://../</a></p>
@@ -11934,7 +11934,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 8
+```````````````````````````````` example Autolinks: 8
 <localhost:5001/foo>
 .
 <p><a href="localhost:5001/foo">localhost:5001/foo</a></p>
@@ -11947,7 +11947,7 @@ Document[0, 21]
 
 Spaces are not allowed in autolinks:
 
-```````````````````````````````` example Autolinks: 9
+```````````````````````````````` example Autolinks: 9
 <http://foo.bar/baz bim>
 .
 <p>&lt;http://foo.bar/baz bim&gt;</p>
@@ -11960,7 +11960,7 @@ Document[0, 25]
 
 Backslash-escapes do not work inside autolinks:
 
-```````````````````````````````` example Autolinks: 10
+```````````````````````````````` example Autolinks: 10
 <http://example.com/\[\>
 .
 <p><a href="http://example.com/%5C%5B%5C">http://example.com/\[\</a></p>
@@ -11986,7 +11986,7 @@ spec](https://html.spec.whatwg.org/multipage/forms.html#e-mail-state-(type=email
 
 Examples of email autolinks:
 
-```````````````````````````````` example Autolinks: 11
+```````````````````````````````` example Autolinks: 11
 <foo@bar.example.com>
 .
 <p><a href="mailto:foo@bar.example.com">foo@bar.example.com</a></p>
@@ -11997,7 +11997,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 12
+```````````````````````````````` example Autolinks: 12
 <foo+special@Bar.baz-bar0.com>
 .
 <p><a href="mailto:foo+special@Bar.baz-bar0.com">foo+special@Bar.baz-bar0.com</a></p>
@@ -12010,7 +12010,7 @@ Document[0, 31]
 
 Backslash-escapes do not work inside email autolinks:
 
-```````````````````````````````` example Autolinks: 13
+```````````````````````````````` example Autolinks: 13
 <foo\+@bar.example.com>
 .
 <p>&lt;foo+@bar.example.com&gt;</p>
@@ -12023,7 +12023,7 @@ Document[0, 24]
 
 These are not autolinks:
 
-```````````````````````````````` example Autolinks: 14
+```````````````````````````````` example Autolinks: 14
 <>
 .
 <p>&lt;&gt;</p>
@@ -12034,7 +12034,7 @@ Document[0, 3]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 15
+```````````````````````````````` example Autolinks: 15
 < http://foo.bar >
 .
 <p>&lt; http://foo.bar &gt;</p>
@@ -12045,7 +12045,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 16
+```````````````````````````````` example Autolinks: 16
 <m:abc>
 .
 <p>&lt;m:abc&gt;</p>
@@ -12056,7 +12056,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 17
+```````````````````````````````` example Autolinks: 17
 <foo.bar.baz>
 .
 <p>&lt;foo.bar.baz&gt;</p>
@@ -12067,7 +12067,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 18
+```````````````````````````````` example Autolinks: 18
 http://example.com
 .
 <p>http://example.com</p>
@@ -12078,7 +12078,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolinks: 19
+```````````````````````````````` example Autolinks: 19
 foo@bar.example.com
 .
 <p>foo@bar.example.com</p>
@@ -12164,7 +12164,7 @@ or a [CDATA section].
 
 Here are some simple open tags:
 
-```````````````````````````````` example Raw HTML: 1
+```````````````````````````````` example Raw HTML: 1
 <a><bab><c2c>
 .
 <p><a><bab><c2c></p>
@@ -12179,7 +12179,7 @@ Document[0, 14]
 
 Empty elements:
 
-```````````````````````````````` example Raw HTML: 2
+```````````````````````````````` example Raw HTML: 2
 <a/><b2/>
 .
 <p><a/><b2/></p>
@@ -12193,7 +12193,7 @@ Document[0, 10]
 
 [Whitespace] is allowed:
 
-```````````````````````````````` example Raw HTML: 3
+```````````````````````````````` example Raw HTML: 3
 <a  /><b2
 data="foo" >
 .
@@ -12209,7 +12209,7 @@ Document[0, 23]
 
 With attributes:
 
-```````````````````````````````` example Raw HTML: 4
+```````````````````````````````` example Raw HTML: 4
 <a foo="bar" bam = 'baz <em>"</em>'
 _boolean zoop:33=zoop:33 />
 .
@@ -12224,7 +12224,7 @@ Document[0, 64]
 
 Custom tag names can be used:
 
-```````````````````````````````` example Raw HTML: 5
+```````````````````````````````` example Raw HTML: 5
 Foo <responsive-image src="foo.jpg" />
 .
 <p>Foo <responsive-image src="foo.jpg" /></p>
@@ -12238,7 +12238,7 @@ Document[0, 39]
 
 Illegal tag names, not parsed as HTML:
 
-```````````````````````````````` example Raw HTML: 6
+```````````````````````````````` example Raw HTML: 6
 <33> <__>
 .
 <p>&lt;33&gt; &lt;__&gt;</p>
@@ -12251,7 +12251,7 @@ Document[0, 10]
 
 Illegal attribute names:
 
-```````````````````````````````` example Raw HTML: 7
+```````````````````````````````` example Raw HTML: 7
 <a h*#ref="hi">
 .
 <p>&lt;a h*#ref=&quot;hi&quot;&gt;</p>
@@ -12264,7 +12264,7 @@ Document[0, 16]
 
 Illegal attribute values:
 
-```````````````````````````````` example Raw HTML: 8
+```````````````````````````````` example Raw HTML: 8
 <a href="hi'> <a href=hi'>
 .
 <p>&lt;a href=&quot;hi'&gt; &lt;a href=hi'&gt;</p>
@@ -12277,7 +12277,7 @@ Document[0, 27]
 
 Illegal [whitespace]:
 
-```````````````````````````````` example Raw HTML: 9
+```````````````````````````````` example Raw HTML: 9
 < a><
 foo><bar/ >
 .
@@ -12294,7 +12294,7 @@ Document[0, 18]
 
 Missing [whitespace]:
 
-```````````````````````````````` example Raw HTML: 10
+```````````````````````````````` example Raw HTML: 10
 <a href='bar'title=title>
 .
 <p>&lt;a href='bar'title=title&gt;</p>
@@ -12307,7 +12307,7 @@ Document[0, 26]
 
 Closing tags:
 
-```````````````````````````````` example Raw HTML: 11
+```````````````````````````````` example Raw HTML: 11
 </a></foo >
 .
 <p></a></foo ></p>
@@ -12321,7 +12321,7 @@ Document[0, 12]
 
 Illegal attributes in closing tag:
 
-```````````````````````````````` example Raw HTML: 12
+```````````````````````````````` example Raw HTML: 12
 </a href="foo">
 .
 <p>&lt;/a href=&quot;foo&quot;&gt;</p>
@@ -12334,7 +12334,7 @@ Document[0, 16]
 
 Comments:
 
-```````````````````````````````` example Raw HTML: 13
+```````````````````````````````` example Raw HTML: 13
 foo <!-- this is a
 comment - with hyphen -->
 .
@@ -12348,7 +12348,7 @@ Document[0, 45]
 ````````````````````````````````
 
 
-```````````````````````````````` example Raw HTML: 14
+```````````````````````````````` example Raw HTML: 14
 foo <!-- not a comment -- two hyphens -->
 .
 <p>foo &lt;!-- not a comment -- two hyphens --&gt;</p>
@@ -12361,7 +12361,7 @@ Document[0, 42]
 
 Not comments:
 
-```````````````````````````````` example Raw HTML: 15
+```````````````````````````````` example Raw HTML: 15
 foo <!--> foo -->
 
 foo <!-- foo--->
@@ -12379,7 +12379,7 @@ Document[0, 36]
 
 Processing instructions:
 
-```````````````````````````````` example Raw HTML: 16
+```````````````````````````````` example Raw HTML: 16
 foo <?php echo $a; ?>
 .
 <p>foo <?php echo $a; ?></p>
@@ -12393,7 +12393,7 @@ Document[0, 22]
 
 Declarations:
 
-```````````````````````````````` example Raw HTML: 17
+```````````````````````````````` example Raw HTML: 17
 foo <!ELEMENT br EMPTY>
 .
 <p>foo <!ELEMENT br EMPTY></p>
@@ -12407,7 +12407,7 @@ Document[0, 24]
 
 CDATA sections:
 
-```````````````````````````````` example Raw HTML: 18
+```````````````````````````````` example Raw HTML: 18
 foo <![CDATA[>&<]]>
 .
 <p>foo <![CDATA[>&<]]></p>
@@ -12422,7 +12422,7 @@ Document[0, 20]
 Entity and numeric character references are preserved in HTML
 attributes:
 
-```````````````````````````````` example Raw HTML: 19
+```````````````````````````````` example Raw HTML: 19
 foo <a href="&ouml;">
 .
 <p>foo <a href="&ouml;"></p>
@@ -12436,7 +12436,7 @@ Document[0, 22]
 
 Backslash escapes do not work in HTML attributes:
 
-```````````````````````````````` example Raw HTML: 20
+```````````````````````````````` example Raw HTML: 20
 foo <a href="\*">
 .
 <p>foo <a href="\*"></p>
@@ -12448,7 +12448,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Raw HTML: 21
+```````````````````````````````` example Raw HTML: 21
 <a href="\"">
 .
 <p>&lt;a href=&quot;&quot;&quot;&gt;</p>
@@ -12466,7 +12466,7 @@ by two or more spaces and does not occur at the end of a block
 is parsed as a [hard line break](@) (rendered
 in HTML as a `<br />` tag):
 
-```````````````````````````````` example Hard line breaks: 1
+```````````````````````````````` example Hard line breaks: 1
 foo  
 baz
 .
@@ -12484,7 +12484,7 @@ Document[0, 10]
 For a more visible alternative, a backslash before the
 [line ending] may be used instead of two spaces:
 
-```````````````````````````````` example Hard line breaks: 2
+```````````````````````````````` example Hard line breaks: 2
 foo\
 baz
 .
@@ -12501,7 +12501,7 @@ Document[0, 9]
 
 More than two spaces can be used:
 
-```````````````````````````````` example Hard line breaks: 3
+```````````````````````````````` example Hard line breaks: 3
 foo       
 baz
 .
@@ -12518,7 +12518,7 @@ Document[0, 15]
 
 Leading spaces at the beginning of the next line are ignored:
 
-```````````````````````````````` example Hard line breaks: 4
+```````````````````````````````` example Hard line breaks: 4
 foo  
      bar
 .
@@ -12533,7 +12533,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 5
+```````````````````````````````` example Hard line breaks: 5
 foo\
      bar
 .
@@ -12551,7 +12551,7 @@ Document[0, 14]
 Line breaks can occur inside emphasis, links, and other constructs
 that allow inline content:
 
-```````````````````````````````` example Hard line breaks: 6
+```````````````````````````````` example Hard line breaks: 6
 *foo  
 bar*
 .
@@ -12567,7 +12567,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 7
+```````````````````````````````` example Hard line breaks: 7
 *foo\
 bar*
 .
@@ -12585,7 +12585,7 @@ Document[0, 11]
 
 Line breaks do not occur inside code spans
 
-```````````````````````````````` example Hard line breaks: 8
+```````````````````````````````` example Hard line breaks: 8
 `code  
 span`
 .
@@ -12597,7 +12597,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 9
+```````````````````````````````` example Hard line breaks: 9
 `code\
 span`
 .
@@ -12611,7 +12611,7 @@ Document[0, 13]
 
 or HTML tags:
 
-```````````````````````````````` example Hard line breaks: 10
+```````````````````````````````` example Hard line breaks: 10
 <a href="foo  
 bar">
 .
@@ -12624,7 +12624,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 11
+```````````````````````````````` example Hard line breaks: 11
 <a href="foo\
 bar">
 .
@@ -12641,7 +12641,7 @@ Hard line breaks are for separating inline content within a block.
 Neither syntax for hard line breaks works at the end of a paragraph or
 other block element:
 
-```````````````````````````````` example Hard line breaks: 12
+```````````````````````````````` example Hard line breaks: 12
 foo\
 .
 <p>foo\</p>
@@ -12652,7 +12652,7 @@ Document[0, 5]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 13
+```````````````````````````````` example Hard line breaks: 13
 foo  
 .
 <p>foo</p>
@@ -12663,7 +12663,7 @@ Document[0, 6]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 14
+```````````````````````````````` example Hard line breaks: 14
 ### foo\
 .
 <h3>foo\</h3>
@@ -12674,7 +12674,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Hard line breaks: 15
+```````````````````````````````` example Hard line breaks: 15
 ### foo  
 .
 <h3>foo</h3>
@@ -12693,7 +12693,7 @@ softbreak.  (A softbreak may be rendered in HTML either as a
 [line ending] or as a space. The result will be the same in
 browsers. In the examples here, a [line ending] will be used.)
 
-```````````````````````````````` example Soft line breaks: 1
+```````````````````````````````` example Soft line breaks: 1
 foo
 baz
 .
@@ -12711,7 +12711,7 @@ Document[0, 8]
 Spaces at the end of the line and beginning of the next line are
 removed:
 
-```````````````````````````````` example Soft line breaks: 2
+```````````````````````````````` example Soft line breaks: 2
 foo 
  baz
 .
@@ -12737,7 +12737,7 @@ as hard line breaks.
 Any characters not given an interpretation by the above rules will
 be parsed as plain textual content.
 
-```````````````````````````````` example Textual content: 1
+```````````````````````````````` example Textual content: 1
 hello $.;'there
 .
 <p>hello $.;'there</p>
@@ -12748,7 +12748,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Textual content: 2
+```````````````````````````````` example Textual content: 2
 Foo χρῆν
 .
 <p>Foo χρῆν</p>
@@ -12761,7 +12761,7 @@ Document[0, 9]
 
 Internal spaces are preserved verbatim:
 
-```````````````````````````````` example Textual content: 3
+```````````````````````````````` example Textual content: 3
 Multiple     spaces
 .
 <p>Multiple     spaces</p>

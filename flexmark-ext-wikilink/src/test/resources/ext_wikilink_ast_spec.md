@@ -3,17 +3,19 @@ title: WikiLinks Extension Spec
 author: Vladimir Schneider
 version: 0.1
 date: '2016-06-06'
-license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
+license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)' 
 ...
+
 ---
 
 ## WikiLinks
 
-Converts wikilink of the forms: [[link]], [[link|text]] and [[text|link]] to links in the HTML page.  
+Converts wikilink of the forms: [[link]], [[link|text]] and
+[[text|link]] to links in the HTML page.  
 
 no spaces between brackets
 
-```````````````````````````````` example WikiLinks: 1
+```````````````````````````````` example WikiLinks: 1
 [ [not wiki link]]
 .
 <p>[ [not wiki link]]</p>
@@ -26,9 +28,10 @@ Document[0, 19]
     Text[17, 18] chars:[17, 18, "]"]
 ````````````````````````````````
 
+
 no spaces between brackets
 
-```````````````````````````````` example WikiLinks: 2
+```````````````````````````````` example WikiLinks: 2
 [[not wiki link] ]
 .
 <p>[[not wiki link] ]</p>
@@ -44,7 +47,7 @@ Document[0, 19]
 
 simple wiki link
 
-```````````````````````````````` example WikiLinks: 3
+```````````````````````````````` example WikiLinks: 3
 [[wiki link]]
 .
 <p><a href="wiki-link.md">wiki link</a></p>
@@ -58,7 +61,7 @@ Document[0, 14]
 
 wiki link with text
 
-```````````````````````````````` example WikiLinks: 4
+```````````````````````````````` example WikiLinks: 4
 [[wiki text|wiki link]]
 .
 <p><a href="wiki-link.md">wiki text</a></p>
@@ -72,7 +75,7 @@ Document[0, 24]
 
 wiki link with text, links first option
 
-```````````````````````````````` example(WikiLinks: 5) options(links-first)
+```````````````````````````````` example(WikiLinks: 5) options(links-first)
 [[wiki link|wiki text]]
 .
 <p><a href="wiki-link.md">wiki text</a></p>
@@ -84,10 +87,9 @@ Document[0, 24]
 ````````````````````````````````
 
 
-
 simple wiki link with ! before
 
-```````````````````````````````` example WikiLinks: 6
+```````````````````````````````` example WikiLinks: 6
 ![[wiki link]]
 .
 <p>!<a href="wiki-link.md">wiki link</a></p>
@@ -102,7 +104,7 @@ Document[0, 15]
 
 wiki link with text with ! before
 
-```````````````````````````````` example WikiLinks: 7
+```````````````````````````````` example WikiLinks: 7
 ![[wiki text|wiki link]]
 .
 <p>!<a href="wiki-link.md">wiki text</a></p>
@@ -117,7 +119,7 @@ Document[0, 25]
 
 reference following will be a reference, even if not defined
 
-```````````````````````````````` example WikiLinks: 8
+```````````````````````````````` example WikiLinks: 8
 [[wiki link]][ref]
 .
 <p><a href="wiki-link.md">wiki link</a>[ref]</p>
@@ -133,7 +135,7 @@ Document[0, 19]
 
 reference following will be a reference
 
-```````````````````````````````` example WikiLinks: 9
+```````````````````````````````` example WikiLinks: 9
 [[wiki link]][ref]
 
 [ref]: /url
@@ -152,7 +154,7 @@ Document[0, 32]
 
 dummy reference following will be an empty reference
 
-```````````````````````````````` example WikiLinks: 10
+```````````````````````````````` example WikiLinks: 10
 [[wiki link]][]
 .
 <p><a href="wiki-link.md">wiki link</a>[]</p>
@@ -165,9 +167,10 @@ Document[0, 16]
 ````````````````````````````````
 
 
-reference inside is not a wiki link but a link ref with brackets around it
+reference inside is not a wiki link but a link ref with brackets around
+it
 
-```````````````````````````````` example WikiLinks: 11
+```````````````````````````````` example WikiLinks: 11
 [[not wiki link][ref]]
 .
 <p>[[not wiki link][ref]]</p>
@@ -181,9 +184,10 @@ Document[0, 23]
 ````````````````````````````````
 
 
-dummy reference inside is not a wiki link but a link ref with brackets around it
+dummy reference inside is not a wiki link but a link ref with brackets
+around it
 
-```````````````````````````````` example WikiLinks: 12
+```````````````````````````````` example WikiLinks: 12
 [[not wiki link][]]
 .
 <p>[[not wiki link]]</p>
@@ -197,7 +201,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example WikiLinks: 13
+```````````````````````````````` example WikiLinks: 13
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="wiki-link.md">wiki link</a> [^link][ref] <a href="^wiki-link.md">^wiki link</a></p>
@@ -214,9 +218,10 @@ Document[0, 42]
       Text[28, 40] chars:[28, 40, "[^wik"..."link]"]
 ````````````````````````````````
 
+
 Exclamation before is just text
 
-```````````````````````````````` example WikiLinks: 14
+```````````````````````````````` example WikiLinks: 14
 ![[wiki link]] [^link][ref] [[^wiki link]] [[wiki]][ref]
 .
 <p>!<a href="wiki-link.md">wiki link</a> [^link][ref] <a href="^wiki-link.md">^wiki link</a> <a href="wiki.md">wiki</a>[ref]</p>

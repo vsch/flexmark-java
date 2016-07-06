@@ -53,18 +53,24 @@ class DumpSpecReader extends SpecReader {
 
     public static void addSpecExample(StringBuilder sb, String source, String html, String ast, String optionsSet, boolean includeExampleCoords, String section, int number) {
         // include source so that diff can be used to update spec
-        sb.append(SpecReader.EXAMPLE_START);
+        StringBuilder header = new StringBuilder();
+
+        header.append(SpecReader.EXAMPLE_START);
         if (includeExampleCoords) {
             if (optionsSet != null) {
-                sb.append("(").append(section.trim()).append(": ").append(number).append(")");
+                header.append("(").append(section.trim()).append(": ").append(number).append(")");
             } else {
-                sb.append(" ").append(section.trim()).append(": ").append(number);
+                header.append(" ").append(section.trim()).append(": ").append(number);
             }
         }
         if (optionsSet != null) {
             sb.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
         }
-        sb.append("\n");
+        header.append("\n");
+
+        // replace spaces so GitHub can display example as code fence, but not for original spec which has no coords
+        if (includeExampleCoords) sb.append(header.toString().replace(' ', '\u00A0'));
+        else sb.append(header.toString());
 
         if (ast != null) {
             sb.append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))

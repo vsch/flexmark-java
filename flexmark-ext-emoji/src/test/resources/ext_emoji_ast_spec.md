@@ -5,13 +5,14 @@ version: 0.1
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 ## Emoji
 
 Converts :warning: to its emoji image
 
-```````````````````````````````` example Emoji: 1
+```````````````````````````````` example Emoji: 1
 :warning:
 .
 <p><img src="/img/warning.png" alt="emoji places:warning" /></p>
@@ -25,7 +26,7 @@ Document[0, 10]
 
 Should work in links
 
-```````````````````````````````` example Emoji: 2
+```````````````````````````````` example Emoji: 2
 [:warning:](/url)
 .
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
@@ -38,7 +39,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 3) options(url)
+```````````````````````````````` example(Emoji: 3) options(url)
 :warning:
 .
 <p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" /></p>
@@ -52,7 +53,7 @@ Document[0, 10]
 
 Should work in links
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example Emoji: 4
 [:warning:](/url)
 .
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
@@ -67,7 +68,7 @@ Document[0, 18]
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 5
+```````````````````````````````` example Emoji: 5
 :warnings:
 .
 <p>:warnings:</p>
@@ -81,7 +82,7 @@ Document[0, 11]
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 6
+```````````````````````````````` example Emoji: 6
 :**warnings**:
 .
 <p>:<strong>warnings</strong>:</p>
