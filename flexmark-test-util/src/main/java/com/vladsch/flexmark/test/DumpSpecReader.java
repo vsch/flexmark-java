@@ -8,6 +8,8 @@ import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
 
+import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
+
 class DumpSpecReader extends SpecReader {
     final private StringBuilder sb = new StringBuilder();
     final private FullSpecTestCase testCase;
@@ -37,6 +39,10 @@ class DumpSpecReader extends SpecReader {
             options = null;
         }
 
+        if (options != null && options.get(FAIL)) {
+            ignoredCase = true;
+        }
+
         Node node = testCase.parser().withOptions(options).parse(example.getSource());
         String html = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
@@ -64,7 +70,7 @@ class DumpSpecReader extends SpecReader {
             }
         }
         if (optionsSet != null) {
-            sb.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
+            header.append(SpecReader.OPTIONS_STRING + "(").append(optionsSet).append(")");
         }
         header.append("\n");
 

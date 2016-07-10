@@ -25,5 +25,6 @@
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" />
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
+    <orderEntry type="module" module-name="flexmark-ext-simtoc" />
   </component>
 </module>

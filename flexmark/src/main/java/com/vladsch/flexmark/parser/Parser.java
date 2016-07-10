@@ -32,7 +32,7 @@ import java.util.*;
  * Node document = parser.parse("input text");
  * </code></pre>
  */
-public class Parser {
+public class Parser implements IParse {
     final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
     final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
     final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);

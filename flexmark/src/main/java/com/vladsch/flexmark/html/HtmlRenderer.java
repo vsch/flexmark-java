@@ -21,7 +21,7 @@ import java.util.*;
  * renderer.render(node);
  * </code></pre>
  */
-public class HtmlRenderer {
+public class HtmlRenderer implements IRender {
     final static public DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
     final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);

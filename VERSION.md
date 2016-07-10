@@ -4,11 +4,29 @@ flexmark-java Version History
 0.4.0
 -----
 
-- [ ] Add TOC syntax as per Markdown Navigator updating TOC element.   
+- Make rendering test case classes usable for other spec based testing, not just flexmark. Too
+  useful for testing other parsing implementations to leave it just for flexmark.  
 
-- Add Zzzzzz module to test suite so that the archetype also gets to run for sanitiy testing of
+- Add Sim TOC syntax as per Markdown Navigator simulated TOC element.    
+
+- [ ] Add Sim TOC node post processor to take the following HTML block or Heading with List up
+      to first blank line in the list. Same as markdown navigator.
+
+- [ ] Add Flexmark Spec Example Extension.
+
+- Add Zzzzzz module to test suite so that the archetype also gets to run for sanity testing of
   basic extension module.
 
+- Change spaces in example lead line to NB SP so GitHub can display it as a code fence.   
+
+- Add HR after spec front matter so GitHub can think it is Jekyll or YAML front matter.
+
+- Fix all examples were not being recognized due to NB SP change. Now will accept first line
+  with NB SP or SP or TABs for whitespace.
+
+- Add exception if an example file results in no examples
+
+- Add FAIL example option to allow sanity tests for failure in specs
 
 0.3.2
 -----
@@ -25,7 +43,7 @@ flexmark-java Version History
   instances and uses these to map visitation of `CustomNode` and `CustomBlock` to specific
   classes of nodes and their corresponding visit handlers, like custom node rendering allows to
   create custom node class specific `visit()` methods. Similar to `AbstractVisitor` any node
-  specific methods not overridden will `visitChildren()` of that node. 
+  specific methods not overridden will `visitChildren()` of that node.
 
 - Add `AbstractCustomBlockVisitor` similar to `AbstractCustomVisitor` but will only visit
   children of block elements except `Paragraph`.
@@ -33,7 +51,7 @@ flexmark-java Version History
 0.3.1
 -----
 
-- Add ability to prioritize dependents, affects only dependents not constrained by dependencies. 
+- Add ability to prioritize dependents, affects only dependents not constrained by dependencies.
 
 - Change document post processors are run after node post processors unless constrained by
   dependencies provided.
@@ -74,7 +92,7 @@ flexmark-java Version History
 
 - Add `HtmlRenderer.GENERATE_HEADER_ID` option, default false. When enabled will generate a
   header id attribute using the configured `HtmlIdGenerator` but not render it. Use this when an
-  extension needs a header id, like AnchorLinksExtension and TocExtension. 
+  extension needs a header id, like AnchorLinksExtension and TocExtension.
 
 - Add `HtmlRenderer.DO_NOT_RENDER_LINKS` option, default false. When enabled will disable link
   rendering in the document. This will cause sub-contexts to also have link rendering disabled.

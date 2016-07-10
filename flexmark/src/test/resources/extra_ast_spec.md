@@ -10,9 +10,9 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Extra tests
 
-Code fence starting with setext header marker
+Should be ignored
 
-```````````````````````````````` example Extra tests: 1
+```````````````````````````````` example(Extra tests: 1) options(IGNORE)
 ```markdown
 ---
 ```
@@ -25,7 +25,37 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Extra tests: 2
+Should fail
+    
+```````````````````````````````` example(Extra tests: 2) options(FAIL)
+```markdown
+abc
+```
+.
+<pre><code class="language-markdown">---
+</code></pre>
+.
+Document[0, 20]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
+````````````````````````````````
+
+
+Code fence starting with setext header marker
+
+```````````````````````````````` example Extra tests: 3
+```markdown
+---
+```
+.
+<pre><code class="language-markdown">---
+</code></pre>
+.
+Document[0, 20]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
+````````````````````````````````
+
+
+```````````````````````````````` example Extra tests: 4
 ```markdown
 ===
 ```
@@ -40,7 +70,7 @@ Document[0, 20]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 3
+```````````````````````````````` example Extra tests: 5
 > - item 1
 > - item 2
 >     1. item 1
@@ -79,7 +109,7 @@ Document[0, 54]
 
 Make sure indentation is properly implemented
 
-```````````````````````````````` example Extra tests: 4
+```````````````````````````````` example Extra tests: 6
 > - item 1
 >
 > - item 2
@@ -128,8 +158,7 @@ Document[0, 60]
 
 ## Reference Repository Keep First tests
 
-Test repository KEEP_FIRST behavior, meaning the first reference def is
-used
+Test repository KEEP_FIRST behavior, meaning the first reference def is used
 
 ```````````````````````````````` example Reference Repository Keep First tests: 1
 [ref]
@@ -152,8 +181,7 @@ Document[0, 46]
 
 ## Reference Repository Keep Last tests
 
-Test repository KEEP_LAST behavior, meaning the last reference def is
-used
+Test repository KEEP_LAST behavior, meaning the last reference def is used
 
 ```````````````````````````````` example(Reference Repository Keep Last tests: 1) options(keep-last)
 [ref]
@@ -304,8 +332,8 @@ Document[0, 81]
 
 ### List - Fixed Indent
 
-Options defined: list-fixed-indent, list-no-break, list-no-loose,
-list-no-start to change the behavior of list parser and renderer
+Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to change the
+behavior of list parser and renderer
 
 Default processing
 
@@ -1341,8 +1369,8 @@ Document[0, 116]
 
 ### Thematic Break - No Relaxed Rules
 
-With relaxed rules. Thematic break can occur without a preceding blank
-line. Applies to non-dashed thematic break, dashes are a heading.
+With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
+non-dashed thematic break, dashes are a heading.
 
 ```````````````````````````````` example Thematic Break - No Relaxed Rules: 1
 This is a paragraph
@@ -1358,8 +1386,8 @@ Document[0, 24]
 ````````````````````````````````
 
 
-Without relaxed rules. Thematic break must be preceded by a blank line.
-Applies to non-dashed thematic break, dashes are a heading.
+Without relaxed rules. Thematic break must be preceded by a blank line. Applies to non-dashed
+thematic break, dashes are a heading.
 
 ```````````````````````````````` example(Thematic Break - No Relaxed Rules: 2) options(thematic-break-no-relaxed-start)
 This is a paragraph

@@ -1,22 +1,31 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.IRender;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.IParse;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.AssumptionViolatedException;
+import org.junit.ComparisonFailure;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase {
 
-    public static final String IGNORE = "IGNORE";
+    public static final String IGNORE_OPTION = "IGNORE";
+    public static final String FAIL_OPTION = "FAIL";
+    public static DataKey<Boolean> FAIL = new DataKey<Boolean>("FAIL", false);
 
-    protected abstract Parser parser();
-    protected abstract HtmlRenderer renderer();
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    protected abstract IParse parser();
+    protected abstract IRender renderer();
     protected abstract SpecExample example();
 
     /**
@@ -38,29 +47,42 @@ public abstract class RenderingTestCase {
      */
     protected DataHolder getOptions(SpecExample example, String optionSets) {
         if (optionSets == null) return null;
-        String[] optionNames = optionSets.split(",");
+        String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
         DataHolder options = null;
         boolean isFirst = true;
         for (String optionName : optionNames) {
-            String optionSet = optionName.trim();
-            if (optionSet.isEmpty()) continue;
-            if (optionSet.equals(IGNORE)) {
+            String option = optionName.trim();
+            if (option.isEmpty()) continue;
+            if (option.equals(IGNORE_OPTION)) {
                 if (example == null)
                     throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using IGNORE option");
                 else
                     throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using ignore option");
             }
 
-            if (options == null) {
-                options = options(optionSet);
+            if (option.equals(FAIL_OPTION)) {
+                if (options == null) {
+                    options = new MutableDataSet().set(FAIL, true);
+                } else {
+                    options = new MutableDataSet(options).set(FAIL, true);
+                }
             } else {
-                DataHolder dataSet = options(optionSet);
-                if (dataSet != null) {
-                    if (isFirst) {
-                        options = new MutableDataSet(options);
-                        isFirst = false;
+                if (options == null) {
+                    options = options(option);
+                    if (options == null) {
+                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                     }
-                    ((MutableDataSet) options).setAll(dataSet);
+                } else {
+                    DataHolder dataSet = options(option);
+                    if (dataSet != null) {
+                        if (isFirst) {
+                            options = new MutableDataSet(options);
+                            isFirst = false;
+                        }
+                        ((MutableDataSet) options).setAll(dataSet);
+                    } else {
+                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                    }
                 }
             }
         }
@@ -85,6 +107,7 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + "\n" + SpecReader.TYPE_BREAK + "\n" + expectedHtml) + SpecReader.EXAMPLE_BREAK + "\n\n";
         String actual = SpecReader.EXAMPLE_START + "\n" + showTabs(source + "\n" + SpecReader.TYPE_BREAK + "\n" + html) + SpecReader.EXAMPLE_BREAK + "\n\n";
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -102,6 +125,7 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected = DumpSpecReader.addSpecExample(showTabs(source), showTabs(expectedHtml), expectedAst, optionsSet);
         String actual = DumpSpecReader.addSpecExample(showTabs(source), showTabs(html), ast, optionsSet);
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -117,6 +141,7 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected = DumpSpecReader.addSpecExample(showTabs(source), "", expectedAst, optionsSet);
         String actual = DumpSpecReader.addSpecExample(showTabs(source), "", ast, optionsSet);
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 

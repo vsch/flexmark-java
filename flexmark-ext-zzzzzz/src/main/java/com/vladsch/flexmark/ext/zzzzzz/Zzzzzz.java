@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.DoNotLinkify;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A Zzzzzz node
  */
 public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;

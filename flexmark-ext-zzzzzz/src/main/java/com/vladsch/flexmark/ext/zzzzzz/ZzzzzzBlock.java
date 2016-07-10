@@ -7,7 +7,7 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Visitor;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A Zzzzzz block node
  */
 public class ZzzzzzBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

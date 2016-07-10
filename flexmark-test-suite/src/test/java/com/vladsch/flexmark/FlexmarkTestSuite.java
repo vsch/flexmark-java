@@ -9,6 +9,7 @@ import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
+import com.vladsch.flexmark.ext.simtoc.ExtSimTocTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
@@ -33,6 +34,7 @@ import org.junit.runners.Suite;
         IntegrationTestSuite.class,
         ExtAnchorLinkTestSuite.class,
         ExtTocTestSuite.class,
+        ExtSimTocTestSuite.class,
         ExtZzzzzzTestSuite.class,
 })
 public class FlexmarkTestSuite {

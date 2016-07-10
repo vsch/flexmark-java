@@ -1,0 +1,120 @@
+package com.vladsch.flexmark.ext.simtoc.internal;
+
+import com.vladsch.flexmark.ext.simtoc.SimTocBlock;
+import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
+import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
+import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.node.Heading;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class SimTocNodeRenderer implements NodeRenderer {
+    private final SimTocOptions options;
+
+    public SimTocNodeRenderer(DataHolder options) {
+        this.options = new SimTocOptions(options);
+    }
+
+    @Override
+    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+        return new HashSet<>(Collections.singletonList(
+                new NodeRenderHandler<>(SimTocBlock.class, this::render)
+        ));
+    }
+
+    private void render(SimTocBlock node, NodeRendererContext context, HtmlWriter html) {
+        // TODO: add options parsing
+
+        //if (node.getLevel() < 1 || node.getLevel() > 6) {
+        //    html.raw("<p>").raw(node.getChars().toString()).raw("</p>").line();
+        //} else {
+        //    HeadingCollectingVisitor visitor = new HeadingCollectingVisitor(node.getLevel());
+        //    visitor.visit(node.getDocument());
+        //
+        //    List<Heading> headings = visitor.getHeadings();
+        //    if (headings != null) {
+        //        renderTocHeaders(context, html, node.getLevel(), headings);
+        //    }
+        //}
+    }
+
+    private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, int level, List<Heading> headings) {
+        int initLevel = headings.get(0).getLevel();
+        int lastLevel = headings.get(0).getLevel();
+
+        html.withAttr().line().tag("ul").indent();
+        boolean[] openedItems = new boolean[7];
+
+        for (int i = 0; i < headings.size(); ++i) {
+            Heading header = headings.get(i);
+            int headerLevel = header.getLevel();
+
+            // ignore the level less than toc limit
+            if (headerLevel > level) {
+                continue;
+            }
+
+            if (lastLevel < headerLevel) {
+                for (int lv = lastLevel; lv < headerLevel; ++lv) {
+                    html.withAttr().line().tag("ul").indent();
+                    openedItems[lv+1] = false;
+                }
+            } else if (lastLevel == headerLevel) {
+                if (i != 0) {
+                    html.tag("/li").line();
+                    openedItems[lastLevel] = false;
+                }
+            } else {
+                html.tag("/li");
+                for (int lv = lastLevel; lv > headerLevel; lv--) {
+                    html.unIndent().tag("/ul")
+                            .tag("/li").line();
+                    openedItems[lv] = false;
+                }
+            }
+
+            String headerText;
+            boolean isRaw;
+            // need to skip anchor links but render emphasis
+            if (options.renderOnlyHeaderText) {
+                headerText = new TextCollectingVisitor().visitAndGetText(header);
+                isRaw = false;
+            } else {
+                TextCollectingAppendable out = new TextCollectingAppendable();
+                NodeRendererContext subContext = context.getSubContext(out, false);
+                subContext.doNotRenderLinks();
+                subContext.renderChildren(header);
+                headerText = out.getHtml();
+                isRaw = true;
+            }
+
+            html.line().tag("li");
+            openedItems[headerLevel] = true;
+            String headerId = context.getNodeId(header);
+            if (headerId == null || context.isDoNotRenderLinks()) {
+                // just text
+                if (isRaw) html.raw(headerText);
+                else html.text(headerText);
+            } else {
+                html.attr("href", "#" + headerId).withAttr().tag("a");
+                if (isRaw) html.raw(headerText);
+                else html.text(headerText);
+                html.tag("/a");
+            }
+            lastLevel = headerLevel;
+        }
+
+        for (int i = lastLevel; i >= initLevel; i--) {
+            if (openedItems[i]) html.tag("/li");
+            html.unIndent().tag("/ul");
+        }
+        html.line();
+    }
+}

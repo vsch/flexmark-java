@@ -12,8 +12,10 @@ import java.util.regex.Pattern;
 
 public class SpecReader {
     public static final String EXAMPLE_START = "```````````````````````````````` example";
-    public static final String OPTIONS_STRING = " options";
-    public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*\\Q" + OPTIONS_STRING + "\\E\\s*\\(\\s*(.*)\\s*\\)\\s*");
+    public static final String EXAMPLE_START_NBSP = "````````````````````````````````\u00A0example";
+    public static final String OPTIONS_KEYWORD= "options";
+    public static final String OPTIONS_STRING = " " + OPTIONS_KEYWORD;
+    public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*(?:\\s|\u00A0)\\Q" + OPTIONS_KEYWORD + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
     public static final String TYPE_BREAK = ".";
     public static final String EXAMPLE_BREAK = "````````````````````````````````";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} *(.*)");
@@ -39,7 +41,11 @@ public class SpecReader {
     }
 
     public static List<SpecExample> readExamples(String specResource) {
-        return readExamples(specResource, null);
+        List<SpecExample> examples = readExamples(specResource, null);
+        if (examples.size() == 0) {
+            throw new IllegalStateException("No examples were found in " + specResource);
+        }
+        return examples;
     }
 
     public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
@@ -134,7 +140,7 @@ public class SpecReader {
                 if (matcher.matches()) {
                     section = matcher.group(1);
                     exampleNumber = 0;
-                } else if (line.startsWith(EXAMPLE_START)) {
+                } else if (line.startsWith(EXAMPLE_START) || line.startsWith(EXAMPLE_START_NBSP)) {
                     Matcher option_matcher = OPTIONS_PATTERN.matcher(line.subSequence(EXAMPLE_START.length(), line.length()));
                     if (option_matcher.matches()) {
                         optionsSet = option_matcher.group(1);
@@ -183,9 +189,7 @@ public class SpecReader {
                 break;
         }
 
-        if (!lineAbsorbed)
-
-        {
+        if (!lineAbsorbed) {
             addSpecLine(line);
         }
     }

@@ -6,5 +6,11 @@ date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
-## For now empty place holder
+## Integration
+
+```````````````````````````````` example(Integration: 1) options(IGNORE)
+.
+.
+````````````````````````````````
+
 
