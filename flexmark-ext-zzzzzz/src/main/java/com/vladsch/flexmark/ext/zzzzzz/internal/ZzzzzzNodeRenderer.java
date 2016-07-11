@@ -25,10 +25,10 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
     }
 
     @Override
-    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderHandler<>(Zzzzzz.class, this::render),
-                new NodeRenderHandler<>(ZzzzzzBlock.class, this::render)
+                new NodeRenderingHandler<>(Zzzzzz.class, this::render),
+                new NodeRenderingHandler<>(ZzzzzzBlock.class, this::render)
         ));
     }
 

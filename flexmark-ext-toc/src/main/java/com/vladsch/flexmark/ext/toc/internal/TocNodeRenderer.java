@@ -2,12 +2,10 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.HeadingCollectingVisitor;
-import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 import com.vladsch.flexmark.node.Heading;
 
@@ -24,96 +22,27 @@ public class TocNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Collections.singletonList(
-                new NodeRenderHandler<>(TocBlock.class, this::render)
+                new NodeRenderingHandler<>(TocBlock.class, this::render)
         ));
     }
 
     private void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
-        if (node.getLevel() < 1 || node.getLevel() > 6) {
-            html.raw("<p>").raw(node.getChars().toString()).raw("</p>").line();
-        } else {
-            HeadingCollectingVisitor visitor = new HeadingCollectingVisitor(node.getLevel());
-            visitor.visit(node.getDocument());
+        HeadingCollectingVisitor visitor = new HeadingCollectingVisitor();
+        visitor.visit(node.getDocument());
 
-            List<Heading> headings = visitor.getHeadings();
-            if (headings != null) {
-                renderTocHeaders(context, html, node.getLevel(), headings);
-            }
+        List<Heading> headings = visitor.getHeadings();
+        if (headings != null) {
+            TocOptionsParser optionsParser = new TocOptionsParser();
+            TocOptions options = optionsParser.parseOption(node.getStyle(), this.options.withTitle(""), null).getFirst();
+            renderTocHeaders(context, html, headings, options);
         }
     }
 
-    private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, int level, List<Heading> headings) {
-        int initLevel = headings.get(0).getLevel();
-        int lastLevel = headings.get(0).getLevel();
-
-        html.withAttr().line().tag("ul").indent();
-        boolean[] openedItems = new boolean[7];
-
-        for (int i = 0; i < headings.size(); ++i) {
-            Heading header = headings.get(i);
-            int headerLevel = header.getLevel();
-
-            // ignore the level less than toc limit
-            if (headerLevel > level) {
-                continue;
-            }
-
-            if (lastLevel < headerLevel) {
-                for (int lv = lastLevel; lv < headerLevel; ++lv) {
-                    html.withAttr().line().tag("ul").indent();
-                    openedItems[lv+1] = false;
-                }
-            } else if (lastLevel == headerLevel) {
-                if (i != 0) {
-                    html.tag("/li").line();
-                    openedItems[lastLevel] = false;
-                }
-            } else {
-                html.tag("/li");
-                for (int lv = lastLevel; lv > headerLevel; lv--) {
-                    html.unIndent().tag("/ul")
-                            .tag("/li").line();
-                    openedItems[lv] = false;
-                }
-            }
-
-            String headerText;
-            boolean isRaw;
-            // need to skip anchor links but render emphasis
-            if (options.renderOnlyHeaderText) {
-                headerText = new TextCollectingVisitor().visitAndGetText(header);
-                isRaw = false;
-            } else {
-                TextCollectingAppendable out = new TextCollectingAppendable();
-                NodeRendererContext subContext = context.getSubContext(out, false);
-                subContext.doNotRenderLinks();
-                subContext.renderChildren(header);
-                headerText = out.getHtml();
-                isRaw = true;
-            }
-
-            html.line().tag("li");
-            openedItems[headerLevel] = true;
-            String headerId = context.getNodeId(header);
-            if (headerId == null || context.isDoNotRenderLinks()) {
-                // just text
-                if (isRaw) html.raw(headerText);
-                else html.text(headerText);
-            } else {
-                html.attr("href", "#" + headerId).withAttr().tag("a");
-                if (isRaw) html.raw(headerText);
-                else html.text(headerText);
-                html.tag("/a");
-            }
-            lastLevel = headerLevel;
-        }
-
-        for (int i = lastLevel; i >= initLevel; i--) {
-            if (openedItems[i]) html.tag("/li");
-            html.unIndent().tag("/ul");
-        }
-        html.line();
+    private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, List<Heading> headings, TocOptions options) {
+        List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
+        List<String> headingTexts = TocUtils.htmlHeaderTexts(context, filteredHeadings, options);
+        TocUtils.renderHtmlToc(html, filteredHeadings, headingTexts, options);
     }
 }

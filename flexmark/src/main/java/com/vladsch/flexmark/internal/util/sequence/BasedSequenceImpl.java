@@ -5,9 +5,7 @@ import com.vladsch.flexmark.internal.util.mappers.CharMapper;
 import com.vladsch.flexmark.internal.util.mappers.LowerCaseMapper;
 import com.vladsch.flexmark.internal.util.mappers.UpperCaseMapper;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
@@ -88,7 +86,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public BasedSequence trim(String chars) {
         int trimStart = countChars(chars, 0, length());
         int trimEnd = countCharsReversed(chars, 0, length());
-        return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : this;
+        int trimmed = trimStart + trimEnd;
+        return trimmed > 0 ? (trimmed >= length() ? subSequence(0, 0) : subSequence(trimStart, length() - trimEnd)) : this;
     }
 
     @Override
@@ -488,5 +487,119 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public boolean contains(BasedSequence other) {
         return getBase() == other.getBase() && !(getStartOffset() >= other.getEndOffset() || getEndOffset() <= other.getStartOffset());
+    }
+
+    @Override
+    public List<BasedSequence> split(char delimiter) {
+        return split(delimiter, 0);
+    }
+
+    @Override
+    public List<BasedSequence> split(char delimiter, int limit) {
+        return split(delimiter, limit, 0);
+    }
+
+    @Override
+    public List<BasedSequence> split(char delimiter, int limit, int flags) {
+        return split(delimiter, limit, flags, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public List<BasedSequence> split(String delimiter) {
+        return split(delimiter, 0);
+    }
+
+    @Override
+    public List<BasedSequence> split(String delimiter, int limit) {
+        return split(delimiter, limit, 0);
+    }
+
+    @Override
+    public List<BasedSequence> split(String delimiter, int limit, int flags) {
+        return split(delimiter, limit, flags, WHITESPACE_CHARS);
+    }
+
+    @Override
+    public List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars) {
+        if (trimChars == null) trimChars = WHITESPACE_CHARS;
+        if (limit < 1) limit = Integer.MAX_VALUE;
+
+        int includeDelims = (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
+        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
+        ArrayList<BasedSequence> items = new ArrayList<>();
+
+        int lastPos = 0;
+        int length = length();
+        if (limit > 1) {
+            while (lastPos < length) {
+                int pos = indexOf(delimiter, lastPos);
+                if (pos < 0) break;
+
+                if (lastPos < pos || !skipEmpty) {
+                    BasedSequence item = subSequence(lastPos, pos + includeDelims);
+                    if (trimParts) item = item.trim(trimChars);
+                    if (!item.isEmpty() || !skipEmpty) {
+                        items.add(item);
+                        if (items.size() == limit - 1) {
+                            lastPos = pos + 1;
+                            break;
+                        }
+                    }
+                }
+                lastPos = pos + 1;
+            }
+        }
+
+        if (lastPos < length) {
+            BasedSequence item = subSequence(lastPos, length);
+            if (trimParts) item = item.trim(trimChars);
+            if (!item.isEmpty() || !skipEmpty) {
+                items.add(item);
+            }
+        }
+        return items;
+    }
+
+    @Override
+    public List<BasedSequence> split(String delimiter, int limit, int flags, String trimChars) {
+        if (trimChars == null) trimChars = WHITESPACE_CHARS;
+        if (limit < 1) limit = Integer.MAX_VALUE;
+
+        int includeDelims = (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
+        boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
+        ArrayList<BasedSequence> items = new ArrayList<>();
+
+        int lastPos = 0;
+        int length = length();
+        if (limit > 1) {
+            while (lastPos < length) {
+                int pos = indexOf(delimiter, lastPos);
+                if (pos < 0) break;
+
+                if (lastPos < pos || !skipEmpty) {
+                    BasedSequence item = subSequence(lastPos, pos + includeDelims);
+                    if (trimParts) item = item.trim(trimChars);
+                    if (!item.isEmpty() || !skipEmpty) {
+                        items.add(item);
+                        if (items.size() == limit - 1) {
+                            lastPos = pos + 1;
+                            break;
+                        }
+                    }
+                }
+                lastPos = pos + 1;
+            }
+        }
+
+        if (lastPos < length) {
+            BasedSequence item = subSequence(lastPos, length);
+            if (trimParts) item = item.trim(trimChars);
+            if (!item.isEmpty() || !skipEmpty) {
+                items.add(item);
+            }
+        }
+        return items;
     }
 }

@@ -280,7 +280,7 @@ public class HtmlRenderer implements IRender {
 
     private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
         private final Document document;
-        private final Map<Class<?>, NodeRenderHandler> renderers;
+        private final Map<Class<?>, NodeRenderingHandler> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final Set<RenderingPhase> renderingPhases;
@@ -305,7 +305,7 @@ public class HtmlRenderer implements IRender {
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
-                for (NodeRenderHandler nodeType : nodeRenderer.getNodeRenderers()) {
+                for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderingHandlers()) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
@@ -395,7 +395,7 @@ public class HtmlRenderer implements IRender {
                     this.phase = phase;
                     // here we render multiple phases
                     if (getRenderingPhase() == RenderingPhase.BODY) {
-                        NodeRenderHandler nodeRenderer = renderers.get(node.getClass());
+                        NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.doNotRenderLinksNesting = documentDoNotRenderLinksNesting;
                             subContext.renderingNode = node;
@@ -417,7 +417,7 @@ public class HtmlRenderer implements IRender {
                     }
                 }
             } else {
-                NodeRenderHandler nodeRenderer = renderers.get(node.getClass());
+                NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;
                     int oldDoNotRenderLinksNesting = subContext.doNotRenderLinksNesting;

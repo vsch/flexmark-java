@@ -2,6 +2,7 @@ package com.vladsch.flexmark.internal.util.sequence;
 
 import com.vladsch.flexmark.internal.util.mappers.CharMapper;
 
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -108,4 +109,17 @@ public interface BasedSequence extends CharSequence {
      * @return true if other is contained in this
      */
     boolean contains(BasedSequence other);
+    
+    int SPLIT_INCLUDE_DELIMS = 1; 
+    int SPLIT_TRIM_PARTS = 2; 
+    int SPLIT_SKIP_EMPTY = 4; 
+    int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY; 
+    List<BasedSequence> split(char delimiter);
+    List<BasedSequence> split(char delimiter, int limit);
+    List<BasedSequence> split(char delimiter, int limit, int flags);
+    List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars);
+    List<BasedSequence> split(String delimiter);
+    List<BasedSequence> split(String delimiter, int limit);
+    List<BasedSequence> split(String delimiter, int limit, int flags);
+    List<BasedSequence> split(String delimiter, int limit, int flags, String trimChars);
 }

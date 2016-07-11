@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.gfm.tables.internal;
 
 import com.vladsch.flexmark.ext.gfm.tables.*;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
 import java.util.Arrays;
@@ -17,14 +17,14 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderHandler<>(TableBlock.class, this::render),
-                new NodeRenderHandler<>(TableHead.class, this::render),
-                new NodeRenderHandler<>(TableSeparator.class, this::render),
-                new NodeRenderHandler<>(TableBody.class, this::render),
-                new NodeRenderHandler<>(TableRow.class, this::render),
-                new NodeRenderHandler<>(TableCell.class, this::render)
+                new NodeRenderingHandler<>(TableBlock.class, this::render),
+                new NodeRenderingHandler<>(TableHead.class, this::render),
+                new NodeRenderingHandler<>(TableSeparator.class, this::render),
+                new NodeRenderingHandler<>(TableBody.class, this::render),
+                new NodeRenderingHandler<>(TableRow.class, this::render),
+                new NodeRenderingHandler<>(TableCell.class, this::render)
         ));
     }
 

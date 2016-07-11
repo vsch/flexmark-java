@@ -16,13 +16,13 @@ public class ComboTocSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(TocExtension.PARSE_INVALID_LEVEL, true)
             .set(Parser.EXTENSIONS, Collections.singletonList(TocExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("only-valid", new MutableDataSet().set(TocExtension.PARSE_INVALID_LEVEL, false));
-        optionsMap.put("text-only", new MutableDataSet().set(TocExtension.HEADER_TEXT_ONLY, true));
+        optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
+        optionsMap.put("numbered", new MutableDataSet().set(TocExtension.IS_NUMBERED, true));
+        optionsMap.put("levels-2", new MutableDataSet().set(TocExtension.LEVELS, 1 << 2));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

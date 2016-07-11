@@ -53,6 +53,10 @@ public class HtmlWriter {
         this.context = context;
     }
 
+    public NodeRendererContext getContext() {
+        return context;
+    }
+
     public int getIndentSize() {
         return indentSize;
     }

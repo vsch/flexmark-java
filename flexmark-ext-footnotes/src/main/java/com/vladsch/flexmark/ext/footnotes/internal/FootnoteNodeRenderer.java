@@ -4,8 +4,8 @@ import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
@@ -28,10 +28,10 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderHandler<>(Footnote.class, this::render),
-                new NodeRenderHandler<>(FootnoteBlock.class, this::render)
+                new NodeRenderingHandler<>(Footnote.class, this::render),
+                new NodeRenderingHandler<>(FootnoteBlock.class, this::render)
         ));
     }
 

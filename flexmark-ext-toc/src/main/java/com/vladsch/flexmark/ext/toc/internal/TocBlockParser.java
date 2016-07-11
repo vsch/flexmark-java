@@ -13,16 +13,16 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.parser.block.BlockStart.none;
 
 public class TocBlockParser extends AbstractBlockParser {
-    private static Pattern TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+(level=\\d))?\\]\\s*$");
+    private static Pattern TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]\\s*$");
     private static Pattern TOC_BLOCK_CONTINUE = Pattern.compile("");
 
     private final TocBlock block;
     //private BlockContent content = new BlockContent();
     private final TocOptions options;
 
-    private TocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence levelChars) {
+    private TocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars) {
         this.options = new TocOptions(options);
-        block = new TocBlock(tocChars, levelChars);
+        block = new TocBlock(tocChars, styleChars);
     }
 
     @Override
@@ -75,26 +75,16 @@ public class TocBlockParser extends AbstractBlockParser {
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
             Matcher matcher = TOC_BLOCK_START.matcher(line);
             if (matcher.matches()) {
-                int openingStart = matcher.start();
-                int openingEnd = matcher.end();
-                BasedSequence tocChars = trySequence.subSequence(openingStart, openingEnd).trimEnd();
-                BasedSequence levelChars = null;
+                BasedSequence tocChars = state.getLineWithEOL();
+                BasedSequence styleChars = null;
+                BasedSequence titleChars = null;
                 if (matcher.start(1) != -1) {
-                    int levelStart = matcher.start(1);
-                    int levelEnd = matcher.end(1);
-                    levelChars = trySequence.subSequence(levelStart, levelEnd);
+                    int styleStart = matcher.start(1);
+                    int styleEnd = matcher.end(1);
+                    styleChars = trySequence.subSequence(styleStart, styleEnd);
                 }
 
-                if (levelChars != null && !options.parseInvalidLevel) {
-                    try {
-                        int level = Integer.valueOf(levelChars.toString());
-                        if (level < 1 || level > 6) return BlockStart.none();
-                    } catch (NumberFormatException ignored) {
-                        return BlockStart.none();
-                    }
-                }
-                
-                TocBlockParser tocBlockParser = new TocBlockParser(state.getProperties(), tocChars, levelChars);
+                TocBlockParser tocBlockParser = new TocBlockParser(state.getProperties(), tocChars, styleChars);
                 return BlockStart.of(tocBlockParser)
                         .atIndex(state.getIndex())
                         //.replaceActiveBlockParser()

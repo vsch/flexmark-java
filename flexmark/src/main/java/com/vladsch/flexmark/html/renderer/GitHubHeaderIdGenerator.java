@@ -9,8 +9,6 @@ import com.vladsch.flexmark.node.Node;
 import java.util.HashMap;
 
 public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
-    private final HashMap<Node, String> headerIds = new HashMap<>();
-
     @Override
     public void generateIds(Document document) {
         HashMap<String, Integer> headerBaseIds = new HashMap<>();
@@ -34,7 +32,7 @@ public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
                         headerBaseIds.put(baseRefId, 0);
                     }
 
-                    headerIds.put(node, baseRefId);
+                    node.setAnchorRefId(baseRefId);
                 }
             }
         }.visit(document);
@@ -42,7 +40,7 @@ public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
 
     @Override
     public String getId(Node node) {
-        return headerIds.get(node);
+        return node instanceof Heading ? ((Heading) node).getAnchorRefId() : null;
     }
 
     public static String generateId(CharSequence headerText) {

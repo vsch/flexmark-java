@@ -237,6 +237,15 @@ public abstract class Node {
         return;
     }
 
+    public void astExtraChars(StringBuilder out) {
+        if (getChars().length() <= 10) {
+            segmentSpanChars(out, getChars(), "chars");
+        } else {
+            // give the first 5 and last 5
+            segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
+        }
+    }
+
     protected String toStringAttributes() {
         return "";
     }
@@ -402,8 +411,12 @@ public abstract class Node {
         }
     }
 
+    public String getNodeName() {
+        return getClass().getName().substring(getClass().getPackage().getName().length() + 1);
+    }
+
     public void astString(StringBuilder out, boolean withExtra) {
-        out.append(getClass().getName().substring(getClass().getPackage().getName().length() + 1));
+        out.append(getNodeName());
         out.append("[").append(getStartOffset()).append(", ").append(getEndOffset()).append("]");
         if (withExtra) getAstExtra(out);
     }

@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderHandler;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.collection.DataHolder;
 
 import java.util.Arrays;
@@ -20,10 +20,10 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
     }
 
     @Override
-    public Set<NodeRenderHandler<?>> getNodeRenderers() {
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderHandler<>(Abbreviation.class, this::render),
-                new NodeRenderHandler<>(AbbreviationBlock.class, this::render)
+                new NodeRenderingHandler<>(Abbreviation.class, this::render),
+                new NodeRenderingHandler<>(AbbreviationBlock.class, this::render)
         ));
     }
 

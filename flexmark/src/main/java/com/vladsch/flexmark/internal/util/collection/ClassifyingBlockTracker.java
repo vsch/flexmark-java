@@ -32,7 +32,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
 
         @Override
         public void addingNulls(int index) {
-            throw new UnsupportedOperationException();
+            // ignore
         }
 
         @Override

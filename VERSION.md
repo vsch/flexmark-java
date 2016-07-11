@@ -4,15 +4,29 @@ flexmark-java Version History
 0.4.0
 -----
 
-- Make rendering test case classes usable for other spec based testing, not just flexmark. Too
+- Add Sim TOC syntax as per Markdown Navigator simulated TOC element.
+
+- Change Sim TOC to be a container and accept only a single HTML block without blank lines
+      or a heading and a list without blank lines.
+
+- [ ] Add Flexmark Spec Example Extension to parse flexmark spec files, same as Markdown
+      Navigator.
+
+- [ ] Add `LinkRenderer` and `LinkRendererFactory` interfaces and registration to HtmlWriter to
+      handle rendering of URLs for links, including adding attributes.
+
+      - [ ] parameters should include the raw link text to be converted to a URL and a source
+            Node for hinting purposes.
+
+      - [ ] Link renderers should be tried until one reports success, so that several renderers
+            could be used for different types of link text syntax without conflict.
+
+      - [ ] like other processors they should have before/after dependencies.
+
+      - [ ] Any unhandled rendering will be rendered by the core
+
+- Made rendering test case classes usable for other spec based testing, not just flexmark. Too
   useful for testing other parsing implementations to leave it just for flexmark.  
-
-- Add Sim TOC syntax as per Markdown Navigator simulated TOC element.    
-
-- [ ] Add Sim TOC node post processor to take the following HTML block or Heading with List up
-      to first blank line in the list. Same as markdown navigator.
-
-- [ ] Add Flexmark Spec Example Extension.
 
 - Add Zzzzzz module to test suite so that the archetype also gets to run for sanity testing of
   basic extension module.
@@ -461,6 +475,7 @@ flexmark-java Version History
   indexed by a string like one used for references.
 
 - ParserState a few new methods:
+    
     - `getPropertyHolder()` returns the property holder for the parse session. This is the
       current document parser. After parsing the property holder is the Document node which can
       be obtained from via `Node::getDocument()` method. Implementation is to traverse node
@@ -503,7 +518,7 @@ flexmark-java Version History
 
         ```````````````````````````````` example
         [[*foo* bar]]
-        
+    
         [*foo* bar]: /url "title"
         .
         <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>

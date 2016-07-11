@@ -495,7 +495,7 @@ public class DocumentParser implements ParserState {
         BlockParser blockParser = lastMatchedBlockParser;
         boolean allClosed = unmatchedBlockParsers.isEmpty();
 
-        // Check to see if we've hit 2nd blank line; if so break out of list:
+        // Check to see if we've hit 2nd blank line; if so break out of list or any other block type that handles this
         if (isBlank() && isLastLineBlank(blockParser.getBlock())) {
             List<BlockParser> matchedBlockParsers = new ArrayList<>(activeBlockParsers.subList(0, matches));
             breakOutOfLists(matchedBlockParsers);

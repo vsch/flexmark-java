@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.toc;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.toc.internal.TocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
+import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.collection.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -22,15 +23,10 @@ import com.vladsch.flexmark.parser.Parser;
 public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // final public static DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new); 
     // final public static DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    
-    /**
-     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC node. 
-     * 
-     * @value #TOC_PARSE_INVALID_LEVEL 
-     * 
-     */
-    final public static DataKey<Boolean> PARSE_INVALID_LEVEL = new DataKey<>("PARSE_INVALID_LEVEL", false); 
-    final public static DataKey<Boolean> HEADER_TEXT_ONLY = new DataKey<>("HEADER_TEXT_ONLY", false); 
+
+    final public static DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
+    final public static DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
+    final public static DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
 
     private TocExtension() {
     }

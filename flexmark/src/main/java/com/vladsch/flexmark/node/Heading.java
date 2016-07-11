@@ -6,11 +6,12 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 import java.util.List;
 
-public class Heading extends Block {
+public class Heading extends Block implements AnchorRefTarget {
     protected int level;
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
+    protected String anchorRefId = "";
 
     @Override
     public void getAstExtra(StringBuilder out) {
@@ -20,6 +21,14 @@ public class Heading extends Block {
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[] { openingMarker, text, closingMarker };
+    }
+
+    public String getAnchorRefId() {
+        return anchorRefId;
+    }
+
+    public void setAnchorRefId(String anchorRefId) {
+        this.anchorRefId = anchorRefId;
     }
 
     public Heading() {

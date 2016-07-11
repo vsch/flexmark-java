@@ -10,63 +10,68 @@ import com.vladsch.flexmark.node.Visitor;
  */
 public class TocBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence levelMarker= SubSequence.NULL;
-    protected BasedSequence level = SubSequence.NULL;
+    protected BasedSequence tocKeyword = SubSequence.NULL;
+    protected BasedSequence style = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        segmentSpan(out, openingMarker, "open");
-        segmentSpan(out, levelMarker, "levelMarker");
-        segmentSpan(out, level, "level");
-        segmentSpan(out, closingMarker, "close");
+        segmentSpan(out, openingMarker, "openingMarker");
+        segmentSpan(out, tocKeyword, "tocKeyword");
+        segmentSpan(out, style, "style");
+        segmentSpan(out, closingMarker, "closingMarker");
     }
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, levelMarker, level, closingMarker };
+        BasedSequence[] nodeSegments = new BasedSequence[]{openingMarker, tocKeyword, style, closingMarker};
+        if (lineSegments.size() == 0) return nodeSegments;
+        BasedSequence[] allSegments = new BasedSequence[lineSegments.size() + nodeSegments.length];
+        lineSegments.toArray(allSegments);
+        System.arraycopy(allSegments, 0, allSegments, nodeSegments.length, lineSegments.size());
+        return allSegments;
     }
 
     public TocBlock(BasedSequence chars) {
-        this(chars, null);
+        this(chars, false);
     }
 
-    public TocBlock(BasedSequence chars, BasedSequence levelChars) {
+    public TocBlock(BasedSequence chars, boolean closingSimToc) {
+        this(chars, null, closingSimToc);
+    }
+
+    public TocBlock(BasedSequence chars, BasedSequence styleChars) {
+        this(chars, styleChars, false);
+    }
+
+    public TocBlock(BasedSequence chars, BasedSequence styleChars, boolean closingSimToc) {
         super(chars);
-        openingMarker = chars.subSequence(0, 4);
-        if (levelChars != null) {
-            levelMarker = levelChars.midSequence(0, -1);
-            level = levelChars.endSequence(1);
+        openingMarker = chars.subSequence(0, 1);
+        tocKeyword = chars.subSequence(1, 3);
+        if (styleChars != null) {
+            style = styleChars;
         }
-        closingMarker = chars.endSequence(1);
+        int closingPos = chars.indexOf(']', 4);
+        if (closingSimToc && !(closingPos != -1 && closingPos + 1 < chars.length() && chars.charAt(closingPos + 1) == ':')) {
+            throw new IllegalStateException("Invalid TOC block sequence");
+        }
+        closingMarker = chars.subSequence(closingPos, closingPos + (closingSimToc ? 2 : 1));
     }
 
     public BasedSequence getOpeningMarker() {
         return openingMarker;
     }
 
+    public BasedSequence getTocKeyword() {
+        return tocKeyword;
+    }
+
+    public BasedSequence getStyle() {
+        return style;
+    }
+
     public BasedSequence getClosingMarker() {
         return closingMarker;
-    }
-
-    public BasedSequence getLevelMarker() {
-        return levelMarker;
-    }
-
-    public void setLevelMarker(BasedSequence levelMarker) {
-        this.levelMarker = levelMarker;
-    }
-
-    public BasedSequence getLevelChars() {
-        return level;
-    }
-
-    public int getLevel() {
-        return levelMarker.isNotNull() ? Integer.valueOf(level.toString()) : 3;
-    }
-
-    public void setLevelChars(BasedSequence level) {
-        this.level = level;
     }
 
     @Override

@@ -15,12 +15,7 @@ public class HtmlInlineComment extends HtmlInlineBase {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        if (getChars().length() <= 10) {
-            segmentSpanChars(out, getChars(), "chars");
-        } else {
-            // give the first 5 and last 5
-            segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
-        }
+        astExtraChars(out);
     }
 
     public HtmlInlineComment() {
