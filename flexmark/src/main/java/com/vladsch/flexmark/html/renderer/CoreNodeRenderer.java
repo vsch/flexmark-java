@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.Parser;

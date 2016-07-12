@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.IRender;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
-import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataKey;
+import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.IParse;
 import com.vladsch.flexmark.spec.SpecExample;

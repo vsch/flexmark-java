@@ -15,15 +15,15 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.ext.toc.internal.*;
+import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
+import com.vladsch.flexmark.ext.toc.internal.TocOptions;
+import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
+import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.IRender;
 import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
-import com.vladsch.flexmark.internal.util.collection.MutableDataHolder;
-import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
+import com.vladsch.flexmark.internal.util.options.*;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.Node;
@@ -204,10 +204,15 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
                         html.raw("'").raw(parserNode.getChars().toString()).raw("' => ");
                         html.raw(nodeTocOptions.toString()).line();
                         html.indent();
-                        
-                        html.raw("diff: ").raw(TocUtils.getTocPrefix(nodeTocOptions, defaultOptions)).line();
-                        html.raw("full: ").raw(TocUtils.getTocPrefix(nodeTocOptions, null)).line();
-                        
+
+                        if (getOptions().get(SIM_TOC)) {
+                            html.raw("diff: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, defaultOptions)).line();
+                            html.raw("full: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, null)).line();
+                        } else {
+                            html.raw("diff: ").raw(TocUtils.getTocPrefix(nodeTocOptions, defaultOptions)).line();
+                            html.raw("full: ").raw(TocUtils.getTocPrefix(nodeTocOptions, null)).line();
+                        }
+
                         super.visitChildren(node);
                         html.unIndent();
                     } else {
@@ -220,7 +225,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         @Override
         public void render(Node node, Appendable output) {
             assert node instanceof ParserNode;
-            RenderingVisitor visitor = new RenderingVisitor(new HtmlWriter(output, 2), getOptions().get(TOC_OPTIONS));
+            TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
+            RenderingVisitor visitor = new RenderingVisitor(new HtmlWriter(output, 2), tocOptions);
             node.accept(visitor);
         }
 

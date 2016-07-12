@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.Parser;

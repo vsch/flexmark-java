@@ -17,6 +17,8 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.internal.util.Computable;
 import com.vladsch.flexmark.internal.util.Pair;
+import com.vladsch.flexmark.internal.util.Utils;
+import com.vladsch.flexmark.internal.util.options.*;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.Collections;
@@ -92,7 +94,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
             if (optionRange.size() == 2) {
                 rangeStart = convertWithMessage.compute(optionRange.get(0));
                 rangeEnd = convertWithMessage.compute(optionRange.get(1));
-                if (rangeStart == null) rangeStart = 2;
+                if (rangeStart == null) rangeStart = 1;
                 if (rangeEnd == null) rangeEnd = 6;
             } else {
                 rangeStart = convertWithMessage.compute(optionRange.get(0));
@@ -100,7 +102,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
             }
 
             if (!parserParams.skip) {
-                if (rangeStart == null && rangeEnd == null) {
+                if (rangeStart == null) {
                     parserParams.add(new ParserMessage(option, ParsedOptionStatus.IGNORED, finalProvider.message(KEY_OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE, OPTION_0_VALUE_1_TRUNCATED_TO_EMPTY_RANGE, myOptionName, option)));
                 } else {
                     if (rangeEnd < rangeStart) {

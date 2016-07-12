@@ -16,7 +16,8 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public class TocOptions {
@@ -36,7 +37,7 @@ public class TocOptions {
     final public String rawTitle;
 
     public TocOptions() {
-        this(DEFAULT_LEVELS, false, false, false, 1, DEFAULT_TITLE);
+        this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE);
     }
 
     public TocOptions(DataHolder options) {
@@ -83,12 +84,17 @@ public class TocOptions {
     // @Formatter:on
 
     public TocOptions withLevelList(int... levelList) {
+        int levels = getLevels(levelList);
+        return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title);
+    }
+
+    public static int getLevels(int... levelList) {
         int levels = 0;
         for (int level : levelList) {
             if (level < 1 || level > 6) throw new IllegalArgumentException("TocOption level out of range [1, 6]");
             levels |= 1 << level;
         }
-        return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title);
+        return levels;
     }
 
     public String getTitleHeading() {

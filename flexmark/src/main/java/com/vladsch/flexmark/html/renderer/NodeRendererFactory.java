@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 /**
  * Factory for instantiating new node renderers when rendering is done.

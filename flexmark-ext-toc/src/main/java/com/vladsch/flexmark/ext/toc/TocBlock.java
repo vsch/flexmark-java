@@ -47,7 +47,7 @@ public class TocBlock extends CustomBlock {
     public TocBlock(BasedSequence chars, BasedSequence styleChars, boolean closingSimToc) {
         super(chars);
         openingMarker = chars.subSequence(0, 1);
-        tocKeyword = chars.subSequence(1, 3);
+        tocKeyword = chars.subSequence(1, 4);
         if (styleChars != null) {
             style = styleChars;
         }

@@ -2,10 +2,14 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.Computable;
 import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.collection.ClassifyingBlockTracker;
+import com.vladsch.flexmark.internal.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataKey;
+import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.sequence.*;
 import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.DelimiterProcessor;

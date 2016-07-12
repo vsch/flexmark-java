@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;

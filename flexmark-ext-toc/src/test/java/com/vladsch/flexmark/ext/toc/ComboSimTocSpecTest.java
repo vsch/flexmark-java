@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -21,6 +21,7 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.IS_TEXT_ONLY, true));
+        optionsMap.put("with-option-list", new MutableDataSet().set(SimTocExtension.AST_INCLUDE_OPTIONS, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

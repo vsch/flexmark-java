@@ -1,4 +1,6 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util.options;
+
+import com.vladsch.flexmark.internal.util.collection.DataValueFactory;
 
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {

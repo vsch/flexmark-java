@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.toc.internal.SimTocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.SimTocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**
@@ -31,11 +31,12 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
      *
      */
     final public static DataKey<Integer> LEVELS = TocExtension.LEVELS;
-    final public static DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
     final public static DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
     final public static DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
+    final public static DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
     final public static DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
     final public static DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
+    final public static DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
 
     private SimTocExtension() {
     }

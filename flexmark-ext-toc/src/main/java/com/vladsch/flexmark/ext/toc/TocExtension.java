@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ext.toc.internal.TocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.TocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**

@@ -13,17 +13,22 @@
  *
  */
 
-package com.vladsch.flexmark.ext.toc.internal;
+package com.vladsch.flexmark.internal.util.options;
 
-import java.text.MessageFormat;
-
-public interface MessageProvider {
-    MessageProvider DEFAULT = new MessageProvider() {
-        @Override
-        public String message(String key, String defaultText, Object... params) {
-            return params.length > 0 && defaultText.indexOf('{') >= 0 ? MessageFormat.format(defaultText, params) : defaultText;
-        }
-    };
+public enum ParsedOptionStatus {
+    VALID(0), 
+    IGNORED(1), 
+    WEAK_WARNING(2), 
+    WARNING(3), 
+    ERROR(4); 
     
-    String message(String key, String defaultText, Object... params);
+    private final int level;
+
+    ParsedOptionStatus(int level) {
+        this.level = level;
+    }
+
+    ParsedOptionStatus escalate(ParsedOptionStatus other) {
+        return level < other.level ? other : this;
+    }
 }

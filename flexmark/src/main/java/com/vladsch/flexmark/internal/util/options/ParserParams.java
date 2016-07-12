@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.toc.internal;
+package com.vladsch.flexmark.internal.util.options;
 
 import java.util.ArrayList;
 import java.util.List;

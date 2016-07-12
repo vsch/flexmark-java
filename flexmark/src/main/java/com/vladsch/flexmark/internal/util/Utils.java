@@ -18,10 +18,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package com.vladsch.flexmark.ext.toc.internal;
-
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.RunnableValue;
+package com.vladsch.flexmark.internal.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -49,16 +46,38 @@ public class Utils {
         return (receiver == null || receiver.isEmpty()) ? altValue : receiver;
     }
 
+    public static String ifNullOrBlank(String receiver, String altValue) {
+        return (receiver == null || isBlank(receiver)) ? altValue : receiver;
+    }
+
+    public static String ifEmpty(String receiver, String arg) {
+        if (receiver != null && !receiver.isEmpty()) return receiver;
+        return arg;
+    }
+
+    public static String ifEmpty(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
+        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
+    }
+
+    public static String ifEmptyNullArgs(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
+        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
+    }
+
+    public static String ifEmpty(String receiver, RunnableValue<String> arg) {
+        if (receiver != null && !receiver.isEmpty()) return receiver;
+        return arg.run();
+    }
+
+    public static String ifEmpty(String receiver, RunnableValue<String> ifEmptyArg, RunnableValue<String> ifNotEmptyArg) {
+        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.run() : ifNotEmptyArg.run();
+    }
+
     public static boolean isBlank(String receiver) {
         return receiver == null || receiver.trim().isEmpty();
     }
 
     public static String orEmpty(String receiver) {
         return receiver == null ? "" : receiver;
-    }
-
-    public static String ifNullOrBlank(String receiver, String altValue) {
-        return (receiver == null || isBlank(receiver)) ? altValue : receiver;
     }
 
     public static String wrapWith(String receiver, char prefixSuffix) {
@@ -207,28 +226,6 @@ public class Utils {
             //e.printStackTrace()
             return orEmpty(receiver);
         }
-    }
-
-    public static String ifEmpty(String receiver, String arg) {
-        if (receiver != null && !receiver.isEmpty()) return receiver;
-        return arg;
-    }
-
-    public static String ifEmpty(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
-        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
-    }
-
-    public static String ifEmptyNullArgs(String receiver, String ifEmptyArg, String ifNotEmptyArg) {
-        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg : ifNotEmptyArg;
-    }
-
-    public static String ifEmpty(String receiver, RunnableValue<String> arg) {
-        if (receiver != null && !receiver.isEmpty()) return receiver;
-        return arg.run();
-    }
-
-    public static String ifEmpty(String receiver, RunnableValue<String> ifEmptyArg, RunnableValue<String> ifNotEmptyArg) {
-        return (receiver == null || receiver.isEmpty()) ? ifEmptyArg.run() : ifNotEmptyArg.run();
     }
 
     public static String removeStart(String receiver, char prefix) {

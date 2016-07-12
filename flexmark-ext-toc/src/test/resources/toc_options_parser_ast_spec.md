@@ -59,35 +59,35 @@ levels=8
 levels=9
 .
 'levels=0' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'levels=1' => TocOptions[levels=<1>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=1]: #
-  full: [TOC levels=1 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=1]
+  full: [TOC levels=1 bullet formatted]
 'levels=2' => TocOptions[levels=<2>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=2,2]: #
-  full: [TOC levels=2,2 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=2,2]
+  full: [TOC levels=2,2 bullet formatted]
 'levels=3' => TocOptions[levels=<3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=3,3]: #
-  full: [TOC levels=3,3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=3,3]
+  full: [TOC levels=3,3 bullet formatted]
 'levels=4' => TocOptions[levels=<4>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=4,4]: #
-  full: [TOC levels=4,4 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=4,4]
+  full: [TOC levels=4,4 bullet formatted]
 'levels=5' => TocOptions[levels=<5>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=5,5]: #
-  full: [TOC levels=5,5 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=5,5]
+  full: [TOC levels=5,5 bullet formatted]
 'levels=6' => TocOptions[levels=<6>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=6,6]: #
-  full: [TOC levels=6,6 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=6,6]
+  full: [TOC levels=6,6 bullet formatted]
 'levels=7' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'levels=8' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'levels=9' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 .
 Example[0, 90]
   Style[0, 8]
@@ -125,14 +125,14 @@ levels=3-1
 levels=0-9
 .
 'levels=1-3 ' => TocOptions[levels=<1,2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=1-3]: #
-  full: [TOC levels=1-3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=1-3]
+  full: [TOC levels=1-3 bullet formatted]
 'levels=3-1 ' => TocOptions[levels=<1,2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=1-3]: #
-  full: [TOC levels=1-3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=1-3]
+  full: [TOC levels=1-3 bullet formatted]
 'levels=0-9' => TocOptions[levels=<1,2,3,4,5,6>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC levels=1-6]: #
-  full: [TOC levels=1-6 bullet formatted]: # "# Table of Contents"
+  diff: [TOC levels=1-6]
+  full: [TOC levels=1-6 bullet formatted]
 .
 Example[0, 35]
   Style[0, 11]
@@ -156,23 +156,23 @@ text
 formatted
 .
 'html' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'markdown' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'numbered' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=true,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC numbered]: #
-  full: [TOC levels=3 numbered formatted]: # "# Table of Contents"
+  diff: [TOC numbered]
+  full: [TOC levels=3 numbered formatted]
 'bullet' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'text' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=true,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC text]: #
-  full: [TOC levels=3 bullet text]: # "# Table of Contents"
+  diff: [TOC text]
+  full: [TOC levels=3 bullet text]
 'formatted' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 .
 Example[0, 45]
   Style[0, 4]
@@ -203,23 +203,23 @@ text
 formatted
 .
 'html' => TocOptions[levels=<2,3>,  isHtml=true,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC html]: #
+  full: [TOC levels=3 html bullet formatted]: # "# Table of Contents"
 'markdown' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
   diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  full: [TOC levels=3 markdown bullet formatted]: # "# Table of Contents"
 'numbered' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=true,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
   diff: [TOC numbered]: #
-  full: [TOC levels=3 numbered formatted]: # "# Table of Contents"
+  full: [TOC levels=3 markdown numbered formatted]: # "# Table of Contents"
 'bullet' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
   diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  full: [TOC levels=3 markdown bullet formatted]: # "# Table of Contents"
 'text' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=true,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
   diff: [TOC text]: #
-  full: [TOC levels=3 bullet text]: # "# Table of Contents"
+  full: [TOC levels=3 markdown bullet text]: # "# Table of Contents"
 'formatted' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
   diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  full: [TOC levels=3 markdown bullet formatted]: # "# Table of Contents"
 .
 Example[0, 45]
   Style[0, 4]
@@ -262,23 +262,23 @@ stext
 sformatted
 .
 'htmls' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'markdowns' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'snumbered' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'bbullet' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'stext' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 'sformatted' => TocOptions[levels=<2,3>,  isHtml=false,  isTextOnly=false,  isNumbered=false,  title="Table of Contents",  titleLevel=1,  rawTitleLevel=1,  rawTitle="Table of Contents", ]
-  diff: [TOC]: #
-  full: [TOC levels=3 bullet formatted]: # "# Table of Contents"
+  diff: [TOC]
+  full: [TOC levels=3 bullet formatted]
 .
 Example[0, 51]
   Style[0, 5]

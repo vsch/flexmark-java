@@ -72,7 +72,7 @@ plain is ok
 .
 .
 Document[0, 11]
-  SimTocBlock[0, 11] openingMarker:[0, 1] tocKeyword:[1, 3] style:[0, 0] closingMarker:[4, 6] anchorMarker:[7, 8] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
+  SimTocBlock[0, 11] openingMarker:[0, 1] tocKeyword:[1, 4] style:[0, 0] closingMarker:[4, 6] anchorMarker:[7, 8] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
 ````````````````````````````````
 
 
@@ -83,15 +83,7 @@ accepts all text for style
 .
 .
 Document[0, 71]
-  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
 ````````````````````````````````
 
 
@@ -105,15 +97,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 <h1 id="heading-1">Heading 1</h1>
 .
 Document[0, 84]
-  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
   Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"] textClose:[0, 0]
     Text[74, 83] chars:[74, 83, "Heading 1"]
 ````````````````````````````````
@@ -131,15 +115,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </ul>
 .
 Document[0, 83]
-  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
   BulletList[72, 83] isTight=true
     BulletListItem[72, 83] open:[72, 73, "-"]
       Paragraph[74, 83]
@@ -157,15 +133,7 @@ Document[0, 83]
 </div>
 .
 Document[0, 85]
-  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
   HtmlBlock[72, 85]
 ````````````````````````````````
 
@@ -191,15 +159,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </ul>
 .
 Document[0, 123]
-  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 82]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"] textClose:[0, 0]
   Heading[83, 97] textOpen:[83, 85, "##"] text:[86, 97, "Heading 1.1"] textClose:[0, 0]
@@ -229,15 +189,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </ul>
 .
 Document[0, 109]
-  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 82]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"] textClose:[0, 0]
   BulletList[84, 109] isTight=true
@@ -262,15 +214,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 <h1 id="heading-1">Heading 1</h1>
 .
 Document[0, 109]
-  SimTocBlock[0, 96] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 96] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 96]
       BulletList[71, 96] isTight=true
         BulletListItem[71, 85] open:[71, 72, "-"]
@@ -301,15 +245,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </ul>
 .
 Document[0, 157]
-  SimTocBlock[0, 141] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 141] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 141]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"] textClose:[0, 0]
       BulletList[83, 141] isTight=true
@@ -352,15 +288,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 </div>
 .
 Document[0, 179]
-  SimTocBlock[0, 130] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 130] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 130]
       HtmlBlock[71, 130]
   IndentedCodeBlock[141, 164]
@@ -383,15 +311,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 .
 Document[0, 187]
-  SimTocBlock[0, 187] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 187] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 187]
       HtmlBlock[71, 187]
 ````````````````````````````````
@@ -409,15 +329,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 .
 Document[0, 128]
-  SimTocBlock[0, 128] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 128] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 128]
       HtmlBlock[71, 128]
 ````````````````````````````````
@@ -436,15 +348,7 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 .
 Document[0, 135]
-  SimTocBlock[0, 135] openingMarker:[0, 1] tocKeyword:[1, 3] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
-    SimTocOptions[5, 64]
-      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
-      SimTocOption[20, 24] chars:[20, 24, "html"]
-      SimTocOption[25, 33] chars:[25, 33, "markdown"]
-      SimTocOption[34, 38] chars:[34, 38, "text"]
-      SimTocOption[39, 48] chars:[39, 48, "formatted"]
-      SimTocOption[49, 55] chars:[49, 55, "bullet"]
-      SimTocOption[56, 64] chars:[56, 64, "numbered"]
+  SimTocBlock[0, 135] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
     SimTocContent[71, 135]
       HtmlBlock[71, 135]
 ````````````````````````````````
@@ -475,7 +379,7 @@ Default rendering with emphasis
 <h3 id="heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
 .
 Document[0, 126]
-  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 3] style:[0, 0] closingMarker:[4, 6] anchorMarker:[6, 7] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
+  SimTocBlock[0, 10] openingMarker:[0, 1] tocKeyword:[1, 4] style:[0, 0] closingMarker:[4, 6] anchorMarker:[6, 7] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
   Heading[11, 36] textOpen:[11, 12, "#"] text:[13, 36, "Heading **some bold** 1"] textClose:[0, 0]
     Text[13, 21] chars:[13, 21, "Heading "]
     StrongEmphasis[21, 34] textOpen:[21, 23, "**"] text:[23, 32, "some bold"] textClose:[32, 34, "**"]
@@ -492,6 +396,25 @@ Document[0, 126]
     StrongEmphasis[103, 125] textOpen:[103, 105, "**"] text:[105, 123, "_some bold italic_"] textClose:[123, 125, "**"]
       Emphasis[105, 123] textOpen:[105, 106, "_"] text:[106, 122, "some bold italic"] textClose:[122, 123, "_"]
         Text[106, 122] chars:[106, 122, "some "..."talic"]
+````````````````````````````````
+
+
+With option nodes in the ast
+
+```````````````````````````````` example(SimToc: 16) options(with-option-list)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: # 
+.
+.
+Document[0, 70]
+  SimTocBlock[0, 70] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68] openingTitleMarker:[0, 0] title:[0, 0] closingTitleMarker:[0, 0]
+    SimTocOptionList[5, 64]
+      SimTocOption[5, 19] chars:[5, 19, "level"..."b,c,d"]
+      SimTocOption[20, 24] chars:[20, 24, "html"]
+      SimTocOption[25, 33] chars:[25, 33, "markdown"]
+      SimTocOption[34, 38] chars:[34, 38, "text"]
+      SimTocOption[39, 48] chars:[39, 48, "formatted"]
+      SimTocOption[49, 55] chars:[49, 55, "bullet"]
+      SimTocOption[56, 64] chars:[56, 64, "numbered"]
 ````````````````````````````````
 
 

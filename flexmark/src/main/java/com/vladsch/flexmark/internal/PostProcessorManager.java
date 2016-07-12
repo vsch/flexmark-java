@@ -1,11 +1,15 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.collection.ClassifyingNodeTracker;
+import com.vladsch.flexmark.internal.util.collection.NodeClassifierVisitor;
+import com.vladsch.flexmark.internal.util.collection.OrderedSet;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
 import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
 import com.vladsch.flexmark.internal.util.dependency.DependentItem;
 import com.vladsch.flexmark.internal.util.dependency.DependentItemMap;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.PostProcessor;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
 import com.vladsch.flexmark.ext.tables.TablesExtension;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 class TableParserOptions {
     final public int maxHeaderRows;

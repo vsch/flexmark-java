@@ -3,9 +3,10 @@ package com.vladsch.flexmark.ext.toc.internal;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
-import com.vladsch.flexmark.ext.toc.SimTocOptions;
+import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.ParsedOption;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Heading;
@@ -30,11 +31,11 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     private final SimTocBlock block;
     //private BlockContent content = new BlockContent();
-    private final TocOptions options;
+    private final SimTocOptions options;
     private int haveChildren = 0;
 
     private SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
-        this.options = new TocOptions(options);
+        this.options = new SimTocOptions(options);
         block = new SimTocBlock(tocChars, styleChars, titleChars);
     }
 
@@ -102,13 +103,13 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
         // now add the options list and options with their text
 
-        if (!block.getStyle().isEmpty()) {
+        if (options.isAstAddOptions && !block.getStyle().isEmpty()) {
             SimTocOptionsParser optionsParser = new SimTocOptionsParser();
             Pair<TocOptions, List<ParsedOption<TocOptions>>> pair = optionsParser.parseOption(block.getStyle(), TocOptions.DEFAULT, null);
             List<ParsedOption<TocOptions>> options = pair.getSecond();
             if (!options.isEmpty()) {
                 // add these
-                SimTocOptions optionsNode = new SimTocOptions();
+                SimTocOptionList optionsNode = new SimTocOptionList();
                 for (ParsedOption<TocOptions> option : options) {
                     SimTocOption optionNode = new SimTocOption(option.getSource());
                     optionsNode.appendChild(optionNode);

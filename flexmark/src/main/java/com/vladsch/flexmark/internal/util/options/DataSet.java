@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.internal.util.collection;
+package com.vladsch.flexmark.internal.util.options;
 
 import java.util.Collection;
 import java.util.HashMap;

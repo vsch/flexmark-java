@@ -8,17 +8,17 @@ import com.vladsch.flexmark.node.Visitor;
 /**
  * A sim toc contents node containing all text that came after the sim toc node
  */
-public class SimTocOptions extends CustomNode implements DoNotLinkify {
+public class SimTocOptionList extends CustomNode implements DoNotLinkify {
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
         return EMPTY_SEGMENTS;
     }
 
-    public SimTocOptions() {
+    public SimTocOptionList() {
     }
 
-    public SimTocOptions(BasedSequence chars) {
+    public SimTocOptionList(BasedSequence chars) {
         super(chars);
     }
 

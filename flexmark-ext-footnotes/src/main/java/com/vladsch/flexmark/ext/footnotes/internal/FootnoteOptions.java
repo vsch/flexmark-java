@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 public class FootnoteOptions {
     final String footnoteRefPrefix;

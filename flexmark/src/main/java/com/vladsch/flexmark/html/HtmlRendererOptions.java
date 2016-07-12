@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 public class HtmlRendererOptions {
     public final String softBreak;

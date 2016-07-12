@@ -3,13 +3,13 @@ package com.vladsch.flexmark.ext.toc.internal;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
-import com.vladsch.flexmark.ext.toc.SimTocOptions;
+import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.HeadingCollectingVisitor;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Heading;
 
 import java.util.Arrays;
@@ -29,7 +29,7 @@ public class SimTocNodeRenderer implements NodeRenderer {
         return new HashSet<>(Arrays.asList(
                 new NodeRenderingHandler<>(SimTocBlock.class, this::render),
                 new NodeRenderingHandler<>(SimTocContent.class, this::render),
-                new NodeRenderingHandler<>(SimTocOptions.class, this::render),
+                new NodeRenderingHandler<>(SimTocOptionList.class, this::render),
                 new NodeRenderingHandler<>(SimTocOption.class, this::render)
         ));
     }
@@ -38,7 +38,7 @@ public class SimTocNodeRenderer implements NodeRenderer {
         // we don't render this or its children
     }
 
-    private void render(SimTocOptions node, NodeRendererContext context, HtmlWriter html) {
+    private void render(SimTocOptionList node, NodeRendererContext context, HtmlWriter html) {
         // we don't render this or its children
     }
 

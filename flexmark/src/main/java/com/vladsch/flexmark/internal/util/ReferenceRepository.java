@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal.util;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.node.Reference;
 import com.vladsch.flexmark.parser.Parser;
 

@@ -1,6 +1,10 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.collection.*;
+import com.vladsch.flexmark.internal.util.collection.DataValueFactory;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataKey;
+import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
+import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.Collection;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 public class AbbreviationOptions {
     protected final boolean useLinks;

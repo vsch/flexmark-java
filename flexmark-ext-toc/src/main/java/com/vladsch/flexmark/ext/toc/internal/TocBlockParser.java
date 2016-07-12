@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.TocBlock;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;

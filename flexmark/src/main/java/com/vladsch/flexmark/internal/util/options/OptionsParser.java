@@ -13,7 +13,7 @@
  *
  */
 
-package com.vladsch.flexmark.ext.toc.internal;
+package com.vladsch.flexmark.internal.util.options;
 
 import com.vladsch.flexmark.internal.util.Pair;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
@@ -107,7 +107,7 @@ public class OptionsParser<T> implements OptionParser<T> {
 
     @Override
     public String getOptionText(T options, T defaultOptions) {
-        DelimitedBuilder out = new DelimitedBuilder(" ");
+        DelimitedBuilder out = new DelimitedBuilder(String.valueOf(myOptionDelimiter));
         for (OptionParser<T> parsableOption : myParsableOptions) {
             String text = parsableOption.getOptionText(options, defaultOptions).trim();
             if (!text.isEmpty()) out.append(text).mark();

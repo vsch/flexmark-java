@@ -15,8 +15,8 @@
 
 package com.vladsch.flexmark.spec;
 
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
-import com.vladsch.flexmark.internal.util.collection.MutableDataSet;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.StringSequence;
 import com.vladsch.flexmark.node.Node;

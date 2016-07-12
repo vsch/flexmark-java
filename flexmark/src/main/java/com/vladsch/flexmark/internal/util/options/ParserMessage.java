@@ -13,15 +13,30 @@
  *
  */
 
-package com.vladsch.flexmark.ext.toc.internal;
+package com.vladsch.flexmark.internal.util.options;
 
-import com.vladsch.flexmark.internal.util.Pair;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
-import java.util.List;
+public class ParserMessage {
+    protected final BasedSequence source; 
+    protected final ParsedOptionStatus status; 
+    protected final String message;
 
-public interface OptionParser<T> {
-    String getOptionName();
-    Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionText, T options, MessageProvider provider);
-    String getOptionText(T options, T defaultOptions);
+    public ParserMessage(BasedSequence source, ParsedOptionStatus status, String message) {
+        this.source = source;
+        this.status = status;
+        this.message = message;
+    }
+
+    public BasedSequence getSource() {
+        return source;
+    }
+
+    public ParsedOptionStatus getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

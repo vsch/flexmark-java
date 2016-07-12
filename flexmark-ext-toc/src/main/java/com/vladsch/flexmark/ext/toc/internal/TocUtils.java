@@ -8,6 +8,7 @@ import com.vladsch.flexmark.internal.util.Computable;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.ValueRunnable;
+import com.vladsch.flexmark.internal.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.node.Heading;
 
 import java.util.ArrayList;
@@ -19,6 +20,17 @@ public class TocUtils {
         out.append("[TOC").mark();
 
         TocOptionsParser optionsParser = new TocOptionsParser();
+        out.append(optionsParser.getOptionText(options, defaultOptions));
+        out.unmark().append("]");
+        out.append("\n").unmark();
+        return out.toString();
+    }
+
+    public static String getSimTocPrefix(TocOptions options, TocOptions defaultOptions) {
+        DelimitedBuilder out = new DelimitedBuilder(" ");
+        out.append("[TOC").mark();
+
+        SimTocOptionsParser optionsParser = new SimTocOptionsParser();
         out.append(optionsParser.getOptionText(options, defaultOptions));
         out.unmark().append("]:").mark().append('#').mark();
 

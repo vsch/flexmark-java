@@ -4,7 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.collection.DataKey;
+import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 
 /**

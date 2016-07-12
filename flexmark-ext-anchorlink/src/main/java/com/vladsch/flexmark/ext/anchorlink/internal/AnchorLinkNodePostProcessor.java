@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.internal.util.NodeTracker;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.BlockQuote;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Heading;

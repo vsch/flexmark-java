@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.collection.DataHolder;
+import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.BlockQuote;

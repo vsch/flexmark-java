@@ -13,7 +13,7 @@
  *
  */
 
-package com.vladsch.flexmark.ext.toc.internal;
+package com.vladsch.flexmark.internal.util.options;
 
 import com.vladsch.flexmark.internal.util.Pair;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
@@ -51,6 +51,6 @@ public abstract class BooleanOptionParser<T> implements OptionParser<T> {
 
     @Override
     public String getOptionText(T options, T defaultOptions) {
-        return (defaultOptions == null || !isOptionSet(defaultOptions)) && isOptionSet(options) ? myOptionName : "";
+        return isOptionSet(options) && (defaultOptions == null || !isOptionSet(defaultOptions)) ? myOptionName : "";
     }
 }
