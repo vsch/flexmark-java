@@ -49,7 +49,7 @@ earlier versions of this project.
 | Dependency definitions for processors to guarantee the right order of processing | :heavy_check_mark:                                               | :x: order specified by extension list ordering, error prone      | :x: not applicable, core defines where extension processing is added |
 
 ###### (1) 
-pathological input of 10,000 `[` parses in 11ms
+pathological input of 10,000 `[` parses in 11ms, 10,000 nested `[` `]` parse in 450ms
 ###### (2) 
 pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 
