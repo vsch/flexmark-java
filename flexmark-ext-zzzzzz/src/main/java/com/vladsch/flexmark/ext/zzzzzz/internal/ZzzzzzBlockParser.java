@@ -8,6 +8,7 @@ import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class ZzzzzzBlockParser extends AbstractBlockParser {
@@ -53,6 +54,21 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+            return null;
+        }
+
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+            return null;
+        }
+
+        @Override
+        public boolean affectsGlobalScope() {
+            return false;
+        }
+
         @Override
         public BlockParserFactory create(DataHolder options) {
             return new BlockFactory(options);

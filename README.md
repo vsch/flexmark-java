@@ -30,6 +30,29 @@ This is a work in progress with many API changes. No attempt is made to keep bac
 compatibility to the original project and until the feature set is mostly complete, not even to
 earlier versions of this project. 
 
+### Comparison Chart
+
+| Feature                                                                          | flexmark-java                                                    | commmonmark-java                                                 | pegdown                                                              |
+|----------------------------------------------------------------------------------|:-----------------------------------------------------------------|:-----------------------------------------------------------------|:---------------------------------------------------------------------|
+| Relative parse time (less is better)                                             | 1x                                                               | 0.6x to 0.7x                                                     | 25x average, 20,000x to ∞ for pathological input [(2)](#2)           |
+| All source elements in the AST                                                   | :heavy_check_mark:                                               | :x:                                                              | :heavy_check_mark:                                                   |
+| AST elements with source position                                                | :heavy_check_mark:                                               | :x:                                                              | :heavy_check_mark: with some errors and idiosyncrasies               |
+| AST can be easily manipulated                                                    | :heavy_check_mark: AST post processing is an extension mechanism | :heavy_check_mark: AST post processing is an extension mechanism | :x: not an option. No node's parent information, children as List<>. |
+| AST elements have detailed source position for all parts                         | :heavy_check_mark:                                               | :x:                                                              | :x: only node start/end                                              |
+| Can disable core parsing features                                                | :heavy_check_mark:                                               | :x:                                                              | :x:                                                                  |
+| Core parser implemented via the extension API                                    | :heavy_check_mark:                                               | :x:                                                              | :x:                                                                  |
+| Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                               | :x: one massive PEG parser with complex interactions [(2)](#2)       |
+| Parsing of block elements is independent from each other                         | :heavy_check_mark: [(1)](#1)                                     | :heavy_check_mark: [(1)](#1)                                     | :x: everything in one PEG grammar                                    |
+| Uniform configuration across: parser, renderer and all extensions                | :heavy_check_mark:                                               | :x: none beyond extension list                                   | :x: bit mask for core, none for extensions                           |
+| Parsing performance optimized for use with extensions                            | :heavy_check_mark:                                               | :x: parsing performance for core, extensions do what they can    | :x: performance is not a feature                                     |
+| Feature rich with many configuration options and extensions out of the box       | :heavy_check_mark:                                               | :x: limited extensions, no options                               | :heavy_check_mark:                                                   |
+| Dependency definitions for processors to guarantee the right order of processing | :heavy_check_mark:                                               | :x: order specified by extension list ordering, error prone      | :x: not applicable, core defines where extension processing is added |
+
+###### (1) 
+pathological input of 10,000 `[` parses in 11ms
+###### (2) 
+pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
+
 Progress
 --------
 

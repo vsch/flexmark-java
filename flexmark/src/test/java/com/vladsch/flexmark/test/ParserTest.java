@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -111,6 +112,21 @@ public class ParserTest {
     }
 
     public static class DashBlockParserFactory implements CustomBlockParserFactory {
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+            return null;
+        }
+
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+            return null;
+        }
+
+        @Override
+        public boolean affectsGlobalScope() {
+            return false;
+        }
+
         @Override
         public BlockParserFactory create(DataHolder options) {
             return new BlockFactory(options);

@@ -12,6 +12,7 @@ import com.vladsch.flexmark.parser.block.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class TableBlockParser extends AbstractBlockParser {
@@ -229,6 +230,21 @@ public class TableBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+            return null;
+        }
+
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+            return null;
+        }
+
+        @Override
+        public boolean affectsGlobalScope() {
+            return false;
+        }
+
         @Override
         public BlockParserFactory create(DataHolder options) {
             return new BlockFactory(options);

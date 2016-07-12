@@ -1,13 +1,49 @@
-flexmark-java Version History
-=============================
+flexmark-java
+=============
+
+[TOC]: # "## Version History"
+## Version History
+- [0.4.1](#041)
+- [0.4.0](#040)
+- [0.3.2](#032)
+- [0.3.1](#031)
+- [0.3.0](#030)
+- [0.2.9](#029)
+- [0.2.8](#028)
+- [0.2.7](#027)
+- [0.2.6](#026)
+- [0.2.5](#025)
+- [0.2.4](#024)
+- [0.2.3](#023)
+- [0.2.2](#022)
+- [0.2.1](#021)
+- [0.2.0](#020)
+- [0.1.9](#019)
+- [0.1.8](#018)
+- [0.1.7](#017)
+- [0.1.6](#016)
+- [0.1.5](#015)
+- [0.1.4](#014)
+- [0.1.3](#013)
+- [0.1.2](#012)
+- [0.1.1](#011)
+- [0.1.0](#010)
+
+0.4.1
+-----
+
+- Add dependencies to CustomBlockParserFactory and core factories to eliminate the need to order
+  factories manually. Custom factories that have no specific dependencies will still run before
+  core factories. Core factories now define dependencies between each other to ensure correct
+  processing. 
 
 0.4.0
 -----
 
 - Add Sim TOC syntax as per Markdown Navigator simulated TOC element.
 
-- Change Sim TOC to be a container and accept only a single HTML block without blank lines
-      or a heading and a list without blank lines.
+- Change Sim TOC to be a container and accept only a single HTML block without blank lines or a
+  heading and a list without blank lines.
 
 - [ ] Add Flexmark Spec Example Extension to parse flexmark spec files, same as Markdown
       Navigator.
@@ -475,7 +511,7 @@ flexmark-java Version History
   indexed by a string like one used for references.
 
 - ParserState a few new methods:
-    
+
     - `getPropertyHolder()` returns the property holder for the parse session. This is the
       current document parser. After parsing the property holder is the Document node which can
       be obtained from via `Node::getDocument()` method. Implementation is to traverse node

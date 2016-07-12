@@ -8,6 +8,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.block.*;
 
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,6 +76,21 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     }
 
     public static class Factory implements CustomBlockParserFactory {
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
+            return null;
+        }
+
+        @Override
+        public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
+            return null;
+        }
+
+        @Override
+        public boolean affectsGlobalScope() {
+            return false;
+        }
+
         @Override
         public BlockParserFactory create(DataHolder options) {
             return new BlockFactory(options);

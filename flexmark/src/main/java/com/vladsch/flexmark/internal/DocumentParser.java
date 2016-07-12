@@ -44,16 +44,16 @@ public class DocumentParser implements ParserState {
         CORE_FACTORIES_DATA_KEYS.put(new IndentedCodeBlockParser.Factory(), Parser.INDENTED_CODE_BLOCK_PARSER);
     }
 
-    private static List<CustomBlockParserFactory> CORE_FACTORIES = new ArrayList<>();
-    static {
-        CORE_FACTORIES.add(new BlockQuoteParser.Factory());
-        CORE_FACTORIES.add(new HeadingParser.Factory());
-        CORE_FACTORIES.add(new FencedCodeBlockParser.Factory());
-        CORE_FACTORIES.add(new HtmlBlockParser.Factory());
-        CORE_FACTORIES.add(new ThematicBreakParser.Factory());
-        CORE_FACTORIES.add(new ListBlockParser.Factory());
-        CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
-    }
+    //private static List<CustomBlockParserFactory> CORE_FACTORIES = new ArrayList<>();
+    //static {
+    //    CORE_FACTORIES.add(new BlockQuoteParser.Factory());
+    //    CORE_FACTORIES.add(new HeadingParser.Factory());
+    //    CORE_FACTORIES.add(new FencedCodeBlockParser.Factory());
+    //    CORE_FACTORIES.add(new HtmlBlockParser.Factory());
+    //    CORE_FACTORIES.add(new ThematicBreakParser.Factory());
+    //    CORE_FACTORIES.add(new ListBlockParser.Factory());
+    //    CORE_FACTORIES.add(new IndentedCodeBlockParser.Factory());
+    //}
 
     private static HashMap<DataKey<Boolean>, ParagraphPreProcessorFactory> CORE_PARAGRAPH_PRE_PROCESSORS = new HashMap<>();
     static {
@@ -203,6 +203,38 @@ public class DocumentParser implements ParserState {
         }
     }
 
+    public static class CustomBlockParserDependencies extends ResolvedDependencies<CustomBlockParserDependencyStage> {
+        public CustomBlockParserDependencies(List<CustomBlockParserDependencyStage> dependentStages) {
+            super(dependentStages);
+        }
+    }
+
+    public static class CustomBlockParserDependencyStage {
+        final private List<CustomBlockParserFactory> dependents;
+
+        public CustomBlockParserDependencyStage(List<CustomBlockParserFactory> dependents) {
+            // compute mappings
+            this.dependents = dependents;
+        }
+    }
+
+    private static class CustomBlockParserDependencyResolver extends DependencyResolver<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
+        @Override
+        protected Class<? extends CustomBlockParserFactory> getDependentClass(CustomBlockParserFactory dependent) {
+            return dependent.getClass();
+        }
+
+        @Override
+        protected CustomBlockParserDependencies createResolvedDependencies(List<CustomBlockParserDependencyStage> stages) {
+            return new CustomBlockParserDependencies(stages);
+        }
+
+        @Override
+        protected CustomBlockParserDependencyStage createStage(List<CustomBlockParserFactory> dependents) {
+            return new CustomBlockParserDependencyStage(dependents);
+        }
+    }
+
     public static class BlockPreProcessorDependencyStage {
         final private Set<Class<? extends Block>> blockTypes;
         final private List<BlockPreProcessorFactory> dependents;
@@ -290,15 +322,21 @@ public class DocumentParser implements ParserState {
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(customBlockParserFactories);
 
-        // need to keep core parsers in the right order
-        for (CustomBlockParserFactory factory : CORE_FACTORIES) {
-            DataKey<Boolean> key = CORE_FACTORIES_DATA_KEYS.get(factory);
-
-            if (key == null || options.get(key)) {
-                list.add(factory);
+        // need to keep core parsers in the right order, this is done through their dependencies
+        for (Map.Entry<CustomBlockParserFactory, DataKey<Boolean>> entry : CORE_FACTORIES_DATA_KEYS.entrySet()) {
+            if (options.get(entry.getValue())) {
+                list.add(entry.getKey());
             }
         }
-        return list;
+
+        //return list;
+        CustomBlockParserDependencyResolver resolver = new CustomBlockParserDependencyResolver();
+        CustomBlockParserDependencies dependencies = resolver.resolveDependencies(list);
+        ArrayList<CustomBlockParserFactory> factories = new ArrayList<>();
+        for (CustomBlockParserDependencyStage stage:dependencies.getDependentStages()) {
+            factories.addAll(stage.dependents);
+        }
+        return factories;
     }
 
     public static ParagraphPreProcessorDependencies calculateParagraphPreProcessors(DataHolder options, List<ParagraphPreProcessorFactory> blockPreProcessors, InlineParserFactory inlineParserFactory) {
