@@ -80,7 +80,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             block.setOpeningMarker(info.subSequence(0, myOptions.exampleBreak.length()));
             block.setExampleKeyword(exampleKeyword);
 
-            if (options.matches()) {
+            if (options.matches() && options.start() < options.end()) {
                 if (options.group(GROUP_EXAMPLE_OPEN) != null)
                     block.setOptionsOpeningMarker(optionsChars.subSequence(options.start(GROUP_EXAMPLE_OPEN), options.end(GROUP_EXAMPLE_OPEN)).trim());
                 if (options.group(GROUP_SECTION) != null)
@@ -121,13 +121,15 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 boolean inAst = false;
                 boolean hadAst = false;
                 int sectionStart = -1;
+                BasedSequence prevLine = SubSequence.NULL;
+                BasedSequence lastLine = lines.get(lines.size() - 1);
                 for (BasedSequence line : lines) {
                     if (line.matches(myOptions.typeBreak)) {
                         if (inSource) {
                             inSource = false;
                             hadSource = true;
                             if (sectionStart != -1) {
-                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - line.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                                block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
                             }
                             block.setHtmlSeparator(line);
                             inHtml = true;
@@ -136,28 +138,28 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                             inHtml = false;
                             hadHtml = true;
                             if (sectionStart != -1) {
-                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - line.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                                block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
                             }
                             block.setAstSeparator(line);
                             inAst = true;
                             sectionStart = -1;
                         }
 
-                        if (line.startsWith(myOptions.exampleBreak)) {
+                        if (line == lastLine) {
                             // done
                             if (inSource) {
                                 if (sectionStart != -1) {
-                                    block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - line.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                                    block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
                                 }
                                 hadSource = true;
                             } else if (inHtml) {
                                 if (sectionStart != -1) {
-                                    block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - line.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                                    block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
                                 }
                                 hadHtml = true;
                             } else if (inAst) {
                                 if (sectionStart != -1) {
-                                    block.setAst(line.baseSubSequence(sectionStart, line.getStartOffset() - line.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                                    block.setAst(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
                                 }
                                 hadAst = true;
                             }
@@ -168,6 +170,8 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         if (sectionStart == -1) {
                             sectionStart = line.getStartOffset();
                         }
+                        
+                        prevLine = line;
                     }
 
                     // here if we create section nodes
@@ -233,7 +237,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence line = state.getLine();
-            if (state.getIndent() == 0) {
+            if (state.getIndex() == 0) {
                 int breakLength = myOptions.exampleBreak.length();
                 if (line.length() >= breakLength + 1 + EXAMPLE_KEYWORD.length() && line.startsWith(myOptions.exampleBreak) && line.matchChars(EXAMPLE_KEYWORD, breakLength + 1) && " \t\u00A0".contains(String.valueOf(line.charAt(breakLength)))) {
                     SpecExampleBlockParser blockParser = new SpecExampleBlockParser(state.getProperties());
