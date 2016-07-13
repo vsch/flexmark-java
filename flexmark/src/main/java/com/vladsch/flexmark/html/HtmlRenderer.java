@@ -26,7 +26,6 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
     final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
-    final public static DataKey<Boolean> LISTS_ORDERED_START = new DataKey<>("LISTS_ORDERED_START", true);
     final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
     final static public DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML::getFrom);
     final static public DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS::getFrom);
@@ -37,9 +36,11 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS::getFrom);
     final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML::getFrom);
     final static public DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENT = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML_COMMENT", SUPPRESS_INLINE_HTML::getFrom);
-    final static public DataKey<Boolean> RENDER_HEADER_ID = new DataKey<Boolean>("RENDER_HEADER_ID", false);
-    final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<Boolean>("GENERATE_HEADER_ID", false);
-    final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<Boolean>("DO_NOT_RENDER_LINKS", false);
+    final public static DataKey<Boolean> LISTS_ORDERED_START = new DataKey<>("LISTS_ORDERED_START", true);
+    final static public DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
+    final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", false);
+    final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
+    final static public DataKey<String> LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
 
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;

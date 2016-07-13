@@ -48,9 +48,9 @@ public abstract class Node {
     }
 
     /**
-     *  Overridden by ListBlock and any others whose children propagate their blank line to parent
-     *  
-     * @return return a child block that can contain the parent's last blank line 
+     * Overridden by ListBlock and any others whose children propagate their blank line to parent
+     *
+     * @return return a child block that can contain the parent's last blank line
      */
     public Node getLastBlankLineChild() {
         return null;
@@ -247,11 +247,13 @@ public abstract class Node {
     }
 
     public void astExtraChars(StringBuilder out) {
-        if (getChars().length() <= 10) {
-            segmentSpanChars(out, getChars(), "chars");
-        } else {
-            // give the first 5 and last 5
-            segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
+        if (getChars().length() > 0) {
+            if (getChars().length() <= 10) {
+                segmentSpanChars(out, getChars(), "chars");
+            } else {
+                // give the first 5 and last 5
+                segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
+            }
         }
     }
 
@@ -364,8 +366,42 @@ public abstract class Node {
     public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars) {
         if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
         out.append("[").append(startOffset).append(", ").append(endOffset);
-        if (startOffset < endOffset) out.append(", \"").append(chars).append("\"");
+        if (startOffset < endOffset) {
+            out.append(", \"");
+            escapeJavaString(out, chars);
+            out.append("\"");
+        }
         out.append("]");
+    }
+
+    private static void escapeJavaString(StringBuilder out, String chars) {
+        int iMax = chars.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = chars.charAt(i);
+            switch (c) {
+                case '\n':
+                    out.append("\\n");
+                    break;
+                case '\r':
+                    out.append("\\r");
+                    break;
+                case '\t':
+                    out.append("\\t");
+                    break;
+                case '\b':
+                    out.append("\\b");
+                    break;
+                case '\f':
+                    out.append("\\f");
+                    break;
+                case '\0':
+                    out.append("\\0");
+                    break;
+                default:
+                    out.append(c);
+                    break;
+            }
+        }
     }
 
     public static void segmentSpan(StringBuilder out, BasedSequence sequence, String name) {
@@ -392,7 +428,7 @@ public abstract class Node {
         segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
         segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
-    
+
     public void takeChildren(Node node) {
         if (node.firstChild != null) {
             Node firstChild = node.firstChild;

@@ -14,6 +14,7 @@ import java.util.*;
 public abstract class BasedSequenceImpl implements BasedSequence {
 
     public static final String WHITESPACE_CHARS = " \t\r\n";
+    public static final String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
     public static final String EOL_CHARS = "\r\n";
 
     @Override
@@ -194,12 +195,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public boolean matches(String chars) {
         return chars.length() == length() && matchChars(chars);
     }
-    
+
     @Override
     public boolean matchChars(String chars) {
         return matchChars(chars, 0);
     }
-    
+
     @Override
     public boolean matchChars(String chars, int startIndex) {
         int iMax = chars.length();
@@ -408,6 +409,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public int indexOfAny(char c1, char c2, char c3) {
+        return indexOfAny(c1,c2,c3,0);
+    }
+    
+    @Override
+    public int indexOfAny(char c1, char c2, char c3, int index) {
+        int iMax = length();
+        for (int i = index; i < iMax; i++) {
+            char c = charAt(i);
+            if (c == c1 || c == c2) return i;
+        }
+        return -1;
+    }
+
+    @Override
     public int lastIndexOf(char c, int index) {
         for (int i = index; i-- > 0; i++) {
             if (charAt(i) == c) return i;
@@ -534,7 +550,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        int includeDelims = (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean includeDelimParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelims = !includeDelimParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
         ArrayList<BasedSequence> items = new ArrayList<>();
@@ -551,7 +568,10 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                     if (trimParts) item = item.trim(trimChars);
                     if (!item.isEmpty() || !skipEmpty) {
                         items.add(item);
-                        if (items.size() == limit - 1) {
+                        if (includeDelimParts) {
+                            items.add(subSequence(pos, pos + 1));
+                        }
+                        if (items.size() >= limit - 1) {
                             lastPos = pos + 1;
                             break;
                         }
@@ -576,7 +596,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        int includeDelims = (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean includeDelimParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelims = !includeDelimParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
         ArrayList<BasedSequence> items = new ArrayList<>();
@@ -589,11 +610,14 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 if (pos < 0) break;
 
                 if (lastPos < pos || !skipEmpty) {
-                    BasedSequence item = subSequence(lastPos, pos + includeDelims);
+                    BasedSequence item = subSequence(lastPos, pos + delimiter.length());
                     if (trimParts) item = item.trim(trimChars);
                     if (!item.isEmpty() || !skipEmpty) {
                         items.add(item);
-                        if (items.size() == limit - 1) {
+                        if (includeDelimParts) {
+                            items.add(subSequence(pos, pos + 1));
+                        }
+                        if (items.size() >= limit - 1) {
                             lastPos = pos + 1;
                             break;
                         }

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.BlockContent;
+import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
@@ -23,10 +24,19 @@ public class Heading extends Block implements AnchorRefTarget {
         return new BasedSequence[] { openingMarker, text, closingMarker };
     }
 
+    @Override
+    public String getAnchorRefText() {
+        TextCollectingVisitor textCollectingVisitor = new TextCollectingVisitor();
+        textCollectingVisitor.visit(this);
+        return textCollectingVisitor.getText();
+    }
+
+    @Override
     public String getAnchorRefId() {
         return anchorRefId;
     }
 
+    @Override
     public void setAnchorRefId(String anchorRefId) {
         this.anchorRefId = anchorRefId;
     }

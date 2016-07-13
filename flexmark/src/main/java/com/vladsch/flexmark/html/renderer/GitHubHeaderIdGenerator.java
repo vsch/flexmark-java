@@ -1,9 +1,8 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.internal.util.AbstractBlockVisitor;
-import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
+import com.vladsch.flexmark.internal.util.AnchorRefTargetBlockVisitor;
+import com.vladsch.flexmark.node.AnchorRefTarget;
 import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.HashMap;
@@ -12,13 +11,11 @@ public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
     @Override
     public void generateIds(Document document) {
         HashMap<String, Integer> headerBaseIds = new HashMap<>();
-        new AbstractBlockVisitor() {
+        new AnchorRefTargetBlockVisitor() {
             @Override
-            public void visit(Heading node) {
-                TextCollectingVisitor textCollectingVisitor = new TextCollectingVisitor();
-                textCollectingVisitor.visit(node);
-                String text = textCollectingVisitor.getText();
-
+            public void visit(AnchorRefTarget node) {
+                String text = node.getAnchorRefText();
+                
                 if (!text.isEmpty()) {
                     String baseRefId = generateId(text);
 
@@ -40,7 +37,7 @@ public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
 
     @Override
     public String getId(Node node) {
-        return node instanceof Heading ? ((Heading) node).getAnchorRefId() : null;
+        return node instanceof AnchorRefTarget ? ((AnchorRefTarget) node).getAnchorRefId() : null;
     }
 
     public static String generateId(CharSequence headerText) {

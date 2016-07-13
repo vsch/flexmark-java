@@ -15,6 +15,7 @@
 
 package com.vladsch.flexmark.internal.util.options;
 
+import java.util.List;
 import java.util.Stack;
 
 public class DelimitedBuilder {
@@ -192,29 +193,55 @@ public class DelimitedBuilder {
         return had();
     }
 
-    public DelimitedBuilder appendAll(Object[] v) {
+    public <V> DelimitedBuilder appendAll(V[] v) {
         return appendAll(v, 0, v.length);
     }
 
-    public DelimitedBuilder appendAll(Object[] v, int start, int end) {
-        for (Object item : v) {
+    public <V> DelimitedBuilder appendAll(V[] v, int start, int end) {
+        for (int i = start; i < end; i++) {
+            V item = v[i];
             append(item.toString());
             mark();
         }
         return this;
     }
 
-    public DelimitedBuilder appendAll(String delimiter, Object[] v) {
+    public <V> DelimitedBuilder appendAll(String delimiter, V[] v) {
         return appendAll(delimiter, v, 0, v.length);
     }
 
-    public DelimitedBuilder appendAll(String delimiter, Object[] v, int start, int end) {
+    public <V> DelimitedBuilder appendAll(String delimiter, V[] v, int start, int end) {
         int lastLength = out != null ? out.length() : 0;
         push(delimiter);
-        for (Object item : v) {
+        appendAll(v,start,end);
+        pop();
+        
+        if (lastLength != (out != null ? out.length() : 0)) mark();
+        else unmark();
+
+        return this;
+    }
+    public <V> DelimitedBuilder appendAll(List<? extends V> v) {
+        return appendAll(v, 0, v.size());
+    }
+
+    public <V> DelimitedBuilder appendAll(List<? extends V> v, int start, int end) {
+        for (int i = start; i < end; i++) {
+            V item = v.get(i);
             append(item.toString());
             mark();
         }
+        return this;
+    }
+
+    public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v) {
+        return appendAll(delimiter, v, 0, v.size());
+    }
+
+    public <V> DelimitedBuilder appendAll(String delimiter, List<? extends V> v, int start, int end) {
+        int lastLength = out != null ? out.length() : 0;
+        push(delimiter);
+        appendAll(v,start,end);
         pop();
         
         if (lastLength != (out != null ? out.length() : 0)) mark();

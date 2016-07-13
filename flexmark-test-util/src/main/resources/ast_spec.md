@@ -900,7 +900,7 @@ A tab will not work:
 .
 Document[0, 6]
   Paragraph[0, 6]
-    Text[0, 5] chars:[0, 5, "#	foo"]
+    Text[0, 5] chars:[0, 5, "#\tfoo"]
 ````````````````````````````````
 
 
@@ -10098,8 +10098,7 @@ bar>)</p>
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 7] chars:[0, 7, "[link]("]
-    HtmlInline[7, 16] chars:[7, 16, "<foo
-bar>"]
+    HtmlInline[7, 16] chars:[7, 16, "<foo\nbar>"]
     Text[16, 17] chars:[16, 17, ")"]
 ````````````````````````````````
 

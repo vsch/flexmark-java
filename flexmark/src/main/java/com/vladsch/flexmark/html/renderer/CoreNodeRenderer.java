@@ -95,7 +95,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             } else {
                 language = info.subSequence(0, space);
             }
-            html.attr("class", "language-" + language.unescape());
+            html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         }
 
         html.line();
@@ -107,12 +107,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.line();
     }
 
-    
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagVoidLine("hr");
     }
 
-    
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
         html.tag("pre");
@@ -123,14 +121,12 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.line();
     }
 
-    
     private void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tagIndent("ul", () -> {
             context.renderChildren(node);
         });
     }
 
-    
     private void render(OrderedList node, NodeRendererContext context, HtmlWriter html) {
         int start = node.getStartNumber();
         if (listOptions.orderedStart && start != 1) html.attr("start", String.valueOf(start));
@@ -139,12 +135,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         });
     }
 
-    
     private void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) {
         render((ListItem) node, context, html);
     }
 
-    
     private void render(OrderedListItem node, NodeRendererContext context, HtmlWriter html) {
         render((ListItem) node, context, html);
     }
@@ -161,7 +155,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         boolean inTightList = listOptions.isInTightListItem(node);
         if (!inTightList) {
@@ -173,38 +166,32 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(Emphasis node, NodeRendererContext context, HtmlWriter html) {
         html.tag("em");
         context.renderChildren(node);
         html.tag("/em");
     }
 
-    
     private void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) {
         html.tag("strong");
         context.renderChildren(node);
         html.tag("/strong");
     }
 
-    
     private void render(Text node, NodeRendererContext context, HtmlWriter html) {
         html.text(Escaping.normalizeEOL(node.getChars().unescape()));
     }
 
-    
     private void render(Code node, NodeRendererContext context, HtmlWriter html) {
         html.withAttr().tag("code");
         html.text(Escaping.collapseWhitespace(node.getText(), true));
         html.tag("/code");
     }
 
-    
     private void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
     }
 
-    
     private void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks);
     }
@@ -221,12 +208,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.line();
     }
 
-    
     private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
         renderInlineHtml(node, context, html, context.getHtmlOptions().suppressInlineHtml, context.getHtmlOptions().escapeInlineHtml);
     }
 
-    
     private void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) {
         renderInlineHtml(node, context, html, context.getHtmlOptions().suppressInlineHtmlComments, context.getHtmlOptions().escapeInlineHtmlComments);
     }
@@ -241,27 +226,22 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) {
         html.raw(context.getHtmlOptions().softBreak);
     }
 
-    
     private void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) {
         html.tagVoid("br").line();
     }
 
-    
     private void render(Reference node, NodeRendererContext context, HtmlWriter html) {
 
     }
 
-    
     private void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) {
         html.text(node.getChars().unescape());
     }
 
-    
     private void render(AutoLink node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getText().toString();
         if (context.isDoNotRenderLinks()) {
@@ -273,7 +253,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(MailLink node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getText().unescape();
         if (context.isDoNotRenderLinks()) {
@@ -288,7 +267,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
             String url = context.encodeUrl(node.getUrl().unescape());
@@ -306,7 +284,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(Link node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
@@ -321,7 +298,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
         if (!node.isDefined()) {
             // empty ref, we treat it as text
@@ -348,7 +324,6 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    
     private void render(LinkRef node, NodeRendererContext context, HtmlWriter html) {
         if (!node.isDefined()) {
             // empty ref, we treat it as text

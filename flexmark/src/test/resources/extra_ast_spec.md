@@ -26,7 +26,7 @@ Document[0, 20]
 
 
 Should fail
-    
+
 ```````````````````````````````` example(Extra tests: 2) options(FAIL)
 ```markdown
 abc
@@ -1828,6 +1828,23 @@ Document[0, 28]
       Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
         Text[8, 19] chars:[8, 19, "bold-"..."talic"]
       Text[20, 25] chars:[20, 25, " bold"]
+````````````````````````````````
+
+
+## Fenced Code Options
+
+Change language class prefix
+
+```````````````````````````````` example(Fenced Code Options: 1) options(no-class-prefix)
+```text
+plain text
+```
+.
+<pre><code class="text">plain text
+</code></pre>
+.
+Document[0, 23]
+  FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[3] close:[19, 22, "```"]
 ````````````````````````````````
 
 

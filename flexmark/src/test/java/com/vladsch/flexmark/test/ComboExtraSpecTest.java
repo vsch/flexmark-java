@@ -44,6 +44,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-html-comment-blocks", new MutableDataSet().set(HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS, true));
         optionsMap.put("suppress-inline-html", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML, true));
         optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENT, true));
+        optionsMap.put("no-class-prefix", new MutableDataSet().set(HtmlRenderer.LANGUAGE_CLASS_PREFIX, ""));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

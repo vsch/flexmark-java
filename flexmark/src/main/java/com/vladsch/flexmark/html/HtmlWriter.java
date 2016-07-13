@@ -26,6 +26,7 @@ public class HtmlWriter {
     private boolean delayedEOL = false;
     private boolean indentIndentingChildren = false;
     private boolean lineOnChildText = false;
+    private int preNesting = 0;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -239,6 +240,19 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter openPre() {
+        preNesting++;
+        return this;
+    }
+
+    public HtmlWriter closePre() {
+        if (preNesting <= 0) {
+            throw new IllegalStateException("Close <pre> context with none open");
+        }
+        preNesting--;
+        return this;
+    }
+
     protected void append(String s) {
         if (s.length() == 0) return;
         //appendCount++;
@@ -248,7 +262,7 @@ public class HtmlWriter {
             if (s.charAt(0) != '\n') append("\n");
         }
 
-        if (indentPrefix.length() > 0) {
+        if (indentPrefix.length() > 0 && preNesting <= 0) {
             // convert \n to \n + indent except for the last one
             // also if the last is \n then prefix indent size
 
@@ -294,4 +308,5 @@ public class HtmlWriter {
             }
         }
     }
+
 }

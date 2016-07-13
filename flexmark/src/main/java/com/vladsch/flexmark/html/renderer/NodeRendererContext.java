@@ -63,7 +63,7 @@ public interface NodeRendererContext {
      * Get the id attribute for the given node.
      *
      * @param node node for which to get an id, depends on the {@link HtmlIdGenerator} assigned for the context. Default generator
-     *             only creates ids for {@link com.vladsch.flexmark.node.Heading} nodes.
+     *             only creates ids for {@link com.vladsch.flexmark.node.Heading} nodes or custom nodes that implement {@link com.vladsch.flexmark.node.AnchorRefTarget} interface.
      * @return id string or null
      */
     String getNodeId(Node node);

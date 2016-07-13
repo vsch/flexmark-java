@@ -17,11 +17,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.internal.util.sequence.BasedSequence.SPLIT_INCLUDE_DELIM_PARTS;
+import static com.vladsch.flexmark.internal.util.sequence.BasedSequenceImpl.WHITESPACE_NBSP_CHARS;
 import static com.vladsch.flexmark.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.spec.SpecReader.OPTIONS_KEYWORD;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
-    private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:]*)(?:(:)(\\S+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^)]+)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));
+    private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));
     private static final int GROUP_COORD_OPEN = 1;
     private static final int GROUP_SECTION = 2;
     private static final int GROUP_NUMBER_SEPARATOR = 3;
@@ -82,22 +84,81 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
             block.setExampleKeyword(exampleKeyword);
 
             if (options.matches()) {
+                BasedSequence coordOpeningMarker = SubSequence.NULL;
+                BasedSequence section = SubSequence.NULL;
+                BasedSequence numberSeparator = SubSequence.NULL;
+                BasedSequence number = SubSequence.NULL;
+                BasedSequence coordClosingMarker = SubSequence.NULL;
+                BasedSequence optionsKeyword = SubSequence.NULL;
+                BasedSequence optionsOpeningMarker = SubSequence.NULL;
+                BasedSequence optionsText = SubSequence.NULL;
+                BasedSequence optionsClosingMarker = SubSequence.NULL;
                 // @formatter:off
-                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()) block.setCoordOpeningMarker(optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim());
-                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()) block.setSection(optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim());
-                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()) block.setNumberSeparator(optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim());
-                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()) block.setNumber(optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim());
-                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()) block.setCoordClosingMarker(optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim());
-                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()) block.setOptionsKeyword(optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim());
-                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()) block.setOptionsOpeningMarker(optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim());
-                if (options.group(GROUP_OPTIONS) != null && !options.group(GROUP_OPTIONS).trim().isEmpty()) block.setOptions(optionsChars.subSequence(options.start(GROUP_OPTIONS), options.end(GROUP_OPTIONS)).trim());
-                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()) block.setOptionsClosingMarker(optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim());
-                // @formatter:off
+                if (options.group(GROUP_COORD_OPEN) != null && !options.group(GROUP_COORD_OPEN).trim().isEmpty()){coordOpeningMarker = optionsChars.subSequence(options.start(GROUP_COORD_OPEN), options.end(GROUP_COORD_OPEN)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_SECTION) != null && !options.group(GROUP_SECTION).trim().isEmpty()){section = optionsChars.subSequence(options.start(GROUP_SECTION), options.end(GROUP_SECTION)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_NUMBER_SEPARATOR) != null && !options.group(GROUP_NUMBER_SEPARATOR).trim().isEmpty()){numberSeparator = optionsChars.subSequence(options.start(GROUP_NUMBER_SEPARATOR), options.end(GROUP_NUMBER_SEPARATOR)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_NUMBER) != null && !options.group(GROUP_NUMBER).trim().isEmpty()){number = optionsChars.subSequence(options.start(GROUP_NUMBER), options.end(GROUP_NUMBER)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_COORD_CLOSE) != null && !options.group(GROUP_COORD_CLOSE).trim().isEmpty()){coordClosingMarker = optionsChars.subSequence(options.start(GROUP_COORD_CLOSE), options.end(GROUP_COORD_CLOSE)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_OPTION_KEYWORD) != null && !options.group(GROUP_OPTION_KEYWORD).trim().isEmpty()){optionsKeyword = optionsChars.subSequence(options.start(GROUP_OPTION_KEYWORD), options.end(GROUP_OPTION_KEYWORD)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_OPTIONS_OPEN) != null && !options.group(GROUP_OPTIONS_OPEN).trim().isEmpty()){optionsOpeningMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_OPEN), options.end(GROUP_OPTIONS_OPEN)).trim(WHITESPACE_NBSP_CHARS);}
+                if (options.group(GROUP_OPTIONS) != null){optionsText = optionsChars.subSequence(options.start(GROUP_OPTIONS), options.end(GROUP_OPTIONS));}
+                if (options.group(GROUP_OPTIONS_CLOSE) != null && !options.group(GROUP_OPTIONS_CLOSE).trim().isEmpty()){optionsClosingMarker = optionsChars.subSequence(options.start(GROUP_OPTIONS_CLOSE), options.end(GROUP_OPTIONS_CLOSE)).trim(WHITESPACE_NBSP_CHARS);}
+                // @formatter:on
+                if (section.isNotNull() && optionsKeyword.isNull() && numberSeparator.isNull() && coordOpeningMarker.isNull() && section.matchChars("options")) {
+                    // move all from section to options
+                    int pos = section.indexOfAny(' ', '\t', '\u00A0');
+                    if (pos < 0) {
+                        optionsKeyword = section;
+                    } else {
+                        optionsKeyword = section.subSequence(0, pos);
+                        optionsText = section.subSequence(pos + 1);
+                    }
+                    optionsClosingMarker = coordClosingMarker;
+                    section = SubSequence.NULL;
+                    coordClosingMarker = SubSequence.NULL;
+                }
+
+                if (optionsText.isNull()) {
+                    if (optionsClosingMarker.isNotNull()) {
+                        optionsText = optionsClosingMarker.subSequence(0, 0);
+                    } else if (optionsOpeningMarker.isNotNull()) {
+                        optionsText = optionsOpeningMarker.subSequence(1, 1);
+                    } else if (optionsKeyword.isNotNull()) {
+                        optionsText = optionsKeyword.subSequence(optionsKeyword.length(), optionsKeyword.length());
+                    }
+                }
+
+                block.setCoordOpeningMarker(coordOpeningMarker);
+                block.setSection(section);
+                block.setNumberSeparator(numberSeparator);
+                block.setNumber(number);
+                block.setCoordClosingMarker(coordClosingMarker);
+                block.setOptionsKeyword(optionsKeyword);
+                block.setOptionsOpeningMarker(optionsOpeningMarker);
+                block.setOptions(optionsText);
+                block.setOptionsClosingMarker(optionsClosingMarker);
             }
 
             // if we create option nodes, we break up the options
-            if (block.getOptionsKeyword().isNotNull()) {
-
+            if (myOptions.optionNodes && block.getOptionsKeyword().isNotNull()) {
+                Node optionsList = new SpecExampleOptionsList(block.getOptions());
+                block.appendChild(optionsList);
+                BasedSequence trimmedOptionsList = block.getOptions().trim(WHITESPACE_NBSP_CHARS);
+                if (!trimmedOptionsList.isEmpty()) {
+                    List<BasedSequence> list = trimmedOptionsList.split(',', 0, SPLIT_INCLUDE_DELIM_PARTS);
+                    for (BasedSequence item : list) {
+                        BasedSequence option = item.trim(WHITESPACE_NBSP_CHARS);
+                        if (!option.isEmpty()) {
+                            if (option.matches(",")) {
+                                Node optionNode = new SpecExampleOptionSeparator(option);
+                                optionsList.appendChild(optionNode);
+                            } else {
+                                Node optionNode = new SpecExampleOption(option);
+                                optionsList.appendChild(optionNode);
+                            }
+                        }
+                    }
+                }
             }
 
             BasedSequence chars = content.getSpanningChars();
@@ -123,16 +184,20 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                             inSource = false;
                             if (sectionStart != -1) {
                                 block.setSource(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                            } else {
+                                block.setSource(line.subSequence(0, 0));
                             }
-                            block.setHtmlSeparator(line.subSequence(0, typeBreakLength));
+                            block.setHtmlSeparator(line);
                             inHtml = true;
                             sectionStart = -1;
                         } else if (inHtml) {
                             inHtml = false;
                             if (sectionStart != -1) {
                                 block.setHtml(line.baseSubSequence(sectionStart, line.getStartOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                            } else {
+                                block.setHtml(line.subSequence(0, 0));
                             }
-                            block.setAstSeparator(line.subSequence(0, typeBreakLength));
+                            block.setAstSeparator(line);
                             inAst = true;
                             sectionStart = -1;
                         } else {
@@ -153,14 +218,20 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                         if (inSource) {
                             if (sectionStart != -1) {
                                 block.setSource(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                            } else {
+                                block.setSource(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inHtml) {
                             if (sectionStart != -1) {
                                 block.setHtml(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                            } else {
+                                block.setHtml(line.subSequence(line.length(), line.length()));
                             }
                         } else if (inAst) {
                             if (sectionStart != -1) {
                                 block.setAst(line.baseSubSequence(sectionStart, line.getEndOffset() - prevLine.countTrailing(BasedSequenceImpl.EOL_CHARS)));
+                            } else {
+                                block.setAst(line.subSequence(line.length(), line.length()));
                             }
                         }
 
@@ -193,9 +264,13 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                     }
                 }
             } else {
+                Node node = new SpecExampleSource(block.getClosingMarker().subSequence(0, 0));
+                block.appendChild(node);
                 block.setContent(spanningChars, SubSequence.EMPTY_LIST);
             }
         } else {
+            Node node = new SpecExampleSource(block.getClosingMarker().subSequence(0, 0));
+            block.appendChild(node);
             block.setContent(content);
         }
 

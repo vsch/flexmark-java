@@ -43,11 +43,11 @@ flexmark-java
 - Add `Node.getLastBlankLineChild()` to remove `instanceOf` tests in `DocumentParser`, making it
   agnostic to specific node types. 
 
+- Add Sim TOC syntax as per Markdown Navigator simulated TOC element, with parse and rendering
+  options.
 
 0.4.0
 -----
-
-- Add Sim TOC syntax as per Markdown Navigator simulated TOC element.
 
 - Change Sim TOC to be a container and accept only a single HTML block without blank lines or a
   heading and a list without blank lines.

@@ -16,7 +16,7 @@ public interface PhasedNodeRenderer extends NodeRenderer {
      * Render the specified node.
      *  @param context
      * @param html
-     * @param document the node to render, will be an instance of one of {@link #getNodeTypes()}
+     * @param document the document node to render
      */
     void renderDocument(NodeRendererContext context, HtmlWriter html, Document document, RenderingPhase phase);
 }

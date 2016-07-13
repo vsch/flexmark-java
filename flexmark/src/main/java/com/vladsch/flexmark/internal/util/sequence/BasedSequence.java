@@ -69,8 +69,10 @@ public interface BasedSequence extends CharSequence {
     int indexOf(char c, int index);
     int indexOfAny(char c1, char c2);
     int indexOfAny(char c1, char c2, int index);
-    int lastIndexOf(char c, int index);
+    int indexOfAny(char c1, char c2, char c3);
+    int indexOfAny(char c1, char c2, char c3, int index);
     int indexOf(String s, int index);
+    int lastIndexOf(char c, int index);
     int lastIndexOf(String s, int index);
 
     String unescape();
@@ -115,6 +117,7 @@ public interface BasedSequence extends CharSequence {
     int SPLIT_INCLUDE_DELIMS = 1; 
     int SPLIT_TRIM_PARTS = 2; 
     int SPLIT_SKIP_EMPTY = 4; 
+    int SPLIT_INCLUDE_DELIM_PARTS = 8; 
     int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY; 
     List<BasedSequence> split(char delimiter);
     List<BasedSequence> split(char delimiter, int limit);

@@ -184,6 +184,68 @@ Parsing complete. </String>
                 <FormatRange Bold="Yes">0,25</FormatRange>
             </Formatting>
         </Note>
+        <Note ID="25" FontSize="12.0" Position="77.0,239.0" Width="146.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>HTML Rendering</String>
+            <ConnectedNoteIDs>26</ConnectedNoteIDs>
+        </Note>
+        <Note ID="26" FontSize="12.0" Position="252.0,239.0" Width="181.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>NodeRendererFactory</String>
+            <ConnectedNoteIDs>25</ConnectedNoteIDs>
+        </Note>
+        <Note ID="27" FontSize="12.0" Position="252.0,267.0" Width="181.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>NodeRenderer</String>
+        </Note>
+        <Note ID="29" FontSize="12.0" Position="46.0,239.0" Width="20.0">
+            <Appearance>
+                <Alignment>Center</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>6.</String>
+        </Note>
+        <Note ID="31" FontSize="12.0" Position="496.0,239.0" Width="217.0" Shadow="Yes">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="2">0.333263 0.550209 0.203198</Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>AST Node based HTML rendering
+AST complete. </String>
+            <Formatting>
+                <FormatRange Bold="Yes">0,29</FormatRange>
+            </Formatting>
+        </Note>
+        <Note ID="32" FontSize="12.0" Position="252.0,295.0" Width="181.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>PhasedNodeRenderer</String>
+        </Note>
+        <Note ID="33" FontSize="12.0" Position="252.0,323.0" Width="181.0">
+            <Appearance>
+                <Alignment>Left</Alignment>
+                <Border Weight="1"></Border>
+                <Fill>1.0 1.0 1.0</Fill>
+            </Appearance>
+            <String>AttributeProvider</String>
+        </Note>
     </Notes>
     <BackgroundShapes>
         <Shape ID="18" Sticky="Yes" Position="34.0,32.0" Width="682.0" Height="57.0" Shadow="Yes">
@@ -204,6 +266,12 @@ Parsing complete. </String>
                 <Fill>0.926085 0.722098 0.999512</Fill>
             </Appearance>
         </Shape>
+        <Shape ID="24" Sticky="Yes" Position="34.0,236.0" Width="682.0" Height="112.0" Shadow="Yes">
+            <Appearance>
+                <Border Weight="1"></Border>
+                <Fill>0.842632 0.921673 0.792615</Fill>
+            </Appearance>
+        </Shape>
     </BackgroundShapes>
     <Stacks>
         <Stack>0-3</Stack>
@@ -211,8 +279,9 @@ Parsing complete. </String>
         <Stack>8-9</Stack>
         <Stack>11, 17</Stack>
         <Stack>12-15</Stack>
+        <Stack>26-27, 32-33</Stack>
     </Stacks>
-    <AutoFit>9, 12-16</AutoFit>
+    <AutoFit>9, 12-16, 29</AutoFit>
     <NoteStyles>
         <Style Name="Blue Bubble" ID="4B1C6936-5C1E-4B2E-8A8D-8D0C63B3C5DC" AffectFontStyle="No" AffectAlignment="No" AffectTextColor="No" AffectNoteBody="Yes" AffectFade="No">
             <BorderThickness>1</BorderThickness>

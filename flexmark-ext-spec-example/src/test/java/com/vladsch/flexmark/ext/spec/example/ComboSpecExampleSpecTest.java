@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.spec.example;
 
+import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.MutableDataSet;
@@ -17,12 +18,16 @@ public class ComboSpecExampleSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, "````````````````")
             .set(SpecExampleExtension.SPEC_TYPE_BREAK, "…")
+            .set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.SIMPLE)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(SpecExampleExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("option1", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_HTML, true));
+        optionsMap.put("no-language-prefix", new MutableDataSet().set(HtmlRenderer.LANGUAGE_CLASS_PREFIX, ""));
+        optionsMap.put("no-option-nodes", new MutableDataSet().set(SpecExampleExtension.SPEC_OPTION_NODES, false));
+        optionsMap.put("as-def-list", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.DEFINITION_LIST));
+        optionsMap.put("as-fenced-code", new MutableDataSet().set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.FENCED_CODE));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
