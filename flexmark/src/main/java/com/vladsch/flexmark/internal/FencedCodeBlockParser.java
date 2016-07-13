@@ -74,6 +74,11 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
+    public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
+        return false;
+    }
+
+    @Override
     public void closeBlock(ParserState parserState) {
         // first line, if not blank, has the info string
         List<BasedSequence> lines = content.getLines();

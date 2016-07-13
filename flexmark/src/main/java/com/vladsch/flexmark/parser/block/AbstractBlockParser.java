@@ -25,6 +25,16 @@ public abstract class AbstractBlockParser implements BlockParser {
         return false;
     }
 
+    /**
+     * should be overridden in BlockQuote, FencedCode and ListItem
+     * @return true if the blank line should be propagated to parent
+     * @param lastMatchedBlockParser
+     */
+    @Override
+    public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
+        return true;
+    }
+
     @Override
     public BlockContent getBlockContent() {
         return null;

@@ -33,6 +33,11 @@ public abstract class ListBlock extends Block {
     }
 
     @Override
+    public Node getLastBlankLineChild() {
+        return getLastChild();
+    }
+
+    @Override
     public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
         out.append(" isTight=").append(tight);

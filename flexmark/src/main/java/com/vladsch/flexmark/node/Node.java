@@ -47,6 +47,15 @@ public abstract class Node {
         return Node.getNodeOfTypeIndex(this, classes);
     }
 
+    /**
+     *  Overridden by ListBlock and any others whose children propagate their blank line to parent
+     *  
+     * @return return a child block that can contain the parent's last blank line 
+     */
+    public Node getLastBlankLineChild() {
+        return null;
+    }
+
     public ReversiblePeekingIterable<Node> getChildren() {
         if (firstChild == null) {
             return NodeIterable.EMPTY;
@@ -383,7 +392,7 @@ public abstract class Node {
         segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
         segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
-
+    
     public void takeChildren(Node node) {
         if (node.firstChild != null) {
             Node firstChild = node.firstChild;

@@ -57,12 +57,31 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
             return null;
+            //return new HashSet<>(Arrays.asList(
+            //        BlockQuoteParser.Factory.class,
+            //        HeadingParser.Factory.class,
+            //        FencedCodeBlockParser.Factory.class,
+            //        HtmlBlockParser.Factory.class,
+            //        ThematicBreakParser.Factory.class,
+            //        ListBlockParser.Factory.class,
+            //        IndentedCodeBlockParser.Factory.class
+            //));
         }
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
             return null;
+            //return new HashSet<>(Arrays.asList(
+            //        BlockQuoteParser.Factory.class,
+            //        HeadingParser.Factory.class,
+            //        FencedCodeBlockParser.Factory.class,
+            //        HtmlBlockParser.Factory.class,
+            //        ThematicBreakParser.Factory.class,
+            //        ListBlockParser.Factory.class,
+            //        IndentedCodeBlockParser.Factory.class
+            //));
         }
+
 
         @Override
         public boolean affectsGlobalScope() {

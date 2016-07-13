@@ -44,13 +44,26 @@ public class DelimitedBuilder {
         return out == null ? "" : out.toString();
     }
 
+    public String getAndClear() {
+        if (delimiterStack != null && !delimiterStack.isEmpty()) throw new IllegalStateException("Delimiter stack is not empty");
+        String result = out == null ? "" : out.toString();
+        clear();
+        return result;
+    }
+
+    public DelimitedBuilder clear() {
+        out = null;
+        unmark();
+        return this;
+    }
+
     public String toStringOrNull() {
         if (delimiterStack != null && !delimiterStack.isEmpty()) throw new IllegalStateException("Delimiter stack is not empty");
         return out == null ? null : out.toString();
     }
 
     public DelimitedBuilder mark() {
-        int length = out.length();
+        int length = out != null ? out.length() : 0;
         pending = lastLen != length;
         lastLen = length;
         return this;
@@ -58,7 +71,7 @@ public class DelimitedBuilder {
 
     public DelimitedBuilder unmark() {
         pending = false;
-        lastLen = out.length();
+        lastLen = out != null ? out.length() : 0;
         return this;
     }
 
@@ -177,5 +190,36 @@ public class DelimitedBuilder {
             out.append(v, start, end);
         }
         return had();
+    }
+
+    public DelimitedBuilder appendAll(Object[] v) {
+        return appendAll(v, 0, v.length);
+    }
+
+    public DelimitedBuilder appendAll(Object[] v, int start, int end) {
+        for (Object item : v) {
+            append(item.toString());
+            mark();
+        }
+        return this;
+    }
+
+    public DelimitedBuilder appendAll(String delimiter, Object[] v) {
+        return appendAll(delimiter, v, 0, v.length);
+    }
+
+    public DelimitedBuilder appendAll(String delimiter, Object[] v, int start, int end) {
+        int lastLength = out != null ? out.length() : 0;
+        push(delimiter);
+        for (Object item : v) {
+            append(item.toString());
+            mark();
+        }
+        pop();
+        
+        if (lastLength != (out != null ? out.length() : 0)) mark();
+        else unmark();
+
+        return this;
     }
 }

@@ -25,6 +25,11 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     @Override
+    public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
+        return false;
+    }
+
+    @Override
     public boolean canContain(Block block) {
         return true;
     }

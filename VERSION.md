@@ -37,6 +37,13 @@ flexmark-java
   core factories. Core factories now define dependencies between each other to ensure correct
   processing. 
 
+- Add `BlockParser.isPropagatingLastBlankLine(BlockParser)` to remove `instanceOf` tests in
+  `DocumentParser`, making it agnostic to specific block parsers.
+
+- Add `Node.getLastBlankLineChild()` to remove `instanceOf` tests in `DocumentParser`, making it
+  agnostic to specific node types. 
+
+
 0.4.0
 -----
 

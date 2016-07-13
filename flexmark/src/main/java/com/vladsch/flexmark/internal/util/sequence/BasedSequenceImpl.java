@@ -191,6 +191,16 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public boolean matches(String chars) {
+        return chars.length() == length() && matchChars(chars);
+    }
+    
+    @Override
+    public boolean matchChars(String chars) {
+        return matchChars(chars, 0);
+    }
+    
+    @Override
     public boolean matchChars(String chars, int startIndex) {
         int iMax = chars.length();
         if (iMax > length() - startIndex) return false;

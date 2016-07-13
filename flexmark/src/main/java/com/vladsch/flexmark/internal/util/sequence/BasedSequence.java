@@ -81,6 +81,8 @@ public interface BasedSequence extends CharSequence {
     String normalizeEndWithEOL();
     BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper);
 
+    boolean matches(String chars);
+    boolean matchChars(String chars);
     boolean matchChars(String chars, int startIndex);
     boolean matchCharsReversed(String chars, int endIndex);
 

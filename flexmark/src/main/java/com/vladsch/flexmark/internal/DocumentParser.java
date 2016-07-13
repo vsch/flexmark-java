@@ -11,7 +11,10 @@ import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.sequence.*;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.node.Block;
+import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserFactory;
@@ -545,7 +548,7 @@ public class DocumentParser implements ParserState {
 
         // Unless last matched container is a code block, try new container starts,
         // adding children to the last matched container:
-        boolean tryBlockStarts = blockParser.getBlock() instanceof Paragraph || blockParser.isContainer();
+        boolean tryBlockStarts = blockParser.isParagraphParser() || blockParser.isContainer();
         while (tryBlockStarts) {
             findNextNonSpace();
 
@@ -586,7 +589,7 @@ public class DocumentParser implements ParserState {
         // appropriate block.
 
         // First check for a lazy paragraph continuation:
-        if (!allClosed && !isBlank() && getActiveBlockParser() instanceof ParagraphParser) {
+        if (!allClosed && !isBlank() && getActiveBlockParser().isParagraphParser()) {
             // lazy paragraph continuation
             addLine();
         } else {
@@ -739,11 +742,7 @@ public class DocumentParser implements ParserState {
             if (isLastLineBlank(block)) {
                 return true;
             }
-            if (block instanceof ListBlock || block instanceof ListItem) {
-                block = block.getLastChild();
-            } else {
-                break;
-            }
+            block = block.getLastBlankLineChild();
         }
         return false;
     }
@@ -805,18 +804,12 @@ public class DocumentParser implements ParserState {
             setLastLineBlank(blockParser.getBlock().getLastChild(), true);
         }
 
-        Block block = blockParser.getBlock();
-
         // Block quote lines are never blank as they start with >
         // and we don't count blanks in fenced code for purposes of tight/loose
         // lists or breaking out of lists. We also don't set lastLineBlank
         // on an empty list item.
-        boolean lastLineBlank = isBlank() &&
-                !(block instanceof BlockQuote ||
-                        block instanceof FencedCodeBlock ||
-                        (block instanceof ListItem &&
-                                block.getFirstChild() == null &&
-                                blockParser != lastMatchedBlockParser));
+        // now implemented by the block parsers to make it available to extensions
+        boolean lastLineBlank = isBlank() && blockParser.isPropagatingLastBlankLine(lastMatchedBlockParser);
 
         // Propagate lastLineBlank up through parents
         Node node = blockParser.getBlock();

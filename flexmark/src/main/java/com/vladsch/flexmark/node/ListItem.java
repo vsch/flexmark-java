@@ -44,6 +44,11 @@ public abstract class ListItem extends Block {
         return isTight();
     }
 
+    @Override
+    public Node getLastBlankLineChild() {
+        return getLastChild();
+    }
+
     public ListItem() {
     }
 

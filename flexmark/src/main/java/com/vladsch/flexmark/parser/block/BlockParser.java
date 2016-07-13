@@ -29,6 +29,12 @@ public interface BlockParser {
     void closeBlock(ParserState parserState);
 
     /**
+     *  
+     * @return true if the last blank line status should be propagated to parent blocks
+     */
+    boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser);
+
+    /**
      * @return  true if Double blank line should finalize this block parser and its children and reset to parent 
      */
     boolean breakOutOnDoubleBlankLine();

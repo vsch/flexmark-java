@@ -7,6 +7,7 @@ import com.vladsch.flexmark.node.ListItem;
 import com.vladsch.flexmark.node.OrderedListItem;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
 
 public class ListItemParser extends AbstractBlockParser {
@@ -37,6 +38,11 @@ public class ListItemParser extends AbstractBlockParser {
     @Override
     public boolean canContain(Block block) {
         return true;
+    }
+
+    @Override
+    public boolean isPropagatingLastBlankLine(BlockParser lastMatchedBlockParser) {
+        return !(block.getFirstChild() == null && this != lastMatchedBlockParser);
     }
 
     @Override
