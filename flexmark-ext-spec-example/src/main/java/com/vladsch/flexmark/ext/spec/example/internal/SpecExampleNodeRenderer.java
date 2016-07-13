@@ -41,7 +41,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     private void render(SpecExampleOption node, NodeRendererContext context, HtmlWriter html) { }
 
     private void render(SpecExampleSeparator node, NodeRendererContext context, HtmlWriter html) {
-        html.tagVoid("hr");
+        html.tagVoidLine("hr");
     }
 
     private void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
@@ -53,8 +53,8 @@ public class SpecExampleNodeRenderer implements NodeRenderer
         String text = node.getChars().normalizeEOL();
         render(text, "language-html", context, html);
         if (options.renderHtml) {
-            html.tagVoid("hr");
-            html.raw(text);
+            html.tagVoidLine("hr");
+            html.raw(text).line();
         }
     }
 

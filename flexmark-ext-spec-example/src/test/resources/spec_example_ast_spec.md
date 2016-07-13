@@ -20,7 +20,7 @@ Plain and simple
 .
 .
 Document[0, 42]
-  SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsOpeningMarker:[25, 25] closingMarker:[25, 41]
+  SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] closingMarker:[25, 41]
 ````````````````````````````````
 
 
@@ -32,7 +32,7 @@ Plain and simple with nbsp for space on first line
 .
 .
 Document[0, 42]
-  SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsOpeningMarker:[25, 25] closingMarker:[25, 41]
+  SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] closingMarker:[25, 41]
 ````````````````````````````````
 
 
@@ -43,9 +43,11 @@ Plain and simple
 …
 ````````````````
 .
+<hr />
 .
 Document[0, 44]
-  SpecExampleBlock[0, 43] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsOpeningMarker:[25, 25] closingMarker:[27, 43]
+  SpecExampleBlock[0, 43] openingMarker:[0, 16] exampleKeyword:[17, 24] htmlSeparator:[25, 26] closingMarker:[27, 43]
+    SpecExampleSeparator[25, 26] chars:[25, 26, "…"]
 ````````````````````````````````
 
 
@@ -57,9 +59,13 @@ Plain and simple
 …
 ````````````````
 .
+<hr />
+<hr />
 .
 Document[0, 46]
-  SpecExampleBlock[0, 45] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsOpeningMarker:[25, 25] closingMarker:[29, 45]
+  SpecExampleBlock[0, 45] openingMarker:[0, 16] exampleKeyword:[17, 24] htmlSeparator:[25, 26] astSeparator:[27, 28] closingMarker:[29, 45]
+    SpecExampleSeparator[25, 26] chars:[25, 26, "…"]
+    SpecExampleSeparator[27, 28] chars:[27, 28, "…"]
 ````````````````````````````````
 
 
@@ -70,9 +76,15 @@ Document[0, 46]
 …
 ````````````````
 .
+<hr />
+<hr />
+<pre><code class="language-text">…</code></pre>
 .
 Document[0, 48]
-  SpecExampleBlock[0, 47] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsOpeningMarker:[25, 25] closingMarker:[31, 47]
+  SpecExampleBlock[0, 47] openingMarker:[0, 16] exampleKeyword:[17, 24] htmlSeparator:[25, 26] astSeparator:[27, 28] ast:[29, 30] closingMarker:[31, 47]
+    SpecExampleSeparator[25, 26] chars:[25, 26, "…"]
+    SpecExampleSeparator[27, 28] chars:[27, 28, "…"]
+    SpecExampleAst[29, 30] chars:[29, 30, "…"]
 ````````````````````````````````
 
 
