@@ -40,13 +40,13 @@ flexmark-java
     - `ResolvedLink` represents the link being resolved. `ResolvedLink.getUrl()` will initially
       return the raw link value from the markdown element. `LinkResolvers` can modify this value
       according to their understanding of the link type and link format. They may or may not
-      change the link type and status. 
+      change the link type and status.
 
     - `LinkType` specifies type of link. Core defines `LinkType.LINK` and `LinkType.IMAGE`,
       extensions can define other types that use different link resolving logic. Wiki link
       extension defines `WikiLinkExtension.WIKI_LINK` type and provides a custom link resolver
       that will convert the wiki link text to a URL and the type to `LinkType.LINK`. It also
-      changes the status to `LinkStatus.UNCHECKED` 
+      changes the status to `LinkStatus.UNCHECKED`
 
     - `LinkStatus` holds the result of the resolving process. Initial link status is
       `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.   
@@ -78,7 +78,8 @@ flexmark-java
     - `AttributablePart.LINK` a node is rendering a link, the `Attributes` parameter will hold
       an attribute named `Attribute.LINK_STATUS` whose value represents the name of the
       `LinkStatus` of the resolved link. Attribute providers can use this value to set specific
-      attributes based on the resolved link status. This attribute does not render in the final HTML.
+      attributes based on the resolved link status. This attribute does not render in the final
+      HTML.
     - Extensions can and should define parts for specific elements they allow to modify with
       extensions.
 
@@ -89,7 +90,6 @@ flexmark-java
 - Change `LinkResolver.resolveLink(NodeRendererContext, ResolvedLink)` the context allows the
   resolver to get the node for which this link is being resolved via
   `NodeRendererContext.getCurrentNode()`.
-
 
 0.4.2
 -----

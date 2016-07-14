@@ -28,7 +28,7 @@ these options for configuration, including disabling some core block parsers.
 
 This is a work in progress with many API changes. No attempt is made to keep backward API
 compatibility to the original project and until the feature set is mostly complete, not even to
-earlier versions of this project. 
+earlier versions of this project.
 
 ### Requirements
 
@@ -57,7 +57,7 @@ earlier versions of this project.
 | Core parser implemented via the extension API                                    | :heavy_check_mark:                                               | :x: `instanceOf` tests for specific block parser and node classes | :x: core exposes few extension points                                |
 | Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: one massive PEG parser with complex interactions [(2)](#2)       |
 | Parsing of block elements is independent from each other                         | :heavy_check_mark: [(1)](#1)                                     | :heavy_check_mark: [(1)](#1)                                      | :x: everything in one PEG grammar                                    |
-| Uniform configuration across: parser, renderer and all extensions                | :heavy_check_mark:                                               | :x: none beyond extension list                                    | :x: bit mask for core, none for extensions                           |
+| Uniform configuration across: parser, renderer and all extensions                | :heavy_check_mark:                                               | :x: none beyond extension list                                    | :x: `int` bit flags for core, none for extensions                    |
 | Parsing performance optimized for use with extensions                            | :heavy_check_mark:                                               | :x: parsing performance for core, extensions do what they can     | :x: performance is not a feature                                     |
 | Feature rich with many configuration options and extensions out of the box       | :heavy_check_mark:                                               | :x: limited extensions, no options                                | :heavy_check_mark:                                                   |
 | Dependency definitions for processors to guarantee the right order of processing | :heavy_check_mark:                                               | :x: order specified by extension list ordering, error prone       | :x: not applicable, core defines where extension processing is added |
@@ -114,15 +114,11 @@ Progress
   These are also available during parsing and rendering phases for use by extensions.
 
 - Test architecture based on original `spec.txt` augmented with:
-
     - expected AST so it is validated by tests
-
     - options can be specified for individual tests so that one file can validate all options
-      available for the extension/core feature.  
-
+      available for the extension/core feature.
     - full spec file generated with expected HTML and AST replaced with generated counterparts
       to make updating expected test results easier for new or modified tests.
-
     - section and example number added to each example opening line for cross referencing test
       results to test source.
 
@@ -303,7 +299,7 @@ Contributing
 Pull requests, issues and comments welcome :smile:. For pull requests:
 
 * Add tests for new features and bug fixes, preferably in the ast_spec.txt format
-* Follow the existing style to make merging easier, as much as possible: 4 space indent.  
+* Follow the existing style to make merging easier, as much as possible: 4 space indent.
 
 * * * 
 
@@ -316,50 +312,51 @@ Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see LICENSE.txt file.
 
+[Markdown Navigator]: http://vladsch.com/product/markdown-navigator
+[Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
+[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
+[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
+[commonmark-java]: https://github.com/atlassian/commonmark-java
+[flexmark-java wiki]: ../../wiki
+[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
+[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
+[intellij-markdown]: https://github.com/valich/intellij-markdown 
+[pegdown]: http://pegdown.org
+[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
+[wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
 [.gitignore]: http://hsz.mobi
 [Android Studio]: http://developer.android.com/sdk/installing/studio.html
 [AppCode]: http://www.jetbrains.com/objc
-[autolink-java]: https://github.com/robinst/autolink-java
 [CLion]: https://www.jetbrains.com/clion
-[commonmark-java]: https://github.com/atlassian/commonmark-java
-[commonmark.js]: https://github.com/jgm/commonmark.js
 [CommonMark]: http://commonmark.org/
-[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [Craig's List]: http://montreal.en.craigslist.ca/
 [DataGrip]: https://www.jetbrains.com/datagrip
-[flexmark-java]: https://github.com/vsch/flexmark-java
-[gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
+[GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [GitHub Issues page]: ../../issues
-[GitHub]: https://github.com/vsch/laravel-translation-manager
-[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
-[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[idea-markdown]: https://github.com/nicoulaj/idea-markdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
-[intellij-markdown]: https://github.com/valich/intellij-markdown 
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
 [Kotlin]: http://kotlinlang.org
 [Kramdown]: http://kramdown.gettalong.org/
-[Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
 [MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
-[nicoulaj/idea-markdown plugin]: https://github.com/nicoulaj/idea-markdown
-[nicoulaj]: https://github.com/nicoulaj
-[pegdown]: http://pegdown.org
 [PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
 [PhpStorm]: http://www.jetbrains.com/phpstorm
 [Pipe Table Formatter]: https://github.com/anton-dev-ua/PipeTableFormatter
 [PyCharm]: http://www.jetbrains.com/pycharm
 [RubyMine]: http://www.jetbrains.com/ruby
 [Semantic Versioning]: http://semver.org/
-[sirthias]: https://github.com/sirthias
-[spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
-[table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
-[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
-[vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
-[wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
-[Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
-[flexmark-java wiki]: ../../wiki
+[autolink-java]: https://github.com/robinst/autolink-java
+[commonmark.js]: https://github.com/jgm/commonmark.js
+[flexmark-java]: https://github.com/vsch/flexmark-java
+[gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
+[idea-markdown]: https://github.com/nicoulaj/idea-markdown
+[nicoulaj]: https://github.com/nicoulaj
+[nicoulaj/idea-markdown plugin]: https://github.com/nicoulaj/idea-markdown
+[sirthias]: https://github.com/sirthias
+[table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
+[vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
+
