@@ -22,11 +22,11 @@ public interface NodeRendererContext {
     /**
      * Extend the attributes by extensions for the node being currently rendered.
      *
-     * @param tag        the tag of the node being rendered, some nodes render multiple tags with attributes
-     * @param attributes the attributes that were calculated by the renderer
+     * @param part        the tag of the node being rendered, some nodes render multiple tags with attributes
+     * @param attributes the attributes that were calculated by the renderer, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/blockRemoved entries
      */
-    Attributes extendRenderingNodeAttributes(String tag, Attributes attributes);
+    Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);
 
     /**
      * @return the HTML writer to use
@@ -138,13 +138,21 @@ public interface NodeRendererContext {
     Document getDocument();
 
     /**
-     * Resolve link for rendering
-     * @param linkType type of link being rendered: Link, Image or Wiki
-     * @param url   link url text
-     * @param text  link text or image alt
-     * @param attributes attributes for the link 
-     * @param node  source node of the link, may be used by link renderer as a hint
-     * @return link rendering representing this link, including attributes
+     * @return the current node being rendered
      */
-    LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node);
+    Node getCurrentNode();
+
+    /**
+     * Resolve link for rendering. Link Resolvers are going to be called until one returns ResolvedLink with getStatus() != LinkStatus.Unknown
+     * <p>
+     * A resolver can replace the url but not change the status letting downstream resolvers handle the rest.
+     * This is useful when a resolver does partial processing like macro expansion but does not know how to handle the rest.
+     * 
+     * Core processing will simply pass the link as is. It is up to extension LinkResolvers and AttributeProviders to make sense of the link and applicable attributes based on status.
+     *
+     * @param linkType type of link being rendered. Core defined links are Link, Image. Extensions can define their own
+     * @param url      link url text
+     * @return resolved link url for this link and its resolved status
+     */
+    ResolvedLink resolveLink(LinkType linkType, String url);
 }

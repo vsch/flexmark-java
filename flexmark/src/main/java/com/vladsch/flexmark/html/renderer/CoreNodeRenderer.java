@@ -5,7 +5,6 @@ import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
-import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
@@ -248,10 +247,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            LinkRendering rendering = context.getLinkRendering(LinkType.Link, text, text, Attributes.EMPTY, node);
-            html.attr("href", rendering.getUrl())
-                    .withAttr(rendering.getAttributes())
-                    .tag("a", () -> html.text(rendering.getText()));
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text);
+            html.attr("href", resolvedLink.getUrl())
+                    .withAttr(resolvedLink)
+                    .tag("a", () -> html.text(text));
         }
     }
 
@@ -260,11 +259,11 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            LinkRendering rendering = context.getLinkRendering(LinkType.MailTo, text, text, Attributes.EMPTY, node);
-            html.attr("href", "mailto:" + rendering.getUrl())
-                    .withAttr(rendering.getAttributes())
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text);
+            html.attr("href", "mailto:" + resolvedLink.getUrl())
+                    .withAttr(resolvedLink)
                     .tag("a")
-                    .text(rendering.getText())
+                    .text(text)
                     .tag("/a");
         }
     }
@@ -275,15 +274,14 @@ public class CoreNodeRenderer implements NodeRenderer {
             node.accept(altTextVisitor);
             String altText = altTextVisitor.getText();
             
-            Attributes attributes = new Attributes();
-            if (node.getTitle().isNotNull()) {
-                attributes.replaceValue("title", node.getTitle().unescape());
-            }
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape());
             
-            LinkRendering rendering = context.getLinkRendering(LinkType.Image, node.getUrl().unescape(), altText, attributes, node);
-            html.attr("src", rendering.getUrl());
-            html.attr("alt", rendering.getText());
-            html.withAttr(rendering.getAttributes()).tagVoid("img");
+            html.attr("src", resolvedLink.getUrl());
+            html.attr("alt", altText);
+            if (node.getTitle().isNotNull()) {
+                html.attr("title", node.getTitle().unescape());
+            }
+            html.withAttr(resolvedLink).tagVoid("img");
         }
     }
 
@@ -291,14 +289,13 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
-            Attributes attributes = new Attributes();
-            if (node.getTitle().isNotNull()) {
-                attributes.replaceValue("title", node.getTitle().unescape());
-            }
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape());
             
-            LinkRendering rendering = context.getLinkRendering(LinkType.Link, node.getUrl().unescape(), "", attributes, node);
-            html.attr("href", rendering.getUrl());
-            html.withAttr(rendering.getAttributes()).tag("a");
+            html.attr("href", resolvedLink.getUrl());
+            if (node.getTitle().isNotNull()) {
+                html.attr("title", node.getTitle().unescape());
+            }
+            html.withAttr(resolvedLink).tag("a");
             context.renderChildren(node);
             html.tag("/a");
         }
@@ -317,15 +314,14 @@ public class CoreNodeRenderer implements NodeRenderer {
                 node.accept(altTextVisitor);
                 String altText = altTextVisitor.getText();
 
-                Attributes attributes = new Attributes();
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape());
+                
+                html.attr("src", resolvedLink.getUrl());
+                html.attr("alt", altText);
                 if (reference.getTitle().isNotNull()) {
-                    attributes.replaceValue("title", reference.getTitle().unescape());
+                    html.attr("title", reference.getTitle().unescape());
                 }
-
-                LinkRendering rendering = context.getLinkRendering(LinkType.Image, reference.getUrl().unescape(), altText, attributes, node);
-                html.attr("src", rendering.getUrl());
-                html.attr("alt", rendering.getText());
-                html.withAttr(rendering.getAttributes()).tagVoid("img");
+                html.withAttr(resolvedLink).tagVoid("img");
             }
         }
     }
@@ -350,14 +346,13 @@ public class CoreNodeRenderer implements NodeRenderer {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
                 
-                Attributes attributes = new Attributes();
-                if (reference.getTitle().isNotNull()) {
-                    attributes.replaceValue("title", reference.getTitle().unescape());
-                }
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape());
 
-                LinkRendering rendering = context.getLinkRendering(LinkType.Link, reference.getUrl().unescape(), "", attributes, node);
-                html.attr("href", rendering.getUrl());
-                html.withAttr(rendering.getAttributes()).tag("a");
+                html.attr("href", resolvedLink.getUrl());
+                if (reference.getTitle().isNotNull()) {
+                    html.attr("title", reference.getTitle().unescape());
+                }
+                html.withAttr(resolvedLink).tag("a");
                 context.renderChildren(node);
                 html.tag("/a");
             }

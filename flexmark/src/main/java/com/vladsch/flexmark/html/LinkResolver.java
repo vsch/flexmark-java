@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.html.renderer.LinkRendering;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 
 public interface LinkResolver {
-    LinkRendering renderLink(LinkRendering linkRendering, NodeRendererContext context);
+    ResolvedLink resolveLink(NodeRendererContext context, ResolvedLink link);
 }

@@ -244,4 +244,43 @@ Document[0, 57]
       Text[52, 55] chars:[52, 55, "ref"]
 ````````````````````````````````
 
+Custom extension
+
+```````````````````````````````` example(WikiLinks: 15) options(custom-ext)
+[[wiki link]] [^link][ref] [[^wiki link]]
+.
+<p><a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a></p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] textSep:[0, 0] text:[0, 0] linkClose:[11, 13, "]]"]
+      Text[1, 12] chars:[1, 12, "[wiki"..."link]"]
+    Text[13, 14] chars:[13, 14, " "]
+    LinkRef[14, 26] textOpen:[14, 15, "["] text:[15, 20, "^link"] textClose:[20, 21, "]"] referenceOpen:[21, 22, "["] reference:[22, 25, "ref"] referenceClose:[25, 26, "]"]
+      Text[15, 20] chars:[15, 20, "^link"]
+    Text[26, 27] chars:[26, 27, " "]
+    WikiLink[27, 41] linkOpen:[27, 29, "[["] link:[29, 39, "^wiki link"] textSep:[0, 0] text:[0, 0] linkClose:[39, 41, "]]"]
+      Text[28, 40] chars:[28, 40, "[^wik"..."link]"]
+````````````````````````````````
+
+
+Custom prefix
+
+```````````````````````````````` example(WikiLinks: 16) options(custom-prefix)
+[[wiki link]] [^link][ref] [[^wiki link]]
+.
+<p><a href="/prefix/wiki-link.md">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link.md">^wiki link</a></p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] textSep:[0, 0] text:[0, 0] linkClose:[11, 13, "]]"]
+      Text[1, 12] chars:[1, 12, "[wiki"..."link]"]
+    Text[13, 14] chars:[13, 14, " "]
+    LinkRef[14, 26] textOpen:[14, 15, "["] text:[15, 20, "^link"] textClose:[20, 21, "]"] referenceOpen:[21, 22, "["] reference:[22, 25, "ref"] referenceClose:[25, 26, "]"]
+      Text[15, 20] chars:[15, 20, "^link"]
+    Text[26, 27] chars:[26, 27, " "]
+    WikiLink[27, 41] linkOpen:[27, 29, "[["] link:[29, 39, "^wiki link"] textSep:[0, 0] text:[0, 0] linkClose:[39, 41, "]]"]
+      Text[28, 40] chars:[28, 40, "[^wik"..."link]"]
+````````````````````````````````
+
 

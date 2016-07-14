@@ -88,12 +88,7 @@ public class HtmlRendererTest {
     public void attributeProviderForCodeBlock() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public LinkRendering setAttributes(LinkRendering linkRendering) {
-                return linkRendering;
-            }
-
-            @Override
-            public void setAttributes(Node node, String tag, Attributes attributes) {
+            public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
                 if (node instanceof FencedCodeBlock) {
                     FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
                     // Remove the default attribute for info
@@ -116,12 +111,7 @@ public class HtmlRendererTest {
     public void attributeProviderForImage() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public LinkRendering setAttributes(LinkRendering linkRendering) {
-                return linkRendering;
-            }
-
-            @Override
-            public void setAttributes(Node node, String tag, Attributes attributes) {
+            public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
                 if (node instanceof Image) {
                     attributes.remove("alt");
                     attributes.replaceValue("test", "hey");

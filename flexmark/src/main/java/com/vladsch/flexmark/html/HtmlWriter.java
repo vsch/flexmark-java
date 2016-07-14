@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.html;
 
+import com.vladsch.flexmark.html.renderer.AttributablePart;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.options.Attribute;
 import com.vladsch.flexmark.internal.util.options.Attributes;
@@ -8,8 +11,6 @@ import com.vladsch.flexmark.internal.util.options.Attributes;
 import java.io.IOException;
 
 public class HtmlWriter {
-    private static final Attributes NO_ATTRIBUTES = new Attributes();
-
     private final Appendable buffer;
     private final int indentSize;
     private final String indentSizePrefix;
@@ -19,13 +20,13 @@ public class HtmlWriter {
     private int indent;
     private String indentPrefix = "";
     private Attributes currentAttributes;
-    private boolean useAttributes = false;
     //private int appendCount = 0;
     private boolean delayedIndent = false;
     private boolean delayedEOL = false;
     private boolean indentIndentingChildren = false;
     private boolean lineOnChildText = false;
     private int preNesting = 0;
+    private AttributablePart useAttributes = null;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -111,18 +112,21 @@ public class HtmlWriter {
     }
 
     public HtmlWriter withAttr() {
-        useAttributes = true;
+        return withAttr(AttributablePart.NODE);
+    }
+
+    public HtmlWriter withAttr(AttributablePart part) {
+        useAttributes = part;
         return this;
     }
 
-    public HtmlWriter withAttr(Attribute attribute) {
-        attr(attribute);
-        return withAttr();
+    public HtmlWriter withAttr(LinkStatus status) {
+        attr(Attribute.LINK_STATUS, status.getName());
+        return withAttr(AttributablePart.LINK);
     }
 
-    public HtmlWriter withAttr(Attributes attributes) {
-        attr(attributes);
-        return withAttr();
+    public HtmlWriter withAttr(ResolvedLink resolvedLink) {
+        return withAttr(resolvedLink.getStatus());
     }
 
     public HtmlWriter withCondIndent() {
@@ -138,15 +142,10 @@ public class HtmlWriter {
     public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
         Attributes attributes = null;
 
-        if (useAttributes) {
-            if (currentAttributes != null) {
-                attributes = context.extendRenderingNodeAttributes(name, currentAttributes);
-            } else {
-                attributes = context.extendRenderingNodeAttributes(name, new Attributes());
-            }
-
+        if (useAttributes != null) {
+            attributes = context.extendRenderingNodeAttributes(useAttributes, currentAttributes);
             currentAttributes = null;
-            useAttributes = false;
+            useAttributes = null;
         }
 
         if (voidElement && voidWithLine) line();
@@ -156,7 +155,7 @@ public class HtmlWriter {
 
         if (attributes != null && !attributes.isEmpty()) {
             for (Attribute attribute : attributes.values()) {
-                if (attribute.isNonRendering()) continue; 
+                if (attribute.isNonRendering()) continue;
                 append(" ");
                 append(Escaping.escapeHtml(attribute.getName(), true));
                 append("=\"");

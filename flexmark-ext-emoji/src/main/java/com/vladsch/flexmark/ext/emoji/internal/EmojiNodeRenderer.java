@@ -35,11 +35,11 @@ public class EmojiNodeRenderer implements NodeRenderer {
             context.renderChildren(node);
             html.text(":");
         } else {
-            LinkRendering rendering = context.getLinkRendering(LinkType.Image, useImageURL ? shortcut.url : rootImagePath + shortcut.image, "emoji " + shortcut.category + ":" + shortcut.name, null, node);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, useImageURL ? shortcut.url : rootImagePath + shortcut.image);
 
-            html.attr("src", rendering.getUrl());
-            html.attr("alt", rendering.getText());
-            html.withAttr(rendering.getAttributes());
+            html.attr("src", resolvedLink.getUrl());
+            html.attr("alt", "emoji " + shortcut.category + ":" + shortcut.name);
+            html.withAttr(resolvedLink);
             html.tagVoid("img");
         }
     }

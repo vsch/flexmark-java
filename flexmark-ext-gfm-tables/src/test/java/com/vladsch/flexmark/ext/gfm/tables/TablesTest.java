@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.gfm.tables;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.LinkRendering;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
@@ -317,12 +317,7 @@ public class TablesTest extends RenderingTestCase {
     public void attributeProviderIsApplied() {
         AttributeProvider attributeProvider = new AttributeProvider() {
             @Override
-            public LinkRendering setAttributes(LinkRendering linkRendering) {
-                return linkRendering;
-            }
-
-            @Override
-            public void setAttributes(Node node, String tag, Attributes attributes) {
+            public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
                 if (node instanceof TableBlock) {
                     attributes.replaceValue("test", "block");
                 } else if (node instanceof TableHead) {

@@ -39,6 +39,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         // zzzoptionszzz(REMOVE, DELIMITER_PROCESSOR)
         // zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
         // zzzoptionszzz(NODE_RENDERER)
+        // zzzoptionszzz(LINK_RESOLVER)
         // zzzoptionszzz(CUSTOM_PROPERTIES)
         // zzzoptionszzz(PARAGRAPH_PRE_PROCESSOR)
         // zzzoptionszzz(DOCUMENT_POST_PROCESSOR)
@@ -58,5 +59,6 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
         rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+        rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
     }
 }

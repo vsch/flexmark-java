@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.collection.DynamicDefaultKey;
+import com.vladsch.flexmark.internal.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.internal.util.options.*;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
@@ -69,7 +70,7 @@ public class HtmlRenderer implements IRender {
             }
         });
 
-        this.linkRendererFactories = LinkResolverDependencyHandler.computeLinkResolvers(builder.linkRendererFactories);
+        this.linkRendererFactories = FlatDependencyHandler.computeDependencies(builder.linkRendererFactories);
     }
 
     /**
@@ -258,7 +259,7 @@ public class HtmlRenderer implements IRender {
          * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        public Builder linkRendererFactory(LinkResolverFactory linkResolverFactory) {
+        public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
             this.linkRendererFactories.add(linkResolverFactory);
             return this;
         }
@@ -307,11 +308,12 @@ public class HtmlRenderer implements IRender {
         private final Map<Class<?>, NodeRenderingHandler> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
-        private final List<LinkResolver> myLinkResolvers;
+        private final LinkResolver[] myLinkResolvers;
         private final Set<RenderingPhase> renderingPhases;
         private final DataHolder options;
         private RenderingPhase phase;
         private final HtmlIdGenerator htmlIdGenerator;
+        private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
 
         private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             super(htmlWriter);
@@ -320,7 +322,7 @@ public class HtmlRenderer implements IRender {
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
-            this.myLinkResolvers = new ArrayList<>(linkRendererFactories.size());
+            this.myLinkResolvers = new LinkResolver[linkRendererFactories.size()];
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : (!(htmlOptions.renderHeaderId || htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new GitHubHeaderIdGenerator.Factory().create(this));
@@ -343,27 +345,40 @@ public class HtmlRenderer implements IRender {
             }
 
             for (int i = 0; i < linkRendererFactories.size(); i++) {
-                myLinkResolvers.set(i, linkRendererFactories.get(i).create(document));
+                myLinkResolvers[i] = linkRendererFactories.get(i).create(this);
             }
         }
 
         @Override
-        public LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node) {
-            LinkRendering linkRendering = new LinkRendering(linkType, url, text, null, attributes, node);
-            for (LinkResolver linkResolver : myLinkResolvers) {
-                linkRendering = linkResolver.renderLink(linkRendering, this);
-                if (linkRendering.getIsResolved()) break; 
-            }
+        public Node getCurrentNode() {
+            return renderingNode;
+        }
 
-            for (AttributeProvider attributeProvider : attributeProviders) {
-                linkRendering = attributeProvider.setAttributes(linkRendering);
+        @Override
+        public ResolvedLink resolveLink(LinkType linkType, String url) {
+            HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
+            if (resolvedLinks == null) {
+                resolvedLinks = new HashMap<>();
+                resolvedLinkMap.put(linkType, resolvedLinks);
             }
             
-            if (htmlOptions.percentEncodeUrls) {
-                return linkRendering.withUrl(Escaping.percentEncodeUrl(linkRendering.getUrl()));
-            } else {
-                return linkRendering;
+            ResolvedLink resolvedLink = resolvedLinks.get(url);
+
+            if (resolvedLink == null) {
+                resolvedLink = new ResolvedLink(linkType, url);
+                for (LinkResolver linkResolver : myLinkResolvers) {
+                    resolvedLink = linkResolver.resolveLink(this, resolvedLink);
+                    if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+                }
+                if (htmlOptions.percentEncodeUrls) {
+                    resolvedLink = resolvedLink.withUrl(Escaping.percentEncodeUrl(resolvedLink.getUrl()));
+                }
+                
+                // put it in the map
+                resolvedLinks.put(url, resolvedLink);
             }
+            
+            return resolvedLink;
         }
 
         @Override
@@ -375,7 +390,7 @@ public class HtmlRenderer implements IRender {
                 if (id != null) attributes.replaceValue("id", id);
 
                 for (AttributeProvider attributeProvider : attributeProviders) {
-                    attributeProvider.setAttributes(this.renderingNode, null, attributes);
+                    attributeProvider.setAttributes(this.renderingNode, AttributablePart.ID, attributes);
                 }
                 id = attributes.getValue("id");
             }
@@ -412,10 +427,10 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public Attributes extendRenderingNodeAttributes(String tag, Attributes attributes) {
-            Attributes attr = new Attributes(attributes);
+        public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+            Attributes attr = attributes != null ? attributes : new Attributes();
             for (AttributeProvider attributeProvider : attributeProviders) {
-                attributeProvider.setAttributes(this.renderingNode, tag, attr);
+                attributeProvider.setAttributes(this.renderingNode, part, attr);
             }
             return attr;
         }
@@ -519,11 +534,21 @@ public class HtmlRenderer implements IRender {
             public String encodeUrl(String url) {return myMainNodeRenderer.encodeUrl(url);}
 
             @Override
-            public Attributes extendRenderingNodeAttributes(String tag, Attributes attributes) {return myMainNodeRenderer.extendRenderingNodeAttributes(tag, attributes);}
+            public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {return myMainNodeRenderer.extendRenderingNodeAttributes(part, attributes);}
 
             @Override
             public void render(Node node) {
                 myMainNodeRenderer.renderNode(node, this);
+            }
+
+            @Override
+            public Node getCurrentNode() {
+                return myMainNodeRenderer.getCurrentNode();
+            }
+
+            @Override
+            public ResolvedLink resolveLink(LinkType linkType, String url) {
+                return myMainNodeRenderer.resolveLink(linkType, url);
             }
 
             @Override
@@ -554,11 +579,6 @@ public class HtmlRenderer implements IRender {
 
             @Override
             public void doRenderLinks() {super.doRenderLinks();}
-
-            @Override
-            public LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node) {
-                return myMainNodeRenderer.getLinkRendering(linkType, url, text, attributes, node);
-            }
         }
     }
 }

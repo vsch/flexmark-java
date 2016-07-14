@@ -4,12 +4,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by vlad on 2016-07-13.
- */
 public class Attribute {
     public static final Attribute NO_FOLLOW = new Attribute("rel", "nofollow");
     public static final Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<>(Arrays.asList("class", "id", "name"));
+    public static final String LINK_STATUS = "Link Status"; 
 
     final private String myName;
     final private String myValue;
@@ -48,7 +46,7 @@ public class Attribute {
     }
     
     public boolean isNonRendering() {
-        return getValue().isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(getName());
+        return myName.indexOf(' ') != -1 || myValue.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(myName);
     }
 
     public Attribute replaceValue(String value) {

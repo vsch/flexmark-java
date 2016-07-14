@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html;
 
-import com.vladsch.flexmark.html.renderer.LinkRendering;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.node.Node;
 
@@ -16,30 +16,20 @@ public interface AttributeProvider {
      * <p>
      * The attribute key and values will be escaped (preserving character entities), so don't escape them here,
      * otherwise they will be double-escaped.
-     * 
-     * Also used to get the id attribute for the node. Specifically for heading nodes. When the tag parameter 
-     * is null only need to check and provide an id attribute.
+     * <p>
+     * Also used to get the id attribute for the node. Specifically for heading nodes. When the part parameter
+     * is AttributablePart.ID only need to check and provide an id attribute.
+     * <p>
+     * When part is AttributablePart.LINK then attributes are being requested for a Link or Image link,
+     * link status after link resolution will be found under the Attribute.LINK_STATUS.
+     * Core defines LinkStatus.UNKNOWN,LinkStatus.VALID,LinkStatus.NOT_FOUND. Extensions can define more.
+     * <p>
+     * AttributablePart.NODE is a generic placeholder when the node did not provide a specific part for attribution.
      *
      * @param node       the node to set attributes for
-     * @param tag        attributes for the specific tag being generated for the node, will be null when requesting id attribute for the node.
+     * @param part       attributes for the specific part of the node being generated, Core defines AttributablePart.LINK,
+     *                   AttributablePart.ID and generic AttributablePart.NODE, extensions are free to define more
      * @param attributes the attributes, with any default attributes already set in the map
      */
-    void setAttributes(Node node, String tag, Attributes attributes);
-    
-    /**
-     * Set the attributes for the link before rendering by modifying its attributes 
-     * <p>
-     * This allows to change or even removeIndex default attributes. With great power comes great responsibility.
-     * <p>
-     * The attribute key and values will be escaped (preserving character entities), so don't escape them here,
-     * otherwise they will be double-escaped.
-     * <p>
-     * The link URL will be url encoded as needed. Do not URL encode it.
-     * 
-     * Also used to get the id attribute for the node. Specifically for heading nodes. When the tag parameter 
-     * is null only need to check and provide an id attribute.
-     *
-     * @param linkRendering       the final link rendering after all resolvers have had a chance to resolve it
-     */
-    LinkRendering setAttributes(LinkRendering linkRendering);
+    void setAttributes(Node node, AttributablePart part, Attributes attributes);
 }

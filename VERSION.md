@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.3](#043)
 - [0.4.2](#042)
 - [0.4.1](#041)
 - [0.4.0](#040)
@@ -30,6 +31,66 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+0.4.3
+-----
+
+- Change `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer to
+  handle resolving of URLs for links.
+
+    - `ResolvedLink` represents the link being resolved. `ResolvedLink.getUrl()` will initially
+      return the raw link value from the markdown element. `LinkResolvers` can modify this value
+      according to their understanding of the link type and link format. They may or may not
+      change the link type and status. 
+
+    - `LinkType` specifies type of link. Core defines `LinkType.LINK` and `LinkType.IMAGE`,
+      extensions can define other types that use different link resolving logic. Wiki link
+      extension defines `WikiLinkExtension.WIKI_LINK` type and provides a custom link resolver
+      that will convert the wiki link text to a URL and the type to `LinkType.LINK`. It also
+      changes the status to `LinkStatus.UNCHECKED` 
+
+    - `LinkStatus` holds the result of the resolving process. Initial link status is
+      `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.   
+        - `LinkStatus.UNKNOWN` link has not been resolved yet
+        - `LinkStatus.VALID` link is resolved and valid
+        - `LinkStatus.UNCHECKED` link is resolved, validity not verified
+        - `LinkStatus.NOT_FOUND` link is resolved and its target is not found
+
+    - Link resolvers are tried until one reports success. They can modify the URL, if available
+      the Text, and attributes. The latter is still modifiable by attribute providers at two
+      points: right after all resolvers have passed and before final rendering of the link.
+
+    - like other processors they have before/after dependencies.
+
+    - Encoding is done by the context as the last step if it is requested in options. No URL
+      encoding of links which are passed through resolving process.
+
+    - Any unresolved link's url is rendered as is.
+
+    - Results of resolving a link are cached based on `LinkType` and the initial url text.
+      Subsequent requests to resolve the same type and url will return the same instance of
+      `ResolvedLink`.  
+
+- Add `AttributablePart` that nodes provide when marking a tag
+  `HtmlWriter.withAttr(AttributablePart)` so that an attribute provider has information about
+  the exact HTML element the node is requesting attributes for. Core only defines:
+    - `AttributablePart.NODE` a generic placeholder when the node does not specify one
+    - `AttributablePart.ID` a node's id attribute is being requested
+    - `AttributablePart.LINK` a node is rendering a link, the `Attributes` parameter will hold
+      an attribute named `Attribute.LINK_STATUS` whose value represents the name of the
+      `LinkStatus` of the resolved link. Attribute providers can use this value to set specific
+      attributes based on the resolved link status. This attribute does not render in the final HTML.
+    - Extensions can and should define parts for specific elements they allow to modify with
+      extensions.
+
+- Change `AttributeProvider.setAttributes(Node, AttributablePart, Attributes)` to now get an
+  attributable part that pinpoints the exact element of the node being rendered, for nodes that
+  have many elements capable of having attributes.  
+
+- Change `LinkResolver.resolveLink(NodeRendererContext, ResolvedLink)` the context allows the
+  resolver to get the node for which this link is being resolved via
+  `NodeRendererContext.getCurrentNode()`.
+
+
 0.4.2
 -----
 
@@ -37,30 +98,28 @@ flexmark-java
   `Map<>`. Allows easier replacing, adding, removing a value from an attribute values, which are
   a space separated list of strings. Determining which ones should not be rendered and when.
 
-- [ ] Add `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer
-      to handle resolving of URLs for links, including adding attributes.
+- Add `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer to
+  handle resolving of URLs for links, including adding attributes.
 
-      - Link resolvers are tried until one reports success. They can modify the URL, if
-        available the Text, and attributes. The latter is still modifiable by attribute providers
-        at two points: right after all resolvers have passed and before final rendering of the
-        link.
+    - Link resolvers are tried until one reports success. They can modify the URL, if available
+      the Text, and attributes. The latter is still modifiable by attribute providers at two
+      points: right after all resolvers have passed and before final rendering of the link.
 
-      - like other processors they have before/after dependencies.
+    - like other processors they have before/after dependencies.
 
-      - After all resolvers have handled the link it is passed to AttributeProviders to possibly
-        add/remove/change attributes via `AttributeProvider.setAttributes(LinkRendering)` at
-        this point if the link was resolved `LinkRendering.getIsResolved()` will return true,
-        null means no resolver handled it, it will render as is, false means it does not
-        resolve.
+    - After all resolvers have handled the link it is passed to AttributeProviders to possibly
+      add/remove/change attributes via `AttributeProvider.setAttributes(LinkRendering)` at this
+      point if the link was resolved `LinkRendering.getIsResolved()` will return true, null
+      means no resolver handled it, it will render as is, false means it does not resolve.
 
-      - The Attribute providers will be invoked again on the final link rendering but at this
-        point there is no information on whether the link resolved or not but there is final
-        attributes that can be manipulated.
+    - The Attribute providers will be invoked again on the final link rendering but at this
+      point there is no information on whether the link resolved or not but there is final
+      attributes that can be manipulated.
 
-      - Encoding is done by the context as the last step if it is requested in options. No URL
-        encoding of links which are passed through resolving process.
+    - Encoding is done by the context as the last step if it is requested in options. No URL
+      encoding of links which are passed through resolving process.
 
-      - Any unresolved link is rendered as is.
+    - Any unresolved link is rendered as is.
 
 0.4.1
 -----
@@ -68,13 +127,13 @@ flexmark-java
 - Add dependencies to CustomBlockParserFactory and core factories to eliminate the need to order
   factories manually. Custom factories that have no specific dependencies will still run before
   core factories. Core factories now define dependencies between each other to ensure correct
-  processing. 
+  processing.
 
 - Add `BlockParser.isPropagatingLastBlankLine(BlockParser)` to remove `instanceOf` tests in
   `DocumentParser`, making it agnostic to specific block parsers.
 
 - Add `Node.getLastBlankLineChild()` to remove `instanceOf` tests in `DocumentParser`, making it
-  agnostic to specific node types. 
+  agnostic to specific node types.
 
 - Add Sim TOC syntax as per Markdown Navigator simulated TOC element, with parse and rendering
   options.
@@ -580,7 +639,7 @@ flexmark-java
 
         ```````````````````````````````` example
         [[*foo* bar]]
-    
+
         [*foo* bar]: /url "title"
         .
         <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
