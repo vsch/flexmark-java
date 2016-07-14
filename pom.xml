@@ -153,6 +153,11 @@
                 <artifactId>flexmark-test-util</artifactId>
                 <version>0.3.0-SNAPSHOT</version>
             </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-test-suite</artifactId>
+                <version>0.3.0-SNAPSHOT</version>
+            </dependency>
 
             <!-- Common test dependencies -->
             <dependency>
