@@ -3,11 +3,10 @@ package com.vladsch.flexmark.html.renderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
-
-import java.util.Map;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
@@ -27,7 +26,7 @@ public interface NodeRendererContext {
      * @param attributes the attributes that were calculated by the renderer
      * @return the extended attributes with added/updated/blockRemoved entries
      */
-    Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes);
+    Attributes extendRenderingNodeAttributes(String tag, Attributes attributes);
 
     /**
      * @return the HTML writer to use
@@ -137,4 +136,15 @@ public interface NodeRendererContext {
      * @return the {@link Document} node of the current context
      */
     Document getDocument();
+
+    /**
+     * Resolve link for rendering
+     * @param linkType type of link being rendered: Link, Image or Wiki
+     * @param url   link url text
+     * @param text  link text or image alt
+     * @param attributes attributes for the link 
+     * @param node  source node of the link, may be used by link renderer as a hint
+     * @return link rendering representing this link, including attributes
+     */
+    LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node);
 }

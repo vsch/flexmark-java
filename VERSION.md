@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.2](#042)
 - [0.4.1](#041)
 - [0.4.0](#040)
 - [0.3.2](#032)
@@ -29,6 +30,38 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+0.4.2
+-----
+
+- Add `Attributes` and `Attribute` dedicated classes to handle attributes instead of relying on
+  `Map<>`. Allows easier replacing, adding, removing a value from an attribute values, which are
+  a space separated list of strings. Determining which ones should not be rendered and when.
+
+- [ ] Add `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer
+      to handle resolving of URLs for links, including adding attributes.
+
+      - Link resolvers are tried until one reports success. They can modify the URL, if
+        available the Text, and attributes. The latter is still modifiable by attribute providers
+        at two points: right after all resolvers have passed and before final rendering of the
+        link.
+
+      - like other processors they have before/after dependencies.
+
+      - After all resolvers have handled the link it is passed to AttributeProviders to possibly
+        add/remove/change attributes via `AttributeProvider.setAttributes(LinkRendering)` at
+        this point if the link was resolved `LinkRendering.getIsResolved()` will return true,
+        null means no resolver handled it, it will render as is, false means it does not
+        resolve.
+
+      - The Attribute providers will be invoked again on the final link rendering but at this
+        point there is no information on whether the link resolved or not but there is final
+        attributes that can be manipulated.
+
+      - Encoding is done by the context as the last step if it is requested in options. No URL
+        encoding of links which are passed through resolving process.
+
+      - Any unresolved link is rendered as is.
+
 0.4.1
 -----
 
@@ -46,27 +79,13 @@ flexmark-java
 - Add Sim TOC syntax as per Markdown Navigator simulated TOC element, with parse and rendering
   options.
 
+- Add Flexmark Spec Example Extension to parse flexmark spec files, same as Markdown Navigator.
+
 0.4.0
 -----
 
 - Change Sim TOC to be a container and accept only a single HTML block without blank lines or a
   heading and a list without blank lines.
-
-- [ ] Add Flexmark Spec Example Extension to parse flexmark spec files, same as Markdown
-      Navigator.
-
-- [ ] Add `LinkRenderer` and `LinkRendererFactory` interfaces and registration to HtmlWriter to
-      handle rendering of URLs for links, including adding attributes.
-
-      - [ ] parameters should include the raw link text to be converted to a URL and a source
-            Node for hinting purposes.
-
-      - [ ] Link renderers should be tried until one reports success, so that several renderers
-            could be used for different types of link text syntax without conflict.
-
-      - [ ] like other processors they should have before/after dependencies.
-
-      - [ ] Any unhandled rendering will be rendered by the core
 
 - Made rendering test case classes usable for other spec based testing, not just flexmark. Too
   useful for testing other parsing implementations to leave it just for flexmark.  
@@ -254,7 +273,7 @@ flexmark-java
 - Add `BlockPreProcessorFactory` and `BlockPreProcessor` interfaces for block node substitution
   before inline processing.
 
-- Add generic `Dependent`, `DependencyResolver` and `ResolvedDependencies` to handle resolving
+- Add generic `Dependent`, `DependencyHandler` and `ResolvedDependencies` to handle resolving
   dependencies between processors. Need to add `PostProcessor` dependency declaration so that
   interdependent extensions can automatically control execution order where it matters.
 

@@ -44,6 +44,7 @@ public class HtmlRenderer implements IRender {
 
     private final List<AttributeProvider> attributeProviders;
     private final List<NodeRendererFactory> nodeRendererFactories;
+    private final List<LinkResolverFactory> linkRendererFactories;
     private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
     private final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
@@ -56,8 +57,10 @@ public class HtmlRenderer implements IRender {
 
         this.attributeProviders = builder.attributeProviders;
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
+
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
+
         // Add as last. This means clients can override the rendering of core nodes if they want.
         this.nodeRendererFactories.add(new NodeRendererFactory() {
             @Override
@@ -65,6 +68,8 @@ public class HtmlRenderer implements IRender {
                 return new CoreNodeRenderer(options);
             }
         });
+
+        this.linkRendererFactories = LinkResolverDependencyHandler.computeLinkResolvers(builder.linkRendererFactories);
     }
 
     /**
@@ -112,6 +117,7 @@ public class HtmlRenderer implements IRender {
     public static class Builder extends MutableDataSet {
         private List<AttributeProvider> attributeProviders = new ArrayList<>();
         private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+        private List<LinkResolverFactory> linkRendererFactories = new ArrayList<>();
         private final HashSet<HtmlRendererExtension> loadedExtensions = new HashSet<>();
         private HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
@@ -132,6 +138,7 @@ public class HtmlRenderer implements IRender {
 
             this.attributeProviders.addAll(other.attributeProviders);
             this.nodeRendererFactories.addAll(other.nodeRendererFactories);
+            this.linkRendererFactories.addAll(other.linkRendererFactories);
             this.loadedExtensions.addAll(other.loadedExtensions);
             this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
@@ -242,6 +249,21 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
+         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
+         * of node types or define rendering for custom node types.
+         * <p>
+         * If multiple node renderers for the same node type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         *
+         * @param linkResolverFactory the factory for creating a node renderer
+         * @return {@code this}
+         */
+        public Builder linkRendererFactory(LinkResolverFactory linkResolverFactory) {
+            this.linkRendererFactories.add(linkResolverFactory);
+            return this;
+        }
+
+        /**
          * Add a factory for generating the header id attribute from the header's text
          *
          * @param htmlIdGeneratorFactory the factory for generating header tag id attributes
@@ -285,6 +307,7 @@ public class HtmlRenderer implements IRender {
         private final Map<Class<?>, NodeRenderingHandler> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
+        private final List<LinkResolver> myLinkResolvers;
         private final Set<RenderingPhase> renderingPhases;
         private final DataHolder options;
         private RenderingPhase phase;
@@ -297,6 +320,7 @@ public class HtmlRenderer implements IRender {
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
+            this.myLinkResolvers = new ArrayList<>(linkRendererFactories.size());
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : (!(htmlOptions.renderHeaderId || htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new GitHubHeaderIdGenerator.Factory().create(this));
@@ -317,6 +341,29 @@ public class HtmlRenderer implements IRender {
                     this.phasedRenderers.add((PhasedNodeRenderer) nodeRenderer);
                 }
             }
+
+            for (int i = 0; i < linkRendererFactories.size(); i++) {
+                myLinkResolvers.set(i, linkRendererFactories.get(i).create(document));
+            }
+        }
+
+        @Override
+        public LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node) {
+            LinkRendering linkRendering = new LinkRendering(linkType, url, text, null, attributes, node);
+            for (LinkResolver linkResolver : myLinkResolvers) {
+                linkRendering = linkResolver.renderLink(linkRendering, this);
+                if (linkRendering.getIsResolved()) break; 
+            }
+
+            for (AttributeProvider attributeProvider : attributeProviders) {
+                linkRendering = attributeProvider.setAttributes(linkRendering);
+            }
+            
+            if (htmlOptions.percentEncodeUrls) {
+                return linkRendering.withUrl(Escaping.percentEncodeUrl(linkRendering.getUrl()));
+            } else {
+                return linkRendering;
+            }
         }
 
         @Override
@@ -324,13 +371,13 @@ public class HtmlRenderer implements IRender {
             String id = htmlIdGenerator.getId(node);
             if (attributeProviders.size() != 0) {
 
-                Map<String, String> attr = new LinkedHashMap<>(1);
-                if (id != null) attr.put("id", id);
+                Attributes attributes = new Attributes();
+                if (id != null) attributes.replaceValue("id", id);
 
                 for (AttributeProvider attributeProvider : attributeProviders) {
-                    attributeProvider.setAttributes(this.renderingNode, null, attr);
+                    attributeProvider.setAttributes(this.renderingNode, null, attributes);
                 }
-                id = attr.get("id");
+                id = attributes.getValue("id");
             }
             return id;
         }
@@ -365,8 +412,8 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes) {
-            Map<String, String> attr = new LinkedHashMap<>(attributes);
+        public Attributes extendRenderingNodeAttributes(String tag, Attributes attributes) {
+            Attributes attr = new Attributes(attributes);
             for (AttributeProvider attributeProvider : attributeProviders) {
                 attributeProvider.setAttributes(this.renderingNode, tag, attr);
             }
@@ -472,7 +519,7 @@ public class HtmlRenderer implements IRender {
             public String encodeUrl(String url) {return myMainNodeRenderer.encodeUrl(url);}
 
             @Override
-            public Map<String, String> extendRenderingNodeAttributes(String tag, Map<String, String> attributes) {return myMainNodeRenderer.extendRenderingNodeAttributes(tag, attributes);}
+            public Attributes extendRenderingNodeAttributes(String tag, Attributes attributes) {return myMainNodeRenderer.extendRenderingNodeAttributes(tag, attributes);}
 
             @Override
             public void render(Node node) {
@@ -507,6 +554,11 @@ public class HtmlRenderer implements IRender {
 
             @Override
             public void doRenderLinks() {super.doRenderLinks();}
+
+            @Override
+            public LinkRendering getLinkRendering(LinkType linkType, String url, String text, Attributes attributes, Node node) {
+                return myMainNodeRenderer.getLinkRendering(linkType, url, text, attributes, node);
+            }
         }
     }
 }

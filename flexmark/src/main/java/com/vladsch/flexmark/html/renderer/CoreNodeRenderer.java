@@ -5,6 +5,7 @@ import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
@@ -247,9 +248,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            html.attr("href", context.encodeUrl(text))
-                    .withAttr()
-                    .tag("a", () -> html.text(text));
+            LinkRendering rendering = context.getLinkRendering(LinkType.Link, text, text, Attributes.EMPTY, node);
+            html.attr("href", rendering.getUrl())
+                    .withAttr(rendering.getAttributes())
+                    .tag("a", () -> html.text(rendering.getText()));
         }
     }
 
@@ -258,29 +260,30 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            String url = context.encodeUrl(text);
-            html.attr("href", "mailto:" + url)
-                    .withAttr()
+            LinkRendering rendering = context.getLinkRendering(LinkType.MailTo, text, text, Attributes.EMPTY, node);
+            html.attr("href", "mailto:" + rendering.getUrl())
+                    .withAttr(rendering.getAttributes())
                     .tag("a")
-                    .text(url)
+                    .text(rendering.getText())
                     .tag("/a");
         }
     }
 
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
-            String url = context.encodeUrl(node.getUrl().unescape());
-
             TextCollectingVisitor altTextVisitor = new TextCollectingVisitor();
             node.accept(altTextVisitor);
             String altText = altTextVisitor.getText();
-
-            html.attr("src", url);
-            html.attr("alt", altText);
+            
+            Attributes attributes = new Attributes();
             if (node.getTitle().isNotNull()) {
-                html.attr("title", node.getTitle().unescape());
+                attributes.replaceValue("title", node.getTitle().unescape());
             }
-            html.withAttr().tagVoid("img");
+            
+            LinkRendering rendering = context.getLinkRendering(LinkType.Image, node.getUrl().unescape(), altText, attributes, node);
+            html.attr("src", rendering.getUrl());
+            html.attr("alt", rendering.getText());
+            html.withAttr(rendering.getAttributes()).tagVoid("img");
         }
     }
 
@@ -288,11 +291,14 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
-            html.attr("href", context.encodeUrl(node.getUrl().unescape()));
+            Attributes attributes = new Attributes();
             if (node.getTitle().isNotNull()) {
-                html.attr("title", node.getTitle().unescape());
+                attributes.replaceValue("title", node.getTitle().unescape());
             }
-            html.withAttr().tag("a");
+            
+            LinkRendering rendering = context.getLinkRendering(LinkType.Link, node.getUrl().unescape(), "", attributes, node);
+            html.attr("href", rendering.getUrl());
+            html.withAttr(rendering.getAttributes()).tag("a");
             context.renderChildren(node);
             html.tag("/a");
         }
@@ -311,15 +317,15 @@ public class CoreNodeRenderer implements NodeRenderer {
                 node.accept(altTextVisitor);
                 String altText = altTextVisitor.getText();
 
-                html.attr("src", context.encodeUrl(reference.getUrl().unescape()));
-                html.attr("alt", altText);
-
-                BasedSequence title = reference.getTitle();
-                if (title.isNotNull()) {
-                    html.attr("title", title.unescape());
+                Attributes attributes = new Attributes();
+                if (reference.getTitle().isNotNull()) {
+                    attributes.replaceValue("title", reference.getTitle().unescape());
                 }
 
-                html.withAttr().tagVoid("img");
+                LinkRendering rendering = context.getLinkRendering(LinkType.Image, reference.getUrl().unescape(), altText, attributes, node);
+                html.attr("src", rendering.getUrl());
+                html.attr("alt", rendering.getText());
+                html.withAttr(rendering.getAttributes()).tagVoid("img");
             }
         }
     }
@@ -343,13 +349,15 @@ public class CoreNodeRenderer implements NodeRenderer {
             } else {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
-                String url = context.encodeUrl(reference.getUrl().unescape());
-                html.attr("href", url);
-                BasedSequence title = reference.getTitle();
-                if (title.isNotNull()) {
-                    html.attr("title", title.unescape());
+                
+                Attributes attributes = new Attributes();
+                if (reference.getTitle().isNotNull()) {
+                    attributes.replaceValue("title", reference.getTitle().unescape());
                 }
-                html.withAttr().tag("a");
+
+                LinkRendering rendering = context.getLinkRendering(LinkType.Link, reference.getUrl().unescape(), "", attributes, node);
+                html.attr("href", rendering.getUrl());
+                html.withAttr(rendering.getAttributes()).tag("a");
                 context.renderChildren(node);
                 html.tag("/a");
             }

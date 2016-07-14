@@ -4,7 +4,7 @@ import com.vladsch.flexmark.internal.util.collection.ClassifyingNodeTracker;
 import com.vladsch.flexmark.internal.util.collection.NodeClassifierVisitor;
 import com.vladsch.flexmark.internal.util.collection.OrderedSet;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
-import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
+import com.vladsch.flexmark.internal.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.internal.util.dependency.DependentItem;
 import com.vladsch.flexmark.internal.util.dependency.DependentItemMap;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
@@ -40,7 +40,7 @@ public class PostProcessorManager {
         // add core block preprocessors
         list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
 
-        PostProcessDependencyResolver resolver = new PostProcessDependencyResolver();
+        PostProcessDependencyHandler resolver = new PostProcessDependencyHandler();
         return resolver.resolveDependencies(list);
     }
 
@@ -173,7 +173,7 @@ public class PostProcessorManager {
         }
     }
 
-    private static class PostProcessDependencyResolver extends DependencyResolver<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
+    private static class PostProcessDependencyHandler extends DependencyHandler<PostProcessorFactory, PostProcessorDependencyStage, PostProcessorDependencies> {
         @Override
         protected Class<? extends PostProcessorFactory> getDependentClass(PostProcessorFactory dependent) {
             return dependent.getClass();

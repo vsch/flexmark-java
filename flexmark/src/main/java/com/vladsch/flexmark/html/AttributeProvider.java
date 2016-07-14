@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.html;
 
+import com.vladsch.flexmark.html.renderer.LinkRendering;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.node.Node;
-
-import java.util.Map;
 
 /**
  * Extension point for adding/changing attributes on the primary HTML tag for a node.
@@ -24,5 +24,22 @@ public interface AttributeProvider {
      * @param tag        attributes for the specific tag being generated for the node, will be null when requesting id attribute for the node.
      * @param attributes the attributes, with any default attributes already set in the map
      */
-    void setAttributes(Node node, String tag, Map<String, String> attributes);
+    void setAttributes(Node node, String tag, Attributes attributes);
+    
+    /**
+     * Set the attributes for the link before rendering by modifying its attributes 
+     * <p>
+     * This allows to change or even removeIndex default attributes. With great power comes great responsibility.
+     * <p>
+     * The attribute key and values will be escaped (preserving character entities), so don't escape them here,
+     * otherwise they will be double-escaped.
+     * <p>
+     * The link URL will be url encoded as needed. Do not URL encode it.
+     * 
+     * Also used to get the id attribute for the node. Specifically for heading nodes. When the tag parameter 
+     * is null only need to check and provide an id attribute.
+     *
+     * @param linkRendering       the final link rendering after all resolvers have had a chance to resolve it
+     */
+    LinkRendering setAttributes(LinkRendering linkRendering);
 }

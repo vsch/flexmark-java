@@ -3,10 +3,8 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
@@ -17,7 +15,6 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -91,13 +88,18 @@ public class HtmlRendererTest {
     public void attributeProviderForCodeBlock() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
+            public LinkRendering setAttributes(LinkRendering linkRendering) {
+                return linkRendering;
+            }
+
+            @Override
+            public void setAttributes(Node node, String tag, Attributes attributes) {
                 if (node instanceof FencedCodeBlock) {
                     FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
                     // Remove the default attribute for info
                     attributes.remove("class");
                     // Put info in custom attribute instead
-                    attributes.put("data-custom", fencedCodeBlock.getInfo().toString());
+                    attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
                 }
             }
         };
@@ -114,10 +116,15 @@ public class HtmlRendererTest {
     public void attributeProviderForImage() {
         AttributeProvider custom = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
+            public LinkRendering setAttributes(LinkRendering linkRendering) {
+                return linkRendering;
+            }
+
+            @Override
+            public void setAttributes(Node node, String tag, Attributes attributes) {
                 if (node instanceof Image) {
                     attributes.remove("alt");
-                    attributes.put("test", "hey");
+                    attributes.replaceValue("test", "hey");
                 }
             }
         };

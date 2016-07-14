@@ -5,7 +5,7 @@ import com.vladsch.flexmark.node.Block;
 
 import java.util.*;
 
-public abstract class DependencyResolver<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
+public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
     protected abstract S createStage(List<D> dependents);
     protected abstract Class<? extends D> getDependentClass(D dependent);
     protected abstract R createResolvedDependencies(List<S> stages);

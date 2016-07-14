@@ -2,14 +2,13 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.options.Attribute;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class HtmlWriter {
-    private static final Map<String, String> NO_ATTRIBUTES = Collections.emptyMap();
+    private static final Attributes NO_ATTRIBUTES = new Attributes();
 
     private final Appendable buffer;
     private final int indentSize;
@@ -19,7 +18,7 @@ public class HtmlWriter {
     private char lastChar = 0;
     private int indent;
     private String indentPrefix = "";
-    private LinkedHashMap<String, String> currentAttributes;
+    private Attributes currentAttributes;
     private boolean useAttributes = false;
     //private int appendCount = 0;
     private boolean delayedIndent = false;
@@ -31,10 +30,10 @@ public class HtmlWriter {
     public HtmlWriter(Appendable out) {
         this(out, 0);
     }
-    
+
     public HtmlWriter(HtmlWriter other, Appendable out, boolean inheritIndent) {
         this(out, other.indentSize);
-        
+
         if (inheritIndent) {
             indent = other.indent;
             indentPrefix = other.indentPrefix;
@@ -74,9 +73,28 @@ public class HtmlWriter {
 
     public HtmlWriter attr(String name, String value) {
         if (currentAttributes == null) {
-            currentAttributes = new LinkedHashMap<>();
+            currentAttributes = new Attributes();
         }
-        currentAttributes.put(name, value);
+        currentAttributes.replaceValue(name, value);
+        return this;
+    }
+
+    public HtmlWriter attr(Attribute attribute) {
+        if (currentAttributes == null) {
+            currentAttributes = new Attributes();
+        }
+        currentAttributes.replaceValue(attribute.getName(), attribute.getValue());
+        return this;
+    }
+
+    public HtmlWriter attr(Attributes attributes) {
+        if (!attributes.isEmpty()) {
+            if (currentAttributes == null) {
+                currentAttributes = new Attributes(attributes);
+            } else {
+                currentAttributes.replaceValues(attributes);
+            }
+        }
         return this;
     }
 
@@ -97,6 +115,16 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter withAttr(Attribute attribute) {
+        attr(attribute);
+        return withAttr();
+    }
+
+    public HtmlWriter withAttr(Attributes attributes) {
+        attr(attributes);
+        return withAttr();
+    }
+
     public HtmlWriter withCondIndent() {
         indentIndentingChildren = true;
         return this;
@@ -108,13 +136,13 @@ public class HtmlWriter {
     }
 
     public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
-        Map<String, String> attr = null;
+        Attributes attributes = null;
 
         if (useAttributes) {
             if (currentAttributes != null) {
-                attr = context.extendRenderingNodeAttributes(name, currentAttributes);
+                attributes = context.extendRenderingNodeAttributes(name, currentAttributes);
             } else {
-                attr = context.extendRenderingNodeAttributes(name, Collections.emptyMap());
+                attributes = context.extendRenderingNodeAttributes(name, new Attributes());
             }
 
             currentAttributes = null;
@@ -126,14 +154,13 @@ public class HtmlWriter {
         append("<");
         append(name);
 
-        if (attr != null && !attr.isEmpty()) {
-            for (Map.Entry<String, String> entry : attr.entrySet()) {
-                if (entry.getKey().equals("class") && entry.getValue().isEmpty()) continue; 
-                
+        if (attributes != null && !attributes.isEmpty()) {
+            for (Attribute attribute : attributes.values()) {
+                if (attribute.isNonRendering()) continue; 
                 append(" ");
-                append(Escaping.escapeHtml(entry.getKey(), true));
+                append(Escaping.escapeHtml(attribute.getName(), true));
                 append("=\"");
-                append(Escaping.escapeHtml(entry.getValue(), true));
+                append(Escaping.escapeHtml(attribute.getValue(), true));
                 append("\"");
             }
         }
@@ -308,5 +335,4 @@ public class HtmlWriter {
             }
         }
     }
-
 }

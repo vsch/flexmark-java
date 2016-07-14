@@ -3,6 +3,8 @@ package com.vladsch.flexmark.ext.gfm.tables;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.LinkRendering;
+import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -10,7 +12,6 @@ import com.vladsch.flexmark.test.RenderingTestCase;
 import org.junit.Test;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -316,17 +317,22 @@ public class TablesTest extends RenderingTestCase {
     public void attributeProviderIsApplied() {
         AttributeProvider attributeProvider = new AttributeProvider() {
             @Override
-            public void setAttributes(Node node, String tag, Map<String, String> attributes) {
+            public LinkRendering setAttributes(LinkRendering linkRendering) {
+                return linkRendering;
+            }
+
+            @Override
+            public void setAttributes(Node node, String tag, Attributes attributes) {
                 if (node instanceof TableBlock) {
-                    attributes.put("test", "block");
+                    attributes.replaceValue("test", "block");
                 } else if (node instanceof TableHead) {
-                    attributes.put("test", "head");
+                    attributes.replaceValue("test", "head");
                 } else if (node instanceof TableBody) {
-                    attributes.put("test", "body");
+                    attributes.replaceValue("test", "body");
                 } else if (node instanceof TableRow) {
-                    attributes.put("test", "row");
+                    attributes.replaceValue("test", "row");
                 } else if (node instanceof TableCell) {
-                    attributes.put("test", "cell");
+                    attributes.replaceValue("test", "cell");
                 }
             }
         };

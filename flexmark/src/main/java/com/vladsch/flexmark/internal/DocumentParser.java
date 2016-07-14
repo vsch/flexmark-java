@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.collection.ClassifyingBlockTracker;
 import com.vladsch.flexmark.internal.util.collection.ItemFactoryMap;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
-import com.vladsch.flexmark.internal.util.dependency.DependencyResolver;
+import com.vladsch.flexmark.internal.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.DataKey;
@@ -189,7 +189,7 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static class ParagraphDependencyResolver extends DependencyResolver<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
+    private static class ParagraphDependencyHandler extends DependencyHandler<ParagraphPreProcessorFactory, ParagraphPreProcessorDependencyStage, ParagraphPreProcessorDependencies> {
         @Override
         protected Class<? extends ParagraphPreProcessorFactory> getDependentClass(ParagraphPreProcessorFactory dependent) {
             return dependent.getClass();
@@ -221,7 +221,7 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static class CustomBlockParserDependencyResolver extends DependencyResolver<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
+    private static class CustomBlockParserDependencyHandler extends DependencyHandler<CustomBlockParserFactory, CustomBlockParserDependencyStage, CustomBlockParserDependencies> {
         @Override
         protected Class<? extends CustomBlockParserFactory> getDependentClass(CustomBlockParserFactory dependent) {
             return dependent.getClass();
@@ -280,7 +280,7 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    private static class BlockDependencyResolver extends DependencyResolver<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
+    private static class BlockDependencyHandler extends DependencyHandler<BlockPreProcessorFactory, BlockPreProcessorDependencyStage, BlockPreProcessorDependencies> {
         @Override
         protected Class<? extends BlockPreProcessorFactory> getDependentClass(BlockPreProcessorFactory dependent) {
             return dependent.getClass();
@@ -333,7 +333,7 @@ public class DocumentParser implements ParserState {
         }
 
         //return list;
-        CustomBlockParserDependencyResolver resolver = new CustomBlockParserDependencyResolver();
+        CustomBlockParserDependencyHandler resolver = new CustomBlockParserDependencyHandler();
         CustomBlockParserDependencies dependencies = resolver.resolveDependencies(list);
         ArrayList<CustomBlockParserFactory> factories = new ArrayList<>();
         for (CustomBlockParserDependencyStage stage:dependencies.getDependentStages()) {
@@ -351,7 +351,7 @@ public class DocumentParser implements ParserState {
             list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
         }
 
-        ParagraphDependencyResolver resolver = new ParagraphDependencyResolver();
+        ParagraphDependencyHandler resolver = new ParagraphDependencyHandler();
         return resolver.resolveDependencies(list);
     }
 
@@ -363,7 +363,7 @@ public class DocumentParser implements ParserState {
         // add core block preprocessors
         list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
 
-        BlockDependencyResolver resolver = new BlockDependencyResolver();
+        BlockDependencyHandler resolver = new BlockDependencyHandler();
         return resolver.resolveDependencies(list);
     }
 

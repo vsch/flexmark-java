@@ -3,9 +3,7 @@ package com.vladsch.flexmark.ext.emoji.internal;
 import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 import java.util.Collections;
@@ -37,9 +35,11 @@ public class EmojiNodeRenderer implements NodeRenderer {
             context.renderChildren(node);
             html.text(":");
         } else {
-            html.attr("src", useImageURL ? shortcut.url : rootImagePath + shortcut.image);
-            html.attr("alt", "emoji " + shortcut.category + ":" + shortcut.name);
-            html.withAttr();
+            LinkRendering rendering = context.getLinkRendering(LinkType.Image, useImageURL ? shortcut.url : rootImagePath + shortcut.image, "emoji " + shortcut.category + ":" + shortcut.name, null, node);
+
+            html.attr("src", rendering.getUrl());
+            html.attr("alt", rendering.getText());
+            html.withAttr(rendering.getAttributes());
             html.tagVoid("img");
         }
     }
