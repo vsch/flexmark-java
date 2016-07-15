@@ -158,7 +158,7 @@ public class SpecReader {
                     lineAbsorbed = true;
                 } else {
                     // examples use "rightwards arrow" to show tab
-                    String processedLine = line.replace('\u2192', '\t');
+                    String processedLine = line.replace('\u2192', '\t').replace("&#2192;", "\u2192");
                     source.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }
@@ -173,7 +173,8 @@ public class SpecReader {
                     state = State.AST;
                     lineAbsorbed = true;
                 } else {
-                    html.append(line).append('\n');
+                    String processedLine = line.replace('\u2192', '\t').replace("&#2192;", "\u2192");
+                    html.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }
                 break;

@@ -79,12 +79,19 @@ class DumpSpecReader extends SpecReader {
         else sb.append(header.toString());
 
         if (ast != null) {
-            sb.append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+            sb.append(showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.TYPE_BREAK).append("\n")
                     .append(ast).append(SpecReader.EXAMPLE_BREAK).append("\n");
         } else {
-            sb.append(RenderingTestCase.showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
+            sb.append(showTabs(source + SpecReader.TYPE_BREAK + "\n" + html))
                     .append(SpecReader.EXAMPLE_BREAK).append("\n");
         }
     }
+
+    public static String showTabs(String s) {
+        if (s == null) return "";
+        // Tabs are shown as "rightwards arrow" for easier comparison
+        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192");
+    }
+
 }

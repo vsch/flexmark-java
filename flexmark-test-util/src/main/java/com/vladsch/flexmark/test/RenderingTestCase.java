@@ -7,7 +7,6 @@ import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.IParse;
 import com.vladsch.flexmark.spec.SpecExample;
-import com.vladsch.flexmark.spec.SpecReader;
 import org.junit.AssumptionViolatedException;
 import org.junit.ComparisonFailure;
 import org.junit.Rule;
@@ -95,6 +94,18 @@ public abstract class RenderingTestCase {
         return astVisitor.getAst();
     }
 
+    protected void actualHtml(String html, String optionSet) {
+
+    }
+
+    protected void actualAst(String ast, String optionSet) {
+
+    }
+
+    protected void specExample(String expected, String actual, String optionSet) {
+
+    }
+
     protected void assertRendering(String source, String expectedHtml) {
         assertRendering(source, expectedHtml, null);
     }
@@ -103,10 +114,25 @@ public abstract class RenderingTestCase {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         Node node = parser().withOptions(options).parse(source);
         String html = renderer().withOptions(options).render(node);
+        actualHtml(html, optionsSet);
 
         // include source for better assertion errors
-        String expected = SpecReader.EXAMPLE_START + "\n" + showTabs(source + "\n" + SpecReader.TYPE_BREAK + "\n" + expectedHtml) + SpecReader.EXAMPLE_BREAK + "\n\n";
-        String actual = SpecReader.EXAMPLE_START + "\n" + showTabs(source + "\n" + SpecReader.TYPE_BREAK + "\n" + html) + SpecReader.EXAMPLE_BREAK + "\n\n";
+        String expected;
+        String actual;
+        if (example().getSection() != null) {
+            StringBuilder outExpected = new StringBuilder();
+            DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
+            expected = outExpected.toString();
+
+            StringBuilder outActual = new StringBuilder();
+            DumpSpecReader.addSpecExample(outActual, source, html, "", optionsSet, true, example().getSection(), example().getExampleNumber());
+            actual = outActual.toString();
+        } else {
+            expected = DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet);
+            actual = DumpSpecReader.addSpecExample(source, html, "", optionsSet);
+        }
+
+        specExample(expected, actual, optionsSet);
         if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
@@ -120,11 +146,26 @@ public abstract class RenderingTestCase {
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
         Node node = parser().withOptions(options).parse(source);
         String html = renderer().withOptions(options).render(node);
+        actualHtml(html, optionsSet);
         String ast = ast(node);
+        actualAst(ast, optionsSet);
 
         // include source for better assertion errors
-        String expected = DumpSpecReader.addSpecExample(showTabs(source), showTabs(expectedHtml), expectedAst, optionsSet);
-        String actual = DumpSpecReader.addSpecExample(showTabs(source), showTabs(html), ast, optionsSet);
+        String expected;
+        String actual;
+        if (example().getSection() != null) {
+            StringBuilder outExpected = new StringBuilder();
+            DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, expectedAst, optionsSet, true, example().getSection(), example().getExampleNumber());
+            expected = outExpected.toString();
+
+            StringBuilder outActual = new StringBuilder();
+            DumpSpecReader.addSpecExample(outActual, source, html, ast, optionsSet, true, example().getSection(), example().getExampleNumber());
+            actual = outActual.toString();
+        } else {
+            expected = DumpSpecReader.addSpecExample(source, expectedHtml, expectedAst, optionsSet);
+            actual = DumpSpecReader.addSpecExample(source, html, ast, optionsSet);
+        }
+        specExample(expected, actual, optionsSet);
         if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
@@ -137,16 +178,14 @@ public abstract class RenderingTestCase {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         Node node = parser().withOptions(options).parse(source);
         String ast = ast(node);
+        actualAst(ast, optionsSet);
 
         // include source for better assertion errors
-        String expected = DumpSpecReader.addSpecExample(showTabs(source), "", expectedAst, optionsSet);
-        String actual = DumpSpecReader.addSpecExample(showTabs(source), "", ast, optionsSet);
+        String expected = DumpSpecReader.addSpecExample(source, "", expectedAst, optionsSet);
+        String actual = DumpSpecReader.addSpecExample(source, "", ast, optionsSet);
+        specExample(expected, actual, optionsSet);
         if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
-    public static String showTabs(String s) {
-        // Tabs are shown as "rightwards arrow" for easier comparison
-        return s.replace("\t", "\u2192");
-    }
 }

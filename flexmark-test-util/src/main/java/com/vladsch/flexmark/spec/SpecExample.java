@@ -29,6 +29,15 @@ public class SpecExample {
         }
     }
 
+    // @formatter:off
+    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    // @formatter:on
+
     public boolean isFullSpecExample() {
         return this == NULL;
     }
