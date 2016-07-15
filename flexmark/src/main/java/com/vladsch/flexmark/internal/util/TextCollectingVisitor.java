@@ -33,7 +33,7 @@ public class TextCollectingVisitor extends AbstractVisitor {
     }
     
     @Override
-    public void visit(Text node) {
+    public void visit(TextBase node) {
         out.append(node.getChars());
     }
 }

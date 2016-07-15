@@ -5,12 +5,11 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A Footnote referencing node
  */
-public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify {
+public class Footnote extends CustomNode<FootnoteVisitor> implements DelimitedNode, DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -74,7 +73,7 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify 
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(FootnoteVisitor visitor) {
         visitor.visit(this);
     }
 }

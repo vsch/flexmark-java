@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
-import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
@@ -18,7 +15,7 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
     }
 
     @Override
-    public void visit(Text text) {
+    public void visit(TextBase text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
         }
     }

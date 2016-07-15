@@ -126,7 +126,7 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
      * @param parent the parent node whose children should be visited
      */
     @Override
-    protected void visitChildren(Node parent) {
+    public void visitChildren(Node parent) {
         if (!myClassificationDone) {
             // initial collection phase
             if (!(parent instanceof Document)) {

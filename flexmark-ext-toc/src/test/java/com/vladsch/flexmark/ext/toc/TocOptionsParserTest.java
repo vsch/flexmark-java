@@ -21,7 +21,9 @@ import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.IRender;
-import com.vladsch.flexmark.internal.util.AbstractVisitor;
+import com.vladsch.flexmark.internal.util.AbstractCustomVisitor;
+import com.vladsch.flexmark.internal.util.Computable;
+import com.vladsch.flexmark.internal.util.NodeVisitHandler;
 import com.vladsch.flexmark.internal.util.Pair;
 import com.vladsch.flexmark.internal.util.options.*;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
@@ -65,7 +67,15 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    private static class ParserNode extends CustomNode {
+    interface ParserVisitor {
+        Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
+                new NodeVisitHandler<>(ParserNode.class, ((ParserVisitor) visitor)::visit),
+        };
+
+        void visit(ParserNode node);
+    }
+
+    private static class ParserNode extends CustomNode<ParserVisitor> {
         final private String nodeType;
         final private ParsedOptionStatus status;
         final private String message;
@@ -125,6 +135,11 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         @Override
         public String getNodeName() {
             return nodeType;
+        }
+
+        @Override
+        public void accept(ParserVisitor visitor) {
+            visitor.visit(this);
         }
     }
 
@@ -186,38 +201,37 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             super(options);
         }
 
-        class RenderingVisitor extends AbstractVisitor {
+        class RenderingVisitor extends AbstractCustomVisitor implements ParserVisitor {
             final HtmlWriter html;
             final TocOptions defaultOptions;
 
             public RenderingVisitor(HtmlWriter html, TocOptions defaultOptions) {
+                super(ParserVisitor.VISIT_HANDLERS);
                 this.html = html;
                 this.defaultOptions = defaultOptions;
             }
 
             @Override
-            public void visit(CustomNode node) {
-                if (node instanceof ParserNode) {
-                    ParserNode parserNode = (ParserNode) node;
-                    TocOptions nodeTocOptions = parserNode.getTocOptions();
-                    if (nodeTocOptions != null) {
-                        html.raw("'").raw(parserNode.getChars().toString()).raw("' => ");
-                        html.raw(nodeTocOptions.toString()).line();
-                        html.indent();
+            public void visit(ParserNode node) {
+                ParserNode parserNode = (ParserNode) node;
+                TocOptions nodeTocOptions = parserNode.getTocOptions();
+                if (nodeTocOptions != null) {
+                    html.raw("'").raw(parserNode.getChars().toString()).raw("' => ");
+                    html.raw(nodeTocOptions.toString()).line();
+                    html.indent();
 
-                        if (getOptions().get(SIM_TOC)) {
-                            html.raw("diff: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, defaultOptions)).line();
-                            html.raw("full: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, null)).line();
-                        } else {
-                            html.raw("diff: ").raw(TocUtils.getTocPrefix(nodeTocOptions, defaultOptions)).line();
-                            html.raw("full: ").raw(TocUtils.getTocPrefix(nodeTocOptions, null)).line();
-                        }
-
-                        super.visitChildren(node);
-                        html.unIndent();
+                    if (getOptions().get(SIM_TOC)) {
+                        html.raw("diff: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, defaultOptions)).line();
+                        html.raw("full: ").raw(TocUtils.getSimTocPrefix(nodeTocOptions, null)).line();
                     } else {
-                        super.visitChildren(node);
+                        html.raw("diff: ").raw(TocUtils.getTocPrefix(nodeTocOptions, defaultOptions)).line();
+                        html.raw("full: ").raw(TocUtils.getTocPrefix(nodeTocOptions, null)).line();
                     }
+
+                    super.visitChildren(node);
+                    html.unIndent();
+                } else {
+                    super.visitChildren(node);
                 }
             }
         }

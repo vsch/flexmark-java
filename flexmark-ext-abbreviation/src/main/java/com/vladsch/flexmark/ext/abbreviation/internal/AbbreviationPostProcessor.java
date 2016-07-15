@@ -6,10 +6,7 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
@@ -21,7 +18,7 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
 
-    private AbbreviationPostProcessor(Document document) {
+    AbbreviationPostProcessor(Document document) {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {
@@ -54,13 +51,13 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     }
 
     @Override
-    public void visit(Text text) {
+    public void visit(TextBase text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             process(text);
         }
     }
     
-    private Node process(Text node) {
+    private Node process(TextBase node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);

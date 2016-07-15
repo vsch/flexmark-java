@@ -43,7 +43,7 @@ public class AbstractVisitor implements Visitor {
     @Override public void visit(Reference node) { visitChildren(node); } 
     @Override public void visit(SoftLineBreak node) { visitChildren(node); } 
     @Override public void visit(StrongEmphasis node) { visitChildren(node); } 
-    @Override public void visit(Text node) { visitChildren(node); } 
+    @Override public void visit(TextBase node) { visitChildren(node); } 
     // @formatter:on
 
     /**
@@ -51,7 +51,7 @@ public class AbstractVisitor implements Visitor {
      *
      * @param parent the parent node whose children should be visited
      */
-    protected void visitChildren(Node parent) {
+    public void visitChildren(Node parent) {
         Node node = parent.getFirstChild();
         while (node != null) {
             // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no

@@ -168,7 +168,7 @@ class AstVisitor extends AbstractVisitor {
     }
 
     @Override
-    public void visit(Text node) {
+    public void visit(TextBase node) {
         visitNode(node);
     }
 
@@ -198,7 +198,7 @@ class AstVisitor extends AbstractVisitor {
     }
 
     @Override
-    protected void visitChildren(Node node) {
+    public void visitChildren(Node node) {
         super.visitChildren(node);
     }
 }

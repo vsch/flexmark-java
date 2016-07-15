@@ -4,9 +4,8 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Visitor;
 
-public class WikiLink extends CustomNode implements DoNotLinkify {
+public class WikiLink extends CustomNode<WikiLinkVisitor> implements DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence link = SubSequence.NULL;
     protected BasedSequence textSeparatorMarker = SubSequence.NULL;
@@ -97,7 +96,7 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(WikiLinkVisitor visitor) {
         visitor.visit(this);
     }
 

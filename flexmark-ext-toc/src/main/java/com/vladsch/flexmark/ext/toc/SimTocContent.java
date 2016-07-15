@@ -4,14 +4,13 @@ import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Visitor;
 
 import java.util.List;
 
 /**
  * A sim toc contents node containing all text that came after the sim toc node
  */
-public class SimTocContent extends CustomBlock implements DoNotLinkify {
+public class SimTocContent extends CustomBlock<SimTocVisitor> implements DoNotLinkify {
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -42,7 +41,7 @@ public class SimTocContent extends CustomBlock implements DoNotLinkify {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(SimTocVisitor visitor) {
         visitor.visit(this);
     }
 }

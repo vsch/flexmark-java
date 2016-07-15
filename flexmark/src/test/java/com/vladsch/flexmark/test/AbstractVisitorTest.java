@@ -13,7 +13,7 @@ public class AbstractVisitorTest {
     public void replacingNodeInVisitorShouldNotDestroyVisitOrder() {
         Visitor visitor = new AbstractVisitor() {
             @Override
-            public void visit(Text text) {
+            public void visit(TextBase text) {
                 text.insertAfter(new Code(text.getChars()));
                 text.unlink();
             }

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Table block containing a {@link TableHead} and optionally a {@link TableBody}.
  */
-public class TableBlock extends CustomBlock {
+public class TableBlock extends CustomBlock<TableVisitor> {
     public TableBlock() {
     }
 
@@ -32,5 +32,10 @@ public class TableBlock extends CustomBlock {
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[0];
+    }
+
+    @Override
+    public void accept(TableVisitor visitor) {
+        visitor.visit(this);
     }
 }

@@ -10,7 +10,10 @@ import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.node.CustomNode;
+import com.vladsch.flexmark.node.DelimitedNode;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -83,8 +86,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
             opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }
+    
+    private interface UpperCaseNodeVisitor {
+        void visit(UpperCaseNode node);
+    }
 
-    private static class UpperCaseNode extends CustomNode implements DelimitedNode {
+    private static class UpperCaseNode extends CustomNode<UpperCaseNodeVisitor> implements DelimitedNode {
         protected BasedSequence openingMarker = SubSequence.NULL;
         protected BasedSequence text = SubSequence.NULL;
         protected BasedSequence closingMarker = SubSequence.NULL;
@@ -133,7 +140,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void accept(Visitor visitor) {
+        public void accept(UpperCaseNodeVisitor visitor) {
             visitor.visit(this);
         }
     }

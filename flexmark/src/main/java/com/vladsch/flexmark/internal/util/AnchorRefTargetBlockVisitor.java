@@ -12,7 +12,7 @@ public abstract class AnchorRefTargetBlockVisitor extends AbstractVisitor {
     public abstract void visit(AnchorRefTarget node);
     
     @Override
-    protected void visitChildren(Node parent) {
+    public void visitChildren(Node parent) {
         if (parent instanceof AnchorRefTarget) {
             visit((AnchorRefTarget) parent);
         }

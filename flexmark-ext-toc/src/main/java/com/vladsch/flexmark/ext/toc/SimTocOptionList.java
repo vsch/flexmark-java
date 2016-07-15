@@ -3,12 +3,11 @@ package com.vladsch.flexmark.ext.toc;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A sim toc contents node containing all text that came after the sim toc node
  */
-public class SimTocOptionList extends CustomNode implements DoNotLinkify {
+public class SimTocOptionList extends CustomNode<SimTocVisitor> implements DoNotLinkify {
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -23,7 +22,7 @@ public class SimTocOptionList extends CustomNode implements DoNotLinkify {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(SimTocVisitor visitor) {
         visitor.visit(this);
     }
 }

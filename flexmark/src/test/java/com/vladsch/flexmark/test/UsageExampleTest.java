@@ -3,7 +3,7 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.TextBase;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class UsageExampleTest {
         int wordCount = 0;
 
         @Override
-        public void visit(Text text) {
+        public void visit(TextBase text) {
             // This is called for all Text nodes. Override other visit methods for other node types.
 
             // Count words (this is just an example, don't actually do it this way for various reasons).

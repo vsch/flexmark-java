@@ -4,12 +4,11 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
  */
-public class TableCell extends CustomNode implements DelimitedNode {
+public class TableCell extends CustomNode<TableVisitor> implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -67,7 +66,7 @@ public class TableCell extends CustomNode implements DelimitedNode {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(TableVisitor visitor) {
         visitor.visit(this);
     }
 

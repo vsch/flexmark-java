@@ -28,13 +28,13 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
     }
 
     @Override
-    public void visit(Text text) {
+    public void visit(TextBase text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             processTextNode(text);
         }
     }
 
-    private void processTextNode(Text text) {
+    private void processTextNode(TextBase text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);

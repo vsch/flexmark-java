@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.4](#044)
 - [0.4.3](#043)
 - [0.4.2](#042)
 - [0.4.1](#041)
@@ -30,6 +31,24 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.4
+-----
+
+- Change `CustomNode` and `CustomBlock` are parameterized by the visitor interface and have
+  `accept()` of that visitor. 
+
+- Change extension modules now implement a custom node visitor interface which defines
+  `VISITOR_HANDLERS` static method that is passed to `AbstractCustomVisitor` and
+  `AbstractCustomBlockVisitor` mapping custom node class visits to the interface's methods
+
+- Change `AbstractCustomVisitor` and `AbstractCustomBlockVisitor` will now work with custom
+  nodes extended from any Node not just `CustomNode` and `CustomBlock`. The abstract custom
+  visitor constructors take a vararg of custom visitor interface defined `VISITOR_HANDLERS` 
+
+    These changes allow a class to handle all types of visits: core and custom without
+    distinction. It only has to declare that it implements all the custom visitor interfaces and
+    add its visitor handlers to its `super()` constructor call. 
 
 0.4.3
 -----

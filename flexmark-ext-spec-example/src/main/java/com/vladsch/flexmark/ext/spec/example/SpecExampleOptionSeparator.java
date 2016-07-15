@@ -2,12 +2,11 @@ package com.vladsch.flexmark.ext.spec.example;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A SpecExample block node
  */
-public class SpecExampleOptionSeparator extends CustomNode {
+public class SpecExampleOptionSeparator extends CustomNode<SpecExampleVisitor> {
     @Override
     public void getAstExtra(StringBuilder out) {
     }
@@ -25,7 +24,7 @@ public class SpecExampleOptionSeparator extends CustomNode {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(SpecExampleVisitor visitor) {
         visitor.visit(this);
     }
 }

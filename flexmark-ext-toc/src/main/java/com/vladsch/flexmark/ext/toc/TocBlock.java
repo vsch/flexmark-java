@@ -2,13 +2,11 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomBlock;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A TOC node
  */
-public class TocBlock extends CustomBlock {
+public class TocBlock extends TocBlockBase<TocVisitor> {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence tocKeyword = SubSequence.NULL;
     protected BasedSequence style = SubSequence.NULL;
@@ -75,7 +73,7 @@ public class TocBlock extends CustomBlock {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(TocVisitor visitor) {
         visitor.visit(this);
     }
 }

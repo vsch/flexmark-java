@@ -42,6 +42,6 @@ public interface Visitor {
     void visit(Reference node); 
     void visit(SoftLineBreak node); 
     void visit(StrongEmphasis node); 
-    void visit(Text node); 
+    void visit(TextBase node); 
     // @formatter:on
 }

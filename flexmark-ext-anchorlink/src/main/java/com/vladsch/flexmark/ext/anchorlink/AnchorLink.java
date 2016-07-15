@@ -2,12 +2,11 @@ package com.vladsch.flexmark.ext.anchorlink;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class AnchorLink extends CustomNode {
+public class AnchorLink extends CustomNode<AnchorLinkVisitor> {
     public AnchorLink() {
     }
 
@@ -21,7 +20,7 @@ public class AnchorLink extends CustomNode {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(AnchorLinkVisitor visitor) {
         visitor.visit(this);
     }
 }

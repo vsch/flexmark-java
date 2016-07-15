@@ -3,14 +3,13 @@ package com.vladsch.flexmark.ext.spec.example;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomBlock;
-import com.vladsch.flexmark.node.Visitor;
 
 import java.util.List;
 
 /**
  * A SpecExample block node
  */
-public class SpecExampleBlock extends CustomBlock {
+public class SpecExampleBlock extends CustomBlock<SpecExampleVisitor> {
     private BasedSequence openingMarker = SubSequence.NULL;
     private BasedSequence exampleKeyword = SubSequence.NULL;
     private BasedSequence coordOpeningMarker = SubSequence.NULL;
@@ -94,7 +93,7 @@ public class SpecExampleBlock extends CustomBlock {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(SpecExampleVisitor visitor) {
         visitor.visit(this);
     }
 

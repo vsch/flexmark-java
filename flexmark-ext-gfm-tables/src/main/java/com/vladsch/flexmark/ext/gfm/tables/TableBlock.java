@@ -6,9 +6,14 @@ import com.vladsch.flexmark.node.CustomBlock;
 /**
  * Table block containing a {@link TableHead} and optionally a {@link TableBody}.
  */
-public class TableBlock extends CustomBlock {
+public class TableBlock extends CustomBlock<TableVisitor> {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
+    }
+
+    @Override
+    public void accept(TableVisitor visitor) {
+        visitor.visit(this);
     }
 }

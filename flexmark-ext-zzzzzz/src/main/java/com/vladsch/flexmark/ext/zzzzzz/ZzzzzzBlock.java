@@ -4,12 +4,11 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomBlock;
 import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A Zzzzzz block node
  */
-public class ZzzzzzBlock extends CustomBlock {
+public class ZzzzzzBlock extends CustomBlock<ZzzzzzVisitor> {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -100,8 +99,7 @@ public class ZzzzzzBlock extends CustomBlock {
         this.zzzzzz = zzzzzz;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
+    public void accept(ZzzzzzVisitor visitor) {
         visitor.visit(this);
     }
 }

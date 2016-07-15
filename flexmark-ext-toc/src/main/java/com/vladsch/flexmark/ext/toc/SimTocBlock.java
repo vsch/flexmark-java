@@ -2,12 +2,11 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A simulated toc block node
  */
-public class SimTocBlock extends TocBlock {
+public class SimTocBlock extends TocBlockBase<SimTocVisitor> {
     protected BasedSequence anchorMarker = SubSequence.NULL;
     protected BasedSequence openingTitleMarker = SubSequence.NULL;
     protected BasedSequence title = SubSequence.NULL;
@@ -72,7 +71,7 @@ public class SimTocBlock extends TocBlock {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(SimTocVisitor visitor) {
         visitor.visit(this);
     }
 }

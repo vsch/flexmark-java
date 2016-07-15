@@ -3,15 +3,10 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.StringSequence;
 
-public class Text extends Node {
+public class Text extends TextBase<Visitor> {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
-    }
-
-    @Override
-    public void getAstExtra(StringBuilder out) {
-        astExtraChars(out);
     }
 
     public Text() {

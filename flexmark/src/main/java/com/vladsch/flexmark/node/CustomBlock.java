@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public abstract class CustomBlock extends Block {
+public abstract class CustomBlock<V> extends Block {
     public CustomBlock() {
     }
 
@@ -25,8 +25,10 @@ public abstract class CustomBlock extends Block {
         super(blockContent);
     }
 
+    public abstract void accept(V visitor);
+
     @Override
-    public void accept(Visitor visitor) {
+    final public void accept(Visitor visitor) {
         visitor.visit(this);
     }
 }

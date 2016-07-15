@@ -35,7 +35,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -58,7 +58,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -82,7 +82,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -108,7 +108,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -132,7 +132,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -161,7 +161,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\ngreat";
         final String rendered = "<p>great</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -194,7 +194,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "\n---";
         final String rendered = "<h1>hello</h1>\n<h2>hello markdown world!</h2>\n<h2>hello: world</h2>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 
@@ -211,7 +211,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
                 "test";
         final String rendered = "<hr />\n<p>test</p>\n";
 
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
+        AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
         document.accept(visitor);
 

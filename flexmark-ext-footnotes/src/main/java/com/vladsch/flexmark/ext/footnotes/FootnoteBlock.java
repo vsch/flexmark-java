@@ -3,12 +3,11 @@ package com.vladsch.flexmark.ext.footnotes;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomBlock;
-import com.vladsch.flexmark.node.Visitor;
 
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class FootnoteBlock extends CustomBlock {
+public class FootnoteBlock extends CustomBlock<FootnoteVisitor> {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -94,7 +93,7 @@ public class FootnoteBlock extends CustomBlock {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(FootnoteVisitor visitor) {
         visitor.visit(this);
     }
 }

@@ -2,11 +2,10 @@ package com.vladsch.flexmark.ext.front.matter;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.Visitor;
 
 import java.util.List;
 
-public class YamlFrontMatterNode extends CustomNode {
+public class YamlFrontMatterNode extends CustomNode<YamlFrontMatterVisitor> {
     private String key;
     private List<String> values;
 
@@ -37,7 +36,7 @@ public class YamlFrontMatterNode extends CustomNode {
     }
 
     @Override
-    public void accept(Visitor visitor) {
+    public void accept(YamlFrontMatterVisitor visitor) {
         visitor.visit(this);
     }
 }
