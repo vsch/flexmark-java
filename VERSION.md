@@ -42,7 +42,7 @@ flexmark-java
   `VISITOR_HANDLERS` static method that is passed to `NodeVisitor` constructor along with any
   other visitor handlers as vararg and implement the needed methods. Got fed up of maintaining
   the core `Visitor` interface and its derivatives. Also was a pain to handle custom nodes. Now
-  all are handled the same way and no limitation of inheritance.
+  all are handled the same way and no limitation of inheritance other than from Node.
 
 0.4.3
 -----
