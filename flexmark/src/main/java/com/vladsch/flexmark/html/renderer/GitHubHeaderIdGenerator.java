@@ -13,9 +13,9 @@ public class GitHubHeaderIdGenerator implements HtmlIdGenerator {
         HashMap<String, Integer> headerBaseIds = new HashMap<>();
         new AnchorRefTargetBlockVisitor() {
             @Override
-            public void visit(AnchorRefTarget node) {
+            protected void visit(AnchorRefTarget node) {
                 String text = node.getAnchorRefText();
-                
+
                 if (!text.isEmpty()) {
                     String baseRefId = generateId(text);
 

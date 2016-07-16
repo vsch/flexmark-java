@@ -25,7 +25,9 @@ import com.vladsch.flexmark.node.Node;
  * Can be used to only process block nodes efficiently skipping text. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
  */
-public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase implements AnchorRefTarget.Visitor {
+public abstract class AnchorRefTargetBlockVisitor extends NodeVisitorBase {
+    protected abstract void visit(AnchorRefTarget node);
+    
     public void visit(Node node) {
         if (node instanceof AnchorRefTarget) visit((AnchorRefTarget) node);
         if (node instanceof Block) {

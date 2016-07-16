@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Abstract visitor that visits all children by default.
+ * Node visitor that visits all children by default and allows configuring node handlers to handle specific classes.
  * <p>
  * Can be used to only process certain nodes. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
@@ -30,6 +30,13 @@ import java.util.Map;
 public class NodeVisitor extends NodeVisitorBase {
     final private Map<Class<?>, VisitHandler<?>> myCustomVisitorsMap;
 
+    // Usage:
+    //myVisitor = new NodeVisitor(
+    //        new VisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
+    //        new VisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
+    //        new VisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
+    //        new VisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
+    //);
     public NodeVisitor(VisitHandler<?>... visitors) {
         HashMap<Class<?>, VisitHandler<?>> visitorMap = new HashMap<>();
         for (VisitHandler<?> visitor : visitors) {
@@ -55,25 +62,6 @@ public class NodeVisitor extends NodeVisitorBase {
         }
         this.myCustomVisitorsMap = visitorMap;
     }
-
-    // Usage:
-    //myVisitor = new NodeVisitor<>(this, (Computable<VisitHandler<?>[], TextCollectingVisitor>) value -> new VisitHandler<?>[] {
-    //        new VisitHandler<>(Text.class, value::visit),
-    //        new VisitHandler<>(HtmlEntity.class, value::visit),
-    //        new VisitHandler<>(SoftLineBreak.class, value::visit),
-    //        new VisitHandler<>(HardLineBreak.class, value::visit),
-    //});
-    //@SafeVarargs
-    //public <V> NodeVisitor(V visitor, Computable<VisitHandler<?>[], V>... computables) {
-    //    HashMap<Class<?>, VisitHandler<?>> visitorMap = new HashMap<>();
-    //    for (Computable<VisitHandler<?>[], V> computable : computables) {
-    //        for (VisitHandler handler : computable.compute(visitor)) {
-    //            visitorMap.put(handler.getNodeType(), handler);
-    //        }
-    //    }
-    //
-    //    this.myCustomVisitorsMap = visitorMap;
-    //}
 
     public void visit(Node node) {
         VisitHandler visitor = myCustomVisitorsMap.get(node.getClass());

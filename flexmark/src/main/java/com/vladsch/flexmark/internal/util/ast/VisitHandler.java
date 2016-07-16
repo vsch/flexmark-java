@@ -47,7 +47,7 @@ public class VisitHandler<N extends Node> implements Visitor<N> {
 
         VisitHandler other = (VisitHandler) o;
 
-        if (!myClass.equals(other.myClass)) return false;
+        if (myClass != other.myClass) return false;
         return myVisitor == other.myVisitor;
     }
 

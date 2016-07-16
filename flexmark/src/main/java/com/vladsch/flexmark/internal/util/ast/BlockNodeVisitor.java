@@ -21,7 +21,7 @@ import com.vladsch.flexmark.node.Node;
 import java.util.Collection;
 
 /**
- * Used to visit only nodes, non block nodes or children of non-block nodes are not visited
+ * Used to visit only block nodes, non block nodes or children of non-block nodes are not visited
  * <p>
  * Can be used to only process certain nodes. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
@@ -31,14 +31,13 @@ public class BlockNodeVisitor extends NodeVisitor {
         super(visitors);
     }
 
-    public BlockNodeVisitor(Collection<VisitHandler<?>> visitors) {
+    public BlockNodeVisitor(VisitHandler<?>[]... visitors) {
         super(visitors);
     }
 
-    //@SafeVarargs
-    //public <V> BlockNodeVisitor(V visitor, Computable<VisitHandler<?>[], V>... computables) {
-    //    super(visitor, computables);
-    //}
+    public BlockNodeVisitor(Collection<VisitHandler<?>> visitors) {
+        super(visitors);
+    }
 
     @Override
     public void visit(Node node) {

@@ -135,20 +135,20 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
         if (!myClassificationDone) {
             // initial collection phase
             if (!(parent instanceof Document)) {
-                myClassifyingNodeTracker.nodeAdded(parent);
+                myClassifyingNodeTracker.nodeAdded((Node) parent);
             }
         } else {
             // postProcessor modification update phase
         }
 
-        if (parent.hasChildren()) {
+        if (parent.getFirstChild() != null) {
             pushNodeAncestry();
-            if (updateNodeAncestry(parent, myNodeAncestryBitSet)) {
+            if (updateNodeAncestry((Node) parent, myNodeAncestryBitSet)) {
                 super.visitChildren(parent);
             }
             popNodeAncestry();
         } else {
-            updateNodeAncestry(parent, myNodeAncestryBitSet);
+            updateNodeAncestry((Node) parent, myNodeAncestryBitSet);
         }
     }
 }

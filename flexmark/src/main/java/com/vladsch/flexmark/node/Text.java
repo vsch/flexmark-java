@@ -4,10 +4,6 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.StringSequence;
 
 public class Text extends TextBase {
-    public interface Visitor {
-        void visit(Text node);
-    }
-    
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

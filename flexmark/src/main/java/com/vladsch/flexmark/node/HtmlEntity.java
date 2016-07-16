@@ -8,10 +8,6 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
 public class HtmlEntity extends Node {
-    public interface Visitor {
-        void visit(HtmlEntity node);
-    }
-
     @Override
     public void getAstExtra(StringBuilder out) {
         if (!getChars().isEmpty()) out.append(" \"").append(getChars()).append("\"");

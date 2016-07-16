@@ -8,10 +8,6 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import java.util.List;
 
 public class Heading extends Block implements AnchorRefTarget {
-    public interface Visitor {
-        void visit(Heading node);
-    }
-
     protected int level;
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;

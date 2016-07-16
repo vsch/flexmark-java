@@ -9,11 +9,6 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public abstract class Node {
-    public interface Visitor {
-        void visit(Node node);
-    }
-
-
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
 
     private Node parent = null;
