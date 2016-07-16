@@ -3,6 +3,10 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 public class SoftLineBreak extends Node {
+    public interface Visitor {
+        void visit(SoftLineBreak node);
+    }
+
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -15,8 +19,4 @@ public class SoftLineBreak extends Node {
         super(chars);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

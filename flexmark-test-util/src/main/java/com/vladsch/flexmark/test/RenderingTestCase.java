@@ -89,9 +89,7 @@ public abstract class RenderingTestCase {
     }
 
     protected String ast(Node node) {
-        AstVisitor astVisitor = new AstVisitor();
-        node.accept(astVisitor);
-        return astVisitor.getAst();
+        return new AstCollectingVisitor().collectAndGetAstText(node);
     }
 
     protected void actualHtml(String html, String optionSet) {
@@ -119,7 +117,7 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected;
         String actual;
-        if (example().getSection() != null) {
+        if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
             expected = outExpected.toString();
@@ -153,7 +151,7 @@ public abstract class RenderingTestCase {
         // include source for better assertion errors
         String expected;
         String actual;
-        if (example().getSection() != null) {
+        if (example() != null && example().getSection() != null) {
             StringBuilder outExpected = new StringBuilder();
             DumpSpecReader.addSpecExample(outExpected, source, expectedHtml, expectedAst, optionsSet, true, example().getSection(), example().getExampleNumber());
             expected = outExpected.toString();
@@ -179,10 +177,21 @@ public abstract class RenderingTestCase {
         Node node = parser().withOptions(options).parse(source);
         String ast = ast(node);
         actualAst(ast, optionsSet);
+        
+        String expected;
+        String actual;
+        if (example() != null && example().getSection() != null) {
+            StringBuilder outExpected = new StringBuilder();
+            DumpSpecReader.addSpecExample(outExpected, source, "", expectedAst, optionsSet, true, example().getSection(), example().getExampleNumber());
+            expected = outExpected.toString();
 
-        // include source for better assertion errors
-        String expected = DumpSpecReader.addSpecExample(source, "", expectedAst, optionsSet);
-        String actual = DumpSpecReader.addSpecExample(source, "", ast, optionsSet);
+            StringBuilder outActual = new StringBuilder();
+            DumpSpecReader.addSpecExample(outActual, source, "", ast, optionsSet, true, example().getSection(), example().getExampleNumber());
+            actual = outActual.toString();
+        } else {
+            expected = DumpSpecReader.addSpecExample(source, "", expectedAst, optionsSet);
+            actual = DumpSpecReader.addSpecExample(source, "", ast, optionsSet);
+        }
         specExample(expected, actual, optionsSet);
         if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);

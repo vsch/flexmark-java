@@ -78,27 +78,25 @@ public class ParserTest {
         }
         return n.getChars().toString();
     }
-    
+
     private interface DashBlockVisitor {
         void visit(DashBlock node);
     }
 
-    private static class DashBlock extends CustomBlock<DashBlockVisitor> {
-        @Override
-        public BasedSequence[] getSegments() {
-            return EMPTY_SEGMENTS;
+    private static class DashBlock extends CustomBlock {
+        DashBlock() {
         }
 
         @Override
-        public void accept(DashBlockVisitor visitor) {
-            visitor.visit(this);
+        public BasedSequence[] getSegments() {
+            return EMPTY_SEGMENTS;
         }
     }
 
     private static class DashBlockParser extends AbstractBlockParser {
 
         private DashBlock dash;
-        
+
         public DashBlockParser(BasedSequence line) {
             dash = new DashBlock();
             dash.setChars(line);

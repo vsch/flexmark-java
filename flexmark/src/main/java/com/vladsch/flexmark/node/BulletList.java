@@ -35,9 +35,4 @@ public class BulletList extends ListBlock {
     public void setOpeningMarker(char openingMarker) {
         this.openingMarker = openingMarker;
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

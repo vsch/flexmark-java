@@ -15,13 +15,14 @@
 
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface EmojiVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(Emoji.class, ((EmojiVisitor) visitor)::visit),
-    };
+    static <V extends EmojiVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(Emoji.class, visitor::visit),
+        };
+    }
 
     void visit(Emoji node);
 }

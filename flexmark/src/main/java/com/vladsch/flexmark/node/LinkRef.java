@@ -30,8 +30,4 @@ public class LinkRef extends RefNode {
         super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, referenceCloseMarker);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

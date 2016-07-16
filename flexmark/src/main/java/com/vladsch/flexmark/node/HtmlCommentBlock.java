@@ -26,8 +26,4 @@ public class HtmlCommentBlock extends HtmlBlockBase {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

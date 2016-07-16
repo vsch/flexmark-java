@@ -1773,6 +1773,55 @@ Document[0, 197]
 ````````````````````````````````
 
 
+Html comments in block
+
+```````````````````````````````` example HTML Suppress Options: 6
+<div>
+    <!-- HTML Comment -->
+</div>
+.
+<div>
+    <!-- HTML Comment -->
+</div>
+.
+Document[0, 39]
+  HtmlBlock[0, 39]
+````````````````````````````````
+
+
+Html comments in block
+
+```````````````````````````````` example HTML Suppress Options: 7
+<!-- HTML Comment -->
+<div>
+</div>
+.
+<!-- HTML Comment -->
+<div>
+</div>
+.
+Document[0, 35]
+  HtmlCommentBlock[0, 22]
+  HtmlBlock[22, 35]
+````````````````````````````````
+
+
+Html comments in block
+
+```````````````````````````````` example HTML Suppress Options: 8
+<div>
+</div>
+<!-- HTML Comment -->
+.
+<div>
+</div>
+<!-- HTML Comment -->
+.
+Document[0, 35]
+  HtmlBlock[0, 35]
+````````````````````````````````
+
+
 ## GFM compatibility
 
 ### GFM Emphasis
@@ -1845,6 +1894,26 @@ plain text
 .
 Document[0, 23]
   FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[3] close:[19, 22, "```"]
+````````````````````````````````
+
+
+## Anchor links option
+
+Change language class prefix
+
+```````````````````````````````` example Anchor links option: 1
+inline anchor <a id="test" href="#"></a><em></em> test 
+.
+<p>inline anchor <a id="test" href="#"></a><em></em> test</p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Text[0, 14] chars:[0, 14, "inlin"..."chor "]
+    HtmlInline[14, 36] chars:[14, 36, "<a id"..."="#">"]
+    HtmlInline[36, 40] chars:[36, 40, "</a>"]
+    HtmlInline[40, 44] chars:[40, 44, "<em>"]
+    HtmlInline[44, 49] chars:[44, 49, "</em>"]
+    Text[49, 54] chars:[49, 54, " test"]
 ````````````````````````````````
 
 

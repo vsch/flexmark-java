@@ -61,8 +61,4 @@ public class MailLink extends LinkNode {
         this.closingMarker = closingMarker;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

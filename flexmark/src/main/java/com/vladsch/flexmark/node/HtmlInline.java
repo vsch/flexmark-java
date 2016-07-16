@@ -25,9 +25,5 @@ public class HtmlInline extends HtmlInlineBase {
         super(chars);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 
 }

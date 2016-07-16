@@ -86,12 +86,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
             opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }
-    
+
     private interface UpperCaseNodeVisitor {
         void visit(UpperCaseNode node);
     }
 
-    private static class UpperCaseNode extends CustomNode<UpperCaseNodeVisitor> implements DelimitedNode {
+    private static class UpperCaseNode extends CustomNode implements DelimitedNode {
         protected BasedSequence openingMarker = SubSequence.NULL;
         protected BasedSequence text = SubSequence.NULL;
         protected BasedSequence closingMarker = SubSequence.NULL;
@@ -138,15 +138,9 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         public void setClosingMarker(BasedSequence closingMarker) {
             this.closingMarker = closingMarker;
         }
-
-        @Override
-        public void accept(UpperCaseNodeVisitor visitor) {
-            visitor.visit(this);
-        }
     }
 
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
-
         @Override
         public NodeRenderer create(DataHolder options) {
             return new UpperCaseNodeRenderer(options);
@@ -154,7 +148,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     private static class UpperCaseNodeRenderer implements NodeRenderer {
-        private UpperCaseNodeRenderer(DataHolder options) {
+        UpperCaseNodeRenderer(DataHolder options) {
         }
 
         @Override
@@ -163,7 +157,6 @@ public class DelimiterProcessorTest extends RenderingTestCase {
                     new NodeRenderingHandler<>(UpperCaseNode.class, this::render)
             ));
         }
-
 
         private void render(UpperCaseNode node, NodeRendererContext context, HtmlWriter html) {
             for (Node child = node.getFirstChild(); child != null; child = child.getNext()) {

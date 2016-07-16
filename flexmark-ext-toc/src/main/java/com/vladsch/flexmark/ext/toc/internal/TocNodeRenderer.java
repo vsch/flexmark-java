@@ -5,7 +5,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
-import com.vladsch.flexmark.internal.util.HeadingCollectingVisitor;
+import com.vladsch.flexmark.internal.util.ast.HeadingCollectingVisitor;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Heading;
 
@@ -30,9 +30,7 @@ public class TocNodeRenderer implements NodeRenderer {
 
     private void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
         HeadingCollectingVisitor visitor = new HeadingCollectingVisitor();
-        visitor.visit(node.getDocument());
-
-        List<Heading> headings = visitor.getHeadings();
+        List<Heading> headings = visitor.collectAndGetHeadings(node.getDocument());
         if (headings != null) {
             TocOptionsParser optionsParser = new TocOptionsParser();
             TocOptions options = optionsParser.parseOption(node.getStyle(), this.options.withTitle(""), null).getFirst();

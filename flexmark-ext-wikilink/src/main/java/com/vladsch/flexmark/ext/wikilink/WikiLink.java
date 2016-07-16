@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DoNotLinkify;
 
-public class WikiLink extends CustomNode<WikiLinkVisitor> implements DoNotLinkify {
+public class WikiLink extends CustomNode implements DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence link = SubSequence.NULL;
     protected BasedSequence textSeparatorMarker = SubSequence.NULL;
@@ -93,11 +93,6 @@ public class WikiLink extends CustomNode<WikiLinkVisitor> implements DoNotLinkif
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
-    }
-
-    @Override
-    public void accept(WikiLinkVisitor visitor) {
-        visitor.visit(this);
     }
 
     public void setLinkChars(BasedSequence linkChars) {

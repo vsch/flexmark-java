@@ -18,7 +18,7 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.StringSequence;
 
-public abstract class TextBase<T> extends Node {
+public abstract class TextBase extends Node {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -44,6 +44,4 @@ public abstract class TextBase<T> extends Node {
     protected String toStringAttributes() {
         return "text=" + getChars();
     }
-
-    public abstract void accept(T visitor);
 }

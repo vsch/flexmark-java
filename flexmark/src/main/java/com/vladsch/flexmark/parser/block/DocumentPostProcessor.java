@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.internal.util.NodeTracker;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.PostProcessor;
 
-public abstract class DocumentPostProcessor extends AbstractVisitor implements PostProcessor {
+public abstract class DocumentPostProcessor implements PostProcessor {
     /**
      * @param state node tracker used for optimizing node processing
      * @param node  the node to post-process

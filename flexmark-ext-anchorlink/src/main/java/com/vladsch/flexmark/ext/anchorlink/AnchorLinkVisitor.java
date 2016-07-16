@@ -15,13 +15,14 @@
 
 package com.vladsch.flexmark.ext.anchorlink;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface AnchorLinkVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(AnchorLink.class, ((AnchorLinkVisitor) visitor)::visit),
-    };
+    static <V extends AnchorLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(AnchorLink.class, visitor::visit),
+        };
+    }
 
     void visit(AnchorLink node);
 }

@@ -55,9 +55,4 @@ public class AutoLink extends LinkNode {
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

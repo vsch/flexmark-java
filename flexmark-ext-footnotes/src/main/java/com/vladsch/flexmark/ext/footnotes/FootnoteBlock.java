@@ -7,7 +7,7 @@ import com.vladsch.flexmark.node.CustomBlock;
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class FootnoteBlock extends CustomBlock<FootnoteVisitor> {
+public class FootnoteBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -90,10 +90,5 @@ public class FootnoteBlock extends CustomBlock<FootnoteVisitor> {
 
     public void setFootnote(BasedSequence footnote) {
         this.footnote = footnote;
-    }
-
-    @Override
-    public void accept(FootnoteVisitor visitor) {
-        visitor.visit(this);
     }
 }

@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.DelimitedNode;
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class Emoji extends CustomNode<EmojiVisitor> implements DelimitedNode {
+public class Emoji extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -59,10 +59,5 @@ public class Emoji extends CustomNode<EmojiVisitor> implements DelimitedNode {
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
-    }
-
-    @Override
-    public void accept(EmojiVisitor visitor) {
-        visitor.visit(this);
     }
 }

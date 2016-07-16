@@ -27,7 +27,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
 
     private void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
-            if (!options.noWrap) {
+            if (options.wrapText) {
                 context.renderChildren(node);
             }
         } else {
@@ -38,7 +38,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
                 if (options.setName) html.attr("name", id);
                 if (!options.anchorClass.isEmpty()) html.attr("class", options.anchorClass);
 
-                if (options.noWrap) {
+                if (!options.wrapText) {
                     html.withAttr().tag("a");
                     if (!options.textPrefix.isEmpty()) html.raw(options.textPrefix);
                     if (!options.textSuffix.isEmpty()) html.raw(options.textSuffix);
@@ -51,7 +51,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
                     });
                 }
             } else {
-                if (!options.noWrap) {
+                if (options.wrapText) {
                     context.renderChildren(node);
                 }
             }

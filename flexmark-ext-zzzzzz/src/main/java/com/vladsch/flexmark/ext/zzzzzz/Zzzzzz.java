@@ -9,7 +9,7 @@ import com.vladsch.flexmark.node.DoNotLinkify;
 /**
  * A Zzzzzz node
  */
-public class Zzzzzz extends CustomNode<ZzzzzzVisitor> implements DelimitedNode, DoNotLinkify {
+public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;

@@ -139,8 +139,4 @@ public class Reference extends Node {
         return "reference=" + reference + ", url=" + url;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

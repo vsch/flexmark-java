@@ -15,14 +15,15 @@
 
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface FootnoteVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(FootnoteBlock.class, ((FootnoteVisitor) visitor)::visit),
-            new NodeVisitHandler<>(Footnote.class, ((FootnoteVisitor) visitor)::visit),
-    };
+    static <V extends FootnoteVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+            new VisitHandler<>(FootnoteBlock.class, visitor::visit),
+            new VisitHandler<>(Footnote.class, visitor::visit),
+        };
+    }
 
     void visit(FootnoteBlock node);
     void visit(Footnote node);

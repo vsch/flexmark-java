@@ -26,5 +26,6 @@
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
   </component>
 </module>

@@ -15,14 +15,15 @@
 
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface ZzzzzzVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(Zzzzzz.class, ((ZzzzzzVisitor)visitor)::visit),// zzzoptionszzz(CUSTOM_NODE)
-            new NodeVisitHandler<>(ZzzzzzBlock.class, ((ZzzzzzVisitor)visitor)::visit),// zzzoptionszzz(CUSTOM_BLOCK_NODE)
-    };
+    static <V extends ZzzzzzVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(Zzzzzz.class, visitor::visit),// zzzoptionszzz(CUSTOM_NODE)
+                new VisitHandler<>(ZzzzzzBlock.class, visitor::visit),// zzzoptionszzz(CUSTOM_BLOCK_NODE)
+        };
+    }
 
     void visit(Zzzzzz node);// zzzoptionszzz(CUSTOM_NODE)
     void visit(ZzzzzzBlock node);// zzzoptionszzz(CUSTOM_BLOCK_NODE)

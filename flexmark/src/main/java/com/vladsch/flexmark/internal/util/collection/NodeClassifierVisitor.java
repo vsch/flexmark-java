@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.internal.util.collection;
 
-import com.vladsch.flexmark.internal.util.AbstractVisitor;
 import com.vladsch.flexmark.internal.util.NodeTracker;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitorBase;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.*;
 
-public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracker {
+public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
     final private OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
     final private OrderedSet<Class<?>> myExclusionSet;
     final private HashMap<Integer, BitSet> myNodeAncestryMap;
@@ -29,9 +29,14 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
     public ClassifyingNodeTracker classify(Node node) {
         // no double dipping
         assert !myClassificationDone;
-        node.accept(this);
+        visit(node);
         myClassificationDone = true;
         return myClassifyingNodeTracker;
+    }
+
+    @Override
+    public void visit(Node node) {
+        visitChildren(node);
     }
 
     // @formatter:off
@@ -59,7 +64,7 @@ public class NodeClassifierVisitor extends AbstractVisitor implements NodeTracke
 
             // let'er rip to update the descendants
             myNodeAncestryBitSetStack.clear();
-            node.accept(this);
+            visit(node);
         }
     }
 

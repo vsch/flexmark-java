@@ -106,8 +106,4 @@ public class Paragraph extends Block {
         return lineIndents;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

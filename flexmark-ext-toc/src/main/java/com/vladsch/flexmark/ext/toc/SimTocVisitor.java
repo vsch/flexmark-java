@@ -15,16 +15,17 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface SimTocVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(SimTocBlock.class, ((SimTocVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SimTocOptionList.class, ((SimTocVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SimTocOption.class, ((SimTocVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SimTocContent.class, ((SimTocVisitor) visitor)::visit),
-    };
+    static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+            new VisitHandler<>(SimTocBlock.class, visitor::visit),
+            new VisitHandler<>(SimTocOptionList.class, visitor::visit),
+            new VisitHandler<>(SimTocOption.class, visitor::visit),
+            new VisitHandler<>(SimTocContent.class, visitor::visit),
+        };
+    }
 
     void visit(SimTocBlock node);
     void visit(SimTocOptionList node);

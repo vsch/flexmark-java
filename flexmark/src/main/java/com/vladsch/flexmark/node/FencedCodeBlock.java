@@ -87,9 +87,4 @@ public class FencedCodeBlock extends Block {
     public void setFenceIndent(int fenceIndent) {
         this.fenceIndent = fenceIndent;
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

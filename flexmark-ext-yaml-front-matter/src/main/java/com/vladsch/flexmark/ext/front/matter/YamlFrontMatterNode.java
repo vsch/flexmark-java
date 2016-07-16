@@ -5,7 +5,7 @@ import com.vladsch.flexmark.node.CustomNode;
 
 import java.util.List;
 
-public class YamlFrontMatterNode extends CustomNode<YamlFrontMatterVisitor> {
+public class YamlFrontMatterNode extends CustomNode {
     private String key;
     private List<String> values;
 
@@ -33,10 +33,5 @@ public class YamlFrontMatterNode extends CustomNode<YamlFrontMatterVisitor> {
 
     public void setValues(List<String> values) {
         this.values = values;
-    }
-
-    @Override
-    public void accept(YamlFrontMatterVisitor visitor) {
-        visitor.visit(this);
     }
 }

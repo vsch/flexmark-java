@@ -1,0 +1,54 @@
+package com.vladsch.flexmark.test;
+
+import com.vladsch.flexmark.internal.util.ast.NodeVisitorBase;
+import com.vladsch.flexmark.node.Node;
+
+class AstCollectingVisitor extends NodeVisitorBase {
+    public static final String EOL = "\n";
+    protected StringBuilder output = new StringBuilder();
+    protected int indent = 0;
+    protected boolean eolPending = false;
+
+    public String getAst() {
+        return output.toString();
+    }
+
+    protected void appendIndent() {
+        for (int i = 0; i < indent * 2; i++) {
+            output.append(' ');
+        }
+        eolPending = true;
+    }
+
+    protected void appendEOL() {
+        output.append(EOL);
+        eolPending = false;
+    }
+
+    protected void appendPendingEOL() {
+        if (eolPending) appendEOL();
+    }
+    
+    public String collectAndGetAstText(Node node) {
+        visit(node);
+        return getAst();
+    }
+    
+    public void collect(Node node) {
+        visit(node);
+    }
+
+    @Override
+    protected void visit(Node node) {
+        appendIndent();
+        node.astString(output, true);
+        output.append(EOL);
+        indent++;
+
+        try {
+            super.visitChildren(node);
+        } finally {
+            indent--;
+        }
+    }
+}

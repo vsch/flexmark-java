@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.CustomNode;
 /**
  * A SpecExample block node
  */
-public class SpecExampleOption extends CustomNode<SpecExampleVisitor> {
+public class SpecExampleOption extends CustomNode {
     @Override
     public void getAstExtra(StringBuilder out) {
         astExtraChars(out);
@@ -22,10 +22,5 @@ public class SpecExampleOption extends CustomNode<SpecExampleVisitor> {
 
     public SpecExampleOption(BasedSequence chars) {
         super(chars);
-    }
-
-    @Override
-    public void accept(SpecExampleVisitor visitor) {
-        visitor.visit(this);
     }
 }

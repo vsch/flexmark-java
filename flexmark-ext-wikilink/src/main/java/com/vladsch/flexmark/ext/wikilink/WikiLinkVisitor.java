@@ -15,13 +15,14 @@
 
 package com.vladsch.flexmark.ext.wikilink;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface WikiLinkVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(WikiLink.class, ((WikiLinkVisitor) visitor)::visit),
-    };
+    static <V extends WikiLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(WikiLink.class, visitor::visit)
+        };
+    }
 
     void visit(WikiLink node);
 }

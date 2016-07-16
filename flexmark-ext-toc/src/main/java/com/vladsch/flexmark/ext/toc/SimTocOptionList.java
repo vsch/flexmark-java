@@ -7,7 +7,7 @@ import com.vladsch.flexmark.node.DoNotLinkify;
 /**
  * A sim toc contents node containing all text that came after the sim toc node
  */
-public class SimTocOptionList extends CustomNode<SimTocVisitor> implements DoNotLinkify {
+public class SimTocOptionList extends CustomNode implements DoNotLinkify {
     @Override
     public BasedSequence[] getSegments() {
         //return EMPTY_SEGMENTS;
@@ -19,10 +19,5 @@ public class SimTocOptionList extends CustomNode<SimTocVisitor> implements DoNot
 
     public SimTocOptionList(BasedSequence chars) {
         super(chars);
-    }
-
-    @Override
-    public void accept(SimTocVisitor visitor) {
-        visitor.visit(this);
     }
 }

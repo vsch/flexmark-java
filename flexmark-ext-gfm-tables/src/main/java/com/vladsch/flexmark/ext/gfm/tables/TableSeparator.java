@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.CustomNode;
 /**
  * Body part of a {@link TableBlock} containing {@link TableRow TableRows}.
  */
-public class TableSeparator extends CustomNode<TableVisitor> {
+public class TableSeparator extends CustomNode {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -17,10 +17,5 @@ public class TableSeparator extends CustomNode<TableVisitor> {
 
     public TableSeparator(BasedSequence chars) {
         super(chars);
-    }
-
-    @Override
-    public void accept(TableVisitor visitor) {
-        visitor.visit(this);
     }
 }

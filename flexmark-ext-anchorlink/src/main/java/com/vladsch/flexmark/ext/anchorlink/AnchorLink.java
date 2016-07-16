@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.CustomNode;
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class AnchorLink extends CustomNode<AnchorLinkVisitor> {
+public class AnchorLink extends CustomNode {
     public AnchorLink() {
     }
 
@@ -17,10 +17,5 @@ public class AnchorLink extends CustomNode<AnchorLinkVisitor> {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-    }
-
-    @Override
-    public void accept(AnchorLinkVisitor visitor) {
-        visitor.visit(this);
     }
 }

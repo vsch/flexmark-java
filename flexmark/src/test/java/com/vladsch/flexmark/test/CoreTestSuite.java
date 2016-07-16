@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         UtilsTestSuite.class,
         AbstractVisitorTest.class,
-        DeilimitedNodeTest.class,
+        DelimitedNodeTest.class,
         DelimiterProcessorTest.class,
         HtmlRendererTest.class,
         ParserTest.class,

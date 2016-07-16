@@ -6,7 +6,7 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 /**
  * A TOC node
  */
-public class TocBlock extends TocBlockBase<TocVisitor> {
+public class TocBlock extends TocBlockBase {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence tocKeyword = SubSequence.NULL;
     protected BasedSequence style = SubSequence.NULL;
@@ -70,10 +70,5 @@ public class TocBlock extends TocBlockBase<TocVisitor> {
 
     public BasedSequence getClosingMarker() {
         return closingMarker;
-    }
-
-    @Override
-    public void accept(TocVisitor visitor) {
-        visitor.visit(this);
     }
 }

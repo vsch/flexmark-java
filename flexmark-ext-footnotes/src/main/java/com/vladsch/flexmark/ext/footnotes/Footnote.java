@@ -9,7 +9,7 @@ import com.vladsch.flexmark.node.DoNotLinkify;
 /**
  * A Footnote referencing node
  */
-public class Footnote extends CustomNode<FootnoteVisitor> implements DelimitedNode, DoNotLinkify {
+public class Footnote extends CustomNode implements DelimitedNode, DoNotLinkify {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -70,10 +70,5 @@ public class Footnote extends CustomNode<FootnoteVisitor> implements DelimitedNo
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
-    }
-
-    @Override
-    public void accept(FootnoteVisitor visitor) {
-        visitor.visit(this);
     }
 }

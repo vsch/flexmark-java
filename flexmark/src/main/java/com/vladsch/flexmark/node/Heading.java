@@ -1,13 +1,17 @@
 package com.vladsch.flexmark.node;
 
 import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
+import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 import java.util.List;
 
 public class Heading extends Block implements AnchorRefTarget {
+    public interface Visitor {
+        void visit(Heading node);
+    }
+
     protected int level;
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
@@ -26,9 +30,7 @@ public class Heading extends Block implements AnchorRefTarget {
 
     @Override
     public String getAnchorRefText() {
-        TextCollectingVisitor textCollectingVisitor = new TextCollectingVisitor();
-        textCollectingVisitor.visit(this);
-        return textCollectingVisitor.getText();
+        return new TextCollectingVisitor().collectAndGetText(this);
     }
 
     @Override
@@ -94,10 +96,5 @@ public class Heading extends Block implements AnchorRefTarget {
 
     public void setLevel(int level) {
         this.level = level;
-    }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
     }
 }

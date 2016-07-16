@@ -7,7 +7,7 @@ import com.vladsch.flexmark.node.CustomBlock;
 /**
  * A block node that contains the abbreviation definition
  */
-public class AbbreviationBlock extends CustomBlock<AbbreviationVisitor> {
+public class AbbreviationBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -63,10 +63,5 @@ public class AbbreviationBlock extends CustomBlock<AbbreviationVisitor> {
 
     public void setAbbreviation(BasedSequence abbreviation) {
         this.abbreviation = abbreviation;
-    }
-
-    @Override
-    public void accept(AbbreviationVisitor visitor) {
-        visitor.visit(this);
     }
 }

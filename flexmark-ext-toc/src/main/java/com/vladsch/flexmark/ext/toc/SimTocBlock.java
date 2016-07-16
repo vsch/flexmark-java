@@ -6,7 +6,7 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 /**
  * A simulated toc block node
  */
-public class SimTocBlock extends TocBlockBase<SimTocVisitor> {
+public class SimTocBlock extends TocBlockBase {
     protected BasedSequence anchorMarker = SubSequence.NULL;
     protected BasedSequence openingTitleMarker = SubSequence.NULL;
     protected BasedSequence title = SubSequence.NULL;
@@ -68,10 +68,5 @@ public class SimTocBlock extends TocBlockBase<SimTocVisitor> {
 
     public BasedSequence getClosingTitleMarker() {
         return closingTitleMarker;
-    }
-
-    @Override
-    public void accept(SimTocVisitor visitor) {
-        visitor.visit(this);
     }
 }

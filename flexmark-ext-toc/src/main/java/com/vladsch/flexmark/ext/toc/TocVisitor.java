@@ -15,13 +15,14 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface TocVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(TocBlock.class, ((TocVisitor) visitor)::visit),
-    };
-
+    static <V extends TocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(TocBlock.class, visitor::visit),
+        };
+    }
+    
     void visit(TocBlock node);
 }

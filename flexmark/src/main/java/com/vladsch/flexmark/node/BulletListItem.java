@@ -21,9 +21,4 @@ public class BulletListItem extends ListItem {
     public BulletListItem(BlockContent blockContent) {
         super(blockContent);
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

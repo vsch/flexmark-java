@@ -6,7 +6,7 @@ import com.vladsch.flexmark.node.CustomNode;
 /**
  * A SpecExample block node
  */
-public class SpecExampleOptionSeparator extends CustomNode<SpecExampleVisitor> {
+public class SpecExampleOptionSeparator extends CustomNode {
     @Override
     public void getAstExtra(StringBuilder out) {
     }
@@ -21,10 +21,5 @@ public class SpecExampleOptionSeparator extends CustomNode<SpecExampleVisitor> {
 
     public SpecExampleOptionSeparator(BasedSequence chars) {
         super(chars);
-    }
-
-    @Override
-    public void accept(SpecExampleVisitor visitor) {
-        visitor.visit(this);
     }
 }

@@ -15,19 +15,20 @@
 
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface SpecExampleVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(SpecExampleAst.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleBlock.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleHtml.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleOption.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleOptionSeparator.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleOptionsList.class, ((SpecExampleVisitor) visitor)::visit),
-            new NodeVisitHandler<>(SpecExampleSeparator.class, ((SpecExampleVisitor) visitor)::visit),
-    };
+    static <V extends SpecExampleVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(SpecExampleAst.class, visitor::visit),
+                new VisitHandler<>(SpecExampleBlock.class, visitor::visit),
+                new VisitHandler<>(SpecExampleHtml.class, visitor::visit),
+                new VisitHandler<>(SpecExampleOption.class, visitor::visit),
+                new VisitHandler<>(SpecExampleOptionSeparator.class, visitor::visit),
+                new VisitHandler<>(SpecExampleOptionsList.class, visitor::visit),
+                new VisitHandler<>(SpecExampleSeparator.class, visitor::visit),
+        };
+    }
 
     void visit(SpecExampleAst node);
     void visit(SpecExampleBlock node);

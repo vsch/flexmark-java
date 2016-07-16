@@ -18,9 +18,4 @@ public class Code extends DelimitedNodeImpl {
     public void getAstExtra(StringBuilder out) {
         delimitedSegmentSpan(out, openingMarker, text, closingMarker, "text");
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * A SpecExample block node
  */
-public class SpecExampleBlock extends CustomBlock<SpecExampleVisitor> {
+public class SpecExampleBlock extends CustomBlock {
     private BasedSequence openingMarker = SubSequence.NULL;
     private BasedSequence exampleKeyword = SubSequence.NULL;
     private BasedSequence coordOpeningMarker = SubSequence.NULL;
@@ -90,11 +90,6 @@ public class SpecExampleBlock extends CustomBlock<SpecExampleVisitor> {
         super(chars, segments);
         this.openingMarker = openingMarker;
         this.closingMarker = closingMarker;
-    }
-
-    @Override
-    public void accept(SpecExampleVisitor visitor) {
-        visitor.visit(this);
     }
 
     public BasedSequence getOpeningMarker() {

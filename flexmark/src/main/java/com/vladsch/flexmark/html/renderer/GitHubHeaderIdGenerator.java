@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.internal.util.AnchorRefTargetBlockVisitor;
+import com.vladsch.flexmark.internal.util.ast.AnchorRefTargetBlockVisitor;
 import com.vladsch.flexmark.node.AnchorRefTarget;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;

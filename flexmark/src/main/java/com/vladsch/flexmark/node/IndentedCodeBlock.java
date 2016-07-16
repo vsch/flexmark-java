@@ -27,8 +27,4 @@ public class IndentedCodeBlock extends Block {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

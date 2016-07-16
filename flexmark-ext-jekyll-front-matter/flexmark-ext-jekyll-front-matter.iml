@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="FLEXMARK_JAVA_EXTENSION" version="4">
+  <component name="FlexmarkExt.ModuleBuildProperties">
+    <option name="extensionName" value="JekyllFrontMatter" />
+    <option name="extensionPackage" value="com.vladsch.flexmark.ext.jekyll.front.matter" />
+    <option name="extensionPackagePrefix" value="com.vladsch.flexmark.ext" />
+    <option name="delimiterProcessor" value="false" />
+    <option name="blockPreProcessor" value="false" />
+    <option name="linkRefProcessor" value="false" />
+    <option name="paragraphPreProcessor" value="false" />
+    <option name="nodePostProcessor" value="false" />
+    <option name="documentPostProcessor" value="false" />
+    <option name="customNode" value="false" />
+    <option name="customNodeRepository" value="false" />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
+    <orderEntry type="module" module-name="flexmark" />
+    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
+  </component>
+</module>

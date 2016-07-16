@@ -1,14 +1,19 @@
 package com.vladsch.flexmark.node;
 
-import com.vladsch.flexmark.internal.util.DescendantNodeIterable;
-import com.vladsch.flexmark.internal.util.NodeIterable;
-import com.vladsch.flexmark.internal.util.NodeIterator;
+import com.vladsch.flexmark.internal.util.ast.DescendantNodeIterable;
+import com.vladsch.flexmark.internal.util.ast.NodeIterable;
+import com.vladsch.flexmark.internal.util.ast.NodeIterator;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.internal.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public abstract class Node {
+    public interface Visitor {
+        void visit(Node node);
+    }
+
+
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
 
     private Node parent = null;
@@ -97,8 +102,6 @@ public abstract class Node {
         }
         return new NodeIterator(firstChild, lastChild, true);
     }
-
-    public abstract void accept(Visitor visitor);
 
     // full document char sequence
     public BasedSequence getChars() {

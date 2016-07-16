@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal.util;
 
+import com.vladsch.flexmark.internal.util.ast.NodeRepository;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.node.Reference;

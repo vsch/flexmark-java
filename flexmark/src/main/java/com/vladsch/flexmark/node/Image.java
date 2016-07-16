@@ -26,8 +26,4 @@ public class Image extends InlineLinkNode {
         super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

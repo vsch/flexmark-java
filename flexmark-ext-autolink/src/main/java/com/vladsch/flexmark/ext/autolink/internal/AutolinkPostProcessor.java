@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
@@ -13,22 +15,25 @@ import org.nibor.autolink.LinkType;
 import java.util.EnumSet;
 
 public class AutolinkPostProcessor extends DocumentPostProcessor {
-
     private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.EMAIL))
             .build();
+    
+    private final NodeVisitor myVisitor;
 
     public AutolinkPostProcessor(Document document) {
+        myVisitor = new NodeVisitor(
+                new VisitHandler<>(Text.class, AutolinkPostProcessor.this::visit)
+        );
 
     }
 
     public Document processDocument(Document document) {
-        document.accept(this);
+        myVisitor.visit(document);
         return document;
     }
 
-    @Override
-    public void visit(TextBase text) {
+    private void visit(Text text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             processTextNode(text);
         }

@@ -4,6 +4,8 @@ import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
 import com.vladsch.flexmark.node.*;
@@ -17,8 +19,13 @@ import java.util.regex.Pattern;
 public class AbbreviationPostProcessor extends DocumentPostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
+    final private NodeVisitor myVisitor;
 
     AbbreviationPostProcessor(Document document) {
+        myVisitor = new NodeVisitor(
+                new VisitHandler<>(Text.class, AbbreviationPostProcessor.this::visit)
+        );
+        
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {
@@ -45,18 +52,17 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     @Override
     public Document processDocument(Document document) {
         if (abbreviations != null) {
-            document.accept(this);
+            myVisitor.visit(document);
         }
         return document;
     }
 
-    @Override
-    public void visit(TextBase text) {
+    private void visit(TextBase text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             process(text);
         }
     }
-    
+
     private Node process(TextBase node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
@@ -96,7 +102,7 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
             Node node1 = new Text(escapedChars);
             lastNode.insertAfter(node1);
         }
-        
+
         lastNode = node.getNext();
         node.unlink();
         return lastNode;

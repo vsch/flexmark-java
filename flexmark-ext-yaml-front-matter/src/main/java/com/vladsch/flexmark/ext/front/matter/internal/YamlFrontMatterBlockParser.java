@@ -52,7 +52,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
 
     @Override
     public BlockContinue tryContinue(ParserState parserState) {
-        final CharSequence line = parserState.getLine();
+        final BasedSequence line = parserState.getLine();
 
         if (inYAMLBlock) {
             if (REGEX_END.matcher(line).matches()) {

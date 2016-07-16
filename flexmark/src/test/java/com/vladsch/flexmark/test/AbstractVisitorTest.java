@@ -1,7 +1,11 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.AbstractVisitor;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.node.Code;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.node.Text;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,19 +15,18 @@ public class AbstractVisitorTest {
 
     @Test
     public void replacingNodeInVisitorShouldNotDestroyVisitOrder() {
-        Visitor visitor = new AbstractVisitor() {
-            @Override
-            public void visit(TextBase text) {
-                text.insertAfter(new Code(text.getChars()));
-                text.unlink();
-            }
-        };
+        NodeVisitor visitor = new NodeVisitor(
+                new VisitHandler<>(Text.class, node -> {
+                    node.insertAfter(new Code(node.getChars()));
+                    node.unlink();
+                })
+        );
 
         Paragraph paragraph = new Paragraph();
         paragraph.appendChild(new Text("foo"));
         paragraph.appendChild(new Text("bar"));
 
-        paragraph.accept(visitor);
+        visitor.visit(paragraph);
 
         assertCode("foo", paragraph.getFirstChild());
         assertCode("bar", paragraph.getFirstChild().getNext());

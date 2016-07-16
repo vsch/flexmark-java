@@ -35,20 +35,15 @@ flexmark-java
 0.4.4
 -----
 
-- Change `CustomNode` and `CustomBlock` are parameterized by the visitor interface and have
-  `accept()` of that visitor. 
+- Remove all the dependencies between nodes and their visitors, no more global visitor and
+  maintaining visitor derived classes.
 
-- Change extension modules now implement a custom node visitor interface which defines
-  `VISITOR_HANDLERS` static method that is passed to `AbstractCustomVisitor` and
-  `AbstractCustomBlockVisitor` mapping custom node class visits to the interface's methods
-
-- Change `AbstractCustomVisitor` and `AbstractCustomBlockVisitor` will now work with custom
-  nodes extended from any Node not just `CustomNode` and `CustomBlock`. The abstract custom
-  visitor constructors take a vararg of custom visitor interface defined `VISITOR_HANDLERS` 
-
-    These changes allow a class to handle all types of visits: core and custom without
-    distinction. It only has to declare that it implements all the custom visitor interfaces and
-    add its visitor handlers to its `super()` constructor call. 
+- Change all nodes now implement a custom node visitor interface which defines
+  `VISITOR_HANDLERS` static method that is passed to `NodeVisitor` constructor along with any
+  other visitor handlers as vararg and implement the needed methods. Got fed up of maintaining
+  the core `Visitor` interface and its derivatives. Also was a pain to handle custom nodes. Now
+  all are handled the same way and no limitation of inheritance. 
+    
 
 0.4.3
 -----

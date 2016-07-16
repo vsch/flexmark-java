@@ -29,7 +29,7 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
             if (heading.getText().isNotNull()) {
                 Node anchor = new AnchorLink();
 
-                if (options.noWrap) {
+                if (!options.wrapText) {
                     if (heading.getFirstChild() == null) {
                         anchor.setChars(heading.getText().subSequence(0, 0));
                         heading.appendChild(anchor);

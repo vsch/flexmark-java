@@ -41,9 +41,4 @@ public class BlockQuote extends Block {
     public void setOpeningMarker(BasedSequence openingMarker) {
         this.openingMarker = openingMarker;
     }
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

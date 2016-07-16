@@ -6,8 +6,8 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
 import com.vladsch.flexmark.internal.util.Computable;
 import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.ValueRunnable;
+import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.node.Heading;
 
@@ -150,7 +150,7 @@ public class TocUtils {
             boolean isRaw;
             // need to skip anchor links but render emphasis
             if (tocOptions.isTextOnly) {
-                headerText = Escaping.escapeHtml(new TextCollectingVisitor().visitAndGetText(header), false);
+                headerText = Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
                 isRaw = false;
             } else {
                 TextCollectingAppendable out = new TextCollectingAppendable();
@@ -171,7 +171,7 @@ public class TocUtils {
             String headerText;
             // need to skip anchor links but render emphasis
             if (tocOptions.isTextOnly) {
-                headerText = new TextCollectingVisitor().visitAndGetText(header);
+                headerText = new TextCollectingVisitor().collectAndGetText(header);
             } else {
                 headerText = header.getChars().toString();
             }

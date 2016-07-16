@@ -19,7 +19,7 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final public static DataKey<Boolean> ANCHORLINKS_NO_WRAP_TEXT = new DataKey<>("ANCHORLINKS_NO_WRAP_TEXT", false);
+    final public static DataKey<Boolean> ANCHORLINKS_WRAP_TEXT = new DataKey<>("ANCHORLINKS_WRAP_TEXT", true);
     final public static DataKey<String> ANCHORLINKS_TEXT_PREFIX = new DataKey<>("ANCHORLINKS_TEXT_PREFIX", "");
     final public static DataKey<String> ANCHORLINKS_TEXT_SUFFIX = new DataKey<>("ANCHORLINKS_TEXT_SUFFIX", "");
     final public static DataKey<String> ANCHORLINKS_ANCHOR_CLASS = new DataKey<>("ANCHORLINKS_ANCHOR_CLASS", "");

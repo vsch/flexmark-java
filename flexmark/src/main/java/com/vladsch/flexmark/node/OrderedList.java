@@ -46,8 +46,4 @@ public class OrderedList extends ListBlock {
         this.delimiter = delimiter;
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

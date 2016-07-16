@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.Node;
 /**
  * A Zzzzzz block node
  */
-public class ZzzzzzBlock extends CustomBlock<ZzzzzzVisitor> {
+public class ZzzzzzBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;

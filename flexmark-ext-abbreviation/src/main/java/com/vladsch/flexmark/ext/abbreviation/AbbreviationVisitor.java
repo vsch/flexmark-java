@@ -15,14 +15,15 @@
 
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface AbbreviationVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(AbbreviationBlock.class, ((AbbreviationVisitor) visitor)::visit),
-            new NodeVisitHandler<>(Abbreviation.class, ((AbbreviationVisitor) visitor)::visit),
-    };
+    static <V extends AbbreviationVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+            new VisitHandler<>(AbbreviationBlock.class, visitor::visit),
+            new VisitHandler<>(Abbreviation.class, visitor::visit),
+        };
+    }
 
     void visit(AbbreviationBlock node);
     void visit(Abbreviation node);

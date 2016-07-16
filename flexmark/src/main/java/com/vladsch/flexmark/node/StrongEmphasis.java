@@ -14,8 +14,4 @@ public class StrongEmphasis extends DelimitedNodeImpl {
         super(openingMarker, content, closingMarker);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

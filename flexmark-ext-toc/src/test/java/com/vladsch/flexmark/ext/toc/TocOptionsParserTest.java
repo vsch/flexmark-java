@@ -21,10 +21,9 @@ import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.IRender;
-import com.vladsch.flexmark.internal.util.AbstractCustomVisitor;
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
 import com.vladsch.flexmark.internal.util.Pair;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.options.*;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.CustomNode;
@@ -68,14 +67,16 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     interface ParserVisitor {
-        Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-                new NodeVisitHandler<>(ParserNode.class, ((ParserVisitor) visitor)::visit),
-        };
+        static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+            return new VisitHandler<?>[] {
+                    new VisitHandler<>(ParserNode.class, visitor::visit),
+            };
+        }
 
         void visit(ParserNode node);
     }
 
-    private static class ParserNode extends CustomNode<ParserVisitor> {
+    private static class ParserNode extends CustomNode {
         final private String nodeType;
         final private ParsedOptionStatus status;
         final private String message;
@@ -135,11 +136,6 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         @Override
         public String getNodeName() {
             return nodeType;
-        }
-
-        @Override
-        public void accept(ParserVisitor visitor) {
-            visitor.visit(this);
         }
     }
 
@@ -201,12 +197,13 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             super(options);
         }
 
-        class RenderingVisitor extends AbstractCustomVisitor implements ParserVisitor {
+        class RenderingVisitor implements ParserVisitor {
             final HtmlWriter html;
             final TocOptions defaultOptions;
+            final NodeVisitor myVisitor;
 
             public RenderingVisitor(HtmlWriter html, TocOptions defaultOptions) {
-                super(ParserVisitor.VISIT_HANDLERS);
+                myVisitor = new NodeVisitor(ParserVisitor.VISIT_HANDLERS(this));
                 this.html = html;
                 this.defaultOptions = defaultOptions;
             }
@@ -228,11 +225,15 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
                         html.raw("full: ").raw(TocUtils.getTocPrefix(nodeTocOptions, null)).line();
                     }
 
-                    super.visitChildren(node);
+                    myVisitor.visitChildren(node);
                     html.unIndent();
                 } else {
-                    super.visitChildren(node);
+                    myVisitor.visitChildren(node);
                 }
+            }
+            
+            public void render(Node node) {
+                myVisitor.visit(node);
             }
         }
 
@@ -241,7 +242,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
             RenderingVisitor visitor = new RenderingVisitor(new HtmlWriter(output, 2), tocOptions);
-            node.accept(visitor);
+            visitor.render(node);
         }
 
         @Override

@@ -15,18 +15,19 @@
 
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface TableVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(TableBlock.class, ((TableVisitor) visitor)::visit),
-            new NodeVisitHandler<>(TableHead.class, ((TableVisitor) visitor)::visit),
-            new NodeVisitHandler<>(TableSeparator.class, ((TableVisitor) visitor)::visit),
-            new NodeVisitHandler<>(TableBody.class, ((TableVisitor) visitor)::visit),
-            new NodeVisitHandler<>(TableRow.class, ((TableVisitor) visitor)::visit),
-            new NodeVisitHandler<>(TableCell.class, ((TableVisitor) visitor)::visit),
-    };
+    static <V extends TableVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(TableBlock.class, visitor::visit),
+                new VisitHandler<>(TableHead.class, visitor::visit),
+                new VisitHandler<>(TableSeparator.class, visitor::visit),
+                new VisitHandler<>(TableBody.class, visitor::visit),
+                new VisitHandler<>(TableRow.class, visitor::visit),
+                new VisitHandler<>(TableCell.class, visitor::visit),
+        };
+    }
 
     void visit(TableBlock node);
     void visit(TableHead node);

@@ -23,6 +23,7 @@ public class NodeRenderingHandler<N extends Node> implements CustomNodeRenderer<
 
     @Override
     public void render(Node node, NodeRendererContext context, HtmlWriter html) {
+        //noinspection unchecked
         myRender.render((N)node, context, html);
     }
 
@@ -31,10 +32,10 @@ public class NodeRenderingHandler<N extends Node> implements CustomNodeRenderer<
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        NodeRenderingHandler<?> entry = (NodeRenderingHandler<?>) o;
+        NodeRenderingHandler<?> other = (NodeRenderingHandler<?>) o;
 
-        if (!myClass.equals(entry.myClass)) return false;
-        return myRender.equals(entry.myRender);
+        if (myClass != other.myClass) return false;
+        return myRender == other.myRender;
     }
 
     @Override

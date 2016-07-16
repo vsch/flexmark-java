@@ -15,14 +15,15 @@
 
 package com.vladsch.flexmark.ext.front.matter;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface YamlFrontMatterVisitor {
-    static Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(YamlFrontMatterNode.class, ((YamlFrontMatterVisitor) visitor)::visit),
-            new NodeVisitHandler<>(YamlFrontMatterBlock.class, ((YamlFrontMatterVisitor) visitor)::visit),
-    };
+    static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(YamlFrontMatterNode.class, visitor::visit),
+                new VisitHandler<>(YamlFrontMatterBlock.class, visitor::visit),
+        };
+    }
 
     void visit(YamlFrontMatterNode node);
     void visit(YamlFrontMatterBlock node);

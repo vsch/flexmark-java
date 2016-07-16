@@ -26,8 +26,4 @@ public class ThematicBreak extends Block {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

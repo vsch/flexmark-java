@@ -22,7 +22,7 @@ import com.vladsch.flexmark.node.CustomBlock;
 /**
  * A TOC node
  */
-public abstract class TocBlockBase<T> extends CustomBlock<T> {
+public abstract class TocBlockBase extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence tocKeyword = SubSequence.NULL;
     protected BasedSequence style = SubSequence.NULL;

@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.DelimitedNode;
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
-public class Strikethrough extends CustomNode<StrikethroughVisitor> implements DelimitedNode {
+public class Strikethrough extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -59,10 +59,5 @@ public class Strikethrough extends CustomNode<StrikethroughVisitor> implements D
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
-    }
-
-    @Override
-    public void accept(StrikethroughVisitor visitor) {
-        visitor.visit(this);
     }
 }

@@ -21,8 +21,4 @@ public class OrderedListItem extends ListItem {
         super(blockContent);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

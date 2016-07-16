@@ -45,9 +45,4 @@ public class Document extends Block implements MutableDataHolder {
 
     @Override
     public void setAll(DataHolder other) {dataSet.setAll(other);}
-
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visit(this);
-    }
 }

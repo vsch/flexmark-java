@@ -15,13 +15,14 @@
 
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.NodeVisitHandler;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 
 public interface StrikethroughVisitor {
-    Computable<NodeVisitHandler<?>[], Object> VISIT_HANDLERS = visitor -> new NodeVisitHandler<?>[] {
-            new NodeVisitHandler<>(Strikethrough.class, ((StrikethroughVisitor) visitor)::visit),
-    };
+    static <V extends StrikethroughVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        return new VisitHandler<?>[] {
+                new VisitHandler<>(Strikethrough.class, visitor::visit),
+        };
+    }
 
     void visit(Strikethrough node);
 }

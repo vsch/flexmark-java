@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.TextNodeConverter;
+import com.vladsch.flexmark.internal.util.ast.TextNodeConverter;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SegmentedSequence;
@@ -119,10 +119,12 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     static class InlineParserOptions {
         final public boolean matchLookaheadFirst;
         final public boolean relaxedEmphasis;
+        final public boolean parseInlineAnchorLinks;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
             relaxedEmphasis = options.get(Parser.INLINE_RELAXED_EMPHASIS);
+            parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
         }
     }
 

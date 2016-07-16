@@ -8,7 +8,7 @@ import com.vladsch.flexmark.node.DelimitedNode;
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
  */
-public class TableCell extends CustomNode<TableVisitor> implements DelimitedNode {
+public class TableCell extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -63,11 +63,6 @@ public class TableCell extends CustomNode<TableVisitor> implements DelimitedNode
 
     public TableCell(BasedSequence chars) {
         super(chars);
-    }
-
-    @Override
-    public void accept(TableVisitor visitor) {
-        visitor.visit(this);
     }
 
     /**

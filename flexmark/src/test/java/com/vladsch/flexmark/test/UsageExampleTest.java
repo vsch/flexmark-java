@@ -1,8 +1,10 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.AbstractVisitor;
+import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
+import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.node.TextBase;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
@@ -23,24 +25,35 @@ public class UsageExampleTest {
     public void visitor() {
         Parser parser = Parser.builder().build();
         Node node = parser.parse("Example\n=======\n\nSome more text");
+
         WordCountVisitor visitor = new WordCountVisitor();
-        node.accept(visitor);
+        visitor.countWords(node);
         assertEquals(4, visitor.wordCount);
     }
 
-    class WordCountVisitor extends AbstractVisitor {
-
+    class WordCountVisitor {
         int wordCount = 0;
 
-        @Override
-        public void visit(TextBase text) {
+        private final NodeVisitor myVisitor;
+
+        public WordCountVisitor() {
+            myVisitor = new NodeVisitor(
+                    new VisitHandler<>(Text.class, WordCountVisitor.this::visit)
+            );
+        }
+        
+        public void countWords(Node node) {
+            myVisitor.visit(node);
+        }
+
+        private void visit(TextBase text) {
             // This is called for all Text nodes. Override other visit methods for other node types.
 
             // Count words (this is just an example, don't actually do it this way for various reasons).
             wordCount += text.getChars().toString().split("\\W+").length;
 
             // Descend into children (could be omitted in this case because Text nodes don't have children).
-            visitChildren(text);
+            myVisitor.visitChildren(text);
         }
     }
 }

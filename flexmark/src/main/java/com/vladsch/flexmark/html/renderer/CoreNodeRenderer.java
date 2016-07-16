@@ -4,7 +4,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.TextCollectingVisitor;
+import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
@@ -270,9 +270,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
-            TextCollectingVisitor altTextVisitor = new TextCollectingVisitor();
-            node.accept(altTextVisitor);
-            String altText = altTextVisitor.getText();
+            String altText = new TextCollectingVisitor().collectAndGetText(node);
             
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape());
             
@@ -310,9 +308,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             if (!context.isDoNotRenderLinks()) {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
-                TextCollectingVisitor altTextVisitor = new TextCollectingVisitor();
-                node.accept(altTextVisitor);
-                String altText = altTextVisitor.getText();
+                String altText = new TextCollectingVisitor().collectAndGetText(node);
 
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape());
                 

@@ -37,7 +37,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -60,7 +60,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -84,7 +84,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -110,7 +110,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -134,7 +134,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -163,7 +163,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -196,7 +196,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 
@@ -213,7 +213,7 @@ public class YamlFrontMatterTest extends RenderingTestCase {
 
         AbstractYamlFrontMatterVisitor visitor = new AbstractYamlFrontMatterVisitor();
         Node document = PARSER.parse(input);
-        document.accept(visitor);
+        visitor.visit(document);
 
         Map<String, List<String>> data = visitor.getData();
 

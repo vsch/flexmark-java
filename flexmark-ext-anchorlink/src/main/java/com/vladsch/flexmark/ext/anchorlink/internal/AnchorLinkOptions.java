@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 class AnchorLinkOptions {
-    final public boolean noWrap;
+    final public boolean wrapText;
     final public String textPrefix;
     final public String textSuffix;
     final public String anchorClass;
@@ -13,7 +13,7 @@ class AnchorLinkOptions {
     final public boolean noBlockQuotes;
 
     public AnchorLinkOptions(DataHolder options) {
-        this.noWrap = options.get(AnchorLinkExtension.ANCHORLINKS_NO_WRAP_TEXT);
+        this.wrapText = options.get(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT);
         this.textPrefix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_PREFIX);
         this.textSuffix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_SUFFIX);
         this.anchorClass = options.get(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS);
