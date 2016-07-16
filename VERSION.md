@@ -38,12 +38,11 @@ flexmark-java
 - Remove all the dependencies between nodes and their visitors, no more global visitor and
   maintaining visitor derived classes.
 
-- Change all nodes now implement a custom node visitor interface which defines
+- Change all extensions now implement a custom node visitor interface which defines
   `VISITOR_HANDLERS` static method that is passed to `NodeVisitor` constructor along with any
   other visitor handlers as vararg and implement the needed methods. Got fed up of maintaining
   the core `Visitor` interface and its derivatives. Also was a pain to handle custom nodes. Now
-  all are handled the same way and no limitation of inheritance. 
-    
+  all are handled the same way and no limitation of inheritance.
 
 0.4.3
 -----
@@ -63,7 +62,7 @@ flexmark-java
       changes the status to `LinkStatus.UNCHECKED`
 
     - `LinkStatus` holds the result of the resolving process. Initial link status is
-      `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.   
+      `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.
         - `LinkStatus.UNKNOWN` link has not been resolved yet
         - `LinkStatus.VALID` link is resolved and valid
         - `LinkStatus.UNCHECKED` link is resolved, validity not verified
@@ -82,7 +81,7 @@ flexmark-java
 
     - Results of resolving a link are cached based on `LinkType` and the initial url text.
       Subsequent requests to resolve the same type and url will return the same instance of
-      `ResolvedLink`.  
+      `ResolvedLink`.
 
 - Add `AttributablePart` that nodes provide when marking a tag
   `HtmlWriter.withAttr(AttributablePart)` so that an attribute provider has information about
@@ -99,7 +98,7 @@ flexmark-java
 
 - Change `AttributeProvider.setAttributes(Node, AttributablePart, Attributes)` to now get an
   attributable part that pinpoints the exact element of the node being rendered, for nodes that
-  have many elements capable of having attributes.  
+  have many elements capable of having attributes.
 
 - Change `LinkResolver.resolveLink(NodeRendererContext, ResolvedLink)` the context allows the
   resolver to get the node for which this link is being resolved via
@@ -161,12 +160,12 @@ flexmark-java
   heading and a list without blank lines.
 
 - Made rendering test case classes usable for other spec based testing, not just flexmark. Too
-  useful for testing other parsing implementations to leave it just for flexmark.  
+  useful for testing other parsing implementations to leave it just for flexmark.
 
 - Add Zzzzzz module to test suite so that the archetype also gets to run for sanity testing of
   basic extension module.
 
-- Change spaces in example lead line to NB SP so GitHub can display it as a code fence.   
+- Change spaces in example lead line to NB SP so GitHub can display it as a code fence.
 
 - Add HR after spec front matter so GitHub can think it is Jekyll or YAML front matter.
 
@@ -186,7 +185,7 @@ flexmark-java
   creation with class and lambda method reference. The method already has the right node class
   eliminating the need to have a slew of `if (node instance of ...) do((cast)...)`. Just
   implement a `NodeRenderHandler.render(YourNode, NodeRendererContext, HtmlWriter)` and add an
-  entry into the map.  
+  entry into the map.
 
 - Add `AbstractCustomVisitor` constructor takes a collection or vararg of `NodeVisitingHandler`
   instances and uses these to map visitation of `CustomNode` and `CustomBlock` to specific
@@ -215,11 +214,11 @@ flexmark-java
   node renderers are not linked to a specific context or html writer, only document.
 
 - Add `RenderingVisitor` class which handles passing extra rendering parameters to overloaded
-  node methods while using the `Visitor.visit()` plumbing.   
+  node methods while using the `Visitor.visit()` plumbing.
 
 - Add `NodeRendererContext.getSubContext()` allowing a renderer to get html rendered to be
   processed or inserted as needed. The sub-context has its own html writer and do not render
-  links state.  
+  links state.
 
 - Add TOC extension as per pegdown, with options to not claim the `[TOC level=#]` line when # is
   not valid: 0, 1, 2. Another option to only use header text for rendering the links, default
@@ -272,9 +271,9 @@ flexmark-java
   post processors that will traverse the whole AST and potentially return a new document node.
   These also specify which nodes to skip based on class list of ancestors. That way processors
   that should not process text nodes that are part of links can just add `DoNotLinkify.class` to
-  the exclusion list.   
+  the exclusion list.
 
-- Add `` to handle dependency resolution for document post processors and node post processors.   
+- Add `` to handle dependency resolution for document post processors and node post processors.
 
 - Add `NodePostProcessor` to support more efficient text node post processing than each post
   processor traversing to post process text nodes instead of each extension traversing the full
@@ -284,11 +283,11 @@ flexmark-java
 -----
 
 - Change `AbstractBlockParserFactory` to require a data holder argument in the constructor so
-  that options can be instantiated in `AbstractBlockParser`.  
+  that options can be instantiated in `AbstractBlockParser`.
 
 - Change builder to use `PostProcessorFactory` which takes a `Document` argument in create
   allowing creation of document specific post processors that can be re-used on any node of that
-  document.  
+  document.
 
 0.2.8
 -----
@@ -530,7 +529,7 @@ flexmark-java
 
 - Change `SpecReader` to recognize lines starting with EXAMPLE_START, that way each example
   start line can be augmented with section and example number for cross reference to failed
-  tests.  
+  tests.
 
 - Add section and example number printing to `FullSpecTestCase` for cross referencing to test
   run results.
@@ -547,7 +546,7 @@ flexmark-java
 - Add `PhasedNodeRenderer` which is an extension of `NodeRenderer` with additional methods to
   allow rendering for specific parts of the HTML document.
 
-- Add html rendering phases to allow generating for different parts of the document.  
+- Add html rendering phases to allow generating for different parts of the document.
     - `HEAD_TOP`
     - `HEAD`
     - `HEAD_CSS`
@@ -573,7 +572,7 @@ flexmark-java
       attributes are merged, or overwritten by ones passed in as an argument to `tag()`
 
 - Fix `SegmentedSequence::getEndOffset()` for sub-sequences would return end offset of the full
-  sequence and not its `subSequence()`.  
+  sequence and not its `subSequence()`.
 
 - Fix footnotes embedded in other footnotes would not be assigned the right source offsets nor
   character sequences.
@@ -682,5 +681,5 @@ flexmark-java
 - Add `flexmark-ext-abbreviation` to implement abbreviations processing. The extension `create`
   function can take an optional `boolean`, which if true will generate HTML abbreviations as `<a
   href="#" title"Abbreviation Expansion Text">Abbreviation</a>`, otherwise will generate `<abbr
-  title"Abbreviation Expansion Text">Abbreviation</abbr>`.  
+  title"Abbreviation Expansion Text">Abbreviation</abbr>`.
 
