@@ -5,7 +5,6 @@ import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.node.DoNotLinkify;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Text;
-import com.vladsch.flexmark.node.TextBase;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
@@ -24,7 +23,7 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
         return document;
     }
 
-    private void visit(TextBase text) {
+    private void visit(Text text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             // do some processing
         }

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 /**
  * Only generated for CharacterNodeFactory custom parsing
  */
-public class WhiteSpace extends TextBase {
+public class WhiteSpace extends Text {
     public WhiteSpace() {
     }
 

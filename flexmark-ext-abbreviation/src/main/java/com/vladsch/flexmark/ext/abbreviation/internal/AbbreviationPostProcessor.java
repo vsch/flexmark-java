@@ -8,7 +8,10 @@ import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
 import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
@@ -57,13 +60,13 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
         return document;
     }
 
-    private void visit(TextBase text) {
+    private void visit(Text text) {
         if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
             process(text);
         }
     }
 
-    private Node process(TextBase node) {
+    private Node process(Text node) {
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);

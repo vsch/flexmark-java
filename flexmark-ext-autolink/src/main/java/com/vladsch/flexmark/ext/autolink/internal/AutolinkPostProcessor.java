@@ -39,7 +39,7 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
         }
     }
 
-    private void processTextNode(TextBase text) {
+    private void processTextNode(Text text) {
         BasedSequence original = text.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
