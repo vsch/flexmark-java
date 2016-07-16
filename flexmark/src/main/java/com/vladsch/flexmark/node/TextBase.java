@@ -18,18 +18,18 @@ package com.vladsch.flexmark.node;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.StringSequence;
 
-public class Text extends Node {
-    public Text() {
+public class TextBase extends Node {
+    public TextBase() {
     }
 
-    public Text(BasedSequence chars) {
+    public TextBase(BasedSequence chars) {
         super(chars);
     }
 
-    public Text(String chars) {
+    public TextBase(String chars) {
         super(new StringSequence(chars));
     }
-
+    
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.5](#045)
 - [0.4.4](#044)
 - [0.4.3](#043)
 - [0.4.2](#042)
@@ -32,17 +33,48 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+0.4.5
+-----
+
+- Change `TextBase` node now represents text equivalent nodes and can contains `Text` and other
+  decorated text nodes processed by extensions. For example `Abbreviation` is really just text
+  but is decorated with link like rendering. Similarly, auto links are just text with link
+  decorations.
+    
+    To allow extensions to create such decorated text while allowing contiguous plain text
+    processing without a lot of code, extensions should replace `Text` nodes that they decorate
+    with `TextBase` and add their unprocessed text as `Text` nodes under the `TextBase` node,
+    along with their extension specific decorated nodes with a child `Text` node for the
+    decorated part of the text. The custom decorated text nodes should also implement
+    `DoNotLinkify` interface so that other extensions will know not to decorate their text.
+    
+    Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
+    
+    If a `Text` node is not a child of `TextBase` then a new instance of `TextBase` should be
+    created and all undecorated and decorated text nodes should be its children.
+    
+    `TextBase` rendering is just rendering of its children. `TextCollectingVisitor` uses the
+    characters of `TextBase` node and does not descend into its children.
+
 0.4.4
 -----
 
 - Remove all the dependencies between nodes and their visitors, no more global visitor and
-  maintaining visitor derived classes.
+  maintaining visitor derived classes or `accept(Visitor)` implementation that requires
+  implementation in every non-abstract class.
 
-- Change all extensions now implement a custom node visitor interface which defines
-  `VISITOR_HANDLERS` static method that is passed to `NodeVisitor` constructor along with any
-  other visitor handlers as vararg and implement the needed methods. Got fed up of maintaining
-  the core `Visitor` interface and its derivatives. Also was a pain to handle custom nodes. Now
-  all are handled the same way and no limitation of inheritance other than from Node.
+- Change all extensions to implement a custom node visitor interface which defines
+  `VISITOR_HANDLERS` static method taking an instance that implements the visitor interface and
+  returns an array of `VisitHandler` which can be passed to `NodeVisitor` constructor along with
+  any other visitor handlers as vararg. 
+
+    Nodes no longer have an `accept()` method. The generic `NodeVisitor.visit(Node)` can be used
+    to start the visit. This method will map the actual node class to the `VisitHandler`
+    associated with the given node.
+
+    Maintaining the core `Visitor` interface and its derivatives became too much of a pain.
+    Handling custom nodes is now identical to handling core nodes and the limitation of
+    inheritance other than from Node has been removed from all nodes.
 
 0.4.3
 -----

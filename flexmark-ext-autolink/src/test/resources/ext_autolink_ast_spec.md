@@ -23,12 +23,13 @@ foo http://one.org/ bar http://two.org/
 .
 Document[0, 40]
   Paragraph[0, 40]
-    Text[0, 4] chars:[0, 4, "foo "]
-    AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
-      Text[4, 19] chars:[4, 19, "http:"...".org/"]
-    Text[19, 24] chars:[19, 24, " bar "]
-    AutoLink[24, 39] textOpen:[0, 0] text:[24, 39, "http://two.org/"] textClose:[0, 0]
-      Text[24, 39] chars:[24, 39, "http:"...".org/"]
+    TextBase[0, 39] chars:[0, 39, "foo h"...".org/"]
+      Text[0, 4] chars:[0, 4, "foo "]
+      AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
+        Text[4, 19] chars:[4, 19, "http:"...".org/"]
+      Text[19, 24] chars:[19, 24, " bar "]
+      AutoLink[24, 39] textOpen:[0, 0] text:[24, 39, "http://two.org/"] textClose:[0, 0]
+        Text[24, 39] chars:[24, 39, "http:"...".org/"]
 ````````````````````````````````
 
 
@@ -39,14 +40,16 @@ foo http://one.org/ bar `code` baz http://two.org/
 .
 Document[0, 51]
   Paragraph[0, 51]
-    Text[0, 4] chars:[0, 4, "foo "]
-    AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
-      Text[4, 19] chars:[4, 19, "http:"...".org/"]
-    Text[19, 24] chars:[19, 24, " bar "]
+    TextBase[0, 24] chars:[0, 24, "foo h"..." bar "]
+      Text[0, 4] chars:[0, 4, "foo "]
+      AutoLink[4, 19] textOpen:[0, 0] text:[4, 19, "http://one.org/"] textClose:[0, 0]
+        Text[4, 19] chars:[4, 19, "http:"...".org/"]
+      Text[19, 24] chars:[19, 24, " bar "]
     Code[24, 30] textOpen:[24, 25, "`"] text:[25, 29, "code"] textClose:[29, 30, "`"]
-    Text[30, 35] chars:[30, 35, " baz "]
-    AutoLink[35, 50] textOpen:[0, 0] text:[35, 50, "http://two.org/"] textClose:[0, 0]
-      Text[35, 50] chars:[35, 50, "http:"...".org/"]
+    TextBase[30, 50] chars:[30, 50, " baz "...".org/"]
+      Text[30, 35] chars:[30, 35, " baz "]
+      AutoLink[35, 50] textOpen:[0, 0] text:[35, 50, "http://two.org/"] textClose:[0, 0]
+        Text[35, 50] chars:[35, 50, "http:"...".org/"]
 ````````````````````````````````
 
 
@@ -57,14 +60,15 @@ http://example.com/one. Example 2 (see http://example.com/two). Example 3: http:
 .
 Document[0, 104]
   Paragraph[0, 104]
-    AutoLink[0, 22] textOpen:[0, 0] text:[0, 22, "http://example.com/one"] textClose:[0, 0]
-      Text[0, 22] chars:[0, 22, "http:"..."m/one"]
-    Text[22, 39] chars:[22, 39, ". Exa"..."(see "]
-    AutoLink[39, 61] textOpen:[0, 0] text:[39, 61, "http://example.com/two"] textClose:[0, 0]
-      Text[39, 61] chars:[39, 61, "http:"..."m/two"]
-    Text[61, 75] chars:[61, 75, "). Ex"..."e 3: "]
-    AutoLink[75, 103] textOpen:[0, 0] text:[75, 103, "http://example.com/foo_(bar)"] textClose:[0, 0]
-      Text[75, 103] chars:[75, 103, "http:"..."(bar)"]
+    TextBase[0, 103] chars:[0, 103, "http:"..."(bar)"]
+      AutoLink[0, 22] textOpen:[0, 0] text:[0, 22, "http://example.com/one"] textClose:[0, 0]
+        Text[0, 22] chars:[0, 22, "http:"..."m/one"]
+      Text[22, 39] chars:[22, 39, ". Exa"..."(see "]
+      AutoLink[39, 61] textOpen:[0, 0] text:[39, 61, "http://example.com/two"] textClose:[0, 0]
+        Text[39, 61] chars:[39, 61, "http:"..."m/two"]
+      Text[61, 75] chars:[61, 75, "). Ex"..."e 3: "]
+      AutoLink[75, 103] textOpen:[0, 0] text:[75, 103, "http://example.com/foo_(bar)"] textClose:[0, 0]
+        Text[75, 103] chars:[75, 103, "http:"..."(bar)"]
 ````````````````````````````````
 
 
@@ -75,8 +79,9 @@ foo@example.com
 .
 Document[0, 16]
   Paragraph[0, 16]
-    MailLink[0, 15] textOpen:[0, 0] text:[0, 15, "foo@example.com"] textClose:[0, 0]
-      Text[0, 15] chars:[0, 15, "foo@e"..."e.com"]
+    TextBase[0, 15] chars:[0, 15, "foo@e"..."e.com"]
+      MailLink[0, 15] textOpen:[0, 0] text:[0, 15, "foo@example.com"] textClose:[0, 0]
+        Text[0, 15] chars:[0, 15, "foo@e"..."e.com"]
 ````````````````````````````````
 
 

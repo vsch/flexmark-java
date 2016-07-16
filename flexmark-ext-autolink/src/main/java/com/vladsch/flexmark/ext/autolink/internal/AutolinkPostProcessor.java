@@ -39,23 +39,32 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
         }
     }
 
-    private void processTextNode(Text text) {
-        BasedSequence original = text.getChars();
+    private void processTextNode(Text node) {
+        BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-
-        Node lastNode = text;
+        Node lastNode = node;
         int lastEscaped = 0;
+        boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
+        TextBase textBase = null;
+
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
             int index = textMapper.originalOffset(link.getBeginIndex());
 
+            if (wrapInTextBase) {
+                wrapInTextBase = false;
+                textBase = new TextBase(original);
+                node.insertBefore(textBase);
+                textBase.appendChild(node);
+            }
+
             if (index != lastEscaped) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, index);
-                Node node = new Text(escapedChars);
-                lastNode.insertAfter(node);
-                lastNode = node;
+                Node node1 = new Text(escapedChars);
+                lastNode.insertAfter(node1);
+                lastNode = node1;
             }
 
             Text contentNode = new Text(linkText);
@@ -79,10 +88,10 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
 
         if (lastEscaped != original.length()) {
             BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            Node node = new Text(escapedChars);
-            lastNode.insertAfter(node);
+            Node node1 = new Text(escapedChars);
+            lastNode.insertAfter(node1);
         }
-        text.unlink();
+        node.unlink();
     }
 
     public static class Factory extends DocumentPostProcessorFactory {

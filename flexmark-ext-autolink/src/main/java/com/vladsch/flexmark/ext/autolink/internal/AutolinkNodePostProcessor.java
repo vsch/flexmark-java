@@ -29,12 +29,22 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-
         Node lastNode = node;
         int lastEscaped = 0;
+        boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
+        TextBase textBase = null;
+
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
             int index = textMapper.originalOffset(link.getBeginIndex());
+
+            if (wrapInTextBase) {
+                wrapInTextBase = false;
+                textBase = new TextBase(original);
+                node.insertBefore(textBase);
+                textBase.appendChild(node);
+                state.nodeAdded(textBase);
+            }
 
             if (index != lastEscaped) {
                 BasedSequence escapedChars = original.subSequence(lastEscaped, index);
@@ -71,6 +81,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             lastNode = node1;
             state.nodeAdded(lastNode);
         }
+        
         node.unlink();
         state.nodeRemoved(node);
     }

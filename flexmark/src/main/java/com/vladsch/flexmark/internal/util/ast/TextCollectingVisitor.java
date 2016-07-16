@@ -24,6 +24,7 @@ public class TextCollectingVisitor {
     public TextCollectingVisitor() {
         myVisitor = new NodeVisitor(
                 new VisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
+                new VisitHandler<>(TextBase.class, TextCollectingVisitor.this::visit),
                 new VisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
                 new VisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
                 new VisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
@@ -56,6 +57,10 @@ public class TextCollectingVisitor {
     }
 
     private void visit(Text node) {
+        out.append(node.getChars());
+    }
+    
+    private void visit(TextBase node) {
         out.append(node.getChars());
     }
 }

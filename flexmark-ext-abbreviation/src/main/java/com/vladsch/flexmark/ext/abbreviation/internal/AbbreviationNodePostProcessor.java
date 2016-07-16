@@ -3,18 +3,19 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
+import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.NodeTracker;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,8 +49,8 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
 
     @Override
     public void process(NodeTracker state, Node node) {
-        if (abbreviations == null) return; 
-        
+        if (abbreviations == null) return;
+
         BasedSequence original = node.getChars();
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
@@ -57,6 +58,8 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         Matcher m = abbreviations.matcher(literal);
         Node lastNode = node;
         int lastEscaped = 0;
+        boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
+        TextBase textBase = null;
 
         while (m.find()) {
             //String found = m.group();
@@ -66,6 +69,14 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 BasedSequence abbrText = literal.subSequence(m.start(0), m.end(0));
                 int startOffset = textMapper.originalOffset(m.start(0));
                 int endOffset = textMapper.originalOffset(m.end(0));
+
+                if (wrapInTextBase) {
+                    wrapInTextBase = false;
+                    textBase = new TextBase(original);
+                    node.insertBefore(textBase);
+                    textBase.appendChild(node);
+                    state.nodeAdded(textBase);
+                }
 
                 if (startOffset != lastEscaped) {
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
@@ -79,7 +90,9 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 Abbreviation abbrNode = new Abbreviation(origAbbrText, abbreviation);
                 lastNode.insertAfter(abbrNode);
                 lastNode = abbrNode;
-                state.nodeAdded(lastNode);
+                Text node1 = new Text(origAbbrText);
+                abbrNode.appendChild(node1);
+                state.nodeAddedWithChildren(lastNode);
 
                 lastEscaped = endOffset;
             }
@@ -91,16 +104,21 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
             lastNode.insertAfter(node1);
             state.nodeAdded(lastNode);
         }
-        
+
         lastNode = node.getNext();
         node.unlink();
         state.nodeRemoved(node);
     }
 
     public static class Factory extends NodePostProcessorFactory {
+        @Override
+        public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
+            return Collections.singleton(AutolinkNodePostProcessor.Factory.class);
+        }
+
         public Factory() {
             super(false);
-            
+
             addNodeWithExclusions(Text.class, DoNotLinkify.class);
         }
 

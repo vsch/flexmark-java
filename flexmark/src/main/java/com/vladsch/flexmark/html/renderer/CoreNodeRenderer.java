@@ -57,6 +57,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 new NodeRenderingHandler<>(SoftLineBreak.class, this::render),
                 new NodeRenderingHandler<>(StrongEmphasis.class, this::render),
                 new NodeRenderingHandler<>(Text.class, this::render),
+                new NodeRenderingHandler<>(TextBase.class, this::render),
                 new NodeRenderingHandler<>(ThematicBreak.class, this::render)
         ));
     }
@@ -180,6 +181,10 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(Text node, NodeRendererContext context, HtmlWriter html) {
         html.text(Escaping.normalizeEOL(node.getChars().unescape()));
+    }
+
+    private void render(TextBase node, NodeRendererContext context, HtmlWriter html) {
+        context.renderChildren(node);
     }
 
     private void render(Code node, NodeRendererContext context, HtmlWriter html) {

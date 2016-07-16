@@ -3,19 +3,20 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
+import com.vladsch.flexmark.ext.autolink.internal.AutolinkPostProcessor;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
 import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.DoNotLinkify;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,15 +75,23 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
         Matcher m = abbreviations.matcher(literal);
         Node lastNode = node;
         int lastEscaped = 0;
+        boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
+        TextBase textBase = null;
 
         while (m.find()) {
             //String found = m.group();
             if (abbreviationMap.containsKey(m.group(0))) {
                 String abbreviation = abbreviationMap.get(m.group(0));
 
-                BasedSequence abbrText = literal.subSequence(m.start(0), m.end(0));
                 int startOffset = textMapper.originalOffset(m.start(0));
                 int endOffset = textMapper.originalOffset(m.end(0));
+
+                if (wrapInTextBase) {
+                    wrapInTextBase = false;
+                    textBase = new TextBase(original);
+                    node.insertBefore(textBase);
+                    textBase.appendChild(node);
+                }
 
                 if (startOffset != lastEscaped) {
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
@@ -112,6 +121,11 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     }
 
     public static class Factory extends DocumentPostProcessorFactory {
+        @Override
+        public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
+            return Collections.singleton(AutolinkPostProcessor.Factory.class);
+        }
+
         @Override
         public DocumentPostProcessor create(Document document) {
             return new AbbreviationPostProcessor(document);
