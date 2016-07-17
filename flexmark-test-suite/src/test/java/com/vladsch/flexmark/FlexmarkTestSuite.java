@@ -3,6 +3,7 @@ package com.vladsch.flexmark;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
+import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
@@ -12,6 +13,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
+import com.vladsch.flexmark.ext.typographic.ExtTypographicTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
@@ -35,6 +37,8 @@ import org.junit.runners.Suite;
         ExtAnchorLinkTestSuite.class,
         ExtTocTestSuite.class,
         ExtSpecExampleTestSuite.class,
+        ExtTypographicTestSuite.class,
+        ExtDefinitionTestSuite.class,
         ExtZzzzzzTestSuite.class,
 })
 public class FlexmarkTestSuite {

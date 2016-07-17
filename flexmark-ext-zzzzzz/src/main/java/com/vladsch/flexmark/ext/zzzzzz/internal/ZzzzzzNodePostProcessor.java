@@ -36,8 +36,8 @@ public class ZzzzzzNodePostProcessor extends NodePostProcessor {
         public Factory() {
             super(false);
             
-            addNodeWithExclusions(Text.class, DoNotLinkify.class, Heading.class);
-            addNodes(HtmlBlock.class, HtmlCommentBlock.class);
+            addNodeWithExclusions(Text.class, DoNotDecorate.class/*, Heading.class*/);
+            //addNodes(HtmlBlock.class, HtmlCommentBlock.class);
         }
 
         @Override

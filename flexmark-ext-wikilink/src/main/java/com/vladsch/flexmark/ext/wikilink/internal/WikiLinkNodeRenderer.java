@@ -28,10 +28,11 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     private void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
-        ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getLink().toString());
-        html.attr("href", resolvedLink.getUrl());
+        ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString());
+        String anchorRef = node.getAnchorMarker().isNull() ? "" : node.getAnchorMarker().toString() + node.getAnchorRef().toString();
+        html.attr("href", resolvedLink.getUrl() + anchorRef);
         html.withAttr(resolvedLink).tag("a");
-        html.text(node.getText().isNotNull() ? node.getText().toString() : node.getLink().toString());
+        html.text(node.getText().isNotNull() ? node.getText().toString() : node.getPageRef().toString());
         html.tag("/a");
     }
 }

@@ -62,7 +62,7 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     }
 
     private void visit(Text text) {
-        if (!text.isOrDescendantOfType(DoNotLinkify.class)) {
+        if (!text.isOrDescendantOfType(DoNotDecorate.class)) {
             process(text);
         }
     }

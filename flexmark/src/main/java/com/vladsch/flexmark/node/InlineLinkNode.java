@@ -10,6 +10,9 @@ public abstract class InlineLinkNode extends LinkNode {
     protected BasedSequence linkOpeningMarker = SubSequence.NULL;
     protected BasedSequence urlOpeningMarker = SubSequence.NULL;
     protected BasedSequence url = SubSequence.NULL;
+    protected BasedSequence pageRef = SubSequence.NULL;
+    protected BasedSequence anchorMarker = SubSequence.NULL;
+    protected BasedSequence anchorRef = SubSequence.NULL;
     protected BasedSequence urlClosingMarker = SubSequence.NULL;
     protected BasedSequence titleOpeningMarker = SubSequence.NULL;
     protected BasedSequence title = SubSequence.NULL;
@@ -25,6 +28,9 @@ public abstract class InlineLinkNode extends LinkNode {
                 linkOpeningMarker,
                 urlOpeningMarker,
                 url,
+                pageRef,
+                anchorMarker,
+                anchorRef,
                 urlClosingMarker,
                 titleOpeningMarker,
                 title,
@@ -38,6 +44,9 @@ public abstract class InlineLinkNode extends LinkNode {
         delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
         segmentSpanChars(out, linkOpeningMarker, "linkOpen");
         delimitedSegmentSpanChars(out, urlOpeningMarker, url, urlClosingMarker, "url");
+        if (pageRef.isNotNull()) segmentSpanChars(out, pageRef, "pageRef");
+        if (anchorMarker.isNotNull()) segmentSpanChars(out, anchorMarker, "anchorMarker");
+        if (anchorRef.isNotNull()) segmentSpanChars(out, anchorRef, "anchorRef");
         delimitedSegmentSpanChars(out, titleOpeningMarker, title, titleClosingMarker, "title");
         segmentSpanChars(out, linkClosingMarker, "linkClose");
     }
@@ -129,11 +138,45 @@ public abstract class InlineLinkNode extends LinkNode {
             } else {
                 this.url = url;
             }
+
+            // parse out the anchor marker and ref
+            int pos = this.url.indexOf('#');
+            if (pos < 0) {
+                this.pageRef = this.url;
+            } else {
+                this.pageRef = this.url.subSequence(0, pos);
+                this.anchorMarker = this.url.subSequence(pos, pos + 1);
+                this.anchorRef = this.url.subSequence(pos + 1);
+            }
         } else {
             this.urlOpeningMarker = SubSequence.NULL;
             this.url = SubSequence.NULL;
             this.urlClosingMarker = SubSequence.NULL;
         }
+    }
+
+    public BasedSequence getPageRef() {
+        return pageRef;
+    }
+
+    public void setPageRef(BasedSequence pageRef) {
+        this.pageRef = pageRef;
+    }
+
+    public BasedSequence getAnchorMarker() {
+        return anchorMarker;
+    }
+
+    public void setAnchorMarker(BasedSequence anchorMarker) {
+        this.anchorMarker = anchorMarker;
+    }
+
+    public BasedSequence getAnchorRef() {
+        return anchorRef;
+    }
+
+    public void setAnchorRef(BasedSequence anchorRef) {
+        this.anchorRef = anchorRef;
     }
 
     public BasedSequence getText() {

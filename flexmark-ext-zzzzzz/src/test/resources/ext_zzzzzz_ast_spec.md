@@ -18,6 +18,7 @@ no spaces between brackets
 Sample  text
 .
 <p>Expected rendered HTML</p>
+.
 ````````````````````````````````
 
 
@@ -25,5 +26,6 @@ Sample  text
 &#X01; &#X234564; fail
 .
 <p> �</p>
+.
 ````````````````````````````````
 

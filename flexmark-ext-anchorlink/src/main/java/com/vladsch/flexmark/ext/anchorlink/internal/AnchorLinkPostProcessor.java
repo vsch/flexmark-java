@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.anchorlink.internal;
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
 import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
 import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.DoNotDecorate;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.node.Node;
@@ -28,7 +28,7 @@ public class AnchorLinkPostProcessor extends DocumentPostProcessor {
     }
 
     private void visit(Heading node) {
-        if (!node.isOrDescendantOfType(DoNotLinkify.class)) {
+        if (!node.isOrDescendantOfType(DoNotDecorate.class)) {
             processNode(node);
         }
     }

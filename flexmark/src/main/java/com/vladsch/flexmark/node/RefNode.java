@@ -167,6 +167,13 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     public void setReference(BasedSequence reference) {
         this.reference = reference;
     }
+    
+    public BasedSequence getDummyReference() {
+        if (isDummyReference()) {
+            return getChars().baseSubSequence(textOpeningMarker.getStartOffset(), textClosingMarker.getEndOffset());
+        }
+        return SubSequence.NULL;
+    }
 
     public BasedSequence getReferenceClosingMarker() {
         return referenceClosingMarker;

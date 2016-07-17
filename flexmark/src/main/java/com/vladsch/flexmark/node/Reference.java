@@ -9,6 +9,9 @@ public class Reference extends Node {
     protected BasedSequence closingMarker = SubSequence.NULL;
     protected BasedSequence urlOpeningMarker = SubSequence.NULL;
     protected BasedSequence url = SubSequence.NULL;
+    protected BasedSequence pageRef = SubSequence.NULL;
+    protected BasedSequence anchorMarker = SubSequence.NULL;
+    protected BasedSequence anchorRef = SubSequence.NULL;
     protected BasedSequence urlClosingMarker = SubSequence.NULL;
     protected BasedSequence titleOpeningMarker = SubSequence.NULL;
     protected BasedSequence title = SubSequence.NULL;
@@ -22,6 +25,9 @@ public class Reference extends Node {
                 closingMarker,
                 urlOpeningMarker,
                 url,
+                pageRef,
+                anchorMarker,
+                anchorRef,
                 urlClosingMarker,
                 titleOpeningMarker,
                 title,
@@ -51,6 +57,16 @@ public class Reference extends Node {
                 urlClosingMarker = url.subSequence(url.length() - 1);
             } else {
                 this.url = url;
+            }
+            
+            // parse out the anchor marker and ref
+            int pos = this.url.indexOf('#');
+            if (pos < 0) {
+                this.pageRef = this.url;
+            } else {
+                this.pageRef = this.url.subSequence(0, pos);
+                this.anchorMarker = this.url.subSequence(pos, pos + 1);
+                this.anchorRef = this.url.subSequence(pos + 1);
             }
         }
 
@@ -124,6 +140,30 @@ public class Reference extends Node {
 
     public void setUrl(BasedSequence url) {
         this.url = url;
+    }
+
+    public BasedSequence getPageRef() {
+        return pageRef;
+    }
+
+    public void setPageRef(BasedSequence pageRef) {
+        this.pageRef = pageRef;
+    }
+
+    public BasedSequence getAnchorMarker() {
+        return anchorMarker;
+    }
+
+    public void setAnchorMarker(BasedSequence anchorMarker) {
+        this.anchorMarker = anchorMarker;
+    }
+
+    public BasedSequence getAnchorRef() {
+        return anchorRef;
+    }
+
+    public void setAnchorRef(BasedSequence anchorRef) {
+        this.anchorRef = anchorRef;
     }
 
     public BasedSequence getTitle() {

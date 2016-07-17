@@ -21,8 +21,10 @@ public interface TaskListItemVisitor {
     static <V extends TaskListItemVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(TaskListItem.class, visitor::visit),
+                new VisitHandler<>(TaskListItemMarker.class, visitor::visit),
         };
     }
 
     void visit(TaskListItem node);
+    void visit(TaskListItemMarker node);
 }

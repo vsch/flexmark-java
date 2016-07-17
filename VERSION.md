@@ -40,21 +40,25 @@ flexmark-java
   decorated text nodes processed by extensions. For example `Abbreviation` is really just text
   but is decorated with link like rendering. Similarly, auto links are just text with link
   decorations.
-    
+
     To allow extensions to create such decorated text while allowing contiguous plain text
     processing without a lot of code, extensions should replace `Text` nodes that they decorate
     with `TextBase` and add their unprocessed text as `Text` nodes under the `TextBase` node,
     along with their extension specific decorated nodes with a child `Text` node for the
     decorated part of the text. The custom decorated text nodes should also implement
-    `DoNotLinkify` interface so that other extensions will know not to decorate their text.
-    
+    `DoNotDecorate` interface so that other extensions will know not to decorate their text.
+
     Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
-    
+
     If a `Text` node is not a child of `TextBase` then a new instance of `TextBase` should be
     created and all undecorated and decorated text nodes should be its children.
-    
+
     `TextBase` rendering is just rendering of its children. `TextCollectingVisitor` uses the
     characters of `TextBase` node and does not descend into its children.
+
+- Add `TypographicExtension` for typographic quotes and smarts, `EscapedCharacterExtension` for
+  syntax highlighting escaped characters, `DefinitionExtension` for definition lists. These are
+  placeholders for now. Code and tests to be done. For now all plugin required nodes are there.
 
 0.4.4
 -----
@@ -66,11 +70,12 @@ flexmark-java
 - Change all extensions to implement a custom node visitor interface which defines
   `VISITOR_HANDLERS` static method taking an instance that implements the visitor interface and
   returns an array of `VisitHandler` which can be passed to `NodeVisitor` constructor along with
-  any other visitor handlers as vararg. 
+  any other visitor handlers as vararg.
 
-    Nodes no longer have an `accept()` method. The generic `NodeVisitor.visit(Node)` can be used
-    to start the visit. This method will map the actual node class to the `VisitHandler`
-    associated with the given node.
+    Nodes no longer have an `accept()` method. `NodeVisitor` delegate is used for recursive
+    traversal of the AST. Its generic `NodeVisitor.visit(Node)` can be used to start the visit.
+    This method will map the actual node class to the `VisitHandler` associated with the given
+    node.
 
     Maintaining the core `Visitor` interface and its derivatives became too much of a pain.
     Handling custom nodes is now identical to handling core nodes and the limitation of
@@ -302,8 +307,8 @@ flexmark-java
 - Add separate abstract classes for node post processors that work on certain nodes and document
   post processors that will traverse the whole AST and potentially return a new document node.
   These also specify which nodes to skip based on class list of ancestors. That way processors
-  that should not process text nodes that are part of links can just add `DoNotLinkify.class` to
-  the exclusion list.
+  that should not process text nodes that are part of links can just add `DoNotDecorate.class`
+  to the exclusion list.
 
 - Add `` to handle dependency resolution for document post processors and node post processors.
 

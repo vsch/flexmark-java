@@ -89,7 +89,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         public Factory() {
             super(false);
-            addNodeWithExclusions(Text.class, DoNotLinkify.class);
+            addNodeWithExclusions(Text.class, DoNotDecorate.class);
         }
 
         @Override

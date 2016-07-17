@@ -119,7 +119,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         public Factory() {
             super(false);
 
-            addNodeWithExclusions(Text.class, DoNotLinkify.class);
+            addNodeWithExclusions(Text.class, DoNotDecorate.class);
         }
 
         @Override

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomBlock;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A Footnote definition node containing text and other inline nodes nodes as children.
  */
 public class FootnoteBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

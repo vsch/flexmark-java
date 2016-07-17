@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
 import com.vladsch.flexmark.internal.util.ast.VisitHandler;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.DoNotDecorate;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.node.TextBase;
@@ -26,7 +26,7 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
     }
 
     private void visit(Text node) {
-        if (!node.isOrDescendantOfType(DoNotLinkify.class)) {
+        if (!node.isOrDescendantOfType(DoNotDecorate.class)) {
             // do some processing
 
             BasedSequence original = node.getChars();

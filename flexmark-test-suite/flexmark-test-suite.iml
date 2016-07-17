@@ -27,5 +27,8 @@
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
+    <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
+    <orderEntry type="module" module-name="flexmark-ext-typographic" />
+    <orderEntry type="module" module-name="flexmark-ext-definition" />
   </component>
 </module>

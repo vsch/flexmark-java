@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class ZzzzzzBlockParser extends AbstractBlockParser {
     private static String COL = "\\s*:?-{3,}:?\\s*";
-    private static Pattern ZZZZZZ_BLOCK_START = Pattern.compile("");
+    private static Pattern ZZZZZZ_BLOCK_START = Pattern.compile("ZzzzzzNoWayzzzzzZ");
     private static Pattern ZZZZZZ_BLOCK_CONTINUE = Pattern.compile("");
 
     private final ZzzzzzBlock block = new ZzzzzzBlock();

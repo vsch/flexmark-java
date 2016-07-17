@@ -4,12 +4,12 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.DoNotDecorate;
 
 /**
  * A Zzzzzz node
  */
-public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotLinkify {
+public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -77,9 +77,5 @@ public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotLinkify {
 
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
-    }
-
-    public void accept(ZzzzzzVisitor visitor) {
-        visitor.visit(this);
     }
 }

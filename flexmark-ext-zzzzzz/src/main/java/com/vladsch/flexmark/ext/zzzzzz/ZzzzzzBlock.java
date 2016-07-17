@@ -98,8 +98,4 @@ public class ZzzzzzBlock extends CustomBlock {
     public void setZzzzzz(BasedSequence zzzzzz) {
         this.zzzzzz = zzzzzz;
     }
-
-    public void accept(ZzzzzzVisitor visitor) {
-        visitor.visit(this);
-    }
 }

@@ -26,7 +26,7 @@ public interface TableVisitor {
                 new VisitHandler<>(TableBody.class, visitor::visit),
                 new VisitHandler<>(TableRow.class, visitor::visit),
                 new VisitHandler<>(TableCell.class, visitor::visit),
-                new VisitHandler<>(TableColumnSeparator.class, visitor::visit),
+                new VisitHandler<>(TableCaption.class, visitor::visit),
         };
     }
 
@@ -36,5 +36,5 @@ public interface TableVisitor {
     void visit(TableBody node);
     void visit(TableRow node);
     void visit(TableCell node);
-    void visit(TableColumnSeparator node);
+    void visit(TableCaption node);
 }

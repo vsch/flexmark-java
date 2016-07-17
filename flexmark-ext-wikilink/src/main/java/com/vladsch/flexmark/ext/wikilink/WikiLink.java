@@ -3,11 +3,14 @@ package com.vladsch.flexmark.ext.wikilink;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DoNotLinkify;
+import com.vladsch.flexmark.node.DoNotDecorate;
 
-public class WikiLink extends CustomNode implements DoNotLinkify {
+public class WikiLink extends CustomNode implements DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence link = SubSequence.NULL;
+    protected BasedSequence pageRef = SubSequence.NULL;
+    protected BasedSequence anchorMarker = SubSequence.NULL;
+    protected BasedSequence anchorRef = SubSequence.NULL;
     protected BasedSequence textSeparatorMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
@@ -15,13 +18,29 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] {
-                openingMarker,
-                link,
-                textSeparatorMarker,
-                text,
-                closingMarker
-        };
+        if (linkIsFirst) {
+            return new BasedSequence[] {
+                    openingMarker,
+                    link,
+                    pageRef,
+                    anchorMarker,
+                    anchorRef,
+                    textSeparatorMarker,
+                    text,
+                    closingMarker
+            };
+        } else {
+            return new BasedSequence[] {
+                    openingMarker,
+                    text,
+                    textSeparatorMarker,
+                    link,
+                    pageRef,
+                    anchorMarker,
+                    anchorRef,
+                    closingMarker
+            };
+        }
     }
 
     @Override
@@ -31,10 +50,16 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
             segmentSpanChars(out, text, "text");
             segmentSpanChars(out, textSeparatorMarker, "textSep");
             segmentSpanChars(out, link, "link");
+            segmentSpanChars(out, pageRef, "pageRef");
+            segmentSpanChars(out, anchorMarker, "anchorMarker");
+            segmentSpanChars(out, anchorRef, "anchorRef");
             segmentSpanChars(out, closingMarker, "linkClose");
         } else {
             segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, link, "link");
+            segmentSpanChars(out, pageRef, "pageRef");
+            segmentSpanChars(out, anchorMarker, "anchorMarker");
+            segmentSpanChars(out, anchorRef, "anchorRef");
             segmentSpanChars(out, textSeparatorMarker, "textSep");
             segmentSpanChars(out, text, "text");
             segmentSpanChars(out, closingMarker, "linkClose");
@@ -63,12 +88,12 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
         this.openingMarker = openingMarker;
     }
 
-    public BasedSequence getLink() {
-        return link;
+    public BasedSequence getPageRef() {
+        return pageRef;
     }
 
-    public void setLink(BasedSequence link) {
-        this.link = link;
+    public void setPageRef(BasedSequence pageRef) {
+        this.pageRef = pageRef;
     }
 
     public BasedSequence getTextSeparatorMarker() {
@@ -95,12 +120,37 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
         this.closingMarker = closingMarker;
     }
 
+    public BasedSequence getAnchorMarker() {
+        return anchorMarker;
+    }
+
+    public void setAnchorMarker(BasedSequence anchorMarker) {
+        this.anchorMarker = anchorMarker;
+    }
+
+    public BasedSequence getAnchorRef() {
+        return anchorRef;
+    }
+
+    public void setAnchorRef(BasedSequence anchorRef) {
+        this.anchorRef = anchorRef;
+    }
+
+    public BasedSequence getLink() {
+        return link;
+    }
+
+    public void setLink(BasedSequence link) {
+        this.link = link;
+    }
+
     public void setLinkChars(BasedSequence linkChars) {
         int length = linkChars.length();
         openingMarker = linkChars.subSequence(0, 2);
         closingMarker = linkChars.subSequence(length - 2, length);
 
         int pos = linkChars.indexOf('|');
+        BasedSequence link;
         if (pos < 0) {
             link = linkChars.subSequence(2, length - 2);
         } else {
@@ -112,6 +162,18 @@ public class WikiLink extends CustomNode implements DoNotLinkify {
                 text = linkChars.subSequence(2, pos);
                 link = linkChars.subSequence(pos + 1, length - 2);
             }
+        }
+
+        // now parse out the # from the link
+        this.link = link;
+        
+        pos = link.indexOf('#');
+        if (pos < 0) {
+            this.pageRef = link;
+        } else {
+            this.pageRef = link.subSequence(0, pos);
+            this.anchorMarker = link.subSequence(pos, pos + 1);
+            this.anchorRef = link.subSequence(pos + 1);
         }
     }
 }

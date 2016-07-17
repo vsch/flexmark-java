@@ -1,0 +1,41 @@
+<!--
+  ~ Copyright (c) 2015-2016 Vladimir Schneider <vladimir.schneider@gmail.com>, all rights reserved.
+  ~
+  ~ This code is private property of the copyright holder and cannot be used without
+  ~ having obtained a license or prior written permission of the of the copyright holder.
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  ~
+  -->
+
+<html>
+<body>
+<b>flexmark-java extension for typographic processing</b>
+<!--
+Converts:
+
+- `'` to apostrophe `&rsquo;` &rsquo;
+- `...` and `. . .` to ellipsis `&hellip;` &hellip;
+- `--` en dash `&ndash;` &ndash;
+- `---` em dash `&mdash;` &mdash;
+- single quoted `'some text'` to `&lsquo;some text&rsquo;` &lsquo;some text&rsquo;
+- double quoted `"some text"` to `&ldquo;some text&rdquo;` &ldquo;some text&rdquo;
+- double angle quoted `<<some text>>` to `&laquo;some text&raquo;` &laquo;some text&raquo;
+-->
+<p>Converts:</p>
+<ul>
+  <li><code>&#39;</code> to apostrophe <code>&amp;rsquo;</code> &rsquo;</li>
+  <li><code>...</code> and <code>. . .</code> to ellipsis <code>&amp;hellip;</code> &hellip;</li>
+  <li><code>--</code> en dash <code>&amp;ndash;</code> &ndash;</li>
+  <li><code>---</code> em dash <code>&amp;mdash;</code> &mdash;</li>
+  <li>single quoted <code>&#39;some text&#39;</code> to <code>&amp;lsquo;some text&amp;rsquo;</code> &lsquo;some text&rsquo;</li>
+  <li>double quoted <code>&quot;some text&quot;</code> to <code>&amp;ldquo;some text&amp;rdquo;</code> &ldquo;some text&rdquo;</li>
+  <li>double angle quoted <code>&lt;&lt;some text&gt;&gt;</code> to <code>&amp;laquo;some text&amp;raquo;</code> &laquo;some text&raquo;</li>
+</ul>
+</body>
+</html>
