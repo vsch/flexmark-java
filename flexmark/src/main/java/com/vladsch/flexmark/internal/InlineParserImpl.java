@@ -63,11 +63,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         final public boolean matchLookaheadFirst;
         final public boolean relaxedEmphasis;
         final public boolean parseInlineAnchorLinks;
+        final public boolean parseMultiLineImageUrls;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
             relaxedEmphasis = options.get(Parser.INLINE_RELAXED_EMPHASIS);
             parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
+            parseMultiLineImageUrls = options.get(Parser.PARSE_MULTI_LINE_IMAGE_URLS);
         }
     }
 
@@ -779,9 +781,12 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean refIsBare = false;
         ReferenceProcessorMatch linkRefProcessorMatch = null;
         boolean refIsDefined = false;
+        BasedSequence linkOpener = SubSequence.NULL;
+        BasedSequence linkCloser = SubSequence.NULL;
 
         // Inline link?
         if (peek() == '(') {
+            linkOpener = input.subSequence(index, index + 1);
             index++;
             spnl();
             if ((dest = parseLinkDestination()) != null) {
@@ -792,12 +797,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     spnl();
                 }
                 if (peek() == ')') {
+                    linkCloser = input.subSequence(index, index + 1);
                     index++;
                     isLinkOrImage = true;
                 }
             }
         } else {
-            // maybe reference link, need to see if it matches a custom pocessor or need to skip this reference because it will be processed on the next char
+            // maybe reference link, need to see if it matches a custom processor or need to skip this reference because it will be processed on the next char
             // as something else, like a wiki link
             boolean wantNextMatch = false;
 
@@ -945,7 +951,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 InlineLinkNode inlineLinkNode = (InlineLinkNode) insertNode;
                 inlineLinkNode.setUrlChars(dest);
                 inlineLinkNode.setTitleChars(title);
-                inlineLinkNode.setTextChars(input.subSequence(opener.index, startIndex));
+                inlineLinkNode.setLinkOpeningMarker(linkOpener);
+                inlineLinkNode.setLinkClosingMarker(linkCloser);
+                inlineLinkNode.setTextChars(isImage ? input.subSequence(opener.index - 1, startIndex) : input.subSequence(opener.index, startIndex));
                 insertNode.setCharsFromContent();
             }
 

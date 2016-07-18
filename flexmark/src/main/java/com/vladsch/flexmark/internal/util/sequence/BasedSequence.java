@@ -55,12 +55,23 @@ public interface BasedSequence extends CharSequence {
     BasedSequence trimEnd();
     BasedSequence trim();
     BasedSequence trimEOL();
+    BasedSequence trimmedStart(String chars);
+    BasedSequence trimmedEnd(String chars);
+    BasedSequence trimmedStart();
+    BasedSequence trimmedEnd();
+    BasedSequence trimmedEOL();
     int eolLength();
 
     boolean isEmpty();
     boolean isBlank();
     boolean isNull();
     boolean isNotNull();
+    
+    BasedSequence ifNullEmptyAfter(BasedSequence other);
+    BasedSequence ifNullEmptyBefore(BasedSequence other);
+    BasedSequence nullIfEmpty();
+    BasedSequence nullIfBlank();
+    BasedSequence nullIf(boolean condition);
 
     int indexOf(char c);
     int lastIndexOf(char c);

@@ -15,10 +15,10 @@ public class SimTocBlock extends TocBlockBase {
     @Override
     public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
-        segmentSpan(out, anchorMarker, "anchorMarker");
-        segmentSpan(out, openingTitleMarker, "openingTitleMarker");
-        segmentSpan(out, title, "title");
-        segmentSpan(out, closingTitleMarker, "closingTitleMarker");
+        segmentSpanChars(out, anchorMarker, "anchorMarker");
+        segmentSpanChars(out, openingTitleMarker, "openingTitleMarker");
+        segmentSpanChars(out, title, "title");
+        segmentSpanChars(out, closingTitleMarker, "closingTitleMarker");
     }
 
     @Override
@@ -49,7 +49,7 @@ public class SimTocBlock extends TocBlockBase {
             }
 
             openingTitleMarker = titleChars.subSequence(0, 1);
-            title = titleChars.midSequence(1, -1);
+            title = titleChars.midSequence(1, -1).nullIfEmpty();
             closingTitleMarker = titleChars.endSequence(1);
         }
     }

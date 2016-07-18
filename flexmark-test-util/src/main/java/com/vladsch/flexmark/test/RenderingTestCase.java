@@ -18,8 +18,8 @@ public abstract class RenderingTestCase {
 
     public static final String IGNORE_OPTION = "IGNORE";
     public static final String FAIL_OPTION = "FAIL";
-    public static DataKey<Boolean> FAIL_OPTION_KEY = new DataKey<Boolean>("FAIL_OPTION_KEY", false);
-    public static DataKey<Boolean> IGNORE_OPTION_KEY = new DataKey<>("IGNORE_OPTION_KEY", false);
+    public static DataKey<Boolean> FAIL = new DataKey<Boolean>("FAIL", false);
+    public static DataKey<Boolean> IGNORE = new DataKey<>("IGNORE", false);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -52,35 +52,27 @@ public abstract class RenderingTestCase {
         boolean isFirst = true;
         for (String optionName : optionNames) {
             String option = optionName.trim();
-            if (option.isEmpty()) continue;
+            if (option.isEmpty() || option.startsWith("-")) continue;
+
             if (option.equals(IGNORE_OPTION)) {
                 throwIgnoredOption(example, optionSets, option);
             }
 
             if (option.equals(FAIL_OPTION)) {
                 if (options == null) {
-                    options = new MutableDataSet().set(FAIL_OPTION_KEY, true);
+                    options = new MutableDataSet().set(FAIL, true);
                 } else {
-                    options = new MutableDataSet(options).set(FAIL_OPTION_KEY, true);
+                    options = new MutableDataSet(options).set(FAIL, true);
                 }
             } else {
                 if (options == null) {
-                    try {
-                        options = options(option);
-                    } catch (AssumptionViolatedException e) {
-                        throwIgnoredOption(example, optionSets, option);
-                    }
+                    options = options(option);
 
                     if (options == null) {
                         throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                     }
                 } else {
-                    DataHolder dataSet = null;
-                    try {
-                        dataSet = options(option);
-                    } catch (AssumptionViolatedException e) {
-                        throwIgnoredOption(example, optionSets, option);
-                    }
+                    DataHolder dataSet = options(option);
 
                     if (dataSet != null) {
                         if (isFirst) {
@@ -92,13 +84,13 @@ public abstract class RenderingTestCase {
                         throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                     }
                 }
+
+                if (IGNORE.getFrom(options)) {
+                    throwIgnoredOption(example, optionSets, option);
+                }
             }
         }
         return options;
-    }
-
-    protected static void throwIgnoredOption() {
-        throw new AssumptionViolatedException("");
     }
 
     private void throwIgnoredOption(SpecExample example, String optionSets, String option) {
@@ -159,7 +151,7 @@ public abstract class RenderingTestCase {
         }
 
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -193,7 +185,7 @@ public abstract class RenderingTestCase {
             actual = DumpSpecReader.addSpecExample(source, useActualHtml ? html : expectedHtml, ast, optionsSet);
         }
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -222,7 +214,7 @@ public abstract class RenderingTestCase {
             actual = DumpSpecReader.addSpecExample(source, "", ast, optionsSet);
         }
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 }

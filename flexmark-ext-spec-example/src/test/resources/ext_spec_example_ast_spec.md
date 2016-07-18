@@ -110,7 +110,7 @@ Markdown only
 .
 Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
 ````````````````````````````````
 
 
@@ -127,7 +127,7 @@ Markdown only
 .
 Document[0, 58]
   SpecExampleBlock[0, 57] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 41] closingMarker:[41, 57]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
     SpecExampleHtml[41, 41]
 ````````````````````````````````
@@ -148,7 +148,7 @@ Markdown only
 .
 Document[0, 60]
   SpecExampleBlock[0, 59] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 41] astSeparator:[41, 43] ast:[43, 43] closingMarker:[43, 59]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
     SpecExampleHtml[41, 41]
     SpecExampleSeparator[41, 43] chars:[41, 43, "…\n"]
@@ -182,7 +182,7 @@ Document[0, 140]
   SpecExampleBlock[0, 139] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 122] closingMarker:[123, 139]
     SpecExampleSource[25, 25]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
-    SpecExampleHtml[27, 122] chars:[27, 122, "<pre>"..."</ul>"]
+    SpecExampleHtml[27, 122] chars:[27, 122, "<pre> … </ul>"]
 ````````````````````````````````
 
 
@@ -214,7 +214,7 @@ Document[0, 142]
   SpecExampleBlock[0, 141] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 122] astSeparator:[123, 125] ast:[125, 125] closingMarker:[125, 141]
     SpecExampleSource[25, 25]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
-    SpecExampleHtml[27, 122] chars:[27, 122, "<pre>"..."</ul>"]
+    SpecExampleHtml[27, 122] chars:[27, 122, "<pre> … </ul>"]
     SpecExampleSeparator[123, 125] chars:[123, 125, "…\n"]
     SpecExampleAst[125, 125]
 ````````````````````````````````
@@ -243,7 +243,7 @@ Document[0, 237]
     SpecExampleSeparator[25, 27] chars:[25, 27, "…\n"]
     SpecExampleHtml[27, 27]
     SpecExampleSeparator[27, 29] chars:[27, 29, "…\n"]
-    SpecExampleAst[29, 219] chars:[29, 219, "Docum"..."nly"]"]
+    SpecExampleAst[29, 219] chars:[29, 219, "Docum … nly\"]"]
 ````````````````````````````````
 
 
@@ -273,9 +273,9 @@ Markdown only
 .
 Document[0, 154]
   SpecExampleBlock[0, 153] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] closingMarker:[137, 153]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
-    SpecExampleHtml[41, 136] chars:[41, 136, "<pre>"..."</ul>"]
+    SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
 ````````````````````````````````
 
 
@@ -307,9 +307,9 @@ Markdown only
 .
 Document[0, 156]
   SpecExampleBlock[0, 155] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 139] closingMarker:[139, 155]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
-    SpecExampleHtml[41, 136] chars:[41, 136, "<pre>"..."</ul>"]
+    SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
     SpecExampleSeparator[137, 139] chars:[137, 139, "…\n"]
     SpecExampleAst[139, 139]
 ````````````````````````````````
@@ -349,11 +349,11 @@ Document[0, 56]
 .
 Document[0, 347]
   SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 329] closingMarker:[330, 346]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
-    SpecExampleHtml[41, 136] chars:[41, 136, "<pre>"..."</ul>"]
+    SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
     SpecExampleSeparator[137, 139] chars:[137, 139, "…\n"]
-    SpecExampleAst[139, 329] chars:[139, 329, "Docum"..."nly"]"]
+    SpecExampleAst[139, 329] chars:[139, 329, "Docum … nly\"]"]
 ````````````````````````````````
 
 
@@ -391,11 +391,11 @@ Document[0, 56]
 .
 Document[0, 347]
   SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 329] closingMarker:[330, 346]
-    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
-    SpecExampleHtml[41, 136] chars:[41, 136, "<pre>"..."</ul>"]
+    SpecExampleHtml[41, 136] chars:[41, 136, "<pre> … </ul>"]
     SpecExampleSeparator[137, 139] chars:[137, 139, "…\n"]
-    SpecExampleAst[139, 329] chars:[139, 329, "Docum"..."nly"]"]
+    SpecExampleAst[139, 329] chars:[139, 329, "Docum … nly\"]"]
 ````````````````````````````````
 
 
@@ -744,7 +744,7 @@ Wrapped options
 .
 Document[0, 69]
   SpecExampleBlock[0, 68] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 50] optionsClosingMarker:[50, 51] closingMarker:[52, 68]
-    SpecExampleOptionsList[33, 50] chars:[33, 50, "1, 2,"..." , 4 "]
+    SpecExampleOptionsList[33, 50] chars:[33, 50, "1, 2, …  , 4 "]
       SpecExampleOption[33, 34] chars:[33, 34, "1"]
       SpecExampleOptionSeparator[34, 35]
       SpecExampleOption[36, 37] chars:[36, 37, "2"]
@@ -768,7 +768,7 @@ Unwrapped coords Wrapped options
 .
 Document[0, 78]
   SpecExampleBlock[0, 77] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] optionsKeyword:[40, 47] optionsOpeningMarker:[47, 48] options:[48, 59] optionsClosingMarker:[59, 60] closingMarker:[61, 77]
-    SpecExampleOptionsList[48, 59] chars:[48, 59, "1, 2,"..." , 4 "]
+    SpecExampleOptionsList[48, 59] chars:[48, 59, "1, 2, …  , 4 "]
       SpecExampleOption[48, 49] chars:[48, 49, "1"]
       SpecExampleOptionSeparator[49, 50]
       SpecExampleOption[51, 52] chars:[51, 52, "2"]
@@ -789,7 +789,7 @@ Wrapped coords Wrapped options
 .
 Document[0, 79]
   SpecExampleBlock[0, 78] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] coordClosingMarker:[39, 40] optionsKeyword:[41, 48] optionsOpeningMarker:[48, 49] options:[49, 60] optionsClosingMarker:[60, 61] closingMarker:[62, 78]
-    SpecExampleOptionsList[49, 60] chars:[49, 60, "1, 2,"..." , 4 "]
+    SpecExampleOptionsList[49, 60] chars:[49, 60, "1, 2, …  , 4 "]
       SpecExampleOption[49, 50] chars:[49, 50, "1"]
       SpecExampleOptionSeparator[50, 51]
       SpecExampleOption[52, 53] chars:[52, 53, "2"]
@@ -853,11 +853,11 @@ Document[0, 350]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
-    SpecExampleSource[58, 84] chars:[58, 84, "Markd"..." item"]
+    SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
-    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma"..."</ul>"]
+    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum"..."nly"]"]
+    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
 ````````````````````````````````
 
 
@@ -897,11 +897,11 @@ Document[0, 350]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
-    SpecExampleSource[58, 84] chars:[58, 84, "Markd"..." item"]
+    SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
     SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
-    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma"..."</ul>"]
+    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
     SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
-    SpecExampleAst[142, 332] chars:[142, 332, "Docum"..."nly"]"]
+    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
 ````````````````````````````````
 
 

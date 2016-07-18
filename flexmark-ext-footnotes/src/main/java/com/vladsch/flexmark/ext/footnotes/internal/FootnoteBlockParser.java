@@ -59,6 +59,9 @@ public class FootnoteBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
+        // set the footnote from closingMarker to end
+        block.setCharsFromContent();
+        block.setFootnote(block.getChars().subSequence(block.getClosingMarker().getEndOffset() - block.getChars().getStartOffset()).trimStart());
         // add it to the map
         FootnoteRepository footnoteMap = parserState.getProperties().get(FootnoteExtension.FOOTNOTES);
         footnoteMap.put(footnoteMap.normalizeKey(block.getText()), block);
@@ -128,8 +131,6 @@ public class FootnoteBlockParser extends AbstractBlockParser {
                 footnoteBlockParser.block.setOpeningMarker(openingMarker);
                 footnoteBlockParser.block.setText(text);
                 footnoteBlockParser.block.setClosingMarker(closingMarker);
-                footnoteBlockParser.block.setFootnote(trySequence.subSequence(matcher.end()).trim());
-                footnoteBlockParser.block.setCharsFromContent();
 
                 return BlockStart.of(footnoteBlockParser)
                         .atIndex(openingEnd);

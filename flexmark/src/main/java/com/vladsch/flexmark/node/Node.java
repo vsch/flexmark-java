@@ -10,6 +10,7 @@ import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 
 public abstract class Node {
     final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
+    public static final String SPLICE = " … ";
 
     private Node parent = null;
     private Node firstChild = null;
@@ -250,7 +251,7 @@ public abstract class Node {
                 segmentSpanChars(out, getChars(), "chars");
             } else {
                 // give the first 5 and last 5
-                segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
+                segmentSpanChars(out, getChars().getStartOffset(), getChars().getEndOffset(), "chars", getChars().subSequence(0, 5).toVisibleWhitespaceString(), SPLICE, getChars().subSequence(getChars().length() - 5).toVisibleWhitespaceString());
             }
         }
     }
@@ -362,11 +363,17 @@ public abstract class Node {
     }
 
     public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars) {
+        segmentSpanChars(out,startOffset,endOffset, name, chars, "", "");
+    }
+
+    public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars1, String splice, String chars2) {
         if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
         out.append("[").append(startOffset).append(", ").append(endOffset);
         if (startOffset < endOffset) {
             out.append(", \"");
-            escapeJavaString(out, chars);
+            escapeJavaString(out, chars1);
+            out.append(splice);
+            escapeJavaString(out, chars2);
             out.append("\"");
         }
         out.append("]");
@@ -377,6 +384,9 @@ public abstract class Node {
         for (int i = 0; i < iMax; i++) {
             char c = chars.charAt(i);
             switch (c) {
+                case '"':
+                    out.append("\\\"");
+                    break;
                 case '\n':
                     out.append("\\n");
                     break;
@@ -403,11 +413,11 @@ public abstract class Node {
     }
 
     public static void segmentSpan(StringBuilder out, BasedSequence sequence, String name) {
-        segmentSpan(out, sequence.getStartOffset(), sequence.getEndOffset(), name);
+        if (sequence.isNotNull()) segmentSpan(out, sequence.getStartOffset(), sequence.getEndOffset(), name);
     }
 
     public static void segmentSpanChars(StringBuilder out, BasedSequence sequence, String name) {
-        segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
+        if (sequence.isNotNull()) segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toString());
     }
 
     public static void delimitedSegmentSpan(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
@@ -416,15 +426,15 @@ public abstract class Node {
             segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
         } else {
             // give the first 5 and last 5
-            segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.subSequence(0, 5).toVisibleWhitespaceString() + "\"...\"" + sequence.endSequence(sequence.length() - 5).toVisibleWhitespaceString());
+            segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.subSequence(0, 5).toVisibleWhitespaceString(), SPLICE, sequence.endSequence(sequence.length() - 5).toVisibleWhitespaceString());
         }
         segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 
     public static void delimitedSegmentSpanChars(StringBuilder out, BasedSequence openingSequence, BasedSequence sequence, BasedSequence closingSequence, String name) {
-        segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
-        segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
-        segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
+        if (openingSequence.isNotNull()) segmentSpanChars(out, openingSequence.getStartOffset(), openingSequence.getEndOffset(), name + "Open", openingSequence.toString());
+        if (sequence.isNotNull()) segmentSpanChars(out, sequence.getStartOffset(), sequence.getEndOffset(), name, sequence.toVisibleWhitespaceString());
+        if (closingSequence.isNotNull()) segmentSpanChars(out, closingSequence.getStartOffset(), closingSequence.getEndOffset(), name + "Close", closingSequence.toString());
     }
 
     public void takeChildren(Node node) {

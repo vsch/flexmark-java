@@ -172,15 +172,11 @@ public class SimTocBlockParser extends AbstractBlockParser {
                 BasedSequence styleChars = null;
                 BasedSequence titleChars = null;
                 if (matcher.start(1) != -1) {
-                    int styleStart = matcher.start(1);
-                    int styleEnd = matcher.end(1);
-                    styleChars = trySequence.subSequence(styleStart, styleEnd);
+                    styleChars = trySequence.subSequence(matcher.start(1), matcher.end(1));
                 }
 
                 if (matcher.start(2) != -1) {
-                    int titleStart = matcher.start(1);
-                    int titleEnd = matcher.end(1);
-                    titleChars = trySequence.subSequence(titleStart, titleEnd);
+                    titleChars = trySequence.subSequence(matcher.start(2), matcher.end(2));
                 }
 
                 SimTocBlockParser simTocBlockParser = new SimTocBlockParser(state.getProperties(), tocChars, styleChars, titleChars);

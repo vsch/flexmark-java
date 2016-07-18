@@ -78,9 +78,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence trimmedStart(String chars) {
+        int trim = countChars(chars, 0, length());
+        return trim > 0 ? subSequence(0, trim) : SubSequence.NULL;
+    }
+
+    @Override
     public BasedSequence trimEnd(String chars) {
         int trim = countCharsReversed(chars, 0, length());
         return trim > 0 ? subSequence(0, length() - trim) : this;
+    }
+
+    @Override
+    public BasedSequence trimmedEnd(String chars) {
+        int trim = countCharsReversed(chars, 0, length());
+        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
     }
 
     @Override
@@ -98,9 +110,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence trimmedStart() {
+        int trim = countChars(WHITESPACE_CHARS, 0, length());
+        return trim > 0 ? subSequence(0, trim) : SubSequence.NULL;
+    }
+
+    @Override
     public BasedSequence trimEnd() {
         int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
         return trim > 0 ? subSequence(0, length() - trim) : this;
+    }
+
+    @Override
+    public BasedSequence trimmedEnd() {
+        int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
+        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
     }
 
     @Override
@@ -115,6 +139,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence trimmedEOL() {
+        int trim = eolLength();
+        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
+    }
+
+    @Override
     public BasedSequence trim() {
         int trimStart = countChars(WHITESPACE_CHARS, 0, length());
         if (trimStart == length()) {
@@ -123,6 +153,31 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
         int trimEnd = countCharsReversed(WHITESPACE_CHARS, 0, length());
         return trimStart > 0 || trimEnd > 0 ? subSequence(trimStart, length() - trimEnd) : this;
+    }
+
+    @Override
+    public BasedSequence ifNullEmptyAfter(BasedSequence other) {
+        return isNull() ? other.subSequence(other.length(), other.length()) : this;
+    }
+
+    @Override
+    public BasedSequence ifNullEmptyBefore(BasedSequence other) {
+        return isNull() ? other.subSequence(0, 0) : this;
+    }
+
+    @Override
+    public BasedSequence nullIfEmpty() {
+        return isEmpty() ? SubSequence.NULL : this;
+    }
+
+    @Override
+    public BasedSequence nullIfBlank() {
+        return isBlank() ? SubSequence.NULL : this;
+    }
+
+    @Override
+    public BasedSequence nullIf(boolean condition) {
+        return condition ? SubSequence.NULL : this;
     }
 
     @Override
@@ -220,7 +275,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public int countChars(String chars, int startIndex, int endIndex) {
         int count = 0;
-        if (endIndex > length()) endIndex = length(); 
+        if (endIndex > length()) endIndex = length();
         for (int i = startIndex; i < endIndex; i++) {
             if (!contains(chars, charAt(i))) break;
             count++;
@@ -410,9 +465,9 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public int indexOfAny(char c1, char c2, char c3) {
-        return indexOfAny(c1,c2,c3,0);
+        return indexOfAny(c1, c2, c3, 0);
     }
-    
+
     @Override
     public int indexOfAny(char c1, char c2, char c3, int index) {
         int iMax = length();

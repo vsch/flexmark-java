@@ -119,13 +119,13 @@ Document[0, 15]
 .
 Document[0, 54]
   Paragraph[0, 54]
-    Strikethrough[0, 53] textOpen:[0, 2, "~~"] text:[2, 51, "Parag"..."raph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "~~"]
-      Text[2, 17] chars:[2, 17, "Parag"..."with "]
+    Strikethrough[0, 53] textOpen:[0, 2, "~~"] text:[2, 51, "Parag … raph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "~~"]
+      Text[2, 17] chars:[2, 17, "Parag … with "]
       Emphasis[17, 27] textOpen:[17, 18, "*"] text:[18, 26, "emphasis"] textClose:[26, 27, "*"]
         Text[18, 26] chars:[18, 26, "emphasis"]
       Text[27, 32] chars:[27, 32, " and "]
       StrongEmphasis[32, 51] textOpen:[32, 34, "__"] text:[34, 49, "strong emphasis"] textClose:[49, 51, "__"]
-        Text[34, 49] chars:[34, 49, "stron"..."hasis"]
+        Text[34, 49] chars:[34, 49, "stron … hasis"]
 ````````````````````````````````
 
 

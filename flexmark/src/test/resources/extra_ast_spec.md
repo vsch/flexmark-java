@@ -171,11 +171,11 @@ Test repository KEEP_FIRST behavior, meaning the first reference def is used
 .
 Document[0, 46]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
-  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "ref"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 19, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] urlOpen:[0, 0] url:[27, 32, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] urlOpen:[0, 0] url:[40, 45, "/url3"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "ref"] refClose:[11, 13, "]:"] url:[14, 19, "/url1"]
+  Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] url:[27, 32, "/url2"]
+  Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] url:[40, 45, "/url3"]
 ````````````````````````````````
 
 
@@ -194,11 +194,11 @@ Test repository KEEP_LAST behavior, meaning the last reference def is used
 .
 Document[0, 46]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
-  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "ref"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 19, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] urlOpen:[0, 0] url:[27, 32, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] urlOpen:[0, 0] url:[40, 45, "/url3"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "ref"] refClose:[11, 13, "]:"] url:[14, 19, "/url1"]
+  Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] url:[27, 32, "/url2"]
+  Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] url:[40, 45, "/url3"]
 ````````````````````````````````
 
 
@@ -235,17 +235,17 @@ Allow atx headers without a space between # and the title
 <h6>Heading</h6>
 .
 Document[0, 1063]
-  Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"] textClose:[0, 0]
+  Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
     Text[1, 8] chars:[1, 8, "Heading"]
-  Heading[85, 94] textOpen:[85, 87, "##"] text:[87, 94, "Heading"] textClose:[0, 0]
+  Heading[85, 94] textOpen:[85, 87, "##"] text:[87, 94, "Heading"]
     Text[87, 94] chars:[87, 94, "Heading"]
-  Heading[171, 181] textOpen:[171, 174, "###"] text:[174, 181, "Heading"] textClose:[0, 0]
+  Heading[171, 181] textOpen:[171, 174, "###"] text:[174, 181, "Heading"]
     Text[174, 181] chars:[174, 181, "Heading"]
-  Heading[258, 269] textOpen:[258, 262, "####"] text:[262, 269, "Heading"] textClose:[0, 0]
+  Heading[258, 269] textOpen:[258, 262, "####"] text:[262, 269, "Heading"]
     Text[262, 269] chars:[262, 269, "Heading"]
-  Heading[346, 358] textOpen:[346, 351, "#####"] text:[351, 358, "Heading"] textClose:[0, 0]
+  Heading[346, 358] textOpen:[346, 351, "#####"] text:[351, 358, "Heading"]
     Text[351, 358] chars:[351, 358, "Heading"]
-  Heading[435, 448] textOpen:[435, 441, "######"] text:[441, 448, "Heading"] textClose:[0, 0]
+  Heading[435, 448] textOpen:[435, 441, "######"] text:[441, 448, "Heading"]
     Text[441, 448] chars:[441, 448, "Heading"]
   Heading[526, 536] textOpen:[526, 527, "#"] text:[527, 534, "Heading"] textClose:[535, 536, "#"]
     Text[527, 534] chars:[527, 534, "Heading"]
@@ -285,13 +285,13 @@ Document[0, 81]
     SoftLineBreak[10, 11]
     Text[12, 22] chars:[12, 22, "## Heading"]
     SoftLineBreak[22, 23]
-    Text[24, 35] chars:[24, 35, "### H"..."ading"]
+    Text[24, 35] chars:[24, 35, "### H … ading"]
     SoftLineBreak[35, 36]
-    Text[37, 49] chars:[37, 49, "#### "..."ading"]
+    Text[37, 49] chars:[37, 49, "####  … ading"]
     SoftLineBreak[49, 50]
-    Text[51, 64] chars:[51, 64, "#####"..."ading"]
+    Text[51, 64] chars:[51, 64, "##### … ading"]
     SoftLineBreak[64, 65]
-    Text[66, 80] chars:[66, 80, "#####"..."ading"]
+    Text[66, 80] chars:[66, 80, "##### … ading"]
 ````````````````````````````````
 
 
@@ -318,13 +318,13 @@ Document[0, 81]
     SoftLineBreak[10, 11]
     Text[12, 22] chars:[12, 22, "## Heading"]
     SoftLineBreak[22, 23]
-    Text[24, 35] chars:[24, 35, "### H"..."ading"]
+    Text[24, 35] chars:[24, 35, "### H … ading"]
     SoftLineBreak[35, 36]
-    Text[37, 49] chars:[37, 49, "#### "..."ading"]
+    Text[37, 49] chars:[37, 49, "####  … ading"]
     SoftLineBreak[49, 50]
-    Text[51, 64] chars:[51, 64, "#####"..."ading"]
+    Text[51, 64] chars:[51, 64, "##### … ading"]
     SoftLineBreak[64, 65]
-    Text[66, 80] chars:[66, 80, "#####"..."ading"]
+    Text[66, 80] chars:[66, 80, "##### … ading"]
 ````````````````````````````````
 
 
@@ -388,7 +388,7 @@ Document[0, 141]
         Text[105, 115] chars:[105, 115, "sub item 4"]
     BulletListItem[124, 141] open:[124, 125, "*"]
       Paragraph[126, 141]
-        Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
+        Text[126, 140] chars:[126, 140, "sub s … tem 1"]
 ````````````````````````````````
 
 
@@ -453,7 +453,7 @@ Document[0, 141]
           BulletList[124, 141] isTight=true
             BulletListItem[124, 141] open:[124, 125, "*"]
               Paragraph[126, 141]
-                Text[126, 140] chars:[126, 140, "sub s"..."tem 1"]
+                Text[126, 140] chars:[126, 140, "sub s … tem 1"]
 ````````````````````````````````
 
 
@@ -573,57 +573,57 @@ Document[0, 661]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       Paragraph[18, 35]
-        Text[18, 34] chars:[18, 34, "this "..." code"]
+        Text[18, 34] chars:[18, 34, "this  …  code"]
       IndentedCodeBlock[48, 61]
     BulletListItem[62, 123] open:[62, 63, "*"]
       Paragraph[64, 71]
         Text[64, 70] chars:[64, 70, "item 2"]
       Paragraph[80, 97]
-        Text[80, 96] chars:[80, 96, "this "..." code"]
+        Text[80, 96] chars:[80, 96, "this  …  code"]
       IndentedCodeBlock[110, 123]
     BulletListItem[125, 186] open:[125, 126, "*"]
       Paragraph[127, 134]
         Text[127, 133] chars:[127, 133, "item 3"]
       Paragraph[143, 160]
-        Text[143, 159] chars:[143, 159, "this "..." code"]
+        Text[143, 159] chars:[143, 159, "this  …  code"]
       IndentedCodeBlock[173, 186]
     BulletListItem[189, 661] open:[189, 190, "*"]
       Paragraph[191, 198]
         Text[191, 197] chars:[191, 197, "item 4"]
       Paragraph[207, 224]
-        Text[207, 223] chars:[207, 223, "this "..." code"]
+        Text[207, 223] chars:[207, 223, "this  …  code"]
       IndentedCodeBlock[237, 250]
       BulletList[254, 661] isTight=false
         BulletListItem[254, 327] open:[254, 255, "*"]
           Paragraph[256, 267]
             Text[256, 266] chars:[256, 266, "sub item 1"]
           Paragraph[280, 297]
-            Text[280, 296] chars:[280, 296, "this "..." code"]
+            Text[280, 296] chars:[280, 296, "this  …  code"]
           IndentedCodeBlock[314, 327]
         BulletListItem[332, 405] open:[332, 333, "*"]
           Paragraph[334, 345]
             Text[334, 344] chars:[334, 344, "sub item 2"]
           Paragraph[358, 375]
-            Text[358, 374] chars:[358, 374, "this "..." code"]
+            Text[358, 374] chars:[358, 374, "this  …  code"]
           IndentedCodeBlock[392, 405]
         BulletListItem[411, 484] open:[411, 412, "*"]
           Paragraph[413, 424]
             Text[413, 423] chars:[413, 423, "sub item 3"]
           Paragraph[437, 454]
-            Text[437, 453] chars:[437, 453, "this "..." code"]
+            Text[437, 453] chars:[437, 453, "this  …  code"]
           IndentedCodeBlock[471, 484]
         BulletListItem[491, 661] open:[491, 492, "*"]
           Paragraph[493, 504]
             Text[493, 503] chars:[493, 503, "sub item 4"]
           Paragraph[517, 534]
-            Text[517, 533] chars:[517, 533, "this "..." code"]
+            Text[517, 533] chars:[517, 533, "this  …  code"]
           IndentedCodeBlock[551, 564]
           BulletList[572, 661] isTight=false
             BulletListItem[572, 661] open:[572, 573, "*"]
               Paragraph[574, 589]
-                Text[574, 588] chars:[574, 588, "sub s"..."tem 1"]
+                Text[574, 588] chars:[574, 588, "sub s … tem 1"]
               Paragraph[606, 623]
-                Text[606, 622] chars:[606, 622, "this "..." code"]
+                Text[606, 622] chars:[606, 622, "this  …  code"]
               IndentedCodeBlock[648, 661]
 ````````````````````````````````
 
@@ -1168,7 +1168,7 @@ This is a paragraph
 .
 Document[0, 80]
   Paragraph[0, 20]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
   OrderedList[20, 40] isTight=true
     OrderedListItem[20, 30] open:[20, 22, "2."]
       Paragraph[23, 30]
@@ -1177,7 +1177,7 @@ Document[0, 80]
       Paragraph[33, 40]
         Text[33, 39] chars:[33, 39, "item 2"]
   Paragraph[41, 62]
-    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    Text[41, 60] chars:[41, 60, "This  … graph"]
   BulletList[62, 80] isTight=true
     BulletListItem[62, 71] open:[62, 63, "-"]
       Paragraph[64, 71]
@@ -1217,13 +1217,13 @@ This is a paragraph
 .
 Document[0, 116]
   Paragraph[0, 40]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 29] chars:[20, 29, "2. item 1"]
     SoftLineBreak[29, 30]
     Text[30, 39] chars:[30, 39, "1. item 2"]
   Paragraph[41, 80]
-    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    Text[41, 60] chars:[41, 60, "This  … graph"]
     SoftLineBreak[61, 62]
     Text[62, 70] chars:[62, 70, "- item 1"]
     SoftLineBreak[70, 71]
@@ -1231,7 +1231,7 @@ Document[0, 116]
   BulletList[81, 116] isTight=true
     BulletListItem[81, 98] open:[81, 82, "-"]
       Paragraph[83, 98]
-        Text[83, 97] chars:[83, 97, "this "..." list"]
+        Text[83, 97] chars:[83, 97, "this  …  list"]
     BulletListItem[98, 107] open:[98, 99, "-"]
       Paragraph[100, 107]
         Text[100, 106] chars:[100, 106, "item 1"]
@@ -1294,7 +1294,7 @@ This is a paragraph
 .
 Document[0, 80]
   Paragraph[0, 20]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
   OrderedList[20, 40] isTight=true
     OrderedListItem[20, 30] open:[20, 22, "2."]
       Paragraph[23, 30]
@@ -1303,7 +1303,7 @@ Document[0, 80]
       Paragraph[33, 40]
         Text[33, 39] chars:[33, 39, "item 2"]
   Paragraph[41, 62]
-    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    Text[41, 60] chars:[41, 60, "This  … graph"]
   BulletList[62, 80] isTight=true
     BulletListItem[62, 71] open:[62, 63, "-"]
       Paragraph[64, 71]
@@ -1343,13 +1343,13 @@ This is a paragraph
 .
 Document[0, 116]
   Paragraph[0, 40]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 29] chars:[20, 29, "2. item 1"]
     SoftLineBreak[29, 30]
     Text[30, 39] chars:[30, 39, "1. item 2"]
   Paragraph[41, 80]
-    Text[41, 60] chars:[41, 60, "This "..."graph"]
+    Text[41, 60] chars:[41, 60, "This  … graph"]
     SoftLineBreak[61, 62]
     Text[62, 70] chars:[62, 70, "- item 1"]
     SoftLineBreak[70, 71]
@@ -1357,7 +1357,7 @@ Document[0, 116]
   BulletList[81, 116] isTight=true
     BulletListItem[81, 98] open:[81, 82, "-"]
       Paragraph[83, 98]
-        Text[83, 97] chars:[83, 97, "this "..." list"]
+        Text[83, 97] chars:[83, 97, "this  …  list"]
     BulletListItem[98, 107] open:[98, 99, "-"]
       Paragraph[100, 107]
         Text[100, 106] chars:[100, 106, "item 1"]
@@ -1381,7 +1381,7 @@ This is a paragraph
 .
 Document[0, 24]
   Paragraph[0, 20]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
   ThematicBreak[20, 23]
 ````````````````````````````````
 
@@ -1398,7 +1398,7 @@ This is a paragraph
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Text[0, 19] chars:[0, 19, "This "..."graph"]
+    Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 23] chars:[20, 23, "***"]
 ````````````````````````````````
@@ -1432,13 +1432,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1466,13 +1466,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1500,13 +1500,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1534,13 +1534,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1568,13 +1568,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1602,13 +1602,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1633,13 +1633,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1662,13 +1662,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1695,13 +1695,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1729,13 +1729,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1763,13 +1763,13 @@ Document[0, 197]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
   Paragraph[77, 197]
-    Text[77, 107] chars:[77, 107, "This "..."html "]
-    HtmlInline[107, 132] chars:[107, 132, "<span"..."ed;">"]
+    Text[77, 107] chars:[77, 107, "This  … html "]
+    HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
     HtmlInline[136, 143] chars:[136, 143, "</span>"]
-    Text[143, 164] chars:[143, 164, " and "..."ment "]
-    HtmlInlineComment[164, 180] chars:[164, 180, "<!-- "..."t -->"]
-    Text[180, 196] chars:[180, 196, " embe"..."n it."]
+    Text[143, 164] chars:[143, 164, " and  … ment "]
+    HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
+    Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
 
 
@@ -1852,7 +1852,7 @@ Html comments in block, parse inner comments
 Document[0, 39]
   HtmlBlock[0, 39]
     HtmlInnerBlock[0, 10] chars:[0, 10, "<div>\n    "]
-    HtmlInnerBlockComment[10, 31] chars:[10, 31, "<!-- "..."t -->"]
+    HtmlInnerBlockComment[10, 31] chars:[10, 31, "<!--  … t -->"]
     HtmlInnerBlock[31, 38] chars:[31, 38, "\n</div>"]
 ````````````````````````````````
 
@@ -1867,8 +1867,8 @@ Html comments in block, parse inner comments
 .
 Document[0, 35]
   HtmlBlock[0, 35]
-    HtmlInnerBlock[0, 13] chars:[0, 13, "<div>"..."div>\n"]
-    HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!-- "..."t -->"]
+    HtmlInnerBlock[0, 13] chars:[0, 13, "<div> … div>\n"]
+    HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!--  … t -->"]
 ````````````````````````````````
 
 
@@ -1885,13 +1885,13 @@ please add  `add_gtest(`**`your_unittest`**` `**`your_unittest_unittest.cc`**` )
 .
 Document[0, 82]
   Paragraph[0, 82]
-    Text[0, 12] chars:[0, 12, "pleas"..."add  "]
+    Text[0, 12] chars:[0, 12, "pleas … add  "]
     Code[12, 24] textOpen:[12, 13, "`"] text:[13, 23, "add_gtest("] textClose:[23, 24, "`"]
     StrongEmphasis[24, 43] textOpen:[24, 26, "**"] text:[26, 41, "`your_unittest`"] textClose:[41, 43, "**"]
-      Code[26, 41] textOpen:[26, 27, "`"] text:[27, 40, "your_"..."unittest"] textClose:[40, 41, "`"]
+      Code[26, 41] textOpen:[26, 27, "`"] text:[27, 40, "your_ … unittest"] textClose:[40, 41, "`"]
     Code[43, 46] textOpen:[43, 44, "`"] text:[44, 45, " "] textClose:[45, 46, "`"]
     StrongEmphasis[46, 77] textOpen:[46, 48, "**"] text:[48, 75, "`your_unittest_unittest.cc`"] textClose:[75, 77, "**"]
-      Code[48, 75] textOpen:[48, 49, "`"] text:[49, 74, "your_"..."unittest_unittest.cc"] textClose:[74, 75, "`"]
+      Code[48, 75] textOpen:[48, 49, "`"] text:[49, 74, "your_ … unittest_unittest.cc"] textClose:[74, 75, "`"]
     Code[77, 81] textOpen:[77, 78, "`"] text:[78, 80, " )"] textClose:[80, 81, "`"]
 ````````````````````````````````
 
@@ -1925,8 +1925,24 @@ Document[0, 28]
     StrongEmphasis[0, 27] textOpen:[0, 2, "**"] text:[2, 25, "bold *bold-italic* bold"] textClose:[25, 27, "**"]
       Text[2, 7] chars:[2, 7, "bold "]
       Emphasis[7, 20] textOpen:[7, 8, "*"] text:[8, 19, "bold-italic"] textClose:[19, 20, "*"]
-        Text[8, 19] chars:[8, 19, "bold-"..."talic"]
+        Text[8, 19] chars:[8, 19, "bold- … talic"]
       Text[20, 25] chars:[20, 25, " bold"]
+````````````````````````````````
+
+
+code mixed with emphasis:
+
+```````````````````````````````` example GFM Emphasis: 4
+`code with `**`bold`**` inside`
+.
+<p><code>code with</code><strong><code>bold</code></strong><code>inside</code></p>
+.
+Document[0, 32]
+  Paragraph[0, 32]
+    Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "code with "] textClose:[11, 12, "`"]
+    StrongEmphasis[12, 22] textOpen:[12, 14, "**"] text:[14, 20, "`bold`"] textClose:[20, 22, "**"]
+      Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "bold"] textClose:[19, 20, "`"]
+    Code[22, 31] textOpen:[22, 23, "`"] text:[23, 30, " inside"] textClose:[30, 31, "`"]
 ````````````````````````````````
 
 
@@ -1946,6 +1962,7 @@ Document[0, 23]
   FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[3] close:[19, 22, "```"]
 ````````````````````````````````
 
+
 empty, no info
 
 ```````````````````````````````` example Fenced Code Options: 2
@@ -1957,7 +1974,7 @@ empty, no info
 </code></pre>
 .
 Document[0, 9]
-  FencedCodeBlock[0, 8] open:[0, 3, "```"] info:[0, 0] content:[4, 5] lines[3] close:[5, 8, "```"]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[3] close:[5, 8, "```"]
 ````````````````````````````````
 
 
@@ -1973,7 +1990,7 @@ empty, no info, blank line follows
 </code></pre>
 .
 Document[0, 10]
-  FencedCodeBlock[0, 8] open:[0, 3, "```"] info:[0, 0] content:[4, 5] lines[3] close:[5, 8, "```"]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[3] close:[5, 8, "```"]
 ````````````````````````````````
 
 
@@ -2008,7 +2025,6 @@ Document[0, 14]
 ````````````````````````````````
 
 
-
 ## Anchor links option
 
 Change language class prefix
@@ -2020,8 +2036,8 @@ inline anchor <a id="test" href="#"></a><em></em> test
 .
 Document[0, 56]
   Paragraph[0, 56]
-    Text[0, 14] chars:[0, 14, "inlin"..."chor "]
-    HtmlInline[14, 36] chars:[14, 36, "<a id"..."="#">"]
+    Text[0, 14] chars:[0, 14, "inlin … chor "]
+    HtmlInline[14, 36] chars:[14, 36, "<a id … =\"#\">"]
     HtmlInline[36, 40] chars:[36, 40, "</a>"]
     HtmlInline[40, 44] chars:[40, 44, "<em>"]
     HtmlInline[44, 49] chars:[44, 49, "</em>"]
@@ -2040,6 +2056,20 @@ Break with trailing spaces
 .
 Document[0, 21]
   ThematicBreak[0, 20]
+````````````````````````````````
+
+
+## Image links
+
+```````````````````````````````` example Image links: 1
+![alt](/url) 
+.
+<p><img src="/url" alt="alt" /></p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Image[0, 12] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] linkClose:[11, 12, ")"]
+      Text[2, 5] chars:[2, 5, "alt"]
 ````````````````````````````````
 
 

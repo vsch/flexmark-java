@@ -748,7 +748,7 @@ bar
 <p>bar</p>
 .
 Document[0, 12]
-  Heading[0, 7] textOpen:[0, 0] text:[0, 3, "Foo"] textClose:[4, 7, "---"]
+  Heading[0, 7] text:[0, 3, "Foo"] textClose:[4, 7, "---"]
     Text[0, 3] chars:[0, 3, "Foo"]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "bar"]
@@ -839,17 +839,17 @@ Simple headings:
 <h6>foo</h6>
 .
 Document[0, 51]
-  Heading[0, 5] textOpen:[0, 1, "#"] text:[2, 5, "foo"] textClose:[0, 0]
+  Heading[0, 5] textOpen:[0, 1, "#"] text:[2, 5, "foo"]
     Text[2, 5] chars:[2, 5, "foo"]
-  Heading[6, 12] textOpen:[6, 8, "##"] text:[9, 12, "foo"] textClose:[0, 0]
+  Heading[6, 12] textOpen:[6, 8, "##"] text:[9, 12, "foo"]
     Text[9, 12] chars:[9, 12, "foo"]
-  Heading[13, 20] textOpen:[13, 16, "###"] text:[17, 20, "foo"] textClose:[0, 0]
+  Heading[13, 20] textOpen:[13, 16, "###"] text:[17, 20, "foo"]
     Text[17, 20] chars:[17, 20, "foo"]
-  Heading[21, 29] textOpen:[21, 25, "####"] text:[26, 29, "foo"] textClose:[0, 0]
+  Heading[21, 29] textOpen:[21, 25, "####"] text:[26, 29, "foo"]
     Text[26, 29] chars:[26, 29, "foo"]
-  Heading[30, 39] textOpen:[30, 35, "#####"] text:[36, 39, "foo"] textClose:[0, 0]
+  Heading[30, 39] textOpen:[30, 35, "#####"] text:[36, 39, "foo"]
     Text[36, 39] chars:[36, 39, "foo"]
-  Heading[40, 50] textOpen:[40, 46, "######"] text:[47, 50, "foo"] textClose:[0, 0]
+  Heading[40, 50] textOpen:[40, 46, "######"] text:[47, 50, "foo"]
     Text[47, 50] chars:[47, 50, "foo"]
 ````````````````````````````````
 
@@ -863,7 +863,7 @@ More than six `#` characters is not a heading:
 .
 Document[0, 12]
   Paragraph[0, 12]
-    Text[0, 11] chars:[0, 11, "#####"..."# foo"]
+    Text[0, 11] chars:[0, 11, "##### … # foo"]
 ````````````````````````````````
 
 
@@ -925,7 +925,7 @@ Contents are parsed as inlines:
 <h1>foo <em>bar</em> *baz*</h1>
 .
 Document[0, 20]
-  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "foo *bar* \*baz\*"] textClose:[0, 0]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "foo *bar* \*baz\*"]
     Text[2, 6] chars:[2, 6, "foo "]
     Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
       Text[7, 10] chars:[7, 10, "bar"]
@@ -941,7 +941,7 @@ Leading and trailing blanks are ignored in parsing inline content:
 <h1>foo</h1>
 .
 Document[0, 44]
-  Heading[0, 22] textOpen:[0, 1, "#"] text:[19, 22, "foo"] textClose:[0, 0]
+  Heading[0, 22] textOpen:[0, 1, "#"] text:[19, 22, "foo"]
     Text[19, 22] chars:[19, 22, "foo"]
 ````````````````````````````````
 
@@ -958,11 +958,11 @@ One to three spaces indentation are allowed:
 <h1>foo</h1>
 .
 Document[0, 27]
-  Heading[1, 8] textOpen:[1, 4, "###"] text:[5, 8, "foo"] textClose:[0, 0]
+  Heading[1, 8] textOpen:[1, 4, "###"] text:[5, 8, "foo"]
     Text[5, 8] chars:[5, 8, "foo"]
-  Heading[11, 17] textOpen:[11, 13, "##"] text:[14, 17, "foo"] textClose:[0, 0]
+  Heading[11, 17] textOpen:[11, 13, "##"] text:[14, 17, "foo"]
     Text[14, 17] chars:[14, 17, "foo"]
-  Heading[21, 26] textOpen:[21, 22, "#"] text:[23, 26, "foo"] textClose:[0, 0]
+  Heading[21, 26] textOpen:[21, 22, "#"] text:[23, 26, "foo"]
     Text[23, 26] chars:[23, 26, "foo"]
 ````````````````````````````````
 
@@ -1052,7 +1052,7 @@ heading:
 <h3>foo ### b</h3>
 .
 Document[0, 14]
-  Heading[0, 13] textOpen:[0, 3, "###"] text:[4, 13, "foo ### b"] textClose:[0, 0]
+  Heading[0, 13] textOpen:[0, 3, "###"] text:[4, 13, "foo ### b"]
     Text[4, 13] chars:[4, 13, "foo ### b"]
 ````````````````````````````````
 
@@ -1065,7 +1065,7 @@ The closing sequence must be preceded by a space:
 <h1>foo#</h1>
 .
 Document[0, 7]
-  Heading[0, 6] textOpen:[0, 1, "#"] text:[2, 6, "foo#"] textClose:[0, 0]
+  Heading[0, 6] textOpen:[0, 1, "#"] text:[2, 6, "foo#"]
     Text[2, 6] chars:[2, 6, "foo#"]
 ````````````````````````````````
 
@@ -1083,11 +1083,11 @@ of the closing sequence:
 <h1>foo #</h1>
 .
 Document[0, 34]
-  Heading[0, 12] textOpen:[0, 3, "###"] text:[4, 12, "foo \###"] textClose:[0, 0]
+  Heading[0, 12] textOpen:[0, 3, "###"] text:[4, 12, "foo \###"]
     Text[4, 12] chars:[4, 12, "foo \###"]
-  Heading[13, 24] textOpen:[13, 15, "##"] text:[16, 24, "foo #\##"] textClose:[0, 0]
+  Heading[13, 24] textOpen:[13, 15, "##"] text:[16, 24, "foo #\##"]
     Text[16, 24] chars:[16, 24, "foo #\##"]
-  Heading[25, 33] textOpen:[25, 26, "#"] text:[27, 33, "foo \#"] textClose:[0, 0]
+  Heading[25, 33] textOpen:[25, 26, "#"] text:[27, 33, "foo \#"]
     Text[27, 33] chars:[27, 33, "foo \#"]
 ````````````````````````````````
 
@@ -1106,7 +1106,7 @@ lines, and they can interrupt paragraphs:
 .
 Document[0, 17]
   ThematicBreak[0, 4]
-  Heading[5, 11] textOpen:[5, 7, "##"] text:[8, 11, "foo"] textClose:[0, 0]
+  Heading[5, 11] textOpen:[5, 7, "##"] text:[8, 11, "foo"]
     Text[8, 11] chars:[8, 11, "foo"]
   ThematicBreak[12, 16]
 ````````````````````````````````
@@ -1124,7 +1124,7 @@ Bar foo
 Document[0, 22]
   Paragraph[0, 8]
     Text[0, 7] chars:[0, 7, "Foo bar"]
-  Heading[8, 13] textOpen:[8, 9, "#"] text:[10, 13, "baz"] textClose:[0, 0]
+  Heading[8, 13] textOpen:[8, 9, "#"] text:[10, 13, "baz"]
     Text[10, 13] chars:[10, 13, "baz"]
   Paragraph[14, 22]
     Text[14, 21] chars:[14, 21, "Bar foo"]
@@ -1143,8 +1143,8 @@ ATX headings can be empty:
 <h3></h3>
 .
 Document[0, 14]
-  Heading[0, 3] textOpen:[0, 2, "##"] text:[3, 3] textClose:[0, 0]
-  Heading[4, 5] textOpen:[4, 5, "#"] text:[5, 5] textClose:[0, 0]
+  Heading[0, 3] textOpen:[0, 2, "##"] text:[3, 3]
+  Heading[4, 5] textOpen:[4, 5, "#"] text:[5, 5]
   Heading[6, 13] textOpen:[6, 9, "###"] text:[10, 10] textClose:[10, 13, "###"]
 ````````````````````````````````
 
@@ -1192,11 +1192,11 @@ Foo *bar*
 <h2>Foo <em>bar</em></h2>
 .
 Document[0, 41]
-  Heading[0, 19] textOpen:[0, 0] text:[0, 9, "Foo *bar*"] textClose:[10, 19, "========="]
+  Heading[0, 19] text:[0, 9, "Foo *bar*"] textClose:[10, 19, "========="]
     Text[0, 4] chars:[0, 4, "Foo "]
     Emphasis[4, 9] textOpen:[4, 5, "*"] text:[5, 8, "bar"] textClose:[8, 9, "*"]
       Text[5, 8] chars:[5, 8, "bar"]
-  Heading[21, 40] textOpen:[0, 0] text:[21, 30, "Foo *bar*"] textClose:[31, 40, "---------"]
+  Heading[21, 40] text:[21, 30, "Foo *bar*"] textClose:[31, 40, "---------"]
     Text[21, 25] chars:[21, 25, "Foo "]
     Emphasis[25, 30] textOpen:[25, 26, "*"] text:[26, 29, "bar"] textClose:[29, 30, "*"]
       Text[26, 29] chars:[26, 29, "bar"]
@@ -1214,7 +1214,7 @@ baz*
 baz</em></h1>
 .
 Document[0, 19]
-  Heading[0, 18] textOpen:[0, 0] text:[0, 13, "Foo *bar\nbaz*"] textClose:[14, 18, "===="]
+  Heading[0, 18] text:[0, 13, "Foo *bar\nbaz*"] textClose:[14, 18, "===="]
     Text[0, 4] chars:[0, 4, "Foo "]
     Emphasis[4, 13] textOpen:[4, 5, "*"] text:[5, 12, "bar\nbaz"] textClose:[12, 13, "*"]
       Text[5, 8] chars:[5, 8, "bar"]
@@ -1236,9 +1236,9 @@ Foo
 <h1>Foo</h1>
 .
 Document[0, 37]
-  Heading[0, 29] textOpen:[0, 0] text:[0, 3, "Foo"] textClose:[4, 29, "-------------------------"]
+  Heading[0, 29] text:[0, 3, "Foo"] textClose:[4, 29, "-------------------------"]
     Text[0, 3] chars:[0, 3, "Foo"]
-  Heading[31, 36] textOpen:[0, 0] text:[31, 34, "Foo"] textClose:[35, 36, "="]
+  Heading[31, 36] text:[31, 34, "Foo"] textClose:[35, 36, "="]
     Text[31, 34] chars:[31, 34, "Foo"]
 ````````````````````````````````
 
@@ -1261,11 +1261,11 @@ not line up with the underlining:
 <h1>Foo</h1>
 .
 Document[0, 37]
-  Heading[3, 10] textOpen:[0, 0] text:[3, 6, "Foo"] textClose:[7, 10, "---"]
+  Heading[3, 10] text:[3, 6, "Foo"] textClose:[7, 10, "---"]
     Text[3, 6] chars:[3, 6, "Foo"]
-  Heading[14, 23] textOpen:[0, 0] text:[14, 17, "Foo"] textClose:[18, 23, "-----"]
+  Heading[14, 23] text:[14, 17, "Foo"] textClose:[18, 23, "-----"]
     Text[14, 17] chars:[14, 17, "Foo"]
-  Heading[27, 36] textOpen:[0, 0] text:[27, 30, "Foo"] textClose:[33, 36, "==="]
+  Heading[27, 36] text:[27, 30, "Foo"] textClose:[33, 36, "==="]
     Text[27, 30] chars:[27, 30, "Foo"]
 ````````````````````````````````
 
@@ -1302,7 +1302,7 @@ Foo
 <h2>Foo</h2>
 .
 Document[0, 18]
-  Heading[0, 11] textOpen:[0, 0] text:[0, 3, "Foo"] textClose:[7, 11, "----"]
+  Heading[0, 11] text:[0, 3, "Foo"] textClose:[7, 11, "----"]
     Text[0, 3] chars:[0, 3, "Foo"]
 ````````````````````````````````
 
@@ -1358,7 +1358,7 @@ Foo
 <h2>Foo</h2>
 .
 Document[0, 12]
-  Heading[0, 11] textOpen:[0, 0] text:[0, 3, "Foo"] textClose:[6, 11, "-----"]
+  Heading[0, 11] text:[0, 3, "Foo"] textClose:[6, 11, "-----"]
     Text[0, 3] chars:[0, 3, "Foo"]
 ````````````````````````````````
 
@@ -1372,7 +1372,7 @@ Foo\
 <h2>Foo\</h2>
 .
 Document[0, 10]
-  Heading[0, 9] textOpen:[0, 0] text:[0, 4, "Foo\"] textClose:[5, 9, "----"]
+  Heading[0, 9] text:[0, 4, "Foo\"] textClose:[5, 9, "----"]
     Text[0, 4] chars:[0, 4, "Foo\"]
 ````````````````````````````````
 
@@ -1395,14 +1395,14 @@ of dashes"/>
 <p>of dashes&quot;/&gt;</p>
 .
 Document[0, 46]
-  Heading[0, 9] textOpen:[0, 0] text:[0, 4, "`Foo"] textClose:[5, 9, "----"]
+  Heading[0, 9] text:[0, 4, "`Foo"] textClose:[5, 9, "----"]
     Text[0, 4] chars:[0, 4, "`Foo"]
   Paragraph[10, 12]
     Text[10, 11] chars:[10, 11, "`"]
-  Heading[13, 32] textOpen:[0, 0] text:[13, 28, "<a title="a lot"] textClose:[29, 32, "---"]
-    Text[13, 28] chars:[13, 28, "<a ti"..."a lot"]
+  Heading[13, 32] text:[13, 28, "<a title=\"a lot"] textClose:[29, 32, "---"]
+    Text[13, 28] chars:[13, 28, "<a ti … a lot"]
   Paragraph[33, 46]
-    Text[33, 45] chars:[33, 45, "of da"..."es"/>"]
+    Text[33, 45] chars:[33, 45, "of da … es\"/>"]
 ````````````````````````````````
 
 
@@ -1479,7 +1479,7 @@ Bar
 Bar</h2>
 .
 Document[0, 12]
-  Heading[0, 11] textOpen:[0, 0] text:[0, 7, "Foo\nBar"] textClose:[8, 11, "---"]
+  Heading[0, 11] text:[0, 7, "Foo\nBar"] textClose:[8, 11, "---"]
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
     Text[4, 7] chars:[4, 7, "Bar"]
@@ -1504,9 +1504,9 @@ Baz
 .
 Document[0, 24]
   ThematicBreak[0, 3]
-  Heading[4, 11] textOpen:[0, 0] text:[4, 7, "Foo"] textClose:[8, 11, "---"]
+  Heading[4, 11] text:[4, 7, "Foo"] textClose:[8, 11, "---"]
     Text[4, 7] chars:[4, 7, "Foo"]
-  Heading[12, 19] textOpen:[0, 0] text:[12, 15, "Bar"] textClose:[16, 19, "---"]
+  Heading[12, 19] text:[12, 15, "Bar"] textClose:[16, 19, "---"]
     Text[12, 15] chars:[12, 15, "Bar"]
   Paragraph[20, 24]
     Text[20, 23] chars:[20, 23, "Baz"]
@@ -1603,7 +1603,7 @@ use backslash escapes:
 <h2>&gt; foo</h2>
 .
 Document[0, 14]
-  Heading[0, 13] textOpen:[0, 0] text:[0, 6, "\> foo"] textClose:[7, 13, "------"]
+  Heading[0, 13] text:[0, 6, "\> foo"] textClose:[7, 13, "------"]
     Text[0, 6] chars:[0, 6, "\> foo"]
 ````````````````````````````````
 
@@ -1645,7 +1645,7 @@ baz
 Document[0, 17]
   Paragraph[0, 4]
     Text[0, 3] chars:[0, 3, "Foo"]
-  Heading[5, 12] textOpen:[0, 0] text:[5, 8, "bar"] textClose:[9, 12, "---"]
+  Heading[5, 12] text:[5, 8, "bar"] textClose:[9, 12, "---"]
     Text[5, 8] chars:[5, 8, "bar"]
   Paragraph[13, 17]
     Text[13, 16] chars:[13, 16, "baz"]
@@ -1931,10 +1931,10 @@ Heading
 <hr />
 .
 Document[0, 46]
-  Heading[0, 9] textOpen:[0, 1, "#"] text:[2, 9, "Heading"] textClose:[0, 0]
+  Heading[0, 9] textOpen:[0, 1, "#"] text:[2, 9, "Heading"]
     Text[2, 9] chars:[2, 9, "Heading"]
   IndentedCodeBlock[14, 18]
-  Heading[18, 32] textOpen:[0, 0] text:[18, 25, "Heading"] textClose:[26, 32, "------"]
+  Heading[18, 32] text:[18, 25, "Heading"] textClose:[26, 32, "------"]
     Text[18, 25] chars:[18, 25, "Heading"]
   IndentedCodeBlock[37, 41]
   ThematicBreak[41, 45]
@@ -2045,7 +2045,7 @@ Here is a simple example with backticks:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[0, 0] content:[4, 9] lines[3] close:[9, 12, "```"]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] content:[4, 9] lines[3] close:[9, 12, "```"]
 ````````````````````````````````
 
 
@@ -2062,7 +2062,7 @@ With tildes:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] info:[0, 0] content:[4, 9] lines[3] close:[9, 12, "~~~"]
+  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[3] close:[9, 12, "~~~"]
 ````````````````````````````````
 
 
@@ -2080,7 +2080,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[0, 0] content:[4, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[3] close:[12, 15, "```"]
 ````````````````````````````````
 
 
@@ -2095,7 +2095,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "~~~"] info:[0, 0] content:[4, 12] lines[3] close:[12, 15, "~~~"]
+  FencedCodeBlock[0, 15] open:[0, 3, "~~~"] content:[4, 12] lines[3] close:[12, 15, "~~~"]
 ````````````````````````````````
 
 
@@ -2112,7 +2112,7 @@ aaa
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[0, 19] open:[0, 4, "````"] info:[0, 0] content:[5, 13] lines[3] close:[13, 19, "``````"]
+  FencedCodeBlock[0, 19] open:[0, 4, "````"] content:[5, 13] lines[3] close:[13, 19, "``````"]
 ````````````````````````````````
 
 
@@ -2127,7 +2127,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 17] open:[0, 4, "~~~~"] info:[0, 0] content:[5, 13] lines[3] close:[13, 17, "~~~~"]
+  FencedCodeBlock[0, 17] open:[0, 4, "~~~~"] content:[5, 13] lines[3] close:[13, 17, "~~~~"]
 ````````````````````````````````
 
 
@@ -2140,7 +2140,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[0, 4] open:[0, 3, "```"] info:[0, 0] content:[4, 4] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 4] lines[3]
 ````````````````````````````````
 
 
@@ -2156,7 +2156,7 @@ aaa
 </code></pre>
 .
 Document[0, 15]
-  FencedCodeBlock[0, 6] open:[0, 5, "`````"] info:[0, 0] content:[6, 15] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 6] open:[0, 5, "`````"] content:[6, 15] lines[3]
 ````````````````````````````````
 
 
@@ -2174,7 +2174,7 @@ bbb
 .
 Document[0, 17]
   BlockQuote[0, 6] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] info:[0, 0] content:[8, 12] lines[3] close:[0, 0]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[8, 12] lines[3]
   Paragraph[13, 17]
     Text[13, 16] chars:[13, 16, "bbb"]
 ````````````````````````````````
@@ -2193,7 +2193,7 @@ A code block can have all empty lines as its content:
 </code></pre>
 .
 Document[0, 12]
-  FencedCodeBlock[0, 11] open:[0, 3, "```"] info:[0, 0] content:[4, 8] lines[3] close:[8, 11, "```"]
+  FencedCodeBlock[0, 11] open:[0, 3, "```"] content:[4, 8] lines[3] close:[8, 11, "```"]
 ````````````````````````````````
 
 
@@ -2206,7 +2206,7 @@ A code block can be empty:
 <pre><code></code></pre>
 .
 Document[0, 8]
-  FencedCodeBlock[0, 7] open:[0, 3, "```"] info:[0, 0] content:[7, 7] lines[3] close:[4, 7, "```"]
+  FencedCodeBlock[0, 7] open:[0, 3, "```"] content:[7, 7] lines[3] close:[4, 7, "```"]
 ````````````````````````````````
 
 
@@ -2225,7 +2225,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[1, 17] open:[1, 4, "```"] info:[0, 0] content:[6, 14] lines[3] close:[14, 17, "```"]
+  FencedCodeBlock[1, 17] open:[1, 4, "```"] content:[6, 14] lines[3] close:[14, 17, "```"]
 ````````````````````````````````
 
 
@@ -2242,7 +2242,7 @@ aaa
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[2, 25] open:[2, 5, "```"] info:[0, 0] content:[6, 20] lines[3] close:[22, 25, "```"]
+  FencedCodeBlock[2, 25] open:[2, 5, "```"] content:[6, 20] lines[3] close:[22, 25, "```"]
 ````````````````````````````````
 
 
@@ -2259,7 +2259,7 @@ aaa
 </code></pre>
 .
 Document[0, 35]
-  FencedCodeBlock[3, 34] open:[3, 6, "```"] info:[0, 0] content:[10, 28] lines[3] close:[31, 34, "```"]
+  FencedCodeBlock[3, 34] open:[3, 6, "```"] content:[10, 28] lines[3] close:[31, 34, "```"]
 ````````````````````````````````
 
 
@@ -2292,7 +2292,7 @@ aaa
 </code></pre>
 .
 Document[0, 14]
-  FencedCodeBlock[0, 13] open:[0, 3, "```"] info:[0, 0] content:[4, 8] lines[3] close:[10, 13, "```"]
+  FencedCodeBlock[0, 13] open:[0, 3, "```"] content:[4, 8] lines[3] close:[10, 13, "```"]
 ````````````````````````````````
 
 
@@ -2305,7 +2305,7 @@ aaa
 </code></pre>
 .
 Document[0, 17]
-  FencedCodeBlock[3, 16] open:[3, 6, "```"] info:[0, 0] content:[7, 11] lines[3] close:[13, 16, "```"]
+  FencedCodeBlock[3, 16] open:[3, 6, "```"] content:[7, 11] lines[3] close:[13, 16, "```"]
 ````````````````````````````````
 
 
@@ -2321,7 +2321,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 4] open:[0, 3, "```"] info:[0, 0] content:[4, 16] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 16] lines[3]
 ````````````````````````````````
 
 
@@ -2353,7 +2353,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 7] open:[0, 6, "~~~~~~"] info:[0, 0] content:[7, 18] lines[3] close:[0, 0]
+  FencedCodeBlock[0, 7] open:[0, 6, "~~~~~~"] content:[7, 18] lines[3]
 ````````````````````````````````
 
 
@@ -2375,7 +2375,7 @@ baz
 Document[0, 20]
   Paragraph[0, 4]
     Text[0, 3] chars:[0, 3, "foo"]
-  FencedCodeBlock[4, 15] open:[4, 7, "```"] info:[0, 0] content:[8, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[4, 15] open:[4, 7, "```"] content:[8, 12] lines[3] close:[12, 15, "```"]
   Paragraph[16, 20]
     Text[16, 19] chars:[16, 19, "baz"]
 ````````````````````````````````
@@ -2398,10 +2398,10 @@ bar
 <h1>baz</h1>
 .
 Document[0, 26]
-  Heading[0, 7] textOpen:[0, 0] text:[0, 3, "foo"] textClose:[4, 7, "---"]
+  Heading[0, 7] text:[0, 3, "foo"] textClose:[4, 7, "---"]
     Text[0, 3] chars:[0, 3, "foo"]
-  FencedCodeBlock[8, 19] open:[8, 11, "~~~"] info:[0, 0] content:[12, 16] lines[3] close:[16, 19, "~~~"]
-  Heading[20, 25] textOpen:[20, 21, "#"] text:[22, 25, "baz"] textClose:[0, 0]
+  FencedCodeBlock[8, 19] open:[8, 11, "~~~"] content:[12, 16] lines[3] close:[16, 19, "~~~"]
+  Heading[20, 25] textOpen:[20, 21, "#"] text:[22, 25, "baz"]
     Text[22, 25] chars:[22, 25, "baz"]
 ````````````````````````````````
 
@@ -2484,7 +2484,7 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "```"] info:[0, 0] content:[4, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[3] close:[12, 15, "```"]
 ````````````````````````````````
 
 
@@ -3247,7 +3247,7 @@ Document[0, 23]
   Paragraph[0, 23]
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
-    HtmlInline[4, 18] chars:[4, 18, "<a hr"..."bar">"]
+    HtmlInline[4, 18] chars:[4, 18, "<a hr … bar\">"]
     SoftLineBreak[18, 19]
     Text[19, 22] chars:[19, 22, "baz"]
 ````````````````````````````````
@@ -3426,9 +3426,9 @@ them.
 <p><a href="/url" title="title">foo</a></p>
 .
 Document[0, 27]
-  Reference[0, 19] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[12, 13, """] title:[13, 18, "title"] titleClose:[18, 19, """]
+  Reference[0, 19] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 11, "/url"] titleOpen:[12, 13, "\""] title:[13, 18, "title"] titleClose:[18, 19, "\""]
   Paragraph[21, 27]
-    LinkRef[21, 26] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
+    LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
       Text[22, 25] chars:[22, 25, "foo"]
 ````````````````````````````````
 
@@ -3443,9 +3443,9 @@ Document[0, 27]
 <p><a href="/url" title="the title">foo</a></p>
 .
 Document[0, 56]
-  Reference[3, 46] refOpen:[3, 4, "["] ref:[4, 7, "foo"] refClose:[7, 9, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[35, 36, "'"] title:[36, 45, "the title"] titleClose:[45, 46, "'"]
+  Reference[3, 46] refOpen:[3, 4, "["] ref:[4, 7, "foo"] refClose:[7, 9, "]:"] url:[17, 21, "/url"] titleOpen:[35, 36, "'"] title:[36, 45, "the title"] titleClose:[45, 46, "'"]
   Paragraph[50, 56]
-    LinkRef[50, 55] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[50, 51, "["] reference:[51, 54, "foo"] referenceClose:[54, 55, "]"]
+    LinkRef[50, 55] referenceOpen:[50, 51, "["] reference:[51, 54, "foo"] referenceClose:[54, 55, "]"]
       Text[51, 54] chars:[51, 54, "foo"]
 ````````````````````````````````
 
@@ -3458,9 +3458,9 @@ Document[0, 56]
 <p><a href="my_(url)" title="title (with parens)">Foo*bar]</a></p>
 .
 Document[0, 56]
-  Reference[0, 42] refOpen:[0, 1, "["] ref:[1, 10, "Foo*bar\]"] refClose:[10, 12, "]:"] urlOpen:[0, 0] url:[12, 20, "my_(url)"] urlClose:[0, 0] titleOpen:[21, 22, "'"] title:[22, 41, "title (with parens)"] titleClose:[41, 42, "'"]
+  Reference[0, 42] refOpen:[0, 1, "["] ref:[1, 10, "Foo*bar\]"] refClose:[10, 12, "]:"] url:[12, 20, "my_(url)"] titleOpen:[21, 22, "'"] title:[22, 41, "title (with parens)"] titleClose:[41, 42, "'"]
   Paragraph[44, 56]
-    LinkRef[44, 55] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[44, 45, "["] reference:[45, 54, "Foo*bar\]"] referenceClose:[54, 55, "]"]
+    LinkRef[44, 55] referenceOpen:[44, 45, "["] reference:[45, 54, "Foo*bar\]"] referenceClose:[54, 55, "]"]
       Text[45, 54] chars:[45, 54, "Foo*bar\]"]
 ````````````````````````````````
 
@@ -3477,7 +3477,7 @@ Document[0, 56]
 Document[0, 41]
   Reference[0, 29] refOpen:[0, 1, "["] ref:[1, 8, "Foo bar"] refClose:[8, 10, "]:"] urlOpen:[11, 12, "<"] url:[12, 20, "my%20url"] urlClose:[20, 21, ">"] titleOpen:[22, 23, "'"] title:[23, 28, "title"] titleClose:[28, 29, "'"]
   Paragraph[31, 41]
-    LinkRef[31, 40] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[31, 32, "["] reference:[32, 39, "Foo bar"] referenceClose:[39, 40, "]"]
+    LinkRef[31, 40] referenceOpen:[31, 32, "["] reference:[32, 39, "Foo bar"] referenceClose:[39, 40, "]"]
       Text[32, 39] chars:[32, 39, "Foo bar"]
 ````````````````````````````````
 
@@ -3500,9 +3500,9 @@ line2
 ">foo</a></p>
 .
 Document[0, 41]
-  Reference[0, 33] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[12, 13, "'"] title:[13, 32, "\ntitle\nline1\nline2\n"] titleClose:[32, 33, "'"]
+  Reference[0, 33] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 11, "/url"] titleOpen:[12, 13, "'"] title:[13, 32, "\ntitle\nline1\nline2\n"] titleClose:[32, 33, "'"]
   Paragraph[35, 41]
-    LinkRef[35, 40] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[35, 36, "["] reference:[36, 39, "foo"] referenceClose:[39, 40, "]"]
+    LinkRef[35, 40] referenceOpen:[35, 36, "["] reference:[36, 39, "foo"] referenceClose:[39, 40, "]"]
       Text[36, 39] chars:[36, 39, "foo"]
 ````````````````````````````````
 
@@ -3522,13 +3522,13 @@ with blank line'
 .
 Document[0, 44]
   Paragraph[0, 19]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Text[5, 18] chars:[5, 18, ": /ur"..."title"]
+    Text[5, 18] chars:[5, 18, ": /ur … title"]
   Paragraph[20, 37]
-    Text[20, 36] chars:[20, 36, "with "..."line'"]
+    Text[20, 36] chars:[20, 36, "with  … line'"]
   Paragraph[38, 44]
-    LinkRef[38, 43] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[38, 39, "["] reference:[39, 42, "foo"] referenceClose:[42, 43, "]"]
+    LinkRef[38, 43] referenceOpen:[38, 39, "["] reference:[39, 42, "foo"] referenceClose:[42, 43, "]"]
       Text[39, 42] chars:[39, 42, "foo"]
 ````````````````````````````````
 
@@ -3544,9 +3544,9 @@ The title may be omitted:
 <p><a href="/url">foo</a></p>
 .
 Document[0, 19]
-  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 11, "/url"]
   Paragraph[13, 19]
-    LinkRef[13, 18] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[13, 14, "["] reference:[14, 17, "foo"] referenceClose:[17, 18, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "foo"] referenceClose:[17, 18, "]"]
       Text[14, 17] chars:[14, 17, "foo"]
 ````````````````````````````````
 
@@ -3563,11 +3563,11 @@ The link destination may not be omitted:
 .
 Document[0, 14]
   Paragraph[0, 7]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, ":"]
   Paragraph[8, 14]
-    LinkRef[8, 13] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[8, 9, "["] reference:[9, 12, "foo"] referenceClose:[12, 13, "]"]
+    LinkRef[8, 13] referenceOpen:[8, 9, "["] reference:[9, 12, "foo"] referenceClose:[12, 13, "]"]
       Text[9, 12] chars:[9, 12, "foo"]
 ````````````````````````````````
 
@@ -3583,9 +3583,9 @@ and literal backslashes:
 <p><a href="/url%5Cbar*baz" title="foo&quot;bar\baz">foo</a></p>
 .
 Document[0, 43]
-  Reference[0, 35] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 20, "/url\bar\*baz"] urlClose:[0, 0] titleOpen:[21, 22, """] title:[22, 34, "foo\"bar\baz"] titleClose:[34, 35, """]
+  Reference[0, 35] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 20, "/url\bar\*baz"] titleOpen:[21, 22, "\""] title:[22, 34, "foo\\"bar\baz"] titleClose:[34, 35, "\""]
   Paragraph[37, 43]
-    LinkRef[37, 42] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[37, 38, "["] reference:[38, 41, "foo"] referenceClose:[41, 42, "]"]
+    LinkRef[37, 42] referenceOpen:[37, 38, "["] reference:[38, 41, "foo"] referenceClose:[41, 42, "]"]
       Text[38, 41] chars:[38, 41, "foo"]
 ````````````````````````````````
 
@@ -3601,9 +3601,9 @@ A link can come before its corresponding definition:
 .
 Document[0, 18]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[7, 17] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 17, "url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[7, 17] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 17, "url"]
 ````````````````````````````````
 
 
@@ -3620,10 +3620,10 @@ precedence:
 .
 Document[0, 34]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 19, "first"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[20, 33] refOpen:[20, 21, "["] ref:[21, 24, "foo"] refClose:[24, 26, "]:"] urlOpen:[0, 0] url:[27, 33, "second"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 19, "first"]
+  Reference[20, 33] refOpen:[20, 21, "["] ref:[21, 24, "foo"] refClose:[24, 26, "]:"] url:[27, 33, "second"]
 ````````````````````````````````
 
 
@@ -3638,9 +3638,9 @@ case-insensitive (see [matches]).
 <p><a href="/url">Foo</a></p>
 .
 Document[0, 19]
-  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "FOO"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "FOO"] refClose:[4, 6, "]:"] url:[7, 11, "/url"]
   Paragraph[13, 19]
-    LinkRef[13, 18] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[13, 14, "["] reference:[14, 17, "Foo"] referenceClose:[17, 18, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "Foo"] referenceClose:[17, 18, "]"]
       Text[14, 17] chars:[14, 17, "Foo"]
 ````````````````````````````````
 
@@ -3653,9 +3653,9 @@ Document[0, 19]
 <p><a href="/%CF%86%CE%BF%CF%85">αγω</a></p>
 .
 Document[0, 19]
-  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "ΑΓΩ"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/φου"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "ΑΓΩ"] refClose:[4, 6, "]:"] url:[7, 11, "/φου"]
   Paragraph[13, 19]
-    LinkRef[13, 18] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[13, 14, "["] reference:[14, 17, "αγω"] referenceClose:[17, 18, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "αγω"] referenceClose:[17, 18, "]"]
       Text[14, 17] chars:[14, 17, "αγω"]
 ````````````````````````````````
 
@@ -3668,7 +3668,7 @@ It contributes nothing to the document.
 .
 .
 Document[0, 12]
-  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 11, "/url"]
 ````````````````````````````````
 
 
@@ -3683,7 +3683,7 @@ bar
 <p>bar</p>
 .
 Document[0, 18]
-  Reference[0, 13] refOpen:[0, 1, "["] ref:[2, 5, "foo"] refClose:[6, 8, "]:"] urlOpen:[0, 0] url:[9, 13, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 13] refOpen:[0, 1, "["] ref:[2, 5, "foo"] refClose:[6, 8, "]:"] url:[9, 13, "/url"]
   Paragraph[14, 18]
     Text[14, 17] chars:[14, 17, "bar"]
 ````````````````````````````````
@@ -3699,9 +3699,9 @@ This is not a link reference definition, because there are
 .
 Document[0, 23]
   Paragraph[0, 23]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Text[5, 22] chars:[5, 22, ": /ur"..."e" ok"]
+    Text[5, 22] chars:[5, 22, ": /ur … e\" ok"]
 ````````````````````````````````
 
 
@@ -3714,9 +3714,9 @@ This is a link reference definition, but it has no title:
 <p>&quot;title&quot; ok</p>
 .
 Document[0, 23]
-  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 11] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 11, "/url"]
   Paragraph[12, 23]
-    Text[12, 22] chars:[12, 22, ""title" ok"]
+    Text[12, 22] chars:[12, 22, "\"title\" ok"]
 ````````````````````````````````
 
 
@@ -3735,7 +3735,7 @@ four spaces:
 Document[0, 31]
   IndentedCodeBlock[4, 25]
   Paragraph[25, 31]
-    LinkRef[25, 30] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[25, 26, "["] reference:[26, 29, "foo"] referenceClose:[29, 30, "]"]
+    LinkRef[25, 30] referenceOpen:[25, 26, "["] reference:[26, 29, "foo"] referenceClose:[29, 30, "]"]
       Text[26, 29] chars:[26, 29, "foo"]
 ````````````````````````````````
 
@@ -3755,9 +3755,9 @@ a code block:
 <p>[foo]</p>
 .
 Document[0, 27]
-  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[0, 0] content:[4, 16] lines[3] close:[16, 19, "```"]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[3] close:[16, 19, "```"]
   Paragraph[21, 27]
-    LinkRef[21, 26] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
+    LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
       Text[22, 25] chars:[22, 25, "foo"]
 ````````````````````````````````
 
@@ -3778,11 +3778,11 @@ Document[0, 23]
   Paragraph[0, 16]
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
-    LinkRef[4, 9] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[4, 5, "["] reference:[5, 8, "bar"] referenceClose:[8, 9, "]"]
+    LinkRef[4, 9] referenceOpen:[4, 5, "["] reference:[5, 8, "bar"] referenceClose:[8, 9, "]"]
       Text[5, 8] chars:[5, 8, "bar"]
     Text[9, 15] chars:[9, 15, ": /baz"]
   Paragraph[17, 23]
-    LinkRef[17, 22] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[17, 18, "["] reference:[18, 21, "bar"] referenceClose:[21, 22, "]"]
+    LinkRef[17, 22] referenceOpen:[17, 18, "["] reference:[18, 21, "bar"] referenceClose:[21, 22, "]"]
       Text[18, 21] chars:[18, 21, "bar"]
 ````````````````````````````````
 
@@ -3801,10 +3801,10 @@ and thematic breaks, and it need not be followed by a blank line.
 </blockquote>
 .
 Document[0, 26]
-  Heading[0, 7] textOpen:[0, 1, "#"] text:[2, 7, "[Foo]"] textClose:[0, 0]
-    LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "Foo"] referenceClose:[6, 7, "]"]
+  Heading[0, 7] textOpen:[0, 1, "#"] text:[2, 7, "[Foo]"]
+    LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "Foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "Foo"]
-  Reference[8, 19] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[8, 19] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"]
   BlockQuote[20, 26] marker:[20, 21, ">"]
     Paragraph[22, 26]
       Text[22, 25] chars:[22, 25, "bar"]
@@ -3829,19 +3829,19 @@ can occur one after another, without intervening blank lines.
 <a href="/baz-url">baz</a></p>
 .
 Document[0, 83]
-  Reference[0, 21] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 15, "/foo-url"] urlClose:[0, 0] titleOpen:[16, 17, """] title:[17, 20, "foo"] titleClose:[20, 21, """]
-  Reference[22, 45] refOpen:[22, 23, "["] ref:[23, 26, "bar"] refClose:[26, 28, "]:"] urlOpen:[0, 0] url:[29, 37, "/bar-url"] urlClose:[0, 0] titleOpen:[40, 41, """] title:[41, 44, "bar"] titleClose:[44, 45, """]
-  Reference[46, 61] refOpen:[46, 47, "["] ref:[47, 50, "baz"] refClose:[50, 52, "]:"] urlOpen:[0, 0] url:[53, 61, "/baz-url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 21] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 15, "/foo-url"] titleOpen:[16, 17, "\""] title:[17, 20, "foo"] titleClose:[20, 21, "\""]
+  Reference[22, 45] refOpen:[22, 23, "["] ref:[23, 26, "bar"] refClose:[26, 28, "]:"] url:[29, 37, "/bar-url"] titleOpen:[40, 41, "\""] title:[41, 44, "bar"] titleClose:[44, 45, "\""]
+  Reference[46, 61] refOpen:[46, 47, "["] ref:[47, 50, "baz"] refClose:[50, 52, "]:"] url:[53, 61, "/baz-url"]
   Paragraph[63, 83]
-    LinkRef[63, 68] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[63, 64, "["] reference:[64, 67, "foo"] referenceClose:[67, 68, "]"]
+    LinkRef[63, 68] referenceOpen:[63, 64, "["] reference:[64, 67, "foo"] referenceClose:[67, 68, "]"]
       Text[64, 67] chars:[64, 67, "foo"]
     Text[68, 69] chars:[68, 69, ","]
     SoftLineBreak[69, 70]
-    LinkRef[70, 75] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[70, 71, "["] reference:[71, 74, "bar"] referenceClose:[74, 75, "]"]
+    LinkRef[70, 75] referenceOpen:[70, 71, "["] reference:[71, 74, "bar"] referenceClose:[74, 75, "]"]
       Text[71, 74] chars:[71, 74, "bar"]
     Text[75, 76] chars:[75, 76, ","]
     SoftLineBreak[76, 77]
-    LinkRef[77, 82] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[77, 78, "["] reference:[78, 81, "baz"] referenceClose:[81, 82, "]"]
+    LinkRef[77, 82] referenceOpen:[77, 78, "["] reference:[78, 81, "baz"] referenceClose:[81, 82, "]"]
       Text[78, 81] chars:[78, 81, "baz"]
 ````````````````````````````````
 
@@ -3862,10 +3862,10 @@ are defined:
 .
 Document[0, 21]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   BlockQuote[7, 21] marker:[7, 8, ">"]
-    Reference[9, 20] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] urlOpen:[0, 0] url:[16, 20, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+    Reference[9, 20] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"]
 ````````````````````````````````
 
 
@@ -4057,7 +4057,7 @@ aaa
 Document[0, 22]
   Paragraph[4, 8]
     Text[4, 7] chars:[4, 7, "aaa"]
-  Heading[12, 17] textOpen:[12, 13, "#"] text:[14, 17, "aaa"] textClose:[0, 0]
+  Heading[12, 17] textOpen:[12, 13, "#"] text:[14, 17, "aaa"]
     Text[14, 17] chars:[14, 17, "aaa"]
 ````````````````````````````````
 
@@ -4126,7 +4126,7 @@ baz</p>
 .
 Document[0, 20]
   BlockQuote[0, 20] marker:[0, 1, ">"]
-    Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"] textClose:[0, 0]
+    Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"]
       Text[4, 7] chars:[4, 7, "Foo"]
     Paragraph[10, 20]
       Text[10, 13] chars:[10, 13, "bar"]
@@ -4150,7 +4150,7 @@ baz</p>
 .
 Document[0, 18]
   BlockQuote[0, 18] marker:[0, 1, ">"]
-    Heading[1, 6] textOpen:[1, 2, "#"] text:[3, 6, "Foo"] textClose:[0, 0]
+    Heading[1, 6] textOpen:[1, 2, "#"] text:[3, 6, "Foo"]
       Text[3, 6] chars:[3, 6, "Foo"]
     Paragraph[8, 18]
       Text[8, 11] chars:[8, 11, "bar"]
@@ -4174,7 +4174,7 @@ baz</p>
 .
 Document[0, 27]
   BlockQuote[3, 27] marker:[3, 4, ">"]
-    Heading[5, 10] textOpen:[5, 6, "#"] text:[7, 10, "Foo"] textClose:[0, 0]
+    Heading[5, 10] textOpen:[5, 6, "#"] text:[7, 10, "Foo"]
       Text[7, 10] chars:[7, 10, "Foo"]
     Paragraph[16, 27]
       Text[16, 19] chars:[16, 19, "bar"]
@@ -4216,7 +4216,7 @@ baz</p>
 .
 Document[0, 18]
   BlockQuote[0, 18] marker:[0, 1, ">"]
-    Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"] textClose:[0, 0]
+    Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"]
       Text[4, 7] chars:[4, 7, "Foo"]
     Paragraph[10, 18]
       Text[10, 13] chars:[10, 13, "bar"]
@@ -4347,10 +4347,10 @@ foo
 .
 Document[0, 14]
   BlockQuote[0, 6] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] info:[0, 0] content:[6, 6] lines[3] close:[0, 0]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[6, 6] lines[3]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "foo"]
-  FencedCodeBlock[10, 14] open:[10, 13, "```"] info:[0, 0] content:[14, 14] lines[3] close:[0, 0]
+  FencedCodeBlock[10, 14] open:[10, 13, "```"] content:[14, 14] lines[3]
 ````````````````````````````````
 
 
@@ -4738,13 +4738,13 @@ with two lines.</p>
 .
 Document[0, 65]
   Paragraph[0, 28]
-    Text[0, 11] chars:[0, 11, "A par"..."graph"]
+    Text[0, 11] chars:[0, 11, "A par … graph"]
     SoftLineBreak[11, 12]
-    Text[12, 27] chars:[12, 27, "with "..."ines."]
+    Text[12, 27] chars:[12, 27, "with  … ines."]
   IndentedCodeBlock[33, 48]
   BlockQuote[48, 65] marker:[48, 49, ">"]
     Paragraph[50, 65]
-      Text[50, 64] chars:[50, 64, "A blo"..."uote."]
+      Text[50, 64] chars:[50, 64, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -4776,13 +4776,13 @@ Document[0, 81]
   OrderedList[0, 81] isTight=false
     OrderedListItem[0, 81] open:[0, 2, "1."]
       Paragraph[4, 36]
-        Text[4, 15] chars:[4, 15, "A par"..."graph"]
+        Text[4, 15] chars:[4, 15, "A par … graph"]
         SoftLineBreak[15, 16]
-        Text[20, 35] chars:[20, 35, "with "..."ines."]
+        Text[20, 35] chars:[20, 35, "with  … ines."]
       IndentedCodeBlock[45, 60]
       BlockQuote[64, 81] marker:[64, 65, ">"]
         Paragraph[66, 81]
-          Text[66, 80] chars:[66, 80, "A blo"..."uote."]
+          Text[66, 80] chars:[66, 80, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -5047,13 +5047,13 @@ Document[0, 97]
     Text[24, 27] chars:[24, 27, "bar"]
   BulletList[29, 96] isTight=false
     BulletListItem[29, 54] open:[29, 30, "-"]
-      FencedCodeBlock[31, 54] open:[31, 34, "```"] info:[0, 0] content:[37, 49] lines[3] close:[51, 54, "```"]
+      FencedCodeBlock[31, 54] open:[31, 34, "```"] content:[37, 49] lines[3] close:[51, 54, "```"]
     BulletListItem[56, 96] open:[56, 57, "-"]
       Paragraph[58, 62]
         Text[58, 61] chars:[58, 61, "baz"]
       BulletList[65, 96] isTight=true
         BulletListItem[65, 96] open:[65, 66, "+"]
-          FencedCodeBlock[67, 96] open:[67, 70, "```"] info:[0, 0] content:[75, 89] lines[3] close:[93, 96, "```"]
+          FencedCodeBlock[67, 96] open:[67, 70, "```"] content:[75, 89] lines[3] close:[93, 96, "```"]
 ````````````````````````````````
 
 
@@ -5087,7 +5087,7 @@ Document[0, 53]
     OrderedListItem[0, 53] open:[0, 2, "1."]
       Paragraph[4, 8]
         Text[4, 7] chars:[4, 7, "foo"]
-      FencedCodeBlock[13, 32] open:[13, 16, "```"] info:[0, 0] content:[21, 25] lines[3] close:[29, 32, "```"]
+      FencedCodeBlock[13, 32] open:[13, 16, "```"] content:[21, 25] lines[3] close:[29, 32, "```"]
       Paragraph[38, 42]
         Text[38, 41] chars:[38, 41, "baz"]
       BlockQuote[47, 53] marker:[47, 48, ">"]
@@ -5179,7 +5179,7 @@ Document[0, 14]
 .
 Document[0, 19]
   Paragraph[0, 19]
-    Text[0, 18] chars:[0, 18, "12345"..."ot ok"]
+    Text[0, 18] chars:[0, 18, "12345 … ot ok"]
 ````````````````````````````````
 
 
@@ -5486,7 +5486,7 @@ Document[0, 40]
       Paragraph[4, 8]
         Text[4, 7] chars:[4, 7, "foo"]
     BulletListItem[8, 27] open:[8, 9, "-"]
-      FencedCodeBlock[12, 27] open:[12, 15, "```"] info:[0, 0] content:[18, 22] lines[3] close:[24, 27, "```"]
+      FencedCodeBlock[12, 27] open:[12, 15, "```"] content:[18, 22] lines[3] close:[24, 27, "```"]
     BulletListItem[28, 40] open:[28, 29, "-"]
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
@@ -5637,13 +5637,13 @@ Document[0, 85]
   OrderedList[1, 85] isTight=false
     OrderedListItem[1, 85] open:[1, 3, "1."]
       Paragraph[5, 38]
-        Text[5, 16] chars:[5, 16, "A par"..."graph"]
+        Text[5, 16] chars:[5, 16, "A par … graph"]
         SoftLineBreak[16, 17]
-        Text[22, 37] chars:[22, 37, "with "..."ines."]
+        Text[22, 37] chars:[22, 37, "with  … ines."]
       IndentedCodeBlock[48, 63]
       BlockQuote[68, 85] marker:[68, 69, ">"]
         Paragraph[70, 85]
-          Text[70, 84] chars:[70, 84, "A blo"..."uote."]
+          Text[70, 84] chars:[70, 84, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -5673,13 +5673,13 @@ Document[0, 89]
   OrderedList[2, 89] isTight=false
     OrderedListItem[2, 89] open:[2, 4, "1."]
       Paragraph[6, 40]
-        Text[6, 17] chars:[6, 17, "A par"..."graph"]
+        Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
-        Text[24, 39] chars:[24, 39, "with "..."ines."]
+        Text[24, 39] chars:[24, 39, "with  … ines."]
       IndentedCodeBlock[51, 66]
       BlockQuote[72, 89] marker:[72, 73, ">"]
         Paragraph[74, 89]
-          Text[74, 88] chars:[74, 88, "A blo"..."uote."]
+          Text[74, 88] chars:[74, 88, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -5709,13 +5709,13 @@ Document[0, 93]
   OrderedList[3, 93] isTight=false
     OrderedListItem[3, 93] open:[3, 5, "1."]
       Paragraph[7, 42]
-        Text[7, 18] chars:[7, 18, "A par"..."graph"]
+        Text[7, 18] chars:[7, 18, "A par … graph"]
         SoftLineBreak[18, 19]
-        Text[26, 41] chars:[26, 41, "with "..."ines."]
+        Text[26, 41] chars:[26, 41, "with  … ines."]
       IndentedCodeBlock[54, 69]
       BlockQuote[76, 93] marker:[76, 77, ">"]
         Paragraph[78, 93]
-          Text[78, 92] chars:[78, 92, "A blo"..."uote."]
+          Text[78, 92] chars:[78, 92, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -5778,13 +5778,13 @@ Document[0, 83]
   OrderedList[2, 83] isTight=false
     OrderedListItem[2, 83] open:[2, 4, "1."]
       Paragraph[6, 34]
-        Text[6, 17] chars:[6, 17, "A par"..."graph"]
+        Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
-        Text[18, 33] chars:[18, 33, "with "..."ines."]
+        Text[18, 33] chars:[18, 33, "with  … ines."]
       IndentedCodeBlock[45, 60]
       BlockQuote[66, 83] marker:[66, 67, ">"]
         Paragraph[68, 83]
-          Text[68, 82] chars:[68, 82, "A blo"..."uote."]
+          Text[68, 82] chars:[68, 82, "A blo … uote."]
 ````````````````````````````````
 
 
@@ -5803,9 +5803,9 @@ Document[0, 38]
   OrderedList[2, 38] isTight=true
     OrderedListItem[2, 38] open:[2, 4, "1."]
       Paragraph[6, 38]
-        Text[6, 17] chars:[6, 17, "A par"..."graph"]
+        Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
-        Text[22, 37] chars:[22, 37, "with "..."ines."]
+        Text[22, 37] chars:[22, 37, "with  … ines."]
 ````````````````````````````````
 
 
@@ -5834,7 +5834,7 @@ Document[0, 34]
           Paragraph[7, 34]
             Text[7, 17] chars:[7, 17, "Blockquote"]
             SoftLineBreak[17, 18]
-            Text[18, 33] chars:[18, 33, "conti"..."here."]
+            Text[18, 33] chars:[18, 33, "conti … here."]
 ````````````````````````````````
 
 
@@ -5861,7 +5861,7 @@ Document[0, 36]
           Paragraph[7, 36]
             Text[7, 17] chars:[7, 17, "Blockquote"]
             SoftLineBreak[17, 18]
-            Text[20, 35] chars:[20, 35, "conti"..."here."]
+            Text[20, 35] chars:[20, 35, "conti … here."]
 ````````````````````````````````
 
 
@@ -6056,10 +6056,10 @@ baz</li>
 Document[0, 26]
   BulletList[0, 26] isTight=true
     BulletListItem[0, 7] open:[0, 1, "-"]
-      Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"] textClose:[0, 0]
+      Heading[2, 7] textOpen:[2, 3, "#"] text:[4, 7, "Foo"]
         Text[4, 7] chars:[4, 7, "Foo"]
     BulletListItem[8, 26] open:[8, 9, "-"]
-      Heading[10, 19] textOpen:[0, 0] text:[10, 13, "Bar"] textClose:[16, 19, "---"]
+      Heading[10, 19] text:[10, 13, "Bar"] textClose:[16, 19, "---"]
         Text[10, 13] chars:[10, 13, "Bar"]
       Paragraph[22, 26]
         Text[22, 25] chars:[22, 25, "baz"]
@@ -6384,11 +6384,11 @@ The number of windows in my house is
 .
 Document[0, 68]
   Paragraph[0, 37]
-    Text[0, 36] chars:[0, 36, "The n"..."se is"]
+    Text[0, 36] chars:[0, 36, "The n … se is"]
   OrderedList[37, 68] isTight=true
     OrderedListItem[37, 68] open:[37, 40, "14."]
       Paragraph[42, 68]
-        Text[42, 67] chars:[42, 67, "The n"..."is 6."]
+        Text[42, 67] chars:[42, 67, "The n … is 6."]
 ````````````````````````````````
 
 
@@ -6857,7 +6857,7 @@ Document[0, 27]
     BulletListItem[4, 23] open:[4, 5, "-"]
       Paragraph[6, 8]
         Text[6, 7] chars:[6, 7, "b"]
-      Reference[11, 22] refOpen:[11, 12, "["] ref:[12, 15, "ref"] refClose:[15, 17, "]:"] urlOpen:[0, 0] url:[18, 22, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+      Reference[11, 22] refOpen:[11, 12, "["] ref:[12, 15, "ref"] refClose:[15, 17, "]:"] url:[18, 22, "/url"]
     BulletListItem[23, 27] open:[23, 24, "-"]
       Paragraph[25, 27]
         Text[25, 26] chars:[25, 26, "d"]
@@ -6892,7 +6892,7 @@ Document[0, 26]
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
     BulletListItem[4, 21] open:[4, 5, "-"]
-      FencedCodeBlock[6, 21] open:[6, 9, "```"] info:[0, 0] content:[12, 16] lines[3] close:[18, 21, "```"]
+      FencedCodeBlock[6, 21] open:[6, 9, "```"] content:[12, 16] lines[3] close:[18, 21, "```"]
     BulletListItem[22, 26] open:[22, 23, "-"]
       Paragraph[24, 26]
         Text[24, 25] chars:[24, 25, "c"]
@@ -7001,7 +7001,7 @@ Document[0, 30]
       BlockQuote[6, 10] marker:[6, 7, ">"]
         Paragraph[8, 10]
           Text[8, 9] chars:[8, 9, "b"]
-      FencedCodeBlock[12, 25] open:[12, 15, "```"] info:[0, 0] content:[18, 20] lines[3] close:[22, 25, "```"]
+      FencedCodeBlock[12, 25] open:[12, 15, "```"] content:[18, 20] lines[3] close:[22, 25, "```"]
     BulletListItem[26, 30] open:[26, 27, "-"]
       Paragraph[28, 30]
         Text[28, 29] chars:[28, 29, "d"]
@@ -7070,7 +7070,7 @@ two block elements in the list item:
 Document[0, 29]
   OrderedList[0, 29] isTight=false
     OrderedListItem[0, 29] open:[0, 2, "1."]
-      FencedCodeBlock[3, 20] open:[3, 6, "```"] info:[0, 0] content:[10, 14] lines[3] close:[17, 20, "```"]
+      FencedCodeBlock[3, 20] open:[3, 6, "```"] content:[10, 14] lines[3] close:[17, 20, "```"]
       Paragraph[25, 29]
         Text[25, 28] chars:[25, 28, "bar"]
 ````````````````````````````````
@@ -7191,7 +7191,7 @@ Any ASCII punctuation character may be backslash-escaped:
 .
 Document[0, 65]
   Paragraph[0, 65]
-    Text[0, 64] chars:[0, 64, "\!\"\"..."|\}\~"]
+    Text[0, 64] chars:[0, 64, "\!\\"\ … |\}\~"]
 ````````````````````````````````
 
 
@@ -7205,7 +7205,7 @@ backslashes:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Text[0, 14] chars:[0, 14, "\\u2192\A\"..."3\φ\«"]
+    Text[0, 14] chars:[0, 14, "\\u2192\A\ … 3\φ\«"]
 ````````````````````````````````
 
 
@@ -7233,21 +7233,21 @@ not have their usual Markdown meanings:
 .
 Document[0, 144]
   Paragraph[0, 144]
-    Text[0, 17] chars:[0, 17, "\*not"..."ized*"]
+    Text[0, 17] chars:[0, 17, "\*not … ized*"]
     SoftLineBreak[17, 18]
-    Text[18, 34] chars:[18, 34, "\<br/"..."a tag"]
+    Text[18, 34] chars:[18, 34, "\<br/ … a tag"]
     SoftLineBreak[34, 35]
-    Text[35, 54] chars:[35, 54, "\[not"..."/foo)"]
+    Text[35, 54] chars:[35, 54, "\[not … /foo)"]
     SoftLineBreak[54, 55]
-    Text[55, 66] chars:[55, 66, "\`not"..."code`"]
+    Text[55, 66] chars:[55, 66, "\`not … code`"]
     SoftLineBreak[66, 67]
-    Text[67, 81] chars:[67, 81, "1\. n"..." list"]
+    Text[67, 81] chars:[67, 81, "1\. n …  list"]
     SoftLineBreak[81, 82]
-    Text[82, 95] chars:[82, 95, "\* no"..." list"]
+    Text[82, 95] chars:[82, 95, "\* no …  list"]
     SoftLineBreak[95, 96]
-    Text[96, 112] chars:[96, 112, "\# no"..."ading"]
+    Text[96, 112] chars:[96, 112, "\# no … ading"]
     SoftLineBreak[112, 113]
-    Text[113, 143] chars:[113, 143, "\[foo"..."ence""]
+    Text[113, 143] chars:[113, 143, "\[foo … ence\""]
 ````````````````````````````````
 
 
@@ -7317,7 +7317,7 @@ Document[0, 9]
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] info:[0, 0] content:[4, 9] lines[3] close:[9, 12, "~~~"]
+  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[3] close:[9, 12, "~~~"]
 ````````````````````````````````
 
 
@@ -7352,7 +7352,7 @@ link references, and [info strings] in [fenced code blocks]:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 22] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[6, 12, "/bar\*"] urlClose:[0, 0] pageRef:[6, 12, "/bar\*"] titleOpen:[13, 14, """] title:[14, 21, "ti\*tle"] titleClose:[21, 22, """] linkClose:[0, 0]
+    Link[0, 23] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 12, "/bar\*"] pageRef:[6, 12, "/bar\*"] titleOpen:[13, 14, "\""] title:[14, 21, "ti\*tle"] titleClose:[21, 22, "\""] linkClose:[22, 23, ")"]
       Text[1, 4] chars:[1, 4, "foo"]
 ````````````````````````````````
 
@@ -7366,9 +7366,9 @@ Document[0, 24]
 .
 Document[0, 31]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[7, 30] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 20, "/bar\*"] urlClose:[0, 0] titleOpen:[21, 22, """] title:[22, 29, "ti\*tle"] titleClose:[29, 30, """]
+  Reference[7, 30] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 20, "/bar\*"] titleOpen:[21, 22, "\""] title:[22, 29, "ti\*tle"] titleClose:[29, 30, "\""]
 ````````````````````````````````
 
 
@@ -7494,7 +7494,7 @@ Here are some nonentities:
 .
 Document[0, 44]
   Paragraph[0, 44]
-    Text[0, 18] chars:[0, 18, "&nbsp"..." &#x;"]
+    Text[0, 18] chars:[0, 18, "&nbsp …  &#x;"]
     SoftLineBreak[18, 19]
     HtmlEntity[19, 37] "&ThisIsNotDefined;"
     Text[37, 43] chars:[37, 43, " &hi?;"]
@@ -7551,7 +7551,7 @@ Document[0, 29]
 .
 Document[0, 38]
   Paragraph[0, 38]
-    Link[0, 36] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[6, 20, "/f&ouml;&ouml;"] urlClose:[0, 0] pageRef:[6, 20, "/f&ouml;&ouml;"] titleOpen:[21, 22, """] title:[22, 35, "f&ouml;&ouml;"] titleClose:[35, 36, """] linkClose:[0, 0]
+    Link[0, 37] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 20, "/f&ouml;&ouml;"] pageRef:[6, 20, "/f&ouml;&ouml;"] titleOpen:[21, 22, "\""] title:[22, 35, "f&ouml;&ouml;"] titleClose:[35, 36, "\""] linkClose:[36, 37, ")"]
       Text[1, 4] chars:[1, 4, "foo"]
 ````````````````````````````````
 
@@ -7565,9 +7565,9 @@ Document[0, 38]
 .
 Document[0, 45]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[7, 44] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 28, "/f&ouml;&ouml;"] urlClose:[0, 0] titleOpen:[29, 30, """] title:[30, 43, "f&ouml;&ouml;"] titleClose:[43, 44, """]
+  Reference[7, 44] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 28, "/f&ouml;&ouml;"] titleOpen:[29, 30, "\""] title:[30, 43, "f&ouml;&ouml;"] titleClose:[43, 44, "\""]
 ````````````````````````````````
 
 
@@ -7594,7 +7594,7 @@ text in code spans and code blocks:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Code[0, 15] textOpen:[0, 1, "`"] text:[1, 14, "f&oum"..."l;&ouml;"] textClose:[14, 15, "`"]
+    Code[0, 15] textOpen:[0, 1, "`"] text:[1, 14, "f&oum … l;&ouml;"] textClose:[14, 15, "`"]
 ````````````````````````````````
 
 
@@ -7644,7 +7644,7 @@ This example also illustrates stripping of leading and trailing spaces:
 .
 Document[0, 17]
   Paragraph[0, 17]
-    Code[0, 16] textOpen:[0, 2, "``"] text:[2, 14, " foo "..."` bar  "] textClose:[14, 16, "``"]
+    Code[0, 16] textOpen:[0, 2, "``"] text:[2, 14, " foo  … ` bar  "] textClose:[14, 16, "``"]
 ````````````````````````````````
 
 
@@ -7688,7 +7688,7 @@ single spaces, just as they would be by a browser:
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Code[0, 17] textOpen:[0, 1, "`"] text:[1, 16, "foo  "..." bar\nbaz"] textClose:[16, 17, "`"]
+    Code[0, 17] textOpen:[0, 1, "`"] text:[1, 16, "foo   …  bar\nbaz"] textClose:[16, 17, "`"]
 ````````````````````````````````
 
 
@@ -7777,8 +7777,8 @@ Thus, this is code:
 .
 Document[0, 15]
   Paragraph[0, 15]
-    Code[0, 11] textOpen:[0, 1, "`"] text:[1, 10, "<a href=""] textClose:[10, 11, "`"]
-    Text[11, 14] chars:[11, 14, "">`"]
+    Code[0, 11] textOpen:[0, 1, "`"] text:[1, 10, "<a href=\""] textClose:[10, 11, "`"]
+    Text[11, 14] chars:[11, 14, "\">`"]
 ````````````````````````````````
 
 
@@ -7791,7 +7791,7 @@ But this is an HTML tag:
 .
 Document[0, 14]
   Paragraph[0, 14]
-    HtmlInline[0, 12] chars:[0, 12, "<a hr"..."="`">"]
+    HtmlInline[0, 12] chars:[0, 12, "<a hr … =\"`\">"]
     Text[12, 13] chars:[12, 13, "`"]
 ````````````````````````````````
 
@@ -7805,7 +7805,7 @@ And this is code:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "<http"..."://foo.bar."] textClose:[17, 18, "`"]
+    Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "<http … ://foo.bar."] textClose:[17, 18, "`"]
     Text[18, 23] chars:[18, 23, "baz>`"]
 ````````````````````````````````
 
@@ -8074,7 +8074,7 @@ a * foo bar*
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Text[0, 12] chars:[0, 12, "a * f"..." bar*"]
+    Text[0, 12] chars:[0, 12, "a * f …  bar*"]
 ````````````````````````````````
 
 
@@ -8089,7 +8089,7 @@ a*"foo"*
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Text[0, 8] chars:[0, 8, "a*"foo"*"]
+    Text[0, 8] chars:[0, 8, "a*\"foo\"*"]
 ````````````````````````````````
 
 
@@ -8173,7 +8173,7 @@ a_"foo"_
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Text[0, 8] chars:[0, 8, "a_"foo"_"]
+    Text[0, 8] chars:[0, 8, "a_\"foo\"_"]
 ````````````````````````````````
 
 
@@ -8208,7 +8208,7 @@ Document[0, 7]
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Text[0, 20] chars:[0, 20, "прист"..."ятся_"]
+    Text[0, 20] chars:[0, 20, "прист … ятся_"]
 ````````````````````````````````
 
 
@@ -8222,7 +8222,7 @@ aa_"bb"_cc
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Text[0, 10] chars:[0, 10, "aa_"bb"_cc"]
+    Text[0, 10] chars:[0, 10, "aa_\"bb\"_cc"]
 ````````````````````````````````
 
 
@@ -8408,7 +8408,7 @@ _пристаням_стремятся
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Text[0, 20] chars:[0, 20, "_прис"..."мятся"]
+    Text[0, 20] chars:[0, 20, "_прис … мятся"]
 ````````````````````````````````
 
 
@@ -8420,7 +8420,7 @@ _foo_bar_baz_
 Document[0, 14]
   Paragraph[0, 14]
     Emphasis[0, 13] textOpen:[0, 1, "_"] text:[1, 12, "foo_bar_baz"] textClose:[12, 13, "_"]
-      Text[1, 12] chars:[1, 12, "foo_b"..."r_baz"]
+      Text[1, 12] chars:[1, 12, "foo_b … r_baz"]
 ````````````````````````````````
 
 
@@ -8465,7 +8465,7 @@ followed by whitespace:
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Text[0, 12] chars:[0, 12, "** fo"..."bar**"]
+    Text[0, 12] chars:[0, 12, "** fo … bar**"]
 ````````````````````````````````
 
 
@@ -8480,7 +8480,7 @@ a**"foo"**
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Text[0, 10] chars:[0, 10, "a**"foo"**"]
+    Text[0, 10] chars:[0, 10, "a**\"foo\"**"]
 ````````````````````````````````
 
 
@@ -8523,7 +8523,7 @@ __ foo bar__
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Text[0, 12] chars:[0, 12, "__ fo"..."bar__"]
+    Text[0, 12] chars:[0, 12, "__ fo … bar__"]
 ````````````````````````````````
 
 
@@ -8553,7 +8553,7 @@ a__"foo"__
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Text[0, 10] chars:[0, 10, "a__"foo"__"]
+    Text[0, 10] chars:[0, 10, "a__\"foo\"__"]
 ````````````````````````````````
 
 
@@ -8588,7 +8588,7 @@ Document[0, 9]
 .
 Document[0, 23]
   Paragraph[0, 23]
-    Text[0, 22] chars:[0, 22, "прист"..."тся__"]
+    Text[0, 22] chars:[0, 22, "прист … тся__"]
 ````````````````````````````````
 
 
@@ -8637,7 +8637,7 @@ by whitespace:
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Text[0, 12] chars:[0, 12, "**foo"..."ar **"]
+    Text[0, 12] chars:[0, 12, "**foo … ar **"]
 ````````````````````````````````
 
 
@@ -8686,13 +8686,13 @@ Document[0, 12]
 Document[0, 75]
   Paragraph[0, 75]
     StrongEmphasis[0, 74] textOpen:[0, 2, "**"] text:[2, 72, "Gomphocarpus (*Gomphocarpus physocarpus*, syn.\n*Asclepias physocarpa*)"] textClose:[72, 74, "**"]
-      Text[2, 16] chars:[2, 16, "Gomph"..."pus ("]
+      Text[2, 16] chars:[2, 16, "Gomph … pus ("]
       Emphasis[16, 42] textOpen:[16, 17, "*"] text:[17, 41, "Gomphocarpus physocarpus"] textClose:[41, 42, "*"]
-        Text[17, 41] chars:[17, 41, "Gomph"..."arpus"]
+        Text[17, 41] chars:[17, 41, "Gomph … arpus"]
       Text[42, 48] chars:[42, 48, ", syn."]
       SoftLineBreak[48, 49]
       Emphasis[49, 71] textOpen:[49, 50, "*"] text:[50, 70, "Asclepias physocarpa"] textClose:[70, 71, "*"]
-        Text[50, 70] chars:[50, 70, "Ascle"..."carpa"]
+        Text[50, 70] chars:[50, 70, "Ascle … carpa"]
       Text[71, 72] chars:[71, 72, ")"]
 ````````````````````````````````
 
@@ -8704,11 +8704,11 @@ Document[0, 75]
 .
 Document[0, 20]
   Paragraph[0, 20]
-    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17, "foo "*bar*" foo"] textClose:[17, 19, "**"]
-      Text[2, 7] chars:[2, 7, "foo ""]
+    StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17, "foo \"*bar*\" foo"] textClose:[17, 19, "**"]
+      Text[2, 7] chars:[2, 7, "foo \""]
       Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "bar"] textClose:[11, 12, "*"]
         Text[8, 11] chars:[8, 11, "bar"]
-      Text[12, 17] chars:[12, 17, "" foo"]
+      Text[12, 17] chars:[12, 17, "\" foo"]
 ````````````````````````````````
 
 
@@ -8739,7 +8739,7 @@ __foo bar __
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Text[0, 12] chars:[0, 12, "__foo"..."ar __"]
+    Text[0, 12] chars:[0, 12, "__foo … ar __"]
 ````````````````````````````````
 
 
@@ -8795,7 +8795,7 @@ __пристаням__стремятся
 .
 Document[0, 23]
   Paragraph[0, 23]
-    Text[0, 22] chars:[0, 22, "__при"..."мятся"]
+    Text[0, 22] chars:[0, 22, "__при … мятся"]
 ````````````````````````````````
 
 
@@ -8807,7 +8807,7 @@ __foo__bar__baz__
 Document[0, 18]
   Paragraph[0, 18]
     StrongEmphasis[0, 17] textOpen:[0, 2, "__"] text:[2, 15, "foo__bar__baz"] textClose:[15, 17, "__"]
-      Text[2, 15] chars:[2, 15, "foo__"..."__baz"]
+      Text[2, 15] chars:[2, 15, "foo__ … __baz"]
 ````````````````````````````````
 
 
@@ -8842,7 +8842,7 @@ Document[0, 18]
   Paragraph[0, 18]
     Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16, "foo [bar](/url)"] textClose:[16, 17, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      Link[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "/url"] urlClose:[0, 0] pageRef:[11, 15, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/url"] pageRef:[11, 15, "/url"] linkClose:[15, 16, ")"]
         Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
 
@@ -9037,7 +9037,7 @@ Document[0, 20]
   Paragraph[0, 20]
     Emphasis[0, 19] textOpen:[0, 1, "*"] text:[1, 18, "foo [*bar*](/url)"] textClose:[18, 19, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
-      Link[5, 17] textOpen:[5, 6, "["] text:[6, 11, "*bar*"] textClose:[11, 12, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[13, 17, "/url"] urlClose:[0, 0] pageRef:[13, 17, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[5, 18] textOpen:[5, 6, "["] text:[6, 11, "*bar*"] textClose:[11, 12, "]"] linkOpen:[12, 13, "("] url:[13, 17, "/url"] pageRef:[13, 17, "/url"] linkClose:[17, 18, ")"]
         Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
           Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
@@ -9052,7 +9052,7 @@ There can be no empty emphasis or strong emphasis:
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Text[0, 27] chars:[0, 27, "** is"..."hasis"]
+    Text[0, 27] chars:[0, 27, "** is … hasis"]
 ````````````````````````````````
 
 
@@ -9063,7 +9063,7 @@ Document[0, 28]
 .
 Document[0, 37]
   Paragraph[0, 37]
-    Text[0, 36] chars:[0, 36, "**** "..."hasis"]
+    Text[0, 36] chars:[0, 36, "****  … hasis"]
 ````````````````````````````````
 
 
@@ -9082,7 +9082,7 @@ Document[0, 20]
   Paragraph[0, 20]
     StrongEmphasis[0, 19] textOpen:[0, 2, "**"] text:[2, 17, "foo [bar](/url)"] textClose:[17, 19, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Link[6, 16] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] pageRef:[12, 16, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[6, 17] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
         Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -9259,7 +9259,7 @@ Document[0, 22]
   Paragraph[0, 22]
     StrongEmphasis[0, 21] textOpen:[0, 2, "**"] text:[2, 19, "foo [*bar*](/url)"] textClose:[19, 21, "**"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Link[6, 18] textOpen:[6, 7, "["] text:[7, 12, "*bar*"] textClose:[12, 13, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[14, 18, "/url"] urlClose:[0, 0] pageRef:[14, 18, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[6, 19] textOpen:[6, 7, "["] text:[7, 12, "*bar*"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 18, "/url"] pageRef:[14, 18, "/url"] linkClose:[18, 19, ")"]
         Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "bar"] textClose:[11, 12, "*"]
           Text[8, 11] chars:[8, 11, "bar"]
 ````````````````````````````````
@@ -9274,7 +9274,7 @@ __ is not an empty emphasis
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Text[0, 27] chars:[0, 27, "__ is"..."hasis"]
+    Text[0, 27] chars:[0, 27, "__ is … hasis"]
 ````````````````````````````````
 
 
@@ -9285,7 +9285,7 @@ ____ is not an empty strong emphasis
 .
 Document[0, 37]
   Paragraph[0, 37]
-    Text[0, 36] chars:[0, 36, "____ "..."hasis"]
+    Text[0, 36] chars:[0, 36, "____  … hasis"]
 ````````````````````````````````
 
 
@@ -9776,7 +9776,7 @@ Document[0, 27]
     Emphasis[0, 26] textOpen:[0, 1, "*"] text:[1, 25, "foo __bar *baz bim__ bam"] textClose:[25, 26, "*"]
       Text[1, 5] chars:[1, 5, "foo "]
       StrongEmphasis[5, 21] textOpen:[5, 7, "__"] text:[7, 19, "bar *baz bim"] textClose:[19, 21, "__"]
-        Text[7, 19] chars:[7, 19, "bar *"..."z bim"]
+        Text[7, 19] chars:[7, 19, "bar * … z bim"]
       Text[21, 25] chars:[21, 25, " bam"]
 ````````````````````````````````
 
@@ -9819,7 +9819,7 @@ Rule 17:
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 1] chars:[0, 1, "*"]
-    Link[1, 12] textOpen:[1, 2, "["] text:[2, 6, "bar*"] textClose:[6, 7, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[8, 12, "/url"] urlClose:[0, 0] pageRef:[8, 12, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[1, 13] textOpen:[1, 2, "["] text:[2, 6, "bar*"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 12, "/url"] pageRef:[8, 12, "/url"] linkClose:[12, 13, ")"]
       Text[2, 6] chars:[2, 6, "bar*"]
 ````````````````````````````````
 
@@ -9832,7 +9832,7 @@ _foo [bar_](/url)
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 5] chars:[0, 5, "_foo "]
-    Link[5, 16] textOpen:[5, 6, "["] text:[6, 10, "bar_"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] pageRef:[12, 16, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[5, 17] textOpen:[5, 6, "["] text:[6, 10, "bar_"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
       Text[6, 10] chars:[6, 10, "bar_"]
 ````````````````````````````````
 
@@ -9845,7 +9845,7 @@ Document[0, 18]
 Document[0, 28]
   Paragraph[0, 28]
     Text[0, 1] chars:[0, 1, "*"]
-    HtmlInline[1, 27] chars:[1, 27, "<img "...""*"/>"]
+    HtmlInline[1, 27] chars:[1, 27, "<img  … \"*\"/>"]
 ````````````````````````````````
 
 
@@ -9857,7 +9857,7 @@ Document[0, 28]
 Document[0, 16]
   Paragraph[0, 16]
     Text[0, 2] chars:[0, 2, "**"]
-    HtmlInline[2, 15] chars:[2, 15, "<a hr"...""**">"]
+    HtmlInline[2, 15] chars:[2, 15, "<a hr … \"**\">"]
 ````````````````````````````````
 
 
@@ -9869,7 +9869,7 @@ __<a href="__">
 Document[0, 16]
   Paragraph[0, 16]
     Text[0, 2] chars:[0, 2, "__"]
-    HtmlInline[2, 15] chars:[2, 15, "<a hr"...""__">"]
+    HtmlInline[2, 15] chars:[2, 15, "<a hr … \"__\">"]
 ````````````````````````````````
 
 
@@ -10003,7 +10003,7 @@ Here is a simple inline link:
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Link[0, 19] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/uri"] urlClose:[0, 0] pageRef:[7, 11, "/uri"] titleOpen:[12, 13, """] title:[13, 18, "title"] titleClose:[18, 19, """] linkClose:[0, 0]
+    Link[0, 20] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/uri"] pageRef:[7, 11, "/uri"] titleOpen:[12, 13, "\""] title:[13, 18, "title"] titleClose:[18, 19, "\""] linkClose:[19, 20, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10017,7 +10017,7 @@ The title may be omitted:
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Link[0, 11] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/uri"] urlClose:[0, 0] pageRef:[7, 11, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 12] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/uri"] pageRef:[7, 11, "/uri"] linkClose:[11, 12, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10031,7 +10031,7 @@ Both the title and the destination may be omitted:
 .
 Document[0, 9]
   Paragraph[0, 9]
-    Link[0, 7] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 7] urlClose:[0, 0] pageRef:[7, 7] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 8] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 7] pageRef:[7, 7] linkClose:[7, 8, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10043,7 +10043,7 @@ Document[0, 9]
 .
 Document[0, 11]
   Paragraph[0, 11]
-    Link[0, 9] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[7, 8, "<"] url:[8, 8] urlClose:[8, 9, ">"] pageRef:[8, 8] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 10] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 8] urlClose:[8, 9, ">"] pageRef:[8, 8] linkClose:[9, 10, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10058,7 +10058,7 @@ even if enclosed in pointy brackets:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 15] chars:[0, 15, "[link"..." uri)"]
+    Text[0, 15] chars:[0, 15, "[link …  uri)"]
 ````````````````````````````````
 
 
@@ -10069,7 +10069,7 @@ Document[0, 16]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Text[0, 17] chars:[0, 17, "[link"..."uri>)"]
+    Text[0, 17] chars:[0, 17, "[link … uri>)"]
 ````````````````````````````````
 
 
@@ -10111,7 +10111,7 @@ Parentheses inside the link destination may be escaped:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 14] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 14, "\(foo\)"] urlClose:[0, 0] pageRef:[7, 14, "\(foo\)"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 15] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 14, "\(foo\)"] pageRef:[7, 14, "\(foo\)"] linkClose:[14, 15, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10124,7 +10124,7 @@ One level of balanced parentheses is allowed without escaping:
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Link[0, 20] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 20, "(foo)and(bar)"] urlClose:[0, 0] pageRef:[7, 20, "(foo)and(bar)"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 21] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 20, "(foo)and(bar)"] pageRef:[7, 20, "(foo)and(bar)"] linkClose:[20, 21, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10138,7 +10138,7 @@ or use the `<...>` form:
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Text[0, 21] chars:[0, 21, "[link"..."ar)))"]
+    Text[0, 21] chars:[0, 21, "[link … ar)))"]
 ````````````````````````````````
 
 
@@ -10149,7 +10149,7 @@ Document[0, 22]
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 22, "foo(and\(bar\))"] urlClose:[0, 0] pageRef:[7, 22, "foo(and\(bar\))"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 23] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 22, "foo(and\(bar\))"] pageRef:[7, 22, "foo(and\(bar\))"] linkClose:[22, 23, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10161,7 +10161,7 @@ Document[0, 24]
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[7, 8, "<"] url:[8, 21, "foo(and(bar))"] urlClose:[21, 22, ">"] pageRef:[8, 21, "foo(and(bar))"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 23] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 21, "foo(and(bar))"] urlClose:[21, 22, ">"] pageRef:[8, 21, "foo(and(bar))"] linkClose:[22, 23, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10176,7 +10176,7 @@ in Markdown:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 14] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 14, "foo\)\:"] urlClose:[0, 0] pageRef:[7, 14, "foo\)\:"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 15] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 14, "foo\)\:"] pageRef:[7, 14, "foo\)\:"] linkClose:[14, 15, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10196,13 +10196,13 @@ A link can contain fragment identifiers and queries:
 .
 Document[0, 94]
   Paragraph[0, 18]
-    Link[0, 16] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 16, "#fragment"] urlClose:[0, 0] pageRef:[7, 7] anchorMarker:[7, 8, "#"] anchorRef:[8, 16, "fragment"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 16, "#fragment"] pageRef:[7, 7] anchorMarker:[7, 8, "#"] anchorRef:[8, 16, "fragment"] linkClose:[16, 17, ")"]
       Text[1, 5] chars:[1, 5, "link"]
   Paragraph[19, 55]
-    Link[19, 53] textOpen:[19, 20, "["] text:[20, 24, "link"] textClose:[24, 25, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[26, 53, "http://example.com#fragment"] urlClose:[0, 0] pageRef:[26, 44, "http://example.com"] anchorMarker:[44, 45, "#"] anchorRef:[45, 53, "fragment"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[19, 54] textOpen:[19, 20, "["] text:[20, 24, "link"] textClose:[24, 25, "]"] linkOpen:[25, 26, "("] url:[26, 53, "http://example.com#fragment"] pageRef:[26, 44, "http://example.com"] anchorMarker:[44, 45, "#"] anchorRef:[45, 53, "fragment"] linkClose:[53, 54, ")"]
       Text[20, 24] chars:[20, 24, "link"]
   Paragraph[56, 94]
-    Link[56, 92] textOpen:[56, 57, "["] text:[57, 61, "link"] textClose:[61, 62, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[63, 92, "http://example.com?foo=3#frag"] urlClose:[0, 0] pageRef:[63, 87, "http://example.com?foo=3"] anchorMarker:[87, 88, "#"] anchorRef:[88, 92, "frag"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[56, 93] textOpen:[56, 57, "["] text:[57, 61, "link"] textClose:[61, 62, "]"] linkOpen:[62, 63, "("] url:[63, 92, "http://example.com?foo=3#frag"] pageRef:[63, 87, "http://example.com?foo=3"] anchorMarker:[87, 88, "#"] anchorRef:[88, 92, "frag"] linkClose:[92, 93, ")"]
       Text[57, 61] chars:[57, 61, "link"]
 ````````````````````````````````
 
@@ -10217,7 +10217,7 @@ just a backslash:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 14] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 14, "foo\bar"] urlClose:[0, 0] pageRef:[7, 14, "foo\bar"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 15] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 14, "foo\bar"] pageRef:[7, 14, "foo\bar"] linkClose:[14, 15, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10238,7 +10238,7 @@ about how to escape or normalize URLs in the output.
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Link[0, 20] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 20, "foo%20b&auml;"] urlClose:[0, 0] pageRef:[7, 20, "foo%20b&auml;"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 21] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 20, "foo%20b&auml;"] pageRef:[7, 20, "foo%20b&auml;"] linkClose:[20, 21, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10254,7 +10254,7 @@ get unexpected results:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Link[0, 14] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 14, ""title""] urlClose:[0, 0] pageRef:[7, 14, ""title""] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 15] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 14, "\"title\""] pageRef:[7, 14, "\"title\""] linkClose:[14, 15, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10272,13 +10272,13 @@ Titles may be in single quotes, double quotes, or parentheses:
 .
 Document[0, 63]
   Paragraph[0, 63]
-    Link[0, 19] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] pageRef:[7, 11, "/url"] titleOpen:[12, 13, """] title:[13, 18, "title"] titleClose:[18, 19, """] linkClose:[0, 0]
+    Link[0, 20] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "\""] title:[13, 18, "title"] titleClose:[18, 19, "\""] linkClose:[19, 20, ")"]
       Text[1, 5] chars:[1, 5, "link"]
     SoftLineBreak[20, 21]
-    Link[21, 40] textOpen:[21, 22, "["] text:[22, 26, "link"] textClose:[26, 27, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] pageRef:[28, 32, "/url"] titleOpen:[33, 34, "'"] title:[34, 39, "title"] titleClose:[39, 40, "'"] linkClose:[0, 0]
+    Link[21, 41] textOpen:[21, 22, "["] text:[22, 26, "link"] textClose:[26, 27, "]"] linkOpen:[27, 28, "("] url:[28, 32, "/url"] pageRef:[28, 32, "/url"] titleOpen:[33, 34, "'"] title:[34, 39, "title"] titleClose:[39, 40, "'"] linkClose:[40, 41, ")"]
       Text[22, 26] chars:[22, 26, "link"]
     SoftLineBreak[41, 42]
-    Link[42, 61] textOpen:[42, 43, "["] text:[43, 47, "link"] textClose:[47, 48, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[49, 53, "/url"] urlClose:[0, 0] pageRef:[49, 53, "/url"] titleOpen:[54, 55, "("] title:[55, 60, "title"] titleClose:[60, 61, ")"] linkClose:[0, 0]
+    Link[42, 62] textOpen:[42, 43, "["] text:[43, 47, "link"] textClose:[47, 48, "]"] linkOpen:[48, 49, "("] url:[49, 53, "/url"] pageRef:[49, 53, "/url"] titleOpen:[54, 55, "("] title:[55, 60, "title"] titleClose:[60, 61, ")"] linkClose:[61, 62, ")"]
       Text[43, 47] chars:[43, 47, "link"]
 ````````````````````````````````
 
@@ -10293,7 +10293,7 @@ may be used in titles:
 .
 Document[0, 30]
   Paragraph[0, 30]
-    Link[0, 28] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] pageRef:[7, 11, "/url"] titleOpen:[12, 13, """] title:[13, 27, "title \"&quot;"] titleClose:[27, 28, """] linkClose:[0, 0]
+    Link[0, 29] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "\""] title:[13, 27, "title \\"&quot;"] titleClose:[27, 28, "\""] linkClose:[28, 29, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10307,7 +10307,7 @@ Nested balanced quotes are not allowed without escaping:
 .
 Document[0, 33]
   Paragraph[0, 33]
-    Text[0, 32] chars:[0, 32, "[link"..."tle")"]
+    Text[0, 32] chars:[0, 32, "[link … tle\")"]
 ````````````````````````````````
 
 
@@ -10320,7 +10320,7 @@ But it is easy to work around this by using a different quote type:
 .
 Document[0, 33]
   Paragraph[0, 33]
-    Link[0, 31] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "'"] title:[13, 30, "title "and" title"] titleClose:[30, 31, "'"] linkClose:[0, 0]
+    Link[0, 32] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "'"] title:[13, 30, "title \"and\" title"] titleClose:[30, 31, "'"] linkClose:[31, 32, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10350,7 +10350,7 @@ the same way in inline links and link reference definitions.)
 .
 Document[0, 28]
   Paragraph[0, 28]
-    Link[0, 24] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[10, 14, "/uri"] urlClose:[0, 0] pageRef:[10, 14, "/uri"] titleOpen:[17, 18, """] title:[18, 23, "title"] titleClose:[23, 24, """] linkClose:[0, 0]
+    Link[0, 27] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[10, 14, "/uri"] pageRef:[10, 14, "/uri"] titleOpen:[17, 18, "\""] title:[18, 23, "title"] titleClose:[23, 24, "\""] linkClose:[26, 27, ")"]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
@@ -10365,7 +10365,7 @@ following parenthesis:
 .
 Document[0, 14]
   Paragraph[0, 14]
-    LinkRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
     Text[6, 13] chars:[6, 13, " (/uri)"]
 ````````````````````````````````
@@ -10381,8 +10381,8 @@ unless they are escaped:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    Link[0, 23] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[19, 23, "/uri"] urlClose:[0, 0] pageRef:[19, 23, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-      Text[1, 17] chars:[1, 17, "link "..."bar]]"]
+    Link[0, 24] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] linkOpen:[18, 19, "("] url:[19, 23, "/uri"] pageRef:[19, 23, "/uri"] linkClose:[23, 24, ")"]
+      Text[1, 17] chars:[1, 17, "link  … bar]]"]
 ````````````````````````````````
 
 
@@ -10393,9 +10393,9 @@ Document[0, 25]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    LinkRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, "link"]
-    Text[6, 17] chars:[6, 17, " bar]"..."/uri)"]
+    Text[6, 17] chars:[6, 17, " bar] … /uri)"]
 ````````````````````````````````
 
 
@@ -10407,7 +10407,7 @@ Document[0, 18]
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 6] chars:[0, 6, "[link "]
-    Link[6, 16] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/uri"] urlClose:[0, 0] pageRef:[12, 16, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[6, 17] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/uri"] pageRef:[12, 16, "/uri"] linkClose:[16, 17, ")"]
       Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -10419,7 +10419,7 @@ Document[0, 18]
 .
 Document[0, 19]
   Paragraph[0, 19]
-    Link[0, 17] textOpen:[0, 1, "["] text:[1, 11, "link \[bar"] textClose:[11, 12, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[13, 17, "/uri"] urlClose:[0, 0] pageRef:[13, 17, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 18] textOpen:[0, 1, "["] text:[1, 11, "link \[bar"] textClose:[11, 12, "]"] linkOpen:[12, 13, "("] url:[13, 17, "/uri"] pageRef:[13, 17, "/uri"] linkClose:[17, 18, ")"]
       Text[1, 11] chars:[1, 11, "link \[bar"]
 ````````````````````````````````
 
@@ -10433,7 +10433,7 @@ The link text may contain inline content:
 .
 Document[0, 31]
   Paragraph[0, 31]
-    Link[0, 29] textOpen:[0, 1, "["] text:[1, 23, "link *foo **bar** `#`*"] textClose:[23, 24, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[25, 29, "/uri"] urlClose:[0, 0] pageRef:[25, 29, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 30] textOpen:[0, 1, "["] text:[1, 23, "link *foo **bar** `#`*"] textClose:[23, 24, "]"] linkOpen:[24, 25, "("] url:[25, 29, "/uri"] pageRef:[25, 29, "/uri"] linkClose:[29, 30, ")"]
       Text[1, 6] chars:[1, 6, "link "]
       Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22, "foo **bar** `#`"] textClose:[22, 23, "*"]
         Text[7, 11] chars:[7, 11, "foo "]
@@ -10451,8 +10451,8 @@ Document[0, 31]
 .
 Document[0, 26]
   Paragraph[0, 26]
-    Link[0, 24] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[20, 24, "/uri"] urlClose:[0, 0] pageRef:[20, 24, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-      Image[2, 17] textOpen:[2, 3, "["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[9, 17, "moon.jpg"] urlClose:[0, 0] pageRef:[9, 17, "moon.jpg"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 25] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 24, "/uri"] pageRef:[20, 24, "/uri"] linkClose:[24, 25, ")"]
+      Image[1, 18] textOpen:[1, 3, "!["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 17, "moon.jpg"] pageRef:[9, 17, "moon.jpg"] linkClose:[17, 18, ")"]
         Text[3, 7] chars:[3, 7, "moon"]
 ````````````````````````````````
 
@@ -10467,7 +10467,7 @@ However, links may not contain other links, at any level of nesting.
 Document[0, 24]
   Paragraph[0, 24]
     Text[0, 5] chars:[0, 5, "[foo "]
-    Link[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "/uri"] urlClose:[0, 0] pageRef:[11, 15, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
       Text[6, 9] chars:[6, 9, "bar"]
     Text[16, 23] chars:[16, 23, "](/uri)"]
 ````````````````````````````````
@@ -10483,7 +10483,7 @@ Document[0, 38]
     Text[0, 5] chars:[0, 5, "[foo "]
     Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29, "[bar [baz](/uri)](/uri)"] textClose:[29, 30, "*"]
       Text[6, 11] chars:[6, 11, "[bar "]
-      Link[11, 21] textOpen:[11, 12, "["] text:[12, 15, "baz"] textClose:[15, 16, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[17, 21, "/uri"] urlClose:[0, 0] pageRef:[17, 21, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[11, 22] textOpen:[11, 12, "["] text:[12, 15, "baz"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 21, "/uri"] pageRef:[17, 21, "/uri"] linkClose:[21, 22, ")"]
         Text[12, 15] chars:[12, 15, "baz"]
       Text[22, 29] chars:[22, 29, "](/uri)"]
     Text[30, 37] chars:[30, 37, "](/uri)"]
@@ -10497,9 +10497,9 @@ Document[0, 38]
 .
 Document[0, 29]
   Paragraph[0, 29]
-    Image[1, 27] textOpen:[1, 2, "["] text:[2, 21, "[[foo](uri1)](uri2)"] textClose:[21, 22, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[23, 27, "uri3"] urlClose:[0, 0] pageRef:[23, 27, "uri3"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 28] textOpen:[0, 2, "!["] text:[2, 21, "[[foo](uri1)](uri2)"] textClose:[21, 22, "]"] linkOpen:[22, 23, "("] url:[23, 27, "uri3"] pageRef:[23, 27, "uri3"] linkClose:[27, 28, ")"]
       Text[2, 3] chars:[2, 3, "["]
-      Link[3, 13] textOpen:[3, 4, "["] text:[4, 7, "foo"] textClose:[7, 8, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[9, 13, "uri1"] urlClose:[0, 0] pageRef:[9, 13, "uri1"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[3, 14] textOpen:[3, 4, "["] text:[4, 7, "foo"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 13, "uri1"] pageRef:[9, 13, "uri1"] linkClose:[13, 14, ")"]
         Text[4, 7] chars:[4, 7, "foo"]
       Text[14, 21] chars:[14, 21, "](uri2)"]
 ````````````````````````````````
@@ -10516,7 +10516,7 @@ emphasis grouping:
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 1] chars:[0, 1, "*"]
-    Link[1, 12] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[8, 12, "/uri"] urlClose:[0, 0] pageRef:[8, 12, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[1, 13] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 12, "/uri"] pageRef:[8, 12, "/uri"] linkClose:[12, 13, ")"]
       Text[2, 6] chars:[2, 6, "foo*"]
 ````````````````````````````````
 
@@ -10528,7 +10528,7 @@ Document[0, 14]
 .
 Document[0, 17]
   Paragraph[0, 17]
-    Link[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "baz*"] urlClose:[0, 0] pageRef:[11, 15, "baz*"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[0, 16] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "baz*"] pageRef:[11, 15, "baz*"] linkClose:[15, 16, ")"]
       Text[1, 9] chars:[1, 9, "foo *bar"]
 ````````````````````````````````
 
@@ -10560,7 +10560,7 @@ and autolinks over link grouping:
 Document[0, 25]
   Paragraph[0, 25]
     Text[0, 5] chars:[0, 5, "[foo "]
-    HtmlInline[5, 24] chars:[5, 24, "<bar "..."az)">"]
+    HtmlInline[5, 24] chars:[5, 24, "<bar  … az)\">"]
 ````````````````````````````````
 
 
@@ -10627,7 +10627,7 @@ Document[0, 32]
   Paragraph[0, 11]
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] urlOpen:[0, 0] url:[19, 23, "/url"] urlClose:[0, 0] titleOpen:[24, 25, """] title:[25, 30, "title"] titleClose:[30, 31, """]
+  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] url:[19, 23, "/url"] titleOpen:[24, 25, "\""] title:[25, 30, "title"] titleClose:[30, 31, "\""]
 ````````````````````````````````
 
 
@@ -10647,8 +10647,8 @@ unless they are escaped:
 Document[0, 37]
   Paragraph[0, 24]
     LinkRef[0, 23] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] referenceOpen:[18, 19, "["] reference:[19, 22, "ref"] referenceClose:[22, 23, "]"]
-      Text[1, 17] chars:[1, 17, "link "..."bar]]"]
-  Reference[25, 36] refOpen:[25, 26, "["] ref:[26, 29, "ref"] refClose:[29, 31, "]:"] urlOpen:[0, 0] url:[32, 36, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+      Text[1, 17] chars:[1, 17, "link  … bar]]"]
+  Reference[25, 36] refOpen:[25, 26, "["] ref:[26, 29, "ref"] refClose:[29, 31, "]:"] url:[32, 36, "/uri"]
 ````````````````````````````````
 
 
@@ -10663,7 +10663,7 @@ Document[0, 31]
   Paragraph[0, 18]
     LinkRef[0, 17] textOpen:[0, 1, "["] text:[1, 11, "link \[bar"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 16, "ref"] referenceClose:[16, 17, "]"]
       Text[1, 11] chars:[1, 11, "link \[bar"]
-  Reference[19, 30] refOpen:[19, 20, "["] ref:[20, 23, "ref"] refClose:[23, 25, "]:"] urlOpen:[0, 0] url:[26, 30, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[19, 30] refOpen:[19, 20, "["] ref:[20, 23, "ref"] refClose:[23, 25, "]:"] url:[26, 30, "/uri"]
 ````````````````````````````````
 
 
@@ -10686,7 +10686,7 @@ Document[0, 43]
           Text[13, 16] chars:[13, 16, "bar"]
         Text[18, 19] chars:[18, 19, " "]
         Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21, "#"] textClose:[21, 22, "`"]
-  Reference[31, 42] refOpen:[31, 32, "["] ref:[32, 35, "ref"] refClose:[35, 37, "]:"] urlOpen:[0, 0] url:[38, 42, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[31, 42] refOpen:[31, 32, "["] ref:[32, 35, "ref"] refClose:[35, 37, "]:"] url:[38, 42, "/uri"]
 ````````````````````````````````
 
 
@@ -10700,9 +10700,9 @@ Document[0, 43]
 Document[0, 38]
   Paragraph[0, 25]
     LinkRef[0, 24] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 23, "ref"] referenceClose:[23, 24, "]"]
-      Image[2, 17] textOpen:[2, 3, "["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[9, 17, "moon.jpg"] urlClose:[0, 0] pageRef:[9, 17, "moon.jpg"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Image[1, 18] textOpen:[1, 3, "!["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 17, "moon.jpg"] pageRef:[9, 17, "moon.jpg"] linkClose:[17, 18, ")"]
         Text[3, 7] chars:[3, 7, "moon"]
-  Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] urlOpen:[0, 0] url:[33, 37, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] url:[33, 37, "/uri"]
 ````````````````````````````````
 
 
@@ -10718,12 +10718,12 @@ However, links may not contain other links, at any level of nesting.
 Document[0, 36]
   Paragraph[0, 23]
     Text[0, 5] chars:[0, 5, "[foo "]
-    Link[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "/uri"] urlClose:[0, 0] pageRef:[11, 15, "/uri"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
       Text[6, 9] chars:[6, 9, "bar"]
     Text[16, 17] chars:[16, 17, "]"]
-    LinkRef[17, 22] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[17, 18, "["] reference:[18, 21, "ref"] referenceClose:[21, 22, "]"]
+    LinkRef[17, 22] referenceOpen:[17, 18, "["] reference:[18, 21, "ref"] referenceClose:[21, 22, "]"]
       Text[18, 21] chars:[18, 21, "ref"]
-  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] urlOpen:[0, 0] url:[31, 35, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[24, 35] refOpen:[24, 25, "["] ref:[25, 28, "ref"] refClose:[28, 30, "]:"] url:[31, 35, "/uri"]
 ````````````````````````````````
 
 
@@ -10742,9 +10742,9 @@ Document[0, 41]
       LinkRef[10, 20] textOpen:[10, 11, "["] text:[11, 14, "baz"] textClose:[14, 15, "]"] referenceOpen:[15, 16, "["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"]
         Text[11, 14] chars:[11, 14, "baz"]
     Text[21, 22] chars:[21, 22, "]"]
-    LinkRef[22, 27] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[22, 23, "["] reference:[23, 26, "ref"] referenceClose:[26, 27, "]"]
+    LinkRef[22, 27] referenceOpen:[22, 23, "["] reference:[23, 26, "ref"] referenceClose:[26, 27, "]"]
       Text[23, 26] chars:[23, 26, "ref"]
-  Reference[29, 40] refOpen:[29, 30, "["] ref:[30, 33, "ref"] refClose:[33, 35, "]:"] urlOpen:[0, 0] url:[36, 40, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[29, 40] refOpen:[29, 30, "["] ref:[30, 33, "ref"] refClose:[33, 35, "]:"] url:[36, 40, "/uri"]
 ````````````````````````````````
 
 
@@ -10766,7 +10766,7 @@ Document[0, 26]
     Text[0, 1] chars:[0, 1, "*"]
     LinkRef[1, 12] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] referenceOpen:[7, 8, "["] reference:[8, 11, "ref"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo*"]
-  Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] urlOpen:[0, 0] url:[21, 25, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] url:[21, 25, "/uri"]
 ````````````````````````````````
 
 
@@ -10781,7 +10781,7 @@ Document[0, 29]
   Paragraph[0, 16]
     LinkRef[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "ref"] referenceClose:[14, 15, "]"]
       Text[1, 9] chars:[1, 9, "foo *bar"]
-  Reference[17, 28] refOpen:[17, 18, "["] ref:[18, 21, "ref"] refClose:[21, 23, "]:"] urlOpen:[0, 0] url:[24, 28, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[17, 28] refOpen:[17, 18, "["] ref:[18, 21, "ref"] refClose:[21, 23, "]:"] url:[24, 28, "/uri"]
 ````````````````````````````````
 
 
@@ -10798,8 +10798,8 @@ and autolinks over link grouping:
 Document[0, 38]
   Paragraph[0, 25]
     Text[0, 5] chars:[0, 5, "[foo "]
-    HtmlInline[5, 24] chars:[5, 24, "<bar "..."ef]">"]
-  Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] urlOpen:[0, 0] url:[33, 37, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+    HtmlInline[5, 24] chars:[5, 24, "<bar  … ef]\">"]
+  Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] url:[33, 37, "/uri"]
 ````````````````````````````````
 
 
@@ -10814,7 +10814,7 @@ Document[0, 26]
   Paragraph[0, 13]
     Text[0, 4] chars:[0, 4, "[foo"]
     Code[4, 12] textOpen:[4, 5, "`"] text:[5, 11, "][ref]"] textClose:[11, 12, "`"]
-  Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] urlOpen:[0, 0] url:[21, 25, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] url:[21, 25, "/uri"]
 ````````````````````````````````
 
 
@@ -10829,7 +10829,7 @@ Document[0, 53]
   Paragraph[0, 40]
     Text[0, 4] chars:[0, 4, "[foo"]
     AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=][ref]"] textClose:[38, 39, ">"]
-  Reference[41, 52] refOpen:[41, 42, "["] ref:[42, 45, "ref"] refClose:[45, 47, "]:"] urlOpen:[0, 0] url:[48, 52, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[41, 52] refOpen:[41, 42, "["] ref:[42, 45, "ref"] refClose:[45, 47, "]:"] url:[48, 52, "/uri"]
 ````````````````````````````````
 
 
@@ -10846,7 +10846,7 @@ Document[0, 32]
   Paragraph[0, 11]
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "BaR"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] urlOpen:[0, 0] url:[19, 23, "/url"] urlClose:[0, 0] titleOpen:[24, 25, """] title:[25, 30, "title"] titleClose:[30, 31, """]
+  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] url:[19, 23, "/url"] titleOpen:[24, 25, "\""] title:[25, 30, "title"] titleClose:[30, 31, "\""]
 ````````````````````````````````
 
 
@@ -10863,8 +10863,8 @@ Document[0, 52]
   Paragraph[0, 36]
     LinkRef[0, 16] textOpen:[0, 1, "["] text:[1, 7, "Толпой"] textClose:[7, 8, "]"] referenceOpen:[8, 9, "["] reference:[9, 15, "Толпой"] referenceClose:[15, 16, "]"]
       Text[1, 7] chars:[1, 7, "Толпой"]
-    Text[16, 35] chars:[16, 35, " is a"..."word."]
-  Reference[37, 51] refOpen:[37, 38, "["] ref:[38, 44, "ТОЛПОЙ"] refClose:[44, 46, "]:"] urlOpen:[0, 0] url:[47, 51, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+    Text[16, 35] chars:[16, 35, " is a … word."]
+  Reference[37, 51] refOpen:[37, 38, "["] ref:[38, 44, "ТОЛПОЙ"] refClose:[44, 46, "]:"] url:[47, 51, "/url"]
 ````````````````````````````````
 
 
@@ -10880,7 +10880,7 @@ purposes of determining matching:
 <p><a href="/url">Baz</a></p>
 .
 Document[0, 34]
-  Reference[0, 17] refOpen:[0, 1, "["] ref:[1, 10, "Foo\n  bar"] refClose:[10, 12, "]:"] urlOpen:[0, 0] url:[13, 17, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 17] refOpen:[0, 1, "["] ref:[1, 10, "Foo\n  bar"] refClose:[10, 12, "]:"] url:[13, 17, "/url"]
   Paragraph[19, 34]
     LinkRef[19, 33] textOpen:[19, 20, "["] text:[20, 23, "Baz"] textClose:[23, 24, "]"] referenceOpen:[24, 25, "["] reference:[25, 32, "Foo bar"] referenceClose:[32, 33, "]"]
       Text[20, 23] chars:[20, 23, "Baz"]
@@ -10899,12 +10899,12 @@ No [whitespace] is allowed between the [link text] and the
 .
 Document[0, 33]
   Paragraph[0, 12]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, " "]
-    LinkRef[6, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
+    LinkRef[6, 11] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[7, 10] chars:[7, 10, "bar"]
-  Reference[13, 32] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] urlOpen:[0, 0] url:[20, 24, "/url"] urlClose:[0, 0] titleOpen:[25, 26, """] title:[26, 31, "title"] titleClose:[31, 32, """]
+  Reference[13, 32] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] url:[20, 24, "/url"] titleOpen:[25, 26, "\""] title:[26, 31, "title"] titleClose:[31, 32, "\""]
 ````````````````````````````````
 
 
@@ -10919,12 +10919,12 @@ Document[0, 33]
 .
 Document[0, 33]
   Paragraph[0, 12]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     SoftLineBreak[5, 6]
-    LinkRef[6, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
+    LinkRef[6, 11] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[7, 10] chars:[7, 10, "bar"]
-  Reference[13, 32] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] urlOpen:[0, 0] url:[20, 24, "/url"] urlClose:[0, 0] titleOpen:[25, 26, """] title:[26, 31, "title"] titleClose:[31, 32, """]
+  Reference[13, 32] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] url:[20, 24, "/url"] titleOpen:[25, 26, "\""] title:[26, 31, "title"] titleClose:[31, 32, "\""]
 ````````````````````````````````
 
 
@@ -10968,8 +10968,8 @@ the first is used:
 <p><a href="/url1">bar</a></p>
 .
 Document[0, 39]
-  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] urlOpen:[0, 0] url:[7, 12, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[14, 26] refOpen:[14, 15, "["] ref:[15, 18, "foo"] refClose:[18, 20, "]:"] urlOpen:[0, 0] url:[21, 26, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "foo"] refClose:[4, 6, "]:"] url:[7, 12, "/url1"]
+  Reference[14, 26] refOpen:[14, 15, "["] ref:[15, 18, "foo"] refClose:[18, 20, "]:"] url:[21, 26, "/url2"]
   Paragraph[28, 39]
     LinkRef[28, 38] textOpen:[28, 29, "["] text:[29, 32, "bar"] textClose:[32, 33, "]"] referenceOpen:[33, 34, "["] reference:[34, 37, "foo"] referenceClose:[37, 38, "]"]
       Text[29, 32] chars:[29, 32, "bar"]
@@ -10991,7 +10991,7 @@ Document[0, 27]
   Paragraph[0, 13]
     LinkRef[0, 12] textOpen:[0, 1, "["] text:[1, 4, "bar"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 11, "foo\!"] referenceClose:[11, 12, "]"]
       Text[1, 4] chars:[1, 4, "bar"]
-  Reference[14, 26] refOpen:[14, 15, "["] ref:[15, 19, "foo!"] refClose:[19, 21, "]:"] urlOpen:[0, 0] url:[22, 26, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[14, 26] refOpen:[14, 15, "["] ref:[15, 19, "foo!"] refClose:[19, 21, "]:"] url:[22, 26, "/url"]
 ````````````````````````````````
 
 
@@ -11008,13 +11008,13 @@ backslash-escaped:
 .
 Document[0, 26]
   Paragraph[0, 12]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, "[ref"]
-    LinkRef[9, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[9, 10, "["] reference:[10, 10] referenceClose:[10, 11, "]"]
+    LinkRef[9, 11] referenceOpen:[9, 10, "["] reference:[10, 10] referenceClose:[10, 11, "]"]
   Paragraph[13, 26]
     Text[13, 17] chars:[13, 17, "[ref"]
-    LinkRef[17, 19] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[17, 18, "["] reference:[18, 18] referenceClose:[18, 19, "]"]
+    LinkRef[17, 19] referenceOpen:[17, 18, "["] reference:[18, 18] referenceClose:[18, 19, "]"]
     Text[19, 25] chars:[19, 25, ": /uri"]
 ````````````````````````````````
 
@@ -11029,15 +11029,15 @@ Document[0, 26]
 .
 Document[0, 34]
   Paragraph[0, 16]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, "[ref"]
-    LinkRef[9, 14] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[9, 10, "["] reference:[10, 13, "bar"] referenceClose:[13, 14, "]"]
+    LinkRef[9, 14] referenceOpen:[9, 10, "["] reference:[10, 13, "bar"] referenceClose:[13, 14, "]"]
       Text[10, 13] chars:[10, 13, "bar"]
     Text[14, 15] chars:[14, 15, "]"]
   Paragraph[17, 34]
     Text[17, 21] chars:[17, 21, "[ref"]
-    LinkRef[21, 26] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[21, 22, "["] reference:[22, 25, "bar"] referenceClose:[25, 26, "]"]
+    LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[22, 25, "bar"] referenceClose:[25, 26, "]"]
       Text[22, 25] chars:[22, 25, "bar"]
     Text[26, 33] chars:[26, 33, "]: /uri"]
 ````````````````````````````````
@@ -11054,12 +11054,12 @@ Document[0, 34]
 Document[0, 27]
   Paragraph[0, 10]
     Text[0, 2] chars:[0, 2, "[["]
-    LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
+    LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
     Text[7, 9] chars:[7, 9, "]]"]
   Paragraph[11, 27]
     Text[11, 13] chars:[11, 13, "[["]
-    LinkRef[13, 18] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[13, 14, "["] reference:[14, 17, "foo"] referenceClose:[17, 18, "]"]
+    LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "foo"] referenceClose:[17, 18, "]"]
       Text[14, 17] chars:[14, 17, "foo"]
     Text[18, 26] chars:[18, 26, "]]: /url"]
 ````````````````````````````````
@@ -11076,7 +11076,7 @@ Document[0, 28]
   Paragraph[0, 13]
     LinkRef[0, 12] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 11, "ref\["] referenceClose:[11, 12, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[14, 27] refOpen:[14, 15, "["] ref:[15, 20, "ref\["] refClose:[20, 22, "]:"] urlOpen:[0, 0] url:[23, 27, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[14, 27] refOpen:[14, 15, "["] ref:[15, 20, "ref\["] refClose:[20, 22, "]:"] url:[23, 27, "/uri"]
 ````````````````````````````````
 
 
@@ -11090,9 +11090,9 @@ Note that in this example `]` is not backslash-escaped:
 <p><a href="/uri">bar\</a></p>
 .
 Document[0, 23]
-  Reference[0, 13] refOpen:[0, 1, "["] ref:[1, 6, "bar\\"] refClose:[6, 8, "]:"] urlOpen:[0, 0] url:[9, 13, "/uri"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 13] refOpen:[0, 1, "["] ref:[1, 6, "bar\\"] refClose:[6, 8, "]:"] url:[9, 13, "/uri"]
   Paragraph[15, 23]
-    LinkRef[15, 22] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[15, 16, "["] reference:[16, 21, "bar\\"] referenceClose:[21, 22, "]"]
+    LinkRef[15, 22] referenceOpen:[15, 16, "["] reference:[16, 21, "bar\\"] referenceClose:[21, 22, "]"]
       Text[16, 21] chars:[16, 21, "bar\\"]
 ````````````````````````````````
 
@@ -11109,9 +11109,9 @@ A [link label] must contain at least one [non-whitespace character]:
 .
 Document[0, 13]
   Paragraph[0, 3]
-    LinkRef[0, 2] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 1] referenceClose:[1, 2, "]"]
+    LinkRef[0, 2] referenceOpen:[0, 1, "["] reference:[1, 1] referenceClose:[1, 2, "]"]
   Paragraph[4, 13]
-    LinkRef[4, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[4, 5, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
+    LinkRef[4, 6] referenceOpen:[4, 5, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
     Text[6, 12] chars:[6, 12, ": /uri"]
 ````````````````````````````````
 
@@ -11130,10 +11130,10 @@ Document[0, 13]
 .
 Document[0, 17]
   Paragraph[0, 5]
-    LinkRef[0, 4] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[3, 2] referenceClose:[3, 4, "]"]
+    LinkRef[0, 4] referenceOpen:[0, 1, "["] reference:[3, 2] referenceClose:[3, 4, "]"]
       SoftLineBreak[1, 2]
   Paragraph[6, 17]
-    LinkRef[6, 10] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[6, 7, "["] reference:[9, 8] referenceClose:[9, 10, "]"]
+    LinkRef[6, 10] referenceOpen:[6, 7, "["] reference:[9, 8] referenceClose:[9, 10, "]"]
       SoftLineBreak[7, 8]
     Text[10, 16] chars:[10, 16, ": /uri"]
 ````````````````````````````````
@@ -11157,9 +11157,9 @@ provided by the matching reference link definition.  Thus,
 .
 Document[0, 29]
   Paragraph[0, 8]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] urlOpen:[0, 0] url:[16, 20, "/url"] urlClose:[0, 0] titleOpen:[21, 22, """] title:[22, 27, "title"] titleClose:[27, 28, """]
+  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"] titleOpen:[21, 22, "\""] title:[22, 27, "title"] titleClose:[27, 28, "\""]
 ````````````````````````````````
 
 
@@ -11172,11 +11172,11 @@ Document[0, 29]
 .
 Document[0, 41]
   Paragraph[0, 14]
-    LinkRef[0, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
+    LinkRef[0, 11] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
       Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 10] chars:[6, 10, " bar"]
-  Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
+  Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] url:[28, 32, "/url"] titleOpen:[33, 34, "\""] title:[34, 39, "title"] titleClose:[39, 40, "\""]
 ````````````````````````````````
 
 
@@ -11191,9 +11191,9 @@ The link labels are case-insensitive:
 .
 Document[0, 29]
   Paragraph[0, 8]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "Foo"]
-  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] urlOpen:[0, 0] url:[16, 20, "/url"] urlClose:[0, 0] titleOpen:[21, 22, """] title:[22, 27, "title"] titleClose:[27, 28, """]
+  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"] titleOpen:[21, 22, "\""] title:[22, 27, "title"] titleClose:[27, 28, "\""]
 ````````````````````````````````
 
 
@@ -11212,11 +11212,11 @@ allowed between the two sets of brackets:
 .
 Document[0, 31]
   Paragraph[0, 10]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     SoftLineBreak[6, 7]
-    LinkRef[7, 9] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[7, 8, "["] reference:[8, 8] referenceClose:[8, 9, "]"]
-  Reference[11, 30] refOpen:[11, 12, "["] ref:[12, 15, "foo"] refClose:[15, 17, "]:"] urlOpen:[0, 0] url:[18, 22, "/url"] urlClose:[0, 0] titleOpen:[23, 24, """] title:[24, 29, "title"] titleClose:[29, 30, """]
+    LinkRef[7, 9] referenceOpen:[7, 8, "["] reference:[8, 8] referenceClose:[8, 9, "]"]
+  Reference[11, 30] refOpen:[11, 12, "["] ref:[12, 15, "foo"] refClose:[15, 17, "]:"] url:[18, 22, "/url"] titleOpen:[23, 24, "\""] title:[24, 29, "title"] titleClose:[29, 30, "\""]
 ````````````````````````````````
 
 
@@ -11238,9 +11238,9 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 .
 Document[0, 27]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 18, "/url"] urlClose:[0, 0] titleOpen:[19, 20, """] title:[20, 25, "title"] titleClose:[25, 26, """]
+  Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 18, "/url"] titleOpen:[19, 20, "\""] title:[20, 25, "title"] titleClose:[25, 26, "\""]
 ````````````````````````````````
 
 
@@ -11253,11 +11253,11 @@ Document[0, 27]
 .
 Document[0, 39]
   Paragraph[0, 12]
-    LinkRef[0, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
+    LinkRef[0, 11] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
       Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
       Text[6, 10] chars:[6, 10, " bar"]
-  Reference[13, 38] refOpen:[13, 14, "["] ref:[14, 23, "*foo* bar"] refClose:[23, 25, "]:"] urlOpen:[0, 0] url:[26, 30, "/url"] urlClose:[0, 0] titleOpen:[31, 32, """] title:[32, 37, "title"] titleClose:[37, 38, """]
+  Reference[13, 38] refOpen:[13, 14, "["] ref:[14, 23, "*foo* bar"] refClose:[23, 25, "]:"] url:[26, 30, "/url"] titleOpen:[31, 32, "\""] title:[32, 37, "title"] titleClose:[37, 38, "\""]
 ````````````````````````````````
 
 
@@ -11271,12 +11271,12 @@ Document[0, 39]
 Document[0, 41]
   Paragraph[0, 14]
     Text[0, 1] chars:[0, 1, "["]
-    LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+    LinkRef[1, 12] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
     Text[12, 13] chars:[12, 13, "]"]
-  Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
+  Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] url:[28, 32, "/url"] titleOpen:[33, 34, "\""] title:[34, 39, "title"] titleClose:[39, 40, "\""]
 ````````````````````````````````
 
 
@@ -11290,9 +11290,9 @@ Document[0, 41]
 Document[0, 25]
   Paragraph[0, 12]
     Text[0, 6] chars:[0, 6, "[[bar "]
-    LinkRef[6, 11] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[6, 7, "["] reference:[7, 10, "foo"] referenceClose:[10, 11, "]"]
+    LinkRef[6, 11] referenceOpen:[6, 7, "["] reference:[7, 10, "foo"] referenceClose:[10, 11, "]"]
       Text[7, 10] chars:[7, 10, "foo"]
-  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "foo"] refClose:[17, 19, "]:"] urlOpen:[0, 0] url:[20, 24, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "foo"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
 ````````````````````````````````
 
 
@@ -11307,9 +11307,9 @@ The link labels are case-insensitive:
 .
 Document[0, 27]
   Paragraph[0, 6]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "Foo"]
-  Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] urlOpen:[0, 0] url:[14, 18, "/url"] urlClose:[0, 0] titleOpen:[19, 20, """] title:[20, 25, "title"] titleClose:[25, 26, """]
+  Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 18, "/url"] titleOpen:[19, 20, "\""] title:[20, 25, "title"] titleClose:[25, 26, "\""]
 ````````````````````````````````
 
 
@@ -11324,10 +11324,10 @@ A space after the link text should be preserved:
 .
 Document[0, 23]
   Paragraph[0, 10]
-    LinkRef[0, 5] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, " bar"]
-  Reference[11, 22] refOpen:[11, 12, "["] ref:[12, 15, "foo"] refClose:[15, 17, "]:"] urlOpen:[0, 0] url:[18, 22, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[11, 22] refOpen:[11, 12, "["] ref:[12, 15, "foo"] refClose:[15, 17, "]:"] url:[18, 22, "/url"]
 ````````````````````````````````
 
 
@@ -11344,7 +11344,7 @@ opening bracket to avoid links:
 Document[0, 28]
   Paragraph[0, 7]
     Text[0, 6] chars:[0, 6, "\[foo]"]
-  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[20, 21, """] title:[21, 26, "title"] titleClose:[26, 27, """]
+  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
 ````````````````````````````````
 
 
@@ -11359,10 +11359,10 @@ following closing bracket:
 <p>*<a href="/url">foo*</a></p>
 .
 Document[0, 22]
-  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 5, "foo*"] refClose:[5, 7, "]:"] urlOpen:[0, 0] url:[8, 12, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 5, "foo*"] refClose:[5, 7, "]:"] url:[8, 12, "/url"]
   Paragraph[14, 22]
     Text[14, 15] chars:[14, 15, "*"]
-    LinkRef[15, 21] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[15, 16, "["] reference:[16, 20, "foo*"] referenceClose:[20, 21, "]"]
+    LinkRef[15, 21] referenceOpen:[15, 16, "["] reference:[16, 20, "foo*"] referenceClose:[20, 21, "]"]
       Text[16, 20] chars:[16, 20, "foo*"]
 ````````````````````````````````
 
@@ -11381,8 +11381,8 @@ Document[0, 38]
   Paragraph[0, 11]
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-  Reference[12, 24] refOpen:[12, 13, "["] ref:[13, 16, "foo"] refClose:[16, 18, "]:"] urlOpen:[0, 0] url:[19, 24, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[25, 37] refOpen:[25, 26, "["] ref:[26, 29, "bar"] refClose:[29, 31, "]:"] urlOpen:[0, 0] url:[32, 37, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[12, 24] refOpen:[12, 13, "["] ref:[13, 16, "foo"] refClose:[16, 18, "]:"] url:[19, 24, "/url1"]
+  Reference[25, 37] refOpen:[25, 26, "["] ref:[26, 29, "bar"] refClose:[29, 31, "]:"] url:[32, 37, "/url2"]
 ````````````````````````````````
 
 
@@ -11401,7 +11401,7 @@ Document[0, 29]
     Text[0, 5] chars:[0, 5, "[foo]"]
     LinkRef[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
       Text[6, 9] chars:[6, 9, "bar"]
-  Reference[17, 28] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] urlOpen:[0, 0] url:[24, 28, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[17, 28] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] url:[24, 28, "/url"]
 ````````````````````````````````
 
 
@@ -11420,10 +11420,10 @@ Document[0, 43]
   Paragraph[0, 16]
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
-    LinkRef[10, 15] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
+    LinkRef[10, 15] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
       Text[11, 14] chars:[11, 14, "baz"]
-  Reference[17, 29] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] urlOpen:[0, 0] url:[24, 29, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[30, 42] refOpen:[30, 31, "["] ref:[31, 34, "bar"] refClose:[34, 36, "]:"] urlOpen:[0, 0] url:[37, 42, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[17, 29] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] url:[24, 29, "/url1"]
+  Reference[30, 42] refOpen:[30, 31, "["] ref:[31, 34, "bar"] refClose:[34, 36, "]:"] url:[37, 42, "/url2"]
 ````````````````````````````````
 
 
@@ -11443,8 +11443,8 @@ Document[0, 43]
     Text[0, 5] chars:[0, 5, "[foo]"]
     LinkRef[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
       Text[6, 9] chars:[6, 9, "bar"]
-  Reference[17, 29] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] urlOpen:[0, 0] url:[24, 29, "/url1"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
-  Reference[30, 42] refOpen:[30, 31, "["] ref:[31, 34, "foo"] refClose:[34, 36, "]:"] urlOpen:[0, 0] url:[37, 42, "/url2"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[17, 29] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] url:[24, 29, "/url1"]
+  Reference[30, 42] refOpen:[30, 31, "["] ref:[31, 34, "foo"] refClose:[34, 36, "]:"] url:[37, 42, "/url2"]
 ````````````````````````````````
 
 
@@ -11468,7 +11468,7 @@ this is standardly used as the image's `alt` attribute.
 .
 Document[0, 21]
   Paragraph[0, 21]
-    Image[1, 19] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 11, "/url"] urlClose:[0, 0] pageRef:[7, 11, "/url"] titleOpen:[12, 13, """] title:[13, 18, "title"] titleClose:[18, 19, """] linkClose:[0, 0]
+    Image[0, 20] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "\""] title:[13, 18, "title"] titleClose:[18, 19, "\""] linkClose:[19, 20, ")"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -11484,11 +11484,11 @@ Document[0, 21]
 .
 Document[0, 55]
   Paragraph[0, 13]
-    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
-  Reference[15, 54] refOpen:[15, 16, "["] ref:[16, 25, "foo *bar*"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 37, "train.jpg"] urlClose:[0, 0] titleOpen:[38, 39, """] title:[39, 53, "train & tracks"] titleClose:[53, 54, """]
+  Reference[15, 54] refOpen:[15, 16, "["] ref:[16, 25, "foo *bar*"] refClose:[25, 27, "]:"] url:[28, 37, "train.jpg"] titleOpen:[38, 39, "\""] title:[39, 53, "train & tracks"] titleClose:[53, 54, "\""]
 ````````````````````````````````
 
 
@@ -11499,9 +11499,9 @@ Document[0, 55]
 .
 Document[0, 27]
   Paragraph[0, 27]
-    Image[1, 25] textOpen:[1, 2, "["] text:[2, 18, "foo ![bar](/url)"] textClose:[18, 19, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[20, 25, "/url2"] urlClose:[0, 0] pageRef:[20, 25, "/url2"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 26] textOpen:[0, 2, "!["] text:[2, 18, "foo ![bar](/url)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 25, "/url2"] pageRef:[20, 25, "/url2"] linkClose:[25, 26, ")"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Image[7, 17] textOpen:[7, 8, "["] text:[8, 11, "bar"] textClose:[11, 12, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[13, 17, "/url"] urlClose:[0, 0] pageRef:[13, 17, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Image[6, 18] textOpen:[6, 8, "!["] text:[8, 11, "bar"] textClose:[11, 12, "]"] linkOpen:[12, 13, "("] url:[13, 17, "/url"] pageRef:[13, 17, "/url"] linkClose:[17, 18, ")"]
         Text[8, 11] chars:[8, 11, "bar"]
 ````````````````````````````````
 
@@ -11513,9 +11513,9 @@ Document[0, 27]
 .
 Document[0, 26]
   Paragraph[0, 26]
-    Image[1, 24] textOpen:[1, 2, "["] text:[2, 17, "foo [bar](/url)"] textClose:[17, 18, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[19, 24, "/url2"] urlClose:[0, 0] pageRef:[19, 24, "/url2"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 25] textOpen:[0, 2, "!["] text:[2, 17, "foo [bar](/url)"] textClose:[17, 18, "]"] linkOpen:[18, 19, "("] url:[19, 24, "/url2"] pageRef:[19, 24, "/url2"] linkClose:[24, 25, ")"]
       Text[2, 6] chars:[2, 6, "foo "]
-      Link[6, 16] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[12, 16, "/url"] urlClose:[0, 0] pageRef:[12, 16, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+      Link[6, 17] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
         Text[7, 10] chars:[7, 10, "bar"]
 ````````````````````````````````
 
@@ -11536,11 +11536,11 @@ content is rendered, without formatting.
 .
 Document[0, 56]
   Paragraph[0, 15]
-    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
-  Reference[16, 55] refOpen:[16, 17, "["] ref:[17, 26, "foo *bar*"] refClose:[26, 28, "]:"] urlOpen:[0, 0] url:[29, 38, "train.jpg"] urlClose:[0, 0] titleOpen:[39, 40, """] title:[40, 54, "train & tracks"] titleClose:[54, 55, """]
+  Reference[16, 55] refOpen:[16, 17, "["] ref:[17, 26, "foo *bar*"] refClose:[26, 28, "]:"] url:[29, 38, "train.jpg"] titleOpen:[39, 40, "\""] title:[40, 54, "train & tracks"] titleClose:[54, 55, "\""]
 ````````````````````````````````
 
 
@@ -11557,7 +11557,7 @@ Document[0, 59]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
         Text[7, 10] chars:[7, 10, "bar"]
-  Reference[22, 58] refOpen:[22, 23, "["] ref:[23, 29, "FOOBAR"] refClose:[29, 31, "]:"] urlOpen:[0, 0] url:[32, 41, "train.jpg"] urlClose:[0, 0] titleOpen:[42, 43, """] title:[43, 57, "train & tracks"] titleClose:[57, 58, """]
+  Reference[22, 58] refOpen:[22, 23, "["] ref:[23, 29, "FOOBAR"] refClose:[29, 31, "]:"] url:[32, 41, "train.jpg"] titleOpen:[42, 43, "\""] title:[43, 57, "train & tracks"] titleClose:[57, 58, "\""]
 ````````````````````````````````
 
 
@@ -11568,7 +11568,7 @@ Document[0, 59]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Image[1, 16] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[7, 16, "train.jpg"] urlClose:[0, 0] pageRef:[7, 16, "train.jpg"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 17] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 16, "train.jpg"] pageRef:[7, 16, "train.jpg"] linkClose:[16, 17, ")"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -11581,7 +11581,7 @@ My ![foo bar](/path/to/train.jpg  "title"   )
 Document[0, 46]
   Paragraph[0, 46]
     Text[0, 3] chars:[0, 3, "My "]
-    Image[4, 41] textOpen:[4, 5, "["] text:[5, 12, "foo bar"] textClose:[12, 13, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[14, 32, "/path/to/train.jpg"] urlClose:[0, 0] pageRef:[14, 32, "/path/to/train.jpg"] titleOpen:[34, 35, """] title:[35, 40, "title"] titleClose:[40, 41, """] linkClose:[0, 0]
+    Image[3, 45] textOpen:[3, 5, "!["] text:[5, 12, "foo bar"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 32, "/path/to/train.jpg"] pageRef:[14, 32, "/path/to/train.jpg"] titleOpen:[34, 35, "\""] title:[35, 40, "title"] titleClose:[40, 41, "\""] linkClose:[44, 45, ")"]
       Text[5, 12] chars:[5, 12, "foo bar"]
 ````````````````````````````````
 
@@ -11593,7 +11593,7 @@ Document[0, 46]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Image[1, 12] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[0, 0] urlOpen:[7, 8, "<"] url:[8, 11, "url"] urlClose:[11, 12, ">"] pageRef:[8, 11, "url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 13] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 11, "url"] urlClose:[11, 12, ">"] pageRef:[8, 11, "url"] linkClose:[12, 13, ")"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
 
@@ -11605,7 +11605,7 @@ Document[0, 14]
 .
 Document[0, 10]
   Paragraph[0, 10]
-    Image[1, 8] textOpen:[1, 2, "["] text:[2, 2] textClose:[2, 3, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[4, 8, "/url"] urlClose:[0, 0] pageRef:[4, 8, "/url"] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
+    Image[0, 9] textOpen:[0, 2, "!["] text:[2, 2] textClose:[2, 3, "]"] linkOpen:[3, 4, "("] url:[4, 8, "/url"] pageRef:[4, 8, "/url"] linkClose:[8, 9, ")"]
 ````````````````````````````````
 
 
@@ -11622,7 +11622,7 @@ Document[0, 25]
   Paragraph[0, 12]
     ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
-  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] urlOpen:[0, 0] url:[20, 24, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
 ````````````````````````````````
 
 
@@ -11637,7 +11637,7 @@ Document[0, 25]
   Paragraph[0, 12]
     ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
-  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "BAR"] refClose:[17, 19, "]:"] urlOpen:[0, 0] url:[20, 24, "/url"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0]
+  Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "BAR"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
 ````````````````````````````````
 
 
@@ -11652,9 +11652,9 @@ Collapsed:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
-  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[22, 23, """] title:[23, 28, "title"] titleClose:[28, 29, """]
+  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
 ````````````````````````````````
 
 
@@ -11667,11 +11667,11 @@ Document[0, 30]
 .
 Document[0, 42]
   Paragraph[0, 15]
-    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
-  Reference[16, 41] refOpen:[16, 17, "["] ref:[17, 26, "*foo* bar"] refClose:[26, 28, "]:"] urlOpen:[0, 0] url:[29, 33, "/url"] urlClose:[0, 0] titleOpen:[34, 35, """] title:[35, 40, "title"] titleClose:[40, 41, """]
+  Reference[16, 41] refOpen:[16, 17, "["] ref:[17, 26, "*foo* bar"] refClose:[26, 28, "]:"] url:[29, 33, "/url"] titleOpen:[34, 35, "\""] title:[35, 40, "title"] titleClose:[40, 41, "\""]
 ````````````````````````````````
 
 
@@ -11686,9 +11686,9 @@ The labels are case-insensitive:
 .
 Document[0, 30]
   Paragraph[0, 9]
-    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "Foo"]
-  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[22, 23, """] title:[23, 28, "title"] titleClose:[28, 29, """]
+  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
 ````````````````````````````````
 
 
@@ -11706,11 +11706,11 @@ between the two sets of brackets:
 .
 Document[0, 32]
   Paragraph[0, 11]
-    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
     SoftLineBreak[7, 8]
-    LinkRef[8, 10] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[8, 9, "["] reference:[9, 9] referenceClose:[9, 10, "]"]
-  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "foo"] refClose:[16, 18, "]:"] urlOpen:[0, 0] url:[19, 23, "/url"] urlClose:[0, 0] titleOpen:[24, 25, """] title:[25, 30, "title"] titleClose:[30, 31, """]
+    LinkRef[8, 10] referenceOpen:[8, 9, "["] reference:[9, 9] referenceClose:[9, 10, "]"]
+  Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "foo"] refClose:[16, 18, "]:"] url:[19, 23, "/url"] titleOpen:[24, 25, "\""] title:[25, 30, "title"] titleClose:[30, 31, "\""]
 ````````````````````````````````
 
 
@@ -11725,9 +11725,9 @@ Shortcut:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
-  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[20, 21, """] title:[21, 26, "title"] titleClose:[26, 27, """]
+  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
 ````````````````````````````````
 
 
@@ -11740,11 +11740,11 @@ Document[0, 28]
 .
 Document[0, 40]
   Paragraph[0, 13]
-    ImageRef[0, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+    ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
       Text[7, 11] chars:[7, 11, " bar"]
-  Reference[14, 39] refOpen:[14, 15, "["] ref:[15, 24, "*foo* bar"] refClose:[24, 26, "]:"] urlOpen:[0, 0] url:[27, 31, "/url"] urlClose:[0, 0] titleOpen:[32, 33, """] title:[33, 38, "title"] titleClose:[38, 39, """]
+  Reference[14, 39] refOpen:[14, 15, "["] ref:[15, 24, "*foo* bar"] refClose:[24, 26, "]:"] url:[27, 31, "/url"] titleOpen:[32, 33, "\""] title:[33, 38, "title"] titleClose:[38, 39, "\""]
 ````````````````````````````````
 
 
@@ -11761,14 +11761,14 @@ Note that link labels cannot contain unescaped brackets:
 Document[0, 32]
   Paragraph[0, 9]
     Text[0, 2] chars:[0, 2, "!["]
-    LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
+    LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
     Text[7, 8] chars:[7, 8, "]"]
   Paragraph[10, 32]
     Text[10, 11] chars:[10, 11, "["]
-    LinkRef[11, 16] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[11, 12, "["] reference:[12, 15, "foo"] referenceClose:[15, 16, "]"]
+    LinkRef[11, 16] referenceOpen:[11, 12, "["] reference:[12, 15, "foo"] referenceClose:[15, 16, "]"]
       Text[12, 15] chars:[12, 15, "foo"]
-    Text[16, 31] chars:[16, 31, "]: /u"..."itle""]
+    Text[16, 31] chars:[16, 31, "]: /u … itle\""]
 ````````````````````````````````
 
 
@@ -11783,9 +11783,9 @@ The link labels are case-insensitive:
 .
 Document[0, 28]
   Paragraph[0, 7]
-    ImageRef[0, 6] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "Foo"]
-  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] urlOpen:[0, 0] url:[15, 19, "/url"] urlClose:[0, 0] titleOpen:[20, 21, """] title:[21, 26, "title"] titleClose:[26, 27, """]
+  Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
 ````````````````````````````````
 
 
@@ -11802,7 +11802,7 @@ opening `!` and `[`:
 Document[0, 30]
   Paragraph[0, 9]
     Text[0, 8] chars:[0, 8, "\!\[foo]"]
-  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] urlOpen:[0, 0] url:[17, 21, "/url"] urlClose:[0, 0] titleOpen:[22, 23, """] title:[23, 28, "title"] titleClose:[28, 29, """]
+  Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
 ````````````````````````````````
 
 
@@ -11819,9 +11819,9 @@ If you want a link after a literal `!`, backslash-escape the
 Document[0, 29]
   Paragraph[0, 8]
     Text[0, 2] chars:[0, 2, "\!"]
-    LinkRef[2, 7] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
+    LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
-  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] urlOpen:[0, 0] url:[16, 20, "/url"] urlClose:[0, 0] titleOpen:[21, 22, """] title:[22, 27, "title"] titleClose:[27, 28, """]
+  Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"] titleOpen:[21, 22, "\""] title:[22, 27, "title"] titleClose:[27, 28, "\""]
 ````````````````````````````````
 
 
@@ -11953,7 +11953,7 @@ Spaces are not allowed in autolinks:
 .
 Document[0, 25]
   Paragraph[0, 25]
-    Text[0, 24] chars:[0, 24, "<http"..." bim>"]
+    Text[0, 24] chars:[0, 24, "<http …  bim>"]
 ````````````````````````````````
 
 
@@ -12016,7 +12016,7 @@ Backslash-escapes do not work inside email autolinks:
 .
 Document[0, 24]
   Paragraph[0, 24]
-    Text[0, 23] chars:[0, 23, "<foo\"...".com>"]
+    Text[0, 23] chars:[0, 23, "<foo\ … .com>"]
 ````````````````````````````````
 
 
@@ -12040,7 +12040,7 @@ Document[0, 3]
 .
 Document[0, 19]
   Paragraph[0, 19]
-    Text[0, 18] chars:[0, 18, "< htt"..."bar >"]
+    Text[0, 18] chars:[0, 18, "< htt … bar >"]
 ````````````````````````````````
 
 
@@ -12062,7 +12062,7 @@ Document[0, 8]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Text[0, 13] chars:[0, 13, "<foo."...".baz>"]
+    Text[0, 13] chars:[0, 13, "<foo. … .baz>"]
 ````````````````````````````````
 
 
@@ -12073,7 +12073,7 @@ http://example.com
 .
 Document[0, 19]
   Paragraph[0, 19]
-    Text[0, 18] chars:[0, 18, "http:"..."e.com"]
+    Text[0, 18] chars:[0, 18, "http: … e.com"]
 ````````````````````````````````
 
 
@@ -12084,7 +12084,7 @@ foo@bar.example.com
 .
 Document[0, 20]
   Paragraph[0, 20]
-    Text[0, 19] chars:[0, 19, "foo@b"..."e.com"]
+    Text[0, 19] chars:[0, 19, "foo@b … e.com"]
 ````````````````````````````````
 
 
@@ -12202,7 +12202,7 @@ data="foo" ></p>
 Document[0, 23]
   Paragraph[0, 23]
     HtmlInline[0, 6] chars:[0, 6, "<a  />"]
-    HtmlInline[6, 22] chars:[6, 22, "<b2\nd"..."oo" >"]
+    HtmlInline[6, 22] chars:[6, 22, "<b2\nd … oo\" >"]
 ````````````````````````````````
 
 
@@ -12217,7 +12217,7 @@ _boolean zoop:33=zoop:33 /></p>
 .
 Document[0, 64]
   Paragraph[0, 64]
-    HtmlInline[0, 63] chars:[0, 63, "<a fo"..."33 />"]
+    HtmlInline[0, 63] chars:[0, 63, "<a fo … 33 />"]
 ````````````````````````````````
 
 
@@ -12231,7 +12231,7 @@ Foo <responsive-image src="foo.jpg" />
 Document[0, 39]
   Paragraph[0, 39]
     Text[0, 4] chars:[0, 4, "Foo "]
-    HtmlInline[4, 38] chars:[4, 38, "<resp"..."g" />"]
+    HtmlInline[4, 38] chars:[4, 38, "<resp … g\" />"]
 ````````````````````````````````
 
 
@@ -12257,7 +12257,7 @@ Illegal attribute names:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 15] chars:[0, 15, "<a h*"...""hi">"]
+    Text[0, 15] chars:[0, 15, "<a h* … \"hi\">"]
 ````````````````````````````````
 
 
@@ -12270,7 +12270,7 @@ Illegal attribute values:
 .
 Document[0, 27]
   Paragraph[0, 27]
-    Text[0, 26] chars:[0, 26, "<a hr"..."=hi'>"]
+    Text[0, 26] chars:[0, 26, "<a hr … =hi'>"]
 ````````````````````````````````
 
 
@@ -12287,7 +12287,7 @@ Document[0, 18]
   Paragraph[0, 18]
     Text[0, 5] chars:[0, 5, "< a><"]
     SoftLineBreak[5, 6]
-    Text[6, 17] chars:[6, 17, "foo><"..."ar/ >"]
+    Text[6, 17] chars:[6, 17, "foo>< … ar/ >"]
 ````````````````````````````````
 
 
@@ -12300,7 +12300,7 @@ Missing [whitespace]:
 .
 Document[0, 26]
   Paragraph[0, 26]
-    Text[0, 25] chars:[0, 25, "<a hr"..."itle>"]
+    Text[0, 25] chars:[0, 25, "<a hr … itle>"]
 ````````````````````````````````
 
 
@@ -12327,7 +12327,7 @@ Illegal attributes in closing tag:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 15] chars:[0, 15, "</a h"..."foo">"]
+    Text[0, 15] chars:[0, 15, "</a h … foo\">"]
 ````````````````````````````````
 
 
@@ -12343,7 +12343,7 @@ comment - with hyphen --></p>
 Document[0, 45]
   Paragraph[0, 45]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInlineComment[4, 44] chars:[4, 44, "<!-- "..."n -->"]
+    HtmlInlineComment[4, 44] chars:[4, 44, "<!--  … n -->"]
 ````````````````````````````````
 
 
@@ -12354,7 +12354,7 @@ foo <!-- not a comment -- two hyphens -->
 .
 Document[0, 42]
   Paragraph[0, 42]
-    Text[0, 41] chars:[0, 41, "foo <"..."s -->"]
+    Text[0, 41] chars:[0, 41, "foo < … s -->"]
 ````````````````````````````````
 
 
@@ -12370,9 +12370,9 @@ foo <!-- foo--->
 .
 Document[0, 36]
   Paragraph[0, 18]
-    Text[0, 17] chars:[0, 17, "foo <"..."o -->"]
+    Text[0, 17] chars:[0, 17, "foo < … o -->"]
   Paragraph[19, 36]
-    Text[19, 35] chars:[19, 35, "foo <"..."o--->"]
+    Text[19, 35] chars:[19, 35, "foo < … o--->"]
 ````````````````````````````````
 
 
@@ -12386,7 +12386,7 @@ foo <?php echo $a; ?>
 Document[0, 22]
   Paragraph[0, 22]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 21] chars:[4, 21, "<?php"..."a; ?>"]
+    HtmlInline[4, 21] chars:[4, 21, "<?php … a; ?>"]
 ````````````````````````````````
 
 
@@ -12400,7 +12400,7 @@ foo <!ELEMENT br EMPTY>
 Document[0, 24]
   Paragraph[0, 24]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 23] chars:[4, 23, "<!ELE"..."MPTY>"]
+    HtmlInline[4, 23] chars:[4, 23, "<!ELE … MPTY>"]
 ````````````````````````````````
 
 
@@ -12414,7 +12414,7 @@ foo <![CDATA[>&<]]>
 Document[0, 20]
   Paragraph[0, 20]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 19] chars:[4, 19, "<![CD"..."&<]]>"]
+    HtmlInline[4, 19] chars:[4, 19, "<![CD … &<]]>"]
 ````````````````````````````````
 
 
@@ -12429,7 +12429,7 @@ foo <a href="&ouml;">
 Document[0, 22]
   Paragraph[0, 22]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 21] chars:[4, 21, "<a hr"..."ml;">"]
+    HtmlInline[4, 21] chars:[4, 21, "<a hr … ml;\">"]
 ````````````````````````````````
 
 
@@ -12443,7 +12443,7 @@ foo <a href="\*">
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 4] chars:[0, 4, "foo "]
-    HtmlInline[4, 17] chars:[4, 17, "<a hr"...""\*">"]
+    HtmlInline[4, 17] chars:[4, 17, "<a hr … \"\*\">"]
 ````````````````````````````````
 
 
@@ -12454,7 +12454,7 @@ Document[0, 18]
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Text[0, 13] chars:[0, 13, "<a hr"...""\"">"]
+    Text[0, 13] chars:[0, 13, "<a hr … \"\\"\">"]
 ````````````````````````````````
 
 
@@ -12592,7 +12592,7 @@ span`
 .
 Document[0, 14]
   Paragraph[0, 14]
-    Code[0, 13] textOpen:[0, 1, "`"] text:[1, 12, "code "..." \nspan"] textClose:[12, 13, "`"]
+    Code[0, 13] textOpen:[0, 1, "`"] text:[1, 12, "code  …  \nspan"] textClose:[12, 13, "`"]
 ````````````````````````````````
 
 
@@ -12619,7 +12619,7 @@ bar"></p>
 .
 Document[0, 21]
   Paragraph[0, 21]
-    HtmlInline[0, 20] chars:[0, 20, "<a hr"..."bar">"]
+    HtmlInline[0, 20] chars:[0, 20, "<a hr … bar\">"]
 ````````````````````````````````
 
 
@@ -12632,7 +12632,7 @@ bar"></p>
 .
 Document[0, 20]
   Paragraph[0, 20]
-    HtmlInline[0, 19] chars:[0, 19, "<a hr"..."bar">"]
+    HtmlInline[0, 19] chars:[0, 19, "<a hr … bar\">"]
 ````````````````````````````````
 
 
@@ -12668,7 +12668,7 @@ Document[0, 6]
 <h3>foo\</h3>
 .
 Document[0, 9]
-  Heading[0, 8] textOpen:[0, 3, "###"] text:[4, 8, "foo\"] textClose:[0, 0]
+  Heading[0, 8] textOpen:[0, 3, "###"] text:[4, 8, "foo\"]
     Text[4, 8] chars:[4, 8, "foo\"]
 ````````````````````````````````
 
@@ -12679,7 +12679,7 @@ Document[0, 9]
 <h3>foo</h3>
 .
 Document[0, 10]
-  Heading[0, 7] textOpen:[0, 3, "###"] text:[4, 7, "foo"] textClose:[0, 0]
+  Heading[0, 7] textOpen:[0, 3, "###"] text:[4, 7, "foo"]
     Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -12743,7 +12743,7 @@ hello $.;'there
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 15] chars:[0, 15, "hello"..."there"]
+    Text[0, 15] chars:[0, 15, "hello … there"]
 ````````````````````````````````
 
 
@@ -12767,7 +12767,7 @@ Multiple     spaces
 .
 Document[0, 20]
   Paragraph[0, 20]
-    Text[0, 19] chars:[0, 19, "Multi"..."paces"]
+    Text[0, 19] chars:[0, 19, "Multi … paces"]
 ````````````````````````````````
 
 
