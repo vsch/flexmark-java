@@ -220,7 +220,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public int countChars(String chars, int startIndex, int endIndex) {
         int count = 0;
-
+        if (endIndex > length()) endIndex = length(); 
         for (int i = startIndex; i < endIndex; i++) {
             if (!contains(chars, charAt(i))) break;
             count++;
@@ -232,7 +232,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public int countCharsReversed(String chars, int startIndex, int endIndex) {
         int count = 0;
-
+        if (endIndex > length()) endIndex = length();
         for (int i = endIndex; i-- > startIndex; ) {
             if (!contains(chars, charAt(i))) break;
             count++;
@@ -244,7 +244,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public int countNotChars(String chars, int startIndex, int endIndex) {
         int count = 0;
-
+        if (endIndex > length()) endIndex = length();
         for (int i = startIndex; i < endIndex; i++) {
             if (contains(chars, charAt(i))) break;
             count++;
@@ -256,7 +256,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public int countNotCharsReversed(String chars, int startIndex, int endIndex) {
         int count = 0;
-
+        if (endIndex > length()) endIndex = length();
         for (int i = endIndex; i-- > startIndex; ) {
             if (contains(chars, charAt(i))) break;
             count++;
