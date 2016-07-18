@@ -13,11 +13,11 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboSpecExampleSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/spec_example_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/ext_spec_example_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
-            .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, "````````````````")
-            .set(SpecExampleExtension.SPEC_TYPE_BREAK, "…")
+            .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, SpecReader.EXAMPLE_TEST_BREAK)
+            .set(SpecExampleExtension.SPEC_TYPE_BREAK, SpecReader.TYPE_TEST_BREAK)
             .set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.SIMPLE)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(SpecExampleExtension.create()));

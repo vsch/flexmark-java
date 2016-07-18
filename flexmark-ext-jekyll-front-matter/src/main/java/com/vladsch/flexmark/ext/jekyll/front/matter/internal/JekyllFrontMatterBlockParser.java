@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 
 public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
     private static String COL = "\\s*:?-{3,}:?\\s*";
-    private static Pattern JEKYLL_FRONT_MATTER_BLOCK_START = Pattern.compile("^-{3}(\\s.*)?");
+    static Pattern JEKYLL_FRONT_MATTER_BLOCK_START = Pattern.compile("^-{3}(\\s.*)?");
     private static Pattern JEKYLL_FRONT_MATTER_BLOCK_END = Pattern.compile("^(-{3}|\\.{3})(\\s.*)?");
     //private static Pattern JEKYLL_FRONT_MATTER_BLOCK_END = Pattern.compile("^(-{3})(\\s.*)?");
 
@@ -27,9 +27,10 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
     private final JekyllFrontMatterOptions options;
     private boolean inYAMLBlock;
 
-    private JekyllFrontMatterBlockParser(DataHolder options) {
+    JekyllFrontMatterBlockParser(DataHolder options, BasedSequence openingMarker) {
         this.options = new JekyllFrontMatterOptions(options);
         inYAMLBlock = true;
+        block.setOpeningMarker(openingMarker);
     }
 
     @Override
@@ -61,7 +62,8 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState parserState) {
-        block.setContent(content);
+        block.setContent(content.getLines().subList(1, content.getLineCount()));
+        block.setCharsFromContent();
         content = null;
     }
 
@@ -121,10 +123,13 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BasedSequence line = state.getLine();
             BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
-            if (parentParser instanceof DocumentBlockParser && parentParser.getBlock().getFirstChild() == null &&
-                    JEKYLL_FRONT_MATTER_BLOCK_START.matcher(line).matches()) {
-                return BlockStart.of(new JekyllFrontMatterBlockParser(state.getProperties()))
-                        .atIndex(state.getNextNonSpaceIndex());
+            if (parentParser instanceof DocumentBlockParser && parentParser.getBlock().getFirstChild() == null) {
+                Matcher matcher = JEKYLL_FRONT_MATTER_BLOCK_START.matcher(line);
+                if (matcher.matches()) {
+                    BasedSequence openingMarker = line.subSequence(0, 3);
+                    JekyllFrontMatterBlockParser parser = new JekyllFrontMatterBlockParser(state.getProperties(), openingMarker);
+                    return BlockStart.of(parser).atIndex(-1);
+                }
             }
 
             return BlockStart.none();

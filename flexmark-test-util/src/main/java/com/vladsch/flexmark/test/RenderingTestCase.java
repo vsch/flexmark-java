@@ -18,7 +18,8 @@ public abstract class RenderingTestCase {
 
     public static final String IGNORE_OPTION = "IGNORE";
     public static final String FAIL_OPTION = "FAIL";
-    public static DataKey<Boolean> FAIL = new DataKey<Boolean>("FAIL", false);
+    public static DataKey<Boolean> FAIL_OPTION_KEY = new DataKey<Boolean>("FAIL_OPTION_KEY", false);
+    public static DataKey<Boolean> IGNORE_OPTION_KEY = new DataKey<>("IGNORE_OPTION_KEY", false);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -53,26 +54,34 @@ public abstract class RenderingTestCase {
             String option = optionName.trim();
             if (option.isEmpty()) continue;
             if (option.equals(IGNORE_OPTION)) {
-                if (example == null)
-                    throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using IGNORE option");
-                else
-                    throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using ignore option");
+                throwIgnoredOption(example, optionSets, option);
             }
 
             if (option.equals(FAIL_OPTION)) {
                 if (options == null) {
-                    options = new MutableDataSet().set(FAIL, true);
+                    options = new MutableDataSet().set(FAIL_OPTION_KEY, true);
                 } else {
-                    options = new MutableDataSet(options).set(FAIL, true);
+                    options = new MutableDataSet(options).set(FAIL_OPTION_KEY, true);
                 }
             } else {
                 if (options == null) {
-                    options = options(option);
+                    try {
+                        options = options(option);
+                    } catch (AssumptionViolatedException e) {
+                        throwIgnoredOption(example, optionSets, option);
+                    }
+
                     if (options == null) {
                         throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
                     }
                 } else {
-                    DataHolder dataSet = options(option);
+                    DataHolder dataSet = null;
+                    try {
+                        dataSet = options(option);
+                    } catch (AssumptionViolatedException e) {
+                        throwIgnoredOption(example, optionSets, option);
+                    }
+
                     if (dataSet != null) {
                         if (isFirst) {
                             options = new MutableDataSet(options);
@@ -86,6 +95,17 @@ public abstract class RenderingTestCase {
             }
         }
         return options;
+    }
+
+    protected static void throwIgnoredOption() {
+        throw new AssumptionViolatedException("");
+    }
+
+    private void throwIgnoredOption(SpecExample example, String optionSets, String option) {
+        if (example == null)
+            throw new AssumptionViolatedException("Ignored: SpecExample test case options(" + optionSets + ") is using " + option + " option");
+        else
+            throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option");
     }
 
     protected String ast(Node node) {
@@ -108,11 +128,19 @@ public abstract class RenderingTestCase {
         assertRendering(source, expectedHtml, null);
     }
 
+    /**
+     * @return return true if actual html should be used in comparison, else only actual AST will be used in compared
+     */
+    protected boolean useActualHtml() {
+        return true;
+    }
+
     protected void assertRendering(String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         Node node = parser().withOptions(options).parse(source);
         String html = renderer().withOptions(options).render(node);
         actualHtml(html, optionsSet);
+        boolean useActualHtml = useActualHtml();
 
         // include source for better assertion errors
         String expected;
@@ -123,15 +151,15 @@ public abstract class RenderingTestCase {
             expected = outExpected.toString();
 
             StringBuilder outActual = new StringBuilder();
-            DumpSpecReader.addSpecExample(outActual, source, html, "", optionsSet, true, example().getSection(), example().getExampleNumber());
+            DumpSpecReader.addSpecExample(outActual, source, useActualHtml ? html : expectedHtml, "", optionsSet, true, example().getSection(), example().getExampleNumber());
             actual = outActual.toString();
         } else {
             expected = DumpSpecReader.addSpecExample(source, expectedHtml, "", optionsSet);
-            actual = DumpSpecReader.addSpecExample(source, html, "", optionsSet);
+            actual = DumpSpecReader.addSpecExample(source, useActualHtml ? html : expectedHtml, "", optionsSet);
         }
 
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -147,6 +175,7 @@ public abstract class RenderingTestCase {
         actualHtml(html, optionsSet);
         String ast = ast(node);
         actualAst(ast, optionsSet);
+        boolean useActualHtml = useActualHtml();
 
         // include source for better assertion errors
         String expected;
@@ -157,14 +186,14 @@ public abstract class RenderingTestCase {
             expected = outExpected.toString();
 
             StringBuilder outActual = new StringBuilder();
-            DumpSpecReader.addSpecExample(outActual, source, html, ast, optionsSet, true, example().getSection(), example().getExampleNumber());
+            DumpSpecReader.addSpecExample(outActual, source, useActualHtml ? html : expectedHtml, ast, optionsSet, true, example().getSection(), example().getExampleNumber());
             actual = outActual.toString();
         } else {
             expected = DumpSpecReader.addSpecExample(source, expectedHtml, expectedAst, optionsSet);
-            actual = DumpSpecReader.addSpecExample(source, html, ast, optionsSet);
+            actual = DumpSpecReader.addSpecExample(source, useActualHtml ? html : expectedHtml, ast, optionsSet);
         }
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
 
@@ -177,7 +206,7 @@ public abstract class RenderingTestCase {
         Node node = parser().withOptions(options).parse(source);
         String ast = ast(node);
         actualAst(ast, optionsSet);
-        
+
         String expected;
         String actual;
         if (example() != null && example().getSection() != null) {
@@ -193,8 +222,7 @@ public abstract class RenderingTestCase {
             actual = DumpSpecReader.addSpecExample(source, "", ast, optionsSet);
         }
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL_OPTION_KEY)) thrown.expect(ComparisonFailure.class);
         assertEquals(expected, actual);
     }
-
 }

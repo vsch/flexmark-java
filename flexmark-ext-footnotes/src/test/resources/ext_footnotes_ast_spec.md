@@ -10,15 +10,223 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Footnotes
 
-Converts footnote references and definitions to footnotes in the HTML
-page. A footnote is a link reference starting with a ^ with the
-definition being the same: [^ref]: footnote.
+Converts footnote references and definitions to footnotes in the HTML page. A footnote is a link
+reference starting with a ^ with the definition being the same: [^ref]: footnote.
 
-A footnote definition is a container block that can contain any element
-as long as it is indented by 4 spaces or a tab from the indent level of
-the footnote.
+A footnote definition is a container block that can contain any element as long as it is
+indented by 4 spaces or a tab from the indent level of the footnote.
+
+basic
 
 ```````````````````````````````` example Footnotes: 1
+text [^footnote] embedded.
+
+[^footnote]: footnote text
+with continuation
+
+.
+<p>text <sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup> embedded.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>footnote text
+      with continuation</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 74]
+  Paragraph[0, 27]
+    Text[0, 5] chars:[0, 5, "text "]
+    Footnote[5, 16] ordinal: 1  textOpen:[5, 7, "[^"] text:[7, 15, "footnote"] textClose:[15, 16, "]"]
+      Text[7, 15] chars:[7, 15, "footnote"]
+    Text[16, 26] chars:[16, 26, " embedded."]
+  FootnoteBlock[28, 54] ordinal: 1  open:[28, 30] text:[30, 38] close:[38, 40] footnote:[41, 54]
+    Paragraph[41, 73]
+      Text[41, 54] chars:[41, 54, "footn"..." text"]
+      SoftLineBreak[54, 55]
+      Text[55, 72] chars:[55, 72, "with "..."ation"]
+````````````````````````````````
+
+
+undefined
+
+```````````````````````````````` example Footnotes: 2
+text [^undefined] embedded.
+
+[^footnote]: footnote text
+with continuation
+
+.
+<p>text [^undefined] embedded.</p>
+.
+Document[0, 75]
+  Paragraph[0, 28]
+    Text[0, 5] chars:[0, 5, "text "]
+    Footnote[5, 17] ordinal: 0  textOpen:[5, 7, "[^"] text:[7, 16, "undefined"] textClose:[16, 17, "]"]
+      Text[7, 16] chars:[7, 16, "undefined"]
+    Text[17, 27] chars:[17, 27, " embedded."]
+  FootnoteBlock[29, 55] ordinal: 0  open:[29, 31] text:[31, 39] close:[39, 41] footnote:[42, 55]
+    Paragraph[42, 74]
+      Text[42, 55] chars:[42, 55, "footn"..." text"]
+      SoftLineBreak[55, 56]
+      Text[56, 73] chars:[56, 73, "with "..."ation"]
+````````````````````````````````
+
+
+duplicated
+
+```````````````````````````````` example Footnotes: 3
+text [^footnote] embedded.
+
+[^footnote]: footnote text
+with continuation
+
+[^footnote]: duplicated footnote text
+with continuation
+
+.
+<p>text <sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup> embedded.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>footnote text
+      with continuation</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 131]
+  Paragraph[0, 27]
+    Text[0, 5] chars:[0, 5, "text "]
+    Footnote[5, 16] ordinal: 1  textOpen:[5, 7, "[^"] text:[7, 15, "footnote"] textClose:[15, 16, "]"]
+      Text[7, 15] chars:[7, 15, "footnote"]
+    Text[16, 26] chars:[16, 26, " embedded."]
+  FootnoteBlock[28, 54] ordinal: 1  open:[28, 30] text:[30, 38] close:[38, 40] footnote:[41, 54]
+    Paragraph[41, 73]
+      Text[41, 54] chars:[41, 54, "footn"..." text"]
+      SoftLineBreak[54, 55]
+      Text[55, 72] chars:[55, 72, "with "..."ation"]
+  FootnoteBlock[74, 111] ordinal: 0  open:[74, 76] text:[76, 84] close:[84, 86] footnote:[87, 111]
+    Paragraph[87, 130]
+      Text[87, 111] chars:[87, 111, "dupli"..." text"]
+      SoftLineBreak[111, 112]
+      Text[112, 129] chars:[112, 129, "with "..."ation"]
+````````````````````````````````
+
+
+nested
+
+```````````````````````````````` example Footnotes: 4
+text [^footnote] embedded.
+
+[^footnote]: footnote text with [^another] embedded footnote
+with continuation
+
+[^another]: footnote text
+with continuation
+
+.
+<p>text <sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup> embedded.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>footnote text with <sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup> embedded footnote
+      with continuation</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+    <li id="fn-2">
+      <p>footnote text
+      with continuation</p>
+      <a href="#fnref-2" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 153]
+  Paragraph[0, 27]
+    Text[0, 5] chars:[0, 5, "text "]
+    Footnote[5, 16] ordinal: 1  textOpen:[5, 7, "[^"] text:[7, 15, "footnote"] textClose:[15, 16, "]"]
+      Text[7, 15] chars:[7, 15, "footnote"]
+    Text[16, 26] chars:[16, 26, " embedded."]
+  FootnoteBlock[28, 88] ordinal: 1  open:[28, 30] text:[30, 38] close:[38, 40] footnote:[41, 88]
+    Paragraph[41, 107]
+      Text[41, 60] chars:[41, 60, "footn"..."with "]
+      Footnote[60, 70] ordinal: 2  textOpen:[60, 62, "[^"] text:[62, 69, "another"] textClose:[69, 70, "]"]
+        Text[62, 69] chars:[62, 69, "another"]
+      Text[70, 88] chars:[70, 88, " embe"..."tnote"]
+      SoftLineBreak[88, 89]
+      Text[89, 106] chars:[89, 106, "with "..."ation"]
+  FootnoteBlock[108, 133] ordinal: 2  open:[108, 110] text:[110, 117] close:[117, 119] footnote:[120, 133]
+    Paragraph[120, 152]
+      Text[120, 133] chars:[120, 133, "footn"..." text"]
+      SoftLineBreak[133, 134]
+      Text[134, 151] chars:[134, 151, "with "..."ation"]
+````````````````````````````````
+
+
+circular
+
+```````````````````````````````` example Footnotes: 5
+text [^footnote] embedded.
+
+[^footnote]: footnote text with [^another] embedded footnote
+with continuation
+
+[^another]: footnote text with [^another] embedded footnote
+with continuation
+
+.
+<p>text <sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup> embedded.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>footnote text with <sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup> embedded footnote
+      with continuation</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+    <li id="fn-2">
+      <p>footnote text with <sup id="fnref-2"><a class="footnote-ref" href="#fn-2">2</a></sup> embedded footnote
+      with continuation</p>
+      <a href="#fnref-2" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 187]
+  Paragraph[0, 27]
+    Text[0, 5] chars:[0, 5, "text "]
+    Footnote[5, 16] ordinal: 1  textOpen:[5, 7, "[^"] text:[7, 15, "footnote"] textClose:[15, 16, "]"]
+      Text[7, 15] chars:[7, 15, "footnote"]
+    Text[16, 26] chars:[16, 26, " embedded."]
+  FootnoteBlock[28, 88] ordinal: 1  open:[28, 30] text:[30, 38] close:[38, 40] footnote:[41, 88]
+    Paragraph[41, 107]
+      Text[41, 60] chars:[41, 60, "footn"..."with "]
+      Footnote[60, 70] ordinal: 2  textOpen:[60, 62, "[^"] text:[62, 69, "another"] textClose:[69, 70, "]"]
+        Text[62, 69] chars:[62, 69, "another"]
+      Text[70, 88] chars:[70, 88, " embe"..."tnote"]
+      SoftLineBreak[88, 89]
+      Text[89, 106] chars:[89, 106, "with "..."ation"]
+  FootnoteBlock[108, 167] ordinal: 2  open:[108, 110] text:[110, 117] close:[117, 119] footnote:[120, 167]
+    Paragraph[120, 186]
+      Text[120, 139] chars:[120, 139, "footn"..."with "]
+      Footnote[139, 149] ordinal: 2  textOpen:[139, 141, "[^"] text:[141, 148, "another"] textClose:[148, 149, "]"]
+        Text[141, 148] chars:[141, 148, "another"]
+      Text[149, 167] chars:[149, 167, " embe"..."tnote"]
+      SoftLineBreak[167, 168]
+      Text[168, 185] chars:[168, 185, "with "..."ation"]
+````````````````````````````````
+
+
+compound
+
+```````````````````````````````` example Footnotes: 6
 This paragraph has a footnote[^footnote].
 
 [^footnote]: This is the body of the footnote.
@@ -84,7 +292,7 @@ Document[0, 262]
 
 Not a footnote nor a footnote definition if space between [ and ^.
 
-```````````````````````````````` example Footnotes: 2
+```````````````````````````````` example Footnotes: 7
 This paragraph has no footnote[ ^footnote].
 
 [ ^footnote]: This is the body of the footnote.
@@ -133,7 +341,7 @@ Document[0, 265]
 
 Unused footnotes are not used and do not show up on the page.
 
-```````````````````````````````` example Footnotes: 3
+```````````````````````````````` example Footnotes: 8
 This paragraph has a footnote[^2].
 
 [^1]: This is the body of the unused footnote.
@@ -213,10 +421,9 @@ Document[0, 351]
 ````````````````````````````````
 
 
-Undefined footnotes are rendered as if they were text, with emphasis
-left as is.
+Undefined footnotes are rendered as if they were text, with emphasis left as is.
 
-```````````````````````````````` example Footnotes: 4
+```````````````````````````````` example Footnotes: 9
 This paragraph has a footnote[^**footnote**].
 
 [^footnote]: This is the body of the footnote.
@@ -264,10 +471,9 @@ Document[0, 266]
 ````````````````````````````````
 
 
-Footnote numbers are assigned in order of their reference in the
-document
+Footnote numbers are assigned in order of their reference in the document
 
-```````````````````````````````` example Footnotes: 5
+```````````````````````````````` example Footnotes: 10
 This paragraph has a footnote[^2]. Followed by another[^1]. 
 
 [^1]: This is the body of the unused footnote.
@@ -358,7 +564,7 @@ Document[0, 377]
 
 Footnotes can contain references to other footnotes.
 
-```````````````````````````````` example Footnotes: 6
+```````````````````````````````` example Footnotes: 11
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -449,7 +655,7 @@ Document[0, 385]
 
 Customized strings
 
-```````````````````````````````` example(Footnotes: 7) options(custom)
+```````````````````````````````` example(Footnotes: 12) options(custom)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -540,7 +746,7 @@ Document[0, 385]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 8) options(link-class-none, back-link-class-text)
+```````````````````````````````` example(Footnotes: 13) options(link-class-none, back-link-class-text)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.
@@ -570,7 +776,7 @@ Document[0, 78]
 
 Customized link ref class
 
-```````````````````````````````` example(Footnotes: 9) options(link-class-text, back-link-class-none)
+```````````````````````````````` example(Footnotes: 14) options(link-class-text, back-link-class-none)
 This paragraph has a footnote[^2].  
 
 [^2]: This is the body of the footnote.

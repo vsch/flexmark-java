@@ -40,6 +40,8 @@ public class CoreNodeRenderer implements NodeRenderer {
                 new NodeRenderingHandler<>(Heading.class, this::render),
                 new NodeRenderingHandler<>(HtmlBlock.class, this::render),
                 new NodeRenderingHandler<>(HtmlCommentBlock.class, this::render),
+                new NodeRenderingHandler<>(HtmlInnerBlock.class, this::render),
+                new NodeRenderingHandler<>(HtmlInnerBlockComment.class, this::render),
                 new NodeRenderingHandler<>(HtmlEntity.class, this::render),
                 new NodeRenderingHandler<>(HtmlInline.class, this::render),
                 new NodeRenderingHandler<>(HtmlInlineComment.class, this::render),
@@ -100,11 +102,11 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
 
         html.line();
-        html.tag("pre");
+        html.tag("pre").openPre();
         html.withAttr().tag("code");
         html.text(node.getContentChars().normalizeEOL());
         html.tag("/code");
-        html.tag("/pre");
+        html.tag("/pre").closePre();
         html.line();
     }
 
@@ -114,11 +116,11 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
-        html.tag("pre");
+        html.tag("pre").openPre();
         html.tag("code");
         html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
         html.tag("/code");
-        html.tag("/pre");
+        html.tag("/pre").closePre();
         html.line();
     }
 
@@ -194,10 +196,23 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
-        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+        if (node.hasChildren()) {
+            // inner blocks handle rendering
+            context.renderChildren(node);
+        } else {
+            renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+        }
     }
 
     private void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {
+        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks);
+    }
+
+    private void render(HtmlInnerBlock node, NodeRendererContext context, HtmlWriter html) {
+        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+    }
+
+    private void render(HtmlInnerBlockComment node, NodeRendererContext context, HtmlWriter html) {
         renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks);
     }
 
@@ -276,9 +291,9 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
-            
+
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape());
-            
+
             html.attr("src", resolvedLink.getUrl());
             html.attr("alt", altText);
             if (node.getTitle().isNotNull()) {
@@ -293,7 +308,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             context.renderChildren(node);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape());
-            
+
             html.attr("href", resolvedLink.getUrl());
             if (node.getTitle().isNotNull()) {
                 html.attr("title", node.getTitle().unescape());
@@ -316,7 +331,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
 
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape());
-                
+
                 html.attr("src", resolvedLink.getUrl());
                 html.attr("alt", altText);
                 if (reference.getTitle().isNotNull()) {
@@ -346,7 +361,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             } else {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
-                
+
                 ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape());
 
                 html.attr("href", resolvedLink.getUrl());

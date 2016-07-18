@@ -104,13 +104,13 @@ public class DefinitionBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            BasedSequence line = state.getLine();
-            if (DEFINITION_BLOCK_START.matcher(line).matches()) {
-                return BlockStart.of(new DefinitionBlockParser(state.getProperties()))
-                        .atIndex(state.getIndex())
-                        //.replaceActiveBlockParser()
-                        ;
-            }
+            //BasedSequence line = state.getLine();
+            //if (DEFINITION_BLOCK_START.matcher(line).matches()) {
+            //    return BlockStart.of(new DefinitionBlockParser(state.getProperties()))
+            //            .atIndex(state.getIndex())
+            //            //.replaceActiveBlockParser()
+            //            ;
+            //}
             return BlockStart.none();
         }
     }

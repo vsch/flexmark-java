@@ -30,5 +30,4 @@ public abstract class HtmlBlockBase extends Block {
     public HtmlBlockBase(BlockContent blockContent) {
         super(blockContent);
     }
-
 }

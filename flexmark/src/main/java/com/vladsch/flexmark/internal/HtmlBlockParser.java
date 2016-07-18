@@ -4,11 +4,13 @@ import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HtmlBlockParser extends AbstractBlockParser {
@@ -67,10 +69,12 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     private boolean finished = false;
     private BlockContent content = new BlockContent();
+    final private boolean parseInnerHtmlComments;
 
-    private HtmlBlockParser(Pattern closingPattern, boolean isComment) {
+    private HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment) {
         this.closingPattern = closingPattern;
-        this.block = isComment ?  new HtmlCommentBlock() : new HtmlBlock();
+        this.block = isComment ? new HtmlCommentBlock() : new HtmlBlock();
+        this.parseInnerHtmlComments = options.get(Parser.PARSE_INNER_HTML_COMMENTS);
     }
 
     @Override
@@ -105,6 +109,33 @@ public class HtmlBlockParser extends AbstractBlockParser {
     public void closeBlock(ParserState parserState) {
         block.setContent(content);
         content = null;
+
+        // split out inner comments
+        if (!(block instanceof HtmlCommentBlock) && parseInnerHtmlComments) {
+            // need to break it up into non-comments and comments
+            int lastIndex = 0;
+            BasedSequence chars = block.getContentChars();
+            if (chars.eolLength() > 0) chars = chars.midSequence(0, -1);
+            Matcher matcher = Parsing.HTML_COMMENT.matcher(chars);
+            while (matcher.find()) {
+                int index = matcher.start();
+                if (lastIndex < index) {
+                    HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, index));
+                    block.appendChild(html);
+                }
+
+                lastIndex = matcher.end();
+                HtmlInnerBlockComment htmlComment = new HtmlInnerBlockComment(chars.subSequence(index, lastIndex));
+                block.appendChild(htmlComment);
+            }
+
+            if (lastIndex > 0) {
+                if (lastIndex < chars.length()) {
+                    HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, chars.length()));
+                    block.appendChild(html);
+                }
+            }
+        }
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -165,7 +196,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     Pattern closer = BLOCK_PATTERNS[blockType][1];
                     boolean matches = opener.matcher(line.subSequence(nextNonSpace, line.length())).find();
                     if (matches) {
-                        return BlockStart.of(new HtmlBlockParser(closer, blockType == COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
+                        return BlockStart.of(new HtmlBlockParser(state.getProperties(), closer, blockType == COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
                     }
                 }
             }

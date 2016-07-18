@@ -3,7 +3,7 @@ package com.vladsch.flexmark.test;
 import com.vladsch.flexmark.internal.util.ast.NodeVisitorBase;
 import com.vladsch.flexmark.node.Node;
 
-class AstCollectingVisitor extends NodeVisitorBase {
+public class AstCollectingVisitor extends NodeVisitorBase {
     public static final String EOL = "\n";
     protected StringBuilder output = new StringBuilder();
     protected int indent = 0;
@@ -11,6 +11,12 @@ class AstCollectingVisitor extends NodeVisitorBase {
 
     public String getAst() {
         return output.toString();
+    }
+    
+    public void clear() {
+        output = new StringBuilder();
+        indent = 0;
+        eolPending = false;
     }
 
     protected void appendIndent() {

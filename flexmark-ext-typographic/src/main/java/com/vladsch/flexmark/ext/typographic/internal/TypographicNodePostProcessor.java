@@ -39,70 +39,68 @@ public class TypographicNodePostProcessor extends NodePostProcessor {
         BasedSequence literal = original;
 
         Matcher m = SMARTS_PATTERN.matcher(literal);
-        Node lastNode = node;
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
-        TextBase textBase = null;
+        TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
 
         while (m.find()) {
             //String found = m.group();
             if (m.group(1) == null) {
-                BasedSequence smart = literal.subSequence(m.start(2), m.end(2));
+                BasedSequence toDecorateText = literal.subSequence(m.start(2), m.end(2));
 
-                int startOffset = smart.getStartOffset();
-                int endOffset = smart.getEndOffset();
+                int startOffset = m.start(2);
+                int endOffset = m.end(2);
 
                 if (wrapInTextBase) {
                     wrapInTextBase = false;
                     textBase = new TextBase(original);
                     node.insertBefore(textBase);
-                    textBase.appendChild(node);
                     state.nodeAdded(textBase);
                 }
 
                 if (startOffset != lastEscaped) {
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                     Node node1 = new Text(escapedChars);
-                    lastNode.insertAfter(node1);
-                    lastNode = node1;
-                    state.nodeAdded(lastNode);
+                    textBase.appendChild(node1);
+                    state.nodeAdded(node1);
                 }
 
                 String typographicSmarts;
 
-                if (smart.matches("--")) {
+                if (toDecorateText.matches("--")) {
                     typographicSmarts = "&ndash;";
-                } else if (smart.matches("---")) {
+                } else if (toDecorateText.matches("---")) {
                     typographicSmarts = "&mdash;";
-                } else if (smart.matches("'")) {
+                } else if (toDecorateText.matches("'")) {
                     typographicSmarts = "&rsquo;";
                 } else {
                     typographicSmarts = "&hellip;";
                 }
 
-                TypographicSmarts smartsNode = new TypographicSmarts(smart, typographicSmarts);
-                smartsNode.setTypographicText(typographicSmarts);
-
-                lastNode.insertAfter(smartsNode);
-                lastNode = smartsNode;
-                Text node1 = new Text(smart);
-                smartsNode.appendChild(node1);
-                state.nodeAddedWithChildren(lastNode);
+                BasedSequence origToDecorateText = original.subSequence(startOffset, endOffset);
+                TypographicSmarts decorationNode = new TypographicSmarts(toDecorateText, typographicSmarts);
+                decorationNode.setTypographicText(typographicSmarts);
+                textBase.appendChild(decorationNode);
+                //Text undecoratedTextNode = new Text(origToDecorateText);
+                //decorationNode.appendChild(undecoratedTextNode);
+                //state.nodeAddedWithChildren(decorationNode);
+                state.nodeAdded(decorationNode);
 
                 lastEscaped = endOffset;
             }
         }
 
-        if (lastEscaped != original.length()) {
-            BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            Node node1 = new Text(escapedChars);
-            lastNode.insertAfter(node1);
-            state.nodeAdded(lastNode);
-        }
+        if (lastEscaped > 0) {
+            if (lastEscaped != original.length()) {
+                BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
+                Node node1 = new Text(escapedChars);
+                textBase.appendChild(node1);
+                state.nodeAdded(node1);
+            }
 
-        lastNode = node.getNext();
-        node.unlink();
-        state.nodeRemoved(node);
+            node.unlink();
+            state.nodeRemoved(node);
+        }
     }
 
     public static class Factory extends NodePostProcessorFactory {

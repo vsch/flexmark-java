@@ -55,6 +55,22 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
             }
         });
     }
+    private final ZzzzzzOptions options;
+
+    ZzzzzzParagraphPreProcessor(DataHolder options) {
+        this.options = new ZzzzzzOptions(options);
+    }
+
+    private ZzzzzzParagraphPreProcessor(ZzzzzzOptions options) {
+        this.options = options;
+    }
+
+    @Override
+    public int preProcessBlock(Paragraph block, ParserState state) {
+        //InlineParser inlineParser = state.getInlineParser();
+        return 0;
+    }
+
     public static ParagraphPreProcessorFactory Factory() {
         return new ParagraphPreProcessorFactory() {
             @Override
@@ -77,21 +93,5 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
                 return new ZzzzzzParagraphPreProcessor(state.getProperties());
             }
         };
-    }
-
-    private final ZzzzzzOptions options;
-
-    private ZzzzzzParagraphPreProcessor(DataHolder options) {
-        this.options = new ZzzzzzOptions(options);
-    }
-
-    private ZzzzzzParagraphPreProcessor(ZzzzzzOptions options) {
-        this.options = options;
-    }
-
-    @Override
-    public int preProcessBlock(Paragraph block, ParserState state) {
-        //InlineParser inlineParser = state.getInlineParser();
-        return 0;
     }
 }

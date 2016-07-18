@@ -2,15 +2,29 @@ package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.internal.BlockContent;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.BulletListItem;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.node.ListItem;
 
 import java.util.List;
 
 /**
  * A Task list item
  */
-public class TaskListItem extends BulletListItem {
+public class TaskListItem extends ListItem {
+    protected BasedSequence taskOpeningMarker = SubSequence.NULL;
+
+    @Override
+    public void getAstExtra(StringBuilder out) {
+        super.getAstExtra(out);
+        segmentSpanChars(out, taskOpeningMarker, "taskOpen");
+    }
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return new BasedSequence[] { openingMarker, taskOpeningMarker };
+    }
+
     @Override
     public boolean isParagraphInTightListItem() {
         // we handle our own paragraph wrapping
@@ -34,13 +48,26 @@ public class TaskListItem extends BulletListItem {
 
     public TaskListItem(BulletListItem block) {
         super(block.getChars(), block.getContentLines());
+        openingMarker = block.getOpeningMarker();
 
         takeChildren(block);
         setCharsFromContent();
     }
 
-    public boolean isItemDone() {
-        Node firstChild = getFirstChild();
-        return firstChild instanceof TaskListItemMarker && ((TaskListItemMarker) firstChild).isItemDoneMarker();
+    public BasedSequence getTaskOpeningMarker() {
+        return taskOpeningMarker;
+    }
+
+    public void setTaskOpeningMarker(BasedSequence taskOpeningMarker) {
+        this.taskOpeningMarker = taskOpeningMarker;
+    }
+
+    @Override
+    public void setOpeningMarker(BasedSequence openingMarker) {
+        throw new IllegalStateException();
+    }
+
+    public boolean isItemDoneMarker() {
+        return !taskOpeningMarker.matches("[ ]");
     }
 }

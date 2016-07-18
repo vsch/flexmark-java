@@ -35,7 +35,7 @@ public abstract class ListItem extends Block {
     public boolean isTight() {
         return tight && isInTightList();
     }
-    
+
     public boolean isInTightList() {
         return !(getParent() instanceof ListBlock) || ((ListBlock) getParent()).isTight();
     }
@@ -63,5 +63,4 @@ public abstract class ListItem extends Block {
     public ListItem(BlockContent blockContent) {
         super(blockContent);
     }
-
 }

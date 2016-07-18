@@ -20,5 +20,4 @@ public class OrderedListItem extends ListItem {
     public OrderedListItem(BlockContent blockContent) {
         super(blockContent);
     }
-
 }

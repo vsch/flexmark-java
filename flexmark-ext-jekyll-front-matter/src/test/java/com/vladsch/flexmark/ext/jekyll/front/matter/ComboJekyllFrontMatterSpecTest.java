@@ -27,7 +27,7 @@ import org.junit.runners.Parameterized;
 import java.util.*;
 
 public class ComboJekyllFrontMatterSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/jekyll_front_matter_ast_spec.md";
+    private static final String SPEC_RESOURCE = "/ext_jekyll_front_matter_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)

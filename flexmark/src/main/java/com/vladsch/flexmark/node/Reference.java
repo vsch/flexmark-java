@@ -58,7 +58,7 @@ public class Reference extends Node {
             } else {
                 this.url = url;
             }
-            
+
             // parse out the anchor marker and ref
             int pos = this.url.indexOf('#');
             if (pos < 0) {
@@ -178,5 +178,4 @@ public class Reference extends Node {
     protected String toStringAttributes() {
         return "reference=" + reference + ", url=" + url;
     }
-
 }

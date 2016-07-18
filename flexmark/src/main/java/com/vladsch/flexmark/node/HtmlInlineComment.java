@@ -24,5 +24,4 @@ public class HtmlInlineComment extends HtmlInlineBase {
     public HtmlInlineComment(BasedSequence chars) {
         super(chars);
     }
-
 }

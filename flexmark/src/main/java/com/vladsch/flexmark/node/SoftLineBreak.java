@@ -14,5 +14,4 @@ public class SoftLineBreak extends Node {
     public SoftLineBreak(BasedSequence chars) {
         super(chars);
     }
-
 }

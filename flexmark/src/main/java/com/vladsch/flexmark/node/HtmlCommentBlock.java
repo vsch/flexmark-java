@@ -25,5 +25,4 @@ public class HtmlCommentBlock extends HtmlBlockBase {
     public HtmlCommentBlock(BlockContent blockContent) {
         super(blockContent);
     }
-
 }

@@ -26,5 +26,4 @@ public class IndentedCodeBlock extends Block {
     public IndentedCodeBlock(BlockContent blockContent) {
         super(blockContent);
     }
-
 }

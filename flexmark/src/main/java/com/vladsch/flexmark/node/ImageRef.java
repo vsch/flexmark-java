@@ -29,5 +29,4 @@ public class ImageRef extends RefNode {
     public ImageRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence referenceCloseMarker) {
         super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, referenceCloseMarker);
     }
-
 }

@@ -29,5 +29,4 @@ public class LinkRef extends RefNode {
     public LinkRef(BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence referenceOpenMarker, BasedSequence referenceCloseMarker) {
         super(textOpenMarker, text, textCloseMarker, referenceOpenMarker, referenceCloseMarker);
     }
-
 }

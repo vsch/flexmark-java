@@ -8,7 +8,7 @@ import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;
 
-import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
+import static com.vladsch.flexmark.test.RenderingTestCase.FAIL_OPTION_KEY;
 
 class DumpSpecReader extends SpecReader {
     final private StringBuilder sb = new StringBuilder();
@@ -39,7 +39,7 @@ class DumpSpecReader extends SpecReader {
             options = null;
         }
 
-        if (options != null && options.get(FAIL)) {
+        if (options != null && options.get(FAIL_OPTION_KEY)) {
             ignoredCase = true;
         }
 

@@ -88,5 +88,4 @@ public abstract class ContentNode extends Node implements Content {
     public void setContentLines(List<BasedSequence> contentLines) {
         this.lineSegments = contentLines;
     }
-
 }

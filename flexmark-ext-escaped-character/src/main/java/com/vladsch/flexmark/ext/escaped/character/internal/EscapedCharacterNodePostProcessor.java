@@ -37,58 +37,59 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
 
-        Node lastNode = node;
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
-        TextBase textBase = null;
+        TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
 
         ArrayList<ReplacedTextRegion> replacedRegions = textMapper.getRegions();
-        
+
         for (ReplacedTextRegion region : replacedRegions) {
             //String found = m.group();
-            if (original.charAt(region.getOriginal().getStartOffset()) == '\\') {
-                int startOffset = region.getOriginal().getStartOffset();
-                int endOffset = region.getOriginal().getEndOffset();
-
+            int startOffset = region.getOriginal().getStartOffset() - original.getStartOffset();
+            int endOffset = region.getOriginal().getEndOffset() - original.getStartOffset();
+            
+            if (original.charAt(startOffset) == '\\' && region.getReplaced().length() == 1) {
                 if (wrapInTextBase) {
                     wrapInTextBase = false;
                     textBase = new TextBase(original);
                     node.insertBefore(textBase);
-                    textBase.appendChild(node);
                     state.nodeAdded(textBase);
                 }
 
                 if (startOffset != lastEscaped) {
+                    if (startOffset > original.length() || lastEscaped > original.length()) {
+                        int tmp = 0;
+                    }
                     BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                     Node node1 = new Text(escapedChars);
-                    lastNode.insertAfter(node1);
-                    lastNode = node1;
-                    state.nodeAdded(lastNode);
+                    textBase.appendChild(node1);
+                    state.nodeAdded(node1);
                 }
 
-                BasedSequence originalEscaped = original.subSequence(startOffset, endOffset);
-                BasedSequence text = originalEscaped.subSequence(1);
-                EscapedCharacter escapedCharacter = new EscapedCharacter(originalEscaped.subSequence(0, 1), text);
-                lastNode.insertAfter(escapedCharacter);
-                lastNode = escapedCharacter;
-                Text node1 = new Text(text);
-                node1.appendChild(node1);
-                state.nodeAddedWithChildren(lastNode);
+                BasedSequence origToDecorateText = original.subSequence(startOffset, endOffset);
+                BasedSequence text = origToDecorateText.subSequence(1);
+                EscapedCharacter decorationNode = new EscapedCharacter(origToDecorateText.subSequence(0, 1), text);
+                textBase.appendChild(decorationNode);
+                //Text undecoratedTextNode = new Text(origToDecorateText);
+                //decorationNode.appendChild(undecoratedTextNode);
+                //state.nodeAddedWithChildren(decorationNode);
+                state.nodeAdded(decorationNode);
 
                 lastEscaped = endOffset;
             }
         }
 
-        if (lastEscaped != original.length()) {
-            BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            Node node1 = new Text(escapedChars);
-            lastNode.insertAfter(node1);
-            state.nodeAdded(lastNode);
-        }
+        if (lastEscaped > 0) {
+            if (lastEscaped != original.length()) {
+                BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
+                Node node1 = new Text(escapedChars);
+                textBase.appendChild(node1);
+                state.nodeAdded(node1);
+            }
 
-        lastNode = node.getNext();
-        node.unlink();
-        state.nodeRemoved(node);
+            node.unlink();
+            state.nodeRemoved(node);
+        }
     }
 
     public static class Factory extends NodePostProcessorFactory {

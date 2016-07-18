@@ -11,19 +11,18 @@ import com.vladsch.flexmark.node.Node;
  */
 public class JekyllFrontMatterBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence content = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {
         segmentSpan(out, openingMarker, "open");
-        segmentSpan(out, content, "content");
+        segmentSpan(out, getContent(), "content");
         segmentSpan(out, closingMarker, "close");
     }
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, content, closingMarker };
+        return new BasedSequence[] { openingMarker, closingMarker };
     }
 
     public JekyllFrontMatterBlock() {
@@ -48,11 +47,7 @@ public class JekyllFrontMatterBlock extends CustomBlock {
     }
 
     public BasedSequence getContent() {
-        return content;
-    }
-
-    public void setContent(BasedSequence content) {
-        this.content = content;
+        return getContentChars();
     }
 
     public BasedSequence getClosingMarker() {

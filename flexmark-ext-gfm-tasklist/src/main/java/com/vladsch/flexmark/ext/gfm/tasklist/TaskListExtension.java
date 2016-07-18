@@ -38,7 +38,6 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.paragraphPreProcessorFactory(new TaskListParagraphPreProcessorFactory());
-        //parserBuilder.blockPreProcessorFactory(new TaskListBlockPreProcessorFactory());
     }
 
     @Override

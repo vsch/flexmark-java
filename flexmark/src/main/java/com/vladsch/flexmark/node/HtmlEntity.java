@@ -25,5 +25,4 @@ public class HtmlEntity extends Node {
     public HtmlEntity(BasedSequence chars) {
         super(chars);
     }
-
 }

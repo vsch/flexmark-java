@@ -12,13 +12,16 @@ import java.util.regex.Pattern;
 
 public class SpecReader {
     public static final String EXAMPLE_KEYWORD = "example";
-    public static final String EXAMPLE_START = "```````````````````````````````` " + EXAMPLE_KEYWORD;
-    public static final String EXAMPLE_START_NBSP = "````````````````````````````````\u00A0" + EXAMPLE_KEYWORD;
+    public static final String EXAMPLE_BREAK = "````````````````````````````````";
+    public static final String EXAMPLE_START = EXAMPLE_BREAK + " " + EXAMPLE_KEYWORD;
+    public static final String EXAMPLE_START_NBSP = EXAMPLE_BREAK + "\u00A0" + EXAMPLE_KEYWORD;
+    public static final String EXAMPLE_TEST_BREAK = "````````````````";
+    public static final String EXAMPLE_TEST_START = EXAMPLE_TEST_BREAK + " " + EXAMPLE_KEYWORD;
     public static final String OPTIONS_KEYWORD= "options";
     public static final String OPTIONS_STRING = " " + OPTIONS_KEYWORD;
     public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*(?:\\s|\u00A0)\\Q" + OPTIONS_KEYWORD + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
     public static final String TYPE_BREAK = ".";
-    public static final String EXAMPLE_BREAK = "````````````````````````````````";
+    public static final String TYPE_TEST_BREAK = "…";
     protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} *(.*)");
 
     protected final InputStream inputStream;

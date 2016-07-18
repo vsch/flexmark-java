@@ -29,29 +29,26 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         ReplacedTextMapper textMapper = new ReplacedTextMapper(original);
         BasedSequence literal = Escaping.unescape(original, textMapper);
         Iterable<LinkSpan> links = linkExtractor.extractLinks(literal);
-        Node lastNode = node;
         int lastEscaped = 0;
         boolean wrapInTextBase = !(node.getParent() instanceof TextBase);
-        TextBase textBase = null;
+        TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
 
         for (LinkSpan link : links) {
             BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
-            int index = textMapper.originalOffset(link.getBeginIndex());
+            int startOffset = textMapper.originalOffset(link.getBeginIndex());
 
             if (wrapInTextBase) {
                 wrapInTextBase = false;
                 textBase = new TextBase(original);
                 node.insertBefore(textBase);
-                textBase.appendChild(node);
                 state.nodeAdded(textBase);
             }
 
-            if (index != lastEscaped) {
-                BasedSequence escapedChars = original.subSequence(lastEscaped, index);
+            if (startOffset != lastEscaped) {
+                BasedSequence escapedChars = original.subSequence(lastEscaped, startOffset);
                 Node node1 = new Text(escapedChars);
-                lastNode.insertAfter(node1);
-                lastNode = node1;
-                state.nodeAdded(lastNode);
+                textBase.appendChild(node1);
+                state.nodeAdded(node1);
             }
 
             Text contentNode = new Text(linkText);
@@ -67,23 +64,23 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
 
             linkNode.setCharsFromContent();
             linkNode.appendChild(contentNode);
-            lastNode.insertAfter(linkNode);
-            lastNode = linkNode;
-            state.nodeAddedWithChildren(lastNode);
+            textBase.appendChild(linkNode);
+            state.nodeAddedWithChildren(linkNode);
 
             lastEscaped = textMapper.originalOffset(link.getEndIndex());
         }
 
-        if (lastEscaped != original.length()) {
-            BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
-            Node node1 = new Text(escapedChars);
-            lastNode.insertAfter(node1);
-            lastNode = node1;
-            state.nodeAdded(lastNode);
+        if (lastEscaped > 0) {
+            if (lastEscaped != original.length()) {
+                BasedSequence escapedChars = original.subSequence(lastEscaped, original.length());
+                Node node1 = new Text(escapedChars);
+                textBase.appendChild(node1);
+                state.nodeAdded(node1);
+            }
+
+            node.unlink();
+            state.nodeRemoved(node);
         }
-        
-        node.unlink();
-        state.nodeRemoved(node);
     }
 
     public static class Factory extends NodePostProcessorFactory {

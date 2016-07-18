@@ -25,5 +25,4 @@ public class Link extends InlineLinkNode {
     public Link(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence linkCloseMarker) {
         super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
     }
-
 }

@@ -45,5 +45,4 @@ public class OrderedList extends ListBlock {
     public void setDelimiter(char delimiter) {
         this.delimiter = delimiter;
     }
-
 }

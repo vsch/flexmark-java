@@ -119,15 +119,9 @@ empty task list items
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
 </ul>
 <ul>
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></p>
-  </li>
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></p>
-  </li>
-  <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></p>
-  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
 </ul>
 <ul>
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></li>
@@ -137,26 +131,17 @@ empty task list items
 .
 Document[0, 62]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 6] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
-    TaskListItem[6, 13] open:[0, 0]
-      TaskListItemMarker[9, 12] isItemDone=true chars:[9, 12, "[X]"]
-    TaskListItem[13, 22] open:[0, 0]
-      TaskListItemMarker[18, 21] isItemDone=true chars:[18, 21, "[x]"]
+    TaskListItem[0, 6] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
+    TaskListItem[6, 13] open:[6, 7, "-"] taskOpen:[9, 12, "[X]"]
+    TaskListItem[13, 22] open:[13, 14, "-"] taskOpen:[18, 21, "[x]"]
   BulletList[23, 43] isTight=false
-    TaskListItem[23, 29] open:[0, 0]
-      TaskListItemMarker[25, 28] isItemDone=false chars:[25, 28, "[ ]"]
-    TaskListItem[30, 36] open:[0, 0]
-      TaskListItemMarker[32, 35] isItemDone=true chars:[32, 35, "[x]"]
-    TaskListItem[37, 43] open:[0, 0]
-      TaskListItemMarker[39, 42] isItemDone=true chars:[39, 42, "[X]"]
+    TaskListItem[23, 29] open:[23, 24, "*"] taskOpen:[25, 28, "[ ]"]
+    TaskListItem[30, 36] open:[30, 31, "*"] taskOpen:[32, 35, "[x]"]
+    TaskListItem[37, 43] open:[37, 38, "*"] taskOpen:[39, 42, "[X]"]
   BulletList[44, 62] isTight=true
-    TaskListItem[44, 50] open:[0, 0]
-      TaskListItemMarker[46, 49] isItemDone=false chars:[46, 49, "[ ]"]
-    TaskListItem[50, 56] open:[0, 0]
-      TaskListItemMarker[52, 55] isItemDone=true chars:[52, 55, "[x]"]
-    TaskListItem[56, 62] open:[0, 0]
-      TaskListItemMarker[58, 61] isItemDone=true chars:[58, 61, "[X]"]
+    TaskListItem[44, 50] open:[44, 45, "+"] taskOpen:[46, 49, "[ ]"]
+    TaskListItem[50, 56] open:[50, 51, "+"] taskOpen:[52, 55, "[x]"]
+    TaskListItem[56, 62] open:[56, 57, "+"] taskOpen:[58, 61, "[X]"]
 ````````````````````````````````
 
 
@@ -201,42 +186,33 @@ non empty task list items
 .
 Document[0, 103]
   BulletList[0, 33] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[X]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[X]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
-    TaskListItem[22, 33] open:[0, 0]
-      TaskListItemMarker[24, 27] isItemDone=true chars:[24, 27, "[x]"]
+    TaskListItem[22, 33] open:[22, 23, "-"] taskOpen:[24, 27, "[x]"]
       Paragraph[28, 33]
         Text[28, 32] chars:[28, 32, "task"]
   BulletList[34, 69] isTight=false
-    TaskListItem[34, 45] open:[0, 0]
-      TaskListItemMarker[36, 39] isItemDone=false chars:[36, 39, "[ ]"]
+    TaskListItem[34, 45] open:[34, 35, "*"] taskOpen:[36, 39, "[ ]"]
       Paragraph[40, 45]
         Text[40, 44] chars:[40, 44, "task"]
-    TaskListItem[46, 57] open:[0, 0]
-      TaskListItemMarker[48, 51] isItemDone=true chars:[48, 51, "[x]"]
+    TaskListItem[46, 57] open:[46, 47, "*"] taskOpen:[48, 51, "[x]"]
       Paragraph[52, 57]
         Text[52, 56] chars:[52, 56, "task"]
-    TaskListItem[58, 69] open:[0, 0]
-      TaskListItemMarker[60, 63] isItemDone=true chars:[60, 63, "[X]"]
+    TaskListItem[58, 69] open:[58, 59, "*"] taskOpen:[60, 63, "[X]"]
       Paragraph[64, 69]
         Text[64, 68] chars:[64, 68, "task"]
   BulletList[70, 103] isTight=true
-    TaskListItem[70, 81] open:[0, 0]
-      TaskListItemMarker[72, 75] isItemDone=false chars:[72, 75, "[ ]"]
+    TaskListItem[70, 81] open:[70, 71, "+"] taskOpen:[72, 75, "[ ]"]
       Paragraph[76, 81]
         Text[76, 80] chars:[76, 80, "task"]
-    TaskListItem[81, 92] open:[0, 0]
-      TaskListItemMarker[83, 86] isItemDone=true chars:[83, 86, "[x]"]
+    TaskListItem[81, 92] open:[81, 82, "+"] taskOpen:[83, 86, "[x]"]
       Paragraph[87, 92]
         Text[87, 91] chars:[87, 91, "task"]
-    TaskListItem[92, 103] open:[0, 0]
-      TaskListItemMarker[94, 97] isItemDone=true chars:[94, 97, "[X]"]
+    TaskListItem[92, 103] open:[92, 93, "+"] taskOpen:[94, 97, "[X]"]
       Paragraph[98, 103]
         Text[98, 102] chars:[98, 102, "task"]
 ````````````````````````````````
@@ -283,58 +259,49 @@ non empty task list items with inlines
 .
 Document[0, 220]
   BulletList[0, 72] isTight=true
-    TaskListItem[0, 24] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 24] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 24]
         Text[6, 11] chars:[6, 11, "task "]
         StrongEmphasis[11, 23] textOpen:[11, 13, "**"] text:[13, 21, "emphasis"] textClose:[21, 23, "**"]
           Text[13, 21] chars:[13, 21, "emphasis"]
-    TaskListItem[24, 48] open:[0, 0]
-      TaskListItemMarker[26, 29] isItemDone=true chars:[26, 29, "[X]"]
+    TaskListItem[24, 48] open:[24, 25, "-"] taskOpen:[26, 29, "[X]"]
       Paragraph[30, 48]
         Text[30, 35] chars:[30, 35, "task "]
         StrongEmphasis[35, 47] textOpen:[35, 37, "**"] text:[37, 45, "emphasis"] textClose:[45, 47, "**"]
           Text[37, 45] chars:[37, 45, "emphasis"]
-    TaskListItem[48, 72] open:[0, 0]
-      TaskListItemMarker[50, 53] isItemDone=true chars:[50, 53, "[x]"]
+    TaskListItem[48, 72] open:[48, 49, "-"] taskOpen:[50, 53, "[x]"]
       Paragraph[54, 72]
         Text[54, 59] chars:[54, 59, "task "]
         StrongEmphasis[59, 71] textOpen:[59, 61, "**"] text:[61, 69, "emphasis"] textClose:[69, 71, "**"]
           Text[61, 69] chars:[61, 69, "emphasis"]
   BulletList[73, 147] isTight=false
-    TaskListItem[73, 97] open:[0, 0]
-      TaskListItemMarker[75, 78] isItemDone=false chars:[75, 78, "[ ]"]
+    TaskListItem[73, 97] open:[73, 74, "*"] taskOpen:[75, 78, "[ ]"]
       Paragraph[79, 97]
         Text[79, 84] chars:[79, 84, "task "]
         StrongEmphasis[84, 96] textOpen:[84, 86, "**"] text:[86, 94, "emphasis"] textClose:[94, 96, "**"]
           Text[86, 94] chars:[86, 94, "emphasis"]
-    TaskListItem[98, 122] open:[0, 0]
-      TaskListItemMarker[100, 103] isItemDone=true chars:[100, 103, "[x]"]
+    TaskListItem[98, 122] open:[98, 99, "*"] taskOpen:[100, 103, "[x]"]
       Paragraph[104, 122]
         Text[104, 109] chars:[104, 109, "task "]
         StrongEmphasis[109, 121] textOpen:[109, 111, "**"] text:[111, 119, "emphasis"] textClose:[119, 121, "**"]
           Text[111, 119] chars:[111, 119, "emphasis"]
-    TaskListItem[123, 147] open:[0, 0]
-      TaskListItemMarker[125, 128] isItemDone=true chars:[125, 128, "[X]"]
+    TaskListItem[123, 147] open:[123, 124, "*"] taskOpen:[125, 128, "[X]"]
       Paragraph[129, 147]
         Text[129, 134] chars:[129, 134, "task "]
         StrongEmphasis[134, 146] textOpen:[134, 136, "**"] text:[136, 144, "emphasis"] textClose:[144, 146, "**"]
           Text[136, 144] chars:[136, 144, "emphasis"]
   BulletList[148, 220] isTight=true
-    TaskListItem[148, 172] open:[0, 0]
-      TaskListItemMarker[150, 153] isItemDone=false chars:[150, 153, "[ ]"]
+    TaskListItem[148, 172] open:[148, 149, "+"] taskOpen:[150, 153, "[ ]"]
       Paragraph[154, 172]
         Text[154, 159] chars:[154, 159, "task "]
         StrongEmphasis[159, 171] textOpen:[159, 161, "**"] text:[161, 169, "emphasis"] textClose:[169, 171, "**"]
           Text[161, 169] chars:[161, 169, "emphasis"]
-    TaskListItem[172, 196] open:[0, 0]
-      TaskListItemMarker[174, 177] isItemDone=true chars:[174, 177, "[x]"]
+    TaskListItem[172, 196] open:[172, 173, "+"] taskOpen:[174, 177, "[x]"]
       Paragraph[178, 196]
         Text[178, 183] chars:[178, 183, "task "]
         StrongEmphasis[183, 195] textOpen:[183, 185, "**"] text:[185, 193, "emphasis"] textClose:[193, 195, "**"]
           Text[185, 193] chars:[185, 193, "emphasis"]
-    TaskListItem[196, 220] open:[0, 0]
-      TaskListItemMarker[198, 201] isItemDone=true chars:[198, 201, "[X]"]
+    TaskListItem[196, 220] open:[196, 197, "+"] taskOpen:[198, 201, "[X]"]
       Paragraph[202, 220]
         Text[202, 207] chars:[202, 207, "task "]
         StrongEmphasis[207, 219] textOpen:[207, 209, "**"] text:[209, 217, "emphasis"] textClose:[217, 219, "**"]
@@ -357,12 +324,10 @@ task list item class
 .
 Document[0, 22]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[x]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[x]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
@@ -386,12 +351,10 @@ task list item class on loose list
 .
 Document[0, 23]
   BulletList[0, 23] isTight=false
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[0, 0]
-      TaskListItemMarker[14, 17] isItemDone=true chars:[14, 17, "[x]"]
+    TaskListItem[12, 23] open:[12, 13, "-"] taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
@@ -410,12 +373,10 @@ loose task list item class
 .
 Document[0, 22]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[x]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[x]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
@@ -439,12 +400,10 @@ loose task list item class on loose list
 .
 Document[0, 23]
   BulletList[0, 23] isTight=false
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[0, 0]
-      TaskListItemMarker[14, 17] isItemDone=true chars:[14, 17, "[x]"]
+    TaskListItem[12, 23] open:[12, 13, "-"] taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
@@ -463,12 +422,10 @@ task list item class and p class
 .
 Document[0, 22]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[x]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[x]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
@@ -492,12 +449,10 @@ task list item class and p class on loose list
 .
 Document[0, 23]
   BulletList[0, 23] isTight=false
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[0, 0]
-      TaskListItemMarker[14, 17] isItemDone=true chars:[14, 17, "[x]"]
+    TaskListItem[12, 23] open:[12, 13, "-"] taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
@@ -516,12 +471,10 @@ custom marker task list item class and p class
 .
 Document[0, 22]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[x]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[x]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
@@ -545,12 +498,10 @@ task list item class and p class on loose list
 .
 Document[0, 23]
   BulletList[0, 23] isTight=false
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[0, 0]
-      TaskListItemMarker[14, 17] isItemDone=true chars:[14, 17, "[x]"]
+    TaskListItem[12, 23] open:[12, 13, "-"] taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
@@ -569,12 +520,10 @@ custom marker task list item class and p class
 .
 Document[0, 22]
   BulletList[0, 22] isTight=true
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[0, 0]
-      TaskListItemMarker[13, 16] isItemDone=true chars:[13, 16, "[x]"]
+    TaskListItem[11, 22] open:[11, 12, "-"] taskOpen:[13, 16, "[x]"]
       Paragraph[17, 22]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
@@ -598,12 +547,10 @@ task list item class and p class on loose list
 .
 Document[0, 23]
   BulletList[0, 23] isTight=false
-    TaskListItem[0, 11] open:[0, 0]
-      TaskListItemMarker[2, 5] isItemDone=false chars:[2, 5, "[ ]"]
+    TaskListItem[0, 11] open:[0, 1, "-"] taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[0, 0]
-      TaskListItemMarker[14, 17] isItemDone=true chars:[14, 17, "[x]"]
+    TaskListItem[12, 23] open:[12, 13, "-"] taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````

@@ -511,55 +511,55 @@ Fixed indentation with code blocks
     <p>item 1</p>
     <p>this is not code</p>
     <pre><code>this is code
-    </code></pre>
+</code></pre>
   </li>
   <li>
     <p>item 2</p>
     <p>this is not code</p>
     <pre><code>this is code
-    </code></pre>
+</code></pre>
   </li>
   <li>
     <p>item 3</p>
     <p>this is not code</p>
     <pre><code>this is code
-    </code></pre>
+</code></pre>
   </li>
   <li>
     <p>item 4</p>
     <p>this is not code</p>
     <pre><code>this is code
-    </code></pre>
+</code></pre>
     <ul>
       <li>
         <p>sub item 1</p>
         <p>this is not code</p>
         <pre><code>this is code
-        </code></pre>
+</code></pre>
       </li>
       <li>
         <p>sub item 2</p>
         <p>this is not code</p>
         <pre><code>this is code
-        </code></pre>
+</code></pre>
       </li>
       <li>
         <p>sub item 3</p>
         <p>this is not code</p>
         <pre><code>this is code
-        </code></pre>
+</code></pre>
       </li>
       <li>
         <p>sub item 4</p>
         <p>this is not code</p>
         <pre><code>this is code
-        </code></pre>
+</code></pre>
         <ul>
           <li>
             <p>sub sub item 1</p>
             <p>this is not code</p>
             <pre><code>this is code
-            </code></pre>
+</code></pre>
           </li>
         </ul>
       </li>
@@ -1773,25 +1773,11 @@ Document[0, 197]
 ````````````````````````````````
 
 
-Html comments in block
-
-```````````````````````````````` example HTML Suppress Options: 6
-<div>
-    <!-- HTML Comment -->
-</div>
-.
-<div>
-    <!-- HTML Comment -->
-</div>
-.
-Document[0, 39]
-  HtmlBlock[0, 39]
-````````````````````````````````
-
+## HTML Parse Inner Comments
 
 Html comments in block
 
-```````````````````````````````` example HTML Suppress Options: 7
+```````````````````````````````` example HTML Parse Inner Comments: 1
 <!-- HTML Comment -->
 <div>
 </div>
@@ -1808,7 +1794,23 @@ Document[0, 35]
 
 Html comments in block
 
-```````````````````````````````` example HTML Suppress Options: 8
+```````````````````````````````` example HTML Parse Inner Comments: 2
+<div>
+    <!-- HTML Comment -->
+</div>
+.
+<div>
+    <!-- HTML Comment -->
+</div>
+.
+Document[0, 39]
+  HtmlBlock[0, 39]
+````````````````````````````````
+
+
+Html comments in block
+
+```````````````````````````````` example HTML Parse Inner Comments: 3
 <div>
 </div>
 <!-- HTML Comment -->
@@ -1819,6 +1821,54 @@ Html comments in block
 .
 Document[0, 35]
   HtmlBlock[0, 35]
+````````````````````````````````
+
+
+Html comments in block, parse inner comments
+
+```````````````````````````````` example(HTML Parse Inner Comments: 4) options(parse-inner-comments)
+<!-- HTML Comment -->
+<div>
+</div>
+.
+<!-- HTML Comment -->
+<div>
+</div>
+.
+Document[0, 35]
+  HtmlCommentBlock[0, 22]
+  HtmlBlock[22, 35]
+````````````````````````````````
+
+
+Html comments in block, parse inner comments
+
+```````````````````````````````` example(HTML Parse Inner Comments: 5) options(parse-inner-comments)
+<div>
+    <!-- HTML Comment -->
+</div>
+.
+.
+Document[0, 39]
+  HtmlBlock[0, 39]
+    HtmlInnerBlock[0, 10] chars:[0, 10, "<div>\n    "]
+    HtmlInnerBlockComment[10, 31] chars:[10, 31, "<!-- "..."t -->"]
+    HtmlInnerBlock[31, 38] chars:[31, 38, "\n</div>"]
+````````````````````````````````
+
+
+Html comments in block, parse inner comments
+
+```````````````````````````````` example(HTML Parse Inner Comments: 6) options(parse-inner-comments)
+<div>
+</div>
+<!-- HTML Comment -->
+.
+.
+Document[0, 35]
+  HtmlBlock[0, 35]
+    HtmlInnerBlock[0, 13] chars:[0, 13, "<div>"..."div>\n"]
+    HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!-- "..."t -->"]
 ````````````````````````````````
 
 
@@ -1896,6 +1946,68 @@ Document[0, 23]
   FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[3] close:[19, 22, "```"]
 ````````````````````````````````
 
+empty, no info
+
+```````````````````````````````` example Fenced Code Options: 2
+```
+
+```
+.
+<pre><code>
+</code></pre>
+.
+Document[0, 9]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] info:[0, 0] content:[4, 5] lines[3] close:[5, 8, "```"]
+````````````````````````````````
+
+
+empty, no info, blank line follows
+
+```````````````````````````````` example Fenced Code Options: 3
+```
+
+```
+
+.
+<pre><code>
+</code></pre>
+.
+Document[0, 10]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] info:[0, 0] content:[4, 5] lines[3] close:[5, 8, "```"]
+````````````````````````````````
+
+
+empty, info
+
+```````````````````````````````` example Fenced Code Options: 4
+```info
+
+```
+.
+<pre><code class="language-info">
+</code></pre>
+.
+Document[0, 13]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[3] close:[9, 12, "```"]
+````````````````````````````````
+
+
+empty, info, blank line follows
+
+```````````````````````````````` example Fenced Code Options: 5
+```info
+
+```
+
+.
+<pre><code class="language-info">
+</code></pre>
+.
+Document[0, 14]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[3] close:[9, 12, "```"]
+````````````````````````````````
+
+
 
 ## Anchor links option
 
@@ -1914,6 +2026,20 @@ Document[0, 56]
     HtmlInline[40, 44] chars:[40, 44, "<em>"]
     HtmlInline[44, 49] chars:[44, 49, "</em>"]
     Text[49, 54] chars:[49, 54, " test"]
+````````````````````````````````
+
+
+## Thematic Break
+
+Break with trailing spaces
+
+```````````````````````````````` example Thematic Break: 1
+---                 
+.
+<hr />
+.
+Document[0, 21]
+  ThematicBreak[0, 20]
 ````````````````````````````````
 
 

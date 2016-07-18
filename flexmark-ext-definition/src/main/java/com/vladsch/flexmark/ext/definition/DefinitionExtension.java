@@ -2,8 +2,6 @@
 package com.vladsch.flexmark.ext.definition;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.definition.internal.DefinitionBlockParser;
-import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -16,7 +14,7 @@ import com.vladsch.flexmark.parser.Parser;
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed definition text is turned into {@link DefinitionItem} nodes.
+ * The parsed definition text is turned into {@link DefinitionList}, {@link DefinitionTerm} and {@link DefinitionItem} nodes.
  * </p>
  */
 public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
@@ -33,12 +31,12 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new DefinitionBlockParser.Factory());
+        //parserBuilder.customBlockParserFactory(new DefinitionBlockParser.Factory());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
+        //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
         // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
     }
 }

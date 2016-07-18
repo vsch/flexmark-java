@@ -36,7 +36,6 @@ Document[0, 55]
     TextBase[22, 54] chars:[22, 54, "This "..."n it."]
       Text[22, 34] chars:[22, 34, "This "..."s an "]
       Abbreviation[34, 38] chars:[34, 38, "Abbr"]
-        Text[34, 38] chars:[34, 38, "Abbr"]
       Text[38, 54] chars:[38, 54, " embe"..."n it."]
 ````````````````````````````````
 
@@ -56,7 +55,6 @@ Document[0, 91]
     TextBase[58, 90] chars:[58, 90, "This "..."n it."]
       Text[58, 70] chars:[58, 70, "This "..."s an "]
       Abbreviation[70, 74] chars:[70, 74, "Abbr"]
-        Text[70, 74] chars:[70, 74, "Abbr"]
       Text[74, 90] chars:[74, 90, " embe"..."n it."]
 ````````````````````````````````
 
@@ -74,7 +72,6 @@ Document[0, 91]
     TextBase[58, 90] chars:[58, 90, "This "..."n it."]
       Text[58, 70] chars:[58, 70, "This "..."s an "]
       Abbreviation[70, 74] chars:[70, 74, "Abbr"]
-        Text[70, 74] chars:[70, 74, "Abbr"]
       Text[74, 90] chars:[74, 90, " embe"..."n it."]
 ````````````````````````````````
 
@@ -107,13 +104,11 @@ Document[0, 126]
     TextBase[50, 83] chars:[50, 83, "This "..."n it."]
       Text[50, 62] chars:[50, 62, "This "..."s an "]
       Abbreviation[62, 67] chars:[62, 67, "Abbre"]
-        Text[62, 67] chars:[62, 67, "Abbre"]
       Text[67, 83] chars:[67, 83, " embe"..."n it."]
     SoftLineBreak[83, 84]
     TextBase[84, 125] chars:[84, 125, "And t"..."n it."]
       Text[84, 105] chars:[84, 105, "And t"..."ther "]
       Abbreviation[105, 109] chars:[105, 109, "Abbr"]
-        Text[105, 109] chars:[105, 109, "Abbr"]
       Text[109, 125] chars:[109, 125, " embe"..."n it."]
 ````````````````````````````````
 
@@ -132,10 +127,8 @@ Document[0, 136]
   Paragraph[74, 136]
     TextBase[74, 135] chars:[74, 135, "U.S.A"..."tion."]
       Abbreviation[74, 80] chars:[74, 80, "U.S.A."]
-        Text[74, 80] chars:[74, 80, "U.S.A."]
       Text[80, 110] chars:[80, 110, " is a"..."o is "]
       Abbreviation[110, 117] chars:[110, 117, "US of A"]
-        Text[110, 117] chars:[110, 117, "US of A"]
       Text[117, 135] chars:[117, 135, ", an "..."tion."]
 ````````````````````````````````
 
@@ -156,13 +149,10 @@ Document[0, 142]
   Paragraph[95, 142]
     TextBase[95, 141] chars:[95, 141, "U.S.A"..."ions."]
       Abbreviation[95, 101] chars:[95, 101, "U.S.A."]
-        Text[95, 101] chars:[95, 101, "U.S.A."]
       Text[101, 103] chars:[101, 103, ", "]
       Abbreviation[103, 110] chars:[103, 110, "US of A"]
-        Text[103, 110] chars:[103, 110, "US of A"]
       Text[110, 116] chars:[110, 116, ", and "]
       Abbreviation[116, 118] chars:[116, 118, "US"]
-        Text[116, 118] chars:[116, 118, "US"]
       Text[118, 141] chars:[118, 141, " are "..."ions."]
 ````````````````````````````````
 
@@ -183,7 +173,6 @@ Document[0, 88]
     TextBase[47, 79] chars:[47, 79, "This "..." not "]
       Text[47, 58] chars:[47, 58, "This "..."s an "]
       Abbreviation[58, 62] chars:[58, 62, "Abbr"]
-        Text[58, 62] chars:[58, 62, "Abbr"]
       Text[62, 79] chars:[62, 79, " and "..." not "]
     LinkRef[79, 85] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[79, 80, "["] reference:[80, 84, "Abbr"] referenceClose:[84, 85, "]"]
       Text[80, 84] chars:[80, 84, "Abbr"]
@@ -195,19 +184,40 @@ A reference that is not on the first line is just text.
 
 ```````````````````````````````` example Abbreviation: 10
 Paragraph with second line having a reference
-[test]: /url
+*[test]: test abbreviation
 
 .
 <p>Paragraph with second line having a reference
-[test]: /url</p>
+*[test]: test abbreviation</p>
 .
-Document[0, 60]
-  Paragraph[0, 59]
+Document[0, 74]
+  Paragraph[0, 73]
     Text[0, 45] chars:[0, 45, "Parag"..."rence"]
     SoftLineBreak[45, 46]
-    LinkRef[46, 52] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[46, 47, "["] reference:[47, 51, "test"] referenceClose:[51, 52, "]"]
-      Text[47, 51] chars:[47, 51, "test"]
-    Text[52, 58] chars:[52, 58, ": /url"]
+    Text[46, 47] chars:[46, 47, "*"]
+    LinkRef[47, 53] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[47, 48, "["] reference:[48, 52, "test"] referenceClose:[52, 53, "]"]
+      Text[48, 52] chars:[48, 52, "test"]
+    Text[53, 72] chars:[53, 72, ": tes"..."ation"]
+````````````````````````````````
+
+
+simple use case
+
+```````````````````````````````` example Abbreviation: 11
+text with abbr embedded
+
+*[abbr]: abbreviation
+
+.
+<p>text with <abbr title="abbreviation">abbr</abbr> embedded</p>
+.
+Document[0, 48]
+  Paragraph[0, 24]
+    TextBase[0, 23] chars:[0, 23, "text "..."edded"]
+      Text[0, 10] chars:[0, 10, "text with "]
+      Abbreviation[10, 14] chars:[10, 14, "abbr"]
+      Text[14, 23] chars:[14, 23, " embedded"]
+  AbbreviationBlock[25, 46] open:[25, 27] text:[27, 31] close:[31, 33] abbreviation:[34, 46]
 ````````````````````````````````
 
 

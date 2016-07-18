@@ -13,5 +13,4 @@ public class Emphasis extends DelimitedNodeImpl {
     public Emphasis(BasedSequence openingMarker, BasedSequence content, BasedSequence closingMarker) {
         super(openingMarker, content, closingMarker);
     }
-
 }

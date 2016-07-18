@@ -16,8 +16,6 @@
 package com.vladsch.flexmark.ext.typographic;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.typographic.internal.TypographicNodePostProcessor;
-import com.vladsch.flexmark.ext.typographic.internal.TypographicNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -30,7 +28,7 @@ import com.vladsch.flexmark.parser.Parser;
  * {@link com.vladsch.flexmark.html.HtmlRenderer.Builder#extensions(Iterable)}).
  * </p>
  * <p>
- * The parsed typographic text is turned into {@link Typographic} nodes.
+ * The parsed typographic text is turned into {@link TypographicQuotes} and {@link TypographicSmarts} nodes.
  * </p>
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
@@ -48,12 +46,12 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.postProcessorFactory(new TypographicNodePostProcessor.Factory());
+        //parserBuilder.postProcessorFactory(new TypographicNodePostProcessor.Factory());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+        //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
         // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
     }
 }

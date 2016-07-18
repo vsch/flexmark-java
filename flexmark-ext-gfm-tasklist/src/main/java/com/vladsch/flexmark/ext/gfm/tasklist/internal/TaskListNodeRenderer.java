@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
-import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemMarker;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -34,26 +33,23 @@ public class TaskListNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(TaskListItem.class, this::render),
-                new NodeRenderingHandler<>(TaskListItemMarker.class, this::render)
+                new NodeRenderingHandler<>(TaskListItem.class, this::render)
         ));
     }
 
-    private void render(TaskListItem taskItem, NodeRendererContext context, HtmlWriter html) {
-        if (listOptions.isTightListItem(taskItem)) {
+    private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
+        if (listOptions.isTightListItem(node)) {
             html.withAttr().attr("class", itemClass).withCondIndent().tagLine("li", () -> {
-                context.renderChildren(taskItem);
+                html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
+                context.renderChildren(node);
             });
         } else {
             html.withAttr().attr("class", looseItemClass).tagIndent("li", () -> {
                 html.withAttr().attr("class", paragraphClass).tagLine("p", () -> {
-                    context.renderChildren(taskItem);
+                    html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
+                    context.renderChildren(node);
                 });
             });
         }
-    }
-
-    private void render(TaskListItemMarker taskListItemMarker, NodeRendererContext context, HtmlWriter html) {
-        html.raw(taskListItemMarker.isItemDoneMarker() ? doneMarker : notDoneMarker);
     }
 }

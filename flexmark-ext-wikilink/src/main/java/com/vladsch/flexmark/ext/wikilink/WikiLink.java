@@ -50,16 +50,16 @@ public class WikiLink extends CustomNode implements DoNotDecorate {
             segmentSpanChars(out, text, "text");
             segmentSpanChars(out, textSeparatorMarker, "textSep");
             segmentSpanChars(out, link, "link");
-            segmentSpanChars(out, pageRef, "pageRef");
-            segmentSpanChars(out, anchorMarker, "anchorMarker");
-            segmentSpanChars(out, anchorRef, "anchorRef");
+            if (pageRef.isNotNull()) segmentSpanChars(out, pageRef, "pageRef");
+            if (anchorMarker.isNotNull()) segmentSpanChars(out, anchorMarker, "anchorMarker");
+            if (anchorRef.isNotNull()) segmentSpanChars(out, anchorRef, "anchorRef");
             segmentSpanChars(out, closingMarker, "linkClose");
         } else {
             segmentSpanChars(out, openingMarker, "linkOpen");
             segmentSpanChars(out, link, "link");
-            segmentSpanChars(out, pageRef, "pageRef");
-            segmentSpanChars(out, anchorMarker, "anchorMarker");
-            segmentSpanChars(out, anchorRef, "anchorRef");
+            if (pageRef.isNotNull()) segmentSpanChars(out, pageRef, "pageRef");
+            if (anchorMarker.isNotNull()) segmentSpanChars(out, anchorMarker, "anchorMarker");
+            if (anchorRef.isNotNull()) segmentSpanChars(out, anchorRef, "anchorRef");
             segmentSpanChars(out, textSeparatorMarker, "textSep");
             segmentSpanChars(out, text, "text");
             segmentSpanChars(out, closingMarker, "linkClose");

@@ -49,6 +49,10 @@ public class HtmlWriter {
         for (int i = 0; i < indentSize; i++) sb.append(' ');
         indentSizePrefix = sb.toString();
     }
+    
+    boolean inPre() {
+        return preNesting > 0;
+    }
 
     void setContext(NodeRendererContext context) {
         this.context = context;

@@ -105,5 +105,4 @@ public class Paragraph extends Block {
     public int[] getLineIndents() {
         return lineIndents;
     }
-
 }

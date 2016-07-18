@@ -89,6 +89,7 @@ public class PostProcessorManager {
 
                     ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
                     for (Node node : nodes) {
+                        if (node.getParent() == null) continue; // was already removed 
                         // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
                         int index = -1;
                         BitSet nodeAncestors = null;

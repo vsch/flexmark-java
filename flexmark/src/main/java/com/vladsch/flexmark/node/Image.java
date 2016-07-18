@@ -25,5 +25,4 @@ public class Image extends InlineLinkNode {
     public Image(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence linkCloseMarker) {
         super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
     }
-
 }

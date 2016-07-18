@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationBlockParser;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodePostProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
+import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationParagraphPreProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.KeepType;
@@ -43,7 +43,8 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new AbbreviationBlockParser.Factory());
+        parserBuilder.paragraphPreProcessorFactory(AbbreviationParagraphPreProcessor.Factory());
+        //parserBuilder.customBlockParserFactory(new AbbreviationBlockParser.Factory());
         //parserBuilder.postProcessorFactory(new AbbreviationPostProcessor.Factory());
         parserBuilder.postProcessorFactory(new AbbreviationNodePostProcessor.Factory());
     }

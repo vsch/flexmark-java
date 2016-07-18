@@ -5,11 +5,13 @@ import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
 import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
+import com.vladsch.flexmark.ext.escaped.character.ExtEscapedCharacterTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
+import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
 import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
@@ -24,22 +26,24 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
+        ExtAnchorLinkTestSuite.class,
         ExtAutolinkTestSuite.class,
+        ExtDefinitionTestSuite.class,
         ExtEmojiTestSuite.class,
+        ExtEscapedCharacterTestSuite.class,
         ExtFootnotesTestSuite.class,
         ExtGfmStrikethroughTestSuite.class,
         ExtGfmTablesTestSuite.class,
         ExtGfmTaskListTestSuite.class,
+        ExtJekyllFrontMatterTestSuite.class,
+        ExtSpecExampleTestSuite.class,
         ExtTablesTestSuite.class,
+        ExtTocTestSuite.class,
+        ExtTypographicTestSuite.class,
         ExtWikiLinkTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
-        IntegrationTestSuite.class,
-        ExtAnchorLinkTestSuite.class,
-        ExtTocTestSuite.class,
-        ExtSpecExampleTestSuite.class,
-        ExtTypographicTestSuite.class,
-        ExtDefinitionTestSuite.class,
         ExtZzzzzzTestSuite.class,
+        IntegrationTestSuite.class,
 })
 public class FlexmarkTestSuite {
 }

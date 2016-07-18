@@ -17,12 +17,12 @@ package com.vladsch.flexmark.ext.typographic;
 
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.DoNotDecorate;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.Node;
 
 /**
  * A TypographicSmarts node
  */
-public class TypographicSmarts extends Text implements DoNotDecorate {
+public class TypographicSmarts extends Node implements DoNotDecorate {
     private String typographicText;
 
     public TypographicSmarts() {
@@ -41,11 +41,6 @@ public class TypographicSmarts extends Text implements DoNotDecorate {
         this.typographicText = typographicText;
     }
 
-    public TypographicSmarts(String chars, String typographicText) {
-        super(chars);
-        this.typographicText = typographicText;
-    }
-
     @Override
     public void getAstExtra(StringBuilder out) {
         out.append(" typographic: ").append(typographicText).append(" ");
@@ -57,5 +52,15 @@ public class TypographicSmarts extends Text implements DoNotDecorate {
 
     public void setTypographicText(String typographicText) {
         this.typographicText = typographicText;
+    }
+
+    @Override
+    public BasedSequence[] getSegments() {
+        return EMPTY_SEGMENTS;
+    }
+
+    @Override
+    protected String toStringAttributes() {
+        return "text=" + getChars();
     }
 }

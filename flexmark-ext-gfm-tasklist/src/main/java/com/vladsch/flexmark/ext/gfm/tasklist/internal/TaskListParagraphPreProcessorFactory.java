@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
-import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemMarker;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequenceImpl;
@@ -46,11 +45,13 @@ public class TaskListParagraphPreProcessorFactory implements ParagraphPreProcess
 
                         // task item
                         TaskListItem taskListItem = new TaskListItem((BulletListItem) bulletListItem);
+                        BasedSequence taskOpeningMarker = chars.subSequence(0, 3);
+                        taskListItem.setTaskOpeningMarker(taskOpeningMarker);
                         bulletListItem.insertBefore(taskListItem);
                         bulletListItem.unlink();
 
-                        TaskListItemMarker marker = new TaskListItemMarker(chars.subSequence(0, 3));
-                        block.insertBefore(marker);
+                        //TaskListItemMarker marker = new TaskListItemMarker(taskOpeningMarker);
+                        //block.insertBefore(marker);
                         return 3 + chars.countChars(BasedSequenceImpl.WHITESPACE_CHARS, 3, chars.length());
                     }
                 }

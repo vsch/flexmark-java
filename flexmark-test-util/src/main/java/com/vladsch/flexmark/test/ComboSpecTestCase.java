@@ -57,13 +57,6 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     /**
-     * @return return true if actual html should be used in comparison, else only actual AST will be used in compared
-     */
-    protected boolean useActualHtml() {
-        return true;
-    }
-
-    /**
      * @return return true if actual result spec used in comparison should be output to stdout
      */
     protected boolean outputActualFullSpec() {

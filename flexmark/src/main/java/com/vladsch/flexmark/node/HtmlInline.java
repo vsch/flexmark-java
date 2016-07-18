@@ -17,13 +17,11 @@ public class HtmlInline extends HtmlInlineBase {
     public void getAstExtra(StringBuilder out) {
         astExtraChars(out);
     }
-    
+
     public HtmlInline() {
     }
 
     public HtmlInline(BasedSequence chars) {
         super(chars);
     }
-
-
 }

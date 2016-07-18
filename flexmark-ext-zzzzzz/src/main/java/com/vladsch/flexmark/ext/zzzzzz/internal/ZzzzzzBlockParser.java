@@ -13,14 +13,14 @@ import java.util.regex.Pattern;
 
 public class ZzzzzzBlockParser extends AbstractBlockParser {
     private static String COL = "\\s*:?-{3,}:?\\s*";
-    private static Pattern ZZZZZZ_BLOCK_START = Pattern.compile("ZzzzzzNoWayzzzzzZ");
+    static Pattern ZZZZZZ_BLOCK_START = Pattern.compile("ZzzzzzNoWayzzzzzZ");
     private static Pattern ZZZZZZ_BLOCK_CONTINUE = Pattern.compile("");
 
     private final ZzzzzzBlock block = new ZzzzzzBlock();
     private BlockContent content = new BlockContent();
     private final ZzzzzzOptions options;
 
-    private ZzzzzzBlockParser(DataHolder options) {
+    ZzzzzzBlockParser(DataHolder options) {
         this.options = new ZzzzzzOptions(options);
     }
 
@@ -97,7 +97,7 @@ public class ZzzzzzBlockParser extends AbstractBlockParser {
     private static class BlockFactory extends AbstractBlockParserFactory {
         private final ZzzzzzOptions options;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             this.options = new ZzzzzzOptions(options);
         }

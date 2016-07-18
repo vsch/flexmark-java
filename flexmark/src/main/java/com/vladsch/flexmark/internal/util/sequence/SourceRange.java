@@ -14,6 +14,10 @@ public class SourceRange {
         return endOffset;
     }
 
+    public int length() {
+        return endOffset - startOffset;
+    }
+    
     public SourceRange(int startOffset, int endOffset) {
         this.startOffset = startOffset;
         this.endOffset = endOffset;
@@ -60,4 +64,5 @@ public class SourceRange {
         result = 31 * result + endOffset;
         return result;
     }
+
 }

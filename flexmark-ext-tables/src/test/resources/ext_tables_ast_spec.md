@@ -1654,3 +1654,85 @@ Document[0, 199]
 ````````````````````````````````
 
 
+multi row/column
+
+```````````````````````````````` example Tables Extension: 52
+| col11 | col12| col13|
+| col21 | col22| col23|
+| col31 | col32| col33|
+|---|---|---|
+| data11 | data12| data13|
+| data21 | data22| data23|
+| data31 | data32| data33|
+
+.
+<table>
+  <thead>
+    <tr><th>col11</th><th>col12</th><th>col13</th></tr>
+    <tr><th>col21</th><th>col22</th><th>col23</th></tr>
+    <tr><th>col31</th><th>col32</th><th>col33</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>data11</td><td>data12</td><td>data13</td></tr>
+    <tr><td>data21</td><td>data22</td><td>data23</td></tr>
+    <tr><td>data31</td><td>data32</td><td>data33</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 168]
+  TableBlock[0, 167]
+    TableHead[0, 71]
+      TableRow[0, 23]
+        TableCell[0, 9] header textOpen:[0, 1, "|"] text:[2, 7, "col11"] textClose:[8, 9, "|"]
+          Text[2, 7] chars:[2, 7, "col11"]
+        TableCell[9, 16] header textOpen:[0, 0] text:[10, 15, "col12"] textClose:[15, 16, "|"]
+          Text[10, 15] chars:[10, 15, "col12"]
+        TableCell[16, 23] header textOpen:[0, 0] text:[17, 22, "col13"] textClose:[22, 23, "|"]
+          Text[17, 22] chars:[17, 22, "col13"]
+      TableRow[24, 47]
+        TableCell[24, 33] header textOpen:[24, 25, "|"] text:[26, 31, "col21"] textClose:[32, 33, "|"]
+          Text[26, 31] chars:[26, 31, "col21"]
+        TableCell[33, 40] header textOpen:[0, 0] text:[34, 39, "col22"] textClose:[39, 40, "|"]
+          Text[34, 39] chars:[34, 39, "col22"]
+        TableCell[40, 47] header textOpen:[0, 0] text:[41, 46, "col23"] textClose:[46, 47, "|"]
+          Text[41, 46] chars:[41, 46, "col23"]
+      TableRow[48, 71]
+        TableCell[48, 57] header textOpen:[48, 49, "|"] text:[50, 55, "col31"] textClose:[56, 57, "|"]
+          Text[50, 55] chars:[50, 55, "col31"]
+        TableCell[57, 64] header textOpen:[0, 0] text:[58, 63, "col32"] textClose:[63, 64, "|"]
+          Text[58, 63] chars:[58, 63, "col32"]
+        TableCell[64, 71] header textOpen:[0, 0] text:[65, 70, "col33"] textClose:[70, 71, "|"]
+          Text[65, 70] chars:[65, 70, "col33"]
+    TableSeparator[72, 85]
+      TableRow[72, 85]
+        TableCell[72, 77] textOpen:[72, 73, "|"] text:[73, 76, "---"] textClose:[76, 77, "|"]
+          Text[73, 76] chars:[73, 76, "---"]
+        TableCell[77, 81] textOpen:[0, 0] text:[77, 80, "---"] textClose:[80, 81, "|"]
+          Text[77, 80] chars:[77, 80, "---"]
+        TableCell[81, 85] textOpen:[0, 0] text:[81, 84, "---"] textClose:[84, 85, "|"]
+          Text[81, 84] chars:[81, 84, "---"]
+    TableBody[86, 166]
+      TableRow[86, 112]
+        TableCell[86, 96] textOpen:[86, 87, "|"] text:[88, 94, "data11"] textClose:[95, 96, "|"]
+          Text[88, 94] chars:[88, 94, "data11"]
+        TableCell[96, 104] textOpen:[0, 0] text:[97, 103, "data12"] textClose:[103, 104, "|"]
+          Text[97, 103] chars:[97, 103, "data12"]
+        TableCell[104, 112] textOpen:[0, 0] text:[105, 111, "data13"] textClose:[111, 112, "|"]
+          Text[105, 111] chars:[105, 111, "data13"]
+      TableRow[113, 139]
+        TableCell[113, 123] textOpen:[113, 114, "|"] text:[115, 121, "data21"] textClose:[122, 123, "|"]
+          Text[115, 121] chars:[115, 121, "data21"]
+        TableCell[123, 131] textOpen:[0, 0] text:[124, 130, "data22"] textClose:[130, 131, "|"]
+          Text[124, 130] chars:[124, 130, "data22"]
+        TableCell[131, 139] textOpen:[0, 0] text:[132, 138, "data23"] textClose:[138, 139, "|"]
+          Text[132, 138] chars:[132, 138, "data23"]
+      TableRow[140, 166]
+        TableCell[140, 150] textOpen:[140, 141, "|"] text:[142, 148, "data31"] textClose:[149, 150, "|"]
+          Text[142, 148] chars:[142, 148, "data31"]
+        TableCell[150, 158] textOpen:[0, 0] text:[151, 157, "data32"] textClose:[157, 158, "|"]
+          Text[151, 157] chars:[151, 157, "data32"]
+        TableCell[158, 166] textOpen:[0, 0] text:[159, 165, "data33"] textClose:[165, 166, "|"]
+          Text[159, 165] chars:[159, 165, "data33"]
+````````````````````````````````
+
+

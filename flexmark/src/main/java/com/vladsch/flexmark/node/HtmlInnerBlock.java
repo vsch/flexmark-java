@@ -7,7 +7,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
  *
  * @see <a href="http://spec.commonmark.org/0.24/#raw-html">CommonMark Spec</a>
  */
-public abstract class HtmlInlineBase extends Node {
+public class HtmlInnerBlock extends HtmlBlockBase {
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -18,10 +18,10 @@ public abstract class HtmlInlineBase extends Node {
         astExtraChars(out);
     }
 
-    public HtmlInlineBase() {
+    public HtmlInnerBlock() {
     }
 
-    public HtmlInlineBase(BasedSequence chars) {
+    public HtmlInnerBlock(BasedSequence chars) {
         super(chars);
     }
 }

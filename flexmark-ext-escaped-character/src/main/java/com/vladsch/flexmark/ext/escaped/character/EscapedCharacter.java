@@ -18,12 +18,12 @@ package com.vladsch.flexmark.ext.escaped.character;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.DoNotDecorate;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.node.Node;
 
 /**
  * A EscapedCharacter node
  */
-public class EscapedCharacter extends Text implements DoNotDecorate {
+public class EscapedCharacter extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
 

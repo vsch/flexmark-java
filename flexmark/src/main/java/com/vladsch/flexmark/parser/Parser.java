@@ -56,6 +56,7 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> LISTS_RELAXED_START = new DataKey<>("LISTS_RELAXED_START", true);
     final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
     final public static DataKey<Boolean> PARSE_INLINE_ANCHOR_LINKS = new DataKey<>("PARSE_INLINE_ANCHOR_LINKS", false);
+    final public static DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);
     final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
 
     private final List<CustomBlockParserFactory> blockParserFactories;

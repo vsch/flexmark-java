@@ -60,5 +60,4 @@ public class MailLink extends LinkNode {
     public void setClosingMarker(BasedSequence closingMarker) {
         this.closingMarker = closingMarker;
     }
-
 }

@@ -29,7 +29,7 @@ public class TextBase extends Node {
     public TextBase(String chars) {
         super(new StringSequence(chars));
     }
-    
+
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;

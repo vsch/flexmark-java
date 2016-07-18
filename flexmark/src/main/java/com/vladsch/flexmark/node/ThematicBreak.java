@@ -25,5 +25,4 @@ public class ThematicBreak extends Block {
     public ThematicBreak(BlockContent blockContent) {
         super(blockContent);
     }
-
 }
