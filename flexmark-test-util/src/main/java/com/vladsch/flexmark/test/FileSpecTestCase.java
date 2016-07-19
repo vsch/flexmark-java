@@ -88,14 +88,14 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
 
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
-        return dataFromSeparateFiles(new String[] { }, false, false);
+        return dataFromSeparateFiles(new String[] { }, "", false, false);
     }
 
-    public static List<Object[]> dataFromSeparateFiles(String[] fileNames, boolean dumpHtml, boolean dumpAst) {
+    public static List<Object[]> dataFromSeparateFiles(String[] fileNames, String prefix, boolean dumpHtml, boolean dumpAst) {
         ArrayList<SpecExample> examples = new ArrayList<>();
 
         for (String name : fileNames) {
-            String source = readResource(name + ".md");
+            String source = readResource(prefix + name + ".md");
             String html = null;
             String ast = null;
             try {
@@ -128,11 +128,11 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
         return data;
     }
 
-    public static List<Object[]> dataFromFiles(String[] fileNames) {
+    public static List<Object[]> dataFromFiles(String[] fileNames, String prefix) {
         ArrayList<SpecExample> examples = new ArrayList<>();
 
         for (String name : fileNames) {
-            List<SpecExample> fileExamples = SpecReader.readExamples(name + "_ast_spec.md");
+            List<SpecExample> fileExamples = SpecReader.readExamples(prefix + name + "_ast_spec.md");
             int i = 1;
             for (SpecExample example : fileExamples) {
                 examples.add(example.withSection(name).withExampleNumber(i++));

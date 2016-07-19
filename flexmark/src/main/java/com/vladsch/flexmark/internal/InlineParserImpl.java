@@ -1008,7 +1008,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean hadCollapse = false;
         while (child != null) {
             Node nextChild = child.getNext();
-            if (child instanceof LinkRefDerived && (isTentative == null || isTentative == ((LinkRef) child).isTentative())) {
+            if (child instanceof LinkRefDerived && (isTentative == null || isTentative == ((RefNode) child).isTentative())) {
                 // need to collapse this one, moving its text contents to text
                 collapseLinkRefChildren(child, isTentative);
                 child.unlink();
