@@ -207,7 +207,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
                 if (closingMarker != null) tableCell.setClosingMarker(closingMarker);
                 tableCell.setChars(tableCell.childChars());
-                tableCell.trimWhiteSpace();
+                // TODO: Add option to keep cell whitespace, if yes, then convert it to text and merge adjacent text nodes
+                //tableCell.trimWhiteSpace();
                 tableCell.setText(tableCell.childChars());
                 tableCell.setCharsFromContent();
                 tableCell.setSpan(span);

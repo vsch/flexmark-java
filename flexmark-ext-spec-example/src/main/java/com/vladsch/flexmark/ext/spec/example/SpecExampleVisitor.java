@@ -27,6 +27,7 @@ public interface SpecExampleVisitor {
                 new VisitHandler<>(SpecExampleOptionSeparator.class, visitor::visit),
                 new VisitHandler<>(SpecExampleOptionsList.class, visitor::visit),
                 new VisitHandler<>(SpecExampleSeparator.class, visitor::visit),
+                new VisitHandler<>(SpecExampleSource.class, visitor::visit),
         };
     }
 
