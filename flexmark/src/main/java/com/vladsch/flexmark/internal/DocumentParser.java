@@ -296,9 +296,12 @@ public class DocumentParser implements ParserState {
             return new BlockPreProcessorDependencyStage(dependents);
         }
     }
+    
+    final private Parsing myParsing; 
 
     public DocumentParser(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
         this.options = options;
+        this.myParsing = new Parsing(options);
 
         ArrayList<BlockParserFactory> blockParserFactories = new ArrayList<>(customBlockParserFactories.size());
         for (CustomBlockParserFactory factory : customBlockParserFactories) {
@@ -313,6 +316,11 @@ public class DocumentParser implements ParserState {
         this.documentBlockParser = new DocumentBlockParser();
         activateBlockParser(this.documentBlockParser);
         this.currentPhase = ParserPhase.STARTING;
+    }
+
+    @Override
+    public Parsing getParsing() {
+        return myParsing;
     }
 
     @Override
@@ -384,7 +392,7 @@ public class DocumentParser implements ParserState {
         lineNumber = 0;
 
         documentBlockParser.initializeDocument(options, input);
-        inlineParser.initializeDocument(documentBlockParser.getBlock());
+        inlineParser.initializeDocument(myParsing, documentBlockParser.getBlock());
 
         currentPhase = ParserPhase.PARSE_BLOCKS;
 
@@ -553,7 +561,7 @@ public class DocumentParser implements ParserState {
             findNextNonSpace();
 
             // this is a little performance optimization:
-            if (isBlank() || (indent < Parsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
+            if (isBlank() || (indent < myParsing.CODE_BLOCK_INDENT && Parsing.isLetter(line, nextNonSpace))) {
                 setNewIndex(nextNonSpace);
                 break;
             }

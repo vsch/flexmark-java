@@ -406,7 +406,11 @@ public abstract class Node {
                     out.append("\\0");
                     break;
                 default:
-                    out.append(c);
+                    if (c < ' ') {
+                        out.append('%').append(String.format("%02x",(int)c));
+                    } else {
+                        out.append(c);
+                    }
                     break;
             }
         }

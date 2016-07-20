@@ -59,9 +59,9 @@ public class BlockQuoteParser extends AbstractBlockParser {
         }
     }
 
-    private static boolean isMarker(ParserState state, int index) {
+    static boolean isMarker(ParserState state, int index) {
         CharSequence line = state.getLine();
-        return state.getIndent() < Parsing.CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '>';
+        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '>';
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -103,7 +103,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
     
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
         }
 

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.parser.block;
 
 import com.vladsch.flexmark.internal.util.BlockParserTracker;
 import com.vladsch.flexmark.internal.util.BlockTracker;
+import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Node;
@@ -84,5 +85,11 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
     MutableDataHolder getProperties();
 
     ParserPhase getParserPhase();
+
+    /**
+     * 
+     * @return Parsing strings and patterns class adjusted for options
+     */
+    Parsing getParsing();
 
 }

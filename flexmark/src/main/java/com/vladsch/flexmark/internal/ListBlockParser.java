@@ -20,7 +20,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
     private final ListBlock block;
     private final ListOptions options;
-    private final int itemIndent;
+    final int itemIndent;
     private final boolean isNumberedList;
 
     public ListBlockParser(ListOptions options, ListData listData) {
@@ -56,7 +56,7 @@ public class ListBlockParser extends AbstractBlockParser {
         return BlockContinue.atIndex(state.getIndex());
     }
 
-    private void setTight(boolean tight) {
+    void setTight(boolean tight) {
         block.setTight(tight);
     }
 
@@ -106,7 +106,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    private static ListData parseListMarker(BasedSequence line, int indent, final int markerIndex, final int markerColumn) {
+    static ListData parseListMarker(Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = MARKER.matcher(rest);
         if (!matcher.find()) {
@@ -137,7 +137,7 @@ public class ListBlockParser extends AbstractBlockParser {
             }
         }
 
-        if (!hasContent || (contentColumn - columnAfterMarker) > Parsing.CODE_BLOCK_INDENT) {
+        if (!hasContent || (contentColumn - columnAfterMarker) > parsing.CODE_BLOCK_INDENT) {
             // If this line is blank or has a code block, default to 1 space after marker
             contentColumn = columnAfterMarker + 1;
         }
@@ -165,7 +165,7 @@ public class ListBlockParser extends AbstractBlockParser {
      * with the same delimiter and bullet character. This is used
      * in agglomerating list items into lists.
      */
-    private static boolean listsMatch(ListBlock a, ListBlock b) {
+    static boolean listsMatch(ListBlock a, ListBlock b) {
         if (a instanceof BulletList && b instanceof BulletList) {
             return equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker());
         } else if (a instanceof OrderedList && b instanceof OrderedList) {
@@ -219,7 +219,7 @@ public class ListBlockParser extends AbstractBlockParser {
     private static class BlockFactory extends AbstractBlockParserFactory {
         private final ListOptions options;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             this.options = new ListOptions(options);
         }
@@ -228,7 +228,7 @@ public class ListBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getMatchedBlockParser();
 
-            if (state.getIndent() >= Parsing.CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
+            if (state.getIndent() >= state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
                 return BlockStart.none();
             }
 
@@ -244,7 +244,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
             int markerIndex = state.getNextNonSpaceIndex();
 
-            ListData listData = parseListMarker(state.getLine(), state.getIndent(), markerIndex, state.getColumn() + state.getIndent());
+            ListData listData = parseListMarker(state.getParsing(), state.getLine(), state.getIndent(), markerIndex, state.getColumn() + state.getIndent());
             if (listData == null) {
                 return BlockStart.none();
             }

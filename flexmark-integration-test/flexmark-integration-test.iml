@@ -14,7 +14,6 @@
     <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
     <orderEntry type="library" scope="TEST" name="org.openjdk.jmh:jmh-core:1.12" level="project" />
     <orderEntry type="library" scope="TEST" name="org.openjdk.jmh:jmh-generator-annprocess:1.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.nibor.autolink:autolink:Latest" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />

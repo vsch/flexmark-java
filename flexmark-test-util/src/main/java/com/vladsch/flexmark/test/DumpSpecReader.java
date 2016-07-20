@@ -10,7 +10,7 @@ import java.io.InputStream;
 
 import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
 
-class DumpSpecReader extends SpecReader {
+public class DumpSpecReader extends SpecReader {
     final private StringBuilder sb = new StringBuilder();
     final private FullSpecTestCase testCase;
 
@@ -90,8 +90,14 @@ class DumpSpecReader extends SpecReader {
 
     public static String showTabs(String s) {
         if (s == null) return "";
-        // Tabs are shown as "rightwards arrow" for easier comparison
-        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192");
+        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
+        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae");     
+    }
+
+    public static String unShowTabs(String s) {
+        if (s == null) return "";
+        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⧰
+        return s.replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");     
     }
 
 }

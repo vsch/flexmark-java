@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.spec;
 
+import com.vladsch.flexmark.test.DumpSpecReader;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -161,7 +163,7 @@ public class SpecReader {
                     lineAbsorbed = true;
                 } else {
                     // examples use "rightwards arrow" to show tab
-                    String processedLine = line.replace('\u2192', '\t').replace("&#2192;", "\u2192");
+                    String processedLine = DumpSpecReader.unShowTabs(line);
                     source.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }
@@ -176,7 +178,7 @@ public class SpecReader {
                     state = State.AST;
                     lineAbsorbed = true;
                 } else {
-                    String processedLine = line.replace('\u2192', '\t').replace("&#2192;", "\u2192");
+                    String processedLine = DumpSpecReader.unShowTabs(line);
                     html.append(processedLine).append('\n');
                     lineAbsorbed = true;
                 }

@@ -78,9 +78,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     final protected InlineParserOptions options;
 
     @Override
-    public void initializeDocument(Document document) {
+    public void initializeDocument(Parsing parsing, Document document) {
         this.document = document;
         this.referenceRepository = document.get(Parser.REFERENCES);
+        this.myParsing = parsing;
 
         linkRefProcessors = new ArrayList<>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
@@ -101,7 +102,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return currentText;
     }
 
+    protected Parsing myParsing;
+    
     public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessorsData) {
+        this.myParsing = new Parsing(options);
         this.options = new InlineParserOptions(options);
         this.delimiterProcessors = delimiterProcessors;
         this.linkRefProcessorsData = linkRefProcessorsData;
@@ -308,7 +312,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         boolean atLineEnd = true;
-        if (index != input.length() && match(Parsing.LINE_END) == null) {
+        if (index != input.length() && match(myParsing.LINE_END) == null) {
             if (title == null) {
                 atLineEnd = false;
             } else {
@@ -319,7 +323,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 // rewind before spaces
                 index = beforeTitle;
                 // and instead check if the link URL is at the line end
-                atLineEnd = match(Parsing.LINE_END) != null;
+                atLineEnd = match(myParsing.LINE_END) != null;
             }
         }
 
@@ -528,7 +532,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Parse zero or more space characters, including at most one newline.
      */
     private boolean spnl() {
-        match(Parsing.SPNL);
+        match(myParsing.SPNL);
         return true;
     }
 
@@ -547,7 +551,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (lastChild != null && lastChild instanceof Text && lastChild.getChars().endsWith(" ")) {
             Text text = (Text) lastChild;
             BasedSequence literal = text.getChars();
-            Matcher matcher = Parsing.FINAL_SPACE.matcher(literal);
+            Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
             appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
             if (spaces > 0) {
@@ -577,7 +581,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (peek() == '\n') {
             appendNode(new HardLineBreak(input.subSequence(index, index + 1)));
             index++;
-        } else if (index < input.length() && Parsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
+        } else if (index < input.length() && myParsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
             appendText(input, index - 1, index + 1);
             index++;
         } else {
@@ -590,13 +594,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Attempt to parse backticks, adding either a backtick code span or a literal sequence of backticks.
      */
     protected boolean parseBackticks() {
-        BasedSequence ticks = match(Parsing.TICKS_HERE);
+        BasedSequence ticks = match(myParsing.TICKS_HERE);
         if (ticks == null) {
             return false;
         }
         int afterOpenTicks = index;
         BasedSequence matched;
-        while ((matched = match(Parsing.TICKS)) != null) {
+        while ((matched = match(myParsing.TICKS)) != null) {
             if (matched.equals(ticks)) {
                 int ticksLength = ticks.length();
                 BasedSequence content = input.subSequence(afterOpenTicks - ticksLength, index - ticksLength);
@@ -805,7 +809,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             if ((dest = parseLinkDestination()) != null) {
                 spnl();
                 // title needs a whitespace before
-                if (Parsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
+                if (myParsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
                     title = parseLinkTitle();
                     spnl();
                 }
@@ -1042,7 +1046,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
 
     protected BasedSequence parseLinkDestination() {
-        BasedSequence res = match(Parsing.LINK_DESTINATION_BRACES);
+        BasedSequence res = match(myParsing.LINK_DESTINATION_BRACES);
         if (res != null) { // chop off surrounding <..>:
             if (res.length() == 2) {
                 return res;
@@ -1050,7 +1054,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 return res;
             }
         } else {
-            res = match(Parsing.LINK_DESTINATION);
+            res = match(myParsing.LINK_DESTINATION);
             if (res != null) {
                 return res;
             } else {
@@ -1063,7 +1067,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Attempt to parse link title (sans quotes), returning the string or null if no match.
      */
     protected BasedSequence parseLinkTitle() {
-        BasedSequence title = match(Parsing.LINK_TITLE);
+        BasedSequence title = match(myParsing.LINK_TITLE);
         if (title != null) {
             // chop off quotes from title and unescape:
             return title; //Escaping.unescapeString(title.substring(1, title.length() - 1));
@@ -1076,7 +1080,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Attempt to parse a link label, returning number of characters parsed.
      */
     protected int parseLinkLabel() {
-        BasedSequence m = match(Parsing.LINK_LABEL);
+        BasedSequence m = match(myParsing.LINK_LABEL);
         return m == null ? 0 : m.length();
     }
 
@@ -1085,11 +1089,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     protected boolean parseAutolink() {
         BasedSequence m;
-        if ((m = match(Parsing.EMAIL_AUTOLINK)) != null) {
+        if ((m = match(myParsing.EMAIL_AUTOLINK)) != null) {
             MailLink node = new MailLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
             appendNode(node);
             return true;
-        } else if ((m = match(Parsing.AUTOLINK)) != null) {
+        } else if ((m = match(myParsing.AUTOLINK)) != null) {
             AutoLink node = new AutoLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
             appendNode(node);
             return true;
@@ -1102,7 +1106,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Attempt to parse inline HTML.
      */
     protected boolean parseHtmlInline() {
-        BasedSequence m = match(Parsing.HTML_TAG);
+        BasedSequence m = match(myParsing.HTML_TAG);
         if (m != null) {
             // separate HTML comment from herd
             HtmlInlineBase node;
@@ -1123,7 +1127,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     protected boolean parseEntity() {
         BasedSequence m;
-        if ((m = match(Parsing.ENTITY_HERE)) != null) {
+        if ((m = match(myParsing.ENTITY_HERE)) != null) {
             HtmlEntity node = new HtmlEntity(m);
             appendNode(node);
             return true;
@@ -1183,10 +1187,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         String after = charAfter == '\0' ? "\n" : String.valueOf(charAfter);
 
         // We could be more lazy here, in most cases we don't need to do every match case.
-        boolean beforeIsPunctuation = Parsing.PUNCTUATION.matcher(before).matches();
-        boolean beforeIsWhitespace = Parsing.UNICODE_WHITESPACE_CHAR.matcher(before).matches();
-        boolean afterIsPunctuation = Parsing.PUNCTUATION.matcher(after).matches();
-        boolean afterIsWhitespace = Parsing.UNICODE_WHITESPACE_CHAR.matcher(after).matches();
+        boolean beforeIsPunctuation = myParsing.PUNCTUATION.matcher(before).matches();
+        boolean beforeIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(before).matches();
+        boolean afterIsPunctuation = myParsing.PUNCTUATION.matcher(after).matches();
+        boolean afterIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(after).matches();
 
         boolean leftFlanking = !afterIsWhitespace &&
                 !(afterIsPunctuation && !beforeIsWhitespace && !beforeIsPunctuation);

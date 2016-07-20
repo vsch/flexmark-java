@@ -15,54 +15,61 @@ import java.util.regex.Pattern;
 
 public class HtmlBlockParser extends AbstractBlockParser {
 
-    private static final int COMMENT_PATTERN_INDEX = 2;
-    private static final Pattern[][] BLOCK_PATTERNS = new Pattern[][] {
-            { null, null }, // not used (no type 0)
-            {
-                    Pattern.compile("^<(?:script|pre|style)(?:\\s|>|$)", Pattern.CASE_INSENSITIVE),
-                    Pattern.compile("</(?:script|pre|style)>", Pattern.CASE_INSENSITIVE)
-            },
-            {
-                    Pattern.compile("^<!--"),
-                    Pattern.compile("-->")
-            },
-            {
-                    Pattern.compile("^<[?]"),
-                    Pattern.compile("\\?>")
-            },
-            {
-                    Pattern.compile("^<![A-Z]"),
-                    Pattern.compile(">")
-            },
-            {
-                    Pattern.compile("^<!\\[CDATA\\["),
-                    Pattern.compile("\\]\\]>")
-            },
-            {
-                    Pattern.compile("^</?(?:" +
-                            "address|article|aside|" +
-                            "base|basefont|blockquote|body|" +
-                            "caption|center|col|colgroup|" +
-                            "dd|details|dialog|dir|div|dl|dt|" +
-                            "fieldset|figcaption|figure|footer|form|frame|frameset|" +
-                            "h1|head|header|hr|html|" +
-                            "iframe|" +
-                            "legend|li|link|" +
-                            "main|menu|menuitem|meta|" +
-                            "nav|noframes|" +
-                            "ol|optgroup|option|" +
-                            "p|param|" +
-                            "section|source|summary|" +
-                            "table|tbody|td|tfoot|th|thead|title|tr|track|" +
-                            "ul" +
-                            ")(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
-                    null // terminated by blank line
-            },
-            {
-                    Pattern.compile("^(?:" + Parsing.OPENTAG + '|' + Parsing.CLOSETAG + ")\\s*$", Pattern.CASE_INSENSITIVE),
-                    null // terminated by blank line
-            }
-    };
+    private static class Patterns {
+        final public int COMMENT_PATTERN_INDEX;
+        final public Pattern[][] BLOCK_PATTERNS;
+
+        public Patterns(Parsing parsing) {
+            this.COMMENT_PATTERN_INDEX = 2;
+            this.BLOCK_PATTERNS = new Pattern[][] {
+                    { null, null }, // not used (no type 0)
+                    {
+                            Pattern.compile("^<(?:script|pre|style)(?:\\s|>|$)", Pattern.CASE_INSENSITIVE),
+                            Pattern.compile("</(?:script|pre|style)>", Pattern.CASE_INSENSITIVE)
+                    },
+                    {
+                            Pattern.compile("^<!--"),
+                            Pattern.compile("-->")
+                    },
+                    {
+                            Pattern.compile("^<[?]"),
+                            Pattern.compile("\\?>")
+                    },
+                    {
+                            Pattern.compile("^<![A-Z]"),
+                            Pattern.compile(">")
+                    },
+                    {
+                            Pattern.compile("^<!\\[CDATA\\["),
+                            Pattern.compile("\\]\\]>")
+                    },
+                    {
+                            Pattern.compile("^</?(?:" +
+                                    "address|article|aside|" +
+                                    "base|basefont|blockquote|body|" +
+                                    "caption|center|col|colgroup|" +
+                                    "dd|details|dialog|dir|div|dl|dt|" +
+                                    "fieldset|figcaption|figure|footer|form|frame|frameset|" +
+                                    "h1|head|header|hr|html|" +
+                                    "iframe|" +
+                                    "legend|li|link|" +
+                                    "main|menu|menuitem|meta|" +
+                                    "nav|noframes|" +
+                                    "ol|optgroup|option|" +
+                                    "p|param|" +
+                                    "section|source|summary|" +
+                                    "table|tbody|td|tfoot|th|thead|title|tr|track|" +
+                                    "ul" +
+                                    ")(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
+                            null // terminated by blank line
+                    },
+                    {
+                            Pattern.compile("^(?:" + parsing.OPENTAG + '|' + parsing.CLOSETAG + ")\\s*$", Pattern.CASE_INSENSITIVE),
+                            null // terminated by blank line
+                    }
+            };
+        }
+    }
 
     private final HtmlBlockBase block;
     private final Pattern closingPattern;
@@ -106,7 +113,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         block.setContent(content);
         content = null;
 
@@ -116,7 +123,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             int lastIndex = 0;
             BasedSequence chars = block.getContentChars();
             if (chars.eolLength() > 0) chars = chars.midSequence(0, -1);
-            Matcher matcher = Parsing.HTML_COMMENT.matcher(chars);
+            Matcher matcher = state.getParsing().HTML_COMMENT.matcher(chars);
             while (matcher.find()) {
                 int index = matcher.start();
                 if (lastIndex < index) {
@@ -177,6 +184,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
+        private Patterns myPatterns = null;
         private BlockFactory(DataHolder options) {
             super(options);
         }
@@ -192,11 +200,16 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     if (blockType == 7 && matchedBlockParser.getMatchedBlockParser().getBlock() instanceof Paragraph) {
                         continue;
                     }
-                    Pattern opener = BLOCK_PATTERNS[blockType][0];
-                    Pattern closer = BLOCK_PATTERNS[blockType][1];
+
+                    if (myPatterns == null) {
+                        myPatterns = new Patterns(state.getParsing());
+                    }
+                    
+                    Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];
+                    Pattern closer = myPatterns.BLOCK_PATTERNS[blockType][1];
                     boolean matches = opener.matcher(line.subSequence(nextNonSpace, line.length())).find();
                     if (matches) {
-                        return BlockStart.of(new HtmlBlockParser(state.getProperties(), closer, blockType == COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
+                        return BlockStart.of(new HtmlBlockParser(state.getProperties(), closer, blockType == myPatterns.COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.parser;
 
+import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
@@ -15,7 +16,7 @@ import java.util.Map;
  */
 public interface InlineParser {
 
-    void initializeDocument(Document document);
+    void initializeDocument(Parsing parsing, Document document);
     void finalizeDocument(Document document);
 
     /**

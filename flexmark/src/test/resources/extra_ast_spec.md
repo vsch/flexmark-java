@@ -234,31 +234,31 @@ Allow atx headers without a space between # and the title
 <h5>Heading</h5>
 <h6>Heading</h6>
 .
-Document[0, 1063]
+Document[0, 151]
   Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
     Text[1, 8] chars:[1, 8, "Heading"]
-  Heading[85, 94] textOpen:[85, 87, "##"] text:[87, 94, "Heading"]
-    Text[87, 94] chars:[87, 94, "Heading"]
-  Heading[171, 181] textOpen:[171, 174, "###"] text:[174, 181, "Heading"]
-    Text[174, 181] chars:[174, 181, "Heading"]
-  Heading[258, 269] textOpen:[258, 262, "####"] text:[262, 269, "Heading"]
-    Text[262, 269] chars:[262, 269, "Heading"]
-  Heading[346, 358] textOpen:[346, 351, "#####"] text:[351, 358, "Heading"]
-    Text[351, 358] chars:[351, 358, "Heading"]
-  Heading[435, 448] textOpen:[435, 441, "######"] text:[441, 448, "Heading"]
-    Text[441, 448] chars:[441, 448, "Heading"]
-  Heading[526, 536] textOpen:[526, 527, "#"] text:[527, 534, "Heading"] textClose:[535, 536, "#"]
-    Text[527, 534] chars:[527, 534, "Heading"]
-  Heading[613, 624] textOpen:[613, 615, "##"] text:[615, 622, "Heading"] textClose:[623, 624, "#"]
-    Text[615, 622] chars:[615, 622, "Heading"]
-  Heading[701, 713] textOpen:[701, 704, "###"] text:[704, 711, "Heading"] textClose:[712, 713, "#"]
-    Text[704, 711] chars:[704, 711, "Heading"]
-  Heading[790, 803] textOpen:[790, 794, "####"] text:[794, 801, "Heading"] textClose:[802, 803, "#"]
-    Text[794, 801] chars:[794, 801, "Heading"]
-  Heading[880, 894] textOpen:[880, 885, "#####"] text:[885, 892, "Heading"] textClose:[893, 894, "#"]
-    Text[885, 892] chars:[885, 892, "Heading"]
-  Heading[971, 986] textOpen:[971, 977, "######"] text:[977, 984, "Heading"] textClose:[985, 986, "#"]
-    Text[977, 984] chars:[977, 984, "Heading"]
+  Heading[9, 18] textOpen:[9, 11, "##"] text:[11, 18, "Heading"]
+    Text[11, 18] chars:[11, 18, "Heading"]
+  Heading[19, 29] textOpen:[19, 22, "###"] text:[22, 29, "Heading"]
+    Text[22, 29] chars:[22, 29, "Heading"]
+  Heading[30, 41] textOpen:[30, 34, "####"] text:[34, 41, "Heading"]
+    Text[34, 41] chars:[34, 41, "Heading"]
+  Heading[42, 54] textOpen:[42, 47, "#####"] text:[47, 54, "Heading"]
+    Text[47, 54] chars:[47, 54, "Heading"]
+  Heading[55, 68] textOpen:[55, 61, "######"] text:[61, 68, "Heading"]
+    Text[61, 68] chars:[61, 68, "Heading"]
+  Heading[70, 80] textOpen:[70, 71, "#"] text:[71, 78, "Heading"] textClose:[79, 80, "#"]
+    Text[71, 78] chars:[71, 78, "Heading"]
+  Heading[81, 92] textOpen:[81, 83, "##"] text:[83, 90, "Heading"] textClose:[91, 92, "#"]
+    Text[83, 90] chars:[83, 90, "Heading"]
+  Heading[93, 105] textOpen:[93, 96, "###"] text:[96, 103, "Heading"] textClose:[104, 105, "#"]
+    Text[96, 103] chars:[96, 103, "Heading"]
+  Heading[106, 119] textOpen:[106, 110, "####"] text:[110, 117, "Heading"] textClose:[118, 119, "#"]
+    Text[110, 117] chars:[110, 117, "Heading"]
+  Heading[120, 134] textOpen:[120, 125, "#####"] text:[125, 132, "Heading"] textClose:[133, 134, "#"]
+    Text[125, 132] chars:[125, 132, "Heading"]
+  Heading[135, 150] textOpen:[135, 141, "######"] text:[141, 148, "Heading"] textClose:[149, 150, "#"]
+    Text[141, 148] chars:[141, 148, "Heading"]
 ````````````````````````````````
 
 
@@ -2135,6 +2135,67 @@ some text
 .
 Document[0, 23]
   FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[3] close:[18, 21, "~~~"]
+````````````````````````````````
+
+
+## IntelliJ Dummy Identifier 
+
+allow dummy identifier in url and text
+
+```````````````````````````````` example(IntelliJ Dummy Identifier: 1) options(dummy-identifier)
+[⎮text](/ur⎮l)
+
+![al⎮t](/url⎮)
+
+.
+<p><a href="/ur%1Fl">⎮text</a></p>
+<p><img src="/url%1F" alt="al⎮t" /></p>
+.
+Document[0, 32]
+  Paragraph[0, 15]
+    Link[0, 14] textOpen:[0, 1, "["] text:[1, 6, "%1ftext"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 13, "/ur%1fl"] pageRef:[8, 13, "/ur%1fl"] linkClose:[13, 14, ")"]
+      Text[1, 6] chars:[1, 6, "%1ftext"]
+  Paragraph[16, 31]
+    Image[16, 30] textOpen:[16, 18, "!["] text:[18, 22, "al%1ft"] textClose:[22, 23, "]"] linkOpen:[23, 24, "("] url:[24, 29, "/url%1f"] pageRef:[24, 29, "/url%1f"] linkClose:[29, 30, ")"]
+      Text[18, 22] chars:[18, 22, "al%1ft"]
+````````````````````````````````
+
+
+## Indented Code Options 
+
+no trim trailing blank lines
+
+```````````````````````````````` example Indented Code Options: 1
+    code
+    code line
+    
+    
+    
+.
+<pre><code>code
+code line
+</code></pre>
+.
+Document[0, 38]
+  IndentedCodeBlock[4, 38]
+````````````````````````````````
+
+
+trim trailing blank lines
+
+```````````````````````````````` example(Indented Code Options: 2) options(code-trim-trailing)
+    code
+    code line
+    
+    
+    
+.
+<pre><code>code
+code line
+</code></pre>
+.
+Document[0, 38]
+  IndentedCodeBlock[4, 23]
 ````````````````````````````````
 
 
