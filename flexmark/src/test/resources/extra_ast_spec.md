@@ -207,19 +207,19 @@ Document[0, 46]
 Allow atx headers without a space between # and the title
 
 ```````````````````````````````` example(ATX Header options: 1) options(hdr-no-atx-space)
-#Heading                                                                            
-##Heading                                                                            
-###Heading                                                                            
-####Heading                                                                            
-#####Heading                                                                            
-######Heading                                                                            
+#Heading
+##Heading
+###Heading
+####Heading
+#####Heading
+######Heading
 
-#Heading #                                                                            
-##Heading #                                                                            
-###Heading #                                                                            
-####Heading #                                                                            
-#####Heading #                                                                            
-######Heading #                                                                            
+#Heading #
+##Heading #
+###Heading #
+####Heading #
+#####Heading #
+######Heading #
 .
 <h1>Heading</h1>
 <h2>Heading</h2>
@@ -1872,6 +1872,25 @@ Document[0, 35]
 ````````````````````````````````
 
 
+## Inline HTML
+
+kbd tag
+
+```````````````````````````````` example Inline HTML: 1
+text with <kbd>ENTER</kbd> embedded
+.
+<p>text with <kbd>ENTER</kbd> embedded</p>
+.
+Document[0, 36]
+  Paragraph[0, 36]
+    Text[0, 10] chars:[0, 10, "text with "]
+    HtmlInline[10, 15] chars:[10, 15, "<kbd>"]
+    Text[15, 20] chars:[15, 20, "ENTER"]
+    HtmlInline[20, 26] chars:[20, 26, "</kbd>"]
+    Text[26, 35] chars:[26, 35, " embedded"]
+````````````````````````````````
+
+
 ## GFM compatibility
 
 ### GFM Emphasis
@@ -2070,6 +2089,52 @@ Document[0, 14]
   Paragraph[0, 14]
     Image[0, 12] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] linkClose:[11, 12, ")"]
       Text[2, 5] chars:[2, 5, "alt"]
+````````````````````````````````
+
+
+## Fenced Code
+
+Option not to match closing fence characters to opening ones
+
+```````````````````````````````` example(Fenced Code: 1) options(unmatched-fence)
+```
+proper unmatched fenced code
+~~~
+.
+<pre><code>proper unmatched fenced code
+</code></pre>
+.
+Document[0, 37]
+  FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[3] close:[33, 36, "~~~"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Fenced Code: 2) options(unmatched-fence)
+~~~
+proper unmatched fenced code
+```
+.
+<pre><code>proper unmatched fenced code
+</code></pre>
+.
+Document[0, 37]
+  FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[3] close:[33, 36, "```"]
+````````````````````````````````
+
+
+non empty, info, blank line follows, unmatched
+
+```````````````````````````````` example(Fenced Code: 3) options(unmatched-fence)
+```info
+some text
+~~~
+
+.
+<pre><code class="language-info">some text
+</code></pre>
+.
+Document[0, 23]
+  FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[3] close:[18, 21, "~~~"]
 ````````````````````````````````
 
 

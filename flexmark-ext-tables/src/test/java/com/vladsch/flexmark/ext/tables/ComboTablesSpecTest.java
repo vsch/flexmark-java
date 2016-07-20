@@ -27,6 +27,7 @@ public class ComboTablesSpecTest extends ComboSpecTestCase {
                 .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMNS, true)
         );
+        optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

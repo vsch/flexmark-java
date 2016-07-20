@@ -62,14 +62,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     static class InlineParserOptions {
         final public boolean matchLookaheadFirst;
         final public boolean relaxedEmphasis;
-        final public boolean parseInlineAnchorLinks;
+        //final public boolean parseInlineAnchorLinks;
         final public boolean parseMultiLineImageUrls;
+        //final public boolean parseGitHubIssueMarker;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
             relaxedEmphasis = options.get(Parser.INLINE_RELAXED_EMPHASIS);
-            parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
+            //parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
             parseMultiLineImageUrls = options.get(Parser.PARSE_MULTI_LINE_IMAGE_URLS);
+            //parseGitHubIssueMarker = options.get(PARSE_GITHUB_ISSUE_MARKER);
         }
     }
 
@@ -381,7 +383,14 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         if (customCharacters != null && customCharacters.get(c)) {
-            processCustomCharacters();
+            res = processCustomCharacters();
+            if (!res) {
+                index++;
+                // When we get here, it's only for a single special character that turned out to not have a special meaning.
+                // So we shouldn't have a single surrogate here, hence it should be ok to turn it into a String.
+                appendText(input.subSequence(index - 1, index));
+            }
+
             return true;
         }
 
@@ -432,9 +441,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return true;
     }
 
-    private void processCustomCharacters() {
+    private boolean processCustomCharacters() {
         char c = peek();
         CharacterNodeFactory factory = customSpecialCharacterFactoryMap.get(c);
+        if (factory == null) return false; 
+        
         Node node = factory.create();
         node.setChars(input.subSequence(index, index + 1));
 
@@ -471,6 +482,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (pos < index && factory.wantSkippedWhitespace()) {
             block.appendChild(new WhiteSpace(input.subSequence(pos, index)));
         }
+        
+        return true;
     }
 
     /**

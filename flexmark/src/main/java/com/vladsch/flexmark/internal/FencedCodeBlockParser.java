@@ -5,6 +5,7 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.FencedCodeBlock;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.Arrays;
@@ -24,11 +25,13 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     private char fenceChar;
     private int fenceLength;
     private int fenceIndent;
+    final private boolean matchingCloser; 
 
-    public FencedCodeBlockParser(char fenceChar, int fenceLength, int fenceIndent) {
+    public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent) {
         this.fenceChar = fenceChar;
         this.fenceLength = fenceLength;
         this.fenceIndent = fenceIndent;
+        this.matchingCloser = options.get(Parser.MATCH_CLOSING_FENCE_CHARACTERS);
     }
 
     @Override
@@ -44,7 +47,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         Matcher matcher = null;
         boolean matches = (state.getIndent() <= 3 &&
                 nextNonSpace < line.length() &&
-                line.charAt(nextNonSpace) == fenceChar);
+                (!matchingCloser || line.charAt(nextNonSpace) == fenceChar));
 
         if (matches) {
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
@@ -158,7 +161,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                 if ((matcher = OPENING_FENCE.matcher(trySequence)).find()) {
                     int fenceLength = matcher.group(0).length();
                     char fenceChar = matcher.group(0).charAt(0);
-                    FencedCodeBlockParser blockParser = new FencedCodeBlockParser(fenceChar, fenceLength, state.getIndent());
+                    FencedCodeBlockParser blockParser = new FencedCodeBlockParser(state.getProperties(), fenceChar, fenceLength, state.getIndent());
                     blockParser.block.setOpeningMarker(trySequence.subSequence(0, fenceLength));
                     return BlockStart.of(blockParser).atIndex(nextNonSpace + fenceLength);
                 }

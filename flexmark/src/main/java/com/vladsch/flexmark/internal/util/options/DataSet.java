@@ -39,4 +39,12 @@ public class DataSet implements DataHolder {
             return key.getDefaultValue(this);
         }
     }
+
+    public static DataSet merge(DataHolder...dataHolders) {
+        DataSet dataSet = new DataSet();
+        for (DataHolder dataHolder : dataHolders) {
+            if (dataHolder != null) dataSet.dataSet.putAll(dataHolder.getAll());
+        }
+        return dataSet;
+    }
 }

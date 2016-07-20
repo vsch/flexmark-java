@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.internal.util.collection;
 
+import com.vladsch.flexmark.internal.util.RunnableValue;
 import com.vladsch.flexmark.internal.util.collection.iteration.*;
 
 import java.util.*;
@@ -213,6 +214,27 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         V old = valueList.get(index);
         valueList.set(index, v);
         return old;
+    }
+    
+    public V putIfMissing(K k, V v) {
+        int index = keySet.indexOf(k);
+        if (index == -1) {
+            keySet.add(k, v);
+            return v;
+        }
+
+        return valueList.get(index);
+    }
+
+    public V putIfMissing(K k, RunnableValue<V> runnableValue) {
+        int index = keySet.indexOf(k);
+        if (index == -1) {
+            V v = runnableValue.run();
+            keySet.add(k, v);
+            return v;
+        }
+
+        return valueList.get(index);
     }
 
     @Override

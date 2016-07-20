@@ -24,6 +24,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     final static public DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<>("APPEND_MISSING_COLUMNS", false);
     final static public DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<>("DISCARD_EXTRA_COLUMNS", false);
     final static public DataKey<Boolean> HEADER_SEPARATOR_COLUMNS = new DataKey<>("HEADER_SEPARATOR_COLUMNS", false);
+    final static public DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<>("TRIM_CELL_WHITESPACE", true);
     final static public DataKey<Boolean> COLUMN_SPANS = new DataKey<>("COLUMN_SPANS", true);
 
     public static Extension create() {

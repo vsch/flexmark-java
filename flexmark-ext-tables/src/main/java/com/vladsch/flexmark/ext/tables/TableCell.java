@@ -1,11 +1,9 @@
 package com.vladsch.flexmark.ext.tables;
 
+import com.vladsch.flexmark.internal.util.ast.TextNodeConverter;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.WhiteSpace;
+import com.vladsch.flexmark.node.*;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.
@@ -32,6 +30,34 @@ public class TableCell extends CustomNode implements DelimitedNode {
             Node next = child.getPrevious();
             child.unlink();
             child = next;
+        }
+    }
+
+    public void mergeWhiteSpace() {
+        boolean hadWhitespace = false;
+        Node child = getFirstChild();
+
+        while (child != null && child instanceof WhiteSpace) {
+            Node next = child.getNext();
+            Text text = new Text(child.getChars());
+            child.insertBefore(text);
+            child.unlink();
+            child = next;
+            hadWhitespace = true;
+        }
+
+        child = getLastChild();
+        while (child != null && child instanceof WhiteSpace) {
+            Node previous = child.getPrevious();
+            Text text = new Text(child.getChars());
+            child.insertBefore(text);
+            child.unlink();
+            child = previous;
+            hadWhitespace = true;
+        }
+
+        if (hadWhitespace) {
+            TextNodeConverter.mergeTextNodes(this);
         }
     }
 

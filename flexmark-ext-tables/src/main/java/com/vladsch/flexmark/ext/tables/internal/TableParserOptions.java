@@ -10,6 +10,7 @@ class TableParserOptions {
     final public boolean discardExtraColumns;
     final public boolean columnSpans;
     final public boolean headerSeparatorColumns;
+    final public boolean trimCellWhitespace;
 
     TableParserOptions(DataHolder options) {
         this.maxHeaderRows = TablesExtension.MAX_HEADER_ROWS.getFrom(options);
@@ -18,5 +19,6 @@ class TableParserOptions {
         this.discardExtraColumns = TablesExtension.DISCARD_EXTRA_COLUMNS.getFrom(options);
         this.columnSpans = TablesExtension.COLUMN_SPANS.getFrom(options);
         this.headerSeparatorColumns = TablesExtension.HEADER_SEPARATOR_COLUMNS.getFrom(options);
+        this.trimCellWhitespace = TablesExtension.TRIM_CELL_WHITESPACE.getFrom(options);
     }
 }

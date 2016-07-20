@@ -26,8 +26,12 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                     "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
 
     private static BitSet pipeCharacters = new BitSet(1);
+    private static BitSet separatorCharacters = new BitSet(3);
     static {
         pipeCharacters.set('|');
+        separatorCharacters.set('|');
+        separatorCharacters.set(':');
+        separatorCharacters.set('-');
     }
 
     private static HashMap<Character, CharacterNodeFactory> pipeNodeMap = new HashMap<>();
@@ -56,7 +60,6 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
         });
     }
-    
     public static ParagraphPreProcessorFactory Factory() {
         return new ParagraphPreProcessorFactory() {
             @Override
@@ -130,7 +133,12 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
             TableRow tableRow = new TableRow(fullRowLine);
 
-            List<Node> sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
+            List<Node> sepList;
+            if (rowNumber == separatorLineNumber) {
+                sepList = inlineParser.parseCustom(fullRowLine, tableRow, separatorCharacters, pipeNodeMap);
+            } else {
+                sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
+            }
 
             if (sepList == null) {
                 if (rowNumber <= separatorLineNumber) return 0;
@@ -208,7 +216,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 if (closingMarker != null) tableCell.setClosingMarker(closingMarker);
                 tableCell.setChars(tableCell.childChars());
                 // TODO: Add option to keep cell whitespace, if yes, then convert it to text and merge adjacent text nodes
-                //tableCell.trimWhiteSpace();
+                if (options.trimCellWhitespace) tableCell.trimWhiteSpace();
+                else tableCell.mergeWhiteSpace();
+
                 tableCell.setText(tableCell.childChars());
                 tableCell.setCharsFromContent();
                 tableCell.setSpan(span);
