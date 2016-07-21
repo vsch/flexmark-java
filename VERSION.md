@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.6](#046)
 - [0.4.5](#045)
 - [0.4.4](#044)
 - [0.4.3](#043)
@@ -33,6 +34,34 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+0.4.6
+-----
+
+- Change move `Parsing` static strings and patterns into instance fields so that they can be
+  changed according to selected options, making it easier to configure parsing patterns.
+
+- Change move all `InlineParserImpl` parsing string and patterns to `Parsing` 
+
+- Add `ParserState.getParsing()` to allow block parsers to use the current parsing config from
+  the core. Extensions can extend this class for their own option dependent patterns.
+
+- Add `Parser.ORDERED_LIST_DOT_ONLY` to not allow `)` ordered list item delimiter
+
+- Add `Parser.INTELLIJ_DUMMY_IDENTIFIER` to include the `'\u001f'` completion location dummy
+  identifier used by Markdown Navigator. Other characters can be easily added if the need
+  arises.
+
+- Change `InlineParserImpl.parseCustom(BasedSequence, Node, BitSet, Map<Character,
+  CharacterNodeFactory>)` now if a character is in the bit set but the map does not contain a
+  node factory then the character will be treated as text and prevent any standard delimiter or
+  other inline parsing checking. Can be used by extensions to prevent their special characters
+  from being hijacked by other processors.
+
+- Add `RenderingTestCase.IGNORE` and `RenderingTestCase.FAIL` boolean data keys. When
+  `RenderingTestCase.getOptions(SpecExample, String)` returns a data set with one of these keys
+  set to true then it is treated the same way as if the option string was `IGNORE` or `FAIL`
+  respectively. Allows conditional ignore or fail on spec examples in tests.
+
 0.4.5
 -----
 
@@ -48,10 +77,10 @@ flexmark-java
     decorated part of the text. The custom decorated text nodes should also implement
     `DoNotDecorate` interface so that other extensions will know not to decorate their text.
 
-    Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
-
     If a `Text` node is not a child of `TextBase` then a new instance of `TextBase` should be
     created and all undecorated and decorated text nodes should be its children.
+
+    Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
 
     `TextBase` rendering is just rendering of its children. `TextCollectingVisitor` uses the
     characters of `TextBase` node and does not descend into its children.

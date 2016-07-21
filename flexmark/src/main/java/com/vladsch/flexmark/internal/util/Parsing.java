@@ -138,6 +138,10 @@ public class Parsing {
         return intellijDummyIdentifier ? "\u001f" : "";
     }
 
+    public String ADDITIONAL_CHARS_SET(String quantifier) {
+        return intellijDummyIdentifier ? "[\u001f]" + quantifier : "";
+    }
+
     public static int columnsToNextTabStop(int column) {
         // Tab stop is 4
         return 4 - (column % 4);

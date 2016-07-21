@@ -16,9 +16,9 @@ import static org.junit.Assert.assertEquals;
 
 public abstract class RenderingTestCase {
 
-    public static final String IGNORE_OPTION = "IGNORE";
-    public static final String FAIL_OPTION = "FAIL";
-    public static DataKey<Boolean> FAIL = new DataKey<Boolean>("FAIL", false);
+    public static final String IGNORE_OPTION_NAME = "IGNORE";
+    public static final String FAIL_OPTION_NAME = "FAIL";
+    public static DataKey<Boolean> FAIL = new DataKey<>("FAIL", false);
     public static DataKey<Boolean> IGNORE = new DataKey<>("IGNORE", false);
 
     @Rule
@@ -54,11 +54,11 @@ public abstract class RenderingTestCase {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
 
-            if (option.equals(IGNORE_OPTION)) {
+            if (option.equals(IGNORE_OPTION_NAME)) {
                 throwIgnoredOption(example, optionSets, option);
             }
 
-            if (option.equals(FAIL_OPTION)) {
+            if (option.equals(FAIL_OPTION_NAME)) {
                 if (options == null) {
                     options = new MutableDataSet().set(FAIL, true);
                 } else {
