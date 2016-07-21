@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="FLEXMARK_JAVA_EXTENSION" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="FlexmarkExt.ModuleBuildProperties">
     <option name="extensionName" value="Definition" />
     <option name="extensionPackage" value="com.vladsch.flexmark.ext.definition" />

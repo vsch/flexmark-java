@@ -20,34 +20,76 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence endSequence(int start, int end) {
         int length = length();
-        return subSequence(length - start, length - end);
+        int useStart = length - start;
+        int useEnd = length - end;
+
+        if (useStart < 0) useStart = 0;
+        else if (useStart > length) useStart = length;
+        if (useEnd < 0) useEnd = 0;
+        else if (useEnd > length) useEnd = length;
+
+        if (useStart > useEnd) useStart = useEnd;
+
+        if (useStart == 0 && useEnd == length) {
+            return this;
+        } else {
+            return subSequence(useStart, useEnd);
+        }
     }
 
     @Override
     public BasedSequence endSequence(int start) {
         int length = length();
-        return subSequence(length - start, length);
+        if (start <= 0) {
+            return subSequence(length, length);
+        } else if (start >= length) {
+            return this;
+        } else {
+            return subSequence(length - start, length);
+        }
     }
 
     @Override
     public char endCharAt(int index) {
+        if (index < 0 || index >= length()) return '\0';
         return charAt(length() - index);
     }
 
     @Override
     public BasedSequence midSequence(int start, int end) {
         int length = length();
-        return subSequence(start < 0 ? length + start : start, end < 0 ? length + end : end);
+        int useStart = start < 0 ? length + start : start;
+        int useEnd = end < 0 ? length + end : end;
+
+        if (useStart < 0) useStart = 0;
+        else if (useStart > length) useStart = length;
+        if (useEnd < 0) useEnd = 0;
+        else if (useEnd > length) useEnd = length;
+
+        if (useStart > useEnd) useStart = useEnd;
+        if (useStart == 0 && useEnd == length) {
+            return this;
+        } else {
+            return subSequence(useStart, useEnd);
+        }
     }
 
     @Override
     public BasedSequence midSequence(int start) {
         int length = length();
-        return subSequence(start < 0 ? length + start : start, length);
+        int useStart = start < 0 ? length + start : start;
+        if (useStart <= 0) {
+            return this;
+        } else if (useStart >= length) {
+            return subSequence(length, length);
+        } else {
+            return subSequence(useStart, length);
+        }
     }
 
     @Override
     public char midCharAt(int index) {
+        if (index < -length() || index >= length()) return '\0';
         return charAt(index < 0 ? length() + index : index);
     }
 
@@ -473,7 +515,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         int iMax = length();
         for (int i = index; i < iMax; i++) {
             char c = charAt(i);
-            if (c == c1 || c == c2) return i;
+            if (c == c1 || c == c2 || c == c3) return i;
         }
         return -1;
     }
