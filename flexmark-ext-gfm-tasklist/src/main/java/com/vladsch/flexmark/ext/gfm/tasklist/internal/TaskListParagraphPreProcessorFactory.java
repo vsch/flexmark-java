@@ -13,8 +13,11 @@ import com.vladsch.flexmark.parser.block.ParserState;
 
 import java.util.Collections;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class TaskListParagraphPreProcessorFactory implements ParagraphPreProcessorFactory {
+    final Pattern TASK_LIST_MARKER = Pattern.compile("^\\[(?: |x|X)\\](?: |\t|\r|\n|$)");
+    
     @Override
     public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
         return null;
@@ -36,13 +39,13 @@ public class TaskListParagraphPreProcessorFactory implements ParagraphPreProcess
             @Override
             public int preProcessBlock(Paragraph block, ParserState state) {
                 Block bulletListItem = block.getParent();
-                if (bulletListItem instanceof BulletListItem && block.getPrevious() == null) {
+                if (bulletListItem instanceof BulletListItem && block.getPrevious() == null ) {
                     // first paragraph of a bullet list item
                     BasedSequence chars = block.getChars();
-                    if (chars.charAt(0) == '[' && chars.charAt(2) == ']'
-                            && (chars.charAt(1) == ' ' || chars.charAt(1) == 'x' || chars.charAt(1) == 'X')
-                            && (chars.length() == 3 || chars.charAt(3) == ' ' || chars.charAt(3) == '\t' || chars.charAt(3) == '\r' || chars.charAt(3) == '\n')) {
-
+                    //if (chars.length() >= 3 && chars.charAt(0) == '[' && chars.charAt(2) == ']'
+                    //        && (chars.charAt(1) == ' ' || chars.charAt(1) == 'x' || chars.charAt(1) == 'X')
+                    //        && (chars.length() <= 3 || chars.charAt(3) == ' ' || chars.charAt(3) == '\t' || chars.charAt(3) == '\r' || chars.charAt(3) == '\n')) {
+                    if (TASK_LIST_MARKER.matcher(chars).find()) {
                         // task item
                         TaskListItem taskListItem = new TaskListItem((BulletListItem) bulletListItem);
                         BasedSequence taskOpeningMarker = chars.subSequence(0, 3);

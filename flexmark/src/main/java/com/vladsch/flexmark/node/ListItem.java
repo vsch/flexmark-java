@@ -13,6 +13,8 @@ public abstract class ListItem extends Block {
     @Override
     public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
+        if (isTight()) out.append(" isTight");
+        else out.append(" isLoose");
     }
 
     @Override
@@ -32,8 +34,16 @@ public abstract class ListItem extends Block {
         this.tight = tight;
     }
 
+    public void setLoose(boolean loose) {
+        this.tight = !loose;
+    }
+
     public boolean isTight() {
         return tight && isInTightList();
+    }
+
+    public boolean isLoose() {
+        return !isTight();
     }
 
     public boolean isInTightList() {

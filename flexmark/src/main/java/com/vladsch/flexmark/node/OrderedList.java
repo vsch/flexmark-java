@@ -6,6 +6,8 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import java.util.List;
 
 public class OrderedList extends ListBlock {
+    private int startNumber;
+    private char delimiter;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -27,8 +29,12 @@ public class OrderedList extends ListBlock {
         super(blockContent);
     }
 
-    private int startNumber;
-    private char delimiter;
+    @Override
+    public void getAstExtra(StringBuilder out) {
+        super.getAstExtra(out);
+        if (startNumber > 1) out.append(" start:").append(startNumber);
+        out.append(" delimiter:'").append(delimiter).append("'");
+    }
 
     public int getStartNumber() {
         return startNumber;

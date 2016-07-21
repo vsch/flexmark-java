@@ -281,11 +281,11 @@ Document[0, 262]
       Text[150, 192] chars:[150, 192, "Multi … other"]
       SoftLineBreak[193, 194]
       Text[198, 230] chars:[198, 230, "markd … ists."]
-    BulletList[240, 262] isTight=true
-      BulletListItem[240, 249] open:[240, 241, "-"]
+    BulletList[240, 262] isTight
+      BulletListItem[240, 249] open:[240, 241, "-"] isTight
         Paragraph[242, 249]
           Text[242, 248] chars:[242, 248, "item 1"]
-      BulletListItem[253, 262] open:[253, 254, "-"]
+      BulletListItem[253, 262] open:[253, 254, "-"] isTight
         Paragraph[255, 262]
           Text[255, 261] chars:[255, 261, "item 2"]
 ````````````````````````````````
@@ -412,11 +412,11 @@ Document[0, 351]
       Text[239, 281] chars:[239, 281, "Multi … other"]
       SoftLineBreak[282, 283]
       Text[287, 319] chars:[287, 319, "markd … ists."]
-    BulletList[329, 351] isTight=true
-      BulletListItem[329, 338] open:[329, 330, "-"]
+    BulletList[329, 351] isTight
+      BulletListItem[329, 338] open:[329, 330, "-"] isTight
         Paragraph[331, 338]
           Text[331, 337] chars:[331, 337, "item 1"]
-      BulletListItem[342, 351] open:[342, 343, "-"]
+      BulletListItem[342, 351] open:[342, 343, "-"] isTight
         Paragraph[344, 351]
           Text[344, 350] chars:[344, 350, "item 2"]
 ````````````````````````````````
@@ -462,11 +462,11 @@ Document[0, 266]
       Text[154, 196] chars:[154, 196, "Multi … other"]
       SoftLineBreak[197, 198]
       Text[202, 234] chars:[202, 234, "markd … ists."]
-    BulletList[244, 266] isTight=true
-      BulletListItem[244, 253] open:[244, 245, "-"]
+    BulletList[244, 266] isTight
+      BulletListItem[244, 253] open:[244, 245, "-"] isTight
         Paragraph[246, 253]
           Text[246, 252] chars:[246, 252, "item 1"]
-      BulletListItem[257, 266] open:[257, 258, "-"]
+      BulletListItem[257, 266] open:[257, 258, "-"] isTight
         Paragraph[259, 266]
           Text[259, 265] chars:[259, 265, "item 2"]
 ````````````````````````````````
@@ -553,11 +553,11 @@ Document[0, 377]
       Text[265, 307] chars:[265, 307, "Multi … other"]
       SoftLineBreak[308, 309]
       Text[313, 345] chars:[313, 345, "markd … ists."]
-    BulletList[355, 377] isTight=true
-      BulletListItem[355, 364] open:[355, 356, "-"]
+    BulletList[355, 377] isTight
+      BulletListItem[355, 364] open:[355, 356, "-"] isTight
         Paragraph[357, 364]
           Text[357, 363] chars:[357, 363, "item 1"]
-      BulletListItem[368, 377] open:[368, 369, "-"]
+      BulletListItem[368, 377] open:[368, 369, "-"] isTight
         Paragraph[370, 377]
           Text[370, 376] chars:[370, 376, "item 2"]
 ````````````````````````````````
@@ -632,11 +632,11 @@ Document[0, 385]
       Footnote[231, 235] ordinal: 2  textOpen:[231, 233, "[^"] text:[233, 234, "1"] textClose:[234, 235, "]"]
         Text[233, 234] chars:[233, 234, "1"]
       Text[235, 236] chars:[235, 236, "."]
-    BulletList[246, 268] isTight=true
-      BulletListItem[246, 255] open:[246, 247, "-"]
+    BulletList[246, 268] isTight
+      BulletListItem[246, 255] open:[246, 247, "-"] isTight
         Paragraph[248, 255]
           Text[248, 254] chars:[248, 254, "item 1"]
-      BulletListItem[259, 268] open:[259, 260, "-"]
+      BulletListItem[259, 268] open:[259, 260, "-"] isTight
         Paragraph[261, 268]
           Text[261, 267] chars:[261, 267, "item 2"]
     FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]
@@ -723,11 +723,11 @@ Document[0, 385]
       Footnote[231, 235] ordinal: 2  textOpen:[231, 233, "[^"] text:[233, 234, "1"] textClose:[234, 235, "]"]
         Text[233, 234] chars:[233, 234, "1"]
       Text[235, 236] chars:[235, 236, "."]
-    BulletList[246, 268] isTight=true
-      BulletListItem[246, 255] open:[246, 247, "-"]
+    BulletList[246, 268] isTight
+      BulletListItem[246, 255] open:[246, 247, "-"] isTight
         Paragraph[248, 255]
           Text[248, 254] chars:[248, 254, "item 1"]
-      BulletListItem[259, 268] open:[259, 260, "-"]
+      BulletListItem[259, 268] open:[259, 260, "-"] isTight
         Paragraph[261, 268]
           Text[261, 267] chars:[261, 267, "item 2"]
     FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]

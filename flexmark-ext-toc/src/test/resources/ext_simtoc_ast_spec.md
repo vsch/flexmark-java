@@ -115,8 +115,8 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 .
 Document[0, 83]
   SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-  BulletList[72, 83] isTight=true
-    BulletListItem[72, 83] open:[72, 73, "-"]
+  BulletList[72, 83] isTight
+    BulletListItem[72, 83] open:[72, 73, "-"] isTight
       Paragraph[74, 83]
         Text[74, 82] chars:[74, 82, "asfdasfd"]
 ````````````````````````````````
@@ -163,11 +163,11 @@ Document[0, 123]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
   Heading[83, 97] textOpen:[83, 85, "##"] text:[86, 97, "Heading 1.1"]
     Text[86, 97] chars:[86, 97, "Headi … g 1.1"]
-  BulletList[98, 123] isTight=true
-    BulletListItem[98, 112] open:[98, 99, "-"]
+  BulletList[98, 123] isTight
+    BulletListItem[98, 112] open:[98, 99, "-"] isTight
       Paragraph[100, 112]
         Text[100, 111] chars:[100, 111, "afdas … dsadf"]
-    BulletListItem[112, 123] open:[112, 113, "-"]
+    BulletListItem[112, 123] open:[112, 113, "-"] isTight
       Paragraph[114, 123]
         Text[114, 122] chars:[114, 122, "asfdasfd"]
 ````````````````````````````````
@@ -191,11 +191,11 @@ Document[0, 109]
   SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 82]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
-  BulletList[84, 109] isTight=true
-    BulletListItem[84, 98] open:[84, 85, "-"]
+  BulletList[84, 109] isTight
+    BulletListItem[84, 98] open:[84, 85, "-"] isTight
       Paragraph[86, 98]
         Text[86, 97] chars:[86, 97, "afdas … dsadf"]
-    BulletListItem[98, 109] open:[98, 99, "-"]
+    BulletListItem[98, 109] open:[98, 99, "-"] isTight
       Paragraph[100, 109]
         Text[100, 108] chars:[100, 108, "asfdasfd"]
 ````````````````````````````````
@@ -215,11 +215,11 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 Document[0, 109]
   SimTocBlock[0, 96] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 96]
-      BulletList[71, 96] isTight=true
-        BulletListItem[71, 85] open:[71, 72, "-"]
+      BulletList[71, 96] isTight
+        BulletListItem[71, 85] open:[71, 72, "-"] isTight
           Paragraph[73, 85]
             Text[73, 84] chars:[73, 84, "afdas … dsadf"]
-        BulletListItem[85, 96] open:[85, 86, "-"]
+        BulletListItem[85, 96] open:[85, 86, "-"] isTight
           Paragraph[87, 96]
             Text[87, 95] chars:[87, 95, "asfdasfd"]
   Heading[97, 108] textOpen:[97, 98, "#"] text:[99, 108, "Heading 1"]
@@ -247,22 +247,22 @@ Document[0, 157]
   SimTocBlock[0, 141] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
     SimTocContent[71, 141]
       Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
-      BulletList[83, 141] isTight=true
-        BulletListItem[83, 97] open:[83, 84, "-"]
+      BulletList[83, 141] isTight
+        BulletListItem[83, 97] open:[83, 84, "-"] isTight
           Paragraph[85, 97]
             Text[85, 96] chars:[85, 96, "afdas … dsadf"]
-        BulletListItem[97, 141] open:[97, 98, "-"]
+        BulletListItem[97, 141] open:[97, 98, "-"] isTight
           Paragraph[99, 108]
             Text[99, 107] chars:[99, 107, "asfdasfd"]
-          BulletList[112, 141] isTight=true
-            BulletListItem[112, 126] open:[112, 113, "-"]
+          BulletList[112, 141] isTight
+            BulletListItem[112, 126] open:[112, 113, "-"] isTight
               Paragraph[114, 126]
                 Text[114, 125] chars:[114, 125, "afdas … dsadf"]
-            BulletListItem[130, 141] open:[130, 131, "-"]
+            BulletListItem[130, 141] open:[130, 131, "-"] isTight
               Paragraph[132, 141]
                 Text[132, 140] chars:[132, 140, "asfdasfd"]
-  BulletList[146, 157] isTight=true
-    BulletListItem[146, 157] open:[146, 147, "-"]
+  BulletList[146, 157] isTight
+    BulletListItem[146, 157] open:[146, 147, "-"] isTight
       Paragraph[148, 157]
         Text[148, 156] chars:[148, 156, "asfdasfd"]
 ````````````````````````````````

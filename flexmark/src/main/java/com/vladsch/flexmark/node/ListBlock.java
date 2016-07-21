@@ -28,8 +28,16 @@ public abstract class ListBlock extends Block {
         return tight;
     }
 
+    public boolean isLoose() {
+        return !tight;
+    }
+
     public void setTight(boolean tight) {
         this.tight = tight;
+    }
+
+    public void setLoose(boolean loose) {
+        this.tight = !loose;
     }
 
     @Override
@@ -40,6 +48,7 @@ public abstract class ListBlock extends Block {
     @Override
     public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
-        out.append(" isTight=").append(tight);
+        if (isTight()) out.append(" isTight");
+        else out.append(" isLoose");
     }
 }

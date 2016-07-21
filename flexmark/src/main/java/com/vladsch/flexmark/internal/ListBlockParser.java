@@ -10,13 +10,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ListBlockParser extends AbstractBlockParser {
-
-    private static Pattern MARKER = Pattern.compile(
-            "^([*+-])(?= |\t|$)" +
-                    "|^(\\d{1,9})([.)])(?= |\t|$)");
 
     private final ListBlock block;
     private final ListOptions options;
@@ -108,7 +103,7 @@ public class ListBlockParser extends AbstractBlockParser {
      */
     static ListData parseListMarker(Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
-        Matcher matcher = MARKER.matcher(rest);
+        Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
         if (!matcher.find()) {
             return null;
         }
@@ -165,11 +160,11 @@ public class ListBlockParser extends AbstractBlockParser {
      * with the same delimiter and bullet character. This is used
      * in agglomerating list items into lists.
      */
-    static boolean listsMatch(ListBlock a, ListBlock b) {
+    static boolean listsMatch(boolean bulletMatch, ListBlock a, ListBlock b) {
         if (a instanceof BulletList && b instanceof BulletList) {
-            return equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker());
+            return !bulletMatch || equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker());
         } else if (a instanceof OrderedList && b instanceof OrderedList) {
-            return equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter());
+            return !bulletMatch || equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter());
         }
         return false;
     }
@@ -254,7 +249,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
             int newColumn = listData.contentColumn;
             // prepend the list block if needed
-            if (listBlockParser == null || (options.bulletMatch && !listsMatch((ListBlock) matched.getBlock(), listData.listBlock))) {
+            if (listBlockParser == null || !listsMatch(options.bulletMatch, (ListBlock) matched.getBlock(), listData.listBlock)) {
                 listBlockParser = new ListBlockParser(options, listData);
                 listBlockParser.setTight(true);
 
