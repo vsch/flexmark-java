@@ -81,7 +81,7 @@ Document[0, 10]
     Text[0, 1] chars:[0, 1, "~"]
     Strikethrough[1, 8] textOpen:[1, 3, "~~"] text:[3, 6, "foo"] textClose:[6, 8, "~~"]
       Text[3, 6] chars:[3, 6, "foo"]
-    Text[6, 7] chars:[6, 7, "~"]
+    Text[8, 9] chars:[8, 9, "~"]
 ````````````````````````````````
 
 
@@ -99,16 +99,63 @@ Document[0, 9]
 
 
 ```````````````````````````````` example Gfm Strikethrough Extension: 8
+~~foo~bar~~
+
+~~foo~~bar~~
+
+~~foo~~~bar~~
+
 ~~foo~~~~bar~~
+
+~~foo~~~~~bar~~
+
+~~foo~~~~~~bar~~
+
+~~foo~~~~~~~bar~~
 .
+<p><del>foo~bar</del></p>
+<p><del>foo</del>bar~~</p>
+<p><del>foo</del>~bar~~</p>
 <p><del>foo</del><del>bar</del></p>
+<p><del>foo</del>~<del>bar</del></p>
+<p><del>foo</del>~~<del>bar</del></p>
+<p><del>foo</del>~~~<del>bar</del></p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
-    Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "foo"] textClose:[5, 7, "~~"]
-      Text[2, 5] chars:[2, 5, "foo"]
-    Strikethrough[5, 14] textOpen:[5, 7, "~~"] text:[7, 12, "~~bar"] textClose:[12, 14, "~~"]
-      Text[9, 12] chars:[9, 12, "bar"]
+Document[0, 111]
+  Paragraph[0, 12]
+    Strikethrough[0, 11] textOpen:[0, 2, "~~"] text:[2, 9, "foo~bar"] textClose:[9, 11, "~~"]
+      Text[2, 9] chars:[2, 9, "foo~bar"]
+  Paragraph[13, 26]
+    Strikethrough[13, 20] textOpen:[13, 15, "~~"] text:[15, 18, "foo"] textClose:[18, 20, "~~"]
+      Text[15, 18] chars:[15, 18, "foo"]
+    Text[20, 25] chars:[20, 25, "bar~~"]
+  Paragraph[27, 41]
+    Strikethrough[27, 34] textOpen:[27, 29, "~~"] text:[29, 32, "foo"] textClose:[32, 34, "~~"]
+      Text[29, 32] chars:[29, 32, "foo"]
+    Text[34, 40] chars:[34, 40, "~bar~~"]
+  Paragraph[42, 57]
+    Strikethrough[42, 49] textOpen:[42, 44, "~~"] text:[44, 47, "foo"] textClose:[47, 49, "~~"]
+      Text[44, 47] chars:[44, 47, "foo"]
+    Strikethrough[47, 56] textOpen:[47, 49, "~~"] text:[49, 54, "~~bar"] textClose:[54, 56, "~~"]
+      Text[51, 54] chars:[51, 54, "bar"]
+  Paragraph[58, 74]
+    Strikethrough[58, 65] textOpen:[58, 60, "~~"] text:[60, 63, "foo"] textClose:[63, 65, "~~"]
+      Text[60, 63] chars:[60, 63, "foo"]
+    Text[65, 66] chars:[65, 66, "~"]
+    Strikethrough[64, 73] textOpen:[64, 66, "~~"] text:[66, 71, "~~bar"] textClose:[71, 73, "~~"]
+      Text[68, 71] chars:[68, 71, "bar"]
+  Paragraph[75, 92]
+    Strikethrough[75, 82] textOpen:[75, 77, "~~"] text:[77, 80, "foo"] textClose:[80, 82, "~~"]
+      Text[77, 80] chars:[77, 80, "foo"]
+    Text[82, 84] chars:[82, 84, "~~"]
+    Strikethrough[82, 91] textOpen:[82, 84, "~~"] text:[84, 89, "~~bar"] textClose:[89, 91, "~~"]
+      Text[86, 89] chars:[86, 89, "bar"]
+  Paragraph[93, 111]
+    Strikethrough[93, 100] textOpen:[93, 95, "~~"] text:[95, 98, "foo"] textClose:[98, 100, "~~"]
+      Text[95, 98] chars:[95, 98, "foo"]
+    Text[100, 103] chars:[100, 103, "~~~"]
+    Strikethrough[101, 110] textOpen:[101, 103, "~~"] text:[103, 108, "~~bar"] textClose:[108, 110, "~~"]
+      Text[105, 108] chars:[105, 108, "bar"]
 ````````````````````````````````
 
 

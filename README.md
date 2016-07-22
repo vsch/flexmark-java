@@ -48,15 +48,15 @@ earlier versions of this project.
 
 | Feature                                                                          | flexmark-java                                                    | commmonmark-java                                                  | pegdown                                                              |
 |----------------------------------------------------------------------------------|:-----------------------------------------------------------------|:------------------------------------------------------------------|:---------------------------------------------------------------------|
-| Relative parse time (less is better)                                             | :heavy_check_mark: 1x                                            | :heavy_check_mark: 0.6x to 0.7x                                   | :x: 25x average, 20,000x to ∞ for pathological input [(2)](#2)       |
+| Relative parse time (less is better)                                             | :heavy_check_mark: 1x                                            | :heavy_check_mark: 0.6x to 0.7x                                   | :x: 25x average, 20,000x to ∞ for pathological input [(3)](#3)       |
 | All source elements in the AST                                                   | :heavy_check_mark:                                               | :x:                                                               | :heavy_check_mark:                                                   |
 | AST elements with source position                                                | :heavy_check_mark:                                               | :x:                                                               | :heavy_check_mark: with some errors and idiosyncrasies               |
 | AST can be easily manipulated                                                    | :heavy_check_mark: AST post processing is an extension mechanism | :heavy_check_mark: AST post processing is an extension mechanism  | :x: not an option. No node's parent information, children as List<>. |
 | AST elements have detailed source position for all parts                         | :heavy_check_mark:                                               | :x:                                                               | :x: only node start/end                                              |
 | Can disable core parsing features                                                | :heavy_check_mark:                                               | :x:                                                               | :x:                                                                  |
 | Core parser implemented via the extension API                                    | :heavy_check_mark:                                               | :x: `instanceOf` tests for specific block parser and node classes | :x: core exposes few extension points                                |
-| Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: one massive PEG parser with complex interactions [(2)](#2)       |
-| Parsing of block elements is independent from each other                         | :heavy_check_mark: [(1)](#1)                                     | :heavy_check_mark: [(1)](#1)                                      | :x: everything in one PEG grammar                                    |
+| Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: one massive PEG parser with complex interactions [(3)](#3)       |
+| Parsing of block elements is independent from each other                         | :heavy_check_mark: [(1)](#1)                                     | :heavy_check_mark: [(2)](#2)                                      | :x: everything in one PEG grammar                                    |
 | Uniform configuration across: parser, renderer and all extensions                | :heavy_check_mark:                                               | :x: none beyond extension list                                    | :x: `int` bit flags for core, none for extensions                    |
 | Parsing performance optimized for use with extensions                            | :heavy_check_mark:                                               | :x: parsing performance for core, extensions do what they can     | :x: performance is not a feature                                     |
 | Feature rich with many configuration options and extensions out of the box       | :heavy_check_mark:                                               | :x: limited extensions, no options                                | :heavy_check_mark:                                                   |
@@ -74,11 +74,17 @@ earlier versions of this project.
 
 ###### (1) 
 
-pathological input of 10,000 `[` parses in 11ms, 10,000 nested `[` `]` parse in 450ms
+flexmark-java pathological input of 100,000 `[` parses in 68ms, 100,000 `]` in 57ms, 100,000
+nested `[` `]` parse in 55ms
 
 ###### (2) 
 
-pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
+commonmark-java pathological input of 100,000 `[` parses in 30ms, 100,000 `]` in 30ms, 100,000
+nested `[` `]` parse in 43ms
+
+###### (3) 
+
+pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 
 Progress
 --------
@@ -163,7 +169,7 @@ Progress
         - [x] inline HTML: all, non-comments, comments
         - [x] HTML blocks: all, non-comments, comments
     - Processor Extensions
-        - [ ] Jekyll front matter
+        - [x] Jekyll front matter
         - [ ] GitBook link URL encoding
         - [x] HTML comment nodes: Block and Inline
         - [ ] Multi-line Image URLs
@@ -209,75 +215,81 @@ its original design.
 Benchmarks
 ----------
 
-I realized that previous results had the code running commonmark-java and flexmark-java parsing
-and rendering, while intellij-markdown and pegdown were only running parsing. Also,
-commonmark-java was only running with ext-gfm-tables but to make it more fair to pegdown I added
-ext-gfm-strikethrough and disabled auto-link extension for all parsers that have the option
-since it causes significant parser slow-down for all parsers:
-
-I also added a flexmark-java configured with all extensions, except for auto-links, for an idea
-of how extra extensions affect performance.
+After upgrading to spec 0.26 compliance and merging delimiter parsing rule changes from
+commonmark-java:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |         0.445ms |       0.734ms |           1.666ms |  14.480ms |
-| VERSION          |         0.801ms |       1.057ms |           3.952ms |  40.997ms |
-| commonMarkSpec   |        33.477ms |      51.230ms |         593.408ms | 567.285ms |
-| markdown_example |         9.457ms |       9.989ms |         210.871ms | 941.851ms |
-| spec             |         5.081ms |       6.589ms |          34.630ms | 285.644ms |
-| table            |         0.238ms |       0.433ms |           0.655ms |   3.358ms |
-| table-format     |         1.580ms |       2.241ms |           3.862ms |  22.149ms |
-| wrap             |         3.348ms |       6.891ms |          14.997ms |  82.089ms |
+| README-SLOW      |         0.409ms |       0.787ms |           1.663ms |  14.874ms |
+| VERSION          |         0.767ms |       1.118ms |           3.611ms |  41.808ms |
+| commonMarkSpec   |        31.120ms |      48.384ms |         593.122ms | 571.006ms |
+| markdown_example |         8.243ms |       9.715ms |         207.987ms | 934.118ms |
+| spec             |         4.568ms |       6.804ms |          34.246ms | 294.498ms |
+| table            |         0.218ms |       0.421ms |           0.677ms |   3.467ms |
+| table-format     |         1.079ms |       2.239ms |           3.803ms |  22.810ms |
+| wrap             |         3.216ms |       7.011ms |          14.891ms |  82.138ms |
 
 Ratios of above:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.65 |              3.74 |     32.53 |
-| VERSION          |            1.00 |          1.32 |              4.93 |     51.17 |
-| commonMarkSpec   |            1.00 |          1.53 |             17.73 |     16.95 |
-| markdown_example |            1.00 |          1.06 |             22.30 |     99.59 |
-| spec             |            1.00 |          1.30 |              6.82 |     56.22 |
-| table            |            1.00 |          1.81 |              2.75 |     14.08 |
-| table-format     |            1.00 |          1.42 |              2.44 |     14.02 |
-| wrap             |            1.00 |          2.06 |              4.48 |     24.52 |
+| README-SLOW      |            1.00 |          1.92 |              4.07 |     36.39 |
+| VERSION          |            1.00 |          1.46 |              4.71 |     54.51 |
+| commonMarkSpec   |            1.00 |          1.55 |             19.06 |     18.35 |
+| markdown_example |            1.00 |          1.18 |             25.23 |    113.33 |
+| spec             |            1.00 |          1.49 |              7.50 |     64.47 |
+| table            |            1.00 |          1.93 |              3.11 |     15.94 |
+| table-format     |            1.00 |          2.07 |              3.52 |     21.14 |
+| wrap             |            1.00 |          2.18 |              4.63 |     25.54 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.45 |             15.87 |     35.97 |
+| overall          |            1.00 |          1.54 |             17.33 |     39.60 |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.61 |          1.00 |              2.27 |     19.73 |
-| VERSION          |            0.76 |          1.00 |              3.74 |     38.79 |
-| commonMarkSpec   |            0.65 |          1.00 |             11.58 |     11.07 |
-| markdown_example |            0.95 |          1.00 |             21.11 |     94.29 |
-| spec             |            0.77 |          1.00 |              5.26 |     43.35 |
-| table            |            0.55 |          1.00 |              1.51 |      7.76 |
-| table-format     |            0.71 |          1.00 |              1.72 |      9.89 |
-| wrap             |            0.49 |          1.00 |              2.18 |     11.91 |
+| README-SLOW      |            0.52 |          1.00 |              2.11 |     18.91 |
+| VERSION          |            0.69 |          1.00 |              3.23 |     37.39 |
+| commonMarkSpec   |            0.64 |          1.00 |             12.26 |     11.80 |
+| markdown_example |            0.85 |          1.00 |             21.41 |     96.15 |
+| spec             |            0.67 |          1.00 |              5.03 |     43.29 |
+| table            |            0.52 |          1.00 |              1.61 |      8.24 |
+| table-format     |            0.48 |          1.00 |              1.70 |     10.19 |
+| wrap             |            0.46 |          1.00 |              2.12 |     11.72 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.69 |          1.00 |             10.91 |     24.73 |
+| overall          |            0.65 |          1.00 |             11.25 |     25.69 |
+
+---
+
+I realized that previous results had the code running commonmark-java and flexmark-java parsing
+and rendering, while intellij-markdown and pegdown were only running parsing. Also,
+commonmark-java was only running with ext-gfm-tables but to make it more fair to pegdown I added
+ext-gfm-strikethrough and disabled auto-link extension for all parsers that have the option
+since it causes significant parser slow-down for all parsers.
+
+---
 
 Because these two files represent the pathological input for pegdown, I no longer run them as
 part of the benchmark to prevent skewing of the results. The results are here for posterity.
 
 | File          | commonmark-java | flexmark-java | intellij-markdown |    pegdown |
 |:--------------|----------------:|--------------:|------------------:|-----------:|
-| hang-pegdown  |         0.099ms |       0.194ms |           0.353ms |  646.659ms |
-| hang-pegdown2 |         0.061ms |       0.113ms |           0.220ms | 1297.536ms |
+| hang-pegdown  |         0.082ms |       0.326ms |           0.342ms |  659.138ms |
+| hang-pegdown2 |         0.048ms |       0.235ms |           0.198ms | 1312.944ms |
+
+Ratios of above:
 
 | File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:--------------|----------------:|--------------:|------------------:|----------:|
-| hang-pegdown  |            1.00 |          1.96 |              3.56 |   6524.52 |
-| hang-pegdown2 |            1.00 |          1.85 |              3.61 |  21230.71 |
+| hang-pegdown  |            1.00 |          3.98 |              4.17 |   8048.38 |
+| hang-pegdown2 |            1.00 |          4.86 |              4.10 |  27207.32 |
 | -----------   |       --------- |     --------- |         --------- | --------- |
-| overall       |            1.00 |          1.92 |              3.58 |  12133.93 |
+| overall       |            1.00 |          4.30 |              4.15 |  15151.91 |
 
 | File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:--------------|----------------:|--------------:|------------------:|----------:|
-| hang-pegdown  |            0.51 |          1.00 |              1.81 |   3325.63 |
-| hang-pegdown2 |            0.54 |          1.00 |              1.95 |  11488.93 |
+| hang-pegdown  |            0.25 |          1.00 |              1.05 |   2024.27 |
+| hang-pegdown2 |            0.21 |          1.00 |              0.84 |   5594.73 |
 | -----------   |       --------- |     --------- |         --------- | --------- |
-| overall       |            0.52 |          1.00 |              1.86 |   6324.95 |
+| overall       |            0.23 |          1.00 |              0.96 |   3519.73 |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance

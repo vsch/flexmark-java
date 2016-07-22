@@ -30,7 +30,7 @@ public class HtmlRendererOptions {
         suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
         suppressHtmlCommentBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS);
         suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
-        suppressInlineHtmlComments = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENT);
+        suppressInlineHtmlComments = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS);
         doNotRenderLinksInDocument = options.get(HtmlRenderer.DO_NOT_RENDER_LINKS);
         renderHeaderId = options.get(HtmlRenderer.RENDER_HEADER_ID);
         generateHeaderIds = options.get(HtmlRenderer.GENERATE_HEADER_ID);

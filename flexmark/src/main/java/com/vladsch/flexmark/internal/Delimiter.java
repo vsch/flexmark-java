@@ -4,12 +4,34 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 
-public class Delimiter {
+public class Delimiter implements DelimiterRun {
 
     final Text node;
     final int index;
     final BasedSequence input;
+    final char delimiterChar;
+
+    /**
+     * Can open emphasis, see spec.
+     */
+    final boolean canOpen;
+
+    /**
+     * Can close emphasis, see spec.
+     */
+    final boolean canClose;
+
+    /**
+     * Skip this delimiter when looking for a link/image opener because it was already matched.
+     */
+    boolean matched = false;
+
+    Delimiter previous;
+    Delimiter next;
+
+    int numDelims = 1;
 
     public Text getNode() {
         return node;
@@ -31,35 +53,12 @@ public class Delimiter {
         return input.subSequence(getStartIndex(), getStartIndex() + delimiterUse);
     }
 
-    Delimiter previous;
-    Delimiter next;
-
-    char delimiterChar;
-    int numDelims = 1;
-
-    /**
-     * Can open emphasis, see spec.
-     */
-    boolean canOpen = true;
-
-    /**
-     * Can close emphasis, see spec.
-     */
-    boolean canClose = false;
-
-    /**
-     * Whether this delimiter is allowed to form a link/image.
-     */
-    boolean allowed = true;
-
-    /**
-     * Skip this delimiter when looking for a link/image opener because it was already matched.
-     */
-    boolean matched = false;
-
-    Delimiter(BasedSequence input, Text node, Delimiter previous, int index) {
+    Delimiter(BasedSequence input, Text node, char delimiterChar, boolean canOpen, boolean canClose, Delimiter previous, int index) {
         this.input = input;
         this.node = node;
+        this.delimiterChar = delimiterChar;
+        this.canOpen = canOpen;
+        this.canClose = canClose;
         this.previous = previous;
         this.index = index;
     }
@@ -86,7 +85,7 @@ public class Delimiter {
         Node tmp = getNode().getNext();
         while (tmp != null && tmp != closer.getNode()) {
             Node next = tmp.getNext();
-            ((Node)delimitedNode).appendChild(tmp);
+            ((Node) delimitedNode).appendChild(tmp);
             tmp = next;
         }
 
@@ -94,20 +93,18 @@ public class Delimiter {
         getNode().insertAfter((Node) delimitedNode);
     }
 
-    public boolean isStraddling(BasedSequence nodeChars) {
-        // first see if we have any closers in our span
-        int startOffset = nodeChars.getStartOffset();
-        int endOffset = nodeChars.getEndOffset();
-        Delimiter inner = this.next;
-        while (inner != null) {
-            int innerOffset = inner.getEndIndex();
-            if (innerOffset >= endOffset) break;
-            if (innerOffset >= startOffset) {
-                // inside our region, if unmatched then we are straddling the region
-                if (!inner.matched) return true;
-            }
-            inner = inner.next;
-        }
-        return false;
+    @Override
+    public boolean canOpen() {
+        return canOpen;
+    }
+
+    @Override
+    public boolean canClose() {
+        return canClose;
+    }
+
+    @Override
+    public int length() {
+        return numDelims;
     }
 }

@@ -15,11 +15,11 @@ import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Paragraph;
-import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 
 import java.io.BufferedReader;
 import java.io.IOException;

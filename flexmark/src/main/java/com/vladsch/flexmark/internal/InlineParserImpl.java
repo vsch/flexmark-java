@@ -11,10 +11,14 @@ import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.*;
-import com.vladsch.flexmark.parser.*;
+import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.LinkRefProcessor;
+import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 
 import java.util.*;
 import java.util.regex.MatchResult;
@@ -46,14 +50,15 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected int index;
 
     /**
-     * Stack of delimiters (emphasis, strong emphasis).
+     * Top delimiter (emphasis, strong emphasis or custom emphasis). (Brackets are on a separate stack, different
+     * from the algorithm described in the spec.)
      */
-    protected Delimiter delimiter;
+    protected Delimiter lastDelimiter;
 
     /**
-     * Earliest possible bracket delimiter to go back to when searching for opener.
+     * Top opening bracket (<code>[</code> or <code>![)</code>).
      */
-    protected Delimiter bracketDelimiterBottom = null;
+    private Bracket lastBracket;
 
     protected ArrayList<BasedSequence> currentText;
 
@@ -61,14 +66,12 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     static class InlineParserOptions {
         final public boolean matchLookaheadFirst;
-        final public boolean relaxedEmphasis;
         //final public boolean parseInlineAnchorLinks;
         final public boolean parseMultiLineImageUrls;
         //final public boolean parseGitHubIssueMarker;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
-            relaxedEmphasis = options.get(Parser.INLINE_RELAXED_EMPHASIS);
             //parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
             parseMultiLineImageUrls = options.get(Parser.PARSE_MULTI_LINE_IMAGE_URLS);
             //parseGitHubIssueMarker = options.get(PARSE_GITHUB_ISSUE_MARKER);
@@ -103,7 +106,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     protected Parsing myParsing;
-    
+
     public InlineParserImpl(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessorsData) {
         this.myParsing = new Parsing(options);
         this.options = new InlineParserOptions(options);
@@ -202,9 +205,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     private static void addDelimiterProcessors(Iterable<DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
         for (DelimiterProcessor delimiterProcessor : delimiterProcessors) {
-            char opening = delimiterProcessor.getOpeningDelimiterChar();
+            char opening = delimiterProcessor.getOpeningCharacter();
             addDelimiterProcessorForChar(opening, delimiterProcessor, map);
-            char closing = delimiterProcessor.getClosingDelimiterChar();
+            char closing = delimiterProcessor.getClosingCharacter();
             if (opening != closing) {
                 addDelimiterProcessorForChar(closing, delimiterProcessor, map);
             }
@@ -239,16 +242,64 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         this.block = block;
         this.input = content.trim();
         this.index = 0;
-        this.delimiter = null;
-        this.bracketDelimiterBottom = null;
+        this.lastDelimiter = null;
+        this.lastBracket = null;
 
         boolean moreToParse;
         do {
             moreToParse = parseInline();
         } while (moreToParse);
-        flushTextNode();
 
         processDelimiters(null);
+        flushTextNode();
+
+        // merge nodes if needed
+        mergeTextNodes(block.getFirstChild(), block.getLastChild());
+    }
+
+    private void mergeTextNodes(Node fromNode, Node toNode) {
+        Text first = null;
+        Text last = null;
+
+        Node node = fromNode;
+        while (node != null) {
+            if (node instanceof Text) {
+                Text text = (Text) node;
+                if (first == null) {
+                    first = text;
+                }
+                last = text;
+            } else {
+                mergeIfNeeded(first, last);
+                first = null;
+                last = null;
+            }
+
+            if (node == toNode) {
+                break;
+            }
+
+            node = node.getNext();
+        }
+
+        mergeIfNeeded(first, last);
+    }
+
+    private void mergeIfNeeded(Text first, Text last) {
+        if (first != null && last != null && first != last) {
+            ArrayList<BasedSequence> sb = new ArrayList<>();
+            sb.add(first.getChars());
+            Node node = first.getNext();
+            Node stop = last.getNext();
+            while (node != stop) {
+                sb.add(node.getChars());
+                Node unlink = node;
+                node = node.getNext();
+                unlink.unlink();
+            }
+            BasedSequence literal = SegmentedSequence.of(sb, first.getChars());
+            first.setChars(literal);
+        }
     }
 
     /*
@@ -448,8 +499,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     private boolean processCustomCharacters() {
         char c = peek();
         CharacterNodeFactory factory = customSpecialCharacterFactoryMap.get(c);
-        if (factory == null) return false; 
-        
+        if (factory == null) return false;
+
         Node node = factory.create();
         node.setChars(input.subSequence(index, index + 1));
 
@@ -486,7 +537,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (pos < index && factory.wantSkippedWhitespace()) {
             block.appendChild(new WhiteSpace(input.subSequence(pos, index)));
         }
-        
+
         return true;
     }
 
@@ -616,11 +667,24 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return true;
     }
 
+    private static class DelimiterData {
+
+        final int count;
+        final boolean canClose;
+        final boolean canOpen;
+
+        DelimiterData(int count, boolean canOpen, boolean canClose) {
+            this.count = count;
+            this.canOpen = canOpen;
+            this.canClose = canClose;
+        }
+    }
+
     /**
      * Attempt to parse delimiters like emphasis, strong emphasis or custom delimiters.
      */
     protected boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
-        DelimiterRun res = scanDelimiters(delimiterProcessor, delimiterChar);
+        DelimiterData res = scanDelimiters(delimiterProcessor, delimiterChar);
         if (res == null) {
             return false;
         }
@@ -631,15 +695,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Text node = appendSeparateText(input.subSequence(startIndex, index));
 
         // Add entry to stack for this opener
-        this.delimiter = new Delimiter(input, node, this.delimiter, startIndex);
-        this.delimiter.delimiterChar = delimiterChar;
-        this.delimiter.numDelims = numDelims;
-        this.delimiter.canOpen = res.canOpen;
-        this.delimiter.canClose = res.canClose;
-        if (this.delimiter.previous != null) {
-            this.delimiter.previous.next = this.delimiter;
+        this.lastDelimiter = new Delimiter(input, node, delimiterChar, res.canOpen, res.canClose, this.lastDelimiter, startIndex);
+        this.lastDelimiter.numDelims = numDelims;
+        if (this.lastDelimiter.previous != null) {
+            this.lastDelimiter.previous.next = this.lastDelimiter;
         }
-
         return true;
     }
 
@@ -653,16 +713,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Text node = appendSeparateText(input.subSequence(index - 1, index));
 
         // Add entry to stack for this opener
-        this.delimiter = new Delimiter(input, node, this.delimiter, startIndex);
-        this.delimiter.delimiterChar = '[';
-        this.delimiter.numDelims = 1;
-        this.delimiter.canOpen = true;
-        this.delimiter.canClose = false;
-        this.delimiter.allowed = true;
-        if (this.delimiter.previous != null) {
-            this.delimiter.previous.next = this.delimiter;
-        }
-
+        addBracket(Bracket.link(input, node, startIndex, lastBracket, lastDelimiter));
         return true;
     }
 
@@ -679,19 +730,22 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             Text node = appendSeparateText(input.subSequence(index - 2, index));
 
             // Add entry to stack for this opener
-            this.delimiter = new Delimiter(input, node, this.delimiter, startIndex + 1);
-            this.delimiter.delimiterChar = '!';
-            this.delimiter.numDelims = 1;
-            this.delimiter.canOpen = true;
-            this.delimiter.canClose = false;
-            this.delimiter.allowed = true;
-            if (this.delimiter.previous != null) {
-                this.delimiter.previous.next = this.delimiter;
-            }
+            addBracket(Bracket.image(input, node, startIndex + 1, lastBracket, lastDelimiter));
         } else {
             appendText(input.subSequence(index - 1, index));
         }
         return true;
+    }
+
+    private void addBracket(Bracket bracket) {
+        if (lastBracket != null) {
+            lastBracket.bracketAfter = true;
+        }
+        lastBracket = bracket;
+    }
+
+    private void removeLastBracket() {
+        lastBracket = lastBracket.previous;
     }
 
     static class ReferenceProcessorMatch {
@@ -706,7 +760,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    private ReferenceProcessorMatch matchLinkRef(Delimiter opener, int startIndex, int lookAhead, int nesting) {
+    private ReferenceProcessorMatch matchLinkRef(Bracket opener, int startIndex, int lookAhead, int nesting) {
         if (linkRefProcessorsData.nestingIndex.length == 0) return null;
 
         ReferenceProcessorMatch match = null;
@@ -725,7 +779,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             wantBang = linkProcessor.getWantExclamationPrefix();
 
             // preview the link ref
-            if (opener.delimiterChar == '!' && wantBang) {
+            if (opener.image && wantBang) {
                 // this one has index off by one for the leading !
                 if (textWithBang == null) textWithBang = input.subSequence(opener.index - 1 - lookAhead, startIndex + lookAhead);
                 nodeChars = textWithBang;
@@ -750,45 +804,37 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         index++;
         int startIndex = index;
 
-        boolean containsBrackets = false;
         int nestedBrackets = 0;
         boolean hadBang = false;
 
         // look through stack of delimiters for a [ or ![
-        Delimiter opener = this.delimiter;
-        Delimiter nextDelimiter = null;
-        while (opener != bracketDelimiterBottom) {
-            if (opener.delimiterChar == '[' || opener.delimiterChar == '!') {
-                if (!opener.matched) {
-                    break;
-                }
-
-                if (!hadBang && (nextDelimiter == null || opener.index + 1 == nextDelimiter.index)) {
-                    nestedBrackets++;
-                }
-                if (opener.delimiterChar == '!') hadBang = true;
-                containsBrackets = true;
-            }
-            nextDelimiter = opener;
-            opener = opener.previous;
-        }
-
-        if (opener == bracketDelimiterBottom) {
-            // No matched opener, just return a literal.
+        Bracket opener = this.lastBracket;
+        if (opener == null) {
+            // No matching opener, just return a literal.
             appendText(input.subSequence(index - 1, index));
-            // No need to search same delimiters for openers next time.
-            bracketDelimiterBottom = this.delimiter;
             return true;
         }
 
         if (!opener.allowed) {
             // Matching opener but it's not allowed, just return a literal.
             appendText(input.subSequence(index - 1, index));
-
-            // We could removeIndex the opener now, but that would complicate text node merging. So just skip it next time.
-            opener.matched = true;
+            removeLastBracket();
             return true;
         }
+
+        nestedBrackets = 0;
+        //Bracket nextBracket = opener;
+        //opener = opener.previous;
+        //hadBang = opener.image;
+        //while (opener != null) {
+        //    if (!hadBang && opener.index + 1 == nextBracket.index) {
+        //        nestedBrackets++;
+        //    }
+        //
+        //    if (opener.image) hadBang = true;
+        //    nextBracket = opener;
+        //    opener = opener.previous;
+        //}
 
         // Check to see if we have a link/image
         BasedSequence dest = null;
@@ -800,6 +846,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean refIsDefined = false;
         BasedSequence linkOpener = SubSequence.NULL;
         BasedSequence linkCloser = SubSequence.NULL;
+        opener = this.lastBracket;
 
         // Inline link?
         if (peek() == '(') {
@@ -822,8 +869,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         } else {
             // maybe reference link, need to see if it matches a custom processor or need to skip this reference because it will be processed on the next char
             // as something else, like a wiki link
-            boolean wantNextMatch = false;
-
             if (!options.matchLookaheadFirst) {
                 linkRefProcessorMatch = matchLinkRef(opener, startIndex, 0, nestedBrackets);
             }
@@ -838,11 +883,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
                 if (maxWanted > nestedBrackets) {
                     // need to see what is available
-                    Delimiter nested = opener;
-                    while (nested.previous != null && (nested.previous.delimiterChar == '[' || nested.previous.delimiterChar == '!') && nested.index == nested.previous.index + 1 && peek(maxAvail) == ']') {
+                    Bracket nested = opener;
+                    while (nested.previous != null && nested.index == nested.previous.index + 1 && peek(maxAvail) == ']') {
                         nested = nested.previous;
                         maxAvail++;
-                        if (maxAvail + nestedBrackets == maxWanted || nested.delimiterChar == '!') break;
+                        if (maxAvail + nestedBrackets == maxWanted || nested.image) break;
                     }
                 }
 
@@ -851,23 +896,27 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
                     if (linkRefProcessorMatch != null) {
                         if (nesting > 0) {
-                            wantNextMatch = true;
-                            linkRefProcessorMatch = null;
+                            while (nesting-- > 0) {
+                                index++;
+                                lastBracket.node.unlink();
+                                removeLastBracket();
+                            }
+                            opener = lastBracket;
                         }
                         break;
                     }
                 }
             }
 
-            if (!wantNextMatch && linkRefProcessorMatch == null) {
+            if (linkRefProcessorMatch == null) {
                 // See if there's a link label
                 int beforeLabel = index;
                 int labelLength = parseLinkLabel();
                 if (labelLength > 2) {
                     ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
-                } else if (!containsBrackets) {
+                } else if (!opener.bracketAfter) {
                     // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
-                    if (opener.delimiterChar == '!') {
+                    if (opener.image) {
                         // this one has index off by one for the leading !
                         ref = input.subSequence(opener.index - 1, startIndex);
                     } else {
@@ -913,8 +962,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         }
                     }
                 }
-            } else {
-                // next one will be a match so we skip this one
             }
         }
 
@@ -925,13 +972,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             flushTextNode();
 
             Node insertNode;
-            boolean isImage = opener.delimiterChar == '!';
+            boolean isImage = opener.image;
 
             if (linkRefProcessorMatch != null) {
                 if (!linkRefProcessorMatch.wantExclamation && isImage) {
                     appendText(input.subSequence(opener.index - 1, opener.index));
                     opener.node.setChars(opener.node.getChars().subSequence(1));
-                    opener.delimiterChar = '[';
+                    //opener.image = false;
                     isImage = false;
                 }
 
@@ -957,7 +1004,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 // set up the parts
                 RefNode refNode = (RefNode) insertNode;
                 refNode.setReferenceChars(ref);
-                if (refIsDefined) refNode.setDefined(refIsDefined);
+                if (refIsDefined) refNode.setDefined(true);
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
@@ -975,18 +1022,19 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             }
 
             // Process delimiters such as emphasis inside link/image
-            processDelimiters(opener);
-            removeDelimiterAndNode(opener);
+            processDelimiters(opener.previousDelimiter);
+            Node toRemove = opener.node;
+            removeLastBracket();
 
             // Links within links are not allowed. We found this link, so there can be no other link around it.
             if (insertNode instanceof Link) {
-                Delimiter delim = this.delimiter;
-                while (delim != null) {
-                    if (delim.delimiterChar == '[') {
+                Bracket bracket = this.lastBracket;
+                while (bracket != null) {
+                    if (!bracket.image) {
                         // Disallow link opener. It will still get matched, but will not result in a link.
-                        delim.allowed = false;
+                        bracket.allowed = false;
                     }
-                    delim = delim.previous;
+                    bracket = bracket.previous;
                 }
 
                 // collapse any link refs contained in this link, they are duds, link takes precedence
@@ -997,13 +1045,12 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 collapseLinkRefChildren(insertNode, true);
             }
 
+            toRemove.unlink();
             return true;
         } else { // no link or image
             index = startIndex;
             appendText(input.subSequence(index - 1, index));
-            // We could removeIndex the opener now, but that would complicate text node merging.
-            // E.g. `[link] (/uri)` isn't a link because of the space, so we want to keep appending text.
-            opener.matched = true;
+            removeLastBracket();
             return true;
         }
     }
@@ -1032,7 +1079,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
                 TextNodeConverter list = new TextNodeConverter(child.getChars());
                 list.addChildrenOf(child);
-                list.insertMergedBefore(nextChild);
+                if (nextChild != null) {
+                    list.insertMergedBefore(nextChild);
+                } else {
+                    list.appendMergedTo(node);
+                }
                 hadCollapse = true;
             }
             child = nextChild;
@@ -1167,7 +1218,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return information about delimiter run, or {@code null}
      */
-    protected DelimiterRun scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
+    protected DelimiterData scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         int startIndex = index;
 
         int delimiterCount = 0;
@@ -1176,7 +1227,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             index++;
         }
 
-        if (delimiterCount < delimiterProcessor.getMinDelimiterCount()) {
+        if (delimiterCount < delimiterProcessor.getMinLength()) {
             index = startIndex;
             return null;
         }
@@ -1204,19 +1255,19 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             canOpen = leftFlanking && (!rightFlanking || beforeIsPunctuation);
             canClose = rightFlanking && (!leftFlanking || afterIsPunctuation);
         } else {
-            canOpen = leftFlanking && delimiterChar == delimiterProcessor.getOpeningDelimiterChar();
-            canClose = rightFlanking && delimiterChar == delimiterProcessor.getClosingDelimiterChar();
+            canOpen = leftFlanking && delimiterChar == delimiterProcessor.getOpeningCharacter();
+            canClose = rightFlanking && delimiterChar == delimiterProcessor.getClosingCharacter();
         }
 
         index = startIndex;
-        return new DelimiterRun(delimiterCount, canOpen, canClose);
+        return new DelimiterData(delimiterCount, canOpen, canClose);
     }
 
     protected void processDelimiters(Delimiter stackBottom) {
         Map<Character, Delimiter> openersBottom = new HashMap<>();
 
         // find first closer above stackBottom:
-        Delimiter closer = this.delimiter;
+        Delimiter closer = lastDelimiter;
         while (closer != null && closer.previous != stackBottom) {
             closer = closer.previous;
         }
@@ -1231,42 +1282,53 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 continue;
             }
 
-            char openingDelimiterChar = delimiterProcessor.getOpeningDelimiterChar();
+            char openingDelimiterChar = delimiterProcessor.getOpeningCharacter();
 
             // found delimiter closer. now look back for first matching opener:
+            int useDelims = 0;
             boolean openerFound = false;
+            boolean potentialOpenerFound = false;
             Delimiter opener = closer.previous;
             while (opener != null && opener != stackBottom && opener != openersBottom.get(delimiterChar)) {
-                if (opener.delimiterChar == openingDelimiterChar && opener.canOpen) {
-                    openerFound = true;
-                    break;
+                if (opener.canOpen && opener.delimiterChar == openingDelimiterChar) {
+                    potentialOpenerFound = true;
+                    useDelims = delimiterProcessor.getDelimiterUse(opener, closer);
+                    if (useDelims > 0) {
+                        openerFound = true;
+                        break;
+                    }
                 }
                 opener = opener.previous;
             }
 
             if (!openerFound) {
-                // Set lower bound for future searches for openers:
-                openersBottom.put(delimiterChar, closer.previous);
-                if (!closer.canOpen) {
-                    // We can removeIndex a closer that can't be an opener,
-                    // once we've seen there's no matching opener:
-                    removeDelimiterKeepNode(closer);
+                if (!potentialOpenerFound) {
+                    // Set lower bound for future searches for openers.
+                    // Only do this when we didn't even have a potential
+                    // opener (one that matches the character and can open).
+                    // If an opener was rejected because of the number of
+                    // delimiters (e.g. because of the "multiple of 3" rule),
+                    // we want to consider it next time because the number
+                    // of delimiters can change as we continue processing.
+                    openersBottom.put(delimiterChar, closer.previous);
+                    if (!closer.canOpen) {
+                        // We can remove a closer that can't be an opener,
+                        // once we've seen there's no matching opener:
+                        removeDelimiterKeepNode(closer);
+                    }
                 }
                 closer = closer.next;
                 continue;
             }
 
-            int useDelims = delimiterProcessor.getDelimiterUse(opener.numDelims, closer.numDelims);
-            if (useDelims <= 0) {
-                // nope
-                useDelims = 1;
-            }
-
-            // removeIndex used delimiters from stack elts and inlines
+            // Remove number of used delimiters from stack and inline nodes.
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
             removeDelimitersBetween(opener, closer);
+            //// The delimiter processor can re-parent the nodes between opener and closer,
+            //// so make sure they're contiguous already.
+            //mergeTextNodes(openerNode.getNext(), closerNode.getPrevious());
 
             opener.numDelims += useDelims;
             closer.numDelims += useDelims;
@@ -1276,7 +1338,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
-            // if opener has 0 delims, removeIndex it and the inline
+            // No delimiter characters left to process, so we can remove delimiter and the now empty node.
             if (opener.numDelims == 0) {
                 removeDelimiterAndNode(opener);
             } else {
@@ -1297,8 +1359,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         // removeIndex all delimiters
-        while (delimiter != null && delimiter != stackBottom) {
-            removeDelimiterKeepNode(delimiter);
+        while (lastDelimiter != null && lastDelimiter != stackBottom) {
+            removeDelimiterKeepNode(lastDelimiter);
         }
     }
 
@@ -1359,7 +1421,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
         if (delim.next == null) {
             // top of stack
-            this.delimiter = delim.previous;
+            this.lastDelimiter = delim.previous;
         } else {
             delim.next.previous = delim.previous;
         }

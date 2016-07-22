@@ -1,8 +1,8 @@
 ---
 title: CommonMark Spec
 author: John MacFarlane
-version: 0.25
-date: '2016-03-24'
+version: 0.26
+date: '2016-07-15'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 ---
@@ -14,12 +14,90 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 Markdown is a plain text format for writing structured documents,
 based on conventions used for indicating formatting in email and
 usenet posts.  It was developed in 2004 by John Gruber, who wrote
-the first Markdown-to-HTML converter in perl, and it soon became
-widely used in websites.  By 2014 there were dozens of
-implementations in many languages.  Some of them extended basic
-Markdown syntax with conventions for footnotes, definition lists,
-tables, and other constructs, and some allowed output not just in
-HTML but in LaTeX and many other formats.
+the first Markdown-to-HTML converter in Perl, and it soon became
+ubiquitous.  In the next decade, dozens of implementations were
+developed in many languages.  Some extended the original
+Markdown syntax with conventions for footnotes, tables, and
+other document elements.  Some allowed Markdown documents to be
+rendered in formats other than HTML.  Websites like Reddit,
+StackOverflow, and GitHub had millions of people using Markdown.
+And Markdown started to be used beyond the web, to author books,
+articles, slide shows, letters, and lecture notes.
+
+What distinguishes Markdown from many other lightweight markup
+syntaxes, which are often easier to write, is its readability.
+As Gruber writes:
+
+> The overriding design goal for Markdown's formatting syntax is
+> to make it as readable as possible. The idea is that a
+> Markdown-formatted document should be publishable as-is, as
+> plain text, without looking like it's been marked up with tags
+> or formatting instructions.
+> (<http://daringfireball.net/projects/markdown/>)
+
+The point can be illustrated by comparing a sample of
+[AsciiDoc](http://www.methods.co.nz/asciidoc/) with
+an equivalent sample of Markdown.  Here is a sample of
+AsciiDoc from the AsciiDoc manual:
+
+```
+1. List item one.
++
+List item one continued with a second paragraph followed by an
+Indented block.
++
+.................
+$ ls *.sh
+$ mv *.sh ~/tmp
+.................
++
+List item continued with a third paragraph.
+
+2. List item two continued with an open block.
++
+--
+This paragraph is part of the preceding list item.
+
+a. This list is nested and does not require explicit item
+continuation.
++
+This paragraph is part of the preceding list item.
+
+b. List item b.
+
+This paragraph belongs to item two of the outer list.
+--
+```
+
+And here is the equivalent in Markdown:
+```
+1.  List item one.
+
+    List item one continued with a second paragraph followed by an
+    Indented block.
+
+        $ ls *.sh
+        $ mv *.sh ~/tmp
+
+    List item continued with a third paragraph.
+
+2.  List item two continued with an open block.
+
+    This paragraph is part of the preceding list item.
+
+    1. This list is nested and does not require explicit item continuation.
+
+       This paragraph is part of the preceding list item.
+
+    2. List item b.
+
+    This paragraph belongs to item two of the outer list.
+```
+
+The AsciiDoc version is, arguably, easier to write. You don't need
+to worry about indentation.  But the Markdown version is much easier
+to read.  The nesting of list items is apparent to the eye in the
+source, not just in the processed document.
 
 ## Why is a spec needed?
 
@@ -259,9 +337,14 @@ the Unicode classes `Pc`, `Pd`, `Pe`, `Pf`, `Pi`, `Po`, or `Ps`.
 ## Tabs
 
 Tabs in lines are not expanded to [spaces].  However,
-in contexts where indentation is significant for the
-document's structure, tabs behave as if they were replaced
-by spaces with a tab stop of 4 characters.
+in contexts where whitespace helps to define block structure,
+tabs behave as if they were replaced by spaces with a tab stop
+of 4 characters.
+
+Thus, for example, a tab can be used instead of four spaces
+in an indented code block.  (Note, however, that internal
+tabs are passed through as literal tabs, not expanded to
+spaces.)
 
 ```````````````````````````````` example Tabs: 1
 →foo→baz→→bim
@@ -297,6 +380,9 @@ Document[0, 16]
   IndentedCodeBlock[4, 16]
 ````````````````````````````````
 
+In the following example, a continuation paragraph of a list
+item is indented with a tab; this has exactly the same effect
+as indentation with four spaces would:
 
 ```````````````````````````````` example Tabs: 4
   - foo
@@ -339,6 +425,15 @@ Document[0, 13]
         Text[2, 5] chars:[2, 5, "foo"]
       IndentedCodeBlock[9, 13]
 ````````````````````````````````
+
+Normally the `>` that begins a block quote may be followed
+optionally by a space, which is not considered part of the
+content.  In the following case `>` is followed by a tab,
+which is treated as if it were expanded into spaces.
+Since one of theses spaces is considered part of the
+delimiter, `foo` is considered to be indented six spaces
+inside the block quote context, so we get an indented
+code block starting with two spaces.
 
 ```````````````````````````````` example Tabs: 6
 >→→foo
@@ -414,6 +509,17 @@ Document[0, 24]
                 Text[20, 23] chars:[20, 23, "baz"]
 ````````````````````````````````
 
+```````````````````````````````` example Tabs: 10
+#→Foo
+.
+<h1>Foo</h1>
+````````````````````````````````
+
+```````````````````````````````` example Tabs: 11
+*→*→*→
+.
+<hr />
+````````````````````````````````
 
 
 ## Insecure characters
@@ -891,22 +997,9 @@ Document[0, 18]
 ````````````````````````````````
 
 
-A tab will not work:
-
-```````````````````````````````` example ATX headings: 4
-#→foo
-.
-<p>#→foo</p>
-.
-Document[0, 6]
-  Paragraph[0, 6]
-    Text[0, 5] chars:[0, 5, "#\tfoo"]
-````````````````````````````````
-
-
 This is not a heading, because the first `#` is escaped:
 
-```````````````````````````````` example ATX headings: 5
+```````````````````````````````` example ATX headings: 4
 \## foo
 .
 <p>## foo</p>
@@ -919,7 +1012,7 @@ Document[0, 8]
 
 Contents are parsed as inlines:
 
-```````````````````````````````` example ATX headings: 6
+```````````````````````````````` example ATX headings: 5
 # foo *bar* \*baz\*
 .
 <h1>foo <em>bar</em> *baz*</h1>
@@ -935,7 +1028,7 @@ Document[0, 20]
 
 Leading and trailing blanks are ignored in parsing inline content:
 
-```````````````````````````````` example ATX headings: 7
+```````````````````````````````` example ATX headings: 6
 #                  foo                     
 .
 <h1>foo</h1>
@@ -948,7 +1041,7 @@ Document[0, 44]
 
 One to three spaces indentation are allowed:
 
-```````````````````````````````` example ATX headings: 8
+```````````````````````````````` example ATX headings: 7
  ### foo
   ## foo
    # foo
@@ -969,7 +1062,7 @@ Document[0, 27]
 
 Four spaces are too much:
 
-```````````````````````````````` example ATX headings: 9
+```````````````````````````````` example ATX headings: 8
     # foo
 .
 <pre><code># foo
@@ -980,7 +1073,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example ATX headings: 10
+```````````````````````````````` example ATX headings: 9
 foo
     # bar
 .
@@ -997,7 +1090,7 @@ Document[0, 14]
 
 A closing sequence of `#` characters is optional:
 
-```````````````````````````````` example ATX headings: 11
+```````````````````````````````` example ATX headings: 10
 ## foo ##
   ###   bar    ###
 .
@@ -1014,7 +1107,7 @@ Document[0, 29]
 
 It need not be the same length as the opening sequence:
 
-```````````````````````````````` example ATX headings: 12
+```````````````````````````````` example ATX headings: 11
 # foo ##################################
 ##### foo ##
 .
@@ -1031,7 +1124,7 @@ Document[0, 54]
 
 Spaces are allowed after the closing sequence:
 
-```````````````````````````````` example ATX headings: 13
+```````````````````````````````` example ATX headings: 12
 ### foo ###     
 .
 <h3>foo</h3>
@@ -1046,7 +1139,7 @@ A sequence of `#` characters with anything but [spaces] following it
 is not a closing sequence, but counts as part of the contents of the
 heading:
 
-```````````````````````````````` example ATX headings: 14
+```````````````````````````````` example ATX headings: 13
 ### foo ### b
 .
 <h3>foo ### b</h3>
@@ -1059,7 +1152,7 @@ Document[0, 14]
 
 The closing sequence must be preceded by a space:
 
-```````````````````````````````` example ATX headings: 15
+```````````````````````````````` example ATX headings: 14
 # foo#
 .
 <h1>foo#</h1>
@@ -1073,7 +1166,7 @@ Document[0, 7]
 Backslash-escaped `#` characters do not count as part
 of the closing sequence:
 
-```````````````````````````````` example ATX headings: 16
+```````````````````````````````` example ATX headings: 15
 ### foo \###
 ## foo #\##
 # foo \#
@@ -1095,7 +1188,7 @@ Document[0, 34]
 ATX headings need not be separated from surrounding content by blank
 lines, and they can interrupt paragraphs:
 
-```````````````````````````````` example ATX headings: 17
+```````````````````````````````` example ATX headings: 16
 ****
 ## foo
 ****
@@ -1112,7 +1205,7 @@ Document[0, 17]
 ````````````````````````````````
 
 
-```````````````````````````````` example ATX headings: 18
+```````````````````````````````` example ATX headings: 17
 Foo bar
 # baz
 Bar foo
@@ -1133,7 +1226,7 @@ Document[0, 22]
 
 ATX headings can be empty:
 
-```````````````````````````````` example ATX headings: 19
+```````````````````````````````` example ATX headings: 18
 ## 
 #
 ### ###
@@ -2499,7 +2592,7 @@ by their start and end conditions.  The block begins with a line that
 meets a [start condition](@) (after up to three spaces
 optional indentation).  It ends with the first subsequent line that
 meets a matching [end condition](@), or the last line of
-the document, if no line is encountered that meets the
+the document or other [container block](@), if no line is encountered that meets the
 [end condition].  If the first line meets both the [start condition]
 and the [end condition], the block will contain just that line.
 
@@ -2910,6 +3003,7 @@ import Text.HTML.TagSoup
 main :: IO ()
 main = print $ parseTags tags
 </code></pre>
+okay
 .
 <pre language="haskell"><code>
 import Text.HTML.TagSoup
@@ -2917,9 +3011,12 @@ import Text.HTML.TagSoup
 main :: IO ()
 main = print $ parseTags tags
 </code></pre>
+<p>okay</p>
 .
-Document[0, 115]
+Document[0, 120]
   HtmlBlock[0, 115]
+  Paragraph[115, 120]
+    Text[115, 119] chars:[115, 119, "okay"]
 ````````````````````````````````
 
 
@@ -2931,15 +3028,19 @@ A script tag (type 1):
 
 document.getElementById("demo").innerHTML = "Hello JavaScript!";
 </script>
+okay
 .
 <script type="text/javascript">
 // JavaScript example
 
 document.getElementById("demo").innerHTML = "Hello JavaScript!";
 </script>
+<p>okay</p>
 .
-Document[0, 130]
+Document[0, 135]
   HtmlBlock[0, 130]
+  Paragraph[130, 135]
+    Text[130, 134] chars:[130, 134, "okay"]
 ````````````````````````````````
 
 
@@ -2952,6 +3053,7 @@ h1 {color:red;}
 
 p {color:blue;}
 </style>
+okay
 .
 <style
   type="text/css">
@@ -2959,9 +3061,12 @@ h1 {color:red;}
 
 p {color:blue;}
 </style>
+<p>okay</p>
 .
-Document[0, 68]
+Document[0, 73]
   HtmlBlock[0, 68]
+  Paragraph[68, 73]
+    Text[68, 72] chars:[68, 72, "okay"]
 ````````````````````````````````
 
 
@@ -3082,14 +3187,18 @@ A comment (type 2):
 
 bar
    baz -->
+okay
 .
 <!-- Foo
 
 bar
    baz -->
+<p>okay</p>
 .
-Document[0, 25]
+Document[0, 30]
   HtmlCommentBlock[0, 25]
+  Paragraph[25, 30]
+    Text[25, 29] chars:[25, 29, "okay"]
 ````````````````````````````````
 
 
@@ -3102,15 +3211,19 @@ A processing instruction (type 3):
   echo '>';
 
 ?>
+okay
 .
 <?php
 
   echo '>';
 
 ?>
+<p>okay</p>
 .
-Document[0, 23]
+Document[0, 28]
   HtmlBlock[0, 23]
+  Paragraph[23, 28]
+    Text[23, 27] chars:[23, 27, "okay"]
 ````````````````````````````````
 
 
@@ -3141,6 +3254,7 @@ function matchwo(a,b)
   }
 }
 ]]>
+okay
 .
 <![CDATA[
 function matchwo(a,b)
@@ -3154,9 +3268,12 @@ function matchwo(a,b)
   }
 }
 ]]>
+<p>okay</p>
 .
-Document[0, 114]
+Document[0, 119]
   HtmlBlock[0, 114]
+  Paragraph[114, 119]
+    Text[114, 118] chars:[114, 118, "okay"]
 ````````````````````````````````
 
 
@@ -4200,8 +4317,8 @@ Document[0, 32]
 ````````````````````````````````
 
 
-The Laziness clause allows us to omit the `>` before a
-paragraph continuation line:
+The Laziness clause allows us to omit the `>` before
+[paragraph continuation text]:
 
 ```````````````````````````````` example Block quotes: 5
 > # Foo
@@ -4354,8 +4471,8 @@ Document[0, 14]
 ````````````````````````````````
 
 
-Note that in the following case, we have a paragraph
-continuation line:
+Note that in the following case, we have a [lazy
+continuation line]:
 
 ```````````````````````````````` example Block quotes: 11
 > foo
@@ -4384,7 +4501,7 @@ To see why, note that in
 
 the `- bar` is indented too far to start a list, and can't
 be an indented code block because indented code blocks cannot
-interrupt paragraphs, so it is a [paragraph continuation line].
+interrupt paragraphs, so it is [paragraph continuation text].
 
 A block quote can be empty:
 
@@ -4710,13 +4827,19 @@ The following rules define [list items]:
 1.  **Basic case.**  If a sequence of lines *Ls* constitute a sequence of
     blocks *Bs* starting with a [non-whitespace character] and not separated
     from each other by more than one blank line, and *M* is a list
-    marker of width *W* followed by 0 < *N* < 5 spaces, then the result
+    marker of width *W* followed by 1 ≤ *N* ≤ 4 spaces, then the result
     of prepending *M* and the following spaces to the first line of
     *Ls*, and indenting subsequent lines of *Ls* by *W + N* spaces, is a
     list item with *Bs* as its contents.  The type of the list item
     (bullet or ordered) is determined by the type of its list marker.
     If the list item is ordered, then it is also assigned a start
     number, based on the ordered list marker.
+
+    Exceptions: When the list item interrupts a paragraph---that
+    is, when it starts on a line that would otherwise count as
+    [paragraph continuation text]---then (a) the lines *Ls* must
+    not begin with a blank line, and (b) if the list item is
+    ordered, the start number must be 1.
 
 For example, let *Ls* be the lines
 
@@ -4971,89 +5094,29 @@ Document[0, 12]
 ````````````````````````````````
 
 
-A list item may not contain blocks that are separated by more than
-one blank line.  Thus, two blank lines will end a list, unless the
-two blanks are contained in a [fenced code block].
+A list item may contain blocks that are separated by more than
+one blank line.
 
 ```````````````````````````````` example List items: 10
 - foo
 
-  bar
-
-- foo
-
 
   bar
-
-- ```
-  foo
-
-
-  bar
-  ```
-
-- baz
-
-  + ```
-    foo
-
-
-    bar
-    ```
 .
 <ul>
 <li>
 <p>foo</p>
 <p>bar</p>
 </li>
-<li>
-<p>foo</p>
-</li>
-</ul>
-<p>bar</p>
-<ul>
-<li>
-<pre><code>foo
-
-
-bar
-</code></pre>
-</li>
-<li>
-<p>baz</p>
-<ul>
-<li>
-<pre><code>foo
-
-
-bar
-</code></pre>
-</li>
-</ul>
-</li>
 </ul>
 .
-Document[0, 97]
-  BulletList[0, 20] isLoose
-    BulletListItem[0, 13] open:[0, 1, "-"] isLoose
+Document[0, 14]
+  BulletList[0, 14] isLoose
+    BulletListItem[0, 14] open:[0, 1, "-"] isLoose
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
-      Paragraph[9, 13]
-        Text[9, 12] chars:[9, 12, "bar"]
-    BulletListItem[14, 20] open:[14, 15, "-"] isLoose
-      Paragraph[16, 20]
-        Text[16, 19] chars:[16, 19, "foo"]
-  Paragraph[24, 28]
-    Text[24, 27] chars:[24, 27, "bar"]
-  BulletList[29, 96] isLoose
-    BulletListItem[29, 54] open:[29, 30, "-"] isLoose
-      FencedCodeBlock[31, 54] open:[31, 34, "```"] content:[37, 49] lines[3] close:[51, 54, "```"]
-    BulletListItem[56, 96] open:[56, 57, "-"] isLoose
-      Paragraph[58, 62]
-        Text[58, 61] chars:[58, 61, "baz"]
-      BulletList[65, 96] isTight
-        BulletListItem[65, 96] open:[65, 66, "+"] isTight
-          FencedCodeBlock[67, 96] open:[67, 70, "```"] content:[75, 89] lines[3] close:[93, 96, "```"]
+      Paragraph[10, 14]
+        Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
 
@@ -5097,67 +5160,38 @@ Document[0, 53]
 
 
 A list item that contains an indented code block will preserve
-empty lines within the code block verbatim, unless there are two
-or more empty lines in a row (since as described above, two
-blank lines end the list):
+empty lines within the code block verbatim.
 
 ```````````````````````````````` example List items: 12
 - Foo
 
       bar
 
+
       baz
 .
 <ul>
 <li>
 <p>Foo</p>
 <pre><code>bar
+
 
 baz
 </code></pre>
 </li>
 </ul>
 .
-Document[0, 28]
-  BulletList[0, 28] isLoose
-    BulletListItem[0, 28] open:[0, 1, "-"] isLoose
-      Paragraph[2, 6]
-        Text[2, 5] chars:[2, 5, "Foo"]
-      IndentedCodeBlock[13, 28]
-````````````````````````````````
-
-
-```````````````````````````````` example List items: 13
-- Foo
-
-      bar
-
-
-      baz
-.
-<ul>
-<li>
-<p>Foo</p>
-<pre><code>bar
-</code></pre>
-</li>
-</ul>
-<pre><code>  baz
-</code></pre>
-.
 Document[0, 29]
-  BulletList[0, 18] isLoose
-    BulletListItem[0, 18] open:[0, 1, "-"] isLoose
+  BulletList[0, 29] isLoose
+    BulletListItem[0, 29] open:[0, 1, "-"] isLoose
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "Foo"]
-      IndentedCodeBlock[13, 18]
-  IndentedCodeBlock[23, 29]
+      IndentedCodeBlock[13, 29]
 ````````````````````````````````
-
 
 Note that ordered list start numbers must be nine digits or less:
 
-```````````````````````````````` example List items: 14
+```````````````````````````````` example List items: 13
 123456789. ok
 .
 <ol start="123456789">
@@ -5172,7 +5206,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 15
+```````````````````````````````` example List items: 14
 1234567890. not ok
 .
 <p>1234567890. not ok</p>
@@ -5185,7 +5219,7 @@ Document[0, 19]
 
 A start number may begin with 0s:
 
-```````````````````````````````` example List items: 16
+```````````````````````````````` example List items: 15
 0. ok
 .
 <ol start="0">
@@ -5200,7 +5234,7 @@ Document[0, 6]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 17
+```````````````````````````````` example List items: 16
 003. ok
 .
 <ol start="3">
@@ -5217,7 +5251,7 @@ Document[0, 8]
 
 A start number may not be negative:
 
-```````````````````````````````` example List items: 18
+```````````````````````````````` example List items: 17
 -1. not ok
 .
 <p>-1. not ok</p>
@@ -5245,7 +5279,7 @@ An indented code block will have to be indented four spaces beyond
 the edge of the region where text will be included in the list item.
 In the following case that is 6 spaces:
 
-```````````````````````````````` example List items: 19
+```````````````````````````````` example List items: 18
 - foo
 
       bar
@@ -5269,7 +5303,7 @@ Document[0, 17]
 
 And in this case it is 11 spaces:
 
-```````````````````````````````` example List items: 20
+```````````````````````````````` example List items: 19
   10.  foo
 
            bar
@@ -5295,7 +5329,7 @@ If the *first* block in the list item is an indented code block,
 then by rule #2, the contents must be indented *one* space after the
 list marker:
 
-```````````````````````````````` example List items: 21
+```````````````````````````````` example List items: 20
     indented code
 
 paragraph
@@ -5316,7 +5350,7 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 22
+```````````````````````````````` example List items: 21
 1.     indented code
 
    paragraph
@@ -5346,7 +5380,7 @@ Document[0, 53]
 Note that an additional space indent is interpreted as space
 inside the code block:
 
-```````````````````````````````` example List items: 23
+```````````````````````````````` example List items: 22
 1.      indented code
 
    paragraph
@@ -5381,7 +5415,7 @@ block.  In a case like the following, where the first block begins with
 a three-space indent, the rules do not allow us to form a list item by
 indenting the whole thing and prepending a list marker:
 
-```````````````````````````````` example List items: 24
+```````````````````````````````` example List items: 23
    foo
 
 bar
@@ -5397,7 +5431,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 25
+```````````````````````````````` example List items: 24
 -    foo
 
   bar
@@ -5422,7 +5456,7 @@ with 1-3 spaces indent, the indentation can always be removed without
 a change in interpretation, allowing rule #1 to be applied.  So, in
 the above case:
 
-```````````````````````````````` example List items: 26
+```````````````````````````````` example List items: 25
 -  foo
 
    bar
@@ -5458,7 +5492,7 @@ Document[0, 15]
 
 Here are some list items that start with a blank line but are not empty:
 
-```````````````````````````````` example List items: 27
+```````````````````````````````` example List items: 26
 -
   foo
 -
@@ -5489,6 +5523,18 @@ Document[0, 40]
       FencedCodeBlock[12, 27] open:[12, 15, "```"] content:[18, 22] lines[3] close:[24, 27, "```"]
     BulletListItem[28, 40] open:[28, 29, "-"] isTight
       IndentedCodeBlock[36, 40]
+````````````````````````````````
+
+When the list item starts with a blank line, the number of spaces
+following the list marker doesn't change the required indentation:
+
+```````````````````````````````` example List items: 27
+-   
+  foo
+.
+<ul>
+<li>foo</li>
+</ul>
 ````````````````````````````````
 
 
@@ -5603,6 +5649,20 @@ Document[0, 2]
     BulletListItem[0, 1] open:[0, 1, "*"] isTight
 ````````````````````````````````
 
+However, an empty list item cannot interrupt a paragraph:
+
+```````````````````````````````` example List items: 33
+foo
+*
+
+foo
+1.
+.
+<p>foo
+*</p>
+<p>foo
+1.</p>
+````````````````````````````````
 
 
 4.  **Indentation.**  If a sequence of lines *Ls* constitutes a list item
@@ -5613,7 +5673,7 @@ Document[0, 2]
 
 Indented one space:
 
-```````````````````````````````` example List items: 33
+```````````````````````````````` example List items: 34
  1.  A paragraph
      with two lines.
 
@@ -5649,7 +5709,7 @@ Document[0, 85]
 
 Indented two spaces:
 
-```````````````````````````````` example List items: 34
+```````````````````````````````` example List items: 35
   1.  A paragraph
       with two lines.
 
@@ -5685,7 +5745,7 @@ Document[0, 89]
 
 Indented three spaces:
 
-```````````````````````````````` example List items: 35
+```````````````````````````````` example List items: 36
    1.  A paragraph
        with two lines.
 
@@ -5721,7 +5781,7 @@ Document[0, 93]
 
 Four spaces indent gives a code block:
 
-```````````````````````````````` example List items: 36
+```````````````````````````````` example List items: 37
     1.  A paragraph
         with two lines.
 
@@ -5754,7 +5814,7 @@ Document[0, 97]
 
 Here is an example with [lazy continuation lines]:
 
-```````````````````````````````` example List items: 37
+```````````````````````````````` example List items: 38
   1.  A paragraph
 with two lines.
 
@@ -5790,7 +5850,7 @@ Document[0, 83]
 
 Indentation can be partially deleted:
 
-```````````````````````````````` example List items: 38
+```````````````````````````````` example List items: 39
   1.  A paragraph
     with two lines.
 .
@@ -5811,7 +5871,7 @@ Document[0, 38]
 
 These examples show how laziness can work in nested structures:
 
-```````````````````````````````` example List items: 39
+```````````````````````````````` example List items: 40
 > 1. > Blockquote
 continued here.
 .
@@ -5838,7 +5898,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 40
+```````````````````````````````` example List items: 41
 > 1. > Blockquote
 > continued here.
 .
@@ -5875,54 +5935,65 @@ in order to be included in the list item.
 
 So, in this case we need two spaces indent:
 
-```````````````````````````````` example List items: 41
+```````````````````````````````` example List items: 42
 - foo
   - bar
     - baz
+      - boo
 .
 <ul>
 <li>foo
 <ul>
 <li>bar
 <ul>
-<li>baz</li>
+<li>baz
+<ul>
+<li>boo</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 .
-Document[0, 24]
-  BulletList[0, 24] isTight
-    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+Document[0, 36]
+  BulletList[0, 36] isTight
+    BulletListItem[0, 36] open:[0, 1, "-"] isTight
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
-      BulletList[8, 24] isTight
-        BulletListItem[8, 24] open:[8, 9, "-"] isTight
+      BulletList[8, 36] isTight
+        BulletListItem[8, 36] open:[8, 9, "-"] isTight
           Paragraph[10, 14]
             Text[10, 13] chars:[10, 13, "bar"]
-          BulletList[18, 24] isTight
-            BulletListItem[18, 24] open:[18, 19, "-"] isTight
+          BulletList[18, 36] isTight
+            BulletListItem[18, 36] open:[18, 19, "-"] isTight
               Paragraph[20, 24]
                 Text[20, 23] chars:[20, 23, "baz"]
+              BulletList[30, 36] isTight
+                BulletListItem[30, 36] open:[30, 31, "-"] isTight
+                  Paragraph[32, 36]
+                    Text[32, 35] chars:[32, 35, "boo"]
 ````````````````````````````````
 
 
 One is not enough:
 
-```````````````````````````````` example List items: 42
+```````````````````````````````` example List items: 43
 - foo
  - bar
   - baz
+   - boo
 .
 <ul>
 <li>foo</li>
 <li>bar</li>
 <li>baz</li>
+<li>boo</li>
 </ul>
 .
-Document[0, 21]
-  BulletList[0, 21] isTight
+Document[0, 30]
+  BulletList[0, 30] isTight
     BulletListItem[0, 6] open:[0, 1, "-"] isTight
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
@@ -5932,12 +6003,15 @@ Document[0, 21]
     BulletListItem[15, 21] open:[15, 16, "-"] isTight
       Paragraph[17, 21]
         Text[17, 20] chars:[17, 20, "baz"]
+    BulletListItem[24, 30] open:[24, 25, "-"] isTight
+      Paragraph[26, 30]
+        Text[26, 29] chars:[26, 29, "boo"]
 ````````````````````````````````
 
 
 Here we need four, because the list marker is wider:
 
-```````````````````````````````` example List items: 43
+```````````````````````````````` example List items: 44
 10) foo
     - bar
 .
@@ -5963,7 +6037,7 @@ Document[0, 18]
 
 Three is not enough:
 
-```````````````````````````````` example List items: 44
+```````````````````````````````` example List items: 45
 10) foo
    - bar
 .
@@ -5988,7 +6062,7 @@ Document[0, 17]
 
 A list may be the first block in a list item:
 
-```````````````````````````````` example List items: 45
+```````````````````````````````` example List items: 46
 - - foo
 .
 <ul>
@@ -6009,7 +6083,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example List items: 46
+```````````````````````````````` example List items: 47
 1. - 2. foo
 .
 <ol>
@@ -6038,7 +6112,7 @@ Document[0, 12]
 
 A list item can contain a heading:
 
-```````````````````````````````` example List items: 47
+```````````````````````````````` example List items: 48
 - # Foo
 - Bar
   ---
@@ -6369,36 +6443,20 @@ Document[0, 16]
         Text[12, 15] chars:[12, 15, "baz"]
 ````````````````````````````````
 
-
 `Markdown.pl` does not allow this, through fear of triggering a list
 via a numeral in a hard-wrapped line:
 
-```````````````````````````````` example Lists: 4
+```````````````````````````````` markdown
 The number of windows in my house is
 14.  The number of doors is 6.
-.
-<p>The number of windows in my house is</p>
-<ol start="14">
-<li>The number of doors is 6.</li>
-</ol>
-.
-Document[0, 68]
-  Paragraph[0, 37]
-    Text[0, 36] chars:[0, 36, "The n … se is"]
-  OrderedList[37, 68] isTight start:14 delimiter:'.'
-    OrderedListItem[37, 68] open:[37, 40, "14."] isTight
-      Paragraph[42, 68]
-        Text[42, 67] chars:[42, 67, "The n … is 6."]
 ````````````````````````````````
+Oddly, though, `Markdown.pl` *does* allow a blockquote to
+interrupt a paragraph, even though the same considerations might
+apply.
 
-
-Oddly, `Markdown.pl` *does* allow a blockquote to interrupt a paragraph,
-even though the same considerations might apply.  We think that the two
-cases should be treated the same.  Here are two reasons for allowing
-lists to interrupt paragraphs:
-
-First, it is natural and not uncommon for people to start lists without
-blank lines:
+In CommonMark, we do allow lists to interrupt paragraphs, for
+two reasons.  First, it is natural and not uncommon for people
+to start lists without blank lines:
 
     I need to buy
     - new shoes
@@ -6432,22 +6490,56 @@ then
 
 by itself should be a paragraph followed by a nested sublist.
 
-Our adherence to the [principle of uniformity]
-thus inclines us to think that there are two coherent packages:
+Since it is well established Markdown practice to allow lists to
+interrupt paragraphs inside list items, the [principle of
+uniformity] requires us to allow this outside list items as
+well.  ([reStructuredText](http://docutils.sourceforge.net/rst.html)
+takes a different approach, requiring blank lines before lists
+even inside other list items.)
 
-1.  Require blank lines before *all* lists and blockquotes,
-    including lists that occur as sublists inside other list items.
+In order to solve of unwanted lists in paragraphs with
+hard-wrapped numerals, we allow only lists starting with `1` to
+interrupt paragraphs.  Thus,
 
-2.  Require blank lines in none of these places.
+```````````````````````````````` example Lists: 4
+The number of windows in my house is
+14.  The number of doors is 6.
+.
+<p>The number of windows in my house is
+14.  The number of doors is 6.</p>
+.
+Document[0, 68]
+  Paragraph[0, 68]
+    Text[0, 36] chars:[0, 36, "The n … se is"]
+    SoftLineBreak[36, 37]
+    Text[37, 67] chars:[37, 67, "14.   … is 6."]
+````````````````````````````````
 
-[reStructuredText](http://docutils.sourceforge.net/rst.html) takes
-the first approach, for which there is much to be said.  But the second
-seems more consistent with established practice with Markdown.
-
-There can be blank lines between items, but two blank lines end
-a list:
+We may still get an unintended result in cases like
 
 ```````````````````````````````` example Lists: 5
+The number of windows in my house is
+1.  The number of doors is 6.
+.
+<p>The number of windows in my house is</p>
+<ol>
+<li>The number of doors is 6.</li>
+</ol>
+.
+Document[0, 67]
+  Paragraph[0, 37]
+    Text[0, 36] chars:[0, 36, "The n … se is"]
+  OrderedList[37, 67] isTight delimiter:'.'
+    OrderedListItem[37, 67] open:[37, 39, "1."] isTight
+      Paragraph[41, 67]
+        Text[41, 66] chars:[41, 66, "The n … is 6."]
+````````````````````````````````
+
+but this rule should prevent most spurious list captures.
+
+There can be any number of blank lines between items:
+
+```````````````````````````````` example Lists: 6
 - foo
 
 - bar
@@ -6462,60 +6554,23 @@ a list:
 <li>
 <p>bar</p>
 </li>
-</ul>
-<ul>
-<li>baz</li>
+<li>
+<p>baz</p>
+</li>
 </ul>
 .
 Document[0, 21]
-  BulletList[0, 13] isLoose
+  BulletList[0, 21] isLoose
     BulletListItem[0, 6] open:[0, 1, "-"] isLoose
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
     BulletListItem[7, 13] open:[7, 8, "-"] isLoose
       Paragraph[9, 13]
         Text[9, 12] chars:[9, 12, "bar"]
-  BulletList[15, 21] isTight
-    BulletListItem[15, 21] open:[15, 16, "-"] isTight
+    BulletListItem[15, 21] open:[15, 16, "-"] isLoose
       Paragraph[17, 21]
         Text[17, 20] chars:[17, 20, "baz"]
 ````````````````````````````````
-
-
-As illustrated above in the section on [list items],
-two blank lines between blocks *within* a list item will also end a
-list:
-
-```````````````````````````````` example Lists: 6
-- foo
-
-
-  bar
-- baz
-.
-<ul>
-<li>foo</li>
-</ul>
-<p>bar</p>
-<ul>
-<li>baz</li>
-</ul>
-.
-Document[0, 20]
-  BulletList[0, 6] isTight
-    BulletListItem[0, 6] open:[0, 1, "-"] isTight
-      Paragraph[2, 6]
-        Text[2, 5] chars:[2, 5, "foo"]
-  Paragraph[10, 14]
-    Text[10, 13] chars:[10, 13, "bar"]
-  BulletList[14, 20] isTight
-    BulletListItem[14, 20] open:[14, 15, "-"] isTight
-      Paragraph[16, 20]
-        Text[16, 19] chars:[16, 19, "baz"]
-````````````````````````````````
-
-
-Indeed, two blank lines will end *all* containing lists:
 
 ```````````````````````````````` example Lists: 7
 - foo
@@ -6530,41 +6585,44 @@ Indeed, two blank lines will end *all* containing lists:
 <ul>
 <li>bar
 <ul>
-<li>baz</li>
-</ul>
+<li>
+<p>baz</p>
+<p>bim</p>
 </li>
 </ul>
 </li>
 </ul>
-<pre><code>  bim
-</code></pre>
+</li>
+</ul>
 .
 Document[0, 36]
-  BulletList[0, 24] isTight
-    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+  BulletList[0, 36] isTight
+    BulletListItem[0, 36] open:[0, 1, "-"] isTight
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
-      BulletList[8, 24] isTight
-        BulletListItem[8, 24] open:[8, 9, "-"] isTight
+      BulletList[8, 36] isTight
+        BulletListItem[8, 36] open:[8, 9, "-"] isTight
           Paragraph[10, 14]
             Text[10, 13] chars:[10, 13, "bar"]
-          BulletList[18, 24] isTight
-            BulletListItem[18, 24] open:[18, 19, "-"] isTight
+          BulletList[18, 36] isLoose
+            BulletListItem[18, 36] open:[18, 19, "-"] isLoose
               Paragraph[20, 24]
                 Text[20, 23] chars:[20, 23, "baz"]
-  IndentedCodeBlock[30, 36]
+              Paragraph[32, 36]
+                Text[32, 35] chars:[32, 35, "bim"]
 ````````````````````````````````
 
 
-Thus, two blank lines can be used to separate consecutive lists of
-the same type, or to separate a list from an indented code block
-that would otherwise be parsed as a subparagraph of the final list
-item:
+To separate consecutive lists of the same type, or to separate a
+list from an indented code block that would otherwise be parsed
+as a subparagraph of the final list item, you can insert a blank HTML
+comment:
 
 ```````````````````````````````` example Lists: 8
 - foo
 - bar
 
+<!-- -->
 
 - baz
 - bim
@@ -6573,12 +6631,13 @@ item:
 <li>foo</li>
 <li>bar</li>
 </ul>
+<!-- -->
 <ul>
 <li>baz</li>
 <li>bim</li>
 </ul>
 .
-Document[0, 26]
+Document[0, 35]
   BulletList[0, 12] isTight
     BulletListItem[0, 6] open:[0, 1, "-"] isTight
       Paragraph[2, 6]
@@ -6586,13 +6645,14 @@ Document[0, 26]
     BulletListItem[6, 12] open:[6, 7, "-"] isTight
       Paragraph[8, 12]
         Text[8, 11] chars:[8, 11, "bar"]
-  BulletList[14, 26] isTight
-    BulletListItem[14, 20] open:[14, 15, "-"] isTight
-      Paragraph[16, 20]
-        Text[16, 19] chars:[16, 19, "baz"]
-    BulletListItem[20, 26] open:[20, 21, "-"] isTight
-      Paragraph[22, 26]
-        Text[22, 25] chars:[22, 25, "bim"]
+  HtmlCommentBlock[13, 22]
+  BulletList[23, 35] isTight
+    BulletListItem[23, 29] open:[23, 24, "-"] isTight
+      Paragraph[25, 29]
+        Text[25, 28] chars:[25, 28, "baz"]
+    BulletListItem[29, 35] open:[29, 30, "-"] isTight
+      Paragraph[31, 35]
+        Text[31, 34] chars:[31, 34, "bim"]
 ````````````````````````````````
 
 
@@ -6603,6 +6663,7 @@ Document[0, 26]
 
 -   foo
 
+<!-- -->
 
     code
 .
@@ -6615,10 +6676,11 @@ Document[0, 26]
 <p>foo</p>
 </li>
 </ul>
+<!-- -->
 <pre><code>code
 </code></pre>
 .
-Document[0, 41]
+Document[0, 50]
   BulletList[0, 30] isLoose
     BulletListItem[0, 21] open:[0, 1, "-"] isLoose
       Paragraph[4, 8]
@@ -6628,7 +6690,8 @@ Document[0, 41]
     BulletListItem[22, 30] open:[22, 23, "-"] isLoose
       Paragraph[26, 30]
         Text[26, 29] chars:[26, 29, "foo"]
-  IndentedCodeBlock[36, 41]
+  HtmlCommentBlock[31, 40]
+  IndentedCodeBlock[45, 50]
 ````````````````````````````````
 
 
@@ -7996,18 +8059,22 @@ The following rules define emphasis and strong emphasis:
 
 9.  Emphasis begins with a delimiter that [can open emphasis] and ends
     with a delimiter that [can close emphasis], and that uses the same
-    character (`_` or `*`) as the opening delimiter.  There must
-    be a nonempty sequence of inlines between the open delimiter
-    and the closing delimiter; these form the contents of the emphasis
-    inline.
+    character (`_` or `*`) as the opening delimiter.  The
+    opening and closing delimiters must belong to separate
+    [delimiter runs].  If one of the delimiters can both
+    open and close emphasis, then the sum of the lengths of the
+    delimiter runs containing the opening and closing delimiters
+    must not be a multiple of 3.
 
 10. Strong emphasis begins with a delimiter that
     [can open strong emphasis] and ends with a delimiter that
     [can close strong emphasis], and that uses the same character
-    (`_` or `*`) as the opening delimiter.
-    There must be a nonempty sequence of inlines between the open
-    delimiter and the closing delimiter; these form the contents of
-    the strong emphasis inline.
+    (`_` or `*`) as the opening delimiter.  The
+    opening and closing delimiters must belong to separate
+    [delimiter runs].  If one of the delimiters can both open
+    and close strong emphasis, then the sum of the lengths of
+    the delimiter runs containing the opening and closing
+    delimiters must not be a multiple of 3.
 
 11. A literal `*` character cannot occur at the beginning or end of
     `*`-delimited emphasis or `**`-delimited strong emphasis, unless it
@@ -8031,9 +8098,7 @@ the following principles resolve ambiguity:
     so that the second begins before the first ends and ends after
     the first ends, the first takes precedence. Thus, for example,
     `*foo _bar* baz_` is parsed as `<em>foo _bar</em> baz_` rather
-    than `*foo <em>bar* baz</em>`.  For the same reason,
-    `**foo*bar**` is parsed as `<em><em>foo</em>bar</em>*`
-    rather than `<strong>foo*bar</strong>`.
+    than `*foo <em>bar* baz</em>`.
 
 16. When there are two potential emphasis or strong emphasis spans
     with the same closing delimiter, the shorter one (the one that
@@ -8279,16 +8344,14 @@ A newline also counts as whitespace:
 *foo bar
 *
 .
-<p>*foo bar</p>
-<ul>
-<li></li>
-</ul>
+<p>*foo bar
+*</p>
 .
 Document[0, 11]
-  Paragraph[0, 9]
+  Paragraph[0, 11]
     Text[0, 8] chars:[0, 8, "*foo bar"]
-  BulletList[9, 10] isTight
-    BulletListItem[9, 10] open:[9, 10, "*"] isTight
+    SoftLineBreak[8, 9]
+    Text[9, 10] chars:[9, 10, "*"]
 ````````````````````````````````
 
 
@@ -8938,27 +9001,38 @@ Document[0, 18]
       Text[12, 16] chars:[12, 16, " baz"]
 ````````````````````````````````
 
-
-But note:
-
 ```````````````````````````````` example Emphasis and strong emphasis: 61
 *foo**bar**baz*
 .
-<p><em>foo</em><em>bar</em><em>baz</em></p>
+<p><em>foo<strong>bar</strong>baz</em></p>
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
+    Emphasis[0, 15] textOpen:[0, 1, "*"] text:[1, 14, "foo**bar**baz"] textClose:[14, 15, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9, "*bar"] textClose:[9, 10, "*"]
-      Text[6, 9] chars:[6, 9, "bar"]
-    Emphasis[9, 15] textOpen:[9, 10, "*"] text:[10, 14, "*baz"] textClose:[14, 15, "*"]
+      StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9, "bar"] textClose:[9, 11, "**"]
+        Text[6, 9] chars:[6, 9, "bar"]
       Text[11, 14] chars:[11, 14, "baz"]
 ````````````````````````````````
 
+Note that in the preceding case, the interpretation
 
-The difference is that in the preceding case, the internal delimiters
-[can close emphasis], while in the cases with spaces, they cannot.
+``` markdown
+<p><em>foo</em><em>bar<em></em>baz</em></p>
+```
+
+
+is precluded by the condition that a delimiter that
+can both open and close (like the `*` after `foo`
+cannot form emphasis if the sum of the lengths of
+the delimiter runs containing the opening and
+closing delimiters is a multiple of 3.
+
+The same condition ensures that the following
+cases are all strong emphasis nested inside
+emphasis, even when the interior spaces are
+omitted:
+
 
 ```````````````````````````````` example Emphasis and strong emphasis: 62
 ***foo** bar*
@@ -8988,29 +9062,36 @@ Document[0, 14]
 ````````````````````````````````
 
 
-Note, however, that in the following case we get no strong
-emphasis, because the opening delimiter is closed by the first
-`*` before `bar`:
-
 ```````````````````````````````` example Emphasis and strong emphasis: 64
 *foo**bar***
 .
-<p><em>foo</em><em>bar</em>**</p>
+<p><em>foo<strong>bar</strong></em></p>
 .
 Document[0, 13]
   Paragraph[0, 13]
-    Emphasis[0, 5] textOpen:[0, 1, "*"] text:[1, 4, "foo"] textClose:[4, 5, "*"]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo**bar"] textClose:[9, 10, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
-    Emphasis[4, 10] textOpen:[4, 5, "*"] text:[5, 9, "*bar"] textClose:[9, 10, "*"]
-      Text[6, 9] chars:[6, 9, "bar"]
-    Text[10, 12] chars:[10, 12, "**"]
+      StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9, "bar"] textClose:[9, 11, "**"]
+        Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
 
 
+```````````````````````````````` example Emphasis and strong emphasis: 65
+*foo**bar***
+.
+<p><em>foo<strong>bar</strong></em></p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo**bar"] textClose:[9, 10, "*"]
+      Text[1, 4] chars:[1, 4, "foo"]
+      StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9, "bar"] textClose:[9, 11, "**"]
+        Text[6, 9] chars:[6, 9, "bar"]
+````````````````````````````````
 
 Indefinite levels of nesting are possible:
 
-```````````````````````````````` example Emphasis and strong emphasis: 65
+```````````````````````````````` example Emphasis and strong emphasis: 66
 *foo **bar *baz* bim** bop*
 .
 <p><em>foo <strong>bar <em>baz</em> bim</strong> bop</em></p>
@@ -9028,7 +9109,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 66
+```````````````````````````````` example Emphasis and strong emphasis: 67
 *foo [*bar*](/url)*
 .
 <p><em>foo <a href="/url"><em>bar</em></a></em></p>
@@ -9045,7 +9126,7 @@ Document[0, 20]
 
 There can be no empty emphasis or strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 67
+```````````````````````````````` example Emphasis and strong emphasis: 68
 ** is not an empty emphasis
 .
 <p>** is not an empty emphasis</p>
@@ -9056,7 +9137,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 68
+```````````````````````````````` example Emphasis and strong emphasis: 69
 **** is not an empty strong emphasis
 .
 <p>**** is not an empty strong emphasis</p>
@@ -9073,7 +9154,7 @@ Rule 10:
 Any nonempty sequence of inline elements can be the contents of an
 strongly emphasized span.
 
-```````````````````````````````` example Emphasis and strong emphasis: 69
+```````````````````````````````` example Emphasis and strong emphasis: 70
 **foo [bar](/url)**
 .
 <p><strong>foo <a href="/url">bar</a></strong></p>
@@ -9087,7 +9168,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 70
+```````````````````````````````` example Emphasis and strong emphasis: 71
 **foo
 bar**
 .
@@ -9106,7 +9187,7 @@ Document[0, 12]
 In particular, emphasis and strong emphasis can be nested
 inside strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 71
+```````````````````````````````` example Emphasis and strong emphasis: 72
 __foo _bar_ baz__
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
@@ -9121,7 +9202,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 72
+```````````````````````````````` example Emphasis and strong emphasis: 73
 __foo __bar__ baz__
 .
 <p><strong>foo <strong>bar</strong> baz</strong></p>
@@ -9136,7 +9217,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 73
+```````````````````````````````` example Emphasis and strong emphasis: 74
 ____foo__ bar__
 .
 <p><strong><strong>foo</strong> bar</strong></p>
@@ -9150,7 +9231,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 74
+```````````````````````````````` example Emphasis and strong emphasis: 75
 **foo **bar****
 .
 <p><strong>foo <strong>bar</strong></strong></p>
@@ -9164,7 +9245,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 75
+```````````````````````````````` example Emphasis and strong emphasis: 76
 **foo *bar* baz**
 .
 <p><strong>foo <em>bar</em> baz</strong></p>
@@ -9179,27 +9260,22 @@ Document[0, 18]
 ````````````````````````````````
 
 
-But note:
-
-```````````````````````````````` example Emphasis and strong emphasis: 76
+```````````````````````````````` example Emphasis and strong emphasis: 77
 **foo*bar*baz**
 .
-<p><em><em>foo</em>bar</em>baz**</p>
+<p><strong>foo<em>bar</em>baz</strong></p>
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "*foo*bar"] textClose:[9, 10, "*"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
-        Text[2, 5] chars:[2, 5, "foo"]
-      Text[6, 9] chars:[6, 9, "bar"]
-    Text[10, 15] chars:[10, 15, "baz**"]
+    StrongEmphasis[0, 15] textOpen:[0, 2, "**"] text:[2, 13, "foo*bar*baz"] textClose:[13, 15, "**"]
+      Text[2, 5] chars:[2, 5, "foo"]
+      Emphasis[5, 10] textOpen:[5, 6, "*"] text:[6, 9, "bar"] textClose:[9, 10, "*"]
+        Text[6, 9] chars:[6, 9, "bar"]
+      Text[10, 13] chars:[10, 13, "baz"]
 ````````````````````````````````
 
 
-The difference is that in the preceding case, the internal delimiters
-[can close emphasis], while in the cases with spaces, they cannot.
-
-```````````````````````````````` example Emphasis and strong emphasis: 77
+```````````````````````````````` example Emphasis and strong emphasis: 78
 ***foo* bar**
 .
 <p><strong><em>foo</em> bar</strong></p>
@@ -9213,7 +9289,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 78
+```````````````````````````````` example Emphasis and strong emphasis: 79
 **foo *bar***
 .
 <p><strong>foo <em>bar</em></strong></p>
@@ -9229,7 +9305,7 @@ Document[0, 14]
 
 Indefinite levels of nesting are possible:
 
-```````````````````````````````` example Emphasis and strong emphasis: 79
+```````````````````````````````` example Emphasis and strong emphasis: 80
 **foo *bar **baz**
 bim* bop**
 .
@@ -9250,7 +9326,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 80
+```````````````````````````````` example Emphasis and strong emphasis: 81
 **foo [*bar*](/url)**
 .
 <p><strong>foo <a href="/url"><em>bar</em></a></strong></p>
@@ -9267,7 +9343,7 @@ Document[0, 22]
 
 There can be no empty emphasis or strong emphasis:
 
-```````````````````````````````` example Emphasis and strong emphasis: 81
+```````````````````````````````` example Emphasis and strong emphasis: 82
 __ is not an empty emphasis
 .
 <p>__ is not an empty emphasis</p>
@@ -9278,7 +9354,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 82
+```````````````````````````````` example Emphasis and strong emphasis: 83
 ____ is not an empty strong emphasis
 .
 <p>____ is not an empty strong emphasis</p>
@@ -9292,7 +9368,7 @@ Document[0, 37]
 
 Rule 11:
 
-```````````````````````````````` example Emphasis and strong emphasis: 83
+```````````````````````````````` example Emphasis and strong emphasis: 84
 foo ***
 .
 <p>foo ***</p>
@@ -9303,7 +9379,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 84
+```````````````````````````````` example Emphasis and strong emphasis: 85
 foo *\**
 .
 <p>foo <em>*</em></p>
@@ -9316,7 +9392,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 85
+```````````````````````````````` example Emphasis and strong emphasis: 86
 foo *_*
 .
 <p>foo <em>_</em></p>
@@ -9329,7 +9405,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 86
+```````````````````````````````` example Emphasis and strong emphasis: 87
 foo *****
 .
 <p>foo *****</p>
@@ -9340,7 +9416,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 87
+```````````````````````````````` example Emphasis and strong emphasis: 88
 foo **\***
 .
 <p>foo <strong>*</strong></p>
@@ -9353,7 +9429,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 88
+```````````````````````````````` example Emphasis and strong emphasis: 89
 foo **_**
 .
 <p>foo <strong>_</strong></p>
@@ -9370,7 +9446,7 @@ Note that when delimiters do not match evenly, Rule 11 determines
 that the excess literal `*` characters will appear outside of the
 emphasis, rather than inside it:
 
-```````````````````````````````` example Emphasis and strong emphasis: 89
+```````````````````````````````` example Emphasis and strong emphasis: 90
 **foo*
 .
 <p>*<em>foo</em></p>
@@ -9383,7 +9459,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 90
+```````````````````````````````` example Emphasis and strong emphasis: 91
 *foo**
 .
 <p><em>foo</em>*</p>
@@ -9396,7 +9472,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 91
+```````````````````````````````` example Emphasis and strong emphasis: 92
 ***foo**
 .
 <p>*<strong>foo</strong></p>
@@ -9409,7 +9485,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 92
+```````````````````````````````` example Emphasis and strong emphasis: 93
 ****foo*
 .
 <p>***<em>foo</em></p>
@@ -9422,7 +9498,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 93
+```````````````````````````````` example Emphasis and strong emphasis: 94
 **foo***
 .
 <p><strong>foo</strong>*</p>
@@ -9435,7 +9511,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 94
+```````````````````````````````` example Emphasis and strong emphasis: 95
 *foo****
 .
 <p><em>foo</em>***</p>
@@ -9451,7 +9527,7 @@ Document[0, 9]
 
 Rule 12:
 
-```````````````````````````````` example Emphasis and strong emphasis: 95
+```````````````````````````````` example Emphasis and strong emphasis: 96
 foo ___
 .
 <p>foo ___</p>
@@ -9462,7 +9538,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 96
+```````````````````````````````` example Emphasis and strong emphasis: 97
 foo _\__
 .
 <p>foo <em>_</em></p>
@@ -9475,7 +9551,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 97
+```````````````````````````````` example Emphasis and strong emphasis: 98
 foo _*_
 .
 <p>foo <em>*</em></p>
@@ -9488,7 +9564,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 98
+```````````````````````````````` example Emphasis and strong emphasis: 99
 foo _____
 .
 <p>foo _____</p>
@@ -9499,7 +9575,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 99
+```````````````````````````````` example Emphasis and strong emphasis: 100
 foo __\___
 .
 <p>foo <strong>_</strong></p>
@@ -9512,7 +9588,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 100
+```````````````````````````````` example Emphasis and strong emphasis: 101
 foo __*__
 .
 <p>foo <strong>*</strong></p>
@@ -9525,7 +9601,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 101
+```````````````````````````````` example Emphasis and strong emphasis: 102
 __foo_
 .
 <p>_<em>foo</em></p>
@@ -9542,7 +9618,7 @@ Note that when delimiters do not match evenly, Rule 12 determines
 that the excess literal `_` characters will appear outside of the
 emphasis, rather than inside it:
 
-```````````````````````````````` example Emphasis and strong emphasis: 102
+```````````````````````````````` example Emphasis and strong emphasis: 103
 _foo__
 .
 <p><em>foo</em>_</p>
@@ -9555,7 +9631,7 @@ Document[0, 7]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 103
+```````````````````````````````` example Emphasis and strong emphasis: 104
 ___foo__
 .
 <p>_<strong>foo</strong></p>
@@ -9568,7 +9644,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 104
+```````````````````````````````` example Emphasis and strong emphasis: 105
 ____foo_
 .
 <p>___<em>foo</em></p>
@@ -9581,7 +9657,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 105
+```````````````````````````````` example Emphasis and strong emphasis: 106
 __foo___
 .
 <p><strong>foo</strong>_</p>
@@ -9594,7 +9670,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 106
+```````````````````````````````` example Emphasis and strong emphasis: 107
 _foo____
 .
 <p><em>foo</em>___</p>
@@ -9610,7 +9686,7 @@ Document[0, 9]
 Rule 13 implies that if you want emphasis nested directly inside
 emphasis, you must use different delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 107
+```````````````````````````````` example Emphasis and strong emphasis: 108
 **foo**
 .
 <p><strong>foo</strong></p>
@@ -9622,7 +9698,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 108
+```````````````````````````````` example Emphasis and strong emphasis: 109
 *_foo_*
 .
 <p><em><em>foo</em></em></p>
@@ -9635,7 +9711,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 109
+```````````````````````````````` example Emphasis and strong emphasis: 110
 __foo__
 .
 <p><strong>foo</strong></p>
@@ -9647,7 +9723,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 110
+```````````````````````````````` example Emphasis and strong emphasis: 111
 _*foo*_
 .
 <p><em><em>foo</em></em></p>
@@ -9663,7 +9739,7 @@ Document[0, 8]
 However, strong emphasis within strong emphasis is possible without
 switching delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 111
+```````````````````````````````` example Emphasis and strong emphasis: 112
 ****foo****
 .
 <p><strong><strong>foo</strong></strong></p>
@@ -9676,7 +9752,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 112
+```````````````````````````````` example Emphasis and strong emphasis: 113
 ____foo____
 .
 <p><strong><strong>foo</strong></strong></p>
@@ -9693,7 +9769,7 @@ Document[0, 12]
 Rule 13 can be applied to arbitrarily long sequences of
 delimiters:
 
-```````````````````````````````` example Emphasis and strong emphasis: 113
+```````````````````````````````` example Emphasis and strong emphasis: 114
 ******foo******
 .
 <p><strong><strong><strong>foo</strong></strong></strong></p>
@@ -9709,7 +9785,7 @@ Document[0, 16]
 
 Rule 14:
 
-```````````````````````````````` example Emphasis and strong emphasis: 114
+```````````````````````````````` example Emphasis and strong emphasis: 115
 ***foo***
 .
 <p><strong><em>foo</em></strong></p>
@@ -9722,7 +9798,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis and strong emphasis: 115
+```````````````````````````````` example Emphasis and strong emphasis: 116
 _____foo_____
 .
 <p><strong><strong><em>foo</em></strong></strong></p>
@@ -9738,7 +9814,7 @@ Document[0, 14]
 
 Rule 15:
 
-```````````````````````````````` example Emphasis and strong emphasis: 116
+```````````````````````````````` example Emphasis and strong emphasis: 117
 *foo _bar* baz_
 .
 <p><em>foo _bar</em> baz_</p>
@@ -9748,21 +9824,6 @@ Document[0, 16]
     Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo _bar"] textClose:[9, 10, "*"]
       Text[1, 9] chars:[1, 9, "foo _bar"]
     Text[10, 15] chars:[10, 15, " baz_"]
-````````````````````````````````
-
-
-```````````````````````````````` example Emphasis and strong emphasis: 117
-**foo*bar**
-.
-<p><em><em>foo</em>bar</em>*</p>
-.
-Document[0, 12]
-  Paragraph[0, 12]
-    Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "*foo*bar"] textClose:[9, 10, "*"]
-      Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
-        Text[2, 5] chars:[2, 5, "foo"]
-      Text[6, 9] chars:[6, 9, "bar"]
-    Text[10, 11] chars:[10, 11, "*"]
 ````````````````````````````````
 
 
@@ -10482,7 +10543,8 @@ Document[0, 38]
   Paragraph[0, 38]
     Text[0, 5] chars:[0, 5, "[foo "]
     Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29, "[bar [baz](/uri)](/uri)"] textClose:[29, 30, "*"]
-      Text[6, 11] chars:[6, 11, "[bar "]
+      Text[6, 7] chars:[6, 7, "["]
+      Text[7, 11] chars:[7, 11, "bar "]
       Link[11, 22] textOpen:[11, 12, "["] text:[12, 15, "baz"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 21, "/uri"] pageRef:[17, 21, "/uri"] linkClose:[21, 22, ")"]
         Text[12, 15] chars:[12, 15, "baz"]
       Text[22, 29] chars:[22, 29, "](/uri)"]
@@ -10544,7 +10606,9 @@ precedence:
 Document[0, 16]
   Paragraph[0, 16]
     Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo [bar"] textClose:[9, 10, "*"]
-      Text[1, 9] chars:[1, 9, "foo [bar"]
+      Text[1, 5] chars:[1, 5, "foo "]
+      Text[5, 6] chars:[5, 6, "["]
+      Text[6, 9] chars:[6, 9, "bar"]
     Text[10, 15] chars:[10, 15, " baz]"]
 ````````````````````````````````
 
@@ -11225,7 +11289,7 @@ consists of a [link label] that [matches] a
 [link reference definition] elsewhere in the
 document and is not followed by `[]` or a link label.
 The contents of the first link label are parsed as inlines,
-which are used as the link's text.  the link's URI and title
+which are used as the link's text.  The link's URI and title
 are provided by the matching link reference definition.
 Thus, `[foo]` is equivalent to `[foo][]`.
 
@@ -11471,7 +11535,6 @@ Document[0, 21]
     Image[0, 20] textOpen:[0, 2, "!["] text:[2, 5, "foo"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] titleOpen:[12, 13, "\""] title:[13, 18, "title"] titleClose:[18, 19, "\""] linkClose:[19, 20, ")"]
       Text[2, 5] chars:[2, 5, "foo"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Images: 2
@@ -12688,7 +12751,7 @@ Document[0, 10]
 
 A regular line break (not in a code span or HTML tag) that is not
 preceded by two or more spaces or a backslash is parsed as a
-softbreak.  (A softbreak may be rendered in HTML either as a
+[softbreak](@).  (A softbreak may be rendered in HTML either as a
 [line ending] or as a space. The result will be the same in
 browsers. In the examples here, a [line ending] will be used.)
 

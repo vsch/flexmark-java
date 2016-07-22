@@ -18,6 +18,7 @@ import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -33,37 +34,37 @@ import java.util.*;
  * </code></pre>
  */
 public class Parser implements IParse {
-    final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
-    final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
-    final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
-    final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final public static DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
-    final public static DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
-    final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
-    final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
-    final public static DataKey<Boolean> INLINE_RELAXED_EMPHASIS = new DataKey<>("INLINE_RELAXED_EMPHASIS", false);
+    final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
+    final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
     final public static DataKey<Boolean> HEADERS_NO_ATX_SPACE = new DataKey<>("HEADERS_NO_ATX_SPACE", false);
     final public static DataKey<Boolean> HEADERS_NO_LEAD_SPACE = new DataKey<>("HEADERS_NO_LEAD_SPACE", false);
-    final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", true);
+    final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
+    final public static DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> INDENTED_CODE_NO_TRAILING_BLANK_LINES = new DataKey<>("INDENTED_CODE_NO_TRAILING_BLANK_LINES", false);
+    final public static DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
+    final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> LIST_INTERRUPTS_PARAGRAPH = new DataKey<>("LIST_INTERRUPTS_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
     final public static DataKey<Boolean> LISTS_BULLET_MATCH = new DataKey<>("LISTS_BULLET_MATCH", true);
-    final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
-    final public static DataKey<Boolean> LISTS_RELAXED_START = new DataKey<>("LISTS_RELAXED_START", true);
+    final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
+    final public static DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
+    final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     final public static DataKey<Boolean> ORDERED_LIST_DOT_ONLY = new DataKey<>("ORDERED_LIST_DOT_ONLY", false);
-    final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
-    //final public static DataKey<Boolean> PARSE_INLINE_ANCHOR_LINKS = new DataKey<>("PARSE_INLINE_ANCHOR_LINKS", false);
+    final public static DataKey<Boolean> ORDERED_LIST_INTERRUPTS_PARAGRAPH = new DataKey<>("ORDERED_LIST_INTERRUPTS_PARAGRAPH", true);
+    final public static DataKey<Boolean> ORDERED_LIST_START = new DataKey<>("ORDERED_LIST_START", true);
+    final public static DataKey<Boolean> ORDERED_SUBITEM_INTERRUPTS_PARENT_ITEM = new DataKey<>("ORDERED_SUBITEM_INTERRUPTS_PARENT_ITEM", false);
     final public static DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);
     final public static DataKey<Boolean> PARSE_MULTI_LINE_IMAGE_URLS = new DataKey<>("PARSE_MULTI_LINE_IMAGE_URLS", false);
-    final public static DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
-    final public static DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
-    final public static DataKey<Boolean> INDENTED_CODE_NO_TRAILING_BLANK_LINES = new DataKey<>("INDENTED_CODE_NO_TRAILING_BLANK_LINES", false);
-    //final public static DataKey<Boolean> PARSE_GITHUB_ISSUE_MARKER = new DataKey<>("PARSE_GITHUB_ISSUE_MARKER", false);
+    final public static DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
+    final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
+    final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
+    final public static DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
+    final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
     final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
+    final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
+    final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -156,7 +157,7 @@ public class Parser implements IParse {
     }
 
     public Parser withOptions(DataHolder options) {
-        return options == null ? this : new Parser(new Builder(builder, options));
+        return options == null ? this : (options.contains(EXTENSIONS) ? new Parser(new Builder(options)) : new Parser(new Builder(builder, options)));
     }
 
     /**

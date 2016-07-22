@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.ListItem;
@@ -13,17 +12,21 @@ public class ListOptions {
     final public boolean orderedStart;
     final public boolean bulletMatch;
     final public int fixedIndent;
-    final public boolean relaxedStart;
+    final public boolean listInterruptsParagraph;
     final public boolean orderedListDotOnly;
+    final public boolean orderedListInterruptsParagraph;
+    final public boolean orderedSubItemInterruptsParentItem;
 
     public ListOptions(DataHolder options) {
         this.endOnDoubleBlank = options.get(Parser.LISTS_END_ON_DOUBLE_BLANK);
         this.autoLoose = options.get(Parser.LISTS_AUTO_LOOSE);
-        this.orderedStart = options.get(HtmlRenderer.LISTS_ORDERED_START);
+        this.orderedStart = options.get(Parser.ORDERED_LIST_START);
         this.fixedIndent = options.get(Parser.LISTS_FIXED_INDENT);
         this.bulletMatch = options.get(Parser.LISTS_BULLET_MATCH);
-        this.relaxedStart = options.get(Parser.LISTS_RELAXED_START);
+        this.listInterruptsParagraph = options.get(Parser.LIST_INTERRUPTS_PARAGRAPH);
         this.orderedListDotOnly = options.get(Parser.ORDERED_LIST_DOT_ONLY);
+        this.orderedListInterruptsParagraph = options.get(Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH);
+        this.orderedSubItemInterruptsParentItem = options.get(Parser.ORDERED_SUBITEM_INTERRUPTS_PARENT_ITEM);
     }
     
     public boolean isTightListItem(ListItem node) {

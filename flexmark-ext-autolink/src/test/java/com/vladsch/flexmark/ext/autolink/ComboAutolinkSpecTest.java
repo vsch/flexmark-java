@@ -22,6 +22,7 @@ public class ComboAutolinkSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("no-autolink", new MutableDataSet().set(Parser.EXTENSIONS, Collections.EMPTY_LIST));
         //        optionsMap.put("custom", new MutableDataSet()
         //                .set(AutolinkExtension.AUTOLINK, value)
         //        );

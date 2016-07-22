@@ -23,15 +23,17 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
-        optionsMap.put("relaxed-emphasis", new MutableDataSet().set(Parser.INLINE_RELAXED_EMPHASIS, true));
         optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADERS_NO_ATX_SPACE, true));
         optionsMap.put("hdr-no-lead-space", new MutableDataSet().set(Parser.HEADERS_NO_LEAD_SPACE, true));
         optionsMap.put("list-fixed-indent", new MutableDataSet().set(Parser.LISTS_FIXED_INDENT, 4));
         optionsMap.put("list-no-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, false));
+        optionsMap.put("list-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, true));
         optionsMap.put("list-no-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
-        optionsMap.put("list-no-start", new MutableDataSet().set(HtmlRenderer.LISTS_ORDERED_START, false));
+        optionsMap.put("list-no-start", new MutableDataSet().set(Parser.ORDERED_LIST_START, false));
         optionsMap.put("list-no-bullet-match", new MutableDataSet().set(Parser.LISTS_BULLET_MATCH, false));
-        optionsMap.put("list-no-relaxed-start", new MutableDataSet().set(Parser.LISTS_RELAXED_START, false));
+        optionsMap.put("list-no-relaxed-start", new MutableDataSet().set(Parser.LIST_INTERRUPTS_PARAGRAPH, false));
+        optionsMap.put("ordered-no-relaxed-start", new MutableDataSet().set(Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH, false));
+        optionsMap.put("ordered-breaks-parent", new MutableDataSet().set(Parser.ORDERED_SUBITEM_INTERRUPTS_PARENT_ITEM, true));
         optionsMap.put("thematic-break-no-relaxed-start", new MutableDataSet().set(Parser.THEMATIC_BREAK_RELAXED_START, false));
         optionsMap.put("test-completions", new MutableDataSet().set(Parser.THEMATIC_BREAK_RELAXED_START, false).set(HtmlRenderer.SUPPRESS_INLINE_HTML, true));
         optionsMap.put("escape-html", new MutableDataSet().set(HtmlRenderer.ESCAPE_HTML, true));
@@ -43,7 +45,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-html-blocks", new MutableDataSet().set(HtmlRenderer.SUPPRESS_HTML_BLOCKS, true));
         optionsMap.put("suppress-html-comment-blocks", new MutableDataSet().set(HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS, true));
         optionsMap.put("suppress-inline-html", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML, true));
-        optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENT, true));
+        optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS, true));
         optionsMap.put("no-class-prefix", new MutableDataSet().set(HtmlRenderer.LANGUAGE_CLASS_PREFIX, ""));
         //optionsMap.put("parse-anchor-links", new MutableDataSet().set(Parser.PARSE_INLINE_ANCHOR_LINKS, true));
         optionsMap.put("parse-inner-comments", new MutableDataSet().set(Parser.PARSE_INNER_HTML_COMMENTS, true));

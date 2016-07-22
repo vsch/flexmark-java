@@ -14,8 +14,9 @@ import com.vladsch.flexmark.node.CustomNode;
 import com.vladsch.flexmark.node.DelimitedNode;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.node.Text;
-import com.vladsch.flexmark.parser.DelimiterProcessor;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.spec.SpecExample;
 import org.junit.Test;
 
@@ -23,6 +24,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 public class DelimiterProcessorTest extends RenderingTestCase {
 
@@ -32,6 +35,16 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     @Override
     protected SpecExample example() {
         return null;
+    }
+
+    @Test
+    public void delimiterProcessorWithInvalidDelimiterUse() {
+        Parser parser = Parser.builder()
+                .customDelimiterProcessor(new CustomDelimiterProcessor(':', 0))
+                .customDelimiterProcessor(new CustomDelimiterProcessor(';', -1))
+                .build();
+        assertEquals("<p>:test:</p>\n", RENDERER.render(parser.parse(":test:")));
+        assertEquals("<p>;test;</p>\n", RENDERER.render(parser.parse(";test;")));
     }
 
     @Test
@@ -58,25 +71,63 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         return RENDERER;
     }
 
-    private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
+    private static class CustomDelimiterProcessor implements DelimiterProcessor {
 
-        @Override
-        public char getOpeningDelimiterChar() {
-            return '{';
+        private final char delimiterChar;
+        private final int delimiterUse;
+
+        CustomDelimiterProcessor(char delimiterChar, int delimiterUse) {
+            this.delimiterChar = delimiterChar;
+            this.delimiterUse = delimiterUse;
         }
 
         @Override
-        public char getClosingDelimiterChar() {
-            return '}';
+        public char getOpeningCharacter() {
+            return delimiterChar;
         }
 
         @Override
-        public int getMinDelimiterCount() {
+        public char getClosingCharacter() {
+            return delimiterChar;
+        }
+
+        @Override
+        public int getMinLength() {
             return 1;
         }
 
         @Override
-        public int getDelimiterUse(int openerCount, int closerCount) {
+        public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
+            return delimiterUse;
+        }
+
+        @Override
+        public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+            
+        }
+    }
+    
+    private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
+
+        AsymmetricDelimiterProcessor() {}
+
+        @Override
+        public char getOpeningCharacter() {
+            return '{';
+        }
+
+        @Override
+        public char getClosingCharacter() {
+            return '}';
+        }
+
+        @Override
+        public int getMinLength() {
+            return 1;
+        }
+
+        @Override
+        public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
             return 1;
         }
 
@@ -141,6 +192,8 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     private static class UpperCaseNodeRendererFactory implements NodeRendererFactory {
+        UpperCaseNodeRendererFactory() {}
+
         @Override
         public NodeRenderer create(DataHolder options) {
             return new UpperCaseNodeRenderer(options);

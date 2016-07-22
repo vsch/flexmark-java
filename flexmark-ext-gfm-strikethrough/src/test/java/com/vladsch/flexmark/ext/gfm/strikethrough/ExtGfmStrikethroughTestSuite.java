@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
     StrikethroughTest.class,
+        StrikethroughTest.class,
         ComboStrikethroughSpecTest.class,
 })
 public class ExtGfmStrikethroughTestSuite {

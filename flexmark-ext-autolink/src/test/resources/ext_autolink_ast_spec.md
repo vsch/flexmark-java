@@ -10,11 +10,9 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Autolink 
 
-Autolink extension converts links and e-mail addresses to links in the
-markdown source.
+Autolink extension converts links and e-mail addresses to links in the markdown source.
 
-The tests here are converted to commonmark spec.txt format and AST
-expected results added.
+The tests here are converted to commonmark spec.txt format and AST expected results added.
 
 ```````````````````````````````` example Autolink: 1
 foo http://one.org/ bar http://two.org/
@@ -53,7 +51,18 @@ Document[0, 51]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 3
+```````````````````````````````` example(Autolink: 3) options(no-autolink)
+http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
+.
+<p>http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)</p>
+.
+Document[0, 104]
+  Paragraph[0, 104]
+    Text[0, 103] chars:[0, 103, "http: … (bar)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Autolink: 4
 http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)
 .
 <p><a href="http://example.com/one">http://example.com/one</a>. Example 2 (see <a href="http://example.com/two">http://example.com/two</a>). Example 3: <a href="http://example.com/foo_(bar)">http://example.com/foo_(bar)</a></p>
@@ -72,7 +81,7 @@ Document[0, 104]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 4
+```````````````````````````````` example Autolink: 5
 foo@example.com
 .
 <p><a href="mailto:foo@example.com">foo@example.com</a></p>
@@ -85,14 +94,14 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 5
+```````````````````````````````` example Autolink: 6
 foo@com
 .
 <p>foo@com</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Autolink: 6
+```````````````````````````````` example Autolink: 7
 <http://example.com>
 .
 <p><a href="http://example.com">http://example.com</a></p>

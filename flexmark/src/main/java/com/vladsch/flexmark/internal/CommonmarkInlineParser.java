@@ -3,7 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.parser.DelimiterProcessor;
+import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 
 import java.util.BitSet;
 import java.util.Map;

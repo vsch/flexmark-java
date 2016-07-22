@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.7](#047)
 - [0.4.6](#046)
 - [0.4.5](#045)
 - [0.4.4](#044)
@@ -33,6 +34,30 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.7
+-----
+
+- Change compliance to spec 0.26 with better emphasis delimiter parsing rules and list rules
+  without double line breaks and ordered lists don't interrupt paragraphs unless they number
+  with 1.
+
+- Add `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to control whether an ordered list item can
+  start without having a blank line before, default true.
+
+- Change `Parser.ORDERED_LIST_START` also controls if an ordered list interrupts a paragraph. If
+  ordered list start is set to false, then an ordered list always starts at 1, so it will
+  interrupt a paragraph regardless of whether it is `1.` in the source.
+
+- Change `HtmlRenderer.ORDERED_LIST_START` moved to `Parser.ORDERED_LIST_START` since it is
+  needed during parsing.
+
+- Add `Parser.ORDERED_SUBITEM_INTERRUPTS_PARENT_ITEM`, when true, even with
+  `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` set to false an ordered sub-item will interrupt
+  parent's item paragraph.
+
+- Remove `Parser.INLINE_RELAXED_EMPHASIS` since spec 0.26 does the right thing without needing
+  an option.
 
 0.4.6
 -----

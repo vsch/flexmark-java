@@ -101,7 +101,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    static ListData parseListMarker(Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn) {
+    static ListData parseListMarker(ListOptions options, Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn, final boolean inParagraph, final boolean inParagraphListItem) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
         if (!matcher.find()) {
@@ -129,6 +129,19 @@ public class ListBlockParser extends AbstractBlockParser {
             } else {
                 hasContent = true;
                 break;
+            }
+        }
+
+        if (inParagraph) {
+            // If the list item is ordered, the start number must be 1 to interrupt a paragraph.
+            if (listBlock instanceof OrderedList && !(
+                    ((((OrderedList) listBlock).getStartNumber() == 1 || !options.orderedStart) && (options.orderedListInterruptsParagraph || (options.orderedSubItemInterruptsParentItem && inParagraphListItem))))) {
+                return null;
+            }
+            
+            // Empty list item can not interrupt a paragraph.
+            if (!hasContent) {
+                return null;
             }
         }
 
@@ -227,7 +240,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            if (!options.relaxedStart && matched.isParagraphParser()) {
+            if (!options.listInterruptsParagraph && matched.isParagraphParser()) {
                 return BlockStart.none();
             }
 
@@ -238,8 +251,11 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             int markerIndex = state.getNextNonSpaceIndex();
+            int markerColumn = state.getColumn() + state.getIndent();
+            boolean inParagraph = matched.isParagraphParser();
+            boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
 
-            ListData listData = parseListMarker(state.getParsing(), state.getLine(), state.getIndent(), markerIndex, state.getColumn() + state.getIndent());
+            ListData listData = parseListMarker(options, state.getParsing(), state.getLine(), state.getIndent(), markerIndex, markerColumn, inParagraph, inParagraphListItem);
             if (listData == null) {
                 return BlockStart.none();
             }

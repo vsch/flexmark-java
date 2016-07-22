@@ -66,7 +66,7 @@ public class Parsing {
 
         this.ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
         this.LINK_LABEL = Pattern
-                .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,1000}\\]");
+                .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
         this.LINK_DESTINATION_BRACES = Pattern.compile(
                 "^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
         this.LINK_TITLE = Pattern.compile(
@@ -81,7 +81,7 @@ public class Parsing {
                 "^(?:" + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
-        this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+" + "\\s+[^>]*>";
+        this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
         this.CDATA = "<!\\[CDATA\\[[\\s\\S]*?\\]\\]>";
         this.ENTITY = "&(?:#x[a-f0-9" + ADDITIONAL_CHARS + "]{1,8}|#[0-9]{1,8}|[a-z" + ADDITIONAL_CHARS + "][a-z0-9" + ADDITIONAL_CHARS + "]{1,31});";
 
