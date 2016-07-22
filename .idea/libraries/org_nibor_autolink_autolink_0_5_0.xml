@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.nibor.autolink:autolink:0.5.0" type="repository">
+    <properties maven-id="org.nibor.autolink:autolink:0.5.0" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/autolink-0.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

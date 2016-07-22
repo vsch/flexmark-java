@@ -20,15 +20,11 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
     </content>
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
-    <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
-    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
+    <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
-    <orderEntry type="inheritedJdk" />
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
   </component>
 </module>

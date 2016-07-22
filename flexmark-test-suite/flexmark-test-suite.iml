@@ -7,6 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="pegdown-1.6.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
@@ -15,7 +17,6 @@
     <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-java" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="junit-4.12" level="application" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
