@@ -12,5 +12,6 @@
     <orderEntry type="library" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="library" name="org.nibor.autolink:autolink:0.5.0" level="project" />
   </component>
 </module>
