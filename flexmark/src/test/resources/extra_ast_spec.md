@@ -2363,9 +2363,113 @@ Document[0, 26]
 ````````````````````````````````
 
 
-This works as expected:
+more emphasis tests
 
 ```````````````````````````````` example GFM Emphasis: 3
+*a**b**c*
+.
+<p><em>a<strong>b</strong>c</em></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "a**b**c"] textClose:[8, 9, "*"]
+      Text[1, 2] chars:[1, 2, "a"]
+      StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "b"] textClose:[5, 7, "**"]
+        Text[4, 5] chars:[4, 5, "b"]
+      Text[7, 8] chars:[7, 8, "c"]
+````````````````````````````````
+
+
+more emphasis tests
+
+```````````````````````````````` example GFM Emphasis: 4
+***a**b*
+.
+<p><em><strong>a</strong>b</em></p>
+.
+Document[0, 9]
+  Paragraph[0, 9]
+    Emphasis[0, 8] textOpen:[0, 1, "*"] text:[1, 7, "**a**b"] textClose:[7, 8, "*"]
+      StrongEmphasis[1, 6] textOpen:[1, 3, "**"] text:[3, 4, "a"] textClose:[4, 6, "**"]
+        Text[3, 4] chars:[3, 4, "a"]
+      Text[6, 7] chars:[6, 7, "b"]
+````````````````````````````````
+
+
+more emphasis tests
+
+```````````````````````````````` example GFM Emphasis: 5
+*b**a***
+
+.
+<p><em>b<strong>a</strong></em></p>
+.
+Document[0, 10]
+  Paragraph[0, 9]
+    Emphasis[0, 8] textOpen:[0, 1, "*"] text:[1, 7, "b**a**"] textClose:[7, 8, "*"]
+      Text[1, 2] chars:[1, 2, "b"]
+      StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "a"] textClose:[5, 7, "**"]
+        Text[4, 5] chars:[4, 5, "a"]
+````````````````````````````````
+
+
+more emphasis tests
+
+```````````````````````````````` example GFM Emphasis: 6
+*a**b**c*
+
+.
+<p><em>a<strong>b</strong>c</em></p>
+.
+Document[0, 11]
+  Paragraph[0, 10]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "a**b**c"] textClose:[8, 9, "*"]
+      Text[1, 2] chars:[1, 2, "a"]
+      StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "b"] textClose:[5, 7, "**"]
+        Text[4, 5] chars:[4, 5, "b"]
+      Text[7, 8] chars:[7, 8, "c"]
+````````````````````````````````
+
+
+more emphasis tests
+
+```````````````````````````````` example GFM Emphasis: 7
+**a*b*c**
+
+.
+<p><strong>a<em>b</em>c</strong></p>
+.
+Document[0, 11]
+  Paragraph[0, 10]
+    StrongEmphasis[0, 9] textOpen:[0, 2, "**"] text:[2, 7, "a*b*c"] textClose:[7, 9, "**"]
+      Text[2, 3] chars:[2, 3, "a"]
+      Emphasis[3, 6] textOpen:[3, 4, "*"] text:[4, 5, "b"] textClose:[5, 6, "*"]
+        Text[4, 5] chars:[4, 5, "b"]
+      Text[6, 7] chars:[6, 7, "c"]
+````````````````````````````````
+
+
+more emphasis tests
+
+```````````````````````````````` example GFM Emphasis: 8
+**a b*b*b c**
+
+.
+<p><strong>a b<em>b</em>b c</strong></p>
+.
+Document[0, 15]
+  Paragraph[0, 14]
+    StrongEmphasis[0, 13] textOpen:[0, 2, "**"] text:[2, 11, "a b*b*b c"] textClose:[11, 13, "**"]
+      Text[2, 5] chars:[2, 5, "a b"]
+      Emphasis[5, 8] textOpen:[5, 6, "*"] text:[6, 7, "b"] textClose:[7, 8, "*"]
+        Text[6, 7] chars:[6, 7, "b"]
+      Text[8, 11] chars:[8, 11, "b c"]
+````````````````````````````````
+
+
+This works as expected:
+
+```````````````````````````````` example GFM Emphasis: 9
 **bold *bold-italic* bold**
 .
 <p><strong>bold <em>bold-italic</em> bold</strong></p>
@@ -2382,7 +2486,7 @@ Document[0, 28]
 
 code mixed with emphasis:
 
-```````````````````````````````` example GFM Emphasis: 4
+```````````````````````````````` example GFM Emphasis: 10
 `code with `**`bold`**` inside`
 .
 <p><code>code with</code><strong><code>bold</code></strong><code>inside</code></p>
@@ -2629,4 +2733,19 @@ Document[0, 38]
   IndentedCodeBlock[4, 23]
 ````````````````````````````````
 
+
+## Links
+
+Url encoded link address should not % encode the query separator `&`
+
+```````````````````````````````` example Links: 1
+[test](http://url?opt=a&opt1=b)
+.
+<p><a href="http://url?opt=a&amp;opt1=b">test</a></p>
+.
+Document[0, 32]
+  Paragraph[0, 32]
+    Link[0, 31] textOpen:[0, 1, "["] text:[1, 5, "test"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 30, "http://url?opt=a&opt1=b"] pageRef:[7, 30, "http://url?opt=a&opt1=b"] linkClose:[30, 31, ")"]
+      Text[1, 5] chars:[1, 5, "test"]
+````````````````````````````````
 

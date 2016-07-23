@@ -33,9 +33,9 @@ public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+    public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
         // Normal case, wrap nodes between delimiters in strikethrough.
-        Zzzzzz zzzzzz = new Zzzzzz(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
+        Zzzzzz zzzzzz = new Zzzzzz(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(zzzzzz, closer);
     }
 }

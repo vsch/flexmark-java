@@ -43,10 +43,10 @@ public interface DelimiterProcessor {
      * a new node after the opener.
      * <p>
      * Note that removal of the delimiter from the delimiter nodes and unlinking them is done by the caller.
-     *  @param opener the delimiter with text node that contained the opening delimiter
+     * @param opener the delimiter with text node that contained the opening delimiter
      * @param closer the delimiter with text node that contained the closing delimiter
-     * @param delimiterUse the number of delimiters that were used
+     * @param delimitersUsed the number of delimiters that were used
      */
-    void process(Delimiter opener, Delimiter closer, int delimiterUse);
+    void process(Delimiter opener, Delimiter closer, int delimitersUsed);
 
 }

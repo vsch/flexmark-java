@@ -267,7 +267,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
             html.attr("href", resolvedLink.getUrl())
                     .withAttr(resolvedLink)
                     .tag("a", () -> html.text(text));
@@ -279,7 +279,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
             html.attr("href", "mailto:" + resolvedLink.getUrl())
                     .withAttr(resolvedLink)
                     .tag("a")
@@ -292,7 +292,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (!context.isDoNotRenderLinks()) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
 
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape());
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null);
 
             html.attr("src", resolvedLink.getUrl());
             html.attr("alt", altText);
@@ -307,7 +307,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape());
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
 
             html.attr("href", resolvedLink.getUrl());
             if (node.getTitle().isNotNull()) {
@@ -330,7 +330,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 assert reference != null;
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
 
-                ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape());
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape(), null);
 
                 html.attr("src", resolvedLink.getUrl());
                 html.attr("alt", altText);
@@ -362,7 +362,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 Reference reference = node.getReferenceNode(referenceRepository);
                 assert reference != null;
 
-                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape());
+                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape(), null);
 
                 html.attr("href", resolvedLink.getUrl());
                 if (reference.getTitle().isNotNull()) {

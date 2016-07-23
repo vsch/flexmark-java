@@ -152,7 +152,8 @@ public interface NodeRendererContext {
      *
      * @param linkType type of link being rendered. Core defined links are Link, Image. Extensions can define their own
      * @param url      link url text
+     * @param urlEncode
      * @return resolved link url for this link and its resolved status
      */
-    ResolvedLink resolveLink(LinkType linkType, String url);
+    ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode);
 }

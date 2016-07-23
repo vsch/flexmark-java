@@ -42,15 +42,15 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
     final static public DataKey<String> LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
 
-    private final List<AttributeProvider> attributeProviders;
-    private final List<NodeRendererFactory> nodeRendererFactories;
-    private final List<LinkResolverFactory> linkRendererFactories;
-    private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
-    private final HtmlRendererOptions htmlOptions;
+    final List<AttributeProvider> attributeProviders;
+    final List<NodeRendererFactory> nodeRendererFactories;
+    final List<LinkResolverFactory> linkRendererFactories;
+    final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
+    final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
     private final Builder builder;
 
-    private HtmlRenderer(Builder builder) {
+    HtmlRenderer(Builder builder) {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.htmlOptions = new HtmlRendererOptions(this.options);
@@ -115,11 +115,11 @@ public class HtmlRenderer implements IRender {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder extends MutableDataSet {
-        private List<AttributeProvider> attributeProviders = new ArrayList<>();
-        private List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
-        private List<LinkResolverFactory> linkRendererFactories = new ArrayList<>();
+        List<AttributeProvider> attributeProviders = new ArrayList<>();
+        List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
+        List<LinkResolverFactory> linkRendererFactories = new ArrayList<>();
         private final HashSet<HtmlRendererExtension> loadedExtensions = new HashSet<>();
-        private HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
+        HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
             super();
@@ -314,7 +314,7 @@ public class HtmlRenderer implements IRender {
         private final HtmlIdGenerator htmlIdGenerator;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
 
-        private MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
+        MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             super(htmlWriter);
             this.options = new ScopedDataSet(options, document);
             this.document = document;
@@ -354,13 +354,13 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, String url) {
+        public ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
             if (resolvedLinks == null) {
                 resolvedLinks = new HashMap<>();
                 resolvedLinkMap.put(linkType, resolvedLinks);
             }
-            
+
             ResolvedLink resolvedLink = resolvedLinks.get(url);
 
             if (resolvedLink == null) {
@@ -369,14 +369,15 @@ public class HtmlRenderer implements IRender {
                     resolvedLink = linkResolver.resolveLink(this, resolvedLink);
                     if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
                 }
-                if (htmlOptions.percentEncodeUrls) {
+
+                if (urlEncode == null && htmlOptions.percentEncodeUrls || urlEncode != null && urlEncode) {
                     resolvedLink = resolvedLink.withUrl(Escaping.percentEncodeUrl(resolvedLink.getUrl()));
                 }
-                
+
                 // put it in the map
                 resolvedLinks.put(url, resolvedLink);
             }
-            
+
             return resolvedLink;
         }
 
@@ -443,10 +444,11 @@ public class HtmlRenderer implements IRender {
         public NodeRendererContext getSubContext(Appendable out, boolean inheritIndent) {
             HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), out, inheritIndent);
             htmlWriter.setContext(this);
+            //noinspection ReturnOfInnerClass
             return new SubNodeRenderer(this, htmlWriter);
         }
 
-        private void renderNode(Node node, NodeRendererSubContext subContext) {
+        void renderNode(Node node, NodeRendererSubContext subContext) {
             if (node instanceof Document) {
                 // here we render multiple phases
                 int oldDoNotRenderLinksNesting = subContext.getDoNotRenderLinksNesting();
@@ -546,14 +548,15 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
-            public ResolvedLink resolveLink(LinkType linkType, String url) {
-                return myMainNodeRenderer.resolveLink(linkType, url);
+            public ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode) {
+                return myMainNodeRenderer.resolveLink(linkType, url, null);
             }
 
             @Override
             public NodeRendererContext getSubContext(Appendable out, boolean inheritIndent) {
                 HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, out, inheritIndent);
                 htmlWriter.setContext(this);
+                //noinspection ReturnOfInnerClass
                 return new SubNodeRenderer(myMainNodeRenderer, htmlWriter);
             }
 

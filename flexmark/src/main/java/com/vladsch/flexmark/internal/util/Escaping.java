@@ -31,7 +31,7 @@ public class Escaping {
     private static final Pattern ESCAPE_IN_URI =
             Pattern.compile("(%[a-fA-F0-9]{0,2}|[^:/?#@!$&'()*+,;=a-zA-Z0-9\\-._~])");
 
-    private static final char[] HEX_DIGITS =
+    static final char[] HEX_DIGITS =
             new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
     private static final Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
@@ -350,7 +350,7 @@ public class Escaping {
         return textMapper.getReplacedSequence();
     }
 
-    private interface Replacer {
+    interface Replacer {
         void replace(String input, StringBuilder sb);
         void replace(BasedSequence input, ReplacedTextMapper replacedTextMapper);
     }

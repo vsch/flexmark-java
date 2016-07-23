@@ -35,7 +35,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
             context.renderChildren(node);
             html.text(":");
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, useImageURL ? shortcut.url : rootImagePath + shortcut.image);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, useImageURL ? shortcut.url : rootImagePath + shortcut.image, null);
 
             html.attr("src", resolvedLink.getUrl());
             html.attr("alt", "emoji " + shortcut.category + ":" + shortcut.name);

@@ -102,7 +102,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+        public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
             
         }
     }
@@ -132,8 +132,8 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
-        public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
-            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
+        public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
+            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
             opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }

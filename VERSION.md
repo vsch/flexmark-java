@@ -42,6 +42,8 @@ flexmark-java
 - Fix `SimTocBlockParser` to use `Parsing.LINK_TITLE` pattern for TOC title to match what is
   allowed for reference title.
 
+- Fix #3, Incorrect emphasis close marker source offset 
+
 0.4.7
 -----
 

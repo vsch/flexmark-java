@@ -28,7 +28,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
     }
 
     private void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
-        ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString());
+        ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString(), null);
         String anchorRef = node.getAnchorMarker().isNull() ? "" : node.getAnchorMarker().toString() + node.getAnchorRef().toString();
         html.attr("href", resolvedLink.getUrl() + anchorRef);
         html.withAttr(resolvedLink).tag("a");

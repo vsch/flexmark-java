@@ -47,10 +47,10 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
-        DelimitedNode emphasis = delimiterUse == 1
-                ? new Emphasis(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse))
-                : new StrongEmphasis(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
+    public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
+        DelimitedNode emphasis = delimitersUsed == 1
+                ? new Emphasis(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed))
+                : new StrongEmphasis(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
 
         opener.moveNodesBetweenDelimitersTo(emphasis, closer);
     }

@@ -9,9 +9,9 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 public class Delimiter implements DelimiterRun {
 
     final Text node;
-    final int index;
     final BasedSequence input;
     final char delimiterChar;
+    int index;
 
     /**
      * Can open emphasis, see spec.
@@ -43,6 +43,14 @@ public class Delimiter implements DelimiterRun {
 
     public int getEndIndex() {
         return index + numDelims;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public BasedSequence getTailChars(int delimiterUse) {
@@ -88,7 +96,7 @@ public class Delimiter implements DelimiterRun {
             ((Node) delimitedNode).appendChild(tmp);
             tmp = next;
         }
-
+        
         delimitedNode.setText(input.subSequence(getEndIndex(), closer.getStartIndex()));
         getNode().insertAfter((Node) delimitedNode);
     }

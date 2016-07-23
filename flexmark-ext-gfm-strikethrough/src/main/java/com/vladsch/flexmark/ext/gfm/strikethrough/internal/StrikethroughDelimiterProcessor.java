@@ -34,9 +34,9 @@ public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public void process(Delimiter opener, Delimiter closer, int delimiterUse) {
+    public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
         // wrap nodes between delimiters in strikethrough.
-        Strikethrough strikethrough = new Strikethrough(opener.getTailChars(delimiterUse), SubSequence.NULL, closer.getLeadChars(delimiterUse));
+        Strikethrough strikethrough = new Strikethrough(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(strikethrough, closer);
     }
 }

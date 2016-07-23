@@ -1355,6 +1355,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 BasedSequence chars = closer.node.getChars();
                 int length = chars.length();
                 closer.node.setChars(chars.subSequence(length - closer.numDelims, length));
+                closer.setIndex(closer.getIndex() + useDelims);
             }
         }
 
