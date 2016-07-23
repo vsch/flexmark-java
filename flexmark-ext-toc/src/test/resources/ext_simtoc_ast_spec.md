@@ -421,10 +421,12 @@ options, empty title
 
 ```````````````````````````````` example SimToc: 17
 [TOC levels=3]:# ""
+[TOC levels=3]:# ''
 .
 .
-Document[0, 20]
+Document[0, 40]
   SimTocBlock[0, 20] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] closingTitleMarker:[18, 19, "\""]
+  SimTocBlock[20, 40] openingMarker:[20, 21] tocKeyword:[21, 24] style:[25, 33] closingMarker:[33, 35] anchorMarker:[35, 36, "#"] openingTitleMarker:[37, 38, "'"] closingTitleMarker:[38, 39, "'"]
 ````````````````````````````````
 
 
@@ -432,10 +434,12 @@ options, title
 
 ```````````````````````````````` example SimToc: 18
 [TOC levels=3]:# "title"
+[TOC levels=3]:# 'title'
 .
 .
-Document[0, 25]
+Document[0, 50]
   SimTocBlock[0, 25] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 23, "title"] closingTitleMarker:[23, 24, "\""]
+  SimTocBlock[25, 50] openingMarker:[25, 26] tocKeyword:[26, 29] style:[30, 38] closingMarker:[38, 40] anchorMarker:[40, 41, "#"] openingTitleMarker:[42, 43, "'"] title:[43, 48, "title"] closingTitleMarker:[48, 49, "'"]
 ````````````````````````````````
 
 
@@ -443,10 +447,12 @@ options, markers, empty title
 
 ```````````````````````````````` example SimToc: 19
 [TOC levels=3]:# "## "
+[TOC levels=3]:# '## '
 .
 .
-Document[0, 23]
+Document[0, 46]
   SimTocBlock[0, 23] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 21, "## "] closingTitleMarker:[21, 22, "\""]
+  SimTocBlock[23, 46] openingMarker:[23, 24] tocKeyword:[24, 27] style:[28, 36] closingMarker:[36, 38] anchorMarker:[38, 39, "#"] openingTitleMarker:[40, 41, "'"] title:[41, 44, "## "] closingTitleMarker:[44, 45, "'"]
 ````````````````````````````````
 
 
@@ -454,10 +460,12 @@ options, markers, title
 
 ```````````````````````````````` example SimToc: 20
 [TOC levels=3]:# "##title"
+[TOC levels=3]:# '##title'
 .
 .
-Document[0, 27]
+Document[0, 54]
   SimTocBlock[0, 27] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 25, "##title"] closingTitleMarker:[25, 26, "\""]
+  SimTocBlock[27, 54] openingMarker:[27, 28] tocKeyword:[28, 31] style:[32, 40] closingMarker:[40, 42] anchorMarker:[42, 43, "#"] openingTitleMarker:[44, 45, "'"] title:[45, 52, "##title"] closingTitleMarker:[52, 53, "'"]
 ````````````````````````````````
 
 
@@ -465,10 +473,12 @@ options, markers, title
 
 ```````````````````````````````` example SimToc: 21
 [TOC levels=3]:# "## title"
+[TOC levels=3]:# '## title'
 .
 .
-Document[0, 28]
+Document[0, 56]
   SimTocBlock[0, 28] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 13] closingMarker:[13, 15] anchorMarker:[15, 16, "#"] openingTitleMarker:[17, 18, "\""] title:[18, 26, "## title"] closingTitleMarker:[26, 27, "\""]
+  SimTocBlock[28, 56] openingMarker:[28, 29] tocKeyword:[29, 32] style:[33, 41] closingMarker:[41, 43] anchorMarker:[43, 44, "#"] openingTitleMarker:[45, 46, "'"] title:[46, 54, "## title"] closingTitleMarker:[54, 55, "'"]
 ````````````````````````````````
 
 

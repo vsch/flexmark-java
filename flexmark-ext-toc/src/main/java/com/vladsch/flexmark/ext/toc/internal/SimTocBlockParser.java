@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
 import com.vladsch.flexmark.ext.toc.SimTocOptionList;
 import com.vladsch.flexmark.internal.util.Pair;
+import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.ParsedOption;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
@@ -23,8 +24,15 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.parser.block.BlockStart.none;
 
 public class SimTocBlockParser extends AbstractBlockParser {
-    private static Pattern TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(\"(?:.*)\"))?\\s*$");
-    //private static Pattern TOC_BLOCK_CONTINUE = Pattern.compile("^.+$");
+    static class TocParsing extends Parsing {
+        final Pattern TOC_BLOCK_START;
+        //private static Pattern TOC_BLOCK_CONTINUE = Pattern.compile("^.+$");
+
+        public TocParsing(DataHolder options) {
+            super(options);
+            this.TOC_BLOCK_START = Pattern.compile("^\\[TOC(?:\\s+([^\\]]+))?]:\\s*#(?:\\s+(" + super.LINK_TITLE_STRING + "))?\\s*$");
+        }
+    }
 
     private static int HAVE_HTML = 1;
     private static int HAVE_HEADING = 2;
@@ -35,7 +43,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
     private final SimTocOptions options;
     private int haveChildren = 0;
 
-    private SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
+    SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
         this.options = new SimTocOptions(options);
         block = new SimTocBlock(tocChars, styleChars, titleChars);
     }
@@ -115,7 +123,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
                     SimTocOption optionNode = new SimTocOption(option.getSource());
                     optionsNode.appendChild(optionNode);
                 }
-                
+
                 optionsNode.setCharsFromContent();
                 block.prependChild(optionsNode);
             }
@@ -152,10 +160,12 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     private static class BlockFactory extends AbstractBlockParserFactory {
         private final TocOptions options;
+        private final TocParsing myParsing;
 
         private BlockFactory(DataHolder options) {
             super(options);
             this.options = new TocOptions(options);
+            this.myParsing = new TocParsing(options);
         }
 
         @Override
@@ -166,7 +176,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
             BasedSequence line = state.getLine();
             int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
-            Matcher matcher = TOC_BLOCK_START.matcher(line);
+            Matcher matcher = myParsing.TOC_BLOCK_START.matcher(line);
             if (matcher.matches()) {
                 BasedSequence tocChars = state.getLineWithEOL();
                 BasedSequence styleChars = null;

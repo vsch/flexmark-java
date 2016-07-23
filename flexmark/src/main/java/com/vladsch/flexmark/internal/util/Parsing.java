@@ -14,6 +14,7 @@ public class Parsing {
     final public String ESCAPED_CHAR;
     final public Pattern LINK_LABEL;
     final public Pattern LINK_DESTINATION_BRACES;
+    final public String LINK_TITLE_STRING;
     final public Pattern LINK_TITLE;
     final public String REG_CHAR;
     final public String IN_PARENS_NOSP;
@@ -69,12 +70,12 @@ public class Parsing {
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
         this.LINK_DESTINATION_BRACES = Pattern.compile(
                 "^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
-        this.LINK_TITLE = Pattern.compile(
-                "^(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
-                        '|' +
-                        "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
-                        '|' +
-                        "\\((" + ESCAPED_CHAR + "|[^)\\x00])*\\))");
+        this.LINK_TITLE_STRING = "(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
+                '|' +
+                "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
+                '|' +
+                "\\((" + ESCAPED_CHAR + "|[^)\\x00])*\\))";
+        this.LINK_TITLE = Pattern.compile("^" + LINK_TITLE_STRING);
         this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.LINK_DESTINATION = Pattern.compile(

@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.8](#048)
 - [0.4.7](#047)
 - [0.4.6](#046)
 - [0.4.5](#045)
@@ -34,6 +35,12 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.8
+-----
+
+- Fix `SimTocBlockParser` to use `Parsing.LINK_TITLE` pattern for TOC title to match what is
+  allowed for reference title.
 
 0.4.7
 -----
