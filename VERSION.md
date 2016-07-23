@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.9](#049)
 - [0.4.8](#048)
 - [0.4.7](#047)
 - [0.4.6](#046)
@@ -36,13 +37,16 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+0.4.9
+-----
+
+- Fix #3, Incorrect emphasis close marker source offset 
+
 0.4.8
 -----
 
 - Fix `SimTocBlockParser` to use `Parsing.LINK_TITLE` pattern for TOC title to match what is
   allowed for reference title.
-
-- Fix #3, Incorrect emphasis close marker source offset 
 
 0.4.7
 -----
