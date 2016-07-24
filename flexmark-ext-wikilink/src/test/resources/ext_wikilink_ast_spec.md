@@ -195,7 +195,7 @@ around it
 Document[0, 20]
   Paragraph[0, 20]
     Text[0, 1] chars:[0, 1, "["]
-    LinkRef[1, 16] referenceOpen:[1, 2, "["] reference:[2, 15, "not wiki link"] referenceClose:[15, 16, "]"]
+    LinkRef[1, 18] referenceOpen:[1, 2, "["] reference:[2, 15, "not wiki link"] referenceClose:[15, 16, "]"] textOpen:[16, 17, "["] textClose:[17, 18, "]"]
       Text[2, 15] chars:[2, 15, "not w …  link"]
     Text[18, 19] chars:[18, 19, "]"]
 ````````````````````````````````

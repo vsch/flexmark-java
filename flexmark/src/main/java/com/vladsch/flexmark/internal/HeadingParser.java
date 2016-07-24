@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Heading;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.Arrays;
@@ -15,12 +17,23 @@ import java.util.regex.Pattern;
 
 public class HeadingParser extends AbstractBlockParser {
 
-    private static Pattern ATX_HEADING = Pattern.compile("^#{1,6}(?:[ \t]+|$)");
-    private static Pattern RELAXED_ATX_HEADING = Pattern.compile("^#{1,6}(?: *|$)");
-    private static Pattern ATX_TRAILING = Pattern.compile("(^| ) *#+ *$");
-    private static Pattern SETEXT_HEADING = Pattern.compile("^(?:=+|-+) *$");
+    static class HeadingParsing extends Parsing {
+        final private Pattern ATX_HEADING;
+        final private Pattern ATX_TRAILING;
+        final private Pattern SETEXT_HEADING;
 
-    private final Heading block = new Heading();
+        public HeadingParsing(DataHolder options) {
+            super(options);
+
+            ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.getFrom(options) ? Pattern.compile("^#{1,6}(?: *|$)") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
+            ATX_TRAILING = Pattern.compile("(^| ) *#+ *$");
+
+            int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
+            SETEXT_HEADING = minLength <= 1 ? Pattern.compile("^(?:=+|-+) *$") : Pattern.compile("^(?:={" + minLength + ",}|-{" + minLength + ",}) *$");
+        }
+    }
+
+    final Heading block = new Heading();
 
     public HeadingParser(int level) {
         block.setLevel(level);
@@ -85,11 +98,13 @@ public class HeadingParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        private final HeadingOptions options;
+        final private HeadingOptions options;
+        final private HeadingParsing myParsing;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             this.options = new HeadingOptions(options);
+            this.myParsing = new HeadingParsing(options);
         }
 
         @Override
@@ -102,7 +117,7 @@ public class HeadingParser extends AbstractBlockParser {
             BasedSequence paragraph = matchedBlockParser.getParagraphContent();
             Matcher matcher;
             BasedSequence trySequence = line.subSequence(nextNonSpace, line.length());
-            matcher = (options.headersNoAtxSpace ? RELAXED_ATX_HEADING : ATX_HEADING).matcher(trySequence);
+            matcher = myParsing.ATX_HEADING.matcher(trySequence);
             if (matcher.find()) {
                 // ATX heading
                 int newOffset = nextNonSpace + matcher.group(0).length();
@@ -116,7 +131,7 @@ public class HeadingParser extends AbstractBlockParser {
 
                 BasedSequence headerText = trySequence.subSequence(openingEnd);
                 BasedSequence closingMarker = null;
-                matcher = ATX_TRAILING.matcher(headerText);
+                matcher = myParsing.ATX_TRAILING.matcher(headerText);
                 if (matcher.find()) {
                     // removeIndex trailing ###s:
                     int closingStart = matcher.start();
@@ -133,7 +148,7 @@ public class HeadingParser extends AbstractBlockParser {
 
                 return BlockStart.of(headingParser)
                         .atIndex(line.length());
-            } else if (paragraph != null && ((matcher = SETEXT_HEADING.matcher(trySequence)).find())) {
+            } else if (paragraph != null && ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find())) {
                 // setext heading line
                 int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
 

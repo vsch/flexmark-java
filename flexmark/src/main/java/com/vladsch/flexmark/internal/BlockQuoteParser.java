@@ -5,6 +5,7 @@ import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.BlockQuote;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 
 import java.util.Arrays;
@@ -14,9 +15,11 @@ import java.util.Set;
 public class BlockQuoteParser extends AbstractBlockParser {
 
     private final BlockQuote block = new BlockQuote();
+    private final boolean continueToBlankLine;
 
-    public BlockQuoteParser(BasedSequence marker) {
+    public BlockQuoteParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
+        continueToBlankLine = options.get(Parser.BLOCK_QUOTE_TO_BLANK_LINE);
     }
 
     @Override
@@ -38,7 +41,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public BlockQuote getBlock() {
         return block;
     }
-    
+
     @Override
     public void closeBlock(ParserState parserState) {
         block.setCharsFromContent();
@@ -47,11 +50,16 @@ public class BlockQuoteParser extends AbstractBlockParser {
     @Override
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
-        if (isMarker(state, nextNonSpace)) {
-            int newColumn = state.getColumn() + state.getIndent() + 1;
-            // optional following space or tab
-            if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
+        boolean isMarker = false;
+        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || continueToBlankLine)) {
+            int newColumn = state.getColumn() + state.getIndent();
+            
+            if (isMarker) {
                 newColumn++;
+                // optional following space or tab
+                if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
+                    newColumn++;
+                }
             }
             return BlockContinue.atColumn(newColumn);
         } else {
@@ -101,7 +109,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
             return new BlockFactory(options);
         }
     }
-    
+
     private static class BlockFactory extends AbstractBlockParserFactory {
         BlockFactory(DataHolder options) {
             super(options);
@@ -115,7 +123,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
                 if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
                     newColumn++;
                 }
-                return BlockStart.of(new BlockQuoteParser(state.getLine().subSequence(nextNonSpace, nextNonSpace +1))).atColumn(newColumn);
+                return BlockStart.of(new BlockQuoteParser(state.getProperties(), state.getLine().subSequence(nextNonSpace, nextNonSpace + 1))).atColumn(newColumn);
             } else {
                 return BlockStart.none();
             }

@@ -202,11 +202,11 @@ Document[0, 46]
 ````````````````````````````````
 
 
-## ATX Header options
+## Heading options
 
 Allow atx headers without a space between # and the title
 
-```````````````````````````````` example(ATX Header options: 1) options(hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 1) options(hdr-no-atx-space)
 #Heading
 ##Heading
 ###Heading
@@ -264,7 +264,7 @@ Document[0, 151]
 
 Don't allow leading spaces
 
-```````````````````````````````` example(ATX Header options: 2) options(hdr-no-lead-space)
+```````````````````````````````` example(Heading options: 2) options(hdr-no-lead-space)
  # Heading
  ## Heading
  ### Heading
@@ -295,36 +295,94 @@ Document[0, 81]
 ````````````````````````````````
 
 
-Don't allow leading spaces
+Don't allow leading spaces, don't require atx marker space
 
-```````````````````````````````` example(ATX Header options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
- # Heading
- ## Heading
- ### Heading
- #### Heading
- ##### Heading
- ###### Heading
+```````````````````````````````` example(Heading options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
+ #Heading
+ ##Heading
+ ###Heading
+ ####Heading
+ #####Heading
+ ######Heading
 .
-<p># Heading
-## Heading
-### Heading
-#### Heading
-##### Heading
-###### Heading</p>
+<p>#Heading
+##Heading
+###Heading
+####Heading
+#####Heading
+######Heading</p>
 .
-Document[0, 81]
-  Paragraph[1, 81]
-    Text[1, 10] chars:[1, 10, "# Heading"]
-    SoftLineBreak[10, 11]
-    Text[12, 22] chars:[12, 22, "## Heading"]
-    SoftLineBreak[22, 23]
-    Text[24, 35] chars:[24, 35, "### H … ading"]
+Document[0, 75]
+  Paragraph[1, 75]
+    Text[1, 9] chars:[1, 9, "#Heading"]
+    SoftLineBreak[9, 10]
+    Text[11, 20] chars:[11, 20, "##Heading"]
+    SoftLineBreak[20, 21]
+    Text[22, 32] chars:[22, 32, "###Heading"]
+    SoftLineBreak[32, 33]
+    Text[34, 45] chars:[34, 45, "####H … ading"]
+    SoftLineBreak[45, 46]
+    Text[47, 59] chars:[47, 59, "##### … ading"]
+    SoftLineBreak[59, 60]
+    Text[61, 74] chars:[61, 74, "##### … ading"]
+````````````````````````````````
+
+
+Minimum setext marker length 3
+
+```````````````````````````````` example(Heading options: 4) options(setext-marker-length)
+Not a Heading 1
+=
+ 
+Not a Heading 1
+==
+ 
+Heading 1
+===
+ 
+ 
+Not a Heading 2
+-
+ 
+Not a Heading 2
+--
+ 
+Heading 2
+---
+ 
+.
+<p>Not a Heading 1
+=</p>
+<p>Not a Heading 1
+==</p>
+<h1>Heading 1</h1>
+<p>Not a Heading 2
+-</p>
+<p>Not a Heading 2
+--</p>
+<h2>Heading 2</h2>
+.
+Document[0, 116]
+  Paragraph[0, 18]
+    Text[0, 15] chars:[0, 15, "Not a … ing 1"]
+    SoftLineBreak[15, 16]
+    Text[16, 17] chars:[16, 17, "="]
+  Paragraph[20, 39]
+    Text[20, 35] chars:[20, 35, "Not a … ing 1"]
     SoftLineBreak[35, 36]
-    Text[37, 49] chars:[37, 49, "####  … ading"]
-    SoftLineBreak[49, 50]
-    Text[51, 64] chars:[51, 64, "##### … ading"]
-    SoftLineBreak[64, 65]
-    Text[66, 80] chars:[66, 80, "##### … ading"]
+    Text[36, 38] chars:[36, 38, "=="]
+  Heading[41, 54] text:[41, 50, "Heading 1"] textClose:[51, 54, "==="]
+    Text[41, 50] chars:[41, 50, "Heading 1"]
+  Paragraph[59, 77]
+    Text[59, 74] chars:[59, 74, "Not a … ing 2"]
+    SoftLineBreak[74, 75]
+    Text[75, 76] chars:[75, 76, "-"]
+  Paragraph[79, 98]
+    Text[79, 94] chars:[79, 94, "Not a … ing 2"]
+    SoftLineBreak[94, 95]
+    Text[95, 97] chars:[95, 97, "--"]
+  Heading[100, 113] text:[100, 109, "Heading 2"] textClose:[110, 113, "---"]
+    Text[100, 109] chars:[100, 109, "Heading 2"]
 ````````````````````````````````
 
 
@@ -2627,6 +2685,23 @@ Document[0, 14]
 ````````````````````````````````
 
 
+dummy ref
+
+```````````````````````````````` example Image links: 2
+[ref]: /url1
+
+![ref][]
+.
+<p><img src="/url1" alt="ref" /></p>
+.
+Document[0, 23]
+  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 12, "/url1"]
+  Paragraph[14, 23]
+    ImageRef[14, 22] referenceOpen:[14, 16, "!["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"] textOpen:[20, 21, "["] textClose:[21, 22, "]"]
+      Text[16, 19] chars:[16, 19, "ref"]
+````````````````````````````````
+
+
 ## Fenced Code
 
 Option not to match closing fence characters to opening ones
@@ -2748,4 +2823,76 @@ Document[0, 32]
     Link[0, 31] textOpen:[0, 1, "["] text:[1, 5, "test"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 30, "http://url?opt=a&opt1=b"] pageRef:[7, 30, "http://url?opt=a&opt1=b"] linkClose:[30, 31, ")"]
       Text[1, 5] chars:[1, 5, "test"]
 ````````````````````````````````
+
+
+```````````````````````````````` example Links: 2
+[ref]: /url1
+
+[ref][]
+.
+<p><a href="/url1">ref</a></p>
+.
+Document[0, 22]
+  Reference[0, 12] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 12, "/url1"]
+  Paragraph[14, 22]
+    LinkRef[14, 21] referenceOpen:[14, 15, "["] reference:[15, 18, "ref"] referenceClose:[18, 19, "]"] textOpen:[19, 20, "["] textClose:[20, 21, "]"]
+      Text[15, 18] chars:[15, 18, "ref"]
+````````````````````````````````
+
+
+## Block Quotes
+
+Extend block quote to next blank line
+
+```````````````````````````````` example(Block Quotes: 1) options(block-quote-extend)
+> 1. one
+2. two
+.
+<blockquote>
+  <ol>
+    <li>one</li>
+    <li>two</li>
+  </ol>
+</blockquote>
+.
+Document[0, 16]
+  BlockQuote[0, 16] marker:[0, 1, ">"]
+    OrderedList[2, 16] isTight delimiter:'.'
+      OrderedListItem[2, 9] open:[2, 4, "1."] isTight
+        Paragraph[5, 9]
+          Text[5, 8] chars:[5, 8, "one"]
+      OrderedListItem[9, 16] open:[9, 11, "2."] isTight
+        Paragraph[12, 16]
+          Text[12, 15] chars:[12, 15, "two"]
+````````````````````````````````
+
+
+without block quote to next blank line causes an interrupted list with a second list after the
+quote.
+
+```````````````````````````````` example Block Quotes: 2
+> 1. one
+2. two
+.
+<blockquote>
+  <ol>
+    <li>one</li>
+  </ol>
+</blockquote>
+<ol start="2">
+  <li>two</li>
+</ol>
+.
+Document[0, 16]
+  BlockQuote[0, 9] marker:[0, 1, ">"]
+    OrderedList[2, 9] isTight delimiter:'.'
+      OrderedListItem[2, 9] open:[2, 4, "1."] isTight
+        Paragraph[5, 9]
+          Text[5, 8] chars:[5, 8, "one"]
+  OrderedList[9, 16] isTight start:2 delimiter:'.'
+    OrderedListItem[9, 16] open:[9, 11, "2."] isTight
+      Paragraph[12, 16]
+        Text[12, 15] chars:[12, 15, "two"]
+````````````````````````````````
+
 

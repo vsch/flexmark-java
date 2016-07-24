@@ -34,11 +34,17 @@ import java.util.*;
  * </code></pre>
  */
 public class Parser implements IParse {
+    final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
+    final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
+    final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
+
     final public static DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
     final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
+    final public static DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_TO_BLANK_LINE", false);
     final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
-    final public static DataKey<Boolean> HEADERS_NO_ATX_SPACE = new DataKey<>("HEADERS_NO_ATX_SPACE", false);
-    final public static DataKey<Boolean> HEADERS_NO_LEAD_SPACE = new DataKey<>("HEADERS_NO_LEAD_SPACE", false);
+    final public static DataKey<Integer> HEADING_SETEXT_MARKER_LENGTH = new DataKey<>("HEADING_SETEXT_MARKER_LENGTH", 1);
+    final public static DataKey<Boolean> HEADING_NO_ATX_SPACE = new DataKey<>("HEADING_NO_ATX_SPACE", false);
+    final public static DataKey<Boolean> HEADING_NO_LEAD_SPACE = new DataKey<>("HEADING_NO_LEAD_SPACE", false);
     final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
     final public static DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
     final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
@@ -49,6 +55,7 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
     final public static DataKey<Boolean> LISTS_BULLET_MATCH = new DataKey<>("LISTS_BULLET_MATCH", true);
     final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
+    final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
     final public static DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     final public static DataKey<Boolean> ORDERED_LIST_DOT_ONLY = new DataKey<>("ORDERED_LIST_DOT_ONLY", false);
@@ -61,10 +68,6 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
     final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
     final public static DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
-    final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
-    final public static DataKey<Iterable<? extends Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
-    final public static DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;

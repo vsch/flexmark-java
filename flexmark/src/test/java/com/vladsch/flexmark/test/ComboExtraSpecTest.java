@@ -23,8 +23,8 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
-        optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADERS_NO_ATX_SPACE, true));
-        optionsMap.put("hdr-no-lead-space", new MutableDataSet().set(Parser.HEADERS_NO_LEAD_SPACE, true));
+        optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADING_NO_ATX_SPACE, true));
+        optionsMap.put("hdr-no-lead-space", new MutableDataSet().set(Parser.HEADING_NO_LEAD_SPACE, true));
         optionsMap.put("list-fixed-indent", new MutableDataSet().set(Parser.LISTS_FIXED_INDENT, 4));
         optionsMap.put("list-no-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, false));
         optionsMap.put("list-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, true));
@@ -53,6 +53,8 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("code-trim-trailing", new MutableDataSet().set(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES, true));
         optionsMap.put("ordered-dot-only", new MutableDataSet().set(Parser.ORDERED_LIST_DOT_ONLY, true));
+        optionsMap.put("block-quote-extend", new MutableDataSet().set(Parser.BLOCK_QUOTE_TO_BLANK_LINE, true));
+        optionsMap.put("setext-marker-length", new MutableDataSet().set(Parser.HEADING_SETEXT_MARKER_LENGTH, 3));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

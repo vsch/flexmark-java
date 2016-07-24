@@ -16,20 +16,36 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] {
-                textOpeningMarker,
-                text,
-                textClosingMarker,
-                referenceOpeningMarker,
-                reference,
-                referenceClosingMarker
-        };
+        if (isReferenceTextCombined()) {
+            return new BasedSequence[] {
+                    referenceOpeningMarker,
+                    reference,
+                    referenceClosingMarker,
+                    textOpeningMarker,
+                    text,
+                    textClosingMarker,
+            };
+        } else {
+            return new BasedSequence[] {
+                    textOpeningMarker,
+                    text,
+                    textClosingMarker,
+                    referenceOpeningMarker,
+                    reference,
+                    referenceClosingMarker,
+            };
+        }
     }
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
-        delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
+        if (isReferenceTextCombined()) {
+            delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
+            delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
+        } else {
+            delimitedSegmentSpanChars(out, textOpeningMarker, text, textClosingMarker, "text");
+            delimitedSegmentSpanChars(out, referenceOpeningMarker, reference, referenceClosingMarker, "reference");
+        }
     }
 
     public RefNode() {

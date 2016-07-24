@@ -847,6 +847,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         BasedSequence linkOpener = SubSequence.NULL;
         BasedSequence linkCloser = SubSequence.NULL;
         opener = this.lastBracket;
+        BasedSequence bareRef = SubSequence.NULL;
 
         // Inline link?
         if (peek() == '(') {
@@ -916,6 +917,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     ref = input.subSequence(beforeLabel, beforeLabel + labelLength);
                 } else if (!opener.bracketAfter) {
                     // Empty or missing second label can only be a reference if there's no unescaped bracket in it.
+                    bareRef = input.subSequence(beforeLabel, beforeLabel + labelLength);
                     if (opener.image) {
                         // this one has index off by one for the leading !
                         ref = input.subSequence(opener.index - 1, startIndex);
@@ -953,7 +955,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                                     }
                                 }
                             } else {
-                                // undefined ref, bare of followed by empty [], create a tentative link ref but only if does not contain any other link refs
+                                // undefined ref, bare or followed by empty [], create a tentative link ref but only if does not contain any other link refs
                                 boolean containsLinks = containsLinkRefs(ref, opener.node.getNext(), null);
                                 if (!containsLinks) {
                                     isLinkOrImage = true;
@@ -1008,6 +1010,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
                 if (!refIsBare) {
                     refNode.setTextChars(input.subSequence(opener.index, startIndex));
+                } else if (!bareRef.isEmpty()) {
+                    refNode.setTextOpeningMarker(bareRef.subSequence(0, 1));
+                    refNode.setTextClosingMarker(bareRef.endSequence(1));
                 }
                 insertNode.setCharsFromContent();
             } else if (insertNode instanceof InlineLinkNode) {

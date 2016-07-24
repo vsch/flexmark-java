@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.10](#0410)
 - [0.4.9](#049)
 - [0.4.8](#048)
 - [0.4.7](#047)
@@ -36,6 +37,15 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.10
+------
+
+- Add `Parser.BLOCK_QUOTE_TO_BLANK_LINE` option, when true block quote block stays open until a
+  blank line. Making block quote parsing compatible with GFM and most other markdown processors.
+
+- Fix `ImageRef` and `LinkRef` did not properly set the source information for a dummy reference
+  part of a reference `[ref][]`
 
 0.4.9
 -----
