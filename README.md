@@ -1,12 +1,14 @@
-![](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
-=============================================================
+![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
+===============================================================================
 
 flexmark-java is a fork of [commonmark-java] project, modified to generate an AST which reflects
 all the elements in the original source, full source position tracking for all elements in the
 AST and easier JetBrains Open API PsiTree generation.
 
 The API was changed to allow more granular control of the parsing process and optimized for
-parsing with a large number of installed extensions.
+parsing with a large number of installed extensions. The parser and extensions come with many
+tweaking options for parser behavior and HTML rendering variations. The end goal is to have the
+parser and renderer be able to mimic other parsers with great degree of accuracy.
 
 Motivation for this was the need to replace [pegdown] parser in [Markdown Navigator] plugin.
 [pegdown] has a great feature set but its speed in general is less than ideal and for
@@ -17,9 +19,9 @@ The goal was to ensure that adding source position tracking in the AST would not
 of parsing and generating the AST more than absolutely necessary.
 
 Reasons for choosing [commonmark-java] as the parser are: speed, ease of understanding, ease of
-extending and are detailed in [Pegdown - Achilles heel of the Markdown Navigator plugin]. Now
-that I have reworked the core and added a few extensions I am extremely satisfied with my
-choice.
+extending and speed. More detailed description in
+[Pegdown - Achilles heel of the Markdown Navigator plugin]. Now that I have reworked the core
+and added a few extensions I am extremely satisfied with my choice.
 
 Another goal was to improve the ability of extensions to modify parser behavior so that any
 dialect of markdown could be implemented through the extension mechanism. An extensible options
@@ -55,7 +57,7 @@ earlier versions of this project.
 | AST elements have detailed source position for all parts                         | :heavy_check_mark:                                               | :x:                                                               | :x: only node start/end                                              |
 | Can disable core parsing features                                                | :heavy_check_mark:                                               | :x:                                                               | :x:                                                                  |
 | Core parser implemented via the extension API                                    | :heavy_check_mark:                                               | :x: `instanceOf` tests for specific block parser and node classes | :x: core exposes few extension points                                |
-| Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: one massive PEG parser with complex interactions [(3)](#3)       |
+| Easy to understand and modify parser implementation                              | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: one PEG parser with complex interactions [(3)](#3)               |
 | Parsing of block elements is independent from each other                         | :heavy_check_mark:                                               | :heavy_check_mark:                                                | :x: everything in one PEG grammar                                    |
 | Uniform configuration across: parser, renderer and all extensions                | :heavy_check_mark:                                               | :x: none beyond extension list                                    | :x: `int` bit flags for core, none for extensions                    |
 | Parsing performance optimized for use with extensions                            | :heavy_check_mark:                                               | :x: parsing performance for core, extensions do what they can     | :x: performance is not a feature                                     |
