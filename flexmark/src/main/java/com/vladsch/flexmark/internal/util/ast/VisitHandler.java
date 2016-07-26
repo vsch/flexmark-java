@@ -17,44 +17,14 @@ package com.vladsch.flexmark.internal.util.ast;
 
 import com.vladsch.flexmark.node.Node;
 
-public class VisitHandler<N extends Node> implements Visitor<N> {
-    final Class<? extends N> myClass;
-    final Visitor<N> myVisitor;
-
-    public VisitHandler(Class<? extends N> aClass, Visitor<N> visitor) {
-        myClass = aClass;
-        myVisitor = visitor;
-    }
-
-    public Class<? extends N> getNodeType() {
-        return myClass;
-    }
-
-    public Visitor getNodeVisitor() {
-        return myVisitor;
+public class VisitHandler<N extends Node> extends NodeAdaptingVisitHandler<N, Visitor<N>> implements Visitor<N> {
+    public VisitHandler(Class<? extends N> aClass, Visitor<N> adapter) {
+        super(aClass, adapter);
     }
 
     @Override
     public void visit(Node node) {
         //noinspection unchecked
-        myVisitor.visit((N)node);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        VisitHandler other = (VisitHandler) o;
-
-        if (myClass != other.myClass) return false;
-        return myVisitor == other.myVisitor;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = myClass.hashCode();
-        result = 31 * result + myVisitor.hashCode();
-        return result;
+        myAdapter.visit((N) node);
     }
 }

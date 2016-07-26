@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.node.Node;
 
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class WikiLinkLinkResolver implements LinkResolver {
     }
 
     @Override
-    public ResolvedLink resolveLink(NodeRendererContext context, ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
         if (link.getLinkType() == WIKI_LINK) {
             StringBuilder sb = new StringBuilder();
             String wikiLink = link.getUrl();

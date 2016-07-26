@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.zzzzzz.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.internal.util.KeepType;
 import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
@@ -24,6 +25,9 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     final public static DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
     final public static DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
     final public static DataKey<Integer> ZZZZZZ_OPTION3 = new DataKey<>("ZZZZZZ_OPTION3", Integer.MAX_VALUE); //zzzoptionszzz(CUSTOM_PROPERTIES)
+    final static public DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");//zzzoptionszzz(LINK_RESOLVER, ATTRIBUTE_PROVIDER)
+    final static public DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");//zzzoptionszzz(LINK_RESOLVER, ATTRIBUTE_PROVIDER)
+    final static public LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private ZzzzzzExtension() {
     }
@@ -60,5 +64,6 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public void extend(HtmlRenderer.Builder rendererBuilder) {
         rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
         rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
+        rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
     }
 }

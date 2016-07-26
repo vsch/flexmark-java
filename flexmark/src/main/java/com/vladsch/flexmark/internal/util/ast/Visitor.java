@@ -17,6 +17,6 @@ package com.vladsch.flexmark.internal.util.ast;
 
 import com.vladsch.flexmark.node.Node;
 
-public interface Visitor<N extends Node> {
+public interface Visitor<N extends Node> extends NodeAdaptingVisitor<N> {
     void visit(N node);
 }

@@ -27,16 +27,16 @@ import java.util.Collection;
  * call {@link #visitChildren}.
  */
 public class BlockNodeVisitor extends NodeVisitor {
-    public BlockNodeVisitor(VisitHandler<?>... visitors) {
-        super(visitors);
+    public BlockNodeVisitor(VisitHandler<?>... handlers) {
+        super(handlers);
     }
 
-    public BlockNodeVisitor(VisitHandler<?>[]... visitors) {
-        super(visitors);
+    public BlockNodeVisitor(VisitHandler<?>[]... handlers) {
+        super(handlers);
     }
 
-    public BlockNodeVisitor(Collection<VisitHandler<?>> visitors) {
-        super(visitors);
+    public BlockNodeVisitor(Collection<VisitHandler<?>> handlers) {
+        super(handlers);
     }
 
     @Override

@@ -42,9 +42,9 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
     final static public DataKey<String> LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
 
-    final List<AttributeProvider> attributeProviders;
+    final List<AttributeProviderFactory> attributeProviderFactories;
     final List<NodeRendererFactory> nodeRendererFactories;
-    final List<LinkResolverFactory> linkRendererFactories;
+    final List<LinkResolverFactory> linkResolverFactories;
     final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
     final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
@@ -55,7 +55,6 @@ public class HtmlRenderer implements IRender {
         this.options = new DataSet(builder);
         this.htmlOptions = new HtmlRendererOptions(this.options);
 
-        this.attributeProviders = builder.attributeProviders;
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
 
         this.nodeRendererFactories = new ArrayList<>(builder.nodeRendererFactories.size() + 1);
@@ -69,7 +68,8 @@ public class HtmlRenderer implements IRender {
             }
         });
 
-        this.linkRendererFactories = FlatDependencyHandler.computeDependencies(builder.linkRendererFactories);
+        this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
+        this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
     }
 
     /**
@@ -115,9 +115,9 @@ public class HtmlRenderer implements IRender {
      * Builder for configuring an {@link HtmlRenderer}. See methods for default configuration.
      */
     public static class Builder extends MutableDataSet {
-        List<AttributeProvider> attributeProviders = new ArrayList<>();
+        List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
         List<NodeRendererFactory> nodeRendererFactories = new ArrayList<>();
-        List<LinkResolverFactory> linkRendererFactories = new ArrayList<>();
+        List<LinkResolverFactory> linkResolverFactories = new ArrayList<>();
         private final HashSet<HtmlRendererExtension> loadedExtensions = new HashSet<>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
@@ -136,9 +136,9 @@ public class HtmlRenderer implements IRender {
         public Builder(Builder other) {
             super(other);
 
-            this.attributeProviders.addAll(other.attributeProviders);
+            this.attributeProviderFactories.addAll(other.attributeProviderFactories);
             this.nodeRendererFactories.addAll(other.nodeRendererFactories);
-            this.linkRendererFactories.addAll(other.linkRendererFactories);
+            this.linkResolverFactories.addAll(other.linkResolverFactories);
             this.loadedExtensions.addAll(other.loadedExtensions);
             this.htmlIdGeneratorFactory = other.htmlIdGeneratorFactory;
         }
@@ -225,11 +225,11 @@ public class HtmlRenderer implements IRender {
         /**
          * Add an attribute provider for adding/changing HTML attributes to the rendered tags.
          *
-         * @param attributeProvider the attribute provider to add
+         * @param attributeProviderFactory the attribute provider factory to add
          * @return {@code this}
          */
-        public Builder attributeProvider(AttributeProvider attributeProvider) {
-            this.attributeProviders.add(attributeProvider);
+        public Builder attributeProviderFactory(AttributeProviderFactory attributeProviderFactory) {
+            this.attributeProviderFactories.add(attributeProviderFactory);
             return this;
         }
 
@@ -259,7 +259,7 @@ public class HtmlRenderer implements IRender {
          * @return {@code this}
          */
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
-            this.linkRendererFactories.add(linkResolverFactory);
+            this.linkResolverFactories.add(linkResolverFactory);
             return this;
         }
 
@@ -313,6 +313,7 @@ public class HtmlRenderer implements IRender {
         private RenderingPhase phase;
         private final HtmlIdGenerator htmlIdGenerator;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<>();
+        private final AttributeProvider[] attributeProviders;
 
         MainNodeRenderer(DataHolder options, HtmlWriter htmlWriter, Document document) {
             super(htmlWriter);
@@ -321,7 +322,7 @@ public class HtmlRenderer implements IRender {
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<>(nodeRendererFactories.size());
-            this.myLinkResolvers = new LinkResolver[linkRendererFactories.size()];
+            this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
             this.doNotRenderLinksNesting = htmlOptions.doNotRenderLinksInDocument ? 0 : 1;
             this.htmlIdGenerator = htmlIdGeneratorFactory != null ? htmlIdGeneratorFactory.create(this)
                     : (!(htmlOptions.renderHeaderId || htmlOptions.generateHeaderIds) ? HtmlIdGenerator.NULL : new GitHubHeaderIdGenerator.Factory().create(this));
@@ -343,8 +344,13 @@ public class HtmlRenderer implements IRender {
                 }
             }
 
-            for (int i = 0; i < linkRendererFactories.size(); i++) {
-                myLinkResolvers[i] = linkRendererFactories.get(i).create(this);
+            for (int i = 0; i < linkResolverFactories.size(); i++) {
+                myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
+            }
+
+            this.attributeProviders = new AttributeProvider[attributeProviderFactories.size()];
+            for (int i = 0; i < attributeProviderFactories.size(); i++) {
+                attributeProviders[i] = attributeProviderFactories.get(i).create(this);
             }
         }
 
@@ -362,11 +368,12 @@ public class HtmlRenderer implements IRender {
             }
 
             ResolvedLink resolvedLink = resolvedLinks.get(url);
+            Node currentNode = getCurrentNode();
 
             if (resolvedLink == null) {
                 resolvedLink = new ResolvedLink(linkType, url);
                 for (LinkResolver linkResolver : myLinkResolvers) {
-                    resolvedLink = linkResolver.resolveLink(this, resolvedLink);
+                    resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
                     if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
                 }
 
@@ -384,7 +391,7 @@ public class HtmlRenderer implements IRender {
         @Override
         public String getNodeId(Node node) {
             String id = htmlIdGenerator.getId(node);
-            if (attributeProviders.size() != 0) {
+            if (attributeProviderFactories.size() != 0) {
 
                 Attributes attributes = new Attributes();
                 if (id != null) attributes.replaceValue("id", id);

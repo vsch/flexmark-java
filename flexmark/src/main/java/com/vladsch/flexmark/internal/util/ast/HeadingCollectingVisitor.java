@@ -25,7 +25,7 @@ public class HeadingCollectingVisitor {
     final private NodeVisitor myVisitor;
 
     public HeadingCollectingVisitor() {
-        myVisitor = new NodeVisitor(
+        myVisitor = new BlockNodeVisitor(
                 new VisitHandler<>(Heading.class, headings::add)
         );
     }

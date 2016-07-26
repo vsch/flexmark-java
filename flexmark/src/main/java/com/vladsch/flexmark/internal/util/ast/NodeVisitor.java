@@ -18,8 +18,6 @@ package com.vladsch.flexmark.internal.util.ast;
 import com.vladsch.flexmark.node.Node;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Node visitor that visits all children by default and allows configuring node handlers to handle specific classes.
@@ -27,55 +25,43 @@ import java.util.Map;
  * Can be used to only process certain nodes. If you override a method and want visiting to descend into children,
  * call {@link #visitChildren}.
  */
-public class NodeVisitor extends NodeVisitorBase {
-    final private Map<Class<?>, VisitHandler<?>> myCustomVisitorsMap;
-
-    // Usage:
-    //myVisitor = new NodeVisitor(
-    //        new VisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
-    //        new VisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
-    //        new VisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
-    //        new VisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
-    //);
-    public NodeVisitor(VisitHandler<?>... visitors) {
-        HashMap<Class<?>, VisitHandler<?>> visitorMap = new HashMap<>();
-        for (VisitHandler<?> visitor : visitors) {
-            visitorMap.put(visitor.getNodeType(), visitor);
-        }
-        this.myCustomVisitorsMap = visitorMap;
+public class NodeVisitor extends NodeAdaptedVisitor<VisitHandler<?>> {
+    public NodeVisitor(VisitHandler<?>... handlers) {
+        super(handlers);
     }
 
-    public NodeVisitor(VisitHandler<?>[]... visitors) {
-        HashMap<Class<?>, VisitHandler<?>> visitorMap = new HashMap<>();
-        for (VisitHandler<?>[] moreVisitors : visitors) {
-            for (VisitHandler<?> visitor : moreVisitors) {
-                visitorMap.put(visitor.getNodeType(), visitor);
-            }
-        }
-        this.myCustomVisitorsMap = visitorMap;
+    public NodeVisitor(VisitHandler<?>[]... handlers) {
+        super(handlers);
     }
 
-    public NodeVisitor(Collection<VisitHandler<?>> visitors) {
-        HashMap<Class<?>, VisitHandler<?>> visitorMap = new HashMap<>();
-        for (VisitHandler<?> visitor : visitors) {
-            visitorMap.put(visitor.getNodeType(), visitor);
-        }
-        this.myCustomVisitorsMap = visitorMap;
+    public NodeVisitor(Collection<VisitHandler<?>> handlers) {
+        super(handlers);
     }
 
+    public void visitChildren(Node parent) {
+        Node node = parent.getFirstChild();
+        while (node != null) {
+            // A subclass of this visitor might modify the node, resulting in getNext returning a different node or no
+            // node after visiting it. So get the next node before visiting.
+            Node next = node.getNext();
+            visit(node);
+            node = next;
+        }
+    }
+    
     public void visit(Node node) {
-        VisitHandler visitor = myCustomVisitorsMap.get(node.getClass());
-        if (visitor != null) {
-            visitor.visit(node);
+        VisitHandler handler = myCustomHandlersMap.get(node.getClass());
+        if (handler != null) {
+            handler.visit(node);
         } else {
             visitChildren(node);
         }
     }
 
     public void visitNodeOnly(Node node) {
-        VisitHandler visitor = myCustomVisitorsMap.get(node.getClass());
-        if (visitor != null) {
-            visitor.visit(node);
+        VisitHandler handler = myCustomHandlersMap.get(node.getClass());
+        if (handler != null) {
+            handler.visit(node);
         }
     }
 }

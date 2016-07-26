@@ -2,6 +2,7 @@ flexmark-java
 =============
 
 [TOC]: # "## Version History"
+
 ## Version History
 - [0.4.11](#0411)
 - [0.4.10](#0410)
@@ -44,6 +45,29 @@ flexmark-java
 
 - Fix `SimTocBlockParser` was not including the blank line spacer as part of the `SimTocContent`
   node.
+
+- Change bare `AttributeProvider` in the API to add `AttributeProviderFactory` to allow for
+  context based construction of attribute providers and for dependency resolution between
+  attribute provider factories. Attribute provider factories that do not define any dependencies
+  should extend `IndependentAttributeProviderFactory` which provides defaults so only
+  `AttributeProviderFactory.create(NodeRendererContext)` method needs to be implemented.
+
+- Add `NodeAdaptingVisitor`, `NodeAdaptingVisitHandler` and `NodeAdaptedVisitor` to handle
+  customized node mapping functions for easier multiplexing from base class Node to specific
+  node subclasses. 
+
+- Change `Visitor`, `VisitHandler`, `NodeVisitor` to use the new adapting node visitor classes
+
+- Change `CustomNodeRenderer`, `NodeRenderingHandler`, `NodeVisitor` to use the new adapting
+  node visitor classes
+
+- Add `LinkResolvingVisitor`, `LinkResolvingHandler` and `LinkResolverAdapter` to allow generic
+  link resolving mapping.
+
+- Add Node parameter to `LinkResolver.resolveLink(Node, NodeRendererContext, ResolvedLink)` for
+  symmetry and to allow node specific link resolution mapping via `LinkResolverAdapter`. 
+
+- Change `WikiLinkExtension.LINK_FILE_EXTENSION` default to `""`
 
 0.4.10
 ------

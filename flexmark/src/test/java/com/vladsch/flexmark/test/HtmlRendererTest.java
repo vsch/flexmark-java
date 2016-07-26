@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.html.AttributeProvider;
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.options.Attributes;
+import com.vladsch.flexmark.html.*;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
@@ -86,20 +86,23 @@ public class HtmlRendererTest {
 
     @Test
     public void attributeProviderForCodeBlock() {
-        AttributeProvider custom = new AttributeProvider() {
+        AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-                if (node instanceof FencedCodeBlock) {
-                    FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
-                    // Remove the default attribute for info
-                    attributes.remove("class");
-                    // Put info in custom attribute instead
-                    attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
-                }
+            public AttributeProvider create(NodeRendererContext context) {
+                //noinspection ReturnOfInnerClass
+                return (node, part, attributes) -> {
+                    if (node instanceof FencedCodeBlock) {
+                        FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
+                        // Remove the default attribute for info
+                        attributes.remove("class");
+                        // Put info in custom attribute instead
+                        attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
+                    }
+                };
             }
         };
 
-        HtmlRenderer renderer = HtmlRenderer.builder().attributeProvider(custom).build();
+        HtmlRenderer renderer = HtmlRenderer.builder().attributeProviderFactory(factory).build();
         String rendered = renderer.render(parse("```info\ncontent\n```"));
         assertEquals("<pre><code data-custom=\"info\">content\n</code></pre>\n", rendered);
 
@@ -109,17 +112,19 @@ public class HtmlRendererTest {
 
     @Test
     public void attributeProviderForImage() {
-        AttributeProvider custom = new AttributeProvider() {
+        AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
-            public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
-                if (node instanceof Image) {
-                    attributes.remove("alt");
-                    attributes.replaceValue("test", "hey");
-                }
+            public AttributeProvider create(NodeRendererContext context) {
+                return (node, part, attributes) -> {
+                    if (node instanceof Image) {
+                        attributes.remove("alt");
+                        attributes.replaceValue("test", "hey");
+                    }
+                };
             }
         };
 
-        HtmlRenderer renderer = HtmlRenderer.builder().attributeProvider(custom).build();
+        HtmlRenderer renderer = HtmlRenderer.builder().attributeProviderFactory(factory).build();
         String rendered = renderer.render(parse("![foo](/url)\n"));
         assertEquals("<p><img src=\"/url\" test=\"hey\" /></p>\n", rendered);
     }

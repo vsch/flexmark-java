@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.node.Node;
 
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class ZzzzzzLinkResolver implements LinkResolver {
     }
 
     @Override
-    public ResolvedLink resolveLink(NodeRendererContext context, ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
         return link;
     }
     

@@ -30,4 +30,8 @@ public class LinkStatus {
     public int hashCode() {
         return myName.hashCode();
     }
+
+    public boolean isStatus(String status) {
+        return myName.equals(status);
+    }
 }

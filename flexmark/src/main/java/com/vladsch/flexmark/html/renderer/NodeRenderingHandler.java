@@ -2,46 +2,17 @@ package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.internal.util.ast.NodeAdaptingVisitHandler;
 import com.vladsch.flexmark.node.Node;
 
-public class NodeRenderingHandler<N extends Node> implements CustomNodeRenderer<N> {
-    final Class<? extends N> myClass;
-    final CustomNodeRenderer<N> myRender;
-
-    public NodeRenderingHandler(Class<? extends N> aClass, CustomNodeRenderer<N> render) {
-        myClass = aClass;
-        myRender = render;
-    }
-
-    public Class<? extends N> getNodeType() {
-        return myClass;
-    }
-
-    public CustomNodeRenderer<N> getNodeRenderer() {
-        return myRender;
+public class NodeRenderingHandler<N extends Node> extends NodeAdaptingVisitHandler<N, CustomNodeRenderer<N>> implements CustomNodeRenderer<Node> {
+    public NodeRenderingHandler(Class<? extends N> aClass, CustomNodeRenderer<N> adapter) {
+        super(aClass, adapter);
     }
 
     @Override
     public void render(Node node, NodeRendererContext context, HtmlWriter html) {
         //noinspection unchecked
-        myRender.render((N)node, context, html);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NodeRenderingHandler<?> other = (NodeRenderingHandler<?>) o;
-
-        if (myClass != other.myClass) return false;
-        return myRender == other.myRender;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = myClass.hashCode();
-        result = 31 * result + myRender.hashCode();
-        return result;
+        myAdapter.render((N)node, context, html);
     }
 }
