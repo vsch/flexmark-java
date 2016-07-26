@@ -50,7 +50,7 @@ simple wiki link
 ```````````````````````````````` example WikiLinks: 3
 [[wiki link]]
 .
-<p><a href="wiki-link.md">wiki link</a></p>
+<p><a href="wiki-link">wiki link</a></p>
 .
 Document[0, 14]
   Paragraph[0, 14]
@@ -64,7 +64,7 @@ wiki link with text
 ```````````````````````````````` example WikiLinks: 4
 [[wiki text|wiki link]]
 .
-<p><a href="wiki-link.md">wiki text</a></p>
+<p><a href="wiki-link">wiki text</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]
@@ -78,7 +78,7 @@ wiki link with text, links first option
 ```````````````````````````````` example(WikiLinks: 5) options(links-first)
 [[wiki link|wiki text]]
 .
-<p><a href="wiki-link.md">wiki text</a></p>
+<p><a href="wiki-link">wiki text</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]
@@ -92,7 +92,7 @@ simple wiki link with ! before
 ```````````````````````````````` example WikiLinks: 6
 ![[wiki link]]
 .
-<p>!<a href="wiki-link.md">wiki link</a></p>
+<p>!<a href="wiki-link">wiki link</a></p>
 .
 Document[0, 15]
   Paragraph[0, 15]
@@ -107,7 +107,7 @@ wiki link with text with ! before
 ```````````````````````````````` example WikiLinks: 7
 ![[wiki text|wiki link]]
 .
-<p>!<a href="wiki-link.md">wiki text</a></p>
+<p>!<a href="wiki-link">wiki text</a></p>
 .
 Document[0, 25]
   Paragraph[0, 25]
@@ -122,7 +122,7 @@ reference following will be a reference, even if not defined
 ```````````````````````````````` example WikiLinks: 8
 [[wiki link]][ref]
 .
-<p><a href="wiki-link.md">wiki link</a>[ref]</p>
+<p><a href="wiki-link">wiki link</a>[ref]</p>
 .
 Document[0, 19]
   Paragraph[0, 19]
@@ -140,7 +140,7 @@ reference following will be a reference
 
 [ref]: /url
 .
-<p><a href="wiki-link.md">wiki link</a><a href="/url">ref</a></p>
+<p><a href="wiki-link">wiki link</a><a href="/url">ref</a></p>
 .
 Document[0, 32]
   Paragraph[0, 19]
@@ -157,7 +157,7 @@ dummy reference following will be an empty reference
 ```````````````````````````````` example WikiLinks: 10
 [[wiki link]][]
 .
-<p><a href="wiki-link.md">wiki link</a>[]</p>
+<p><a href="wiki-link">wiki link</a>[]</p>
 .
 Document[0, 16]
   Paragraph[0, 16]
@@ -204,7 +204,7 @@ Document[0, 20]
 ```````````````````````````````` example WikiLinks: 13
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
-<p><a href="wiki-link.md">wiki link</a> [^link][ref] <a href="^wiki-link.md">^wiki link</a></p>
+<p><a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a></p>
 .
 Document[0, 42]
   Paragraph[0, 42]
@@ -224,7 +224,7 @@ Exclamation before is just text
 ```````````````````````````````` example WikiLinks: 14
 ![[wiki link]] [^link][ref] [[^wiki link]] [[wiki]][ref]
 .
-<p>!<a href="wiki-link.md">wiki link</a> [^link][ref] <a href="^wiki-link.md">^wiki link</a> <a href="wiki.md">wiki</a>[ref]</p>
+<p>!<a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a> <a href="wiki">wiki</a>[ref]</p>
 .
 Document[0, 57]
   Paragraph[0, 57]
@@ -269,7 +269,7 @@ Custom prefix
 ```````````````````````````````` example(WikiLinks: 16) options(custom-prefix)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
-<p><a href="/prefix/wiki-link.md">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link.md">^wiki link</a></p>
+<p><a href="/prefix/wiki-link">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link">^wiki link</a></p>
 .
 Document[0, 42]
   Paragraph[0, 42]
@@ -289,7 +289,7 @@ With empty anchor ref
 ```````````````````````````````` example WikiLinks: 17
 [[wiki link#]] 
 .
-<p><a href="wiki-link.md#">wiki link</a></p>
+<p><a href="wiki-link#">wiki link</a></p>
 .
 Document[0, 16]
   Paragraph[0, 16]
@@ -302,7 +302,7 @@ With Anchor ref
 ```````````````````````````````` example WikiLinks: 18
 [[wiki link#anchor-ref]] 
 .
-<p><a href="wiki-link.md#anchor-ref">wiki link</a></p>
+<p><a href="wiki-link#anchor-ref">wiki link</a></p>
 .
 Document[0, 26]
   Paragraph[0, 26]
@@ -315,7 +315,7 @@ With text, empty anchor ref
 ```````````````````````````````` example WikiLinks: 19
 [[wiki text|wiki link#]] 
 .
-<p><a href="wiki-link.md#">wiki text</a></p>
+<p><a href="wiki-link#">wiki text</a></p>
 .
 Document[0, 26]
   Paragraph[0, 26]
@@ -328,7 +328,7 @@ With text, anchor ref
 ```````````````````````````````` example WikiLinks: 20
 [[wiki text|wiki link#anchor-ref]] 
 .
-<p><a href="wiki-link.md#anchor-ref">wiki text</a></p>
+<p><a href="wiki-link#anchor-ref">wiki text</a></p>
 .
 Document[0, 36]
   Paragraph[0, 36]
@@ -341,7 +341,7 @@ Links first, with text, empty anchor ref
 ```````````````````````````````` example(WikiLinks: 21) options(links-first)
 [[wiki link#|wiki text]] 
 .
-<p><a href="wiki-link.md#">wiki text</a></p>
+<p><a href="wiki-link#">wiki text</a></p>
 .
 Document[0, 26]
   Paragraph[0, 26]
@@ -354,7 +354,7 @@ Links first, with text, anchor ref
 ```````````````````````````````` example(WikiLinks: 22) options(links-first)
 [[wiki link#anchor-ref|wiki text]] 
 .
-<p><a href="wiki-link.md#anchor-ref">wiki text</a></p>
+<p><a href="wiki-link#anchor-ref">wiki text</a></p>
 .
 Document[0, 36]
   Paragraph[0, 36]
@@ -395,7 +395,7 @@ Custom prefix with empty anchor ref
 ```````````````````````````````` example(WikiLinks: 25) options(custom-prefix)
 [[wiki link#]]
 .
-<p><a href="/prefix/wiki-link.md#">wiki link</a></p>
+<p><a href="/prefix/wiki-link#">wiki link</a></p>
 .
 Document[0, 15]
   Paragraph[0, 15]
@@ -409,7 +409,7 @@ Custom prefix with anchor ref
 ```````````````````````````````` example(WikiLinks: 26) options(custom-prefix)
 [[wiki link#anchor-ref]]
 .
-<p><a href="/prefix/wiki-link.md#anchor-ref">wiki link</a></p>
+<p><a href="/prefix/wiki-link#anchor-ref">wiki link</a></p>
 .
 Document[0, 25]
   Paragraph[0, 25]
