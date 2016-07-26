@@ -3,6 +3,7 @@ flexmark-java
 
 [TOC]: # "## Version History"
 ## Version History
+- [0.4.11](#0411)
 - [0.4.10](#0410)
 - [0.4.9](#049)
 - [0.4.8](#048)
@@ -37,6 +38,12 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.11
+------
+
+- Fix `SimTocBlockParser` was not including the blank line spacer as part of the `SimTocContent`
+  node.
 
 0.4.10
 ------

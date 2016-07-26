@@ -363,7 +363,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 84]
   SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 83]
+    SimTocContent[71, 83]
       Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
 ````````````````````````````````
 
@@ -378,7 +378,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 83]
   SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 83]
+    SimTocContent[71, 83]
       BulletList[72, 83] isTight
         BulletListItem[72, 83] open:[72, 73, "-"] isTight
           Paragraph[74, 83]
@@ -397,7 +397,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 85]
   SimTocBlock[0, 85] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 85]
+    SimTocContent[71, 85]
       HtmlBlock[72, 85]
 ````````````````````````````````
 
@@ -461,7 +461,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 124]
   SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 83]
+    SimTocContent[71, 83]
       Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
   Heading[84, 98] textOpen:[84, 86, "##"] text:[87, 98, "Heading 1.1"]
     Text[87, 98] chars:[87, 98, "Headi … g 1.1"]
@@ -589,7 +589,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 158]
   SimTocBlock[0, 142] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 142]
+    SimTocContent[71, 142]
       Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
       BulletList[84, 142] isTight
         BulletListItem[84, 98] open:[84, 85, "-"] isTight
@@ -677,7 +677,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 188]
   SimTocBlock[0, 188] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 188]
+    SimTocContent[71, 188]
       HtmlBlock[72, 188]
 ````````````````````````````````
 
@@ -744,7 +744,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 129]
   SimTocBlock[0, 129] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 129]
+    SimTocContent[71, 129]
       HtmlBlock[72, 129]
 ````````````````````````````````
 
@@ -816,7 +816,7 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 .
 Document[0, 137]
   SimTocBlock[0, 104] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
-    SimTocContent[72, 104]
+    SimTocContent[71, 104]
       HtmlBlock[72, 104]
   HtmlBlock[105, 137]
 ````````````````````````````````

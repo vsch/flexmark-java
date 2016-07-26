@@ -9,10 +9,8 @@ import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.internal.util.options.ParsedOption;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.Heading;
-import com.vladsch.flexmark.node.HtmlBlock;
-import com.vladsch.flexmark.node.ListBlock;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 
@@ -43,6 +41,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
     //private BlockContent content = new BlockContent();
     private final SimTocOptions options;
     private int haveChildren = 0;
+    private BasedSequence blankLineSpacer = SubSequence.NULL;
 
     SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
         this.options = new SimTocOptions(options);
@@ -60,7 +59,10 @@ public class SimTocBlockParser extends AbstractBlockParser {
         if ((!options.isBlankLineSpacer || haveChildren != 0) && state.isBlank()) {
             return BlockContinue.none();
         } else {
-            if (state.isBlank()) haveChildren |= HAVE_BLANK_LINE;
+            if (state.isBlank()) {
+                haveChildren |= HAVE_BLANK_LINE;
+                blankLineSpacer = state.getLine();
+            }
             return BlockContinue.atIndex(state.getIndex());
         }
     }
@@ -111,6 +113,12 @@ public class SimTocBlockParser extends AbstractBlockParser {
             SimTocContent tocContent = new SimTocContent();
             tocContent.takeChildren(block);
             tocContent.setCharsFromContent();
+            
+            if (blankLineSpacer.isNotNull()) {
+                // need to extend the content node start to include the blank line
+                tocContent.setChars(Node.spanningChars(blankLineSpacer, tocContent.getChars()));
+            }
+
             block.appendChild(tocContent);
             block.setCharsFromContent();
             parserState.blockAddedWithChildren(tocContent);
