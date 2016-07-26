@@ -37,6 +37,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     final public static DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
     final public static DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
     final public static DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
+    final public static DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
 
     private SimTocExtension() {
     }

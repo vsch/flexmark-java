@@ -47,10 +47,51 @@ flexmark-java
 - Fix `ImageRef` and `LinkRef` did not properly set the source information for a dummy reference
   part of a reference `[ref][]`
 
+- Add a bunch of list parsing options to allow mimicking list parsing by various markdown
+  implementations:
+
+    - Add `Parser.LISTS_ITEM_TYPE_MATCH` when true a new list is started when the list item type
+      does not match an existing list type. When false bullet list can contain ordered list items
+      and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows mimicking
+      different parser behavior: kramdown, GFM, Markdown.pl, ...
+    
+    - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a sub
+      item instead of starting a new list. When false a new list will be started.
+      :information_source: only applicable if `Parser.LISTS_ITEM_TYPE_MATCH` is true.
+    
+    - Change `Parser.ORDERED_LIST_DOT_ONLY` to `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`
+    
+    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item can
+      interrupt a paragraph. i.e. start without having a blank line before
+    
+    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list sub
+      item can interrupt the parent item's item text paragraph.
+    
+    - Change `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to
+      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered list
+      item can interrupt a paragraph. i.e. can start without having a blank line before.
+      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only true
+      for items with 1. prefix, or any ordered item.
+    
+    - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered list
+      sub item can interrupt the parent item's item text paragraph.
+      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this is only true
+      for items with 1. prefix, or any ordered item.
+    
+    - Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
+    
+    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered item
+      can interrupt or only one starting with 1. :information_source: only applies if
+      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` is true.
+    
+    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether any
+      ordered item can interrupt or only one starting with 1. :information_source: only applies if
+      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
+    
 0.4.9
 -----
 
-- Fix #3, Incorrect emphasis close marker source offset 
+- Fix #3, Incorrect emphasis close marker source offset
 
 0.4.8
 -----
@@ -88,7 +129,7 @@ flexmark-java
 - Change move `Parsing` static strings and patterns into instance fields so that they can be
   changed according to selected options, making it easier to configure parsing patterns.
 
-- Change move all `InlineParserImpl` parsing string and patterns to `Parsing` 
+- Change move all `InlineParserImpl` parsing string and patterns to `Parsing`
 
 - Add `ParserState.getParsing()` to allow block parsers to use the current parsing config from
   the core. Extensions can extend this class for their own option dependent patterns.

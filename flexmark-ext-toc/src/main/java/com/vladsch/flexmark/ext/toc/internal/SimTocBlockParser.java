@@ -34,9 +34,10 @@ public class SimTocBlockParser extends AbstractBlockParser {
         }
     }
 
-    private static int HAVE_HTML = 1;
-    private static int HAVE_HEADING = 2;
-    private static int HAVE_LIST = 4;
+    static int HAVE_HTML = 1;
+    static int HAVE_HEADING = 2;
+    static int HAVE_LIST = 4;
+    static int HAVE_BLANK_LINE = 8;
 
     private final SimTocBlock block;
     //private BlockContent content = new BlockContent();
@@ -55,19 +56,24 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
-        // we stop on a blank line
-        return state.isBlank() ? BlockContinue.none() : BlockContinue.atIndex(state.getIndex());
+        // we stop on a blank line if blank line spacer is not enabled or we already had one
+        if ((!options.isBlankLineSpacer || haveChildren != 0) && state.isBlank()) {
+            return BlockContinue.none();
+        } else {
+            if (state.isBlank()) haveChildren |= HAVE_BLANK_LINE;
+            return BlockContinue.atIndex(state.getIndex());
+        }
     }
 
     @Override
     public boolean canContain(Block block) {
         if (block instanceof HtmlBlock) {
-            if (haveChildren == 0) {
+            if ((haveChildren & ~HAVE_BLANK_LINE) == 0) {
                 haveChildren |= HAVE_HTML;
                 return true;
             }
         } else if (block instanceof Heading) {
-            if (haveChildren == 0) {
+            if ((haveChildren & ~HAVE_BLANK_LINE) == 0) {
                 haveChildren |= HAVE_HEADING;
                 return true;
             }
@@ -162,7 +168,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
         private final TocOptions options;
         private final TocParsing myParsing;
 
-        private BlockFactory(DataHolder options) {
+        BlockFactory(DataHolder options) {
             super(options);
             this.options = new TocOptions(options);
             this.myParsing = new TocParsing(options);

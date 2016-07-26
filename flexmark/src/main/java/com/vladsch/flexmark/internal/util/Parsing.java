@@ -5,7 +5,7 @@ import com.vladsch.flexmark.parser.Parser;
 
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.parser.Parser.ORDERED_LIST_DOT_ONLY;
+import static com.vladsch.flexmark.parser.Parser.LISTS_ORDERED_ITEM_DOT_ONLY;
 
 public class Parsing {
     final public String ADDITIONAL_CHARS;
@@ -122,7 +122,7 @@ public class Parsing {
                 + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-        if (options.get(ORDERED_LIST_DOT_ONLY)) {
+        if (options.get(LISTS_ORDERED_ITEM_DOT_ONLY)) {
             this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
         } else {
             this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");

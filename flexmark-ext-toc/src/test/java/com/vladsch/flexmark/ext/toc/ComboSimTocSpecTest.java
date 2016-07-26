@@ -22,6 +22,7 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
     static {
         optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.IS_TEXT_ONLY, true));
         optionsMap.put("with-option-list", new MutableDataSet().set(SimTocExtension.AST_INCLUDE_OPTIONS, true));
+        optionsMap.put("blank-line-spacer", new MutableDataSet().set(SimTocExtension.BLANK_LINE_SPACER, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

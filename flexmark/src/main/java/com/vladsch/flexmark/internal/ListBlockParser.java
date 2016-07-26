@@ -97,6 +97,15 @@ public class ListBlockParser extends AbstractBlockParser {
             item = item.getNext();
         }
     }
+    
+    static Boolean isOrderedListMarker(BasedSequence line, Parsing parsing, int markerIndex) {
+        BasedSequence rest = line.subSequence(markerIndex, line.length());
+        Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
+        if (!matcher.find()) {
+            return null;
+        }
+        return !"+-*".contains(matcher.group()); 
+    }
 
     /**
      * Parse a list marker and return data on the marker or null.
@@ -109,6 +118,25 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         ListBlock listBlock = createListBlock(matcher);
+
+        if (inParagraph) {
+            // If the list item is ordered, the start number must be 1 to interrupt a paragraph.
+            if (listBlock instanceof OrderedList) {
+                if (inParagraphListItem) {
+                    if (!(options.orderedItemInterruptsItemParagraph && (options.orderedNonOneItemInterruptsParentItemParagraph || !options.orderedStart || ((OrderedList) listBlock).getStartNumber() == 1))) {
+                        return null;
+                    }
+                } else {
+                    if (!(options.orderedItemInterruptsParagraph && (options.orderedNonOneItemInterruptsParagraph || !options.orderedStart || ((OrderedList) listBlock).getStartNumber() == 1))) {
+                        return null;
+                    }
+                }
+            } else {
+                if (!(options.bulletItemInterruptsParagraph || options.bulletItemInterruptsItemParagraph && inParagraphListItem)) {
+                    return null;
+                }
+            }
+        }
 
         int markerLength = matcher.end() - matcher.start();
         boolean isNumberedList = !"+-*".contains(matcher.group());
@@ -133,12 +161,6 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         if (inParagraph) {
-            // If the list item is ordered, the start number must be 1 to interrupt a paragraph.
-            if (listBlock instanceof OrderedList && !(
-                    ((((OrderedList) listBlock).getStartNumber() == 1 || !options.orderedStart) && (options.orderedListInterruptsParagraph || (options.orderedSubItemInterruptsParentItem && inParagraphListItem))))) {
-                return null;
-            }
-            
             // Empty list item can not interrupt a paragraph.
             if (!hasContent) {
                 return null;
@@ -173,13 +195,29 @@ public class ListBlockParser extends AbstractBlockParser {
      * with the same delimiter and bullet character. This is used
      * in agglomerating list items into lists.
      */
-    static boolean listsMatch(boolean bulletMatch, ListBlock a, ListBlock b) {
-        if (a instanceof BulletList && b instanceof BulletList) {
-            return !bulletMatch || equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker());
-        } else if (a instanceof OrderedList && b instanceof OrderedList) {
-            return !bulletMatch || equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter());
+    enum ListMatchType {
+        PREFIX_MATCHED(true, true),
+        PREFIX_NOT_MATCHED(false, true),
+        TYPE_MISMATCHED_NEWLIST(false, false),
+        TYPE_MISMATCHED_IGNORE(false, false),
+        TYPE_MISMATCHED_SUBITEM(false, false);
+
+        final private boolean isPrefixMatched;
+        final private boolean isTypeMatched;
+
+        ListMatchType(boolean isPrefixMatched, boolean isTypeMatched) {
+            this.isPrefixMatched = isPrefixMatched;
+            this.isTypeMatched = isTypeMatched;
         }
-        return false;
+    }
+
+    static ListMatchType listsMatch(ListOptions options, ListBlock a, ListBlock b) {
+        if (a instanceof BulletList && b instanceof BulletList) {
+            return !options.bulletMatch || equals(((BulletList) a).getOpeningMarker(), ((BulletList) b).getOpeningMarker()) ? ListMatchType.PREFIX_MATCHED : ListMatchType.PREFIX_NOT_MATCHED;
+        } else if (a instanceof OrderedList && b instanceof OrderedList) {
+            return !options.bulletMatch || equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter()) ? ListMatchType.PREFIX_MATCHED : ListMatchType.PREFIX_NOT_MATCHED;
+        }
+        return options.itemTypeMatch ? (options.itemMismatchToSubitem ? ListMatchType.TYPE_MISMATCHED_SUBITEM : ListMatchType.TYPE_MISMATCHED_NEWLIST) : ListMatchType.TYPE_MISMATCHED_IGNORE;
     }
 
     private static boolean equals(Object a, Object b) {
@@ -240,10 +278,6 @@ public class ListBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            if (!options.listInterruptsParagraph && matched.isParagraphParser()) {
-                return BlockStart.none();
-            }
-
             ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
 
             if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemIndent + options.fixedIndent) {
@@ -261,17 +295,31 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             int newContentColumn = options.fixedIndent > 0 ? state.getColumn() + options.fixedIndent : listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
+            ListItemParser listItemParser = new ListItemParser(options, state.getParsing(), newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
 
             int newColumn = listData.contentColumn;
             // prepend the list block if needed
-            if (listBlockParser == null || !listsMatch(options.bulletMatch, (ListBlock) matched.getBlock(), listData.listBlock)) {
+            if (listBlockParser == null) {
                 listBlockParser = new ListBlockParser(options, listData);
                 listBlockParser.setTight(true);
 
                 return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
             } else {
-                return BlockStart.of(listItemParser).atColumn(newColumn);
+                ListMatchType matchType = listsMatch(options, (ListBlock) matched.getBlock(), listData.listBlock);
+                if (matchType == ListMatchType.PREFIX_NOT_MATCHED || matchType == ListMatchType.TYPE_MISMATCHED_NEWLIST) {
+                    listBlockParser = new ListBlockParser(options, listData);
+                    listBlockParser.setTight(true);
+
+                    return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
+                } else if (matchType == ListMatchType.TYPE_MISMATCHED_SUBITEM) {
+                    // need to start a new sub-item list
+                    listBlockParser = new ListBlockParser(options, listData);
+                    listBlockParser.setTight(true);
+
+                    return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
+                } else {
+                    return BlockStart.of(listItemParser).atColumn(newColumn);
+                }
             }
         }
     }

@@ -353,9 +353,506 @@ Document[0, 135]
 ````````````````````````````````
 
 
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 15) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+# Heading 1
+.
+.
+Document[0, 84]
+  SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 83]
+      Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 16) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+- asfdasfd
+.
+.
+Document[0, 83]
+  SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 83]
+      BulletList[72, 83] isTight
+        BulletListItem[72, 83] open:[72, 73, "-"] isTight
+          Paragraph[74, 83]
+            Text[74, 82] chars:[74, 82, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 17) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+<div>
+</div>
+.
+.
+Document[0, 85]
+  SimTocBlock[0, 85] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 85]
+      HtmlBlock[72, 85]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 18) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+# Heading 1
+## Heading 1.1
+- afdasfdsadf
+- asfdasfd
+.
+<div><h1>Table of Contents</h1>
+  <ol>
+    <li><a href="#heading-11">Heading 1.1</a></li>
+  </ol>
+</div>
+<h2 id="heading-11">Heading 1.1</h2>
+<ul>
+  <li>afdasfdsadf</li>
+  <li>asfdasfd</li>
+</ul>
+.
+Document[0, 123]
+  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 82]
+      Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
+  Heading[83, 97] textOpen:[83, 85, "##"] text:[86, 97, "Heading 1.1"]
+    Text[86, 97] chars:[86, 97, "Headi … g 1.1"]
+  BulletList[98, 123] isTight
+    BulletListItem[98, 112] open:[98, 99, "-"] isTight
+      Paragraph[100, 112]
+        Text[100, 111] chars:[100, 111, "afdas … dsadf"]
+    BulletListItem[112, 123] open:[112, 113, "-"] isTight
+      Paragraph[114, 123]
+        Text[114, 122] chars:[114, 122, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 19) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+# Heading 1
+## Heading 1.1
+- afdasfdsadf
+- asfdasfd
+.
+<div><h1>Table of Contents</h1>
+  <ol>
+    <li><a href="#heading-11">Heading 1.1</a></li>
+  </ol>
+</div>
+<h2 id="heading-11">Heading 1.1</h2>
+<ul>
+  <li>afdasfdsadf</li>
+  <li>asfdasfd</li>
+</ul>
+.
+Document[0, 124]
+  SimTocBlock[0, 83] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 83]
+      Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
+  Heading[84, 98] textOpen:[84, 86, "##"] text:[87, 98, "Heading 1.1"]
+    Text[87, 98] chars:[87, 98, "Headi … g 1.1"]
+  BulletList[99, 124] isTight
+    BulletListItem[99, 113] open:[99, 100, "-"] isTight
+      Paragraph[101, 113]
+        Text[101, 112] chars:[101, 112, "afdas … dsadf"]
+    BulletListItem[113, 124] open:[113, 114, "-"] isTight
+      Paragraph[115, 124]
+        Text[115, 123] chars:[115, 123, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 20) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+# Heading 1
+
+- afdasfdsadf
+- asfdasfd
+.
+<ul>
+  <li>afdasfdsadf</li>
+  <li>asfdasfd</li>
+</ul>
+.
+Document[0, 109]
+  SimTocBlock[0, 82] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 82]
+      Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
+  BulletList[84, 109] isTight
+    BulletListItem[84, 98] open:[84, 85, "-"] isTight
+      Paragraph[86, 98]
+        Text[86, 97] chars:[86, 97, "afdas … dsadf"]
+    BulletListItem[98, 109] open:[98, 99, "-"] isTight
+      Paragraph[100, 109]
+        Text[100, 108] chars:[100, 108, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 21) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+- afdasfdsadf
+- asfdasfd
+
+# Heading 1
+.
+<h1 id="heading-1">Heading 1</h1>
+.
+Document[0, 109]
+  SimTocBlock[0, 96] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 96]
+      BulletList[71, 96] isTight
+        BulletListItem[71, 85] open:[71, 72, "-"] isTight
+          Paragraph[73, 85]
+            Text[73, 84] chars:[73, 84, "afdas … dsadf"]
+        BulletListItem[85, 96] open:[85, 86, "-"] isTight
+          Paragraph[87, 96]
+            Text[87, 95] chars:[87, 95, "asfdasfd"]
+  Heading[97, 108] textOpen:[97, 98, "#"] text:[99, 108, "Heading 1"]
+    Text[99, 108] chars:[99, 108, "Heading 1"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 22) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+# Heading 1
+- afdasfdsadf
+- asfdasfd
+    - afdasfdsadf
+    - asfdasfd
+    
+- asfdasfd
+.
+<ul>
+  <li>asfdasfd</li>
+</ul>
+.
+Document[0, 157]
+  SimTocBlock[0, 141] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 141]
+      Heading[71, 82] textOpen:[71, 72, "#"] text:[73, 82, "Heading 1"]
+      BulletList[83, 141] isTight
+        BulletListItem[83, 97] open:[83, 84, "-"] isTight
+          Paragraph[85, 97]
+            Text[85, 96] chars:[85, 96, "afdas … dsadf"]
+        BulletListItem[97, 141] open:[97, 98, "-"] isTight
+          Paragraph[99, 108]
+            Text[99, 107] chars:[99, 107, "asfdasfd"]
+          BulletList[112, 141] isTight
+            BulletListItem[112, 126] open:[112, 113, "-"] isTight
+              Paragraph[114, 126]
+                Text[114, 125] chars:[114, 125, "afdas … dsadf"]
+            BulletListItem[130, 141] open:[130, 131, "-"] isTight
+              Paragraph[132, 141]
+                Text[132, 140] chars:[132, 140, "asfdasfd"]
+  BulletList[146, 157] isTight
+    BulletListItem[146, 157] open:[146, 147, "-"] isTight
+      Paragraph[148, 157]
+        Text[148, 156] chars:[148, 156, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 23) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+# Heading 1
+- afdasfdsadf
+- asfdasfd
+    - afdasfdsadf
+    - asfdasfd
+    
+- asfdasfd
+.
+<ul>
+  <li>asfdasfd</li>
+</ul>
+.
+Document[0, 158]
+  SimTocBlock[0, 142] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 142]
+      Heading[72, 83] textOpen:[72, 73, "#"] text:[74, 83, "Heading 1"]
+      BulletList[84, 142] isTight
+        BulletListItem[84, 98] open:[84, 85, "-"] isTight
+          Paragraph[86, 98]
+            Text[86, 97] chars:[86, 97, "afdas … dsadf"]
+        BulletListItem[98, 142] open:[98, 99, "-"] isTight
+          Paragraph[100, 109]
+            Text[100, 108] chars:[100, 108, "asfdasfd"]
+          BulletList[113, 142] isTight
+            BulletListItem[113, 127] open:[113, 114, "-"] isTight
+              Paragraph[115, 127]
+                Text[115, 126] chars:[115, 126, "afdas … dsadf"]
+            BulletListItem[131, 142] open:[131, 132, "-"] isTight
+              Paragraph[133, 142]
+                Text[133, 141] chars:[133, 141, "asfdasfd"]
+  BulletList[147, 158] isTight
+    BulletListItem[147, 158] open:[147, 148, "-"] isTight
+      Paragraph[149, 158]
+        Text[149, 157] chars:[149, 157, "asfdasfd"]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, no blank lines
+
+```````````````````````````````` example(SimToc: 24) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+<div>
+  <h1>Content</h1>
+  <ul>
+      <li>blah blah</li>  
+      
+      <li>blah blah</li>  
+  </ul>
+</div>
+.
+<pre><code>  &lt;li&gt;blah blah&lt;/li&gt;  
+</code></pre>
+  </ul>
+</div>
+.
+Document[0, 179]
+  SimTocBlock[0, 130] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 130]
+      HtmlBlock[71, 130]
+  IndentedCodeBlock[141, 164]
+  HtmlBlock[164, 179]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 25) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+<div>
+  <h1>Content</h1>
+  <ul>
+      <li>blah blah</li>  
+      <li>blah blah</li>  
+  </ul>
+</div>
+## Heading 1.1
+.
+.
+Document[0, 187]
+  SimTocBlock[0, 187] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 187]
+      HtmlBlock[71, 187]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 26) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+<div>
+  <h1>Content</h1>
+  <ul>
+      <li>blah blah</li>  
+      <li>blah blah</li>  
+  </ul>
+</div>
+## Heading 1.1
+.
+.
+Document[0, 188]
+  SimTocBlock[0, 188] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 188]
+      HtmlBlock[72, 188]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 27) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+
+<div>
+  <h1>Content</h1>
+  <ul>
+      <li>blah blah</li>  
+      <li>blah blah</li>  
+  </ul>
+</div>
+## Heading 1.1
+.
+<div>
+  <h1>Content</h1>
+  <ul>
+      <li>blah blah</li>  
+      <li>blah blah</li>  
+  </ul>
+</div>
+## Heading 1.1
+.
+Document[0, 189]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+  HtmlBlock[73, 189]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 28) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+<div>
+  <h1>Content</h1>
+</div>
+- afdasfdsadf
+- asfdasfd
+.
+.
+Document[0, 128]
+  SimTocBlock[0, 128] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 128]
+      HtmlBlock[71, 128]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 29) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+<div>
+  <h1>Content</h1>
+</div>
+- afdasfdsadf
+- asfdasfd
+.
+.
+Document[0, 129]
+  SimTocBlock[0, 129] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 129]
+      HtmlBlock[72, 129]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 30) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+
+<div>
+  <h1>Content</h1>
+</div>
+- afdasfdsadf
+- asfdasfd
+.
+<div>
+  <h1>Content</h1>
+</div>
+- afdasfdsadf
+- asfdasfd
+.
+Document[0, 130]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+  HtmlBlock[73, 130]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 31) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+<div>
+  <h1>Content</h1>
+</div>
+
+<div>
+  <h1>Content</h1>
+</div>
+.
+<div>
+  <h1>Content</h1>
+</div>
+.
+Document[0, 136]
+  SimTocBlock[0, 103] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[71, 103]
+      HtmlBlock[71, 103]
+  HtmlBlock[104, 136]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 32) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+<div>
+  <h1>Content</h1>
+</div>
+
+<div>
+  <h1>Content</h1>
+</div>
+.
+<div>
+  <h1>Content</h1>
+</div>
+.
+Document[0, 137]
+  SimTocBlock[0, 104] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+    SimTocContent[72, 104]
+      HtmlBlock[72, 104]
+  HtmlBlock[105, 137]
+````````````````````````````````
+
+
+Absorbs only valid combinations, HTML or Heading with List, with one leading blank line
+
+```````````````````````````````` example(SimToc: 33) options(blank-line-spacer)
+[TOC levels=a,b,c,d html markdown text formatted bullet numbered]: #  
+
+
+<div>
+  <h1>Content</h1>
+</div>
+
+<div>
+  <h1>Content</h1>
+</div>
+.
+<div>
+  <h1>Content</h1>
+</div>
+<div>
+  <h1>Content</h1>
+</div>
+.
+Document[0, 138]
+  SimTocBlock[0, 71] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 64] closingMarker:[64, 66] anchorMarker:[67, 68, "#"]
+  HtmlBlock[73, 105]
+  HtmlBlock[106, 138]
+````````````````````````````````
+
+
 Default rendering with emphasis
 
-```````````````````````````````` example SimToc: 15
+```````````````````````````````` example SimToc: 34
 [TOC]:#  
 
 # Heading **some bold** 1
@@ -400,7 +897,7 @@ Document[0, 126]
 
 With option nodes in the ast
 
-```````````````````````````````` example(SimToc: 16) options(with-option-list)
+```````````````````````````````` example(SimToc: 35) options(with-option-list)
 [TOC levels=a,b,c,d html markdown text formatted bullet numbered]: # 
 .
 .
@@ -419,7 +916,7 @@ Document[0, 70]
 
 options, empty title
 
-```````````````````````````````` example SimToc: 17
+```````````````````````````````` example SimToc: 36
 [TOC levels=3]:# ""
 [TOC levels=3]:# ''
 .
@@ -432,7 +929,7 @@ Document[0, 40]
 
 options, title
 
-```````````````````````````````` example SimToc: 18
+```````````````````````````````` example SimToc: 37
 [TOC levels=3]:# "title"
 [TOC levels=3]:# 'title'
 .
@@ -445,7 +942,7 @@ Document[0, 50]
 
 options, markers, empty title
 
-```````````````````````````````` example SimToc: 19
+```````````````````````````````` example SimToc: 38
 [TOC levels=3]:# "## "
 [TOC levels=3]:# '## '
 .
@@ -458,7 +955,7 @@ Document[0, 46]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 20
+```````````````````````````````` example SimToc: 39
 [TOC levels=3]:# "##title"
 [TOC levels=3]:# '##title'
 .
@@ -471,7 +968,7 @@ Document[0, 54]
 
 options, markers, title
 
-```````````````````````````````` example SimToc: 21
+```````````````````````````````` example SimToc: 40
 [TOC levels=3]:# "## title"
 [TOC levels=3]:# '## title'
 .
