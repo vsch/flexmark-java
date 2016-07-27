@@ -39,6 +39,7 @@ public class EmojiNodeRenderer implements NodeRenderer {
 
             html.attr("src", resolvedLink.getUrl());
             html.attr("alt", "emoji " + shortcut.category + ":" + shortcut.name);
+            html.attr("height", "20").attr("width", "20").attr("align", "absmiddle");
             html.withAttr(resolvedLink);
             html.tagVoid("img");
         }

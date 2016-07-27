@@ -56,6 +56,8 @@ flexmark-java
 - Add test in `HtmlRenderer.MainNodeRenderer.resolveLink(LinkType, String, Boolean)` for empty
   url in which case no link resolvers are called.
 
+- Fix emoji renderer was not setting image height, width nor align attributes
+
 0.4.11
 ------
 
