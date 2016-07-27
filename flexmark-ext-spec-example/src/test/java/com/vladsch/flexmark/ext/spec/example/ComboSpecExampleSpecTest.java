@@ -18,7 +18,7 @@ public class ComboSpecExampleSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(SpecExampleExtension.SPEC_EXAMPLE_BREAK, SpecReader.EXAMPLE_TEST_BREAK)
             .set(SpecExampleExtension.SPEC_TYPE_BREAK, SpecReader.TYPE_TEST_BREAK)
-            .set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.SIMPLE)
+            .set(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS, RenderAs.SECTIONS)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(SpecExampleExtension.create()));
 

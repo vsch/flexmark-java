@@ -21,9 +21,10 @@ public class ComboEmojiSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("url", new MutableDataSet()
-                .set(EmojiExtension.USE_IMAGE_URLS, true)
-        );
+        optionsMap.put("url", new MutableDataSet().set(EmojiExtension.USE_IMAGE_URLS, true));
+        optionsMap.put("size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, "40"));
+        optionsMap.put("no-size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, ""));
+        optionsMap.put("no-align", new MutableDataSet().set(EmojiExtension.ATTR_ALIGN, ""));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

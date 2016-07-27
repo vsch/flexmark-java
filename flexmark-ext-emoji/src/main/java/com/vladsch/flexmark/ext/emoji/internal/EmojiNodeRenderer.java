@@ -13,10 +13,14 @@ import java.util.Set;
 public class EmojiNodeRenderer implements NodeRenderer {
     private final String rootImagePath;
     private final boolean useImageURL;
+    private final String attrImageSize;
+    private final String attrAlign;
 
     public EmojiNodeRenderer(DataHolder options) {
         this.rootImagePath = options.get(EmojiExtension.ROOT_IMAGE_PATH);
         this.useImageURL = options.get(EmojiExtension.USE_IMAGE_URLS);
+        this.attrImageSize = options.get(EmojiExtension.ATTR_IMAGE_SIZE);
+        this.attrAlign = options.get(EmojiExtension.ATTR_ALIGN);
     }
 
     @Override
@@ -39,7 +43,8 @@ public class EmojiNodeRenderer implements NodeRenderer {
 
             html.attr("src", resolvedLink.getUrl());
             html.attr("alt", "emoji " + shortcut.category + ":" + shortcut.name);
-            html.attr("height", "20").attr("width", "20").attr("align", "absmiddle");
+            if (!attrImageSize.isEmpty()) html.attr("height", attrImageSize).attr("width", attrImageSize);
+            if (!attrAlign.isEmpty()) html.attr("align", attrAlign);
             html.withAttr(resolvedLink);
             html.tagVoid("img");
         }

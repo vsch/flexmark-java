@@ -15,7 +15,49 @@ Converts :warning: to its emoji image
 ```````````````````````````````` example Emoji: 1
 :warning:
 .
-<p><img src="/img/warning.png" alt="emoji places:warning" /></p>
+<p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
+      Text[1, 8] chars:[1, 8, "warning"]
+````````````````````````````````
+
+
+change size
+
+```````````````````````````````` example(Emoji: 2) options(size)
+:warning:
+.
+<p><img src="/img/warning.png" alt="emoji places:warning" height="40" width="40" align="absmiddle" /></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
+      Text[1, 8] chars:[1, 8, "warning"]
+````````````````````````````````
+
+
+no size
+
+```````````````````````````````` example(Emoji: 3) options(no-size)
+:warning:
+.
+<p><img src="/img/warning.png" alt="emoji places:warning" align="absmiddle" /></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
+      Text[1, 8] chars:[1, 8, "warning"]
+````````````````````````````````
+
+
+no align
+
+```````````````````````````````` example(Emoji: 4) options(no-align)
+:warning:
+.
+<p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" /></p>
 .
 Document[0, 10]
   Paragraph[0, 10]
@@ -26,10 +68,10 @@ Document[0, 10]
 
 Should work in links
 
-```````````````````````````````` example Emoji: 2
+```````````````````````````````` example Emoji: 5
 [:warning:](/url)
 .
-<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
+<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
 Document[0, 18]
   Paragraph[0, 18]
@@ -39,10 +81,10 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 3) options(url)
+```````````````````````````````` example(Emoji: 6) options(url)
 :warning:
 .
-<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" /></p>
+<p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 10]
   Paragraph[0, 10]
@@ -53,10 +95,10 @@ Document[0, 10]
 
 Should work in links
 
-```````````````````````````````` example Emoji: 4
+```````````````````````````````` example Emoji: 7
 [:warning:](/url)
 .
-<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" /></a></p>
+<p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
 Document[0, 18]
   Paragraph[0, 18]
@@ -68,7 +110,7 @@ Document[0, 18]
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 5
+```````````````````````````````` example Emoji: 8
 :warnings:
 .
 <p>:warnings:</p>
@@ -82,7 +124,7 @@ Document[0, 11]
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 6
+```````````````````````````````` example Emoji: 9
 :**warnings**:
 .
 <p>:<strong>warnings</strong>:</p>

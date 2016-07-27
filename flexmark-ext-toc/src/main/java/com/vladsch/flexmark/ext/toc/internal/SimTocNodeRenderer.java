@@ -54,7 +54,7 @@ public class SimTocNodeRenderer implements NodeRenderer {
             TocOptions options = optionsParser.parseOption(node.getStyle(), this.options, null).getFirst();
             
             if (node.getTitle().isNotNull()) {
-                options = options.withTitle(node.getTitle().toString());
+                options = options.withTitle(node.getTitle().unescape());
             }
             renderTocHeaders(context, html, headings, options);
         }

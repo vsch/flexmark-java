@@ -18,6 +18,7 @@ Empty
 ```````````````` example
 ````````````````
 .
+<hr />
 .
 Document[0, 42]
   SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] closingMarker:[25, 41]
@@ -31,6 +32,7 @@ Empty with nbsp for space on first line
 ```````````````` example
 ````````````````
 .
+<hr />
 .
 Document[0, 42]
   SpecExampleBlock[0, 41] openingMarker:[0, 16] exampleKeyword:[17, 24] closingMarker:[25, 41]
@@ -63,7 +65,6 @@ Two spacers
 …
 ````````````````
 .
-<hr />
 <hr />
 .
 Document[0, 46]
@@ -106,6 +107,8 @@ Source Only
 Markdown only
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="language-markdown">Markdown only</code></pre>
 .
 Document[0, 56]
@@ -122,8 +125,9 @@ Markdown only
 …
 ````````````````
 .
-<pre><code class="language-markdown">Markdown only</code></pre>
 <hr />
+<hr />
+<pre><code class="language-markdown">Markdown only</code></pre>
 .
 Document[0, 58]
   SpecExampleBlock[0, 57] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 41] closingMarker:[41, 57]
@@ -142,9 +146,9 @@ Markdown only
 …
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="language-markdown">Markdown only</code></pre>
-<hr />
-<hr />
 .
 Document[0, 60]
   SpecExampleBlock[0, 59] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 41] astSeparator:[41, 43] ast:[43, 43] closingMarker:[43, 59]
@@ -167,6 +171,7 @@ Html Only, no AST
 </ul>
 ````````````````
 .
+<hr />
 <hr />
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
@@ -199,6 +204,7 @@ Html Only, empty AST
 ````````````````
 .
 <hr />
+<hr />
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
   &lt;li&gt;List item&lt;/li&gt;
@@ -208,7 +214,6 @@ Html Only, empty AST
 <ul>
   <li>List item</li>
 </ul></div>
-<hr />
 .
 Document[0, 142]
   SpecExampleBlock[0, 141] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 25] htmlSeparator:[25, 27] html:[27, 122] astSeparator:[123, 125] ast:[125, 125] closingMarker:[125, 141]
@@ -259,6 +264,8 @@ Markdown only
 </ul>
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="language-markdown">Markdown only</code></pre>
 <hr />
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
@@ -292,6 +299,8 @@ Markdown only
 …
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="language-markdown">Markdown only</code></pre>
 <hr />
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
@@ -303,7 +312,6 @@ Markdown only
 <ul>
   <li>List item</li>
 </ul></div>
-<hr />
 .
 Document[0, 156]
   SpecExampleBlock[0, 155] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 139] closingMarker:[139, 155]
@@ -331,6 +339,8 @@ Document[0, 56]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="language-markdown">Markdown only</code></pre>
 <hr />
 <pre><code class="language-html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
@@ -373,6 +383,8 @@ Document[0, 56]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
 ````````````````
 .
+<hr />
+<hr />
 <pre><code class="markdown">Markdown only</code></pre>
 <hr />
 <pre><code class="html">&lt;pre&gt;&lt;code class=&quot;language-markdown&quot;&gt;Markdown only&lt;/code&gt;&lt;/pre&gt;
@@ -405,6 +417,8 @@ Plain Coordinates, section
 ```````````````` example Section
 ````````````````
 .
+<hr />
+<h5>Section: </h5>
 .
 Document[0, 50]
   SpecExampleBlock[0, 49] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] closingMarker:[33, 49]
@@ -418,6 +432,8 @@ Plain Coordinates, number
 ```````````````` example :number
 ````````````````
 .
+<hr />
+<h5>: number</h5>
 .
 Document[0, 50]
   SpecExampleBlock[0, 49] openingMarker:[0, 16] exampleKeyword:[17, 24] numberSeparator:[25, 26] number:[26, 32] closingMarker:[33, 49]
@@ -434,7 +450,7 @@ Plain Coordinates, section and number
 ````````````````
 .
 <hr />
-<hr />
+<h5>Section: number</h5>
 .
 Document[0, 61]
   SpecExampleBlock[0, 60] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] source:[40, 40] htmlSeparator:[40, 42] html:[42, 42] astSeparator:[42, 44] ast:[44, 44] closingMarker:[44, 60]
@@ -452,6 +468,8 @@ Wrapped Coordinates, section
 ```````````````` example(Section)
 ````````````````
 .
+<hr />
+<h5>Section: </h5>
 .
 Document[0, 51]
   SpecExampleBlock[0, 50] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] coordClosingMarker:[32, 33] closingMarker:[34, 50]
@@ -465,6 +483,8 @@ Wrapped Coordinates, number
 ```````````````` example(:number)
 ````````````````
 .
+<hr />
+<h5>: number</h5>
 .
 Document[0, 51]
   SpecExampleBlock[0, 50] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] numberSeparator:[25, 26] number:[26, 32] coordClosingMarker:[32, 33] closingMarker:[34, 50]
@@ -481,7 +501,7 @@ Wrapped Coordinates, section and number
 ````````````````
 .
 <hr />
-<hr />
+<h5>Section: number</h5>
 .
 Document[0, 62]
   SpecExampleBlock[0, 61] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] coordClosingMarker:[39, 40] source:[41, 41] htmlSeparator:[41, 43] html:[43, 43] astSeparator:[43, 45] ast:[45, 45] closingMarker:[45, 61]
@@ -499,6 +519,8 @@ Wrapped Coordinates, section
 ```````````````` example(Section
 ````````````````
 .
+<hr />
+<h5>Section: </h5>
 .
 Document[0, 50]
   SpecExampleBlock[0, 49] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] closingMarker:[33, 49]
@@ -512,6 +534,8 @@ Wrapped Coordinates, number
 ```````````````` example(:number
 ````````````````
 .
+<hr />
+<h5>: number</h5>
 .
 Document[0, 50]
   SpecExampleBlock[0, 49] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] numberSeparator:[25, 26] number:[26, 32] closingMarker:[33, 49]
@@ -528,7 +552,7 @@ Wrapped Coordinates, section and number
 ````````````````
 .
 <hr />
-<hr />
+<h5>Section: number</h5>
 .
 Document[0, 61]
   SpecExampleBlock[0, 60] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] source:[40, 40] htmlSeparator:[40, 42] html:[42, 42] astSeparator:[42, 44] ast:[44, 44] closingMarker:[44, 60]
@@ -546,6 +570,8 @@ Wrapped Coordinates, section
 ```````````````` example Section)
 ````````````````
 .
+<hr />
+<h5>Section: </h5>
 .
 Document[0, 51]
   SpecExampleBlock[0, 50] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] coordClosingMarker:[32, 33] closingMarker:[34, 50]
@@ -559,6 +585,8 @@ Wrapped Coordinates, number
 ```````````````` example :number)
 ````````````````
 .
+<hr />
+<h5>: number</h5>
 .
 Document[0, 51]
   SpecExampleBlock[0, 50] openingMarker:[0, 16] exampleKeyword:[17, 24] numberSeparator:[25, 26] number:[26, 32] coordClosingMarker:[32, 33] closingMarker:[34, 50]
@@ -575,7 +603,7 @@ Wrapped Coordinates, section and number
 ````````````````
 .
 <hr />
-<hr />
+<h5>Section: number</h5>
 .
 Document[0, 62]
   SpecExampleBlock[0, 61] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] coordClosingMarker:[39, 40] source:[41, 41] htmlSeparator:[41, 43] html:[43, 43] astSeparator:[43, 45] ast:[45, 45] closingMarker:[45, 61]
@@ -593,6 +621,7 @@ Plain options
 ```````````````` example options
 ````````````````
 .
+<hr />
 .
 Document[0, 50]
   SpecExampleBlock[0, 49] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] options:[32, 32] closingMarker:[33, 49]
@@ -607,6 +636,7 @@ Wrapped options
 ```````````````` example options()
 ````````````````
 .
+<hr />
 .
 Document[0, 52]
   SpecExampleBlock[0, 51] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 33] optionsClosingMarker:[33, 34] closingMarker:[35, 51]
@@ -623,7 +653,6 @@ Wrapped options
 …
 ````````````````
 .
-<hr />
 <hr />
 .
 Document[0, 55]
@@ -646,7 +675,6 @@ Unwrapped options as section
 ````````````````
 .
 <hr />
-<hr />
 .
 Document[0, 55]
   SpecExampleBlock[0, 54] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] options:[32, 32] optionsClosingMarker:[32, 33] source:[34, 34] htmlSeparator:[34, 36] html:[36, 36] astSeparator:[36, 38] ast:[38, 38] closingMarker:[38, 54]
@@ -665,6 +693,7 @@ Plain options
 ```````````````` example options option
 ````````````````
 .
+<hr />
 .
 Document[0, 57]
   SpecExampleBlock[0, 56] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] options:[33, 39] closingMarker:[40, 56]
@@ -680,6 +709,7 @@ Wrapped options
 ```````````````` example options(option)
 ````````````````
 .
+<hr />
 .
 Document[0, 58]
   SpecExampleBlock[0, 57] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 39] optionsClosingMarker:[39, 40] closingMarker:[41, 57]
@@ -697,7 +727,6 @@ Wrapped options
 …
 ````````````````
 .
-<hr />
 <hr />
 .
 Document[0, 61]
@@ -721,7 +750,6 @@ Unwrapped options as section
 ````````````````
 .
 <hr />
-<hr />
 .
 Document[0, 62]
   SpecExampleBlock[0, 61] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] options:[33, 39] optionsClosingMarker:[39, 40] source:[41, 41] htmlSeparator:[41, 43] html:[43, 43] astSeparator:[43, 45] ast:[45, 45] closingMarker:[45, 61]
@@ -741,6 +769,7 @@ Wrapped options
 ```````````````` example options(1, 2,, ,  ,3 , 4 )
 ````````````````
 .
+<hr />
 .
 Document[0, 69]
   SpecExampleBlock[0, 68] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 50] optionsClosingMarker:[50, 51] closingMarker:[52, 68]
@@ -765,6 +794,8 @@ Unwrapped coords Wrapped options
 ```````````````` example section:number options(1, 2,3 , 4 )
 ````````````````
 .
+<hr />
+<h5>section: number</h5>
 .
 Document[0, 78]
   SpecExampleBlock[0, 77] openingMarker:[0, 16] exampleKeyword:[17, 24] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] optionsKeyword:[40, 47] optionsOpeningMarker:[47, 48] options:[48, 59] optionsClosingMarker:[59, 60] closingMarker:[61, 77]
@@ -786,6 +817,8 @@ Wrapped coords Wrapped options
 ```````````````` example(section:number) options(1, 2,3 , 4 )
 ````````````````
 .
+<hr />
+<h5>section: number</h5>
 .
 Document[0, 79]
   SpecExampleBlock[0, 78] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[33, 39] coordClosingMarker:[39, 40] optionsKeyword:[41, 48] optionsOpeningMarker:[48, 49] options:[49, 60] optionsClosingMarker:[60, 61] closingMarker:[62, 78]
@@ -911,6 +944,7 @@ No option nodes
 ```````````````` example options(1, 2,, ,  ,3 , 4 )
 ````````````````
 .
+<hr />
 .
 Document[0, 69]
   SpecExampleBlock[0, 68] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 50] optionsClosingMarker:[50, 51] closingMarker:[52, 68]

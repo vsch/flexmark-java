@@ -19,8 +19,10 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final public static DataKey<String> ROOT_IMAGE_PATH = new DataKey<String>("ROOT_IMAGE_PATH", "/img/");
-    final public static DataKey<Boolean> USE_IMAGE_URLS = new DataKey<Boolean>("USE_IMAGE_URLS", false);
+    final public static DataKey<String> ATTR_ALIGN = new DataKey<>("ATTR_ALIGN", "absmiddle");
+    final public static DataKey<String> ATTR_IMAGE_SIZE = new DataKey<>("ATTR_IMAGE_SIZE", "20");
+    final public static DataKey<String> ROOT_IMAGE_PATH = new DataKey<>("ROOT_IMAGE_PATH", "/img/");
+    final public static DataKey<Boolean> USE_IMAGE_URLS = new DataKey<>("USE_IMAGE_URLS", false);
 
     private EmojiExtension() {
     }

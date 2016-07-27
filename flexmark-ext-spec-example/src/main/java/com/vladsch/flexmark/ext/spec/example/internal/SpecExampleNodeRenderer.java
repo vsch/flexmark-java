@@ -53,8 +53,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
             case DEFINITION_LIST:
                 break;
 
-            case SIMPLE:
-                html.tagVoidLine("hr");
+            case SECTIONS:
                 break;
 
             case FENCED_CODE:
@@ -73,8 +72,11 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 html.tag("/dd").line();
                 break;
 
-            case SIMPLE:
-                render(text, "markdown", context, html);
+            case SECTIONS:
+                if (!text.isEmpty()) {
+                    html.tagVoidLine("hr");
+                    render(text, "markdown", context, html);
+                }
                 break;
 
             case FENCED_CODE:
@@ -99,11 +101,14 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 }
                 break;
 
-            case SIMPLE:
-                render(text, "html", context, html);
-                if (options.renderHtml && !text.isEmpty()) {
+            case SECTIONS:
+                if (!text.isEmpty()) {
                     html.tagVoidLine("hr");
-                    html.raw(options.renderedHtmlPrefix).raw(text).raw(options.renderedHtmlSuffix).line();
+                    render(text, "html", context, html);
+                    if (options.renderHtml) {
+                        html.tagVoidLine("hr");
+                        html.raw(options.renderedHtmlPrefix).raw(text).raw(options.renderedHtmlSuffix).line();
+                    }
                 }
                 break;
 
@@ -124,8 +129,11 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 html.tag("/dd").line();
                 break;
 
-            case SIMPLE:
-                render(text, "text", context, html);
+            case SECTIONS:
+                if (!text.isEmpty()) {
+                    html.tagVoidLine("hr");
+                    render(text, "text", context, html);
+                }
                 break;
 
             case FENCED_CODE:
@@ -162,7 +170,11 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 html.unIndent().tag("/dl").line();
                 break;
 
-            case SIMPLE:
+            case SECTIONS:
+                html.tagVoidLine("hr");
+                if (node.getSection().isNotNull() || node.getNumberSeparator().isNotNull() || node.getNumber().isNotNull()) {
+                    html.tag("h5").text(node.getSection().toString()).text(": ").text(node.getNumber().toString()).tag("/h5").line();
+                }
                 context.renderChildren(node);
                 break;
 

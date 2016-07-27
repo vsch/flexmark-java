@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.13](#0413)
 - [0.4.12](#0412)
 - [0.4.11](#0411)
 - [0.4.10](#0410)
@@ -40,6 +41,20 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.13
+------
+
+- Fix #5, SimToc did not unescape the title string when rendering
+
+- Add `EmojiExtension.ATTR_IMAGE_SIZE` and `EmojiExtension.ATTR_ALIGN` options to control image
+  size and align attributes for rendering
+
+- Change rename `RenderAs.SIMPLE` to `RenderAs.SECTIONS`
+
+- Change `SpecExampleNodeRenderer` for `RenderAs.SECTIONS` option to render the spec example
+  section and number if it is available as `h5`, also only render `hr` tag if the section text
+  is not empty.
 
 0.4.12
 ------

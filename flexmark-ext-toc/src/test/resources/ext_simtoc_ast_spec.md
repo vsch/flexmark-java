@@ -979,3 +979,35 @@ Document[0, 56]
 ````````````````````````````````
 
 
+options, title with escaped chars
+
+```````````````````````````````` example SimToc: 41
+## Header 2
+### Header 3
+
+[TOC levels=3]:# "title\"s"
+[TOC levels=3]:# 'title\'s'
+.
+<h2 id="header-2">Header 2</h2>
+<h3 id="header-3">Header 3</h3>
+<div><h1>title&quot;s</h1>
+  <ul>
+    <li><a href="#header-3">Header 3</a></li>
+  </ul>
+</div>
+<div><h1>title's</h1>
+  <ul>
+    <li><a href="#header-3">Header 3</a></li>
+  </ul>
+</div>
+.
+Document[0, 82]
+  Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
+    Text[3, 11] chars:[3, 11, "Header 2"]
+  Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
+    Text[16, 24] chars:[16, 24, "Header 3"]
+  SimTocBlock[26, 54] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 41] anchorMarker:[41, 42, "#"] openingTitleMarker:[43, 44, "\""] title:[44, 52, "title\\"s"] closingTitleMarker:[52, 53, "\""]
+  SimTocBlock[54, 82] openingMarker:[54, 55] tocKeyword:[55, 58] style:[59, 67] closingMarker:[67, 69] anchorMarker:[69, 70, "#"] openingTitleMarker:[71, 72, "'"] title:[72, 80, "title\'s"] closingTitleMarker:[80, 81, "'"]
+````````````````````````````````
+
+
