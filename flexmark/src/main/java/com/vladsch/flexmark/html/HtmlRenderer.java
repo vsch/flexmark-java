@@ -40,7 +40,7 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
     final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", false);
     final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
-    final static public DataKey<String> LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
+    final static public DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
 
     final List<AttributeProviderFactory> attributeProviderFactories;
     final List<NodeRendererFactory> nodeRendererFactories;
@@ -368,17 +368,20 @@ public class HtmlRenderer implements IRender {
             }
 
             ResolvedLink resolvedLink = resolvedLinks.get(url);
-            Node currentNode = getCurrentNode();
-
             if (resolvedLink == null) {
                 resolvedLink = new ResolvedLink(linkType, url);
-                for (LinkResolver linkResolver : myLinkResolvers) {
-                    resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
-                    if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
-                }
 
-                if (urlEncode == null && htmlOptions.percentEncodeUrls || urlEncode != null && urlEncode) {
-                    resolvedLink = resolvedLink.withUrl(Escaping.percentEncodeUrl(resolvedLink.getUrl()));
+                if (!url.isEmpty()) {
+                    Node currentNode = getCurrentNode();
+                    
+                    for (LinkResolver linkResolver : myLinkResolvers) {
+                        resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
+                        if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;
+                    }
+
+                    if (urlEncode == null && htmlOptions.percentEncodeUrls || urlEncode != null && urlEncode) {
+                        resolvedLink = resolvedLink.withUrl(Escaping.percentEncodeUrl(resolvedLink.getUrl()));
+                    }
                 }
 
                 // put it in the map

@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.12](#0412)
 - [0.4.11](#0411)
 - [0.4.10](#0410)
 - [0.4.9](#049)
@@ -39,6 +40,21 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.12
+------
+
+- Add `WikiLinkExtension.DISABLE_RENDERING` option to render wiki links as the text of the node,
+  for cases where wiki links are not allowed in the document but for purposes of error
+  annotations they should still be parsed.
+
+- Fix `Attributes.getValue(String)` was not checking if the attribute was missing, causing NPE. 
+
+- Change rename `HtmlRenderer.LANGUAGE_CLASS_PREFIX` to
+  `HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX`
+
+- Add test in `HtmlRenderer.MainNodeRenderer.resolveLink(LinkType, String, Boolean)` for empty
+  url in which case no link resolvers are called.
 
 0.4.11
 ------

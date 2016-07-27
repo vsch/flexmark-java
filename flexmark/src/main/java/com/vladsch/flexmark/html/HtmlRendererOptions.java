@@ -34,6 +34,6 @@ public class HtmlRendererOptions {
         doNotRenderLinksInDocument = options.get(HtmlRenderer.DO_NOT_RENDER_LINKS);
         renderHeaderId = options.get(HtmlRenderer.RENDER_HEADER_ID);
         generateHeaderIds = options.get(HtmlRenderer.GENERATE_HEADER_ID);
-        languageClassPrefix = options.get(HtmlRenderer.LANGUAGE_CLASS_PREFIX);
+        languageClassPrefix = options.get(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX);
     }
 }

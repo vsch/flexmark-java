@@ -30,7 +30,9 @@ public class Attributes {
 
     public String getValue(String key) {
         if (myAttributes == null) return "";
-        return myAttributes.get(key).getValue();
+        Attribute attribute = myAttributes.get(key);
+        if (attribute == null) return "";
+        return attribute.getValue();
     }
 
     public Attribute replaceValue(Attribute attribute) {
