@@ -56,6 +56,33 @@ flexmark-java
   section and number if it is available as `h5`, also only render `hr` tag if the section text
   is not empty.
 
+- Add `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM` option to set the next list item as loose if
+  previous one was loose. This makes list items mimic GFM quirky (diplomatic way of saying
+  buggy) list item parsing.
+
+- Add `HtmlRenderer.HARD_BREAK` option so that GFM comment mode where soft wraps are turned into
+  `<br>` and hard wraps are turned into `<br><br>` could be emulated. Are we having fun yet!?!?
+
+- Fix #6, List items are not properly marked as tight/loose
+
+- Fix #7, Task list items not copying the original list item's tight/loose flag
+
+- Add `CoreNodeRenderer.LOOSE_LIST_ITEM` and `CoreNodeRenderer.TIGHT_LIST_ITEM` instances of
+  `AttributablePart` to identify attributes used for generating `<li>` tag for list items.
+
+- Add `TaskListNodeRenderer.TASK_ITEM_PARAGRAPH` `AttributablePart` to identify when a loose
+  task list item `<p>` tag attributes are being requested.
+
+- Add `TableRow.rowNumber` in `flexmark-ext-tables` which is the row number within the table
+  section. Allowing easy first/even/odd determination for rendering where the browser does not
+  have CSS capabilities to handle this. 
+
+- Add `TaskListExtension.CONVERT_ORDERED_LIST_ITEMS` option to convert ordered list items to
+  task list items, default set to true. 
+
+- Change `TaskListItem.isOrderedItem()` added to allow distinguishing ordered from unordered
+  task list items.
+
 0.4.12
 ------
 

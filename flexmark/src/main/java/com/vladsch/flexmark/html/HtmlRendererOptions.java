@@ -4,6 +4,7 @@ import com.vladsch.flexmark.internal.util.options.DataHolder;
 
 public class HtmlRendererOptions {
     public final String softBreak;
+    public final String hardBreak;
     public final boolean escapeHtmlBlocks;
     public final boolean escapeHtmlCommentBlocks;
     public final boolean escapeInlineHtml;
@@ -21,6 +22,7 @@ public class HtmlRendererOptions {
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = options.get(HtmlRenderer.SOFT_BREAK);
+        hardBreak = options.get(HtmlRenderer.HARD_BREAK);
         escapeHtmlBlocks = options.get(HtmlRenderer.ESCAPE_HTML_BLOCKS);
         escapeHtmlCommentBlocks = options.get(HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS);
         escapeInlineHtml = options.get(HtmlRenderer.ESCAPE_INLINE_HTML);

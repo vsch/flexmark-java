@@ -18,6 +18,9 @@ import java.util.Set;
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
  */
 public class CoreNodeRenderer implements NodeRenderer {
+    final static public AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
+    final static public AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
+    
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
 
@@ -147,12 +150,12 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(ListItem node, NodeRendererContext context, HtmlWriter html) {
-        if (node.getFirstChild() == null || listOptions.isTightListItem(node)) {
-            html.withAttr().withCondIndent().tagLine("li", () -> {
+        if (listOptions.isTightListItem(node)) {
+            html.withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(node);
             });
         } else {
-            html.withAttr().tagIndent("li", () -> {
+            html.withAttr(LOOSE_LIST_ITEM).tagIndent("li", () -> {
                 context.renderChildren(node);
             });
         }
@@ -160,8 +163,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         boolean inTightList = listOptions.isInTightListItem(node);
-        if (!inTightList) {
-            html.tagLine("p", () -> {
+        if (!inTightList && (!(node.getParent() instanceof ListItem) || !((ListItem)node.getParent()).isParagraphWrappingDisabled())) {
+            html.withAttr().tagLine("p", () -> {
                 context.renderChildren(node);
             });
         } else {
@@ -251,7 +254,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.tagVoid("br").line();
+        html.raw(context.getHtmlOptions().hardBreak);
     }
 
     private void render(Reference node, NodeRendererContext context, HtmlWriter html) {

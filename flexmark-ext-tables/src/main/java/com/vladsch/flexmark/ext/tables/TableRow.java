@@ -7,6 +7,17 @@ import com.vladsch.flexmark.node.CustomNode;
  * Table row of a {@link TableHead} or {@link TableBody} containing {@link TableCell TableCells}.
  */
 public class TableRow extends CustomNode {
+    /**
+     * rowNumber within the table section: header, body, separator
+     */
+    private int rowNumber;
+
+    @Override
+    public void getAstExtra(StringBuilder out) {
+        super.getAstExtra(out);
+        if (rowNumber != 0) out.append(" rowNumber=").append(rowNumber);
+    }
+
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
@@ -17,5 +28,13 @@ public class TableRow extends CustomNode {
 
     public TableRow(BasedSequence chars) {
         super(chars);
+    }
+
+    public int getRowNumber() {
+        return rowNumber;
+    }
+
+    public void setRowNumber(int rowNumber) {
+        this.rowNumber = rowNumber;
     }
 }

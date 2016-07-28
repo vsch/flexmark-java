@@ -6,6 +6,7 @@ import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -24,13 +25,13 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
-    public Map<DataKey, Object> getAll() {return dataSet.getAll();}
+    public Map<DataKey, Object> getAll() { return dataSet.getAll(); }
 
     @Override
     public Collection<DataKey> keySet() { return dataSet.keySet(); }
 
     @Override
-    public boolean contains(DataKey key) {return dataSet.contains(key);}
+    public boolean contains(DataKey key) { return dataSet.contains(key); }
 
     @Override
     public <T> T get(DataKey<T> key) {
@@ -44,5 +45,18 @@ public class Document extends Block implements MutableDataHolder {
     public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
 
     @Override
-    public void setAll(DataHolder other) {dataSet.setAll(other);}
+    public void setAll(DataHolder other) { dataSet.setAll(other); }
+
+    @NotNull
+    @Override
+    public MutableDataHolder toMutable() { return dataSet.toMutable(); }
+
+    @NotNull
+    @Override
+    public DataHolder toImmutable() { return dataSet.toImmutable(); }
+
+    @Override
+    public void clear() {
+        throw new UnsupportedOperationException();
+    }
 }

@@ -132,12 +132,16 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
             TableRow tableRow = new TableRow(fullRowLine);
+            int tableRowNumber;
 
             List<Node> sepList;
             if (rowNumber == separatorLineNumber) {
                 sepList = inlineParser.parseCustom(fullRowLine, tableRow, separatorCharacters, pipeNodeMap);
+                tableRowNumber = 0;
             } else {
                 sepList = inlineParser.parseCustom(fullRowLine, tableRow, pipeCharacters, pipeNodeMap);
+                if (rowNumber < separatorLineNumber) tableRowNumber = rowNumber + 1;
+                else tableRowNumber = rowNumber - separatorLineNumber;
             }
 
             if (sepList == null) {
@@ -145,6 +149,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 break;
             }
 
+            tableRow.setRowNumber(tableRowNumber);
             tableRows.add(tableRow);
         }
 
@@ -172,6 +177,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             int cellCount = 0;
             NodeIterator nodes = new NodeIterator(tableRow.getFirstChild());
             TableRow newTableRow = new TableRow(tableRow.getChars());
+            newTableRow.setRowNumber(tableRow.getRowNumber());
 
             while (nodes.hasNext()) {
                 if (cellCount >= separatorColumns && options.discardExtraColumns) break;

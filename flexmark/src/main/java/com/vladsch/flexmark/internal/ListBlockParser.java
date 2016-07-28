@@ -68,43 +68,49 @@ public class ListBlockParser extends AbstractBlockParser {
 
     private void finalizeListTight(ParserState parserState) {
         Node item = getBlock().getFirstChild();
+        boolean isTight = true;
+        boolean prevItemLoose = false;
+
         while (item != null) {
             // check for non-final list item ending with blank line:
+            boolean thisItemLoose = false;
             if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
-                if (item instanceof ListItem) {
+                isTight = false;
+                thisItemLoose = true;
+            }
+
+            if (item instanceof ListItem) {
+                if (thisItemLoose || (options.looseOnPrevLooseItem && prevItemLoose)) {
                     // set the item's tight setting
                     ((ListItem) item).setTight(false);
                 }
-
-                if (options.autoLoose) {
-                    setTight(false);
-                }
-                break;
+                
+                prevItemLoose = thisItemLoose;
             }
 
             // recurse into children of list item, to see if there are
             // spaces between any of them:
-            if (options.autoLoose) {
-                Node subItem = item.getFirstChild();
-                while (subItem != null) {
-                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                        setTight(false);
-                        break;
-                    }
-                    subItem = subItem.getNext();
+            Node subItem = item.getFirstChild();
+            while (subItem != null) {
+                if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                    isTight = false;
+                    break;
                 }
+                subItem = subItem.getNext();
             }
             item = item.getNext();
         }
+
+        if (options.autoLoose && !isTight) setTight(false);
     }
-    
+
     static Boolean isOrderedListMarker(BasedSequence line, Parsing parsing, int markerIndex) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
         if (!matcher.find()) {
             return null;
         }
-        return !"+-*".contains(matcher.group()); 
+        return !"+-*".contains(matcher.group());
     }
 
     /**

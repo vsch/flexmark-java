@@ -3,9 +3,7 @@ package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 
@@ -14,6 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TaskListNodeRenderer implements NodeRenderer {
+    final static public AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
+    
     private final String doneMarker;
     private final String notDoneMarker;
     private final String itemClass;
@@ -39,13 +39,16 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
     private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
-            html.withAttr().attr("class", itemClass).withCondIndent().tagLine("li", () -> {
+            if (!itemClass.isEmpty()) html.attr("class", itemClass);
+            html.withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                 context.renderChildren(node);
             });
         } else {
-            html.withAttr().attr("class", looseItemClass).tagIndent("li", () -> {
-                html.withAttr().attr("class", paragraphClass).tagLine("p", () -> {
+            if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
+            html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", () -> {
+                if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
+                html.withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
                     html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                     context.renderChildren(node);
                 });

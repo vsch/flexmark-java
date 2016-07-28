@@ -768,7 +768,9 @@ Without auto loose setting for list
       <li>
         <p>sub item 1</p>
       </li>
-      <li>sub item 2</li>
+      <li>
+        <p>sub item 2</p>
+      </li>
       <li>sub item 3</li>
     </ul>
   </li>
@@ -790,7 +792,7 @@ Document[0, 97]
         BulletListItem[31, 44] open:[31, 32, "*"] isLoose
           Paragraph[33, 44]
             Text[33, 43] chars:[33, 43, "sub item 1"]
-        BulletListItem[53, 66] open:[53, 54, "*"] isTight
+        BulletListItem[53, 66] open:[53, 54, "*"] isLoose
           Paragraph[55, 66]
             Text[55, 65] chars:[55, 65, "sub item 2"]
         BulletListItem[75, 88] open:[75, 76, "*"] isTight
@@ -799,6 +801,139 @@ Document[0, 97]
     BulletListItem[88, 97] open:[88, 89, "*"] isTight
       Paragraph[90, 97]
         Text[90, 96] chars:[90, 96, "item 4"]
+````````````````````````````````
+
+
+### List - No Auto Loose, Loose Item if Previous Loose
+
+Without auto loose setting for list with loose if previous loose item
+
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 1) options(list-no-loose, list-loose-if-prev)
+* item 1
+* item 2
+* item 3
+
+* item 4
+* item 5
+
+* item 6
+
+* item 7
+
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>
+    <p>item 3</p>
+  </li>
+  <li>
+    <p>item 4</p>
+  </li>
+  <li>
+    <p>item 5</p>
+  </li>
+  <li>
+    <p>item 6</p>
+  </li>
+  <li>
+    <p>item 7</p>
+  </li>
+</ul>
+.
+Document[0, 67]
+  BulletList[0, 66] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 18] open:[9, 10, "*"] isTight
+      Paragraph[11, 18]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[18, 27] open:[18, 19, "*"] isLoose
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 3"]
+    BulletListItem[28, 37] open:[28, 29, "*"] isLoose
+      Paragraph[30, 37]
+        Text[30, 36] chars:[30, 36, "item 4"]
+    BulletListItem[37, 46] open:[37, 38, "*"] isLoose
+      Paragraph[39, 46]
+        Text[39, 45] chars:[39, 45, "item 5"]
+    BulletListItem[47, 56] open:[47, 48, "*"] isLoose
+      Paragraph[49, 56]
+        Text[49, 55] chars:[49, 55, "item 6"]
+    BulletListItem[57, 66] open:[57, 58, "*"] isLoose
+      Paragraph[59, 66]
+        Text[59, 65] chars:[59, 65, "item 7"]
+````````````````````````````````
+
+
+Without auto loose setting for list with loose if previous loose item
+
+```````````````````````````````` example(List - No Auto Loose, Loose Item if Previous Loose: 2) options(list-no-loose, list-loose-if-prev)
+* main item 
+    * item 1
+    * item 2
+    * item 3
+    
+    * item 4
+    * item 5
+    
+    * item 6
+    
+    * item 7
+
+.
+<ul>
+  <li>main item
+    <ul>
+      <li>item 1</li>
+      <li>item 2</li>
+      <li>
+        <p>item 3</p>
+      </li>
+      <li>
+        <p>item 4</p>
+      </li>
+      <li>
+        <p>item 5</p>
+      </li>
+      <li>
+        <p>item 6</p>
+      </li>
+      <li>
+        <p>item 7</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 120]
+  BulletList[0, 119] isTight
+    BulletListItem[0, 119] open:[0, 1, "*"] isTight
+      Paragraph[2, 13]
+        Text[2, 11] chars:[2, 11, "main item"]
+      BulletList[17, 119] isTight
+        BulletListItem[17, 26] open:[17, 18, "*"] isTight
+          Paragraph[19, 26]
+            Text[19, 25] chars:[19, 25, "item 1"]
+        BulletListItem[30, 39] open:[30, 31, "*"] isTight
+          Paragraph[32, 39]
+            Text[32, 38] chars:[32, 38, "item 2"]
+        BulletListItem[43, 52] open:[43, 44, "*"] isLoose
+          Paragraph[45, 52]
+            Text[45, 51] chars:[45, 51, "item 3"]
+        BulletListItem[61, 70] open:[61, 62, "*"] isLoose
+          Paragraph[63, 70]
+            Text[63, 69] chars:[63, 69, "item 4"]
+        BulletListItem[74, 83] open:[74, 75, "*"] isLoose
+          Paragraph[76, 83]
+            Text[76, 82] chars:[76, 82, "item 5"]
+        BulletListItem[92, 101] open:[92, 93, "*"] isLoose
+          Paragraph[94, 101]
+            Text[94, 100] chars:[94, 100, "item 6"]
+        BulletListItem[110, 119] open:[110, 111, "*"] isLoose
+          Paragraph[112, 119]
+            Text[112, 118] chars:[112, 118, "item 7"]
 ````````````````````````````````
 
 

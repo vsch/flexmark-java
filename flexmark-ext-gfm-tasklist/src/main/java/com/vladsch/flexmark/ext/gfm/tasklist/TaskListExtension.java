@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeRenderer;
-import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListParagraphPreProcessorFactory;
+import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListParagraphPreProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.internal.util.options.DataKey;
@@ -22,8 +22,9 @@ import com.vladsch.flexmark.parser.Parser;
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // for webview use "<span class=\"taskitem\">" + (node.isDone() ? "X" : "O") + "</span>"
     // for swing use ""
-    public final static DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\"></input>");
-    public final static DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\"></input>");
+    public final static DataKey<Boolean> CONVERT_ORDERED_LIST_ITEMS = new DataKey<>("CONVERT_ORDERED_LIST_ITEMS", true);
+    public final static DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");
+    public final static DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" />");
     public final static DataKey<String> ITEM_CLASS = new DataKey<>("ITEM_CLASS", "task-list-item");
     public final static DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<>("LOOSE_ITEM_CLASS", ITEM_CLASS::getFrom);
     public final static DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
@@ -37,7 +38,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.paragraphPreProcessorFactory(new TaskListParagraphPreProcessorFactory());
+        parserBuilder.paragraphPreProcessorFactory(new TaskListParagraphPreProcessor.Factory());
     }
 
     @Override

@@ -52,6 +52,7 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
     final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
     final public static DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
+    final public static DataKey<Boolean> LISTS_LOOSE_ON_PREV_LOOSE_ITEM = new DataKey<>("LISTS_LOOSE_ON_PREV_LOOSE_ITEM", false);
     final public static DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_BULLET_MATCH = new DataKey<>("LISTS_BULLET_MATCH", true);

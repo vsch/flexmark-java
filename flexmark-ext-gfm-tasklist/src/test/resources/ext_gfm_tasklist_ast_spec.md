@@ -114,19 +114,19 @@ empty task list items
 + [X]
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
 </ul>
 .
 Document[0, 62]
@@ -163,25 +163,25 @@ non empty task list items
 + [X] task
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
   </li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
 Document[0, 103]
@@ -236,25 +236,25 @@ non empty task list items with inlines
 + [X] task **emphasis**
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
 </ul>
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></p>
   </li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
 </ul>
 .
 Document[0, 220]
@@ -318,8 +318,8 @@ task list item class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
-  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
 Document[0, 22]
@@ -342,10 +342,10 @@ task list item class on loose list
 .
 <ul>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
   </li>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
   </li>
 </ul>
 .
@@ -367,8 +367,8 @@ loose task list item class
 - [x] task
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
 Document[0, 22]
@@ -391,10 +391,10 @@ loose task list item class on loose list
 .
 <ul>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
   </li>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
   </li>
 </ul>
 .
@@ -416,8 +416,8 @@ task list item class and p class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
-  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
 Document[0, 22]
@@ -440,10 +440,10 @@ task list item class and p class on loose list
 .
 <ul>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
   </li>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled"></input>task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
   </li>
 </ul>
 .
@@ -465,7 +465,7 @@ custom marker task list item class and p class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
   <li><span class="taskitem">X</span>task</li>
 </ul>
 .
@@ -489,7 +489,7 @@ task list item class and p class on loose list
 .
 <ul>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"></input>task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
   </li>
   <li>
     <p class="task-item"><span class="taskitem">X</span>task</p>
@@ -553,6 +553,54 @@ Document[0, 23]
     TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
       Paragraph[18, 23]
         Text[18, 22] chars:[18, 22, "task"]
+````````````````````````````````
+
+
+task list item on ordered list item
+
+```````````````````````````````` example Gfm Task List Options: 11
+1. [ ] task
+2. [x] task
+.
+<ol>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+</ol>
+.
+Document[0, 24]
+  OrderedList[0, 24] isTight delimiter:'.'
+    TaskListItem[0, 12] open:[0, 2, "1."] isTight taskOpen:[3, 6, "[ ]"]
+      Paragraph[7, 12]
+        Text[7, 11] chars:[7, 11, "task"]
+    TaskListItem[12, 24] open:[12, 14, "2."] isTight taskOpen:[15, 18, "[x]"]
+      Paragraph[19, 24]
+        Text[19, 23] chars:[19, 23, "task"]
+````````````````````````````````
+
+
+task list item on ordered list item without ordered list item conversion
+
+```````````````````````````````` example(Gfm Task List Options: 12) options(no-ordered-items)
+1. [ ] task
+2. [x] task
+.
+<ol>
+  <li>[ ] task</li>
+  <li>[x] task</li>
+</ol>
+.
+Document[0, 24]
+  OrderedList[0, 24] isTight delimiter:'.'
+    OrderedListItem[0, 12] open:[0, 2, "1."] isTight
+      Paragraph[3, 12]
+        LinkRef[3, 6] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
+          Text[4, 5] chars:[4, 5, " "]
+        Text[6, 11] chars:[6, 11, " task"]
+    OrderedListItem[12, 24] open:[12, 14, "2."] isTight
+      Paragraph[15, 24]
+        LinkRef[15, 18] referenceOpen:[15, 16, "["] reference:[16, 17, "x"] referenceClose:[17, 18, "]"]
+          Text[16, 17] chars:[16, 17, "x"]
+        Text[18, 23] chars:[18, 23, " task"]
 ````````````````````````````````
 
 

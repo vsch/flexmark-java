@@ -20,21 +20,12 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("item-class", new MutableDataSet()
-                .set(TaskListExtension.ITEM_CLASS, "")
-        );
-        optionsMap.put("loose-class", new MutableDataSet()
-                .set(TaskListExtension.LOOSE_ITEM_CLASS, "")
-        );
-        optionsMap.put("p-class", new MutableDataSet()
-                .set(TaskListExtension.PARAGRAPH_CLASS, "task-item")
-        );
-        optionsMap.put("done", new MutableDataSet()
-                .set(TaskListExtension.ITEM_DONE_MARKER, "<span class=\"taskitem\">X</span>")
-        );
-        optionsMap.put("not-done", new MutableDataSet()
-                .set(TaskListExtension.ITEM_NOT_DONE_MARKER, "<span class=\"taskitem\">O</span>")
-        );
+        optionsMap.put("item-class", new MutableDataSet().set(TaskListExtension.ITEM_CLASS, ""));
+        optionsMap.put("loose-class", new MutableDataSet().set(TaskListExtension.LOOSE_ITEM_CLASS, ""));
+        optionsMap.put("p-class", new MutableDataSet().set(TaskListExtension.PARAGRAPH_CLASS, "task-item"));
+        optionsMap.put("done", new MutableDataSet().set(TaskListExtension.ITEM_DONE_MARKER, "<span class=\"taskitem\">X</span>"));
+        optionsMap.put("not-done", new MutableDataSet().set(TaskListExtension.ITEM_NOT_DONE_MARKER, "<span class=\"taskitem\">O</span>"));
+        optionsMap.put("no-ordered-items", new MutableDataSet().set(TaskListExtension.CONVERT_ORDERED_LIST_ITEMS, false));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

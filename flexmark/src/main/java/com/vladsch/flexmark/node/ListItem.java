@@ -45,6 +45,10 @@ public abstract class ListItem extends Block {
     public boolean isLoose() {
         return !isTight();
     }
+    
+    public boolean isParagraphWrappingDisabled() {
+        return false;
+    }
 
     public boolean isInTightList() {
         return !(getParent() instanceof ListBlock) || ((ListBlock) getParent()).isTight();

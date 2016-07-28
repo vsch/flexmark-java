@@ -9,6 +9,7 @@ import com.vladsch.flexmark.parser.Parser;
 public class ListOptions {
     final public boolean endOnDoubleBlank;
     final public boolean autoLoose;
+    final public boolean looseOnPrevLooseItem;
     final public boolean orderedStart;
     final public boolean bulletMatch;
     final public boolean itemTypeMatch;
@@ -25,6 +26,7 @@ public class ListOptions {
     public ListOptions(DataHolder options) {
         this.endOnDoubleBlank = options.get(Parser.LISTS_END_ON_DOUBLE_BLANK);
         this.autoLoose = options.get(Parser.LISTS_AUTO_LOOSE);
+        this.looseOnPrevLooseItem = options.get(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM);
         this.orderedStart = options.get(Parser.LISTS_ORDERED_LIST_MANUAL_START);
         this.fixedIndent = options.get(Parser.LISTS_FIXED_INDENT);
         this.bulletMatch = options.get(Parser.LISTS_BULLET_MATCH);
@@ -40,11 +42,11 @@ public class ListOptions {
     }
     
     public boolean isTightListItem(ListItem node) {
-        return node.getFirstChild() == null || node.isTight();
+        return node.getFirstChild() == null || !autoLoose && node.isTight() || autoLoose && node.isInTightList();
     }
     
     public boolean isInTightListItem(Paragraph node) {
         Block parent = node.getParent();
-        return parent instanceof ListItem && ((ListItem) parent).isParagraphInTightListItem();
+        return parent instanceof ListItem && (!autoLoose && ((ListItem) parent).isParagraphInTightListItem() || autoLoose && ((ListItem) parent).isInTightList());
     }
 }

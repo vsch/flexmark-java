@@ -36,4 +36,9 @@ public interface MutableDataHolder extends DataHolder {
      * @return
      */
     <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory);
+
+    /**
+     * clear all options out of the data set
+     */
+    void clear();
 }
