@@ -95,6 +95,10 @@ public class HtmlWriter {
         return srcPosWithEOL(context.getCurrentNode().getChars());
     }
 
+    public HtmlWriter srcPosWithTrailingEOL() {
+        return srcPosWithTrailingEOL(context.getCurrentNode().getChars());
+    }
+
     public HtmlWriter srcPos(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             BasedSequence trimmed = sourceText.trimEOL();
@@ -106,6 +110,28 @@ public class HtmlWriter {
     public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
+        }
+        return this;
+    }
+
+    public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
+        if (sourceText.isNotNull()) {
+            int endOffset = sourceText.getEndOffset();
+            CharSequence base = sourceText.getBase();
+            while (endOffset < base.length()) {
+                char c = base.charAt(endOffset);
+                if (c != ' ' && c != '\t') break; 
+                endOffset++;
+            }
+            
+            if (endOffset < base.length() && base.charAt(endOffset) == '\r') {
+                endOffset++;
+            }
+            
+            if (endOffset < base.length() && base.charAt(endOffset) == '\n') {
+                endOffset++;
+            }
+            return srcPos(sourceText.getStartOffset(), endOffset);
         }
         return this;
     }

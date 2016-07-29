@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.15](#0415)
 - [0.4.14](#0414)
 - [0.4.13](#0413)
 - [0.4.12](#0412)
@@ -42,6 +43,16 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.15
+------
+
+- Add `HtmlWriter.srcPosWithTrailingEOL()` that will extend the position information to include
+  trailing EOL after then end of the sequence, skipping any spaces or tabs. Used to include EOL
+  for closing code fence marker.
+
+- Fix #8, Fenced code closing sequence allows trailing spaces but not tabs. Tab added to ignored
+  trailing characters after the closing marker.
 
 0.4.14
 ------

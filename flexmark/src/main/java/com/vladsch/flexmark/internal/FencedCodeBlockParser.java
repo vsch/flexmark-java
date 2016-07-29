@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
     private static final Pattern OPENING_FENCE = Pattern.compile("^`{3,}(?!.*`)|^~{3,}(?!.*~)");
-    private static final Pattern CLOSING_FENCE = Pattern.compile("^(?:`{3,}|~{3,})(?= *$)");
+    private static final Pattern CLOSING_FENCE = Pattern.compile("^(?:`{3,}|~{3,})(?=[ \t]*$)");
 
     private final FencedCodeBlock block = new FencedCodeBlock();
     private BlockContent content = new BlockContent();

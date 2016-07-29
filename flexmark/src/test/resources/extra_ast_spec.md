@@ -3914,9 +3914,7 @@ _text_
 [img]: /img.png
 [ref]: /url
 
-```text
-text
-```
+    text
 
 .
 <p md-pos="0-113"><a md-pos="1-11" href="http://url">http://url</a>
@@ -3940,12 +3938,12 @@ text
   <li md-pos="151-156">item</li>
 </ol>
 <!-- -->
-<pre md-pos="171-189"><code md-pos="171-184">indented code
+<pre md-pos="171-191"><code md-pos="171-191">indented code
 </code></pre>
-<pre md-pos="220-236"><code class="language-text" md-pos="228-232">text
+<pre md-pos="224-230"><code md-pos="224-230">text
 </code></pre>
 .
-Document[0, 238]
+Document[0, 230]
   Paragraph[0, 113]
     AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://url"] textClose:[11, 12, ">"]
     SoftLineBreak[13, 14]
@@ -3992,13 +3990,49 @@ Document[0, 238]
   IndentedCodeBlock[171, 191]
   Reference[191, 206] refOpen:[191, 192, "["] ref:[192, 195, "img"] refClose:[195, 197, "]:"] url:[198, 206, "/img.png"]
   Reference[207, 218] refOpen:[207, 208, "["] ref:[208, 211, "ref"] refClose:[211, 213, "]:"] url:[214, 218, "/url"]
-  FencedCodeBlock[220, 236] open:[220, 223, "```"] info:[223, 227, "text"] content:[228, 233] lines[3] close:[233, 236, "```"]
+  IndentedCodeBlock[224, 230]
+````````````````````````````````
+
+
+fenced code
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+```text
+text
+```
+
+.
+<pre md-pos="0-17"><code class="language-text" md-pos="8-13">text
+</code></pre>
+.
+Document[0, 18]
+  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[3] close:[13, 16, "```"]
+````````````````````````````````
+
+
+fenced code with trailing spaces and tabs on close
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos)
+```text
+text
+``` →
+
+test
+.
+<pre md-pos="0-19"><code class="language-text" md-pos="8-13">text
+</code></pre>
+<p md-pos="20-25">test</p>
+.
+Document[0, 25]
+  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[3] close:[13, 16, "```"]
+  Paragraph[20, 25]
+    Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
 
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -4146,7 +4180,7 @@ Document[0, 456]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -4167,7 +4201,7 @@ Document[0, 71]
 
 Wrap individual paragraph lines in source position marked spans tight list items
 
-```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -4214,7 +4248,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 7) options(src-pos, src-pos-lines)
 - item
 
 - item

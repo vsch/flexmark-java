@@ -105,7 +105,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
-        html.srcPos(node.getChars()).withAttr().tag("pre").openPre();
+        html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
         
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
@@ -119,7 +119,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         }
 
-        html.srcPos(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
+        html.srcPosWithEOL(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
         html.text(node.getContentChars().normalizeEOL());
         html.tag("/code");
         html.tag("/pre").closePre();
@@ -132,8 +132,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
-        html.srcPos(node.getChars()).withAttr().tag("pre").openPre();
-        html.srcPos(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
+        html.srcPosWithEOL(node.getChars()).withAttr().tag("pre").openPre();
+        html.srcPosWithEOL(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
         html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
         html.tag("/code");
         html.tag("/pre").closePre();
