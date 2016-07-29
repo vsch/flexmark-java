@@ -154,7 +154,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
-            html.srcPos(node.getFirstChild() != null ? node.getFirstChild().getChars() : node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+            BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
+            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(node);
             });
         } else {

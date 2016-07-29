@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.ListOptions;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -38,9 +39,10 @@ public class TaskListNodeRenderer implements NodeRenderer {
     }
 
     private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
+        BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
         if (listOptions.isTightListItem(node)) {
             if (!itemClass.isEmpty()) html.attr("class", itemClass);
-            html.srcPos(node.getFirstChild() != null ? node.getFirstChild().getChars() : node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                 context.renderChildren(node);
             });
@@ -48,7 +50,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
             if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
             html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", () -> {
                 if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
-                html.srcPos(node.getFirstChild() != null ? node.getFirstChild().getChars() : node.getChars()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
+                html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
                     html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                     context.renderChildren(node);
                 });
