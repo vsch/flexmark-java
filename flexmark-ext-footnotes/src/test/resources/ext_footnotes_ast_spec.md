@@ -805,3 +805,33 @@ Document[0, 78]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+.
+<p md-pos="0-36">This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p md-pos="44-77">This is the body of the footnote.</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 78]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This  … tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 78] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 78]
+    Paragraph[44, 78]
+      Text[44, 77] chars:[44, 77, "This  … note."]
+````````````````````````````````
+
+

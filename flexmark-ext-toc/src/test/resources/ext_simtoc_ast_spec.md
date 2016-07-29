@@ -1011,3 +1011,28 @@ Document[0, 82]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+## Header 2
+### Header 3
+
+[TOC levels=3]:# "titles"
+.
+<h2 id="header-2" md-pos="3-11">Header 2</h2>
+<h3 id="header-3" md-pos="16-24">Header 3</h3>
+<div md-pos="26-51"><h1>titles</h1>
+  <ul>
+    <li><a href="#header-3">Header 3</a></li>
+  </ul>
+</div>
+.
+Document[0, 52]
+  Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
+    Text[3, 11] chars:[3, 11, "Header 2"]
+  Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
+    Text[16, 24] chars:[16, 24, "Header 3"]
+  SimTocBlock[26, 52] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 41] anchorMarker:[41, 42, "#"] openingTitleMarker:[43, 44, "\""] title:[44, 50, "titles"] closingTitleMarker:[50, 51, "\""]
+````````````````````````````````
+
+

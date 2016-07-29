@@ -67,8 +67,8 @@ public class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public SourceRange getSourceRange() {
-        return new SourceRange(startOffset, endOffset);
+    public Range getSourceRange() {
+        return new Range(startOffset, endOffset);
     }
 
     @Override
@@ -164,8 +164,8 @@ public class SubSequence extends BasedSequenceImpl {
         }
 
         @Override
-        public SourceRange getSourceRange() {
-            return SourceRange.NULL;
+        public Range getSourceRange() {
+            return Range.NULL;
         }
 
         @Override

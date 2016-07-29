@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
 import com.vladsch.flexmark.internal.util.Computable;
@@ -9,12 +10,16 @@ import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.ValueRunnable;
 import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
 import com.vladsch.flexmark.internal.util.options.DelimitedBuilder;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.Heading;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TocUtils {
+    final static public AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
+    
     public static String getTocPrefix(TocOptions options, TocOptions defaultOptions) {
         DelimitedBuilder out = new DelimitedBuilder(" ");
         out.append("[TOC").mark();
@@ -59,15 +64,16 @@ public class TocUtils {
         if (headings.isEmpty()) return;
 
         if (options.isHtml) {
-            renderHtmlToc(out, headings, headingTexts, options);
+            renderHtmlToc(out, SubSequence.NULL, headings, headingTexts, options);
         } else {
             renderMarkdownToc(out, headings, headingTexts, options);
         }
     }
 
-    public static void renderHtmlToc(HtmlWriter html, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
-        if (headings.size() > 0 && !tocOptions.title.isEmpty()) {
-            html.tag("div");
+    public static void renderHtmlToc(HtmlWriter html, BasedSequence sourceText, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
+        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
+            if (sourceText.isNotNull()) html.srcPos(sourceText); 
+            html.withAttr(TOC_CONTENT).tag("div");
             html.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line().indent();
         }
 
@@ -123,7 +129,7 @@ public class TocUtils {
             }
         }
 
-        if (headings.size() > 0 && !tocOptions.title.isEmpty()) {
+        if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
             html.line().unIndent().tag("/div");
         }
 

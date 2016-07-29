@@ -2,12 +2,15 @@ package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.TocBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.util.ast.HeadingCollectingVisitor;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.node.Heading;
+import com.vladsch.flexmark.node.Node;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 public class TocNodeRenderer implements NodeRenderer {
+    final static public AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;
+    
     private final TocOptions options;
 
     public TocNodeRenderer(DataHolder options) {
@@ -34,13 +39,13 @@ public class TocNodeRenderer implements NodeRenderer {
         if (headings != null) {
             TocOptionsParser optionsParser = new TocOptionsParser();
             TocOptions options = optionsParser.parseOption(node.getStyle(), this.options.withTitle(""), null).getFirst();
-            renderTocHeaders(context, html, headings, options);
+            renderTocHeaders(context, html, node, headings, options);
         }
     }
 
-    private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, List<Heading> headings, TocOptions options) {
+    private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, Node node, List<Heading> headings, TocOptions options) {
         List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
         List<String> headingTexts = TocUtils.htmlHeaderTexts(context, filteredHeadings, options);
-        TocUtils.renderHtmlToc(html, filteredHeadings, headingTexts, options);
+        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? SubSequence.NULL : node.getChars(), filteredHeadings, headingTexts, options);
     }
 }

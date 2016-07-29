@@ -45,7 +45,7 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
         }
 
         html.attr("title", abbreviation);
-        html.withAttr().tag(tag);
+        html.srcPos(node.getChars()).withAttr().tag(tag);
         html.text(text);
         html.tag("/" + tag);
     }

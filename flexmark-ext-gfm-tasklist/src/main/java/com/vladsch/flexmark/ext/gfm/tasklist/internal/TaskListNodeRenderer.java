@@ -40,7 +40,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
     private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             if (!itemClass.isEmpty()) html.attr("class", itemClass);
-            html.withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+            html.srcPos(node.getFirstChild() != null ? node.getFirstChild().getChars() : node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                 context.renderChildren(node);
             });
@@ -48,7 +48,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
             if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
             html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", () -> {
                 if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
-                html.withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
+                html.srcPos(node.getFirstChild() != null ? node.getFirstChild().getChars() : node.getChars()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
                     html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
                     context.renderChildren(node);
                 });

@@ -45,10 +45,10 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
 
         for (ReplacedTextRegion region : replacedRegions) {
             //String found = m.group();
-            int startOffset = region.getOriginal().getStartOffset() - original.getStartOffset();
-            int endOffset = region.getOriginal().getEndOffset() - original.getStartOffset();
+            int startOffset = region.getOriginalRange().getStart() - original.getStartOffset();
+            int endOffset = region.getOriginalRange().getEnd() - original.getStartOffset();
             
-            if (original.charAt(startOffset) == '\\' && region.getReplaced().length() == 1) {
+            if (original.charAt(startOffset) == '\\' && region.getReplacedRange().length() == 1) {
                 if (wrapInTextBase) {
                     wrapInTextBase = false;
                     textBase = new TextBase(original);

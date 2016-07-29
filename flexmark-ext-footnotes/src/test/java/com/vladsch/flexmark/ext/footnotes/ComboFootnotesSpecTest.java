@@ -20,23 +20,16 @@ public class ComboFootnotesSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("custom", new MutableDataSet()
                 .set(FootnoteExtension.FOOTNOTE_REF_PREFIX, "[")
                 .set(FootnoteExtension.FOOTNOTE_REF_SUFFIX, "]")
                 .set(FootnoteExtension.FOOTNOTE_BACK_REF_STRING, "&lt;back&gt;")
         );
-        optionsMap.put("link-class-none", new MutableDataSet()
-                .set(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS, "")
-        );
-        optionsMap.put("link-class-text", new MutableDataSet()
-                .set(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS, "text")
-        );
-        optionsMap.put("back-link-class-none", new MutableDataSet()
-                .set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "")
-        );
-        optionsMap.put("back-link-class-text", new MutableDataSet()
-                .set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "text")
-        );
+        optionsMap.put("link-class-none", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS, ""));
+        optionsMap.put("link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS, "text"));
+        optionsMap.put("back-link-class-none", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, ""));
+        optionsMap.put("back-link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "text"));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

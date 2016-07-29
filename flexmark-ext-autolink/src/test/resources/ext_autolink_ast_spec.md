@@ -112,3 +112,24 @@ Document[0, 21]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+foo@example.com
+http://example.com
+.
+<p md-pos="0-34"><a md-pos="0-15" href="mailto:foo@example.com">foo@example.com</a>
+<a md-pos="16-34" href="http://example.com">http://example.com</a></p>
+.
+Document[0, 35]
+  Paragraph[0, 35]
+    TextBase[0, 15] chars:[0, 15, "foo@e … e.com"]
+      MailLink[0, 15] text:[0, 15, "foo@example.com"]
+        Text[0, 15] chars:[0, 15, "foo@e … e.com"]
+    SoftLineBreak[15, 16]
+    TextBase[16, 34] chars:[16, 34, "http: … e.com"]
+      AutoLink[16, 34] text:[16, 34, "http://example.com"]
+        Text[16, 34] chars:[16, 34, "http: … e.com"]
+````````````````````````````````
+
+

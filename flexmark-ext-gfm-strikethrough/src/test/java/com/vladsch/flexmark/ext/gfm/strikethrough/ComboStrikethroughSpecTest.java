@@ -20,9 +20,8 @@ public class ComboStrikethroughSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        //        optionsMap.put("custom", new MutableDataSet()
-        //                .set(StrikethroughExtension.STRIKETHROUGH, value)
-        //        );
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        //optionsMap.put("custom", new MutableDataSet().set(StrikethroughExtension.STRIKETHROUGH, value));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

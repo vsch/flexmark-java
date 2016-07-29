@@ -20,6 +20,7 @@ public class ComboTocSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("text-only", new MutableDataSet().set(TocExtension.IS_TEXT_ONLY, true));
         optionsMap.put("numbered", new MutableDataSet().set(TocExtension.IS_NUMBERED, true));
         optionsMap.put("levels-2", new MutableDataSet().set(TocExtension.LEVELS, 1 << 2));

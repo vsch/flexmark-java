@@ -3881,3 +3881,401 @@ Document[0, 16]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+<http://url> 
+`code` 
+_text_ 
+![alt](/url) 
+![img]
+![img][]
+[text](/url) 
+[ref]
+[ref][]
+<name@mail.com>
+**text**
+
+---
+
+# Heading
+
+- item
+
+<!-- -->
+
+1. item
+
+<!-- -->
+
+    indented code
+    
+
+[img]: /img.png
+[ref]: /url
+
+```text
+text
+```
+
+.
+<p md-pos="0-112"><a md-pos="1-11" href="http://url">http://url</a>
+<code md-pos="15-19">code</code>
+<em md-pos="23-27">text</em>
+<img src="/url" alt="alt" md-pos="30-42" />
+<img src="/img.png" alt="img" md-pos="44-50" />
+<img src="/img.png" alt="img" md-pos="51-59" />
+<a href="/url" md-pos="61-65">text</a>
+<a href="/url" md-pos="75-78">ref</a>
+<a href="/url" md-pos="81-84">ref</a>
+<a md-pos="89-102" href="mailto:name@mail.com">name@mail.com</a>
+<strong md-pos="106-110">text</strong></p>
+<hr md-pos="114-117" />
+<h1 md-pos="121-128">Heading</h1>
+<ul>
+  <li md-pos="132-136">item</li>
+</ul>
+<!-- -->
+<ol>
+  <li md-pos="151-155">item</li>
+</ol>
+<!-- -->
+<pre><code md-pos="171-184">indented code
+</code></pre>
+<pre><code class="language-text" md-pos="228-232">text
+</code></pre>
+.
+Document[0, 238]
+  Paragraph[0, 113]
+    AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://url"] textClose:[11, 12, ">"]
+    SoftLineBreak[13, 14]
+    Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "code"] textClose:[19, 20, "`"]
+    SoftLineBreak[21, 22]
+    Emphasis[22, 28] textOpen:[22, 23, "_"] text:[23, 27, "text"] textClose:[27, 28, "_"]
+      Text[23, 27] chars:[23, 27, "text"]
+    SoftLineBreak[29, 30]
+    Image[30, 42] textOpen:[30, 32, "!["] text:[32, 35, "alt"] textClose:[35, 36, "]"] linkOpen:[36, 37, "("] url:[37, 41, "/url"] pageRef:[37, 41, "/url"] linkClose:[41, 42, ")"]
+      Text[32, 35] chars:[32, 35, "alt"]
+    SoftLineBreak[43, 44]
+    ImageRef[44, 50] referenceOpen:[44, 46, "!["] reference:[46, 49, "img"] referenceClose:[49, 50, "]"]
+      Text[46, 49] chars:[46, 49, "img"]
+    SoftLineBreak[50, 51]
+    ImageRef[51, 59] referenceOpen:[51, 53, "!["] reference:[53, 56, "img"] referenceClose:[56, 57, "]"] textOpen:[57, 58, "["] textClose:[58, 59, "]"]
+      Text[53, 56] chars:[53, 56, "img"]
+    SoftLineBreak[59, 60]
+    Link[60, 72] textOpen:[60, 61, "["] text:[61, 65, "text"] textClose:[65, 66, "]"] linkOpen:[66, 67, "("] url:[67, 71, "/url"] pageRef:[67, 71, "/url"] linkClose:[71, 72, ")"]
+      Text[61, 65] chars:[61, 65, "text"]
+    SoftLineBreak[73, 74]
+    LinkRef[74, 79] referenceOpen:[74, 75, "["] reference:[75, 78, "ref"] referenceClose:[78, 79, "]"]
+      Text[75, 78] chars:[75, 78, "ref"]
+    SoftLineBreak[79, 80]
+    LinkRef[80, 87] referenceOpen:[80, 81, "["] reference:[81, 84, "ref"] referenceClose:[84, 85, "]"] textOpen:[85, 86, "["] textClose:[86, 87, "]"]
+      Text[81, 84] chars:[81, 84, "ref"]
+    SoftLineBreak[87, 88]
+    MailLink[88, 103] textOpen:[88, 89, "<"] text:[89, 102, "name@mail.com"] textClose:[102, 103, ">"]
+    SoftLineBreak[103, 104]
+    StrongEmphasis[104, 112] textOpen:[104, 106, "**"] text:[106, 110, "text"] textClose:[110, 112, "**"]
+      Text[106, 110] chars:[106, 110, "text"]
+  ThematicBreak[114, 117]
+  Heading[119, 128] textOpen:[119, 120, "#"] text:[121, 128, "Heading"]
+    Text[121, 128] chars:[121, 128, "Heading"]
+  BulletList[130, 137] isTight
+    BulletListItem[130, 137] open:[130, 131, "-"] isTight
+      Paragraph[132, 137]
+        Text[132, 136] chars:[132, 136, "item"]
+  HtmlCommentBlock[138, 147]
+  OrderedList[148, 156] isTight delimiter:'.'
+    OrderedListItem[148, 156] open:[148, 150, "1."] isTight
+      Paragraph[151, 156]
+        Text[151, 155] chars:[151, 155, "item"]
+  HtmlCommentBlock[157, 166]
+  IndentedCodeBlock[171, 191]
+  Reference[191, 206] refOpen:[191, 192, "["] ref:[192, 195, "img"] refClose:[195, 197, "]:"] url:[198, 206, "/img.png"]
+  Reference[207, 218] refOpen:[207, 208, "["] ref:[208, 211, "ref"] refClose:[211, 213, "]:"] url:[214, 218, "/url"]
+  FencedCodeBlock[220, 236] open:[220, 223, "```"] info:[223, 227, "text"] content:[228, 233] lines[3] close:[233, 236, "```"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, src-pos-lines)
+paragraph test 
+with multiple lazy lines
+all should be src pos wrapped
+
+- item
+with multiple lazy lines
+all should be src pos wrapped
+
+<!-- -->
+
+- item
+with multiple lazy lines
+all should be src pos wrapped
+
+- item
+<!-- -->
+
+1. item
+with multiple lazy lines
+all should be src pos wrapped
+
+1. item
+
+<!-- -->
+
+1. item
+with multiple lazy lines
+all should be src pos wrapped
+1. item
+
+<!-- -->
+
+- [ ] item
+with multiple lazy lines
+all should be src pos wrapped
+.
+<p md-pos="0-70"><span md-pos="0-14">paragraph test</span>
+<span md-pos="16-40">with multiple lazy lines</span>
+<span md-pos="41-70">all should be src pos wrapped</span></p>
+<ul>
+  <li md-pos="74-133"><span md-pos="74-78">item</span>
+  <span md-pos="79-103">with multiple lazy lines</span>
+  <span md-pos="104-133">all should be src pos wrapped</span></li>
+</ul>
+<!-- -->
+<ul>
+  <li>
+    <p md-pos="147-206"><span md-pos="147-151">item</span>
+    <span md-pos="152-176">with multiple lazy lines</span>
+    <span md-pos="177-206">all should be src pos wrapped</span></p>
+  </li>
+  <li>
+    <p md-pos="210-214"><span md-pos="210-214">item</span></p>
+  </li>
+</ul>
+<!-- -->
+<ol>
+  <li>
+    <p md-pos="228-287"><span md-pos="228-232">item</span>
+    <span md-pos="233-257">with multiple lazy lines</span>
+    <span md-pos="258-287">all should be src pos wrapped</span></p>
+  </li>
+  <li>
+    <p md-pos="292-296"><span md-pos="292-296">item</span></p>
+  </li>
+</ol>
+<!-- -->
+<ol>
+  <li md-pos="311-370"><span md-pos="311-315">item</span>
+  <span md-pos="316-340">with multiple lazy lines</span>
+  <span md-pos="341-370">all should be src pos wrapped</span></li>
+  <li md-pos="374-378"><span md-pos="374-378">item</span></li>
+</ol>
+<!-- -->
+<ul>
+  <li md-pos="392-455"><span md-pos="392-400">[ ] item</span>
+  <span md-pos="401-425">with multiple lazy lines</span>
+  <span md-pos="426-455">all should be src pos wrapped</span></li>
+</ul>
+.
+Document[0, 456]
+  Paragraph[0, 71]
+    Text[0, 14] chars:[0, 14, "parag …  test"]
+    SoftLineBreak[15, 16]
+    Text[16, 40] chars:[16, 40, "with  … lines"]
+    SoftLineBreak[40, 41]
+    Text[41, 70] chars:[41, 70, "all s … apped"]
+  BulletList[72, 134] isTight
+    BulletListItem[72, 134] open:[72, 73, "-"] isTight
+      Paragraph[74, 134]
+        Text[74, 78] chars:[74, 78, "item"]
+        SoftLineBreak[78, 79]
+        Text[79, 103] chars:[79, 103, "with  … lines"]
+        SoftLineBreak[103, 104]
+        Text[104, 133] chars:[104, 133, "all s … apped"]
+  HtmlCommentBlock[135, 144]
+  BulletList[145, 215] isLoose
+    BulletListItem[145, 207] open:[145, 146, "-"] isLoose
+      Paragraph[147, 207]
+        Text[147, 151] chars:[147, 151, "item"]
+        SoftLineBreak[151, 152]
+        Text[152, 176] chars:[152, 176, "with  … lines"]
+        SoftLineBreak[176, 177]
+        Text[177, 206] chars:[177, 206, "all s … apped"]
+    BulletListItem[208, 215] open:[208, 209, "-"] isLoose
+      Paragraph[210, 215]
+        Text[210, 214] chars:[210, 214, "item"]
+  HtmlCommentBlock[215, 224]
+  OrderedList[225, 297] isLoose delimiter:'.'
+    OrderedListItem[225, 288] open:[225, 227, "1."] isLoose
+      Paragraph[228, 288]
+        Text[228, 232] chars:[228, 232, "item"]
+        SoftLineBreak[232, 233]
+        Text[233, 257] chars:[233, 257, "with  … lines"]
+        SoftLineBreak[257, 258]
+        Text[258, 287] chars:[258, 287, "all s … apped"]
+    OrderedListItem[289, 297] open:[289, 291, "1."] isLoose
+      Paragraph[292, 297]
+        Text[292, 296] chars:[292, 296, "item"]
+  HtmlCommentBlock[298, 307]
+  OrderedList[308, 379] isTight delimiter:'.'
+    OrderedListItem[308, 371] open:[308, 310, "1."] isTight
+      Paragraph[311, 371]
+        Text[311, 315] chars:[311, 315, "item"]
+        SoftLineBreak[315, 316]
+        Text[316, 340] chars:[316, 340, "with  … lines"]
+        SoftLineBreak[340, 341]
+        Text[341, 370] chars:[341, 370, "all s … apped"]
+    OrderedListItem[371, 379] open:[371, 373, "1."] isTight
+      Paragraph[374, 379]
+        Text[374, 378] chars:[374, 378, "item"]
+  HtmlCommentBlock[380, 389]
+  BulletList[390, 456] isTight
+    BulletListItem[390, 456] open:[390, 391, "-"] isTight
+      Paragraph[392, 456]
+        LinkRef[392, 395] referenceOpen:[392, 393, "["] reference:[394, 394] referenceClose:[394, 395, "]"]
+          Text[393, 394] chars:[393, 394, " "]
+        Text[395, 400] chars:[395, 400, " item"]
+        SoftLineBreak[400, 401]
+        Text[401, 425] chars:[401, 425, "with  … lines"]
+        SoftLineBreak[425, 426]
+        Text[426, 455] chars:[426, 455, "all s … apped"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
+paragraph test 
+with multiple lazy lines
+all should be src pos wrapped
+.
+<p md-pos="0-70"><span md-pos="0-14">paragraph test</span>
+<span md-pos="16-40">with multiple lazy lines</span>
+<span md-pos="41-70">all should be src pos wrapped</span></p>
+.
+Document[0, 71]
+  Paragraph[0, 71]
+    Text[0, 14] chars:[0, 14, "parag …  test"]
+    SoftLineBreak[15, 16]
+    Text[16, 40] chars:[16, 40, "with  … lines"]
+    SoftLineBreak[40, 41]
+    Text[41, 70] chars:[41, 70, "all s … apped"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans tight list items
+
+```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
+- item
+with multiple lazy lines
+all should be src pos wrapped
+
+<!-- -->
+
+1. item
+with multiple lazy lines
+all should be src pos wrapped
+
+.
+<ul>
+  <li md-pos="2-61"><span md-pos="2-6">item</span>
+  <span md-pos="7-31">with multiple lazy lines</span>
+  <span md-pos="32-61">all should be src pos wrapped</span></li>
+</ul>
+<!-- -->
+<ol>
+  <li md-pos="76-135"><span md-pos="76-80">item</span>
+  <span md-pos="81-105">with multiple lazy lines</span>
+  <span md-pos="106-135">all should be src pos wrapped</span></li>
+</ol>
+.
+Document[0, 137]
+  BulletList[0, 62] isTight
+    BulletListItem[0, 62] open:[0, 1, "-"] isTight
+      Paragraph[2, 62]
+        Text[2, 6] chars:[2, 6, "item"]
+        SoftLineBreak[6, 7]
+        Text[7, 31] chars:[7, 31, "with  … lines"]
+        SoftLineBreak[31, 32]
+        Text[32, 61] chars:[32, 61, "all s … apped"]
+  HtmlCommentBlock[63, 72]
+  OrderedList[73, 136] isTight delimiter:'.'
+    OrderedListItem[73, 136] open:[73, 75, "1."] isTight
+      Paragraph[76, 136]
+        Text[76, 80] chars:[76, 80, "item"]
+        SoftLineBreak[80, 81]
+        Text[81, 105] chars:[81, 105, "with  … lines"]
+        SoftLineBreak[105, 106]
+        Text[106, 135] chars:[106, 135, "all s … apped"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans loose list items
+
+```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines)
+- item
+
+- item
+with multiple lazy lines
+all should be src pos wrapped
+
+<!-- -->
+
+1. item
+
+1. item
+with multiple lazy lines
+all should be src pos wrapped
+
+.
+<ul>
+  <li>
+    <p md-pos="2-6"><span md-pos="2-6">item</span></p>
+  </li>
+  <li>
+    <p md-pos="10-69"><span md-pos="10-14">item</span>
+    <span md-pos="15-39">with multiple lazy lines</span>
+    <span md-pos="40-69">all should be src pos wrapped</span></p>
+  </li>
+</ul>
+<!-- -->
+<ol>
+  <li>
+    <p md-pos="84-88"><span md-pos="84-88">item</span></p>
+  </li>
+  <li>
+    <p md-pos="93-152"><span md-pos="93-97">item</span>
+    <span md-pos="98-122">with multiple lazy lines</span>
+    <span md-pos="123-152">all should be src pos wrapped</span></p>
+  </li>
+</ol>
+.
+Document[0, 154]
+  BulletList[0, 70] isLoose
+    BulletListItem[0, 7] open:[0, 1, "-"] isLoose
+      Paragraph[2, 7]
+        Text[2, 6] chars:[2, 6, "item"]
+    BulletListItem[8, 70] open:[8, 9, "-"] isLoose
+      Paragraph[10, 70]
+        Text[10, 14] chars:[10, 14, "item"]
+        SoftLineBreak[14, 15]
+        Text[15, 39] chars:[15, 39, "with  … lines"]
+        SoftLineBreak[39, 40]
+        Text[40, 69] chars:[40, 69, "all s … apped"]
+  HtmlCommentBlock[71, 80]
+  OrderedList[81, 153] isLoose delimiter:'.'
+    OrderedListItem[81, 89] open:[81, 83, "1."] isLoose
+      Paragraph[84, 89]
+        Text[84, 88] chars:[84, 88, "item"]
+    OrderedListItem[90, 153] open:[90, 92, "1."] isLoose
+      Paragraph[93, 153]
+        Text[93, 97] chars:[93, 97, "item"]
+        SoftLineBreak[97, 98]
+        Text[98, 122] chars:[98, 122, "with  … lines"]
+        SoftLineBreak[122, 123]
+        Text[123, 152] chars:[123, 152, "all s … apped"]
+````````````````````````````````
+
+

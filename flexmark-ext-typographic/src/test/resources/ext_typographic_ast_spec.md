@@ -132,3 +132,15 @@ en--dash and em---dash
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, IGNORE)
+Sample with l'existence, from 1...2 and so on. . . 
+
+en--dash and em---dash
+.
+<p>Expected rendered HTML</p>
+.
+````````````````````````````````
+
+

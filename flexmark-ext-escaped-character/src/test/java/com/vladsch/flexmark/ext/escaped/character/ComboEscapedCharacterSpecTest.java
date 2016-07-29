@@ -35,6 +35,7 @@ public class ComboEscapedCharacterSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION1, true));
     }
 

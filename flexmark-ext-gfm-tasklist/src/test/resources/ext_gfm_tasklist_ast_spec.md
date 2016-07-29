@@ -604,3 +604,148 @@ Document[0, 24]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+1. [ ] task
+2. [x] task
+<!-- -->
+- [ ] task
+- [x] task
+.
+<ol>
+  <li class="task-list-item" md-pos="7-11"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="19-23"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+</ol>
+<!-- -->
+<ul>
+  <li class="task-list-item" md-pos="39-43"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="50-54"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+</ul>
+.
+Document[0, 55]
+  OrderedList[0, 24] isTight delimiter:'.'
+    TaskListItem[0, 12] open:[0, 2, "1."] isTight taskOpen:[3, 6, "[ ]"]
+      Paragraph[7, 12]
+        Text[7, 11] chars:[7, 11, "task"]
+    TaskListItem[12, 24] open:[12, 14, "2."] isTight taskOpen:[15, 18, "[x]"]
+      Paragraph[19, 24]
+        Text[19, 23] chars:[19, 23, "task"]
+  HtmlCommentBlock[24, 33]
+  BulletList[33, 55] isTight
+    TaskListItem[33, 44] open:[33, 34, "-"] isTight taskOpen:[35, 38, "[ ]"]
+      Paragraph[39, 44]
+        Text[39, 43] chars:[39, 43, "task"]
+    TaskListItem[44, 55] open:[44, 45, "-"] isTight taskOpen:[46, 49, "[x]"]
+      Paragraph[50, 55]
+        Text[50, 54] chars:[50, 54, "task"]
+````````````````````````````````
+
+Wrap individual lines in source position spans tight items
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, src-pos-lines)
+1. [ ] item
+with multiple lazy lines
+all should be src pos wrapped
+<!-- -->
+- [ ] item
+with multiple lazy lines
+all should be src pos wrapped
+.
+<ol>
+  <li class="task-list-item" md-pos="7-66"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span>
+  <span md-pos="12-36">with multiple lazy lines</span>
+  <span md-pos="37-66">all should be src pos wrapped</span></li>
+</ol>
+<!-- -->
+<ul>
+  <li class="task-list-item" md-pos="82-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
+  <span md-pos="87-111">with multiple lazy lines</span>
+  <span md-pos="112-141">all should be src pos wrapped</span></li>
+</ul>
+.
+Document[0, 142]
+  OrderedList[0, 67] isTight delimiter:'.'
+    TaskListItem[0, 67] open:[0, 2, "1."] isTight taskOpen:[3, 6, "[ ]"]
+      Paragraph[7, 67]
+        Text[7, 11] chars:[7, 11, "item"]
+        SoftLineBreak[11, 12]
+        Text[12, 36] chars:[12, 36, "with  … lines"]
+        SoftLineBreak[36, 37]
+        Text[37, 66] chars:[37, 66, "all s … apped"]
+  HtmlCommentBlock[67, 76]
+  BulletList[76, 142] isTight
+    TaskListItem[76, 142] open:[76, 77, "-"] isTight taskOpen:[78, 81, "[ ]"]
+      Paragraph[82, 142]
+        Text[82, 86] chars:[82, 86, "item"]
+        SoftLineBreak[86, 87]
+        Text[87, 111] chars:[87, 111, "with  … lines"]
+        SoftLineBreak[111, 112]
+        Text[112, 141] chars:[112, 141, "all s … apped"]
+````````````````````````````````
+
+
+Wrap individual lines in source position spans loose items
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
+1. [ ] item
+
+1. [ ] item
+with multiple lazy lines
+all should be src pos wrapped
+<!-- -->
+- [ ] item
+
+- [ ] item
+with multiple lazy lines
+all should be src pos wrapped
+.
+<ol>
+  <li class="task-list-item">
+    <p md-pos="0-11"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span></p>
+  </li>
+  <li class="task-list-item">
+    <p md-pos="13-79"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="20-24">item</span>
+    <span md-pos="25-49">with multiple lazy lines</span>
+    <span md-pos="50-79">all should be src pos wrapped</span></p>
+  </li>
+</ol>
+<!-- -->
+<ul>
+  <li class="task-list-item">
+    <p md-pos="89-99"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="95-99">item</span></p>
+  </li>
+  <li class="task-list-item">
+    <p md-pos="101-166"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
+    <span md-pos="112-136">with multiple lazy lines</span>
+    <span md-pos="137-166">all should be src pos wrapped</span></p>
+  </li>
+</ul>
+.
+Document[0, 167]
+  OrderedList[0, 80] isLoose delimiter:'.'
+    TaskListItem[0, 12] open:[0, 2, "1."] isLoose taskOpen:[3, 6, "[ ]"]
+      Paragraph[7, 12]
+        Text[7, 11] chars:[7, 11, "item"]
+    TaskListItem[13, 80] open:[13, 15, "1."] isLoose taskOpen:[16, 19, "[ ]"]
+      Paragraph[20, 80]
+        Text[20, 24] chars:[20, 24, "item"]
+        SoftLineBreak[24, 25]
+        Text[25, 49] chars:[25, 49, "with  … lines"]
+        SoftLineBreak[49, 50]
+        Text[50, 79] chars:[50, 79, "all s … apped"]
+  HtmlCommentBlock[80, 89]
+  BulletList[89, 167] isLoose
+    TaskListItem[89, 100] open:[89, 90, "-"] isLoose taskOpen:[91, 94, "[ ]"]
+      Paragraph[95, 100]
+        Text[95, 99] chars:[95, 99, "item"]
+    TaskListItem[101, 167] open:[101, 102, "-"] isLoose taskOpen:[103, 106, "[ ]"]
+      Paragraph[107, 167]
+        Text[107, 111] chars:[107, 111, "item"]
+        SoftLineBreak[111, 112]
+        Text[112, 136] chars:[112, 136, "with  … lines"]
+        SoftLineBreak[136, 137]
+        Text[137, 166] chars:[137, 166, "all s … apped"]
+````````````````````````````````
+
+

@@ -20,6 +20,7 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("text-only", new MutableDataSet().set(SimTocExtension.IS_TEXT_ONLY, true));
         optionsMap.put("with-option-list", new MutableDataSet().set(SimTocExtension.AST_INCLUDE_OPTIONS, true));
         optionsMap.put("blank-line-spacer", new MutableDataSet().set(SimTocExtension.BLANK_LINE_SPACER, true));

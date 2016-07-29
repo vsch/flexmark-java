@@ -171,8 +171,8 @@ public class SegmentedSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public SourceRange getSourceRange() {
-        return new SourceRange(getStartOffset(), getEndOffset());
+    public Range getSourceRange() {
+        return new Range(getStartOffset(), getEndOffset());
     }
 
     @Override

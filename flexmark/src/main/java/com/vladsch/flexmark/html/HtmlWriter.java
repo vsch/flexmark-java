@@ -7,8 +7,11 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.internal.util.Escaping;
 import com.vladsch.flexmark.internal.util.options.Attribute;
 import com.vladsch.flexmark.internal.util.options.Attributes;
+import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.internal.util.sequence.TagRange;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class HtmlWriter {
     private final Appendable buffer;
@@ -49,7 +52,7 @@ public class HtmlWriter {
         for (int i = 0; i < indentSize; i++) sb.append(' ');
         indentSizePrefix = sb.toString();
     }
-    
+
     boolean inPre() {
         return preNesting > 0;
     }
@@ -81,6 +84,28 @@ public class HtmlWriter {
             currentAttributes = new Attributes();
         }
         currentAttributes.replaceValue(name, value);
+        return this;
+    }
+
+    public HtmlWriter srcPos() {
+        return srcPos(context.getCurrentNode().getChars());
+    }
+
+    public HtmlWriter srcPos(BasedSequence sourceText) {
+        if (sourceText.isNotNull()) {
+            BasedSequence trimmed = sourceText.trimEOL();
+            return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
+        }
+        return this;
+    }
+
+    public HtmlWriter srcPos(int startOffset, int endOffset) {
+        if (startOffset <= endOffset && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
+            if (currentAttributes == null) {
+                currentAttributes = new Attributes();
+            }
+            currentAttributes.replaceValue(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
+        }
         return this;
     }
 
@@ -158,12 +183,41 @@ public class HtmlWriter {
         append(name);
 
         if (attributes != null && !attributes.isEmpty()) {
+            String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;
+
             for (Attribute attribute : attributes.values()) {
+                String attributeValue = attribute.getValue();
+                
+                if (!sourcePositionAttribute.isEmpty() && attribute.getName().equals(sourcePositionAttribute)) {
+                    int pos = attributeValue.indexOf('-');
+                    int startOffset = -1;
+                    int endOffset = -1;
+
+                    if (pos != -1) {
+                        try {
+                            startOffset = Integer.valueOf(attributeValue.substring(0, pos));
+                        } catch (Throwable ignored) {
+
+                        }
+                        try {
+                            endOffset = Integer.valueOf(attributeValue.substring(pos + 1));
+                        } catch (Throwable ignored) {
+
+                        }
+                    }
+
+                    if (startOffset >= 0 && startOffset < endOffset) {
+                        ArrayList<TagRange> tagRanges = context.getDocument().get(HtmlRenderer.TAG_RANGES);
+                        tagRanges.add(new TagRange(name, startOffset, endOffset));
+                    }
+                }
+
                 if (attribute.isNonRendering()) continue;
+
                 append(" ");
                 append(Escaping.escapeHtml(attribute.getName(), true));
                 append("=\"");
-                append(Escaping.escapeHtml(attribute.getValue(), true));
+                append(Escaping.escapeHtml(attributeValue, true));
                 append("\"");
             }
         }

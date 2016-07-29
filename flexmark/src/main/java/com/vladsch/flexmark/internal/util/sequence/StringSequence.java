@@ -31,8 +31,8 @@ public class StringSequence extends BasedSequenceImpl {
     }
 
     @Override
-    public SourceRange getSourceRange() {
-        return new SourceRange(0, length());
+    public Range getSourceRange() {
+        return new Range(0, length());
     }
 
     @Override

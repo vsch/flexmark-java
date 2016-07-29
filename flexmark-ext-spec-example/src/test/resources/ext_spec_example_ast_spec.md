@@ -10,7 +10,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## SpecExample  
 
-Converts spec example text to SpecExample nodes.  
+Converts spec example text to SpecExample nodes.
 
 Empty
 
@@ -949,6 +949,163 @@ No option nodes
 Document[0, 69]
   SpecExampleBlock[0, 68] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 50] optionsClosingMarker:[50, 51] closingMarker:[52, 68]
     SpecExampleSource[52, 52]
+````````````````````````````````
+
+
+## Source Position Attribute
+
+Render sections
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+```````````````` example(Section: Number) options(option)
+Markdown only
+
+- List item
+…
+<p>Markdown only</p>
+<ul>
+  <li>List item</li>
+</ul>
+…
+Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+````````````````
+.
+<hr />
+<h5>Section: Number</h5>
+<hr />
+<pre><code class="language-markdown" md-pos="58-84">Markdown only
+
+- List item</code></pre>
+<hr />
+<pre><code class="language-html" md-pos="87-139">&lt;p&gt;Markdown only&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;List item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<hr />
+<div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><p>Markdown only</p>
+<ul>
+  <li>List item</li>
+</ul></div>
+<hr />
+<pre><code class="language-text" md-pos="142-332">Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+.
+Document[0, 350]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+    SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
+      SpecExampleOption[50, 56] chars:[50, 56, "option"]
+    SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
+    SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
+    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
+    SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
+    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+````````````````````````````````
+
+
+Fenced code rendering
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, as-fenced-code)
+```````````````` example(Section: Number) options(option)
+Markdown only
+
+- List item
+…
+<p>Markdown only</p>
+<ul>
+  <li>List item</li>
+</ul>
+…
+Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+````````````````
+.
+<pre><code class="language-text" md-pos="58-332">Markdown only
+
+- List item
+…
+&lt;p&gt;Markdown only&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;List item&lt;/li&gt;
+&lt;/ul&gt;
+…
+Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
+</code></pre>
+.
+Document[0, 350]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+    SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
+      SpecExampleOption[50, 56] chars:[50, 56, "option"]
+    SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
+    SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
+    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
+    SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
+    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
+````````````````````````````````
+
+
+Definition list rendering
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, as-def-list)
+```````````````` example(Section: Number) options(option)
+Markdown only
+
+- List item
+…
+<p>Markdown only</p>
+<ul>
+  <li>List item</li>
+</ul>
+…
+Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, "Markd"..." only"]
+````````````````
+.
+<hr />
+<dl>
+  <dt>example Section: Number options(option)</dt>
+  <dt>Source</dt>
+  <dd>
+  <pre><code class="language-markdown" md-pos="58-84">Markdown only
+
+- List item</code></pre>
+  </dd>
+  <dt>Html</dt>
+  <dd>
+  <pre><code class="language-html" md-pos="87-139">&lt;p&gt;Markdown only&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;List item&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+  </dd>
+  <dt>Rendered Html</dt>
+  <dd><div style="border:solid #cccccc 1px;padding:0 20px 10px 20px;"><p>Markdown only</p>
+  <ul>
+    <li>List item</li>
+  </ul></div>
+  </dd>
+  <dt>AST</dt>
+  <dd>
+  <pre><code class="language-text" md-pos="142-332">Document[0, 56]
+  SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
+    SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
+  </dd>
+</dl>
+.
+Document[0, 350]
+  SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
+    SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
+      SpecExampleOption[50, 56] chars:[50, 56, "option"]
+    SpecExampleSource[58, 84] chars:[58, 84, "Markd …  item"]
+    SpecExampleSeparator[85, 87] chars:[85, 87, "…\n"]
+    SpecExampleHtml[87, 139] chars:[87, 139, "<p>Ma … </ul>"]
+    SpecExampleSeparator[140, 142] chars:[140, 142, "…\n"]
+    SpecExampleAst[142, 332] chars:[142, 332, "Docum … nly\"]"]
 ````````````````````````````````
 
 

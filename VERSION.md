@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.14](#0414)
 - [0.4.13](#0413)
 - [0.4.12](#0412)
 - [0.4.11](#0411)
@@ -41,6 +42,20 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.14
+------
+
+- Add `HtmlWriter.srcPos()` methods to add source position information to the next `.withAttr()`
+  tag.
+
+- Add `HtmlRenderer.SOURCE_POSITION_ATTRIBUTE` the name of the source position HTML attribute so
+  set to the source position given in `.srcPos()` methods.
+
+- Add `HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES` if true then paragraph source lines will be
+  wrapped in `<span></span>` with source position information for the line. Works even for tight
+  list items that do not generate a `<p>` wrapper for their text. :warning: Only works if source
+  position attribute is set to non-empty value.
 
 0.4.13
 ------

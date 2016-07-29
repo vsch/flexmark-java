@@ -20,9 +20,8 @@ public class ComboAbbreviationSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("links", new MutableDataSet()
-                .set(AbbreviationExtension.USE_LINKS, true)
-        );
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("links", new MutableDataSet().set(AbbreviationExtension.USE_LINKS, true));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

@@ -19,6 +19,8 @@ public class HtmlRendererOptions {
     public final boolean renderHeaderId;
     public final boolean generateHeaderIds;
     public final String languageClassPrefix;
+    public final String sourcePositionAttribute;
+    public final boolean sourcePositionParagraphLines;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = options.get(HtmlRenderer.SOFT_BREAK);
@@ -37,5 +39,7 @@ public class HtmlRendererOptions {
         renderHeaderId = options.get(HtmlRenderer.RENDER_HEADER_ID);
         generateHeaderIds = options.get(HtmlRenderer.GENERATE_HEADER_ID);
         languageClassPrefix = options.get(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX);
+        sourcePositionAttribute = options.get(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE);
+        sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES);
     }
 }

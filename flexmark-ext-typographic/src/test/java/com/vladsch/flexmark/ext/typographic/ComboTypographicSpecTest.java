@@ -35,6 +35,7 @@ public class ComboTypographicSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("no-quotes", new MutableDataSet().set(TypographicExtension.TYPOGRAPHIC_QUOTES, false));
         optionsMap.put("no-smarts", new MutableDataSet().set(TypographicExtension.TYPOGRAPHIC_SMARTS, false));
     }

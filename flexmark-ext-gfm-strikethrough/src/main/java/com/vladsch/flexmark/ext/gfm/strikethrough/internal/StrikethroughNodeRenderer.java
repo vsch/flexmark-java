@@ -24,7 +24,7 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
     }
 
     private void render(Strikethrough node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("del");
+        html.srcPos(node.getText()).withAttr().tag("del");
         context.renderChildren(node);
         html.tag("/del");
     }

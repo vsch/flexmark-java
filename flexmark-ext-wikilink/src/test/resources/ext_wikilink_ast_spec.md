@@ -10,8 +10,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## WikiLinks
 
-Converts wikilink of the forms: [[link]], [[link|text]] and
-[[text|link]] to links in the HTML page.  
+Converts wikilink of the forms: [[link]], [[link|text]] and [[text|link]] to links in the HTML
+page.
 
 no spaces between brackets
 
@@ -167,8 +167,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-reference inside is not a wiki link but a link ref with brackets around
-it
+reference inside is not a wiki link but a link ref with brackets around it
 
 ```````````````````````````````` example WikiLinks: 11
 [[not wiki link][ref]]
@@ -184,8 +183,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-dummy reference inside is not a wiki link but a link ref with brackets
-around it
+dummy reference inside is not a wiki link but a link ref with brackets around it
 
 ```````````````````````````````` example WikiLinks: 12
 [[not wiki link][]]
@@ -244,6 +242,7 @@ Document[0, 57]
       Text[52, 55] chars:[52, 55, "ref"]
 ````````````````````````````````
 
+
 Custom extension
 
 ```````````````````````````````` example(WikiLinks: 15) options(custom-ext)
@@ -297,6 +296,7 @@ Document[0, 16]
       Text[2, 12] chars:[2, 12, "wiki link#"]
 ````````````````````````````````
 
+
 With Anchor ref
 
 ```````````````````````````````` example WikiLinks: 18
@@ -309,6 +309,7 @@ Document[0, 26]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 22, "anchor-ref"] linkClose:[22, 24, "]]"]
       Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
 ````````````````````````````````
+
 
 With text, empty anchor ref
 
@@ -323,6 +324,7 @@ Document[0, 26]
       Text[2, 22] chars:[2, 22, "wiki  … link#"]
 ````````````````````````````````
 
+
 With text, anchor ref
 
 ```````````````````````````````` example WikiLinks: 20
@@ -335,6 +337,7 @@ Document[0, 36]
     WikiLink[0, 34] linkOpen:[0, 2, "[["] link:[12, 32, "wiki link#anchor-ref"] pageRef:[12, 21, "wiki link"] anchorMarker:[21, 22, "#"] anchorRef:[22, 32, "anchor-ref"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[32, 34, "]]"]
       Text[2, 32] chars:[2, 32, "wiki  … r-ref"]
 ````````````````````````````````
+
 
 Links first, with text, empty anchor ref
 
@@ -349,6 +352,7 @@ Document[0, 26]
       Text[2, 22] chars:[2, 22, "wiki  …  text"]
 ````````````````````````````````
 
+
 Links first, with text, anchor ref
 
 ```````````````````````````````` example(WikiLinks: 22) options(links-first)
@@ -361,6 +365,7 @@ Document[0, 36]
     WikiLink[0, 34] linkOpen:[0, 2, "[["] text:[23, 32, "wiki text"] textSep:[22, 23, "|"] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 22, "anchor-ref"] linkClose:[32, 34, "]]"]
       Text[2, 32] chars:[2, 32, "wiki  …  text"]
 ````````````````````````````````
+
 
 Custom extension with empty Anchor ref
 
@@ -415,6 +420,50 @@ Document[0, 25]
   Paragraph[0, 25]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 22, "anchor-ref"] linkClose:[22, 24, "]]"]
       Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
+````````````````````````````````
+
+
+## Source Position Attribute
+
+simple wiki link
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+[[wiki link]]
+.
+<p md-pos="0-13"><a href="wiki-link" md-pos="2-11">wiki link</a></p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
+      Text[2, 11] chars:[2, 11, "wiki link"]
+````````````````````````````````
+
+
+wiki link with text
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+[[wiki text|wiki link]]
+.
+<p md-pos="0-23"><a href="wiki-link" md-pos="2-11">wiki text</a></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiLink[0, 23] linkOpen:[0, 2, "[["] link:[12, 21, "wiki link"] pageRef:[12, 21, "wiki link"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[21, 23, "]]"]
+      Text[2, 21] chars:[2, 21, "wiki  …  link"]
+````````````````````````````````
+
+
+wiki link with text, links first option
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, links-first)
+[[wiki link|wiki text]]
+.
+<p md-pos="0-23"><a href="wiki-link" md-pos="12-21">wiki text</a></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiLink[0, 23] linkOpen:[0, 2, "[["] text:[12, 21, "wiki text"] textSep:[11, 12, "|"] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[21, 23, "]]"]
+      Text[2, 21] chars:[2, 21, "wiki  …  text"]
 ````````````````````````````````
 
 

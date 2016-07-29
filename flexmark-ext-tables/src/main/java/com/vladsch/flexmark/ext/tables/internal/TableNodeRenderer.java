@@ -54,7 +54,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(TableRow node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagLine("tr", () -> {
+        html.srcPos(node.getChars()).withAttr().tagLine("tr", () -> {
             context.renderChildren(node);
         });
     }
@@ -69,7 +69,7 @@ public class TableNodeRenderer implements NodeRenderer {
             html.attr("colspan", String.valueOf(node.getSpan()));
         }
 
-        html.withAttr().tag(tag);
+        html.srcPos(node.getText()).withAttr().tag(tag);
         context.renderChildren(node);
         html.tag("/" + tag);
     }

@@ -13,14 +13,14 @@ public class ReplacedTextMapper {
     }
 
     public void addReplacedText(BasedSequence originalSegment, BasedSequence replacedSequence) {
-        regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), new SourceRange(replacedLength, replacedLength + replacedSequence.length())));
+        regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), new Range(replacedLength, replacedLength + replacedSequence.length())));
         replacedLength += replacedSequence.length();
         replacedSegments.add(replacedSequence);
     }
 
     public void addOriginalText(BasedSequence originalSegment) {
         if (originalSegment.length() > 0) {
-            regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), new SourceRange(replacedLength, replacedLength + originalSegment.length())));
+            regions.add(new ReplacedTextRegion(originalSegment.getSourceRange(), new Range(replacedLength, replacedLength + originalSegment.length())));
             replacedLength += originalSegment.length();
             replacedSegments.add(originalSegment);
         }
@@ -50,9 +50,9 @@ public class ReplacedTextMapper {
 
         for (ReplacedTextRegion region : regions) {
             if (region.containsReplacedIndex(replacedIndex)) {
-                originalIndex = region.getOriginal().startOffset + replacedIndex - region.getReplaced().startOffset;
-                if (originalIndex > region.getOriginal().getEndOffset()) {
-                    originalIndex = region.getOriginal().getEndOffset();
+                originalIndex = region.getOriginalRange().getStart() + replacedIndex - region.getReplacedRange().getStart();
+                if (originalIndex > region.getOriginalRange().getEnd()) {
+                    originalIndex = region.getOriginalRange().getEnd();
                 }
 
                 originalIndex -= original.getStartOffset();

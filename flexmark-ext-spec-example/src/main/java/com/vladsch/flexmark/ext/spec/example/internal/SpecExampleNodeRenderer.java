@@ -63,7 +63,8 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     }
 
     private void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
-        String text = node.getChars().normalizeEOL();
+        BasedSequence text = node.getChars();
+        
         switch (options.renderAs) {
             case DEFINITION_LIST:
                 html.tag("dt").text("Source").tag("/dt").line();
@@ -86,7 +87,8 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     }
 
     private void render(SpecExampleHtml node, NodeRendererContext context, HtmlWriter html) {
-        String text = node.getChars().normalizeEOL();
+        BasedSequence text = node.getChars();
+        
         switch (options.renderAs) {
             case DEFINITION_LIST:
                 html.tag("dt").text("Html").tag("/dt").line();
@@ -96,7 +98,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 if (options.renderHtml) {
                     html.tag("dt").text("Rendered Html").tag("/dt").line();
                     html.tag("dd");
-                    html.raw(options.renderedHtmlPrefix).raw(text).raw(options.renderedHtmlSuffix).line();
+                    html.raw(options.renderedHtmlPrefix).raw(text.normalizeEOL()).raw(options.renderedHtmlSuffix).line();
                     html.tag("/dd").line();
                 }
                 break;
@@ -107,7 +109,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                     render(text, "html", context, html);
                     if (options.renderHtml) {
                         html.tagVoidLine("hr");
-                        html.raw(options.renderedHtmlPrefix).raw(text).raw(options.renderedHtmlSuffix).line();
+                        html.raw(options.renderedHtmlPrefix).raw(text.normalizeEOL()).raw(options.renderedHtmlSuffix).line();
                     }
                 }
                 break;
@@ -119,7 +121,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     }
 
     private void render(SpecExampleAst node, NodeRendererContext context, HtmlWriter html) {
-        String text = node.getChars().normalizeEOL();
+        BasedSequence text = node.getChars();
 
         switch (options.renderAs) {
             case DEFINITION_LIST:
@@ -180,12 +182,14 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
             case FENCED_CODE:
             default:
-                render(node.getContentChars().toString(), "text", context, html);
+                render(node.getContentChars(), "text", context, html);
                 break;
         }
     }
 
-    private void render(String text, String language, NodeRendererContext context, HtmlWriter html) {
+    private void render(BasedSequence contentChars, String language, NodeRendererContext context, HtmlWriter html) {
+        String text = contentChars.normalizeEOL();
+        
         if (!text.isEmpty()) {
             if (!language.isEmpty()) {
                 html.attr("class", context.getHtmlOptions().languageClassPrefix + language);
@@ -193,7 +197,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
             html.line();
             html.tag("pre").openPre();
-            html.withAttr().tag("code");
+            html.srcPos(contentChars).withAttr().tag("code");
             html.text(text);
             html.tag("/code");
             html.tag("/pre").closePre();

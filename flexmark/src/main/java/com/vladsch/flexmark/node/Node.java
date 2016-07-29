@@ -283,7 +283,7 @@ public abstract class Node {
 
     public static BasedSequence spanningChars(BasedSequence... segments) {
         int startOffset = Integer.MAX_VALUE;
-        int endOffset = 0;
+        int endOffset = -1;
         BasedSequence firstSequence = null;
         BasedSequence lastSequence = null;
         for (BasedSequence segment : segments) {

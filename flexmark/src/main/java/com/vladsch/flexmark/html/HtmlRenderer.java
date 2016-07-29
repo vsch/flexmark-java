@@ -3,9 +3,11 @@ package com.vladsch.flexmark.html;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.Escaping;
+import com.vladsch.flexmark.internal.util.collection.DataValueFactory;
 import com.vladsch.flexmark.internal.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.internal.util.dependency.FlatDependencyHandler;
 import com.vladsch.flexmark.internal.util.options.*;
+import com.vladsch.flexmark.internal.util.sequence.TagRange;
 import com.vladsch.flexmark.node.Document;
 import com.vladsch.flexmark.node.HtmlBlock;
 import com.vladsch.flexmark.node.HtmlInline;
@@ -42,6 +44,14 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", false);
     final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
     final static public DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
+    final static public DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
+    final static public DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
+    final static public DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
+        @Override
+        public ArrayList<TagRange> create(DataHolder value) {
+            return new ArrayList<>();
+        }
+    });
 
     final List<AttributeProviderFactory> attributeProviderFactories;
     final List<NodeRendererFactory> nodeRendererFactories;

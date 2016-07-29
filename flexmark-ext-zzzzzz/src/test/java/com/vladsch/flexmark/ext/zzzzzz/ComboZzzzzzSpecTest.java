@@ -20,7 +20,8 @@ public class ComboZzzzzzSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("option1", new MutableDataSet().set(ZzzzzzExtension.ZZZZZZ_OPTION1, true));
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("option1", new MutableDataSet().set(ZzzzzzExtension.ZZZZZZ_OPTION1, true));//zzzoptionszzz(CUSTOM_PROPERTIES)
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

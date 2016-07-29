@@ -1831,9 +1831,99 @@ Document[0, 30]
 ````````````````````````````````
 
 
+in item
+
+```````````````````````````````` example(Tables Extension: 55) options(keep-whitespace)
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                                               |
+  |---------------|-----------------|---------------------------------------------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
+  | Explicit link | `.link`         | `[]()`                                                  |
+.
+<ul>
+  <li>
+    <p>Add: live templates starting with <code>.</code></p>
+    <table>
+      <thead>
+        <tr><th> Element       </th><th> Abbreviation    </th><th> Expansion                                               </th></tr>
+      </thead>
+      <tbody>
+        <tr><td> Abbreviation  </td><td> <code>.abbreviation</code> </td><td> <code>*[]:</code>                                                 </td></tr>
+        <tr><td> Code fence    </td><td> <code>.codefence</code>    </td><td> ``` ... ```                                       </td></tr>
+        <tr><td> Explicit link </td><td> <code>.link</code>         </td><td> <code>[]()</code>                                                  </td></tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+.
+Document[0, 565]
+  BulletList[0, 565] isLoose
+    BulletListItem[0, 565] open:[0, 1, "-"] isLoose
+      Paragraph[2, 44]
+        Text[2, 36] chars:[2, 36, "Add:  … with "]
+        Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
+      TableBlock[87, 565]
+        TableHead[87, 180]
+          TableRow[87, 180] rowNumber=1
+            TableCell[87, 104] header textOpen:[87, 88, "|"] text:[88, 103, " Element       "] textClose:[103, 104, "|"]
+              Text[88, 103] chars:[88, 103, " Elem …      "]
+            TableCell[104, 122] header text:[104, 121, " Abbreviation    "] textClose:[121, 122, "|"]
+              Text[104, 121] chars:[104, 121, " Abbr … n    "]
+            TableCell[122, 180] header text:[122, 179, " Expansion                                               "] textClose:[179, 180, "|"]
+              Text[122, 179] chars:[122, 179, " Expa …      "]
+        TableSeparator[183, 276]
+          TableRow[183, 276]
+            TableCell[183, 200] textOpen:[183, 184, "|"] text:[184, 199, "---------------"] textClose:[199, 200, "|"]
+              Text[184, 199] chars:[184, 199, "----- … -----"]
+            TableCell[200, 218] text:[200, 217, "-----------------"] textClose:[217, 218, "|"]
+              Text[200, 217] chars:[200, 217, "----- … -----"]
+            TableCell[218, 276] text:[218, 275, "---------------------------------------------------------"] textClose:[275, 276, "|"]
+              Text[218, 275] chars:[218, 275, "----- … -----"]
+        TableBody[279, 564]
+          TableRow[279, 372] rowNumber=1
+            TableCell[279, 296] textOpen:[279, 280, "|"] text:[280, 295, " Abbreviation  "] textClose:[295, 296, "|"]
+              Text[280, 295] chars:[280, 295, " Abbr … ion  "]
+            TableCell[296, 314] text:[296, 313, " `.abbreviation` "] textClose:[313, 314, "|"]
+              Text[296, 297] chars:[296, 297, " "]
+              Code[297, 312] textOpen:[297, 298, "`"] text:[298, 311, ".abbr … eviation"] textClose:[311, 312, "`"]
+              Text[312, 312]
+              Text[312, 313] chars:[312, 313, " "]
+            TableCell[314, 372] text:[314, 371, " `*[]: `                                                 "] textClose:[371, 372, "|"]
+              Text[314, 315] chars:[314, 315, " "]
+              Code[315, 322] textOpen:[315, 316, "`"] text:[316, 321, "*[]: "] textClose:[321, 322, "`"]
+              Text[322, 322]
+              Text[322, 371] chars:[322, 371, "      …      "]
+          TableRow[375, 468] rowNumber=2
+            TableCell[375, 392] textOpen:[375, 376, "|"] text:[376, 391, " Code fence    "] textClose:[391, 392, "|"]
+              Text[376, 391] chars:[376, 391, " Code … e    "]
+            TableCell[392, 410] text:[392, 409, " `.codefence`    "] textClose:[409, 410, "|"]
+              Text[392, 393] chars:[392, 393, " "]
+              Code[393, 405] textOpen:[393, 394, "`"] text:[394, 404, ".codefence"] textClose:[404, 405, "`"]
+              Text[405, 405]
+              Text[405, 409] chars:[405, 409, "    "]
+            TableCell[410, 468] text:[410, 467, " \`\`\` ... \`\`\`                                       "] textClose:[467, 468, "|"]
+              Text[410, 467] chars:[410, 467, " \`\` …      "]
+          TableRow[471, 564] rowNumber=3
+            TableCell[471, 488] textOpen:[471, 472, "|"] text:[472, 487, " Explicit link "] textClose:[487, 488, "|"]
+              Text[472, 487] chars:[472, 487, " Expl … link "]
+            TableCell[488, 506] text:[488, 505, " `.link`         "] textClose:[505, 506, "|"]
+              Text[488, 489] chars:[488, 489, " "]
+              Code[489, 496] textOpen:[489, 490, "`"] text:[490, 495, ".link"] textClose:[495, 496, "`"]
+              Text[496, 496]
+              Text[496, 505] chars:[496, 505, "         "]
+            TableCell[506, 564] text:[506, 563, " `[]()`                                                  "] textClose:[563, 564, "|"]
+              Text[506, 507] chars:[506, 507, " "]
+              Code[507, 513] textOpen:[507, 508, "`"] text:[508, 512, "[]()"] textClose:[512, 513, "`"]
+              Text[513, 513]
+              Text[513, 563] chars:[513, 563, "      …      "]
+````````````````````````````````
+
+
 real life table
 
-```````````````````````````````` example Tables Extension: 55
+```````````````````````````````` example Tables Extension: 56
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2667,6 +2757,186 @@ Document[0, 10153]
         TableCell[10133, 10141] CENTER textClose:[10140, 10141, "|"]
         TableCell[10141, 10152] CENTER text:[10145, 10146, "X"] textClose:[10151, 10152, "|"]
           Text[10145, 10146] chars:[10145, 10146, "X"]
+````````````````````````````````
+
+
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+| Feature                                                                                                                 | Basic | Enhanced |
+|:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
+| Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
+| Preview Tab so you can see what the rendered markdown will look like on GitHub.                                         |   X   |    X     |
+| Syntax highlighting                                                                                                     |   X   |    X     |
+| Table syntax highlighting stripes rows and columns                                                                      |   X   |    X     |
+| Support for Default and Darcula color schemes for preview tab                                                           |   X   |    X     |
+| Warning and Error Annotations to help you validate wiki link errors                                                     |   X   |    X     |
+.
+<table>
+  <thead>
+    <tr md-pos="0-142"><th align="left" md-pos="2-9">Feature</th><th align="center" md-pos="124-129">Basic</th><th align="center" md-pos="132-140">Enhanced</th></tr>
+  </thead>
+  <tbody>
+    <tr md-pos="286-428"><td align="left" md-pos="288-352">Works with builds 143.2370 or newer, product version IDEA 15.0.6</td><td align="center" md-pos="412-413">X</td><td align="center" md-pos="421-422">X</td></tr>
+    <tr md-pos="429-571"><td align="left" md-pos="431-510">Preview Tab so you can see what the rendered markdown will look like on GitHub.</td><td align="center" md-pos="555-556">X</td><td align="center" md-pos="564-565">X</td></tr>
+    <tr md-pos="572-714"><td align="left" md-pos="574-593">Syntax highlighting</td><td align="center" md-pos="698-699">X</td><td align="center" md-pos="707-708">X</td></tr>
+    <tr md-pos="715-857"><td align="left" md-pos="717-767">Table syntax highlighting stripes rows and columns</td><td align="center" md-pos="841-842">X</td><td align="center" md-pos="850-851">X</td></tr>
+    <tr md-pos="858-1000"><td align="left" md-pos="860-921">Support for Default and Darcula color schemes for preview tab</td><td align="center" md-pos="984-985">X</td><td align="center" md-pos="993-994">X</td></tr>
+    <tr md-pos="1001-1143"><td align="left" md-pos="1003-1070">Warning and Error Annotations to help you validate wiki link errors</td><td align="center" md-pos="1127-1128">X</td><td align="center" md-pos="1136-1137">X</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 1144]
+  TableBlock[0, 1144]
+    TableHead[0, 142]
+      TableRow[0, 142] rowNumber=1
+        TableCell[0, 123] LEFT header textOpen:[0, 1, "|"] text:[2, 9, "Feature"] textClose:[122, 123, "|"]
+          Text[2, 9] chars:[2, 9, "Feature"]
+        TableCell[123, 131] CENTER header text:[124, 129, "Basic"] textClose:[130, 131, "|"]
+          Text[124, 129] chars:[124, 129, "Basic"]
+        TableCell[131, 142] CENTER header text:[132, 140, "Enhanced"] textClose:[141, 142, "|"]
+          Text[132, 140] chars:[132, 140, "Enhanced"]
+    TableSeparator[143, 285]
+      TableRow[143, 285]
+        TableCell[143, 266] LEFT textOpen:[143, 144, "|"] text:[144, 265, ":------------------------------------------------------------------------------------------------------------------------"] textClose:[265, 266, "|"]
+          Text[144, 265] chars:[144, 265, ":---- … -----"]
+        TableCell[266, 274] CENTER text:[266, 273, ":-----:"] textClose:[273, 274, "|"]
+          Text[266, 273] chars:[266, 273, ":-----:"]
+        TableCell[274, 285] CENTER text:[274, 284, ":--------:"] textClose:[284, 285, "|"]
+          Text[274, 284] chars:[274, 284, ":--------:"]
+    TableBody[286, 1143]
+      TableRow[286, 428] rowNumber=1
+        TableCell[286, 409] LEFT textOpen:[286, 287, "|"] text:[288, 352, "Works with builds 143.2370 or newer, product version IDEA 15.0.6"] textClose:[408, 409, "|"]
+          Text[288, 352] chars:[288, 352, "Works … 5.0.6"]
+        TableCell[409, 417] CENTER text:[412, 413, "X"] textClose:[416, 417, "|"]
+          Text[412, 413] chars:[412, 413, "X"]
+        TableCell[417, 428] CENTER text:[421, 422, "X"] textClose:[427, 428, "|"]
+          Text[421, 422] chars:[421, 422, "X"]
+      TableRow[429, 571] rowNumber=2
+        TableCell[429, 552] LEFT textOpen:[429, 430, "|"] text:[431, 510, "Preview Tab so you can see what the rendered markdown will look like on GitHub."] textClose:[551, 552, "|"]
+          Text[431, 510] chars:[431, 510, "Previ … tHub."]
+        TableCell[552, 560] CENTER text:[555, 556, "X"] textClose:[559, 560, "|"]
+          Text[555, 556] chars:[555, 556, "X"]
+        TableCell[560, 571] CENTER text:[564, 565, "X"] textClose:[570, 571, "|"]
+          Text[564, 565] chars:[564, 565, "X"]
+      TableRow[572, 714] rowNumber=3
+        TableCell[572, 695] LEFT textOpen:[572, 573, "|"] text:[574, 593, "Syntax highlighting"] textClose:[694, 695, "|"]
+          Text[574, 593] chars:[574, 593, "Synta … hting"]
+        TableCell[695, 703] CENTER text:[698, 699, "X"] textClose:[702, 703, "|"]
+          Text[698, 699] chars:[698, 699, "X"]
+        TableCell[703, 714] CENTER text:[707, 708, "X"] textClose:[713, 714, "|"]
+          Text[707, 708] chars:[707, 708, "X"]
+      TableRow[715, 857] rowNumber=4
+        TableCell[715, 838] LEFT textOpen:[715, 716, "|"] text:[717, 767, "Table syntax highlighting stripes rows and columns"] textClose:[837, 838, "|"]
+          Text[717, 767] chars:[717, 767, "Table … lumns"]
+        TableCell[838, 846] CENTER text:[841, 842, "X"] textClose:[845, 846, "|"]
+          Text[841, 842] chars:[841, 842, "X"]
+        TableCell[846, 857] CENTER text:[850, 851, "X"] textClose:[856, 857, "|"]
+          Text[850, 851] chars:[850, 851, "X"]
+      TableRow[858, 1000] rowNumber=5
+        TableCell[858, 981] LEFT textOpen:[858, 859, "|"] text:[860, 921, "Support for Default and Darcula color schemes for preview tab"] textClose:[980, 981, "|"]
+          Text[860, 921] chars:[860, 921, "Suppo … w tab"]
+        TableCell[981, 989] CENTER text:[984, 985, "X"] textClose:[988, 989, "|"]
+          Text[984, 985] chars:[984, 985, "X"]
+        TableCell[989, 1000] CENTER text:[993, 994, "X"] textClose:[999, 1000, "|"]
+          Text[993, 994] chars:[993, 994, "X"]
+      TableRow[1001, 1143] rowNumber=6
+        TableCell[1001, 1124] LEFT textOpen:[1001, 1002, "|"] text:[1003, 1070, "Warning and Error Annotations to help you validate wiki link errors"] textClose:[1123, 1124, "|"]
+          Text[1003, 1070] chars:[1003, 1070, "Warni … rrors"]
+        TableCell[1124, 1132] CENTER text:[1127, 1128, "X"] textClose:[1131, 1132, "|"]
+          Text[1127, 1128] chars:[1127, 1128, "X"]
+        TableCell[1132, 1143] CENTER text:[1136, 1137, "X"] textClose:[1142, 1143, "|"]
+          Text[1136, 1137] chars:[1136, 1137, "X"]
+````````````````````````````````
+
+
+in item
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos, keep-whitespace)
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                                               |
+  |---------------|-----------------|---------------------------------------------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
+  | Explicit link | `.link`         | `[]()`                                                  |
+.
+<ul>
+  <li>
+    <p md-pos="2-43">Add: live templates starting with <code md-pos="37-38">.</code></p>
+    <table>
+      <thead>
+        <tr md-pos="87-180"><th md-pos="88-103"> Element       </th><th md-pos="104-121"> Abbreviation    </th><th md-pos="122-179"> Expansion                                               </th></tr>
+      </thead>
+      <tbody>
+        <tr md-pos="279-372"><td md-pos="280-295"> Abbreviation  </td><td md-pos="296-313"> <code md-pos="298-311">.abbreviation</code> </td><td md-pos="314-371"> <code md-pos="316-321">*[]:</code>                                                 </td></tr>
+        <tr md-pos="375-468"><td md-pos="376-391"> Code fence    </td><td md-pos="392-409"> <code md-pos="394-404">.codefence</code>    </td><td md-pos="410-467"> ``` ... ```                                       </td></tr>
+        <tr md-pos="471-564"><td md-pos="472-487"> Explicit link </td><td md-pos="488-505"> <code md-pos="490-495">.link</code>         </td><td md-pos="506-563"> <code md-pos="508-512">[]()</code>                                                  </td></tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+.
+Document[0, 565]
+  BulletList[0, 565] isLoose
+    BulletListItem[0, 565] open:[0, 1, "-"] isLoose
+      Paragraph[2, 44]
+        Text[2, 36] chars:[2, 36, "Add:  … with "]
+        Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
+      TableBlock[87, 565]
+        TableHead[87, 180]
+          TableRow[87, 180] rowNumber=1
+            TableCell[87, 104] header textOpen:[87, 88, "|"] text:[88, 103, " Element       "] textClose:[103, 104, "|"]
+              Text[88, 103] chars:[88, 103, " Elem …      "]
+            TableCell[104, 122] header text:[104, 121, " Abbreviation    "] textClose:[121, 122, "|"]
+              Text[104, 121] chars:[104, 121, " Abbr … n    "]
+            TableCell[122, 180] header text:[122, 179, " Expansion                                               "] textClose:[179, 180, "|"]
+              Text[122, 179] chars:[122, 179, " Expa …      "]
+        TableSeparator[183, 276]
+          TableRow[183, 276]
+            TableCell[183, 200] textOpen:[183, 184, "|"] text:[184, 199, "---------------"] textClose:[199, 200, "|"]
+              Text[184, 199] chars:[184, 199, "----- … -----"]
+            TableCell[200, 218] text:[200, 217, "-----------------"] textClose:[217, 218, "|"]
+              Text[200, 217] chars:[200, 217, "----- … -----"]
+            TableCell[218, 276] text:[218, 275, "---------------------------------------------------------"] textClose:[275, 276, "|"]
+              Text[218, 275] chars:[218, 275, "----- … -----"]
+        TableBody[279, 564]
+          TableRow[279, 372] rowNumber=1
+            TableCell[279, 296] textOpen:[279, 280, "|"] text:[280, 295, " Abbreviation  "] textClose:[295, 296, "|"]
+              Text[280, 295] chars:[280, 295, " Abbr … ion  "]
+            TableCell[296, 314] text:[296, 313, " `.abbreviation` "] textClose:[313, 314, "|"]
+              Text[296, 297] chars:[296, 297, " "]
+              Code[297, 312] textOpen:[297, 298, "`"] text:[298, 311, ".abbr … eviation"] textClose:[311, 312, "`"]
+              Text[312, 312]
+              Text[312, 313] chars:[312, 313, " "]
+            TableCell[314, 372] text:[314, 371, " `*[]: `                                                 "] textClose:[371, 372, "|"]
+              Text[314, 315] chars:[314, 315, " "]
+              Code[315, 322] textOpen:[315, 316, "`"] text:[316, 321, "*[]: "] textClose:[321, 322, "`"]
+              Text[322, 322]
+              Text[322, 371] chars:[322, 371, "      …      "]
+          TableRow[375, 468] rowNumber=2
+            TableCell[375, 392] textOpen:[375, 376, "|"] text:[376, 391, " Code fence    "] textClose:[391, 392, "|"]
+              Text[376, 391] chars:[376, 391, " Code … e    "]
+            TableCell[392, 410] text:[392, 409, " `.codefence`    "] textClose:[409, 410, "|"]
+              Text[392, 393] chars:[392, 393, " "]
+              Code[393, 405] textOpen:[393, 394, "`"] text:[394, 404, ".codefence"] textClose:[404, 405, "`"]
+              Text[405, 405]
+              Text[405, 409] chars:[405, 409, "    "]
+            TableCell[410, 468] text:[410, 467, " \`\`\` ... \`\`\`                                       "] textClose:[467, 468, "|"]
+              Text[410, 467] chars:[410, 467, " \`\` …      "]
+          TableRow[471, 564] rowNumber=3
+            TableCell[471, 488] textOpen:[471, 472, "|"] text:[472, 487, " Explicit link "] textClose:[487, 488, "|"]
+              Text[472, 487] chars:[472, 487, " Expl … link "]
+            TableCell[488, 506] text:[488, 505, " `.link`         "] textClose:[505, 506, "|"]
+              Text[488, 489] chars:[488, 489, " "]
+              Code[489, 496] textOpen:[489, 490, "`"] text:[490, 495, ".link"] textClose:[495, 496, "`"]
+              Text[496, 496]
+              Text[496, 505] chars:[496, 505, "         "]
+            TableCell[506, 564] text:[506, 563, " `[]()`                                                  "] textClose:[563, 564, "|"]
+              Text[506, 507] chars:[506, 507, " "]
+              Code[507, 513] textOpen:[507, 508, "`"] text:[508, 512, "[]()"] textClose:[512, 513, "`"]
+              Text[513, 513]
+              Text[513, 563] chars:[513, 563, "      …      "]
 ````````````````````````````````
 
 

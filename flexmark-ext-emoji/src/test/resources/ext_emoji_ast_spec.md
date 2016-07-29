@@ -137,3 +137,30 @@ Document[0, 15]
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+:warning:
+.
+<p md-pos="0-9"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
+      Text[1, 8] chars:[1, 8, "warning"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+[:warning:](/url)
+.
+<p md-pos="0-17"><a href="/url" md-pos="1-10"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
+      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
+        Text[2, 9] chars:[2, 9, "warning"]
+````````````````````````````````
+
+

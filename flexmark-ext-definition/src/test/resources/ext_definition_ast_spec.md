@@ -243,3 +243,17 @@ Term 4
 ````````````````````````````````
 
 
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos, IGNORE)
+Definition Term
+: definition item 
+.
+<dl>
+   <dt>Definition Term</dt>
+   <dd>definition item</dd>
+</dl>
+.
+````````````````````````````````
+
+

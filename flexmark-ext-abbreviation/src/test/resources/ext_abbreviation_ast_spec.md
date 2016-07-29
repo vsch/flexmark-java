@@ -10,9 +10,8 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ## Abbreviation
 
-flexmark-java extension for defining abbreviations and turning
-appearance of these abbreviations in text into abbr tags with titles
-consisting of the expansion of the abbreviation.
+flexmark-java extension for defining abbreviations and turning appearance of these abbreviations
+in text into abbr tags with titles consisting of the expansion of the abbreviation.
 
 ```````````````````````````````` example Abbreviation: 1
 *[Abbr]:Abbreviation
@@ -210,6 +209,26 @@ text with abbr embedded
 
 .
 <p>text with <abbr title="abbreviation">abbr</abbr> embedded</p>
+.
+Document[0, 48]
+  Paragraph[0, 24]
+    TextBase[0, 23] chars:[0, 23, "text  … edded"]
+      Text[0, 10] chars:[0, 10, "text with "]
+      Abbreviation[10, 14] chars:[10, 14, "abbr"]
+      Text[14, 23] chars:[14, 23, " embedded"]
+  AbbreviationBlock[25, 46] open:[25, 27] text:[27, 31] close:[31, 33] abbreviation:[34, 46]
+````````````````````````````````
+
+
+## Source Position Attribute
+
+```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+text with abbr embedded
+
+*[abbr]: abbreviation
+
+.
+<p md-pos="0-23">text with <abbr title="abbreviation" md-pos="10-14">abbr</abbr> embedded</p>
 .
 Document[0, 48]
   Paragraph[0, 24]

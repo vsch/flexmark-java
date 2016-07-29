@@ -20,6 +20,7 @@ public class ComboWikiLinkSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));
         optionsMap.put("custom-ext", new MutableDataSet().set(WikiLinkExtension.LINK_FILE_EXTENSION, ""));
         optionsMap.put("custom-prefix", new MutableDataSet().set(WikiLinkExtension.LINK_PREFIX, "/prefix/"));

@@ -14,7 +14,7 @@ public interface BasedSequence extends CharSequence {
     int getStartOffset();
     int getEndOffset();
     int getIndexOffset(int index);
-    SourceRange getSourceRange();
+    Range getSourceRange();
 
     @Override
     BasedSequence subSequence(int start, int end);

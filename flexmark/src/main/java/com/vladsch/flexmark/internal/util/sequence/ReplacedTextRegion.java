@@ -1,24 +1,24 @@
 package com.vladsch.flexmark.internal.util.sequence;
 
 public class ReplacedTextRegion {
-    final private SourceRange original;
-    final private SourceRange replaced;
+    final private Range original;
+    final private Range replaced;
 
-    public ReplacedTextRegion(SourceRange original, SourceRange replaced) {
+    public ReplacedTextRegion(Range original, Range replaced) {
         this.original = original;
         this.replaced = replaced;
     }
 
     public ReplacedTextRegion(int originalStart, int originalEnd, int replacedStart, int replacedEnd) {
-        this.original = new SourceRange(originalStart, originalEnd);
-        this.replaced = new SourceRange(replacedStart, replacedEnd);
+        this.original = new Range(originalStart, originalEnd);
+        this.replaced = new Range(replacedStart, replacedEnd);
     }
 
-    public SourceRange getOriginal() {
+    public Range getOriginalRange() {
         return original;
     }
 
-    public SourceRange getReplaced() {
+    public Range getReplacedRange() {
         return replaced;
     }
 
