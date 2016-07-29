@@ -430,7 +430,7 @@ simple wiki link
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 [[wiki link]]
 .
-<p md-pos="0-13"><a href="wiki-link" md-pos="2-11">wiki link</a></p>
+<p md-pos="0-14"><a href="wiki-link" md-pos="0-13">wiki link</a></p>
 .
 Document[0, 14]
   Paragraph[0, 14]
@@ -444,7 +444,7 @@ wiki link with text
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
 [[wiki text|wiki link]]
 .
-<p md-pos="0-23"><a href="wiki-link" md-pos="2-11">wiki text</a></p>
+<p md-pos="0-24"><a href="wiki-link" md-pos="0-23">wiki text</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]
@@ -458,7 +458,7 @@ wiki link with text, links first option
 ```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, links-first)
 [[wiki link|wiki text]]
 .
-<p md-pos="0-23"><a href="wiki-link" md-pos="12-21">wiki text</a></p>
+<p md-pos="0-24"><a href="wiki-link" md-pos="0-23">wiki text</a></p>
 .
 Document[0, 24]
   Paragraph[0, 24]

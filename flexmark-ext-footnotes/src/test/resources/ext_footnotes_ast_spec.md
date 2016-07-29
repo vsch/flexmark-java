@@ -812,12 +812,12 @@ This paragraph has a footnote[^2].
 
 [^2]: This is the body of the footnote.
 .
-<p md-pos="0-36">This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<p md-pos="0-37">This paragraph has a footnote<sup id="fnref-1" md-pos="29-33"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
 <div class="footnotes">
   <hr />
   <ol>
     <li id="fn-1">
-      <p md-pos="44-77">This is the body of the footnote.</p>
+      <p md-pos="44-78">This is the body of the footnote.</p>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>
   </ol>

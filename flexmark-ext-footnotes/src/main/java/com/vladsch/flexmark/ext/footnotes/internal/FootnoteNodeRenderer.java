@@ -81,7 +81,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
         } else {
             int footnoteOrdinal = footnoteBlock.getFootnoteOrdinal();
             html.attr("id", "fnref-" + footnoteOrdinal);
-            html.withAttr().tag("sup", () -> {
+            html.srcPos(node.getChars()).withAttr().tag("sup", () -> {
                 if (!options.footnoteLinkRefClass.isEmpty()) html.attr("class", options.footnoteLinkRefClass);
                 html.attr("href", "#fn-" + footnoteOrdinal);
                 html.withAttr().tag("a");

@@ -228,7 +228,7 @@ text with abbr embedded
 *[abbr]: abbreviation
 
 .
-<p md-pos="0-23">text with <abbr title="abbreviation" md-pos="10-14">abbr</abbr> embedded</p>
+<p md-pos="0-24">text with <abbr title="abbreviation" md-pos="10-14">abbr</abbr> embedded</p>
 .
 Document[0, 48]
   Paragraph[0, 24]

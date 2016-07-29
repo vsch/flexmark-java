@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.*;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.FencedCodeBlock;
 import com.vladsch.flexmark.node.Image;
@@ -91,7 +88,7 @@ public class HtmlRendererTest {
             public AttributeProvider create(NodeRendererContext context) {
                 //noinspection ReturnOfInnerClass
                 return (node, part, attributes) -> {
-                    if (node instanceof FencedCodeBlock) {
+                    if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
                         FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
                         // Remove the default attribute for info
                         attributes.remove("class");

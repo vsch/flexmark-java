@@ -34,7 +34,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString(), null);
             String anchorRef = node.getAnchorMarker().isNull() ? "" : node.getAnchorMarker().toString() + node.getAnchorRef().toString();
             html.attr("href", resolvedLink.getUrl() + anchorRef);
-            html.srcPos(node.getText().isNotNull() ? node.getText() : node.getPageRef()).withAttr(resolvedLink).tag("a");
+            html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
             html.text(node.getText().isNotNull() ? node.getText().toString() : node.getPageRef().toString());
             html.tag("/a");
         }

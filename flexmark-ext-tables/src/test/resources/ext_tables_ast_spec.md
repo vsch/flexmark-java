@@ -2772,7 +2772,7 @@ Document[0, 10153]
 | Support for Default and Darcula color schemes for preview tab                                                           |   X   |    X     |
 | Warning and Error Annotations to help you validate wiki link errors                                                     |   X   |    X     |
 .
-<table>
+<table md-pos="0-1144">
   <thead>
     <tr md-pos="0-142"><th align="left" md-pos="2-9">Feature</th><th align="center" md-pos="124-129">Basic</th><th align="center" md-pos="132-140">Enhanced</th></tr>
   </thead>
@@ -2863,8 +2863,8 @@ in item
 .
 <ul>
   <li>
-    <p md-pos="2-43">Add: live templates starting with <code md-pos="37-38">.</code></p>
-    <table>
+    <p md-pos="2-44">Add: live templates starting with <code md-pos="37-38">.</code></p>
+    <table md-pos="87-565">
       <thead>
         <tr md-pos="87-180"><th md-pos="88-103"> Element       </th><th md-pos="104-121"> Abbreviation    </th><th md-pos="122-179"> Expansion                                               </th></tr>
       </thead>

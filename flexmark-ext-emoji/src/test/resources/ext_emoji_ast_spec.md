@@ -142,7 +142,7 @@ Document[0, 15]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 :warning:
 .
-<p md-pos="0-9"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<p md-pos="0-10"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
 Document[0, 10]
   Paragraph[0, 10]
@@ -154,7 +154,7 @@ Document[0, 10]
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
 [:warning:](/url)
 .
-<p md-pos="0-17"><a href="/url" md-pos="1-10"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
+<p md-pos="0-18"><a href="/url" md-pos="0-17"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
 Document[0, 18]
   Paragraph[0, 18]

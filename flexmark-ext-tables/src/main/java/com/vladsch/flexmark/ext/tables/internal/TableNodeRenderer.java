@@ -32,7 +32,7 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagIndent("table", () -> {
+        html.srcPosWithEOL(node.getChars()).withAttr().tagIndent("table", () -> {
             context.renderChildren(node);
         });
     }

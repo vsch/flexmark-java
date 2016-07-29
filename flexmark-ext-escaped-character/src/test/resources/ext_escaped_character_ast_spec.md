@@ -34,7 +34,7 @@ Document[0, 30]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Sample  \t\e\x\t and \\ \- \~
 .
-<p md-pos="0-29">Sample  \t\e\x\t and \ - ~</p>
+<p md-pos="0-30">Sample  \t\e\x\t and \ - ~</p>
 .
 Document[0, 30]
   Paragraph[0, 30]

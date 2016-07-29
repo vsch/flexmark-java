@@ -50,12 +50,23 @@ flexmark-java
   tag.
 
 - Add `HtmlRenderer.SOURCE_POSITION_ATTRIBUTE` the name of the source position HTML attribute so
-  set to the source position given in `.srcPos()` methods.
+  set to the source position given in `.srcPos()` and `.srcPosWithEOL()` methods. These behave
+  as `.attr()` methods and the source position attribute will be applied to the next tag which
+  is preceded by one of `.withAttr()` methods.
 
 - Add `HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES` if true then paragraph source lines will be
   wrapped in `<span></span>` with source position information for the line. Works even for tight
   list items that do not generate a `<p>` wrapper for their text. :warning: Only works if source
   position attribute is set to non-empty value.
+
+- Add `AttributablePart` instances: 
+    - `CoreNodeRenderer.CODE_CONTENT` to mark the `code` tag part of fenced code and indented
+      code
+    - `CoreNodeRenderer.PARAGRAPH_LINE` to mark line spans of paragraphs source positions, list
+      items or any other text block supporting lazy continuation.
+
+- Refine source position attribute generation to make highlighting HTML elements from source
+  position information more intuitive.
 
 0.4.13
 ------

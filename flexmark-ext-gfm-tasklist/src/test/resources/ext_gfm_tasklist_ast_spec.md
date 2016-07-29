@@ -614,13 +614,13 @@ Document[0, 24]
 - [x] task
 .
 <ol>
-  <li class="task-list-item" md-pos="7-11"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item" md-pos="19-23"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="7-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="19-24"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ol>
 <!-- -->
 <ul>
-  <li class="task-list-item" md-pos="39-43"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item" md-pos="50-54"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="39-44"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="50-55"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
 Document[0, 55]
@@ -653,13 +653,13 @@ with multiple lazy lines
 all should be src pos wrapped
 .
 <ol>
-  <li class="task-list-item" md-pos="7-66"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span>
+  <li class="task-list-item" md-pos="0-67"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span>
   <span md-pos="12-36">with multiple lazy lines</span>
   <span md-pos="37-66">all should be src pos wrapped</span></li>
 </ol>
 <!-- -->
 <ul>
-  <li class="task-list-item" md-pos="82-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
+  <li class="task-list-item" md-pos="76-142"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
   <span md-pos="87-111">with multiple lazy lines</span>
   <span md-pos="112-141">all should be src pos wrapped</span></li>
 </ul>
@@ -702,10 +702,10 @@ all should be src pos wrapped
 .
 <ol>
   <li class="task-list-item">
-    <p md-pos="0-11"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span></p>
+    <p md-pos="0-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span></p>
   </li>
   <li class="task-list-item">
-    <p md-pos="13-79"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="20-24">item</span>
+    <p md-pos="13-80"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="20-24">item</span>
     <span md-pos="25-49">with multiple lazy lines</span>
     <span md-pos="50-79">all should be src pos wrapped</span></p>
   </li>
@@ -713,10 +713,10 @@ all should be src pos wrapped
 <!-- -->
 <ul>
   <li class="task-list-item">
-    <p md-pos="89-99"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="95-99">item</span></p>
+    <p md-pos="89-100"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="95-99">item</span></p>
   </li>
   <li class="task-list-item">
-    <p md-pos="101-166"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
+    <p md-pos="101-167"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
     <span md-pos="112-136">with multiple lazy lines</span>
     <span md-pos="137-166">all should be src pos wrapped</span></p>
   </li>

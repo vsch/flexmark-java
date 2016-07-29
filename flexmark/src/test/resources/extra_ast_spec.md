@@ -3919,30 +3919,30 @@ text
 ```
 
 .
-<p md-pos="0-112"><a md-pos="1-11" href="http://url">http://url</a>
+<p md-pos="0-113"><a md-pos="1-11" href="http://url">http://url</a>
 <code md-pos="15-19">code</code>
 <em md-pos="23-27">text</em>
 <img src="/url" alt="alt" md-pos="30-42" />
 <img src="/img.png" alt="img" md-pos="44-50" />
 <img src="/img.png" alt="img" md-pos="51-59" />
-<a href="/url" md-pos="61-65">text</a>
-<a href="/url" md-pos="75-78">ref</a>
-<a href="/url" md-pos="81-84">ref</a>
+<a href="/url" md-pos="60-72">text</a>
+<a href="/url" md-pos="74-79">ref</a>
+<a href="/url" md-pos="80-87">ref</a>
 <a md-pos="89-102" href="mailto:name@mail.com">name@mail.com</a>
 <strong md-pos="106-110">text</strong></p>
 <hr md-pos="114-117" />
 <h1 md-pos="121-128">Heading</h1>
 <ul>
-  <li md-pos="132-136">item</li>
+  <li md-pos="132-137">item</li>
 </ul>
 <!-- -->
 <ol>
-  <li md-pos="151-155">item</li>
+  <li md-pos="151-156">item</li>
 </ol>
 <!-- -->
-<pre><code md-pos="171-184">indented code
+<pre md-pos="171-189"><code md-pos="171-184">indented code
 </code></pre>
-<pre><code class="language-text" md-pos="228-232">text
+<pre md-pos="220-236"><code class="language-text" md-pos="228-232">text
 </code></pre>
 .
 Document[0, 238]
@@ -4035,46 +4035,46 @@ all should be src pos wrapped
 with multiple lazy lines
 all should be src pos wrapped
 .
-<p md-pos="0-70"><span md-pos="0-14">paragraph test</span>
+<p md-pos="0-71"><span md-pos="0-14">paragraph test</span>
 <span md-pos="16-40">with multiple lazy lines</span>
 <span md-pos="41-70">all should be src pos wrapped</span></p>
 <ul>
-  <li md-pos="74-133"><span md-pos="74-78">item</span>
+  <li md-pos="72-134"><span md-pos="74-78">item</span>
   <span md-pos="79-103">with multiple lazy lines</span>
   <span md-pos="104-133">all should be src pos wrapped</span></li>
 </ul>
 <!-- -->
 <ul>
   <li>
-    <p md-pos="147-206"><span md-pos="147-151">item</span>
+    <p md-pos="147-207"><span md-pos="147-151">item</span>
     <span md-pos="152-176">with multiple lazy lines</span>
     <span md-pos="177-206">all should be src pos wrapped</span></p>
   </li>
   <li>
-    <p md-pos="210-214"><span md-pos="210-214">item</span></p>
+    <p md-pos="210-215"><span md-pos="210-214">item</span></p>
   </li>
 </ul>
 <!-- -->
 <ol>
   <li>
-    <p md-pos="228-287"><span md-pos="228-232">item</span>
+    <p md-pos="228-288"><span md-pos="228-232">item</span>
     <span md-pos="233-257">with multiple lazy lines</span>
     <span md-pos="258-287">all should be src pos wrapped</span></p>
   </li>
   <li>
-    <p md-pos="292-296"><span md-pos="292-296">item</span></p>
+    <p md-pos="292-297"><span md-pos="292-296">item</span></p>
   </li>
 </ol>
 <!-- -->
 <ol>
-  <li md-pos="311-370"><span md-pos="311-315">item</span>
+  <li md-pos="308-371"><span md-pos="311-315">item</span>
   <span md-pos="316-340">with multiple lazy lines</span>
   <span md-pos="341-370">all should be src pos wrapped</span></li>
-  <li md-pos="374-378"><span md-pos="374-378">item</span></li>
+  <li md-pos="371-379"><span md-pos="374-378">item</span></li>
 </ol>
 <!-- -->
 <ul>
-  <li md-pos="392-455"><span md-pos="392-400">[ ] item</span>
+  <li md-pos="390-456"><span md-pos="392-400">[ ] item</span>
   <span md-pos="401-425">with multiple lazy lines</span>
   <span md-pos="426-455">all should be src pos wrapped</span></li>
 </ul>
@@ -4151,7 +4151,7 @@ paragraph test
 with multiple lazy lines
 all should be src pos wrapped
 .
-<p md-pos="0-70"><span md-pos="0-14">paragraph test</span>
+<p md-pos="0-71"><span md-pos="0-14">paragraph test</span>
 <span md-pos="16-40">with multiple lazy lines</span>
 <span md-pos="41-70">all should be src pos wrapped</span></p>
 .
@@ -4180,13 +4180,13 @@ all should be src pos wrapped
 
 .
 <ul>
-  <li md-pos="2-61"><span md-pos="2-6">item</span>
+  <li md-pos="0-62"><span md-pos="2-6">item</span>
   <span md-pos="7-31">with multiple lazy lines</span>
   <span md-pos="32-61">all should be src pos wrapped</span></li>
 </ul>
 <!-- -->
 <ol>
-  <li md-pos="76-135"><span md-pos="76-80">item</span>
+  <li md-pos="73-136"><span md-pos="76-80">item</span>
   <span md-pos="81-105">with multiple lazy lines</span>
   <span md-pos="106-135">all should be src pos wrapped</span></li>
 </ol>
@@ -4232,10 +4232,10 @@ all should be src pos wrapped
 .
 <ul>
   <li>
-    <p md-pos="2-6"><span md-pos="2-6">item</span></p>
+    <p md-pos="2-7"><span md-pos="2-6">item</span></p>
   </li>
   <li>
-    <p md-pos="10-69"><span md-pos="10-14">item</span>
+    <p md-pos="10-70"><span md-pos="10-14">item</span>
     <span md-pos="15-39">with multiple lazy lines</span>
     <span md-pos="40-69">all should be src pos wrapped</span></p>
   </li>
@@ -4243,10 +4243,10 @@ all should be src pos wrapped
 <!-- -->
 <ol>
   <li>
-    <p md-pos="84-88"><span md-pos="84-88">item</span></p>
+    <p md-pos="84-89"><span md-pos="84-88">item</span></p>
   </li>
   <li>
-    <p md-pos="93-152"><span md-pos="93-97">item</span>
+    <p md-pos="93-153"><span md-pos="93-97">item</span>
     <span md-pos="98-122">with multiple lazy lines</span>
     <span md-pos="123-152">all should be src pos wrapped</span></p>
   </li>

@@ -91,10 +91,21 @@ public class HtmlWriter {
         return srcPos(context.getCurrentNode().getChars());
     }
 
+    public HtmlWriter srcPosWithEOL() {
+        return srcPosWithEOL(context.getCurrentNode().getChars());
+    }
+
     public HtmlWriter srcPos(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             BasedSequence trimmed = sourceText.trimEOL();
             return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
+        }
+        return this;
+    }
+
+    public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
+        if (sourceText.isNotNull()) {
+            return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
         }
         return this;
     }

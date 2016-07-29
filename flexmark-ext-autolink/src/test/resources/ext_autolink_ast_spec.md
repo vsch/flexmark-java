@@ -118,7 +118,7 @@ Document[0, 21]
 foo@example.com
 http://example.com
 .
-<p md-pos="0-34"><a md-pos="0-15" href="mailto:foo@example.com">foo@example.com</a>
+<p md-pos="0-35"><a md-pos="0-15" href="mailto:foo@example.com">foo@example.com</a>
 <a md-pos="16-34" href="http://example.com">http://example.com</a></p>
 .
 Document[0, 35]

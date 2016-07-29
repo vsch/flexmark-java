@@ -23,6 +23,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     final static public AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
     final static public AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
     final static public AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
+    final static public AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
 
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
@@ -83,9 +84,17 @@ public class CoreNodeRenderer implements NodeRenderer {
             }
         }
 
-        html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), () -> {
-            context.renderChildren(node);
-        });
+        if (context.getHtmlOptions().sourcePositionParagraphLines) {
+            html.srcPos(node.getChars()).withAttr().tagLine("h" + node.getLevel(), () -> {
+                html.srcPos(node.getText()).withAttr().tag("span");
+                context.renderChildren(node);
+                html.tag("/span");
+            });
+        } else {
+            html.srcPos(node.getText()).withAttr().tagLine("h" + node.getLevel(), () -> {
+                context.renderChildren(node);
+            });
+        }
     }
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
@@ -95,6 +104,9 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
+        html.line();
+        html.srcPos(node.getChars()).withAttr().tag("pre").openPre();
+        
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.indexOf(' ');
@@ -107,9 +119,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
         }
 
-        html.line();
-        html.tag("pre").openPre();
-        html.srcPos(node.getContentChars()).withAttr().tag("code");
+        html.srcPos(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
         html.text(node.getContentChars().normalizeEOL());
         html.tag("/code");
         html.tag("/pre").closePre();
@@ -122,8 +132,8 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
-        html.tag("pre").openPre();
-        html.srcPos(node.getContentChars()).withAttr().tag("code");
+        html.srcPos(node.getChars()).withAttr().tag("pre").openPre();
+        html.srcPos(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
         html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
         html.tag("/code");
         html.tag("/pre").closePre();
@@ -155,7 +165,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
-            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+            html.srcPosWithEOL(sourceText).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(node);
             });
         } else {
@@ -181,7 +191,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         boolean inTightList = listOptions.isInTightListItem(node);
         if (!inTightList && (!(node.getParent() instanceof ListItem) || !((ListItem) node.getParent()).isParagraphWrappingDisabled())) {
-            html.srcPos(node.getChars()).withAttr().tagLine("p", () -> {
+            html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", () -> {
                 renderTextBlockParagraphLines(node, context, html);
             });
         } else {
@@ -356,7 +366,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             if (node.getTitle().isNotNull()) {
                 html.attr("title", node.getTitle().unescape());
             }
-            html.srcPos(node.getText()).withAttr(resolvedLink).tag("a");
+            html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
             context.renderChildren(node);
             html.tag("/a");
         }
@@ -411,7 +421,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 if (reference.getTitle().isNotNull()) {
                     html.attr("title", reference.getTitle().unescape());
                 }
-                html.srcPos(node.isReferenceTextCombined() ? node.getReference() : node.getText()).withAttr(resolvedLink).tag("a");
+                html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
                 context.renderChildren(node);
                 html.tag("/a");
             }
