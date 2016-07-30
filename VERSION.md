@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.16](#0416)
 - [0.4.15](#0415)
 - [0.4.14](#0414)
 - [0.4.13](#0413)
@@ -43,6 +44,12 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.16
+------
+
+- Fix Toc extension did not generate the right table of contents hierarchy if header levels were
+  missing. The indentation is still not perfect but will do for now.
 
 0.4.15
 ------

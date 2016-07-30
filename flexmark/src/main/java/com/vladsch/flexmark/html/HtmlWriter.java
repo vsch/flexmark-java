@@ -30,6 +30,7 @@ public class HtmlWriter {
     private boolean lineOnChildText = false;
     private int preNesting = 0;
     private AttributablePart useAttributes = null;
+    private int appendCount = 0;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -51,6 +52,10 @@ public class HtmlWriter {
         StringBuilder sb = new StringBuilder(indentSize);
         for (int i = 0; i < indentSize; i++) sb.append(' ');
         indentSizePrefix = sb.toString();
+    }
+
+    public int getAppendCount() {
+        return appendCount;
     }
 
     boolean inPre() {
@@ -120,14 +125,14 @@ public class HtmlWriter {
             CharSequence base = sourceText.getBase();
             while (endOffset < base.length()) {
                 char c = base.charAt(endOffset);
-                if (c != ' ' && c != '\t') break; 
+                if (c != ' ' && c != '\t') break;
                 endOffset++;
             }
-            
+
             if (endOffset < base.length() && base.charAt(endOffset) == '\r') {
                 endOffset++;
             }
-            
+
             if (endOffset < base.length() && base.charAt(endOffset) == '\n') {
                 endOffset++;
             }
@@ -195,16 +200,6 @@ public class HtmlWriter {
         return withAttr(resolvedLink.getStatus());
     }
 
-    public HtmlWriter withCondIndent() {
-        indentIndentingChildren = true;
-        return this;
-    }
-
-    public HtmlWriter withCondLine() {
-        lineOnChildText = true;
-        return this;
-    }
-
     public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
         Attributes attributes = null;
 
@@ -224,7 +219,7 @@ public class HtmlWriter {
 
             for (Attribute attribute : attributes.values()) {
                 String attributeValue = attribute.getValue();
-                
+
                 if (!sourcePositionAttribute.isEmpty() && attribute.getName().equals(sourcePositionAttribute)) {
                     int pos = attributeValue.indexOf('-');
                     int startOffset = -1;
@@ -329,7 +324,7 @@ public class HtmlWriter {
 
         boolean hadIndent = indentLevel < indent;
         if (hadIndent) {
-            while (indentLevel < indent) unIndent();
+            unIndentTo(indentLevel);
         }
 
         if (hadIndent || hadPreIndent || withLine) line();
@@ -344,8 +339,14 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter lineIf(boolean predicate) {
+        if (predicate) return line();
+        return this;
+    }
+
     public HtmlWriter indent() {
         line();
+
         indent++;
         indentPrefix += indentSizePrefix;
         return this;
@@ -358,6 +359,36 @@ public class HtmlWriter {
             if (indent * indentSize > 0) indentPrefix = indentPrefix.substring(0, indent * indentSize);
             else indentPrefix = "";
         }
+        return this;
+    }
+
+    public HtmlWriter withCondIndent() {
+        indentIndentingChildren = true;
+        return this;
+    }
+
+    public HtmlWriter withCondLine() {
+        lineOnChildText = true;
+        return this;
+    }
+    
+    public HtmlWriter withPostIndent() {
+        // for manual indenting child control
+        if (delayedIndent) {
+            delayedIndent = false;
+            indent();
+        }
+        return this;
+    }
+
+    public HtmlWriter withDelayedIndent() {
+        delayedIndent = true;
+        return this;
+    }
+
+    public HtmlWriter unIndentTo(int indentSize) {
+        delayedIndent = false;
+        while (indentSize < indent) unIndent();
         return this;
     }
 
@@ -377,6 +408,7 @@ public class HtmlWriter {
     protected void append(String s) {
         if (s.length() == 0) return;
         //appendCount++;
+        appendCount++;
 
         if (delayedEOL) {
             delayedEOL = false;

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class TocUtils {
     final static public AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
-    
+
     public static String getTocPrefix(TocOptions options, TocOptions defaultOptions) {
         DelimitedBuilder out = new DelimitedBuilder(" ");
         out.append("[TOC").mark();
@@ -72,16 +72,20 @@ public class TocUtils {
 
     public static void renderHtmlToc(HtmlWriter html, BasedSequence sourceText, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
         if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
-            if (sourceText.isNotNull()) html.srcPos(sourceText); 
-            html.withAttr(TOC_CONTENT).tag("div");
-            html.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line().indent();
+            if (sourceText.isNotNull()) html.srcPos(sourceText);
+            html.withAttr(TOC_CONTENT).tag("div").line().indent();
+            html.tag("h" + tocOptions.titleLevel).text(tocOptions.title).tag("/h" + tocOptions.titleLevel).line();
         }
 
         int initLevel = -1;
         int lastLevel = -1;
         String listOpen = tocOptions.isNumbered ? "ol" : "ul";
         String listClose = "/" + listOpen;
+        int listNesting = 0;
         boolean[] openedItems = new boolean[7];
+        boolean[] openedList = new boolean[7];
+        int[] openedItemAppendCount = new int[7];
+        //int[] openedItemIndentSize = new int[7];
 
         for (int i = 0; i < headings.size(); i++) {
             Heading header = headings.get(i);
@@ -91,21 +95,36 @@ public class TocUtils {
             if (initLevel == -1) {
                 initLevel = headerLevel;
                 lastLevel = headerLevel;
-                html.withAttr().line().tag(listOpen).indent();
+                html.withAttr().line().tag(listOpen).indent().line();
+                openedList[0] = true;
             }
 
             if (lastLevel < headerLevel) {
                 for (int lv = lastLevel; lv < headerLevel; lv++) {
                     openedItems[lv + 1] = false;
+                    openedList[lv + 1] = false;
                 }
-                html.withAttr().line().tag(listOpen).indent();
+                
+                if (!openedList[lastLevel]) {
+                    html.withAttr().line().tag(listOpen).indent();
+                    openedList[lastLevel] = true;
+                }
             } else if (lastLevel == headerLevel) {
-                if (openedItems[lastLevel]) html.tag("/li").line();
+                if (openedItems[lastLevel]) {
+                    if (openedList[lastLevel]) html.unIndent().tag(listClose).line();
+                    html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                }
                 openedItems[lastLevel] = false;
+                openedList[lastLevel] = false;
             } else {
-                for (int lv = lastLevel; lv >= headerLevel + 1; lv--) {
-                    if (openedItems[lv]) html.unIndent().tag(listClose).tag("/li").line();
+                // lastLevel > headerLevel
+                for (int lv = lastLevel; lv >= headerLevel; lv--) {
+                    if (openedItems[lv]) {
+                        if (openedList[lv]) html.unIndent().tag(listClose).line();
+                        html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                    }
                     openedItems[lv] = false;
+                    openedList[lv] = false;
                 }
             }
 
@@ -119,15 +138,22 @@ public class TocUtils {
                 html.raw(headerText);
                 html.tag("/a");
             }
+            
             lastLevel = headerLevel;
+            openedItemAppendCount[headerLevel] = html.getAppendCount();
+            //openedItemIndentSize[headerLevel] = html.getIndentSize();
+            //html.withDelayedIndent();
         }
 
         for (int i = lastLevel; i >= 1; i--) {
             if (openedItems[i]) {
-                html.tag("/li");
-                html.unIndent().tag(listClose);
+                if (openedList[i]) html.unIndent().tag(listClose).line();
+                html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
             }
         }
+
+        // close original list
+        if (openedList[0]) html.unIndent().tag(listClose).line();
 
         if (headings.size() > 0 && (sourceText.isNotNull() || !tocOptions.title.isEmpty())) {
             html.line().unIndent().tag("/div");

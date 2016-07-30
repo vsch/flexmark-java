@@ -146,7 +146,8 @@ Absorbs only valid combinations, HTML or Heading with List, no blank lines
 - afdasfdsadf
 - asfdasfd
 .
-<div><h1>Table of Contents</h1>
+<div>
+  <h1>Table of Contents</h1>
   <ol>
     <li><a href="#heading-11">Heading 1.1</a></li>
   </ol>
@@ -411,7 +412,8 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 - afdasfdsadf
 - asfdasfd
 .
-<div><h1>Table of Contents</h1>
+<div>
+  <h1>Table of Contents</h1>
   <ol>
     <li><a href="#heading-11">Heading 1.1</a></li>
   </ol>
@@ -448,7 +450,8 @@ Absorbs only valid combinations, HTML or Heading with List, with one leading bla
 - afdasfdsadf
 - asfdasfd
 .
-<div><h1>Table of Contents</h1>
+<div>
+  <h1>Table of Contents</h1>
   <ol>
     <li><a href="#heading-11">Heading 1.1</a></li>
   </ol>
@@ -860,13 +863,15 @@ Default rendering with emphasis
 ### Heading 1.1.1
 ### Heading 1.1.2  **_some bold italic_**
 .
-<div><h1>Table of Contents</h1>
+<div>
+  <h1>Table of Contents</h1>
   <ul>
     <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
     <ul>
       <li><a href="#heading-111">Heading 1.1.1</a></li>
       <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
-    </ul></li>
+    </ul>
+    </li>
   </ul>
 </div>
 <h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
@@ -990,12 +995,14 @@ options, title with escaped chars
 .
 <h2 id="header-2">Header 2</h2>
 <h3 id="header-3">Header 3</h3>
-<div><h1>title&quot;s</h1>
+<div>
+  <h1>title&quot;s</h1>
   <ul>
     <li><a href="#header-3">Header 3</a></li>
   </ul>
 </div>
-<div><h1>title's</h1>
+<div>
+  <h1>title's</h1>
   <ul>
     <li><a href="#header-3">Header 3</a></li>
   </ul>
@@ -1011,6 +1018,93 @@ Document[0, 82]
 ````````````````````````````````
 
 
+start with missing first level
+
+```````````````````````````````` example SimToc: 42
+[TOC levels=1-6]:#  
+
+
+## Header 1
+# Header 2
+### Header 3
+## Header 4
+# Header 5
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#header-1">Header 1</a></li>
+    <li><a href="#header-2">Header 2</a>
+    <ul>
+      <li><a href="#header-3">Header 3</a></li>
+      <li><a href="#header-4">Header 4</a></li>
+    </ul>
+    </li>
+    <li><a href="#header-5">Header 5</a></li>
+  </ul>
+</div>
+<h2 id="header-1">Header 1</h2>
+<h1 id="header-2">Header 2</h1>
+<h3 id="header-3">Header 3</h3>
+<h2 id="header-4">Header 4</h2>
+<h1 id="header-5">Header 5</h1>
+.
+Document[0, 82]
+  SimTocBlock[0, 21] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 15] closingMarker:[15, 17] anchorMarker:[17, 18, "#"]
+  Heading[23, 34] textOpen:[23, 25, "##"] text:[26, 34, "Header 1"]
+    Text[26, 34] chars:[26, 34, "Header 1"]
+  Heading[35, 45] textOpen:[35, 36, "#"] text:[37, 45, "Header 2"]
+    Text[37, 45] chars:[37, 45, "Header 2"]
+  Heading[46, 58] textOpen:[46, 49, "###"] text:[50, 58, "Header 3"]
+    Text[50, 58] chars:[50, 58, "Header 3"]
+  Heading[59, 70] textOpen:[59, 61, "##"] text:[62, 70, "Header 4"]
+    Text[62, 70] chars:[62, 70, "Header 4"]
+  Heading[71, 81] textOpen:[71, 72, "#"] text:[73, 81, "Header 5"]
+    Text[73, 81] chars:[73, 81, "Header 5"]
+````````````````````````````````
+
+
+start with missing first 2 levels
+
+```````````````````````````````` example SimToc: 43
+[TOC levels=1-6]:#  
+
+
+### Header 1
+## Header 2
+### Header 3
+# Header 4
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#header-1">Header 1</a></li>
+    <li><a href="#header-2">Header 2</a>
+    <ul>
+      <li><a href="#header-3">Header 3</a></li>
+    </ul>
+    </li>
+    <li><a href="#header-4">Header 4</a></li>
+  </ul>
+</div>
+<h3 id="header-1">Header 1</h3>
+<h2 id="header-2">Header 2</h2>
+<h3 id="header-3">Header 3</h3>
+<h1 id="header-4">Header 4</h1>
+.
+Document[0, 72]
+  SimTocBlock[0, 21] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 15] closingMarker:[15, 17] anchorMarker:[17, 18, "#"]
+  Heading[23, 35] textOpen:[23, 26, "###"] text:[27, 35, "Header 1"]
+    Text[27, 35] chars:[27, 35, "Header 1"]
+  Heading[36, 47] textOpen:[36, 38, "##"] text:[39, 47, "Header 2"]
+    Text[39, 47] chars:[39, 47, "Header 2"]
+  Heading[48, 60] textOpen:[48, 51, "###"] text:[52, 60, "Header 3"]
+    Text[52, 60] chars:[52, 60, "Header 3"]
+  Heading[61, 71] textOpen:[61, 62, "#"] text:[63, 71, "Header 4"]
+    Text[63, 71] chars:[63, 71, "Header 4"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
@@ -1021,7 +1115,8 @@ Document[0, 82]
 .
 <h2 id="header-2" md-pos="3-11">Header 2</h2>
 <h3 id="header-3" md-pos="16-24">Header 3</h3>
-<div md-pos="26-51"><h1>titles</h1>
+<div md-pos="26-51">
+  <h1>titles</h1>
   <ul>
     <li><a href="#header-3">Header 3</a></li>
   </ul>
