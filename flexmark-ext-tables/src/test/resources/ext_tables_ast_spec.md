@@ -2759,6 +2759,53 @@ Document[0, 10153]
           Text[10145, 10146] chars:[10145, 10146, "X"]
 ````````````````````````````````
 
+## GFM options 
+
+invalid table: 
+
+```````````````````````````````` example(GFM options: 1) options(gfm)
+| A | B | C |
+|-----------|
+| a | b | c |
+| b | a | c |
+.
+<p>| A | B | C |
+|-----------|
+| a | b | c |
+| b | a | c |</p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Text[0, 13] chars:[0, 13, "| A | … | C |"]
+    SoftLineBreak[13, 14]
+    Text[14, 27] chars:[14, 27, "|---- … ----|"]
+    SoftLineBreak[27, 28]
+    Text[28, 41] chars:[28, 41, "| a | … | c |"]
+    SoftLineBreak[41, 42]
+    Text[42, 55] chars:[42, 55, "| b | … | c |"]
+````````````````````````````````
+
+
+invalid table: 
+
+```````````````````````````````` example(GFM options: 2) options(gfm)
+| A | B | C |
+| a | b | c |
+| b | a | c |
+.
+<p>| A | B | C |
+| a | b | c |
+| b | a | c |</p>
+.
+Document[0, 42]
+  Paragraph[0, 42]
+    Text[0, 13] chars:[0, 13, "| A | … | C |"]
+    SoftLineBreak[13, 14]
+    Text[14, 27] chars:[14, 27, "| a | … | c |"]
+    SoftLineBreak[27, 28]
+    Text[28, 41] chars:[28, 41, "| b | … | c |"]
+````````````````````````````````
+
 
 ## Source Position Attribute
 

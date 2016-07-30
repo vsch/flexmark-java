@@ -180,7 +180,14 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             newTableRow.setRowNumber(tableRow.getRowNumber());
 
             while (nodes.hasNext()) {
-                if (cellCount >= separatorColumns && options.discardExtraColumns) break;
+                if (cellCount >= separatorColumns && options.discardExtraColumns) {
+                    if (options.headerSeparatorColumnMatch && rowNumber < separatorLineNumber) {
+                        // header/separator mismatch
+                        return 0;
+                    }
+                    
+                    break;
+                }
 
                 TableCell tableCell = new TableCell();
 
@@ -230,6 +237,11 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                 tableCell.setSpan(span);
                 newTableRow.appendChild(tableCell);
                 cellCount++;
+            }
+
+            if (options.headerSeparatorColumnMatch && rowNumber < separatorLineNumber && cellCount < separatorColumns) {
+                // no match
+                return 0;
             }
 
             while (options.appendMissingColumns && cellCount < separatorColumns) {

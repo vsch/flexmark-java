@@ -53,6 +53,9 @@ flexmark-java
 
 - Add source position attribute to list item tags
 
+- Rename `TablesExtension.HEADER_SEPARATOR_COLUMNS` to
+  `TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH` and implement this option in the table parser. 
+
 0.4.15
 ------
 

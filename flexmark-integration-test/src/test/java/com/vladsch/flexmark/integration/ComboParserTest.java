@@ -43,7 +43,7 @@ public class ComboParserTest extends ComboSpecTestCase {
                 .set(TablesExtension.COLUMN_SPANS, false)
                 .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
                 .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
-                .set(TablesExtension.HEADER_SEPARATOR_COLUMNS, true)
+                .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
     }
 
