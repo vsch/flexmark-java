@@ -2862,7 +2862,7 @@ in item
   | Explicit link | `.link`         | `[]()`                                                  |
 .
 <ul>
-  <li>
+  <li md-pos="0-565">
     <p md-pos="2-44">Add: live templates starting with <code md-pos="37-38">.</code></p>
     <table md-pos="87-565">
       <thead>

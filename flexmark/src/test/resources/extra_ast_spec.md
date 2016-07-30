@@ -3931,11 +3931,11 @@ _text_
 <hr md-pos="114-117" />
 <h1 md-pos="121-128">Heading</h1>
 <ul>
-  <li md-pos="132-137">item</li>
+  <li md-pos="130-137">item</li>
 </ul>
 <!-- -->
 <ol>
-  <li md-pos="151-156">item</li>
+  <li md-pos="148-156">item</li>
 </ol>
 <!-- -->
 <pre md-pos="171-191"><code md-pos="171-191">indented code
@@ -4079,23 +4079,23 @@ all should be src pos wrapped
 </ul>
 <!-- -->
 <ul>
-  <li>
+  <li md-pos="145-207">
     <p md-pos="147-207"><span md-pos="147-151">item</span>
     <span md-pos="152-176">with multiple lazy lines</span>
     <span md-pos="177-206">all should be src pos wrapped</span></p>
   </li>
-  <li>
+  <li md-pos="208-215">
     <p md-pos="210-215"><span md-pos="210-214">item</span></p>
   </li>
 </ul>
 <!-- -->
 <ol>
-  <li>
+  <li md-pos="225-288">
     <p md-pos="228-288"><span md-pos="228-232">item</span>
     <span md-pos="233-257">with multiple lazy lines</span>
     <span md-pos="258-287">all should be src pos wrapped</span></p>
   </li>
-  <li>
+  <li md-pos="289-297">
     <p md-pos="292-297"><span md-pos="292-296">item</span></p>
   </li>
 </ol>
@@ -4265,10 +4265,10 @@ all should be src pos wrapped
 
 .
 <ul>
-  <li>
+  <li md-pos="0-7">
     <p md-pos="2-7"><span md-pos="2-6">item</span></p>
   </li>
-  <li>
+  <li md-pos="8-70">
     <p md-pos="10-70"><span md-pos="10-14">item</span>
     <span md-pos="15-39">with multiple lazy lines</span>
     <span md-pos="40-69">all should be src pos wrapped</span></p>
@@ -4276,10 +4276,10 @@ all should be src pos wrapped
 </ul>
 <!-- -->
 <ol>
-  <li>
+  <li md-pos="81-89">
     <p md-pos="84-89"><span md-pos="84-88">item</span></p>
   </li>
-  <li>
+  <li md-pos="90-153">
     <p md-pos="93-153"><span md-pos="93-97">item</span>
     <span md-pos="98-122">with multiple lazy lines</span>
     <span md-pos="123-152">all should be src pos wrapped</span></p>

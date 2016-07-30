@@ -106,7 +106,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
         html.srcPosWithTrailingEOL(node.getChars()).withAttr().tag("pre").openPre();
-        
+
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
             int space = info.indexOf(' ');
@@ -164,12 +164,11 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
-            BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
-            html.srcPosWithEOL(sourceText).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
+            html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(node);
             });
         } else {
-            html.withAttr(LOOSE_LIST_ITEM).tagIndent("li", () -> {
+            html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).tagIndent("li", () -> {
                 context.renderChildren(node);
             });
         }

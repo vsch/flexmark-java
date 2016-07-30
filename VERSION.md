@@ -51,6 +51,8 @@ flexmark-java
 - Fix Toc extension did not generate the right table of contents hierarchy if header levels were
   missing. The indentation is still not perfect but will do for now.
 
+- Add source position attribute to list item tags
+
 0.4.15
 ------
 
