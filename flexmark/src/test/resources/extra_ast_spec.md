@@ -1968,9 +1968,47 @@ Document[0, 38]
 ````````````````````````````````
 
 
+Bullet items must have a blank line before them when preceded by paragraph but should not append
+following child paragraph
+
+```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-fixed-indent, list-no-type-match, list-no-loose)
+- item 1 paragraph
+    * sublist
+- item 2 paragraph
+
+    paragraph
+.
+<ul>
+  <li>item 1 paragraph
+    <ul>
+      <li>sublist</li>
+    </ul>
+  </li>
+  <li>item 2 paragraph
+  <p>paragraph</p>
+  </li>
+</ul>
+.
+Document[0, 67]
+  BulletList[0, 67] isTight
+    BulletListItem[0, 33] open:[0, 1, "-"] isTight
+      Paragraph[2, 19]
+        Text[2, 18] chars:[2, 18, "item  … graph"]
+      BulletList[23, 33] isTight
+        BulletListItem[23, 33] open:[23, 24, "*"] isTight
+          Paragraph[25, 33]
+            Text[25, 32] chars:[25, 32, "sublist"]
+    BulletListItem[33, 67] open:[33, 34, "-"] isTight
+      Paragraph[35, 52]
+        Text[35, 51] chars:[35, 51, "item  … graph"]
+      Paragraph[57, 67]
+        Text[57, 66] chars:[57, 66, "paragraph"]
+````````````````````````````````
+
+
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 - not item 1
 - not item 2
@@ -1991,7 +2029,7 @@ Document[0, 46]
 
 Bullet items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
 - item 1.0
 
 - item 2.0
@@ -2030,7 +2068,7 @@ Document[0, 48]
 
 Bullet items must have a blank line before them, but not ordered items
 
-```````````````````````````````` example(List - Paragraph Break Options: 16) options(bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
 This is a paragraph
 1. item 1
 2. item 2
@@ -2056,7 +2094,7 @@ Document[0, 40]
 
 All items must have a blank line before them
 
-```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 18) options(bullet-no-para-break, bullet-no-item-break, ordered-no-para-break, ordered-no-item-break)
 This is a paragraph
 2. not item 1
 1. not item 2

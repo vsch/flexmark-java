@@ -47,6 +47,6 @@ public class ListOptions {
     
     public boolean isInTightListItem(Paragraph node) {
         Block parent = node.getParent();
-        return parent instanceof ListItem && (!autoLoose && ((ListItem) parent).isParagraphInTightListItem() || autoLoose && ((ListItem) parent).isInTightList());
+        return parent instanceof ListItem && (!autoLoose && ((ListItem) parent).isParagraphInTightListItem(node) || autoLoose && ((ListItem) parent).isInTightList());
     }
 }

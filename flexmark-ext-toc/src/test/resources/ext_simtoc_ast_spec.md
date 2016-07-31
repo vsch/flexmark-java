@@ -867,10 +867,10 @@ Default rendering with emphasis
   <h1>Table of Contents</h1>
   <ul>
     <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
-    <ul>
-      <li><a href="#heading-111">Heading 1.1.1</a></li>
-      <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
-    </ul>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+        <li><a href="#heading-112--some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+      </ul>
     </li>
   </ul>
 </div>
@@ -1035,10 +1035,10 @@ start with missing first level
   <ul>
     <li><a href="#header-1">Header 1</a></li>
     <li><a href="#header-2">Header 2</a>
-    <ul>
-      <li><a href="#header-3">Header 3</a></li>
-      <li><a href="#header-4">Header 4</a></li>
-    </ul>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+        <li><a href="#header-4">Header 4</a></li>
+      </ul>
     </li>
     <li><a href="#header-5">Header 5</a></li>
   </ul>
@@ -1080,9 +1080,9 @@ start with missing first 2 levels
   <ul>
     <li><a href="#header-1">Header 1</a></li>
     <li><a href="#header-2">Header 2</a>
-    <ul>
-      <li><a href="#header-3">Header 3</a></li>
-    </ul>
+      <ul>
+        <li><a href="#header-3">Header 3</a></li>
+      </ul>
     </li>
     <li><a href="#header-4">Header 4</a></li>
   </ul>

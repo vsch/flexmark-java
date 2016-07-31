@@ -54,8 +54,13 @@ public abstract class ListItem extends Block {
         return !(getParent() instanceof ListBlock) || ((ListBlock) getParent()).isTight();
     }
 
-    public boolean isParagraphInTightListItem() {
-        return isTight();
+    public boolean isParagraphInTightListItem(Paragraph node) {
+        if (!isTight()) return false; 
+        
+        // see if this is the first paragraph child item
+        Node child = getFirstChild();
+        while (child != null && !(child instanceof Paragraph)) child = child.getNext();
+        return child == node;
     }
 
     @Override

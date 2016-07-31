@@ -372,20 +372,6 @@ public class HtmlWriter {
         return this;
     }
     
-    public HtmlWriter withPostIndent() {
-        // for manual indenting child control
-        if (delayedIndent) {
-            delayedIndent = false;
-            indent();
-        }
-        return this;
-    }
-
-    public HtmlWriter withDelayedIndent() {
-        delayedIndent = true;
-        return this;
-    }
-
     public HtmlWriter unIndentTo(int indentSize) {
         delayedIndent = false;
         while (indentSize < indent) unIndent();

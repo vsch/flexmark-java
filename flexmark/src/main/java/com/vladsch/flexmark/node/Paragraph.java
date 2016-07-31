@@ -54,11 +54,6 @@ public class Paragraph extends Block {
         super.setContent(chars, lineSegments);
     }
 
-    public boolean isInTightListItem() {
-        Node parent = getParent();
-        return parent != null && parent instanceof ListItem && ((ListItem) parent).isParagraphInTightListItem();
-    }
-
     public void setContent(BasedSequence chars, List<BasedSequence> lineSegments, List<Integer> lineIndents) {
         super.setContent(chars, lineSegments);
         if (lineSegments.size() != lineIndents.size())

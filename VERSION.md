@@ -56,6 +56,9 @@ flexmark-java
 - Rename `TablesExtension.HEADER_SEPARATOR_COLUMNS` to
   `TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH` and implement this option in the table parser. 
 
+- Fix child paragraphs of list items would not be wrapped in `p` tags if list auto-loose option
+  was disabled and the item was not loose
+
 0.4.15
 ------
 

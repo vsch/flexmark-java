@@ -85,7 +85,6 @@ public class TocUtils {
         boolean[] openedItems = new boolean[7];
         boolean[] openedList = new boolean[7];
         int[] openedItemAppendCount = new int[7];
-        //int[] openedItemIndentSize = new int[7];
 
         for (int i = 0; i < headings.size(); i++) {
             Heading header = headings.get(i);
@@ -106,13 +105,13 @@ public class TocUtils {
                 }
                 
                 if (!openedList[lastLevel]) {
-                    html.withAttr().line().tag(listOpen).indent();
+                    html.withAttr().indent().line().tag(listOpen).indent();
                     openedList[lastLevel] = true;
                 }
             } else if (lastLevel == headerLevel) {
                 if (openedItems[lastLevel]) {
                     if (openedList[lastLevel]) html.unIndent().tag(listClose).line();
-                    html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                    html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
                 }
                 openedItems[lastLevel] = false;
                 openedList[lastLevel] = false;
@@ -120,8 +119,8 @@ public class TocUtils {
                 // lastLevel > headerLevel
                 for (int lv = lastLevel; lv >= headerLevel; lv--) {
                     if (openedItems[lv]) {
-                        if (openedList[lv]) html.unIndent().tag(listClose).line();
-                        html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                        if (openedList[lv]) html.unIndent().tag(listClose).unIndent().line();
+                        html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
                     }
                     openedItems[lv] = false;
                     openedList[lv] = false;
@@ -141,14 +140,12 @@ public class TocUtils {
             
             lastLevel = headerLevel;
             openedItemAppendCount[headerLevel] = html.getAppendCount();
-            //openedItemIndentSize[headerLevel] = html.getIndentSize();
-            //html.withDelayedIndent();
         }
 
         for (int i = lastLevel; i >= 1; i--) {
             if (openedItems[i]) {
-                if (openedList[i]) html.unIndent().tag(listClose).line();
-                html/*.unIndentTo(openedItemIndentSize[lastLevel])*/.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                if (openedList[i]) html.unIndent().tag(listClose).unIndent().line();
+                html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
             }
         }
 
