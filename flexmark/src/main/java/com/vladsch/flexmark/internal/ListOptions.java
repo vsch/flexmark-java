@@ -13,7 +13,11 @@ public class ListOptions {
     final public boolean orderedStart;
     final public boolean bulletMatch;
     final public boolean itemTypeMatch;
-    final public boolean itemMismatchToSubitem;
+    final public boolean itemMismatchToSubItem;
+    final public boolean useListContentIndent;
+    final public int listContentIndentOffset;
+    final public boolean listContentIndentOverridesCodeOffset;
+    final public boolean overIndentsToFirstItem;
     final public int fixedIndent;
     final public boolean bulletItemInterruptsParagraph;
     final public boolean bulletItemInterruptsItemParagraph;
@@ -38,7 +42,11 @@ public class ListOptions {
         this.orderedItemInterruptsItemParagraph = options.get(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH);
         this.orderedNonOneItemInterruptsParagraph = options.get(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH);
         this.orderedNonOneItemInterruptsParentItemParagraph = options.get(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH);
-        this.itemMismatchToSubitem = options.get(Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM);
+        this.itemMismatchToSubItem = options.get(Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM);
+        this.useListContentIndent = options.get(Parser.LISTS_CONTENT_INDENT);
+        this.listContentIndentOffset = options.get(Parser.LISTS_CONTENT_INDENT_OFFSET);
+        this.listContentIndentOverridesCodeOffset = options.get(Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET);
+        this.overIndentsToFirstItem = options.get(Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM);
     }
     
     public boolean isTightListItem(ListItem node) {

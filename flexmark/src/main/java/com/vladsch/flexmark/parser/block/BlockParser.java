@@ -27,6 +27,8 @@ public interface BlockParser {
     void addLine(ParserState state, BasedSequence line);
 
     void closeBlock(ParserState parserState);
+    
+    boolean isClosed();
 
     /**
      *  

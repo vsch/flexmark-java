@@ -14,7 +14,7 @@ public class DumpSpecReader extends SpecReader {
     final private StringBuilder sb = new StringBuilder();
     final private FullSpecTestCase testCase;
 
-    DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
+    public DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
         super(stream);
         this.testCase = testCase;
     }

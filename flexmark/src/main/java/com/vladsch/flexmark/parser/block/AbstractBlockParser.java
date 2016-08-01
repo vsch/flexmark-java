@@ -9,7 +9,13 @@ import com.vladsch.flexmark.parser.InlineParser;
 
 public abstract class AbstractBlockParser implements BlockParser {
     private MutableDataSet mutableData = null;
-    
+    private boolean isClosed = false;
+
+    @Override
+    public boolean isClosed() {
+        return isClosed;
+    }
+
     @Override
     public boolean isContainer() {
         return false;
@@ -56,6 +62,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     @Override
     final public void finalizeClosedBlock() {
         mutableData = null;
+        isClosed = true;
     }
 
     @Override

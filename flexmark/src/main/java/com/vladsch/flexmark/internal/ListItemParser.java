@@ -2,10 +2,7 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.BulletListItem;
-import com.vladsch.flexmark.node.ListItem;
-import com.vladsch.flexmark.node.OrderedListItem;
+import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
 import com.vladsch.flexmark.parser.block.BlockParser;
@@ -21,15 +18,23 @@ public class ListItemParser extends AbstractBlockParser {
      */
     final private ListOptions options;
     final private boolean itemInterruptsItemParagraph;
+    private int markerColumn;
+    private int contentColumn;
     private int contentIndent;
     private boolean hadBlankLine = false;
     final private boolean mismatchedItemToSubItem;
     final private Parsing myParsing;
 
-    public ListItemParser(ListOptions options, Parsing parsing, int contentIndent, BasedSequence marker, boolean isNumberedList) {
+    public ListItemParser(ListOptions options, Parsing parsing, int markerColumn, int contentColumn, int contentIndent, BasedSequence marker, boolean isNumberedList) {
         this.options = options;
 
+        this.markerColumn = markerColumn;
+        this.contentColumn = contentColumn;
+
         this.contentIndent = contentIndent;
+        mismatchedItemToSubItem = this.options.itemTypeMatch && this.options.itemMismatchToSubItem;
+        myParsing = parsing;
+
         if (isNumberedList) {
             block = new OrderedListItem();
             itemInterruptsItemParagraph = this.options.orderedItemInterruptsParagraph || this.options.orderedItemInterruptsItemParagraph;
@@ -37,9 +42,6 @@ public class ListItemParser extends AbstractBlockParser {
             block = new BulletListItem();
             itemInterruptsItemParagraph = this.options.bulletItemInterruptsParagraph || this.options.bulletItemInterruptsItemParagraph;
         }
-
-        mismatchedItemToSubItem = this.options.itemTypeMatch && this.options.itemMismatchToSubitem;
-        myParsing = parsing;
 
         block.setOpeningMarker(marker);
     }
@@ -81,6 +83,33 @@ public class ListItemParser extends AbstractBlockParser {
             }
         }
 
+        int nonBlankColumn = state.getColumn() + state.getIndent();
+        if (nonBlankColumn < contentColumn && options.useListContentIndent && nonBlankColumn > markerColumn) {
+            // if we are the in the first list, we take it as our sublist, otherwise we let the list handle it
+            boolean previousListsItem = false;
+
+            if ((block.getParent() instanceof ListBlock)) {
+                if (!options.overIndentsToFirstItem) {
+                    ListBlockParser parentListParser = (ListBlockParser) state.getActiveBlockParser(block.getParent());
+                    if (parentListParser != null && nonBlankColumn >= parentListParser.markerColumn && nonBlankColumn < parentListParser.itemContentColumn + options.listContentIndentOffset) {
+                        previousListsItem = true;
+                    }
+                } else {
+                    if (block.getParent().getParent() instanceof ListItem) {
+                        ListBlockParser parentListParser = (ListBlockParser) state.getActiveBlockParser(block.getParent());
+                        if (parentListParser != null && nonBlankColumn >= parentListParser.markerColumn && nonBlankColumn < parentListParser.itemContentColumn + options.listContentIndentOffset) {
+                            previousListsItem = true;
+                        }
+                        //ListBlockParser parentListParser = (ListBlockParser) state.getActiveBlockParser(block.getParent().getParent().getParent());
+                        //if (parentListParser != null && nonBlankColumn >= parentListParser.markerColumn && nonBlankColumn < parentListParser.itemContentColumn + options.listContentIndentOffset) {
+                        //}
+                    }
+                }
+            }
+
+            if (!previousListsItem) return BlockContinue.atColumn(state.getColumn());
+        }
+
         if (state.getIndent() >= contentIndent) {
             return BlockContinue.atColumn(state.getColumn() + contentIndent);
         } else if (!hadBlankLine && !itemInterruptsItemParagraph) {
@@ -96,6 +125,7 @@ public class ListItemParser extends AbstractBlockParser {
                     }
                 }
             }
+
             return BlockContinue.none();
         }
     }

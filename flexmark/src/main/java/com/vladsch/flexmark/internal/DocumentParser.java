@@ -506,6 +506,17 @@ public class DocumentParser implements ParserState {
         return activeBlockParsers.get(activeBlockParsers.size() - 1);
     }
 
+    @Override
+    public BlockParser getActiveBlockParser(Block node) {
+        BlockParser blockParser = blockTracker.getKey(node);
+        return blockParser == null || blockParser.isClosed() ? null : blockParser;
+    }
+
+    @Override
+    public List<BlockParser> getActiveBlockParsers() {
+        return activeBlockParsers;
+    }
+
     /**
      * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each
      * line of input, then finalizing the document.

@@ -33,6 +33,12 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("list-no-start", new MutableDataSet().set(Parser.LISTS_ORDERED_LIST_MANUAL_START, false));
         optionsMap.put("list-no-bullet-match", new MutableDataSet().set(Parser.LISTS_BULLET_MATCH, false));
         optionsMap.put("list-no-type-match", new MutableDataSet().set(Parser.LISTS_ITEM_TYPE_MATCH, false));
+        optionsMap.put("list-content-indent", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT, true));
+        optionsMap.put("list-content-indent-overrides-code", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET, true));
+        optionsMap.put("list-content-indent-offset-1", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT_OFFSET, 1));
+        optionsMap.put("list-content-indent-offset-2", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT_OFFSET, 2));
+        optionsMap.put("list-content-indent-offset-3", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT_OFFSET, 3));
+        optionsMap.put("list-over-indents-to-first-item", new MutableDataSet().set(Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM, true));
         optionsMap.put("bullet-no-para-break", new MutableDataSet().set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH, false));
         optionsMap.put("bullet-no-item-break", new MutableDataSet().set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH, false));
         optionsMap.put("ordered-no-para-break", new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH, false));

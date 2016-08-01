@@ -54,6 +54,14 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
         return allBlockParsersMap.valueSet();
     }
 
+    public Block getValue(BlockParser parser) {
+        return allBlockParsersMap.getKeyValue(parser);
+    }
+
+    public BlockParser getKey(Block parser) {
+        return allBlockParsersMap.getValueKey(parser);
+    }
+
     public boolean containsKey(BlockParser parser) {
         return allBlockParsersMap.containsKey(parser);
     }

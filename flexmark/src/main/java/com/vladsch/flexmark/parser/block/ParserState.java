@@ -5,8 +5,11 @@ import com.vladsch.flexmark.internal.util.BlockTracker;
 import com.vladsch.flexmark.internal.util.Parsing;
 import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
+
+import java.util.List;
 
 /**
  * State of the parser that is used in block parsers.
@@ -57,6 +60,16 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
      * @return the deepest open block parser
      */
     BlockParser getActiveBlockParser();
+
+    /**
+     * @return the current list of active block parsers, deepest is last
+     */
+    List<BlockParser> getActiveBlockParsers();
+
+    /**
+     * @return an active block parser for the node or null if not found
+     */
+    BlockParser getActiveBlockParser(Block node);
 
     InlineParser getInlineParser();
     /**

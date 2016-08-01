@@ -66,6 +66,11 @@ public class Parser implements IParse {
     final public static DataKey<Boolean> LISTS_ORDERED_LIST_MANUAL_START = new DataKey<>("LISTS_ORDERED_LIST_MANUAL_START", true);
     final public static DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
     final public static DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH", false);
+    final public static DataKey<Boolean> LISTS_CONTENT_INDENT = new DataKey<>("LISTS_LIST_CONTENT_INDENT", false);
+    final public static DataKey<Integer> LISTS_CONTENT_INDENT_OFFSET = new DataKey<>("LISTS_LIST_CONTENT_INDENT", 0);
+    final public static DataKey<Boolean> LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET = new DataKey<>("LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET", false);
+    final public static DataKey<Boolean> LISTS_OVER_INDENTS_TO_FIRST_ITEM = new DataKey<>("LISTS_OVER_INDENTS_TO_FIRST_ITEM", false);
+    
     final public static DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     final public static DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);

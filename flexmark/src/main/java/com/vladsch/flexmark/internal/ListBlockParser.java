@@ -16,12 +16,16 @@ public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock block;
     private final ListOptions options;
     final int itemIndent;
+    final int markerColumn;
+    final int itemContentColumn;
     private final boolean isNumberedList;
 
     public ListBlockParser(ListOptions options, ListData listData) {
         this.options = options;
         this.block = listData.listBlock;
+        this.markerColumn = listData.markerColumn;
         this.itemIndent = listData.indent;
+        this.itemContentColumn = listData.contentColumn;
         this.isNumberedList = listData.isNumberedList;
     }
 
@@ -42,13 +46,6 @@ public class ListBlockParser extends AbstractBlockParser {
     @Override
     public Block getBlock() {
         return block;
-    }
-
-    @Override
-    public BlockContinue tryContinue(ParserState state) {
-        // List blocks themselves don't have any markers, only list items. So try to stay in the list.
-        // If there is a block start other than list item, canContain makes sure that this list is closed.
-        return BlockContinue.atIndex(state.getIndex());
     }
 
     void setTight(boolean tight) {
@@ -84,7 +81,7 @@ public class ListBlockParser extends AbstractBlockParser {
                     // set the item's tight setting
                     ((ListItem) item).setTight(false);
                 }
-                
+
                 prevItemLoose = thisItemLoose;
             }
 
@@ -177,7 +174,7 @@ public class ListBlockParser extends AbstractBlockParser {
             // If this line is blank or has a code block, default to 1 space after marker
             contentColumn = columnAfterMarker + 1;
         }
-        return new ListData(listBlock, indent, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
+        return new ListData(listBlock, indent, markerColumn, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -223,11 +220,18 @@ public class ListBlockParser extends AbstractBlockParser {
         } else if (a instanceof OrderedList && b instanceof OrderedList) {
             return !options.bulletMatch || equals(((OrderedList) a).getDelimiter(), ((OrderedList) b).getDelimiter()) ? ListMatchType.PREFIX_MATCHED : ListMatchType.PREFIX_NOT_MATCHED;
         }
-        return options.itemTypeMatch ? (options.itemMismatchToSubitem ? ListMatchType.TYPE_MISMATCHED_SUBITEM : ListMatchType.TYPE_MISMATCHED_NEWLIST) : ListMatchType.TYPE_MISMATCHED_IGNORE;
+        return options.itemTypeMatch ? (options.itemMismatchToSubItem ? ListMatchType.TYPE_MISMATCHED_SUBITEM : ListMatchType.TYPE_MISMATCHED_NEWLIST) : ListMatchType.TYPE_MISMATCHED_IGNORE;
     }
 
     private static boolean equals(Object a, Object b) {
         return (a == null) ? (b == null) : a.equals(b);
+    }
+
+    @Override
+    public BlockContinue tryContinue(ParserState state) {
+        // List blocks themselves don't have any markers, only list items. So try to stay in the list.
+        // If there is a block start other than list item, canContain makes sure that this list is closed.
+        return BlockContinue.atIndex(state.getIndex());
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -280,7 +284,7 @@ public class ListBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getMatchedBlockParser();
 
-            if (state.getIndent() >= state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
+            if ((!options.useListContentIndent || !options.listContentIndentOverridesCodeOffset) && state.getIndent() >= state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
                 return BlockStart.none();
             }
 
@@ -300,8 +304,34 @@ public class ListBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
+            Integer moreThanToSubItem = null;
+            if (options.useListContentIndent) {
+                // see if we are in a list item
+                if (state.getIndent() >= options.listContentIndentOffset + state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
+                    return BlockStart.none();
+                }
+
+                //moreThanToSubItem = listData.markerColumn;
+                //
+                //List<BlockParser> parsers = state.getActiveBlockParsers();
+                //ListBlockParser parentListBlockParser = null;
+                //
+                //int iMax = parsers.size();
+                //for (int i = iMax; i-- > 1; ) {
+                //    if (parsers.get(i) instanceof ListBlockParser) {
+                //        parentListBlockParser = (ListBlockParser) parsers.get(i);
+                //        moreThanToSubItem = parentListBlockParser.markerColumn;
+                //        break;
+                //    }
+                //    
+                //    if (!(parsers.get(i) instanceof ParagraphParser || parsers.get(i) instanceof ListItemParser)) {
+                //        break;
+                //    }
+                //}
+            }
+
             int newContentColumn = options.fixedIndent > 0 ? state.getColumn() + options.fixedIndent : listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(options, state.getParsing(), newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
+            ListItemParser listItemParser = new ListItemParser(options, state.getParsing(), listData.markerColumn, newContentColumn, newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
 
             int newColumn = listData.contentColumn;
             // prepend the list block if needed
@@ -324,6 +354,16 @@ public class ListBlockParser extends AbstractBlockParser {
 
                     return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
                 } else {
+                    if (options.useListContentIndent && options.overIndentsToFirstItem) {
+                        // if this is the first list with a single item and we are > list.markerColumn and options.firstListFirstItemTakesOverIndents we start a sub list
+                        if (listData.markerColumn > listBlockParser.markerColumn && !(listBlockParser.getBlock().getParent() instanceof ListItem) && listBlockParser.getBlock().getFirstChild() == listBlockParser.getBlock().getLastChild())
+                        {
+                            listBlockParser = new ListBlockParser(options, listData);
+                            listBlockParser.setTight(true);
+
+                            return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
+                        }
+                    }
                     return BlockStart.of(listItemParser).atColumn(newColumn);
                 }
             }
@@ -333,13 +373,15 @@ public class ListBlockParser extends AbstractBlockParser {
     private static class ListData {
         final ListBlock listBlock;
         final int contentColumn;
+        final int markerColumn;
         final int indent;
         final BasedSequence listMarker;
         final boolean isNumberedList;
 
-        ListData(ListBlock listBlock, int indent, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
+        ListData(ListBlock listBlock, int indent, int markerColumn, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
             this.listBlock = listBlock;
             this.indent = indent;
+            this.markerColumn = markerColumn;
             this.contentColumn = contentColumn;
             this.listMarker = listMarker;
             this.isNumberedList = isNumberedList;
