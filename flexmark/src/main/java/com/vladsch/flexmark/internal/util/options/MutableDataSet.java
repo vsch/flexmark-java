@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.internal.util.options;
 
 import com.vladsch.flexmark.internal.util.collection.DataValueFactory;
-import org.jetbrains.annotations.NotNull;
 
 public class MutableDataSet extends DataSet implements MutableDataHolder {
     public MutableDataSet() {
@@ -49,13 +48,11 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         return dataSet;
     }
     
-    @NotNull
     @Override
     public MutableDataHolder toMutable() {
         return this;
     }
 
-    @NotNull
     @Override
     public DataHolder toImmutable() {
         return new DataSet(this);

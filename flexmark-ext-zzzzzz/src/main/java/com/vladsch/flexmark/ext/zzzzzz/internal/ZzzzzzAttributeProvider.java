@@ -11,15 +11,14 @@ import com.vladsch.flexmark.internal.util.ast.AttributeProvidingHandler;
 import com.vladsch.flexmark.internal.util.options.Attributes;
 import com.vladsch.flexmark.internal.util.options.DataHolder;
 import com.vladsch.flexmark.node.*;
-import org.jetbrains.annotations.NotNull;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
 import static com.vladsch.flexmark.internal.util.options.Attribute.LINK_STATUS;
 
 public class ZzzzzzAttributeProvider implements AttributeProvider {
-    @NotNull final protected String missingTargetClass;
-    @NotNull final protected String localOnlyTargetClass;
-    @NotNull final protected AttributeProviderAdapter nodeAdapter;
+    final private String missingTargetClass;
+    final private String localOnlyTargetClass;
+    final private AttributeProviderAdapter nodeAdapter;
 
     public ZzzzzzAttributeProvider(NodeRendererContext context) {
         DataHolder options = context.getOptions();
@@ -39,11 +38,11 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         nodeAdapter.setAttributes(node, part, attributes);
     }
 
-    void setLinkAttributes(LinkNode node, AttributablePart part, Attributes attributes) {
+    private void setLinkAttributes(LinkNode node, AttributablePart part, Attributes attributes) {
         setLinkAttributes(part, attributes);
     }
 
-    void setLinkAttributes(AttributablePart part, Attributes attributes) {
+    private void setLinkAttributes(AttributablePart part, Attributes attributes) {
         if (part == LINK) {
             String linkStatus = attributes.getValue(LINK_STATUS);
             if (LinkStatus.NOT_FOUND.isStatus(linkStatus)) {
@@ -75,5 +74,4 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
             return new ZzzzzzAttributeProvider(context);
         }
     }
-
 }

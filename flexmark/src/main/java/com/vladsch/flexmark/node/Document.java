@@ -6,7 +6,6 @@ import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
 import com.vladsch.flexmark.internal.util.options.MutableDataSet;
 import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Map;
@@ -47,11 +46,9 @@ public class Document extends Block implements MutableDataHolder {
     @Override
     public void setAll(DataHolder other) { dataSet.setAll(other); }
 
-    @NotNull
     @Override
     public MutableDataHolder toMutable() { return dataSet.toMutable(); }
 
-    @NotNull
     @Override
     public DataHolder toImmutable() { return dataSet.toImmutable(); }
 

@@ -18,6 +18,9 @@
     </option>
     <envs />
     <patterns />
+    <RunnerSettings RunnerId="Debug with VisualVM">
+      <option name="visualVMId" value="39089742193516" />
+    </RunnerSettings>
     <method />
   </configuration>
 </component>

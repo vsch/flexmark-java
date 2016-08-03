@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.internal.util.options;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,13 +48,11 @@ public class DataSet implements DataHolder {
         return dataSet;
     }
 
-    @NotNull
     @Override
     public MutableDataHolder toMutable() {
         return new MutableDataSet(this);
     }
 
-    @NotNull
     @Override
     public DataHolder toImmutable() {
         return this;

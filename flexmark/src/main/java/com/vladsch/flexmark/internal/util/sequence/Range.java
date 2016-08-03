@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.internal.util.sequence;
 
-import com.intellij.openapi.util.TextRange;
-
 public class Range {
     final static public Range NULL = new Range(0, 0);
 
@@ -20,10 +18,10 @@ public class Range {
 
     public int component2() { return myEnd; }
 
-    public TextRange asTextRange() {
-        return new TextRange(myStart, myEnd);
-    }
-
+    //public TextRange asTextRange() {
+    //    return new TextRange(myStart, myEnd);
+    //}
+    
     public Range(int start, int end) {
         myStart = start;
         myEnd = end;

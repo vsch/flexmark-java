@@ -26,7 +26,6 @@ Definition Term
 .
 ````````````````````````````````
 
-
 Optional : at end
 
 ```````````````````````````````` example(Definition: 2) options(IGNORE)
