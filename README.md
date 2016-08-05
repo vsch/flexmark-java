@@ -91,9 +91,10 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
-- Removed all `instanceOf` block parser and node tests from `DocumentParser` making it
-  completely agnostic to classes and relies instead on the values returned from `BlockParser`
-  and `Node` and `Block` interfaces.
+- Parser is mature enough to be used as the parser in the Markdown Navigator plugin. Performance
+  improvement is spectacular. Typing with preview enabled is now comfortable, even in larger
+  files. Disabling the preview for major editing makes typing response similar to editing plain
+  text files.
 
 - Optimized post processor processing to eliminate each processor from having to traverse the
   AST looking for nodes of interest. Parse time for large file (500k bytes, 10k lines) went from
@@ -105,21 +106,13 @@ Progress
 
 - Wiki added [flexmark-java wiki]
 
-- Add `BlockPreProcessor` interface for efficient node replacement before inline processing is
-  done. Could be handled with `PostProcessor` but would require each one traverse the full AST.
-  This way they are run only on the required nodes.
-
-- Add `ParagraphPreProcessor` interface for generic removal of definitions/other nodes from
-  beginnings of paragraphs, like reference definitions are done in [commonmark-java] but made
-  generic to be extensible and accessible to extensions.
-
-- Add dependencies between paragraph pre processors so that their order is defined by the
-  extension. That way a paragraph pre-processor can be sure that a pre-processor on whose output
-  it depends on has been run before it is invoked.
-
 - Unified options architecture to configure: parser, renderer and any custom extensions. This
   includes the list of extensions to use. Making a single argument configure the environment.
   These are also available during parsing and rendering phases for use by extensions.
+
+    - Add options syntax to ast_spec.md to allow varying parser/renderer options on a per spec
+      example basis. This way all options available for the core or extension can be tested in a
+      single file.
 
 - Test architecture based on original `spec.txt` augmented with:
     - expected AST so it is validated by tests
@@ -207,7 +200,7 @@ Progress
               Text[1, 9] chars:[1, 9, "foo *bar"]
         ````````````````````````````````
     
-Whitespace is left out. So all spans of text not in a node are implicitly white space.
+    Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
 I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
 had to do major surgery on its innards to get full source position tracking and AST that matches
