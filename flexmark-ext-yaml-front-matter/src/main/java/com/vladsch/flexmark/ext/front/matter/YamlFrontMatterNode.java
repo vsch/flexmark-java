@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.front.matter;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomNode;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 

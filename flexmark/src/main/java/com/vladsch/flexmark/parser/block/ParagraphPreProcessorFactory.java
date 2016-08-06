@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.ComputableFactory;
-import com.vladsch.flexmark.internal.util.dependency.Dependent;
+import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.dependency.Dependent;
 
 public interface ParagraphPreProcessorFactory extends ComputableFactory<ParagraphPreProcessor, ParserState>, Dependent<ParagraphPreProcessorFactory> {
 

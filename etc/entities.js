@@ -1,5 +1,5 @@
 // 1. curl -O "https://html.spec.whatwg.org/multipage/entities.json"
-// 2. run this script with node
+// 2. run this script with ast
 
 var fs = require('fs');
 var data = JSON.parse(fs.readFileSync("entities.json"));

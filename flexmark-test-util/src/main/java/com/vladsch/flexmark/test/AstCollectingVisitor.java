@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.ast.NodeVisitorBase;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitorBase;
 
 public class AstCollectingVisitor extends NodeVisitorBase {
     public static final String EOL = "\n";

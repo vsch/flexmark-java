@@ -3,15 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
-        <artifactId>flexmark-parent</artifactId>
-        <version>0.3.0-SNAPSHOT</version>
+        <artifactId>flexmark-java</artifactId>
+        <version>0.4.16-SNAPSHOT</version>
     </parent>
 
-    <artifactId>typographic</artifactId>
+    <artifactId>flexmark-ext-typographic</artifactId>
     <name>flexmark-java extension for typographic</name>
     <description>flexmark-java extension for typographic</description>
 
     <dependencies>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark</artifactId>

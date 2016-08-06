@@ -1,5 +1,9 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -7,17 +11,13 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.spec.SpecExample;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.junit.Test;
 
 import java.util.Collections;

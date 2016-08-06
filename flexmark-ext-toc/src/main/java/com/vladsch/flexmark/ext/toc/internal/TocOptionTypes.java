@@ -15,12 +15,12 @@
 
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.options.BooleanOptionParser;
-import com.vladsch.flexmark.internal.util.options.MessageProvider;
-import com.vladsch.flexmark.internal.util.options.OptionParser;
-import com.vladsch.flexmark.internal.util.options.ParsedOption;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.options.BooleanOptionParser;
+import com.vladsch.flexmark.util.options.MessageProvider;
+import com.vladsch.flexmark.util.options.OptionParser;
+import com.vladsch.flexmark.util.options.ParsedOption;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 

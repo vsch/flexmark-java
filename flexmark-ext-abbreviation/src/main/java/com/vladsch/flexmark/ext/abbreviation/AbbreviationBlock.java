@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomBlock;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A block node that contains the abbreviation definition
+ * A block ast that contains the abbreviation definition
  */
 public class AbbreviationBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

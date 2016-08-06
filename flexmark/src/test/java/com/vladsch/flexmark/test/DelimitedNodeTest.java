@@ -1,11 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Emphasis;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.StrongEmphasis;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
 

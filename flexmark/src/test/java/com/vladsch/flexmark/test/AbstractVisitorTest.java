@@ -1,11 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.node.Code;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Paragraph;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.ast.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -35,7 +30,7 @@ public class AbstractVisitorTest {
     }
 
     private static void assertCode(String expectedLiteral, Node node) {
-        assertEquals("Expected node to be a Code node: " + node, Code.class, node.getClass());
+        assertEquals("Expected ast to be a Code ast: " + node, Code.class, node.getClass());
         Code code = (Code) node;
         assertEquals(expectedLiteral, code.getChars().toString());
     }

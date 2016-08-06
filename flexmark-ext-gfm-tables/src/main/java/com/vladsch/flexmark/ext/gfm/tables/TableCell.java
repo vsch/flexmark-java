@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.

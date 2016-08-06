@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.spec.example.internal;
 
 import com.vladsch.flexmark.ext.spec.example.SpecExampleExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 class SpecExampleOptions {
     final public boolean renderHtml;

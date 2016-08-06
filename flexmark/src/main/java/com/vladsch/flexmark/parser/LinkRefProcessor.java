@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]
@@ -39,13 +39,13 @@ public interface LinkRefProcessor {
     /**
      * Create the desired element that was previously matched with isMatch
      *
-     * @param nodeChars    char sequence from which to create the node
+     * @param nodeChars    char sequence from which to create the ast
      * @return Node element to be inserted into the tree
      */
     Node createNode(BasedSequence nodeChars);
 
     /**
-     * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
+     * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the ast
      * or if the children are not desired then removeIndex them.
      */
     void adjustInlineText(Node node);

@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
-        <artifactId>flexmark-parent</artifactId>
-        <version>0.3.0-SNAPSHOT</version>
+        <artifactId>flexmark-java</artifactId>
+        <version>0.4.16-SNAPSHOT</version>
     </parent>
 
     <artifactId>flexmark-ext-autolink</artifactId>
@@ -16,6 +16,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark</artifactId>

@@ -1,18 +1,18 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
 import com.vladsch.flexmark.ext.toc.SimTocOptionList;
-import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.options.ParsedOption;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.ParsedOption;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 import java.util.Set;
@@ -104,18 +104,18 @@ public class SimTocBlockParser extends AbstractBlockParser {
         //if (block.getLineCount() > 1) {
         //    BasedSequence contentChars = SegmentedSequence.of(block.getContentLines(1, block.getLineCount()), block.getChars());
         //    if (!contentChars.isEmpty()) {
-        //        SimTocContent node = new SimTocContent(contentChars);
-        //        block.appendChild(node);
+        //        SimTocContent ast = new SimTocContent(contentChars);
+        //        block.appendChild(ast);
         //    }
         //}
         if (block.hasChildren()) {
-            // move the children to a SimTocContent node
+            // move the children to a SimTocContent ast
             SimTocContent tocContent = new SimTocContent();
             tocContent.takeChildren(block);
             tocContent.setCharsFromContent();
             
             if (blankLineSpacer.isNotNull()) {
-                // need to extend the content node start to include the blank line
+                // need to extend the content ast start to include the blank line
                 tocContent.setChars(Node.spanningChars(blankLineSpacer, tocContent.getChars()));
             }
 

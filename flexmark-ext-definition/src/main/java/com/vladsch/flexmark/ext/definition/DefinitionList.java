@@ -1,14 +1,14 @@
 
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.ListBlock;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.ListBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
 /**
- * A DefinitionList block node
+ * A DefinitionList block ast
  */
 public class DefinitionList extends ListBlock {
     public DefinitionList() {

@@ -15,12 +15,12 @@
 
 package com.vladsch.flexmark.ext.typographic;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.DoNotDecorate;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A TypographicSmarts node
+ * A TypographicSmarts ast
  */
 public class TypographicSmarts extends Node implements DoNotDecorate {
     private String typographicText;

@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.17](#0417)
 - [0.4.16](#0416)
 - [0.4.15](#0415)
 - [0.4.14](#0414)
@@ -44,6 +45,13 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.17
+------
+
+- Factor out utilities to a separate module to eliminate maven pom cycles 
+
+- Prepare for maven release
 
 0.4.16
 ------
@@ -481,7 +489,7 @@ flexmark-java
   ease of implementation. `NodeRenderer` interface changed. Now it provides a map of node
   classes to `NodeRenderingHandler` instance. In the implementation it becomes a new instance
   creation with class and lambda method reference. The method already has the right node class
-  eliminating the need to have a slew of `if (node instance of ...) do((cast)...)`. Just
+  eliminating the need to have a slew of `if (ast instance of ...) do((cast)...)`. Just
   implement a `NodeRenderHandler.render(YourNode, NodeRendererContext, HtmlWriter)` and add an
   entry into the map.
 

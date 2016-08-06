@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.typographic;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface TypographicVisitor {
     static <V extends TypographicVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

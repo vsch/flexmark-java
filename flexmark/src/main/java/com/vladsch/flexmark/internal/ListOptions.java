@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.ListItem;
-import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 public class ListOptions {
     final public boolean endOnDoubleBlank;

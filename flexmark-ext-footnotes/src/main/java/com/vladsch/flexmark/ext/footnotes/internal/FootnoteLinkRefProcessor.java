@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     final static boolean WANT_EXCLAMATION_PREFIX = false;

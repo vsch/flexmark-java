@@ -1,7 +1,7 @@
 
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface DefinitionVisitor {
     static <V extends DefinitionVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
@@ -12,7 +12,7 @@ public interface DefinitionVisitor {
         };
     }
 
-    // void visit(Definition node);
+    // void visit(Definition ast);
     void visit(DefinitionList node);
     void visit(DefinitionTerm node);
     void visit(DefinitionItem node);

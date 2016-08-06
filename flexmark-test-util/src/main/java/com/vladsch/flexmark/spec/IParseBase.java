@@ -15,12 +15,12 @@
 
 package com.vladsch.flexmark.spec;
 
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.options.MutableDataSet;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.StringSequence;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.IParse;
+import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.StringSequence;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -6,9 +6,9 @@ import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationParagraphPreProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.KeepType;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for adding abbreviations to markdown

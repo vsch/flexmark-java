@@ -25,5 +25,6 @@
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
+    <orderEntry type="module" module-name="flexmark-util" />
   </component>
 </module>

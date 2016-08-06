@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.ext.autolink.internal;
 
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 import org.nibor.autolink.LinkExtractor;
 import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;

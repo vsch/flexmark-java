@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.front.matter.internal;
 
+import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterBlock;
 import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterNode;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class Delimiter implements DelimiterRun {
 

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.anchorlink;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomNode;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A strikethrough ast containing text and other inline nodes nodes as children.
  */
 public class AnchorLink extends CustomNode {
     public AnchorLink() {

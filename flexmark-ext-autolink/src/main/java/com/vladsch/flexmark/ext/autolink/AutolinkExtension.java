@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.autolink;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
-import com.vladsch.flexmark.node.Link;
 import com.vladsch.flexmark.parser.Parser;
 
 /**

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.node.Node;
 
 public abstract class NodeRendererSubContext implements NodeRendererContext {
     final HtmlWriter htmlWriter;

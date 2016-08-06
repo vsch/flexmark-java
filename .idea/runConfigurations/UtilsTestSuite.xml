@@ -9,8 +9,8 @@
     <module name="flexmark" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.internal.util" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.internal.util.UtilsTestSuite" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.util" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.util.UtilsTestSuite" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="VM_PARAMETERS" value="-ea" />

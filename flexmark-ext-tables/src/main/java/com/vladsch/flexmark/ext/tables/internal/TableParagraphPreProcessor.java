@@ -1,18 +1,18 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeIterator;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
-import com.vladsch.flexmark.internal.util.ast.NodeIterator;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 import java.util.regex.Pattern;

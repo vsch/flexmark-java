@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface SpecExampleVisitor {
     static <V extends SpecExampleVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.BlockParserTracker;
-import com.vladsch.flexmark.internal.util.BlockTracker;
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.Parsing;
+import com.vladsch.flexmark.internal.BlockParserTracker;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.util.BlockTracker;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
@@ -67,7 +67,7 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
     List<BlockParser> getActiveBlockParsers();
 
     /**
-     * @return an active block parser for the node or null if not found
+     * @return an active block parser for the ast or null if not found
      */
     BlockParser getActiveBlockParser(Block node);
 

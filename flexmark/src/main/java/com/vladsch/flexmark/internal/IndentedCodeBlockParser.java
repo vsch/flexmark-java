@@ -1,13 +1,14 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.collection.iteration.Reverse;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.IndentedCodeBlock;
-import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.IndentedCodeBlock;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.collection.iteration.Reverse;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -17,8 +17,8 @@ package com.vladsch.flexmark.ext.typographic;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for typographics

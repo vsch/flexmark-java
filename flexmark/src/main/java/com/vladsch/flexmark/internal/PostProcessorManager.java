@@ -1,19 +1,19 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.collection.ClassifyingNodeTracker;
-import com.vladsch.flexmark.internal.util.collection.NodeClassifierVisitor;
-import com.vladsch.flexmark.internal.util.collection.OrderedSet;
-import com.vladsch.flexmark.internal.util.collection.iteration.ReversibleIterable;
-import com.vladsch.flexmark.internal.util.dependency.DependencyHandler;
-import com.vladsch.flexmark.internal.util.dependency.DependentItem;
-import com.vladsch.flexmark.internal.util.dependency.DependentItemMap;
-import com.vladsch.flexmark.internal.util.dependency.ResolvedDependencies;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.options.DataKey;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.util.collection.ClassifyingNodeTracker;
+import com.vladsch.flexmark.util.collection.NodeClassifierVisitor;
+import com.vladsch.flexmark.util.collection.OrderedSet;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
+import com.vladsch.flexmark.util.dependency.DependencyHandler;
+import com.vladsch.flexmark.util.dependency.DependentItem;
+import com.vladsch.flexmark.util.dependency.DependentItemMap;
+import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -53,7 +53,7 @@ public class PostProcessorManager {
     }
 
     public Document postProcess(Document document) {
-        // first initialize node tracker if 
+        // first initialize ast tracker if 
         ClassifyingNodeTracker classifyingNodeTracker = null;
 
         classifyingNodeTracker = null;
@@ -75,7 +75,7 @@ public class PostProcessorManager {
                     assert !hadGlobal;
 
                     if (classifyingNodeTracker == null) {
-                        // build the node type information by traversing the document tree
+                        // build the ast type information by traversing the document tree
                         classifyingNodeTracker = new NodeClassifierVisitor(stage.myNodeMap).classify(document);
                     }
 
@@ -90,7 +90,7 @@ public class PostProcessorManager {
                     ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
                     for (Node node : nodes) {
                         if (node.getParent() == null) continue; // was already removed 
-                        // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
+                        // now we need to get the bitset for the excluded ancestors of the ast, then intersect it with the actual ancestors of this factory
                         int index = -1;
                         BitSet nodeAncestors = null;
                         BitSet nodeExclusions = null;
@@ -131,7 +131,7 @@ public class PostProcessorManager {
             for (PostProcessorFactory dependent : dependents) {
                 Map<Class<? extends Node>, Set<Class<?>>> types = dependent.getNodeTypes();
                 if ((types == null || types.isEmpty()) && !dependent.affectsGlobalScope()) {
-                    throw new IllegalStateException("PostProcessorFactory " + dependent + " is not document post processor and has empty node map, does nothing, should not be registered.");
+                    throw new IllegalStateException("PostProcessorFactory " + dependent + " is not document post processor and has empty ast map, does nothing, should not be registered.");
                 }
 
                 if (types != null) {

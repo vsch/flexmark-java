@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.DoNotDecorate;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Footnote referencing node
+ * A Footnote referencing ast
  */
 public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

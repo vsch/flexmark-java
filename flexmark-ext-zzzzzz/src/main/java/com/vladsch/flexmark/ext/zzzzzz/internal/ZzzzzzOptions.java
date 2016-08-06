@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 class ZzzzzzOptions {
     final public boolean zzzzzzOption1;

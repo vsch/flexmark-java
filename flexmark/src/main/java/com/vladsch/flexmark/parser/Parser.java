@@ -1,24 +1,25 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
 import com.vladsch.flexmark.internal.PostProcessorManager;
-import com.vladsch.flexmark.internal.util.KeepType;
-import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.options.DataKey;
-import com.vladsch.flexmark.internal.util.options.DataSet;
-import com.vladsch.flexmark.internal.util.options.MutableDataSet;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.StringSequence;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CustomBlockParserFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.DataSet;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.StringSequence;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -125,7 +126,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
-     * @return the root node
+     * @return the root ast
      */
     public Node parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
@@ -140,7 +141,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
-     * @return the root node
+     * @return the root ast
      */
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
@@ -155,7 +156,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the reader to parse
-     * @return the root node
+     * @return the root ast
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {

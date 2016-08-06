@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomBlock;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * Table block containing a {@link TableHead} and optionally a {@link TableBody}.

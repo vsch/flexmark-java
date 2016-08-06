@@ -15,5 +15,6 @@
     <orderEntry type="library" scope="TEST" name="org.openjdk.jmh:jmh-generator-annprocess:1.12" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-util" />
   </component>
 </module>

@@ -15,13 +15,13 @@
 
 package com.vladsch.flexmark.ext.escaped.character;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.DoNotDecorate;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A EscapedCharacter node
+ * A EscapedCharacter ast
  */
 public class EscapedCharacter extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

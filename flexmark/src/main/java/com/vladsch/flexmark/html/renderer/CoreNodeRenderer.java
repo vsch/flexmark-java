@@ -1,23 +1,23 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.ReferenceRepository;
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.internal.ListOptions;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.vladsch.flexmark.internal.util.sequence.SubSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
 
 /**
- * The node renderer that renders all the core nodes (comes last in the order of node renderers).
+ * The ast renderer that renders all the core nodes (comes last in the order of ast renderers).
  */
 public class CoreNodeRenderer implements NodeRenderer {
     final static public AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");

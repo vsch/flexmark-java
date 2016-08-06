@@ -5,8 +5,8 @@ import com.vladsch.flexmark.ext.toc.internal.SimTocBlockParser;
 import com.vladsch.flexmark.ext.toc.internal.SimTocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for tocs
@@ -25,7 +25,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     // final public static DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
 
     /**
-     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC node.
+     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC ast.
      *
      * @value #TOC_PARSE_INVALID_LEVEL
      *

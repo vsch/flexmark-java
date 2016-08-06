@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 /**
- * Specifies the node part for which attributes can be provided
+ * Specifies the ast part for which attributes can be provided
  */
 public class AttributablePart {
     final public static AttributablePart NODE = new AttributablePart("NODE");

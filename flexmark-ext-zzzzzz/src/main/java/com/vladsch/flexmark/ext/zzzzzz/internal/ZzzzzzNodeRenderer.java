@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
 import java.util.Collections;

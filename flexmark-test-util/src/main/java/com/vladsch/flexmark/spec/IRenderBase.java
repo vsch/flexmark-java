@@ -15,10 +15,10 @@
 
 package com.vladsch.flexmark.spec;
 
-import com.vladsch.flexmark.html.IRender;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.options.MutableDataSet;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.io.IOException;
 

@@ -3,7 +3,7 @@ package com.vladsch.flexmark.html.renderer;
 import java.util.Set;
 
 /**
- * A renderer for a set of node types.
+ * A renderer for a set of ast types.
  */
 public interface NodeRenderer {
     /**

@@ -1,19 +1,19 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.AttributeProviderAdapter;
+import com.vladsch.flexmark.ast.util.AttributeProvidingHandler;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.internal.util.ast.AttributeProviderAdapter;
-import com.vladsch.flexmark.internal.util.ast.AttributeProvidingHandler;
-import com.vladsch.flexmark.internal.util.options.Attributes;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
-import static com.vladsch.flexmark.internal.util.options.Attribute.LINK_STATUS;
+import static com.vladsch.flexmark.util.options.Attribute.LINK_STATUS;
 
 public class ZzzzzzAttributeProvider implements AttributeProvider {
     final private String missingTargetClass;

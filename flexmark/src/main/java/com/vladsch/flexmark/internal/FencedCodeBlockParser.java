@@ -1,12 +1,13 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.FencedCodeBlock;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.FencedCodeBlock;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;

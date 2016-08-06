@@ -15,12 +15,12 @@
 
 package com.vladsch.flexmark.ext.typographic.internal;
 
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.typographic.TypographicSmarts;
-import com.vladsch.flexmark.internal.util.NodeTracker;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
+import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.internal.util.ast.AnchorRefTargetBlockVisitor;
-import com.vladsch.flexmark.node.AnchorRefTarget;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.AnchorRefTarget;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.AnchorRefTargetBlockVisitor;
 
 import java.util.HashMap;
 

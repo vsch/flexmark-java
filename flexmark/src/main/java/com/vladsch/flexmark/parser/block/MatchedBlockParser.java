@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 

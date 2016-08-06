@@ -16,7 +16,7 @@
 package com.vladsch.flexmark.ext.typographic.internal;
 
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 class TypographicOptions {
     final public boolean typographicQuotes;

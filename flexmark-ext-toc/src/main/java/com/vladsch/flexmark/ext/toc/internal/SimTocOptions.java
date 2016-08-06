@@ -16,7 +16,7 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 public class SimTocOptions extends TocOptions {
     final public boolean isAstAddOptions;

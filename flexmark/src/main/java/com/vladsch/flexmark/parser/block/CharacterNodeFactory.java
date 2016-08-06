@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.Factory;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.Factory;
 
 public interface CharacterNodeFactory extends Factory<Node> {
     boolean skipNext(char c);

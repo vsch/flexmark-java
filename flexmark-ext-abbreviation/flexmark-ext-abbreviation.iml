@@ -13,5 +13,6 @@
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" />
+    <orderEntry type="module" module-name="flexmark-util" />
   </component>
 </module>

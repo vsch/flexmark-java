@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface SimTocVisitor {
     static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

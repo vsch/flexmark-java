@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
-        <artifactId>flexmark-parent</artifactId>
-        <version>0.3.0-SNAPSHOT</version>
+        <artifactId>flexmark-java</artifactId>
+        <version>0.4.16-SNAPSHOT</version>
     </parent>
 
     <artifactId>flexmark-integration-test</artifactId>
@@ -24,6 +24,21 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-abbreviation</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-emoji</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-footnotes</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
             <scope>test</scope>
         </dependency>
@@ -34,7 +49,22 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-gfm-tasklist</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-tables</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-yaml-front-matter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-wikilink</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -59,6 +89,10 @@
             <artifactId>jmh-generator-annprocess</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-util</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
@@ -66,16 +100,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
                 <configuration>
-                    <!-- We don't have anything in src/main for this zzzzzz, it only contains tests -->
+                    <!-- We don't have anything in src/main for this module, it only contains tests -->
                     <skip>true</skip>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.1</version>
                 <configuration>
-                    <!-- We don't have anything to install for this zzzzzz, it only contains tests -->
+                    <!-- We don't have anything to install for this module, it only contains tests -->
                     <skip>true</skip>
                 </configuration>
             </plugin>

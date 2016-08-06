@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 
 import java.util.Map;
@@ -10,7 +10,7 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
     /**
      * Node types that this post processor processes
      *
-     * @return set of block node types
+     * @return set of block ast types
      */
     @Override
     final public Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes() {

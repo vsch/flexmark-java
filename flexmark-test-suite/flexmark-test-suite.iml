@@ -31,5 +31,6 @@
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" />
     <orderEntry type="module" module-name="flexmark-ext-definition" />
+    <orderEntry type="module" module-name="flexmark-util" />
   </component>
 </module>

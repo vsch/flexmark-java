@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomBlock;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
 /**
- * A SpecExample block node
+ * A SpecExample block ast
  */
 public class SpecExampleBlock extends CustomBlock {
     private BasedSequence openingMarker = SubSequence.NULL;

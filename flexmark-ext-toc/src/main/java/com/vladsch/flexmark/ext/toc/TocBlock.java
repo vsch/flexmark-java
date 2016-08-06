@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A TOC node
+ * A TOC ast
  */
 public class TocBlock extends TocBlockBase {
     protected BasedSequence openingMarker = SubSequence.NULL;

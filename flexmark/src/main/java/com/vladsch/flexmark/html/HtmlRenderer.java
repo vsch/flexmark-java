@@ -1,18 +1,19 @@
 package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.HtmlBlock;
+import com.vladsch.flexmark.ast.HtmlInline;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.collection.DataValueFactory;
-import com.vladsch.flexmark.internal.util.collection.DynamicDefaultKey;
-import com.vladsch.flexmark.internal.util.dependency.FlatDependencyHandler;
-import com.vladsch.flexmark.internal.util.options.*;
-import com.vladsch.flexmark.internal.util.sequence.TagRange;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.HtmlBlock;
-import com.vladsch.flexmark.node.HtmlInline;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
+import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.sequence.TagRange;
 
 import java.util.*;
 
@@ -22,7 +23,7 @@ import java.util.*;
  * Start with the {@link #builder} method to configure the renderer. Example:
  * <pre><code>
  * HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
- * renderer.render(node);
+ * renderer.render(ast);
  * </code></pre>
  */
 public class HtmlRenderer implements IRender {
@@ -109,7 +110,7 @@ public class HtmlRenderer implements IRender {
     /**
      * Render the tree of nodes to HTML.
      *
-     * @param node the root node
+     * @param node the root ast
      * @return the rendered HTML
      */
     public String render(Node node) {
@@ -245,13 +246,13 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
-         * of node types or define rendering for custom node types.
+         * Add a factory for instantiating a ast renderer (done when rendering). This allows to override the rendering
+         * of ast types or define rendering for custom ast types.
          * <p>
-         * If multiple node renderers for the same node type are created, the one from the factory that was added first
-         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         * If multiple ast renderers for the same ast type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core ast types can be overridden; the default rendering comes last.)
          *
-         * @param nodeRendererFactory the factory for creating a node renderer
+         * @param nodeRendererFactory the factory for creating a ast renderer
          * @return {@code this}
          */
         public Builder nodeRendererFactory(NodeRendererFactory nodeRendererFactory) {
@@ -260,13 +261,13 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
-         * of node types or define rendering for custom node types.
+         * Add a factory for instantiating a ast renderer (done when rendering). This allows to override the rendering
+         * of ast types or define rendering for custom ast types.
          * <p>
-         * If multiple node renderers for the same node type are created, the one from the factory that was added first
-         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         * If multiple ast renderers for the same ast type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core ast types can be overridden; the default rendering comes last.)
          *
-         * @param linkResolverFactory the factory for creating a node renderer
+         * @param linkResolverFactory the factory for creating a ast renderer
          * @return {@code this}
          */
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
@@ -340,7 +341,7 @@ public class HtmlRenderer implements IRender {
 
             htmlWriter.setContext(this);
 
-            // The first node renderer for a node type "wins".
+            // The first ast renderer for a ast type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());

@@ -4,8 +4,8 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiDelimiterProcessor;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for emoji shortcuts using Emoji-Cheat-Sheet.com.

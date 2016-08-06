@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.front.matter;
 
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
 
 import java.util.LinkedHashMap;
 import java.util.List;

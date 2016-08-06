@@ -1,14 +1,15 @@
 package com.vladsch.flexmark.ext.spec.example.internal;
 
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.spec.example.*;
 import com.vladsch.flexmark.internal.*;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequenceImpl;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,10 +18,10 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.vladsch.flexmark.internal.util.sequence.BasedSequence.SPLIT_INCLUDE_DELIM_PARTS;
-import static com.vladsch.flexmark.internal.util.sequence.BasedSequenceImpl.WHITESPACE_NBSP_CHARS;
 import static com.vladsch.flexmark.spec.SpecReader.EXAMPLE_KEYWORD;
 import static com.vladsch.flexmark.spec.SpecReader.OPTIONS_KEYWORD;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.SPLIT_INCLUDE_DELIM_PARTS;
+import static com.vladsch.flexmark.util.sequence.BasedSequenceImpl.WHITESPACE_NBSP_CHARS;
 
 public class SpecExampleBlockParser extends AbstractBlockParser {
     private static final Pattern OPTIONS_PATTERN = Pattern.compile("^\\s*(\\()?([^:()]*)(?:(:)\\s*([^\\s()]+)\\s*?)?(\\))?(?:\\s+(options)\\s*(\\()?([^()\\n\\r]*)(\\))?)?\\s*$".replace("options", OPTIONS_KEYWORD));

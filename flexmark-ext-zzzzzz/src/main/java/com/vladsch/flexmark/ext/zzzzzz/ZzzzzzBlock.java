@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomBlock;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Zzzzzz block node
+ * A Zzzzzz block ast
  */
 public class ZzzzzzBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

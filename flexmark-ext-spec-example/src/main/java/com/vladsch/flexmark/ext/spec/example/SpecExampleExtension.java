@@ -5,9 +5,9 @@ import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleBlockParser;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for spec_examples

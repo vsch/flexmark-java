@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.spec.example;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomNode;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A SpecExample block node
+ * A SpecExample block ast
  */
 public class SpecExampleOption extends CustomNode {
     @Override

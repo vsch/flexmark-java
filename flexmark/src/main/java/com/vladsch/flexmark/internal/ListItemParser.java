@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
 import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ListItemParser extends AbstractBlockParser {
 

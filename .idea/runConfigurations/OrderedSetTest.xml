@@ -2,15 +2,15 @@
   <configuration default="false" name="OrderedSetTest" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.internal.util.collection.iteration.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.collection.iteration.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
     <module name="flexmark" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" />
-    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.internal.util.collection" />
-    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.internal.util.collection.OrderedSetTest" />
+    <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.collection" />
+    <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.collection.OrderedSetTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <option name="VM_PARAMETERS" value="-ea" />

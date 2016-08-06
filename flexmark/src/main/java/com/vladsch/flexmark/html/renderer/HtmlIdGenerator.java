@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
 
 public interface HtmlIdGenerator {
     HtmlIdGenerator NULL = new HtmlIdGenerator() {

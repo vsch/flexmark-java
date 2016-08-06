@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.wikilink;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DoNotDecorate;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class WikiLink extends CustomNode implements DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

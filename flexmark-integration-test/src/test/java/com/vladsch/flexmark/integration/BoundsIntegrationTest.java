@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.integration;
 
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -52,7 +52,7 @@ public class BoundsIntegrationTest {
     private void parse(String input) {
         try {
             Node parsed = PARSER.parse(input);
-            // Parsing should always return a node
+            // Parsing should always return a ast
             assertNotNull(parsed);
         } catch (Exception e) {
             throw new AssertionError("Parsing failed, input: " + input, e);

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.util.ComputableFactory;
-import com.vladsch.flexmark.internal.util.dependency.Dependent;
-import com.vladsch.flexmark.node.Block;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.dependency.Dependent;
 
 import java.util.Set;
 
@@ -10,7 +10,7 @@ public interface BlockPreProcessorFactory extends ComputableFactory<BlockPreProc
     /**
      * Block types that this pre-processors processes
      *
-     * @return set of block node types
+     * @return set of block ast types
      */
     Set<Class<? extends Block>> getBlockTypes();
 

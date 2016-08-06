@@ -1,14 +1,14 @@
 package com.vladsch.flexmark.ext.gfm.tables.internal;
 
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.gfm.tables.*;
-import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;

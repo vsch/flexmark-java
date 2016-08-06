@@ -1,16 +1,11 @@
 package com.vladsch.flexmark.internal;
 
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.Parsing;
+import com.vladsch.flexmark.ast.util.ReferenceRepository;
+import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.ReferenceRepository;
-import com.vladsch.flexmark.internal.util.ast.TextNodeConverter;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
@@ -19,6 +14,11 @@ import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.*;
 import java.util.regex.MatchResult;
@@ -411,7 +411,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         block.appendChild(node);
     }
 
-    // In some cases, we don't want the text to be appended to an existing node, we need it separate
+    // In some cases, we don't want the text to be appended to an existing ast, we need it separate
     protected Text appendSeparateText(BasedSequence text) {
         Text node = new Text(text);
         appendNode(node);
@@ -593,7 +593,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected boolean parseNewline() {
         index++; // assume we're at a \n
 
-        // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
+        // We're gonna add a new ast in any case and we need to check the last text ast, so flush outstanding text.
         flushTextNode();
 
         Node lastChild = block.getLastChild();
@@ -704,7 +704,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Add open bracket to delimiter stack and add a text node to block's children.
+     * Add open bracket to delimiter stack and add a text ast to block's children.
      */
     protected boolean parseOpenBracket() {
         int startIndex = index;
@@ -718,8 +718,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * If next character is [, and ! delimiter to delimiter stack and add a text node to block's children.
-     * Otherwise just add a text node.
+     * If next character is [, and ! delimiter to delimiter stack and add a text ast to block's children.
+     * Otherwise just add a text ast.
      */
     protected boolean parseBang() {
         int startIndex = index;
@@ -970,7 +970,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (isLinkOrImage || linkRefProcessorMatch != null) {
             // If we got here, open is a potential opener
             // Flush text now. We don't need to worry about combining it with adjacent text nodes, as we'll wrap it in a
-            // link or image node.
+            // link or image ast.
             flushTextNode();
 
             Node insertNode;
@@ -1343,11 +1343,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
-            // No delimiter characters left to process, so we can remove delimiter and the now empty node.
+            // No delimiter characters left to process, so we can remove delimiter and the now empty ast.
             if (opener.numDelims == 0) {
                 removeDelimiterAndNode(opener);
             } else {
-                // adjust number of characters in the node by keeping outer of numDelims
+                // adjust number of characters in the ast by keeping outer of numDelims
                 opener.node.setChars(opener.node.getChars().subSequence(0, opener.numDelims));
             }
 
@@ -1356,7 +1356,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 removeDelimiterAndNode(closer);
                 closer = next;
             } else {
-                // adjust number of characters in the node by keeping outer of numDelims
+                // adjust number of characters in the ast by keeping outer of numDelims
                 BasedSequence chars = closer.node.getChars();
                 int length = chars.length();
                 closer.node.setChars(chars.subSequence(length - closer.numDelims, length));
@@ -1380,7 +1380,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Remove the delimiter and the corresponding text node. For used delimiters, e.g. `*` in `*foo*`.
+     * Remove the delimiter and the corresponding text ast. For used delimiters, e.g. `*` in `*foo*`.
      */
     protected void removeDelimiterAndNode(Delimiter delim) {
         Text node = delim.node;
@@ -1397,7 +1397,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Remove the delimiter but keep the corresponding node as text. For unused delimiters such as `_` in `foo_bar`.
+     * Remove the delimiter but keep the corresponding ast as text. For unused delimiters such as `_` in `foo_bar`.
      */
     protected void removeDelimiterKeepNode(Delimiter delim) {
         Text node = delim.node;

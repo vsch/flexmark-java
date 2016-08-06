@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.Image;
+import com.vladsch.flexmark.ast.Link;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.FencedCodeBlock;
-import com.vladsch.flexmark.node.Image;
-import com.vladsch.flexmark.node.Link;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -33,7 +33,7 @@ public class HtmlRendererTest {
     @Test
     public void htmlEscapingShouldEscapeInlineHtml() {
         String rendered = htmlEscapingRenderer().render(parse("paragraph with <span id='foo' class=\"bar\">inline &amp; html</span>"));
-        // Note that &amp; is not escaped, as it's a normal text node, not part of the inline HTML.
+        // Note that &amp; is not escaped, as it's a normal text ast, not part of the inline HTML.
         assertEquals("<p>paragraph with &lt;span id='foo' class=&quot;bar&quot;&gt;inline &amp; html&lt;/span&gt;</p>\n", rendered);
     }
 

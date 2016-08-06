@@ -1,19 +1,19 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BulletListItem;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequenceImpl;
-import com.vladsch.flexmark.node.Block;
-import com.vladsch.flexmark.node.BulletListItem;
-import com.vladsch.flexmark.node.ListItem;
-import com.vladsch.flexmark.node.Paragraph;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Collections;
 import java.util.Set;

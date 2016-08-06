@@ -1,18 +1,18 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.ValueRunnable;
-import com.vladsch.flexmark.internal.util.ast.TextCollectingVisitor;
-import com.vladsch.flexmark.internal.util.options.DelimitedBuilder;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Heading;
+import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.ValueRunnable;
+import com.vladsch.flexmark.util.options.DelimitedBuilder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;

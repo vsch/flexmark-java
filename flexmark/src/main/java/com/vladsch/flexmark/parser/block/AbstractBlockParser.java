@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.options.MutableDataHolder;
-import com.vladsch.flexmark.internal.util.options.MutableDataSet;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Block;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class AbstractBlockParser implements BlockParser {
     private MutableDataSet mutableData = null;

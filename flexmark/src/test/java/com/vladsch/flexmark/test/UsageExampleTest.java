@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.node.Text;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
 
@@ -46,7 +46,7 @@ public class UsageExampleTest {
         }
 
         private void visit(Text text) {
-            // This is called for all Text nodes. Override other visit methods for other node types.
+            // This is called for all Text nodes. Override other visit methods for other ast types.
 
             // Count words (this is just an example, don't actually do it this way for various reasons).
             wordCount += text.getChars().toString().split("\\W+").length;

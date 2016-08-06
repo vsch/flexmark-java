@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
-import com.vladsch.flexmark.internal.BlockContent;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.ListItem;
-import com.vladsch.flexmark.node.OrderedListItem;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedListItem;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.ext.tables;
 
-import com.vladsch.flexmark.internal.util.ast.TextNodeConverter;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.*;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.TextNodeConverter;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * Table cell of a {@link TableRow} containing inline nodes.

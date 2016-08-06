@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface EmojiVisitor {
     static <V extends EmojiVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

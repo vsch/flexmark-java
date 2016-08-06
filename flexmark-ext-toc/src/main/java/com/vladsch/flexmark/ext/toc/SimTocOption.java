@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DoNotDecorate;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A sim toc contents node containing all text that came after the sim toc node
+ * A sim toc contents ast containing all text that came after the sim toc ast
  */
 public class SimTocOption extends CustomNode implements DoNotDecorate {
     @Override

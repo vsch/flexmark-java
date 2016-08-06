@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.internal.util.ComputableFactory;
-import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.util.ComputableFactory;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]

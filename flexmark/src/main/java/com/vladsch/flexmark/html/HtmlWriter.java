@@ -4,11 +4,11 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.options.Attribute;
-import com.vladsch.flexmark.internal.util.options.Attributes;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.TagRange;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.options.Attribute;
+import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.TagRange;
 
 import java.io.IOException;
 import java.util.ArrayList;

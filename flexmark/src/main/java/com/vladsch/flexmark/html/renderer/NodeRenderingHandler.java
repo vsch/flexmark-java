@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeAdaptingVisitHandler;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.internal.util.ast.NodeAdaptingVisitHandler;
-import com.vladsch.flexmark.node.Node;
 
 public class NodeRenderingHandler<N extends Node> extends NodeAdaptingVisitHandler<N, CustomNodeRenderer<N>> implements CustomNodeRenderer<Node> {
     public NodeRenderingHandler(Class<? extends N> aClass, CustomNodeRenderer<N> adapter) {

@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface ZzzzzzVisitor {
     static <V extends ZzzzzzVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

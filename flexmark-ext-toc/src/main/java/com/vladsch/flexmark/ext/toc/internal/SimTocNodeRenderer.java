@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.HeadingCollectingVisitor;
 import com.vladsch.flexmark.ext.toc.SimTocBlock;
 import com.vladsch.flexmark.ext.toc.SimTocContent;
 import com.vladsch.flexmark.ext.toc.SimTocOption;
@@ -9,11 +12,8 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
-import com.vladsch.flexmark.internal.util.ast.HeadingCollectingVisitor;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.Heading;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;

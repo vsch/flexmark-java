@@ -1,17 +1,17 @@
 package com.vladsch.flexmark.ext.abbreviation.internal;
 
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
-import com.vladsch.flexmark.internal.util.Escaping;
-import com.vladsch.flexmark.internal.util.NodeTracker;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.node.*;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
+import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
 import java.util.Collections;
 import java.util.HashMap;

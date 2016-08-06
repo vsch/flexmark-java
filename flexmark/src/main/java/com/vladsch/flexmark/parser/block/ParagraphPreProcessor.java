@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.node.Paragraph;
+import com.vladsch.flexmark.ast.Paragraph;
 
 public interface ParagraphPreProcessor {
     /**
@@ -10,7 +10,7 @@ public interface ParagraphPreProcessor {
      * to other blocks
      * 
      * by Default leading lines that define references are blockRemoved and Reference nodes are inserted before.
-     * @param block     paragraph node to process  
+     * @param block     paragraph ast to process  
      * @param state     parser state
      * @return number of characters processed from the start of the block                 
      */

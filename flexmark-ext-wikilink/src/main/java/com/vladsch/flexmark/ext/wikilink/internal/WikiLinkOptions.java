@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 public class WikiLinkOptions {
     final public boolean linkFirstSyntax;

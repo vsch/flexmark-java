@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface TaskListItemVisitor {
     static <V extends TaskListItemVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

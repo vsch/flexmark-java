@@ -15,7 +15,7 @@
 
 package com.vladsch.flexmark.ext.gfm.tables;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface TableVisitor {
     static <V extends TableVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

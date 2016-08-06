@@ -2,9 +2,9 @@ package com.vladsch.flexmark.ext.emoji.internal;
 
 import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class EmojiDelimiterProcessor implements DelimiterProcessor {
 
@@ -34,7 +34,7 @@ public class EmojiDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-        // Normal case, wrap nodes between delimiters in emoji node.
+        // Normal case, wrap nodes between delimiters in emoji ast.
         Emoji emoji = new Emoji(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(emoji, closer);
     }

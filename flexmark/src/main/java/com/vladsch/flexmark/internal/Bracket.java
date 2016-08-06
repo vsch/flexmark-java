@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Text;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * Opening bracket for links (<code>[</code>) or images (<code>![</code>).

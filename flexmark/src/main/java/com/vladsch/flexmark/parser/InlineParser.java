@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.BitSet;
 import java.util.List;
@@ -21,7 +21,7 @@ public interface InlineParser {
 
     /**
      * @param input the content to parse as inline
-     * @param node the node to append resulting nodes to (as children)
+     * @param node the ast to append resulting nodes to (as children)
      */
     void parse(BasedSequence input, Node node);
 

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.emoji.Emoji;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Collections;
 import java.util.HashSet;

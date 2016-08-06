@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 class DefinitionOptions {
     final public boolean definitionOption1;

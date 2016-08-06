@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.ext.emoji;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.DelimitedNode;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A strikethrough node containing text and other inline nodes nodes as children.
+ * A strikethrough ast containing text and other inline nodes nodes as children.
  */
 public class Emoji extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.front.matter;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomBlock;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class YamlFrontMatterBlock extends CustomBlock {
     @Override

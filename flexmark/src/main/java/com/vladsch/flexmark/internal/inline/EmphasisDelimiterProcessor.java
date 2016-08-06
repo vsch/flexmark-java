@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.internal.inline;
 
+import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.Emphasis;
+import com.vladsch.flexmark.ast.StrongEmphasis;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.DelimitedNode;
-import com.vladsch.flexmark.node.Emphasis;
-import com.vladsch.flexmark.node.StrongEmphasis;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
 

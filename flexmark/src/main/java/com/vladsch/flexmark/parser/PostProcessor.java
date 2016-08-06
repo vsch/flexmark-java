@@ -1,19 +1,19 @@
 package com.vladsch.flexmark.parser;
 
-import com.vladsch.flexmark.internal.util.NodeTracker;
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.NodeTracker;
 
 public interface PostProcessor {
     /**
-     * @param document the node to post-process
+     * @param document the ast to post-process
      * @return the result of post-processing, may be a modified {@code document} argument
      */
     Document processDocument(Document document);
     
     /**
-     * @param state node tracker used for optimizing node processing
-     * @param node the node to post-process
+     * @param state ast tracker used for optimizing ast processing
+     * @param node the ast to post-process
      */
     void process(NodeTracker state, Node node);
 }

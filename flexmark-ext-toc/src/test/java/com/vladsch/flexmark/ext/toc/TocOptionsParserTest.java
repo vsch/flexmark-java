@@ -15,25 +15,25 @@
 
 package com.vladsch.flexmark.ext.toc;
 
+import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.IRender;
+import com.vladsch.flexmark.ast.CustomNode;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
+import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocUtils;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.IRender;
-import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.ast.NodeVisitor;
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
-import com.vladsch.flexmark.internal.util.options.*;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.node.CustomNode;
-import com.vladsch.flexmark.node.Node;
-import com.vladsch.flexmark.parser.IParse;
 import com.vladsch.flexmark.spec.IParseBase;
 import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;

@@ -20,10 +20,12 @@ import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
+import com.vladsch.flexmark.util.UtilsTestSuite;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
+        UtilsTestSuite.class,
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
         ExtAnchorLinkTestSuite.class,

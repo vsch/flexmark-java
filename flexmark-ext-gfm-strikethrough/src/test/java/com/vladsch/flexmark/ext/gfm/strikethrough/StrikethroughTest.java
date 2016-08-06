@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.node.Node;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;

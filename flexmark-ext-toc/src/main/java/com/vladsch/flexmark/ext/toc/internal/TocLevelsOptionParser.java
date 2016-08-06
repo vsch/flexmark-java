@@ -15,11 +15,11 @@
 
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.internal.util.Computable;
-import com.vladsch.flexmark.internal.util.Pair;
-import com.vladsch.flexmark.internal.util.Utils;
-import com.vladsch.flexmark.internal.util.options.*;
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.options.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Collections;
 import java.util.HashMap;

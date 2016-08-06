@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.parser.block;
 
-import com.vladsch.flexmark.node.Document;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 
 import java.util.*;

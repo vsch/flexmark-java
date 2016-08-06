@@ -1,7 +1,7 @@
 
 package com.vladsch.flexmark.ext.jekyll.front.matter;
 
-import com.vladsch.flexmark.internal.util.ast.VisitHandler;
+import com.vladsch.flexmark.ast.VisitHandler;
 
 public interface JekyllFrontMatterVisitor {
     static <V extends JekyllFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {

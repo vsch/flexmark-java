@@ -6,9 +6,9 @@ import com.vladsch.flexmark.ext.footnotes.internal.FootnoteLinkRefProcessor;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteNodeRenderer;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.internal.util.KeepType;
-import com.vladsch.flexmark.internal.util.options.DataKey;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.options.DataKey;
 
 /**
  * Extension for footnotes

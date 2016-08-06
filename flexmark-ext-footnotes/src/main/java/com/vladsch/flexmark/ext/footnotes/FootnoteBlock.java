@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
-import com.vladsch.flexmark.node.CustomBlock;
+import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Footnote definition node containing text and other inline nodes nodes as children.
+ * A Footnote definition ast containing text and other inline nodes nodes as children.
  */
 public class FootnoteBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

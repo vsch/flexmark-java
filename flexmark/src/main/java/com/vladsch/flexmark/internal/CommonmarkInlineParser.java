@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.internal.util.Parsing;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.BitSet;
 import java.util.Map;

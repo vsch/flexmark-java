@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
@@ -8,8 +9,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
 import com.vladsch.flexmark.html.renderer.RenderingPhase;
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.Document;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
 import java.util.Collections;

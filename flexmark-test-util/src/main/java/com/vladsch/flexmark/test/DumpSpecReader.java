@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.internal.util.options.DataHolder;
-import com.vladsch.flexmark.node.Node;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.AssumptionViolatedException;
 
 import java.io.InputStream;

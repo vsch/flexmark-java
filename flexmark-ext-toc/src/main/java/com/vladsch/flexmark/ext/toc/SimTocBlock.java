@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.internal.util.sequence.BasedSequence;
-import com.vladsch.flexmark.internal.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A simulated toc block node
+ * A simulated toc block ast
  */
 public class SimTocBlock extends TocBlockBase {
     protected BasedSequence anchorMarker = SubSequence.NULL;
