@@ -14,6 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -133,10 +135,10 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="714">
-                <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
+              <first_editor relative-caret-position="578">
+                <caret line="34" column="45" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
                 <folding>
-                  <marker date="1470540876000" expanded="true" signature="7155:7317" ph="..." />
+                  <marker date="1470541951000" expanded="true" signature="7441:7603" ph="..." />
                 </folding>
               </first_editor>
               <second_editor />
@@ -148,8 +150,8 @@
         <entry file="file://$PROJECT_DIR$/../commonmark-java/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="663">
-                <caret line="39" column="106" selection-start-line="39" selection-start-column="93" selection-end-line="39" selection-end-column="106" />
+              <first_editor relative-caret-position="731">
+                <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
                 <folding>
                   <marker date="1469186410000" expanded="true" signature="939:1070" ph="..." />
                   <marker date="1469186410000" expanded="true" signature="1951:2051" ph="..." />
@@ -166,8 +168,8 @@
       <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+            <state relative-caret-position="136">
+              <caret line="8" column="59" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1729,14 +1731,7 @@
       <workItem from="1470182673030" duration="1587000" />
       <workItem from="1470429792738" duration="8728000" />
       <workItem from="1470451790363" duration="7432000" />
-      <workItem from="1470515566208" duration="17085000" />
-    </task>
-    <task id="LOCAL-00058" summary="add helper classes, refactor util dir structure">
-      <created>1467056972816</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1467056972817</updated>
+      <workItem from="1470515566208" duration="18186000" />
     </task>
     <task id="LOCAL-00059" summary="add more helper classes">
       <created>1467086673067</created>
@@ -2074,7 +2069,14 @@
       <option name="project" value="LOCAL" />
       <updated>1470541654406</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="update">
+      <created>1470541711856</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1470541711856</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -2127,7 +2129,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49185000" />
+    <option name="totallyTimeSpent" value="50286000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="23" width="2286" height="1342" extended-state="0" />
@@ -2265,7 +2267,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix toc generation, recreate IDEA settings" />
     <MESSAGE value="fix toc generation, recreate IDEA settings, remove android facet" />
     <MESSAGE value="update readme, minor changes to zzzzzz" />
     <MESSAGE value="add hr to ast_spec.md for github" />
@@ -2290,7 +2291,8 @@
     <MESSAGE value="update pom versions" />
     <MESSAGE value="update first maven central release" />
     <MESSAGE value="update travis.yml" />
-    <option name="LAST_COMMIT_MESSAGE" value="update travis.yml" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3830,29 +3832,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="714">
-            <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
-            <folding>
-              <marker date="1470540876000" expanded="true" signature="7155:7317" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../commonmark-java/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="663">
-            <caret line="39" column="106" selection-start-line="39" selection-start-column="93" selection-end-line="39" selection-end-column="106" />
+          <first_editor relative-caret-position="731">
+            <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
             <folding>
               <marker date="1469186410000" expanded="true" signature="939:1070" ph="..." />
               <marker date="1469186410000" expanded="true" signature="1951:2051" ph="..." />
@@ -3865,10 +3849,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="578">
+            <caret line="34" column="45" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
+            <folding>
+              <marker date="1470541951000" expanded="true" signature="7441:7603" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        <state relative-caret-position="136">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
