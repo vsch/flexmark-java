@@ -13,7 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.wiki" afterPath="$PROJECT_DIR$/flexmark-java.wiki" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
     </list>
@@ -190,8 +189,8 @@
       <file leaf-file-name=".travis.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="9" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -1832,14 +1831,7 @@
       <workItem from="1470515566208" duration="20868000" />
       <workItem from="1470583295941" duration="137000" />
       <workItem from="1470583506334" duration="178000" />
-      <workItem from="1470583709075" duration="870000" />
-    </task>
-    <task id="LOCAL-00065" summary="add post processor with dependencies resolution and node filtering.&#10;needs lots of testing.">
-      <created>1467257247185</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1467257247186</updated>
+      <workItem from="1470583709075" duration="1045000" />
     </task>
     <task id="LOCAL-00066" summary="doc and node post processors work. good performance improvement.">
       <created>1467265034378</created>
@@ -2177,7 +2169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1470584431900</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="remove sudo:false, builds failing">
+      <created>1470584595018</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1470584595018</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -2230,7 +2229,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54153000" />
+    <option name="totallyTimeSpent" value="54328000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="23" width="2286" height="1342" extended-state="0" />
@@ -2368,7 +2367,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add hr to all ast_spec.md files for github" />
     <MESSAGE value="replace sp with nbsp in example first line so github can treat it as code fence" />
     <MESSAGE value="add sim toc as per Markdown Nav toc element" />
     <MESSAGE value="add sim toc as per Markdown Nav toc element with options parsing, rendering and toc generation" />
@@ -2393,7 +2391,8 @@
     <MESSAGE value="update wiki" />
     <MESSAGE value="update IDEA module files for maven module status" />
     <MESSAGE value="update travis.yml for sudo:false" />
-    <option name="LAST_COMMIT_MESSAGE" value="update travis.yml for sudo:false" />
+    <MESSAGE value="remove sudo:false, builds failing" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove sudo:false, builds failing" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3832,8 +3831,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="9" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="3" selection-start-line="0" selection-start-column="3" selection-end-line="0" selection-end-column="3" />
           <folding />
         </state>
       </provider>
