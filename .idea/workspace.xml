@@ -12,10 +12,8 @@
     <bookmark url="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" line="422" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="update travis.yml">
+    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -136,7 +134,7 @@
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
               <first_editor relative-caret-position="714">
-                <caret line="42" column="104" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
+                <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
                 <folding>
                   <marker date="1470540876000" expanded="true" signature="7155:7317" ph="..." />
                 </folding>
@@ -1731,14 +1729,7 @@
       <workItem from="1470182673030" duration="1587000" />
       <workItem from="1470429792738" duration="8728000" />
       <workItem from="1470451790363" duration="7432000" />
-      <workItem from="1470515566208" duration="17038000" />
-    </task>
-    <task id="LOCAL-00057" summary="update pom versions.">
-      <created>1466992764786</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1466992764786</updated>
+      <workItem from="1470515566208" duration="17085000" />
     </task>
     <task id="LOCAL-00058" summary="add helper classes, refactor util dir structure">
       <created>1467056972816</created>
@@ -2076,7 +2067,14 @@
       <option name="project" value="LOCAL" />
       <updated>1470540312276</updated>
     </task>
-    <option name="localTasksCounter" value="106" />
+    <task id="LOCAL-00106" summary="update travis.yml">
+      <created>1470541654406</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1470541654406</updated>
+    </task>
+    <option name="localTasksCounter" value="107" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -2129,7 +2127,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49138000" />
+    <option name="totallyTimeSpent" value="49185000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="112" y="23" width="2286" height="1342" extended-state="0" />
@@ -2267,7 +2265,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add custom node visitor similar to custom node renderer, using a map with lambda method reference." />
     <MESSAGE value="fix toc generation, recreate IDEA settings" />
     <MESSAGE value="fix toc generation, recreate IDEA settings, remove android facet" />
     <MESSAGE value="update readme, minor changes to zzzzzz" />
@@ -2292,7 +2289,8 @@
     <MESSAGE value="rework for maven release" />
     <MESSAGE value="update pom versions" />
     <MESSAGE value="update first maven central release" />
-    <option name="LAST_COMMIT_MESSAGE" value="update first maven central release" />
+    <MESSAGE value="update travis.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="update travis.yml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3841,7 +3839,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="714">
-            <caret line="42" column="104" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
+            <caret line="42" column="64" selection-start-line="42" selection-start-column="64" selection-end-line="42" selection-end-column="64" />
             <folding>
               <marker date="1470540876000" expanded="true" signature="7155:7317" ph="..." />
             </folding>
