@@ -48,7 +48,7 @@ earlier versions of this project.
 - Android compatibility neglected for now
 - No attempt is made to keep API backward compatibility to the original project.
 
-    This is a work in progress with many API changes.
+#### This is a work in progress with many API changes.
 
 ### Feature Comparison
 

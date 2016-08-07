@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="pegdown-1.6.7" level="project" />
+    <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
@@ -23,14 +23,14 @@
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-anchorlink" />
-    <orderEntry type="module" module-name="flexmark-ext-toc" />
-    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" />
-    <orderEntry type="module" module-name="flexmark-ext-spec-example" />
-    <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
-    <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
-    <orderEntry type="module" module-name="flexmark-ext-typographic" />
-    <orderEntry type="module" module-name="flexmark-ext-definition" />
-    <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
   </component>
 </module>

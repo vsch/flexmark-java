@@ -27,18 +27,51 @@
         <module name="flexmark-ext-abbreviation" />
         <module name="flexmark-ext-anchorlink" />
         <module name="flexmark-ext-autolink" />
+        <module name="flexmark-ext-definition" />
         <module name="flexmark-ext-emoji" />
+        <module name="flexmark-ext-escaped-character" />
         <module name="flexmark-ext-footnotes" />
         <module name="flexmark-ext-gfm-strikethrough" />
         <module name="flexmark-ext-gfm-tables" />
         <module name="flexmark-ext-gfm-tasklist" />
+        <module name="flexmark-ext-jekyll-front-matter" />
+        <module name="flexmark-ext-spec-example" />
         <module name="flexmark-ext-tables" />
+        <module name="flexmark-ext-toc" />
+        <module name="flexmark-ext-typographic" />
         <module name="flexmark-ext-wikilink" />
         <module name="flexmark-ext-yaml-front-matter" />
+        <module name="flexmark-ext-zzzzzz" />
         <module name="flexmark-integration-test" />
         <module name="flexmark-test-suite" />
         <module name="flexmark-test-util" />
+        <module name="flexmark-util" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="flexmark" target="8" />
+      <module name="flexmark-ext-abbreviation" target="8" />
+      <module name="flexmark-ext-anchorlink" target="8" />
+      <module name="flexmark-ext-autolink" target="8" />
+      <module name="flexmark-ext-definition" target="8" />
+      <module name="flexmark-ext-emoji" target="8" />
+      <module name="flexmark-ext-escaped-character" target="8" />
+      <module name="flexmark-ext-footnotes" target="8" />
+      <module name="flexmark-ext-gfm-strikethrough" target="8" />
+      <module name="flexmark-ext-gfm-tables" target="8" />
+      <module name="flexmark-ext-gfm-tasklist" target="8" />
+      <module name="flexmark-ext-jekyll-front-matter" target="8" />
+      <module name="flexmark-ext-spec-example" target="8" />
+      <module name="flexmark-ext-tables" target="8" />
+      <module name="flexmark-ext-toc" target="8" />
+      <module name="flexmark-ext-typographic" target="8" />
+      <module name="flexmark-ext-wikilink" target="8" />
+      <module name="flexmark-ext-yaml-front-matter" target="8" />
+      <module name="flexmark-ext-zzzzzz" target="8" />
+      <module name="flexmark-integration-test" target="8" />
+      <module name="flexmark-java" target="8" />
+      <module name="flexmark-test-util" target="8" />
+      <module name="flexmark-util" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
