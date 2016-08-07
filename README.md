@@ -39,7 +39,7 @@ earlier versions of this project.
 
 ### Changes from commonmark-java project
 
-- The project is not yet on Maven
+- The project is now on Maven [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
 - Java compatibility raised to 1.8 so that lambdas could be used
 - Android compatibility neglected for now
 - No attempt is made to keep API backward compatibility to the original project.
