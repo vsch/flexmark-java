@@ -38,7 +38,7 @@ earlier versions of this project.
 * The core has no dependencies; for extensions, see below
 
 [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
-[![Coverage status](https://coveralls.io/repos/github/vsch/flexmark-java/badge.svg?branch=master)](https://coveralls.io/github/vsch/flexmark-java?branch=master)
+[![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java)
 [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
 
 
