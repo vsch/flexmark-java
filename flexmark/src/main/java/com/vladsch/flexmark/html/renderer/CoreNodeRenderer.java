@@ -17,7 +17,7 @@ import java.util.Set;
 import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
 
 /**
- * The ast renderer that renders all the core nodes (comes last in the order of ast renderers).
+ * The node renderer that renders all the core nodes (comes last in the order of node renderers).
  */
 public class CoreNodeRenderer implements NodeRenderer {
     final static public AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");

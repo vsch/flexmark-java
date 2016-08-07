@@ -50,7 +50,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         // trim trailing blank lines out of the block
         if (trimTrailingBlankLines) {
             int trailingBlankLines = 0;

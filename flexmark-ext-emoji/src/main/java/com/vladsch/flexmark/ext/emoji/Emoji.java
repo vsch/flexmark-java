@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A strikethrough ast containing text and other inline nodes nodes as children.
+ * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class Emoji extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = SubSequence.NULL;

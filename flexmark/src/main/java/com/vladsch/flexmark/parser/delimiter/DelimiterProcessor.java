@@ -10,19 +10,19 @@ import com.vladsch.flexmark.internal.Delimiter;
 public interface DelimiterProcessor {
 
     /**
-     * @return the character that marks the beginning of a delimited ast, must not clash with any built-in special
+     * @return the character that marks the beginning of a delimited node, must not clash with any built-in special
      * characters
      */
     char getOpeningCharacter();
 
     /**
-     * @return the character that marks the the ending of a delimited ast, must not clash with any built-in special
+     * @return the character that marks the the ending of a delimited node, must not clash with any built-in special
      * characters. Note that for a symmetric delimiter such as "*", this is the same as the opening.
      */
     char getClosingCharacter();
 
     /**
-     * Minimum number of delimiter characters that are needed to activate this. Must be at least 1.
+     * @return Minimum number of delimiter characters that are needed to activate this. Must be at least 1.
      */
     int getMinLength();
 
@@ -39,12 +39,12 @@ public interface DelimiterProcessor {
     int getDelimiterUse(DelimiterRun opener, DelimiterRun closer);
 
     /**
-     * Process the matched delimiters, e.g. by wrapping the nodes between opener and closer in a new ast, or appending
-     * a new ast after the opener.
+     * Process the matched delimiters, e.g. by wrapping the nodes between opener and closer in a new node, or appending
+     * a new node after the opener.
      * <p>
      * Note that removal of the delimiter from the delimiter nodes and unlinking them is done by the caller.
-     * @param opener the delimiter with text ast that contained the opening delimiter
-     * @param closer the delimiter with text ast that contained the closing delimiter
+     * @param opener the delimiter with text node that contained the opening delimiter
+     * @param closer the delimiter with text node that contained the closing delimiter
      * @param delimitersUsed the number of delimiters that were used
      */
     void process(Delimiter opener, Delimiter closer, int delimitersUsed);

@@ -67,6 +67,8 @@ public class FencedCodeBlock extends Block {
 
     /**
      * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
+     * 
+     * @return the sequence for the info part of the node
      */
     public BasedSequence getInfo() {
         return info;

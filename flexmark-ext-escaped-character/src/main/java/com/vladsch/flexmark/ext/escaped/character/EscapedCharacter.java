@@ -21,7 +21,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A EscapedCharacter ast
+ * A EscapedCharacter node
  */
 public class EscapedCharacter extends Node implements DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

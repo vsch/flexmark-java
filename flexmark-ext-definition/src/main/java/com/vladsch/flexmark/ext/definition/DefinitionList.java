@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
 /**
- * A DefinitionList block ast
+ * A DefinitionList block node
  */
 public class DefinitionList extends ListBlock {
     public DefinitionList() {

@@ -19,17 +19,19 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * Whether the element consists of nested [] inside the link ref. For example Wiki link [[]] processor would return 1
      * Only immediately nested [] are considered. [[  ]] is nesting 1, [ [ ]] is not considered
      * <p>
-     * When >0 then preview of next characters is used and if they will match then inner reference will not be created to
+     * When {@code >0} then preview of next characters is used and if they will match then inner reference will not be created to
      * allow outer one to match the desired element
      *
-     * @return nesting level for references, >0 for nesting
+     * @return nesting level for references, {@code >0} for nesting
      */
     int getBracketNestingLevel();
 
     /**
      * Create a link ref processor for the document
+     *
      * @param document on which the processor will work
      * @return link ref processor
      */
-    @Override LinkRefProcessor create(Document document);
+    @Override
+    LinkRefProcessor create(Document document);
 }

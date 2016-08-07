@@ -69,7 +69,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         // first line, if not blank, has the info string
         List<BasedSequence> lines = content.getLines();
         if (lines.size() > 0) {

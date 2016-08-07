@@ -30,7 +30,7 @@ public class AbstractVisitorTest {
     }
 
     private static void assertCode(String expectedLiteral, Node node) {
-        assertEquals("Expected ast to be a Code ast: " + node, Code.class, node.getClass());
+        assertEquals("Expected node to be a Code node: " + node, Code.class, node.getClass());
         Code code = (Code) node;
         assertEquals(expectedLiteral, code.getChars().toString());
     }

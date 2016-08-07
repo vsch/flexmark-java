@@ -46,7 +46,7 @@ public class HeadingParser extends AbstractBlockParser {
     }
 
     @Override
-    public BlockContinue tryContinue(ParserState parserState) {
+    public BlockContinue tryContinue(ParserState state) {
         // In both ATX and Setext headings, once we have the heading markup, there's nothing more to parse.
         return BlockContinue.none();
     }
@@ -57,7 +57,7 @@ public class HeadingParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
     }
 
     public static class Factory implements CustomBlockParserFactory {

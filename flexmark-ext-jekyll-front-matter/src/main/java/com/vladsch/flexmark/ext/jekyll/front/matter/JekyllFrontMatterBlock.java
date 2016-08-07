@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A JekyllFrontMatter block ast
+ * A JekyllFrontMatter block node
  */
 public class JekyllFrontMatterBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

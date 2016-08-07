@@ -67,7 +67,7 @@ public class ListItemParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         block.setCharsFromContent();
     }
 

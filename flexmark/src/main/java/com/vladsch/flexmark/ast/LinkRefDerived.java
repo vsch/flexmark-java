@@ -5,7 +5,7 @@ package com.vladsch.flexmark.ast;
  */
 public interface LinkRefDerived {
     /**
-     * @return true if this ast can be reverted to its text equivalent without loss of HTML rendering results
+     * @return true if this node can be reverted to its text equivalent without loss of HTML rendering results
      */
     boolean isTentative();
 }

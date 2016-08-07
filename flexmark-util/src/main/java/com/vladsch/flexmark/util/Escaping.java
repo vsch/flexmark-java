@@ -157,6 +157,9 @@ public class Escaping {
 
     /**
      * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s string to un-escape
+     * @return un-escaped string
      */
     public static String unescapeString(String s) {
         if (BACKSLASH_OR_AMP.matcher(s).find()) {
@@ -168,6 +171,10 @@ public class Escaping {
 
     /**
      * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s          based sequence to un-escape
+     * @param textMapper replaced text mapper to update for the changed text
+     * @return un-escaped sequence
      */
     public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
         int indexOfAny = s.indexOfAny('\\', '&');
@@ -181,8 +188,9 @@ public class Escaping {
     }
 
     /**
-     * Normalize after parsing: this means that any CR at the end of text should be blockRemoved it was converted to SoftBreak during parsing
-     * embedded \r and \r\n are converted to \n
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     * <p>
+     * Append EOL sequence if sequence does not already end in EOL
      *
      * @param input sequence to convert
      * @return converted sequence
@@ -191,10 +199,23 @@ public class Escaping {
         return normalizeEOL(input, true);
     }
 
+    /**
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     *
+     * @param input sequence to convert
+     * @return converted sequence
+     */
     public static String normalizeEOL(CharSequence input) {
         return normalizeEOL(input, false);
     }
 
+    /**
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     *
+     * @param input      sequence to convert
+     * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
+     * @return converted sequence
+     */
     public static String normalizeEOL(CharSequence input, boolean endWithEOL) {
         StringBuilder sb = new StringBuilder(input.length());
         int iMax = input.length();
@@ -220,14 +241,40 @@ public class Escaping {
         return sb.toString();
     }
 
+    /**
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     * <p>
+     * Append EOL sequence if sequence does not already end in EOL
+     *
+     * @param input      sequence to convert
+     * @param textMapper text mapper to update for the replaced text
+     * @return converted sequence
+     */
     public static BasedSequence normalizeEndWithEOL(BasedSequence input, ReplacedTextMapper textMapper) {
         return normalizeEOL(input, textMapper, true);
     }
 
+    /**
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     *
+     * @param input      sequence to convert
+     * @param textMapper text mapper to update for the replaced text
+     * @return converted sequence
+     */
     public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper) {
         return normalizeEOL(input, textMapper, false);
     }
 
+    /**
+     * Normalize eol: embedded \r and \r\n are converted to \n
+     * <p>
+     * Append EOL sequence if sequence does not already end in EOL
+     *
+     * @param input      sequence to convert
+     * @param textMapper text mapper to update for the replaced text
+     * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
+     * @return converted sequence
+     */
     public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper, boolean endWithEOL) {
         int iMax = input.length();
         int lastPos = 0;
@@ -269,15 +316,35 @@ public class Escaping {
         return textMapper.getReplacedSequence();
     }
 
+    /**
+     * @param s string to encode
+     * @return encoded string
+     */
     public static String percentEncodeUrl(String s) {
         return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
     }
 
+    /**
+     * Normalize the link reference id
+     *
+     * @param input      sequence containing the link reference id
+     * @param changeCase if true then reference will be converted to lowercase
+     * @return normalized link reference id
+     */
     public static String normalizeReference(CharSequence input, boolean changeCase) {
         if (changeCase) return Escaping.collapseWhitespace(input.toString(), true).toLowerCase();
         else return Escaping.collapseWhitespace(input.toString(), true);
     }
 
+    /**
+     * Get a normalized the link reference id from reference characters
+     * <p>
+     * Will remove leading ![ or [ and trailing ], collapse multiple whitespaces to a space and optionally convert the id to lowercase.
+     *
+     * @param input      sequence containing the link reference id
+     * @param changeCase if true then reference will be converted to lowercase
+     * @return normalized link reference id
+     */
     public static String normalizeReferenceChars(CharSequence input, boolean changeCase) {
         // Strip '[' and ']', then trim and convert to lowercase
         if (input.length() > 1) {
@@ -288,6 +355,13 @@ public class Escaping {
         return input.toString();
     }
 
+    /**
+     * Collapse regions of multiple white spaces to a single space
+     *
+     * @param input sequence to process
+     * @param trim  true if the sequence should also be trimmed
+     * @return processed sequence
+     */
     public static String collapseWhitespace(CharSequence input, boolean trim) {
         StringBuilder sb = new StringBuilder(input.length());
         int iMax = input.length();

@@ -24,9 +24,9 @@ public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAda
 
     // implement whatever function interface is desired for the adapter
     //@Override
-    //public void render(Node ast, NodeRendererContext context, HtmlWriter html) {
+    //public void render(Node node, NodeRendererContext context, HtmlWriter html) {
     //    //noinspection unchecked
-    //    myAdapter.render((N)ast, context, html);
+    //    myAdapter.render((N)node, context, html);
     //}
     
     @Override

@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Zzzzzz ast
+ * A Zzzzzz node
  */
 public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

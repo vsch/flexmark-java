@@ -30,7 +30,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     /**
      * iterate nodes, with descendants, depth first until all are done
      *
-     * @param iterator
+     * @param iterator iterator to use for iterating nodes and their descendants
      */
     public DescendantNodeIterator(ReversiblePeekingIterator<Node> iterator) {
         this.isReversed = iterator.isReversed();
@@ -54,7 +54,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
         result = iterator.next();
 
         if (result.getFirstChild() != null) {
-            // push the current iterator on to the stack and make the ast's children the iterator
+            // push the current iterator on to the stack and make the node's children the iterator
             if (iterator.hasNext()) {
                 if (iteratorStack == null) iteratorStack = new Stack<>();
                 iteratorStack.push(iterator);
@@ -79,7 +79,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     @Override
     public void remove() {
         if (result == null) {
-            throw new IllegalStateException("Either next() was not called yet or the ast was removed");
+            throw new IllegalStateException("Either next() was not called yet or the node was removed");
         }
         result.unlink();
         result = null;

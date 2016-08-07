@@ -10,7 +10,7 @@ public interface BlockPreProcessorFactory extends ComputableFactory<BlockPreProc
     /**
      * Block types that this pre-processors processes
      *
-     * @return set of block ast types
+     * @return set of block node types
      */
     Set<Class<? extends Block>> getBlockTypes();
 

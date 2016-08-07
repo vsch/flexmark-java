@@ -20,7 +20,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             List<D> dependents = Collections.singletonList(dependent);
             return createResolvedDependencies(Collections.singletonList(createStage(dependents)));
         } else {
-            // resolve dependencies and ast processing lists
+            // resolve dependencies and node processing lists
             int dependentCount = dependentsList.size();
             DependentItemMap<D> dependentItemMap = new DependentItemMap<>(dependentCount);
 

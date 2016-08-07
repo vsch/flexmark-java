@@ -34,7 +34,7 @@ public class EmojiDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-        // Normal case, wrap nodes between delimiters in emoji ast.
+        // Normal case, wrap nodes between delimiters in emoji node.
         Emoji emoji = new Emoji(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(emoji, closer);
     }

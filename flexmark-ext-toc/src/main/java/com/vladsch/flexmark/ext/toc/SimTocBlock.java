@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A simulated toc block ast
+ * A simulated toc block node
  */
 public class SimTocBlock extends TocBlockBase {
     protected BasedSequence anchorMarker = SubSequence.NULL;

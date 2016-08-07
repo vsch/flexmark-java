@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Footnote referencing ast
+ * A Footnote referencing node
  */
 public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

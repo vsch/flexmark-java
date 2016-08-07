@@ -91,18 +91,18 @@ public class ClassifyingNodeTracker implements NodeTracker {
     @Override
     public void nodeRemoved(Node node) {
         nodeRemovedWithDescendants(node);
-        //validateUnlinked(ast);
-        //myNodeClassifier.remove(ast);
-        //if (myHost != null) myHost.nodeRemoved(ast);
+        //validateUnlinked(node);
+        //myNodeClassifier.remove(node);
+        //if (myHost != null) myHost.nodeRemoved(node);
     }
 
     @Override
     public void nodeRemovedWithChildren(Node node) {
         nodeRemovedWithDescendants(node);
-        //validateUnlinked(ast);
-        //myNodeClassifier.add(ast);
-        //removeNodes(ast.getChildren());
-        //if (myHost != null) myHost.nodeRemovedWithChildren(ast);
+        //validateUnlinked(node);
+        //myNodeClassifier.add(node);
+        //removeNodes(node.getChildren());
+        //if (myHost != null) myHost.nodeRemovedWithChildren(node);
     }
 
     @Override

@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.options.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
- * The context for ast rendering, including configuration and functionality for the ast renderer to use.
+ * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
 public interface NodeRendererContext {
 
@@ -20,11 +20,11 @@ public interface NodeRendererContext {
     String encodeUrl(String url);
 
     /**
-     * Extend the attributes by extensions for the ast being currently rendered.
+     * Extend the attributes by extensions for the node being currently rendered.
      *
-     * @param part        the tag of the ast being rendered, some nodes render multiple tags with attributes
+     * @param part        the tag of the node being rendered, some nodes render multiple tags with attributes
      * @param attributes the attributes that were calculated by the renderer, these may be modified. To preserve originals pass a copy.
-     * @return the extended attributes with added/updated/blockRemoved entries
+     * @return the extended attributes with added/updated/removed entries
      */
     Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);
 
@@ -44,24 +44,24 @@ public interface NodeRendererContext {
     NodeRendererContext getSubContext(Appendable out, boolean inheritIndent);
 
     /**
-     * Render the specified ast and its children using the configured renderers. This should be used to render child
-     * nodes; be careful not to pass the ast that is being rendered, that would result in an endless loop.
+     * Render the specified node and its children using the configured renderers. This should be used to render child
+     * nodes; be careful not to pass the node that is being rendered, that would result in an endless loop.
      *
-     * @param node the ast to render
+     * @param node the node to render
      */
     void render(Node node);
 
     /**
-     * Render the children of the ast, used by custom renderers
+     * Render the children of the node, used by custom renderers
      *
-     * @param parent
+     * @param parent node the children of which are to be rendered  
      */
     void renderChildren(Node parent);
 
     /**
-     * Get the id attribute for the given ast.
+     * Get the id attribute for the given node.
      *
-     * @param node ast for which to get an id, depends on the {@link HtmlIdGenerator} assigned for the context. Default generator
+     * @param node node for which to get an id, depends on the {@link HtmlIdGenerator} assigned for the context. Default generator
      *             only creates ids for {@link com.vladsch.flexmark.ast.Heading} nodes or custom nodes that implement {@link com.vladsch.flexmark.ast.AnchorRefTarget} interface.
      * @return id string or null
      */
@@ -80,8 +80,8 @@ public interface NodeRendererContext {
     boolean isDoNotRenderLinks();
 
     /**
-     * Increment/Decrement the do not render links in this context. This value will persist for the duration of the current ast's render() method
-     * and will be restored upon return. Effectively it will persist for the rendering of the children of this ast.
+     * Increment/Decrement the do not render links in this context. This value will persist for the duration of the current node's render() method
+     * and will be restored upon return. Effectively it will persist for the rendering of the children of this node.
      *
      * @param doNotRenderLinks if true then increment the doNotRenderLinks value, else decrement it
      * @see #isDoNotRenderLinks()
@@ -92,8 +92,8 @@ public interface NodeRendererContext {
     void doNotRenderLinks(boolean doNotRenderLinks);
 
     /**
-     * Increment the do not render links in this context. This value will persist for the duration of the current ast's render() method
-     * and will be restored upon return. Effectively it will persist for the rendering of the children of this ast.
+     * Increment the do not render links in this context. This value will persist for the duration of the current node's render() method
+     * and will be restored upon return. Effectively it will persist for the rendering of the children of this node.
      *
      * @see #isDoNotRenderLinks()
      * @see #doNotRenderLinks()
@@ -103,8 +103,8 @@ public interface NodeRendererContext {
     void doNotRenderLinks();
 
     /**
-     * Decrement the do not render links in this context. This value will persist for the duration of the current ast's render() method
-     * and will be restored upon return. Effectively it will persist for the rendering of the children of this ast.
+     * Decrement the do not render links in this context. This value will persist for the duration of the current node's render() method
+     * and will be restored upon return. Effectively it will persist for the rendering of the children of this node.
      *
      * @throws IllegalStateException if the current doNotRender links value is 0.
      * @see #isDoNotRenderLinks()
@@ -133,12 +133,12 @@ public interface NodeRendererContext {
     HtmlRendererOptions getHtmlOptions();
 
     /**
-     * @return the {@link Document} ast of the current context
+     * @return the {@link Document} node of the current context
      */
     Document getDocument();
 
     /**
-     * @return the current ast being rendered
+     * @return the current node being rendered
      */
     Node getCurrentNode();
 
@@ -152,7 +152,7 @@ public interface NodeRendererContext {
      *
      * @param linkType type of link being rendered. Core defined links are Link, Image. Extensions can define their own
      * @param url      link url text
-     * @param urlEncode
+     * @param urlEncode whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
      * @return resolved link url for this link and its resolved status
      */
     ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode);

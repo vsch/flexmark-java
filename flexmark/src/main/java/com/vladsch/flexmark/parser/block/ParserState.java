@@ -67,10 +67,14 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
     List<BlockParser> getActiveBlockParsers();
 
     /**
-     * @return an active block parser for the ast or null if not found
+     * @param node block node for which to get the active block parser
+     * @return an active block parser for the node or null if not found or the block is already closed.
      */
     BlockParser getActiveBlockParser(Block node);
 
+    /**
+     * @return inline parser instance for the parser state
+     */
     InlineParser getInlineParser();
     /**
      * @return The 0 based current line number within the input
@@ -92,17 +96,36 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
      */
     int getLineEndIndex();
 
+    /**
+     * Test the block to see if it ends in a blank line. The blank line can be in the block or its last child.
+     *
+     * @param block block to be tested
+     * @return true if the block ends in a blank line
+     */
     boolean endsWithBlankLine(Node block);
+
+    /**
+     * Test a block to see if the last line of the block is blank. Children not tested.
+     *
+     * @param node block instance to test
+     * @return true if the block's last line is blank
+     */
     boolean isLastLineBlank(Node node);
 
+    /**
+     * @return document properties of the document being parsed
+     */
     MutableDataHolder getProperties();
 
+    /**
+     * Get the current parser phase
+     *
+     * @return the current parser phase {@link ParserPhase}
+     */
     ParserPhase getParserPhase();
 
     /**
-     * 
-     * @return Parsing strings and patterns class adjusted for options
+     * @return strings and patterns class adjusted for options {@link Parsing}
      */
     Parsing getParsing();
-
 }

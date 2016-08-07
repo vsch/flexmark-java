@@ -99,29 +99,29 @@ public class SimTocBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         //block.setContent(content);
         //if (block.getLineCount() > 1) {
         //    BasedSequence contentChars = SegmentedSequence.of(block.getContentLines(1, block.getLineCount()), block.getChars());
         //    if (!contentChars.isEmpty()) {
-        //        SimTocContent ast = new SimTocContent(contentChars);
-        //        block.appendChild(ast);
+        //        SimTocContent node = new SimTocContent(contentChars);
+        //        block.appendChild(node);
         //    }
         //}
         if (block.hasChildren()) {
-            // move the children to a SimTocContent ast
+            // move the children to a SimTocContent node
             SimTocContent tocContent = new SimTocContent();
             tocContent.takeChildren(block);
             tocContent.setCharsFromContent();
             
             if (blankLineSpacer.isNotNull()) {
-                // need to extend the content ast start to include the blank line
+                // need to extend the content node start to include the blank line
                 tocContent.setChars(Node.spanningChars(blankLineSpacer, tocContent.getChars()));
             }
 
             block.appendChild(tocContent);
             block.setCharsFromContent();
-            parserState.blockAddedWithChildren(tocContent);
+            state.blockAddedWithChildren(tocContent);
         }
 
         // now add the options list and options with their text

@@ -51,12 +51,12 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     public void nodeAdded(Node node) {
         if (myClassificationDone) {
             if (node.getParent() == null) {
-                throw new IllegalStateException("Node must be inserted into the document before calling ast tracker nodeAdded functions");
+                throw new IllegalStateException("Node must be inserted into the document before calling node tracker nodeAdded functions");
             }
 
             int parentIndex = myClassifyingNodeTracker.getItems().indexOf(node.getParent());
             if (parentIndex == -1) {
-                throw new IllegalStateException("Parent ast: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
+                throw new IllegalStateException("Parent node: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
             }
 
             BitSet ancestorBitSet = myNodeAncestryMap.get(parentIndex);
@@ -109,10 +109,10 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
 
             if (myClassificationDone && myNodeAncestryBitSetStack.size() > 1) {
                 // see if we can stop 
-                // now store the stuff for the ast index
+                // now store the stuff for the node index
                 BitSet oldBitSet = myNodeAncestryMap.get(index);
                 if (oldBitSet != null && oldBitSet.equals(bitSet)) {
-                    // no need to process descendants of this ast
+                    // no need to process descendants of this node
                     return false;
                 }
             }
@@ -128,7 +128,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     /**
      * Visit the child nodes.
      *
-     * @param parent the parent ast whose children should be visited
+     * @param parent the parent node whose children should be visited
      */
     @Override
     public void visitChildren(Node parent) {

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A SpecExample block ast
+ * A SpecExample block node
  */
 public class SpecExampleSource extends CustomNode {
     @Override

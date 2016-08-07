@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A sim toc contents ast containing all text that came after the sim toc ast
+ * A sim toc contents node containing all text that came after the sim toc node
  */
 public class SimTocOption extends CustomNode implements DoNotDecorate {
     @Override

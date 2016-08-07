@@ -33,7 +33,7 @@ public class HtmlRendererTest {
     @Test
     public void htmlEscapingShouldEscapeInlineHtml() {
         String rendered = htmlEscapingRenderer().render(parse("paragraph with <span id='foo' class=\"bar\">inline &amp; html</span>"));
-        // Note that &amp; is not escaped, as it's a normal text ast, not part of the inline HTML.
+        // Note that &amp; is not escaped, as it's a normal text node, not part of the inline HTML.
         assertEquals("<p>paragraph with &lt;span id='foo' class=&quot;bar&quot;&gt;inline &amp; html&lt;/span&gt;</p>\n", rendered);
     }
 

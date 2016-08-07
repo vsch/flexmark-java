@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
 /**
- * A sim toc contents ast containing all text that came after the sim toc ast
+ * A sim toc contents node containing all text that came after the sim toc node
  */
 public class SimTocContent extends CustomBlock implements DoNotDecorate {
     @Override

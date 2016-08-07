@@ -44,7 +44,7 @@ public class TextNodeConverter {
                 list.add(new Text(remainingChars.subSequence(0, childChars.getStartOffset() - remainingChars.getStartOffset())));
             }
 
-            // punch out remaining ast chars
+            // punch out remaining node chars
             remainingChars = remainingChars.subSequence(childChars.getEndOffset() - remainingChars.getStartOffset());
             list.add(child);
         }

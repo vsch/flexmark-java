@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Intended to be extended by specific type of ast visitor see {@link AttributeProviderAdapter}
+ * Intended to be extended by specific type of node visitor 
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
  */
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
@@ -52,20 +52,4 @@ public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?
         }
         return this;
     }
-    
-    //public void visit(Node ast) {
-    //    A handler = myCustomVisitorsMap.get(ast.getClass());
-    //    if (handler != null) {
-    //        callFunctionHere();
-    //    } else {
-    //        visitChildren(ast);
-    //    }
-    //}
-    //
-    //public void visitNodeOnly(Node ast) {
-    //    A handler = myCustomVisitorsMap.get(ast.getClass());
-    //    if (handler != null) {
-    //        callFunctionHere();
-    //    }
-    //}
 }

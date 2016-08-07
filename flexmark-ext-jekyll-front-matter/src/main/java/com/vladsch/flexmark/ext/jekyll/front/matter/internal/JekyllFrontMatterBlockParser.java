@@ -61,7 +61,7 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         block.setContent(content.getLines().subList(1, content.getLineCount()));
         block.setCharsFromContent();
         content = null;

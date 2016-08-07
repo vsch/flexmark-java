@@ -322,7 +322,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     /**
      * Attempt to parse a reference definition, modifying the internal reference map.
      *
-     * @return how many characters were parsed as a reference, {@code 0} if none
+     * @param block the block whose text is being parsed for references
+     * @param s     sequence of the blocks characters
+     * @return number of characters were parsed as a reference from the start of the sequence, {@code 0} if none
      */
     protected int parseReference(Block block, BasedSequence s) {
         this.input = s;
@@ -411,7 +413,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         block.appendChild(node);
     }
 
-    // In some cases, we don't want the text to be appended to an existing ast, we need it separate
+    // In some cases, we don't want the text to be appended to an existing node, we need it separate
     protected Text appendSeparateText(BasedSequence text) {
         Text node = new Text(text);
         appendNode(node);
@@ -429,6 +431,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Parse the next inline element in subject, advancing input index.
      * On success, add the result to block's children and return true.
      * On failure, return false.
+     *
+     * @return false on failure true on success
      */
     protected boolean parseInline() {
         boolean res;
@@ -543,6 +547,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * If RE matches at current index in the input, advance index and return the match; otherwise return null.
+     *
+     * @param re pattern to match
+     * @return sequence matched or null
      */
     protected BasedSequence match(Pattern re) {
         if (index >= input.length()) {
@@ -561,7 +568,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Returns the char at the current input index, or {@code '\0'} in case there are no more characters.
+     * @return the char at the current input index, or {@code '\0'} in case there are no more characters.
      */
     protected char peek() {
         if (index < input.length()) {
@@ -581,6 +588,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Parse zero or more space characters, including at most one newline.
+     *
+     * @return true
      */
     private boolean spnl() {
         match(myParsing.SPNL);
@@ -588,12 +597,14 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Parse a newline. If it was preceded by two spaces, return a hard line break; otherwise a soft line break.
+     * Parse a newline. If it was preceded by two spaces, append a hard line break; otherwise a soft line break.
+     *
+     * @return true
      */
     protected boolean parseNewline() {
         index++; // assume we're at a \n
 
-        // We're gonna add a new ast in any case and we need to check the last text ast, so flush outstanding text.
+        // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
         flushTextNode();
 
         Node lastChild = block.getLastChild();
@@ -626,6 +637,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     /**
      * Parse a backslash-escaped special character, adding either the escaped  character, a hard line break
      * (if the backslash is followed by a newline), or a literal backslash to the block's children.
+     *
+     * @return true
      */
     protected boolean parseBackslash() {
         index++;
@@ -643,6 +656,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Attempt to parse backticks, adding either a backtick code span or a literal sequence of backticks.
+     *
+     * @return true if matched backticks, false otherwise
      */
     protected boolean parseBackticks() {
         BasedSequence ticks = match(myParsing.TICKS_HERE);
@@ -682,6 +697,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Attempt to parse delimiters like emphasis, strong emphasis or custom delimiters.
+     *
+     * @param delimiterProcessor delimiter processor instance
+     * @param delimiterChar      delimiter character being processed
+     * @return true if processed characters false otherwise
      */
     protected boolean parseDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
         DelimiterData res = scanDelimiters(delimiterProcessor, delimiterChar);
@@ -704,7 +723,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Add open bracket to delimiter stack and add a text ast to block's children.
+     * Add open bracket to delimiter stack and add a text node to block's children.
+     *
+     * @return true
      */
     protected boolean parseOpenBracket() {
         int startIndex = index;
@@ -718,8 +739,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * If next character is [, and ! delimiter to delimiter stack and add a text ast to block's children.
-     * Otherwise just add a text ast.
+     * If next character is [, and ! delimiter to delimiter stack and add a text node to block's children.
+     * Otherwise just add a text node.
+     *
+     * @return true if processed characters false otherwise
      */
     protected boolean parseBang() {
         int startIndex = index;
@@ -799,6 +822,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     /**
      * Try to match close bracket against an opening in the delimiter stack. Add either a link or image, or a
      * plain [ character, to block's children. If there is a matching delimiter, removeIndex it from the delimiter stack.
+     * <p>
+     * Also handles custom link ref processing
+     *
+     * @return true
      */
     protected boolean parseCloseBracket() {
         index++;
@@ -970,7 +997,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (isLinkOrImage || linkRefProcessorMatch != null) {
             // If we got here, open is a potential opener
             // Flush text now. We don't need to worry about combining it with adjacent text nodes, as we'll wrap it in a
-            // link or image ast.
+            // link or image node.
             flushTextNode();
 
             Node insertNode;
@@ -1098,9 +1125,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Attempt to parse link destination, returning the string or null if no match.
+     * Attempt to parse link destination,
+     *
+     * @return the string or null if no match.
      */
-
     protected BasedSequence parseLinkDestination() {
         BasedSequence res = match(myParsing.LINK_DESTINATION_BRACES);
         if (res != null) { // chop off surrounding <..>:
@@ -1120,7 +1148,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Attempt to parse link title (sans quotes), returning the string or null if no match.
+     * Attempt to parse link title (sans quotes),
+     *
+     * @return the string or null if no match.
      */
     protected BasedSequence parseLinkTitle() {
         BasedSequence title = match(myParsing.LINK_TITLE);
@@ -1133,7 +1163,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Attempt to parse a link label, returning number of characters parsed.
+     * Attempt to parse a link label
+     *
+     * @return number of characters parsed.
      */
     protected int parseLinkLabel() {
         BasedSequence m = match(myParsing.LINK_LABEL);
@@ -1142,6 +1174,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Attempt to parse an autolink (URL or email in pointy brackets).
+     *
+     * @return true if processed characters false otherwise
      */
     protected boolean parseAutolink() {
         BasedSequence m;
@@ -1160,6 +1194,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Attempt to parse inline HTML.
+     *
+     * @return true if processed characters false otherwise
      */
     protected boolean parseHtmlInline() {
         BasedSequence m = match(myParsing.HTML_TAG);
@@ -1180,6 +1216,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Attempt to parse an entity, return Entity object if successful.
+     *
+     * @return true if processed characters false otherwise
      */
     protected boolean parseEntity() {
         BasedSequence m;
@@ -1194,6 +1232,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Parse a run of ordinary characters, or a single character with a special meaning in markdown, as a plain string.
+     *
+     * @return true if processed characters false otherwise
      */
     protected boolean parseString() {
         int begin = index;
@@ -1221,6 +1261,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * Scan a sequence of characters with code delimiterChar, and return information about the number of delimiters
      * and whether they are positioned such that they can open and/or close emphasis or strong emphasis.
      *
+     * @param delimiterProcessor delimiter processor instance
+     * @param delimiterChar      delimiter character being scanned
      * @return information about delimiter run, or {@code null}
      */
     protected DelimiterData scanDelimiters(DelimiterProcessor delimiterProcessor, char delimiterChar) {
@@ -1343,11 +1385,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             opener.numDelims -= useDelims;
             closer.numDelims -= useDelims;
 
-            // No delimiter characters left to process, so we can remove delimiter and the now empty ast.
+            // No delimiter characters left to process, so we can remove delimiter and the now empty node.
             if (opener.numDelims == 0) {
                 removeDelimiterAndNode(opener);
             } else {
-                // adjust number of characters in the ast by keeping outer of numDelims
+                // adjust number of characters in the node by keeping outer of numDelims
                 opener.node.setChars(opener.node.getChars().subSequence(0, opener.numDelims));
             }
 
@@ -1356,7 +1398,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 removeDelimiterAndNode(closer);
                 closer = next;
             } else {
-                // adjust number of characters in the ast by keeping outer of numDelims
+                // adjust number of characters in the node by keeping outer of numDelims
                 BasedSequence chars = closer.node.getChars();
                 int length = chars.length();
                 closer.node.setChars(chars.subSequence(length - closer.numDelims, length));
@@ -1380,7 +1422,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Remove the delimiter and the corresponding text ast. For used delimiters, e.g. `*` in `*foo*`.
+     * Remove the delimiter and the corresponding text node. For used delimiters, e.g. `*` in `*foo*`.
+     * 
+     * @param delim delimiter to remove
      */
     protected void removeDelimiterAndNode(Delimiter delim) {
         Text node = delim.node;
@@ -1397,7 +1441,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Remove the delimiter but keep the corresponding ast as text. For unused delimiters such as `_` in `foo_bar`.
+     * Remove the delimiter but keep the corresponding node as text. For unused delimiters such as `_` in `foo_bar`.
+     *
+     * @param delim delimiter being processed
      */
     protected void removeDelimiterKeepNode(Delimiter delim) {
         Text node = delim.node;

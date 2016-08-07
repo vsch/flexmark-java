@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-<!--
-    <parent>
-        <groupId>com.vladsch.pom</groupId>
-        <artifactId>central-pom</artifactId>
-        <version>0.3.0</version>
-    </parent>
--->
+    <!--
+        <parent>
+            <groupId>com.vladsch.pom</groupId>
+            <artifactId>central-pom</artifactId>
+            <version>0.3.0</version>
+        </parent>
+    -->
 
     <packaging>pom</packaging>
 
@@ -48,7 +48,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <flexmark.javadoc.location>${project.basedir}/../flexmark/target/apidocs/</flexmark.javadoc.location>
+        <flexmark.javadoc.location>${project.basedir}/target/apidocs/</flexmark.javadoc.location>
         <!-- Don't automatically publish artifacts to Central, we might want to inspect them first. -->
         <nexus.staging.autoRelease>false</nexus.staging.autoRelease>
     </properties>
@@ -64,55 +64,130 @@
         </repository>
     </distributionManagement>
 
-<!--
-    <profiles>
-        <profile>
-            <id>release-sign-artifacts</id>
-            <activation>
-                <property>
-                    <name>performRelease</name>
-                    <value>true</value>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
--->
-    
+    <!--
+        <profiles>
+            <profile>
+                <id>release-sign-artifacts</id>
+                <activation>
+                    <property>
+                        <name>performRelease</name>
+                        <value>true</value>
+                    </property>
+                </activation>
+                <build>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-gpg-plugin</artifactId>
+                            <version>1.6</version>
+                            <executions>
+                                <execution>
+                                    <id>sign-artifacts</id>
+                                    <phase>verify</phase>
+                                    <goals>
+                                        <goal>sign</goal>
+                                    </goals>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </build>
+            </profile>
+        </profiles>
+    -->
+
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.5.1</version>
-                    <configuration>
-                        <source>8</source>
-                        <target>8</target>
-                    </configuration>
-                </plugin>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-javadoc</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <description>${project.version}</description>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>deploy-to-sonatype</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                            <!--
+                                                            <goal>release</goal>
+                            -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin><!--
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <configuration>
                         <excludePackageNames/>
-                        <!-- The offline links make links from extensions to core work. -->
+                        &lt;!&ndash; The offline links make links from extensions to core work. &ndash;&gt;
                         <detectOfflineLinks>false</detectOfflineLinks>
                         <offlineLinks>
                             <offlineLink>
@@ -126,15 +201,15 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <configuration>
-                        <!-- There's lots of potential for things to go wrong when publishing to Central, so
+                        &lt;!&ndash; There's lots of potential for things to go wrong when publishing to Central, so
                              don't push the tag and master automatically (which happens before publishing). Also
-                             requires "localCheckout" for release:perform to work. -->
+                             requires "localCheckout" for release:perform to work. &ndash;&gt;
                         <pushChanges>false</pushChanges>
                         <localCheckout>true</localCheckout>
                     </configuration>
                 </plugin>
-            </plugins>
-        </pluginManagement>
+-->
+        </plugins>
     </build>
 
     <dependencyManagement>

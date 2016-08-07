@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A strikethrough ast containing text and other inline nodes nodes as children.
+ * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class AnchorLink extends CustomNode {
     public AnchorLink() {

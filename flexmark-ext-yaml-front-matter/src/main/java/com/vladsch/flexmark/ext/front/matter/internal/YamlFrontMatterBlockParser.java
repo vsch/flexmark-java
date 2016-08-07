@@ -46,13 +46,13 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         block.setCharsFromContent();
     }
 
     @Override
-    public BlockContinue tryContinue(ParserState parserState) {
-        final BasedSequence line = parserState.getLine();
+    public BlockContinue tryContinue(ParserState state) {
+        final BasedSequence line = state.getLine();
 
         if (inYAMLBlock) {
             if (REGEX_END.matcher(line).matches()) {
@@ -77,7 +77,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                     currentValues.add(matcher.group(2));
                 }
 
-                return BlockContinue.atIndex(parserState.getIndex());
+                return BlockContinue.atIndex(state.getIndex());
             } else {
                 if (inLiteral) {
                     matcher = REGEX_METADATA_LITERAL.matcher(line);
@@ -95,11 +95,11 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                     }
                 }
 
-                return BlockContinue.atIndex(parserState.getIndex());
+                return BlockContinue.atIndex(state.getIndex());
             }
         } else if (REGEX_BEGIN.matcher(line).matches()) {
             inYAMLBlock = true;
-            return BlockContinue.atIndex(parserState.getIndex());
+            return BlockContinue.atIndex(state.getIndex());
         }
 
         return BlockContinue.none();

@@ -20,7 +20,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
- * A TypographicSmarts ast
+ * A TypographicSmarts node
  */
 public class TypographicSmarts extends Node implements DoNotDecorate {
     private String typographicText;

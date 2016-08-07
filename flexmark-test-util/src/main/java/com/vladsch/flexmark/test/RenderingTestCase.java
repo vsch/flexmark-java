@@ -42,6 +42,7 @@ public abstract class RenderingTestCase {
     /**
      * process comma separated list of option sets and combine them for final set to use
      *
+     * @param example  spec example instance for which options are being processed
      * @param optionSets comma separate list of option set names
      * @return combined set from applying these options together
      */

@@ -46,7 +46,7 @@ public class UsageExampleTest {
         }
 
         private void visit(Text text) {
-            // This is called for all Text nodes. Override other visit methods for other ast types.
+            // This is called for all Text nodes. Override other visit methods for other node types.
 
             // Count words (this is just an example, don't actually do it this way for various reasons).
             wordCount += text.getChars().toString().split("\\W+").length;

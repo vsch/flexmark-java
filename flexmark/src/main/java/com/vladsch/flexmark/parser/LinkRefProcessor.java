@@ -19,10 +19,10 @@ public interface LinkRefProcessor {
      * Whether the element consists of nested [] inside the link ref. For example Wiki link [[]] processor would return 1
      * Only immediately nested [] are considered. [[  ]] is nesting 1, [ [ ]] is not considered
      * <p>
-     * When >0 then preview of next characters is used and if they will match then inner reference will not be created to
+     * When {@code >0} then preview of next characters is used and if they will match then inner reference will not be created to
      * allow outer one to match the desired element
      *
-     * @return nesting level for references, >0 for nesting
+     * @return desired nesting level for references, {@code >0} for nested, 0 for not nested
      */
     int getBracketNestingLevel();
 
@@ -39,14 +39,16 @@ public interface LinkRefProcessor {
     /**
      * Create the desired element that was previously matched with isMatch
      *
-     * @param nodeChars    char sequence from which to create the ast
+     * @param nodeChars char sequence from which to create the node
      * @return Node element to be inserted into the tree
      */
     Node createNode(BasedSequence nodeChars);
 
     /**
-     * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the ast
+     * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
      * or if the children are not desired then removeIndex them.
+     *
+     * @param node node whose inline text is to be adjusted to reflect some of the text having been used as part of the opener and/or closer sequence.
      */
     void adjustInlineText(Node node);
 }

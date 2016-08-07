@@ -63,7 +63,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
         //    FileOutputStream outputStream = null;
         //    try {
         //        outputStream = new FileOutputStream(file);
-        //        outputStream.write(ast.getBytes(Charset.defaultCharset()));
+        //        outputStream.write(node.getBytes(Charset.defaultCharset()));
         //        outputStream.close();
         //    } catch (IOException e) {
         //        e.printStackTrace();

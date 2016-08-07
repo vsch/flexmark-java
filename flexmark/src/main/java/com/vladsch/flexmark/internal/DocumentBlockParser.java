@@ -44,7 +44,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
     }
 
 }

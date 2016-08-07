@@ -21,7 +21,7 @@ public interface InlineParser {
 
     /**
      * @param input the content to parse as inline
-     * @param node the ast to append resulting nodes to (as children)
+     * @param node the node to append resulting nodes to (as children)
      */
     void parse(BasedSequence input, Node node);
 

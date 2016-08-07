@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A TOC ast
+ * A TOC node
  */
 public class TocBlock extends TocBlockBase {
     protected BasedSequence openingMarker = SubSequence.NULL;

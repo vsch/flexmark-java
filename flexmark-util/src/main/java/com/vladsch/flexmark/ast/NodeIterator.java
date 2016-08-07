@@ -29,36 +29,34 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     Node result;
 
     /**
-     * iterate nodes until last ast is iterated over or null
-     *
-     * @param firstNode
+     * @param firstNode node from which to start the iteration and continue until all sibling nodes have been traversed
      */
     public NodeIterator(Node firstNode) {
         this(firstNode, null, false);
     }
 
     /**
-     * iterate nodes until last ast is iterated over or null
-     *
-     * @param firstNode
+     * @param firstNode node from which to start the iteration and continue until all sibling nodes have been traversed
+     * @param reversed  true/false if the nodes are to be traversed in reverse order. If true the nodes previous sibling will be used instead of next sibling
      */
     public NodeIterator(Node firstNode, boolean reversed) {
         this(firstNode, null, reversed);
     }
 
     /**
-     * iterate nodes until last ast is iterated over or null
-     *
-     * @param firstNode
+     * @param firstNode node from which to start the iteration and continue until all sibling nodes have been traversed or lastNode has been traversed
+     * @param lastNode  the last node to be traversed
      */
     public NodeIterator(Node firstNode, Node lastNode) {
         this(firstNode, lastNode, false);
     }
 
     /**
-     * iterate nodes until null or last ast is iterated over
+     * iterate nodes until null or last node is iterated over
      *
-     * @param firstNode
+     * @param firstNode node from which to start the iteration and continue until all sibling nodes have been traversed or lastNode has been traversed
+     * @param lastNode  the last node to be traversed
+     * @param reversed true/false if the nodes are to be traversed in reverse order. If true the nodes previous sibling will be used instead of next sibling
      */
     public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
         Objects.requireNonNull(firstNode);
@@ -69,16 +67,25 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
         this.node = reversed ? lastNode : firstNode;
     }
 
+    /**
+     * @return true if the iterator is a reversed iterator
+     */
     @Override
     public boolean isReversed() {
         return reversed;
     }
 
+    /**
+     * @return true if there is a next node
+     */
     @Override
     public boolean hasNext() {
         return node != null;
     }
 
+    /**
+     * @return the next node for the iterator. If the iterator is not reversed then the previous node's next sibling is returned. If it is reversed the the previous node's previous sibling is returned.
+     */
     @Override
     public Node next() {
         result = null;
@@ -93,6 +100,9 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
         return result;
     }
 
+    /**
+     * @return the node which would be returned by a call to {@link #next()} or null if there is no next node. 
+     */
     public Node peek() {
         if (node != null) {
             return node;
@@ -100,10 +110,13 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
         return null;
     }
 
+    /**
+     * Remove the last node returned by {@link #next()}
+     */
     @Override
     public void remove() {
         if (result == null) {
-            throw new IllegalStateException("Either next() was not called yet or the ast was blockRemoved");
+            throw new IllegalStateException("Either next() was not called yet or the node was removed");
         }
         result.unlink();
         result = null;

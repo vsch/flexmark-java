@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.List;
 
 /**
- * A ast that uses delimiters in the source form (e.g. <code>*bold*</code>).
+ * A node that uses delimiters in the source form (e.g. <code>*bold*</code>).
  */
 public interface Content {
     BasedSequence getSpanningChars();

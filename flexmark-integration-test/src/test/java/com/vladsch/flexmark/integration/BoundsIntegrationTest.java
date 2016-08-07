@@ -52,7 +52,7 @@ public class BoundsIntegrationTest {
     private void parse(String input) {
         try {
             Node parsed = PARSER.parse(input);
-            // Parsing should always return a ast
+            // Parsing should always return a node
             assertNotNull(parsed);
         } catch (Exception e) {
             throw new AssertionError("Parsing failed, input: " + input, e);

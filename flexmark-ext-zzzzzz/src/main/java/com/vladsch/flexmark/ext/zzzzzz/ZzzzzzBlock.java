@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Zzzzzz block ast
+ * A Zzzzzz block node
  */
 public class ZzzzzzBlock extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

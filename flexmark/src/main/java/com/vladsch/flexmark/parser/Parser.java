@@ -126,7 +126,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
-     * @return the root ast
+     * @return the root node
      */
     public Node parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
@@ -141,7 +141,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the text to parse
-     * @return the root ast
+     * @return the root node
      */
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
@@ -156,7 +156,7 @@ public class Parser implements IParse {
      * Note that this method is thread-safe (a new parser state is used for each invocation).
      *
      * @param input the reader to parse
-     * @return the root ast
+     * @return the root node
      * @throws IOException when reading throws an exception
      */
     public Node parseReader(Reader input) throws IOException {

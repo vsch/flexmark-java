@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A Definition block ast
+ * A Definition block node
  */
 public class DefinitionTerm extends CustomBlock {
     protected BasedSequence text = SubSequence.NULL;

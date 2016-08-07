@@ -20,7 +20,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A TOC ast
+ * A TOC node
  */
 public abstract class TocBlockBase extends CustomBlock {
     protected BasedSequence openingMarker = SubSequence.NULL;

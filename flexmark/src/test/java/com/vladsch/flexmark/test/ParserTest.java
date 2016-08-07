@@ -108,12 +108,12 @@ public class ParserTest {
         }
 
         @Override
-        public void closeBlock(ParserState parserState) {
+        public void closeBlock(ParserState state) {
             dash.setCharsFromContent();
         }
 
         @Override
-        public BlockContinue tryContinue(ParserState parserState) {
+        public BlockContinue tryContinue(ParserState state) {
             return BlockContinue.none();
         }
     }

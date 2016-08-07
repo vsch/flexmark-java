@@ -25,10 +25,9 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     // final public static DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
 
     /**
-     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC ast.
-     *
-     * @value #TOC_PARSE_INVALID_LEVEL
-     *
+     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC node.
+     * <p>
+     * LEVELS levels of heading to use for TOC generation
      */
     final public static DataKey<Integer> LEVELS = TocExtension.LEVELS;
     final public static DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;

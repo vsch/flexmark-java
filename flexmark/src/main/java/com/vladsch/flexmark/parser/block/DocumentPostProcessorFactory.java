@@ -10,7 +10,7 @@ public abstract class DocumentPostProcessorFactory implements PostProcessorFacto
     /**
      * Node types that this post processor processes
      *
-     * @return set of block ast types
+     * @return set of block node types
      */
     @Override
     final public Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes() {

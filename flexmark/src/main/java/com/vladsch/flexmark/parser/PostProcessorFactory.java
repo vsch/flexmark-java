@@ -10,10 +10,10 @@ import java.util.Set;
 
 public interface PostProcessorFactory extends ComputableFactory<PostProcessor, Document>, Dependent<PostProcessorFactory> {
     /**
-     * A map of nodes of interest as keys and values a set of classes, if implemented by an ancestors then the ast should be excluded from processing by this processor
+     * A map of nodes of interest as keys and values a set of classes, if implemented by an ancestors then the node should be excluded from processing by this processor
      * i.e. DoNotDecorate.class if the processor adds links so that existing links will be ignored.
      *
-     * @return a map of desired ast types mapped to a set of ancestors under which the post processor does not process the block
+     * @return a map of desired node types mapped to a set of ancestors under which the post processor does not process the block
      */
     Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes();
 

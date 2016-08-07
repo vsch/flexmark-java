@@ -33,9 +33,9 @@ public class AbbreviationBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public void closeBlock(ParserState parserState) {
+    public void closeBlock(ParserState state) {
         // add it to the map
-        AbbreviationRepository abbreviationMap = parserState.getProperties().get(AbbreviationExtension.ABBREVIATIONS);
+        AbbreviationRepository abbreviationMap = state.getProperties().get(AbbreviationExtension.ABBREVIATIONS);
         abbreviationMap.put(abbreviationMap.normalizeKey(block.getText()), block);
     }
 

@@ -120,7 +120,7 @@ public class DocumentParser implements ParserState {
     private List<BlockParser> activeBlockParsers = new ArrayList<>();
 
     private final ClassifyingBlockTracker blockTracker = new ClassifyingBlockTracker();
-    
+
     public void blockParserAdded(BlockParser blockParser) {
         blockTracker.blockParserAdded(blockParser);
     }
@@ -296,8 +296,8 @@ public class DocumentParser implements ParserState {
             return new BlockPreProcessorDependencyStage(dependents);
         }
     }
-    
-    final private Parsing myParsing; 
+
+    final private Parsing myParsing;
 
     public DocumentParser(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
         this.options = options;
@@ -344,7 +344,7 @@ public class DocumentParser implements ParserState {
         CustomBlockParserDependencyHandler resolver = new CustomBlockParserDependencyHandler();
         CustomBlockParserDependencies dependencies = resolver.resolveDependencies(list);
         ArrayList<CustomBlockParserFactory> factories = new ArrayList<>();
-        for (CustomBlockParserDependencyStage stage:dependencies.getDependentStages()) {
+        for (CustomBlockParserDependencyStage stage : dependencies.getDependentStages()) {
             factories.addAll(stage.dependents);
         }
         return factories;
@@ -382,6 +382,9 @@ public class DocumentParser implements ParserState {
 
     /**
      * The main parsing function. Returns a parsed document AST.
+     *
+     * @param source source squence to parse
+     * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
         BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : new SubSequence(source);
@@ -520,6 +523,8 @@ public class DocumentParser implements ParserState {
     /**
      * Analyze a line of text and update the document appropriately. We parse markdown text by calling this on each
      * line of input, then finalizing the document.
+     *
+     * @param ln sequence of the current line
      */
     private void incorporateLine(BasedSequence ln) {
         line = ln;
@@ -735,6 +740,8 @@ public class DocumentParser implements ParserState {
      * Finalize a block. Close it and do any necessary postprocessing, e.g. creating string_content from strings,
      * setting the 'tight' or 'loose' status of a list, and parsing the beginnings of paragraphs for reference
      * definitions.
+     *
+     * @param blockParser block parser instance to finalize
      */
     private void finalize(BlockParser blockParser) {
         if (getActiveBlockParser() == blockParser) {
@@ -769,6 +776,8 @@ public class DocumentParser implements ParserState {
     /**
      * Break out of all containing lists, resetting the tip of the document to the parent of the highest list,
      * and finalizing all the lists. (This is used to implement the "two blank lines break of of all lists" feature.)
+     *
+     * @param blockParsers list of block parsers to break out on double blank line
      */
     private void breakOutOfLists(List<BlockParser> blockParsers) {
         int lastList = -1;
@@ -785,8 +794,12 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Add block of type tag as a child of the tip. If the tip can't  accept children, close and finalize it and try
+     * Add block parser of type T as a child of the currently active parsers. If the tip can't  accept children, close and finalize it and try
      * its parent, and so on til we find a block that can accept children.
+     *
+     * @param <T>         block parser type
+     * @param blockParser new block parser to add as a child
+     * @return block parser instance added as a child.
      */
     private <T extends BlockParser> T addChild(T blockParser) {
         while (!getActiveBlockParser().canContain(blockParser.getBlock())) {
@@ -849,7 +862,9 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * Finalize blocks of previous line. Returns true.
+     * Finalize blocks of previous line.
+     *
+     * @return true.
      */
     private boolean finalizeBlocks(List<BlockParser> blockParsers) {
         for (int i = blockParsers.size() - 1; i >= 0; i--) {
@@ -870,10 +885,11 @@ public class DocumentParser implements ParserState {
     }
 
     /**
-     * pre-process paragraph
+     * pre-process a paragraph block
      *
-     * @param block
-     * @param stage
+     * @param block        paragraph block to pre-process
+     * @param stage        paragraph pre-processor dependency stage
+     * @param processorMap paragraph pre-processor cache
      */
     private void preProcessParagraph(Paragraph block, ParagraphPreProcessorDependencyStage stage, ParagraphPreProcessorCache processorMap) {
         while (true) {

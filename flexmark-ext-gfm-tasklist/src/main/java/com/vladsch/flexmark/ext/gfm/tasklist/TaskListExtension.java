@@ -20,7 +20,7 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // for webview use "<span class=\"taskitem\">" + (ast.isDone() ? "X" : "O") + "</span>"
+    // for webview use "<span class=\"taskitem\">" + (node.isDone() ? "X" : "O") + "</span>"
     // for swing use ""
     public final static DataKey<Boolean> CONVERT_ORDERED_LIST_ITEMS = new DataKey<>("CONVERT_ORDERED_LIST_ITEMS", true);
     public final static DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");

@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
 import java.util.List;
 
 /**
- * A SpecExample block ast
+ * A SpecExample block node
  */
 public class SpecExampleBlock extends CustomBlock {
     private BasedSequence openingMarker = SubSequence.NULL;

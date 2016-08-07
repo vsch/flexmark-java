@@ -23,7 +23,7 @@ import java.util.*;
  * Start with the {@link #builder} method to configure the renderer. Example:
  * <pre><code>
  * HtmlRenderer renderer = HtmlRenderer.builder().escapeHtml(true).build();
- * renderer.render(ast);
+ * renderer.render(node);
  * </code></pre>
  */
 public class HtmlRenderer implements IRender {
@@ -96,12 +96,19 @@ public class HtmlRenderer implements IRender {
     /**
      * Create a new builder for configuring an {@link HtmlRenderer}.
      *
+     * @param options initialization options
      * @return a builder
      */
     public static Builder builder(DataHolder options) {
         return new Builder(options);
     }
 
+    /**
+     * Render a node to the appendable
+     *
+     * @param node   node to render
+     * @param output appendable to use for the output
+     */
     public void render(Node node, Appendable output) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
         renderer.render(node);
@@ -110,7 +117,7 @@ public class HtmlRenderer implements IRender {
     /**
      * Render the tree of nodes to HTML.
      *
-     * @param node the root ast
+     * @param node the root node
      * @return the rendered HTML
      */
     public String render(Node node) {
@@ -246,13 +253,13 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a ast renderer (done when rendering). This allows to override the rendering
-         * of ast types or define rendering for custom ast types.
+         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
+         * of node types or define rendering for custom node types.
          * <p>
-         * If multiple ast renderers for the same ast type are created, the one from the factory that was added first
-         * "wins". (This is how the rendering for core ast types can be overridden; the default rendering comes last.)
+         * If multiple node renderers for the same node type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
-         * @param nodeRendererFactory the factory for creating a ast renderer
+         * @param nodeRendererFactory the factory for creating a node renderer
          * @return {@code this}
          */
         public Builder nodeRendererFactory(NodeRendererFactory nodeRendererFactory) {
@@ -261,13 +268,13 @@ public class HtmlRenderer implements IRender {
         }
 
         /**
-         * Add a factory for instantiating a ast renderer (done when rendering). This allows to override the rendering
-         * of ast types or define rendering for custom ast types.
+         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
+         * of node types or define rendering for custom node types.
          * <p>
-         * If multiple ast renderers for the same ast type are created, the one from the factory that was added first
-         * "wins". (This is how the rendering for core ast types can be overridden; the default rendering comes last.)
+         * If multiple node renderers for the same node type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
          *
-         * @param linkResolverFactory the factory for creating a ast renderer
+         * @param linkResolverFactory the factory for creating a node renderer
          * @return {@code this}
          */
         public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
@@ -341,7 +348,7 @@ public class HtmlRenderer implements IRender {
 
             htmlWriter.setContext(this);
 
-            // The first ast renderer for a ast type "wins".
+            // The first node renderer for a node type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
@@ -385,7 +392,7 @@ public class HtmlRenderer implements IRender {
 
                 if (!url.isEmpty()) {
                     Node currentNode = getCurrentNode();
-                    
+
                     for (LinkResolver linkResolver : myLinkResolvers) {
                         resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
                         if (resolvedLink.getStatus() != LinkStatus.UNKNOWN) break;

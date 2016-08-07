@@ -22,7 +22,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
- * A TypographicQuotes ast
+ * A TypographicQuotes node
  */
 public class TypographicQuotes extends CustomNode implements DelimitedNode, DoNotDecorate {
     protected BasedSequence openingMarker = SubSequence.NULL;

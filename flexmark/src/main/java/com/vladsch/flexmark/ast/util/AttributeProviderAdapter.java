@@ -28,17 +28,17 @@ public class AttributeProviderAdapter extends NodeAdaptedVisitor<AttributeProvid
         }
     }
 
-    //public void visit(Node ast) {
-    //    A visitor = myCustomVisitorsMap.get(ast.getClass());
+    //public void visit(Node node) {
+    //    A visitor = myCustomVisitorsMap.get(node.getClass());
     //    if (visitor != null) {
     //        callFunctionHere();
     //    } else {
-    //        visitChildren(ast);
+    //        visitChildren(node);
     //    }
     //}
     //
-    //public void visitNodeOnly(Node ast) {
-    //    A visitor = myCustomVisitorsMap.get(ast.getClass());
+    //public void visitNodeOnly(Node node) {
+    //    A visitor = myCustomVisitorsMap.get(node.getClass());
     //    if (visitor != null) {
     //        callFunctionHere();
     //    }

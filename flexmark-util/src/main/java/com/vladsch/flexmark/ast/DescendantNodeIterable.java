@@ -24,7 +24,7 @@ public class DescendantNodeIterable implements ReversiblePeekingIterable<Node> {
     /**
      * iterate nodes, with descendants, depth first until all are done
      *
-     * @param iterable
+     * @param iterable node iterable to use for iterating nodes and their descendants 
      */
     public DescendantNodeIterable(ReversiblePeekingIterable<Node> iterable) {
         if (iterable instanceof DescendantNodeIterable) {
