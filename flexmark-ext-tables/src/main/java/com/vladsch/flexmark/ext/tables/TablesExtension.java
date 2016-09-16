@@ -26,6 +26,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     final static public DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<>("TRIM_CELL_WHITESPACE", true);
     final static public DataKey<Boolean> COLUMN_SPANS = new DataKey<>("COLUMN_SPANS", true);
     final static public DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<>("HEADER_SEPARATOR_COLUMN_MATCH", false);
+    final static public DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
 
     public static Extension create() {
         return new TablesExtension();

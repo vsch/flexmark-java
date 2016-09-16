@@ -32,6 +32,10 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
+        if (!options.className.isEmpty()) {
+            html.attr("class", options.className);
+        }
+        
         html.srcPosWithEOL(node.getChars()).withAttr().tagIndent("table", () -> {
             context.renderChildren(node);
         });

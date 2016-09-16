@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.18](#0418)
 - [0.4.17](#0417)
 - [0.4.16](#0416)
 - [0.4.15](#0415)
@@ -45,6 +46,11 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.18
+------
+
+- Add table class option to tables extension
 
 0.4.17
 ------
