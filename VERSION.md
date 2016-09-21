@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.4.18](#0418)
 - [0.4.17](#0417)
 - [0.4.16](#0416)
 - [0.4.15](#0415)
@@ -45,6 +46,13 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.4.18
+------
+
+- Add table class option to tables extension
+- Add `Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE` option to make block quotes ignore blank lines
+  between block quotes. This duplicates pegdown and GFM parsing.
 
 0.4.17
 ------

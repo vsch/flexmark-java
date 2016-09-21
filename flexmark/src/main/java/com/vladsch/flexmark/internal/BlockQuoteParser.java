@@ -16,10 +16,13 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     private final BlockQuote block = new BlockQuote();
     private final boolean continueToBlankLine;
+    private final boolean ignoreBlankLine;
+    private int lastWasBlankLine = 0;
 
     public BlockQuoteParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
         continueToBlankLine = options.get(Parser.BLOCK_QUOTE_TO_BLANK_LINE);
+        ignoreBlankLine = options.get(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE);
     }
 
     @Override
@@ -44,6 +47,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState state) {
+        // TODO: remove lastWasBlankLine count number of lines from the end of the content
         block.setCharsFromContent();
     }
 
@@ -51,9 +55,10 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
         boolean isMarker = false;
-        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || continueToBlankLine)) {
+        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || (continueToBlankLine && lastWasBlankLine == 0))) {
             int newColumn = state.getColumn() + state.getIndent();
-            
+            lastWasBlankLine = 0;
+
             if (isMarker) {
                 newColumn++;
                 // optional following space or tab
@@ -63,6 +68,11 @@ public class BlockQuoteParser extends AbstractBlockParser {
             }
             return BlockContinue.atColumn(newColumn);
         } else {
+            if (ignoreBlankLine && state.isBlank()) {
+                lastWasBlankLine++;
+                int newColumn = state.getColumn() + state.getIndent();
+                return BlockContinue.atColumn(newColumn);
+            }
             return BlockContinue.none();
         }
     }

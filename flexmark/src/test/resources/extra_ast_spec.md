@@ -587,6 +587,93 @@ Document[0, 117]
 
 Indent less than list's item content indent + 4 is a list item, >= is a sub item
 
+- kramdown 1.2.0
+
+```````````````````````````````` example(List - Fixed Indent: 4) options(list-content-indent, list-content-indent-offset-2)
+* item 1
+
+  # Heading 1
+
+   ## Heading 2
+
+    ### Heading 3
+
+     #### Heading 4
+
+      ##### Heading 5
+
+       ###### Heading 6
+
+  * item 2
+
+    ## Heading 2
+  
+     ### Heading 3
+  
+      #### Heading 3
+
+       ##### Heading 5
+    
+        ###### Heading 6
+
+.
+<ul>
+  <li>
+    <p>item 1</p>
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <pre><code>##### Heading 5
+
+ ###### Heading 6
+</code></pre>
+    <ul>
+      <li>
+        <p>item 2</p>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 3</h4>
+        <h5>Heading 5</h5>
+        <pre><code>###### Heading 6
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 260]
+  BulletList[0, 260] isLoose
+    BulletListItem[0, 260] open:[0, 1, "*"] isLoose
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
+        Text[14, 23] chars:[14, 23, "Heading 1"]
+      Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
+        Text[31, 40] chars:[31, 40, "Heading 2"]
+      Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
+        Text[50, 59] chars:[50, 59, "Heading 3"]
+      Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
+        Text[71, 80] chars:[71, 80, "Heading 4"]
+      IndentedCodeBlock[88, 130]
+      BulletList[132, 260] isLoose
+        BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+          Paragraph[134, 141]
+            Text[134, 140] chars:[134, 140, "item 2"]
+          Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
+            Text[149, 158] chars:[149, 158, "Heading 2"]
+          Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
+            Text[171, 180] chars:[171, 180, "Heading 3"]
+          Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
+            Text[195, 204] chars:[195, 204, "Heading 3"]
+          Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
+            Text[219, 228] chars:[219, 228, "Heading 5"]
+          IndentedCodeBlock[242, 260]
+````````````````````````````````
+
+
+Indent less than list's item content indent + 4 is a list item, >= is a sub item
+
 - showdown 0.3.1
 - Markdown.pl 1.0.1
 - Markdown.pl 1.0.2b8
@@ -596,7 +683,7 @@ Indent less than list's item content indent + 4 is a list item, >= is a sub item
 - Parsedown 1.6.0
 - s9e\TextFormatter (Fatdown/PHP)
 
-```````````````````````````````` example(List - Fixed Indent: 4) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
+```````````````````````````````` example(List - Fixed Indent: 5) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
 * item 1
  * item 2
   * item 3
@@ -659,6 +746,100 @@ Document[0, 117]
 ````````````````````````````````
 
 
+Indent less than list's item content indent + 4 is a list item, >= is a sub item
+
+- showdown 0.3.1
+- Markdown.pl 1.0.1
+- Markdown.pl 1.0.2b8
+- RedCarpet 3.1.2
+- PHP Markdown 1.0.2
+- PHP Markdown Extra 1.2.8
+- Parsedown 1.6.0
+- s9e\TextFormatter (Fatdown/PHP)
+
+```````````````````````````````` example(List - Fixed Indent: 6) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
+* item 1
+
+  # Heading 1
+
+   ## Heading 2
+
+    ### Heading 3
+
+     #### Heading 4
+
+      ##### Heading 5
+
+       ###### Heading 6
+
+  * item 2
+
+    ## Heading 2
+  
+     ### Heading 3
+  
+      #### Heading 3
+
+       ##### Heading 5
+    
+        ###### Heading 6
+
+.
+<ul>
+  <li>
+    <p>item 1</p>
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 4</h4>
+    <pre><code>##### Heading 5
+
+ ###### Heading 6
+</code></pre>
+    <ul>
+      <li>
+        <p>item 2</p>
+        <h2>Heading 2</h2>
+        <h3>Heading 3</h3>
+        <h4>Heading 3</h4>
+        <h5>Heading 5</h5>
+        <pre><code>###### Heading 6
+</code></pre>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 260]
+  BulletList[0, 260] isLoose
+    BulletListItem[0, 260] open:[0, 1, "*"] isLoose
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
+        Text[14, 23] chars:[14, 23, "Heading 1"]
+      Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
+        Text[31, 40] chars:[31, 40, "Heading 2"]
+      Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
+        Text[50, 59] chars:[50, 59, "Heading 3"]
+      Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
+        Text[71, 80] chars:[71, 80, "Heading 4"]
+      IndentedCodeBlock[88, 130]
+      BulletList[132, 260] isLoose
+        BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+          Paragraph[134, 141]
+            Text[134, 140] chars:[134, 140, "item 2"]
+          Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
+            Text[149, 158] chars:[149, 158, "Heading 2"]
+          Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
+            Text[171, 180] chars:[171, 180, "Heading 3"]
+          Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
+            Text[195, 204] chars:[195, 204, "Heading 3"]
+          Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
+            Text[219, 228] chars:[219, 228, "Heading 5"]
+          IndentedCodeBlock[242, 260]
+````````````````````````````````
+
+
 Fixed indentation only (4 spaces)
 
 - pandoc (strict) 1.17.2
@@ -670,7 +851,7 @@ Fixed indentation only (4 spaces)
 - MultiMarkdown 5.1.0
 - pegdown
 
-```````````````````````````````` example(List - Fixed Indent: 5) options(list-fixed-indent)
+```````````````````````````````` example(List - Fixed Indent: 7) options(list-fixed-indent)
 * item 1
  * item 2
   * item 3
@@ -733,6 +914,154 @@ Document[0, 122]
 ````````````````````````````````
 
 
+Embedded headings Fixed indentation only (4 spaces)
+
+- pandoc (strict) 1.17.2
+- pandoc 1.17.2
+- lunamark 0.4.0
+- RDiscount 2.1.7
+- Python-Markdown 2.6.5
+- Minima 0.8.0a3_20140907
+- MultiMarkdown 5.1.0
+- pegdown
+
+```````````````````````````````` example(List - Fixed Indent: 8) options(list-fixed-indent)
+1. Some Lists
+    
+    # Test
+
+.
+<ol>
+  <li>
+    <p>Some Lists</p>
+    <h1>Test</h1>
+  </li>
+</ol>
+.
+Document[0, 31]
+  OrderedList[0, 29] isLoose delimiter:'.'
+    OrderedListItem[0, 29] open:[0, 2, "1."] isLoose
+      Paragraph[3, 14]
+        Text[3, 13] chars:[3, 13, "Some Lists"]
+      Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
+        Text[25, 29] chars:[25, 29, "Test"]
+````````````````````````````````
+
+
+Embedded headings Markdown Navigator options
+
+```````````````````````````````` example(List - Fixed Indent: 9) options(list-markdown-navigator)
+1. Some Lists
+    
+    # Test
+
+.
+<ol>
+  <li>Some Lists
+  <h1>Test</h1>
+  </li>
+</ol>
+.
+Document[0, 31]
+  OrderedList[0, 29] isTight delimiter:'.'
+    OrderedListItem[0, 29] open:[0, 2, "1."] isTight
+      Paragraph[3, 14]
+        Text[3, 13] chars:[3, 13, "Some Lists"]
+      Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
+        Text[25, 29] chars:[25, 29, "Test"]
+````````````````````````````````
+
+
+Fixed indentation only (4 spaces)
+
+- pandoc (strict) 1.17.2
+- pandoc 1.17.2
+- lunamark 0.4.0
+- RDiscount 2.1.7
+- Python-Markdown 2.6.5
+- Minima 0.8.0a3_20140907
+- MultiMarkdown 5.1.0
+- pegdown
+
+```````````````````````````````` example(List - Fixed Indent: 10) options(list-fixed-indent)
+* item 1
+
+  # Heading 1
+
+   ## Heading 2
+
+    ### Heading 3
+
+     #### Heading 4
+
+      ##### Heading 5
+
+       ###### Heading 6
+
+  * item 2
+
+    ## Heading 2
+  
+     ### Heading 3
+  
+      #### Heading 3
+
+       ##### Heading 5
+    
+        ###### Heading 6
+
+.
+<ul>
+  <li>item 1</li>
+</ul>
+<h1>Heading 1</h1>
+<h2>Heading 2</h2>
+<pre><code>### Heading 3
+
+ #### Heading 4
+
+  ##### Heading 5
+
+   ###### Heading 6
+</code></pre>
+<ul>
+  <li>
+    <p>item 2</p>
+    <h2>Heading 2</h2>
+    <h3>Heading 3</h3>
+    <h4>Heading 3</h4>
+    <h5>Heading 5</h5>
+    <pre><code>###### Heading 6
+</code></pre>
+  </li>
+</ul>
+.
+Document[0, 260]
+  BulletList[0, 9] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+  Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
+    Text[14, 23] chars:[14, 23, "Heading 1"]
+  Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
+    Text[31, 40] chars:[31, 40, "Heading 2"]
+  IndentedCodeBlock[46, 130]
+  BulletList[132, 260] isLoose
+    BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+      Paragraph[134, 141]
+        Text[134, 140] chars:[134, 140, "item 2"]
+      Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
+        Text[149, 158] chars:[149, 158, "Heading 2"]
+      Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
+        Text[171, 180] chars:[171, 180, "Heading 3"]
+      Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
+        Text[195, 204] chars:[195, 204, "Heading 3"]
+      Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
+        Text[219, 228] chars:[219, 228, "Heading 5"]
+      IndentedCodeBlock[242, 260]
+````````````````````````````````
+
+
 Fixed indentation with code blocks
 
 - pegdown
@@ -741,7 +1070,7 @@ Fixed indentation with code blocks
 - lunamark 0.4.0
 - MultiMarkdown 5.1.0
 
-```````````````````````````````` example(List - Fixed Indent: 6) options(list-fixed-indent)
+```````````````````````````````` example(List - Fixed Indent: 11) options(list-fixed-indent)
 * item 1
     
     this is not code
@@ -912,7 +1241,7 @@ Document[0, 637]
 
 parent list content indent
 
-```````````````````````````````` example(List - Fixed Indent: 7) options(list-content-indent)
+```````````````````````````````` example(List - Fixed Indent: 12) options(list-content-indent)
 * item 1
     
     this is not code
@@ -1087,7 +1416,7 @@ Document[0, 637]
 
 Indent less than list's item content indent + 4 is a list item, >= is a sub item
 
-```````````````````````````````` example(List - Fixed Indent: 8) options(list-content-indent, list-content-indent-offset-2)
+```````````````````````````````` example(List - Fixed Indent: 13) options(list-content-indent, list-content-indent-offset-2)
 * item 1
     
     this is not code
@@ -1255,7 +1584,7 @@ Document[0, 637]
 
 Indent less than list's item content indent + 4 is a list item, >= is a sub item
 
-```````````````````````````````` example(List - Fixed Indent: 9) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
+```````````````````````````````` example(List - Fixed Indent: 14) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
 * item 1
     
     this is not code
@@ -4654,6 +4983,123 @@ Document[0, 16]
         Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
 
+
+Block quotes don't ignore interspersing blank lines
+
+```````````````````````````````` example Block Quotes: 3
+> Block Quote
+>> Nested Quote
+>>> Another Quote
+
+>>>> Nested Quote
+
+.
+<blockquote>
+  <p>Block Quote</p>
+  <blockquote>
+    <p>Nested Quote</p>
+    <blockquote>
+      <p>Another Quote</p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <blockquote>
+        <p>Nested Quote</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+.
+Document[0, 68]
+  BlockQuote[0, 48] marker:[0, 1, ">"]
+    Paragraph[2, 14]
+      Text[2, 13] chars:[2, 13, "Block … Quote"]
+    BlockQuote[15, 48] marker:[15, 16, ">"]
+      Paragraph[17, 30]
+        Text[17, 29] chars:[17, 29, "Neste … Quote"]
+      BlockQuote[32, 48] marker:[32, 33, ">"]
+        Paragraph[34, 48]
+          Text[34, 47] chars:[34, 47, "Anoth … Quote"]
+  BlockQuote[49, 67] marker:[49, 50, ">"]
+    BlockQuote[50, 67] marker:[50, 51, ">"]
+      BlockQuote[51, 67] marker:[51, 52, ">"]
+        BlockQuote[52, 67] marker:[52, 53, ">"]
+          Paragraph[54, 67]
+            Text[54, 66] chars:[54, 66, "Neste … Quote"]
+````````````````````````````````
+
+
+Block quotes ignore interspersing blank lines
+
+```````````````````````````````` example(Block Quotes: 4) options(block-ignore-blank)
+> Block Quote
+>> Nested Quote
+>>> Another Quote
+
+>>>> Nested Quote
+
+.
+<blockquote>
+  <p>Block Quote</p>
+  <blockquote>
+    <p>Nested Quote</p>
+    <blockquote>
+      <p>Another Quote</p>
+      <blockquote>
+        <p>Nested Quote</p>
+      </blockquote>
+    </blockquote>
+  </blockquote>
+</blockquote>
+.
+Document[0, 68]
+  BlockQuote[0, 67] marker:[0, 1, ">"]
+    Paragraph[2, 14]
+      Text[2, 13] chars:[2, 13, "Block … Quote"]
+    BlockQuote[15, 67] marker:[15, 16, ">"]
+      Paragraph[17, 30]
+        Text[17, 29] chars:[17, 29, "Neste … Quote"]
+      BlockQuote[32, 67] marker:[32, 33, ">"]
+        Paragraph[34, 48]
+          Text[34, 47] chars:[34, 47, "Anoth … Quote"]
+        BlockQuote[52, 67] marker:[52, 53, ">"]
+          Paragraph[54, 67]
+            Text[54, 66] chars:[54, 66, "Neste … Quote"]
+````````````````````````````````
+
+
+Block quotes ignore interspersing blank lines but don't include any lines without prefix after
+blank lines
+
+```````````````````````````````` example(Block Quotes: 5) options(block-ignore-blank, block-quote-extend)
+> Block Quote 
+> this is still block quote 
+
+
+this is not
+
+.
+<blockquote>
+  <p>Block Quote
+  this is still block quote</p>
+</blockquote>
+<p>this is not</p>
+.
+Document[0, 59]
+  BlockQuote[0, 44] marker:[0, 1, ">"]
+    Paragraph[2, 44]
+      Text[2, 13] chars:[2, 13, "Block … Quote"]
+      SoftLineBreak[14, 15]
+      Text[17, 42] chars:[17, 42, "this  … quote"]
+  Paragraph[46, 58]
+    Text[46, 57] chars:[46, 57, "this  … s not"]
+````````````````````````````````
+
+without block quote to next blank line causes an interrupted list with a second list after the
+quote.
 
 ## Source Position Attribute
 

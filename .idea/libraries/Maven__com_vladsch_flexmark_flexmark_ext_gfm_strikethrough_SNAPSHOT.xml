@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/SNAPSHOT/flexmark-ext-gfm-strikethrough-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/SNAPSHOT/flexmark-ext-gfm-strikethrough-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/SNAPSHOT/flexmark-ext-gfm-strikethrough-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

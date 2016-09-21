@@ -66,9 +66,23 @@ Document[0, 10]
 ````````````````````````````````
 
 
-Should work in links
+no spaces allowed
 
 ```````````````````````````````` example Emoji: 5
+:no spaces:
+.
+<p>:no spaces:</p>
+.
+Document[0, 12]
+  Paragraph[0, 12]
+    Emoji[0, 11] textOpen:[0, 1, ":"] text:[1, 10, "no spaces"] textClose:[10, 11, ":"]
+      Text[1, 10] chars:[1, 10, "no spaces"]
+````````````````````````````````
+
+
+Should work in links
+
+```````````````````````````````` example Emoji: 6
 [:warning:](/url)
 .
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
@@ -81,7 +95,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 6) options(url)
+```````````````````````````````` example(Emoji: 7) options(url)
 :warning:
 .
 <p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
@@ -95,7 +109,7 @@ Document[0, 10]
 
 Should work in links
 
-```````````````````````````````` example Emoji: 7
+```````````````````````````````` example Emoji: 8
 [:warning:](/url)
 .
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
@@ -110,7 +124,7 @@ Document[0, 18]
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 8
+```````````````````````````````` example Emoji: 9
 :warnings:
 .
 <p>:warnings:</p>
@@ -124,7 +138,7 @@ Document[0, 11]
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 9
+```````````````````````````````` example Emoji: 10
 :**warnings**:
 .
 <p>:<strong>warnings</strong>:</p>

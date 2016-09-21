@@ -1831,9 +1831,40 @@ Document[0, 30]
 ````````````````````````````````
 
 
+Custom class name
+
+```````````````````````````````` example(Tables Extension: 55) options(class-name)
+Abc|Def
+---|---
+.
+<table class="table-class">
+  <thead>
+    <tr><th>Abc</th><th>Def</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+.
+Document[0, 16]
+  TableBlock[0, 16]
+    TableHead[0, 7]
+      TableRow[0, 7] rowNumber=1
+        TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
+          Text[0, 3] chars:[0, 3, "Abc"]
+        TableCell[4, 7] header text:[4, 7, "Def"]
+          Text[4, 7] chars:[4, 7, "Def"]
+    TableSeparator[8, 15]
+      TableRow[8, 15]
+        TableCell[8, 12] text:[8, 11, "---"] textClose:[11, 12, "|"]
+          Text[8, 11] chars:[8, 11, "---"]
+        TableCell[12, 15] text:[12, 15, "---"]
+          Text[12, 15] chars:[12, 15, "---"]
+    TableBody[0, 0]
+````````````````````````````````
+
+
 in item
 
-```````````````````````````````` example(Tables Extension: 55) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 56) options(keep-whitespace)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -1923,7 +1954,7 @@ Document[0, 565]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 56
+```````````````````````````````` example Tables Extension: 57
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2759,9 +2790,10 @@ Document[0, 10153]
           Text[10145, 10146] chars:[10145, 10146, "X"]
 ````````````````````````````````
 
+
 ## GFM options 
 
-invalid table: 
+invalid table:
 
 ```````````````````````````````` example(GFM options: 1) options(gfm)
 | A | B | C |
@@ -2786,7 +2818,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
-invalid table: 
+invalid table:
 
 ```````````````````````````````` example(GFM options: 2) options(gfm)
 | A | B | C |

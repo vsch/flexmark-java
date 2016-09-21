@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vladsch.flexmark:flexmark-ext-tables:SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-tables/SNAPSHOT/flexmark-ext-tables-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-tables/SNAPSHOT/flexmark-ext-tables-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-tables/SNAPSHOT/flexmark-ext-tables-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

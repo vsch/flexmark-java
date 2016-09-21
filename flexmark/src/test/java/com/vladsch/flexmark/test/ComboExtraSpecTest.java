@@ -66,9 +66,27 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("code-trim-trailing", new MutableDataSet().set(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES, true));
         optionsMap.put("ordered-dot-only", new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, true));
         optionsMap.put("block-quote-extend", new MutableDataSet().set(Parser.BLOCK_QUOTE_TO_BLANK_LINE, true));
+        optionsMap.put("block-ignore-blank", new MutableDataSet().set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true));
         optionsMap.put("setext-marker-length", new MutableDataSet().set(Parser.HEADING_SETEXT_MARKER_LENGTH, 3));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true));
+        optionsMap.put("list-markdown-navigator", new MutableDataSet()
+                .set(Parser.LISTS_AUTO_LOOSE, false)
+                .set(Parser.LISTS_AUTO_LOOSE, false)
+                .set(Parser.LISTS_BULLET_MATCH, false)
+                .set(Parser.LISTS_ITEM_TYPE_MATCH, false)
+                .set(Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM, false)
+                .set(Parser.LISTS_END_ON_DOUBLE_BLANK, false)
+                .set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH, false)
+                .set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
+                .set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, true)
+                .set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH, false)
+                .set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
+                .set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH, false)
+                .set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH, true)
+                .set(Parser.LISTS_ORDERED_LIST_MANUAL_START, false)
+                .set(Parser.LISTS_FIXED_INDENT, 4)
+        );
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
