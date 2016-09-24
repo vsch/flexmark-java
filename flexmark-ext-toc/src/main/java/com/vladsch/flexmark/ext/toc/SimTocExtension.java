@@ -51,7 +51,10 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(SimTocNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(SimTocNodeRenderer::new);
+        }
     }
 }

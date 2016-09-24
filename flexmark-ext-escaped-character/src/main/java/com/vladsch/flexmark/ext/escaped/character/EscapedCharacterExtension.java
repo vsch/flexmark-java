@@ -52,8 +52,11 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(EscapedCharacterNodeRenderer::new);
-        // rendererBuilder.linkResolverFactory(new EscapedCharacterLinkResolver.Factory());
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(EscapedCharacterNodeRenderer::new);
+            // rendererBuilder.linkResolverFactory(new EscapedCharacterLinkResolver.Factory());
+        }
     }
 }

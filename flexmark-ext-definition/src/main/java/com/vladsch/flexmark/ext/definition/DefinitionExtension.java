@@ -35,8 +35,13 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
-        // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
+            // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
+        } else if (rendererType.equals("HTML")) {
+            //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
+            // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
+        }
     }
 }

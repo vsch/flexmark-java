@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.emoji;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiDelimiterProcessor;
+import com.vladsch.flexmark.ext.emoji.internal.EmojiJiraRenderer;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -37,7 +38,11 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(EmojiNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(EmojiJiraRenderer::new);
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(EmojiNodeRenderer::new);
+        }
     }
 }

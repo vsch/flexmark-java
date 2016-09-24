@@ -39,8 +39,11 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(JekyllFrontMatterNodeRenderer::new);
-        // rendererBuilder.linkResolverFactory(new JekyllFrontMatterLinkResolver.Factory());
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(JekyllFrontMatterNodeRenderer::new);
+            // rendererBuilder.linkResolverFactory(new JekyllFrontMatterLinkResolver.Factory());
+        }
     }
 }

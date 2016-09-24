@@ -8,7 +8,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
- * Extension for anchorlinkss
+ * Extension for anchor links
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},
@@ -41,7 +41,10 @@ public class AnchorLinkExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(AnchorLinkNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(AnchorLinkNodeRenderer::new);
+        }
     }
 }

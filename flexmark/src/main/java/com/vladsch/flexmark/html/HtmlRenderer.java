@@ -47,6 +47,7 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
     final static public DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
     final static public DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
+    final static public DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
     final static public DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
         @Override
         public ArrayList<TagRange> create(DataHolder value) {
@@ -180,7 +181,7 @@ public class HtmlRenderer implements IRender {
         public HtmlRenderer build() {
             return new HtmlRenderer(this);
         }
-
+        
         /**
          * The HTML to use for rendering a softbreak, defaults to {@code "\n"} (meaning the rendered result doesn't have
          * a line break).
@@ -305,7 +306,7 @@ public class HtmlRenderer implements IRender {
                 if (extension instanceof HtmlRendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
                         HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
-                        htmlRendererExtension.extend(this);
+                        htmlRendererExtension.extend(this, this.get(HtmlRenderer.TYPE));
                         loadedExtensions.add(htmlRendererExtension);
                     }
                 }
@@ -318,7 +319,7 @@ public class HtmlRenderer implements IRender {
      * Extension for {@link HtmlRenderer}.
      */
     public interface HtmlRendererExtension extends Extension {
-        void extend(Builder rendererBuilder);
+        void extend(Builder rendererBuilder, String rendererType);
     }
 
     private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {

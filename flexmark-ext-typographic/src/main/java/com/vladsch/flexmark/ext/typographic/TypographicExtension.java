@@ -50,8 +50,13 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
-        // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
+            //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+        } else if (rendererType.equals("HTML")) {
+            // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
+            //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+        }
     }
 }

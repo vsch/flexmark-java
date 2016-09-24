@@ -25,6 +25,12 @@
             <artifactId>flexmark-test-util</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-jira-converter</artifactId>
+            <version>SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>

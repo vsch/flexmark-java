@@ -32,5 +32,6 @@
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
   </component>
 </module>

@@ -94,8 +94,8 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         if (!example.isFullSpecExample()) return;
 
         String specResourcePath = getSpecResourceName();
-        SpecReader.readExamples(specResourcePath, this);
         String fullSpec = SpecReader.readSpec(specResourcePath);
+        SpecReader.readExamples(specResourcePath, this);
         String actual = dumpSpecReader.getFullSpec();
 
         if (outputActualFullSpec()) {

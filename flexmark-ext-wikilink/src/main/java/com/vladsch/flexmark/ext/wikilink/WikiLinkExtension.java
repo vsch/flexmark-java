@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.wikilink;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkJiraRenderer;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkRefProcessor;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkLinkResolver;
 import com.vladsch.flexmark.ext.wikilink.internal.WikiLinkNodeRenderer;
@@ -40,8 +41,13 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(WikiLinkNodeRenderer::new);
-        rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(WikiLinkJiraRenderer::new);
+            rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(WikiLinkNodeRenderer::new);
+            rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
+        }
     }
 }

@@ -43,6 +43,7 @@
         <module>flexmark-ext-zzzzzz</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-test-util</module>
+        <module>flexmark-jira-converter</module>
         <module>flexmark-util</module>
     </modules>
 
@@ -317,6 +318,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-util</artifactId>
+                <version>SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-jira-converter</artifactId>
                 <version>SNAPSHOT</version>
             </dependency>
 

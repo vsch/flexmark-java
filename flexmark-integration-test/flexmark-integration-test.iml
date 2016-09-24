@@ -35,6 +35,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.nibor.autolink:autolink:0.4.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-abbreviation:SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-emoji:SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-footnotes:SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:SNAPSHOT" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-tables:SNAPSHOT" level="project" />

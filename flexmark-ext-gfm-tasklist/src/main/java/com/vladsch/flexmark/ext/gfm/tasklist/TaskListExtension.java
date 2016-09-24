@@ -42,7 +42,10 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TaskListNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(TaskListNodeRenderer::new);
+        }
     }
 }

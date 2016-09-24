@@ -19,6 +19,7 @@ import com.vladsch.flexmark.ext.typographic.ExtTypographicTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
+import com.vladsch.flexmark.jira.converter.ExtJiraConverterTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
 import org.junit.runners.Suite;
@@ -45,6 +46,7 @@ import org.junit.runners.Suite;
         ExtWikiLinkTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
         ExtZzzzzzTestSuite.class,
+        ExtJiraConverterTestSuite.class,
         IntegrationTestSuite.class,
 })
 public class FlexmarkTestSuite {

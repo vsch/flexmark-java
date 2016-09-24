@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.gfm.strikethrough;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughDelimiterProcessor;
+import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughJiraRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -32,7 +33,11 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(StrikethroughNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(StrikethroughJiraRenderer::new);
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(StrikethroughNodeRenderer::new);
+        }
     }
 }

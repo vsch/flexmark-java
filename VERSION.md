@@ -4,7 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
-- [0.4.18](#0418)
+- [0.5.00](#0500)
 - [0.4.17](#0417)
 - [0.4.16](#0416)
 - [0.4.15](#0415)
@@ -47,12 +47,31 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
-0.4.18
+0.5.00
 ------
 
 - Add table class option to tables extension
+
 - Add `Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE` option to make block quotes ignore blank lines
   between block quotes. This duplicates pegdown and GFM parsing.
+
+- Add: `HtmlRenderer.TYPE` data key to allow extensions to set rendering type. Default value
+  `HTML`.
+
+- Add: `JiraConverterExtension` to convert standard markdown AST to JIRA formatted text
+
+- Add: Rendering type to allow standard non-html rendering capability to be added by extensions.
+  For now rendering types are: `HTML` default and `JIRA`. The latter generates JIRA formatted
+  text from Markdown AST.
+
+- Change: `HtmlRendererExtension.extend(Builder, String)` now gets a string argument for the
+  type of rendering to be desired. If the extension does not recognize the type it should not
+  register a renderer. Current values are: `HTML` and `JIRA` others may be added by extensions
+
+- Change: standard extensions that can be mapped to JIRA formatted text to implement JIRA
+  renderer. 
+
+- Add: `JIRA` rendering for autolink, emoji, strikethrough, tables and wiki link extensions.
 
 0.4.17
 ------

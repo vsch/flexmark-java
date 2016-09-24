@@ -50,7 +50,7 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(AbbreviationNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("HTML")) rendererBuilder.nodeRendererFactory(AbbreviationNodeRenderer::new);
     }
 }

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -38,7 +39,11 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(TableNodeRenderer::new);
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(TableJiraRenderer::new);
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(TableNodeRenderer::new);
+        }
     }
 }

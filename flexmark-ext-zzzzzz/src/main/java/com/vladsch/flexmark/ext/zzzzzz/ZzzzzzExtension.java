@@ -61,9 +61,13 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder) {
-        rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-        rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
-        rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(ZzzzzzJiraRenderer::new);// zzzoptionszzz(JIRA_RENDERER)
+        } else if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
+            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
+        }
     }
 }
