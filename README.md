@@ -95,6 +95,8 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
+- JIRA renderer added to allow rendering Markdown AST as JIRA formatted text.
+
 - Parser is mature enough to be used as the parser in the Markdown Navigator plugin. Performance
   improvement is spectacular. Typing with preview enabled is now comfortable, even in larger
   files. Disabling the preview for major editing makes typing response similar to editing plain
