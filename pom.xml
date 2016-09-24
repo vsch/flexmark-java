@@ -13,7 +13,7 @@
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
-    <version>SNAPSHOT</version>
+    <version>0.5.0</version>
     <name>flexmark-java</name>
     <description>
         Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
@@ -218,112 +218,112 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-abbreviation</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-anchorlink</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-autolink</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-definition</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-emoji</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-escaped-character</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-footnotes</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tables</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tasklist</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-spec-example</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-toc</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-typographic</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-wikilink</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-yaml-front-matter</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-zzzzzz</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-test-util</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-util</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-jira-converter</artifactId>
-                <version>SNAPSHOT</version>
+                <version>0.5.0</version>
             </dependency>
 
             <!-- Common test dependencies -->

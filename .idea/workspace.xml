@@ -13,78 +13,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ExtJiraConverterTestSuite.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiJiraRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/test/java/com/vladsch/flexmark/ext/emoji/ComboEmojiJiraTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/test/resources/ext_emoji_jira_spec.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughJiraRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/JiraStrikethroughSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_gfm_strikethrough_jira_spec.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableJiraRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/JiraTablesSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/test/resources/ext_tables_jira_spec.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkJiraRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/test/java/com/vladsch/flexmark/ext/wikilink/JiraWikiLinkSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/test/resources/ext_wikilink_jira_spec.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzJiraRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/JiraZzzzzzSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/resources/ext_zzzzzz_jira_spec.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/JiraConverterExtension.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/javadoc/overview.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/test/java/com/vladsch/flexmark/jira/converter/ComboJiraConverterSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/test/java/com/vladsch/flexmark/jira/converter/ExtJiraConverterTestSuite.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/ComboAnchorLinkSpecTest.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ComboAnchorLinkSpecTest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_abbreviation_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_autolink_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_emoji_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_footnotes_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_strikethrough_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tables_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tasklist_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_tables_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_wikilink_SNAPSHOT.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_yaml_front_matter_SNAPSHOT.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VERSION.md" afterPath="$PROJECT_DIR$/VERSION.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/central-pom.xml" afterPath="$PROJECT_DIR$/central-pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-autolink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-autolink/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-definition/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/test/java/com/vladsch/flexmark/ext/emoji/ExtEmojiTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/test/java/com/vladsch/flexmark/ext/emoji/ExtEmojiTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/ExtGfmStrikethroughTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/ExtGfmStrikethroughTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TablesExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TablesExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" afterPath="$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TablesExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TablesExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/ExtTablesTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/ExtTablesTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-toc/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/test/java/com/vladsch/flexmark/ext/wikilink/ExtWikiLinkTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/test/java/com/vladsch/flexmark/ext/wikilink/ExtWikiLinkTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/ExtZzzzzzTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/ExtZzzzzzTestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" afterPath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" afterPath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark/FlexmarkTestSuite.java" afterPath="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark/FlexmarkTestSuite.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/test/ComboSpecTestCase.java" afterPath="$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/test/ComboSpecTestCase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/flexmark.iml" afterPath="$PROJECT_DIR$/flexmark/flexmark.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/pom.xml" afterPath="$PROJECT_DIR$/flexmark-integration-test/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/pom.xml" afterPath="$PROJECT_DIR$/flexmark-test-util/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/pom.xml" afterPath="$PROJECT_DIR$/flexmark-util/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/pom.xml" afterPath="$PROJECT_DIR$/flexmark/pom.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="flexmark-parent.iws" />
@@ -144,12 +110,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VERSION.md" pinned="true" current-in-tab="true">
+      <file leaf-file-name="VERSION.md" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VERSION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="510">
-                <caret line="78" column="6" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
+              <first_editor relative-caret-position="476">
+                <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -157,32 +123,69 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jira_converter_ast_spec.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md">
+      <file leaf-file-name="central-pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/central-pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExtZzzzzzTestSuite.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/ExtZzzzzzTestSuite.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ext_zzzzzz_jira_spec.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/resources/ext_zzzzzz_jira_spec.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="1785">
-                <caret line="119" column="39" selection-start-line="119" selection-start-column="39" selection-end-line="119" selection-end-column="39" />
+              <first_editor relative-caret-position="680">
+                <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
                 <folding>
-                  <element signature="e#466#1169#0" expanded="true" />
-                  <element signature="e#1351#1608#0" expanded="true" />
-                  <element signature="e#1863#2417#0" expanded="true" />
-                  <element signature="e#2755#3543#0" expanded="true" />
-                  <element signature="e#3890#4710#0" expanded="true" />
-                  <element signature="e#4907#5032#0" expanded="true" />
-                  <element signature="e#5218#5419#0" expanded="true" />
-                  <element signature="e#5684#6034#0" expanded="true" />
-                  <element signature="e#6198#6363#0" expanded="true" />
-                  <element signature="e#6559#6922#0" expanded="true" />
-                  <element signature="e#7110#7496#0" expanded="true" />
-                  <element signature="e#7838#9093#0" expanded="true" />
-                  <element signature="e#9449#10806#0" expanded="true" />
-                  <marker date="1474749535000" expanded="true" signature="11:29" ph="JiraConver..." />
-                  <marker date="1474749535000" expanded="true" signature="55:67" ph="2016-09-23" />
-                  <marker date="1474749535000" expanded="true" signature="77:141" ph="[CC-BY-SA ..." />
+                  <marker date="1474746634000" expanded="true" signature="11:37" ph="Zzzzzz Ext..." />
+                  <marker date="1474746634000" expanded="true" signature="63:75" ph="2016-06-06" />
+                  <marker date="1474746634000" expanded="true" signature="85:149" ph="[CC-BY-SA ..." />
                 </folding>
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JiraZzzzzzSpecTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/JiraZzzzzzSpecTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="flexmark-ext-zzzzzz.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="527">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -207,116 +210,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ext_emoji_jira_spec.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/test/resources/ext_emoji_jira_spec.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="85">
-                <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-                <folding>
-                  <marker date="1474749962000" expanded="true" signature="11:31" ph="Emoji Exte..." />
-                  <marker date="1474749962000" expanded="true" signature="40:58" ph="Vladimir S..." />
-                  <marker date="1474749962000" expanded="true" signature="68:71" ph="0.1" />
-                  <marker date="1474749962000" expanded="true" signature="78:90" ph="2016-06-06" />
-                  <marker date="1474749962000" expanded="true" signature="100:164" ph="[CC-BY-SA ..." />
-                </folding>
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JiraWikiLinkSpecTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-wikilink/src/test/java/com/vladsch/flexmark/ext/wikilink/JiraWikiLinkSpecTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ext_wikilink_jira_spec.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-ext-wikilink/src/test/resources/ext_wikilink_jira_spec.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
               <first_editor relative-caret-position="595">
-                <caret line="41" column="79" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
+                <caret line="41" column="48" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
                 <folding>
-                  <element signature="e#414#616#0" expanded="true" />
-                  <element signature="e#777#1033#0" expanded="true" />
-                  <element signature="e#1236#1491#0" expanded="true" />
-                  <element signature="e#1647#1897#0" expanded="true" />
-                  <element signature="e#2067#2344#0" expanded="true" />
-                  <element signature="e#2516#2819#0" expanded="true" />
                   <marker date="1474750148000" expanded="true" signature="11:40" ph="WikiLinks ..." />
                   <marker date="1474750148000" expanded="true" signature="49:67" ph="Vladimir S..." />
                   <marker date="1474750148000" expanded="true" signature="77:80" ph="0.1" />
                   <marker date="1474750148000" expanded="true" signature="87:99" ph="2016-09-24" />
                   <marker date="1474750148000" expanded="true" signature="109:173" ph="[CC-BY-SA ..." />
-                </folding>
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ext_tables_jira_spec.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/test/resources/ext_tables_jira_spec.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="85">
-                <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-                <folding>
-                  <element signature="e#343#908#0" expanded="true" />
-                  <element signature="e#1033#1553#0" expanded="true" />
-                  <element signature="e#1692#2494#0" expanded="true" />
-                  <element signature="e#2646#3685#0" expanded="true" />
-                  <element signature="e#3828#4727#0" expanded="true" />
-                  <element signature="e#4888#5773#0" expanded="true" />
-                  <element signature="e#5989#7277#0" expanded="true" />
-                  <element signature="e#7513#8332#0" expanded="true" />
-                  <element signature="e#8578#9679#0" expanded="true" />
-                  <element signature="e#9834#10485#0" expanded="true" />
-                  <element signature="e#10641#11314#0" expanded="true" />
-                  <element signature="e#11808#15023#0" expanded="true" />
-                  <element signature="e#16149#20329#0" expanded="true" />
-                  <marker date="1474749962000" expanded="true" signature="11:37" ph="Tables Ext..." />
-                  <marker date="1474749962000" expanded="true" signature="46:64" ph="Vladimir S..." />
-                  <marker date="1474749962000" expanded="true" signature="74:77" ph="0.1" />
-                  <marker date="1474749962000" expanded="true" signature="84:96" ph="2016-06-06" />
-                  <marker date="1474749962000" expanded="true" signature="106:170" ph="[CC-BY-SA ..." />
-                  <marker date="1474749962000" expanded="true" signature="83351:83406" ph="..." />
-                  <marker date="1474749962000" expanded="true" signature="83882:83923" ph="..." />
-                </folding>
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ext_gfm_strikethrough_jira_spec.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_gfm_strikethrough_jira_spec.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="85">
-                <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-                <folding>
-                  <marker date="1474749962000" expanded="true" signature="11:48" ph="Gfm Strike..." />
-                  <marker date="1474749962000" expanded="true" signature="57:75" ph="Vladimir S..." />
-                  <marker date="1474749962000" expanded="true" signature="85:88" ph="0.1" />
-                  <marker date="1474749962000" expanded="true" signature="95:107" ph="2016-06-06" />
-                  <marker date="1474749962000" expanded="true" signature="117:181" ph="[CC-BY-SA ..." />
+                  <marker date="1474750148000" expanded="true" signature="373:386" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="389:411" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="414:615" ph="...AST..." />
+                  <marker date="1474750148000" expanded="true" signature="726:749" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="752:774" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="777:1032" ph="...AST..." />
+                  <marker date="1474750148000" expanded="true" signature="1185:1208" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="1211:1233" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="1236:1490" ph="...AST..." />
+                  <marker date="1474750148000" expanded="true" signature="1603:1618" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="1621:1644" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="1647:1896" ph="...AST..." />
+                  <marker date="1474750148000" expanded="true" signature="2003:2028" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="2031:2064" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="2067:2343" ph="...AST..." />
+                  <marker date="1474750148000" expanded="true" signature="2462:2487" ph="...source..." />
+                  <marker date="1474750148000" expanded="true" signature="2490:2513" ph="...HTML..." />
+                  <marker date="1474750148000" expanded="true" signature="2516:2818" ph="...AST..." />
                 </folding>
               </first_editor>
               <second_editor />
@@ -390,7 +313,6 @@
         <option value="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />
         <option value="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
         <option value="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
         <option value="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
         <option value="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitor.java" />
@@ -495,7 +417,6 @@
         <option value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark/FlexmarkTestSuite.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="/Markdown Fragment (jira_converter_ast_spec.md:8025).md" />
-        <option value="$PROJECT_DIR$/central-pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
@@ -555,6 +476,8 @@
         <option value="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkJiraRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-wikilink/src/test/resources/ext_wikilink_jira_spec.md" />
         <option value="$PROJECT_DIR$/VERSION.md" />
+        <option value="$PROJECT_DIR$/central-pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" />
       </list>
     </option>
   </component>
@@ -903,7 +826,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-integration-test" />
+              <option name="myItemId" value="flexmark-ext-zzzzzz" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -918,6 +841,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="flexmark-ext-zzzzzz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-zzzzzz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zzzzzz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-zzzzzz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2486,13 +2469,6 @@
       <workItem from="1473275241758" duration="114000" />
       <workItem from="1473386005362" duration="1776000" />
     </task>
-    <task id="LOCAL-00068" summary="refactor dir structure">
-      <created>1467292327322</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1467292327322</updated>
-    </task>
     <task id="LOCAL-00069" summary="move doc post processors to run last">
       <created>1467295367081</created>
       <option name="number" value="00069" />
@@ -2829,7 +2805,14 @@
       <option name="project" value="LOCAL" />
       <updated>1474502890692</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="add jira converter and JIRA rendering support to extensions.">
+      <created>1474752857888</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1474752857888</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -3021,7 +3004,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add sim toc as per Markdown Nav toc element with options parsing, rendering and toc generation" />
     <MESSAGE value="move option parsers to core from toc extension" />
     <MESSAGE value="add block parser factory dependencies" />
     <MESSAGE value="fix pathological note" />
@@ -3046,7 +3028,8 @@
     <MESSAGE value="remove sudo:false, builds failing" />
     <MESSAGE value="restore travis.yml" />
     <MESSAGE value="add option" />
-    <option name="LAST_COMMIT_MESSAGE" value="add option" />
+    <MESSAGE value="add jira converter and JIRA rendering support to extensions." />
+    <option name="LAST_COMMIT_MESSAGE" value="add jira converter and JIRA rendering support to extensions." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -3326,20 +3309,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-test-util/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -3999,6 +3968,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -4043,14 +4013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5678">
           <caret line="334" column="54" selection-start-line="334" selection-start-column="54" selection-end-line="334" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/central-pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -4168,29 +4130,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/resources/ext_zzzzzz_jira_spec.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="680">
-            <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-            <folding>
-              <marker date="1474746634000" expanded="true" signature="11:37" ph="Zzzzzz Ext..." />
-              <marker date="1474746634000" expanded="true" signature="63:75" ph="2016-06-06" />
-              <marker date="1474746634000" expanded="true" signature="85:149" ph="[CC-BY-SA ..." />
-            </folding>
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/JiraConverterExtension.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -4203,22 +4142,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="65" column="104" selection-start-line="65" selection-start-column="73" selection-end-line="65" selection-end-column="104" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/ExtZzzzzzTestSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/JiraZzzzzzSpecTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4509,24 +4432,51 @@
           <first_editor relative-caret-position="85">
             <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
             <folding>
-              <element signature="e#343#908#0" expanded="true" />
-              <element signature="e#1033#1553#0" expanded="true" />
-              <element signature="e#1692#2494#0" expanded="true" />
-              <element signature="e#2646#3685#0" expanded="true" />
-              <element signature="e#3828#4727#0" expanded="true" />
-              <element signature="e#4888#5773#0" expanded="true" />
-              <element signature="e#5989#7277#0" expanded="true" />
-              <element signature="e#7513#8332#0" expanded="true" />
-              <element signature="e#8578#9679#0" expanded="true" />
-              <element signature="e#9834#10485#0" expanded="true" />
-              <element signature="e#10641#11314#0" expanded="true" />
-              <element signature="e#11808#15023#0" expanded="true" />
-              <element signature="e#16149#20329#0" expanded="true" />
               <marker date="1474749962000" expanded="true" signature="11:37" ph="Tables Ext..." />
               <marker date="1474749962000" expanded="true" signature="46:64" ph="Vladimir S..." />
               <marker date="1474749962000" expanded="true" signature="74:77" ph="0.1" />
               <marker date="1474749962000" expanded="true" signature="84:96" ph="2016-06-06" />
               <marker date="1474749962000" expanded="true" signature="106:170" ph="[CC-BY-SA ..." />
+              <marker date="1474749962000" expanded="true" signature="310:325" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="328:340" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="343:907" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="1004:1016" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="1019:1030" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="1033:1552" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="1649:1668" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="1671:1689" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="1692:2493" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="2590:2615" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="2618:2643" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="2646:3684" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="3781:3802" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="3805:3825" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="3828:4726" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="4823:4848" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="4851:4885" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="4888:5772" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="5898:5945" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="5948:5986" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="5989:7276" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="7460:7488" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="7491:7510" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="7513:8331" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="8503:8540" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="8543:8575" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="8578:9678" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="9793:9817" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="9820:9831" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="9834:10484" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="10597:10621" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="10624:10638" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="10641:11313" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="11445:11643" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="11646:11805" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="11808:15022" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="15155:15719" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="15722:16146" ph="...HTML..." />
+              <marker date="1474749962000" expanded="true" signature="16149:20328" ph="...AST..." />
+              <marker date="1474749962000" expanded="true" signature="30598:35382" ph="...HTML..." />
               <marker date="1474749962000" expanded="true" signature="83351:83406" ph="..." />
               <marker date="1474749962000" expanded="true" signature="83882:83923" ph="..." />
             </folding>
@@ -4546,6 +4496,9 @@
               <marker date="1474749962000" expanded="true" signature="85:88" ph="0.1" />
               <marker date="1474749962000" expanded="true" signature="95:107" ph="2016-06-06" />
               <marker date="1474749962000" expanded="true" signature="117:181" ph="[CC-BY-SA ..." />
+              <marker date="1474749962000" expanded="true" signature="423:430" ph="...source..." />
+              <marker date="1474749962000" expanded="true" signature="433:439" ph="...HTML..." />
+              <marker date="1474749962000" expanded="false" signature="442:599" ph="...AST..." />
             </folding>
           </first_editor>
           <second_editor />
@@ -4563,6 +4516,7 @@
               <marker date="1474749962000" expanded="true" signature="68:71" ph="0.1" />
               <marker date="1474749962000" expanded="true" signature="78:90" ph="2016-06-06" />
               <marker date="1474749962000" expanded="true" signature="100:164" ph="[CC-BY-SA ..." />
+              <marker date="1474749962000" expanded="true" signature="924:1001" ph="...HTML..." />
             </folding>
           </first_editor>
           <second_editor />
@@ -4591,6 +4545,7 @@
               <marker date="1474749535000" expanded="true" signature="11:29" ph="JiraConver..." />
               <marker date="1474749535000" expanded="true" signature="55:67" ph="2016-09-23" />
               <marker date="1474749535000" expanded="true" signature="77:141" ph="[CC-BY-SA ..." />
+              <marker date="1474749535000" expanded="true" signature="3638:3759" ph="...source..." />
             </folding>
           </first_editor>
           <second_editor />
@@ -4617,19 +4572,31 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
           <first_editor relative-caret-position="595">
-            <caret line="41" column="79" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
+            <caret line="41" column="48" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
             <folding>
-              <element signature="e#414#616#0" expanded="true" />
-              <element signature="e#777#1033#0" expanded="true" />
-              <element signature="e#1236#1491#0" expanded="true" />
-              <element signature="e#1647#1897#0" expanded="true" />
-              <element signature="e#2067#2344#0" expanded="true" />
-              <element signature="e#2516#2819#0" expanded="true" />
               <marker date="1474750148000" expanded="true" signature="11:40" ph="WikiLinks ..." />
               <marker date="1474750148000" expanded="true" signature="49:67" ph="Vladimir S..." />
               <marker date="1474750148000" expanded="true" signature="77:80" ph="0.1" />
               <marker date="1474750148000" expanded="true" signature="87:99" ph="2016-09-24" />
               <marker date="1474750148000" expanded="true" signature="109:173" ph="[CC-BY-SA ..." />
+              <marker date="1474750148000" expanded="true" signature="373:386" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="389:411" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="414:615" ph="...AST..." />
+              <marker date="1474750148000" expanded="true" signature="726:749" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="752:774" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="777:1032" ph="...AST..." />
+              <marker date="1474750148000" expanded="true" signature="1185:1208" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="1211:1233" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="1236:1490" ph="...AST..." />
+              <marker date="1474750148000" expanded="true" signature="1603:1618" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="1621:1644" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="1647:1896" ph="...AST..." />
+              <marker date="1474750148000" expanded="true" signature="2003:2028" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="2031:2064" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="2067:2343" ph="...AST..." />
+              <marker date="1474750148000" expanded="true" signature="2462:2487" ph="...source..." />
+              <marker date="1474750148000" expanded="true" signature="2490:2513" ph="...HTML..." />
+              <marker date="1474750148000" expanded="true" signature="2516:2818" ph="...AST..." />
             </folding>
           </first_editor>
           <second_editor />
@@ -4644,11 +4611,74 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="510">
-            <caret line="78" column="6" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
+          <first_editor relative-caret-position="476">
+            <caret line="76" column="6" selection-start-line="76" selection-start-column="6" selection-end-line="76" selection-end-column="6" />
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-test-util/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/central-pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/ExtZzzzzzTestSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/resources/ext_zzzzzz_jira_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="680">
+            <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <folding>
+              <marker date="1474746634000" expanded="true" signature="11:37" ph="Zzzzzz Ext..." />
+              <marker date="1474746634000" expanded="true" signature="63:75" ph="2016-06-06" />
+              <marker date="1474746634000" expanded="true" signature="85:149" ph="[CC-BY-SA ..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/src/test/java/com/vladsch/flexmark/ext/zzzzzz/JiraZzzzzzSpecTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="9" selection-start-line="21" selection-start-column="9" selection-end-line="21" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
