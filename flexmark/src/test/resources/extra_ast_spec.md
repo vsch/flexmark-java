@@ -5098,8 +5098,6 @@ Document[0, 59]
     Text[46, 57] chars:[46, 57, "this  … s not"]
 ````````````````````````````````
 
-without block quote to next blank line causes an interrupted list with a second list after the
-quote.
 
 ## Source Position Attribute
 

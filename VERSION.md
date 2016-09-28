@@ -4,7 +4,8 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
-- [0.5.00](#0500)
+- [0.5.1](#051)
+- [0.5.0](#050)
 - [0.4.17](#0417)
 - [0.4.16](#0416)
 - [0.4.15](#0415)
@@ -47,8 +48,14 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
-0.5.00
-------
+0.5.1
+-----
+
+- Add aside extension that behaves as block quotes with `|` marker and generates `<aside>` tags
+  instead of block quotes.
+
+0.5.0
+-----
 
 - Add table class option to tables extension
 

@@ -1,28 +1,30 @@
-package com.vladsch.flexmark.internal;
+package com.vladsch.flexmark.ext.aside.internal;
 
 import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockQuote;
 import com.vladsch.flexmark.ast.util.Parsing;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.ext.aside.AsideBlock;
+import com.vladsch.flexmark.ext.aside.AsideExtension;
+import com.vladsch.flexmark.internal.*;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BlockQuoteParser extends AbstractBlockParser {
+public class AsideBlockParser extends AbstractBlockParser {
 
-    private final BlockQuote block = new BlockQuote();
+    private final AsideBlock block = new AsideBlock();
     private final boolean continueToBlankLine;
     private final boolean ignoreBlankLine;
     private int lastWasBlankLine = 0;
 
-    public BlockQuoteParser(DataHolder options, BasedSequence marker) {
+    public AsideBlockParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
-        continueToBlankLine = options.get(Parser.BLOCK_QUOTE_TO_BLANK_LINE);
-        ignoreBlankLine = options.get(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE);
+        continueToBlankLine = options.get(AsideExtension.EXTEND_TO_BLANK_LINE);
+        ignoreBlankLine = options.get(AsideExtension.IGNORE_BLANK_LINE);
     }
 
     @Override
@@ -41,7 +43,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     @Override
-    public BlockQuote getBlock() {
+    public AsideBlock getBlock() {
         return block;
     }
 
@@ -78,7 +80,12 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     static boolean isMarker(ParserState state, int index) {
         CharSequence line = state.getLine();
-        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '>';
+        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '|';
+    }
+
+    static boolean endsWithMarker(BasedSequence line) {
+        int tailBlanks = line.countTrailing(BasedSequenceImpl.WHITESPACE_NBSP_CHARS);
+        return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == '|';
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -126,13 +133,13 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
-            if (isMarker(state, nextNonSpace)) {
+            if (isMarker(state, nextNonSpace) && !endsWithMarker(state.getLine())) {
                 int newColumn = state.getColumn() + state.getIndent() + 1;
                 // optional following space or tab
                 if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {
                     newColumn++;
                 }
-                return BlockStart.of(new BlockQuoteParser(state.getProperties(), state.getLine().subSequence(nextNonSpace, nextNonSpace + 1))).atColumn(newColumn);
+                return BlockStart.of(new AsideBlockParser(state.getProperties(), state.getLine().subSequence(nextNonSpace, nextNonSpace + 1))).atColumn(newColumn);
             } else {
                 return BlockStart.none();
             }

@@ -2,6 +2,7 @@ package com.vladsch.flexmark;
 
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
+import com.vladsch.flexmark.ext.aside.ExtAsideTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
 import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
@@ -30,6 +31,7 @@ import org.junit.runners.Suite;
         CoreTestSuite.class,
         ExtAbbreviationTestSuite.class,
         ExtAnchorLinkTestSuite.class,
+        ExtAsideTestSuite.class,
         ExtAutolinkTestSuite.class,
         ExtDefinitionTestSuite.class,
         ExtEmojiTestSuite.class,

@@ -45,7 +45,7 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
             rendererBuilder.nodeRendererFactory(JiraConverterNodeRenderer::new);
             // rendererBuilder.linkResolverFactory(new JiraConverterLinkResolver.Factory());
             // rendererBuilder.attributeProviderFactory(new JiraConverterAttributeProvider.Factory());
-        } else {
+        } else if (!rendererType.equals("JIRA")) {
             throw new IllegalStateException("Non HTML Renderer is already set to " + rendererType);
         }
     }

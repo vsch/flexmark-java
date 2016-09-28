@@ -16,10 +16,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
     <orderEntry type="library" scope="TEST" name="org.openjdk.jmh:jmh-core:1.12" level="project" />
     <orderEntry type="library" scope="TEST" name="org.openjdk.jmh:jmh-generator-annprocess:1.12" level="project" />
-    <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
+    <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" />
@@ -27,6 +26,7 @@
     <orderEntry type="module" module-name="flexmark-ext-footnotes" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
     <orderEntry type="module" module-name="flexmark-ext-tables" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
