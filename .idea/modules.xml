@@ -25,6 +25,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" filepath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java.iml" filepath="$PROJECT_DIR$/flexmark-java.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" filepath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" filepath="$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" filepath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util/flexmark-util.iml" filepath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />

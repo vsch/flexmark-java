@@ -9,7 +9,6 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

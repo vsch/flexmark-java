@@ -6,7 +6,6 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
@@ -34,5 +33,8 @@
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="module" module-name="flexmark-jira-parser" />
   </component>
 </module>
