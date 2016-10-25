@@ -54,6 +54,8 @@ flexmark-java
 - Add aside extension that behaves as block quotes with `|` marker and generates `<aside>` tags
   instead of block quotes.
 
+- Add multi-line url image links option
+
 0.5.0
 -----
 

@@ -173,7 +173,7 @@ Progress
         - [x] Jekyll front matter
         - [ ] GitBook link URL encoding
         - [x] HTML comment nodes: Block and Inline
-        - [ ] Multi-line Image URLs
+        - [x] Multi-line Image URLs
         - [x] Spec Example Element
     - Commonmark Syntax suppression
         - [x] Manual loose lists

@@ -40,6 +40,9 @@ public class SegmentedSequence extends BasedSequenceImpl {
             }
             return 0;
         }
+        
+        // ensure that 0 length end returns start
+        if (length == 0) return iMax > 0 ? baseOffsets[baseStartOffset] : 0; 
         return iMax > 0 ? baseOffsets[baseStartOffset + length - 1] + 1 : 0;
     }
 

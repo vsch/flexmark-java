@@ -4790,6 +4790,156 @@ Document[0, 23]
 ````````````````````````````````
 
 
+## Multi-Line Image URL
+
+not parsed, invalid end
+
+```````````````````````````````` example(Multi-Line Image URL: 1) options(multi-line-image-url)
+![ref](/url1?
+    )
+.
+<p><img src="/url1?" alt="ref" /></p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Image[0, 19] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[18, 18] linkClose:[18, 19, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+empty content
+
+```````````````````````````````` example(Multi-Line Image URL: 2) options(multi-line-image-url)
+![ref](/url1?
+)
+.
+<p><img src="/url1?" alt="ref" /></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Image[0, 15] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 14] linkClose:[14, 15, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+empty content
+
+```````````````````````````````` example(Multi-Line Image URL: 3) options(multi-line-image-url)
+![ref](/url1?
+   )
+.
+<p><img src="/url1?" alt="ref" /></p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Image[0, 18] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[17, 17] linkClose:[17, 18, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+simple content
+
+```````````````````````````````` example(Multi-Line Image URL: 4) options(multi-line-image-url)
+![ref](/url1?
+one line
+)
+.
+<p><img src="/url1?one%20line%0A" alt="ref" /></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    Image[0, 24] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 23, "one line\n"] linkClose:[23, 24, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+simple content
+
+```````````````````````````````` example(Multi-Line Image URL: 5) options(multi-line-image-url)
+![ref](/url1?
+one line
+two line
+)
+.
+<p><img src="/url1?one%20line%0Atwo%20line%0A" alt="ref" /></p>
+.
+Document[0, 34]
+  Paragraph[0, 34]
+    Image[0, 33] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 32, "one line\ntwo line\n"] linkClose:[32, 33, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+false title
+
+```````````````````````````````` example(Multi-Line Image URL: 6) options(multi-line-image-url)
+![ref](/url1?
+one line
+"false title"
+ "real title")
+.
+<p><img src="/url1?one%20line%0A%22false%20title%22%0A" alt="ref" title="real title" /></p>
+.
+Document[0, 52]
+  Paragraph[0, 52]
+    Image[0, 51] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 37, "one line\n\"false title\"\n"] titleOpen:[38, 39, "\""] title:[39, 49, "real title"] titleClose:[49, 50, "\""] linkClose:[50, 51, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+````````````````````````````````
+
+
+trailing text
+
+```````````````````````````````` example(Multi-Line Image URL: 7) options(multi-line-image-url)
+![ref](/url1?
+one line
+two line
+) trailing text
+.
+<p><img src="/url1?one%20line%0Atwo%20line%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 48]
+  Paragraph[0, 48]
+    Image[0, 33] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 32, "one line\ntwo line\n"] linkClose:[32, 33, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[33, 47] chars:[33, 47, " trai …  text"]
+````````````````````````````````
+
+
+encoding of &, =
+
+```````````````````````````````` example(Multi-Line Image URL: 8) options(multi-line-image-url)
+![ref](/url1?
+one = 1 & line
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20&amp;%20line%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 45]
+  Paragraph[0, 45]
+    Image[0, 30] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 29, "one = 1 & line\n"] linkClose:[29, 30, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[30, 44] chars:[30, 44, " trai …  text"]
+````````````````````````````````
+
+
+encoding of embedded EOL
+
+```````````````````````````````` example(Multi-Line Image URL: 9) options(multi-line-image-url)
+![ref](/url1?
+one = 1 & line \\
+line two \\
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20&amp;%20line%20%5C%5C%0Aline%20two%20%5C%5C%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 60]
+  Paragraph[0, 60]
+    Image[0, 45] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 44, "one = 1 & line \\\nline two \\\n"] linkClose:[44, 45, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[45, 59] chars:[45, 59, " trai …  text"]
+````````````````````````````````
+
+
 ## Fenced Code
 
 Option not to match closing fence characters to opening ones

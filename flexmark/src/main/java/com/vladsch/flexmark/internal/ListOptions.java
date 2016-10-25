@@ -6,7 +6,33 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
 public class ListOptions {
+
+    public enum ListType {
+        FIXED_INDENT,
+        LIST_RELATIVE,
+        LIST_ITEM_RELATIVE;
+
+        public static final ListType DEFAULT = LIST_ITEM_RELATIVE;
+    }
+
+    public enum ListRelativeSubType {
+        NONE,
+        FIRST_LIST_FIXED_INDENT,
+        FIRST_LIST_FIRST_ITEM_RELATIVE;
+
+        public static final ListRelativeSubType DEFAULT = NONE;
+    }
+
+    public enum RelativeType {
+        MARKER_RELATIVE,
+        CONTENT_RELATIVE;
+
+        public static final RelativeType DEFAULT = CONTENT_RELATIVE;
+    }
+
     final public boolean endOnDoubleBlank;
     final public boolean autoLoose;
     final public boolean looseOnPrevLooseItem;
@@ -48,11 +74,11 @@ public class ListOptions {
         this.listContentIndentOverridesCodeOffset = options.get(Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET);
         this.overIndentsToFirstItem = options.get(Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM);
     }
-    
+
     public boolean isTightListItem(ListItem node) {
         return node.getFirstChild() == null || !autoLoose && node.isTight() || autoLoose && node.isInTightList();
     }
-    
+
     public boolean isInTightListItem(Paragraph node) {
         Block parent = node.getParent();
         return parent instanceof ListItem && (!autoLoose && ((ListItem) parent).isParagraphInTightListItem(node) || autoLoose && ((ListItem) parent).isInTightList());

@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 public class ListItemParser extends AbstractBlockParser {
 
     private final ListItem block;
-
+    
     /**
      * Minimum number of columns that the content has to be indented (relative to the containing block) to be part of
      * this list item.
@@ -30,8 +30,8 @@ public class ListItemParser extends AbstractBlockParser {
 
         this.markerColumn = markerColumn;
         this.contentColumn = contentColumn;
-
         this.contentIndent = contentIndent;
+
         mismatchedItemToSubItem = this.options.itemTypeMatch && this.options.itemMismatchToSubItem;
         myParsing = parsing;
 
