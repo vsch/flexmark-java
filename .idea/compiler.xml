@@ -26,6 +26,7 @@
         <module name="flexmark" />
         <module name="flexmark-ext-abbreviation" />
         <module name="flexmark-ext-anchorlink" />
+        <module name="flexmark-ext-aside" />
         <module name="flexmark-ext-autolink" />
         <module name="flexmark-ext-definition" />
         <module name="flexmark-ext-emoji" />
@@ -53,6 +54,7 @@
       <module name="flexmark" target="8" />
       <module name="flexmark-ext-abbreviation" target="8" />
       <module name="flexmark-ext-anchorlink" target="8" />
+      <module name="flexmark-ext-aside" target="8" />
       <module name="flexmark-ext-autolink" target="8" />
       <module name="flexmark-ext-definition" target="8" />
       <module name="flexmark-ext-emoji" target="8" />

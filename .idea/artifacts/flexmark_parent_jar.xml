@@ -18,7 +18,19 @@
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="flexmark-ext-gfm-tasklist" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/autolink-0.4.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.nibor.autolink:autolink:0.4.0" />
+      <element id="module-output" name="flexmark-ext-anchorlink" />
+      <element id="module-output" name="flexmark-ext-aside" />
+      <element id="module-output" name="flexmark-ext-definition" />
+      <element id="module-output" name="flexmark-ext-escaped-character" />
+      <element id="module-output" name="flexmark-ext-jekyll-front-matter" />
+      <element id="module-output" name="flexmark-ext-spec-example" />
+      <element id="module-output" name="flexmark-ext-toc" />
+      <element id="module-output" name="flexmark-ext-typographic" />
+      <element id="module-output" name="flexmark-ext-zzzzzz" />
+      <element id="module-output" name="flexmark-jira-converter" />
+      <element id="module-output" name="flexmark-jira-parser" />
+      <element id="module-output" name="flexmark-util" />
     </root>
   </artifact>
 </component>

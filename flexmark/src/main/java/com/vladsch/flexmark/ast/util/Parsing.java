@@ -37,6 +37,10 @@ public class Parsing {
     final public Pattern EMAIL_AUTOLINK;
     final public Pattern AUTOLINK;
     final public Pattern SPNL;
+    final public Pattern SPNL_URL;
+    final public Pattern SPNI;
+    final public Pattern SP;
+    final public Pattern REST_OF_LINE;
     final public Pattern UNICODE_WHITESPACE_CHAR;
     final public Pattern WHITESPACE;
     final public Pattern FINAL_SPACE;
@@ -100,7 +104,11 @@ public class Parsing {
                 "^<([a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)>");
         this.AUTOLINK = Pattern.compile(
                 "^<[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
-        this.SPNL = Pattern.compile("^ *(?:\n *)?");
+        this.SPNL = Pattern.compile("^(?: |\t)*(?:\n(?: |\t)*)?");
+        this.SPNL_URL = Pattern.compile("^(?: |\t)*\n");
+        this.SPNI = Pattern.compile("^ {0,3}");
+        this.SP = Pattern.compile("^(?: |\t)*");
+        this.REST_OF_LINE = Pattern.compile("^.*\n");
         this.UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
         this.WHITESPACE = Pattern.compile("\\s+");
         this.FINAL_SPACE = Pattern.compile(" *$");

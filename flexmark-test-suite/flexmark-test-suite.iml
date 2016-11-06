@@ -6,32 +6,35 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="junit:junit:4.12" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-aside" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-java" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="module" module-name="flexmark-jira-parser" />
   </component>
 </module>

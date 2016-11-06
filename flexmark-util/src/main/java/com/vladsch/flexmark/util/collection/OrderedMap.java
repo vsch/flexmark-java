@@ -5,6 +5,7 @@ import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     final private OrderedSet<K> keySet;
@@ -216,20 +217,10 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return old;
     }
     
-    public V putIfMissing(K k, V v) {
+    public V computeIfAbsent(K k, Function<? super K, ? extends V> runnableValue) {
         int index = keySet.indexOf(k);
         if (index == -1) {
-            keySet.add(k, v);
-            return v;
-        }
-
-        return valueList.get(index);
-    }
-
-    public V putIfMissing(K k, RunnableValue<V> runnableValue) {
-        int index = keySet.indexOf(k);
-        if (index == -1) {
-            V v = runnableValue.run();
+            V v = runnableValue.apply(k);
             keySet.add(k, v);
             return v;
         }

@@ -12,7 +12,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 
 public class ListBlockParser extends AbstractBlockParser {
-
     private final ListBlock block;
     private final ListOptions options;
     final int itemIndent;
@@ -164,7 +163,7 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         if (inParagraph) {
-            // Empty list item can not interrupt a paragraph.
+            // Empty list item cannot interrupt a paragraph.
             if (!hasContent) {
                 return null;
             }

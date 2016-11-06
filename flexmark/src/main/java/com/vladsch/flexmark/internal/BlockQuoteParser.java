@@ -47,7 +47,6 @@ public class BlockQuoteParser extends AbstractBlockParser {
 
     @Override
     public void closeBlock(ParserState state) {
-        // TODO: remove lastWasBlankLine count number of lines from the end of the content
         block.setCharsFromContent();
     }
 

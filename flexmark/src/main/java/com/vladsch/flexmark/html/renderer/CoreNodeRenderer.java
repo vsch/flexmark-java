@@ -10,6 +10,7 @@ import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -256,11 +257,17 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
+        if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
+            html.line().srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
+        }
         if (node.hasChildren()) {
             // inner blocks handle rendering
             context.renderChildren(node);
         } else {
             renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+        }
+        if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
+            html.unIndent().tag("/div").line();
         }
     }
 
@@ -289,7 +296,13 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
+        //if (context.getHtmlOptions().sourceWrapInlineHtml) {
+        //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
+        //}
         renderInlineHtml(node, context, html, context.getHtmlOptions().suppressInlineHtml, context.getHtmlOptions().escapeInlineHtml);
+        //if (context.getHtmlOptions().sourceWrapInlineHtml) {
+        //    html.tag("/span");
+        //}
     }
 
     private void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) {
@@ -345,8 +358,15 @@ public class CoreNodeRenderer implements NodeRenderer {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
 
             ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null);
+            String url = resolvedLink.getUrl();
 
-            html.attr("src", resolvedLink.getUrl());
+            if (!node.getUrlContent().isEmpty()) {
+                // reverse URL encoding of =, &
+                String content = Escaping.percentEncodeUrl(node.getUrlContent().toString()).replace("+", "%20").replace("%3D", "=").replace("%26", "&amp;");
+                url += content;
+            }
+
+            html.attr("src", url);
             html.attr("alt", altText);
             if (node.getTitle().isNotNull()) {
                 html.attr("title", node.getTitle().unescape());

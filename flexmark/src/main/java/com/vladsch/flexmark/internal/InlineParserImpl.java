@@ -69,11 +69,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         //final public boolean parseInlineAnchorLinks;
         final public boolean parseMultiLineImageUrls;
         //final public boolean parseGitHubIssueMarker;
+        final public boolean hardLineBreakLimit;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
             //parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
             parseMultiLineImageUrls = options.get(Parser.PARSE_MULTI_LINE_IMAGE_URLS);
+            hardLineBreakLimit = options.get(Parser.HARD_LINE_BREAK_LIMIT);
             //parseGitHubIssueMarker = options.get(PARSE_GITHUB_ISSUE_MARKER);
         }
     }
@@ -587,13 +589,51 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
-     * Parse zero or more space characters, including at most one newline.
+     * Parse zero or more space characters, including at most one newline and zero or more spaces.
      *
      * @return true
      */
     private boolean spnl() {
         match(myParsing.SPNL);
         return true;
+    }
+
+    /**
+     * Parse zero or more non-indent spaces
+     *
+     * @return true
+     */
+    private boolean nonIndentSp() {
+        match(myParsing.SPNI);
+        return true;
+    }
+
+    /**
+     * Parse zero or more spaces
+     *
+     * @return true
+     */
+    private boolean sp() {
+        match(myParsing.SP);
+        return true;
+    }
+
+    /**
+     * Parse zero or more space characters, including at one newline.
+     *
+     * @return true
+     */
+    private boolean spnlUrl() {
+        return match(myParsing.SPNL_URL) != null;
+    }
+
+    /**
+     * Parse to end of line, including EOL
+     *
+     * @return characters parsed or null if no end of line
+     */
+    private BasedSequence toEOL() {
+        return match(myParsing.REST_OF_LINE);
     }
 
     /**
@@ -615,7 +655,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             BasedSequence literal = text.getChars();
             Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
             int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
-            appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - 3, index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
+            appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - (options.hardLineBreakLimit ? 3 : spaces + 1), index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
             if (spaces > 0) {
                 if (literal.length() > spaces) {
                     lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
@@ -643,7 +683,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected boolean parseBackslash() {
         index++;
         if (peek() == '\n') {
-            appendNode(new HardLineBreak(input.subSequence(index, index + 1)));
+            appendNode(new HardLineBreak(input.subSequence(index - 1, index + 1)));
             index++;
         } else if (index < input.length() && myParsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
             appendText(input, index - 1, index + 1);
@@ -850,18 +890,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         nestedBrackets = 0;
-        //Bracket nextBracket = opener;
-        //opener = opener.previous;
-        //hadBang = opener.image;
-        //while (opener != null) {
-        //    if (!hadBang && opener.index + 1 == nextBracket.index) {
-        //        nestedBrackets++;
-        //    }
-        //
-        //    if (opener.image) hadBang = true;
-        //    nextBracket = opener;
-        //    opener = opener.previous;
-        //}
 
         // Check to see if we have a link/image
         BasedSequence dest = null;
@@ -873,8 +901,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean refIsDefined = false;
         BasedSequence linkOpener = SubSequence.NULL;
         BasedSequence linkCloser = SubSequence.NULL;
-        opener = this.lastBracket;
         BasedSequence bareRef = SubSequence.NULL;
+        BasedSequence imageUrlContent = null;
 
         // Inline link?
         if (peek() == '(') {
@@ -882,16 +910,43 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             index++;
             spnl();
             if ((dest = parseLinkDestination()) != null) {
-                spnl();
-                // title needs a whitespace before
-                if (myParsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
-                    title = parseLinkTitle();
+                if (options.parseMultiLineImageUrls && opener.image && !dest.startsWith("<") && dest.endsWith("?") && spnlUrl()) {
+                    // possible multi-line image url
+                    int contentStart = index;
+                    int contentEnd = contentStart;
+                    BasedSequence multiLineTitle = null;
+
+                    while (true) {
+                        sp();
+                        multiLineTitle = parseLinkTitle();
+                        if (multiLineTitle != null) sp();
+
+                        if (peek() == ')') {
+                            linkCloser = input.subSequence(index, index + 1);
+                            index++;
+                            imageUrlContent = input.subSequence(contentStart, contentEnd);
+                            title = multiLineTitle;
+                            isLinkOrImage = true;
+                            break;
+                        }
+
+                        BasedSequence restOfLine = toEOL();
+                        if (restOfLine == null) break;
+                        contentEnd = index;
+                    }
+                } else {
                     spnl();
-                }
-                if (peek() == ')') {
-                    linkCloser = input.subSequence(index, index + 1);
-                    index++;
-                    isLinkOrImage = true;
+                    // title needs a whitespace before
+                    if (myParsing.WHITESPACE.matcher(input.subSequence(index - 1, index)).matches()) {
+                        title = parseLinkTitle();
+                        spnl();
+                    }
+
+                    if (peek() == ')') {
+                        linkCloser = input.subSequence(index, index + 1);
+                        index++;
+                        isLinkOrImage = true;
+                    }
                 }
             }
         } else {
@@ -1050,6 +1105,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 inlineLinkNode.setLinkOpeningMarker(linkOpener);
                 inlineLinkNode.setLinkClosingMarker(linkCloser);
                 inlineLinkNode.setTextChars(isImage ? input.subSequence(opener.index - 1, startIndex) : input.subSequence(opener.index, startIndex));
+
+                if (imageUrlContent != null) {
+                    ((Image) insertNode).setUrlContent(imageUrlContent);
+                }
+
                 insertNode.setCharsFromContent();
             }
 
@@ -1131,19 +1191,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     protected BasedSequence parseLinkDestination() {
         BasedSequence res = match(myParsing.LINK_DESTINATION_BRACES);
-        if (res != null) { // chop off surrounding <..>:
-            if (res.length() == 2) {
-                return res;
-            } else {
-                return res;
-            }
+        if (res != null) {
+            return res;
         } else {
-            res = match(myParsing.LINK_DESTINATION);
-            if (res != null) {
-                return res;
-            } else {
-                return null;
-            }
+            return match(myParsing.LINK_DESTINATION);
         }
     }
 
@@ -1423,7 +1474,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     /**
      * Remove the delimiter and the corresponding text node. For used delimiters, e.g. `*` in `*foo*`.
-     * 
+     *
      * @param delim delimiter to remove
      */
     protected void removeDelimiterAndNode(Delimiter delim) {
