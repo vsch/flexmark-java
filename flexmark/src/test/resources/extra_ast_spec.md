@@ -5249,6 +5249,25 @@ Document[0, 59]
 ````````````````````````````````
 
 
+## Hard Line Break Limit
+
+Only attribute two last spaces of a hard line break space sequence
+
+```````````````````````````````` example(Hard Line Break Limit: 1) options(hard-line-break-limit)
+hard    
+line breaks
+.
+<p>hard<br />
+line breaks</p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 4] chars:[0, 4, "hard"]
+    HardLineBreak[6, 9]
+    Text[9, 20] chars:[9, 20, "line  … reaks"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

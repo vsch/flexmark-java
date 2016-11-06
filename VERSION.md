@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [0.6.1](#061)
 - [0.6.0](#060)
 - [0.5.0](#050)
 - [0.4.17](#0417)
@@ -47,6 +48,11 @@ flexmark-java
 - [0.1.2](#012)
 - [0.1.1](#011)
 - [0.1.0](#010)
+
+0.6.1
+-----
+
+- Add test for `Parser.HARD_LINE_BREAK_LIMIT` option
 
 0.6.0
 -----

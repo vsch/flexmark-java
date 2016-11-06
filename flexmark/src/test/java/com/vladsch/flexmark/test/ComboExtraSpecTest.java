@@ -73,6 +73,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true));
         optionsMap.put("src-wrap-html", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_HTML, true));
         optionsMap.put("src-wrap-blocks", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS, true));
+        optionsMap.put("hard-line-break-limit", new MutableDataSet().set(Parser.HARD_LINE_BREAK_LIMIT, true));
         //optionsMap.put("src-wrap-inline", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_INLINE_HTML, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)

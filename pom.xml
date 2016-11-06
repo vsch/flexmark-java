@@ -43,8 +43,8 @@
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-ext-zzzzzz</module>
         <module>flexmark-integration-test</module>
-        <module>flexmark-test-util</module>
         <module>flexmark-jira-converter</module>
+        <module>flexmark-test-util</module>
         <module>flexmark-util</module>
     </modules>
 
