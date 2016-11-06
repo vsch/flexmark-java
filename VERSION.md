@@ -4,7 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
-- [0.5.1](#051)
+- [0.6.0](#060)
 - [0.5.0](#050)
 - [0.4.17](#0417)
 - [0.4.16](#0416)
@@ -48,13 +48,21 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
-0.5.1
+0.6.0
 -----
 
 - Add aside extension that behaves as block quotes with `|` marker and generates `<aside>` tags
   instead of block quotes.
 
 - Add multi-line url image links option
+
+- Add `HtmlRenderer.SOURCE_WRAP_HTML` and `HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS` options to wrap
+  HTML blocks in `div` with source position information attribute.
+
+- Fix #10, Wrong startOffset in HardLineBreak
+
+- Add `Parser.HARD_LINE_BREAK_LIMIT` false by default, when true only the last 2 spaces of a
+  hard line break will be part of the node. The rest are part of the previous text node.
 
 0.5.0
 -----
@@ -78,14 +86,14 @@ flexmark-java
   register a renderer. Current values are: `HTML` and `JIRA` others may be added by extensions
 
 - Change: standard extensions that can be mapped to JIRA formatted text to implement JIRA
-  renderer. 
+  renderer.
 
 - Add: `JIRA` rendering for autolink, emoji, strikethrough, tables and wiki link extensions.
 
 0.4.17
 ------
 
-- Factor out utilities to a separate module to eliminate maven pom cycles 
+- Factor out utilities to a separate module to eliminate maven pom cycles
 
 - Prepare for maven release
 
@@ -98,7 +106,7 @@ flexmark-java
 - Add source position attribute to list item tags
 
 - Rename `TablesExtension.HEADER_SEPARATOR_COLUMNS` to
-  `TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH` and implement this option in the table parser. 
+  `TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH` and implement this option in the table parser.
 
 - Fix child paragraphs of list items would not be wrapped in `p` tags if list auto-loose option
   was disabled and the item was not loose
@@ -129,7 +137,7 @@ flexmark-java
   list items that do not generate a `<p>` wrapper for their text. :warning: Only works if source
   position attribute is set to non-empty value.
 
-- Add `AttributablePart` instances: 
+- Add `AttributablePart` instances:
     - `CoreNodeRenderer.CODE_CONTENT` to mark the `code` tag part of fenced code and indented
       code
     - `CoreNodeRenderer.PARAGRAPH_LINE` to mark line spans of paragraphs source positions, list
@@ -171,10 +179,10 @@ flexmark-java
 
 - Add `TableRow.rowNumber` in `flexmark-ext-tables` which is the row number within the table
   section. Allowing easy first/even/odd determination for rendering where the browser does not
-  have CSS capabilities to handle this. 
+  have CSS capabilities to handle this.
 
 - Add `TaskListExtension.CONVERT_ORDERED_LIST_ITEMS` option to convert ordered list items to
-  task list items, default set to true. 
+  task list items, default set to true.
 
 - Change `TaskListItem.isOrderedItem()` added to allow distinguishing ordered from unordered
   task list items.
@@ -186,7 +194,7 @@ flexmark-java
   for cases where wiki links are not allowed in the document but for purposes of error
   annotations they should still be parsed.
 
-- Fix `Attributes.getValue(String)` was not checking if the attribute was missing, causing NPE. 
+- Fix `Attributes.getValue(String)` was not checking if the attribute was missing, causing NPE.
 
 - Change rename `HtmlRenderer.LANGUAGE_CLASS_PREFIX` to
   `HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX`
@@ -210,7 +218,7 @@ flexmark-java
 
 - Add `NodeAdaptingVisitor`, `NodeAdaptingVisitHandler` and `NodeAdaptedVisitor` to handle
   customized node mapping functions for easier multiplexing from base class Node to specific
-  node subclasses. 
+  node subclasses.
 
 - Change `Visitor`, `VisitHandler`, `NodeVisitor` to use the new adapting node visitor classes
 
@@ -221,7 +229,7 @@ flexmark-java
   link resolving mapping.
 
 - Add Node parameter to `LinkResolver.resolveLink(Node, NodeRendererContext, ResolvedLink)` for
-  symmetry and to allow node specific link resolution mapping via `LinkResolverAdapter`. 
+  symmetry and to allow node specific link resolution mapping via `LinkResolverAdapter`.
 
 - Change `WikiLinkExtension.LINK_FILE_EXTENSION` default to `""`
 
@@ -241,40 +249,40 @@ flexmark-java
       does not match an existing list type. When false bullet list can contain ordered list items
       and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows mimicking
       different parser behavior: kramdown, GFM, Markdown.pl, ...
-    
+
     - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a sub
       item instead of starting a new list. When false a new list will be started.
       :information_source: only applicable if `Parser.LISTS_ITEM_TYPE_MATCH` is true.
-    
+
     - Change `Parser.ORDERED_LIST_DOT_ONLY` to `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`
-    
+
     - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item can
       interrupt a paragraph. i.e. start without having a blank line before
-    
+
     - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list sub
       item can interrupt the parent item's item text paragraph.
-    
+
     - Change `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to
       `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered list
       item can interrupt a paragraph. i.e. can start without having a blank line before.
       `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only true
       for items with 1. prefix, or any ordered item.
-    
+
     - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered list
       sub item can interrupt the parent item's item text paragraph.
       `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this is only true
       for items with 1. prefix, or any ordered item.
-    
+
     - Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
-    
+
     - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered item
       can interrupt or only one starting with 1. :information_source: only applies if
       `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` is true.
-    
+
     - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether any
       ordered item can interrupt or only one starting with 1. :information_source: only applies if
       `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
-    
+
 0.4.9
 -----
 
@@ -1009,7 +1017,7 @@ flexmark-java
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-    
+
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

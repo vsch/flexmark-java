@@ -171,7 +171,7 @@ Progress
         - [x] HTML blocks: all, non-comments, comments
     - Processor Extensions
         - [x] Jekyll front matter
-        - [ ] GitBook link URL encoding
+        - [x] GitBook link URL encoding. Not applicable
         - [x] HTML comment nodes: Block and Inline
         - [x] Multi-line Image URLs
         - [x] Spec Example Element

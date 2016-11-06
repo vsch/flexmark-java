@@ -6,5 +6,5 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboJiraConverterSpecTest.class,
 })
-public class ExtJiraConverterTestSuite {
+public class JiraConverterTestSuite {
 }

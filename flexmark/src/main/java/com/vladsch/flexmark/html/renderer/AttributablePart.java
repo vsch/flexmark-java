@@ -5,7 +5,7 @@ package com.vladsch.flexmark.html.renderer;
  */
 public class AttributablePart {
     final public static AttributablePart NODE = new AttributablePart("NODE");
-    final public static AttributablePart NODE_WITH_POSITION = new AttributablePart("NODE_WITH_POSITION");
+    final public static AttributablePart NODE_POSITION = new AttributablePart("NODE_POSITION");
     final public static AttributablePart LINK = new AttributablePart("LINK");
     final public static AttributablePart ID = new AttributablePart("ID");
     

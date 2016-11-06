@@ -4145,7 +4145,7 @@ bbb</p>
 Document[0, 18]
   Paragraph[0, 18]
     Text[0, 3] chars:[0, 3, "aaa"]
-    HardLineBreak[6, 9]
+    HardLineBreak[3, 9]
     Text[9, 12] chars:[9, 12, "bbb"]
 ````````````````````````````````
 
@@ -7341,7 +7341,7 @@ bar</p>
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3] chars:[0, 3, "foo"]
-    HardLineBreak[4, 5]
+    HardLineBreak[3, 5]
     Text[5, 8] chars:[5, 8, "bar"]
 ````````````````````````````````
 
@@ -12556,7 +12556,7 @@ baz</p>
 Document[0, 9]
   Paragraph[0, 9]
     Text[0, 3] chars:[0, 3, "foo"]
-    HardLineBreak[4, 5]
+    HardLineBreak[3, 5]
     Text[5, 8] chars:[5, 8, "baz"]
 ````````````````````````````````
 
@@ -12573,7 +12573,7 @@ baz</p>
 Document[0, 15]
   Paragraph[0, 15]
     Text[0, 3] chars:[0, 3, "foo"]
-    HardLineBreak[8, 11]
+    HardLineBreak[3, 11]
     Text[11, 14] chars:[11, 14, "baz"]
 ````````````````````````````````
 
@@ -12605,7 +12605,7 @@ bar</p>
 Document[0, 14]
   Paragraph[0, 14]
     Text[0, 3] chars:[0, 3, "foo"]
-    HardLineBreak[4, 5]
+    HardLineBreak[3, 5]
     Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
@@ -12640,7 +12640,7 @@ Document[0, 11]
   Paragraph[0, 11]
     Emphasis[0, 10] textOpen:[0, 1, "*"] text:[1, 9, "foo\\nbar"] textClose:[9, 10, "*"]
       Text[1, 4] chars:[1, 4, "foo"]
-      HardLineBreak[5, 6]
+      HardLineBreak[4, 6]
       Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
 

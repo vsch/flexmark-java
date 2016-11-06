@@ -245,12 +245,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean endsWith(String suffix) {
-        return matchCharsReversed(suffix, length());
+        return length() > 0 && matchCharsReversed(suffix, length());
     }
 
     @Override
     public boolean startsWith(String prefix) {
-        return matchChars(prefix, 0);
+        return length() > 0 && matchChars(prefix, 0);
     }
 
     @Override
@@ -311,7 +311,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean matchCharsReversed(String chars, int endIndex) {
-        return matchChars(chars, endIndex - chars.length());
+        return endIndex >= chars.length() && matchChars(chars, endIndex - chars.length());
     }
 
     @Override

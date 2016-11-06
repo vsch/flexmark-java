@@ -5398,9 +5398,85 @@ Document[0, 25]
 ````````````````````````````````
 
 
-Wrap individual paragraph lines in source position marked spans
+no source wrap HTML
 
 ```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
+<div>
+<p>HTML Block</p>
+</div>
+
+This is <span>inline html</span>
+.
+<div>
+<p>HTML Block</p>
+</div>
+<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+.
+Document[0, 65]
+  HtmlBlock[0, 31]
+  Paragraph[32, 65]
+    Text[32, 40] chars:[32, 40, "This is "]
+    HtmlInline[40, 46] chars:[40, 46, "<span>"]
+    Text[46, 57] chars:[46, 57, "inlin …  html"]
+    HtmlInline[57, 64] chars:[57, 64, "</span>"]
+````````````````````````````````
+
+
+source wrap HTML
+
+```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines, src-wrap-html)
+<div>
+<p>HTML Block</p>
+</div>
+
+This is <span>inline html</span>
+.
+<div md-pos="0-30">
+  <div>
+  <p>HTML Block</p>
+  </div>
+</div>
+<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+.
+Document[0, 65]
+  HtmlBlock[0, 31]
+  Paragraph[32, 65]
+    Text[32, 40] chars:[32, 40, "This is "]
+    HtmlInline[40, 46] chars:[40, 46, "<span>"]
+    Text[46, 57] chars:[46, 57, "inlin …  html"]
+    HtmlInline[57, 64] chars:[57, 64, "</span>"]
+````````````````````````````````
+
+
+source wrap HTML blocks
+
+```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines, src-wrap-blocks)
+<div>
+<p>HTML Block</p>
+</div>
+
+This is <span>inline html</span>
+.
+<div md-pos="0-30">
+  <div>
+  <p>HTML Block</p>
+  </div>
+</div>
+<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+.
+Document[0, 65]
+  HtmlBlock[0, 31]
+  Paragraph[32, 65]
+    Text[32, 40] chars:[32, 40, "This is "]
+    HtmlInline[40, 46] chars:[40, 46, "<span>"]
+    Text[46, 57] chars:[46, 57, "inlin …  html"]
+    HtmlInline[57, 64] chars:[57, 64, "</span>"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans
+
+```````````````````````````````` example(Source Position Attribute: 7) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5548,7 +5624,7 @@ Document[0, 456]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 8) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5569,7 +5645,7 @@ Document[0, 71]
 
 Wrap individual paragraph lines in source position marked spans tight list items
 
-```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 9) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -5616,7 +5692,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Source Position Attribute: 7) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 10) options(src-pos, src-pos-lines)
 - item
 
 - item

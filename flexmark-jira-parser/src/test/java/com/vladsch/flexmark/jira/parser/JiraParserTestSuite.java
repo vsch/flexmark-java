@@ -7,5 +7,5 @@ import org.junit.runners.Suite;
         ComboJiraParserSpecTest.class,
         // JiraJiraParserSpecTest.class,
 })
-public class ExtJiraParserTestSuite {
+public class JiraParserTestSuite {
 }
