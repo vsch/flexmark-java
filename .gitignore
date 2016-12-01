@@ -8,3 +8,4 @@ out/
 
 # Maven
 target/
+/.idea/workspace.xml
