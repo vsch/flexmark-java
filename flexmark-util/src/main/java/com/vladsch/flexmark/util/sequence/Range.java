@@ -52,6 +52,10 @@ public class Range {
         return myStart <= index && index < myEnd;
     }
 
+    public boolean contains(int start, int end) {
+        return myStart <= start && end <= myEnd;
+    }
+
     public boolean leads(int index) {
         return myEnd <= index;
     }
@@ -183,9 +187,29 @@ public class Range {
         return myStart == other.myEnd;
     }
 
-    public Range expandToInclude(Range other) {
-        return withRange(myStart > other.myStart ? other.myStart : myStart, myEnd < other.myEnd ? other.myEnd : myEnd);
+    public Range include( Range other) {
+        return other.isNull() ? (this.isNull() ? NULL : this) : expandToInclude(other);
     }
+
+    public Range include(int pos) {
+        return include(pos, pos);
+    }
+
+    public Range include(int start, int end) {
+        return this.isNull() ? new Range(start, end) : expandToInclude(start, end);
+    }
+
+    public Range expandToInclude( Range other) {
+        return expandToInclude(other.myStart, other.myEnd);
+    }
+
+    public Range expandToInclude(int start, int end) {
+        return withRange(myStart > start ? start : myStart, myEnd < end ? end : myEnd);
+    }
+
+    //public boolean equals(TextRange o) {
+    //    return myStart == o.getStartOffset() && myEnd == o.getEndOffset();
+    //}
 
     @Override
     public boolean equals(Object o) {

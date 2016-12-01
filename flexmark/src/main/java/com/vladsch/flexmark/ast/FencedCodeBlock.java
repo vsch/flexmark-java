@@ -14,7 +14,7 @@ public class FencedCodeBlock extends Block {
     @Override
     public void getAstExtra(StringBuilder out) {
         BasedSequence content = getContentChars();
-        int lines = getSegments().length;
+        int lines = getContentLines().size();
         segmentSpanChars(out, openingMarker, "open");
         segmentSpanChars(out, info, "info");
         segmentSpan(out, content, "content");
@@ -24,7 +24,7 @@ public class FencedCodeBlock extends Block {
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, info, closingMarker };
+        return new BasedSequence[] { openingMarker, info, getContentChars(), closingMarker };
     }
 
     public FencedCodeBlock() {

@@ -17,6 +17,7 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
@@ -312,10 +313,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:
-        while (contentChars.length() > 3 && contentChars.charAt(0) == '[') {
+        int leadingSpaces = contentChars.countLeading(BasedSequenceImpl.WHITESPACE_NO_EOL_CHARS);
+
+        while (leadingSpaces <= 3 && contentChars.length() > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
             int pos = parseReference(block, contentChars);
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, contentChars.length());
+            leadingSpaces = contentChars.countLeading(BasedSequenceImpl.WHITESPACE_NO_EOL_CHARS);
         }
 
         return contentChars.getStartOffset() - block.getChars().getStartOffset();
@@ -682,9 +686,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     protected boolean parseBackslash() {
         index++;
-        if (peek() == '\n') {
-            appendNode(new HardLineBreak(input.subSequence(index - 1, index + 1)));
-            index++;
+        if (peek() == '\n' || peek() == '\r') {
+            int charsMatched = peek(1) == '\n' ? 2 : 1;
+            appendNode(new HardLineBreak(input.subSequence(index - 1, index + charsMatched)));
+            index += charsMatched;
         } else if (index < input.length() && myParsing.ESCAPABLE.matcher(input.subSequence(index, index + 1)).matches()) {
             appendText(input, index - 1, index + 1);
             index++;

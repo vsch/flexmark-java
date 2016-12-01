@@ -51,7 +51,7 @@ Code fence starting with setext header marker
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
 ````````````````````````````````
 
 
@@ -64,7 +64,7 @@ Document[0, 20]
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
 ````````````````````````````````
 
 
@@ -199,6 +199,78 @@ Document[0, 46]
   Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "ref"] refClose:[11, 13, "]:"] url:[14, 19, "/url1"]
   Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] url:[27, 32, "/url2"]
   Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] url:[40, 45, "/url3"]
+````````````````````````````````
+
+
+## References 
+
+References with up to 3 leading blanks should be processed.
+
+```````````````````````````````` example References: 1
+[ref]
+
+ [ref]: /url1
+.
+<p><a href="/url1">ref</a></p>
+.
+Document[0, 21]
+  Paragraph[0, 6]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "ref"]
+  Reference[8, 20] refOpen:[8, 9, "["] ref:[9, 12, "ref"] refClose:[12, 14, "]:"] url:[15, 20, "/url1"]
+````````````````````````````````
+
+
+References with up to 3 leading blanks should be processed.
+
+```````````````````````````````` example References: 2
+[ref]
+
+  [ref]: /url1
+.
+<p><a href="/url1">ref</a></p>
+.
+Document[0, 22]
+  Paragraph[0, 6]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "ref"]
+  Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "ref"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
+````````````````````````````````
+
+
+References with up to 3 leading blanks should be processed.
+
+```````````````````````````````` example References: 3
+[ref]
+
+   [ref]: /url1
+.
+<p><a href="/url1">ref</a></p>
+.
+Document[0, 23]
+  Paragraph[0, 6]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "ref"]
+  Reference[10, 22] refOpen:[10, 11, "["] ref:[11, 14, "ref"] refClose:[14, 16, "]:"] url:[17, 22, "/url1"]
+````````````````````````````````
+
+
+References with up to 3 leading blanks should be processed.
+
+```````````````````````````````` example References: 4
+[ref]
+
+    [ref]: /url1
+.
+<p>[ref]</p>
+<pre><code>[ref]: /url1
+</code></pre>
+.
+Document[0, 24]
+  Paragraph[0, 6]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "ref"]
+  IndentedCodeBlock[11, 24]
 ````````````````````````````````
 
 
@@ -643,8 +715,8 @@ Indent less than list's item content indent + 4 is a list item, >= is a sub item
 </ul>
 .
 Document[0, 260]
-  BulletList[0, 260] isLoose
-    BulletListItem[0, 260] open:[0, 1, "*"] isLoose
+  BulletList[0, 259] isLoose
+    BulletListItem[0, 259] open:[0, 1, "*"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
@@ -655,9 +727,9 @@ Document[0, 260]
         Text[50, 59] chars:[50, 59, "Heading 3"]
       Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
         Text[71, 80] chars:[71, 80, "Heading 4"]
-      IndentedCodeBlock[88, 130]
-      BulletList[132, 260] isLoose
-        BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+      IndentedCodeBlock[88, 129]
+      BulletList[132, 259] isLoose
+        BulletListItem[132, 259] open:[132, 133, "*"] isLoose
           Paragraph[134, 141]
             Text[134, 140] chars:[134, 140, "item 2"]
           Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
@@ -668,7 +740,7 @@ Document[0, 260]
             Text[195, 204] chars:[195, 204, "Heading 3"]
           Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
             Text[219, 228] chars:[219, 228, "Heading 5"]
-          IndentedCodeBlock[242, 260]
+          IndentedCodeBlock[242, 259]
 ````````````````````````````````
 
 
@@ -811,8 +883,8 @@ Indent less than list's item content indent + 4 is a list item, >= is a sub item
 </ul>
 .
 Document[0, 260]
-  BulletList[0, 260] isLoose
-    BulletListItem[0, 260] open:[0, 1, "*"] isLoose
+  BulletList[0, 259] isLoose
+    BulletListItem[0, 259] open:[0, 1, "*"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
@@ -823,9 +895,9 @@ Document[0, 260]
         Text[50, 59] chars:[50, 59, "Heading 3"]
       Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
         Text[71, 80] chars:[71, 80, "Heading 4"]
-      IndentedCodeBlock[88, 130]
-      BulletList[132, 260] isLoose
-        BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+      IndentedCodeBlock[88, 129]
+      BulletList[132, 259] isLoose
+        BulletListItem[132, 259] open:[132, 133, "*"] isLoose
           Paragraph[134, 141]
             Text[134, 140] chars:[134, 140, "item 2"]
           Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
@@ -836,7 +908,7 @@ Document[0, 260]
             Text[195, 204] chars:[195, 204, "Heading 3"]
           Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
             Text[219, 228] chars:[219, 228, "Heading 5"]
-          IndentedCodeBlock[242, 260]
+          IndentedCodeBlock[242, 259]
 ````````````````````````````````
 
 
@@ -1045,9 +1117,9 @@ Document[0, 260]
     Text[14, 23] chars:[14, 23, "Heading 1"]
   Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
     Text[31, 40] chars:[31, 40, "Heading 2"]
-  IndentedCodeBlock[46, 130]
-  BulletList[132, 260] isLoose
-    BulletListItem[132, 260] open:[132, 133, "*"] isLoose
+  IndentedCodeBlock[46, 129]
+  BulletList[132, 259] isLoose
+    BulletListItem[132, 259] open:[132, 133, "*"] isLoose
       Paragraph[134, 141]
         Text[134, 140] chars:[134, 140, "item 2"]
       Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
@@ -1058,7 +1130,7 @@ Document[0, 260]
         Text[195, 204] chars:[195, 204, "Heading 3"]
       Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
         Text[219, 228] chars:[219, 228, "Heading 5"]
-      IndentedCodeBlock[242, 260]
+      IndentedCodeBlock[242, 259]
 ````````````````````````````````
 
 
@@ -1545,7 +1617,7 @@ Document[0, 637]
     BulletListItem[189, 637] open:[189, 190, "*"] isLoose
       Paragraph[191, 198]
         Text[191, 197] chars:[191, 197, "item 4"]
-      IndentedCodeBlock[207, 229]
+      IndentedCodeBlock[207, 224]
       Paragraph[237, 263]
         Text[237, 249] chars:[237, 249, "this  …  code"]
         SoftLineBreak[249, 250]
@@ -1740,7 +1812,7 @@ Document[0, 637]
         BulletListItem[479, 637] open:[479, 480, "*"] isLoose
           Paragraph[481, 488]
             Text[481, 487] chars:[481, 487, "item 8"]
-          IndentedCodeBlock[499, 523]
+          IndentedCodeBlock[499, 518]
           Paragraph[535, 565]
             Text[535, 547] chars:[535, 547, "this  …  code"]
             SoftLineBreak[547, 548]
@@ -4659,7 +4731,7 @@ plain text
 </code></pre>
 .
 Document[0, 23]
-  FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[3] close:[19, 22, "```"]
+  FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[1] close:[19, 22, "```"]
 ````````````````````````````````
 
 
@@ -4674,7 +4746,7 @@ empty, no info
 </code></pre>
 .
 Document[0, 9]
-  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[3] close:[5, 8, "```"]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
 ````````````````````````````````
 
 
@@ -4690,7 +4762,7 @@ empty, no info, blank line follows
 </code></pre>
 .
 Document[0, 10]
-  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[3] close:[5, 8, "```"]
+  FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
 ````````````````````````````````
 
 
@@ -4705,7 +4777,7 @@ empty, info
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[3] close:[9, 12, "```"]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
 ````````````````````````````````
 
 
@@ -4721,7 +4793,37 @@ empty, info, blank line follows
 </code></pre>
 .
 Document[0, 14]
-  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[3] close:[9, 12, "```"]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
+````````````````````````````````
+
+
+Unclosed Fenced code should take all input to end
+
+```````````````````````````````` example Fenced Code Options: 6
+```
+sample 
+unclosed
+
+fenced
+
+code
+
+
+
+.
+<pre><code>sample 
+unclosed
+
+fenced
+
+code
+
+
+
+</code></pre>
+.
+Document[0, 38]
+  FencedCodeBlock[0, 38] open:[0, 3, "```"] content:[4, 38] lines[9]
 ````````````````````````````````
 
 
@@ -4953,7 +5055,7 @@ proper unmatched fenced code
 </code></pre>
 .
 Document[0, 37]
-  FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[3] close:[33, 36, "~~~"]
+  FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1] close:[33, 36, "~~~"]
 ````````````````````````````````
 
 
@@ -4966,7 +5068,7 @@ proper unmatched fenced code
 </code></pre>
 .
 Document[0, 37]
-  FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[3] close:[33, 36, "```"]
+  FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[1] close:[33, 36, "```"]
 ````````````````````````````````
 
 
@@ -4982,7 +5084,7 @@ some text
 </code></pre>
 .
 Document[0, 23]
-  FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[3] close:[18, 21, "~~~"]
+  FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[1] close:[18, 21, "~~~"]
 ````````````````````````````````
 
 
@@ -5011,7 +5113,7 @@ Document[0, 32]
 
 ## Indented Code Options 
 
-no trim trailing blank lines
+trim trailing blank lines by default
 
 ```````````````````````````````` example Indented Code Options: 1
     code
@@ -5025,13 +5127,13 @@ code line
 </code></pre>
 .
 Document[0, 38]
-  IndentedCodeBlock[4, 38]
+  IndentedCodeBlock[4, 23]
 ````````````````````````````````
 
 
-trim trailing blank lines
+don't trim trailing blank lines
 
-```````````````````````````````` example(Indented Code Options: 2) options(code-trim-trailing)
+```````````````````````````````` example(Indented Code Options: 2) options(code-no-trim-trailing)
     code
     code line
     
@@ -5043,7 +5145,7 @@ code line
 </code></pre>
 .
 Document[0, 38]
-  IndentedCodeBlock[4, 23]
+  IndentedCodeBlock[4, 38]
 ````````````````````````````````
 
 
@@ -5325,9 +5427,9 @@ _text_
   <li md-pos="148-156">item</li>
 </ol>
 <!-- -->
-<pre md-pos="171-191"><code md-pos="171-191">indented code
+<pre md-pos="171-185"><code md-pos="171-185">indented code
 </code></pre>
-<pre md-pos="224-230"><code md-pos="224-230">text
+<pre md-pos="224-229"><code md-pos="224-229">text
 </code></pre>
 .
 Document[0, 230]
@@ -5374,10 +5476,10 @@ Document[0, 230]
       Paragraph[151, 156]
         Text[151, 155] chars:[151, 155, "item"]
   HtmlCommentBlock[157, 166]
-  IndentedCodeBlock[171, 191]
+  IndentedCodeBlock[171, 185]
   Reference[191, 206] refOpen:[191, 192, "["] ref:[192, 195, "img"] refClose:[195, 197, "]:"] url:[198, 206, "/img.png"]
   Reference[207, 218] refOpen:[207, 208, "["] ref:[208, 211, "ref"] refClose:[211, 213, "]:"] url:[214, 218, "/url"]
-  IndentedCodeBlock[224, 230]
+  IndentedCodeBlock[224, 229]
 ````````````````````````````````
 
 
@@ -5393,7 +5495,7 @@ text
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[3] close:[13, 16, "```"]
+  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
 ````````````````````````````````
 
 
@@ -5411,7 +5513,7 @@ test
 <p md-pos="20-25">test</p>
 .
 Document[0, 25]
-  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[3] close:[13, 16, "```"]
+  FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
   Paragraph[20, 25]
     Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
@@ -5775,4 +5877,67 @@ Document[0, 154]
         Text[123, 152] chars:[123, 152, "all s … apped"]
 ````````````````````````````````
 
+
+### Issue #17
+
+one line blank after code should not be kept as part of the code block
+
+```````````````````````````````` example Issue #17: 1
+→code
+
+some text
+.
+<pre><code>code
+</code></pre>
+<p>some text</p>
+.
+Document[0, 17]
+  IndentedCodeBlock[1, 6]
+  Paragraph[7, 17]
+    Text[7, 16] chars:[7, 16, "some text"]
+````````````````````````````````
+
+
+Blank lines before and after should not be kept
+
+```````````````````````````````` example Issue #17: 2
+→code
+
+
+→code
+
+
+some text
+.
+<pre><code>code
+
+
+code
+</code></pre>
+<p>some text</p>
+.
+Document[0, 26]
+  IndentedCodeBlock[1, 14]
+  Paragraph[16, 26]
+    Text[16, 25] chars:[16, 25, "some text"]
+````````````````````````````````
+
+
+## Mixed EOLs
+
+Escape crlf
+
+```````````````````````````````` example Mixed EOLs: 1
+test\⏎
+line after hard break
+.
+<p>test<br />
+line after hard break</p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    Text[0, 4] chars:[0, 4, "test"]
+    HardLineBreak[4, 7]
+    Text[7, 28] chars:[7, 28, "line  … break"]
+````````````````````````````````
 

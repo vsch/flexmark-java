@@ -90,14 +90,14 @@ public class DumpSpecReader extends SpecReader {
 
     public static String showTabs(String s) {
         if (s == null) return "";
-        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
-        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae");     
+        // Tabs are shown as "rightwards arrow →" for easier comparison and IntelliJ dummy identifier as ⎮23ae, CR ⏎ 23ce
+        return s.replace("\u2192", "&#2192;").replace("\t", "\u2192").replace("\u23ae", "&#23ae;").replace("\u001f", "\u23ae").replace("\u23ce", "&#23ce").replace("\r","\u23ce");     
     }
 
     public static String unShowTabs(String s) {
         if (s == null) return "";
-        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⧰
-        return s.replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");     
+        // Tabs are shown as "rightwards arrow" for easier comparison and IntelliJ dummy identifier as ⎮
+        return s.replace("\u23ce", "\r").replace("&#23ce", "\u23ce").replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");     
     }
 
 }

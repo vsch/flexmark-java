@@ -10,7 +10,6 @@ import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -156,14 +155,14 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) {
-        render((ListItem) node, context, html);
+        renderListItem(node, context, html);
     }
 
     private void render(OrderedListItem node, NodeRendererContext context, HtmlWriter html) {
-        render((ListItem) node, context, html);
+        renderListItem(node, context, html);
     }
 
-    private void render(ListItem node, NodeRendererContext context, HtmlWriter html) {
+    private void renderListItem(ListItem node, NodeRendererContext context, HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
                 context.renderChildren(node);

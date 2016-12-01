@@ -2063,7 +2063,7 @@ are not included in it:
 </code></pre>
 .
 Document[0, 20]
-  IndentedCodeBlock[10, 20]
+  IndentedCodeBlock[10, 14]
 ````````````````````````````````
 
 
@@ -2138,7 +2138,7 @@ Here is a simple example with backticks:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "```"] content:[4, 9] lines[3] close:[9, 12, "```"]
+  FencedCodeBlock[0, 12] open:[0, 3, "```"] content:[4, 9] lines[2] close:[9, 12, "```"]
 ````````````````````````````````
 
 
@@ -2155,7 +2155,7 @@ With tildes:
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[3] close:[9, 12, "~~~"]
+  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[2] close:[9, 12, "~~~"]
 ````````````````````````````````
 
 
@@ -2173,7 +2173,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[2] close:[12, 15, "```"]
 ````````````````````````````````
 
 
@@ -2188,7 +2188,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "~~~"] content:[4, 12] lines[3] close:[12, 15, "~~~"]
+  FencedCodeBlock[0, 15] open:[0, 3, "~~~"] content:[4, 12] lines[2] close:[12, 15, "~~~"]
 ````````````````````````````````
 
 
@@ -2205,7 +2205,7 @@ aaa
 </code></pre>
 .
 Document[0, 20]
-  FencedCodeBlock[0, 19] open:[0, 4, "````"] content:[5, 13] lines[3] close:[13, 19, "``````"]
+  FencedCodeBlock[0, 19] open:[0, 4, "````"] content:[5, 13] lines[2] close:[13, 19, "``````"]
 ````````````````````````````````
 
 
@@ -2220,7 +2220,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 17] open:[0, 4, "~~~~"] content:[5, 13] lines[3] close:[13, 17, "~~~~"]
+  FencedCodeBlock[0, 17] open:[0, 4, "~~~~"] content:[5, 13] lines[2] close:[13, 17, "~~~~"]
 ````````````````````````````````
 
 
@@ -2233,7 +2233,7 @@ Unclosed code blocks are closed by the end of the document
 <pre><code></code></pre>
 .
 Document[0, 4]
-  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 4] lines[3]
+  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 4] lines[0]
 ````````````````````````````````
 
 
@@ -2249,7 +2249,7 @@ aaa
 </code></pre>
 .
 Document[0, 15]
-  FencedCodeBlock[0, 6] open:[0, 5, "`````"] content:[6, 15] lines[3]
+  FencedCodeBlock[0, 15] open:[0, 5, "`````"] content:[6, 15] lines[3]
 ````````````````````````````````
 
 
@@ -2266,8 +2266,8 @@ bbb
 <p>bbb</p>
 .
 Document[0, 17]
-  BlockQuote[0, 6] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[8, 12] lines[3]
+  BlockQuote[0, 12] marker:[0, 1, ">"]
+    FencedCodeBlock[2, 12] open:[2, 5, "```"] content:[8, 12] lines[1]
   Paragraph[13, 17]
     Text[13, 16] chars:[13, 16, "bbb"]
 ````````````````````````````````
@@ -2286,7 +2286,7 @@ A code block can have all empty lines as its content:
 </code></pre>
 .
 Document[0, 12]
-  FencedCodeBlock[0, 11] open:[0, 3, "```"] content:[4, 8] lines[3] close:[8, 11, "```"]
+  FencedCodeBlock[0, 11] open:[0, 3, "```"] content:[4, 8] lines[2] close:[8, 11, "```"]
 ````````````````````````````````
 
 
@@ -2299,7 +2299,7 @@ A code block can be empty:
 <pre><code></code></pre>
 .
 Document[0, 8]
-  FencedCodeBlock[0, 7] open:[0, 3, "```"] content:[7, 7] lines[3] close:[4, 7, "```"]
+  FencedCodeBlock[0, 7] open:[0, 3, "```"] content:[7, 7] lines[0] close:[4, 7, "```"]
 ````````````````````````````````
 
 
@@ -2318,7 +2318,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[1, 17] open:[1, 4, "```"] content:[6, 14] lines[3] close:[14, 17, "```"]
+  FencedCodeBlock[1, 17] open:[1, 4, "```"] content:[6, 14] lines[2] close:[14, 17, "```"]
 ````````````````````````````````
 
 
@@ -2385,7 +2385,7 @@ aaa
 </code></pre>
 .
 Document[0, 14]
-  FencedCodeBlock[0, 13] open:[0, 3, "```"] content:[4, 8] lines[3] close:[10, 13, "```"]
+  FencedCodeBlock[0, 13] open:[0, 3, "```"] content:[4, 8] lines[1] close:[10, 13, "```"]
 ````````````````````````````````
 
 
@@ -2398,7 +2398,7 @@ aaa
 </code></pre>
 .
 Document[0, 17]
-  FencedCodeBlock[3, 16] open:[3, 6, "```"] content:[7, 11] lines[3] close:[13, 16, "```"]
+  FencedCodeBlock[3, 16] open:[3, 6, "```"] content:[7, 11] lines[1] close:[13, 16, "```"]
 ````````````````````````````````
 
 
@@ -2414,7 +2414,7 @@ aaa
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 4] open:[0, 3, "```"] content:[4, 16] lines[3]
+  FencedCodeBlock[0, 16] open:[0, 3, "```"] content:[4, 16] lines[2]
 ````````````````````````````````
 
 
@@ -2446,7 +2446,7 @@ aaa
 </code></pre>
 .
 Document[0, 18]
-  FencedCodeBlock[0, 7] open:[0, 6, "~~~~~~"] content:[7, 18] lines[3]
+  FencedCodeBlock[0, 18] open:[0, 6, "~~~~~~"] content:[7, 18] lines[2]
 ````````````````````````````````
 
 
@@ -2468,7 +2468,7 @@ baz
 Document[0, 20]
   Paragraph[0, 4]
     Text[0, 3] chars:[0, 3, "foo"]
-  FencedCodeBlock[4, 15] open:[4, 7, "```"] content:[8, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[4, 15] open:[4, 7, "```"] content:[8, 12] lines[1] close:[12, 15, "```"]
   Paragraph[16, 20]
     Text[16, 19] chars:[16, 19, "baz"]
 ````````````````````````````````
@@ -2493,7 +2493,7 @@ bar
 Document[0, 26]
   Heading[0, 7] text:[0, 3, "foo"] textClose:[4, 7, "---"]
     Text[0, 3] chars:[0, 3, "foo"]
-  FencedCodeBlock[8, 19] open:[8, 11, "~~~"] content:[12, 16] lines[3] close:[16, 19, "~~~"]
+  FencedCodeBlock[8, 19] open:[8, 11, "~~~"] content:[12, 16] lines[1] close:[16, 19, "~~~"]
   Heading[20, 25] textOpen:[20, 21, "#"] text:[22, 25, "baz"]
     Text[22, 25] chars:[22, 25, "baz"]
 ````````````````````````````````
@@ -2545,7 +2545,7 @@ Document[0, 65]
 <pre><code class="language-;"></code></pre>
 .
 Document[0, 11]
-  FencedCodeBlock[0, 10] open:[0, 4, "````"] info:[4, 5, ";"] content:[10, 10] lines[3] close:[6, 10, "````"]
+  FencedCodeBlock[0, 10] open:[0, 4, "````"] info:[4, 5, ";"] content:[10, 10] lines[0] close:[6, 10, "````"]
 ````````````````````````````````
 
 
@@ -2577,7 +2577,7 @@ Closing code fences cannot have [info strings]:
 </code></pre>
 .
 Document[0, 16]
-  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[3] close:[12, 15, "```"]
+  FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[1] close:[12, 15, "```"]
 ````````````````````````````````
 
 
@@ -3505,7 +3505,7 @@ an indented code block:
 Document[0, 64]
   HtmlBlock[0, 8]
   HtmlBlock[9, 16]
-  IndentedCodeBlock[21, 46]
+  IndentedCodeBlock[21, 45]
   HtmlBlock[46, 54]
   HtmlBlock[55, 64]
 ````````````````````````````````
@@ -3850,7 +3850,7 @@ four spaces:
 <p>[foo]</p>
 .
 Document[0, 31]
-  IndentedCodeBlock[4, 25]
+  IndentedCodeBlock[4, 24]
   Paragraph[25, 31]
     LinkRef[25, 30] referenceOpen:[25, 26, "["] reference:[26, 29, "foo"] referenceClose:[29, 30, "]"]
       Text[26, 29] chars:[26, 29, "foo"]
@@ -3872,7 +3872,7 @@ a code block:
 <p>[foo]</p>
 .
 Document[0, 27]
-  FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[3] close:[16, 19, "```"]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[1] close:[16, 19, "```"]
   Paragraph[21, 27]
     LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
       Text[22, 25] chars:[22, 25, "foo"]
@@ -4464,10 +4464,10 @@ foo
 .
 Document[0, 14]
   BlockQuote[0, 6] marker:[0, 1, ">"]
-    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[6, 6] lines[3]
+    FencedCodeBlock[2, 6] open:[2, 5, "```"] content:[6, 6] lines[0]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "foo"]
-  FencedCodeBlock[10, 14] open:[10, 13, "```"] content:[14, 14] lines[3]
+  FencedCodeBlock[10, 14] open:[10, 13, "```"] content:[14, 14] lines[0]
 ````````````````````````````````
 
 
@@ -4864,7 +4864,7 @@ Document[0, 65]
     Text[0, 11] chars:[0, 11, "A par … graph"]
     SoftLineBreak[11, 12]
     Text[12, 27] chars:[12, 27, "with  … ines."]
-  IndentedCodeBlock[33, 48]
+  IndentedCodeBlock[33, 47]
   BlockQuote[48, 65] marker:[48, 49, ">"]
     Paragraph[50, 65]
       Text[50, 64] chars:[50, 64, "A blo … uote."]
@@ -4902,7 +4902,7 @@ Document[0, 81]
         Text[4, 15] chars:[4, 15, "A par … graph"]
         SoftLineBreak[15, 16]
         Text[20, 35] chars:[20, 35, "with  … ines."]
-      IndentedCodeBlock[45, 60]
+      IndentedCodeBlock[45, 59]
       BlockQuote[64, 81] marker:[64, 65, ">"]
         Paragraph[66, 81]
           Text[66, 80] chars:[66, 80, "A blo … uote."]
@@ -5150,7 +5150,7 @@ Document[0, 53]
     OrderedListItem[0, 53] open:[0, 2, "1."] isLoose
       Paragraph[4, 8]
         Text[4, 7] chars:[4, 7, "foo"]
-      FencedCodeBlock[13, 32] open:[13, 16, "```"] content:[21, 25] lines[3] close:[29, 32, "```"]
+      FencedCodeBlock[13, 32] open:[13, 16, "```"] content:[21, 25] lines[1] close:[29, 32, "```"]
       Paragraph[38, 42]
         Text[38, 41] chars:[38, 41, "baz"]
       BlockQuote[47, 53] marker:[47, 48, ">"]
@@ -5343,7 +5343,7 @@ paragraph
 </code></pre>
 .
 Document[0, 44]
-  IndentedCodeBlock[4, 19]
+  IndentedCodeBlock[4, 18]
   Paragraph[19, 29]
     Text[19, 28] chars:[19, 28, "paragraph"]
   IndentedCodeBlock[34, 44]
@@ -5370,7 +5370,7 @@ Document[0, 44]
 Document[0, 53]
   OrderedList[0, 53] isLoose delimiter:'.'
     OrderedListItem[0, 53] open:[0, 2, "1."] isLoose
-      IndentedCodeBlock[7, 22]
+      IndentedCodeBlock[7, 21]
       Paragraph[25, 35]
         Text[25, 34] chars:[25, 34, "paragraph"]
       IndentedCodeBlock[43, 53]
@@ -5400,7 +5400,7 @@ inside the code block:
 Document[0, 54]
   OrderedList[0, 54] isLoose delimiter:'.'
     OrderedListItem[0, 54] open:[0, 2, "1."] isLoose
-      IndentedCodeBlock[7, 23]
+      IndentedCodeBlock[7, 22]
       Paragraph[26, 36]
         Text[26, 35] chars:[26, 35, "paragraph"]
       IndentedCodeBlock[44, 54]
@@ -5520,7 +5520,7 @@ Document[0, 40]
       Paragraph[4, 8]
         Text[4, 7] chars:[4, 7, "foo"]
     BulletListItem[8, 27] open:[8, 9, "-"] isTight
-      FencedCodeBlock[12, 27] open:[12, 15, "```"] content:[18, 22] lines[3] close:[24, 27, "```"]
+      FencedCodeBlock[12, 27] open:[12, 15, "```"] content:[18, 22] lines[1] close:[24, 27, "```"]
     BulletListItem[28, 40] open:[28, 29, "-"] isTight
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
@@ -5700,7 +5700,7 @@ Document[0, 85]
         Text[5, 16] chars:[5, 16, "A par … graph"]
         SoftLineBreak[16, 17]
         Text[22, 37] chars:[22, 37, "with  … ines."]
-      IndentedCodeBlock[48, 63]
+      IndentedCodeBlock[48, 62]
       BlockQuote[68, 85] marker:[68, 69, ">"]
         Paragraph[70, 85]
           Text[70, 84] chars:[70, 84, "A blo … uote."]
@@ -5736,7 +5736,7 @@ Document[0, 89]
         Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
         Text[24, 39] chars:[24, 39, "with  … ines."]
-      IndentedCodeBlock[51, 66]
+      IndentedCodeBlock[51, 65]
       BlockQuote[72, 89] marker:[72, 73, ">"]
         Paragraph[74, 89]
           Text[74, 88] chars:[74, 88, "A blo … uote."]
@@ -5772,7 +5772,7 @@ Document[0, 93]
         Text[7, 18] chars:[7, 18, "A par … graph"]
         SoftLineBreak[18, 19]
         Text[26, 41] chars:[26, 41, "with  … ines."]
-      IndentedCodeBlock[54, 69]
+      IndentedCodeBlock[54, 68]
       BlockQuote[76, 93] marker:[76, 77, ">"]
         Paragraph[78, 93]
           Text[78, 92] chars:[78, 92, "A blo … uote."]
@@ -5841,7 +5841,7 @@ Document[0, 83]
         Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
         Text[18, 33] chars:[18, 33, "with  … ines."]
-      IndentedCodeBlock[45, 60]
+      IndentedCodeBlock[45, 59]
       BlockQuote[66, 83] marker:[66, 67, ">"]
         Paragraph[68, 83]
           Text[68, 82] chars:[68, 82, "A blo … uote."]
@@ -7064,7 +7064,7 @@ Document[0, 30]
       BlockQuote[6, 10] marker:[6, 7, ">"]
         Paragraph[8, 10]
           Text[8, 9] chars:[8, 9, "b"]
-      FencedCodeBlock[12, 25] open:[12, 15, "```"] content:[18, 20] lines[3] close:[22, 25, "```"]
+      FencedCodeBlock[12, 25] open:[12, 15, "```"] content:[18, 20] lines[1] close:[22, 25, "```"]
     BulletListItem[26, 30] open:[26, 27, "-"] isTight
       Paragraph[28, 30]
         Text[28, 29] chars:[28, 29, "d"]
@@ -7133,7 +7133,7 @@ two block elements in the list item:
 Document[0, 29]
   OrderedList[0, 29] isLoose delimiter:'.'
     OrderedListItem[0, 29] open:[0, 2, "1."] isLoose
-      FencedCodeBlock[3, 20] open:[3, 6, "```"] content:[10, 14] lines[3] close:[17, 20, "```"]
+      FencedCodeBlock[3, 20] open:[3, 6, "```"] content:[10, 14] lines[1] close:[17, 20, "```"]
       Paragraph[25, 29]
         Text[25, 28] chars:[25, 28, "bar"]
 ````````````````````````````````
@@ -7380,7 +7380,7 @@ Document[0, 9]
 </code></pre>
 .
 Document[0, 13]
-  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[3] close:[9, 12, "~~~"]
+  FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[1] close:[9, 12, "~~~"]
 ````````````````````````````````
 
 
@@ -7444,7 +7444,7 @@ foo
 </code></pre>
 .
 Document[0, 21]
-  FencedCodeBlock[0, 20] open:[0, 3, "```"] info:[4, 12, "foo\+bar"] content:[13, 17] lines[3] close:[17, 20, "```"]
+  FencedCodeBlock[0, 20] open:[0, 3, "```"] info:[4, 12, "foo\+bar"] content:[13, 17] lines[1] close:[17, 20, "```"]
 ````````````````````````````````
 
 
@@ -7643,7 +7643,7 @@ foo
 </code></pre>
 .
 Document[0, 26]
-  FencedCodeBlock[0, 25] open:[0, 3, "```"] info:[4, 17, "f&ouml;&ouml;"] content:[18, 22] lines[3] close:[22, 25, "```"]
+  FencedCodeBlock[0, 25] open:[0, 3, "```"] info:[4, 17, "f&ouml;&ouml;"] content:[18, 22] lines[1] close:[22, 25, "```"]
 ````````````````````````````````
 
 

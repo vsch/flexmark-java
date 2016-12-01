@@ -4,6 +4,7 @@ flexmark-java
 [TOC]: # "## Version History"
 
 ## Version History
+- [Next Release To Do List](#next-release-to-do-list)
 - [0.6.1](#061)
 - [0.6.0](#060)
 - [0.5.0](#050)
@@ -49,10 +50,35 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+
+Next Release To Do List
+-----------------------
+
+- [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
+      to HTML offset for the element(s). This is needed to allow synchronization with source
+      when using an attribute to hold the source information is not an option.
+
 0.6.1
 -----
 
+- Fix: #13, Hard line breaks do not work if markdown text/files uses CR LF as line separator
+
+- Fix: #14, Link reference definitions indented by spaces not recognized
+
+- Fix: #17, IndentedCodeBlock endOffset too large?, Added an option
+  `Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES`
+
+- Fix: #18, Unclosed FencedCodeBlock endOffset too small
+
 - Add test for `Parser.HARD_LINE_BREAK_LIMIT` option
+
+- Change `HtmlRenderer.GENERATE_HEADER_ID` default to true
+
+- Fix #16, jira converter does not include lang= for fenced code with info
+
+- Fix jira converter to output to better handle loose lists, items and options
+
+- Fix jira converter to output an extra blank line after the end of the outermost list
 
 0.6.0
 -----
@@ -252,42 +278,42 @@ flexmark-java
   implementations:
 
     - Add `Parser.LISTS_ITEM_TYPE_MATCH` when true a new list is started when the list item type
-      does not match an existing list type. When false bullet list can contain ordered list items
-      and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows mimicking
-      different parser behavior: kramdown, GFM, Markdown.pl, ...
+      does not match an existing list type. When false bullet list can contain ordered list
+      items and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows
+      mimicking different parser behavior: kramdown, GFM, Markdown.pl, ...
 
-    - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a sub
-      item instead of starting a new list. When false a new list will be started.
+    - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a
+      sub item instead of starting a new list. When false a new list will be started.
       :information_source: only applicable if `Parser.LISTS_ITEM_TYPE_MATCH` is true.
 
     - Change `Parser.ORDERED_LIST_DOT_ONLY` to `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`
 
-    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item can
-      interrupt a paragraph. i.e. start without having a blank line before
+    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item
+      can interrupt a paragraph. i.e. start without having a blank line before
 
-    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list sub
-      item can interrupt the parent item's item text paragraph.
+    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list
+      sub item can interrupt the parent item's item text paragraph.
 
     - Change `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to
-      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered list
-      item can interrupt a paragraph. i.e. can start without having a blank line before.
-      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only true
-      for items with 1. prefix, or any ordered item.
+      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered
+      list item can interrupt a paragraph. i.e. can start without having a blank line before.
+      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only
+      true for items with 1. prefix, or any ordered item.
 
-    - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered list
-      sub item can interrupt the parent item's item text paragraph.
-      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this is only true
-      for items with 1. prefix, or any ordered item.
+    - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered
+      list sub item can interrupt the parent item's item text paragraph.
+      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this
+      is only true for items with 1. prefix, or any ordered item.
 
     - Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
 
-    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered item
-      can interrupt or only one starting with 1. :information_source: only applies if
+    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered
+      item can interrupt or only one starting with 1. :information_source: only applies if
       `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` is true.
 
-    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether any
-      ordered item can interrupt or only one starting with 1. :information_source: only applies if
-      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
+    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether
+      any ordered item can interrupt or only one starting with 1. :information_source: only
+      applies if `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
 
 0.4.9
 -----
@@ -1023,7 +1049,7 @@ flexmark-java
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-
+    
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

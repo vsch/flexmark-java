@@ -45,7 +45,7 @@ public class HtmlRenderer implements IRender {
     final static public DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<>("SOURCE_WRAP_HTML_BLOCKS", SOURCE_WRAP_HTML::getFrom);
     //final static public DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
     final static public DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
-    final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", false);
+    final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
     final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
     final static public DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
     final static public DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");

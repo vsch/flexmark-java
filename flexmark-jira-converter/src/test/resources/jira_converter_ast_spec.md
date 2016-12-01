@@ -1,14 +1,14 @@
 ---
 title: JiraConverter Spec
-author: 
-version: 
+author:
+version:
 date: '2016-09-23'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## JiraConverter  
+## JiraConverter
 
 Converts markdown to JIRA formatting
 
@@ -140,16 +140,16 @@ Document[0, 122]
 Single line block quote
 
 ```````````````````````````````` example Block quotes: 1
-> simple block quote 
+> simple block quote
 .
 {quote}
 simple block quote
 
 {quote}
 .
-Document[0, 22]
-  BlockQuote[0, 22] marker:[0, 1, ">"]
-    Paragraph[2, 22]
+Document[0, 21]
+  BlockQuote[0, 21] marker:[0, 1, ">"]
+    Paragraph[2, 21]
       Text[2, 20] chars:[2, 20, "simpl … quote"]
 ````````````````````````````````
 
@@ -157,7 +157,7 @@ Document[0, 22]
 Simple
 
 ```````````````````````````````` example Block quotes: 2
-> simple block quote 
+> simple block quote
 > paragraph.
 .
 {quote}
@@ -166,22 +166,22 @@ paragraph.
 
 {quote}
 .
-Document[0, 35]
-  BlockQuote[0, 35] marker:[0, 1, ">"]
-    Paragraph[2, 35]
+Document[0, 34]
+  BlockQuote[0, 34] marker:[0, 1, ">"]
+    Paragraph[2, 34]
       Text[2, 20] chars:[2, 20, "simpl … quote"]
-      SoftLineBreak[21, 22]
-      Text[24, 34] chars:[24, 34, "paragraph."]
+      SoftLineBreak[20, 21]
+      Text[23, 33] chars:[23, 33, "paragraph."]
 ````````````````````````````````
 
 
 Multi-paragraph
 
 ```````````````````````````````` example Block quotes: 3
-> simple block quote 
+> simple block quote
 > paragraph.
 >
-> another block quote 
+> another block quote
 > paragraph.
 .
 {quote}
@@ -193,16 +193,16 @@ paragraph.
 
 {quote}
 .
-Document[0, 73]
-  BlockQuote[0, 73] marker:[0, 1, ">"]
-    Paragraph[2, 35]
+Document[0, 71]
+  BlockQuote[0, 71] marker:[0, 1, ">"]
+    Paragraph[2, 34]
       Text[2, 20] chars:[2, 20, "simpl … quote"]
-      SoftLineBreak[21, 22]
-      Text[24, 34] chars:[24, 34, "paragraph."]
-    Paragraph[39, 73]
-      Text[39, 58] chars:[39, 58, "anoth … quote"]
-      SoftLineBreak[59, 60]
-      Text[62, 72] chars:[62, 72, "paragraph."]
+      SoftLineBreak[20, 21]
+      Text[23, 33] chars:[23, 33, "paragraph."]
+    Paragraph[38, 71]
+      Text[38, 57] chars:[38, 57, "anoth … quote"]
+      SoftLineBreak[57, 58]
+      Text[60, 70] chars:[60, 70, "paragraph."]
 ````````````````````````````````
 
 
@@ -241,6 +241,7 @@ with lazy continuation
 * item 1
 * item 2
 with lazy continuation
+
 .
 Document[0, 41]
   BulletList[0, 41] isTight
@@ -265,6 +266,7 @@ with lazy continuation
 # item 1
 # item 2
 with lazy continuation
+
 .
 Document[0, 43]
   OrderedList[0, 43] isTight delimiter:'.'
@@ -299,6 +301,7 @@ lazy continuation
 *** sub-sub-item 1
 * item 2
 ** sub-item 1
+
 .
 Document[0, 123]
   BulletList[0, 123] isTight
@@ -352,6 +355,7 @@ lazy continuation
 ### sub-sub-item 1
 # item 2
 ## sub-item 1
+
 .
 Document[0, 137]
   OrderedList[0, 137] isTight delimiter:'.'
@@ -382,6 +386,159 @@ Document[0, 137]
         OrderedListItem[123, 137] open:[123, 125, "1."] isTight
           Paragraph[126, 137]
             Text[126, 136] chars:[126, 136, "sub-item 1"]
+````````````````````````````````
+
+
+Loose Nested lists
+
+```````````````````````````````` example(Lists: 5) options(list-no-auto-loose)
+1. item 1
+lazy continuation
+
+   1. sub-item 1
+      1. sub-sub-item 1
+   1. sub-item 2
+      1. sub-sub-item 1
+
+1. item 2
+
+   1. sub-item 1
+
+.
+# item 1
+lazy continuation
+
+## sub-item 1
+### sub-sub-item 1
+## sub-item 2
+### sub-sub-item 1
+
+# item 2
+## sub-item 1
+
+.
+Document[0, 141]
+  OrderedList[0, 140] isTight delimiter:'.'
+    OrderedListItem[0, 111] open:[0, 2, "1."] isLoose
+      Paragraph[3, 28]
+        Text[3, 9] chars:[3, 9, "item 1"]
+        SoftLineBreak[9, 10]
+        Text[10, 27] chars:[10, 27, "lazy  … ation"]
+      OrderedList[32, 111] isTight delimiter:'.'
+        OrderedListItem[32, 70] open:[32, 34, "1."] isTight
+          Paragraph[35, 46]
+            Text[35, 45] chars:[35, 45, "sub-item 1"]
+          OrderedList[52, 70] isTight delimiter:'.'
+            OrderedListItem[52, 70] open:[52, 54, "1."] isTight
+              Paragraph[55, 70]
+                Text[55, 69] chars:[55, 69, "sub-s … tem 1"]
+        OrderedListItem[73, 111] open:[73, 75, "1."] isTight
+          Paragraph[76, 87]
+            Text[76, 86] chars:[76, 86, "sub-item 2"]
+          OrderedList[93, 111] isTight delimiter:'.'
+            OrderedListItem[93, 111] open:[93, 95, "1."] isTight
+              Paragraph[96, 111]
+                Text[96, 110] chars:[96, 110, "sub-s … tem 1"]
+    OrderedListItem[112, 140] open:[112, 114, "1."] isTight
+      Paragraph[115, 122]
+        Text[115, 121] chars:[115, 121, "item 2"]
+      OrderedList[126, 140] isTight delimiter:'.'
+        OrderedListItem[126, 140] open:[126, 128, "1."] isTight
+          Paragraph[129, 140]
+            Text[129, 139] chars:[129, 139, "sub-item 1"]
+````````````````````````````````
+
+
+### Fenced code
+
+plain
+
+```````````````````````````````` example Fenced code: 1
+```
+fenced code
+```
+
+.
+{code}
+fenced code
+{code}
+
+.
+Document[0, 21]
+  FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[1] close:[16, 19, "```"]
+````````````````````````````````
+
+
+with language
+
+```````````````````````````````` example Fenced code: 2
+```kotlin
+fenced code
+```
+
+.
+{code:lang=kotlin}
+fenced code
+{code}
+
+.
+Document[0, 27]
+  FencedCodeBlock[0, 25] open:[0, 3, "```"] info:[3, 9, "kotlin"] content:[10, 22] lines[1] close:[22, 25, "```"]
+````````````````````````````````
+
+
+### Paragraph Spacing
+
+multiple paragraphs
+
+```````````````````````````````` example Paragraph Spacing: 1
+paragraph 1
+with lazy continuation
+
+paragraph 3
+with lazy continuation
+
+* item 1
+* item 2
+* item 3
+
+paragraph 3
+
+.
+paragraph 1
+with lazy continuation
+
+paragraph 3
+with lazy continuation
+
+* item 1
+* item 2
+* item 3
+
+paragraph 3
+
+.
+Document[0, 113]
+  Paragraph[0, 35]
+    Text[0, 11] chars:[0, 11, "parag … aph 1"]
+    SoftLineBreak[11, 12]
+    Text[12, 34] chars:[12, 34, "with  … ation"]
+  Paragraph[36, 71]
+    Text[36, 47] chars:[36, 47, "parag … aph 3"]
+    SoftLineBreak[47, 48]
+    Text[48, 70] chars:[48, 70, "with  … ation"]
+  BulletList[72, 99] isTight
+    BulletListItem[72, 81] open:[72, 73, "*"] isTight
+      Paragraph[74, 81]
+        Text[74, 80] chars:[74, 80, "item 1"]
+    BulletListItem[81, 90] open:[81, 82, "*"] isTight
+      Paragraph[83, 90]
+        Text[83, 89] chars:[83, 89, "item 2"]
+    BulletListItem[90, 99] open:[90, 91, "*"] isTight
+      Paragraph[92, 99]
+        Text[92, 98] chars:[92, 98, "item 3"]
+  Paragraph[100, 112]
+    Text[100, 111] chars:[100, 111, "parag … aph 3"]
 ````````````````````````````````
 
 

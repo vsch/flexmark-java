@@ -461,10 +461,12 @@ in item
   | Explicit link | `.link`         | `[]()`                                                  |
 .
 * Add: live templates starting with {{.}}
+
 || Element       || Abbreviation    || Expansion                                               ||
 | Abbreviation  | {{.abbreviation}} | {{*[]:}}                                                 |
 | Code fence    | {{.codefence}}    | ``` ... ```                                       |
 | Explicit link | {{.link}}         | {{[]()}}                                                  |
+
 .
 Document[0, 565]
   BulletList[0, 565] isLoose

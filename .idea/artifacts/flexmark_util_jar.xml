@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="flexmark-util:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/flexmark_util_jar</output-path>
+    <root id="archive" name="flexmark-util.jar">
+      <element id="module-output" name="flexmark-util" />
+    </root>
+  </artifact>
+</component>

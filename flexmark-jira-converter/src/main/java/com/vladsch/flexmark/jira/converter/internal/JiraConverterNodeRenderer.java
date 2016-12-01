@@ -91,13 +91,14 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         BasedSequence info = node.getInfo();
         if (info.isNotNull() && !info.isBlank()) {
-            html.line().raw("{code:" + info.unescape() + "}").line();
+            html.line().raw("{code:lang=" + info.unescape() + "}").line();
         } else {
             html.line().raw("{code}").line();
         }
 
         html.raw(node.getContentChars().normalizeEOL());
         html.line().raw("{code}").line();
+        html.raw("\n");
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
@@ -128,22 +129,39 @@ public class JiraConverterNodeRenderer implements NodeRenderer
         html.line().raw(prefix.toString());
     }
 
-    private void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
+    private void renderListItem(ListItem node, NodeRendererContext context, HtmlWriter html) {
+        renderListItemPrefix(node, context, html);
+        if (listOptions.isTightListItem(node)) {
+            context.renderChildren(node);
+        } else {
+            context.renderChildren(node);
+            html.line().raw("\n");
+        }
+    }
+
+    private void renderList(ListBlock node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
+        if (node.getParent() instanceof Document) {
+            if (node.getLastChild() == null || listOptions.isTightListItem((ListItem) node.getLastChild())) {
+                html.line().raw("\n");
+            }
+        }
+    }
+
+    private void render(BulletList node, NodeRendererContext context, HtmlWriter html) {
+        renderList(node, context, html);
     }
 
     private void render(OrderedList node, NodeRendererContext context, HtmlWriter html) {
-        context.renderChildren(node);
+        renderList(node, context, html);
     }
 
     private void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) {
-        renderListItemPrefix(node, context, html);
-        context.renderChildren(node);
+        renderListItem(node, context, html);
     }
 
     private void render(OrderedListItem node, NodeRendererContext context, HtmlWriter html) {
-        renderListItemPrefix(node, context, html);
-        context.renderChildren(node);
+        renderListItem(node, context, html);
     }
 
     private static void renderTextBlockParagraphLines(Node node, NodeRendererContext context, HtmlWriter html) {
@@ -152,13 +170,13 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
-        //if (node.getParent().getFirstChild() != node) {
-        //}
-        if (node.getParent() instanceof ListItem && node.getParent().getFirstChild() == node) {
-            renderTextBlockParagraphLines(node, context, html);
-        } else {
+        boolean inTightList = listOptions.isInTightListItem(node);
+        //if (node.getParent() instanceof ListItem && node.getParent().getFirstChild() == node) {
+        if (!inTightList && (node.getParent().getFirstChild() != node || !(node.getParent() instanceof ListItem) || !((ListItem) node.getParent()).isParagraphWrappingDisabled())) {
             renderTextBlockParagraphLines(node, context, html);
             html.line().raw("\n");
+        } else {
+            renderTextBlockParagraphLines(node, context, html);
         }
     }
 

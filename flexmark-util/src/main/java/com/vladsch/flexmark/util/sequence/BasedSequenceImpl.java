@@ -13,6 +13,7 @@ import java.util.*;
  */
 public abstract class BasedSequenceImpl implements BasedSequence {
 
+    public static final String WHITESPACE_NO_EOL_CHARS = " \t";
     public static final String WHITESPACE_CHARS = " \t\r\n";
     public static final String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
     public static final String EOL_CHARS = "\r\n";
@@ -364,22 +365,27 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public int countChars(String chars) {
-        return countChars(chars, 0, chars.length());
+        return countChars(chars, 0, length());
     }
 
     @Override
     public int countCharsReversed(String chars) {
-        return countCharsReversed(chars, 0, chars.length());
+        return countCharsReversed(chars, 0, length());
     }
 
     @Override
     public int countNotChars(String chars) {
-        return countNotChars(chars, 0, chars.length());
+        return countNotChars(chars, 0, length());
     }
 
     @Override
     public int countNotCharsReversed(String chars) {
-        return countNotCharsReversed(chars, 0, chars.length());
+        return countNotCharsReversed(chars, 0, length());
+    }
+
+    @Override
+    public BasedSequence subSequence(Range range) {
+        return subSequence(range.getStart(), range.getEnd());
     }
 
     @Override

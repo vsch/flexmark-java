@@ -18,6 +18,7 @@ public interface BasedSequence extends CharSequence {
 
     @Override
     BasedSequence subSequence(int start, int end);
+    BasedSequence subSequence(Range range);
 
     BasedSequence subSequence(int start);
     BasedSequence baseSubSequence(int start, int end);

@@ -46,7 +46,11 @@ public class DataKey<T> {
             return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
         } else {
             T defaultValue = factory.create(null);
-            return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+            if (defaultValue != null) {
+                return "DataKey<" + defaultValue.getClass().getName().substring(defaultValue.getClass().getPackage().getName().length() + 1) + "> " + name;
+            } else {
+                return "DataKey<unknown> " + name;
+            }
         }
     }
 

@@ -43,6 +43,10 @@ public class SubSequence extends BasedSequenceImpl {
         this(base, 0, base.length());
     }
 
+    public SubSequence(CharSequence base, Range range) {
+        this(base, range.getStart(), range.getEnd());
+    }
+
     public SubSequence(CharSequence base, int startOffset, int endOffset) {
         if (startOffset < 0) {
             throw new StringIndexOutOfBoundsException("beginIndex:" + startOffset + " must be at least 0");

@@ -20,8 +20,7 @@ public class ComboJiraConverterSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        // optionsMap.put("option1", new MutableDataSet().set(JiraConverterExtension.JIRA_CONVERTER_OPTION1, true));
+        optionsMap.put("list-no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
