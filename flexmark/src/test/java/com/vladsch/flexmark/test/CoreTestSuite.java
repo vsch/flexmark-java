@@ -16,7 +16,8 @@ import org.junit.runners.Suite;
         ComboExtraSpecTest.class,
         SpecialInputTest.class,
         SubstringTest.class,
-        UsageExampleTest.class
+        UsageExampleTest.class,
+        ComboParserCompatibilitySpecTest.class,
 })
 public class CoreTestSuite {
 }

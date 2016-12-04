@@ -14,17 +14,39 @@ import java.util.regex.Matcher;
 public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock block;
     private final ListOptions options;
-    final int itemIndent;
-    final int markerColumn;
+    final int itemMarkerColumn;
+    final int itemMarkerIndent;
+    final int itemContentOffset;
+    final int itemContentIndent;
     final int itemContentColumn;
     private final boolean isNumberedList;
+    private int lastItemIndent = -1;
+    private BasedSequence passThroughLine = null;
+
+    public BasedSequence getPassThroughLine() {
+        return passThroughLine;
+    }
+
+    public void setPassThroughLine(BasedSequence passThroughLine) {
+        this.passThroughLine = passThroughLine;
+    }
+
+    int getLastItemIndent() {
+        return lastItemIndent;
+    }
+
+    void setLastItemIndent(int lastItemIndent) {
+        this.lastItemIndent = lastItemIndent;
+    }
 
     public ListBlockParser(ListOptions options, ListData listData) {
         this.options = options;
         this.block = listData.listBlock;
-        this.markerColumn = listData.markerColumn;
-        this.itemIndent = listData.indent;
-        this.itemContentColumn = listData.contentColumn;
+        this.itemMarkerColumn = listData.markerColumn;
+        this.itemMarkerIndent = listData.markerIndent;
+        this.itemContentOffset = listData.contentOffset;
+        this.itemContentIndent = listData.markerIndent + listData.contentOffset;
+        this.itemContentColumn = listData.markerColumn + listData.contentOffset;
         this.isNumberedList = listData.isNumberedList;
     }
 
@@ -112,7 +134,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    static ListData parseListMarker(ListOptions options, Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn, final boolean inParagraph, final boolean inParagraphListItem) {
+    static ListData parseListMarker(ListOptions options, Parsing parsing, BasedSequence line, int indent, final int markerIndex, final int markerColumn, int markerIndent, final boolean inParagraph, final boolean inParagraphListItem) {
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         Matcher matcher = parsing.LIST_ITEM_MARKER.matcher(rest);
         if (!matcher.find()) {
@@ -146,16 +168,16 @@ public class ListBlockParser extends AbstractBlockParser {
         // marker doesn't include tabs, so counting them as columns directly is ok
         int columnAfterMarker = markerColumn + markerLength;
         // the column within the line where the content starts
-        int contentColumn = columnAfterMarker;
+        int contentOffset = 0;
 
         // See at which column the content starts if there is content
         boolean hasContent = false;
         for (int i = indexAfterMarker; i < line.length(); i++) {
             char c = line.charAt(i);
             if (c == '\t') {
-                contentColumn += Parsing.columnsToNextTabStop(contentColumn);
+                contentOffset += Parsing.columnsToNextTabStop(columnAfterMarker + contentOffset);
             } else if (c == ' ') {
-                contentColumn++;
+                contentOffset++;
             } else {
                 hasContent = true;
                 break;
@@ -163,17 +185,17 @@ public class ListBlockParser extends AbstractBlockParser {
         }
 
         if (inParagraph) {
-            // Empty list item cannot interrupt a paragraph.
-            if (!hasContent) {
+            // Empty list item cannot interrupt a paragraph unless the option is on
+            if (!(hasContent || options.emptyBulletItemInterruptsItemParagraph)) {
                 return null;
             }
         }
 
-        if (!hasContent || (contentColumn - columnAfterMarker) > parsing.CODE_BLOCK_INDENT) {
+        if (!hasContent || contentOffset > parsing.CODE_BLOCK_INDENT) {
             // If this line is blank or has a code block, default to 1 space after marker
-            contentColumn = columnAfterMarker + 1;
+            contentOffset = 1;
         }
-        return new ListData(listBlock, indent, markerColumn, contentColumn, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
+        return new ListData(listBlock, indent, markerColumn, markerIndent, contentOffset, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -281,58 +303,54 @@ public class ListBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            BlockParser matched = matchedBlockParser.getMatchedBlockParser();
+            BlockParser matched = matchedBlockParser.getBlockParser();
+            ListBlockParser listBlockParser = null;
 
-            if ((!options.useListContentIndent || !options.listContentIndentOverridesCodeOffset) && state.getIndent() >= state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
+            if (matched instanceof ListBlockParser) {
+                listBlockParser = (ListBlockParser) matched;
+            }
+
+            if (listBlockParser != null && listBlockParser.passThroughLine == state.getLine()) {
+                // already spoken for by the ListItem
+                listBlockParser.passThroughLine = null;
                 return BlockStart.none();
             }
 
-            ListBlockParser listBlockParser = matched instanceof ListBlockParser ? (ListBlockParser) matched : null;
+            // see if we are in a list item and need to interrupt for indented code
+            if (!options.itemIndentRelativeToLastItem
+                    || listBlockParser == null
+                    || listBlockParser.lastItemIndent == -1
+                    || state.getIndent() > listBlockParser.lastItemIndent + state.getParsing().CODE_BLOCK_INDENT) {
+                if (state.getIndent() >= state.getParsing().CODE_BLOCK_INDENT) {
+                    // see if item's content indent overrides the default code indent
+                    if (!options.listContentIndentOverridesCodeIndent
+                            || !(matched instanceof ListBlockParser)
+                            || state.getIndent() >= ((ListBlockParser) matched).itemContentOffset + options.listContentIndentOverridesCodeIndentOffset) {
+                        return BlockStart.none();
+                    }
+                }
 
-            if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemIndent + options.fixedIndent) {
-                return BlockStart.none();
+                if (listBlockParser != null && options.fixedIndent > 0 && state.getIndent() >= listBlockParser.itemMarkerIndent + options.fixedIndent) {
+                    return BlockStart.none();
+                }
             }
 
             int markerIndex = state.getNextNonSpaceIndex();
+            // this original calculation screws up after block quotes because the column has to be relative to index
             int markerColumn = state.getColumn() + state.getIndent();
+            int markerIndent = state.getIndent();
             boolean inParagraph = matched.isParagraphParser();
             boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
 
-            ListData listData = parseListMarker(options, state.getParsing(), state.getLine(), state.getIndent(), markerIndex, markerColumn, inParagraph, inParagraphListItem);
+            ListData listData = parseListMarker(options, state.getParsing(), state.getLine(), state.getIndent(), markerIndex, markerColumn, markerIndent, inParagraph, inParagraphListItem);
             if (listData == null) {
                 return BlockStart.none();
             }
 
-            Integer moreThanToSubItem = null;
-            if (options.useListContentIndent) {
-                // see if we are in a list item
-                if (state.getIndent() >= options.listContentIndentOffset + state.getParsing().CODE_BLOCK_INDENT && !(matched instanceof ListBlockParser)) {
-                    return BlockStart.none();
-                }
+            int contentOffset = options.fixedIndent > 0 ? options.fixedIndent : listData.contentOffset + listData.listMarker.length();
+            ListItemParser listItemParser = new ListItemParser(options, state.getParsing(), listData.markerColumn, listData.markerIndent, contentOffset, listData.listMarker, listData.isNumberedList);
 
-                //moreThanToSubItem = listData.markerColumn;
-                //
-                //List<BlockParser> parsers = state.getActiveBlockParsers();
-                //ListBlockParser parentListBlockParser = null;
-                //
-                //int iMax = parsers.size();
-                //for (int i = iMax; i-- > 1; ) {
-                //    if (parsers.get(i) instanceof ListBlockParser) {
-                //        parentListBlockParser = (ListBlockParser) parsers.get(i);
-                //        moreThanToSubItem = parentListBlockParser.markerColumn;
-                //        break;
-                //    }
-                //    
-                //    if (!(parsers.get(i) instanceof ParagraphParser || parsers.get(i) instanceof ListItemParser)) {
-                //        break;
-                //    }
-                //}
-            }
-
-            int newContentColumn = options.fixedIndent > 0 ? state.getColumn() + options.fixedIndent : listData.contentColumn;
-            ListItemParser listItemParser = new ListItemParser(options, state.getParsing(), listData.markerColumn, newContentColumn, newContentColumn - state.getColumn(), listData.listMarker, listData.isNumberedList);
-
-            int newColumn = listData.contentColumn;
+            int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
             // prepend the list block if needed
             if (listBlockParser == null) {
                 listBlockParser = new ListBlockParser(options, listData);
@@ -353,10 +371,13 @@ public class ListBlockParser extends AbstractBlockParser {
 
                     return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
                 } else {
-                    if (options.useListContentIndent && options.overIndentsToFirstItem) {
-                        // if this is the first list with a single item and we are > list.markerColumn and options.firstListFirstItemTakesOverIndents we start a sub list
-                        if (listData.markerColumn > listBlockParser.markerColumn && !(listBlockParser.getBlock().getParent() instanceof ListItem) && listBlockParser.getBlock().getFirstChild() == listBlockParser.getBlock().getLastChild())
-                        {
+                    if (options.itemIndentOverMarkerToSubItem) {
+                        // if this is the first list with a single item and we are > list.markerIndent and options.overIndentsToFirstItem we start a sub list
+                        if (listData.markerIndent > listBlockParser.itemMarkerIndent
+                                && !(listBlockParser.getBlock().getParent() instanceof ListItem)
+                                && listBlockParser.getBlock().getFirstChild() == listBlockParser.getBlock().getLastChild()) {
+                            // this f'up rule is for some processors, so that an item indented more than first list item marker but less than previous item's content indent
+                            // becomes a sub-item of the previous item, even though it is indented less that it is, like I said F'UP!
                             listBlockParser = new ListBlockParser(options, listData);
                             listBlockParser.setTight(true);
 
@@ -371,17 +392,19 @@ public class ListBlockParser extends AbstractBlockParser {
 
     private static class ListData {
         final ListBlock listBlock;
-        final int contentColumn;
+        final int contentOffset;
         final int markerColumn;
+        final int markerIndent;
         final int indent;
         final BasedSequence listMarker;
         final boolean isNumberedList;
 
-        ListData(ListBlock listBlock, int indent, int markerColumn, int contentColumn, BasedSequence listMarker, boolean isNumberedList) {
+        ListData(ListBlock listBlock, int indent, int markerColumn, int markerIndent, int contentOffset, BasedSequence listMarker, boolean isNumberedList) {
             this.listBlock = listBlock;
             this.indent = indent;
             this.markerColumn = markerColumn;
-            this.contentColumn = contentColumn;
+            this.markerIndent = markerIndent;
+            this.contentOffset = contentOffset;
             this.listMarker = listMarker;
             this.isNumberedList = isNumberedList;
         }

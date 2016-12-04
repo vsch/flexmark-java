@@ -77,7 +77,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
     private static class BlockFactory extends AbstractBlockParserFactory {
         final private ThematicBreakOptions options;
-        
+
         private BlockFactory(DataHolder options) {
             super(options);
             this.options = new ThematicBreakOptions(options);
@@ -85,7 +85,7 @@ public class ThematicBreakParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4 || matchedBlockParser.getMatchedBlockParser().isParagraphParser() && !options.relaxedStart) {
+            if (state.getIndent() >= 4 || matchedBlockParser.getBlockParser().isParagraphParser() && !options.relaxedStart) {
                 return BlockStart.none();
             }
             int nextNonSpace = state.getNextNonSpaceIndex();

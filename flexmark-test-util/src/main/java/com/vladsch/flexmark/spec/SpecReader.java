@@ -24,7 +24,7 @@ public class SpecReader {
     public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*(?:\\s|\u00A0)\\Q" + OPTIONS_KEYWORD + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
     public static final String TYPE_BREAK = ".";
     public static final String TYPE_TEST_BREAK = "…";
-    protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} *(.*)");
+    protected static final Pattern SECTION_PATTERN = Pattern.compile("#{1,6} +(.*)");
 
     protected final InputStream inputStream;
 

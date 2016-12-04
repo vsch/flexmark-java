@@ -5,6 +5,7 @@ flexmark-java
 
 ## Version History
 - [Next Release To Do List](#next-release-to-do-list)
+- [(0.6.2)](#062)
 - [0.6.1](#061)
 - [0.6.0](#060)
 - [0.5.0](#050)
@@ -57,6 +58,62 @@ Next Release To Do List
 - [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
+
+- [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
+      when descriptions can benefit form complex formatting
+
+- [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
+      extra entries. Update description for better understanding.
+
+(0.6.2)
+-------
+
+- [ ] Fix: HTML comment blocks should only be recognized as blocks if they have a blank line
+      above. Otherwise HTML in a lazy continuation becomes an HTML block. Difference with spec
+      since it probably does not understand the uses for HTML comments other than empty breaks.
+      In IntelliJ comments are used for TODO markers and ability to embedd one in a paragraph is
+      important.
+
+      - [x] Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but
+            when false then they require a blank line.
+
+      - [ ] Add: test for above option
+
+- [ ] Fix: clean up list processing options to be consistent and easily configured for
+      processors with which flexmark-java can be made compatible.
+      - [x] commonmark, obviously defaults
+      - [ ] Markdown.pl
+      - [ ] Fixed 4, MultiMarkdown, pandocs, pegdown
+      - [x] github comments, common mark
+      - [x] kramdown, Jekyll, github docs
+
+- Change: rename `Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM` to
+  `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_FIRST_ITEM`
+
+- Add: option `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_SUB_ITEM` to control whether items
+  indented over the marker indent of the first list item but less than the content indent of the
+  previous item will be added as a sub-item of the previous item. Can't say it enough, it's f'up
+  but that is how one of the processors I tested handled it, have to see which one. If you think
+  it's hard to follow you should try debugging it.
+
+- Add: documentation to Extensions wiki for missing core list parser options for weird
+  processing of lists:
+    - `Parser.LISTS_CONTENT_INDENT`
+    - `Parser.LISTS_CONTENT_INDENT_OFFSET`
+    - `Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET`
+    - `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_FIRST_ITEM`
+    - `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_SUB_ITEM`
+
+- Fix: #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of
+
+  text block
+
+- Change: `SpecReader` to parse for headings only if spaces are present after leading `#`.
+  Otherwise, leading github issue `#7` in the description is treated as a heading.
+
+- Add: list parsing option `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` to allow
+  an empty list sub-item to be recognized as such. Needed by Markdown Navigator to recognize
+  empty sub-items during parsing for list item formatting ops
 
 0.6.1
 -----
@@ -1049,7 +1106,7 @@ Next Release To Do List
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-    
+
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

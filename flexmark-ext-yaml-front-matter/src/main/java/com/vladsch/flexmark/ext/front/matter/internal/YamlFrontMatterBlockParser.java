@@ -139,7 +139,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             CharSequence line = state.getLine();
-            BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
+            BlockParser parentParser = matchedBlockParser.getBlockParser();
             // check whether this line is the first line of whole document or not
             if (parentParser instanceof DocumentBlockParser && parentParser.getBlock().getFirstChild() == null &&
                     REGEX_BEGIN.matcher(line).matches()) {

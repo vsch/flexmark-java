@@ -527,6 +527,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public int indexOfAny(String s) {
+        return indexOfAny(s,0);
+    }
+
+    @Override
+    public int indexOfAny(String s, int index) {
+        int iMax = length();
+        for (int i = index; i < iMax; i++) {
+            char c = charAt(i);
+            if (s.indexOf(c) != -1) return i;
+        }
+        return -1;
+    }
+
+    @Override
     public int lastIndexOf(char c, int index) {
         for (int i = index; i-- > 0; i++) {
             if (charAt(i) == c) return i;

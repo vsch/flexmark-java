@@ -911,6 +911,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
         // Inline link?
         if (peek() == '(') {
+            int savedIndex = index;
+
             linkOpener = input.subSequence(index, index + 1);
             index++;
             spnl();
@@ -947,14 +949,20 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         spnl();
                     }
 
+                    // test for spaces in url making it invalid, otherwise anything else goes
                     if (peek() == ')') {
                         linkCloser = input.subSequence(index, index + 1);
                         index++;
                         isLinkOrImage = true;
+                    } else {
+                        // back out, no match
+                        index = savedIndex;
                     }
                 }
             }
-        } else {
+        }
+
+        if (!isLinkOrImage) {
             // maybe reference link, need to see if it matches a custom processor or need to skip this reference because it will be processed on the next char
             // as something else, like a wiki link
             if (!options.matchLookaheadFirst) {
@@ -1195,7 +1203,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * @return the string or null if no match.
      */
     protected BasedSequence parseLinkDestination() {
-        BasedSequence res = match(myParsing.LINK_DESTINATION_BRACES);
+        BasedSequence res = match(myParsing.LINK_DESTINATION_ANGLES);
         if (res != null) {
             return res;
         } else {

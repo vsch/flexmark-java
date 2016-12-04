@@ -152,7 +152,9 @@ public abstract class RenderingTestCase {
         }
 
         specExample(expected, actual, optionsSet);
-        if (options != null && options.get(FAIL)) thrown.expect(ComparisonFailure.class);
+        if (options != null && options.get(FAIL)) {
+            thrown.expect(ComparisonFailure.class);
+        }
         assertEquals(expected, actual);
     }
 

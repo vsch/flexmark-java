@@ -545,6 +545,13 @@ public class DocumentParser implements ParserState {
                 BlockContinueImpl blockContinue = (BlockContinueImpl) result;
                 if (blockContinue.isFinalize()) {
                     finalize(blockParser);
+
+                    // maybe it left a notice to advance index or column
+                    if (blockContinue.getNewIndex() != -1) {
+                        setNewIndex(blockContinue.getNewIndex());
+                    } else if (blockContinue.getNewColumn() != -1) {
+                        setNewColumn(blockContinue.getNewColumn());
+                    }
                     return;
                 } else {
                     if (blockContinue.getNewIndex() != -1) {
@@ -554,6 +561,14 @@ public class DocumentParser implements ParserState {
                     }
                     matches++;
                 }
+            } else if (result instanceof BlockNoneImpl) {
+                BlockNoneImpl blockContinue = (BlockNoneImpl) result;
+                if (blockContinue.getNewIndex() != -1) {
+                    setNewIndex(blockContinue.getNewIndex());
+                } else if (blockContinue.getNewColumn() != -1) {
+                    setNewColumn(blockContinue.getNewColumn());
+                }
+                break;
             } else {
                 break;
             }
@@ -1017,7 +1032,7 @@ public class DocumentParser implements ParserState {
         }
 
         @Override
-        public BlockParser getMatchedBlockParser() {
+        public BlockParser getBlockParser() {
             return matchedBlockParser;
         }
 

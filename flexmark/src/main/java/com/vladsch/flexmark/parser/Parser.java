@@ -37,45 +37,69 @@ public class Parser implements IParse {
     final public static DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", ReferenceRepository::new);
 
     final public static DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
+
     final public static DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
     final public static DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_TO_BLANK_LINE", false);
     final public static DataKey<Boolean> BLOCK_QUOTE_IGNORE_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_IGNORE_BLANK_LINE", false);
+
     final public static DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
+
     final public static DataKey<Boolean> HARD_LINE_BREAK_LIMIT = new DataKey<>("HARD_LINE_BREAK_LIMIT", false);
+
+    final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
     final public static DataKey<Integer> HEADING_SETEXT_MARKER_LENGTH = new DataKey<>("HEADING_SETEXT_MARKER_LENGTH", 1);
     final public static DataKey<Boolean> HEADING_NO_ATX_SPACE = new DataKey<>("HEADING_NO_ATX_SPACE", false);
     final public static DataKey<Boolean> HEADING_NO_LEAD_SPACE = new DataKey<>("HEADING_NO_LEAD_SPACE", false);
-    final public static DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
+
     final public static DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
+    final public static DataKey<Boolean> HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH = new DataKey<>("HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH", true);
+
     final public static DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
     final public static DataKey<Boolean> INDENTED_CODE_NO_TRAILING_BLANK_LINES = new DataKey<>("INDENTED_CODE_NO_TRAILING_BLANK_LINES", true);
+
     final public static DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
-    
+
     final public static DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
     final public static DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
     final public static DataKey<Boolean> LISTS_LOOSE_ON_PREV_LOOSE_ITEM = new DataKey<>("LISTS_LOOSE_ON_PREV_LOOSE_ITEM", false);
     final public static DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    final public static DataKey<Boolean> LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
     final public static DataKey<Boolean> LISTS_BULLET_MATCH = new DataKey<>("LISTS_BULLET_MATCH", true);
     final public static DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
     final public static DataKey<Integer> LISTS_FIXED_INDENT = new DataKey<>("LISTS_FIXED_INDENT", 0);
     final public static DataKey<Boolean> LISTS_ITEM_TYPE_MATCH = new DataKey<>("LISTS_ITEM_TYPE_MATCH", true);
-    final public static DataKey<Boolean> LISTS_ITEM_MISMATCH_TO_SUBITEM = new DataKey<>("LISTS_ITEM_MISMATCH_TO_SUBITEM", false);
+    final public static DataKey<Boolean> LISTS_ITEM_MISMATCH_TO_SUB_ITEM = new DataKey<>("LISTS_ITEM_MISMATCH_TO_SUB_ITEM", false);
     final public static DataKey<Boolean> LISTS_ORDERED_ITEM_DOT_ONLY = new DataKey<>("LISTS_ORDERED_ITEM_DOT_ONLY", false);
     final public static DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
     final public static DataKey<Boolean> LISTS_ORDERED_LIST_MANUAL_START = new DataKey<>("LISTS_ORDERED_LIST_MANUAL_START", true);
     final public static DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
     final public static DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH", false);
-    final public static DataKey<Boolean> LISTS_CONTENT_INDENT = new DataKey<>("LISTS_LIST_CONTENT_INDENT", false);
-    final public static DataKey<Integer> LISTS_CONTENT_INDENT_OFFSET = new DataKey<>("LISTS_LIST_CONTENT_INDENT", 0);
-    final public static DataKey<Boolean> LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET = new DataKey<>("LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET", false);
-    final public static DataKey<Boolean> LISTS_OVER_INDENTS_TO_FIRST_ITEM = new DataKey<>("LISTS_OVER_INDENTS_TO_FIRST_ITEM", false);
-    
+    final public static DataKey<Boolean> LISTS_FIRST_ITEM_INDENT_BASED_LIMIT = new DataKey<>("LISTS_FIRST_ITEM_INDENT_BASED_LIMIT", false);
+    final public static DataKey<Integer> LISTS_FIRST_ITEM_INDENT_BASED_LIMIT_OFFSET = new DataKey<>("LISTS_FIRST_ITEM_INDENT_BASED_LIMIT_OFFSET", 4);
+    final public static DataKey<Boolean> LISTS_CONTENT_INDENT_OVERRIDES_CODE_INDENT = new DataKey<>("LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET", false);
+    final public static DataKey<Integer> LISTS_CONTENT_INDENT_OVERRIDES_CODE_INDENT_OFFSET = new DataKey<>("LISTS_CONTENT_INDENT_OVERRIDES_CODE_INDENT_OFFSET", 8);
+    final public static DataKey<Boolean> LISTS_ITEM_INDENT_OVER_MARKER_TO_LIST = new DataKey<>("LISTS_ITEM_INDENT_OVER_MARKER_TO_LIST", true);
+    final public static DataKey<Boolean> LISTS_ITEM_INDENT_RELATIVE_TO_LAST_ITEM = new DataKey<>("LISTS_ITEM_INDENT_RELATIVE_TO_LAST_ITEM", true);
+
+    // this one if line's indent < list's first item indent + offset then it is an item, else a sub-item, >= offset + 4 then it is indented code
+    final public static DataKey<Boolean> LISTS_FIRST_ITEM_INDENT_BASED_CONTENT_INDENT = new DataKey<>("LISTS_FIRST_ITEM_INDENT_BASED_CONTENT_INDENT", false);
+    final public static DataKey<Integer> LISTS_FIRST_ITEM_INDENT_BASED_CONTENT_INDENT_OFFSET = new DataKey<>("LISTS_FIRST_ITEM_INDENT_BASED_CONTENT_INDENT_OFFSET", 4);
+
+    // TEST: this option tests are missing
+    final public static DataKey<Boolean> LISTS_ITEM_INDENT_OVER_MARKER_TO_SUB_ITEM = new DataKey<>("LISTS_ITEM_INDENT_OVER_MARKER_TO_SUB_ITEM", false);
+
+    /**
+     * @depricated LISTS_OVER_INDENTS_TO_FIRST_ITEM
+     */
+    final public static DataKey<Boolean> LISTS_OVER_INDENTS_TO_FIRST_ITEM = LISTS_ITEM_INDENT_OVER_MARKER_TO_LIST;
+
     final public static DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     final public static DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
     final public static DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);
     final public static DataKey<Boolean> PARSE_MULTI_LINE_IMAGE_URLS = new DataKey<>("PARSE_MULTI_LINE_IMAGE_URLS", false);
+    final public static DataKey<Boolean> PARSE_JEKYLL_MACROS_IN_URLS = new DataKey<>("PARSE_JEKYLL_MACROS_IN_URLS", false);
     final public static DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     final public static DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
     final public static DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);

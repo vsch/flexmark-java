@@ -14,11 +14,12 @@ public class Parsing {
 
     final public String ESCAPED_CHAR;
     final public Pattern LINK_LABEL;
-    final public Pattern LINK_DESTINATION_BRACES;
+    final public Pattern LINK_DESTINATION_ANGLES;
     final public String LINK_TITLE_STRING;
     final public Pattern LINK_TITLE;
     final public String REG_CHAR;
     final public String IN_PARENS_NOSP;
+    final public String IN_BRACES_W_SP;
     final public Pattern LINK_DESTINATION;
     final public String HTMLCOMMENT;
     final public String PROCESSINGINSTRUCTION;
@@ -63,6 +64,7 @@ public class Parsing {
 
     final public int CODE_BLOCK_INDENT;
     final public boolean intellijDummyIdentifier;
+    final public String INVALID_LINK_CHARS;
 
     public Parsing(DataHolder options) {
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
@@ -73,7 +75,7 @@ public class Parsing {
         this.ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
         this.LINK_LABEL = Pattern
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
-        this.LINK_DESTINATION_BRACES = Pattern.compile(
+        this.LINK_DESTINATION_ANGLES = Pattern.compile(
                 "^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
         this.LINK_TITLE_STRING = "(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
                 '|' +
@@ -83,8 +85,9 @@ public class Parsing {
         this.LINK_TITLE = Pattern.compile("^" + LINK_TITLE_STRING);
         this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
+        this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
+                "^(?:" +(options.get(Parser.PARSE_JEKYLL_MACROS_IN_URLS) ? IN_BRACES_W_SP + "|" : "")  + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
         this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
@@ -138,6 +141,9 @@ public class Parsing {
         }
 
         this.CODE_BLOCK_INDENT = 4;
+
+        // list of characters not allowed in link URL
+        this.INVALID_LINK_CHARS = " \t";
     }
 
     public String EXCLUDED_0_TO_SPACE() {

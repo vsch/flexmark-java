@@ -1,10 +1,11 @@
 ---
 title: CommonMark Spec
 author: John MacFarlane
-version: 0.26
-date: '2016-07-15'
+version: 0.27
+date: '2016-11-18'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
+
 ---
 
 # Introduction
@@ -70,6 +71,7 @@ This paragraph belongs to item two of the outer list.
 ```
 
 And here is the equivalent in Markdown:
+
 ```
 1.  List item one.
 
@@ -380,6 +382,7 @@ Document[0, 16]
   IndentedCodeBlock[4, 16]
 ````````````````````````````````
 
+
 In the following example, a continuation paragraph of a list
 item is indented with a tab; this has exactly the same effect
 as indentation with four spaces would:
@@ -405,6 +408,7 @@ Document[0, 14]
         Text[10, 13] chars:[10, 13, "bar"]
 ````````````````````````````````
 
+
 ```````````````````````````````` example Tabs: 5
 - foo
 
@@ -425,6 +429,7 @@ Document[0, 13]
         Text[2, 5] chars:[2, 5, "foo"]
       IndentedCodeBlock[9, 13]
 ````````````````````````````````
+
 
 Normally the `>` that begins a block quote may be followed
 optionally by a space, which is not considered part of the
@@ -447,6 +452,7 @@ Document[0, 7]
   BlockQuote[0, 7] marker:[0, 1, ">"]
     IndentedCodeBlock[3, 7]
 ````````````````````````````````
+
 
 ```````````````````````````````` example Tabs: 7
 -→→foo
@@ -476,6 +482,7 @@ bar
 Document[0, 13]
   IndentedCodeBlock[4, 13]
 ````````````````````````````````
+
 
 ```````````````````````````````` example Tabs: 9
  - foo
@@ -509,11 +516,13 @@ Document[0, 24]
                 Text[20, 23] chars:[20, 23, "baz"]
 ````````````````````````````````
 
+
 ```````````````````````````````` example Tabs: 10
 #→Foo
 .
 <h1>Foo</h1>
 ````````````````````````````````
+
 
 ```````````````````````````````` example Tabs: 11
 *→*→*→
@@ -1902,7 +1911,6 @@ Document[0, 19]
 ````````````````````````````````
 
 
-
 The contents of a code block are literal text, and do not get parsed
 as Markdown:
 
@@ -2078,7 +2086,6 @@ Trailing spaces are included in the code block's content:
 Document[0, 10]
   IndentedCodeBlock[4, 10]
 ````````````````````````````````
-
 
 
 ## Fenced code blocks
@@ -2418,7 +2425,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 Code fences (opening and closing) cannot contain internal spaces:
 
 ```````````````````````````````` example Fenced code blocks: 19
@@ -2581,7 +2587,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 ## HTML blocks
 
 An [HTML block](@) is a group of lines that is treated
@@ -2592,7 +2597,7 @@ by their start and end conditions.  The block begins with a line that
 meets a [start condition](@) (after up to three spaces
 optional indentation).  It ends with the first subsequent line that
 meets a matching [end condition](@), or the last line of
-the document or other [container block](@), if no line is encountered that meets the
+the document or other [container block]), if no line is encountered that meets the
 [end condition].  If the first line meets both the [start condition]
 and the [end condition], the block will contain just that line.
 
@@ -2622,7 +2627,8 @@ followed by one of the strings (case-insensitive) `address`,
 `article`, `aside`, `base`, `basefont`, `blockquote`, `body`,
 `caption`, `center`, `col`, `colgroup`, `dd`, `details`, `dialog`,
 `dir`, `div`, `dl`, `dt`, `fieldset`, `figcaption`, `figure`,
-`footer`, `form`, `frame`, `frameset`, `h1`, `head`, `header`, `hr`,
+`footer`, `form`, `frame`, `frameset`,
+`h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `head`, `header`, `hr`,
 `html`, `iframe`, `legend`, `li`, `link`, `main`, `menu`, `menuitem`,
 `meta`, `nav`, `noframes`, `ol`, `optgroup`, `option`, `p`, `param`,
 `section`, `source`, `summary`, `table`, `tbody`, `td`,
@@ -2754,6 +2760,7 @@ Document[0, 40]
 
 
 An open tag need not be closed:
+
 ```````````````````````````````` example HTML blocks: 7
 <div>
 *foo*
@@ -2770,7 +2777,6 @@ Document[0, 19]
     Emphasis[13, 18] textOpen:[13, 14, "*"] text:[14, 17, "bar"] textClose:[17, 18, "*"]
       Text[14, 17] chars:[14, 17, "bar"]
 ````````````````````````````````
-
 
 
 A partial tag need not even be completed (garbage
@@ -3200,7 +3206,6 @@ Document[0, 30]
   Paragraph[25, 30]
     Text[25, 29] chars:[25, 29, "okay"]
 ````````````````````````````````
-
 
 
 A processing instruction (type 3):
@@ -3986,7 +3991,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 ## Paragraphs
 
 A sequence of non-blank lines that cannot be interpreted as other
@@ -4177,7 +4181,6 @@ Document[0, 22]
   Heading[12, 17] textOpen:[12, 13, "#"] text:[14, 17, "aaa"]
     Text[14, 17] chars:[14, 17, "aaa"]
 ````````````````````````````````
-
 
 
 # Container blocks
@@ -4494,7 +4497,7 @@ Document[0, 16]
 
 To see why, note that in
 
-```markdown
+``` markdown
 > foo
 >     - bar
 ```
@@ -4807,7 +4810,6 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
 ## List items
 
 A [list marker](@) is a
@@ -4835,11 +4837,11 @@ The following rules define [list items]:
     If the list item is ordered, then it is also assigned a start
     number, based on the ordered list marker.
 
-    Exceptions: When the list item interrupts a paragraph---that
-    is, when it starts on a line that would otherwise count as
-    [paragraph continuation text]---then (a) the lines *Ls* must
-    not begin with a blank line, and (b) if the list item is
-    ordered, the start number must be 1.
+    Exceptions: When the first list item in a [list] interrupts
+    a paragraph---that is, when it starts on a line that would
+    otherwise count as [paragraph continuation text]---then (a)
+    the lines *Ls* must not begin with a blank line, and (b) if
+    the list item is ordered, the start number must be 1.
 
 For example, let *Ls* be the lines
 
@@ -5189,6 +5191,7 @@ Document[0, 29]
       IndentedCodeBlock[13, 29]
 ````````````````````````````````
 
+
 Note that ordered list start numbers must be nine digits or less:
 
 ```````````````````````````````` example List items: 13
@@ -5260,7 +5263,6 @@ Document[0, 11]
   Paragraph[0, 11]
     Text[0, 10] chars:[0, 10, "-1. not ok"]
 ````````````````````````````````
-
 
 
 2.  **Item starting with indented code.**  If a sequence of lines *Ls*
@@ -5525,6 +5527,7 @@ Document[0, 40]
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
 
+
 When the list item starts with a blank line, the number of spaces
 following the list marker doesn't change the required indentation:
 
@@ -5648,6 +5651,7 @@ Document[0, 2]
   BulletList[0, 1] isTight
     BulletListItem[0, 1] open:[0, 1, "*"] isTight
 ````````````````````````````````
+
 
 However, an empty list item cannot interrupt a paragraph:
 
@@ -5802,7 +5806,6 @@ Document[0, 97]
 ````````````````````````````````
 
 
-
 5.  **Laziness.**  If a string of lines *Ls* constitute a [list
     item](#list-items) with contents *Bs*, then the result of deleting
     some or all of the indentation from one or more lines in which the
@@ -5923,7 +5926,6 @@ Document[0, 36]
             SoftLineBreak[17, 18]
             Text[20, 35] chars:[20, 35, "conti … here."]
 ````````````````````````````````
-
 
 
 6.  **That's all.** Nothing that is not counted as a list item by rules
@@ -6330,8 +6332,7 @@ takes four spaces (a common case), but diverge in other cases.
 
 A [list](@) is a sequence of one or more
 list items [of the same type].  The list items
-may be separated by single [blank lines], but two
-blank lines end all containing lists.
+may be separated by any number of blank lines.
 
 Two list items are [of the same type](@)
 if they begin with a [list marker] of the same type.
@@ -6443,13 +6444,15 @@ Document[0, 16]
         Text[12, 15] chars:[12, 15, "baz"]
 ````````````````````````````````
 
+
 `Markdown.pl` does not allow this, through fear of triggering a list
 via a numeral in a hard-wrapped line:
 
-```````````````````````````````` markdown
+``` markdown
 The number of windows in my house is
 14.  The number of doors is 6.
-````````````````````````````````
+```
+
 Oddly, though, `Markdown.pl` *does* allow a blockquote to
 interrupt a paragraph, even though the same considerations might
 apply.
@@ -6458,10 +6461,12 @@ In CommonMark, we do allow lists to interrupt paragraphs, for
 two reasons.  First, it is natural and not uncommon for people
 to start lists without blank lines:
 
-    I need to buy
-    - new shoes
-    - a coat
-    - a plane ticket
+``` markdown
+I need to buy
+- new shoes
+- a coat
+- a plane ticket
+```
 
 Second, we are attracted to a
 
@@ -6473,20 +6478,24 @@ Second, we are attracted to a
 (Indeed, the spec for [list items] and [block quotes] presupposes
 this principle.) This principle implies that if
 
-      * I need to buy
-        - new shoes
-        - a coat
-        - a plane ticket
+``` markdown
+  * I need to buy
+    - new shoes
+    - a coat
+    - a plane ticket
+```
 
 is a list item containing a paragraph followed by a nested sublist,
 as all Markdown implementations agree it is (though the paragraph
 may be rendered without `<p>` tags, since the list is "tight"),
 then
 
-    I need to buy
-    - new shoes
-    - a coat
-    - a plane ticket
+``` markdown
+I need to buy
+- new shoes
+- a coat
+- a plane ticket
+```
 
 by itself should be a paragraph followed by a nested sublist.
 
@@ -6515,6 +6524,7 @@ Document[0, 68]
     Text[37, 67] chars:[37, 67, "14.   … is 6."]
 ````````````````````````````````
 
+
 We may still get an unintended result in cases like
 
 ```````````````````````````````` example Lists: 5
@@ -6534,6 +6544,7 @@ Document[0, 67]
       Paragraph[41, 67]
         Text[41, 66] chars:[41, 66, "The n … is 6."]
 ````````````````````````````````
+
 
 but this rule should prevent most spurious list captures.
 
@@ -6571,6 +6582,7 @@ Document[0, 21]
       Paragraph[17, 21]
         Text[17, 20] chars:[17, 20, "baz"]
 ````````````````````````````````
+
 
 ```````````````````````````````` example Lists: 7
 - foo
@@ -7448,7 +7460,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 ## Entity and numeric character references
 
 All valid HTML entity references and numeric character
@@ -7748,10 +7759,16 @@ single spaces, just as they would be by a browser:
   baz`
 .
 <p><code>foo bar baz</code></p>
+````````````````````````````````
+
+
+Not all [Unicode whitespace] (for instance, non-breaking space) is
+collapsed, however:
+
+```````````````````````````````` example Code spans: 6
+`a  b`
 .
-Document[0, 18]
-  Paragraph[0, 18]
-    Code[0, 17] textOpen:[0, 1, "`"] text:[1, 16, "foo   …  bar\nbaz"] textClose:[16, 17, "`"]
+<p><code>a  b</code></p>
 ````````````````````````````````
 
 
@@ -7768,7 +7785,7 @@ span will cause an unintended line break in the output.  Others just
 leave internal spaces as they are, which is fine if only HTML is being
 targeted.)
 
-```````````````````````````````` example Code spans: 6
+```````````````````````````````` example Code spans: 7
 `foo `` bar`
 .
 <p><code>foo `` bar</code></p>
@@ -7782,7 +7799,7 @@ Document[0, 13]
 Note that backslash escapes do not work in code spans. All backslashes
 are treated literally:
 
-```````````````````````````````` example Code spans: 7
+```````````````````````````````` example Code spans: 8
 `foo\`bar`
 .
 <p><code>foo\</code>bar`</p>
@@ -7803,7 +7820,7 @@ constructs except HTML tags and autolinks.  Thus, for example, this is
 not parsed as emphasized text, since the second `*` is part of a code
 span:
 
-```````````````````````````````` example Code spans: 8
+```````````````````````````````` example Code spans: 9
 *foo`*`
 .
 <p>*foo<code>*</code></p>
@@ -7817,7 +7834,7 @@ Document[0, 8]
 
 And this is not parsed as a link:
 
-```````````````````````````````` example Code spans: 9
+```````````````````````````````` example Code spans: 10
 [not a `link](/foo`)
 .
 <p>[not a <code>link](/foo</code>)</p>
@@ -7833,7 +7850,7 @@ Document[0, 21]
 Code spans, HTML tags, and autolinks have the same precedence.
 Thus, this is code:
 
-```````````````````````````````` example Code spans: 10
+```````````````````````````````` example Code spans: 11
 `<a href="`">`
 .
 <p><code>&lt;a href=&quot;</code>&quot;&gt;`</p>
@@ -7847,7 +7864,7 @@ Document[0, 15]
 
 But this is an HTML tag:
 
-```````````````````````````````` example Code spans: 11
+```````````````````````````````` example Code spans: 12
 <a href="`">`
 .
 <p><a href="`">`</p>
@@ -7861,7 +7878,7 @@ Document[0, 14]
 
 And this is code:
 
-```````````````````````````````` example Code spans: 12
+```````````````````````````````` example Code spans: 13
 `<http://foo.bar.`baz>`
 .
 <p><code>&lt;http://foo.bar.</code>baz&gt;`</p>
@@ -7875,7 +7892,7 @@ Document[0, 24]
 
 But this is an autolink:
 
-```````````````````````````````` example Code spans: 13
+```````````````````````````````` example Code spans: 14
 <http://foo.bar.`baz>`
 .
 <p><a href="http://foo.bar.%60baz">http://foo.bar.`baz</a>`</p>
@@ -7890,7 +7907,7 @@ Document[0, 23]
 When a backtick string is not closed by a matching backtick string,
 we just have literal backticks:
 
-```````````````````````````````` example Code spans: 14
+```````````````````````````````` example Code spans: 15
 ```foo``
 .
 <p>```foo``</p>
@@ -7901,7 +7918,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Code spans: 15
+```````````````````````````````` example Code spans: 16
 `foo
 .
 <p>`foo</p>
@@ -8403,7 +8420,6 @@ Document[0, 9]
 ````````````````````````````````
 
 
-
 Rule 4:
 
 This is not emphasis, because the closing `_` is preceded by
@@ -8591,6 +8607,7 @@ Document[0, 13]
 
 
 A newline counts as whitespace:
+
 ```````````````````````````````` example Emphasis and strong emphasis: 34
 __
 foo bar__
@@ -8685,7 +8702,6 @@ Document[0, 14]
     StrongEmphasis[4, 13] textOpen:[4, 6, "__"] text:[6, 11, "(bar)"] textClose:[11, 13, "__"]
       Text[6, 11] chars:[6, 11, "(bar)"]
 ````````````````````````````````
-
 
 
 Rule 7:
@@ -9001,6 +9017,7 @@ Document[0, 18]
       Text[12, 16] chars:[12, 16, " baz"]
 ````````````````````````````````
 
+
 ```````````````````````````````` example Emphasis and strong emphasis: 61
 *foo**bar**baz*
 .
@@ -9015,12 +9032,12 @@ Document[0, 16]
       Text[11, 14] chars:[11, 14, "baz"]
 ````````````````````````````````
 
+
 Note that in the preceding case, the interpretation
 
 ``` markdown
 <p><em>foo</em><em>bar<em></em>baz</em></p>
 ```
-
 
 is precluded by the condition that a delimiter that
 can both open and close (like the `*` after `foo`
@@ -9032,7 +9049,6 @@ The same condition ensures that the following
 cases are all strong emphasis nested inside
 emphasis, even when the interior spaces are
 omitted:
-
 
 ```````````````````````````````` example Emphasis and strong emphasis: 62
 ***foo** bar*
@@ -9088,6 +9104,7 @@ Document[0, 13]
       StrongEmphasis[4, 11] textOpen:[4, 6, "**"] text:[6, 9, "bar"] textClose:[9, 11, "**"]
         Text[6, 9] chars:[6, 9, "bar"]
 ````````````````````````````````
+
 
 Indefinite levels of nesting are possible:
 
@@ -9146,7 +9163,6 @@ Document[0, 37]
   Paragraph[0, 37]
     Text[0, 36] chars:[0, 36, "****  … hasis"]
 ````````````````````````````````
-
 
 
 Rule 10:
@@ -9365,7 +9381,6 @@ Document[0, 37]
 ````````````````````````````````
 
 
-
 Rule 11:
 
 ```````````````````````````````` example Emphasis and strong emphasis: 84
@@ -9522,7 +9537,6 @@ Document[0, 9]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 8] chars:[5, 8, "***"]
 ````````````````````````````````
-
 
 
 Rule 12:
@@ -9765,7 +9779,6 @@ Document[0, 12]
 ````````````````````````````````
 
 
-
 Rule 13 can be applied to arbitrarily long sequences of
 delimiters:
 
@@ -9984,7 +9997,6 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
 ## Links
 
 A link contains [link text] (the visible text), a [link destination]
@@ -10119,7 +10131,9 @@ even if enclosed in pointy brackets:
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 15] chars:[0, 15, "[link …  uri)"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 15] chars:[6, 15, "(/my uri)"]
 ````````````````````````````````
 
 
@@ -10130,7 +10144,9 @@ Document[0, 16]
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Text[0, 17] chars:[0, 17, "[link … uri>)"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 17] chars:[6, 17, "(</my … uri>)"]
 ````````````````````````````````
 
 
@@ -10143,7 +10159,9 @@ bar)</p>
 .
 Document[0, 16]
   Paragraph[0, 16]
-    Text[0, 10] chars:[0, 10, "[link](foo"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 10] chars:[6, 10, "(foo"]
     SoftLineBreak[10, 11]
     Text[11, 15] chars:[11, 15, "bar)"]
 ````````````````````````````````
@@ -10158,10 +10176,13 @@ bar>)</p>
 .
 Document[0, 18]
   Paragraph[0, 18]
-    Text[0, 7] chars:[0, 7, "[link]("]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 7] chars:[6, 7, "("]
     HtmlInline[7, 16] chars:[7, 16, "<foo\nbar>"]
     Text[16, 17] chars:[16, 17, ")"]
 ````````````````````````````````
+
 
 Parentheses inside the link destination may be escaped:
 
@@ -10176,6 +10197,7 @@ Document[0, 16]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
+
 One level of balanced parentheses is allowed without escaping:
 
 ```````````````````````````````` example Links: 10
@@ -10189,6 +10211,7 @@ Document[0, 22]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
+
 However, if you have parentheses within parentheses, you need to escape
 or use the `<...>` form:
 
@@ -10199,7 +10222,9 @@ or use the `<...>` form:
 .
 Document[0, 22]
   Paragraph[0, 22]
-    Text[0, 21] chars:[0, 21, "[link … ar)))"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 21] chars:[6, 21, "(foo( … ar)))"]
 ````````````````````````````````
 
 
@@ -10359,22 +10384,39 @@ Document[0, 30]
 ````````````````````````````````
 
 
-Nested balanced quotes are not allowed without escaping:
+Titles must be separated from the link using a [whitespace].
+Other [Unicode whitespace] like non-breaking space doesn't work.
 
 ```````````````````````````````` example Links: 21
+[link](/url "title")
+.
+<p><a href="/url%C2%A0%22title%22">link</a></p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    Link[0, 20] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 19, "/url \"title\""] pageRef:[7, 19, "/url \"title\""] linkClose:[19, 20, ")"]
+      Text[1, 5] chars:[1, 5, "link"]
+````````````````````````````````
+
+
+Nested balanced quotes are not allowed without escaping:
+
+```````````````````````````````` example Links: 22
 [link](/url "title "and" title")
 .
 <p>[link](/url &quot;title &quot;and&quot; title&quot;)</p>
 .
 Document[0, 33]
   Paragraph[0, 33]
-    Text[0, 32] chars:[0, 32, "[link … tle\")"]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 32] chars:[6, 32, "(/url … tle\")"]
 ````````````````````````````````
 
 
 But it is easy to work around this by using a different quote type:
 
-```````````````````````````````` example Links: 22
+```````````````````````````````` example Links: 23
 [link](/url 'title "and" title')
 .
 <p><a href="/url" title="title &quot;and&quot; title">link</a></p>
@@ -10403,7 +10445,7 @@ the same way in inline links and link reference definitions.)
 
 [Whitespace] is allowed around the destination and title:
 
-```````````````````````````````` example Links: 23
+```````````````````````````````` example Links: 24
 [link](   /uri
   "title"  )
 .
@@ -10419,7 +10461,7 @@ Document[0, 28]
 But it is not allowed between the link text and the
 following parenthesis:
 
-```````````````````````````````` example Links: 24
+```````````````````````````````` example Links: 25
 [link] (/uri)
 .
 <p>[link] (/uri)</p>
@@ -10435,7 +10477,7 @@ Document[0, 14]
 The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:
 
-```````````````````````````````` example Links: 25
+```````````````````````````````` example Links: 26
 [link [foo [bar]]](/uri)
 .
 <p><a href="/uri">link [foo [bar]]</a></p>
@@ -10447,7 +10489,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 26
+```````````````````````````````` example Links: 27
 [link] bar](/uri)
 .
 <p>[link] bar](/uri)</p>
@@ -10460,7 +10502,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 27
+```````````````````````````````` example Links: 28
 [link [bar](/uri)
 .
 <p>[link <a href="/uri">bar</a></p>
@@ -10473,7 +10515,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 28
+```````````````````````````````` example Links: 29
 [link \[bar](/uri)
 .
 <p><a href="/uri">link [bar</a></p>
@@ -10487,7 +10529,7 @@ Document[0, 19]
 
 The link text may contain inline content:
 
-```````````````````````````````` example Links: 29
+```````````````````````````````` example Links: 30
 [link *foo **bar** `#`*](/uri)
 .
 <p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
@@ -10505,7 +10547,7 @@ Document[0, 31]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 30
+```````````````````````````````` example Links: 31
 [![moon](moon.jpg)](/uri)
 .
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
@@ -10520,7 +10562,7 @@ Document[0, 26]
 
 However, links may not contain other links, at any level of nesting.
 
-```````````````````````````````` example Links: 31
+```````````````````````````````` example Links: 32
 [foo [bar](/uri)](/uri)
 .
 <p>[foo <a href="/uri">bar</a>](/uri)</p>
@@ -10534,7 +10576,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 32
+```````````````````````````````` example Links: 33
 [foo *[bar [baz](/uri)](/uri)*](/uri)
 .
 <p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
@@ -10552,7 +10594,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 33
+```````````````````````````````` example Links: 34
 ![[[foo](uri1)](uri2)](uri3)
 .
 <p><img src="uri3" alt="[foo](uri2)" /></p>
@@ -10570,7 +10612,7 @@ Document[0, 29]
 These cases illustrate the precedence of link text grouping over
 emphasis grouping:
 
-```````````````````````````````` example Links: 34
+```````````````````````````````` example Links: 35
 *[foo*](/uri)
 .
 <p>*<a href="/uri">foo*</a></p>
@@ -10583,7 +10625,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 35
+```````````````````````````````` example Links: 36
 [foo *bar](baz*)
 .
 <p><a href="baz*">foo *bar</a></p>
@@ -10598,7 +10640,7 @@ Document[0, 17]
 Note that brackets that *aren't* part of links do not take
 precedence:
 
-```````````````````````````````` example Links: 36
+```````````````````````````````` example Links: 37
 *foo [bar* baz]
 .
 <p><em>foo [bar</em> baz]</p>
@@ -10616,7 +10658,7 @@ Document[0, 16]
 These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:
 
-```````````````````````````````` example Links: 37
+```````````````````````````````` example Links: 38
 [foo <bar attr="](baz)">
 .
 <p>[foo <bar attr="](baz)"></p>
@@ -10628,7 +10670,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 38
+```````````````````````````````` example Links: 39
 [foo`](/uri)`
 .
 <p>[foo<code>](/uri)</code></p>
@@ -10640,7 +10682,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 39
+```````````````````````````````` example Links: 40
 [foo<http://example.com/?search=](uri)>
 .
 <p>[foo<a href="http://example.com/?search=%5D(uri)">http://example.com/?search=](uri)</a></p>
@@ -10680,7 +10722,7 @@ matching [link reference definition].
 
 Here is a simple example:
 
-```````````````````````````````` example Links: 40
+```````````````````````````````` example Links: 41
 [foo][bar]
 
 [bar]: /url "title"
@@ -10701,7 +10743,7 @@ The rules for the [link text] are the same as with
 The link text may contain balanced brackets, but not unbalanced ones,
 unless they are escaped:
 
-```````````````````````````````` example Links: 41
+```````````````````````````````` example Links: 42
 [link [foo [bar]]][ref]
 
 [ref]: /uri
@@ -10716,7 +10758,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 42
+```````````````````````````````` example Links: 43
 [link \[bar][ref]
 
 [ref]: /uri
@@ -10733,7 +10775,7 @@ Document[0, 31]
 
 The link text may contain inline content:
 
-```````````````````````````````` example Links: 43
+```````````````````````````````` example Links: 44
 [link *foo **bar** `#`*][ref]
 
 [ref]: /uri
@@ -10754,7 +10796,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 44
+```````````````````````````````` example Links: 45
 [![moon](moon.jpg)][ref]
 
 [ref]: /uri
@@ -10772,7 +10814,7 @@ Document[0, 38]
 
 However, links may not contain other links, at any level of nesting.
 
-```````````````````````````````` example Links: 45
+```````````````````````````````` example Links: 46
 [foo [bar](/uri)][ref]
 
 [ref]: /uri
@@ -10791,7 +10833,7 @@ Document[0, 36]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 46
+```````````````````````````````` example Links: 47
 [foo *bar [baz][ref]*][ref]
 
 [ref]: /uri
@@ -10818,7 +10860,7 @@ instead of one [full reference link].)
 The following cases illustrate the precedence of link text grouping over
 emphasis grouping:
 
-```````````````````````````````` example Links: 47
+```````````````````````````````` example Links: 48
 *[foo*][ref]
 
 [ref]: /uri
@@ -10834,7 +10876,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 48
+```````````````````````````````` example Links: 49
 [foo *bar][ref]
 
 [ref]: /uri
@@ -10852,7 +10894,7 @@ Document[0, 29]
 These cases illustrate the precedence of HTML tags, code spans,
 and autolinks over link grouping:
 
-```````````````````````````````` example Links: 49
+```````````````````````````````` example Links: 50
 [foo <bar attr="][ref]">
 
 [ref]: /uri
@@ -10867,7 +10909,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 50
+```````````````````````````````` example Links: 51
 [foo`][ref]`
 
 [ref]: /uri
@@ -10882,7 +10924,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 51
+```````````````````````````````` example Links: 52
 [foo<http://example.com/?search=][ref]>
 
 [ref]: /uri
@@ -10899,7 +10941,7 @@ Document[0, 53]
 
 Matching is case-insensitive:
 
-```````````````````````````````` example Links: 52
+```````````````````````````````` example Links: 53
 [foo][BaR]
 
 [bar]: /url "title"
@@ -10916,7 +10958,7 @@ Document[0, 32]
 
 Unicode case fold is used:
 
-```````````````````````````````` example Links: 53
+```````````````````````````````` example Links: 54
 [Толпой][Толпой] is a Russian word.
 
 [ТОЛПОЙ]: /url
@@ -10935,7 +10977,7 @@ Document[0, 52]
 Consecutive internal [whitespace] is treated as one space for
 purposes of determining matching:
 
-```````````````````````````````` example Links: 54
+```````````````````````````````` example Links: 55
 [Foo
   bar]: /url
 
@@ -10954,7 +10996,7 @@ Document[0, 34]
 No [whitespace] is allowed between the [link text] and the
 [link label]:
 
-```````````````````````````````` example Links: 55
+```````````````````````````````` example Links: 56
 [foo] [bar]
 
 [bar]: /url "title"
@@ -10972,7 +11014,7 @@ Document[0, 33]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 56
+```````````````````````````````` example Links: 57
 [foo]
 [bar]
 
@@ -11022,7 +11064,7 @@ unintended results.)
 When there are multiple matching [link reference definitions],
 the first is used:
 
-```````````````````````````````` example Links: 57
+```````````````````````````````` example Links: 58
 [foo]: /url1
 
 [foo]: /url2
@@ -11044,7 +11086,7 @@ Note that matching is performed on normalized strings, not parsed
 inline content.  So the following does not match, even though the
 labels define equivalent inline content:
 
-```````````````````````````````` example Links: 58
+```````````````````````````````` example Links: 59
 [bar][foo\!]
 
 [foo!]: /url
@@ -11062,7 +11104,7 @@ Document[0, 27]
 [Link labels] cannot contain brackets, unless they are
 backslash-escaped:
 
-```````````````````````````````` example Links: 59
+```````````````````````````````` example Links: 60
 [foo][ref[]
 
 [ref[]: /uri
@@ -11083,7 +11125,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 60
+```````````````````````````````` example Links: 61
 [foo][ref[bar]]
 
 [ref[bar]]: /uri
@@ -11107,7 +11149,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 61
+```````````````````````````````` example Links: 62
 [[[foo]]]
 
 [[[foo]]]: /url
@@ -11129,7 +11171,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 62
+```````````````````````````````` example Links: 63
 [foo][ref\[]
 
 [ref\[]: /uri
@@ -11146,7 +11188,7 @@ Document[0, 28]
 
 Note that in this example `]` is not backslash-escaped:
 
-```````````````````````````````` example Links: 63
+```````````````````````````````` example Links: 64
 [bar\\]: /uri
 
 [bar\\]
@@ -11163,7 +11205,7 @@ Document[0, 23]
 
 A [link label] must contain at least one [non-whitespace character]:
 
-```````````````````````````````` example Links: 64
+```````````````````````````````` example Links: 65
 []
 
 []: /uri
@@ -11180,7 +11222,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 65
+```````````````````````````````` example Links: 66
 [
  ]
 
@@ -11212,7 +11254,7 @@ which are used as the link's text.  The link's URI and title are
 provided by the matching reference link definition.  Thus,
 `[foo][]` is equivalent to `[foo][foo]`.
 
-```````````````````````````````` example Links: 66
+```````````````````````````````` example Links: 67
 [foo][]
 
 [foo]: /url "title"
@@ -11227,7 +11269,7 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 67
+```````````````````````````````` example Links: 68
 [*foo* bar][]
 
 [*foo* bar]: /url "title"
@@ -11246,7 +11288,7 @@ Document[0, 41]
 
 The link labels are case-insensitive:
 
-```````````````````````````````` example Links: 68
+```````````````````````````````` example Links: 69
 [Foo][]
 
 [foo]: /url "title"
@@ -11261,11 +11303,10 @@ Document[0, 29]
 ````````````````````````````````
 
 
-
 As with full reference links, [whitespace] is not
 allowed between the two sets of brackets:
 
-```````````````````````````````` example Links: 69
+```````````````````````````````` example Links: 70
 [foo] 
 []
 
@@ -11293,7 +11334,7 @@ which are used as the link's text.  The link's URI and title
 are provided by the matching link reference definition.
 Thus, `[foo]` is equivalent to `[foo][]`.
 
-```````````````````````````````` example Links: 70
+```````````````````````````````` example Links: 71
 [foo]
 
 [foo]: /url "title"
@@ -11308,7 +11349,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 71
+```````````````````````````````` example Links: 72
 [*foo* bar]
 
 [*foo* bar]: /url "title"
@@ -11325,7 +11366,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 72
+```````````````````````````````` example Links: 73
 [[*foo* bar]]
 
 [*foo* bar]: /url "title"
@@ -11344,7 +11385,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 73
+```````````````````````````````` example Links: 74
 [[bar [foo]
 
 [foo]: /url
@@ -11362,7 +11403,7 @@ Document[0, 25]
 
 The link labels are case-insensitive:
 
-```````````````````````````````` example Links: 74
+```````````````````````````````` example Links: 75
 [Foo]
 
 [foo]: /url "title"
@@ -11379,7 +11420,7 @@ Document[0, 27]
 
 A space after the link text should be preserved:
 
-```````````````````````````````` example Links: 75
+```````````````````````````````` example Links: 76
 [foo] bar
 
 [foo]: /url
@@ -11398,7 +11439,7 @@ Document[0, 23]
 If you just want bracketed text, you can backslash-escape the
 opening bracket to avoid links:
 
-```````````````````````````````` example Links: 76
+```````````````````````````````` example Links: 77
 \[foo]
 
 [foo]: /url "title"
@@ -11415,7 +11456,7 @@ Document[0, 28]
 Note that this is a link, because a link label ends with the first
 following closing bracket:
 
-```````````````````````````````` example Links: 77
+```````````````````````````````` example Links: 78
 [foo*]: /url
 
 *[foo*]
@@ -11431,9 +11472,10 @@ Document[0, 22]
 ````````````````````````````````
 
 
-Full references take precedence over shortcut references:
+Full and compact references take precedence over shortcut
+references:
 
-```````````````````````````````` example Links: 78
+```````````````````````````````` example Links: 79
 [foo][bar]
 
 [foo]: /url1
@@ -11450,10 +11492,58 @@ Document[0, 38]
 ````````````````````````````````
 
 
+```````````````````````````````` example Links: 80
+[foo][]
+
+[foo]: /url1
+.
+<p><a href="/url1">foo</a></p>
+.
+Document[0, 22]
+  Paragraph[0, 8]
+    LinkRef[0, 7] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
+      Text[1, 4] chars:[1, 4, "foo"]
+  Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
+````````````````````````````````
+
+
+Inline links also take precedence:
+
+```````````````````````````````` example Links: 81
+[foo]()
+
+[foo]: /url1
+.
+<p><a href="">foo</a></p>
+.
+Document[0, 22]
+  Paragraph[0, 8]
+    Link[0, 7] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 6] pageRef:[6, 6] linkClose:[6, 7, ")"]
+      Text[1, 4] chars:[1, 4, "foo"]
+  Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
+````````````````````````````````
+
+
+```````````````````````````````` example Links: 82
+[foo](not a link)
+
+[foo]: /url1
+.
+<p><a href="/url1">foo</a>(not a link)</p>
+.
+Document[0, 32]
+  Paragraph[0, 18]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
+      Text[1, 4] chars:[1, 4, "foo"]
+    Text[5, 17] chars:[5, 17, "(not  … link)"]
+  Reference[19, 31] refOpen:[19, 20, "["] ref:[20, 23, "foo"] refClose:[23, 25, "]:"] url:[26, 31, "/url1"]
+````````````````````````````````
+
+
 In the following case `[bar][baz]` is parsed as a reference,
 `[foo]` as normal text:
 
-```````````````````````````````` example Links: 79
+```````````````````````````````` example Links: 83
 [foo][bar][baz]
 
 [baz]: /url
@@ -11472,7 +11562,7 @@ Document[0, 29]
 Here, though, `[foo][bar]` is parsed as a reference, since
 `[bar]` is defined:
 
-```````````````````````````````` example Links: 80
+```````````````````````````````` example Links: 84
 [foo][bar][baz]
 
 [baz]: /url1
@@ -11494,7 +11584,7 @@ Document[0, 43]
 Here `[foo]` is not parsed as a shortcut reference, because it
 is followed by a link label (even though `[bar]` is not defined):
 
-```````````````````````````````` example Links: 81
+```````````````````````````````` example Links: 85
 [foo][bar][baz]
 
 [baz]: /url1
@@ -11510,7 +11600,6 @@ Document[0, 43]
   Reference[17, 29] refOpen:[17, 18, "["] ref:[18, 21, "baz"] refClose:[21, 23, "]:"] url:[24, 29, "/url1"]
   Reference[30, 42] refOpen:[30, 31, "["] ref:[31, 34, "foo"] refClose:[34, 36, "]:"] url:[37, 42, "/url2"]
 ````````````````````````````````
-
 
 
 ## Images
@@ -12906,7 +12995,7 @@ blocks.  But we cannot close unmatched blocks yet, because we may have a
 [lazy continuation line].
 
 2.  Next, after consuming the continuation markers for existing
-blocks, we look for new block starts (e.g. `>` for a block quote.
+blocks, we look for new block starts (e.g. `>` for a block quote).
 If we encounter a new block start, we close any blocks unmatched
 in step 1 before creating the new block as a child of the last
 matched block.

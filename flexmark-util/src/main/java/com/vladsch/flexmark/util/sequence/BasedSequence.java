@@ -27,7 +27,7 @@ public interface BasedSequence extends CharSequence {
     // no exceptions are thrown, instead the range is reduced to the legal available range
     BasedSequence endSequence(int start, int end);
     BasedSequence endSequence(int start);
-    
+
     // index from the end of the sequence
     // no exceptions are thrown, instead a \0 is returned for an invalid index
     char endCharAt(int index);
@@ -72,7 +72,7 @@ public interface BasedSequence extends CharSequence {
     boolean isBlank();
     boolean isNull();
     boolean isNotNull();
-    
+
     BasedSequence ifNullEmptyAfter(BasedSequence other);
     BasedSequence ifNullEmptyBefore(BasedSequence other);
     BasedSequence nullIfEmpty();
@@ -88,6 +88,8 @@ public interface BasedSequence extends CharSequence {
     int indexOfAny(char c1, char c2, int index);
     int indexOfAny(char c1, char c2, char c3);
     int indexOfAny(char c1, char c2, char c3, int index);
+    int indexOfAny(String s);
+    int indexOfAny(String s, int index);
     int indexOf(String s, int index);
     int lastIndexOf(char c, int index);
     int lastIndexOf(String s, int index);
@@ -130,12 +132,12 @@ public interface BasedSequence extends CharSequence {
      * @return true if other is contained in this
      */
     boolean contains(BasedSequence other);
-    
-    int SPLIT_INCLUDE_DELIMS = 1; 
-    int SPLIT_TRIM_PARTS = 2; 
-    int SPLIT_SKIP_EMPTY = 4; 
-    int SPLIT_INCLUDE_DELIM_PARTS = 8; 
-    int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY; 
+
+    int SPLIT_INCLUDE_DELIMS = 1;
+    int SPLIT_TRIM_PARTS = 2;
+    int SPLIT_SKIP_EMPTY = 4;
+    int SPLIT_INCLUDE_DELIM_PARTS = 8;
+    int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
     List<BasedSequence> split(char delimiter);
     List<BasedSequence> split(char delimiter, int limit);
     List<BasedSequence> split(char delimiter, int limit, int flags);

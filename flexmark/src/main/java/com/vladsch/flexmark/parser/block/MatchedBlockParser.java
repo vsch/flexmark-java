@@ -12,7 +12,18 @@ import java.util.List;
  */
 public interface MatchedBlockParser {
 
-    BlockParser getMatchedBlockParser();
+    /**
+     * @return current matched block parser instance
+     */
+    BlockParser getBlockParser();
+
+    /**
+     * @return current matched block parser instance
+     * @deprecated use {@link #getBlockParser()}
+     */
+    default BlockParser getMatchedBlockParser() {
+        return getBlockParser();
+    }
 
     /**
      * Returns the current content of the paragraph if the matched block is a paragraph. The content can be multiple

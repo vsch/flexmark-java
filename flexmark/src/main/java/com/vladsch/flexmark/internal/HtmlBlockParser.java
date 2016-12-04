@@ -185,8 +185,10 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     private static class BlockFactory extends AbstractBlockParserFactory {
         private Patterns myPatterns = null;
+        private final boolean myHtmlCommentBlocksInterruptParagraph;
         private BlockFactory(DataHolder options) {
             super(options);
+            myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.getFrom(options);
         }
 
         @Override
@@ -197,18 +199,20 @@ public class HtmlBlockParser extends AbstractBlockParser {
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<') {
                 for (int blockType = 1; blockType <= 7; blockType++) {
                     // Type 7 can not interrupt a paragraph
-                    if (blockType == 7 && matchedBlockParser.getMatchedBlockParser().getBlock() instanceof Paragraph) {
+                    if (blockType == 7 && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph) {
                         continue;
                     }
 
                     if (myPatterns == null) {
                         myPatterns = new Patterns(state.getParsing());
                     }
-                    
+
                     Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];
                     Pattern closer = myPatterns.BLOCK_PATTERNS[blockType][1];
                     boolean matches = opener.matcher(line.subSequence(nextNonSpace, line.length())).find();
-                    if (matches) {
+
+                    // TEST: non-interrupting of paragraphs by HTML comments
+                    if (matches && (myHtmlCommentBlocksInterruptParagraph || blockType != myPatterns.COMMENT_PATTERN_INDEX || !(matchedBlockParser.getBlockParser() instanceof ParagraphParser))) {
                         return BlockStart.of(new HtmlBlockParser(state.getProperties(), closer, blockType == myPatterns.COMMENT_PATTERN_INDEX)).atIndex(state.getIndex());
                     }
                 }

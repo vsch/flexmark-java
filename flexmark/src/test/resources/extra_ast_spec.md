@@ -25,6 +25,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
+
 Should fail
 
 ```````````````````````````````` example(Extra tests: 2) options(FAIL)
@@ -38,6 +39,7 @@ abc
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
 ````````````````````````````````
+
 
 
 Code fence starting with setext header marker
@@ -55,6 +57,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example Extra tests: 4
 ```markdown
 ===
@@ -66,6 +69,7 @@ Document[0, 20]
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
 ````````````````````````````````
+
 
 
 Make sure indentation is properly implemented
@@ -105,6 +109,7 @@ Document[0, 54]
             Paragraph[47, 54]
               Text[47, 53] chars:[47, 53, "item 2"]
 ````````````````````````````````
+
 
 
 Make sure indentation is properly implemented
@@ -156,6 +161,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
+
 ## Reference Repository Keep First tests
 
 Test repository KEEP_FIRST behavior, meaning the first reference def is used
@@ -177,6 +183,7 @@ Document[0, 46]
   Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] url:[27, 32, "/url2"]
   Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] url:[40, 45, "/url3"]
 ````````````````````````````````
+
 
 
 ## Reference Repository Keep Last tests
@@ -202,7 +209,8 @@ Document[0, 46]
 ````````````````````````````````
 
 
-## References 
+
+## References
 
 References with up to 3 leading blanks should be processed.
 
@@ -219,6 +227,7 @@ Document[0, 21]
       Text[1, 4] chars:[1, 4, "ref"]
   Reference[8, 20] refOpen:[8, 9, "["] ref:[9, 12, "ref"] refClose:[12, 14, "]:"] url:[15, 20, "/url1"]
 ````````````````````````````````
+
 
 
 References with up to 3 leading blanks should be processed.
@@ -238,6 +247,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
+
 References with up to 3 leading blanks should be processed.
 
 ```````````````````````````````` example References: 3
@@ -253,6 +263,7 @@ Document[0, 23]
       Text[1, 4] chars:[1, 4, "ref"]
   Reference[10, 22] refOpen:[10, 11, "["] ref:[11, 14, "ref"] refClose:[14, 16, "]:"] url:[17, 22, "/url1"]
 ````````````````````````````````
+
 
 
 References with up to 3 leading blanks should be processed.
@@ -272,6 +283,7 @@ Document[0, 24]
       Text[1, 4] chars:[1, 4, "ref"]
   IndentedCodeBlock[11, 24]
 ````````````````````````````````
+
 
 
 ## Heading options
@@ -334,6 +346,7 @@ Document[0, 151]
 ````````````````````````````````
 
 
+
 Don't allow leading spaces
 
 ```````````````````````````````` example(Heading options: 2) options(hdr-no-lead-space)
@@ -367,6 +380,7 @@ Document[0, 81]
 ````````````````````````````````
 
 
+
 Don't allow leading spaces, don't require atx marker space
 
 ```````````````````````````````` example(Heading options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
@@ -398,6 +412,7 @@ Document[0, 75]
     SoftLineBreak[59, 60]
     Text[61, 74] chars:[61, 74, "##### … ading"]
 ````````````````````````````````
+
 
 
 Minimum setext marker length 3
@@ -458,1370 +473,57 @@ Document[0, 116]
 ````````````````````````````````
 
 
+
+Minimum setext marker length 3 in lists
+
+```````````````````````````````` example(Heading options: 5) options(setext-marker-length)
+- item 
+    - 
+ 
+.
+<ul>
+  <li>item
+  -</li>
+</ul>
+.
+Document[0, 17]
+  BulletList[0, 15] isTight
+    BulletListItem[0, 15] open:[0, 1, "-"] isTight
+      Paragraph[2, 15]
+        Text[2, 6] chars:[2, 6, "item"]
+        SoftLineBreak[7, 8]
+        Text[12, 13] chars:[12, 13, "-"]
+````````````````````````````````
+
+
+
+Minimum setext marker length 3 in lists
+
+```````````````````````````````` example(Heading options: 6) options(setext-marker-length, empty-bullet-item-break)
+- item 
+    - 
+ 
+.
+<ul>
+  <li>item
+    <ul>
+      <li></li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 17]
+  BulletList[0, 13] isTight
+    BulletListItem[0, 13] open:[0, 1, "-"] isTight
+      Paragraph[2, 8]
+        Text[2, 6] chars:[2, 6, "item"]
+      BulletList[12, 13] isTight
+        BulletListItem[12, 13] open:[12, 13, "-"] isTight
+````````````````````````````````
+
+
+
 ## List Options
-
-### List - Fixed Indent
-
-Options defined: list-fixed-indent, list-no-break, list-no-loose, list-no-start to change the
-behavior of list parser and renderer
-
-Default processing
-
-```````````````````````````````` example List - Fixed Indent: 1
-* item 1
- * item 2
-  * item 3
-   * item 4
-    *  item 5
-     *  item 6
-      *  item 7
-       *  item 8
-        *  item 9
-.
-<ul>
-  <li>item 1</li>
-  <li>item 2</li>
-  <li>item 3</li>
-  <li>item 4</li>
-  <li>item 5</li>
-  <li>item 6</li>
-  <li>item 7</li>
-  <li>item 8</li>
-  <li>item 9</li>
-</ul>
-.
-Document[0, 122]
-  BulletList[0, 122] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 19] open:[10, 11, "*"] isTight
-      Paragraph[12, 19]
-        Text[12, 18] chars:[12, 18, "item 2"]
-    BulletListItem[21, 30] open:[21, 22, "*"] isTight
-      Paragraph[23, 30]
-        Text[23, 29] chars:[23, 29, "item 3"]
-    BulletListItem[33, 42] open:[33, 34, "*"] isTight
-      Paragraph[35, 42]
-        Text[35, 41] chars:[35, 41, "item 4"]
-    BulletListItem[46, 56] open:[46, 47, "*"] isTight
-      Paragraph[49, 56]
-        Text[49, 55] chars:[49, 55, "item 5"]
-    BulletListItem[61, 71] open:[61, 62, "*"] isTight
-      Paragraph[64, 71]
-        Text[64, 70] chars:[64, 70, "item 6"]
-    BulletListItem[77, 87] open:[77, 78, "*"] isTight
-      Paragraph[80, 87]
-        Text[80, 86] chars:[80, 86, "item 7"]
-    BulletListItem[94, 104] open:[94, 95, "*"] isTight
-      Paragraph[97, 104]
-        Text[97, 103] chars:[97, 103, "item 8"]
-    BulletListItem[112, 122] open:[112, 113, "*"] isTight
-      Paragraph[115, 122]
-        Text[115, 121] chars:[115, 121, "item 9"]
-````````````````````````````````
-
-
-Indent less than list's item content indent is a list item, >= is a sub item
-
-```````````````````````````````` example(List - Fixed Indent: 2) options(list-content-indent)
-* item 1
- * item 2
-  * item 3
-   * item 4
-    * item 5
-     * item 6
-      * item 7
-       * item 8
-        * item 9
-.
-<ul>
-  <li>item 1</li>
-  <li>item 2
-    <ul>
-      <li>item 3</li>
-      <li>item 4
-        <ul>
-          <li>item 5</li>
-          <li>item 6
-            <ul>
-              <li>item 7</li>
-              <li>item 8
-                <ul>
-                  <li>item 9</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 117]
-  BulletList[0, 117] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 117] open:[10, 11, "*"] isTight
-      Paragraph[12, 19]
-        Text[12, 18] chars:[12, 18, "item 2"]
-      BulletList[21, 117] isTight
-        BulletListItem[21, 30] open:[21, 22, "*"] isTight
-          Paragraph[23, 30]
-            Text[23, 29] chars:[23, 29, "item 3"]
-        BulletListItem[33, 117] open:[33, 34, "*"] isTight
-          Paragraph[35, 42]
-            Text[35, 41] chars:[35, 41, "item 4"]
-          BulletList[46, 117] isTight
-            BulletListItem[46, 55] open:[46, 47, "*"] isTight
-              Paragraph[48, 55]
-                Text[48, 54] chars:[48, 54, "item 5"]
-            BulletListItem[60, 117] open:[60, 61, "*"] isTight
-              Paragraph[62, 69]
-                Text[62, 68] chars:[62, 68, "item 6"]
-              BulletList[75, 117] isTight
-                BulletListItem[75, 84] open:[75, 76, "*"] isTight
-                  Paragraph[77, 84]
-                    Text[77, 83] chars:[77, 83, "item 7"]
-                BulletListItem[91, 117] open:[91, 92, "*"] isTight
-                  Paragraph[93, 100]
-                    Text[93, 99] chars:[93, 99, "item 8"]
-                  BulletList[108, 117] isTight
-                    BulletListItem[108, 117] open:[108, 109, "*"] isTight
-                      Paragraph[110, 117]
-                        Text[110, 116] chars:[110, 116, "item 9"]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-- kramdown 1.2.0
-
-```````````````````````````````` example(List - Fixed Indent: 3) options(list-content-indent, list-content-indent-offset-2)
-* item 1
- * item 2
-  * item 3
-   * item 4
-    * item 5
-     * item 6
-      * item 7
-       * item 8
-        * item 9
-.
-<ul>
-  <li>item 1</li>
-  <li>item 2</li>
-  <li>item 3</li>
-  <li>item 4
-  * item 5
-    <ul>
-      <li>item 6</li>
-      <li>item 7</li>
-      <li>item 8</li>
-      <li>item 9</li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 117]
-  BulletList[0, 117] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 19] open:[10, 11, "*"] isTight
-      Paragraph[12, 19]
-        Text[12, 18] chars:[12, 18, "item 2"]
-    BulletListItem[21, 30] open:[21, 22, "*"] isTight
-      Paragraph[23, 30]
-        Text[23, 29] chars:[23, 29, "item 3"]
-    BulletListItem[33, 117] open:[33, 34, "*"] isTight
-      Paragraph[35, 55]
-        Text[35, 41] chars:[35, 41, "item 4"]
-        SoftLineBreak[41, 42]
-        Text[46, 54] chars:[46, 54, "* item 5"]
-      BulletList[60, 117] isTight
-        BulletListItem[60, 69] open:[60, 61, "*"] isTight
-          Paragraph[62, 69]
-            Text[62, 68] chars:[62, 68, "item 6"]
-        BulletListItem[75, 84] open:[75, 76, "*"] isTight
-          Paragraph[77, 84]
-            Text[77, 83] chars:[77, 83, "item 7"]
-        BulletListItem[91, 100] open:[91, 92, "*"] isTight
-          Paragraph[93, 100]
-            Text[93, 99] chars:[93, 99, "item 8"]
-        BulletListItem[108, 117] open:[108, 109, "*"] isTight
-          Paragraph[110, 117]
-            Text[110, 116] chars:[110, 116, "item 9"]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-- kramdown 1.2.0
-
-```````````````````````````````` example(List - Fixed Indent: 4) options(list-content-indent, list-content-indent-offset-2)
-* item 1
-
-  # Heading 1
-
-   ## Heading 2
-
-    ### Heading 3
-
-     #### Heading 4
-
-      ##### Heading 5
-
-       ###### Heading 6
-
-  * item 2
-
-    ## Heading 2
-  
-     ### Heading 3
-  
-      #### Heading 3
-
-       ##### Heading 5
-    
-        ###### Heading 6
-
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <h1>Heading 1</h1>
-    <h2>Heading 2</h2>
-    <h3>Heading 3</h3>
-    <h4>Heading 4</h4>
-    <pre><code>##### Heading 5
-
- ###### Heading 6
-</code></pre>
-    <ul>
-      <li>
-        <p>item 2</p>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 3</h4>
-        <h5>Heading 5</h5>
-        <pre><code>###### Heading 6
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 260]
-  BulletList[0, 259] isLoose
-    BulletListItem[0, 259] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
-        Text[14, 23] chars:[14, 23, "Heading 1"]
-      Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
-        Text[31, 40] chars:[31, 40, "Heading 2"]
-      Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
-        Text[50, 59] chars:[50, 59, "Heading 3"]
-      Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
-        Text[71, 80] chars:[71, 80, "Heading 4"]
-      IndentedCodeBlock[88, 129]
-      BulletList[132, 259] isLoose
-        BulletListItem[132, 259] open:[132, 133, "*"] isLoose
-          Paragraph[134, 141]
-            Text[134, 140] chars:[134, 140, "item 2"]
-          Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
-            Text[149, 158] chars:[149, 158, "Heading 2"]
-          Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
-            Text[171, 180] chars:[171, 180, "Heading 3"]
-          Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
-            Text[195, 204] chars:[195, 204, "Heading 3"]
-          Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
-            Text[219, 228] chars:[219, 228, "Heading 5"]
-          IndentedCodeBlock[242, 259]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-- showdown 0.3.1
-- Markdown.pl 1.0.1
-- Markdown.pl 1.0.2b8
-- RedCarpet 3.1.2
-- PHP Markdown 1.0.2
-- PHP Markdown Extra 1.2.8
-- Parsedown 1.6.0
-- s9e\TextFormatter (Fatdown/PHP)
-
-```````````````````````````````` example(List - Fixed Indent: 5) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
-* item 1
- * item 2
-  * item 3
-   * item 4
-    * item 5
-     * item 6
-      * item 7
-       * item 8
-        * item 9
-.
-<ul>
-  <li>item 1
-    <ul>
-      <li>item 2</li>
-      <li>item 3</li>
-      <li>item 4</li>
-      <li>item 5
-        <ul>
-          <li>item 6</li>
-          <li>item 7</li>
-          <li>item 8</li>
-          <li>item 9</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 117]
-  BulletList[0, 117] isTight
-    BulletListItem[0, 117] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      BulletList[10, 117] isTight
-        BulletListItem[10, 19] open:[10, 11, "*"] isTight
-          Paragraph[12, 19]
-            Text[12, 18] chars:[12, 18, "item 2"]
-        BulletListItem[21, 30] open:[21, 22, "*"] isTight
-          Paragraph[23, 30]
-            Text[23, 29] chars:[23, 29, "item 3"]
-        BulletListItem[33, 42] open:[33, 34, "*"] isTight
-          Paragraph[35, 42]
-            Text[35, 41] chars:[35, 41, "item 4"]
-        BulletListItem[46, 117] open:[46, 47, "*"] isTight
-          Paragraph[48, 55]
-            Text[48, 54] chars:[48, 54, "item 5"]
-          BulletList[60, 117] isTight
-            BulletListItem[60, 69] open:[60, 61, "*"] isTight
-              Paragraph[62, 69]
-                Text[62, 68] chars:[62, 68, "item 6"]
-            BulletListItem[75, 84] open:[75, 76, "*"] isTight
-              Paragraph[77, 84]
-                Text[77, 83] chars:[77, 83, "item 7"]
-            BulletListItem[91, 100] open:[91, 92, "*"] isTight
-              Paragraph[93, 100]
-                Text[93, 99] chars:[93, 99, "item 8"]
-            BulletListItem[108, 117] open:[108, 109, "*"] isTight
-              Paragraph[110, 117]
-                Text[110, 116] chars:[110, 116, "item 9"]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-- showdown 0.3.1
-- Markdown.pl 1.0.1
-- Markdown.pl 1.0.2b8
-- RedCarpet 3.1.2
-- PHP Markdown 1.0.2
-- PHP Markdown Extra 1.2.8
-- Parsedown 1.6.0
-- s9e\TextFormatter (Fatdown/PHP)
-
-```````````````````````````````` example(List - Fixed Indent: 6) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
-* item 1
-
-  # Heading 1
-
-   ## Heading 2
-
-    ### Heading 3
-
-     #### Heading 4
-
-      ##### Heading 5
-
-       ###### Heading 6
-
-  * item 2
-
-    ## Heading 2
-  
-     ### Heading 3
-  
-      #### Heading 3
-
-       ##### Heading 5
-    
-        ###### Heading 6
-
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <h1>Heading 1</h1>
-    <h2>Heading 2</h2>
-    <h3>Heading 3</h3>
-    <h4>Heading 4</h4>
-    <pre><code>##### Heading 5
-
- ###### Heading 6
-</code></pre>
-    <ul>
-      <li>
-        <p>item 2</p>
-        <h2>Heading 2</h2>
-        <h3>Heading 3</h3>
-        <h4>Heading 3</h4>
-        <h5>Heading 5</h5>
-        <pre><code>###### Heading 6
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 260]
-  BulletList[0, 259] isLoose
-    BulletListItem[0, 259] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
-        Text[14, 23] chars:[14, 23, "Heading 1"]
-      Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
-        Text[31, 40] chars:[31, 40, "Heading 2"]
-      Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
-        Text[50, 59] chars:[50, 59, "Heading 3"]
-      Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
-        Text[71, 80] chars:[71, 80, "Heading 4"]
-      IndentedCodeBlock[88, 129]
-      BulletList[132, 259] isLoose
-        BulletListItem[132, 259] open:[132, 133, "*"] isLoose
-          Paragraph[134, 141]
-            Text[134, 140] chars:[134, 140, "item 2"]
-          Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
-            Text[149, 158] chars:[149, 158, "Heading 2"]
-          Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
-            Text[171, 180] chars:[171, 180, "Heading 3"]
-          Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
-            Text[195, 204] chars:[195, 204, "Heading 3"]
-          Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
-            Text[219, 228] chars:[219, 228, "Heading 5"]
-          IndentedCodeBlock[242, 259]
-````````````````````````````````
-
-
-Fixed indentation only (4 spaces)
-
-- pandoc (strict) 1.17.2
-- pandoc 1.17.2
-- lunamark 0.4.0
-- RDiscount 2.1.7
-- Python-Markdown 2.6.5
-- Minima 0.8.0a3_20140907
-- MultiMarkdown 5.1.0
-- pegdown
-
-```````````````````````````````` example(List - Fixed Indent: 7) options(list-fixed-indent)
-* item 1
- * item 2
-  * item 3
-   * item 4
-    *  item 5
-     *  item 6
-      *  item 7
-       *  item 8
-        *  item 9
-.
-<ul>
-  <li>item 1</li>
-  <li>item 2</li>
-  <li>item 3</li>
-  <li>item 4
-    <ul>
-      <li>item 5</li>
-      <li>item 6</li>
-      <li>item 7</li>
-      <li>item 8
-        <ul>
-          <li>item 9</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 122]
-  BulletList[0, 122] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 19] open:[10, 11, "*"] isTight
-      Paragraph[12, 19]
-        Text[12, 18] chars:[12, 18, "item 2"]
-    BulletListItem[21, 30] open:[21, 22, "*"] isTight
-      Paragraph[23, 30]
-        Text[23, 29] chars:[23, 29, "item 3"]
-    BulletListItem[33, 122] open:[33, 34, "*"] isTight
-      Paragraph[35, 42]
-        Text[35, 41] chars:[35, 41, "item 4"]
-      BulletList[46, 122] isTight
-        BulletListItem[46, 56] open:[46, 47, "*"] isTight
-          Paragraph[49, 56]
-            Text[49, 55] chars:[49, 55, "item 5"]
-        BulletListItem[61, 71] open:[61, 62, "*"] isTight
-          Paragraph[64, 71]
-            Text[64, 70] chars:[64, 70, "item 6"]
-        BulletListItem[77, 87] open:[77, 78, "*"] isTight
-          Paragraph[80, 87]
-            Text[80, 86] chars:[80, 86, "item 7"]
-        BulletListItem[94, 122] open:[94, 95, "*"] isTight
-          Paragraph[97, 104]
-            Text[97, 103] chars:[97, 103, "item 8"]
-          BulletList[112, 122] isTight
-            BulletListItem[112, 122] open:[112, 113, "*"] isTight
-              Paragraph[115, 122]
-                Text[115, 121] chars:[115, 121, "item 9"]
-````````````````````````````````
-
-
-Embedded headings Fixed indentation only (4 spaces)
-
-- pandoc (strict) 1.17.2
-- pandoc 1.17.2
-- lunamark 0.4.0
-- RDiscount 2.1.7
-- Python-Markdown 2.6.5
-- Minima 0.8.0a3_20140907
-- MultiMarkdown 5.1.0
-- pegdown
-
-```````````````````````````````` example(List - Fixed Indent: 8) options(list-fixed-indent)
-1. Some Lists
-    
-    # Test
-
-.
-<ol>
-  <li>
-    <p>Some Lists</p>
-    <h1>Test</h1>
-  </li>
-</ol>
-.
-Document[0, 31]
-  OrderedList[0, 29] isLoose delimiter:'.'
-    OrderedListItem[0, 29] open:[0, 2, "1."] isLoose
-      Paragraph[3, 14]
-        Text[3, 13] chars:[3, 13, "Some Lists"]
-      Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
-        Text[25, 29] chars:[25, 29, "Test"]
-````````````````````````````````
-
-
-Embedded headings Markdown Navigator options
-
-```````````````````````````````` example(List - Fixed Indent: 9) options(list-markdown-navigator)
-1. Some Lists
-    
-    # Test
-
-.
-<ol>
-  <li>Some Lists
-  <h1>Test</h1>
-  </li>
-</ol>
-.
-Document[0, 31]
-  OrderedList[0, 29] isTight delimiter:'.'
-    OrderedListItem[0, 29] open:[0, 2, "1."] isTight
-      Paragraph[3, 14]
-        Text[3, 13] chars:[3, 13, "Some Lists"]
-      Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
-        Text[25, 29] chars:[25, 29, "Test"]
-````````````````````````````````
-
-
-Fixed indentation only (4 spaces)
-
-- pandoc (strict) 1.17.2
-- pandoc 1.17.2
-- lunamark 0.4.0
-- RDiscount 2.1.7
-- Python-Markdown 2.6.5
-- Minima 0.8.0a3_20140907
-- MultiMarkdown 5.1.0
-- pegdown
-
-```````````````````````````````` example(List - Fixed Indent: 10) options(list-fixed-indent)
-* item 1
-
-  # Heading 1
-
-   ## Heading 2
-
-    ### Heading 3
-
-     #### Heading 4
-
-      ##### Heading 5
-
-       ###### Heading 6
-
-  * item 2
-
-    ## Heading 2
-  
-     ### Heading 3
-  
-      #### Heading 3
-
-       ##### Heading 5
-    
-        ###### Heading 6
-
-.
-<ul>
-  <li>item 1</li>
-</ul>
-<h1>Heading 1</h1>
-<h2>Heading 2</h2>
-<pre><code>### Heading 3
-
- #### Heading 4
-
-  ##### Heading 5
-
-   ###### Heading 6
-</code></pre>
-<ul>
-  <li>
-    <p>item 2</p>
-    <h2>Heading 2</h2>
-    <h3>Heading 3</h3>
-    <h4>Heading 3</h4>
-    <h5>Heading 5</h5>
-    <pre><code>###### Heading 6
-</code></pre>
-  </li>
-</ul>
-.
-Document[0, 260]
-  BulletList[0, 9] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-  Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
-    Text[14, 23] chars:[14, 23, "Heading 1"]
-  Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
-    Text[31, 40] chars:[31, 40, "Heading 2"]
-  IndentedCodeBlock[46, 129]
-  BulletList[132, 259] isLoose
-    BulletListItem[132, 259] open:[132, 133, "*"] isLoose
-      Paragraph[134, 141]
-        Text[134, 140] chars:[134, 140, "item 2"]
-      Heading[146, 158] textOpen:[146, 148, "##"] text:[149, 158, "Heading 2"]
-        Text[149, 158] chars:[149, 158, "Heading 2"]
-      Heading[167, 180] textOpen:[167, 170, "###"] text:[171, 180, "Heading 3"]
-        Text[171, 180] chars:[171, 180, "Heading 3"]
-      Heading[190, 204] textOpen:[190, 194, "####"] text:[195, 204, "Heading 3"]
-        Text[195, 204] chars:[195, 204, "Heading 3"]
-      Heading[213, 228] textOpen:[213, 218, "#####"] text:[219, 228, "Heading 5"]
-        Text[219, 228] chars:[219, 228, "Heading 5"]
-      IndentedCodeBlock[242, 259]
-````````````````````````````````
-
-
-Fixed indentation with code blocks
-
-- pegdown
-- pandoc (strict) 1.17.2
-- pandoc 1.17.2
-- lunamark 0.4.0
-- MultiMarkdown 5.1.0
-
-```````````````````````````````` example(List - Fixed Indent: 11) options(list-fixed-indent)
-* item 1
-    
-    this is not code
-    
-        this is code
- * item 2
-    
-    this is not code
-    
-        this is code
-  * item 3
-    
-    this is not code
-    
-        this is code
-   * item 4
-    
-    this is not code
-    
-        this is code
-    * item 5
-    
-        this is not code
-    
-            this is code
-     * item 6
-    
-        this is not code
-    
-            this is code
-      * item 7
-    
-        this is not code
-    
-            this is code
-       * item 8
-    
-        this is not code
-    
-            this is code
-        * item 9
-    
-            this is not code
-        
-                this is code
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <p>this is not code</p>
-    <pre><code>this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 2</p>
-    <p>this is not code</p>
-    <pre><code>this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 3</p>
-    <p>this is not code</p>
-    <pre><code>this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 4</p>
-    <p>this is not code</p>
-    <pre><code>this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 5</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 6</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 7</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 8</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-        <ul>
-          <li>
-            <p>item 9</p>
-            <p>this is not code</p>
-            <pre><code>this is code
-</code></pre>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 637]
-  BulletList[0, 637] isLoose
-    BulletListItem[0, 61] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Paragraph[18, 35]
-        Text[18, 34] chars:[18, 34, "this  …  code"]
-      IndentedCodeBlock[48, 61]
-    BulletListItem[62, 123] open:[62, 63, "*"] isLoose
-      Paragraph[64, 71]
-        Text[64, 70] chars:[64, 70, "item 2"]
-      Paragraph[80, 97]
-        Text[80, 96] chars:[80, 96, "this  …  code"]
-      IndentedCodeBlock[110, 123]
-    BulletListItem[125, 186] open:[125, 126, "*"] isLoose
-      Paragraph[127, 134]
-        Text[127, 133] chars:[127, 133, "item 3"]
-      Paragraph[143, 160]
-        Text[143, 159] chars:[143, 159, "this  …  code"]
-      IndentedCodeBlock[173, 186]
-    BulletListItem[189, 637] open:[189, 190, "*"] isLoose
-      Paragraph[191, 198]
-        Text[191, 197] chars:[191, 197, "item 4"]
-      Paragraph[207, 224]
-        Text[207, 223] chars:[207, 223, "this  …  code"]
-      IndentedCodeBlock[237, 250]
-      BulletList[254, 637] isLoose
-        BulletListItem[254, 323] open:[254, 255, "*"] isLoose
-          Paragraph[256, 263]
-            Text[256, 262] chars:[256, 262, "item 5"]
-          Paragraph[276, 293]
-            Text[276, 292] chars:[276, 292, "this  …  code"]
-          IndentedCodeBlock[310, 323]
-        BulletListItem[328, 397] open:[328, 329, "*"] isLoose
-          Paragraph[330, 337]
-            Text[330, 336] chars:[330, 336, "item 6"]
-          Paragraph[350, 367]
-            Text[350, 366] chars:[350, 366, "this  …  code"]
-          IndentedCodeBlock[384, 397]
-        BulletListItem[403, 472] open:[403, 404, "*"] isLoose
-          Paragraph[405, 412]
-            Text[405, 411] chars:[405, 411, "item 7"]
-          Paragraph[425, 442]
-            Text[425, 441] chars:[425, 441, "this  …  code"]
-          IndentedCodeBlock[459, 472]
-        BulletListItem[479, 637] open:[479, 480, "*"] isLoose
-          Paragraph[481, 488]
-            Text[481, 487] chars:[481, 487, "item 8"]
-          Paragraph[501, 518]
-            Text[501, 517] chars:[501, 517, "this  …  code"]
-          IndentedCodeBlock[535, 548]
-          BulletList[556, 637] isLoose
-            BulletListItem[556, 637] open:[556, 557, "*"] isLoose
-              Paragraph[558, 565]
-                Text[558, 564] chars:[558, 564, "item 9"]
-              Paragraph[582, 599]
-                Text[582, 598] chars:[582, 598, "this  …  code"]
-              IndentedCodeBlock[624, 637]
-````````````````````````````````
-
-
-parent list content indent
-
-```````````````````````````````` example(List - Fixed Indent: 12) options(list-content-indent)
-* item 1
-    
-    this is not code
-    
-        this is code
- * item 2
-    
-    this is not code
-    
-        this is code
-  * item 3
-    
-    this is not code
-    
-        this is code
-   * item 4
-    
-    this is not code
-    
-        this is code
-    * item 5
-    
-        this is not code
-    
-            this is code
-     * item 6
-    
-        this is not code
-    
-            this is code
-      * item 7
-    
-        this is not code
-    
-            this is code
-       * item 8
-    
-        this is not code
-    
-            this is code
-        * item 9
-    
-            this is not code
-        
-                this is code
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <p>this is not code</p>
-    <pre><code>  this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 2</p>
-    <p>this is not code</p>
-    <pre><code> this is code
-</code></pre>
-    <ul>
-      <li>item 3</li>
-    </ul>
-    <p>this is not code</p>
-    <pre><code> this is code
-</code></pre>
-    <ul>
-      <li>item 4</li>
-    </ul>
-    <p>this is not code</p>
-    <pre><code> this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 5</p>
-        <p>this is not code</p>
-        <pre><code>  this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 6</p>
-        <p>this is not code</p>
-        <pre><code> this is code
-</code></pre>
-        <ul>
-          <li>item 7</li>
-        </ul>
-        <p>this is not code</p>
-        <pre><code> this is code
-</code></pre>
-        <ul>
-          <li>item 8</li>
-        </ul>
-        <p>this is not code</p>
-        <pre><code> this is code
-</code></pre>
-        <ul>
-          <li>
-            <p>item 9</p>
-            <p>this is not code</p>
-            <pre><code>  this is code
-</code></pre>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 637]
-  BulletList[0, 637] isLoose
-    BulletListItem[0, 61] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Paragraph[18, 35]
-        Text[18, 34] chars:[18, 34, "this  …  code"]
-      IndentedCodeBlock[46, 61]
-    BulletListItem[62, 637] open:[62, 63, "*"] isLoose
-      Paragraph[64, 71]
-        Text[64, 70] chars:[64, 70, "item 2"]
-      Paragraph[80, 97]
-        Text[80, 96] chars:[80, 96, "this  …  code"]
-      IndentedCodeBlock[109, 123]
-      BulletList[125, 134] isTight
-        BulletListItem[125, 134] open:[125, 126, "*"] isTight
-          Paragraph[127, 134]
-            Text[127, 133] chars:[127, 133, "item 3"]
-      Paragraph[143, 160]
-        Text[143, 159] chars:[143, 159, "this  …  code"]
-      IndentedCodeBlock[172, 186]
-      BulletList[189, 198] isTight
-        BulletListItem[189, 198] open:[189, 190, "*"] isTight
-          Paragraph[191, 198]
-            Text[191, 197] chars:[191, 197, "item 4"]
-      Paragraph[207, 224]
-        Text[207, 223] chars:[207, 223, "this  …  code"]
-      IndentedCodeBlock[236, 250]
-      BulletList[254, 637] isLoose
-        BulletListItem[254, 323] open:[254, 255, "*"] isLoose
-          Paragraph[256, 263]
-            Text[256, 262] chars:[256, 262, "item 5"]
-          Paragraph[276, 293]
-            Text[276, 292] chars:[276, 292, "this  …  code"]
-          IndentedCodeBlock[308, 323]
-        BulletListItem[328, 637] open:[328, 329, "*"] isLoose
-          Paragraph[330, 337]
-            Text[330, 336] chars:[330, 336, "item 6"]
-          Paragraph[350, 367]
-            Text[350, 366] chars:[350, 366, "this  …  code"]
-          IndentedCodeBlock[383, 397]
-          BulletList[403, 412] isTight
-            BulletListItem[403, 412] open:[403, 404, "*"] isTight
-              Paragraph[405, 412]
-                Text[405, 411] chars:[405, 411, "item 7"]
-          Paragraph[425, 442]
-            Text[425, 441] chars:[425, 441, "this  …  code"]
-          IndentedCodeBlock[458, 472]
-          BulletList[479, 488] isTight
-            BulletListItem[479, 488] open:[479, 480, "*"] isTight
-              Paragraph[481, 488]
-                Text[481, 487] chars:[481, 487, "item 8"]
-          Paragraph[501, 518]
-            Text[501, 517] chars:[501, 517, "this  …  code"]
-          IndentedCodeBlock[534, 548]
-          BulletList[556, 637] isLoose
-            BulletListItem[556, 637] open:[556, 557, "*"] isLoose
-              Paragraph[558, 565]
-                Text[558, 564] chars:[558, 564, "item 9"]
-              Paragraph[582, 599]
-                Text[582, 598] chars:[582, 598, "this  …  code"]
-              IndentedCodeBlock[622, 637]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-```````````````````````````````` example(List - Fixed Indent: 13) options(list-content-indent, list-content-indent-offset-2)
-* item 1
-    
-    this is not code
-    
-        this is code
- * item 2
-    
-    this is not code
-    
-        this is code
-  * item 3
-    
-    this is not code
-    
-        this is code
-   * item 4
-    
-    this is not code
-    
-        this is code
-    * item 5
-    
-        this is not code
-    
-            this is code
-     * item 6
-    
-        this is not code
-    
-            this is code
-      * item 7
-    
-        this is not code
-    
-            this is code
-       * item 8
-    
-        this is not code
-    
-            this is code
-        * item 9
-    
-            this is not code
-        
-                this is code
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <p>this is not code</p>
-    <pre><code>  this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 2</p>
-    <p>this is not code</p>
-    <pre><code> this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 3</p>
-    <p>this is not code</p>
-    <pre><code>this is code
-</code></pre>
-  </li>
-  <li>
-    <p>item 4</p>
-    <pre><code>this is not code
-</code></pre>
-    <p>this is code
-    * item 5</p>
-    <p>this is not code</p>
-    <pre><code>   this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 6</p>
-        <p>this is not code</p>
-        <pre><code> this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 7</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 8</p>
-      </li>
-    </ul>
-    <p>this is not code</p>
-    <pre><code>   this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 9</p>
-        <p>this is not code</p>
-        <pre><code>  this is code
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 637]
-  BulletList[0, 637] isLoose
-    BulletListItem[0, 61] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Paragraph[18, 35]
-        Text[18, 34] chars:[18, 34, "this  …  code"]
-      IndentedCodeBlock[46, 61]
-    BulletListItem[62, 123] open:[62, 63, "*"] isLoose
-      Paragraph[64, 71]
-        Text[64, 70] chars:[64, 70, "item 2"]
-      Paragraph[80, 97]
-        Text[80, 96] chars:[80, 96, "this  …  code"]
-      IndentedCodeBlock[109, 123]
-    BulletListItem[125, 186] open:[125, 126, "*"] isLoose
-      Paragraph[127, 134]
-        Text[127, 133] chars:[127, 133, "item 3"]
-      Paragraph[143, 160]
-        Text[143, 159] chars:[143, 159, "this  …  code"]
-      IndentedCodeBlock[173, 186]
-    BulletListItem[189, 637] open:[189, 190, "*"] isLoose
-      Paragraph[191, 198]
-        Text[191, 197] chars:[191, 197, "item 4"]
-      IndentedCodeBlock[207, 224]
-      Paragraph[237, 263]
-        Text[237, 249] chars:[237, 249, "this  …  code"]
-        SoftLineBreak[249, 250]
-        Text[254, 262] chars:[254, 262, "* item 5"]
-      Paragraph[276, 293]
-        Text[276, 292] chars:[276, 292, "this  …  code"]
-      IndentedCodeBlock[307, 323]
-      BulletList[328, 488] isLoose
-        BulletListItem[328, 397] open:[328, 329, "*"] isLoose
-          Paragraph[330, 337]
-            Text[330, 336] chars:[330, 336, "item 6"]
-          Paragraph[350, 367]
-            Text[350, 366] chars:[350, 366, "this  …  code"]
-          IndentedCodeBlock[383, 397]
-        BulletListItem[403, 472] open:[403, 404, "*"] isLoose
-          Paragraph[405, 412]
-            Text[405, 411] chars:[405, 411, "item 7"]
-          Paragraph[425, 442]
-            Text[425, 441] chars:[425, 441, "this  …  code"]
-          IndentedCodeBlock[459, 472]
-        BulletListItem[479, 488] open:[479, 480, "*"] isLoose
-          Paragraph[481, 488]
-            Text[481, 487] chars:[481, 487, "item 8"]
-      Paragraph[501, 518]
-        Text[501, 517] chars:[501, 517, "this  …  code"]
-      IndentedCodeBlock[532, 548]
-      BulletList[556, 637] isLoose
-        BulletListItem[556, 637] open:[556, 557, "*"] isLoose
-          Paragraph[558, 565]
-            Text[558, 564] chars:[558, 564, "item 9"]
-          Paragraph[582, 599]
-            Text[582, 598] chars:[582, 598, "this  …  code"]
-          IndentedCodeBlock[622, 637]
-````````````````````````````````
-
-
-Indent less than list's item content indent + 4 is a list item, >= is a sub item
-
-```````````````````````````````` example(List - Fixed Indent: 14) options(list-content-indent, list-over-indents-to-first-item, list-content-indent-overrides-code, list-content-indent-offset-2)
-* item 1
-    
-    this is not code
-    
-        this is code
- * item 2
-    
-    this is not code
-    
-        this is code
-  * item 3
-    
-    this is not code
-    
-        this is code
-   * item 4
-    
-    this is not code
-    
-        this is code
-    * item 5
-    
-        this is not code
-    
-            this is code
-     * item 6
-    
-        this is not code
-    
-            this is code
-      * item 7
-    
-        this is not code
-    
-            this is code
-       * item 8
-    
-        this is not code
-    
-            this is code
-        * item 9
-    
-            this is not code
-        
-                this is code
-.
-<ul>
-  <li>
-    <p>item 1</p>
-    <p>this is not code</p>
-    <pre><code>  this is code
-</code></pre>
-    <ul>
-      <li>item 2</li>
-    </ul>
-    <p>this is not code</p>
-    <pre><code>  this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 3</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 4</p>
-      </li>
-    </ul>
-    <p>this is not code</p>
-    <pre><code>  this is code
-</code></pre>
-    <ul>
-      <li>
-        <p>item 5</p>
-        <p>this is not code</p>
-        <pre><code>  this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 6</p>
-        <p>this is not code</p>
-        <pre><code> this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 7</p>
-        <p>this is not code</p>
-        <pre><code>this is code
-</code></pre>
-      </li>
-      <li>
-        <p>item 8</p>
-        <pre><code>  this is not code
-</code></pre>
-        <p>this is code
-        * item 9</p>
-        <p>this is not code</p>
-        <pre><code>   this is code
-</code></pre>
-      </li>
-    </ul>
-  </li>
-</ul>
-.
-Document[0, 637]
-  BulletList[0, 637] isLoose
-    BulletListItem[0, 637] open:[0, 1, "*"] isLoose
-      Paragraph[2, 9]
-        Text[2, 8] chars:[2, 8, "item 1"]
-      Paragraph[18, 35]
-        Text[18, 34] chars:[18, 34, "this  …  code"]
-      IndentedCodeBlock[46, 61]
-      BulletList[62, 71] isTight
-        BulletListItem[62, 71] open:[62, 63, "*"] isTight
-          Paragraph[64, 71]
-            Text[64, 70] chars:[64, 70, "item 2"]
-      Paragraph[80, 97]
-        Text[80, 96] chars:[80, 96, "this  …  code"]
-      IndentedCodeBlock[108, 123]
-      BulletList[125, 198] isLoose
-        BulletListItem[125, 186] open:[125, 126, "*"] isLoose
-          Paragraph[127, 134]
-            Text[127, 133] chars:[127, 133, "item 3"]
-          Paragraph[143, 160]
-            Text[143, 159] chars:[143, 159, "this  …  code"]
-          IndentedCodeBlock[173, 186]
-        BulletListItem[189, 198] open:[189, 190, "*"] isLoose
-          Paragraph[191, 198]
-            Text[191, 197] chars:[191, 197, "item 4"]
-      Paragraph[207, 224]
-        Text[207, 223] chars:[207, 223, "this  …  code"]
-      IndentedCodeBlock[235, 250]
-      BulletList[254, 637] isLoose
-        BulletListItem[254, 323] open:[254, 255, "*"] isLoose
-          Paragraph[256, 263]
-            Text[256, 262] chars:[256, 262, "item 5"]
-          Paragraph[276, 293]
-            Text[276, 292] chars:[276, 292, "this  …  code"]
-          IndentedCodeBlock[308, 323]
-        BulletListItem[328, 397] open:[328, 329, "*"] isLoose
-          Paragraph[330, 337]
-            Text[330, 336] chars:[330, 336, "item 6"]
-          Paragraph[350, 367]
-            Text[350, 366] chars:[350, 366, "this  …  code"]
-          IndentedCodeBlock[383, 397]
-        BulletListItem[403, 472] open:[403, 404, "*"] isLoose
-          Paragraph[405, 412]
-            Text[405, 411] chars:[405, 411, "item 7"]
-          Paragraph[425, 442]
-            Text[425, 441] chars:[425, 441, "this  …  code"]
-          IndentedCodeBlock[459, 472]
-        BulletListItem[479, 637] open:[479, 480, "*"] isLoose
-          Paragraph[481, 488]
-            Text[481, 487] chars:[481, 487, "item 8"]
-          IndentedCodeBlock[499, 518]
-          Paragraph[535, 565]
-            Text[535, 547] chars:[535, 547, "this  …  code"]
-            SoftLineBreak[547, 548]
-            Text[556, 564] chars:[556, 564, "* item 9"]
-          Paragraph[582, 599]
-            Text[582, 598] chars:[582, 598, "this  …  code"]
-          IndentedCodeBlock[621, 637]
-````````````````````````````````
-
 
 ### List - No Auto Loose
 
@@ -1884,6 +586,7 @@ Document[0, 97]
 ````````````````````````````````
 
 
+
 Without auto loose setting for list
 
 ```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
@@ -1939,6 +642,7 @@ Document[0, 97]
       Paragraph[90, 97]
         Text[90, 96] chars:[90, 96, "item 4"]
 ````````````````````````````````
+
 
 
 ### List - No Auto Loose, Loose Item if Previous Loose
@@ -2002,6 +706,7 @@ Document[0, 67]
       Paragraph[59, 66]
         Text[59, 65] chars:[59, 65, "item 7"]
 ````````````````````````````````
+
 
 
 Without auto loose setting for list with loose if previous loose item
@@ -2074,6 +779,7 @@ Document[0, 120]
 ````````````````````````````````
 
 
+
 ### List - No Break on Double Blank Line
 
 With break all lists on two blank lines
@@ -2125,6 +831,7 @@ Document[0, 80]
       Paragraph[73, 80]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
+
 
 
 Without break all lists on two blank lines
@@ -2182,6 +889,7 @@ Document[0, 80]
 ````````````````````````````````
 
 
+
 Without break all lists on two blank lines no auto loose
 
 ```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
@@ -2229,6 +937,7 @@ Document[0, 80]
       Paragraph[73, 80]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
+
 
 
 With break all lists on two blank lines
@@ -2286,6 +995,7 @@ Document[0, 114]
       Paragraph[107, 114]
         Text[107, 113] chars:[107, 113, "item 5"]
 ````````````````````````````````
+
 
 
 Without break on two blank lines
@@ -2354,6 +1064,7 @@ Document[0, 114]
 ````````````````````````````````
 
 
+
 ### List - No Bullet Match
 
 With bullet matching for items within a list
@@ -2389,6 +1100,7 @@ Document[0, 27]
 ````````````````````````````````
 
 
+
 Without bullet matching for items within a list
 
 ```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
@@ -2414,6 +1126,7 @@ Document[0, 27]
       Paragraph[20, 27]
         Text[20, 26] chars:[20, 26, "item 3"]
 ````````````````````````````````
+
 
 
 ### List - No Manual Start
@@ -2445,6 +1158,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
+
 Without start
 
 ```````````````````````````````` example(List - No Manual Start: 2) options(list-no-start)
@@ -2470,6 +1184,7 @@ Document[0, 30]
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
 ````````````````````````````````
+
 
 
 ### List - Paragraph Break Options
@@ -2506,6 +1221,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
+
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
@@ -2531,6 +1247,7 @@ Document[0, 41]
         SoftLineBreak[27, 28]
         Text[31, 40] chars:[31, 40, "2. item 2"]
 ````````````````````````````````
+
 
 
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
@@ -2562,6 +1279,7 @@ Document[0, 61]
         SoftLineBreak[47, 48]
         Text[51, 60] chars:[51, 60, "2. item 2"]
 ````````````````````````````````
+
 
 
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
@@ -2600,6 +1318,7 @@ Document[0, 61]
 ````````````````````````````````
 
 
+
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
@@ -2632,6 +1351,7 @@ Document[0, 41]
 ````````````````````````````````
 
 
+
 Without relaxed start. Lists start only if preceded by a blank line.
 
 ```````````````````````````````` example(List - Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
@@ -2661,6 +1381,7 @@ Document[0, 37]
           Paragraph[30, 37]
             Text[30, 36] chars:[30, 36, "item 2"]
 ````````````````````````````````
+
 
 
 With relaxed start. Lists can start without preceding blank lines.
@@ -2758,6 +1479,7 @@ Document[0, 163]
 ````````````````````````````````
 
 
+
 Without relaxed start. Lists start only if preceded by a blank line. Items and sub-items can
 start without a blank line.
 
@@ -2837,6 +1559,7 @@ Document[0, 160]
           Paragraph[153, 160]
             Text[153, 159] chars:[153, 159, "item 2"]
 ````````````````````````````````
+
 
 
 Without relaxed start for bullet Lists start only if preceded by a blank line. Items and
@@ -2929,6 +1652,7 @@ Document[0, 160]
 ````````````````````````````````
 
 
+
 With relaxed start but not for ordered lists. Ordered lists start only if preceded by a blank
 line.
 
@@ -3019,6 +1743,7 @@ Document[0, 160]
 ````````````````````````````````
 
 
+
 Ordered items must have a blank line before them
 
 ```````````````````````````````` example(List - Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
@@ -3038,6 +1763,7 @@ Document[0, 48]
     SoftLineBreak[33, 34]
     Text[34, 47] chars:[34, 47, "1. no … tem 2"]
 ````````````````````````````````
+
 
 
 Ordered items must have a blank line before them
@@ -3079,6 +1805,7 @@ Document[0, 52]
 ````````````````````````````````
 
 
+
 Ordered items must have a blank line before them, but not bullet items
 
 ```````````````````````````````` example(List - Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
@@ -3103,6 +1830,7 @@ Document[0, 38]
       Paragraph[31, 38]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
+
 
 
 Bullet items must have a blank line before them when preceded by paragraph but should not append
@@ -3143,6 +1871,7 @@ Document[0, 67]
 ````````````````````````````````
 
 
+
 Bullet items must have a blank line before them
 
 ```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
@@ -3162,6 +1891,7 @@ Document[0, 46]
     SoftLineBreak[32, 33]
     Text[33, 45] chars:[33, 45, "- not … tem 2"]
 ````````````````````````````````
+
 
 
 Bullet items must have a blank line before them
@@ -3203,6 +1933,7 @@ Document[0, 48]
 ````````````````````````````````
 
 
+
 Bullet items must have a blank line before them, but not ordered items
 
 ```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
@@ -3227,6 +1958,7 @@ Document[0, 40]
       Paragraph[33, 40]
         Text[33, 39] chars:[33, 39, "item 2"]
 ````````````````````````````````
+
 
 
 All items must have a blank line before them
@@ -3329,6 +2061,7 @@ Document[0, 209]
 ````````````````````````````````
 
 
+
 ### List - Marker Options
 
 Without ordered items dot only
@@ -3373,6 +2106,7 @@ Document[0, 43]
 ````````````````````````````````
 
 
+
 With ordered items dot only
 
 ```````````````````````````````` example(List - Marker Options: 2) options(ordered-dot-only)
@@ -3404,6 +2138,7 @@ Document[0, 43]
   Paragraph[32, 42]
     Text[32, 41] chars:[32, 41, "2) item c"]
 ````````````````````````````````
+
 
 
 An ordered list after bullet list with no bullet matching
@@ -3452,6 +2187,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
+
 A bullet list after an ordered list with no bullet matching
 
 ```````````````````````````````` example(List - Marker Options: 4) options(list-no-bullet-match)
@@ -3498,6 +2234,7 @@ Document[0, 57]
 ````````````````````````````````
 
 
+
 An ordered list after bullet list, no type match
 
 ```````````````````````````````` example(List - Marker Options: 5) options(list-no-type-match)
@@ -3537,6 +2274,7 @@ Document[0, 39]
       Paragraph[32, 39]
         Text[32, 38] chars:[32, 38, "item 2"]
 ````````````````````````````````
+
 
 
 A bullet list after an ordered list, no type match
@@ -3580,6 +2318,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
+
 An ordered list item can interrupt a previous list item's paragraph
 
 ```````````````````````````````` example List - Marker Options: 7
@@ -3604,6 +2343,7 @@ Document[0, 38]
       Paragraph[31, 38]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
+
 
 
 An ordered list sub item can interrupt its parent item's paragraph even if it does not start
@@ -3635,6 +2375,7 @@ Document[0, 43]
           Paragraph[34, 43]
             Text[34, 42] chars:[34, 42, "item 1.1"]
 ````````````````````````````````
+
 
 
 nested
@@ -3673,6 +2414,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
+
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
 ```````````````````````````````` example(List - Marker Options: 10) options(list-fixed-indent, list-no-start, ordered-no-para-break, ordered-no-item-break)
@@ -3700,6 +2442,7 @@ Document[0, 46]
         SoftLineBreak[35, 36]
         Text[36, 45] chars:[36, 45, "1. item 3"]
 ````````````````````````````````
+
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
@@ -3744,6 +2487,7 @@ Document[0, 53]
       Paragraph[46, 53]
         Text[46, 52] chars:[46, 52, "item 3"]
 ````````````````````````````````
+
 
 
 no relaxed ordered start with exception for another item's paragraph
@@ -3796,6 +2540,7 @@ Document[0, 117]
 ````````````````````````````````
 
 
+
 no relaxed ordered start with exception for another item's paragraph but only if manual list
 start is enabled
 
@@ -3843,6 +2588,7 @@ Document[0, 117]
 ````````````````````````````````
 
 
+
 nested, no bullet para break, no bullet item paragraph break
 
 ```````````````````````````````` example(List - Marker Options: 14) options(list-fixed-indent, bullet-no-para-break, bullet-no-item-break)
@@ -3870,6 +2616,7 @@ Document[0, 42]
         SoftLineBreak[32, 33]
         Text[33, 41] chars:[33, 41, "- item 3"]
 ````````````````````````````````
+
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
@@ -3914,6 +2661,7 @@ Document[0, 49]
       Paragraph[42, 49]
         Text[42, 48] chars:[42, 48, "item 3"]
 ````````````````````````````````
+
 
 
 mismatched item to sub-item
@@ -3966,6 +2714,7 @@ Document[0, 62]
 ````````````````````````````````
 
 
+
 mismatched item to sub-item
 
 ```````````````````````````````` example(List - Marker Options: 17) options(list-item-mismatch-to-subitem)
@@ -4016,6 +2765,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
+
 ### Thematic Break - No Relaxed Rules
 
 With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
@@ -4035,6 +2785,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
+
 Without relaxed rules. Thematic break must be preceded by a blank line. Applies to non-dashed
 thematic break, dashes are a heading.
 
@@ -4051,6 +2802,7 @@ Document[0, 24]
     SoftLineBreak[19, 20]
     Text[20, 23] chars:[20, 23, "***"]
 ````````````````````````````````
+
 
 
 ### HTML Options
@@ -4091,6 +2843,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 Encode all html
 
 ```````````````````````````````` example(HTML Encode Options: 2) options(escape-html)
@@ -4123,6 +2876,7 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
+
 
 
 Encode html blocks
@@ -4159,6 +2913,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 Encode html block comments
 
 ```````````````````````````````` example(HTML Encode Options: 4) options(escape-html-comment-blocks)
@@ -4191,6 +2946,7 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
+
 
 
 Encode inline html
@@ -4227,6 +2983,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 Encode inline html comments
 
 ```````````````````````````````` example(HTML Encode Options: 6) options(escape-inline-html-comments)
@@ -4261,6 +3018,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 #### HTML Suppress Options
 
 Suppress all html
@@ -4292,6 +3050,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 Suppress html blocks
 
 ```````````````````````````````` example(HTML Suppress Options: 2) options(suppress-html-blocks)
@@ -4319,6 +3078,7 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
+
 
 
 Suppress html comment blocks
@@ -4352,6 +3112,7 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
+
 
 
 Suppress inline html
@@ -4388,6 +3149,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 Suppress inline html comments
 
 ```````````````````````````````` example(HTML Suppress Options: 5) options(suppress-inline-html-comments)
@@ -4422,6 +3184,7 @@ Document[0, 197]
 ````````````````````````````````
 
 
+
 ## HTML Parse Inner Comments
 
 Html comments in block
@@ -4441,6 +3204,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
+
 Html comments in block
 
 ```````````````````````````````` example HTML Parse Inner Comments: 2
@@ -4457,6 +3221,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
+
 Html comments in block
 
 ```````````````````````````````` example HTML Parse Inner Comments: 3
@@ -4471,6 +3236,7 @@ Html comments in block
 Document[0, 35]
   HtmlBlock[0, 35]
 ````````````````````````````````
+
 
 
 Html comments in block, parse inner comments
@@ -4490,6 +3256,7 @@ Document[0, 35]
 ````````````````````````````````
 
 
+
 Html comments in block, parse inner comments
 
 ```````````````````````````````` example(HTML Parse Inner Comments: 5) options(parse-inner-comments)
@@ -4506,6 +3273,7 @@ Document[0, 39]
 ````````````````````````````````
 
 
+
 Html comments in block, parse inner comments
 
 ```````````````````````````````` example(HTML Parse Inner Comments: 6) options(parse-inner-comments)
@@ -4519,6 +3287,7 @@ Document[0, 35]
     HtmlInnerBlock[0, 13] chars:[0, 13, "<div> … div>\n"]
     HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!--  … t -->"]
 ````````````````````````````````
+
 
 
 ## Inline HTML
@@ -4538,6 +3307,7 @@ Document[0, 36]
     HtmlInline[20, 26] chars:[20, 26, "</kbd>"]
     Text[26, 35] chars:[26, 35, " embedded"]
 ````````````````````````````````
+
 
 
 ## GFM compatibility
@@ -4564,6 +3334,7 @@ Document[0, 82]
 ````````````````````````````````
 
 
+
 Some weird commonmark processing of emphasis
 
 ```````````````````````````````` example GFM Emphasis: 2
@@ -4579,6 +3350,7 @@ Document[0, 26]
         Text[7, 18] chars:[7, 18, "bold- … talic"]
       Text[19, 23] chars:[19, 23, "bold"]
 ````````````````````````````````
+
 
 
 more emphasis tests
@@ -4598,6 +3370,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
+
 more emphasis tests
 
 ```````````````````````````````` example GFM Emphasis: 4
@@ -4612,6 +3385,7 @@ Document[0, 9]
         Text[3, 4] chars:[3, 4, "a"]
       Text[6, 7] chars:[6, 7, "b"]
 ````````````````````````````````
+
 
 
 more emphasis tests
@@ -4629,6 +3403,7 @@ Document[0, 10]
       StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "a"] textClose:[5, 7, "**"]
         Text[4, 5] chars:[4, 5, "a"]
 ````````````````````````````````
+
 
 
 more emphasis tests
@@ -4649,6 +3424,7 @@ Document[0, 11]
 ````````````````````````````````
 
 
+
 more emphasis tests
 
 ```````````````````````````````` example GFM Emphasis: 7
@@ -4665,6 +3441,7 @@ Document[0, 11]
         Text[4, 5] chars:[4, 5, "b"]
       Text[6, 7] chars:[6, 7, "c"]
 ````````````````````````````````
+
 
 
 more emphasis tests
@@ -4685,6 +3462,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
+
 This works as expected:
 
 ```````````````````````````````` example GFM Emphasis: 9
@@ -4702,6 +3480,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
+
 code mixed with emphasis:
 
 ```````````````````````````````` example GFM Emphasis: 10
@@ -4716,6 +3495,7 @@ Document[0, 32]
       Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "bold"] textClose:[19, 20, "`"]
     Code[22, 31] textOpen:[22, 23, "`"] text:[23, 30, " inside"] textClose:[30, 31, "`"]
 ````````````````````````````````
+
 
 
 ## Fenced Code Options
@@ -4735,6 +3515,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
+
 empty, no info
 
 ```````````````````````````````` example Fenced Code Options: 2
@@ -4748,6 +3529,7 @@ empty, no info
 Document[0, 9]
   FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
 ````````````````````````````````
+
 
 
 empty, no info, blank line follows
@@ -4766,6 +3548,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
+
 empty, info
 
 ```````````````````````````````` example Fenced Code Options: 4
@@ -4779,6 +3562,7 @@ empty, info
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
 ````````````````````````````````
+
 
 
 empty, info, blank line follows
@@ -4795,6 +3579,7 @@ empty, info, blank line follows
 Document[0, 14]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
 ````````````````````````````````
+
 
 
 Unclosed Fenced code should take all input to end
@@ -4827,6 +3612,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
+
 ## Anchor links option
 
 Change language class prefix
@@ -4847,6 +3633,7 @@ Document[0, 56]
 ````````````````````````````````
 
 
+
 ## Thematic Break
 
 Break with trailing spaces
@@ -4861,6 +3648,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
+
 ## Image links
 
 ```````````````````````````````` example Image links: 1
@@ -4873,6 +3661,7 @@ Document[0, 14]
     Image[0, 12] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] linkClose:[11, 12, ")"]
       Text[2, 5] chars:[2, 5, "alt"]
 ````````````````````````````````
+
 
 
 dummy ref
@@ -4892,6 +3681,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
+
 ## Multi-Line Image URL
 
 not parsed, invalid end
@@ -4909,6 +3699,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
+
 empty content
 
 ```````````````````````````````` example(Multi-Line Image URL: 2) options(multi-line-image-url)
@@ -4922,6 +3713,7 @@ Document[0, 16]
     Image[0, 15] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 14] linkClose:[14, 15, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
+
 
 
 empty content
@@ -4939,6 +3731,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
+
 simple content
 
 ```````````````````````````````` example(Multi-Line Image URL: 4) options(multi-line-image-url)
@@ -4953,6 +3746,7 @@ Document[0, 25]
     Image[0, 24] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 23, "one line\n"] linkClose:[23, 24, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
+
 
 
 simple content
@@ -4972,6 +3766,7 @@ Document[0, 34]
 ````````````````````````````````
 
 
+
 false title
 
 ```````````````````````````````` example(Multi-Line Image URL: 6) options(multi-line-image-url)
@@ -4987,6 +3782,7 @@ Document[0, 52]
     Image[0, 51] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 37, "one line\n\"false title\"\n"] titleOpen:[38, 39, "\""] title:[39, 49, "real title"] titleClose:[49, 50, "\""] linkClose:[50, 51, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
+
 
 
 trailing text
@@ -5007,6 +3803,7 @@ Document[0, 48]
 ````````````````````````````````
 
 
+
 encoding of &, =
 
 ```````````````````````````````` example(Multi-Line Image URL: 8) options(multi-line-image-url)
@@ -5022,6 +3819,7 @@ Document[0, 45]
       Text[2, 5] chars:[2, 5, "ref"]
     Text[30, 44] chars:[30, 44, " trai …  text"]
 ````````````````````````````````
+
 
 
 encoding of embedded EOL
@@ -5042,6 +3840,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
+
 ## Fenced Code
 
 Option not to match closing fence characters to opening ones
@@ -5059,6 +3858,7 @@ Document[0, 37]
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example(Fenced Code: 2) options(unmatched-fence)
 ~~~
 proper unmatched fenced code
@@ -5070,6 +3870,7 @@ proper unmatched fenced code
 Document[0, 37]
   FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[1] close:[33, 36, "```"]
 ````````````````````````````````
+
 
 
 non empty, info, blank line follows, unmatched
@@ -5088,7 +3889,8 @@ Document[0, 23]
 ````````````````````````````````
 
 
-## IntelliJ Dummy Identifier 
+
+## IntelliJ Dummy Identifier
 
 allow dummy identifier in url and text
 
@@ -5111,7 +3913,8 @@ Document[0, 32]
 ````````````````````````````````
 
 
-## Indented Code Options 
+
+## Indented Code Options
 
 trim trailing blank lines by default
 
@@ -5129,6 +3932,7 @@ code line
 Document[0, 38]
   IndentedCodeBlock[4, 23]
 ````````````````````````````````
+
 
 
 don't trim trailing blank lines
@@ -5149,6 +3953,7 @@ Document[0, 38]
 ````````````````````````````````
 
 
+
 ## Links
 
 Url encoded link address should not % encode the query separator `&`
@@ -5165,6 +3970,7 @@ Document[0, 32]
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example Links: 2
 [ref]: /url1
 
@@ -5178,6 +3984,7 @@ Document[0, 22]
     LinkRef[14, 21] referenceOpen:[14, 15, "["] reference:[15, 18, "ref"] referenceClose:[18, 19, "]"] textOpen:[19, 20, "["] textClose:[20, 21, "]"]
       Text[15, 18] chars:[15, 18, "ref"]
 ````````````````````````````````
+
 
 
 ## Block Quotes
@@ -5207,6 +4014,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
+
 without block quote to next blank line causes an interrupted list with a second list after the
 quote.
 
@@ -5234,6 +4042,7 @@ Document[0, 16]
       Paragraph[12, 16]
         Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
+
 
 
 Block quotes don't ignore interspersing blank lines
@@ -5284,6 +4093,7 @@ Document[0, 68]
 ````````````````````````````````
 
 
+
 Block quotes ignore interspersing blank lines
 
 ```````````````````````````````` example(Block Quotes: 4) options(block-ignore-blank)
@@ -5323,6 +4133,7 @@ Document[0, 68]
 ````````````````````````````````
 
 
+
 Block quotes ignore interspersing blank lines but don't include any lines without prefix after
 blank lines
 
@@ -5351,6 +4162,7 @@ Document[0, 59]
 ````````````````````````````````
 
 
+
 ## Hard Line Break Limit
 
 Only attribute two last spaces of a hard line break space sequence
@@ -5368,6 +4180,7 @@ Document[0, 21]
     HardLineBreak[6, 9]
     Text[9, 20] chars:[9, 20, "line  … reaks"]
 ````````````````````````````````
+
 
 
 ## Source Position Attribute
@@ -5483,6 +4296,7 @@ Document[0, 230]
 ````````````````````````````````
 
 
+
 fenced code
 
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
@@ -5497,6 +4311,7 @@ text
 Document[0, 18]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
 ````````````````````````````````
+
 
 
 fenced code with trailing spaces and tabs on close
@@ -5517,6 +4332,7 @@ Document[0, 25]
   Paragraph[20, 25]
     Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
+
 
 
 no source wrap HTML
@@ -5541,6 +4357,7 @@ Document[0, 65]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
     HtmlInline[57, 64] chars:[57, 64, "</span>"]
 ````````````````````````````````
+
 
 
 source wrap HTML
@@ -5569,6 +4386,7 @@ Document[0, 65]
 ````````````````````````````````
 
 
+
 source wrap HTML blocks
 
 ```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines, src-wrap-blocks)
@@ -5593,6 +4411,7 @@ Document[0, 65]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
     HtmlInline[57, 64] chars:[57, 64, "</span>"]
 ````````````````````````````````
+
 
 
 Wrap individual paragraph lines in source position marked spans
@@ -5743,6 +4562,7 @@ Document[0, 456]
 ````````````````````````````````
 
 
+
 Wrap individual paragraph lines in source position marked spans
 
 ```````````````````````````````` example(Source Position Attribute: 8) options(src-pos, src-pos-lines)
@@ -5762,6 +4582,7 @@ Document[0, 71]
     SoftLineBreak[40, 41]
     Text[41, 70] chars:[41, 70, "all s … apped"]
 ````````````````````````````````
+
 
 
 Wrap individual paragraph lines in source position marked spans tight list items
@@ -5809,6 +4630,7 @@ Document[0, 137]
         SoftLineBreak[105, 106]
         Text[106, 135] chars:[106, 135, "all s … apped"]
 ````````````````````````````````
+
 
 
 Wrap individual paragraph lines in source position marked spans loose list items
@@ -5878,6 +4700,7 @@ Document[0, 154]
 ````````````````````````````````
 
 
+
 ### Issue #17
 
 one line blank after code should not be kept as part of the code block
@@ -5896,6 +4719,7 @@ Document[0, 17]
   Paragraph[7, 17]
     Text[7, 16] chars:[7, 16, "some text"]
 ````````````````````````````````
+
 
 
 Blank lines before and after should not be kept
@@ -5923,6 +4747,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
+
 ## Mixed EOLs
 
 Escape crlf
@@ -5940,4 +4765,53 @@ Document[0, 29]
     HardLineBreak[4, 7]
     Text[7, 28] chars:[7, 28, "line  … break"]
 ````````````````````````````````
+
+
+
+## Jekyll Macros in URLs
+
+Allow funny URLs
+
+```````````````````````````````` example(Jekyll Macros in URLs: 1) options(jekyll-macros-in-urls)
+[ref]({{ macro }}/someDir/someFile.someExt)
+.
+<p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.someExt">ref</a></p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Link[0, 43] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 42, "{{ macro }}/someDir/someFile.someExt"] pageRef:[6, 42, "{{ macro }}/someDir/someFile.someExt"] linkClose:[42, 43, ")"]
+      Text[1, 4] chars:[1, 4, "ref"]
+````````````````````````````````
+
+
+
+Allow funny URLs
+
+```````````````````````````````` example(Jekyll Macros in URLs: 2) options(jekyll-macros-in-urls)
+[ref]({{ macro }}/someDir/someFile.{{someExt}})
+.
+<p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.%7B%7BsomeExt%7D%7D">ref</a></p>
+.
+Document[0, 48]
+  Paragraph[0, 48]
+    Link[0, 47] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 46, "{{ macro }}/someDir/someFile.{{someExt}}"] pageRef:[6, 46, "{{ macro }}/someDir/someFile.{{someExt}}"] linkClose:[46, 47, ")"]
+      Text[1, 4] chars:[1, 4, "ref"]
+````````````````````````````````
+
+
+
+Allow funny URLs
+
+```````````````````````````````` example(Jekyll Macros in URLs: 3) options(jekyll-macros-in-urls)
+[ref]({{ macro|()|$/| }}someFile.ext)
+.
+<p><a href="%7B%7B%20macro%7C()%7C$/%7C%20%7D%7DsomeFile.ext">ref</a></p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Link[0, 37] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 36, "{{ macro|()|$/| }}someFile.ext"] pageRef:[6, 36, "{{ macro|()|$/| }}someFile.ext"] linkClose:[36, 37, ")"]
+      Text[1, 4] chars:[1, 4, "ref"]
+````````````````````````````````
+
+
 

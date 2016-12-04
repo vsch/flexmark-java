@@ -122,7 +122,7 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BasedSequence line = state.getLine();
-            BlockParser parentParser = matchedBlockParser.getMatchedBlockParser();
+            BlockParser parentParser = matchedBlockParser.getBlockParser();
             if (parentParser instanceof DocumentBlockParser && parentParser.getBlock().getFirstChild() == null) {
                 Matcher matcher = JEKYLL_FRONT_MATTER_BLOCK_START.matcher(line);
                 if (matcher.matches()) {
