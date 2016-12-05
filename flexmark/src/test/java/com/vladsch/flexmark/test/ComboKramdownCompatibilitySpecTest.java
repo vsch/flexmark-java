@@ -14,10 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboMultiMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
-    private static final String SPEC_RESOURCE = "/multi_markdown_compatibility_spec.md";
+public class ComboKramdownCompatibilitySpecTest extends ComboExtraSpecTest {
+    private static final String SPEC_RESOURCE = "/kramdown_compatibility_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationFamily.MULTI_MARKDOWN.getListOptions())
+            .setFrom(ParserEmulationFamily.KRAMDOWN.getListOptions())
+            .set(Parser.HEADING_NO_LEAD_SPACE, true)
+            //.set(Parser.THEMATIC_BREAK_RELAXED_START, true)
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
@@ -37,7 +39,7 @@ public class ComboMultiMarkdownCompatibilitySpecTest extends ComboExtraSpecTest 
         return optionsMap.get(optionSet);
     }
 
-    public ComboMultiMarkdownCompatibilitySpecTest(SpecExample example) {
+    public ComboKramdownCompatibilitySpecTest(SpecExample example) {
         super(example);
     }
 

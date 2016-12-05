@@ -96,6 +96,7 @@ Tests how all tight items are generated
 ````````````````````````````````
 
 
+
 Test to see how trailing blank after item determines looseness 
 
 ```````````````````````````````` example Loose Item Handling: 2
@@ -141,7 +142,8 @@ Test to see how trailing blank after item determines looseness
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -160,6 +162,7 @@ Test to see how trailing blank after item determines looseness
 </ul>
 .
 ````````````````````````````````
+
 
 
 Test looseness with child items
@@ -200,6 +203,7 @@ Test looseness with child items
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
@@ -236,6 +240,7 @@ Test looseness with child items
 </ul>
 .
 ````````````````````````````````
+
 
 
 ```````````````````````````````` example Loose Item Handling: 7
@@ -356,7 +361,8 @@ Test looseness with child items
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 9
+
+```````````````````````````````` example Loose Item Handling: 10
 - item 1
     - item 1.1
 - item 2 
@@ -395,7 +401,7 @@ Test looseness with child items
 
 
 
-```````````````````````````````` example Loose Item Handling: 10
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
 - item 2 
@@ -434,7 +440,8 @@ Test looseness with child items
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 10
+
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
     - item 1.1
 - item 2 
@@ -1268,6 +1275,78 @@ Document[0, 296]
           Heading[218, 232] textOpen:[218, 222, "####"] text:[223, 232, "Heading 3"]
             Text[223, 232] chars:[223, 232, "Heading 3"]
           IndentedCodeBlock[246, 295]
+````````````````````````````````
+
+
+
+```````````````````````````````` example List Item Indent Handling: 8
+-   test
+    - sub item
+
+         sub item child para
+
+          indented code
+          
+---
+
+1.  test
+    1. sub item
+
+          sub item child para
+
+           indented code
+
+.
+<ul>
+    <li>
+        <p>test</p>
+        <ul>
+            <li>
+                <p>sub item</p>
+                <p>sub item child para</p>
+                <p>indented code</p>
+            </li>
+        </ul>
+    </li>
+</ul>
+<hr />
+<ol>
+    <li>
+        <p>test</p>
+        <ol>
+            <li>
+                <p>sub item</p>
+                <p>sub item child para</p>
+                <p>indented code</p>
+            </li>
+        </ol>
+    </li>
+</ol>
+.
+Document[0, 167]
+  BulletList[0, 79] isTight
+    BulletListItem[0, 79] open:[0, 1, "-"] isTight
+      Paragraph[4, 9]
+        Text[4, 8] chars:[4, 8, "test"]
+      BulletList[13, 79] isLoose
+        BulletListItem[13, 79] open:[13, 14, "-"] isLoose
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "sub item"]
+          Paragraph[34, 54]
+            Text[34, 53] chars:[34, 53, "sub i …  para"]
+          IndentedCodeBlock[65, 79]
+  ThematicBreak[79, 82]
+  OrderedList[84, 166] isTight delimiter:'.'
+    OrderedListItem[84, 166] open:[84, 86, "1."] isTight
+      Paragraph[88, 93]
+        Text[88, 92] chars:[88, 92, "test"]
+      OrderedList[97, 166] isLoose delimiter:'.'
+        OrderedListItem[97, 166] open:[97, 99, "1."] isLoose
+          Paragraph[100, 109]
+            Text[100, 108] chars:[100, 108, "sub item"]
+          Paragraph[120, 140]
+            Text[120, 139] chars:[120, 139, "sub i …  para"]
+          IndentedCodeBlock[152, 166]
 ````````````````````````````````
 
 

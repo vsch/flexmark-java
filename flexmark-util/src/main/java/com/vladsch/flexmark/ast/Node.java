@@ -34,6 +34,17 @@ public abstract class Node {
         return null;
     }
 
+    public Node getChildOfType(Class... classes) {
+        Node child = getFirstChild();
+        while (child != null) {
+            for (Class nodeType : classes) {
+                if (nodeType.isInstance(parent)) return child;
+            }
+            child = child.getNext();
+        }
+        return null;
+    }
+
     public static int getNodeOfTypeIndex(Node node, Class... classes) {
         int i = 0;
         for (Class nodeType : classes) {

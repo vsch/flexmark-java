@@ -6,6 +6,8 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
 import com.vladsch.flexmark.parser.block.*;
 
+import java.util.List;
+
 import static com.vladsch.flexmark.parser.ParserEmulationFamily.*;
 
 public class ListItemParser extends AbstractBlockParser {
@@ -26,7 +28,7 @@ public class ListItemParser extends AbstractBlockParser {
 
     @SuppressWarnings({ "WeakerAccess", "unused" })
     int getContentColumn() {
-        return myListData.markerColumn + myListData.contentOffset;
+        return myListData.markerColumn + myListData.listMarker.length() + myListData.contentOffset;
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -69,7 +71,11 @@ public class ListItemParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         if (state.isBlank()) {
             // now when we have a Blank line after empty list item, now we need to handle it because the list is not closed and we handle next list item conditions
-            myIsEmpty = myBlock.getFirstChild() == null;
+            Node firstChild = myBlock.getFirstChild();
+            myIsEmpty = firstChild == null;
+            if (myIsEmpty || firstChild.getNext() == null) {
+                myBlock.setHadBlankAfterItemParagraph(true);
+            }
             myHadBlankLine = true;
             return BlockContinue.atIndex(state.getNextNonSpaceIndex());
         }
@@ -79,7 +85,6 @@ public class ListItemParser extends AbstractBlockParser {
         ListBlockParser listBlockParser = (ListBlockParser) state.getActiveBlockParser(myBlock.getParent());
 
         ParserEmulationFamily emulationFamily = myOptions.parserEmulationFamily;
-        int newColumn = state.getColumn() + getContentIndent();
         if (emulationFamily == COMMONMARK) {
             // - CommonMark: version 0.27 of the spec, all common mark parsers
             //     - Definitions/Defaults:
@@ -95,6 +100,7 @@ public class ListItemParser extends AbstractBlockParser {
             //         - `current indent` >= `list indent`: list item
 
             int currentIndent = state.getIndent();
+            int newColumn = state.getColumn() + getContentIndent();
 
             if (currentIndent >= getContentIndent() + myOptions.codeIndent) {
                 // our indented code child
@@ -169,56 +175,64 @@ public class ListItemParser extends AbstractBlockParser {
             //          - `current indent` >= `ITEM_INDENT`: sub-item
             //          - `current indent` < `ITEM_INDENT`: list item
 
-            ListBlockParser firstParent = null;
-            int listLevel = 0;
-
-            for (BlockParser blockParser : state.getActiveBlockParsers()) {
-                if (blockParser instanceof ListBlockParser) {
-                    firstParent = (ListBlockParser) blockParser;
-                    listLevel++;
-                } else if (!(blockParser instanceof ListItemParser)) {
-                    break;
-                }
-            }
-
-            int firstParentListColumn = firstParent == null ? state.getColumn() : firstParent.getListData().markerColumn;
-            int firstParentListIndent = firstParent == null ? state.getIndent() : firstParent.getListData().markerIndent;
-            if (listLevel == 0) listLevel = 1;
-
-            int currentIndent = state.getColumn() - firstParentListColumn + firstParentListIndent - myOptions.itemIndent * (listLevel - 1);
+            int currentIndent = state.getIndent();
+            int newColumn = state.getColumn() + state.getIndent();
 
             if (currentIndent >= myOptions.codeIndent) {
                 // our indented code child
                 listBlockParser.setItemHandledLine(state.getLine());
-                return continueAtColumn(newColumn);
+                return continueAtColumn(state.getColumn() + state.getIndent());
             } else {
                 ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
 
                 if (currentIndent >= myOptions.itemIndent) {
                     if (listData != null) {
-                        // our sub list item
-                        listBlockParser.setItemHandledNewListLine(state.getLine());
-                        return continueAtColumn(newColumn);
+                        BlockParser matched = state.getActiveBlockParser();
+                        boolean inParagraph = matched.isParagraphParser();
+                        boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+                        if (inParagraphListItem
+                                && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
+                                || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
+                            // just a lazy continuation of us
+                            listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                            return continueAtColumn(newColumn);
+                        } else {
+                            // our sub list item
+                            listBlockParser.setItemHandledNewListLine(state.getLine());
+                            return continueAtColumn(state.getColumn() + state.getIndent());
+                        }
                     } else {
-                        // our child item, other than a list item
-                        listBlockParser.setItemHandledLine(state.getLine());
-                        return continueAtColumn(newColumn);
+                        // our child item, other than a list item, if we are empty then no such thing
+                        if (myIsEmpty) {
+                            listBlockParser.setItemHandledLine(state.getLine());
+                            return BlockContinue.none();
+                        } else {
+                            listBlockParser.setItemHandledLine(state.getLine());
+                            return continueAtColumn(newColumn);
+                        }
                     }
-                } else {
-                    if (!myHadBlankLine && (listData == null || !myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true))) {
+                } else if (listData != null) {
+                    if (!myHadBlankLine && !myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)) {
                         // our text or lazy continuation
                         listBlockParser.setItemHandledLine(state.getLine());
                         return continueAtColumn(state.getColumn() + currentIndent);
-                    } else if (listData != null && currentIndent >= myListData.markerIndent) {
+                    } else if (currentIndent >= myListData.markerIndent) {
                         // here have to see if the item is really a mismatch and we sub-list mismatches
                         if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                             // we keep it as our sub-item
                             listBlockParser.setItemHandledNewListLine(state.getLine());
                             return continueAtColumn(state.getColumn() + currentIndent);
                         } else {
-                            // the next line in the list
-                            listBlockParser.setItemHandledNewItemLine(state.getLine());
-                            return BlockContinue.none();
+                            if (myOptions.startNewList(listBlockParser.getBlock(), listData.listBlock)) {
+                                // a new list
+                                listBlockParser.setItemHandledNewListLine(state.getLine());
+                                return BlockContinue.none();
+                            } else {
+                                // the next line in the list
+                                listBlockParser.setItemHandledNewItemLine(state.getLine());
+                                return BlockContinue.none();
+                            }
                         }
                     }
                 }
@@ -232,53 +246,83 @@ public class ListItemParser extends AbstractBlockParser {
             //     - Start List Conditions:
             //         - `current indent` < `ITEM_INDENT`: new list with new item
             //     - Continuation Conditions:
-            //         - `current indent` >= `list content indent` + `CODE_INDENT`: indented code
-            //         - `current indent` >= `list content indent` + `ITEM_INDENT`:
-            //             - if had blank line in item && have previous list item parent && list item line: then let it have it
-            //             - otherwise: lazy continuation of last list item
-            //         - `current indent` >= `item content indent`: sub-item
-            //         - `current indent` >= `list content indent`: list item
+            //         - `current indent` >= `list indent` + `CODE_INDENT`: indented code
+            //         - `current indent` >= `list indent` + `ITEM_INDENT`: lazy continuation
+            //         - `current indent` >  `item content indent`: sub-item
+            //         - `current indent` >= `list indent`: list item
 
             int currentIndent = state.getIndent();
             int listContentIndent = listBlockParser.getContentIndent();
+            int listIndent = listBlockParser.getListData().markerIndent;
+            int newColumn = state.getColumn() + getContentIndent();
 
-            if (currentIndent >= listContentIndent + myOptions.codeIndent) {
-                // our indented code child
-                listBlockParser.setItemHandledLine(state.getLine());
-                return continueAtColumn(newColumn);
+            ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
+
+            if (currentIndent > getContentIndent()) {
+                // our sub item
+                if (listData != null) {
+                    BlockParser matched = state.getActiveBlockParser();
+                    boolean inParagraph = matched.isParagraphParser();
+                    boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+                    if (inParagraphListItem
+                            && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
+                            || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
+                        // just a lazy continuation of us
+                        listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                        return continueAtColumn(newColumn);
+                    } else {
+                        // our sub list item
+                        listBlockParser.setItemHandledNewListLine(state.getLine());
+                        return continueAtColumn(newColumn);
+                    }
+                } else {
+                    // our child item, other than a list item, if we are empty then no such thing
+                    if (myIsEmpty) {
+                        listBlockParser.setItemHandledLine(state.getLine());
+                        return BlockContinue.none();
+                    } else {
+                        listBlockParser.setItemHandledLine(state.getLine());
+                        return continueAtColumn(newColumn);
+                    }
+                }
             } else {
-                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
+                if (listData != null && currentIndent >= listIndent + myOptions.itemIndent) {
+                    if (!myHadBlankLine) {
+                        // our text or lazy continuation
+                        listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                        return continueAtColumn(state.getColumn() + currentIndent);
+                    }
+                }
 
-                if (currentIndent >= listContentIndent + myOptions.itemIndent) {
-                    // this could be indented code of the parent list item or our lazy continuation or our child
-                    if (listData == null || !(myBlock.getParent().getParent() instanceof ListItem)) {
-                        if (!myHadBlankLine && (listData == null || !myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true))) {
-                            // our text or lazy continuation
-                            listBlockParser.setItemHandledLine(state.getLine());
+                if (myHadBlankLine && currentIndent >= listIndent + myOptions.itemIndent) {
+                    // indented code interrupts us
+                    listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                    return BlockContinue.none();
+                }
+
+                if (currentIndent >= listIndent + myOptions.codeIndent) {
+                    // our indented code child
+                    listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                    return continueAtColumn(newColumn);
+                } else if (listData != null) {
+                    if (currentIndent >= listIndent) {
+                        // here have to see if the item is really a mismatch and we sub-list mismatches
+                        if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                            // we keep it as our sub-item
+                            listBlockParser.setItemHandledNewListLine(state.getLine());
                             return continueAtColumn(state.getColumn() + currentIndent);
-                        } else if (listData != null && currentIndent >= myListData.markerIndent) {
-                            // here have to see if the item is really a mismatch and we sub-list mismatches
-                            if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
-                                // we keep it as our sub-item
+                        } else {
+                            if (myOptions.startNewList(listBlockParser.getBlock(), listData.listBlock)) {
+                                // a new list
                                 listBlockParser.setItemHandledNewListLine(state.getLine());
-                                return continueAtColumn(state.getColumn() + currentIndent);
+                                return BlockContinue.none();
                             } else {
                                 // the next line in the list
                                 listBlockParser.setItemHandledNewItemLine(state.getLine());
                                 return BlockContinue.none();
                             }
                         }
-                    }
-                } else if (currentIndent >= listContentIndent) {
-                    // our sub item
-                    if (listData != null) {
-                        // our sub list item
-                        listBlockParser.setItemHandledNewListLine(state.getLine());
-                        return continueAtColumn(newColumn);
-                    } else {
-                        // our child item, other than a list item
-                        listBlockParser.setItemHandledLine(state.getLine());
-                        return continueAtColumn(newColumn);
                     }
                 }
             }
@@ -291,46 +335,73 @@ public class ListItemParser extends AbstractBlockParser {
             //     - Start List Conditions:
             //         - `current indent` < `ITEM_INDENT`: new list with new item
             //     - Continuation Conditions:
-            //         - `current indent` >= `list indent` + `CODE_INDENT`:
-            //             - if had blank line in item: indented code child
-            //             - otherwise: lazy continuation of last list item
+            //         - `current indent` >= `list indent` + `CODE_INDENT`: indented code
             //         - `current indent` > `list indent`: sub-item or non-list child
             //         - `current indent` == `list indent` && list item line: new list item
             //         - otherwise: not our business
 
             int currentIndent = state.getIndent();
             int listIndent = listBlockParser.getListData().markerIndent;
+            int newColumn = state.getColumn() + getContentIndent();
 
             if (currentIndent >= listIndent + myOptions.codeIndent) {
                 // this could be indented code or our lazy continuation
-                if (!myHadBlankLine) {
-                    // our lazy continuation
-                    listBlockParser.setItemHandledLine(state.getLine());
-                    return continueAtColumn(state.getColumn() + currentIndent);
-                } else {
-                    // indented code child
-                    listBlockParser.setItemHandledLine(state.getLine());
-                    return continueAtColumn(state.getColumn() + listIndent + myOptions.itemIndent);
-                }
+                // indented code child
+                listBlockParser.setItemHandledLine(state.getLine());
+                return continueAtColumn(state.getColumn() + listIndent + myOptions.itemIndent);
             } else {
                 ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
 
                 if (currentIndent > listIndent) {
-                    // our sub item or non-list item child
+                    // our sub item
                     if (listData != null) {
-                        // our sub list item
-                        listBlockParser.setItemHandledNewListLine(state.getLine());
-                        return continueAtColumn(newColumn);
+                        BlockParser matched = state.getActiveBlockParser();
+                        boolean inParagraph = matched.isParagraphParser();
+                        boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+                        if (inParagraphListItem
+                                && (!myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)
+                                || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
+                            // just a lazy continuation of us
+                            listBlockParser.setItemHandledLineSkipActive(state.getLine());
+                            return continueAtColumn(newColumn);
+                        } else {
+                            // our sub list item
+                            listBlockParser.setItemHandledNewListLine(state.getLine());
+                            return continueAtColumn(newColumn);
+                        }
                     } else {
-                        // our child item, other than a list item
-                        listBlockParser.setItemHandledLine(state.getLine());
-                        return continueAtColumn(newColumn);
+                        // our child item, other than a list item, if we are empty then no such thing
+                        if (myIsEmpty) {
+                            listBlockParser.setItemHandledLine(state.getLine());
+                            return BlockContinue.none();
+                        } else {
+                            listBlockParser.setItemHandledLine(state.getLine());
+                            return continueAtColumn(newColumn);
+                        }
                     }
                 } else if (currentIndent == listIndent && listData != null) {
-                    if (myHadBlankLine || myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)) {
-                        // the next line in the list
-                        listBlockParser.setItemHandledNewItemLine(state.getLine());
-                        return BlockContinue.none();
+                    if (!myHadBlankLine && !myOptions.canInterrupt(listData.listBlock, listData.isEmpty, true)) {
+                        // our text or lazy continuation
+                        listBlockParser.setItemHandledLine(state.getLine());
+                        return continueAtColumn(state.getColumn() + currentIndent);
+                    } else if (currentIndent >= myListData.markerIndent) {
+                        // here have to see if the item is really a mismatch and we sub-list mismatches
+                        if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                            // we keep it as our sub-item
+                            listBlockParser.setItemHandledNewListLine(state.getLine());
+                            return continueAtColumn(state.getColumn() + currentIndent);
+                        } else {
+                            if (myOptions.startNewList(listBlockParser.getBlock(), listData.listBlock)) {
+                                // a new list
+                                listBlockParser.setItemHandledNewListLine(state.getLine());
+                                return BlockContinue.none();
+                            } else {
+                                // the next line in the list
+                                listBlockParser.setItemHandledNewItemLine(state.getLine());
+                                return BlockContinue.none();
+                            }
+                        }
                     }
                 }
             }

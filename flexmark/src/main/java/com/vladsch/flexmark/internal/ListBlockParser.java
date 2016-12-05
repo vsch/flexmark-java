@@ -5,11 +5,13 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -119,13 +121,28 @@ public class ListBlockParser extends AbstractBlockParser {
         Node item = getBlock().getFirstChild();
         boolean isTight = true;
         boolean prevItemLoose = false;
+        boolean haveNestedList = false;
 
         while (item != null) {
             // check for non-final list item ending with blank line:
             boolean thisItemLoose = false;
-            if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
-                isTight = false;
-                thisItemLoose = true;
+            if (myOptions.looseWhenBlankFollowsItemParagraph) {
+                if (item instanceof ListItem) {
+                    if (myOptions.looseWhenBlankFollowsItemParagraph && ((ListItem) item).isHadBlankAfterItemParagraph()) {
+                        if (item.getNext() == null && (item.getFirstChild() == null || item.getFirstChild().getNext() == null)) {
+                            // not for last block
+                        } else {
+                            ((ListItem) item).setLoose(true);
+                            isTight = false;
+                            thisItemLoose = true;
+                        }
+                    }
+                }
+            } else {
+                if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
+                    isTight = false;
+                    thisItemLoose = true;
+                }
             }
 
             if (item instanceof ListItem) {
@@ -141,16 +158,34 @@ public class ListBlockParser extends AbstractBlockParser {
             // spaces between any of them:
             Node subItem = item.getFirstChild();
             while (subItem != null) {
-                if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                    isTight = false;
-                    break;
+                if (myOptions.looseWhenBlankFollowsItemParagraph) {
+                    if (subItem instanceof ListItem) {
+                        if (!((ListItem) subItem).isTight()) {
+                            isTight = false;
+                            if (haveNestedList || !myOptions.autoLooseOneLevelLists) break;
+                        }
+                    }
+                } else {
+                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                        isTight = false;
+                        if (haveNestedList || !myOptions.autoLooseOneLevelLists) break;
+                    }
                 }
+                if (subItem instanceof ListBlock) haveNestedList = true;
                 subItem = subItem.getNext();
             }
             item = item.getNext();
         }
 
-        if (myOptions.autoLoose && !isTight) setTight(false);
+        if (myOptions.autoLoose && myOptions.autoLooseOneLevelLists) {
+            if (!haveNestedList && getBlock().getAncestorOfType(ListBlock.class) == null && !isTight) {
+                setTight(false);
+            }
+        } else {
+            if (myOptions.autoLoose && !isTight) {
+                setTight(false);
+            }
+        }
     }
 
     /**
@@ -316,7 +351,7 @@ public class ListBlockParser extends AbstractBlockParser {
             } else {
                 // see if the list item is still active and set line handled, need this to handle lazy continuations when they look like list items
                 ListBlock block = (ListBlock) matched.getBlock().getAncestorOfType(ListBlock.class);
-                if (block != null ) {
+                if (block != null) {
                     ListBlockParser listBlockParser = (ListBlockParser) state.getActiveBlockParser(block);
                     if (listBlockParser.myItemHandledLine == state.getLine() && listBlockParser.myItemHandledSkipActiveLine) {
                         listBlockParser.myItemHandledLine = null;
@@ -355,8 +390,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 //     - Definitions/Defaults:
                 //         - `ITEM_INDENT` = 4
                 //         - `CODE_INDENT` = 8
-                //         - `current indent` = `line column` - `first parent list column` + `first parent list
-                //           indent` - (`list nesting` - 1) * `ITEM_INDENT`
+                //         - `current indent` = `line indent`
                 //     - Start List Conditions:
                 //         - `current indent` < `ITEM_INDENT`: new list with new item
                 //     - Continuation Conditions:
@@ -364,31 +398,12 @@ public class ListBlockParser extends AbstractBlockParser {
                 //          - `current indent` >= `ITEM_INDENT`: sub-item
                 //          - `current indent` < `ITEM_INDENT`: list item
 
-                ListBlockParser firstParent = null;
-                int listLevel = 0;
-
-                for (BlockParser blockParser : state.getActiveBlockParsers()) {
-                    if (blockParser instanceof ListBlockParser) {
-                        firstParent = (ListBlockParser) blockParser;
-                        listLevel++;
-                    } else if (!(blockParser instanceof ListItemParser)) {
-                        break;
-                    }
-                }
-
-                int firstParentListColumn = firstParent == null ? state.getColumn() : firstParent.getListData().markerColumn;
-                int firstParentListIndent = firstParent == null ? state.getIndent() : firstParent.getListData().markerIndent;
-                if (listLevel == 0) listLevel = 1;
-
-                int currentIndent = state.getColumn() - firstParentListColumn + firstParentListIndent - myOptions.itemIndent * (listLevel - 1);
+                int currentIndent = state.getIndent();
 
                 if (currentIndent >= myOptions.codeIndent) {
                     // must be a code block, and we should be outside a list or it would have been handled
                     return BlockStart.none();
                 }
-
-                // we should not be starting new sub-lists here, it is done earlier from instructions by list item parser
-                assert currentIndent < myOptions.itemIndent;
             } else if (emulationFamily == KRAMDOWN) {
                 // - Kramdown:
                 //     - Definitions/Defaults:
@@ -412,9 +427,6 @@ public class ListBlockParser extends AbstractBlockParser {
                     // must be a code block, and we should be outside a list or it would have been handled
                     return BlockStart.none();
                 }
-
-                // only new lists are started here
-                assert currentIndent >= listContentIndent + myOptions.itemIndent;
             } else if (emulationFamily == MARKDOWN) {
                 // - Markdown:
                 //     - Definitions/Defaults:

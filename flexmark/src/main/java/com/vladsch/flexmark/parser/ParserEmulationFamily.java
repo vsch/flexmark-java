@@ -18,7 +18,9 @@ public enum ParserEmulationFamily {
         if (this == MULTI_MARKDOWN) {
             return new ListOptions.Mutable()
                     .setParserEmulationFamily(this)
-                    .setAutoLoose(false)
+                    .setAutoLoose(true)
+                    .setAutoLooseOneLevelLists(true)
+                    .setLooseWhenBlankFollowsItemParagraph(true)
                     .setLooseOnPrevLooseItem(false)
                     .setOrderedStart(false)
                     .setBulletMismatchToNewList(false)
@@ -56,6 +58,7 @@ public enum ParserEmulationFamily {
             return new ListOptions.Mutable()
                     .setParserEmulationFamily(this)
                     .setAutoLoose(false)
+                    .setLooseWhenBlankFollowsItemParagraph(true)
                     .setLooseOnPrevLooseItem(false)
                     .setOrderedStart(false)
                     .setBulletMismatchToNewList(false)
@@ -65,13 +68,13 @@ public enum ParserEmulationFamily {
                     .setItemIndent(4)
                     .setCodeIndent(8)
                     .setItemInterrupt(new ListOptions.MutableItemInterrupt()
-                            .setBulletItemInterruptsParagraph(true)
-                            .setOrderedItemInterruptsParagraph(true)
-                            .setOrderedNonOneItemInterruptsParagraph(true)
+                            .setBulletItemInterruptsParagraph(false)
+                            .setOrderedItemInterruptsParagraph(false)
+                            .setOrderedNonOneItemInterruptsParagraph(false)
 
-                            .setEmptyBulletItemInterruptsParagraph(true)
-                            .setEmptyOrderedItemInterruptsParagraph(true)
-                            .setEmptyOrderedNonOneItemInterruptsParagraph(true)
+                            .setEmptyBulletItemInterruptsParagraph(false)
+                            .setEmptyOrderedItemInterruptsParagraph(false)
+                            .setEmptyOrderedNonOneItemInterruptsParagraph(false)
 
                             .setBulletItemInterruptsItemParagraph(true)
                             .setOrderedItemInterruptsItemParagraph(true)
@@ -81,10 +84,9 @@ public enum ParserEmulationFamily {
                             .setEmptyOrderedItemInterruptsItemParagraph(true)
                             .setEmptyOrderedNonOneItemInterruptsItemParagraph(true)
 
-                            // TEST: need to test for these
-                            .setEmptyBulletSubItemInterruptsItemParagraph(true)
-                            .setEmptyOrderedSubItemInterruptsItemParagraph(true)
-                            .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
+                            .setEmptyBulletSubItemInterruptsItemParagraph(false)
+                            .setEmptyOrderedSubItemInterruptsItemParagraph(false)
+                            .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(false)
                     )
 
                     .getListOptions();
@@ -93,7 +95,8 @@ public enum ParserEmulationFamily {
             return new ListOptions.Mutable()
                     .setParserEmulationFamily(this)
                     .setAutoLoose(false)
-                    .setLooseOnPrevLooseItem(false)
+                    .setLooseOnPrevLooseItem(true)
+                    .setLooseWhenBlankFollowsItemParagraph(false)
                     .setOrderedStart(false)
                     .setBulletMismatchToNewList(false)
                     .setItemTypeMismatchToNewList(false)

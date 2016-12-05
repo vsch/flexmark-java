@@ -18,7 +18,8 @@ import org.junit.runners.Suite;
         SubstringTest.class,
         UsageExampleTest.class,
         //ComboParserCompatibilitySpecTest.class,
-        ComboMultiMarkdownCompatibilitySpecTest.class
+        ComboMultiMarkdownCompatibilitySpecTest.class,
+        ComboKramdownCompatibilitySpecTest.class,
 })
 public class CoreTestSuite {
 }

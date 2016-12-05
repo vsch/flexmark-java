@@ -7,13 +7,15 @@ import java.util.List;
 
 public abstract class ListItem extends Block {
     protected BasedSequence openingMarker = SubSequence.NULL;
-    private Boolean tight = true;
+    private boolean tight = true;
+    private boolean hadBlankAfterItemParagraph = false;
 
     @Override
     public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
         if (isTight()) out.append(" isTight");
         else out.append(" isLoose");
+        if (isHadBlankAfterItemParagraph()) out.append(" hadBlankLineAfter");
     }
 
     @Override
@@ -44,7 +46,7 @@ public abstract class ListItem extends Block {
     public boolean isLoose() {
         return !isTight();
     }
-    
+
     public boolean isParagraphWrappingDisabled() {
         return false;
     }
@@ -53,9 +55,18 @@ public abstract class ListItem extends Block {
         return !(getParent() instanceof ListBlock) || ((ListBlock) getParent()).isTight();
     }
 
+    public boolean isHadBlankAfterItemParagraph() {
+        return hadBlankAfterItemParagraph;
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    public void setHadBlankAfterItemParagraph(boolean hadBlankAfterItemParagraph) {
+        this.hadBlankAfterItemParagraph = hadBlankAfterItemParagraph;
+    }
+
     public boolean isParagraphInTightListItem(Paragraph node) {
-        if (!isTight()) return false; 
-        
+        if (!isTight()) return false;
+
         // see if this is the first paragraph child item
         Node child = getFirstChild();
         while (child != null && !(child instanceof Paragraph)) child = child.getNext();

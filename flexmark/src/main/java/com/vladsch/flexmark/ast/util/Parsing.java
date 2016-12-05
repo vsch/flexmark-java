@@ -6,6 +6,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.parser.Parser.LISTS_ITEM_MARKER_SPACE;
 import static com.vladsch.flexmark.parser.Parser.LISTS_ORDERED_ITEM_DOT_ONLY;
 
 public class Parsing {
@@ -87,7 +88,7 @@ public class Parsing {
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" +(Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")  + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
         this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
@@ -134,10 +135,18 @@ public class Parsing {
                 + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-        if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
-            this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
+        if (LISTS_ITEM_MARKER_SPACE.getFrom(options)) {
+            if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t)|^(\\d{1,9})([.])(?= |\t)");
+            } else {
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t)|^(\\d{1,9})([.)])(?= |\t)");
+            }
         } else {
-            this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
+            if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
+            } else {
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
+            }
         }
 
         // make sure this is consistent with lists settings

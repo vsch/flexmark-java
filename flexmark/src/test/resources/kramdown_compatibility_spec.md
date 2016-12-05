@@ -27,6 +27,17 @@ Test to see if bullet mismatch starts a new list
     <li>item</li>
 </ul>
 .
+Document[0, 22]
+  BulletList[0, 21] isTight
+    BulletListItem[0, 7] open:[0, 1, "-"] isTight
+      Paragraph[2, 7]
+        Text[2, 6] chars:[2, 6, "item"]
+    BulletListItem[7, 14] open:[7, 8, "+"] isTight
+      Paragraph[9, 14]
+        Text[9, 13] chars:[9, 13, "item"]
+    BulletListItem[14, 21] open:[14, 15, "*"] isTight hadBlankLineAfter
+      Paragraph[16, 21]
+        Text[16, 20] chars:[16, 20, "item"]
 ````````````````````````````````
 
 
@@ -42,6 +53,11 @@ Test to see if ordered list item will set list start if not one
     <li>Non One Start Item</li>
 </ol>
 .
+Document[0, 22]
+  OrderedList[0, 22] isTight start:2 delimiter:'.'
+    OrderedListItem[0, 22] open:[0, 2, "2."] isTight
+      Paragraph[3, 22]
+        Text[3, 21] chars:[3, 21, "Non O …  Item"]
 ````````````````````````````````
 
 
@@ -55,10 +71,22 @@ Test how mismatches in item types are handled
 1. With Ordered Item
 .
 <ul>
-    <li>Bullet List</li>
-    <li>With Ordered Item</li>
+    <li>Bullet List
+        <ol>
+            <li>With Ordered Item</li>
+        </ol>
+    </li>
 </ul>
 .
+Document[0, 35]
+  BulletList[0, 35] isTight
+    BulletListItem[0, 35] open:[0, 1, "-"] isTight
+      Paragraph[2, 14]
+        Text[2, 13] chars:[2, 13, "Bulle …  List"]
+      OrderedList[14, 35] isTight delimiter:'.'
+        OrderedListItem[14, 35] open:[14, 16, "1."] isTight
+          Paragraph[17, 35]
+            Text[17, 34] chars:[17, 34, "With  …  Item"]
 ````````````````````````````````
 
 
@@ -68,10 +96,22 @@ Test how mismatches in item types are handled
 - With Bullet List
 .
 <ol>
-    <li>Ordered Item</li>
-    <li>With Bullet List</li>
+    <li>Ordered Item
+        <ul>
+            <li>With Bullet List</li>
+        </ul>
+    </li>
 </ol>
 .
+Document[0, 35]
+  OrderedList[0, 35] isTight delimiter:'.'
+    OrderedListItem[0, 35] open:[0, 2, "1."] isTight
+      Paragraph[3, 16]
+        Text[3, 15] chars:[3, 15, "Order …  Item"]
+      BulletList[16, 35] isTight
+        BulletListItem[16, 35] open:[16, 17, "-"] isTight
+          Paragraph[18, 35]
+            Text[18, 34] chars:[18, 34, "With  …  List"]
 ````````````````````````````````
 
 
@@ -93,7 +133,22 @@ Tests how all tight items are generated
     <li>item 4</li>
 </ul>
 .
+Document[0, 39]
+  BulletList[0, 39] isTight
+    BulletListItem[0, 9] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 19] open:[9, 10, "-"] isTight
+      Paragraph[11, 19]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[19, 29] open:[19, 20, "-"] isTight
+      Paragraph[21, 29]
+        Text[21, 27] chars:[21, 27, "item 3"]
+    BulletListItem[29, 39] open:[29, 30, "-"] isTight
+      Paragraph[31, 39]
+        Text[31, 37] chars:[31, 37, "item 4"]
 ````````````````````````````````
+
 
 
 Test to see how trailing blank after item determines looseness 
@@ -114,8 +169,21 @@ Test to see how trailing blank after item determines looseness
     <li>item 4</li>
 </ul>
 .
+Document[0, 40]
+  BulletList[0, 40] isTight
+    BulletListItem[0, 9] open:[0, 1, "-"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 20] open:[10, 11, "-"] isTight
+      Paragraph[12, 20]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[20, 30] open:[20, 21, "-"] isTight
+      Paragraph[22, 30]
+        Text[22, 28] chars:[22, 28, "item 3"]
+    BulletListItem[30, 40] open:[30, 31, "-"] isTight
+      Paragraph[32, 40]
+        Text[32, 38] chars:[32, 38, "item 4"]
 ````````````````````````````````
-
 
 
 
@@ -135,10 +203,25 @@ Test to see how trailing blank after item determines looseness
     <li>item 4</li>
 </ul>
 .
+Document[0, 40]
+  BulletList[0, 40] isTight
+    BulletListItem[0, 9] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 19] open:[9, 10, "-"] isLoose hadBlankLineAfter
+      Paragraph[11, 19]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[20, 30] open:[20, 21, "-"] isTight
+      Paragraph[22, 30]
+        Text[22, 28] chars:[22, 28, "item 3"]
+    BulletListItem[30, 40] open:[30, 31, "-"] isTight
+      Paragraph[32, 40]
+        Text[32, 38] chars:[32, 38, "item 4"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -154,7 +237,22 @@ Test to see how trailing blank after item determines looseness
     <li>item 4</li>
 </ul>
 .
+Document[0, 40]
+  BulletList[0, 40] isTight
+    BulletListItem[0, 9] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 19] open:[9, 10, "-"] isTight
+      Paragraph[11, 19]
+        Text[11, 17] chars:[11, 17, "item 2"]
+    BulletListItem[19, 29] open:[19, 20, "-"] isLoose hadBlankLineAfter
+      Paragraph[21, 29]
+        Text[21, 27] chars:[21, 27, "item 3"]
+    BulletListItem[30, 40] open:[30, 31, "-"] isTight
+      Paragraph[32, 40]
+        Text[32, 38] chars:[32, 38, "item 4"]
 ````````````````````````````````
+
 
 
 Test looseness with child items
@@ -192,7 +290,38 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 102]
+  BulletList[0, 102] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 50] open:[24, 25, "-"] isTight
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[38, 50] isTight
+        BulletListItem[38, 50] open:[38, 39, "-"] isTight
+          Paragraph[40, 50]
+            Text[40, 48] chars:[40, 48, "item 2.1"]
+    BulletListItem[50, 76] open:[50, 51, "-"] isTight
+      Paragraph[52, 60]
+        Text[52, 58] chars:[52, 58, "item 3"]
+      BulletList[64, 76] isTight
+        BulletListItem[64, 76] open:[64, 65, "-"] isTight
+          Paragraph[66, 76]
+            Text[66, 74] chars:[66, 74, "item 3.1"]
+    BulletListItem[76, 102] open:[76, 77, "-"] isTight
+      Paragraph[78, 86]
+        Text[78, 84] chars:[78, 84, "item 4"]
+      BulletList[90, 102] isTight
+        BulletListItem[90, 102] open:[90, 91, "-"] isTight
+          Paragraph[92, 102]
+            Text[92, 100] chars:[92, 100, "item 4.1"]
 ````````````````````````````````
+
 
 
 ```````````````````````````````` example Loose Item Handling: 6
@@ -230,7 +359,38 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 25] open:[0, 1, "-"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[14, 25] isTight
+        BulletListItem[14, 25] open:[14, 15, "-"] isTight
+          Paragraph[16, 25]
+            Text[16, 24] chars:[16, 24, "item 1.1"]
+    BulletListItem[25, 51] open:[25, 26, "-"] isTight
+      Paragraph[27, 35]
+        Text[27, 33] chars:[27, 33, "item 2"]
+      BulletList[39, 51] isTight
+        BulletListItem[39, 51] open:[39, 40, "-"] isTight
+          Paragraph[41, 51]
+            Text[41, 49] chars:[41, 49, "item 2.1"]
+    BulletListItem[51, 77] open:[51, 52, "-"] isTight
+      Paragraph[53, 61]
+        Text[53, 59] chars:[53, 59, "item 3"]
+      BulletList[65, 77] isTight
+        BulletListItem[65, 77] open:[65, 66, "-"] isTight
+          Paragraph[67, 77]
+            Text[67, 75] chars:[67, 75, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
+
 
 
 ```````````````````````````````` example Loose Item Handling: 7
@@ -267,6 +427,36 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight hadBlankLineAfter
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[25, 51] open:[25, 26, "-"] isTight
+      Paragraph[27, 35]
+        Text[27, 33] chars:[27, 33, "item 2"]
+      BulletList[39, 51] isTight
+        BulletListItem[39, 51] open:[39, 40, "-"] isTight
+          Paragraph[41, 51]
+            Text[41, 49] chars:[41, 49, "item 2.1"]
+    BulletListItem[51, 77] open:[51, 52, "-"] isTight
+      Paragraph[53, 61]
+        Text[53, 59] chars:[53, 59, "item 3"]
+      BulletList[65, 77] isTight
+        BulletListItem[65, 77] open:[65, 66, "-"] isTight
+          Paragraph[67, 77]
+            Text[67, 75] chars:[67, 75, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
@@ -306,6 +496,36 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 51] open:[24, 25, "-"] isLoose hadBlankLineAfter
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[39, 51] isTight
+        BulletListItem[39, 51] open:[39, 40, "-"] isTight
+          Paragraph[41, 51]
+            Text[41, 49] chars:[41, 49, "item 2.1"]
+    BulletListItem[51, 77] open:[51, 52, "-"] isTight
+      Paragraph[53, 61]
+        Text[53, 59] chars:[53, 59, "item 3"]
+      BulletList[65, 77] isTight
+        BulletListItem[65, 77] open:[65, 66, "-"] isTight
+          Paragraph[67, 77]
+            Text[67, 75] chars:[67, 75, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
@@ -344,10 +564,41 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 50] open:[24, 25, "-"] isTight
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[38, 50] isTight
+        BulletListItem[38, 50] open:[38, 39, "-"] isTight hadBlankLineAfter
+          Paragraph[40, 50]
+            Text[40, 48] chars:[40, 48, "item 2.1"]
+    BulletListItem[51, 77] open:[51, 52, "-"] isTight
+      Paragraph[53, 61]
+        Text[53, 59] chars:[53, 59, "item 3"]
+      BulletList[65, 77] isTight
+        BulletListItem[65, 77] open:[65, 66, "-"] isTight
+          Paragraph[67, 77]
+            Text[67, 75] chars:[67, 75, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 9
+
+```````````````````````````````` example Loose Item Handling: 10
 - item 1
     - item 1.1
 - item 2 
@@ -382,11 +633,41 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 50] open:[24, 25, "-"] isTight
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[38, 50] isTight
+        BulletListItem[38, 50] open:[38, 39, "-"] isTight
+          Paragraph[40, 50]
+            Text[40, 48] chars:[40, 48, "item 2.1"]
+    BulletListItem[50, 77] open:[50, 51, "-"] isLoose hadBlankLineAfter
+      Paragraph[52, 60]
+        Text[52, 58] chars:[52, 58, "item 3"]
+      BulletList[65, 77] isTight
+        BulletListItem[65, 77] open:[65, 66, "-"] isTight
+          Paragraph[67, 77]
+            Text[67, 75] chars:[67, 75, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
 
-```````````````````````````````` example Loose Item Handling: 10
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
 - item 2 
@@ -420,10 +701,41 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 50] open:[24, 25, "-"] isTight
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[38, 50] isTight
+        BulletListItem[38, 50] open:[38, 39, "-"] isTight
+          Paragraph[40, 50]
+            Text[40, 48] chars:[40, 48, "item 2.1"]
+    BulletListItem[50, 76] open:[50, 51, "-"] isTight
+      Paragraph[52, 60]
+        Text[52, 58] chars:[52, 58, "item 3"]
+      BulletList[64, 76] isTight
+        BulletListItem[64, 76] open:[64, 65, "-"] isTight hadBlankLineAfter
+          Paragraph[66, 76]
+            Text[66, 74] chars:[66, 74, "item 3.1"]
+    BulletListItem[77, 103] open:[77, 78, "-"] isTight
+      Paragraph[79, 87]
+        Text[79, 85] chars:[79, 85, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 10
+
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
     - item 1.1
 - item 2 
@@ -458,6 +770,36 @@ Test looseness with child items
     </li>
 </ul>
 .
+Document[0, 103]
+  BulletList[0, 103] isTight
+    BulletListItem[0, 24] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[13, 24] isTight
+        BulletListItem[13, 24] open:[13, 14, "-"] isTight
+          Paragraph[15, 24]
+            Text[15, 23] chars:[15, 23, "item 1.1"]
+    BulletListItem[24, 50] open:[24, 25, "-"] isTight
+      Paragraph[26, 34]
+        Text[26, 32] chars:[26, 32, "item 2"]
+      BulletList[38, 50] isTight
+        BulletListItem[38, 50] open:[38, 39, "-"] isTight
+          Paragraph[40, 50]
+            Text[40, 48] chars:[40, 48, "item 2.1"]
+    BulletListItem[50, 76] open:[50, 51, "-"] isTight
+      Paragraph[52, 60]
+        Text[52, 58] chars:[52, 58, "item 3"]
+      BulletList[64, 76] isTight
+        BulletListItem[64, 76] open:[64, 65, "-"] isTight
+          Paragraph[66, 76]
+            Text[66, 74] chars:[66, 74, "item 3.1"]
+    BulletListItem[76, 103] open:[76, 77, "-"] isLoose hadBlankLineAfter
+      Paragraph[78, 86]
+        Text[78, 84] chars:[78, 84, "item 4"]
+      BulletList[91, 103] isTight
+        BulletListItem[91, 103] open:[91, 92, "-"] isTight
+          Paragraph[93, 103]
+            Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
 
 
@@ -493,6 +835,31 @@ Empty Numbered non-one item can interrupt paragraph
 <p>Numbered non-one item can interrupt paragraph 2. non-one item</p>
 <p>Empty Numbered non-one item can interrupt paragraph 2.</p>
 .
+Document[0, 318]
+  Paragraph[0, 43]
+    Text[0, 35] chars:[0, 35, "Bulle … graph"]
+    SoftLineBreak[35, 36]
+    Text[36, 42] chars:[36, 42, "* item"]
+  Paragraph[44, 89]
+    Text[44, 85] chars:[44, 85, "Empty … graph"]
+    SoftLineBreak[85, 86]
+    Text[86, 87] chars:[86, 87, "*"]
+  Paragraph[90, 144]
+    Text[90, 131] chars:[90, 131, "Numbe … graph"]
+    SoftLineBreak[131, 132]
+    Text[132, 143] chars:[132, 143, "1. on …  item"]
+  Paragraph[145, 197]
+    Text[145, 192] chars:[145, 192, "Empty … graph"]
+    SoftLineBreak[192, 193]
+    Text[193, 195] chars:[193, 195, "1."]
+  Paragraph[198, 260]
+    Text[198, 243] chars:[198, 243, "Numbe … graph"]
+    SoftLineBreak[243, 244]
+    Text[244, 259] chars:[244, 259, "2. no …  item"]
+  Paragraph[261, 317]
+    Text[261, 312] chars:[261, 312, "Empty … graph"]
+    SoftLineBreak[312, 313]
+    Text[313, 315] chars:[313, 315, "2."]
 ````````````````````````````````
 
 
@@ -571,6 +938,52 @@ Test to see which list items can interrupt another bullet list item's paragraphs
     </li>
 </ul>
 .
+Document[0, 557]
+  BulletList[0, 67] isTight
+    BulletListItem[0, 60] open:[0, 1, "*"] isTight
+      Paragraph[2, 60]
+        Text[2, 59] chars:[2, 59, "Bulle …  item"]
+    BulletListItem[60, 67] open:[60, 61, "*"] isTight hadBlankLineAfter
+      Paragraph[62, 67]
+        Text[62, 66] chars:[62, 66, "item"]
+  HtmlCommentBlock[68, 86]
+  BulletList[87, 154] isTight
+    BulletListItem[87, 153] open:[87, 88, "*"] isTight
+      Paragraph[89, 153]
+        Text[89, 152] chars:[89, 152, "Empty …  item"]
+    BulletListItem[153, 154] open:[153, 154, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[157, 175]
+  BulletList[176, 254] isTight
+    BulletListItem[176, 254] open:[176, 177, "*"] isTight
+      Paragraph[178, 242]
+        Text[178, 241] chars:[178, 241, "Numbe …  item"]
+      OrderedList[242, 254] isTight delimiter:'.'
+        OrderedListItem[242, 254] open:[242, 244, "1."] isTight hadBlankLineAfter
+          Paragraph[245, 254]
+            Text[245, 253] chars:[245, 253, "one item"]
+  HtmlCommentBlock[255, 273]
+  BulletList[274, 348] isTight
+    BulletListItem[274, 348] open:[274, 275, "*"] isTight
+      Paragraph[276, 346]
+        Text[276, 345] chars:[276, 345, "Empty …  item"]
+      OrderedList[346, 348] isTight delimiter:'.'
+        OrderedListItem[346, 348] open:[346, 348, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[351, 369]
+  BulletList[370, 456] isTight
+    BulletListItem[370, 456] open:[370, 371, "*"] isTight
+      Paragraph[372, 440]
+        Text[372, 439] chars:[372, 439, "Numbe …  item"]
+      OrderedList[440, 456] isTight start:2 delimiter:'.'
+        OrderedListItem[440, 456] open:[440, 442, "2."] isTight hadBlankLineAfter
+          Paragraph[443, 456]
+            Text[443, 455] chars:[443, 455, "non-o …  item"]
+  HtmlCommentBlock[457, 475]
+  BulletList[476, 554] isTight
+    BulletListItem[476, 554] open:[476, 477, "*"] isTight
+      Paragraph[478, 552]
+        Text[478, 551] chars:[478, 551, "Empty …  item"]
+      OrderedList[552, 554] isTight start:2 delimiter:'.'
+        OrderedListItem[552, 554] open:[552, 554, "2."] isTight hadBlankLineAfter
 ````````````````````````````````
 
 
@@ -594,7 +1007,7 @@ Test to see which list items can interrupt another numbered list item's paragrap
 <!--List Break-->
 
 1. Empty Numbered one item can interrupt paragraph of a numbered list item 
-1.
+1. 
 
 <!--List Break-->
 
@@ -604,7 +1017,7 @@ Test to see which list items can interrupt another numbered list item's paragrap
 <!--List Break-->
 
 1. Empty Numbered non-one item can interrupt paragraph of a numbered list item
-2. 
+2.  
 
 .
 <ol>
@@ -629,8 +1042,8 @@ Test to see which list items can interrupt another numbered list item's paragrap
 </ol>
 <!--List Break-->
 <ol>
-    <li>Empty Numbered one item can interrupt paragraph of a numbered list item
-        1.</li>
+    <li>Empty Numbered one item can interrupt paragraph of a numbered list item</li>
+    <li></li>
 </ol>
 <!--List Break-->
 <ol>
@@ -639,11 +1052,54 @@ Test to see which list items can interrupt another numbered list item's paragrap
 </ol>
 <!--List Break-->
 <ol>
-    <li>Empty Numbered non-one item can interrupt paragraph of a numbered list
-        item</li>
+    <li>Empty Numbered non-one item can interrupt paragraph of a numbered list item</li>
     <li></li>
 </ol>
 .
+Document[0, 577]
+  OrderedList[0, 70] isTight delimiter:'.'
+    OrderedListItem[0, 70] open:[0, 2, "1."] isTight
+      Paragraph[3, 63]
+        Text[3, 62] chars:[3, 62, "Bulle …  item"]
+      BulletList[63, 70] isTight
+        BulletListItem[63, 70] open:[63, 64, "*"] isTight hadBlankLineAfter
+          Paragraph[65, 70]
+            Text[65, 69] chars:[65, 69, "item"]
+  HtmlCommentBlock[71, 89]
+  OrderedList[90, 160] isTight delimiter:'.'
+    OrderedListItem[90, 160] open:[90, 92, "1."] isTight
+      Paragraph[93, 159]
+        Text[93, 158] chars:[93, 158, "Empty …  item"]
+      BulletList[159, 160] isTight
+        BulletListItem[159, 160] open:[159, 160, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[163, 181]
+  OrderedList[182, 263] isTight delimiter:'.'
+    OrderedListItem[182, 251] open:[182, 184, "1."] isTight
+      Paragraph[185, 251]
+        Text[185, 250] chars:[185, 250, "Numbe …  item"]
+    OrderedListItem[251, 263] open:[251, 253, "1."] isTight hadBlankLineAfter
+      Paragraph[254, 263]
+        Text[254, 262] chars:[254, 262, "one item"]
+  HtmlCommentBlock[264, 282]
+  OrderedList[283, 361] isTight delimiter:'.'
+    OrderedListItem[283, 359] open:[283, 285, "1."] isTight
+      Paragraph[286, 359]
+        Text[286, 357] chars:[286, 357, "Empty …  item"]
+    OrderedListItem[359, 361] open:[359, 361, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[364, 382]
+  OrderedList[383, 472] isTight delimiter:'.'
+    OrderedListItem[383, 456] open:[383, 385, "1."] isTight
+      Paragraph[386, 456]
+        Text[386, 455] chars:[386, 455, "Numbe …  item"]
+    OrderedListItem[456, 472] open:[456, 458, "2."] isTight hadBlankLineAfter
+      Paragraph[459, 472]
+        Text[459, 471] chars:[459, 471, "non-o …  item"]
+  HtmlCommentBlock[473, 491]
+  OrderedList[492, 573] isTight delimiter:'.'
+    OrderedListItem[492, 571] open:[492, 494, "1."] isTight
+      Paragraph[495, 571]
+        Text[495, 570] chars:[495, 570, "Empty …  item"]
+    OrderedListItem[571, 573] open:[571, 573, "2."] isTight hadBlankLineAfter
 ````````````````````````````````
 
 
@@ -688,24 +1144,24 @@ Document[0, 117]
     BulletListItem[21, 30] open:[21, 22, "*"] isTight
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 3"]
-    BulletListItem[33, 42] open:[33, 34, "*"] isTight
-      Paragraph[35, 42]
+    BulletListItem[33, 117] open:[33, 34, "*"] isTight
+      Paragraph[35, 55]
         Text[35, 41] chars:[35, 41, "item 4"]
-    BulletListItem[46, 55] open:[46, 47, "*"] isTight
-      Paragraph[48, 55]
-        Text[48, 54] chars:[48, 54, "item 5"]
-    BulletListItem[60, 69] open:[60, 61, "*"] isTight
-      Paragraph[62, 69]
-        Text[62, 68] chars:[62, 68, "item 6"]
-    BulletListItem[75, 84] open:[75, 76, "*"] isTight
-      Paragraph[77, 84]
-        Text[77, 83] chars:[77, 83, "item 7"]
-    BulletListItem[91, 100] open:[91, 92, "*"] isTight
-      Paragraph[93, 100]
-        Text[93, 99] chars:[93, 99, "item 8"]
-    BulletListItem[108, 117] open:[108, 109, "*"] isTight
-      Paragraph[110, 117]
-        Text[110, 116] chars:[110, 116, "item 9"]
+        SoftLineBreak[41, 42]
+        Text[46, 54] chars:[46, 54, "* item 5"]
+      BulletList[60, 117] isTight
+        BulletListItem[60, 69] open:[60, 61, "*"] isTight
+          Paragraph[62, 69]
+            Text[62, 68] chars:[62, 68, "item 6"]
+        BulletListItem[75, 84] open:[75, 76, "*"] isTight
+          Paragraph[77, 84]
+            Text[77, 83] chars:[77, 83, "item 7"]
+        BulletListItem[91, 100] open:[91, 92, "*"] isTight
+          Paragraph[93, 100]
+            Text[93, 99] chars:[93, 99, "item 8"]
+        BulletListItem[108, 117] open:[108, 109, "*"] isTight
+          Paragraph[110, 117]
+            Text[110, 116] chars:[110, 116, "item 9"]
 ````````````````````````````````
 
 
@@ -754,35 +1210,21 @@ Document[0, 117]
     * item 9
 </code></pre>
 .
-Document[0, 117]
-  BulletList[0, 117] isTight
-    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+Document[0, 153]
+  BulletList[0, 48] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isLoose hadBlankLineAfter
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 19] open:[10, 11, "*"] isTight
-      Paragraph[12, 19]
-        Text[12, 18] chars:[12, 18, "item 2"]
-    BulletListItem[21, 30] open:[21, 22, "*"] isTight
-      Paragraph[23, 30]
-        Text[23, 29] chars:[23, 29, "item 3"]
-    BulletListItem[33, 42] open:[33, 34, "*"] isTight
-      Paragraph[35, 42]
-        Text[35, 41] chars:[35, 41, "item 4"]
-    BulletListItem[46, 55] open:[46, 47, "*"] isTight
-      Paragraph[48, 55]
-        Text[48, 54] chars:[48, 54, "item 5"]
-    BulletListItem[60, 69] open:[60, 61, "*"] isTight
-      Paragraph[62, 69]
-        Text[62, 68] chars:[62, 68, "item 6"]
-    BulletListItem[75, 84] open:[75, 76, "*"] isTight
-      Paragraph[77, 84]
-        Text[77, 83] chars:[77, 83, "item 7"]
-    BulletListItem[91, 100] open:[91, 92, "*"] isTight
-      Paragraph[93, 100]
-        Text[93, 99] chars:[93, 99, "item 8"]
-    BulletListItem[108, 117] open:[108, 109, "*"] isTight
-      Paragraph[110, 117]
-        Text[110, 116] chars:[110, 116, "item 9"]
+    BulletListItem[11, 20] open:[11, 12, "*"] isLoose hadBlankLineAfter
+      Paragraph[13, 20]
+        Text[13, 19] chars:[13, 19, "item 2"]
+    BulletListItem[24, 33] open:[24, 25, "*"] isLoose hadBlankLineAfter
+      Paragraph[26, 33]
+        Text[26, 32] chars:[26, 32, "item 3"]
+    BulletListItem[39, 48] open:[39, 40, "*"] isLoose hadBlankLineAfter
+      Paragraph[41, 48]
+        Text[41, 47] chars:[41, 47, "item 4"]
+  IndentedCodeBlock[56, 153]
 ````````````````````````````````
 
 
@@ -854,6 +1296,7 @@ paragraph, the second is indented code
          sub item child para
 
           indented code
+
 ---
 
 1.  test
@@ -869,50 +1312,51 @@ paragraph, the second is indented code
         <ul>
             <li>
                 <p>sub item</p>
-                <p>sub item child para</p> <pre><code>indented code ---
+                <p>sub item child para</p>
+                <pre><code>indented code
 </code></pre>
-
             </li>
         </ul>
     </li>
 </ul>
+<hr />
 <ol>
     <li>test
         <ol>
             <li>
                 <p>sub item</p>
-                <p>sub item child para</p> <pre><code>indented code
+                <p>sub item child para</p>
+                <pre><code>indented code
 </code></pre>
-
             </li>
         </ol>
     </li>
 </ol>
 .
-Document[0, 167]
+Document[0, 168]
   BulletList[0, 79] isTight
     BulletListItem[0, 79] open:[0, 1, "-"] isTight
       Paragraph[4, 9]
         Text[4, 8] chars:[4, 8, "test"]
-      BulletList[13, 79] isLoose
-        BulletListItem[13, 79] open:[13, 14, "-"] isLoose
+      BulletList[13, 79] isTight
+        BulletListItem[13, 79] open:[13, 14, "-"] isLoose hadBlankLineAfter
           Paragraph[15, 24]
             Text[15, 23] chars:[15, 23, "sub item"]
           Paragraph[34, 54]
             Text[34, 53] chars:[34, 53, "sub i …  para"]
           IndentedCodeBlock[65, 79]
-  ThematicBreak[79, 82]
-  OrderedList[84, 166] isTight delimiter:'.'
-    OrderedListItem[84, 166] open:[84, 86, "1."] isTight
-      Paragraph[88, 93]
-        Text[88, 92] chars:[88, 92, "test"]
-      OrderedList[97, 166] isLoose delimiter:'.'
-        OrderedListItem[97, 166] open:[97, 99, "1."] isLoose
-          Paragraph[100, 109]
-            Text[100, 108] chars:[100, 108, "sub item"]
-          Paragraph[120, 140]
-            Text[120, 139] chars:[120, 139, "sub i …  para"]
-          IndentedCodeBlock[152, 166]
+  ThematicBreak[80, 83]
+  OrderedList[85, 167] isTight delimiter:'.'
+    OrderedListItem[85, 167] open:[85, 87, "1."] isTight
+      Paragraph[89, 94]
+        Text[89, 93] chars:[89, 93, "test"]
+      OrderedList[98, 167] isTight delimiter:'.'
+        OrderedListItem[98, 167] open:[98, 100, "1."] isLoose hadBlankLineAfter
+          Paragraph[101, 110]
+            Text[101, 109] chars:[101, 109, "sub item"]
+          Paragraph[121, 141]
+            Text[121, 140] chars:[121, 140, "sub i …  para"]
+          IndentedCodeBlock[153, 167]
 ````````````````````````````````
 
 
@@ -1007,60 +1451,60 @@ paragraph is a paragraph, the second is indented code
         <p>item para 1</p>
         <p>item para 2</p>
         <p>item para 3</p>
-        <p>item para 4</p> <pre><code>item para 5
-  
+        <p>item para 4</p>
+        <pre><code>item para 5
+
  item para 6
-   
+
   item para 7
 </code></pre>
-
     </li>
     <li>
         <p>item 2</p>
         <p>item para 1</p>
         <p>item para 2</p>
         <p>item para 3</p>
-        <p>item para 4</p> <pre><code>item para 5
-   
+        <p>item para 4</p>
+        <pre><code>item para 5
+
  item para 6
-    
+
   item para 7
 </code></pre>
-
     </li>
     <li>
         <p>item 3</p>
         <p>item para 1</p>
         <p>item para 2</p>
         <p>item para 3</p>
-        <p>item para 4</p> <pre><code>item para 5
-    
+        <p>item para 4</p>
+        <pre><code>item para 5
+
  item para 6
-     
+
   item para 7
 </code></pre>
-
     </li>
     <li>
         <p>item 4</p>
         <p>item para 1</p>
         <p>item para 2</p>
         <p>item para 3</p>
-        <p>item para 4</p> <pre><code>item para 5
-     
+        <p>item para 4</p>
+        <pre><code>item para 5
+
  item para 6
-      
+
   item para 7
 </code></pre>
-
     </li>
 </ul>
 <pre><code>* item 5
 
   item para 1
-  
+
    item para 2
-   
+
     item para 3
 
      item para 4
@@ -1073,8 +1517,8 @@ paragraph is a paragraph, the second is indented code
 </code></pre>
 .
 Document[0, 982]
-  BulletList[0, 982] isLoose
-    BulletListItem[0, 166] open:[0, 1, "*"] isLoose
+  BulletList[0, 775] isTight
+    BulletListItem[0, 166] open:[0, 1, "*"] isLoose hadBlankLineAfter
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       Paragraph[16, 28]
@@ -1086,7 +1530,7 @@ Document[0, 982]
       Paragraph[76, 88]
         Text[76, 87] chars:[76, 87, "item  … ara 4"]
       IndentedCodeBlock[100, 166]
-    BulletListItem[176, 355] open:[176, 177, "*"] isLoose
+    BulletListItem[176, 355] open:[176, 177, "*"] isLoose hadBlankLineAfter
       Paragraph[178, 185]
         Text[178, 184] chars:[178, 184, "item 2"]
       Paragraph[193, 205]
@@ -1098,7 +1542,7 @@ Document[0, 982]
       Paragraph[259, 271]
         Text[259, 270] chars:[259, 270, "item  … ara 4"]
       IndentedCodeBlock[285, 355]
-    BulletListItem[366, 558] open:[366, 367, "*"] isLoose
+    BulletListItem[366, 558] open:[366, 367, "*"] isLoose hadBlankLineAfter
       Paragraph[368, 375]
         Text[368, 374] chars:[368, 374, "item 3"]
       Paragraph[384, 396]
@@ -1110,7 +1554,7 @@ Document[0, 982]
       Paragraph[456, 468]
         Text[456, 467] chars:[456, 467, "item  … ara 4"]
       IndentedCodeBlock[484, 558]
-    BulletListItem[570, 775] open:[570, 571, "*"] isLoose
+    BulletListItem[570, 775] open:[570, 571, "*"] isLoose hadBlankLineAfter
       Paragraph[572, 579]
         Text[572, 578] chars:[572, 578, "item 4"]
       Paragraph[589, 601]
@@ -1122,18 +1566,7 @@ Document[0, 982]
       Paragraph[667, 679]
         Text[667, 678] chars:[667, 678, "item  … ara 4"]
       IndentedCodeBlock[697, 775]
-    BulletListItem[788, 982] open:[788, 789, "*"] isLoose
-      Paragraph[790, 797]
-        Text[790, 796] chars:[790, 796, "item 5"]
-      Paragraph[808, 820]
-        Text[808, 819] chars:[808, 819, "item  … ara 1"]
-      Paragraph[830, 842]
-        Text[830, 841] chars:[830, 841, "item  … ara 2"]
-      Paragraph[854, 866]
-        Text[854, 865] chars:[854, 865, "item  … ara 3"]
-      Paragraph[880, 892]
-        Text[880, 891] chars:[880, 891, "item  … ara 4"]
-      IndentedCodeBlock[908, 982]
+  IndentedCodeBlock[788, 982]
 ````````````````````````````````
 
 
@@ -1209,58 +1642,56 @@ Test how headings in list items are handled, leading space allowed or not
 <ul>
     <li>
         <p>item 1</p>
-         <h1 id="heading-1">Heading 1</h1>
-
+        <h1 id="heading-1">Heading 1</h1>
         <p>## Heading 2</p>
         <p>### Heading 3</p>
-        <p>#### Heading 4</p> <pre><code>##### Heading 5
+        <p>#### Heading 4</p>
+        <pre><code>##### Heading 5
 
  ###### Heading 6
 </code></pre>
-
         <ul>
             <li>
                 <p>item 2</p>
-                 <h1 id="heading-1-1">Heading 1</h1>
-
+                <h1 id="heading-1-1">Heading 1</h1>
                 <p>## Heading 2</p>
                 <p>### Heading 3</p>
-                <p>#### Heading 3</p> <pre><code>##### Heading 5
-  
+                <p>#### Heading 3</p>
+                <pre><code>##### Heading 5
+
  ###### Heading 6
 </code></pre>
-
             </li>
         </ul>
     </li>
 </ul>
 .
 Document[0, 296]
-  BulletList[0, 295] isLoose
-    BulletListItem[0, 295] open:[0, 1, "*"] isLoose
+  BulletList[0, 295] isTight
+    BulletListItem[0, 295] open:[0, 1, "*"] isLoose hadBlankLineAfter
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
         Text[14, 23] chars:[14, 23, "Heading 1"]
-      Heading[28, 40] textOpen:[28, 30, "##"] text:[31, 40, "Heading 2"]
-        Text[31, 40] chars:[31, 40, "Heading 2"]
-      Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
-        Text[50, 59] chars:[50, 59, "Heading 3"]
-      Heading[66, 80] textOpen:[66, 70, "####"] text:[71, 80, "Heading 4"]
-        Text[71, 80] chars:[71, 80, "Heading 4"]
+      Paragraph[28, 41]
+        Text[28, 40] chars:[28, 40, "## He … ing 2"]
+      Paragraph[46, 60]
+        Text[46, 59] chars:[46, 59, "### H … ing 3"]
+      Paragraph[66, 81]
+        Text[66, 80] chars:[66, 80, "####  … ing 4"]
       IndentedCodeBlock[88, 129]
-      BulletList[132, 295] isLoose
-        BulletListItem[132, 295] open:[132, 133, "*"] isLoose
+      BulletList[132, 295] isTight
+        BulletListItem[132, 295] open:[132, 133, "*"] isLoose hadBlankLineAfter
           Paragraph[134, 141]
             Text[134, 140] chars:[134, 140, "item 2"]
           Heading[146, 157] textOpen:[146, 147, "#"] text:[148, 157, "Heading 1"]
             Text[148, 157] chars:[148, 157, "Heading 1"]
-          Heading[168, 180] textOpen:[168, 170, "##"] text:[171, 180, "Heading 2"]
-            Text[171, 180] chars:[171, 180, "Heading 2"]
-          Heading[192, 205] textOpen:[192, 195, "###"] text:[196, 205, "Heading 3"]
-            Text[196, 205] chars:[196, 205, "Heading 3"]
-          Heading[218, 232] textOpen:[218, 222, "####"] text:[223, 232, "Heading 3"]
-            Text[223, 232] chars:[223, 232, "Heading 3"]
+          Paragraph[168, 181]
+            Text[168, 180] chars:[168, 180, "## He … ing 2"]
+          Paragraph[192, 206]
+            Text[192, 205] chars:[192, 205, "### H … ing 3"]
+          Paragraph[218, 233]
+            Text[218, 232] chars:[218, 232, "####  … ing 3"]
           IndentedCodeBlock[246, 295]
 ````````````````````````````````
 
