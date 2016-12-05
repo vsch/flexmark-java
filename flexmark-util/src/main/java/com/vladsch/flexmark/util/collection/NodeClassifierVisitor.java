@@ -8,16 +8,16 @@ import com.vladsch.flexmark.util.NodeTracker;
 import java.util.*;
 
 public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracker {
-    final private OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
-    final private OrderedSet<Class<?>> myExclusionSet;
-    final private HashMap<Integer, BitSet> myNodeAncestryMap;
-    final private Stack<BitSet> myNodeAncestryBitSetStack = new Stack<>();
-    final private CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
+    private final OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
+    private final OrderedSet<Class<?>> myExclusionSet;
+    private final HashMap<Integer, BitSet> myNodeAncestryMap;
+    private final Stack<BitSet> myNodeAncestryBitSetStack = new Stack<>();
+    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), value -> value != null ? (BitSet) value.clone() : new BitSet());
 
-    final private static BitSet EMPTY_SET = new BitSet();
+    private static final BitSet EMPTY_SET = new BitSet();
     private boolean myClassificationDone = false;
 
-    final private ClassifyingNodeTracker myClassifyingNodeTracker;
+    private final ClassifyingNodeTracker myClassifyingNodeTracker;
 
     public NodeClassifierVisitor(Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         myClassifyingNodeTracker = new ClassifyingNodeTracker(this, exclusionMap);
@@ -40,8 +40,8 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     }
 
     // @formatter:off
-    @Override public void nodeRemoved(Node node) { } 
-    @Override public void nodeRemovedWithChildren(Node node) { } 
+    @Override public void nodeRemoved(Node node) { }
+    @Override public void nodeRemovedWithChildren(Node node) { }
     @Override public void nodeRemovedWithDescendants(Node node) { }
     @Override public void nodeAddedWithChildren(Node node) { nodeAdded(node); }
     @Override public void nodeAddedWithDescendants(Node node) { nodeAdded(node); }
@@ -108,7 +108,7 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
             }
 
             if (myClassificationDone && myNodeAncestryBitSetStack.size() > 1) {
-                // see if we can stop 
+                // see if we can stop
                 // now store the stuff for the node index
                 BitSet oldBitSet = myNodeAncestryMap.get(index);
                 if (oldBitSet != null && oldBitSet.equals(bitSet)) {

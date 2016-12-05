@@ -94,7 +94,7 @@ public enum SimTocOptionTypes implements OptionParser<TocOptions> {
     }),
     ;
 
-    final public OptionParser<TocOptions> parser;
+    public final OptionParser<TocOptions> parser;
 
     @Override
     public String getOptionName() {return parser.getOptionName();}
@@ -109,7 +109,7 @@ public enum SimTocOptionTypes implements OptionParser<TocOptions> {
         this.parser = parser;
     }
 
-    final public static OptionParser<TocOptions>[] OPTIONS = SimTocOptionTypes.values();
+    public static final OptionParser<TocOptions>[] OPTIONS = SimTocOptionTypes.values();
 
     private static class Constants {
         public static final String OPTION_BULLET = "bullet";

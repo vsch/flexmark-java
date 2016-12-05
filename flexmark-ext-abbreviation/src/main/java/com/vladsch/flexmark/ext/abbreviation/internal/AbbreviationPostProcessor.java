@@ -21,13 +21,13 @@ import java.util.regex.Pattern;
 public class AbbreviationPostProcessor extends DocumentPostProcessor {
     private Pattern abbreviations = null;
     private HashMap<String, String> abbreviationMap = null;
-    final private NodeVisitor myVisitor;
+    private final NodeVisitor myVisitor;
 
     AbbreviationPostProcessor(Document document) {
         myVisitor = new NodeVisitor(
                 new VisitHandler<>(Text.class, AbbreviationPostProcessor.this::visit)
         );
-        
+
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
 
         if (!abbrRepository.isEmpty()) {

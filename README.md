@@ -1,7 +1,7 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
-flexmark-java is a fork of [commonmark-java] project, modified to generate an AST which reflects
+**flexmark-java** is a fork of [commonmark-java] project, modified to generate an AST which reflects
 all the elements in the original source, full source position tracking for all elements in the
 AST and easier JetBrains Open API PsiTree generation.
 
@@ -48,7 +48,36 @@ earlier versions of this project.
 - Android compatibility neglected for now
 - No attempt is made to keep API backward compatibility to the original project.
 
-#### This is a work in progress with many API changes.
+#### Markdown Parser
+
+Latest addition was a rewrite of the list parser to better control emulation of other markdown
+parsers as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md) and the addition of
+processor presets to emulate specific markdown processing behaviour of these parsers. 
+
+Some presets do a better better job of emulating their target than others. Most of the effort
+was directed at emulating how these processors parse standard Markdown. For processors that
+extend original Markdown, you will need to add those extensions that are already implemented in
+flexmark-java to the Parser/Renderer builder options.
+
+Extensions will be modified to include their own presets for specific processor emulation, if
+that processor has an equivalent extension implemented.
+
+If you find a discrepancy please open an issue so it can be addressed.
+
+Major processor families with presets for their variants: 
+
+- [x] CommonMark (spec 0.27)
+    - [ ] GitHub Comments
+    - [ ] League/CommonMark
+- [ ] MultiMarkdown
+    - [ ] Pegdown
+    - [ ] Pandoc
+- [ ] Kramdown
+    - [ ] GitHub Docs
+    - [ ] Jekyll  
+- [ ] Markdown
+    - [ ] Php Markdown Extra
+
 
 ### Feature Comparison
 
@@ -324,6 +353,7 @@ Copyright (c) 2015-2016 Atlassian and others.
 Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see LICENSE.txt file.
+
 
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15

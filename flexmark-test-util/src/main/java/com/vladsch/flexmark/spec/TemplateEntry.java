@@ -11,7 +11,7 @@ public class TemplateEntry {
     private final String source;
     private final HashSet<String> params = new HashSet<>();
 
-    private final static Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
+    private static final Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
 
     public TemplateEntry(int entryNumber, String source) {
         this.entryNumber = entryNumber;
@@ -45,13 +45,13 @@ public class TemplateEntry {
                 sb.append(source.substring(pos, m.start()));
                 pos = m.end();
             }
-            
+
             // append parameter if exists
             if (params.containsKey(param)) {
                 sb.append(params.get(param));
             }
         }
-        
+
         if (pos < source.length()) {
             sb.append(source.substring(pos));
         }

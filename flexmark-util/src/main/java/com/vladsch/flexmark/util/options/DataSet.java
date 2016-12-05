@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DataSet implements DataHolder {
-    final protected HashMap<DataKey, Object> dataSet;
+    protected final HashMap<DataKey, Object> dataSet;
 
     public DataSet() {
         dataSet = new HashMap<>();

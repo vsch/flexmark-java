@@ -8,8 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
-    final protected HashMap<ComputableFactory<I, P>, I> itemMap;
-    final protected P param;
+    protected final HashMap<ComputableFactory<I, P>, I> itemMap;
+    protected final P param;
 
     public ItemFactoryMap(P param) {
         this(param, 0);

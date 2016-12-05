@@ -4,10 +4,10 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 public class WikiLinkOptions {
-    final public boolean linkFirstSyntax;
-    final public boolean disableRendering;
-    final public String linkPrefix;
-    final public String linkFileExtension;
+    public final boolean linkFirstSyntax;
+    public final boolean disableRendering;
+    public final String linkPrefix;
+    public final String linkFileExtension;
 
     public WikiLinkOptions(DataHolder options) {
         this.linkFirstSyntax = options.get(WikiLinkExtension.LINK_FIRST_SYNTAX);

@@ -17,11 +17,11 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class JiraParserExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<JiraParserRepository> JIRA_PARSERS = new DataKey<>("JIRA_PARSERS", JiraParserRepository::new); 
-    // final public static DataKey<KeepType> JIRA_PARSERS_KEEP = new DataKey<>("JIRA_PARSERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    //final public static DataKey<Boolean> JIRA_PARSER_OPTION1 = new DataKey<>("JIRA_PARSER_OPTION1", false); 
-    //final public static DataKey<String> JIRA_PARSER_OPTION2 = new DataKey<>("JIRA_PARSER_OPTION2", "default"); 
-    //final public static DataKey<Integer> JIRA_PARSER_OPTION3 = new DataKey<>("JIRA_PARSER_OPTION3", Integer.MAX_VALUE); 
+    // public static final DataKey<JiraParserRepository> JIRA_PARSERS = new DataKey<>("JIRA_PARSERS", JiraParserRepository::new);
+    // public static final DataKey<KeepType> JIRA_PARSERS_KEEP = new DataKey<>("JIRA_PARSERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    //public static final DataKey<Boolean> JIRA_PARSER_OPTION1 = new DataKey<>("JIRA_PARSER_OPTION1", false);
+    //public static final DataKey<String> JIRA_PARSER_OPTION2 = new DataKey<>("JIRA_PARSER_OPTION2", "default");
+    //public static final DataKey<Integer> JIRA_PARSER_OPTION3 = new DataKey<>("JIRA_PARSER_OPTION3", Integer.MAX_VALUE);
     // final static public DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
     // final static public DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
     final static public LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");

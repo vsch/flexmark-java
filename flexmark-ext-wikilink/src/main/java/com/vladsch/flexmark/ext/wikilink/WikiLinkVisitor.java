@@ -24,5 +24,5 @@ public interface WikiLinkVisitor {
         };
     }
 
-    void visit(WikiLink node);
+    void visit(final WikiLink node);
 }

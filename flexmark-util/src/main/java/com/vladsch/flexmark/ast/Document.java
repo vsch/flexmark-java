@@ -1,17 +1,14 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Collection;
 import java.util.Map;
 
 public class Document extends Block implements MutableDataHolder {
-    final private MutableDataSet dataSet;
+    private final MutableDataSet dataSet;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -42,6 +39,9 @@ public class Document extends Block implements MutableDataHolder {
 
     @Override
     public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
+
+    @Override
+    public MutableDataHolder setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
 
     @Override
     public void setAll(DataHolder other) { dataSet.setAll(other); }

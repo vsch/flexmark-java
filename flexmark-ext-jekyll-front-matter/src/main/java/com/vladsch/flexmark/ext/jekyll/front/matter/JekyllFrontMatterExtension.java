@@ -19,12 +19,12 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<JekyllFrontMatterRepository> JEKYLL_FRONT_MATTERS = new DataKey<>("JEKYLL_FRONT_MATTERS", JekyllFrontMatterRepository::new); 
-    // final public static DataKey<KeepType> JEKYLL_FRONT_MATTERS_KEEP = new DataKey<>("JEKYLL_FRONT_MATTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    //final public static DataKey<Boolean> ENABLE_JEKYLL_FRONT_MATTER = new DataKey<>("ENABLE_JEKYLL_FRONT_MATTER", true); 
-    //final public static DataKey<Boolean> ENABLE_FLEXMARK_FRONT_MATTER = new DataKey<>("ENABLE_FLEXMARK_FRONT_MATTER", true); 
-    //final public static DataKey<String> JEKYLL_FRONT_MATTER_OPTION2 = new DataKey<>("JEKYLL_FRONT_MATTER_OPTION2", "default"); 
-    //final public static DataKey<Integer> JEKYLL_FRONT_MATTER_OPTION3 = new DataKey<>("JEKYLL_FRONT_MATTER_OPTION3", Integer.MAX_VALUE); 
+    // public static final DataKey<JekyllFrontMatterRepository> JEKYLL_FRONT_MATTERS = new DataKey<>("JEKYLL_FRONT_MATTERS", JekyllFrontMatterRepository::new);
+    // public static final DataKey<KeepType> JEKYLL_FRONT_MATTERS_KEEP = new DataKey<>("JEKYLL_FRONT_MATTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    //public static final DataKey<Boolean> ENABLE_JEKYLL_FRONT_MATTER = new DataKey<>("ENABLE_JEKYLL_FRONT_MATTER", true);
+    //public static final DataKey<Boolean> ENABLE_FLEXMARK_FRONT_MATTER = new DataKey<>("ENABLE_FLEXMARK_FRONT_MATTER", true);
+    //public static final DataKey<String> JEKYLL_FRONT_MATTER_OPTION2 = new DataKey<>("JEKYLL_FRONT_MATTER_OPTION2", "default");
+    //public static final DataKey<Integer> JEKYLL_FRONT_MATTER_OPTION3 = new DataKey<>("JEKYLL_FRONT_MATTER_OPTION3", Integer.MAX_VALUE);
 
     private JekyllFrontMatterExtension() {
     }

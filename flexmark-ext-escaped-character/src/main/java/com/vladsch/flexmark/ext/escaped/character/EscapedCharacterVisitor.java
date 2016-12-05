@@ -24,5 +24,5 @@ public interface EscapedCharacterVisitor {
         };
     }
 
-    void visit(EscapedCharacter node);
+    void visit(final EscapedCharacter node);
 }

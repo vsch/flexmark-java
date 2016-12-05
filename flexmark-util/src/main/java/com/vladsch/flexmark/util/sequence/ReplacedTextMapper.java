@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.sequence;
 import java.util.ArrayList;
 
 public class ReplacedTextMapper {
-    final private BasedSequence original;
+    private final BasedSequence original;
     private ArrayList<ReplacedTextRegion> regions = new ArrayList<>();
     private ArrayList<BasedSequence> replacedSegments = new ArrayList<>();
     private int replacedLength = 0;
@@ -43,9 +43,9 @@ public class ReplacedTextMapper {
     }
 
     public int originalOffset(int replacedIndex) {
-        if (regions.isEmpty()) return replacedIndex; 
-        if (replacedIndex == replacedLength) return original.length(); 
-        
+        if (regions.isEmpty()) return replacedIndex;
+        if (replacedIndex == replacedLength) return original.length();
+
         int originalIndex = replacedIndex;
 
         for (ReplacedTextRegion region : regions) {

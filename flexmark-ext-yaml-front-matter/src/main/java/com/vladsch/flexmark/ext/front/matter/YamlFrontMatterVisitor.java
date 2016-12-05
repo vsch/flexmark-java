@@ -25,6 +25,6 @@ public interface YamlFrontMatterVisitor {
         };
     }
 
-    void visit(YamlFrontMatterNode node);
-    void visit(YamlFrontMatterBlock node);
+    void visit(final YamlFrontMatterNode node);
+    void visit(final YamlFrontMatterBlock node);
 }

@@ -6,8 +6,8 @@ import com.vladsch.flexmark.spec.TemplateReader;
 import java.io.InputStream;
 
 class DumpTemplateReader extends TemplateReader {
-    final private StringBuilder sb = new StringBuilder();
-    final private TemplateTestCase testCase;
+    private final StringBuilder sb = new StringBuilder();
+    private final TemplateTestCase testCase;
 
     DumpTemplateReader(InputStream stream, TemplateTestCase testCase) {
         super(stream);

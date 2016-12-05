@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Set;
 
 public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
-    final private ZzzzzzOptions options;
+    private final ZzzzzzOptions options;
 
     public ZzzzzzBlockPreProcessor(DataHolder options) {
         this.options = new ZzzzzzOptions(options);

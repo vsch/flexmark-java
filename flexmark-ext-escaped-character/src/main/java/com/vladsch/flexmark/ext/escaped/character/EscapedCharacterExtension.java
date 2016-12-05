@@ -33,11 +33,11 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<EscapedCharacterRepository> ESCAPED_CHARACTERS = new DataKey<>("ESCAPED_CHARACTERS", EscapedCharacterRepository::new); 
-    // final public static DataKey<KeepType> ESCAPED_CHARACTERS_KEEP = new DataKey<>("ESCAPED_CHARACTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    //final public static DataKey<Boolean> ESCAPED_CHARACTER_OPTION1 = new DataKey<>("ESCAPED_CHARACTER_OPTION1", false); 
-    //final public static DataKey<String> ESCAPED_CHARACTER_OPTION2 = new DataKey<>("ESCAPED_CHARACTER_OPTION2", "default"); 
-    //final public static DataKey<Integer> ESCAPED_CHARACTER_OPTION3 = new DataKey<>("ESCAPED_CHARACTER_OPTION3", Integer.MAX_VALUE); 
+    // public static final DataKey<EscapedCharacterRepository> ESCAPED_CHARACTERS = new DataKey<>("ESCAPED_CHARACTERS", EscapedCharacterRepository::new);
+    // public static final DataKey<KeepType> ESCAPED_CHARACTERS_KEEP = new DataKey<>("ESCAPED_CHARACTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    //public static final DataKey<Boolean> ESCAPED_CHARACTER_OPTION1 = new DataKey<>("ESCAPED_CHARACTER_OPTION1", false);
+    //public static final DataKey<String> ESCAPED_CHARACTER_OPTION2 = new DataKey<>("ESCAPED_CHARACTER_OPTION2", "default");
+    //public static final DataKey<Integer> ESCAPED_CHARACTER_OPTION3 = new DataKey<>("ESCAPED_CHARACTER_OPTION3", Integer.MAX_VALUE);
 
     private EscapedCharacterExtension() {
     }

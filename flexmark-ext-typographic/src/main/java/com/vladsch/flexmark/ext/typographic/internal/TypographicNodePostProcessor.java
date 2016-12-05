@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class TypographicNodePostProcessor extends NodePostProcessor {
     final static public Pattern SMARTS_PATTERN = Pattern.compile("(\\?)(\\.\\.\\.|\\. \\. \\.|--|---|')");
-    final private TypographicOptions myOptions;
+    private final TypographicOptions myOptions;
 
     public TypographicNodePostProcessor(Document document) {
         myOptions = new TypographicOptions(document);

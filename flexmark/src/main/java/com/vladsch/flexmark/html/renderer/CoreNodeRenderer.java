@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.internal.ListOptions;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;

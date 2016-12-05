@@ -18,9 +18,9 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<DefinitionRepository> DEFINITIONS = new DataKey<>("DEFINITIONS", DefinitionRepository::new); 
-    // final public static DataKey<KeepType> DEFINITIONS_KEEP = new DataKey<>("DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    final public static DataKey<Boolean> NO_TERM_TRAILING_COLON = new DataKey<>("NO_TERM_TRAILING_COLON", false); 
+    // public static final DataKey<DefinitionRepository> DEFINITIONS = new DataKey<>("DEFINITIONS", DefinitionRepository::new);
+    // public static final DataKey<KeepType> DEFINITIONS_KEEP = new DataKey<>("DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<Boolean> NO_TERM_TRAILING_COLON = new DataKey<>("NO_TERM_TRAILING_COLON", false);
 
     private DefinitionExtension() {
     }

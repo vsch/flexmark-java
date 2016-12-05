@@ -184,7 +184,7 @@ public class HtmlRenderer implements IRender {
         public HtmlRenderer build() {
             return new HtmlRenderer(this);
         }
-        
+
         /**
          * The HTML to use for rendering a softbreak, defaults to {@code "\n"} (meaning the rendered result doesn't have
          * a line break).
@@ -541,7 +541,7 @@ public class HtmlRenderer implements IRender {
         }
 
         private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
-            final private MainNodeRenderer myMainNodeRenderer;
+            private final MainNodeRenderer myMainNodeRenderer;
 
             public SubNodeRenderer(MainNodeRenderer mainNodeRenderer, HtmlWriter htmlWriter) {
                 super(htmlWriter);

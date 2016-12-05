@@ -18,6 +18,11 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
+    public MutableDataHolder setFrom(MutableDataSetter dataSetter) {
+        return dataSetter.setIn(this);
+    }
+
+    @Override
     public void setAll(DataHolder other) {
         for (DataKey key : other.keySet()) {
             set(key, other.get(key));
@@ -47,7 +52,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
         }
         return dataSet;
     }
-    
+
     @Override
     public MutableDataHolder toMutable() {
         return this;

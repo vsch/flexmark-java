@@ -26,29 +26,25 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("jekyll-macros-in-urls", new MutableDataSet().set(Parser.PARSE_JEKYLL_MACROS_IN_URLS, true));
         optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADING_NO_ATX_SPACE, true));
         optionsMap.put("hdr-no-lead-space", new MutableDataSet().set(Parser.HEADING_NO_LEAD_SPACE, true));
-        optionsMap.put("list-fixed-indent", new MutableDataSet().set(Parser.LISTS_FIXED_INDENT, 4));
         optionsMap.put("list-no-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, false));
         optionsMap.put("list-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, true));
         optionsMap.put("list-no-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
         optionsMap.put("list-loose-if-prev", new MutableDataSet().set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, true));
         optionsMap.put("list-no-start", new MutableDataSet().set(Parser.LISTS_ORDERED_LIST_MANUAL_START, false));
-        optionsMap.put("list-no-bullet-match", new MutableDataSet().set(Parser.LISTS_BULLET_MATCH, false));
-        optionsMap.put("list-no-type-match", new MutableDataSet().set(Parser.LISTS_ITEM_TYPE_MATCH, false));
-        optionsMap.put("list-content-indent", new MutableDataSet().set(Parser.LISTS_FIRST_ITEM_INDENT_BASED_LIMIT, true));
-        optionsMap.put("list-content-indent-overrides-code", new MutableDataSet().set(Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_INDENT, true));
-        optionsMap.put("list-content-indent-offset-1", new MutableDataSet().set(Parser.LISTS_FIRST_ITEM_INDENT_BASED_LIMIT_OFFSET, 1));
-        optionsMap.put("list-content-indent-offset-2", new MutableDataSet().set(Parser.LISTS_FIRST_ITEM_INDENT_BASED_LIMIT_OFFSET, 2));
-        optionsMap.put("list-content-indent-offset-3", new MutableDataSet().set(Parser.LISTS_FIRST_ITEM_INDENT_BASED_LIMIT_OFFSET, 3));
-        optionsMap.put("list-over-indents-to-first-item", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT_OVER_MARKER_TO_LIST, true));
-        optionsMap.put("list-over-indents-to-sub-item", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT_OVER_MARKER_TO_SUB_ITEM, true));
+        optionsMap.put("list-no-bullet-match", new MutableDataSet().set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, false));
+        optionsMap.put("list-no-type-match", new MutableDataSet().set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, false));
         optionsMap.put("bullet-no-para-break", new MutableDataSet().set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH, false));
         optionsMap.put("bullet-no-item-break", new MutableDataSet().set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH, false));
         optionsMap.put("empty-bullet-item-break", new MutableDataSet().set(Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true));
+        optionsMap.put("empty-bullet-no-sub-item-break", new MutableDataSet().set(Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, false));
+        optionsMap.put("empty-bullet-sub-item-break", new MutableDataSet().set(Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true));
         optionsMap.put("ordered-no-para-break", new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH, false));
         optionsMap.put("ordered-non-1-para-break", new MutableDataSet().set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH, true));
+        optionsMap.put("ordered-no-non-1-para-break", new MutableDataSet().set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH, false));
         optionsMap.put("ordered-no-item-break", new MutableDataSet().set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH, false));
-        optionsMap.put("ordered-non-1-item-break", new MutableDataSet().set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH, true));
-        optionsMap.put("list-item-mismatch-to-subitem", new MutableDataSet().set(Parser.LISTS_ITEM_MISMATCH_TO_SUB_ITEM, true));
+        optionsMap.put("ordered-non-1-item-break", new MutableDataSet().set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true));
+        optionsMap.put("ordered-no-non-1-item-break", new MutableDataSet().set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH, false));
+        optionsMap.put("list-item-mismatch-to-subitem", new MutableDataSet().set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, true));
         optionsMap.put("thematic-break-no-relaxed-start", new MutableDataSet().set(Parser.THEMATIC_BREAK_RELAXED_START, false));
         optionsMap.put("test-completions", new MutableDataSet().set(Parser.THEMATIC_BREAK_RELAXED_START, false).set(HtmlRenderer.SUPPRESS_INLINE_HTML, true));
         optionsMap.put("escape-html", new MutableDataSet().set(HtmlRenderer.ESCAPE_HTML, true));
@@ -81,9 +77,9 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)
                 .set(Parser.LISTS_AUTO_LOOSE, false)
-                .set(Parser.LISTS_BULLET_MATCH, false)
-                .set(Parser.LISTS_ITEM_TYPE_MATCH, false)
-                .set(Parser.LISTS_ITEM_MISMATCH_TO_SUB_ITEM, false)
+                .set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, false)
+                .set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, false)
+                .set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, false)
                 .set(Parser.LISTS_END_ON_DOUBLE_BLANK, false)
                 .set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH, false)
                 .set(Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
@@ -91,9 +87,8 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
                 .set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH, false)
                 .set(Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
                 .set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH, false)
-                .set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH, true)
+                .set(Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
                 .set(Parser.LISTS_ORDERED_LIST_MANUAL_START, false)
-                .set(Parser.LISTS_FIXED_INDENT, 4)
         );
     }
 

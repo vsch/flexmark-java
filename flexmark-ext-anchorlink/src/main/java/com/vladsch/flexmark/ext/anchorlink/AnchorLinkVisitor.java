@@ -24,5 +24,5 @@ public interface AnchorLinkVisitor {
         };
     }
 
-    void visit(AnchorLink node);
+    void visit(final AnchorLink node);
 }

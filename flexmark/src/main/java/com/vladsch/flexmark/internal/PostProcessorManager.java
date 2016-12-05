@@ -53,12 +53,12 @@ public class PostProcessorManager {
     }
 
     public Document postProcess(Document document) {
-        // first initialize node tracker if 
+        // first initialize node tracker if
         ClassifyingNodeTracker classifyingNodeTracker = null;
 
         classifyingNodeTracker = null;
         for (PostProcessorDependencyStage stage : postProcessorDependencies.getDependentStages()) {
-            // idiosyncrasy of post processors the last dependency can be global, in which case it processes the whole document and no ancestry info is 
+            // idiosyncrasy of post processors the last dependency can be global, in which case it processes the whole document and no ancestry info is
             // provided
             //new ClassifyingNodeTracker()
             boolean hadGlobal = false;
@@ -89,7 +89,7 @@ public class PostProcessorManager {
 
                     ReversibleIterable<Node> nodes = classifyingNodeTracker.getCategoryItems(Node.class, dependentNodeTypes.keySet());
                     for (Node node : nodes) {
-                        if (node.getParent() == null) continue; // was already removed 
+                        if (node.getParent() == null) continue; // was already removed
                         // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
                         int index = -1;
                         BitSet nodeAncestors = null;
@@ -119,9 +119,9 @@ public class PostProcessorManager {
     }
 
     public static class PostProcessorDependencyStage {
-        final private Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
-        final private boolean myWithExclusions;
-        final private List<PostProcessorFactory> dependents;
+        private final Map<Class<? extends Node>, Set<Class<?>>> myNodeMap;
+        private final boolean myWithExclusions;
+        private final List<PostProcessorFactory> dependents;
 
         public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
@@ -193,24 +193,24 @@ public class PostProcessorManager {
         @Override
         protected DependentItemMap<PostProcessorFactory> prioritize(final DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
-            List<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries(); 
+            List<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
             prioritized.sort(new Comparator<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>>() {
                 @Override
                 public int compare(DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e2) {
-                    int g1 = e1.getValue().isGlobalScope ? 1 : 0; 
-                    int g2 = e2.getValue().isGlobalScope ? 1 : 0; 
+                    int g1 = e1.getValue().isGlobalScope ? 1 : 0;
+                    int g2 = e2.getValue().isGlobalScope ? 1 : 0;
                     return g1 - g2;
                 }
             });
-            
+
             BitSet dependentMapSet = dependentMap.keySet().keyDifferenceBitSet(prioritized);
             if (dependentMapSet.isEmpty()) {
                 return dependentMap;
-            } 
-            
+            }
+
             DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<>(prioritized.size());
             prioritizedMap.addAll(prioritized);
-            
+
             return prioritizedMap;
         }
     }

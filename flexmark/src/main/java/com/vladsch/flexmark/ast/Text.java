@@ -18,7 +18,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.StringSequence;
 
-final public class Text extends Node {
+public final class Text extends Node {
     public Text() {
     }
 

@@ -23,6 +23,6 @@ public interface TocVisitor {
                 new VisitHandler<>(TocBlock.class, visitor::visit),
         };
     }
-    
-    void visit(TocBlock node);
+
+    void visit(final TocBlock node);
 }

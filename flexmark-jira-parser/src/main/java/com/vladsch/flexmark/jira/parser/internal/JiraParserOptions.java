@@ -3,9 +3,9 @@ package com.vladsch.flexmark.jira.parser.internal;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class JiraParserOptions {
-    //final public boolean jira_parserOption1;
-    //final public String jira_parserOption2;
-    //final public int jira_parserOption3;
+    //public final boolean jira_parserOption1;
+    //public final String jira_parserOption2;
+    //public final int jira_parserOption3;
 
     public JiraParserOptions(DataHolder options) {
         //this.jira_parserOption1 = options.get(JiraParserExtension.JIRA_PARSER_OPTION1);

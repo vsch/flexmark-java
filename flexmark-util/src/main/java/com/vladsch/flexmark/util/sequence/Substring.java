@@ -4,7 +4,7 @@ package com.vladsch.flexmark.util.sequence;
  * A CharSequence that avoids copying string data when getting a substring.
  */
 public class Substring implements CharSequence {
-    final public static CharSequence EMPTY = new CharSequence() {
+    public static final CharSequence EMPTY = new CharSequence() {
         @Override
         public int length() {
             return 0;

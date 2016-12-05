@@ -4,8 +4,8 @@ import com.vladsch.flexmark.ext.aside.AsideExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class AsideOptions {
-    final public boolean extendToBlankLine;
-    final public boolean ignoreBlankLine;
+    public final boolean extendToBlankLine;
+    public final boolean ignoreBlankLine;
 
     public AsideOptions(DataHolder options) {
         this.extendToBlankLine = options.get(AsideExtension.EXTEND_TO_BLANK_LINE);

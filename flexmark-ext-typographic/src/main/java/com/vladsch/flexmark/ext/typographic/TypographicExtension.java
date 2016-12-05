@@ -32,10 +32,10 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<TypographicRepository> TYPOGRAPHICS = new DataKey<>("TYPOGRAPHICS", TypographicRepository::new); 
-    // final public static DataKey<KeepType> TYPOGRAPHICS_KEEP = new DataKey<>("TYPOGRAPHICS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
-    final public static DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true); 
-    final public static DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true); 
+    // public static final DataKey<TypographicRepository> TYPOGRAPHICS = new DataKey<>("TYPOGRAPHICS", TypographicRepository::new);
+    // public static final DataKey<KeepType> TYPOGRAPHICS_KEEP = new DataKey<>("TYPOGRAPHICS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
+    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
 
     private TypographicExtension() {
     }

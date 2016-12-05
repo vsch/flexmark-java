@@ -16,9 +16,9 @@ import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
 import static com.vladsch.flexmark.util.options.Attribute.LINK_STATUS;
 
 public class ZzzzzzAttributeProvider implements AttributeProvider {
-    final private String missingTargetClass;
-    final private String localOnlyTargetClass;
-    final private AttributeProviderAdapter nodeAdapter;
+    private final String missingTargetClass;
+    private final String localOnlyTargetClass;
+    private final AttributeProviderAdapter nodeAdapter;
 
     public ZzzzzzAttributeProvider(NodeRendererContext context) {
         DataHolder options = context.getOptions();

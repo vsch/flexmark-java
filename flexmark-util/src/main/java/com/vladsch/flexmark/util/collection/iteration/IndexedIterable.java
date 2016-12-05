@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implements ReversibleIndexedIterable<R> {
-    final private ReversibleIterable<Integer> myIterable;
-    final private Indexed<S> myItems;
+    private final ReversibleIterable<Integer> myIterable;
+    private final Indexed<S> myItems;
 
     public IndexedIterable(Indexed<S> items, I iterable) {
         this.myItems = items;

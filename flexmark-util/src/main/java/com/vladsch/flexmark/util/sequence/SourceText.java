@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.util.sequence;
 
 public class SourceText {
-    final public static SourceText NULL = new SourceText(Substring.EMPTY, -1, -1);
+    public static final SourceText NULL = new SourceText(Substring.EMPTY, -1, -1);
 
-    final public CharSequence text;
-    final public Range range;
+    public final CharSequence text;
+    public final Range range;
 
     public CharSequence getText() {
         return text;

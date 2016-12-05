@@ -5,8 +5,8 @@ public class Pair<K, V> implements Paired<K, V> {
         return new Pair<K1, V1>(first, second);
     }
 
-    final private K myFirst;
-    final private V mySecond;
+    private final K myFirst;
+    private final V mySecond;
 
     public Pair(K first, V second) {
         this.myFirst = first;

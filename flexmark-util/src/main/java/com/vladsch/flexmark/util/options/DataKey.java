@@ -3,10 +3,10 @@ package com.vladsch.flexmark.util.options;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 
 public class DataKey<T> {
-    final private String name;
-    final private DataValueFactory<T> factory;
+    private final String name;
+    private final DataValueFactory<T> factory;
 
-    final private T defaultValue;
+    private final T defaultValue;
 
     public DataKey(String name, DataValueFactory<T> factory) {
         this.name = name;

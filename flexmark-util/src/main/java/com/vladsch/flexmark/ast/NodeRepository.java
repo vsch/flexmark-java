@@ -25,8 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
-    final private Map<String, T> nodeMap = new HashMap<>();
-    final private KeepType keepType;
+    private final Map<String, T> nodeMap = new HashMap<>();
+    private final KeepType keepType;
 
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();
     public abstract DataKey<KeepType> getKeepDataKey();
@@ -44,7 +44,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     }
 
     public T putRawKey(CharSequence key, T t) {
-        return put(normalizeKey(key), t); 
+        return put(normalizeKey(key), t);
     }
 
     @Override

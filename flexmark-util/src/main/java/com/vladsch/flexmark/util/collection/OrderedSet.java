@@ -6,9 +6,9 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class OrderedSet<E> implements Set<E>, Iterable<E> {
-    final private HashMap<E, Integer> myKeyMap;
-    final private ArrayList<E> myValueList;
-    final private CollectionHost<E> myHost;
+    private final HashMap<E, Integer> myKeyMap;
+    private final ArrayList<E> myValueList;
+    private final CollectionHost<E> myHost;
     private Indexed<E> myIndexedProxy;
     private Indexed<E> myAllowConcurrentModsIndexedProxy;
     private BitSet myValidIndices;
@@ -48,9 +48,9 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     }
 
     public BitSet differenceBitSet(Iterable<? extends E> items) {
-       return differenceBitSet(items.iterator()); 
+       return differenceBitSet(items.iterator());
     }
-    
+
     public BitSet differenceBitSet(Iterator<? extends E> items) {
         BitSet bitSet = new BitSet();
         int j = 0;
@@ -69,7 +69,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     public BitSet keyDifferenceBitSet(Iterable<? extends Map.Entry<? extends E, ?>> items) {
         return keyDifferenceBitSet(items.iterator());
     }
-    
+
     public BitSet keyDifferenceBitSet(Iterator<? extends Map.Entry<? extends E, ?>> items) {
         BitSet bitSet = new BitSet();
         int j = 0;
@@ -87,7 +87,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     public BitSet valueDifferenceBitSet(Iterable<? extends Map.Entry<?, ? extends E>> items) {
         return valueDifferenceBitSet(items.iterator());
     }
-    
+
     public BitSet valueDifferenceBitSet(Iterator<? extends Map.Entry<?, ? extends E>> items) {
         BitSet bitSet = new BitSet();
         int j = 0;

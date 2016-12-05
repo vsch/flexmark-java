@@ -27,10 +27,10 @@ public class OptionsParser<T> implements OptionParser<T> {
     public static final String OPTION_0_DOES_NOT_MATCH = "Option {0} does not match any of: ";
     public static final String KEY_OPTION_0_DOES_NOT_MATCH = "options.parser.option.unknown";
 
-    final private String myOptionName;
-    final private OptionParser<T>[] myParsableOptions;
-    final private char myOptionDelimiter;
-    final private char myOptionValueDelimiter;
+    private final String myOptionName;
+    private final OptionParser<T>[] myParsableOptions;
+    private final char myOptionDelimiter;
+    private final char myOptionValueDelimiter;
 
     public OptionsParser(String optionName, OptionParser<T>[] parsableOptions, char optionDelimiter, char optionValueDelimiter) {
         myOptionName = optionName;

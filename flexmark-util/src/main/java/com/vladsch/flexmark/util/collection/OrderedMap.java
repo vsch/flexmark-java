@@ -8,9 +8,9 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    final private OrderedSet<K> keySet;
-    final private ArrayList<V> valueList;
-    final private CollectionHost<K> host;
+    private final OrderedSet<K> keySet;
+    private final ArrayList<V> valueList;
+    private final CollectionHost<K> host;
     private boolean inUpdate;
     private Indexed<Entry<K, V>> myIndexedEntryProxy;
     private Indexed<V> myIndexedValueProxy;
@@ -216,7 +216,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         valueList.set(index, v);
         return old;
     }
-    
+
     public V computeIfAbsent(K k, Function<? super K, ? extends V> runnableValue) {
         int index = keySet.indexOf(k);
         if (index == -1) {

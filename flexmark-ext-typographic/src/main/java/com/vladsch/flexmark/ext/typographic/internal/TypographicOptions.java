@@ -19,8 +19,8 @@ import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class TypographicOptions {
-    final public boolean typographicQuotes;
-    final public boolean typographicSmarts;
+    public final boolean typographicQuotes;
+    public final boolean typographicSmarts;
 
     public TypographicOptions(DataHolder options) {
         this.typographicQuotes = options.get(TypographicExtension.TYPOGRAPHIC_QUOTES);

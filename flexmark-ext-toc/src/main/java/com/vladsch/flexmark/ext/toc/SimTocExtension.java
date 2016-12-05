@@ -21,22 +21,22 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new);
-    // final public static DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    // public static final DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new);
+    // public static final DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
 
     /**
      * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC node.
      * <p>
      * LEVELS levels of heading to use for TOC generation
      */
-    final public static DataKey<Integer> LEVELS = TocExtension.LEVELS;
-    final public static DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
-    final public static DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
-    final public static DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
-    final public static DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    final public static DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
-    final public static DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
-    final public static DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
+    public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
+    public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
+    public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
+    public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
+    public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
+    public static final DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
+    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
+    public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
 
     private SimTocExtension() {
     }

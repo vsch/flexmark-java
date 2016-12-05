@@ -101,7 +101,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     /**
-     * @return the node which would be returned by a call to {@link #next()} or null if there is no next node. 
+     * @return the node which would be returned by a call to {@link #next()} or null if there is no next node.
      */
     public Node peek() {
         if (node != null) {
@@ -131,7 +131,7 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
         }
     }
 
-    public final static ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
+    public static final ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
         @Override
         public boolean isReversed() {
             return false;

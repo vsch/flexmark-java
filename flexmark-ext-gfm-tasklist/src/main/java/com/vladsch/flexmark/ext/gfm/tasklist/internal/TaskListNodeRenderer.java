@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.ListOptions;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class TaskListNodeRenderer implements NodeRenderer {
     final static public AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
-    
+
     private final String doneMarker;
     private final String notDoneMarker;
     private final String itemClass;

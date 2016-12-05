@@ -5,7 +5,7 @@ flexmark-java
 
 ## Version History
 - [Next Release To Do List](#next-release-to-do-list)
-- [(0.6.2)](#062)
+- [0.7.0](#070)
 - [0.6.1](#061)
 - [0.6.0](#060)
 - [0.5.0](#050)
@@ -56,6 +56,7 @@ Next Release To Do List
 -----------------------
 
 - [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
+
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
@@ -65,27 +66,37 @@ Next Release To Do List
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
 
-(0.6.2)
--------
+0.7.0
+-----
 
-- [ ] Fix: HTML comment blocks should only be recognized as blocks if they have a blank line
-      above. Otherwise HTML in a lazy continuation becomes an HTML block. Difference with spec
-      since it probably does not understand the uses for HTML comments other than empty breaks.
-      In IntelliJ comments are used for TODO markers and ability to embedd one in a paragraph is
-      important.
+- [x] Add: final to all node visitors' node parameter 
+- [x] Add: upgrade to CommonMark spec 0.27
 
-      - [x] Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but
-            when false then they require a blank line.
+- [x] Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear
+      between `{{` and `}}` in URLs, including spaces, pipes and backslashes.
 
-      - [ ] Add: test for above option
+- [x] Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but when
+      false then they require a blank line before, otherwise they become inline HTML.
 
-- [ ] Fix: clean up list processing options to be consistent and easily configured for
-      processors with which flexmark-java can be made compatible.
-      - [x] commonmark, obviously defaults
-      - [ ] Markdown.pl
-      - [ ] Fixed 4, MultiMarkdown, pandocs, pegdown
-      - [x] github comments, common mark
-      - [x] kramdown, Jekyll, github docs
+- [x] Add: test for `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` option
+
+- [ ] Fix: rewrite list handling and list handling options to allow for Markdown parser
+      emulation based on major parser families, as described in
+      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md) with processor profile preset:
+      - [x] CommonMark
+          - [ ] GitHub Comments
+          - [ ] League/CommonMark
+      - [ ] FixedIndent
+          - [ ] Pegdown
+          - [ ] MultiMarkdown
+          - [ ] Pandoc
+      - [ ] Kramdown
+          - [ ] GitHub Docs
+          - [ ] Jekyll  
+          - [ ] Kramdown
+      - [ ] Markdown
+          - [ ] Markdown.pl
+          - [ ] Php Markdown Extra
 
 - Change: rename `Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM` to
   `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_FIRST_ITEM`
@@ -106,7 +117,7 @@ Next Release To Do List
 
 - Fix: #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of
 
-  text block
+text block
 
 - Change: `SpecReader` to parse for headings only if spaces are present after leading `#`.
   Otherwise, leading github issue `#7` in the description is treated as a heading.
@@ -1106,7 +1117,7 @@ Next Release To Do List
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-
+    
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

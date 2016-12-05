@@ -14,8 +14,8 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.mappers.NodeClassifier;
 
 public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker {
-    final protected ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
-    final protected OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
+    protected final ClassificationBag<Class<?>, Node> nodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
+    protected final OrderedMultiMap<BlockParser, Block> allBlockParsersMap = new OrderedMultiMap<>(new CollectionHost<Paired<BlockParser, Block>>() {
         @Override
         public void adding(int index, Paired<BlockParser, Block> paired, Object v) {
             Block block = paired.getSecond();
@@ -93,7 +93,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
             throw new IllegalStateException("Added block " + node + " is not linked into the AST");
         }
     }
-    
+
     @Override
     public void blockAdded(Block node) {
         validateLinked(node);
@@ -127,7 +127,7 @@ public class ClassifyingBlockTracker implements BlockTracker, BlockParserTracker
             throw new IllegalStateException("Removed block " + node + " is still linked in the AST");
         }
     }
-    
+
     @Override
     public void blockRemoved(Block node) {
         validateUnlinked(node);

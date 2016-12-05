@@ -3,7 +3,7 @@ package com.vladsch.flexmark.html.renderer;
 import java.io.IOException;
 
 public class TextCollectingAppendable implements Appendable {
-    final private StringBuilder out;
+    private final StringBuilder out;
 
     public TextCollectingAppendable() {
         this(new StringBuilder());

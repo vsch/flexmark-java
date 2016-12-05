@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class DefinitionOptions {
-    final public boolean definitionOption1;
+    public final boolean definitionOption1;
 
     public DefinitionOptions(DataHolder options) {
         this.definitionOption1 = options.get(DefinitionExtension.NO_TERM_TRAILING_COLON);

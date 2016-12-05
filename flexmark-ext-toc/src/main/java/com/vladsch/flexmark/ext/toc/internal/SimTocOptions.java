@@ -19,8 +19,8 @@ import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 public class SimTocOptions extends TocOptions {
-    final public boolean isAstAddOptions;
-    final public boolean isBlankLineSpacer;
+    public final boolean isAstAddOptions;
+    public final boolean isBlankLineSpacer;
 
     public SimTocOptions() {
         this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, false, true);

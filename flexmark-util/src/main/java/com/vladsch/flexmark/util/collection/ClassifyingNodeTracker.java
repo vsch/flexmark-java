@@ -12,19 +12,19 @@ import java.util.Map;
 import java.util.Set;
 
 public class ClassifyingNodeTracker implements NodeTracker {
-    final protected ClassificationBag<Class<?>, Node> myNodeClassifier;
-    final private NodeTracker myHost;
-    final private OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
-    final private OrderedSet<Class<?>> myExclusionSet;
-    final private HashMap<Integer, BitSet> myNodeAncestryMap;
+    protected final ClassificationBag<Class<?>, Node> myNodeClassifier;
+    private final NodeTracker myHost;
+    private final OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
+    private final OrderedSet<Class<?>> myExclusionSet;
+    private final HashMap<Integer, BitSet> myNodeAncestryMap;
 
     public ClassifyingNodeTracker(NodeTracker host, Map<Class<? extends Node>, Set<Class<?>>> exclusionMap) {
         myHost = host;
         myNodeClassifier = new ClassificationBag<>(NodeClassifier.INSTANCE);
         myExclusionMap = new OrderedMap<>(exclusionMap.size());
         myExclusionMap.putAll(exclusionMap);
-        
-        // this maps the exclusion class to bits in the bit set 
+
+        // this maps the exclusion class to bits in the bit set
         myExclusionSet = new OrderedSet<>();
         myExclusionMap.valueIterable().forEach(myExclusionSet::addAll);
 

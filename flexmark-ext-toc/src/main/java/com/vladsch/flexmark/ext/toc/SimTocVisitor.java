@@ -27,8 +27,8 @@ public interface SimTocVisitor {
         };
     }
 
-    void visit(SimTocBlock node);
-    void visit(SimTocOptionList node);
-    void visit(SimTocOption node);
-    void visit(SimTocContent node);
+    void visit(final SimTocBlock node);
+    void visit(final SimTocOptionList node);
+    void visit(final SimTocOption node);
+    void visit(final SimTocContent node);
 }

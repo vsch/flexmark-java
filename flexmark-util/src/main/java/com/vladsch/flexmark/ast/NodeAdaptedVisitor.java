@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Intended to be extended by specific type of node visitor 
+ * Intended to be extended by specific type of node visitor
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
  */
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
-    final protected Map<Class<?>, H> myCustomHandlersMap = new HashMap<>();
+    protected final Map<Class<?>, H> myCustomHandlersMap = new HashMap<>();
 
     // Usage:
     //myVisitor = new NodeVisitor(
@@ -29,14 +29,14 @@ public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?
     public NodeAdaptedVisitor(Collection<H> handlers) {
         addHandlers(handlers);
     }
-    
+
     public NodeAdaptedVisitor<H> addHandlers(H... handlers) {
         for (H handler : handlers) {
             myCustomHandlersMap.put(handler.getNodeType(), handler);
         }
         return this;
     }
-    
+
     public NodeAdaptedVisitor<H> addHandlers(H[]... handlers) {
         for (H[] moreVisitors : handlers) {
             for (H handler : moreVisitors) {
@@ -45,7 +45,7 @@ public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?
         }
         return this;
     }
-    
+
     public NodeAdaptedVisitor<H> addHandlers(Collection<H> handlers) {
         for (H handler : handlers) {
             myCustomHandlersMap.put(handler.getNodeType(), handler);

@@ -22,7 +22,7 @@ import java.util.Stack;
 import java.util.function.Consumer;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
-    final private boolean isReversed;
+    private final boolean isReversed;
     private ReversiblePeekingIterator<Node> iterator;
     private Stack<ReversiblePeekingIterator<Node>> iteratorStack;
     private Node result;

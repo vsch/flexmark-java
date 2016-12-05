@@ -6,7 +6,7 @@ import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
 
 public class AnchorLinkPostProcessor extends DocumentPostProcessor {
-    final private AnchorLinkOptions options;
+    private final AnchorLinkOptions options;
     private final NodeVisitor myVisitor;
 
     public AnchorLinkPostProcessor(Document document) {

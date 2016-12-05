@@ -20,7 +20,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
 
     private static final Pattern TRAILING_BLANK_LINES = Pattern.compile("(?:\n[ \t]*)+$");
 
-    final private IndentedCodeBlock block = new IndentedCodeBlock();
+    private final IndentedCodeBlock block = new IndentedCodeBlock();
     private BlockContent content = new BlockContent();
     private boolean trimTrailingBlankLines;
 

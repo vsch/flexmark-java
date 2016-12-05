@@ -3,9 +3,9 @@ package com.vladsch.flexmark.ext.escaped.character.internal;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class EscapedCharacterOptions {
-    //final public boolean escaped_characterOption1;
-    //final public String escaped_characterOption2;
-    //final public int escaped_characterOption3;
+    //public final boolean escaped_characterOption1;
+    //public final String escaped_characterOption2;
+    //public final int escaped_characterOption3;
 
     public EscapedCharacterOptions(DataHolder options) {
         //this.escaped_characterOption1 = options.get(EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION1);

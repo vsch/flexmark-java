@@ -15,10 +15,164 @@ differences are to be found.
 
 Default processing for commonmark here as reference for the rest
 
+Test to see which list items can interrupt paragraphs.   
+
+- MultiMarkdown: none
+- CommonMark: non-empty bullets, non-empty one item 
+- Pandoc: none
+- Kramdown: none
+- Markdown: none
+- GFM: bullets 
+- GFC: non-empty bullets, non-empty one item
+- Php Markdown Extra: none
+- League/CommonMark: all
+
+```````````````````````````````` example Default: 1
+Bullet item can interrupt paragraph
+* item
+
+Empty bullet item can interrupt paragraph
+* 
+
+Numbered one item can interrupt paragraph
+1. one item
+
+Empty Numbered one item can interrupt paragraph
+1. 
+
+Numbered non-one item can interrupt paragraph
+2. non-one item
+
+Empty Numbered non-one item can interrupt paragraph
+2. 
+
+.
+.
+````````````````````````````````
+
+
+
+Test to see which list items can interrupt another bullet list item's paragraphs
+
+- Markdown: non-empty bullets, non-empty numbered item
+- MultiMarkdown: all
+- CommonMark: all, mismatch to new list 
+- League/CommonMark: all, mismatch to new list
+- Pandoc: all, mismatch to new list
+- Php Markdown Extra: all, mismatch to new list
+- Kramdown: all, mismatch to sub-list
+- GFM: all
+- GFC: all, mismatch to new list
+
+
+```````````````````````````````` example Default: 2
+* Bullet item can interrupt paragraph of a bullet list item
+* item
+
+<!--List Break-->
+
+* Empty bullet item can interrupt paragraph of a bullet list item
+* 
+
+<!--List Break-->
+
+* Numbered one item can interrupt paragraph of a bullet list item
+1. one item
+
+<!--List Break-->
+
+* Empty Numbered one item can interrupt paragraph of a bullet list item
+1. 
+
+<!--List Break-->
+
+* Numbered non-one item can interrupt paragraph of a bullet list item
+2. non-one item
+
+<!--List Break-->
+
+* Empty Numbered non-one item can interrupt paragraph of a bullet list item
+2. 
+
+.
+.
+````````````````````````````````
+
+
+
+Test to see which list items can interrupt another numbered list item's paragraphs
+
+- Markdown: non-empty bullets, non-empty numbered item
+- MultiMarkdown: all
+- CommonMark: all, mismatch to new list 
+- League/CommonMark: all, mismatch to new list
+- Pandoc: all, mismatch to new list
+- Php Markdown Extra: all, mismatch to new list
+- Kramdown: all, mismatch to sub-list
+- GFM: all
+- GFC: all, mismatch to new list
+
+```````````````````````````````` example Default: 3
+1. Bullet item can interrupt paragraph of a numbered list item
+* item
+
+<!--List Break-->
+
+1. Empty bullet item can interrupt paragraph of a numbered list item
+* 
+
+<!--List Break-->
+
+1. Numbered one item can interrupt paragraph of a numbered list item
+1. one item
+
+<!--List Break-->
+
+1. Empty Numbered one item can interrupt paragraph of a numbered list item 
+1.
+
+<!--List Break-->
+
+1. Numbered non-one item can interrupt paragraph of a numbered list item
+2. non-one item
+
+<!--List Break-->
+
+1. Empty Numbered non-one item can interrupt paragraph of a numbered list item
+2. 
+
+.
+.
+````````````````````````````````
+
+
+Test to see if bullet mismatch starts a new list
+
+- Markdown: no
+- MultiMarkdown: no
+- CommonMark: yes
+- League/CommonMark: no
+- Pandoc: no
+- Php Markdown Extra: no
+- Kramdown: no
+- GFM: no
+- GFC: yes
+
+```````````````````````````````` example Default: 3
+- item
++ item
+* item
+
+.
+.
+````````````````````````````````
+
+
+
 Test if list item indent handling is purely previous item content based or depends on list's
 first item's indent level. If the
 
-```````````````````````````````` example Default: 1
+```````````````````````````````` example Default: 4
 * item 1
  * item 2
   * item 3
@@ -74,10 +228,74 @@ Document[0, 117]
 
 
 
+```````````````````````````````` example Default: 5
+* item 1
+
+ * item 2
+ 
+  * item 3
+  
+   * item 4
+   
+    * item 5
+    
+     * item 6
+     
+      * item 7
+      
+       * item 8
+       
+        * item 9
+.
+<ul>
+  <li>item 1</li>
+  <li>item 2</li>
+  <li>item 3</li>
+  <li>item 4</li>
+  <li>item 5</li>
+  <li>item 6</li>
+  <li>item 7</li>
+  <li>item 8</li>
+  <li>item 9</li>
+</ul>
+.
+Document[0, 117]
+  BulletList[0, 117] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 30] open:[21, 22, "*"] isTight
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+    BulletListItem[33, 42] open:[33, 34, "*"] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 4"]
+    BulletListItem[46, 55] open:[46, 47, "*"] isTight
+      Paragraph[48, 55]
+        Text[48, 54] chars:[48, 54, "item 5"]
+    BulletListItem[60, 69] open:[60, 61, "*"] isTight
+      Paragraph[62, 69]
+        Text[62, 68] chars:[62, 68, "item 6"]
+    BulletListItem[75, 84] open:[75, 76, "*"] isTight
+      Paragraph[77, 84]
+        Text[77, 83] chars:[77, 83, "item 7"]
+    BulletListItem[91, 100] open:[91, 92, "*"] isTight
+      Paragraph[93, 100]
+        Text[93, 99] chars:[93, 99, "item 8"]
+    BulletListItem[108, 117] open:[108, 109, "*"] isTight
+      Paragraph[110, 117]
+        Text[110, 116] chars:[110, 116, "item 9"]
+````````````````````````````````
+
+
+
 Test to confirm if list item indent handling is purely previous item content based or depends on
 list's first item's indent level. If the
 
-```````````````````````````````` example Default: 2
+```````````````````````````````` example Default: 6
 * item 1
  *  item 2
   *  item 3
@@ -136,7 +354,7 @@ Document[0, 125]
 Test shows where the boundary switch to indented code occurs. Sub-items first paragraph is a
 paragraph, the second is indented code
 
-```````````````````````````````` example Default: 3
+```````````````````````````````` example Default: 7
 -   test
     - sub item
 
@@ -210,7 +428,7 @@ Document[0, 167]
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
 paragraph is a paragraph, the second is indented code
 
-```````````````````````````````` example Default: 4
+```````````````````````````````` example Default: 8
 * item 1
     
   item para 1
@@ -431,7 +649,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example Default: 5
+```````````````````````````````` example Default: 9
 *  item 1
    * item 2
   * item 3
@@ -463,7 +681,7 @@ Document[0, 33]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example Default: 6
+```````````````````````````````` example Default: 10
 * item 1
 
   # Heading 1
@@ -2218,7 +2436,7 @@ Default offset is 4
 
 kramdown 1.2.0
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 1) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 1) options(kramdown)
 * item 1
  * item 2
   * item 3
@@ -2277,10 +2495,57 @@ Document[0, 117]
 
 
 
+```````````````````````````````` example List - First Item Indent Based Limit - kramdown: 2
+* item 1
+
+ * item 2
+ 
+  * item 3
+  
+   * item 4
+   
+    * item 5
+    
+     * item 6
+     
+      * item 7
+      
+       * item 8
+       
+        * item 9
+.
+<ul>
+    <li>
+        <p>item 1</p>
+    </li>
+    <li>
+        <p>item 2</p>
+    </li>
+    <li>
+        <p>item 3</p>
+    </li>
+    <li>
+        <p>item 4</p>
+    </li>
+</ul>
+<pre><code>* item 5
+
+ * item 6
+ 
+  * item 7
+  
+   * item 8
+   
+    * item 9
+</code></pre>
+.
+````````````````````````````````
+
+
 Test to confirm if list item indent handling is purely previous item content based or depends on
 list's first item's indent level. If the
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 2) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 3) options(kramdown)
 * item 1
  *  item 2
   *  item 3
@@ -2341,7 +2606,7 @@ Document[0, 125]
 Test shows where the boundary switch to indented code occurs. Sub-items first paragraph is a
 paragraph, the second is indented code
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 3) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 4) options(kramdown)
 -   test
     - sub item
 
@@ -2415,7 +2680,7 @@ Document[0, 167]
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
 paragraph is a paragraph, the second is indented code
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 4) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 5) options(kramdown)
 * item 1
     
   item para 1
@@ -2628,7 +2893,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 5) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 6) options(kramdown)
 *  item 1
    * item 2
   * item 3
@@ -2660,7 +2925,7 @@ Document[0, 33]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 6) options(list-first-item-indent-based-limit, hdr-no-lead-space)
+```````````````````````````````` example(List - First Item Indent Based Limit - kramdown: 7) options(kramdown)
 * item 1
 
   # Heading 1

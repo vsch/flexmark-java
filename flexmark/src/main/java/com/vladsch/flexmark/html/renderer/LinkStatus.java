@@ -1,12 +1,12 @@
 package com.vladsch.flexmark.html.renderer;
 
 public class LinkStatus {
-    final public static LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
-    final public static LinkStatus VALID = new LinkStatus("VALID");
-    final public static LinkStatus UNCHECKED = new LinkStatus("UNCHECKED");
-    final public static LinkStatus NOT_FOUND = new LinkStatus("NOT_FOUND");
-    
-    final private String myName;
+    public static final LinkStatus UNKNOWN = new LinkStatus("UNKNOWN");
+    public static final LinkStatus VALID = new LinkStatus("VALID");
+    public static final LinkStatus UNCHECKED = new LinkStatus("UNCHECKED");
+    public static final LinkStatus NOT_FOUND = new LinkStatus("NOT_FOUND");
+
+    private final String myName;
 
     public LinkStatus(String name) {
         this.myName = name;

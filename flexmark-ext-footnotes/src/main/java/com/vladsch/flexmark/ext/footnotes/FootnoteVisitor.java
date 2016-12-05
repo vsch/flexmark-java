@@ -25,6 +25,6 @@ public interface FootnoteVisitor {
         };
     }
 
-    void visit(FootnoteBlock node);
-    void visit(Footnote node);
+    void visit(final FootnoteBlock node);
+    void visit(final Footnote node);
 }

@@ -4,10 +4,10 @@ import java.util.HashMap;
 
 public class EmojiCheatSheet {
     public static class EmojiShortcut {
-        final public String name;
-        final public String image;
-        final public String url;
-        final public String category;
+        public final String name;
+        public final String image;
+        public final String url;
+        public final String category;
 
         public EmojiShortcut(String name, String image, String url, String category) {
             this.name = name;
@@ -17,7 +17,7 @@ public class EmojiCheatSheet {
         }
     }
 
-    final public static HashMap<String, EmojiShortcut> shortCutMap = new HashMap<>();
+    public static final HashMap<String, EmojiShortcut> shortCutMap = new HashMap<>();
     static {
         shortCutMap.put("frowning", new EmojiShortcut("frowning", "frowning.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f626.png", "people"));
         shortCutMap.put("vhs", new EmojiShortcut("vhs", "vhs.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f4fc.png", "objects"));

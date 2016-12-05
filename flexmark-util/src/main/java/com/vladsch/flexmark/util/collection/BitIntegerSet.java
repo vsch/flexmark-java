@@ -14,8 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.IntConsumer;
 
 public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> {
-    final private BitSet myBits;
-    final private boolean myReversed;
+    private final BitSet myBits;
+    private final boolean myReversed;
 
     public BitIntegerSet() {
         this(0);
@@ -59,7 +59,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
             if (start <= end && myBits.length() > 0) {
                 int startIndex = start >> 6;
                 int endIndex = end >> 6;
-                long startMask = -1L << (start & 63); // 0-FF, 1-FE, 2-FC, 3-FE, 4-F0.... 
+                long startMask = -1L << (start & 63); // 0-FF, 1-FE, 2-FC, 3-FE, 4-F0....
                 long endMask = ~(-1L << (end & 63)); // 0-0, 1-01, 2-03, 3-07
 
                 if (endMask == 0) {
@@ -247,7 +247,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
 
     public byte[] toByteArray() {return myBits.toByteArray();}
     public long[] toLongArray() {return myBits.toLongArray();}
-    
+
     public BitIntegerSet flip(int i) {myBits.flip(i); return this;}
     public BitIntegerSet flip(int i, int i1) {myBits.flip(i, i1); return this;}
     public BitIntegerSet set(int i) {myBits.set(i); return this;}
@@ -256,7 +256,7 @@ public class BitIntegerSet implements Set<Integer>, ReversibleIterable<Integer> 
     public BitIntegerSet set(int i, int i1, boolean b) {myBits.set(i, i1, b); return this;}
     public BitIntegerSet clear(int i) {myBits.clear(i); return this;}
     public BitIntegerSet clear(int i, int i1) {myBits.clear(i, i1); return this;}
-    
+
     public BitIntegerSet and(BitSet set) {myBits.and(set); return this;}
     public BitIntegerSet or(BitSet set) {myBits.or(set); return this;}
     public BitIntegerSet xor(BitSet set) {myBits.xor(set); return this;}

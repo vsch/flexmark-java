@@ -20,8 +20,8 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final public static DataKey<Boolean> EXTEND_TO_BLANK_LINE = new DataKey<>("EXTEND_TO_BLANK_LINE", false);
-    final public static DataKey<Boolean> IGNORE_BLANK_LINE = new DataKey<>("IGNORE_BLANK_LINE", false);
+    public static final DataKey<Boolean> EXTEND_TO_BLANK_LINE = new DataKey<>("EXTEND_TO_BLANK_LINE", false);
+    public static final DataKey<Boolean> IGNORE_BLANK_LINE = new DataKey<>("IGNORE_BLANK_LINE", false);
     final static public LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private AsideExtension() {

@@ -23,13 +23,13 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public final static DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", FootnoteRepository::new);
-    public final static DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
-    final public static DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
-    final public static DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
-    final public static DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
-    final public static DataKey<String> FOOTNOTE_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_LINK_REF_CLASS", "footnote-ref");
-    final public static DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
+    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", FootnoteRepository::new);
+    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
+    public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
+    public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
+    public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
+    public static final DataKey<String> FOOTNOTE_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_LINK_REF_CLASS", "footnote-ref");
+    public static final DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
 
     private FootnoteExtension() {
     }

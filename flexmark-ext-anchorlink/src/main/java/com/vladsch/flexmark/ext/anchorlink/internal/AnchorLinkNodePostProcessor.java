@@ -13,7 +13,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import static com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE;
 
 public class AnchorLinkNodePostProcessor extends NodePostProcessor {
-    final private AnchorLinkOptions options;
+    private final AnchorLinkOptions options;
 
     public AnchorLinkNodePostProcessor(DataHolder options) {
         this.options = new AnchorLinkOptions(options);
@@ -53,7 +53,7 @@ public class AnchorLinkNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         public Factory(DataHolder options) {
             super(false);
-            
+
             if (options.get(ANCHORLINKS_NO_BLOCK_QUOTE)) {
                 addNodeWithExclusions(Heading.class, BlockQuote.class);
             } else {

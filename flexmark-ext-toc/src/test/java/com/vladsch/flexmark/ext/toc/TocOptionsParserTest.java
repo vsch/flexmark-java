@@ -77,10 +77,10 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     private static class ParserNode extends CustomNode {
-        final private String nodeType;
-        final private ParsedOptionStatus status;
-        final private String message;
-        final private MutableDataHolder options = new MutableDataSet();
+        private final String nodeType;
+        private final ParsedOptionStatus status;
+        private final String message;
+        private final MutableDataHolder options = new MutableDataSet();
         private TocOptions tocOptions = null;
 
         public TocOptions getTocOptions() {
@@ -140,7 +140,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     private static class Parser extends IParseBase {
-        final private OptionsParser<TocOptions> myParser;
+        private final OptionsParser<TocOptions> myParser;
 
         public Parser() {
             this(null);
@@ -231,7 +231,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
                     myVisitor.visitChildren(node);
                 }
             }
-            
+
             public void render(Node node) {
                 myVisitor.visit(node);
             }

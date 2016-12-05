@@ -23,7 +23,7 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
 import java.io.IOException;
 
 public abstract class IRenderBase implements IRender {
-    final public static IRender NullRenderer = new IRenderBase() {
+    public static final IRender NullRenderer = new IRenderBase() {
         @Override
         public void render(Node node, Appendable output) {
 
@@ -35,7 +35,7 @@ public abstract class IRenderBase implements IRender {
         }
     };
 
-    final public static IRender TextRenderer = new IRenderBase() {
+    public static final IRender TextRenderer = new IRenderBase() {
         @Override
         public void render(Node node, Appendable output) {
             try {

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.util.Computable;
 
 public class BlockClassifier implements Computable<Class<? extends Block>, Block> {
-    final public static BlockClassifier INSTANCE = new BlockClassifier();
+    public static final BlockClassifier INSTANCE = new BlockClassifier();
 
     private BlockClassifier() {
     }

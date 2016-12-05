@@ -9,7 +9,7 @@ public abstract class NodePostProcessor implements PostProcessor {
      * @return the result of post-processing, may be a modified {@code document} argument
      */
     @Override
-    final public Document processDocument(Document document) {
-       return document; 
+    public final Document processDocument(Document document) {
+       return document;
     }
 }

@@ -24,5 +24,5 @@ public interface TaskListItemVisitor {
         };
     }
 
-    void visit(TaskListItem node);
+    void visit(final TaskListItem node);
 }

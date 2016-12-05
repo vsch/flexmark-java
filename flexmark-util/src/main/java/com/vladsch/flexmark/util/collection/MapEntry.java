@@ -2,9 +2,9 @@ package com.vladsch.flexmark.util.collection;
 
 import java.util.Map;
 
-final public class MapEntry<K, V> implements Map.Entry<K, V> {
-    final private K myKey;
-    final private V myValue;
+public final class MapEntry<K, V> implements Map.Entry<K, V> {
+    private final K myKey;
+    private final V myValue;
 
     public MapEntry(K key, V value) {
         myKey = key;

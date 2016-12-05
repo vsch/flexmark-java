@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TextNodeConverter {
-    final private BasedSequence nodeChars;
+    private final BasedSequence nodeChars;
     private BasedSequence remainingChars;
     private ArrayList<Node> list = new ArrayList<>();
 

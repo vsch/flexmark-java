@@ -9,62 +9,62 @@ import java.util.regex.Pattern;
 import static com.vladsch.flexmark.parser.Parser.LISTS_ORDERED_ITEM_DOT_ONLY;
 
 public class Parsing {
-    final public String ADDITIONAL_CHARS;
-    final public String EXCLUDED_0_TO_SPACE;
+    public final String ADDITIONAL_CHARS;
+    public final String EXCLUDED_0_TO_SPACE;
 
-    final public String ESCAPED_CHAR;
-    final public Pattern LINK_LABEL;
-    final public Pattern LINK_DESTINATION_ANGLES;
-    final public String LINK_TITLE_STRING;
-    final public Pattern LINK_TITLE;
-    final public String REG_CHAR;
-    final public String IN_PARENS_NOSP;
-    final public String IN_BRACES_W_SP;
-    final public Pattern LINK_DESTINATION;
-    final public String HTMLCOMMENT;
-    final public String PROCESSINGINSTRUCTION;
-    final public String DECLARATION;
-    final public String CDATA;
-    final public String ENTITY;
+    public final String ESCAPED_CHAR;
+    public final Pattern LINK_LABEL;
+    public final Pattern LINK_DESTINATION_ANGLES;
+    public final String LINK_TITLE_STRING;
+    public final Pattern LINK_TITLE;
+    public final String REG_CHAR;
+    public final String IN_PARENS_NOSP;
+    public final String IN_BRACES_W_SP;
+    public final Pattern LINK_DESTINATION;
+    public final String HTMLCOMMENT;
+    public final String PROCESSINGINSTRUCTION;
+    public final String DECLARATION;
+    public final String CDATA;
+    public final String ENTITY;
 
-    final public Pattern ENTITY_HERE;
-    final public String ASCII_PUNCTUATION;
-    final public Pattern PUNCTUATION;
+    public final Pattern ENTITY_HERE;
+    public final String ASCII_PUNCTUATION;
+    public final Pattern PUNCTUATION;
 
-    final public Pattern HTML_COMMENT;
-    final public Pattern ESCAPABLE;
-    final public Pattern TICKS;
-    final public Pattern TICKS_HERE;
-    final public Pattern EMAIL_AUTOLINK;
-    final public Pattern AUTOLINK;
-    final public Pattern SPNL;
-    final public Pattern SPNL_URL;
-    final public Pattern SPNI;
-    final public Pattern SP;
-    final public Pattern REST_OF_LINE;
-    final public Pattern UNICODE_WHITESPACE_CHAR;
-    final public Pattern WHITESPACE;
-    final public Pattern FINAL_SPACE;
-    final public Pattern LINE_END;
-    final public String TAGNAME;
-    final public String ATTRIBUTENAME;
-    final public String UNQUOTEDVALUE;
-    final public String SINGLEQUOTEDVALUE;
-    final public String DOUBLEQUOTEDVALUE;
-    final public String ATTRIBUTEVALUE;
-    final public String ATTRIBUTEVALUESPEC;
-    final public String ATTRIBUTE;
+    public final Pattern HTML_COMMENT;
+    public final Pattern ESCAPABLE;
+    public final Pattern TICKS;
+    public final Pattern TICKS_HERE;
+    public final Pattern EMAIL_AUTOLINK;
+    public final Pattern AUTOLINK;
+    public final Pattern SPNL;
+    public final Pattern SPNL_URL;
+    public final Pattern SPNI;
+    public final Pattern SP;
+    public final Pattern REST_OF_LINE;
+    public final Pattern UNICODE_WHITESPACE_CHAR;
+    public final Pattern WHITESPACE;
+    public final Pattern FINAL_SPACE;
+    public final Pattern LINE_END;
+    public final String TAGNAME;
+    public final String ATTRIBUTENAME;
+    public final String UNQUOTEDVALUE;
+    public final String SINGLEQUOTEDVALUE;
+    public final String DOUBLEQUOTEDVALUE;
+    public final String ATTRIBUTEVALUE;
+    public final String ATTRIBUTEVALUESPEC;
+    public final String ATTRIBUTE;
 
-    final public String OPENTAG;
-    final public String CLOSETAG;
-    final public String HTMLTAG;
-    final public Pattern HTML_TAG;
+    public final String OPENTAG;
+    public final String CLOSETAG;
+    public final String HTMLTAG;
+    public final Pattern HTML_TAG;
 
-    final public Pattern LIST_ITEM_MARKER;
+    public final Pattern LIST_ITEM_MARKER;
 
-    final public int CODE_BLOCK_INDENT;
-    final public boolean intellijDummyIdentifier;
-    final public String INVALID_LINK_CHARS;
+    public final int CODE_BLOCK_INDENT;
+    public final boolean intellijDummyIdentifier;
+    public final String INVALID_LINK_CHARS;
 
     public Parsing(DataHolder options) {
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
@@ -87,7 +87,7 @@ public class Parsing {
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" +(options.get(Parser.PARSE_JEKYLL_MACROS_IN_URLS) ? IN_BRACES_W_SP + "|" : "")  + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
+                "^(?:" +(Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "")  + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
         this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";
@@ -134,13 +134,14 @@ public class Parsing {
                 + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
-        if (options.get(LISTS_ORDERED_ITEM_DOT_ONLY)) {
+        if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
             this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
         } else {
             this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
         }
 
-        this.CODE_BLOCK_INDENT = 4;
+        // make sure this is consistent with lists settings
+        this.CODE_BLOCK_INDENT = Parser.LISTS_ITEM_INDENT.getFrom(options);
 
         // list of characters not allowed in link URL
         this.INVALID_LINK_CHARS = " \t";

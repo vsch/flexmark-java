@@ -18,7 +18,7 @@ import java.util.Set;
 
 public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
-    final private FootnoteRepository footnoteRepository;
+    private final FootnoteRepository footnoteRepository;
     private final FootnoteOptions options;
 
     public FootnoteNodeRenderer(DataHolder options) {

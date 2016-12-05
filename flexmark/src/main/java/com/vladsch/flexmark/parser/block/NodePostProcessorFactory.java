@@ -24,7 +24,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     }
 
     @Override
-    final public boolean affectsGlobalScope() {
+    public final boolean affectsGlobalScope() {
         return false;
     }
 
@@ -44,10 +44,10 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     }
 
     @Override
-    final public Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes() {
+    public final Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes() {
         return NODE_MAP;
     }
 
     @Override
-    abstract public NodePostProcessor create(Document document); 
+    abstract public NodePostProcessor create(Document document);
 }

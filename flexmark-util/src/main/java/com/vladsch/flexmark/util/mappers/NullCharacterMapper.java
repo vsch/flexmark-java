@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.mappers;
 
 public class NullCharacterMapper implements CharMapper {
-    final public static NullCharacterMapper INSTANCE = new NullCharacterMapper();
+    public static final NullCharacterMapper INSTANCE = new NullCharacterMapper();
 
     @Override
     public char map(char c) {

@@ -8,9 +8,9 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
-    final private OrderedSet<K> myKeySet;
-    final private OrderedSet<V> myValueSet;
-    final private CollectionHost<Paired<K, V>> myHost;
+    private final OrderedSet<K> myKeySet;
+    private final OrderedSet<V> myValueSet;
+    private final CollectionHost<Paired<K, V>> myHost;
     private boolean myInKeyUpdate;
     private boolean myInValueUpdate;
     private Indexed<Entry<K, V>> myIndexedProxy;

@@ -7,10 +7,10 @@ import java.util.Set;
 public class Attribute {
     public static final Attribute NO_FOLLOW = new Attribute("rel", "nofollow");
     public static final Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<>(Arrays.asList("class", "id", "name"));
-    public static final String LINK_STATUS = "Link Status"; 
+    public static final String LINK_STATUS = "Link Status";
 
-    final private String myName;
-    final private String myValue;
+    private final String myName;
+    private final String myValue;
 
     public Attribute(String name, String value) {
         myName = name;
@@ -26,8 +26,8 @@ public class Attribute {
     }
 
     protected int indexOfValue(String value) {
-        if (value.isEmpty() || myValue.isEmpty()) return -1; 
-        
+        if (value.isEmpty() || myValue.isEmpty()) return -1;
+
         int lastPos = 0;
         while (lastPos < myValue.length()) {
             int pos = myValue.indexOf(value, lastPos);
@@ -44,18 +44,18 @@ public class Attribute {
         }
         return -1;
     }
-    
+
     public boolean isNonRendering() {
         return myName.indexOf(' ') != -1 || myValue.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(myName);
     }
 
     public Attribute replaceValue(String value) {
-        if (myValue.equals(value)) return this; 
+        if (myValue.equals(value)) return this;
         return new Attribute(myName, value);
     }
 
     public Attribute addValue(String value) {
-        if (value.isEmpty() || indexOfValue(value) >= 0) return this; 
+        if (value.isEmpty() || indexOfValue(value) >= 0) return this;
         return new Attribute(myName, myValue.isEmpty() ? value : myValue + " " + value);
     }
 
@@ -68,14 +68,14 @@ public class Attribute {
                 return new Attribute(myName, myValue.substring(0, pos));
             }
             if (pos == 0) {
-                if (endPos < myValue.length()) endPos++; 
+                if (endPos < myValue.length()) endPos++;
                 return new Attribute(myName, myValue.substring(endPos));
             }
             return new Attribute(myName, myValue.substring(0, pos-1) + myValue.substring(endPos));
         }
         return this;
     }
-    
+
     public boolean containsValue(String value) {
         return indexOfValue(value) != -1;
     }

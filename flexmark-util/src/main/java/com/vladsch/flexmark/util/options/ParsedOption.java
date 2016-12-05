@@ -22,10 +22,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class ParsedOption<T> {
-    final protected BasedSequence mySource;
-    final protected OptionParser<T> myOptionParser;
-    final protected ParsedOptionStatus myOptionResult;
-    final protected List<ParserMessage> myMessages;
+    protected final BasedSequence mySource;
+    protected final OptionParser<T> myOptionParser;
+    protected final ParsedOptionStatus myOptionResult;
+    protected final List<ParserMessage> myMessages;
 
     public ParsedOption(BasedSequence source, OptionParser<T> optionParser, ParsedOptionStatus optionResult) {
         this(source, optionParser, optionResult, (List<ParserMessage>) null);

@@ -21,20 +21,20 @@ import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class TocOptions {
-    final public static TocOptions DEFAULT = new TocOptions();
-    final public static int DEFAULT_LEVELS = 4 | 8; // 0 not used, default H2 & H3, H1 assumed to be document heading and does not need to be part of TOC
-    final public static String DEFAULT_TITLE = "Table of Contents";
-    final public static int DEFAULT_TITLE_LEVEL = 1;
-    final public static int VALID_LEVELS = 0x7e;
+    public static final TocOptions DEFAULT = new TocOptions();
+    public static final int DEFAULT_LEVELS = 4 | 8; // 0 not used, default H2 & H3, H1 assumed to be document heading and does not need to be part of TOC
+    public static final String DEFAULT_TITLE = "Table of Contents";
+    public static final int DEFAULT_TITLE_LEVEL = 1;
+    public static final int VALID_LEVELS = 0x7e;
 
-    final public int levels;
-    final public boolean isHtml;
-    final public boolean isTextOnly;
-    final public boolean isNumbered;
-    final public int titleLevel;
-    final public String title;
-    final public int rawTitleLevel;
-    final public String rawTitle;
+    public final int levels;
+    public final boolean isHtml;
+    public final boolean isTextOnly;
+    public final boolean isNumbered;
+    public final int titleLevel;
+    public final String title;
+    public final int rawTitleLevel;
+    public final String rawTitle;
 
     public TocOptions() {
         this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE);
@@ -116,13 +116,13 @@ public class TocOptions {
     public String toString() {
         DelimitedBuilder out = new DelimitedBuilder(", ");
         out.append("TocOptions[");
-        
+
         out.append("levels=<").push(",");
         for (int i=1;i<=6;i++) {
-            if (isLevelIncluded(i)) out.append(i).mark(); 
+            if (isLevelIncluded(i)) out.append(i).mark();
         }
         out.pop().unmark().append('>').mark();
-        
+
         out.append(" isHtml=").append(isHtml).mark();
         out.append(" isTextOnly=").append(isTextOnly).mark();
         out.append(" isNumbered=").append(isNumbered).mark();

@@ -22,12 +22,12 @@ import com.vladsch.flexmark.util.options.DataKey;
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // for webview use "<span class=\"taskitem\">" + (node.isDone() ? "X" : "O") + "</span>"
     // for swing use ""
-    public final static DataKey<Boolean> CONVERT_ORDERED_LIST_ITEMS = new DataKey<>("CONVERT_ORDERED_LIST_ITEMS", true);
-    public final static DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");
-    public final static DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" />");
-    public final static DataKey<String> ITEM_CLASS = new DataKey<>("ITEM_CLASS", "task-list-item");
-    public final static DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<>("LOOSE_ITEM_CLASS", ITEM_CLASS::getFrom);
-    public final static DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
+    public static final DataKey<Boolean> CONVERT_ORDERED_LIST_ITEMS = new DataKey<>("CONVERT_ORDERED_LIST_ITEMS", true);
+    public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");
+    public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" />");
+    public static final DataKey<String> ITEM_CLASS = new DataKey<>("ITEM_CLASS", "task-list-item");
+    public static final DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<>("LOOSE_ITEM_CLASS", ITEM_CLASS::getFrom);
+    public static final DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
 
     private TaskListExtension() {
     }

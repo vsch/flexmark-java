@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import java.util.function.Consumer;
 
 public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>> implements ReversibleIndexedIterator<R> {
-    final private I myIterator;
-    final private Indexed<S> myItems;
+    private final I myIterator;
+    private final Indexed<S> myItems;
     private int myLastIndex;
     private int myModificationCount;
 

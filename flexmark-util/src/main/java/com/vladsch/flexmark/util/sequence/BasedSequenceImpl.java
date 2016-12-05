@@ -94,6 +94,22 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return charAt(index < 0 ? length() + index : index);
     }
 
+    /**
+     * @return the last character of the sequence or '\0' if empty
+     */
+    @Override
+    public char lastChar() {
+        return isEmpty() ? '\0' : charAt(length()-1);
+    }
+
+    /**
+     * @return the first character of the sequence or '\0' if empty
+     */
+    @Override
+    public char firstChar() {
+        return isEmpty() ? '\0' : charAt(0);
+    }
+
     @Override
     public int countLeading(String chars) {
         return countChars(chars, 0, length());
@@ -275,7 +291,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    final public MappedSequence toMapped(CharMapper mapper) {
+    public final MappedSequence toMapped(CharMapper mapper) {
         return new MappedSequence(this, mapper);
     }
 

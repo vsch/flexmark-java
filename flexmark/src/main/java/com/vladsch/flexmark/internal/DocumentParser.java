@@ -154,7 +154,7 @@ public class DocumentParser implements ParserState {
     }
 
     private static class BlockParserMapper implements Computable<Block, BlockParser> {
-        final public static BlockParserMapper INSTANCE = new BlockParserMapper();
+        public static final BlockParserMapper INSTANCE = new BlockParserMapper();
 
         private BlockParserMapper() {
         }
@@ -166,7 +166,7 @@ public class DocumentParser implements ParserState {
     }
 
     private Map<Node, Boolean> lastLineBlank = new HashMap<>();
-    final private DataHolder options;
+    private final DataHolder options;
     private ParserPhase currentPhase = ParserPhase.NONE;
 
     @Override
@@ -181,7 +181,7 @@ public class DocumentParser implements ParserState {
     }
 
     public static class ParagraphPreProcessorDependencyStage {
-        final private List<ParagraphPreProcessorFactory> dependents;
+        private final List<ParagraphPreProcessorFactory> dependents;
 
         public ParagraphPreProcessorDependencyStage(List<ParagraphPreProcessorFactory> dependents) {
             // compute mappings
@@ -213,7 +213,7 @@ public class DocumentParser implements ParserState {
     }
 
     public static class CustomBlockParserDependencyStage {
-        final private List<CustomBlockParserFactory> dependents;
+        private final List<CustomBlockParserFactory> dependents;
 
         public CustomBlockParserDependencyStage(List<CustomBlockParserFactory> dependents) {
             // compute mappings
@@ -239,8 +239,8 @@ public class DocumentParser implements ParserState {
     }
 
     public static class BlockPreProcessorDependencyStage {
-        final private Set<Class<? extends Block>> blockTypes;
-        final private List<BlockPreProcessorFactory> dependents;
+        private final Set<Class<? extends Block>> blockTypes;
+        private final List<BlockPreProcessorFactory> dependents;
 
         public BlockPreProcessorDependencyStage(List<BlockPreProcessorFactory> dependents) {
             // compute mappings
@@ -256,8 +256,8 @@ public class DocumentParser implements ParserState {
     }
 
     public static class BlockPreProcessorDependencies extends ResolvedDependencies<BlockPreProcessorDependencyStage> {
-        final private Set<Class<? extends Block>> blockTypes;
-        final private Set<BlockPreProcessorFactory> blockPreProcessorFactories;
+        private final Set<Class<? extends Block>> blockTypes;
+        private final Set<BlockPreProcessorFactory> blockPreProcessorFactories;
 
         public BlockPreProcessorDependencies(List<BlockPreProcessorDependencyStage> dependentStages) {
             super(dependentStages);
@@ -297,7 +297,7 @@ public class DocumentParser implements ParserState {
         }
     }
 
-    final private Parsing myParsing;
+    private final Parsing myParsing;
 
     public DocumentParser(DataHolder options, List<CustomBlockParserFactory> customBlockParserFactories, ParagraphPreProcessorDependencies paragraphPreProcessorDependencies, BlockPreProcessorDependencies blockPreProcessorDependencies, InlineParser inlineParser) {
         this.options = options;

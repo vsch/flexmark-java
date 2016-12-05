@@ -26,7 +26,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     private char fenceChar;
     private int fenceLength;
     private int fenceIndent;
-    final private boolean matchingCloser; 
+    private final boolean matchingCloser;
 
     public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent) {
         this.fenceChar = fenceChar;

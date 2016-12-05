@@ -9,11 +9,11 @@ import java.util.List;
  */
 public class SegmentedSequence extends BasedSequenceImpl {
 
-    final protected CharSequence base;
-    final protected char[] nonBaseChars;
-    final protected int[] baseOffsets;
-    final protected int baseStartOffset;
-    final protected int length;      // list of start/end indices
+    protected final CharSequence base;
+    protected final char[] nonBaseChars;
+    protected final int[] baseOffsets;
+    protected final int baseStartOffset;
+    protected final int length;      // list of start/end indices
 
     public CharSequence getBase() {
         return base;
@@ -40,9 +40,9 @@ public class SegmentedSequence extends BasedSequenceImpl {
             }
             return 0;
         }
-        
+
         // ensure that 0 length end returns start
-        if (length == 0) return iMax > 0 ? baseOffsets[baseStartOffset] : 0; 
+        if (length == 0) return iMax > 0 ? baseOffsets[baseStartOffset] : 0;
         return iMax > 0 ? baseOffsets[baseStartOffset + length - 1] + 1 : 0;
     }
 

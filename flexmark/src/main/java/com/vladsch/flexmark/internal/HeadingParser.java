@@ -19,9 +19,9 @@ import java.util.regex.Pattern;
 public class HeadingParser extends AbstractBlockParser {
 
     static class HeadingParsing extends Parsing {
-        final private Pattern ATX_HEADING;
-        final private Pattern ATX_TRAILING;
-        final private Pattern SETEXT_HEADING;
+        private final Pattern ATX_HEADING;
+        private final Pattern ATX_TRAILING;
+        private final Pattern SETEXT_HEADING;
 
         public HeadingParsing(DataHolder options) {
             super(options);
@@ -99,8 +99,8 @@ public class HeadingParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        final private HeadingOptions options;
-        final private HeadingParsing myParsing;
+        private final HeadingOptions options;
+        private final HeadingParsing myParsing;
 
         BlockFactory(DataHolder options) {
             super(options);

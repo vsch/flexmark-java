@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.collection.iteration;
 import java.util.List;
 
 public class Reverse<T> implements ReversibleIterable<T> {
-    final private List<T> myList;
-    final private boolean myIsReversed;
+    private final List<T> myList;
+    private final boolean myIsReversed;
 
     public Reverse(List<T> list) {
         this(list, true);
@@ -16,8 +16,8 @@ public class Reverse<T> implements ReversibleIterable<T> {
     }
 
     static class ReversedListIterator<T> implements ReversibleIterator<T> {
-        final private List<T> myList;
-        final private boolean myIsReversed;
+        private final List<T> myList;
+        private final boolean myIsReversed;
         private int index;
 
         public ReversedListIterator(List<T> list) {

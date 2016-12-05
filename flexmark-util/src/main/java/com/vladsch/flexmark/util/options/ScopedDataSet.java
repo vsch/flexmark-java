@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ScopedDataSet extends DataSet {
-    final protected DataHolder parent;
+    protected final DataHolder parent;
 
     public ScopedDataSet() {
         this.parent = null;

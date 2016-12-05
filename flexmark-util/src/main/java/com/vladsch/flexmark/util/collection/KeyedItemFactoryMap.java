@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class KeyedItemFactoryMap<K, I, P> implements Map<K, ComputableFactory<I, P>> {
-    final protected HashMap<K, ComputableFactory<I, P>> factoryMap;
-    final protected HashMap<K, I> itemMap;
-    final protected P param;
+    protected final HashMap<K, ComputableFactory<I, P>> factoryMap;
+    protected final HashMap<K, I> itemMap;
+    protected final P param;
 
     public KeyedItemFactoryMap(P param) {
         this(param, 0);

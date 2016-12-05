@@ -14,7 +14,7 @@ public class WikiLink extends CustomNode implements DoNotDecorate {
     protected BasedSequence textSeparatorMarker = SubSequence.NULL;
     protected BasedSequence text = SubSequence.NULL;
     protected BasedSequence closingMarker = SubSequence.NULL;
-    final protected boolean linkIsFirst;
+    protected final boolean linkIsFirst;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -166,7 +166,7 @@ public class WikiLink extends CustomNode implements DoNotDecorate {
 
         // now parse out the # from the link
         this.link = link;
-        
+
         pos = link.indexOf('#');
         if (pos < 0) {
             this.pageRef = link;

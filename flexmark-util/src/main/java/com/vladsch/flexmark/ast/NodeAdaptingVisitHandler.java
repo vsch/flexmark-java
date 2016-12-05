@@ -6,8 +6,8 @@ package com.vladsch.flexmark.ast;
  * @param <A> subclass of {@link NodeAdaptingVisitor}
  */
 public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAdaptingVisitor<N>> {
-    final protected Class<? extends N> myClass;
-    final protected A myAdapter;
+    protected final Class<? extends N> myClass;
+    protected final A myAdapter;
 
     public NodeAdaptingVisitHandler(Class<? extends N> aClass, A adapter) {
         myClass = aClass;
@@ -28,7 +28,7 @@ public abstract class NodeAdaptingVisitHandler<N extends Node, A extends NodeAda
     //    //noinspection unchecked
     //    myAdapter.render((N)node, context, html);
     //}
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

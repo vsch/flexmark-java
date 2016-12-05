@@ -24,5 +24,5 @@ public interface StrikethroughVisitor {
         };
     }
 
-    void visit(Strikethrough node);
+    void visit(final Strikethrough node);
 }

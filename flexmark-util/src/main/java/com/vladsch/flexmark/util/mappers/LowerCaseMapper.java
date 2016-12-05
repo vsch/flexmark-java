@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.mappers;
 import java.util.Locale;
 
 public class LowerCaseMapper implements CharMapper {
-    final public static LowerCaseMapper INSTANCE = new LowerCaseMapper();
+    public static final LowerCaseMapper INSTANCE = new LowerCaseMapper();
 
     Locale locale = Locale.ROOT;
 

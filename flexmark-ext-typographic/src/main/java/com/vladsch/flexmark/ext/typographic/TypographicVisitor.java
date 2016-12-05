@@ -25,6 +25,6 @@ public interface TypographicVisitor {
         };
     }
 
-    void visit(TypographicSmarts node);
-    void visit(TypographicQuotes node);
+    void visit(final TypographicSmarts node);
+    void visit(final TypographicQuotes node);
 }

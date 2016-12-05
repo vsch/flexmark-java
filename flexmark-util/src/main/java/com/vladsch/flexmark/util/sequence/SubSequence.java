@@ -8,12 +8,12 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public class SubSequence extends BasedSequenceImpl {
-    //final public static BasedSequence EMPTY = new EmptyBasedSequence();
-    final public static BasedSequence NULL = new EmptyBasedSequence();
+    //public static final BasedSequence EMPTY = new EmptyBasedSequence();
+    public static final BasedSequence NULL = new EmptyBasedSequence();
 
-    final public static BasedSequence EOL = new StringSequence("\n");
-    final public static List<BasedSequence> EMPTY_LIST = new ArrayList<>();
-    final public static BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
+    public static final BasedSequence EOL = new StringSequence("\n");
+    public static final List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+    public static final BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
 
     public static BasedSequence firstNonNull(BasedSequence... sequences) {
         for (BasedSequence sequence : sequences) {

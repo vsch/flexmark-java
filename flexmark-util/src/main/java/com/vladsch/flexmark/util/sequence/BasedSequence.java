@@ -146,4 +146,14 @@ public interface BasedSequence extends CharSequence {
     List<BasedSequence> split(String delimiter, int limit);
     List<BasedSequence> split(String delimiter, int limit, int flags);
     List<BasedSequence> split(String delimiter, int limit, int flags, String trimChars);
+
+    /**
+     * @return the last character of the sequence or '\0' if empty
+     */
+    char lastChar();
+
+    /**
+     * @return the first character of the sequence or '\0' if empty
+     */
+    char firstChar();
 }

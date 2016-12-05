@@ -476,9 +476,9 @@ Document[0, 116]
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 5) options(setext-marker-length)
+```````````````````````````````` example(Heading options: 5) options(setext-marker-length, empty-bullet-no-sub-item-break)
 - item 
-    - 
+  - 
  
 .
 <ul>
@@ -486,22 +486,22 @@ Minimum setext marker length 3 in lists
   -</li>
 </ul>
 .
-Document[0, 17]
-  BulletList[0, 15] isTight
-    BulletListItem[0, 15] open:[0, 1, "-"] isTight
-      Paragraph[2, 15]
+Document[0, 15]
+  BulletList[0, 13] isTight
+    BulletListItem[0, 13] open:[0, 1, "-"] isTight
+      Paragraph[2, 13]
         Text[2, 6] chars:[2, 6, "item"]
         SoftLineBreak[7, 8]
-        Text[12, 13] chars:[12, 13, "-"]
+        Text[10, 11] chars:[10, 11, "-"]
 ````````````````````````````````
 
 
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 6) options(setext-marker-length, empty-bullet-item-break)
+```````````````````````````````` example(Heading options: 6) options(setext-marker-length, empty-bullet-sub-item-break)
 - item 
-    - 
+  - 
  
 .
 <ul>
@@ -512,13 +512,13 @@ Minimum setext marker length 3 in lists
   </li>
 </ul>
 .
-Document[0, 17]
-  BulletList[0, 13] isTight
-    BulletListItem[0, 13] open:[0, 1, "-"] isTight
+Document[0, 15]
+  BulletList[0, 11] isTight
+    BulletListItem[0, 11] open:[0, 1, "-"] isTight
       Paragraph[2, 8]
         Text[2, 6] chars:[2, 6, "item"]
-      BulletList[12, 13] isTight
-        BulletListItem[12, 13] open:[12, 13, "-"] isTight
+      BulletList[10, 11] isTight
+        BulletListItem[10, 11] open:[10, 11, "-"] isTight
 ````````````````````````````````
 
 
@@ -1192,7 +1192,7 @@ Document[0, 30]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(List - Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 1) options(bullet-no-para-break, ordered-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    1. item 2
@@ -1225,7 +1225,7 @@ Document[0, 41]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
-```````````````````````````````` example(List - Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 2) options(bullet-no-para-break, ordered-no-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1253,7 +1253,7 @@ Document[0, 41]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 3) options(bullet-no-para-break, ordered-non-1-para-break)
+```````````````````````````````` example(List - Paragraph Break Options: 3) options(ordered-non-1-para-break, ordered-no-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1285,7 +1285,7 @@ Document[0, 61]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 4) options(bullet-no-para-break, ordered-non-1-para-break, ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 4) options(ordered-non-1-para-break, ordered-non-1-item-break)
 This is a paragraph
 2. this is a list
 1. item 1
@@ -1322,7 +1322,7 @@ Document[0, 61]
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
-```````````````````````````````` example(List - Paragraph Break Options: 5) options(bullet-no-para-break, ordered-no-para-break, ordered-non-1-item-break)
+```````````````````````````````` example(List - Paragraph Break Options: 5) options(ordered-non-1-item-break)
 1. this is a list
 1. item 1
    2. item 2
@@ -1836,9 +1836,9 @@ Document[0, 38]
 Bullet items must have a blank line before them when preceded by paragraph but should not append
 following child paragraph
 
-```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-fixed-indent, list-no-type-match, list-no-loose)
+```````````````````````````````` example(List - Paragraph Break Options: 14) options(bullet-no-para-break, list-no-type-match, list-no-loose)
 - item 1 paragraph
-    * sublist
+  * sublist
 - item 2 paragraph
 
     paragraph
@@ -1854,20 +1854,20 @@ following child paragraph
   </li>
 </ul>
 .
-Document[0, 67]
-  BulletList[0, 67] isTight
-    BulletListItem[0, 33] open:[0, 1, "-"] isTight
+Document[0, 65]
+  BulletList[0, 65] isTight
+    BulletListItem[0, 31] open:[0, 1, "-"] isTight
       Paragraph[2, 19]
         Text[2, 18] chars:[2, 18, "item  … graph"]
-      BulletList[23, 33] isTight
-        BulletListItem[23, 33] open:[23, 24, "*"] isTight
-          Paragraph[25, 33]
-            Text[25, 32] chars:[25, 32, "sublist"]
-    BulletListItem[33, 67] open:[33, 34, "-"] isTight
-      Paragraph[35, 52]
-        Text[35, 51] chars:[35, 51, "item  … graph"]
-      Paragraph[57, 67]
-        Text[57, 66] chars:[57, 66, "paragraph"]
+      BulletList[21, 31] isTight
+        BulletListItem[21, 31] open:[21, 22, "*"] isTight
+          Paragraph[23, 31]
+            Text[23, 30] chars:[23, 30, "sublist"]
+    BulletListItem[31, 65] open:[31, 32, "-"] isTight
+      Paragraph[33, 50]
+        Text[33, 49] chars:[33, 49, "item  … graph"]
+      Paragraph[55, 65]
+        Text[55, 64] chars:[55, 64, "paragraph"]
 ````````````````````````````````
 
 
@@ -2380,10 +2380,10 @@ Document[0, 43]
 
 nested
 
-```````````````````````````````` example(List - Marker Options: 9) options(list-fixed-indent, list-no-start)
+```````````````````````````````` example(List - Marker Options: 9) options(list-no-start)
 4. item 1
 3. item 2
-    2. item 2.1
+   2. item 2.1
 1. item 3
 .
 <ol>
@@ -2396,31 +2396,31 @@ nested
   <li>item 3</li>
 </ol>
 .
-Document[0, 46]
-  OrderedList[0, 46] isTight start:4 delimiter:'.'
+Document[0, 45]
+  OrderedList[0, 45] isTight start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isTight
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[10, 36] open:[10, 12, "3."] isTight
+    OrderedListItem[10, 35] open:[10, 12, "3."] isTight
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 2"]
-      OrderedList[24, 36] isTight start:2 delimiter:'.'
-        OrderedListItem[24, 36] open:[24, 26, "2."] isTight
-          Paragraph[27, 36]
-            Text[27, 35] chars:[27, 35, "item 2.1"]
-    OrderedListItem[36, 46] open:[36, 38, "1."] isTight
-      Paragraph[39, 46]
-        Text[39, 45] chars:[39, 45, "item 3"]
+      OrderedList[23, 35] isTight start:2 delimiter:'.'
+        OrderedListItem[23, 35] open:[23, 25, "2."] isTight
+          Paragraph[26, 35]
+            Text[26, 34] chars:[26, 34, "item 2.1"]
+    OrderedListItem[35, 45] open:[35, 37, "1."] isTight
+      Paragraph[38, 45]
+        Text[38, 44] chars:[38, 44, "item 3"]
 ````````````````````````````````
 
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 10) options(list-fixed-indent, list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
-    2. item 2.1
+   2. item 2.1
 1. item 3
 .
 <ol>
@@ -2430,29 +2430,29 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   1. item 3</li>
 </ol>
 .
-Document[0, 46]
-  OrderedList[0, 46] isTight start:4 delimiter:'.'
-    OrderedListItem[0, 46] open:[0, 2, "4."] isTight
-      Paragraph[3, 46]
+Document[0, 45]
+  OrderedList[0, 45] isTight start:4 delimiter:'.'
+    OrderedListItem[0, 45] open:[0, 2, "4."] isTight
+      Paragraph[3, 45]
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
         Text[10, 19] chars:[10, 19, "3. item 2"]
         SoftLineBreak[19, 20]
-        Text[24, 35] chars:[24, 35, "2. it … m 2.1"]
-        SoftLineBreak[35, 36]
-        Text[36, 45] chars:[36, 45, "1. item 3"]
+        Text[23, 34] chars:[23, 34, "2. it … m 2.1"]
+        SoftLineBreak[34, 35]
+        Text[35, 44] chars:[35, 44, "1. item 3"]
 ````````````````````````````````
 
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 11) options(list-fixed-indent, list-no-start, ordered-no-para-break, ordered-no-item-break)
+```````````````````````````````` example(List - Marker Options: 11) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
 4. item 1
 
 3. item 2
 
-    2. item 2.1
+   2. item 2.1
     
 1. item 3
 .
@@ -2471,34 +2471,34 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   </li>
 </ol>
 .
-Document[0, 53]
-  OrderedList[0, 53] isLoose start:4 delimiter:'.'
+Document[0, 52]
+  OrderedList[0, 52] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[11, 38] open:[11, 13, "3."] isLoose
+    OrderedListItem[11, 37] open:[11, 13, "3."] isLoose
       Paragraph[14, 21]
         Text[14, 20] chars:[14, 20, "item 2"]
-      OrderedList[26, 38] isTight start:2 delimiter:'.'
-        OrderedListItem[26, 38] open:[26, 28, "2."] isTight
-          Paragraph[29, 38]
-            Text[29, 37] chars:[29, 37, "item 2.1"]
-    OrderedListItem[43, 53] open:[43, 45, "1."] isLoose
-      Paragraph[46, 53]
-        Text[46, 52] chars:[46, 52, "item 3"]
+      OrderedList[25, 37] isTight start:2 delimiter:'.'
+        OrderedListItem[25, 37] open:[25, 27, "2."] isTight
+          Paragraph[28, 37]
+            Text[28, 36] chars:[28, 36, "item 2.1"]
+    OrderedListItem[42, 52] open:[42, 44, "1."] isLoose
+      Paragraph[45, 52]
+        Text[45, 51] chars:[45, 51, "item 3"]
 ````````````````````````````````
 
 
 
 no relaxed ordered start with exception for another item's paragraph
 
-```````````````````````````````` example(List - Marker Options: 12) options(list-fixed-indent, list-no-start, ordered-no-para-break)
+```````````````````````````````` example(List - Marker Options: 12) options(list-no-start, ordered-no-para-break)
 4. item 1
 3. item 2
-    2. item 2.1
+   2. item 2.1
     
-    paragraph 
-    1. with lazy continuation looking like an item
+   paragraph 
+   1. with lazy continuation looking like an item
 1. item 3
 .
 <ol>
@@ -2518,25 +2518,25 @@ no relaxed ordered start with exception for another item's paragraph
   </li>
 </ol>
 .
-Document[0, 117]
-  OrderedList[0, 117] isLoose start:4 delimiter:'.'
+Document[0, 114]
+  OrderedList[0, 114] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[10, 107] open:[10, 12, "3."] isLoose
+    OrderedListItem[10, 104] open:[10, 12, "3."] isLoose
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 2"]
-      OrderedList[24, 36] isTight start:2 delimiter:'.'
-        OrderedListItem[24, 36] open:[24, 26, "2."] isTight
-          Paragraph[27, 36]
-            Text[27, 35] chars:[27, 35, "item 2.1"]
-      Paragraph[45, 107]
-        Text[45, 54] chars:[45, 54, "paragraph"]
-        SoftLineBreak[55, 56]
-        Text[60, 106] chars:[60, 106, "1. wi …  item"]
-    OrderedListItem[107, 117] open:[107, 109, "1."] isLoose
-      Paragraph[110, 117]
-        Text[110, 116] chars:[110, 116, "item 3"]
+      OrderedList[23, 35] isTight start:2 delimiter:'.'
+        OrderedListItem[23, 35] open:[23, 25, "2."] isTight
+          Paragraph[26, 35]
+            Text[26, 34] chars:[26, 34, "item 2.1"]
+      Paragraph[43, 104]
+        Text[43, 52] chars:[43, 52, "paragraph"]
+        SoftLineBreak[53, 54]
+        Text[57, 103] chars:[57, 103, "1. wi …  item"]
+    OrderedListItem[104, 114] open:[104, 106, "1."] isLoose
+      Paragraph[107, 114]
+        Text[107, 113] chars:[107, 113, "item 3"]
 ````````````````````````````````
 
 
@@ -2544,13 +2544,13 @@ Document[0, 117]
 no relaxed ordered start with exception for another item's paragraph but only if manual list
 start is enabled
 
-```````````````````````````````` example(List - Marker Options: 13) options(list-fixed-indent, ordered-no-para-break)
+```````````````````````````````` example(List - Marker Options: 13) options(ordered-no-para-break, ordered-no-item-break)
 4. item 1
 3. item 2
-    2. item 2.1
-    
-    paragraph 
-    1. with lazy continuation looking like an item
+   2. item 2.1
+   
+   paragraph 
+   1. with lazy continuation looking like an item
 1. item 3
 .
 <ol start="4">
@@ -2568,33 +2568,33 @@ start is enabled
   </li>
 </ol>
 .
-Document[0, 117]
-  OrderedList[0, 117] isLoose start:4 delimiter:'.'
+Document[0, 113]
+  OrderedList[0, 113] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[10, 107] open:[10, 12, "3."] isLoose
-      Paragraph[13, 36]
+    OrderedListItem[10, 103] open:[10, 12, "3."] isLoose
+      Paragraph[13, 35]
         Text[13, 19] chars:[13, 19, "item 2"]
         SoftLineBreak[19, 20]
-        Text[24, 35] chars:[24, 35, "2. it … m 2.1"]
-      Paragraph[45, 107]
-        Text[45, 54] chars:[45, 54, "paragraph"]
-        SoftLineBreak[55, 56]
-        Text[60, 106] chars:[60, 106, "1. wi …  item"]
-    OrderedListItem[107, 117] open:[107, 109, "1."] isLoose
-      Paragraph[110, 117]
-        Text[110, 116] chars:[110, 116, "item 3"]
+        Text[23, 34] chars:[23, 34, "2. it … m 2.1"]
+      Paragraph[42, 103]
+        Text[42, 51] chars:[42, 51, "paragraph"]
+        SoftLineBreak[52, 53]
+        Text[56, 102] chars:[56, 102, "1. wi …  item"]
+    OrderedListItem[103, 113] open:[103, 105, "1."] isLoose
+      Paragraph[106, 113]
+        Text[106, 112] chars:[106, 112, "item 3"]
 ````````````````````````````````
 
 
 
 nested, no bullet para break, no bullet item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 14) options(list-fixed-indent, bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 - item 2
-    - item 2.1
+  - item 2.1
 - item 3
 .
 <ul>
@@ -2604,29 +2604,29 @@ nested, no bullet para break, no bullet item paragraph break
   - item 3</li>
 </ul>
 .
-Document[0, 42]
-  BulletList[0, 42] isTight
-    BulletListItem[0, 42] open:[0, 1, "-"] isTight
-      Paragraph[2, 42]
+Document[0, 40]
+  BulletList[0, 40] isTight
+    BulletListItem[0, 40] open:[0, 1, "-"] isTight
+      Paragraph[2, 40]
         Text[2, 8] chars:[2, 8, "item 1"]
         SoftLineBreak[8, 9]
         Text[9, 17] chars:[9, 17, "- item 2"]
         SoftLineBreak[17, 18]
-        Text[22, 32] chars:[22, 32, "- item 2.1"]
-        SoftLineBreak[32, 33]
-        Text[33, 41] chars:[33, 41, "- item 3"]
+        Text[20, 30] chars:[20, 30, "- item 2.1"]
+        SoftLineBreak[30, 31]
+        Text[31, 39] chars:[31, 39, "- item 3"]
 ````````````````````````````````
 
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
-```````````````````````````````` example(List - Marker Options: 15) options(list-fixed-indent, bullet-no-para-break, bullet-no-item-break)
+```````````````````````````````` example(List - Marker Options: 15) options(bullet-no-para-break, bullet-no-item-break)
 - item 1
 
 - item 2
 
-    - item 2.1
+  - item 2.1
     
 - item 3
 .
@@ -2645,21 +2645,21 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   </li>
 </ul>
 .
-Document[0, 49]
-  BulletList[0, 49] isLoose
+Document[0, 47]
+  BulletList[0, 47] isLoose
     BulletListItem[0, 9] open:[0, 1, "-"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[10, 35] open:[10, 11, "-"] isLoose
+    BulletListItem[10, 33] open:[10, 11, "-"] isLoose
       Paragraph[12, 19]
         Text[12, 18] chars:[12, 18, "item 2"]
-      BulletList[24, 35] isTight
-        BulletListItem[24, 35] open:[24, 25, "-"] isTight
-          Paragraph[26, 35]
-            Text[26, 34] chars:[26, 34, "item 2.1"]
-    BulletListItem[40, 49] open:[40, 41, "-"] isLoose
-      Paragraph[42, 49]
-        Text[42, 48] chars:[42, 48, "item 3"]
+      BulletList[22, 33] isTight
+        BulletListItem[22, 33] open:[22, 23, "-"] isTight
+          Paragraph[24, 33]
+            Text[24, 32] chars:[24, 32, "item 2.1"]
+    BulletListItem[38, 47] open:[38, 39, "-"] isLoose
+      Paragraph[40, 47]
+        Text[40, 46] chars:[40, 46, "item 3"]
 ````````````````````````````````
 
 

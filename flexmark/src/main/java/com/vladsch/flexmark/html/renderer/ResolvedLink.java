@@ -1,9 +1,9 @@
 package com.vladsch.flexmark.html.renderer;
 
 public class ResolvedLink {
-    final private LinkType myLinkType;
-    final private String myUrl;
-    final private LinkStatus myStatus;
+    private final LinkType myLinkType;
+    private final String myUrl;
+    private final LinkStatus myStatus;
 
     public ResolvedLink(LinkType linkType, String url) {
         this(linkType, url, LinkStatus.UNKNOWN);

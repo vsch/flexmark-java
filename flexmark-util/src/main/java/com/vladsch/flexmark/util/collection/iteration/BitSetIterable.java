@@ -3,8 +3,8 @@ package com.vladsch.flexmark.util.collection.iteration;
 import java.util.BitSet;
 
 public class BitSetIterable implements ReversibleIterable<Integer> {
-    final private BitSet myBitSet;
-    final private boolean myIsReversed;
+    private final BitSet myBitSet;
+    private final boolean myIsReversed;
 
     public BitSetIterable(BitSet bitSet) {
         this(bitSet, false);

@@ -21,12 +21,12 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // final public static DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new); 
-    // final public static DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates 
+    // public static final DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new);
+    // public static final DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
 
-    final public static DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
-    final public static DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
-    final public static DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
+    public static final DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
+    public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
+    public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
 
     private TocExtension() {
     }

@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
-import com.vladsch.flexmark.internal.ListOptions;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -18,7 +18,7 @@ import java.util.Set;
 import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
 
 public class JiraConverterNodeRenderer implements NodeRenderer
-        // , PhasedNodeRenderer 
+        // , PhasedNodeRenderer
 {
     private static String fromChars = " +/<>";
     private static String toChars = "-----";

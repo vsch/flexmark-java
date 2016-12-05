@@ -23,6 +23,17 @@ public abstract class Node {
         this.chars = chars;
     }
 
+    public Node getAncestorOfType(Class... classes) {
+        Node parent = getParent();
+        while (parent != null) {
+            for (Class nodeType : classes) {
+                if (nodeType.isInstance(parent)) return parent;
+            }
+            parent = parent.getParent();
+        }
+        return null;
+    }
+
     public static int getNodeOfTypeIndex(Node node, Class... classes) {
         int i = 0;
         for (Class nodeType : classes) {

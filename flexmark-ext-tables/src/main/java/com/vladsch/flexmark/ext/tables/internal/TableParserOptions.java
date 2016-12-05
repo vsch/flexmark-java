@@ -4,14 +4,14 @@ import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 class TableParserOptions {
-    final public int maxHeaderRows;
-    final public int minHeaderRows;
-    final public boolean appendMissingColumns;
-    final public boolean discardExtraColumns;
-    final public boolean columnSpans;
-    final public boolean trimCellWhitespace;
-    final public boolean headerSeparatorColumnMatch;
-    final public String className;
+    public final int maxHeaderRows;
+    public final int minHeaderRows;
+    public final boolean appendMissingColumns;
+    public final boolean discardExtraColumns;
+    public final boolean columnSpans;
+    public final boolean trimCellWhitespace;
+    public final boolean headerSeparatorColumnMatch;
+    public final String className;
 
     TableParserOptions(DataHolder options) {
         this.maxHeaderRows = TablesExtension.MAX_HEADER_ROWS.getFrom(options);

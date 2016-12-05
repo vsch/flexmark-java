@@ -12,8 +12,8 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     final static boolean WANT_EXCLAMATION_PREFIX = false;
     final static int BRACKET_NESTING_LEVEL = 0;
-    
-    final private FootnoteRepository footnoteRepository;
+
+    private final FootnoteRepository footnoteRepository;
 
     public FootnoteLinkRefProcessor(Document document) {
         this.footnoteRepository = document.get(FootnoteExtension.FOOTNOTES);

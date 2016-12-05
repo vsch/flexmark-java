@@ -12,6 +12,6 @@ public interface HtmlInnerVisitor {
         };
     }
 
-    void visit(HtmlInnerBlock node);
-    void visit(HtmlInnerBlockComment node);
+    void visit(final HtmlInnerBlock node);
+    void visit(final HtmlInnerBlockComment node);
 }

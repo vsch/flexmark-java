@@ -16,8 +16,8 @@ import java.util.regex.Pattern;
 public class HtmlBlockParser extends AbstractBlockParser {
 
     private static class Patterns {
-        final public int COMMENT_PATTERN_INDEX;
-        final public Pattern[][] BLOCK_PATTERNS;
+        public final int COMMENT_PATTERN_INDEX;
+        public final Pattern[][] BLOCK_PATTERNS;
 
         public Patterns(Parsing parsing) {
             this.COMMENT_PATTERN_INDEX = 2;
@@ -76,7 +76,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     private boolean finished = false;
     private BlockContent content = new BlockContent();
-    final private boolean parseInnerHtmlComments;
+    private final boolean parseInnerHtmlComments;
 
     private HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment) {
         this.closingPattern = closingPattern;

@@ -26,5 +26,5 @@ public interface AsideVisitor {
     }
 
     // void visit(ExtAside node);
-    void visit(AsideBlock node);
+    void visit(final AsideBlock node);
 }

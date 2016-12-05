@@ -31,12 +31,12 @@ public interface SpecExampleVisitor {
         };
     }
 
-    void visit(SpecExampleAst node);
-    void visit(SpecExampleBlock node);
-    void visit(SpecExampleHtml node);
-    void visit(SpecExampleOption node);
-    void visit(SpecExampleOptionSeparator node);
-    void visit(SpecExampleOptionsList node);
-    void visit(SpecExampleSeparator node);
-    void visit(SpecExampleSource node);
+    void visit(final SpecExampleAst node);
+    void visit(final SpecExampleBlock node);
+    void visit(final SpecExampleHtml node);
+    void visit(final SpecExampleOption node);
+    void visit(final SpecExampleOptionSeparator node);
+    void visit(final SpecExampleOptionsList node);
+    void visit(final SpecExampleSeparator node);
+    void visit(final SpecExampleSource node);
 }

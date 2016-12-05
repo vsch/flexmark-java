@@ -24,5 +24,5 @@ public interface EmojiVisitor {
         };
     }
 
-    void visit(Emoji node);
+    void visit(final Emoji node);
 }

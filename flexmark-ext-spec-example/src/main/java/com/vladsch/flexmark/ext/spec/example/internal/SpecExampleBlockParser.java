@@ -37,7 +37,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
     private final SpecExampleBlock block = new SpecExampleBlock();
     private BlockContent content = new BlockContent();
-    final private SpecExampleOptions myOptions;
+    private final SpecExampleOptions myOptions;
 
     public SpecExampleBlockParser(DataHolder options) {
         myOptions = new SpecExampleOptions(options);
@@ -318,7 +318,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
-        final private SpecExampleOptions myOptions;
+        private final SpecExampleOptions myOptions;
 
         private BlockFactory(DataHolder options) {
             super(options);

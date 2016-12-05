@@ -60,7 +60,7 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
-    final public void finalizeClosedBlock() {
+    public final void finalizeClosedBlock() {
         mutableData = null;
         isClosed = true;
     }

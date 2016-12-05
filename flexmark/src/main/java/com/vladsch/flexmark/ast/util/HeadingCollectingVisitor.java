@@ -20,15 +20,15 @@ import com.vladsch.flexmark.ast.*;
 import java.util.ArrayList;
 
 public class HeadingCollectingVisitor {
-    final private ArrayList<Heading> headings = new ArrayList<>();
-    final private NodeVisitor myVisitor;
+    private final ArrayList<Heading> headings = new ArrayList<>();
+    private final NodeVisitor myVisitor;
 
     public HeadingCollectingVisitor() {
         myVisitor = new BlockNodeVisitor(
                 new VisitHandler<>(Heading.class, headings::add)
         );
     }
-    
+
     public void collect(Node node) {
         myVisitor.visit(node);
     }

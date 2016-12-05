@@ -10,5 +10,5 @@ public interface JekyllFrontMatterVisitor {
         };
     }
 
-    void visit(JekyllFrontMatterBlock node);
+    void visit(final JekyllFrontMatterBlock node);
 }

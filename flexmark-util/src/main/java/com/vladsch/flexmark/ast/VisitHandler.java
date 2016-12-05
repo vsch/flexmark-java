@@ -21,7 +21,7 @@ public class VisitHandler<N extends Node> extends NodeAdaptingVisitHandler<N, Vi
     }
 
     @Override
-    public void visit(Node node) {
+    public void visit(final Node node) {
         //noinspection unchecked
         myAdapter.visit((N) node);
     }

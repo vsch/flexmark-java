@@ -3,7 +3,7 @@ package com.vladsch.flexmark.util.mappers;
 import java.util.Locale;
 
 public class UpperCaseMapper implements CharMapper {
-    final public static UpperCaseMapper INSTANCE = new UpperCaseMapper();
+    public static final UpperCaseMapper INSTANCE = new UpperCaseMapper();
 
     Locale locale = Locale.ROOT;
 

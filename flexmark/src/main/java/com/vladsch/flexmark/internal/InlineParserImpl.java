@@ -66,11 +66,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     protected Document document;
 
     static class InlineParserOptions {
-        final public boolean matchLookaheadFirst;
-        //final public boolean parseInlineAnchorLinks;
-        final public boolean parseMultiLineImageUrls;
-        //final public boolean parseGitHubIssueMarker;
-        final public boolean hardLineBreakLimit;
+        public final boolean matchLookaheadFirst;
+        //public final boolean parseInlineAnchorLinks;
+        public final boolean parseMultiLineImageUrls;
+        //public final boolean parseGitHubIssueMarker;
+        public final boolean hardLineBreakLimit;
 
         public InlineParserOptions(DataHolder options) {
             matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
@@ -81,7 +81,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    final protected InlineParserOptions options;
+    protected final InlineParserOptions options;
 
     @Override
     public void initializeDocument(Parsing parsing, Document document) {
@@ -817,9 +817,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     static class ReferenceProcessorMatch {
-        final public LinkRefProcessor processor;
-        final public BasedSequence nodeChars;
-        final public boolean wantExclamation;
+        public final LinkRefProcessor processor;
+        public final BasedSequence nodeChars;
+        public final boolean wantExclamation;
 
         public ReferenceProcessorMatch(LinkRefProcessor processor, boolean wantExclamation, BasedSequence nodeChars) {
             this.processor = processor;

@@ -32,7 +32,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
         this.reversed = reversed;
     }
 
-    
+
     @Override
     public ReversiblePeekingIterator<Node> iterator() {
         return new NodeIterator(firstNode, lastNode, reversed);
@@ -61,7 +61,7 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
         return new NodeIterator(firstNode, lastNode, !reversed);
     }
 
-    public final static ReversiblePeekingIterable<Node> EMPTY = new ReversiblePeekingIterable<Node>() {
+    public static final ReversiblePeekingIterable<Node> EMPTY = new ReversiblePeekingIterable<Node>() {
         @Override
         public ReversiblePeekingIterator<Node> iterator() {
             return NodeIterator.EMPTY;
