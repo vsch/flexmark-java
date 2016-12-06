@@ -636,7 +636,7 @@ Document[0, 385]
       BulletListItem[246, 255] open:[246, 247, "-"] isTight
         Paragraph[248, 255]
           Text[248, 254] chars:[248, 254, "item 1"]
-      BulletListItem[259, 268] open:[259, 260, "-"] isTight
+      BulletListItem[259, 268] open:[259, 260, "-"] isTight hadBlankLineAfter
         Paragraph[261, 268]
           Text[261, 267] chars:[261, 267, "item 2"]
     FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]
@@ -727,7 +727,7 @@ Document[0, 385]
       BulletListItem[246, 255] open:[246, 247, "-"] isTight
         Paragraph[248, 255]
           Text[248, 254] chars:[248, 254, "item 1"]
-      BulletListItem[259, 268] open:[259, 260, "-"] isTight
+      BulletListItem[259, 268] open:[259, 260, "-"] isTight hadBlankLineAfter
         Paragraph[261, 268]
           Text[261, 267] chars:[261, 267, "item 2"]
     FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]

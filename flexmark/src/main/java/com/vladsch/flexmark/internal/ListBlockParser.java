@@ -5,13 +5,11 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
 import com.vladsch.flexmark.parser.block.*;
-import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -382,26 +380,24 @@ public class ListBlockParser extends AbstractBlockParser {
                 int currentIndent = state.getIndent();
 
                 if (currentIndent >= myOptions.codeIndent) {
-                    // code block
                     return BlockStart.none();
                 }
-            } else if (emulationFamily == MULTI_MARKDOWN) {
-                // - MultiMarkdown: Pandoc, MultiMarkdown, Pegdown
+            } else if (emulationFamily == FIXED_INDENT) {
+                // - FixedIndent: Pandoc, MultiMarkdown, Pegdown
                 //     - Definitions/Defaults:
                 //         - `ITEM_INDENT` = 4
                 //         - `CODE_INDENT` = 8
-                //         - `current indent` = `line indent`
+                //         - `current indent` = line indent
                 //     - Start List Conditions:
                 //         - `current indent` < `ITEM_INDENT`: new list with new item
                 //     - Continuation Conditions:
                 //          - `current indent` >= `CODE_INDENT`: indented code
                 //          - `current indent` >= `ITEM_INDENT`: sub-item
-                //          - `current indent` < `ITEM_INDENT`: list item
+                //          - otherwise: list item
 
                 int currentIndent = state.getIndent();
 
                 if (currentIndent >= myOptions.codeIndent) {
-                    // must be a code block, and we should be outside a list or it would have been handled
                     return BlockStart.none();
                 }
             } else if (emulationFamily == KRAMDOWN) {
@@ -424,7 +420,6 @@ public class ListBlockParser extends AbstractBlockParser {
                 int listContentIndent = 0;
 
                 if (currentIndent >= listContentIndent + myOptions.itemIndent) {
-                    // must be a code block, and we should be outside a list or it would have been handled
                     return BlockStart.none();
                 }
             } else if (emulationFamily == MARKDOWN) {
@@ -444,7 +439,6 @@ public class ListBlockParser extends AbstractBlockParser {
 
                 int currentIndent = state.getIndent();
                 if (currentIndent >= myOptions.itemIndent) {
-                    // must be a code block, and we should be outside a list or it would have been handled
                     return BlockStart.none();
                 }
             }
@@ -452,6 +446,8 @@ public class ListBlockParser extends AbstractBlockParser {
             ListData listData = parseListMarker(newItemCodeIndent, state);
 
             if (listData != null) {
+                int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
+
                 boolean inParagraph = matched.isParagraphParser();
                 boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
 
@@ -460,7 +456,6 @@ public class ListBlockParser extends AbstractBlockParser {
                 }
 
                 ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
-                int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
 
                 // prepend new list block
                 ListBlockParser listBlockParser = new ListBlockParser(myOptions, listData, listItemParser);

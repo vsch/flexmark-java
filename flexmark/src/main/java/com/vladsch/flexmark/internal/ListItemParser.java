@@ -6,8 +6,6 @@ import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
 import com.vladsch.flexmark.parser.block.*;
 
-import java.util.List;
-
 import static com.vladsch.flexmark.parser.ParserEmulationFamily.*;
 
 public class ListItemParser extends AbstractBlockParser {
@@ -161,27 +159,28 @@ public class ListItemParser extends AbstractBlockParser {
                     }
                 }
             }
-        } else if (emulationFamily == MULTI_MARKDOWN) {
-            // - MultiMarkdown: Pandoc, MultiMarkdown, Pegdown
+        } else if (emulationFamily == FIXED_INDENT) {
+            // - FixedIndent: Pandoc, MultiMarkdown, Pegdown
             //     - Definitions/Defaults:
             //         - `ITEM_INDENT` = 4
             //         - `CODE_INDENT` = 8
-            //         - `current indent` = `line column` - `first parent list column` + `first parent list
-            //           indent` - (`list nesting` - 1) * `ITEM_INDENT`
+            //         - `current indent` = line indent
             //     - Start List Conditions:
             //         - `current indent` < `ITEM_INDENT`: new list with new item
             //     - Continuation Conditions:
             //          - `current indent` >= `CODE_INDENT`: indented code
             //          - `current indent` >= `ITEM_INDENT`: sub-item
-            //          - `current indent` < `ITEM_INDENT`: list item
+            //          - otherwise: list item
 
             int currentIndent = state.getIndent();
-            int newColumn = state.getColumn() + state.getIndent();
+
+            // advance by 4
+            int newColumn = state.getColumn() + 4;
 
             if (currentIndent >= myOptions.codeIndent) {
                 // our indented code child
                 listBlockParser.setItemHandledLine(state.getLine());
-                return continueAtColumn(state.getColumn() + state.getIndent());
+                return continueAtColumn(newColumn);
             } else {
                 ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
 
@@ -196,11 +195,11 @@ public class ListItemParser extends AbstractBlockParser {
                                 || !myOptions.canStartSubList(listData.listBlock, listData.isEmpty))) {
                             // just a lazy continuation of us
                             listBlockParser.setItemHandledLineSkipActive(state.getLine());
-                            return continueAtColumn(newColumn);
+                            return continueAtColumn(state.getColumn() + currentIndent);
                         } else {
                             // our sub list item
                             listBlockParser.setItemHandledNewListLine(state.getLine());
-                            return continueAtColumn(state.getColumn() + state.getIndent());
+                            return continueAtColumn(newColumn);
                         }
                     } else {
                         // our child item, other than a list item, if we are empty then no such thing
@@ -217,7 +216,7 @@ public class ListItemParser extends AbstractBlockParser {
                         // our text or lazy continuation
                         listBlockParser.setItemHandledLine(state.getLine());
                         return continueAtColumn(state.getColumn() + currentIndent);
-                    } else if (currentIndent >= myListData.markerIndent) {
+                    } else {
                         // here have to see if the item is really a mismatch and we sub-list mismatches
                         if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                             // we keep it as our sub-item

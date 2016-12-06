@@ -470,7 +470,7 @@ in item
 .
 Document[0, 565]
   BulletList[0, 565] isLoose
-    BulletListItem[0, 565] open:[0, 1, "-"] isLoose
+    BulletListItem[0, 565] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 44]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]

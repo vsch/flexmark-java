@@ -50,24 +50,23 @@ Family types:
         - `current indent` = `line indent`
     - Start List Conditions:
         - `item indent` < `CODE_INDENT`: new list with new item
-        - `item content indent` >= `CODE_INDENT`: empty item, indented code
+        - `item content indent` >= `CODE_INDENT`: empty item + indented code
     - Continuation Conditions:
         - `current indent` >= `list last content indent` + `CODE_INDENT`: indented code
         - `current indent` >= `list last content indent`: sub-item
         - `current indent` >= `list indent`: list item
 
-- MultiMarkdown: Pandoc, Pegdown, all fixed indent type processors 
+- FixedIndent: Pandoc, MultiMarkdown, Pegdown
     - Definitions/Defaults:
         - `ITEM_INDENT` = 4
-        - `CODE_INDENT` = 8 
-        - `current indent` = `line column` - `first parent list column` + `first parent list
-          indent` - (`list nesting` - 1) * `ITEM_INDENT`
+        - `CODE_INDENT` = 8
+        - `current indent` = line indent
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
          - `current indent` >= `CODE_INDENT`: indented code
          - `current indent` >= `ITEM_INDENT`: sub-item
-         - `current indent` < `ITEM_INDENT`: list item
+         - otherwise: list item
 
 - Kramdown:  
     - Definitions/Defaults:
@@ -101,25 +100,25 @@ Family types:
 Minor differences, are addressed with options applied on top of the `family` list behavior to
 tweak parser emulation:
 
-- [x] bullet item can interrupt a paragraph {C} {GFM} {GFC}
-- [x] bullet item can interrupt a paragraph of a list item 
-- [x] empty bullet item can interrupt a paragraph
+- [ ] bullet item can interrupt a paragraph
+- [ ] bullet item can interrupt a paragraph of a list item 
+- [ ] empty bullet item can interrupt a paragraph
 - [ ] empty bullet item can interrupt a paragraph of a list item
-- [x] ordered item can interrupt a paragraph
-- [x] ordered item can interrupt a paragraph of a list item 
-- [x] ordered non 1 item can interrupt a paragraph
-- [x] ordered non 1 item can interrupt a paragraph of a list item 
+- [ ] ordered item can interrupt a paragraph
+- [ ] ordered item can interrupt a paragraph of a list item 
+- [ ] ordered non 1 item can interrupt a paragraph
+- [ ] ordered non 1 item can interrupt a paragraph of a list item 
 - [ ] empty ordered item can interrupt a paragraph
 - [ ] empty ordered item can interrupt a paragraph of a list item 
 - [ ] empty ordered non 1 item can interrupt a paragraph
 - [ ] empty ordered non 1 item can interrupt a paragraph of a list item 
-- [x] mismatch item type continue same list type
-- [x] mismatch item type start new list
-- [x] mismatch item type start a sub-list
-- [x] bullet mismatch starts a new list
-- [x] ordered items only with `.` after digit, otherwise `)` is also allowed
-- [x] first ordered item prefix sets start number of list 
-- [x] item is loose if it has trailing blank line in it or its last child
-- [ ] item is loose if previous item has trailing blank line in it or its last child
-- [x] item is loose if it or previous item is loose 
-- [x] all items are loose if any in the list are loose
+- [ ] mismatch item type continue same list type
+- [ ] mismatch item type start new list
+- [ ] mismatch item type start a sub-list
+- [ ] bullet mismatch starts a new list
+- [ ] ordered items only with `.` after digit, otherwise `)` is also allowed
+- [ ] first ordered item prefix sets start number of list 
+- [ ] item is loose if it has trailing blank line in it or its last child
+- [ ] item is loose if it contains a blank line after its item text
+- [ ] item is loose if it or previous item is loose 
+- [ ] all items are loose if any in the list are loose

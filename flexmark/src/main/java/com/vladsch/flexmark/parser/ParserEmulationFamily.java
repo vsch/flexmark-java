@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 public enum ParserEmulationFamily {
     COMMONMARK(0),
-    MULTI_MARKDOWN(1),
+    FIXED_INDENT(1),
     KRAMDOWN(2),
     MARKDOWN(3);
 
@@ -15,7 +15,7 @@ public enum ParserEmulationFamily {
     }
 
     public ListOptions getListOptions() {
-        if (this == MULTI_MARKDOWN) {
+        if (this == FIXED_INDENT) {
             return new ListOptions.Mutable()
                     .setParserEmulationFamily(this)
                     .setAutoLoose(true)

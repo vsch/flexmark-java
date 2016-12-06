@@ -419,7 +419,7 @@ lazy continuation
 .
 Document[0, 141]
   OrderedList[0, 140] isTight delimiter:'.'
-    OrderedListItem[0, 111] open:[0, 2, "1."] isLoose
+    OrderedListItem[0, 111] open:[0, 2, "1."] isLoose hadBlankLineAfter
       Paragraph[3, 28]
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
@@ -436,14 +436,14 @@ Document[0, 141]
           Paragraph[76, 87]
             Text[76, 86] chars:[76, 86, "sub-item 2"]
           OrderedList[93, 111] isTight delimiter:'.'
-            OrderedListItem[93, 111] open:[93, 95, "1."] isTight
+            OrderedListItem[93, 111] open:[93, 95, "1."] isTight hadBlankLineAfter
               Paragraph[96, 111]
                 Text[96, 110] chars:[96, 110, "sub-s … tem 1"]
-    OrderedListItem[112, 140] open:[112, 114, "1."] isTight
+    OrderedListItem[112, 140] open:[112, 114, "1."] isTight hadBlankLineAfter
       Paragraph[115, 122]
         Text[115, 121] chars:[115, 121, "item 2"]
       OrderedList[126, 140] isTight delimiter:'.'
-        OrderedListItem[126, 140] open:[126, 128, "1."] isTight
+        OrderedListItem[126, 140] open:[126, 128, "1."] isTight hadBlankLineAfter
           Paragraph[129, 140]
             Text[129, 139] chars:[129, 139, "sub-item 1"]
 ````````````````````````````````
@@ -534,7 +534,7 @@ Document[0, 113]
     BulletListItem[81, 90] open:[81, 82, "*"] isTight
       Paragraph[83, 90]
         Text[83, 89] chars:[83, 89, "item 2"]
-    BulletListItem[90, 99] open:[90, 91, "*"] isTight
+    BulletListItem[90, 99] open:[90, 91, "*"] isTight hadBlankLineAfter
       Paragraph[92, 99]
         Text[92, 98] chars:[92, 98, "item 3"]
   Paragraph[100, 112]

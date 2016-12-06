@@ -389,45 +389,45 @@ public class ListOptions implements MutableDataSetter {
         }
 
         // @formatter:off
-        boolean isBulletItemInterruptsParagraph() { return bulletItemInterruptsParagraph; }
-        boolean isOrderedItemInterruptsParagraph() { return orderedItemInterruptsParagraph; }
-        boolean isOrderedNonOneItemInterruptsParagraph() { return orderedNonOneItemInterruptsParagraph; }
+        public boolean isBulletItemInterruptsParagraph() { return bulletItemInterruptsParagraph; }
+        public boolean isOrderedItemInterruptsParagraph() { return orderedItemInterruptsParagraph; }
+        public boolean isOrderedNonOneItemInterruptsParagraph() { return orderedNonOneItemInterruptsParagraph; }
 
-        boolean isEmptyBulletItemInterruptsParagraph() { return emptyBulletItemInterruptsParagraph; }
-        boolean isEmptyOrderedItemInterruptsParagraph() { return emptyOrderedItemInterruptsParagraph; }
-        boolean isEmptyOrderedNonOneItemInterruptsParagraph() { return emptyOrderedNonOneItemInterruptsParagraph; }
+        public boolean isEmptyBulletItemInterruptsParagraph() { return emptyBulletItemInterruptsParagraph; }
+        public boolean isEmptyOrderedItemInterruptsParagraph() { return emptyOrderedItemInterruptsParagraph; }
+        public boolean isEmptyOrderedNonOneItemInterruptsParagraph() { return emptyOrderedNonOneItemInterruptsParagraph; }
 
-        boolean isBulletItemInterruptsItemParagraph() { return bulletItemInterruptsItemParagraph; }
-        boolean isOrderedItemInterruptsItemParagraph() { return orderedItemInterruptsItemParagraph; }
-        boolean isOrderedNonOneItemInterruptsItemParagraph() { return orderedNonOneItemInterruptsItemParagraph; }
+        public boolean isBulletItemInterruptsItemParagraph() { return bulletItemInterruptsItemParagraph; }
+        public boolean isOrderedItemInterruptsItemParagraph() { return orderedItemInterruptsItemParagraph; }
+        public boolean isOrderedNonOneItemInterruptsItemParagraph() { return orderedNonOneItemInterruptsItemParagraph; }
 
-        boolean isEmptyBulletItemInterruptsItemParagraph() { return emptyBulletItemInterruptsItemParagraph; }
-        boolean isEmptyOrderedItemInterruptsItemParagraph() { return emptyOrderedItemInterruptsItemParagraph; }
-        boolean isEmptyOrderedNonOneItemInterruptsItemParagraph() { return emptyOrderedNonOneItemInterruptsItemParagraph; }
+        public boolean isEmptyBulletItemInterruptsItemParagraph() { return emptyBulletItemInterruptsItemParagraph; }
+        public boolean isEmptyOrderedItemInterruptsItemParagraph() { return emptyOrderedItemInterruptsItemParagraph; }
+        public boolean isEmptyOrderedNonOneItemInterruptsItemParagraph() { return emptyOrderedNonOneItemInterruptsItemParagraph; }
 
-        boolean isEmptyBulletSubItemInterruptsItemParagraph() { return emptyBulletSubItemInterruptsItemParagraph; }
-        boolean isEmptyOrderedSubItemInterruptsItemParagraph() { return emptyOrderedSubItemInterruptsItemParagraph; }
-        boolean isEmptyOrderedNonOneSubItemInterruptsItemParagraph() { return emptyOrderedNonOneSubItemInterruptsItemParagraph; }
+        public boolean isEmptyBulletSubItemInterruptsItemParagraph() { return emptyBulletSubItemInterruptsItemParagraph; }
+        public boolean isEmptyOrderedSubItemInterruptsItemParagraph() { return emptyOrderedSubItemInterruptsItemParagraph; }
+        public boolean isEmptyOrderedNonOneSubItemInterruptsItemParagraph() { return emptyOrderedNonOneSubItemInterruptsItemParagraph; }
 
-        MutableItemInterrupt setBulletItemInterruptsParagraph(boolean bulletItemInterruptsParagraph) { this.bulletItemInterruptsParagraph = bulletItemInterruptsParagraph; return this; }
-        MutableItemInterrupt setOrderedItemInterruptsParagraph(boolean orderedItemInterruptsParagraph) { this.orderedItemInterruptsParagraph = orderedItemInterruptsParagraph; return this; }
-        MutableItemInterrupt setOrderedNonOneItemInterruptsParagraph(boolean orderedNonOneItemInterruptsParagraph) { this.orderedNonOneItemInterruptsParagraph = orderedNonOneItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setBulletItemInterruptsParagraph(boolean bulletItemInterruptsParagraph) { this.bulletItemInterruptsParagraph = bulletItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setOrderedItemInterruptsParagraph(boolean orderedItemInterruptsParagraph) { this.orderedItemInterruptsParagraph = orderedItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setOrderedNonOneItemInterruptsParagraph(boolean orderedNonOneItemInterruptsParagraph) { this.orderedNonOneItemInterruptsParagraph = orderedNonOneItemInterruptsParagraph; return this; }
 
-        MutableItemInterrupt setEmptyBulletItemInterruptsParagraph(boolean emptyBulletItemInterruptsParagraph) { this.emptyBulletItemInterruptsParagraph = emptyBulletItemInterruptsParagraph; return this; }
-        MutableItemInterrupt setEmptyOrderedItemInterruptsParagraph(boolean emptyOrderedItemInterruptsParagraph) { this.emptyOrderedItemInterruptsParagraph = emptyOrderedItemInterruptsParagraph; return this; }
-        MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsParagraph(boolean emptyOrderedNonOneItemInterruptsParagraph) { this.emptyOrderedNonOneItemInterruptsParagraph = emptyOrderedNonOneItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setEmptyBulletItemInterruptsParagraph(boolean emptyBulletItemInterruptsParagraph) { this.emptyBulletItemInterruptsParagraph = emptyBulletItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setEmptyOrderedItemInterruptsParagraph(boolean emptyOrderedItemInterruptsParagraph) { this.emptyOrderedItemInterruptsParagraph = emptyOrderedItemInterruptsParagraph; return this; }
+        public MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsParagraph(boolean emptyOrderedNonOneItemInterruptsParagraph) { this.emptyOrderedNonOneItemInterruptsParagraph = emptyOrderedNonOneItemInterruptsParagraph; return this; }
 
-        MutableItemInterrupt setBulletItemInterruptsItemParagraph(boolean bulletItemInterruptsItemParagraph) { this.bulletItemInterruptsItemParagraph = bulletItemInterruptsItemParagraph; return this; }
-        MutableItemInterrupt setOrderedItemInterruptsItemParagraph(boolean orderedItemInterruptsItemParagraph) { this.orderedItemInterruptsItemParagraph = orderedItemInterruptsItemParagraph; return this; }
-        MutableItemInterrupt setOrderedNonOneItemInterruptsItemParagraph(boolean orderedNonOneItemInterruptsItemParagraph) { this.orderedNonOneItemInterruptsItemParagraph = orderedNonOneItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setBulletItemInterruptsItemParagraph(boolean bulletItemInterruptsItemParagraph) { this.bulletItemInterruptsItemParagraph = bulletItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setOrderedItemInterruptsItemParagraph(boolean orderedItemInterruptsItemParagraph) { this.orderedItemInterruptsItemParagraph = orderedItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setOrderedNonOneItemInterruptsItemParagraph(boolean orderedNonOneItemInterruptsItemParagraph) { this.orderedNonOneItemInterruptsItemParagraph = orderedNonOneItemInterruptsItemParagraph; return this; }
 
-        MutableItemInterrupt setEmptyBulletItemInterruptsItemParagraph(boolean emptyBulletItemInterruptsItemParagraph) { this.emptyBulletItemInterruptsItemParagraph = emptyBulletItemInterruptsItemParagraph; return this; }
-        MutableItemInterrupt setEmptyOrderedItemInterruptsItemParagraph(boolean emptyOrderedItemInterruptsItemParagraph) { this.emptyOrderedItemInterruptsItemParagraph = emptyOrderedItemInterruptsItemParagraph; return this; }
-        MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsItemParagraph(boolean emptyOrderedNonOneItemInterruptsItemParagraph) { this.emptyOrderedNonOneItemInterruptsItemParagraph = emptyOrderedNonOneItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setEmptyBulletItemInterruptsItemParagraph(boolean emptyBulletItemInterruptsItemParagraph) { this.emptyBulletItemInterruptsItemParagraph = emptyBulletItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setEmptyOrderedItemInterruptsItemParagraph(boolean emptyOrderedItemInterruptsItemParagraph) { this.emptyOrderedItemInterruptsItemParagraph = emptyOrderedItemInterruptsItemParagraph; return this; }
+        public MutableItemInterrupt setEmptyOrderedNonOneItemInterruptsItemParagraph(boolean emptyOrderedNonOneItemInterruptsItemParagraph) { this.emptyOrderedNonOneItemInterruptsItemParagraph = emptyOrderedNonOneItemInterruptsItemParagraph; return this; }
 
-        MutableItemInterrupt setEmptyBulletSubItemInterruptsItemParagraph(boolean emptyBulletItemStartsSubList) { this.emptyBulletSubItemInterruptsItemParagraph = emptyBulletItemStartsSubList; return this; }
-        MutableItemInterrupt setEmptyOrderedSubItemInterruptsItemParagraph(boolean emptyOrderedItemStartsSubList) { this.emptyOrderedSubItemInterruptsItemParagraph = emptyOrderedItemStartsSubList; return this; }
-        MutableItemInterrupt setEmptyOrderedNonOneSubItemInterruptsItemParagraph(boolean emptyOrderedNonOneItemStartsSubList) { this.emptyOrderedNonOneSubItemInterruptsItemParagraph = emptyOrderedNonOneItemStartsSubList; return this; }
+        public MutableItemInterrupt setEmptyBulletSubItemInterruptsItemParagraph(boolean emptyBulletItemStartsSubList) { this.emptyBulletSubItemInterruptsItemParagraph = emptyBulletItemStartsSubList; return this; }
+        public MutableItemInterrupt setEmptyOrderedSubItemInterruptsItemParagraph(boolean emptyOrderedItemStartsSubList) { this.emptyOrderedSubItemInterruptsItemParagraph = emptyOrderedItemStartsSubList; return this; }
+        public MutableItemInterrupt setEmptyOrderedNonOneSubItemInterruptsItemParagraph(boolean emptyOrderedNonOneItemStartsSubList) { this.emptyOrderedNonOneSubItemInterruptsItemParagraph = emptyOrderedNonOneItemStartsSubList; return this; }
 
         // @formatter:on
     }
