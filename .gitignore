@@ -9,3 +9,4 @@ out/
 # Maven
 target/
 /.idea/workspace.xml
+/flexmark-java.wiki
