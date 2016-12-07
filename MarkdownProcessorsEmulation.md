@@ -26,7 +26,7 @@ The following definitions are used:
 - `line column`: would be index of first non-blank if tabs were expanded to 4 space boundaries
 - `item indent`: `line indent` of first line of item (one with list item marker)
 - `item column`: `line column` of first line of item (one with list item marker)
-- `item content offset`: item prefix length + # of trailing white spaces following the item prefix 
+- `item content offset`: item prefix length + # of trailing white spaces following the item prefix
 - `item content indent`: `item indent` + `item content offset`
 - `item content column`: `item column` + `item content offset`
 - `list indent`: first item's `item indent`
@@ -46,8 +46,8 @@ Family types:
 - CommonMark: version 0.27 of the spec, all common mark parsers
     - Definitions/Defaults:
         - `ITEM_INDENT` = 4 <!-- not used -->
-        - `CODE_INDENT` = 4 
-        - `NEW_ITEM_CODE_INDENT` = 4 
+        - `CODE_INDENT` = 4
+        - `NEW_ITEM_CODE_INDENT` = 4
         - `current indent` = `line indent`
     - Start List Conditions:
         - `current indent` < `CODE_INDENT`
@@ -62,7 +62,7 @@ Family types:
     - Definitions/Defaults:
         - `ITEM_INDENT` = 4
         - `CODE_INDENT` = 8
-        - `current indent` = line indent
+        - `current indent` = `line indent`
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
@@ -75,7 +75,6 @@ Family types:
         - `ITEM_INDENT` = 4
         - `CODE_INDENT` = 8
         - `current indent` = `line indent`
-        - `LISTS_ITEM_MARKER_SPACE` = true
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
@@ -88,17 +87,18 @@ Family types:
 
 - Markdown:
     - Definitions/Defaults:
-        - `ITEM_INDENT` = 4 
-        - `CODE_INDENT` = 8 
+        - `ITEM_INDENT` = 4
+        - `CODE_INDENT` = 8
         - `current indent` = `line indent`
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
-        - `current indent` >= `list indent` + `CODE_INDENT`: 
-            - if had blank line in item && have previous list item parent: then let it have it
-            - otherwise: lazy continuation of last list item
-        - `current indent` > `list indent`: sub-item
-        - `current indent` == `list indent`: list item
+        - `current indent` >= `CODE_INDENT`
+            - if had blank line: indented code
+            - otherwise: lazy continuation
+        - if is first list && `current indent` > `list indent`: sub-item or child item
+        - otherwise if `current indent` > `ITEM_INDENT`: sub-item or child item
+        - otherwise: list item
 
 Parser configuration parameters, parser emulation family sets defaults but these can be modified
 to tweak parser behaviour:
@@ -111,10 +111,11 @@ to tweak parser behaviour:
 - [ ] mismatch item type start a sub-list: `Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST`, `ListOptions.itemTypeMismatchToSubList`
 - [ ] bullet or ordered item delimiter mismatch starts a new list: `Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST`, `ListOptions.delimiterMismatchToNewList`
 - [ ] ordered items only with `.` after digit, otherwise `)` is also allowed: `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`, `ListOptions.orderedItemDotOnly`
-- [ ] first ordered item prefix sets start number of list: `Parser.LISTS_ORDERED_LIST_MANUAL_START`, `ListOptions.orderedListManualStart` 
-- [ ] item is loose if it has trailing blank line in it or its last child: `Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE`, `ListOptions.looseWhenHasTrailingBlankLine`
+- [ ] first ordered item prefix sets start number of list: `Parser.LISTS_ORDERED_LIST_MANUAL_START`, `ListOptions.orderedListManualStart`
 - [ ] item is loose if it contains a blank line after its item text: `Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH`, `ListOptions.looseWhenBlankFollowsItemParagraph`
-- [ ] item is loose if it or previous item is loose: `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM`, `ListOptions.looseOnPrevLooseItem` 
+- [ ] item is loose if it or previous item is loose: `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM`, `ListOptions.looseOnPrevLooseItem`
+- [ ] item is loose if it has loose sub-item: `Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM`, `ListOptions.looseWhenHasLooseSubItem`
+- [ ] item is loose if it has trailing blank line in it or its last child: `Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE`, `ListOptions.looseWhenHasTrailingBlankLine`
 - [ ] all items are loose if any in the list are loose: `Parser.LISTS_AUTO_LOOSE`, `ListOptions.autoLoose`
 - [ ] auto loose list setting `Parser.LISTS_AUTO_LOOSE` only applies to simple 1 level lists: `Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS`, `ListOptions.autoLooseOneLevelLists`
 

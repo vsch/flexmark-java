@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
 import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -66,6 +67,14 @@ public class ListBlockParser extends AbstractBlockParser {
         myItemHandledNewListLine = false;
         myItemHandledNewItemLine = false;
         myItemHandledSkipActiveLine = true;
+    }
+
+    public ListItemParser getLastChild() {
+        return myLastChild;
+    }
+
+    public void setLastChild(final ListItemParser lastChild) {
+        myLastChild = lastChild;
     }
 
     public ListOptions getOptions() {
@@ -148,6 +157,39 @@ public class ListBlockParser extends AbstractBlockParser {
                 }
             }
 
+            // recurse into children of list item, to see if there are
+            // spaces between any of them:
+            Node subItem = item.getFirstChild();
+            while (subItem != null) {
+                if (myOptions.looseWhenHasTrailingBlankLine) {
+                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                        isTight = false;
+                    }
+                }
+
+                if (subItem instanceof ListBlock) {
+                    haveNestedList = true;
+                    if (myOptions.looseWhenHasLooseSubItem && !thisItemLoose) {
+                        if (subItem instanceof ListBlock) {
+                            ReversiblePeekingIterator<Node> iterator = subItem.getChildIterator();
+                            while (iterator.hasNext()) {
+                                ListItem item1 = (ListItem) iterator.next();
+                                if (!item1.isTight()) {
+                                    thisItemLoose = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (myOptions.looseWhenHasLooseSubItem) {
+                    if (thisItemLoose && (haveNestedList || !myOptions.autoLooseOneLevelLists)) break;
+                } else {
+                    if (!isTight && (haveNestedList || !myOptions.autoLooseOneLevelLists)) break;
+                }
+                subItem = subItem.getNext();
+            }
+
             if (item instanceof ListItem) {
                 if (myOptions.looseWhenHasTrailingBlankLine && myOptions.looseWhenBlankFollowsItemParagraph) {
                     // when both are on only trailing blank line is propagated from prev since it is shared
@@ -173,27 +215,6 @@ public class ListBlockParser extends AbstractBlockParser {
                 prevItemLooseHadBlankAfterItemPara = thisItemLooseHadBlankAfterItemPara;
             }
 
-            // recurse into children of list item, to see if there are
-            // spaces between any of them:
-            Node subItem = item.getFirstChild();
-            while (subItem != null) {
-                if (myOptions.looseWhenBlankFollowsItemParagraph) {
-                    if (subItem instanceof ListItem) {
-                        if (!((ListItem) subItem).isTight()) {
-                            isTight = false;
-                        }
-                    }
-                }
-                if (myOptions.looseWhenHasTrailingBlankLine) {
-                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                        isTight = false;
-                    }
-                }
-
-                if (subItem instanceof ListBlock) haveNestedList = true;
-                if (!isTight && (haveNestedList || !myOptions.autoLooseOneLevelLists)) break;
-                subItem = subItem.getNext();
-            }
             item = item.getNext();
         }
 

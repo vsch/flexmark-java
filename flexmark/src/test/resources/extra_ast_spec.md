@@ -4873,3 +4873,30 @@ Document[0, 38]
 
 
 
+## Lists - Markdown Navigator
+
+Embedded headings Markdown Navigator options
+
+```````````````````````````````` example(Lists - Markdown Navigator: 1) options(list-markdown-navigator)
+1. Some Lists
+    
+    # Test
+
+.
+<ol>
+  <li>Some Lists
+  <h1>Test</h1>
+  </li>
+</ol>
+.
+Document[0, 31]
+  OrderedList[0, 29] isTight delimiter:'.'
+    OrderedListItem[0, 29] open:[0, 2, "1."] isTight hadBlankLineAfter
+      Paragraph[3, 14]
+        Text[3, 13] chars:[3, 13, "Some Lists"]
+      Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
+        Text[25, 29] chars:[25, 29, "Test"]
+````````````````````````````````
+
+
+

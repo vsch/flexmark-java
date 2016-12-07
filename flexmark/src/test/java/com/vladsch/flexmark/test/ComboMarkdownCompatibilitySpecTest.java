@@ -18,11 +18,11 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/markdown_compatibility_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .setFrom(ParserEmulationFamily.MARKDOWN.getListOptions())
-            //.set(Parser.HEADING_NO_LEAD_SPACE, true)
+            .set(Parser.HEADING_NO_LEAD_SPACE, true)
             //.set(Parser.THEMATIC_BREAK_RELAXED_START, true)
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(HtmlRenderer.RENDER_HEADER_ID, true)
+            //.set(HtmlRenderer.RENDER_HEADER_ID, true)
             .set(HtmlRenderer.SOFT_BREAK, " ")
             ;
 

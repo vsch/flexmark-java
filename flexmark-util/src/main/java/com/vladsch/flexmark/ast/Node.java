@@ -34,6 +34,17 @@ public abstract class Node {
         return null;
     }
 
+    public Node getOldestAncestorOfTypeAfter(final Class ancestor, final Class after) {
+        Node parent = getParent();
+        Node oldestAncestor = null;
+        while (parent != null) {
+            if (ancestor.isInstance(parent)) oldestAncestor = parent;
+            else if (after.isInstance(parent)) break;
+            parent = parent.getParent();
+        }
+        return oldestAncestor;
+    }
+
     public Node getChildOfType(Class... classes) {
         Node child = getFirstChild();
         while (child != null) {

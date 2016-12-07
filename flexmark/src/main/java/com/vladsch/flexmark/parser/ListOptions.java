@@ -17,6 +17,7 @@ public class ListOptions implements MutableDataSetter {
     public final boolean itemTypeMismatchToNewList;
     public final boolean itemTypeMismatchToSubList;
     public final boolean looseOnPrevLooseItem;
+    public final boolean looseWhenHasLooseSubItem;
     public final boolean looseWhenHasTrailingBlankLine;
     public final boolean looseWhenBlankFollowsItemParagraph;
     public final boolean orderedItemDotOnly;
@@ -38,6 +39,7 @@ public class ListOptions implements MutableDataSetter {
         itemTypeMismatchToSubList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST.getFrom(options);
         looseOnPrevLooseItem = Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM.getFrom(options);
         looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
+        looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
         looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
         orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options);
         orderedStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
@@ -60,6 +62,7 @@ public class ListOptions implements MutableDataSetter {
         itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
         looseOnPrevLooseItem = other.looseOnPrevLooseItem;
         looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
+        looseWhenHasLooseSubItem = other.looseWhenHasLooseSubItem;
         looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
         orderedItemDotOnly = other.orderedItemDotOnly;
         orderedStart = other.orderedStart;
@@ -139,6 +142,7 @@ public class ListOptions implements MutableDataSetter {
         options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, itemTypeMismatchToSubList);
         options.set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, looseOnPrevLooseItem);
         options.set(Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH, looseWhenBlankFollowsItemParagraph);
+        options.set(Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM, looseWhenHasLooseSubItem);
         options.set(Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE, looseWhenHasTrailingBlankLine);
         options.set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, orderedItemDotOnly);
         options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, orderedStart);
@@ -164,6 +168,7 @@ public class ListOptions implements MutableDataSetter {
         private boolean itemTypeMismatchToSubList;
         private boolean looseOnPrevLooseItem;
         private boolean looseWhenBlankFollowsItemParagraph;
+        private boolean looseWhenHasLooseSubItem;
         private boolean looseWhenHasTrailingBlankLine;
         private boolean orderedItemDotOnly;
         private boolean orderedStart;
@@ -193,6 +198,7 @@ public class ListOptions implements MutableDataSetter {
             itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
             looseOnPrevLooseItem = other.looseOnPrevLooseItem;
             looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
+            looseWhenHasLooseSubItem = other.looseWhenHasLooseSubItem;
             looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
             orderedItemDotOnly = other.orderedItemDotOnly;
             orderedStart = other.orderedStart;
@@ -215,6 +221,7 @@ public class ListOptions implements MutableDataSetter {
             itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
             looseOnPrevLooseItem = other.looseOnPrevLooseItem;
             looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
+            looseWhenHasLooseSubItem = other.looseWhenHasLooseSubItem;
             looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
             orderedItemDotOnly = other.orderedItemDotOnly;
             orderedStart = other.orderedStart;
@@ -248,6 +255,7 @@ public class ListOptions implements MutableDataSetter {
         public boolean isItemTypeMismatchToSubList() { return itemTypeMismatchToSubList; }
         public boolean isLooseOnPrevLooseItem() { return looseOnPrevLooseItem; }
         public boolean isLooseWhenBlankFollowsItemParagraph() { return looseWhenBlankFollowsItemParagraph; }
+        public boolean isLooseWhenHasLooseSubItem() { return looseWhenHasLooseSubItem; }
         public boolean isLooseWhenHasTrailingBlankLine() { return looseWhenHasTrailingBlankLine; }
         public boolean isOrderedItemDotOnly() { return orderedItemDotOnly; }
         public boolean isOrderedStart() { return orderedStart; }
@@ -265,6 +273,7 @@ public class ListOptions implements MutableDataSetter {
         public Mutable setItemTypeMismatchToSubList(boolean itemTypeMismatchToSubList) { this.itemTypeMismatchToSubList = itemTypeMismatchToSubList; return this; }
         public Mutable setLooseOnPrevLooseItem(boolean looseOnPrevLooseItem) { this.looseOnPrevLooseItem = looseOnPrevLooseItem; return this; }
         public Mutable setLooseWhenBlankFollowsItemParagraph(boolean looseWhenBlankFollowsItemParagraph) { this.looseWhenBlankFollowsItemParagraph = looseWhenBlankFollowsItemParagraph; return this; }
+        public Mutable setLooseWhenHasLooseSubItem(boolean looseWhenHasLooseSubItem) { this.looseWhenHasLooseSubItem = looseWhenHasLooseSubItem; return this; }
         public Mutable setLooseWhenHasTrailingBlankLine(boolean looseWhenHasTrailingBlankLine) { this.looseWhenHasTrailingBlankLine = looseWhenHasTrailingBlankLine; return this; }
         public Mutable setOrderedItemDotOnly(boolean orderedItemDotOnly) { this.orderedItemDotOnly = orderedItemDotOnly; return this; }
         public Mutable setOrderedStart(boolean orderedStart) { this.orderedStart = orderedStart; return this; }
