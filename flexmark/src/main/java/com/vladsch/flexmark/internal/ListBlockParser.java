@@ -118,25 +118,30 @@ public class ListBlockParser extends AbstractBlockParser {
     private void finalizeListTight(ParserState parserState) {
         Node item = getBlock().getFirstChild();
         boolean isTight = true;
+        boolean prevItemLooseHadBlankAfterItemPara = false;
         boolean prevItemLoose = false;
         boolean haveNestedList = false;
 
         while (item != null) {
             // check for non-final list item ending with blank line:
+            boolean thisItemLooseHadBlankAfterItemPara = false;
             boolean thisItemLoose = false;
             if (myOptions.looseWhenBlankFollowsItemParagraph) {
                 if (item instanceof ListItem) {
-                    if (myOptions.looseWhenBlankFollowsItemParagraph && ((ListItem) item).isHadBlankAfterItemParagraph()) {
+                    if (((ListItem) item).isHadBlankAfterItemParagraph()) {
+                        //noinspection StatementWithEmptyBody
                         if (item.getNext() == null && (item.getFirstChild() == null || item.getFirstChild().getNext() == null)) {
                             // not for last block
                         } else {
                             ((ListItem) item).setLoose(true);
                             isTight = false;
-                            thisItemLoose = true;
+                            thisItemLooseHadBlankAfterItemPara = true;
                         }
                     }
                 }
-            } else {
+            }
+
+            if (myOptions.looseWhenHasTrailingBlankLine) {
                 if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
                     isTight = false;
                     thisItemLoose = true;
@@ -144,12 +149,28 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             if (item instanceof ListItem) {
-                if (thisItemLoose || (myOptions.looseOnPrevLooseItem && prevItemLoose)) {
-                    // set the item's tight setting
-                    ((ListItem) item).setTight(false);
+                if (myOptions.looseWhenHasTrailingBlankLine && myOptions.looseWhenBlankFollowsItemParagraph) {
+                    // when both are on only trailing blank line is propagated from prev since it is shared
+                    if ((thisItemLoose || thisItemLooseHadBlankAfterItemPara) || (myOptions.looseOnPrevLooseItem && prevItemLoose)) {
+                        // set the item's tight setting
+                        ((ListItem) item).setTight(false);
+                    }
+                } else {
+                    if (myOptions.looseWhenHasTrailingBlankLine) {
+                        if (thisItemLoose || (myOptions.looseOnPrevLooseItem && prevItemLoose)) {
+                            // set the item's tight setting
+                            ((ListItem) item).setTight(false);
+                        }
+                    } else if (myOptions.looseWhenBlankFollowsItemParagraph) {
+                        if (thisItemLooseHadBlankAfterItemPara || (myOptions.looseOnPrevLooseItem && prevItemLooseHadBlankAfterItemPara)) {
+                            // set the item's tight setting
+                            ((ListItem) item).setTight(false);
+                        }
+                    }
                 }
 
                 prevItemLoose = thisItemLoose;
+                prevItemLooseHadBlankAfterItemPara = thisItemLooseHadBlankAfterItemPara;
             }
 
             // recurse into children of list item, to see if there are
@@ -160,16 +181,17 @@ public class ListBlockParser extends AbstractBlockParser {
                     if (subItem instanceof ListItem) {
                         if (!((ListItem) subItem).isTight()) {
                             isTight = false;
-                            if (haveNestedList || !myOptions.autoLooseOneLevelLists) break;
                         }
                     }
-                } else {
+                }
+                if (myOptions.looseWhenHasTrailingBlankLine) {
                     if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
                         isTight = false;
-                        if (haveNestedList || !myOptions.autoLooseOneLevelLists) break;
                     }
                 }
+
                 if (subItem instanceof ListBlock) haveNestedList = true;
+                if (!isTight && (haveNestedList || !myOptions.autoLooseOneLevelLists)) break;
                 subItem = subItem.getNext();
             }
             item = item.getNext();
@@ -309,7 +331,7 @@ public class ListBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getBlockParser();
             ParserEmulationFamily emulationFamily = myOptions.parserEmulationFamily;
-            int newItemCodeIndent = emulationFamily == COMMONMARK ? myOptions.codeIndent : -1;
+            int newItemCodeIndent = myOptions.newItemCodeIndent;
 
             if (matched instanceof ListBlockParser) {
                 // the list item should have handled this line, if it is part of new list item, or a new sub list
@@ -409,12 +431,12 @@ public class ListBlockParser extends AbstractBlockParser {
                 //     - Start List Conditions:
                 //         - `current indent` < `ITEM_INDENT`: new list with new item
                 //     - Continuation Conditions:
-                //         - `current indent` >= `list content indent` + `CODE_INDENT`: indented code
-                //         - `current indent` >= `list content indent` + `ITEM_INDENT`:
-                //             - if had blank line in item && have previous list item parent: then let it have it
-                //             - otherwise: lazy continuation of last list item
-                //         - `current indent` >= `item content indent`: sub-item
-                //         - `current indent` >= `list content indent`: list item
+                //         - `current indent` >=  `item content indent`: sub-item
+                //         - `current indent` >= `list indent` + `ITEM_INDENT`
+                //              - hadBlankLine: end current item, keep loose status, indented code
+                //              - !hadBlankLine: lazy continuation
+                //         - `current indent` >= `list indent` + `CODE_INDENT`: indented code
+                //         - `current indent` >= `list indent`: list item
 
                 int currentIndent = state.getIndent();
                 int listContentIndent = 0;

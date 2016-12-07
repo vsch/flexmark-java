@@ -8,52 +8,65 @@ import com.vladsch.flexmark.util.options.MutableDataSetter;
 @SuppressWarnings("WeakerAccess")
 public class ListOptions implements MutableDataSetter {
     public final ParserEmulationFamily parserEmulationFamily;
+    public final ItemInterrupt itemInterrupt;
     public final boolean autoLoose;
     public final boolean autoLooseOneLevelLists;
-    public final boolean looseOnPrevLooseItem;
-    public final boolean orderedStart;
     public final boolean delimiterMismatchToNewList;
+    public final boolean endOnDoubleBlank;
+    public final boolean itemMarkerSpace;
     public final boolean itemTypeMismatchToNewList;
     public final boolean itemTypeMismatchToSubList;
-    public final boolean endOnDoubleBlank;
+    public final boolean looseOnPrevLooseItem;
+    public final boolean looseWhenHasTrailingBlankLine;
     public final boolean looseWhenBlankFollowsItemParagraph;
-    public final boolean itemMarkerSpace;
-    public final ItemInterrupt itemInterrupt;
-    public final int itemIndent;
+    public final boolean orderedItemDotOnly;
+    public final boolean orderedStart;
     public final int codeIndent;
+    public final int itemIndent;
+    public final int newItemCodeIndent;
 
     public ListOptions(DataHolder options) {
         parserEmulationFamily = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
-        endOnDoubleBlank = Parser.LISTS_END_ON_DOUBLE_BLANK.getFrom(options);
+        itemInterrupt = new ItemInterrupt(options);
+
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
         autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);
-        looseOnPrevLooseItem = Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM.getFrom(options);
-        orderedStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
         delimiterMismatchToNewList = Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST.getFrom(options);
+        endOnDoubleBlank = Parser.LISTS_END_ON_DOUBLE_BLANK.getFrom(options);
+        itemMarkerSpace = Parser.LISTS_ITEM_MARKER_SPACE.getFrom(options);
         itemTypeMismatchToNewList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST.getFrom(options);
         itemTypeMismatchToSubList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST.getFrom(options);
+        looseOnPrevLooseItem = Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM.getFrom(options);
         looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
-        itemMarkerSpace = Parser.LISTS_ITEM_MARKER_SPACE.getFrom(options);
-        itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
+        looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
+        orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options);
+        orderedStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
+
         codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);
-        itemInterrupt = new ItemInterrupt(options);
+        itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
+        newItemCodeIndent = Parser.LISTS_NEW_ITEM_CODE_INDENT.getFrom(options);
     }
 
     ListOptions(Mutable other) {
         parserEmulationFamily = other.parserEmulationFamily;
-        endOnDoubleBlank = other.endOnDoubleBlank;
+        itemInterrupt = new ItemInterrupt(other.itemInterrupt);
+
         autoLoose = other.autoLoose;
         autoLooseOneLevelLists = other.autoLooseOneLevelLists;
-        looseOnPrevLooseItem = other.looseOnPrevLooseItem;
-        orderedStart = other.orderedStart;
         delimiterMismatchToNewList = other.bulletMismatchToNewList;
+        endOnDoubleBlank = other.endOnDoubleBlank;
+        itemMarkerSpace = other.itemMarkerSpace;
         itemTypeMismatchToNewList = other.itemTypeMismatchToNewList;
         itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
+        looseOnPrevLooseItem = other.looseOnPrevLooseItem;
         looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
-        itemMarkerSpace = other.itemMarkerSpace;
-        itemIndent = other.itemIndent;
+        looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
+        orderedItemDotOnly = other.orderedItemDotOnly;
+        orderedStart = other.orderedStart;
+
         codeIndent = other.codeIndent;
-        itemInterrupt = new ItemInterrupt(other.itemInterrupt);
+        itemIndent = other.itemIndent;
+        newItemCodeIndent = other.newItemCodeIndent;
     }
 
     public boolean isTightListItem(ListItem node) {
@@ -115,39 +128,49 @@ public class ListOptions implements MutableDataSetter {
 
     public MutableDataHolder setIn(MutableDataHolder options) {
         options.set(Parser.PARSER_EMULATION_FAMILY, parserEmulationFamily);
-        options.set(Parser.LISTS_END_ON_DOUBLE_BLANK, endOnDoubleBlank);
+        itemInterrupt.setIn(options);
+
         options.set(Parser.LISTS_AUTO_LOOSE, autoLoose);
         options.set(Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS, autoLooseOneLevelLists);
-        options.set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, looseOnPrevLooseItem);
-        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, orderedStart);
         options.set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, delimiterMismatchToNewList);
+        options.set(Parser.LISTS_END_ON_DOUBLE_BLANK, endOnDoubleBlank);
+        options.set(Parser.LISTS_ITEM_MARKER_SPACE, itemMarkerSpace);
         options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, itemTypeMismatchToNewList);
         options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, itemTypeMismatchToSubList);
+        options.set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, looseOnPrevLooseItem);
         options.set(Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH, looseWhenBlankFollowsItemParagraph);
-        options.set(Parser.LISTS_ITEM_MARKER_SPACE, itemMarkerSpace);
+        options.set(Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE, looseWhenHasTrailingBlankLine);
+        options.set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, orderedItemDotOnly);
+        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, orderedStart);
+
         options.set(Parser.LISTS_ITEM_INDENT, itemIndent);
         options.set(Parser.LISTS_CODE_INDENT, codeIndent);
+        options.set(Parser.LISTS_NEW_ITEM_CODE_INDENT, newItemCodeIndent);
 
-        itemInterrupt.setIn(options);
         return options;
     }
 
     @SuppressWarnings("SameParameterValue")
     public static class Mutable {
         private ParserEmulationFamily parserEmulationFamily;
+        private MutableItemInterrupt itemInterrupt;
+
         private boolean autoLoose;
         private boolean autoLooseOneLevelLists;
-        private boolean looseOnPrevLooseItem;
-        private boolean orderedStart;
         private boolean bulletMismatchToNewList;
+        private boolean endOnDoubleBlank;
+        private boolean itemMarkerSpace;
         private boolean itemTypeMismatchToNewList;
         private boolean itemTypeMismatchToSubList;
-        private boolean endOnDoubleBlank;
+        private boolean looseOnPrevLooseItem;
         private boolean looseWhenBlankFollowsItemParagraph;
-        private boolean itemMarkerSpace;
-        private int itemIndent;
+        private boolean looseWhenHasTrailingBlankLine;
+        private boolean orderedItemDotOnly;
+        private boolean orderedStart;
+
         private int codeIndent;
-        private MutableItemInterrupt itemInterrupt;
+        private int itemIndent;
+        private int newItemCodeIndent;
 
         public Mutable() {
             this(new ListOptions((DataHolder) null));
@@ -159,36 +182,46 @@ public class ListOptions implements MutableDataSetter {
 
         public Mutable(ListOptions other) {
             parserEmulationFamily = other.parserEmulationFamily;
-            endOnDoubleBlank = other.endOnDoubleBlank;
+            itemInterrupt = new MutableItemInterrupt(other.itemInterrupt);
+
             autoLoose = other.autoLoose;
             autoLooseOneLevelLists = other.autoLooseOneLevelLists;
-            looseOnPrevLooseItem = other.looseOnPrevLooseItem;
-            orderedStart = other.orderedStart;
             bulletMismatchToNewList = other.delimiterMismatchToNewList;
+            endOnDoubleBlank = other.endOnDoubleBlank;
+            itemMarkerSpace = other.itemMarkerSpace;
             itemTypeMismatchToNewList = other.itemTypeMismatchToNewList;
             itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
+            looseOnPrevLooseItem = other.looseOnPrevLooseItem;
             looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
-            itemMarkerSpace = other.itemMarkerSpace;
-            itemIndent = other.itemIndent;
+            looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
+            orderedItemDotOnly = other.orderedItemDotOnly;
+            orderedStart = other.orderedStart;
+
             codeIndent = other.codeIndent;
-            itemInterrupt = new MutableItemInterrupt(other.itemInterrupt);
+            itemIndent = other.itemIndent;
+            newItemCodeIndent = other.newItemCodeIndent;
         }
 
         public Mutable(Mutable other) {
             parserEmulationFamily = other.parserEmulationFamily;
-            endOnDoubleBlank = other.endOnDoubleBlank;
+            itemInterrupt = new MutableItemInterrupt(other.itemInterrupt);
+
             autoLoose = other.autoLoose;
             autoLooseOneLevelLists = other.autoLooseOneLevelLists;
-            looseOnPrevLooseItem = other.looseOnPrevLooseItem;
-            orderedStart = other.orderedStart;
             bulletMismatchToNewList = other.bulletMismatchToNewList;
+            endOnDoubleBlank = other.endOnDoubleBlank;
+            itemMarkerSpace = other.itemMarkerSpace;
             itemTypeMismatchToNewList = other.itemTypeMismatchToNewList;
             itemTypeMismatchToSubList = other.itemTypeMismatchToSubList;
+            looseOnPrevLooseItem = other.looseOnPrevLooseItem;
             looseWhenBlankFollowsItemParagraph = other.looseWhenBlankFollowsItemParagraph;
-            itemMarkerSpace = other.itemMarkerSpace;
-            itemIndent = other.itemIndent;
+            looseWhenHasTrailingBlankLine = other.looseWhenHasTrailingBlankLine;
+            orderedItemDotOnly = other.orderedItemDotOnly;
+            orderedStart = other.orderedStart;
+
             codeIndent = other.codeIndent;
-            itemInterrupt = new MutableItemInterrupt(other.itemInterrupt);
+            itemIndent = other.itemIndent;
+            newItemCodeIndent = other.newItemCodeIndent;
         }
 
         public ListOptions getListOptions() {
@@ -201,34 +234,44 @@ public class ListOptions implements MutableDataSetter {
         }
 
         // @formatter:off
+        public ParserEmulationFamily getParserEmulationFamily() { return parserEmulationFamily; }
+        public MutableItemInterrupt getItemInterrupt() { return itemInterrupt; }
+        public Mutable setParserEmulationFamily(ParserEmulationFamily parserEmulationFamily) { this.parserEmulationFamily = parserEmulationFamily; return this; }
+        public Mutable setItemInterrupt(MutableItemInterrupt itemInterrupt) { this.itemInterrupt = itemInterrupt; return this; }
+        // boolean getters
         public boolean isAutoLoose() { return autoLoose; }
         public boolean isAutoLooseOneLevelLists() { return autoLooseOneLevelLists; }
         public boolean isBulletMismatchToNewList() { return bulletMismatchToNewList; }
         public boolean isEndOnDoubleBlank() { return endOnDoubleBlank; }
+        public boolean isItemMarkerSpace() { return itemMarkerSpace; }
         public boolean isItemTypeMismatchToNewList() { return itemTypeMismatchToNewList; }
         public boolean isItemTypeMismatchToSubList() { return itemTypeMismatchToSubList; }
         public boolean isLooseOnPrevLooseItem() { return looseOnPrevLooseItem; }
+        public boolean isLooseWhenBlankFollowsItemParagraph() { return looseWhenBlankFollowsItemParagraph; }
+        public boolean isLooseWhenHasTrailingBlankLine() { return looseWhenHasTrailingBlankLine; }
+        public boolean isOrderedItemDotOnly() { return orderedItemDotOnly; }
         public boolean isOrderedStart() { return orderedStart; }
-        public boolean isItemMarkerSpace() { return itemMarkerSpace; }
+        // int getters
         public int getCodeIndent() { return codeIndent; }
         public int getItemIndent() { return itemIndent; }
-        public boolean isLooseWhenBlankFollowsItemParagraph() { return looseWhenBlankFollowsItemParagraph; }
-        public MutableItemInterrupt getItemInterrupt() { return itemInterrupt; }
-        public ParserEmulationFamily getParserEmulationFamily() { return parserEmulationFamily; }
+        public int getNewItemCodeIndent() { return newItemCodeIndent; }
+        // boolean setters
         public Mutable setAutoLoose(boolean autoLoose) { this.autoLoose = autoLoose; return this; }
         public Mutable setAutoLooseOneLevelLists(boolean autoLooseOneLevelLists) { this.autoLooseOneLevelLists = autoLooseOneLevelLists; return this; }
         public Mutable setBulletMismatchToNewList(boolean bulletMismatchToNewList) { this.bulletMismatchToNewList = bulletMismatchToNewList; return this; }
-        public Mutable setCodeIndent(int codeIndent) { this.codeIndent = codeIndent; return this; }
         public Mutable setEndOnDoubleBlank(boolean endOnDoubleBlank) { this.endOnDoubleBlank = endOnDoubleBlank; return this; }
-        public Mutable setItemIndent(int itemIndent) { this.itemIndent = itemIndent; return this; }
-        public Mutable setItemInterrupt(MutableItemInterrupt itemInterrupt) { this.itemInterrupt = itemInterrupt; return this; }
+        public Mutable setItemMarkerSpace(boolean itemMarkerSpace) { this.itemMarkerSpace = itemMarkerSpace; return this; }
         public Mutable setItemTypeMismatchToNewList(boolean itemTypeMatchToNewList) { this.itemTypeMismatchToNewList = itemTypeMatchToNewList; return this; }
         public Mutable setItemTypeMismatchToSubList(boolean itemTypeMismatchToSubList) { this.itemTypeMismatchToSubList = itemTypeMismatchToSubList; return this; }
         public Mutable setLooseOnPrevLooseItem(boolean looseOnPrevLooseItem) { this.looseOnPrevLooseItem = looseOnPrevLooseItem; return this; }
-        public Mutable setOrderedStart(boolean orderedStart) { this.orderedStart = orderedStart; return this; }
-        public Mutable setParserEmulationFamily(ParserEmulationFamily parserEmulationFamily) { this.parserEmulationFamily = parserEmulationFamily; return this; }
         public Mutable setLooseWhenBlankFollowsItemParagraph(boolean looseWhenBlankFollowsItemParagraph) { this.looseWhenBlankFollowsItemParagraph = looseWhenBlankFollowsItemParagraph; return this; }
-        public Mutable setItemMarkerSpace(boolean itemMarkerSpace) { this.itemMarkerSpace = itemMarkerSpace; return this; }
+        public Mutable setLooseWhenHasTrailingBlankLine(boolean looseWhenHasTrailingBlankLine) { this.looseWhenHasTrailingBlankLine = looseWhenHasTrailingBlankLine; return this; }
+        public Mutable setOrderedItemDotOnly(boolean orderedItemDotOnly) { this.orderedItemDotOnly = orderedItemDotOnly; return this; }
+        public Mutable setOrderedStart(boolean orderedStart) { this.orderedStart = orderedStart; return this; }
+        // int setters
+        public Mutable setCodeIndent(int codeIndent) { this.codeIndent = codeIndent; return this; }
+        public Mutable setItemIndent(int itemIndent) { this.itemIndent = itemIndent; return this; }
+        public Mutable setNewItemCodeIndent(int newItemCodeIndent) { this.newItemCodeIndent = newItemCodeIndent; return this; }
         // @formatter:on
     }
 

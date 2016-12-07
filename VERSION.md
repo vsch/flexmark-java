@@ -1,9 +1,10 @@
 flexmark-java
 =============
 
-[TOC]: # "## Version History"
+&nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-## Version History
+[TOC]: # " "
+
 - [Next Release To Do List](#next-release-to-do-list)
 - [0.7.0](#070)
 - [0.6.1](#061)
@@ -51,14 +52,17 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+&nbsp;</details>
 
 Next Release To Do List
 -----------------------
 
 - [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
-
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
+
+0.7.0
+-----
 
 - [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
       when descriptions can benefit form complex formatting
@@ -66,19 +70,16 @@ Next Release To Do List
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
 
-0.7.0
------
+- Add: final to all node visitors' node parameter
+- Add: upgrade to CommonMark spec 0.27
 
-- [x] Add: final to all node visitors' node parameter 
-- [x] Add: upgrade to CommonMark spec 0.27
-
-- [x] Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear
+- Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear
       between `{{` and `}}` in URLs, including spaces, pipes and backslashes.
 
-- [x] Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but when
+- Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but when
       false then they require a blank line before, otherwise they become inline HTML.
 
-- [x] Add: test for `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` option
+- Add: test for `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` option
 
 - [ ] Fix: rewrite list handling and list handling options to allow for Markdown parser
       emulation based on major parser families, as described in
@@ -86,14 +87,14 @@ Next Release To Do List
       - [x] CommonMark
           - [ ] GitHub Comments
           - [ ] League/CommonMark
-      - [ ] FixedIndent
+      - [x] FixedIndent
           - [ ] Pegdown
-          - [ ] MultiMarkdown
+          - [x] MultiMarkdown
           - [ ] Pandoc
-      - [ ] Kramdown
+      - [x] Kramdown
           - [ ] GitHub Docs
-          - [ ] Jekyll  
-          - [ ] Kramdown
+          - [ ] Jekyll
+          - [x] Kramdown
       - [ ] Markdown
           - [ ] Markdown.pl
           - [ ] Php Markdown Extra
@@ -1117,7 +1118,7 @@ text block
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-    
+
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

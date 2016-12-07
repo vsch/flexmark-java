@@ -96,6 +96,7 @@ Tests how all tight items are generated
 ````````````````````````````````
 
 
+
 Test to see how trailing blank after item determines looseness 
 
 ```````````````````````````````` example Loose Item Handling: 2
@@ -121,7 +122,8 @@ Test to see how trailing blank after item determines looseness
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 3
+
+```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
 - item 3 
@@ -130,6 +132,7 @@ Test to see how trailing blank after item determines looseness
 .
 .
 ````````````````````````````````
+
 
 
 Test looseness with child items
@@ -148,6 +151,7 @@ Test looseness with child items
 ````````````````````````````````
 
 
+
 ```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
@@ -161,6 +165,7 @@ Test looseness with child items
 .
 .
 ````````````````````````````````
+
 
 
 ```````````````````````````````` example Loose Item Handling: 7
@@ -210,7 +215,8 @@ Test looseness with child items
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 9
+
+```````````````````````````````` example Loose Item Handling: 10
 - item 1
     - item 1.1
 - item 2 
@@ -226,7 +232,7 @@ Test looseness with child items
 
 
 
-```````````````````````````````` example Loose Item Handling: 10
+```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
 - item 2 
@@ -241,7 +247,8 @@ Test looseness with child items
 ````````````````````````````````
 
 
-```````````````````````````````` example Loose Item Handling: 10
+
+```````````````````````````````` example Loose Item Handling: 12
 - item 1
     - item 1.1
 - item 2 
@@ -265,22 +272,37 @@ Test to see which list items can interrupt paragraphs.
 Bullet item can interrupt paragraph
 * item
 
-Empty bullet item can interrupt paragraph
+Empty bullet item with space can interrupt paragraph 
 * 
+
+Empty bullet item without space can interrupt paragraph
+*
 
 Numbered one item can interrupt paragraph
 1. one item
 
-Empty Numbered one item can interrupt paragraph
+Empty Numbered one item with space can interrupt paragraph
 1. 
+
+Empty Numbered one item without space can interrupt paragraph
+1.
 
 Numbered non-one item can interrupt paragraph
 2. non-one item
 
-Empty Numbered non-one item can interrupt paragraph
+Empty Numbered non-one item with space can interrupt paragraph
 2. 
 
+Empty Numbered non-one item without space can interrupt paragraph
+2.
+
 .
+<p>Bullet item can interrupt paragraph * item</p>
+<p>Empty bullet item can interrupt paragraph *</p>
+<p>Numbered one item can interrupt paragraph 1. one item</p>
+<p>Empty Numbered one item can interrupt paragraph 1.</p>
+<p>Numbered non-one item can interrupt paragraph 2. non-one item</p>
+<p>Empty Numbered non-one item can interrupt paragraph 2.</p>
 .
 ````````````````````````````````
 
@@ -294,8 +316,13 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty bullet item can interrupt paragraph of a bullet list item
+* Empty bullet item with space can interrupt paragraph of a bullet list item
 * 
+
+<!--List Break-->
+
+* Empty bullet item without space can interrupt paragraph of a bullet list item
+*
 
 <!--List Break-->
 
@@ -304,8 +331,13 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty Numbered one item can interrupt paragraph of a bullet list item
+* Empty Numbered one item with space can interrupt paragraph of a bullet list item
 1. 
+
+<!--List Break-->
+
+* Empty Numbered one item without space can interrupt paragraph of a bullet list item
+1.
 
 <!--List Break-->
 
@@ -314,10 +346,44 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty Numbered non-one item can interrupt paragraph of a bullet list item
+* Empty Numbered non-one item with space can interrupt paragraph of a bullet list item
 2. 
 
+<!--List Break-->
+
+* Empty Numbered non-one item without space can interrupt paragraph of a bullet list item
+2.
+
 .
+<ul>
+    <li>Bullet item can interrupt paragraph of a bullet list item</li>
+    <li>item</li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty bullet item can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Numbered one item can interrupt paragraph of a bullet list item</li>
+    <li>one item</li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty Numbered one item can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Numbered non-one item can interrupt paragraph of a bullet list item</li>
+    <li>non-one item</li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty Numbered non-one item can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
 .
 ````````````````````````````````
 
@@ -331,8 +397,13 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty bullet item can interrupt paragraph of a numbered list item
+1. Empty bullet item with space can interrupt paragraph of a numbered list item
 * 
+
+<!--List Break-->
+
+1. Empty bullet item without space can interrupt paragraph of a numbered list item
+*
 
 <!--List Break-->
 
@@ -341,7 +412,12 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty Numbered one item can interrupt paragraph of a numbered list item 
+1. Empty Numbered one item with space can interrupt paragraph of a numbered list item 
+1. 
+
+<!--List Break-->
+
+1. Empty Numbered one item without space can interrupt paragraph of a numbered list item 
 1.
 
 <!--List Break-->
@@ -351,10 +427,44 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty Numbered non-one item can interrupt paragraph of a numbered list item
+1. Empty Numbered non-one item with space can interrupt paragraph of a numbered list item
 2. 
 
+<!--List Break-->
+
+1. Empty Numbered non-one item without space can interrupt paragraph of a numbered list item
+2.
+
 .
+<ol>
+    <li>Bullet item can interrupt paragraph of a numbered list item</li>
+    <li>item</li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty bullet item can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Numbered one item can interrupt paragraph of a numbered list item</li>
+    <li>one item</li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty Numbered one item can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Numbered non-one item can interrupt paragraph of a numbered list item</li>
+    <li>non-one item</li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty Numbered non-one item can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
 .
 ````````````````````````````````
 

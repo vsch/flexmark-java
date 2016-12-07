@@ -20,6 +20,7 @@ import org.junit.runners.Suite;
         //ComboParserCompatibilitySpecTest.class,
         ComboMultiMarkdownCompatibilitySpecTest.class,
         ComboKramdownCompatibilitySpecTest.class,
+        ComboMarkdownCompatibilitySpecTest.class,
 })
 public class CoreTestSuite {
 }

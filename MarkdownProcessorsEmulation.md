@@ -47,10 +47,12 @@ Family types:
     - Definitions/Defaults:
         - `ITEM_INDENT` = 4 <!-- not used -->
         - `CODE_INDENT` = 4 
+        - `NEW_ITEM_CODE_INDENT` = 4 
         - `current indent` = `line indent`
     - Start List Conditions:
-        - `item indent` < `CODE_INDENT`: new list with new item
-        - `item content indent` >= `CODE_INDENT`: empty item + indented code
+        - `current indent` < `CODE_INDENT`
+            - `item content indent` >= `NEW_ITEM_CODE_INDENT`: empty item + indented code
+            - otherwise: new list with new item
     - Continuation Conditions:
         - `current indent` >= `list last content indent` + `CODE_INDENT`: indented code
         - `current indent` >= `list last content indent`: sub-item
@@ -68,20 +70,21 @@ Family types:
          - `current indent` >= `ITEM_INDENT`: sub-item
          - otherwise: list item
 
-- Kramdown:  
+- Kramdown:
     - Definitions/Defaults:
-        - `ITEM_INDENT` = 4 
-        - `CODE_INDENT` = 8 
+        - `ITEM_INDENT` = 4
+        - `CODE_INDENT` = 8
         - `current indent` = `line indent`
+        - `LISTS_ITEM_MARKER_SPACE` = true
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
-        - `current indent` >= `list content indent` + `CODE_INDENT`: indented code
-        - `current indent` >= `list content indent` + `ITEM_INDENT`: 
-            - if had blank line in item && have previous list item parent: then let it have it
-            - otherwise: lazy continuation of last list item
-        - `current indent` >= `item content indent`: sub-item
-        - `current indent` >= `list content indent`: list item
+        - `current indent` >=  `item content indent`: sub-item
+        - `current indent` >= `list indent` + `ITEM_INDENT`
+             - hadBlankLine: end current item, keep loose status, indented code
+             - !hadBlankLine: lazy continuation
+        - `current indent` >= `list indent` + `CODE_INDENT`: indented code
+        - `current indent` >= `list indent`: list item
 
 - Markdown:
     - Definitions/Defaults:
@@ -97,28 +100,36 @@ Family types:
         - `current indent` > `list indent`: sub-item
         - `current indent` == `list indent`: list item
 
-Minor differences, are addressed with options applied on top of the `family` list behavior to
-tweak parser emulation:
+Parser configuration parameters, parser emulation family sets defaults but these can be modified
+to tweak parser behaviour:
 
-- [ ] bullet item can interrupt a paragraph
-- [ ] bullet item can interrupt a paragraph of a list item 
-- [ ] empty bullet item can interrupt a paragraph
-- [ ] empty bullet item can interrupt a paragraph of a list item
-- [ ] ordered item can interrupt a paragraph
-- [ ] ordered item can interrupt a paragraph of a list item 
-- [ ] ordered non 1 item can interrupt a paragraph
-- [ ] ordered non 1 item can interrupt a paragraph of a list item 
-- [ ] empty ordered item can interrupt a paragraph
-- [ ] empty ordered item can interrupt a paragraph of a list item 
-- [ ] empty ordered non 1 item can interrupt a paragraph
-- [ ] empty ordered non 1 item can interrupt a paragraph of a list item 
-- [ ] mismatch item type continue same list type
-- [ ] mismatch item type start new list
-- [ ] mismatch item type start a sub-list
-- [ ] bullet mismatch starts a new list
-- [ ] ordered items only with `.` after digit, otherwise `)` is also allowed
-- [ ] first ordered item prefix sets start number of list 
-- [ ] item is loose if it has trailing blank line in it or its last child
-- [ ] item is loose if it contains a blank line after its item text
-- [ ] item is loose if it or previous item is loose 
-- [ ] all items are loose if any in the list are loose
+- [ ] item indent columns: `Parser.ITEM_INDENT`, `ListOptions.itemIndent`
+- [ ] item code indent column: `Parser.CODE_INDENT`, `ListOptions.codeIndent`
+- [ ] new item code indent column: `Parser.NEW_ITEM_CODE_INDENT`, `ListOptions.newItemCodeIndent`
+- [ ] list items require explicit space after marker `Parser.LISTS_ITEM_MARKER_SPACE`, `ListOptions.itemMarkerSpace`
+- [ ] mismatch item type starts a new list: `Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST`, `ListOptions.itemTypeMismatchToNewList`
+- [ ] mismatch item type start a sub-list: `Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST`, `ListOptions.itemTypeMismatchToSubList`
+- [ ] bullet or ordered item delimiter mismatch starts a new list: `Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST`, `ListOptions.delimiterMismatchToNewList`
+- [ ] ordered items only with `.` after digit, otherwise `)` is also allowed: `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`, `ListOptions.orderedItemDotOnly`
+- [ ] first ordered item prefix sets start number of list: `Parser.LISTS_ORDERED_LIST_MANUAL_START`, `ListOptions.orderedListManualStart` 
+- [ ] item is loose if it has trailing blank line in it or its last child: `Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE`, `ListOptions.looseWhenHasTrailingBlankLine`
+- [ ] item is loose if it contains a blank line after its item text: `Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH`, `ListOptions.looseWhenBlankFollowsItemParagraph`
+- [ ] item is loose if it or previous item is loose: `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM`, `ListOptions.looseOnPrevLooseItem` 
+- [ ] all items are loose if any in the list are loose: `Parser.LISTS_AUTO_LOOSE`, `ListOptions.autoLoose`
+- [ ] auto loose list setting `Parser.LISTS_AUTO_LOOSE` only applies to simple 1 level lists: `Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS`, `ListOptions.autoLooseOneLevelLists`
+
+- [ ] bullet item can interrupt a paragraph: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.bulletItemInterruptsParagraph`
+- [ ] ordered item can interrupt a paragraph: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.orderedItemInterruptsParagraph`
+- [ ] ordered non 1 item can interrupt a paragraph: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.orderedNonOneItemInterruptsParagraph`
+- [ ] empty bullet item can interrupt a paragraph: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyBulletItemInterruptsParagraph`
+- [ ] empty ordered item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyOrderedItemInterruptsParagraph`
+- [ ] empty ordered non 1 item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyOrderedNonOneItemInterruptsParagraph`
+- [ ] bullet item can interrupt a paragraph of a list item: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.bulletItemInterruptsItemParagraph`
+- [ ] ordered item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.orderedItemInterruptsItemParagraph`
+- [ ] ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.orderedNonOneItemInterruptsItemParagraph`
+- [ ] empty bullet item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyBulletItemInterruptsItemParagraph`
+- [ ] empty ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedItemInterruptsItemParagraph`
+- [ ] empty ordered item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedNonOneItemInterruptsItemParagraph`
+- [ ] empty bullet sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyBulletSubItemInterruptsItemParagraph`
+- [ ] empty ordered non 1 sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedSubItemInterruptsItemParagraph`
+- [ ] empty ordered sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedNonOneSubItemInterruptsItemParagraph`

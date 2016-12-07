@@ -822,54 +822,78 @@ Test to see which list items can interrupt paragraphs.
 Bullet item can interrupt paragraph
 * item
 
-Empty bullet item can interrupt paragraph
+Empty bullet item with space can interrupt paragraph 
 * 
+
+Empty bullet item without space can interrupt paragraph
+*
 
 Numbered one item can interrupt paragraph
 1. one item
 
-Empty Numbered one item can interrupt paragraph
+Empty Numbered one item with space can interrupt paragraph
 1. 
+
+Empty Numbered one item without space can interrupt paragraph
+1.
 
 Numbered non-one item can interrupt paragraph
 2. non-one item
 
-Empty Numbered non-one item can interrupt paragraph
+Empty Numbered non-one item with space can interrupt paragraph
 2. 
+
+Empty Numbered non-one item without space can interrupt paragraph
+2.
 
 .
 <p>Bullet item can interrupt paragraph * item</p>
-<p>Empty bullet item can interrupt paragraph *</p>
+<p>Empty bullet item with space can interrupt paragraph *</p>
+<p>Empty bullet item without space can interrupt paragraph *</p>
 <p>Numbered one item can interrupt paragraph 1. one item</p>
-<p>Empty Numbered one item can interrupt paragraph 1.</p>
+<p>Empty Numbered one item with space can interrupt paragraph 1.</p>
+<p>Empty Numbered one item without space can interrupt paragraph 1.</p>
 <p>Numbered non-one item can interrupt paragraph 2. non-one item</p>
-<p>Empty Numbered non-one item can interrupt paragraph 2.</p>
+<p>Empty Numbered non-one item with space can interrupt paragraph 2.</p>
+<p>Empty Numbered non-one item without space can interrupt paragraph 2.</p>
 .
-Document[0, 318]
+Document[0, 547]
   Paragraph[0, 43]
     Text[0, 35] chars:[0, 35, "Bulle … graph"]
     SoftLineBreak[35, 36]
     Text[36, 42] chars:[36, 42, "* item"]
-  Paragraph[44, 89]
-    Text[44, 85] chars:[44, 85, "Empty … graph"]
-    SoftLineBreak[85, 86]
-    Text[86, 87] chars:[86, 87, "*"]
-  Paragraph[90, 144]
-    Text[90, 131] chars:[90, 131, "Numbe … graph"]
-    SoftLineBreak[131, 132]
-    Text[132, 143] chars:[132, 143, "1. on …  item"]
-  Paragraph[145, 197]
-    Text[145, 192] chars:[145, 192, "Empty … graph"]
-    SoftLineBreak[192, 193]
-    Text[193, 195] chars:[193, 195, "1."]
-  Paragraph[198, 260]
-    Text[198, 243] chars:[198, 243, "Numbe … graph"]
-    SoftLineBreak[243, 244]
-    Text[244, 259] chars:[244, 259, "2. no …  item"]
-  Paragraph[261, 317]
-    Text[261, 312] chars:[261, 312, "Empty … graph"]
-    SoftLineBreak[312, 313]
-    Text[313, 315] chars:[313, 315, "2."]
+  Paragraph[44, 101]
+    Text[44, 96] chars:[44, 96, "Empty … graph"]
+    SoftLineBreak[97, 98]
+    Text[98, 99] chars:[98, 99, "*"]
+  Paragraph[102, 160]
+    Text[102, 157] chars:[102, 157, "Empty … graph"]
+    SoftLineBreak[157, 158]
+    Text[158, 159] chars:[158, 159, "*"]
+  Paragraph[161, 215]
+    Text[161, 202] chars:[161, 202, "Numbe … graph"]
+    SoftLineBreak[202, 203]
+    Text[203, 214] chars:[203, 214, "1. on …  item"]
+  Paragraph[216, 279]
+    Text[216, 274] chars:[216, 274, "Empty … graph"]
+    SoftLineBreak[274, 275]
+    Text[275, 277] chars:[275, 277, "1."]
+  Paragraph[280, 345]
+    Text[280, 341] chars:[280, 341, "Empty … graph"]
+    SoftLineBreak[341, 342]
+    Text[342, 344] chars:[342, 344, "1."]
+  Paragraph[346, 408]
+    Text[346, 391] chars:[346, 391, "Numbe … graph"]
+    SoftLineBreak[391, 392]
+    Text[392, 407] chars:[392, 407, "2. no …  item"]
+  Paragraph[409, 476]
+    Text[409, 471] chars:[409, 471, "Empty … graph"]
+    SoftLineBreak[471, 472]
+    Text[472, 474] chars:[472, 474, "2."]
+  Paragraph[477, 546]
+    Text[477, 542] chars:[477, 542, "Empty … graph"]
+    SoftLineBreak[542, 543]
+    Text[543, 545] chars:[543, 545, "2."]
 ````````````````````````````````
 
 
@@ -882,8 +906,13 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty bullet item can interrupt paragraph of a bullet list item
+* Empty bullet item with space can interrupt paragraph of a bullet list item
 * 
+
+<!--List Break-->
+
+* Empty bullet item without space can interrupt paragraph of a bullet list item
+*
 
 <!--List Break-->
 
@@ -892,8 +921,13 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty Numbered one item can interrupt paragraph of a bullet list item
+* Empty Numbered one item with space can interrupt paragraph of a bullet list item
 1. 
+
+<!--List Break-->
+
+* Empty Numbered one item without space can interrupt paragraph of a bullet list item
+1.
 
 <!--List Break-->
 
@@ -902,8 +936,13 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 
 <!--List Break-->
 
-* Empty Numbered non-one item can interrupt paragraph of a bullet list item
+* Empty Numbered non-one item with space can interrupt paragraph of a bullet list item
 2. 
+
+<!--List Break-->
+
+* Empty Numbered non-one item without space can interrupt paragraph of a bullet list item
+2.
 
 .
 <ul>
@@ -912,7 +951,12 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 </ul>
 <!--List Break-->
 <ul>
-    <li>Empty bullet item can interrupt paragraph of a bullet list item</li>
+    <li>Empty bullet item with space can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty bullet item without space can interrupt paragraph of a bullet list item</li>
     <li></li>
 </ul>
 <!--List Break-->
@@ -922,7 +966,12 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 </ul>
 <!--List Break-->
 <ul>
-    <li>Empty Numbered one item can interrupt paragraph of a bullet list item</li>
+    <li>Empty Numbered one item with space can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty Numbered one item without space can interrupt paragraph of a bullet list item</li>
     <li></li>
 </ul>
 <!--List Break-->
@@ -932,11 +981,16 @@ Test to see which list items can interrupt another bullet list item's paragraphs
 </ul>
 <!--List Break-->
 <ul>
-    <li>Empty Numbered non-one item can interrupt paragraph of a bullet list item</li>
+    <li>Empty Numbered non-one item with space can interrupt paragraph of a bullet list item</li>
+    <li></li>
+</ul>
+<!--List Break-->
+<ul>
+    <li>Empty Numbered non-one item without space can interrupt paragraph of a bullet list item</li>
     <li></li>
 </ul>
 .
-Document[0, 557]
+Document[0, 914]
   BulletList[0, 67] isTight
     BulletListItem[0, 60] open:[0, 1, "*"] isTight
       Paragraph[2, 60]
@@ -945,39 +999,57 @@ Document[0, 557]
       Paragraph[62, 67]
         Text[62, 66] chars:[62, 66, "item"]
   HtmlCommentBlock[68, 86]
-  BulletList[87, 154] isTight
-    BulletListItem[87, 153] open:[87, 88, "*"] isTight
-      Paragraph[89, 153]
-        Text[89, 152] chars:[89, 152, "Empty …  item"]
-    BulletListItem[153, 154] open:[153, 154, "*"] isTight hadBlankLineAfter
-  HtmlCommentBlock[157, 175]
-  BulletList[176, 254] isTight
-    BulletListItem[176, 242] open:[176, 177, "*"] isTight
-      Paragraph[178, 242]
-        Text[178, 241] chars:[178, 241, "Numbe …  item"]
-    OrderedListItem[242, 254] open:[242, 244, "1."] isTight hadBlankLineAfter
-      Paragraph[245, 254]
-        Text[245, 253] chars:[245, 253, "one item"]
-  HtmlCommentBlock[255, 273]
-  BulletList[274, 348] isTight
-    BulletListItem[274, 346] open:[274, 275, "*"] isTight
-      Paragraph[276, 346]
-        Text[276, 345] chars:[276, 345, "Empty …  item"]
-    OrderedListItem[346, 348] open:[346, 348, "1."] isTight hadBlankLineAfter
-  HtmlCommentBlock[351, 369]
-  BulletList[370, 456] isTight
-    BulletListItem[370, 440] open:[370, 371, "*"] isTight
-      Paragraph[372, 440]
-        Text[372, 439] chars:[372, 439, "Numbe …  item"]
-    OrderedListItem[440, 456] open:[440, 442, "2."] isTight hadBlankLineAfter
-      Paragraph[443, 456]
-        Text[443, 455] chars:[443, 455, "non-o …  item"]
-  HtmlCommentBlock[457, 475]
-  BulletList[476, 554] isTight
-    BulletListItem[476, 552] open:[476, 477, "*"] isTight
-      Paragraph[478, 552]
-        Text[478, 551] chars:[478, 551, "Empty …  item"]
-    OrderedListItem[552, 554] open:[552, 554, "2."] isTight hadBlankLineAfter
+  BulletList[87, 165] isTight
+    BulletListItem[87, 164] open:[87, 88, "*"] isTight
+      Paragraph[89, 164]
+        Text[89, 163] chars:[89, 163, "Empty …  item"]
+    BulletListItem[164, 165] open:[164, 165, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[168, 186]
+  BulletList[187, 268] isTight
+    BulletListItem[187, 267] open:[187, 188, "*"] isTight
+      Paragraph[189, 267]
+        Text[189, 266] chars:[189, 266, "Empty …  item"]
+    BulletListItem[267, 268] open:[267, 268, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[270, 288]
+  BulletList[289, 367] isTight
+    BulletListItem[289, 355] open:[289, 290, "*"] isTight
+      Paragraph[291, 355]
+        Text[291, 354] chars:[291, 354, "Numbe …  item"]
+    OrderedListItem[355, 367] open:[355, 357, "1."] isTight hadBlankLineAfter
+      Paragraph[358, 367]
+        Text[358, 366] chars:[358, 366, "one item"]
+  HtmlCommentBlock[368, 386]
+  BulletList[387, 472] isTight
+    BulletListItem[387, 470] open:[387, 388, "*"] isTight
+      Paragraph[389, 470]
+        Text[389, 469] chars:[389, 469, "Empty …  item"]
+    OrderedListItem[470, 472] open:[470, 472, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[475, 493]
+  BulletList[494, 582] isTight
+    BulletListItem[494, 580] open:[494, 495, "*"] isTight
+      Paragraph[496, 580]
+        Text[496, 579] chars:[496, 579, "Empty …  item"]
+    OrderedListItem[580, 582] open:[580, 582, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[584, 602]
+  BulletList[603, 689] isTight
+    BulletListItem[603, 673] open:[603, 604, "*"] isTight
+      Paragraph[605, 673]
+        Text[605, 672] chars:[605, 672, "Numbe …  item"]
+    OrderedListItem[673, 689] open:[673, 675, "2."] isTight hadBlankLineAfter
+      Paragraph[676, 689]
+        Text[676, 688] chars:[676, 688, "non-o …  item"]
+  HtmlCommentBlock[690, 708]
+  BulletList[709, 798] isTight
+    BulletListItem[709, 796] open:[709, 710, "*"] isTight
+      Paragraph[711, 796]
+        Text[711, 795] chars:[711, 795, "Empty …  item"]
+    OrderedListItem[796, 798] open:[796, 798, "2."] isTight hadBlankLineAfter
+  HtmlCommentBlock[801, 819]
+  BulletList[820, 912] isTight
+    BulletListItem[820, 910] open:[820, 821, "*"] isTight
+      Paragraph[822, 910]
+        Text[822, 909] chars:[822, 909, "Empty …  item"]
+    OrderedListItem[910, 912] open:[910, 912, "2."] isTight hadBlankLineAfter
 ````````````````````````````````
 
 
@@ -990,8 +1062,13 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty bullet item can interrupt paragraph of a numbered list item
+1. Empty bullet item with space can interrupt paragraph of a numbered list item
 * 
+
+<!--List Break-->
+
+1. Empty bullet item without space can interrupt paragraph of a numbered list item
+*
 
 <!--List Break-->
 
@@ -1000,7 +1077,12 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty Numbered one item can interrupt paragraph of a numbered list item 
+1. Empty Numbered one item with space can interrupt paragraph of a numbered list item 
+1. 
+
+<!--List Break-->
+
+1. Empty Numbered one item without space can interrupt paragraph of a numbered list item 
 1.
 
 <!--List Break-->
@@ -1010,8 +1092,13 @@ Test to see which list items can interrupt another numbered list item's paragrap
 
 <!--List Break-->
 
-1. Empty Numbered non-one item can interrupt paragraph of a numbered list item
+1. Empty Numbered non-one item with space can interrupt paragraph of a numbered list item
 2. 
+
+<!--List Break-->
+
+1. Empty Numbered non-one item without space can interrupt paragraph of a numbered list item
+2.
 
 .
 <ol>
@@ -1020,7 +1107,12 @@ Test to see which list items can interrupt another numbered list item's paragrap
 </ol>
 <!--List Break-->
 <ol>
-    <li>Empty bullet item can interrupt paragraph of a numbered list item</li>
+    <li>Empty bullet item with space can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty bullet item without space can interrupt paragraph of a numbered list item</li>
     <li></li>
 </ol>
 <!--List Break-->
@@ -1030,7 +1122,12 @@ Test to see which list items can interrupt another numbered list item's paragrap
 </ol>
 <!--List Break-->
 <ol>
-    <li>Empty Numbered one item can interrupt paragraph of a numbered list item</li>
+    <li>Empty Numbered one item with space can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty Numbered one item without space can interrupt paragraph of a numbered list item</li>
     <li></li>
 </ol>
 <!--List Break-->
@@ -1040,11 +1137,16 @@ Test to see which list items can interrupt another numbered list item's paragrap
 </ol>
 <!--List Break-->
 <ol>
-    <li>Empty Numbered non-one item can interrupt paragraph of a numbered list item</li>
+    <li>Empty Numbered non-one item with space can interrupt paragraph of a numbered list item</li>
+    <li></li>
+</ol>
+<!--List Break-->
+<ol>
+    <li>Empty Numbered non-one item without space can interrupt paragraph of a numbered list item</li>
     <li></li>
 </ol>
 .
-Document[0, 575]
+Document[0, 943]
   OrderedList[0, 70] isTight delimiter:'.'
     OrderedListItem[0, 63] open:[0, 2, "1."] isTight
       Paragraph[3, 63]
@@ -1053,39 +1155,57 @@ Document[0, 575]
       Paragraph[65, 70]
         Text[65, 69] chars:[65, 69, "item"]
   HtmlCommentBlock[71, 89]
-  OrderedList[90, 160] isTight delimiter:'.'
-    OrderedListItem[90, 159] open:[90, 92, "1."] isTight
-      Paragraph[93, 159]
-        Text[93, 158] chars:[93, 158, "Empty …  item"]
-    BulletListItem[159, 160] open:[159, 160, "*"] isTight hadBlankLineAfter
-  HtmlCommentBlock[163, 181]
-  OrderedList[182, 263] isTight delimiter:'.'
-    OrderedListItem[182, 251] open:[182, 184, "1."] isTight
-      Paragraph[185, 251]
-        Text[185, 250] chars:[185, 250, "Numbe …  item"]
-    OrderedListItem[251, 263] open:[251, 253, "1."] isTight hadBlankLineAfter
-      Paragraph[254, 263]
-        Text[254, 262] chars:[254, 262, "one item"]
-  HtmlCommentBlock[264, 282]
-  OrderedList[283, 361] isTight delimiter:'.'
-    OrderedListItem[283, 359] open:[283, 285, "1."] isTight
-      Paragraph[286, 359]
-        Text[286, 357] chars:[286, 357, "Empty …  item"]
-    OrderedListItem[359, 361] open:[359, 361, "1."] isTight hadBlankLineAfter
-  HtmlCommentBlock[363, 381]
-  OrderedList[382, 471] isTight delimiter:'.'
-    OrderedListItem[382, 455] open:[382, 384, "1."] isTight
-      Paragraph[385, 455]
-        Text[385, 454] chars:[385, 454, "Numbe …  item"]
-    OrderedListItem[455, 471] open:[455, 457, "2."] isTight hadBlankLineAfter
-      Paragraph[458, 471]
-        Text[458, 470] chars:[458, 470, "non-o …  item"]
-  HtmlCommentBlock[472, 490]
-  OrderedList[491, 572] isTight delimiter:'.'
-    OrderedListItem[491, 570] open:[491, 493, "1."] isTight
-      Paragraph[494, 570]
-        Text[494, 569] chars:[494, 569, "Empty …  item"]
-    OrderedListItem[570, 572] open:[570, 572, "2."] isTight hadBlankLineAfter
+  OrderedList[90, 171] isTight delimiter:'.'
+    OrderedListItem[90, 170] open:[90, 92, "1."] isTight
+      Paragraph[93, 170]
+        Text[93, 169] chars:[93, 169, "Empty …  item"]
+    BulletListItem[170, 171] open:[170, 171, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[174, 192]
+  OrderedList[193, 277] isTight delimiter:'.'
+    OrderedListItem[193, 276] open:[193, 195, "1."] isTight
+      Paragraph[196, 276]
+        Text[196, 275] chars:[196, 275, "Empty …  item"]
+    BulletListItem[276, 277] open:[276, 277, "*"] isTight hadBlankLineAfter
+  HtmlCommentBlock[279, 297]
+  OrderedList[298, 379] isTight delimiter:'.'
+    OrderedListItem[298, 367] open:[298, 300, "1."] isTight
+      Paragraph[301, 367]
+        Text[301, 366] chars:[301, 366, "Numbe …  item"]
+    OrderedListItem[367, 379] open:[367, 369, "1."] isTight hadBlankLineAfter
+      Paragraph[370, 379]
+        Text[370, 378] chars:[370, 378, "one item"]
+  HtmlCommentBlock[380, 398]
+  OrderedList[399, 488] isTight delimiter:'.'
+    OrderedListItem[399, 486] open:[399, 401, "1."] isTight
+      Paragraph[402, 486]
+        Text[402, 484] chars:[402, 484, "Empty …  item"]
+    OrderedListItem[486, 488] open:[486, 488, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[491, 509]
+  OrderedList[510, 602] isTight delimiter:'.'
+    OrderedListItem[510, 600] open:[510, 512, "1."] isTight
+      Paragraph[513, 600]
+        Text[513, 598] chars:[513, 598, "Empty …  item"]
+    OrderedListItem[600, 602] open:[600, 602, "1."] isTight hadBlankLineAfter
+  HtmlCommentBlock[604, 622]
+  OrderedList[623, 712] isTight delimiter:'.'
+    OrderedListItem[623, 696] open:[623, 625, "1."] isTight
+      Paragraph[626, 696]
+        Text[626, 695] chars:[626, 695, "Numbe …  item"]
+    OrderedListItem[696, 712] open:[696, 698, "2."] isTight hadBlankLineAfter
+      Paragraph[699, 712]
+        Text[699, 711] chars:[699, 711, "non-o …  item"]
+  HtmlCommentBlock[713, 731]
+  OrderedList[732, 824] isTight delimiter:'.'
+    OrderedListItem[732, 822] open:[732, 734, "1."] isTight
+      Paragraph[735, 822]
+        Text[735, 821] chars:[735, 821, "Empty …  item"]
+    OrderedListItem[822, 824] open:[822, 824, "2."] isTight hadBlankLineAfter
+  HtmlCommentBlock[827, 845]
+  OrderedList[846, 941] isTight delimiter:'.'
+    OrderedListItem[846, 939] open:[846, 848, "1."] isTight
+      Paragraph[849, 939]
+        Text[849, 938] chars:[849, 938, "Empty …  item"]
+    OrderedListItem[939, 941] open:[939, 941, "2."] isTight hadBlankLineAfter
 ````````````````````````````````
 
 
