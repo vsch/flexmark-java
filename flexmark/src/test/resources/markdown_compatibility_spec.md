@@ -1632,6 +1632,7 @@ Document[0, 186]
 ````````````````````````````````
 
 
+
 Test to confirm that it is first list indent processing, not first child of list that differs
 from sub-lists.
 
@@ -1683,6 +1684,7 @@ Document[0, 60]
 ````````````````````````````````
 
 
+
 Test where lazy continuation affects list item processing.
 
 ```````````````````````````````` example List Item Indent Handling: 7
@@ -1722,9 +1724,9 @@ Test if it is `first first list` indent processing, or first direct parent list 
 affects sub-list indentation. But `Markdown.pl` cannot properly process block quotes in list
 items. See: [Bugs](#bugs) 
 
-So first list it is.
+So first list it is and the HTML here is from the emulator not Markdown.pl 
 
-```````````````````````````````` example(List Item Indent Handling: 8) options(IGNORE)
+```````````````````````````````` example List Item Indent Handling: 8
 * item 1
  * item 2
   * item 4
@@ -1738,15 +1740,99 @@ So first list it is.
             <li>item 2</li>
             <li>item 4</li>
         </ul>
-    </li>
-    <li>item 3
+    <blockquote>
         <ul>
-            <li>item 4</li>
-            <li>item 5</li>
+            <li>item 3
+                <ul>
+                    <li>item 4</li>
+                    <li>item 5</li>
+                </ul>
+            </li>
+        </ul>
+    </blockquote>
+    </li>
+</ul>
+.
+Document[0, 78]
+  BulletList[0, 78] isTight
+    BulletListItem[0, 78] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[10, 30] isTight
+        BulletListItem[10, 19] open:[10, 11, "*"] isTight
+          Paragraph[12, 19]
+            Text[12, 18] chars:[12, 18, "item 2"]
+        BulletListItem[21, 30] open:[21, 22, "*"] isTight
+          Paragraph[23, 30]
+            Text[23, 29] chars:[23, 29, "item 4"]
+      BlockQuote[34, 78] marker:[34, 35, ">"]
+        BulletList[36, 78] isTight
+          BulletListItem[36, 78] open:[36, 37, "*"] isTight
+            Paragraph[38, 45]
+              Text[38, 44] chars:[38, 44, "item 3"]
+            BulletList[52, 78] isTight
+              BulletListItem[52, 61] open:[52, 53, "*"] isTight
+                Paragraph[54, 61]
+                  Text[54, 60] chars:[54, 60, "item 4"]
+              BulletListItem[69, 78] open:[69, 70, "*"] isTight
+                Paragraph[71, 78]
+                  Text[71, 77] chars:[71, 77, "item 5"]
+````````````````````````````````
+
+
+
+```````````````````````````````` example List Item Indent Handling: 9
+* item 1
+ * item 2
+  * item 4
+     > * item 3
+     >  * item 4
+     >   * item 5
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2</li>
+            <li>item 4
+                <blockquote>
+                    <ul>
+                        <li>item 3
+                            <ul>
+                                <li>item 4</li>
+                                <li>item 5</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </blockquote>
+            </li>
         </ul>
     </li>
 </ul>
 .
+Document[0, 81]
+  BulletList[0, 81] isTight
+    BulletListItem[0, 81] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[10, 81] isTight
+        BulletListItem[10, 19] open:[10, 11, "*"] isTight
+          Paragraph[12, 19]
+            Text[12, 18] chars:[12, 18, "item 2"]
+        BulletListItem[21, 81] open:[21, 22, "*"] isTight
+          Paragraph[23, 30]
+            Text[23, 29] chars:[23, 29, "item 4"]
+          BlockQuote[35, 81] marker:[35, 36, ">"]
+            BulletList[37, 81] isTight
+              BulletListItem[37, 81] open:[37, 38, "*"] isTight
+                Paragraph[39, 46]
+                  Text[39, 45] chars:[39, 45, "item 3"]
+                BulletList[54, 81] isTight
+                  BulletListItem[54, 63] open:[54, 55, "*"] isTight
+                    Paragraph[56, 63]
+                      Text[56, 62] chars:[56, 62, "item 4"]
+                  BulletListItem[72, 81] open:[72, 73, "*"] isTight
+                    Paragraph[74, 81]
+                      Text[74, 80] chars:[74, 80, "item 5"]
 ````````````````````````````````
 
 
@@ -1754,7 +1840,7 @@ So first list it is.
 Test shows where the boundary switch to indented code occurs. First paragraph is a paragraph,
 the second is indented code.
 
-```````````````````````````````` example List Item Indent Handling: 9
+```````````````````````````````` example List Item Indent Handling: 10
 -   test
 
        item child para
@@ -1867,7 +1953,7 @@ Document[0, 331]
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
 paragraph is a paragraph, the second is indented code
 
-```````````````````````````````` example List Item Indent Handling: 10
+```````````````````````````````` example List Item Indent Handling: 11
 * item 1
     
   item para 1
@@ -2100,7 +2186,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example List Item Indent Handling: 11
+```````````````````````````````` example List Item Indent Handling: 12
 *  item 1
    * item 2
   * item 3
@@ -2132,7 +2218,7 @@ Document[0, 33]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 12
+```````````````````````````````` example List Item Indent Handling: 13
 * item 1
 
   # Heading 1
@@ -2219,7 +2305,7 @@ Document[0, 296]
 
 
 
-```````````````````````````````` example List Item Indent Handling: 13
+```````````````````````````````` example List Item Indent Handling: 14
 -   test
     - sub item
 
@@ -2408,6 +2494,8 @@ Here the block quote messes up parsing and HTML generation
 .
 ````````````````````````````````
 
+
+
 An item prefix with a space but otherwise empty, instead of lazy continuation becomes something
 outside the item as part of the list
 
@@ -2439,5 +2527,6 @@ list break
         list item</li>2.</ul>
 .
 ````````````````````````````````
+
 
 

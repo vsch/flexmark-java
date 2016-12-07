@@ -52,6 +52,7 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+
 &nbsp;</details>
 
 Next Release To Do List
@@ -61,16 +62,21 @@ Next Release To Do List
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
-0.7.0
------
-
 - [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
       when descriptions can benefit form complex formatting
 
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
 
+0.7.0
+-----
+
+- Add: YouTrack converter, same as Jira but with a few differences
+
+- Fix: Jira converter not to add an extra blank line after paragraphs in block quotes
+
 - Add: final to all node visitors' node parameter
+
 - Add: upgrade to CommonMark spec 0.27
 
 - Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear
@@ -81,44 +87,46 @@ Next Release To Do List
 
 - Add: test for `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` option
 
-- [ ] Fix: rewrite list handling and list handling options to allow for Markdown parser
-      emulation based on major parser families, as described in
-      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md) with processor profile preset:
+- Add: header id generator options to allow slight customization of heading ids
+
+    - `HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES` when set to true adds a `-` with an
+      increasing number from 1 to N for each duplicated id generated.
+
+    - `HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS` a string of characters in the heading
+      text which will be mapped to `-`, alphanumerics are passed as is. Anything else is suppressed.
+
+    - `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` if set will not generate consecutive
+      dashes in the reference ids.
+
+- [x] Change: complete rewrite of list handling and list handling options to allow for Markdown
+      parser emulation based on major parser families, as described in
+      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). All major families are done
+      and tested. 
       - [x] CommonMark
-          - [ ] GitHub Comments
+          - [x] GitHub Comments
           - [ ] League/CommonMark
+          - [x] CommonMark (default for family)
       - [x] FixedIndent
           - [ ] Pegdown
-          - [x] MultiMarkdown
+          - [x] MultiMarkdown 
           - [ ] Pandoc
-      - [x] Kramdown
+      - [x] Kramdown (default for family)
           - [ ] GitHub Docs
           - [ ] Jekyll
-          - [x] Kramdown
-      - [ ] Markdown
-          - [ ] Markdown.pl
+          - [x] Kramdown (default for family)
+      - [x] Markdown
+          - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
 
-- Change: rename `Parser.LISTS_OVER_INDENTS_TO_FIRST_ITEM` to
-  `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_FIRST_ITEM`
+      No attempt was made to emulate inline processing of these parsers. Only list processing
+      for now. Most of the other element discrepancies are already addressable with existing
+      parser options.
 
-- Add: option `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_SUB_ITEM` to control whether items
-  indented over the marker indent of the first list item but less than the content indent of the
-  previous item will be added as a sub-item of the previous item. Can't say it enough, it's f'up
-  but that is how one of the processors I tested handled it, have to see which one. If you think
-  it's hard to follow you should try debugging it.
-
-- Add: documentation to Extensions wiki for missing core list parser options for weird
-  processing of lists:
-    - `Parser.LISTS_CONTENT_INDENT`
-    - `Parser.LISTS_CONTENT_INDENT_OFFSET`
-    - `Parser.LISTS_CONTENT_INDENT_OVERRIDES_CODE_OFFSET`
-    - `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_FIRST_ITEM`
-    - `Parser.LISTS_CONTENT_INDENT_OVER_MARKER_TO_SUB_ITEM`
+      :warning: Markdown.pl is emulated fairly well but without its abundant bugs. Use it at
+      your own discretion.
 
 - Fix: #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of
-
-text block
+  text block
 
 - Change: `SpecReader` to parse for headings only if spaces are present after leading `#`.
   Otherwise, leading github issue `#7` in the description is treated as a heading.
@@ -1118,7 +1126,7 @@ text block
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-
+    
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

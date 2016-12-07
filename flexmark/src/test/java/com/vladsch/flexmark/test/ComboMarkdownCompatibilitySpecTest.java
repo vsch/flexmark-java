@@ -17,7 +17,7 @@ import java.util.Map;
 public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/markdown_compatibility_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationFamily.MARKDOWN.getListOptions())
+            .setFrom(ParserEmulationFamily.MARKDOWN.getOptions())
             .set(Parser.HEADING_NO_LEAD_SPACE, true)
             //.set(Parser.THEMATIC_BREAK_RELAXED_START, true)
             .set(HtmlRenderer.INDENT_SIZE, 4)

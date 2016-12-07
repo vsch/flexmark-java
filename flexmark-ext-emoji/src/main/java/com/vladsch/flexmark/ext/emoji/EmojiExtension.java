@@ -39,7 +39,7 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(EmojiJiraRenderer::new);
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(EmojiNodeRenderer::new);

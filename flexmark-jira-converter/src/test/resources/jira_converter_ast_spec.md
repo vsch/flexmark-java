@@ -144,7 +144,6 @@ Single line block quote
 .
 {quote}
 simple block quote
-
 {quote}
 .
 Document[0, 21]
@@ -163,7 +162,6 @@ Simple
 {quote}
 simple block quote
 paragraph.
-
 {quote}
 .
 Document[0, 34]
@@ -190,7 +188,6 @@ paragraph.
 
 another block quote
 paragraph.
-
 {quote}
 .
 Document[0, 71]

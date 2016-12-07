@@ -1,9 +1,79 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
-**flexmark-java** is a fork of [commonmark-java] project, modified to generate an AST which reflects
-all the elements in the original source, full source position tracking for all elements in the
-AST and easier JetBrains Open API PsiTree generation.
+**flexmark-java** is a Java implementation of CommonMark 0.27 spec parser using the blocks
+first, inlines after Markdown parsing architecture.
+
+Its strengths are speed, flexibility, Markdown source element based AST with details of the
+source position down to individual lexemes that make up the element and extensibility.
+
+The API allows granular control of the parsing process and is optimized for parsing with a large
+number of installed extensions. The parser and extensions come with plenty of options for parser
+behavior and HTML rendering variations. The end goal is to have the parser and renderer be able
+to mimic other parsers with great degree of accuracy. This is now partially complete with the
+implementation of [Markdown Processor Family Emulation](#markdown-processor-family-emulation)
+
+Motivation for this project was the need to replace [pegdown] parser in my [Markdown Navigator]
+plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
+than ideal and for pathological input either hangs or practically hangs during parsing.
+
+### Requirements
+
+* Java 8 or above
+* The core has no dependencies; for extensions, see below
+
+[![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
+[![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java)
+[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
+
+### Changes from commonmark-java project
+
+- The project is now on Maven
+- Java compatibility raised to 1.8 so that lambdas could be used
+- Android compatibility neglected for now
+- No attempt is made to keep API backward compatibility to the original project.
+
+#### Markdown Processor Family Emulation
+
+Latest addition was a rewrite of the list parser to better control emulation of other markdown
+processors as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md). Addition of
+processor presets to emulate specific markdown processing behaviour of these parsers is on a
+short to do list.
+
+Some emulation families do a better better job of emulating their target than others. Most of
+the effort was directed at emulating how these processors parse standard Markdown and list
+related parsing specifically. For processors that extend original Markdown, you will need to add
+those extensions that are already implemented in flexmark-java to the Parser/Renderer builder
+options.
+
+Extensions will be modified to include their own presets for specific processor emulation, if
+that processor has an equivalent extension implemented.
+
+If you find a discrepancy please open an issue so it can be addressed.
+
+Major processor families are implemented:
+
+- [x] CommonMark (spec 0.27)
+      - [x] GitHub Comments
+      - [ ] League/CommonMark
+- [x] FixedIndent
+      - [x] MultiMarkdown
+      - [ ] Pegdown
+- [x] Kramdown
+      - [ ] GitHub Docs
+      - [ ] Jekyll
+- [x] Markdown.pl
+      - [ ] Php Markdown Extra
+
+:information_source: profiles to encapsulate configuration details for variants within the
+family will follow shortly.
+
+
+### History and Motivation
+
+**flexmark-java** is a fork of [commonmark-java] project, modified to generate an AST which
+reflects all the elements in the original source, full source position tracking for all elements
+in the AST and easier JetBrains Open API PsiTree generation.
 
 The API was changed to allow more granular control of the parsing process and optimized for
 parsing with a large number of installed extensions. The parser and extensions come with many
@@ -31,53 +101,6 @@ these options for configuration, including disabling some core block parsers.
 This is a work in progress with many API changes. No attempt is made to keep backward API
 compatibility to the original project and until the feature set is mostly complete, not even to
 earlier versions of this project.
-
-### Requirements
-
-* Java 8 or above
-* The core has no dependencies; for extensions, see below
-
-[![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
-[![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java)
-[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
-
-### Changes from commonmark-java project
-
-- The project is now on Maven
-- Java compatibility raised to 1.8 so that lambdas could be used
-- Android compatibility neglected for now
-- No attempt is made to keep API backward compatibility to the original project.
-
-#### Markdown Parser
-
-Latest addition was a rewrite of the list parser to better control emulation of other markdown
-parsers as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md) and the addition of
-processor presets to emulate specific markdown processing behaviour of these parsers. 
-
-Some presets do a better better job of emulating their target than others. Most of the effort
-was directed at emulating how these processors parse standard Markdown. For processors that
-extend original Markdown, you will need to add those extensions that are already implemented in
-flexmark-java to the Parser/Renderer builder options.
-
-Extensions will be modified to include their own presets for specific processor emulation, if
-that processor has an equivalent extension implemented.
-
-If you find a discrepancy please open an issue so it can be addressed.
-
-Major processor families with presets for their variants: 
-
-- [x] CommonMark (spec 0.27)
-    - [ ] GitHub Comments
-    - [ ] League/CommonMark
-- [ ] MultiMarkdown
-    - [ ] Pegdown
-    - [ ] Pandoc
-- [ ] Kramdown
-    - [ ] GitHub Docs
-    - [ ] Jekyll  
-- [ ] Markdown
-    - [ ] Php Markdown Extra
-
 
 ### Feature Comparison
 
@@ -245,55 +268,47 @@ its original design.
 Benchmarks
 ----------
 
-After upgrading to spec 0.26 compliance and merging delimiter parsing rule changes from
-commonmark-java:
+After upgrading to spec 0.27 compliance and adding parser emulation for various list processing
+variations:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |         0.409ms |       0.787ms |           1.663ms |  14.874ms |
-| VERSION          |         0.767ms |       1.118ms |           3.611ms |  41.808ms |
-| commonMarkSpec   |        31.120ms |      48.384ms |         593.122ms | 571.006ms |
-| markdown_example |         8.243ms |       9.715ms |         207.987ms | 934.118ms |
-| spec             |         4.568ms |       6.804ms |          34.246ms | 294.498ms |
-| table            |         0.218ms |       0.421ms |           0.677ms |   3.467ms |
-| table-format     |         1.079ms |       2.239ms |           3.803ms |  22.810ms |
-| wrap             |         3.216ms |       7.011ms |          14.891ms |  82.138ms |
+| README-SLOW      |         0.425ms |       1.007ms |           1.664ms |  15.210ms |
+| VERSION          |         0.791ms |       1.659ms |           3.871ms |  42.589ms |
+| commonMarkSpec   |        31.163ms |      51.462ms |         608.117ms | 593.732ms |
+| markdown_example |         8.325ms |      10.002ms |         210.672ms | 981.694ms |
+| spec             |         4.685ms |       6.973ms |          34.622ms | 297.876ms |
+| table            |         0.230ms |       0.503ms |           0.654ms |   3.477ms |
+| table-format     |         1.622ms |       2.689ms |           3.792ms |  22.820ms |
+| wrap             |         3.396ms |       7.875ms |          15.658ms |  86.634ms |
 
 Ratios of above:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          1.92 |              4.07 |     36.39 |
-| VERSION          |            1.00 |          1.46 |              4.71 |     54.51 |
-| commonMarkSpec   |            1.00 |          1.55 |             19.06 |     18.35 |
-| markdown_example |            1.00 |          1.18 |             25.23 |    113.33 |
-| spec             |            1.00 |          1.49 |              7.50 |     64.47 |
-| table            |            1.00 |          1.93 |              3.11 |     15.94 |
-| table-format     |            1.00 |          2.07 |              3.52 |     21.14 |
-| wrap             |            1.00 |          2.18 |              4.63 |     25.54 |
+| README-SLOW      |            1.00 |          2.37 |              3.92 |     35.79 |
+| VERSION          |            1.00 |          2.10 |              4.89 |     53.82 |
+| commonMarkSpec   |            1.00 |          1.65 |             19.51 |     19.05 |
+| markdown_example |            1.00 |          1.20 |             25.31 |    117.92 |
+| spec             |            1.00 |          1.49 |              7.39 |     63.59 |
+| table            |            1.00 |          2.19 |              2.85 |     15.14 |
+| table-format     |            1.00 |          1.66 |              2.34 |     14.07 |
+| wrap             |            1.00 |          2.32 |              4.61 |     25.51 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.54 |             17.33 |     39.60 |
+| overall          |            1.00 |          1.62 |             17.36 |     40.37 |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.52 |          1.00 |              2.11 |     18.91 |
-| VERSION          |            0.69 |          1.00 |              3.23 |     37.39 |
-| commonMarkSpec   |            0.64 |          1.00 |             12.26 |     11.80 |
-| markdown_example |            0.85 |          1.00 |             21.41 |     96.15 |
-| spec             |            0.67 |          1.00 |              5.03 |     43.29 |
-| table            |            0.52 |          1.00 |              1.61 |      8.24 |
-| table-format     |            0.48 |          1.00 |              1.70 |     10.19 |
-| wrap             |            0.46 |          1.00 |              2.12 |     11.72 |
+| README-SLOW      |            0.42 |          1.00 |              1.65 |     15.11 |
+| VERSION          |            0.48 |          1.00 |              2.33 |     25.67 |
+| commonMarkSpec   |            0.61 |          1.00 |             11.82 |     11.54 |
+| markdown_example |            0.83 |          1.00 |             21.06 |     98.15 |
+| spec             |            0.67 |          1.00 |              4.97 |     42.72 |
+| table            |            0.46 |          1.00 |              1.30 |      6.92 |
+| table-format     |            0.60 |          1.00 |              1.41 |      8.49 |
+| wrap             |            0.43 |          1.00 |              1.99 |     11.00 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.65 |          1.00 |             11.25 |     25.69 |
-
----
-
-I realized that previous results had the code running commonmark-java and flexmark-java parsing
-and rendering, while intellij-markdown and pegdown were only running parsing. Also,
-commonmark-java was only running with ext-gfm-tables but to make it more fair to pegdown I added
-ext-gfm-strikethrough and disabled auto-link extension for all parsers that have the option
-since it causes significant parser slow-down for all parsers.
+| overall          |            0.62 |          1.00 |             10.70 |     24.88 |
 
 ---
 

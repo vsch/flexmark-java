@@ -42,7 +42,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(TocNodeRenderer::new);
         }

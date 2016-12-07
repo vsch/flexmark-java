@@ -42,7 +42,7 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(WikiLinkJiraRenderer::new);
             rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
         } else if (rendererType.equals("HTML")) {

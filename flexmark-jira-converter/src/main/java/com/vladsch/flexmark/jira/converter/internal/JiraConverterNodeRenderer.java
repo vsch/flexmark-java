@@ -27,6 +27,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
 
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
+    private int inBlockQuote = 0;
 
     public JiraConverterNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
@@ -84,7 +85,9 @@ public class JiraConverterNodeRenderer implements NodeRenderer
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
         html.line().raw("{quote}").line();
+        inBlockQuote++;
         context.renderChildren(node);
+        inBlockQuote--;
         html.line().raw("{quote}").line();
     }
 
@@ -174,7 +177,12 @@ public class JiraConverterNodeRenderer implements NodeRenderer
         //if (node.getParent() instanceof ListItem && node.getParent().getFirstChild() == node) {
         if (!inTightList && (node.getParent().getFirstChild() != node || !(node.getParent() instanceof ListItem) || !((ListItem) node.getParent()).isParagraphWrappingDisabled())) {
             renderTextBlockParagraphLines(node, context, html);
-            html.line().raw("\n");
+
+            if (inBlockQuote > 0 && node.getNext() == null) {
+                html.line();
+            } else {
+                html.line().raw("\n");
+            }
         } else {
             renderTextBlockParagraphLines(node, context, html);
         }
@@ -195,7 +203,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.raw("\n");
+        html.line();
     }
 
     private void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) {

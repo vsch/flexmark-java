@@ -33,7 +33,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(TableNodeRenderer::new);
         }

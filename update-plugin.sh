@@ -5,3 +5,4 @@ cd ${HOME_DIR}
 
 cp out/artifacts/flexmark-util.jar ../MissingInActions/lib
 cp out/artifacts/flexmark-parent.jar ../idea-multimarkdown2/lib
+cp out/artifacts/flexmark-parent.jar ../markdown-profiling/lib

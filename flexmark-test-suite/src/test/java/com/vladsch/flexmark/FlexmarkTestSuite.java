@@ -21,9 +21,9 @@ import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
-import com.vladsch.flexmark.jira.parser.JiraParserTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
+import com.vladsch.flexmark.youtrack.converter.YouTrackConverterTestSuite;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -50,7 +50,7 @@ import org.junit.runners.Suite;
         ExtYamlFrontMatterTestSuite.class,
         ExtZzzzzzTestSuite.class,
         JiraConverterTestSuite.class,
-        //JiraParserTestSuite.class,
+        YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,
 })
 public class FlexmarkTestSuite {

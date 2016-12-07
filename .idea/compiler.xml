@@ -43,6 +43,7 @@
         <module name="flexmark-test-suite" />
         <module name="flexmark-test-util" />
         <module name="flexmark-util" />
+        <module name="flexmark-youtrack-converter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -71,6 +72,7 @@
       <module name="flexmark-jira-converter" target="8" />
       <module name="flexmark-test-util" target="8" />
       <module name="flexmark-util" target="8" />
+      <module name="flexmark-youtrack-converter" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

@@ -39,7 +39,7 @@ public class JiraParserExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             // rendererBuilder.nodeRendererFactory(JiraParserJiraRenderer::new);
         } else if (rendererType.equals("HTML")) {
             // rendererBuilder.nodeRendererFactory(JiraParserNodeRenderer::new);

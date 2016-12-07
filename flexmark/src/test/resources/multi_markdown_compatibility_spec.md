@@ -1785,8 +1785,8 @@ Test how headings in list items are handled, leading space allowed or not
 <ul>
     <li>item 1</li>
 </ul>
-<h1 id="heading-1">Heading 1</h1>
-<h2 id="heading-2">Heading 2</h2>
+<h1 id="heading1">Heading 1</h1>
+<h2 id="heading2">Heading 2</h2>
 <pre><code>### Heading 3
 
  #### Heading 4
@@ -1798,10 +1798,10 @@ Test how headings in list items are handled, leading space allowed or not
 <ul>
     <li>
         <p>item 2</p>
-        <h1 id="heading-1-1">Heading 1</h1>
-        <h2 id="heading-2-1">Heading 2</h2>
-        <h3 id="heading-3">Heading 3</h3>
-        <h4 id="heading-3-1">Heading 3</h4>
+        <h1 id="heading1">Heading 1</h1>
+        <h2 id="heading2">Heading 2</h2>
+        <h3 id="heading3">Heading 3</h3>
+        <h4 id="heading3">Heading 3</h4>
         <pre><code>##### Heading 5
 
  ###### Heading 6

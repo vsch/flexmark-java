@@ -16,8 +16,8 @@ uses the last item's content indent for this determination. MultiMarkdown, uses 
 fixed indent of 4 spaces from left edge or last block quote marker to make that determination.
 
 After trying to work this out by trial and error and only having moderate success, I decided to
-make more rigorous to reduce interaction between options and to be able tweak individual family
-emulation accuracy.
+take more rigorous approach to reduce interaction between options and to be able tweak
+individual family emulation accuracy.
 
 The following definitions are used:
 
@@ -41,7 +41,7 @@ The following definitions are used:
   non-list-item parent block), always >= 1 since every list item has a list parent
 - `first parent list`: last list block after non-list or non-list item block
 
-Family types:
+Family type rough behavior, details are in the code for `ListBlockParser` and `ListItemParser`:
 
 - CommonMark: version 0.27 of the spec, all common mark parsers
     - Definitions/Defaults:
@@ -62,13 +62,13 @@ Family types:
     - Definitions/Defaults:
         - `ITEM_INDENT` = 4
         - `CODE_INDENT` = 8
-        - `current indent` = `line indent`
+        - `current indent` = line indent
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
-         - `current indent` >= `CODE_INDENT`: indented code
-         - `current indent` >= `ITEM_INDENT`: sub-item
-         - otherwise: list item
+         - `current indent` >= `CODE_INDENT`: item content
+         - `current indent` >= `ITEM_INDENT`: sub-item or content
+         - otherwise: list item or not ours
 
 - Kramdown:
     - Definitions/Defaults:
@@ -78,12 +78,12 @@ Family types:
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
-        - `current indent` >=  `item content indent`: sub-item
+        - `current indent` >=  `item content indent`: sub-item or content
         - `current indent` >= `list indent` + `ITEM_INDENT`
-             - hadBlankLine: end current item, keep loose status, indented code
+             - hadBlankLine: end current item, keep loose status, item content
              - !hadBlankLine: lazy continuation
-        - `current indent` >= `list indent` + `CODE_INDENT`: indented code
-        - `current indent` >= `list indent`: list item
+        - `current indent` >= `list indent` + `CODE_INDENT`: item content
+        - `current indent` >= `list indent`: list item or not ours
 
 - Markdown:
     - Definitions/Defaults:
@@ -93,12 +93,12 @@ Family types:
     - Start List Conditions:
         - `current indent` < `ITEM_INDENT`: new list with new item
     - Continuation Conditions:
-        - `current indent` >= `CODE_INDENT`
-            - if had blank line: indented code
-            - otherwise: lazy continuation
-        - if is first list && `current indent` > `list indent`: sub-item or child item
-        - otherwise if `current indent` > `ITEM_INDENT`: sub-item or child item
-        - otherwise: list item
+        - `current indent` >= `CODE_INDENT`: item content
+        - `current indent` > `ITEM_INDENT`: sub-item or content
+        - `current indent` > `list indent`: sub-item or content
+        - otherwise: list item or not ours
+
+##### List Parsing Options
 
 Parser configuration parameters, parser emulation family sets defaults but these can be modified
 to tweak parser behaviour:
@@ -119,18 +119,20 @@ to tweak parser behaviour:
 - [ ] all items are loose if any in the list are loose: `Parser.LISTS_AUTO_LOOSE`, `ListOptions.autoLoose`
 - [ ] auto loose list setting `Parser.LISTS_AUTO_LOOSE` only applies to simple 1 level lists: `Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS`, `ListOptions.autoLooseOneLevelLists`
 
-- [ ] bullet item can interrupt a paragraph: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.bulletItemInterruptsParagraph`
-- [ ] ordered item can interrupt a paragraph: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.orderedItemInterruptsParagraph`
-- [ ] ordered non 1 item can interrupt a paragraph: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.orderedNonOneItemInterruptsParagraph`
-- [ ] empty bullet item can interrupt a paragraph: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyBulletItemInterruptsParagraph`
-- [ ] empty ordered item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyOrderedItemInterruptsParagraph`
-- [ ] empty ordered non 1 item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.emptyOrderedNonOneItemInterruptsParagraph`
-- [ ] bullet item can interrupt a paragraph of a list item: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.bulletItemInterruptsItemParagraph`
-- [ ] ordered item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.orderedItemInterruptsItemParagraph`
-- [ ] ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.orderedNonOneItemInterruptsItemParagraph`
-- [ ] empty bullet item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyBulletItemInterruptsItemParagraph`
-- [ ] empty ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedItemInterruptsItemParagraph`
-- [ ] empty ordered item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedNonOneItemInterruptsItemParagraph`
-- [ ] empty bullet sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyBulletSubItemInterruptsItemParagraph`
-- [ ] empty ordered non 1 sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedSubItemInterruptsItemParagraph`
-- [ ] empty ordered sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.emptyOrderedNonOneSubItemInterruptsItemParagraph`
+##### List Item Paragraph Interruption Options
+
+- [ ] bullet item can interrupt a paragraph: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.bulletItemInterruptsParagraph`
+- [ ] ordered item can interrupt a paragraph: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.orderedItemInterruptsParagraph`
+- [ ] ordered non 1 item can interrupt a paragraph: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.orderedNonOneItemInterruptsParagraph`
+- [ ] empty bullet item can interrupt a paragraph: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.emptyBulletItemInterruptsParagraph`
+- [ ] empty ordered item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedItemInterruptsParagraph`
+- [ ] empty ordered non 1 item can interrupt a paragraph: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedNonOneItemInterruptsParagraph`
+- [ ] bullet item can interrupt a paragraph of a list item: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.bulletItemInterruptsItemParagraph`
+- [ ] ordered item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.orderedItemInterruptsItemParagraph`
+- [ ] ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.orderedNonOneItemInterruptsItemParagraph`
+- [ ] empty bullet item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyBulletItemInterruptsItemParagraph`
+- [ ] empty ordered non 1 item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedItemInterruptsItemParagraph`
+- [ ] empty ordered item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedNonOneItemInterruptsItemParagraph`
+- [ ] empty bullet sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyBulletSubItemInterruptsItemParagraph`
+- [ ] empty ordered non 1 sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedSubItemInterruptsItemParagraph`
+- [ ] empty ordered sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedNonOneSubItemInterruptsItemParagraph`

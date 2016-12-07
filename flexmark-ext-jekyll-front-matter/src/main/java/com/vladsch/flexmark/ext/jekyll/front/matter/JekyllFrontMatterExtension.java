@@ -40,7 +40,7 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(JekyllFrontMatterNodeRenderer::new);
             // rendererBuilder.linkResolverFactory(new JekyllFrontMatterLinkResolver.Factory());

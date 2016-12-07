@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <exclude-output />
@@ -28,18 +28,18 @@
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-autolink:0.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-autolink:0.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.nibor.autolink:autolink:0.4.0" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-abbreviation:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-emoji:0.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-abbreviation:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-emoji:0.7.0" level="project" />
     <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-footnotes:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-tables:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-tables:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.6.1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-wikilink:0.6.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-footnotes:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-tables:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-tasklist:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-tables:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.7.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.vladsch.flexmark:flexmark-ext-wikilink:0.7.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.pegdown:pegdown:1.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-java:1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-core:1.1.7" level="project" />

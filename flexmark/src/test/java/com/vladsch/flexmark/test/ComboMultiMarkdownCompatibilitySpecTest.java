@@ -18,10 +18,10 @@ import java.util.Map;
 public class ComboMultiMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/multi_markdown_compatibility_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationFamily.FIXED_INDENT.getListOptions().getMutable()
+            .setFrom(ParserEmulationFamily.FIXED_INDENT.getOptions().getMutable()
                     .setAutoLoose(true)
                     .setAutoLooseOneLevelLists(true)
-                    .setBulletMismatchToNewList(false)
+                    .setDelimiterMismatchToNewList(false)
                     .setCodeIndent(8)
                     .setEndOnDoubleBlank(false)
                     .setItemIndent(4)
@@ -52,17 +52,17 @@ public class ComboMultiMarkdownCompatibilitySpecTest extends ComboExtraSpecTest 
                             .setEmptyOrderedItemInterruptsItemParagraph(true)
                             .setEmptyOrderedNonOneItemInterruptsItemParagraph(true)
 
-                            // TEST: need to test for these
                             .setEmptyBulletSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
                     )
-
-                    .getListOptions()
             )
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
+            .set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false)
+            .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
+            .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
             .set(HtmlRenderer.SOFT_BREAK, " ");
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();

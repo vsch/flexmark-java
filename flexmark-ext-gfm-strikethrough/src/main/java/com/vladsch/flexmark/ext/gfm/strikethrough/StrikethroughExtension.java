@@ -34,7 +34,7 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(StrikethroughJiraRenderer::new);
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(StrikethroughNodeRenderer::new);

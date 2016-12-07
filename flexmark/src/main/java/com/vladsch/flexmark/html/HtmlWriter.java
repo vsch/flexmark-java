@@ -31,6 +31,7 @@ public class HtmlWriter {
     private int preNesting = 0;
     private AttributablePart useAttributes = null;
     private int appendCount = 0;
+    private String prefix = "";
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -52,6 +53,15 @@ public class HtmlWriter {
         StringBuilder sb = new StringBuilder(indentSize);
         for (int i = 0; i < indentSize; i++) sb.append(' ');
         indentSizePrefix = sb.toString();
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public HtmlWriter setPrefix(final String prefix) {
+        this.prefix = prefix;
+        return this;
     }
 
     public int getAppendCount() {
@@ -371,7 +381,7 @@ public class HtmlWriter {
         lineOnChildText = true;
         return this;
     }
-    
+
     public HtmlWriter unIndentTo(int indentSize) {
         delayedIndent = false;
         while (indentSize < indent) unIndent();
@@ -398,10 +408,10 @@ public class HtmlWriter {
 
         if (delayedEOL) {
             delayedEOL = false;
-            if (s.charAt(0) != '\n') append("\n");
+            if (s.charAt(0) != '\n') append("\n" + prefix);
         }
 
-        if (indentPrefix.length() > 0 && preNesting <= 0) {
+        if ((!indentPrefix.isEmpty() || !prefix.isEmpty()) && preNesting <= 0) {
             // convert \n to \n + indent except for the last one
             // also if the last is \n then prefix indent size
 
@@ -412,13 +422,13 @@ public class HtmlWriter {
                 while (lastPos < s.length()) {
                     int pos = s.indexOf('\n', lastPos);
                     if (pos < 0 || pos == s.length() - 1) {
-                        if (lastWasEOL) buffer.append(indentPrefix);
+                        if (lastWasEOL) buffer.append(prefix).append(indentPrefix);
                         buffer.append(s.substring(lastPos));
                         break;
                     }
 
                     if (pos > lastPos) {
-                        if (lastWasEOL) buffer.append(indentPrefix);
+                        if (lastWasEOL) buffer.append(prefix).append(indentPrefix);
                         buffer.append(s.substring(lastPos, pos));
                     }
 
@@ -436,6 +446,7 @@ public class HtmlWriter {
             }
         } else {
             try {
+                if (lastChar == '\n' && !prefix.isEmpty()) buffer.append(prefix);
                 buffer.append(s);
             } catch (IOException e) {
                 throw new RuntimeException(e);

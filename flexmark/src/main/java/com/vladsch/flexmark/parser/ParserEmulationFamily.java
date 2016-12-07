@@ -14,9 +14,9 @@ public enum ParserEmulationFamily {
         this.intValue = intValue;
     }
 
-    public ListOptions getListOptions() {
+    public MutableListOptions getOptions() {
         if (this == FIXED_INDENT) {
-            return new ListOptions.Mutable().setParserEmulationFamily(this)
+            return new MutableListOptions().setParserEmulationFamily(this)
                     .setAutoLoose(false)
                     .setAutoLooseOneLevelLists(false)
                     .setLooseWhenBlankFollowsItemParagraph(false)
@@ -24,7 +24,7 @@ public enum ParserEmulationFamily {
                     .setLooseWhenHasTrailingBlankLine(true)
                     .setLooseOnPrevLooseItem(false)
                     .setOrderedStart(false)
-                    .setBulletMismatchToNewList(false)
+                    .setDelimiterMismatchToNewList(false)
                     .setItemTypeMismatchToNewList(false)
                     .setItemTypeMismatchToSubList(false)
                     .setEndOnDoubleBlank(false)
@@ -53,12 +53,10 @@ public enum ParserEmulationFamily {
                             .setEmptyBulletSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
-                    )
-
-                    .getListOptions();
+                    );
         }
         if (this == KRAMDOWN) {
-            return new ListOptions.Mutable()
+            return new MutableListOptions()
                     .setParserEmulationFamily(this)
                     .setAutoLoose(false)
                     .setLooseWhenBlankFollowsItemParagraph(true)
@@ -66,7 +64,7 @@ public enum ParserEmulationFamily {
                     .setLooseWhenHasTrailingBlankLine(false)
                     .setLooseOnPrevLooseItem(false)
                     .setOrderedStart(false)
-                    .setBulletMismatchToNewList(false)
+                    .setDelimiterMismatchToNewList(false)
                     .setItemTypeMismatchToNewList(false)
                     .setItemTypeMismatchToSubList(true)
                     .setOrderedItemDotOnly(true)
@@ -95,12 +93,10 @@ public enum ParserEmulationFamily {
                             .setEmptyBulletSubItemInterruptsItemParagraph(false)
                             .setEmptyOrderedSubItemInterruptsItemParagraph(false)
                             .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(false)
-                    )
-
-                    .getListOptions();
+                    );
         }
         if (this == MARKDOWN) {
-            return new ListOptions.Mutable()
+            return new MutableListOptions()
                     .setParserEmulationFamily(this)
                     .setAutoLoose(false)
                     .setLooseOnPrevLooseItem(true)
@@ -108,7 +104,7 @@ public enum ParserEmulationFamily {
                     .setLooseWhenHasLooseSubItem(true)
                     .setLooseWhenHasTrailingBlankLine(true)
                     .setOrderedStart(false)
-                    .setBulletMismatchToNewList(false)
+                    .setDelimiterMismatchToNewList(false)
                     .setItemTypeMismatchToNewList(false)
                     .setItemTypeMismatchToSubList(false)
                     .setEndOnDoubleBlank(false)
@@ -137,11 +133,9 @@ public enum ParserEmulationFamily {
                             .setEmptyBulletSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedSubItemInterruptsItemParagraph(true)
                             .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
-                    )
-
-                    .getListOptions();
+                    );
         }
 
-        return new ListOptions((DataHolder) null);
+        return new MutableListOptions((DataHolder) null);
     }
 }

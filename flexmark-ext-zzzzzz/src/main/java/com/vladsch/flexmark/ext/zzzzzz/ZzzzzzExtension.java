@@ -62,7 +62,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
+        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             rendererBuilder.nodeRendererFactory(ZzzzzzJiraRenderer::new);// zzzoptionszzz(JIRA_RENDERER)
         } else if (rendererType.equals("HTML")) {
             rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
