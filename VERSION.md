@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.7.1](#071)
 - [0.7.0](#070)
 - [0.6.1](#061)
 - [0.6.0](#060)
@@ -68,6 +69,14 @@ Next Release To Do List
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
 
+0.7.1
+-----
+
+- [ ] Add: test for enabling all list item interruption options does to allow a list item right after a
+      paragraph.
+
+- [ ] Fix: strike through extension was not rendering correctly for YouTrack conversion.
+
 0.7.0
 -----
 
@@ -101,14 +110,14 @@ Next Release To Do List
 - [x] Change: complete rewrite of list handling and list handling options to allow for Markdown
       parser emulation based on major parser families, as described in
       [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). All major families are done
-      and tested. 
+      and tested.
       - [x] CommonMark
           - [x] GitHub Comments
           - [ ] League/CommonMark
           - [x] CommonMark (default for family)
       - [x] FixedIndent
           - [ ] Pegdown
-          - [x] MultiMarkdown 
+          - [x] MultiMarkdown
           - [ ] Pandoc
       - [x] Kramdown (default for family)
           - [ ] GitHub Docs
@@ -1126,7 +1135,7 @@ Next Release To Do List
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-    
+
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

@@ -33,7 +33,7 @@ public class ComboMultiMarkdownCompatibilitySpecTest extends ComboExtraSpecTest 
                     .setLooseWhenHasTrailingBlankLine(false)
                     .setNewItemCodeIndent(Integer.MAX_VALUE)
                     .setOrderedItemDotOnly(true)
-                    .setOrderedStart(false)
+                    .setOrderedListManualStart(false)
 
                     .setItemInterrupt(new ListOptions.MutableItemInterrupt()
                             .setBulletItemInterruptsParagraph(false)

@@ -21,7 +21,7 @@ public class ListOptions implements MutableDataSetter {
     protected boolean looseWhenHasTrailingBlankLine;
     protected boolean looseWhenBlankFollowsItemParagraph;
     protected boolean orderedItemDotOnly;
-    protected boolean orderedStart;
+    protected boolean orderedListManualStart;
     protected int codeIndent;
     protected int itemIndent;
     protected int newItemCodeIndent;
@@ -46,7 +46,7 @@ public class ListOptions implements MutableDataSetter {
         looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
         looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
         orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options);
-        orderedStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
+        orderedListManualStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
 
         codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);
         itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
@@ -69,7 +69,7 @@ public class ListOptions implements MutableDataSetter {
         looseWhenHasLooseSubItem = other.isLooseWhenHasLooseSubItem();
         looseWhenHasTrailingBlankLine = other.isLooseWhenHasTrailingBlankLine();
         orderedItemDotOnly = other.isOrderedItemDotOnly();
-        orderedStart = other.isOrderedStart();
+        orderedListManualStart = other.isOrderedListManualStart();
 
         codeIndent = other.getCodeIndent();
         itemIndent = other.getItemIndent();
@@ -95,14 +95,14 @@ public class ListOptions implements MutableDataSetter {
 
     public boolean canInterrupt(ListBlock a, boolean isEmptyItem, boolean isItemParagraph) {
         boolean isNumberedItem = a instanceof OrderedList;
-        boolean isOneItem = isNumberedItem && (!isOrderedStart() || ((OrderedList) a).getStartNumber() == 1);
+        boolean isOneItem = isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
 
         return getItemInterrupt().canInterrupt(isNumberedItem, isOneItem, isEmptyItem, isItemParagraph);
     }
 
     public boolean canStartSubList(ListBlock a, boolean isEmptyItem) {
         boolean isNumberedItem = a instanceof OrderedList;
-        boolean isOneItem = isNumberedItem && (!isOrderedStart() || ((OrderedList) a).getStartNumber() == 1);
+        boolean isOneItem = isNumberedItem && (!isOrderedListManualStart() || ((OrderedList) a).getStartNumber() == 1);
 
         return getItemInterrupt().canStartSubList(isNumberedItem, isOneItem, isEmptyItem);
     }
@@ -149,7 +149,7 @@ public class ListOptions implements MutableDataSetter {
         options.set(Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM, isLooseWhenHasLooseSubItem());
         options.set(Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE, isLooseWhenHasTrailingBlankLine());
         options.set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, isOrderedItemDotOnly());
-        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, isOrderedStart());
+        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, isOrderedListManualStart());
 
         options.set(Parser.LISTS_ITEM_INDENT, getItemIndent());
         options.set(Parser.LISTS_CODE_INDENT, getCodeIndent());
@@ -214,8 +214,8 @@ public class ListOptions implements MutableDataSetter {
         return orderedItemDotOnly;
     }
 
-    public boolean isOrderedStart() {
-        return orderedStart;
+    public boolean isOrderedListManualStart() {
+        return orderedListManualStart;
     }
 
     public int getCodeIndent() {

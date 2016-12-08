@@ -23,10 +23,6 @@ public class MutableListOptions extends ListOptions {
         return new MutableListOptions(this);
     }
 
-    public ListOptions getListOptions() {
-        return new ListOptions(this);
-    }
-
     // @formatter:off
     public MutableListOptions setParserEmulationFamily(ParserEmulationFamily parserEmulationFamily) { this.parserEmulationFamily = parserEmulationFamily; return this; }
     public MutableListOptions setItemInterrupt(MutableItemInterrupt itemInterrupt) { this.itemInterrupt = itemInterrupt; return this; }
@@ -43,7 +39,7 @@ public class MutableListOptions extends ListOptions {
     public MutableListOptions setLooseWhenHasLooseSubItem(boolean looseWhenHasLooseSubItem) { this.looseWhenHasLooseSubItem = looseWhenHasLooseSubItem; return this; }
     public MutableListOptions setLooseWhenHasTrailingBlankLine(boolean looseWhenHasTrailingBlankLine) { this.looseWhenHasTrailingBlankLine = looseWhenHasTrailingBlankLine; return this; }
     public MutableListOptions setOrderedItemDotOnly(boolean orderedItemDotOnly) { this.orderedItemDotOnly = orderedItemDotOnly; return this; }
-    public MutableListOptions setOrderedStart(boolean orderedStart) { this.orderedStart = orderedStart; return this; }
+    public MutableListOptions setOrderedListManualStart(boolean orderedListManualStart) { this.orderedListManualStart = orderedListManualStart; return this; }
     // int setters
     public MutableListOptions setCodeIndent(int codeIndent) { this.codeIndent = codeIndent; return this; }
     public MutableListOptions setItemIndent(int itemIndent) { this.itemIndent = itemIndent; return this; }

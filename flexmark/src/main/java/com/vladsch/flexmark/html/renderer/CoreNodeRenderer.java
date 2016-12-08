@@ -148,7 +148,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     private void render(OrderedList node, NodeRendererContext context, HtmlWriter html) {
         int start = node.getStartNumber();
-        if (listOptions.isOrderedStart() && start != 1) html.attr("start", String.valueOf(start));
+        if (listOptions.isOrderedListManualStart() && start != 1) html.attr("start", String.valueOf(start));
         html.withAttr().tagIndent("ol", () -> {
             context.renderChildren(node);
         });

@@ -4898,5 +4898,118 @@ Document[0, 31]
         Text[25, 29] chars:[25, 29, "Test"]
 ````````````````````````````````
 
+Allow all breaks for list items
+
+```````````````````````````````` example(Lists - Markdown Navigator: 2) options(list-markdown-navigator)
+paragraph
+* list item
+
+paragraph
+* 
+
+paragraph
+*
+
+paragraph
+1. numbered item
+
+paragraph
+1. 
+
+paragraph
+1.
+
+paragraph
+2. numbered item
+
+paragraph
+2. 
+
+paragraph
+2.
+.
+<p>paragraph</p>
+<ul>
+  <li>list item</li>
+</ul>
+<p>paragraph</p>
+<ul>
+  <li></li>
+</ul>
+<p>paragraph</p>
+<ul>
+  <li></li>
+</ul>
+<p>paragraph</p>
+<ol>
+  <li>numbered item</li>
+</ol>
+<p>paragraph</p>
+<ol>
+  <li></li>
+</ol>
+<p>paragraph</p>
+<ol>
+  <li></li>
+</ol>
+<p>paragraph</p>
+<ol>
+  <li>numbered item</li>
+</ol>
+<p>paragraph</p>
+<ol>
+  <li></li>
+</ol>
+<p>paragraph</p>
+<ol>
+  <li></li>
+</ol>
+.
+Document[0, 163]
+  Paragraph[0, 10]
+    Text[0, 9] chars:[0, 9, "paragraph"]
+  BulletList[10, 22] isTight
+    BulletListItem[10, 22] open:[10, 11, "*"] isTight hadBlankLineAfter
+      Paragraph[12, 22]
+        Text[12, 21] chars:[12, 21, "list item"]
+  Paragraph[23, 33]
+    Text[23, 32] chars:[23, 32, "paragraph"]
+  BulletList[33, 34] isTight
+    BulletListItem[33, 34] open:[33, 34, "*"] isTight hadBlankLineAfter
+  Paragraph[37, 47]
+    Text[37, 46] chars:[37, 46, "paragraph"]
+  BulletList[47, 48] isTight
+    BulletListItem[47, 48] open:[47, 48, "*"] isTight hadBlankLineAfter
+  Paragraph[50, 60]
+    Text[50, 59] chars:[50, 59, "paragraph"]
+  OrderedList[60, 77] isTight delimiter:'.'
+    OrderedListItem[60, 77] open:[60, 62, "1."] isTight hadBlankLineAfter
+      Paragraph[63, 77]
+        Text[63, 76] chars:[63, 76, "numbe …  item"]
+  Paragraph[78, 88]
+    Text[78, 87] chars:[78, 87, "paragraph"]
+  OrderedList[88, 90] isTight delimiter:'.'
+    OrderedListItem[88, 90] open:[88, 90, "1."] isTight hadBlankLineAfter
+  Paragraph[93, 103]
+    Text[93, 102] chars:[93, 102, "paragraph"]
+  OrderedList[103, 105] isTight delimiter:'.'
+    OrderedListItem[103, 105] open:[103, 105, "1."] isTight hadBlankLineAfter
+  Paragraph[107, 117]
+    Text[107, 116] chars:[107, 116, "paragraph"]
+  OrderedList[117, 134] isTight start:2 delimiter:'.'
+    OrderedListItem[117, 134] open:[117, 119, "2."] isTight hadBlankLineAfter
+      Paragraph[120, 134]
+        Text[120, 133] chars:[120, 133, "numbe …  item"]
+  Paragraph[135, 145]
+    Text[135, 144] chars:[135, 144, "paragraph"]
+  OrderedList[145, 147] isTight start:2 delimiter:'.'
+    OrderedListItem[145, 147] open:[145, 147, "2."] isTight hadBlankLineAfter
+  Paragraph[150, 160]
+    Text[150, 159] chars:[150, 159, "paragraph"]
+  OrderedList[160, 162] isTight start:2 delimiter:'.'
+    OrderedListItem[160, 162] open:[160, 162, "2."] isTight
+````````````````````````````````
+
+
 
 

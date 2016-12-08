@@ -31,6 +31,7 @@
       <element id="module-output" name="flexmark-jira-converter" />
       <element id="module-output" name="flexmark-jira-parser" />
       <element id="module-output" name="flexmark-util" />
+      <element id="module-output" name="flexmark-youtrack-converter" />
     </root>
   </artifact>
 </component>

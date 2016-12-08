@@ -103,6 +103,8 @@ Family type rough behavior, details are in the code for `ListBlockParser` and `L
 Parser configuration parameters, parser emulation family sets defaults but these can be modified
 to tweak parser behaviour:
 
+<!-- @formatter:off -->
+
 - [ ] item indent columns: `Parser.ITEM_INDENT`, `ListOptions.itemIndent`
 - [ ] item code indent column: `Parser.CODE_INDENT`, `ListOptions.codeIndent`
 - [ ] new item code indent column: `Parser.NEW_ITEM_CODE_INDENT`, `ListOptions.newItemCodeIndent`
@@ -119,7 +121,11 @@ to tweak parser behaviour:
 - [ ] all items are loose if any in the list are loose: `Parser.LISTS_AUTO_LOOSE`, `ListOptions.autoLoose`
 - [ ] auto loose list setting `Parser.LISTS_AUTO_LOOSE` only applies to simple 1 level lists: `Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS`, `ListOptions.autoLooseOneLevelLists`
 
+<!-- @formatter:on -->
+
 ##### List Item Paragraph Interruption Options
+
+<!-- @formatter:off -->
 
 - [ ] bullet item can interrupt a paragraph: `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.bulletItemInterruptsParagraph`
 - [ ] ordered item can interrupt a paragraph: `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH`, `ListOptions.itemInterrupt.orderedItemInterruptsParagraph`
@@ -136,3 +142,5 @@ to tweak parser behaviour:
 - [ ] empty bullet sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyBulletSubItemInterruptsItemParagraph`
 - [ ] empty ordered non 1 sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedSubItemInterruptsItemParagraph`
 - [ ] empty ordered sub-item can interrupt a paragraph of a list item: `Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH`, `ListOptions.itemInterrupt.emptyOrderedNonOneSubItemInterruptsItemParagraph`
+
+<!-- @formatter:on -->
