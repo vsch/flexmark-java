@@ -72,10 +72,14 @@ Next Release To Do List
 0.7.1
 -----
 
-- [ ] Add: test for enabling all list item interruption options does to allow a list item right after a
-      paragraph.
+- Fix: strike through extension was not rendering correctly for YouTrack conversion.
 
-- [ ] Fix: strike through extension was not rendering correctly for YouTrack conversion.
+- Fix: moved all renderer specific extension tests to their corresponding renderer instead of
+  having each extension test for each renderer. Much easier to ensure the extensions are
+  properly tested and if any extension has not been properly updated.
+
+- Add: Blank lines to Jira and YouTrack renderer after: heading, thematic break, block quote and
+  table.
 
 0.7.0
 -----
@@ -88,11 +92,11 @@ Next Release To Do List
 
 - Add: upgrade to CommonMark spec 0.27
 
-- Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear
-      between `{{` and `}}` in URLs, including spaces, pipes and backslashes.
+- Add: option `Parser.PARSE_JEKYLL_MACROS_IN_URLS` which allows any characters to appear between
+  `{{` and `}}` in URLs, including spaces, pipes and backslashes.
 
-- Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but when
-      false then they require a blank line before, otherwise they become inline HTML.
+- Add: option `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` with `true` by default but when false
+  then they require a blank line before, otherwise they become inline HTML.
 
 - Add: test for `HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH` option
 
@@ -102,7 +106,8 @@ Next Release To Do List
       increasing number from 1 to N for each duplicated id generated.
 
     - `HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS` a string of characters in the heading
-      text which will be mapped to `-`, alphanumerics are passed as is. Anything else is suppressed.
+      text which will be mapped to `-`, alphanumerics are passed as is. Anything else is
+      suppressed.
 
     - `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` if set will not generate consecutive
       dashes in the reference ids.
@@ -1135,7 +1140,7 @@ Next Release To Do List
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-
+    
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 
