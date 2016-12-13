@@ -5,7 +5,8 @@
 first, inlines after Markdown parsing architecture.
 
 Its strengths are speed, flexibility, Markdown source element based AST with details of the
-source position down to individual lexemes that make up the element and extensibility.
+source position down to individual characters of lexemes that make up the element and
+extensibility.
 
 The API allows granular control of the parsing process and is optimized for parsing with a large
 number of installed extensions. The parser and extensions come with plenty of options for parser
@@ -19,7 +20,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Requirements
 
-* Java 8 or above
+* Java 8 or above (to be downgraded to Java 7 in the next release)
 * The core has no dependencies; for extensions, see below
 
 [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
@@ -28,10 +29,13 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Changes from commonmark-java project
 
-- The project is now on Maven
-- Java compatibility raised to 1.8 so that lambdas could be used
-- Android compatibility neglected for now
+- The project is on [![Maven Central status]][flexmark-java on Maven]
+- Java compatibility raised to 1.8 so that lambda syntax could be used during early development
+  but will removed in the next release to support android compatibility
+- Android compatibility to be added once Java 8 requirement is removed
 - No attempt is made to keep API backward compatibility to the original project.
+
+    The API has stabilized but some changes may be necessary before 1.0 release. 
 
 #### Markdown Processor Family Emulation
 
@@ -51,14 +55,14 @@ that processor has an equivalent extension implemented.
 
 If you find a discrepancy please open an issue so it can be addressed.
 
-Major processor families are implemented:
+Major processor families are implemented and some family members also:
 
 - [x] CommonMark (spec 0.27)
       - [x] GitHub Comments
       - [ ] League/CommonMark
 - [x] FixedIndent
       - [x] MultiMarkdown
-      - [ ] Pegdown
+      - [x] Pegdown
 - [x] Kramdown
       - [ ] GitHub Docs
       - [ ] Jekyll
@@ -67,7 +71,6 @@ Major processor families are implemented:
 
 :information_source: profiles to encapsulate configuration details for variants within the
 family will follow shortly.
-
 
 ### History and Motivation
 
@@ -147,6 +150,9 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
+- YouTrack renderer added to allow rendering Markdown AST as YouTrack formatted text. Almost the
+  same as JIRA but with a few differences.
+
 - JIRA renderer added to allow rendering Markdown AST as JIRA formatted text.
 
 - Parser is mature enough to be used as the parser in the Markdown Navigator plugin. Performance
@@ -160,7 +166,7 @@ Progress
 
 - Took a few days to add some flexmark-java extension related functionality to Markdown
   Navigator to make working with test spec files and extension modules easier. I will move this
-  out into a separate plugin.
+  out into a separate plugin but it makes working with the test spec files a pleasure.
 
 - Wiki added [flexmark-java wiki]
 
@@ -244,8 +250,10 @@ Progress
     - `StrongEmphasis`
     - `HtmlEntity`
 
-- `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
-  AST so that the generated AST can be validated.
+- `spec.txt` now `ast_spec.md` with an added section to each example that contains the expected
+  AST so that the generated AST can be validated. The original `spec.txt` is also tested against
+  so that any inadvertent changes in the `ast_spec.md` file cause a false pass, they will be
+  caught by the original tests in `spec.txt`
 
         ```````````````````````````````` example Links: 35
         [foo *bar](baz*)
@@ -263,7 +271,10 @@ Progress
 I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
 had to do major surgery on its innards to get full source position tracking and AST that matches
 source elements, it is a pleasure to work with and is now a pleasure to extend a parser based ot
-its original design.
+its original design. If you don't need source level element AST or the rest of what
+flexmark-java added and [CommonMark] is your target markdown parser then I encourage you to use
+[commonmark-java] as it is an excellent choice for your needs and its performance does not
+suffer for the overhead of features that you will not use.
 
 Benchmarks
 ----------
@@ -369,12 +380,13 @@ Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see LICENSE.txt file.
 
-
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
+[Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [commonmark-java]: https://github.com/atlassian/commonmark-java
+[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
 [flexmark-java wiki]: ../../wiki
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
 [hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
