@@ -29,7 +29,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Changes from commonmark-java project
 
-- The project is on [![Maven Central status]][flexmark-java on Maven]
+- The project is on Maven: `com.vladsch.flexmark`
 - Java compatibility raised to 1.8 so that lambda syntax could be used during early development
   but will removed in the next release to support android compatibility
 - Android compatibility to be added once Java 8 requirement is removed
