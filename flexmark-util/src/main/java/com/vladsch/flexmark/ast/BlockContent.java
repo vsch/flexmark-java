@@ -17,7 +17,7 @@ public class BlockContent {
     }
 
     public BasedSequence getSpanningChars() {
-        return lines.size() > 0 ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : SubSequence.NULL;
+        return lines.size() > 0 ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : BasedSequence.NULL;
     }
 
     public List<BasedSequence> getLines() {
@@ -78,7 +78,7 @@ public class BlockContent {
     }
 
     public BasedSequence getContents() {
-        if (lines.size() == 0) return SubSequence.NULL;
+        if (lines.size() == 0) return BasedSequence.NULL;
         return getContents(0, lines.size());
     }
 
@@ -87,7 +87,7 @@ public class BlockContent {
     }
 
     public BasedSequence getContents(int startLine, int endLine) {
-        if (lines.size() == 0) return SubSequence.NULL;
+        if (lines.size() == 0) return BasedSequence.NULL;
 
         if (startLine < 0) {
             throw new IndexOutOfBoundsException("startLine must be at least 0");
@@ -102,7 +102,7 @@ public class BlockContent {
             throw new IndexOutOfBoundsException("endLine must not be greater than line cardinality");
         }
 
-        return SegmentedSequence.of(lines.subList(startLine, endLine), SubSequence.NULL);
+        return SegmentedSequence.of(lines.subList(startLine, endLine), BasedSequence.NULL);
     }
 
     public String getString() {

@@ -2,16 +2,15 @@ package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A block node that contains the abbreviation definition
  */
 public class AbbreviationBlock extends CustomBlock {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
-    protected BasedSequence abbreviation = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
+    protected BasedSequence abbreviation = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

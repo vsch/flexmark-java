@@ -103,10 +103,10 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-            
+
         }
     }
-    
+
     private static class AsymmetricDelimiterProcessor implements DelimiterProcessor {
 
         AsymmetricDelimiterProcessor() {}
@@ -133,7 +133,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
-            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
+            UpperCaseNode content = new UpperCaseNode(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed));
             opener.moveNodesBetweenDelimitersTo(content, closer);
         }
     }
@@ -143,9 +143,9 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     private static class UpperCaseNode extends CustomNode implements DelimitedNode {
-        protected BasedSequence openingMarker = SubSequence.NULL;
-        protected BasedSequence text = SubSequence.NULL;
-        protected BasedSequence closingMarker = SubSequence.NULL;
+        protected BasedSequence openingMarker = BasedSequence.NULL;
+        protected BasedSequence text = BasedSequence.NULL;
+        protected BasedSequence closingMarker = BasedSequence.NULL;
 
         @Override
         public BasedSequence[] getSegments() {

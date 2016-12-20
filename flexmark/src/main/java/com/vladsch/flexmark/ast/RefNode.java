@@ -6,12 +6,12 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class RefNode extends LinkNode implements LinkRefDerived {
-    protected BasedSequence textOpeningMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence textClosingMarker = SubSequence.NULL;
-    protected BasedSequence referenceOpeningMarker = SubSequence.NULL;
-    protected BasedSequence reference = SubSequence.NULL;
-    protected BasedSequence referenceClosingMarker = SubSequence.NULL;
+    protected BasedSequence textOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence textClosingMarker = BasedSequence.NULL;
+    protected BasedSequence referenceOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence reference = BasedSequence.NULL;
+    protected BasedSequence referenceClosingMarker = BasedSequence.NULL;
     protected boolean isDefined = false;
 
     @Override
@@ -114,7 +114,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public boolean isReferenceTextCombined() {
-        return text == SubSequence.NULL;
+        return text == BasedSequence.NULL;
     }
 
     public boolean isDefined() {
@@ -131,7 +131,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public boolean isDummyReference() {
-        return textOpeningMarker != SubSequence.NULL && text == SubSequence.NULL && textClosingMarker != SubSequence.NULL;
+        return textOpeningMarker != BasedSequence.NULL && text == BasedSequence.NULL && textClosingMarker != BasedSequence.NULL;
     }
 
     public BasedSequence getText() {
@@ -188,7 +188,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
         if (isDummyReference()) {
             return getChars().baseSubSequence(textOpeningMarker.getStartOffset(), textClosingMarker.getEndOffset());
         }
-        return SubSequence.NULL;
+        return BasedSequence.NULL;
     }
 
     public BasedSequence getReferenceClosingMarker() {

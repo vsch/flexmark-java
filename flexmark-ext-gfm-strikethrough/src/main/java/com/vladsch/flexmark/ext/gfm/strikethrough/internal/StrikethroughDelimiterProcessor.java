@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
-import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
 
@@ -36,7 +36,7 @@ public class StrikethroughDelimiterProcessor implements DelimiterProcessor {
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
         // wrap nodes between delimiters in strikethrough.
-        Strikethrough strikethrough = new Strikethrough(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
+        Strikethrough strikethrough = new Strikethrough(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(strikethrough, closer);
     }
 }

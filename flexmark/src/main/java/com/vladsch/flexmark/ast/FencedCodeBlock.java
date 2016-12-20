@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
 public class FencedCodeBlock extends Block {
     private int fenceIndent;
-    private BasedSequence openingMarker = SubSequence.NULL;
-    private BasedSequence info = SubSequence.NULL;
-    private BasedSequence closingMarker = SubSequence.NULL;
+    private BasedSequence openingMarker = BasedSequence.NULL;
+    private BasedSequence info = BasedSequence.NULL;
+    private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {
@@ -67,7 +66,7 @@ public class FencedCodeBlock extends Block {
 
     /**
      * @see <a href="http://spec.commonmark.org/0.18/#info-string">CommonMark spec</a>
-     * 
+     *
      * @return the sequence for the info part of the node
      */
     public BasedSequence getInfo() {

@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
 public class BlockQuote extends Block {
-    private BasedSequence openingMarker = SubSequence.NULL;
+    private BasedSequence openingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

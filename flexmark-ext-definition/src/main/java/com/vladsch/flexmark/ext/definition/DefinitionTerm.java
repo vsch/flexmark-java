@@ -4,14 +4,13 @@ package com.vladsch.flexmark.ext.definition;
 import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A Definition block node
  */
 public class DefinitionTerm extends CustomBlock {
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

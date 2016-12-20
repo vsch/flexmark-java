@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.OrderedListItem;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * A Task list item
  */
 public class TaskListItem extends ListItem {
-    protected BasedSequence taskOpeningMarker = SubSequence.NULL;
+    protected BasedSequence taskOpeningMarker = BasedSequence.NULL;
     protected boolean isOrderedItem = false;
 
     @Override
@@ -51,7 +50,7 @@ public class TaskListItem extends ListItem {
         super(block.getChars(), block.getContentLines());
         openingMarker = block.getOpeningMarker();
         isOrderedItem = block instanceof OrderedListItem;
-        
+
         takeChildren(block);
         setCharsFromContent();
     }

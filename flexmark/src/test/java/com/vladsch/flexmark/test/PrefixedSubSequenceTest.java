@@ -2,13 +2,12 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.Substring;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertEquals;
 
 public class PrefixedSubSequenceTest {
-    private final CharSequence sequence = Substring.of("abcdefghi", 3, 6);
+    private final BasedSequence sequence = BasedSequence.of("abcdefghi", 3, 6);
     private final BasedSequence substring = new PrefixedSubSequence("0123", sequence);
 
     @Test

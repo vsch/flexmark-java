@@ -7,7 +7,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -99,7 +98,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                 // have more lines
                 block.setContent(spanningChars, lines.subList(1, lines.size()));
             } else {
-                block.setContent(spanningChars, SubSequence.EMPTY_LIST);
+                block.setContent(spanningChars, BasedSequence.EMPTY_LIST);
             }
         } else {
             block.setContent(content);

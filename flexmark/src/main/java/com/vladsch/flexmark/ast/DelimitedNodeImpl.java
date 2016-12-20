@@ -4,9 +4,9 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

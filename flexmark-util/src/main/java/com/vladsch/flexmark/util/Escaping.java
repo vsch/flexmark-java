@@ -3,7 +3,6 @@ package com.vladsch.flexmark.util;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
@@ -61,16 +60,16 @@ public class Escaping {
         public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
             switch (input.toString()) {
                 case "&":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&amp;", SubSequence.NULL));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&amp;", BasedSequence.NULL));
                     break;
                 case "<":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&lt;", SubSequence.NULL));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&lt;", BasedSequence.NULL));
                     break;
                 case ">":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&gt;", SubSequence.NULL));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&gt;", BasedSequence.NULL));
                     break;
                 case "\"":
-                    textMapper.addReplacedText(input, new PrefixedSubSequence("&quot;", SubSequence.NULL));
+                    textMapper.addReplacedText(input, new PrefixedSubSequence("&quot;", BasedSequence.NULL));
                     break;
                 default:
                     textMapper.addOriginalText(input);
@@ -128,7 +127,7 @@ public class Escaping {
                     textMapper.addOriginalText(input);
                 } else {
                     // %25 is the percent-encoding for %
-                    textMapper.addReplacedText(input.subSequence(0, 1), new PrefixedSubSequence("%25", SubSequence.NULL));
+                    textMapper.addReplacedText(input.subSequence(0, 1), new PrefixedSubSequence("%25", BasedSequence.NULL));
                     textMapper.addOriginalText(input.subSequence(1, input.length()));
                 }
             } else {
@@ -140,7 +139,7 @@ public class Escaping {
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
                 }
-                textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), SubSequence.NULL));
+                textMapper.addReplacedText(input, new PrefixedSubSequence(sbItem.toString(), BasedSequence.NULL));
             }
         }
     };
@@ -179,7 +178,7 @@ public class Escaping {
     public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
         int indexOfAny = s.indexOfAny('\\', '&');
         if (indexOfAny != -1) {
-            // all before are not part of it so we can skip it 
+            // all before are not part of it so we can skip it
             textMapper.addOriginalText(s.subSequence(0, indexOfAny));
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s.subSequence(indexOfAny), UNESCAPE_REPLACER, textMapper);
         } else {
@@ -296,7 +295,7 @@ public class Escaping {
             } else {
                 if (hadCR) {
                     if (lastPos < i - 1) textMapper.addOriginalText(input.subSequence(lastPos, i + 1));
-                    textMapper.addReplacedText(input.subSequence(i - 1, i), SubSequence.EOL);
+                    textMapper.addReplacedText(input.subSequence(i - 1, i), BasedSequence.EOL);
                     lastPos = i;
                     hadCR = false;
                     hadEOL = false;
@@ -310,7 +309,7 @@ public class Escaping {
             //    textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
             //} else {
             if (lastPos < iMax) textMapper.addOriginalText(input.subSequence(lastPos, iMax));
-            if (!hadEOL && endWithEOL) textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
+            if (!hadEOL && endWithEOL) textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), BasedSequence.EOL);
         }
 
         return textMapper.getReplacedSequence();

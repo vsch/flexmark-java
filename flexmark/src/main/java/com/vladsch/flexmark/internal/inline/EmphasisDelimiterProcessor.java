@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.StrongEmphasis;
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
-import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
 
@@ -49,8 +49,8 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
         DelimitedNode emphasis = delimitersUsed == 1
-                ? new Emphasis(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed))
-                : new StrongEmphasis(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
+                ? new Emphasis(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed))
+                : new StrongEmphasis(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed));
 
         opener.moveNodesBetweenDelimitersTo(emphasis, closer);
     }

@@ -2,15 +2,14 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
 public class Heading extends Block implements AnchorRefTarget {
     protected int level;
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
     protected String anchorRefId = "";
 
     @Override
@@ -54,11 +53,11 @@ public class Heading extends Block implements AnchorRefTarget {
     }
 
     public boolean isAtxHeading() {
-        return openingMarker != SubSequence.NULL;
+        return openingMarker != BasedSequence.NULL;
     }
 
     public boolean isSetextHeading() {
-        return openingMarker == SubSequence.NULL && closingMarker != SubSequence.NULL;
+        return openingMarker == BasedSequence.NULL && closingMarker != BasedSequence.NULL;
     }
 
     public BasedSequence getOpeningMarker() {
@@ -66,7 +65,7 @@ public class Heading extends Block implements AnchorRefTarget {
     }
 
     public void setOpeningMarker(BasedSequence openingMarker) {
-        this.openingMarker = openingMarker == null ? SubSequence.NULL : openingMarker;
+        this.openingMarker = openingMarker == null ? BasedSequence.NULL : openingMarker;
     }
 
     public BasedSequence getText() {
@@ -74,7 +73,7 @@ public class Heading extends Block implements AnchorRefTarget {
     }
 
     public void setText(BasedSequence text) {
-        this.text = text == null ? SubSequence.NULL : text;
+        this.text = text == null ? BasedSequence.NULL : text;
     }
 
     public BasedSequence getClosingMarker() {
@@ -82,7 +81,7 @@ public class Heading extends Block implements AnchorRefTarget {
     }
 
     public void setClosingMarker(BasedSequence closingMarker) {
-        this.closingMarker = closingMarker == null ? SubSequence.NULL : closingMarker;
+        this.closingMarker = closingMarker == null ? BasedSequence.NULL : closingMarker;
     }
 
     public int getLevel() {

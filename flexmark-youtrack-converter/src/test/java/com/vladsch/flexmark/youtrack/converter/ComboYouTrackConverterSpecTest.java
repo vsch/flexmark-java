@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.youtrack.converter;
 
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -16,11 +18,19 @@ public class ComboYouTrackConverterSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             //.set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(YouTrackConverterExtension.create()));
+            .set(Parser.EXTENSIONS, Arrays.asList(YouTrackConverterExtension.create(), StrikethroughExtension.create(), TablesExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("list-no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
+        optionsMap.put("gfm", new MutableDataSet()
+                .set(TablesExtension.COLUMN_SPANS, false)
+                .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
+                .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
+                .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
+        );
+
+        optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

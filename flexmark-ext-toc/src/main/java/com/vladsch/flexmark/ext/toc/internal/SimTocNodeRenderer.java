@@ -13,7 +13,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,7 +22,7 @@ import java.util.Set;
 
 public class SimTocNodeRenderer implements NodeRenderer {
     final static public AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;
-    
+
     private final TocOptions options;
 
     public SimTocNodeRenderer(DataHolder options) {
@@ -57,7 +57,7 @@ public class SimTocNodeRenderer implements NodeRenderer {
         if (headings != null) {
             SimTocOptionsParser optionsParser = new SimTocOptionsParser();
             TocOptions options = optionsParser.parseOption(node.getStyle(), this.options, null).getFirst();
-            
+
             if (node.getTitle().isNotNull()) {
                 options = options.withTitle(node.getTitle().unescape());
             }
@@ -68,6 +68,6 @@ public class SimTocNodeRenderer implements NodeRenderer {
     private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, Node node, List<Heading> headings, TocOptions options) {
         List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
         List<String> headingTexts = TocUtils.htmlHeaderTexts(context, filteredHeadings, options);
-        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? SubSequence.NULL : node.getChars(), filteredHeadings, headingTexts, options);
+        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? BasedSequence.NULL : node.getChars(), filteredHeadings, headingTexts, options);
     }
 }

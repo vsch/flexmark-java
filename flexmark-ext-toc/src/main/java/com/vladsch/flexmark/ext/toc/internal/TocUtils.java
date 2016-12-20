@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +63,7 @@ public class TocUtils {
         if (headings.isEmpty()) return;
 
         if (options.isHtml) {
-            renderHtmlToc(out, SubSequence.NULL, headings, headingTexts, options);
+            renderHtmlToc(out, BasedSequence.NULL, headings, headingTexts, options);
         } else {
             renderMarkdownToc(out, headings, headingTexts, options);
         }
@@ -103,7 +102,7 @@ public class TocUtils {
                     openedItems[lv + 1] = false;
                     openedList[lv + 1] = false;
                 }
-                
+
                 if (!openedList[lastLevel]) {
                     html.withAttr().indent().line().tag(listOpen).indent();
                     openedList[lastLevel] = true;
@@ -137,7 +136,7 @@ public class TocUtils {
                 html.raw(headerText);
                 html.tag("/a");
             }
-            
+
             lastLevel = headerLevel;
             openedItemAppendCount[headerLevel] = html.getAppendCount();
         }

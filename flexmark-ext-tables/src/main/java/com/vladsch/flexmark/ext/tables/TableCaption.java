@@ -18,15 +18,14 @@ package com.vladsch.flexmark.ext.tables;
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * Table caption of a {@link TableBlock} containing inline nodes.
  */
 public class TableCaption extends CustomNode implements DelimitedNode {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     public TableCaption(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
         this.openingMarker = openingMarker;

@@ -1,16 +1,15 @@
 package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A TOC node
  */
 public class TocBlock extends TocBlockBase {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence tocKeyword = SubSequence.NULL;
-    protected BasedSequence style = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence tocKeyword = BasedSequence.NULL;
+    protected BasedSequence style = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

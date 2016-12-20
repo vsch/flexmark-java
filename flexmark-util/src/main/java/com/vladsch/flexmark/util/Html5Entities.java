@@ -2,7 +2,6 @@ package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -54,17 +53,17 @@ public class Html5Entities {
             try {
                 int codePoint = Integer.parseInt(input.subSequence(matcher.end(), input.length() - 1).toString(), base);
                 if (codePoint == 0) {
-                    return new PrefixedSubSequence("\uFFFD", SubSequence.NULL);
+                    return new PrefixedSubSequence("\uFFFD", BasedSequence.NULL);
                 }
-                return new PrefixedSubSequence(Arrays.toString(Character.toChars(codePoint)), SubSequence.NULL);
+                return new PrefixedSubSequence(Arrays.toString(Character.toChars(codePoint)), BasedSequence.NULL);
             } catch (IllegalArgumentException e) {
-                return new PrefixedSubSequence("\uFFFD", SubSequence.NULL);
+                return new PrefixedSubSequence("\uFFFD", BasedSequence.NULL);
             }
         } else {
             String name = input.subSequence(1, input.length() - 1).toString();
             String s = NAMED_CHARACTER_REFERENCES.get(name);
             if (s != null) {
-                return new PrefixedSubSequence(s, SubSequence.NULL);
+                return new PrefixedSubSequence(s, BasedSequence.NULL);
             } else {
                 return input;
             }

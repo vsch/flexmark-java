@@ -1599,9 +1599,81 @@ Document[0, 25]
 ````````````````````````````````
 
 
-multiple tables parsed correctly
+Alignment should be taken from column after span is added
 
 ```````````````````````````````` example Tables Extension: 52
+| day         | time  |   spent |
+|:------------|:-----:|--------:|
+| nov. 2. tue | 10:00 |  4h 40m |
+| nov. 3. thu | 11:00 |      4h |
+| nov. 7. mon | 10:20 |  4h 20m |
+| total:             || **13h** |
+.
+<table>
+  <thead>
+    <tr><th align="left">day</th><th align="center">time</th><th align="right">spent</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">nov. 2. tue</td><td align="center">10:00</td><td align="right">4h 40m</td></tr>
+    <tr><td align="left">nov. 3. thu</td><td align="center">11:00</td><td align="right">4h</td></tr>
+    <tr><td align="left">nov. 7. mon</td><td align="center">10:20</td><td align="right">4h 20m</td></tr>
+    <tr><td align="left" colspan="2">total:</td><td align="right"><strong>13h</strong></td></tr>
+  </tbody>
+</table>
+.
+Document[0, 204]
+  TableBlock[0, 204]
+    TableHead[0, 33]
+      TableRow[0, 33] rowNumber=1
+        TableCell[0, 15] LEFT header textOpen:[0, 1, "|"] text:[2, 5, "day"] textClose:[14, 15, "|"]
+          Text[2, 5] chars:[2, 5, "day"]
+        TableCell[15, 23] CENTER header text:[16, 20, "time"] textClose:[22, 23, "|"]
+          Text[16, 20] chars:[16, 20, "time"]
+        TableCell[23, 33] RIGHT header text:[26, 31, "spent"] textClose:[32, 33, "|"]
+          Text[26, 31] chars:[26, 31, "spent"]
+    TableSeparator[34, 67]
+      TableRow[34, 67]
+        TableCell[34, 49] LEFT textOpen:[34, 35, "|"] text:[35, 48, ":------------"] textClose:[48, 49, "|"]
+          Text[35, 48] chars:[35, 48, ":---- … -----"]
+        TableCell[49, 57] CENTER text:[49, 56, ":-----:"] textClose:[56, 57, "|"]
+          Text[49, 56] chars:[49, 56, ":-----:"]
+        TableCell[57, 67] RIGHT text:[57, 66, "--------:"] textClose:[66, 67, "|"]
+          Text[57, 66] chars:[57, 66, "--------:"]
+    TableBody[68, 203]
+      TableRow[68, 101] rowNumber=1
+        TableCell[68, 83] LEFT textOpen:[68, 69, "|"] text:[70, 81, "nov. 2. tue"] textClose:[82, 83, "|"]
+          Text[70, 81] chars:[70, 81, "nov.  … . tue"]
+        TableCell[83, 91] CENTER text:[84, 89, "10:00"] textClose:[90, 91, "|"]
+          Text[84, 89] chars:[84, 89, "10:00"]
+        TableCell[91, 101] RIGHT text:[93, 99, "4h 40m"] textClose:[100, 101, "|"]
+          Text[93, 99] chars:[93, 99, "4h 40m"]
+      TableRow[102, 135] rowNumber=2
+        TableCell[102, 117] LEFT textOpen:[102, 103, "|"] text:[104, 115, "nov. 3. thu"] textClose:[116, 117, "|"]
+          Text[104, 115] chars:[104, 115, "nov.  … . thu"]
+        TableCell[117, 125] CENTER text:[118, 123, "11:00"] textClose:[124, 125, "|"]
+          Text[118, 123] chars:[118, 123, "11:00"]
+        TableCell[125, 135] RIGHT text:[131, 133, "4h"] textClose:[134, 135, "|"]
+          Text[131, 133] chars:[131, 133, "4h"]
+      TableRow[136, 169] rowNumber=3
+        TableCell[136, 151] LEFT textOpen:[136, 137, "|"] text:[138, 149, "nov. 7. mon"] textClose:[150, 151, "|"]
+          Text[138, 149] chars:[138, 149, "nov.  … . mon"]
+        TableCell[151, 159] CENTER text:[152, 157, "10:20"] textClose:[158, 159, "|"]
+          Text[152, 157] chars:[152, 157, "10:20"]
+        TableCell[159, 169] RIGHT text:[161, 167, "4h 20m"] textClose:[168, 169, "|"]
+          Text[161, 167] chars:[161, 167, "4h 20m"]
+      TableRow[170, 203] rowNumber=4
+        TableCell[170, 193] LEFT span textOpen:[170, 171, "|"] text:[172, 178, "total:"] textClose:[191, 193, "||"]
+          Text[172, 178] chars:[172, 178, "total:"]
+        TableCell[193, 203] RIGHT text:[194, 201, "**13h**"] textClose:[202, 203, "|"]
+          StrongEmphasis[194, 201] textOpen:[194, 196, "**"] text:[196, 199, "13h"] textClose:[199, 201, "**"]
+            Text[196, 199] chars:[196, 199, "13h"]
+          Text[201, 201]
+````````````````````````````````
+
+
+multiple tables parsed correctly
+
+```````````````````````````````` example Tables Extension: 53
 not a table, followed by a table
 
 | col1 | col2|
@@ -1712,7 +1784,7 @@ Document[0, 199]
 
 multi row/column
 
-```````````````````````````````` example Tables Extension: 53
+```````````````````````````````` example Tables Extension: 54
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -1794,7 +1866,7 @@ Document[0, 168]
 
 keep cell whitespace
 
-```````````````````````````````` example(Tables Extension: 54) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 55) options(keep-whitespace)
  Abc  | Def
  --- | ---
  1 | 2
@@ -1833,7 +1905,7 @@ Document[0, 30]
 
 Custom class name
 
-```````````````````````````````` example(Tables Extension: 55) options(class-name)
+```````````````````````````````` example(Tables Extension: 56) options(class-name)
 Abc|Def
 ---|---
 .
@@ -1864,7 +1936,7 @@ Document[0, 16]
 
 in item
 
-```````````````````````````````` example(Tables Extension: 56) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 57) options(keep-whitespace)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -1954,7 +2026,7 @@ Document[0, 565]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 57
+```````````````````````````````` example Tables Extension: 58
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |

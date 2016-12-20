@@ -12,7 +12,6 @@ import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.ParsedOption;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 import java.util.Set;
@@ -41,7 +40,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
     //private BlockContent content = new BlockContent();
     private final SimTocOptions options;
     private int haveChildren = 0;
-    private BasedSequence blankLineSpacer = SubSequence.NULL;
+    private BasedSequence blankLineSpacer = BasedSequence.NULL;
 
     SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
         this.options = new SimTocOptions(options);
@@ -113,7 +112,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
             SimTocContent tocContent = new SimTocContent();
             tocContent.takeChildren(block);
             tocContent.setCharsFromContent();
-            
+
             if (blankLineSpacer.isNotNull()) {
                 // need to extend the content node start to include the blank line
                 tocContent.setChars(Node.spanningChars(blankLineSpacer, tocContent.getChars()));

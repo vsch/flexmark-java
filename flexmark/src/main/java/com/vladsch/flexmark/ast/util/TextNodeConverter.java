@@ -18,7 +18,6 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +68,7 @@ public class TextNodeConverter {
 
     public void clear() {
         list.clear();
-        remainingChars = SubSequence.NULL;
+        remainingChars = BasedSequence.NULL;
     }
 
     // insert and clear list
@@ -110,7 +109,7 @@ public class TextNodeConverter {
     private void mergeList() {
         if (!remainingChars.isEmpty()) {
             list.add(new Text(remainingChars));
-            remainingChars = SubSequence.NULL;
+            remainingChars = BasedSequence.NULL;
         }
     }
 

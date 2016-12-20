@@ -3,16 +3,15 @@ package com.vladsch.flexmark.ext.zzzzzz;
 import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A Zzzzzz block node
  */
 public class ZzzzzzBlock extends CustomBlock {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
-    protected BasedSequence zzzzzz = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
+    protected BasedSequence zzzzzz = BasedSequence.NULL;
     private int zzzzzzOrdinal = 0;
     private int firstReferenceOffset = Integer.MAX_VALUE;
 

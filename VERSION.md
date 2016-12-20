@@ -5,6 +5,7 @@ flexmark-java
 
 [TOC]: # " "
 
+- [This Release To Do List](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
 - [0.7.1](#071)
 - [0.7.0](#070)
@@ -56,12 +57,11 @@ flexmark-java
 
 &nbsp;</details>
 
-Next Release To Do List
+This Release To Do List
 -----------------------
 
-- [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
-      to HTML offset for the element(s). This is needed to allow synchronization with source
-      when using an attribute to hold the source information is not an option.
+- [ ] Change: remove Java 8 language constructs and reduce language level to 7 for android
+      support.
 
 - [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
       when descriptions can benefit form complex formatting
@@ -69,8 +69,48 @@ Next Release To Do List
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
 
+Next Release To Do List
+-----------------------
+
+- [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
+      to HTML offset for the element(s). This is needed to allow synchronization with source
+      when using an attribute to hold the source information is not an option.
+
+- [ ] Add: PDF renderer
+
+- [ ] Add: Latex extension
+
+- [x] Change: complete parser profiles for variations within a family
+      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). 
+      - [x] CommonMark
+          - [x] GitHub Comments
+          - [ ] League/CommonMark
+          - [x] CommonMark (default for family)
+      - [x] FixedIndent
+          - [x] Pegdown (done but needs a profile)
+          - [x] MultiMarkdown
+          - [ ] Pandoc
+      - [x] Kramdown (default for family)
+          - [ ] GitHub Docs
+          - [ ] Jekyll
+          - [x] Kramdown (default for family)
+      - [x] Markdown
+          - [x] Markdown.pl (default for family)
+          - [ ] Php Markdown Extra
+          
 0.7.1
 -----
+
+- Change: remove `Substring` class from sequences and rename `StringSequence` to
+  `StringBasedSequence`. `Substring` was duplicating code and not used except in tests.
+
+- Change: move some statics from `BasedSequenceImpl` to `BasedSequence` and add
+  `BasedSequence.of()` variations to the latter that check for already being a `BasedSequence`
+  and just returning it or if `String` is passed then wrapping it in `StringBasedSequence` and
+  if neither then wrap it in `SubSequence`.
+
+- Fix: #21, table column alignment was not taking accumulated spans in the row into account when
+  getting alignment for cell from table separator row.
 
 - Fix: strike through extension was not rendering correctly for YouTrack conversion.
 
@@ -112,25 +152,19 @@ Next Release To Do List
     - `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` if set will not generate consecutive
       dashes in the reference ids.
 
-- [x] Change: complete rewrite of list handling and list handling options to allow for Markdown
+- Change: complete rewrite of list handling and list handling options to allow for Markdown
       parser emulation based on major parser families, as described in
       [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). All major families are done
       and tested.
-      - [x] CommonMark
-          - [x] GitHub Comments
-          - [ ] League/CommonMark
-          - [x] CommonMark (default for family)
-      - [x] FixedIndent
-          - [ ] Pegdown
-          - [x] MultiMarkdown
-          - [ ] Pandoc
-      - [x] Kramdown (default for family)
-          - [ ] GitHub Docs
-          - [ ] Jekyll
-          - [x] Kramdown (default for family)
-      - [x] Markdown
-          - [x] Markdown.pl (default for family)
-          - [ ] Php Markdown Extra
+      - CommonMark
+          - GitHub Comments
+          - CommonMark (default for family)
+      - FixedIndent
+          - MultiMarkdown
+      - Kramdown (default for family)
+          - Kramdown (default for family)
+      - Markdown
+          - Markdown.pl (default for family)
 
       No attempt was made to emulate inline processing of these parsers. Only list processing
       for now. Most of the other element discrepancies are already addressable with existing
@@ -1140,7 +1174,7 @@ Next Release To Do List
             Text[12, 13]
           Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
         ````````````````````````````````
-    
+
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
 

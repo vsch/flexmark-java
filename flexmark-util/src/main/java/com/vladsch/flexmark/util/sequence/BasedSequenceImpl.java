@@ -12,12 +12,15 @@ import java.util.*;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public abstract class BasedSequenceImpl implements BasedSequence {
-
-    public static final String WHITESPACE_NO_EOL_CHARS = " \t";
-    public static final String WHITESPACE_CHARS = " \t\r\n";
-    public static final String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
-    public static final String EOL_CHARS = "\r\n";
-
+    private static final Map<Character, String> visibleSpacesMap;
+    static {
+        HashMap<Character, String> charMap = new HashMap<>();
+        visibleSpacesMap = charMap;
+        charMap.put('\n', "\\n");
+        charMap.put('\r', "\\r");
+        charMap.put('\f', "\\f");
+        charMap.put('\t', "\\u2192");
+    }
     @Override
     public BasedSequence endSequence(int start, int end) {
         int length = length();
@@ -99,7 +102,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
      */
     @Override
     public char lastChar() {
-        return isEmpty() ? '\0' : charAt(length()-1);
+        return isEmpty() ? '\0' : charAt(length() - 1);
     }
 
     /**
@@ -110,52 +113,545 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return isEmpty() ? '\0' : charAt(0);
     }
 
+    // @formatter:off
+    @Override public int indexOf(CharSequence s) { return indexOf(s, 0, length()); }
+    @Override public int indexOf(CharSequence s, int fromIndex) { return indexOf(s, fromIndex, length()); }
+    // @formatter:on
+
     @Override
-    public int countLeading(String chars) {
-        return countChars(chars, 0, length());
+    public int indexOf(CharSequence s, int fromIndex, int endIndex) {
+        int sMax = s.length();
+        if (sMax == 0) return fromIndex;
+        if (endIndex > length()) endIndex = length();
+        if (fromIndex < endIndex) {
+            char firstChar = s.charAt(0);
+            int pos = fromIndex;
+
+            do {
+                pos = indexOf(firstChar, pos);
+                if (pos < 0 || pos + sMax > endIndex) break;
+                if (matchChars(s, pos)) return pos;
+                pos++;
+            } while (pos + sMax < endIndex);
+        }
+
+        return -1;
+    }
+
+    // @formatter:off
+    @Override public int indexOf(char c) { return indexOf(c, 0, length()); }
+    @Override public int indexOfAny(char c1, char c2) { return indexOfAny(c1, c2, 0, length()); }
+    @Override public int indexOfAny(char c1, char c2, char c3) { return indexOfAny(c1, c2, c3, 0, length()); }
+    @Override public int indexOfAny(CharSequence s) { return indexOfAny(s, 0, length()); }
+    @Override public int indexOf(char c, int fromIndex) { return indexOf(c, fromIndex, length()); }
+    @Override public int indexOfAny(char c1, char c2, int fromIndex) { return indexOfAny(c1, c2, fromIndex, length()); }
+    @Override public int indexOfAny(char c1, char c2, char c3, int fromIndex) { return indexOfAny(c1, c2, c3, fromIndex, length()); }
+    @Override public int indexOfAny(CharSequence s, int index) { return indexOfAny(s, index, length()); }
+    // @formatter:on
+
+    @Override
+    public int indexOf(char c, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            if (charAt(i) == c) return i;
+        }
+        return -1;
     }
 
     @Override
-    public int countLeadingNot(String chars) {
-        return countNotChars(chars, 0, length());
+    public int indexOfAny(char c1, char c2, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (c == c1 || c == c2) return i;
+        }
+        return -1;
     }
 
     @Override
-    public int countTrailing(String chars) {
-        return countCharsReversed(chars, 0, length());
+    public int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (c == c1 || c == c2 || c == c3) return i;
+        }
+        return -1;
     }
 
     @Override
-    public int countTrailingNot(String chars) {
-        return countNotCharsReversed(chars, 0, length());
+    public int indexOfAny(CharSequence s, int fromIndex, int endIndex) {
+        switch (s.length()) {
+            case 0:
+                return fromIndex;
+            case 1:
+                return indexOf(s.charAt(0), fromIndex, endIndex);
+            case 2:
+                return indexOfAny(s.charAt(0), s.charAt(1), fromIndex, endIndex);
+            case 3:
+                return indexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
+
+            default:
+                BasedSequence sequence = BasedSequence.of(s);
+                if (fromIndex < 0) fromIndex = 0;
+                if (endIndex > length()) endIndex = length();
+                for (int i = fromIndex; i < endIndex; i++) {
+                    char c = charAt(i);
+                    if (sequence.indexOf(c) != -1) return i;
+                }
+        }
+        return -1;
+    }
+
+    // @formatter:off
+    @Override public int indexOfNot(char c) { return indexOfNot(c, 0, length()); }
+    @Override public int indexOfAnyNot(char c1, char c2) { return indexOfAnyNot(c1, c2, 0, length()); }
+    @Override public int indexOfAnyNot(char c1, char c2, char c3) { return indexOfAnyNot(c1, c2, c3, 0, length()); }
+    @Override public int indexOfAnyNot(CharSequence s) { return indexOfAnyNot(s, 0, length()); }
+    @Override public int indexOfNot(char c, int fromIndex) { return indexOfNot(c, fromIndex, length()); }
+    @Override public int indexOfAnyNot(char c1, char c2, int fromIndex) { return indexOfAnyNot(c1, c2, fromIndex, length()); }
+    @Override public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex) { return indexOfAnyNot(c1, c2, c3, fromIndex, length()); }
+    @Override public int indexOfAnyNot(CharSequence s, int fromIndex) { return indexOfAnyNot(s, fromIndex, length()); }
+    // @formatter:on
+
+    @Override
+    public int indexOfNot(char c, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            if (charAt(i) != c) return i;
+        }
+        return -1;
     }
 
     @Override
-    public BasedSequence trimStart(String chars) {
+    public int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (c != c1 && c != c2) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        for (int i = fromIndex; i < endIndex; i++) {
+            char c = charAt(i);
+            if (c != c1 && c != c2 && c != c3) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int indexOfAnyNot(CharSequence s, int fromIndex, int endIndex) {
+        switch (s.length()) {
+            case 0:
+                return fromIndex;
+            case 1:
+                return indexOfNot(s.charAt(0), fromIndex, endIndex);
+            case 2:
+                return indexOfAnyNot(s.charAt(0), s.charAt(1), fromIndex, endIndex);
+            case 3:
+                return indexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
+
+            default:
+                BasedSequence sequence = BasedSequence.of(s);
+                if (fromIndex < 0) fromIndex = 0;
+                if (endIndex > length()) endIndex = length();
+                for (int i = fromIndex; i < endIndex; i++) {
+                    char c = charAt(i);
+                    if (sequence.indexOf(c) == -1) return i;
+                }
+        }
+        return -1;
+    }
+
+    // @formatter:off
+    @Override public int lastIndexOf(CharSequence s) { return lastIndexOf(s, 0, length()); }
+    @Override public int lastIndexOf(CharSequence s, int fromIndex) { return lastIndexOf(s, 0, fromIndex); }
+    // @formatter:on
+
+    @Override
+    public int lastIndexOf(CharSequence s, int startIndex, int fromIndex) {
+        int sMax = s.length();
+        if (sMax == 0) return startIndex;
+
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+
+        if (startIndex < fromIndex) {
+            int pos = fromIndex;
+            char lastChar = s.charAt(sMax - 1);
+
+            do {
+                pos = lastIndexOf(lastChar, pos);
+                if (pos + 1 < startIndex + sMax) break;
+                if (matchCharsReversed(s, pos)) return pos + 1 - sMax;
+                pos--;
+            } while (pos + 1 >= startIndex + sMax);
+        }
+
+        return -1;
+    }
+
+    // @formatter:off
+    @Override public int lastIndexOf(char c)                                        { return lastIndexOf(c, 0, length()); }
+    @Override public int lastIndexOfAny(char c1, char c2)                           { return lastIndexOfAny(c1, c2, 0, length()); }
+    @Override public int lastIndexOfAny(char c1, char c2, char c3)                  { return lastIndexOfAny(c1, c2, c3, 0, length()); }
+    @Override public int lastIndexOfAny(CharSequence s)                             { return indexOfAny(s, 0, length()); }
+    @Override public int lastIndexOf(char c, int fromIndex)                        { return lastIndexOf(c, 0, fromIndex); }
+    @Override public int lastIndexOfAny(char c1, char c2, int fromIndex)           { return lastIndexOfAny(c1, c2, 0, fromIndex); }
+    @Override public int lastIndexOfAny(char c1, char c2, char c3, int fromIndex)  { return lastIndexOfAny(c1, c2, c3, 0, fromIndex); }
+    @Override public int lastIndexOfAny(CharSequence s, int fromIndex)             { return lastIndexOfAny(s, 0, fromIndex); }
+    // @formatter:on
+
+    @Override
+    public int lastIndexOf(char c, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            if (charAt(i) == c) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c == c1 || c == c2) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c == c1 || c == c2 || c == c3) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAny(CharSequence s, int startIndex, int fromIndex) {
+        switch (s.length()) {
+            case 0:
+                return startIndex;
+            case 1:
+                return lastIndexOf(s.charAt(0), startIndex, fromIndex);
+            case 2:
+                return lastIndexOfAny(s.charAt(0), s.charAt(1), startIndex, fromIndex);
+            case 3:
+                return lastIndexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
+
+            default:
+                BasedSequence sequence = BasedSequence.of(s);
+                if (startIndex < 0) startIndex = 0;
+                if (fromIndex >= length()) fromIndex = length();
+                else fromIndex++;
+                for (int i = fromIndex; i-- > startIndex; ) {
+                    final char c = charAt(i);
+                    if (sequence.indexOf(c) != -1) return i;
+                }
+        }
+        return -1;
+    }
+
+    // @formatter:off
+    @Override public int lastIndexOfNot(char c)                                         { return lastIndexOfNot(c, 0, length()); }
+    @Override public int lastIndexOfAnyNot(char c1, char c2)                            { return lastIndexOfAnyNot(c1, c2, 0, length()); }
+    @Override public int lastIndexOfAnyNot(char c1, char c2, char c3)                   { return lastIndexOfAnyNot(c1, c2, c3, 0, length()); }
+    @Override public int lastIndexOfAnyNot(CharSequence s)                              { return indexOfAnyNot(s, 0, length()); }
+    @Override public int lastIndexOfNot(char c, int fromIndex)                         { return lastIndexOfNot(c, 0, fromIndex); }
+    @Override public int lastIndexOfAnyNot(char c1, char c2, int fromIndex)            { return lastIndexOfAnyNot(c1, c2, 0, fromIndex); }
+    @Override public int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex)   { return lastIndexOfAnyNot(c1, c2, c3, 0, fromIndex); }
+    @Override public int lastIndexOfAnyNot(CharSequence s, int fromIndex)              { return lastIndexOfAnyNot(s, 0, fromIndex); }
+    // @formatter:on
+
+    @Override
+    public int lastIndexOfNot(char c, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            if (charAt(i) != c) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c != c1 && c != c2) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex >= length()) fromIndex = length();
+        else fromIndex++;
+        for (int i = fromIndex; i-- > startIndex; ) {
+            final char c = charAt(i);
+            if (c != c1 && c != c2 && c != c3) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOfAnyNot(CharSequence s, int startIndex, int fromIndex) {
+        switch (s.length()) {
+            case 0:
+                return startIndex;
+            case 1:
+                return lastIndexOfNot(s.charAt(0), startIndex, fromIndex);
+            case 2:
+                return lastIndexOfAnyNot(s.charAt(0), s.charAt(1), startIndex, fromIndex);
+            case 3:
+                return lastIndexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
+
+            default:
+                BasedSequence sequence = BasedSequence.of(s);
+                if (startIndex < 0) startIndex = 0;
+                if (fromIndex >= length()) fromIndex = length();
+                else fromIndex++;
+                for (int i = fromIndex; i-- > startIndex; ) {
+                    final char c = charAt(i);
+                    if (sequence.indexOf(c) == -1) return i;
+                }
+        }
+        return -1;
+    }
+
+    @Override
+    public int startOfDelimitedBy(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = lastIndexOf(s, index - 1);
+        return offset == -1 ? 0 : offset + 1;
+    }
+
+    @Override
+    public int startOfDelimitedByAny(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = lastIndexOfAny(s, index - 1);
+        return offset == -1 ? 0 : offset + 1;
+    }
+
+    @Override
+    public int startOfDelimitedByAnyNot(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = lastIndexOfAnyNot(s, index - 1);
+        return offset == -1 ? 0 : offset + 1;
+    }
+
+    @Override
+    public int endOfDelimitedBy(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = indexOf(s, index);
+        return offset == -1 ? length() : offset;
+    }
+
+    @Override
+    public int endOfDelimitedByAny(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = indexOfAny(s, index);
+        return offset == -1 ? length() : offset;
+    }
+
+    @Override
+    public int endOfDelimitedByAnyNot(CharSequence s, int index) {
+        if (index < 0) index = 0;
+        else if (index > length()) index = length();
+        int offset = indexOfAnyNot(s, index);
+        return offset == -1 ? length() : offset;
+    }
+
+    @Override
+    public int endOfLine(int index) {
+        return endOfDelimitedBy(EOL, index);
+    }
+
+    @Override
+    public int endOfLineAnyEOL(int index) {
+        return endOfDelimitedByAny(EOL_CHARS, index);
+    }
+
+    @Override
+    public int startOfLine(int index) {
+        return startOfDelimitedBy(EOL, index);
+    }
+
+    @Override
+    public int startOfLineAnyEOL(int index) {
+        return startOfDelimitedByAny(EOL_CHARS, index);
+    }
+
+    // @formatter:off
+    @Override public int countLeading(char c)                                   { return countChars(c, 0, length()); }
+    @Override public int countLeadingNot(char c)                                { return countNotChars(c, 0, length()); }
+    @Override public int countLeading(char c, int fromIndex)                   { return countChars(c, fromIndex, length()); }
+    @Override public int countLeadingNot(char c, int fromIndex)                { return countNotChars(c, fromIndex, length()); }
+    @Override public int countLeading(char c, int fromIndex, int endIndex)     { return countChars(c, fromIndex, endIndex); }
+    @Override public int countLeadingNot(char c, int fromIndex, int endIndex)  { return countNotChars(c, fromIndex, endIndex); }
+    
+    @Override public int countTrailing(char c)                                  { return countCharsReversed(c, 0, length()); }
+    @Override public int countTrailingNot(char c)                               { return countNotCharsReversed(c, 0, length()); }
+    @Override public int countTrailing(char c, int fromIndex)                  { return countCharsReversed(c, 0, fromIndex); }
+    @Override public int countTrailingNot(char c, int fromIndex)               { return countNotCharsReversed(c, 0, fromIndex); }
+    @Override public int countTrailing(char c, int startIndex, int fromIndex)    { return countCharsReversed(c, startIndex, fromIndex); }
+    @Override public int countTrailingNot(char c, int startIndex, int fromIndex) { return countNotCharsReversed(c, startIndex, fromIndex); }
+
+    @Override public int countChars(char c)                                     { return countChars(c, 0, length()); }
+    @Override public int countNotChars(char c)                                  { return countNotChars(c, 0, length()); }
+    @Override public int countChars(char c, int fromIndex)                     { return countChars(c, fromIndex, length()); }
+    @Override public int countNotChars(char c, int fromIndex)                  { return countNotChars(c, fromIndex, length()); }
+    
+    @Override public int countCharsReversed(char c)                             { return countCharsReversed(c, 0, length()); }
+    @Override public int countNotCharsReversed(char c)                          { return countNotCharsReversed(c, 0, length()); }
+    @Override public int countCharsReversed(char c, int fromIndex)             { return countCharsReversed(c, 0, fromIndex); }
+    @Override public int countNotCharsReversed(char c, int fromIndex)          { return countNotCharsReversed(c, 0, fromIndex); }
+    // @formatter:on
+
+    @Override
+    public int countChars(char c, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int index = indexOfNot(c, fromIndex, endIndex);
+        return index == -1 ? endIndex - fromIndex : index - fromIndex;
+    }
+
+    @Override
+    public int countCharsReversed(char c, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex > length()) fromIndex = length();
+        int index = lastIndexOfNot(c, startIndex, fromIndex);
+        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+    }
+
+    @Override
+    public int countNotChars(char c, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int index = indexOf(c, fromIndex, endIndex);
+        return index == -1 ? endIndex - fromIndex : index - fromIndex;
+    }
+
+    @Override
+    public int countNotCharsReversed(char c, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex > length()) fromIndex = length();
+        int index = lastIndexOf(c, startIndex, fromIndex);
+        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+    }
+
+    // @formatter:off
+    @Override public int countLeading(CharSequence chars)                                   { return countChars(chars, 0, length()); }
+    @Override public int countLeadingNot(CharSequence chars)                                { return countNotChars(chars, 0, length()); }
+    @Override public int countLeading(CharSequence chars, int fromIndex)                   { return countChars(chars, fromIndex, length()); }
+    @Override public int countLeadingNot(CharSequence chars, int fromIndex)                { return countNotChars(chars, fromIndex, length()); }
+    @Override public int countLeading(CharSequence chars, int fromIndex, int endIndex)     { return countChars(chars, fromIndex, endIndex); }
+    @Override public int countLeadingNot(CharSequence chars, int fromIndex, int endIndex)  { return countNotChars(chars, fromIndex, endIndex); }
+    
+    @Override public int countTrailing(CharSequence chars)                                  { return countCharsReversed(chars, 0, length()); }
+    @Override public int countTrailingNot(CharSequence chars)                               { return countNotCharsReversed(chars, 0, length()); }
+    @Override public int countTrailing(CharSequence chars, int fromIndex)                  { return countCharsReversed(chars, 0, fromIndex); }
+    @Override public int countTrailingNot(CharSequence chars, int fromIndex)               { return countNotCharsReversed(chars, 0, fromIndex); }
+    @Override public int countTrailing(CharSequence chars, int startIndex, int fromIndex)    { return countCharsReversed(chars, startIndex, fromIndex); }
+    @Override public int countTrailingNot(CharSequence chars, int startIndex, int fromIndex) { return countNotCharsReversed(chars, startIndex, fromIndex); }
+
+    @Override public int countChars(CharSequence chars)                                     { return countChars(chars, 0, length()); }
+    @Override public int countNotChars(CharSequence chars)                                  { return countNotChars(chars, 0, length()); }
+    @Override public int countChars(CharSequence chars, int fromIndex)                     { return countChars(chars, fromIndex, length()); }
+    @Override public int countNotChars(CharSequence chars, int fromIndex)                  { return countNotChars(chars, fromIndex, length()); }
+    
+    @Override public int countCharsReversed(CharSequence chars)                             { return countCharsReversed(chars, 0, length()); }
+    @Override public int countNotCharsReversed(CharSequence chars)                          { return countNotCharsReversed(chars, 0, length()); }
+    @Override public int countCharsReversed(CharSequence chars, int fromIndex)             { return countCharsReversed(chars, 0, fromIndex); }
+    @Override public int countNotCharsReversed(CharSequence chars, int fromIndex)          { return countNotCharsReversed(chars, 0, fromIndex); }
+    // @formatter:on
+
+    @Override
+    public int countChars(CharSequence chars, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int index = indexOfAnyNot(chars, fromIndex, endIndex);
+        return index == -1 ? endIndex - fromIndex : index - fromIndex;
+    }
+
+    @Override
+    public int countCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex > length()) fromIndex = length();
+        int index = lastIndexOfAnyNot(chars, startIndex, fromIndex);
+        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+    }
+
+    @Override
+    public int countNotChars(CharSequence chars, int fromIndex, int endIndex) {
+        if (fromIndex < 0) fromIndex = 0;
+        if (endIndex > length()) endIndex = length();
+        int index = indexOfAny(chars, fromIndex, endIndex);
+        return index == -1 ? endIndex - fromIndex : index - fromIndex;
+    }
+
+    @Override
+    public int countNotCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
+        if (startIndex < 0) startIndex = 0;
+        if (fromIndex > length()) fromIndex = length();
+        int index = lastIndexOfAny(chars, startIndex, fromIndex);
+        return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
+    }
+
+    @Override
+    public BasedSequence trimStart(CharSequence chars) {
         int trim = countChars(chars, 0, length());
         return trim > 0 ? subSequence(trim, length()) : this;
     }
 
     @Override
-    public BasedSequence trimmedStart(String chars) {
+    public BasedSequence trimmedStart(CharSequence chars) {
         int trim = countChars(chars, 0, length());
-        return trim > 0 ? subSequence(0, trim) : SubSequence.NULL;
+        return trim > 0 ? subSequence(0, trim) : BasedSequence.NULL;
     }
 
     @Override
-    public BasedSequence trimEnd(String chars) {
+    public BasedSequence trimEnd(CharSequence chars) {
         int trim = countCharsReversed(chars, 0, length());
         return trim > 0 ? subSequence(0, length() - trim) : this;
     }
 
     @Override
-    public BasedSequence trimmedEnd(String chars) {
+    public BasedSequence trimmedEnd(CharSequence chars) {
         int trim = countCharsReversed(chars, 0, length());
-        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
+        return trim > 0 ? subSequence(length() - trim) : BasedSequence.NULL;
     }
 
     @Override
-    public BasedSequence trim(String chars) {
+    public BasedSequence trim(CharSequence chars) {
         int trimStart = countChars(chars, 0, length());
         int trimEnd = countCharsReversed(chars, 0, length());
         int trimmed = trimStart + trimEnd;
@@ -171,7 +667,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence trimmedStart() {
         int trim = countChars(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(0, trim) : SubSequence.NULL;
+        return trim > 0 ? subSequence(0, trim) : BasedSequence.NULL;
     }
 
     @Override
@@ -183,7 +679,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence trimmedEnd() {
         int trim = countCharsReversed(WHITESPACE_CHARS, 0, length());
-        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
+        return trim > 0 ? subSequence(length() - trim) : BasedSequence.NULL;
     }
 
     @Override
@@ -200,7 +696,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence trimmedEOL() {
         int trim = eolLength();
-        return trim > 0 ? subSequence(length() - trim) : SubSequence.NULL;
+        return trim > 0 ? subSequence(length() - trim) : BasedSequence.NULL;
     }
 
     @Override
@@ -226,17 +722,17 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public BasedSequence nullIfEmpty() {
-        return isEmpty() ? SubSequence.NULL : this;
+        return isEmpty() ? BasedSequence.NULL : this;
     }
 
     @Override
     public BasedSequence nullIfBlank() {
-        return isBlank() ? SubSequence.NULL : this;
+        return isBlank() ? BasedSequence.NULL : this;
     }
 
     @Override
     public BasedSequence nullIf(boolean condition) {
-        return condition ? SubSequence.NULL : this;
+        return condition ? BasedSequence.NULL : this;
     }
 
     @Override
@@ -252,22 +748,42 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean isNull() {
-        return this == SubSequence.NULL;
+        return this == BasedSequence.NULL;
     }
 
     @Override
     public boolean isNotNull() {
-        return this != SubSequence.NULL;
+        return this != BasedSequence.NULL;
     }
 
     @Override
-    public boolean endsWith(String suffix) {
-        return length() > 0 && matchCharsReversed(suffix, length());
+    public boolean endsWith(CharSequence suffix) {
+        return length() > 0 && matchCharsReversed(suffix, length() - 1);
     }
 
     @Override
-    public boolean startsWith(String prefix) {
+    public boolean startsWith(CharSequence prefix) {
         return length() > 0 && matchChars(prefix, 0);
+    }
+
+    @Override
+    public BasedSequence removeSuffix(CharSequence suffix) {
+        return !endsWith(suffix) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removePrefix(CharSequence prefix) {
+        return !startsWith(prefix) ? this : subSequence(prefix.length(), length());
+    }
+
+    @Override
+    public BasedSequence removeProperSuffix(CharSequence suffix) {
+        return length() <= suffix.length() || !endsWith(suffix) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removeProperPrefix(CharSequence prefix) {
+        return length() <= prefix.length() || !startsWith(prefix) ? this : subSequence(prefix.length(), length());
     }
 
     @Override
@@ -295,28 +811,18 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return new MappedSequence(this, mapper);
     }
 
-    private static boolean contains(String chars, char c) {
-        int iMax = chars.length();
-
-        for (int i = 0; i < iMax; i++) {
-            if (chars.charAt(i) == c) return true;
-        }
-
-        return false;
-    }
-
     @Override
-    public boolean matches(String chars) {
+    public boolean matches(CharSequence chars) {
         return chars.length() == length() && matchChars(chars);
     }
 
     @Override
-    public boolean matchChars(String chars) {
+    public boolean matchChars(CharSequence chars) {
         return matchChars(chars, 0);
     }
 
     @Override
-    public boolean matchChars(String chars, int startIndex) {
+    public boolean matchChars(CharSequence chars, int startIndex) {
         int iMax = chars.length();
         if (iMax > length() - startIndex) return false;
 
@@ -327,76 +833,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public boolean matchCharsReversed(String chars, int endIndex) {
-        return endIndex >= chars.length() && matchChars(chars, endIndex - chars.length());
-    }
-
-    @Override
-    public int countChars(String chars, int startIndex, int endIndex) {
-        int count = 0;
-        if (endIndex > length()) endIndex = length();
-        for (int i = startIndex; i < endIndex; i++) {
-            if (!contains(chars, charAt(i))) break;
-            count++;
-        }
-
-        return count;
-    }
-
-    @Override
-    public int countCharsReversed(String chars, int startIndex, int endIndex) {
-        int count = 0;
-        if (endIndex > length()) endIndex = length();
-        for (int i = endIndex; i-- > startIndex; ) {
-            if (!contains(chars, charAt(i))) break;
-            count++;
-        }
-
-        return count;
-    }
-
-    @Override
-    public int countNotChars(String chars, int startIndex, int endIndex) {
-        int count = 0;
-        if (endIndex > length()) endIndex = length();
-        for (int i = startIndex; i < endIndex; i++) {
-            if (contains(chars, charAt(i))) break;
-            count++;
-        }
-
-        return count;
-    }
-
-    @Override
-    public int countNotCharsReversed(String chars, int startIndex, int endIndex) {
-        int count = 0;
-        if (endIndex > length()) endIndex = length();
-        for (int i = endIndex; i-- > startIndex; ) {
-            if (contains(chars, charAt(i))) break;
-            count++;
-        }
-
-        return count;
-    }
-
-    @Override
-    public int countChars(String chars) {
-        return countChars(chars, 0, length());
-    }
-
-    @Override
-    public int countCharsReversed(String chars) {
-        return countCharsReversed(chars, 0, length());
-    }
-
-    @Override
-    public int countNotChars(String chars) {
-        return countNotChars(chars, 0, length());
-    }
-
-    @Override
-    public int countNotCharsReversed(String chars) {
-        return countNotCharsReversed(chars, 0, length());
+    public boolean matchCharsReversed(CharSequence chars, int endIndex) {
+        return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length());
     }
 
     @Override
@@ -483,134 +921,10 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return Escaping.normalizeEndWithEOL(this, textMapper);
     }
 
-    @Override
-    public int indexOf(char c) {
-        return indexOf(c, 0);
+    static boolean isVisibleWhitespace(char c) {
+        return visibleSpacesMap.containsKey(c);
     }
 
-    @Override
-    public int lastIndexOf(char c) {
-        return lastIndexOf(c, length());
-    }
-
-    @Override
-    public int indexOf(String s) {
-        return indexOf(s, 0);
-    }
-
-    @Override
-    public int lastIndexOf(String s) {
-        return lastIndexOf(s, length());
-    }
-
-    @Override
-    public int indexOf(char c, int index) {
-        int iMax = length();
-        for (int i = index; i < iMax; i++) {
-            if (charAt(i) == c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int indexOfAny(char c1, char c2) {
-        return indexOfAny(c1, c2, 0);
-    }
-
-    @Override
-    public int indexOfAny(char c1, char c2, int index) {
-        int iMax = length();
-        for (int i = index; i < iMax; i++) {
-            char c = charAt(i);
-            if (c == c1 || c == c2) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int indexOfAny(char c1, char c2, char c3) {
-        return indexOfAny(c1, c2, c3, 0);
-    }
-
-    @Override
-    public int indexOfAny(char c1, char c2, char c3, int index) {
-        int iMax = length();
-        for (int i = index; i < iMax; i++) {
-            char c = charAt(i);
-            if (c == c1 || c == c2 || c == c3) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int indexOfAny(String s) {
-        return indexOfAny(s,0);
-    }
-
-    @Override
-    public int indexOfAny(String s, int index) {
-        int iMax = length();
-        for (int i = index; i < iMax; i++) {
-            char c = charAt(i);
-            if (s.indexOf(c) != -1) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int lastIndexOf(char c, int index) {
-        for (int i = index; i-- > 0; i++) {
-            if (charAt(i) == c) return i;
-        }
-        return -1;
-    }
-
-    @Override
-    public int indexOf(String s, int index) {
-        int sMax = s.length();
-        if (sMax == 0) return index;
-
-        int iMax = length();
-        char firstChar = s.charAt(0);
-        int pos = index;
-
-        do {
-            pos = indexOf(firstChar, pos);
-            if (pos < 0 || pos + sMax > iMax) break;
-            if (matchChars(s, pos)) return pos;
-            pos++;
-        } while (pos + sMax < iMax);
-
-        return -1;
-    }
-
-    @Override
-    public int lastIndexOf(String s, int index) {
-        int sMax = s.length();
-        if (sMax == 0) return index;
-
-        int pos = index;
-        char lastChar = s.charAt(s.length() - 1);
-
-        do {
-            pos = lastIndexOf(lastChar, pos);
-            if (pos < sMax) break;
-            if (matchCharsReversed(s, pos + 1)) return pos - sMax;
-            pos--;
-        } while (pos >= sMax);
-
-        return -1;
-    }
-
-    public static final Map<Character, String> visibleSpacesMap;
-    static {
-        HashMap<Character, String> charMap = new HashMap<>();
-        visibleSpacesMap = charMap;
-        charMap.put('\n', "\\n");
-        charMap.put('\r', "\\r");
-        charMap.put('\f', "\\f");
-        charMap.put('\t', "\\u2192");
-    }
     @Override
     public String toVisibleWhitespaceString() {
         StringBuilder sb = new StringBuilder();
@@ -665,17 +979,17 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public List<BasedSequence> split(String delimiter) {
+    public List<BasedSequence> split(CharSequence delimiter) {
         return split(delimiter, 0);
     }
 
     @Override
-    public List<BasedSequence> split(String delimiter, int limit) {
+    public List<BasedSequence> split(CharSequence delimiter, int limit) {
         return split(delimiter, limit, 0);
     }
 
     @Override
-    public List<BasedSequence> split(String delimiter, int limit, int flags) {
+    public List<BasedSequence> split(CharSequence delimiter, int limit, int flags) {
         return split(delimiter, limit, flags, WHITESPACE_CHARS);
     }
 
@@ -726,7 +1040,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public List<BasedSequence> split(String delimiter, int limit, int flags, String trimChars) {
+    public List<BasedSequence> split(CharSequence delimiter, int limit, int flags, String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 

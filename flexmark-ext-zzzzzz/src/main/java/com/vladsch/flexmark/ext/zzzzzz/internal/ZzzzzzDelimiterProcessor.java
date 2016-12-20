@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.internal.Delimiter;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
-import com.vladsch.flexmark.util.sequence.SubSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
 
@@ -35,7 +35,7 @@ public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
     @Override
     public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
         // Normal case, wrap nodes between delimiters in strikethrough.
-        Zzzzzz zzzzzz = new Zzzzzz(opener.getTailChars(delimitersUsed), SubSequence.NULL, closer.getLeadChars(delimitersUsed));
+        Zzzzzz zzzzzz = new Zzzzzz(opener.getTailChars(delimitersUsed), BasedSequence.NULL, closer.getLeadChars(delimitersUsed));
         opener.moveNodesBetweenDelimitersTo(zzzzzz, closer);
     }
 }

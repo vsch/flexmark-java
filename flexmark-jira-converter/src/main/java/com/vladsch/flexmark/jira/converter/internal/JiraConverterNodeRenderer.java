@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class JiraConverterNodeRenderer implements NodeRenderer
         // , PhasedNodeRenderer
@@ -80,7 +80,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     private void render(Heading node, NodeRendererContext context, HtmlWriter html) {
         html.line().raw("h" + node.getLevel() + ". ");
         context.renderChildren(node);
-        html.line();
+        html.line().raw("\n");
     }
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
@@ -88,7 +88,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
         inBlockQuote++;
         context.renderChildren(node);
         inBlockQuote--;
-        html.line().raw("{quote}").line();
+        html.line().raw("{quote}").line().raw("\n");
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -105,7 +105,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.line().raw("----").line();
+        html.line().raw("----").line().raw("\n");
     }
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {

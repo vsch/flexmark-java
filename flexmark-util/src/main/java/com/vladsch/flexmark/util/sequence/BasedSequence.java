@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.mappers.CharMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -9,7 +10,33 @@ import java.util.Locale;
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
+@SuppressWarnings("SameParameterValue")
 public interface BasedSequence extends CharSequence {
+    BasedSequence NULL = new EmptyBasedSequence();
+    BasedSequence EOL = new SubCharSequence("\n");
+    List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+    BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
+    String WHITESPACE_NO_EOL_CHARS = " \t";
+    String WHITESPACE_CHARS = " \t\r\n";
+    String WHITESPACE_NBSP_CHARS = " \t\r\n\u00A0";
+
+    String EOL_CHARS = "\r\n";
+    char EOL_CHAR = EOL_CHARS.charAt(1);
+    char EOL_CHAR1 = EOL_CHARS.charAt(0);
+    char EOL_CHAR2 = EOL_CHARS.charAt(1);
+
+    static BasedSequence firstNonNull(BasedSequence... sequences) {
+        for (BasedSequence sequence : sequences) {
+            if (sequence != null && sequence != NULL) return sequence;
+        }
+
+        return NULL;
+    }
+
+    static boolean isVisibleWhitespace(char c) {
+        return BasedSequenceImpl.isVisibleWhitespace(c);
+    }
+
     CharSequence getBase();
     int getStartOffset();
     int getEndOffset();
@@ -41,28 +68,141 @@ public interface BasedSequence extends CharSequence {
     // no exceptions are thrown, instead a \0 is returned for an invalid index
     char midCharAt(int index);
 
-    int countLeading(String chars);
-    int countLeadingNot(String chars);
-    int countTrailing(String chars);
-    int countTrailingNot(String chars);
-    int countChars(String chars, int startIndex, int endIndex);
-    int countCharsReversed(String chars, int startIndex, int endIndex);
-    int countNotChars(String chars, int startIndex, int endIndex);
-    int countNotCharsReversed(String chars, int startIndex, int endIndex);
-    int countChars(String chars);
-    int countCharsReversed(String chars);
-    int countNotChars(String chars);
-    int countNotCharsReversed(String chars);
+    int indexOf(CharSequence s);
+    int indexOf(CharSequence s, int startIndex);
+    int indexOf(CharSequence s, int startIndex, int endIndex);
 
-    BasedSequence trimStart(String chars);
-    BasedSequence trimEnd(String chars);
-    BasedSequence trim(String chars);
+    int indexOf(char c);
+    int indexOfAny(char c1, char c2);
+    int indexOfAny(char c1, char c2, char c3);
+    int indexOfAny(CharSequence s);
+
+    int indexOf(char c, int fromIndex);
+    int indexOfAny(char c1, char c2, int fromIndex);
+    int indexOfAny(char c1, char c2, char c3, int fromIndex);
+    int indexOfAny(CharSequence s, int fromIndex);
+
+    int indexOf(char c, int fromIndex, int endIndex);
+    int indexOfAny(char c1, char c2, int fromIndex, int endIndex);
+    int indexOfAny(char c1, char c2, char c3, int fromIndex, int endIndex);
+    int indexOfAny(CharSequence s, int fromIndex, int endIndex);
+
+    int indexOfNot(char c);
+    int indexOfAnyNot(char c1, char c2);
+    int indexOfAnyNot(char c1, char c2, char c3);
+    int indexOfAnyNot(CharSequence s);
+
+    int indexOfNot(char c, int fromIndex);
+    int indexOfAnyNot(char c1, char c2, int fromIndex);
+    int indexOfAnyNot(char c1, char c2, char c3, int fromIndex);
+    int indexOfAnyNot(CharSequence s, int fromIndex);
+
+    int indexOfNot(char c, int fromIndex, int endIndex);
+    int indexOfAnyNot(char c1, char c2, int fromIndex, int endIndex);
+    int indexOfAnyNot(char c1, char c2, char c3, int fromIndex, int endIndex);
+    int indexOfAnyNot(CharSequence s, int fromIndex, int endIndex);
+
+    int lastIndexOf(CharSequence s);
+    int lastIndexOf(CharSequence s, int fromIndex);
+    int lastIndexOf(CharSequence s, int startIndex, int fromIndex);
+
+    int lastIndexOf(char c);
+    int lastIndexOfAny(char c1, char c2);
+    int lastIndexOfAny(char c1, char c2, char c3);
+    int lastIndexOfAny(CharSequence s);
+
+    int lastIndexOf(char c, int fromIndex);
+    int lastIndexOfAny(char c1, char c2, int fromIndex);
+    int lastIndexOfAny(char c1, char c2, char c3, int fromIndex);
+    int lastIndexOfAny(CharSequence s, int fromIndex);
+
+    int lastIndexOf(char c, int startIndex, int fromIndex);
+    int lastIndexOfAny(char c1, char c2, int startIndex, int fromIndex);
+    int lastIndexOfAny(char c1, char c2, char c3, int startIndex, int fromIndex);
+    int lastIndexOfAny(CharSequence s, int startIndex, int fromIndex);
+
+    int lastIndexOfNot(char c);
+    int lastIndexOfAnyNot(char c1, char c2);
+    int lastIndexOfAnyNot(char c1, char c2, char c3);
+    int lastIndexOfAnyNot(CharSequence s);
+
+    int lastIndexOfNot(char c, int fromIndex);
+    int lastIndexOfAnyNot(char c1, char c2, int fromIndex);
+    int lastIndexOfAnyNot(char c1, char c2, char c3, int fromIndex);
+    int lastIndexOfAnyNot(CharSequence s, int fromIndex);
+
+    int lastIndexOfNot(char c, int startIndex, int fromIndex);
+    int lastIndexOfAnyNot(char c1, char c2, int startIndex, int fromIndex);
+    int lastIndexOfAnyNot(char c1, char c2, char c3, int startIndex, int fromIndex);
+    int lastIndexOfAnyNot(CharSequence s, int startIndex, int fromIndex);
+
+    int countLeading(CharSequence chars);
+    int countLeadingNot(CharSequence chars);
+    int countLeading(CharSequence chars, int startIndex);
+    int countLeadingNot(CharSequence chars, int startIndex);
+    int countLeading(CharSequence chars, int startIndex, int endIndex);
+    int countLeadingNot(CharSequence chars, int startIndex, int endIndex);
+
+    int countTrailing(CharSequence chars);
+    int countTrailingNot(CharSequence chars);
+    int countTrailing(CharSequence chars, int startIndex);
+    int countTrailingNot(CharSequence chars, int startIndex);
+    int countTrailing(CharSequence chars, int startIndex, int endIndex);
+    int countTrailingNot(CharSequence chars, int startIndex, int endIndex);
+
+    int countLeading(char c);
+    int countLeadingNot(char c);
+    int countLeading(char c, int startIndex);
+    int countLeadingNot(char c, int startIndex);
+    int countLeading(char c, int startIndex, int endIndex);
+    int countLeadingNot(char c, int startIndex, int endIndex);
+
+    int countTrailing(char c);
+    int countTrailingNot(char c);
+    int countTrailing(char c, int startIndex);
+    int countTrailingNot(char c, int startIndex);
+    int countTrailing(char c, int startIndex, int endIndex);
+    int countTrailingNot(char c, int startIndex, int endIndex);
+
+    int countChars(char c);
+    int countCharsReversed(char c);
+    int countNotChars(char c);
+    int countNotCharsReversed(char c);
+
+    int countChars(char c, int startIndex);
+    int countCharsReversed(char c, int startIndex);
+    int countNotChars(char c, int startIndex);
+    int countNotCharsReversed(char c, int startIndex);
+
+    int countChars(char c, int startIndex, int endIndex);
+    int countNotChars(char c, int startIndex, int endIndex);
+    int countCharsReversed(char c, int startIndex, int endIndex);
+    int countNotCharsReversed(char c, int startIndex, int endIndex);
+
+    int countChars(CharSequence chars);
+    int countCharsReversed(CharSequence chars);
+    int countNotChars(CharSequence chars);
+    int countNotCharsReversed(CharSequence chars);
+
+    int countChars(CharSequence chars, int startIndex);
+    int countCharsReversed(CharSequence chars, int startIndex);
+    int countNotChars(CharSequence chars, int startIndex);
+    int countNotCharsReversed(CharSequence chars, int startIndex);
+
+    int countChars(CharSequence chars, int startIndex, int endIndex);
+    int countNotChars(CharSequence chars, int startIndex, int endIndex);
+    int countCharsReversed(CharSequence chars, int startIndex, int endIndex);
+    int countNotCharsReversed(CharSequence chars, int startIndex, int endIndex);
+
+    BasedSequence trimStart(CharSequence chars);
+    BasedSequence trimEnd(CharSequence chars);
+    BasedSequence trim(CharSequence chars);
     BasedSequence trimStart();
     BasedSequence trimEnd();
     BasedSequence trim();
     BasedSequence trimEOL();
-    BasedSequence trimmedStart(String chars);
-    BasedSequence trimmedEnd(String chars);
+    BasedSequence trimmedStart(CharSequence chars);
+    BasedSequence trimmedEnd(CharSequence chars);
     BasedSequence trimmedStart();
     BasedSequence trimmedEnd();
     BasedSequence trimmedEOL();
@@ -79,20 +219,18 @@ public interface BasedSequence extends CharSequence {
     BasedSequence nullIfBlank();
     BasedSequence nullIf(boolean condition);
 
-    int indexOf(char c);
-    int lastIndexOf(char c);
-    int indexOf(String s);
-    int lastIndexOf(String s);
-    int indexOf(char c, int index);
-    int indexOfAny(char c1, char c2);
-    int indexOfAny(char c1, char c2, int index);
-    int indexOfAny(char c1, char c2, char c3);
-    int indexOfAny(char c1, char c2, char c3, int index);
-    int indexOfAny(String s);
-    int indexOfAny(String s, int index);
-    int indexOf(String s, int index);
-    int lastIndexOf(char c, int index);
-    int lastIndexOf(String s, int index);
+    int endOfDelimitedBy(CharSequence s, int index);
+    int endOfDelimitedByAny(CharSequence s, int index);
+    int endOfDelimitedByAnyNot(CharSequence s, int index);
+
+    int startOfDelimitedBy(CharSequence s, int index);
+    int startOfDelimitedByAny(CharSequence s, int index);
+    int startOfDelimitedByAnyNot(CharSequence s, int index);
+
+    int endOfLine(int index);
+    int endOfLineAnyEOL(int index);
+    int startOfLine(int index);
+    int startOfLineAnyEOL(int index);
 
     String unescape();
     BasedSequence unescape(ReplacedTextMapper textMapper);
@@ -102,13 +240,18 @@ public interface BasedSequence extends CharSequence {
     String normalizeEndWithEOL();
     BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper);
 
-    boolean matches(String chars);
-    boolean matchChars(String chars);
-    boolean matchChars(String chars, int startIndex);
-    boolean matchCharsReversed(String chars, int endIndex);
+    boolean matches(CharSequence chars);
+    boolean matchChars(CharSequence chars);
+    boolean matchChars(CharSequence chars, int startIndex);
+    boolean matchCharsReversed(CharSequence chars, int endIndex);
 
-    boolean endsWith(String suffix);
-    boolean startsWith(String prefix);
+    boolean endsWith(CharSequence suffix);
+    boolean startsWith(CharSequence prefix);
+
+    BasedSequence removeSuffix(CharSequence suffix);
+    BasedSequence removePrefix(CharSequence prefix);
+    BasedSequence removeProperSuffix(CharSequence suffix);
+    BasedSequence removeProperPrefix(CharSequence prefix);
 
     MappedSequence toLowerCase();
     MappedSequence toUpperCase();
@@ -138,14 +281,15 @@ public interface BasedSequence extends CharSequence {
     int SPLIT_SKIP_EMPTY = 4;
     int SPLIT_INCLUDE_DELIM_PARTS = 8;
     int SPLIT_TRIM_SKIP_EMPTY = SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY;
+
     List<BasedSequence> split(char delimiter);
     List<BasedSequence> split(char delimiter, int limit);
     List<BasedSequence> split(char delimiter, int limit, int flags);
     List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars);
-    List<BasedSequence> split(String delimiter);
-    List<BasedSequence> split(String delimiter, int limit);
-    List<BasedSequence> split(String delimiter, int limit, int flags);
-    List<BasedSequence> split(String delimiter, int limit, int flags, String trimChars);
+    List<BasedSequence> split(CharSequence delimiter);
+    List<BasedSequence> split(CharSequence delimiter, int limit);
+    List<BasedSequence> split(CharSequence delimiter, int limit, int flags);
+    List<BasedSequence> split(CharSequence delimiter, int limit, int flags, String trimChars);
 
     /**
      * @return the last character of the sequence or '\0' if empty
@@ -156,4 +300,74 @@ public interface BasedSequence extends CharSequence {
      * @return the first character of the sequence or '\0' if empty
      */
     char firstChar();
+
+    static BasedSequence of(CharSequence charSequence) {
+        if (charSequence instanceof String) return new SubCharSequence((String) charSequence);
+        else return of(charSequence, 0, charSequence.length());
+    }
+
+    static BasedSequence of(CharSequence charSequence, int startOffset) {
+        if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset);
+        else return of(charSequence, startOffset, charSequence.length());
+    }
+
+    static BasedSequence of(CharSequence charSequence, int startOffset, int endOffset) {
+        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence.subSequence(startOffset, endOffset);
+        else if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset, endOffset);
+        else return new SubSequence(charSequence, startOffset, endOffset);
+    }
+
+    class EmptyBasedSequence extends BasedSequenceImpl {
+        @Override
+        public int length() {
+            return 0;
+        }
+
+        @Override
+        public char charAt(int index) {
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+
+        @Override
+        public int getIndexOffset(int index) {
+            if (index == 0) return 0;
+            throw new StringIndexOutOfBoundsException("String index: " + index + " out of range: 0, " + length());
+        }
+
+        @Override
+        public BasedSequence subSequence(int i, int i1) {
+            if (i == 0 && i1 == 0) return this;
+            throw new StringIndexOutOfBoundsException("EMPTY subSequence(" + i + "," + i1 + ") only subSequence(0, 0) is allowed");
+        }
+
+        @Override
+        public BasedSequence baseSubSequence(int start, int end) {
+            return subSequence(start, end);
+        }
+
+        @Override
+        public CharSequence getBase() {
+            return BasedSequence.NULL;
+        }
+
+        @Override
+        public int getStartOffset() {
+            return 0;
+        }
+
+        @Override
+        public int getEndOffset() {
+            return 0;
+        }
+
+        @Override
+        public Range getSourceRange() {
+            return Range.NULL;
+        }
+
+        @Override
+        public String toString() {
+            return "";
+        }
+    }
 }

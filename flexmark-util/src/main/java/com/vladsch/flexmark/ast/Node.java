@@ -3,10 +3,9 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class Node {
-    final static public BasedSequence[] EMPTY_SEGMENTS = SubSequence.EMPTY_ARRAY;
+    final static public BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
     public static final String SPLICE = " … ";
 
     private Node parent = null;
@@ -14,7 +13,7 @@ public abstract class Node {
     private Node lastChild = null;
     private Node prev = null;
     private Node next = null;
-    private BasedSequence chars = SubSequence.NULL;
+    private BasedSequence chars = BasedSequence.NULL;
 
     public Node() {
     }
@@ -157,7 +156,7 @@ public abstract class Node {
     }
 
     public void setChars(BasedSequence chars) {
-        this.chars = chars == null ? SubSequence.NULL : chars;
+        this.chars = chars == null ? BasedSequence.NULL : chars;
     }
 
     public Node getNext() {
@@ -294,10 +293,10 @@ public abstract class Node {
 
     public static BasedSequence getLeadSegment(BasedSequence[] segments) {
         for (BasedSequence segment : segments) {
-            if (segment != null && segment != SubSequence.NULL) return segment;
+            if (segment != null && segment != BasedSequence.NULL) return segment;
         }
 
-        return SubSequence.NULL;
+        return BasedSequence.NULL;
     }
 
     public static BasedSequence getTrailSegment(BasedSequence[] segments) {
@@ -305,10 +304,10 @@ public abstract class Node {
 
         for (int i = iMax; i-- > 0; ) {
             BasedSequence segment = segments[i];
-            if (segment != null && segment != SubSequence.NULL) return segment;
+            if (segment != null && segment != BasedSequence.NULL) return segment;
         }
 
-        return SubSequence.NULL;
+        return BasedSequence.NULL;
     }
 
     public static BasedSequence spanningChars(BasedSequence... segments) {
@@ -317,7 +316,7 @@ public abstract class Node {
         BasedSequence firstSequence = null;
         BasedSequence lastSequence = null;
         for (BasedSequence segment : segments) {
-            if (segment != null && segment != SubSequence.NULL) {
+            if (segment != null && segment != BasedSequence.NULL) {
                 if (startOffset > segment.getStartOffset()) {
                     startOffset = segment.getStartOffset();
                     firstSequence = segment;
@@ -333,7 +332,7 @@ public abstract class Node {
         if (firstSequence != null && lastSequence != null) {
             return firstSequence.baseSubSequence(firstSequence.getStartOffset(), lastSequence.getEndOffset());
         } else {
-            return SubSequence.NULL;
+            return BasedSequence.NULL;
         }
     }
 
@@ -384,7 +383,7 @@ public abstract class Node {
     }
 
     protected BasedSequence deNullify(BasedSequence nullable) {
-        return nullable == null ? SubSequence.NULL : nullable;
+        return nullable == null ? BasedSequence.NULL : nullable;
     }
 
     public static void segmentSpan(StringBuilder out, int startOffset, int endOffset, String name) {
@@ -525,7 +524,7 @@ public abstract class Node {
 
     public BasedSequence childChars() {
         if (firstChild == null || lastChild == null) {
-            return SubSequence.NULL;
+            return BasedSequence.NULL;
         }
 
         return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());

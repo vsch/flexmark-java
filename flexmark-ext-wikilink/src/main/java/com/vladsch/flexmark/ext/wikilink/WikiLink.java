@@ -3,17 +3,16 @@ package com.vladsch.flexmark.ext.wikilink;
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class WikiLink extends CustomNode implements DoNotDecorate {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence link = SubSequence.NULL;
-    protected BasedSequence pageRef = SubSequence.NULL;
-    protected BasedSequence anchorMarker = SubSequence.NULL;
-    protected BasedSequence anchorRef = SubSequence.NULL;
-    protected BasedSequence textSeparatorMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence link = BasedSequence.NULL;
+    protected BasedSequence pageRef = BasedSequence.NULL;
+    protected BasedSequence anchorMarker = BasedSequence.NULL;
+    protected BasedSequence anchorRef = BasedSequence.NULL;
+    protected BasedSequence textSeparatorMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
     protected final boolean linkIsFirst;
 
     @Override

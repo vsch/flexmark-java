@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.spec.example;
 
 import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
@@ -10,23 +9,23 @@ import java.util.List;
  * A SpecExample block node
  */
 public class SpecExampleBlock extends CustomBlock {
-    private BasedSequence openingMarker = SubSequence.NULL;
-    private BasedSequence exampleKeyword = SubSequence.NULL;
-    private BasedSequence coordOpeningMarker = SubSequence.NULL;
-    private BasedSequence section = SubSequence.NULL;
-    private BasedSequence numberSeparator = SubSequence.NULL;
-    private BasedSequence number = SubSequence.NULL;
-    private BasedSequence coordClosingMarker = SubSequence.NULL;
-    private BasedSequence optionsKeyword = SubSequence.NULL;
-    private BasedSequence optionsOpeningMarker = SubSequence.NULL;
-    private BasedSequence options = SubSequence.NULL;
-    private BasedSequence optionsClosingMarker = SubSequence.NULL;
-    private BasedSequence source = SubSequence.NULL;
-    private BasedSequence htmlSeparator = SubSequence.NULL;
-    private BasedSequence html = SubSequence.NULL;
-    private BasedSequence astSeparator = SubSequence.NULL;
-    private BasedSequence ast = SubSequence.NULL;
-    private BasedSequence closingMarker = SubSequence.NULL;
+    private BasedSequence openingMarker = BasedSequence.NULL;
+    private BasedSequence exampleKeyword = BasedSequence.NULL;
+    private BasedSequence coordOpeningMarker = BasedSequence.NULL;
+    private BasedSequence section = BasedSequence.NULL;
+    private BasedSequence numberSeparator = BasedSequence.NULL;
+    private BasedSequence number = BasedSequence.NULL;
+    private BasedSequence coordClosingMarker = BasedSequence.NULL;
+    private BasedSequence optionsKeyword = BasedSequence.NULL;
+    private BasedSequence optionsOpeningMarker = BasedSequence.NULL;
+    private BasedSequence options = BasedSequence.NULL;
+    private BasedSequence optionsClosingMarker = BasedSequence.NULL;
+    private BasedSequence source = BasedSequence.NULL;
+    private BasedSequence htmlSeparator = BasedSequence.NULL;
+    private BasedSequence html = BasedSequence.NULL;
+    private BasedSequence astSeparator = BasedSequence.NULL;
+    private BasedSequence ast = BasedSequence.NULL;
+    private BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public void getAstExtra(StringBuilder out) {

@@ -10,9 +10,9 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
  * A Zzzzzz node
  */
 public class Zzzzzz extends CustomNode implements DelimitedNode, DoNotDecorate {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
     protected ZzzzzzBlock zzzzzzBlock;
     protected String zzzzzzBlockText;
 

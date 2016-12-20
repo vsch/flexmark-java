@@ -18,11 +18,11 @@ package com.vladsch.flexmark.ext.tables.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.tables.TableCell;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.StringSequence;
+import com.vladsch.flexmark.util.sequence.SubCharSequence;
 
 /**
  * Table cell separator only used during parsing, not part of the AST, use the {@link TableCell#getOpeningMarker()} and {@link TableCell#getClosingMarker()}
- * 
+ *
  */
 class TableColumnSeparator extends Node {
     public TableColumnSeparator() {
@@ -33,7 +33,7 @@ class TableColumnSeparator extends Node {
     }
 
     public TableColumnSeparator(String chars) {
-        super(new StringSequence(chars));
+        super(new SubCharSequence(chars));
     }
 
     @Override

@@ -24,8 +24,8 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
  * A EscapedCharacter node
  */
 public class EscapedCharacter extends Node implements DoNotDecorate {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -35,7 +35,7 @@ public class EscapedCharacter extends Node implements DoNotDecorate {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        delimitedSegmentSpanChars(out, openingMarker, text, SubSequence.NULL, "text");
+        delimitedSegmentSpanChars(out, openingMarker, text, BasedSequence.NULL, "text");
     }
 
     public EscapedCharacter() {

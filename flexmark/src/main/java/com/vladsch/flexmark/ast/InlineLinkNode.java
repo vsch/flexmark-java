@@ -1,23 +1,22 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class InlineLinkNode extends LinkNode {
-    protected BasedSequence textOpeningMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence textClosingMarker = SubSequence.NULL;
-    protected BasedSequence linkOpeningMarker = SubSequence.NULL;
-    protected BasedSequence urlOpeningMarker = SubSequence.NULL;
-    protected BasedSequence url = SubSequence.NULL;
-    protected BasedSequence pageRef = SubSequence.NULL;
-    protected BasedSequence anchorMarker = SubSequence.NULL;
-    protected BasedSequence anchorRef = SubSequence.NULL;
-    protected BasedSequence urlClosingMarker = SubSequence.NULL;
-    protected BasedSequence titleOpeningMarker = SubSequence.NULL;
-    protected BasedSequence title = SubSequence.NULL;
-    protected BasedSequence titleClosingMarker = SubSequence.NULL;
-    protected BasedSequence linkClosingMarker = SubSequence.NULL;
+    protected BasedSequence textOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence textClosingMarker = BasedSequence.NULL;
+    protected BasedSequence linkOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence urlOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence url = BasedSequence.NULL;
+    protected BasedSequence pageRef = BasedSequence.NULL;
+    protected BasedSequence anchorMarker = BasedSequence.NULL;
+    protected BasedSequence anchorRef = BasedSequence.NULL;
+    protected BasedSequence urlClosingMarker = BasedSequence.NULL;
+    protected BasedSequence titleOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence title = BasedSequence.NULL;
+    protected BasedSequence titleClosingMarker = BasedSequence.NULL;
+    protected BasedSequence linkClosingMarker = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -103,15 +102,15 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     public void setTitleChars(BasedSequence titleChars) {
-        if (titleChars != null && titleChars != SubSequence.NULL) {
+        if (titleChars != null && titleChars != BasedSequence.NULL) {
             int titleCharsLength = titleChars.length();
             titleOpeningMarker = titleChars.subSequence(0, 1);
             title = titleChars.subSequence(1, titleCharsLength - 1);
             titleClosingMarker = titleChars.subSequence(titleCharsLength - 1, titleCharsLength);
         } else {
-            titleOpeningMarker = SubSequence.NULL;
-            title = SubSequence.NULL;
-            titleClosingMarker = SubSequence.NULL;
+            titleOpeningMarker = BasedSequence.NULL;
+            title = BasedSequence.NULL;
+            titleClosingMarker = BasedSequence.NULL;
         }
     }
 
@@ -124,7 +123,7 @@ public abstract class InlineLinkNode extends LinkNode {
     }
 
     public void setUrlChars(BasedSequence url) {
-        if (url != null && url != SubSequence.NULL) {
+        if (url != null && url != BasedSequence.NULL) {
             // strip off <> wrapping
             if (url.startsWith("<") && url.endsWith(">")) {
                 urlOpeningMarker = url.subSequence(0, 1);
@@ -144,9 +143,9 @@ public abstract class InlineLinkNode extends LinkNode {
                 this.anchorRef = this.url.subSequence(pos + 1);
             }
         } else {
-            this.urlOpeningMarker = SubSequence.NULL;
-            this.url = SubSequence.NULL;
-            this.urlClosingMarker = SubSequence.NULL;
+            this.urlOpeningMarker = BasedSequence.NULL;
+            this.url = BasedSequence.NULL;
+            this.urlClosingMarker = BasedSequence.NULL;
         }
     }
 

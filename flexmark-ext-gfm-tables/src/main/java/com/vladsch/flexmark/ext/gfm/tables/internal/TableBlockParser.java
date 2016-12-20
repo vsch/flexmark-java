@@ -8,7 +8,6 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class TableBlockParser extends AbstractBlockParser {
     private BlockContent content = new BlockContent();
 
     private boolean nextIsSeparatorLine = false;
-    private BasedSequence separatorLine = SubSequence.NULL;
+    private BasedSequence separatorLine = BasedSequence.NULL;
     private int separatorLineNumber = 0;
 
     public static boolean bodyColumnsFilledToHead = true;
@@ -102,14 +101,14 @@ public class TableBlockParser extends AbstractBlockParser {
             }
 
             int segmentOffset = 0;
-            BasedSequence openingMarker = SubSequence.NULL;
+            BasedSequence openingMarker = BasedSequence.NULL;
 
             for (int i = 0; i < maxColumns; i++) {
-                BasedSequence cell = i < rowCells ? cells.get(i + segmentOffset) : SubSequence.NULL;
+                BasedSequence cell = i < rowCells ? cells.get(i + segmentOffset) : BasedSequence.NULL;
                 if (!isCell(cell)) {
                     openingMarker = cell;
                     segmentOffset++;
-                    cell = i < rowCells ? cells.get(i + segmentOffset) : SubSequence.NULL;
+                    cell = i < rowCells ? cells.get(i + segmentOffset) : BasedSequence.NULL;
                 }
 
                 TableCell.Alignment alignment = i < alignments.size() ? alignments.get(i) : null;
@@ -117,7 +116,7 @@ public class TableBlockParser extends AbstractBlockParser {
                 tableCell.setHeader(rowNumber < separatorLineNumber);
                 tableCell.setAlignment(alignment);
                 tableCell.setOpeningMarker(openingMarker);
-                openingMarker = SubSequence.NULL;
+                openingMarker = BasedSequence.NULL;
 
                 // if the next one is not a cell then it is our closing marker
                 if (i + segmentOffset + 1 < cells.size()) {

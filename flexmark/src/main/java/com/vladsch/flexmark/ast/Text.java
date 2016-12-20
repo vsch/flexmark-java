@@ -16,7 +16,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.StringSequence;
+import com.vladsch.flexmark.util.sequence.SubCharSequence;
 
 public final class Text extends Node {
     public Text() {
@@ -27,7 +27,7 @@ public final class Text extends Node {
     }
 
     public Text(String chars) {
-        super(new StringSequence(chars));
+        super(new SubCharSequence(chars));
     }
 
     @Override

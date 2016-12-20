@@ -7,8 +7,8 @@ import org.junit.runners.Suite;
     StrikethroughTest.class,
         StrikethroughTest.class,
         ComboStrikethroughSpecTest.class,
-        JiraStrikethroughSpecTest.class,
-        YouTrackStrikethroughSpecTest.class,
+        //JiraStrikethroughSpecTest.class,
+        //YouTrackStrikethroughSpecTest.class,
 })
 public class ExtGfmStrikethroughTestSuite {
 }

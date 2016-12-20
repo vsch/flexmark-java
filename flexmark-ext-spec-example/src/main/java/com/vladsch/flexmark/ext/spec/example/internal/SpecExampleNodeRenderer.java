@@ -9,7 +9,6 @@ import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -17,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 public class SpecExampleNodeRenderer implements NodeRenderer
-        // , PhasedNodeRenderer 
+        // , PhasedNodeRenderer
 {
     private static String fromChars = " +/<>";
     private static String toChars = "-----";
@@ -64,7 +63,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
     private void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
         BasedSequence text = node.getChars();
-        
+
         switch (options.renderAs) {
             case DEFINITION_LIST:
                 html.tag("dt").text("Source").tag("/dt").line();
@@ -88,7 +87,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
     private void render(SpecExampleHtml node, NodeRendererContext context, HtmlWriter html) {
         BasedSequence text = node.getChars();
-        
+
         switch (options.renderAs) {
             case DEFINITION_LIST:
                 html.tag("dt").text("Html").tag("/dt").line();
@@ -157,7 +156,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 }
                 if (node.getOptionsKeyword().isNotNull() || node.getOptionsOpeningMarker().isNotNull() || node.getOptions().isNotNull() || node.getOptionsClosingMarker().isNotNull()) {
                     String optionsText = "";
-                    BasedSequence trimmed = node.getOptions().trim(BasedSequenceImpl.WHITESPACE_NBSP_CHARS);
+                    BasedSequence trimmed = node.getOptions().trim(BasedSequence.WHITESPACE_NBSP_CHARS);
                     if (!trimmed.isEmpty()) {
                         List<BasedSequence> optionsList = trimmed.split(',', 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
                         DelimitedBuilder out = new DelimitedBuilder(", ");
@@ -189,7 +188,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
 
     private void render(BasedSequence contentChars, String language, NodeRendererContext context, HtmlWriter html) {
         String text = contentChars.normalizeEOL();
-        
+
         if (!text.isEmpty()) {
             if (!language.isEmpty()) {
                 html.attr("class", context.getHtmlOptions().languageClassPrefix + language);

@@ -8,15 +8,14 @@ import java.util.List;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public class SegmentedSequence extends BasedSequenceImpl {
-
-    protected final CharSequence base;
+    protected final CharSequence baseSeq;
     protected final char[] nonBaseChars;
     protected final int[] baseOffsets;
     protected final int baseStartOffset;
     protected final int length;      // list of start/end indices
 
     public CharSequence getBase() {
-        return base;
+        return baseSeq;
     }
 
     public int getStartOffset() {
@@ -116,7 +115,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
     }
 
     private SegmentedSequence(List<BasedSequence> segments) {
-        this.base = segments.get(0).getBase();
+        this.baseSeq = segments.get(0).getBase();
 
         int length = 0;
 
@@ -160,8 +159,8 @@ public class SegmentedSequence extends BasedSequenceImpl {
         }
     }
 
-    private SegmentedSequence(CharSequence base, int[] baseOffsets, int baseStartOffset, char[] nonBaseChars, int length) {
-        this.base = base;
+    private SegmentedSequence(CharSequence baseSeq, int[] baseOffsets, int baseStartOffset, char[] nonBaseChars, int length) {
+        this.baseSeq = baseSeq;
         this.baseOffsets = baseOffsets;
         this.baseStartOffset = baseStartOffset;
         this.nonBaseChars = nonBaseChars;
@@ -190,19 +189,19 @@ public class SegmentedSequence extends BasedSequenceImpl {
             // KLUDGE: allows having characters which are not from original base sequence
             return nonBaseChars[-offset - 1];
         }
-        return base.charAt(offset);
+        return baseSeq.charAt(offset);
     }
 
     @Override
     public BasedSequence baseSubSequence(int start, int end) {
-        if (start < 0 || start > base.length()) {
+        if (start < 0 || start > baseSeq.length()) {
             throw new StringIndexOutOfBoundsException("String index out of range: " + start);
         }
-        if (end < 0 || end > base.length()) {
+        if (end < 0 || end > baseSeq.length()) {
             throw new StringIndexOutOfBoundsException("String index out of range: " + end);
         }
 
-        return new SubSequence(base, start, end);
+        return new SubSequence(baseSeq, start, end);
     }
 
     @Override
@@ -219,9 +218,9 @@ public class SegmentedSequence extends BasedSequenceImpl {
             return this;
         } else {
             if (nonBaseChars != null) {
-                return new SegmentedSequence(base, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
+                return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
             } else {
-                return new SegmentedSequence(base, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
+                return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
             }
         }
     }

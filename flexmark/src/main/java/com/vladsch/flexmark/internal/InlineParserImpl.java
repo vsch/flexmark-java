@@ -17,9 +17,7 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.*;
 import java.util.regex.MatchResult;
@@ -313,13 +311,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         BasedSequence contentChars = block.getChars();
 
         // try parsing the beginning as link reference definitions:
-        int leadingSpaces = contentChars.countLeading(BasedSequenceImpl.WHITESPACE_NO_EOL_CHARS);
+        int leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
 
         while (leadingSpaces <= 3 && contentChars.length() > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
             int pos = parseReference(block, contentChars);
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, contentChars.length());
-            leadingSpaces = contentChars.countLeading(BasedSequenceImpl.WHITESPACE_NO_EOL_CHARS);
+            leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
         }
 
         return contentChars.getStartOffset() - block.getChars().getStartOffset();
@@ -428,7 +426,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     protected void flushTextNode() {
         if (currentText != null) {
-            block.appendChild(new Text(SegmentedSequence.of(currentText, SubSequence.NULL)));
+            block.appendChild(new Text(SegmentedSequence.of(currentText, BasedSequence.NULL)));
             currentText = null;
         }
     }
@@ -515,7 +513,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         node.setChars(input.subSequence(index, index + 1));
 
         if (currentText != null) {
-            BasedSequence prevText = SegmentedSequence.of(currentText, SubSequence.NULL);
+            BasedSequence prevText = SegmentedSequence.of(currentText, BasedSequence.NULL);
             currentText = null;
 
             // see if need to trim some off the end
@@ -904,9 +902,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean refIsBare = false;
         ReferenceProcessorMatch linkRefProcessorMatch = null;
         boolean refIsDefined = false;
-        BasedSequence linkOpener = SubSequence.NULL;
-        BasedSequence linkCloser = SubSequence.NULL;
-        BasedSequence bareRef = SubSequence.NULL;
+        BasedSequence linkOpener = BasedSequence.NULL;
+        BasedSequence linkCloser = BasedSequence.NULL;
+        BasedSequence bareRef = BasedSequence.NULL;
         BasedSequence imageUrlContent = null;
 
         // Inline link?

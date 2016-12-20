@@ -10,13 +10,13 @@ if (testPropertiesFile.canRead()) {
 }
 
 android {
-    compileSdkVersion 15
-    buildToolsVersion "21.1.1"
+    compileSdkVersion 16
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.atlassian.commonmark.android.test"
-        minSdkVersion 15
-        targetSdkVersion 15
+        applicationId "com.vladsch.flexmark.android.test"
+        minSdkVersion 16
+        targetSdkVersion 16
         versionCode 1
         versionName "1.0"
 
@@ -29,8 +29,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     packagingOptions {
@@ -47,29 +47,33 @@ android {
 
 repositories {
     flatDir {
-        dirs '../../commonmark/target',
-                '../../commonmark-ext-autolink/target',
-                '../../commonmark-ext-gfm-strikethrough/target',
-                '../../commonmark-ext-gfm-tables/target',
-                '../../commonmark-test-util/target'
+        dirs '../../flexmark/target',
+                '../../flexmark-ext-autolink/target',
+                '../../flexmark-ext-gfm-strikethrough/target',
+                '../../flexmark-ext-gfm-tables/target',
+                '../../flexmark-test-util/target',
+                '../../flexmark-ext-yaml-front-matter/target',
+                '../../flexmark-test-util/target'
     }
 }
 
 dependencies {
-    androidTestCompile 'com.android.support.test:runner:0.4.1'
-    androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
 
-    androidTestCompile ':commonmark-test-util-' + testProperties['version.snapshot']
+    androidTestCompile ':flexmark-test-util-' + testProperties['version.snapshot']
 
     androidTestMavenCompile 'org.nibor.autolink:autolink:' + testProperties['version.maven_autolink']
-    androidTestMavenCompile 'com.atlassian.commonmark:commonmark:' + testProperties['version.maven']
-    androidTestMavenCompile 'com.atlassian.commonmark:commonmark-ext-autolink:' + testProperties['version.maven']
-    androidTestMavenCompile 'com.atlassian.commonmark:commonmark-ext-gfm-strikethrough:' + testProperties['version.maven']
-    androidTestMavenCompile 'com.atlassian.commonmark:commonmark-ext-gfm-tables:' + testProperties['version.maven']
+    androidTestMavenCompile 'com.vladsch.flexmark:flexmark:' + testProperties['version.maven']
+    androidTestMavenCompile 'com.vladsch.flexmark:flexmark-ext-autolink:' + testProperties['version.maven']
+    androidTestMavenCompile 'com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:' + testProperties['version.maven']
+    androidTestMavenCompile 'com.vladsch.flexmark:flexmark-ext-gfm-tables:' + testProperties['version.maven']
+    androidTestMavenCompile 'com.vladsch.flexmark:flexmark-ext-yaml-front-matter:' + testProperties['version.maven']
 
     androidTestSnapshotCompile 'org.nibor.autolink:autolink:' + testProperties['version.snapshot_autolink']
-    androidTestSnapshotCompile ':commonmark-' + testProperties['version.snapshot']
-    androidTestSnapshotCompile ':commonmark-ext-autolink-' + testProperties['version.snapshot']
-    androidTestSnapshotCompile ':commonmark-ext-gfm-strikethrough-' + testProperties['version.snapshot']
-    androidTestSnapshotCompile ':commonmark-ext-gfm-tables-' + testProperties['version.snapshot']
+    androidTestSnapshotCompile ':flexmark-' + testProperties['version.snapshot']
+    androidTestSnapshotCompile ':flexmark-ext-autolink-' + testProperties['version.snapshot']
+    androidTestSnapshotCompile ':flexmark-ext-gfm-strikethrough-' + testProperties['version.snapshot']
+    androidTestSnapshotCompile ':flexmark-ext-gfm-tables-' + testProperties['version.snapshot']
+    androidTestSnapshotCompile ':flexmark-ext-yaml-front-matter-' + testProperties['version.snapshot']
 }

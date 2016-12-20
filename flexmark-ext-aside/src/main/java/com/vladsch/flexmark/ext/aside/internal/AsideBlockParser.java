@@ -8,7 +8,6 @@ import com.vladsch.flexmark.internal.*;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -84,7 +83,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     static boolean endsWithMarker(BasedSequence line) {
-        int tailBlanks = line.countTrailing(BasedSequenceImpl.WHITESPACE_NBSP_CHARS);
+        int tailBlanks = line.countTrailing(BasedSequence.WHITESPACE_NBSP_CHARS);
         return tailBlanks + 1 < line.length() && line.charAt(line.length() - tailBlanks - 1) == '|';
     }
 

@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).

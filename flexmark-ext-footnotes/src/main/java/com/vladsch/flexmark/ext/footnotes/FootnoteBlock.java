@@ -2,16 +2,15 @@ package com.vladsch.flexmark.ext.footnotes;
 
 import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
  */
 public class FootnoteBlock extends CustomBlock {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
-    protected BasedSequence footnote = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
+    protected BasedSequence footnote = BasedSequence.NULL;
     private int footnoteOrdinal = 0;
     private int firstReferenceOffset = Integer.MAX_VALUE;
 

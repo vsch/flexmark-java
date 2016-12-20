@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
 import java.util.List;
 
 public abstract class ContentNode extends Node implements Content {
-    protected List<BasedSequence> lineSegments = SubSequence.EMPTY_LIST;
+    protected List<BasedSequence> lineSegments = BasedSequence.EMPTY_LIST;
 
     public ContentNode() {
 
@@ -51,7 +51,7 @@ public abstract class ContentNode extends Node implements Content {
     }
 
     private static BasedSequence getSpanningChars(List<BasedSequence> lineSegments) {
-        return lineSegments.size() > 0 ? new SubSequence(lineSegments.get(0).getBase(), lineSegments.get(0).getStartOffset(), lineSegments.get(lineSegments.size() - 1).getEndOffset()) : SubSequence.NULL;
+        return lineSegments.size() > 0 ? new SubSequence(lineSegments.get(0).getBase(), lineSegments.get(0).getStartOffset(), lineSegments.get(lineSegments.size() - 1).getEndOffset()) : BasedSequence.NULL;
     }
 
     @Override

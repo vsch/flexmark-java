@@ -178,6 +178,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             NodeIterator nodes = new NodeIterator(tableRow.getFirstChild());
             TableRow newTableRow = new TableRow(tableRow.getChars());
             newTableRow.setRowNumber(tableRow.getRowNumber());
+            int accumulatedSpanOffset = 0;
 
             while (nodes.hasNext()) {
                 if (cellCount >= separatorColumns && options.discardExtraColumns) {
@@ -185,7 +186,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                         // header/separator mismatch
                         return 0;
                     }
-                    
+
                     break;
                 }
 
@@ -198,7 +199,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                     firstCell = false;
                 }
 
-                TableCell.Alignment alignment = cellCount < separatorColumns ? alignments.get(cellCount) : null;
+                TableCell.Alignment alignment = cellCount + accumulatedSpanOffset < separatorColumns ? alignments.get(cellCount + accumulatedSpanOffset) : null;
                 tableCell.setHeader(rowNumber < separatorLineNumber);
                 tableCell.setAlignment(alignment);
 
@@ -225,6 +226,8 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
                         span++;
                     }
                 }
+
+                accumulatedSpanOffset += span - 1;
 
                 if (closingMarker != null) tableCell.setClosingMarker(closingMarker);
                 tableCell.setChars(tableCell.childChars());

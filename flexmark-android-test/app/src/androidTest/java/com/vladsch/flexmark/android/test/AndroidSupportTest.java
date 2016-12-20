@@ -1,4 +1,4 @@
-package com.atlassian.commonmark.android.test;
+package com.vladsch.flexmark.android.test;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
@@ -55,9 +55,14 @@ public class AndroidSupportTest {
     }
 
     @Test
+    public void yamlFrontMatterExtensionTest() throws Exception {
+        parseWithExtensionsTest(YamlFrontMatterExtension.create());
+    }
+
+    @Test
     public void htmlRendererTest() throws Exception {
-        Parser parser = new Parser.Builder().build();
-        HtmlRenderer renderer = new HtmlRenderer.Builder().build();
+        Parser parser = Parser.builder().build();
+        HtmlRenderer renderer = HtmlRenderer.builder().build();
 
         String renderedString = renderer.render(parser.parse(spec));
 
@@ -65,12 +70,18 @@ public class AndroidSupportTest {
     }
 
     private void parseWithExtensionsTest(Extension extension) throws Exception {
-        Parser parser = new Parser.Builder()
+        Parser parser = Parser.builder()
                 .extensions(Collections.singletonList(extension))
                 .build();
 
         Node document = parser.parse(spec);
-
         assertNotNull(document);
+
+        HtmlRenderer renderer = HtmlRenderer.builder()
+                .extensions(Collections.singletonList(extension))
+                .build();
+
+        String renderedString = renderer.render(document);
+        assertNotNull(renderedString);
     }
 }

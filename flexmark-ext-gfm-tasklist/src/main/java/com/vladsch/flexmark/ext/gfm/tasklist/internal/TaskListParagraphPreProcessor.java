@@ -13,7 +13,6 @@ import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Collections;
 import java.util.Set;
@@ -57,7 +56,7 @@ public class TaskListParagraphPreProcessor implements ParagraphPreProcessor {
 
                 //TaskListItemMarker marker = new TaskListItemMarker(taskOpeningMarker);
                 //block.insertBefore(marker);
-                return 3 + chars.countChars(BasedSequenceImpl.WHITESPACE_CHARS, 3, chars.length());
+                return 3 + chars.countChars(BasedSequence.WHITESPACE_CHARS, 3, chars.length());
             }
         }
         return 0;

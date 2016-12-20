@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class Image extends InlineLinkNode {
-    private BasedSequence urlContent = SubSequence.NULL;
+    private BasedSequence urlContent = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -63,7 +62,7 @@ public class Image extends InlineLinkNode {
     public Image(BasedSequence chars, BasedSequence textOpenMarker, BasedSequence text, BasedSequence textCloseMarker, BasedSequence linkOpenMarker, BasedSequence url, BasedSequence linkCloseMarker) {
         super(chars, textOpenMarker, text, textCloseMarker, linkOpenMarker, url, linkCloseMarker);
     }
-    
+
     @Override
     public void setTextChars(BasedSequence textChars) {
         int textCharsLength = textChars.length();

@@ -15,7 +15,6 @@ import org.junit.runners.Suite;
         ComboCoreSpecTest.class,
         ComboExtraSpecTest.class,
         SpecialInputTest.class,
-        SubstringTest.class,
         UsageExampleTest.class,
         //ComboParserCompatibilitySpecTest.class,
         ComboMultiMarkdownCompatibilitySpecTest.class,

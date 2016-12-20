@@ -1,12 +1,11 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 
 public abstract class ListItem extends Block {
-    protected BasedSequence openingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
     private boolean tight = true;
     private boolean hadBlankAfterItemParagraph = false;
 

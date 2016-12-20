@@ -25,9 +25,9 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
  * A TypographicQuotes node
  */
 public class TypographicQuotes extends CustomNode implements DelimitedNode, DoNotDecorate {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
     protected String typographicOpening;
     protected String typographicClosing;
 

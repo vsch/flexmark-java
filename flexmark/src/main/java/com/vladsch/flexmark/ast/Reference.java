@@ -1,21 +1,20 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class Reference extends Node {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence reference = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
-    protected BasedSequence urlOpeningMarker = SubSequence.NULL;
-    protected BasedSequence url = SubSequence.NULL;
-    protected BasedSequence pageRef = SubSequence.NULL;
-    protected BasedSequence anchorMarker = SubSequence.NULL;
-    protected BasedSequence anchorRef = SubSequence.NULL;
-    protected BasedSequence urlClosingMarker = SubSequence.NULL;
-    protected BasedSequence titleOpeningMarker = SubSequence.NULL;
-    protected BasedSequence title = SubSequence.NULL;
-    protected BasedSequence titleClosingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence reference = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
+    protected BasedSequence urlOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence url = BasedSequence.NULL;
+    protected BasedSequence pageRef = BasedSequence.NULL;
+    protected BasedSequence anchorMarker = BasedSequence.NULL;
+    protected BasedSequence anchorRef = BasedSequence.NULL;
+    protected BasedSequence urlClosingMarker = BasedSequence.NULL;
+    protected BasedSequence titleOpeningMarker = BasedSequence.NULL;
+    protected BasedSequence title = BasedSequence.NULL;
+    protected BasedSequence titleClosingMarker = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -43,7 +42,7 @@ public class Reference extends Node {
     }
 
     public Reference(BasedSequence label, BasedSequence url, BasedSequence title) {
-        super(SubSequence.NULL);
+        super(BasedSequence.NULL);
 
         this.openingMarker = label.subSequence(0, 1);
         this.reference = label.subSequence(1, label.length() - 2).trim();

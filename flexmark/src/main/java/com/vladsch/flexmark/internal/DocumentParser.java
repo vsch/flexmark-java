@@ -383,7 +383,7 @@ public class DocumentParser implements ParserState {
     /**
      * The main parsing function. Returns a parsed document AST.
      *
-     * @param source source squence to parse
+     * @param source source sequence to parse
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
@@ -446,7 +446,7 @@ public class DocumentParser implements ParserState {
             if (charsRead < buffer.length) break;
         }
 
-        CharSequence source = new StringSequence(file.toString());
+        CharSequence source = new SubCharSequence(file.toString());
         return parse(source);
     }
 
@@ -905,7 +905,7 @@ public class DocumentParser implements ParserState {
 
                     // skip leading blanks
                     BasedSequence blockChars = block.getChars();
-                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countChars(BasedSequenceImpl.WHITESPACE_CHARS, pos, blockChars.length()));
+                    BasedSequence contentChars = blockChars.subSequence(pos + blockChars.countChars(BasedSequence.WHITESPACE_CHARS, pos, blockChars.length()));
 
                     if (contentChars.isBlank()) {
                         // all used up

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.vladsch.flexmark.util.sequence.SubSequence.NULL;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class YouTrackConverterNodeRenderer implements NodeRenderer
         // , PhasedNodeRenderer
@@ -89,7 +89,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         String s = repeat("=", node.getLevel());
         html.line().raw(s);
         context.renderChildren(node);
-        html.raw(s).line();
+        html.raw(s).line().raw("\n");
     }
 
     private void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) {
@@ -106,7 +106,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         } else {
             html.setPrefix("");
         }
-        html.line();
+        html.line().raw("\n");
     }
 
     private void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -123,7 +123,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.line().raw("-----").line();
+        html.line().raw("-----").line().raw("\n");
     }
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {

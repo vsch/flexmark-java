@@ -9,9 +9,9 @@ import com.vladsch.flexmark.util.sequence.SubSequence;
  * A strikethrough node containing text and other inline nodes nodes as children.
  */
 public class Emoji extends CustomNode implements DelimitedNode {
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {

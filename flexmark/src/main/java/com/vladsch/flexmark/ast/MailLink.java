@@ -12,9 +12,9 @@ public class MailLink extends LinkNode {
         super(chars);
     }
 
-    protected BasedSequence openingMarker = SubSequence.NULL;
-    protected BasedSequence text = SubSequence.NULL;
-    protected BasedSequence closingMarker = SubSequence.NULL;
+    protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence text = BasedSequence.NULL;
+    protected BasedSequence closingMarker = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -27,7 +27,7 @@ public class MailLink extends LinkNode {
     }
 
     public BasedSequence getLeadSegment() {
-        return SubSequence.firstNonNull(openingMarker, text);
+        return BasedSequence.firstNonNull(openingMarker, text);
     }
 
     public MailLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
