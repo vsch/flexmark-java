@@ -30,8 +30,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 ### Changes from commonmark-java project
 
 - The project is on Maven: `com.vladsch.flexmark`
-- Java compatibility raised to 1.7
-  but will removed in the next release to support android compatibility
+- Java compatibility now 1.7
 - Android compatibility to be added
 - No attempt is made to keep API backward compatibility to the original project.
 
