@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ast.util;
 import com.vladsch.flexmark.ast.*;
 
 public class BlockVisitorExt {
-    static <V extends BlockVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends BlockVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(BlockQuote.class, new Visitor<BlockQuote>() {
                     @Override

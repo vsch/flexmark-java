@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class AbbreviationVisitorExt {
-    static <V extends AbbreviationVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends AbbreviationVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(AbbreviationBlock.class, new Visitor<AbbreviationBlock>() {
                     @Override

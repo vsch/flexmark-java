@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class AsideVisitorExt {
-    static <V extends AsideVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends AsideVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 // new VisitHandler<>(ExtAside.class, visitor::visit),
                 new VisitHandler<>(AsideBlock.class, new Visitor<AsideBlock>() {

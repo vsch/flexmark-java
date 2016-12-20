@@ -13,171 +13,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/Consumer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_wikilink_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_wikilink_0_7_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VERSION.md" afterPath="$PROJECT_DIR$/VERSION.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationPostProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationPostProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkPostProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkPostProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" afterPath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideBlockParser.java" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideBlockParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-autolink/src/main/java/com/vladsch/flexmark/ext/autolink/internal/AutolinkPostProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-autolink/src/main/java/com/vladsch/flexmark/ext/autolink/internal/AutolinkPostProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" afterPath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiJiraRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiJiraRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/internal/EscapedCharacterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/internal/EscapedCharacterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteRepository.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughJiraRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughJiraRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughYouTrackRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughYouTrackRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TablesExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TablesExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/internal/TableNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/internal/TableNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/test/java/com/vladsch/flexmark/ext/gfm/tables/TablesTest.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/test/java/com/vladsch/flexmark/ext/gfm/tables/TablesTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListParagraphPreProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListParagraphPreProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/internal/JekyllFrontMatterBlockParser.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/internal/JekyllFrontMatterBlockParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/internal/JekyllFrontMatterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/internal/JekyllFrontMatterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/internal/SpecExampleNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/internal/SpecExampleNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TablesExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TablesExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableJiraRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableJiraRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableParagraphPreProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableParagraphPreProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" afterPath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/TocOptionsParserTest.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/TocOptionsParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/internal/TypographicNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/internal/TypographicNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkJiraRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkJiraRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/internal/WikiLinkNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/AbstractYamlFrontMatterVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/AbstractYamlFrontMatterVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzVisitor.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzAttributeProvider.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzAttributeProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzBlockPreProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzBlockPreProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzDocumentPostProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzDocumentPostProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzJiraRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzJiraRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzParagraphPreProcessor.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzParagraphPreProcessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzRepository.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzRepository.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" afterPath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java" afterPath="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.iml" afterPath="$PROJECT_DIR$/flexmark-java.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.wiki/Home.md" afterPath="$PROJECT_DIR$/flexmark-java.wiki/Home.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/JiraConverterExtension.java" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/JiraConverterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" afterPath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" afterPath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Utils.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/ClassifyingNodeTracker.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/ClassifyingNodeTracker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/NodeClassifierVisitor.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/NodeClassifierVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/OrderedMultiMap.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/OrderedMultiMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/dependency/DependencyHandler.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/dependency/DependencyHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/BooleanOptionParser.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/BooleanOptionParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/DataKey.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/DataKey.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/OptionsParser.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/OptionsParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMapTest.java" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMapTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMultiMapTest.java" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMultiMapTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/BasedSequenceImplTest.java" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/BasedSequenceImplTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/YouTrackConverterExtension.java" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/YouTrackConverterExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/flexmark.iml" afterPath="$PROJECT_DIR$/flexmark/flexmark.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/Extension.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/Extension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/MailLink.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/MailLink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitor.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HeadingCollectingVisitor.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HeadingCollectingVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitor.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitor.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/TextCollectingVisitor.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/TextCollectingVisitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/BlockQuoteParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/BlockQuoteParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/DocumentParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/DocumentParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/HeadingParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/HeadingParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/IndentedCodeBlockParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/IndentedCodeBlockParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/InlineParserImpl.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/InlineParserImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/PostProcessorManager.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/PostProcessorManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/block/MatchedBlockParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/block/MatchedBlockParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/AbstractVisitorTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/AbstractVisitorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimitedNodeTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimitedNodeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimiterProcessorTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimiterProcessorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/HtmlRendererTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/HtmlRendererTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/PrefixedSubSequenceTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/PrefixedSubSequenceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/UsageExampleTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/UsageExampleTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/JekyllFrontMatterVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLinkVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/ZzzzzzVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="flexmark-parent.iws" />
@@ -264,51 +123,81 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/Home.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="629">
-                <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
-                <folding>
-                  <marker date="1482226012000" expanded="true" signature="6499:6661" ph="..." />
-                </folding>
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="814">
+              <caret line="336" column="15" lean-forward="false" selection-start-line="336" selection-start-column="15" selection-end-line="336" selection-end-column="15" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmojiNodeRenderer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiNodeRenderer.java">
+      <file leaf-file-name="BlockVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="11" lean-forward="false" selection-start-line="26" selection-start-column="11" selection-end-line="26" selection-end-column="11" />
-              <folding>
-                <element signature="e#1183#1421#0" expanded="true" />
-                <element signature="e#1420#1421#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="85">
+              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmojiJiraRenderer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiJiraRenderer.java">
+      <file leaf-file-name="HtmlInnerVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="47" column="12" lean-forward="false" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="12" />
-              <folding>
-                <element signature="e#1788#2026#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="8" column="10" lean-forward="false" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmojiVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitor.java">
+      <file leaf-file-name="InlineVisitorExt.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="17" column="29" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="85">
+              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AbbreviationVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnchorLinkVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsideVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefinitionVisitorExt.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -317,60 +206,9 @@
       <file leaf-file-name="EmojiVisitorExt.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-              <folding>
-                <element signature="e#335#524#0" expanded="true" />
-                <element signature="e#523#524#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbbreviationParagraphPreProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="977">
-              <caret line="82" column="69" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+            <state relative-caret-position="102">
+              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbbreviationNodePostProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="892">
-              <caret line="119" column="57" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VisitorSample.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-              <folding>
-                <element signature="e#474#652#0" expanded="true" />
-                <element signature="e#651#652#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="578">
-                <caret line="34" column="35" lean-forward="false" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-                <folding>
-                  <marker date="1482226031000" expanded="true" signature="10019:10181" ph="..." />
-                </folding>
-              </first_editor>
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -393,8 +231,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>listBlockParser.myListData.markerIndent + listBlockParser.myListData.contentOffset</find>
-      <find>getContentIndent</find>
       <find>options.get\(([^)]+)\)</find>
       <find>FIXED_INDENT</find>
       <find>myIsEmpty = false</find>
@@ -423,6 +259,8 @@
       <find>CharSequence chars</find>
       <find>chars</find>
       <find>String</find>
+      <find>VisitHandler</find>
+      <find>static &lt;V extends</find>
     </findStrings>
     <replaceStrings>
       <replace>`</replace>
@@ -452,6 +290,7 @@
       <replace>char c</replace>
       <replace>c</replace>
       <replace>SubCharSequence</replace>
+      <replace>public static &lt;V extends</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/flexmark</dir>
@@ -500,7 +339,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/ComboExtraSpecTest.java" />
         <option value="$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_gfm_strikethrough_youtrack_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/YouTrackStrikethroughSpecTest.java" />
@@ -554,7 +392,6 @@
         <option value="$PROJECT_DIR$/flexmark-youtrack-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/DataKey.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/ClassifyingNodeTracker.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" />
@@ -574,11 +411,8 @@
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/TextCollectingVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/Extension.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" />
@@ -640,7 +474,6 @@
         <option value="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/UsageExampleTest.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/internal/FootnoteRepository.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/FootnoteVisitor.java" />
@@ -662,10 +495,8 @@
         <option value="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzJiraRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/src/main/java/com/vladsch/flexmark/ext/jekyll/front/matter/internal/JekyllFrontMatterBlockParser.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkExtension.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkPostProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/internal/AnchorLinkNodeRenderer.java" />
@@ -690,17 +521,25 @@
         <option value="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/internal/ZzzzzzBlockPreProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiJiraRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java" />
         <option value="$PROJECT_DIR$/VERSION.md" />
         <option value="$PROJECT_DIR$/flexmark-java.wiki/Home.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/flexmark/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" />
       </list>
     </option>
   </component>
@@ -914,6 +753,188 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="flexmark-java.wiki" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-definition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-definition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-definition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-definition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="definition" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-aside" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-aside" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-aside" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-aside" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="aside" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1485,13 +1506,6 @@
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
     </task>
-    <task id="LOCAL-00098" summary="update wiki">
-      <created>1468526420868</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1468526420868</updated>
-    </task>
     <task id="LOCAL-00099" summary="update pom">
       <created>1468527626116</created>
       <option name="number" value="00099" />
@@ -1828,7 +1842,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482215842814</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="downgrade to java 7 lang level">
+      <created>1482226062742</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1482226062742</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -1924,6 +1945,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17074275" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.58062017" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26404995" sideWeight="0.5029387" order="6" side_tool="true" content_ui="tabs" />
@@ -1948,7 +1970,6 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14556135" sideWeight="0.5006321" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17596899" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Copy/Paste" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13504992" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2046,7 +2067,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add aside block extension" />
     <MESSAGE value="add multi-line url image links option" />
     <MESSAGE value="fix #10" />
     <MESSAGE value="update ide workspace files" />
@@ -2071,7 +2091,8 @@
     <MESSAGE value="optimize imports to remove spurious and unused ones" />
     <MESSAGE value="add jira and youtrack converter dependencies" />
     <MESSAGE value="remove jira and youtrack from table and strikethrough deps list" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove jira and youtrack from table and strikethrough deps list" />
+    <MESSAGE value="downgrade to java 7 lang level" />
+    <option name="LAST_COMMIT_MESSAGE" value="downgrade to java 7 lang level" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2087,21 +2108,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/ExtGfmStrikethroughTestSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="19" lean-forward="false" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/test/resources/ext_tables_jira_spec.md" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/ExtTablesTestSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/JiraTablesSpecTest.java" />
     <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/test/java/com/vladsch/flexmark/jira/converter/ComboJiraConverterSpecTest.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2347,14 +2353,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="157" column="28" lean-forward="false" selection-start-line="157" selection-start-column="28" selection-end-line="157" selection-end-column="28" />
           <folding />
         </state>
       </provider>
@@ -2605,45 +2603,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="60" lean-forward="true" selection-start-line="5" selection-start-column="60" selection-end-line="5" selection-end-column="60" />
-          <folding>
-            <element signature="e#287#482#0" expanded="true" />
-            <element signature="e#481#482#0" expanded="true" />
-            <element signature="e#532#719#0" expanded="true" />
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#773#968#0" expanded="true" />
-            <element signature="e#967#968#0" expanded="true" />
-            <element signature="e#1027#1232#0" expanded="true" />
-            <element signature="e#1231#1232#0" expanded="true" />
-            <element signature="e#1288#1487#0" expanded="true" />
-            <element signature="e#1486#1487#0" expanded="true" />
-            <element signature="e#1543#1742#0" expanded="true" />
-            <element signature="e#1741#1742#0" expanded="true" />
-            <element signature="e#1805#2018#0" expanded="true" />
-            <element signature="e#2017#2018#0" expanded="true" />
-            <element signature="e#2069#2258#0" expanded="true" />
-            <element signature="e#2257#2258#0" expanded="true" />
-            <element signature="e#2312#2507#0" expanded="true" />
-            <element signature="e#2506#2507#0" expanded="true" />
-            <element signature="e#2557#2744#0" expanded="true" />
-            <element signature="e#2743#2744#0" expanded="true" />
-            <element signature="e#2797#2990#0" expanded="true" />
-            <element signature="e#2989#2990#0" expanded="true" />
-            <element signature="e#3044#3239#0" expanded="true" />
-            <element signature="e#3238#3239#0" expanded="true" />
-            <element signature="e#3298#3503#0" expanded="true" />
-            <element signature="e#3502#3503#0" expanded="true" />
-            <element signature="e#3563#3770#0" expanded="true" />
-            <element signature="e#3769#3770#0" expanded="true" />
-            <element signature="e#3820#4007#0" expanded="true" />
-            <element signature="e#4006#4007#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -2654,61 +2613,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="38" lean-forward="false" selection-start-line="55" selection-start-column="38" selection-end-line="55" selection-end-column="38" />
-          <folding>
-            <element signature="e#287#486#0" expanded="true" />
-            <element signature="e#485#486#0" expanded="true" />
-            <element signature="e#542#741#0" expanded="true" />
-            <element signature="e#740#741#0" expanded="true" />
-            <element signature="e#795#990#0" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-            <element signature="e#1051#1260#0" expanded="true" />
-            <element signature="e#1259#1260#0" expanded="true" />
-            <element signature="e#1313#1506#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1561#1758#0" expanded="true" />
-            <element signature="e#1757#1758#0" expanded="true" />
-            <element signature="e#1820#2031#0" expanded="true" />
-            <element signature="e#2030#2031#0" expanded="true" />
-            <element signature="e#2094#2307#0" expanded="true" />
-            <element signature="e#2306#2307#0" expanded="true" />
-            <element signature="e#2367#2574#0" expanded="true" />
-            <element signature="e#2573#2574#0" expanded="true" />
-            <element signature="e#2635#2844#0" expanded="true" />
-            <element signature="e#2843#2844#0" expanded="true" />
-            <element signature="e#2901#3102#0" expanded="true" />
-            <element signature="e#3101#3102#0" expanded="true" />
-            <element signature="e#3157#3354#0" expanded="true" />
-            <element signature="e#3353#3354#0" expanded="true" />
-            <element signature="e#3409#3606#0" expanded="true" />
-            <element signature="e#3605#3606#0" expanded="true" />
-            <element signature="e#3665#3870#0" expanded="true" />
-            <element signature="e#3869#3870#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="26" lean-forward="false" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="32" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#454#661#0" expanded="true" />
-            <element signature="e#660#661#0" expanded="true" />
-            <element signature="e#728#949#0" expanded="true" />
-            <element signature="e#948#949#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3112,10 +3021,10 @@
         <state relative-caret-position="374">
           <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
-            <element signature="e#365#578#0" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-            <element signature="e#641#856#0" expanded="true" />
-            <element signature="e#855#856#0" expanded="true" />
+            <element signature="e#372#585#0" expanded="true" />
+            <element signature="e#584#585#0" expanded="true" />
+            <element signature="e#648#863#0" expanded="true" />
+            <element signature="e#862#863#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3125,20 +3034,20 @@
         <state relative-caret-position="876">
           <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
           <folding>
-            <element signature="e#341#540#0" expanded="true" />
-            <element signature="e#539#540#0" expanded="true" />
-            <element signature="e#595#792#0" expanded="true" />
-            <element signature="e#791#792#0" expanded="true" />
-            <element signature="e#852#1059#0" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-            <element signature="e#1114#1311#0" expanded="true" />
-            <element signature="e#1310#1311#0" expanded="true" />
-            <element signature="e#1365#1560#0" expanded="true" />
-            <element signature="e#1559#1560#0" expanded="true" />
-            <element signature="e#1615#1812#0" expanded="true" />
-            <element signature="e#1811#1812#0" expanded="true" />
-            <element signature="e#1870#2073#0" expanded="true" />
-            <element signature="e#2072#2073#0" expanded="true" />
+            <element signature="e#348#547#0" expanded="true" />
+            <element signature="e#546#547#0" expanded="true" />
+            <element signature="e#602#799#0" expanded="true" />
+            <element signature="e#798#799#0" expanded="true" />
+            <element signature="e#859#1066#0" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1121#1318#0" expanded="true" />
+            <element signature="e#1317#1318#0" expanded="true" />
+            <element signature="e#1372#1567#0" expanded="true" />
+            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#1622#1819#0" expanded="true" />
+            <element signature="e#1818#1819#0" expanded="true" />
+            <element signature="e#1877#2080#0" expanded="true" />
+            <element signature="e#2079#2080#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3207,14 +3116,14 @@
         <state relative-caret-position="578">
           <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
           <folding>
-            <element signature="e#341#542#0" expanded="true" />
-            <element signature="e#541#542#0" expanded="true" />
-            <element signature="e#604#815#0" expanded="true" />
-            <element signature="e#814#815#0" expanded="true" />
-            <element signature="e#873#1076#0" expanded="true" />
-            <element signature="e#1075#1076#0" expanded="true" />
-            <element signature="e#1135#1340#0" expanded="true" />
-            <element signature="e#1339#1340#0" expanded="true" />
+            <element signature="e#348#549#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#611#822#0" expanded="true" />
+            <element signature="e#821#822#0" expanded="true" />
+            <element signature="e#880#1083#0" expanded="true" />
+            <element signature="e#1082#1083#0" expanded="true" />
+            <element signature="e#1142#1347#0" expanded="true" />
+            <element signature="e#1346#1347#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3242,8 +3151,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#332#527#0" expanded="true" />
-            <element signature="e#526#527#0" expanded="true" />
+            <element signature="e#339#534#0" expanded="true" />
+            <element signature="e#533#534#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3305,10 +3214,10 @@
         <state relative-caret-position="374">
           <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
-            <element signature="e#376#593#0" expanded="true" />
-            <element signature="e#592#593#0" expanded="true" />
-            <element signature="e#659#878#0" expanded="true" />
-            <element signature="e#877#878#0" expanded="true" />
+            <element signature="e#383#600#0" expanded="true" />
+            <element signature="e#599#600#0" expanded="true" />
+            <element signature="e#666#885#0" expanded="true" />
+            <element signature="e#884#885#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3367,22 +3276,22 @@
         <state relative-caret-position="952">
           <caret line="58" column="1" lean-forward="false" selection-start-line="58" selection-start-column="1" selection-end-line="58" selection-end-column="1" />
           <folding>
-            <element signature="e#363#570#0" expanded="true" />
-            <element signature="e#569#570#0" expanded="true" />
-            <element signature="e#632#843#0" expanded="true" />
-            <element signature="e#842#843#0" expanded="true" />
-            <element signature="e#904#1113#0" expanded="true" />
-            <element signature="e#1112#1113#0" expanded="true" />
-            <element signature="e#1176#1389#0" expanded="true" />
-            <element signature="e#1388#1389#0" expanded="true" />
-            <element signature="e#1461#1692#0" expanded="true" />
-            <element signature="e#1691#1692#0" expanded="true" />
-            <element signature="e#1760#1983#0" expanded="true" />
-            <element signature="e#1982#1983#0" expanded="true" />
-            <element signature="e#2049#2268#0" expanded="true" />
-            <element signature="e#2267#2268#0" expanded="true" />
-            <element signature="e#2331#2544#0" expanded="true" />
-            <element signature="e#2543#2544#0" expanded="true" />
+            <element signature="e#370#577#0" expanded="true" />
+            <element signature="e#576#577#0" expanded="true" />
+            <element signature="e#639#850#0" expanded="true" />
+            <element signature="e#849#850#0" expanded="true" />
+            <element signature="e#911#1120#0" expanded="true" />
+            <element signature="e#1119#1120#0" expanded="true" />
+            <element signature="e#1183#1396#0" expanded="true" />
+            <element signature="e#1395#1396#0" expanded="true" />
+            <element signature="e#1468#1699#0" expanded="true" />
+            <element signature="e#1698#1699#0" expanded="true" />
+            <element signature="e#1767#1990#0" expanded="true" />
+            <element signature="e#1989#1990#0" expanded="true" />
+            <element signature="e#2056#2275#0" expanded="true" />
+            <element signature="e#2274#2275#0" expanded="true" />
+            <element signature="e#2338#2551#0" expanded="true" />
+            <element signature="e#2550#2551#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3435,8 +3344,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding>
-            <element signature="e#363#566#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
+            <element signature="e#370#573#0" expanded="true" />
+            <element signature="e#572#573#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3492,20 +3401,20 @@
         <state relative-caret-position="876">
           <caret line="52" column="1" lean-forward="false" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="1" />
           <folding>
-            <element signature="e#344#541#0" expanded="true" />
-            <element signature="e#540#541#0" expanded="true" />
-            <element signature="e#597#796#0" expanded="true" />
-            <element signature="e#795#796#0" expanded="true" />
-            <element signature="e#851#1048#0" expanded="true" />
-            <element signature="e#1047#1048#0" expanded="true" />
-            <element signature="e#1108#1315#0" expanded="true" />
-            <element signature="e#1314#1315#0" expanded="true" />
-            <element signature="e#1370#1567#0" expanded="true" />
-            <element signature="e#1566#1567#0" expanded="true" />
-            <element signature="e#1621#1816#0" expanded="true" />
-            <element signature="e#1815#1816#0" expanded="true" />
-            <element signature="e#1871#2068#0" expanded="true" />
-            <element signature="e#2067#2068#0" expanded="true" />
+            <element signature="e#351#548#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
+            <element signature="e#604#803#0" expanded="true" />
+            <element signature="e#802#803#0" expanded="true" />
+            <element signature="e#858#1055#0" expanded="true" />
+            <element signature="e#1054#1055#0" expanded="true" />
+            <element signature="e#1115#1322#0" expanded="true" />
+            <element signature="e#1321#1322#0" expanded="true" />
+            <element signature="e#1377#1574#0" expanded="true" />
+            <element signature="e#1573#1574#0" expanded="true" />
+            <element signature="e#1628#1823#0" expanded="true" />
+            <element signature="e#1822#1823#0" expanded="true" />
+            <element signature="e#1878#2075#0" expanded="true" />
+            <element signature="e#2074#2075#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3529,8 +3438,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding>
-            <element signature="e#380#591#0" expanded="true" />
-            <element signature="e#590#591#0" expanded="true" />
+            <element signature="e#387#598#0" expanded="true" />
+            <element signature="e#597#598#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3679,23 +3588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-          <folding>
-            <element signature="e#359#566#0" expanded="true" />
-            <element signature="e#565#566#0" expanded="true" />
-            <element signature="e#626#833#0" expanded="true" />
-            <element signature="e#832#833#0" expanded="true" />
-            <element signature="e#893#1100#0" expanded="true" />
-            <element signature="e#1099#1100#0" expanded="true" />
-            <element signature="e#1160#1367#0" expanded="true" />
-            <element signature="e#1366#1367#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -3741,10 +3633,10 @@
         <state relative-caret-position="374">
           <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
-            <element signature="e#353#558#0" expanded="true" />
-            <element signature="e#557#558#0" expanded="true" />
-            <element signature="e#612#807#0" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#360#565#0" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+            <element signature="e#619#814#0" expanded="true" />
+            <element signature="e#813#814#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3782,8 +3674,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding>
-            <element signature="e#371#576#0" expanded="true" />
-            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#378#583#0" expanded="true" />
+            <element signature="e#582#583#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3851,8 +3743,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding>
-            <element signature="e#390#613#0" expanded="true" />
-            <element signature="e#612#613#0" expanded="true" />
+            <element signature="e#397#620#0" expanded="true" />
+            <element signature="e#619#620#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3930,17 +3822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="1" lean-forward="false" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-          <folding>
-            <element signature="e#411#610#0" expanded="true" />
-            <element signature="e#609#610#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/internal/AsideNodeRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
@@ -3959,17 +3840,6 @@
         <state relative-caret-position="85">
           <caret line="18" column="21" lean-forward="false" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <element signature="e#355#554#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -4138,10 +4008,10 @@
         <state relative-caret-position="153">
           <caret line="9" column="16" lean-forward="false" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="16" />
           <folding>
-            <element signature="e#357#448#0" expanded="true" />
-            <element signature="e#447#448#0" expanded="true" />
-            <element signature="e#540#641#0" expanded="true" />
-            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#364#455#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#547#648#0" expanded="true" />
+            <element signature="e#647#648#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4184,8 +4054,8 @@
         <state relative-caret-position="272">
           <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding>
-            <element signature="e#347#542#0" expanded="true" />
-            <element signature="e#541#542#0" expanded="true" />
+            <element signature="e#354#549#0" expanded="true" />
+            <element signature="e#548#549#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -4237,19 +4107,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="1" lean-forward="false" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-          <folding>
-            <element signature="e#368#581#0" expanded="true" />
-            <element signature="e#580#581#0" expanded="true" />
-            <element signature="e#639#842#0" expanded="true" />
-            <element signature="e#841#842#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/internal/EmojiNodeRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -4279,21 +4136,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="1" lean-forward="false" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding>
-            <element signature="e#335#524#0" expanded="true" />
-            <element signature="e#523#524#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="977">
-          <caret line="82" column="69" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
+          <caret line="82" column="21" lean-forward="false" selection-start-line="82" selection-start-column="21" selection-end-line="82" selection-end-column="21" />
           <folding />
         </state>
       </provider>
@@ -4301,7 +4147,7 @@
     <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="892">
-          <caret line="119" column="57" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -4309,7 +4155,7 @@
     <entry file="file://$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding>
             <element signature="e#474#652#0" expanded="true" />
             <element signature="e#651#652#0" expanded="true" />
@@ -4357,6 +4203,102 @@
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.travis.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/central-pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="53" column="36" lean-forward="false" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="814">
+          <caret line="336" column="15" lean-forward="false" selection-start-line="336" selection-start-column="15" selection-end-line="336" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-anchorlink/src/main/java/com/vladsch/flexmark/ext/anchorlink/AnchorLinkVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="28" lean-forward="false" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-aside/src/main/java/com/vladsch/flexmark/ext/aside/AsideVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="10" lean-forward="false" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class TypographicVisitorExt {
-    static <V extends TypographicVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends TypographicVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(TypographicSmarts.class, new Visitor<TypographicSmarts>() {
                     @Override

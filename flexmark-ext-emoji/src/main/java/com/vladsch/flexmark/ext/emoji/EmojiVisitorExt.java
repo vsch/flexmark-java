@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class EmojiVisitorExt {
-    static <V extends EmojiVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends EmojiVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(Emoji.class, new Visitor<Emoji>() {
                     @Override

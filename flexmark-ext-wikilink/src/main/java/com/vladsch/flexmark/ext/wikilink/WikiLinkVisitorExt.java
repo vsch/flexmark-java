@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class WikiLinkVisitorExt {
-    static <V extends WikiLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends WikiLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(WikiLink.class, new Visitor<WikiLink>() {
                     @Override

@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.VisitHandler;
 import com.vladsch.flexmark.ast.Visitor;
 
 public class TableVisitorExt {
-    static <V extends TableVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
+    public static <V extends TableVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
                 new VisitHandler<>(TableCell.class, new Visitor<TableCell>() {
                     @Override
