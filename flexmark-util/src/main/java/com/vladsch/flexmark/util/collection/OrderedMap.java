@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.util.collection;
 
-import com.vladsch.flexmark.util.RunnableValue;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;

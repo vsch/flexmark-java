@@ -1,10 +1,13 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.ParserEmulationFamily;
-import com.vladsch.flexmark.parser.block.*;
+import com.vladsch.flexmark.parser.block.AbstractBlockParser;
+import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
+import com.vladsch.flexmark.parser.block.ParserState;
 
 import static com.vladsch.flexmark.parser.ParserEmulationFamily.*;
 

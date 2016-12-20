@@ -1,8 +1,5 @@
 package com.vladsch.flexmark.util.sequence;
 
-import com.sun.tools.javac.util.ArrayUtils;
-import com.sun.xml.internal.fastinfoset.util.CharArray;
-
 /**
  * A CharSequence that references original char[] and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence

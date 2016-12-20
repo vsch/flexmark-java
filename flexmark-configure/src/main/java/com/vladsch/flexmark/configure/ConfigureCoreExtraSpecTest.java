@@ -1,17 +1,15 @@
 package com.vladsch.flexmark.configure;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.util.KeepType;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
+import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
-
-import java.util.*;
 
 public class ConfigureCoreExtraSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/configure_core_extra_spec.md";
