@@ -19,7 +19,10 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodePostProcessor;
 import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
  * Extension for escaped_characters
@@ -55,7 +58,12 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(EscapedCharacterNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new EscapedCharacterNodeRenderer(options);
+                }
+            });
             // rendererBuilder.linkResolverFactory(new EscapedCharacterLinkResolver.Factory());
         }
     }

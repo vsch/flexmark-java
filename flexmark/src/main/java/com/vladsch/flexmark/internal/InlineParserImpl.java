@@ -162,20 +162,23 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
             final int[] maxNestingLevelRef = new int[] { 0 };
 
-            sortedLinkProcessors.sort((p1, p2) -> {
-                int lv1 = p1.getBracketNestingLevel();
-                int lv2 = p2.getBracketNestingLevel();
-                int maxLevel = maxNestingLevelRef[0];
-                if (maxLevel < lv1) maxLevel = lv1;
-                if (maxLevel < lv2) maxLevel = lv2;
-                maxNestingLevelRef[0] = maxLevel;
+            Collections.sort(sortedLinkProcessors, new Comparator<LinkRefProcessorFactory>() {
+                @Override
+                public int compare(LinkRefProcessorFactory p1, LinkRefProcessorFactory p2) {
+                    int lv1 = p1.getBracketNestingLevel();
+                    int lv2 = p2.getBracketNestingLevel();
+                    int maxLevel = maxNestingLevelRef[0];
+                    if (maxLevel < lv1) maxLevel = lv1;
+                    if (maxLevel < lv2) maxLevel = lv2;
+                    maxNestingLevelRef[0] = maxLevel;
 
-                if (lv1 == lv2) {
-                    // processors that want exclamation before the [ have higher priority
-                    if (!p1.getWantExclamationPrefix()) lv1++;
-                    if (!p2.getWantExclamationPrefix()) lv2++;
+                    if (lv1 == lv2) {
+                        // processors that want exclamation before the [ have higher priority
+                        if (!p1.getWantExclamationPrefix()) lv1++;
+                        if (!p2.getWantExclamationPrefix()) lv2++;
+                    }
+                    return lv1 - lv2;
                 }
-                return lv1 - lv2;
             });
 
             int maxNestingLevel = maxNestingLevelRef[0];
@@ -204,7 +207,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    private static void addDelimiterProcessors(Iterable<DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
+    private static void addDelimiterProcessors(List<? extends DelimiterProcessor> delimiterProcessors, Map<Character, DelimiterProcessor> map) {
         for (DelimiterProcessor delimiterProcessor : delimiterProcessors) {
             char opening = delimiterProcessor.getOpeningCharacter();
             addDelimiterProcessorForChar(opening, delimiterProcessor, map);

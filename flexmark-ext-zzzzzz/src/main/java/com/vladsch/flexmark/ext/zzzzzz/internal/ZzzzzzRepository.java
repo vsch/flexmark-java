@@ -9,6 +9,8 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
@@ -25,7 +27,12 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
 
     public void resolveZzzzzzOrdinals() {
         // need to sort by first referenced offset then set each to its ordinal position in the array+1
-        referencedZzzzzzBlocks.sort((f1, f2) -> f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset());
+        Collections.sort(referencedZzzzzzBlocks, new Comparator<ZzzzzzBlock>() {
+            @Override
+            public int compare(ZzzzzzBlock f1, ZzzzzzBlock f2) {
+                return f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset();
+            }
+        });
         int ordinal = 0;
         for (ZzzzzzBlock zzzzzzBlock : referencedZzzzzzBlocks) {
             zzzzzzBlock.setZzzzzzOrdinal(++ordinal);

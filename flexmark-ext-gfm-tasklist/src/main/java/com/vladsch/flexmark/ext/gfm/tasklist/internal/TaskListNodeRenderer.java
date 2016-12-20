@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -33,27 +34,45 @@ public class TaskListNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(TaskListItem.class, this::render)
-        ));
+        //noinspection unchecked
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(
+                new NodeRenderingHandler<>(TaskListItem.class, new CustomNodeRenderer<TaskListItem>() {
+                    @Override
+                    public void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
+                        TaskListNodeRenderer.this.render(node, context, html);
+                    }
+                })
+        );
+
+        return set;
     }
 
-    private void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
-        BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
+    private void render(final TaskListItem node, final NodeRendererContext context, final HtmlWriter html) {
+        final BasedSequence sourceText = context.getHtmlOptions().sourcePositionParagraphLines || node.getFirstChild() == null ? node.getChars() : node.getFirstChild().getChars();
         if (listOptions.isTightListItem(node)) {
             if (!itemClass.isEmpty()) html.attr("class", itemClass);
-            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", () -> {
-                html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
-                context.renderChildren(node);
+            html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
+                @Override
+                public void run() {
+                    html.raw(node.isItemDoneMarker() ? TaskListNodeRenderer.this.doneMarker : TaskListNodeRenderer.this.notDoneMarker);
+                    context.renderChildren(node);
+                }
             });
         } else {
             if (!looseItemClass.isEmpty()) html.attr("class", looseItemClass);
-            html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", () -> {
-                if (!paragraphClass.isEmpty()) html.attr("class", paragraphClass);
-                html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", () -> {
-                    html.raw(node.isItemDoneMarker() ? doneMarker : notDoneMarker);
-                    context.renderChildren(node);
-                });
+            html.withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
+                @Override
+                public void run() {
+                    if (!TaskListNodeRenderer.this.paragraphClass.isEmpty()) html.attr("class", TaskListNodeRenderer.this.paragraphClass);
+                    html.srcPos(sourceText.getStartOffset(), sourceText.getEndOffset()).withAttr(TASK_ITEM_PARAGRAPH).tagLine("p", new Runnable() {
+                        @Override
+                        public void run() {
+                            html.raw(node.isItemDoneMarker() ? TaskListNodeRenderer.this.doneMarker : TaskListNodeRenderer.this.notDoneMarker);
+                            context.renderChildren(node);
+                        }
+                    });
+                }
             });
         }
     }

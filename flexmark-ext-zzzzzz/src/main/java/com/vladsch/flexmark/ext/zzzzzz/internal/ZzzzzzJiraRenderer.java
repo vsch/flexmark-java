@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -12,17 +13,18 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ZzzzzzJiraRenderer implements NodeRenderer
-{
+public class ZzzzzzJiraRenderer implements NodeRenderer {
     public ZzzzzzJiraRenderer(DataHolder options) {
-        
+
     }
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(Zzzzzz.class, this::render),// zzzoptionszzz(CUSTOM_NODE)
-                new NodeRenderingHandler<>(ZzzzzzBlock.class, this::render)// zzzoptionszzz(CUSTOM_BLOCK_NODE)
+                // @formatter:off
+                new NodeRenderingHandler<>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } }),// zzzoptionszzz(CUSTOM_NODE)
+                new NodeRenderingHandler<>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzJiraRenderer.this.render(node, context, html); } })// zzzoptionszzz(CUSTOM_BLOCK_NODE)
+                // @formatter:on
         ));
     }
 

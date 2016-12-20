@@ -63,15 +63,19 @@ public class HeadingParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
-                    BlockQuoteParser.Factory.class
-                    //HeadingParser.Factory.class,
-                    //FencedCodeBlockParser.Factory.class,
-                    //HtmlBlockParser.Factory.class,
-                    //ThematicBreakParser.Factory.class,
-                    //ListBlockParser.Factory.class,
-                    //IndentedCodeBlockParser.Factory.class
-            ));
+            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<>();
+            set.add(BlockQuoteParser.Factory.class);
+            return set;
+            //return new HashSet<>(Arrays.asList(
+            //        BlockQuoteParser.Factory.class
+            //        //HtmlBlockParser.Factory.class,
+            //        //HeadingParser.Factory.class,
+            //        //FencedCodeBlockParser.Factory.class,
+            //        //HtmlBlockParser.Factory.class,
+            //        //ThematicBreakParser.Factory.class,
+            //        //ListBlockParser.Factory.class,
+            //        //IndentedCodeBlockParser.Factory.class
+            //));
         }
 
         @Override

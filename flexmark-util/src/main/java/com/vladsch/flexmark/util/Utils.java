@@ -268,9 +268,9 @@ public class Utils {
         return "";
     }
 
-    public static <T> List<? extends T> stringSorted(Collection<? extends T> receiver, Computable<String, T> stringer) {
+    public static <T> List<? extends T> stringSorted(Collection<? extends T> receiver, final Computable<String, T> stringer) {
         ArrayList<? extends T> result = new ArrayList<T>(receiver);
-        result.sort(new Comparator<T>() {
+        Collections.sort(result, new Comparator<T>() {
             @Override
             public int compare(T o1, T o2) {
                 return stringer.compute(o1).compareTo(stringer.compute(o2));
@@ -375,8 +375,13 @@ public class Utils {
         HashMap<K, V> map = new HashMap<K, V>();
 
         map.putAll(receiver);
-        for (Map.Entry<K, V> entry : defaults.entrySet()) {
-            putIfMissing(map, entry.getKey(), entry::getValue);
+        for (final Map.Entry<K, V> entry : defaults.entrySet()) {
+            putIfMissing(map, entry.getKey(), new RunnableValue<V>() {
+                @Override
+                public V run() {
+                    return entry.getValue();
+                }
+            });
         }
         return map;
     }

@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.gfm.tables.internal;
 
 import com.vladsch.flexmark.ext.gfm.tables.*;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -19,25 +20,60 @@ public class TableNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(TableBlock.class, this::render),
-                new NodeRenderingHandler<>(TableHead.class, this::render),
-                new NodeRenderingHandler<>(TableSeparator.class, this::render),
-                new NodeRenderingHandler<>(TableBody.class, this::render),
-                new NodeRenderingHandler<>(TableRow.class, this::render),
-                new NodeRenderingHandler<>(TableCell.class, this::render)
+                new NodeRenderingHandler<>(TableBlock.class, new CustomNodeRenderer<TableBlock>() {
+                    @Override
+                    public void render(TableBlock tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(TableHead.class, new CustomNodeRenderer<TableHead>() {
+                    @Override
+                    public void render(TableHead tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(TableSeparator.class, new CustomNodeRenderer<TableSeparator>() {
+                    @Override
+                    public void render(TableSeparator tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(TableBody.class, new CustomNodeRenderer<TableBody>() {
+                    @Override
+                    public void render(TableBody tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(TableRow.class, new CustomNodeRenderer<TableRow>() {
+                    @Override
+                    public void render(TableRow tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(TableCell.class, new CustomNodeRenderer<TableCell>() {
+                    @Override
+                    public void render(TableCell tableCell, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(tableCell, context, html);
+                    }
+                })
         ));
     }
 
-
-    private void render(TableBlock tableBlock, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagIndent("table", () -> {
-            context.renderChildren(tableBlock);
+    private void render(final TableBlock tableBlock, final NodeRendererContext context, HtmlWriter html) {
+        html.withAttr().tagIndent("table", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(tableBlock);
+            }
         });
     }
 
-    private void render(TableHead tableHead, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().withCondLine().tagIndent("thead", () -> {
-            context.renderChildren(tableHead);
+    private void render(final TableHead tableHead, final NodeRendererContext context, HtmlWriter html) {
+        html.withAttr().withCondLine().tagIndent("thead", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(tableHead);
+            }
         });
     }
 
@@ -45,15 +81,21 @@ public class TableNodeRenderer implements NodeRenderer {
 
     }
 
-    private void render(TableBody tableBody, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().withCondLine().tagIndent("tbody", () -> {
-            context.renderChildren(tableBody);
+    private void render(final TableBody tableBody, final NodeRendererContext context, HtmlWriter html) {
+        html.withAttr().withCondLine().tagIndent("tbody", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(tableBody);
+            }
         });
     }
 
-    private void render(TableRow tableRow, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagLine("tr", () -> {
-            context.renderChildren(tableRow);
+    private void render(final TableRow tableRow, final NodeRendererContext context, HtmlWriter html) {
+        html.withAttr().tagLine("tr", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(tableRow);
+            }
         });
     }
 

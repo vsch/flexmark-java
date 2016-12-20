@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class MailLink extends LinkNode {
@@ -27,7 +28,7 @@ public class MailLink extends LinkNode {
     }
 
     public BasedSequence getLeadSegment() {
-        return BasedSequence.firstNonNull(openingMarker, text);
+        return BasedSequenceImpl.firstNonNull(openingMarker, text);
     }
 
     public MailLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {

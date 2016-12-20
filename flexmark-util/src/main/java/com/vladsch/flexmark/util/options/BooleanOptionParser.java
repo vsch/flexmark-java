@@ -18,6 +18,7 @@ package com.vladsch.flexmark.util.options;
 import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,14 +39,15 @@ public abstract class BooleanOptionParser<T> implements OptionParser<T> {
         return myOptionName;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionText, T options, MessageProvider provider) {
         if (optionText.isEmpty()) {
-            return new Pair<>(setOptions(options), Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.VALID)));
+            return new Pair<>(setOptions(options), (List<ParsedOption<T>>)Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.VALID)));
         } else {
             if (provider == null) provider = MessageProvider.DEFAULT;
             String message = provider.message(KEY_OPTION_0_PARAMETERS_1_IGNORED, OPTION_0_PARAMETERS_1_IGNORED, myOptionName, optionText);
-            return new Pair<>(setOptions(options), Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
+            return new Pair<>(setOptions(options), (List<ParsedOption<T>>)Collections.<ParsedOption<T>>singletonList(new ParsedOption(optionText, this, ParsedOptionStatus.IGNORED, Collections.singletonList(new ParserMessage(optionText, ParsedOptionStatus.IGNORED, message)))));
         }
     }
 

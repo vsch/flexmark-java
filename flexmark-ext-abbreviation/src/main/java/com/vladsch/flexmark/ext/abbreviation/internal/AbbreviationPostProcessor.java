@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkPostProcessor;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
 import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
@@ -14,6 +15,7 @@ import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +27,12 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
 
     AbbreviationPostProcessor(Document document) {
         myVisitor = new NodeVisitor(
-                new VisitHandler<>(Text.class, AbbreviationPostProcessor.this::visit)
+                new VisitHandler<>(Text.class, new Visitor<Text>() {
+                    @Override
+                    public void visit(Text text) {
+                        AbbreviationPostProcessor.this.visit(text);
+                    }
+                })
         );
 
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
@@ -121,7 +128,9 @@ public class AbbreviationPostProcessor extends DocumentPostProcessor {
     public static class Factory extends DocumentPostProcessorFactory {
         @Override
         public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
-            return Collections.singleton(AutolinkPostProcessor.Factory.class);
+            HashSet<Class<? extends PostProcessorFactory>> set = new HashSet<>();
+            set.add(AutolinkPostProcessor.Factory.class);
+            return set;
         }
 
         @Override

@@ -15,16 +15,7 @@
 
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface FootnoteVisitor {
-    static <V extends FootnoteVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-            new VisitHandler<>(FootnoteBlock.class, visitor::visit),
-            new VisitHandler<>(Footnote.class, visitor::visit),
-        };
-    }
-
     void visit(final FootnoteBlock node);
     void visit(final Footnote node);
 }

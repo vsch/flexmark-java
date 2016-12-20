@@ -21,6 +21,34 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         charMap.put('\f', "\\f");
         charMap.put('\t', "\\u2192");
     }
+    public static BasedSequence firstNonNull(BasedSequence... sequences) {
+        for (BasedSequence sequence : sequences) {
+            if (sequence != null && sequence != NULL) return sequence;
+        }
+
+        return NULL;
+    }
+
+    static boolean isVisibleWhitespace(char c) {
+        return visibleSpacesMap.containsKey(c);
+    }
+
+    public static BasedSequence of(CharSequence charSequence) {
+        if (charSequence instanceof String) return new SubCharSequence((String) charSequence);
+        else return of(charSequence, 0, charSequence.length());
+    }
+
+    public static BasedSequence of(CharSequence charSequence, int startOffset) {
+        if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset);
+        else return of(charSequence, startOffset, charSequence.length());
+    }
+
+    public static BasedSequence of(CharSequence charSequence, int startOffset, int endOffset) {
+        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence.subSequence(startOffset, endOffset);
+        else if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset, endOffset);
+        else return new SubSequence(charSequence, startOffset, endOffset);
+    }
+
     @Override
     public BasedSequence endSequence(int start, int end) {
         int length = length();
@@ -194,7 +222,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 return indexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
 
             default:
-                BasedSequence sequence = BasedSequence.of(s);
+                BasedSequence sequence = of(s);
                 if (fromIndex < 0) fromIndex = 0;
                 if (endIndex > length()) endIndex = length();
                 for (int i = fromIndex; i < endIndex; i++) {
@@ -261,7 +289,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 return indexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), fromIndex, endIndex);
 
             default:
-                BasedSequence sequence = BasedSequence.of(s);
+                BasedSequence sequence = of(s);
                 if (fromIndex < 0) fromIndex = 0;
                 if (endIndex > length()) endIndex = length();
                 for (int i = fromIndex; i < endIndex; i++) {
@@ -359,7 +387,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 return lastIndexOfAny(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
 
             default:
-                BasedSequence sequence = BasedSequence.of(s);
+                BasedSequence sequence = of(s);
                 if (startIndex < 0) startIndex = 0;
                 if (fromIndex >= length()) fromIndex = length();
                 else fromIndex++;
@@ -430,7 +458,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 return lastIndexOfAnyNot(s.charAt(0), s.charAt(1), s.charAt(2), startIndex, fromIndex);
 
             default:
-                BasedSequence sequence = BasedSequence.of(s);
+                BasedSequence sequence = of(s);
                 if (startIndex < 0) startIndex = 0;
                 if (fromIndex >= length()) fromIndex = length();
                 else fromIndex++;
@@ -919,10 +947,6 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence normalizeEndWithEOL(ReplacedTextMapper textMapper) {
         return Escaping.normalizeEndWithEOL(this, textMapper);
-    }
-
-    static boolean isVisibleWhitespace(char c) {
-        return visibleSpacesMap.containsKey(c);
     }
 
     @Override

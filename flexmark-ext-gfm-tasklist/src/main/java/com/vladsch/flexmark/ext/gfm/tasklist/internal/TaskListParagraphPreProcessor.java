@@ -15,6 +15,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -70,7 +71,9 @@ public class TaskListParagraphPreProcessor implements ParagraphPreProcessor {
 
         @Override
         public Set<Class<? extends ParagraphPreProcessorFactory>> getBeforeDependents() {
-            return Collections.singleton(ReferencePreProcessorFactory.class);
+            HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
+            set.add(ReferencePreProcessorFactory.class);
+            return set;
         }
 
         @Override

@@ -67,8 +67,7 @@ public class OrderedMultiMapTest {
         }
 
         OrderedSet<Map.Entry<String, Integer>> entries = orderedMap.entrySet();
-        
-        
+
         orderedMap.putAll(orderedMap);
         i = 0;
         for (Map.Entry<String, Integer> it : entries) {
@@ -788,27 +787,40 @@ public class OrderedMultiMapTest {
     @Test
     public void testHostedCallback() throws Exception {
         CollectionHostValidator<Paired<String, Integer>> validator = new CollectionHostValidator<>();
-        OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>(validator.getHost());
+        final OrderedMultiMap<String, Integer> orderedMap = new OrderedMultiMap<>(validator.getHost());
 
         //validator.trace();
-        
+
         validator.reset()
                 .expectAdding(0, Pair.of("0", 0), null)
-                .test(() -> orderedMap.put("0", 0));
+                .test(new Runnable() {
+                    @Override
+                    public void run() {
+                        orderedMap.put("0", 0);
+                    }
+                });
 
         validator.reset()
                 .expectAdding(1, Pair.of("1", 1), null)
                 //.expectAdding(0, "1", 1)
-                .test(() -> orderedMap.put("1", 1));
+                .test(new Runnable() {
+                    @Override
+                    public void run() {
+                        orderedMap.put("1", 1);
+                    }
+                });
 
         int j = 0;
         for (j = 0; j < 2; j++) {
-            int finalJ = j;
+            final int finalJ = j;
             validator.reset().id(j)
-                    .expectRemoving(j, Pair.of(String.valueOf(j), null))
-                    .expectRemoving(j, Pair.of(null, j))
-                    .repeat(2).onCond(j==1).expectClearing()
-                    .test(() -> orderedMap.keySet().remove(String.valueOf(finalJ)));
+                    .expectRemoving(j, Pair.of(String.valueOf(j), (Integer) null))
+                    .expectRemoving(j, Pair.of((String)null, j))
+                    .repeat(2).onCond(j == 1).expectClearing()
+                    .test(new Runnable() {
+                        @Override
+                        public void run() {orderedMap.keySet().remove(String.valueOf(finalJ));}
+                    });
         }
     }
 }

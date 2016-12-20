@@ -16,14 +16,18 @@ public class AutolinkPostProcessor extends DocumentPostProcessor {
     private LinkExtractor linkExtractor = LinkExtractor.builder()
             .linkTypes(EnumSet.of(LinkType.URL, LinkType.EMAIL))
             .build();
-    
+
     private final NodeVisitor myVisitor;
 
     public AutolinkPostProcessor(Document document) {
         myVisitor = new NodeVisitor(
-                new VisitHandler<>(Text.class, AutolinkPostProcessor.this::visit)
+                new VisitHandler<>(Text.class, new Visitor<Text>() {
+                    @Override
+                    public void visit(Text text) {
+                        AutolinkPostProcessor.this.visit(text);
+                    }
+                })
         );
-
     }
 
     public Document processDocument(Document document) {

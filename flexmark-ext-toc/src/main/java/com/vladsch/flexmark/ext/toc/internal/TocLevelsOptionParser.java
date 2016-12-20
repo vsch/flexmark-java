@@ -73,14 +73,17 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
         int newLevels = 0;
         int i = 0;
 
-        MessageProvider finalProvider = provider;
-        Computable<Integer, BasedSequence> convertWithMessage = (BasedSequence option) -> {
-            try {
-                return option.isEmpty() ? null : Integer.parseInt(option.toString());
-            } catch (Exception ignored) {
-                parserParams.add(new ParserMessage(option, ParsedOptionStatus.ERROR, finalProvider.message(KEY_OPTION_0_VALUE_1_NOT_INTEGER, OPTION_0_VALUE_1_NOT_INTEGER, myOptionName, option)));
-                parserParams.skip = true;
-                return null;
+        final MessageProvider finalProvider = provider;
+        Computable<Integer, BasedSequence> convertWithMessage = new Computable<Integer, BasedSequence>() {
+            @Override
+            public Integer compute(BasedSequence option) {
+                try {
+                    return option.isEmpty() ? null : Integer.parseInt(option.toString());
+                } catch (Exception ignored) {
+                    parserParams.add(new ParserMessage(option, ParsedOptionStatus.ERROR, finalProvider.message(KEY_OPTION_0_VALUE_1_NOT_INTEGER, OPTION_0_VALUE_1_NOT_INTEGER, myOptionName, option)));
+                    parserParams.skip = true;
+                    return null;
+                }
             }
         };
 
@@ -134,7 +137,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
 
         if (newLevels != 0) result = result.withLevels(newLevels);
 
-        return new Pair<>(result, Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
+        return new Pair<>(result, (List<ParsedOption<TocOptions>>)Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
     }
 
     @Override

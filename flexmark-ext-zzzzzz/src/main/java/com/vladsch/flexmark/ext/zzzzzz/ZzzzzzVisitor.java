@@ -15,16 +15,7 @@
 
 package com.vladsch.flexmark.ext.zzzzzz;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface ZzzzzzVisitor {
-    static <V extends ZzzzzzVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(Zzzzzz.class, visitor::visit),// zzzoptionszzz(CUSTOM_NODE)
-                new VisitHandler<>(ZzzzzzBlock.class, visitor::visit),// zzzoptionszzz(CUSTOM_BLOCK_NODE)
-        };
-    }
-
     void visit(final Zzzzzz node);// zzzoptionszzz(CUSTOM_NODE)
     void visit(final ZzzzzzBlock node);// zzzoptionszzz(CUSTOM_BLOCK_NODE)
 }

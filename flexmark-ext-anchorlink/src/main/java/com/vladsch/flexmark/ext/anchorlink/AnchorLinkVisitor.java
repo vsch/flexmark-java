@@ -15,14 +15,6 @@
 
 package com.vladsch.flexmark.ext.anchorlink;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface AnchorLinkVisitor {
-    static <V extends AnchorLinkVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(AnchorLink.class, visitor::visit),
-        };
-    }
-
     void visit(final AnchorLink node);
 }

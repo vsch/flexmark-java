@@ -2,8 +2,11 @@ package com.vladsch.flexmark.util.dependency;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
     protected abstract S createStage(List<D> dependents);
@@ -64,11 +67,13 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
 
             BitSet newReady = new BitSet(dependentCount);
             final Ref<BitSet> newReadyRef = new Ref<>(newReady);
-            dependentItemMap.valueIterator().forEachRemaining(item -> {
+            ReversibleIndexedIterator<DependentItem<D>> iterator = dependentItemMap.valueIterator();
+            while (iterator.hasNext()) {
+                DependentItem<D> item = iterator.next();
                 if (!item.hasDependencies()) {
                     newReadyRef.value.set(item.index);
                 }
-            });
+            }
 
             BitSet dependents = new BitSet(dependentCount);
             dependents.set(0, dependentItemMap.size());

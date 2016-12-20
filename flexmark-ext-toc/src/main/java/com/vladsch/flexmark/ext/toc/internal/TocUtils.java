@@ -218,25 +218,31 @@ public class TocUtils {
         return headingTexts;
     }
 
-    public static void renderMarkdownToc(HtmlWriter html, List<Heading> headings, List<String> headingTexts, TocOptions tocOptions) {
+    public static void renderMarkdownToc(HtmlWriter html, List<Heading> headings, List<String> headingTexts, final TocOptions tocOptions) {
         int initLevel = -1;
         int lastLevel = -1;
-        int[] headingNumbers = new int[7];
-        boolean[] openedItems = new boolean[7];
+        final int[] headingNumbers = new int[7];
+        final boolean[] openedItems = new boolean[7];
 
-        Computable<String, Integer> listOpen = level -> {
-            openedItems[level] = true;
-            if (tocOptions.isNumbered) {
-                int v = ++headingNumbers[level];
-                return v + ". ";
-            } else {
-                return "- ";
+        Computable<String, Integer> listOpen = new Computable<String, Integer>() {
+            @Override
+            public String compute(Integer level) {
+                openedItems[level] = true;
+                if (tocOptions.isNumbered) {
+                    int v = ++headingNumbers[level];
+                    return v + ". ";
+                } else {
+                    return "- ";
+                }
             }
         };
 
-        ValueRunnable<Integer> listClose = level -> {
-            if (tocOptions.isNumbered) {
-                headingNumbers[level] = 0;
+        ValueRunnable<Integer> listClose = new ValueRunnable<Integer>() {
+            @Override
+            public void run(Integer level) {
+                if (tocOptions.isNumbered) {
+                    headingNumbers[level] = 0;
+                }
             }
         };
 

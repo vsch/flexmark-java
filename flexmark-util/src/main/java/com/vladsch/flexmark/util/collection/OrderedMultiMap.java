@@ -5,7 +5,6 @@ import com.vladsch.flexmark.util.Paired;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     private final OrderedSet<K> myKeySet;
@@ -135,6 +134,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return (int) ((long) myKeySet.getModificationCount() + (long) myValueSet.getModificationCount());
     }
 
+    @SuppressWarnings("unchecked")
     private void addingKey(int index, K k, Object v) {
         assert !myInValueUpdate;
 
@@ -163,13 +163,14 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInValueUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.removing(index, new Pair<>(k, null));
+            myHost.removing(index, new Pair<K, V>(k, null));
         }
         Object r = myValueSet.removeIndexHosted(index);
         myInValueUpdate = false;
         return r;
     }
 
+    @SuppressWarnings("unchecked")
     private void addingValue(int index, V v, Object k) {
         assert !myInKeyUpdate;
 
@@ -198,7 +199,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInKeyUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.removing(index, new Pair<>(null, v));
+            myHost.removing(index, new Pair<>((K)null, v));
         }
         Object r = myKeySet.removeIndexHosted(index);
         myInKeyUpdate = false;
@@ -574,8 +575,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         return entrySetIterator();
     }
 
-    @Override
-    public void forEach(Consumer<? super Map.Entry<K, V>> consumer) {
+    public void forEach(Consumer<? super Entry<K, V>> consumer) {
         Iterator<Map.Entry<K, V>> iterator = entrySetIterator();
         while (iterator.hasNext()) {
             consumer.accept(iterator.next());

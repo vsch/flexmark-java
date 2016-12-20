@@ -5,7 +5,10 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.jekyll.front.matter.internal.JekyllFrontMatterNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
  * Extension for jekyll_front_matters
@@ -42,7 +45,12 @@ public class JekyllFrontMatterExtension implements Parser.ParserExtension, HtmlR
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(JekyllFrontMatterNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new JekyllFrontMatterNodeRenderer(options);
+                }
+            });
             // rendererBuilder.linkResolverFactory(new JekyllFrontMatterLinkResolver.Factory());
         }
     }

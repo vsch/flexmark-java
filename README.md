@@ -20,7 +20,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Requirements
 
-* Java 8 or above (to be downgraded to Java 7 in the next release)
+* Java 7 or above
 * The core has no dependencies; for extensions, see below
 
 [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
@@ -30,9 +30,9 @@ than ideal and for pathological input either hangs or practically hangs during p
 ### Changes from commonmark-java project
 
 - The project is on Maven: `com.vladsch.flexmark`
-- Java compatibility raised to 1.8 so that lambda syntax could be used during early development
+- Java compatibility raised to 1.7
   but will removed in the next release to support android compatibility
-- Android compatibility to be added once Java 8 requirement is removed
+- Android compatibility to be added
 - No attempt is made to keep API backward compatibility to the original project.
 
     The API has stabilized but some changes may be necessary before 1.0 release. 

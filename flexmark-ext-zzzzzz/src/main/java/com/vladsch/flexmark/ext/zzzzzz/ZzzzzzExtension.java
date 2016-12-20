@@ -4,8 +4,12 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.zzzzzz.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -20,7 +24,12 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", ZzzzzzRepository::new); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new DataValueFactory<ZzzzzzRepository>() {
+        @Override
+        public ZzzzzzRepository create(DataHolder options) {
+            return new ZzzzzzRepository(options);
+        }
+    }); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
     public static final DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
@@ -63,9 +72,9 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(ZzzzzzJiraRenderer::new);// zzzoptionszzz(JIRA_RENDERER)
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);} });// zzzoptionszzz(JIRA_RENDERER)
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(ZzzzzzNodeRenderer::new);// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
             rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
             rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
         }

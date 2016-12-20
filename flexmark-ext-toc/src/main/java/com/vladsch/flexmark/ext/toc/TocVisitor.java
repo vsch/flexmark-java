@@ -15,14 +15,6 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface TocVisitor {
-    static <V extends TocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(TocBlock.class, visitor::visit),
-        };
-    }
-
     void visit(final TocBlock node);
 }

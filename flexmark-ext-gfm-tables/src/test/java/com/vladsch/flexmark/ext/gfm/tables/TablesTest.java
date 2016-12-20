@@ -1,14 +1,17 @@
 package com.vladsch.flexmark.ext.gfm.tables;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
+import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
+import com.vladsch.flexmark.util.options.Attributes;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -318,22 +321,25 @@ public class TablesTest extends RenderingTestCase {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
             public AttributeProvider create(NodeRendererContext context) {
-                return (node, part, attributes) -> {
-                    if (node instanceof TableBlock) {
-                        attributes.replaceValue("test", "block");
-                    } else if (node instanceof TableHead) {
-                        attributes.replaceValue("test", "head");
-                    } else if (node instanceof TableBody) {
-                        attributes.replaceValue("test", "body");
-                    } else if (node instanceof TableRow) {
-                        attributes.replaceValue("test", "row");
-                    } else if (node instanceof TableCell) {
-                        attributes.replaceValue("test", "cell");
+                return new AttributeProvider() {
+                    @Override
+                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+                        if (node instanceof TableBlock) {
+                            attributes.replaceValue("test", "block");
+                        } else if (node instanceof TableHead) {
+                            attributes.replaceValue("test", "head");
+                        } else if (node instanceof TableBody) {
+                            attributes.replaceValue("test", "body");
+                        } else if (node instanceof TableRow) {
+                            attributes.replaceValue("test", "row");
+                        } else if (node instanceof TableCell) {
+                            attributes.replaceValue("test", "cell");
+                        }
                     }
                 };
             }
         };
-        
+
         HtmlRenderer renderer = HtmlRenderer.builder()
                 .attributeProviderFactory(factory)
                 .extensions(EXTENSIONS)

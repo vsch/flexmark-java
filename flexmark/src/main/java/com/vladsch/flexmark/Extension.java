@@ -13,5 +13,5 @@ import java.util.Set;
  */
 public interface Extension {
     Set<Extension> EMPTY_SET = new HashSet<>();
-    Iterable<? extends Extension> EMPTY_LIST = new ArrayList<>();
+    Iterable<Extension> EMPTY_LIST = new ArrayList<>();
 }

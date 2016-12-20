@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.anchorlink.internal;
 
 import com.vladsch.flexmark.ext.anchorlink.AnchorLink;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -20,12 +21,17 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Collections.singletonList(
-                new NodeRenderingHandler<>(AnchorLink.class, this::render)
-        ));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(AnchorLink.class, new CustomNodeRenderer<AnchorLink>() {
+            @Override
+            public void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
+                AnchorLinkNodeRenderer.this.render(node, context, html);
+            }
+        }));
+        return set;
     }
 
-    private void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
+    private void render(final AnchorLink node, final NodeRendererContext context, final HtmlWriter html) {
         if (context.isDoNotRenderLinks()) {
             if (options.wrapText) {
                 context.renderChildren(node);
@@ -44,10 +50,13 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
                     if (!options.textSuffix.isEmpty()) html.raw(options.textSuffix);
                     html.tag("/a");
                 } else {
-                    html.withAttr().tag("a", () -> {
-                        if (!options.textPrefix.isEmpty()) html.raw(options.textPrefix);
-                        context.renderChildren(node);
-                        if (!options.textSuffix.isEmpty()) html.raw(options.textSuffix);
+                    html.withAttr().tag("a", new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!options.textPrefix.isEmpty()) html.raw(options.textPrefix);
+                            context.renderChildren(node);
+                            if (!options.textSuffix.isEmpty()) html.raw(options.textSuffix);
+                        }
                     });
                 }
             } else {

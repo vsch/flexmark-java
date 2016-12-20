@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
+import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.util.collection.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.collection.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.OrderedSet;
@@ -38,7 +39,13 @@ public class PostProcessorManager {
         list.addAll(postProcessorFactories);
 
         // add core block preprocessors
-        list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
+        //list.addAll(CORE_POST_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_POST_PROCESSORS.get(key)).collect(Collectors.toList()));
+        for (DataKey<Boolean> processorDataKey : CORE_POST_PROCESSORS.keySet()) {
+            if (processorDataKey.getFrom(options)) {
+                PostProcessorFactory preProcessorFactory = CORE_POST_PROCESSORS.get(processorDataKey);
+                list.add(preProcessorFactory);
+            }
+        }
 
         PostProcessDependencyHandler resolver = new PostProcessDependencyHandler();
         return resolver.resolveDependencies(list);

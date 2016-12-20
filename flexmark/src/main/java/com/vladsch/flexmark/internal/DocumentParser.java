@@ -359,7 +359,13 @@ public class DocumentParser implements ParserState {
         list.addAll(blockPreProcessors);
 
         if (inlineParserFactory == INLINE_PARSER_FACTORY) {
-            list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
+            //list.addAll(CORE_PARAGRAPH_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_PARAGRAPH_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
+            for (DataKey<Boolean> preProcessorDataKey : CORE_PARAGRAPH_PRE_PROCESSORS.keySet()) {
+                if (preProcessorDataKey.getFrom(options)) {
+                    ParagraphPreProcessorFactory preProcessorFactory = CORE_PARAGRAPH_PRE_PROCESSORS.get(preProcessorDataKey);
+                    list.add(preProcessorFactory);
+                }
+            }
         }
 
         ParagraphDependencyHandler resolver = new ParagraphDependencyHandler();
@@ -372,7 +378,13 @@ public class DocumentParser implements ParserState {
         list.addAll(blockPreProcessors);
 
         // add core block preprocessors
-        list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
+        //list.addAll(CORE_BLOCK_PRE_PROCESSORS.keySet().stream().filter(options::get).map(key -> CORE_BLOCK_PRE_PROCESSORS.get(key)).collect(Collectors.toList()));
+        for (DataKey<Boolean> preProcessorDataKey : CORE_BLOCK_PRE_PROCESSORS.keySet()) {
+            if (preProcessorDataKey.getFrom(options)) {
+                BlockPreProcessorFactory preProcessorFactory = CORE_BLOCK_PRE_PROCESSORS.get(preProcessorDataKey);
+                list.add(preProcessorFactory);
+            }
+        }
 
         BlockDependencyHandler resolver = new BlockDependencyHandler();
         return resolver.resolveDependencies(list);

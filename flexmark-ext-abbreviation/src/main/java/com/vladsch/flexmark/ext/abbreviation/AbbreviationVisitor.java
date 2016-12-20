@@ -15,16 +15,7 @@
 
 package com.vladsch.flexmark.ext.abbreviation;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface AbbreviationVisitor {
-    static <V extends AbbreviationVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-            new VisitHandler<>(AbbreviationBlock.class, visitor::visit),
-            new VisitHandler<>(Abbreviation.class, visitor::visit),
-        };
-    }
-
     void visit(final AbbreviationBlock node);
     void visit(final Abbreviation node);
 }

@@ -15,16 +15,7 @@
 
 package com.vladsch.flexmark.ext.front.matter;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface YamlFrontMatterVisitor {
-    static <V extends YamlFrontMatterVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(YamlFrontMatterNode.class, visitor::visit),
-                new VisitHandler<>(YamlFrontMatterBlock.class, visitor::visit),
-        };
-    }
-
     void visit(final YamlFrontMatterNode node);
     void visit(final YamlFrontMatterBlock node);
 }

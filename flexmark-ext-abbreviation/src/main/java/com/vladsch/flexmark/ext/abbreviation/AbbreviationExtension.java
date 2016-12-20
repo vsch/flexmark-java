@@ -6,8 +6,12 @@ import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationParagraphPreProcessor;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -25,7 +29,12 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
-    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", AbbreviationRepository::new);
+    public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<>("ABBREVIATIONS", new DataValueFactory<AbbreviationRepository>() {
+        @Override
+        public AbbreviationRepository create(DataHolder options) {
+            return new AbbreviationRepository(options);
+        }
+    });
 
     /**
      * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
@@ -51,6 +60,11 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("HTML")) rendererBuilder.nodeRendererFactory(AbbreviationNodeRenderer::new);
+        if (rendererType.equals("HTML")) rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+            @Override
+            public NodeRenderer create(DataHolder options) {
+                return new AbbreviationNodeRenderer(options);
+            }
+        });
     }
 }

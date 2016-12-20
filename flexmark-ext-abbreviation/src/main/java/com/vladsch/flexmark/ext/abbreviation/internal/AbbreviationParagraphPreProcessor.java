@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.abbreviation.internal;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
@@ -11,6 +12,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -73,7 +75,9 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getBeforeDependents() {
-                return Collections.singleton(ReferencePreProcessorFactory.class);
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
+                set.add(ReferencePreProcessorFactory.class);
+                return set;
             }
 
             @Override

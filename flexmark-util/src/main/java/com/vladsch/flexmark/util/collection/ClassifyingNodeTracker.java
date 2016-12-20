@@ -3,6 +3,7 @@ package com.vladsch.flexmark.util.collection;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterable;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.mappers.NodeClassifier;
 
@@ -10,6 +11,7 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class ClassifyingNodeTracker implements NodeTracker {
     protected final ClassificationBag<Class<?>, Node> myNodeClassifier;
@@ -26,8 +28,11 @@ public class ClassifyingNodeTracker implements NodeTracker {
 
         // this maps the exclusion class to bits in the bit set
         myExclusionSet = new OrderedSet<>();
-        myExclusionMap.valueIterable().forEach(myExclusionSet::addAll);
 
+        ReversibleIterator<Set<Class<?>>> iterator = myExclusionMap.valueIterable().iterator();
+        while (iterator.hasNext()) {
+            myExclusionSet.addAll(iterator.next());
+        }
         myNodeAncestryMap = new HashMap<>();
     }
 

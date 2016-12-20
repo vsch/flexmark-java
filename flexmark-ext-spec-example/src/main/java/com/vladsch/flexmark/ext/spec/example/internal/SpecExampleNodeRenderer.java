@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.spec.example.internal;
 
 import com.vladsch.flexmark.ext.spec.example.*;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -30,14 +31,54 @@ public class SpecExampleNodeRenderer implements NodeRenderer
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(SpecExampleBlock.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleOptionsList.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleOption.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleOptionSeparator.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleSeparator.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleSource.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleHtml.class, this::render),
-                new NodeRenderingHandler<>(SpecExampleAst.class, this::render)
+                new NodeRenderingHandler<>(SpecExampleBlock.class, new CustomNodeRenderer<SpecExampleBlock>() {
+                    @Override
+                    public void render(SpecExampleBlock node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleOptionsList.class, new CustomNodeRenderer<SpecExampleOptionsList>() {
+                    @Override
+                    public void render(SpecExampleOptionsList node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleOption.class, new CustomNodeRenderer<SpecExampleOption>() {
+                    @Override
+                    public void render(SpecExampleOption node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleOptionSeparator.class, new CustomNodeRenderer<SpecExampleOptionSeparator>() {
+                    @Override
+                    public void render(SpecExampleOptionSeparator node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleSeparator.class, new CustomNodeRenderer<SpecExampleSeparator>() {
+                    @Override
+                    public void render(SpecExampleSeparator node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleSource.class, new CustomNodeRenderer<SpecExampleSource>() {
+                    @Override
+                    public void render(SpecExampleSource node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleHtml.class, new CustomNodeRenderer<SpecExampleHtml>() {
+                    @Override
+                    public void render(SpecExampleHtml node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                }),
+                new NodeRenderingHandler<>(SpecExampleAst.class, new CustomNodeRenderer<SpecExampleAst>() {
+                    @Override
+                    public void render(SpecExampleAst node, NodeRendererContext context, HtmlWriter html) {
+                        SpecExampleNodeRenderer.this.render(node, context, html);
+                    }
+                })
         ));
     }
 

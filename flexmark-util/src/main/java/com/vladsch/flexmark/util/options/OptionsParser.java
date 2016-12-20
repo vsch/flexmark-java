@@ -50,7 +50,7 @@ public class OptionsParser<T> implements OptionParser<T> {
         List<BasedSequence> optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;
-        ArrayList<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.size());
+        List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.size());
 
         for (BasedSequence optionText : optionsList) {
             OptionParser<T> matched = null;

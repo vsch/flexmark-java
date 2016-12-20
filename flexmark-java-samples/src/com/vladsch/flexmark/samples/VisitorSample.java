@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitor;
-import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ast.VisitHandler;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
 
 @SuppressWarnings({ "unchecked", "WeakerAccess" })
@@ -13,7 +10,12 @@ public class VisitorSample {
     // example of visitor for a node or nodes, just add VisitHandlers<> to the list
     // any node type not handled by the visitor will default to visiting its children
     NodeVisitor visitor = new NodeVisitor(
-            new VisitHandler<>(Text.class, this::visit)
+            new VisitHandler<>(Text.class, new Visitor<Text>() {
+                @Override
+                public void visit(Text text) {
+                    VisitorSample.this.visit(text);
+                }
+            })
     );
 
     public void visit(Text text) {

@@ -15,16 +15,7 @@
 
 package com.vladsch.flexmark.ext.aside;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface AsideVisitor {
-    static <V extends AsideVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                // new VisitHandler<>(ExtAside.class, visitor::visit),
-                new VisitHandler<>(AsideBlock.class, visitor::visit),
-        };
-    }
-
     // void visit(ExtAside node);
     void visit(final AsideBlock node);
 }

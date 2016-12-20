@@ -17,7 +17,12 @@ public class DataKey<T> {
     public DataKey(String name, final T defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;
-        this.factory = (DataHolder options) -> defaultValue;
+        this.factory = new DataValueFactory<T>() {
+            @Override
+            public T create(DataHolder options) {
+                return defaultValue;
+            }
+        };
     }
 
     public String getName() {

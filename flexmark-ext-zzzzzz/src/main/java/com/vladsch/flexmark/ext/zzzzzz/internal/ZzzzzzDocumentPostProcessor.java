@@ -10,7 +10,12 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
 
     public ZzzzzzDocumentPostProcessor(Document document) {
         myVisitor = new NodeVisitor(
-                new VisitHandler<>(Text.class, ZzzzzzDocumentPostProcessor.this::visit)
+                new VisitHandler<>(Text.class, new Visitor<Text>() {
+                    @Override
+                    public void visit(Text node) {
+                        ZzzzzzDocumentPostProcessor.this.visit(node);
+                    }
+                })
         );
     }
 
@@ -36,7 +41,6 @@ public class ZzzzzzDocumentPostProcessor extends DocumentPostProcessor {
                     textBase.appendChild(node);
                 }
             }
-            
         }
     }
 

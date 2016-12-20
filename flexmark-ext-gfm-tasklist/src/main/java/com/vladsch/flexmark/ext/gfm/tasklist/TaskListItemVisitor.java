@@ -15,14 +15,6 @@
 
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface TaskListItemVisitor {
-    static <V extends TaskListItemVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(TaskListItem.class, visitor::visit),
-        };
-    }
-
     void visit(final TaskListItem node);
 }

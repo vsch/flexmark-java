@@ -5,7 +5,10 @@ import com.vladsch.flexmark.ext.aside.internal.AsideBlockParser;
 import com.vladsch.flexmark.ext.aside.internal.AsideNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -41,7 +44,12 @@ public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.Html
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
             // rendererBuilder.nodeRendererFactory(ExtAsideJiraRenderer::new);
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(AsideNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new AsideNodeRenderer(options);
+                }
+            });
             // rendererBuilder.linkResolverFactory(new ExtAsideLinkResolver.Factory());
             // rendererBuilder.attributeProviderFactory(new ExtAsideAttributeProvider.Factory());
         }

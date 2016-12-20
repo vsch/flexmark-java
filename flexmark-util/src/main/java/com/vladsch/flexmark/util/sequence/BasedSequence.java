@@ -25,18 +25,6 @@ public interface BasedSequence extends CharSequence {
     char EOL_CHAR1 = EOL_CHARS.charAt(0);
     char EOL_CHAR2 = EOL_CHARS.charAt(1);
 
-    static BasedSequence firstNonNull(BasedSequence... sequences) {
-        for (BasedSequence sequence : sequences) {
-            if (sequence != null && sequence != NULL) return sequence;
-        }
-
-        return NULL;
-    }
-
-    static boolean isVisibleWhitespace(char c) {
-        return BasedSequenceImpl.isVisibleWhitespace(c);
-    }
-
     CharSequence getBase();
     int getStartOffset();
     int getEndOffset();
@@ -300,22 +288,6 @@ public interface BasedSequence extends CharSequence {
      * @return the first character of the sequence or '\0' if empty
      */
     char firstChar();
-
-    static BasedSequence of(CharSequence charSequence) {
-        if (charSequence instanceof String) return new SubCharSequence((String) charSequence);
-        else return of(charSequence, 0, charSequence.length());
-    }
-
-    static BasedSequence of(CharSequence charSequence, int startOffset) {
-        if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset);
-        else return of(charSequence, startOffset, charSequence.length());
-    }
-
-    static BasedSequence of(CharSequence charSequence, int startOffset, int endOffset) {
-        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence.subSequence(startOffset, endOffset);
-        else if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset, endOffset);
-        else return new SubSequence(charSequence, startOffset, endOffset);
-    }
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override

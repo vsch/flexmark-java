@@ -15,18 +15,7 @@
 
 package com.vladsch.flexmark.ext.toc;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface SimTocVisitor {
-    static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-            new VisitHandler<>(SimTocBlock.class, visitor::visit),
-            new VisitHandler<>(SimTocOptionList.class, visitor::visit),
-            new VisitHandler<>(SimTocOption.class, visitor::visit),
-            new VisitHandler<>(SimTocContent.class, visitor::visit),
-        };
-    }
-
     void visit(final SimTocBlock node);
     void visit(final SimTocOptionList node);
     void visit(final SimTocOption node);

@@ -3,7 +3,10 @@ package com.vladsch.flexmark.youtrack.converter;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.youtrack.converter.internal.YouTrackConverterNodeRenderer;
 
 /**
@@ -42,7 +45,12 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("HTML")) {
             rendererBuilder.set(HtmlRenderer.TYPE, "YOUTRACK");
-            rendererBuilder.nodeRendererFactory(YouTrackConverterNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new YouTrackConverterNodeRenderer(options);
+                }
+            });
             // rendererBuilder.linkResolverFactory(new YoutrackConverterLinkResolver.Factory());
             // rendererBuilder.attributeProviderFactory(new YoutrackConverterAttributeProvider.Factory());
         } else if (!rendererType.equals("YOUTRACK")) {

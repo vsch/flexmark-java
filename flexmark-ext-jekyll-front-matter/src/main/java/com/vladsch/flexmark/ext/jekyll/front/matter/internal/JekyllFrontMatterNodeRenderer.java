@@ -2,6 +2,7 @@
 package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -21,10 +22,15 @@ public class JekyllFrontMatterNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                // new NodeRenderingHandler<>(JekyllFrontMatter.class, this::render),
-                new NodeRenderingHandler<>(JekyllFrontMatterBlock.class, this::render)
-        ));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(JekyllFrontMatterBlock.class, new CustomNodeRenderer<JekyllFrontMatterBlock>() {
+            @Override
+            public void render(JekyllFrontMatterBlock node, NodeRendererContext context, HtmlWriter html) {
+                JekyllFrontMatterNodeRenderer.this.render(node, context, html);
+            }
+        }));
+
+        return set;
     }
 
     private void render(JekyllFrontMatterBlock node, NodeRendererContext context, HtmlWriter html) {

@@ -17,10 +17,7 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
-import com.vladsch.flexmark.ast.CustomNode;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitor;
-import com.vladsch.flexmark.ast.VisitHandler;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.toc.internal.SimTocOptionsParser;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.toc.internal.TocOptionsParser;
@@ -67,13 +64,19 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     }
 
     interface ParserVisitor {
-        static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
+        void visit(ParserNode node);
+    }
+
+    static class ParserVisitorExt {
+        static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
             return new VisitHandler<?>[] {
-                    new VisitHandler<>(ParserNode.class, visitor::visit),
+                    new VisitHandler<>(ParserNode.class, new Visitor<ParserNode>() {
+                        @Override
+                        public void visit(ParserNode node) {visitor.visit(node);
+                        }
+                    }),
             };
         }
-
-        void visit(ParserNode node);
     }
 
     private static class ParserNode extends CustomNode {
@@ -203,7 +206,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             final NodeVisitor myVisitor;
 
             public RenderingVisitor(HtmlWriter html, TocOptions defaultOptions) {
-                myVisitor = new NodeVisitor(ParserVisitor.VISIT_HANDLERS(this));
+                myVisitor = new NodeVisitor(ParserVisitorExt.VISIT_HANDLERS(this));
                 this.html = html;
                 this.defaultOptions = defaultOptions;
             }

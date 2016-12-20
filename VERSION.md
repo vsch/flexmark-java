@@ -60,9 +60,6 @@ flexmark-java
 This Release To Do List
 -----------------------
 
-- [ ] Change: remove Java 8 language constructs and reduce language level to 7 for android
-      support.
-
 - [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
       when descriptions can benefit form complex formatting
 
@@ -100,6 +97,8 @@ Next Release To Do List
           
 0.7.1
 -----
+
+- Change: remove Java 8 language constructs and reduce language level to 7 for android support.
 
 - Change: remove `Substring` class from sequences and rename `StringSequence` to
   `StringBasedSequence`. `Substring` was duplicating code and not used except in tests.

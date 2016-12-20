@@ -6,7 +6,10 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughJiraRend
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughYouTrackRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
@@ -36,11 +39,26 @@ public class StrikethroughExtension implements Parser.ParserExtension, HtmlRende
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA")) {
-            rendererBuilder.nodeRendererFactory(StrikethroughJiraRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughJiraRenderer(options);
+                }
+            });
         } else if (rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(StrikethroughYouTrackRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughYouTrackRenderer(options);
+                }
+            });
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(StrikethroughNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughNodeRenderer(options);
+                }
+            });
         }
     }
 }

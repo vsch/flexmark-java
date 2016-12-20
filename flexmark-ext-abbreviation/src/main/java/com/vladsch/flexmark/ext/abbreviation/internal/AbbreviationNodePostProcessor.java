@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.abbreviation.Abbreviation;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
@@ -15,6 +16,7 @@ import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -111,7 +113,9 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
     public static class Factory extends NodePostProcessorFactory {
         @Override
         public Set<Class<? extends PostProcessorFactory>> getAfterDependents() {
-            return Collections.singleton(AutolinkNodePostProcessor.Factory.class);
+            HashSet<Class<? extends PostProcessorFactory>> set = new HashSet<>();
+            set.add(AutolinkNodePostProcessor.Factory.class);
+            return set;
         }
 
         public Factory() {

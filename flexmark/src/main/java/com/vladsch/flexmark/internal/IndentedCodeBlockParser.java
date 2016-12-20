@@ -10,10 +10,7 @@ import com.vladsch.flexmark.util.collection.iteration.Reverse;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
@@ -84,15 +81,16 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
-                    //BlockQuoteParser.Factory.class,
-                    //HeadingParser.Factory.class,
-                    //FencedCodeBlockParser.Factory.class,
-                    //HtmlBlockParser.Factory.class,
-                    //ThematicBreakParser.Factory.class,
-                    //ListBlockParser.Factory.class,
-                    //IndentedCodeBlockParser.Factory.class
-            ));
+            return Collections.emptySet();
+            //return new HashSet<>(Arrays.asList(
+            //        //BlockQuoteParser.Factory.class,
+            //        //HeadingParser.Factory.class,
+            //        //FencedCodeBlockParser.Factory.class,
+            //        //HtmlBlockParser.Factory.class,
+            //        //ThematicBreakParser.Factory.class,
+            //        //ListBlockParser.Factory.class,
+            //        //IndentedCodeBlockParser.Factory.class
+            //));
         }
 
         @Override

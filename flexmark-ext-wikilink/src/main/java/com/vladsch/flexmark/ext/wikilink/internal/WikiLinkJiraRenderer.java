@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -22,14 +23,19 @@ public class WikiLinkJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Collections.singletonList(
-                new NodeRenderingHandler<>(WikiLink.class, this::render)
-        ));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {
+            @Override
+            public void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
+                WikiLinkJiraRenderer.this.render(node, context, html);
+            }
+        }));
+        return set;
     }
 
     private void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
         if (options.disableRendering) {
-           html.text(node.getChars().unescape());
+            html.text(node.getChars().unescape());
         } else {
             ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString(), null);
             String anchorRef = node.getAnchorMarker().isNull() ? "" : node.getAnchorMarker().toString() + node.getAnchorRef().toString();

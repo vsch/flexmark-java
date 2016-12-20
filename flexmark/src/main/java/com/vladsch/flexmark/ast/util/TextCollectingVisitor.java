@@ -23,11 +23,36 @@ public class TextCollectingVisitor {
 
     public TextCollectingVisitor() {
         myVisitor = new NodeVisitor(
-                new VisitHandler<>(Text.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(TextBase.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(HtmlEntity.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(SoftLineBreak.class, TextCollectingVisitor.this::visit),
-                new VisitHandler<>(HardLineBreak.class, TextCollectingVisitor.this::visit)
+                new VisitHandler<>(Text.class, new Visitor<Text>() {
+                    @Override
+                    public void visit(Text node) {
+                        TextCollectingVisitor.this.visit(node);
+                    }
+                }),
+                new VisitHandler<>(TextBase.class, new Visitor<TextBase>() {
+                    @Override
+                    public void visit(TextBase node) {
+                        TextCollectingVisitor.this.visit(node);
+                    }
+                }),
+                new VisitHandler<>(HtmlEntity.class, new Visitor<HtmlEntity>() {
+                    @Override
+                    public void visit(HtmlEntity node) {
+                        TextCollectingVisitor.this.visit(node);
+                    }
+                }),
+                new VisitHandler<>(SoftLineBreak.class, new Visitor<SoftLineBreak>() {
+                    @Override
+                    public void visit(SoftLineBreak node) {
+                        TextCollectingVisitor.this.visit(node);
+                    }
+                }),
+                new VisitHandler<>(HardLineBreak.class, new Visitor<HardLineBreak>() {
+                    @Override
+                    public void visit(HardLineBreak node) {
+                        TextCollectingVisitor.this.visit(node);
+                    }
+                })
         );
     }
 
@@ -59,7 +84,7 @@ public class TextCollectingVisitor {
     private void visit(Text node) {
         out.append(node.getChars());
     }
-    
+
     private void visit(TextBase node) {
         out.append(node.getChars());
     }

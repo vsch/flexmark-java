@@ -4,8 +4,12 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeRenderer;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListParagraphPreProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -26,7 +30,12 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" />");
     public static final DataKey<String> ITEM_CLASS = new DataKey<>("ITEM_CLASS", "task-list-item");
-    public static final DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<>("LOOSE_ITEM_CLASS", ITEM_CLASS::getFrom);
+    public static final DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<>("LOOSE_ITEM_CLASS", new DataValueFactory<String>() {
+        @Override
+        public String create(DataHolder holder) {
+            return ITEM_CLASS.getFrom(holder);
+        }
+    });
     public static final DataKey<String> PARAGRAPH_CLASS = new DataKey<>("PARAGRAPH_CLASS", "");
 
     private TaskListExtension() {
@@ -45,7 +54,12 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(TaskListNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new TaskListNodeRenderer(options);
+                }
+            });
         }
     }
 }

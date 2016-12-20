@@ -15,14 +15,6 @@
 
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
-import com.vladsch.flexmark.ast.VisitHandler;
-
 public interface StrikethroughVisitor {
-    static <V extends StrikethroughVisitor> VisitHandler<?>[] VISIT_HANDLERS(V visitor) {
-        return new VisitHandler<?>[] {
-                new VisitHandler<>(Strikethrough.class, visitor::visit),
-        };
-    }
-
     void visit(final Strikethrough node);
 }

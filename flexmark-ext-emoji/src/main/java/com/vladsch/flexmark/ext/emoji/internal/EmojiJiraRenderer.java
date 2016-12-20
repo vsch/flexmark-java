@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.emoji.internal;
 
 import com.vladsch.flexmark.ext.emoji.Emoji;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
@@ -14,7 +15,6 @@ import java.util.Set;
 
 public class EmojiJiraRenderer implements NodeRenderer {
     public static final HashMap<String, String> shortCutMap = new HashMap<>();
-    
     static {
         shortCutMap.put("smile", ":)");
         shortCutMap.put("frowning", ":(");
@@ -35,15 +35,19 @@ public class EmojiJiraRenderer implements NodeRenderer {
         shortCutMap.put("triangular_flag_on_post", "(flag)");
         shortCutMap.put("crossed_flags", "(flagoff)");
     }
-
     public EmojiJiraRenderer(DataHolder options) {
     }
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Collections.singletonList(
-                new NodeRenderingHandler<>(Emoji.class, this::render)
-        ));
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        set.add(new NodeRenderingHandler<>(Emoji.class, new CustomNodeRenderer<Emoji>() {
+            @Override
+            public void render(Emoji node, NodeRendererContext context, HtmlWriter html) {
+                EmojiJiraRenderer.this.render(node, context, html);
+            }
+        }));
+        return set;
     }
 
     private void render(Emoji node, NodeRendererContext context, HtmlWriter html) {

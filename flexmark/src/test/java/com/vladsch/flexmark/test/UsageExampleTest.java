@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.test;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.NodeVisitor;
-import com.vladsch.flexmark.ast.Text;
-import com.vladsch.flexmark.ast.VisitHandler;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import org.junit.Test;
@@ -37,10 +34,15 @@ public class UsageExampleTest {
 
         public WordCountVisitor() {
             myVisitor = new NodeVisitor(
-                    new VisitHandler<>(Text.class, WordCountVisitor.this::visit)
+                    new VisitHandler<>(Text.class, new Visitor<Text>() {
+                        @Override
+                        public void visit(Text text) {
+                            WordCountVisitor.this.visit(text);
+                        }
+                    })
             );
         }
-        
+
         public void countWords(Node node) {
             myVisitor.visit(node);
         }

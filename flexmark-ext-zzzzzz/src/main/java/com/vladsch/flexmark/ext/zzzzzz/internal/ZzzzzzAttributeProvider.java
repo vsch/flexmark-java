@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.AttributeProviderAdapter;
 import com.vladsch.flexmark.ast.util.AttributeProvidingHandler;
+import com.vladsch.flexmark.ast.util.AttributeProvidingVisitor;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzExtension;
 import com.vladsch.flexmark.html.AttributeProvider;
 import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
@@ -26,10 +27,30 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
         this.missingTargetClass = options.get(ZzzzzzExtension.MISSING_TARGET_CLASS);
 
         this.nodeAdapter = new AttributeProviderAdapter(
-                new AttributeProvidingHandler<>(Image.class, this::setLinkAttributes),
-                new AttributeProvidingHandler<>(ImageRef.class, this::setLinkAttributes),
-                new AttributeProvidingHandler<>(LinkRef.class, this::setLinkAttributes),
-                new AttributeProvidingHandler<>(Link.class, this::setLinkAttributes)
+                new AttributeProvidingHandler<>(Image.class, new AttributeProvidingVisitor<Image>() {
+                    @Override
+                    public void setAttributes(Image node, AttributablePart part, Attributes attributes) {
+                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
+                    }
+                }),
+                new AttributeProvidingHandler<>(ImageRef.class, new AttributeProvidingVisitor<ImageRef>() {
+                    @Override
+                    public void setAttributes(ImageRef node, AttributablePart part, Attributes attributes) {
+                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
+                    }
+                }),
+                new AttributeProvidingHandler<>(LinkRef.class, new AttributeProvidingVisitor<LinkRef>() {
+                    @Override
+                    public void setAttributes(LinkRef node, AttributablePart part, Attributes attributes) {
+                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
+                    }
+                }),
+                new AttributeProvidingHandler<>(Link.class, new AttributeProvidingVisitor<Link>() {
+                    @Override
+                    public void setAttributes(Link node, AttributablePart part, Attributes attributes) {
+                        ZzzzzzAttributeProvider.this.setLinkAttributes(node, part, attributes);
+                    }
+                })
         );
     }
 

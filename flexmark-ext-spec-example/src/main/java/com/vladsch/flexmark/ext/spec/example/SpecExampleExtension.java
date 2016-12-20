@@ -5,8 +5,11 @@ import com.vladsch.flexmark.ext.spec.example.internal.RenderAs;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleBlockParser;
 import com.vladsch.flexmark.ext.spec.example.internal.SpecExampleNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecReader;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -47,7 +50,12 @@ public class SpecExampleExtension implements Parser.ParserExtension, HtmlRendere
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(SpecExampleNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new SpecExampleNodeRenderer(options);
+                }
+            });
         }
     }
 }

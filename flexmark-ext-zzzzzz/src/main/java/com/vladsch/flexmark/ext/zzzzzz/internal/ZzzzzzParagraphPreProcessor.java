@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.zzzzzz.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.zzzzzz.ZzzzzzBlock;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
@@ -10,10 +11,7 @@ import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
 
-import java.util.BitSet;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
@@ -80,7 +78,9 @@ public class ZzzzzzParagraphPreProcessor implements ParagraphPreProcessor {
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
-                return Collections.singleton(ReferencePreProcessorFactory.class);
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
+                set.add(ReferencePreProcessorFactory.class);
+                return set;
             }
 
             @Override

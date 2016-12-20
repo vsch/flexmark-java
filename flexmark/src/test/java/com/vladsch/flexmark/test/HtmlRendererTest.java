@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.Test;
 
@@ -87,13 +88,16 @@ public class HtmlRendererTest {
             @Override
             public AttributeProvider create(NodeRendererContext context) {
                 //noinspection ReturnOfInnerClass
-                return (node, part, attributes) -> {
-                    if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
-                        FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
-                        // Remove the default attribute for info
-                        attributes.remove("class");
-                        // Put info in custom attribute instead
-                        attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
+                return new AttributeProvider() {
+                    @Override
+                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+                        if (node instanceof FencedCodeBlock && part == CoreNodeRenderer.CODE_CONTENT) {
+                            FencedCodeBlock fencedCodeBlock = (FencedCodeBlock) node;
+                            // Remove the default attribute for info
+                            attributes.remove("class");
+                            // Put info in custom attribute instead
+                            attributes.replaceValue("data-custom", fencedCodeBlock.getInfo().toString());
+                        }
                     }
                 };
             }
@@ -112,10 +116,13 @@ public class HtmlRendererTest {
         AttributeProviderFactory factory = new IndependentAttributeProviderFactory() {
             @Override
             public AttributeProvider create(NodeRendererContext context) {
-                return (node, part, attributes) -> {
-                    if (node instanceof Image) {
-                        attributes.remove("alt");
-                        attributes.replaceValue("test", "hey");
+                return new AttributeProvider() {
+                    @Override
+                    public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+                        if (node instanceof Image) {
+                            attributes.remove("alt");
+                            attributes.replaceValue("test", "hey");
+                        }
                     }
                 };
             }
@@ -128,19 +135,21 @@ public class HtmlRendererTest {
 
     @Test
     public void overrideNodeRender() {
-        NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
             @Override
             public NodeRenderer create(final DataHolder options) {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        return new HashSet<>(Collections.singletonList(
-                                new NodeRenderingHandler<>(Link.class, this::render)
-                        ));
-                    }
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+                        set.add(new NodeRenderingHandler<>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                context.getHtmlWriter().text("test");
+                            }
+                        }));
 
-                    private void render(Link node, NodeRendererContext context, HtmlWriter html) {
-                        context.getHtmlWriter().text("test");
+                        return set;
                     }
                 };
             }

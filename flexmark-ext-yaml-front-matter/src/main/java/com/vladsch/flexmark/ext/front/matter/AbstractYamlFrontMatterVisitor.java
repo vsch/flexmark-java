@@ -18,7 +18,7 @@ public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
         //        new VisitHandler<>(YamlFrontMatterNode.class, AbstractYamlFrontMatterVisitor.this::visit),
         //        new VisitHandler<>(YamlFrontMatterBlock.class, AbstractYamlFrontMatterVisitor.this::visit)
         //);
-        myVisitor = new NodeVisitor(YamlFrontMatterVisitor.VISIT_HANDLERS(this));
+        myVisitor = new NodeVisitor(YamlFrontMatterVisitorExt.VISIT_HANDLERS(this));
         data = new LinkedHashMap<>();
     }
 

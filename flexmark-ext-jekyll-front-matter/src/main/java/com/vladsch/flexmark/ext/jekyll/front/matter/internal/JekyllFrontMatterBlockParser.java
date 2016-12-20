@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ext.front.matter.internal.YamlFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
+import com.vladsch.flexmark.internal.BlockQuoteParser;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
@@ -88,16 +89,19 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
-                    YamlFrontMatterBlockParser.Factory.class
-                    //        BlockQuoteParser.Factory.class,
-                    //        HeadingParser.Factory.class,
-                    //        FencedCodeBlockParser.Factory.class,
-                    //        HtmlBlockParser.Factory.class,
-                    //        ThematicBreakParser.Factory.class,
-                    //        ListBlockParser.Factory.class,
-                    //        IndentedCodeBlockParser.Factory.class
-            ));
+            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<>();
+            set.add(YamlFrontMatterBlockParser.Factory.class);
+            return set;
+            //return new HashSet<>(Arrays.asList(
+            //        YamlFrontMatterBlockParser.Factory.class
+            //        //        BlockQuoteParser.Factory.class,
+            //        //        HeadingParser.Factory.class,
+            //        //        FencedCodeBlockParser.Factory.class,
+            //        //        HtmlBlockParser.Factory.class,
+            //        //        ThematicBreakParser.Factory.class,
+            //        //        ListBlockParser.Factory.class,
+            //        //        IndentedCodeBlockParser.Factory.class
+            //));
         }
 
         @Override

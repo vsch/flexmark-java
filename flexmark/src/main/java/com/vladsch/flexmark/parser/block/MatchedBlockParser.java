@@ -18,14 +18,6 @@ public interface MatchedBlockParser {
     BlockParser getBlockParser();
 
     /**
-     * @return current matched block parser instance
-     * @deprecated use {@link #getBlockParser()}
-     */
-    default BlockParser getMatchedBlockParser() {
-        return getBlockParser();
-    }
-
-    /**
      * Returns the current content of the paragraph if the matched block is a paragraph. The content can be multiple
      * lines separated by {@code '\n'}.
      *

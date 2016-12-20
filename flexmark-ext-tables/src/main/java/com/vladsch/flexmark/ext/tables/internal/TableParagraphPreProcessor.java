@@ -5,6 +5,10 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeIterator;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.tables.*;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
+import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
@@ -69,7 +73,9 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             @Override
             public Set<Class<? extends ParagraphPreProcessorFactory>> getAfterDependents() {
-                return Collections.singleton(ReferencePreProcessorFactory.class);
+                HashSet<Class<? extends ParagraphPreProcessorFactory>> set = new HashSet<>();
+                set.add(ReferencePreProcessorFactory.class);
+                return set;
             }
 
             @Override

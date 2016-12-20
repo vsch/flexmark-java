@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -84,15 +85,16 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
-                    //BlockQuoteParser.Factory.class,
-                    //HeadingParser.Factory.class,
-                    //FencedCodeBlockParser.Factory.class,
-                    //HtmlBlockParser.Factory.class,
-                    //ThematicBreakParser.Factory.class,
-                    //ListBlockParser.Factory.class,
-                    //IndentedCodeBlockParser.Factory.class
-            ));
+            return Collections.emptySet(); 
+            //new HashSet<Class<?extends CustomBlockParserFactory>>(Arrays.asList(
+            //        //BlockQuoteParser.Factory.class,
+            //        //HeadingParser.Factory.class,
+            //        //FencedCodeBlockParser.Factory.class
+            //        //HtmlBlockParser.Factory.class,
+            //        //ThematicBreakParser.Factory.class,
+            //        //ListBlockParser.Factory.class,
+            //        //IndentedCodeBlockParser.Factory.class
+            //));
         }
 
         @Override
