@@ -15,7 +15,7 @@
     <option name="customNodeRepository" value="false" />
     <option name="customProperties" value="false" />
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -29,6 +29,9 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="library" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.7.0" level="project" />
+    <orderEntry type="module" module-name="flexmark-youtrack-converter" />
+    <orderEntry type="library" name="Maven: com.vladsch.flexmark:flexmark-ext-tables:0.7.0" level="project" />
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
