@@ -95,7 +95,7 @@ Next Release To Do List
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
           
-0.7.1
+0.8.0
 -----
 
 - Change: remove Java 8 language constructs and reduce language level to 7 for android support.

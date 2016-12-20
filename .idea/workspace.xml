@@ -13,8 +13,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_wikilink_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_abbreviation_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_abbreviation_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_autolink_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_autolink_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_emoji_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_emoji_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_footnotes_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_footnotes_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_strikethrough_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_strikethrough_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tables_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tables_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tasklist_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_gfm_tasklist_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_tables_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_tables_0_8_0.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_yaml_front_matter_0_7_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_yaml_front_matter_0_8_0.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VERSION.md" afterPath="$PROJECT_DIR$/VERSION.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" afterPath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-autolink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-autolink/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-definition/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-toc/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" afterPath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/pom.xml" afterPath="$PROJECT_DIR$/flexmark-integration-test/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/pom.xml" afterPath="$PROJECT_DIR$/flexmark-test-util/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/pom.xml" afterPath="$PROJECT_DIR$/flexmark-util/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/pom.xml" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/pom.xml" afterPath="$PROJECT_DIR$/flexmark/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -91,8 +133,8 @@
         <entry file="file://$PROJECT_DIR$/VERSION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="1700">
-                <caret line="100" column="86" lean-forward="false" selection-start-line="100" selection-start-column="86" selection-end-line="100" selection-end-column="86" />
+              <first_editor relative-caret-position="1649">
+                <caret line="97" column="5" lean-forward="false" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -100,11 +142,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BlockVisitorExt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+            <state relative-caret-position="782">
+              <caret line="306" column="55" lean-forward="false" selection-start-line="306" selection-start-column="55" selection-end-line="306" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -130,27 +172,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="391">
+              <first_editor relative-caret-position="561">
                 <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
                 <folding>
                   <marker date="1482227442000" expanded="true" signature="9941:10103" ph="..." />
                 </folding>
               </first_editor>
               <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbbreviationVisitorExt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/AbbreviationVisitorExt.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="29" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -180,16 +212,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" column="11" lean-forward="false" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmojiVisitorExt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/EmojiVisitorExt.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -321,7 +343,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_gfm_strikethrough_youtrack_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/YouTrackStrikethroughSpecTest.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/ListOptions.java" />
@@ -509,7 +530,6 @@
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationParagraphPreProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/src/main/java/com/vladsch/flexmark/ext/abbreviation/internal/AbbreviationNodePostProcessor.java" />
         <option value="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/VisitorSample.java" />
-        <option value="$PROJECT_DIR$/VERSION.md" />
         <option value="$PROJECT_DIR$/flexmark-java.wiki/Home.md" />
         <option value="$PROJECT_DIR$/flexmark/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -522,6 +542,8 @@
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitorExt.java" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/VERSION.md" />
+        <option value="$USER_HOME$/.m2/settings.xml" />
       </list>
     </option>
   </component>
@@ -710,7 +732,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -921,8 +945,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1488,13 +1510,6 @@
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
     </task>
-    <task id="LOCAL-00100" summary="update pom">
-      <created>1468527827610</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1468527827610</updated>
-    </task>
     <task id="LOCAL-00101" summary="set all modules to non-maven until it is released to maven">
       <created>1468530736772</created>
       <option name="number" value="00101" />
@@ -1831,7 +1846,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482227036794</updated>
     </task>
-    <option name="localTasksCounter" value="149" />
+    <task id="LOCAL-00149" summary="update readme">
+      <created>1482227455398</created>
+      <option name="number" value="00149" />
+      <option name="presentableId" value="LOCAL-00149" />
+      <option name="project" value="LOCAL" />
+      <updated>1482227455399</updated>
+    </task>
+    <option name="localTasksCounter" value="150" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -1925,7 +1947,7 @@
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31937984" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17028986" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16983695" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
@@ -2067,14 +2089,14 @@
     <MESSAGE value="update" />
     <MESSAGE value="update wiki" />
     <MESSAGE value="update version notes" />
-    <MESSAGE value="update readme" />
     <MESSAGE value="cleanup sequence handling impl" />
     <MESSAGE value="optimize imports to remove spurious and unused ones" />
     <MESSAGE value="add jira and youtrack converter dependencies" />
     <MESSAGE value="remove jira and youtrack from table and strikethrough deps list" />
     <MESSAGE value="downgrade to java 7 lang level" />
     <MESSAGE value="fix incompatibilities added with downgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix incompatibilities added with downgrade" />
+    <MESSAGE value="update readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="update readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2090,7 +2112,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/test/java/com/vladsch/flexmark/ext/tables/JiraTablesSpecTest.java" />
     <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/test/java/com/vladsch/flexmark/jira/converter/ComboJiraConverterSpecTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -2295,6 +2316,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="20" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2302,6 +2324,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="16" lean-forward="false" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2309,6 +2332,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="50" lean-forward="false" selection-start-line="17" selection-start-column="50" selection-end-line="17" selection-end-column="50" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2316,6 +2340,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3325,23 +3350,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/VERSION.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="1700">
-            <caret line="100" column="86" lean-forward="false" selection-start-line="100" selection-start-column="86" selection-end-line="100" selection-end-column="86" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/Home.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -3359,14 +3367,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/central-pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="589">
@@ -3375,19 +3375,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5712">
-          <caret line="336" column="15" lean-forward="false" selection-start-line="336" selection-start-column="15" selection-end-line="336" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitorExt.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="11" lean-forward="false" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3395,7 +3386,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3403,7 +3393,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="29" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3450,13 +3439,54 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="391">
+          <first_editor relative-caret-position="561">
             <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
             <folding>
               <marker date="1482227442000" expanded="true" signature="9941:10103" ph="..." />
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VERSION.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="1649">
+            <caret line="97" column="5" lean-forward="false" selection-start-line="97" selection-start-column="5" selection-end-line="97" selection-end-column="5" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/central-pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.m2/settings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="67" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="306" column="55" lean-forward="false" selection-start-line="306" selection-start-column="55" selection-end-line="306" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
