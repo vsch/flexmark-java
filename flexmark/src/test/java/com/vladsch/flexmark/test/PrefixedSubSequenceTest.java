@@ -9,7 +9,7 @@ import static junit.framework.TestCase.assertEquals;
 
 public class PrefixedSubSequenceTest {
     private final BasedSequence sequence = BasedSequenceImpl.of("abcdefghi", 3, 6);
-    private final BasedSequence substring = new PrefixedSubSequence("0123", sequence);
+    private final BasedSequence substring = PrefixedSubSequence.of("0123", sequence);
 
     @Test
     public void testLength() {

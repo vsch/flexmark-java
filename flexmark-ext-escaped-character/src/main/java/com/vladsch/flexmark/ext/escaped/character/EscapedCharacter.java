@@ -46,7 +46,7 @@ public class EscapedCharacter extends Node implements DoNotDecorate {
     }
 
     public EscapedCharacter(BasedSequence openingMarker, BasedSequence text) {
-        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), text.getEndOffset()));
+        super(openingMarker.baseSubSequence(openingMarker.getStartOffset(), text.getEndOffset()));
         this.openingMarker = openingMarker;
         this.text = text;
     }

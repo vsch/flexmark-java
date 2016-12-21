@@ -5,37 +5,92 @@ import com.vladsch.flexmark.util.mappers.CharMapper;
 /**
  * A CharSequence that maps characters according to CharMapper
  */
-public class MappedSequence extends SubSequence {
-    protected final CharMapper mapper;
+public final class MappedSequence extends BasedSequenceImpl {
+    private final CharMapper mapper;
+    private final BasedSequence base;
 
     public CharMapper getCharMapper() {
         return mapper;
     }
 
-    public MappedSequence(CharSequence baseSeq, CharMapper mapper) {
-        super(baseSeq);
+    private MappedSequence(CharMapper mapper, CharSequence baseSeq) {
+        this.base = of(baseSeq);
         this.mapper = mapper;
     }
 
-    public MappedSequence(SubSequence baseSeq, int start, int end, CharMapper mapper) {
-        super(baseSeq, start, end);
+    private MappedSequence(CharMapper mapper, CharSequence baseSeq, int start) {
+        this.base = of(baseSeq, start);
         this.mapper = mapper;
     }
 
-    public MappedSequence(CharSequence baseSeq, int startOffset, int endOffset, CharMapper mapper) {
-        super(baseSeq, startOffset, endOffset);
+    private MappedSequence(CharMapper mapper, CharSequence baseSeq, int start, int end) {
+        this.base = of(baseSeq, start, end);
         this.mapper = mapper;
+    }
+
+    public static MappedSequence of(CharMapper mapper, CharSequence baseSeq) {
+        return new MappedSequence(mapper, baseSeq);
+    }
+
+    public static MappedSequence of(CharMapper mapper, CharSequence baseSeq, int start) {
+        return new MappedSequence(mapper, baseSeq, start);
+    }
+
+    public static MappedSequence of(CharMapper mapper, CharSequence baseSeq, int start, int end) {
+        return new MappedSequence(mapper, baseSeq, start, end);
     }
 
     @Override
     public char charAt(int index) {
-        char c = super.charAt(index);
+        char c = base.charAt(index);
         return mapper.map(c);
     }
 
     @Override
     public BasedSequence subSequence(int start, int end) {
-        return new MappedSequence(base, startOffset + start, startOffset + end, mapper);
+        final BasedSequence baseSequence = base.subSequence(start, end);
+        return baseSequence == base ? this : new MappedSequence(mapper, baseSequence);
+    }
+
+    @Override
+    public BasedSequence baseSubSequence(final int start, final int end) {
+        final BasedSequence baseSequence = base.subSequence(start, end);
+        return baseSequence == base ? this : new MappedSequence(mapper, baseSequence);
+    }
+
+    @Override
+    public Object getBase() {
+        return base.getBase();
+    }
+
+    @Override
+    public BasedSequence getBaseSequence() {
+        return base.getBaseSequence();
+    }
+
+    @Override
+    public int getStartOffset() {
+        return base.getStartOffset();
+    }
+
+    @Override
+    public int getEndOffset() {
+        return base.getEndOffset();
+    }
+
+    @Override
+    public int getIndexOffset(final int index) {
+        return base.getIndexOffset(index);
+    }
+
+    @Override
+    public Range getSourceRange() {
+        return base.getSourceRange();
+    }
+
+    @Override
+    public int length() {
+        return base.length();
     }
 
     @Override
@@ -43,7 +98,7 @@ public class MappedSequence extends SubSequence {
         int iMax = length();
         StringBuilder sb = new StringBuilder(iMax);
         for (int i = 0; i < iMax; i++) {
-            sb.append(mapper.map(super.charAt(i)));
+            sb.append(mapper.map(base.charAt(i)));
         }
         return sb.toString();
     }

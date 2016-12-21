@@ -7,15 +7,21 @@ import java.util.List;
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
-public class SegmentedSequence extends BasedSequenceImpl {
-    protected final CharSequence baseSeq;
-    protected final char[] nonBaseChars;
-    protected final int[] baseOffsets;
-    protected final int baseStartOffset;
-    protected final int length;      // list of start/end indices
+public final class SegmentedSequence extends BasedSequenceImpl {
+    private final BasedSequence baseSeq;
+    private final char[] nonBaseChars;
+    private final int[] baseOffsets;
+    private final int baseStartOffset;
+    private final int length;      // list of start/end indices
 
-    public CharSequence getBase() {
-        return baseSeq;
+    @Override
+    public Object getBase() {
+        return baseSeq.getBase();
+    }
+
+    @Override
+    public BasedSequence getBaseSequence() {
+        return baseSeq.getBaseSequence();
     }
 
     public int getStartOffset() {
@@ -81,11 +87,11 @@ public class SegmentedSequence extends BasedSequenceImpl {
 
         BasedSequence lastSegment = null;
         BasedSequence firstSegment = segments.get(0);
-        CharSequence base = firstSegment.getBase();
+        BasedSequence base = firstSegment.getBaseSequence();
         ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
 
         for (BasedSequence basedSequence : segments) {
-            assert base == basedSequence.getBase() : "all segments must come from the same base sequence";
+            assert base == basedSequence.getBaseSequence() : "all segments must come from the same base sequence";
 
             if (basedSequence instanceof PrefixedSubSequence || basedSequence instanceof SegmentedSequence) {
                 if (lastSegment != null) mergedSequences.add(lastSegment);
@@ -115,14 +121,14 @@ public class SegmentedSequence extends BasedSequenceImpl {
     }
 
     private SegmentedSequence(List<BasedSequence> segments) {
-        this.baseSeq = segments.get(0).getBase();
+        this.baseSeq = segments.get(0).getBaseSequence();
 
         int length = 0;
 
-        CharSequence base = segments.size() > 0 ? segments.get(0).getBase() : null;
+        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : null;
 
         for (BasedSequence basedSequence : segments) {
-            assert base == basedSequence.getBase() : "all segments must come from the same base sequence";
+            assert base == basedSequence.getBaseSequence() : "all segments must come from the same base sequence";
             assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start=" + basedSequence.getStartOffset() + ", length=" + length;
             length += basedSequence.length();
         }
@@ -159,7 +165,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
         }
     }
 
-    private SegmentedSequence(CharSequence baseSeq, int[] baseOffsets, int baseStartOffset, char[] nonBaseChars, int length) {
+    private SegmentedSequence(BasedSequence baseSeq, int[] baseOffsets, int baseStartOffset, char[] nonBaseChars, int length) {
         this.baseSeq = baseSeq;
         this.baseOffsets = baseOffsets;
         this.baseStartOffset = baseStartOffset;
@@ -201,7 +207,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
             throw new StringIndexOutOfBoundsException("String index out of range: " + end);
         }
 
-        return new SubSequence(baseSeq, start, end);
+        return baseSeq.baseSubSequence(start, end);
     }
 
     @Override
@@ -217,11 +223,7 @@ public class SegmentedSequence extends BasedSequenceImpl {
         if (start == 0 && end == length) {
             return this;
         } else {
-            if (nonBaseChars != null) {
-                return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
-            } else {
-                return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
-            }
+            return new SegmentedSequence(baseSeq, baseOffsets, baseStartOffset + start, nonBaseChars, end - start);
         }
     }
 

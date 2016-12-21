@@ -20,7 +20,7 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.DataSet;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubCharSequence;
+import com.vladsch.flexmark.util.sequence.CharSubSequence;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -206,7 +206,7 @@ public class Parser implements IParse {
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
-        Document document = documentParser.parse(new SubCharSequence(input));
+        Document document = documentParser.parse(CharSubSequence.of(input));
         return postProcess(document);
     }
 

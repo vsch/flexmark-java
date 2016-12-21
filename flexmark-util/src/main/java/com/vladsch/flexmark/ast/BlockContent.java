@@ -17,7 +17,7 @@ public class BlockContent {
     }
 
     public BasedSequence getSpanningChars() {
-        return lines.size() > 0 ? new SubSequence(lines.get(0).getBase(), lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : BasedSequence.NULL;
+        return lines.size() > 0 ? lines.get(0).baseSubSequence(lines.get(0).getStartOffset(), lines.get(lines.size() - 1).getEndOffset()) : BasedSequence.NULL;
     }
 
     public List<BasedSequence> getLines() {
@@ -29,7 +29,7 @@ public class BlockContent {
     }
 
     public int getLineCount() {
-        return lines.size() == 0 ? 0 : lines.size();
+        return lines.size();
     }
 
     public BlockContent() {

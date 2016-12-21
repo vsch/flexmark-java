@@ -7,7 +7,8 @@ flexmark-java
 
 - [This Release To Do List](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
-- [0.7.1](#071)
+- [0.9.0](#090)
+- [0.8.0](#080)
 - [0.7.0](#070)
 - [0.6.1](#061)
 - [0.6.0](#060)
@@ -78,7 +79,7 @@ Next Release To Do List
 - [ ] Add: Latex extension
 
 - [x] Change: complete parser profiles for variations within a family
-      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). 
+      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
       - [x] CommonMark
           - [x] GitHub Comments
           - [ ] League/CommonMark
@@ -94,7 +95,47 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
-          
+
+0.9.0
+-----
+
+- API Change: clean up of sequences in flexmark-java-util was long overdue. The `BasedSequence`
+  interface has evolved but not existing uses were updated. The following changes allow
+  optimization of `BasedSequence.subSequence()` and `BasedSequence.baseSubSequence()` depending
+  on implementation particulars.
+
+    Fastest parsing results will be achieved if the sequence passed to the parser is a
+    `CharSubSequence`.
+
+    - Add: `CharSubSequence` implementation of `BasedSequence`
+
+        - uses `char[]` as the base that it accesses directly and creates `subSequence` and
+          `baseSubSequence` instances that also access it directly eliminating the nested calls
+          through `charAt`
+
+        - converts `\0` to `\uFFFD` on construction eliminating this test on every character
+          access.
+
+        - in the future has the potential to support fast `toCharArray()` and related
+          optimizations.
+
+    - Remove: all string based `BasedSequence` implementations, now replaced by
+      `CharSubSequence`
+
+    - Change: `BasedSequence.getBase()` now returns `Object` to reflect that the underlying
+      source of text could be anything.
+
+    - Add: `BasedSequence.getBaseSequence()` which returns a `BasedSequence` of the wrapped full
+      source.
+
+    - Change: all sequence classes are now final and constructors private. Use static methods
+      `BasedSequenceImpl.of()` or the same of specific classes to get sequences of source. This
+      allows optimization based on inputs or when a `subSequence()` of the base is required use
+      `BasedSequence.baseSubSequence()` method, which will return an optimized instance where
+      possible.
+
+    - Add: documentation to `BasedSequence` interface
+
 0.8.0
 -----
 

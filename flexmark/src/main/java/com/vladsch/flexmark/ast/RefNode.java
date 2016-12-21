@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class RefNode extends LinkNode implements LinkRefDerived {
     protected BasedSequence textOpeningMarker = BasedSequence.NULL;
@@ -56,7 +55,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public RefNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence referenceOpeningMarker, BasedSequence reference, BasedSequence referenceClosingMarker) {
-        super(new SubSequence(textOpeningMarker.getBase(), textOpeningMarker.getStartOffset(), referenceClosingMarker.getEndOffset()));
+        super(textOpeningMarker.baseSubSequence(textOpeningMarker.getStartOffset(), referenceClosingMarker.getEndOffset()));
         this.textOpeningMarker = textOpeningMarker;
         this.text = text;
         this.textClosingMarker = textClosingMarker;
@@ -76,7 +75,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public RefNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker) {
-        super(new SubSequence(textOpeningMarker.getBase(), textOpeningMarker.getStartOffset(), textClosingMarker.getEndOffset()));
+        super(textOpeningMarker.baseSubSequence(textOpeningMarker.getStartOffset(), textClosingMarker.getEndOffset()));
         this.textOpeningMarker = textOpeningMarker;
         this.text = text;
         this.textClosingMarker = textClosingMarker;
@@ -90,7 +89,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
     }
 
     public RefNode(BasedSequence textOpeningMarker, BasedSequence text, BasedSequence textClosingMarker, BasedSequence referenceOpeningMarker, BasedSequence referenceClosingMarker) {
-        super(new SubSequence(textOpeningMarker.getBase(), textOpeningMarker.getStartOffset(), referenceClosingMarker.getEndOffset()));
+        super(textOpeningMarker.baseSubSequence(textOpeningMarker.getStartOffset(), referenceClosingMarker.getEndOffset()));
         this.textOpeningMarker = textOpeningMarker;
         this.text = text;
         this.textClosingMarker = textClosingMarker;

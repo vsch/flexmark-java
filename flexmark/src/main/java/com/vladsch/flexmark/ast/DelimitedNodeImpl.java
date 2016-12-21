@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
@@ -26,7 +25,8 @@ public abstract class DelimitedNodeImpl extends Node implements DelimitedNode {
     }
 
     public DelimitedNodeImpl(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+        super(openingMarker.baseSubSequence(openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+
         this.openingMarker = openingMarker;
         this.text = text;
         this.closingMarker = closingMarker;

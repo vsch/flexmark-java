@@ -53,17 +53,17 @@ public class Html5Entities {
             try {
                 int codePoint = Integer.parseInt(input.subSequence(matcher.end(), input.length() - 1).toString(), base);
                 if (codePoint == 0) {
-                    return new PrefixedSubSequence("\uFFFD", BasedSequence.NULL);
+                    return PrefixedSubSequence.of("\uFFFD", BasedSequence.NULL);
                 }
-                return new PrefixedSubSequence(Arrays.toString(Character.toChars(codePoint)), BasedSequence.NULL);
+                return PrefixedSubSequence.of(Arrays.toString(Character.toChars(codePoint)), BasedSequence.NULL);
             } catch (IllegalArgumentException e) {
-                return new PrefixedSubSequence("\uFFFD", BasedSequence.NULL);
+                return PrefixedSubSequence.of("\uFFFD", BasedSequence.NULL);
             }
         } else {
             String name = input.subSequence(1, input.length() - 1).toString();
             String s = NAMED_CHARACTER_REFERENCES.get(name);
             if (s != null) {
-                return new PrefixedSubSequence(s, BasedSequence.NULL);
+                return PrefixedSubSequence.of(s, BasedSequence.NULL);
             } else {
                 return input;
             }

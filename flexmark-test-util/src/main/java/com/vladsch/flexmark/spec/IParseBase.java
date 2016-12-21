@@ -20,7 +20,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubCharSequence;
+import com.vladsch.flexmark.util.sequence.CharSubSequence;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +39,7 @@ public abstract class IParseBase implements IParse {
 
     @Override
     public Node parse(String input) {
-        return parse(new SubCharSequence(input));
+        return parse(CharSubSequence.of(input));
     }
 
     @Override
@@ -60,7 +60,7 @@ public abstract class IParseBase implements IParse {
             if (charsRead < buffer.length) break;
         }
 
-        BasedSequence source = new SubCharSequence(file.toString());
+        BasedSequence source = CharSubSequence.of(file.toString());
         return parse(source);
     }
 

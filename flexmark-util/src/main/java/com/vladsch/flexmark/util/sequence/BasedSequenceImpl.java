@@ -33,22 +33,6 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return visibleSpacesMap.containsKey(c);
     }
 
-    public static BasedSequence of(CharSequence charSequence) {
-        if (charSequence instanceof String) return new SubCharSequence((String) charSequence);
-        else return of(charSequence, 0, charSequence.length());
-    }
-
-    public static BasedSequence of(CharSequence charSequence, int startOffset) {
-        if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset);
-        else return of(charSequence, startOffset, charSequence.length());
-    }
-
-    public static BasedSequence of(CharSequence charSequence, int startOffset, int endOffset) {
-        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence.subSequence(startOffset, endOffset);
-        else if (charSequence instanceof String) return new SubCharSequence((String) charSequence).subSequence(startOffset, endOffset);
-        else return new SubSequence(charSequence, startOffset, endOffset);
-    }
-
     @Override
     public BasedSequence endSequence(int start, int end) {
         int length = length();
@@ -545,7 +529,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int countLeadingNot(char c, int fromIndex)                { return countNotChars(c, fromIndex, length()); }
     @Override public int countLeading(char c, int fromIndex, int endIndex)     { return countChars(c, fromIndex, endIndex); }
     @Override public int countLeadingNot(char c, int fromIndex, int endIndex)  { return countNotChars(c, fromIndex, endIndex); }
-    
+
     @Override public int countTrailing(char c)                                  { return countCharsReversed(c, 0, length()); }
     @Override public int countTrailingNot(char c)                               { return countNotCharsReversed(c, 0, length()); }
     @Override public int countTrailing(char c, int fromIndex)                  { return countCharsReversed(c, 0, fromIndex); }
@@ -557,7 +541,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int countNotChars(char c)                                  { return countNotChars(c, 0, length()); }
     @Override public int countChars(char c, int fromIndex)                     { return countChars(c, fromIndex, length()); }
     @Override public int countNotChars(char c, int fromIndex)                  { return countNotChars(c, fromIndex, length()); }
-    
+
     @Override public int countCharsReversed(char c)                             { return countCharsReversed(c, 0, length()); }
     @Override public int countNotCharsReversed(char c)                          { return countNotCharsReversed(c, 0, length()); }
     @Override public int countCharsReversed(char c, int fromIndex)             { return countCharsReversed(c, 0, fromIndex); }
@@ -603,7 +587,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int countLeadingNot(CharSequence chars, int fromIndex)                { return countNotChars(chars, fromIndex, length()); }
     @Override public int countLeading(CharSequence chars, int fromIndex, int endIndex)     { return countChars(chars, fromIndex, endIndex); }
     @Override public int countLeadingNot(CharSequence chars, int fromIndex, int endIndex)  { return countNotChars(chars, fromIndex, endIndex); }
-    
+
     @Override public int countTrailing(CharSequence chars)                                  { return countCharsReversed(chars, 0, length()); }
     @Override public int countTrailingNot(CharSequence chars)                               { return countNotCharsReversed(chars, 0, length()); }
     @Override public int countTrailing(CharSequence chars, int fromIndex)                  { return countCharsReversed(chars, 0, fromIndex); }
@@ -615,7 +599,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override public int countNotChars(CharSequence chars)                                  { return countNotChars(chars, 0, length()); }
     @Override public int countChars(CharSequence chars, int fromIndex)                     { return countChars(chars, fromIndex, length()); }
     @Override public int countNotChars(CharSequence chars, int fromIndex)                  { return countNotChars(chars, fromIndex, length()); }
-    
+
     @Override public int countCharsReversed(CharSequence chars)                             { return countCharsReversed(chars, 0, length()); }
     @Override public int countNotCharsReversed(CharSequence chars)                          { return countNotCharsReversed(chars, 0, length()); }
     @Override public int countCharsReversed(CharSequence chars, int fromIndex)             { return countCharsReversed(chars, 0, fromIndex); }
@@ -836,7 +820,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public final MappedSequence toMapped(CharMapper mapper) {
-        return new MappedSequence(this, mapper);
+        return MappedSequence.of(mapper, this);
     }
 
     @Override
@@ -1022,8 +1006,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        boolean includeDelimParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelims = !includeDelimParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
         ArrayList<BasedSequence> items = new ArrayList<>();
@@ -1036,11 +1020,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 if (pos < 0) break;
 
                 if (lastPos < pos || !skipEmpty) {
-                    BasedSequence item = subSequence(lastPos, pos + includeDelims);
+                    BasedSequence item = subSequence(lastPos, pos + includeDelimiter);
                     if (trimParts) item = item.trim(trimChars);
                     if (!item.isEmpty() || !skipEmpty) {
                         items.add(item);
-                        if (includeDelimParts) {
+                        if (includeDelimiterParts) {
                             items.add(subSequence(pos, pos + 1));
                         }
                         if (items.size() >= limit - 1) {
@@ -1068,8 +1052,8 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
-        boolean includeDelimParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
-        int includeDelims = !includeDelimParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
+        boolean includeDelimiterParts = (flags & SPLIT_INCLUDE_DELIM_PARTS) != 0;
+        int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
         ArrayList<BasedSequence> items = new ArrayList<>();
@@ -1082,12 +1066,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 if (pos < 0) break;
 
                 if (lastPos < pos || !skipEmpty) {
-                    BasedSequence item = subSequence(lastPos, pos + delimiter.length());
+                    BasedSequence item = subSequence(lastPos, pos + includeDelimiter);
                     if (trimParts) item = item.trim(trimChars);
                     if (!item.isEmpty() || !skipEmpty) {
                         items.add(item);
-                        if (includeDelimParts) {
-                            items.add(subSequence(pos, pos + 1));
+                        if (includeDelimiterParts) {
+                            items.add(subSequence(pos, pos + delimiter.length()));
                         }
                         if (items.size() >= limit - 1) {
                             lastPos = pos + 1;
@@ -1108,4 +1092,23 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         }
         return items;
     }
+
+    public static BasedSequence of(CharSequence charSequence) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence);
+        else if (charSequence instanceof String) return CharSubSequence.of(charSequence);
+        else return SubSequence.of(charSequence);
+    }
+
+    public static BasedSequence of(CharSequence charSequence, int start) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start);
+        else if (charSequence instanceof String) return CharSubSequence.of(charSequence, start);
+        else return SubSequence.of(charSequence, start);
+    }
+
+    public static BasedSequence of(CharSequence charSequence, int start, int end) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start, end);
+        else if (charSequence instanceof String) return CharSubSequence.of(charSequence, start, end);
+        else return SubSequence.of(charSequence, start, end);
+    }
+
 }

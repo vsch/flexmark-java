@@ -583,7 +583,6 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
         if (!node.isDefined()) {
             // empty ref, we treat it as text
-            assert !node.isDefined();
             html.text(node.getChars().unescape());
         } else {
             if (!context.isDoNotRenderLinks()) {

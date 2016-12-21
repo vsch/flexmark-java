@@ -132,7 +132,8 @@ public class HtmlWriter {
     public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             int endOffset = sourceText.getEndOffset();
-            CharSequence base = sourceText.getBase();
+            BasedSequence base = sourceText.getBaseSequence();
+
             while (endOffset < base.length()) {
                 char c = base.charAt(endOffset);
                 if (c != ' ' && c != '\t') break;

@@ -21,7 +21,7 @@ public class Range {
     //public TextRange asTextRange() {
     //    return new TextRange(myStart, myEnd);
     //}
-    
+
     public Range(int start, int end) {
         myStart = start;
         myEnd = end;
@@ -45,7 +45,7 @@ public class Range {
     }
 
     public BasedSequence subSequence(CharSequence charSequence) {
-        return new SubSequence(charSequence, myStart, myEnd);
+        return BasedSequenceImpl.of(charSequence, myStart, myEnd);
     }
 
     public boolean contains(int index) {
@@ -157,11 +157,11 @@ public class Range {
     public int getSpan() {
         return myEnd - myStart;
     }
-    
+
     public int length() {
         return myEnd - myStart;
     }
-    
+
     public boolean isNull() {
         return this == NULL;
     }

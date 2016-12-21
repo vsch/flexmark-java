@@ -26,7 +26,7 @@ public class AutoLink extends LinkNode {
     }
 
     public AutoLink(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-        super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+        super(openingMarker.baseSubSequence(openingMarker.getStartOffset(), closingMarker.getEndOffset()));
         this.openingMarker = openingMarker;
         this.text = text;
         this.closingMarker = closingMarker;

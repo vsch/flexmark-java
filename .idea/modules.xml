@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark/flexmark.iml" filepath="$PROJECT_DIR$/flexmark/flexmark.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" filepath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" filepath="$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" />
@@ -27,6 +28,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" filepath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" filepath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" filepath="$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" filepath="$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" filepath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-util/flexmark-util.iml" filepath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />

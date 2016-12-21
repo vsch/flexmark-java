@@ -4,18 +4,19 @@ package com.vladsch.flexmark.util.sequence;
  * A CharSequence that references original char sequence, maps '\0' to '\uFFFD' and is prefixed with a fixed string
  * a subSequence() returns a sub-sequence from the original base sequence, possibly with a prefix if it falls in range
  */
-public class PrefixedSubSequence extends BasedSequenceImpl {
+public final class PrefixedSubSequence extends BasedSequenceImpl {
     private final String prefix;
     private final int prefixLength;
     private final BasedSequence base;
 
-    public PrefixedSubSequence(String prefix, BasedSequence charSequence) {
-        this(prefix, charSequence, 0, charSequence.length());
+    @Override
+    public Object getBase() {
+        return base.getBase();
     }
 
     @Override
-    public CharSequence getBase() {
-        return base.getBase();
+    public BasedSequence getBaseSequence() {
+        return base.getBaseSequence();
     }
 
     @Override
@@ -35,17 +36,25 @@ public class PrefixedSubSequence extends BasedSequenceImpl {
 
     @Override
     public BasedSequence baseSubSequence(int start, int end) {
-        return null;
-    }
-
-    public PrefixedSubSequence(String prefix, BasedSequence baseSeq, int start, int end) {
-        this(prefix, baseSeq, start, end, true);
+        return base.baseSubSequence(start, end);
     }
 
     private PrefixedSubSequence(String prefix, BasedSequence baseSeq, int start, int end, boolean replaceChar) {
         this.prefix = replaceChar ? prefix.replace('\0', '\uFFFD') : prefix;
         this.prefixLength = prefix.length();
-        this.base = baseSeq.subSequence(start, end);
+        this.base = of(baseSeq, start, end);
+    }
+
+    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq) {
+        return of(prefix, BasedSequenceImpl.of(baseSeq), 0, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq, int start) {
+        return of(prefix, BasedSequenceImpl.of(baseSeq), start, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq, int start, int end) {
+        return new PrefixedSubSequence(prefix, BasedSequenceImpl.of(baseSeq), start, end, true);
     }
 
     @Override

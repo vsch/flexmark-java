@@ -18,10 +18,8 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -161,7 +159,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         public UpperCaseNode(BasedSequence openingMarker, BasedSequence text, BasedSequence closingMarker) {
-            super(new SubSequence(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset()));
+            super(openingMarker.baseSubSequence(openingMarker.getStartOffset(), closingMarker.getEndOffset()));
             this.openingMarker = openingMarker;
             this.text = text;
             this.closingMarker = closingMarker;
@@ -214,7 +212,6 @@ public class DelimiterProcessorTest extends RenderingTestCase {
                     UpperCaseNodeRenderer.this.render(node, context, html);
                 }
             }));
-
             return set;
         }
 

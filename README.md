@@ -18,6 +18,19 @@ Motivation for this project was the need to replace [pegdown] parser in my [Mark
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
+### Changes Forced by Downgrade to Java 7
+
+I tried to keep all changes caused by the downgrade in Java language level as mechanical as
+possible to make it easier to migrate. The biggest change is the lack of lambda syntax and no
+static extension methods in interfaces.
+
+- All VISIT_HANDLERS in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
+  mechanical search and replace from `.VISIT_HANDLERS` to `Ext.VISIT_HANDLERS` should take care
+  of the change
+
+- Lack of Lambda syntax will only have an effect if your project language level is downgraded.
+  Otherwise, you can keep using lambda syntax.
+
 ### Requirements
 
 * Java 7 or above
@@ -30,13 +43,43 @@ than ideal and for pathological input either hangs or practically hangs during p
 ### Changes from commonmark-java project
 
 - The project is on Maven: `com.vladsch.flexmark`
-- Java compatibility now 1.7
+- Java compatibility back to 1.7
 - Android compatibility to be added
 - No attempt is made to keep API backward compatibility to the original project.
 
-    The API has stabilized but some changes may be necessary before 1.0 release. 
+    The API has stabilized but some changes may be necessary before 1.0 release.
 
-#### Markdown Processor Family Emulation
+### Pegdown Migration Helper
+
+I added `com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter` class that converts
+pegdown Extensions.* flags to flexmark options and extensions list. Pegdown `Extensions.java` is
+included for convenience.
+
+You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
+can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
+extension flags. `PegdownOptionsAdapter.getFlexmarkOptions()` will return a fresh copy of
+`DataHolder` every time with the options reflecting pegdown extension flags.
+
+```java
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.profiles.pegdown.Extensions;
+import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.options.DataHolder;
+
+public class PegdownOptions {
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+            Extensions.ALL | Extensions.MULTI_LINE_IMAGE_URLS
+    );
+
+    static final Parser PARSER = Parser.builder(OPTIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+
+    // use the PARSER to parse and RENDERER to render with pegdown compatibility
+}
+```
+
+### Markdown Processor Family Emulation
 
 Latest addition was a rewrite of the list parser to better control emulation of other markdown
 processors as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md). Addition of
@@ -132,17 +175,17 @@ earlier versions of this project.
 |  | :x: | :x: | :x: |
 -->
 
-###### (1) 
+###### (1)
 
 flexmark-java pathological input of 100,000 `[` parses in 68ms, 100,000 `]` in 57ms, 100,000
 nested `[` `]` parse in 55ms
 
-###### (2) 
+###### (2)
 
 commonmark-java pathological input of 100,000 `[` parses in 30ms, 100,000 `]` in 30ms, 100,000
 nested `[` `]` parse in 43ms
 
-###### (3) 
+###### (3)
 
 pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 
@@ -264,7 +307,7 @@ Progress
             Link[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "baz*"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
               Text[1, 9] chars:[1, 9, "foo *bar"]
         ````````````````````````````````
-    
+
     Whitespace is left out. So all spans of text not in a node are implicitly white space.
 
 I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
@@ -368,7 +411,7 @@ Pull requests, issues and comments welcome :smile:. For pull requests:
 * Add tests for new features and bug fixes, preferably in the ast_spec.txt format
 * Follow the existing style to make merging easier, as much as possible: 4 space indent.
 
-* * * 
+* * *
 
 License
 -------
@@ -379,17 +422,16 @@ Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see LICENSE.txt file.
 
+[CommonMark]: http://commonmark.org/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
-[Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [commonmark-java]: https://github.com/atlassian/commonmark-java
-[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
 [flexmark-java wiki]: ../../wiki
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
 [hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[intellij-markdown]: https://github.com/valich/intellij-markdown 
+[intellij-markdown]: https://github.com/valich/intellij-markdown
 [pegdown]: http://pegdown.org
 [spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
@@ -397,7 +439,6 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [Android Studio]: http://developer.android.com/sdk/installing/studio.html
 [AppCode]: http://www.jetbrains.com/objc
 [CLion]: https://www.jetbrains.com/clion
-[CommonMark]: http://commonmark.org/
 [Craig's List]: http://montreal.en.craigslist.ca/
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub]: https://github.com/vsch/laravel-translation-manager
@@ -410,6 +451,7 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [Kramdown]: http://kramdown.gettalong.org/
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
+[Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
 [MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
 [PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
 [PhpStorm]: http://www.jetbrains.com/phpstorm
@@ -421,6 +463,7 @@ BSD (2-clause) licensed, see LICENSE.txt file.
 [autolink-java]: https://github.com/robinst/autolink-java
 [commonmark.js]: https://github.com/jgm/commonmark.js
 [flexmark-java]: https://github.com/vsch/flexmark-java
+[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
 [gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
 [idea-markdown]: https://github.com/nicoulaj/idea-markdown
 [nicoulaj]: https://github.com/nicoulaj

@@ -59,7 +59,7 @@ public class TocOptions {
         this.rawTitle = title == null ? "" : title;
         this.rawTitleLevel = titleLevel;
         if (!rawTitle.isEmpty()) {
-            int markers = new SubSequence(rawTitle.trim()).countLeading("#");
+            int markers = SubSequence.of(rawTitle.trim()).countLeading("#");
             if (markers >= 1 && markers <= 6) titleLevel = markers;
             this.title = rawTitle.substring(markers).trim();
         } else {

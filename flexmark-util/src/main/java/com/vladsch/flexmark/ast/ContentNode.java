@@ -51,7 +51,7 @@ public abstract class ContentNode extends Node implements Content {
     }
 
     private static BasedSequence getSpanningChars(List<BasedSequence> lineSegments) {
-        return lineSegments.size() > 0 ? new SubSequence(lineSegments.get(0).getBase(), lineSegments.get(0).getStartOffset(), lineSegments.get(lineSegments.size() - 1).getEndOffset()) : BasedSequence.NULL;
+        return lineSegments.isEmpty() ? BasedSequence.NULL : lineSegments.get(0).baseSubSequence(lineSegments.get(0).getStartOffset(), lineSegments.get(lineSegments.size() - 1).getEndOffset());
     }
 
     @Override

@@ -21,14 +21,13 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
-import com.vladsch.flexmark.util.sequence.SubCharSequence;
+import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class DocumentParser implements ParserState {
 
@@ -402,7 +401,7 @@ public class DocumentParser implements ParserState {
      * @return Document node of the resulting AST
      */
     public Document parse(CharSequence source) {
-        BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : new SubSequence(source);
+        BasedSequence input = source instanceof BasedSequence ? (BasedSequence) source : SubSequence.of(source);
         int lineStart = 0;
         int lineBreak;
         int lineEOL;
@@ -461,7 +460,7 @@ public class DocumentParser implements ParserState {
             if (charsRead < buffer.length) break;
         }
 
-        CharSequence source = new SubCharSequence(file.toString());
+        CharSequence source = CharSubSequence.of(file.toString());
         return parse(source);
     }
 
@@ -732,7 +731,7 @@ public class DocumentParser implements ParserState {
                 sb.append(' ');
             }
             //sb.append(rest);
-            content = new PrefixedSubSequence(sb.toString(), rest);
+            content = PrefixedSubSequence.of(sb.toString(), rest);
         }
 
         //getActiveBlockParser().addLine(content, content.baseSubSequence(lineEOL, lineEnd));
