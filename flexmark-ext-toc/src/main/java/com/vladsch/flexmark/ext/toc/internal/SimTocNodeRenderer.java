@@ -88,7 +88,16 @@ public class SimTocNodeRenderer implements NodeRenderer {
 
     private void renderTocHeaders(NodeRendererContext context, HtmlWriter html, Node node, List<Heading> headings, TocOptions options) {
         List<Heading> filteredHeadings = TocUtils.filteredHeadings(headings, options);
-        List<String> headingTexts = TocUtils.htmlHeaderTexts(context, filteredHeadings, options);
-        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? BasedSequence.NULL : node.getChars(), filteredHeadings, headingTexts, options);
+        List<Heading> sortedHeadings = sort(context, filteredHeadings, options);
+        List<String> headingTexts = TocUtils.htmlHeaderTexts(context, sortedHeadings, options);
+        TocUtils.renderHtmlToc(html, context.getHtmlOptions().sourcePositionAttribute.isEmpty() ? BasedSequence.NULL : node.getChars(), sortedHeadings, headingTexts, options);
     }
+
+    private List<Heading> sort(NodeRendererContext context, List<Heading> filteredHeadings, TocOptions options) {
+        if (options.sortAlpha) {
+            return TocUtils.sortAlpha(context, filteredHeadings, options);
+        }
+        return filteredHeadings;
+    }
+
 }

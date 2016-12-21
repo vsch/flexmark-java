@@ -26,6 +26,7 @@ public class TocOptions {
     public static final String DEFAULT_TITLE = "Table of Contents";
     public static final int DEFAULT_TITLE_LEVEL = 1;
     public static final int VALID_LEVELS = 0x7e;
+    public static final boolean SORT_ALPHA = false;
 
     public final int levels;
     public final boolean isHtml;
@@ -34,10 +35,11 @@ public class TocOptions {
     public final int titleLevel;
     public final String title;
     public final int rawTitleLevel;
+    public final boolean sortAlpha;
     public final String rawTitle;
 
     public TocOptions() {
-        this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE);
+        this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, SORT_ALPHA);
     }
 
     public TocOptions(DataHolder options) {
@@ -47,17 +49,23 @@ public class TocOptions {
                 options.get(SimTocExtension.IS_TEXT_ONLY),
                 options.get(SimTocExtension.IS_NUMBERED),
                 options.get(SimTocExtension.TITLE_LEVEL),
-                options.get(SimTocExtension.TITLE)
+                options.get(SimTocExtension.TITLE),
+                options.get(SimTocExtension.IS_SORT_ALPHA)
         );
     }
 
     public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, int titleLevel, String title) {
+        this(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, SORT_ALPHA);
+    }
+
+    public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, int titleLevel, String title, boolean sortAlpha) {
         this.levels = levels & VALID_LEVELS;
         this.isHtml = isHtml;
         this.isTextOnly = isTextOnly;
         this.isNumbered = isNumbered;
         this.rawTitle = title == null ? "" : title;
         this.rawTitleLevel = titleLevel;
+        this.sortAlpha = sortAlpha;
         if (!rawTitle.isEmpty()) {
             int markers = SubSequence.of(rawTitle.trim()).countLeading("#");
             if (markers >= 1 && markers <= 6) titleLevel = markers;
@@ -73,19 +81,20 @@ public class TocOptions {
     }
 
     // @Formatter:off
-    public TocOptions withLevels(int levels)                { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withIsHtml(boolean isHtml)            { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withIsTextOnly(boolean isTextOnly)    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withIsNumbered(boolean isNumbered)    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withTitleLevel(int titleLevel)        { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withTitle( String title)              { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withRawTitleLevel(int titleLevel)     { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
-    public TocOptions withRawTitle( String title)           { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title); }
+    public TocOptions withLevels(int levels)                { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withIsHtml(boolean isHtml)            { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withIsTextOnly(boolean isTextOnly)    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withIsNumbered(boolean isNumbered)    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withTitleLevel(int titleLevel)        { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withTitle( String title)              { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withRawTitleLevel(int titleLevel)     { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withRawTitle( String title)           { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
+    public TocOptions withIsSortAlpha(boolean sortAlpha)    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha); }
     // @Formatter:on
 
     public TocOptions withLevelList(int... levelList) {
         int levels = getLevels(levelList);
-        return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title);
+        return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, sortAlpha);
     }
 
     public static int getLevels(int... levelList) {

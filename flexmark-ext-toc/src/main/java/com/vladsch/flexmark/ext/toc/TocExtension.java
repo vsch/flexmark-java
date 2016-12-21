@@ -30,6 +30,7 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     public static final DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
     public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
     public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
+    public static final DataKey<Boolean> IS_SORT_ALPHA = new DataKey<>("IS_SORT_ALPHA", false);
 
     private TocExtension() {
     }

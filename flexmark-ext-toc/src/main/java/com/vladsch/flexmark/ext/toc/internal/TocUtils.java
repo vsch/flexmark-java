@@ -14,6 +14,8 @@ import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TocUtils {
@@ -178,16 +180,55 @@ public class TocUtils {
             boolean isRaw;
             // need to skip anchor links but render emphasis
             if (tocOptions.isTextOnly) {
-                headerText = Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
+                headerText = getHeadingText(header);
                 isRaw = false;
             } else {
-                TextCollectingAppendable out = new TextCollectingAppendable();
-                NodeRendererContext subContext = context.getSubContext(out, false);
-                subContext.doNotRenderLinks();
-                subContext.renderChildren(header);
+                TextCollectingAppendable out = getHeadingContent(context, header);
                 headerText = out.getHtml();
             }
             headerTexts.add(headerText);
+        }
+
+        return headerTexts;
+    }
+
+    private static String getHeadingText(Heading header) {
+        return Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
+    }
+
+    private static TextCollectingAppendable getHeadingContent(NodeRendererContext context, Heading header) {
+        TextCollectingAppendable out = new TextCollectingAppendable();
+        NodeRendererContext subContext = context.getSubContext(out, false);
+        subContext.doNotRenderLinks();
+        subContext.renderChildren(header);
+        return out;
+    }
+
+    public static List<Heading> sortAlpha(final NodeRendererContext context, List<Heading> headings, TocOptions tocOptions) {
+        List<Heading> headerTexts = new ArrayList<>(headings.size());
+        headerTexts.addAll(headings);
+
+        if (tocOptions.isTextOnly) {
+
+            Collections.sort(headerTexts, new Comparator<Heading>() {
+                @Override
+                public int compare(Heading heading1, Heading heading2) {
+                    String header1Text = getHeadingText(heading1);
+                    String header2Text = getHeadingText(heading2);
+                    return header1Text.compareTo(header2Text);
+                }
+            });
+
+        } else {
+
+            Collections.sort(headerTexts, new Comparator<Heading>() {
+                @Override
+                public int compare(Heading heading1, Heading heading2) {
+                    String header1Text = getHeadingContent(context, heading1).getHtml();
+                    String header2Text = getHeadingContent(context, heading2).getHtml();
+                    return header1Text.compareTo(header2Text);
+                }
+            });
         }
 
         return headerTexts;
