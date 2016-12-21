@@ -53,7 +53,9 @@ static extension methods in interfaces.
 
 I added `com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter` class that converts
 pegdown Extensions.* flags to flexmark options and extensions list. Pegdown `Extensions.java` is
-included for convenience.
+included for convenience. These are located in `flexmark-profile-pegdown` module, which will be
+added to Maven on the next release. For now you can grab the source from this repo:
+[PegdownOptionsAdapter.java] and if you need it [Extensions.java]
 
 You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
 can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
@@ -423,8 +425,10 @@ Copyright (c) 2016, Vladimir Schneider,
 BSD (2-clause) licensed, see LICENSE.txt file.
 
 [CommonMark]: http://commonmark.org/
+[Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
+[PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [commonmark-java]: https://github.com/atlassian/commonmark-java
