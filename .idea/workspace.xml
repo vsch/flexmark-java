@@ -13,101 +13,38 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/src/ImageRefVisitor.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownOptions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/pom.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/javadoc/overview.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/test/java/com/vladsch/flexmark/profiles/pegdown/ComboPegdownProfileSpecTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/test/java/com/vladsch/flexmark/profiles/pegdown/ExtPegdownProfileTestSuite.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-profile-pegdown/src/test/resources/pegdown_profile_ast_spec.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_vladsch_flexmark_flexmark_ext_wikilink_0_7_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/.travis.sh" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/app/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/app/src/androidTest/java/com/vladsch/flexmark/android/test/AndroidSupportTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/app/src/main/AndroidManifest.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/build.gradle" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/flexmark-android-test.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/gradle/wrapper/gradle-wrapper.jar" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/gradle/wrapper/gradle-wrapper.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/gradlew" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/gradlew.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-android-test/settings.gradle" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubCharSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="update readme">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/FormattingAppendableImplTest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/JiraConverterTestSuite.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/YouTrackConverterTestSuite.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormatter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/vlad.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/vlad.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/All_Tests.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/All_Tests.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VERSION.md" afterPath="$PROJECT_DIR$/VERSION.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" afterPath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" afterPath="$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" afterPath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-autolink/flexmark-ext-autolink.iml" afterPath="$PROJECT_DIR$/flexmark-ext-autolink/flexmark-ext-autolink.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" afterPath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/Emoji.java" afterPath="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/Emoji.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacter.java" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/Footnote.java" afterPath="$PROJECT_DIR$/flexmark-ext-footnotes/src/main/java/com/vladsch/flexmark/ext/footnotes/Footnote.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/Strikethrough.java" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/Strikethrough.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" afterPath="$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableColumnSeparator.java" afterPath="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableColumnSeparator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" afterPath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicQuotes.java" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicQuotes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" afterPath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/Zzzzzz.java" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/src/main/java/com/vladsch/flexmark/ext/zzzzzz/Zzzzzz.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" afterPath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" afterPath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.iml" afterPath="$PROJECT_DIR$/flexmark-java.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" afterPath="$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" afterPath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" afterPath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/spec/IParseBase.java" afterPath="$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/spec/IParseBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" afterPath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/BlockContent.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/BlockContent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/ContentNode.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/ContentNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Escaping.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Escaping.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Html5Entities.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Html5Entities.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/MappedSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/MappedSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/PrefixedSubSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/PrefixedSubSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/Range.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/Range.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SegmentedSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SegmentedSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/BasedSequenceImplTest.java" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/BasedSequenceImplTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/flexmark.iml" afterPath="$PROJECT_DIR$/flexmark/flexmark.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/AutoLink.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/AutoLink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/DelimitedNodeImpl.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/DelimitedNodeImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/MailLink.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/MailLink.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/RefNode.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/RefNode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/Text.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/Text.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/TextBase.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/TextBase.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/DocumentParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/DocumentParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimiterProcessorTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimiterProcessorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/PrefixedSubSequenceTest.java" afterPath="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/PrefixedSubSequenceTest.java" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -185,12 +122,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="VERSION.md" pinned="true" current-in-tab="false">
+      <file leaf-file-name="VERSION.md" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/VERSION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="1180">
-                <caret line="127" column="6" lean-forward="false" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
+              <first_editor relative-caret-position="442">
+                <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -198,57 +135,61 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PegdownOptionsAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java">
+      <file leaf-file-name="FormattingAppendable.java" pinned="true" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4284">
-              <caret line="252" column="28" lean-forward="false" selection-start-line="252" selection-start-column="28" selection-end-line="252" selection-end-column="28" />
+            <state relative-caret-position="1802">
+              <caret line="106" column="53" lean-forward="false" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MutableDataSet.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/MutableDataSet.java">
+      <file leaf-file-name="FormattingAppendableImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
+            <state relative-caret-position="2516">
+              <caret line="148" column="49" lean-forward="false" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PegdownOptions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownOptions.java">
+      <file leaf-file-name="CharSubSequence.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="2380">
+              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="595">
-                <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-                <folding>
-                  <marker date="1482289668000" expanded="true" signature="3329:3589" ph="..." />
-                  <marker date="1482289668000" expanded="true" signature="11845:12007" ph="..." />
-                </folding>
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="BasedSequenceImpl.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18649">
+              <caret line="1097" column="0" lean-forward="false" selection-start-line="1097" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TocVisitorExt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitorExt.java">
+      <file leaf-file-name="FormattingAppendableImplTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
+            <state relative-caret-position="4947">
+              <caret line="291" column="25" lean-forward="false" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="918">
+              <caret line="54" column="43" lean-forward="false" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -261,21 +202,17 @@
       <list>
         <option value="HTML File" />
         <option value="flexmark-java extension" />
-        <option value="JUnit4 Test Class" />
         <option value="Enum" />
         <option value="Markdown" />
-        <option value="Interface" />
         <option value="Markdown Issue" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>HeaderId</find>
-      <find>HeaderIdGeneratorFactory</find>
-      <find>$</find>
-      <find>looseWhenHasTrailingBlankLine</find>
       <find>setBulletMismatchToNewList</find>
       <find>jira</find>
       <find>Soft</find>
@@ -302,9 +239,12 @@
       <find>SubSequence.of(openingMarker.getBase(), openingMarker.getStartOffset(), closingMarker.getEndOffset())</find>
       <find>SubSequence.of\(([a-zA-z]+).getBase\(\), ([a-zA-z]+).getStartOffset\(\), ([a-zA-z]+).getEndOffset\(\)\)</find>
       <find>&lt;content url=&quot;file://$MODULE_DIR$&quot;&gt;</find>
+      <find>blank</find>
+      <find>buffer</find>
+      <find>.setIndentPrefix\(&quot;\s*&quot;\);</find>
+      <find>myModCount</find>
     </findStrings>
     <replaceStrings>
-      <replace>private final</replace>
       <replace>public final</replace>
       <replace>$1 final</replace>
       <replace>$1 static final</replace>
@@ -334,6 +274,7 @@
       <replace>return lineSegments.isEmpty() ? BasedSequence.NULL : lineSegments.get(0).baseSubSequence(lineSegments.get(0).getStartOffset(), lineSegments.get(lineSegments.size() - 1).getEndOffset());</replace>
       <replace>openingMarker.baseSubSequence(openingMarker.getStartOffset(), closingMarker.getEndOffset())</replace>
       <replace>$1.baseSubSequence($2.getStartOffset(), $3.getEndOffset())</replace>
+      <replace>.setIndentPrefix(indent);</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/flexmark</dir>
@@ -344,7 +285,7 @@
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_COMMON_BRANCH" value="flexmark-java" />
+    <option name="RECENT_COMMON_BRANCH" value="master" />
     <option name="PUSH_TAGS">
       <GitPushTagMode />
     </option>
@@ -382,13 +323,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/BasedSequenceImplTest.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharBasedSequence.java" />
-        <option value="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-youtrack-converter/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-ext-tables/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/DataKey.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/ClassifyingNodeTracker.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/NodeClassifierVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/dependency/DependencyHandler.java" />
@@ -417,8 +351,6 @@
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/HeadingParser.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/JiraConverterExtension.java" />
-        <option value="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableJiraRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/internal/TypographicNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitor.java" />
@@ -546,7 +478,6 @@
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/src/main/java/com/vladsch/flexmark/ext/emoji/Emoji.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SegmentedSequence.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacter.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/PrefixedSubSequence.java" />
@@ -558,8 +489,6 @@
         <option value="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/src/ImageRefVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/RefNode.java" />
-        <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md" />
-        <option value="$PROJECT_DIR$/VERSION.md" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java" />
         <option value="$PROJECT_DIR$/.idea/modules.xml" />
         <option value="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java" />
@@ -582,7 +511,19 @@
         <option value="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" />
         <option value="$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java" />
         <option value="$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownOptions.java" />
+        <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
+        <option value="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
+        <option value="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormater.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormatter.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
+        <option value="$PROJECT_DIR$/VERSION.md" />
       </list>
     </option>
   </component>
@@ -771,9 +712,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -796,7 +736,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-profile-pegdown" />
+              <option name="myItemId" value="flexmark-util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -810,17 +750,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-profile-pegdown" />
+              <option name="myItemId" value="flexmark-util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -832,7 +768,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-profile-pegdown" />
+              <option name="myItemId" value="flexmark-util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -854,7 +790,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-profile-pegdown" />
+              <option name="myItemId" value="flexmark-util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -870,7 +806,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pegdown" />
+              <option name="myItemId" value="flexmark" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -884,97 +820,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java-samples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java-samples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="samples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-ext-toc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-ext-toc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-ext-toc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemId" value="flexmark-util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -990,12 +836,55 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="toc" />
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sequence" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1003,7 +892,7 @@
     <property name="editor.config.accepted" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA&#10;Markdown&#10;TEXT&#10;HTML" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Markdown" />
+    <property name="settings.editor.selected.configurable" value="MissingInActions.Settings.Application" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.1286425" />
     <property name="project.structure.side.proportion" value="0.271615" />
@@ -1034,14 +923,11 @@
     <option name="AUTOSCROLL_FROM_SOURCE" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.vladsch.flexmark.html.renderer" />
-      <recent name="com.vladsch.flexmark.internal.util" />
-    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.vladsch.flexmark.util" />
       <recent name="com.vladsch.flexmark.internal.util.options" />
       <recent name="com.vladsch.flexmark.internal.util.sequence" />
       <recent name="com.vladsch.flexmark.internal.util.collection" />
@@ -1061,6 +947,13 @@
       <recent name="com.vladsch.flexmark.internal" />
       <recent name="com.vladsch.flexmark.internal.util" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FlexmarkJavaAssets" />
+      <recent name="$PROJECT_DIR$/flexmark-android-test" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test" />
+      <recent name="$PROJECT_DIR$/flexmark-ext-emoji/src/test/resources" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.vladsch.flexmark.profiles.pegdown.internal" />
       <recent name="com.vladsch.flexmark.profiles.pegdown" />
@@ -1075,78 +968,12 @@
       <recent name="$PROJECT_DIR$/flexmark-test-util/src/main/resources" />
       <recent name="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/FlexmarkJavaAssets" />
-      <recent name="$PROJECT_DIR$/flexmark-android-test" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test" />
-      <recent name="$PROJECT_DIR$/flexmark-ext-emoji/src/test/resources" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.vladsch.flexmark.html.renderer" />
+      <recent name="com.vladsch.flexmark.internal.util" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All Tests">
-    <configuration default="false" name="build (1)" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
-      <module name="flexmark-android-test" />
-      <setting name="path" value="file://$PROJECT_DIR$/flexmark-android-test/build.gradle" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$/flexmark-android-test" />
-      <setting name="debug" value="false" />
-      <method>
-        <option name="Make" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="false" name="BasedSequenceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.vladsch.flexmark.util.sequence.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="flexmark-util" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.vladsch.flexmark.util.sequence" />
-      <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.util.sequence.BasedSequenceImplTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="false" name="DelimiterProcessorTest.asymmetricDelimiter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.vladsch.flexmark.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="flexmark-test-suite" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.vladsch.flexmark.test" />
-      <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.test.DelimiterProcessorTest" />
-      <option name="METHOD_NAME" value="asymmetricDelimiter" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="false" name="PrefixedSubSequenceTest.testSubSequence" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1194,6 +1021,59 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="ComboJiraConverterSpecTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.vladsch.flexmark.jira.converter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="flexmark-test-suite" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.vladsch.flexmark.jira.converter" />
+      <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.jira.converter.ComboJiraConverterSpecTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="[Section &quot;Paragraph Spacing&quot; example 1]" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <envs />
+      <dir value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark" />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="ComboJiraConverterSpecTest (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="com.vladsch.flexmark.jira.converter.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="flexmark-jira-converter" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.vladsch.flexmark.jira.converter" />
+      <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.jira.converter.ComboJiraConverterSpecTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="[Section &quot;Lists&quot; example 5]" />
+      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
       </option>
       <envs />
       <patterns />
@@ -1412,67 +1292,41 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="JiraConverterTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="com.vladsch.flexmark.jira.converter.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="flexmark-jira-converter" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.vladsch.flexmark.jira.converter" />
-      <option name="MAIN_CLASS_NAME" value="com.vladsch.flexmark.jira.converter.JiraConverterTestSuite" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <list size="26">
+    <list size="27">
       <item index="0" class="java.lang.String" itemvalue="JUnit.ComboParserCompatibilitySpecTest" />
       <item index="1" class="java.lang.String" itemvalue="JUnit.ComboMultiMarkdownCompatibilitySpecTest" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.ComboKramdownCompatibilitySpecTest" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.ComboMarkdownCompatibilitySpecTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.All Tests" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ExtAbbreviationTestSuite" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.ExtFootnotesTestSuite" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.ExtTablesTestSuite" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.ExtWikiLinkTestSuite" />
-      <item index="9" class="java.lang.String" itemvalue="JUnit.ExtGfmTablesTestSuite" />
-      <item index="10" class="java.lang.String" itemvalue="JUnit.ExtEmojiTestSuite" />
-      <item index="11" class="java.lang.String" itemvalue="JUnit.ExtGfmTaskListTestSuite" />
-      <item index="12" class="java.lang.String" itemvalue="JUnit.OrderedSetTest" />
-      <item index="13" class="java.lang.String" itemvalue="JUnit.ClassificationBagTest" />
-      <item index="14" class="java.lang.String" itemvalue="JUnit.ComboAnchorLinkSpecTest" />
-      <item index="15" class="java.lang.String" itemvalue="JUnit.ComboTocSpecTest" />
-      <item index="16" class="java.lang.String" itemvalue="JUnit.ExtTocTestSuite" />
-      <item index="17" class="java.lang.String" itemvalue="JUnit.ExtSpecExampleTestSuite" />
-      <item index="18" class="java.lang.String" itemvalue="JUnit.UtilsTestSuite" />
-      <item index="19" class="java.lang.String" itemvalue="JUnit.JiraConverterTestSuite" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ExtAbbreviationTestSuite" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ExtFootnotesTestSuite" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.ExtTablesTestSuite" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.ExtWikiLinkTestSuite" />
+      <item index="8" class="java.lang.String" itemvalue="JUnit.ExtGfmTablesTestSuite" />
+      <item index="9" class="java.lang.String" itemvalue="JUnit.ExtEmojiTestSuite" />
+      <item index="10" class="java.lang.String" itemvalue="JUnit.ExtGfmTaskListTestSuite" />
+      <item index="11" class="java.lang.String" itemvalue="JUnit.OrderedSetTest" />
+      <item index="12" class="java.lang.String" itemvalue="JUnit.ClassificationBagTest" />
+      <item index="13" class="java.lang.String" itemvalue="JUnit.ComboAnchorLinkSpecTest" />
+      <item index="14" class="java.lang.String" itemvalue="JUnit.ComboTocSpecTest" />
+      <item index="15" class="java.lang.String" itemvalue="JUnit.ExtTocTestSuite" />
+      <item index="16" class="java.lang.String" itemvalue="JUnit.ExtSpecExampleTestSuite" />
+      <item index="17" class="java.lang.String" itemvalue="JUnit.UtilsTestSuite" />
+      <item index="18" class="java.lang.String" itemvalue="JUnit.JiraConverterTestSuite" />
+      <item index="19" class="java.lang.String" itemvalue="JUnit.YouTrackConverterTestSuite" />
       <item index="20" class="java.lang.String" itemvalue="JUnit.ExtAsideTestSuite" />
-      <item index="21" class="java.lang.String" itemvalue="Groovy.build (1)" />
-      <item index="22" class="java.lang.String" itemvalue="JUnit.BasedSequenceImplTest" />
-      <item index="23" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter" />
-      <item index="24" class="java.lang.String" itemvalue="JUnit.PrefixedSubSequenceTest.testSubSequence" />
-      <item index="25" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter (1)" />
+      <item index="21" class="java.lang.String" itemvalue="JUnit.All Tests" />
+      <item index="22" class="java.lang.String" itemvalue="JUnit.FormattingAppendableImplTest" />
+      <item index="23" class="java.lang.String" itemvalue="JUnit.PrefixedSubSequenceTest.testSubSequence" />
+      <item index="24" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter (1)" />
+      <item index="25" class="java.lang.String" itemvalue="JUnit.ComboJiraConverterSpecTest" />
+      <item index="26" class="java.lang.String" itemvalue="JUnit.ComboJiraConverterSpecTest (1)" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter (1)" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PrefixedSubSequenceTest.testSubSequence" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.BasedSequenceImplTest" />
-        <item index="4" class="java.lang.String" itemvalue="Groovy.build (1)" />
+      <list size="4">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ComboJiraConverterSpecTest (1)" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ComboJiraConverterSpecTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.DelimiterProcessorTest.asymmetricDelimiter (1)" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.PrefixedSubSequenceTest.testSubSequence" />
       </list>
     </recent_temporary>
   </component>
@@ -1559,20 +1413,6 @@
       <workItem from="1480661474551" duration="2123000" />
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
-    </task>
-    <task id="LOCAL-00102" summary="update modules">
-      <created>1469159464958</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1469159464958</updated>
-    </task>
-    <task id="LOCAL-00103" summary="rework for maven release">
-      <created>1470519856151</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1470519856152</updated>
     </task>
     <task id="LOCAL-00104" summary="update pom versions">
       <created>1470519925782</created>
@@ -1903,7 +1743,21 @@
       <option name="project" value="LOCAL" />
       <updated>1482229889165</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="update readme, add PegdownOptionsAdapter">
+      <created>1482289706074</created>
+      <option name="number" value="00151" />
+      <option name="presentableId" value="LOCAL-00151" />
+      <option name="project" value="LOCAL" />
+      <updated>1482289706075</updated>
+    </task>
+    <task id="LOCAL-00152" summary="update readme">
+      <created>1482290211028</created>
+      <option name="number" value="00152" />
+      <option name="presentableId" value="LOCAL-00152" />
+      <option name="project" value="LOCAL" />
+      <updated>1482290211028</updated>
+    </task>
+    <option name="localTasksCounter" value="153" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -1924,35 +1778,35 @@
     </servers>
   </component>
   <component name="TestHistory">
-    <history-entry file="All_Tests - 2016.12.20 at 13h 37m 57s.xml">
+    <history-entry file="All_Tests - 2016.12.22 at 01h 58m 49s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 13h 41m 45s.xml">
+    <history-entry file="All_Tests - 2016.12.22 at 02h 07m 44s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 13h 56m 42s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 00h 58m 22s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 13h 59m 32s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 00m 23s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 14h 01m 12s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 07m 18s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 14h 01m 58s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 25m 00s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 14h 06m 01s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 25m 36s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.20 at 15h 27m 12s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 27m 24s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DelimiterProcessorTest_asymmetricDelimiter_(1) - 2016.12.20 at 14h 04m 56s.xml">
-      <configuration name="DelimiterProcessorTest.asymmetricDelimiter (1)" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 28m 04s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="DelimiterProcessorTest_asymmetricDelimiter_(1) - 2016.12.20 at 14h 05m 47s.xml">
-      <configuration name="DelimiterProcessorTest.asymmetricDelimiter (1)" configurationId="JUnit" />
+    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 28m 23s.xml">
+      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -1995,9 +1849,8 @@
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31937984" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16621377" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16440217" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11782946" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26404995" sideWeight="0.5029387" order="6" side_tool="true" content_ui="tabs" />
@@ -2025,6 +1878,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14556135" sideWeight="0.5006321" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11782946" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Copy/Paste" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13504992" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2122,7 +1976,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="update ide workspace files" />
     <MESSAGE value="add missing test" />
     <MESSAGE value=" update for 0.6.1" />
     <MESSAGE value="partial compatibility, kramdown done, fixed 4 broken, markdown.pl not working yet." />
@@ -2145,16 +1998,17 @@
     <MESSAGE value="remove jira and youtrack from table and strikethrough deps list" />
     <MESSAGE value="downgrade to java 7 lang level" />
     <MESSAGE value="fix incompatibilities added with downgrade" />
-    <MESSAGE value="update readme" />
     <MESSAGE value="update to 0.8.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to 0.8.0" />
+    <MESSAGE value="update readme, add PegdownOptionsAdapter" />
+    <MESSAGE value="update readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="update readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="544" />
+      <option name="time" value="554" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2163,64 +2017,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/IndentedCodeBlockParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="87" column="3" lean-forward="false" selection-start-line="87" selection-start-column="3" selection-end-line="87" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4105">
-          <caret line="40" column="39" lean-forward="false" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="233" column="12" lean-forward="false" selection-start-line="232" selection-start-column="0" selection-end-line="233" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/internal/TypographicNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="672">
-          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="45" lean-forward="false" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TablesExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="57" column="16" lean-forward="false" selection-start-line="57" selection-start-column="16" selection-end-line="57" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="103" column="20" lean-forward="false" selection-start-line="103" selection-start-column="20" selection-end-line="103" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="859">
-          <caret line="63" column="16" lean-forward="false" selection-start-line="63" selection-start-column="16" selection-end-line="63" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" />
     <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2935,13 +2731,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="151" column="12" lean-forward="false" selection-start-line="151" selection-start-column="12" selection-end-line="151" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -3033,13 +2822,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="20" lean-forward="false" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Escaping.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="455">
@@ -3061,21 +2843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="884">
-            <caret line="52" column="59" lean-forward="false" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2550">
@@ -3085,19 +2852,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownProfileVisitorExt.java" />
     <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/internal/PegdownProfileOptions.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9197">
-          <caret line="541" column="13" lean-forward="false" selection-start-line="541" selection-start-column="13" selection-end-line="541" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-jira-parser/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3105,7 +2863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="69" lean-forward="false" selection-start-line="30" selection-start-column="69" selection-end-line="30" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3113,7 +2870,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
           <caret line="84" column="33" lean-forward="false" selection-start-line="84" selection-start-column="33" selection-end-line="84" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3122,25 +2878,16 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="51">
             <caret line="3" column="88" lean-forward="false" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="88" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownProfileExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="76" lean-forward="true" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownProfileExtension.java" />
     <entry file="file://$PROJECT_DIR$/flexmark-profile-pegdown/src/test/java/com/vladsch/flexmark/profiles/pegdown/ComboPegdownProfileSpecTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3148,7 +2895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3157,11 +2903,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="0">
             <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding>
-              <marker date="1482282559000" expanded="true" signature="11:40" ph="PegdownPr…nsion Spec" />
-              <marker date="1482282559000" expanded="true" signature="66:78" ph="2016-06-06" />
-              <marker date="1482282559000" expanded="true" signature="88:152" ph="[CC-BY-SA…y-sa/4.0/)" />
-            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -3172,7 +2913,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="51">
             <caret line="3" column="120" lean-forward="false" selection-start-line="3" selection-start-column="120" selection-end-line="3" selection-end-column="120" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -3182,7 +2922,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="554">
           <caret line="187" column="46" lean-forward="false" selection-start-line="187" selection-start-column="21" selection-end-line="187" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3190,7 +2929,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="5" lean-forward="false" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3198,7 +2936,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3206,7 +2943,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3214,7 +2950,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3222,7 +2957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3230,7 +2964,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3238,7 +2971,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3246,7 +2978,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3254,7 +2985,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3262,7 +2992,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3270,7 +2999,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3278,7 +3006,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3286,7 +3013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3294,7 +3020,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3302,7 +3027,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3310,7 +3034,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3318,7 +3041,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="4" lean-forward="false" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3326,7 +3048,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3334,7 +3055,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3342,7 +3062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3350,7 +3069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="6" lean-forward="false" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3358,7 +3076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3366,7 +3083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3374,7 +3090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="4" lean-forward="false" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3382,7 +3097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="10" lean-forward="false" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3390,7 +3104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3398,7 +3111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3406,7 +3118,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3414,7 +3125,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="20" column="4" lean-forward="false" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3422,7 +3132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3430,7 +3139,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3438,24 +3146,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="10" lean-forward="false" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VERSION.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="1180">
-            <caret line="127" column="6" lean-forward="false" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
-            <folding />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -3463,15 +3153,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="62" lean-forward="false" selection-start-line="6" selection-start-column="62" selection-end-line="6" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/MutableDataSet.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
-          <caret line="63" column="22" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
-          <folding />
+          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -3479,29 +3167,163 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4284">
           <caret line="252" column="28" lean-forward="false" selection-start-line="252" selection-start-column="28" selection-end-line="252" selection-end-column="28" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownOptions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
-          <caret line="18" column="5" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="68">
+            <caret line="4" column="94" lean-forward="false" selection-start-line="4" selection-start-column="94" selection-end-line="4" selection-end-column="94" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="595">
-            <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="799">
+            <caret line="47" column="75" lean-forward="false" selection-start-line="47" selection-start-column="75" selection-end-line="47" selection-end-column="75" />
             <folding>
-              <marker date="1482289668000" expanded="true" signature="3329:3589" ph="..." />
-              <marker date="1482289668000" expanded="true" signature="11845:12007" ph="..." />
+              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
+              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
             </folding>
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/junit/junit/4.12/junit-4.12.jar!/org/junit/internal/builders/AllDefaultPossibilitiesBuilder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark/FlexmarkTestSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="62" lean-forward="false" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="71" column="19" lean-forward="false" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4794">
+          <caret line="282" column="13" lean-forward="false" selection-start-line="282" selection-start-column="13" selection-end-line="282" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="10778">
+            <caret line="634" column="24" lean-forward="false" selection-start-line="492" selection-start-column="0" selection-end-line="634" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="10999">
+            <caret line="647" column="0" lean-forward="false" selection-start-line="647" selection-start-column="0" selection-end-line="647" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="54" column="43" lean-forward="false" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18649">
+          <caret line="1097" column="0" lean-forward="false" selection-start-line="1097" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4947">
+          <caret line="291" column="25" lean-forward="false" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="148" column="49" lean-forward="false" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="106" column="53" lean-forward="false" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VERSION.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="442">
+            <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3548,11 +3370,11 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>git4idea</last-edited>
+          <last-edited>junit-4.12</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.32263815" />
+                <option value="0.271615" />
               </list>
             </option>
           </splitter-proportions>
@@ -3595,11 +3417,12 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>flexmark-java-samples</last-edited>
+          <last-edited>flexmark-test-suite</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.271615" />
+                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

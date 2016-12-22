@@ -5,6 +5,7 @@
       <w>commonmark</w>
       <w>flexmark</w>
       <w>kramdown</w>
+      <w>renderers</w>
     </words>
   </dictionary>
 </component>

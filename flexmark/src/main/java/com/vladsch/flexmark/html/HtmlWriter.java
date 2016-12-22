@@ -32,6 +32,7 @@ public class HtmlWriter {
     private AttributablePart useAttributes = null;
     private int appendCount = 0;
     private String prefix = "";
+    private boolean lastLineBlank = false;
 
     public HtmlWriter(Appendable out) {
         this(out, 0);
@@ -350,6 +351,19 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter blankLine() {
+        if (lastChar != 0 && !lastLineBlank) {
+            if (lastChar != '\n' && !delayedEOL) {
+                append("\n\n");
+            } else {
+                append("\n");
+            }
+
+            lastLineBlank = true;
+        }
+        return this;
+    }
+
     public HtmlWriter lineIf(boolean predicate) {
         if (predicate) return line();
         return this;
@@ -406,6 +420,7 @@ public class HtmlWriter {
         if (s.length() == 0) return;
         //appendCount++;
         appendCount++;
+        lastLineBlank = false;
 
         if (delayedEOL) {
             delayedEOL = false;

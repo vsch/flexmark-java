@@ -169,8 +169,7 @@ Simple
 > paragraph.
 .
 {quote}
-simple block quote
-paragraph.
+simple block quote paragraph.
 {quote}
 
 .
@@ -193,11 +192,9 @@ Multi-paragraph
 > paragraph.
 .
 {quote}
-simple block quote
-paragraph.
+simple block quote paragraph.
 
-another block quote
-paragraph.
+another block quote paragraph.
 {quote}
 
 .
@@ -248,8 +245,7 @@ Bullet lists
 with lazy continuation
 .
 * item 1
-* item 2
-with lazy continuation
+* item 2 with lazy continuation
 
 .
 Document[0, 41]
@@ -273,8 +269,7 @@ Ordered lists
 with lazy continuation
 .
 # item 1
-# item 2
-with lazy continuation
+# item 2 with lazy continuation
 
 .
 Document[0, 43]
@@ -302,8 +297,7 @@ lazy continuation
 - item 2
   - sub-item 1
 .
-* item 1
-lazy continuation
+* item 1 lazy continuation
 ** sub-item 1
 *** sub-sub-item 1
 ** sub-item 2
@@ -356,8 +350,7 @@ lazy continuation
 1. item 2
    1. sub-item 1
 .
-# item 1
-lazy continuation
+# item 1 lazy continuation
 ## sub-item 1
 ### sub-sub-item 1
 ## sub-item 2
@@ -414,8 +407,7 @@ lazy continuation
    1. sub-item 1
 
 .
-# item 1
-lazy continuation
+# item 1 lazy continuation
 
 ## sub-item 1
 ### sub-sub-item 1
@@ -504,54 +496,143 @@ multiple paragraphs
 paragraph 1
 with lazy continuation
 
-paragraph 3
+paragraph 2
 with lazy continuation
 
 * item 1
-* item 2
-* item 3
-
-paragraph 3
-
-.
-paragraph 1
+with lazy continuation
+* loose item 2
 with lazy continuation
 
-paragraph 3
-with lazy continuation
-
-* item 1
-* item 2
 * item 3
 
-paragraph 3
+    item 3 paragraph
+* item 4
+
+paragraph 4
 
 .
-Document[0, 113]
+paragraph 1 with lazy continuation
+
+paragraph 2 with lazy continuation
+
+* item 1 with lazy continuation
+
+* loose item 2 with lazy continuation
+
+* item 3
+
+item 3 paragraph
+
+* item 4
+
+paragraph 4
+
+.
+Document[0, 197]
   Paragraph[0, 35]
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
     SoftLineBreak[11, 12]
     Text[12, 34] chars:[12, 34, "with  … ation"]
   Paragraph[36, 71]
-    Text[36, 47] chars:[36, 47, "parag … aph 3"]
+    Text[36, 47] chars:[36, 47, "parag … aph 2"]
     SoftLineBreak[47, 48]
     Text[48, 70] chars:[48, 70, "with  … ation"]
-  BulletList[72, 99] isTight
-    BulletListItem[72, 81] open:[72, 73, "*"] isTight
-      Paragraph[74, 81]
+  BulletList[72, 183] isLoose
+    BulletListItem[72, 104] open:[72, 73, "*"] isLoose
+      Paragraph[74, 104]
         Text[74, 80] chars:[74, 80, "item 1"]
-    BulletListItem[81, 90] open:[81, 82, "*"] isTight
-      Paragraph[83, 90]
-        Text[83, 89] chars:[83, 89, "item 2"]
-    BulletListItem[90, 99] open:[90, 91, "*"] isTight hadBlankLineAfter
-      Paragraph[92, 99]
-        Text[92, 98] chars:[92, 98, "item 3"]
-  Paragraph[100, 112]
-    Text[100, 111] chars:[100, 111, "parag … aph 3"]
+        SoftLineBreak[80, 81]
+        Text[81, 103] chars:[81, 103, "with  … ation"]
+    BulletListItem[104, 142] open:[104, 105, "*"] isLoose hadBlankLineAfter
+      Paragraph[106, 142]
+        Text[106, 118] chars:[106, 118, "loose … tem 2"]
+        SoftLineBreak[118, 119]
+        Text[119, 141] chars:[119, 141, "with  … ation"]
+    BulletListItem[143, 174] open:[143, 144, "*"] isLoose hadBlankLineAfter
+      Paragraph[145, 152]
+        Text[145, 151] chars:[145, 151, "item 3"]
+      Paragraph[157, 174]
+        Text[157, 173] chars:[157, 173, "item  … graph"]
+    BulletListItem[174, 183] open:[174, 175, "*"] isLoose hadBlankLineAfter
+      Paragraph[176, 183]
+        Text[176, 182] chars:[176, 182, "item 4"]
+  Paragraph[184, 196]
+    Text[184, 195] chars:[184, 195, "parag … aph 4"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraph Spacing: 2
+multiple paragraphs
+
+```````````````````````````````` example(Paragraph Spacing: 2) options(list-no-auto-loose)
+paragraph 1
+with lazy continuation
+
+paragraph 2
+with lazy continuation
+
+* item 1
+with lazy continuation
+* loose item 2
+with lazy continuation
+
+* item 3
+
+    item 3 paragraph
+* item 4
+
+paragraph 4
+
+.
+paragraph 1 with lazy continuation
+
+paragraph 2 with lazy continuation
+
+* item 1 with lazy continuation
+* loose item 2 with lazy continuation
+
+* item 3
+item 3 paragraph
+
+* item 4
+
+paragraph 4
+
+.
+Document[0, 197]
+  Paragraph[0, 35]
+    Text[0, 11] chars:[0, 11, "parag … aph 1"]
+    SoftLineBreak[11, 12]
+    Text[12, 34] chars:[12, 34, "with  … ation"]
+  Paragraph[36, 71]
+    Text[36, 47] chars:[36, 47, "parag … aph 2"]
+    SoftLineBreak[47, 48]
+    Text[48, 70] chars:[48, 70, "with  … ation"]
+  BulletList[72, 183] isTight
+    BulletListItem[72, 104] open:[72, 73, "*"] isTight
+      Paragraph[74, 104]
+        Text[74, 80] chars:[74, 80, "item 1"]
+        SoftLineBreak[80, 81]
+        Text[81, 103] chars:[81, 103, "with  … ation"]
+    BulletListItem[104, 142] open:[104, 105, "*"] isLoose hadBlankLineAfter
+      Paragraph[106, 142]
+        Text[106, 118] chars:[106, 118, "loose … tem 2"]
+        SoftLineBreak[118, 119]
+        Text[119, 141] chars:[119, 141, "with  … ation"]
+    BulletListItem[143, 174] open:[143, 144, "*"] isTight hadBlankLineAfter
+      Paragraph[145, 152]
+        Text[145, 151] chars:[145, 151, "item 3"]
+      Paragraph[157, 174]
+        Text[157, 173] chars:[157, 173, "item  … graph"]
+    BulletListItem[174, 183] open:[174, 175, "*"] isTight hadBlankLineAfter
+      Paragraph[176, 183]
+        Text[176, 182] chars:[176, 182, "item 4"]
+  Paragraph[184, 196]
+    Text[184, 195] chars:[184, 195, "parag … aph 4"]
+````````````````````````````````
+
+
+```````````````````````````````` example Paragraph Spacing: 3
 Heading One
 ===========
 
@@ -1136,8 +1217,8 @@ Document[0, 199]
 in item
 
 ```````````````````````````````` example(Tables Extension: 13) options(keep-whitespace)
-- Add: live templates starting with `.`    
-                                        
+- Add: live templates starting with `.`
+
   | Element       | Abbreviation    | Expansion                                               |
   |---------------|-----------------|---------------------------------------------------------|
   | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
@@ -1153,66 +1234,66 @@ in item
 
 
 .
-Document[0, 565]
-  BulletList[0, 565] isLoose
-    BulletListItem[0, 565] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 44]
+Document[0, 521]
+  BulletList[0, 521] isLoose
+    BulletListItem[0, 521] open:[0, 1, "-"] isLoose hadBlankLineAfter
+      Paragraph[2, 40]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
-      TableBlock[87, 565]
-        TableHead[87, 180]
-          TableRow[87, 180] rowNumber=1
-            TableCell[87, 104] header textOpen:[87, 88, "|"] text:[88, 103, " Element       "] textClose:[103, 104, "|"]
-              Text[88, 103] chars:[88, 103, " Elem …      "]
-            TableCell[104, 122] header text:[104, 121, " Abbreviation    "] textClose:[121, 122, "|"]
-              Text[104, 121] chars:[104, 121, " Abbr … n    "]
-            TableCell[122, 180] header text:[122, 179, " Expansion                                               "] textClose:[179, 180, "|"]
-              Text[122, 179] chars:[122, 179, " Expa …      "]
-        TableSeparator[183, 276]
-          TableRow[183, 276]
-            TableCell[183, 200] textOpen:[183, 184, "|"] text:[184, 199, "---------------"] textClose:[199, 200, "|"]
-              Text[184, 199] chars:[184, 199, "----- … -----"]
-            TableCell[200, 218] text:[200, 217, "-----------------"] textClose:[217, 218, "|"]
-              Text[200, 217] chars:[200, 217, "----- … -----"]
-            TableCell[218, 276] text:[218, 275, "---------------------------------------------------------"] textClose:[275, 276, "|"]
-              Text[218, 275] chars:[218, 275, "----- … -----"]
-        TableBody[279, 564]
-          TableRow[279, 372] rowNumber=1
-            TableCell[279, 296] textOpen:[279, 280, "|"] text:[280, 295, " Abbreviation  "] textClose:[295, 296, "|"]
-              Text[280, 295] chars:[280, 295, " Abbr … ion  "]
-            TableCell[296, 314] text:[296, 313, " `.abbreviation` "] textClose:[313, 314, "|"]
-              Text[296, 297] chars:[296, 297, " "]
-              Code[297, 312] textOpen:[297, 298, "`"] text:[298, 311, ".abbr … eviation"] textClose:[311, 312, "`"]
-              Text[312, 312]
-              Text[312, 313] chars:[312, 313, " "]
-            TableCell[314, 372] text:[314, 371, " `*[]: `                                                 "] textClose:[371, 372, "|"]
-              Text[314, 315] chars:[314, 315, " "]
-              Code[315, 322] textOpen:[315, 316, "`"] text:[316, 321, "*[]: "] textClose:[321, 322, "`"]
-              Text[322, 322]
-              Text[322, 371] chars:[322, 371, "      …      "]
-          TableRow[375, 468] rowNumber=2
-            TableCell[375, 392] textOpen:[375, 376, "|"] text:[376, 391, " Code fence    "] textClose:[391, 392, "|"]
-              Text[376, 391] chars:[376, 391, " Code … e    "]
-            TableCell[392, 410] text:[392, 409, " `.codefence`    "] textClose:[409, 410, "|"]
-              Text[392, 393] chars:[392, 393, " "]
-              Code[393, 405] textOpen:[393, 394, "`"] text:[394, 404, ".codefence"] textClose:[404, 405, "`"]
-              Text[405, 405]
-              Text[405, 409] chars:[405, 409, "    "]
-            TableCell[410, 468] text:[410, 467, " \`\`\` ... \`\`\`                                       "] textClose:[467, 468, "|"]
-              Text[410, 467] chars:[410, 467, " \`\` …      "]
-          TableRow[471, 564] rowNumber=3
-            TableCell[471, 488] textOpen:[471, 472, "|"] text:[472, 487, " Explicit link "] textClose:[487, 488, "|"]
-              Text[472, 487] chars:[472, 487, " Expl … link "]
-            TableCell[488, 506] text:[488, 505, " `.link`         "] textClose:[505, 506, "|"]
-              Text[488, 489] chars:[488, 489, " "]
-              Code[489, 496] textOpen:[489, 490, "`"] text:[490, 495, ".link"] textClose:[495, 496, "`"]
-              Text[496, 496]
-              Text[496, 505] chars:[496, 505, "         "]
-            TableCell[506, 564] text:[506, 563, " `[]()`                                                  "] textClose:[563, 564, "|"]
-              Text[506, 507] chars:[506, 507, " "]
-              Code[507, 513] textOpen:[507, 508, "`"] text:[508, 512, "[]()"] textClose:[512, 513, "`"]
-              Text[513, 513]
-              Text[513, 563] chars:[513, 563, "      …      "]
+      TableBlock[43, 521]
+        TableHead[43, 136]
+          TableRow[43, 136] rowNumber=1
+            TableCell[43, 60] header textOpen:[43, 44, "|"] text:[44, 59, " Element       "] textClose:[59, 60, "|"]
+              Text[44, 59] chars:[44, 59, " Elem …      "]
+            TableCell[60, 78] header text:[60, 77, " Abbreviation    "] textClose:[77, 78, "|"]
+              Text[60, 77] chars:[60, 77, " Abbr … n    "]
+            TableCell[78, 136] header text:[78, 135, " Expansion                                               "] textClose:[135, 136, "|"]
+              Text[78, 135] chars:[78, 135, " Expa …      "]
+        TableSeparator[139, 232]
+          TableRow[139, 232]
+            TableCell[139, 156] textOpen:[139, 140, "|"] text:[140, 155, "---------------"] textClose:[155, 156, "|"]
+              Text[140, 155] chars:[140, 155, "----- … -----"]
+            TableCell[156, 174] text:[156, 173, "-----------------"] textClose:[173, 174, "|"]
+              Text[156, 173] chars:[156, 173, "----- … -----"]
+            TableCell[174, 232] text:[174, 231, "---------------------------------------------------------"] textClose:[231, 232, "|"]
+              Text[174, 231] chars:[174, 231, "----- … -----"]
+        TableBody[235, 520]
+          TableRow[235, 328] rowNumber=1
+            TableCell[235, 252] textOpen:[235, 236, "|"] text:[236, 251, " Abbreviation  "] textClose:[251, 252, "|"]
+              Text[236, 251] chars:[236, 251, " Abbr … ion  "]
+            TableCell[252, 270] text:[252, 269, " `.abbreviation` "] textClose:[269, 270, "|"]
+              Text[252, 253] chars:[252, 253, " "]
+              Code[253, 268] textOpen:[253, 254, "`"] text:[254, 267, ".abbr … eviation"] textClose:[267, 268, "`"]
+              Text[268, 268]
+              Text[268, 269] chars:[268, 269, " "]
+            TableCell[270, 328] text:[270, 327, " `*[]: `                                                 "] textClose:[327, 328, "|"]
+              Text[270, 271] chars:[270, 271, " "]
+              Code[271, 278] textOpen:[271, 272, "`"] text:[272, 277, "*[]: "] textClose:[277, 278, "`"]
+              Text[278, 278]
+              Text[278, 327] chars:[278, 327, "      …      "]
+          TableRow[331, 424] rowNumber=2
+            TableCell[331, 348] textOpen:[331, 332, "|"] text:[332, 347, " Code fence    "] textClose:[347, 348, "|"]
+              Text[332, 347] chars:[332, 347, " Code … e    "]
+            TableCell[348, 366] text:[348, 365, " `.codefence`    "] textClose:[365, 366, "|"]
+              Text[348, 349] chars:[348, 349, " "]
+              Code[349, 361] textOpen:[349, 350, "`"] text:[350, 360, ".codefence"] textClose:[360, 361, "`"]
+              Text[361, 361]
+              Text[361, 365] chars:[361, 365, "    "]
+            TableCell[366, 424] text:[366, 423, " \`\`\` ... \`\`\`                                       "] textClose:[423, 424, "|"]
+              Text[366, 423] chars:[366, 423, " \`\` …      "]
+          TableRow[427, 520] rowNumber=3
+            TableCell[427, 444] textOpen:[427, 428, "|"] text:[428, 443, " Explicit link "] textClose:[443, 444, "|"]
+              Text[428, 443] chars:[428, 443, " Expl … link "]
+            TableCell[444, 462] text:[444, 461, " `.link`         "] textClose:[461, 462, "|"]
+              Text[444, 445] chars:[444, 445, " "]
+              Code[445, 452] textOpen:[445, 446, "`"] text:[446, 451, ".link"] textClose:[451, 452, "`"]
+              Text[452, 452]
+              Text[452, 461] chars:[452, 461, "         "]
+            TableCell[462, 520] text:[462, 519, " `[]()`                                                  "] textClose:[519, 520, "|"]
+              Text[462, 463] chars:[462, 463, " "]
+              Code[463, 469] textOpen:[463, 464, "`"] text:[464, 468, "[]()"] textClose:[468, 469, "`"]
+              Text[469, 469]
+              Text[469, 519] chars:[469, 519, "      …      "]
 ````````````````````````````````
 
 
@@ -2050,7 +2131,7 @@ Document[0, 10153]
 ````````````````````````````````
 
 
-## GFM options 
+## GFM options
 
 invalid table:
 
@@ -2060,10 +2141,7 @@ invalid table:
 | a | b | c |
 | b | a | c |
 .
-| A | B | C |
-|-----------|
-| a | b | c |
-| b | a | c |
+| A | B | C | |-----------| | a | b | c | | b | a | c |
 
 .
 Document[0, 56]
@@ -2085,9 +2163,7 @@ invalid table:
 | a | b | c |
 | b | a | c |
 .
-| A | B | C |
-| a | b | c |
-| b | a | c |
+| A | B | C | | a | b | c | | b | a | c |
 
 .
 Document[0, 42]

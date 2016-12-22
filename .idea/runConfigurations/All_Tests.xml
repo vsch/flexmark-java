@@ -17,6 +17,7 @@
       <value defaultName="wholeProject" />
     </option>
     <envs />
+    <dir value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark" />
     <patterns />
     <RunnerSettings RunnerId="Debug with VisualVM">
       <option name="visualVMId" value="39089742193516" />
