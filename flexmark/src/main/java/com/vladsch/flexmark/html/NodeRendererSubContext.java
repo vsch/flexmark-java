@@ -18,6 +18,14 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
         return htmlWriter;
     }
 
+    public void flush() {
+        htmlWriter.flush();
+    }
+
+    public void flush(int maxBlankLines) {
+        htmlWriter.flush(maxBlankLines);
+    }
+
     protected int getDoNotRenderLinksNesting() {
         return doNotRenderLinksNesting;
     }

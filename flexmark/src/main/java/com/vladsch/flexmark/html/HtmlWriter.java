@@ -416,6 +416,14 @@ public class HtmlWriter {
         return this;
     }
 
+    public HtmlWriter flush() {
+       return this;
+    }
+
+    public HtmlWriter flush(int maxBlankLines) {
+       return this;
+    }
+
     protected void append(String s) {
         if (s.length() == 0) return;
         //appendCount++;

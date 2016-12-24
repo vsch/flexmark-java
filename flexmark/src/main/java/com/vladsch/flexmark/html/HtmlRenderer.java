@@ -164,6 +164,19 @@ public class HtmlRenderer implements IRender {
     public void render(Node node, Appendable output) {
         MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
         renderer.render(node);
+        renderer.flush();
+    }
+
+    /**
+     * Render a node to the appendable
+     *
+     * @param node   node to render
+     * @param output appendable to use for the output
+     */
+    public void render(Node node, Appendable output, int maxTrailingBlankLines) {
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
+        renderer.render(node);
+        renderer.flush(maxTrailingBlankLines);
     }
 
     /**

@@ -35,6 +35,7 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
     public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
     public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
+    public static final DataKey<TocOptions.ListType> LIST_TYPE = TocExtension.LIST_TYPE;
     public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
     public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
     public static final DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);

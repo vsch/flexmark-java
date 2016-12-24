@@ -149,6 +149,22 @@ public interface FormattingAppendable extends Appendable {
     FormattingAppendable blankLine(int count);
 
     /**
+     * Get the current indent level + indent offset
+     *
+     * @return indent level
+     */
+    int getIndent();
+
+    /**
+     * Set the current indent level. Not for indenting use. This does not do any calls or validation.
+     * Intended use is to set initial indent
+     *
+     * @param indentOffset minimum indent that will be used
+     * @return this
+     */
+    FormattingAppendable setIndentOffset(int indentOffset);
+
+    /**
      * Increase the indent level, will terminate the current line if there is unterminated text
      *
      * @return this
@@ -190,6 +206,11 @@ public interface FormattingAppendable extends Appendable {
     FormattingAppendable closePreFormatted();
 
     /**
+     * @return true if in pre-formatted region
+     */
+    boolean isPreFormatted();
+
+    /**
      * Open a conditional formatting region.
      * <p>
      * After opening if and when text is appended the {@link ConditionalFormatter#apply(boolean, boolean, boolean)}
@@ -214,4 +235,5 @@ public interface FormattingAppendable extends Appendable {
      * @return this
      */
     FormattingAppendable closeConditional(ConditionalFormatter closeFormatter);
+
 }

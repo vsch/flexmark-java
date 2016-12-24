@@ -13,38 +13,37 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="update readme">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/FormattingAppendableImplTest.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/JiraConverterTestSuite.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/YouTrackConverterTestSuite.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormatter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/vlad.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/vlad.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/runConfigurations/All_Tests.xml" afterPath="$PROJECT_DIR$/.idea/runConfigurations/All_Tests.xml" />
+    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Immutable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Mutable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/mappers/IndexMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/ReversedCharSequence.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/FormattingHtmlWriter.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptions.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/VERSION.md" afterPath="$PROJECT_DIR$/VERSION.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" afterPath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" afterPath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" afterPath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" afterPath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" afterPath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" afterPath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" afterPath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" afterPath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" afterPath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.iml" afterPath="$PROJECT_DIR$/flexmark-java.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" afterPath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" afterPath="$PROJECT_DIR$/flexmark-test-util/flexmark-test-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" afterPath="$PROJECT_DIR$/flexmark-util/flexmark-util.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/flexmark-youtrack-converter.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/flexmark.iml" afterPath="$PROJECT_DIR$/flexmark/flexmark.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocBlockParser.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocBlockParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptionTypes.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptionTypes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptionTypes.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptionTypes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboTocSpecTest.java" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboTocSpecTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_simtoc_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_simtoc_ast_spec.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_toc_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_toc_ast_spec.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/toc_options_parser_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/toc_options_parser_ast_spec.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/NodeRendererSubContext.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/NodeRendererSubContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -125,12 +124,79 @@
       <file leaf-file-name="VERSION.md" pinned="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/VERSION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="442">
-                <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-                <folding />
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="531">
+                <caret line="118" column="38" lean-forward="true" selection-start-line="118" selection-start-column="38" selection-end-line="118" selection-end-column="38" />
+                <folding>
+                  <element signature="e#105#998#0" expanded="true" />
+                </folding>
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FormattingHtmlWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/FormattingHtmlWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NodeRendererSubContext.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/NodeRendererSubContext.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HtmlRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="647">
+              <caret line="197" column="10" lean-forward="false" selection-start-line="197" selection-start-column="10" selection-end-line="197" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ComboSpecTestCase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/test/ComboSpecTestCase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="684">
+              <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CoreNodeRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="299" column="57" lean-forward="false" selection-start-line="299" selection-start-column="57" selection-end-line="299" selection-end-column="57" />
+              <folding>
+                <element signature="e#12647#12940#0" expanded="true" />
+                <element signature="e#12939#12940#0" expanded="true" />
+                <element signature="e#17218#17378#0" expanded="true" />
+                <element signature="e#17377#17378#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -138,8 +204,8 @@
       <file leaf-file-name="FormattingAppendable.java" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1802">
-              <caret line="106" column="53" lean-forward="false" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+            <state relative-caret-position="501">
+              <caret line="198" column="25" lean-forward="false" selection-start-line="198" selection-start-column="25" selection-end-line="198" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -148,48 +214,18 @@
       <file leaf-file-name="FormattingAppendableImpl.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2516">
-              <caret line="148" column="49" lean-forward="false" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
+            <state relative-caret-position="298">
+              <caret line="177" column="19" lean-forward="false" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CharSubSequence.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java">
+      <file leaf-file-name="HtmlRendererTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/HtmlRendererTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2380">
-              <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BasedSequenceImpl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18649">
-              <caret line="1097" column="0" lean-forward="false" selection-start-line="1097" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FormattingAppendableImplTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4947">
-              <caret line="291" column="25" lean-forward="false" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HtmlWriter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="918">
-              <caret line="54" column="43" lean-forward="false" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
+            <state relative-caret-position="391">
+              <caret line="23" column="78" lean-forward="false" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -213,12 +249,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setBulletMismatchToNewList</find>
-      <find>jira</find>
-      <find>Soft</find>
-      <find>blockqu</find>
-      <find>JIRA</find>
-      <find>if \(rendererType\.equals\(\&quot;JIRA\&quot;\)\) \{\n</find>
       <find>Any\b</find>
       <find>AnyNot</find>
       <find>(String</find>
@@ -243,10 +273,14 @@
       <find>buffer</find>
       <find>.setIndentPrefix\(&quot;\s*&quot;\);</find>
       <find>myModCount</find>
+      <find>sortAlpha</find>
+      <find>TocOptions</find>
+      <find>SimTocOptions</find>
+      <find>Thematic</find>
+      <find>myIndent</find>
+      <find>raw</find>
     </findStrings>
     <replaceStrings>
-      <replace>public final</replace>
-      <replace>$1 final</replace>
       <replace>$1 static final</replace>
       <replace>a numbered</replace>
       <replace>CODE_INDENT</replace>
@@ -275,6 +309,8 @@
       <replace>openingMarker.baseSubSequence(openingMarker.getStartOffset(), closingMarker.getEndOffset())</replace>
       <replace>$1.baseSubSequence($2.getStartOffset(), $3.getEndOffset())</replace>
       <replace>.setIndentPrefix(indent);</replace>
+      <replace>SimTocOptions</replace>
+      <replace>TocOptions</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/flexmark</dir>
@@ -323,28 +359,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/ClassifyingNodeTracker.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/NodeClassifierVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/dependency/DependencyHandler.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/Consumer.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Utils.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/BooleanOptionParser.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/OptionParser.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/collection/OrderedMultiMap.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/OptionsParser.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMapTest.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/block/MatchedBlockParser.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HeadingCollectingVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/collection/OrderedMultiMapTest.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/InlineParserImpl.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/TextCollectingVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/InlineVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/BlockVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/HtmlInnerVisitor.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/Extension.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/PostProcessorFactory.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/PostProcessorManager.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/dependency/Dependent.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/BlockQuoteParser.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/IndentedCodeBlockParser.java" />
@@ -359,16 +373,10 @@
         <option value="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/TableVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-tables/src/main/java/com/vladsch/flexmark/ext/tables/internal/TableNodeRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitorExt.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitorExt.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListNodeRenderer.java" />
@@ -484,7 +492,6 @@
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/Range.java" />
         <option value="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimiterProcessorTest.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/MappedSequence.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
         <option value="/Java Fragment (22.md:703).java" />
         <option value="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/src/ImageRefVisitor.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
@@ -516,13 +523,42 @@
         <option value="$PROJECT_DIR$/flexmark-youtrack-converter/src/main/java/com/vladsch/flexmark/youtrack/converter/internal/YouTrackConverterNodeRenderer.java" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java" />
-        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
         <option value="$PROJECT_DIR$/flexmark-youtrack-converter/src/test/resources/youtrack_converter_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormater.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/ConditionalFormatter.java" />
-        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/FormattingAppendableImplTest.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_5.txt" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Mutable.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Immutable.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_12.md" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocLevelsOptionParser.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptions.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocBlockParser.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboTocSpecTest.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptionTypes.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptionTypes.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/toc_options_parser_ast_spec.md" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_toc_ast_spec.md" />
+        <option value="$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_simtoc_ast_spec.md" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/mappers/IndexMapper.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/ReversedCharSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/NodeRendererSubContext.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/FormattingHtmlWriter.java" />
+        <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java" />
         <option value="$PROJECT_DIR$/VERSION.md" />
       </list>
     </option>
@@ -556,10 +592,10 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="135" />
+    <option name="x" value="115" />
     <option name="y" value="23" />
-    <option name="width" value="2252" />
-    <option name="height" value="1382" />
+    <option name="width" value="2342" />
+    <option name="height" value="1380" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -608,6 +644,9 @@
             <id>Declaration redundancyJava</id>
           </State>
           <State>
+            <id>Gradle</id>
+          </State>
+          <State>
             <id>Groovy</id>
           </State>
           <State>
@@ -635,6 +674,9 @@
             <id>Logging issuesJava</id>
           </State>
           <State>
+            <id>Maven</id>
+          </State>
+          <State>
             <id>Memory issuesJava</id>
           </State>
           <State>
@@ -654,6 +696,9 @@
           </State>
           <State>
             <id>Portability issuesJava</id>
+          </State>
+          <State>
+            <id>Probable bugsGradle</id>
           </State>
           <State>
             <id>Probable bugsJava</id>
@@ -712,7 +757,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -755,6 +799,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -882,17 +956,432 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mappers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dependency" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="toc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="editor.config.accepted" value="true" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA&#10;Markdown&#10;TEXT&#10;HTML" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="TEXT&#10;JAVA&#10;Markdown&#10;HTML" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="MissingInActions.Settings.Application" />
+    <property name="settings.editor.selected.configurable" value="MarkdownNavigator.Settings.Css" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.1286425" />
     <property name="project.structure.side.proportion" value="0.271615" />
@@ -923,6 +1412,10 @@
     <option name="AUTOSCROLL_FROM_SOURCE" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.vladsch.flexmark.html.renderer" />
+      <recent name="com.vladsch.flexmark.internal.util" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -947,30 +1440,26 @@
       <recent name="com.vladsch.flexmark.internal" />
       <recent name="com.vladsch.flexmark.internal.util" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.vladsch.flexmark.html" />
+      <recent name="com.vladsch.flexmark.util.mappers" />
+      <recent name="com.vladsch.flexmark.util.sequence" />
+      <recent name="com.vladsch.flexmark.ext.toc.internal" />
+      <recent name="com.vladsch.flexmark.profiles.pegdown.internal" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence" />
+      <recent name="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util" />
+      <recent name="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/flexmark/src/test/resources" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence" />
       <recent name="$PROJECT_DIR$/FlexmarkJavaAssets" />
       <recent name="$PROJECT_DIR$/flexmark-android-test" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test" />
-      <recent name="$PROJECT_DIR$/flexmark-ext-emoji/src/test/resources" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.vladsch.flexmark.profiles.pegdown.internal" />
-      <recent name="com.vladsch.flexmark.profiles.pegdown" />
-      <recent name="com.vladsch.flexmark.util.sequence" />
-      <recent name="com.vladsch.flexmark.ext.gfm.strikethrough" />
-      <recent name="com.vladsch.flexmark.ext.gfm.strikethrough.internal" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources" />
-      <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/flexmark/src/test/resources" />
-      <recent name="$PROJECT_DIR$/flexmark-test-util/src/main/resources" />
-      <recent name="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="com.vladsch.flexmark.html.renderer" />
-      <recent name="com.vladsch.flexmark.internal.util" />
     </key>
   </component>
   <component name="RunManager" selected="JUnit.All Tests">
@@ -1164,6 +1653,17 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -1344,6 +1844,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="" />
+      <changelist id="" name="PR23" comment="" />
       <created>1465673815303</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -1413,13 +1914,6 @@
       <workItem from="1480661474551" duration="2123000" />
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
-    </task>
-    <task id="LOCAL-00104" summary="update pom versions">
-      <created>1470519925782</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1470519925782</updated>
     </task>
     <task id="LOCAL-00105" summary="update first maven central release">
       <created>1470540312276</created>
@@ -1757,7 +2251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482290211028</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="formatting appendable done and tested.">
+      <created>1482390723902</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1482390723902</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -1778,35 +2279,35 @@
     </servers>
   </component>
   <component name="TestHistory">
-    <history-entry file="All_Tests - 2016.12.22 at 01h 58m 49s.xml">
+    <history-entry file="All_Tests - 2016.12.23 at 21h 39m 54s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_Tests - 2016.12.22 at 02h 07m 44s.xml">
+    <history-entry file="All_Tests - 2016.12.23 at 21h 40m 59s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 00h 58m 22s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 43m 37s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 00m 23s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 45m 31s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 07m 18s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 48m 26s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 25m 00s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 51m 38s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 25m 36s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 53m 11s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 27m 24s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 55m 50s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 28m 04s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 21h 58m 16s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="FormattingAppendableImplTest - 2016.12.22 at 01h 28m 23s.xml">
-      <configuration name="FormattingAppendableImplTest" configurationId="JUnit" />
+    <history-entry file="All_Tests - 2016.12.23 at 22h 01m 17s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
@@ -1822,8 +2323,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="135" y="23" width="2252" height="1382" extended-state="0" />
-    <editor active="false" />
+    <frame x="115" y="23" width="2342" height="1380" extended-state="0" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
@@ -1833,53 +2333,85 @@
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Script Monkey" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920218" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489491" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3007752" sideWeight="0.49643177" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29968944" sideWeight="0.49643177" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17054264" sideWeight="0.6512681" order="18" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17003106" sideWeight="0.6512681" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32801276" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
-      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27903748" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31937984" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28416014" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.318323" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28804347" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16440217" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17145343" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1886646" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26404995" sideWeight="0.5029387" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298639" sideWeight="0.49960223" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="21" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17003106" sideWeight="0.6512681" order="18" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.16604617" sideWeight="0.4993679" order="1" side_tool="true" content_ui="tabs" x="1065" y="664" width="580" height="522" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.318323" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17101449" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26404995" sideWeight="0.5029387" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3263566" sideWeight="0.34873188" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Code Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Script Monkey" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32920218" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2489491" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="true" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29968944" sideWeight="0.49643177" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Plugins" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32938188" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32999372" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32801276" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28416014" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32906324" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14556135" sideWeight="0.5006321" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28804347" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32790697" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.11782946" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1886646" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Copy/Paste" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13504992" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1976,7 +2508,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add missing test" />
     <MESSAGE value=" update for 0.6.1" />
     <MESSAGE value="partial compatibility, kramdown done, fixed 4 broken, markdown.pl not working yet." />
     <MESSAGE value="compatibility for list processing rewritten. CommonMark passes." />
@@ -2001,14 +2532,15 @@
     <MESSAGE value="update to 0.8.0" />
     <MESSAGE value="update readme, add PegdownOptionsAdapter" />
     <MESSAGE value="update readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="update readme" />
+    <MESSAGE value="formatting appendable done and tested." />
+    <option name="LAST_COMMIT_MESSAGE" value="formatting appendable done and tested." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="554" />
+      <option name="time" value="557" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -2017,216 +2549,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="18" lean-forward="false" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="842">
-          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="140" column="66" lean-forward="false" selection-start-line="140" selection-start-column="5" selection-end-line="140" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-typographic/src/main/java/com/vladsch/flexmark/ext/typographic/TypographicVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="21" column="69" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="40" column="20" lean-forward="false" selection-start-line="40" selection-start-column="19" selection-end-line="40" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="262" column="20" lean-forward="false" selection-start-line="262" selection-start-column="20" selection-end-line="262" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/YamlFrontMatterVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="61" column="18" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="876">
-          <caret line="74" column="17" lean-forward="false" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/src/main/java/com/vladsch/flexmark/ext/front/matter/AbstractYamlFrontMatterVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="61" lean-forward="false" selection-start-line="20" selection-start-column="61" selection-end-line="20" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/SpecExampleExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="56" column="16" lean-forward="false" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-spec-example/src/main/java/com/vladsch/flexmark/ext/spec/example/internal/SpecExampleNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="33" column="46" lean-forward="false" selection-start-line="33" selection-start-column="46" selection-end-line="33" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItemVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="8" lean-forward="false" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TablesExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="44" column="16" lean-forward="false" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/internal/TaskListParagraphPreProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="75" column="23" lean-forward="false" selection-start-line="75" selection-start-column="23" selection-end-line="75" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/TableVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/StrikethroughExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="16" lean-forward="false" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitorExt.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/EscapedCharacterExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="64" column="16" lean-forward="false" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/StrikethroughYouTrackRenderer.java" />
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/src/main/java/com/vladsch/flexmark/ext/gfm/tables/internal/TableNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-escaped-character/src/main/java/com/vladsch/flexmark/ext/escaped/character/internal/EscapedCharacterNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="49" column="12" lean-forward="false" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/AbstractVisitorTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" lean-forward="false" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/DelimitedNodeTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/HtmlRendererTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="93" column="28" lean-forward="false" selection-start-line="93" selection-start-column="28" selection-end-line="93" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/UsageExampleTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="40" column="24" lean-forward="false" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="587">
-          <caret line="48" column="57" lean-forward="false" selection-start-line="48" selection-start-column="57" selection-end-line="48" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -2388,13 +2710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="18" column="20" lean-forward="false" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/TocOptionsParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="208" column="61" lean-forward="false" selection-start-line="208" selection-start-column="61" selection-end-line="208" selection-end-column="61" />
         </state>
       </provider>
     </entry>
@@ -2780,24 +3095,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubSequence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/util/TextCollectingVisitor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="37" column="35" lean-forward="false" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="31" column="90" lean-forward="true" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
         </state>
       </provider>
     </entry>
@@ -3197,10 +3498,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="799">
             <caret line="47" column="75" lean-forward="false" selection-start-line="47" selection-start-column="75" selection-end-line="47" selection-end-column="75" />
-            <folding>
-              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
-              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
-            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -3254,27 +3551,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="54" column="43" lean-forward="false" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/CharSubSequence.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2380">
           <caret line="140" column="0" lean-forward="false" selection-start-line="140" selection-start-column="0" selection-end-line="140" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18649">
-          <caret line="1097" column="0" lean-forward="false" selection-start-line="1097" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3282,15 +3562,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4947">
           <caret line="291" column="25" lean-forward="false" selection-start-line="291" selection-start-column="25" selection-end-line="291" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2516">
-          <caret line="148" column="49" lean-forward="false" selection-start-line="148" selection-start-column="49" selection-end-line="148" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3298,24 +3569,982 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="31" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_5.txt" />
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="709">
+          <caret line="94" column="1" lean-forward="false" selection-start-line="94" selection-start-column="1" selection-end-line="94" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocBlockParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-922">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Pair.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="816">
+          <caret line="48" column="76" lean-forward="false" selection-start-line="48" selection-start-column="76" selection-end-line="48" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Immutable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/test/resources/extra_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="4267">
+            <caret line="251" column="21" lean-forward="false" selection-start-line="251" selection-start-column="21" selection-end-line="251" selection-end-column="21" />
+            <folding>
+              <element signature="e#693#826#0" expanded="true" />
+              <element signature="e#1043#1176#0" expanded="true" />
+              <element signature="e#1346#1479#0" expanded="true" />
+              <element signature="e#1833#2510#0" expanded="true" />
+              <element signature="e#2957#3688#0" expanded="true" />
+              <element signature="e#3937#4356#0" expanded="true" />
+              <element signature="e#4617#5036#0" expanded="true" />
+              <element signature="e#7102#7588#0" expanded="true" />
+              <element signature="e#7922#8408#0" expanded="true" />
+              <element signature="e#8630#8900#0" expanded="true" />
+              <element signature="e#9108#9380#0" expanded="true" />
+              <element signature="e#9589#9863#0" expanded="true" />
+              <element signature="e#10093#10287#0" expanded="true" />
+              <element signature="e#10847#12376#0" expanded="true" />
+              <element signature="e#12694#13144#0" expanded="true" />
+              <element signature="e#13500#13942#0" expanded="true" />
+              <element signature="e#14360#15146#0" expanded="true" />
+              <element signature="e#15395#15640#0" expanded="true" />
+              <element signature="e#15920#16186#0" expanded="true" />
+              <element signature="e#16716#17733#0" expanded="true" />
+              <element signature="e#18224#19241#0" expanded="true" />
+              <element signature="e#19825#20797#0" expanded="true" />
+              <element signature="e#21489#22729#0" expanded="true" />
+              <element signature="e#23201#24089#0" expanded="true" />
+              <element signature="e#24547#25406#0" expanded="true" />
+              <element signature="e#25872#26731#0" expanded="true" />
+              <element signature="e#27246#28178#0" expanded="true" />
+              <element signature="e#28747#29902#0" expanded="true" />
+              <element signature="e#30196#30656#0" expanded="true" />
+              <element signature="e#30934#31338#0" expanded="true" />
+              <element signature="e#31589#32026#0" expanded="true" />
+              <element signature="e#32266#32703#0" expanded="true" />
+              <element signature="e#33186#33684#0" expanded="true" />
+              <element signature="e#34076#34467#0" expanded="true" />
+              <element signature="e#34951#35423#0" expanded="true" />
+              <element signature="e#35946#36533#0" expanded="true" />
+              <element signature="e#36973#37479#0" expanded="true" />
+              <element signature="e#37853#38315#0" expanded="true" />
+              <element signature="e#39075#40725#0" expanded="true" />
+              <element signature="e#41475#42926#0" expanded="true" />
+              <element signature="e#43726#45297#0" expanded="true" />
+              <element signature="e#46080#47665#0" expanded="true" />
+              <element signature="e#47988#48220#0" expanded="true" />
+              <element signature="e#48626#49182#0" expanded="true" />
+              <element signature="e#49536#49895#0" expanded="true" />
+              <element signature="e#50399#50960#0" expanded="true" />
+              <element signature="e#51276#51508#0" expanded="true" />
+              <element signature="e#51906#52441#0" expanded="true" />
+              <element signature="e#52795#53173#0" expanded="true" />
+              <element signature="e#54032#55718#0" expanded="true" />
+              <element signature="e#56049#56702#0" expanded="true" />
+              <element signature="e#56987#57438#0" expanded="true" />
+              <element signature="e#57830#58680#0" expanded="true" />
+              <element signature="e#59074#59928#0" expanded="true" />
+              <element signature="e#60294#60844#0" expanded="true" />
+              <element signature="e#61222#61799#0" expanded="true" />
+              <element signature="e#62078#62463#0" expanded="true" />
+              <element signature="e#62863#63318#0" expanded="true" />
+              <element signature="e#63611#64244#0" expanded="true" />
+              <element signature="e#64614#65039#0" expanded="true" />
+              <element signature="e#65502#66189#0" expanded="true" />
+              <element signature="e#66751#67574#0" expanded="true" />
+              <element signature="e#68167#68877#0" expanded="true" />
+              <element signature="e#69202#69594#0" expanded="true" />
+              <element signature="e#70035#70666#0" expanded="true" />
+              <element signature="e#71086#72017#0" expanded="true" />
+              <element signature="e#72435#73347#0" expanded="true" />
+              <element signature="e#73699#73805#0" expanded="true" />
+              <element signature="e#74152#74299#0" expanded="true" />
+              <element signature="e#74874#75358#0" expanded="true" />
+              <element signature="e#75969#76453#0" expanded="true" />
+              <element signature="e#77046#77530#0" expanded="true" />
+              <element signature="e#78103#78587#0" expanded="true" />
+              <element signature="e#79166#79650#0" expanded="true" />
+              <element signature="e#80225#80709#0" expanded="true" />
+              <element signature="e#81161#81645#0" expanded="true" />
+              <element signature="e#82127#82611#0" expanded="true" />
+              <element signature="e#83156#83640#0" expanded="true" />
+              <element signature="e#84149#84633#0" expanded="true" />
+              <element signature="e#85192#85676#0" expanded="true" />
+              <element signature="e#85909#85971#0" expanded="true" />
+              <element signature="e#86182#86217#0" expanded="true" />
+              <element signature="e#86420#86455#0" expanded="true" />
+              <element signature="e#86711#86773#0" expanded="true" />
+              <element signature="e#86998#87208#0" expanded="true" />
+              <element signature="e#87429#87588#0" expanded="true" />
+              <element signature="e#87787#88047#0" expanded="true" />
+              <element signature="e#88468#89251#0" expanded="true" />
+              <element signature="e#89472#89844#0" expanded="true" />
+              <element signature="e#90008#90324#0" expanded="true" />
+              <element signature="e#90486#90764#0" expanded="true" />
+              <element signature="e#90927#91206#0" expanded="true" />
+              <element signature="e#91371#91687#0" expanded="true" />
+              <element signature="e#91852#92166#0" expanded="true" />
+              <element signature="e#92339#92667#0" expanded="true" />
+              <element signature="e#92871#93247#0" expanded="true" />
+              <element signature="e#93486#93886#0" expanded="true" />
+              <element signature="e#94141#94268#0" expanded="true" />
+              <element signature="e#94422#94524#0" expanded="true" />
+              <element signature="e#94699#94802#0" expanded="true" />
+              <element signature="e#94979#95104#0" expanded="true" />
+              <element signature="e#95302#95427#0" expanded="true" />
+              <element signature="e#95678#95763#0" expanded="true" />
+              <element signature="e#96038#96357#0" expanded="true" />
+              <element signature="e#96530#96569#0" expanded="true" />
+              <element signature="e#96730#96971#0" expanded="true" />
+              <element signature="e#97137#97466#0" expanded="true" />
+              <element signature="e#97709#97974#0" expanded="true" />
+              <element signature="e#98178#98443#0" expanded="true" />
+              <element signature="e#98650#98915#0" expanded="true" />
+              <element signature="e#99142#99421#0" expanded="true" />
+              <element signature="e#99670#99959#0" expanded="true" />
+              <element signature="e#100251#100627#0" expanded="true" />
+              <element signature="e#100903#101241#0" expanded="true" />
+              <element signature="e#101520#101854#0" expanded="true" />
+              <element signature="e#102187#102537#0" expanded="true" />
+              <element signature="e#102827#102934#0" expanded="true" />
+              <element signature="e#103146#103253#0" expanded="true" />
+              <element signature="e#103502#103629#0" expanded="true" />
+              <element signature="e#103942#104448#0" expanded="true" />
+              <element signature="e#104695#104738#0" expanded="true" />
+              <element signature="e#104986#105029#0" expanded="true" />
+              <element signature="e#105284#105563#0" expanded="true" />
+              <element signature="e#105705#106032#0" expanded="true" />
+              <element signature="e#106305#106651#0" expanded="true" />
+              <element signature="e#106961#107350#0" expanded="true" />
+              <element signature="e#107892#108530#0" expanded="true" />
+              <element signature="e#109002#109508#0" expanded="true" />
+              <element signature="e#109915#110188#0" expanded="true" />
+              <element signature="e#110470#110612#0" expanded="true" />
+              <element signature="e#111793#114653#0" expanded="true" />
+              <element signature="e#114891#115018#0" expanded="true" />
+              <element signature="e#115329#115516#0" expanded="true" />
+              <element signature="e#115858#116103#0" expanded="true" />
+              <element signature="e#116490#116735#0" expanded="true" />
+              <element signature="e#117131#117376#0" expanded="true" />
+              <element signature="e#119539#122260#0" expanded="true" />
+              <element signature="e#122712#122944#0" expanded="true" />
+              <element signature="e#123684#124413#0" expanded="true" />
+              <element signature="e#125415#126425#0" expanded="true" />
+              <element signature="e#126669#126773#0" expanded="true" />
+              <element signature="e#126995#127103#0" expanded="true" />
+              <element signature="e#127294#127436#0" expanded="true" />
+              <element signature="e#127735#128038#0" expanded="true" />
+              <element signature="e#128327#128638#0" expanded="true" />
+              <element signature="e#128905#129196#0" expanded="true" />
+              <element signature="e#129500#129812#0" expanded="true" />
+              <element signature="e#130547#132439#0" expanded="true" />
+              <marker date="1482529838000" expanded="true" signature="11:31" ph="Core Extra Test Spec" />
+              <marker date="1482529838000" expanded="true" signature="40:58" ph="Vladimir Schneider" />
+              <marker date="1482529838000" expanded="true" signature="68:71" ph="0.1" />
+              <marker date="1482529838000" expanded="true" signature="78:90" ph="2016-06-06" />
+              <marker date="1482529838000" expanded="true" signature="100:164" ph="[CC-BY-SA…y-sa/4.0/)" />
+              <marker date="1482529838000" expanded="true" signature="294:299" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="309:358" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="341:352" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="625:630" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="640:689" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="672:683" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="975:980" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="990:1039" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1022:1033" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1278:1283" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1293:1342" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1325:1336" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1684:1829" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1691:1815" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1720:1807" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="1737:1797" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2721:2953" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2728:2939" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2737:2767" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2776:2931" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2807:2921" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2820:2858" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="2871:2909" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="3830:3933" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="3837:3927" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="3850:3919" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="3861:3909" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="4510:4613" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="4517:4607" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="4530:4599" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="4541:4589" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="10057:10089" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="10063:10083" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="12612:12690" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="13424:13496" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="14220:14241" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="14245:14267" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="14290:14311" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="14315:14337" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="15365:15391" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="15372:15385" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="15856:15916" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="15863:15910" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="15876:15902" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16465:16712" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16508:16688" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16523:16680" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16534:16572" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16583:16621" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="16632:16670" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="17996:18220" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="18039:18196" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="18054:18188" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="18065:18103" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="18114:18152" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19614:19821" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19657:19683" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19690:19716" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19723:19749" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19756:19782" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="19789:19815" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21167:21485" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21174:21479" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21192:21471" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21247:21281" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21292:21326" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21337:21371" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21382:21416" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="21427:21461" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="23034:23150" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="23059:23144" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="23074:23136" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="23155:23197" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24334:24543" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24341:24367" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24374:24471" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24401:24463" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24478:24504" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="24511:24537" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="25704:25868" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="25729:25826" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="25756:25818" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27028:27144" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27053:27138" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27068:27130" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27150:27195" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27156:27189" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="27200:27242" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28447:28743" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28472:28701" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28487:28693" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28498:28536" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28547:28585" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28596:28634" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="28645:28683" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="30110:30134" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="30139:30163" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="30168:30192" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="30870:30930" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="31525:31585" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="32202:32262" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="33088:33182" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="33121:33176" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="33136:33168" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="34010:34072" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="34043:34066" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="34885:34947" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="34918:34941" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="35838:35942" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="35871:35936" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="35896:35928" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="36865:36969" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="36898:36963" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="36923:36955" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="37755:37849" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="37788:37843" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="37803:37835" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38660:38693" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38698:38852" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38705:38731" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38738:38772" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38779:38846" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38806:38838" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38884:39071" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38891:38917" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38924:38950" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38957:38991" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="38998:39065" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="39025:39057" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41175:41218" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41233:41327" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41266:41321" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41281:41313" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41331:41372" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41377:41471" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41410:41465" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="41425:41457" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43391:43578" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43398:43424" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43431:43457" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43464:43498" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43505:43572" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43532:43564" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43582:43623" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43628:43722" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43661:43716" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="43676:43708" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45705:45748" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45763:45857" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45796:45851" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45811:45843" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45889:46076" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45896:45922" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45929:45955" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="45962:45996" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="46003:46070" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="46030:46062" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="47933:47984" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="48493:48622" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="48500:48528" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="48535:48581" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="48543:48573" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="48588:48616" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="49490:49532" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="50266:50395" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="50273:50339" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="50298:50331" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="50346:50389" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51223:51272" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51774:51902" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51781:51809" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51816:51861" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51824:51853" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="51868:51896" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="52749:52791" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53642:53693" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53698:53825" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53705:53733" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53740:53786" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53748:53778" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53793:53819" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53829:53878" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53883:54028" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53890:53918" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53925:53987" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53933:53979" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="53994:54022" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="55926:55968" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="55973:56045" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="55980:56006" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="56013:56039" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="56907:56949" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="57691:57769" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="57784:57826" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="58945:58987" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="58992:59070" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="60152:60290" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="60159:60185" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="60192:60218" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="60225:60251" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="60258:60284" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="61080:61218" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="61087:61113" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="61120:61146" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="61153:61179" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="61186:61212" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="62012:62074" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="62019:62050" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="62769:62859" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="62776:62853" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="62811:62845" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="63501:63607" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="63526:63583" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="63541:63575" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="64548:64610" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="64555:64604" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="65350:65498" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="65357:65383" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="65390:65459" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="65417:65451" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="65466:65492" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66527:66747" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66534:66560" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66567:66708" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66594:66628" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66636:66700" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="66715:66741" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="67970:68163" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="67977:68003" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="68010:68124" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="68018:68044" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="68052:68116" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="68131:68157" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69139:69198" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69146:69192" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69883:70031" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69890:69916" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69923:69992" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69950:69984" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="69999:70025" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="70904:71082" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="70911:70990" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="70924:70982" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="70997:71076" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="71010:71068" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="72253:72431" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="72260:72339" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="72273:72331" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="72346:72425" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="72359:72417" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="74121:74148" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="74674:74698" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="74791:74801" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="75695:75699" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75702:75706" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75707:75711" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75712:75716" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75725:75729" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75731:75735" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75736:75740" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75744:75748" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75749:75753" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75778:75782" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75783:75787" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75788:75792" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75801:75805" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75807:75811" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75845:75849" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75860:75866" ph="&amp;quot;" />
+              <marker date="1482529838000" expanded="true" signature="75876:75882" ph="&amp;quot;" />
+              <marker date="1482529838000" expanded="true" signature="75882:75886" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75890:75894" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75899:75903" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="75924:75928" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="75942:75946" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76800:76804" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76807:76811" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76812:76816" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76817:76821" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76830:76834" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76836:76840" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76841:76845" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76849:76853" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76854:76858" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76883:76887" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76888:76892" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76893:76897" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76906:76910" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="76912:76916" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="76963:76973" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="77897:77921" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="77923:77927" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="77952:77956" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="78020:78030" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="78938:78962" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="79042:79046" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="79057:79063" ph="&amp;quot;" />
+              <marker date="1482529838000" expanded="true" signature="79073:79079" ph="&amp;quot;" />
+              <marker date="1482529838000" expanded="true" signature="79079:79083" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="79087:79091" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="79096:79100" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="79121:79125" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="79139:79143" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="80019:80043" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="80136:80146" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="80180:80184" ph="&amp;lt;" />
+              <marker date="1482529838000" expanded="true" signature="80198:80202" ph="&amp;gt;" />
+              <marker date="1482529838000" expanded="true" signature="82044:82054" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="82984:83008" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="83073:83083" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="83997:84021" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="85008:85032" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="85125:85135" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="85898:85905" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="86145:86178" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="86387:86394" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="86700:86707" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94072:94084" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94094:94137" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94113:94131" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94386:94388" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94398:94418" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94404:94412" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94662:94664" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94675:94695" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94681:94689" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94921:94923" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94933:94975" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="94961:94969" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="95243:95245" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="95256:95298" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="95284:95292" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="95621:95674" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="95627:95668" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="99075:99084" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="99581:99599" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="100116:100139" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="100786:100804" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="101403:101418" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="102024:102054" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="102735:102765" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="102775:102823" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="102781:102817" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103054:103084" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103094:103142" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103100:103136" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103425:103436" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103447:103498" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="103475:103492" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104613:104636" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104657:104691" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104663:104685" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104904:104927" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104948:104982" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="104954:104976" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="106238:106301" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="106245:106287" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="106875:106921" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="106882:106907" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="106936:106957" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107576:107728" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107612:107714" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107653:107698" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107741:107888" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107756:107874" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107773:107858" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="107792:107840" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="108779:108998" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="108815:108984" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="108856:108968" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="108902:108950" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="109829:109892" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="109835:109878" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="110440:110466" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="110931:110950" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="110984:110994" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111014:111488" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111551:111590" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111604:111643" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111675:111725" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111698:111719" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111748:111789" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="111771:111783" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="114796:114802" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="114827:114887" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="114869:114881" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="115238:115298" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="115280:115292" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="115746:115771" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="116359:116403" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="116367:116396" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="117000:117044" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="117008:117037" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118053:118209" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118214:118398" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118237:118392" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118412:118731" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118436:118630" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118461:118622" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118654:118725" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118745:119064" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118769:118963" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118794:118955" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="118987:119058" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="119078:119329" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="119102:119260" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="119343:119535" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="119367:119529" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="122552:122708" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="123306:123482" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="123327:123476" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="123496:123680" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="123519:123674" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="124793:125089" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="124813:124876" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="124897:125083" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="124920:125075" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="125103:125411" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="125125:125192" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="125215:125405" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="125239:125397" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="126624:126648" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="126630:126642" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="126943:126974" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="126949:126968" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="127254:127290" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="129449:129496" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="129456:129490" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130170:130197" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130219:130237" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130259:130277" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130299:130330" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130352:130370" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130392:130410" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130432:130463" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130485:130503" ph="..." />
+              <marker date="1482529838000" expanded="true" signature="130525:130543" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_12.md" />
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/ListOptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1921">
+          <caret line="8" column="53" lean-forward="false" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="53" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Mutable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/TocExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="28" lean-forward="false" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/options/OptionParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="22" column="31" lean-forward="false" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocLevelsOptionParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="64" column="47" lean-forward="false" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocLevelsOptionParser.java" />
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptions.java" />
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocBlockParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="45" column="27" lean-forward="false" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptionsParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="19" column="13" lean-forward="false" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptionsParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="21" column="45" lean-forward="false" selection-start-line="21" selection-start-column="45" selection-end-line="21" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#897#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/SimTocExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="40" column="41" lean-forward="false" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboSimTocSpecTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="41" lean-forward="false" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptionTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2380">
+          <caret line="153" column="45" lean-forward="false" selection-start-line="153" selection-start-column="45" selection-end-line="153" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/SimTocOptionTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2822">
+          <caret line="179" column="64" lean-forward="false" selection-start-line="179" selection-start-column="64" selection-end-line="179" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/toc_options_parser_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="5304">
+            <caret line="375" column="0" lean-forward="false" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+            <folding>
+              <element signature="e#4498#5393#0" expanded="true" />
+              <element signature="e#6373#6629#0" expanded="true" />
+              <element signature="e#9760#10658#0" expanded="true" />
+              <element signature="e#14210#14824#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/ComboTocSpecTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="30" column="129" lean-forward="false" selection-start-line="30" selection-start-column="129" selection-end-line="30" selection-end-column="129" />
+          <folding>
+            <marker date="1482540909000" expanded="true" signature="1872:2066" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="2380:2473" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="2524:2555" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="2641:2999" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="3066:3111" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="3170:3207" ph="{...}" />
+            <marker date="1482540909000" expanded="true" signature="3253:3283" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocOptions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="56" column="8" lean-forward="false" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#15903#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/main/java/com/vladsch/flexmark/ext/toc/internal/TocUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5185">
+          <caret line="305" column="46" lean-forward="false" selection-start-line="305" selection-start-column="46" selection-end-line="305" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_toc_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="1139">
+            <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <folding>
+              <element signature="e#1873#2368#0" expanded="true" />
+              <element signature="e#5286#7537#0" expanded="true" />
+              <element signature="e#8837#10736#0" expanded="true" />
+              <element signature="e#11551#12801#0" expanded="true" />
+              <element signature="e#13952#16005#0" expanded="true" />
+              <element signature="e#18937#21188#0" expanded="true" />
+              <element signature="e#21977#23227#0" expanded="true" />
+              <element signature="e#23997#25265#0" expanded="true" />
+              <element signature="e#26099#27369#0" expanded="true" />
+              <element signature="e#28131#29381#0" expanded="true" />
+              <element signature="e#30174#31424#0" expanded="true" />
+              <element signature="e#32204#33452#0" expanded="true" />
+              <element signature="e#34254#35502#0" expanded="true" />
+              <element signature="e#36342#37612#0" expanded="true" />
+              <element signature="e#38378#39627#0" expanded="true" />
+              <element signature="e#40410#41659#0" expanded="true" />
+              <element signature="e#42456#43703#0" expanded="true" />
+              <element signature="e#44507#45781#0" expanded="true" />
+              <element signature="e#46173#46508#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/resources/ext_simtoc_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="25177">
+            <caret line="1708" column="0" lean-forward="false" selection-start-line="1708" selection-start-column="0" selection-end-line="1708" selection-end-column="0" />
+            <folding>
+              <element signature="e#47077#48356#0" expanded="true" />
+              <element signature="e#49224#50497#0" expanded="true" />
+              <element signature="e#51320#52599#0" expanded="true" />
+              <element signature="e#53453#54734#0" expanded="true" />
+              <element signature="e#55566#56845#0" expanded="true" />
+              <element signature="e#57708#58989#0" expanded="true" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/mappers/IndexMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="33" column="12" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
+          <folding>
+            <element signature="e#987#1108#0" expanded="true" />
+            <element signature="e#1107#1108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequenceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="824">
+          <caret line="1097" column="0" lean-forward="false" selection-start-line="1097" selection-start-column="0" selection-end-line="1097" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/SubSequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="728">
+          <caret line="121" column="15" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/ReversedCharSequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="25" column="13" lean-forward="false" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="e#1178#1211#0" expanded="true" />
+            <element signature="e#1603#1785#0" expanded="true" />
+            <element signature="e#1784#1785#0" expanded="true" />
+            <element signature="e#1798#1831#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="64" column="35" lean-forward="true" selection-start-line="64" selection-start-column="35" selection-end-line="64" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#3137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-toc/src/test/java/com/vladsch/flexmark/ext/toc/TocOptionsParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-196">
+          <caret line="203" column="18" lean-forward="false" selection-start-line="203" selection-start-column="18" selection-end-line="203" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/NodeRendererSubContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="5" lean-forward="false" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-test-util/src/main/java/com/vladsch/flexmark/test/ComboSpecTestCase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="104" column="0" lean-forward="false" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="299" column="57" lean-forward="false" selection-start-line="299" selection-start-column="57" selection-end-line="299" selection-end-column="57" />
+          <folding>
+            <element signature="e#12647#12940#0" expanded="true" />
+            <element signature="e#12939#12940#0" expanded="true" />
+            <element signature="e#17218#17378#0" expanded="true" />
+            <element signature="e#17377#17378#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1802">
-          <caret line="106" column="53" lean-forward="false" selection-start-line="106" selection-start-column="53" selection-end-line="106" selection-end-column="53" />
+        <state relative-caret-position="501">
+          <caret line="198" column="25" lean-forward="false" selection-start-line="198" selection-start-column="25" selection-end-line="198" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="177" column="19" lean-forward="false" selection-start-line="177" selection-start-column="19" selection-end-line="177" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/test/java/com/vladsch/flexmark/test/HtmlRendererTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="78" lean-forward="false" selection-start-line="23" selection-start-column="78" selection-end-line="23" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/FormattingHtmlWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="45" lean-forward="true" selection-start-line="8" selection-start-column="45" selection-end-line="8" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="647">
+          <caret line="197" column="10" lean-forward="false" selection-start-line="197" selection-start-column="10" selection-end-line="197" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="424" column="5" lean-forward="true" selection-start-line="424" selection-start-column="5" selection-end-line="424" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VERSION.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="442">
-            <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
-            <folding />
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="531">
+            <caret line="118" column="38" lean-forward="true" selection-start-line="118" selection-start-column="38" selection-end-line="118" selection-end-column="38" />
+            <folding>
+              <element signature="e#105#998#0" expanded="true" />
+            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -3323,7 +4552,9 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#105#998#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

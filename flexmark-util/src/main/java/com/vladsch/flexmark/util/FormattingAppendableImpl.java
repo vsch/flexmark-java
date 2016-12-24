@@ -29,6 +29,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     // indent level to use after the next \n and before text is appended
     private int myIndent;
+    private int myIndentOffset;
     private BasedSequence myIndentPrefix;
 
     // pre-formatted nesting level, while >0 all text is passed through as is and not monitored
@@ -50,13 +51,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myLineCount = 0;
         myModCountOfLastEOL = 0;
         myIndent = 0;
+        myIndentOffset = 0;
         myIndentPrefix = BasedSequence.NULL;
         myPreFormattedNesting = 0;
     }
 
     private void appendIndent() throws IOException {
-        if (myIndent > 0 && !myIndentPrefix.isEmpty()) {
-            for (int i = 0; i < myIndent; i++) {
+        if (myIndent + myIndentOffset > 0 && !myIndentPrefix.isEmpty()) {
+            for (int i = 0; i < myIndent + myIndentOffset; i++) {
                 myAppendable.append(myIndentPrefix);
             }
         }
@@ -152,6 +154,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void appendImpl(final char c) throws IOException {
         if (myPreFormattedNesting > 0) {
+            appendSpaces();
             myAppendable.append(c);
             myModCount++;
         } else {
@@ -171,6 +174,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void appendImpl(final CharSequence csq, final int start, final int end) throws IOException {
         if (myPreFormattedNesting > 0) {
+            appendSpaces();
             myAppendable.append(csq, start, end);
             myModCount++;
         } else {
@@ -344,6 +348,17 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public int getIndent() {
+        return myIndent + myIndentOffset;
+    }
+
+    @Override
+    public FormattingAppendable setIndentOffset(final int indentOffset) {
+        myIndentOffset = indentOffset;
+        return this;
+    }
+
+    @Override
     public FormattingAppendable indent() {
         line();
         ++myIndent;
@@ -382,6 +397,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         if (myPreFormattedNesting <= 0) throw new IllegalStateException("closePreFormatted called with nesting == 0");
         --myPreFormattedNesting;
         return this;
+    }
+
+    @Override
+    public boolean isPreFormatted() {
+        return myPreFormattedNesting > 0;
     }
 
     @Override

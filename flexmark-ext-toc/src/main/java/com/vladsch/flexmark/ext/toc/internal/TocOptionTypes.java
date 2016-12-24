@@ -69,31 +69,89 @@ public enum TocOptionTypes implements OptionParser<TocOptions> {
         public TocOptions setOptions(TocOptions options) {
             return options.withIsTextOnly(false);
         }
-    })
+    }),
+    HIERARCHY(new BooleanOptionParser<TocOptions>(Constants.OPTION_HIERARCHY) {
+        @Override
+        protected boolean isOptionSet(TocOptions options) {
+            return options.listType == TocOptions.ListType.HIERARCHY;
+        }
+
+        @Override
+        public TocOptions setOptions(TocOptions options) {
+            return options.withListType(TocOptions.ListType.HIERARCHY);
+        }
+    }),
+    FLAT(new BooleanOptionParser<TocOptions>(Constants.OPTION_FLAT) {
+        @Override
+        protected boolean isOptionSet(TocOptions options) {
+            return options.listType == TocOptions.ListType.FLAT;
+        }
+
+        @Override
+        public TocOptions setOptions(TocOptions options) {
+            return options.withListType(TocOptions.ListType.FLAT);
+        }
+    }),
+    FLAT_REVERSED(new BooleanOptionParser<TocOptions>(Constants.OPTION_FLAT_REVERSED) {
+        @Override
+        protected boolean isOptionSet(TocOptions options) {
+            return options.listType == TocOptions.ListType.FLAT_REVERSED;
+        }
+
+        @Override
+        public TocOptions setOptions(TocOptions options) {
+            return options.withListType(TocOptions.ListType.FLAT_REVERSED);
+        }
+    }),
+    SORTED(new BooleanOptionParser<TocOptions>(Constants.OPTION_SORTED) {
+        @Override
+        protected boolean isOptionSet(TocOptions options) {
+            return options.listType == TocOptions.ListType.SORTED;
+        }
+
+        @Override
+        public TocOptions setOptions(TocOptions options) {
+            return options.withListType(TocOptions.ListType.SORTED);
+        }
+    }),
+    SORTED_REVERSED(new BooleanOptionParser<TocOptions>(Constants.OPTION_SORTED_REVERSED) {
+        @Override
+        protected boolean isOptionSet(TocOptions options) {
+            return options.listType == TocOptions.ListType.SORTED_REVERSED;
+        }
+
+        @Override
+        public TocOptions setOptions(TocOptions options) {
+            return options.withListType(TocOptions.ListType.SORTED_REVERSED);
+        }
+    }),
     ;
 
     public final OptionParser<TocOptions> parser;
 
     @Override
-    public String getOptionName() {return parser.getOptionName();}
+    public String getOptionName() { return parser.getOptionName(); }
 
     @Override
-    public Pair<TocOptions, List<ParsedOption<TocOptions>>> parseOption(BasedSequence optionText, TocOptions options, MessageProvider provider) {return parser.parseOption(optionText, options, provider);}
+    public Pair<TocOptions, List<ParsedOption<TocOptions>>> parseOption(BasedSequence optionText, TocOptions options, MessageProvider provider) { return parser.parseOption(optionText, options, provider); }
 
     @Override
-    public String getOptionText(TocOptions options, TocOptions defaultOptions) {return parser.getOptionText(options, defaultOptions);}
+    public String getOptionText(TocOptions options, TocOptions defaultOptions) { return parser.getOptionText(options, defaultOptions); }
 
-    TocOptionTypes(OptionParser<TocOptions> parser) {
-        this.parser = parser;
-    }
+    TocOptionTypes(OptionParser<TocOptions> parser) { this.parser = parser; }
 
     public static final OptionParser<TocOptions>[] OPTIONS = TocOptionTypes.values();
 
-    private static class Constants {
-        public static final String OPTION_BULLET = "bullet";
-        public static final String OPTION_NUMBERED = "numbered";
-        public static final String OPTION_TEXT = "text";
-        public static final String OPTION_FORMATTED = "formatted";
-        public static final String OPTION_LEVELS = "levels";
+    static class Constants {
+        static final String OPTION_BULLET = "bullet";
+        static final String OPTION_NUMBERED = "numbered";
+        static final String OPTION_TEXT = "text";
+        static final String OPTION_FORMATTED = "formatted";
+        static final String OPTION_HIERARCHY = "hierarchy";
+        static final String OPTION_FLAT = "flat";
+        static final String OPTION_FLAT_REVERSED = "reversed";
+        static final String OPTION_SORTED = "increasing";
+        static final String OPTION_SORTED_REVERSED = "decreasing";
+        static final String OPTION_LEVELS = "levels";
     }
 }

@@ -25,7 +25,6 @@ Document[0, 20]
 ````````````````````````````````
 
 
-
 Should fail
 
 ```````````````````````````````` example(Extra tests: 2) options(FAIL)
@@ -39,7 +38,6 @@ abc
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[3] close:[16, 19, "```"]
 ````````````````````````````````
-
 
 
 Code fence starting with setext header marker
@@ -57,7 +55,6 @@ Document[0, 20]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Extra tests: 4
 ```markdown
 ===
@@ -69,7 +66,6 @@ Document[0, 20]
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
 ````````````````````````````````
-
 
 
 Make sure indentation is properly implemented
@@ -109,7 +105,6 @@ Document[0, 54]
             Paragraph[47, 54]
               Text[47, 53] chars:[47, 53, "item 2"]
 ````````````````````````````````
-
 
 
 Make sure indentation is properly implemented
@@ -161,7 +156,6 @@ Document[0, 60]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Extra tests: 7
 - item 
   - sub item  
@@ -188,7 +182,6 @@ Document[0, 46]
             HardLineBreak[20, 23]
             Text[23, 45] chars:[23, 45, "with  … ation"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Extra tests: 8
@@ -219,6 +212,38 @@ Document[0, 58]
 ````````````````````````````````
 
 
+headings should contain inlines
+
+```````````````````````````````` example Extra tests: 9
+# Atx Heading with **bold** and _italic_ and `code`
+
+Setext Heading with **bold** and _italic_ and `code`
+----------------------------------------------------
+.
+<h1>Atx Heading with <strong>bold</strong> and <em>italic</em> and <code>code</code></h1>
+<h2>Setext Heading with <strong>bold</strong> and <em>italic</em> and <code>code</code></h2>
+.
+Document[0, 159]
+  Heading[0, 51] textOpen:[0, 1, "#"] text:[2, 51, "Atx Heading with **bold** and _italic_ and `code`"]
+    Text[2, 19] chars:[2, 19, "Atx H … with "]
+    StrongEmphasis[19, 27] textOpen:[19, 21, "**"] text:[21, 25, "bold"] textClose:[25, 27, "**"]
+      Text[21, 25] chars:[21, 25, "bold"]
+    Text[27, 32] chars:[27, 32, " and "]
+    Emphasis[32, 40] textOpen:[32, 33, "_"] text:[33, 39, "italic"] textClose:[39, 40, "_"]
+      Text[33, 39] chars:[33, 39, "italic"]
+    Text[40, 45] chars:[40, 45, " and "]
+    Code[45, 51] textOpen:[45, 46, "`"] text:[46, 50, "code"] textClose:[50, 51, "`"]
+  Heading[53, 158] text:[53, 105, "Setext Heading with **bold** and _italic_ and `code`"] textClose:[106, 158, "----------------------------------------------------"]
+    Text[53, 73] chars:[53, 73, "Setex … with "]
+    StrongEmphasis[73, 81] textOpen:[73, 75, "**"] text:[75, 79, "bold"] textClose:[79, 81, "**"]
+      Text[75, 79] chars:[75, 79, "bold"]
+    Text[81, 86] chars:[81, 86, " and "]
+    Emphasis[86, 94] textOpen:[86, 87, "_"] text:[87, 93, "italic"] textClose:[93, 94, "_"]
+      Text[87, 93] chars:[87, 93, "italic"]
+    Text[94, 99] chars:[94, 99, " and "]
+    Code[99, 105] textOpen:[99, 100, "`"] text:[100, 104, "code"] textClose:[104, 105, "`"]
+````````````````````````````````
+
 
 ## Reference Repository Keep First tests
 
@@ -241,7 +266,6 @@ Document[0, 46]
   Reference[20, 32] refOpen:[20, 21, "["] ref:[21, 24, "ref"] refClose:[24, 26, "]:"] url:[27, 32, "/url2"]
   Reference[33, 45] refOpen:[33, 34, "["] ref:[34, 37, "ref"] refClose:[37, 39, "]:"] url:[40, 45, "/url3"]
 ````````````````````````````````
-
 
 
 ## Reference Repository Keep Last tests
@@ -267,7 +291,6 @@ Document[0, 46]
 ````````````````````````````````
 
 
-
 ## References
 
 References with up to 3 leading blanks should be processed.
@@ -287,7 +310,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 References with up to 3 leading blanks should be processed.
 
 ```````````````````````````````` example References: 2
@@ -303,7 +325,6 @@ Document[0, 22]
       Text[1, 4] chars:[1, 4, "ref"]
   Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "ref"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
 ````````````````````````````````
-
 
 
 References with up to 3 leading blanks should be processed.
@@ -323,7 +344,6 @@ Document[0, 23]
 ````````````````````````````````
 
 
-
 References with up to 3 leading blanks should be processed.
 
 ```````````````````````````````` example References: 4
@@ -341,7 +361,6 @@ Document[0, 24]
       Text[1, 4] chars:[1, 4, "ref"]
   IndentedCodeBlock[11, 24]
 ````````````````````````````````
-
 
 
 ## Heading options
@@ -404,7 +423,6 @@ Document[0, 151]
 ````````````````````````````````
 
 
-
 Don't allow leading spaces
 
 ```````````````````````````````` example(Heading options: 2) options(hdr-no-lead-space)
@@ -438,7 +456,6 @@ Document[0, 81]
 ````````````````````````````````
 
 
-
 Don't allow leading spaces, don't require atx marker space
 
 ```````````````````````````````` example(Heading options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
@@ -470,7 +487,6 @@ Document[0, 75]
     SoftLineBreak[59, 60]
     Text[61, 74] chars:[61, 74, "##### … ading"]
 ````````````````````````````````
-
 
 
 Minimum setext marker length 3
@@ -531,7 +547,6 @@ Document[0, 116]
 ````````````````````````````````
 
 
-
 Minimum setext marker length 3 in lists
 
 ```````````````````````````````` example(Heading options: 5) options(setext-marker-length, empty-bullet-no-sub-item-break)
@@ -552,7 +567,6 @@ Document[0, 15]
         SoftLineBreak[7, 8]
         Text[10, 11] chars:[10, 11, "-"]
 ````````````````````````````````
-
 
 
 Minimum setext marker length 3 in lists
@@ -578,7 +592,6 @@ Document[0, 15]
       BulletList[10, 11] isTight
         BulletListItem[10, 11] open:[10, 11, "-"] isTight hadBlankLineAfter
 ````````````````````````````````
-
 
 
 ## List Options
@@ -644,7 +657,6 @@ Document[0, 97]
 ````````````````````````````````
 
 
-
 Without auto loose setting for list
 
 ```````````````````````````````` example(List - No Auto Loose: 2) options(list-no-loose)
@@ -700,7 +712,6 @@ Document[0, 97]
       Paragraph[90, 97]
         Text[90, 96] chars:[90, 96, "item 4"]
 ````````````````````````````````
-
 
 
 ### List - No Auto Loose, Loose Item if Previous Loose
@@ -764,7 +775,6 @@ Document[0, 67]
       Paragraph[59, 66]
         Text[59, 65] chars:[59, 65, "item 7"]
 ````````````````````````````````
-
 
 
 Without auto loose setting for list with loose if previous loose item
@@ -837,7 +847,6 @@ Document[0, 120]
 ````````````````````````````````
 
 
-
 ### List - No Break on Double Blank Line
 
 With break all lists on two blank lines
@@ -889,7 +898,6 @@ Document[0, 80]
       Paragraph[73, 80]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
-
 
 
 Without break all lists on two blank lines
@@ -947,7 +955,6 @@ Document[0, 80]
 ````````````````````````````````
 
 
-
 Without break all lists on two blank lines no auto loose
 
 ```````````````````````````````` example(List - No Break on Double Blank Line: 3) options(list-no-loose, list-no-break)
@@ -995,7 +1002,6 @@ Document[0, 80]
       Paragraph[73, 80]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
-
 
 
 With break all lists on two blank lines
@@ -1053,7 +1059,6 @@ Document[0, 114]
       Paragraph[107, 114]
         Text[107, 113] chars:[107, 113, "item 5"]
 ````````````````````````````````
-
 
 
 Without break on two blank lines
@@ -1122,7 +1127,6 @@ Document[0, 114]
 ````````````````````````````````
 
 
-
 ### List - No Bullet Match
 
 With bullet matching for items within a list
@@ -1158,7 +1162,6 @@ Document[0, 27]
 ````````````````````````````````
 
 
-
 Without bullet matching for items within a list
 
 ```````````````````````````````` example(List - No Bullet Match: 2) options(list-no-bullet-match)
@@ -1184,7 +1187,6 @@ Document[0, 27]
       Paragraph[20, 27]
         Text[20, 26] chars:[20, 26, "item 3"]
 ````````````````````````````````
-
 
 
 ### List - No Manual Start
@@ -1216,7 +1218,6 @@ Document[0, 30]
 ````````````````````````````````
 
 
-
 Without start
 
 ```````````````````````````````` example(List - No Manual Start: 2) options(list-no-start)
@@ -1242,7 +1243,6 @@ Document[0, 30]
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
 ````````````````````````````````
-
 
 
 ### List - Paragraph Break Options
@@ -1279,7 +1279,6 @@ Document[0, 41]
 ````````````````````````````````
 
 
-
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1.
 
@@ -1305,7 +1304,6 @@ Document[0, 41]
         SoftLineBreak[27, 28]
         Text[31, 40] chars:[31, 40, "2. item 2"]
 ````````````````````````````````
-
 
 
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
@@ -1337,7 +1335,6 @@ Document[0, 61]
         SoftLineBreak[47, 48]
         Text[51, 60] chars:[51, 60, "2. item 2"]
 ````````````````````````````````
-
 
 
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
@@ -1376,7 +1373,6 @@ Document[0, 61]
 ````````````````````````````````
 
 
-
 Without relaxed start. Lists start only if preceded by a blank line and sub-lists only when
 starting with 1 or no ordered start restriction
 
@@ -1409,7 +1405,6 @@ Document[0, 41]
 ````````````````````````````````
 
 
-
 Without relaxed start. Lists start only if preceded by a blank line.
 
 ```````````````````````````````` example(List - Paragraph Break Options: 6) options(bullet-no-para-break, ordered-no-para-break)
@@ -1439,7 +1434,6 @@ Document[0, 37]
           Paragraph[30, 37]
             Text[30, 36] chars:[30, 36, "item 2"]
 ````````````````````````````````
-
 
 
 With relaxed start. Lists can start without preceding blank lines.
@@ -1537,7 +1531,6 @@ Document[0, 163]
 ````````````````````````````````
 
 
-
 Without relaxed start. Lists start only if preceded by a blank line. Items and sub-items can
 start without a blank line.
 
@@ -1617,7 +1610,6 @@ Document[0, 160]
           Paragraph[153, 160]
             Text[153, 159] chars:[153, 159, "item 2"]
 ````````````````````````````````
-
 
 
 Without relaxed start for bullet Lists start only if preceded by a blank line. Items and
@@ -1710,7 +1702,6 @@ Document[0, 160]
 ````````````````````````````````
 
 
-
 With relaxed start but not for ordered lists. Ordered lists start only if preceded by a blank
 line.
 
@@ -1801,7 +1792,6 @@ Document[0, 160]
 ````````````````````````````````
 
 
-
 Ordered items must have a blank line before them
 
 ```````````````````````````````` example(List - Paragraph Break Options: 11) options(ordered-no-para-break, ordered-no-item-break)
@@ -1821,7 +1811,6 @@ Document[0, 48]
     SoftLineBreak[33, 34]
     Text[34, 47] chars:[34, 47, "1. no … tem 2"]
 ````````````````````````````````
-
 
 
 Ordered items must have a blank line before them
@@ -1863,7 +1852,6 @@ Document[0, 52]
 ````````````````````````````````
 
 
-
 Ordered items must have a blank line before them, but not bullet items
 
 ```````````````````````````````` example(List - Paragraph Break Options: 13) options(ordered-no-para-break, ordered-no-item-break)
@@ -1888,7 +1876,6 @@ Document[0, 38]
       Paragraph[31, 38]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
-
 
 
 Bullet items must have a blank line before them when preceded by paragraph but should not append
@@ -1929,7 +1916,6 @@ Document[0, 65]
 ````````````````````````````````
 
 
-
 Bullet items must have a blank line before them
 
 ```````````````````````````````` example(List - Paragraph Break Options: 15) options(bullet-no-para-break, bullet-no-item-break)
@@ -1949,7 +1935,6 @@ Document[0, 46]
     SoftLineBreak[32, 33]
     Text[33, 45] chars:[33, 45, "- not … tem 2"]
 ````````````````````````````````
-
 
 
 Bullet items must have a blank line before them
@@ -1991,7 +1976,6 @@ Document[0, 48]
 ````````````````````````````````
 
 
-
 Bullet items must have a blank line before them, but not ordered items
 
 ```````````````````````````````` example(List - Paragraph Break Options: 17) options(bullet-no-para-break, bullet-no-item-break)
@@ -2016,7 +2000,6 @@ Document[0, 40]
       Paragraph[33, 40]
         Text[33, 39] chars:[33, 39, "item 2"]
 ````````````````````````````````
-
 
 
 All items must have a blank line before them
@@ -2119,7 +2102,6 @@ Document[0, 209]
 ````````````````````````````````
 
 
-
 ### List - Marker Options
 
 Without ordered items dot only
@@ -2164,7 +2146,6 @@ Document[0, 43]
 ````````````````````````````````
 
 
-
 With ordered items dot only
 
 ```````````````````````````````` example(List - Marker Options: 2) options(ordered-dot-only)
@@ -2196,7 +2177,6 @@ Document[0, 43]
   Paragraph[32, 42]
     Text[32, 41] chars:[32, 41, "2) item c"]
 ````````````````````````````````
-
 
 
 An ordered list after bullet list with no bullet matching
@@ -2245,7 +2225,6 @@ Document[0, 57]
 ````````````````````````````````
 
 
-
 A bullet list after an ordered list with no bullet matching
 
 ```````````````````````````````` example(List - Marker Options: 4) options(list-no-bullet-match)
@@ -2292,7 +2271,6 @@ Document[0, 57]
 ````````````````````````````````
 
 
-
 An ordered list after bullet list, no type match
 
 ```````````````````````````````` example(List - Marker Options: 5) options(list-no-type-match)
@@ -2332,7 +2310,6 @@ Document[0, 39]
       Paragraph[32, 39]
         Text[32, 38] chars:[32, 38, "item 2"]
 ````````````````````````````````
-
 
 
 A bullet list after an ordered list, no type match
@@ -2376,7 +2353,6 @@ Document[0, 39]
 ````````````````````````````````
 
 
-
 An ordered list item can interrupt a previous list item's paragraph
 
 ```````````````````````````````` example List - Marker Options: 7
@@ -2401,7 +2377,6 @@ Document[0, 38]
       Paragraph[31, 38]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
-
 
 
 An ordered list sub item can interrupt its parent item's paragraph even if it does not start
@@ -2433,7 +2408,6 @@ Document[0, 43]
           Paragraph[34, 43]
             Text[34, 42] chars:[34, 42, "item 1.1"]
 ````````````````````````````````
-
 
 
 nested
@@ -2472,7 +2446,6 @@ Document[0, 45]
 ````````````````````````````````
 
 
-
 nested, no ordered start, no ordered para break, no ordered item paragraph break
 
 ```````````````````````````````` example(List - Marker Options: 10) options(list-no-start, ordered-no-para-break, ordered-no-item-break)
@@ -2500,7 +2473,6 @@ Document[0, 45]
         SoftLineBreak[34, 35]
         Text[35, 44] chars:[35, 44, "1. item 3"]
 ````````````````````````````````
-
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
@@ -2545,7 +2517,6 @@ Document[0, 52]
       Paragraph[45, 52]
         Text[45, 51] chars:[45, 51, "item 3"]
 ````````````````````````````````
-
 
 
 no relaxed ordered start with exception for another item's paragraph
@@ -2598,7 +2569,6 @@ Document[0, 114]
 ````````````````````````````````
 
 
-
 no relaxed ordered start with exception for another item's paragraph but only if manual list
 start is enabled
 
@@ -2646,7 +2616,6 @@ Document[0, 113]
 ````````````````````````````````
 
 
-
 nested, no bullet para break, no bullet item paragraph break
 
 ```````````````````````````````` example(List - Marker Options: 14) options(bullet-no-para-break, bullet-no-item-break)
@@ -2674,7 +2643,6 @@ Document[0, 40]
         SoftLineBreak[30, 31]
         Text[31, 39] chars:[31, 39, "- item 3"]
 ````````````````````````````````
-
 
 
 nested, no ordered start, no ordered para break, no ordered item paragraph break
@@ -2719,7 +2687,6 @@ Document[0, 47]
       Paragraph[40, 47]
         Text[40, 46] chars:[40, 46, "item 3"]
 ````````````````````````````````
-
 
 
 mismatched item to sub-item
@@ -2772,7 +2739,6 @@ Document[0, 62]
 ````````````````````````````````
 
 
-
 mismatched item to sub-item
 
 ```````````````````````````````` example(List - Marker Options: 17) options(list-item-mismatch-to-subitem)
@@ -2823,7 +2789,6 @@ Document[0, 60]
 ````````````````````````````````
 
 
-
 ### Thematic Break - No Relaxed Rules
 
 With relaxed rules. Thematic break can occur without a preceding blank line. Applies to
@@ -2843,7 +2808,6 @@ Document[0, 24]
 ````````````````````````````````
 
 
-
 Without relaxed rules. Thematic break must be preceded by a blank line. Applies to non-dashed
 thematic break, dashes are a heading.
 
@@ -2860,7 +2824,6 @@ Document[0, 24]
     SoftLineBreak[19, 20]
     Text[20, 23] chars:[20, 23, "***"]
 ````````````````````````````````
-
 
 
 ### HTML Options
@@ -2901,7 +2864,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 Encode all html
 
 ```````````````````````````````` example(HTML Encode Options: 2) options(escape-html)
@@ -2934,7 +2896,6 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
-
 
 
 Encode html blocks
@@ -2971,7 +2932,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 Encode html block comments
 
 ```````````````````````````````` example(HTML Encode Options: 4) options(escape-html-comment-blocks)
@@ -3004,7 +2964,6 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
-
 
 
 Encode inline html
@@ -3041,7 +3000,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 Encode inline html comments
 
 ```````````````````````````````` example(HTML Encode Options: 6) options(escape-inline-html-comments)
@@ -3076,7 +3034,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 #### HTML Suppress Options
 
 Suppress all html
@@ -3108,7 +3065,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 Suppress html blocks
 
 ```````````````````````````````` example(HTML Suppress Options: 2) options(suppress-html-blocks)
@@ -3136,7 +3092,6 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
-
 
 
 Suppress html comment blocks
@@ -3170,7 +3125,6 @@ Document[0, 197]
     HtmlInlineComment[164, 180] chars:[164, 180, "<!--  … t -->"]
     Text[180, 196] chars:[180, 196, " embe … n it."]
 ````````````````````````````````
-
 
 
 Suppress inline html
@@ -3207,7 +3161,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 Suppress inline html comments
 
 ```````````````````````````````` example(HTML Suppress Options: 5) options(suppress-inline-html-comments)
@@ -3242,7 +3195,6 @@ Document[0, 197]
 ````````````````````````````````
 
 
-
 ## HTML Parse Inner Comments
 
 Html comments in block
@@ -3262,7 +3214,6 @@ Document[0, 35]
 ````````````````````````````````
 
 
-
 Html comments in block
 
 ```````````````````````````````` example HTML Parse Inner Comments: 2
@@ -3279,7 +3230,6 @@ Document[0, 39]
 ````````````````````````````````
 
 
-
 Html comments in block
 
 ```````````````````````````````` example HTML Parse Inner Comments: 3
@@ -3294,7 +3244,6 @@ Html comments in block
 Document[0, 35]
   HtmlBlock[0, 35]
 ````````````````````````````````
-
 
 
 Html comments in block, parse inner comments
@@ -3314,7 +3263,6 @@ Document[0, 35]
 ````````````````````````````````
 
 
-
 Html comments in block, parse inner comments
 
 ```````````````````````````````` example(HTML Parse Inner Comments: 5) options(parse-inner-comments)
@@ -3331,7 +3279,6 @@ Document[0, 39]
 ````````````````````````````````
 
 
-
 Html comments in block, parse inner comments
 
 ```````````````````````````````` example(HTML Parse Inner Comments: 6) options(parse-inner-comments)
@@ -3345,7 +3292,6 @@ Document[0, 35]
     HtmlInnerBlock[0, 13] chars:[0, 13, "<div> … div>\n"]
     HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!--  … t -->"]
 ````````````````````````````````
-
 
 
 ## Inline HTML
@@ -3365,7 +3311,6 @@ Document[0, 36]
     HtmlInline[20, 26] chars:[20, 26, "</kbd>"]
     Text[26, 35] chars:[26, 35, " embedded"]
 ````````````````````````````````
-
 
 
 ## GFM compatibility
@@ -3392,7 +3337,6 @@ Document[0, 82]
 ````````````````````````````````
 
 
-
 Some weird commonmark processing of emphasis
 
 ```````````````````````````````` example GFM Emphasis: 2
@@ -3408,7 +3352,6 @@ Document[0, 26]
         Text[7, 18] chars:[7, 18, "bold- … talic"]
       Text[19, 23] chars:[19, 23, "bold"]
 ````````````````````````````````
-
 
 
 more emphasis tests
@@ -3428,7 +3371,6 @@ Document[0, 10]
 ````````````````````````````````
 
 
-
 more emphasis tests
 
 ```````````````````````````````` example GFM Emphasis: 4
@@ -3443,7 +3385,6 @@ Document[0, 9]
         Text[3, 4] chars:[3, 4, "a"]
       Text[6, 7] chars:[6, 7, "b"]
 ````````````````````````````````
-
 
 
 more emphasis tests
@@ -3461,7 +3402,6 @@ Document[0, 10]
       StrongEmphasis[2, 7] textOpen:[2, 4, "**"] text:[4, 5, "a"] textClose:[5, 7, "**"]
         Text[4, 5] chars:[4, 5, "a"]
 ````````````````````````````````
-
 
 
 more emphasis tests
@@ -3482,7 +3422,6 @@ Document[0, 11]
 ````````````````````````````````
 
 
-
 more emphasis tests
 
 ```````````````````````````````` example GFM Emphasis: 7
@@ -3499,7 +3438,6 @@ Document[0, 11]
         Text[4, 5] chars:[4, 5, "b"]
       Text[6, 7] chars:[6, 7, "c"]
 ````````````````````````````````
-
 
 
 more emphasis tests
@@ -3520,7 +3458,6 @@ Document[0, 15]
 ````````````````````````````````
 
 
-
 This works as expected:
 
 ```````````````````````````````` example GFM Emphasis: 9
@@ -3538,7 +3475,6 @@ Document[0, 28]
 ````````````````````````````````
 
 
-
 code mixed with emphasis:
 
 ```````````````````````````````` example GFM Emphasis: 10
@@ -3553,7 +3489,6 @@ Document[0, 32]
       Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "bold"] textClose:[19, 20, "`"]
     Code[22, 31] textOpen:[22, 23, "`"] text:[23, 30, " inside"] textClose:[30, 31, "`"]
 ````````````````````````````````
-
 
 
 ## Fenced Code Options
@@ -3573,7 +3508,6 @@ Document[0, 23]
 ````````````````````````````````
 
 
-
 empty, no info
 
 ```````````````````````````````` example Fenced Code Options: 2
@@ -3587,7 +3521,6 @@ empty, no info
 Document[0, 9]
   FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
 ````````````````````````````````
-
 
 
 empty, no info, blank line follows
@@ -3606,7 +3539,6 @@ Document[0, 10]
 ````````````````````````````````
 
 
-
 empty, info
 
 ```````````````````````````````` example Fenced Code Options: 4
@@ -3620,7 +3552,6 @@ empty, info
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
 ````````````````````````````````
-
 
 
 empty, info, blank line follows
@@ -3637,7 +3568,6 @@ empty, info, blank line follows
 Document[0, 14]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
 ````````````````````````````````
-
 
 
 Unclosed Fenced code should take all input to end
@@ -3670,7 +3600,6 @@ Document[0, 38]
 ````````````````````````````````
 
 
-
 ## Anchor links option
 
 Change language class prefix
@@ -3691,7 +3620,6 @@ Document[0, 56]
 ````````````````````````````````
 
 
-
 ## Thematic Break
 
 Break with trailing spaces
@@ -3706,7 +3634,6 @@ Document[0, 21]
 ````````````````````````````````
 
 
-
 ## Image links
 
 ```````````````````````````````` example Image links: 1
@@ -3719,7 +3646,6 @@ Document[0, 14]
     Image[0, 12] textOpen:[0, 2, "!["] text:[2, 5, "alt"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 11, "/url"] pageRef:[7, 11, "/url"] linkClose:[11, 12, ")"]
       Text[2, 5] chars:[2, 5, "alt"]
 ````````````````````````````````
-
 
 
 dummy ref
@@ -3739,7 +3665,6 @@ Document[0, 23]
 ````````````````````````````````
 
 
-
 ## Multi-Line Image URL
 
 not parsed, invalid end
@@ -3757,7 +3682,6 @@ Document[0, 20]
 ````````````````````````````````
 
 
-
 empty content
 
 ```````````````````````````````` example(Multi-Line Image URL: 2) options(multi-line-image-url)
@@ -3771,7 +3695,6 @@ Document[0, 16]
     Image[0, 15] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 14] linkClose:[14, 15, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
-
 
 
 empty content
@@ -3789,7 +3712,6 @@ Document[0, 19]
 ````````````````````````````````
 
 
-
 simple content
 
 ```````````````````````````````` example(Multi-Line Image URL: 4) options(multi-line-image-url)
@@ -3804,7 +3726,6 @@ Document[0, 25]
     Image[0, 24] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 23, "one line\n"] linkClose:[23, 24, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
-
 
 
 simple content
@@ -3824,7 +3745,6 @@ Document[0, 34]
 ````````````````````````````````
 
 
-
 false title
 
 ```````````````````````````````` example(Multi-Line Image URL: 6) options(multi-line-image-url)
@@ -3840,7 +3760,6 @@ Document[0, 52]
     Image[0, 51] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 37, "one line\n\"false title\"\n"] titleOpen:[38, 39, "\""] title:[39, 49, "real title"] titleClose:[49, 50, "\""] linkClose:[50, 51, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
-
 
 
 trailing text
@@ -3861,7 +3780,6 @@ Document[0, 48]
 ````````````````````````````````
 
 
-
 encoding of &, =
 
 ```````````````````````````````` example(Multi-Line Image URL: 8) options(multi-line-image-url)
@@ -3877,7 +3795,6 @@ Document[0, 45]
       Text[2, 5] chars:[2, 5, "ref"]
     Text[30, 44] chars:[30, 44, " trai …  text"]
 ````````````````````````````````
-
 
 
 encoding of embedded EOL
@@ -3898,7 +3815,6 @@ Document[0, 60]
 ````````````````````````````````
 
 
-
 ## Fenced Code
 
 Option not to match closing fence characters to opening ones
@@ -3916,7 +3832,6 @@ Document[0, 37]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example(Fenced Code: 2) options(unmatched-fence)
 ~~~
 proper unmatched fenced code
@@ -3928,7 +3843,6 @@ proper unmatched fenced code
 Document[0, 37]
   FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[1] close:[33, 36, "```"]
 ````````````````````````````````
-
 
 
 non empty, info, blank line follows, unmatched
@@ -3945,7 +3859,6 @@ some text
 Document[0, 23]
   FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[1] close:[18, 21, "~~~"]
 ````````````````````````````````
-
 
 
 ## IntelliJ Dummy Identifier
@@ -3971,7 +3884,6 @@ Document[0, 32]
 ````````````````````````````````
 
 
-
 ## Indented Code Options
 
 trim trailing blank lines by default
@@ -3992,7 +3904,6 @@ Document[0, 38]
 ````````````````````````````````
 
 
-
 don't trim trailing blank lines
 
 ```````````````````````````````` example(Indented Code Options: 2) options(code-no-trim-trailing)
@@ -4011,7 +3922,6 @@ Document[0, 38]
 ````````````````````````````````
 
 
-
 ## Links
 
 Url encoded link address should not % encode the query separator `&`
@@ -4028,7 +3938,6 @@ Document[0, 32]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Links: 2
 [ref]: /url1
 
@@ -4042,7 +3951,6 @@ Document[0, 22]
     LinkRef[14, 21] referenceOpen:[14, 15, "["] reference:[15, 18, "ref"] referenceClose:[18, 19, "]"] textOpen:[19, 20, "["] textClose:[20, 21, "]"]
       Text[15, 18] chars:[15, 18, "ref"]
 ````````````````````````````````
-
 
 
 ## Block Quotes
@@ -4072,7 +3980,6 @@ Document[0, 16]
 ````````````````````````````````
 
 
-
 without block quote to next blank line causes an interrupted list with a second list after the
 quote.
 
@@ -4100,7 +4007,6 @@ Document[0, 16]
       Paragraph[12, 16]
         Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
-
 
 
 Block quotes don't ignore interspersing blank lines
@@ -4151,7 +4057,6 @@ Document[0, 68]
 ````````````````````````````````
 
 
-
 Block quotes ignore interspersing blank lines
 
 ```````````````````````````````` example(Block Quotes: 4) options(block-ignore-blank)
@@ -4191,7 +4096,6 @@ Document[0, 68]
 ````````````````````````````````
 
 
-
 Block quotes ignore interspersing blank lines but don't include any lines without prefix after
 blank lines
 
@@ -4220,7 +4124,6 @@ Document[0, 59]
 ````````````````````````````````
 
 
-
 ## Hard Line Break Limit
 
 Only attribute two last spaces of a hard line break space sequence
@@ -4238,7 +4141,6 @@ Document[0, 21]
     HardLineBreak[6, 9]
     Text[9, 20] chars:[9, 20, "line  … reaks"]
 ````````````````````````````````
-
 
 
 ## Source Position Attribute
@@ -4354,7 +4256,6 @@ Document[0, 230]
 ````````````````````````````````
 
 
-
 fenced code
 
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
@@ -4369,7 +4270,6 @@ text
 Document[0, 18]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
 ````````````````````````````````
-
 
 
 fenced code with trailing spaces and tabs on close
@@ -4390,7 +4290,6 @@ Document[0, 25]
   Paragraph[20, 25]
     Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
-
 
 
 no source wrap HTML
@@ -4415,7 +4314,6 @@ Document[0, 65]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
     HtmlInline[57, 64] chars:[57, 64, "</span>"]
 ````````````````````````````````
-
 
 
 source wrap HTML
@@ -4444,7 +4342,6 @@ Document[0, 65]
 ````````````````````````````````
 
 
-
 source wrap HTML blocks
 
 ```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines, src-wrap-blocks)
@@ -4469,7 +4366,6 @@ Document[0, 65]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
     HtmlInline[57, 64] chars:[57, 64, "</span>"]
 ````````````````````````````````
-
 
 
 Wrap individual paragraph lines in source position marked spans
@@ -4620,7 +4516,6 @@ Document[0, 456]
 ````````````````````````````````
 
 
-
 Wrap individual paragraph lines in source position marked spans
 
 ```````````````````````````````` example(Source Position Attribute: 8) options(src-pos, src-pos-lines)
@@ -4640,7 +4535,6 @@ Document[0, 71]
     SoftLineBreak[40, 41]
     Text[41, 70] chars:[41, 70, "all s … apped"]
 ````````````````````````````````
-
 
 
 Wrap individual paragraph lines in source position marked spans tight list items
@@ -4688,7 +4582,6 @@ Document[0, 137]
         SoftLineBreak[105, 106]
         Text[106, 135] chars:[106, 135, "all s … apped"]
 ````````````````````````````````
-
 
 
 Wrap individual paragraph lines in source position marked spans loose list items
@@ -4758,7 +4651,6 @@ Document[0, 154]
 ````````````````````````````````
 
 
-
 ### Issue #17
 
 one line blank after code should not be kept as part of the code block
@@ -4777,7 +4669,6 @@ Document[0, 17]
   Paragraph[7, 17]
     Text[7, 16] chars:[7, 16, "some text"]
 ````````````````````````````````
-
 
 
 Blank lines before and after should not be kept
@@ -4805,7 +4696,6 @@ Document[0, 26]
 ````````````````````````````````
 
 
-
 ## Mixed EOLs
 
 Escape crlf
@@ -4825,7 +4715,6 @@ Document[0, 29]
 ````````````````````````````````
 
 
-
 ## Jekyll Macros in URLs
 
 Allow funny URLs
@@ -4842,7 +4731,6 @@ Document[0, 44]
 ````````````````````````````````
 
 
-
 Allow funny URLs
 
 ```````````````````````````````` example(Jekyll Macros in URLs: 2) options(jekyll-macros-in-urls)
@@ -4857,7 +4745,6 @@ Document[0, 48]
 ````````````````````````````````
 
 
-
 Allow funny URLs
 
 ```````````````````````````````` example(Jekyll Macros in URLs: 3) options(jekyll-macros-in-urls)
@@ -4870,7 +4757,6 @@ Document[0, 38]
     Link[0, 37] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 36, "{{ macro|()|$/| }}someFile.ext"] pageRef:[6, 36, "{{ macro|()|$/| }}someFile.ext"] linkClose:[36, 37, ")"]
       Text[1, 4] chars:[1, 4, "ref"]
 ````````````````````````````````
-
 
 
 ## Lists - Markdown Navigator
@@ -4897,6 +4783,7 @@ Document[0, 31]
       Heading[23, 29] textOpen:[23, 24, "#"] text:[25, 29, "Test"]
         Text[25, 29] chars:[25, 29, "Test"]
 ````````````````````````````````
+
 
 Allow all breaks for list items
 
@@ -5009,7 +4896,5 @@ Document[0, 163]
   OrderedList[160, 162] isTight start:2 delimiter:'.'
     OrderedListItem[160, 162] open:[160, 162, "2."] isTight
 ````````````````````````````````
-
-
 
 

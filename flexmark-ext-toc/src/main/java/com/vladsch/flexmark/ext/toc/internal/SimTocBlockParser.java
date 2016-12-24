@@ -38,12 +38,12 @@ public class SimTocBlockParser extends AbstractBlockParser {
 
     private final SimTocBlock block;
     //private BlockContent content = new BlockContent();
-    private final SimTocOptions options;
+    private final TocOptions options;
     private int haveChildren = 0;
     private BasedSequence blankLineSpacer = BasedSequence.NULL;
 
     SimTocBlockParser(DataHolder options, BasedSequence tocChars, BasedSequence styleChars, BasedSequence titleChars) {
-        this.options = new SimTocOptions(options);
+        this.options = new TocOptions(options);
         block = new SimTocBlock(tocChars, styleChars, titleChars);
     }
 

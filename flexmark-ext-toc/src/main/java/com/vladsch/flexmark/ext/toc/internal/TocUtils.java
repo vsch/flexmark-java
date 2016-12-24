@@ -7,14 +7,11 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
-import com.vladsch.flexmark.util.Computable;
-import com.vladsch.flexmark.util.Escaping;
-import com.vladsch.flexmark.util.ValueRunnable;
+import com.vladsch.flexmark.util.*;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class TocUtils {
     final static public AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
@@ -88,7 +85,7 @@ public class TocUtils {
         for (int i = 0; i < headings.size(); i++) {
             Heading header = headings.get(i);
             String headerText = headingTexts.get(i);
-            int headerLevel = header.getLevel();
+            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : header.getLevel();
 
             if (initLevel == -1) {
                 initLevel = headerLevel;
@@ -170,27 +167,80 @@ public class TocUtils {
         return filteredHeadings;
     }
 
-    public static List<String> htmlHeaderTexts(NodeRendererContext context, List<Heading> headings, TocOptions tocOptions) {
-        ArrayList<String> headerTexts = new ArrayList<>(headings.size());
+    public static Paired<List<Heading>, List<String>> htmlHeadingTexts(NodeRendererContext context, List<Heading> headings, TocOptions tocOptions) {
+        final List<String> headingContents = new ArrayList<>(headings.size());
+        final boolean isReversed = tocOptions.listType == TocOptions.ListType.SORTED_REVERSED || tocOptions.listType == TocOptions.ListType.FLAT_REVERSED;
+        final boolean isSorted = tocOptions.listType == TocOptions.ListType.SORTED || tocOptions.listType == TocOptions.ListType.SORTED_REVERSED;
+        final  boolean needText = isReversed || isSorted;
+        final HashMap<String, Heading> headingNodes = !needText ? null : new HashMap<String, Heading>(headings.size());
+        final HashMap<String, String> headingTexts = !needText || tocOptions.isTextOnly ? null : new HashMap<String, String>(headings.size());
 
-        for (Heading header : headings) {
-            String headerText;
-            boolean isRaw;
+        for (Heading heading : headings) {
+            String headingContent;
             // need to skip anchor links but render emphasis
             if (tocOptions.isTextOnly) {
-                headerText = Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
-                isRaw = false;
+                headingContent = getHeadingText(heading);
             } else {
-                TextCollectingAppendable out = new TextCollectingAppendable();
-                NodeRendererContext subContext = context.getSubContext(out, false);
-                subContext.doNotRenderLinks();
-                subContext.renderChildren(header);
-                headerText = out.getHtml();
+                TextCollectingAppendable out = getHeadingContent(context, heading);
+                headingContent = out.getHtml();
+
+                if (needText) {
+                    headingTexts.put(headingContent, getHeadingText(heading));
+                }
             }
-            headerTexts.add(headerText);
+
+            if (needText) {
+                headingNodes.put(headingContent, heading);
+            }
+            headingContents.add(headingContent);
         }
 
-        return headerTexts;
+        if (isSorted || isReversed) {
+            if (tocOptions.isTextOnly) {
+                if (isSorted) {
+                    Collections.sort(headingContents, new Comparator<String>() {
+                        @Override
+                        public int compare(String heading1, String heading2) {
+                            return isReversed ? heading2.compareTo(heading1) : heading1.compareTo(heading2);
+                        }
+                    });
+                } else {
+                    Collections.reverse(headingContents);
+                }
+            } else {
+                if (isSorted) {
+                    Collections.sort(headingContents, new Comparator<String>() {
+                        @Override
+                        public int compare(String heading1, String heading2) {
+                            final String headingText1 = headingTexts.get(heading1);
+                            final String headingText2 = headingTexts.get(heading2);
+                            return isReversed ? headingText2.compareTo(headingText1) : headingText1.compareTo(headingText2);
+                        }
+                    });
+                } else {
+                    Collections.reverse(headingContents);
+                }
+            }
+
+            headings = new ArrayList<>();
+            for (String headingContent : headingContents) {
+                headings.add(headingNodes.get(headingContent));
+            }
+        }
+
+        return Pair.of(headings, headingContents);
+    }
+
+    private static String getHeadingText(Heading header) {
+        return Escaping.escapeHtml(new TextCollectingVisitor().collectAndGetText(header), false);
+    }
+
+    private static TextCollectingAppendable getHeadingContent(NodeRendererContext context, Heading header) {
+        TextCollectingAppendable out = new TextCollectingAppendable();
+        NodeRendererContext subContext = context.getSubContext(out, false);
+        subContext.doNotRenderLinks();
+        subContext.renderChildren(header);
+        return out;
     }
 
     public static List<String> markdownHeaderTexts(List<Heading> headings, TocOptions tocOptions) {
@@ -253,7 +303,7 @@ public class TocUtils {
         for (int i = 0; i < headings.size(); i++) {
             Heading header = headings.get(i);
             String headerText = headingTexts.get(i);
-            int headerLevel = header.getLevel();
+            int headerLevel = tocOptions.listType != TocOptions.ListType.HIERARCHY ? 1 : header.getLevel();
 
             if (initLevel == -1) {
                 initLevel = headerLevel;
