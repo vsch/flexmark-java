@@ -4,10 +4,10 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.8.0</version>
+        <version>0.9.0</version>
     </parent>
 
-    <artifactId>ins</artifactId>
+    <artifactId>flexmark-ext-ins</artifactId>
     <name>flexmark-java extension for ins</name>
     <description>flexmark-java extension for ins</description>
 
@@ -24,10 +24,6 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-jira-converter</artifactId>
         </dependency>
     </dependencies>
 </project>
