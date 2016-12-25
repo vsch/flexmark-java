@@ -400,4 +400,21 @@ Document[0, 52]
         Text[33, 48] chars:[33, 48, "stron … hasis"]
 ````````````````````````````````
 
+```````````````````````````````` example Subscript Source Position Attribute: 2
+~~DiHydrogen Oxide~~ H~2~O
+.
+<p><del>DiHydrogen Oxide</del> H<sub>2</sub>O</p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Strikethrough[0, 20] textOpen:[0, 2, "~~"] text:[2, 18, "DiHyd … rogen Oxide"] textClose:[18, 20, "~~"]
+      Text[2, 18] chars:[2, 18, "DiHyd … Oxide"]
+    Text[20, 22] chars:[20, 22, " H"]
+    Subscript[22, 25] textOpen:[22, 23, "~"] text:[23, 24, "2"] textClose:[24, 25, "~"]
+      Text[23, 24] chars:[23, 24, "2"]
+    Text[25, 26] chars:[25, 26, "O"]
+````````````````````````````````
+
+
+
 

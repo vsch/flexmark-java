@@ -14,12 +14,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/flexmark_parent_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/flexmark_parent_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/BiConsumer.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/BiConsumer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/html/FormattingAppendable.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/html/FormattingAppendable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-java.wiki/Extensions.md" afterPath="$PROJECT_DIR$/flexmark-java.wiki/Extensions.md" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -102,11 +102,9 @@
         <entry file="file://$PROJECT_DIR$/VERSION.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="4131">
+              <first_editor relative-caret-position="5321">
                 <caret line="313" column="8" lean-forward="false" selection-start-line="313" selection-start-column="8" selection-end-line="313" selection-end-column="8" />
-                <folding>
-                  <marker date="1482638786000" expanded="true" signature="10233:10862" ph="{...}" />
-                </folding>
+                <folding />
               </first_editor>
               <second_editor />
             </state>
@@ -123,75 +121,171 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ComboInsSpecTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ComboInsSpecTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/test/java/com/vladsch/flexmark/ext/ins/ComboInsSpecTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1028">
-              <caret line="68" column="179" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+            <state relative-caret-position="714">
+              <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InsExtension.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsExtension.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-              <folding />
+      <file leaf-file-name="ext_strikethrough_subscript_ast_spec.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="6528">
+                <caret line="384" column="38" lean-forward="false" selection-start-line="384" selection-start-column="38" selection-end-line="384" selection-end-column="38" />
+                <folding>
+                  <element signature="e#459#611#0" expanded="true" />
+                  <element signature="e#752#910#0" expanded="true" />
+                  <element signature="e#1046#1119#0" expanded="true" />
+                  <element signature="e#1249#1319#0" expanded="true" />
+                  <element signature="e#1449#1519#0" expanded="true" />
+                  <element signature="e#1673#1921#0" expanded="true" />
+                  <element signature="e#2064#2255#0" expanded="true" />
+                  <element signature="e#2687#4146#0" expanded="true" />
+                  <element signature="e#4399#4975#0" expanded="true" />
+                  <element signature="e#5162#5420#0" expanded="true" />
+                  <element signature="e#5777#6353#0" expanded="true" />
+                  <element signature="e#6638#6790#0" expanded="true" />
+                  <element signature="e#6923#7081#0" expanded="true" />
+                  <element signature="e#7209#7282#0" expanded="true" />
+                  <element signature="e#7404#7474#0" expanded="true" />
+                  <element signature="e#7596#7666#0" expanded="true" />
+                  <element signature="e#7812#8060#0" expanded="true" />
+                  <element signature="e#8195#8386#0" expanded="true" />
+                  <element signature="e#8807#10362#0" expanded="true" />
+                  <element signature="e#10605#11175#0" expanded="true" />
+                  <element signature="e#11354#11612#0" expanded="true" />
+                  <element signature="e#11987#12557#0" expanded="true" />
+                  <element signature="e#12752#13146#0" expanded="true" />
+                  <marker date="1482641993000" expanded="true" signature="11:43" ph="Gfm Strik…nsion Spec" />
+                  <marker date="1482641993000" expanded="true" signature="52:70" ph="Vladimir Schneider" />
+                  <marker date="1482641993000" expanded="true" signature="80:83" ph="0.1" />
+                  <marker date="1482641993000" expanded="true" signature="90:102" ph="2016-06-06" />
+                  <marker date="1482641993000" expanded="true" signature="112:176" ph="[CC-BY-SA…y-sa/4.0/)" />
+                  <marker date="1482641993000" expanded="true" signature="5114:5158" ph="..." />
+                  <marker date="1482641993000" expanded="true" signature="11306:11350" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InsJiraRenderer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/internal/InsJiraRenderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-              <folding>
-                <element signature="e#786#990#0" expanded="true" />
-                <element signature="e#989#990#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="1141">
+                <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
+                <folding>
+                  <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
+                  <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InsDelimiterProcessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/internal/InsDelimiterProcessor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-              <folding />
+      <file leaf-file-name="25.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="221">
+                <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InsVisitor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsVisitor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-              <folding />
+      <file leaf-file-name="Extensions.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/Extensions.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="852">
+                <caret line="598" column="9" lean-forward="false" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
+                <folding>
+                  <marker date="1482644914000" expanded="true" signature="1236:1372" ph="..." />
+                  <marker date="1482644914000" expanded="true" signature="2456:2538" ph="..." />
+                  <marker date="1482644914000" expanded="true" signature="42791:42882" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InsVisitorExt.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsVisitorExt.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
+      <file leaf-file-name="ins_ast_spec.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/test/resources/ins_ast_spec.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="3638">
+                <caret line="214" column="12" lean-forward="false" selection-start-line="214" selection-start-column="12" selection-end-line="214" selection-end-column="12" />
+                <folding>
+                  <element signature="e#350#422#0" expanded="true" />
+                  <element signature="e#598#748#0" expanded="true" />
+                  <element signature="e#918#993#0" expanded="true" />
+                  <element signature="e#1160#1232#0" expanded="true" />
+                  <element signature="e#1399#1471#0" expanded="true" />
+                  <element signature="e#1649#1865#0" expanded="true" />
+                  <element signature="e#2042#2225#0" expanded="true" />
+                  <element signature="e#2405#2565#0" expanded="true" />
+                  <element signature="e#2746#2935#0" expanded="true" />
+                  <element signature="e#3118#3308#0" expanded="true" />
+                  <element signature="e#3499#3770#0" expanded="true" />
+                  <element signature="e#3962#4270#0" expanded="true" />
+                  <element signature="e#4463#4772#0" expanded="true" />
+                  <element signature="e#4966#5280#0" expanded="true" />
+                  <element signature="e#5571#6136#0" expanded="true" />
+                  <element signature="e#6366#6621#0" expanded="true" />
+                  <element signature="e#6934#7189#0" expanded="true" />
+                  <marker date="1482641308000" expanded="true" signature="11:29" ph="Ins Extension Spec" />
+                  <marker date="1482641308000" expanded="true" signature="38:56" ph="Vladimir Schneider" />
+                  <marker date="1482641308000" expanded="true" signature="66:69" ph="0.1" />
+                  <marker date="1482641308000" expanded="true" signature="76:88" ph="2016-06-06" />
+                  <marker date="1482641308000" expanded="true" signature="98:162" ph="[CC-BY-SA…y-sa/4.0/)" />
+                  <marker date="1482641308000" expanded="true" signature="6313:6362" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="29" lean-forward="false" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
-              <folding />
+      <file leaf-file-name="superscript_ast_spec.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-superscript/src/test/resources/superscript_ast_spec.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="544">
+                <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+                <folding>
+                  <element signature="e#435#589#0" expanded="true" />
+                  <element signature="e#735#979#0" expanded="true" />
+                  <element signature="e#1109#1182#0" expanded="true" />
+                  <element signature="e#1306#1376#0" expanded="true" />
+                  <element signature="e#1500#1570#0" expanded="true" />
+                  <element signature="e#1729#2069#0" expanded="true" />
+                  <element signature="e#2217#2494#0" expanded="true" />
+                  <element signature="e#2953#5056#0" expanded="true" />
+                  <element signature="e#5301#5870#0" expanded="true" />
+                  <element signature="e#6064#6419#0" expanded="true" />
+                  <element signature="e#6563#6789#0" expanded="true" />
+                  <element signature="e#7142#7749#0" expanded="true" />
+                  <marker date="1482641308000" expanded="true" signature="11:37" ph="Superscri…nsion Spec" />
+                  <marker date="1482641308000" expanded="true" signature="46:64" ph="Vladimir Schneider" />
+                  <marker date="1482641308000" expanded="true" signature="74:77" ph="0.1" />
+                  <marker date="1482641308000" expanded="true" signature="84:96" ph="2016-06-06" />
+                  <marker date="1482641308000" expanded="true" signature="106:170" ph="[CC-BY-SA…y-sa/4.0/)" />
+                  <marker date="1482641308000" expanded="true" signature="6003:6060" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -199,7 +293,7 @@
       <file leaf-file-name="FormattingAppendable.java" pinned="true" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/html/FormattingAppendable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
+            <state relative-caret-position="4862">
               <caret line="286" column="29" lean-forward="false" selection-start-line="286" selection-start-column="29" selection-end-line="286" selection-end-column="29" />
               <folding />
             </state>
@@ -295,7 +389,7 @@
   </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="SYNC" />
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/flexmark-java.wiki" />
     <option name="RECENT_COMMON_BRANCH" value="master" />
     <option name="PUSH_TAGS">
       <GitPushTagMode />
@@ -429,7 +523,6 @@
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendable.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/FormattingAppendableImpl.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/MappedSequence.java" />
-        <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" />
         <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequenceTest.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/ReversedCharSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/test/java/com/vladsch/flexmark/util/sequence/ReversedCharSequenceTest.java" />
@@ -512,7 +605,6 @@
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/ComboStrikethroughSubscriptSpecTest.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/java/com/vladsch/flexmark/ext/gfm/strikethrough/ExtGfmStrikethroughTestSuite.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_subscript_ast_spec.md" />
-        <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/src/test/java/com/vladsch/flexmark/jira/converter/ComboJiraConverterSpecTest.java" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/src/test/resources/jira_converter_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-superscript/flexmark-ext-superscript.iml" />
@@ -525,7 +617,6 @@
         <option value="$PROJECT_DIR$/flexmark-test-suite/src/test/java/com/vladsch/flexmark/FlexmarkTestSuite.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-superscript/src/test/resources/superscript_ast_spec.md" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-java.wiki/Extensions.md" />
         <option value="$PROJECT_DIR$/VERSION.md" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-ins/pom.xml" />
@@ -535,6 +626,9 @@
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/BasedSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/sequence/RepeatedCharSequence.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-ins/src/main/java/com/vladsch/flexmark/ext/ins/InsExtension.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md" />
+        <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" />
+        <option value="$PROJECT_DIR$/flexmark-java.wiki/Extensions.md" />
       </list>
     </option>
   </component>
@@ -737,6 +831,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -746,6 +843,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlexmarkJavaAssets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FlexmarkJavaAssets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="issues" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -891,7 +1020,87 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java.wiki" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="flexmark-ext-superscript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-superscript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-superscript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-superscript" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1082,6 +1291,36 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="flexmark-ext-gfm-strikethrough" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -1141,9 +1380,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1151,8 +1387,8 @@
     <property name="editor.config.accepted" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="TEXT&#10;JAVA&#10;Markdown&#10;HTML" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Markdown" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="settings.editor.selected.configurable" value="MarkdownNavigator.Settings.Parser" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.1286425" />
     <property name="project.structure.side.proportion" value="0.5941704" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../pegdown" />
@@ -2075,9 +2311,6 @@
     </servers>
   </component>
   <component name="TestHistory">
-    <history-entry file="All_Tests - 2016.12.24 at 22h 50m 43s.xml">
-      <configuration name="All Tests" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_Tests - 2016.12.24 at 22h 51m 24s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
@@ -2088,6 +2321,9 @@
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
     <history-entry file="All_Tests - 2016.12.24 at 22h 55m 35s.xml">
+      <configuration name="All Tests" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_Tests - 2016.12.24 at 23h 57m 52s.xml">
       <configuration name="All Tests" configurationId="JUnit" />
     </history-entry>
     <history-entry file="JiraConverterTestSuite - 2016.12.24 at 22h 38m 45s.xml">
@@ -2137,7 +2373,6 @@
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29968944" sideWeight="0.49643177" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17003106" sideWeight="0.6512681" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Regex Tester" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32801276" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -2146,9 +2381,8 @@
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.318323" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28804347" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32763976" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20887728" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20800696" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1886646" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26404995" sideWeight="0.5029387" order="6" side_tool="true" content_ui="tabs" />
@@ -2159,6 +2393,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17003106" sideWeight="0.6512681" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="left" auto_hide="true" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.16604617" sideWeight="0.4993679" order="1" side_tool="true" content_ui="tabs" x="1065" y="664" width="580" height="522" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2176,6 +2411,7 @@
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14556135" sideWeight="0.5006321" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32961783" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1886646" sideWeight="0.49831975" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Copy/Paste" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13504992" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3054,17 +3290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="136">
-            <caret line="8" column="52" lean-forward="true" selection-start-line="8" selection-start-column="52" selection-end-line="8" selection-end-column="52" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/HtmlRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -3212,7 +3437,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3229,7 +3453,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="13" lean-forward="false" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3237,7 +3460,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="9" lean-forward="false" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3246,7 +3468,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="2" lean-forward="false" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3254,7 +3475,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3262,7 +3482,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="59" lean-forward="true" selection-start-line="29" selection-start-column="50" selection-end-line="29" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3270,7 +3489,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="20" column="101" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3278,7 +3496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="52" lean-forward="false" selection-start-line="15" selection-start-column="52" selection-end-line="15" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3286,7 +3503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="24" column="20" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3294,7 +3510,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="321" column="15" lean-forward="false" selection-start-line="318" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3302,7 +3517,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3310,7 +3524,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3318,7 +3531,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="55" column="29" lean-forward="false" selection-start-line="50" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3326,7 +3538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
           <caret line="17" column="34" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3334,7 +3545,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="489">
           <caret line="32" column="93" lean-forward="false" selection-start-line="32" selection-start-column="93" selection-end-line="32" selection-end-column="93" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3342,7 +3552,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="489">
           <caret line="32" column="80" lean-forward="false" selection-start-line="32" selection-start-column="80" selection-end-line="32" selection-end-column="80" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3350,12 +3559,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="44" column="7" lean-forward="true" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
-          <folding>
-            <element signature="e#915#1177#0" expanded="true" />
-            <element signature="e#1176#1177#0" expanded="true" />
-            <element signature="e#1241#1495#0" expanded="true" />
-            <element signature="e#1494#1495#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3363,10 +3566,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="47" column="19" lean-forward="false" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-          <folding>
-            <element signature="e#1253#1511#0" expanded="true" />
-            <element signature="e#1510#1511#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3374,12 +3573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="761">
           <caret line="47" column="19" lean-forward="false" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
-          <folding>
-            <element signature="e#915#1177#0" expanded="true" />
-            <element signature="e#1176#1177#0" expanded="true" />
-            <element signature="e#1241#1495#0" expanded="true" />
-            <element signature="e#1494#1495#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3387,7 +3580,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="75" lean-forward="false" selection-start-line="22" selection-start-column="75" selection-end-line="22" selection-end-column="75" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3395,7 +3587,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="81" lean-forward="false" selection-start-line="14" selection-start-column="81" selection-end-line="14" selection-end-column="81" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3403,47 +3594,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="43" lean-forward="false" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="514">
-            <caret line="392" column="18" lean-forward="false" selection-start-line="392" selection-start-column="18" selection-end-line="392" selection-end-column="18" />
-            <folding>
-              <element signature="e#459#611#0" expanded="true" />
-              <element signature="e#752#910#0" expanded="true" />
-              <element signature="e#1046#1119#0" expanded="true" />
-              <element signature="e#1249#1319#0" expanded="true" />
-              <element signature="e#1449#1519#0" expanded="true" />
-              <element signature="e#1673#1921#0" expanded="true" />
-              <element signature="e#2064#2255#0" expanded="true" />
-              <element signature="e#2687#4146#0" expanded="true" />
-              <element signature="e#4399#4975#0" expanded="true" />
-              <element signature="e#5162#5420#0" expanded="true" />
-              <element signature="e#5777#6353#0" expanded="true" />
-              <element signature="e#6638#6790#0" expanded="true" />
-              <element signature="e#6923#7081#0" expanded="true" />
-              <element signature="e#7209#7282#0" expanded="true" />
-              <element signature="e#7404#7474#0" expanded="true" />
-              <element signature="e#7596#7666#0" expanded="true" />
-              <element signature="e#7812#8060#0" expanded="true" />
-              <element signature="e#8195#8386#0" expanded="true" />
-              <element signature="e#8807#10362#0" expanded="true" />
-              <element signature="e#10605#11175#0" expanded="true" />
-              <element signature="e#11354#11612#0" expanded="true" />
-              <marker date="1482637116000" expanded="true" signature="11:43" ph="Gfm Strik…nsion Spec" />
-              <marker date="1482637116000" expanded="true" signature="52:70" ph="Vladimir Schneider" />
-              <marker date="1482637116000" expanded="true" signature="80:83" ph="0.1" />
-              <marker date="1482637116000" expanded="true" signature="90:102" ph="2016-06-06" />
-              <marker date="1482637116000" expanded="true" signature="112:176" ph="[CC-BY-SA…y-sa/4.0/)" />
-              <marker date="1482637116000" expanded="true" signature="5114:5158" ph="..." />
-              <marker date="1482637116000" expanded="true" signature="11306:11350" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -3451,7 +3601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="25" column="53" lean-forward="false" selection-start-line="25" selection-start-column="53" selection-end-line="25" selection-end-column="53" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3460,24 +3609,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="735">
             <caret line="2359" column="0" lean-forward="false" selection-start-line="2359" selection-start-column="0" selection-end-line="2359" selection-end-column="0" />
-            <folding>
-              <element signature="e#105995#106197#0" expanded="true" />
-              <element signature="e#106358#106614#0" expanded="true" />
-              <element signature="e#106817#107072#0" expanded="true" />
-              <element signature="e#107228#107478#0" expanded="true" />
-              <element signature="e#107648#107925#0" expanded="true" />
-              <element signature="e#108097#108400#0" expanded="true" />
-              <element signature="e#108586#108913#0" expanded="true" />
-              <element signature="e#109186#109751#0" expanded="true" />
-              <element signature="e#109958#110213#0" expanded="true" />
-              <element signature="e#110435#111005#0" expanded="true" />
-              <element signature="e#111216#111475#0" expanded="true" />
-              <marker date="1482637245000" expanded="true" signature="11:29" ph="JiraConverter Spec" />
-              <marker date="1482637245000" expanded="true" signature="53:65" ph="2016-09-23" />
-              <marker date="1482637245000" expanded="true" signature="75:139" ph="[CC-BY-SA…y-sa/4.0/)" />
-              <marker date="1482637245000" expanded="true" signature="12756:12769" ph="..." />
-              <marker date="1482637245000" expanded="true" signature="13027:13040" ph="..." />
-            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -3487,7 +3618,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="56" lean-forward="false" selection-start-line="25" selection-start-column="56" selection-end-line="25" selection-end-column="56" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3495,7 +3625,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-55">
           <caret line="25" column="31" lean-forward="false" selection-start-line="25" selection-start-column="31" selection-end-line="25" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3503,7 +3632,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3511,7 +3639,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="32" column="1" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3519,7 +3646,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="5" lean-forward="false" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3528,7 +3654,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="51">
             <caret line="3" column="46" lean-forward="false" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -3538,7 +3663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="710">
           <caret line="42" column="9" lean-forward="false" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3546,7 +3670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="79" lean-forward="false" selection-start-line="18" selection-start-column="79" selection-end-line="18" selection-end-column="79" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3555,24 +3678,6 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="170">
             <caret line="10" column="18" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-            <folding>
-              <element signature="e#429#581#0" expanded="true" />
-              <element signature="e#725#965#0" expanded="true" />
-              <element signature="e#1093#1166#0" expanded="true" />
-              <element signature="e#1288#1358#0" expanded="true" />
-              <element signature="e#1480#1550#0" expanded="true" />
-              <element signature="e#1707#2041#0" expanded="true" />
-              <element signature="e#2187#2460#0" expanded="true" />
-              <element signature="e#2917#4994#0" expanded="true" />
-              <element signature="e#5237#5807#0" expanded="true" />
-              <element signature="e#6703#7273#0" expanded="true" />
-              <marker date="1482637116000" expanded="true" signature="11:35" ph="Subscript…nsion Spec" />
-              <marker date="1482637116000" expanded="true" signature="44:62" ph="Vladimir Schneider" />
-              <marker date="1482637116000" expanded="true" signature="72:75" ph="0.1" />
-              <marker date="1482637116000" expanded="true" signature="82:94" ph="2016-06-06" />
-              <marker date="1482637116000" expanded="true" signature="104:168" ph="[CC-BY-SA…y-sa/4.0/)" />
-              <marker date="1482637116000" expanded="true" signature="5938:5993" ph="..." />
-            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -3582,54 +3687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
           <caret line="47" column="31" lean-forward="false" selection-start-line="47" selection-start-column="31" selection-end-line="47" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-superscript/src/test/resources/superscript_ast_spec.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="714">
-            <caret line="42" column="8" lean-forward="false" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
-            <folding>
-              <element signature="e#435#589#0" expanded="true" />
-              <element signature="e#735#979#0" expanded="true" />
-              <element signature="e#1109#1182#0" expanded="true" />
-              <element signature="e#1306#1376#0" expanded="true" />
-              <element signature="e#1500#1570#0" expanded="true" />
-              <element signature="e#1729#2069#0" expanded="true" />
-              <element signature="e#2217#2494#0" expanded="true" />
-              <element signature="e#2953#5056#0" expanded="true" />
-              <element signature="e#5301#5870#0" expanded="true" />
-              <element signature="e#6064#6419#0" expanded="true" />
-              <element signature="e#6563#6789#0" expanded="true" />
-              <element signature="e#7142#7749#0" expanded="true" />
-              <marker date="1482638126000" expanded="true" signature="11:13" ph="Superscri…nsion Spec" />
-              <marker date="1482638126000" expanded="true" signature="11:37" ph="Superscri…nsion Spec" />
-              <marker date="1482638126000" expanded="true" signature="46:64" ph="Vladimir Schneider" />
-              <marker date="1482638126000" expanded="true" signature="74:77" ph="0.1" />
-              <marker date="1482638126000" expanded="true" signature="84:96" ph="2016-06-06" />
-              <marker date="1482638126000" expanded="true" signature="106:170" ph="[CC-BY-SA…y-sa/4.0/)" />
-              <marker date="1482638126000" expanded="true" signature="6003:6060" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/Extensions.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="-527">
-            <caret line="27" column="7" lean-forward="false" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-            <folding>
-              <element signature="e#0#763#0" expanded="true" />
-              <marker date="1482638504000" expanded="true" signature="1236:1372" ph="..." />
-              <marker date="1482638504000" expanded="true" signature="2456:2538" ph="..." />
-              <marker date="1482638504000" expanded="true" signature="42791:42882" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -3637,7 +3694,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="18" column="30" lean-forward="false" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3645,7 +3701,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3653,10 +3708,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-          <folding>
-            <element signature="e#380#481#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3664,55 +3715,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/test/resources/ins_ast_spec.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="497">
-            <caret line="214" column="12" lean-forward="false" selection-start-line="214" selection-start-column="12" selection-end-line="214" selection-end-column="12" />
-            <folding>
-              <element signature="e#350#422#0" expanded="true" />
-              <element signature="e#598#748#0" expanded="true" />
-              <element signature="e#918#993#0" expanded="true" />
-              <element signature="e#1160#1232#0" expanded="true" />
-              <element signature="e#1399#1471#0" expanded="true" />
-              <element signature="e#1649#1865#0" expanded="true" />
-              <element signature="e#2042#2225#0" expanded="true" />
-              <element signature="e#2405#2565#0" expanded="true" />
-              <element signature="e#2746#2935#0" expanded="true" />
-              <element signature="e#3118#3308#0" expanded="true" />
-              <element signature="e#3499#3770#0" expanded="true" />
-              <element signature="e#3962#4270#0" expanded="true" />
-              <element signature="e#4463#4772#0" expanded="true" />
-              <element signature="e#4966#5280#0" expanded="true" />
-              <element signature="e#5571#6136#0" expanded="true" />
-              <element signature="e#6366#6621#0" expanded="true" />
-              <element signature="e#6934#7189#0" expanded="true" />
-              <marker date="1482635562000" expanded="true" signature="11:29" ph="Ins Extension Spec" />
-              <marker date="1482635562000" expanded="true" signature="38:46" ph="Vladimir" />
-              <marker date="1482635562000" expanded="true" signature="38:56" ph="Vladimir Schneider" />
-              <marker date="1482635562000" expanded="true" signature="66:69" ph="0.1" />
-              <marker date="1482635562000" expanded="true" signature="76:88" ph="2016-06-06" />
-              <marker date="1482635562000" expanded="true" signature="98:162" ph="[CC-BY-SA…y-sa/4.0/)" />
-              <marker date="1482635562000" expanded="true" signature="6313:6362" ph="..." />
-              <marker date="1482635562000" expanded="true" signature="6867:6930" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VERSION.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="4131">
+          <first_editor relative-caret-position="5321">
             <caret line="313" column="8" lean-forward="false" selection-start-line="313" selection-start-column="8" selection-end-line="313" selection-end-column="8" />
-            <folding>
-              <marker date="1482638786000" expanded="true" signature="10233:10862" ph="{...}" />
-            </folding>
+            <folding />
           </first_editor>
           <second_editor />
         </state>
@@ -3720,23 +3731,7 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1482638786000" expanded="true" signature="10233:10862" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="374">
-            <caret line="151" column="22" lean-forward="false" selection-start-line="151" selection-start-column="22" selection-end-line="151" selection-end-column="22" />
-            <folding>
-              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
-              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3744,7 +3739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="36" column="29" lean-forward="false" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3752,7 +3746,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4454">
           <caret line="323" column="26" lean-forward="false" selection-start-line="323" selection-start-column="26" selection-end-line="323" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3760,7 +3753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="205" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3768,13 +3760,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="37" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/html/FormattingAppendable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
+        <state relative-caret-position="4862">
           <caret line="286" column="29" lean-forward="false" selection-start-line="286" selection-start-column="29" selection-end-line="286" selection-end-column="29" />
           <folding />
         </state>
@@ -3784,7 +3775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="701" column="101" lean-forward="true" selection-start-line="701" selection-start-column="94" selection-end-line="701" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3792,7 +3782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3800,7 +3789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
           <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3808,7 +3796,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="34" column="14" lean-forward="false" selection-start-line="34" selection-start-column="14" selection-end-line="34" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3816,7 +3803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="17" column="7" lean-forward="false" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3824,7 +3810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="20" lean-forward="false" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3832,10 +3817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="54" lean-forward="false" selection-start-line="21" selection-start-column="54" selection-end-line="21" selection-end-column="54" />
-          <folding>
-            <element signature="e#786#990#0" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3843,7 +3824,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
           <caret line="22" column="16" lean-forward="false" selection-start-line="22" selection-start-column="16" selection-end-line="22" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3873,9 +3853,156 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/test/java/com/vladsch/flexmark/ext/ins/ComboInsSpecTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1028">
-          <caret line="68" column="179" lean-forward="true" selection-start-line="68" selection-start-column="13" selection-end-line="68" selection-end-column="13" />
+        <state relative-caret-position="714">
+          <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/test/resources/ext_strikethrough_subscript_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="6528">
+            <caret line="384" column="38" lean-forward="false" selection-start-line="384" selection-start-column="38" selection-end-line="384" selection-end-column="38" />
+            <folding>
+              <element signature="e#459#611#0" expanded="true" />
+              <element signature="e#752#910#0" expanded="true" />
+              <element signature="e#1046#1119#0" expanded="true" />
+              <element signature="e#1249#1319#0" expanded="true" />
+              <element signature="e#1449#1519#0" expanded="true" />
+              <element signature="e#1673#1921#0" expanded="true" />
+              <element signature="e#2064#2255#0" expanded="true" />
+              <element signature="e#2687#4146#0" expanded="true" />
+              <element signature="e#4399#4975#0" expanded="true" />
+              <element signature="e#5162#5420#0" expanded="true" />
+              <element signature="e#5777#6353#0" expanded="true" />
+              <element signature="e#6638#6790#0" expanded="true" />
+              <element signature="e#6923#7081#0" expanded="true" />
+              <element signature="e#7209#7282#0" expanded="true" />
+              <element signature="e#7404#7474#0" expanded="true" />
+              <element signature="e#7596#7666#0" expanded="true" />
+              <element signature="e#7812#8060#0" expanded="true" />
+              <element signature="e#8195#8386#0" expanded="true" />
+              <element signature="e#8807#10362#0" expanded="true" />
+              <element signature="e#10605#11175#0" expanded="true" />
+              <element signature="e#11354#11612#0" expanded="true" />
+              <element signature="e#11987#12557#0" expanded="true" />
+              <element signature="e#12752#13146#0" expanded="true" />
+              <marker date="1482641993000" expanded="true" signature="11:43" ph="Gfm Strik…nsion Spec" />
+              <marker date="1482641993000" expanded="true" signature="52:70" ph="Vladimir Schneider" />
+              <marker date="1482641993000" expanded="true" signature="80:83" ph="0.1" />
+              <marker date="1482641993000" expanded="true" signature="90:102" ph="2016-06-06" />
+              <marker date="1482641993000" expanded="true" signature="112:176" ph="[CC-BY-SA…y-sa/4.0/)" />
+              <marker date="1482641993000" expanded="true" signature="5114:5158" ph="..." />
+              <marker date="1482641993000" expanded="true" signature="11306:11350" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-ins/src/test/resources/ins_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="3638">
+            <caret line="214" column="12" lean-forward="false" selection-start-line="214" selection-start-column="12" selection-end-line="214" selection-end-column="12" />
+            <folding>
+              <element signature="e#350#422#0" expanded="true" />
+              <element signature="e#598#748#0" expanded="true" />
+              <element signature="e#918#993#0" expanded="true" />
+              <element signature="e#1160#1232#0" expanded="true" />
+              <element signature="e#1399#1471#0" expanded="true" />
+              <element signature="e#1649#1865#0" expanded="true" />
+              <element signature="e#2042#2225#0" expanded="true" />
+              <element signature="e#2405#2565#0" expanded="true" />
+              <element signature="e#2746#2935#0" expanded="true" />
+              <element signature="e#3118#3308#0" expanded="true" />
+              <element signature="e#3499#3770#0" expanded="true" />
+              <element signature="e#3962#4270#0" expanded="true" />
+              <element signature="e#4463#4772#0" expanded="true" />
+              <element signature="e#4966#5280#0" expanded="true" />
+              <element signature="e#5571#6136#0" expanded="true" />
+              <element signature="e#6366#6621#0" expanded="true" />
+              <element signature="e#6934#7189#0" expanded="true" />
+              <marker date="1482641308000" expanded="true" signature="11:29" ph="Ins Extension Spec" />
+              <marker date="1482641308000" expanded="true" signature="38:56" ph="Vladimir Schneider" />
+              <marker date="1482641308000" expanded="true" signature="66:69" ph="0.1" />
+              <marker date="1482641308000" expanded="true" signature="76:88" ph="2016-06-06" />
+              <marker date="1482641308000" expanded="true" signature="98:162" ph="[CC-BY-SA…y-sa/4.0/)" />
+              <marker date="1482641308000" expanded="true" signature="6313:6362" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-superscript/src/test/resources/superscript_ast_spec.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="544">
+            <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
+            <folding>
+              <element signature="e#435#589#0" expanded="true" />
+              <element signature="e#735#979#0" expanded="true" />
+              <element signature="e#1109#1182#0" expanded="true" />
+              <element signature="e#1306#1376#0" expanded="true" />
+              <element signature="e#1500#1570#0" expanded="true" />
+              <element signature="e#1729#2069#0" expanded="true" />
+              <element signature="e#2217#2494#0" expanded="true" />
+              <element signature="e#2953#5056#0" expanded="true" />
+              <element signature="e#5301#5870#0" expanded="true" />
+              <element signature="e#6064#6419#0" expanded="true" />
+              <element signature="e#6563#6789#0" expanded="true" />
+              <element signature="e#7142#7749#0" expanded="true" />
+              <marker date="1482641308000" expanded="true" signature="11:37" ph="Superscri…nsion Spec" />
+              <marker date="1482641308000" expanded="true" signature="46:64" ph="Vladimir Schneider" />
+              <marker date="1482641308000" expanded="true" signature="74:77" ph="0.1" />
+              <marker date="1482641308000" expanded="true" signature="84:96" ph="2016-06-06" />
+              <marker date="1482641308000" expanded="true" signature="106:170" ph="[CC-BY-SA…y-sa/4.0/)" />
+              <marker date="1482641308000" expanded="true" signature="6003:6060" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="1141">
+            <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
+            <folding>
+              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
+              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="221">
+            <caret line="13" column="20" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/Extensions.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="852">
+            <caret line="598" column="9" lean-forward="false" selection-start-line="598" selection-start-column="9" selection-end-line="598" selection-end-column="9" />
+            <folding>
+              <marker date="1482644914000" expanded="true" signature="1236:1372" ph="..." />
+              <marker date="1482644914000" expanded="true" signature="2456:2538" ph="..." />
+              <marker date="1482644914000" expanded="true" signature="42791:42882" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -3889,7 +4016,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.271615" />
+                <option value="0.2671984" />
                 <option value="0.5" />
               </list>
             </option>

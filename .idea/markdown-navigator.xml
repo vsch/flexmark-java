@@ -15,18 +15,19 @@
         <option name="DEFINITIONS" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="FOOTNOTES" value="true" />
-        <option name="FORCELISTITEMPARA" value="false" />
         <option name="HARDWRAPS" value="false" />
+        <option name="INSERTED" value="true" />
         <option name="QUOTES" value="false" />
         <option name="RELAXEDHRULES" value="true" />
         <option name="SMARTS" value="false" />
         <option name="STRIKETHROUGH" value="true" />
+        <option name="SUBSCRIPT" value="true" />
+        <option name="SUPERSCRIPT" value="true" />
         <option name="SUPPRESS_HTML_BLOCKS" value="false" />
         <option name="SUPPRESS_INLINE_HTML" value="false" />
         <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="true" />
-        <option name="TRACE_PARSER" value="false" />
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
