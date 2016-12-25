@@ -6,7 +6,7 @@ package com.vladsch.flexmark.util;
  * Unlike most other functional interfaces, {@code BiConsumer} is expected
  * to operate via side-effects.
  * <p>
- * <p>This is a <a href="package-summary.html">functional interface</a>
+ * This is a <a href="package-summary.html">functional interface</a>
  * whose functional method is {@link #accept(Object, Object)}.
  *
  * @param <T> the type of the first argument to the operation

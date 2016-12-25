@@ -24,7 +24,7 @@ package com.vladsch.flexmark.util.sequence;
 /**
  * CharSequence that repeats in a wraparound the given sequence.
  * <p>
- * Partial repeat occurs when start % length() > 0 and/or end % length() > 0
+ * Partial repeat occurs when start % length() &gt;0 and/or end % length() &gt;0
  *
  * The hashCode is purposefully matched to the string equivalent or this.toString().hashCode()
  */

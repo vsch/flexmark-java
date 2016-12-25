@@ -56,7 +56,7 @@ public interface BasedSequence extends CharSequence {
     /**
      * Get the offset of index in this sequence mapped to offset into {@link #getBaseSequence()} and {@link #getBase()} original text source.
      *
-     * @param index
+     * @param index index for which to get the offset in original source
      * @return offset of index of this sequence in original text
      */
     int getIndexOffset(int index);
@@ -135,33 +135,33 @@ public interface BasedSequence extends CharSequence {
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
-     * when offset >= then it is offset from the start of the sequence,
-     * when <0 then from the end
+     * when offset &gt;= then it is offset from the start of the sequence,
+     * when &lt;0 then from the end
      * <p>
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
      * @param start offset into this sequence
      * @param end   offset into this sequence
-     * @return selected portion spanning start to end of this sequence. If offset is <0 then it is taken as relative to length()
+     * @return selected portion spanning start to end of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
     BasedSequence midSequence(int start, int end);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
-     * when offset >= then it is offset from the start of the sequence,
-     * when <0 then from the end
+     * when offset &gt;= then it is offset from the start of the sequence,
+     * when &lt;0 then from the end
      * <p>
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
      * @param start offset into this sequence
-     * @return selected portion spanning start to length() of this sequence. If offset is <0 then it is taken as relative to length()
+     * @return selected portion spanning start to length() of this sequence. If offset is &lt;0 then it is taken as relative to length()
      */
     BasedSequence midSequence(int start);
 
     /**
      * Convenience method to get characters offset from start or end of sequence.
-     * when index >= then it is offset from the start of the sequence,
-     * when <0 then from the end
+     * when index &gt;= then it is offset from the start of the sequence,
+     * when &lt;0 then from the end
      * no exceptions are thrown, instead a \0 is returned for an invalid index positions
      *
      * @param index of character to get
@@ -209,6 +209,9 @@ public interface BasedSequence extends CharSequence {
      * lastIndexOfAnyNot(Char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
      * lastIndexOfAnyNot(char,char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
      * lastIndexOfAnyNot(char,char,char): returns the index of the previous occurrence of any of the characters not in this sequence, reversed search
+     *
+     * @param s character sequence whose occurrence to find
+     * @return index where found or -1
      */
     int indexOf(CharSequence s);
     int indexOf(CharSequence s, int fromIndex);
@@ -311,6 +314,9 @@ public interface BasedSequence extends CharSequence {
      * countTrailingNot(char): count contiguous leading characters not from set in this sequence
      * countTrailingNot(char,char): count contiguous leading characters not from set in this sequence
      * countTrailingNot(char,char,char): count contiguous leading characters not from set in this sequence
+     *
+     * @param chars set of contiguous characters which should be counted at start of sequence
+     * @return number of chars in contiguous span at start of sequence
      */
     int countLeading(CharSequence chars);
     int countLeadingNot(CharSequence chars);
@@ -374,8 +380,11 @@ public interface BasedSequence extends CharSequence {
      * Trim, Trim start/end of this sequence, characters to trim are passed in the sequence argument
      * <p>
      * returns trimmed sequence or if nothing matched the original sequence
-     *
+     * <p>
      * If character set  in the form of character sequence is not passed in the {@link #WHITESPACE_CHARS} are assumed.
+     *
+     * @param chars set of characters to trim from start of line
+     * @return sequence after it is trimmed
      */
     BasedSequence trimStart(CharSequence chars);
     BasedSequence trimEnd(CharSequence chars);
@@ -389,6 +398,9 @@ public interface BasedSequence extends CharSequence {
      * Get the characters Trimmed, Trimmed from start/end of this sequence, characters to trim are passed in the sequence argument
      * <p>
      * returns trimmed sequence or if nothing matched the original sequence
+     *
+     * @param chars set of characters to trim from start of line
+     * @return part of the sequence that was trimmed from the start
      */
     BasedSequence trimmedStart(CharSequence chars);
     BasedSequence trimmedEnd(CharSequence chars);
@@ -447,6 +459,7 @@ public interface BasedSequence extends CharSequence {
     /**
      * If condition is true return BasedSequence.NULL otherwise returns this sequence.
      *
+     * @param condition when true return NULL else this
      * @return this or SubSequence.NULL
      */
     BasedSequence nullIf(boolean condition);
@@ -455,6 +468,10 @@ public interface BasedSequence extends CharSequence {
      * Find start/end region in this sequence delimited by any characters in argument or the CharSequence
      * <p>
      * For Any and AnyNot methods uses the CharSequence argument as a character set of possible delimiting characters
+     *
+     * @param s     character sequence delimiting the region
+     * @param index from which to start looking for end of region
+     * @return index of end of region delimited by s
      */
     int endOfDelimitedBy(CharSequence s, int index);
     int endOfDelimitedByAny(CharSequence s, int index);
@@ -466,6 +483,9 @@ public interface BasedSequence extends CharSequence {
 
     /**
      * Get the offset of the end of line at given index, end of line delimited by \n or any of \n \r \r\n for Any methods.
+     *
+     * @param index index where to start searching for end of line
+     * @return index of end of line delimited by \n
      */
     int endOfLine(int index);
     int endOfLineAnyEOL(int index);
@@ -599,6 +619,8 @@ public interface BasedSequence extends CharSequence {
 
     /**
      * Map characters of this sequence to: Uppercase, Lowercase or use custom mapping
+     *
+     * @return  lowercase version of sequence
      */
     MappedSequence toLowerCase();
     MappedSequence toUpperCase();
@@ -608,6 +630,7 @@ public interface BasedSequence extends CharSequence {
 
     /**
      * Trim leading trailing blank lines in this sequence
+     * @return  return sequence with trailing blank lines trimmed off
      */
     BasedSequence trimTailBlankLines();
     BasedSequence trimLeadBlankLines();
@@ -666,6 +689,7 @@ public interface BasedSequence extends CharSequence {
      *                  SPLIT_SKIP_EMPTY: skip empty segments (or empty after trimming if enabled)
      *                  SPLIT_INCLUDE_DELIM_PARTS: include delimiters as separate split item of its own
      *                  SPLIT_TRIM_SKIP_EMPTY: same as SPLIT_TRIM_PARTS | SPLIT_SKIP_EMPTY
+     * @param trimChars set of characters that should be used for trimming individual split results
      * @return List of split results
      */
     List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars);

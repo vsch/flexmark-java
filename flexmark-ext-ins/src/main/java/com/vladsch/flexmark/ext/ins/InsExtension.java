@@ -11,7 +11,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
- * Extension for inss
+ * Extension for ins
  * <p>
  * Create it with {@link #create()} and then configure it on the builders
  * ({@link com.vladsch.flexmark.parser.Parser.Builder#extensions(Iterable)},

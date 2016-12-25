@@ -126,6 +126,7 @@ public interface FormattingAppendable extends Appendable {
      * <p>
      * Actual new line character is only appended if there is real data
      * appended and it did not contain a new line as the last character
+     * @return this
      */
     FormattingAppendable line();
 
@@ -135,6 +136,7 @@ public interface FormattingAppendable extends Appendable {
      * Actual new line character is only appended if and when text is appended
      * appended and it did not contain a new line as the last character
      *
+     * @param predicate if true then new line will be started
      * @return this
      */
     FormattingAppendable lineIf(boolean predicate);
@@ -146,6 +148,7 @@ public interface FormattingAppendable extends Appendable {
      * appended and it did not contain a new line as the last character
      *
      * @param lineRef predicate storage will be set to false if conditionalFormatter suppressed a new line
+     * @return this
      */
     FormattingAppendable line(Ref<Boolean> lineRef);
 
@@ -264,7 +267,7 @@ public interface FormattingAppendable extends Appendable {
     int getOffsetAfter();
 
     /**
-     * Open a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count >0
+     * Open a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count &gt;0
      *
      * @param keepIndent       if true, if there is pending indent it will be appended before entering pre-format mode
      * @return this
@@ -272,7 +275,7 @@ public interface FormattingAppendable extends Appendable {
     FormattingAppendable openPreFormatted(final boolean keepIndent);
 
     /**
-     * Close a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count >0
+     * Close a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count &gt;0
      *
      * @return this
      */
