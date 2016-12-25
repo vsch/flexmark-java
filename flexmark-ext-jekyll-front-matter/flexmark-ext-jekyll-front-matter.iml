@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="FlexmarkExt.ModuleBuildProperties">
     <option name="extensionName" value="JekyllFrontMatter" />
     <option name="extensionPackage" value="com.vladsch.flexmark.ext.jekyll.front.matter" />
@@ -27,7 +27,6 @@
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark-util" />
     <orderEntry type="module" module-name="flexmark" />
-    <orderEntry type="library" name="Maven: com.vladsch.flexmark:flexmark-ext-yaml-front-matter:0.8.0" level="project" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />

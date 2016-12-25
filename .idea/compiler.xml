@@ -30,6 +30,7 @@
         <module name="flexmark-ext-gfm-strikethrough" />
         <module name="flexmark-ext-gfm-tables" />
         <module name="flexmark-ext-gfm-tasklist" />
+        <module name="flexmark-ext-ins" />
         <module name="flexmark-ext-jekyll-front-matter" />
         <module name="flexmark-ext-spec-example" />
         <module name="flexmark-ext-tables" />
@@ -59,6 +60,7 @@
       <module name="flexmark-ext-gfm-strikethrough" target="7" />
       <module name="flexmark-ext-gfm-tables" target="7" />
       <module name="flexmark-ext-gfm-tasklist" target="7" />
+      <module name="flexmark-ext-ins" target="7" />
       <module name="flexmark-ext-jekyll-front-matter" target="7" />
       <module name="flexmark-ext-spec-example" target="7" />
       <module name="flexmark-ext-tables" target="7" />

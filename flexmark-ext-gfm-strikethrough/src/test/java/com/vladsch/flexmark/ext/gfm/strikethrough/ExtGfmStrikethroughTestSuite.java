@@ -7,6 +7,8 @@ import org.junit.runners.Suite;
     StrikethroughTest.class,
         StrikethroughTest.class,
         ComboStrikethroughSpecTest.class,
+        ComboSubscriptSpecTest.class,
+        ComboStrikethroughSubscriptSpecTest.class,
         //JiraStrikethroughSpecTest.class,
         //YouTrackStrikethroughSpecTest.class,
 })

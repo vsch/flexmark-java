@@ -3,7 +3,7 @@ package com.vladsch.flexmark.ext.autolink.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;

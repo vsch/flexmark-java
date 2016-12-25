@@ -8,13 +8,14 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
 import com.vladsch.flexmark.util.*;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 
 public class TocUtils {
-    final static public AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
+    public static final AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
 
     public static String getTocPrefix(TocOptions options, TocOptions defaultOptions) {
         DelimitedBuilder out = new DelimitedBuilder(" ");
@@ -107,7 +108,7 @@ public class TocUtils {
             } else if (lastLevel == headerLevel) {
                 if (openedItems[lastLevel]) {
                     if (openedList[lastLevel]) html.unIndent().tag(listClose).line();
-                    html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                    html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
                 }
                 openedItems[lastLevel] = false;
                 openedList[lastLevel] = false;
@@ -116,7 +117,7 @@ public class TocUtils {
                 for (int lv = lastLevel; lv >= headerLevel; lv--) {
                     if (openedItems[lv]) {
                         if (openedList[lv]) html.unIndent().tag(listClose).unIndent().line();
-                        html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                        html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
                     }
                     openedItems[lv] = false;
                     openedList[lv] = false;
@@ -135,13 +136,13 @@ public class TocUtils {
             }
 
             lastLevel = headerLevel;
-            openedItemAppendCount[headerLevel] = html.getAppendCount();
+            openedItemAppendCount[headerLevel] = html.getModCount();
         }
 
         for (int i = lastLevel; i >= 1; i--) {
             if (openedItems[i]) {
                 if (openedList[i]) html.unIndent().tag(listClose).unIndent().line();
-                html.lineIf(openedItemAppendCount[lastLevel] != html.getAppendCount()).tag("/li").line();
+                html.lineIf(openedItemAppendCount[lastLevel] != html.getModCount()).tag("/li").line();
             }
         }
 

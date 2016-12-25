@@ -18,7 +18,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="flexmark-ext-gfm-tasklist" />
-      <element id="library" level="project" name="Maven: org.nibor.autolink:autolink:0.4.0" />
       <element id="module-output" name="flexmark-ext-anchorlink" />
       <element id="module-output" name="flexmark-ext-aside" />
       <element id="module-output" name="flexmark-ext-definition" />

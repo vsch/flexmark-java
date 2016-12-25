@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.util;
 
+import com.vladsch.flexmark.util.html.ConditionalFormatter;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
 import org.junit.Test;
 
-import java.io.IOException;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class FormattingAppendableImplTest {
     @Test
@@ -27,6 +28,48 @@ public class FormattingAppendableImplTest {
         fa = new FormattingAppendableImpl(sb, true);
         fa.append('a').append('b').append('\n').line().flush();
         assertEquals("ab\n", sb.toString());
+    }
+
+    @Test
+    public void test_charOffset() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+
+        fa.append(' ');
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("", sb.toString());
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+
+        fa.append('a');
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(1, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("a\n", sb.toString());
+        assertEquals(1, fa.getOffsetBefore());
+        assertEquals(2, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append('a').append('b').append('c').line();
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("abc\n", sb.toString());
+        assertEquals(3, fa.getOffsetBefore());
+        assertEquals(4, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append('a').append('b').append('\n');
+        assertEquals(1, fa.getOffsetBefore());
+        assertEquals(2, fa.getOffsetAfter());
+        fa.line().flush();
+        assertEquals("ab\n", sb.toString());
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
     }
 
     @Test
@@ -72,6 +115,96 @@ public class FormattingAppendableImplTest {
         fa = new FormattingAppendableImpl(sb, true);
         fa.append("ab\n    \t \n\t   \n\n").line().flush();
         assertEquals("ab\n", sb.toString());
+    }
+
+    @Test
+    public void test_charsOffset() throws Exception {
+        StringBuilder sb = new StringBuilder();
+        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+
+        fa.append(" ");
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("", sb.toString());
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+
+        fa.append("     ");
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("", sb.toString());
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(0, fa.getOffsetAfter());
+
+        fa.append("a");
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(1, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("a\n", sb.toString());
+        assertEquals(1, fa.getOffsetBefore());
+        assertEquals(2, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("abc").line();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("abc\n", sb.toString());
+        assertEquals(3, fa.getOffsetBefore());
+        assertEquals(4, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("abc").line().line();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("abc\n", sb.toString());
+        assertEquals(3, fa.getOffsetBefore());
+        assertEquals(4, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("abc").line().blankLine();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("abc\n", sb.toString());
+        assertEquals(3, fa.getOffsetBefore());
+        assertEquals(4, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("abc").line().blankLine();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+        fa.flush(1);
+        assertEquals("abc\n\n", sb.toString());
+        assertEquals(3, fa.getOffsetBefore());
+        assertEquals(5, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("ab\n").line();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(2, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("ab\n", sb.toString());
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true);
+        fa.append("ab\n    \t \n\t   \n\n").line();
+        assertEquals(0, fa.getOffsetBefore());
+        assertEquals(2, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("ab\n", sb.toString());
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(3, fa.getOffsetAfter());
     }
 
     @Test
@@ -257,7 +390,7 @@ public class FormattingAppendableImplTest {
         final FormattingAppendable fa1 = fa;
         fa.append("<li>").openConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (onIndent) fa1.indent();
                 fa1.append("item text");
                 if (onIndent) fa1.line();
@@ -265,7 +398,7 @@ public class FormattingAppendableImplTest {
         });
         fa.closeConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (!onText) {
                     fa1.append("item text");
                 } else if (onIndent) {
@@ -282,7 +415,7 @@ public class FormattingAppendableImplTest {
         final FormattingAppendable fa2 = fa;
         fa.append("<li>").openConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (onIndent) fa2.indent();
                 fa2.append("item text");
                 if (onIndent) fa2.line();
@@ -292,7 +425,7 @@ public class FormattingAppendableImplTest {
         fa.line(paraLine).append("<p>para</p>").lineIf(paraLine);
         fa.closeConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (!onText) {
                     fa2.append("item text");
                 } else if (onIndent) {
@@ -309,14 +442,14 @@ public class FormattingAppendableImplTest {
         final FormattingAppendable fa3 = fa;
         fa.append("<li>").openConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 fa3.indent().append("item text").line();
             }
         });
         fa.line().append("<p>para</p>").line();
         fa.closeConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (onText) {
                     fa3.unIndent();
                 } else {
@@ -333,7 +466,7 @@ public class FormattingAppendableImplTest {
         final FormattingAppendable fa4 = fa;
         fa.append("<li>").openConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (onIndent) fa4.indent();
                 fa4.append("item text");
                 if (onIndent) fa4.blankLine().unIndent();
@@ -342,7 +475,7 @@ public class FormattingAppendableImplTest {
         fa.indent().append("<p>para</p>").unIndent();
         fa.closeConditional(new ConditionalFormatter() {
             @Override
-            public void apply(boolean onIndent, boolean onLine, boolean onText) {
+            public void apply(final boolean firstAppend, boolean onIndent, boolean onLine, boolean onText) {
                 if (!onText) {
                     fa4.append("item text");
                 }
@@ -358,8 +491,136 @@ public class FormattingAppendableImplTest {
         StringBuilder sb = new StringBuilder();
         FormattingAppendable fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
 
-        fa.indent().append("<pre>").openPreFormatted().append("abc\ndef \n\n").append("hij\n")
-                .closePreFormatted().append("</pre>").unIndent().flush();
+        fa.indent().append("<pre>").openPreFormatted(true).append("abc\ndef \n\n").append("hij\n")
+                .append("</pre>").closePreFormatted().unIndent().flush();
         assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", sb.toString());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().append("</div>").unIndent().flush();
+        assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().append("</div>").unIndent().flush();
+        assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").indent().openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().unIndent().append("</div>").unIndent().flush();
+        assertEquals("  <p>this is a paragraph\n    <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+    }
+
+    @Test
+    public void test_lineCount() throws Exception {
+        String indent = "  ";
+        StringBuilder sb = new StringBuilder();
+        FormattingAppendable fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<pre>").openPreFormatted(true).append("abc\ndef \n\n").append("hij\n")
+                .append("</pre>").closePreFormatted().unIndent().flush();
+        assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", sb.toString());
+        assertEquals(5, fa.getLineCount());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+        fa.append("ab").indent().append("c").unIndent().flush();
+        //assertEquals("ab\n c\n", sb.toString());
+        assertEquals(2, fa.getLineCount());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+        fa.append("ab\n    \t \n\t   \n\n").indent().append("c").unIndent().flush();
+        assertEquals("ab\n  c\n", sb.toString());
+        assertEquals(2, fa.getLineCount());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().append("</div>").unIndent().flush();
+        //assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+        assertEquals(3, fa.getLineCount());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").line().openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().append("</div>").unIndent().flush();
+        //assertEquals("  <p>this is a paragraph\n  <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+        assertEquals(4, fa.getLineCount());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ").indent().openPreFormatted(true).append("<div style=''>    some text\n    some more text\n")
+                .closePreFormatted().unIndent().append("</div>").unIndent().flush();
+        assertEquals("  <p>this is a paragraph\n    <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+        assertEquals(4, fa.getLineCount());
+    }
+
+    @Test
+    public void test_preOffset() throws Exception {
+        String indent = "  ";
+        StringBuilder sb = new StringBuilder();
+        FormattingAppendable fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<pre>");
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(7, fa.getOffsetAfter());
+        fa.openPreFormatted(true);
+        assertEquals(7, fa.getOffsetBefore());
+        assertEquals(7, fa.getOffsetAfter());
+        fa.append("abc\ndef \n\n");
+        assertEquals(7, fa.getOffsetBefore());
+        assertEquals(17, fa.getOffsetAfter());
+        fa.append("hij\n");
+        assertEquals(17, fa.getOffsetBefore());
+        assertEquals(21, fa.getOffsetAfter());
+        fa.append("</pre>");
+        assertEquals(21, fa.getOffsetBefore());
+        assertEquals(27, fa.getOffsetAfter());
+        fa.closePreFormatted();
+        assertEquals(21, fa.getOffsetBefore());
+        assertEquals(27, fa.getOffsetAfter());
+        fa.unIndent();
+        assertEquals(21, fa.getOffsetBefore());
+        assertEquals(27, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("  <pre>abc\ndef \n\nhij\n</pre>\n", sb.toString());
+        assertEquals(27, fa.getOffsetBefore());
+        assertEquals(28, fa.getOffsetAfter());
+
+        sb = new StringBuilder();
+        fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
+
+        fa.indent().append("<p>this is a paragraph ");
+        assertEquals(2, fa.getOffsetBefore());
+        assertEquals(24, fa.getOffsetAfter());
+        fa.openPreFormatted(true);
+        assertEquals(24, fa.getOffsetBefore());
+        assertEquals(25, fa.getOffsetAfter());
+        fa.append("<div style=''>    some text\n    some more text\n");
+        assertEquals(25, fa.getOffsetBefore());
+        assertEquals(72, fa.getOffsetAfter());
+        fa.closePreFormatted();
+        assertEquals(25, fa.getOffsetBefore());
+        assertEquals(72, fa.getOffsetAfter());
+        fa.append("</div>");
+        assertEquals(74, fa.getOffsetBefore());
+        assertEquals(80, fa.getOffsetAfter());
+        fa.unIndent();
+        assertEquals(74, fa.getOffsetBefore());
+        assertEquals(80, fa.getOffsetAfter());
+        fa.flush();
+        assertEquals("  <p>this is a paragraph <div style=''>    some text\n    some more text\n  </div>\n", sb.toString());
+        assertEquals(80, fa.getOffsetBefore());
+        assertEquals(81, fa.getOffsetAfter());
     }
 }

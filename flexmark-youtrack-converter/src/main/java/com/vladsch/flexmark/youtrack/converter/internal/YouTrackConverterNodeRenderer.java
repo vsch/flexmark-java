@@ -8,7 +8,7 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -219,7 +219,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
-        html.line().raw("-----").line().raw("\n");
+        html.line().raw("-----").blankLine();
     }
 
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {

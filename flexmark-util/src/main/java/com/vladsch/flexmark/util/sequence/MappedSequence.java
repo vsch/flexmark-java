@@ -95,11 +95,9 @@ public final class MappedSequence extends BasedSequenceImpl {
 
     @Override
     public String toString() {
-        int iMax = length();
-        StringBuilder sb = new StringBuilder(iMax);
-        for (int i = 0; i < iMax; i++) {
-            sb.append(mapper.map(base.charAt(i)));
-        }
+        //noinspection StringBufferReplaceableByString
+        StringBuilder sb = new StringBuilder(length());
+        sb.append(this);
         return sb.toString();
     }
 }

@@ -143,7 +143,7 @@ Document[0, 39]
 
 
 
-Test to see how trailing blank after item determines looseness 
+Test to see how trailing blank after item determines looseness
 
 ```````````````````````````````` example Loose Item Handling: 2
 - item 1
@@ -810,7 +810,7 @@ Document[0, 103]
 
 ## List Item Interrupts Paragraph
 
-Test to see which list items can interrupt paragraphs.   
+Test to see which list items can interrupt paragraphs.
 
 ```````````````````````````````` example List Item Interrupts Paragraph: 1
 Bullet item can interrupt paragraph
@@ -1722,9 +1722,9 @@ Document[0, 51]
 
 Test if it is `first first list` indent processing, or first direct parent list processing that
 affects sub-list indentation. But `Markdown.pl` cannot properly process block quotes in list
-items. See: [Bugs](#bugs) 
+items. See: [Bugs](#bugs)
 
-So first list it is and the HTML here is from the emulator not Markdown.pl 
+So first list it is and the HTML here is from the emulator not Markdown.pl
 
 ```````````````````````````````` example List Item Indent Handling: 8
 * item 1
@@ -1740,16 +1740,16 @@ So first list it is and the HTML here is from the emulator not Markdown.pl
             <li>item 2</li>
             <li>item 4</li>
         </ul>
-    <blockquote>
-        <ul>
-            <li>item 3
-                <ul>
-                    <li>item 4</li>
-                    <li>item 5</li>
-                </ul>
-            </li>
-        </ul>
-    </blockquote>
+        <blockquote>
+            <ul>
+                <li>item 3
+                    <ul>
+                        <li>item 4</li>
+                        <li>item 5</li>
+                    </ul>
+                </li>
+            </ul>
+        </blockquote>
     </li>
 </ul>
 .

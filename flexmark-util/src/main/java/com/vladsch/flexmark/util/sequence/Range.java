@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.util.sequence;
 
 public class Range {
-    final static public Range NULL = new Range(0, 0);
+    public static final Range NULL = new Range(0, 0);
 
     public static Range of(int start, int end) {
         return new Range(start, end);

@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ast.util;
 
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.regex.Pattern;

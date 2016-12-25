@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.spec;
 
 public class SpecExample {
-    final static public SpecExample NULL = new SpecExample(null, "", 0, "", "");
+    public static final SpecExample NULL = new SpecExample(null, "", 0, "", "");
 
     private final String optionsSet;
     private final String section;

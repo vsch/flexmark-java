@@ -10,8 +10,8 @@ import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
-    final static boolean WANT_EXCLAMATION_PREFIX = false;
-    final static int BRACKET_NESTING_LEVEL = 0;
+    static final boolean WANT_EXCLAMATION_PREFIX = false;
+    static final int BRACKET_NESTING_LEVEL = 0;
 
     private final FootnoteRepository footnoteRepository;
 

@@ -10,11 +10,11 @@ import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import static com.vladsch.flexmark.html.renderer.AttributablePart.LINK;
-import static com.vladsch.flexmark.util.options.Attribute.LINK_STATUS;
+import static com.vladsch.flexmark.util.html.Attribute.LINK_STATUS_ATTR;
 
 public class ZzzzzzAttributeProvider implements AttributeProvider {
     private final String missingTargetClass;
@@ -65,7 +65,7 @@ public class ZzzzzzAttributeProvider implements AttributeProvider {
 
     private void setLinkAttributes(AttributablePart part, Attributes attributes) {
         if (part == LINK) {
-            String linkStatus = attributes.getValue(LINK_STATUS);
+            String linkStatus = attributes.getValue(LINK_STATUS_ATTR);
             if (LinkStatus.NOT_FOUND.isStatus(linkStatus)) {
                 attributes.addValue("class", missingTargetClass);
             } else if (ZzzzzzExtension.LOCAL_ONLY.isStatus(linkStatus)) {

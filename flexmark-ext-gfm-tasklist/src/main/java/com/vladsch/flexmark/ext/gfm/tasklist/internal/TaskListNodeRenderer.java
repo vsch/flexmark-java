@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TaskListNodeRenderer implements NodeRenderer {
-    final static public AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
+    public static final AttributablePart TASK_ITEM_PARAGRAPH = new AttributablePart("TASK_ITEM_PARAGRAPH");
 
     private final String doneMarker;
     private final String notDoneMarker;

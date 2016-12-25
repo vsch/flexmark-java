@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ext.gfm.strikethrough;
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 /**
  * A strikethrough node containing text and other inline nodes nodes as children.

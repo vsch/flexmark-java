@@ -4,73 +4,40 @@ import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.Escaping;
-import com.vladsch.flexmark.util.options.Attribute;
-import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.TagRange;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class HtmlWriter {
-    private final Appendable buffer;
-    private final int indentSize;
-    private final String indentSizePrefix;
+public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
     private NodeRendererContext context;
-
-    private char lastChar = 0;
-    private int indent;
-    private String indentPrefix = "";
-    private Attributes currentAttributes;
-    //private int appendCount = 0;
-    private boolean delayedIndent = false;
-    private boolean delayedEOL = false;
-    private boolean indentIndentingChildren = false;
-    private boolean lineOnChildText = false;
-    private int preNesting = 0;
-    private AttributablePart useAttributes = null;
-    private int appendCount = 0;
-    private String prefix = "";
-    private boolean lastLineBlank = false;
+    private AttributablePart useAttributes;
 
     public HtmlWriter(Appendable out) {
-        this(out, 0);
+        super(out);
     }
 
     public HtmlWriter(HtmlWriter other, Appendable out, boolean inheritIndent) {
-        this(out, other.indentSize);
-
-        if (inheritIndent) {
-            indent = other.indent;
-            indentPrefix = other.indentPrefix;
-        }
+        super(other, out, inheritIndent);
+        context = other.context;
     }
 
     public HtmlWriter(Appendable out, int indentSize) {
-        this.buffer = out;
-        this.indentSize = indentSize;
-
-        StringBuilder sb = new StringBuilder(indentSize);
-        for (int i = 0; i < indentSize; i++) sb.append(' ');
-        indentSizePrefix = sb.toString();
+        super(out, indentSize, false);
     }
 
-    public String getPrefix() {
-        return prefix;
+    public HtmlWriter(Appendable out, int indentSize, boolean allFormatOptions) {
+        super(out, indentSize, allFormatOptions);
     }
 
-    public HtmlWriter setPrefix(final String prefix) {
-        this.prefix = prefix;
+    public HtmlWriter(Appendable out, int indentSize, int formatOptions) {
+        super(out, indentSize, formatOptions);
+    }
+
+    @Override
+    protected HtmlWriter chaining() {
         return this;
-    }
-
-    public int getAppendCount() {
-        return appendCount;
-    }
-
-    boolean inPre() {
-        return preNesting > 0;
     }
 
     void setContext(NodeRendererContext context) {
@@ -79,28 +46,6 @@ public class HtmlWriter {
 
     public NodeRendererContext getContext() {
         return context;
-    }
-
-    public int getIndentSize() {
-        return indentSize;
-    }
-
-    public HtmlWriter raw(String s) {
-        append(s);
-        return this;
-    }
-
-    public HtmlWriter text(String text) {
-        append(Escaping.escapeHtml(text, false));
-        return this;
-    }
-
-    public HtmlWriter attr(String name, String value) {
-        if (currentAttributes == null) {
-            currentAttributes = new Attributes();
-        }
-        currentAttributes.replaceValue(name, value);
-        return this;
     }
 
     public HtmlWriter srcPos() {
@@ -123,6 +68,7 @@ public class HtmlWriter {
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public HtmlWriter srcPosWithEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
@@ -130,6 +76,7 @@ public class HtmlWriter {
         return this;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public HtmlWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
         if (sourceText.isNotNull()) {
             int endOffset = sourceText.getEndOffset();
@@ -155,43 +102,9 @@ public class HtmlWriter {
 
     public HtmlWriter srcPos(int startOffset, int endOffset) {
         if (startOffset <= endOffset && !context.getHtmlOptions().sourcePositionAttribute.isEmpty()) {
-            if (currentAttributes == null) {
-                currentAttributes = new Attributes();
-            }
-            currentAttributes.replaceValue(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
+            super.attr(context.getHtmlOptions().sourcePositionAttribute, startOffset + "-" + endOffset);
         }
         return this;
-    }
-
-    public HtmlWriter attr(Attribute attribute) {
-        if (currentAttributes == null) {
-            currentAttributes = new Attributes();
-        }
-        currentAttributes.replaceValue(attribute.getName(), attribute.getValue());
-        return this;
-    }
-
-    public HtmlWriter attr(Attributes attributes) {
-        if (!attributes.isEmpty()) {
-            if (currentAttributes == null) {
-                currentAttributes = new Attributes(attributes);
-            } else {
-                currentAttributes.replaceValues(attributes);
-            }
-        }
-        return this;
-    }
-
-    public HtmlWriter tag(String name) {
-        return tag(name, false, false);
-    }
-
-    public HtmlWriter tagVoid(String name) {
-        return tag(name, true, false);
-    }
-
-    public HtmlWriter tagVoidLine(String name) {
-        return tag(name, true, true);
     }
 
     public HtmlWriter withAttr() {
@@ -199,12 +112,13 @@ public class HtmlWriter {
     }
 
     public HtmlWriter withAttr(AttributablePart part) {
+        super.withAttr();
         useAttributes = part;
         return this;
     }
 
     public HtmlWriter withAttr(LinkStatus status) {
-        attr(Attribute.LINK_STATUS, status.getName());
+        attr(Attribute.LINK_STATUS_ATTR, status.getName());
         return withAttr(AttributablePart.LINK);
     }
 
@@ -212,274 +126,208 @@ public class HtmlWriter {
         return withAttr(resolvedLink.getStatus());
     }
 
-    public HtmlWriter tag(String name, boolean voidElement, boolean voidWithLine) {
-        Attributes attributes = null;
-
+    @Override
+    public HtmlWriter tag(String name, boolean voidElement) {
         if (useAttributes != null) {
-            attributes = context.extendRenderingNodeAttributes(useAttributes, currentAttributes);
-            currentAttributes = null;
+            final Attributes attributes = context.extendRenderingNodeAttributes(useAttributes, getAttributes());
+            String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;
+            String attributeValue = attributes.getValue(sourcePositionAttribute);
+
+            if (!attributeValue.isEmpty()) {
+                // add to tag ranges
+                int pos = attributeValue.indexOf('-');
+                int startOffset = -1;
+                int endOffset = -1;
+
+                if (pos != -1) {
+                    try {
+                        startOffset = Integer.valueOf(attributeValue.substring(0, pos));
+                    } catch (Throwable ignored) {
+
+                    }
+                    try {
+                        endOffset = Integer.valueOf(attributeValue.substring(pos + 1));
+                    } catch (Throwable ignored) {
+
+                    }
+                }
+
+                if (startOffset >= 0 && startOffset < endOffset) {
+                    ArrayList<TagRange> tagRanges = context.getDocument().get(HtmlRenderer.TAG_RANGES);
+                    tagRanges.add(new TagRange(name, startOffset, endOffset));
+                }
+            }
+
+            setAttributes(attributes);
             useAttributes = null;
         }
 
-        if (voidElement && voidWithLine) line();
-
-        append("<");
-        append(name);
-
-        if (attributes != null && !attributes.isEmpty()) {
-            String sourcePositionAttribute = context.getHtmlOptions().sourcePositionAttribute;
-
-            for (Attribute attribute : attributes.values()) {
-                String attributeValue = attribute.getValue();
-
-                if (!sourcePositionAttribute.isEmpty() && attribute.getName().equals(sourcePositionAttribute)) {
-                    int pos = attributeValue.indexOf('-');
-                    int startOffset = -1;
-                    int endOffset = -1;
-
-                    if (pos != -1) {
-                        try {
-                            startOffset = Integer.valueOf(attributeValue.substring(0, pos));
-                        } catch (Throwable ignored) {
-
-                        }
-                        try {
-                            endOffset = Integer.valueOf(attributeValue.substring(pos + 1));
-                        } catch (Throwable ignored) {
-
-                        }
-                    }
-
-                    if (startOffset >= 0 && startOffset < endOffset) {
-                        ArrayList<TagRange> tagRanges = context.getDocument().get(HtmlRenderer.TAG_RANGES);
-                        tagRanges.add(new TagRange(name, startOffset, endOffset));
-                    }
-                }
-
-                if (attribute.isNonRendering()) continue;
-
-                append(" ");
-                append(Escaping.escapeHtml(attribute.getName(), true));
-                append("=\"");
-                append(Escaping.escapeHtml(attributeValue, true));
-                append("\"");
-            }
-        }
-
-        if (voidElement) {
-            append(" />");
-            if (voidWithLine) line();
-        } else {
-            append(">");
-        }
-
+        super.tag(name, voidElement);
         return this;
     }
 
-    public HtmlWriter tag(String name, Runnable runnable) {
-        return tag(name, false, false, runnable);
-    }
-
-    public HtmlWriter tagIndent(String name, Runnable runnable) {
-        return tag(name, !indentIndentingChildren, false, runnable);
-    }
-
-    public HtmlWriter tagLine(String name, Runnable runnable) {
-        return tag(name, false, !lineOnChildText, runnable);
-    }
-
-    public HtmlWriter tag(String name, boolean indentTag, boolean withLine, Runnable runnable) {
-        int indentLevel = indent;
-        int preIndentLevel = indent;
-
-        boolean delayedIndent = this.delayedIndent;
-        this.delayedIndent = false;
-
-        if (delayedIndent) {
-            if (indentTag) {
-                indent();
-                preIndentLevel = indent;
-            }
-        }
-
-        if (withLine || indentTag) line();
-        tag(name, false, false);
-
-        if (lineOnChildText) {
-            delayedEOL = true;
-            lineOnChildText = false;
-        }
-
-        if (indentTag) indent();
-
-        if (indentIndentingChildren) {
-            this.delayedIndent = true;
-            indentIndentingChildren = false;
-        }
-
-        runnable.run();
-
-        // if not used then not needed
-        this.delayedIndent = false;
-
-        boolean hadPreIndent = preIndentLevel < indent;
-        if (hadPreIndent) {
-            while (preIndentLevel < indent) unIndent();
-        }
-
-        // if not used then not needed
-        this.delayedEOL = false;
-
-        append("</");
-        append(name);
-        append(">");
-
-        boolean hadIndent = indentLevel < indent;
-        if (hadIndent) {
-            unIndentTo(indentLevel);
-        }
-
-        if (hadIndent || hadPreIndent || withLine) line();
-
-        return this;
-    }
-
-    public HtmlWriter line() {
-        if (lastChar != 0 && lastChar != '\n' && !delayedEOL) {
-            append("\n");
-        }
-        return this;
-    }
-
-    public HtmlWriter blankLine() {
-        if (lastChar != 0 && !lastLineBlank) {
-            if (lastChar != '\n' && !delayedEOL) {
-                append("\n\n");
-            } else {
-                append("\n");
-            }
-
-            lastLineBlank = true;
-        }
-        return this;
-    }
-
-    public HtmlWriter lineIf(boolean predicate) {
-        if (predicate) return line();
-        return this;
-    }
-
-    public HtmlWriter indent() {
-        line();
-
-        indent++;
-        indentPrefix += indentSizePrefix;
-        return this;
-    }
-
-    public HtmlWriter unIndent() {
-        if (indent > 0) {
-            line();
-            indent--;
-            if (indent * indentSize > 0) indentPrefix = indentPrefix.substring(0, indent * indentSize);
-            else indentPrefix = "";
-        }
-        return this;
-    }
-
-    public HtmlWriter withCondIndent() {
-        indentIndentingChildren = true;
-        return this;
-    }
-
-    public HtmlWriter withCondLine() {
-        lineOnChildText = true;
-        return this;
-    }
-
-    public HtmlWriter unIndentTo(int indentSize) {
-        delayedIndent = false;
-        while (indentSize < indent) unIndent();
-        return this;
-    }
-
-    public HtmlWriter openPre() {
-        preNesting++;
-        return this;
-    }
-
-    public HtmlWriter closePre() {
-        if (preNesting <= 0) {
-            throw new IllegalStateException("Close <pre> context with none open");
-        }
-        preNesting--;
-        return this;
-    }
-
-    public HtmlWriter flush() {
-       return this;
-    }
-
-    public HtmlWriter flush(int maxBlankLines) {
-       return this;
-    }
-
-    protected void append(String s) {
-        if (s.length() == 0) return;
-        //appendCount++;
-        appendCount++;
-        lastLineBlank = false;
-
-        if (delayedEOL) {
-            delayedEOL = false;
-            if (s.charAt(0) != '\n') append("\n" + prefix);
-        }
-
-        if ((!indentPrefix.isEmpty() || !prefix.isEmpty()) && preNesting <= 0) {
-            // convert \n to \n + indent except for the last one
-            // also if the last is \n then prefix indent size
-
-            try {
-                int lastPos = 0;
-                boolean lastWasEOL = lastChar == '\n';
-
-                while (lastPos < s.length()) {
-                    int pos = s.indexOf('\n', lastPos);
-                    if (pos < 0 || pos == s.length() - 1) {
-                        if (lastWasEOL) buffer.append(prefix).append(indentPrefix);
-                        buffer.append(s.substring(lastPos));
-                        break;
-                    }
-
-                    if (pos > lastPos) {
-                        if (lastWasEOL) buffer.append(prefix).append(indentPrefix);
-                        buffer.append(s.substring(lastPos, pos));
-                    }
-
-                    buffer.append("\n");
-                    lastWasEOL = true;
-                    lastPos = pos + 1;
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            int length = s.length();
-            if (length != 0) {
-                lastChar = s.charAt(length - 1);
-            }
-        } else {
-            try {
-                if (lastChar == '\n' && !prefix.isEmpty()) buffer.append(prefix);
-                buffer.append(s);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            int length = s.length();
-            if (length != 0) {
-                lastChar = s.charAt(length - 1);
-            }
-        }
-    }
+    //@Override
+    //public HtmlFormattingAppendableImpl openPre() {
+    //    return super.openPre();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl closePre() {
+    //    return super.closePre();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl raw(final String s) {
+    //    return super.raw(s);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl text(final String text) {
+    //    return super.text(text);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl attr(final String name, final String value) {
+    //    return super.attr(name, value);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl attr(final Attribute attribute) {
+    //    return super.attr(attribute);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl attr(final Attributes attributes) {
+    //    return super.attr(attributes);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl setAttributes(final Attributes attributes) {
+    //    return super.setAttributes(attributes);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tag(final String name) {
+    //    return super.tag(name);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagVoid(final String name) {
+    //    return super.tagVoid(name);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tag(final String name, final Runnable runnable) {
+    //    return super.tag(name, runnable);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagVoidLine(final String name) {
+    //    return super.tagVoidLine(name);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagLine(final String name) {
+    //    return super.tagLine(name);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagLine(final String name, final boolean voidElement) {
+    //    return super.tagLine(name, voidElement);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagLine(final String name, final Runnable runnable) {
+    //    return super.tagLine(name, runnable);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl tagIndent(final String name, final Runnable runnable) {
+    //    return super.tagIndent(name, runnable);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl line() {
+    //    return super.line();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl blankLine() {
+    //    return super.blankLine();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl lineIf(final boolean predicate) {
+    //    return super.lineIf(predicate);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl indent() {
+    //    return super.indent();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl unIndent() {
+    //    return super.unIndent();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl flush() {
+    //    return super.flush();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl flush(final int maxBlankLines) {
+    //    return super.flush(maxBlankLines);
+    //}
+    //
+    //@Override
+    //public FormattingAppendable setIndentPrefix(final CharSequence prefix) {
+    //    return super.setIndentPrefix(prefix);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl line(final Ref<Boolean> lineRef) {
+    //    return super.line(lineRef);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl lineIf(final Ref<Boolean> lineRef) {
+    //    return super.lineIf(lineRef);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl blankLineIf(final boolean predicate) {
+    //    return super.blankLineIf(predicate);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl blankLine(final int count) {
+    //    return super.blankLine(count);
+    //}
+    //
+    //@Override
+    //public FormattingAppendable setIndentOffset(final int indentOffset) {
+    //    return super.setIndentOffset(indentOffset);
+    //}
+    //
+    //@Override
+    //public FormattingAppendable openPreFormatted() {
+    //    return super.openPreFormatted();
+    //}
+    //
+    //@Override
+    //public FormattingAppendable closePreFormatted() {
+    //    return super.closePreFormatted();
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl openConditional(final ConditionalFormatter openFormatter) {
+    //    return super.openConditional(openFormatter);
+    //}
+    //
+    //@Override
+    //public HtmlFormattingAppendableImpl closeConditional(final ConditionalFormatter closeFormatter) {
+    //    return super.closeConditional(closeFormatter);
+    //}
 }

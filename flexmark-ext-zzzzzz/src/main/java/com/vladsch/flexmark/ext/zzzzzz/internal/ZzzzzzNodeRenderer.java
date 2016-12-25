@@ -27,12 +27,12 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-// @formatter:off
-                new NodeRenderingHandler<>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } }),// zzzoptionszzz(CUSTOM_NODE)
-                new NodeRenderingHandler<>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } })// zzzoptionszzz(CUSTOM_BLOCK_NODE)
- // @formatter:on
-        ));
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
+        // @formatter:off
+        set.add(new NodeRenderingHandler<>(Zzzzzz.class, new CustomNodeRenderer<Zzzzzz>() { @Override public void render(Zzzzzz node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } }));// zzzoptionszzz(CUSTOM_NODE)
+        set.add(new NodeRenderingHandler<>(ZzzzzzBlock.class, new CustomNodeRenderer<ZzzzzzBlock>() { @Override public void render(ZzzzzzBlock node, NodeRendererContext context, HtmlWriter html) { ZzzzzzNodeRenderer.this.render(node, context, html); } }));// zzzoptionszzz(CUSTOM_BLOCK_NODE),// zzzoptionszzz(CUSTOM_NODE)
+        // @formatter:on
+        return set;
     }
 
     @Override//zzzoptionszzz(REMOVE, PHASED_NODE_RENDERER)

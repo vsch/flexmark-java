@@ -5,7 +5,7 @@ import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class Node {
-    final static public BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
+    public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
     public static final String SPLICE = " … ";
 
     private Node parent = null;

@@ -8,9 +8,9 @@ import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
-    final static boolean WANT_EXCLAMATION_PREFIX = false;
-    final static int BRACKET_NESTING_LEVEL = 1;
-    
+    static final boolean WANT_EXCLAMATION_PREFIX = false;
+    static final int BRACKET_NESTING_LEVEL = 1;
+
     private final WikiLinkOptions options;
 
     public WikiLinkLinkRefProcessor(Document document) {
@@ -41,7 +41,7 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     public Node createNode(BasedSequence nodeChars) {
         return new WikiLink(nodeChars, options.linkFirstSyntax);
     }
-    
+
     public static class Factory implements LinkRefProcessorFactory {
         @Override
         public LinkRefProcessor create(Document document) {

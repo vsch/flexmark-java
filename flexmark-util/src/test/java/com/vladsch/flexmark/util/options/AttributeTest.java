@@ -1,22 +1,21 @@
 package com.vladsch.flexmark.util.options;
 
+import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.AttributeImpl;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-/**
- * Created by vlad on 2016-07-13.
- */
 public class AttributeTest {
 
     @Test
     public void testBasic() throws Exception {
-        Attribute attribute = new Attribute("name", "value1");
+        Attribute attribute = AttributeImpl.of("name", "value1", ' ');
         assertEquals("no name change", "name", attribute.getName());
 
         assertEquals("contains a simple value", true, attribute.containsValue("value1"));
 
-        Attribute attribute1 = attribute.addValue("value2");
+        Attribute attribute1 = attribute.setValue("value2");
         assertEquals("add a new value", "value1 value2", attribute1.getValue());
         assertEquals("non-equality", false, attribute1.equals(attribute));
         assertEquals("no name change", "name", attribute1.getName());
@@ -31,22 +30,22 @@ public class AttributeTest {
         assertEquals("replace value", "value2", attribute3.getValue());
         assertEquals("no name change", "name", attribute3.getName());
 
-        Attribute attribute4 = attribute1.addValue("value1");
+        Attribute attribute4 = attribute1.setValue("value1");
         assertEquals("add existing value", "value1 value2", attribute4.getValue());
         assertEquals("add existing value, no new attribute", attribute4, attribute1);
         assertEquals("no name change", "name", attribute4.getName());
 
-        Attribute attribute5 = attribute1.addValue("value1");
+        Attribute attribute5 = attribute1.setValue("value1");
         assertEquals("add existing value", "value1 value2", attribute5.getValue());
         assertEquals("add existing value, no new attribute", attribute5, attribute1);
         assertEquals("no name change", "name", attribute5.getName());
 
-        Attribute attribute6 = attribute1.addValue("value2");
+        Attribute attribute6 = attribute1.setValue("value2");
         assertEquals("add existing value", "value1 value2", attribute6.getValue());
         assertEquals("add existing value, no new attribute", attribute6, attribute1);
         assertEquals("no name change", "name", attribute6.getName());
 
-        Attribute attribute7 = attribute1.addValue("value3");
+        Attribute attribute7 = attribute1.setValue("value3");
         assertEquals("add existing value", "value1 value2 value3", attribute7.getValue());
         assertEquals("no name change", "name", attribute7.getName());
 

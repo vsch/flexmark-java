@@ -244,8 +244,10 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
         public void render(Node node, Appendable output) {
             assert node instanceof ParserNode;
             TocOptions tocOptions = getOptions().get(TOC_OPTIONS);
-            RenderingVisitor visitor = new RenderingVisitor(new HtmlWriter(output, 2), tocOptions);
+            final HtmlWriter html = new HtmlWriter(output, 2);
+            RenderingVisitor visitor = new RenderingVisitor(html, tocOptions);
             visitor.render(node);
+            html.flush();
         }
 
         @Override

@@ -19,7 +19,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.escaped.character.EscapedCharacter;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
@@ -48,7 +48,7 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
             int startOffset = region.getOriginalRange().getStart() - original.getStartOffset();
             int endOffset = region.getOriginalRange().getEnd() - original.getStartOffset();
 
-            if (original.charAt(startOffset) == '\\' && region.getReplacedRange().length() == 1 
+            if (original.charAt(startOffset) == '\\' && region.getReplacedRange().length() == 1
                     // fix for #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block
                     && startOffset + 1 < original.length()) {
                 if (wrapInTextBase) {

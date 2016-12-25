@@ -22,6 +22,8 @@ public class HtmlRendererOptions {
     public final String sourcePositionAttribute;
     public final boolean sourcePositionParagraphLines;
     public final boolean sourceWrapHtmlBlocks;
+    public final int formatFlags;
+    public final int maxTrailingBlankLines;
     //public final boolean sourceWrapInlineHtml;
 
     public HtmlRendererOptions(DataHolder options) {
@@ -45,5 +47,7 @@ public class HtmlRendererOptions {
         sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES);
         sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS);
         //sourceWrapInlineHtml = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_WRAP_INLINE_HTML);
+        formatFlags = options.get(HtmlRenderer.FORMAT_FLAGS);
+        maxTrailingBlankLines = options.get(HtmlRenderer.MAX_TRAILING_BLANK_LINES);
     }
 }

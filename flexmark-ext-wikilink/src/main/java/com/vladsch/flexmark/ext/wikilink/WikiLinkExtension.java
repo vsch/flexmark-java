@@ -25,11 +25,11 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    final static public DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
-    final static public DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
-    final static public DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
-    final static public DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");
-    final static public LinkType WIKI_LINK = new LinkType("WIKI");
+    public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
+    public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
+    public static final DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
+    public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");
+    public static final LinkType WIKI_LINK = new LinkType("WIKI");
 
     private WikiLinkExtension() {
     }

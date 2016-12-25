@@ -15,8 +15,10 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" filepath="$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" filepath="$PROJECT_DIR$/flexmark-ext-spec-example/flexmark-ext-spec-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-superscript/flexmark-ext-superscript.iml" filepath="$PROJECT_DIR$/flexmark-ext-superscript/flexmark-ext-superscript.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" filepath="$PROJECT_DIR$/flexmark-ext-tables/flexmark-ext-tables.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" filepath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" filepath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />

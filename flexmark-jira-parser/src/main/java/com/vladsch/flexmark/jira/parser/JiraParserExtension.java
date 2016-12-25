@@ -22,9 +22,9 @@ public class JiraParserExtension implements Parser.ParserExtension, HtmlRenderer
     //public static final DataKey<Boolean> JIRA_PARSER_OPTION1 = new DataKey<>("JIRA_PARSER_OPTION1", false);
     //public static final DataKey<String> JIRA_PARSER_OPTION2 = new DataKey<>("JIRA_PARSER_OPTION2", "default");
     //public static final DataKey<Integer> JIRA_PARSER_OPTION3 = new DataKey<>("JIRA_PARSER_OPTION3", Integer.MAX_VALUE);
-    // final static public DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
-    // final static public DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
-    final static public LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
+    // public static final DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
+    // public static final DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
+    public static final LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private JiraParserExtension() {
     }

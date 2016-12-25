@@ -8,13 +8,16 @@ import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.TagRange;
 
+import java.text.Format;
 import java.util.*;
 
 /**
@@ -26,91 +29,104 @@ import java.util.*;
  * renderer.render(node);
  * </code></pre>
  */
+@SuppressWarnings("WeakerAccess")
 public class HtmlRenderer implements IRender {
-    final static public DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
-    final static public DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
-    final static public DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
-    final static public DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
-    final static public DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
-    final static public DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<String> SOFT_BREAK = new DataKey<>("SOFT_BREAK", "\n");
+    public static final DataKey<String> HARD_BREAK = new DataKey<>("HARD_BREAK", "<br />\n");
+    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<>("ESCAPE_HTML", false);
+    public static final DataKey<Integer> INDENT_SIZE = new DataKey<>("INDENT", 0);
+    public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<>("ESCAPE_HTML", false);
+    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return ESCAPE_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("ESCAPE_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return ESCAPE_HTML_BLOCKS.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return ESCAPE_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<>("ESCAPE_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<>("ESCAPE_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return ESCAPE_INLINE_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> SUPPRESS_HTML = new DataKey<>("SUPPRESS_HTML", false);
-    final static public DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<>("SUPPRESS_HTML", false);
+    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return SUPPRESS_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<>("SUPPRESS_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return SUPPRESS_HTML_BLOCKS.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return SUPPRESS_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<>("SUPPRESS_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return SUPPRESS_INLINE_HTML.getFrom(holder);
         }
     });
-    final static public DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<>("SOURCE_WRAP_HTML", false);
-    final static public DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<>("SOURCE_WRAP_HTML_BLOCKS", new DataValueFactory<Boolean>() {
+    public static final DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<>("SOURCE_WRAP_HTML", false);
+    public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<>("SOURCE_WRAP_HTML_BLOCKS", new DataValueFactory<Boolean>() {
         @Override
         public Boolean create(DataHolder holder) {
             return SOURCE_WRAP_HTML.getFrom(holder);
         }
     });
-    //final static public DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
-    final static public DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
-    final static public DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
-    final static public DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
-    final static public DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
-    final static public DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
-    final static public DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
-    final static public DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
-    final static public DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
-    final static public DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
-    final static public DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
-    final static public DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
+    //public static final DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
+    public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");
+    public static final DataKey<Boolean> HEADER_ID_GENERATOR_NO_DUPED_DASHES = new DataKey<>("HEADER_ID_GENERATOR_NO_DUPED_DASHES", false);
+    public static final DataKey<Boolean> RENDER_HEADER_ID = new DataKey<>("RENDER_HEADER_ID", false);
+    public static final DataKey<Boolean> GENERATE_HEADER_ID = new DataKey<>("GENERATE_HEADER_ID", true);
+    public static final DataKey<Boolean> DO_NOT_RENDER_LINKS = new DataKey<>("DO_NOT_RENDER_LINKS", false);
+    public static final DataKey<String> FENCED_CODE_LANGUAGE_CLASS_PREFIX = new DataKey<>("LANGUAGE_CLASS_PREFIX", "language-");
+    public static final DataKey<String> SOURCE_POSITION_ATTRIBUTE = new DataKey<>("SOURCE_POSITION_ATTRIBUTE", "");
+    public static final DataKey<Boolean> SOURCE_POSITION_PARAGRAPH_LINES = new DataKey<>("SOURCE_POSITION_PARAGRAPH_LINES", false);
+    public static final DataKey<String> TYPE = new DataKey<>("TYPE", "HTML");
+    public static final DataKey<ArrayList<TagRange>> TAG_RANGES = new DataKey<>("TAG_RANGES", new DataValueFactory<ArrayList<TagRange>>() {
         @Override
         public ArrayList<TagRange> create(DataHolder value) {
             return new ArrayList<>();
         }
     });
 
-    final List<AttributeProviderFactory> attributeProviderFactories;
-    final List<NodeRendererFactory> nodeRendererFactories;
-    final List<LinkResolverFactory> linkResolverFactories;
-    final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
-    final HtmlRendererOptions htmlOptions;
+    /**
+     * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
+     */
+    public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
+    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
+
+    // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
+    public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
+    public static final int FORMAT_COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
+    public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
+    public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
+
+    private final List<AttributeProviderFactory> attributeProviderFactories;
+    private final List<NodeRendererFactory> nodeRendererFactories;
+    private final List<LinkResolverFactory> linkResolverFactories;
+    private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
+    private final HtmlRendererOptions htmlOptions;
     private final DataHolder options;
     private final Builder builder;
 
@@ -162,9 +178,9 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags), node.getDocument());
         renderer.render(node);
-        renderer.flush();
+        renderer.flush(htmlOptions.maxTrailingBlankLines);
     }
 
     /**
@@ -174,7 +190,7 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags), node.getDocument());
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
     }
@@ -301,6 +317,7 @@ public class HtmlRenderer implements IRender {
          * @param percentEncodeUrls true to percent-encode, false for leaving as-is
          * @return {@code this}
          */
+        @SuppressWarnings("SameParameterValue")
         public Builder percentEncodeUrls(boolean percentEncodeUrls) {
             this.set(PERCENT_ENCODE_URLS, percentEncodeUrls);
             return this;
@@ -592,6 +609,7 @@ public class HtmlRenderer implements IRender {
             renderChildrenNode(parent, this);
         }
 
+        @SuppressWarnings("WeakerAccess")
         protected void renderChildrenNode(Node parent, NodeRendererSubContext subContext) {
             Node node = parent.getFirstChild();
             while (node != null) {
@@ -601,6 +619,7 @@ public class HtmlRenderer implements IRender {
             }
         }
 
+        @SuppressWarnings("WeakerAccess")
         private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
             private final MainNodeRenderer myMainNodeRenderer;
 
@@ -629,7 +648,12 @@ public class HtmlRenderer implements IRender {
             public String encodeUrl(String url) {return myMainNodeRenderer.encodeUrl(url);}
 
             @Override
-            public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {return myMainNodeRenderer.extendRenderingNodeAttributes(part, attributes);}
+            public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
+                return myMainNodeRenderer.extendRenderingNodeAttributes(
+                        part,
+                        attributes
+                );
+            }
 
             @Override
             public void render(Node node) {

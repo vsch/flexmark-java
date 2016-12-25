@@ -2,7 +2,7 @@ package com.vladsch.flexmark.html;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
-import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.html.Attributes;
 
 /**
  * Extension point for adding/changing attributes on the primary HTML tag for a node.

@@ -138,7 +138,10 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                 if (options.renderHtml) {
                     html.tag("dt").text("Rendered Html").tag("/dt").line();
                     html.tag("dd");
-                    html.raw(options.renderedHtmlPrefix).raw(text.normalizeEOL()).raw(options.renderedHtmlSuffix).line();
+                    html.raw(options.renderedHtmlPrefix)
+                            .rawIndentedPre(text.normalizeEOL())
+                            .raw(options.renderedHtmlSuffix)
+                            .line();
                     html.tag("/dd").line();
                 }
                 break;
@@ -149,7 +152,10 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                     render(text, "html", context, html);
                     if (options.renderHtml) {
                         html.tagVoidLine("hr");
-                        html.raw(options.renderedHtmlPrefix).raw(text.normalizeEOL()).raw(options.renderedHtmlSuffix).line();
+                        html.raw(options.renderedHtmlPrefix)
+                                .rawIndentedPre(text.normalizeEOL())
+                                .raw(options.renderedHtmlSuffix)
+                                .line();
                     }
                 }
                 break;

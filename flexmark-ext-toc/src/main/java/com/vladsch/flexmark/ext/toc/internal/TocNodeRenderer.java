@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 public class TocNodeRenderer implements NodeRenderer {
-    final static public AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;
+    public static final AttributablePart TOC_CONTENT = TocUtils.TOC_CONTENT;
 
     private final TocOptions options;
 

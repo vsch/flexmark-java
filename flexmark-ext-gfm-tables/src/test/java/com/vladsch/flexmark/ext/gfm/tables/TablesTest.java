@@ -11,7 +11,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.test.RenderingTestCase;
-import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.html.Attributes;
 import org.junit.Test;
 
 import java.util.Collections;

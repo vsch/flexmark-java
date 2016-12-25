@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="false" type="JAVA_MODULE" version="4">
   <component name="FlexmarkExt.ModuleBuildProperties">
     <option name="extensionName" value="JiraConverter" />
     <option name="extensionPackage" value="com.vladsch.flexmark.jira.converter" />
@@ -15,7 +15,7 @@
     <option name="customNodeRepository" value="false" />
     <option name="customProperties" value="false" />
   </component>
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
@@ -28,9 +28,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" />
-    <orderEntry type="library" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.8.0" level="project" />
-    <orderEntry type="library" name="Maven: com.vladsch.flexmark:flexmark-ext-tables:0.8.0" level="project" />
     <orderEntry type="module" module-name="flexmark" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />

@@ -7,7 +7,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Escaping;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -21,10 +21,10 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
  */
 public class CoreNodeRenderer implements NodeRenderer {
-    final static public AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
-    final static public AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
-    final static public AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
-    final static public AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
+    public static final AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
+    public static final AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
+    public static final AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
+    public static final AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
 
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
@@ -264,8 +264,8 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void render(final BlockQuote node, final NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tagIndent("blockquote", new Runnable() {
+    private void render(final BlockQuote node, final NodeRendererContext context, final HtmlWriter html) {
+        html.withAttr().tagLineIndent("blockquote", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);
@@ -444,12 +444,14 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
             html.line().srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
         }
+
         if (node.hasChildren()) {
             // inner blocks handle rendering
             context.renderChildren(node);
         } else {
             renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
         }
+
         if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
             html.unIndent().tag("/div").line();
         }
@@ -474,7 +476,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (escape) {
             html.text(node.getContentChars().normalizeEOL());
         } else {
-            html.raw(node.getContentChars().normalizeEOL());
+            html.rawIndentedPre(node.getContentChars().normalizeEOL());
         }
         html.line();
     }
@@ -499,7 +501,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (escape) {
             html.text(node.getChars().normalizeEOL());
         } else {
-            html.raw(node.getChars().normalizeEOL());
+            html.rawPre(node.getChars().normalizeEOL());
         }
     }
 
@@ -519,7 +521,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
             html.srcPos(node.getText()).attr("href", resolvedLink.getUrl())
                     .withAttr(resolvedLink)
-                    .tag("a", new Runnable() {
+                    .tag("a", false, false, new Runnable() {
                         @Override
                         public void run() {
                             html.text(text);

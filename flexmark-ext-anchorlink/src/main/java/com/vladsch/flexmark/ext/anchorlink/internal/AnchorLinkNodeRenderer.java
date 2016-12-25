@@ -8,7 +8,6 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +49,7 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
                     if (!options.textSuffix.isEmpty()) html.raw(options.textSuffix);
                     html.tag("/a");
                 } else {
-                    html.withAttr().tag("a", new Runnable() {
+                    html.withAttr().tag("a", false, false, new Runnable() {
                         @Override
                         public void run() {
                             if (!options.textPrefix.isEmpty()) html.raw(options.textPrefix);

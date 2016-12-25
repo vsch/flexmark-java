@@ -67,7 +67,7 @@ public class TableNodeRenderer implements NodeRenderer {
             html.attr("class", options.className);
         }
 
-        html.srcPosWithEOL(node.getChars()).withAttr().tagIndent("table", new Runnable() {
+        html.srcPosWithEOL(node.getChars()).withAttr().tagLineIndent("table", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);

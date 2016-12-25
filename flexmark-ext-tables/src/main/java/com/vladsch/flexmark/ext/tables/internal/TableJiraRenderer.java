@@ -64,7 +64,7 @@ public class TableJiraRenderer implements NodeRenderer {
 
     private void render(TableBlock node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
-        html.raw("\n");
+        html.blankLine();
     }
 
     private void render(TableHead node, NodeRendererContext context, HtmlWriter html) {

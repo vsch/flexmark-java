@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.options;
 
+import com.vladsch.flexmark.util.html.Attributes;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -57,11 +58,11 @@ public class AttributesTest {
         assertEquals("contains added values", true, attributes.containsValue("class", "class1"));
         assertEquals("contains added values", true, attributes.containsValue("class", "class2"));
         assertEquals("contains added values", true, attributes.containsValue("class", "class3"));
-        
+
         attributes.addValue("id", "id1");
         assertEquals("add value", "id1", attributes.getValue("id"));
         assertEquals("contains added attribute", true, attributes.contains("id"));
         assertEquals("contains added value", true, attributes.containsValue("id", "id1"));
-        
+
     }
 }

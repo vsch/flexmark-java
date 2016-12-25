@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.jira.converter;
 
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
+import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -18,11 +21,19 @@ public class ComboJiraConverterSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             //.set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Arrays.asList(JiraConverterExtension.create(), StrikethroughExtension.create(), TablesExtension.create()));
+            .set(Parser.EXTENSIONS, Arrays.asList(
+                    JiraConverterExtension.create()
+                    , StrikethroughSubscriptExtension.create()
+                    , TablesExtension.create()
+                    , WikiLinkExtension.create()
+                    , InsExtension.create()
+                    )
+            );
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("list-no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
+        optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));
         optionsMap.put("gfm", new MutableDataSet()
                 .set(TablesExtension.COLUMN_SPANS, false)
                 .set(TablesExtension.APPEND_MISSING_COLUMNS, true)

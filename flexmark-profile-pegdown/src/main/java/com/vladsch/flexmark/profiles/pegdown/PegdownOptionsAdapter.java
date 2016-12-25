@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class PegdownOptionsAdapter {
-    final private MutableDataSet myOptions;
+    private final MutableDataSet myOptions;
     private int myPegdownExtensions = 0;
     private boolean myIsUpdateNeeded = false;
 

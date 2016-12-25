@@ -1,14 +1,14 @@
 ---
 title: Aside Extension Spec
 author: Vladimir Schneider
-version: 
+version:
 date: '2016-09-27'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## Aside  
+## Aside
 
 Converts text prefixed with `|` to aside tags, same as block quotes, some examples are copied
 from the commonmark spec for block quotes with the marker changed to `|`
@@ -313,8 +313,7 @@ A block quote can be empty:
 ```````````````````````````````` example Aside: 14
 |
 .
-<aside>
-</aside>
+<aside></aside>
 .
 Document[0, 2]
   AsideBlock[0, 1] marker:[0, 1, "|"]
@@ -326,8 +325,7 @@ Document[0, 2]
 |  
 | 
 .
-<aside>
-</aside>
+<aside></aside>
 .
 Document[0, 9]
   AsideBlock[0, 1] marker:[0, 1, "|"]

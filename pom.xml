@@ -35,7 +35,9 @@
         <module>flexmark-ext-gfm-tables</module>
         <module>flexmark-ext-gfm-tasklist</module>
         <module>flexmark-ext-jekyll-front-matter</module>
+        <module>flexmark-ext-ins</module>
         <module>flexmark-ext-spec-example</module>
+        <module>flexmark-ext-superscript</module>
         <module>flexmark-ext-tables</module>
         <module>flexmark-ext-toc</module>
         <module>flexmark-ext-typographic</module>
@@ -67,7 +69,7 @@
         </repository>
     </distributionManagement>
 
-    <build>          
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -255,7 +257,17 @@
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-ins</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-spec-example</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-superscript</artifactId>
                 <version>0.8.0</version>
             </dependency>
             <dependency>

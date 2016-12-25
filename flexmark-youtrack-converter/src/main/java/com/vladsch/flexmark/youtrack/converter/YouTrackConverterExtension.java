@@ -26,9 +26,9 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
     // public static final DataKey<Boolean> YOUTRACK_CONVERTER_OPTION1 = new DataKey<>("YOUTRACK_CONVERTER_OPTION1", false);
     // public static final DataKey<String> YOUTRACK_CONVERTER_OPTION2 = new DataKey<>("YOUTRACK_CONVERTER_OPTION2", "default");
     // public static final DataKey<Integer> YOUTRACK_CONVERTER_OPTION3 = new DataKey<>("YOUTRACK_CONVERTER_OPTION3", Integer.MAX_VALUE);
-    // final static public DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
-    // final static public DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
-    final static public LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
+    // public static final DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
+    // public static final DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
+    public static final LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private YouTrackConverterExtension() {
     }

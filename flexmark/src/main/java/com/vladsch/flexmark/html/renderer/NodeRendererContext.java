@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.util.options.Attributes;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
@@ -54,7 +54,7 @@ public interface NodeRendererContext {
     /**
      * Render the children of the node, used by custom renderers
      *
-     * @param parent node the children of which are to be rendered  
+     * @param parent node the children of which are to be rendered
      */
     void renderChildren(Node parent);
 
@@ -147,7 +147,7 @@ public interface NodeRendererContext {
      * <p>
      * A resolver can replace the url but not change the status letting downstream resolvers handle the rest.
      * This is useful when a resolver does partial processing like macro expansion but does not know how to handle the rest.
-     * 
+     *
      * Core processing will simply pass the link as is. It is up to extension LinkResolvers and AttributeProviders to make sense of the link and applicable attributes based on status.
      *
      * @param linkType type of link being rendered. Core defined links are Link, Image. Extensions can define their own

@@ -23,20 +23,24 @@ package com.vladsch.flexmark.util.sequence;
 
 import com.vladsch.flexmark.util.mappers.IndexMapper;
 
+/**
+ * CharSequence that is the reverse of the given sequence
+ *
+ * The hashCode is purposefully matched to the string equivalent or this.toString().hashCode()
+ */
 public class ReversedCharSequence implements CharSequence {
-    final private CharSequence myChars;
-    final private int myStart;
-    final private int myEnd;
+    private final CharSequence myChars;
+    private final int myStartIndex;
+    private final int myEndIndex;
     private int myHash;
 
     @SuppressWarnings("WeakerAccess")
-    public ReversedCharSequence(CharSequence chars, int start, int end) {
-        if (start < 0 || end > chars.length() || start > end) {
+    private ReversedCharSequence(CharSequence chars, int start, int end) {
+        if (start < 0 || end > chars.length() || start > end)
             throw new IndexOutOfBoundsException("[" + start + "," + end + ") not in [0," + length() + ")");
-        }
         myChars = chars;
-        myStart = start;
-        myEnd = end;
+        myStartIndex = start;
+        myEndIndex = end;
     }
 
     public IndexMapper getIndexMapper() {
@@ -49,39 +53,29 @@ public class ReversedCharSequence implements CharSequence {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public ReversedCharSequence(CharSequence chars) {
-        this(chars, 0, chars.length());
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public ReversedCharSequence(CharSequence chars, int start) {
-        this(chars, start, chars.length());
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    protected int reversedIndex(int index) {
-        if (index < 0 || index > length()) {
-            throw new IndexOutOfBoundsException("" + index + " not in [0," + (length() - 1) + "]");
-        }
-        return myEnd - 1 - index;
+    public int reversedIndex(int index) {
+        if (index < 0 || index > length()) throw new IndexOutOfBoundsException("" + index + " not in [0," + (length() - 1) + "]");
+        return myEndIndex - 1 - index;
     }
 
     @Override
     public int length() {
-        return myEnd - myStart;
+        return myEndIndex - myStartIndex;
     }
 
     @Override
     public char charAt(int index) {
-        if (index < 0 || index >= length()) {
-            throw new IndexOutOfBoundsException("" + index + " not in [0," + (length() - 1) + ")");
-        }
+        if (index < 0 || index >= length()) throw new IndexOutOfBoundsException("" + index + " not in [0," + (length() - 1) + ")");
         return myChars.charAt(reversedIndex(index));
     }
 
     @Override
     public CharSequence subSequence(int start, int end) {
-        return new ReversedCharSequence(myChars, reversedIndex(end) + 1, reversedIndex(end) + 1 + end - start);
+        if (start < 0 || end > length())
+            throw new IndexOutOfBoundsException("[" + start + ", " + end + ") not in [0," + (length() - 1) + ")");
+        final int startIndex = reversedIndex(end) + 1;
+        final int endIndex = startIndex + end - start;
+        return startIndex == myStartIndex && endIndex == myEndIndex ? this : new ReversedCharSequence(myChars, startIndex, endIndex);
     }
 
     @Override
@@ -89,7 +83,6 @@ public class ReversedCharSequence implements CharSequence {
         //noinspection StringBufferReplaceableByString
         StringBuilder sb = new StringBuilder(length());
         sb.append(this);
-
         return sb.toString();
     }
 
@@ -121,11 +114,28 @@ public class ReversedCharSequence implements CharSequence {
     public int hashCode() {
         int h = myHash;
         if (h == 0 && length() > 0) {
-            for (int i = myEnd; i-- > myStart; ) {
+            for (int i = myEndIndex; i-- > myStartIndex; ) {
                 h = 31 * h + myChars.charAt(i);
             }
             myHash = h;
         }
         return h;
+    }
+
+    public static CharSequence of(final CharSequence chars) {
+        return of(chars, 0, chars.length());
+    }
+
+    public static CharSequence of(final CharSequence chars, final int start) {
+        return of(chars, start, chars.length());
+    }
+
+    public static CharSequence of(final CharSequence chars, final int start, final int end) {
+        if (chars instanceof ReversedCharSequence) {
+            final ReversedCharSequence reversedChars = (ReversedCharSequence) chars;
+            final int startIndex = reversedChars.reversedIndex(end) + 1;
+            final int endIndex = startIndex + end - start;
+            return startIndex == 0 && endIndex == chars.length() ? reversedChars.myChars : reversedChars.myChars.subSequence(startIndex, endIndex);
+        } else return new ReversedCharSequence(chars, start, end);
     }
 }
