@@ -9,7 +9,7 @@
     <ParserSettings>
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="true" />
-        <option name="ANCHORLINKS" value="true" />
+        <option name="ANCHORLINKS" value="false" />
         <option name="ATXHEADERSPACE" value="true" />
         <option name="AUTOLINKS" value="true" />
         <option name="DEFINITIONS" value="false" />
