@@ -35,11 +35,6 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
         super(out, indentSize, formatOptions);
     }
 
-    @Override
-    protected HtmlWriter chaining() {
-        return this;
-    }
-
     void setContext(NodeRendererContext context) {
         this.context = context;
     }

@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.9.1](#091)
 - [0.9.0](#090)
 - [0.8.0](#080)
 - [0.7.0](#070)
@@ -94,6 +95,16 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.9.1
+-----
+
+- Fix: #27, Abbreviation node not called when 2 abbreviations, was expecting \n even at end of
+  file.
+
+- Add: `RenderingTestCase.NO_FILE_EOL` option `NO_FILE_EOL` to test cases which will strip out
+  the last EOL of example in a spec to simulate input without trailing EOL. Otherwise all test
+  cases had trailing EOL.
 
 0.9.0
 -----

@@ -14,7 +14,7 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     HtmlFormattingAppendable rawIndentedPre(String s);
     HtmlFormattingAppendable text(String text);
     HtmlFormattingAppendable attr(String name, String value);
-    HtmlFormattingAppendable attr(Attribute attribute);
+    HtmlFormattingAppendable attr(Attribute... attribute);
     HtmlFormattingAppendable attr(Attributes attributes);
     HtmlFormattingAppendable withAttr();
 

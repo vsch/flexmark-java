@@ -18,8 +18,10 @@ public abstract class RenderingTestCase {
 
     public static final String IGNORE_OPTION_NAME = "IGNORE";
     public static final String FAIL_OPTION_NAME = "FAIL";
-    public static DataKey<Boolean> FAIL = new DataKey<>("FAIL", false);
-    public static DataKey<Boolean> IGNORE = new DataKey<>("IGNORE", false);
+    public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
+    public static DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
+    public static DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
+    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, false);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -56,39 +58,51 @@ public abstract class RenderingTestCase {
             if (option.isEmpty() || option.startsWith("-")) continue;
 
             if (option.equals(IGNORE_OPTION_NAME)) {
+                //noinspection ConstantConditions
                 throwIgnoredOption(example, optionSets, option);
             }
 
-            if (option.equals(FAIL_OPTION_NAME)) {
-                if (options == null) {
-                    options = new MutableDataSet().set(FAIL, true);
-                } else {
-                    options = new MutableDataSet(options).set(FAIL, true);
-                }
-            } else {
-                if (options == null) {
-                    options = options(option);
-
+            switch (option) {
+                case FAIL_OPTION_NAME:
                     if (options == null) {
-                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
-                    }
-                } else {
-                    DataHolder dataSet = options(option);
-
-                    if (dataSet != null) {
-                        if (isFirst) {
-                            options = new MutableDataSet(options);
-                            isFirst = false;
-                        }
-                        ((MutableDataSet) options).setAll(dataSet);
+                        options = new MutableDataSet().set(FAIL, true);
                     } else {
-                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                        options = new MutableDataSet(options).set(FAIL, true);
                     }
-                }
+                    break;
+                case NO_FILE_EOL_OPTION_NAME:
+                    if (options == null) {
+                        options = new MutableDataSet().set(NO_FILE_EOL, true);
+                    } else {
+                        options = new MutableDataSet(options).set(NO_FILE_EOL, true);
+                    }
+                    break;
+                default:
+                    if (options == null) {
+                        options = options(option);
 
-                if (IGNORE.getFrom(options)) {
-                    throwIgnoredOption(example, optionSets, option);
-                }
+                        if (options == null) {
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                        }
+                    } else {
+                        DataHolder dataSet = options(option);
+
+                        if (dataSet != null) {
+                            if (isFirst) {
+                                options = new MutableDataSet(options);
+                                isFirst = false;
+                            }
+                            ((MutableDataSet) options).setAll(dataSet);
+                        } else {
+                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                        }
+                    }
+
+                    if (IGNORE.getFrom(options)) {
+                        //noinspection ConstantConditions
+                        throwIgnoredOption(example, optionSets, option);
+                    }
+                    break;
             }
         }
         return options;
@@ -130,7 +144,15 @@ public abstract class RenderingTestCase {
 
     protected void assertRendering(String source, String expectedHtml, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
-        Node node = parser().withOptions(options).parse(source);
+        String parseSource = source;
+
+        if (options != null && options.get(NO_FILE_EOL)) {
+            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
+                parseSource = parseSource.substring(0, parseSource.length()-1);
+            }
+        }
+
+        Node node = parser().withOptions(options).parse(parseSource);
         String html = renderer().withOptions(options).render(node);
         actualHtml(html, optionsSet);
         boolean useActualHtml = useActualHtml();
@@ -163,9 +185,17 @@ public abstract class RenderingTestCase {
     //}
 
     protected void assertRenderingAst(String source, String expectedHtml, String expectedAst, String optionsSet) {
-        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
         //assert options != null || optionsSet == null || optionsSet.isEmpty() : "Non empty optionsSet without any option customizations";
-        Node node = parser().withOptions(options).parse(source);
+        DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
+        String parseSource = source;
+
+        if (options != null && options.get(NO_FILE_EOL)) {
+            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
+                parseSource = parseSource.substring(0, parseSource.length()-1);
+            }
+        }
+
+        Node node = parser().withOptions(options).parse(parseSource);
         String html = renderer().withOptions(options).render(node);
         actualHtml(html, optionsSet);
         String ast = ast(node);
@@ -198,7 +228,15 @@ public abstract class RenderingTestCase {
 
     protected void assertAst(String source, String expectedAst, String optionsSet) {
         DataHolder options = optionsSet == null ? null : getOptions(example(), optionsSet);
-        Node node = parser().withOptions(options).parse(source);
+        String parseSource = source;
+
+        if (options != null && options.get(NO_FILE_EOL)) {
+            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
+                parseSource = parseSource.substring(0, parseSource.length()-1);
+            }
+        }
+
+        Node node = parser().withOptions(options).parse(parseSource);
         String ast = ast(node);
         actualAst(ast, optionsSet);
 

@@ -22,7 +22,18 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 2
+Should work without trailing EOL
+
+```````````````````````````````` example(Abbreviation: 2) options(NO_FILE_EOL)
+*[Abbr]:Abbreviation
+.
+.
+Document[0, 20]
+  AbbreviationBlock[0, 20] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[8, 20]
+````````````````````````````````
+
+
+```````````````````````````````` example Abbreviation: 3
 *[Abbr]:Abbreviation
 
 This has an Abbr embedded in it.
@@ -41,7 +52,7 @@ Document[0, 55]
 
 No inline processing in expansion text.
 
-```````````````````````````````` example Abbreviation: 3
+```````````````````````````````` example Abbreviation: 4
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -58,7 +69,7 @@ Document[0, 91]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Abbreviation: 4) options(links)
+```````````````````````````````` example(Abbreviation: 5) options(links)
 *[Abbr]: Abbreviation has *emphasis*, **bold** or `code`
 
 This has an Abbr embedded in it.
@@ -75,7 +86,7 @@ Document[0, 91]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 5
+```````````````````````````````` example Abbreviation: 6
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 .
@@ -86,7 +97,7 @@ Document[0, 49]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 6
+```````````````````````````````` example Abbreviation: 7
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
 
@@ -112,7 +123,7 @@ Document[0, 126]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 7
+```````````````````````````````` example Abbreviation: 8
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
 
@@ -132,7 +143,7 @@ Document[0, 136]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 8
+```````````````````````````````` example Abbreviation: 9
 *[US]: United States
 *[U.S.A.]: United States of America
 *[US of A]: United States of America
@@ -156,7 +167,7 @@ Document[0, 142]
 ````````````````````````````````
 
 
-```````````````````````````````` example Abbreviation: 9
+```````````````````````````````` example Abbreviation: 10
 *[Abbr]: Abbreviation
 [Abbr]: http://test.com
 
@@ -181,7 +192,7 @@ Document[0, 88]
 
 A reference that is not on the first line is just text.
 
-```````````````````````````````` example Abbreviation: 10
+```````````````````````````````` example Abbreviation: 11
 Paragraph with second line having a reference
 *[test]: test abbreviation
 
@@ -202,7 +213,7 @@ Document[0, 74]
 
 simple use case
 
-```````````````````````````````` example Abbreviation: 11
+```````````````````````````````` example Abbreviation: 12
 text with abbr embedded
 
 *[abbr]: abbreviation

@@ -18,12 +18,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor {
-    private static Pattern ABBREVIATION_BLOCK = Pattern.compile("\\s{0,3}(\\*\\[\\s*.*\\s*\\]:)\\s*[^\n\r]*(?:\r\n|\r|\n)");
+    private static Pattern ABBREVIATION_BLOCK = Pattern.compile("\\s{0,3}(\\*\\[\\s*.*\\s*\\]:)\\s*[^\n\r]*(?:\r\n|\r|\n|$)");
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final AbbreviationOptions options;
     private final AbbreviationRepository abbreviationMap;
 
-    AbbreviationParagraphPreProcessor(DataHolder options) {
+    private AbbreviationParagraphPreProcessor(DataHolder options) {
         this.options = new AbbreviationOptions(options);
         abbreviationMap = options.get(AbbreviationExtension.ABBREVIATIONS);
     }
@@ -35,10 +36,10 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
         int lastFound = 0;
         while (matcher.find()) {
             // abbreviation definition
-            if (matcher.start() != lastFound) break; 
-            
+            if (matcher.start() != lastFound) break;
+
             lastFound = matcher.end();
-            
+
             int openingStart = matcher.start(1);
             int openingEnd = matcher.end(1);
             int textEnd = lastFound;
@@ -52,15 +53,15 @@ public class AbbreviationParagraphPreProcessor implements ParagraphPreProcessor 
             abbreviationBlock.setClosingMarker(closingMarker);
             abbreviationBlock.setAbbreviation(trySequence.subSequence(openingEnd, textEnd).trim());
             abbreviationBlock.setCharsFromContent();
-            
+
             block.insertBefore(abbreviationBlock);
             state.blockAdded(abbreviationBlock);
-            
+
             abbreviationMap.put(abbreviationMap.normalizeKey(abbreviationBlock.getText()), abbreviationBlock);
         }
         return lastFound;
     }
-    
+
     public static ParagraphPreProcessorFactory Factory() {
         return new ParagraphPreProcessorFactory() {
             @Override

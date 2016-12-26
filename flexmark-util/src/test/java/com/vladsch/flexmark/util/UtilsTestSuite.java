@@ -1,8 +1,7 @@
 package com.vladsch.flexmark.util;
 
 import com.vladsch.flexmark.util.collection.*;
-import com.vladsch.flexmark.util.html.HtmlFormattingAppendableImpl;
-import com.vladsch.flexmark.util.html.HtmlFormattingAppendableImplTest;
+import com.vladsch.flexmark.util.html.HtmlFormattingAppendableBaseTest;
 import com.vladsch.flexmark.util.options.AttributeTest;
 import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
@@ -25,7 +24,7 @@ import org.junit.runners.Suite;
         FormattingAppendableImplTest.class,
         RepeatedCharSequenceTest.class,
         ReversedCharSequenceTest.class,
-        HtmlFormattingAppendableImplTest.class,
+        HtmlFormattingAppendableBaseTest.class,
 })
 public class UtilsTestSuite {
 }

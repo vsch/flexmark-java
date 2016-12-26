@@ -387,6 +387,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public Appendable getAppendable() {
+        return myAppendable;
+    }
+
+    @Override
     public FormattingAppendable flush() {
         return flush(0);
     }

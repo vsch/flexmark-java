@@ -43,7 +43,14 @@ public class DumpSpecReader extends SpecReader {
             ignoredCase = true;
         }
 
-        Node node = testCase.parser().withOptions(options).parse(example.getSource());
+        String parseSource = example.getSource();
+        if (options != null && options.get(RenderingTestCase.NO_FILE_EOL)) {
+            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
+                parseSource = parseSource.substring(0, parseSource.length()-1);
+            }
+        }
+
+        Node node = testCase.parser().withOptions(options).parse(parseSource);
         String html = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
         String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
 

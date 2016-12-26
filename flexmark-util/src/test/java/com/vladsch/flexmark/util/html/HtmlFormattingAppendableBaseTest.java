@@ -4,12 +4,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class HtmlFormattingAppendableImplTest {
+public class HtmlFormattingAppendableBaseTest {
 
     @Test
     public void test_basic() throws Exception {
         StringBuilder sb = new StringBuilder();
-        final HtmlFormattingAppendableImpl fa = new HtmlFormattingAppendableImpl(sb, 2, true);
+        final HtmlFormattingAppendableBase fa = new HtmlFormattingAppendableBase(sb, 2, true);
 
         fa.tagIndent("ul", new Runnable() {
             @Override
@@ -27,7 +27,7 @@ public class HtmlFormattingAppendableImplTest {
         assertEquals("<ul>\n  <li>item1</li>\n</ul>\n", sb.toString());
 
         sb = new StringBuilder();
-        final HtmlFormattingAppendableImpl fa1 = new HtmlFormattingAppendableImpl(sb, 2, true);
+        final HtmlFormattingAppendableBase fa1 = new HtmlFormattingAppendableBase(sb, 2, true);
 
         fa1.tagIndent("ul", new Runnable() {
             @Override
@@ -56,7 +56,7 @@ public class HtmlFormattingAppendableImplTest {
         assertEquals("<ul>\n  <li>item1\n    <ul>\n      <li>item1</li>\n    </ul>\n  </li>\n</ul>\n", sb.toString());
 
         sb = new StringBuilder();
-        final HtmlFormattingAppendableImpl fa2 = new HtmlFormattingAppendableImpl(sb, 2, true);
+        final HtmlFormattingAppendableBase fa2 = new HtmlFormattingAppendableBase(sb, 2, true);
 
         fa2.withCondLine().tagIndent("tbody", new Runnable() {
             @Override

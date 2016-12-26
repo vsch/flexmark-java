@@ -43,6 +43,13 @@ public interface FormattingAppendable extends Appendable {
     @Override
     FormattingAppendable append(char c);
 
+    /**
+     * Get the underlying appendable
+     *
+     * @return appendable being used for accumulating output
+     */
+    Appendable getAppendable();
+
     int CONVERT_TABS = 0x0001;
     int COLLAPSE_WHITESPACE = 0x0002;
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;
