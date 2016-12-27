@@ -1046,12 +1046,12 @@ Document[0, 129]
   </ul>
 </div>
 .
-Document[0, 41]
+Document[0, 40]
   Heading[0, 11] textOpen:[0, 2, "##"] text:[3, 11, "Header 2"]
     Text[3, 11] chars:[3, 11, "Header 2"]
   Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
     Text[16, 24] chars:[16, 24, "Header 3"]
-  TocBlock[26, 41] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 40]
+  TocBlock[26, 40] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 40]
 ````````````````````````````````
 
 

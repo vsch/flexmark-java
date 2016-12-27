@@ -11,7 +11,6 @@ import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Consumer;
 
 public class ClassifyingNodeTracker implements NodeTracker {
     protected final ClassificationBag<Class<?>, Node> myNodeClassifier;

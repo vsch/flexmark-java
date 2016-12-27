@@ -13,7 +13,6 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class SpecExampleNodeRenderer implements NodeRenderer
@@ -205,7 +204,7 @@ public class SpecExampleNodeRenderer implements NodeRenderer
                     String optionsText = "";
                     BasedSequence trimmed = node.getOptions().trim(BasedSequence.WHITESPACE_NBSP_CHARS);
                     if (!trimmed.isEmpty()) {
-                        List<BasedSequence> optionsList = trimmed.split(',', 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
+                        BasedSequence[] optionsList = trimmed.split(',', 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
                         DelimitedBuilder out = new DelimitedBuilder(", ");
                         optionsText = out.appendAll(optionsList).getAndClear();
                     }

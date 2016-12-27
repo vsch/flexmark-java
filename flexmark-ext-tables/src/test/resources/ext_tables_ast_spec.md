@@ -859,8 +859,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 25]
-  TableBlock[0, 25]
+Document[0, 24]
+  TableBlock[0, 24]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1204,8 +1204,8 @@ Abc|Def
   </tbody>
 </table>
 .
-Document[0, 22]
-  TableBlock[0, 22]
+Document[0, 21]
+  TableBlock[0, 21]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1599,9 +1599,87 @@ Document[0, 25]
 ````````````````````````````````
 
 
-Alignment should be taken from column after span is added
+With caption
 
 ```````````````````````````````` example Tables Extension: 52
+| col1 | col2|
+|---|---|
+         [Caption **bold** _italic_ `code`]          
+.
+<table>
+  <thead>
+    <tr><th>col1</th><th>col2</th></tr>
+  </thead>
+  <tbody></tbody>
+  <caption>Caption <strong>bold</strong> <em>italic</em> <code>code</code></caption>
+</table>
+.
+Document[0, 79]
+  TableBlock[0, 68]
+    TableHead[0, 14]
+      TableRow[0, 14] rowNumber=1
+        TableCell[0, 8] header textOpen:[0, 1, "|"] text:[2, 6, "col1"] textClose:[7, 8, "|"]
+          Text[2, 6] chars:[2, 6, "col1"]
+        TableCell[8, 14] header text:[9, 13, "col2"] textClose:[13, 14, "|"]
+          Text[9, 13] chars:[9, 13, "col2"]
+    TableSeparator[15, 24]
+      TableRow[15, 24]
+        TableCell[15, 20] textOpen:[15, 16, "|"] text:[16, 19, "---"] textClose:[19, 20, "|"]
+          Text[16, 19] chars:[16, 19, "---"]
+        TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
+          Text[20, 23] chars:[20, 23, "---"]
+    TableBody[0, 0]
+    TableCaption[34, 68] textOpen:[34, 35, "["] text:[35, 67, "Caption **bold** _italic_ `code`"] textClose:[67, 68, "]"]
+      Text[35, 43] chars:[35, 43, "Caption "]
+      StrongEmphasis[43, 51] textOpen:[43, 45, "**"] text:[45, 49, "bold"] textClose:[49, 51, "**"]
+        Text[45, 49] chars:[45, 49, "bold"]
+      Text[51, 52] chars:[51, 52, " "]
+      Emphasis[52, 60] textOpen:[52, 53, "_"] text:[53, 59, "italic"] textClose:[59, 60, "_"]
+        Text[53, 59] chars:[53, 59, "italic"]
+      Text[60, 61] chars:[60, 61, " "]
+      Code[61, 67] textOpen:[61, 62, "`"] text:[62, 66, "code"] textClose:[66, 67, "`"]
+````````````````````````````````
+
+
+With caption but no caption parsing
+
+```````````````````````````````` example(Tables Extension: 53) options(no-caption)
+| col1 | col2|
+|---|---|
+[Caption]
+.
+<table>
+  <thead>
+    <tr><th>col1</th><th>col2</th></tr>
+  </thead>
+  <tbody></tbody>
+</table>
+<p>[Caption]</p>
+.
+Document[0, 34]
+  TableBlock[0, 25]
+    TableHead[0, 14]
+      TableRow[0, 14] rowNumber=1
+        TableCell[0, 8] header textOpen:[0, 1, "|"] text:[2, 6, "col1"] textClose:[7, 8, "|"]
+          Text[2, 6] chars:[2, 6, "col1"]
+        TableCell[8, 14] header text:[9, 13, "col2"] textClose:[13, 14, "|"]
+          Text[9, 13] chars:[9, 13, "col2"]
+    TableSeparator[15, 24]
+      TableRow[15, 24]
+        TableCell[15, 20] textOpen:[15, 16, "|"] text:[16, 19, "---"] textClose:[19, 20, "|"]
+          Text[16, 19] chars:[16, 19, "---"]
+        TableCell[20, 24] text:[20, 23, "---"] textClose:[23, 24, "|"]
+          Text[20, 23] chars:[20, 23, "---"]
+    TableBody[0, 0]
+  Paragraph[25, 34]
+    LinkRef[25, 34] referenceOpen:[25, 26, "["] reference:[26, 33, "Caption"] referenceClose:[33, 34, "]"]
+      Text[26, 33] chars:[26, 33, "Caption"]
+````````````````````````````````
+
+
+Alignment should be taken from column after span is added
+
+```````````````````````````````` example Tables Extension: 54
 | day         | time  |   spent |
 |:------------|:-----:|--------:|
 | nov. 2. tue | 10:00 |  4h 40m |
@@ -1673,7 +1751,7 @@ Document[0, 204]
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 53
+```````````````````````````````` example Tables Extension: 55
 not a table, followed by a table
 
 | col1 | col2|
@@ -1784,7 +1862,7 @@ Document[0, 199]
 
 multi row/column
 
-```````````````````````````````` example Tables Extension: 54
+```````````````````````````````` example Tables Extension: 56
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -1866,7 +1944,7 @@ Document[0, 168]
 
 keep cell whitespace
 
-```````````````````````````````` example(Tables Extension: 55) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 57) options(keep-whitespace)
  Abc  | Def
  --- | ---
  1 | 2
@@ -1880,8 +1958,8 @@ keep cell whitespace
   </tbody>
 </table>
 .
-Document[0, 30]
-  TableBlock[1, 30]
+Document[0, 29]
+  TableBlock[1, 29]
     TableHead[1, 11]
       TableRow[1, 11] rowNumber=1
         TableCell[1, 7] header text:[1, 6, "Abc  "] textClose:[6, 7, "|"]
@@ -1905,7 +1983,7 @@ Document[0, 30]
 
 Custom class name
 
-```````````````````````````````` example(Tables Extension: 56) options(class-name)
+```````````````````````````````` example(Tables Extension: 58) options(class-name)
 Abc|Def
 ---|---
 .
@@ -1916,8 +1994,8 @@ Abc|Def
   <tbody></tbody>
 </table>
 .
-Document[0, 16]
-  TableBlock[0, 16]
+Document[0, 15]
+  TableBlock[0, 15]
     TableHead[0, 7]
       TableRow[0, 7] rowNumber=1
         TableCell[0, 4] header text:[0, 3, "Abc"] textClose:[3, 4, "|"]
@@ -1936,7 +2014,7 @@ Document[0, 16]
 
 in item
 
-```````````````````````````````` example(Tables Extension: 57) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 59) options(keep-whitespace)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -1961,13 +2039,13 @@ in item
   </li>
 </ul>
 .
-Document[0, 565]
-  BulletList[0, 565] isLoose
-    BulletListItem[0, 565] open:[0, 1, "-"] isLoose hadBlankLineAfter
+Document[0, 564]
+  BulletList[0, 564] isLoose
+    BulletListItem[0, 564] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 44]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
-      TableBlock[87, 565]
+      TableBlock[87, 564]
         TableHead[87, 180]
           TableRow[87, 180] rowNumber=1
             TableCell[87, 104] header textOpen:[87, 88, "|"] text:[88, 103, " Element       "] textClose:[103, 104, "|"]
@@ -2026,7 +2104,7 @@ Document[0, 565]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 58
+```````````````````````````````` example Tables Extension: 60
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -2863,7 +2941,7 @@ Document[0, 10153]
 ````````````````````````````````
 
 
-## GFM options 
+## GFM options
 
 invalid table:
 
@@ -2878,8 +2956,8 @@ invalid table:
 | a | b | c |
 | b | a | c |</p>
 .
-Document[0, 56]
-  Paragraph[0, 56]
+Document[0, 55]
+  Paragraph[0, 55]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "|---- … ----|"]
@@ -2901,8 +2979,8 @@ invalid table:
 | a | b | c |
 | b | a | c |</p>
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "| a | … | c |"]
@@ -2923,7 +3001,7 @@ Document[0, 42]
 | Support for Default and Darcula color schemes for preview tab                                                           |   X   |    X     |
 | Warning and Error Annotations to help you validate wiki link errors                                                     |   X   |    X     |
 .
-<table md-pos="0-1144">
+<table md-pos="0-1143">
   <thead>
     <tr md-pos="0-142"><th align="left" md-pos="2-9">Feature</th><th align="center" md-pos="124-129">Basic</th><th align="center" md-pos="132-140">Enhanced</th></tr>
   </thead>
@@ -2937,8 +3015,8 @@ Document[0, 42]
   </tbody>
 </table>
 .
-Document[0, 1144]
-  TableBlock[0, 1144]
+Document[0, 1143]
+  TableBlock[0, 1143]
     TableHead[0, 142]
       TableRow[0, 142] rowNumber=1
         TableCell[0, 123] LEFT header textOpen:[0, 1, "|"] text:[2, 9, "Feature"] textClose:[122, 123, "|"]
@@ -3013,9 +3091,9 @@ in item
   | Explicit link | `.link`         | `[]()`                                                  |
 .
 <ul>
-  <li md-pos="0-565">
+  <li md-pos="0-564">
     <p md-pos="2-44">Add: live templates starting with <code md-pos="37-38">.</code></p>
-    <table md-pos="87-565">
+    <table md-pos="87-564">
       <thead>
         <tr md-pos="87-180"><th md-pos="88-103"> Element       </th><th md-pos="104-121"> Abbreviation    </th><th md-pos="122-179"> Expansion                                               </th></tr>
       </thead>
@@ -3028,13 +3106,13 @@ in item
   </li>
 </ul>
 .
-Document[0, 565]
-  BulletList[0, 565] isLoose
-    BulletListItem[0, 565] open:[0, 1, "-"] isLoose hadBlankLineAfter
+Document[0, 564]
+  BulletList[0, 564] isLoose
+    BulletListItem[0, 564] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 44]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
-      TableBlock[87, 565]
+      TableBlock[87, 564]
         TableHead[87, 180]
           TableRow[87, 180] rowNumber=1
             TableCell[87, 104] header textOpen:[87, 88, "|"] text:[88, 103, " Element       "] textClose:[103, 104, "|"]

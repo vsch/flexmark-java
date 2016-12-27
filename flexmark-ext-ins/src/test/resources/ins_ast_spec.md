@@ -231,12 +231,12 @@ Document[0, 80]
 > underline ++that++                                                           
 .
 <blockquote>
-  <p md-pos="2-80">underline <ins>that</ins></p>
+  <p md-pos="2-79">underline <ins>that</ins></p>
 </blockquote>
 .
-Document[0, 80]
-  BlockQuote[0, 80] marker:[0, 1, ">"]
-    Paragraph[2, 80]
+Document[0, 79]
+  BlockQuote[0, 79] marker:[0, 1, ">"]
+    Paragraph[2, 79]
       Text[2, 12] chars:[2, 12, "underline "]
       Ins[12, 20] textOpen:[12, 14, "++"] text:[14, 18, "that"] textClose:[18, 20, "++"]
         Text[14, 18] chars:[14, 18, "that"]

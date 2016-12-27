@@ -10,7 +10,6 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

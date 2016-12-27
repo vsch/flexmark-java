@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.9.2](#092)
 - [0.9.1](#091)
 - [0.9.0](#090)
 - [0.8.0](#080)
@@ -95,6 +96,20 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.9.2
+-----
+
+- Change: make NO_FILE_EOL default condition for tests. Last EOL will be stripped unless the
+  previous line is blank.
+
+- Fix: #28, Table caption support?, add `TablesExtension.WITH_CAPTION` default `true`, when true
+  will parse table caption line, line after table with format `[` ... `]`
+
+- Change: methods that had `String` arguments to `CharSequence`
+
+- Change: add `BasedSequence.appendTo(StringBuilder)` and start/end variations to allow
+  optimized appending to string builder for specific implementations.
 
 0.9.1
 -----

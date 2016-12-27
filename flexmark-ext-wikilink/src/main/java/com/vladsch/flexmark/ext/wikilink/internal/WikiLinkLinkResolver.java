@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class WikiLinkLinkResolver implements LinkResolver {
             String wikiLink = link.getUrl();
             int iMax = wikiLink.length();
             sb.append(options.linkPrefix);
-            
+
             for (int i = 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
                 int pos = fromChars.indexOf(c);

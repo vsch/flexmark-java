@@ -8,7 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Gfm Strikethrough Extension 
+## Gfm Strikethrough Extension
 
 Converts ~~text~~ to strikethrough of text
 
@@ -197,10 +197,10 @@ Document[0, 18]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ~~Paragraph with *emphasis* and __strong emphasis__~~
 .
-<p md-pos="0-54"><del md-pos="2-51">Paragraph with <em md-pos="18-26">emphasis</em> and <strong md-pos="34-49">strong emphasis</strong></del></p>
+<p md-pos="0-53"><del md-pos="2-51">Paragraph with <em md-pos="18-26">emphasis</em> and <strong md-pos="34-49">strong emphasis</strong></del></p>
 .
-Document[0, 54]
-  Paragraph[0, 54]
+Document[0, 53]
+  Paragraph[0, 53]
     Strikethrough[0, 53] textOpen:[0, 2, "~~"] text:[2, 51, "Parag … raph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "~~"]
       Text[2, 17] chars:[2, 17, "Parag … with "]
       Emphasis[17, 27] textOpen:[17, 18, "*"] text:[18, 26, "emphasis"] textClose:[26, 27, "*"]

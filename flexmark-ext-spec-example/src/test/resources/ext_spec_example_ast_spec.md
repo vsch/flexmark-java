@@ -1,14 +1,14 @@
 ---
 title: SpecExample Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## SpecExample  
+## SpecExample
 
 Converts spec example text to SpecExample nodes.
 
@@ -401,7 +401,7 @@ Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
     SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
 .
-Document[0, 347]
+Document[0, 346]
   SpecExampleBlock[0, 346] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] htmlSeparator:[39, 41] html:[41, 136] astSeparator:[137, 139] ast:[139, 329] closingMarker:[330, 346]
     SpecExampleSource[25, 38] chars:[25, 38, "Markd …  only"]
     SpecExampleSeparator[39, 41] chars:[39, 41, "…\n"]
@@ -882,7 +882,7 @@ Document[0, 56]
   </dd>
 </dl>
 .
-Document[0, 350]
+Document[0, 349]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
@@ -926,7 +926,7 @@ Document[0, 56]
     SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
 </code></pre>
 .
-Document[0, 350]
+Document[0, 349]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
@@ -946,7 +946,7 @@ No option nodes
 .
 <hr />
 .
-Document[0, 69]
+Document[0, 68]
   SpecExampleBlock[0, 68] openingMarker:[0, 16] exampleKeyword:[17, 24] optionsKeyword:[25, 32] optionsOpeningMarker:[32, 33] options:[33, 50] optionsClosingMarker:[50, 51] closingMarker:[52, 68]
     SpecExampleSource[52, 52]
 ````````````````````````````````
@@ -993,7 +993,7 @@ Document[0, 56]
   SpecExampleBlock[0, 55] openingMarker:[0, 16] exampleKeyword:[17, 24] source:[25, 38] closingMarker:[39, 55]
     SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]</code></pre>
 .
-Document[0, 350]
+Document[0, 349]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
@@ -1037,7 +1037,7 @@ Document[0, 56]
     SpecExampleSource[25, 38] chars:[25, 38, &quot;Markd&quot;...&quot; only&quot;]
 </code></pre>
 .
-Document[0, 350]
+Document[0, 349]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]
@@ -1097,7 +1097,7 @@ Document[0, 56]
   </dd>
 </dl>
 .
-Document[0, 350]
+Document[0, 349]
   SpecExampleBlock[0, 349] openingMarker:[0, 16] exampleKeyword:[17, 24] coordOpeningMarker:[24, 25] section:[25, 32] numberSeparator:[32, 33] number:[34, 40] coordClosingMarker:[40, 41] optionsKeyword:[42, 49] optionsOpeningMarker:[49, 50] options:[50, 56] optionsClosingMarker:[56, 57] source:[58, 84] htmlSeparator:[85, 87] html:[87, 139] astSeparator:[140, 142] ast:[142, 332] closingMarker:[333, 349]
     SpecExampleOptionsList[50, 56] chars:[50, 56, "option"]
       SpecExampleOption[50, 56] chars:[50, 56, "option"]

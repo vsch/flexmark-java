@@ -14,7 +14,6 @@ import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -23,16 +22,16 @@ public class TaskListParagraphPreProcessor implements ParagraphPreProcessor {
     static class TaskListParsing extends Parsing {
         final Pattern TASK_LIST_MARKER;
 
-        public TaskListParsing(DataHolder options) {
+        TaskListParsing(DataHolder options) {
             super(options);
             TASK_LIST_MARKER = Pattern.compile("^\\[" + super.ADDITIONAL_CHARS_SET("?") + "[ xX]\\](?: |\t|\r|\n|$)");
         }
     }
 
-    final TaskListParsing myParsing;
-    final boolean convertOrderedListItems;
+    private final TaskListParsing myParsing;
+    private final boolean convertOrderedListItems;
 
-    public TaskListParagraphPreProcessor(DataHolder options) {
+    TaskListParagraphPreProcessor(DataHolder options) {
         myParsing = new TaskListParsing(options);
         convertOrderedListItems = options.get(TaskListExtension.CONVERT_ORDERED_LIST_ITEMS);
     }

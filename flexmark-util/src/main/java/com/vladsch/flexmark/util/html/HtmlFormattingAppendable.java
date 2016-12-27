@@ -9,11 +9,11 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     boolean inPre();
     HtmlFormattingAppendable openPre();
     HtmlFormattingAppendable closePre();
-    HtmlFormattingAppendable raw(String s);
-    HtmlFormattingAppendable rawPre(String s);
-    HtmlFormattingAppendable rawIndentedPre(String s);
-    HtmlFormattingAppendable text(String text);
-    HtmlFormattingAppendable attr(String name, String value);
+    HtmlFormattingAppendable raw(CharSequence s);
+    HtmlFormattingAppendable rawPre(CharSequence s);
+    HtmlFormattingAppendable rawIndentedPre(CharSequence s);
+    HtmlFormattingAppendable text(CharSequence s);
+    HtmlFormattingAppendable attr(CharSequence attrName, CharSequence value);
     HtmlFormattingAppendable attr(Attribute... attribute);
     HtmlFormattingAppendable attr(Attributes attributes);
     HtmlFormattingAppendable withAttr();
@@ -21,15 +21,16 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     HtmlFormattingAppendable withCondLine();
     HtmlFormattingAppendable withCondIndent();
 
-    HtmlFormattingAppendable tagVoid(String name);
-    HtmlFormattingAppendable tag(String name);
-    HtmlFormattingAppendable tag(String name, boolean voidElement);
-    HtmlFormattingAppendable tag(String name, final boolean withIndent, final boolean withLine, Runnable runnable);
+    HtmlFormattingAppendable tagVoid(CharSequence tagName);
+    HtmlFormattingAppendable tag(CharSequence tagName);
+    HtmlFormattingAppendable tag(CharSequence tagName, boolean voidElement);
+    HtmlFormattingAppendable tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable);
 
-    HtmlFormattingAppendable tagVoidLine(String name);
-    HtmlFormattingAppendable tagLine(String name);
-    HtmlFormattingAppendable tagLine(String name, boolean voidElement);
-    HtmlFormattingAppendable tagLine(String name, Runnable runnable);
-    HtmlFormattingAppendable tagIndent(String name, Runnable runnable);
-    HtmlFormattingAppendable tagLineIndent(String name, Runnable runnable);
+    HtmlFormattingAppendable tagVoidLine(CharSequence tagName);
+    HtmlFormattingAppendable tagLine(CharSequence tagName);
+    HtmlFormattingAppendable tagLine(CharSequence tagName, boolean voidElement);
+    HtmlFormattingAppendable tagLine(CharSequence tagName, Runnable runnable);
+    HtmlFormattingAppendable tagIndent(CharSequence tagName, Runnable runnable);
+    HtmlFormattingAppendable tagLineIndent(CharSequence tagName, Runnable runnable);
+    HtmlFormattingAppendable closeTag(CharSequence tagName);
 }

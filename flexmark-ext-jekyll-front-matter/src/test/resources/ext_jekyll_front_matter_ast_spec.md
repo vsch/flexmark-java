@@ -1,14 +1,14 @@
 ---
 title: JekyllFrontMatter Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## JekyllFrontMatter  
+## JekyllFrontMatter
 
 Converts jekyll_front_matter text to JekyllFrontMatter node.
 
@@ -29,7 +29,7 @@ Document[0, 160]
 ````````````````````````````````
 
 
-## FlexmarkFrontMatter  
+## FlexmarkFrontMatter
 
 Converts jekyll front matter text to JekyllFrontMatter node.
 
@@ -62,7 +62,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 .
 .
-Document[0, 160]
+Document[0, 159]
   JekyllFrontMatterBlock[0, 159] open:[0, 3] content:[4, 156] close:[156, 159]
 ````````````````````````````````
 

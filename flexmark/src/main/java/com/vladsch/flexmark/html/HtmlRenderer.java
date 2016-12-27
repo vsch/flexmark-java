@@ -8,16 +8,15 @@ import com.vladsch.flexmark.ast.HtmlInline;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.html.Attributes;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.TagRange;
 
-import java.text.Format;
 import java.util.*;
 
 /**
@@ -461,18 +460,19 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode) {
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
             if (resolvedLinks == null) {
                 resolvedLinks = new HashMap<>();
                 resolvedLinkMap.put(linkType, resolvedLinks);
             }
 
-            ResolvedLink resolvedLink = resolvedLinks.get(url);
+            String urlSeq = url instanceof String ? (String)url : String.valueOf(url);
+            ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             if (resolvedLink == null) {
-                resolvedLink = new ResolvedLink(linkType, url);
+                resolvedLink = new ResolvedLink(linkType, urlSeq);
 
-                if (!url.isEmpty()) {
+                if (!urlSeq.isEmpty()) {
                     Node currentNode = getCurrentNode();
 
                     for (LinkResolver linkResolver : myLinkResolvers) {
@@ -486,7 +486,7 @@ public class HtmlRenderer implements IRender {
                 }
 
                 // put it in the map
-                resolvedLinks.put(url, resolvedLink);
+                resolvedLinks.put(urlSeq, resolvedLink);
             }
 
             return resolvedLink;
@@ -529,11 +529,11 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
-        public String encodeUrl(String url) {
+        public String encodeUrl(CharSequence url) {
             if (htmlOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
             } else {
-                return url;
+                return url instanceof String ? (String)url : String.valueOf(url);
             }
         }
 
@@ -645,7 +645,7 @@ public class HtmlRenderer implements IRender {
             public RenderingPhase getRenderingPhase() {return myMainNodeRenderer.getRenderingPhase();}
 
             @Override
-            public String encodeUrl(String url) {return myMainNodeRenderer.encodeUrl(url);}
+            public String encodeUrl(CharSequence url) {return myMainNodeRenderer.encodeUrl(url);}
 
             @Override
             public Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes) {
@@ -666,7 +666,7 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
-            public ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode) {
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
                 return myMainNodeRenderer.resolveLink(linkType, url, null);
             }
 

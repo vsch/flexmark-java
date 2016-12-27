@@ -9,7 +9,10 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComboPegdownProfileSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_profile_ast_spec.md";

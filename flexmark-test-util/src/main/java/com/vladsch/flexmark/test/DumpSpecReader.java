@@ -45,9 +45,7 @@ public class DumpSpecReader extends SpecReader {
 
         String parseSource = example.getSource();
         if (options != null && options.get(RenderingTestCase.NO_FILE_EOL)) {
-            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
-                parseSource = parseSource.substring(0, parseSource.length()-1);
-            }
+            parseSource = trimTrailingEOL(parseSource);
         }
 
         Node node = testCase.parser().withOptions(options).parse(parseSource);
@@ -107,4 +105,16 @@ public class DumpSpecReader extends SpecReader {
         return s.replace("\u23ce", "\r").replace("&#23ce", "\u23ce").replace("\u23ae", "\u001f").replace("&#23ae;", "\u23ae").replace('\u2192', '\t').replace("&#2192;", "\u2192");
     }
 
+    public static String trimTrailingEOL(String parseSource) {
+        if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length() - 1) == '\n') {
+            // if previous line is blank, then no point in removing this EOL, just leave it
+            int pos = parseSource.lastIndexOf('\n', parseSource.length() - 2);
+            if (pos == -1 || !parseSource.substring(pos + 1).trim().isEmpty()) {
+                parseSource = parseSource.substring(0, parseSource.length() - 1);
+            } else {
+                int tmp = 0;
+            }
+        }
+        return parseSource;
+    }
 }

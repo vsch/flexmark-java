@@ -13,7 +13,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 flexmark-java extension for defining abbreviations and turning appearance of these abbreviations
 in text into abbr tags with titles consisting of the expansion of the abbreviation.
 
-```````````````````````````````` example Abbreviation: 1
+```````````````````````````````` example(Abbreviation: 1) options(FILE_EOL)
 *[Abbr]:Abbreviation
 .
 .
@@ -76,9 +76,9 @@ This has an Abbr embedded in it.
 .
 <p>This has an <a href="#" title="Abbreviation has *emphasis*, **bold** or `code`">Abbr</a> embedded in it.</p>
 .
-Document[0, 91]
+Document[0, 90]
   AbbreviationBlock[0, 56] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 56]
-  Paragraph[58, 91]
+  Paragraph[58, 90]
     TextBase[58, 90] chars:[58, 90, "This  … n it."]
       Text[58, 70] chars:[58, 70, "This  … s an "]
       Abbreviation[70, 74] chars:[70, 74, "Abbr"]

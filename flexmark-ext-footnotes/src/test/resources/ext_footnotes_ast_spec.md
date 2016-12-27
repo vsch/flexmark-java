@@ -698,13 +698,13 @@ with continuation text. Inline _italic_ and
   </ol>
 </div>
 .
-Document[0, 385]
+Document[0, 384]
   Paragraph[0, 37]
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 385] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 385]
+  FootnoteBlock[38, 384] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 384]
     Paragraph[44, 133]
       Text[44, 77] chars:[44, 77, "This  … note."]
       SoftLineBreak[77, 78]
@@ -730,8 +730,8 @@ Document[0, 385]
       BulletListItem[259, 268] open:[259, 260, "-"] isTight hadBlankLineAfter
         Paragraph[261, 268]
           Text[261, 267] chars:[261, 267, "item 2"]
-    FootnoteBlock[277, 385] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 385]
-      Paragraph[283, 385]
+    FootnoteBlock[277, 384] ordinal: 2  open:[277, 279] text:[279, 280] close:[280, 282] footnote:[283, 384]
+      Paragraph[283, 384]
         Text[283, 321] chars:[283, 321, "This  … note."]
         SoftLineBreak[321, 322]
         Text[326, 357] chars:[326, 357, "with  … line "]
@@ -763,14 +763,14 @@ This paragraph has a footnote[^2].
   </ol>
 </div>
 .
-Document[0, 78]
+Document[0, 77]
   Paragraph[0, 37]
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 78] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 78]
-    Paragraph[44, 78]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 77]
       Text[44, 77] chars:[44, 77, "This  … note."]
 ````````````````````````````````
 
@@ -793,14 +793,14 @@ This paragraph has a footnote[^2].
   </ol>
 </div>
 .
-Document[0, 78]
+Document[0, 77]
   Paragraph[0, 37]
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 78] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 78]
-    Paragraph[44, 78]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 77]
       Text[44, 77] chars:[44, 77, "This  … note."]
 ````````````````````````````````
 
@@ -817,20 +817,20 @@ This paragraph has a footnote[^2].
   <hr />
   <ol>
     <li id="fn-1">
-      <p md-pos="44-78">This is the body of the footnote.</p>
+      <p md-pos="44-77">This is the body of the footnote.</p>
       <a href="#fnref-1" class="footnote-backref">&#8617;</a>
     </li>
   </ol>
 </div>
 .
-Document[0, 78]
+Document[0, 77]
   Paragraph[0, 37]
     Text[0, 29] chars:[0, 29, "This  … tnote"]
     Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
       Text[31, 32] chars:[31, 32, "2"]
     Text[33, 34] chars:[33, 34, "."]
-  FootnoteBlock[38, 78] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 78]
-    Paragraph[44, 78]
+  FootnoteBlock[38, 77] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 77]
+    Paragraph[44, 77]
       Text[44, 77] chars:[44, 77, "This  … note."]
 ````````````````````````````````
 

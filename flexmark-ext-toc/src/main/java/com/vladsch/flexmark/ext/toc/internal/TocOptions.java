@@ -1,18 +1,3 @@
-/*
- * Copyright (c) 2015-2016 Vladimir Schneider <vladimir.schneider@gmail.com>, all rights reserved.
- *
- * This code is private property of the copyright holder and cannot be used without
- * having obtained a license or prior written permission of the of the copyright holder.
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- *
- */
-
 package com.vladsch.flexmark.ext.toc.internal;
 
 import com.vladsch.flexmark.ext.toc.SimTocExtension;
@@ -24,6 +9,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSetter;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 
+@SuppressWarnings("WeakerAccess")
 public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, MutableDataSetter {
     public static final TocOptions DEFAULT = new TocOptions();
     public static final int DEFAULT_LEVELS = 4 | 8; // 0 not used, default H2 & H3, H1 assumed to be document heading and does not need to be part of TOC
@@ -61,7 +47,7 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, ListType.HIERARCHY, false, true);
     }
 
-    public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, ListType listType ) {
+    public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, ListType listType) {
         this(DEFAULT_LEVELS, false, false, false, DEFAULT_TITLE_LEVEL, DEFAULT_TITLE, listType, false, true);
     }
 
@@ -125,13 +111,23 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         return dataHolder;
     }
 
-    public TocOptions(int levels, boolean isHtml, boolean isTextOnly, boolean isNumbered, int titleLevel, String title, ListType listType, boolean isAstAddOptions, boolean isBlankLineSpacer) {
+    public TocOptions(
+            int levels,
+            boolean isHtml,
+            boolean isTextOnly,
+            boolean isNumbered,
+            int titleLevel,
+            CharSequence title,
+            ListType listType,
+            boolean isAstAddOptions,
+            boolean isBlankLineSpacer
+    ) {
         this.levels = VALID_LEVELS & levels;
         this.isTextOnly = isTextOnly;
         this.isNumbered = isNumbered;
         this.listType = listType;
         this.isHtml = isHtml;
-        this.rawTitle = title == null ? "" : title;
+        this.rawTitle = title == null ? "" : title instanceof String ? (String) title : String.valueOf(title);
         this.rawTitleLevel = titleLevel;
         if (!rawTitle.isEmpty()) {
             int markers = SubSequence.of(rawTitle.trim()).countLeading("#");
@@ -156,13 +152,13 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     public TocOptions withIsTextOnly(boolean isTextOnly)                 { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     public TocOptions withIsNumbered(boolean isNumbered)                 { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     public TocOptions withTitleLevel(int titleLevel)                     { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
-    public TocOptions withTitle( String title)                           { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
+    public TocOptions withTitle(CharSequence title)                      { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     public TocOptions withListType(ListType listType)                    { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     public TocOptions withIsAstAddOptions(boolean isAstAddOptions)       { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     public TocOptions withIsBlankLineSpacer(boolean isBlankLineSpacer)   { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
 
     public TocOptions withRawTitleLevel(int titleLevel)                  { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
-    public TocOptions withRawTitle( String title)                        { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
+    public TocOptions withRawTitle(CharSequence title)                   { return new TocOptions(levels, isHtml, isTextOnly, isNumbered, titleLevel, title, listType, isAstAddOptions, isBlankLineSpacer); }
     // @Formatter:on
 
     public TocOptions withLevelList(int... levelList) {

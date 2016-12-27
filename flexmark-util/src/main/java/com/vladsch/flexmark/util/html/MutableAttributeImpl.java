@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.BiConsumer;
-import com.vladsch.flexmark.util.mappers.NullCharacterMapper;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,11 +13,11 @@ public class MutableAttributeImpl implements MutableAttribute {
     private String myValue;
     private LinkedHashMap<String, String> myValues;
 
-    private MutableAttributeImpl(String name, String value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = name;
+    private MutableAttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
+        myName = name instanceof String ? (String) name : String.valueOf(name);
         myValueListDelimiter = valueListDelimiter;
         myValueNameDelimiter = valueNameDelimiter;
-        myValue = value == null ? "" : value;
+        myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
         myValues = null;
     }
 
@@ -137,17 +135,18 @@ public class MutableAttributeImpl implements MutableAttribute {
         return myName.indexOf(' ') != -1 || myValue.isEmpty() && NON_RENDERING_WHEN_EMPTY.contains(myName);
     }
 
-    public MutableAttributeImpl replaceValue(String value) {
-        if (myValue == null || value == null || !myValue.equals(value)) {
-            myValue = value == null ? "" : value;
+    public MutableAttributeImpl replaceValue(CharSequence value) {
+        final String useValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
+        if (myValue == null || value == null || !myValue.equals(useValue)) {
+            myValue = useValue;
             myValues = null;
         }
         return this;
     }
 
-    public MutableAttributeImpl setValue(String value) {
+    public MutableAttributeImpl setValue(CharSequence value) {
         if (myValueListDelimiter != NUL) {
-            if (value != null && !value.isEmpty()) {
+            if (value != null && value.length() != 0) {
                 final Map<String, String> valueMap = getValueMap();
 
                 forEachValue(value, new BiConsumer<String, String>() {
@@ -165,7 +164,7 @@ public class MutableAttributeImpl implements MutableAttribute {
             }
         } else {
             if (myValue == null || value == null || !myValue.equals(value)) {
-                myValue = value == null ? "" : value;
+                myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
                 myValues = null;
             }
         }
@@ -173,14 +172,15 @@ public class MutableAttributeImpl implements MutableAttribute {
         return this;
     }
 
-    private void forEachValue(final String value, BiConsumer<String, String> consumer) {
+    private void forEachValue(final CharSequence value, BiConsumer<String, String> consumer) {
+        String useValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
         int lastPos = 0;
-        while (lastPos < value.length()) {
-            int pos = value.indexOf(myValueListDelimiter, lastPos);
+        while (lastPos < useValue.length()) {
+            int pos = useValue.indexOf(myValueListDelimiter, lastPos);
 
-            int endPos = pos == -1 ? value.length() : pos;
+            int endPos = pos == -1 ? useValue.length() : pos;
             if (lastPos < endPos) {
-                final String valueItem = value.substring(lastPos, endPos).trim();
+                final String valueItem = useValue.substring(lastPos, endPos).trim();
                 if (!valueItem.isEmpty()) {
                     final int namePos = myValueNameDelimiter == NUL ? -1 : valueItem.indexOf(myValueNameDelimiter);
                     final String itemName = namePos == -1 ? valueItem : valueItem.substring(0, namePos);
@@ -195,9 +195,9 @@ public class MutableAttributeImpl implements MutableAttribute {
         }
     }
 
-    public MutableAttributeImpl removeValue(String value) {
+    public MutableAttributeImpl removeValue(CharSequence value) {
         if (myValueListDelimiter != NUL) {
-            if (value != null && !value.isEmpty()) {
+            if (value != null && value.length() != 0) {
                 final Map<String, String> valueMap = getValueMap();
                 final boolean[] removed = { false };
 
@@ -221,7 +221,7 @@ public class MutableAttributeImpl implements MutableAttribute {
         return this;
     }
 
-    public boolean containsValue(String value) {
+    public boolean containsValue(CharSequence value) {
         return AttributeImpl.indexOfValue(myValue, value, myValueListDelimiter, myValueNameDelimiter) != -1;
     }
 
@@ -256,19 +256,19 @@ public class MutableAttributeImpl implements MutableAttribute {
         return of(other.getName(), other.getValue(), other.getValueListDelimiter(), other.getValueNameDelimiter());
     }
 
-    public static MutableAttributeImpl of(String attrName) {
+    public static MutableAttributeImpl of(CharSequence attrName) {
         return of(attrName, attrName, NUL, NUL);
     }
 
-    public static MutableAttributeImpl of(String attrName, String value) {
+    public static MutableAttributeImpl of(CharSequence attrName, CharSequence value) {
         return of(attrName, value, NUL, NUL);
     }
 
-    public static MutableAttributeImpl of(String attrName, String value, char valueListDelimiter) {
+    public static MutableAttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter) {
         return of(attrName, value, valueListDelimiter, NUL);
     }
 
-    public static MutableAttributeImpl of(String attrName, String value, char valueListDelimiter, char valueNameDelimiter) {
+    public static MutableAttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         if (CLASS_ATTR.equals(attrName)) {
             return new MutableAttributeImpl(attrName, value, ' ', NUL);
         } else if (STYLE_ATTR.equals(attrName)) {

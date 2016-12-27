@@ -5,13 +5,17 @@ import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
 import com.vladsch.flexmark.util.mappers.UpperCaseMapper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public abstract class BasedSequenceImpl implements BasedSequence {
+    private static int[] EMPTY_INDICES = {};
     private static final Map<Character, String> visibleSpacesMap;
     static {
         HashMap<Character, String> charMap = new HashMap<>();
@@ -748,6 +752,54 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence nullIf(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (matches(match)) return BasedSequence.NULL;
+        }
+        return this;
+    }
+
+    @Override
+    public BasedSequence nullIfNot(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (matches(match)) return this;
+        }
+        return BasedSequence.NULL;
+    }
+
+    @Override
+    public BasedSequence nullIfStartsWith(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (startsWith(match)) return BasedSequence.NULL;
+        }
+        return this;
+    }
+
+    @Override
+    public BasedSequence nullIfStartsWithNot(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (startsWith(match)) return this;
+        }
+        return BasedSequence.NULL;
+    }
+
+    @Override
+    public BasedSequence nullIfEndsWith(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (endsWith(match)) return BasedSequence.NULL;
+        }
+        return this;
+    }
+
+    @Override
+    public BasedSequence nullIfEndsWithNot(final CharSequence... matches) {
+        for (CharSequence match : matches) {
+            if (endsWith(match)) return this;
+        }
+        return BasedSequence.NULL;
+    }
+
+    @Override
     public boolean isEmpty() {
         return length() == 0;
     }
@@ -905,7 +957,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public String unescape() {
-        return Escaping.unescapeString(toString());
+        return Escaping.unescapeString(this);
     }
 
     @Override
@@ -972,37 +1024,37 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public List<BasedSequence> split(char delimiter) {
+    public BasedSequence[] split(char delimiter) {
         return split(delimiter, 0);
     }
 
     @Override
-    public List<BasedSequence> split(char delimiter, int limit) {
+    public BasedSequence[] split(char delimiter, int limit) {
         return split(delimiter, limit, 0);
     }
 
     @Override
-    public List<BasedSequence> split(char delimiter, int limit, int flags) {
+    public BasedSequence[] split(char delimiter, int limit, int flags) {
         return split(delimiter, limit, flags, WHITESPACE_CHARS);
     }
 
     @Override
-    public List<BasedSequence> split(CharSequence delimiter) {
+    public BasedSequence[] split(CharSequence delimiter) {
         return split(delimiter, 0);
     }
 
     @Override
-    public List<BasedSequence> split(CharSequence delimiter, int limit) {
+    public BasedSequence[] split(CharSequence delimiter, int limit) {
         return split(delimiter, limit, 0);
     }
 
     @Override
-    public List<BasedSequence> split(CharSequence delimiter, int limit, int flags) {
+    public BasedSequence[] split(CharSequence delimiter, int limit, int flags) {
         return split(delimiter, limit, flags, WHITESPACE_CHARS);
     }
 
     @Override
-    public List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars) {
+    public BasedSequence[] split(char delimiter, int limit, int flags, String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
@@ -1044,11 +1096,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 items.add(item);
             }
         }
-        return items;
+        return items.toArray(new BasedSequence[items.size()]);
     }
 
     @Override
-    public List<BasedSequence> split(CharSequence delimiter, int limit, int flags, String trimChars) {
+    public BasedSequence[] split(CharSequence delimiter, int limit, int flags, String trimChars) {
         if (trimChars == null) trimChars = WHITESPACE_CHARS;
         if (limit < 1) limit = Integer.MAX_VALUE;
 
@@ -1090,7 +1142,102 @@ public abstract class BasedSequenceImpl implements BasedSequence {
                 items.add(item);
             }
         }
-        return items;
+        return items.toArray(new BasedSequence[items.size()]);
+    }
+
+    @Override
+    public BasedSequence appendTo(final StringBuilder out) {
+        return appendTo(out, 0, length());
+    }
+
+    @Override
+    public BasedSequence appendTo(final StringBuilder out, final int start) {
+        return appendTo(out, start, length());
+    }
+
+    @Override
+    public BasedSequence appendTo(final StringBuilder out, final int start, final int end) {
+        out.append(this, start, end);
+        return this;
+    }
+
+    public static int[] expandTo(int[] indices, int length, int step) {
+        int remainder = length & step;
+        int next = length + (remainder != 0 ? step : 0);
+        if (indices.length < length) {
+            int[] replace = new int[length];
+            System.arraycopy(indices, 0, replace, 0, indices.length);
+            return replace;
+        }
+        return indices;
+    }
+
+    public static int[] truncateTo(int[] indices, int length) {
+        if (indices.length > length) {
+            int[] replace = new int[length];
+            System.arraycopy(indices, 0, replace, 0, length);
+            return replace;
+        }
+        return indices;
+    }
+
+    @Override
+    public int[] indexOfAll(final CharSequence s) {
+        final int length = s.length();
+        if (length == 0) return EMPTY_INDICES;
+        int pos = indexOf(s);
+        if (pos == -1) return EMPTY_INDICES;
+
+        int iMax = 0;
+        int[] indices = new int[32];
+        indices[iMax++] = pos;
+
+        while (true) {
+            pos = indexOf(s, pos + length);
+            if (pos == -1) break;
+            if (indices.length < iMax) indices = expandTo(indices, iMax, 32);
+            indices[iMax++] = pos;
+        }
+        return truncateTo(indices, iMax);
+    }
+
+    @Override
+    public BasedSequence replace(final CharSequence find, final CharSequence replace) {
+        int[] indices = indexOfAll(find);
+        if (indices.length == 0) return this;
+
+        final int iMax = indices.length;
+        StringBuilder sb = new StringBuilder(length() + (replace.length() - find.length()) * iMax);
+        final BasedSequence basedReplace = SubSequence.of(replace);
+        int i = 0;
+        int lastPos = 0;
+        while (i < iMax) {
+            int pos = indices[i++];
+            int endPos = pos == -1 ? length() : pos;
+
+            if (lastPos < endPos) appendTo(sb, lastPos, pos);
+            if (pos == -1) break;
+            lastPos = pos + find.length();
+            basedReplace.appendTo(sb);
+        }
+
+        return CharSubSequence.of(sb);
+    }
+
+    @Override
+    public BasedSequence append(final CharSequence... others) {
+        if (others.length > 0) {
+            int total = 0;
+            for (CharSequence other : others) total += other.length();
+            StringBuilder sb = new StringBuilder(length() + total);
+            appendTo(sb);
+            for (CharSequence other : others) {
+                if (other instanceof BasedSequence) ((BasedSequence) other).appendTo(sb);
+                else sb.append(other);
+            }
+            return CharSubSequence.of(sb);
+        }
+        return this;
     }
 
     public static BasedSequence of(CharSequence charSequence) {
@@ -1110,5 +1257,4 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         else if (charSequence instanceof String) return CharSubSequence.of(charSequence, start, end);
         else return SubSequence.of(charSequence, start, end);
     }
-
 }

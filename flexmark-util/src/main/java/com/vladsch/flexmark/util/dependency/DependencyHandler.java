@@ -3,10 +3,8 @@ package com.vladsch.flexmark.util.dependency;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterator;
-import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 
 import java.util.*;
-import java.util.function.Consumer;
 
 public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
     protected abstract S createStage(List<D> dependents);
@@ -60,8 +58,8 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                         }
                     }
                 }
-            } 
-            
+            }
+
             dependentItemMap = prioritize(dependentItemMap);
             dependentCount = dependentItemMap.size();
 
@@ -96,7 +94,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                     stageDependents.add(item.dependent);
                     dependents.clear(i);
 
-                    // removeIndex it from dependent's dependencies 
+                    // removeIndex it from dependent's dependencies
                     if (item.hasDependents()) {
                         while (true) {
                             int j = item.dependents.nextSetBit(0);

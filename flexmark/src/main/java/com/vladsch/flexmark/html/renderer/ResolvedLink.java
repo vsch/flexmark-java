@@ -5,21 +5,24 @@ public class ResolvedLink {
     private final String myUrl;
     private final LinkStatus myStatus;
 
-    public ResolvedLink(LinkType linkType, String url) {
+    public ResolvedLink(LinkType linkType, CharSequence url) {
         this(linkType, url, LinkStatus.UNKNOWN);
     }
 
-    public ResolvedLink(LinkType linkType, String url, LinkStatus status) {
+    public ResolvedLink(LinkType linkType, CharSequence url, LinkStatus status) {
         myLinkType = linkType;
-        myUrl = url;
+        myUrl = url instanceof String ? (String) url : String.valueOf(url);
         myStatus = status;
     }
 
     // @formatter:off
-    public ResolvedLink withLinkType(LinkType myLinkType) { return myLinkType == this.myLinkType ? this : new ResolvedLink(myLinkType, myUrl, myStatus); }
-    public ResolvedLink withUrl(String myUrl) { return myUrl.equals(this.myUrl) ? this : new ResolvedLink(myLinkType, myUrl, myStatus); }
-    public ResolvedLink withStatus(LinkStatus myStatus) { return myStatus == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myStatus); }
+    public ResolvedLink withLinkType(LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myStatus); }
+    public ResolvedLink withStatus(LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, status); }
     // @formatter:on
+    public ResolvedLink withUrl(CharSequence url) {
+        String useUrl = url instanceof String ? (String) url : String.valueOf(url);
+        return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myStatus);
+    }
 
     public LinkType getLinkType() {
         return myLinkType;

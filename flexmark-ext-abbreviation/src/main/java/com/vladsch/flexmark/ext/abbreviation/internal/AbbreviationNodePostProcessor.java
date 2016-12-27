@@ -8,8 +8,8 @@ import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
 import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.NodeTracker;
+import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class AbbreviationNodePostProcessor extends NodePostProcessor {
     private Pattern abbreviations = null;
-    private HashMap<String, String> abbreviationMap = null;
+    private HashMap<String, BasedSequence> abbreviationMap = null;
 
     private AbbreviationNodePostProcessor(Document document) {
         AbbreviationRepository abbrRepository = document.get(AbbreviationExtension.ABBREVIATIONS);
@@ -33,7 +33,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
                 BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
                 if (!abbreviation.isEmpty()) {
-                    abbreviationMap.put(abbr, abbreviation.toString());
+                    abbreviationMap.put(abbr, abbreviation);
 
                     if (sb.length() > 0) sb.append("|");
 
@@ -63,7 +63,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         while (m.find()) {
             //String found = m.group();
             if (abbreviationMap.containsKey(m.group(0))) {
-                String abbreviation = abbreviationMap.get(m.group(0));
+                BasedSequence abbreviation = abbreviationMap.get(m.group(0));
 
                 BasedSequence toDecorateText = literal.subSequence(m.start(0), m.end(0));
                 int startOffset = textMapper.originalOffset(m.start(0));

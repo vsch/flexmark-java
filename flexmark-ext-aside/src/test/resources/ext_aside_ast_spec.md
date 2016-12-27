@@ -617,14 +617,14 @@ Extend block quote to next blank line
   </ol>
 </aside>
 .
-Document[0, 16]
-  AsideBlock[0, 16] marker:[0, 1, "|"]
-    OrderedList[2, 16] isTight delimiter:'.'
+Document[0, 15]
+  AsideBlock[0, 15] marker:[0, 1, "|"]
+    OrderedList[2, 15] isTight delimiter:'.'
       OrderedListItem[2, 9] open:[2, 4, "1."] isTight
         Paragraph[5, 9]
           Text[5, 8] chars:[5, 8, "one"]
-      OrderedListItem[9, 16] open:[9, 11, "2."] isTight
-        Paragraph[12, 16]
+      OrderedListItem[9, 15] open:[9, 11, "2."] isTight
+        Paragraph[12, 15]
           Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
 
@@ -779,13 +779,13 @@ Document[0, 59]
 | this is still block quote 
 .
 <aside>
-  <p md-pos="2-44">Block Quote
+  <p md-pos="2-43">Block Quote
   this is still block quote</p>
 </aside>
 .
-Document[0, 44]
-  AsideBlock[0, 44] marker:[0, 1, "|"]
-    Paragraph[2, 44]
+Document[0, 43]
+  AsideBlock[0, 43] marker:[0, 1, "|"]
+    Paragraph[2, 43]
       Text[2, 13] chars:[2, 13, "Block … Quote"]
       SoftLineBreak[14, 15]
       Text[17, 42] chars:[17, 42, "this  … quote"]

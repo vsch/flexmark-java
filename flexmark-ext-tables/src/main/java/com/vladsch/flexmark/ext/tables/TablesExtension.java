@@ -31,6 +31,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Boolean> COLUMN_SPANS = new DataKey<>("COLUMN_SPANS", true);
     public static final DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<>("HEADER_SEPARATOR_COLUMN_MATCH", false);
     public static final DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
+    public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
 
     public static Extension create() {
         return new TablesExtension();

@@ -7,13 +7,17 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.AttributablePart;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.TextCollectingAppendable;
-import com.vladsch.flexmark.util.*;
+import com.vladsch.flexmark.util.Computable;
+import com.vladsch.flexmark.util.Pair;
+import com.vladsch.flexmark.util.Paired;
+import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 
+@SuppressWarnings("WeakerAccess")
 public class TocUtils {
     public static final AttributablePart TOC_CONTENT = new AttributablePart("TOC_CONTENT");
 
@@ -180,13 +184,13 @@ public class TocUtils {
             String headingContent;
             // need to skip anchor links but render emphasis
             if (tocOptions.isTextOnly) {
-                headingContent = getHeadingText(heading);
+                headingContent = getHeadingText(heading).toString();
             } else {
                 TextCollectingAppendable out = getHeadingContent(context, heading);
                 headingContent = out.getHtml();
 
                 if (needText) {
-                    headingTexts.put(headingContent, getHeadingText(heading));
+                    headingTexts.put(headingContent, getHeadingText(heading).toString());
                 }
             }
 

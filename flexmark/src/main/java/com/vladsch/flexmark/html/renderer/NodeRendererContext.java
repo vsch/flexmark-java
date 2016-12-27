@@ -17,7 +17,7 @@ public interface NodeRendererContext {
      * @param url to be encoded
      * @return an encoded URL (depending on the configuration)
      */
-    String encodeUrl(String url);
+    String encodeUrl(CharSequence url);
 
     /**
      * Extend the attributes by extensions for the node being currently rendered.
@@ -155,5 +155,5 @@ public interface NodeRendererContext {
      * @param urlEncode whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
      * @return resolved link url for this link and its resolved status
      */
-    ResolvedLink resolveLink(LinkType linkType, String url, Boolean urlEncode);
+    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode);
 }

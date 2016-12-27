@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.List;
 

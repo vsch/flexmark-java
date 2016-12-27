@@ -1,14 +1,14 @@
 ---
 title: EscapedCharacter Extension Spec
-author: 
-version: 
+author:
+version:
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
 
 ---
 
-## EscapedCharacter  
+## EscapedCharacter
 
 Converts escaped_character text to EscapedCharacter nodes.
 
@@ -34,10 +34,10 @@ Document[0, 30]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Sample  \t\e\x\t and \\ \- \~
 .
-<p md-pos="0-30">Sample  \t\e\x\t and \ - ~</p>
+<p md-pos="0-29">Sample  \t\e\x\t and \ - ~</p>
 .
-Document[0, 30]
-  Paragraph[0, 30]
+Document[0, 29]
+  Paragraph[0, 29]
     TextBase[0, 29] chars:[0, 29, "Sampl … \- \~"]
       Text[0, 21] chars:[0, 21, "Sampl …  and "]
       EscapedCharacter[21, 23] textOpen:[21, 22, "\"] text:[22, 23, "\"]

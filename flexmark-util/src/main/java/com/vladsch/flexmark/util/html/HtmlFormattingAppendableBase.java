@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.util.html;
 
-import com.vladsch.flexmark.util.*;
+import com.vladsch.flexmark.util.Ref;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.io.IOException;
@@ -54,13 +54,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T raw(String s) {
+    public T raw(CharSequence s) {
         out.append(s);
         return (T)this;
     }
 
     @Override
-    public T rawPre(String s) {
+    public T rawPre(CharSequence s) {
         out.openPreFormatted(true)
                 .append(s)
                 .closePreFormatted();
@@ -68,7 +68,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T rawIndentedPre(String s) {
+    public T rawIndentedPre(CharSequence s) {
         CharSequence prefix = out.getPrefix();
         out.setPrefix(out.getTotalIndentPrefix());
         out.openPreFormatted(false)
@@ -79,17 +79,17 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T text(String text) {
-        out.append(Escaping.escapeHtml(text, false));
+    public T text(CharSequence s) {
+        out.append(Escaping.escapeHtml(s, false));
         return (T)this;
     }
 
     @Override
-    public T attr(String name, String value) {
+    public T attr(CharSequence attrName, CharSequence value) {
         if (currentAttributes == null) {
             currentAttributes = new Attributes();
         }
-        currentAttributes.replaceValue(name, value);
+        currentAttributes.replaceValue(attrName, value);
         return (T)this;
     }
 
@@ -99,7 +99,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             currentAttributes = new Attributes();
         }
         for (Attribute attr : attribute) {
-            currentAttributes.replaceValue(attr.getName(), attr.getValue());
+            currentAttributes.addValue(attr.getName(), attr.getValue());
         }
         return (T)this;
     }
@@ -110,7 +110,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             if (currentAttributes == null) {
                 currentAttributes = new Attributes(attributes);
             } else {
-                currentAttributes.replaceValues(attributes);
+                currentAttributes.addValues(attributes);
             }
         }
         return (T)this;
@@ -146,17 +146,27 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T tag(String name) {
-        return tag(name, false);
+    public T tag(CharSequence tagName) {
+        return tag(tagName, false);
     }
 
     @Override
-    public T tagVoid(String name) {
-        return tag(name, true);
+    public T tagVoid(CharSequence tagName) {
+        return tag(tagName, true);
+    }
+
+    protected void tagOpened(CharSequence tagName) {
+
+    }
+
+    protected void tagClosed(CharSequence tagName) {
+
     }
 
     @Override
-    public T tag(String name, boolean voidElement) {
+    public T tag(CharSequence tagName, boolean voidElement) {
+        if (tagName.length() == 0 || tagName.charAt(0) == '/') return closeTag(tagName);
+
         Attributes attributes = null;
 
         if (withAttributes) {
@@ -166,11 +176,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         }
 
         out.append("<");
-        out.append(name);
+        out.append(tagName);
 
         if (attributes != null && !attributes.isEmpty()) {
             for (Attribute attribute : attributes.values()) {
-                String attributeValue = attribute.getValue();
+                CharSequence attributeValue = attribute.getValue();
 
                 if (attribute.isNonRendering()) continue;
 
@@ -186,19 +196,34 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             out.append(" />");
         } else {
             out.append(">");
+            tagOpened(tagName);
         }
 
         return (T)this;
     }
 
     @Override
-    public T tag(String name, final boolean withIndent, final boolean withLine, Runnable runnable) {
+    public T closeTag(final CharSequence tagName) {
+        if (tagName.length() == 0) throw new IllegalStateException("closeTag called with tag:'" + tagName + "'");
+
+        if (tagName.charAt(0) == '/') {
+            out.append("<").append(tagName).append(">");
+            tagClosed(tagName.subSequence(1, tagName.length()));
+        } else {
+            out.append("</").append(tagName).append(">");
+            tagClosed(tagName);
+        }
+        return (T)this;
+    }
+
+    @Override
+    public T tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable) {
         if (withIndent) {
             out.willIndent();
             out.line();
         }
 
-        tag(name, false);
+        tag(tagName, false);
 
         if (withIndent) out.indent();
 
@@ -247,9 +272,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         // don't rely on unIndent() doing a line, it will only do so if there was text since indent()
         if (withLine) out.line();
 
-        out.append("</");
-        out.append(name);
-        out.append(">");
+        closeTag(tagName);
 
         if (withIndent) line();
 
@@ -257,38 +280,38 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T tagVoidLine(final String name) {
-        line().tagVoid(name).line();
+    public T tagVoidLine(final CharSequence tagName) {
+        line().tagVoid(tagName).line();
         return (T)this;
     }
 
     @Override
-    public T tagLine(final String name) {
-        line().tag(name).line();
+    public T tagLine(final CharSequence tagName) {
+        line().tag(tagName).line();
         return (T)this;
     }
 
     @Override
-    public T tagLine(final String name, final boolean voidElement) {
-        line().tag(name, voidElement).line();
+    public T tagLine(final CharSequence tagName, final boolean voidElement) {
+        line().tag(tagName, voidElement).line();
         return (T)this;
     }
 
     @Override
-    public T tagLine(final String name, final Runnable runnable) {
-        line().tag(name, false, false, runnable).line();
+    public T tagLine(final CharSequence tagName, final Runnable runnable) {
+        line().tag(tagName, false, false, runnable).line();
         return (T)this;
     }
 
     @Override
-    public T tagIndent(final String name, final Runnable runnable) {
-        tag(name, true, false, runnable);
+    public T tagIndent(final CharSequence tagName, final Runnable runnable) {
+        tag(tagName, true, false, runnable);
         return (T)this;
     }
 
     @Override
-    public T tagLineIndent(final String name, final Runnable runnable) {
-        tag(name, true, true, runnable);
+    public T tagLineIndent(final CharSequence tagName, final Runnable runnable) {
+        tag(tagName, true, true, runnable);
         return (T)this;
     }
 

@@ -26,6 +26,16 @@ public interface BasedSequence extends CharSequence {
     char EOL_CHAR2 = EOL_CHARS.charAt(1);
 
     /**
+     * @return the last character of the sequence or '\0' if empty
+     */
+    char lastChar();
+
+    /**
+     * @return the first character of the sequence or '\0' if empty
+     */
+    char firstChar();
+
+    /**
      * Get the underlying object on which this sequence contents are based
      *
      * @return underlying object containing original text
@@ -465,6 +475,54 @@ public interface BasedSequence extends CharSequence {
     BasedSequence nullIf(boolean condition);
 
     /**
+     * If this sequence matches one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIf(CharSequence... matches);
+
+    /**
+     * If this sequence does not match one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIfNot(CharSequence... matches);
+
+    /**
+     * If this sequence starts with one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIfStartsWith(CharSequence... matches);
+
+    /**
+     * If this sequence does not start with one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIfStartsWithNot(CharSequence... matches);
+
+    /**
+     * If this sequence ends with one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIfEndsWith(CharSequence... matches);
+
+    /**
+     * If this sequence does not end with one of given sequences return BasedSequence.NULL otherwise returns this sequence.
+     *
+     * @param matches match sequence list
+     * @return this or SubSequence.NULL
+     */
+    BasedSequence nullIfEndsWithNot(CharSequence... matches);
+
+    /**
      * Find start/end region in this sequence delimited by any characters in argument or the CharSequence
      * <p>
      * For Any and AnyNot methods uses the CharSequence argument as a character set of possible delimiting characters
@@ -692,24 +750,21 @@ public interface BasedSequence extends CharSequence {
      * @param trimChars set of characters that should be used for trimming individual split results
      * @return List of split results
      */
-    List<BasedSequence> split(char delimiter, int limit, int flags, String trimChars);
-    List<BasedSequence> split(char delimiter);
-    List<BasedSequence> split(char delimiter, int limit);
-    List<BasedSequence> split(char delimiter, int limit, int flags);
-    List<BasedSequence> split(CharSequence delimiter);
-    List<BasedSequence> split(CharSequence delimiter, int limit);
-    List<BasedSequence> split(CharSequence delimiter, int limit, int flags);
-    List<BasedSequence> split(CharSequence delimiter, int limit, int flags, String trimChars);
+    BasedSequence[] split(char delimiter, int limit, int flags, String trimChars);
+    BasedSequence[] split(char delimiter);
+    BasedSequence[] split(char delimiter, int limit);
+    BasedSequence[] split(char delimiter, int limit, int flags);
+    BasedSequence[] split(CharSequence delimiter);
+    BasedSequence[] split(CharSequence delimiter, int limit);
+    BasedSequence[] split(CharSequence delimiter, int limit, int flags);
+    BasedSequence[] split(CharSequence delimiter, int limit, int flags, String trimChars);
 
-    /**
-     * @return the last character of the sequence or '\0' if empty
-     */
-    char lastChar();
-
-    /**
-     * @return the first character of the sequence or '\0' if empty
-     */
-    char firstChar();
+    int[] indexOfAll(CharSequence s);
+    BasedSequence replace(CharSequence find, CharSequence replace);
+    BasedSequence appendTo(StringBuilder out);
+    BasedSequence appendTo(StringBuilder out, int start);
+    BasedSequence appendTo(StringBuilder out, int start, int end);
+    BasedSequence append(CharSequence...others);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override

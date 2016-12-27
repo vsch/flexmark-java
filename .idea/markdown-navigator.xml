@@ -44,7 +44,7 @@
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false">
       <GeneratorProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
       </GeneratorProvider>
@@ -53,21 +53,610 @@
       <bodyTop />
       <bodyBottom />
     </HtmlSettings>
-    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssTextEnabled="true" isDynamicPageWidth="true">
+    <CssSettings previewScheme="UI_SCHEME" cssUri="" isCssUriEnabled="false" isCssTextEnabled="false" isDynamicPageWidth="true">
       <StylesheetProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>
       <ScriptProviders>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
       </ScriptProviders>
-      <cssText>/* Code blocks */
-pre[class*=&quot;language-&quot;] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-	border: .1em solid hsl(30, 20%, 40%);
-	border-radius: .5em;
-	box-shadow: none;
+      <cssText>.container {
+    width: 980px;
+    margin: 0 auto;
+    padding-left: 10px;
+    float: left !important;
+}
+
+.wiki-container {
+    width: 830px;
+    margin: 0 auto;
+    padding-left: 20px;
+    float: left !important;
+}
+
+.wiki-body {
+    width: 700px;
+    margin-left: -20px;
+    padding-left: 20px;
+}
+
+.markdown-body,
+.wiki-body {
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+#readme .markdown-body {
+    /*corner radii on a large body of text causes very slow scrolling and updates in WebView */
+    /*border-bottom-left-radius: 3px;*/
+    /*border-bottom-right-radius: 3px;*/
+    border-bottom-right-radius: 0;
+    padding: 45px 38px 45px 38px;
+    word-wrap: break-word;
+}
+
+.boxed-group&gt;h3, .boxed-group .heading {
+    border-bottom: 0;
+    /*border-radius: 3px 3px 0 0;*/
+    border-radius: 0;
+    display: block;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0;
+    padding: 6px 10px 6px;
+}
+
+.boxed-group {
+    border-radius: 0;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  text-indent: 0;
+  -webkit-text-size-adjust: none;
+}
+
+a {
+    background-color: transparent;
+}
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+img {
+    border: 0;
+}
+
+hr {
+    border: 0 none;
+    box-sizing: content-box;
+    height: 2px;
+    margin: 16px 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+hr:before {
+    content: &quot;&quot;;
+    display: table;
+}
+
+hr:after {
+    clear: both;
+    content: &quot;&quot;;
+    display: table;
+}
+
+pre {
+    overflow: auto;
+}
+
+var,
+code,
+kbd {
+    font-family: Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
+    font-size: 12px;
+}
+
+pre {
+    margin-top: 0;
+    margin-bottom: 0;
+    font: 12px Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
+}
+
+code {
+    border-radius: 0;
+    font-size: 85%;
+    margin: 0;
+    padding: 0.2em 0 0.2em 0;
+}
+
+var {
+    font-style: italic;
+}
+
+code:before,
+code:after {
+    content: &quot;\00a0&quot;;
+    letter-spacing: -0.2em;
+}
+
+pre &gt; code {
+    border-radius: 0;
+    background: transparent;
+    border: 0;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    white-space: pre;
+    word-break: normal;
+}
+
+.highlight {
+    margin-bottom: 16px;
+}
+
+.highlight pre,
+pre {
+    border-radius: 0;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+
+.highlight pre {
+    margin-bottom: 0;
+    word-break: normal;
+}
+
+pre {
+    word-wrap: normal;
+}
+
+pre code {
+    background-color: transparent;
+    border-radius: 0;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    max-width: initial;
+    overflow: initial;
+    padding: 0;
+    word-wrap: normal;
+}
+
+pre code:before,
+pre code:after {
+    content: normal;
+}
+
+kbd {
+    border-radius: 0;
+    display: inline-block;
+    font: 11px Consolas, &quot;Liberation Mono&quot;, Menlo, Courier, monospace;
+    font-weight: 500;
+    line-height: 10px;
+    padding: 5px 5px 3px 5px;
+    vertical-align: middle;
+}
+
+input {
+    color: inherit;
+    font: inherit;
+    margin: 0;
+}
+
+html input[disabled] {
+    cursor: default;
+}
+
+input {
+    line-height: normal;
+}
+
+input[type=&quot;checkbox&quot;] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+input {
+    font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;;
+    font-size: 11px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Helvetica, &quot;Helvetica Neue&quot;, Arial, freesans, sans-serif;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.25em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h5 {
+    font-size: 0.875em;
+}
+
+h6 {
+    font-size: 0.85em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    margin-top: 1em;
+    position: relative;
+}
+
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+    display: none;
+    font-weight: normal;
+    margin-left: 8px;
+    vertical-align: middle;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+    margin-left: -30px;
+    padding-left: 0;
+    text-decoration: none;
+}
+
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+    display: inline-block;
+}
+
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    padding-bottom: 0.3em;
+}
+
+.wiki-container &gt; h1 {
+    font-size: 30px;
+    line-height: 1.1;
+    font-weight: normal;
+}
+
+h1 .anchor {
+    line-height: 1;
+}
+
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    padding-bottom: 0.3em;
+}
+
+h2 .anchor {
+    line-height: 1;
+}
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+
+h3 .anchor {
+    line-height: 1.2;
+}
+
+h4 {
+    font-size: 1.25em;
+}
+
+h4 .anchor {
+    line-height: 1.2;
+}
+
+h5 {
+    font-size: 1em;
+}
+
+h5 .anchor {
+    line-height: 1.1;
+}
+
+h6 {
+    font-size: 1em;
+}
+
+h6 .anchor {
+    line-height: 1.1;
+}
+
+blockquote {
+    margin: 0;
+}
+
+dd {
+    margin-left: 0;
+}
+
+.octicon {
+    display: inline-block;
+    font: normal normal normal 28px/1 task-items;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.taskitem {
+    display: inline-block;
+    font: normal normal normal 18px/1 task-items;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.bookicon {
+    display: inline-block;
+    font: normal normal normal 20px/1 task-items;
+    text-decoration: none;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.octicon-link:before {
+    content: 'C';
+}
+
+.octicon-book:before {
+    content: 'B';
+}
+
+.markdown-body &gt; *:first-child {
+    margin-top: 0 !important;
+}
+
+.markdown-body &gt; *:last-child {
+    margin-bottom: 0 !important;
+}
+
+a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.anchor {
+    display: block;
+    left: 0;
+    margin-left: -30px;
+    padding-left: 30px;
+    padding-right: 6px;
+    position: absolute;
+    top: 0;
+}
+
+.anchor:focus {
+    outline: none;
+}
+
+blockquote,
+ul,
+ol,
+dl,
+table,
+pre {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* loosely spaced list items that reflect the markdown source */
+p {
+    margin-top: 0;
+    margin-bottom: 16px;
+}
+
+/* loosely spaced list items that duplicate quirky GFM implementation */
+p {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+ul,
+ol {
+    padding: 0;
+}
+
+ol ol,
+ul ol {
+    list-style-type: lower-roman;
+    text-indent: 0;
+}
+
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+    list-style-type: lower-alpha;
+    text-indent: 0;
+}
+
+li.task-list-item {
+    list-style-type: none;
+    text-indent: -0.78em;
+}
+
+li.task-list-item &gt; p:first-child {
+    margin-left: 0;
+}
+
+li.task-list-item &gt; p {
+    margin-left: 0.85em;
+}
+
+span.taskitem {
+    padding-right: 0.4em;
+}
+
+ul,
+ol {
+    padding-left: 2em;
+    margin-top: 16px;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item + .task-list-item-checkbox {
+    margin-top: 3px;
+}
+
+.task-list-item input {
+    margin: 0 0.35em 0.25em -0.6em;
+    vertical-align: middle;
+}
+
+dl {
+    padding: 0;
+}
+
+dl dt {
+    font-size: 1em;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 16px;
+    padding: 0;
+}
+
+dl dd {
+    margin-top: 16px;
+    padding: 0 16px;
+}
+
+blockquote {
+    padding: 0 15px;
+}
+
+blockquote &gt; :first-child {
+    margin-top: 0;
+}
+
+blockquote &gt; :last-child {
+    margin-bottom: 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 10px;
+    display: block;
+    line-height: inherit !important;
+    overflow: auto;
+    word-break: normal;
+}
+
+table th {
+    font-weight: bold;
+}
+
+th,
+td {
+    padding: 6px 10px 2px 10px !important;
+}
+
+img {
+    box-sizing: border-box;
+    max-width: 100%;
 }</cssText>
     </CssSettings>
     <HtmlExportSettings updateOnSave="false" parentDir="" targetDir="" cssDir="" scriptDir="" plainHtml="false" imageDir="" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" />

@@ -23,13 +23,14 @@ public class ComboTablesSpecTest extends ComboSpecTestCase {
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("class-name", new MutableDataSet().set(TablesExtension.CLASS_NAME, "table-class"));
+        optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.WITH_CAPTION, false));
         optionsMap.put("gfm", new MutableDataSet()
                 .set(TablesExtension.COLUMN_SPANS, false)
                 .set(TablesExtension.APPEND_MISSING_COLUMNS, true)
                 .set(TablesExtension.DISCARD_EXTRA_COLUMNS, true)
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
-        
+
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
     }
 

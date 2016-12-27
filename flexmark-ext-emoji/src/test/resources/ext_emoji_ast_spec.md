@@ -31,8 +31,8 @@ change size
 .
 <p><img src="/img/warning.png" alt="emoji places:warning" height="40" width="40" align="absmiddle" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
@@ -45,8 +45,8 @@ no size
 .
 <p><img src="/img/warning.png" alt="emoji places:warning" align="absmiddle" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
@@ -59,8 +59,8 @@ no align
 .
 <p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
@@ -100,8 +100,8 @@ Document[0, 18]
 .
 <p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
@@ -156,10 +156,10 @@ Document[0, 15]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 :warning:
 .
-<p md-pos="0-10"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<p md-pos="0-9"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
+Document[0, 9]
+  Paragraph[0, 9]
     Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
       Text[1, 8] chars:[1, 8, "warning"]
 ````````````````````````````````
@@ -168,10 +168,10 @@ Document[0, 10]
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
 [:warning:](/url)
 .
-<p md-pos="0-18"><a href="/url" md-pos="0-17"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
+<p md-pos="0-17"><a href="/url" md-pos="0-17"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
+Document[0, 17]
+  Paragraph[0, 17]
     Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
       Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
         Text[2, 9] chars:[2, 9, "warning"]

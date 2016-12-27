@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.parser.PostProcessor;
 import com.vladsch.flexmark.parser.PostProcessorFactory;
-import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.util.collection.ClassifyingNodeTracker;
 import com.vladsch.flexmark.util.collection.NodeClassifierVisitor;
 import com.vladsch.flexmark.util.collection.OrderedSet;
@@ -17,8 +16,6 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.stream.Collectors;
 
 public class PostProcessorManager {
     private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
@@ -143,14 +140,14 @@ public class PostProcessorManager {
 
                 if (types != null) {
                     for (Map.Entry<Class<? extends Node>, Set<Class<?>>> entry : types.entrySet()) {
-                        nodeMap.merge(entry.getKey(), entry.getValue(), new BiFunction<Set<Class<?>>, Set<Class<?>>, Set<Class<?>>>() {
-                            @Override
-                            public Set<Class<?>> apply(Set<Class<?>> classes, Set<Class<?>> classes2) {
-                                classes.addAll(classes2);
-                                if (!classes.isEmpty()) haveExclusions[0] = true;
-                                return classes;
-                            }
-                        });
+                        Set<Class<?>> classes = nodeMap.get(entry.getKey());
+                        if (classes == null) {
+                             classes = entry.getValue();
+                             nodeMap.put(entry.getKey(), classes);
+                        } else {
+                            classes.addAll(entry.getValue());
+                        }
+                        if (!classes.isEmpty()) haveExclusions[0] = true;
                     }
                 }
             }
@@ -201,7 +198,7 @@ public class PostProcessorManager {
         protected DependentItemMap<PostProcessorFactory> prioritize(final DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
             List<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
-            prioritized.sort(new Comparator<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>>() {
+            Collections.sort(prioritized, new Comparator<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>>() {
                 @Override
                 public int compare(DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e2) {
                     int g1 = e1.getValue().isGlobalScope ? 1 : 0;

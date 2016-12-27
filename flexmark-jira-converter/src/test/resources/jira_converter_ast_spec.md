@@ -1233,13 +1233,13 @@ in item
 | Explicit link | {{.link}}         | {{[]()}}                                                  |
 
 .
-Document[0, 521]
-  BulletList[0, 521] isLoose
-    BulletListItem[0, 521] open:[0, 1, "-"] isLoose hadBlankLineAfter
+Document[0, 520]
+  BulletList[0, 520] isLoose
+    BulletListItem[0, 520] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 40]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
-      TableBlock[43, 521]
+      TableBlock[43, 520]
         TableHead[43, 136]
           TableRow[43, 136] rowNumber=1
             TableCell[43, 60] header textOpen:[43, 44, "|"] text:[44, 59, " Element       "] textClose:[59, 60, "|"]
@@ -2143,8 +2143,8 @@ invalid table:
 | A | B | C | |-----------| | a | b | c | | b | a | c |
 
 .
-Document[0, 56]
-  Paragraph[0, 56]
+Document[0, 55]
+  Paragraph[0, 55]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "|---- … ----|"]
@@ -2165,8 +2165,8 @@ invalid table:
 | A | B | C | | a | b | c | | b | a | c |
 
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "| a | … | c |"]
@@ -2218,8 +2218,8 @@ wiki link with text, links first option
 [wiki text|wiki-link]
 
 .
-Document[0, 24]
-  Paragraph[0, 24]
+Document[0, 23]
+  Paragraph[0, 23]
     WikiLink[0, 23] linkOpen:[0, 2, "[["] text:[12, 21, "wiki text"] textSep:[11, 12, "|"] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[21, 23, "]]"]
       Text[2, 21] chars:[2, 21, "wiki  …  text"]
 ````````````````````````````````

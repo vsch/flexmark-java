@@ -1,18 +1,3 @@
-/*
- * Copyright (c) 2015-2016 Vladimir Schneider <vladimir.schneider@gmail.com>, all rights reserved.
- *
- * This code is private property of the copyright holder and cannot be used without
- * having obtained a license or prior written permission of the of the copyright holder.
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- *
- */
-
 package com.vladsch.flexmark.util.options;
 
 import com.vladsch.flexmark.util.Pair;
@@ -47,18 +32,18 @@ public class OptionsParser<T> implements OptionParser<T> {
     @Override
     public Pair<T, List<ParsedOption<T>>> parseOption(BasedSequence optionsText, T options, MessageProvider provider) {
         ArrayList<ParserMessage> messages = null;
-        List<BasedSequence> optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
+        BasedSequence[] optionsList = optionsText.split(myOptionDelimiter, 0, BasedSequence.SPLIT_TRIM_SKIP_EMPTY);
         T result = options;
         if (provider == null) provider = MessageProvider.DEFAULT;
-        List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.size());
+        List<ParsedOption<T>> parsedOptions = new ArrayList<>(optionsList.length);
 
         for (BasedSequence optionText : optionsList) {
             OptionParser<T> matched = null;
             DelimitedBuilder message = null;
-            List<BasedSequence> optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY);
-            if (optionList.isEmpty()) continue;
-            BasedSequence optionName = optionList.get(0);
-            BasedSequence optionValue = optionList.size() > 1 ? optionList.get(1) : optionName.subSequence(optionName.length(), optionName.length());
+            BasedSequence[] optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY);
+            if (optionList.length == 0) continue;
+            BasedSequence optionName = optionList[0];
+            BasedSequence optionValue = optionList.length > 1 ? optionList[1] : optionName.subSequence(optionName.length(), optionName.length());
 
             for (OptionParser<T> optionParser : myParsableOptions) {
                 if (optionParser.getOptionName().equals(optionName.toString())) {

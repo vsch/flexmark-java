@@ -4,14 +4,12 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ext.front.matter.internal.YamlFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
-import com.vladsch.flexmark.internal.BlockQuoteParser;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;

@@ -45,16 +45,16 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         this.base = of(baseSeq, start, end);
     }
 
-    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq) {
-        return of(prefix, BasedSequenceImpl.of(baseSeq), 0, baseSeq.length());
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq) {
+        return of(prefix, baseSeq, 0, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq, int start) {
-        return of(prefix, BasedSequenceImpl.of(baseSeq), start, baseSeq.length());
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start) {
+        return of(prefix, baseSeq, start, baseSeq.length());
     }
 
-    public static PrefixedSubSequence of(String prefix, CharSequence baseSeq, int start, int end) {
-        return new PrefixedSubSequence(prefix, BasedSequenceImpl.of(baseSeq), start, end, true);
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start, int end) {
+        return new PrefixedSubSequence(prefix, baseSeq, start, end, true);
     }
 
     @Override

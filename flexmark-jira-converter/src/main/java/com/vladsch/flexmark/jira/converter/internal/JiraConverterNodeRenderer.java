@@ -386,7 +386,7 @@ public class JiraConverterNodeRenderer implements NodeRenderer
     }
 
     private void render(AutoLink node, NodeRendererContext context, HtmlWriter html) {
-        String text = node.getText().toString();
+        BasedSequence text = node.getText();
         if (context.isDoNotRenderLinks()) {
             html.text(text);
         } else {

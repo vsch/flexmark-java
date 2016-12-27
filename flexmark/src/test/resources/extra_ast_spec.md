@@ -1,7 +1,7 @@
 ---
 title: Core Extra Test Spec
 author: Vladimir Schneider
-version: 0.1
+version: 0.2
 date: '2016-06-06'
 license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 ...
@@ -281,7 +281,7 @@ Test repository KEEP_LAST behavior, meaning the last reference def is used
 .
 <p><a href="/url3">ref</a></p>
 .
-Document[0, 46]
+Document[0, 45]
   Paragraph[0, 6]
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "ref"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "ref"]
@@ -395,7 +395,7 @@ Allow atx headers without a space between # and the title
 <h5>Heading</h5>
 <h6>Heading</h6>
 .
-Document[0, 151]
+Document[0, 150]
   Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
     Text[1, 8] chars:[1, 8, "Heading"]
   Heading[9, 18] textOpen:[9, 11, "##"] text:[11, 18, "Heading"]
@@ -440,8 +440,8 @@ Don't allow leading spaces
 ##### Heading
 ###### Heading</p>
 .
-Document[0, 81]
-  Paragraph[1, 81]
+Document[0, 80]
+  Paragraph[1, 80]
     Text[1, 10] chars:[1, 10, "# Heading"]
     SoftLineBreak[10, 11]
     Text[12, 22] chars:[12, 22, "## Heading"]
@@ -473,8 +473,8 @@ Don't allow leading spaces, don't require atx marker space
 #####Heading
 ######Heading</p>
 .
-Document[0, 75]
-  Paragraph[1, 75]
+Document[0, 74]
+  Paragraph[1, 74]
     Text[1, 9] chars:[1, 9, "#Heading"]
     SoftLineBreak[9, 10]
     Text[11, 20] chars:[11, 20, "##Heading"]
@@ -687,8 +687,8 @@ Without auto loose setting for list
   <li>item 4</li>
 </ul>
 .
-Document[0, 97]
-  BulletList[0, 97] isTight
+Document[0, 96]
+  BulletList[0, 96] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -708,8 +708,8 @@ Document[0, 97]
         BulletListItem[75, 88] open:[75, 76, "*"] isTight
           Paragraph[77, 88]
             Text[77, 87] chars:[77, 87, "sub item 3"]
-    BulletListItem[88, 97] open:[88, 89, "*"] isTight
-      Paragraph[90, 97]
+    BulletListItem[88, 96] open:[88, 89, "*"] isTight
+      Paragraph[90, 96]
         Text[90, 96] chars:[90, 96, "item 4"]
 ````````````````````````````````
 
@@ -875,7 +875,7 @@ With break all lists on two blank lines
   <li>item 5</li>
 </ul>
 .
-Document[0, 80]
+Document[0, 79]
   BulletList[0, 52] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
@@ -890,12 +890,12 @@ Document[0, 80]
         BulletListItem[39, 52] open:[39, 40, "*"] isTight hadBlankLineAfter
           Paragraph[41, 52]
             Text[41, 51] chars:[41, 51, "sub item 2"]
-  BulletList[62, 80] isTight
+  BulletList[62, 79] isTight
     BulletListItem[62, 71] open:[62, 63, "*"] isTight
       Paragraph[64, 71]
         Text[64, 70] chars:[64, 70, "item 4"]
-    BulletListItem[71, 80] open:[71, 72, "*"] isTight
-      Paragraph[73, 80]
+    BulletListItem[71, 79] open:[71, 72, "*"] isTight
+      Paragraph[73, 79]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
 
@@ -980,8 +980,8 @@ Without break all lists on two blank lines no auto loose
   <li>item 5</li>
 </ul>
 .
-Document[0, 80]
-  BulletList[0, 80] isTight
+Document[0, 79]
+  BulletList[0, 79] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -998,8 +998,8 @@ Document[0, 80]
     BulletListItem[62, 71] open:[62, 63, "*"] isTight
       Paragraph[64, 71]
         Text[64, 70] chars:[64, 70, "item 4"]
-    BulletListItem[71, 80] open:[71, 72, "*"] isTight
-      Paragraph[73, 80]
+    BulletListItem[71, 79] open:[71, 72, "*"] isTight
+      Paragraph[73, 79]
         Text[73, 79] chars:[73, 79, "item 5"]
 ````````````````````````````````
 
@@ -1035,7 +1035,7 @@ With break all lists on two blank lines
   <li>item 5</li>
 </ul>
 .
-Document[0, 114]
+Document[0, 113]
   BulletList[0, 52] isTight
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
@@ -1051,12 +1051,12 @@ Document[0, 114]
           Paragraph[41, 52]
             Text[41, 51] chars:[41, 51, "sub item 2"]
   IndentedCodeBlock[66, 96]
-  BulletList[96, 114] isTight
+  BulletList[96, 113] isTight
     BulletListItem[96, 105] open:[96, 97, "*"] isTight
       Paragraph[98, 105]
         Text[98, 104] chars:[98, 104, "item 4"]
-    BulletListItem[105, 114] open:[105, 106, "*"] isTight
-      Paragraph[107, 114]
+    BulletListItem[105, 113] open:[105, 106, "*"] isTight
+      Paragraph[107, 113]
         Text[107, 113] chars:[107, 113, "item 5"]
 ````````````````````````````````
 
@@ -1175,16 +1175,16 @@ Without bullet matching for items within a list
   <li>item 3</li>
 </ul>
 .
-Document[0, 27]
-  BulletList[0, 27] isTight
+Document[0, 26]
+  BulletList[0, 26] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
     BulletListItem[9, 18] open:[9, 10, "*"] isTight
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 2"]
-    BulletListItem[18, 27] open:[18, 19, "+"] isTight
-      Paragraph[20, 27]
+    BulletListItem[18, 26] open:[18, 19, "+"] isTight
+      Paragraph[20, 26]
         Text[20, 26] chars:[20, 26, "item 3"]
 ````````````````````````````````
 
@@ -1231,16 +1231,16 @@ Without start
   <li>item 1</li>
 </ol>
 .
-Document[0, 30]
-  OrderedList[0, 30] isTight start:2 delimiter:'.'
+Document[0, 29]
+  OrderedList[0, 29] isTight start:2 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "2."] isTight
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
     OrderedListItem[10, 20] open:[10, 12, "1."] isTight
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 1"]
-    OrderedListItem[20, 30] open:[20, 22, "1."] isTight
-      Paragraph[23, 30]
+    OrderedListItem[20, 29] open:[20, 22, "1."] isTight
+      Paragraph[23, 29]
         Text[23, 29] chars:[23, 29, "item 1"]
 ````````````````````````````````
 
@@ -1264,17 +1264,17 @@ starting with 1.
   </li>
 </ol>
 .
-Document[0, 41]
-  OrderedList[0, 41] isTight delimiter:'.'
+Document[0, 40]
+  OrderedList[0, 40] isTight delimiter:'.'
     OrderedListItem[0, 18] open:[0, 2, "1."] isTight
       Paragraph[3, 18]
         Text[3, 17] chars:[3, 17, "this  …  list"]
-    OrderedListItem[18, 41] open:[18, 20, "1."] isTight
+    OrderedListItem[18, 40] open:[18, 20, "1."] isTight
       Paragraph[21, 28]
         Text[21, 27] chars:[21, 27, "item 1"]
-      OrderedList[31, 41] isTight delimiter:'.'
-        OrderedListItem[31, 41] open:[31, 33, "1."] isTight
-          Paragraph[34, 41]
+      OrderedList[31, 40] isTight delimiter:'.'
+        OrderedListItem[31, 40] open:[31, 33, "1."] isTight
+          Paragraph[34, 40]
             Text[34, 40] chars:[34, 40, "item 2"]
 ````````````````````````````````
 
@@ -1293,13 +1293,13 @@ starting with 1.
   2. item 2</li>
 </ol>
 .
-Document[0, 41]
-  OrderedList[0, 41] isTight delimiter:'.'
+Document[0, 40]
+  OrderedList[0, 40] isTight delimiter:'.'
     OrderedListItem[0, 18] open:[0, 2, "1."] isTight
       Paragraph[3, 18]
         Text[3, 17] chars:[3, 17, "this  …  list"]
-    OrderedListItem[18, 41] open:[18, 20, "1."] isTight
-      Paragraph[21, 41]
+    OrderedListItem[18, 40] open:[18, 20, "1."] isTight
+      Paragraph[21, 40]
         Text[21, 27] chars:[21, 27, "item 1"]
         SoftLineBreak[27, 28]
         Text[31, 40] chars:[31, 40, "2. item 2"]
@@ -1322,15 +1322,15 @@ This is a paragraph
   2. item 2</li>
 </ol>
 .
-Document[0, 61]
+Document[0, 60]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
-  OrderedList[20, 61] isTight start:2 delimiter:'.'
+  OrderedList[20, 60] isTight start:2 delimiter:'.'
     OrderedListItem[20, 38] open:[20, 22, "2."] isTight
       Paragraph[23, 38]
         Text[23, 37] chars:[23, 37, "this  …  list"]
-    OrderedListItem[38, 61] open:[38, 40, "1."] isTight
-      Paragraph[41, 61]
+    OrderedListItem[38, 60] open:[38, 40, "1."] isTight
+      Paragraph[41, 60]
         Text[41, 47] chars:[41, 47, "item 1"]
         SoftLineBreak[47, 48]
         Text[51, 60] chars:[51, 60, "2. item 2"]
@@ -1356,19 +1356,19 @@ This is a paragraph
   </li>
 </ol>
 .
-Document[0, 61]
+Document[0, 60]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
-  OrderedList[20, 61] isTight start:2 delimiter:'.'
+  OrderedList[20, 60] isTight start:2 delimiter:'.'
     OrderedListItem[20, 38] open:[20, 22, "2."] isTight
       Paragraph[23, 38]
         Text[23, 37] chars:[23, 37, "this  …  list"]
-    OrderedListItem[38, 61] open:[38, 40, "1."] isTight
+    OrderedListItem[38, 60] open:[38, 40, "1."] isTight
       Paragraph[41, 48]
         Text[41, 47] chars:[41, 47, "item 1"]
-      OrderedList[51, 61] isTight start:2 delimiter:'.'
-        OrderedListItem[51, 61] open:[51, 53, "2."] isTight
-          Paragraph[54, 61]
+      OrderedList[51, 60] isTight start:2 delimiter:'.'
+        OrderedListItem[51, 60] open:[51, 53, "2."] isTight
+          Paragraph[54, 60]
             Text[54, 60] chars:[54, 60, "item 2"]
 ````````````````````````````````
 
@@ -1390,17 +1390,17 @@ starting with 1 or no ordered start restriction
   </li>
 </ol>
 .
-Document[0, 41]
-  OrderedList[0, 41] isTight delimiter:'.'
+Document[0, 40]
+  OrderedList[0, 40] isTight delimiter:'.'
     OrderedListItem[0, 18] open:[0, 2, "1."] isTight
       Paragraph[3, 18]
         Text[3, 17] chars:[3, 17, "this  …  list"]
-    OrderedListItem[18, 41] open:[18, 20, "1."] isTight
+    OrderedListItem[18, 40] open:[18, 20, "1."] isTight
       Paragraph[21, 28]
         Text[21, 27] chars:[21, 27, "item 1"]
-      OrderedList[31, 41] isTight start:2 delimiter:'.'
-        OrderedListItem[31, 41] open:[31, 33, "2."] isTight
-          Paragraph[34, 41]
+      OrderedList[31, 40] isTight start:2 delimiter:'.'
+        OrderedListItem[31, 40] open:[31, 33, "2."] isTight
+          Paragraph[34, 40]
             Text[34, 40] chars:[34, 40, "item 2"]
 ````````````````````````````````
 
@@ -1421,17 +1421,17 @@ Without relaxed start. Lists start only if preceded by a blank line.
   </li>
 </ul>
 .
-Document[0, 37]
-  BulletList[0, 37] isTight
+Document[0, 36]
+  BulletList[0, 36] isTight
     BulletListItem[0, 17] open:[0, 1, "-"] isTight
       Paragraph[2, 17]
         Text[2, 16] chars:[2, 16, "this  …  list"]
-    BulletListItem[17, 37] open:[17, 18, "-"] isTight
+    BulletListItem[17, 36] open:[17, 18, "-"] isTight
       Paragraph[19, 26]
         Text[19, 25] chars:[19, 25, "item 1"]
-      BulletList[28, 37] isTight
-        BulletListItem[28, 37] open:[28, 29, "-"] isTight
-          Paragraph[30, 37]
+      BulletList[28, 36] isTight
+        BulletListItem[28, 36] open:[28, 29, "-"] isTight
+          Paragraph[30, 36]
             Text[30, 36] chars:[30, 36, "item 2"]
 ````````````````````````````````
 
@@ -1574,7 +1574,7 @@ This is a paragraph
   </li>
 </ul>
 .
-Document[0, 160]
+Document[0, 159]
   Paragraph[0, 40]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
@@ -1598,16 +1598,16 @@ Document[0, 160]
     Text[104, 112] chars:[104, 112, "- item 1"]
     SoftLineBreak[112, 113]
     Text[113, 121] chars:[113, 121, "- item 2"]
-  BulletList[123, 160] isTight
+  BulletList[123, 159] isTight
     BulletListItem[123, 140] open:[123, 124, "-"] isTight
       Paragraph[125, 140]
         Text[125, 139] chars:[125, 139, "this  …  list"]
-    BulletListItem[140, 160] open:[140, 141, "-"] isTight
+    BulletListItem[140, 159] open:[140, 141, "-"] isTight
       Paragraph[142, 149]
         Text[142, 148] chars:[142, 148, "item 1"]
-      BulletList[151, 160] isTight
-        BulletListItem[151, 160] open:[151, 152, "-"] isTight
-          Paragraph[153, 160]
+      BulletList[151, 159] isTight
+        BulletListItem[151, 159] open:[151, 152, "-"] isTight
+          Paragraph[153, 159]
             Text[153, 159] chars:[153, 159, "item 2"]
 ````````````````````````````````
 
@@ -1662,7 +1662,7 @@ This is a paragraph
   </li>
 </ul>
 .
-Document[0, 160]
+Document[0, 159]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
   OrderedList[20, 82] isLoose delimiter:'.'
@@ -1688,16 +1688,16 @@ Document[0, 160]
     Text[104, 112] chars:[104, 112, "- item 1"]
     SoftLineBreak[112, 113]
     Text[113, 121] chars:[113, 121, "- item 2"]
-  BulletList[123, 160] isTight
+  BulletList[123, 159] isTight
     BulletListItem[123, 140] open:[123, 124, "-"] isTight
       Paragraph[125, 140]
         Text[125, 139] chars:[125, 139, "this  …  list"]
-    BulletListItem[140, 160] open:[140, 141, "-"] isTight
+    BulletListItem[140, 159] open:[140, 141, "-"] isTight
       Paragraph[142, 149]
         Text[142, 148] chars:[142, 148, "item 1"]
-      BulletList[151, 160] isTight
-        BulletListItem[151, 160] open:[151, 152, "-"] isTight
-          Paragraph[153, 160]
+      BulletList[151, 159] isTight
+        BulletListItem[151, 159] open:[151, 152, "-"] isTight
+          Paragraph[153, 159]
             Text[153, 159] chars:[153, 159, "item 2"]
 ````````````````````````````````
 
@@ -1752,7 +1752,7 @@ This is a paragraph
   </li>
 </ul>
 .
-Document[0, 160]
+Document[0, 159]
   Paragraph[0, 40]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
@@ -1772,7 +1772,7 @@ Document[0, 160]
             Text[75, 81] chars:[75, 81, "item 2"]
   Paragraph[83, 104]
     Text[83, 102] chars:[83, 102, "This  … graph"]
-  BulletList[104, 160] isLoose
+  BulletList[104, 159] isLoose
     BulletListItem[104, 113] open:[104, 105, "-"] isLoose
       Paragraph[106, 113]
         Text[106, 112] chars:[106, 112, "item 1"]
@@ -1782,12 +1782,12 @@ Document[0, 160]
     BulletListItem[123, 140] open:[123, 124, "-"] isLoose
       Paragraph[125, 140]
         Text[125, 139] chars:[125, 139, "this  …  list"]
-    BulletListItem[140, 160] open:[140, 141, "-"] isLoose
+    BulletListItem[140, 159] open:[140, 141, "-"] isLoose
       Paragraph[142, 149]
         Text[142, 148] chars:[142, 148, "item 1"]
-      BulletList[151, 160] isTight
-        BulletListItem[151, 160] open:[151, 152, "-"] isTight
-          Paragraph[153, 160]
+      BulletList[151, 159] isTight
+        BulletListItem[151, 159] open:[151, 152, "-"] isTight
+          Paragraph[153, 159]
             Text[153, 159] chars:[153, 159, "item 2"]
 ````````````````````````````````
 
@@ -1803,8 +1803,8 @@ This is a paragraph
 2. not item 1
 1. not item 2</p>
 .
-Document[0, 48]
-  Paragraph[0, 48]
+Document[0, 47]
+  Paragraph[0, 47]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 33] chars:[20, 33, "2. no … tem 1"]
@@ -1836,8 +1836,8 @@ Ordered items must have a blank line before them
   </li>
 </ol>
 .
-Document[0, 52]
-  OrderedList[0, 52] isLoose delimiter:'.'
+Document[0, 51]
+  OrderedList[0, 51] isLoose delimiter:'.'
     OrderedListItem[0, 12] open:[0, 2, "1."] isLoose hadBlankLineAfter
       Paragraph[3, 12]
         Text[3, 11] chars:[3, 11, "item 1.0"]
@@ -1846,8 +1846,8 @@ Document[0, 52]
         Text[16, 24] chars:[16, 24, "item 2.0"]
         SoftLineBreak[24, 25]
         Text[25, 38] chars:[25, 38, "1. no … tem 2"]
-    OrderedListItem[40, 52] open:[40, 42, "1."] isLoose
-      Paragraph[43, 52]
+    OrderedListItem[40, 51] open:[40, 42, "1."] isLoose
+      Paragraph[43, 51]
         Text[43, 51] chars:[43, 51, "item 3.0"]
 ````````````````````````````````
 
@@ -1865,15 +1865,15 @@ This is a paragraph
   <li>item 2</li>
 </ul>
 .
-Document[0, 38]
+Document[0, 37]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
-  BulletList[20, 38] isTight
+  BulletList[20, 37] isTight
     BulletListItem[20, 29] open:[20, 21, "-"] isTight
       Paragraph[22, 29]
         Text[22, 28] chars:[22, 28, "item 1"]
-    BulletListItem[29, 38] open:[29, 30, "-"] isTight
-      Paragraph[31, 38]
+    BulletListItem[29, 37] open:[29, 30, "-"] isTight
+      Paragraph[31, 37]
         Text[31, 37] chars:[31, 37, "item 2"]
 ````````````````````````````````
 
@@ -1899,8 +1899,8 @@ following child paragraph
   </li>
 </ul>
 .
-Document[0, 65]
-  BulletList[0, 65] isTight
+Document[0, 64]
+  BulletList[0, 64] isTight
     BulletListItem[0, 31] open:[0, 1, "-"] isTight
       Paragraph[2, 19]
         Text[2, 18] chars:[2, 18, "item  … graph"]
@@ -1908,10 +1908,10 @@ Document[0, 65]
         BulletListItem[21, 31] open:[21, 22, "*"] isTight
           Paragraph[23, 31]
             Text[23, 30] chars:[23, 30, "sublist"]
-    BulletListItem[31, 65] open:[31, 32, "-"] isTight hadBlankLineAfter
+    BulletListItem[31, 64] open:[31, 32, "-"] isTight hadBlankLineAfter
       Paragraph[33, 50]
         Text[33, 49] chars:[33, 49, "item  … graph"]
-      Paragraph[55, 65]
+      Paragraph[55, 64]
         Text[55, 64] chars:[55, 64, "paragraph"]
 ````````````````````````````````
 
@@ -1927,8 +1927,8 @@ This is a paragraph
 - not item 1
 - not item 2</p>
 .
-Document[0, 46]
-  Paragraph[0, 46]
+Document[0, 45]
+  Paragraph[0, 45]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 32] chars:[20, 32, "- not … tem 1"]
@@ -1960,8 +1960,8 @@ Bullet items must have a blank line before them
   </li>
 </ul>
 .
-Document[0, 48]
-  BulletList[0, 48] isLoose
+Document[0, 47]
+  BulletList[0, 47] isLoose
     BulletListItem[0, 11] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 11]
         Text[2, 10] chars:[2, 10, "item 1.0"]
@@ -1970,8 +1970,8 @@ Document[0, 48]
         Text[14, 22] chars:[14, 22, "item 2.0"]
         SoftLineBreak[22, 23]
         Text[23, 35] chars:[23, 35, "- not … tem 2"]
-    BulletListItem[37, 48] open:[37, 38, "-"] isLoose
-      Paragraph[39, 48]
+    BulletListItem[37, 47] open:[37, 38, "-"] isLoose
+      Paragraph[39, 47]
         Text[39, 47] chars:[39, 47, "item 3.0"]
 ````````````````````````````````
 
@@ -1989,15 +1989,15 @@ This is a paragraph
   <li>item 2</li>
 </ol>
 .
-Document[0, 40]
+Document[0, 39]
   Paragraph[0, 20]
     Text[0, 19] chars:[0, 19, "This  … graph"]
-  OrderedList[20, 40] isTight delimiter:'.'
+  OrderedList[20, 39] isTight delimiter:'.'
     OrderedListItem[20, 30] open:[20, 22, "1."] isTight
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
-    OrderedListItem[30, 40] open:[30, 32, "2."] isTight
-      Paragraph[33, 40]
+    OrderedListItem[30, 39] open:[30, 32, "2."] isTight
+      Paragraph[33, 39]
         Text[33, 39] chars:[33, 39, "item 2"]
 ````````````````````````````````
 
@@ -2060,7 +2060,7 @@ This is a paragraph
   </li>
 </ul>
 .
-Document[0, 209]
+Document[0, 208]
   Paragraph[0, 48]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
@@ -2085,7 +2085,7 @@ Document[0, 209]
     Text[121, 133] chars:[121, 133, "- not … tem 1"]
     SoftLineBreak[133, 134]
     Text[134, 146] chars:[134, 146, "- not … tem 2"]
-  BulletList[148, 209] isLoose
+  BulletList[148, 208] isLoose
     BulletListItem[148, 159] open:[148, 149, "-"] isLoose hadBlankLineAfter
       Paragraph[150, 159]
         Text[150, 158] chars:[150, 158, "item 1.0"]
@@ -2096,8 +2096,8 @@ Document[0, 209]
         Text[171, 183] chars:[171, 183, "- not … tem 1"]
         SoftLineBreak[183, 184]
         Text[184, 196] chars:[184, 196, "- not … tem 2"]
-    BulletListItem[198, 209] open:[198, 199, "-"] isLoose
-      Paragraph[200, 209]
+    BulletListItem[198, 208] open:[198, 199, "-"] isLoose
+      Paragraph[200, 208]
         Text[200, 208] chars:[200, 208, "item 3.0"]
 ````````````````````````````````
 
@@ -2201,7 +2201,7 @@ An ordered list after bullet list with no bullet matching
   <li>item 2</li>
 </ol>
 .
-Document[0, 57]
+Document[0, 56]
   BulletList[0, 36] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isTight
       Paragraph[2, 9]
@@ -2215,12 +2215,12 @@ Document[0, 57]
     BulletListItem[27, 36] open:[27, 28, "*"] isTight hadBlankLineAfter
       Paragraph[29, 36]
         Text[29, 35] chars:[29, 35, "item 4"]
-  OrderedList[37, 57] isTight start:2 delimiter:'.'
+  OrderedList[37, 56] isTight start:2 delimiter:'.'
     OrderedListItem[37, 47] open:[37, 39, "2."] isTight
       Paragraph[40, 47]
         Text[40, 46] chars:[40, 46, "item 1"]
-    OrderedListItem[47, 57] open:[47, 49, "1."] isTight
-      Paragraph[50, 57]
+    OrderedListItem[47, 56] open:[47, 49, "1."] isTight
+      Paragraph[50, 56]
         Text[50, 56] chars:[50, 56, "item 2"]
 ````````````````````````````````
 
@@ -2247,7 +2247,7 @@ A bullet list after an ordered list with no bullet matching
   <li>item 4</li>
 </ul>
 .
-Document[0, 57]
+Document[0, 56]
   OrderedList[0, 20] isTight start:2 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "2."] isTight
       Paragraph[3, 10]
@@ -2255,7 +2255,7 @@ Document[0, 57]
     OrderedListItem[10, 20] open:[10, 12, "1."] isTight hadBlankLineAfter
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 2"]
-  BulletList[21, 57] isTight
+  BulletList[21, 56] isTight
     BulletListItem[21, 30] open:[21, 22, "-"] isTight
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
@@ -2265,8 +2265,8 @@ Document[0, 57]
     BulletListItem[39, 48] open:[39, 40, "+"] isTight
       Paragraph[41, 48]
         Text[41, 47] chars:[41, 47, "item 3"]
-    BulletListItem[48, 57] open:[48, 49, "*"] isTight
-      Paragraph[50, 57]
+    BulletListItem[48, 56] open:[48, 49, "*"] isTight
+      Paragraph[50, 56]
         Text[50, 56] chars:[50, 56, "item 4"]
 ````````````````````````````````
 
@@ -2295,8 +2295,8 @@ An ordered list after bullet list, no type match
   </li>
 </ul>
 .
-Document[0, 39]
-  BulletList[0, 39] isLoose
+Document[0, 38]
+  BulletList[0, 38] isLoose
     BulletListItem[0, 9] open:[0, 1, "-"] isLoose
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -2306,8 +2306,8 @@ Document[0, 39]
     OrderedListItem[19, 29] open:[19, 21, "2."] isLoose
       Paragraph[22, 29]
         Text[22, 28] chars:[22, 28, "item 1"]
-    OrderedListItem[29, 39] open:[29, 31, "1."] isLoose
-      Paragraph[32, 39]
+    OrderedListItem[29, 38] open:[29, 31, "1."] isLoose
+      Paragraph[32, 38]
         Text[32, 38] chars:[32, 38, "item 2"]
 ````````````````````````````````
 
@@ -2336,8 +2336,8 @@ A bullet list after an ordered list, no type match
   </li>
 </ol>
 .
-Document[0, 39]
-  OrderedList[0, 39] isLoose start:2 delimiter:'.'
+Document[0, 38]
+  OrderedList[0, 38] isLoose start:2 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "2."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -2347,8 +2347,8 @@ Document[0, 39]
     BulletListItem[21, 30] open:[21, 22, "-"] isLoose
       Paragraph[23, 30]
         Text[23, 29] chars:[23, 29, "item 1"]
-    BulletListItem[30, 39] open:[30, 31, "-"] isLoose
-      Paragraph[32, 39]
+    BulletListItem[30, 38] open:[30, 31, "-"] isLoose
+      Paragraph[32, 38]
         Text[32, 38] chars:[32, 38, "item 2"]
 ````````````````````````````````
 
@@ -2396,16 +2396,16 @@ lazy continuation
   </li>
 </ol>
 .
-Document[0, 43]
-  OrderedList[0, 43] isTight delimiter:'.'
-    OrderedListItem[0, 43] open:[0, 2, "1."] isTight
+Document[0, 42]
+  OrderedList[0, 42] isTight delimiter:'.'
+    OrderedListItem[0, 42] open:[0, 2, "1."] isTight
       Paragraph[3, 28]
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
         Text[10, 27] chars:[10, 27, "lazy  … ation"]
-      OrderedList[31, 43] isTight start:2 delimiter:'.'
-        OrderedListItem[31, 43] open:[31, 33, "2."] isTight
-          Paragraph[34, 43]
+      OrderedList[31, 42] isTight start:2 delimiter:'.'
+        OrderedListItem[31, 42] open:[31, 33, "2."] isTight
+          Paragraph[34, 42]
             Text[34, 42] chars:[34, 42, "item 1.1"]
 ````````````````````````````````
 
@@ -2428,8 +2428,8 @@ nested
   <li>item 3</li>
 </ol>
 .
-Document[0, 45]
-  OrderedList[0, 45] isTight start:4 delimiter:'.'
+Document[0, 44]
+  OrderedList[0, 44] isTight start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isTight
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -2440,8 +2440,8 @@ Document[0, 45]
         OrderedListItem[23, 35] open:[23, 25, "2."] isTight
           Paragraph[26, 35]
             Text[26, 34] chars:[26, 34, "item 2.1"]
-    OrderedListItem[35, 45] open:[35, 37, "1."] isTight
-      Paragraph[38, 45]
+    OrderedListItem[35, 44] open:[35, 37, "1."] isTight
+      Paragraph[38, 44]
         Text[38, 44] chars:[38, 44, "item 3"]
 ````````````````````````````````
 
@@ -2461,10 +2461,10 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   1. item 3</li>
 </ol>
 .
-Document[0, 45]
-  OrderedList[0, 45] isTight start:4 delimiter:'.'
-    OrderedListItem[0, 45] open:[0, 2, "4."] isTight
-      Paragraph[3, 45]
+Document[0, 44]
+  OrderedList[0, 44] isTight start:4 delimiter:'.'
+    OrderedListItem[0, 44] open:[0, 2, "4."] isTight
+      Paragraph[3, 44]
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
         Text[10, 19] chars:[10, 19, "3. item 2"]
@@ -2501,8 +2501,8 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   </li>
 </ol>
 .
-Document[0, 52]
-  OrderedList[0, 52] isLoose start:4 delimiter:'.'
+Document[0, 51]
+  OrderedList[0, 51] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose hadBlankLineAfter
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -2513,8 +2513,8 @@ Document[0, 52]
         OrderedListItem[25, 37] open:[25, 27, "2."] isTight hadBlankLineAfter
           Paragraph[28, 37]
             Text[28, 36] chars:[28, 36, "item 2.1"]
-    OrderedListItem[42, 52] open:[42, 44, "1."] isLoose
-      Paragraph[45, 52]
+    OrderedListItem[42, 51] open:[42, 44, "1."] isLoose
+      Paragraph[45, 51]
         Text[45, 51] chars:[45, 51, "item 3"]
 ````````````````````````````````
 
@@ -2547,8 +2547,8 @@ no relaxed ordered start with exception for another item's paragraph
   </li>
 </ol>
 .
-Document[0, 114]
-  OrderedList[0, 114] isLoose start:4 delimiter:'.'
+Document[0, 113]
+  OrderedList[0, 113] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -2563,8 +2563,8 @@ Document[0, 114]
         Text[43, 52] chars:[43, 52, "paragraph"]
         SoftLineBreak[53, 54]
         Text[57, 103] chars:[57, 103, "1. wi …  item"]
-    OrderedListItem[104, 114] open:[104, 106, "1."] isLoose
-      Paragraph[107, 114]
+    OrderedListItem[104, 113] open:[104, 106, "1."] isLoose
+      Paragraph[107, 113]
         Text[107, 113] chars:[107, 113, "item 3"]
 ````````````````````````````````
 
@@ -2596,8 +2596,8 @@ start is enabled
   </li>
 </ol>
 .
-Document[0, 113]
-  OrderedList[0, 113] isLoose start:4 delimiter:'.'
+Document[0, 112]
+  OrderedList[0, 112] isLoose start:4 delimiter:'.'
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
@@ -2610,8 +2610,8 @@ Document[0, 113]
         Text[42, 51] chars:[42, 51, "paragraph"]
         SoftLineBreak[52, 53]
         Text[56, 102] chars:[56, 102, "1. wi …  item"]
-    OrderedListItem[103, 113] open:[103, 105, "1."] isLoose
-      Paragraph[106, 113]
+    OrderedListItem[103, 112] open:[103, 105, "1."] isLoose
+      Paragraph[106, 112]
         Text[106, 112] chars:[106, 112, "item 3"]
 ````````````````````````````````
 
@@ -2631,10 +2631,10 @@ nested, no bullet para break, no bullet item paragraph break
   - item 3</li>
 </ul>
 .
-Document[0, 40]
-  BulletList[0, 40] isTight
-    BulletListItem[0, 40] open:[0, 1, "-"] isTight
-      Paragraph[2, 40]
+Document[0, 39]
+  BulletList[0, 39] isTight
+    BulletListItem[0, 39] open:[0, 1, "-"] isTight
+      Paragraph[2, 39]
         Text[2, 8] chars:[2, 8, "item 1"]
         SoftLineBreak[8, 9]
         Text[9, 17] chars:[9, 17, "- item 2"]
@@ -2671,8 +2671,8 @@ nested, no ordered start, no ordered para break, no ordered item paragraph break
   </li>
 </ul>
 .
-Document[0, 47]
-  BulletList[0, 47] isLoose
+Document[0, 46]
+  BulletList[0, 46] isLoose
     BulletListItem[0, 9] open:[0, 1, "-"] isLoose hadBlankLineAfter
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
@@ -2683,8 +2683,8 @@ Document[0, 47]
         BulletListItem[22, 33] open:[22, 23, "-"] isTight hadBlankLineAfter
           Paragraph[24, 33]
             Text[24, 32] chars:[24, 32, "item 2.1"]
-    BulletListItem[38, 47] open:[38, 39, "-"] isLoose
-      Paragraph[40, 47]
+    BulletListItem[38, 46] open:[38, 39, "-"] isLoose
+      Paragraph[40, 46]
         Text[40, 46] chars:[40, 46, "item 3"]
 ````````````````````````````````
 
@@ -2714,8 +2714,8 @@ mismatched item to sub-item
   </li>
 </ul>
 .
-Document[0, 62]
-  BulletList[0, 62] isTight
+Document[0, 61]
+  BulletList[0, 61] isTight
     BulletListItem[0, 31] open:[0, 1, "-"] isTight
       Paragraph[2, 7]
         Text[2, 6] chars:[2, 6, "item"]
@@ -2726,15 +2726,15 @@ Document[0, 62]
         OrderedListItem[19, 31] open:[19, 21, "1."] isTight
           Paragraph[22, 31]
             Text[22, 30] chars:[22, 30, "sub-item"]
-    BulletListItem[31, 62] open:[31, 32, "-"] isTight
+    BulletListItem[31, 61] open:[31, 32, "-"] isTight
       Paragraph[33, 38]
         Text[33, 37] chars:[33, 37, "item"]
-      OrderedList[38, 62] isTight delimiter:'.'
+      OrderedList[38, 61] isTight delimiter:'.'
         OrderedListItem[38, 50] open:[38, 40, "1."] isTight
           Paragraph[41, 50]
             Text[41, 49] chars:[41, 49, "sub-item"]
-        OrderedListItem[50, 62] open:[50, 52, "1."] isTight
-          Paragraph[53, 62]
+        OrderedListItem[50, 61] open:[50, 52, "1."] isTight
+          Paragraph[53, 61]
             Text[53, 61] chars:[53, 61, "sub-item"]
 ````````````````````````````````
 
@@ -2764,8 +2764,8 @@ mismatched item to sub-item
   </li>
 </ol>
 .
-Document[0, 60]
-  OrderedList[0, 60] isTight delimiter:'.'
+Document[0, 59]
+  OrderedList[0, 59] isTight delimiter:'.'
     OrderedListItem[0, 30] open:[0, 2, "1."] isTight
       Paragraph[3, 8]
         Text[3, 7] chars:[3, 7, "item"]
@@ -2776,15 +2776,15 @@ Document[0, 60]
         BulletListItem[19, 30] open:[19, 20, "-"] isTight
           Paragraph[21, 30]
             Text[21, 29] chars:[21, 29, "sub-item"]
-    OrderedListItem[30, 60] open:[30, 32, "1."] isTight
+    OrderedListItem[30, 59] open:[30, 32, "1."] isTight
       Paragraph[33, 38]
         Text[33, 37] chars:[33, 37, "item"]
-      BulletList[38, 60] isTight
+      BulletList[38, 59] isTight
         BulletListItem[38, 49] open:[38, 39, "-"] isTight
           Paragraph[40, 49]
             Text[40, 48] chars:[40, 48, "sub-item"]
-        BulletListItem[49, 60] open:[49, 50, "-"] isTight
-          Paragraph[51, 60]
+        BulletListItem[49, 59] open:[49, 50, "-"] isTight
+          Paragraph[51, 59]
             Text[51, 59] chars:[51, 59, "sub-item"]
 ````````````````````````````````
 
@@ -2818,8 +2818,8 @@ This is a paragraph
 <p>This is a paragraph
 ***</p>
 .
-Document[0, 24]
-  Paragraph[0, 24]
+Document[0, 23]
+  Paragraph[0, 23]
     Text[0, 19] chars:[0, 19, "This  … graph"]
     SoftLineBreak[19, 20]
     Text[20, 23] chars:[20, 23, "***"]
@@ -2883,11 +2883,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 &lt;p&gt;paragraph&lt;/p&gt;
 <p>This is a paragraph with html &lt;span style=&quot;color:red;&quot;&gt;Test&lt;/span&gt; and an html comment &lt;!-- comment --&gt; embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -2917,11 +2917,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 &lt;p&gt;paragraph&lt;/p&gt;
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -2951,11 +2951,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -2985,11 +2985,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html &lt;span style=&quot;color:red;&quot;&gt;Test&lt;/span&gt; and an html comment &lt;!-- comment --&gt; embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3019,11 +3019,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment &lt;!-- comment --&gt; embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3050,11 +3050,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 .
 <p>This is a paragraph with html Test and an html comment  embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3079,11 +3079,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 .
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3112,11 +3112,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3146,11 +3146,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html Test and an html comment  embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3180,11 +3180,11 @@ This is a paragraph with html <span style="color:red;">Test</span> and an html c
 <p>paragraph</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment  embedded in it.</p>
 .
-Document[0, 197]
+Document[0, 196]
   HtmlBlock[0, 30]
   HtmlCommentBlock[31, 59]
   HtmlBlock[59, 76]
-  Paragraph[77, 197]
+  Paragraph[77, 196]
     Text[77, 107] chars:[77, 107, "This  … html "]
     HtmlInline[107, 132] chars:[107, 132, "<span … ed;\">"]
     Text[132, 136] chars:[132, 136, "Test"]
@@ -3257,9 +3257,9 @@ Html comments in block, parse inner comments
 <div>
 </div>
 .
-Document[0, 35]
+Document[0, 34]
   HtmlCommentBlock[0, 22]
-  HtmlBlock[22, 35]
+  HtmlBlock[22, 34]
 ````````````````````````````````
 
 
@@ -3271,8 +3271,8 @@ Html comments in block, parse inner comments
 </div>
 .
 .
-Document[0, 39]
-  HtmlBlock[0, 39]
+Document[0, 38]
+  HtmlBlock[0, 38]
     HtmlInnerBlock[0, 10] chars:[0, 10, "<div>\n    "]
     HtmlInnerBlockComment[10, 31] chars:[10, 31, "<!--  … t -->"]
     HtmlInnerBlock[31, 38] chars:[31, 38, "\n</div>"]
@@ -3287,8 +3287,8 @@ Html comments in block, parse inner comments
 <!-- HTML Comment -->
 .
 .
-Document[0, 35]
-  HtmlBlock[0, 35]
+Document[0, 34]
+  HtmlBlock[0, 34]
     HtmlInnerBlock[0, 13] chars:[0, 13, "<div> … div>\n"]
     HtmlInnerBlockComment[13, 34] chars:[13, 34, "<!--  … t -->"]
 ````````````````````````````````
@@ -3503,7 +3503,7 @@ plain text
 <pre><code class="text">plain text
 </code></pre>
 .
-Document[0, 23]
+Document[0, 22]
   FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[1] close:[19, 22, "```"]
 ````````````````````````````````
 
@@ -3675,8 +3675,8 @@ not parsed, invalid end
 .
 <p><img src="/url1?" alt="ref" /></p>
 .
-Document[0, 20]
-  Paragraph[0, 20]
+Document[0, 19]
+  Paragraph[0, 19]
     Image[0, 19] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[18, 18] linkClose:[18, 19, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3690,8 +3690,8 @@ empty content
 .
 <p><img src="/url1?" alt="ref" /></p>
 .
-Document[0, 16]
-  Paragraph[0, 16]
+Document[0, 15]
+  Paragraph[0, 15]
     Image[0, 15] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 14] linkClose:[14, 15, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3705,8 +3705,8 @@ empty content
 .
 <p><img src="/url1?" alt="ref" /></p>
 .
-Document[0, 19]
-  Paragraph[0, 19]
+Document[0, 18]
+  Paragraph[0, 18]
     Image[0, 18] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[17, 17] linkClose:[17, 18, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3721,8 +3721,8 @@ one line
 .
 <p><img src="/url1?one%20line%0A" alt="ref" /></p>
 .
-Document[0, 25]
-  Paragraph[0, 25]
+Document[0, 24]
+  Paragraph[0, 24]
     Image[0, 24] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 23, "one line\n"] linkClose:[23, 24, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3738,8 +3738,8 @@ two line
 .
 <p><img src="/url1?one%20line%0Atwo%20line%0A" alt="ref" /></p>
 .
-Document[0, 34]
-  Paragraph[0, 34]
+Document[0, 33]
+  Paragraph[0, 33]
     Image[0, 33] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 32, "one line\ntwo line\n"] linkClose:[32, 33, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3755,8 +3755,8 @@ one line
 .
 <p><img src="/url1?one%20line%0A%22false%20title%22%0A" alt="ref" title="real title" /></p>
 .
-Document[0, 52]
-  Paragraph[0, 52]
+Document[0, 51]
+  Paragraph[0, 51]
     Image[0, 51] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 37, "one line\n\"false title\"\n"] titleOpen:[38, 39, "\""] title:[39, 49, "real title"] titleClose:[49, 50, "\""] linkClose:[50, 51, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
 ````````````````````````````````
@@ -3772,8 +3772,8 @@ two line
 .
 <p><img src="/url1?one%20line%0Atwo%20line%0A" alt="ref" /> trailing text</p>
 .
-Document[0, 48]
-  Paragraph[0, 48]
+Document[0, 47]
+  Paragraph[0, 47]
     Image[0, 33] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 32, "one line\ntwo line\n"] linkClose:[32, 33, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
     Text[33, 47] chars:[33, 47, " trai …  text"]
@@ -3789,8 +3789,8 @@ one = 1 & line
 .
 <p><img src="/url1?one%20=%201%20&amp;%20line%0A" alt="ref" /> trailing text</p>
 .
-Document[0, 45]
-  Paragraph[0, 45]
+Document[0, 44]
+  Paragraph[0, 44]
     Image[0, 30] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 29, "one = 1 & line\n"] linkClose:[29, 30, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
     Text[30, 44] chars:[30, 44, " trai …  text"]
@@ -3807,8 +3807,8 @@ line two \\
 .
 <p><img src="/url1?one%20=%201%20&amp;%20line%20%5C%5C%0Aline%20two%20%5C%5C%0A" alt="ref" /> trailing text</p>
 .
-Document[0, 60]
-  Paragraph[0, 60]
+Document[0, 59]
+  Paragraph[0, 59]
     Image[0, 45] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 44, "one = 1 & line \\\nline two \\\n"] linkClose:[44, 45, ")"]
       Text[2, 5] chars:[2, 5, "ref"]
     Text[45, 59] chars:[45, 59, " trai …  text"]
@@ -3827,7 +3827,7 @@ proper unmatched fenced code
 <pre><code>proper unmatched fenced code
 </code></pre>
 .
-Document[0, 37]
+Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1] close:[33, 36, "~~~"]
 ````````````````````````````````
 
@@ -3840,7 +3840,7 @@ proper unmatched fenced code
 <pre><code>proper unmatched fenced code
 </code></pre>
 .
-Document[0, 37]
+Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[1] close:[33, 36, "```"]
 ````````````````````````````````
 
@@ -3968,14 +3968,14 @@ Extend block quote to next blank line
   </ol>
 </blockquote>
 .
-Document[0, 16]
-  BlockQuote[0, 16] marker:[0, 1, ">"]
-    OrderedList[2, 16] isTight delimiter:'.'
+Document[0, 15]
+  BlockQuote[0, 15] marker:[0, 1, ">"]
+    OrderedList[2, 15] isTight delimiter:'.'
       OrderedListItem[2, 9] open:[2, 4, "1."] isTight
         Paragraph[5, 9]
           Text[5, 8] chars:[5, 8, "one"]
-      OrderedListItem[9, 16] open:[9, 11, "2."] isTight
-        Paragraph[12, 16]
+      OrderedListItem[9, 15] open:[9, 11, "2."] isTight
+        Paragraph[12, 15]
           Text[12, 15] chars:[12, 15, "two"]
 ````````````````````````````````
 
@@ -4135,8 +4135,8 @@ line breaks
 <p>hard<br />
 line breaks</p>
 .
-Document[0, 21]
-  Paragraph[0, 21]
+Document[0, 20]
+  Paragraph[0, 20]
     Text[0, 4] chars:[0, 4, "hard"]
     HardLineBreak[6, 9]
     Text[9, 20] chars:[9, 20, "line  … reaks"]
@@ -4283,11 +4283,11 @@ test
 .
 <pre md-pos="0-19"><code class="language-text" md-pos="8-13">text
 </code></pre>
-<p md-pos="20-25">test</p>
+<p md-pos="20-24">test</p>
 .
-Document[0, 25]
+Document[0, 24]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
-  Paragraph[20, 25]
+  Paragraph[20, 24]
     Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
 
@@ -4304,11 +4304,11 @@ This is <span>inline html</span>
 <div>
 <p>HTML Block</p>
 </div>
-<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+<p md-pos="32-64"><span md-pos="32-64">This is <span>inline html</span></span></p>
 .
-Document[0, 65]
+Document[0, 64]
   HtmlBlock[0, 31]
-  Paragraph[32, 65]
+  Paragraph[32, 64]
     Text[32, 40] chars:[32, 40, "This is "]
     HtmlInline[40, 46] chars:[40, 46, "<span>"]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
@@ -4330,11 +4330,11 @@ This is <span>inline html</span>
   <p>HTML Block</p>
   </div>
 </div>
-<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+<p md-pos="32-64"><span md-pos="32-64">This is <span>inline html</span></span></p>
 .
-Document[0, 65]
+Document[0, 64]
   HtmlBlock[0, 31]
-  Paragraph[32, 65]
+  Paragraph[32, 64]
     Text[32, 40] chars:[32, 40, "This is "]
     HtmlInline[40, 46] chars:[40, 46, "<span>"]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
@@ -4356,11 +4356,11 @@ This is <span>inline html</span>
   <p>HTML Block</p>
   </div>
 </div>
-<p md-pos="32-65"><span md-pos="32-64">This is <span>inline html</span></span></p>
+<p md-pos="32-64"><span md-pos="32-64">This is <span>inline html</span></span></p>
 .
-Document[0, 65]
+Document[0, 64]
   HtmlBlock[0, 31]
-  Paragraph[32, 65]
+  Paragraph[32, 64]
     Text[32, 40] chars:[32, 40, "This is "]
     HtmlInline[40, 46] chars:[40, 46, "<span>"]
     Text[46, 57] chars:[46, 57, "inlin …  html"]
@@ -4446,12 +4446,12 @@ all should be src pos wrapped
 </ol>
 <!-- -->
 <ul>
-  <li md-pos="390-456"><span md-pos="392-400">[ ] item</span>
+  <li md-pos="390-455"><span md-pos="392-400">[ ] item</span>
   <span md-pos="401-425">with multiple lazy lines</span>
   <span md-pos="426-455">all should be src pos wrapped</span></li>
 </ul>
 .
-Document[0, 456]
+Document[0, 455]
   Paragraph[0, 71]
     Text[0, 14] chars:[0, 14, "parag …  test"]
     SoftLineBreak[15, 16]
@@ -4503,9 +4503,9 @@ Document[0, 456]
       Paragraph[374, 379]
         Text[374, 378] chars:[374, 378, "item"]
   HtmlCommentBlock[380, 389]
-  BulletList[390, 456] isTight
-    BulletListItem[390, 456] open:[390, 391, "-"] isTight
-      Paragraph[392, 456]
+  BulletList[390, 455] isTight
+    BulletListItem[390, 455] open:[390, 391, "-"] isTight
+      Paragraph[392, 455]
         LinkRef[392, 395] referenceOpen:[392, 393, "["] reference:[394, 394] referenceClose:[394, 395, "]"]
           Text[393, 394] chars:[393, 394, " "]
         Text[395, 400] chars:[395, 400, " item"]
@@ -4523,12 +4523,12 @@ paragraph test
 with multiple lazy lines
 all should be src pos wrapped
 .
-<p md-pos="0-71"><span md-pos="0-14">paragraph test</span>
+<p md-pos="0-70"><span md-pos="0-14">paragraph test</span>
 <span md-pos="16-40">with multiple lazy lines</span>
 <span md-pos="41-70">all should be src pos wrapped</span></p>
 .
-Document[0, 71]
-  Paragraph[0, 71]
+Document[0, 70]
+  Paragraph[0, 70]
     Text[0, 14] chars:[0, 14, "parag …  test"]
     SoftLineBreak[15, 16]
     Text[16, 40] chars:[16, 40, "with  … lines"]
@@ -4724,8 +4724,8 @@ Allow funny URLs
 .
 <p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.someExt">ref</a></p>
 .
-Document[0, 44]
-  Paragraph[0, 44]
+Document[0, 43]
+  Paragraph[0, 43]
     Link[0, 43] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 42, "{{ macro }}/someDir/someFile.someExt"] pageRef:[6, 42, "{{ macro }}/someDir/someFile.someExt"] linkClose:[42, 43, ")"]
       Text[1, 4] chars:[1, 4, "ref"]
 ````````````````````````````````
@@ -4738,8 +4738,8 @@ Allow funny URLs
 .
 <p><a href="%7B%7B%20macro%20%7D%7D/someDir/someFile.%7B%7BsomeExt%7D%7D">ref</a></p>
 .
-Document[0, 48]
-  Paragraph[0, 48]
+Document[0, 47]
+  Paragraph[0, 47]
     Link[0, 47] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 46, "{{ macro }}/someDir/someFile.{{someExt}}"] pageRef:[6, 46, "{{ macro }}/someDir/someFile.{{someExt}}"] linkClose:[46, 47, ")"]
       Text[1, 4] chars:[1, 4, "ref"]
 ````````````````````````````````
@@ -4752,8 +4752,8 @@ Allow funny URLs
 .
 <p><a href="%7B%7B%20macro%7C()%7C$/%7C%20%7D%7DsomeFile.ext">ref</a></p>
 .
-Document[0, 38]
-  Paragraph[0, 38]
+Document[0, 37]
+  Paragraph[0, 37]
     Link[0, 37] textOpen:[0, 1, "["] text:[1, 4, "ref"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 36, "{{ macro|()|$/| }}someFile.ext"] pageRef:[6, 36, "{{ macro|()|$/| }}someFile.ext"] linkClose:[36, 37, ")"]
       Text[1, 4] chars:[1, 4, "ref"]
 ````````````````````````````````
@@ -4852,7 +4852,7 @@ paragraph
   <li></li>
 </ol>
 .
-Document[0, 163]
+Document[0, 162]
   Paragraph[0, 10]
     Text[0, 9] chars:[0, 9, "paragraph"]
   BulletList[10, 22] isTight

@@ -322,13 +322,13 @@ task list item class
   <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
-Document[0, 22]
-  BulletList[0, 22] isTight
+Document[0, 21]
+  BulletList[0, 21] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] isTight taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
-      Paragraph[17, 22]
+    TaskListItem[11, 21] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
+      Paragraph[17, 21]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
 
@@ -349,13 +349,13 @@ task list item class on loose list
   </li>
 </ul>
 .
-Document[0, 23]
-  BulletList[0, 23] isLoose
+Document[0, 22]
+  BulletList[0, 22] isLoose
     TaskListItem[0, 11] open:[0, 1, "-"] isLoose taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
-      Paragraph[18, 23]
+    TaskListItem[12, 22] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
+      Paragraph[18, 22]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
 
@@ -371,13 +371,13 @@ loose task list item class
   <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
-Document[0, 22]
-  BulletList[0, 22] isTight
+Document[0, 21]
+  BulletList[0, 21] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] isTight taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
-      Paragraph[17, 22]
+    TaskListItem[11, 21] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
+      Paragraph[17, 21]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
 
@@ -398,13 +398,13 @@ loose task list item class on loose list
   </li>
 </ul>
 .
-Document[0, 23]
-  BulletList[0, 23] isLoose
+Document[0, 22]
+  BulletList[0, 22] isLoose
     TaskListItem[0, 11] open:[0, 1, "-"] isLoose taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
-      Paragraph[18, 23]
+    TaskListItem[12, 22] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
+      Paragraph[18, 22]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
 
@@ -420,13 +420,13 @@ task list item class and p class
   <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
-Document[0, 22]
-  BulletList[0, 22] isTight
+Document[0, 21]
+  BulletList[0, 21] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] isTight taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
-      Paragraph[17, 22]
+    TaskListItem[11, 21] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
+      Paragraph[17, 21]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
 
@@ -447,13 +447,13 @@ task list item class and p class on loose list
   </li>
 </ul>
 .
-Document[0, 23]
-  BulletList[0, 23] isLoose
+Document[0, 22]
+  BulletList[0, 22] isLoose
     TaskListItem[0, 11] open:[0, 1, "-"] isLoose taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
-      Paragraph[18, 23]
+    TaskListItem[12, 22] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
+      Paragraph[18, 22]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
 
@@ -469,13 +469,13 @@ custom marker task list item class and p class
   <li><span class="taskitem">X</span>task</li>
 </ul>
 .
-Document[0, 22]
-  BulletList[0, 22] isTight
+Document[0, 21]
+  BulletList[0, 21] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] isTight taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
-      Paragraph[17, 22]
+    TaskListItem[11, 21] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
+      Paragraph[17, 21]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
 
@@ -496,13 +496,13 @@ task list item class and p class on loose list
   </li>
 </ul>
 .
-Document[0, 23]
-  BulletList[0, 23] isLoose
+Document[0, 22]
+  BulletList[0, 22] isLoose
     TaskListItem[0, 11] open:[0, 1, "-"] isLoose taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
-      Paragraph[18, 23]
+    TaskListItem[12, 22] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
+      Paragraph[18, 22]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
 
@@ -518,13 +518,13 @@ custom marker task list item class and p class
   <li><span class="taskitem">X</span>task</li>
 </ul>
 .
-Document[0, 22]
-  BulletList[0, 22] isTight
+Document[0, 21]
+  BulletList[0, 21] isTight
     TaskListItem[0, 11] open:[0, 1, "-"] isTight taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[11, 22] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
-      Paragraph[17, 22]
+    TaskListItem[11, 21] open:[11, 12, "-"] isTight taskOpen:[13, 16, "[x]"]
+      Paragraph[17, 21]
         Text[17, 21] chars:[17, 21, "task"]
 ````````````````````````````````
 
@@ -545,13 +545,13 @@ task list item class and p class on loose list
   </li>
 </ul>
 .
-Document[0, 23]
-  BulletList[0, 23] isLoose
+Document[0, 22]
+  BulletList[0, 22] isLoose
     TaskListItem[0, 11] open:[0, 1, "-"] isLoose taskOpen:[2, 5, "[ ]"]
       Paragraph[6, 11]
         Text[6, 10] chars:[6, 10, "task"]
-    TaskListItem[12, 23] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
-      Paragraph[18, 23]
+    TaskListItem[12, 22] open:[12, 13, "-"] isLoose taskOpen:[14, 17, "[x]"]
+      Paragraph[18, 22]
         Text[18, 22] chars:[18, 22, "task"]
 ````````````````````````````````
 
@@ -589,15 +589,15 @@ task list item on ordered list item without ordered list item conversion
   <li>[x] task</li>
 </ol>
 .
-Document[0, 24]
-  OrderedList[0, 24] isTight delimiter:'.'
+Document[0, 23]
+  OrderedList[0, 23] isTight delimiter:'.'
     OrderedListItem[0, 12] open:[0, 2, "1."] isTight
       Paragraph[3, 12]
         LinkRef[3, 6] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
           Text[4, 5] chars:[4, 5, " "]
         Text[6, 11] chars:[6, 11, " task"]
-    OrderedListItem[12, 24] open:[12, 14, "2."] isTight
-      Paragraph[15, 24]
+    OrderedListItem[12, 23] open:[12, 14, "2."] isTight
+      Paragraph[15, 23]
         LinkRef[15, 18] referenceOpen:[15, 16, "["] reference:[16, 17, "x"] referenceClose:[17, 18, "]"]
           Text[16, 17] chars:[16, 17, "x"]
         Text[18, 23] chars:[18, 23, " task"]
@@ -620,10 +620,10 @@ Document[0, 24]
 <!-- -->
 <ul>
   <li class="task-list-item" md-pos="39-44"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item" md-pos="50-55"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="50-54"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
 </ul>
 .
-Document[0, 55]
+Document[0, 54]
   OrderedList[0, 24] isTight delimiter:'.'
     TaskListItem[0, 12] open:[0, 2, "1."] isTight taskOpen:[3, 6, "[ ]"]
       Paragraph[7, 12]
@@ -632,12 +632,12 @@ Document[0, 55]
       Paragraph[19, 24]
         Text[19, 23] chars:[19, 23, "task"]
   HtmlCommentBlock[24, 33]
-  BulletList[33, 55] isTight
+  BulletList[33, 54] isTight
     TaskListItem[33, 44] open:[33, 34, "-"] isTight taskOpen:[35, 38, "[ ]"]
       Paragraph[39, 44]
         Text[39, 43] chars:[39, 43, "task"]
-    TaskListItem[44, 55] open:[44, 45, "-"] isTight taskOpen:[46, 49, "[x]"]
-      Paragraph[50, 55]
+    TaskListItem[44, 54] open:[44, 45, "-"] isTight taskOpen:[46, 49, "[x]"]
+      Paragraph[50, 54]
         Text[50, 54] chars:[50, 54, "task"]
 ````````````````````````````````
 
@@ -659,12 +659,12 @@ all should be src pos wrapped
 </ol>
 <!-- -->
 <ul>
-  <li class="task-list-item" md-pos="76-142"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
+  <li class="task-list-item" md-pos="76-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
   <span md-pos="87-111">with multiple lazy lines</span>
   <span md-pos="112-141">all should be src pos wrapped</span></li>
 </ul>
 .
-Document[0, 142]
+Document[0, 141]
   OrderedList[0, 67] isTight delimiter:'.'
     TaskListItem[0, 67] open:[0, 2, "1."] isTight taskOpen:[3, 6, "[ ]"]
       Paragraph[7, 67]
@@ -674,9 +674,9 @@ Document[0, 142]
         SoftLineBreak[36, 37]
         Text[37, 66] chars:[37, 66, "all s … apped"]
   HtmlCommentBlock[67, 76]
-  BulletList[76, 142] isTight
-    TaskListItem[76, 142] open:[76, 77, "-"] isTight taskOpen:[78, 81, "[ ]"]
-      Paragraph[82, 142]
+  BulletList[76, 141] isTight
+    TaskListItem[76, 141] open:[76, 77, "-"] isTight taskOpen:[78, 81, "[ ]"]
+      Paragraph[82, 141]
         Text[82, 86] chars:[82, 86, "item"]
         SoftLineBreak[86, 87]
         Text[87, 111] chars:[87, 111, "with  … lines"]
@@ -716,13 +716,13 @@ all should be src pos wrapped
     <p md-pos="89-100"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="95-99">item</span></p>
   </li>
   <li class="task-list-item">
-    <p md-pos="101-167"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
+    <p md-pos="101-166"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
     <span md-pos="112-136">with multiple lazy lines</span>
     <span md-pos="137-166">all should be src pos wrapped</span></p>
   </li>
 </ul>
 .
-Document[0, 167]
+Document[0, 166]
   OrderedList[0, 80] isLoose delimiter:'.'
     TaskListItem[0, 12] open:[0, 2, "1."] isLoose taskOpen:[3, 6, "[ ]"]
       Paragraph[7, 12]
@@ -735,12 +735,12 @@ Document[0, 167]
         SoftLineBreak[49, 50]
         Text[50, 79] chars:[50, 79, "all s … apped"]
   HtmlCommentBlock[80, 89]
-  BulletList[89, 167] isLoose
+  BulletList[89, 166] isLoose
     TaskListItem[89, 100] open:[89, 90, "-"] isLoose taskOpen:[91, 94, "[ ]"]
       Paragraph[95, 100]
         Text[95, 99] chars:[95, 99, "item"]
-    TaskListItem[101, 167] open:[101, 102, "-"] isLoose taskOpen:[103, 106, "[ ]"]
-      Paragraph[107, 167]
+    TaskListItem[101, 166] open:[101, 102, "-"] isLoose taskOpen:[103, 106, "[ ]"]
+      Paragraph[107, 166]
         Text[107, 111] chars:[107, 111, "item"]
         SoftLineBreak[111, 112]
         Text[112, 136] chars:[112, 136, "with  … lines"]

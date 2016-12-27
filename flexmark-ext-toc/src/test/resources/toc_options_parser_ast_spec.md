@@ -282,7 +282,7 @@ decreasing
   diff: [TOC decreasing]: #
   full: [TOC levels=3 markdown bullet formatted decreasing]: # "# Table of Contents"
 .
-Example[0, 91]
+Example[0, 90]
   Style[0, 4]
     SimTocOptions[0, 4] status:VALID
   Style[5, 13]

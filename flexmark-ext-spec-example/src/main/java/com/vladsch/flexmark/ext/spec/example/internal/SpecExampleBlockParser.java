@@ -144,7 +144,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
                 block.appendChild(optionsList);
                 BasedSequence trimmedOptionsList = block.getOptions().trim(WHITESPACE_NBSP_CHARS);
                 if (!trimmedOptionsList.isEmpty()) {
-                    List<BasedSequence> list = trimmedOptionsList.split(',', 0, SPLIT_INCLUDE_DELIM_PARTS);
+                    BasedSequence[] list = trimmedOptionsList.split(',', 0, SPLIT_INCLUDE_DELIM_PARTS);
                     for (BasedSequence item : list) {
                         BasedSequence option = item.trim(WHITESPACE_NBSP_CHARS);
                         if (!option.isEmpty()) {

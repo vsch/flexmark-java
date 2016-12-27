@@ -58,6 +58,12 @@ public class TableNodeRenderer implements NodeRenderer {
                     public void render(TableCell node, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(node, context, html);
                     }
+                }),
+                new NodeRenderingHandler<>(TableCaption.class, new CustomNodeRenderer<TableCaption>() {
+                    @Override
+                    public void render(TableCaption node, NodeRendererContext context, HtmlWriter html) {
+                        TableNodeRenderer.this.render(node, context, html);
+                    }
                 })
         ));
     }
@@ -99,6 +105,15 @@ public class TableNodeRenderer implements NodeRenderer {
 
     private void render(final TableRow node, final NodeRendererContext context, HtmlWriter html) {
         html.srcPos(node.getChars()).withAttr().tagLine("tr", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(node);
+            }
+        });
+    }
+
+    private void render(final TableCaption node, final NodeRendererContext context, HtmlWriter html) {
+        html.srcPos(node.getChars()).withAttr().tagLine("caption", new Runnable() {
             @Override
             public void run() {
                 context.renderChildren(node);

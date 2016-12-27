@@ -5,10 +5,6 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeIterator;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ext.tables.*;
-import com.vladsch.flexmark.html.CustomNodeRenderer;
-import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.ReferencePreProcessorFactory;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
@@ -108,6 +104,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         int separatorLineNumber = -1;
         BasedSequence separatorLine = null;
         int blockIndent = block.getLineIndent(0);
+        BasedSequence captionLine = null;
 
         for (BasedSequence rowLine : block.getContentLines()) {
             int rowNumber = tableLines.size();
@@ -115,6 +112,13 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             if (rowLine.indexOf('|') < 0) {
                 if (separatorLineNumber == -1) return 0;
+
+                if (options.withCaption) {
+                    BasedSequence trimmed = rowLine.trim();
+                    if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+                        captionLine = trimmed;
+                    }
+                }
                 break;
             }
 
@@ -272,6 +276,14 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         if (section instanceof TableSeparator) {
             TableBody tableBody = new TableBody();
             tableBlock.appendChild(tableBody);
+        }
+
+        // Add caption if the option is enabled
+        if (captionLine != null) {
+            TableCaption caption = new TableCaption(captionLine.subSequence(0, 1), captionLine.subSequence(1, captionLine.length() - 1), captionLine.subSequence(captionLine.length() - 1));
+            inlineParser.parse(caption.getText(), caption);
+            caption.setCharsFromContent();
+            tableBlock.appendChild(caption);
         }
 
         tableBlock.setCharsFromContent();

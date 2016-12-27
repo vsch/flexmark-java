@@ -19,9 +19,10 @@ public abstract class RenderingTestCase {
     public static final String IGNORE_OPTION_NAME = "IGNORE";
     public static final String FAIL_OPTION_NAME = "FAIL";
     public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
+    public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
     public static DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
     public static DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
-    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, false);
+    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -44,7 +45,7 @@ public abstract class RenderingTestCase {
     /**
      * process comma separated list of option sets and combine them for final set to use
      *
-     * @param example  spec example instance for which options are being processed
+     * @param example    spec example instance for which options are being processed
      * @param optionSets comma separate list of option set names
      * @return combined set from applying these options together
      */
@@ -57,12 +58,11 @@ public abstract class RenderingTestCase {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
 
-            if (option.equals(IGNORE_OPTION_NAME)) {
-                //noinspection ConstantConditions
-                throwIgnoredOption(example, optionSets, option);
-            }
-
             switch (option) {
+                case IGNORE_OPTION_NAME:
+                    //noinspection ConstantConditions
+                    throwIgnoredOption(example, optionSets, option);
+                    break;
                 case FAIL_OPTION_NAME:
                     if (options == null) {
                         options = new MutableDataSet().set(FAIL, true);
@@ -73,6 +73,13 @@ public abstract class RenderingTestCase {
                 case NO_FILE_EOL_OPTION_NAME:
                     if (options == null) {
                         options = new MutableDataSet().set(NO_FILE_EOL, true);
+                    } else {
+                        options = new MutableDataSet(options).set(NO_FILE_EOL, true);
+                    }
+                    break;
+                case FILE_EOL_OPTION_NAME:
+                    if (options == null) {
+                        options = new MutableDataSet().set(NO_FILE_EOL, false);
                     } else {
                         options = new MutableDataSet(options).set(NO_FILE_EOL, true);
                     }
@@ -147,9 +154,7 @@ public abstract class RenderingTestCase {
         String parseSource = source;
 
         if (options != null && options.get(NO_FILE_EOL)) {
-            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
-                parseSource = parseSource.substring(0, parseSource.length()-1);
-            }
+            parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
         Node node = parser().withOptions(options).parse(parseSource);
@@ -190,9 +195,7 @@ public abstract class RenderingTestCase {
         String parseSource = source;
 
         if (options != null && options.get(NO_FILE_EOL)) {
-            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
-                parseSource = parseSource.substring(0, parseSource.length()-1);
-            }
+            parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
         Node node = parser().withOptions(options).parse(parseSource);
@@ -231,9 +234,7 @@ public abstract class RenderingTestCase {
         String parseSource = source;
 
         if (options != null && options.get(NO_FILE_EOL)) {
-            if (!parseSource.isEmpty() && parseSource.charAt(parseSource.length()-1) == '\n') {
-                parseSource = parseSource.substring(0, parseSource.length()-1);
-            }
+            parseSource = DumpSpecReader.trimTrailingEOL(parseSource);
         }
 
         Node node = parser().withOptions(options).parse(parseSource);

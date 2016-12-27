@@ -8,7 +8,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Autolink 
+## Autolink
 
 Autolink extension converts links and e-mail addresses to links in the markdown source.
 
@@ -56,8 +56,8 @@ http://example.com/one. Example 2 (see http://example.com/two). Example 3: http:
 .
 <p>http://example.com/one. Example 2 (see http://example.com/two). Example 3: http://example.com/foo_(bar)</p>
 .
-Document[0, 104]
-  Paragraph[0, 104]
+Document[0, 103]
+  Paragraph[0, 103]
     Text[0, 103] chars:[0, 103, "http: … (bar)"]
 ````````````````````````````````
 
@@ -118,11 +118,11 @@ Document[0, 21]
 foo@example.com
 http://example.com
 .
-<p md-pos="0-35"><a md-pos="0-15" href="mailto:foo@example.com">foo@example.com</a>
+<p md-pos="0-34"><a md-pos="0-15" href="mailto:foo@example.com">foo@example.com</a>
 <a md-pos="16-34" href="http://example.com">http://example.com</a></p>
 .
-Document[0, 35]
-  Paragraph[0, 35]
+Document[0, 34]
+  Paragraph[0, 34]
     TextBase[0, 15] chars:[0, 15, "foo@e … e.com"]
       MailLink[0, 15] text:[0, 15, "foo@example.com"]
         Text[0, 15] chars:[0, 15, "foo@e … e.com"]

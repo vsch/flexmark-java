@@ -107,6 +107,12 @@ public final class CharSubSequence extends BasedSequenceImpl {
     }
 
     @Override
+    public BasedSequence appendTo(final StringBuilder out, final int start, final int end) {
+        out.append(baseChars, startOffset + start, end - start);
+        return this;
+    }
+
+    @Override
     public int hashCode() {
         return toString().hashCode();
     }
@@ -125,32 +131,33 @@ public final class CharSubSequence extends BasedSequenceImpl {
         return of(charSequence, 0, charSequence.length());
     }
 
-    public static CharSubSequence of(char[] chars) {
-        return new CharSubSequence(chars);
-    }
-
     public static CharSubSequence of(CharSequence charSequence, int start) {
         return of(charSequence, start, charSequence.length());
     }
 
-    public static CharSubSequence of(char[] chars, int start) {
-        return of(chars, start, chars.length);
+    public static CharSubSequence of(char[] chars, int start, int end) {
+        char[] useChars = new char[chars.length];
+        System.arraycopy(chars, 0, useChars, 0, chars.length);
+        return start == 0 && end == chars.length ? new CharSubSequence(useChars) : new CharSubSequence(useChars).subSequence(start, end);
     }
 
     public static CharSubSequence of(CharSequence charSequence, int start, int end) {
         if (start == 0 && end == charSequence.length()) {
             if (charSequence instanceof CharSubSequence) return ((CharSubSequence) charSequence);
-            else if (charSequence instanceof String) return of(((String) charSequence).toCharArray());
-            else return of(charSequence.toString().toCharArray());
+            else if (charSequence instanceof String) return new CharSubSequence(((String) charSequence).toCharArray());
+            else if (charSequence instanceof StringBuilder) {
+                char[] chars = new char[charSequence.length()];
+                ((StringBuilder) charSequence).getChars(0, charSequence.length(), chars, 0);
+                return new CharSubSequence(chars);
+            } else return new CharSubSequence(charSequence.toString().toCharArray());
         } else {
             if (charSequence instanceof CharSubSequence) return ((CharSubSequence) charSequence).subSequence(start, end);
-            else if (charSequence instanceof String) return of(((String) charSequence).toCharArray(), start, end);
-            else return of(charSequence.toString().toCharArray(), start, end);
+            else if (charSequence instanceof String) return new CharSubSequence(((String) charSequence).toCharArray()).subSequence(start, end);
+            else if (charSequence instanceof StringBuilder) {
+                char[] chars = new char[charSequence.length()];
+                ((StringBuilder) charSequence).getChars(0, charSequence.length(), chars, 0);
+                return new CharSubSequence(chars).subSequence(start, end);
+            } else return new CharSubSequence(charSequence.toString().toCharArray()).subSequence(start, end);
         }
-    }
-
-    public static CharSubSequence of(char[] chars, int start, int end) {
-        return start == 0 && end == chars.length ? new CharSubSequence(chars)
-                : new CharSubSequence(chars).subSequence(start, end);
     }
 }

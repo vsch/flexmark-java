@@ -20,6 +20,7 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
  */
+@SuppressWarnings("WeakerAccess")
 public class CoreNodeRenderer implements NodeRenderer {
     public static final AttributablePart LOOSE_LIST_ITEM = new AttributablePart("LOOSE_LIST_ITEM");
     public static final AttributablePart TIGHT_LIST_ITEM = new AttributablePart("TIGHT_LIST_ITEM");
@@ -553,7 +554,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             if (!node.getUrlContent().isEmpty()) {
                 // reverse URL encoding of =, &
-                String content = Escaping.percentEncodeUrl(node.getUrlContent().toString()).replace("+", "%20").replace("%3D", "=").replace("%26", "&amp;");
+                String content = Escaping.percentEncodeUrl(node.getUrlContent()).replace("+", "%20").replace("%3D", "=").replace("%26", "&amp;");
                 url += content;
             }
 

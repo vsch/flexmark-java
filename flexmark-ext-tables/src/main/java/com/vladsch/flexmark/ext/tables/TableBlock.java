@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
@@ -32,5 +33,10 @@ public class TableBlock extends CustomBlock {
     @Override
     public BasedSequence[] getSegments() {
         return new BasedSequence[0];
+    }
+
+    TableCaption getCaption() {
+        Node child = getLastChild();
+        return child instanceof TableCaption ? (TableCaption) child : null;
     }
 }

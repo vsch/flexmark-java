@@ -1223,13 +1223,13 @@ in item
 | Explicit link | `.link`         | `[]()`            |
 
 .
-Document[0, 323]
+Document[0, 322]
   BulletList[0, 41] isTight
     BulletListItem[0, 41] open:[0, 1, "-"] isTight hadBlankLineAfter
       Paragraph[2, 41]
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
-  TableBlock[43, 323]
+  TableBlock[43, 322]
     TableHead[43, 98]
       TableRow[43, 98] rowNumber=1
         TableCell[43, 60] header textOpen:[43, 44, "|"] text:[44, 59, " Element       "] textClose:[59, 60, "|"]
@@ -2133,8 +2133,8 @@ invalid table:
 | A | B | C | |-----------| | a | b | c | | b | a | c |
 
 .
-Document[0, 56]
-  Paragraph[0, 56]
+Document[0, 55]
+  Paragraph[0, 55]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "|---- … ----|"]
@@ -2155,8 +2155,8 @@ invalid table:
 | A | B | C | | a | b | c | | b | a | c |
 
 .
-Document[0, 42]
-  Paragraph[0, 42]
+Document[0, 41]
+  Paragraph[0, 41]
     Text[0, 13] chars:[0, 13, "| A | … | C |"]
     SoftLineBreak[13, 14]
     Text[14, 27] chars:[14, 27, "| a | … | c |"]

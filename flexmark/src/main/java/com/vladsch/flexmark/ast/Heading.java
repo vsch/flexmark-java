@@ -28,6 +28,11 @@ public class Heading extends Block implements AnchorRefTarget {
     }
 
     @Override
+    public BasedSequence[] getAnchorRefSegments() {
+        return new TextCollectingVisitor().collectAndGetSegments(this);
+    }
+
+    @Override
     public String getAnchorRefId() {
         return anchorRefId;
     }

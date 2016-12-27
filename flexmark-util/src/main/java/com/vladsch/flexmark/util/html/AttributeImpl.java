@@ -1,16 +1,19 @@
 package com.vladsch.flexmark.util.html;
 
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
+
 public class AttributeImpl implements Attribute {
     private final String myName;
     private final char myValueListDelimiter;
     private final char myValueNameDelimiter;
     private final String myValue;
 
-    private AttributeImpl(String name, String value, char valueListDelimiter, char valueNameDelimiter) {
-        myName = name;
+    private AttributeImpl(CharSequence name, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
+        myName = name instanceof String ? (String) name : String.valueOf(name);
         myValueListDelimiter = valueListDelimiter;
         myValueNameDelimiter = valueNameDelimiter;
-        myValue = value;
+        myValue = value == null ? "" : value instanceof String ? (String) value : String.valueOf(value);
     }
 
     @Override
@@ -44,15 +47,16 @@ public class AttributeImpl implements Attribute {
     }
 
     @SuppressWarnings("WeakerAccess")
-    public static int indexOfValue(final String value, final String valueName, final char valueListDelimiter, final char valueNameDelimiter) {
-        if (valueName.isEmpty() || value.isEmpty()) return -1;
+    public static int indexOfValue(final CharSequence value, final CharSequence valueName, final char valueListDelimiter, final char valueNameDelimiter) {
+        if (valueName.length() == 0 || value.length() == 0) return -1;
 
         if (valueListDelimiter == NUL) {
             return value.equals(valueName) ? 0 : -1;
         } else {
             int lastPos = 0;
+            final BasedSequence subSeq = SubSequence.of(value);
             while (lastPos < value.length()) {
-                int pos = value.indexOf(valueName, lastPos);
+                int pos = subSeq.indexOf(valueName, lastPos);
                 if (pos == -1) break;
                 // see if it is 0 or preceded by a space, or at the end or followed by a space
                 int endPos = pos + valueName.length();
@@ -73,23 +77,23 @@ public class AttributeImpl implements Attribute {
     }
 
     @Override
-    public boolean containsValue(String value) {
+    public boolean containsValue(CharSequence value) {
         return indexOfValue(myValue, value, myValueListDelimiter, myValueNameDelimiter) != -1;
     }
 
     @Override
-    public Attribute replaceValue(final String value) {
+    public Attribute replaceValue(final CharSequence value) {
         return myValue.equals(value) ? this : of(myName, value, myValueListDelimiter, myValueNameDelimiter);
     }
 
     @Override
-    public Attribute setValue(final String value) {
+    public Attribute setValue(final CharSequence value) {
         MutableAttribute mutable = toMutable().setValue(value);
         return mutable.equals(this) ? this : mutable.toImmutable();
     }
 
     @Override
-    public Attribute removeValue(final String value) {
+    public Attribute removeValue(final CharSequence value) {
         MutableAttribute mutable = toMutable().removeValue(value);
         return mutable.equals(this) ? this : mutable.toImmutable();
     }
@@ -125,19 +129,19 @@ public class AttributeImpl implements Attribute {
         return of(other.getName(), other.getValue(), other.getValueListDelimiter(), other.getValueNameDelimiter());
     }
 
-    public static AttributeImpl of(String attrName) {
+    public static AttributeImpl of(CharSequence attrName) {
         return of(attrName, attrName, NUL, NUL);
     }
 
-    public static AttributeImpl of(String attrName, String value) {
+    public static AttributeImpl of(CharSequence attrName, CharSequence value) {
         return of(attrName, value, NUL, NUL);
     }
 
-    public static AttributeImpl of(String attrName, String value, char valueListDelimiter) {
+    public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter) {
         return of(attrName, value, valueListDelimiter, NUL);
     }
 
-    public static AttributeImpl of(String attrName, String value, char valueListDelimiter, char valueNameDelimiter) {
+    public static AttributeImpl of(CharSequence attrName, CharSequence value, char valueListDelimiter, char valueNameDelimiter) {
         if (CLASS_ATTR.equals(attrName)) {
             return new AttributeImpl(attrName, value, ' ', NUL);
         } else if (STYLE_ATTR.equals(attrName)) {

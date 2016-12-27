@@ -189,10 +189,10 @@ Document[0, 18]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 ~~Paragraph with *emphasis* and __strong emphasis__~~
 .
-<p md-pos="0-54"><del md-pos="2-51">Paragraph with <em md-pos="18-26">emphasis</em> and <strong md-pos="34-49">strong emphasis</strong></del></p>
+<p md-pos="0-53"><del md-pos="2-51">Paragraph with <em md-pos="18-26">emphasis</em> and <strong md-pos="34-49">strong emphasis</strong></del></p>
 .
-Document[0, 54]
-  Paragraph[0, 54]
+Document[0, 53]
+  Paragraph[0, 53]
     Strikethrough[0, 53] textOpen:[0, 2, "~~"] text:[2, 51, "Parag … raph with *emphasis* and __strong emphasis__"] textClose:[51, 53, "~~"]
       Text[2, 17] chars:[2, 17, "Parag … with "]
       Emphasis[17, 27] textOpen:[17, 18, "*"] text:[18, 26, "emphasis"] textClose:[26, 27, "*"]
@@ -387,10 +387,10 @@ Document[0, 18]
 ```````````````````````````````` example(Subscript Source Position Attribute: 1) options(src-pos)
 ~Paragraph with *emphasis* and __strong emphasis__~
 .
-<p md-pos="0-52"><sub md-pos="1-50">Paragraph with <em md-pos="17-25">emphasis</em> and <strong md-pos="33-48">strong emphasis</strong></sub></p>
+<p md-pos="0-51"><sub md-pos="1-50">Paragraph with <em md-pos="17-25">emphasis</em> and <strong md-pos="33-48">strong emphasis</strong></sub></p>
 .
-Document[0, 52]
-  Paragraph[0, 52]
+Document[0, 51]
+  Paragraph[0, 51]
     Subscript[0, 51] textOpen:[0, 1, "~"] text:[1, 50, "Parag … raph with *emphasis* and __strong emphasis__"] textClose:[50, 51, "~"]
       Text[1, 16] chars:[1, 16, "Parag … with "]
       Emphasis[16, 26] textOpen:[16, 17, "*"] text:[17, 25, "emphasis"] textClose:[25, 26, "*"]

@@ -9,7 +9,6 @@ import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

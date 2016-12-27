@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -44,7 +45,7 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
 
     private void render(Abbreviation node, NodeRendererContext context, HtmlWriter html) {
         String text = node.getChars().unescape();
-        String abbreviation = node.getAbbreviation();
+        BasedSequence abbreviation = node.getAbbreviation();
         String tag;
 
         if (options.useLinks) {
@@ -57,6 +58,6 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
         html.attr("title", abbreviation);
         html.srcPos(node.getChars()).withAttr().tag(tag);
         html.text(text);
-        html.tag("/" + tag);
+        html.closeTag(tag);
     }
 }

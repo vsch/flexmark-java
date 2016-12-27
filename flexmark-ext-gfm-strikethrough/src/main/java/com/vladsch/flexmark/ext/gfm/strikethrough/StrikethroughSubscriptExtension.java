@@ -1,7 +1,10 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.gfm.strikethrough.internal.*;
+import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughJiraRenderer;
+import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRenderer;
+import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughSubscriptDelimiterProcessor;
+import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughYouTrackRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;

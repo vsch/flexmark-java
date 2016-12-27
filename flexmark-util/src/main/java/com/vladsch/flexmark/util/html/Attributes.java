@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.BiConsumer;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
 
@@ -24,16 +25,18 @@ public class Attributes {
         return myAttributes;
     }
 
-    public Attribute get(String key) {
-        if (myAttributes == null || key == null || key.isEmpty()) return null;
+    public Attribute get(CharSequence key) {
+        if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        return myAttributes.get(key);
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        return myAttributes.get(useKey);
     }
 
-    public String getValue(String key) {
-        if (myAttributes == null || key == null || key.isEmpty()) return "";
+    public String getValue(CharSequence key) {
+        if (myAttributes == null || key == null || key.length() == 0) return "";
 
-        Attribute attribute = myAttributes.get(key);
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        Attribute attribute = myAttributes.get(useKey);
         if (attribute == null) return "";
         return attribute.getValue();
     }
@@ -42,16 +45,17 @@ public class Attributes {
         return replaceValue(attribute.getName(), attribute.getValue());
     }
 
-    public Attribute replaceValue(String key, String value) {
+    public Attribute replaceValue(CharSequence key, CharSequence value) {
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
         Attribute attribute;
         if (myAttributes == null) {
-            attribute = AttributeImpl.of(key, value);
+            attribute = AttributeImpl.of(useKey, value);
         } else {
-            attribute = myAttributes.get(key);
+            attribute = myAttributes.get(useKey);
             if (attribute != null) attribute = attribute.replaceValue(value);
-            else attribute = AttributeImpl.of(key, value);
+            else attribute = AttributeImpl.of(useKey, value);
         }
-        getAttributes().put(key, attribute);
+        getAttributes().put(useKey, attribute);
         return attribute;
     }
 
@@ -59,16 +63,24 @@ public class Attributes {
         return addValue(attribute.getName(), attribute.getValue());
     }
 
-    public Attribute addValue(String key, String value) {
+    public Attributes addValues(Attributes attributes) {
+        for (Attribute attribute : attributes.values()) {
+            addValue(attribute.getName(), attribute.getValue());
+        }
+        return this;
+    }
+
+    public Attribute addValue(CharSequence key, CharSequence value) {
         Attribute attribute;
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
         if (myAttributes == null) {
             attribute = AttributeImpl.of(key, value);
         } else {
-            attribute = myAttributes.get(key);
+            attribute = myAttributes.get(useKey);
             if (attribute != null) attribute = attribute.setValue(value);
-            else attribute = AttributeImpl.of(key, value);
+            else attribute = AttributeImpl.of(useKey, value);
         }
-        getAttributes().put(key, attribute);
+        getAttributes().put(useKey, attribute);
         return attribute;
     }
 
@@ -80,22 +92,27 @@ public class Attributes {
         return remove(attribute.getName());
     }
 
-    public Attribute removeValue(String key, String value) {
-        if (myAttributes == null || key == null || key.isEmpty()) return null;
+    public Attribute removeValue(CharSequence key, CharSequence value) {
+        if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        Attribute oldAttribute = myAttributes.get(key);
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        Attribute oldAttribute = myAttributes.get(useKey);
         Attribute attribute = oldAttribute.removeValue(value);
-        getAttributes().put(key, attribute);
+        getAttributes().put(useKey, attribute);
         return attribute;
     }
 
-    public boolean contains(String key) {
-        return myAttributes != null && myAttributes.containsKey(key);
+    public boolean contains(CharSequence key) {
+        if (myAttributes == null || key == null || key.length() == 0) return false;
+
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        return myAttributes.containsKey(useKey);
     }
 
-    public boolean containsValue(String key, String value) {
+    public boolean containsValue(CharSequence key, CharSequence value) {
         if (myAttributes == null) return false;
-        Attribute attribute = myAttributes.get(key);
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        Attribute attribute = myAttributes.get(useKey);
         return attribute != null && attribute.containsValue(value);
     }
 
@@ -108,7 +125,7 @@ public class Attributes {
     }
 
     @SuppressWarnings("unchecked")
-    public Set<String> keySet() {
+    public Set<BasedSequence> keySet() {
         return myAttributes != null ? myAttributes.keySet() : Collections.EMPTY_SET;
     }
 
@@ -118,7 +135,7 @@ public class Attributes {
     }
 
     @SuppressWarnings("unchecked")
-    public Set<Map.Entry<String, Attribute>> entrySet() {
+    public Set<Map.Entry<BasedSequence, Attribute>> entrySet() {
         return myAttributes != null ? myAttributes.entrySet() : Collections.EMPTY_SET;
     }
 
@@ -134,11 +151,12 @@ public class Attributes {
         return myAttributes == null ? 0 : myAttributes.size();
     }
 
-    public Attribute remove(String key) {
-        if (myAttributes == null || key == null || key.isEmpty()) return null;
+    public Attribute remove(CharSequence key) {
+        if (myAttributes == null || key == null || key.length() == 0) return null;
 
-        Attribute oldAttribute = myAttributes.get(key);
-        myAttributes.remove(key);
+        String useKey = key instanceof String ? (String) key : String.valueOf(key);
+        Attribute oldAttribute = myAttributes.get(useKey);
+        myAttributes.remove(useKey);
         return oldAttribute;
     }
 

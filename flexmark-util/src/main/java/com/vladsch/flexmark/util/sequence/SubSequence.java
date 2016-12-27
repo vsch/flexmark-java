@@ -105,6 +105,12 @@ public final class SubSequence extends BasedSequenceImpl {
     }
 
     @Override
+    public BasedSequence appendTo(final StringBuilder out, final int start, final int end) {
+        out.append(baseSeq, startOffset + start, startOffset + end);
+        return this;
+    }
+
+    @Override
     public int hashCode() {
         return toString().hashCode();
     }
@@ -116,30 +122,29 @@ public final class SubSequence extends BasedSequenceImpl {
 
     @Override
     public String toString() {
-        return String.valueOf(baseSeq.subSequence(startOffset, endOffset));
+        StringBuilder sb = new StringBuilder(length());
+        appendTo(sb, 0, length());
+        return sb.toString();
     }
 
-    public static SubSequence of(CharSequence charSequence) {
-        if (charSequence instanceof SubSequence) return (SubSequence) charSequence;
+    public static BasedSequence of(CharSequence charSequence) {
+        if (charSequence instanceof BasedSequence) return (BasedSequence) charSequence;
         else {
-            assert !(charSequence instanceof BasedSequence);
-            return new SubSequence(charSequence);
+            return charSequence == null ? BasedSequence.NULL : new SubSequence(charSequence);
         }
     }
 
-    public static SubSequence of(CharSequence charSequence, int start) {
-        if (charSequence instanceof SubSequence) return ((SubSequence) charSequence).subSequence(start);
+    public static BasedSequence of(CharSequence charSequence, int start) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start);
         else {
-            assert !(charSequence instanceof BasedSequence);
-            return start == 0 ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, charSequence.length());
+            return charSequence == null ? BasedSequence.NULL : start == 0 ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, charSequence.length());
         }
     }
 
-    public static SubSequence of(CharSequence charSequence, int start, int end) {
-        if (charSequence instanceof SubSequence) return ((SubSequence) charSequence).subSequence(start, end);
+    public static BasedSequence of(CharSequence charSequence, int start, int end) {
+        if (charSequence instanceof BasedSequence) return ((BasedSequence) charSequence).subSequence(start, end);
         else {
-            assert !(charSequence instanceof BasedSequence);
-            return start == 0 && end == charSequence.length() ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, end);
+            return charSequence == null ? BasedSequence.NULL : start == 0 && end == charSequence.length() ? new SubSequence(charSequence) : new SubSequence(charSequence).subSequence(start, end);
         }
     }
 }

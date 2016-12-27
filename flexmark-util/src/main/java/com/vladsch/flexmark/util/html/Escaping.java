@@ -37,8 +37,8 @@ public class Escaping {
 
     private static final Replacer UNSAFE_CHAR_REPLACER = new Replacer() {
         @Override
-        public void replace(String input, StringBuilder sb) {
-            switch (input) {
+        public void replace(String s, StringBuilder sb) {
+            switch (s) {
                 case "&":
                     sb.append("&amp;");
                     break;
@@ -52,65 +52,65 @@ public class Escaping {
                     sb.append("&quot;");
                     break;
                 default:
-                    sb.append(input);
+                    sb.append(s);
             }
         }
 
         @Override
-        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
-            switch (input.toString()) {
+        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+            switch (s.toString()) {
                 case "&":
-                    textMapper.addReplacedText(input, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
+                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
                     break;
                 case "<":
-                    textMapper.addReplacedText(input, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
+                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
                     break;
                 case ">":
-                    textMapper.addReplacedText(input, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
+                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
                     break;
                 case "\"":
-                    textMapper.addReplacedText(input, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
+                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
                     break;
                 default:
-                    textMapper.addOriginalText(input);
+                    textMapper.addOriginalText(s);
             }
         }
     };
 
     private static final Replacer UNESCAPE_REPLACER = new Replacer() {
         @Override
-        public void replace(String input, StringBuilder sb) {
-            if (input.charAt(0) == '\\') {
-                sb.append(input, 1, input.length());
+        public void replace(String s, StringBuilder sb) {
+            if (s.charAt(0) == '\\') {
+                sb.append(s, 1, s.length());
             } else {
-                sb.append(Html5Entities.entityToString(input));
+                sb.append(Html5Entities.entityToString(s));
             }
         }
 
         @Override
-        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
-            if (input.charAt(0) == '\\') {
-                textMapper.addReplacedText(input, input.subSequence(1, input.length()));
+        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+            if (s.charAt(0) == '\\') {
+                textMapper.addReplacedText(s, s.subSequence(1, s.length()));
             } else {
-                textMapper.addReplacedText(input, Html5Entities.entityToSequence(input));
+                textMapper.addReplacedText(s, Html5Entities.entityToSequence(s));
             }
         }
     };
 
     private static final Replacer URI_REPLACER = new Replacer() {
         @Override
-        public void replace(String input, StringBuilder sb) {
-            if (input.startsWith("%")) {
-                if (input.length() == 3) {
+        public void replace(String s, StringBuilder sb) {
+            if (s.startsWith("%")) {
+                if (s.length() == 3) {
                     // Already percent-encoded, preserve
-                    sb.append(input);
+                    sb.append(s);
                 } else {
                     // %25 is the percent-encoding for %
                     sb.append("%25");
-                    sb.append(input, 1, input.length());
+                    sb.append(s, 1, s.length());
                 }
             } else {
-                byte[] bytes = input.getBytes(Charset.forName("UTF-8"));
+                byte[] bytes = s.getBytes(Charset.forName("UTF-8"));
                 for (byte b : bytes) {
                     sb.append('%');
                     sb.append(HEX_DIGITS[(b >> 4) & 0xF]);
@@ -120,18 +120,18 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence input, ReplacedTextMapper textMapper) {
-            if (input.startsWith("%")) {
-                if (input.length() == 3) {
+        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+            if (s.startsWith("%")) {
+                if (s.length() == 3) {
                     // Already percent-encoded, preserve
-                    textMapper.addOriginalText(input);
+                    textMapper.addOriginalText(s);
                 } else {
                     // %25 is the percent-encoding for %
-                    textMapper.addReplacedText(input.subSequence(0, 1), PrefixedSubSequence.of("%25", BasedSequence.NULL));
-                    textMapper.addOriginalText(input.subSequence(1, input.length()));
+                    textMapper.addReplacedText(s.subSequence(0, 1), PrefixedSubSequence.of("%25", BasedSequence.NULL));
+                    textMapper.addOriginalText(s.subSequence(1, s.length()));
                 }
             } else {
-                byte[] bytes = input.toString().getBytes(Charset.forName("UTF-8"));
+                byte[] bytes = s.toString().getBytes(Charset.forName("UTF-8"));
                 StringBuilder sbItem = new StringBuilder();
 
                 for (byte b : bytes) {
@@ -139,19 +139,19 @@ public class Escaping {
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
                 }
-                textMapper.addReplacedText(input, PrefixedSubSequence.of(sbItem.toString(), BasedSequence.NULL));
+                textMapper.addReplacedText(s, PrefixedSubSequence.of(sbItem.toString(), BasedSequence.NULL));
             }
         }
     };
 
-    public static String escapeHtml(String input, boolean preserveEntities) {
+    public static String escapeHtml(CharSequence s, boolean preserveEntities) {
         Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
-        return replaceAll(p, input, UNSAFE_CHAR_REPLACER);
+        return replaceAll(p, s, UNSAFE_CHAR_REPLACER);
     }
 
-    public static BasedSequence escapeHtml(BasedSequence input, boolean preserveEntities, ReplacedTextMapper textMapper) {
+    public static BasedSequence escapeHtml(BasedSequence s, boolean preserveEntities, ReplacedTextMapper textMapper) {
         Pattern p = preserveEntities ? XML_SPECIAL_OR_ENTITY : XML_SPECIAL_RE;
-        return replaceAll(p, input, UNSAFE_CHAR_REPLACER, textMapper);
+        return replaceAll(p, s, UNSAFE_CHAR_REPLACER, textMapper);
     }
 
     /**
@@ -160,11 +160,11 @@ public class Escaping {
      * @param s string to un-escape
      * @return un-escaped string
      */
-    public static String unescapeString(String s) {
+    public static String unescapeString(CharSequence s) {
         if (BACKSLASH_OR_AMP.matcher(s).find()) {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
         } else {
-            return s;
+            return s instanceof String ? (String) s : String.valueOf(s);
         }
     }
 
@@ -191,38 +191,38 @@ public class Escaping {
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
      *
-     * @param input sequence to convert
+     * @param s sequence to convert
      * @return converted sequence
      */
-    public static String normalizeEndWithEOL(CharSequence input) {
-        return normalizeEOL(input, true);
+    public static String normalizeEndWithEOL(CharSequence s) {
+        return normalizeEOL(s, true);
     }
 
     /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
-     * @param input sequence to convert
+     * @param s sequence to convert
      * @return converted sequence
      */
-    public static String normalizeEOL(CharSequence input) {
-        return normalizeEOL(input, false);
+    public static String normalizeEOL(CharSequence s) {
+        return normalizeEOL(s, false);
     }
 
     /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
-     * @param input      sequence to convert
+     * @param s      sequence to convert
      * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
      * @return converted sequence
      */
-    public static String normalizeEOL(CharSequence input, boolean endWithEOL) {
-        StringBuilder sb = new StringBuilder(input.length());
-        int iMax = input.length();
+    public static String normalizeEOL(CharSequence s, boolean endWithEOL) {
+        StringBuilder sb = new StringBuilder(s.length());
+        int iMax = s.length();
         boolean hadCR = false;
         boolean hadEOL = false;
 
         for (int i = 0; i < iMax; i++) {
-            char c = input.charAt(i);
+            char c = s.charAt(i);
             if (c == '\r') {
                 hadCR = true;
             } else if (c == '\n') {
@@ -245,23 +245,23 @@ public class Escaping {
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
      *
-     * @param input      sequence to convert
+     * @param s      sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @return converted sequence
      */
-    public static BasedSequence normalizeEndWithEOL(BasedSequence input, ReplacedTextMapper textMapper) {
-        return normalizeEOL(input, textMapper, true);
+    public static BasedSequence normalizeEndWithEOL(BasedSequence s, ReplacedTextMapper textMapper) {
+        return normalizeEOL(s, textMapper, true);
     }
 
     /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
-     * @param input      sequence to convert
+     * @param s      sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @return converted sequence
      */
-    public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper) {
-        return normalizeEOL(input, textMapper, false);
+    public static BasedSequence normalizeEOL(BasedSequence s, ReplacedTextMapper textMapper) {
+        return normalizeEOL(s, textMapper, false);
     }
 
     /**
@@ -269,33 +269,33 @@ public class Escaping {
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
      *
-     * @param input      sequence to convert
+     * @param s      sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
      * @return converted sequence
      */
-    public static BasedSequence normalizeEOL(BasedSequence input, ReplacedTextMapper textMapper, boolean endWithEOL) {
-        int iMax = input.length();
+    public static BasedSequence normalizeEOL(BasedSequence s, ReplacedTextMapper textMapper, boolean endWithEOL) {
+        int iMax = s.length();
         int lastPos = 0;
         boolean hadCR = false;
         boolean hadEOL = false;
 
         for (int i = 0; i < iMax; i++) {
-            char c = input.charAt(i);
+            char c = s.charAt(i);
             if (c == '\r') {
                 hadCR = true;
             } else if (c == '\n') {
                 if (hadCR) {
                     // previous was CR, need to take preceding chars
-                    if (lastPos < i - 1) textMapper.addOriginalText(input.subSequence(lastPos, i - 1));
+                    if (lastPos < i - 1) textMapper.addOriginalText(s.subSequence(lastPos, i - 1));
                     lastPos = i;
                     hadCR = false;
                     hadEOL = true;
                 }
             } else {
                 if (hadCR) {
-                    if (lastPos < i - 1) textMapper.addOriginalText(input.subSequence(lastPos, i + 1));
-                    textMapper.addReplacedText(input.subSequence(i - 1, i), BasedSequence.EOL);
+                    if (lastPos < i - 1) textMapper.addOriginalText(s.subSequence(lastPos, i + 1));
+                    textMapper.addReplacedText(s.subSequence(i - 1, i), BasedSequence.EOL);
                     lastPos = i;
                     hadCR = false;
                     hadEOL = false;
@@ -308,8 +308,8 @@ public class Escaping {
             //    if (lastPos < iMax - 1) textMapper.addOriginalText(input.subSequence(lastPos, iMax - 1));
             //    textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
             //} else {
-            if (lastPos < iMax) textMapper.addOriginalText(input.subSequence(lastPos, iMax));
-            if (!hadEOL && endWithEOL) textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), BasedSequence.EOL);
+            if (lastPos < iMax) textMapper.addOriginalText(s.subSequence(lastPos, iMax));
+            if (!hadEOL && endWithEOL) textMapper.addReplacedText(s.subSequence(iMax - 1, iMax), BasedSequence.EOL);
         }
 
         return textMapper.getReplacedSequence();
@@ -319,20 +319,20 @@ public class Escaping {
      * @param s string to encode
      * @return encoded string
      */
-    public static String percentEncodeUrl(String s) {
+    public static String percentEncodeUrl(CharSequence s) {
         return replaceAll(ESCAPE_IN_URI, s, URI_REPLACER);
     }
 
     /**
      * Normalize the link reference id
      *
-     * @param input      sequence containing the link reference id
+     * @param s      sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
      * @return normalized link reference id
      */
-    public static String normalizeReference(CharSequence input, boolean changeCase) {
-        if (changeCase) return Escaping.collapseWhitespace(input.toString(), true).toLowerCase();
-        else return Escaping.collapseWhitespace(input.toString(), true);
+    public static String normalizeReference(CharSequence s, boolean changeCase) {
+        if (changeCase) return Escaping.collapseWhitespace(s.toString(), true).toLowerCase();
+        else return Escaping.collapseWhitespace(s.toString(), true);
     }
 
     /**
@@ -340,34 +340,34 @@ public class Escaping {
      * <p>
      * Will remove leading ![ or [ and trailing ], collapse multiple whitespaces to a space and optionally convert the id to lowercase.
      *
-     * @param input      sequence containing the link reference id
+     * @param s      sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
      * @return normalized link reference id
      */
-    public static String normalizeReferenceChars(CharSequence input, boolean changeCase) {
+    public static String normalizeReferenceChars(CharSequence s, boolean changeCase) {
         // Strip '[' and ']', then trim and convert to lowercase
-        if (input.length() > 1) {
-            int stripEnd = input.charAt(input.length() - 1) == ':' ? 2 : 1;
-            int stripStart = input.charAt(0) == '!' ? 2 : 1;
-            return normalizeReference(input.subSequence(stripStart, input.length() - stripEnd), changeCase);
+        if (s.length() > 1) {
+            int stripEnd = s.charAt(s.length() - 1) == ':' ? 2 : 1;
+            int stripStart = s.charAt(0) == '!' ? 2 : 1;
+            return normalizeReference(s.subSequence(stripStart, s.length() - stripEnd), changeCase);
         }
-        return input.toString();
+        return s instanceof String ? (String) s : String.valueOf(s);
     }
 
     /**
      * Collapse regions of multiple white spaces to a single space
      *
-     * @param input sequence to process
+     * @param s sequence to process
      * @param trim  true if the sequence should also be trimmed
      * @return processed sequence
      */
-    public static String collapseWhitespace(CharSequence input, boolean trim) {
-        StringBuilder sb = new StringBuilder(input.length());
-        int iMax = input.length();
+    public static String collapseWhitespace(CharSequence s, boolean trim) {
+        StringBuilder sb = new StringBuilder(s.length());
+        int iMax = s.length();
         boolean hadSpace = false;
 
         for (int i = 0; i < iMax; i++) {
-            char c = input.charAt(i);
+            char c = s.charAt(i);
             if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
                 hadSpace = true;
             } else {
@@ -380,11 +380,11 @@ public class Escaping {
         return sb.toString();
     }
 
-    private static String replaceAll(Pattern p, String s, Replacer replacer) {
+    private static String replaceAll(Pattern p, CharSequence s, Replacer replacer) {
         Matcher matcher = p.matcher(s);
 
         if (!matcher.find()) {
-            return s;
+            return s instanceof String ? (String) s : String.valueOf(s);
         }
 
         StringBuilder sb = new StringBuilder(s.length() + 16);
@@ -424,7 +424,7 @@ public class Escaping {
     }
 
     interface Replacer {
-        void replace(String input, StringBuilder sb);
-        void replace(BasedSequence input, ReplacedTextMapper replacedTextMapper);
+        void replace(String s, StringBuilder sb);
+        void replace(BasedSequence s, ReplacedTextMapper replacedTextMapper);
     }
 }

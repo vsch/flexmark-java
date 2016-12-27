@@ -2,7 +2,9 @@ package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Immutable;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public interface Attribute extends Immutable<Attribute, MutableAttribute> {
     String CLASS_ATTR = "class";
@@ -25,7 +27,7 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
      * @param value name part of the attribute value list or the value if the attribute does not have a value list delimiter
      * @return true if the attribute contains the valueName
      */
-    boolean containsValue(String value);
+    boolean containsValue(CharSequence value);
 
     // create a new attribute, if needed
     /**
@@ -34,7 +36,7 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
      * @param value new value
      * @return new attribute or same attribute if nothing changed or attribute is mutable
      */
-    Attribute replaceValue(String value);
+    Attribute replaceValue(CharSequence value);
 
     /**
      * Add a new value or values depending on list and name delimiter settings and value content
@@ -54,7 +56,7 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
      * @param value value or list of values (if attribute has a list delimiter and name delimiter) to change
      * @return new attribute or same attribute if nothing changed or attribute is mutable
      */
-    Attribute setValue(String value);
+    Attribute setValue(CharSequence value);
 
     /**
      * Add a new value or values depending on list and name delimiter settings and value content.
@@ -73,5 +75,5 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
      * @param value value or list of values (if attribute has a list delimiter and name delimiter) to remove
      * @return new attribute or same attribute if nothing changed or attribute is mutable
      */
-    Attribute removeValue(String value);
+    Attribute removeValue(CharSequence value);
 }

@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 public class AutoLink extends LinkNode {
     public AutoLink() {
