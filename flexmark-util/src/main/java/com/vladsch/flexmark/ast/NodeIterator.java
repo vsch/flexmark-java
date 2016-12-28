@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 public class NodeIterator implements ReversiblePeekingIterator<Node> {
     final Node firstNode;
@@ -107,7 +107,6 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
         result = null;
     }
 
-    @Override
     public void forEachRemaining(Consumer<? super Node> consumer) {
         Objects.requireNonNull(consumer);
 
@@ -117,6 +116,11 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     public static final ReversiblePeekingIterator<Node> EMPTY = new ReversiblePeekingIterator<Node>() {
+        @Override
+        public void remove() {
+
+        }
+
         @Override
         public boolean isReversed() {
             return false;

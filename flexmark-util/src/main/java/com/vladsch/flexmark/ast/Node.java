@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -375,8 +376,8 @@ public abstract class Node {
             if (chars.isNull()) {
                 setChars(spanningChars);
             } else {
-                int start = Integer.min(chars.getStartOffset(), spanningChars.getStartOffset());
-                int end = Integer.max(chars.getEndOffset(), spanningChars.getEndOffset());
+                int start = Utils.min(chars.getStartOffset(), spanningChars.getStartOffset());
+                int end = Utils.max(chars.getEndOffset(), spanningChars.getEndOffset());
                 setChars(chars.baseSubSequence(start, end));
             }
         }

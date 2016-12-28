@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import com.vladsch.flexmark.util.collection.Consumer;
+
 import java.util.BitSet;
 import java.util.NoSuchElementException;
-import java.util.function.Consumer;
 
 public class BitSetIterator implements ReversibleIterator<Integer> {
     private final BitSet myBitSet;
@@ -51,7 +52,6 @@ public class BitSetIterator implements ReversibleIterator<Integer> {
         myBitSet.clear(myLast);
     }
 
-    @Override
     public void forEachRemaining(Consumer<? super Integer> consumer) {
         while (hasNext()) {
             consumer.accept(next());

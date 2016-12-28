@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.util.collection;
 
+import com.vladsch.flexmark.util.Function;
 import com.vladsch.flexmark.util.collection.iteration.*;
 
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
+@SuppressWarnings("WeakerAccess")
 public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     private final OrderedSet<K> keySet;
     private final ArrayList<V> valueList;
@@ -142,6 +142,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         if (host != null && !host.skipHostUpdate()) {
             host.adding(index, k, v);
         }
+        //noinspection unchecked
         valueList.add((V) v);
     }
 
@@ -178,11 +179,13 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
     @Override
     public boolean containsKey(Object o) {
+        //noinspection SuspiciousMethodCalls
         return keySet.contains(o);
     }
 
     @Override
     public boolean containsValue(Object o) {
+        //noinspection SuspiciousMethodCalls
         int index = valueList.indexOf(o);
         return keySet.isValidIndex(index);
     }
@@ -229,6 +232,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
     @Override
     public V remove(Object o) {
+        //noinspection unchecked
         return (V) keySet.removeHosted(o);
     }
 
@@ -375,7 +379,6 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return entryIterator();
     }
 
-    @Override
     public void forEach(Consumer<? super Map.Entry<K, V>> consumer) {
         Iterator<Map.Entry<K, V>> iterator = iterator();
         while (iterator.hasNext()) {
