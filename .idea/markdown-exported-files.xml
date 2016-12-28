@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MarkdownExportedFiles">
-    <htmlFiles>
-      <exportedFile path="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" settingsVersion="ED6B5AAF-4ED556D7" />
-    </htmlFiles>
-    <imageFiles />
-    <otherFiles />
+    <exportedHtmlFiles />
+    <exportedImageFiles />
+    <exportedOtherFiles />
   </component>
 </project>

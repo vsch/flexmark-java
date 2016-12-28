@@ -1,7 +1,3 @@
-<component name="MarkdownNavigator.ProfileManager">
-  <settings default="">
-    <scope-profiles>
-      <element scope="Definition Overview" profile="OVERVIEW" />
-    </scope-profiles>
-  </settings>
+<component name="MarkdownNavigatorProfileManager">
+  <settings default="" />
 </component>

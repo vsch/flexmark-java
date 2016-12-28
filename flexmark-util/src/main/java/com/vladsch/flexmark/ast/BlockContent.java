@@ -73,11 +73,7 @@ public class BlockContent {
     }
 
     public boolean hasSingleLine() {
-        return lines.size() == 1;
-    }
-
-    public boolean isEmpty() {
-        return lines.isEmpty();
+        return lines.size() > 0 && lines.size() == 1;
     }
 
     public BasedSequence getContents() {

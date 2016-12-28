@@ -463,8 +463,9 @@ public class ListBlockParser extends AbstractBlockParser {
                 //         - `current indent` >= `list indent`: list item or not ours
 
                 int currentIndent = state.getIndent();
+                int listContentIndent = 0;
 
-                if (currentIndent >= myOptions.getItemIndent()) {
+                if (currentIndent >= listContentIndent + myOptions.getItemIndent()) {
                     return BlockStart.none();
                 }
             } else if (emulationFamily == MARKDOWN) {

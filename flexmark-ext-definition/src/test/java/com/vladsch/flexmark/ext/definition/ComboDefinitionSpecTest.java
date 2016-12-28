@@ -21,9 +21,7 @@ public class ComboDefinitionSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        optionsMap.put("marker-spaces-1", new MutableDataSet().set(DefinitionExtension.MARKER_SPACES, 1));
-        optionsMap.put("marker-spaces-2", new MutableDataSet().set(DefinitionExtension.MARKER_SPACES, 2));
-        optionsMap.put("marker-spaces-3", new MutableDataSet().set(DefinitionExtension.MARKER_SPACES, 3));
+        optionsMap.put("option1", new MutableDataSet().set(DefinitionExtension.NO_TERM_TRAILING_COLON, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
