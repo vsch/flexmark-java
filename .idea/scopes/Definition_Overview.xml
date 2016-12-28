@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Definition Overview" pattern="file[flexmark-ext-definition]:src/main/javadoc/overview.md" />
+</component>

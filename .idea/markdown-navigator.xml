@@ -35,7 +35,7 @@
         <option name="DUMMY" value="false" />
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
-        <option name="GFM_TABLE_RENDERING" value="true" />
+        <option name="GFM_TABLE_RENDERING" value="false" />
         <option name="GITBOOK_URL_ENCODING" value="true" />
         <option name="GITHUB_EMOJI_URL" value="false" />
         <option name="GITHUB_LISTS" value="false" />
