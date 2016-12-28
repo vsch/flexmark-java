@@ -12,40 +12,9 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="partial definition list implementation. DefinitionItemB">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/markdown-navigator/OVERVIEW.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/runConfigurations/ExtDefinitionTestSuite.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/Definition_Overview.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/FlexmarkJavaAssets.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/markdown-navigator.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/markdown-navigator/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/24.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/28.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionItemBlockParser.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.md" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionBlockParser.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-exported-files.xml" afterPath="$PROJECT_DIR$/.idea/markdown-exported-files.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" />
+    <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/20.md" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/20.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/22.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" afterPath="$PROJECT_DIR$/FlexmarkJavaAssets/issues/25.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionItem.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionTerm.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionTerm.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionOptions.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionOptions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/test/java/com/vladsch/flexmark/ext/definition/ComboDefinitionSpecTest.java" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/test/java/com/vladsch/flexmark/ext/definition/ComboDefinitionSpecTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-definition/src/test/resources/ext_definition_ast_spec.md" afterPath="$PROJECT_DIR$/flexmark-ext-definition/src/test/resources/ext_definition_ast_spec.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" afterPath="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/BlockContent.java" afterPath="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/BlockContent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" afterPath="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -161,11 +130,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CoreNodeRenderer.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CoreNodeRenderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="202" column="96" lean-forward="false" selection-start-line="202" selection-start-column="96" selection-end-line="202" selection-end-column="96" />
+            <state relative-caret-position="722">
+              <caret line="203" column="29" lean-forward="false" selection-start-line="203" selection-start-column="29" selection-end-line="203" selection-end-column="29" />
               <folding>
                 <element signature="e#796#829#0" expanded="true" />
                 <element signature="e#1752#2035#0" expanded="true" />
@@ -254,6 +223,45 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="DefinitionNodeRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DefinitionExtension.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="421">
+              <caret line="29" column="27" lean-forward="false" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+              <folding>
+                <element signature="e#2225#2407#0" expanded="true" />
+                <element signature="e#2406#2407#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="306">
+                <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+                <folding>
+                  <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
+                  <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
+                </folding>
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="JiraConverterNodeRenderer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flexmark-jira-converter/src/main/java/com/vladsch/flexmark/jira/converter/internal/JiraConverterNodeRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -269,36 +277,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="340">
               <caret line="293" column="175" lean-forward="false" selection-start-line="293" selection-start-column="175" selection-end-line="293" selection-end-column="175" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskListItem.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/src/main/java/com/vladsch/flexmark/ext/gfm/tasklist/TaskListItem.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="19" lean-forward="false" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefinitionTerm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionTerm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="1" lean-forward="false" selection-start-line="33" selection-start-column="1" selection-end-line="33" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefinitionList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -661,7 +639,6 @@
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.md" />
         <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/24.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/test/java/com/vladsch/flexmark/ext/definition/ComboDefinitionSpecTest.java" />
-        <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" />
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/BlockContent.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionOptions.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/ListBlockParser.java" />
@@ -674,6 +651,7 @@
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/ast/ListItem.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionItem.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java" />
+        <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java" />
       </list>
     </option>
   </component>
@@ -2180,13 +2158,6 @@
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
     </task>
-    <task id="LOCAL-00112" summary="update IDEA module files for maven module status">
-      <created>1470583977807</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1470583977808</updated>
-    </task>
     <task id="LOCAL-00113" summary="update travis.yml for sudo:false">
       <created>1470584431900</created>
       <option name="number" value="00113" />
@@ -2523,7 +2494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482849293681</updated>
     </task>
-    <option name="localTasksCounter" value="161" />
+    <task id="LOCAL-00161" summary="partial definition list implementation. DefinitionItemBlockParser done.">
+      <created>1482906568190</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1482906568190</updated>
+    </task>
+    <option name="localTasksCounter" value="162" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -2615,7 +2593,7 @@
       <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22110163" sideWeight="0.4867979" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.13121118" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738557" sideWeight="0.49003622" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18425842" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18880801" sideWeight="0.49706128" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run with VisualVM" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919255" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
@@ -2743,7 +2721,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="maven ide files" />
     <MESSAGE value="tie up loose ends" />
     <MESSAGE value="fix missing dep for strikethrough" />
     <MESSAGE value="add pegdown issues" />
@@ -2768,7 +2745,8 @@
     <MESSAGE value="update wiki for gfm-strikethrough" />
     <MESSAGE value="fix #27" />
     <MESSAGE value="fix #28" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix #28" />
+    <MESSAGE value="partial definition list implementation. DefinitionItemBlockParser done." />
+    <option name="LAST_COMMIT_MESSAGE" value="partial definition list implementation. DefinitionItemBlockParser done." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2784,13 +2762,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/src/main/java/com/vladsch/flexmark/ext/gfm/strikethrough/internal/SubscriptDelimiterProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="0" lean-forward="true" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/internal/inline/EmphasisDelimiterProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
@@ -3050,16 +3021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="42" column="39" lean-forward="false" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="8109">
-            <caret line="477" column="0" lean-forward="false" selection-start-line="477" selection-start-column="0" selection-end-line="477" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
         </state>
       </provider>
     </entry>
@@ -4125,14 +4086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="47" column="53" lean-forward="true" selection-start-line="47" selection-start-column="53" selection-end-line="47" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/ast/ContentNode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
@@ -4399,8 +4352,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/html/renderer/CoreNodeRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="202" column="96" lean-forward="false" selection-start-line="202" selection-start-column="96" selection-end-line="202" selection-end-column="96" />
+        <state relative-caret-position="722">
+          <caret line="203" column="29" lean-forward="false" selection-start-line="203" selection-start-column="29" selection-end-line="203" selection-end-column="29" />
           <folding>
             <element signature="e#796#829#0" expanded="true" />
             <element signature="e#1752#2035#0" expanded="true" />
@@ -4485,6 +4438,39 @@
             <element signature="e#24702#24889#0" expanded="true" />
             <element signature="e#24888#24889#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionNodeRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/DefinitionExtension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="421">
+          <caret line="29" column="27" lean-forward="false" selection-start-line="29" selection-start-column="27" selection-end-line="29" selection-end-column="27" />
+          <folding>
+            <element signature="e#2225#2407#0" expanded="true" />
+            <element signature="e#2406#2407#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="306">
+            <caret line="18" column="34" lean-forward="false" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+            <folding>
+              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
+              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
+            </folding>
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

@@ -3,8 +3,12 @@ package com.vladsch.flexmark.ext.definition;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionItemBlockParser;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
 /**
@@ -41,7 +45,10 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
             //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
             // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
         } else if (rendererType.equals("HTML")) {
-            //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(final DataHolder options) {return new DefinitionNodeRenderer(options);}
+            });
             // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
         }
     }
