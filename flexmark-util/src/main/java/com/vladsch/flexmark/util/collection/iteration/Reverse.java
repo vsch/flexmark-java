@@ -2,6 +2,7 @@ package com.vladsch.flexmark.util.collection.iteration;
 
 import java.util.List;
 
+@SuppressWarnings("WeakerAccess")
 public class Reverse<T> implements ReversibleIterable<T> {
     private final List<T> myList;
     private final boolean myIsReversed;
@@ -24,7 +25,7 @@ public class Reverse<T> implements ReversibleIterable<T> {
             this(list, true);
         }
 
-        public ReversedListIterator(List<T> list, boolean isReversed) {
+        ReversedListIterator(List<T> list, boolean isReversed) {
             myList = list;
             myIsReversed = isReversed;
             if (isReversed) {
@@ -37,6 +38,11 @@ public class Reverse<T> implements ReversibleIterable<T> {
         @Override
         public boolean isReversed() {
             return myIsReversed;
+        }
+
+        @Override
+        public void remove() {
+
         }
 
         @Override

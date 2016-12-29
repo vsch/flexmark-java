@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSetter;
 
@@ -30,7 +32,7 @@ public class ListOptions implements MutableDataSetter {
         this((DataHolder) null);
     }
 
-    public ListOptions(DataHolder options) {
+    private ListOptions(DataHolder options) {
         parserEmulationFamily = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
         itemInterrupt = new ItemInterrupt(options);
 
@@ -74,6 +76,14 @@ public class ListOptions implements MutableDataSetter {
         codeIndent = other.getCodeIndent();
         itemIndent = other.getItemIndent();
         newItemCodeIndent = other.getNewItemCodeIndent();
+    }
+
+    public static ListOptions getFrom(final DataHolder options) {
+        return new ListOptions(options);
+    }
+
+    public static ListOptions getNew(final DataHolder options) {
+        return new ListOptions(options);
     }
 
     public boolean isTightListItem(ListItem node) {
@@ -372,6 +382,50 @@ public class ListOptions implements MutableDataSetter {
                 return bulletItemInterruptsItemParagraph && (!isEmptyItem || emptyBulletSubItemInterruptsItemParagraph && emptyBulletItemInterruptsItemParagraph);
             }
         }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (this == o) return true;
+            if (!(o instanceof ItemInterrupt)) return false;
+
+            ItemInterrupt interrupt = (ItemInterrupt) o;
+
+            if (bulletItemInterruptsParagraph != interrupt.bulletItemInterruptsParagraph) return false;
+            if (orderedItemInterruptsParagraph != interrupt.orderedItemInterruptsParagraph) return false;
+            if (orderedNonOneItemInterruptsParagraph != interrupt.orderedNonOneItemInterruptsParagraph) return false;
+            if (emptyBulletItemInterruptsParagraph != interrupt.emptyBulletItemInterruptsParagraph) return false;
+            if (emptyOrderedItemInterruptsParagraph != interrupt.emptyOrderedItemInterruptsParagraph) return false;
+            if (emptyOrderedNonOneItemInterruptsParagraph != interrupt.emptyOrderedNonOneItemInterruptsParagraph) return false;
+            if (bulletItemInterruptsItemParagraph != interrupt.bulletItemInterruptsItemParagraph) return false;
+            if (orderedItemInterruptsItemParagraph != interrupt.orderedItemInterruptsItemParagraph) return false;
+            if (orderedNonOneItemInterruptsItemParagraph != interrupt.orderedNonOneItemInterruptsItemParagraph) return false;
+            if (emptyBulletItemInterruptsItemParagraph != interrupt.emptyBulletItemInterruptsItemParagraph) return false;
+            if (emptyOrderedItemInterruptsItemParagraph != interrupt.emptyOrderedItemInterruptsItemParagraph) return false;
+            if (emptyOrderedNonOneItemInterruptsItemParagraph != interrupt.emptyOrderedNonOneItemInterruptsItemParagraph) return false;
+            if (emptyBulletSubItemInterruptsItemParagraph != interrupt.emptyBulletSubItemInterruptsItemParagraph) return false;
+            if (emptyOrderedSubItemInterruptsItemParagraph != interrupt.emptyOrderedSubItemInterruptsItemParagraph) return false;
+            return emptyOrderedNonOneSubItemInterruptsItemParagraph == interrupt.emptyOrderedNonOneSubItemInterruptsItemParagraph;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = (bulletItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (orderedItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (orderedNonOneItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (emptyBulletItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedNonOneItemInterruptsParagraph ? 1 : 0);
+            result = 31 * result + (bulletItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (orderedItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (orderedNonOneItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyBulletItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedNonOneItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyBulletSubItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedSubItemInterruptsItemParagraph ? 1 : 0);
+            result = 31 * result + (emptyOrderedNonOneSubItemInterruptsItemParagraph ? 1 : 0);
+            return result;
+        }
     }
 
     @SuppressWarnings("SameParameterValue")
@@ -428,6 +482,56 @@ public class ListOptions implements MutableDataSetter {
         public MutableItemInterrupt setEmptyOrderedNonOneSubItemInterruptsItemParagraph(boolean emptyOrderedNonOneItemStartsSubList) { this.emptyOrderedNonOneSubItemInterruptsItemParagraph = emptyOrderedNonOneItemStartsSubList; return this; }
 
         // @formatter:on
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ListOptions)) return false;
+
+        ListOptions that = (ListOptions) o;
+
+        if (autoLoose != that.autoLoose) return false;
+        if (autoLooseOneLevelLists != that.autoLooseOneLevelLists) return false;
+        if (delimiterMismatchToNewList != that.delimiterMismatchToNewList) return false;
+        if (endOnDoubleBlank != that.endOnDoubleBlank) return false;
+        if (itemMarkerSpace != that.itemMarkerSpace) return false;
+        if (itemTypeMismatchToNewList != that.itemTypeMismatchToNewList) return false;
+        if (itemTypeMismatchToSubList != that.itemTypeMismatchToSubList) return false;
+        if (looseOnPrevLooseItem != that.looseOnPrevLooseItem) return false;
+        if (looseWhenHasLooseSubItem != that.looseWhenHasLooseSubItem) return false;
+        if (looseWhenHasTrailingBlankLine != that.looseWhenHasTrailingBlankLine) return false;
+        if (looseWhenBlankFollowsItemParagraph != that.looseWhenBlankFollowsItemParagraph) return false;
+        if (orderedItemDotOnly != that.orderedItemDotOnly) return false;
+        if (orderedListManualStart != that.orderedListManualStart) return false;
+        if (codeIndent != that.codeIndent) return false;
+        if (itemIndent != that.itemIndent) return false;
+        if (newItemCodeIndent != that.newItemCodeIndent) return false;
+        if (parserEmulationFamily != that.parserEmulationFamily) return false;
+        return itemInterrupt.equals(that.itemInterrupt);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = parserEmulationFamily.hashCode();
+        result = 31 * result + itemInterrupt.hashCode();
+        result = 31 * result + (autoLoose ? 1 : 0);
+        result = 31 * result + (autoLooseOneLevelLists ? 1 : 0);
+        result = 31 * result + (delimiterMismatchToNewList ? 1 : 0);
+        result = 31 * result + (endOnDoubleBlank ? 1 : 0);
+        result = 31 * result + (itemMarkerSpace ? 1 : 0);
+        result = 31 * result + (itemTypeMismatchToNewList ? 1 : 0);
+        result = 31 * result + (itemTypeMismatchToSubList ? 1 : 0);
+        result = 31 * result + (looseOnPrevLooseItem ? 1 : 0);
+        result = 31 * result + (looseWhenHasLooseSubItem ? 1 : 0);
+        result = 31 * result + (looseWhenHasTrailingBlankLine ? 1 : 0);
+        result = 31 * result + (looseWhenBlankFollowsItemParagraph ? 1 : 0);
+        result = 31 * result + (orderedItemDotOnly ? 1 : 0);
+        result = 31 * result + (orderedListManualStart ? 1 : 0);
+        result = 31 * result + codeIndent;
+        result = 31 * result + itemIndent;
+        result = 31 * result + newItemCodeIndent;
+        return result;
     }
 }
 

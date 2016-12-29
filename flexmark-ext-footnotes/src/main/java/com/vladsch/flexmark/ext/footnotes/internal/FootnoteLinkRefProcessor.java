@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class FootnoteLinkRefProcessor implements LinkRefProcessor {
@@ -68,12 +69,12 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
         }
 
         @Override
-        public boolean getWantExclamationPrefix() {
+        public boolean getWantExclamationPrefix(DataHolder options) {
             return WANT_EXCLAMATION_PREFIX;
         }
 
         @Override
-        public int getBracketNestingLevel() {
+        public int getBracketNestingLevel(DataHolder options) {
             return BRACKET_NESTING_LEVEL;
         }
     }

@@ -1,10 +1,9 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversibleIterator;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
-
-import java.util.function.Consumer;
 
 public class NodeIterable implements ReversiblePeekingIterable<Node> {
     final Node firstNode;
@@ -23,7 +22,6 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
         return new NodeIterator(firstNode, lastNode, reversed);
     }
 
-    @Override
     public void forEach(Consumer<? super Node> consumer) {
         ReversibleIterator<Node> iterator = iterator();
         while (iterator.hasNext()) {
@@ -57,7 +55,6 @@ public class NodeIterable implements ReversiblePeekingIterable<Node> {
             return this;
         }
 
-        @Override
         public void forEach(Consumer<? super Node> consumer) {
 
         }

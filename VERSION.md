@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.9.3](#093)
 - [0.9.2](#092)
 - [0.9.1](#091)
 - [0.9.0](#090)
@@ -97,11 +98,32 @@ Next Release To Do List
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
 
+0.9.3
+-----
+
+- Add: `WikiLinkExtension.IMAGE_LINKS`, default `false`, when true enables wiki images of the
+  form `![[]]` with optional `|` used for separating file ref from alt text. Other options:
+
+    - `WikiLinkExtension.IMAGE_FILE_EXTENSION`, default `""`, to add file extension or suffix to
+      file reference.
+
+    - `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a prefix to file reference
+
+- Add: #24, DefinitionList extension doesn't seem to work, implemented definition lists as per
+  PHP Markdown Extra.
+
+- API Change: paragraph rendering now can determine whether `<p>` wrapping is disabled by
+  checking if invoking its parent's
+  `ParagraphItemContainer.isParagraphWrappingDisabled(Paragraph, ListOptions, DataHolder)`
+  method. Removes all details of having to know anything about the parent type other than its
+  implementation of `ParagraphItemContainer`
+
 0.9.2
 -----
 
-- Change: make NO_FILE_EOL default condition for tests. Last EOL will be stripped unless the
-  previous line is blank.
+- Change: make `NO_FILE_EOL` default condition for tests. Last EOL will be stripped unless the
+  previous line is blank. Also have `FILE_EOL` to reverse the condition. Default for tests now
+  is `NO_FILE_EOL` to force tests without having the file EOL terminated.
 
 - Fix: #28, Table caption support?, add `TablesExtension.WITH_CAPTION` default `true`, when true
   will parse table caption line, line after table with format `[` ... `]`

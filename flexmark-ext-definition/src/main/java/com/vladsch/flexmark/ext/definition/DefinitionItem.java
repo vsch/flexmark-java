@@ -1,43 +1,21 @@
 
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.ast.CustomBlock;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
- * A Definition block node
+ * A Definition item block node, starts with : followed by any content like a list item
  */
-public class DefinitionItem extends CustomBlock {
-    protected BasedSequence openingMarker = BasedSequence.NULL;
-    protected BasedSequence text = BasedSequence.NULL;
-
-    @Override
-    public void getAstExtra(StringBuilder out) {
-        segmentSpan(out, openingMarker, "open");
-        segmentSpan(out, text, "text");
-    }
-
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, text };
-    }
-
+public class DefinitionItem extends ListItem {
     public DefinitionItem() {
+
     }
 
-    public BasedSequence getOpeningMarker() {
-        return openingMarker;
-    }
-
-    public void setOpeningMarker(BasedSequence openingMarker) {
-        this.openingMarker = openingMarker;
-    }
-
-    public BasedSequence getText() {
-        return text;
-    }
-
-    public void setText(BasedSequence text) {
-        this.text = text;
+    @Override
+    public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
+        boolean isDisabled = super.isParagraphWrappingDisabled(node, listOptions, options);
+        return isDisabled;
     }
 }

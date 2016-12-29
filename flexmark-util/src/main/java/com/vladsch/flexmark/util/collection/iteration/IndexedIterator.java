@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
+import com.vladsch.flexmark.util.collection.Consumer;
+
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
-import java.util.function.Consumer;
 
 public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>> implements ReversibleIndexedIterator<R> {
     private final I myIterator;
@@ -60,7 +61,6 @@ public class IndexedIterator<R, S, I extends ReversibleIterator<Integer>> implem
         return myLastIndex;
     }
 
-    @Override
     public void forEachRemaining(Consumer<? super R> consumer) {
         while (hasNext()) {
             consumer.accept(next());

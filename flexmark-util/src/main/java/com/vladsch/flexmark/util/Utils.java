@@ -320,7 +320,7 @@ public class Utils {
     public static int min(int receiver, int... others) {
         int min = receiver;
         for (int other : others) {
-            if (min < other) min = other;
+            if (min > other) min = other;
         }
         return min;
     }

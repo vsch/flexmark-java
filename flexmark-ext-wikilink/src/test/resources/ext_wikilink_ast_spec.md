@@ -245,10 +245,10 @@ Document[0, 57]
 
 Custom extension
 
-```````````````````````````````` example(WikiLinks: 15) options(custom-ext)
+```````````````````````````````` example(WikiLinks: 15) options(link-ext)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
-<p><a href="wiki-link">wiki link</a> [^link][ref] <a href="^wiki-link">^wiki link</a></p>
+<p><a href="wiki-link.html">wiki link</a> [^link][ref] <a href="^wiki-link.html">^wiki link</a></p>
 .
 Document[0, 41]
   Paragraph[0, 41]
@@ -265,7 +265,7 @@ Document[0, 41]
 
 Custom prefix
 
-```````````````````````````````` example(WikiLinks: 16) options(custom-prefix)
+```````````````````````````````` example(WikiLinks: 16) options(link-prefix)
 [[wiki link]] [^link][ref] [[^wiki link]]
 .
 <p><a href="/prefix/wiki-link">wiki link</a> [^link][ref] <a href="/prefix/^wiki-link">^wiki link</a></p>
@@ -369,10 +369,10 @@ Document[0, 35]
 
 Custom extension with empty Anchor ref
 
-```````````````````````````````` example(WikiLinks: 23) options(custom-ext)
+```````````````````````````````` example(WikiLinks: 23) options(link-ext)
 [[wiki link#]] 
 .
-<p><a href="wiki-link#">wiki link</a></p>
+<p><a href="wiki-link.html#">wiki link</a></p>
 .
 Document[0, 15]
   Paragraph[0, 15]
@@ -383,10 +383,10 @@ Document[0, 15]
 
 Custom extension with anchor ref
 
-```````````````````````````````` example(WikiLinks: 24) options(custom-ext)
+```````````````````````````````` example(WikiLinks: 24) options(link-ext)
 [[wiki link#anchor-ref]] 
 .
-<p><a href="wiki-link#anchor-ref">wiki link</a></p>
+<p><a href="wiki-link.html#anchor-ref">wiki link</a></p>
 .
 Document[0, 25]
   Paragraph[0, 25]
@@ -397,7 +397,7 @@ Document[0, 25]
 
 Custom prefix with empty anchor ref
 
-```````````````````````````````` example(WikiLinks: 25) options(custom-prefix)
+```````````````````````````````` example(WikiLinks: 25) options(link-prefix)
 [[wiki link#]]
 .
 <p><a href="/prefix/wiki-link#">wiki link</a></p>
@@ -411,7 +411,7 @@ Document[0, 14]
 
 Custom prefix with anchor ref
 
-```````````````````````````````` example(WikiLinks: 26) options(custom-prefix)
+```````````````````````````````` example(WikiLinks: 26) options(link-prefix)
 [[wiki link#anchor-ref]]
 .
 <p><a href="/prefix/wiki-link#anchor-ref">wiki link</a></p>
@@ -464,6 +464,462 @@ Document[0, 23]
   Paragraph[0, 23]
     WikiLink[0, 23] linkOpen:[0, 2, "[["] text:[12, 21, "wiki text"] textSep:[11, 12, "|"] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[21, 23, "]]"]
       Text[2, 21] chars:[2, 21, "wiki  …  text"]
+````````````````````````````````
+
+
+## WikiImages
+
+Converts wiki image of the forms: ![[image]], ![[image|text]] and ![[text|image]] to image
+images in the HTML page.
+
+no spaces between brackets
+
+```````````````````````````````` example(WikiImages: 1) options(wiki-images)
+![ [not wiki image]]
+.
+<p>![ [not wiki image]]</p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 3] chars:[0, 3, "![ "]
+    LinkRef[3, 19] referenceOpen:[3, 4, "["] reference:[4, 18, "not wiki image"] referenceClose:[18, 19, "]"]
+      Text[4, 18] chars:[4, 18, "not w … image"]
+    Text[19, 20] chars:[19, 20, "]"]
+````````````````````````````````
+
+
+no spaces between brackets
+
+```````````````````````````````` example(WikiImages: 2) options(wiki-images)
+![[not wiki image] ]
+.
+<p>![[not wiki image] ]</p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 2] chars:[0, 2, "!["]
+    LinkRef[2, 18] referenceOpen:[2, 3, "["] reference:[3, 17, "not wiki image"] referenceClose:[17, 18, "]"]
+      Text[3, 17] chars:[3, 17, "not w … image"]
+    Text[18, 20] chars:[18, 20, " ]"]
+````````````````````````````````
+
+
+simple wiki image
+
+```````````````````````````````` example(WikiImages: 3) options(wiki-images)
+![[wiki image]]
+.
+<p><img src="wiki-image" alt="wiki image" /></p>
+.
+Document[0, 15]
+  Paragraph[0, 15]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+````````````````````````````````
+
+
+simple wiki image ignored without wiki images option
+
+```````````````````````````````` example WikiImages: 4
+![[wiki image]]
+.
+<p>!<a href="wiki-image">wiki image</a></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 1] chars:[0, 1, "!"]
+    WikiLink[1, 15] linkOpen:[1, 3, "[["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+````````````````````````````````
+
+
+wiki image with text
+
+```````````````````````````````` example(WikiImages: 5) options(wiki-images)
+![[alt text|wiki image]]
+.
+<p><img src="wiki-image" alt="alt text" /></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiImage[0, 24] linkOpen:[0, 3, "![["] link:[12, 22, "wiki image"] pageRef:[12, 22, "wiki image"] textSep:[11, 12, "|"] text:[3, 11, "alt text"] linkClose:[22, 24, "]]"]
+      Text[3, 22] chars:[3, 22, "alt t … image"]
+````````````````````````````````
+
+
+wiki image with text, images first option
+
+```````````````````````````````` example(WikiImages: 6) options(wiki-images, links-first)
+![[wiki image|alt text]]
+.
+<p><img src="wiki-image" alt="alt text" /></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiImage[0, 24] linkOpen:[0, 3, "![["] text:[14, 22, "alt text"] textSep:[13, 14, "|"] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[22, 24, "]]"]
+      Text[3, 22] chars:[3, 22, "wiki  …  text"]
+````````````````````````````````
+
+
+reference following will be a reference, even if not defined
+
+```````````````````````````````` example(WikiImages: 7) options(wiki-images)
+![[wiki image]][ref]
+.
+<p><img src="wiki-image" alt="wiki image" />[ref]</p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    LinkRef[15, 20] referenceOpen:[15, 16, "["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"]
+      Text[16, 19] chars:[16, 19, "ref"]
+````````````````````````````````
+
+
+reference following will be a reference
+
+```````````````````````````````` example(WikiImages: 8) options(wiki-images)
+![[wiki image]][ref]
+
+[ref]: /url
+.
+<p><img src="wiki-image" alt="wiki image" /><a href="/url">ref</a></p>
+.
+Document[0, 33]
+  Paragraph[0, 21]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    LinkRef[15, 20] referenceOpen:[15, 16, "["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"]
+      Text[16, 19] chars:[16, 19, "ref"]
+  Reference[22, 33] refOpen:[22, 23, "["] ref:[23, 26, "ref"] refClose:[26, 28, "]:"] url:[29, 33, "/url"]
+````````````````````````````````
+
+
+dummy reference following will be an empty reference
+
+```````````````````````````````` example(WikiImages: 9) options(wiki-images)
+![[wiki image]][]
+.
+<p><img src="wiki-image" alt="wiki image" />[]</p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    LinkRef[15, 17] referenceOpen:[15, 16, "["] reference:[16, 16] referenceClose:[16, 17, "]"]
+````````````````````````````````
+
+
+reference inside is not a wiki image but a image ref with brackets around it
+
+```````````````````````````````` example(WikiImages: 10) options(wiki-images)
+![[not wiki image][ref]]
+.
+<p>![[not wiki image][ref]]</p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 2] chars:[0, 2, "!["]
+    LinkRef[2, 23] textOpen:[2, 3, "["] text:[3, 17, "not wiki image"] textClose:[17, 18, "]"] referenceOpen:[18, 19, "["] reference:[19, 22, "ref"] referenceClose:[22, 23, "]"]
+      Text[3, 17] chars:[3, 17, "not w … image"]
+    Text[23, 24] chars:[23, 24, "]"]
+````````````````````````````````
+
+
+dummy reference inside is not a wiki image but a image ref with brackets around it
+
+```````````````````````````````` example(WikiImages: 11) options(wiki-images)
+![[not wiki image][]]
+.
+<p>![[not wiki image]]</p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 2] chars:[0, 2, "!["]
+    LinkRef[2, 20] referenceOpen:[2, 3, "["] reference:[3, 17, "not wiki image"] referenceClose:[17, 18, "]"] textOpen:[18, 19, "["] textClose:[19, 20, "]"]
+      Text[3, 17] chars:[3, 17, "not w … image"]
+    Text[20, 21] chars:[20, 21, "]"]
+````````````````````````````````
+
+
+```````````````````````````````` example(WikiImages: 12) options(wiki-images)
+![[wiki image]] ![^image][ref] ![[^wiki image]]
+.
+<p><img src="wiki-image" alt="wiki image" /> [^image][ref] <img src="^wiki-image" alt="^wiki image" /></p>
+.
+Document[0, 47]
+  Paragraph[0, 47]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    Text[15, 16] chars:[15, 16, " "]
+    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+      Text[18, 24] chars:[18, 24, "^image"]
+    Text[30, 31] chars:[30, 31, " "]
+    WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]
+      Text[34, 45] chars:[34, 45, "^wiki … image"]
+````````````````````````````````
+
+
+Custom extension
+
+```````````````````````````````` example(WikiImages: 13) options(wiki-images, image-ext)
+[[wiki image]] [^image][ref] [[^wiki image]]
+.
+<p><a href="wiki-image">wiki image</a> [^image][ref] <a href="^wiki-image">^wiki image</a></p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    WikiLink[0, 14] linkOpen:[0, 2, "[["] link:[2, 12, "wiki image"] pageRef:[2, 12, "wiki image"] linkClose:[12, 14, "]]"]
+      Text[2, 12] chars:[2, 12, "wiki image"]
+    Text[14, 15] chars:[14, 15, " "]
+    LinkRef[15, 28] textOpen:[15, 16, "["] text:[16, 22, "^image"] textClose:[22, 23, "]"] referenceOpen:[23, 24, "["] reference:[24, 27, "ref"] referenceClose:[27, 28, "]"]
+      Text[16, 22] chars:[16, 22, "^image"]
+    Text[28, 29] chars:[28, 29, " "]
+    WikiLink[29, 44] linkOpen:[29, 31, "[["] link:[31, 42, "^wiki image"] pageRef:[31, 42, "^wiki image"] linkClose:[42, 44, "]]"]
+      Text[31, 42] chars:[31, 42, "^wiki … image"]
+````````````````````````````````
+
+
+```````````````````````````````` example(WikiImages: 14) options(wiki-images, image-ext)
+![[wiki image]] ![^image][ref] ![[^wiki image]]
+.
+<p><img src="wiki-image.png" alt="wiki image" /> [^image][ref] <img src="^wiki-image.png" alt="^wiki image" /></p>
+.
+Document[0, 47]
+  Paragraph[0, 47]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    Text[15, 16] chars:[15, 16, " "]
+    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+      Text[18, 24] chars:[18, 24, "^image"]
+    Text[30, 31] chars:[30, 31, " "]
+    WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]
+      Text[34, 45] chars:[34, 45, "^wiki … image"]
+````````````````````````````````
+
+
+Custom prefix
+
+```````````````````````````````` example(WikiImages: 15) options(wiki-images, image-prefix)
+[[wiki image]] [^image][ref] [[^wiki image]]
+.
+<p><a href="wiki-image">wiki image</a> [^image][ref] <a href="^wiki-image">^wiki image</a></p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    WikiLink[0, 14] linkOpen:[0, 2, "[["] link:[2, 12, "wiki image"] pageRef:[2, 12, "wiki image"] linkClose:[12, 14, "]]"]
+      Text[2, 12] chars:[2, 12, "wiki image"]
+    Text[14, 15] chars:[14, 15, " "]
+    LinkRef[15, 28] textOpen:[15, 16, "["] text:[16, 22, "^image"] textClose:[22, 23, "]"] referenceOpen:[23, 24, "["] reference:[24, 27, "ref"] referenceClose:[27, 28, "]"]
+      Text[16, 22] chars:[16, 22, "^image"]
+    Text[28, 29] chars:[28, 29, " "]
+    WikiLink[29, 44] linkOpen:[29, 31, "[["] link:[31, 42, "^wiki image"] pageRef:[31, 42, "^wiki image"] linkClose:[42, 44, "]]"]
+      Text[31, 42] chars:[31, 42, "^wiki … image"]
+````````````````````````````````
+
+
+Custom prefix
+
+```````````````````````````````` example(WikiImages: 16) options(wiki-images, image-prefix)
+![[wiki image]] ![^image][ref] ![[^wiki image]]
+.
+<p><img src="/images/wiki-image" alt="wiki image" /> [^image][ref] <img src="/images/^wiki-image" alt="^wiki image" /></p>
+.
+Document[0, 47]
+  Paragraph[0, 47]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+    Text[15, 16] chars:[15, 16, " "]
+    ImageRef[17, 30] textOpen:[17, 18, "["] text:[18, 24, "^image"] textClose:[24, 25, "]"] referenceOpen:[25, 26, "["] reference:[26, 29, "ref"] referenceClose:[29, 30, "]"]
+      Text[18, 24] chars:[18, 24, "^image"]
+    Text[30, 31] chars:[30, 31, " "]
+    WikiImage[31, 47] linkOpen:[31, 34, "![["] link:[34, 45, "^wiki image"] pageRef:[34, 45, "^wiki image"] linkClose:[45, 47, "]]"]
+      Text[34, 45] chars:[34, 45, "^wiki … image"]
+````````````````````````````````
+
+
+With empty anchor ref
+
+```````````````````````````````` example(WikiImages: 17) options(wiki-images)
+![[wiki image#]] 
+.
+<p><img src="wiki-image#" alt="wiki image#" /></p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    WikiImage[0, 16] linkOpen:[0, 3, "![["] link:[3, 14, "wiki image#"] pageRef:[3, 14, "wiki image#"] linkClose:[14, 16, "]]"]
+      Text[3, 14] chars:[3, 14, "wiki  … mage#"]
+````````````````````````````````
+
+
+With Anchor ref
+
+```````````````````````````````` example(WikiImages: 18) options(wiki-images)
+![[wiki image#anchor-ref]] 
+.
+<p><img src="wiki-image#anchor-ref" alt="wiki image#anchor-ref" /></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    WikiImage[0, 26] linkOpen:[0, 3, "![["] link:[3, 24, "wiki image#anchor-ref"] pageRef:[3, 24, "wiki image#anchor-ref"] linkClose:[24, 26, "]]"]
+      Text[3, 24] chars:[3, 24, "wiki  … r-ref"]
+````````````````````````````````
+
+
+With text, empty anchor ref
+
+```````````````````````````````` example(WikiImages: 19) options(wiki-images)
+[[alt text|wiki image#]] 
+.
+<p><a href="wiki-image#">alt text</a></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[11, 22, "wiki image#"] pageRef:[11, 21, "wiki image"] anchorMarker:[21, 22, "#"] anchorRef:[22, 22] textSep:[10, 11, "|"] text:[2, 10, "alt text"] linkClose:[22, 24, "]]"]
+      Text[2, 22] chars:[2, 22, "alt t … mage#"]
+````````````````````````````````
+
+
+With text, anchor ref
+
+```````````````````````````````` example(WikiImages: 20) options(wiki-images)
+[[alt text|wiki image#anchor-ref]] 
+.
+<p><a href="wiki-image#anchor-ref">alt text</a></p>
+.
+Document[0, 35]
+  Paragraph[0, 35]
+    WikiLink[0, 34] linkOpen:[0, 2, "[["] link:[11, 32, "wiki image#anchor-ref"] pageRef:[11, 21, "wiki image"] anchorMarker:[21, 22, "#"] anchorRef:[22, 32, "anchor-ref"] textSep:[10, 11, "|"] text:[2, 10, "alt text"] linkClose:[32, 34, "]]"]
+      Text[2, 32] chars:[2, 32, "alt t … r-ref"]
+````````````````````````````````
+
+
+Links first, with text, empty anchor ref
+
+```````````````````````````````` example(WikiImages: 21) options(wiki-images, links-first)
+[[wiki image#|alt text]] 
+.
+<p><a href="wiki-image#">alt text</a></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    WikiLink[0, 24] linkOpen:[0, 2, "[["] text:[14, 22, "alt text"] textSep:[13, 14, "|"] link:[2, 13, "wiki image#"] pageRef:[2, 12, "wiki image"] anchorMarker:[12, 13, "#"] anchorRef:[13, 13] linkClose:[22, 24, "]]"]
+      Text[2, 22] chars:[2, 22, "wiki  …  text"]
+````````````````````````````````
+
+
+Links first, with text, anchor ref
+
+```````````````````````````````` example(WikiImages: 22) options(wiki-images, links-first)
+[[wiki image#anchor-ref|alt text]] 
+.
+<p><a href="wiki-image#anchor-ref">alt text</a></p>
+.
+Document[0, 35]
+  Paragraph[0, 35]
+    WikiLink[0, 34] linkOpen:[0, 2, "[["] text:[24, 32, "alt text"] textSep:[23, 24, "|"] link:[2, 23, "wiki image#anchor-ref"] pageRef:[2, 12, "wiki image"] anchorMarker:[12, 13, "#"] anchorRef:[13, 23, "anchor-ref"] linkClose:[32, 34, "]]"]
+      Text[2, 32] chars:[2, 32, "wiki  …  text"]
+````````````````````````````````
+
+
+Custom extension with empty Anchor ref
+
+```````````````````````````````` example(WikiImages: 23) options(wiki-images, image-ext)
+![[wiki image#]] 
+.
+<p><img src="wiki-image#.png" alt="wiki image#" /></p>
+.
+Document[0, 17]
+  Paragraph[0, 17]
+    WikiImage[0, 16] linkOpen:[0, 3, "![["] link:[3, 14, "wiki image#"] pageRef:[3, 14, "wiki image#"] linkClose:[14, 16, "]]"]
+      Text[3, 14] chars:[3, 14, "wiki  … mage#"]
+````````````````````````````````
+
+
+Custom extension with anchor ref
+
+```````````````````````````````` example(WikiImages: 24) options(wiki-images, image-ext)
+![[wiki image#anchor-ref]] 
+.
+<p><img src="wiki-image#anchor-ref.png" alt="wiki image#anchor-ref" /></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    WikiImage[0, 26] linkOpen:[0, 3, "![["] link:[3, 24, "wiki image#anchor-ref"] pageRef:[3, 24, "wiki image#anchor-ref"] linkClose:[24, 26, "]]"]
+      Text[3, 24] chars:[3, 24, "wiki  … r-ref"]
+````````````````````````````````
+
+
+Custom prefix with empty anchor ref
+
+```````````````````````````````` example(WikiImages: 25) options(wiki-images, image-prefix)
+![[wiki image#]]
+.
+<p><img src="/images/wiki-image#" alt="wiki image#" /></p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    WikiImage[0, 16] linkOpen:[0, 3, "![["] link:[3, 14, "wiki image#"] pageRef:[3, 14, "wiki image#"] linkClose:[14, 16, "]]"]
+      Text[3, 14] chars:[3, 14, "wiki  … mage#"]
+````````````````````````````````
+
+
+Custom prefix with anchor ref
+
+```````````````````````````````` example(WikiImages: 26) options(wiki-images, image-prefix)
+![[wiki image#anchor-ref]]
+.
+<p><img src="/images/wiki-image#anchor-ref" alt="wiki image#anchor-ref" /></p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    WikiImage[0, 26] linkOpen:[0, 3, "![["] link:[3, 24, "wiki image#anchor-ref"] pageRef:[3, 24, "wiki image#anchor-ref"] linkClose:[24, 26, "]]"]
+      Text[3, 24] chars:[3, 24, "wiki  … r-ref"]
+````````````````````````````````
+
+
+## WikiImages Source Position Attribute
+
+simple wiki image
+
+```````````````````````````````` example(WikiImages Source Position Attribute: 1) options(wiki-images, src-pos)
+![[wiki image]]
+.
+<p md-pos="0-15"><img src="wiki-image" alt="wiki image" md-pos="0-15" /></p>
+.
+Document[0, 15]
+  Paragraph[0, 15]
+    WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
+      Text[3, 13] chars:[3, 13, "wiki image"]
+````````````````````````````````
+
+
+wiki image with text
+
+```````````````````````````````` example(WikiImages Source Position Attribute: 2) options(wiki-images, src-pos)
+![[alt text|wiki image]]
+.
+<p md-pos="0-24"><img src="wiki-image" alt="alt text" md-pos="0-24" /></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiImage[0, 24] linkOpen:[0, 3, "![["] link:[12, 22, "wiki image"] pageRef:[12, 22, "wiki image"] textSep:[11, 12, "|"] text:[3, 11, "alt text"] linkClose:[22, 24, "]]"]
+      Text[3, 22] chars:[3, 22, "alt t … image"]
+````````````````````````````````
+
+
+wiki image with text, images first option
+
+```````````````````````````````` example(WikiImages Source Position Attribute: 3) options(wiki-images, src-pos, links-first)
+![[wiki image|alt text]]
+.
+<p md-pos="0-24"><img src="wiki-image" alt="alt text" md-pos="0-24" /></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    WikiImage[0, 24] linkOpen:[0, 3, "![["] text:[14, 22, "alt text"] textSep:[13, 14, "|"] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[22, 24, "]]"]
+      Text[3, 22] chars:[3, 22, "wiki  …  text"]
 ````````````````````````````````
 
 

@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 
 import java.util.Objects;
 import java.util.Stack;
-import java.util.function.Consumer;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     private final boolean isReversed;
@@ -70,7 +70,6 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
         result = null;
     }
 
-    @Override
     public void forEachRemaining(Consumer<? super Node> consumer) {
         Objects.requireNonNull(consumer);
 

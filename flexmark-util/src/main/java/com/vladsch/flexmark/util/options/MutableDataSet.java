@@ -35,6 +35,12 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
+    public <T> MutableDataSet remove(DataKey<T> key) {
+        dataSet.remove(key);
+        return this;
+    }
+
+    @Override
     public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) {
         if (dataSet.containsKey(key)) {
             return key.getValue(dataSet.get(key));
@@ -54,7 +60,7 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public MutableDataHolder toMutable() {
+    public MutableDataSet toMutable() {
         return this;
     }
 
