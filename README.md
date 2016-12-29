@@ -263,7 +263,7 @@ Progress
     - Publishing
         - [x] Abbreviations
         - [x] Footnotes
-        - [ ] Definitions
+        - [x] Definitions
         - [x] Table of Contents
     - Typographic
         - [ ] Quotes

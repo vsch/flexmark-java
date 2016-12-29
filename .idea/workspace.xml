@@ -13,10 +13,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7f9c9c3d-8ee5-4398-b959-7b2654f5c056" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/Definition_List_Overview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-exported-files.xml" afterPath="$PROJECT_DIR$/.idea/markdown-exported-files.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" afterPath="$PROJECT_DIR$/.idea/markdown-navigator/profiles_settings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="flexmark-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,13 +108,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="overview.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.md">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="272">
-                <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-                <folding />
+            <state split_layout="FIRST">
+              <first_editor relative-caret-position="4420">
+                <caret line="265" column="17" lean-forward="true" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+                <folding>
+                  <marker date="1482980607000" expanded="true" signature="3549:3809" ph="..." />
+                  <marker date="1482980607000" expanded="true" signature="12065:12227" ph="..." />
+                </folding>
               </first_editor>
               <second_editor />
             </state>
@@ -406,7 +407,6 @@
         <option value="$PROJECT_DIR$/flexmark-util/src/main/java/com/vladsch/flexmark/util/Utils.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/src/main/java/com/vladsch/flexmark/ext/definition/internal/DefinitionOptions.java" />
         <option value="$PROJECT_DIR$/flexmark/src/main/java/com/vladsch/flexmark/parser/Parser.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/FlexmarkJavaAssets/issues/24.md" />
         <option value="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiLink.java" />
         <option value="$PROJECT_DIR$/flexmark-ext-wikilink/src/main/java/com/vladsch/flexmark/ext/wikilink/WikiImage.java" />
@@ -457,6 +457,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_2.html" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch_14.md" />
         <option value="$PROJECT_DIR$/VERSION.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -1407,13 +1408,6 @@
       <workItem from="1480663636287" duration="287000" />
       <workItem from="1480691917155" duration="5000" />
     </task>
-    <task id="LOCAL-00115" summary="restore travis.yml">
-      <created>1470584765739</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1470584765739</updated>
-    </task>
     <task id="LOCAL-00116" summary="add option">
       <created>1474502890692</created>
       <option name="number" value="00116" />
@@ -1750,7 +1744,14 @@
       <option name="project" value="LOCAL" />
       <updated>1482908723242</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="add markdown navigator export profiles">
+      <created>1482980554831</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1482980554831</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers>
       <GitHub shared="false" url="https://github.com">
         <option name="assignedIssuesOnly" value="false" />
@@ -1971,7 +1972,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix missing dep for strikethrough" />
     <MESSAGE value="add pegdown issues" />
     <MESSAGE value="add flexmark issues" />
     <MESSAGE value="update" />
@@ -1996,7 +1996,8 @@
     <MESSAGE value="fix #28" />
     <MESSAGE value="partial definition list implementation. DefinitionItemBlockParser done." />
     <MESSAGE value="clean up left over java 1.8 interface and method references" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up left over java 1.8 interface and method references" />
+    <MESSAGE value="add markdown navigator export profiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="add markdown navigator export profiles" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2964,20 +2965,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="340">
-            <caret line="87" column="50" lean-forward="false" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
-            <folding>
-              <marker date="1482290194000" expanded="true" signature="3549:3809" ph="..." />
-              <marker date="1482290194000" expanded="true" signature="12065:12227" ph="..." />
-            </folding>
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FlexmarkJavaAssets/issues/24.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
@@ -3127,7 +3114,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html" />
     <entry file="file://$PROJECT_DIR$/flexmark-java.wiki/ext/Definition-List-Extension.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="SPLIT">
@@ -3453,6 +3439,28 @@
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_2.html" />
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_14.md" />
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.html">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownHtmlPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="425">
+            <caret line="25" column="17" lean-forward="true" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/VERSION.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -3474,12 +3482,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flexmark-ext-definition/src/main/javadoc/overview.md">
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="272">
-            <caret line="16" column="29" lean-forward="false" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
-            <folding />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="4420">
+            <caret line="265" column="17" lean-forward="true" selection-start-line="265" selection-start-column="17" selection-end-line="265" selection-end-column="17" />
+            <folding>
+              <marker date="1482980607000" expanded="true" signature="3549:3809" ph="..." />
+              <marker date="1482980607000" expanded="true" signature="12065:12227" ph="..." />
+            </folding>
           </first_editor>
           <second_editor />
         </state>
