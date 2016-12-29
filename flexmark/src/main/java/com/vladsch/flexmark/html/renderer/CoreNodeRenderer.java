@@ -32,7 +32,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
     public CoreNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
-        this.listOptions = new ListOptions(options);
+        this.listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -370,15 +370,19 @@ public class CoreNodeRenderer implements NodeRenderer {
         context.renderChildren(node);
     }
 
+    private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
+        html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
+            @Override
+            public void run() {
+                renderTextBlockParagraphLines(node, context, html);
+            }
+        });
+    }
+
     private void render(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
-        boolean inTightList = listOptions.isInTightListItem(node);
-        if (!inTightList && (!(node.getParent() instanceof ListItem) || !((ListItem) node.getParent()).isParagraphWrappingDisabled())) {
-            html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
-                @Override
-                public void run() {
-                    renderTextBlockParagraphLines(node, context, html);
-                }
-            });
+        if (!(node.getParent() instanceof ParagraphItemContainer)
+                || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+            renderLooseParagraph(node, context, html);
         } else {
             renderTextBlockParagraphLines(node, context, html);
         }

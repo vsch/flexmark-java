@@ -1,10 +1,12 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public abstract class ListItem extends Block {
+public abstract class ListItem extends Block implements ParagraphItemContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     private boolean tight = true;
     private boolean hadBlankAfterItemParagraph = false;
@@ -46,8 +48,19 @@ public abstract class ListItem extends Block {
         return !isTight();
     }
 
-    public boolean isParagraphWrappingDisabled() {
-        return false;
+    public boolean isParagraphInTightListItem(Paragraph node) {
+        if (!isTight()) return false;
+
+        // see if this is the first paragraph child item
+        Node child = getFirstChild();
+        while (child != null && !(child instanceof Paragraph)) child = child.getNext();
+        return child == node;
+    }
+
+    @Override
+    public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
+        assert node.getParent() == this;
+        return listOptions.isInTightListItem(node);
     }
 
     public boolean isInTightList() {
@@ -61,15 +74,6 @@ public abstract class ListItem extends Block {
     @SuppressWarnings("SameParameterValue")
     public void setHadBlankAfterItemParagraph(boolean hadBlankAfterItemParagraph) {
         this.hadBlankAfterItemParagraph = hadBlankAfterItemParagraph;
-    }
-
-    public boolean isParagraphInTightListItem(Paragraph node) {
-        if (!isTight()) return false;
-
-        // see if this is the first paragraph child item
-        Node child = getFirstChild();
-        while (child != null && !(child instanceof Paragraph)) child = child.getNext();
-        return child == node;
     }
 
     @Override

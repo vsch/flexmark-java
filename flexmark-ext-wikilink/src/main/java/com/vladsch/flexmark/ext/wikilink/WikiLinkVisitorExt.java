@@ -11,7 +11,7 @@ public class WikiLinkVisitorExt {
                     public void visit(WikiLink node) {
                         visitor.visit(node);
                     }
-                })
+                }),
         };
     }
 }

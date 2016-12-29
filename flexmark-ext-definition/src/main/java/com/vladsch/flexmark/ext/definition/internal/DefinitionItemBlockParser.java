@@ -80,7 +80,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
 
         BasedSequence rest = line.subSequence(markerIndex, line.length());
         final char c1 = rest.firstChar();
-        if (c1 != ':' && c1 != '~') {
+        if (!(c1 == ':' && options.colonMarker) && !(c1 == '~' && options.tildeMarker)) {
             return null;
         }
 

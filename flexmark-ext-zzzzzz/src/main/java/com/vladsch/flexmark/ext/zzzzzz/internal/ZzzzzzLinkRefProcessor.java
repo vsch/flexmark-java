@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
@@ -49,12 +50,12 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
         }
 
         @Override
-        public boolean getWantExclamationPrefix() {
+        public boolean getWantExclamationPrefix(DataHolder options) {
             return WANT_EXCLAMATION_PREFIX;
         }
 
         @Override
-        public int getBracketNestingLevel() {
+        public int getBracketNestingLevel(DataHolder options) {
             return BRACKET_NESTING_LEVEL;
         }
     }

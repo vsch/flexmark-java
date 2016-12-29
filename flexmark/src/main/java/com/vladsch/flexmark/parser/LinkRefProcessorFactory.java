@@ -2,6 +2,7 @@ package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
  * Processing of elements which are based on a link ref: [] or ![]
@@ -12,8 +13,9 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * Whether the image ref is desired, if not then ! will be stripped off the prefix and treated as plain text
      *
      * @return true if ! is part of the desired element, false otherwise
+     * @param options
      */
-    boolean getWantExclamationPrefix();
+    boolean getWantExclamationPrefix(DataHolder options);
 
     /**
      * Whether the element consists of nested [] inside the link ref. For example Wiki link [[]] processor would return 1
@@ -23,8 +25,9 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * allow outer one to match the desired element
      *
      * @return nesting level for references, {@code >0} for nesting
+     * @param options
      */
-    int getBracketNestingLevel();
+    int getBracketNestingLevel(DataHolder options);
 
     /**
      * Create a link ref processor for the document

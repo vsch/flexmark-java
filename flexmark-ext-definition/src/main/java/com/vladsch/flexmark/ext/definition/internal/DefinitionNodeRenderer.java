@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
@@ -51,15 +52,29 @@ public class DefinitionNodeRenderer implements NodeRenderer {
         html.unIndent().tag("/dl");
     }
 
-    private void render(DefinitionTerm node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("dt").indent();
-        context.renderChildren(node);
-        html.unIndent().tag("/dt");
+    private void render(final DefinitionTerm node, final NodeRendererContext context, HtmlWriter html) {
+        final Node childText = node.getFirstChild();
+        if (childText != null) {
+            html.srcPosWithEOL(childText.getChars()).withAttr().withCondIndent().tagLine("dt", new Runnable() {
+                @Override
+                public void run() {
+                    context.render(childText);
+                }
+            });
+        }
+
+        for (Node child : node.getChildren()) {
+            if (child == childText) continue;
+            context.render(child);
+        }
     }
 
-    private void render(DefinitionItem node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("dd").indent();
-        context.renderChildren(node);
-        html.unIndent().tag("/dd");
+    private void render(final DefinitionItem node, final NodeRendererContext context, HtmlWriter html) {
+        html.srcPosWithEOL(node.getChars()).withAttr().withCondIndent().tagLine("dd", new Runnable() {
+            @Override
+            public void run() {
+                context.renderChildren(node);
+            }
+        });
     }
 }

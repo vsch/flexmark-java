@@ -28,7 +28,7 @@ public class TaskListNodeRenderer implements NodeRenderer {
         this.itemClass = options.get(TaskListExtension.ITEM_CLASS);
         this.looseItemClass = options.get(TaskListExtension.LOOSE_ITEM_CLASS);
         this.paragraphClass = options.get(TaskListExtension.PARAGRAPH_CLASS);
-        this.listOptions = new ListOptions(options);
+        this.listOptions = ListOptions.getFrom(options);
     }
 
     @Override

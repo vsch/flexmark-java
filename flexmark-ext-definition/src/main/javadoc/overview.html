@@ -1,62 +1,23 @@
 <html>
 <head>
-<title>overview.md</title>
 </head>
 <body>
 <article class="markdown-body">
 <p>flexmark-java extension for definition list processing</p>
 <p>Converts definition syntax of
-<a href="https://michelf.ca/projects/php-markdown/extra/#def-list">Php Markdown Extra Def List</a> into
-<code>&lt;dl&gt;&lt;dt&gt;&lt;/dt&gt;&lt;dd&gt;&lt;/dd&gt;&lt;/dl&gt;</code> html</p>
-<p>Converts definition lists into definition list nodes. Definition terms have an optional <code>:</code> at
-the end. Definition items can be preceded by <code>:</code> or <code>~</code></p>
+<a href="https://michelf.ca/projects/php-markdown/extra/#def-list">Php Markdown Extra Definition List</a>
+into <code>&lt;dl&gt;&lt;/dl&gt;</code> html</p>
+<p>Definition items can be preceded by <code>:</code> or <code>~</code></p>
 <p>Definition list is one or more definition terms with one or more definitions.</p>
 <pre><code class="markdown">Definition Term
 : Definition of above term
 : Another definition of above term
 </code></pre>
-<p>Definitions terms can have not definitions if they are not the last term before a definition:</p>
+<p>Definitions terms can have no definitions if they are not the last term before a definition:</p>
 <pre><code class="markdown">Definition Term without definition  
 Definition Term  
 : Definition of above term  
 : Another definition of above term
-</code></pre>
-<p>A blank line between the definition term and definition, or the definition term and previous
-definition term will create a &quot;loose&quot; definition by wrapping its text in <code>&lt;p&gt;&lt;/p&gt;</code>.</p>
-<pre><code class="markdown">Definition Term
-
-: Loose Definition of above term  
-: Tight definition of above term
-
-: Another loose definition term
-</code></pre>
-<p>Will create:</p>
-<pre><code class="html">&lt;dl&gt;
-  &lt;dt&gt;Definition Term&lt;/dt&gt;
-  &lt;dd&gt;&lt;p&gt;Loose Definition of above term&lt;/p&gt;&lt;/dd&gt;
-  &lt;dd&gt;Tight definition of above term&lt;/dd&gt;
-  &lt;dd&gt;&lt;p&gt;Another loose definition term&lt;/p&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-</code></pre>
-<p>Lazy continuation of definitions is supported and definition terms which follow a definition
-must be separated from it by a blank line.</p>
-<pre><code class="markdown">Definition Term  
-: Definition for Definition Term
-
-Another Definition Term  
-: Definition for Another Definition Term
-</code></pre>
-<p>Inline markdown is allowed in both terms and definitions. Definitions can contain any other
-markdown elements provided these are indented as per list indentation rules.</p>
-<p>Multiple definition terms cannot be separated by blank lines since all but the last term will be
-treated as paragraph text:</p>
-<pre><code class="markdown">Not a definition term.
-
-Neither is this.
-
-Definition Term
-Another Definition Term
-: Definition
 </code></pre>
 </article>
 </body>

@@ -38,6 +38,9 @@ public class Document extends Block implements MutableDataHolder {
     public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) { return dataSet.getOrCompute(key, factory); }
 
     @Override
+    public <T> MutableDataHolder remove(final DataKey<T> key) { return dataSet.remove(key); }
+
+    @Override
     public <T> MutableDataHolder set(DataKey<T> key, T value) { return dataSet.set(key, value);}
 
     @Override

@@ -14,8 +14,8 @@ public interface MutableDataHolder extends DataHolder {
     <T> T get(DataKey<T> key);
 
     /**
-     *
      * Store the given value for the key
+     *
      * @param <T>  data type of the data referred by the key
      * @param key   data key
      * @param value value to store
@@ -24,8 +24,17 @@ public interface MutableDataHolder extends DataHolder {
     <T> MutableDataHolder set(DataKey<T> key, T value);
 
     /**
+     * Remove the stored value for the key, used to force to default or to force recompute
      *
+     * @param <T>  data type of the data referred by the key
+     * @param key   data key to remove
+     * @return mutable data holder for chained calls
+     */
+    <T> MutableDataHolder remove(DataKey<T> key);
+
+    /**
      * Store the given value for the key
+     *
      * @param dataSetter   data setter which will set values
      * @return mutable data holder for chained calls
      */

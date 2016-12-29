@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.ListItem;
-import com.vladsch.flexmark.ast.OrderedListItem;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
@@ -26,9 +26,13 @@ public class TaskListItem extends ListItem {
     }
 
     @Override
-    public boolean isParagraphWrappingDisabled() {
-        // we handle our own paragraph wrapping
-        return true;
+    public boolean isParagraphWrappingDisabled(Paragraph node, ListOptions listOptions, DataHolder options) {
+        assert node.getParent() == this;
+
+        // see if this is the first paragraph child item we handle our own paragraph wrapping for that one
+        Node child = getFirstChild();
+        while (child != null && !(child instanceof Paragraph)) child = child.getNext();
+        return child == node;
     }
 
     public TaskListItem() {

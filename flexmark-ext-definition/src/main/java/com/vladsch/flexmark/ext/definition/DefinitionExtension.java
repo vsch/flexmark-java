@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.definition;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionItemBlockParser;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionListBlockPreProcessor;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -25,7 +26,9 @@ import com.vladsch.flexmark.util.options.DataKey;
 public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // public static final DataKey<DefinitionRepository> DEFINITIONS = new DataKey<>("DEFINITIONS", DefinitionRepository::new);
     // public static final DataKey<KeepType> DEFINITIONS_KEEP = new DataKey<>("DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
+    public static final DataKey<Boolean> COLON_MARKER = new DataKey<>("COLON_MARKER", true);
     public static final DataKey<Integer> MARKER_SPACES = new DataKey<>("MARKER_SPACE", 1);
+    public static final DataKey<Boolean> TILDE_MARKER = new DataKey<>("TILDE_MARKER", true);
 
     private DefinitionExtension() {
     }
@@ -37,6 +40,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new DefinitionItemBlockParser.Factory());
+        parserBuilder.blockPreProcessorFactory(new DefinitionListBlockPreProcessor.Factory());
     }
 
     @Override

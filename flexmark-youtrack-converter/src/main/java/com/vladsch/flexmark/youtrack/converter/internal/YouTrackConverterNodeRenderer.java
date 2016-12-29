@@ -32,7 +32,7 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
     public YouTrackConverterNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
-        this.listOptions = new ListOptions(options);
+        this.listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -288,17 +288,20 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
         html.line();
     }
 
-    private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
-        boolean inTightList = listOptions.isInTightListItem(node);
-        //if (node.getParent() instanceof ListItem && node.getParent().getFirstChild() == node) {
-        if (!inTightList && (node.getParent().getFirstChild() != node || !(node.getParent() instanceof ListItem) || !((ListItem) node.getParent()).isParagraphWrappingDisabled())) {
-            renderTextBlockParagraphLines(node, context, html);
+    private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
+        renderTextBlockParagraphLines(node, context, html);
 
-            if (inBlockQuote > 0 && node.getNext() == null) {
-                html.line();
-            } else {
-                html.blankLine();
-            }
+        if (inBlockQuote > 0 && node.getNext() == null) {
+            html.line();
+        } else {
+            html.blankLine();
+        }
+    }
+
+    private void render(Paragraph node, NodeRendererContext context, HtmlWriter html) {
+        if (!(node.getParent() instanceof ParagraphItemContainer)
+                || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+            renderLooseParagraph(node, context, html);
         } else {
             renderTextBlockParagraphLines(node, context, html);
         }

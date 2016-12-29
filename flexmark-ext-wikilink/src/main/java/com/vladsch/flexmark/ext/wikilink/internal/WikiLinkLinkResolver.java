@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
 
@@ -26,9 +26,10 @@ public class WikiLinkLinkResolver implements LinkResolver {
     public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
         if (link.getLinkType() == WIKI_LINK) {
             StringBuilder sb = new StringBuilder();
+            final boolean isWikiImage = node instanceof WikiImage;
             String wikiLink = link.getUrl();
             int iMax = wikiLink.length();
-            sb.append(options.linkPrefix);
+            sb.append(isWikiImage ? options.imagePrefix : options.linkPrefix);
 
             for (int i = 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
@@ -40,8 +41,14 @@ public class WikiLinkLinkResolver implements LinkResolver {
                 }
             }
 
-            sb.append(options.linkFileExtension);
-            return new ResolvedLink(LinkType.LINK, sb.toString(), LinkStatus.UNCHECKED);
+            if (isWikiImage) {
+                sb.append(options.imageFileExtension);
+                return new ResolvedLink(LinkType.IMAGE, sb.toString(), LinkStatus.UNCHECKED);
+            }
+            else {
+                sb.append(options.linkFileExtension);
+                return new ResolvedLink(LinkType.LINK, sb.toString(), LinkStatus.UNCHECKED);
+            }
         }
 
         return link;

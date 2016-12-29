@@ -8,10 +8,11 @@ import com.vladsch.flexmark.util.options.DataHolder;
 @SuppressWarnings("WeakerAccess")
 class DefinitionOptions {
     public final int markerSpaces;
+    public final boolean tildeMarker;
+    public final boolean colonMarker;
     public final ParserEmulationFamily parserEmulationFamily;
     public final boolean autoLoose;
     public final boolean autoLooseOneLevelLists;
-    public final boolean delimiterMismatchToNewList;
     public final boolean looseOnPrevLooseItem;
     public final boolean looseWhenHasLooseSubItem;
     public final boolean looseWhenHasTrailingBlankLine;
@@ -22,10 +23,11 @@ class DefinitionOptions {
 
     public DefinitionOptions(DataHolder options) {
         markerSpaces = options.get(DefinitionExtension.MARKER_SPACES);
+        tildeMarker = options.get(DefinitionExtension.TILDE_MARKER);
+        colonMarker = options.get(DefinitionExtension.COLON_MARKER);
         parserEmulationFamily = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
         autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);
-        delimiterMismatchToNewList = Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST.getFrom(options);
         looseOnPrevLooseItem = Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM.getFrom(options);
         looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
         looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);

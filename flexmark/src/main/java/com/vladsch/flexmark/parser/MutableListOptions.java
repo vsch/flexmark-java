@@ -10,8 +10,7 @@ public class MutableListOptions extends ListOptions {
     }
 
     public MutableListOptions(DataHolder options) {
-        super(options);
-        itemInterrupt = new MutableItemInterrupt(super.getItemInterrupt());
+        this(ListOptions.getFrom(options));
     }
 
     MutableListOptions(ListOptions other) {

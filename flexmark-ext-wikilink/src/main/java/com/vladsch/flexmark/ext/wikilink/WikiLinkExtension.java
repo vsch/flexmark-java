@@ -28,7 +28,10 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
     public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
     public static final DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
+    public static final DataKey<String> IMAGE_PREFIX = new DataKey<>("IMAGE_PREFIX", "");
+    public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<>("IMAGE_LINKS", false);
     public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");
+    public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<>("IMAGE_FILE_EXTENSION", "");
     public static final LinkType WIKI_LINK = new LinkType("WIKI");
 
     private WikiLinkExtension() {

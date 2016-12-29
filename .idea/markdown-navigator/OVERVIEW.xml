@@ -44,7 +44,7 @@
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="false">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true">
         <GeneratorProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>
@@ -57,7 +57,9 @@
         <StylesheetProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
         </StylesheetProvider>
-        <ScriptProviders />
+        <ScriptProviders>
+          <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
+        </ScriptProviders>
         <cssText />
       </CssSettings>
       <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" />
