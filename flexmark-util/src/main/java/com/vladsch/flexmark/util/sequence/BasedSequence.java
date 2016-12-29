@@ -551,6 +551,22 @@ public interface BasedSequence extends CharSequence {
     int startOfLineAnyEOL(int index);
 
     /**
+     * Get the line characters at given index, line delimited by \n
+     *
+     * @param index index at which to get the line
+     * @return sub-sequence for the line containing index
+     */
+    BasedSequence lineAt(int index);
+
+    /**
+     * Get the line characters at given index, line delimited by \n, \r or \r\n
+     *
+     * @param index index at which to get the line
+     * @return sub-sequence for the line containing index
+     */
+    BasedSequence lineAtAnyEOL(int index);
+
+    /**
      * Get the unescaped string of this sequence content
      *
      * @return unescaped text

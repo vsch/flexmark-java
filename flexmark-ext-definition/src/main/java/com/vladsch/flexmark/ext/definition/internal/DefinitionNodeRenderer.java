@@ -58,14 +58,9 @@ public class DefinitionNodeRenderer implements NodeRenderer {
             html.srcPosWithEOL(childText.getChars()).withAttr().withCondIndent().tagLine("dt", new Runnable() {
                 @Override
                 public void run() {
-                    context.render(childText);
+                    context.renderChildren(node);
                 }
             });
-        }
-
-        for (Node child : node.getChildren()) {
-            if (child == childText) continue;
-            context.render(child);
         }
     }
 

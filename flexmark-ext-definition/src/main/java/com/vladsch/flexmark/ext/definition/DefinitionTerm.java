@@ -1,10 +1,7 @@
 
 package com.vladsch.flexmark.ext.definition;
 
-import com.vladsch.flexmark.ast.CustomBlock;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.Paragraph;
-import com.vladsch.flexmark.ast.ParagraphItemContainer;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -12,7 +9,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Definition block node
  */
-public class DefinitionTerm extends CustomBlock implements ParagraphItemContainer {
+public class DefinitionTerm extends ListItem implements ParagraphItemContainer {
 
     @Override
     public void getAstExtra(StringBuilder out) {

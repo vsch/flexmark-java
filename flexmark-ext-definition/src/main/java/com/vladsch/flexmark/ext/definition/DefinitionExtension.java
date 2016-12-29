@@ -4,6 +4,7 @@ package com.vladsch.flexmark.ext.definition;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionItemBlockParser;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionListBlockPreProcessor;
+import com.vladsch.flexmark.ext.definition.internal.DefinitionListItemBlockPreProcessor;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -40,6 +41,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new DefinitionItemBlockParser.Factory());
+        parserBuilder.blockPreProcessorFactory(new DefinitionListItemBlockPreProcessor.Factory());
         parserBuilder.blockPreProcessorFactory(new DefinitionListBlockPreProcessor.Factory());
     }
 

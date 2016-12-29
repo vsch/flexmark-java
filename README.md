@@ -1,5 +1,5 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
-===============================================================================
+=========================================================================================
 
 **flexmark-java** is a Java implementation of CommonMark 0.27 spec parser using the blocks
 first, inlines after Markdown parsing architecture.
@@ -304,10 +304,11 @@ Progress
         .
         <p><a href="baz*">foo *bar</a></p>
         .
-        Document[0, 17]
-          Paragraph[0, 17]
-            Link[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] linkOpen:[0, 0] urlOpen:[0, 0] url:[11, 15, "baz*"] urlClose:[0, 0] titleOpen:[0, 0] title:[0, 0] titleClose:[0, 0] linkClose:[0, 0]
-              Text[1, 9] chars:[1, 9, "foo *bar"]
+        Document[0, 14]
+          Paragraph[0, 14]
+            Text[0, 1] chars:[0, 1, "*"]
+            Link[1, 13] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 12, "/uri"] pageRef:[8, 12, "/uri"] linkClose:[12, 13, ")"]
+              Text[2, 6] chars:[2, 6, "foo*"]
         ````````````````````````````````
 
     Whitespace is left out. So all spans of text not in a node are implicitly white space.
@@ -422,10 +423,11 @@ Copyright (c) 2015-2016 Atlassian and others.
 
 Copyright (c) 2016, Vladimir Schneider,
 
-BSD (2-clause) licensed, see LICENSE.txt file.
+BSD (2-clause) licensed, see [LICENSE.txt] file.
 
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
+[LICENSE.txt]: LICENSE.txt
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java

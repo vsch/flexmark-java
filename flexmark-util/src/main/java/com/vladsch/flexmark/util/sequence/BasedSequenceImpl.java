@@ -526,30 +526,40 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return startOfDelimitedByAny(EOL_CHARS, index);
     }
 
+    @Override
+    public BasedSequence lineAt(final int index) {
+        return subSequence(startOfLine(index), endOfLine(index));
+    }
+
+    @Override
+    public BasedSequence lineAtAnyEOL(final int index) {
+        return subSequence(startOfLineAnyEOL(index), endOfLineAnyEOL(index));
+    }
+
     // @formatter:off
-    @Override public int countLeading(char c)                                   { return countChars(c, 0, length()); }
-    @Override public int countLeadingNot(char c)                                { return countNotChars(c, 0, length()); }
-    @Override public int countLeading(char c, int fromIndex)                   { return countChars(c, fromIndex, length()); }
-    @Override public int countLeadingNot(char c, int fromIndex)                { return countNotChars(c, fromIndex, length()); }
-    @Override public int countLeading(char c, int fromIndex, int endIndex)     { return countChars(c, fromIndex, endIndex); }
-    @Override public int countLeadingNot(char c, int fromIndex, int endIndex)  { return countNotChars(c, fromIndex, endIndex); }
+    @Override public int countLeading(char c)                                       { return countChars(c, 0, length()); }
+    @Override public int countLeadingNot(char c)                                    { return countNotChars(c, 0, length()); }
+    @Override public int countLeading(char c, int fromIndex)                        { return countChars(c, fromIndex, length()); }
+    @Override public int countLeadingNot(char c, int fromIndex)                     { return countNotChars(c, fromIndex, length()); }
+    @Override public int countLeading(char c, int fromIndex, int endIndex)          { return countChars(c, fromIndex, endIndex); }
+    @Override public int countLeadingNot(char c, int fromIndex, int endIndex)       { return countNotChars(c, fromIndex, endIndex); }
 
-    @Override public int countTrailing(char c)                                  { return countCharsReversed(c, 0, length()); }
-    @Override public int countTrailingNot(char c)                               { return countNotCharsReversed(c, 0, length()); }
-    @Override public int countTrailing(char c, int fromIndex)                  { return countCharsReversed(c, 0, fromIndex); }
-    @Override public int countTrailingNot(char c, int fromIndex)               { return countNotCharsReversed(c, 0, fromIndex); }
-    @Override public int countTrailing(char c, int startIndex, int fromIndex)    { return countCharsReversed(c, startIndex, fromIndex); }
-    @Override public int countTrailingNot(char c, int startIndex, int fromIndex) { return countNotCharsReversed(c, startIndex, fromIndex); }
+    @Override public int countTrailing(char c)                                      { return countCharsReversed(c, 0, length()); }
+    @Override public int countTrailingNot(char c)                                   { return countNotCharsReversed(c, 0, length()); }
+    @Override public int countTrailing(char c, int fromIndex)                       { return countCharsReversed(c, 0, fromIndex); }
+    @Override public int countTrailingNot(char c, int fromIndex)                    { return countNotCharsReversed(c, 0, fromIndex); }
+    @Override public int countTrailing(char c, int startIndex, int fromIndex)       { return countCharsReversed(c, startIndex, fromIndex); }
+    @Override public int countTrailingNot(char c, int startIndex, int fromIndex)    { return countNotCharsReversed(c, startIndex, fromIndex); }
 
-    @Override public int countChars(char c)                                     { return countChars(c, 0, length()); }
-    @Override public int countNotChars(char c)                                  { return countNotChars(c, 0, length()); }
-    @Override public int countChars(char c, int fromIndex)                     { return countChars(c, fromIndex, length()); }
-    @Override public int countNotChars(char c, int fromIndex)                  { return countNotChars(c, fromIndex, length()); }
+    @Override public int countChars(char c)                                         { return countChars(c, 0, length()); }
+    @Override public int countNotChars(char c)                                      { return countNotChars(c, 0, length()); }
+    @Override public int countChars(char c, int fromIndex)                          { return countChars(c, fromIndex, length()); }
+    @Override public int countNotChars(char c, int fromIndex)                       { return countNotChars(c, fromIndex, length()); }
 
-    @Override public int countCharsReversed(char c)                             { return countCharsReversed(c, 0, length()); }
-    @Override public int countNotCharsReversed(char c)                          { return countNotCharsReversed(c, 0, length()); }
-    @Override public int countCharsReversed(char c, int fromIndex)             { return countCharsReversed(c, 0, fromIndex); }
-    @Override public int countNotCharsReversed(char c, int fromIndex)          { return countNotCharsReversed(c, 0, fromIndex); }
+    @Override public int countCharsReversed(char c)                                 { return countCharsReversed(c, 0, length()); }
+    @Override public int countNotCharsReversed(char c)                              { return countNotCharsReversed(c, 0, length()); }
+    @Override public int countCharsReversed(char c, int fromIndex)                  { return countCharsReversed(c, 0, fromIndex); }
+    @Override public int countNotCharsReversed(char c, int fromIndex)               { return countNotCharsReversed(c, 0, fromIndex); }
     // @formatter:on
 
     @Override

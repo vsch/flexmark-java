@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.9.4](#094)
 - [0.9.3](#093)
 - [0.9.2](#092)
 - [0.9.1](#091)
@@ -97,6 +98,16 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.9.4
+-----
+
+- Fix: Definition items were included as child nodes of definition terms.
+
+- Fix: Definition list character range was not being updated
+
+- Fix: Definition list to respect the auto-loose setting for lists. If one definition item in
+  the list is loose then all items will be loose. ie. have their text wrapped in `<p></p>`
 
 0.9.3
 -----
