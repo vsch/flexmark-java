@@ -78,6 +78,6 @@
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
-    <option name="GENERATE_NO_WARNINGS" value="true" />
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
   </component>
 </project>

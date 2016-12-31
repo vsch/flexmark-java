@@ -30,19 +30,14 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             final DefinitionItem definitionItem = (DefinitionItem) block;
             final Node previous = block.getPrevious();
 
-            definitionItem.unlink();
-
             if (previous instanceof Paragraph) {
                 final Paragraph paragraph = (Paragraph) previous;
                 Node paragraphPrevious = paragraph.getPrevious();
                 final Node paragraphParent = paragraph.getParent();
 
+                definitionItem.unlink();
                 paragraph.unlink();
                 state.blockRemovedWithChildren(paragraph);
-
-                if (paragraphPrevious == null) {
-                    paragraphPrevious = paragraphParent.getLastChild();
-                }
 
                 final boolean hadPreviousList = paragraphPrevious instanceof DefinitionList;
                 final DefinitionList definitionList = new DefinitionList();
@@ -87,12 +82,21 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                     if (paragraphPrevious != null) {
                         paragraphPrevious.insertAfter(definitionList);
                     } else {
-                        paragraphParent.appendChild(definitionList);
+                        if (paragraphParent.getFirstChild() != null) {
+                            paragraphParent.getFirstChild().insertBefore(definitionList);
+                        } else {
+                            paragraphParent.appendChild(definitionList);
+                        }
                     }
 
                     definitionList.setCharsFromContent();
                     state.blockAddedWithChildren(definitionList);
                 }
+            } else if (previous instanceof DefinitionList) {
+                final DefinitionList previousList = (DefinitionList) previous;
+                definitionItem.unlink();
+                previousList.appendChild(definitionItem);
+                previousList.setCharsFromContent();
             }
         }
     }

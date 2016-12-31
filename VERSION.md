@@ -100,6 +100,11 @@ Next Release To Do List
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
 
+0.10.1
+------
+
+- Fix: definitions would loose consecutive definition items without intervening defintion terms.
+
 0.10.0
 ------
 

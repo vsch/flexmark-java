@@ -366,24 +366,32 @@ Term 2
 <dl>
   <dt>Term 1</dt>
   <dd>Definition 1</dd>
+  <dd>Definition 2</dd>
   <dt>Term 2</dt>
   <dd>Definition 3</dd>
+  <dd>Definition 4</dd>
 </dl>
 .
 Document[0, 84]
-  DefinitionList[0, 66] isTight
+  DefinitionList[0, 83] isTight
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
     DefinitionItem[7, 24] open:[7, 8, ":"] isTight
       Paragraph[11, 24]
         Text[11, 23] chars:[11, 23, "Defin … ion 1"]
+    DefinitionItem[24, 41] open:[24, 25, ":"] isTight hadBlankLineAfter
+      Paragraph[28, 41]
+        Text[28, 40] chars:[28, 40, "Defin … ion 2"]
     DefinitionTerm[42, 49]
       Paragraph[42, 49]
         Text[42, 48] chars:[42, 48, "Term 2"]
     DefinitionItem[49, 66] open:[49, 50, ":"] isTight
       Paragraph[53, 66]
         Text[53, 65] chars:[53, 65, "Defin … ion 3"]
+    DefinitionItem[66, 83] open:[66, 67, ":"] isTight hadBlankLineAfter
+      Paragraph[70, 83]
+        Text[70, 82] chars:[70, 82, "Defin … ion 4"]
 ````````````````````````````````
 
 
@@ -407,13 +415,17 @@ Term 2
   <dt>Term 1</dt>
   <dd>Definition 1 line 1 ...
   Definition 1 line 2</dd>
+  <dd>Definition 2 line 1 ...
+  Definition 2 line 2</dd>
   <dt>Term 2</dt>
   <dd>Definition 3 line 2 ...
   Definition 3 line 2</dd>
+  <dd>Definition 4 line 2 ...
+  Definition 4 line 2</dd>
 </dl>
 .
 Document[0, 216]
-  DefinitionList[0, 163] isTight
+  DefinitionList[0, 215] isTight
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
@@ -422,6 +434,11 @@ Document[0, 216]
         Text[11, 34] chars:[11, 34, "Defin … 1 ..."]
         SoftLineBreak[34, 35]
         Text[35, 54] chars:[35, 54, "Defin … ine 2"]
+    DefinitionItem[55, 103] open:[55, 56, ":"] isTight hadBlankLineAfter
+      Paragraph[59, 103]
+        Text[59, 82] chars:[59, 82, "Defin … 1 ..."]
+        SoftLineBreak[82, 83]
+        Text[83, 102] chars:[83, 102, "Defin … ine 2"]
     DefinitionTerm[104, 111]
       Paragraph[104, 111]
         Text[104, 110] chars:[104, 110, "Term 2"]
@@ -430,6 +447,11 @@ Document[0, 216]
         Text[115, 138] chars:[115, 138, "Defin … 2 ..."]
         SoftLineBreak[138, 139]
         Text[143, 162] chars:[143, 162, "Defin … ine 2"]
+    DefinitionItem[163, 215] open:[163, 164, ":"] isTight hadBlankLineAfter
+      Paragraph[167, 215]
+        Text[167, 190] chars:[167, 190, "Defin … 2 ..."]
+        SoftLineBreak[190, 191]
+        Text[195, 214] chars:[195, 214, "Defin … ine 2"]
 ````````````````````````````````
 
 
@@ -584,9 +606,32 @@ Term 4
   <p>Definition 1 paragraph 2 line 1 ...
   Definition 1 paragraph 2 line 2</p>
   </dd>
+  <dd>
+  <p>Definition 2 paragraph 1 line 1 ...
+  Definition 2 paragraph 1 line 2 (lazy)</p>
+  </dd>
   <dt>Term 3</dt>
   <dd>
   <p>Definition 3 (no paragraph)</p>
+  </dd>
+  <dd>
+  <p>Definition 4 (no paragraph)</p>
+  </dd>
+  <dd>
+  <p>Definition 5 line 1 ...
+  Definition 5 line 2 (no paragraph)</p>
+  </dd>
+  <dd>
+  <p>Definition 6 paragraph 1 line 1 ...
+  Definition 6 paragraph 1 line 2</p>
+  </dd>
+  <dd>
+  <p>Definition 7 (no paragraph)</p>
+  </dd>
+  <dd>
+  <p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
+  Definition 8 paragraph 1 line 2</p>
+  <p>Definition 8 paragraph 2 line 1</p>
   </dd>
   <dt>Term 4</dt>
   <dd>
@@ -594,10 +639,13 @@ Term 4
   Definition 9 paragraph 1 line 2</p>
   <p>Definition 9 paragraph 2 line 1</p>
   </dd>
+  <dd>
+  <p>Definition 10 (no paragraph)</p>
+  </dd>
 </dl>
 .
 Document[0, 816]
-  DefinitionList[0, 783] isLoose
+  DefinitionList[0, 816] isLoose
     DefinitionTerm[0, 7]
       Paragraph[0, 7]
         Text[0, 6] chars:[0, 6, "Term 1"]
@@ -613,12 +661,40 @@ Document[0, 816]
         Text[103, 138] chars:[103, 138, "Defin … 1 ..."]
         SoftLineBreak[138, 139]
         Text[143, 174] chars:[143, 174, "Defin … ine 2"]
+    DefinitionItem[176, 255] open:[176, 177, ":"] isLoose hadBlankLineAfter
+      Paragraph[180, 255]
+        Text[180, 215] chars:[180, 215, "Defin … 1 ..."]
+        SoftLineBreak[215, 216]
+        Text[216, 254] chars:[216, 254, "Defin … lazy)"]
     DefinitionTerm[256, 263]
       Paragraph[256, 263]
         Text[256, 262] chars:[256, 262, "Term 3"]
     DefinitionItem[263, 295] open:[263, 264, ":"] isLoose
       Paragraph[267, 295]
         Text[267, 294] chars:[267, 294, "Defin … raph)"]
+    DefinitionItem[295, 327] open:[295, 296, ":"] isLoose
+      Paragraph[299, 327]
+        Text[299, 326] chars:[299, 326, "Defin … raph)"]
+    DefinitionItem[327, 394] open:[327, 328, ":"] isLoose hadBlankLineAfter
+      Paragraph[331, 394]
+        Text[331, 354] chars:[331, 354, "Defin … 1 ..."]
+        SoftLineBreak[354, 355]
+        Text[359, 393] chars:[359, 393, "Defin … raph)"]
+    DefinitionItem[395, 467] open:[395, 396, ":"] isLoose
+      Paragraph[399, 467]
+        Text[399, 434] chars:[399, 434, "Defin … 1 ..."]
+        SoftLineBreak[434, 435]
+        Text[435, 466] chars:[435, 466, "Defin … ine 2"]
+    DefinitionItem[467, 499] open:[467, 468, ":"] isLoose
+      Paragraph[471, 499]
+        Text[471, 498] chars:[471, 498, "Defin … raph)"]
+    DefinitionItem[499, 635] open:[499, 500, ":"] isLoose hadBlankLineAfter
+      Paragraph[503, 594]
+        Text[503, 557] chars:[503, 557, "Defin … ) ..."]
+        SoftLineBreak[557, 558]
+        Text[562, 593] chars:[562, 593, "Defin … ine 2"]
+      Paragraph[603, 635]
+        Text[603, 634] chars:[603, 634, "Defin … ine 1"]
     DefinitionTerm[640, 647]
       Paragraph[640, 647]
         Text[640, 646] chars:[640, 646, "Term 4"]
@@ -629,6 +705,9 @@ Document[0, 816]
         Text[710, 741] chars:[710, 741, "Defin … ine 2"]
       Paragraph[751, 783]
         Text[751, 782] chars:[751, 782, "Defin … ine 1"]
+    DefinitionItem[783, 816] open:[783, 784, ":"] isLoose
+      Paragraph[787, 816]
+        Text[787, 815] chars:[787, 815, "Defin … raph)"]
 ````````````````````````````````
 
 
@@ -847,6 +926,57 @@ Document[0, 75]
     DefinitionItem[45, 74] open:[45, 46, ":"] isTight hadBlankLineAfter
       Paragraph[49, 74]
         Text[49, 73] chars:[49, 73, "Defin … raph)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Definition List Extension: 22
+Definition Term
+: Definition of above term
+: Another definition of above term
+.
+<dl>
+  <dt>Definition Term</dt>
+  <dd>Definition of above term</dd>
+  <dd>Another definition of above term</dd>
+</dl>
+.
+Document[0, 78]
+  DefinitionList[0, 78] isTight
+    DefinitionTerm[0, 16]
+      Paragraph[0, 16]
+        Text[0, 15] chars:[0, 15, "Defin …  Term"]
+    DefinitionItem[16, 43] open:[16, 17, ":"] isTight
+      Paragraph[18, 43]
+        Text[18, 42] chars:[18, 42, "Defin …  term"]
+    DefinitionItem[43, 78] open:[43, 44, ":"] isTight
+      Paragraph[45, 78]
+        Text[45, 77] chars:[45, 77, "Anoth …  term"]
+````````````````````````````````
+
+
+```````````````````````````````` example Definition List Extension: 23
+Definition Term
+: Definition of above term
+: Another definition of above term
+
+.
+<dl>
+  <dt>Definition Term</dt>
+  <dd>Definition of above term</dd>
+  <dd>Another definition of above term</dd>
+</dl>
+.
+Document[0, 79]
+  DefinitionList[0, 78] isTight
+    DefinitionTerm[0, 16]
+      Paragraph[0, 16]
+        Text[0, 15] chars:[0, 15, "Defin …  Term"]
+    DefinitionItem[16, 43] open:[16, 17, ":"] isTight
+      Paragraph[18, 43]
+        Text[18, 42] chars:[18, 42, "Defin …  term"]
+    DefinitionItem[43, 78] open:[43, 44, ":"] isTight hadBlankLineAfter
+      Paragraph[45, 78]
+        Text[45, 77] chars:[45, 77, "Anoth …  term"]
 ````````````````````````````````
 
 

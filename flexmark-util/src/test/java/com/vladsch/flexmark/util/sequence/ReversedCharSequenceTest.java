@@ -34,7 +34,7 @@ public class ReversedCharSequenceTest {
         CharSequence test = ReversedCharSequence.of(orig);
 
         assertEquals(reved, test.toString());
-        assertEquals(orig, ReversedCharSequence.of(test));
+        assertEquals(orig, ReversedCharSequence.of(test).toString());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class ReversedCharSequenceTest {
         for (int i = 0; i < iMax; i++) {
             for (int j = iMax - i - 1; j >= 0 && j >= i; j--) {
                 assertEquals("subSequence(" + i + "," + j + ")", reved.subSequence(i, j), test.subSequence(i, j).toString());
-                assertEquals("reverse.of(subSequence(" + i + "," + j + "))", orig.subSequence(test.reversedIndex(j) + 1, test.reversedIndex(j) + 1 + j - i), ReversedCharSequence.of(test.subSequence(i, j)));
+                assertEquals("reverse.of(subSequence(" + i + "," + j + "))", orig.subSequence(test.reversedIndex(j) + 1, test.reversedIndex(j) + 1 + j - i), ReversedCharSequence.of(test.subSequence(i, j)).toString());
                 assertEquals("subSequence(" + i + "," + j + ").hashCode()", reved.subSequence(i, j).hashCode(), test.subSequence(i, j).hashCode());
                 assertEquals("subSequence(" + i + "," + j + ").equals()", true, test.subSequence(i, j).equals(reved.subSequence(i, j)));
             }

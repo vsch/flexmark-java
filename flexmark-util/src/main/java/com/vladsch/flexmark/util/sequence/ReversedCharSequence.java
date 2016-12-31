@@ -49,7 +49,7 @@ public class ReversedCharSequence implements CharSequence {
     }
 
     @Override
-    public CharSequence subSequence(int start, int end) {
+    public ReversedCharSequence subSequence(int start, int end) {
         if (start < 0 || end > length())
             throw new IndexOutOfBoundsException("[" + start + ", " + end + ") not in [0," + (length() - 1) + ")");
         final int startIndex = reversedIndex(end) + 1;
@@ -101,20 +101,24 @@ public class ReversedCharSequence implements CharSequence {
         return h;
     }
 
-    public static CharSequence of(final CharSequence chars) {
+    public static ReversedCharSequence of(final CharSequence chars) {
         return of(chars, 0, chars.length());
     }
 
-    public static CharSequence of(final CharSequence chars, final int start) {
+    public static ReversedCharSequence of(final CharSequence chars, final int start) {
         return of(chars, start, chars.length());
     }
 
-    public static CharSequence of(final CharSequence chars, final int start, final int end) {
+    public static ReversedCharSequence of(final CharSequence chars, final int start, final int end) {
         if (chars instanceof ReversedCharSequence) {
             final ReversedCharSequence reversedChars = (ReversedCharSequence) chars;
-            final int startIndex = reversedChars.reversedIndex(end) + 1;
-            final int endIndex = startIndex + end - start;
-            return startIndex == 0 && endIndex == chars.length() ? reversedChars.myChars : reversedChars.myChars.subSequence(startIndex, endIndex);
-        } else return new ReversedCharSequence(chars, start, end);
+            if (reversedChars.myChars instanceof RepeatedCharSequence) {
+                final int startIndex = reversedChars.reversedIndex(end) + 1;
+                final int endIndex = startIndex + end - start;
+                return startIndex == 0 && endIndex == chars.length() ? (ReversedCharSequence)reversedChars.myChars : ((ReversedCharSequence)reversedChars.myChars).subSequence(startIndex, endIndex);
+
+            }
+        }
+        return new ReversedCharSequence(chars, start, end);
     }
 }
