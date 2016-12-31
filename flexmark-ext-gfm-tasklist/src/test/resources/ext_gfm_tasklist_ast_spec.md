@@ -166,18 +166,18 @@ empty task list items
 </ul>
 .
 Document[0, 62]
-  BulletList[0, 14] isTight
-    TaskListItem[0, 1] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight
-    TaskListItem[6, 7] open:[6, 7, "-"] openSuffix:[9, 12, "[X]"] isTight
-    TaskListItem[13, 14] open:[13, 14, "-"] openSuffix:[18, 21, "[x]"] isTight hadBlankLineAfter
-  BulletList[23, 38] isLoose
-    TaskListItem[23, 24] open:[23, 24, "*"] openSuffix:[25, 28, "[ ]"] isLoose hadBlankLineAfter
-    TaskListItem[30, 31] open:[30, 31, "*"] openSuffix:[32, 35, "[x]"] isLoose hadBlankLineAfter
-    TaskListItem[37, 38] open:[37, 38, "*"] openSuffix:[39, 42, "[X]"] isLoose hadBlankLineAfter
-  BulletList[44, 57] isTight
-    TaskListItem[44, 45] open:[44, 45, "+"] openSuffix:[46, 49, "[ ]"] isTight
-    TaskListItem[50, 51] open:[50, 51, "+"] openSuffix:[52, 55, "[x]"] isTight
-    TaskListItem[56, 57] open:[56, 57, "+"] openSuffix:[58, 61, "[X]"] isTight
+  BulletList[0, 21] isTight
+    TaskListItem[0, 5] open:[0, 1, "-"] openSuffix:[2, 5, "[ ]"] isTight
+    TaskListItem[6, 12] open:[6, 7, "-"] openSuffix:[9, 12, "[X]"] isTight
+    TaskListItem[13, 21] open:[13, 14, "-"] openSuffix:[18, 21, "[x]"] isTight hadBlankLineAfter
+  BulletList[23, 42] isLoose
+    TaskListItem[23, 28] open:[23, 24, "*"] openSuffix:[25, 28, "[ ]"] isLoose hadBlankLineAfter
+    TaskListItem[30, 35] open:[30, 31, "*"] openSuffix:[32, 35, "[x]"] isLoose hadBlankLineAfter
+    TaskListItem[37, 42] open:[37, 38, "*"] openSuffix:[39, 42, "[X]"] isLoose hadBlankLineAfter
+  BulletList[44, 61] isTight
+    TaskListItem[44, 49] open:[44, 45, "+"] openSuffix:[46, 49, "[ ]"] isTight
+    TaskListItem[50, 55] open:[50, 51, "+"] openSuffix:[52, 55, "[x]"] isTight
+    TaskListItem[56, 61] open:[56, 57, "+"] openSuffix:[58, 61, "[X]"] isTight
 ````````````````````````````````
 
 

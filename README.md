@@ -1,5 +1,5 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
-=========================================================================================
+===============================================================================
 
 **flexmark-java** is a Java implementation of CommonMark 0.27 spec parser using the blocks
 first, inlines after Markdown parsing architecture.
@@ -49,13 +49,63 @@ static extension methods in interfaces.
 
     The API has stabilized but some changes may be necessary before 1.0 release.
 
+### Releases, Bug Fixes, Enhancements and Support
+
+I use flexmark-java as the parser for [Markdown Navigator] plugin for JetBrains IDEs. I tend to
+use the latest, unreleased version to fix bugs or get improvements. So if you find a bug that is
+a show stopper for your project or see a bug in [github issues page] marked `fixed for next
+release` that is affecting your project then please let me know and I may be able to promptly
+make a new release to address your issue. Otherwise, I will let bug fixes and enhancements
+accumulate thinking no one is affected by what is already fixed.
+
+#### Extension points in the API are many and numerous
+
+There are many extension options in the API with their intended use. If your extension lines up
+with the right API, the task is usually very short and sweet. If your extension uses the API in
+an unintended fashion or does not follow expected housekeeping protocols, you may find it an
+uphill battle with a rat's nest of if/else condition handling and fixing one bug only leading to
+creating another one.
+
+Generally, if it takes more than a few dozen lines to add a simple extension, then either you
+are going about it wrong or the API is missing an extension point. If you look at all the
+implemented extensions you will see that most are a few lines of code other than boiler plate
+dictated by the API. That is the goal for this library: provide an extensible core that makes
+writing extensions a breeze.
+
+The larger extensions are `flexmark-ext-tables` and `flexmark-ext-spec-example`, the meat of
+both is around 200 lines of code. You can use them as a guide post for size estimating your
+extension.
+
+My own experience adding extensions shows that sometimes a new type of extension is best
+addressed with an API enhancement to make its implementation seamless, or a by fixing a bug that
+was not visible before the extension excersized the API in just the right way. Your intended
+extension may just be the one requiring such an approach.
+
+#### Don't hesitate to open an issue if you can't find the answer
+
+The takeaway is: if you want to implement an extension or a feature please don't hesitate to
+open an issue and I will give you pointers on the best way to go about it. It may save you a lot
+of time by letting me improve the API to address your extension's needs before you put a lot of
+fruitless effort into it.
+
+I do ask that you realize that I am chief cook and bottle washer on this project, without an
+iota of Vulcan Mind Melding skills. I do ask that you describe what you want to implement
+because I can't read your mind and do some reconaissance background work around the source code
+and documentation because I cannot transfer what I know to you, without your willing effort.
+
+#### Consulting is available
+
+If you have a commercial application and don't want to write the extension(s) yourself or want
+to reduce the time and effort of implementing extensions and integrating flexmark-java, feel
+free to contact me. I am available on a consulting/contracting basis, [All about me].
+
 ### Pegdown Migration Helper
 
-I added `com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter` class that converts
-pegdown Extensions.* flags to flexmark options and extensions list. Pegdown `Extensions.java` is
-included for convenience. These are located in `flexmark-profile-pegdown` module, which will be
-added to Maven on the next release. For now you can grab the source from this repo:
-[PegdownOptionsAdapter.java] and if you need it [Extensions.java]
+I added `PegdownOptionsAdapter` class that converts pegdown `Extensions.*` flags to flexmark
+options and extensions list. Pegdown `Extensions.java` is included for convenience. These are
+located in `flexmark-profile-pegdown` module, was added to Maven but you can grab the source
+from this repo: [PegdownOptionsAdapter.java] and if you need it [Extensions.java] and make your
+own version, modified to your project's needs.
 
 You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
 can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
@@ -114,7 +164,8 @@ Major processor families are implemented and some family members also:
       - [ ] Php Markdown Extra
 
 :information_source: profiles to encapsulate configuration details for variants within the
-family will follow shortly.
+family will follow shortly. It can happen sooner if you let me know that you need it for you
+project.
 
 ### History and Motivation
 
@@ -194,57 +245,6 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
-- YouTrack renderer added to allow rendering Markdown AST as YouTrack formatted text. Almost the
-  same as JIRA but with a few differences.
-
-- JIRA renderer added to allow rendering Markdown AST as JIRA formatted text.
-
-- Parser is mature enough to be used as the parser in the Markdown Navigator plugin. Performance
-  improvement is spectacular. Typing with preview enabled is now comfortable, even in larger
-  files. Disabling the preview for major editing makes typing response similar to editing plain
-  text files.
-
-- Optimized post processor processing to eliminate each processor from having to traverse the
-  AST looking for nodes of interest. Parse time for large file (500k bytes, 10k lines) went from
-  1.39x commonmark-java down to 1.05x-1.20x range.
-
-- Took a few days to add some flexmark-java extension related functionality to Markdown
-  Navigator to make working with test spec files and extension modules easier. I will move this
-  out into a separate plugin but it makes working with the test spec files a pleasure.
-
-- Wiki added [flexmark-java wiki]
-
-- Unified options architecture to configure: parser, renderer and any custom extensions. This
-  includes the list of extensions to use. Making a single argument configure the environment.
-  These are also available during parsing and rendering phases for use by extensions.
-
-    - Add options syntax to ast_spec.md to allow varying parser/renderer options on a per spec
-      example basis. This way all options available for the core or extension can be tested in a
-      single file.
-
-- Test architecture based on original `spec.txt` augmented with:
-    - expected AST so it is validated by tests
-    - options can be specified for individual tests so that one file can validate all options
-      available for the extension/core feature.
-    - full spec file generated with expected HTML and AST replaced with generated counterparts
-      to make updating expected test results easier for new or modified tests.
-    - section and example number added to each example opening line for cross referencing test
-      results to test source.
-
-- Rework `HtmlRenderer` to allow inserting rendered HTML into different parts of the generated
-  HTML document. Now can generate HTML for top/bottom of document.
-
-- Enhance `HtmlWriter` to make it easier to generate indented html and eliminate the need to
-  implement attribute map and boiler plate render children method in custom node renderers.
-
-- Add `ParagraphPreProcessor` interface to allow customizing of block processing of paragraph
-  blocks on closing. Effectively, the mechanism of removing reference definitions from the start
-  of the paragraph was generalized to be usable by any block and extensible.
-
-- Add `LinkRefProcessor` interface to allow customizing parsing of link refs for custom nodes,
-  such as footnotes `[^]` and wiki links `[[]]` that affect parsing which could not be done with
-  a post processor extension.
-
 - Parser options to be implemented:
     - GitHub Extensions
         - [x] Fenced code blocks
@@ -283,41 +283,11 @@ Progress
         - [x] Fixed list item indent, items must be indented by at least 4 spaces
         - [x] Relaxed list start option, allow lists to start when not preceded by a blank line.
 
-- AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
-    - `Reference`
-    - `Image`
-    - `LinkRef`
-    - `ImageRef`
-    - `AutoLink`
-    - `MailLink`
-    - `Emphasis`
-    - `StrongEmphasis`
-    - `HtmlEntity`
-
-- `spec.txt` now `ast_spec.md` with an added section to each example that contains the expected
-  AST so that the generated AST can be validated. The original `spec.txt` is also tested against
-  so that any inadvertent changes in the `ast_spec.md` file cause a false pass, they will be
-  caught by the original tests in `spec.txt`
-
-        ```````````````````````````````` example Links: 35
-        [foo *bar](baz*)
-        .
-        <p><a href="baz*">foo *bar</a></p>
-        .
-        Document[0, 14]
-          Paragraph[0, 14]
-            Text[0, 1] chars:[0, 1, "*"]
-            Link[1, 13] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] linkOpen:[7, 8, "("] url:[8, 12, "/uri"] pageRef:[8, 12, "/uri"] linkClose:[12, 13, ")"]
-              Text[2, 6] chars:[2, 6, "foo*"]
-        ````````````````````````````````
-
-    Whitespace is left out. So all spans of text not in a node are implicitly white space.
-
-I am very pleased with the decision to switch to [commonmark-java] based parser. Even though I
-had to do major surgery on its innards to get full source position tracking and AST that matches
-source elements, it is a pleasure to work with and is now a pleasure to extend a parser based ot
-its original design. If you don't need source level element AST or the rest of what
-flexmark-java added and [CommonMark] is your target markdown parser then I encourage you to use
+I am very pleased with the decision to switch to [commonmark-java] based parser for my own
+projects. Even though I had to do major surgery on its innards to get full source position
+tracking and AST that matches source elements, it is a pleasure to work with and is now a
+pleasure to extend. If you don't need source level element AST or the rest of what flexmark-java
+added and [CommonMark] is your target markdown parser then I encourage you to use
 [commonmark-java] as it is an excellent choice for your needs and its performance does not
 suffer for the overhead of features that you will not use.
 
@@ -427,6 +397,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
+[GitHub Issues page]: ../../issues
 [LICENSE.txt]: LICENSE.txt
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
@@ -434,7 +405,6 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [commonmark-java]: https://github.com/atlassian/commonmark-java
-[flexmark-java wiki]: ../../wiki
 [hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
 [hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
 [intellij-markdown]: https://github.com/valich/intellij-markdown
@@ -449,7 +419,6 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
-[GitHub Issues page]: ../../issues
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
@@ -470,6 +439,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [commonmark.js]: https://github.com/jgm/commonmark.js
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
+[flexmark-java wiki]: ../../wiki
 [gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
 [idea-markdown]: https://github.com/nicoulaj/idea-markdown
 [nicoulaj]: https://github.com/nicoulaj
@@ -477,4 +447,5 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [sirthias]: https://github.com/sirthias
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
+[All about me]: https://vladsch.com/about
 

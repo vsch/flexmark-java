@@ -23,7 +23,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
 
     @Override
     public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker };
+        return new BasedSequence[] { openingMarker, markerSuffix };
     }
 
     public BasedSequence getOpeningMarker() {

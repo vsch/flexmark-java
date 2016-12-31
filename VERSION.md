@@ -7,6 +7,8 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.10.2](#0102)
+- [0.10.1](#0101)
 - [0.10.0](#0100)
 - [0.9.4](#094)
 - [0.9.3](#093)
@@ -99,6 +101,11 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.10.2
+------
+
+- Fix: #31, empty Gfm-Task list item nodes character span does not include the task marker
 
 0.10.1
 ------
