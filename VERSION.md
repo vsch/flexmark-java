@@ -106,9 +106,9 @@ Next Release To Do List
 - Fix: Emoji extension to not allow spaces between delimiters and add API methods to support
   delimiters converting themselves to text if contained text does not meet constraints.
 
-- Add: method `Delimiter.convertDelimitersToText(int, Delimiter)` to remove used
-  delimiters and convert them to text nodes instead of the expected delimited text node. For use
-  when a delimiter processor determines that the delimited text is not valid for its wrapping.
+- Add: method `Delimiter.convertDelimitersToText(int, Delimiter)` to remove used delimiters and
+  convert them to text nodes instead of the expected delimited text node. For use when a
+  delimiter processor determines that the delimited text is not valid for its wrapping.
 
 - Change: `LinkRefProcessor.adjustInlineText(Document, Node)` to allow access to options and now
   returning `BasedSequence` of characters to keep as part of its contained text children.
@@ -132,6 +132,34 @@ Next Release To Do List
 - Change: Wiki link nodes now pass the whole link text to link resolver, previously only the
   `pageRef()` portion was passed and the `anchorRef()` was appended to the resolved link. Now it
   is the link resolver's responsibility to handle this extraction and attachment of anchor refs.
+
+- API Change: add `ParserExtension.parserOptions(MutableDataHolder)` method that is called on
+  all extensions before calling the `ParserExtension.extend(Builder)` so that all extensions get
+  a chance to update options before any are loaded.
+
+- API Change: add `HtmlRendererExtension.rendererOptions(MutableDataHolder)` method that is
+  called on all extensions before calling the `HtmlRendererExtension.extend(Builder, String)` so
+  that all extensions get a chance to update options before any are loaded.
+
+- API Change: `Node.childChars()` renamed to `Node.getChildChars()` for consistency.
+
+- Add: list parser options `Parser.LISTS_ITEM_MARKER_SUFFIXES` default `String[]{}`, to allow
+  suffixes after item markers that will be treated as part of the marker not content for
+  purposes of computing content offset.
+
+- Add: list parser options `Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED` default `true`, to
+  disable list marker suffix processing for ordered list items.
+
+- API Change: gfm-tasks extension now using list suffix options for proper parsing of task item
+  sub-item and child paragraphs.
+
+    - `TaskListExtension.CONVERT_ORDERED_LIST_ITEMS` changed to
+      `Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED`, same default of `true` but now part of core
+      parser option.
+
+    - `TaskListItem.getTaskOpeningMarker()` and
+      `TaskListItem.setTaskOpeningMarker(BasedSequence)` are now part of `ListItem`,
+      `ListItem.getMarkerSuffix()` and `TaskListItem.setMarkerSuffix(BasedSequence)`
 
 0.9.4
 -----

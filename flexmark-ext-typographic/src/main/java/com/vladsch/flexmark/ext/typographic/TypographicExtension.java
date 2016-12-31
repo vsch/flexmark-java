@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for typographics
@@ -17,8 +18,6 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // public static final DataKey<TypographicRepository> TYPOGRAPHICS = new DataKey<>("TYPOGRAPHICS", TypographicRepository::new);
-    // public static final DataKey<KeepType> TYPOGRAPHICS_KEEP = new DataKey<>("TYPOGRAPHICS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
     public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
 
@@ -30,18 +29,33 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         //parserBuilder.postProcessorFactory(new TypographicNodePostProcessor.Factory());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
-            //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
-        } else if (rendererType.equals("HTML")) {
-            // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
-            //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+        switch (rendererType) {
+            case "HTML":
+                // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
+                //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                // rendererBuilder.linkResolverFactory(new TypographicLinkResolver.Factory());
+                //rendererBuilder.nodeRendererFactory(TypographicNodeRenderer::new);
+                break;
         }
     }
 }

@@ -339,11 +339,12 @@ public class CoreNodeRenderer implements NodeRenderer {
         renderListItem(node, context, html);
     }
 
-    private void renderListItem(final ListItem node, final NodeRendererContext context, HtmlWriter html) {
+    private void renderListItem(final ListItem node, final NodeRendererContext context, final HtmlWriter html) {
         if (listOptions.isTightListItem(node)) {
             html.srcPosWithEOL(node.getChars()).withAttr(TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
                 @Override
                 public void run() {
+                    html.text(node.getMarkerSuffix().unescape());
                     context.renderChildren(node);
                 }
             });
@@ -351,6 +352,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.srcPosWithEOL(node.getChars()).withAttr(LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
                 @Override
                 public void run() {
+                    html.text(node.getMarkerSuffix().unescape());
                     context.renderChildren(node);
                 }
             });
@@ -613,14 +615,12 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (!node.isDefined()) {
             // empty ref, we treat it as text
             assert !node.isDefined();
-            html.raw("[");
-            context.renderChildren(node);
-            html.raw("]");
-
-            if (!node.isReferenceTextCombined()) {
-                html.raw("[");
-                html.raw(node.getReference().unescape());
-                html.raw("]");
+            if (!node.hasChildren()) {
+                html.text(node.getChars().unescape());
+            } else {
+                html.text(node.getChars().prefixOf(node.getChildChars()).unescape());
+                context.renderChildren(node);
+                html.text(node.getChars().suffixOf(node.getChildChars()).unescape());
             }
         } else {
             if (context.isDoNotRenderLinks()) {

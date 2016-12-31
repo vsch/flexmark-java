@@ -10,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for GFM strikethrough using ~~ (GitHub Flavored Markdown).
@@ -32,33 +33,47 @@ public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customDelimiterProcessor(new SubscriptDelimiterProcessor());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new StrikethroughJiraRenderer(options);
-                }
-            });
-        } else if (rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new StrikethroughYouTrackRenderer(options);
-                }
-            });
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new StrikethroughNodeRenderer(options);
-                }
-            });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new StrikethroughNodeRenderer(options);
+                    }
+                });
+                break;
+            case "JIRA":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new StrikethroughJiraRenderer(options);
+                    }
+                });
+                break;
+            case "YOUTRACK":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new StrikethroughYouTrackRenderer(options);
+                    }
+                });
+                break;
         }
     }
 }

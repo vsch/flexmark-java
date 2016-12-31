@@ -10,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for emoji shortcuts using Emoji-Cheat-Sheet.com.
@@ -36,26 +37,40 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customDelimiterProcessor(new EmojiDelimiterProcessor());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new EmojiJiraRenderer(options);
-                }
-            });
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new EmojiNodeRenderer(options);
-                }
-            });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new EmojiNodeRenderer(options);
+                    }
+                });
+                break;
+            case "JIRA":
+            case "YOUTRACK":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new EmojiJiraRenderer(options);
+                    }
+                });
+                break;
         }
     }
 }

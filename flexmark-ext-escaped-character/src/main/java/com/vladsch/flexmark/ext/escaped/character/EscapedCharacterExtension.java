@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for escaped_characters
@@ -21,17 +22,21 @@ import com.vladsch.flexmark.util.options.DataHolder;
  * </p>
  */
 public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // public static final DataKey<EscapedCharacterRepository> ESCAPED_CHARACTERS = new DataKey<>("ESCAPED_CHARACTERS", EscapedCharacterRepository::new);
-    // public static final DataKey<KeepType> ESCAPED_CHARACTERS_KEEP = new DataKey<>("ESCAPED_CHARACTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    //public static final DataKey<Boolean> ESCAPED_CHARACTER_OPTION1 = new DataKey<>("ESCAPED_CHARACTER_OPTION1", false);
-    //public static final DataKey<String> ESCAPED_CHARACTER_OPTION2 = new DataKey<>("ESCAPED_CHARACTER_OPTION2", "default");
-    //public static final DataKey<Integer> ESCAPED_CHARACTER_OPTION3 = new DataKey<>("ESCAPED_CHARACTER_OPTION3", Integer.MAX_VALUE);
-
     private EscapedCharacterExtension() {
     }
 
     public static Extension create() {
         return new EscapedCharacterExtension();
+    }
+
+    @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
     }
 
     @Override
@@ -41,15 +46,19 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new EscapedCharacterNodeRenderer(options);
-                }
-            });
-            // rendererBuilder.linkResolverFactory(new EscapedCharacterLinkResolver.Factory());
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new EscapedCharacterNodeRenderer(options);
+                    }
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }

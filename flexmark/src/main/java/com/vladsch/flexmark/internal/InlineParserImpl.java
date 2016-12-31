@@ -1108,7 +1108,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             if (linkRefProcessorMatch != null) {
                 // may need to adjust children's text because some characters were part of the processor's opener/closer
                 if (insertNode.hasChildren()) {
-                    final BasedSequence original = insertNode.childChars();
+                    final BasedSequence original = insertNode.getChildChars();
                     final BasedSequence text = linkRefProcessorMatch.processor.adjustInlineText(document, insertNode);
 
                     // may need to remove some delimiters if they span across original and changed text boundary or if now they are outside text boundary

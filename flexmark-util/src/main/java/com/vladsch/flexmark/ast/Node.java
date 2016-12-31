@@ -523,7 +523,7 @@ public abstract class Node {
         return out.toString();
     }
 
-    public BasedSequence childChars() {
+    public BasedSequence getChildChars() {
         if (firstChild == null || lastChild == null) {
             return BasedSequence.NULL;
         }

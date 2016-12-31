@@ -750,7 +750,7 @@ public interface BasedSequence extends CharSequence {
     /**
      * start/end offset based containment, not textual
      *
-     * @param other based sequence from the same parent
+     * @param other based sequence from the same base
      * @return true if other is contained in this
      */
     boolean containsAllOf(BasedSequence other);
@@ -758,10 +758,26 @@ public interface BasedSequence extends CharSequence {
     /**
      * start/end offset based containment, not textual
      *
-     * @param other based sequence from the same parent
+     * @param other based sequence from the same base
      * @return true if other is contained in this
      */
     boolean containsSomeOf(BasedSequence other);
+
+    /**
+     * Get the prefix part of this from other, start/end offset based containment, not textual
+     *
+     * @param other based sequence from the same base
+     * @return prefix part of this as compared to other, start/end offset based, not content
+     */
+    BasedSequence prefixOf(BasedSequence other);
+
+    /**
+     * Get the suffix part of this from other, start/end offset based containment, not textual
+     *
+     * @param other based sequence from the same base
+     * @return suffix part of this as compared to other, start/end offset based, not content
+     */
+    BasedSequence suffixOf(BasedSequence other);
 
     /**
      * start/end offset based intersection, not textual

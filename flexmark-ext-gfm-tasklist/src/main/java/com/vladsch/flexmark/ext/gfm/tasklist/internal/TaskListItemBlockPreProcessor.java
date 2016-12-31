@@ -1,0 +1,68 @@
+package com.vladsch.flexmark.ext.gfm.tasklist.internal;
+
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
+import com.vladsch.flexmark.parser.block.BlockPreProcessor;
+import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
+import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
+
+    public TaskListItemBlockPreProcessor(DataHolder options) {
+    }
+
+    @Override
+    public void preProcess(ParserState state, Block block) {
+        if (block instanceof BulletListItem || block instanceof OrderedListItem) {
+            // we chop up the previous paragraph into definition terms and add the definition item to the last one
+            // we add all these to the previous DefinitionList or add a new one if there isn't one
+            final ListItem listItem = (ListItem) block;
+
+            final BasedSequence markerSuffix = listItem.getMarkerSuffix();
+
+            if (markerSuffix.matches("[ ]") || markerSuffix.matches("[x]") || markerSuffix.matches("[X]")) {
+                TaskListItem taskListItem = new TaskListItem(listItem);
+                taskListItem.setTight(listItem.isTight());
+                listItem.insertBefore(taskListItem);
+                listItem.unlink();
+                state.blockAdded(taskListItem);
+                state.blockRemoved(listItem);
+            }
+        }
+    }
+
+    public static class Factory implements BlockPreProcessorFactory {
+        @Override
+        public Set<Class<? extends Block>> getBlockTypes() {
+            HashSet<Class<? extends Block>> set = new HashSet<>();
+            set.add(BulletListItem.class);
+            set.add(OrderedListItem.class);
+            return set;
+        }
+
+        @Override
+        public Set<Class<? extends BlockPreProcessorFactory>> getAfterDependents() {
+            return null;
+        }
+
+        @Override
+        public Set<Class<? extends BlockPreProcessorFactory>> getBeforeDependents() {
+            return null;
+        }
+
+        @Override
+        public boolean affectsGlobalScope() {
+            return true;
+        }
+
+        @Override
+        public BlockPreProcessor create(ParserState state) {
+            return new TaskListItemBlockPreProcessor(state.getProperties());
+        }
+    }
+}

@@ -232,7 +232,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
-    static ListData parseListMarker(int newItemCodeIndent, ParserState state) {
+    static ListData parseListMarker(ListOptions options, int newItemCodeIndent, ParserState state) {
         Parsing parsing = state.getParsing();
         BasedSequence line = state.getLine();
         int markerIndex = state.getNextNonSpaceIndex();
@@ -259,24 +259,71 @@ public class ListBlockParser extends AbstractBlockParser {
 
         // See at which column the content starts if there is content
         boolean hasContent = false;
+        int contentIndex = indexAfterMarker;
         for (int i = indexAfterMarker; i < line.length(); i++) {
             char c = line.charAt(i);
             if (c == '\t') {
                 contentOffset += Parsing.columnsToNextTabStop(columnAfterMarker + contentOffset);
+                contentIndex++;
             } else if (c == ' ') {
                 contentOffset++;
+                contentIndex++;
             } else {
                 hasContent = true;
                 break;
             }
         }
 
+        BasedSequence markerSuffix = BasedSequence.NULL;
+        int markerSuffixOffset = contentOffset;
+
         if (!hasContent || contentOffset > newItemCodeIndent) {
             // If this line is blank or has a code block, default to 1 space after marker
             contentOffset = 1;
+        } else if (!isNumberedList || options.isNumberedItemMarkerSuffixed()) {
+            // see if we have optional suffix strings on the marker
+            String[] markerSuffixes = options.getItemMarkerSuffixes();
+            for (String suffix : markerSuffixes) {
+                int suffixLength = suffix.length();
+                if (suffixLength > 0 && line.matchChars(suffix, contentIndex)) {
+                    if (options.isItemMarkerSpace()) {
+                        final char c = line.midCharAt(contentIndex + suffixLength);
+                        if (c != ' ' && c != '\t') {
+                            // no space after, no match
+                            continue;
+                        }
+                    }
+
+                    markerSuffix = line.subSequence(contentIndex, contentIndex + suffixLength);
+                    contentOffset += suffixLength;
+                    contentIndex += suffixLength;
+                    columnAfterMarker += suffixLength;
+
+                    hasContent = false;
+                    int suffixContentOffset = contentOffset;
+
+                    for (int i = contentIndex; i < line.length(); i++) {
+                        char c = line.charAt(i);
+                        if (c == '\t') {
+                            contentOffset += Parsing.columnsToNextTabStop(columnAfterMarker + contentOffset);
+                        } else if (c == ' ') {
+                            contentOffset++;
+                        } else {
+                            hasContent = true;
+                            break;
+                        }
+                    }
+
+                    if (!hasContent || contentOffset > suffixContentOffset + newItemCodeIndent) {
+                        // If this line is blank or has a code block, default to 1 space after marker suffix
+                        contentOffset = suffixContentOffset + 1;
+                    }
+                    break;
+                }
+            }
         }
 
-        return new ListData(listBlock, !hasContent, markerIndex, markerColumn, markerIndent, contentOffset, rest.subSequence(matcher.start(), matcher.end()), isNumberedList);
+        return new ListData(listBlock, !hasContent, markerIndex, markerColumn, markerIndent, contentOffset, rest.subSequence(matcher.start(), matcher.end()), isNumberedList, markerSuffix, markerSuffixOffset);
     }
 
     private static ListBlock createListBlock(Matcher matcher) {
@@ -318,7 +365,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
             set.add(IndentedCodeBlockParser.Factory.class);
             return set;
             //return new HashSet<>(Arrays.asList(
@@ -364,7 +411,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 if (state.getLine() == listBlockParser.myItemHandledLine) {
                     if (listBlockParser.myItemHandledNewListLine) {
                         // it is a new list already determined by the item
-                        ListData listData = parseListMarker(newItemCodeIndent, state);
+                        ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
                         ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
 
                         assert listData != null;
@@ -374,7 +421,7 @@ public class ListBlockParser extends AbstractBlockParser {
                         return BlockStart.of(listBlockParser, listItemParser).atColumn(newColumn);
                     } else if (listBlockParser.myItemHandledNewItemLine) {
                         // it is a new item for this list already determined by the previous item
-                        ListData listData = parseListMarker(newItemCodeIndent, state);
+                        ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
                         ListItemParser listItemParser = new ListItemParser(myOptions, state.getParsing(), listData);
 
                         assert listData != null;
@@ -488,7 +535,7 @@ public class ListBlockParser extends AbstractBlockParser {
                 }
             }
 
-            ListData listData = parseListMarker(newItemCodeIndent, state);
+            ListData listData = parseListMarker(myOptions, newItemCodeIndent, state);
 
             if (listData != null) {
                 int newColumn = listData.markerColumn + listData.listMarker.length() + listData.contentOffset;
@@ -520,8 +567,21 @@ public class ListBlockParser extends AbstractBlockParser {
         final int contentOffset;
         final BasedSequence listMarker;
         final boolean isNumberedList;
+        final BasedSequence markerSuffix;
+        final int markerSuffixOffset;
 
-        ListData(ListBlock listBlock, boolean isEmpty, int markerIndex, int markerColumn, int markerIndent, int contentOffset, BasedSequence listMarker, boolean isNumberedList) {
+        ListData(
+                ListBlock listBlock,
+                boolean isEmpty,
+                int markerIndex,
+                int markerColumn,
+                int markerIndent,
+                int contentOffset,
+                BasedSequence listMarker,
+                boolean isNumberedList,
+                BasedSequence markerSuffix,
+                int markerSuffixOffset
+        ) {
             this.listBlock = listBlock;
             this.isEmpty = isEmpty;
             this.markerIndex = markerIndex;
@@ -530,6 +590,8 @@ public class ListBlockParser extends AbstractBlockParser {
             this.contentOffset = contentOffset;
             this.listMarker = listMarker;
             this.isNumberedList = isNumberedList;
+            this.markerSuffix = markerSuffix;
+            this.markerSuffixOffset = markerSuffixOffset;
         }
     }
 }

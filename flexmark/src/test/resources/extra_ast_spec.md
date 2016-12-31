@@ -3953,6 +3953,92 @@ Document[0, 22]
 ````````````````````````````````
 
 
+## LinkRefs and ImageRefs
+
+empty link ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 1
+[ ]
+.
+<p>[ ]</p>
+.
+Document[0, 4]
+  Paragraph[0, 4]
+    LinkRef[0, 3] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"]
+      Text[1, 2] chars:[1, 2, " "]
+````````````````````````````````
+
+
+empty link ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 2
+[ ][]
+.
+<p>[ ][]</p>
+.
+Document[0, 6]
+  Paragraph[0, 6]
+    LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[2, 2] referenceClose:[2, 3, "]"] textOpen:[3, 4, "["] textClose:[4, 5, "]"]
+      Text[1, 2] chars:[1, 2, " "]
+````````````````````````````````
+
+
+empty link ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 3
+[ ][ ]
+.
+<p>[ ][ ]</p>
+.
+Document[0, 7]
+  Paragraph[0, 7]
+    LinkRef[0, 6] textOpen:[0, 1, "["] text:[2, 2] textClose:[2, 3, "]"] referenceOpen:[3, 4, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
+      Text[1, 2] chars:[1, 2, " "]
+````````````````````````````````
+
+
+empty image ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 4
+![ ]
+.
+<p>![ ]</p>
+.
+Document[0, 5]
+  Paragraph[0, 5]
+    ImageRef[0, 4] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"]
+      Text[2, 3] chars:[2, 3, " "]
+````````````````````````````````
+
+
+empty link ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 5
+![ ][]
+.
+<p>![ ][]</p>
+.
+Document[0, 7]
+  Paragraph[0, 7]
+    ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[3, 3] referenceClose:[3, 4, "]"] textOpen:[4, 5, "["] textClose:[5, 6, "]"]
+      Text[2, 3] chars:[2, 3, " "]
+````````````````````````````````
+
+
+empty link ref
+
+```````````````````````````````` example LinkRefs and ImageRefs: 6
+![ ][ ]
+.
+<p>[ ][ ]</p>
+.
+Document[0, 8]
+  Paragraph[0, 8]
+    ImageRef[1, 7] textOpen:[1, 2, "["] text:[3, 3] textClose:[3, 4, "]"] referenceOpen:[4, 5, "["] reference:[6, 6] referenceClose:[6, 7, "]"]
+      Text[2, 3] chars:[2, 3, " "]
+````````````````````````````````
+
+
 ## Block Quotes
 
 Extend block quote to next blank line

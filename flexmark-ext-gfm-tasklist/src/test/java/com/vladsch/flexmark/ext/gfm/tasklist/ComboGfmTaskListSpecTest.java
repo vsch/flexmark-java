@@ -20,6 +20,7 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("marker-space", new MutableDataSet().set(Parser.LISTS_ITEM_MARKER_SPACE, true));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("src-pos-lines", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES, true));
         optionsMap.put("item-class", new MutableDataSet().set(TaskListExtension.ITEM_CLASS, ""));
@@ -27,7 +28,7 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
         optionsMap.put("p-class", new MutableDataSet().set(TaskListExtension.PARAGRAPH_CLASS, "task-item"));
         optionsMap.put("done", new MutableDataSet().set(TaskListExtension.ITEM_DONE_MARKER, "<span class=\"taskitem\">X</span>"));
         optionsMap.put("not-done", new MutableDataSet().set(TaskListExtension.ITEM_NOT_DONE_MARKER, "<span class=\"taskitem\">O</span>"));
-        optionsMap.put("no-ordered-items", new MutableDataSet().set(TaskListExtension.CONVERT_ORDERED_LIST_ITEMS, false));
+        optionsMap.put("no-ordered-items", new MutableDataSet().set(Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED, false));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

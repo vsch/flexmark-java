@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.jira.converter.internal.JiraConverterNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for jira_converters
@@ -21,14 +22,6 @@ import com.vladsch.flexmark.util.options.DataHolder;
  * </p>
  */
 public class JiraConverterExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // public static final DataKey<JiraConverterRepository> JIRA_CONVERTERS = new DataKey<>("JIRA_CONVERTERS", JiraConverterRepository::new);
-    // public static final DataKey<KeepType> JIRA_CONVERTERS_KEEP = new DataKey<>("JIRA_CONVERTERS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-    // public static final DataKey<Boolean> JIRA_CONVERTER_OPTION1 = new DataKey<>("JIRA_CONVERTER_OPTION1", false);
-    // public static final DataKey<String> JIRA_CONVERTER_OPTION2 = new DataKey<>("JIRA_CONVERTER_OPTION2", "default");
-    // public static final DataKey<Integer> JIRA_CONVERTER_OPTION3 = new DataKey<>("JIRA_CONVERTER_OPTION3", Integer.MAX_VALUE);
-    // public static final DataKey<String> LOCAL_ONLY_TARGET_CLASS = new DataKey<>("LOCAL_ONLY_TARGET_CLASS", "local-only");
-    // public static final DataKey<String> MISSING_TARGET_CLASS = new DataKey<>("MISSING_TARGET_CLASS", "absent");
-    public static final LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private JiraConverterExtension() {
     }
@@ -42,19 +35,33 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     }
 
     @Override
-    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+    public void rendererOptions(final MutableDataHolder options) {
+        final String rendererType = HtmlRenderer.TYPE.getFrom(options);
         if (rendererType.equals("HTML")) {
-            rendererBuilder.set(HtmlRenderer.TYPE, "JIRA");
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new JiraConverterNodeRenderer(options);
-                }
-            });
-            // rendererBuilder.linkResolverFactory(new JiraConverterLinkResolver.Factory());
-            // rendererBuilder.attributeProviderFactory(new JiraConverterAttributeProvider.Factory());
+            options.set(HtmlRenderer.TYPE, "JIRA");
         } else if (!rendererType.equals("JIRA")) {
             throw new IllegalStateException("Non HTML Renderer is already set to " + rendererType);
+        }
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
+        switch (rendererType) {
+            case "JIRA":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new JiraConverterNodeRenderer(options);
+                    }
+                });
+                break;
+            default:
+                throw new IllegalStateException("Jira Converter Extension used with non Jira Renderer " + rendererType);
         }
     }
 }

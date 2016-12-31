@@ -8,12 +8,14 @@ import java.util.List;
 
 public abstract class ListItem extends Block implements ParagraphItemContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
+    protected BasedSequence markerSuffix = BasedSequence.NULL;
     private boolean tight = true;
     private boolean hadBlankAfterItemParagraph = false;
 
     @Override
     public void getAstExtra(StringBuilder out) {
         segmentSpanChars(out, openingMarker, "open");
+        segmentSpanChars(out, markerSuffix, "openSuffix");
         if (isTight()) out.append(" isTight");
         else out.append(" isLoose");
         if (isHadBlankAfterItemParagraph()) out.append(" hadBlankLineAfter");
@@ -30,6 +32,16 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
 
     public void setOpeningMarker(BasedSequence openingMarker) {
         this.openingMarker = openingMarker;
+    }
+
+    public BasedSequence getMarkerSuffix() {
+        return markerSuffix;
+    }
+
+    public void setMarkerSuffix(final BasedSequence markerSuffix) {
+        assert markerSuffix.isNull() || openingMarker.getBase() == markerSuffix.getBase();
+
+        this.markerSuffix = markerSuffix;
     }
 
     public void setTight(boolean tight) {
@@ -82,6 +94,16 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
     }
 
     public ListItem() {
+    }
+
+    public ListItem(ListItem other) {
+        this.openingMarker = other.openingMarker;
+        this.markerSuffix = other.markerSuffix;
+        this.tight = other.tight;
+        this.hadBlankAfterItemParagraph = other.hadBlankAfterItemParagraph;
+
+        takeChildren(other);
+        setCharsFromContent();
     }
 
     public ListItem(BasedSequence chars) {

@@ -1,11 +1,11 @@
 package com.vladsch.flexmark.parser;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSetter;
+
+import java.util.Arrays;
 
 @SuppressWarnings("WeakerAccess")
 public class ListOptions implements MutableDataSetter {
@@ -19,14 +19,16 @@ public class ListOptions implements MutableDataSetter {
     protected boolean itemTypeMismatchToNewList;
     protected boolean itemTypeMismatchToSubList;
     protected boolean looseOnPrevLooseItem;
+    protected boolean looseWhenBlankFollowsItemParagraph;
     protected boolean looseWhenHasLooseSubItem;
     protected boolean looseWhenHasTrailingBlankLine;
-    protected boolean looseWhenBlankFollowsItemParagraph;
+    protected boolean numberedItemMarkerSuffixed;
     protected boolean orderedItemDotOnly;
     protected boolean orderedListManualStart;
     protected int codeIndent;
     protected int itemIndent;
     protected int newItemCodeIndent;
+    protected String[] itemMarkerSuffixes;
 
     public ListOptions() {
         this((DataHolder) null);
@@ -47,12 +49,14 @@ public class ListOptions implements MutableDataSetter {
         looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
         looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
         looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
+        numberedItemMarkerSuffixed = Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED.getFrom(options);
         orderedItemDotOnly = Parser.LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options);
         orderedListManualStart = Parser.LISTS_ORDERED_LIST_MANUAL_START.getFrom(options);
 
         codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);
         itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
         newItemCodeIndent = Parser.LISTS_NEW_ITEM_CODE_INDENT.getFrom(options);
+        itemMarkerSuffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.getFrom(options);
     }
 
     ListOptions(ListOptions other) {
@@ -70,12 +74,14 @@ public class ListOptions implements MutableDataSetter {
         looseWhenBlankFollowsItemParagraph = other.isLooseWhenBlankFollowsItemParagraph();
         looseWhenHasLooseSubItem = other.isLooseWhenHasLooseSubItem();
         looseWhenHasTrailingBlankLine = other.isLooseWhenHasTrailingBlankLine();
+        numberedItemMarkerSuffixed = other.isNumberedItemMarkerSuffixed();
         orderedItemDotOnly = other.isOrderedItemDotOnly();
         orderedListManualStart = other.isOrderedListManualStart();
 
         codeIndent = other.getCodeIndent();
         itemIndent = other.getItemIndent();
         newItemCodeIndent = other.getNewItemCodeIndent();
+        itemMarkerSuffixes = other.getItemMarkerSuffixes();
     }
 
     public static ListOptions getFrom(final DataHolder options) {
@@ -147,25 +153,59 @@ public class ListOptions implements MutableDataSetter {
         options.set(Parser.PARSER_EMULATION_FAMILY, getParserEmulationFamily());
         getItemInterrupt().setIn(options);
 
-        options.set(Parser.LISTS_AUTO_LOOSE, isAutoLoose());
-        options.set(Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS, isAutoLooseOneLevelLists());
-        options.set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, isDelimiterMismatchToNewList());
-        options.set(Parser.LISTS_END_ON_DOUBLE_BLANK, isEndOnDoubleBlank());
-        options.set(Parser.LISTS_ITEM_MARKER_SPACE, isItemMarkerSpace());
-        options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, isItemTypeMismatchToNewList());
-        options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, isItemTypeMismatchToSubList());
-        options.set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, isLooseOnPrevLooseItem());
-        options.set(Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH, isLooseWhenBlankFollowsItemParagraph());
-        options.set(Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM, isLooseWhenHasLooseSubItem());
-        options.set(Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE, isLooseWhenHasTrailingBlankLine());
-        options.set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, isOrderedItemDotOnly());
-        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, isOrderedListManualStart());
+        options.set(Parser.LISTS_AUTO_LOOSE, autoLoose);
+        options.set(Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS, autoLooseOneLevelLists);
+        options.set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, delimiterMismatchToNewList);
+        options.set(Parser.LISTS_END_ON_DOUBLE_BLANK, endOnDoubleBlank);
+        options.set(Parser.LISTS_ITEM_MARKER_SPACE, itemMarkerSpace);
+        options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, itemTypeMismatchToNewList);
+        options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, itemTypeMismatchToSubList);
+        options.set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, looseOnPrevLooseItem);
+        options.set(Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH, looseWhenBlankFollowsItemParagraph);
+        options.set(Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM, looseWhenHasLooseSubItem);
+        options.set(Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE, looseWhenHasTrailingBlankLine);
+        options.set(Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED, numberedItemMarkerSuffixed);
+        options.set(Parser.LISTS_ORDERED_ITEM_DOT_ONLY, orderedItemDotOnly);
+        options.set(Parser.LISTS_ORDERED_LIST_MANUAL_START, orderedListManualStart);
 
-        options.set(Parser.LISTS_ITEM_INDENT, getItemIndent());
-        options.set(Parser.LISTS_CODE_INDENT, getCodeIndent());
-        options.set(Parser.LISTS_NEW_ITEM_CODE_INDENT, getNewItemCodeIndent());
+        options.set(Parser.LISTS_CODE_INDENT, codeIndent);
+        options.set(Parser.LISTS_ITEM_INDENT, itemIndent);
+        options.set(Parser.LISTS_NEW_ITEM_CODE_INDENT, newItemCodeIndent);
+        options.set(Parser.LISTS_ITEM_MARKER_SUFFIXES, itemMarkerSuffixes);
 
         return options;
+    }
+
+    public static void addItemMarkerSuffixes(MutableDataHolder options, String... itemMarkerSuffixes) {
+        String[] suffixes = Parser.LISTS_ITEM_MARKER_SUFFIXES.getFrom(options);
+        int addSuffixCount = itemMarkerSuffixes.length;
+
+        int iMax = itemMarkerSuffixes.length;
+        for (String suffix : suffixes) {
+            for (int i = 0; i < iMax; i++) {
+                String addSuffix = itemMarkerSuffixes[i];
+                if (addSuffix != null && addSuffix.equals(suffix)) {
+                    addSuffixCount--;
+                    itemMarkerSuffixes[i] = null;
+                    break;
+                }
+            }
+
+            if (addSuffixCount == 0) break;
+        }
+
+        if (addSuffixCount > 0) {
+            String[] newSuffixes = new String[suffixes.length + addSuffixCount];
+            System.arraycopy(suffixes, 0, newSuffixes, 0, suffixes.length);
+
+            int suffixIndex = suffixes.length;
+            for (String addSuffix : itemMarkerSuffixes) {
+                if (addSuffix != null) {
+                    newSuffixes[suffixIndex++] = addSuffix;
+                }
+            }
+            options.set(Parser.LISTS_ITEM_MARKER_SUFFIXES, newSuffixes);
+        }
     }
 
     public ParserEmulationFamily getParserEmulationFamily() {
@@ -228,6 +268,10 @@ public class ListOptions implements MutableDataSetter {
         return orderedListManualStart;
     }
 
+    public boolean isNumberedItemMarkerSuffixed() {
+        return numberedItemMarkerSuffixed;
+    }
+
     public int getCodeIndent() {
         return codeIndent;
     }
@@ -238,6 +282,10 @@ public class ListOptions implements MutableDataSetter {
 
     public int getNewItemCodeIndent() {
         return newItemCodeIndent;
+    }
+
+    public String[] getItemMarkerSuffixes() {
+        return itemMarkerSuffixes;
     }
 
     public static class ItemInterrupt {
@@ -491,6 +539,7 @@ public class ListOptions implements MutableDataSetter {
 
         ListOptions that = (ListOptions) o;
 
+        if (parserEmulationFamily != that.parserEmulationFamily) return false;
         if (autoLoose != that.autoLoose) return false;
         if (autoLooseOneLevelLists != that.autoLooseOneLevelLists) return false;
         if (delimiterMismatchToNewList != that.delimiterMismatchToNewList) return false;
@@ -499,15 +548,16 @@ public class ListOptions implements MutableDataSetter {
         if (itemTypeMismatchToNewList != that.itemTypeMismatchToNewList) return false;
         if (itemTypeMismatchToSubList != that.itemTypeMismatchToSubList) return false;
         if (looseOnPrevLooseItem != that.looseOnPrevLooseItem) return false;
+        if (looseWhenBlankFollowsItemParagraph != that.looseWhenBlankFollowsItemParagraph) return false;
         if (looseWhenHasLooseSubItem != that.looseWhenHasLooseSubItem) return false;
         if (looseWhenHasTrailingBlankLine != that.looseWhenHasTrailingBlankLine) return false;
-        if (looseWhenBlankFollowsItemParagraph != that.looseWhenBlankFollowsItemParagraph) return false;
+        if (numberedItemMarkerSuffixed != that.numberedItemMarkerSuffixed) return false;
         if (orderedItemDotOnly != that.orderedItemDotOnly) return false;
         if (orderedListManualStart != that.orderedListManualStart) return false;
         if (codeIndent != that.codeIndent) return false;
         if (itemIndent != that.itemIndent) return false;
         if (newItemCodeIndent != that.newItemCodeIndent) return false;
-        if (parserEmulationFamily != that.parserEmulationFamily) return false;
+        if (itemMarkerSuffixes != that.itemMarkerSuffixes) return false;
         return itemInterrupt.equals(that.itemInterrupt);
     }
 
@@ -523,14 +573,16 @@ public class ListOptions implements MutableDataSetter {
         result = 31 * result + (itemTypeMismatchToNewList ? 1 : 0);
         result = 31 * result + (itemTypeMismatchToSubList ? 1 : 0);
         result = 31 * result + (looseOnPrevLooseItem ? 1 : 0);
+        result = 31 * result + (looseWhenBlankFollowsItemParagraph ? 1 : 0);
         result = 31 * result + (looseWhenHasLooseSubItem ? 1 : 0);
         result = 31 * result + (looseWhenHasTrailingBlankLine ? 1 : 0);
-        result = 31 * result + (looseWhenBlankFollowsItemParagraph ? 1 : 0);
+        result = 31 * result + (numberedItemMarkerSuffixed ? 1 : 0);
         result = 31 * result + (orderedItemDotOnly ? 1 : 0);
         result = 31 * result + (orderedListManualStart ? 1 : 0);
         result = 31 * result + codeIndent;
         result = 31 * result + itemIndent;
         result = 31 * result + newItemCodeIndent;
+        result = 31 * result + Arrays.hashCode(itemMarkerSuffixes);
         return result;
     }
 }

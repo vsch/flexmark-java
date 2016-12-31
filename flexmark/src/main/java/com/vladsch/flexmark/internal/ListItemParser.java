@@ -25,6 +25,7 @@ public class ListItemParser extends AbstractBlockParser {
         myParsing = parsing;
         myBlock = myListData.isNumberedList ? new OrderedListItem() : new BulletListItem();
         myBlock.setOpeningMarker(myListData.listMarker);
+        myBlock.setMarkerSuffix(myListData.markerSuffix);
     }
 
     @SuppressWarnings({ "WeakerAccess", "unused" })
@@ -112,7 +113,7 @@ public class ListItemParser extends AbstractBlockParser {
                 listBlockParser.setItemHandledLine(state.getLine());
                 return continueAtColumn(newColumn);
             } else {
-                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions.getCodeIndent(), state);
+                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, myOptions.getCodeIndent(), state);
 
                 if (currentIndent >= getContentIndent()) {
                     if (listData != null) {
@@ -189,7 +190,7 @@ public class ListItemParser extends AbstractBlockParser {
                 listBlockParser.setItemHandledLine(state.getLine());
                 return continueAtColumn(newColumn);
             } else {
-                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
+                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, -1, state);
 
                 if (currentIndent >= myOptions.getItemIndent()) {
                     if (listData != null) {
@@ -263,7 +264,7 @@ public class ListItemParser extends AbstractBlockParser {
             int listIndent = listBlockParser.getListData().markerIndent;
             int newColumn = state.getColumn() + getContentIndent();
 
-            ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
+            ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, -1, state);
 
             if (currentIndent >= getContentIndent()) {
                 // our sub item
@@ -357,7 +358,7 @@ public class ListItemParser extends AbstractBlockParser {
                 listBlockParser.setItemHandledLine(state.getLine());
                 return continueAtColumn(state.getColumn() + myOptions.getItemIndent());
             } else {
-                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(-1, state);
+                ListBlockParser.ListData listData = ListBlockParser.parseListMarker(myOptions, -1, state);
 
                 if (currentIndent > myOptions.getItemIndent()) {
                     if (listData != null) {

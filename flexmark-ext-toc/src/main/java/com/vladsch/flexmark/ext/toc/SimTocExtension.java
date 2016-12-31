@@ -10,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for tocs
@@ -24,14 +25,6 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // public static final DataKey<TocRepository> TOCS = new DataKey<>("TOCS", TocRepository::new);
-    // public static final DataKey<KeepType> TOCS_KEEP = new DataKey<>("TOCS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
-
-    /**
-     * DataKey specifying if [TOC level=#] with invalid level option: 0, 7,8,9 should still be parsed into a TOC node.
-     * <p>
-     * LEVELS levels of heading to use for TOC generation
-     */
     public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
     public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
     public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
@@ -45,6 +38,16 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     private SimTocExtension() {
     }
 
+    @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
     public static Extension create() {
         return new SimTocExtension();
     }
@@ -56,14 +59,19 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new SimTocNodeRenderer(options);
-                }
-            });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new SimTocNodeRenderer(options);
+                    }
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }

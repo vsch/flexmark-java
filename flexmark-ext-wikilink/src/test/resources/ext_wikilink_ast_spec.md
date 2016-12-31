@@ -275,7 +275,7 @@ dummy reference inside is not a wiki link but a link ref with brackets around it
 ```````````````````````````````` example WikiLinks: 18
 [[not wiki link][]]
 .
-<p>[[not wiki link]]</p>
+<p>[[not wiki link][]]</p>
 .
 Document[0, 20]
   Paragraph[0, 20]
@@ -719,7 +719,7 @@ dummy reference inside is not a wiki image but a image ref with brackets around 
 ```````````````````````````````` example(WikiImages: 11) options(wiki-images)
 ![[not wiki image][]]
 .
-<p>![[not wiki image]]</p>
+<p>![[not wiki image][]]</p>
 .
 Document[0, 21]
   Paragraph[0, 21]

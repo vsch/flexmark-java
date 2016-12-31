@@ -11,6 +11,7 @@ import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for zzzzzzs
@@ -46,6 +47,16 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         // zzzoptionszzz(REMOVE, BLOCK_PARSER)
         // zzzoptionszzz(BLOCK_PRE_PROCESSOR)
@@ -71,12 +82,24 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);} });// zzzoptionszzz(JIRA_RENDERER)
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
-            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);}
+                });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+
+                rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
+                rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);}
+                });// zzzoptionszzz(JIRA_RENDERER)
+                break;
         }
     }
 }

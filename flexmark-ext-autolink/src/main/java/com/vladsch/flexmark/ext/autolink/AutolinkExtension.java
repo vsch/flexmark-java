@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Link;
 import com.vladsch.flexmark.ext.autolink.internal.AutolinkNodePostProcessor;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for automatically turning plain URLs and email addresses into links.
@@ -17,7 +18,6 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class AutolinkExtension implements Parser.ParserExtension {
-
     private AutolinkExtension() {
     }
 
@@ -25,8 +25,12 @@ public class AutolinkExtension implements Parser.ParserExtension {
         return new AutolinkExtension();
     }
 
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
     public void extend(Parser.Builder parserBuilder) {
-        //parserBuilder.postProcessorFactory(new AutolinkPostProcessor.Factory());
         parserBuilder.postProcessorFactory(new AutolinkNodePostProcessor.Factory());
     }
 }

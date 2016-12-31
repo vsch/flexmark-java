@@ -10,6 +10,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for ext_asides
@@ -35,23 +36,35 @@ public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.Html
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new AsideBlockParser.Factory());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            // rendererBuilder.nodeRendererFactory(ExtAsideJiraRenderer::new);
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new AsideNodeRenderer(options);
-                }
-            });
-            // rendererBuilder.linkResolverFactory(new ExtAsideLinkResolver.Factory());
-            // rendererBuilder.attributeProviderFactory(new ExtAsideAttributeProvider.Factory());
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new AsideNodeRenderer(options);
+                    }
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }

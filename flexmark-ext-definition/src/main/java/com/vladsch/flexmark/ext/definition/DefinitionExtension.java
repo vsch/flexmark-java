@@ -12,6 +12,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for definitions
@@ -25,8 +26,6 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    // public static final DataKey<DefinitionRepository> DEFINITIONS = new DataKey<>("DEFINITIONS", DefinitionRepository::new);
-    // public static final DataKey<KeepType> DEFINITIONS_KEEP = new DataKey<>("DEFINITIONS_KEEP", KeepType.FIRST); // standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> COLON_MARKER = new DataKey<>("COLON_MARKER", true);
     public static final DataKey<Integer> MARKER_SPACES = new DataKey<>("MARKER_SPACE", 1);
     public static final DataKey<Boolean> TILDE_MARKER = new DataKey<>("TILDE_MARKER", true);
@@ -39,6 +38,16 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new DefinitionItemBlockParser.Factory());
         parserBuilder.blockPreProcessorFactory(new DefinitionListItemBlockPreProcessor.Factory());
@@ -47,15 +56,17 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            //rendererBuilder.nodeRendererFactory(DefinitionNodeRenderer::new);
-            // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(final DataHolder options) {return new DefinitionNodeRenderer(options);}
-            });
-            // rendererBuilder.linkResolverFactory(new DefinitionLinkResolver.Factory());
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(final DataHolder options) {return new DefinitionNodeRenderer(options);}
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }

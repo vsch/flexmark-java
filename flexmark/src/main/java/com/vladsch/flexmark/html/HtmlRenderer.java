@@ -382,6 +382,16 @@ public class HtmlRenderer implements IRender {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
+            // first give extensions a chance to modify options
+            for (Extension extension : extensions) {
+                if (extension instanceof HtmlRendererExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        HtmlRendererExtension htmlRendererExtension = (HtmlRendererExtension) extension;
+                        htmlRendererExtension.rendererOptions(this);
+                    }
+                }
+            }
+
             for (Extension extension : extensions) {
                 if (extension instanceof HtmlRendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
@@ -399,6 +409,12 @@ public class HtmlRenderer implements IRender {
      * Extension for {@link HtmlRenderer}.
      */
     public interface HtmlRendererExtension extends Extension {
+        /**
+         * This method is called first on all extensions so that they can adjust the options.
+         * @param options option set that will be used for the builder
+         */
+        void rendererOptions(MutableDataHolder options);
+
         void extend(Builder rendererBuilder, String rendererType);
     }
 

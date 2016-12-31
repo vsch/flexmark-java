@@ -9,6 +9,7 @@ import com.vladsch.flexmark.superscript.internal.SuperscriptDelimiterProcessor;
 import com.vladsch.flexmark.superscript.internal.SuperscriptJiraRenderer;
 import com.vladsch.flexmark.superscript.internal.SuperscriptNodeRenderer;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for superscripts
@@ -30,16 +31,37 @@ public class SuperscriptExtension implements Parser.ParserExtension, HtmlRendere
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customDelimiterProcessor(new SuperscriptDelimiterProcessor());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new SuperscriptJiraRenderer(options);} });
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new SuperscriptNodeRenderer(options);} });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {return new SuperscriptNodeRenderer(options);}
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {return new SuperscriptJiraRenderer(options);}
+                });
+                break;
         }
     }
 }

@@ -37,12 +37,14 @@ public class MutableListOptions extends ListOptions {
     public MutableListOptions setLooseWhenBlankFollowsItemParagraph(boolean looseWhenBlankFollowsItemParagraph) { this.looseWhenBlankFollowsItemParagraph = looseWhenBlankFollowsItemParagraph; return this; }
     public MutableListOptions setLooseWhenHasLooseSubItem(boolean looseWhenHasLooseSubItem) { this.looseWhenHasLooseSubItem = looseWhenHasLooseSubItem; return this; }
     public MutableListOptions setLooseWhenHasTrailingBlankLine(boolean looseWhenHasTrailingBlankLine) { this.looseWhenHasTrailingBlankLine = looseWhenHasTrailingBlankLine; return this; }
+    public MutableListOptions setNumberedItemMarkerSuffixed(boolean numberedItemMarkerSuffixed) { this.numberedItemMarkerSuffixed = numberedItemMarkerSuffixed; return this; }
     public MutableListOptions setOrderedItemDotOnly(boolean orderedItemDotOnly) { this.orderedItemDotOnly = orderedItemDotOnly; return this; }
     public MutableListOptions setOrderedListManualStart(boolean orderedListManualStart) { this.orderedListManualStart = orderedListManualStart; return this; }
     // int setters
     public MutableListOptions setCodeIndent(int codeIndent) { this.codeIndent = codeIndent; return this; }
     public MutableListOptions setItemIndent(int itemIndent) { this.itemIndent = itemIndent; return this; }
     public MutableListOptions setNewItemCodeIndent(int newItemCodeIndent) { this.newItemCodeIndent = newItemCodeIndent; return this; }
+    public MutableListOptions setItemMarkerSuffixes(String[] itemMarkerSuffixes) { this.itemMarkerSuffixes = itemMarkerSuffixes; return this; }
     // @formatter:on
 }
 

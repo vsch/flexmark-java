@@ -14,5 +14,4 @@ public interface NodeRendererFactory {
      * @return a node renderer
      */
     NodeRenderer create(DataHolder options);
-
 }

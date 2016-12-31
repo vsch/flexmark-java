@@ -31,7 +31,7 @@
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
-        <option name="COMMONMARK_LISTS" value="true" />
+        <option name="COMMONMARK_LISTS" value="false" />
         <option name="DUMMY" value="false" />
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />

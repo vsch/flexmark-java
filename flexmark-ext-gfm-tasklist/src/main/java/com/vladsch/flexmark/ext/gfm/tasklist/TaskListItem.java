@@ -17,12 +17,7 @@ public class TaskListItem extends ListItem {
     @Override
     public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
-        segmentSpanChars(out, taskOpeningMarker, "taskOpen");
-    }
-
-    @Override
-    public BasedSequence[] getSegments() {
-        return new BasedSequence[] { openingMarker, taskOpeningMarker };
+        if (isOrderedItem) out.append(" isOrderedItem");
     }
 
     @Override
@@ -51,20 +46,8 @@ public class TaskListItem extends ListItem {
     }
 
     public TaskListItem(ListItem block) {
-        super(block.getChars(), block.getContentLines());
-        openingMarker = block.getOpeningMarker();
+        super(block);
         isOrderedItem = block instanceof OrderedListItem;
-
-        takeChildren(block);
-        setCharsFromContent();
-    }
-
-    public BasedSequence getTaskOpeningMarker() {
-        return taskOpeningMarker;
-    }
-
-    public void setTaskOpeningMarker(BasedSequence taskOpeningMarker) {
-        this.taskOpeningMarker = taskOpeningMarker;
     }
 
     @Override
@@ -73,7 +56,7 @@ public class TaskListItem extends ListItem {
     }
 
     public boolean isItemDoneMarker() {
-        return !taskOpeningMarker.matches("[ ]");
+        return !markerSuffix.matches("[ ]");
     }
 
     public boolean isOrderedItem() {

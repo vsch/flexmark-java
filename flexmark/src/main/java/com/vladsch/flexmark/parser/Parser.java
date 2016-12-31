@@ -15,16 +15,14 @@ import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.DataSet;
-import com.vladsch.flexmark.util.options.MutableDataSet;
+import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Parses input text to a tree of nodes.
@@ -94,6 +92,11 @@ public class Parser implements IParse {
 
     // space must follow a list item marker to be recognized as such
     public static final DataKey<Boolean> LISTS_ITEM_MARKER_SPACE = new DataKey<>("LISTS_ITEM_MARKER_SPACE", false);
+
+    // strings for list marker suffixes which offset the content, to properly support gfm task lists with content offset matching the suffix end
+    // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed
+    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[]{ });
+    public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
 
     // List parsing options beyond major parser family
     public static final DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
@@ -296,6 +299,15 @@ public class Parser implements IParse {
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
+            // first give extensions a chance to modify parser options
+            for (Extension extension : extensions) {
+                if (extension instanceof ParserExtension) {
+                    if (!loadedExtensions.contains(extension)) {
+                        ParserExtension parserExtension = (ParserExtension) extension;
+                        parserExtension.parserOptions(this);
+                    }
+                }
+            }
             for (Extension extension : extensions) {
                 if (extension instanceof ParserExtension) {
                     if (!loadedExtensions.contains(extension)) {
@@ -361,6 +373,16 @@ public class Parser implements IParse {
      * Extension for {@link Parser}.
      */
     public interface ParserExtension extends Extension {
+        /**
+         * This method is called first on all extensions so that they can adjust the options.
+         * @param options option set that will be used for the builder
+         */
+        void parserOptions(MutableDataHolder options);
+
+        /**
+         * This method is called on all extensions so that they can register their custom processors
+         * @param parserBuilder
+         */
         void extend(Builder parserBuilder);
     }
 }

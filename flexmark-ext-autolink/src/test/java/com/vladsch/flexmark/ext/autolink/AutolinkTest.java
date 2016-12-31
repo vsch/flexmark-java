@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Set;
 
 public class AutolinkTest extends RenderingTestCase {
-
     private static final Set<Extension> EXTENSIONS = Collections.singleton(AutolinkExtension.create());
     private static final Parser PARSER = Parser.builder().extensions(EXTENSIONS).build();
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();

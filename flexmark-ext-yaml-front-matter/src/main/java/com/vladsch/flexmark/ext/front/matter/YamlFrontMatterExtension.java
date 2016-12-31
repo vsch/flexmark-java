@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.front.matter;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.front.matter.internal.YamlFrontMatterBlockParser;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for YAML-like metadata.
@@ -16,13 +17,17 @@ import com.vladsch.flexmark.parser.Parser;
  * </p>
  */
 public class YamlFrontMatterExtension implements Parser.ParserExtension {
-
     private YamlFrontMatterExtension() {
     }
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new YamlFrontMatterBlockParser.Factory());
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
     }
 
     public static Extension create() {

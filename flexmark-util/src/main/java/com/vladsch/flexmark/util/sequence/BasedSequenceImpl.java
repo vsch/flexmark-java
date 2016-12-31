@@ -1053,6 +1053,22 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence prefixOf(final BasedSequence other) {
+        if (getBase() != other.getBase()) return SubSequence.NULL;
+        else if (other.getStartOffset() <= getStartOffset()) return subSequence(0, 0);
+        else if (other.getStartOffset() >= getEndOffset()) return subSequence(0, 0);
+        else return this.baseSubSequence(getStartOffset(), other.getStartOffset());
+    }
+
+    @Override
+    public BasedSequence suffixOf(final BasedSequence other) {
+        if (getBase() != other.getBase()) return SubSequence.NULL;
+        else if (other.getStartOffset() <= getStartOffset()) return subSequence(length(), length());
+        else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
+        else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
+    }
+
+    @Override
     public BasedSequence[] split(char delimiter) {
         return split(delimiter, 0);
     }

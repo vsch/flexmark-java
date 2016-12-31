@@ -1,16 +1,18 @@
 package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListItemBlockPreProcessor;
 import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListNodeRenderer;
-import com.vladsch.flexmark.ext.gfm.tasklist.internal.TaskListParagraphPreProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for GFM style task list items
@@ -26,7 +28,6 @@ import com.vladsch.flexmark.util.options.DataKey;
 public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     // for webview use "<span class=\"taskitem\">" + (node.isDone() ? "X" : "O") + "</span>"
     // for swing use ""
-    public static final DataKey<Boolean> CONVERT_ORDERED_LIST_ITEMS = new DataKey<>("CONVERT_ORDERED_LIST_ITEMS", true);
     public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" />");
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" />");
     public static final DataKey<String> ITEM_CLASS = new DataKey<>("ITEM_CLASS", "task-list-item");
@@ -46,20 +47,35 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+        ListOptions.addItemMarkerSuffixes(options, "[ ]", "[x]", "[X]" );
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.paragraphPreProcessorFactory(new TaskListParagraphPreProcessor.Factory());
+        parserBuilder.blockPreProcessorFactory(new TaskListItemBlockPreProcessor.Factory());
     }
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new TaskListNodeRenderer(options);
-                }
-            });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new TaskListNodeRenderer(options);
+                    }
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }

@@ -13,6 +13,7 @@ import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
  * Extension for footnotes
@@ -48,6 +49,16 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     }
 
     @Override
+    public void rendererOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
+    public void parserOptions(final MutableDataHolder options) {
+
+    }
+
+    @Override
     public void extend(Parser.Builder parserBuilder) {
         parserBuilder.customBlockParserFactory(new FootnoteBlockParser.Factory());
         parserBuilder.linkRefProcessorFactory(new FootnoteLinkRefProcessor.Factory());
@@ -55,14 +66,19 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
-        } else if (rendererType.equals("HTML")) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                @Override
-                public NodeRenderer create(DataHolder options) {
-                    return new FootnoteNodeRenderer(options);
-                }
-            });
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                    @Override
+                    public NodeRenderer create(DataHolder options) {
+                        return new FootnoteNodeRenderer(options);
+                    }
+                });
+                break;
+
+            case "JIRA":
+            case "YOUTRACK":
+                break;
         }
     }
 }
