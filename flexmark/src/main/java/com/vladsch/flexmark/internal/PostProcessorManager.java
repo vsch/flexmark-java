@@ -58,7 +58,7 @@ public class PostProcessorManager {
 
     public Document postProcess(Document document) {
         // first initialize node tracker if
-        ClassifyingNodeTracker classifyingNodeTracker = null;
+        ClassifyingNodeTracker classifyingNodeTracker;
 
         classifyingNodeTracker = null;
         for (PostProcessorDependencyStage stage : postProcessorDependencies.getDependentStages()) {
@@ -95,9 +95,9 @@ public class PostProcessorManager {
                     for (Node node : nodes) {
                         if (node.getParent() == null) continue; // was already removed
                         // now we need to get the bitset for the excluded ancestors of the node, then intersect it with the actual ancestors of this factory
-                        int index = -1;
-                        BitSet nodeAncestors = null;
-                        BitSet nodeExclusions = null;
+                        int index;
+                        BitSet nodeAncestors;
+                        BitSet nodeExclusions;
                         Set<Class<?>> excluded = dependentNodeTypes.get(node.getClass());
                         if (excluded != null) {
                             index = classifyingNodeTracker.getItems().indexOf(node);

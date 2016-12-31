@@ -54,7 +54,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     @Override
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
-        boolean isMarker = false;
+        boolean isMarker;
         if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || (continueToBlankLine && lastWasBlankLine == 0))) {
             int newColumn = state.getColumn() + state.getIndent();
             lastWasBlankLine = 0;
@@ -85,7 +85,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return Collections.emptySet(); 
+            return Collections.emptySet();
             //new HashSet<Class<?extends CustomBlockParserFactory>>(Arrays.asList(
             //        //BlockQuoteParser.Factory.class,
             //        //HeadingParser.Factory.class,

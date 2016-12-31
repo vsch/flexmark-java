@@ -888,7 +888,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         index++;
         int startIndex = index;
 
-        int nestedBrackets = 0;
+        int nestedBrackets;
         boolean hadBang = false;
 
         // look through stack of delimiters for a [ or ![
@@ -933,7 +933,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     // possible multi-line image url
                     int contentStart = index;
                     int contentEnd = contentStart;
-                    BasedSequence multiLineTitle = null;
+                    BasedSequence multiLineTitle;
 
                     while (true) {
                         sp();

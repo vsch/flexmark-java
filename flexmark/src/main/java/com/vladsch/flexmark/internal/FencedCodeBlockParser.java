@@ -44,7 +44,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         int nextNonSpace = state.getNextNonSpaceIndex();
         int newIndex = state.getIndex();
         BasedSequence line = state.getLine();
-        Matcher matcher = null;
+        Matcher matcher;
         boolean matches = (state.getIndent() <= 3 &&
                 nextNonSpace < line.length() &&
                 (!matchingCloser || line.charAt(nextNonSpace) == fenceChar));

@@ -13,7 +13,7 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * Whether the image ref is desired, if not then ! will be stripped off the prefix and treated as plain text
      *
      * @return true if ! is part of the desired element, false otherwise
-     * @param options
+     * @param options options
      */
     boolean getWantExclamationPrefix(DataHolder options);
 
@@ -25,7 +25,7 @@ public interface LinkRefProcessorFactory extends ComputableFactory<LinkRefProces
      * allow outer one to match the desired element
      *
      * @return nesting level for references, {@code >0} for nesting
-     * @param options
+     * @param options options
      */
     int getBracketNestingLevel(DataHolder options);
 

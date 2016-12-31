@@ -13,9 +13,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -29,7 +27,17 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         if (!abbrRepository.isEmpty()) {
             abbreviationMap = new HashMap<>();
             StringBuilder sb = new StringBuilder();
-            for (String abbr : abbrRepository.keySet()) {
+            
+            // sort reverse aphabetical order so longer ones match first. for sdk7
+            ArrayList<String> abbreviations = new ArrayList<>(abbrRepository.keySet());
+            Collections.sort(abbreviations, new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o2.compareTo(o1);
+                }
+            });
+
+            for (String abbr : abbreviations) {
                 AbbreviationBlock abbreviationBlock = abbrRepository.get(abbr);
                 BasedSequence abbreviation = abbreviationBlock.getAbbreviation();
                 if (!abbreviation.isEmpty()) {
@@ -43,7 +51,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                 }
             }
 
-            if (sb.length() > 0) abbreviations = Pattern.compile(sb.toString());
+            if (sb.length() > 0) this.abbreviations = Pattern.compile(sb.toString());
         }
     }
 

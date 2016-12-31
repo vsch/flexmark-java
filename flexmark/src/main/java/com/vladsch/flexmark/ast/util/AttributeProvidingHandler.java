@@ -12,6 +12,7 @@ public class AttributeProvidingHandler<N extends Node> extends NodeAdaptingVisit
 
     @Override
     public void setAttributes(Node node, AttributablePart part, Attributes attributes) {
+        //noinspection unchecked
         myAdapter.setAttributes((N)node, part, attributes);
     }
 }

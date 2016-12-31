@@ -39,6 +39,7 @@ public abstract class NodePostProcessorFactory implements PostProcessorFactory {
     @SafeVarargs
     protected final void addNodes(Class<? extends Node>... nodeTypes) {
         for (Class<? extends Node> nodeType : nodeTypes) {
+            //noinspection unchecked
             NODE_MAP.put(nodeType, Collections.EMPTY_SET);
         }
     }

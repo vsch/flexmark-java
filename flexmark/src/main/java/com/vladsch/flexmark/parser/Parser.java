@@ -381,7 +381,7 @@ public class Parser implements IParse {
 
         /**
          * This method is called on all extensions so that they can register their custom processors
-         * @param parserBuilder
+         * @param parserBuilder parser builder with which to register extensions
          */
         void extend(Builder parserBuilder);
     }

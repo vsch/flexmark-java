@@ -103,6 +103,11 @@ Next Release To Do List
 0.10.0
 ------
 
+- Fix: abbreviation extension for JDK7 needed to sort regex list of abbreviations in descending
+  alphabetical order.
+
+- Fix: travis yaml to JDK7
+
 - Fix: Emoji extension to not allow spaces between delimiters and add API methods to support
   delimiters converting themselves to text if contained text does not meet constraints.
 

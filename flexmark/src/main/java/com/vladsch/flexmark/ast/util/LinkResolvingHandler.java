@@ -12,6 +12,7 @@ public class LinkResolvingHandler<N extends Node> extends NodeAdaptingVisitHandl
 
     @Override
     public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
+        //noinspection unchecked
         return myAdapter.resolveLink((N)node, context, link);
     }
 }
