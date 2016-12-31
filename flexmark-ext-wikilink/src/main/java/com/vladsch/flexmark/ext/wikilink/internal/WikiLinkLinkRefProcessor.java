@@ -2,9 +2,11 @@ package com.vladsch.flexmark.ext.wikilink.internal;
 
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
+import com.vladsch.flexmark.ext.wikilink.WikiNode;
 import com.vladsch.flexmark.parser.LinkRefProcessor;
 import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -45,8 +47,31 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public void adjustInlineText(Node node) {
-        // nothing to do, our prefixes are stripped out of a link ref
+    public BasedSequence adjustInlineText(Document document, Node node) {
+        // here we remove the page ref from child text and only leave the text part
+        assert (node instanceof WikiNode);
+        final WikiNode wikiNode = (WikiNode) node;
+        return wikiNode.getText().ifNull(wikiNode.getLink());
+    }
+
+    @Override
+    public boolean allowDelimiters(final BasedSequence chars, final Document document, final Node node) {
+        assert (node instanceof WikiNode);
+        final WikiNode wikiNode = (WikiNode) node;
+        return node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.getFrom(document) && wikiNode.getText().ifNull(wikiNode.getLink()).containsAllOf(chars);
+    }
+
+    @Override
+    public void updateNodeElements(final Document document, final Node node) {
+        assert (node instanceof WikiNode);
+        final WikiNode wikiNode = (WikiNode) node;
+        if (node instanceof WikiLink && WikiLinkExtension.ALLOW_INLINES.getFrom(document)) {
+            // need to update link and pageRef with plain text versions
+            if (wikiNode.getText().isNull()) {
+                BasedSequence link = new TextCollectingVisitor().collectAndGetSequence(node);
+                wikiNode.setLink(link);
+            }
+        }
     }
 
     @Override

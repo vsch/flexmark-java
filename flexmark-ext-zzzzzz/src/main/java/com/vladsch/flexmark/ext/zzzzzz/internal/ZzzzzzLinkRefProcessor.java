@@ -34,8 +34,19 @@ public class ZzzzzzLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public void adjustInlineText(Node node) {
+    public BasedSequence adjustInlineText(Document document, Node node) {
         // nothing to do, our prefixes are stripped out of a link ref
+        return node.getChars();
+    }
+
+    @Override
+    public boolean allowDelimiters(final BasedSequence chars, final Document document, final Node node) {
+        return true;
+    }
+
+    @Override
+    public void updateNodeElements(final Document document, final Node node) {
+
     }
 
     @Override

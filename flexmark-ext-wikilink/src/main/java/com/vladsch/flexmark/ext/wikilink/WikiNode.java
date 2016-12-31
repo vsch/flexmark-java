@@ -140,7 +140,21 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
     }
 
     public void setLink(BasedSequence link) {
+        // now parse out the # from the link
         this.link = link;
+
+        if (((this instanceof WikiImage))) {
+            this.pageRef = link;
+        } else {
+            int pos = link.indexOf('#');
+            if (pos < 0) {
+                this.pageRef = link;
+            } else {
+                this.pageRef = link.subSequence(0, pos);
+                this.anchorMarker = link.subSequence(pos, pos + 1);
+                this.anchorRef = link.subSequence(pos + 1);
+            }
+        }
     }
 
     public void setLinkChars(BasedSequence linkChars) {
@@ -149,7 +163,7 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
         openingMarker = linkChars.subSequence(0, start);
         closingMarker = linkChars.subSequence(length - 2, length);
 
-        int pos = linkChars.indexOf('|');
+        int pos = linkIsFirst ? linkChars.lastIndexOf('|') : linkChars.indexOf('|');
         BasedSequence link;
         if (pos < 0) {
             link = linkChars.subSequence(start, length - 2);
@@ -164,20 +178,6 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
             }
         }
 
-        // now parse out the # from the link
-        this.link = link;
-
-        if (((this instanceof WikiImage))) {
-            this.pageRef = link;
-        } else {
-            pos = link.indexOf('#');
-            if (pos < 0) {
-                this.pageRef = link;
-            } else {
-                this.pageRef = link.subSequence(0, pos);
-                this.anchorMarker = link.subSequence(pos, pos + 1);
-                this.anchorRef = link.subSequence(pos + 1);
-            }
-        }
+        setLink(link);
     }
 }

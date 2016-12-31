@@ -36,12 +36,11 @@ public class WikiLinkJiraRenderer implements NodeRenderer {
         if (options.disableRendering) {
             html.text(node.getChars().unescape());
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString(), null);
-            String anchorRef = node.getAnchorMarker().isNull() ? "" : node.getAnchorMarker().toString() + node.getAnchorRef().toString();
+            ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getLink().toString(), null);
             html.raw("[");
             html.raw(node.getText().isNotNull() ? node.getText().toString() : node.getPageRef().toString());
             html.raw("|");
-            html.raw(resolvedLink.getUrl() + anchorRef);
+            html.raw(resolvedLink.getUrl());
             html.raw("]");
         }
     }

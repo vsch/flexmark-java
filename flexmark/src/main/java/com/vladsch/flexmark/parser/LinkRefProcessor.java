@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.parser;
 
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -48,7 +49,26 @@ public interface LinkRefProcessor {
      * Adjust child nodes' text as needed when some of the link ref text was used in the opening or closing sequence of the node
      * or if the children are not desired then removeIndex them.
      *
-     * @param node node whose inline text is to be adjusted to reflect some of the text having been used as part of the opener and/or closer sequence.
+     * @param document document, can be used to get parsing options
+     * @param node     node whose inline text is to be adjusted to reflect some of the text having been used as part of the opener and/or closer sequence.
+     * @return adjusted sequence to use for this node's child text
      */
-    void adjustInlineText(Node node);
+    BasedSequence adjustInlineText(Document document, Node node);
+
+    /**
+     * Allows the delimiter processor to allow/disallow other delimiters in its inline text
+     *
+     * @param chars    character sub-sequence to test
+     * @param document document, can be used to get options
+     * @param node     delimited node created by this processor  @return true if delimiters are allowed in this part of the node's text
+     */
+    boolean allowDelimiters(BasedSequence chars, Document document, Node node);
+
+    /**
+     * Allows the processor to adjust nodes' elements after all delimiters have been processed inside the inlined text
+     *
+     * @param document document, can be used to get parsing options
+     * @param node     node whose elements can be adjusted
+     */
+    void updateNodeElements(Document document, Node node);
 }

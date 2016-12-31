@@ -31,9 +31,19 @@ public class WikiLinkLinkResolver implements LinkResolver {
             int iMax = wikiLink.length();
             sb.append(isWikiImage ? options.imagePrefix : options.linkPrefix);
 
+            boolean hadAnchorRef = false;
+
             for (int i = 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
+
+                if (c == '#') {
+                    if (hadAnchorRef) continue;
+                    sb.append(isWikiImage ? options.imageFileExtension : options.linkFileExtension);
+                    hadAnchorRef = true;
+                }
+
                 int pos = fromChars.indexOf(c);
+
                 if (pos < 0) {
                     sb.append(c);
                 } else {
@@ -41,12 +51,13 @@ public class WikiLinkLinkResolver implements LinkResolver {
                 }
             }
 
-            if (isWikiImage) {
-                sb.append(options.imageFileExtension);
-                return new ResolvedLink(LinkType.IMAGE, sb.toString(), LinkStatus.UNCHECKED);
+            if (!hadAnchorRef) {
+                sb.append(isWikiImage ? options.imageFileExtension : options.linkFileExtension);
             }
-            else {
-                sb.append(options.linkFileExtension);
+
+            if (isWikiImage) {
+                return new ResolvedLink(LinkType.IMAGE, sb.toString(), LinkStatus.UNCHECKED);
+            } else {
                 return new ResolvedLink(LinkType.LINK, sb.toString(), LinkStatus.UNCHECKED);
             }
         }

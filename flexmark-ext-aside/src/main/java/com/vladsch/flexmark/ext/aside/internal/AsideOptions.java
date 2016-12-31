@@ -8,7 +8,7 @@ class AsideOptions {
     public final boolean ignoreBlankLine;
 
     public AsideOptions(DataHolder options) {
-        this.extendToBlankLine = options.get(AsideExtension.EXTEND_TO_BLANK_LINE);
-        this.ignoreBlankLine = options.get(AsideExtension.IGNORE_BLANK_LINE);
+        this.extendToBlankLine = AsideExtension.EXTEND_TO_BLANK_LINE.getFrom(options);
+        this.ignoreBlankLine = AsideExtension.IGNORE_BLANK_LINE.getFrom(options);
     }
 }

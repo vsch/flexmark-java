@@ -2206,7 +2206,7 @@ wiki link with text
 Document[0, 24]
   Paragraph[0, 24]
     WikiLink[0, 23] linkOpen:[0, 2, "[["] link:[12, 21, "wiki link"] pageRef:[12, 21, "wiki link"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[21, 23, "]]"]
-      Text[2, 21] chars:[2, 21, "wiki  …  link"]
+      Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
 
 
@@ -2221,7 +2221,7 @@ wiki link with text, links first option
 Document[0, 23]
   Paragraph[0, 23]
     WikiLink[0, 23] linkOpen:[0, 2, "[["] text:[12, 21, "wiki text"] textSep:[11, 12, "|"] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[21, 23, "]]"]
-      Text[2, 21] chars:[2, 21, "wiki  …  text"]
+      Text[12, 21] chars:[12, 21, "wiki text"]
 ````````````````````````````````
 
 
@@ -2266,7 +2266,7 @@ With text, empty anchor ref
 Document[0, 26]
   Paragraph[0, 26]
     WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[12, 22, "wiki link#"] pageRef:[12, 21, "wiki link"] anchorMarker:[21, 22, "#"] anchorRef:[22, 22] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[22, 24, "]]"]
-      Text[2, 22] chars:[2, 22, "wiki  … link#"]
+      Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
 
 
@@ -2281,7 +2281,7 @@ With text, anchor ref
 Document[0, 36]
   Paragraph[0, 36]
     WikiLink[0, 34] linkOpen:[0, 2, "[["] link:[12, 32, "wiki link#anchor-ref"] pageRef:[12, 21, "wiki link"] anchorMarker:[21, 22, "#"] anchorRef:[22, 32, "anchor-ref"] textSep:[11, 12, "|"] text:[2, 11, "wiki text"] linkClose:[32, 34, "]]"]
-      Text[2, 32] chars:[2, 32, "wiki  … r-ref"]
+      Text[2, 11] chars:[2, 11, "wiki text"]
 ````````````````````````````````
 
 

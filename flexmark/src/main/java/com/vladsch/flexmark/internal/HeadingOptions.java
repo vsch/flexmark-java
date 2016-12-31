@@ -9,8 +9,8 @@ class HeadingOptions {
     final int setextMarkerLength;
 
     public HeadingOptions(DataHolder options) {
-        this.headersNoAtxSpace = options.get(Parser.HEADING_NO_ATX_SPACE);
-        this.headersNoLeadSpace = options.get(Parser.HEADING_NO_LEAD_SPACE);
-        this.setextMarkerLength = options.get(Parser.HEADING_SETEXT_MARKER_LENGTH);
+        this.headersNoAtxSpace = Parser.HEADING_NO_ATX_SPACE.getFrom(options);
+        this.headersNoLeadSpace = Parser.HEADING_NO_LEAD_SPACE.getFrom(options);
+        this.setextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
     }
 }

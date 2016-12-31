@@ -30,7 +30,6 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
         return BRACKET_NESTING_LEVEL;
     }
 
-
     @Override
     public boolean isMatch(BasedSequence nodeChars) {
         return nodeChars.length() >= 3 && nodeChars.charAt(0) == '[' && nodeChars.charAt(1) == '^' && nodeChars.endCharAt(1) == ']';
@@ -51,15 +50,19 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
     }
 
     @Override
-    public void adjustInlineText(Node node) {
-        Node firstChild = node.getFirstChild();
-        if (firstChild != null) {
-            if (firstChild.getChars().length() == 1) {
-                firstChild.unlink();
-            } else {
-                firstChild.setChars(firstChild.getChars().subSequence(1));
-            }
-        }
+    public BasedSequence adjustInlineText(Document document, Node node) {
+        assert node instanceof Footnote;
+        return ((Footnote) node).getText();
+    }
+
+    @Override
+    public boolean allowDelimiters(final BasedSequence chars, final Document document, final Node node) {
+        return true;
+    }
+
+    @Override
+    public void updateNodeElements(final Document document, final Node node) {
+
     }
 
     public static class Factory implements LinkRefProcessorFactory {
@@ -78,5 +81,4 @@ public class FootnoteLinkRefProcessor implements LinkRefProcessor {
             return BRACKET_NESTING_LEVEL;
         }
     }
-
 }

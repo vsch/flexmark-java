@@ -13,12 +13,12 @@ class AnchorLinkOptions {
     public final boolean noBlockQuotes;
 
     public AnchorLinkOptions(DataHolder options) {
-        this.wrapText = options.get(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT);
-        this.textPrefix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_PREFIX);
-        this.textSuffix = options.get(AnchorLinkExtension.ANCHORLINKS_TEXT_SUFFIX);
-        this.anchorClass = options.get(AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS);
-        this.setName = options.get(AnchorLinkExtension.ANCHORLINKS_SET_NAME);
-        this.setId = options.get(AnchorLinkExtension.ANCHORLINKS_SET_ID);
-        this.noBlockQuotes = options.get(AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE);
+        this.wrapText = AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT.getFrom(options);
+        this.textPrefix = AnchorLinkExtension.ANCHORLINKS_TEXT_PREFIX.getFrom(options);
+        this.textSuffix = AnchorLinkExtension.ANCHORLINKS_TEXT_SUFFIX.getFrom(options);
+        this.anchorClass = AnchorLinkExtension.ANCHORLINKS_ANCHOR_CLASS.getFrom(options);
+        this.setName = AnchorLinkExtension.ANCHORLINKS_SET_NAME.getFrom(options);
+        this.setId = AnchorLinkExtension.ANCHORLINKS_SET_ID.getFrom(options);
+        this.noBlockQuotes = AnchorLinkExtension.ANCHORLINKS_NO_BLOCK_QUOTE.getFrom(options);
     }
 }

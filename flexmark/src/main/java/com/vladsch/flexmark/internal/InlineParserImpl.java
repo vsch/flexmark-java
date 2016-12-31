@@ -71,11 +71,11 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         public final boolean hardLineBreakLimit;
 
         public InlineParserOptions(DataHolder options) {
-            matchLookaheadFirst = options.get(Parser.MATCH_NESTED_LINK_REFS_FIRST);
-            //parseInlineAnchorLinks = options.get(Parser.PARSE_INLINE_ANCHOR_LINKS);
-            parseMultiLineImageUrls = options.get(Parser.PARSE_MULTI_LINE_IMAGE_URLS);
-            hardLineBreakLimit = options.get(Parser.HARD_LINE_BREAK_LIMIT);
-            //parseGitHubIssueMarker = options.get(PARSE_GITHUB_ISSUE_MARKER);
+            matchLookaheadFirst = Parser.MATCH_NESTED_LINK_REFS_FIRST.getFrom(options);
+            //parseInlineAnchorLinks = Parser.PARSE_INLINE_ANCHOR_LINKS.getFrom(options);
+            parseMultiLineImageUrls = Parser.PARSE_MULTI_LINE_IMAGE_URLS.getFrom(options);
+            hardLineBreakLimit = Parser.HARD_LINE_BREAK_LIMIT.getFrom(options);
+            //parseGitHubIssueMarker = PARSE_GITHUB_ISSUE_MARKER.getFrom(options);
         }
     }
 
@@ -1096,16 +1096,55 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 insertNode = ref != null ? isImage ? new ImageRef() : new LinkRef() : isImage ? new Image() : new Link();
             }
 
-            Node node = opener.node.getNext();
-            while (node != null) {
-                Node next = node.getNext();
-                insertNode.appendChild(node);
-                node = next;
+            {
+                Node node = opener.node.getNext();
+                while (node != null) {
+                    Node next = node.getNext();
+                    insertNode.appendChild(node);
+                    node = next;
+                }
             }
 
             if (linkRefProcessorMatch != null) {
                 // may need to adjust children's text because some characters were part of the processor's opener/closer
-                linkRefProcessorMatch.processor.adjustInlineText(insertNode);
+                if (insertNode.hasChildren()) {
+                    final BasedSequence original = insertNode.childChars();
+                    final BasedSequence text = linkRefProcessorMatch.processor.adjustInlineText(document, insertNode);
+
+                    // may need to remove some delimiters if they span across original and changed text boundary or if now they are outside text boundary
+                    Delimiter delimiter = lastDelimiter;
+                    while (delimiter != null) {
+                        Delimiter prevDelimiter = delimiter.previous;
+
+                        final BasedSequence delimiterChars = delimiter.getInput().subSequence(delimiter.getStartIndex(), delimiter.getEndIndex());
+                        if (original.containsAllOf(delimiterChars)) {
+                            if (!text.containsAllOf(delimiterChars) || !linkRefProcessorMatch.processor.allowDelimiters(delimiterChars, document, insertNode)) {
+                                // remove it
+                                removeDelimiterKeepNode(delimiter);
+                            }
+                        }
+
+                        delimiter = prevDelimiter;
+                    }
+
+                    if (!text.containsAllOf(original)) {
+                        // now need to truncate child text
+                        for (Node node : insertNode.getChildren()) {
+                            final BasedSequence nodeChars = node.getChars();
+                            if (text.containsSomeOf(nodeChars)) {
+                                if (!text.containsAllOf(nodeChars)) {
+                                   // truncate the contents to intersection of node's chars and adjusted chars
+                                    BasedSequence chars = text.intersect(nodeChars);
+                                    node.setChars(chars);
+                                }
+                            } else {
+                                // remove the node
+                                node.unlink();
+                            }
+                        }
+                    }
+                }
+
             }
             appendNode(insertNode);
 
@@ -1142,6 +1181,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             processDelimiters(opener.previousDelimiter);
             Node toRemove = opener.node;
             removeLastBracket();
+
+            if (linkRefProcessorMatch != null) {
+                linkRefProcessorMatch.processor.updateNodeElements(document, insertNode);
+            }
 
             // Links within links are not allowed. We found this link, so there can be no other link around it.
             if (insertNode instanceof Link) {
@@ -1508,7 +1551,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Text nextText = delim.getNextNonDelimiterTextNode();
         if (previousText != null && nextText != null) {
             // Merge adjacent text nodes
-            previousText.setChars(input.subSequence(previousText.getStartOffset(), nextText.getEndOffset()));
+            previousText.setChars(input.baseSubSequence(previousText.getStartOffset(), nextText.getEndOffset()));
             nextText.unlink();
         }
 

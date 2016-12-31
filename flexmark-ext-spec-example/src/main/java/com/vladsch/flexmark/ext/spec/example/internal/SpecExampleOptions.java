@@ -13,12 +13,12 @@ class SpecExampleOptions {
     public final String renderedHtmlSuffix;
 
     public SpecExampleOptions(DataHolder options) {
-        this.renderHtml = options.get(SpecExampleExtension.SPEC_EXAMPLE_RENDER_RAW_HTML);
-        this.renderAs = options.get(SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS);
-        this.exampleBreak = options.get(SpecExampleExtension.SPEC_EXAMPLE_BREAK);
-        this.typeBreak = options.get(SpecExampleExtension.SPEC_TYPE_BREAK);
-        this.optionNodes = options.get(SpecExampleExtension.SPEC_OPTION_NODES);
-        this.renderedHtmlPrefix = options.get(SpecExampleExtension.SPEC_EXAMPLE_RENDERED_HTML_PREFIX);
-        this.renderedHtmlSuffix = options.get(SpecExampleExtension.SPEC_EXAMPLE_RENDERED_HTML_SUFFIX);
+        this.renderHtml = SpecExampleExtension.SPEC_EXAMPLE_RENDER_RAW_HTML.getFrom(options);
+        this.renderAs = SpecExampleExtension.SPEC_EXAMPLE_RENDER_AS.getFrom(options);
+        this.exampleBreak = SpecExampleExtension.SPEC_EXAMPLE_BREAK.getFrom(options);
+        this.typeBreak = SpecExampleExtension.SPEC_TYPE_BREAK.getFrom(options);
+        this.optionNodes = SpecExampleExtension.SPEC_OPTION_NODES.getFrom(options);
+        this.renderedHtmlPrefix = SpecExampleExtension.SPEC_EXAMPLE_RENDERED_HTML_PREFIX.getFrom(options);
+        this.renderedHtmlSuffix = SpecExampleExtension.SPEC_EXAMPLE_RENDERED_HTML_SUFFIX.getFrom(options);
     }
 }

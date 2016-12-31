@@ -3,6 +3,7 @@
     <scope-profiles>
       <element scope="Wiki Link Overview" profile="OVERVIEW" />
       <element scope="Definition List Overview" profile="OVERVIEW" />
+      <element scope="Emoji Overview" profile="OVERVIEW" />
     </scope-profiles>
   </settings>
 </component>

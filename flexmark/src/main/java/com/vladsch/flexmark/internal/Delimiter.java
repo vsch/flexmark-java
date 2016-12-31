@@ -7,7 +7,6 @@ import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class Delimiter implements DelimiterRun {
-
     final Text node;
     final BasedSequence input;
     final char delimiterChar;
@@ -35,6 +34,10 @@ public class Delimiter implements DelimiterRun {
 
     public Text getNode() {
         return node;
+    }
+
+    public BasedSequence getInput() {
+        return input;
     }
 
     public int getStartIndex() {
@@ -96,9 +99,19 @@ public class Delimiter implements DelimiterRun {
             ((Node) delimitedNode).appendChild(tmp);
             tmp = next;
         }
-        
+
         delimitedNode.setText(input.subSequence(getEndIndex(), closer.getStartIndex()));
         getNode().insertAfter((Node) delimitedNode);
+    }
+
+    public void convertDelimitersToText(int delimitersUsed, Delimiter closer) {
+        Text openerText = new Text();
+        openerText.setChars(getTailChars(delimitersUsed));
+        Text closerText = new Text();
+        closerText.setChars(closer.getLeadChars(delimitersUsed));
+
+        getNode().insertAfter(openerText);
+        closer.getNode().insertBefore(closerText);
     }
 
     @Override

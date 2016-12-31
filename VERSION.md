@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.10.0](#0100)
 - [0.9.4](#094)
 - [0.9.3](#093)
 - [0.9.2](#092)
@@ -88,7 +89,7 @@ Next Release To Do List
           - [ ] League/CommonMark
           - [x] CommonMark (default for family)
       - [x] FixedIndent
-          - [x] Pegdown (done but needs a profile)
+          - [x] Pegdown
           - [x] MultiMarkdown
           - [ ] Pandoc
       - [x] Kramdown (default for family)
@@ -98,6 +99,39 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.10.0
+------
+
+- Fix: Emoji extension to not allow spaces between delimiters and add API methods to support
+  delimiters converting themselves to text if contained text does not meet constraints.
+
+- Add: method `Delimiter.convertDelimitersToText(int, Delimiter)` to remove used
+  delimiters and convert them to text nodes instead of the expected delimited text node. For use
+  when a delimiter processor determines that the delimited text is not valid for its wrapping.
+
+- Change: `LinkRefProcessor.adjustInlineText(Document, Node)` to allow access to options and now
+  returning `BasedSequence` of characters to keep as part of its contained text children.
+
+- Add: `LinkRefProcessor.allowDelimiters(BasedSequence, Document, Node)` to have delimiter
+  processing disabled for some regions withing the contained text
+
+- Add: `LinkRefProcessor.updateNodeElements(Document, Node)` to allow the processor to update
+  some node elements after all delimiter processing for contained text has completed. For
+  example allows `WikiLink` nodes with `WikiLinkExtension.ALLOW_INLINES` enabled to adjust
+  `link` field without inline markers.
+
+- Add: `WikiLinkExtension.ALLOW_INLINES`, default `false`, to allow delimiter processing in text
+  part when `|` is used, or when combined text and page ref in the contained text.
+
+- Change: wiki links now split text from link using `|` based on
+  `WikiLinkExtension.LINK_FIRST_SYNTAX` setting. If link is first then last `|` is used to split
+  off the text portion. If text is first then first `|` is used. This ensures that no `|` are in
+  the text, allowing `|` in links to be handled by the `LinkResolver`
+
+- Change: Wiki link nodes now pass the whole link text to link resolver, previously only the
+  `pageRef()` portion was passed and the `anchorRef()` was appended to the resolved link. Now it
+  is the link resolver's responsibility to handle this extraction and attachment of anchor refs.
 
 0.9.4
 -----

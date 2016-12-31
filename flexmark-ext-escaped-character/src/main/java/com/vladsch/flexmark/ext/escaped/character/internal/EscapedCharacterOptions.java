@@ -8,8 +8,8 @@ class EscapedCharacterOptions {
     //public final int escaped_characterOption3;
 
     public EscapedCharacterOptions(DataHolder options) {
-        //this.escaped_characterOption1 = options.get(EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION1);
-        //this.escaped_characterOption2 = options.get(EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION2);
-        //this.escaped_characterOption3 = options.get(EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION3);
+        //this.escaped_characterOption1 = EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION1.getFrom(options);
+        //this.escaped_characterOption2 = EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION2.getFrom(options);
+        //this.escaped_characterOption3 = EscapedCharacterExtension.ESCAPED_CHARACTER_OPTION3.getFrom(options);
     }
 }

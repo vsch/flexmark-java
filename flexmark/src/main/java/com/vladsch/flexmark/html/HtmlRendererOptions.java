@@ -27,27 +27,27 @@ public class HtmlRendererOptions {
     //public final boolean sourceWrapInlineHtml;
 
     public HtmlRendererOptions(DataHolder options) {
-        softBreak = options.get(HtmlRenderer.SOFT_BREAK);
-        hardBreak = options.get(HtmlRenderer.HARD_BREAK);
-        escapeHtmlBlocks = options.get(HtmlRenderer.ESCAPE_HTML_BLOCKS);
-        escapeHtmlCommentBlocks = options.get(HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS);
-        escapeInlineHtml = options.get(HtmlRenderer.ESCAPE_INLINE_HTML);
-        escapeInlineHtmlComments = options.get(HtmlRenderer.ESCAPE_INLINE_HTML_COMMENTS);
-        percentEncodeUrls = options.get(HtmlRenderer.PERCENT_ENCODE_URLS);
-        indentSize = options.get(HtmlRenderer.INDENT_SIZE);
-        suppressHtmlBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_BLOCKS);
-        suppressHtmlCommentBlocks = options.get(HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS);
-        suppressInlineHtml = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML);
-        suppressInlineHtmlComments = options.get(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS);
-        doNotRenderLinksInDocument = options.get(HtmlRenderer.DO_NOT_RENDER_LINKS);
-        renderHeaderId = options.get(HtmlRenderer.RENDER_HEADER_ID);
-        generateHeaderIds = options.get(HtmlRenderer.GENERATE_HEADER_ID);
-        languageClassPrefix = options.get(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX);
-        sourcePositionAttribute = options.get(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE);
-        sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES);
-        sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS);
-        //sourceWrapInlineHtml = !sourcePositionAttribute.isEmpty() && options.get(HtmlRenderer.SOURCE_WRAP_INLINE_HTML);
-        formatFlags = options.get(HtmlRenderer.FORMAT_FLAGS);
-        maxTrailingBlankLines = options.get(HtmlRenderer.MAX_TRAILING_BLANK_LINES);
+        softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
+        hardBreak = HtmlRenderer.HARD_BREAK.getFrom(options);
+        escapeHtmlBlocks = HtmlRenderer.ESCAPE_HTML_BLOCKS.getFrom(options);
+        escapeHtmlCommentBlocks = HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS.getFrom(options);
+        escapeInlineHtml = HtmlRenderer.ESCAPE_INLINE_HTML.getFrom(options);
+        escapeInlineHtmlComments = HtmlRenderer.ESCAPE_INLINE_HTML_COMMENTS.getFrom(options);
+        percentEncodeUrls = HtmlRenderer.PERCENT_ENCODE_URLS.getFrom(options);
+        indentSize = HtmlRenderer.INDENT_SIZE.getFrom(options);
+        suppressHtmlBlocks = HtmlRenderer.SUPPRESS_HTML_BLOCKS.getFrom(options);
+        suppressHtmlCommentBlocks = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS.getFrom(options);
+        suppressInlineHtml = HtmlRenderer.SUPPRESS_INLINE_HTML.getFrom(options);
+        suppressInlineHtmlComments = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS.getFrom(options);
+        doNotRenderLinksInDocument = HtmlRenderer.DO_NOT_RENDER_LINKS.getFrom(options);
+        renderHeaderId = HtmlRenderer.RENDER_HEADER_ID.getFrom(options);
+        generateHeaderIds = HtmlRenderer.GENERATE_HEADER_ID.getFrom(options);
+        languageClassPrefix = HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX.getFrom(options);
+        sourcePositionAttribute = HtmlRenderer.SOURCE_POSITION_ATTRIBUTE.getFrom(options);
+        sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES.getFrom(options);
+        sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS.getFrom(options);
+        //sourceWrapInlineHtml = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_INLINE_HTML.getFrom(options);
+        formatFlags = HtmlRenderer.FORMAT_FLAGS.getFrom(options);
+        maxTrailingBlankLines = HtmlRenderer.MAX_TRAILING_BLANK_LINES.getFrom(options);
     }
 }

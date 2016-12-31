@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 public class WikiLinkOptions {
+    public final boolean allowInlines;
     public final boolean disableRendering;
     public final boolean imageLinks;
     public final boolean linkFirstSyntax;
@@ -13,12 +14,13 @@ public class WikiLinkOptions {
     public final String linkPrefix;
 
     public WikiLinkOptions(DataHolder options) {
-        this.disableRendering = options.get(WikiLinkExtension.DISABLE_RENDERING);
-        this.imageFileExtension = options.get(WikiLinkExtension.IMAGE_FILE_EXTENSION);
-        this.imageLinks = options.get(WikiLinkExtension.IMAGE_LINKS);
-        this.imagePrefix = options.get(WikiLinkExtension.IMAGE_PREFIX);
-        this.linkFileExtension = options.get(WikiLinkExtension.LINK_FILE_EXTENSION);
-        this.linkFirstSyntax = options.get(WikiLinkExtension.LINK_FIRST_SYNTAX);
-        this.linkPrefix = options.get(WikiLinkExtension.LINK_PREFIX);
+        this.allowInlines = WikiLinkExtension.ALLOW_INLINES.getFrom(options);
+        this.disableRendering = WikiLinkExtension.DISABLE_RENDERING.getFrom(options);
+        this.imageFileExtension = WikiLinkExtension.IMAGE_FILE_EXTENSION.getFrom(options);
+        this.imageLinks = WikiLinkExtension.IMAGE_LINKS.getFrom(options);
+        this.imagePrefix = WikiLinkExtension.IMAGE_PREFIX.getFrom(options);
+        this.linkFileExtension = WikiLinkExtension.LINK_FILE_EXTENSION.getFrom(options);
+        this.linkFirstSyntax = WikiLinkExtension.LINK_FIRST_SYNTAX.getFrom(options);
+        this.linkPrefix = WikiLinkExtension.LINK_PREFIX.getFrom(options);
     }
 }

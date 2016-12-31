@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.wikilink;
+package com.vladsch.flexmark.ext.emoji;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -11,23 +11,21 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboWikiLinkSpecTest extends ComboSpecTestCase {
-    static final String SPEC_RESOURCE = "/ext_wikilink_ast_spec.md";
+public class ComboEmojiCrashSpecTest extends ComboSpecTestCase {
+    static final String SPEC_RESOURCE = "/ext_emoji_crash_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(WikiLinkExtension.create()));
+            .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
+            .set(EmojiExtension.ROOT_IMAGE_PATH, "/img/");
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));
-        optionsMap.put("link-ext", new MutableDataSet().set(WikiLinkExtension.LINK_FILE_EXTENSION, ".html"));
-        optionsMap.put("link-prefix", new MutableDataSet().set(WikiLinkExtension.LINK_PREFIX, "/prefix/"));
-        optionsMap.put("image-ext", new MutableDataSet().set(WikiLinkExtension.IMAGE_FILE_EXTENSION, ".png"));
-        optionsMap.put("image-prefix", new MutableDataSet().set(WikiLinkExtension.IMAGE_PREFIX, "/images/"));
-        optionsMap.put("wiki-images", new MutableDataSet().set(WikiLinkExtension.IMAGE_LINKS, true));
-        optionsMap.put("allow-inlines", new MutableDataSet().set(WikiLinkExtension.ALLOW_INLINES, true));
+        optionsMap.put("url", new MutableDataSet().set(EmojiExtension.USE_IMAGE_URLS, true));
+        optionsMap.put("size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, "40"));
+        optionsMap.put("no-size", new MutableDataSet().set(EmojiExtension.ATTR_IMAGE_SIZE, ""));
+        optionsMap.put("no-align", new MutableDataSet().set(EmojiExtension.ATTR_ALIGN, ""));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -35,11 +33,10 @@ public class ComboWikiLinkSpecTest extends ComboSpecTestCase {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
 
     static DataHolder optionsSet(String optionSet) {
-        if (optionSet == null) return null;
         return optionsMap.get(optionSet);
     }
 
-    public ComboWikiLinkSpecTest(SpecExample example) {
+    public ComboEmojiCrashSpecTest(SpecExample example) {
         super(example);
     }
 

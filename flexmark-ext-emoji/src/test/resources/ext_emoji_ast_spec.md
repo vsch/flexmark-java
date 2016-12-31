@@ -12,169 +12,277 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts :warning: to its emoji image
 
+No spaces between markers
+
 ```````````````````````````````` example Emoji: 1
+# some leading text 
+more text :warning : more text
+.
+<h1>some leading text</h1>
+<p>more text :warning : more text</p>
+.
+Document[0, 52]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 52]
+    Text[21, 51] chars:[21, 51, "more  …  text"]
+````````````````````````````````
+
+
+No spaces between markers
+
+```````````````````````````````` example Emoji: 2
+# some leading text 
+more text : warning: more text
+.
+<h1>some leading text</h1>
+<p>more text : warning: more text</p>
+.
+Document[0, 52]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 52]
+    Text[21, 51] chars:[21, 51, "more  …  text"]
+````````````````````````````````
+
+
+No spaces between markers
+
+```````````````````````````````` example Emoji: 3
+# some leading text 
+more text :warning
+: more text
+.
+<h1>some leading text</h1>
+<p>more text :warning
+: more text</p>
+.
+Document[0, 52]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 52]
+    Text[21, 39] chars:[21, 39, "more  … rning"]
+    SoftLineBreak[39, 40]
+    Text[40, 51] chars:[40, 51, ": mor …  text"]
+````````````````````````````````
+
+
+No spaces between markers
+
+```````````````````````````````` example Emoji: 4
+# some leading text 
+more text :
+warning: more text
+.
+<h1>some leading text</h1>
+<p>more text :
+warning: more text</p>
+.
+Document[0, 52]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 52]
+    Text[21, 32] chars:[21, 32, "more  … ext :"]
+    SoftLineBreak[32, 33]
+    Text[33, 51] chars:[33, 51, "warni …  text"]
+````````````````````````````````
+
+
+Converts :warning: to its emoji image
+
+```````````````````````````````` example Emoji: 5
+# some leading text 
 :warning:
 .
+<h1>some leading text</h1>
 <p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 10]
-  Paragraph[0, 10]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
+Document[0, 31]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 31]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 change size
 
-```````````````````````````````` example(Emoji: 2) options(size)
+```````````````````````````````` example(Emoji: 6) options(size)
+# some leading text 
 :warning:
 .
+<h1>some leading text</h1>
 <p><img src="/img/warning.png" alt="emoji places:warning" height="40" width="40" align="absmiddle" /></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
+Document[0, 30]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 30]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 no size
 
-```````````````````````````````` example(Emoji: 3) options(no-size)
+```````````````````````````````` example(Emoji: 7) options(no-size)
+# some leading text 
 :warning:
 .
+<h1>some leading text</h1>
 <p><img src="/img/warning.png" alt="emoji places:warning" align="absmiddle" /></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
+Document[0, 30]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 30]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 no align
 
-```````````````````````````````` example(Emoji: 4) options(no-align)
+```````````````````````````````` example(Emoji: 8) options(no-align)
+# some leading text 
 :warning:
 .
+<h1>some leading text</h1>
 <p><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" /></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
-````````````````````````````````
-
-
-no spaces allowed
-
-```````````````````````````````` example Emoji: 5
-:no spaces:
-.
-<p>:no spaces:</p>
-.
-Document[0, 12]
-  Paragraph[0, 12]
-    Emoji[0, 11] textOpen:[0, 1, ":"] text:[1, 10, "no spaces"] textClose:[10, 11, ":"]
-      Text[1, 10] chars:[1, 10, "no spaces"]
+Document[0, 30]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 30]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 Should work in links
 
-```````````````````````````````` example Emoji: 6
+```````````````````````````````` example Emoji: 9
+# some leading text 
 [:warning:](/url)
 .
+<h1>some leading text</h1>
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
-    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
-      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
-        Text[2, 9] chars:[2, 9, "warning"]
+Document[0, 39]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 39]
+    Link[21, 38] textOpen:[21, 22, "["] text:[22, 31, ":warning:"] textClose:[31, 32, "]"] linkOpen:[32, 33, "("] url:[33, 37, "/url"] pageRef:[33, 37, "/url"] linkClose:[37, 38, ")"]
+      Emoji[22, 31] textOpen:[22, 23, ":"] text:[23, 30, "warning"] textClose:[30, 31, ":"]
+        Text[23, 30] chars:[23, 30, "warning"]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Emoji: 7) options(url)
+```````````````````````````````` example(Emoji: 10) options(url)
+# some leading text 
 :warning:
 .
+<h1>some leading text</h1>
 <p><img src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a0.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
+Document[0, 30]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 30]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 Should work in links
 
-```````````````````````````````` example Emoji: 8
+```````````````````````````````` example Emoji: 11
+# some leading text 
 [:warning:](/url)
 .
+<h1>some leading text</h1>
 <p><a href="/url"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 18]
-  Paragraph[0, 18]
-    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
-      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
-        Text[2, 9] chars:[2, 9, "warning"]
+Document[0, 39]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 39]
+    Link[21, 38] textOpen:[21, 22, "["] text:[22, 31, ":warning:"] textClose:[31, 32, "]"] linkOpen:[32, 33, "("] url:[33, 37, "/url"] pageRef:[33, 37, "/url"] linkClose:[37, 38, ")"]
+      Emoji[22, 31] textOpen:[22, 23, ":"] text:[23, 30, "warning"] textClose:[30, 31, ":"]
+        Text[23, 30] chars:[23, 30, "warning"]
 ````````````````````````````````
 
 
 Unknown shortcuts are converted to text
 
-```````````````````````````````` example Emoji: 9
+```````````````````````````````` example Emoji: 12
+# some leading text 
 :warnings:
 .
+<h1>some leading text</h1>
 <p>:warnings:</p>
 .
-Document[0, 11]
-  Paragraph[0, 11]
-    Emoji[0, 10] textOpen:[0, 1, ":"] text:[1, 9, "warnings"] textClose:[9, 10, ":"]
-      Text[1, 9] chars:[1, 9, "warnings"]
+Document[0, 32]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 32]
+    Emoji[21, 31] textOpen:[21, 22, ":"] text:[22, 30, "warnings"] textClose:[30, 31, ":"]
+      Text[22, 30] chars:[22, 30, "warnings"]
 ````````````````````````````````
 
 
 Unknown shortcuts are converted to text with inline emphasis parsing
 
-```````````````````````````````` example Emoji: 10
+```````````````````````````````` example Emoji: 13
+# some leading text 
 :**warnings**:
 .
+<h1>some leading text</h1>
 <p>:<strong>warnings</strong>:</p>
 .
-Document[0, 15]
-  Paragraph[0, 15]
-    Emoji[0, 14] textOpen:[0, 1, ":"] text:[1, 13, "**warnings**"] textClose:[13, 14, ":"]
-      StrongEmphasis[1, 13] textOpen:[1, 3, "**"] text:[3, 11, "warnings"] textClose:[11, 13, "**"]
-        Text[3, 11] chars:[3, 11, "warnings"]
+Document[0, 36]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 36]
+    Emoji[21, 35] textOpen:[21, 22, ":"] text:[22, 34, "**warnings**"] textClose:[34, 35, ":"]
+      StrongEmphasis[22, 34] textOpen:[22, 24, "**"] text:[24, 32, "warnings"] textClose:[32, 34, "**"]
+        Text[24, 32] chars:[24, 32, "warnings"]
 ````````````````````````````````
 
 
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
+# some leading text 
 :warning:
 .
-<p md-pos="0-9"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
+<h1 md-pos="2-19">some leading text</h1>
+<p md-pos="21-30"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></p>
 .
-Document[0, 9]
-  Paragraph[0, 9]
-    Emoji[0, 9] textOpen:[0, 1, ":"] text:[1, 8, "warning"] textClose:[8, 9, ":"]
-      Text[1, 8] chars:[1, 8, "warning"]
+Document[0, 30]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 30]
+    Emoji[21, 30] textOpen:[21, 22, ":"] text:[22, 29, "warning"] textClose:[29, 30, ":"]
+      Text[22, 29] chars:[22, 29, "warning"]
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Source Position Attribute: 2) options(src-pos)
+# some leading text 
 [:warning:](/url)
 .
-<p md-pos="0-17"><a href="/url" md-pos="0-17"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
+<h1 md-pos="2-19">some leading text</h1>
+<p md-pos="21-38"><a href="/url" md-pos="21-38"><img src="/img/warning.png" alt="emoji places:warning" height="20" width="20" align="absmiddle" /></a></p>
 .
-Document[0, 17]
-  Paragraph[0, 17]
-    Link[0, 17] textOpen:[0, 1, "["] text:[1, 10, ":warning:"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
-      Emoji[1, 10] textOpen:[1, 2, ":"] text:[2, 9, "warning"] textClose:[9, 10, ":"]
-        Text[2, 9] chars:[2, 9, "warning"]
+Document[0, 38]
+  Heading[0, 19] textOpen:[0, 1, "#"] text:[2, 19, "some leading text"]
+    Text[2, 19] chars:[2, 19, "some  …  text"]
+  Paragraph[21, 38]
+    Link[21, 38] textOpen:[21, 22, "["] text:[22, 31, ":warning:"] textClose:[31, 32, "]"] linkOpen:[32, 33, "("] url:[33, 37, "/url"] pageRef:[33, 37, "/url"] linkClose:[37, 38, ")"]
+      Emoji[22, 31] textOpen:[22, 23, ":"] text:[23, 30, "warning"] textClose:[30, 31, ":"]
+        Text[23, 30] chars:[23, 30, "warning"]
 ````````````````````````````````
 
 

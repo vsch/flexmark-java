@@ -435,6 +435,15 @@ public interface BasedSequence extends CharSequence {
     boolean isNotNull();
 
     /**
+     * If this sequence is the BasedSequence.NULL instance then returns other,
+     * otherwise returns this sequence.
+     *
+     * @param other based sequence to return if this is BasedSequence.NULL
+     * @return this or other
+     */
+    BasedSequence ifNull(BasedSequence other);
+
+    /**
      * If this sequence is the BasedSequence.NULL instance then returns an empty subSequence from the end of other,
      * otherwise returns this sequence.
      *
@@ -744,7 +753,23 @@ public interface BasedSequence extends CharSequence {
      * @param other based sequence from the same parent
      * @return true if other is contained in this
      */
-    boolean contains(BasedSequence other);
+    boolean containsAllOf(BasedSequence other);
+
+    /**
+     * start/end offset based containment, not textual
+     *
+     * @param other based sequence from the same parent
+     * @return true if other is contained in this
+     */
+    boolean containsSomeOf(BasedSequence other);
+
+    /**
+     * start/end offset based intersection, not textual
+     *
+     * @param other based sequence from the same parent
+     * @return sequence which is the intersection of the range of this and other
+     */
+    BasedSequence intersect(BasedSequence other);
 
     int SPLIT_INCLUDE_DELIMS = 1;
     int SPLIT_TRIM_PARTS = 2;

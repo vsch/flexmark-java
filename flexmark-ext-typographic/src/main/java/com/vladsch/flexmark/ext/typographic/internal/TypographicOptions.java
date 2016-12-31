@@ -8,7 +8,7 @@ class TypographicOptions {
     public final boolean typographicSmarts;
 
     public TypographicOptions(DataHolder options) {
-        this.typographicQuotes = options.get(TypographicExtension.TYPOGRAPHIC_QUOTES);
-        this.typographicSmarts = options.get(TypographicExtension.TYPOGRAPHIC_SMARTS);
+        this.typographicQuotes = TypographicExtension.TYPOGRAPHIC_QUOTES.getFrom(options);
+        this.typographicSmarts = TypographicExtension.TYPOGRAPHIC_SMARTS.getFrom(options);
     }
 }

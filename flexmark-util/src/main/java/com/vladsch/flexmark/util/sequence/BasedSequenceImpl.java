@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.util.sequence;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.mappers.CharMapper;
 import com.vladsch.flexmark.util.mappers.LowerCaseMapper;
@@ -15,7 +16,7 @@ import java.util.Map;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 public abstract class BasedSequenceImpl implements BasedSequence {
-    private static int[] EMPTY_INDICES = {};
+    private static int[] EMPTY_INDICES = { };
     private static final Map<Character, String> visibleSpacesMap;
     static {
         HashMap<Character, String> charMap = new HashMap<>();
@@ -737,6 +738,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public BasedSequence ifNull(BasedSequence other) {
+        return isNull() ? other : this;
+    }
+
+    @Override
     public BasedSequence ifNullEmptyAfter(BasedSequence other) {
         return isNull() ? other.subSequence(other.length(), other.length()) : this;
     }
@@ -1029,8 +1035,21 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
-    public boolean contains(BasedSequence other) {
+    public boolean containsAllOf(BasedSequence other) {
+        return getBase() == other.getBase() && other.getStartOffset() >= getStartOffset() && other.getEndOffset() <= getEndOffset();
+    }
+
+    @Override
+    public boolean containsSomeOf(BasedSequence other) {
         return getBase() == other.getBase() && !(getStartOffset() >= other.getEndOffset() || getEndOffset() <= other.getStartOffset());
+    }
+
+    @Override
+    public BasedSequence intersect(BasedSequence other) {
+        if (getBase() != other.getBase()) return SubSequence.NULL;
+        else if (other.getEndOffset() <= getStartOffset()) return subSequence(0, 0);
+        else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
+        else return this.baseSubSequence(Utils.max(getStartOffset(), other.getStartOffset()), Utils.min(getEndOffset(), other.getEndOffset()));
     }
 
     @Override

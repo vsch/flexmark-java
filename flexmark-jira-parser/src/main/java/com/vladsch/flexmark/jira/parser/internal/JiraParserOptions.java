@@ -8,8 +8,8 @@ class JiraParserOptions {
     //public final int jira_parserOption3;
 
     public JiraParserOptions(DataHolder options) {
-        //this.jira_parserOption1 = options.get(JiraParserExtension.JIRA_PARSER_OPTION1);
-        //this.jira_parserOption2 = options.get(JiraParserExtension.JIRA_PARSER_OPTION2);
-        //this.jira_parserOption3 = options.get(JiraParserExtension.JIRA_PARSER_OPTION3);
+        //this.jira_parserOption1 = JiraParserExtension.JIRA_PARSER_OPTION1.getFrom(options);
+        //this.jira_parserOption2 = JiraParserExtension.JIRA_PARSER_OPTION2.getFrom(options);
+        //this.jira_parserOption3 = JiraParserExtension.JIRA_PARSER_OPTION3.getFrom(options);
     }
 }

@@ -7,6 +7,6 @@ class ThematicBreakOptions {
     final boolean relaxedStart;
 
     public ThematicBreakOptions(DataHolder options) {
-        this.relaxedStart = options.get(Parser.THEMATIC_BREAK_RELAXED_START);
+        this.relaxedStart = Parser.THEMATIC_BREAK_RELAXED_START.getFrom(options);
     }
 }

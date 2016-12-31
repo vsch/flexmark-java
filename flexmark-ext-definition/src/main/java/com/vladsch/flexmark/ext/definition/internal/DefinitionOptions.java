@@ -22,9 +22,9 @@ class DefinitionOptions {
     public final int newItemCodeIndent;
 
     public DefinitionOptions(DataHolder options) {
-        markerSpaces = options.get(DefinitionExtension.MARKER_SPACES);
-        tildeMarker = options.get(DefinitionExtension.TILDE_MARKER);
-        colonMarker = options.get(DefinitionExtension.COLON_MARKER);
+        markerSpaces = DefinitionExtension.MARKER_SPACES.getFrom(options);
+        tildeMarker = DefinitionExtension.TILDE_MARKER.getFrom(options);
+        colonMarker = DefinitionExtension.COLON_MARKER.getFrom(options);
         parserEmulationFamily = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
         autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);

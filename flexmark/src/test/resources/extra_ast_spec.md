@@ -4898,3 +4898,20 @@ Document[0, 162]
 ````````````````````````````````
 
 
+```````````````````````````````` example Lists - Markdown Navigator: 3
+- ****adsfasddasfdsa****
+.
+<ul>
+  <li><strong><strong>adsfasddasfdsa</strong></strong></li>
+</ul>
+.
+Document[0, 25]
+  BulletList[0, 25] isTight
+    BulletListItem[0, 25] open:[0, 1, "-"] isTight
+      Paragraph[2, 25]
+        StrongEmphasis[2, 24] textOpen:[2, 4, "**"] text:[4, 22, "**adsfasddasfdsa**"] textClose:[22, 24, "**"]
+          StrongEmphasis[4, 22] textOpen:[4, 6, "**"] text:[6, 20, "adsfasddasfdsa"] textClose:[20, 22, "**"]
+            Text[6, 20] chars:[6, 20, "adsfa … sfdsa"]
+````````````````````````````````
+
+

@@ -11,10 +11,10 @@ public class FootnoteOptions {
     final String footnoteBackLinkRefClass;
 
     public FootnoteOptions(DataHolder options) {
-        this.footnoteRefPrefix = options.get(FootnoteExtension.FOOTNOTE_REF_PREFIX);
-        this.footnoteRefSuffix = options.get(FootnoteExtension.FOOTNOTE_REF_SUFFIX);
-        this.footnoteBackRefString = options.get(FootnoteExtension.FOOTNOTE_BACK_REF_STRING);
-        this.footnoteLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS);
-        this.footnoteBackLinkRefClass = options.get(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS);
+        this.footnoteRefPrefix = FootnoteExtension.FOOTNOTE_REF_PREFIX.getFrom(options);
+        this.footnoteRefSuffix = FootnoteExtension.FOOTNOTE_REF_SUFFIX.getFrom(options);
+        this.footnoteBackRefString = FootnoteExtension.FOOTNOTE_BACK_REF_STRING.getFrom(options);
+        this.footnoteLinkRefClass = FootnoteExtension.FOOTNOTE_LINK_REF_CLASS.getFrom(options);
+        this.footnoteBackLinkRefClass = FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS.getFrom(options);
     }
 }

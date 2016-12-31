@@ -25,6 +25,7 @@ import com.vladsch.flexmark.util.options.DataKey;
  * </p>
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);
     public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
     public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
     public static final DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
