@@ -1,11 +1,11 @@
 jdk:
-  - oraclejdk8
-  
+  - oraclejdk7
+
 env:
   - TEST=java
-  
+
 script:
   - 'if [[ $TEST = java ]]; then mvn test -Dsurefire.useFile=false; fi'
-  
-after_success:  
+
+after_success:
   - bash <(curl -s https://codecov.io/bash)
