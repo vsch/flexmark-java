@@ -11,7 +11,6 @@ import java.util.List;
  * A Task list item
  */
 public class TaskListItem extends ListItem {
-    protected BasedSequence taskOpeningMarker = BasedSequence.NULL;
     protected boolean isOrderedItem = false;
 
     @Override

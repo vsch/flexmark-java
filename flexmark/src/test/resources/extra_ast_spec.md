@@ -2826,6 +2826,27 @@ Document[0, 23]
 ````````````````````````````````
 
 
+Nested in other elements
+
+```````````````````````````````` example Thematic Break - No Relaxed Rules: 3
+> - ***
+.
+<blockquote>
+  <ul>
+    <li>
+    <hr />
+    </li>
+  </ul>
+</blockquote>
+.
+Document[0, 8]
+  BlockQuote[0, 7] marker:[0, 1, ">"]
+    BulletList[2, 7] isTight
+      BulletListItem[2, 7] open:[2, 3, "-"] isTight
+        ThematicBreak[4, 7]
+````````````````````````````````
+
+
 ### HTML Options
 
 #### HTML Encode Options

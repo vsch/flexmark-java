@@ -88,10 +88,10 @@ public class ThematicBreakParser extends AbstractBlockParser {
             if (state.getIndent() >= 4 || matchedBlockParser.getBlockParser().isParagraphParser() && !options.relaxedStart) {
                 return BlockStart.none();
             }
-            int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence line = state.getLine();
-            if (PATTERN.matcher(line.subSequence(nextNonSpace, line.length())).matches()) {
-                return BlockStart.of(new ThematicBreakParser(line)).atIndex(line.length());
+            final BasedSequence input = line.subSequence(state.getNextNonSpaceIndex(), line.length());
+            if (PATTERN.matcher(input).matches()) {
+                return BlockStart.of(new ThematicBreakParser(line.subSequence(state.getIndex()))).atIndex(line.length());
             } else {
                 return BlockStart.none();
             }

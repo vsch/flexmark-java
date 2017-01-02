@@ -107,6 +107,8 @@ Next Release To Do List
 
 - Fix: #31, empty Gfm-Task list item nodes character span does not include the task marker
 
+- Fix: #32, Thematic Break AST node includes the full line when embedded in other elements
+
 0.10.1
 ------
 

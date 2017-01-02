@@ -918,7 +918,7 @@ Document[0, 14]
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "Foo"]
     BulletListItem[6, 13] open:[6, 7, "-"] isTight
-      ThematicBreak[6, 13]
+      ThematicBreak[8, 13]
 ````````````````````````````````
 
 
