@@ -73,10 +73,10 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
         this.linkIsFirst = linkIsFirst;
     }
 
-    public WikiNode(BasedSequence chars, boolean linkIsFirst) {
+    public WikiNode(BasedSequence chars, boolean linkIsFirst, boolean allowAnchors, boolean canEscapePipe, boolean canEscapeAnchor) {
         super(chars);
         this.linkIsFirst = linkIsFirst;
-        setLinkChars(chars);
+        setLinkChars(chars, allowAnchors, canEscapePipe, canEscapeAnchor);
     }
 
     public BasedSequence getOpeningMarker() {
@@ -139,31 +139,47 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
         return link;
     }
 
-    public void setLink(BasedSequence link) {
+    public void setLink(BasedSequence linkChars, boolean allowAnchors, boolean canEscapeAnchor) {
         // now parse out the # from the link
-        this.link = link;
+        this.link = linkChars;
 
-        if (((this instanceof WikiImage))) {
-            this.pageRef = link;
+        if (!allowAnchors) {
+            this.pageRef = linkChars;
         } else {
-            int pos = link.indexOf('#');
+            int pos = -1;
+            do {
+                pos = linkChars.indexOf('#', pos + 1);
+            } while (pos != -1 && canEscapeAnchor && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing('\\') & 1) == 1));
+
             if (pos < 0) {
-                this.pageRef = link;
+                this.pageRef = linkChars;
             } else {
-                this.pageRef = link.subSequence(0, pos);
-                this.anchorMarker = link.subSequence(pos, pos + 1);
-                this.anchorRef = link.subSequence(pos + 1);
+                this.pageRef = linkChars.subSequence(0, pos);
+                this.anchorMarker = linkChars.subSequence(pos, pos + 1);
+                this.anchorRef = linkChars.subSequence(pos + 1);
             }
         }
     }
 
-    public void setLinkChars(BasedSequence linkChars) {
+    public void setLinkChars(BasedSequence linkChars, boolean allowAnchors, boolean canEscapePipe, boolean canEscapeAnchor) {
         int length = linkChars.length();
         final int start = this instanceof WikiImage ? 3 : 2;
         openingMarker = linkChars.subSequence(0, start);
         closingMarker = linkChars.subSequence(length - 2, length);
 
-        int pos = linkIsFirst ? linkChars.lastIndexOf('|') : linkChars.indexOf('|');
+        int pos;
+        if (linkIsFirst) {
+            pos = linkChars.length() - 2;
+            do {
+                pos = linkChars.lastIndexOf('|', pos - 1);
+            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing('\\') & 1) == 1));
+        } else {
+            pos = -1;
+            do {
+                pos = linkChars.indexOf('|', pos + 1);
+            } while (pos != -1 && canEscapePipe && (pos > 0 && linkChars.charAt(pos - 1) == '\\' && (linkChars.subSequence(0, pos).countTrailing('\\') & 1) == 1));
+        }
+
         BasedSequence link;
         if (pos < 0) {
             link = linkChars.subSequence(start, length - 2);
@@ -178,6 +194,11 @@ public class WikiNode extends CustomNode implements DoNotDecorate {
             }
         }
 
-        setLink(link);
+        setLink(link, allowAnchors, canEscapeAnchor);
+
+        if (text.isNull() && allowAnchors && !anchorMarker.isNull()) {
+            // have anchor ref, remove it from text
+            text = pageRef;
+        }
     }
 }

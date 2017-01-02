@@ -27,7 +27,8 @@ public class ComboJiraConverterSpecTest extends ComboSpecTestCase {
                     , WikiLinkExtension.create()
                     , InsExtension.create()
                     )
-            );
+            )
+            .set(WikiLinkExtension.ALLOW_ANCHORS, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {

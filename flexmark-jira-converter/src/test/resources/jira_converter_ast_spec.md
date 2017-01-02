@@ -2235,8 +2235,8 @@ With empty anchor ref
 .
 Document[0, 16]
   Paragraph[0, 16]
-    WikiLink[0, 14] linkOpen:[0, 2, "[["] link:[2, 12, "wiki link#"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 12] linkClose:[12, 14, "]]"]
-      Text[2, 12] chars:[2, 12, "wiki link#"]
+    WikiLink[0, 14] linkOpen:[0, 2, "[["] link:[2, 12, "wiki link#"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 12] text:[2, 11, "wiki link"] linkClose:[12, 14, "]]"]
+      Text[2, 11] chars:[2, 11, "wiki link"]
 ````````````````````````````````
 
 
@@ -2250,8 +2250,8 @@ With Anchor ref
 .
 Document[0, 26]
   Paragraph[0, 26]
-    WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 22, "anchor-ref"] linkClose:[22, 24, "]]"]
-      Text[2, 22] chars:[2, 22, "wiki  … r-ref"]
+    WikiLink[0, 24] linkOpen:[0, 2, "[["] link:[2, 22, "wiki link#anchor-ref"] pageRef:[2, 11, "wiki link"] anchorMarker:[11, 12, "#"] anchorRef:[12, 22, "anchor-ref"] text:[2, 11, "wiki link"] linkClose:[22, 24, "]]"]
+      Text[2, 11] chars:[2, 11, "wiki link"]
 ````````````````````````````````
 
 

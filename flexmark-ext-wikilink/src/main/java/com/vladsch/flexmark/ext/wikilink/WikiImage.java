@@ -7,7 +7,7 @@ public class WikiImage extends WikiNode {
         super(linkIsFirst);
     }
 
-    public WikiImage(BasedSequence chars, boolean linkIsFirst) {
-        super(chars, linkIsFirst);
+    public WikiImage(BasedSequence chars, boolean linkIsFirst, boolean canEscapePipe) {
+        super(chars, linkIsFirst, false, canEscapePipe, false);
     }
 }

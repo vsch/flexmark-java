@@ -44,7 +44,7 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
             if (options.disableRendering) {
                 html.text(node.getChars().unescape());
             } else {
-                ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getLink().toString(), null);
+                ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getLink().unescape(), null);
                 html.attr("href", resolvedLink.getUrl());
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
                 context.renderChildren(node);//html.text(node.getText().isNotNull() ? node.getText().toString() : node.getPageRef().toString());
@@ -58,9 +58,9 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
             if (options.disableRendering) {
                 html.text(node.getChars().unescape());
             } else {
-                String altText = node.getText().isNotNull() ? node.getText().toString() : node.getPageRef().toString();
+                String altText = node.getText().isNotNull() ? node.getText().toString() : node.getLink().unescape();
 
-                ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getPageRef().toString(), null);
+                ResolvedLink resolvedLink = context.resolveLink(WikiLinkExtension.WIKI_LINK, node.getLink().unescape(), null);
                 String url = resolvedLink.getUrl();
 
                 html.attr("src", url);

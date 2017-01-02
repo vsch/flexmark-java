@@ -7,7 +7,7 @@ public class WikiLink extends WikiNode {
         super(linkIsFirst);
     }
 
-    public WikiLink(BasedSequence chars, boolean linkIsFirst) {
-        super(chars, linkIsFirst);
+    public WikiLink(BasedSequence chars, boolean linkIsFirst, boolean allowAnchors, boolean canEscapePipe, boolean canEscapeAnchor) {
+        super(chars, linkIsFirst, allowAnchors, canEscapePipe, canEscapeAnchor);
     }
 }

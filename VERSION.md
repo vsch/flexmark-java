@@ -7,6 +7,7 @@ flexmark-java
 
 - [This Release **To Do List**](#this-release-to-do-list)
 - [Next Release To Do List](#next-release-to-do-list)
+- [0.10.3](#0103)
 - [0.10.2](#0102)
 - [0.10.1](#0101)
 - [0.10.0](#0100)
@@ -101,6 +102,27 @@ Next Release To Do List
       - [x] Markdown
           - [x] Markdown.pl (default for family)
           - [ ] Php Markdown Extra
+
+0.10.3
+------
+
+- Fix: #34, Add option to Wiki link extension to escape the pipe separating text and link
+
+    - Add: `WikiLinkExtension.ALLOW_ANCHORS`, default `false`, to parse link for anchor refs. If
+      link is text and page ref combined with anchor ref, then text will be without the trailing
+      anchor marker `#` or anchor ref. For somewhat backwards compatible mode setting this key to
+      `true`, will parse and set node's anchorRef field but will also remove the anchor marker and
+      ref from the node's text if text and page ref are combined.
+
+    - Add: `WikiLinkExtension.ALLOW_ANCHOR_ESCAPE`, default `false`, to allow `\` escapes for anchor
+      markers.
+
+    - Add: `WikiLinkExtension.ALLOW_PIPE_ESCAPE`, default `false`, to allow `\` escapes for pipe `|`
+      that separates text from link.
+
+    - Add: `WikiLinkNodeRenderer` to unescape link for wiki and image links before passing it to be
+      resolved. Previously the link was not unescaped, causing backslashes `\` to appear in the HTML
+      link address.
 
 0.10.2
 ------

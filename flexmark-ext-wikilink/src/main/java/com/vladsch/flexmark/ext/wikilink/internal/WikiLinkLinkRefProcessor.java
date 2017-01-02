@@ -69,14 +69,15 @@ public class WikiLinkLinkRefProcessor implements LinkRefProcessor {
             // need to update link and pageRef with plain text versions
             if (wikiNode.getText().isNull()) {
                 BasedSequence link = new TextCollectingVisitor().collectAndGetSequence(node);
-                wikiNode.setLink(link);
+                wikiNode.setLink(link, WikiLinkExtension.ALLOW_ANCHORS.getFrom(document), WikiLinkExtension.ALLOW_ANCHOR_ESCAPE.getFrom(document));
             }
         }
     }
 
     @Override
     public Node createNode(BasedSequence nodeChars) {
-        return nodeChars.firstChar() == '!' ? new WikiImage(nodeChars, options.linkFirstSyntax) : new WikiLink(nodeChars, options.linkFirstSyntax);
+        return nodeChars.firstChar() == '!' ? new WikiImage(nodeChars, options.linkFirstSyntax, options.allowPipeEscape)
+                : new WikiLink(nodeChars, options.linkFirstSyntax, options.allowAnchors, options.allowPipeEscape, options.allowAnchorEscape);
     }
 
     public static class Factory implements LinkRefProcessorFactory {
