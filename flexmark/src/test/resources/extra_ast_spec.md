@@ -3974,6 +3974,47 @@ Document[0, 22]
 ````````````````````````````````
 
 
+Escaped chars in links
+
+```````````````````````````````` example Links: 3
+[test](http://url\(.com\))   
+
+![test](http://url\(.com\))
+.
+<p><a href="http://url(.com)">test</a></p>
+<p><img src="http://url(.com)" alt="test" /></p>
+.
+Document[0, 59]
+  Paragraph[0, 30]
+    Link[0, 26] textOpen:[0, 1, "["] text:[1, 5, "test"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 25, "http://url\(.com\)"] pageRef:[7, 25, "http://url\(.com\)"] linkClose:[25, 26, ")"]
+      Text[1, 5] chars:[1, 5, "test"]
+  Paragraph[31, 59]
+    Image[31, 58] textOpen:[31, 33, "!["] text:[33, 37, "test"] textClose:[37, 38, "]"] linkOpen:[38, 39, "("] url:[39, 57, "http://url\(.com\)"] pageRef:[39, 57, "http://url\(.com\)"] linkClose:[57, 58, ")"]
+      Text[33, 37] chars:[33, 37, "test"]
+````````````````````````````````
+
+
+```````````````````````````````` example Links: 4
+[ref]: /url1\(.com\)
+
+[ref][]
+
+![ref][]
+.
+<p><a href="/url1(.com)">ref</a></p>
+<p><img src="/url1(.com)" alt="ref" /></p>
+.
+Document[0, 40]
+  Reference[0, 20] refOpen:[0, 1, "["] ref:[1, 4, "ref"] refClose:[4, 6, "]:"] url:[7, 20, "/url1\(.com\)"]
+  Paragraph[22, 30]
+    LinkRef[22, 29] referenceOpen:[22, 23, "["] reference:[23, 26, "ref"] referenceClose:[26, 27, "]"] textOpen:[27, 28, "["] textClose:[28, 29, "]"]
+      Text[23, 26] chars:[23, 26, "ref"]
+  Paragraph[31, 40]
+    ImageRef[31, 39] referenceOpen:[31, 33, "!["] reference:[33, 36, "ref"] referenceClose:[36, 37, "]"] textOpen:[37, 38, "["] textClose:[38, 39, "]"]
+      Text[33, 36] chars:[33, 36, "ref"]
+````````````````````````````````
+
+
 ## LinkRefs and ImageRefs
 
 empty link ref

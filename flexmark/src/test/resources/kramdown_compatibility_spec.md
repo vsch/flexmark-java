@@ -151,7 +151,7 @@ Document[0, 39]
 
 
 
-Test to see how trailing blank after item determines looseness 
+Test to see how trailing blank after item determines looseness
 
 ```````````````````````````````` example Loose Item Handling: 2
 - item 1
@@ -806,7 +806,7 @@ Document[0, 103]
 
 ## List Item Interrupts Paragraph
 
-Test to see which list items can interrupt paragraphs.   
+Test to see which list items can interrupt paragraphs.
 
 ```````````````````````````````` example List Item Interrupts Paragraph: 1
 Bullet item can interrupt paragraph
@@ -1812,6 +1812,61 @@ Document[0, 296]
           Paragraph[218, 233]
             Text[218, 232] chars:[218, 232, "####  … ing 3"]
           IndentedCodeBlock[246, 295]
+````````````````````````````````
+
+
+```````````````````````````````` example List Item Indent Handling: 8
+* item 1
+*  item 2
+*   item 3
+*    item 4
+*     item 5
+*      item 6
+*       item 7
+*        item 8
+*         item 9
+.
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3</li>
+    <li>item 4</li>
+    <li>item 5</li>
+    <li>item 6</li>
+    <li>item 7</li>
+    <li>item 8</li>
+    <li>item 9</li>
+</ul>
+.
+Document[0, 117]
+  BulletList[0, 117] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[9, 19] open:[9, 10, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[19, 30] open:[19, 20, "*"] isTight
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+    BulletListItem[30, 42] open:[30, 31, "*"] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 4"]
+    BulletListItem[42, 55] open:[42, 43, "*"] isTight
+      Paragraph[48, 55]
+        Text[48, 54] chars:[48, 54, "item 5"]
+    BulletListItem[55, 69] open:[55, 56, "*"] isTight
+      Paragraph[62, 69]
+        Text[62, 68] chars:[62, 68, "item 6"]
+    BulletListItem[69, 84] open:[69, 70, "*"] isTight
+      Paragraph[77, 84]
+        Text[77, 83] chars:[77, 83, "item 7"]
+    BulletListItem[84, 100] open:[84, 85, "*"] isTight
+      Paragraph[93, 100]
+        Text[93, 99] chars:[93, 99, "item 8"]
+    BulletListItem[100, 117] open:[100, 101, "*"] isTight
+      Paragraph[110, 117]
+        Text[110, 116] chars:[110, 116, "item 9"]
 ````````````````````````````````
 
 

@@ -428,6 +428,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
 [Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
 [MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
+[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
 [PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
 [PhpStorm]: http://www.jetbrains.com/phpstorm
 [Pipe Table Formatter]: https://github.com/anton-dev-ua/PipeTableFormatter

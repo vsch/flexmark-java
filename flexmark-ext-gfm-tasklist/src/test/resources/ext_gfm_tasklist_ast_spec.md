@@ -1013,4 +1013,187 @@ Document[0, 166]
         Text[137, 166] chars:[137, 166, "all s … apped"]
 ````````````````````````````````
 
+Deep indent testing, commonmark
+
+```````````````````````````````` example Source Position Attribute: 4
+* [ ] item 1
+* [ ]  item 2
+* [ ]   item 3
+* [ ]    item 4
+* [ ]     item 5
+* [ ]      item 6
+* [ ]       item 7
+* [ ]        item 8
+* [ ]         item 9
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <pre><code>item 5
+</code></pre>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <pre><code> item 6
+</code></pre>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <pre><code>  item 7
+</code></pre>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <pre><code>   item 8
+</code></pre>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <pre><code>    item 9
+</code></pre>
+  </li>
+</ul>
+.
+Document[0, 153]
+  BulletList[0, 153] isTight
+    TaskListItem[0, 13] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight
+      Paragraph[6, 13]
+        Text[6, 12] chars:[6, 12, "item 1"]
+    TaskListItem[13, 27] open:[13, 14, "*"] openSuffix:[15, 18, "[ ]"] isTight
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 2"]
+    TaskListItem[27, 42] open:[27, 28, "*"] openSuffix:[29, 32, "[ ]"] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 3"]
+    TaskListItem[42, 58] open:[42, 43, "*"] openSuffix:[44, 47, "[ ]"] isTight
+      Paragraph[51, 58]
+        Text[51, 57] chars:[51, 57, "item 4"]
+    TaskListItem[58, 75] open:[58, 59, "*"] openSuffix:[60, 63, "[ ]"] isTight
+      IndentedCodeBlock[68, 75]
+    TaskListItem[75, 93] open:[75, 76, "*"] openSuffix:[77, 80, "[ ]"] isTight
+      IndentedCodeBlock[85, 93]
+    TaskListItem[93, 112] open:[93, 94, "*"] openSuffix:[95, 98, "[ ]"] isTight
+      IndentedCodeBlock[103, 112]
+    TaskListItem[112, 132] open:[112, 113, "*"] openSuffix:[114, 117, "[ ]"] isTight
+      IndentedCodeBlock[122, 132]
+    TaskListItem[132, 153] open:[132, 133, "*"] openSuffix:[134, 137, "[ ]"] isTight
+      IndentedCodeBlock[142, 153]
+````````````````````````````````
+
+
+
+Deep indent testing, kramdown
+
+```````````````````````````````` example(Source Position Attribute: 5) options(kramdown)
+* [ ] item 1
+* [ ]  item 2
+* [ ]   item 3
+* [ ]    item 4
+* [ ]     item 5
+* [ ]      item 6
+* [ ]       item 7
+* [ ]        item 8
+* [ ]         item 9
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 5</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 6</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 7</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 8</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 9</li>
+</ul>
+.
+Document[0, 152]
+  BulletList[0, 152] isTight
+    TaskListItem[0, 13] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight
+      Paragraph[6, 13]
+        Text[6, 12] chars:[6, 12, "item 1"]
+    TaskListItem[13, 27] open:[13, 14, "*"] openSuffix:[15, 18, "[ ]"] isTight
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 2"]
+    TaskListItem[27, 42] open:[27, 28, "*"] openSuffix:[29, 32, "[ ]"] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 3"]
+    TaskListItem[42, 58] open:[42, 43, "*"] openSuffix:[44, 47, "[ ]"] isTight
+      Paragraph[51, 58]
+        Text[51, 57] chars:[51, 57, "item 4"]
+    TaskListItem[58, 75] open:[58, 59, "*"] openSuffix:[60, 63, "[ ]"] isTight
+      Paragraph[68, 75]
+        Text[68, 74] chars:[68, 74, "item 5"]
+    TaskListItem[75, 93] open:[75, 76, "*"] openSuffix:[77, 80, "[ ]"] isTight
+      Paragraph[86, 93]
+        Text[86, 92] chars:[86, 92, "item 6"]
+    TaskListItem[93, 112] open:[93, 94, "*"] openSuffix:[95, 98, "[ ]"] isTight
+      Paragraph[105, 112]
+        Text[105, 111] chars:[105, 111, "item 7"]
+    TaskListItem[112, 132] open:[112, 113, "*"] openSuffix:[114, 117, "[ ]"] isTight
+      Paragraph[125, 132]
+        Text[125, 131] chars:[125, 131, "item 8"]
+    TaskListItem[132, 152] open:[132, 133, "*"] openSuffix:[134, 137, "[ ]"] isTight
+      Paragraph[146, 152]
+        Text[146, 152] chars:[146, 152, "item 9"]
+````````````````````````````````
+
+
+
+Deep indent testing, markdown
+
+```````````````````````````````` example(Source Position Attribute: 6) options(markdown)
+* [ ] item 1
+* [ ]  item 2
+* [ ]   item 3
+* [ ]    item 4
+* [ ]     item 5
+* [ ]      item 6
+* [ ]       item 7
+* [ ]        item 8
+* [ ]         item 9
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 5</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 6</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 7</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 8</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 9</li>
+</ul>
+.
+Document[0, 152]
+  BulletList[0, 152] isTight
+    TaskListItem[0, 13] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight
+      Paragraph[6, 13]
+        Text[6, 12] chars:[6, 12, "item 1"]
+    TaskListItem[13, 27] open:[13, 14, "*"] openSuffix:[15, 18, "[ ]"] isTight
+      Paragraph[20, 27]
+        Text[20, 26] chars:[20, 26, "item 2"]
+    TaskListItem[27, 42] open:[27, 28, "*"] openSuffix:[29, 32, "[ ]"] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "item 3"]
+    TaskListItem[42, 58] open:[42, 43, "*"] openSuffix:[44, 47, "[ ]"] isTight
+      Paragraph[51, 58]
+        Text[51, 57] chars:[51, 57, "item 4"]
+    TaskListItem[58, 75] open:[58, 59, "*"] openSuffix:[60, 63, "[ ]"] isTight
+      Paragraph[68, 75]
+        Text[68, 74] chars:[68, 74, "item 5"]
+    TaskListItem[75, 93] open:[75, 76, "*"] openSuffix:[77, 80, "[ ]"] isTight
+      Paragraph[86, 93]
+        Text[86, 92] chars:[86, 92, "item 6"]
+    TaskListItem[93, 112] open:[93, 94, "*"] openSuffix:[95, 98, "[ ]"] isTight
+      Paragraph[105, 112]
+        Text[105, 111] chars:[105, 111, "item 7"]
+    TaskListItem[112, 132] open:[112, 113, "*"] openSuffix:[114, 117, "[ ]"] isTight
+      Paragraph[125, 132]
+        Text[125, 131] chars:[125, 131, "item 8"]
+    TaskListItem[132, 152] open:[132, 133, "*"] openSuffix:[134, 137, "[ ]"] isTight
+      Paragraph[146, 152]
+        Text[146, 152] chars:[146, 152, "item 9"]
+````````````````````````````````
+
+
 

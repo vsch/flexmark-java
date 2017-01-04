@@ -314,7 +314,7 @@ public class ListBlockParser extends AbstractBlockParser {
                         }
                     }
 
-                    if (!hasContent || contentOffset > suffixContentOffset + newItemCodeIndent) {
+                    if (!hasContent || contentOffset - suffixContentOffset > newItemCodeIndent) {
                         // If this line is blank or has a code block, default to 1 space after marker suffix
                         contentOffset = suffixContentOffset + 1;
                     }

@@ -81,48 +81,51 @@ Next Release To Do List
       to HTML offset for the element(s). This is needed to allow synchronization with source
       when using an attribute to hold the source information is not an option.
 
-- Add: PDF renderer
-
 - [ ] Add: Latex extension
 
-- [x] Change: complete parser profiles for variations within a family
-      [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
-      - [x] CommonMark
-          - [x] GitHub Comments
-          - [ ] League/CommonMark
-          - [x] CommonMark (default for family)
-      - [x] FixedIndent
-          - [x] Pegdown
-          - [x] MultiMarkdown
-          - [ ] Pandoc
-      - [x] Kramdown (default for family)
-          - [ ] GitHub Docs
-          - [ ] Jekyll
-          - [x] Kramdown (default for family)
-      - [x] Markdown
-          - [x] Markdown.pl (default for family)
-          - [ ] Php Markdown Extra
+- Change: complete parser profiles for variations within a family
+  [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
+      - [ ] League/CommonMark
+      - [ ] Pandoc
+      - [ ] GitHub Docs
+      - [ ] Jekyll
+      - [ ] Php Markdown Extra
+      - CommonMark
+      - GitHub Comments
+      - CommonMark (default for family)
+      - FixedIndent
+      - Pegdown
+      - MultiMarkdown
+      - Kramdown (default for family)
+      - Kramdown (default for family)
+      - Markdown
+      - Markdown.pl (default for family)
+
+- Add: PDF renderer
 
 0.10.3
 ------
 
+- Fix: #36, Gfm Task Items incorrectly converts deeply indented content as indented code when
+  non-commonmark family
+
 - Fix: #34, Add option to Wiki link extension to escape the pipe separating text and link
 
-    - Add: `WikiLinkExtension.ALLOW_ANCHORS`, default `false`, to parse link for anchor refs. If
-      link is text and page ref combined with anchor ref, then text will be without the trailing
-      anchor marker `#` or anchor ref. For somewhat backwards compatible mode setting this key to
-      `true`, will parse and set node's anchorRef field but will also remove the anchor marker and
-      ref from the node's text if text and page ref are combined.
+  - Add: `WikiLinkExtension.ALLOW_ANCHORS`, default `false`, to parse link for anchor refs. If
+    link is text and page ref combined with anchor ref, then text will be without the trailing
+    anchor marker `#` or anchor ref. For somewhat backwards compatible mode setting this key to
+    `true`, will parse and set node's anchorRef field but will also remove the anchor marker and
+    ref from the node's text if text and page ref are combined.
 
-    - Add: `WikiLinkExtension.ALLOW_ANCHOR_ESCAPE`, default `false`, to allow `\` escapes for anchor
-      markers.
+  - Add: `WikiLinkExtension.ALLOW_ANCHOR_ESCAPE`, default `false`, to allow `\` escapes for
+    anchor markers.
 
-    - Add: `WikiLinkExtension.ALLOW_PIPE_ESCAPE`, default `false`, to allow `\` escapes for pipe `|`
-      that separates text from link.
+  - Add: `WikiLinkExtension.ALLOW_PIPE_ESCAPE`, default `false`, to allow `\` escapes for pipe
+    `|` that separates text from link.
 
-    - Add: `WikiLinkNodeRenderer` to unescape link for wiki and image links before passing it to be
-      resolved. Previously the link was not unescaped, causing backslashes `\` to appear in the HTML
-      link address.
+  - Add: `WikiLinkNodeRenderer` to unescape link for wiki and image links before passing it to
+    be resolved. Previously the link was not unescaped, causing backslashes `\` to appear in the
+    HTML link address.
 
 0.10.2
 ------
@@ -194,13 +197,13 @@ Next Release To Do List
 - API Change: gfm-tasks extension now using list suffix options for proper parsing of task item
   sub-item and child paragraphs.
 
-    - `TaskListExtension.CONVERT_ORDERED_LIST_ITEMS` changed to
-      `Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED`, same default of `true` but now part of core
-      parser option.
+  - `TaskListExtension.CONVERT_ORDERED_LIST_ITEMS` changed to
+    `Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED`, same default of `true` but now part of core
+    parser option.
 
-    - `TaskListItem.getTaskOpeningMarker()` and
-      `TaskListItem.setTaskOpeningMarker(BasedSequence)` are now part of `ListItem`,
-      `ListItem.getMarkerSuffix()` and `TaskListItem.setMarkerSuffix(BasedSequence)`
+  - `TaskListItem.getTaskOpeningMarker()` and `TaskListItem.setTaskOpeningMarker(BasedSequence)`
+    are now part of `ListItem`, `ListItem.getMarkerSuffix()` and
+    `TaskListItem.setMarkerSuffix(BasedSequence)`
 
 0.9.4
 -----
@@ -218,10 +221,10 @@ Next Release To Do List
 - Add: `WikiLinkExtension.IMAGE_LINKS`, default `false`, when true enables wiki images of the
   form `![[]]` with optional `|` used for separating file ref from alt text. Other options:
 
-    - `WikiLinkExtension.IMAGE_FILE_EXTENSION`, default `""`, to add file extension or suffix to
-      file reference.
+  - `WikiLinkExtension.IMAGE_FILE_EXTENSION`, default `""`, to add file extension or suffix to
+    file reference.
 
-    - `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a prefix to file reference
+  - `WikiLinkExtension.IMAGE_PREFIX`, default `""`, to add a prefix to file reference
 
 - Add: #24, DefinitionList extension doesn't seem to work, implemented definition lists as per
   PHP Markdown Extra.
@@ -264,136 +267,134 @@ Next Release To Do List
   with greater flexibility. This affects how NodeRenderers generate output by allowing for more
   flexibility to control when line breaks should be suppressed or blank lines added.
 
-    Modifications to existing code, some from Java 7 downgrade:
+  Modifications to existing code, some from Java 7 downgrade:
 
-    1. `HtmlWriter.getAppendCount()` changed to `HtmlWriter.getModCount()` or can use the
-       `HtmlWriter.getOffsetAfter()` to get actual character offset after append to find out if
-       something was appended in child rendering code.
+  1. `HtmlWriter.getAppendCount()` changed to `HtmlWriter.getModCount()` or can use the
+     `HtmlWriter.getOffsetAfter()` to get actual character offset after append to find out if
+     something was appended in child rendering code.
 
-    2. Now there is EOL and blank line tracking even when using `HtmlWriter.raw()` so trying to
-       output an extra blank line via `HtmlWriter.raw("\n")` will no longer work. Use
-       `HtmlWriter.blankLine()`.
+  2. Now there is EOL and blank line tracking even when using `HtmlWriter.raw()` so trying to
+     output an extra blank line via `HtmlWriter.raw("\n")` will no longer work. Use
+     `HtmlWriter.blankLine()`.
 
-    3. There are several `raw` output methods all have slightly different behaviour since normal
-       output does processing you may not want for `raw` text.
+  3. There are several `raw` output methods all have slightly different behaviour since normal
+     output does processing you may not want for `raw` text.
 
-        - `HtmlWriter.raw(String)` will output raw without setting a pre-formatted region, which
-          means accumulated spaces before the `raw()` call will be output, which is desired for
-          inline html.
+     - `HtmlWriter.raw(String)` will output raw without setting a pre-formatted region, which
+       means accumulated spaces before the `raw()` call will be output, which is desired for
+       inline html.
 
-        - `HtmlWriter.rawPre(String)` will set a pre-formatted region and output text as is,
-          without indents but will output any accumulates spaces before the `rawPre()` call.
-          This is desired for real `<pre><code>` output.
+     - `HtmlWriter.rawPre(String)` will set a pre-formatted region and output text as is,
+       without indents but will output any accumulates spaces before the `rawPre()` call. This
+       is desired for real `<pre><code>` output.
 
-        - `HtmlWriter.rawIndentedPre(String)` will also set a pre-formatted region but will set
-          a fixed indent at the current indentation level that will be prefixed to all the lines
-          and not output any pending white space characters. This is desired for HTML block
-          output.
+     - `HtmlWriter.rawIndentedPre(String)` will also set a pre-formatted region but will set a
+       fixed indent at the current indentation level that will be prefixed to all the lines and
+       not output any pending white space characters. This is desired for HTML block output.
 
-    4. `HtmlWriter.tagIndent(String, Runnable)` will no longer output an end of line after the
-       opening tag if there was no lines appended between the opening and closing tag. In which
-       case both tags will be on the same line. If you desire to have the tags always split on
-       separate lines use the `HtmlWriter.tagLineIndent(String, Runnable)`, which will force the
-       closing tag on a new line, even if no lines were appended by child content.
+  4. `HtmlWriter.tagIndent(String, Runnable)` will no longer output an end of line after the
+     opening tag if there was no lines appended between the opening and closing tag. In which
+     case both tags will be on the same line. If you desire to have the tags always split on
+     separate lines use the `HtmlWriter.tagLineIndent(String, Runnable)`, which will force the
+     closing tag on a new line, even if no lines were appended by child content.
 
-    5. Rendered HTML by default will now have a maximum of 1 blank line, no matter how many are
-       output with the data. This is controlled by the `HtmlWriter.flush(int)` call and the
-       `HtmlRenderer.render(Node, Appendable, int)` can be used which takes `maxBlankLines` as
-       the last argument and controls maximum trailing blank lines that will be appended.
+  5. Rendered HTML by default will now have a maximum of 1 blank line, no matter how many are
+     output with the data. This is controlled by the `HtmlWriter.flush(int)` call and the
+     `HtmlRenderer.render(Node, Appendable, int)` can be used which takes `maxBlankLines` as the
+     last argument and controls maximum trailing blank lines that will be appended.
 
-    Changes made:
+  Changes made:
 
-    - \n in appended text is equivalent to `HtmlWriter.line()` call. Will only terminate a line
-      of text, never create blankLines. For blank lines use `HtmlWriter.blankLine()` or
-      `HtmlWriter.blankLine(int)`
+  - \n in appended text is equivalent to `HtmlWriter.line()` call. Will only terminate a line of
+    text, never create blankLines. For blank lines use `HtmlWriter.blankLine()` or
+    `HtmlWriter.blankLine(int)`
 
-    - spaces before and after \n are suppressed unless in `preFormatted` region. Before are not
-      needed and after are controlled with `HtmlWriter.indent()` and `HtmlWriter.unIndent()`
+  - spaces before and after \n are suppressed unless in `preFormatted` region. Before are not
+    needed and after are controlled with `HtmlWriter.indent()` and `HtmlWriter.unIndent()`
 
-    - tabs outside of `preFormatted` region are converted to spaces and multiple spaces are
-      collapsed to a single space, or eliminated if they come before or after \n. Allowing
-      generating clean HTML.
+  - tabs outside of `preFormatted` region are converted to spaces and multiple spaces are
+    collapsed to a single space, or eliminated if they come before or after \n. Allowing
+    generating clean HTML.
 
-    - all forms of blank lines not generated by calls to `HtmlWriter.blankLine()` or
-      `HtmlWriter.blankLine(int)` are suppressed in order to generate properly formatted output
-      without extra blank lines.
+  - all forms of blank lines not generated by calls to `HtmlWriter.blankLine()` or
+    `HtmlWriter.blankLine(int)` are suppressed in order to generate properly formatted output
+    without extra blank lines.
 
-    - `flush()` or `flush(int)` methods can now be used to control number of trailing blank
-      lines in the output. They also need to be called to make sure trailing EOL is output to
-      the underlying appendable.
+  - `flush()` or `flush(int)` methods can now be used to control number of trailing blank lines
+    in the output. They also need to be called to make sure trailing EOL is output to the
+    underlying appendable.
 
-    - now conditional `line()` and `indent()` formatting is available without having to use the
-      `HtmlWriter.tag()` with runnable argument for the child element text generation, by using
-      the `HtmlWriter.openConditional(ConditionalFormatter)` and
-      `HtmlWriter.closeConditional(ConditionalFormatter)` methods giving the parent element
-      ability to change indent, add a new line or blank lines, prefix any output before the
-      child element's text. Similar ability on closing the conditional formatting region.
+  - now conditional `line()` and `indent()` formatting is available without having to use the
+    `HtmlWriter.tag()` with runnable argument for the child element text generation, by using
+    the `HtmlWriter.openConditional(ConditionalFormatter)` and
+    `HtmlWriter.closeConditional(ConditionalFormatter)` methods giving the parent element
+    ability to change indent, add a new line or blank lines, prefix any output before the child
+    element's text. Similar ability on closing the conditional formatting region.
 
-    - Add: `HtmlWriter.blankLine()` and `HtmlWriter.blankLine(int)` methods that will add a
-      single blank line or a count of blank lines, even when called multiple times without
-      intervening output. Ensures a blank lines where needed but no more than the requested
-      blank lines.
+  - Add: `HtmlWriter.blankLine()` and `HtmlWriter.blankLine(int)` methods that will add a single
+    blank line or a count of blank lines, even when called multiple times without intervening
+    output. Ensures a blank lines where needed but no more than the requested blank lines.
 
-    - to preserve spaces and EOL in `HtmlWriter.raw()` now temporarily setting pre-formatted
-      region for the call. If this gets in the way and you want `raw()` text without HTML
-      escapes but without pre-formatting, just use the `append()` methods passed through from
-      `FormattingAppendableImpl`, they don't do any escaping but process all other formatting,
-      unless in pre-formatting region.
+  - to preserve spaces and EOL in `HtmlWriter.raw()` now temporarily setting pre-formatted
+    region for the call. If this gets in the way and you want `raw()` text without HTML escapes
+    but without pre-formatting, just use the `append()` methods passed through from
+    `FormattingAppendableImpl`, they don't do any escaping but process all other formatting,
+    unless in pre-formatting region.
 
 - API Change: clean up of sequences in flexmark-java-util was long overdue. The `BasedSequence`
   interface has evolved but not existing uses were updated. The following changes allow
   optimization of `BasedSequence.subSequence()` and `BasedSequence.baseSubSequence()` depending
   on implementation particulars.
 
-    Fastest parsing results will be achieved if the sequence passed to the parser is a
-    `CharSubSequence`.
+  Fastest parsing results will be achieved if the sequence passed to the parser is a
+  `CharSubSequence`.
 
-    Modifications to existing code, some from Java 7 downgrade:
+  Modifications to existing code, some from Java 7 downgrade:
 
-    1. `BasedSequenceImpl.NULL` to `BasedSequence.NULL`
+  1. `BasedSequenceImpl.NULL` to `BasedSequence.NULL`
 
-    2. `new SubSequence(` to `SubSequence.of(`
+  2. `new SubSequence(` to `SubSequence.of(`
 
-    3. `BasedSequence.of(` to `BasedSequenceImpl.of(`
+  3. `BasedSequence.of(` to `BasedSequenceImpl.of(`
 
-    4. `new StringSubSequence(` to `BasedSequenceImpl.of(` or `CharSubSequence.of(`
+  4. `new StringSubSequence(` to `BasedSequenceImpl.of(` or `CharSubSequence.of(`
 
-    5. `com.vladsch.flexmark.util.Escaping` moved to `com.vladsch.flexmark.util.html.Escaping`
+  5. `com.vladsch.flexmark.util.Escaping` moved to `com.vladsch.flexmark.util.html.Escaping`
 
-    6. `com.vladsch.flexmark.util.Html5Entities` moved to
-       `com.vladsch.flexmark.util.html.Html5Entities`
+  6. `com.vladsch.flexmark.util.Html5Entities` moved to
+     `com.vladsch.flexmark.util.html.Html5Entities`
 
-    7. `Attribute` changes:
+  7. `Attribute` changes:
 
-        1. `com.vladsch.flexmark.util.options.Attributes` moved to
-           `com.vladsch.flexmark.util.html.Attributes`
+     1. `com.vladsch.flexmark.util.options.Attributes` moved to
+        `com.vladsch.flexmark.util.html.Attributes`
 
-        2. `com.vladsch.flexmark.util.options.Attribute` moved to
-           `com.vladsch.flexmark.util.html.Attribute`
+     2. `com.vladsch.flexmark.util.options.Attribute` moved to
+        `com.vladsch.flexmark.util.html.Attribute`
 
-        3. `Attribute` is now an interface with `MutableAttribute` interface extending it for
-           in-place attribute manipulation. implemented in `AttributeImpl`, instantiate with
-           `AttributeImpl.of()` variants.
+     3. `Attribute` is now an interface with `MutableAttribute` interface extending it for
+        in-place attribute manipulation. implemented in `AttributeImpl`, instantiate with
+        `AttributeImpl.of()` variants.
 
-            - assign delimiters for `class` and `style` attribute names that you cannot
-              override. The reset will get `NUL` delimiters unless you specify otherwise.
+          - assign delimiters for `class` and `style` attribute names that you cannot override.
+            The reset will get `NUL` delimiters unless you specify otherwise.
 
-        4. `Attribute` now has a value list delimiter and a value name delimiter, these are used
-           to split and combine values. Both can be `Attribute.NUL` then no multiple values can
-           be stored or manipulated in the attribute. If value name delimiter is `Attribute.NUL`
-           then multiple values are delimited by value list delimiter and considered named
-           values without individual item values. For example:
+     4. `Attribute` now has a value list delimiter and a value name delimiter, these are used to
+        split and combine values. Both can be `Attribute.NUL` then no multiple values can be
+        stored or manipulated in the attribute. If value name delimiter is `Attribute.NUL` then
+        multiple values are delimited by value list delimiter and considered named values
+        without individual item values. For example:
 
-            - `class` attribute has a list delimiter of `' '` and class names can be added
-              removed but they have no values associated with them beyond their name.
+          - `class` attribute has a list delimiter of `' '` and class names can be added removed
+            but they have no values associated with them beyond their name.
 
-            - `style` attribute on the other hand has a list delimiter of `';'` and a name
-              delimiter of `':'`. Item part before the colon is the name and the part after is
-              the value. So you can change individual style's settings using the attribute
-              manipulation functions of: `Attribute.removeValue(String)`,
-              `Attribute.setValue(String)` which will parse the strings and add/remove/replace
-              values. Any item whose value is empty is removed. Any existing item's value is
-              change to the new value and any new items are appended at the end.
+          - `style` attribute on the other hand has a list delimiter of `';'` and a name
+            delimiter of `':'`. Item part before the colon is the name and the part after is the
+            value. So you can change individual style's settings using the attribute
+            manipulation functions of: `Attribute.removeValue(String)`,
+            `Attribute.setValue(String)` which will parse the strings and add/remove/replace
+            values. Any item whose value is empty is removed. Any existing item's value is
+            change to the new value and any new items are appended at the end.
 
                 ```java
                 class Test {
@@ -412,59 +413,55 @@ Next Release To Do List
                 }
                 ```
 
-    Changes made:
+  Changes made:
 
-    - Add: `CharSubSequence` implementation of `BasedSequence`
+  - Add: `CharSubSequence` implementation of `BasedSequence`
 
-        - uses `char[]` as the base that it accesses directly and creates `subSequence` and
-          `baseSubSequence` instances that also access it directly eliminating the nested calls
-          through `charAt`
+    - uses `char[]` as the base that it accesses directly and creates `subSequence` and
+      `baseSubSequence` instances that also access it directly eliminating the nested calls
+      through `charAt`
 
-        - converts `\0` to `\uFFFD` on construction eliminating this test on every character
-          access.
+    - converts `\0` to `\uFFFD` on construction eliminating this test on every character access.
 
-        - in the future has the potential to support fast `toCharArray()` and related
-          optimizations.
+    - in the future has the potential to support fast `toCharArray()` and related optimizations.
 
-    - Remove: all string based `BasedSequence` implementations, now replaced by
-      `CharSubSequence`
+  - Remove: all string based `BasedSequence` implementations, now replaced by `CharSubSequence`
 
-    - Change: `BasedSequence.getBase()` now returns `Object` to reflect that the underlying
-      source of text could be anything.
+  - Change: `BasedSequence.getBase()` now returns `Object` to reflect that the underlying source
+    of text could be anything.
 
-    - Add: `BasedSequence.getBaseSequence()` which returns a `BasedSequence` of the wrapped full
-      source.
+  - Add: `BasedSequence.getBaseSequence()` which returns a `BasedSequence` of the wrapped full
+    source.
 
-    - Change: all sequence classes are now final and constructors private. Use static methods
-      `BasedSequenceImpl.of()` or the same of specific classes to get sequences of source. This
-      allows optimization based on inputs or when a `subSequence()` of the base is required use
-      `BasedSequence.baseSubSequence()` method, which will return an optimized instance where
-      possible.
+  - Change: all sequence classes are now final and constructors private. Use static methods
+    `BasedSequenceImpl.of()` or the same of specific classes to get sequences of source. This
+    allows optimization based on inputs or when a `subSequence()` of the base is required use
+    `BasedSequence.baseSubSequence()` method, which will return an optimized instance where
+    possible.
 
-    - Add: documentation to `BasedSequence` interface
+  - Add: documentation to `BasedSequence` interface
 
 - Fix: YouTrack and Jira renderers to remove soft line breaks and to make sure no extra blank
   lines are added after loose items. Loose items had 2 blank lines between them because one was
   added by the paragraph node and the other by the list item.
 
 - Add: added Toc and SimToc options:
-    - hierarchy: as before hierarchical list of headings
-    - flat: flat list of headings
-    - reversed: flat reversed list of headings
-    - increasing: flat, alphabetically increasing by heading text
-    - decreasing: flat, alphabetically decreasing by heading text
+  - hierarchy: as before hierarchical list of headings
+  - flat: flat list of headings
+  - reversed: flat reversed list of headings
+  - increasing: flat, alphabetically increasing by heading text
+  - decreasing: flat, alphabetically decreasing by heading text
 
-    Extension changes:
+  Extension changes:
 
-    1. new key `TocExtension.LIST_TYPE` takes a `TocOptions.ListType` enum for list generation
-       type.
+  1. new key `TocExtension.LIST_TYPE` takes a `TocOptions.ListType` enum for list generation
+     type.
 
-    2. `TocOptions` now supports `Immutable` interface allowing to get a mutable copy whose
-       fields can be modified directly with `toMutable()`, and back to `TocOptions` with
-       `toImmutable()`.
+  2. `TocOptions` now supports `Immutable` interface allowing to get a mutable copy whose fields
+     can be modified directly with `toMutable()`, and back to `TocOptions` with `toImmutable()`.
 
-    3. `SimTocOptions` have been removed. `TocOptions` holds all the options for both the
-       regular TOC and simulated TOC.
+  3. `SimTocOptions` have been removed. `TocOptions` holds all the options for both the regular
+     TOC and simulated TOC.
 
 - Add: `SubscriptExtension` and `StrikethroughSubscriptExtension` extensions to
   `flexmark-ext-gfm-strikethrough` artifact. You guessed it, adds `~subscript~` parsing
@@ -521,36 +518,35 @@ Next Release To Do List
 
 - Add: header id generator options to allow slight customization of heading ids
 
-    - `HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES` when set to true adds a `-` with an
-      increasing number from 1 to N for each duplicated id generated.
+  - `HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES` when set to true adds a `-` with an
+    increasing number from 1 to N for each duplicated id generated.
 
-    - `HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS` a string of characters in the heading
-      text which will be mapped to `-`, alphanumerics are passed as is. Anything else is
-      suppressed.
+  - `HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS` a string of characters in the heading text
+    which will be mapped to `-`, alphanumerics are passed as is. Anything else is suppressed.
 
-    - `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` if set will not generate consecutive
-      dashes in the reference ids.
+  - `HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES` if set will not generate consecutive
+    dashes in the reference ids.
 
 - Change: complete rewrite of list handling and list handling options to allow for Markdown
   parser emulation based on major parser families, as described in
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md). All major families are done and
   tested.
-    - CommonMark
-        - GitHub Comments
-        - CommonMark (default for family)
-    - FixedIndent
-        - MultiMarkdown
+  - CommonMark
+    - GitHub Comments
+    - CommonMark (default for family)
+  - FixedIndent
+    - MultiMarkdown
+  - Kramdown (default for family)
     - Kramdown (default for family)
-        - Kramdown (default for family)
-    - Markdown
-        - Markdown.pl (default for family)
+  - Markdown
+    - Markdown.pl (default for family)
 
-    No attempt was made to emulate inline processing of these parsers. Only list processing for
-    now. Most of the other element discrepancies are already addressable with existing parser
-    options.
+  No attempt was made to emulate inline processing of these parsers. Only list processing for
+  now. Most of the other element discrepancies are already addressable with existing parser
+  options.
 
-    :warning: Markdown.pl is emulated fairly well but without its abundant bugs. Use it at your
-    own discretion.
+  :warning: Markdown.pl is emulated fairly well but without its abundant bugs. Use it at your
+  own discretion.
 
 - Fix: #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of
   text block
@@ -674,10 +670,9 @@ Next Release To Do List
   position attribute is set to non-empty value.
 
 - Add `AttributablePart` instances:
-    - `CoreNodeRenderer.CODE_CONTENT` to mark the `code` tag part of fenced code and indented
-      code
-    - `CoreNodeRenderer.PARAGRAPH_LINE` to mark line spans of paragraphs source positions, list
-      items or any other text block supporting lazy continuation.
+  - `CoreNodeRenderer.CODE_CONTENT` to mark the `code` tag part of fenced code and indented code
+  - `CoreNodeRenderer.PARAGRAPH_LINE` to mark line spans of paragraphs source positions, list
+    items or any other text block supporting lazy continuation.
 
 - Refine source position attribute generation to make highlighting HTML elements from source
   position information more intuitive.
@@ -781,43 +776,43 @@ Next Release To Do List
 - Add a bunch of list parsing options to allow mimicking list parsing by various markdown
   implementations:
 
-    - Add `Parser.LISTS_ITEM_TYPE_MATCH` when true a new list is started when the list item type
-      does not match an existing list type. When false bullet list can contain ordered list
-      items and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows
-      mimicking different parser behavior: kramdown, GFM, Markdown.pl, ...
+  - Add `Parser.LISTS_ITEM_TYPE_MATCH` when true a new list is started when the list item type
+    does not match an existing list type. When false bullet list can contain ordered list items
+    and vice versa. In combination with `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` allows mimicking
+    different parser behavior: kramdown, GFM, Markdown.pl, ...
 
-    - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a
-      sub item instead of starting a new list. When false a new list will be started.
-      :information_source: only applicable if `Parser.LISTS_ITEM_TYPE_MATCH` is true.
+  - Add `Parser.LISTS_ITEM_MISMATCH_TO_SUBITEM` when true a mismatched item is treated as a sub
+    item instead of starting a new list. When false a new list will be started.
+    :information_source: only applicable if `Parser.LISTS_ITEM_TYPE_MATCH` is true.
 
-    - Change `Parser.ORDERED_LIST_DOT_ONLY` to `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`
+  - Change `Parser.ORDERED_LIST_DOT_ONLY` to `Parser.LISTS_ORDERED_ITEM_DOT_ONLY`
 
-    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item
-      can interrupt a paragraph. i.e. start without having a blank line before
+  - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH` option, when true a bullet list item can
+    interrupt a paragraph. i.e. start without having a blank line before
 
-    - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list
-      sub item can interrupt the parent item's item text paragraph.
+  - Add `Parser.LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true a bullet list sub
+    item can interrupt the parent item's item text paragraph.
 
-    - Change `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to
-      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered
-      list item can interrupt a paragraph. i.e. can start without having a blank line before.
-      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only
-      true for items with 1. prefix, or any ordered item.
+  - Change `Parser.ORDERED_LIST_INTERRUPTS_PARAGRAPH` to
+    `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` option, now controls whether an ordered
+    list item can interrupt a paragraph. i.e. can start without having a blank line before.
+    `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether this is only true
+    for items with 1. prefix, or any ordered item.
 
-    - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered
-      list sub item can interrupt the parent item's item text paragraph.
-      `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this
-      is only true for items with 1. prefix, or any ordered item.
+  - Add `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` option, when true an ordered list
+    sub item can interrupt the parent item's item text paragraph.
+    `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether this
+    is only true for items with 1. prefix, or any ordered item.
 
-    - Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
+  - Change `Parser.ORDERED_LIST_START` to `Parser.LISTS_ORDERED_LIST_MANUAL_START`
 
-    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered
-      item can interrupt or only one starting with 1. :information_source: only applies if
-      `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` is true.
+  - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH` controls whether any ordered
+    item can interrupt or only one starting with 1. :information_source: only applies if
+    `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH` is true.
 
-    - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether
-      any ordered item can interrupt or only one starting with 1. :information_source: only
-      applies if `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
+  - Add `Parser.LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARENT_ITEM_PARAGRAPH` controls whether
+    any ordered item can interrupt or only one starting with 1. :information_source: only
+    applies if `Parser.LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH` is true.
 
 0.4.9
 -----
@@ -890,20 +885,20 @@ Next Release To Do List
   but is decorated with link like rendering. Similarly, auto links are just text with link
   decorations.
 
-    To allow extensions to create such decorated text while allowing contiguous plain text
-    processing without a lot of code, extensions should replace `Text` nodes that they decorate
-    with `TextBase` and add their unprocessed text as `Text` nodes under the `TextBase` node,
-    along with their extension specific decorated nodes with a child `Text` node for the
-    decorated part of the text. The custom decorated text nodes should also implement
-    `DoNotDecorate` interface so that other extensions will know not to decorate their text.
+  To allow extensions to create such decorated text while allowing contiguous plain text
+  processing without a lot of code, extensions should replace `Text` nodes that they decorate
+  with `TextBase` and add their unprocessed text as `Text` nodes under the `TextBase` node,
+  along with their extension specific decorated nodes with a child `Text` node for the decorated
+  part of the text. The custom decorated text nodes should also implement `DoNotDecorate`
+  interface so that other extensions will know not to decorate their text.
 
-    If a `Text` node is not a child of `TextBase` then a new instance of `TextBase` should be
-    created and all undecorated and decorated text nodes should be its children.
+  If a `Text` node is not a child of `TextBase` then a new instance of `TextBase` should be
+  created and all undecorated and decorated text nodes should be its children.
 
-    Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
+  Text decoration by extension should always be done on `Text` and never on `TextBase` nodes.
 
-    `TextBase` rendering is just rendering of its children. `TextCollectingVisitor` uses the
-    characters of `TextBase` node and does not descend into its children.
+  `TextBase` rendering is just rendering of its children. `TextCollectingVisitor` uses the
+  characters of `TextBase` node and does not descend into its children.
 
 - Add `TypographicExtension` for typographic quotes and smarts, `EscapedCharacterExtension` for
   syntax highlighting escaped characters, `DefinitionExtension` for definition lists. These are
@@ -921,14 +916,14 @@ Next Release To Do List
   returns an array of `VisitHandler` which can be passed to `NodeVisitor` constructor along with
   any other visitor handlers as vararg.
 
-    Nodes no longer have an `accept()` method. `NodeVisitor` delegate is used for recursive
-    traversal of the AST. Its generic `NodeVisitor.visit(Node)` can be used to start the visit.
-    This method will map the actual node class to the `VisitHandler` associated with the given
-    node.
+  Nodes no longer have an `accept()` method. `NodeVisitor` delegate is used for recursive
+  traversal of the AST. Its generic `NodeVisitor.visit(Node)` can be used to start the visit.
+  This method will map the actual node class to the `VisitHandler` associated with the given
+  node.
 
-    Maintaining the core `Visitor` interface and its derivatives became too much of a pain.
-    Handling custom nodes is now identical to handling core nodes and the limitation of
-    inheritance other than from Node has been removed from all nodes.
+  Maintaining the core `Visitor` interface and its derivatives became too much of a pain.
+  Handling custom nodes is now identical to handling core nodes and the limitation of
+  inheritance other than from Node has been removed from all nodes.
 
 0.4.3
 -----
@@ -936,51 +931,50 @@ Next Release To Do List
 - Change `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer to
   handle resolving of URLs for links.
 
-    - `ResolvedLink` represents the link being resolved. `ResolvedLink.getUrl()` will initially
-      return the raw link value from the markdown element. `LinkResolvers` can modify this value
-      according to their understanding of the link type and link format. They may or may not
-      change the link type and status.
+  - `ResolvedLink` represents the link being resolved. `ResolvedLink.getUrl()` will initially
+    return the raw link value from the markdown element. `LinkResolvers` can modify this value
+    according to their understanding of the link type and link format. They may or may not
+    change the link type and status.
 
-    - `LinkType` specifies type of link. Core defines `LinkType.LINK` and `LinkType.IMAGE`,
-      extensions can define other types that use different link resolving logic. Wiki link
-      extension defines `WikiLinkExtension.WIKI_LINK` type and provides a custom link resolver
-      that will convert the wiki link text to a URL and the type to `LinkType.LINK`. It also
-      changes the status to `LinkStatus.UNCHECKED`
+  - `LinkType` specifies type of link. Core defines `LinkType.LINK` and `LinkType.IMAGE`,
+    extensions can define other types that use different link resolving logic. Wiki link
+    extension defines `WikiLinkExtension.WIKI_LINK` type and provides a custom link resolver
+    that will convert the wiki link text to a URL and the type to `LinkType.LINK`. It also
+    changes the status to `LinkStatus.UNCHECKED`
 
-    - `LinkStatus` holds the result of the resolving process. Initial link status is
-      `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.
-        - `LinkStatus.UNKNOWN` link has not been resolved yet
-        - `LinkStatus.VALID` link is resolved and valid
-        - `LinkStatus.UNCHECKED` link is resolved, validity not verified
-        - `LinkStatus.NOT_FOUND` link is resolved and its target is not found
+  - `LinkStatus` holds the result of the resolving process. Initial link status is
+    `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.
+    - `LinkStatus.UNKNOWN` link has not been resolved yet
+    - `LinkStatus.VALID` link is resolved and valid
+    - `LinkStatus.UNCHECKED` link is resolved, validity not verified
+    - `LinkStatus.NOT_FOUND` link is resolved and its target is not found
 
-    - Link resolvers are tried until one reports success. They can modify the URL, if available
-      the Text, and attributes. The latter is still modifiable by attribute providers at two
-      points: right after all resolvers have passed and before final rendering of the link.
+  - Link resolvers are tried until one reports success. They can modify the URL, if available
+    the Text, and attributes. The latter is still modifiable by attribute providers at two
+    points: right after all resolvers have passed and before final rendering of the link.
 
-    - like other processors they have before/after dependencies.
+  - like other processors they have before/after dependencies.
 
-    - Encoding is done by the context as the last step if it is requested in options. No URL
-      encoding of links which are passed through resolving process.
+  - Encoding is done by the context as the last step if it is requested in options. No URL
+    encoding of links which are passed through resolving process.
 
-    - Any unresolved link's url is rendered as is.
+  - Any unresolved link's url is rendered as is.
 
-    - Results of resolving a link are cached based on `LinkType` and the initial url text.
-      Subsequent requests to resolve the same type and url will return the same instance of
-      `ResolvedLink`.
+  - Results of resolving a link are cached based on `LinkType` and the initial url text.
+    Subsequent requests to resolve the same type and url will return the same instance of
+    `ResolvedLink`.
 
 - Add `AttributablePart` that nodes provide when marking a tag
   `HtmlWriter.withAttr(AttributablePart)` so that an attribute provider has information about
   the exact HTML element the node is requesting attributes for. Core only defines:
-    - `AttributablePart.NODE` a generic placeholder when the node does not specify one
-    - `AttributablePart.ID` a node's id attribute is being requested
-    - `AttributablePart.LINK` a node is rendering a link, the `Attributes` parameter will hold
-      an attribute named `Attribute.LINK_STATUS` whose value represents the name of the
-      `LinkStatus` of the resolved link. Attribute providers can use this value to set specific
-      attributes based on the resolved link status. This attribute does not render in the final
-      HTML.
-    - Extensions can and should define parts for specific elements they allow to modify with
-      extensions.
+  - `AttributablePart.NODE` a generic placeholder when the node does not specify one
+  - `AttributablePart.ID` a node's id attribute is being requested
+  - `AttributablePart.LINK` a node is rendering a link, the `Attributes` parameter will hold an
+    attribute named `Attribute.LINK_STATUS` whose value represents the name of the `LinkStatus`
+    of the resolved link. Attribute providers can use this value to set specific attributes
+    based on the resolved link status. This attribute does not render in the final HTML.
+  - Extensions can and should define parts for specific elements they allow to modify with
+    extensions.
 
 - Change `AttributeProvider.setAttributes(Node, AttributablePart, Attributes)` to now get an
   attributable part that pinpoints the exact element of the node being rendered, for nodes that
@@ -1000,25 +994,25 @@ Next Release To Do List
 - Add `LinkResolver` and `LinkResolverFactory` interfaces and registration in HtmlRenderer to
   handle resolving of URLs for links, including adding attributes.
 
-    - Link resolvers are tried until one reports success. They can modify the URL, if available
-      the Text, and attributes. The latter is still modifiable by attribute providers at two
-      points: right after all resolvers have passed and before final rendering of the link.
+  - Link resolvers are tried until one reports success. They can modify the URL, if available
+    the Text, and attributes. The latter is still modifiable by attribute providers at two
+    points: right after all resolvers have passed and before final rendering of the link.
 
-    - like other processors they have before/after dependencies.
+  - like other processors they have before/after dependencies.
 
-    - After all resolvers have handled the link it is passed to AttributeProviders to possibly
-      add/remove/change attributes via `AttributeProvider.setAttributes(LinkRendering)` at this
-      point if the link was resolved `LinkRendering.getIsResolved()` will return true, null
-      means no resolver handled it, it will render as is, false means it does not resolve.
+  - After all resolvers have handled the link it is passed to AttributeProviders to possibly
+    add/remove/change attributes via `AttributeProvider.setAttributes(LinkRendering)` at this
+    point if the link was resolved `LinkRendering.getIsResolved()` will return true, null means
+    no resolver handled it, it will render as is, false means it does not resolve.
 
-    - The Attribute providers will be invoked again on the final link rendering but at this
-      point there is no information on whether the link resolved or not but there is final
-      attributes that can be manipulated.
+  - The Attribute providers will be invoked again on the final link rendering but at this point
+    there is no information on whether the link resolved or not but there is final attributes
+    that can be manipulated.
 
-    - Encoding is done by the context as the last step if it is requested in options. No URL
-      encoding of links which are passed through resolving process.
+  - Encoding is done by the context as the last step if it is requested in options. No URL
+    encoding of links which are passed through resolving process.
 
-    - Any unresolved link is rendered as is.
+  - Any unresolved link is rendered as is.
 
 0.4.1
 -----
@@ -1145,9 +1139,9 @@ Next Release To Do List
   for either key or value to be null. All of these are iterable and have iterators for indices,
   values, keys, and entries, including reversed and reversible iterators.
 
-    Additionally, these have can be in hosted mode, in which they make callbacks on changes
-    allowing to keep tandem structures in sync. `OrderedMap` and `OrderedMultiMap` use
-    `OrderedSet` in this way.
+  Additionally, these have can be in hosted mode, in which they make callbacks on changes
+  allowing to keep tandem structures in sync. `OrderedMap` and `OrderedMultiMap` use
+  `OrderedSet` in this way.
 
 - Change document parser to use helper classes for block parser and block pre-processor
   optimizations. Gain in performance for large files is significant. 500k file flexmark-java was
@@ -1259,15 +1253,15 @@ Next Release To Do List
 
 - Add Heading allow no space after # for atx and do not allow non-indent spaces before heading
   options:
-    - `Parser.HEADERS_NO_ATX_SPACE`
-    - `Parser.HEADERS_NO_LEAD_SPACE`
+  - `Parser.HEADERS_NO_ATX_SPACE`
+  - `Parser.HEADERS_NO_LEAD_SPACE`
 
 - Add Relaxed inline emphasis parsing option. No code behind the option yet.
-    - `Parser.INLINE_RELAXED_EMPHASIS`
+  - `Parser.INLINE_RELAXED_EMPHASIS`
 
 - Add footnote link class options for footnote ref link and footnote back link:
-    - `FootnoteExtension.FOOTNOTE_LINK_REF_CLASS`
-    - `FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS`
+  - `FootnoteExtension.FOOTNOTE_LINK_REF_CLASS`
+  - `FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS`
 
 0.2.1
 -----
@@ -1345,8 +1339,8 @@ Next Release To Do List
 
 - Change more tests using multiple test classes and spec files to use the options mechanism. On
   the todo list:
-    - Wiki link extension with creole vs gfm syntax tests
-    - Table extension for gfm and non-gfm table testing, need to add tests for various options.
+  - Wiki link extension with creole vs gfm syntax tests
+  - Table extension for gfm and non-gfm table testing, need to add tests for various options.
 
 0.1.4
 -----
@@ -1433,29 +1427,29 @@ Next Release To Do List
   allow rendering for specific parts of the HTML document.
 
 - Add html rendering phases to allow generating for different parts of the document.
-    - `HEAD_TOP`
-    - `HEAD`
-    - `HEAD_CSS`
-    - `HEAD_SCRIPTS`
-    - `HEAD_BOTTOM`
-    - `BODY_TOP`
-    - `BODY`
-    - `BODY_BOTTOM`
-    - `BODY_LOAD_SCRIPTS`
-    - `BODY_SCRIPTS`
+  - `HEAD_TOP`
+  - `HEAD`
+  - `HEAD_CSS`
+  - `HEAD_SCRIPTS`
+  - `HEAD_BOTTOM`
+  - `BODY_TOP`
+  - `BODY`
+  - `BODY_BOTTOM`
+  - `BODY_LOAD_SCRIPTS`
+  - `BODY_SCRIPTS`
 
 - Add `FootnoteExtension` which converts `[^footnote]` to footnote references and `[^footnote]:
   footnote text` footnote definitions. With referenced footnotes added to the bottom of the
   generated HTML.
 
 - Add a few HtmlWriter methods and enhancements to allow:
-    - indenting HTML
-    - methods return `this` so methods could be chained
-    - invocation with lambda to eliminate the need to close a tag
-    - `renderChildren()` to eliminate the need for each renderer to roll its own
-    - `attr(String, String)` method to accumulate attributes to be used on the next `tag()`
-      invocation. Eliminating the need to roll your own attribute methods. Accumulated
-      attributes are merged, or overwritten by ones passed in as an argument to `tag()`
+  - indenting HTML
+  - methods return `this` so methods could be chained
+  - invocation with lambda to eliminate the need to close a tag
+  - `renderChildren()` to eliminate the need for each renderer to roll its own
+  - `attr(String, String)` method to accumulate attributes to be used on the next `tag()`
+    invocation. Eliminating the need to roll your own attribute methods. Accumulated attributes
+    are merged, or overwritten by ones passed in as an argument to `tag()`
 
 - Fix `SegmentedSequence::getEndOffset()` for sub-sequences would return end offset of the full
   sequence and not its `subSequence()`.
@@ -1472,21 +1466,21 @@ Next Release To Do List
 -----
 
 - AST is built based on Nodes in the source not nodes needed for HTML generation. New nodes:
-    - Reference
-    - Image
-    - LinkRef
-    - ImageRef
-    - AutoLink
-    - MailLink
-    - Emphasis
-    - StrongEmphasis
-    - HtmlEntity
+  - Reference
+  - Image
+  - LinkRef
+  - ImageRef
+  - AutoLink
+  - MailLink
+  - Emphasis
+  - StrongEmphasis
+  - HtmlEntity
 
-    Each node has `getChars()` property which returns a BasedSequence character sequence which
-    spans the contents of the node, with start/end offsets into the original source.
+  Each node has `getChars()` property which returns a BasedSequence character sequence which
+  spans the contents of the node, with start/end offsets into the original source.
 
-    Additionally, each node can provide other `BasedSequence` properties that parcel out pieces
-    of the node's characters, independent of child node breakdown.
+  Additionally, each node can provide other `BasedSequence` properties that parcel out pieces of
+  the node's characters, independent of child node breakdown.
 
 - Add `PropertyHolder` interface to store document global properties for things like references,
   abbreviations, footnotes, or anything else that is parsed from the source.
@@ -1496,21 +1490,21 @@ Next Release To Do List
 
 - ParserState a few new methods:
 
-    - `getPropertyHolder()` returns the property holder for the parse session. This is the
-      current document parser. After parsing the property holder is the Document node which can
-      be obtained from via `Node::getDocument()` method. Implementation is to traverse node
-      parents until a Document node is reached.
+  - `getPropertyHolder()` returns the property holder for the parse session. This is the current
+    document parser. After parsing the property holder is the Document node which can be
+    obtained from via `Node::getDocument()` method. Implementation is to traverse node parents
+    until a Document node is reached.
 
-    - `getInlineParser()` returns the current parse session's inline processor
+  - `getInlineParser()` returns the current parse session's inline processor
 
-    - `getLine()` and `getLineWithEOL()` return the current line being parsed. With or without
-      the EOL.
+  - `getLine()` and `getLineWithEOL()` return the current line being parsed. With or without the
+    EOL.
 
-    - `getLineEolLength()` returns the current line's EOL length, usually 1 but can be 2 if
-      `"\r\n"` is the current line's sequence.
+  - `getLineEolLength()` returns the current line's EOL length, usually 1 but can be 2 if
+    `"\r\n"` is the current line's sequence.
 
-    - Implements `BlockPreProcessor` interface to handle pre-processing of blocks as was done in
-      paragraph blocks to remove reference definitions from the beginning of a paragraph block.
+  - Implements `BlockPreProcessor` interface to handle pre-processing of blocks as was done in
+    paragraph blocks to remove reference definitions from the beginning of a paragraph block.
 
 - `AbstractBlockParser::closeBlock()` now takes a `ParserState` argument so that any block can
   do processing similar to Paragraph processing of leading References by using the
@@ -1536,23 +1530,23 @@ Next Release To Do List
 - `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
   AST so that the generated AST can be validated.
 
-        ```````````````````````````````` example
-        [[*foo* bar]]
+      ```````````````````````````````` example
+      [[*foo* bar]]
 
-        [*foo* bar]: /url "title"
-        .
-        <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
-        .
-        Document[0, 41]
-          Paragraph[0, 14]
-            Text[0, 1]
-            LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
-              Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
-                Text[3, 6]
-              Text[7, 11]
-            Text[12, 13]
-          Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
-        ````````````````````````````````
+      [*foo* bar]: /url "title"
+      .
+      <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
+      .
+      Document[0, 41]
+        Paragraph[0, 14]
+          Text[0, 1]
+          LinkRef[1, 12] textOpen:[0, 0] text:[0, 0] textClose:[0, 0] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
+            Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6] textClose:[6, 7, "*"]
+              Text[3, 6]
+            Text[7, 11]
+          Text[12, 13]
+        Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
+      ````````````````````````````````
 
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST
