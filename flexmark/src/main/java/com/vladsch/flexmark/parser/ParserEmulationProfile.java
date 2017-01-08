@@ -297,7 +297,6 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, true)
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH, false)
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
-                    .set(Parser.HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH, false)
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions().setIn(dataHolder);

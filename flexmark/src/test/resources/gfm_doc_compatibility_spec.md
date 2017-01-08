@@ -2366,21 +2366,30 @@ Test how headings in list items are handled, leading space allowed or not
 
 .
 <ul>
-    <li>item 1 # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6
+    <li>
+        <p>item 1</p>
+        <h1 id="heading-1">Heading 1</h1>
+        <p>## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</p>
         <ul>
-            <li>item 2 # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</li>
+            <li>
+                <p>item 2</p>
+                <h1 id="heading-1-1">Heading 1</h1>
+                <h2 id="heading-2">Heading 2</h2>
+                <h3 id="heading-3">Heading 3</h3>
+                <p>#### Heading 4 ##### Heading 5 ###### Heading 6</p>
+            </li>
         </ul>
     </li>
 </ul>
 .
 Document[0, 261]
   BulletList[0, 260] isTight
-    BulletListItem[0, 260] open:[0, 1, "*"] isTight
-      Paragraph[2, 123]
+    BulletListItem[0, 260] open:[0, 1, "*"] isLoose
+      Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-        SoftLineBreak[8, 9]
-        Text[11, 22] chars:[11, 22, "# Hea … ing 1"]
-        SoftLineBreak[22, 23]
+      Heading[11, 22] textOpen:[11, 12, "#"] text:[13, 22, "Heading 1"]
+        Text[13, 22] chars:[13, 22, "Heading 1"]
+      Paragraph[26, 123]
         Text[26, 38] chars:[26, 38, "## He … ing 2"]
         SoftLineBreak[38, 39]
         Text[43, 56] chars:[43, 56, "### H … ing 3"]
@@ -2391,16 +2400,16 @@ Document[0, 261]
         SoftLineBreak[98, 99]
         Text[106, 122] chars:[106, 122, "##### … ing 6"]
       BulletList[125, 260] isTight
-        BulletListItem[125, 260] open:[125, 126, "*"] isTight hadBlankLineAfter
-          Paragraph[127, 260]
+        BulletListItem[125, 260] open:[125, 126, "*"] isLoose
+          Paragraph[127, 134]
             Text[127, 133] chars:[127, 133, "item 2"]
-            SoftLineBreak[133, 134]
-            Text[138, 149] chars:[138, 149, "# Hea … ing 1"]
-            SoftLineBreak[149, 150]
-            Text[155, 167] chars:[155, 167, "## He … ing 2"]
-            SoftLineBreak[167, 168]
-            Text[174, 187] chars:[174, 187, "### H … ing 3"]
-            SoftLineBreak[187, 188]
+          Heading[138, 149] textOpen:[138, 139, "#"] text:[140, 149, "Heading 1"]
+            Text[140, 149] chars:[140, 149, "Heading 1"]
+          Heading[155, 167] textOpen:[155, 157, "##"] text:[158, 167, "Heading 2"]
+            Text[158, 167] chars:[158, 167, "Heading 2"]
+          Heading[174, 187] textOpen:[174, 177, "###"] text:[178, 187, "Heading 3"]
+            Text[178, 187] chars:[178, 187, "Heading 3"]
+          Paragraph[195, 260]
             Text[195, 209] chars:[195, 209, "####  … ing 4"]
             SoftLineBreak[209, 210]
             Text[218, 233] chars:[218, 233, "##### … ing 5"]
@@ -2434,22 +2443,36 @@ Document[0, 261]
 
 .
 <ul>
-    <li>item 1 # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6
+    <li>
+        <p>item 1</p>
+        <h1 id="heading-1">Heading 1</h1>
+        <p>## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</p>
         <ul>
-            <li>item 2 # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</li>
-            <li>item 3 # Heading 1 ## Heading 2 ### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</li>
+            <li>
+                <p>item 2</p>
+                <h1 id="heading-1-1">Heading 1</h1>
+                <h2 id="heading-2">Heading 2</h2>
+                <h3 id="heading-3">Heading 3</h3>
+                <p>#### Heading 4 ##### Heading 5 ###### Heading 6</p>
+            </li>
+            <li>
+                <p>item 3</p>
+                <h1 id="heading-1-2">Heading 1</h1>
+                <h2 id="heading-2-1">Heading 2</h2>
+                <p>### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</p>
+            </li>
         </ul>
     </li>
 </ul>
 .
 Document[0, 405]
   BulletList[0, 404] isTight
-    BulletListItem[0, 404] open:[0, 1, "*"] isTight
-      Paragraph[2, 123]
+    BulletListItem[0, 404] open:[0, 1, "*"] isLoose
+      Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-        SoftLineBreak[8, 9]
-        Text[11, 22] chars:[11, 22, "# Hea … ing 1"]
-        SoftLineBreak[22, 23]
+      Heading[11, 22] textOpen:[11, 12, "#"] text:[13, 22, "Heading 1"]
+        Text[13, 22] chars:[13, 22, "Heading 1"]
+      Paragraph[26, 123]
         Text[26, 38] chars:[26, 38, "## He … ing 2"]
         SoftLineBreak[38, 39]
         Text[43, 56] chars:[43, 56, "### H … ing 3"]
@@ -2460,29 +2483,29 @@ Document[0, 405]
         SoftLineBreak[98, 99]
         Text[106, 122] chars:[106, 122, "##### … ing 6"]
       BulletList[125, 404] isTight
-        BulletListItem[125, 260] open:[125, 126, "*"] isTight
-          Paragraph[127, 260]
+        BulletListItem[125, 260] open:[125, 126, "*"] isLoose
+          Paragraph[127, 134]
             Text[127, 133] chars:[127, 133, "item 2"]
-            SoftLineBreak[133, 134]
-            Text[138, 149] chars:[138, 149, "# Hea … ing 1"]
-            SoftLineBreak[149, 150]
-            Text[155, 167] chars:[155, 167, "## He … ing 2"]
-            SoftLineBreak[167, 168]
-            Text[174, 187] chars:[174, 187, "### H … ing 3"]
-            SoftLineBreak[187, 188]
+          Heading[138, 149] textOpen:[138, 139, "#"] text:[140, 149, "Heading 1"]
+            Text[140, 149] chars:[140, 149, "Heading 1"]
+          Heading[155, 167] textOpen:[155, 157, "##"] text:[158, 167, "Heading 2"]
+            Text[158, 167] chars:[158, 167, "Heading 2"]
+          Heading[174, 187] textOpen:[174, 177, "###"] text:[178, 187, "Heading 3"]
+            Text[178, 187] chars:[178, 187, "Heading 3"]
+          Paragraph[195, 260]
             Text[195, 209] chars:[195, 209, "####  … ing 4"]
             SoftLineBreak[209, 210]
             Text[218, 233] chars:[218, 233, "##### … ing 5"]
             SoftLineBreak[233, 234]
             Text[243, 259] chars:[243, 259, "##### … ing 6"]
-        BulletListItem[263, 404] open:[263, 264, "*"] isTight hadBlankLineAfter
-          Paragraph[265, 404]
+        BulletListItem[263, 404] open:[263, 264, "*"] isLoose
+          Paragraph[265, 272]
             Text[265, 271] chars:[265, 271, "item 3"]
-            SoftLineBreak[271, 272]
-            Text[277, 288] chars:[277, 288, "# Hea … ing 1"]
-            SoftLineBreak[288, 289]
-            Text[295, 307] chars:[295, 307, "## He … ing 2"]
-            SoftLineBreak[307, 308]
+          Heading[277, 288] textOpen:[277, 278, "#"] text:[279, 288, "Heading 1"]
+            Text[279, 288] chars:[279, 288, "Heading 1"]
+          Heading[295, 307] textOpen:[295, 297, "##"] text:[298, 307, "Heading 2"]
+            Text[298, 307] chars:[298, 307, "Heading 2"]
+          Paragraph[315, 404]
             Text[315, 328] chars:[315, 328, "### H … ing 3"]
             SoftLineBreak[328, 329]
             Text[337, 351] chars:[337, 351, "####  … ing 4"]

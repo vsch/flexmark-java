@@ -154,9 +154,9 @@ flexmark-java
     line between the item text and the block quote.
 
 - API Change: add heading parsing option `Parser.HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH`, default
-  `true`, when `false` heading in list item paragraph is ignored. Used for partial GitHub
-  compatibility implementation. GitHub parses ATX headings only in list items if the list has a
-  blank line included in it. Too much of a kludge to replicate.
+  `true`, when `false` heading in list item paragraph is ignored. Not Used but can be applied
+  for partial GitHub compatibility implementation. GitHub parses ATX headings only in list items
+  if the list has a blank line included in it. Too much of a kludge to replicate.
 
 - API Change: rename `ParserEmulationFamily` to `ParserEmulationProfile` and make it implement
   `MutableDataSetter` and add `ParserEmulationProfile.family` field to get emulation family. Now
