@@ -87,14 +87,15 @@ flexmark-java
   - [ ] League/CommonMark
   - [ ] Jekyll
   - [ ] Php Markdown Extra
-  - GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
-  - GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
   - CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
   - FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
-  - Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
-  - MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
+  - GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
+  - GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
   - Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
   - Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
+  - MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
+  - Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
+  - Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 - Add: PDF renderer
 

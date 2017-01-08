@@ -164,8 +164,17 @@ Major processor families are implemented and some family members also:
   - Pegdown
 
 :information_source: profiles to encapsulate configuration details for variants within the
-family will follow shortly. It can happen sooner if you let me know that you need it for you
-project.
+family were added in 0.11.0:
+
+- CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
+- FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
+- GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
+- GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
+- Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
+- Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
+- MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
+- Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
+- Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 ### History and Motivation
 
