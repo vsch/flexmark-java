@@ -11,6 +11,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
     protected BasedSequence markerSuffix = BasedSequence.NULL;
     private boolean tight = true;
     private boolean hadBlankAfterItemParagraph = false;
+    private boolean containsBlankLine = false;
 
     @Override
     public void getAstExtra(StringBuilder out) {
@@ -19,6 +20,7 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
         if (isTight()) out.append(" isTight");
         else out.append(" isLoose");
         if (isHadBlankAfterItemParagraph()) out.append(" hadBlankLineAfter");
+        else if (isContainsBlankLine()) out.append(" hadBlankLine");
     }
 
     @Override
@@ -81,6 +83,14 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
 
     public boolean isHadBlankAfterItemParagraph() {
         return hadBlankAfterItemParagraph;
+    }
+
+    public boolean isContainsBlankLine() {
+        return containsBlankLine;
+    }
+
+    public void setContainsBlankLine(final boolean containsBlankLine) {
+        this.containsBlankLine = containsBlankLine;
     }
 
     @SuppressWarnings("SameParameterValue")

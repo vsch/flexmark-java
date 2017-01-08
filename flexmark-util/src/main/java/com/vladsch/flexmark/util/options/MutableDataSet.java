@@ -23,10 +23,17 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public void setAll(DataHolder other) {
+    public MutableDataSet setAll(DataHolder other) {
         for (DataKey key : other.keySet()) {
             set(key, other.get(key));
         }
+        return this;
+    }
+
+    @Override
+    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+        dataHolder.setAll(this);
+        return dataHolder;
     }
 
     @Override
@@ -70,7 +77,8 @@ public class MutableDataSet extends DataSet implements MutableDataHolder {
     }
 
     @Override
-    public void clear() {
+    public MutableDataHolder clear() {
         dataSet.clear();
+        return this;
     }
 }

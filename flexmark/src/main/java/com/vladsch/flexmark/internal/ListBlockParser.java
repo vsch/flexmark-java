@@ -3,7 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
-import static com.vladsch.flexmark.parser.ParserEmulationFamily.*;
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class ListBlockParser extends AbstractBlockParser {
     private final ListBlock myBlock;
@@ -124,36 +124,72 @@ public class ListBlockParser extends AbstractBlockParser {
         return myOptions.isEndOnDoubleBlank();
     }
 
+    private static boolean hasNonItemChildren(ListItem item) {
+        if (item.hasChildren()) {
+            int count = 0;
+            for (Node child : item.getChildren()) {
+                if (child instanceof ListBlock) continue;
+
+                count++;
+                if (count >= 2) return true;
+            }
+        }
+        return false;
+    }
+
     private void finalizeListTight(ParserState parserState) {
         Node item = getBlock().getFirstChild();
         boolean isTight = true;
-        boolean prevItemLooseHadBlankAfterItemPara = false;
+        boolean prevItemHadBlankAfterItemPara = false;
+        boolean prevItemHadTrailingBlankLine = false;
+        boolean prevItemHadTrueTrailingBlankLine = false;
+        boolean prevItemContainsBlankLine = false;
+        boolean prevItemHadChildren = false;
         boolean prevItemLoose = false;
         boolean haveNestedList = false;
 
         while (item != null) {
             // check for non-final list item ending with blank line:
-            boolean thisItemLooseHadBlankAfterItemPara = false;
+            boolean thisItemHadBlankAfterItemPara = false;
+            boolean thisItemContainsBlankLine = false;
+            boolean thisItemHadTrailingBlankLine = false;
+            boolean thisItemHadTrueTrailingBlankLine = false;
+            boolean thisItemHadChildren = false;
             boolean thisItemLoose = false;
-            if (myOptions.isLooseWhenBlankFollowsItemParagraph()) {
-                if (item instanceof ListItem) {
-                    if (((ListItem) item).isHadBlankAfterItemParagraph()) {
-                        //noinspection StatementWithEmptyBody
-                        if (item.getNext() == null && (item.getFirstChild() == null || item.getFirstChild().getNext() == null)) {
-                            // not for last block
-                        } else {
-                            ((ListItem) item).setLoose(true);
-                            isTight = false;
-                            thisItemLooseHadBlankAfterItemPara = true;
-                        }
+
+            if (item instanceof ListItem) {
+                if (((ListItem) item).isHadBlankAfterItemParagraph()) {
+                    //noinspection StatementWithEmptyBody
+                    if (item.getNext() == null && (item.getFirstChild() == null || item.getFirstChild().getNext() == null)) {
+                        // not for last block
+                    } else {
+                        thisItemHadBlankAfterItemPara = true;
                     }
                 }
-            }
 
-            if (myOptions.isLooseWhenHasTrailingBlankLine()) {
+                if (((ListItem) item).isContainsBlankLine()) {
+                    thisItemContainsBlankLine = true;
+                }
+
                 if (parserState.endsWithBlankLine(item) && item.getNext() != null) {
+                    thisItemHadTrueTrailingBlankLine = true;
+                }
+
+                if (hasNonItemChildren((ListItem) item)) {
+                    thisItemHadChildren = true;
+                }
+
+                thisItemLoose = false
+                        || thisItemHadTrueTrailingBlankLine && myOptions.isLooseWhenHasTrailingBlankLine()
+                        || thisItemHadBlankAfterItemPara && myOptions.isLooseWhenBlankLineFollowsItemParagraph()
+                        || thisItemContainsBlankLine && myOptions.isLooseWhenContainsBlankLine()
+                        || thisItemHadChildren && myOptions.isLooseWhenHasNonListChildren()
+                        || (thisItemHadTrueTrailingBlankLine && item.getPrevious() == null || prevItemHadTrueTrailingBlankLine) && myOptions.isLooseWhenPrevHasTrailingBlankLine()
+                ;
+
+                if (thisItemLoose) {
+                    ((ListItem) item).setLoose(true);
                     isTight = false;
-                    thisItemLoose = true;
                 }
             }
 
@@ -161,21 +197,35 @@ public class ListBlockParser extends AbstractBlockParser {
             // spaces between any of them:
             Node subItem = item.getFirstChild();
             while (subItem != null) {
-                if (myOptions.isLooseWhenHasTrailingBlankLine()) {
-                    if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
-                        isTight = false;
+                if (parserState.endsWithBlankLine(subItem) && (item.getNext() != null || subItem.getNext() != null)) {
+                    thisItemHadTrailingBlankLine = true;
+                    if (subItem == item.getLastChild()) thisItemHadTrueTrailingBlankLine = true;
+
+                    if (!thisItemLoose) {
+                        if (myOptions.isLooseWhenHasTrailingBlankLine()) {
+                            isTight = false;
+                        }
+
+                        if (thisItemHadTrueTrailingBlankLine && item.getPrevious() == null && myOptions.isLooseWhenPrevHasTrailingBlankLine()) {
+                            isTight = false;
+                            thisItemLoose = true;
+                            ((ListItem)item).setLoose(true);
+                        }
                     }
                 }
 
                 if (subItem instanceof ListBlock) {
                     haveNestedList = true;
-                    if (myOptions.isLooseWhenHasLooseSubItem() && !thisItemLoose) {
+                    if (!thisItemLoose && myOptions.isLooseWhenHasLooseSubItem()) {
                         if (subItem instanceof ListBlock) {
                             ReversiblePeekingIterator<Node> iterator = subItem.getChildIterator();
                             while (iterator.hasNext()) {
                                 ListItem item1 = (ListItem) iterator.next();
                                 if (!item1.isTight()) {
                                     thisItemLoose = true;
+                                    isTight = false;
+                                    ((ListItem)item).setLoose(true);
+                                    break;
                                 }
                             }
                         }
@@ -191,28 +241,12 @@ public class ListBlockParser extends AbstractBlockParser {
             }
 
             if (item instanceof ListItem) {
-                if (myOptions.isLooseWhenHasTrailingBlankLine() && myOptions.isLooseWhenBlankFollowsItemParagraph()) {
-                    // when both are on only trailing blank line is propagated from prev since it is shared
-                    if ((thisItemLoose || thisItemLooseHadBlankAfterItemPara) || (myOptions.isLooseOnPrevLooseItem() && prevItemLoose)) {
-                        // set the item's tight setting
-                        ((ListItem) item).setTight(false);
-                    }
-                } else {
-                    if (myOptions.isLooseWhenHasTrailingBlankLine()) {
-                        if (thisItemLoose || (myOptions.isLooseOnPrevLooseItem() && prevItemLoose)) {
-                            // set the item's tight setting
-                            ((ListItem) item).setTight(false);
-                        }
-                    } else if (myOptions.isLooseWhenBlankFollowsItemParagraph()) {
-                        if (thisItemLooseHadBlankAfterItemPara || (myOptions.isLooseOnPrevLooseItem() && prevItemLooseHadBlankAfterItemPara)) {
-                            // set the item's tight setting
-                            ((ListItem) item).setTight(false);
-                        }
-                    }
-                }
-
                 prevItemLoose = thisItemLoose;
-                prevItemLooseHadBlankAfterItemPara = thisItemLooseHadBlankAfterItemPara;
+                prevItemHadBlankAfterItemPara = thisItemHadBlankAfterItemPara;
+                prevItemHadTrailingBlankLine = thisItemHadTrailingBlankLine;
+                prevItemHadTrueTrailingBlankLine = thisItemHadTrueTrailingBlankLine;
+                prevItemContainsBlankLine = thisItemContainsBlankLine;
+                prevItemHadChildren = thisItemHadChildren;
             }
 
             item = item.getNext();
@@ -232,6 +266,7 @@ public class ListBlockParser extends AbstractBlockParser {
     /**
      * Parse a list marker and return data on the marker or null.
      */
+
     static ListData parseListMarker(ListOptions options, int newItemCodeIndent, ParserState state) {
         Parsing parsing = state.getParsing();
         BasedSequence line = state.getLine();
@@ -401,7 +436,7 @@ public class ListBlockParser extends AbstractBlockParser {
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BlockParser matched = matchedBlockParser.getBlockParser();
-            ParserEmulationFamily emulationFamily = myOptions.getParserEmulationFamily();
+            ParserEmulationProfile emulationFamily = myOptions.getParserEmulationProfile().family;
             int newItemCodeIndent = myOptions.getNewItemCodeIndent();
 
             if (matched instanceof ListBlockParser) {
@@ -457,78 +492,21 @@ public class ListBlockParser extends AbstractBlockParser {
             // so everything should have indent >= current list indent, the rest should not be here
 
             if (emulationFamily == COMMONMARK) {
-                // - CommonMark: version 0.27 of the spec, all common mark parsers
-                //     - Definitions/Defaults:
-                //         - `ITEM_INDENT` = 4 <!-- not used -->
-                //         - `CODE_INDENT` = 4
-                //         - `current indent` = `line indent`
-                //     - Start List Conditions:
-                //         - `item indent` < `CODE_INDENT`: new list with new item
-                //         - `item content indent` >= `CODE_INDENT`: empty item, indented code
-                //     - Continuation Conditions:
-                //         - `current indent` >= `list last content indent` + `CODE_INDENT`: indented code
-                //         - `current indent` >= `list last content indent`: sub-item
-                //         - `current indent` >= `list indent`: list item
-
                 int currentIndent = state.getIndent();
-
                 if (currentIndent >= myOptions.getCodeIndent()) {
                     return BlockStart.none();
                 }
             } else if (emulationFamily == FIXED_INDENT) {
-                // - FixedIndent: Pandoc, MultiMarkdown, Pegdown
-                //     - Definitions/Defaults:
-                //         - `ITEM_INDENT` = 4
-                //         - `CODE_INDENT` = 8
-                //         - `current indent` = line indent
-                //     - Start List Conditions:
-                //         - `current indent` < `ITEM_INDENT`: new list with new item
-                //     - Continuation Conditions:
-                //          - `current indent` >= `CODE_INDENT`: item content
-                //          - `current indent` >= `ITEM_INDENT`: sub-item or content
-                //          - otherwise: list item or not ours
-
                 int currentIndent = state.getIndent();
-
                 if (currentIndent >= myOptions.getCodeIndent()) {
                     return BlockStart.none();
                 }
             } else if (emulationFamily == KRAMDOWN) {
-                // - Kramdown:
-                //     - Definitions/Defaults:
-                //         - `ITEM_INDENT` = 4
-                //         - `CODE_INDENT` = 8
-                //         - `current indent` = `line indent`
-                //     - Start List Conditions:
-                //         - `current indent` < `ITEM_INDENT`: new list with new item
-                //     - Continuation Conditions:
-                //         - `current indent` >=  `item content indent`: sub-item or content
-                //         - `current indent` >= `list indent` + `ITEM_INDENT`
-                //              - hadBlankLine: end current item, keep loose status, item content
-                //              - !hadBlankLine: lazy continuation
-                //         - `current indent` >= `list indent` + `CODE_INDENT`: item content
-                //         - `current indent` >= `list indent`: list item or not ours
-
                 int currentIndent = state.getIndent();
-                int listContentIndent = 0;
-
-                if (currentIndent >= listContentIndent + myOptions.getItemIndent()) {
+                if (currentIndent >= myOptions.getItemIndent()) {
                     return BlockStart.none();
                 }
             } else if (emulationFamily == MARKDOWN) {
-                // - Markdown:
-                //     - Definitions/Defaults:
-                //         - `ITEM_INDENT` = 4
-                //         - `CODE_INDENT` = 8
-                //         - `current indent` = `line indent`
-                //     - Start List Conditions:
-                //         - `current indent` < `ITEM_INDENT`: new list with new item
-                //     - Continuation Conditions:
-                //         - `current indent` >= `CODE_INDENT`: item content
-                //         - `current indent` > `ITEM_INDENT`: sub-item or content
-                //         - `current indent` > `list indent`: sub-item or content
-                //         - otherwise: list item or not ours
-
                 int currentIndent = state.getIndent();
                 if (currentIndent >= myOptions.getItemIndent()) {
                     return BlockStart.none();

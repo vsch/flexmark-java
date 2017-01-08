@@ -18,11 +18,13 @@ public class FootnoteBlockParser extends AbstractBlockParser {
     static Pattern FOOTNOTE_DEF_PATTERN = Pattern.compile("^\\[\\^\\s*(" + FOOTNOTE_ID + ")\\s*\\]:");
 
     private final FootnoteBlock block = new FootnoteBlock();
+    private final FootnoteOptions options;
+    private final int contentOffset;
     private BlockContent content = new BlockContent();
-    private int contentIndent;
 
-    public FootnoteBlockParser(int contentIndent) {
-        this.contentIndent = contentIndent;
+    public FootnoteBlockParser(FootnoteOptions options, int contentOffset) {
+        this.options = options;
+        this.contentOffset = contentOffset;
     }
 
     public BlockContent getBlockContent() {
@@ -36,17 +38,19 @@ public class FootnoteBlockParser extends AbstractBlockParser {
 
     @Override
     public BlockContinue tryContinue(ParserState state) {
+        final int nonSpaceIndex = state.getNextNonSpaceIndex();
         if (state.isBlank()) {
             if (block.getFirstChild() == null) {
                 // Blank line after empty list item
                 return BlockContinue.none();
             } else {
-                return BlockContinue.atIndex(state.getNextNonSpaceIndex());
+                return BlockContinue.atIndex(nonSpaceIndex);
             }
         }
 
-        if (state.getIndent() >= contentIndent) {
-            return BlockContinue.atColumn(state.getColumn() + contentIndent);
+        if (state.getIndent() >= options.contentIndent) {
+            int contentIndent = state.getIndex() + options.contentIndent;
+            return BlockContinue.atIndex(contentIndent);
         } else {
             return BlockContinue.none();
         }
@@ -127,7 +131,9 @@ public class FootnoteBlockParser extends AbstractBlockParser {
                 BasedSequence text = line.subSequence(openingStart + 2, openingEnd - 2).trim();
                 BasedSequence closingMarker = line.subSequence(openingEnd - 2, openingEnd);
 
-                FootnoteBlockParser footnoteBlockParser = new FootnoteBlockParser(state.getIndent() + 4);
+                int contentOffset = options.contentIndent;
+
+                FootnoteBlockParser footnoteBlockParser = new FootnoteBlockParser(options, contentOffset);
                 footnoteBlockParser.block.setOpeningMarker(openingMarker);
                 footnoteBlockParser.block.setText(text);
                 footnoteBlockParser.block.setClosingMarker(closingMarker);

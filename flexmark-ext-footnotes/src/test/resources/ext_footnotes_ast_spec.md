@@ -805,6 +805,96 @@ Document[0, 77]
 ````````````````````````````````
 
 
+Parser emulation family indent handling is ignored. Otherwise the indent can be huge.
+
+```````````````````````````````` example Footnotes: 15
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+
+      Another paragraph of the footnote
+      
+    Also a paragraph of the footnote
+    
+        indented code of the footnote
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.</p>
+      <p>Another paragraph of the footnote</p>
+      <p>Also a paragraph of the footnote</p>
+      <pre><code>indented code of the footnote
+</code></pre>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 206]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This  … tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 206] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 206]
+    Paragraph[44, 78]
+      Text[44, 77] chars:[44, 77, "This  … note."]
+    Paragraph[85, 119]
+      Text[85, 118] chars:[85, 118, "Anoth … tnote"]
+    Paragraph[130, 163]
+      Text[130, 162] chars:[130, 162, "Also  … tnote"]
+    IndentedCodeBlock[176, 206]
+````````````````````````````````
+
+
+List item indent is used
+
+```````````````````````````````` example(Footnotes: 16) options(item-indent-8)
+This paragraph has a footnote[^2].  
+
+[^2]: This is the body of the footnote.
+
+        Another paragraph of the footnote
+    
+            indented code of the footnote
+      
+       Not a paragraph of the footnote
+.
+<p>This paragraph has a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
+<p>Not a paragraph of the footnote</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>This is the body of the footnote.</p>
+      <p>Another paragraph of the footnote</p>
+      <p>indented code of the footnote</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 213]
+  Paragraph[0, 37]
+    Text[0, 29] chars:[0, 29, "This  … tnote"]
+    Footnote[29, 33] ordinal: 1  textOpen:[29, 31, "[^"] text:[31, 32, "2"] textClose:[32, 33, "]"]
+      Text[31, 32] chars:[31, 32, "2"]
+    Text[33, 34] chars:[33, 34, "."]
+  FootnoteBlock[38, 168] ordinal: 1  open:[38, 40] text:[40, 41] close:[41, 43] footnote:[44, 168]
+    Paragraph[44, 78]
+      Text[44, 77] chars:[44, 77, "This  … note."]
+    Paragraph[87, 121]
+      Text[87, 120] chars:[87, 120, "Anoth … tnote"]
+    Paragraph[138, 168]
+      Text[138, 167] chars:[138, 167, "inden … tnote"]
+  Paragraph[182, 213]
+    Text[182, 213] chars:[182, 213, "Not a … tnote"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

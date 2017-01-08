@@ -638,7 +638,7 @@ Document[0, 97]
     BulletListItem[9, 18] open:[9, 10, "*"] isTight
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 2"]
-    BulletListItem[18, 88] open:[18, 19, "*"] isTight
+    BulletListItem[18, 88] open:[18, 19, "*"] isTight hadBlankLine
       Paragraph[20, 27]
         Text[20, 26] chars:[20, 26, "item 3"]
       BulletList[31, 88] isLoose
@@ -695,7 +695,7 @@ Document[0, 96]
     BulletListItem[9, 18] open:[9, 10, "*"] isTight
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 2"]
-    BulletListItem[18, 88] open:[18, 19, "*"] isTight
+    BulletListItem[18, 88] open:[18, 19, "*"] isTight hadBlankLine
       Paragraph[20, 27]
         Text[20, 26] chars:[20, 26, "item 3"]
       BulletList[31, 88] isTight
@@ -819,7 +819,7 @@ Without auto loose setting for list with loose if previous loose item
 .
 Document[0, 120]
   BulletList[0, 119] isTight
-    BulletListItem[0, 119] open:[0, 1, "*"] isTight
+    BulletListItem[0, 119] open:[0, 1, "*"] isTight hadBlankLine
       Paragraph[2, 13]
         Text[2, 11] chars:[2, 11, "main item"]
       BulletList[17, 119] isTight
@@ -1102,7 +1102,7 @@ Document[0, 114]
     BulletListItem[0, 9] open:[0, 1, "*"] isTight
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
-    BulletListItem[9, 96] open:[9, 10, "*"] isTight
+    BulletListItem[9, 96] open:[9, 10, "*"] isTight hadBlankLine
       Paragraph[11, 18]
         Text[11, 17] chars:[11, 17, "item 2"]
       BulletList[22, 96] isLoose
@@ -2552,7 +2552,7 @@ Document[0, 113]
     OrderedListItem[0, 10] open:[0, 2, "4."] isLoose
       Paragraph[3, 10]
         Text[3, 9] chars:[3, 9, "item 1"]
-    OrderedListItem[10, 104] open:[10, 12, "3."] isLoose
+    OrderedListItem[10, 104] open:[10, 12, "3."] isLoose hadBlankLine
       Paragraph[13, 20]
         Text[13, 19] chars:[13, 19, "item 2"]
       OrderedList[23, 35] isTight start:2 delimiter:'.'
@@ -3291,6 +3291,9 @@ Html comments in block, parse inner comments
     <!-- HTML Comment -->
 </div>
 .
+<div>
+    <!-- HTML Comment -->
+</div>
 .
 Document[0, 38]
   HtmlBlock[0, 38]
@@ -3307,6 +3310,9 @@ Html comments in block, parse inner comments
 </div>
 <!-- HTML Comment -->
 .
+<div>
+</div>
+<!-- HTML Comment -->
 .
 Document[0, 34]
   HtmlBlock[0, 34]
@@ -4475,8 +4481,8 @@ This is <span>inline html</span>
 .
 <div md-pos="0-30">
   <div>
-  <p>HTML Block</p>
-  </div>
+<p>HTML Block</p>
+</div>
 </div>
 <p md-pos="32-64"><span md-pos="32-64">This is <span>inline html</span></span></p>
 .
@@ -4501,8 +4507,8 @@ This is <span>inline html</span>
 .
 <div md-pos="0-30">
   <div>
-  <p>HTML Block</p>
-  </div>
+<p>HTML Block</p>
+</div>
 </div>
 <p md-pos="32-64"><span md-pos="32-64">This is <span>inline html</span></span></p>
 .

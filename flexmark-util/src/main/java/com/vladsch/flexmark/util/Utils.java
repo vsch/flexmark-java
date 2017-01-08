@@ -325,14 +325,12 @@ public class Utils {
         return min;
     }
 
-    public static int minLimit(int receiver, int minBound) {
-        if (receiver < minBound) return minBound;
-        else return receiver;
+    public static int minLimit(int receiver, int... minBound) {
+        return max(receiver, minBound);
     }
 
-    public static int maxLimit(int receiver, int maxBound) {
-        if (receiver > maxBound) return maxBound;
-        else return receiver;
+    public static int maxLimit(int receiver, int... maxBound) {
+        return min(receiver, maxBound);
     }
 
     public static int rangeLimit(int receiver, int minBound, int maxBound) {

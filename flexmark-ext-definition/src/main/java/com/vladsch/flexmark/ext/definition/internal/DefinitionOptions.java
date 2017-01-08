@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.definition.internal;
 
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 @SuppressWarnings("WeakerAccess")
@@ -10,7 +10,7 @@ class DefinitionOptions {
     public final int markerSpaces;
     public final boolean tildeMarker;
     public final boolean colonMarker;
-    public final ParserEmulationFamily parserEmulationFamily;
+    public final ParserEmulationProfile myParserEmulationProfile;
     public final boolean autoLoose;
     public final boolean autoLooseOneLevelLists;
     public final boolean looseOnPrevLooseItem;
@@ -25,11 +25,11 @@ class DefinitionOptions {
         markerSpaces = DefinitionExtension.MARKER_SPACES.getFrom(options);
         tildeMarker = DefinitionExtension.TILDE_MARKER.getFrom(options);
         colonMarker = DefinitionExtension.COLON_MARKER.getFrom(options);
-        parserEmulationFamily = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
+        myParserEmulationProfile = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
         autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);
-        looseOnPrevLooseItem = Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM.getFrom(options);
-        looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
+        looseOnPrevLooseItem = Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);
+        looseWhenBlankFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
         looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
         looseWhenHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE.getFrom(options);
         codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);

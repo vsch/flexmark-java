@@ -22,6 +22,7 @@ import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
+import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
 import com.vladsch.flexmark.superscript.ExtSuperscriptTestSuite;
 import com.vladsch.flexmark.test.CoreTestSuite;
 import com.vladsch.flexmark.util.UtilsTestSuite;
@@ -56,6 +57,7 @@ import org.junit.runners.Suite;
         JiraConverterTestSuite.class,
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,
+        PegdownProfileTestSuite.class,
 })
 public class FlexmarkTestSuite {
 }

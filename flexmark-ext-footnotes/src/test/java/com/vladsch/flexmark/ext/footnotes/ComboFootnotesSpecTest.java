@@ -30,6 +30,7 @@ public class ComboFootnotesSpecTest extends ComboSpecTestCase {
         optionsMap.put("link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_LINK_REF_CLASS, "text"));
         optionsMap.put("back-link-class-none", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, ""));
         optionsMap.put("back-link-class-text", new MutableDataSet().set(FootnoteExtension.FOOTNOTE_BACK_LINK_REF_CLASS, "text"));
+        optionsMap.put("item-indent-8", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 8));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

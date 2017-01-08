@@ -112,6 +112,21 @@ Document[0, 21]
 ````````````````````````````````
 
 
+Issue #37, How to add attribute 'class' to AutoLink node
+
+```````````````````````````````` example Autolink: 8
+https://google.com/abc?hello=456&world=789
+.
+<p><a href="https://google.com/abc?hello=456&amp;world=789">https://google.com/abc?hello=456&amp;world=789</a></p>
+.
+Document[0, 43]
+  Paragraph[0, 43]
+    TextBase[0, 42] chars:[0, 42, "https … d=789"]
+      AutoLink[0, 42] text:[0, 42, "https://google.com/abc?hello=456&world=789"]
+        Text[0, 42] chars:[0, 42, "https … d=789"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

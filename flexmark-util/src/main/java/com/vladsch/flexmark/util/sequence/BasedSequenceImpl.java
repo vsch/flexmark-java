@@ -567,6 +567,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countChars(char c, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
+        if (fromIndex > endIndex) fromIndex = endIndex;
         int index = indexOfNot(c, fromIndex, endIndex);
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
@@ -575,6 +576,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countCharsReversed(char c, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
+        if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOfNot(c, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
     }
@@ -583,6 +585,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countNotChars(char c, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
+        if (fromIndex > endIndex) fromIndex = endIndex;
         int index = indexOf(c, fromIndex, endIndex);
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
@@ -591,6 +594,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countNotCharsReversed(char c, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
+        if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOf(c, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
     }
@@ -625,6 +629,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countChars(CharSequence chars, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
+        if (fromIndex > endIndex) fromIndex = endIndex;
         int index = indexOfAnyNot(chars, fromIndex, endIndex);
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
@@ -633,6 +638,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
+        if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOfAnyNot(chars, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
     }
@@ -641,6 +647,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countNotChars(CharSequence chars, int fromIndex, int endIndex) {
         if (fromIndex < 0) fromIndex = 0;
         if (endIndex > length()) endIndex = length();
+        if (fromIndex > endIndex) fromIndex = endIndex;
         int index = indexOfAny(chars, fromIndex, endIndex);
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
@@ -649,6 +656,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public int countNotCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;
         if (fromIndex > length()) fromIndex = length();
+        if (startIndex > fromIndex) startIndex = fromIndex;
         int index = lastIndexOfAny(chars, startIndex, fromIndex);
         return index == -1 ? fromIndex - startIndex : fromIndex - index - 1;
     }

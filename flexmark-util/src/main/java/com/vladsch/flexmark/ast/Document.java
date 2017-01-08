@@ -35,6 +35,11 @@ public class Document extends Block implements MutableDataHolder {
     }
 
     @Override
+    public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
+        return dataSet.setIn(dataHolder);
+    }
+
+    @Override
     public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) { return dataSet.getOrCompute(key, factory); }
 
     @Override
@@ -47,7 +52,7 @@ public class Document extends Block implements MutableDataHolder {
     public MutableDataHolder setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
 
     @Override
-    public void setAll(DataHolder other) { dataSet.setAll(other); }
+    public MutableDataHolder setAll(DataHolder other) { dataSet.setAll(other); return dataSet; }
 
     @Override
     public MutableDataHolder toMutable() { return dataSet.toMutable(); }
@@ -56,7 +61,7 @@ public class Document extends Block implements MutableDataHolder {
     public DataHolder toImmutable() { return dataSet.toImmutable(); }
 
     @Override
-    public void clear() {
+    public MutableDataHolder clear() {
         throw new UnsupportedOperationException();
     }
 }

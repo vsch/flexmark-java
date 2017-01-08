@@ -3,7 +3,7 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
@@ -17,7 +17,7 @@ public class BasicSample {
 
     void kramdown() {
         MutableDataHolder options = new MutableDataSet();
-        options.setFrom(ParserEmulationFamily.KRAMDOWN.getOptions());
+        options.setFrom(ParserEmulationProfile.KRAMDOWN);
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
@@ -28,21 +28,7 @@ public class BasicSample {
 
     void multiMarkdown() {
         MutableDataHolder options = new MutableDataSet();
-
-        // configure for MultiMarkdown differences from family
-        options.setFrom(ParserEmulationFamily.FIXED_INDENT.getOptions()
-                .setAutoLoose(true)
-                .setAutoLooseOneLevelLists(true)
-                .setItemMarkerSpace(false)
-                .setLooseWhenBlankFollowsItemParagraph(true)
-                .setLooseWhenHasTrailingBlankLine(false))
-
-                // Other compatibility options, outside of lists
-                .set(HtmlRenderer.RENDER_HEADER_ID, true)
-                .set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false)
-                .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
-                .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
-                .set(HtmlRenderer.SOFT_BREAK, " ");
+        options.setFrom(ParserEmulationProfile.MULTI_MARKDOWN);
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
@@ -53,9 +39,7 @@ public class BasicSample {
 
     void markdown() {
         MutableDataHolder options = new MutableDataSet();
-
-        // configure for MultiMarkdown differences from family
-        options.setFrom(ParserEmulationFamily.MARKDOWN.getOptions());
+        options.setFrom(ParserEmulationProfile.MARKDOWN);
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();

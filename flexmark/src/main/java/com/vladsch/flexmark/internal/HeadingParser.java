@@ -3,6 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
@@ -114,9 +115,20 @@ public class HeadingParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            if (state.getIndent() >= 4 || options.headersNoLeadSpace && state.getIndent() >= 1) {
+            if (state.getIndent() >= 4 || options.noLeadSpace && state.getIndent() >= 1) {
                 return BlockStart.none();
             }
+
+            if (!options.canInterruptItemParagraph) {
+                BlockParser matched = matchedBlockParser.getBlockParser();
+                boolean inParagraph = matched.isParagraphParser();
+                boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+                if (inParagraphListItem) {
+                    return BlockStart.none();
+                }
+            }
+
             BasedSequence line = state.getLine();
             int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence paragraph = matchedBlockParser.getParagraphContent();

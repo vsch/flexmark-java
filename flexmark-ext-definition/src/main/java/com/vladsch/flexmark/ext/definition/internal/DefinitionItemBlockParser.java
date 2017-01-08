@@ -9,14 +9,14 @@ import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.internal.ParagraphParser;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Set;
 
-import static com.vladsch.flexmark.parser.ParserEmulationFamily.*;
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class DefinitionItemBlockParser extends AbstractBlockParser {
     private final DefinitionItem block;
@@ -106,7 +106,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             return null;
         }
 
-        if (!hasContent || options.parserEmulationFamily == COMMONMARK && contentOffset > options.newItemCodeIndent) {
+        if (!hasContent || options.myParserEmulationProfile == COMMONMARK && contentOffset > options.newItemCodeIndent) {
             // If this line is blank or has a code block, default to 1 space after marker
             contentOffset = 1;
         }
@@ -127,7 +127,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             return BlockContinue.atIndex(state.getLineEndIndex());
         }
 
-        ParserEmulationFamily emulationFamily = options.parserEmulationFamily;
+        ParserEmulationProfile emulationFamily = options.myParserEmulationProfile.family;
         if (emulationFamily == COMMONMARK || emulationFamily == KRAMDOWN || emulationFamily == MARKDOWN) {
             int currentIndent = state.getIndent();
             int newColumn = state.getColumn() + getContentIndent();
@@ -254,7 +254,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
-            ParserEmulationFamily emulationFamily = options.parserEmulationFamily;
+            ParserEmulationProfile emulationFamily = options.myParserEmulationProfile;
 
             int currentIndent = state.getIndent();
             int codeIndent = emulationFamily == COMMONMARK || emulationFamily == FIXED_INDENT ? options.codeIndent : options.itemIndent;

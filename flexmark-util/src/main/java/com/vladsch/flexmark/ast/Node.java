@@ -147,6 +147,17 @@ public abstract class Node {
         return firstChild != null;
     }
 
+    public boolean hasOrMoreChildren(int chidCount) {
+        if (firstChild != null) {
+            int count = 0;
+            for (Node child : getChildren()) {
+                count++;
+                if (count >= chidCount) return true;
+            }
+        }
+        return false;
+    }
+
     public Document getDocument() {
         Node node = this;
         while (node != null && !(node instanceof Document)) {

@@ -5,8 +5,8 @@ flexmark-java
 
 [TOC]: # ""
 
-- [This Release **To Do List**](#this-release-to-do-list)
-- [Next Release To Do List](#next-release-to-do-list)
+- [To Do](#to-do)
+- [0.11.0](#0110)
 - [0.10.3](#0103)
 - [0.10.2](#0102)
 - [0.10.1](#0101)
@@ -66,16 +66,15 @@ flexmark-java
 
 &nbsp;</details>
 
-## This Release **To Do List**
+&nbsp;<details id="version-history"><summary>**To Do**</summary>
+
+## To Do
 
 - [ ] Change: Extensions wiki from table format for options to list, easier to maintain and read
       when descriptions can benefit form complex formatting
 
 - [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
       extra entries. Update description for better understanding.
-
-Next Release To Do List
------------------------
 
 - [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
       to HTML offset for the element(s). This is needed to allow synchronization with source
@@ -85,23 +84,104 @@ Next Release To Do List
 
 - Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
-      - [ ] League/CommonMark
-      - [ ] Pandoc
-      - [ ] GitHub Docs
-      - [ ] Jekyll
-      - [ ] Php Markdown Extra
-      - CommonMark
-      - GitHub Comments
-      - CommonMark (default for family)
-      - FixedIndent
-      - Pegdown
-      - MultiMarkdown
-      - Kramdown (default for family)
-      - Kramdown (default for family)
-      - Markdown
-      - Markdown.pl (default for family)
+  - [ ] League/CommonMark
+  - [ ] Jekyll
+  - [ ] Php Markdown Extra
+  - GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
+  - GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
+  - CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
+  - FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
+  - Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
+  - MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
+  - Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
+  - Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
 
 - Add: PDF renderer
+
+&nbsp;</details>
+
+0.11.0
+------
+
+- Fix: #38, AutoLink extension does not recognize links with ampersand in the link
+
+- Add: Footnote extension to use `Parser.LISTS_ITEM_INDENT` for determining which elements make
+  up part of the footnote.
+
+- Fix: `PegdownOptionsAdapter.flexmarkOptions(int)` was not passing pegdown options to
+  constructor resulting in always having default 0 options
+
+- Fix: `PegdownOptionsAdapter` did not properly set some list options for `pegdown`
+  compatibility.
+
+- Fix: removed some flags from `org.pegdown.Extensions` that were only added in my fork of
+  pegdown and never made it into a released version:
+  - `Extensions.EXTANCHORLINKS_WRAP`
+  - `Extensions.FOOTNOTES`
+  - `Extensions.INTELLIJ_DUMMY_IDENTIFIER`
+  - `Extensions.MULTI_LINE_IMAGE_URLS`
+  - `Extensions.RELAXED_STRONG_EMPHASIS_RULES`
+  - `Extensions.TOC`
+  - `Extensions.TRACE_PARSER`
+
+- Add: Tests to `flexmark-profile-pegdown` based on actual pegdown HTML rendering of markdown
+  for compatibility testing. Some pegdown idiosyncrasies/bugs not replicated.
+
+- API Change: `Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM` to
+  `Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE` which accurately reflects the setting.
+
+- API Change: `Parser.LISTS_LOOSE_WHEN_BLANK_FOLLOWS_ITEM_PARAGRAPH` to
+  `Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH` which accurately reflects the
+  setting.
+
+- API Change: `Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN` to be able to emulate GitHub Doc,
+  MultiMarkdown and pegdown with `Extensions.FORCELISTITEMPARA` option.
+
+- API Change: add block quote options
+
+  - `Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE`, default true, when `false` block quote with
+    leading spaces will not be ignored
+
+  - `Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH`, default true, when `false` block quote will not
+    interrupt a paragraph, requiring a blank line before all block quotes
+
+  - `Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH`, default true, when `false` block quote will
+    not interrupt an item paragraph, requiring a blank line between list item text and the block
+    quote.
+
+  - `Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH`, default true, when `false`
+    block quote will be ignored if it has leading space before the marker and there is no blank
+    line between the item text and the block quote.
+
+- API Change: add heading parsing option `Parser.HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH`, default
+  `true`, when `false` heading in list item paragraph is ignored. Used for partial GitHub
+  compatibility implementation. GitHub parses ATX headings only in list items if the list has a
+  blank line included in it. Too much of a kludge to replicate.
+
+- API Change: rename `ParserEmulationFamily` to `ParserEmulationProfile` and make it implement
+  `MutableDataSetter` and add `ParserEmulationProfile.family` field to get emulation family. Now
+  there are predefined profiles for:
+  - `COMMONMARK`, family `COMMONMARK`
+  - `FIXED_INDENT`, family `FIXED_INDENT`
+  - `KRAMDOWN`, family `KRAMDOWN`
+  - `MARKDOWN`, family `MARKDOWN`
+  - `GITHUB_DOC`, family `MARKDOWN`
+  - `MULTI_MARKDOWN`, family `FIXED_INDENT`
+  - `PEGDOWN`, family `FIXED_INDENT`
+
+  Usage is simplified to:
+
+  ```
+  private static final DataHolder OPTIONS = new MutableDataSet()
+          .setFrom(ParserEmulationProfile.MULTI_MARKDOWN);
+  ```
+
+- Add: More tests to all non-CommonMark compatibility tests, block quote handling, block quote
+  in list item handling, etc
+
+- Add: GitHub document compatibility tests. It is a mix of `MARKDOWN` and some `KRAMDOWN` list
+  parsing qualities, family changed to `MARKDOWN` since it is closer to it. Some edge cases not
+  replicated, too many kludges in its parsing rules.
 
 0.10.3
 ------
@@ -137,7 +217,7 @@ Next Release To Do List
 0.10.1
 ------
 
-- Fix: definitions would loose consecutive definition items without intervening defintion terms.
+- Fix: definitions would loose consecutive definition items without intervening definition terms.
 
 0.10.0
 ------
@@ -145,7 +225,7 @@ Next Release To Do List
 - Fix: abbreviation extension for JDK7 needed to sort regex list of abbreviations in descending
   alphabetical order.
 
-- Fix: travis yaml to JDK7
+- Fix: travis YAML to JDK7
 
 - Fix: Emoji extension to not allow spaces between delimiters and add API methods to support
   delimiters converting themselves to text if contained text does not meet constraints.
@@ -376,8 +456,8 @@ Next Release To Do List
         in-place attribute manipulation. implemented in `AttributeImpl`, instantiate with
         `AttributeImpl.of()` variants.
 
-          - assign delimiters for `class` and `style` attribute names that you cannot override.
-            The reset will get `NUL` delimiters unless you specify otherwise.
+        - assign delimiters for `class` and `style` attribute names that you cannot override.
+          The reset will get `NUL` delimiters unless you specify otherwise.
 
      4. `Attribute` now has a value list delimiter and a value name delimiter, these are used to
         split and combine values. Both can be `Attribute.NUL` then no multiple values can be
@@ -385,33 +465,33 @@ Next Release To Do List
         multiple values are delimited by value list delimiter and considered named values
         without individual item values. For example:
 
-          - `class` attribute has a list delimiter of `' '` and class names can be added removed
-            but they have no values associated with them beyond their name.
+        - `class` attribute has a list delimiter of `' '` and class names can be added removed
+          but they have no values associated with them beyond their name.
 
-          - `style` attribute on the other hand has a list delimiter of `';'` and a name
-            delimiter of `':'`. Item part before the colon is the name and the part after is the
-            value. So you can change individual style's settings using the attribute
-            manipulation functions of: `Attribute.removeValue(String)`,
-            `Attribute.setValue(String)` which will parse the strings and add/remove/replace
-            values. Any item whose value is empty is removed. Any existing item's value is
-            change to the new value and any new items are appended at the end.
+        - `style` attribute on the other hand has a list delimiter of `';'` and a name delimiter
+          of `':'`. Item part before the colon is the name and the part after is the value. So
+          you can change individual style's settings using the attribute manipulation functions
+          of: `Attribute.removeValue(String)`, `Attribute.setValue(String)` which will parse the
+          strings and add/remove/replace values. Any item whose value is empty is removed. Any
+          existing item's value is change to the new value and any new items are appended at the
+          end.
 
-                ```java
-                class Test {
-                    void test() {
-                        MutableAttribute attr = MutableAttribute.of("style");
+     ```java
+     class Test {
+         void test() {
+             MutableAttribute attr = MutableAttribute.of("style");
 
-                        // after setValue(): attr.getValue() == "color:#white;background:#black"
-                        attr.setValue("color:#white;background:#black");
+             // after setValue(): attr.getValue() == "color:#white;background:#black"
+             attr.setValue("color:#white;background:#black");
 
-                        // after setValue(): attr.getValue() == "color:#green;background:#black;font-family:monospaced;"
-                        attr.setValue("font-family:monospaced;color:#green");
+             // after setValue(): attr.getValue() == "color:#green;background:#black;font-family:monospaced;"
+             attr.setValue("font-family:monospaced;color:#green");
 
-                        // after setValue(): attr.getValue() == "color:#green;font-family:monospaced;"
-                        attr.setValue("background");
-                    }
-                }
-                ```
+             // after setValue(): attr.getValue() == "color:#green;font-family:monospaced;"
+             attr.setValue("background");
+         }
+     }
+     ```
 
   Changes made:
 
@@ -536,7 +616,7 @@ Next Release To Do List
     - CommonMark (default for family)
   - FixedIndent
     - MultiMarkdown
-  - Kramdown (default for family)
+  - Kramdown
     - Kramdown (default for family)
   - Markdown
     - Markdown.pl (default for family)
@@ -620,7 +700,7 @@ Next Release To Do List
 - Change: standard extensions that can be mapped to JIRA formatted text to implement JIRA
   renderer.
 
-- Add: `JIRA` rendering for autolink, emoji, strikethrough, tables and wiki link extensions.
+- Add: `JIRA` rendering for auto-link, emoji, strikethrough, tables and wiki link extensions.
 
 0.4.17
 ------
@@ -943,7 +1023,7 @@ Next Release To Do List
     changes the status to `LinkStatus.UNCHECKED`
 
   - `LinkStatus` holds the result of the resolving process. Initial link status is
-    `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.
+    - `LinkStatus.UNKNOWN`, resolvers are called until status changes to another value.
     - `LinkStatus.UNKNOWN` link has not been resolved yet
     - `LinkStatus.VALID` link is resolved and valid
     - `LinkStatus.UNCHECKED` link is resolved, validity not verified
@@ -973,8 +1053,9 @@ Next Release To Do List
     attribute named `Attribute.LINK_STATUS` whose value represents the name of the `LinkStatus`
     of the resolved link. Attribute providers can use this value to set specific attributes
     based on the resolved link status. This attribute does not render in the final HTML.
-  - Extensions can and should define parts for specific elements they allow to modify with
-    extensions.
+
+  Extensions can and should define parts for specific elements they allow to modify with
+  extensions.
 
 - Change `AttributeProvider.setAttributes(Node, AttributablePart, Attributes)` to now get an
   attributable part that pinpoints the exact element of the node being rendered, for nodes that
@@ -1530,8 +1611,8 @@ Next Release To Do List
 - `spec.txt` now `ast_spec_txt` with an added section to each example that contains the expected
   AST so that the generated AST can be validated.
 
-      ```````````````````````````````` example
-      [[*foo* bar]]
+  ````````````````````````````````example
+  [[*foo* bar]]
 
       [*foo* bar]: /url "title"
       .
@@ -1546,7 +1627,7 @@ Next Release To Do List
             Text[7, 11]
           Text[12, 13]
         Reference[15, 40] refOpen:[15, 16, "["] ref:[16, 25, "*foo* bar"] refClose:[25, 27, "]:"] urlOpen:[0, 0] url:[28, 32, "/url"] urlClose:[0, 0] titleOpen:[33, 34, """] title:[34, 39, "title"] titleClose:[39, 40, """]
-      ````````````````````````````````
+  ````````````````````````````````
 
 - Convert all extension tests to spec.txt style driven testing to make generating tests easier
   and to also test for the generated AST

@@ -6609,11 +6609,11 @@ Document[0, 21]
 .
 Document[0, 36]
   BulletList[0, 36] isTight
-    BulletListItem[0, 36] open:[0, 1, "-"] isTight
+    BulletListItem[0, 36] open:[0, 1, "-"] isTight hadBlankLine
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
       BulletList[8, 36] isTight
-        BulletListItem[8, 36] open:[8, 9, "-"] isTight
+        BulletListItem[8, 36] open:[8, 9, "-"] isTight hadBlankLine
           Paragraph[10, 14]
             Text[10, 13] chars:[10, 13, "bar"]
           BulletList[18, 36] isLoose
@@ -6999,7 +6999,7 @@ the outer list is tight:
 .
 Document[0, 21]
   BulletList[0, 21] isTight
-    BulletListItem[0, 17] open:[0, 1, "-"] isTight
+    BulletListItem[0, 17] open:[0, 1, "-"] isTight hadBlankLine
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
       BulletList[6, 17] isLoose
@@ -7171,7 +7171,7 @@ Here the outer list is loose, the inner list tight:
 .
 Document[0, 21]
   BulletList[0, 21] isLoose
-    BulletListItem[0, 21] open:[0, 1, "*"] isLoose
+    BulletListItem[0, 21] open:[0, 1, "*"] isLoose hadBlankLine
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
       BulletList[8, 14] isTight

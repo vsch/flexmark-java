@@ -41,7 +41,6 @@ Document[0, 22]
 ````````````````````````````````
 
 
-
 ## Ordered List Item Sets List Start
 
 Test to see if ordered list item will set list start if not one
@@ -59,7 +58,6 @@ Document[0, 22]
       Paragraph[3, 22]
         Text[3, 21] chars:[3, 21, "Non O …  Item"]
 ````````````````````````````````
-
 
 
 ## Mismatched List Item Type Handling
@@ -90,7 +88,6 @@ Document[0, 35]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Mismatched List Item Type Handling: 2
 1. Ordered Item
 - With Bullet List
@@ -113,7 +110,6 @@ Document[0, 35]
           Paragraph[18, 35]
             Text[18, 34] chars:[18, 34, "With  …  List"]
 ````````````````````````````````
-
 
 
 ## Loose Item Handling
@@ -148,7 +144,6 @@ Document[0, 39]
       Paragraph[31, 39]
         Text[31, 37] chars:[31, 37, "item 4"]
 ````````````````````````````````
-
 
 
 Test to see how trailing blank after item determines looseness
@@ -186,7 +181,6 @@ Document[0, 40]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 3
 - item 1
 - item 2 
@@ -220,7 +214,6 @@ Document[0, 40]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 4
 - item 1
 - item 2 
@@ -252,7 +245,6 @@ Document[0, 40]
       Paragraph[32, 40]
         Text[32, 38] chars:[32, 38, "item 4"]
 ````````````````````````````````
-
 
 
 Test looseness with child items
@@ -323,7 +315,6 @@ Document[0, 102]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 6
 - item 1
 
@@ -392,7 +383,6 @@ Document[0, 103]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 7
 - item 1
     - item 1.1
@@ -458,7 +448,6 @@ Document[0, 103]
           Paragraph[93, 103]
             Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Loose Item Handling: 8
@@ -529,7 +518,6 @@ Document[0, 103]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 9
 - item 1
     - item 1.1
@@ -595,7 +583,6 @@ Document[0, 103]
           Paragraph[93, 103]
             Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Loose Item Handling: 10
@@ -666,7 +653,6 @@ Document[0, 103]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example Loose Item Handling: 11
 - item 1
     - item 1.1
@@ -732,7 +718,6 @@ Document[0, 103]
           Paragraph[93, 103]
             Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example Loose Item Handling: 12
@@ -801,7 +786,6 @@ Document[0, 103]
           Paragraph[93, 103]
             Text[93, 101] chars:[93, 101, "item 4.1"]
 ````````````````````````````````
-
 
 
 ## List Item Interrupts Paragraph
@@ -885,7 +869,6 @@ Document[0, 547]
     SoftLineBreak[542, 543]
     Text[543, 545] chars:[543, 545, "2."]
 ````````````````````````````````
-
 
 
 Test to see which list items can interrupt another bullet list item's paragraphs
@@ -1059,7 +1042,6 @@ Document[0, 914]
 ````````````````````````````````
 
 
-
 Test to see which list items can interrupt another numbered list item's paragraphs
 
 ```````````````````````````````` example List Item Interrupts Paragraph: 3
@@ -1223,7 +1205,6 @@ Document[0, 943]
 ````````````````````````````````
 
 
-
 ## List Item Indent Handling
 
 Test if list item indent handling for edge cases
@@ -1283,7 +1264,6 @@ Document[0, 117]
           Paragraph[110, 117]
             Text[110, 116] chars:[110, 116, "item 9"]
 ````````````````````````````````
-
 
 
 ```````````````````````````````` example List Item Indent Handling: 2
@@ -1348,7 +1328,6 @@ Document[0, 153]
 ````````````````````````````````
 
 
-
 ```````````````````````````````` example List Item Indent Handling: 3
 *  item 1
  *  item 2
@@ -1404,7 +1383,6 @@ Document[0, 126]
 ````````````````````````````````
 
 
-
 Test shows where the boundary switch to indented code occurs. Sub-items first paragraph is a
 paragraph, the second is indented code
 
@@ -1454,7 +1432,7 @@ paragraph, the second is indented code
 .
 Document[0, 168]
   BulletList[0, 79] isTight
-    BulletListItem[0, 79] open:[0, 1, "-"] isTight
+    BulletListItem[0, 79] open:[0, 1, "-"] isTight hadBlankLine
       Paragraph[4, 9]
         Text[4, 8] chars:[4, 8, "test"]
       BulletList[13, 79] isTight
@@ -1466,7 +1444,7 @@ Document[0, 168]
           IndentedCodeBlock[65, 79]
   ThematicBreak[80, 83]
   OrderedList[85, 167] isTight delimiter:'.'
-    OrderedListItem[85, 167] open:[85, 87, "1."] isTight
+    OrderedListItem[85, 167] open:[85, 87, "1."] isTight hadBlankLine
       Paragraph[89, 94]
         Text[89, 93] chars:[89, 93, "test"]
       OrderedList[98, 167] isTight delimiter:'.'
@@ -1477,7 +1455,6 @@ Document[0, 168]
             Text[121, 140] chars:[121, 140, "sub i …  para"]
           IndentedCodeBlock[153, 167]
 ````````````````````````````````
-
 
 
 More extensive test to show where the boundary switch to indented code occurs. Sub-items first
@@ -1689,7 +1666,6 @@ Document[0, 982]
 ````````````````````````````````
 
 
-
 Test for how items with indent > first list item's indent but < previous item's content indent
 are handled. Mainly, if they are handled in a weird way of treating the item as a sub-item of
 the previous list item. There was one that did it that way, GitHub comments if I can remember
@@ -1725,10 +1701,208 @@ Document[0, 33]
 ````````````````````````````````
 
 
+Test where lazy continuation affects list item processing.
+
+```````````````````````````````` example List Item Indent Handling: 7
+* item 1
+       * item 2
+* item 3
+        * item 4
+.
+<ul>
+    <li>item 1 * item 2</li>
+    <li>item 3 * item 4</li>
+</ul>
+.
+Document[0, 51]
+  BulletList[0, 51] isTight
+    BulletListItem[0, 25] open:[0, 1, "*"] isTight
+      Paragraph[2, 25]
+        Text[2, 8] chars:[2, 8, "item 1"]
+        SoftLineBreak[8, 9]
+        Text[16, 24] chars:[16, 24, "* item 2"]
+    BulletListItem[25, 51] open:[25, 26, "*"] isTight
+      Paragraph[27, 51]
+        Text[27, 33] chars:[27, 33, "item 3"]
+        SoftLineBreak[33, 34]
+        Text[42, 50] chars:[42, 50, "* item 4"]
+````````````````````````````````
+
+
+Test if it is `first first list` indent processing, or first direct parent list processing that
+affects sub-list indentation.
+
+Test if block quote can interrupt item paragraph
+
+```````````````````````````````` example List Item Indent Handling: 8
+* item 1
+ * item 2
+  * item 3
+    > * item 4
+    >  * item 5
+    >   * item 6
+.
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3 &gt; * item 4 &gt;  * item 5 &gt;   * item 6</li>
+</ul>
+.
+Document[0, 78]
+  BulletList[0, 78] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 78] open:[21, 22, "*"] isTight
+      Paragraph[23, 78]
+        Text[23, 29] chars:[23, 29, "item 3"]
+        SoftLineBreak[29, 30]
+        Text[34, 44] chars:[34, 44, "> * item 4"]
+        SoftLineBreak[44, 45]
+        Text[49, 60] chars:[49, 60, ">  *  … tem 5"]
+        SoftLineBreak[60, 61]
+        Text[65, 77] chars:[65, 77, ">   * … tem 6"]
+````````````````````````````````
+
+
+```````````````````````````````` example List Item Indent Handling: 9
+* item 1
+ * item 2
+  * item 3
+     > * item 4
+     >  * item 5
+     >   * item 6
+.
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>item 3 &gt; * item 4 &gt;  * item 5 &gt;   * item 6</li>
+</ul>
+.
+Document[0, 81]
+  BulletList[0, 81] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 81] open:[21, 22, "*"] isTight
+      Paragraph[23, 81]
+        Text[23, 29] chars:[23, 29, "item 3"]
+        SoftLineBreak[29, 30]
+        Text[35, 45] chars:[35, 45, "> * item 4"]
+        SoftLineBreak[45, 46]
+        Text[51, 62] chars:[51, 62, ">  *  … tem 5"]
+        SoftLineBreak[62, 63]
+        Text[68, 80] chars:[68, 80, ">   * … tem 6"]
+````````````````````````````````
+
+
+```````````````````````````````` example List Item Indent Handling: 10
+* item 1
+ * item 2
+  * item 3
+  
+    > * item 4
+    >  * item 5
+    >   * item 6
+.
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>
+        <p>item 3</p>
+        <blockquote>
+            <ul>
+                <li>item 4</li>
+                <li>item 5</li>
+                <li>item 6</li>
+            </ul>
+        </blockquote>
+    </li>
+</ul>
+.
+Document[0, 81]
+  BulletList[0, 81] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 81] open:[21, 22, "*"] isLoose hadBlankLineAfter
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+      BlockQuote[37, 81] marker:[37, 38, ">"]
+        BulletList[39, 81] isTight
+          BulletListItem[39, 48] open:[39, 40, "*"] isTight
+            Paragraph[41, 48]
+              Text[41, 47] chars:[41, 47, "item 4"]
+          BulletListItem[55, 64] open:[55, 56, "*"] isTight
+            Paragraph[57, 64]
+              Text[57, 63] chars:[57, 63, "item 5"]
+          BulletListItem[72, 81] open:[72, 73, "*"] isTight
+            Paragraph[74, 81]
+              Text[74, 80] chars:[74, 80, "item 6"]
+````````````````````````````````
+
+
+```````````````````````````````` example List Item Indent Handling: 11
+* item 1
+ * item 2
+  * item 3
+  
+     > * item 4
+     >  * item 5
+     >   * item 6
+.
+<ul>
+    <li>item 1</li>
+    <li>item 2</li>
+    <li>
+        <p>item 3</p>
+        <blockquote>
+            <ul>
+                <li>item 4</li>
+                <li>item 5</li>
+                <li>item 6</li>
+            </ul>
+        </blockquote>
+    </li>
+</ul>
+.
+Document[0, 84]
+  BulletList[0, 84] isTight
+    BulletListItem[0, 9] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+    BulletListItem[10, 19] open:[10, 11, "*"] isTight
+      Paragraph[12, 19]
+        Text[12, 18] chars:[12, 18, "item 2"]
+    BulletListItem[21, 84] open:[21, 22, "*"] isLoose hadBlankLineAfter
+      Paragraph[23, 30]
+        Text[23, 29] chars:[23, 29, "item 3"]
+      BlockQuote[38, 84] marker:[38, 39, ">"]
+        BulletList[40, 84] isTight
+          BulletListItem[40, 49] open:[40, 41, "*"] isTight
+            Paragraph[42, 49]
+              Text[42, 48] chars:[42, 48, "item 4"]
+          BulletListItem[57, 66] open:[57, 58, "*"] isTight
+            Paragraph[59, 66]
+              Text[59, 65] chars:[59, 65, "item 5"]
+          BulletListItem[75, 84] open:[75, 76, "*"] isTight
+            Paragraph[77, 84]
+              Text[77, 83] chars:[77, 83, "item 6"]
+````````````````````````````````
+
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 7
+```````````````````````````````` example List Item Indent Handling: 12
 * item 1
 
   # Heading 1
@@ -1815,7 +1989,7 @@ Document[0, 296]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 8
+```````````````````````````````` example List Item Indent Handling: 13
 * item 1
 *  item 2
 *   item 3
@@ -1869,5 +2043,387 @@ Document[0, 117]
         Text[110, 116] chars:[110, 116, "item 9"]
 ````````````````````````````````
 
+
+## Block quote parsing
+
+Whether blank lines are required to start a block quote
+
+```````````````````````````````` example Block quote parsing: 1
+paragraph text
+> block quoted text
+.
+<p>paragraph text &gt; block quoted text</p>
+.
+Document[0, 35]
+  Paragraph[0, 35]
+    Text[0, 14] chars:[0, 14, "parag …  text"]
+    SoftLineBreak[14, 15]
+    Text[15, 34] chars:[15, 34, "> blo …  text"]
+````````````````````````````````
+
+
+Whether blank lines are required to start a block quote
+
+```````````````````````````````` example Block quote parsing: 2
+paragraph text
+
+> block quoted text
+.
+<p>paragraph text</p>
+<blockquote>
+    <p>block quoted text</p>
+</blockquote>
+.
+Document[0, 36]
+  Paragraph[0, 15]
+    Text[0, 14] chars:[0, 14, "parag …  text"]
+  BlockQuote[16, 36] marker:[16, 17, ">"]
+    Paragraph[18, 36]
+      Text[18, 35] chars:[18, 35, "block …  text"]
+````````````````````````````````
+
+
+Whether blank lines are ignored and treated as if prefixed with block quote
+
+```````````````````````````````` example Block quote parsing: 3
+> block quoted text
+
+> more block quoted text
+.
+<blockquote>
+    <p>block quoted text</p>
+</blockquote>
+<blockquote>
+    <p>more block quoted text</p>
+</blockquote>
+.
+Document[0, 46]
+  BlockQuote[0, 20] marker:[0, 1, ">"]
+    Paragraph[2, 20]
+      Text[2, 19] chars:[2, 19, "block …  text"]
+  BlockQuote[21, 46] marker:[21, 22, ">"]
+    Paragraph[23, 46]
+      Text[23, 45] chars:[23, 45, "more  …  text"]
+````````````````````````````````
+
+
+Whether block quotes continue to a blank line
+
+```````````````````````````````` example Block quote parsing: 4
+> block quoted text
+lazy continuation
+
+another paragraph
+.
+<blockquote>
+    <p>block quoted text lazy continuation</p>
+</blockquote>
+<p>another paragraph</p>
+.
+Document[0, 57]
+  BlockQuote[0, 38] marker:[0, 1, ">"]
+    Paragraph[2, 38]
+      Text[2, 19] chars:[2, 19, "block …  text"]
+      SoftLineBreak[19, 20]
+      Text[20, 37] chars:[20, 37, "lazy  … ation"]
+  Paragraph[39, 57]
+    Text[39, 56] chars:[39, 56, "anoth … graph"]
+````````````````````````````````
+
+
+Whether leading spaces are allowed before block quote marker
+
+```````````````````````````````` example Block quote parsing: 5
+ > block quote paragraph text
+.
+<blockquote>
+    <p>block quote paragraph text</p>
+</blockquote>
+.
+Document[0, 30]
+  BlockQuote[1, 30] marker:[1, 2, ">"]
+    Paragraph[3, 30]
+      Text[3, 29] chars:[3, 29, "block …  text"]
+````````````````````````````````
+
+
+Whether trailing spaces are required after block quote marker
+
+```````````````````````````````` example Block quote parsing: 6
+>block quote paragraph text
+.
+<blockquote>
+    <p>block quote paragraph text</p>
+</blockquote>
+.
+Document[0, 28]
+  BlockQuote[0, 28] marker:[0, 1, ">"]
+    Paragraph[1, 28]
+      Text[1, 27] chars:[1, 27, "block …  text"]
+````````````````````````````````
+
+
+Whether block quotes can interrupt item paragraph
+
+```````````````````````````````` example Block quote parsing: 7
+* item 1
+  > block quoted text
+
+<!-- list break -->
+
+1. item 1
+   > block quoted text
+
+.
+<ul>
+    <li>item 1 &gt; block quoted text</li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>item 1 &gt; block quoted text</li>
+</ol>
+.
+Document[0, 87]
+  BulletList[0, 31] isTight
+    BulletListItem[0, 31] open:[0, 1, "*"] isTight hadBlankLineAfter
+      Paragraph[2, 31]
+        Text[2, 8] chars:[2, 8, "item 1"]
+        SoftLineBreak[8, 9]
+        Text[11, 30] chars:[11, 30, "> blo …  text"]
+  HtmlCommentBlock[32, 52]
+  OrderedList[53, 86] isTight delimiter:'.'
+    OrderedListItem[53, 86] open:[53, 55, "1."] isTight hadBlankLineAfter
+      Paragraph[56, 86]
+        Text[56, 62] chars:[56, 62, "item 1"]
+        SoftLineBreak[62, 63]
+        Text[66, 85] chars:[66, 85, "> blo …  text"]
+````````````````````````````````
+
+
+Whether block quotes can interrupt item paragraph
+
+```````````````````````````````` example Block quote parsing: 8
+* item 1
+
+  > block quoted text
+
+<!-- list break -->
+
+1. item 1
+
+   > block quoted text
+
+.
+<ul>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ol>
+.
+Document[0, 89]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 32] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BlockQuote[12, 32] marker:[12, 13, ">"]
+        Paragraph[14, 32]
+          Text[14, 31] chars:[14, 31, "block …  text"]
+  HtmlCommentBlock[33, 53]
+  OrderedList[54, 88] isTight delimiter:'.'
+    OrderedListItem[54, 88] open:[54, 56, "1."] isLoose hadBlankLineAfter
+      Paragraph[57, 64]
+        Text[57, 63] chars:[57, 63, "item 1"]
+      BlockQuote[68, 88] marker:[68, 69, ">"]
+        Paragraph[70, 88]
+          Text[70, 87] chars:[70, 87, "block …  text"]
+````````````````````````````````
+
+
+Whether block quotes with leading space can interrupt item paragraphs
+
+```````````````````````````````` example Block quote parsing: 9
+* item 1
+   > block quoted text
+
+<!-- list break -->
+
+1. item 1
+    > block quoted text
+
+.
+<ul>
+    <li>item 1 &gt; block quoted text</li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>item 1 &gt; block quoted text</li>
+</ol>
+.
+Document[0, 89]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 32] open:[0, 1, "*"] isTight hadBlankLineAfter
+      Paragraph[2, 32]
+        Text[2, 8] chars:[2, 8, "item 1"]
+        SoftLineBreak[8, 9]
+        Text[12, 31] chars:[12, 31, "> blo …  text"]
+  HtmlCommentBlock[33, 53]
+  OrderedList[54, 88] isTight delimiter:'.'
+    OrderedListItem[54, 88] open:[54, 56, "1."] isTight hadBlankLineAfter
+      Paragraph[57, 88]
+        Text[57, 63] chars:[57, 63, "item 1"]
+        SoftLineBreak[63, 64]
+        Text[68, 87] chars:[68, 87, "> blo …  text"]
+````````````````````````````````
+
+
+Whether block quotes with leading space can interrupt item paragraph
+
+```````````````````````````````` example Block quote parsing: 10
+* item 1
+
+   > block quoted text
+
+<!-- list break -->
+
+1. item 1
+
+    > block quoted text
+
+.
+<ul>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ol>
+.
+Document[0, 91]
+  BulletList[0, 33] isTight
+    BulletListItem[0, 33] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BlockQuote[13, 33] marker:[13, 14, ">"]
+        Paragraph[15, 33]
+          Text[15, 32] chars:[15, 32, "block …  text"]
+  HtmlCommentBlock[34, 54]
+  OrderedList[55, 90] isTight delimiter:'.'
+    OrderedListItem[55, 90] open:[55, 57, "1."] isLoose hadBlankLineAfter
+      Paragraph[58, 65]
+        Text[58, 64] chars:[58, 64, "item 1"]
+      BlockQuote[70, 90] marker:[70, 71, ">"]
+        Paragraph[72, 90]
+          Text[72, 89] chars:[72, 89, "block …  text"]
+````````````````````````````````
+
+
+Whether block quotes without trailing space can interrupt item paragraphs
+
+```````````````````````````````` example Block quote parsing: 11
+* item 1
+  >block quoted text
+
+<!-- list break -->
+
+1. item 1
+   >block quoted text
+
+.
+<ul>
+    <li>item 1 &gt;block quoted text</li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>item 1 &gt;block quoted text</li>
+</ol>
+.
+Document[0, 85]
+  BulletList[0, 30] isTight
+    BulletListItem[0, 30] open:[0, 1, "*"] isTight hadBlankLineAfter
+      Paragraph[2, 30]
+        Text[2, 8] chars:[2, 8, "item 1"]
+        SoftLineBreak[8, 9]
+        Text[11, 29] chars:[11, 29, ">bloc …  text"]
+  HtmlCommentBlock[31, 51]
+  OrderedList[52, 84] isTight delimiter:'.'
+    OrderedListItem[52, 84] open:[52, 54, "1."] isTight hadBlankLineAfter
+      Paragraph[55, 84]
+        Text[55, 61] chars:[55, 61, "item 1"]
+        SoftLineBreak[61, 62]
+        Text[65, 83] chars:[65, 83, ">bloc …  text"]
+````````````````````````````````
+
+
+Whether block quotes without trailing space can interrupt item paragraph
+
+```````````````````````````````` example Block quote parsing: 12
+* item 1
+
+   >block quoted text
+
+<!-- list break -->
+
+1. item 1
+
+   >block quoted text
+
+.
+<ul>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ul>
+<!-- list break -->
+<ol>
+    <li>
+        <p>item 1</p>
+        <blockquote>
+            <p>block quoted text</p>
+        </blockquote>
+    </li>
+</ol>
+.
+Document[0, 88]
+  BulletList[0, 32] isTight
+    BulletListItem[0, 32] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BlockQuote[13, 32] marker:[13, 14, ">"]
+        Paragraph[14, 32]
+          Text[14, 31] chars:[14, 31, "block …  text"]
+  HtmlCommentBlock[33, 53]
+  OrderedList[54, 87] isTight delimiter:'.'
+    OrderedListItem[54, 87] open:[54, 56, "1."] isLoose hadBlankLineAfter
+      Paragraph[57, 64]
+        Text[57, 63] chars:[57, 63, "item 1"]
+      BlockQuote[68, 87] marker:[68, 69, ">"]
+        Paragraph[69, 87]
+          Text[69, 86] chars:[69, 86, "block …  text"]
+````````````````````````````````
 
 

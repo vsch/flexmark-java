@@ -2,7 +2,7 @@ package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
@@ -31,11 +31,11 @@ public class ComboGfmTaskListSpecTest extends ComboSpecTestCase {
         optionsMap.put("not-done", new MutableDataSet().set(TaskListExtension.ITEM_NOT_DONE_MARKER, "<span class=\"taskitem\">O</span>"));
         optionsMap.put("no-ordered-items", new MutableDataSet().set(Parser.LISTS_NUMBERED_ITEM_MARKER_SUFFIXED, false));
         optionsMap.put("kramdown", new MutableDataSet()
-                .setFrom(ParserEmulationFamily.KRAMDOWN.getOptions())
+                .setFrom(ParserEmulationProfile.KRAMDOWN.getOptions())
                 .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
         );
         optionsMap.put("markdown", new MutableDataSet()
-                .setFrom(ParserEmulationFamily.MARKDOWN.getOptions())
+                .setFrom(ParserEmulationProfile.MARKDOWN.getOptions())
                 .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
         );
     }

@@ -479,13 +479,13 @@ public class CoreNodeRenderer implements NodeRenderer {
     public void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape) {
         if (suppress) return;
 
-        html.line();
+        if (node instanceof HtmlBlock) html.line();
         if (escape) {
-            html.text(node.getContentChars().normalizeEOL());
+            html.text(node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL());
         } else {
-            html.rawIndentedPre(node.getContentChars().normalizeEOL());
+            html.rawPre((node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL()));
         }
-        html.line();
+        if (node instanceof HtmlBlock) html.line();
     }
 
     private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {

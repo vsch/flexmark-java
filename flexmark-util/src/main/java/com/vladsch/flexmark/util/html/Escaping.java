@@ -178,9 +178,7 @@ public class Escaping {
     public static BasedSequence unescape(BasedSequence s, ReplacedTextMapper textMapper) {
         int indexOfAny = s.indexOfAny('\\', '&');
         if (indexOfAny != -1) {
-            // all before are not part of it so we can skip it
-            textMapper.addOriginalText(s.subSequence(0, indexOfAny));
-            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s.subSequence(indexOfAny), UNESCAPE_REPLACER, textMapper);
+            return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER, textMapper);
         } else {
             return s;
         }

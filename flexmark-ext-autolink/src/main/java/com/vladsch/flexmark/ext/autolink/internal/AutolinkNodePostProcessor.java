@@ -16,7 +16,7 @@ import java.util.EnumSet;
 public class AutolinkNodePostProcessor extends NodePostProcessor {
 
     private LinkExtractor linkExtractor = LinkExtractor.builder()
-            .linkTypes(EnumSet.of(LinkType.URL, LinkType.EMAIL))
+            .linkTypes(EnumSet.of(LinkType.URL, LinkType.WWW, LinkType.EMAIL))
             .build();
 
     public AutolinkNodePostProcessor(Document document) {

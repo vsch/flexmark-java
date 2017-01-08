@@ -14,6 +14,27 @@ Converts pipe separated tables to html tables with optional column spans and mul
 lines and table caption.
 
 ```````````````````````````````` example Tables Extension: 1
+-------|-------------
+.
+<table>
+  <thead></thead>
+  <tbody></tbody>
+</table>
+.
+Document[0, 22]
+  TableBlock[0, 22]
+    TableHead[0, 0]
+    TableSeparator[0, 21]
+      TableRow[0, 21]
+        TableCell[0, 8] text:[0, 7, "-------"] textClose:[7, 8, "|"]
+          Text[0, 7] chars:[0, 7, "-------"]
+        TableCell[8, 21] text:[8, 21, "-------------"]
+          Text[8, 21] chars:[8, 21, "----- … -----"]
+    TableBody[0, 0]
+````````````````````````````````
+
+
+```````````````````````````````` example Tables Extension: 2
 Abc|Def
 .
 <p>Abc|Def</p>
@@ -24,7 +45,7 @@ Document[0, 8]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 2
+```````````````````````````````` example Tables Extension: 3
 Abc | Def
 .
 <p>Abc | Def</p>
@@ -35,7 +56,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 3
+```````````````````````````````` example Tables Extension: 4
 Abc|Def
 -|-
 .
@@ -50,7 +71,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 4
+```````````````````````````````` example Tables Extension: 5
 Abc|Def
 --|--
 .
@@ -65,7 +86,7 @@ Document[0, 14]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 5
+```````````````````````````````` example Tables Extension: 6
 Abc|Def
  |---|---
 .
@@ -80,7 +101,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 6
+```````````````````````````````` example Tables Extension: 7
 No
 Abc|Def
 ---|---
@@ -99,7 +120,7 @@ Document[0, 19]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 7
+```````````````````````````````` example Tables Extension: 8
 Abc|Def
 ---|---
 .
@@ -130,7 +151,7 @@ Document[0, 16]
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables Extension: 8
+```````````````````````````````` example Tables Extension: 9
 Abc|Def
 :--|---
 .
@@ -161,7 +182,7 @@ Document[0, 16]
 
 Separator columns need to be at least 3 characters, not 3 dashes
 
-```````````````````````````````` example Tables Extension: 9
+```````````````````````````````` example Tables Extension: 10
 Abc|Def
 --:|---
 .
@@ -190,7 +211,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 10
+```````````````````````````````` example Tables Extension: 11
 Abc|Def
 :-:|---
 .
@@ -219,7 +240,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 11
+```````````````````````````````` example Tables Extension: 12
 |Abc
 |---
 .
@@ -244,7 +265,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 12
+```````````````````````````````` example Tables Extension: 13
 |Abc|
 |---|
 .
@@ -269,7 +290,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 13
+```````````````````````````````` example Tables Extension: 14
 Abc|
 ---|
 .
@@ -294,7 +315,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 14
+```````````````````````````````` example Tables Extension: 15
 |Abc
 ---
 .
@@ -306,7 +327,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 15
+```````````````````````````````` example Tables Extension: 16
 Abc
 |---
 .
@@ -321,7 +342,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 16
+```````````````````````````````` example Tables Extension: 17
 |Abc
 |---
 |1
@@ -352,7 +373,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 17
+```````````````````````````````` example Tables Extension: 18
 |Abc|
 |---|
 |1|
@@ -383,7 +404,7 @@ Document[0, 16]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 18
+```````````````````````````````` example Tables Extension: 19
 Abc|
 ---|
 1|
@@ -414,7 +435,7 @@ Document[0, 13]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 19
+```````````````````````````````` example Tables Extension: 20
 |Abc
 ---
 |1
@@ -430,7 +451,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 20
+```````````````````````````````` example Tables Extension: 21
 |Abc
 |---
 1
@@ -459,7 +480,7 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 21
+```````````````````````````````` example Tables Extension: 22
 Abc|Def
 ---|---
 1|2
@@ -496,7 +517,7 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 22
+```````````````````````````````` example Tables Extension: 23
 Abc|Def|Ghi
 ---|---
 1|2|3
@@ -537,7 +558,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 23
+```````````````````````````````` example Tables Extension: 24
  Abc  | Def
  --- | ---
  1 | 2
@@ -574,7 +595,7 @@ Document[0, 30]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 24
+```````````````````````````````` example Tables Extension: 25
 Abc|Def
 ---|---
     1|2
@@ -611,7 +632,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 25
+```````````````````````````````` example Tables Extension: 26
 |Abc|Def|
 |---|---|
 |1|2|
@@ -650,7 +671,7 @@ Document[0, 26]
 
 Embedded pipes in inline elements
 
-```````````````````````````````` example Tables Extension: 26
+```````````````````````````````` example Tables Extension: 27
 Abc|Def
 ---|---
 `|`|`|`
@@ -689,7 +710,7 @@ Document[0, 24]
 
 unclosed delimiters in cells
 
-```````````````````````````````` example Tables Extension: 27
+```````````````````````````````` example Tables Extension: 28
 Abc|Def
 ---|---
 `| | abc
@@ -729,7 +750,7 @@ Document[0, 25]
 
 unclosed delimiters in cells
 
-```````````````````````````````` example Tables Extension: 28
+```````````````````````````````` example Tables Extension: 29
 Abc|Def
 ---|---
 **def | abc
@@ -766,7 +787,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 29
+```````````````````````````````` example Tables Extension: 30
 *Abc*|Def
 ---|---
 1|2
@@ -804,7 +825,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 30
+```````````````````````````````` example Tables Extension: 31
 Abc|Def
 ---|---
 1\\|2|20
@@ -845,7 +866,7 @@ Document[0, 25]
 
 Extra column should be truncated when GFM compatibility is selected
 
-```````````````````````````````` example(Tables Extension: 31) options(gfm)
+```````````````````````````````` example(Tables Extension: 32) options(gfm)
 Abc|Def
 ---|---
 1\\|2|20
@@ -882,7 +903,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 32
+```````````````````````````````` example Tables Extension: 33
 Abc|Def
 ---|---
 1\\\\|2
@@ -919,7 +940,7 @@ Document[0, 24]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 33
+```````````````````````````````` example Tables Extension: 34
 Abc|Def
 :---|---
 1|2
@@ -956,7 +977,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 34
+```````````````````````````````` example Tables Extension: 35
 Abc|Def
 ---:|---
 1|2
@@ -993,7 +1014,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 35
+```````````````````````````````` example Tables Extension: 36
 Abc|Def
 :---:|---
 1|2
@@ -1030,7 +1051,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 36
+```````````````````````````````` example Tables Extension: 37
 Abc|Def
 ---|:---:
 1|2
@@ -1067,7 +1088,7 @@ Document[0, 22]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 37
+```````````````````````````````` example Tables Extension: 38
 Abc|Def
  :--- |---
 1|2
@@ -1104,7 +1125,7 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 38
+```````````````````````````````` example Tables Extension: 39
 Abc|Def
 --- :|---
 .
@@ -1119,7 +1140,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 39
+```````````````````````````````` example Tables Extension: 40
 Abc|Def
 ---|: ---
 .
@@ -1134,7 +1155,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 40
+```````````````````````````````` example Tables Extension: 41
 Abc|Def
 ---|--- :
 .
@@ -1149,7 +1170,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 41
+```````````````````````````````` example Tables Extension: 42
 Abc|Def
 ---|---
 1|2|3
@@ -1190,7 +1211,7 @@ Document[0, 22]
 
 Extra columns truncated with GFM compatibility on.
 
-```````````````````````````````` example(Tables Extension: 42) options(gfm)
+```````````````````````````````` example(Tables Extension: 43) options(gfm)
 Abc|Def
 ---|---
 1|2|3
@@ -1227,7 +1248,7 @@ Document[0, 21]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 43
+```````````````````````````````` example Tables Extension: 44
 Abc|Def|Ghi
 ---|---|---
 1|2
@@ -1268,7 +1289,7 @@ Document[0, 28]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 44
+```````````````````````````````` example Tables Extension: 45
 > Abc|Def
 > ---|---
 > 1|2
@@ -1308,7 +1329,7 @@ Document[0, 26]
 ````````````````````````````````
 
 
-```````````````````````````````` example Tables Extension: 45
+```````````````````````````````` example Tables Extension: 46
 Abc|Def
 ---|---
 1|2
@@ -1351,7 +1372,7 @@ Document[0, 40]
 
 inlines should be processed
 
-```````````````````````````````` example Tables Extension: 46
+```````````````````````````````` example Tables Extension: 47
 **Abc**|_Def_
 ---|---
 [ref]|`code`
@@ -1400,7 +1421,7 @@ Document[0, 68]
 
 inlines should be processed
 
-```````````````````````````````` example Tables Extension: 47
+```````````````````````````````` example Tables Extension: 48
 |**Abc** **test** |_Def_ _Def_
 ---|---
 [ref]|`code` `code`
@@ -1458,7 +1479,7 @@ Document[0, 92]
 
 Column spans are created with repeated | pipes one for each additional column to span
 
-```````````````````````````````` example Tables Extension: 48
+```````````````````````````````` example Tables Extension: 49
 |Abc|Def
 |---|---|
 | span ||
@@ -1495,7 +1516,7 @@ Document[0, 29]
 
 Now we try varying the header lines and make sure we get the right output
 
-```````````````````````````````` example Tables Extension: 49
+```````````````````````````````` example Tables Extension: 50
 |Abc|Def
 |Hij|Lmn
 |---|---|
@@ -1539,7 +1560,7 @@ Document[0, 38]
 
 No header lines
 
-```````````````````````````````` example Tables Extension: 50
+```````````````````````````````` example Tables Extension: 51
 |---|---|
 | col1 | col2|
 .
@@ -1570,7 +1591,7 @@ Document[0, 25]
 
 No body lines
 
-```````````````````````````````` example Tables Extension: 51
+```````````````````````````````` example Tables Extension: 52
 | col1 | col2|
 |---|---|
 .
@@ -1601,7 +1622,7 @@ Document[0, 25]
 
 With caption
 
-```````````````````````````````` example Tables Extension: 52
+```````````````````````````````` example Tables Extension: 53
 | col1 | col2|
 |---|---|
          [Caption **bold** _italic_ `code`]          
@@ -1643,7 +1664,7 @@ Document[0, 79]
 
 With caption but no caption parsing
 
-```````````````````````````````` example(Tables Extension: 53) options(no-caption)
+```````````````````````````````` example(Tables Extension: 54) options(no-caption)
 | col1 | col2|
 |---|---|
 [Caption]
@@ -1679,7 +1700,7 @@ Document[0, 34]
 
 Alignment should be taken from column after span is added
 
-```````````````````````````````` example Tables Extension: 54
+```````````````````````````````` example Tables Extension: 55
 | day         | time  |   spent |
 |:------------|:-----:|--------:|
 | nov. 2. tue | 10:00 |  4h 40m |
@@ -1751,7 +1772,7 @@ Document[0, 204]
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 55
+```````````````````````````````` example Tables Extension: 56
 not a table, followed by a table
 
 | col1 | col2|
@@ -1862,7 +1883,7 @@ Document[0, 199]
 
 multi row/column
 
-```````````````````````````````` example Tables Extension: 56
+```````````````````````````````` example Tables Extension: 57
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -1944,7 +1965,7 @@ Document[0, 168]
 
 keep cell whitespace
 
-```````````````````````````````` example(Tables Extension: 57) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 58) options(keep-whitespace)
  Abc  | Def
  --- | ---
  1 | 2
@@ -1983,7 +2004,7 @@ Document[0, 29]
 
 Custom class name
 
-```````````````````````````````` example(Tables Extension: 58) options(class-name)
+```````````````````````````````` example(Tables Extension: 59) options(class-name)
 Abc|Def
 ---|---
 .
@@ -2014,7 +2035,7 @@ Document[0, 15]
 
 in item
 
-```````````````````````````````` example(Tables Extension: 59) options(keep-whitespace)
+```````````````````````````````` example(Tables Extension: 60) options(keep-whitespace)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -2104,7 +2125,7 @@ Document[0, 564]
 
 real life table
 
-```````````````````````````````` example Tables Extension: 60
+```````````````````````````````` example Tables Extension: 61
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |

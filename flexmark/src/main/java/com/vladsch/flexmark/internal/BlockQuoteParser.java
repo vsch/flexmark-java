@@ -2,6 +2,7 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockQuote;
+import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
@@ -16,14 +17,22 @@ import java.util.Set;
 public class BlockQuoteParser extends AbstractBlockParser {
 
     private final BlockQuote block = new BlockQuote();
+    private final boolean allowLeadingSpace;
     private final boolean continueToBlankLine;
     private final boolean ignoreBlankLine;
+    private final boolean interruptsParagraph;
+    private final boolean interruptsItemParagraph;
+    private final boolean withLeadSpacesInterruptsItemParagraph;
     private int lastWasBlankLine = 0;
 
     public BlockQuoteParser(DataHolder options, BasedSequence marker) {
         block.setOpeningMarker(marker);
         continueToBlankLine = options.get(Parser.BLOCK_QUOTE_TO_BLANK_LINE);
+        allowLeadingSpace = options.get(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE);
         ignoreBlankLine = options.get(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE);
+        interruptsParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH);
+        interruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH);
+        withLeadSpacesInterruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
     }
 
     @Override
@@ -55,7 +64,7 @@ public class BlockQuoteParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         int nextNonSpace = state.getNextNonSpaceIndex();
         boolean isMarker;
-        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace)) || (continueToBlankLine && lastWasBlankLine == 0))) {
+        if (!state.isBlank() && ((isMarker = isMarker(state, nextNonSpace, false, false, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) || (continueToBlankLine && lastWasBlankLine == 0))) {
             int newColumn = state.getColumn() + state.getIndent();
             lastWasBlankLine = 0;
 
@@ -77,9 +86,27 @@ public class BlockQuoteParser extends AbstractBlockParser {
         }
     }
 
-    static boolean isMarker(ParserState state, int index) {
+    static boolean isMarker(
+            final ParserState state,
+            final int index,
+            final boolean inParagraph,
+            final boolean inParagraphListItem,
+            final boolean allowLeadingSpace,
+            final boolean interruptsParagraph,
+            final boolean interruptsItemParagraph,
+            final boolean withLeadSpacesInterruptsItemParagraph
+    ) {
         CharSequence line = state.getLine();
-        return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT && index < line.length() && line.charAt(index) == '>';
+        if ((!inParagraph || interruptsParagraph) && index < line.length() && line.charAt(index) == '>') {
+            if ((allowLeadingSpace || state.getIndent() == 0) && (!inParagraphListItem || interruptsItemParagraph)) {
+                if (inParagraphListItem && !withLeadSpacesInterruptsItemParagraph) {
+                    return state.getIndent() == 0;
+                } else {
+                    return state.getIndent() < state.getParsing().CODE_BLOCK_INDENT;
+                }
+            }
+        }
+        return false;
     }
 
     public static class Factory implements CustomBlockParserFactory {
@@ -122,13 +149,25 @@ public class BlockQuoteParser extends AbstractBlockParser {
     }
 
     private static class BlockFactory extends AbstractBlockParserFactory {
+        private final boolean allowLeadingSpace;
+        private final boolean interruptsParagraph;
+        private final boolean interruptsItemParagraph;
+        private final boolean withLeadSpacesInterruptsItemParagraph;
         BlockFactory(DataHolder options) {
             super(options);
+            allowLeadingSpace = options.get(Parser.BLOCK_QUOTE_ALLOW_LEADING_SPACE);
+            interruptsParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH);
+            interruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH);
+            withLeadSpacesInterruptsItemParagraph = options.get(Parser.BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH);
         }
 
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             int nextNonSpace = state.getNextNonSpaceIndex();
-            if (isMarker(state, nextNonSpace)) {
+            BlockParser matched = matchedBlockParser.getBlockParser();
+            boolean inParagraph = matched.isParagraphParser();
+            boolean inParagraphListItem = inParagraph && matched.getBlock().getParent() instanceof ListItem && matched.getBlock() == matched.getBlock().getParent().getFirstChild();
+
+            if (isMarker(state, nextNonSpace, inParagraph, inParagraphListItem, allowLeadingSpace, interruptsParagraph, interruptsItemParagraph, withLeadSpacesInterruptsItemParagraph)) {
                 int newColumn = state.getColumn() + state.getIndent() + 1;
                 // optional following space or tab
                 if (Parsing.isSpaceOrTab(state.getLine(), nextNonSpace + 1)) {

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.IParse;
+import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -29,7 +31,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("list-no-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, false));
         optionsMap.put("list-break", new MutableDataSet().set(Parser.LISTS_END_ON_DOUBLE_BLANK, true));
         optionsMap.put("list-no-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
-        optionsMap.put("list-loose-if-prev", new MutableDataSet().set(Parser.LISTS_LOOSE_ON_PREV_LOOSE_ITEM, true));
+        optionsMap.put("list-loose-if-prev", new MutableDataSet().set(Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE, true));
         optionsMap.put("list-no-start", new MutableDataSet().set(Parser.LISTS_ORDERED_LIST_MANUAL_START, false));
         optionsMap.put("list-no-bullet-match", new MutableDataSet().set(Parser.LISTS_DELIMITER_MISMATCH_TO_NEW_LIST, false));
         optionsMap.put("list-no-type-match", new MutableDataSet().set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, false));
@@ -139,12 +141,12 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected Parser parser() {
+    protected IParse parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    protected IRender renderer() {
         return RENDERER;
     }
 }

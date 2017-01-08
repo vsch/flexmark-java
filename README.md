@@ -26,7 +26,7 @@ static extension methods in interfaces.
 
 - All VISIT_HANDLERS in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
   mechanical search and replace from `.VISIT_HANDLERS` to `Ext.VISIT_HANDLERS` should take care
-  of the change
+  of the change.
 
 - Lack of Lambda syntax will only have an effect if your project language level is downgraded.
   Otherwise, you can keep using lambda syntax.
@@ -47,7 +47,7 @@ static extension methods in interfaces.
 - Android compatibility to be added
 - No attempt is made to keep API backward compatibility to the original project.
 
-    The API has stabilized but some changes may be necessary before 1.0 release.
+  The API has stabilized but some changes may be necessary before 1.0 release.
 
 ### Releases, Bug Fixes, Enhancements and Support
 
@@ -151,17 +151,17 @@ If you find a discrepancy please open an issue so it can be addressed.
 
 Major processor families are implemented and some family members also:
 
-- [x] CommonMark (spec 0.27)
-      - [x] GitHub Comments
-      - [ ] League/CommonMark
-- [x] FixedIndent
-      - [x] MultiMarkdown
-      - [x] Pegdown
-- [x] Kramdown
-      - [ ] GitHub Docs
-      - [ ] Jekyll
-- [x] Markdown.pl
-      - [ ] Php Markdown Extra
+- CommonMark (spec 0.27)
+  - [ ] League/CommonMark
+  - GitHub Comments
+- Kramdown
+  - [ ] Jekyll
+- Markdown.pl
+  - [ ] Php Markdown Extra
+  - GitHub Docs
+- FixedIndent
+  - MultiMarkdown
+  - Pegdown
 
 :information_source: profiles to encapsulate configuration details for variants within the
 family will follow shortly. It can happen sooner if you let me know that you need it for you
@@ -245,43 +245,43 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
-- Parser options to be implemented:
-    - GitHub Extensions
-        - [x] Fenced code blocks
-        - [x] Anchor links for headers with auto id generation
-        - [x] Table Spans option to be implemented for tables extension
-        - [x] Wiki Links with GitHub and Creole syntax
-        - [x] Emoji Shortcuts with use GitHub emoji URL option
-    - GitHub Syntax
-        - [x] Strikethrough
-        - [x] Task Lists
-        - [x] No Atx Header Space
-        - [x] No Header indents
-        - [x] Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
-        - [x] Relaxed HR Rules Option
-        - [x] Wiki links
-    - Publishing
-        - [x] Abbreviations
-        - [x] Footnotes
-        - [x] Definitions
-        - [x] Table of Contents
-    - Typographic
-        - [ ] Quotes
-        - [ ] Smarts
-    - Suppress
-        - [x] inline HTML: all, non-comments, comments
-        - [x] HTML blocks: all, non-comments, comments
-    - Processor Extensions
-        - [x] Jekyll front matter
-        - [x] GitBook link URL encoding. Not applicable
-        - [x] HTML comment nodes: Block and Inline
-        - [x] Multi-line Image URLs
-        - [x] Spec Example Element
-    - Commonmark Syntax suppression
-        - [x] Manual loose lists
-        - [x] Numbered lists always start with 1.
-        - [x] Fixed list item indent, items must be indented by at least 4 spaces
-        - [x] Relaxed list start option, allow lists to start when not preceded by a blank line.
+- Parser options, items marked as a task item are to be implemented the rest are complete:
+  - Typographic
+    - [ ] Quotes
+    - [ ] Smarts
+  - GitHub Extensions
+    - Fenced code blocks
+    - Anchor links for headers with auto id generation
+    - Table Spans option to be implemented for tables extension
+    - Wiki Links with GitHub and Creole syntax
+    - Emoji Shortcuts with use GitHub emoji URL option
+  - GitHub Syntax
+    - Strikethrough
+    - Task Lists
+    - No Atx Header Space
+    - No Header indents
+    - Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
+    - Relaxed HR Rules Option
+    - Wiki links
+  - Publishing
+    - Abbreviations
+    - Footnotes
+    - Definitions
+    - Table of Contents
+  - Suppress
+    - inline HTML: all, non-comments, comments
+    - HTML blocks: all, non-comments, comments
+  - Processor Extensions
+    - Jekyll front matter
+    - GitBook link URL encoding. Not applicable
+    - HTML comment nodes: Block and Inline
+    - Multi-line Image URLs
+    - Spec Example Element
+  - Commonmark Syntax suppression
+    - Manual loose lists
+    - Numbered lists always start with 1.
+    - Fixed list item indent, items must be indented by at least 4 spaces
+    - Relaxed list start option, allow lists to start when not preceded by a blank line.
 
 I am very pleased with the decision to switch to [commonmark-java] based parser for my own
 projects. Even though I had to do major surgery on its innards to get full source position
@@ -381,8 +381,10 @@ Contributing
 
 Pull requests, issues and comments welcome :smile:. For pull requests:
 
-* Add tests for new features and bug fixes, preferably in the ast_spec.txt format
-* Follow the existing style to make merging easier, as much as possible: 4 space indent.
+* Add tests for new features and bug fixes, preferably in the
+  [ast_spec.md](flexmark-test-util/src/main/resources/ast_spec.md) format
+* Follow the existing style to make merging easier, as much as possible: 4 space indent,
+  trailing spaces trimmed.
 
 * * *
 
@@ -395,6 +397,7 @@ Copyright (c) 2016, Vladimir Schneider,
 
 BSD (2-clause) licensed, see [LICENSE.txt] file.
 
+[All about me]: https://vladsch.com/about
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [GitHub Issues page]: ../../issues
@@ -420,6 +423,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
+[Jekyll]: https://jekyllrb.com
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
 [Kotlin]: http://kotlinlang.org
@@ -448,5 +452,4 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [sirthias]: https://github.com/sirthias
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
-[All about me]: https://vladsch.com/about
 

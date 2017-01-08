@@ -2,7 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationFamily;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -17,13 +17,9 @@ import java.util.Map;
 public class ComboKramdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/kramdown_compatibility_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
-            .setFrom(ParserEmulationFamily.KRAMDOWN.getOptions())
-            .set(Parser.HEADING_NO_LEAD_SPACE, true)
-            //.set(Parser.THEMATIC_BREAK_RELAXED_START, true)
+            .setFrom(ParserEmulationProfile.KRAMDOWN)
             .set(HtmlRenderer.INDENT_SIZE, 4)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(HtmlRenderer.SOFT_BREAK, " ")
             ;
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();

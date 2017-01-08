@@ -2,7 +2,7 @@ package com.vladsch.flexmark.util.options;
 
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 
-public interface MutableDataHolder extends DataHolder {
+public interface MutableDataHolder extends DataHolder, MutableDataSetter {
     /**
      * Get the given key, if it does not exist then use the key's factory to create a new value and put it into the collection
      * so that the following get of the same key will find a value
@@ -44,8 +44,18 @@ public interface MutableDataHolder extends DataHolder {
      * Copy all values from one data holder to this data holder
      *
      * @param other data holder from which to copy all values
+     * @return mutable data holder for chained calls
      */
-    void setAll(DataHolder other);
+    MutableDataHolder setAll(DataHolder other);
+
+    /**
+     * Set options in gven mutable data hoer
+     *
+     * @param dataHolder data holder where to copy options from this data holder
+     * @return dataHolder
+     */
+    @Override
+    MutableDataHolder setIn(MutableDataHolder dataHolder);
 
     /**
      * Will return the value previously set or generate a new value using the given factory.
@@ -61,6 +71,7 @@ public interface MutableDataHolder extends DataHolder {
 
     /**
      * clear all options out of the data set
+     * @return mutable data holder for chained calls
      */
-    void clear();
+    MutableDataHolder clear();
 }
