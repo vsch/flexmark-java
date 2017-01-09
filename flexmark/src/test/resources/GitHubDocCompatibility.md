@@ -1,3 +1,5 @@
+<!-- @formatter:off -->
+
 ## Bullet Mismatch Starts a New List
 
 ```markdown
@@ -1547,3 +1549,54 @@ Whether block quotes without trailing space can interrupt item paragraph
 1. item 1
 
    >block quoted text
+
+Test to make sure content indented deeply nested lists process correctly
+
+```markdown
+- item 1
+  - item 2
+    - item 3
+      - item 4
+        - item 5
+          - item 6
+            - item 7
+              - item 8
+                - item 9
+```
+
+- item 1
+  - item 2
+    - item 3
+      - item 4
+        - item 5
+          - item 6
+            - item 7
+              - item 8
+                - item 9
+
+
+```markdown
+1. item 1
+   1. item 2
+      1. item 3
+         1. item 4
+            1. item 5
+               1. item 6
+                  1. item 7
+                     1. item 8
+                        1. item 9
+```
+
+1. item 1
+   1. item 2
+      1. item 3
+         1. item 4
+            1. item 5
+               1. item 6
+                  1. item 7
+                     1. item 8
+                        1. item 9
+
+
+
+<!-- @formatter:on -->

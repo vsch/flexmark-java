@@ -3129,3 +3129,157 @@ Document[0, 88]
 ````````````````````````````````
 
 
+Test to make sure content indented deeply nested lists process correctly
+
+```````````````````````````````` example Block quote parsing: 13
+- item 1
+  - item 2
+    - item 3
+      - item 4
+        - item 5
+          - item 6
+            - item 7
+              - item 8
+                - item 9
+
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2</li>
+            <li>item 3
+                <ul>
+                    <li>item 4</li>
+                    <li>item 5
+                        <ul>
+                            <li>item 6</li>
+                            <li>item 7
+                                <ul>
+                                    <li>item 8</li>
+                                    <li>item 9</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 154]
+  BulletList[0, 153] isTight
+    BulletListItem[0, 153] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[11, 153] isTight
+        BulletListItem[11, 20] open:[11, 12, "-"] isTight
+          Paragraph[13, 20]
+            Text[13, 19] chars:[13, 19, "item 2"]
+        BulletListItem[24, 153] open:[24, 25, "-"] isTight
+          Paragraph[26, 33]
+            Text[26, 32] chars:[26, 32, "item 3"]
+          BulletList[39, 153] isTight
+            BulletListItem[39, 48] open:[39, 40, "-"] isTight
+              Paragraph[41, 48]
+                Text[41, 47] chars:[41, 47, "item 4"]
+            BulletListItem[56, 153] open:[56, 57, "-"] isTight
+              Paragraph[58, 65]
+                Text[58, 64] chars:[58, 64, "item 5"]
+              BulletList[75, 153] isTight
+                BulletListItem[75, 84] open:[75, 76, "-"] isTight
+                  Paragraph[77, 84]
+                    Text[77, 83] chars:[77, 83, "item 6"]
+                BulletListItem[96, 153] open:[96, 97, "-"] isTight
+                  Paragraph[98, 105]
+                    Text[98, 104] chars:[98, 104, "item 7"]
+                  BulletList[119, 153] isTight
+                    BulletListItem[119, 128] open:[119, 120, "-"] isTight
+                      Paragraph[121, 128]
+                        Text[121, 127] chars:[121, 127, "item 8"]
+                    BulletListItem[144, 153] open:[144, 145, "-"] isTight hadBlankLineAfter
+                      Paragraph[146, 153]
+                        Text[146, 152] chars:[146, 152, "item 9"]
+````````````````````````````````
+
+
+```````````````````````````````` example Block quote parsing: 14
+1. item 1
+   1. item 2
+      1. item 3
+         1. item 4
+            1. item 5
+               1. item 6
+                  1. item 7
+                     1. item 8
+                        1. item 9
+
+.
+<ol>
+    <li>item 1
+        <ol>
+            <li>item 2
+                <ol>
+                    <li>item 3
+                        <ol>
+                            <li>item 4</li>
+                            <li>item 5
+                                <ol>
+                                    <li>item 6
+                                        <ol>
+                                            <li>item 7
+                                                <ol>
+                                                    <li>item 8</li>
+                                                    <li>item 9</li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </li>
+</ol>
+.
+Document[0, 199]
+  OrderedList[0, 198] isTight delimiter:'.'
+    OrderedListItem[0, 198] open:[0, 2, "1."] isTight
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+      OrderedList[13, 198] isTight delimiter:'.'
+        OrderedListItem[13, 198] open:[13, 15, "1."] isTight
+          Paragraph[16, 23]
+            Text[16, 22] chars:[16, 22, "item 2"]
+          OrderedList[29, 198] isTight delimiter:'.'
+            OrderedListItem[29, 198] open:[29, 31, "1."] isTight
+              Paragraph[32, 39]
+                Text[32, 38] chars:[32, 38, "item 3"]
+              OrderedList[48, 198] isTight delimiter:'.'
+                OrderedListItem[48, 58] open:[48, 50, "1."] isTight
+                  Paragraph[51, 58]
+                    Text[51, 57] chars:[51, 57, "item 4"]
+                OrderedListItem[70, 198] open:[70, 72, "1."] isTight
+                  Paragraph[73, 80]
+                    Text[73, 79] chars:[73, 79, "item 5"]
+                  OrderedList[95, 198] isTight delimiter:'.'
+                    OrderedListItem[95, 198] open:[95, 97, "1."] isTight
+                      Paragraph[98, 105]
+                        Text[98, 104] chars:[98, 104, "item 6"]
+                      OrderedList[123, 198] isTight delimiter:'.'
+                        OrderedListItem[123, 198] open:[123, 125, "1."] isTight
+                          Paragraph[126, 133]
+                            Text[126, 132] chars:[126, 132, "item 7"]
+                          OrderedList[154, 198] isTight delimiter:'.'
+                            OrderedListItem[154, 164] open:[154, 156, "1."] isTight
+                              Paragraph[157, 164]
+                                Text[157, 163] chars:[157, 163, "item 8"]
+                            OrderedListItem[188, 198] open:[188, 190, "1."] isTight hadBlankLineAfter
+                              Paragraph[191, 198]
+                                Text[191, 197] chars:[191, 197, "item 9"]
+````````````````````````````````
+
+

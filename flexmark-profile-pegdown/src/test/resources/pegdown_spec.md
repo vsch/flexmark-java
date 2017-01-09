@@ -1411,3 +1411,109 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
+Test to make sure content indented deeply nested lists process correctly
+
+```````````````````````````````` example Block quote parsing: 13
+- item 1
+    - item 2
+        - item 3
+            - item 4
+                - item 5
+                    - item 6
+                        - item 7
+                            - item 8
+                                - item 9
+
+.
+<ul>
+  <li>item 1
+    <ul>
+      <li>item 2
+        <ul>
+          <li>item 3
+            <ul>
+              <li>item 4
+                <ul>
+                  <li>item 5
+                    <ul>
+                      <li>item 6
+                        <ul>
+                          <li>item 7
+                            <ul>
+                              <li>item 8
+                                <ul>
+                                  <li>item 9</li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+.
+PegdownParser$PegdownRootNode[0, 0]
+````````````````````````````````
+
+
+```````````````````````````````` example Block quote parsing: 14
+1. item 1
+    1. item 2
+        1. item 3
+            1. item 4
+                1. item 5
+                    1. item 6
+                        1. item 7
+                            1. item 8
+                                1. item 9
+
+.
+<ol>
+  <li>item 1
+    <ol>
+      <li>item 2
+        <ol>
+          <li>item 3
+            <ol>
+              <li>item 4
+                <ol>
+                  <li>item 5
+                    <ol>
+                      <li>item 6
+                        <ol>
+                          <li>item 7
+                            <ol>
+                              <li>item 8
+                                <ol>
+                                  <li>item 9</li>
+                                </ol>
+                              </li>
+                            </ol>
+                          </li>
+                        </ol>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+.
+PegdownParser$PegdownRootNode[0, 0]
+````````````````````````````````
+
+

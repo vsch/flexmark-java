@@ -1197,7 +1197,92 @@ Document[0, 943]
 
 Test how list indentation is determined
 
+Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
+level.
+
 ```````````````````````````````` example List Item Indent Handling: 1
+* item 1
+ * item 2
+  * item 3
+   * item 4
+    * item 5
+     * item 6
+      * item 7
+       * item 8
+        * item 9
+         * item 10
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2</li>
+            <li>item 3
+                <ul>
+                    <li>item 4</li>
+                    <li>item 5
+                        <ul>
+                            <li>item 6</li>
+                            <li>item 7
+                                <ul>
+                                    <li>item 8</li>
+                                    <li>item 9
+                                        <ul>
+                                            <li>item 10</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 136]
+  BulletList[0, 136] isTight
+    BulletListItem[0, 136] open:[0, 1, "*"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[10, 136] isTight
+        BulletListItem[10, 19] open:[10, 11, "*"] isTight
+          Paragraph[12, 19]
+            Text[12, 18] chars:[12, 18, "item 2"]
+        BulletListItem[21, 136] open:[21, 22, "*"] isTight
+          Paragraph[23, 30]
+            Text[23, 29] chars:[23, 29, "item 3"]
+          BulletList[33, 136] isTight
+            BulletListItem[33, 42] open:[33, 34, "*"] isTight
+              Paragraph[35, 42]
+                Text[35, 41] chars:[35, 41, "item 4"]
+            BulletListItem[46, 136] open:[46, 47, "*"] isTight
+              Paragraph[48, 55]
+                Text[48, 54] chars:[48, 54, "item 5"]
+              BulletList[60, 136] isTight
+                BulletListItem[60, 69] open:[60, 61, "*"] isTight
+                  Paragraph[62, 69]
+                    Text[62, 68] chars:[62, 68, "item 6"]
+                BulletListItem[75, 136] open:[75, 76, "*"] isTight
+                  Paragraph[77, 84]
+                    Text[77, 83] chars:[77, 83, "item 7"]
+                  BulletList[91, 136] isTight
+                    BulletListItem[91, 100] open:[91, 92, "*"] isTight
+                      Paragraph[93, 100]
+                        Text[93, 99] chars:[93, 99, "item 8"]
+                    BulletListItem[108, 136] open:[108, 109, "*"] isTight
+                      Paragraph[110, 117]
+                        Text[110, 116] chars:[110, 116, "item 9"]
+                      BulletList[126, 136] isTight
+                        BulletListItem[126, 136] open:[126, 127, "*"] isTight
+                          Paragraph[128, 136]
+                            Text[128, 135] chars:[128, 135, "item 10"]
+````````````````````````````````
+
+
+Actual GitHub results. Not matched.
+
+```````````````````````````````` example(List Item Indent Handling: 2) options(FAIL)
 * item 1
  * item 2
   * item 3
@@ -1272,7 +1357,84 @@ Document[0, 136]
 Test if list indentation is determined on marker indent or content indent. If this and above
 test differ in list structure, then content indent is used. Otherwise, marker indent.
 
-```````````````````````````````` example List Item Indent Handling: 2
+Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
+level.
+
+```````````````````````````````` example List Item Indent Handling: 3
+*  item 1
+ *  item 2
+  *  item 3
+   *  item 4
+    *  item 5
+     *  item 6
+      *  item 7
+       *  item 8
+        *  item 9
+         *  item 10
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4
+                <ul>
+                    <li>item 5</li>
+                    <li>item 6</li>
+                    <li>item 7
+                        <ul>
+                            <li>item 8</li>
+                            <li>item 9</li>
+                            <li>item 10</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 146]
+  BulletList[0, 146] isTight
+    BulletListItem[0, 146] open:[0, 1, "*"] isTight
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+      BulletList[11, 146] isTight
+        BulletListItem[11, 21] open:[11, 12, "*"] isTight
+          Paragraph[14, 21]
+            Text[14, 20] chars:[14, 20, "item 2"]
+        BulletListItem[23, 33] open:[23, 24, "*"] isTight
+          Paragraph[26, 33]
+            Text[26, 32] chars:[26, 32, "item 3"]
+        BulletListItem[36, 146] open:[36, 37, "*"] isTight
+          Paragraph[39, 46]
+            Text[39, 45] chars:[39, 45, "item 4"]
+          BulletList[50, 146] isTight
+            BulletListItem[50, 60] open:[50, 51, "*"] isTight
+              Paragraph[53, 60]
+                Text[53, 59] chars:[53, 59, "item 5"]
+            BulletListItem[65, 75] open:[65, 66, "*"] isTight
+              Paragraph[68, 75]
+                Text[68, 74] chars:[68, 74, "item 6"]
+            BulletListItem[81, 146] open:[81, 82, "*"] isTight
+              Paragraph[84, 91]
+                Text[84, 90] chars:[84, 90, "item 7"]
+              BulletList[98, 146] isTight
+                BulletListItem[98, 108] open:[98, 99, "*"] isTight
+                  Paragraph[101, 108]
+                    Text[101, 107] chars:[101, 107, "item 8"]
+                BulletListItem[116, 126] open:[116, 117, "*"] isTight
+                  Paragraph[119, 126]
+                    Text[119, 125] chars:[119, 125, "item 9"]
+                BulletListItem[135, 146] open:[135, 136, "*"] isTight
+                  Paragraph[138, 146]
+                    Text[138, 145] chars:[138, 145, "item 10"]
+````````````````````````````````
+
+
+Actual GitHub results. Not matched.
+
+```````````````````````````````` example(List Item Indent Handling: 4) options(FAIL)
 *  item 1
  *  item 2
   *  item 3
@@ -1348,7 +1510,114 @@ Test to see if having a blank line in list item makes a difference on indent col
 If this list structure is the same as the one without blank lines, then had blank line status
 does not affect indentation level.
 
-```````````````````````````````` example List Item Indent Handling: 3
+Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
+level.
+
+```````````````````````````````` example List Item Indent Handling: 5
+* item 1
+
+ * item 2
+ 
+  * item 3
+  
+   * item 4
+   
+    * item 5
+    
+     * item 6
+     
+      * item 7
+      
+       * item 8
+       
+        * item 9
+        
+         * item 10
+.
+<ul>
+    <li>
+        <p>item 1</p>
+        <ul>
+            <li>
+                <p>item 2</p>
+            </li>
+            <li>
+                <p>item 3</p>
+                <ul>
+                    <li>
+                        <p>item 4</p>
+                    </li>
+                    <li>
+                        <p>item 5</p>
+                        <ul>
+                            <li>
+                                <p>item 6</p>
+                            </li>
+                            <li>
+                                <p>item 7</p>
+                                <ul>
+                                    <li>
+                                        <p>item 8</p>
+                                    </li>
+                                    <li>
+                                        <p>item 9</p>
+                                        <ul>
+                                            <li>item 10</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 181]
+  BulletList[0, 181] isTight
+    BulletListItem[0, 181] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[11, 181] isTight
+        BulletListItem[11, 20] open:[11, 12, "*"] isLoose hadBlankLineAfter
+          Paragraph[13, 20]
+            Text[13, 19] chars:[13, 19, "item 2"]
+        BulletListItem[24, 181] open:[24, 25, "*"] isLoose hadBlankLineAfter
+          Paragraph[26, 33]
+            Text[26, 32] chars:[26, 32, "item 3"]
+          BulletList[39, 181] isTight
+            BulletListItem[39, 48] open:[39, 40, "*"] isLoose hadBlankLineAfter
+              Paragraph[41, 48]
+                Text[41, 47] chars:[41, 47, "item 4"]
+            BulletListItem[56, 181] open:[56, 57, "*"] isLoose hadBlankLineAfter
+              Paragraph[58, 65]
+                Text[58, 64] chars:[58, 64, "item 5"]
+              BulletList[75, 181] isTight
+                BulletListItem[75, 84] open:[75, 76, "*"] isLoose hadBlankLineAfter
+                  Paragraph[77, 84]
+                    Text[77, 83] chars:[77, 83, "item 6"]
+                BulletListItem[96, 181] open:[96, 97, "*"] isLoose hadBlankLineAfter
+                  Paragraph[98, 105]
+                    Text[98, 104] chars:[98, 104, "item 7"]
+                  BulletList[119, 181] isTight
+                    BulletListItem[119, 128] open:[119, 120, "*"] isLoose hadBlankLineAfter
+                      Paragraph[121, 128]
+                        Text[121, 127] chars:[121, 127, "item 8"]
+                    BulletListItem[144, 181] open:[144, 145, "*"] isLoose hadBlankLineAfter
+                      Paragraph[146, 153]
+                        Text[146, 152] chars:[146, 152, "item 9"]
+                      BulletList[171, 181] isTight
+                        BulletListItem[171, 181] open:[171, 172, "*"] isTight
+                          Paragraph[173, 181]
+                            Text[173, 180] chars:[173, 180, "item 10"]
+````````````````````````````````
+
+
+Actual GitHub results. Not matched.
+
+```````````````````````````````` example(List Item Indent Handling: 6) options(FAIL)
 * item 1
 
  * item 2
@@ -1447,7 +1716,92 @@ Document[0, 181]
 Test to see if first item indent affect list indentation processing, if structure differs from
 same list but without leading first item space then yes.
 
-```````````````````````````````` example List Item Indent Handling: 4
+Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
+level.
+
+```````````````````````````````` example List Item Indent Handling: 7
+ * item 1
+  * item 2
+   * item 3
+    * item 4
+     * item 5
+      * item 6
+       * item 7
+        * item 8
+         * item 9
+          * item 10
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2</li>
+            <li>item 3
+                <ul>
+                    <li>item 4</li>
+                    <li>item 5
+                        <ul>
+                            <li>item 6</li>
+                            <li>item 7
+                                <ul>
+                                    <li>item 8</li>
+                                    <li>item 9
+                                        <ul>
+                                            <li>item 10</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 146]
+  BulletList[1, 146] isTight
+    BulletListItem[1, 146] open:[1, 2, "*"] isTight
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+      BulletList[12, 146] isTight
+        BulletListItem[12, 21] open:[12, 13, "*"] isTight
+          Paragraph[14, 21]
+            Text[14, 20] chars:[14, 20, "item 2"]
+        BulletListItem[24, 146] open:[24, 25, "*"] isTight
+          Paragraph[26, 33]
+            Text[26, 32] chars:[26, 32, "item 3"]
+          BulletList[37, 146] isTight
+            BulletListItem[37, 46] open:[37, 38, "*"] isTight
+              Paragraph[39, 46]
+                Text[39, 45] chars:[39, 45, "item 4"]
+            BulletListItem[51, 146] open:[51, 52, "*"] isTight
+              Paragraph[53, 60]
+                Text[53, 59] chars:[53, 59, "item 5"]
+              BulletList[66, 146] isTight
+                BulletListItem[66, 75] open:[66, 67, "*"] isTight
+                  Paragraph[68, 75]
+                    Text[68, 74] chars:[68, 74, "item 6"]
+                BulletListItem[82, 146] open:[82, 83, "*"] isTight
+                  Paragraph[84, 91]
+                    Text[84, 90] chars:[84, 90, "item 7"]
+                  BulletList[99, 146] isTight
+                    BulletListItem[99, 108] open:[99, 100, "*"] isTight
+                      Paragraph[101, 108]
+                        Text[101, 107] chars:[101, 107, "item 8"]
+                    BulletListItem[117, 146] open:[117, 118, "*"] isTight
+                      Paragraph[119, 126]
+                        Text[119, 125] chars:[119, 125, "item 9"]
+                      BulletList[136, 146] isTight
+                        BulletListItem[136, 146] open:[136, 137, "*"] isTight
+                          Paragraph[138, 146]
+                            Text[138, 145] chars:[138, 145, "item 10"]
+````````````````````````````````
+
+
+Actual GitHub results. Not matched.
+
+```````````````````````````````` example(List Item Indent Handling: 8) options(FAIL)
  * item 1
   * item 2
    * item 3
@@ -1521,7 +1875,38 @@ Document[0, 146]
 
 Test where lazy continuation affects list item processing.
 
-```````````````````````````````` example List Item Indent Handling: 5
+Not a complete match. Haven't figured out what rules GitHub uses for indentation removal at each
+level.
+
+```````````````````````````````` example List Item Indent Handling: 9
+* item 1
+       * item 2
+* item 3
+        * item 4
+.
+<ul>
+    <li>item 1 * item 2</li>
+    <li>item 3 * item 4</li>
+</ul>
+.
+Document[0, 51]
+  BulletList[0, 51] isTight
+    BulletListItem[0, 25] open:[0, 1, "*"] isTight
+      Paragraph[2, 25]
+        Text[2, 8] chars:[2, 8, "item 1"]
+        SoftLineBreak[8, 9]
+        Text[16, 24] chars:[16, 24, "* item 2"]
+    BulletListItem[25, 51] open:[25, 26, "*"] isTight
+      Paragraph[27, 51]
+        Text[27, 33] chars:[27, 33, "item 3"]
+        SoftLineBreak[33, 34]
+        Text[42, 50] chars:[42, 50, "* item 4"]
+````````````````````````````````
+
+
+Actual GitHub results. Not matched.
+
+```````````````````````````````` example(List Item Indent Handling: 10) options(FAIL)
 * item 1
        * item 2
 * item 3
@@ -1558,7 +1943,7 @@ affects sub-list indentation.
 
 Test if block quote can interrupt item paragraph
 
-```````````````````````````````` example List Item Indent Handling: 6
+```````````````````````````````` example List Item Indent Handling: 11
 * item 1
  * item 2
   * item 3
@@ -1596,7 +1981,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 7
+```````````````````````````````` example List Item Indent Handling: 12
 * item 1
  * item 2
   * item 3
@@ -1634,7 +2019,7 @@ Document[0, 81]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 8
+```````````````````````````````` example List Item Indent Handling: 13
 * item 1
  * item 2
   * item 3
@@ -1692,7 +2077,7 @@ Document[0, 81]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 9
+```````````````````````````````` example List Item Indent Handling: 14
 * item 1
  * item 2
   * item 3
@@ -1753,7 +2138,7 @@ Document[0, 84]
 Test shows where the boundary switch to indented code occurs. First paragraph is a paragraph,
 the second is indented code.
 
-```````````````````````````````` example List Item Indent Handling: 10
+```````````````````````````````` example List Item Indent Handling: 15
 -   test
     - sub item
 
@@ -1826,7 +2211,7 @@ Document[0, 178]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 11
+```````````````````````````````` example List Item Indent Handling: 16
 -   test
 
        item child para
@@ -1869,7 +2254,7 @@ Document[0, 178]
             <li>
                 <p>sub item</p>
                 <p>sub item child para</p>
-                <pre><code>sub item indented code
+                <pre><code>  sub item indented code
 </code></pre>
             </li>
         </ul>
@@ -1889,7 +2274,7 @@ Document[0, 178]
             <li>
                 <p>sub item</p>
                 <p>sub item child para</p>
-                <pre><code>sub item indented code
+                <pre><code> sub item indented code
 </code></pre>
             </li>
         </ol>
@@ -1913,7 +2298,7 @@ Document[0, 331]
             Text[82, 90] chars:[82, 90, "sub item"]
           Paragraph[103, 123]
             Text[103, 122] chars:[103, 122, "sub i …  para"]
-          IndentedCodeBlock[136, 159]
+          IndentedCodeBlock[134, 159]
   ThematicBreak[170, 173]
   OrderedList[175, 330] isTight delimiter:'.'
     OrderedListItem[175, 236] open:[175, 177, "1."] isLoose hadBlankLineAfter
@@ -1931,7 +2316,7 @@ Document[0, 331]
             Text[253, 261] chars:[253, 261, "sub item"]
           Paragraph[274, 294]
             Text[274, 293] chars:[274, 293, "sub i …  para"]
-          IndentedCodeBlock[307, 330]
+          IndentedCodeBlock[306, 330]
 ````````````````````````````````
 
 
@@ -1940,7 +2325,7 @@ paragraph is a paragraph, the second is indented code
 
 Not a complete match to GitHub, see next example
 
-```````````````````````````````` example List Item Indent Handling: 12
+```````````````````````````````` example List Item Indent Handling: 17
 * item 1
     
   item para 1
@@ -2030,7 +2415,7 @@ Not a complete match to GitHub, see next example
         <p>item para 4</p>
         <p>item para 5</p>
         <p>item para 6</p>
-        <pre><code>item para 7
+        <pre><code>  item para 7
 </code></pre>
         <ul>
             <li>
@@ -2051,27 +2436,32 @@ Not a complete match to GitHub, see next example
                 <p>item para 4</p>
                 <p>item para 5</p>
                 <p>item para 6</p>
-                <p>item para 7</p>
-            </li>
-            <li>
-                <p>item 4</p>
+                <pre><code>  item para 7
+</code></pre>
+                <ul>
+                    <li>item 4</li>
+                </ul>
                 <p>item para 1</p>
                 <p>item para 2</p>
                 <p>item para 3</p>
                 <p>item para 4</p>
                 <p>item para 5</p>
-                <p>item para 6</p>
-                <p>item para 7</p>
-            </li>
-            <li>
-                <p>item 5</p>
+                <pre><code>  item para 6
+
+   item para 7
+</code></pre>
+                <ul>
+                    <li>item 5</li>
+                </ul>
                 <p>item para 1</p>
                 <p>item para 2</p>
                 <p>item para 3</p>
                 <p>item para 4</p>
-                <p>item para 5</p>
-                <p>item para 6</p>
-                <pre><code>item para 7
+                <pre><code>  item para 5
+
+   item para 6
+
+    item para 7
 </code></pre>
             </li>
         </ul>
@@ -2095,7 +2485,7 @@ Document[0, 982]
         Text[100, 111] chars:[100, 111, "item  … ara 5"]
       Paragraph[126, 138]
         Text[126, 137] chars:[126, 137, "item  … ara 6"]
-      IndentedCodeBlock[154, 166]
+      IndentedCodeBlock[152, 166]
       BulletList[176, 982] isTight
         BulletListItem[176, 355] open:[176, 177, "*"] isLoose hadBlankLineAfter
           Paragraph[178, 185]
@@ -2114,7 +2504,7 @@ Document[0, 982]
             Text[313, 324] chars:[313, 324, "item  … ara 6"]
           Paragraph[343, 355]
             Text[343, 354] chars:[343, 354, "item  … ara 7"]
-        BulletListItem[366, 558] open:[366, 367, "*"] isLoose hadBlankLineAfter
+        BulletListItem[366, 982] open:[366, 367, "*"] isLoose hadBlankLineAfter
           Paragraph[368, 375]
             Text[368, 374] chars:[368, 374, "item 3"]
           Paragraph[384, 396]
@@ -2129,11 +2519,11 @@ Document[0, 982]
             Text[484, 495] chars:[484, 495, "item  … ara 5"]
           Paragraph[514, 526]
             Text[514, 525] chars:[514, 525, "item  … ara 6"]
-          Paragraph[546, 558]
-            Text[546, 557] chars:[546, 557, "item  … ara 7"]
-        BulletListItem[570, 775] open:[570, 571, "*"] isLoose hadBlankLineAfter
-          Paragraph[572, 579]
-            Text[572, 578] chars:[572, 578, "item 4"]
+          IndentedCodeBlock[544, 558]
+          BulletList[570, 579] isTight
+            BulletListItem[570, 579] open:[570, 571, "*"] isTight hadBlankLineAfter
+              Paragraph[572, 579]
+                Text[572, 578] chars:[572, 578, "item 4"]
           Paragraph[589, 601]
             Text[589, 600] chars:[589, 600, "item  … ara 1"]
           Paragraph[613, 625]
@@ -2144,13 +2534,11 @@ Document[0, 982]
             Text[667, 678] chars:[667, 678, "item  … ara 4"]
           Paragraph[697, 709]
             Text[697, 708] chars:[697, 708, "item  … ara 5"]
-          Paragraph[729, 741]
-            Text[729, 740] chars:[729, 740, "item  … ara 6"]
-          Paragraph[763, 775]
-            Text[763, 774] chars:[763, 774, "item  … ara 7"]
-        BulletListItem[788, 982] open:[788, 789, "*"] isLoose hadBlankLineAfter
-          Paragraph[790, 797]
-            Text[790, 796] chars:[790, 796, "item 5"]
+          IndentedCodeBlock[727, 775]
+          BulletList[788, 797] isTight
+            BulletListItem[788, 797] open:[788, 789, "*"] isTight hadBlankLineAfter
+              Paragraph[790, 797]
+                Text[790, 796] chars:[790, 796, "item 5"]
           Paragraph[808, 820]
             Text[808, 819] chars:[808, 819, "item  … ara 1"]
           Paragraph[830, 842]
@@ -2159,17 +2547,13 @@ Document[0, 982]
             Text[854, 865] chars:[854, 865, "item  … ara 3"]
           Paragraph[880, 892]
             Text[880, 891] chars:[880, 891, "item  … ara 4"]
-          Paragraph[908, 920]
-            Text[908, 919] chars:[908, 919, "item  … ara 5"]
-          Paragraph[938, 950]
-            Text[938, 949] chars:[938, 949, "item  … ara 6"]
-          IndentedCodeBlock[970, 982]
+          IndentedCodeBlock[906, 982]
 ````````````````````````````````
 
 
 Cannot generate exact GitHub idiosyncrasies
 
-```````````````````````````````` example(List Item Indent Handling: 13) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 18) options(FAIL)
 * item 1
     
   item para 1
@@ -2317,7 +2701,7 @@ the previous list item. There was one that did it that way, GitHub comments if I
 right, but now they switched to commonmark list handling with mods. Guess it is now GFC--GitHub
 Flavoured Commonmark.
 
-```````````````````````````````` example List Item Indent Handling: 14
+```````````````````````````````` example List Item Indent Handling: 19
 *  item 1
    * item 2
   * item 3
@@ -2348,7 +2732,7 @@ Document[0, 33]
 
 Test how headings in list items are handled, leading space allowed or not
 
-```````````````````````````````` example List Item Indent Handling: 15
+```````````````````````````````` example List Item Indent Handling: 20
 * item 1
   # Heading 1
    ## Heading 2
@@ -2418,7 +2802,7 @@ Document[0, 261]
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 16
+```````````````````````````````` example List Item Indent Handling: 21
 * item 1
   # Heading 1
    ## Heading 2
@@ -2454,12 +2838,16 @@ Document[0, 261]
                 <h2 id="heading-2">Heading 2</h2>
                 <h3 id="heading-3">Heading 3</h3>
                 <p>#### Heading 4 ##### Heading 5 ###### Heading 6</p>
-            </li>
-            <li>
-                <p>item 3</p>
-                <h1 id="heading-1-2">Heading 1</h1>
-                <h2 id="heading-2-1">Heading 2</h2>
-                <p>### Heading 3 #### Heading 4 ##### Heading 5 ###### Heading 6</p>
+                <ul>
+                    <li>
+                        <p>item 3</p>
+                        <h1 id="heading-1-2">Heading 1</h1>
+                        <h2 id="heading-2-1">Heading 2</h2>
+                        <h3 id="heading-3-1">Heading 3</h3>
+                        <h4 id="heading-4">Heading 4</h4>
+                        <p>##### Heading 5 ###### Heading 6</p>
+                    </li>
+                </ul>
             </li>
         </ul>
     </li>
@@ -2483,7 +2871,7 @@ Document[0, 405]
         SoftLineBreak[98, 99]
         Text[106, 122] chars:[106, 122, "##### … ing 6"]
       BulletList[125, 404] isTight
-        BulletListItem[125, 260] open:[125, 126, "*"] isLoose
+        BulletListItem[125, 404] open:[125, 126, "*"] isLoose
           Paragraph[127, 134]
             Text[127, 133] chars:[127, 133, "item 2"]
           Heading[138, 149] textOpen:[138, 139, "#"] text:[140, 149, "Heading 1"]
@@ -2498,28 +2886,29 @@ Document[0, 405]
             Text[218, 233] chars:[218, 233, "##### … ing 5"]
             SoftLineBreak[233, 234]
             Text[243, 259] chars:[243, 259, "##### … ing 6"]
-        BulletListItem[263, 404] open:[263, 264, "*"] isLoose
-          Paragraph[265, 272]
-            Text[265, 271] chars:[265, 271, "item 3"]
-          Heading[277, 288] textOpen:[277, 278, "#"] text:[279, 288, "Heading 1"]
-            Text[279, 288] chars:[279, 288, "Heading 1"]
-          Heading[295, 307] textOpen:[295, 297, "##"] text:[298, 307, "Heading 2"]
-            Text[298, 307] chars:[298, 307, "Heading 2"]
-          Paragraph[315, 404]
-            Text[315, 328] chars:[315, 328, "### H … ing 3"]
-            SoftLineBreak[328, 329]
-            Text[337, 351] chars:[337, 351, "####  … ing 4"]
-            SoftLineBreak[351, 352]
-            Text[361, 376] chars:[361, 376, "##### … ing 5"]
-            SoftLineBreak[376, 377]
-            Text[387, 403] chars:[387, 403, "##### … ing 6"]
+          BulletList[263, 404] isTight
+            BulletListItem[263, 404] open:[263, 264, "*"] isLoose
+              Paragraph[265, 272]
+                Text[265, 271] chars:[265, 271, "item 3"]
+              Heading[277, 288] textOpen:[277, 278, "#"] text:[279, 288, "Heading 1"]
+                Text[279, 288] chars:[279, 288, "Heading 1"]
+              Heading[295, 307] textOpen:[295, 297, "##"] text:[298, 307, "Heading 2"]
+                Text[298, 307] chars:[298, 307, "Heading 2"]
+              Heading[315, 328] textOpen:[315, 318, "###"] text:[319, 328, "Heading 3"]
+                Text[319, 328] chars:[319, 328, "Heading 3"]
+              Heading[337, 351] textOpen:[337, 341, "####"] text:[342, 351, "Heading 4"]
+                Text[342, 351] chars:[342, 351, "Heading 4"]
+              Paragraph[361, 404]
+                Text[361, 376] chars:[361, 376, "##### … ing 5"]
+                SoftLineBreak[376, 377]
+                Text[387, 403] chars:[387, 403, "##### … ing 6"]
 ````````````````````````````````
 
 
 GitHub processes ATX headings if the list has a blank line, cannot do that. More accurately, can
 but this is a KLUDGE in GitHub that is not supported.
 
-```````````````````````````````` example(List Item Indent Handling: 17) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 22) options(FAIL)
 * item 1
   # Heading 1
    ## Heading 2
@@ -2556,7 +2945,7 @@ but this is a KLUDGE in GitHub that is not supported.
 GitHub processes ATX headings if the list has a blank line, cannot do that. More accurately, can
 but this is a KLUDGE in GitHub that is not supported.
 
-```````````````````````````````` example(List Item Indent Handling: 18) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 23) options(FAIL)
 * item 1
   # Heading 1
    ## Heading 2
@@ -2615,7 +3004,7 @@ but this is a KLUDGE in GitHub that is not supported.
 Not an exact match, GitHub has idiosyncrasies in its leading space removal that are not
 duplicated.
 
-```````````````````````````````` example List Item Indent Handling: 19
+```````````````````````````````` example List Item Indent Handling: 24
 * item 1
 
   # Heading 1
@@ -2706,7 +3095,7 @@ Document[0, 296]
 
 GitHub idosyncrasies not duplicated
 
-```````````````````````````````` example(List Item Indent Handling: 20) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 25) options(FAIL)
 * item 1
 
   # Heading 1
@@ -2765,7 +3154,7 @@ GitHub idosyncrasies not duplicated
 Not an exact match, GitHub has idiosyncrasies in its leading space removal that are not
 duplicated.
 
-```````````````````````````````` example List Item Indent Handling: 21
+```````````````````````````````` example List Item Indent Handling: 26
 * item 1
 
   # Heading 1
@@ -2827,15 +3216,16 @@ duplicated.
                 <p>#### Heading 4</p>
                 <p>##### Heading 5</p>
                 <p>###### Heading 6</p>
-            </li>
-            <li>
-                <p>item 3</p>
+                <ul>
+                    <li>item 3</li>
+                </ul>
                 <h1 id="heading-1-2">Heading 1</h1>
                 <h2 id="heading-2-1">Heading 2</h2>
                 <p>### Heading 3</p>
                 <p>#### Heading 4</p>
                 <p>##### Heading 5</p>
-                <p>###### Heading 6</p>
+                <pre><code>  ###### Heading 6
+</code></pre>
             </li>
         </ul>
     </li>
@@ -2859,7 +3249,7 @@ Document[0, 480]
       Paragraph[112, 129]
         Text[112, 128] chars:[112, 128, "##### … ing 6"]
       BulletList[132, 476] isTight
-        BulletListItem[132, 295] open:[132, 133, "*"] isLoose hadBlankLineAfter
+        BulletListItem[132, 476] open:[132, 133, "*"] isLoose hadBlankLineAfter
           Paragraph[134, 141]
             Text[134, 140] chars:[134, 140, "item 2"]
           Heading[146, 157] textOpen:[146, 147, "#"] text:[148, 157, "Heading 1"]
@@ -2874,9 +3264,10 @@ Document[0, 480]
             Text[246, 261] chars:[246, 261, "##### … ing 5"]
           Paragraph[278, 295]
             Text[278, 294] chars:[278, 294, "##### … ing 6"]
-        BulletListItem[299, 476] open:[299, 300, "*"] isLoose hadBlankLineAfter
-          Paragraph[301, 308]
-            Text[301, 307] chars:[301, 307, "item 3"]
+          BulletList[299, 308] isTight
+            BulletListItem[299, 308] open:[299, 300, "*"] isTight hadBlankLineAfter
+              Paragraph[301, 308]
+                Text[301, 307] chars:[301, 307, "item 3"]
           Heading[317, 328] textOpen:[317, 318, "#"] text:[319, 328, "Heading 1"]
             Text[319, 328] chars:[319, 328, "Heading 1"]
           Heading[341, 353] textOpen:[341, 343, "##"] text:[344, 353, "Heading 2"]
@@ -2887,14 +3278,13 @@ Document[0, 480]
             Text[395, 409] chars:[395, 409, "####  … ing 4"]
           Paragraph[425, 441]
             Text[425, 440] chars:[425, 440, "##### … ing 5"]
-          Paragraph[459, 476]
-            Text[459, 475] chars:[459, 475, "##### … ing 6"]
+          IndentedCodeBlock[457, 476]
 ````````````````````````````````
 
 
 GitHub idosyncrasies not duplicated
 
-```````````````````````````````` example(List Item Indent Handling: 22) options(FAIL)
+```````````````````````````````` example(List Item Indent Handling: 27) options(FAIL)
 * item 1
 
   # Heading 1
@@ -2973,7 +3363,7 @@ GitHub idosyncrasies not duplicated
 ````````````````````````````````
 
 
-```````````````````````````````` example List Item Indent Handling: 23
+```````````````````````````````` example List Item Indent Handling: 28
 * item 1
 *  item 2
 *   item 3
@@ -3409,6 +3799,222 @@ Document[0, 88]
       BlockQuote[68, 87] marker:[68, 69, ">"]
         Paragraph[69, 87]
           Text[69, 86] chars:[69, 86, "block …  text"]
+````````````````````````````````
+
+
+```````````````````````````````` example Block quote parsing: 13
+- item 1
+  - sub-item 1
+    1. sub-sub-item 1
+    1. sub-sub-item 2
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>sub-item 1
+                <ol>
+                    <li>sub-sub-item 1</li>
+                    <li>sub-sub-item 2</li>
+                </ol>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 68]
+  BulletList[0, 68] isTight
+    BulletListItem[0, 68] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[11, 68] isTight
+        BulletListItem[11, 68] open:[11, 12, "-"] isTight
+          Paragraph[13, 24]
+            Text[13, 23] chars:[13, 23, "sub-item 1"]
+          OrderedList[28, 68] isTight delimiter:'.'
+            OrderedListItem[28, 46] open:[28, 30, "1."] isTight
+              Paragraph[31, 46]
+                Text[31, 45] chars:[31, 45, "sub-s … tem 1"]
+            OrderedListItem[50, 68] open:[50, 52, "1."] isTight
+              Paragraph[53, 68]
+                Text[53, 67] chars:[53, 67, "sub-s … tem 2"]
+````````````````````````````````
+
+
+Test to make sure content indented deeply nested lists process correctly
+
+```````````````````````````````` example Block quote parsing: 14
+- item 1
+  - item 2
+    - item 3
+      - item 4
+        - item 5
+          - item 6
+            - item 7
+              - item 8
+                - item 9
+
+.
+<ul>
+    <li>item 1
+        <ul>
+            <li>item 2
+                <ul>
+                    <li>item 3
+                        <ul>
+                            <li>item 4
+                                <ul>
+                                    <li>item 5
+                                        <ul>
+                                            <li>item 6
+                                                <ul>
+                                                    <li>item 7
+                                                        <ul>
+                                                            <li>item 8
+                                                                <ul>
+                                                                    <li>item 9</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+.
+Document[0, 154]
+  BulletList[0, 153] isTight
+    BulletListItem[0, 153] open:[0, 1, "-"] isTight
+      Paragraph[2, 9]
+        Text[2, 8] chars:[2, 8, "item 1"]
+      BulletList[11, 153] isTight
+        BulletListItem[11, 153] open:[11, 12, "-"] isTight
+          Paragraph[13, 20]
+            Text[13, 19] chars:[13, 19, "item 2"]
+          BulletList[24, 153] isTight
+            BulletListItem[24, 153] open:[24, 25, "-"] isTight
+              Paragraph[26, 33]
+                Text[26, 32] chars:[26, 32, "item 3"]
+              BulletList[39, 153] isTight
+                BulletListItem[39, 153] open:[39, 40, "-"] isTight
+                  Paragraph[41, 48]
+                    Text[41, 47] chars:[41, 47, "item 4"]
+                  BulletList[56, 153] isTight
+                    BulletListItem[56, 153] open:[56, 57, "-"] isTight
+                      Paragraph[58, 65]
+                        Text[58, 64] chars:[58, 64, "item 5"]
+                      BulletList[75, 153] isTight
+                        BulletListItem[75, 153] open:[75, 76, "-"] isTight
+                          Paragraph[77, 84]
+                            Text[77, 83] chars:[77, 83, "item 6"]
+                          BulletList[96, 153] isTight
+                            BulletListItem[96, 153] open:[96, 97, "-"] isTight
+                              Paragraph[98, 105]
+                                Text[98, 104] chars:[98, 104, "item 7"]
+                              BulletList[119, 153] isTight
+                                BulletListItem[119, 153] open:[119, 120, "-"] isTight
+                                  Paragraph[121, 128]
+                                    Text[121, 127] chars:[121, 127, "item 8"]
+                                  BulletList[144, 153] isTight
+                                    BulletListItem[144, 153] open:[144, 145, "-"] isTight hadBlankLineAfter
+                                      Paragraph[146, 153]
+                                        Text[146, 152] chars:[146, 152, "item 9"]
+````````````````````````````````
+
+
+```````````````````````````````` example Block quote parsing: 15
+1. item 1
+   1. item 2
+      1. item 3
+         1. item 4
+            1. item 5
+               1. item 6
+                  1. item 7
+                     1. item 8
+                        1. item 9
+
+.
+<ol>
+    <li>item 1
+        <ol>
+            <li>item 2
+                <ol>
+                    <li>item 3
+                        <ol>
+                            <li>item 4
+                                <ol>
+                                    <li>item 5
+                                        <ol>
+                                            <li>item 6
+                                                <ol>
+                                                    <li>item 7
+                                                        <ol>
+                                                            <li>item 8
+                                                                <ol>
+                                                                    <li>item 9</li>
+                                                                </ol>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                            </li>
+                                        </ol>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </li>
+        </ol>
+    </li>
+</ol>
+.
+Document[0, 199]
+  OrderedList[0, 198] isTight delimiter:'.'
+    OrderedListItem[0, 198] open:[0, 2, "1."] isTight
+      Paragraph[3, 10]
+        Text[3, 9] chars:[3, 9, "item 1"]
+      OrderedList[13, 198] isTight delimiter:'.'
+        OrderedListItem[13, 198] open:[13, 15, "1."] isTight
+          Paragraph[16, 23]
+            Text[16, 22] chars:[16, 22, "item 2"]
+          OrderedList[29, 198] isTight delimiter:'.'
+            OrderedListItem[29, 198] open:[29, 31, "1."] isTight
+              Paragraph[32, 39]
+                Text[32, 38] chars:[32, 38, "item 3"]
+              OrderedList[48, 198] isTight delimiter:'.'
+                OrderedListItem[48, 198] open:[48, 50, "1."] isTight
+                  Paragraph[51, 58]
+                    Text[51, 57] chars:[51, 57, "item 4"]
+                  OrderedList[70, 198] isTight delimiter:'.'
+                    OrderedListItem[70, 198] open:[70, 72, "1."] isTight
+                      Paragraph[73, 80]
+                        Text[73, 79] chars:[73, 79, "item 5"]
+                      OrderedList[95, 198] isTight delimiter:'.'
+                        OrderedListItem[95, 198] open:[95, 97, "1."] isTight
+                          Paragraph[98, 105]
+                            Text[98, 104] chars:[98, 104, "item 6"]
+                          OrderedList[123, 198] isTight delimiter:'.'
+                            OrderedListItem[123, 198] open:[123, 125, "1."] isTight
+                              Paragraph[126, 133]
+                                Text[126, 132] chars:[126, 132, "item 7"]
+                              OrderedList[154, 198] isTight delimiter:'.'
+                                OrderedListItem[154, 198] open:[154, 156, "1."] isTight
+                                  Paragraph[157, 164]
+                                    Text[157, 163] chars:[157, 163, "item 8"]
+                                  OrderedList[188, 198] isTight delimiter:'.'
+                                    OrderedListItem[188, 198] open:[188, 190, "1."] isTight hadBlankLineAfter
+                                      Paragraph[191, 198]
+                                        Text[191, 197] chars:[191, 197, "item 9"]
 ````````````````````````````````
 
 

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.1](#0111)
 - [0.11.0](#0110)
 - [0.10.3](#0103)
 - [0.10.2](#0102)
@@ -100,6 +101,14 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.1
+------
+
+- Fix: GitHub profile to correctly parse deeply nested, content indent aligned lists at the
+  expense of matching poorly formatted markdown matching. GitHub Doc profile has many
+  differences from GitHub parsing for edge cases because GitHub has very unorthodox and
+  irregular parsing rules that I have not been able to completely figure out.
 
 0.11.0
 ------

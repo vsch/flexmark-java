@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
-    private static final String SPEC_RESOURCE = "/pegdown_compatibility_spec.md";
+    private static final String SPEC_RESOURCE = "/pegdown_profile_compatibility_spec.md";
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.FENCED_CODE_BLOCKS
     ).toMutable()
