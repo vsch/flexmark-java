@@ -11,3 +11,5 @@ target/
 /.idea/workspace.xml
 /flexmark-java.wiki
 /FlexmarkJavaAssets/
+/lib/autolink-0.6.0.jar
+/lib/autolink-0.6.0-sources.jar
