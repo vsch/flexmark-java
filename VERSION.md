@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.2](#0112)
 - [0.11.1](#0111)
 - [0.11.0](#0110)
 - [0.10.3](#0103)
@@ -101,6 +102,12 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.2
+------
+
+* Remove: `ReversedCharSequence` and `IndexMapper` because these were moved to
+  `reverse-regex-util` library that implements reverse search using regex.
 
 0.11.1
 ------

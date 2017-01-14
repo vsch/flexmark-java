@@ -7,7 +7,6 @@ import com.vladsch.flexmark.util.options.AttributesTest;
 import com.vladsch.flexmark.util.options.MutableAttributeTest;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImplTest;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequenceTest;
-import com.vladsch.flexmark.util.sequence.ReversedCharSequenceTest;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -23,7 +22,6 @@ import org.junit.runners.Suite;
         AttributesTest.class,
         FormattingAppendableImplTest.class,
         RepeatedCharSequenceTest.class,
-        ReversedCharSequenceTest.class,
         HtmlFormattingAppendableBaseTest.class,
 })
 public class UtilsTestSuite {

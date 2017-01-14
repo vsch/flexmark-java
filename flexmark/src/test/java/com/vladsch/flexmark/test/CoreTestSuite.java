@@ -16,13 +16,13 @@ import org.junit.runners.Suite;
         ComboExtraSpecTest.class,
         SpecialInputTest.class,
         UsageExampleTest.class,
-        //ComboParserCompatibilitySpecTest.class,
         ComboCommonMarkCompatibilitySpecTest.class,
         ComboMultiMarkdownCompatibilitySpecTest.class,
         ComboKramdownCompatibilitySpecTest.class,
         ComboMarkdownCompatibilitySpecTest.class,
         ComboGitHubCompatibilitySpecTest.class,
         ComboPegdownCompatibilitySpecTest.class,
+        ComboIssuesSpecTest.class,
 })
 public class CoreTestSuite {
 }
