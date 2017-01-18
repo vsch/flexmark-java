@@ -1,3 +1,0 @@
-<component name="DependencyValidationManager">
-  <scope name="Wiki Link Overview" pattern="file[flexmark-ext-wikilink]:src/main/javadoc/overview.md" />
-</component>

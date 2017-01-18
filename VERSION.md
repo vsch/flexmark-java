@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.3](#0113)
 - [0.11.2](#0112)
 - [0.11.1](#0111)
 - [0.11.0](#0110)
@@ -102,6 +103,18 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.3
+------
+
+* Add: `Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE` option when `true` and
+  `Parser.HEADING_NO_ATX_SPACE` is false then bare `#`'s are not interpreted as headings unless
+  they are followed by at least one space or tab character.
+
+* Fix: treat spaces and tabs for purpose of heading parsing as equivalent
+
+* Add: `flexmark-ext-xwiki-macros` xwiki application specific macro extension, for now only the
+  block macros are implemented. Inline are treated as text.
 
 0.11.2
 ------

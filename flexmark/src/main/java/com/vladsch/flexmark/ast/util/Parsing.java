@@ -124,10 +124,8 @@ public class Parsing {
         this.DOUBLEQUOTEDVALUE = "\"[^\"]*\"";
         this.ATTRIBUTEVALUE = "(?:" + UNQUOTEDVALUE + "|" + SINGLEQUOTEDVALUE
                 + "|" + DOUBLEQUOTEDVALUE + ")";
-        this.ATTRIBUTEVALUESPEC = "(?:" + "\\s*=" + "\\s*" + ATTRIBUTEVALUE
-                + ")";
-        this.ATTRIBUTE = "(?:" + "\\s+" + ATTRIBUTENAME + ATTRIBUTEVALUESPEC
-                + "?)";
+        this.ATTRIBUTEVALUESPEC = "(?:" + "\\s*=" + "\\s*" + ATTRIBUTEVALUE + ")";
+        this.ATTRIBUTE = "(?:" + "\\s+" + ATTRIBUTENAME + ATTRIBUTEVALUESPEC + "?)";
 
         this.OPENTAG = "<" + TAGNAME + ATTRIBUTE + "*" + "\\s*/?>";
         this.CLOSETAG = "</" + TAGNAME + "\\s*[>]";

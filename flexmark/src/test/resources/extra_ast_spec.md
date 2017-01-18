@@ -365,9 +365,83 @@ Document[0, 24]
 
 ## Heading options
 
+If allow atx headers without a space between # and the title is false, don't treat bare `#`'s
+without a trailing space as empty headings
+
+```````````````````````````````` example(Heading options: 1) options(no-empty-heading-without-space)
+#
+
+##
+
+###
+
+####
+
+#####
+
+######
+
+.
+<p>#</p>
+<p>##</p>
+<p>###</p>
+<p>####</p>
+<p>#####</p>
+<p>######</p>
+.
+Document[0, 33]
+  Paragraph[0, 2]
+    Text[0, 1] chars:[0, 1, "#"]
+  Paragraph[3, 6]
+    Text[3, 5] chars:[3, 5, "##"]
+  Paragraph[7, 11]
+    Text[7, 10] chars:[7, 10, "###"]
+  Paragraph[12, 17]
+    Text[12, 16] chars:[12, 16, "####"]
+  Paragraph[18, 24]
+    Text[18, 23] chars:[18, 23, "#####"]
+  Paragraph[25, 32]
+    Text[25, 31] chars:[25, 31, "######"]
+````````````````````````````````
+
+
+If allow atx headers without a space between # and the title is false, treat bare `#`'s with a
+trailing space as empty headings
+
+```````````````````````````````` example(Heading options: 2) options(no-empty-heading-without-space)
+# 
+
+## 
+
+### 
+
+#### 
+
+##### 
+
+###### 
+
+.
+<h1></h1>
+<h2></h2>
+<h3></h3>
+<h4></h4>
+<h5></h5>
+<h6></h6>
+.
+Document[0, 39]
+  Heading[0, 2] textOpen:[0, 1, "#"] text:[2, 2]
+  Heading[4, 7] textOpen:[4, 6, "##"] text:[7, 7]
+  Heading[9, 13] textOpen:[9, 12, "###"] text:[13, 13]
+  Heading[15, 20] textOpen:[15, 19, "####"] text:[20, 20]
+  Heading[22, 28] textOpen:[22, 27, "#####"] text:[28, 28]
+  Heading[30, 37] textOpen:[30, 36, "######"] text:[37, 37]
+````````````````````````````````
+
+
 Allow atx headers without a space between # and the title
 
-```````````````````````````````` example(Heading options: 1) options(hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 3) options(hdr-no-atx-space)
 #Heading
 ##Heading
 ###Heading
@@ -425,7 +499,7 @@ Document[0, 150]
 
 Don't allow leading spaces
 
-```````````````````````````````` example(Heading options: 2) options(hdr-no-lead-space)
+```````````````````````````````` example(Heading options: 4) options(hdr-no-lead-space)
  # Heading
  ## Heading
  ### Heading
@@ -458,7 +532,7 @@ Document[0, 80]
 
 Don't allow leading spaces, don't require atx marker space
 
-```````````````````````````````` example(Heading options: 3) options(hdr-no-lead-space, hdr-no-atx-space)
+```````````````````````````````` example(Heading options: 5) options(hdr-no-lead-space, hdr-no-atx-space)
  #Heading
  ##Heading
  ###Heading
@@ -491,7 +565,7 @@ Document[0, 74]
 
 Minimum setext marker length 3
 
-```````````````````````````````` example(Heading options: 4) options(setext-marker-length)
+```````````````````````````````` example(Heading options: 6) options(setext-marker-length)
 Not a Heading 1
 =
  
@@ -549,7 +623,7 @@ Document[0, 116]
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 5) options(setext-marker-length, empty-bullet-no-sub-item-break)
+```````````````````````````````` example(Heading options: 7) options(setext-marker-length, empty-bullet-no-sub-item-break)
 - item 
   - 
  
@@ -571,7 +645,7 @@ Document[0, 15]
 
 Minimum setext marker length 3 in lists
 
-```````````````````````````````` example(Heading options: 6) options(setext-marker-length, empty-bullet-sub-item-break)
+```````````````````````````````` example(Heading options: 8) options(setext-marker-length, empty-bullet-sub-item-break)
 - item 
   - 
  

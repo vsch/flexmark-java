@@ -23,6 +23,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" filepath="$PROJECT_DIR$/flexmark-ext-toc/flexmark-ext-toc.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" filepath="$PROJECT_DIR$/flexmark-ext-typographic/flexmark-ext-typographic.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" filepath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" filepath="$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" filepath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
