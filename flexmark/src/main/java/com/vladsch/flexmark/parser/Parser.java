@@ -160,6 +160,7 @@ public class Parser implements IParse {
     private final DocumentParser.ParagraphPreProcessorDependencies paragraphPreProcessorFactories;
     private final DocumentParser.BlockPreProcessorDependencies blockPreProcessorDependencies;
     private final LinkRefProcessorData linkRefProcessors;
+    private final List<InlineParserExtensionFactory> inlineParserExtensionFactories;
     private final InlineParserFactory inlineParserFactory;
     private final DataHolder options;
 
@@ -175,6 +176,7 @@ public class Parser implements IParse {
         this.linkRefProcessors = InlineParserImpl.calculateLinkRefProcessors(this.options, builder.linkRefProcessors);
         this.specialCharacters = InlineParserImpl.calculateSpecialCharacters(this.options, delimiterCharacters);
         this.postProcessorDependencies = PostProcessorManager.calculatePostProcessors(this.options, builder.postProcessorFactories);
+        this.inlineParserExtensionFactories = builder.inlineParserExtensionFactories;
     }
 
     /**
@@ -200,7 +202,7 @@ public class Parser implements IParse {
      */
     public Node parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
+                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -215,7 +217,7 @@ public class Parser implements IParse {
      */
     public Node parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
+                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(CharSubSequence.of(input));
         return postProcess(document);
     }
@@ -231,7 +233,7 @@ public class Parser implements IParse {
      */
     public Node parseReader(Reader input) throws IOException {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
-                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors));
+                blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
         return postProcess(document);
     }
@@ -255,6 +257,7 @@ public class Parser implements IParse {
         private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
         private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
         private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
+        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
         private InlineParserFactory inlineParserFactory = null;
         private final HashSet<ParserExtension> loadedExtensions = new HashSet<>();
 
@@ -339,6 +342,11 @@ public class Parser implements IParse {
          */
         public Builder customBlockParserFactory(CustomBlockParserFactory blockParserFactory) {
             blockParserFactories.add(blockParserFactory);
+            return this;
+        }
+
+        public Builder customInlineParserExtensionFactory(InlineParserExtensionFactory inlineParserExtensionFactory) {
+            inlineParserExtensionFactories.add(inlineParserExtensionFactory);
             return this;
         }
 

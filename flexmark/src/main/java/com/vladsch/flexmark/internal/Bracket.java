@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * Opening bracket for links (<code>[</code>) or images (<code>![</code>).
  */
-class Bracket {
+public class Bracket {
     final Text node;
     final int index;
     final boolean image;
@@ -32,15 +32,15 @@ class Bracket {
      * determined by next != null
      */
     boolean bracketAfter = false;
-    
+
     int getStartIndex() {
         return index;
     }
-    
+
     int getEndIndex() {
         return image ? index + 2 : index + 1;
     }
-    
+
     static Bracket link(BasedSequence input, Text node, int index, Bracket previous, Delimiter previousDelimiter) {
         return new Bracket(input, node, index, previous, previousDelimiter, false);
     }

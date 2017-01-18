@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A macros node
  */
-public class MacroClose extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class MacroClose extends CustomNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence name = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
@@ -46,12 +46,12 @@ public class MacroClose extends CustomNode implements DelimitedNode, DoNotDecora
         this.openingMarker = openingMarker;
     }
 
-    public BasedSequence getText() {
+    public BasedSequence getName() {
         return name;
     }
 
-    public void setText(BasedSequence text) {
-        this.name = text;
+    public void setName(BasedSequence name) {
+        this.name = name;
     }
 
     public BasedSequence getClosingMarker() {

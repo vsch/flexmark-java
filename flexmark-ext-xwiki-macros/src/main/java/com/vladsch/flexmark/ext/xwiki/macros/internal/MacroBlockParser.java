@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.xwiki.macros.internal;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MacroBlockParser extends AbstractBlockParser {
     private final MacroBlock block = new MacroBlock();
@@ -27,26 +27,6 @@ public class MacroBlockParser extends AbstractBlockParser {
     private final BasedSequence macroName;
     private final boolean oneLine;
     private boolean hadClose;
-
-    private static class MacroParsing {
-        final Parsing myParsing;
-        final String OPEN_MACROTAG;
-        final String CLOSE_MACROTAG;
-        final Pattern MACRO_OPEN;
-        final Pattern MACRO_CLOSE;
-        final Pattern MACRO_CLOSE_END;
-        final Pattern MACRO_ATTRIBUTE;
-
-        public MacroParsing(Parsing parsing) {
-            this.myParsing = parsing;
-            this.OPEN_MACROTAG = "\\{\\{(" + myParsing.TAGNAME + ")" + myParsing.ATTRIBUTE + "*" + "\\s*/?\\}\\}";
-            this.CLOSE_MACROTAG = "\\{\\{/(" + myParsing.TAGNAME + ")\\s*\\}\\}";
-            this.MACRO_OPEN = Pattern.compile('^' + OPEN_MACROTAG, Pattern.CASE_INSENSITIVE);
-            this.MACRO_CLOSE = Pattern.compile('^' + CLOSE_MACROTAG + "\\s*$", Pattern.CASE_INSENSITIVE);
-            this.MACRO_CLOSE_END = Pattern.compile(CLOSE_MACROTAG + "\\s*$", Pattern.CASE_INSENSITIVE);
-            this.MACRO_ATTRIBUTE = Pattern.compile("\\s*(" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?");
-        }
-    }
 
     MacroBlockParser(DataHolder options, MacroParsing parsing, BasedSequence macroName, boolean oneLine) {
         this.options = new MacroOptions(options);
@@ -214,7 +194,7 @@ public class MacroBlockParser extends AbstractBlockParser {
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
             BasedSequence line = state.getLine();
             int currentIndent = state.getIndent();
-            if (currentIndent == 0) {
+            if (currentIndent == 0 && !(matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
                 final BasedSequence tryLine = line.subSequence(state.getIndex());
                 Matcher matcher = parsing.MACRO_OPEN.matcher(tryLine);
 

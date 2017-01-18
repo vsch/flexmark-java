@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.ClassifyingBlockTracker;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
+import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
 import com.vladsch.flexmark.parser.InlineParserFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
@@ -33,8 +34,8 @@ public class DocumentParser implements ParserState {
 
     public static final InlineParserFactory INLINE_PARSER_FACTORY = new InlineParserFactory() {
         @Override
-        public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessors) {
-            return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors);
+        public InlineParser inlineParser(DataHolder options, BitSet specialCharacters, BitSet delimiterCharacters, Map<Character, DelimiterProcessor> delimiterProcessors, LinkRefProcessorData linkRefProcessors, List<InlineParserExtensionFactory> inlineParserExtensions) {
+            return new CommonmarkInlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensions);
         }
     };
 

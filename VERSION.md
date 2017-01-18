@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.4](#0114)
 - [0.11.3](#0113)
 - [0.11.2](#0112)
 - [0.11.1](#0111)
@@ -103,6 +104,22 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.4
+------
+
+* Fix: #40, XWiki Ext Block Macros should not interrupt a paragraph
+
+* Add: test for #40
+
+* Add: `InlineParserExtensionFactory` and `InlineParserExtension` to allow custom inline parsing
+  elements.
+
+* Add: inline xwiki macro processing
+
+* Change: default node renderer for xwiki macros now renders the macro as text so that if node
+  rendering is not done by the application then output will be equivalent to text for unhandled
+  macros.
 
 0.11.3
 ------

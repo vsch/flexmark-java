@@ -6,16 +6,17 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
 import com.vladsch.flexmark.internal.inline.AsteriskDelimiterProcessor;
 import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
-import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.LinkRefProcessor;
-import com.vladsch.flexmark.parser.LinkRefProcessorFactory;
-import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
+import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
+import com.vladsch.flexmark.util.dependency.DependencyHandler;
+import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
@@ -25,12 +26,82 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
+    static class InlineParserExtensionDependencies extends ResolvedDependencies<InlineParserDependencyStage> {
+        public InlineParserExtensionDependencies(List<InlineParserDependencyStage> dependentStages) {
+            super(dependentStages);
+        }
+    }
+
+    static class InlineParserDependencyStage {
+        private final List<InlineParserExtensionFactory> dependents;
+
+        public InlineParserDependencyStage(List<InlineParserExtensionFactory> dependents) {
+            // compute mappings
+            this.dependents = dependents;
+        }
+    }
+
+    static class InlineParserExtensionDependencyHandler extends DependencyHandler<InlineParserExtensionFactory, InlineParserDependencyStage, InlineParserExtensionDependencies> {
+        @Override
+        protected Class<? extends InlineParserExtensionFactory> getDependentClass(InlineParserExtensionFactory dependent) {
+            return dependent.getClass();
+        }
+
+        @Override
+        protected InlineParserExtensionDependencies createResolvedDependencies(List<InlineParserDependencyStage> stages) {
+            return new InlineParserExtensionDependencies(stages);
+        }
+
+        @Override
+        protected InlineParserDependencyStage createStage(List<InlineParserExtensionFactory> dependents) {
+            return new InlineParserDependencyStage(dependents);
+        }
+    }
+
+    public static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
+        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
+
+        for (InlineParserExtensionFactory factory : extensionFactories) {
+            CharSequence chars = factory.getCharacters();
+            for (int i = 0; i < chars.length(); i++) {
+                char c = chars.charAt(i);
+                List<InlineParserExtensionFactory> list = extensionMap.get(c);
+                if (list == null) {
+                    list = new ArrayList<>();
+                    extensionMap.put(c, list);
+                }
+
+                list.add(factory);
+            }
+        }
+
+        InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
+        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<>();
+        for (Character c : extensionMap.keySet()) {
+            List<InlineParserExtensionFactory> list = extensionMap.get(c);
+            List<InlineParserExtensionFactory> resolvedList = list;
+
+            if (list.size() > 1) {
+                InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
+                resolvedList = new ArrayList<>(list.size());
+                for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
+                    resolvedList.addAll(stage.dependents);
+                }
+            }
+
+            extensions.put(c, resolvedList);
+        }
+
+        return extensions;
+    }
 
     protected final BitSet originalSpecialCharacters;
     protected final BitSet delimiterCharacters;
     protected final Map<Character, DelimiterProcessor> delimiterProcessors;
     protected final LinkRefProcessorData linkRefProcessorsData;
     protected List<LinkRefProcessor> linkRefProcessors = null;
+    protected Map<Character, List<InlineParserExtension>> inlineParserExtensions = null;
+    protected List<InlineParserExtensionFactory> inlineParserExtensionFactories = null;
 
     // used to temporarily override handling of special characters by custom ParagraphPreProcessors
     protected BitSet specialCharacters;
@@ -63,22 +134,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     protected Document document;
 
-    static class InlineParserOptions {
-        public final boolean matchLookaheadFirst;
-        //public final boolean parseInlineAnchorLinks;
-        public final boolean parseMultiLineImageUrls;
-        //public final boolean parseGitHubIssueMarker;
-        public final boolean hardLineBreakLimit;
-
-        public InlineParserOptions(DataHolder options) {
-            matchLookaheadFirst = Parser.MATCH_NESTED_LINK_REFS_FIRST.getFrom(options);
-            //parseInlineAnchorLinks = Parser.PARSE_INLINE_ANCHOR_LINKS.getFrom(options);
-            parseMultiLineImageUrls = Parser.PARSE_MULTI_LINE_IMAGE_URLS.getFrom(options);
-            hardLineBreakLimit = Parser.HARD_LINE_BREAK_LIMIT.getFrom(options);
-            //parseGitHubIssueMarker = PARSE_GITHUB_ISSUE_MARKER.getFrom(options);
-        }
-    }
-
     protected final InlineParserOptions options;
 
     @Override
@@ -91,11 +146,36 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
             linkRefProcessors.add(factory.create(document));
         }
+
+        // create custom processors
+        if (inlineParserExtensionFactories != null) {
+            Map<Character, List<InlineParserExtensionFactory>> extensions = calculateInlineParserExtensions(document, inlineParserExtensionFactories);
+            inlineParserExtensions = new HashMap<>(extensions.size());
+            for (Map.Entry<Character, List<InlineParserExtensionFactory>> entry : extensions.entrySet()) {
+                List<InlineParserExtension> extensionList = new ArrayList<>(entry.getValue().size());
+                for (InlineParserExtensionFactory factory : entry.getValue()) {
+                    extensionList.add(factory.create(this));
+                }
+
+                inlineParserExtensions.put(entry.getKey(), extensionList);
+
+                // set it as special character
+                specialCharacters.set(entry.getKey());
+            }
+        }
     }
 
     @Override
     public void finalizeDocument(Document document) {
         assert this.referenceRepository == document.get(Parser.REFERENCES);
+
+        if (inlineParserExtensions != null) {
+            for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
+                for (InlineParserExtension extension : extensionList) {
+                    extension.finalizeDocument(this);
+                }
+            }
+        }
     }
 
     public ArrayList<BasedSequence> getCurrentText() {
@@ -113,7 +193,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             BitSet specialCharacters,
             BitSet delimiterCharacters,
             Map<Character, DelimiterProcessor> delimiterProcessors,
-            LinkRefProcessorData linkRefProcessorsData
+            LinkRefProcessorData linkRefProcessorsData,
+            List<InlineParserExtensionFactory> inlineParserExtensionFactories
     ) {
         this.myParsing = new Parsing(options);
         this.options = new InlineParserOptions(options);
@@ -122,6 +203,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         this.delimiterCharacters = delimiterCharacters;
         this.originalSpecialCharacters = specialCharacters;
         this.specialCharacters = specialCharacters;
+        this.inlineParserExtensionFactories = !inlineParserExtensionFactories.isEmpty() ? inlineParserExtensionFactories : null;
     }
 
     public static BitSet calculateDelimiterCharacters(DataHolder options, Set<Character> characters) {
@@ -232,6 +314,51 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     @Override
+    public BasedSequence getInput() {
+        return input;
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public void setIndex(final int index) {
+        this.index = index;
+    }
+
+    @Override
+    public Delimiter getLastDelimiter() {
+        return lastDelimiter;
+    }
+
+    @Override
+    public Bracket getLastBracket() {
+        return lastBracket;
+    }
+
+    @Override
+    public Document getDocument() {
+        return document;
+    }
+
+    @Override
+    public InlineParserOptions getOptions() {
+        return options;
+    }
+
+    @Override
+    public Parsing getParsing() {
+        return myParsing;
+    }
+
+    @Override
+    public Node getBlock() {
+        return block;
+    }
+
+    @Override
     public List<Node> parseCustom(BasedSequence input, Node node, BitSet customCharacters, Map<Character, CharacterNodeFactory> nodeFactoryMap) {
         this.customCharacters = customCharacters;
         this.specialCharacters.or(customCharacters);
@@ -263,11 +390,20 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         processDelimiters(null);
         flushTextNode();
 
+        if (inlineParserExtensions != null) {
+            for (List<InlineParserExtension> extensionList : inlineParserExtensions.values()) {
+                for (InlineParserExtension extension : extensionList) {
+                    extension.finalizeBlock(this);
+                }
+            }
+        }
+
         // merge nodes if needed
         mergeTextNodes(block.getFirstChild(), block.getLastChild());
     }
 
-    private void mergeTextNodes(Node fromNode, Node toNode) {
+    @Override
+    public void mergeTextNodes(Node fromNode, Node toNode) {
         Text first = null;
         Text last = null;
 
@@ -295,7 +431,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         mergeIfNeeded(first, last);
     }
 
-    private void mergeIfNeeded(Text first, Text last) {
+    @Override
+    public void mergeIfNeeded(Text first, Text last) {
         if (first != null && last != null && first != last) {
             ArrayList<BasedSequence> sb = new ArrayList<>();
             sb.add(first.getChars());
@@ -330,6 +467,20 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         return contentChars.getStartOffset() - block.getChars().getStartOffset();
+    }
+
+    @Override
+    public void moveNodes(Node fromNode, Node toNode) {
+        Node next = fromNode.getNext();
+        while (next != null) {
+            Node nextNode = next.getNext();
+            next.unlink();
+            fromNode.appendChild(next);
+            if (next == toNode) break;
+            next = nextNode;
+        }
+
+        fromNode.setCharsFromContent();
     }
 
     /**
@@ -413,27 +564,31 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return index - startIndex;
     }
 
-    protected void appendText(BasedSequence text) {
+    public void appendText(BasedSequence text) {
         getCurrentText().add(text);
     }
 
-    protected void appendText(BasedSequence text, int beginIndex, int endIndex) {
+    @Override
+    public void appendText(BasedSequence text, int beginIndex, int endIndex) {
         getCurrentText().add(text.subSequence(beginIndex, endIndex));
     }
 
-    protected void appendNode(Node node) {
+    @Override
+    public void appendNode(Node node) {
         flushTextNode();
         block.appendChild(node);
     }
 
     // In some cases, we don't want the text to be appended to an existing node, we need it separate
-    protected Text appendSeparateText(BasedSequence text) {
+    @Override
+    public Text appendSeparateText(BasedSequence text) {
         Text node = new Text(text);
         appendNode(node);
         return node;
     }
 
-    protected void flushTextNode() {
+    @Override
+    public void flushTextNode() {
         if (currentText != null) {
             block.appendChild(new Text(SegmentedSequence.of(currentText, BasedSequence.NULL)));
             currentText = null;
@@ -452,6 +607,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         char c = peek();
         if (c == '\0') {
             return false;
+        }
+
+        if (inlineParserExtensions != null) {
+            List<InlineParserExtension> extensions = inlineParserExtensions.get(c);
+            if (extensions != null) {
+                for (InlineParserExtension extension : extensions) {
+                    res = extension.parse(this);
+                    if (res) return true;
+                }
+            }
         }
 
         if (customCharacters != null && customCharacters.get(c)) {
@@ -564,7 +729,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * @param re pattern to match
      * @return sequence matched or null
      */
-    protected BasedSequence match(Pattern re) {
+    @Override
+    public BasedSequence match(Pattern re) {
         if (index >= input.length()) {
             return null;
         }
@@ -581,9 +747,32 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     /**
+     * If RE matches at current index in the input, advance index and return the match; otherwise return null.
+     *
+     * @param re pattern to match
+     * @return matched matcher or null
+     */
+    @Override
+    public Matcher matcher(Pattern re) {
+        if (index >= input.length()) {
+            return null;
+        }
+        Matcher matcher = re.matcher(input);
+        matcher.region(index, input.length());
+        boolean m = matcher.find();
+        if (m) {
+            index = matcher.end();
+            return matcher;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * @return the char at the current input index, or {@code '\0'} in case there are no more characters.
      */
-    protected char peek() {
+    @Override
+    public char peek() {
         if (index < input.length()) {
             return input.charAt(index);
         } else {
@@ -591,7 +780,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    protected char peek(int ahead) {
+    @Override
+    public char peek(int ahead) {
         if (index + ahead < input.length()) {
             return input.charAt(index + ahead);
         } else {
@@ -604,7 +794,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true
      */
-    private boolean spnl() {
+    @Override
+    public boolean spnl() {
         match(myParsing.SPNL);
         return true;
     }
@@ -614,7 +805,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true
      */
-    private boolean nonIndentSp() {
+    @Override
+    public boolean nonIndentSp() {
         match(myParsing.SPNI);
         return true;
     }
@@ -624,7 +816,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true
      */
-    private boolean sp() {
+    @Override
+    public boolean sp() {
         match(myParsing.SP);
         return true;
     }
@@ -634,7 +827,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true
      */
-    private boolean spnlUrl() {
+    @Override
+    public boolean spnlUrl() {
         return match(myParsing.SPNL_URL) != null;
     }
 
@@ -643,7 +837,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return characters parsed or null if no end of line
      */
-    private BasedSequence toEOL() {
+    @Override
+    public BasedSequence toEOL() {
         return match(myParsing.REST_OF_LINE);
     }
 
@@ -652,7 +847,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true
      */
-    protected boolean parseNewline() {
+    @Override
+    public boolean parseNewline() {
         index++; // assume we're at a \n
 
         // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
@@ -735,7 +931,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     private static class DelimiterData {
-
         final int count;
         final boolean canClose;
         final boolean canOpen;
@@ -1133,7 +1328,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                             final BasedSequence nodeChars = node.getChars();
                             if (text.containsSomeOf(nodeChars)) {
                                 if (!text.containsAllOf(nodeChars)) {
-                                   // truncate the contents to intersection of node's chars and adjusted chars
+                                    // truncate the contents to intersection of node's chars and adjusted chars
                                     BasedSequence chars = text.intersect(nodeChars);
                                     node.setChars(chars);
                                 }
@@ -1144,7 +1339,6 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         }
                     }
                 }
-
             }
             appendNode(insertNode);
 
@@ -1257,7 +1451,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return the string or null if no match.
      */
-    protected BasedSequence parseLinkDestination() {
+    @Override
+    public BasedSequence parseLinkDestination() {
         BasedSequence res = match(myParsing.LINK_DESTINATION_ANGLES);
         if (res != null) {
             return res;
@@ -1271,7 +1466,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return the string or null if no match.
      */
-    protected BasedSequence parseLinkTitle() {
+    @Override
+    public BasedSequence parseLinkTitle() {
         BasedSequence title = match(myParsing.LINK_TITLE);
         if (title != null) {
             // chop off quotes from title and unescape:
@@ -1286,7 +1482,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return number of characters parsed.
      */
-    protected int parseLinkLabel() {
+    @Override
+    public int parseLinkLabel() {
         BasedSequence m = match(myParsing.LINK_LABEL);
         return m == null ? 0 : m.length();
     }
@@ -1296,7 +1493,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true if processed characters false otherwise
      */
-    protected boolean parseAutolink() {
+    @Override
+    public boolean parseAutolink() {
         BasedSequence m;
         if ((m = match(myParsing.EMAIL_AUTOLINK)) != null) {
             MailLink node = new MailLink(m.subSequence(0, 1), m.subSequence(1, m.length() - 1), m.subSequence(m.length() - 1, m.length()));
@@ -1316,7 +1514,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true if processed characters false otherwise
      */
-    protected boolean parseHtmlInline() {
+    @Override
+    public boolean parseHtmlInline() {
         BasedSequence m = match(myParsing.HTML_TAG);
         if (m != null) {
             // separate HTML comment from herd
@@ -1338,7 +1537,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @return true if processed characters false otherwise
      */
-    protected boolean parseEntity() {
+    @Override
+    public boolean parseEntity() {
         BasedSequence m;
         if ((m = match(myParsing.ENTITY_HERE)) != null) {
             HtmlEntity node = new HtmlEntity(m);
@@ -1429,7 +1629,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         return new DelimiterData(delimiterCount, canOpen, canClose);
     }
 
-    protected void processDelimiters(Delimiter stackBottom) {
+    @Override
+    public void processDelimiters(Delimiter stackBottom) {
         Map<Character, Delimiter> openersBottom = new HashMap<>();
 
         // find first closer above stackBottom:
@@ -1531,7 +1732,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
     }
 
-    protected void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
+    @Override
+    public void removeDelimitersBetween(Delimiter opener, Delimiter closer) {
         Delimiter delimiter = closer.previous;
         while (delimiter != null && delimiter != opener) {
             Delimiter previousDelimiter = delimiter.previous;
@@ -1545,7 +1747,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @param delim delimiter to remove
      */
-    protected void removeDelimiterAndNode(Delimiter delim) {
+    @Override
+    public void removeDelimiterAndNode(Delimiter delim) {
         Text node = delim.node;
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -1564,7 +1767,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      *
      * @param delim delimiter being processed
      */
-    protected void removeDelimiterKeepNode(Delimiter delim) {
+    @Override
+    public void removeDelimiterKeepNode(Delimiter delim) {
         Text node = delim.node;
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
@@ -1586,7 +1790,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         removeDelimiter(delim);
     }
 
-    protected void removeDelimiter(Delimiter delim) {
+    @Override
+    public void removeDelimiter(Delimiter delim) {
         if (delim.previous != null) {
             delim.previous.next = delim.next;
         }

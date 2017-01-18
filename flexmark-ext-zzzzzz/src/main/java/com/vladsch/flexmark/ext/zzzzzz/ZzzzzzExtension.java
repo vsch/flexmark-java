@@ -78,6 +78,7 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
         parserBuilder.linkRefProcessorFactory(new ZzzzzzLinkRefProcessor.Factory());//zzzoptionszzz(REMOVE, LINK_REF_PROCESSOR)
         parserBuilder.postProcessorFactory(new ZzzzzzNodePostProcessor.Factory());//zzzoptionszzz(REMOVE, NODE_POST_PROCESSOR)
         parserBuilder.postProcessorFactory(new ZzzzzzDocumentPostProcessor.Factory());//zzzoptionszzz(REMOVE, DOCUMENT_POST_PROCESSOR)
+        parserBuilder.customInlineParserExtensionFactory(new ZzzzzzInlineParserExtension.Factory());//zzzoptionszzz(REMOVE, INLINE_PARSER_EXTENSION)
     }
 
     @Override

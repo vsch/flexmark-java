@@ -32,7 +32,6 @@
     <orderEntry type="module" module-name="flexmark-jira-parser" />
     <orderEntry type="module" module-name="flexmark-test-util" />
     <orderEntry type="module" module-name="flexmark-util" />
-    <orderEntry type="module" module-name="flexmark-java" />
     <orderEntry type="module" module-name="flexmark-profile-pegdown" />
     <orderEntry type="module" module-name="flexmark-test-suite" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" />

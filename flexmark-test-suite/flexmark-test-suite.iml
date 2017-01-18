@@ -29,7 +29,6 @@
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-java" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />

@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.xwiki.macros.internal;
 
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroBlock;
+import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -23,6 +24,10 @@ public class MacroNodeRenderer implements NodeRenderer {
             @Override
             public void render(Macro node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
         }));
+        set.add(new NodeRenderingHandler<>(MacroClose.class, new CustomNodeRenderer<MacroClose>() {
+            @Override
+            public void render(MacroClose node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
+        }));
         set.add(new NodeRenderingHandler<>(MacroBlock.class, new CustomNodeRenderer<MacroBlock>() {
             @Override
             public void render(MacroBlock node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
@@ -31,8 +36,16 @@ public class MacroNodeRenderer implements NodeRenderer {
     }
 
     private void render(Macro node, NodeRendererContext context, HtmlWriter html) {
+        html.text(node.spanningChars(node.getOpeningMarker(), node.getClosingMarker()));
+        context.renderChildren(node);
+    }
+
+    private void render(MacroClose node, NodeRendererContext context, HtmlWriter html) {
+        html.text(node.spanningChars(node.getOpeningMarker(), node.getClosingMarker()));
+        context.renderChildren(node);
     }
 
     private void render(MacroBlock node, NodeRendererContext context, HtmlWriter html) {
+        context.renderChildren(node);
     }
 }

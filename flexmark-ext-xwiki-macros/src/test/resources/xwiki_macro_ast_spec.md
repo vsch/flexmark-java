@@ -25,11 +25,11 @@ content
 .
 Document[0, 30]
   Paragraph[1, 30]
-    Text[1, 10] chars:[1, 10, "{{macro}}"]
-    SoftLineBreak[10, 11]
-    Text[11, 18] chars:[11, 18, "content"]
-    SoftLineBreak[18, 19]
-    Text[19, 29] chars:[19, 29, "{{/macro}}"]
+    Macro[1, 29] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 10, "}}"]
+      SoftLineBreak[10, 11]
+      Text[11, 18] chars:[11, 18, "content"]
+      SoftLineBreak[18, 19]
+      MacroClose[19, 29] nameOpen:[19, 22, "{{/"] name:[22, 27, "macro"] nameClose:[27, 29, "}}"]
 ````````````````````````````````
 
 
@@ -40,7 +40,9 @@ Document[0, 30]
 .
 Document[0, 30]
   Paragraph[1, 30]
-    Text[1, 29] chars:[1, 29, "{{mac … cro}}"]
+    Macro[1, 29] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 10, "}}"]
+      Text[10, 19] chars:[10, 19, " content "]
+      MacroClose[19, 29] nameOpen:[19, 22, "{{/"] name:[22, 27, "macro"] nameClose:[27, 29, "}}"]
 ````````````````````````````````
 
 
@@ -51,17 +53,43 @@ Document[0, 30]
 .
 Document[0, 12]
   Paragraph[1, 12]
-    Text[1, 11] chars:[1, 11, "{{macro/}}"]
+    Macro[1, 11] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 11, "/}}"]
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 4
+needs blank line before
+{{macro}}
+content
+{{/macro}}
+.
+<p>needs blank line before
+{{macro}}
+content
+{{/macro}}</p>
+.
+Document[0, 53]
+  Paragraph[0, 53]
+    Text[0, 23] chars:[0, 23, "needs … efore"]
+    SoftLineBreak[23, 24]
+    Macro[24, 52] open:[24, 26, "{{"] name:[26, 31, "macro"] close:[31, 33, "}}"]
+      SoftLineBreak[33, 34]
+      Text[34, 41] chars:[34, 41, "content"]
+      SoftLineBreak[41, 42]
+      MacroClose[42, 52] nameOpen:[42, 45, "{{/"] name:[45, 50, "macro"] nameClose:[50, 52, "}}"]
 ````````````````````````````````
 
 
 Converts macros text to macros nodes.
 
-```````````````````````````````` example Macros: 4
+```````````````````````````````` example Macros: 5
 {{macro}}
 content
 {{/macro}}
 .
+{{macro}}
+<p>content</p>
+{{/macro}}
 .
 Document[0, 29]
   MacroBlock[0, 28]
@@ -72,13 +100,17 @@ Document[0, 29]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 5
+```````````````````````````````` example Macros: 6
 {{macro}}
 content
 
 with blank line
 {{/macro}}
 .
+{{macro}}
+<p>content</p>
+<p>with blank line</p>
+{{/macro}}
 .
 Document[0, 46]
   MacroBlock[0, 45]
@@ -91,7 +123,7 @@ Document[0, 46]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 6
+```````````````````````````````` example Macros: 7
 {{macro}}
 content
 
@@ -103,6 +135,14 @@ nested with blank line
 with blank line
 {{/macro}}
 .
+{{macro}}
+<p>content</p>
+{{macro}}
+<p>nested content</p>
+<p>nested with blank line</p>
+{{/macro}}
+<p>with blank line</p>
+{{/macro}}
 .
 Document[0, 106]
   MacroBlock[0, 105]
@@ -122,7 +162,7 @@ Document[0, 106]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 7
+```````````````````````````````` example Macros: 8
 {{macro}}
 content
 - bullet item
@@ -135,6 +175,18 @@ content
 with blank line
 {{/macro}}
 .
+{{macro}}
+<p>content</p>
+<ul>
+  <li>bullet item
+  text</li>
+</ul>
+<!-- list break -->
+<ol>
+  <li>numbered item</li>
+</ol>
+<p>with blank line</p>
+{{/macro}}
 .
 Document[0, 106]
   MacroBlock[0, 105]
@@ -158,9 +210,10 @@ Document[0, 106]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 8
+```````````````````````````````` example Macros: 9
 {{macro/}}
 .
+{{macro/}}
 .
 Document[0, 11]
   MacroBlock[0, 10]
@@ -168,9 +221,10 @@ Document[0, 11]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 9
+```````````````````````````````` example Macros: 10
 {{macro /}}
 .
+{{macro /}}
 .
 Document[0, 12]
   MacroBlock[0, 11]
@@ -178,9 +232,10 @@ Document[0, 12]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 10
+```````````````````````````````` example Macros: 11
 {{macro}}{{/macro}}
 .
+{{macro}}{{/macro}}
 .
 Document[0, 20]
   MacroBlock[0, 19]
@@ -189,9 +244,10 @@ Document[0, 20]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 11
+```````````````````````````````` example Macros: 12
 {{macro}}text content{{/macro}}
 .
+{{macro}}text content{{/macro}}
 .
 Document[0, 32]
   MacroBlock[0, 31]
@@ -201,9 +257,10 @@ Document[0, 32]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 12
+```````````````````````````````` example Macros: 13
 {{macro}}text **bold** content{{/macro}}
 .
+{{macro}}text <strong>bold</strong> content{{/macro}}
 .
 Document[0, 41]
   MacroBlock[0, 40]
@@ -216,9 +273,10 @@ Document[0, 41]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 13
+```````````````````````````````` example Macros: 14
 {{macro attribute}}text{{/macro}}
 .
+{{macro attribute}}text{{/macro}}
 .
 Document[0, 34]
   MacroBlock[0, 33]
@@ -229,9 +287,10 @@ Document[0, 34]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 14
+```````````````````````````````` example Macros: 15
 {{macro attribute=}}text{{/macro}}
 .
+{{macro attribute=}}text{{/macro}}
 .
 Document[0, 35]
   MacroBlock[0, 34]
@@ -240,9 +299,10 @@ Document[0, 35]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 15
+```````````````````````````````` example Macros: 16
 {{macro attribute=""}}text{{/macro}}
 .
+{{macro attribute=&quot;&quot;}}text{{/macro}}
 .
 Document[0, 37]
   MacroBlock[0, 36]
@@ -253,9 +313,10 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 16
+```````````````````````````````` example Macros: 17
 {{macro attribute=''}}text{{/macro}}
 .
+{{macro attribute=''}}text{{/macro}}
 .
 Document[0, 37]
   MacroBlock[0, 36]
@@ -266,9 +327,10 @@ Document[0, 37]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 17
+```````````````````````````````` example Macros: 18
 {{macro attribute="value"}}text{{/macro}}
 .
+{{macro attribute=&quot;value&quot;}}text{{/macro}}
 .
 Document[0, 42]
   MacroBlock[0, 41]
@@ -279,9 +341,10 @@ Document[0, 42]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 18
+```````````````````````````````` example Macros: 19
 {{macro attribute='value'}}text{{/macro}}
 .
+{{macro attribute='value'}}text{{/macro}}
 .
 Document[0, 42]
   MacroBlock[0, 41]
@@ -292,9 +355,10 @@ Document[0, 42]
 ````````````````````````````````
 
 
-```````````````````````````````` example Macros: 19
+```````````````````````````````` example Macros: 20
 {{macro disabled class="aClass" attribute='value' mixed='test "quoted"'}}text{{/macro}}
 .
+{{macro disabled class=&quot;aClass&quot; attribute='value' mixed='test &quot;quoted&quot;'}}text{{/macro}}
 .
 Document[0, 88]
   MacroBlock[0, 87]
@@ -305,6 +369,108 @@ Document[0, 88]
       MacroAttribute[50, 71] attribute:[50, 55, "mixed"] separator:[55, 56, "="] valueOpen:[56, 57, "'"] value:[57, 70, "test \"quoted\""] valueClose:[70, 71, "'"]
     Text[73, 77] chars:[73, 77, "text"]
     MacroClose[77, 87] nameOpen:[77, 80, "{{/"] name:[80, 85, "macro"] nameClose:[85, 87, "}}"]
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 21
+ {{macro}}text **bold** content{{/macro}}
+.
+<p>{{macro}}text <strong>bold</strong> content{{/macro}}</p>
+.
+Document[0, 42]
+  Paragraph[1, 42]
+    Macro[1, 41] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 10, "}}"]
+      Text[10, 15] chars:[10, 15, "text "]
+      StrongEmphasis[15, 23] textOpen:[15, 17, "**"] text:[17, 21, "bold"] textClose:[21, 23, "**"]
+        Text[17, 21] chars:[17, 21, "bold"]
+      Text[23, 31] chars:[23, 31, " content"]
+      MacroClose[31, 41] nameOpen:[31, 34, "{{/"] name:[34, 39, "macro"] nameClose:[39, 41, "}}"]
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 22
+ **{{macro}}text *italic* content{{/macro}}**
+.
+<p><strong>{{macro}}text <em>italic</em> content{{/macro}}</strong></p>
+.
+Document[0, 46]
+  Paragraph[1, 46]
+    StrongEmphasis[1, 45] textOpen:[1, 3, "**"] text:[3, 43, "{{macro}}text *italic* content{{/macro}}"] textClose:[43, 45, "**"]
+      Macro[3, 43] open:[3, 5, "{{"] name:[5, 10, "macro"] close:[10, 12, "}}"]
+        Text[12, 17] chars:[12, 17, "text "]
+        Emphasis[17, 25] textOpen:[17, 18, "*"] text:[18, 24, "italic"] textClose:[24, 25, "*"]
+          Text[18, 24] chars:[18, 24, "italic"]
+        Text[25, 33] chars:[25, 33, " content"]
+        MacroClose[33, 43] nameOpen:[33, 36, "{{/"] name:[36, 41, "macro"] nameClose:[41, 43, "}}"]
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 23
+ **{{macro class="aClass" style="margin:0" disabled}}text *italic* content{{/macro}}**
+.
+<p><strong>{{macro class=&quot;aClass&quot; style=&quot;margin:0&quot; disabled}}text <em>italic</em> content{{/macro}}</strong></p>
+.
+Document[0, 87]
+  Paragraph[1, 87]
+    StrongEmphasis[1, 86] textOpen:[1, 3, "**"] text:[3, 84, "{{macro class=\"aClass\" style=\"margin:0\" disabled}}text *italic* content{{/macro}}"] textClose:[84, 86, "**"]
+      Macro[3, 84] open:[3, 5, "{{"] name:[5, 10, "macro"] attributes:[11, 51, "class=\"aClass\" style=\"margin:0\" disabled"] close:[51, 53, "}}"]
+        MacroAttribute[11, 25] attribute:[11, 16, "class"] separator:[16, 17, "="] valueOpen:[17, 18, "\""] value:[18, 24, "aClass"] valueClose:[24, 25, "\""]
+        MacroAttribute[26, 42] attribute:[26, 31, "style"] separator:[31, 32, "="] valueOpen:[32, 33, "\""] value:[33, 41, "margin:0"] valueClose:[41, 42, "\""]
+        MacroAttribute[43, 51] attribute:[43, 51, "disabled"]
+        Text[53, 58] chars:[53, 58, "text "]
+        Emphasis[58, 66] textOpen:[58, 59, "*"] text:[59, 65, "italic"] textClose:[65, 66, "*"]
+          Text[59, 65] chars:[59, 65, "italic"]
+        Text[66, 74] chars:[66, 74, " content"]
+        MacroClose[74, 84] nameOpen:[74, 77, "{{/"] name:[77, 82, "macro"] nameClose:[82, 84, "}}"]
+````````````````````````````````
+
+
+```````````````````````````````` example Macros: 24
+ {{macro}}nested{{macro}}content{{/macro}}{{/macro}}
+.
+<p>{{macro}}nested{{macro}}content{{/macro}}{{/macro}}</p>
+.
+Document[0, 53]
+  Paragraph[1, 53]
+    Macro[1, 52] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 10, "}}"]
+      Text[10, 16] chars:[10, 16, "nested"]
+      Macro[16, 42] open:[16, 18, "{{"] name:[18, 23, "macro"] close:[23, 25, "}}"]
+        Text[25, 32] chars:[25, 32, "content"]
+        MacroClose[32, 42] nameOpen:[32, 35, "{{/"] name:[35, 40, "macro"] nameClose:[40, 42, "}}"]
+      MacroClose[42, 52] nameOpen:[42, 45, "{{/"] name:[45, 50, "macro"] nameClose:[50, 52, "}}"]
+````````````````````````````````
+
+
+macros are automatically closed
+
+```````````````````````````````` example Macros: 25
+ {{macro}}nested{{macro}}content
+.
+<p>{{macro}}nested{{macro}}content</p>
+.
+Document[0, 33]
+  Paragraph[1, 33]
+    Macro[1, 32] open:[1, 3, "{{"] name:[3, 8, "macro"] close:[8, 10, "}}"]
+      Text[10, 16] chars:[10, 16, "nested"]
+      Macro[16, 32] open:[16, 18, "{{"] name:[18, 23, "macro"] close:[23, 25, "}}"]
+        Text[25, 32] chars:[25, 32, "content"]
+````````````````````````````````
+
+
+macros are automatically closed
+
+```````````````````````````````` example Macros: 26
+ {{macro1}}nested{{macro2}}content{{/macro1}}
+.
+<p>{{macro1}}nested{{macro2}}content{{/macro1}}</p>
+.
+Document[0, 46]
+  Paragraph[1, 46]
+    Macro[1, 45] open:[1, 3, "{{"] name:[3, 9, "macro1"] close:[9, 11, "}}"]
+      Text[11, 17] chars:[11, 17, "nested"]
+      Macro[17, 34] open:[17, 19, "{{"] name:[19, 25, "macro2"] close:[25, 27, "}}"]
+        Text[27, 34] chars:[27, 34, "content"]
+      MacroClose[34, 45] nameOpen:[34, 37, "{{/"] name:[37, 43, "macro1"] nameClose:[43, 45, "}}"]
 ````````````````````````````````
 
 

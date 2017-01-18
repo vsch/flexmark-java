@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A macros node
  */
-public class Macro extends CustomNode implements DoNotDecorate {
+public class Macro extends CustomNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence name = BasedSequence.NULL;
     protected BasedSequence attributeText = BasedSequence.NULL;
