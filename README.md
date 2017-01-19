@@ -121,7 +121,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 public class PegdownOptions {
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL | Extensions.MULTI_LINE_IMAGE_URLS
+            Extensions.ALL
     );
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
