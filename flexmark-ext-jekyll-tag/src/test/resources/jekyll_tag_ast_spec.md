@@ -112,3 +112,53 @@ Document[0, 10]
 ````````````````````````````````
 
 
+include
+
+```````````````````````````````` example Jekyll Tag: 9
+{% include  %}
+.
+.
+Document[0, 15]
+  JekyllTagBlock[14, 15]
+    JekyllTag[0, 14] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[12, 12] close:[12, 14, "%}"]
+````````````````````````````````
+
+
+include
+
+```````````````````````````````` example(Jekyll Tag: 10) options(dummy-identifier)
+{% include ⎮ %}
+.
+.
+Document[0, 15]
+  JekyllTagBlock[15, 15]
+    JekyllTag[0, 15] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 12, "%1f"] close:[13, 15, "%}"]
+````````````````````````````````
+
+
+include
+
+```````````````````````````````` example(Jekyll Tag: 11) options(includes)
+{% include test.html %}
+.
+<h1>Heading 1</h1>
+<p>test text</p>
+.
+Document[0, 23]
+  JekyllTagBlock[23, 23]
+    JekyllTag[0, 23] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 20, "test.html"] close:[21, 23, "%}"]
+````````````````````````````````
+
+
+include
+
+```````````````````````````````` example(Jekyll Tag: 12) options(includes)
+{% include links.html %}
+.
+.
+Document[0, 24]
+  JekyllTagBlock[24, 24]
+    JekyllTag[0, 24] open:[0, 2, "{%"] tag:[3, 10, "include"] parameters:[11, 21, "links.html"] close:[22, 24, "%}"]
+````````````````````````````````
+
+

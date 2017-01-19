@@ -24,13 +24,11 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed zzzzzz text is turned into {@link Zzzzzz} nodes.
  * </p>
  */
-public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new DataValueFactory<ZzzzzzRepository>() {
-        @Override
-        public ZzzzzzRepository create(DataHolder options) {
-            return new ZzzzzzRepository(options);
-        }
-    }); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+public class ZzzzzzExtension implements Parser.ParserExtension
+        , HtmlRenderer.HtmlRendererExtension // zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+        , Parser.ReferenceHoldingExtension //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
+{
+    public static final DataKey<ZzzzzzRepository> ZZZZZZS = new DataKey<>("ZZZZZZS", new DataValueFactory<ZzzzzzRepository>() { @Override public ZzzzzzRepository create(DataHolder options) { return new ZzzzzzRepository(options); } }); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY)
     public static final DataKey<KeepType> ZZZZZZS_KEEP = new DataKey<>("ZZZZZZS_KEEP", KeepType.FIRST); //zzzoptionszzz(CUSTOM_NODE_REPOSITORY) standard option to allow control over how to handle duplicates
     public static final DataKey<Boolean> ZZZZZZ_OPTION1 = new DataKey<>("ZZZZZZ_OPTION1", false); //zzzoptionszzz(CUSTOM_PROPERTIES)
     public static final DataKey<String> ZZZZZZ_OPTION2 = new DataKey<>("ZZZZZZ_OPTION2", "default"); //zzzoptionszzz(CUSTOM_PROPERTIES)
@@ -54,6 +52,14 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     @Override
     public void parserOptions(final MutableDataHolder options) {
 
+    }
+
+    @Override
+    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+        if (document.contains(ZZZZZZS) && included.contains(ZZZZZZS)) {
+            return Parser.transferReferences(ZZZZZZS.getFrom(document), ZZZZZZS.getFrom(included), ZZZZZZS_KEEP.getFrom(document) == KeepType.FIRST);
+        }
+        return false;
     }
 
     @Override
@@ -83,24 +89,14 @@ public class ZzzzzzExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);}
-                });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-
-                rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER)
-                rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER)
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);}
-                });// zzzoptionszzz(JIRA_RENDERER)
-                break;
+        if ("HTML".equals(rendererType)) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+        } else if ("JIRA".equals(rendererType) || "YOUTRACK".equals(rendererType)) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
         }
     }
 }

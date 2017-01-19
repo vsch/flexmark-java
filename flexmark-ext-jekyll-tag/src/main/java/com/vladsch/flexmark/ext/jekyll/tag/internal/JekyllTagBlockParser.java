@@ -6,11 +6,14 @@ import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 
@@ -90,10 +93,12 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
 
     private static class BlockFactory extends AbstractBlockParserFactory {
         private final JekyllTagParsing parsing;
+        private final boolean listIncludesOnly;
 
         BlockFactory(DataHolder options) {
             super(options);
             this.parsing = new JekyllTagParsing(new Parsing(options));
+            listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.getFrom(options);
         }
 
         @Override
@@ -115,6 +120,11 @@ public class JekyllTagBlockParser extends AbstractBlockParser {
 
                     final JekyllTagBlockParser parser = new JekyllTagBlockParser(state.getProperties());
                     parser.block.appendChild(tagNode);
+
+                    if (!listIncludesOnly || tagName.equals("include")) {
+                        List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(state.getProperties());
+                        tagList.add(tagNode);
+                    }
 
                     return BlockStart.of(parser)
                             .atIndex(state.getLineEndIndex())

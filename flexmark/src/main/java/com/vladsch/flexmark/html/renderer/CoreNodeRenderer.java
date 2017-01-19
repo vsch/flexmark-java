@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
@@ -27,12 +28,14 @@ public class CoreNodeRenderer implements NodeRenderer {
     public static final AttributablePart PARAGRAPH_LINE = new AttributablePart("PARAGRAPH_LINE");
     public static final AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
 
-    private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
+    private ReferenceRepository referenceRepository;
+    private boolean recheckUndefinedReferences;
 
     public CoreNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = ListOptions.getFrom(options);
+        this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
     }
 
     @Override
@@ -590,6 +593,12 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
+        if (!node.isDefined() && recheckUndefinedReferences) {
+            if (node.getReferenceNode(referenceRepository) != null) {
+                node.setDefined(true);
+            }
+        }
+
         if (!node.isDefined()) {
             // empty ref, we treat it as text
             html.text(node.getChars().unescape());
@@ -612,6 +621,12 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(LinkRef node, NodeRendererContext context, HtmlWriter html) {
+        if (!node.isDefined() && recheckUndefinedReferences) {
+            if (node.getReferenceNode(referenceRepository) != null) {
+                node.setDefined(true);
+            }
+        }
+
         if (!node.isDefined()) {
             // empty ref, we treat it as text
             assert !node.isDefined();

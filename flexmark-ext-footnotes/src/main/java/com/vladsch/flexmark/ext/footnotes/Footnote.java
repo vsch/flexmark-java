@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ext.footnotes;
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
 import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
@@ -13,6 +14,14 @@ public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected FootnoteBlock footnoteBlock;
+
+    public boolean isDefined() {
+        return footnoteBlock != null;
+    }
+
+    public FootnoteBlock getFootonoteBlock(FootnoteRepository footnoteRepository) {
+        return text.isEmpty() ? null : footnoteRepository.get(text.toString());
+    }
 
     public FootnoteBlock getFootnoteBlock() {
         return footnoteBlock;

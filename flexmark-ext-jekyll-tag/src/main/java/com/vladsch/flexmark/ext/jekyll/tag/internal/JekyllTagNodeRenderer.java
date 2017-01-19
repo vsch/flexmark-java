@@ -11,13 +11,16 @@ import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class JekyllTagNodeRenderer implements NodeRenderer {
     private final boolean enabledRendering;
+    private final Map<String, String> includeContent;
 
     public JekyllTagNodeRenderer(DataHolder options) {
         enabledRendering = JekyllTagExtension.ENABLE_RENDERING.getFrom(options);
+        includeContent = JekyllTagExtension.INCLUDED_HTML.getFrom(options);
     }
 
     @Override
@@ -32,9 +35,15 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
 
     private void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) {
         if (enabledRendering) html.text(node.getChars());
+        else if (node.getTag().equals("include") && includeContent != null && !node.getParameters().isEmpty()) {
+            String content = includeContent.get(node.getParameters());
+            if (content != null && !content.isEmpty()) {
+                html.rawPre(content);
+            }
+        }
     }
 
     private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {
-        if (enabledRendering) context.renderChildren(node);
+        context.renderChildren(node);
     }
 }

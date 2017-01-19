@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.jekyll.tag.internal;
 
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.InlineParserExtension;
 import com.vladsch.flexmark.parser.InlineParserExtensionFactory;
@@ -13,9 +14,11 @@ import java.util.regex.Matcher;
 
 public class JekyllTagInlineParserExtension implements InlineParserExtension {
     private final JekyllTagParsing parsing;
+    private final boolean listIncludesOnly;
 
     public JekyllTagInlineParserExtension(final InlineParser inlineParser) {
         this.parsing = new JekyllTagParsing(inlineParser.getParsing());
+        this.listIncludesOnly = JekyllTagExtension.LIST_INCLUDES_ONLY.getFrom(inlineParser.getDocument());
     }
 
     @Override
@@ -38,6 +41,11 @@ public class JekyllTagInlineParserExtension implements InlineParserExtension {
                 BasedSequence parameters = input.subSequence(matcher.end(1), matcher.end() - 2).trim();
                 JekyllTag macro = new JekyllTag(tag.subSequence(0, 2), tagName, parameters, tag.endSequence(2));
                 macro.setCharsFromContent();
+
+                if (!listIncludesOnly || tagName.equals("includes")) {
+                    List<JekyllTag> tagList = JekyllTagExtension.TAG_LIST.getFrom(inlineParser.getDocument());
+                    tagList.add(macro);
+                }
 
                 inlineParser.flushTextNode();
                 inlineParser.getBlock().appendChild(macro);

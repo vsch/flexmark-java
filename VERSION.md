@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.6](#0116)
 - [0.11.5](#0115)
 - [0.11.4](#0114)
 - [0.11.3](#0113)
@@ -105,6 +106,27 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.6
+------
+
+* Fix: jekyll tags not parsed if two spaces included after tag and before the closing marker
+
+* Add: jekyll tags `JekyllTagExtension.INCLUDED_HTML` a map of include parameter strings to
+  string of HTML content to replace the include tag: `{% include file %}`
+
+* Add: `HtmlRenderer.RECHECK_UNDEFINED_REFERENCES` to check link and image refs which are not
+  defined again, used by `Parser.transferReferences(Document, Document)` to let extensions know
+  they need to try resolving references.
+
+* Add: `Parser.ReferenceHoldingExtension` to be implemented by extensions that create node
+  repostitories so that these can be copied from included documents to including documents.
+
+* Add: `Parser.transferReferences(Document, Document)` for use by library users and static
+  `Parser.transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean
+  ifUndefined)` for use by extensions to implmement `Parser.ReferenceHoldingExtension`
+
+* Add: Reference, Footnote and Abbreviation reference copying
 
 0.11.5
 ------

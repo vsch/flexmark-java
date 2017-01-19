@@ -26,7 +26,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed abbreviations are turned into abbr tags by default or a links as an option by setting the {@link AbbreviationExtension#USE_LINKS} key to true in option used to create the {@link Parser.Builder} via {@code Parser.builder(options)}
  * </p>
  */
-public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension {
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
@@ -59,6 +59,14 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
     @Override
     public void parserOptions(final MutableDataHolder options) {
 
+    }
+
+    @Override
+    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+        if (document.contains(ABBREVIATIONS) && included.contains(ABBREVIATIONS)) {
+            return Parser.transferReferences(ABBREVIATIONS.getFrom(document), ABBREVIATIONS.getFrom(included), ABBREVIATIONS_KEEP.getFrom(document) == KeepType.FIRST);
+        }
+        return false;
     }
 
     @Override

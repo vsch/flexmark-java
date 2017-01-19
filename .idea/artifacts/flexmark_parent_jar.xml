@@ -33,6 +33,7 @@
       <element id="module-output" name="flexmark-youtrack-converter" />
       <element id="module-output" name="flexmark-ext-ins" />
       <element id="module-output" name="flexmark-ext-superscript" />
+      <element id="module-output" name="flexmark-ext-jekyll-tag" />
     </root>
   </artifact>
 </component>

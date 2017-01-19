@@ -20,8 +20,15 @@ public class ComboJekyllTagSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("dummy-identifier", new MutableDataSet().set(Parser.INTELLIJ_DUMMY_IDENTIFIER, true));
         optionsMap.put("no-inlines", new MutableDataSet().set(JekyllTagExtension.ENABLE_INLINE_TAGS, false));
         optionsMap.put("no-blocks", new MutableDataSet().set(JekyllTagExtension.ENABLE_BLOCK_TAGS, false));
+        Map<String, String> content = new HashMap<>();
+        content.put("test.html", "<h1>Heading 1</h1>\n" +
+                "<p>test text</p>\n" +
+                "");
+        content.put("links.html", "");
+        optionsMap.put("includes", new MutableDataSet().set(JekyllTagExtension.INCLUDED_HTML, content));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

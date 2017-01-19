@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.jekyll.tag;
 
 import com.vladsch.flexmark.Extension;
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ext.jekyll.tag.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
@@ -12,6 +13,10 @@ import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Extension for jekyll_tags
@@ -28,6 +33,15 @@ public class JekyllTagExtension implements Parser.ParserExtension, HtmlRenderer.
     public static final DataKey<Boolean> ENABLE_INLINE_TAGS = new DataKey<>("ENABLE_INLINE_TAGS", true);
     public static final DataKey<Boolean> ENABLE_BLOCK_TAGS = new DataKey<>("ENABLE_BLOCK_TAGS", true);
     public static final DataKey<Boolean> ENABLE_RENDERING = new DataKey<>("ENABLE_RENDERING", false);
+    public static final DataKey<Boolean> LIST_INCLUDES_ONLY = new DataKey<>("LIST_INCLUDES_ONLY", true);
+    public static final DataKey<Map<String, String>> INCLUDED_HTML = new DataKey<>("INCLUDED_HTML", (Map<String, String>) null);
+    //public static final DataKey<Map<String, Document>> INCLUDED_DOCUMENTS = new DataKey<>("INCLUDED_DOCUMENTS", (Map<String, Document>) null);
+    public static final DataKey<List<JekyllTag>> TAG_LIST = new DataKey<>("TAG_LIST", new DataValueFactory<List<JekyllTag>>() {
+        @Override
+        public List<JekyllTag> create(DataHolder options) {
+            return new ArrayList<JekyllTag>();
+        }
+    });
 
     private JekyllTagExtension() {
     }

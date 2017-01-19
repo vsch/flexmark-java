@@ -4,7 +4,9 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeRepository;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.internal.DocumentParser;
 import com.vladsch.flexmark.internal.InlineParserImpl;
 import com.vladsch.flexmark.internal.LinkRefProcessorData;
@@ -100,7 +102,7 @@ public class Parser implements IParse {
 
     // strings for list marker suffixes which offset the content, to properly support gfm task lists with content offset matching the suffix end
     // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed
-    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[]{ });
+    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
     public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
 
     // List parsing options beyond major parser family
@@ -247,6 +249,44 @@ public class Parser implements IParse {
         return options == null ? this : (options.contains(EXTENSIONS) ? new Parser(new Builder(options)) : new Parser(new Builder(builder, options)));
     }
 
+    public boolean transferReferences(Document document, Document included) {
+        // transfer references from included to document
+        boolean transferred = false;
+
+        if (options.contains(EXTENSIONS)) {
+            for (Extension extension : options.get(EXTENSIONS)) {
+                if (extension instanceof ReferenceHoldingExtension) {
+                    ReferenceHoldingExtension parserExtension = (ReferenceHoldingExtension) extension;
+                    if (parserExtension.transferReferences(document, included)) transferred = true;
+                }
+            }
+        }
+
+        // transfer references
+        if (document.contains(REFERENCES) && included.contains(REFERENCES)) {
+            if (transferReferences(REFERENCES.getFrom(document), REFERENCES.getFrom(included), REFERENCES_KEEP.getFrom(document) == KeepType.FIRST)) {
+                transferred = true;
+            }
+        }
+
+        if (transferred) {
+            document.set(HtmlRenderer.RECHECK_UNDEFINED_REFERENCES, true);
+        }
+        return transferred;
+    }
+
+    public static <T extends Node> boolean transferReferences(NodeRepository<T> destination, NodeRepository<T> included, boolean ifUndefined) {
+        // copy references but only if they are not defined in the original document
+        boolean transferred = false;
+        for (Map.Entry<String, T> entry : included.entrySet()) {
+            if (!ifUndefined || !destination.containsKey(entry.getKey())) {
+                destination.put(entry.getKey(), entry.getValue());
+                transferred = true;
+            }
+        }
+        return true;
+    }
+
     /**
      * Builder for configuring a {@link Parser}.
      */
@@ -264,8 +304,8 @@ public class Parser implements IParse {
         public Builder(DataHolder options) {
             super(options);
 
-            if (contains(Parser.EXTENSIONS)) {
-                extensions(get(Parser.EXTENSIONS));
+            if (contains(EXTENSIONS)) {
+                extensions(get(EXTENSIONS));
             }
         }
 
@@ -291,8 +331,8 @@ public class Parser implements IParse {
             if (options != null) {
                 setAll(options);
 
-                if (options.contains(Parser.EXTENSIONS)) {
-                    extensions(get(Parser.EXTENSIONS));
+                if (options.contains(EXTENSIONS)) {
+                    extensions(get(EXTENSIONS));
                 }
             }
         }
@@ -390,14 +430,30 @@ public class Parser implements IParse {
     public interface ParserExtension extends Extension {
         /**
          * This method is called first on all extensions so that they can adjust the options.
+         *
          * @param options option set that will be used for the builder
          */
         void parserOptions(MutableDataHolder options);
 
         /**
          * This method is called on all extensions so that they can register their custom processors
+         *
          * @param parserBuilder parser builder with which to register extensions
          */
         void extend(Builder parserBuilder);
+    }
+
+    /**
+     * Extension for {@link Parser}.
+     */
+    public interface ReferenceHoldingExtension extends Extension {
+        /**
+         * This method is called to transfer references from included document to the source document
+         *
+         * @param document destination document for references
+         * @param included source document for references
+         * @return true if references were transfered
+         */
+        boolean transferReferences(MutableDataHolder document, DataHolder included);
     }
 }

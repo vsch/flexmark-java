@@ -27,7 +27,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed footnote definitions are turned into {@link FootnoteBlock} nodes.
  * </p>
  */
-public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension {
     public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
         @Override
         public FootnoteRepository create(DataHolder options) {
@@ -56,6 +56,14 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     @Override
     public void parserOptions(final MutableDataHolder options) {
 
+    }
+
+    @Override
+    public boolean transferReferences(final MutableDataHolder document, final DataHolder included) {
+        if (document.contains(FOOTNOTES) && included.contains(FOOTNOTES)) {
+            return Parser.transferReferences(FOOTNOTES.getFrom(document), FOOTNOTES.getFrom(included), FOOTNOTES_KEEP.getFrom(document) == KeepType.FIRST);
+        }
+        return false;
     }
 
     @Override

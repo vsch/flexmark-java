@@ -109,6 +109,8 @@ public class HtmlRenderer implements IRender {
         }
     });
 
+    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
+
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
      */

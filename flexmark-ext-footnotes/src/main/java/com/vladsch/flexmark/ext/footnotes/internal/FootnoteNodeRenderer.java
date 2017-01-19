@@ -1,10 +1,11 @@
 package com.vladsch.flexmark.ext.footnotes.internal;
 
-import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.footnotes.Footnote;
 import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
@@ -21,10 +22,12 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     private final FootnoteRepository footnoteRepository;
     private final FootnoteOptions options;
+    private boolean recheckUndefinedReferences;
 
     public FootnoteNodeRenderer(DataHolder options) {
         this.options = new FootnoteOptions(options);
         this.footnoteRepository = options.get(FootnoteExtension.FOOTNOTES);
+        this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         this.footnoteRepository.resolveFootnoteOrdinals();
     }
 
@@ -48,11 +51,42 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
-        return new HashSet<>(Collections.singletonList(RenderingPhase.BODY_BOTTOM));
+        Set<RenderingPhase> set = new HashSet<>();
+        set.add(RenderingPhase.BODY_TOP);
+        set.add(RenderingPhase.BODY_BOTTOM);
+        return set;
     }
 
     @Override
     public void renderDocument(final NodeRendererContext context, final HtmlWriter html, Document document, RenderingPhase phase) {
+        if (phase == RenderingPhase.BODY_TOP) {
+            if (recheckUndefinedReferences) {
+                // need to see if have undefined footnotes that were defined after parsing
+                final boolean[] hadNewFootnotes = { false };
+                NodeVisitor visitor = new NodeVisitor(
+                        new VisitHandler<>(Footnote.class, new Visitor<Footnote>() {
+                            @Override
+                            public void visit(Footnote node) {
+                                if (!node.isDefined()) {
+                                    FootnoteBlock footonoteBlock = node.getFootonoteBlock(footnoteRepository);
+
+                                    if (footonoteBlock != null) {
+                                        footnoteRepository.addFootnoteReference(footonoteBlock, node);
+                                        node.setFootnoteBlock(footonoteBlock);
+                                        hadNewFootnotes[0] = true;
+                                    }
+                                }
+                            }
+                        })
+                );
+
+                visitor.visit(document);
+                if (hadNewFootnotes[0]) {
+                    this.footnoteRepository.resolveFootnoteOrdinals();
+                }
+            }
+        }
+
         if (phase == RenderingPhase.BODY_BOTTOM) {
             // here we dump the footnote blocks that were referenced in the document body, ie. ones with footnoteOrdinal > 0
             if (footnoteRepository.getReferencedFootnoteBlocks().size() > 0) {
