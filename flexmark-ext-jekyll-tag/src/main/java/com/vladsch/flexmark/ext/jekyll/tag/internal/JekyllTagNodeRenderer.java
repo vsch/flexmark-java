@@ -1,0 +1,40 @@
+package com.vladsch.flexmark.ext.jekyll.tag.internal;
+
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagBlock;
+import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
+import com.vladsch.flexmark.html.CustomNodeRenderer;
+import com.vladsch.flexmark.html.HtmlWriter;
+import com.vladsch.flexmark.html.renderer.NodeRenderer;
+import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
+import com.vladsch.flexmark.util.options.DataHolder;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class JekyllTagNodeRenderer implements NodeRenderer {
+    private final boolean enabledRendering;
+
+    public JekyllTagNodeRenderer(DataHolder options) {
+        enabledRendering = JekyllTagExtension.ENABLE_RENDERING.getFrom(options);
+    }
+
+    @Override
+    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+        Set<NodeRenderingHandler<?>> set = new HashSet<>();
+        // @formatter:off
+        set.add(new NodeRenderingHandler<>(JekyllTag.class, new CustomNodeRenderer<JekyllTag>() { @Override public void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
+        set.add(new NodeRenderingHandler<>(JekyllTagBlock.class, new CustomNodeRenderer<JekyllTagBlock>() { @Override public void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
+        // @formatter:on
+        return set;
+    }
+
+    private void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) {
+        if (enabledRendering) html.text(node.getChars());
+    }
+
+    private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {
+        if (enabledRendering) context.renderChildren(node);
+    }
+}

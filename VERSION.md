@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # ""
 
 - [To Do](#to-do)
+- [0.11.5](#0115)
 - [0.11.4](#0114)
 - [0.11.3](#0113)
 - [0.11.2](#0112)
@@ -104,6 +105,15 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.5
+------
+
+* Add: Jekyll Tags extension to parse tags of the form: `{% tag params %}`, with options
+  `JekyllTagExtension.ENABLE_BLOCK_TAGS` and `JekyllTagExtension.ENABLE_INLINE_TAGS` to disable
+  individual types of parsers.
+
+* Fix: remove unused xwiki macro options
 
 0.11.4
 ------

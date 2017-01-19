@@ -14,6 +14,7 @@ import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
 import com.vladsch.flexmark.ext.ins.ExtInsTestSuite;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
+import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
 import com.vladsch.flexmark.ext.xwiki.macros.ExtXWikiMacroTestSuite;
 import com.vladsch.flexmark.ext.spec.example.ExtSpecExampleTestSuite;
 import com.vladsch.flexmark.ext.tables.ExtTablesTestSuite;
@@ -46,6 +47,7 @@ import org.junit.runners.Suite;
         ExtGfmTablesTestSuite.class,
         ExtGfmTaskListTestSuite.class,
         ExtJekyllFrontMatterTestSuite.class,
+        ExtJekyllTagTestSuite.class,
         ExtInsTestSuite.class,
         ExtSuperscriptTestSuite.class,
         ExtSpecExampleTestSuite.class,
