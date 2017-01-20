@@ -70,9 +70,7 @@ flexmark-java
 - [0.1.0](#010)
 
 
-&nbsp;</details>
-
-&nbsp;<details id="version-history"><summary>**To Do**</summary>
+&nbsp;</details><details id="version-history"><summary>**To Do**</summary>
 
 ## To Do
 

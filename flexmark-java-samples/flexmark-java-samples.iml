@@ -35,5 +35,9 @@
     <orderEntry type="module" module-name="flexmark-profile-pegdown" />
     <orderEntry type="module" module-name="flexmark-test-suite" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" />
+    <orderEntry type="module" module-name="flexmark-ext-ins" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
+    <orderEntry type="module" module-name="flexmark-ext-superscript" />
+    <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
   </component>
 </module>
