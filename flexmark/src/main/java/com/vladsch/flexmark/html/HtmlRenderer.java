@@ -245,15 +245,27 @@ public class HtmlRenderer implements IRender {
         }
 
         public Builder(Builder other, DataHolder options) {
-            this(other);
+            super(other);
+
+            List<Extension> extensions = new ArrayList<Extension>();
+            for (Extension extension : get(Parser.EXTENSIONS)) {
+                extensions.add(extension);
+            }
 
             if (options != null) {
-                setAll(options);
-
-                if (options.contains(Parser.EXTENSIONS)) {
-                    extensions(get(Parser.EXTENSIONS));
+                for (DataKey key : options.keySet()) {
+                    if (key == Parser.EXTENSIONS) {
+                        for (Extension extension : options.get(Parser.EXTENSIONS)) {
+                            extensions.add(extension);
+                        }
+                    } else {
+                        set(key, options.get(key));
+                    }
                 }
             }
+
+            set(Parser.EXTENSIONS, extensions);
+            extensions(extensions);
         }
 
         /**

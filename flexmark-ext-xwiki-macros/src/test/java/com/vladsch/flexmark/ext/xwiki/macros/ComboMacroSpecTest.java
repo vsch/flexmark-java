@@ -15,11 +15,14 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/xwiki_macro_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
+            .set(MacroExtension.ENABLE_RENDERING, true)
             .set(Parser.EXTENSIONS, Collections.singleton(MacroExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("no-rendering", new MutableDataSet().set(MacroExtension.ENABLE_RENDERING, false));
+        optionsMap.put("no-inlines", new MutableDataSet().set(MacroExtension.ENABLE_INLINE_MACROS, false));
+        optionsMap.put("no-blocks", new MutableDataSet().set(MacroExtension.ENABLE_BLOCK_MACROS, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

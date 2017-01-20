@@ -2,11 +2,16 @@ package com.vladsch.flexmark.ext.xwiki.macros;
 
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A macros node
  */
+@SuppressWarnings("WeakerAccess")
 public class Macro extends CustomNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence name = BasedSequence.NULL;
@@ -25,6 +30,9 @@ public class Macro extends CustomNode {
         segmentSpanChars(out, name, "name");
         segmentSpanChars(out, attributeText, "attributes");
         segmentSpanChars(out, closingMarker, "close");
+        if (isClosedTag()) out.append(" isClosed");
+        if (isBlockMacro()) out.append(" isBlockMacro");
+        segmentSpanChars(out, getMacroContentChars(), "macroContent");
     }
 
     public Macro() {
@@ -71,5 +79,34 @@ public class Macro extends CustomNode {
 
     public void setAttributeText(final BasedSequence attributeText) {
         this.attributeText = attributeText;
+    }
+
+    public boolean isBlockMacro() {
+        Node parent = getParent();
+        return parent instanceof MacroBlock && parent.getFirstChild() == this;
+    }
+
+    public Map<String, String> getAttributes() {
+        final Map<String, String> attributes = new HashMap<>();
+        Node child = getFirstChild();
+        while (child != null) {
+            if (child instanceof MacroAttribute) {
+                MacroAttribute attribute = (MacroAttribute) child;
+                attributes.put(attribute.getAttribute().toString(), attribute.getValue().toString());
+            }
+            child = child.getNext();
+        }
+        return attributes;
+    }
+
+    public BasedSequence getMacroContentChars() {
+        Node lastChild = getLastChild();
+        int startOffset = getClosingMarker().getEndOffset();
+        int endOffset = lastChild == null || lastChild instanceof MacroAttribute ? getEndOffset() : lastChild.getStartOffset();
+        return isClosedTag() ? BasedSequence.NULL : getChars().baseSubSequence(startOffset, endOffset);
+    }
+
+    public boolean isClosedTag() {
+        return getClosingMarker().length() > 2;
     }
 }

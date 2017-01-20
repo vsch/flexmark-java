@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.11.7](#0117)
 - [0.11.6](#0116)
 - [0.11.5](#0115)
 - [0.11.4](#0114)
@@ -104,6 +105,30 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.7
+------
+
+* Fix: `HtmlRenderer.Builder` and `Parser.Builder` constructor which takes an instance of other
+  plus `DataHolder` to reload all extensions to allow extensions to register different
+  processors based on options. Previously these copied all registered components plus new ones,
+  not allowing components to be not-registered based on options.
+
+* Add: XWiki Macro members to facilitate usage of these nodes in XWiki processing:
+  * `MacroBlock`
+    * `Map<String, String> getAttributes()`: map of attributes
+    * `Macro getMacroNode()`: returns the `Macro` first child node
+    * `boolean isClosedTag()`: true if macro has `{{macro /}}` form
+    * `BasedSequence getMacroContentChars()`: raw text of macro content
+  * `Macro`
+    * `Map<String, String> getAttributes()`: map of attributes
+    * `boolean isClosedTag()`: true if macro has `{{macro /}}` form
+    * `boolean isBlockMacro()`: true if macro is the first child of `MacroBlock`
+    * `BasedSequence getMacroContentChars()`: raw text of macro content
+
+* Add: XWiki options `MacroExtension.ENABLE_BLOCK_MACROS`, `MacroExtension.ENABLE_INLINE_MACROS`
+  and `MacroExtension.ENABLE_RENDERING`. If block macros are disabled then all macros will be
+  inline macros.
 
 0.11.6
 ------

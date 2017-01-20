@@ -25,6 +25,10 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public static final DataKey<Boolean> ENABLE_INLINE_MACROS = new DataKey<>("ENABLE_INLINE_MACROS", true);
+    public static final DataKey<Boolean> ENABLE_BLOCK_MACROS = new DataKey<>("ENABLE_BLOCK_MACROS", true);
+    public static final DataKey<Boolean> ENABLE_RENDERING = new DataKey<>("ENABLE_RENDERING", false);
+
     private MacroExtension() {
     }
 
@@ -37,7 +41,9 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
     public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
         rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
             @Override
-            public NodeRenderer create(DataHolder options) {return new MacroNodeRenderer(options);}
+            public NodeRenderer create(DataHolder options) {
+                return new MacroNodeRenderer(options);
+            }
         });
     }
 
@@ -52,7 +58,7 @@ public class MacroExtension implements Parser.ParserExtension, HtmlRenderer.Html
 
     @Override
     public void extend(Parser.Builder parserBuilder) {
-        parserBuilder.customBlockParserFactory(new MacroBlockParser.Factory());
-        parserBuilder.customInlineParserExtensionFactory(new MacroInlineParser.Factory());
+        if (ENABLE_BLOCK_MACROS.getFrom(parserBuilder)) parserBuilder.customBlockParserFactory(new MacroBlockParser.Factory());
+        if (ENABLE_INLINE_MACROS.getFrom(parserBuilder)) parserBuilder.customInlineParserExtensionFactory(new MacroInlineParser.Factory());
     }
 }

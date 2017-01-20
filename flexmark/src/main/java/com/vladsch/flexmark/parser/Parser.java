@@ -322,19 +322,32 @@ public class Parser implements IParse {
             blockPreProcessorFactories.addAll(other.blockPreProcessorFactories);
             linkRefProcessors.addAll(other.linkRefProcessors);
             inlineParserFactory = other.inlineParserFactory;
+            inlineParserExtensionFactories.addAll(other.inlineParserExtensionFactories);
             loadedExtensions.addAll(other.loadedExtensions);
         }
 
         public Builder(Builder other, DataHolder options) {
-            this(other);
+            super(other);
+
+            List<Extension> extensions = new ArrayList<Extension>();
+            for (Extension extension : get(EXTENSIONS)) {
+                extensions.add(extension);
+            }
 
             if (options != null) {
-                setAll(options);
-
-                if (options.contains(EXTENSIONS)) {
-                    extensions(get(EXTENSIONS));
+                for (DataKey key : options.keySet()) {
+                    if (key == EXTENSIONS) {
+                        for (Extension extension : options.get(EXTENSIONS)) {
+                            extensions.add(extension);
+                        }
+                    } else {
+                        set(key, options.get(key));
+                    }
                 }
             }
+
+            set(EXTENSIONS, extensions);
+            extensions(extensions);
         }
 
         /**

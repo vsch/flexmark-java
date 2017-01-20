@@ -27,7 +27,7 @@ import java.util.Map;
 public class JekyllIncludeFileSample {
     static String commonMark(String markdown, Map<String, String> included) {
         MutableDataHolder options = new MutableDataSet();
-        options.set(Parser.EXTENSIONS, Arrays.asList(new Extension[] { AutolinkExtension.create(), JekyllTagExtension.create() }));
+        options.set(Parser.EXTENSIONS, Arrays.asList(AutolinkExtension.create(), JekyllTagExtension.create()));
 
         // change soft break to hard break
         options.set(HtmlRenderer.SOFT_BREAK, "<br/>");

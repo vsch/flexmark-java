@@ -80,9 +80,10 @@ no blocks
 ```````````````````````````````` example(Jekyll Tag: 6) options(no-blocks)
 {% tag %}
 .
+<p></p>
 .
 Document[0, 9]
-  JekyllTagBlock[9, 9]
+  Paragraph[0, 9]
     JekyllTag[0, 9] open:[0, 2, "{%"] tag:[3, 6, "tag"] parameters:[7, 7] close:[7, 9, "%}"]
 ````````````````````````````````
 
@@ -92,10 +93,11 @@ no blocks no inlines
 ```````````````````````````````` example(Jekyll Tag: 7) options(no-blocks, no-inlines)
 {% tag %}
 .
+<p>{% tag %}</p>
 .
 Document[0, 9]
-  JekyllTagBlock[9, 9]
-    JekyllTag[0, 9] open:[0, 2, "{%"] tag:[3, 6, "tag"] parameters:[7, 7] close:[7, 9, "%}"]
+  Paragraph[0, 9]
+    Text[0, 9] chars:[0, 9, "{% tag %}"]
 ````````````````````````````````
 
 
