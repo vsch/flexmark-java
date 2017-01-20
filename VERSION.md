@@ -3,7 +3,7 @@ flexmark-java
 
 &nbsp;<details id="version-history"><summary>**Version History**</summary>
 
-[TOC]: # ""
+[TOC]: # " "
 
 - [To Do](#to-do)
 - [0.11.6](#0116)
