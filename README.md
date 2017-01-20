@@ -283,7 +283,7 @@ Progress
   - Processor Extensions
     - Jekyll front matter
     - Jekyll tag elements, with support for `{% include file %}`,
-      [Include Markdown and HTML content with Jekyll Tag Extension]
+      [Include Markdown and HTML File Content]
     - GitBook link URL encoding. Not applicable
     - HTML comment nodes: Block and Inline
     - Multi-line Image URLs
@@ -463,5 +463,5 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [sirthias]: https://github.com/sirthias
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
-[Include Markdown and HTML content with Jekyll Tag Extension]: ../../wiki/Usage#include-markdown-and-html-content-with-jekyll-tag-extension
+[Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 
