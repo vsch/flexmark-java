@@ -42,9 +42,9 @@ public class MacroInlineParser implements InlineParserExtension {
     public boolean parse(final InlineParser inlineParser) {
         if (inlineParser.peek(1) == '{') {
             BasedSequence input = inlineParser.getInput();
+            int index = inlineParser.getIndex();
             Matcher matcher = inlineParser.matcher(parsing.MACRO_TAG);
             if (matcher != null) {
-                int index = inlineParser.getIndex();
                 BasedSequence macroOpen = input.subSequence(matcher.start(), matcher.end());
 
                 // see what we have

@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
-import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
 public class BasicSample {
@@ -16,7 +15,7 @@ public class BasicSample {
     }
 
     void kramdown() {
-        MutableDataHolder options = new MutableDataSet();
+        MutableDataSet options = new MutableDataSet();
         options.setFrom(ParserEmulationProfile.KRAMDOWN);
 
         Parser parser = Parser.builder(options).build();
@@ -27,7 +26,7 @@ public class BasicSample {
     }
 
     void multiMarkdown() {
-        MutableDataHolder options = new MutableDataSet();
+        MutableDataSet options = new MutableDataSet();
         options.setFrom(ParserEmulationProfile.MULTI_MARKDOWN);
 
         Parser parser = Parser.builder(options).build();
@@ -38,7 +37,7 @@ public class BasicSample {
     }
 
     void markdown() {
-        MutableDataHolder options = new MutableDataSet();
+        MutableDataSet options = new MutableDataSet();
         options.setFrom(ParserEmulationProfile.MARKDOWN);
 
         Parser parser = Parser.builder(options).build();

@@ -507,3 +507,77 @@ Document[0, 46]
 ````````````````````````````````
 
 
+Incorrect input
+
+```````````````````````````````` example Macros: 29
+{{mymacro par1="val1" par2=2}}
+{{/nomacro}} is not end
+and even {{mymacro}} is just plain content
+{{/mymacro}}
+
+Markdown
+{{/mymacro}}
+.
+{{mymacro par1=&quot;val1&quot; par2=2}}
+<p>{{/nomacro}} is not end
+and even {{mymacro}} is just plain content</p>
+{{/mymacro}}
+<p>Markdown
+{{/mymacro}}</p>
+.
+Document[0, 134]
+  MacroBlock[0, 110] macroContent:[31, 98, "{{/nomacro}} is not end\nand even {{mymacro}} is just plain content\n"]
+    Macro[0, 30] open:[0, 2, "{{"] name:[2, 9, "mymacro"] attributes:[10, 28, "par1=\"val1\" par2=2"] close:[28, 30, "}}"] isBlockMacro macroContent:[30, 30]
+      MacroAttribute[10, 21] attribute:[10, 14, "par1"] separator:[14, 15, "="] valueOpen:[15, 16, "\""] value:[16, 20, "val1"] valueClose:[20, 21, "\""]
+      MacroAttribute[22, 28] attribute:[22, 26, "par2"] separator:[26, 27, "="] value:[27, 28, "2"]
+    Paragraph[31, 98]
+      Text[31, 54] chars:[31, 54, "{{/no … t end"]
+      SoftLineBreak[54, 55]
+      Text[55, 64] chars:[55, 64, "and even "]
+      Macro[64, 97] open:[64, 66, "{{"] name:[66, 73, "mymacro"] close:[73, 75, "}}"] macroContent:[75, 75]
+        Text[75, 97] chars:[75, 97, " is j … ntent"]
+    MacroClose[98, 110] nameOpen:[98, 101, "{{/"] name:[101, 108, "mymacro"] nameClose:[108, 110, "}}"]
+  Paragraph[112, 134]
+    Text[112, 120] chars:[112, 120, "Markdown"]
+    SoftLineBreak[120, 121]
+    Text[121, 133] chars:[121, 133, "{{/my … cro}}"]
+````````````````````````````````
+
+
+Corrected input
+
+```````````````````````````````` example Macros: 30
+{{mymacro par1="val1" par2=2}}
+{{/nomacro}} is not end
+and even {{mymacro}} is just plain content
+ {{/mymacro}}
+
+Markdown
+{{/mymacro}}
+.
+{{mymacro par1=&quot;val1&quot; par2=2}}
+<p>{{/nomacro}} is not end
+and even {{mymacro}} is just plain content
+{{/mymacro}}</p>
+<p>Markdown</p>
+{{/mymacro}}
+.
+Document[0, 135]
+  MacroBlock[0, 134] macroContent:[31, 122, "{{/nomacro}} is not end\nand even {{mymacro}} is just plain content\n {{/mymacro}}\n\nMarkdown\n"]
+    Macro[0, 30] open:[0, 2, "{{"] name:[2, 9, "mymacro"] attributes:[10, 28, "par1=\"val1\" par2=2"] close:[28, 30, "}}"] isBlockMacro macroContent:[30, 30]
+      MacroAttribute[10, 21] attribute:[10, 14, "par1"] separator:[14, 15, "="] valueOpen:[15, 16, "\""] value:[16, 20, "val1"] valueClose:[20, 21, "\""]
+      MacroAttribute[22, 28] attribute:[22, 26, "par2"] separator:[26, 27, "="] value:[27, 28, "2"]
+    Paragraph[31, 112]
+      Text[31, 54] chars:[31, 54, "{{/no … t end"]
+      SoftLineBreak[54, 55]
+      Text[55, 64] chars:[55, 64, "and even "]
+      Macro[64, 111] open:[64, 66, "{{"] name:[66, 73, "mymacro"] close:[73, 75, "}}"] macroContent:[75, 99, " is just plain content\n "]
+        Text[75, 97] chars:[75, 97, " is j … ntent"]
+        SoftLineBreak[97, 98]
+        MacroClose[99, 111] nameOpen:[99, 102, "{{/"] name:[102, 109, "mymacro"] nameClose:[109, 111, "}}"]
+    Paragraph[113, 122]
+      Text[113, 121] chars:[113, 121, "Markdown"]
+    MacroClose[122, 134] nameOpen:[122, 125, "{{/"] name:[125, 132, "mymacro"] nameClose:[132, 134, "}}"]
+````````````````````````````````
+
+

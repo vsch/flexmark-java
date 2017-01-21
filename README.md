@@ -37,8 +37,8 @@ static extension methods in interfaces.
 * The core has no dependencies; for extensions, see below
 
 [![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
-[![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java)
 [![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
+<!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
 
 ### Changes from commonmark-java project
 
@@ -412,6 +412,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [GitHub Issues page]: ../../issues
+[Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [LICENSE.txt]: LICENSE.txt
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
@@ -463,5 +464,4 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [sirthias]: https://github.com/sirthias
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
-[Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 

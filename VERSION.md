@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.11.8](#0118)
 - [0.11.7](#0117)
 - [0.11.6](#0116)
 - [0.11.5](#0115)
@@ -105,6 +106,11 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.8
+------
+
+* Fix: #42, Indext out of bounds when XWiki macro match is rejected because of context mismatch
 
 0.11.7
 ------
