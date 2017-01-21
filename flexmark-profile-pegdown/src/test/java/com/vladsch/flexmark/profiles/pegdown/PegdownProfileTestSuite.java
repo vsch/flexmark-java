@@ -6,8 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboPegdownSpecTest.class,
         ComboPegdownCompatibilitySpecTest.class,
-        ComboPegdownExtSpecTest.class,
-        ComboPegdownExtCompatibilitySpecTest.class,
+        ComboPegdownExtensionCompatibilitySpecTest.class,
 })
 public class PegdownProfileTestSuite {
 }

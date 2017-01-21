@@ -43,6 +43,11 @@ public interface FormattingAppendable extends Appendable {
     @Override
     FormattingAppendable append(char c);
 
+    // same as calling append count times
+    FormattingAppendable repeat(char c, int count);
+    FormattingAppendable repeat(CharSequence csq, int count);
+    FormattingAppendable repeat(CharSequence csq, int start, int end, int count);
+
     /**
      * Get the underlying appendable
      *

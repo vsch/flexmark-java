@@ -10,6 +10,7 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     HtmlFormattingAppendable openPre();
     HtmlFormattingAppendable closePre();
     HtmlFormattingAppendable raw(CharSequence s);
+    HtmlFormattingAppendable raw(CharSequence s, int count);
     HtmlFormattingAppendable rawPre(CharSequence s);
     HtmlFormattingAppendable rawIndentedPre(CharSequence s);
     HtmlFormattingAppendable text(CharSequence s);

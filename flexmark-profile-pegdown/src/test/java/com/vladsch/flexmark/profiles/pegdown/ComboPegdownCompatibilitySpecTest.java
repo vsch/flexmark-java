@@ -1,11 +1,10 @@
 package com.vladsch.flexmark.profiles.pegdown;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.test.ComboExtraSpecTest;
+import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.runners.Parameterized;
 
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
+public class ComboPegdownCompatibilitySpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_profile_compatibility_spec.md";
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.FENCED_CODE_BLOCKS

@@ -35,13 +35,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T openPre() {
         out.openPreFormatted(true);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T closePre() {
         out.closePreFormatted();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -56,7 +56,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T raw(CharSequence s) {
         out.append(s);
-        return (T)this;
+        return (T) this;
+    }
+
+    public T raw(CharSequence s, int count) {
+        int i = count;
+        while (i-- > 0) out.append(s);
+        return (T) this;
     }
 
     @Override
@@ -64,7 +70,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         out.openPreFormatted(true)
                 .append(s)
                 .closePreFormatted();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -75,13 +81,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
                 .append(s)
                 .closePreFormatted();
         out.setPrefix(prefix);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T text(CharSequence s) {
         out.append(Escaping.escapeHtml(s, false));
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -90,7 +96,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             currentAttributes = new Attributes();
         }
         currentAttributes.replaceValue(attrName, value);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -101,7 +107,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         for (Attribute attr : attribute) {
             currentAttributes.addValue(attr.getName(), attr.getValue());
         }
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -113,13 +119,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
                 currentAttributes.addValues(attributes);
             }
         }
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public HtmlFormattingAppendable withAttr() {
         withAttributes = true;
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -130,19 +136,19 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T setAttributes(Attributes attributes) {
         currentAttributes = attributes;
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T withCondLine() {
         lineOnChildText = true;
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T withCondIndent() {
         indentIndentingChildren = true;
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -199,7 +205,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             tagOpened(tagName);
         }
 
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -213,7 +219,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
             out.append("</").append(tagName).append(">");
             tagClosed(tagName);
         }
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -276,43 +282,43 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
         if (withIndent) line();
 
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagVoidLine(final CharSequence tagName) {
         line().tagVoid(tagName).line();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName) {
         line().tag(tagName).line();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName, final boolean voidElement) {
         line().tag(tagName, voidElement).line();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName, final Runnable runnable) {
         line().tag(tagName, false, false, runnable).line();
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagIndent(final CharSequence tagName, final Runnable runnable) {
         tag(tagName, true, false, runnable);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T tagLineIndent(final CharSequence tagName, final Runnable runnable) {
         tag(tagName, true, true, runnable);
-        return (T)this;
+        return (T) this;
     }
 
     // delegated to FormattingAppendable
@@ -326,7 +332,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T setOptions(final int options) {
         out.setOptions(options);
-        return (T)this;
+        return (T) this;
     }
 
     public int getModCount() {
@@ -339,32 +345,32 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public T line() {
         out.line();
-        return (T)this;
+        return (T) this;
     }
 
     public T blankLine() {
         out.blankLine();
-        return (T)this;
+        return (T) this;
     }
 
     public T lineIf(boolean predicate) {
         out.lineIf(predicate);
-        return (T)this;
+        return (T) this;
     }
 
     public T indent() {
         out.indent();
-        return (T)this;
+        return (T) this;
     }
 
     public T willIndent() {
         out.willIndent();
-        return (T)this;
+        return (T) this;
     }
 
     public T unIndent() {
         out.unIndent();
-        return (T)this;
+        return (T) this;
     }
 
     public IOException getIOException() {
@@ -374,29 +380,29 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T append(final CharSequence csq) {
         out.append(csq);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T append(final CharSequence csq, final int start, final int end) {
         out.append(csq, start, end);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T append(final char c) {
         out.append(c);
-        return (T)this;
+        return (T) this;
     }
 
     public T flush() {
         out.flush();
-        return (T)this;
+        return (T) this;
     }
 
     public T flush(final int maxBlankLines) {
         out.flush(maxBlankLines);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -405,7 +411,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T setIndentPrefix(final CharSequence prefix) {
         out.setIndentPrefix(prefix);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -414,7 +420,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T setPrefix(final CharSequence prefix) {
         out.setPrefix(prefix);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
@@ -424,22 +430,40 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public T line(final Ref<Boolean> lineRef) {
         out.line(lineRef);
-        return (T)this;
+        return (T) this;
     }
 
     public T lineIf(final Ref<Boolean> lineRef) {
         out.lineIf(lineRef);
-        return (T)this;
+        return (T) this;
     }
 
     public T blankLineIf(final boolean predicate) {
         out.blankLineIf(predicate);
-        return (T)this;
+        return (T) this;
     }
 
     public T blankLine(final int count) {
         out.blankLine(count);
-        return (T)this;
+        return (T) this;
+    }
+
+    @Override
+    public FormattingAppendable repeat(final char c, final int count) {
+        out.repeat(c, count);
+        return (T) this;
+    }
+
+    @Override
+    public FormattingAppendable repeat(final CharSequence csq, final int count) {
+        out.repeat(csq, count);
+        return (T) this;
+    }
+
+    @Override
+    public FormattingAppendable repeat(final CharSequence csq, final int start, final int end, final int count) {
+        out.repeat(csq, start, end, count);
+        return (T) this;
     }
 
     @Override
@@ -448,7 +472,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T setIndentOffset(final int indentOffset) {
         out.setIndentOffset(indentOffset);
-        return (T)this;
+        return (T) this;
     }
 
     public int getLineCount() {
@@ -464,22 +488,22 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public T openPreFormatted(final boolean keepIndent) {
         out.openPreFormatted(true);
-        return (T)this;
+        return (T) this;
     }
 
     @Override
     public T closePreFormatted() {
         out.closePreFormatted();
-        return (T)this;
+        return (T) this;
     }
 
     public T openConditional(final ConditionalFormatter openFormatter) {
         out.openConditional(openFormatter);
-        return (T)this;
+        return (T) this;
     }
 
     public T closeConditional(final ConditionalFormatter closeFormatter) {
         out.closeConditional(closeFormatter);
-        return (T)this;
+        return (T) this;
     }
 }

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.11.9](#0119)
 - [0.11.8](#0118)
 - [0.11.7](#0117)
 - [0.11.6](#0116)
@@ -106,6 +107,12 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.9
+------
+
+* Fix: #43, Out of date documentation for Pegdown Migration Helper, caused by
+  `flexmark-profile-pegdown` missing from project dependencies and not being updated.
 
 0.11.8
 ------

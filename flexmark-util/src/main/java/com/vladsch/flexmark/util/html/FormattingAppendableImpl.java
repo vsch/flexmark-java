@@ -386,6 +386,24 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         return this;
     }
 
+    public FormattingAppendable repeat(char c, int count) {
+        int i = count;
+        while (i-- > 0) append(c);
+        return this;
+    }
+
+    public FormattingAppendable repeat(CharSequence csq, int count) {
+        int i = count;
+        while (i-- > 0) append(csq);
+        return this;
+    }
+
+    public FormattingAppendable repeat(CharSequence csq, int start, int end, int count) {
+        int i = count;
+        while (i-- > 0) append(csq, start, end);
+        return this;
+    }
+
     @Override
     public Appendable getAppendable() {
         return myAppendable;

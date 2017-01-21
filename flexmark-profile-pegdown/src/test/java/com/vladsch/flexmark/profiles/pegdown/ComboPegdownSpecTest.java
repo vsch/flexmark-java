@@ -4,7 +4,7 @@ import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
-import com.vladsch.flexmark.test.ComboExtraSpecTest;
+import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboPegdownSpecTest extends ComboExtraSpecTest {
+public class ComboPegdownSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(PegdownParser.PEGDOWN_EXTENSIONS, Extensions.FENCED_CODE_BLOCKS);
