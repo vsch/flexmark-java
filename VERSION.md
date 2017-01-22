@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
-- [0.11.11](#01111)
+- [0.12.0](#0120)
 - [0.11.10](#01110)
 - [0.11.9](#0119)
 - [0.11.8](#0118)
@@ -110,17 +110,22 @@ flexmark-java
 
 &nbsp;</details>
 
-0.11.11
--------
+0.12.0
+------
+
+* Fix: XWiki `Macro.getAttributes()` to use `LinkedHashMap` to preserve attribute order.
 
 * Add: `flexmark-html-parser` module to convert HTML to markdown, uses `jsoup` for HTML parsing.
 
-  Converts HTML to Markdown, assumes all non-application specific extensions are going to be
-  used:
+  Converts HTML to Markdown, assumes all non-application specific extensions are available:
 
   * abbreviations
   * aside
+  * block quotes
+  * bold, italic, inline code
+  * bullet and numbered lists
   * definition
+  * fenced code
   * strikethrough
   * subscript
   * superscript

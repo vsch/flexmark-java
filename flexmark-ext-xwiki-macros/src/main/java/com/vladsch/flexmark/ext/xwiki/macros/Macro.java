@@ -6,6 +6,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -87,7 +88,7 @@ public class Macro extends CustomNode {
     }
 
     public Map<String, String> getAttributes() {
-        final Map<String, String> attributes = new HashMap<>();
+        final Map<String, String> attributes = new LinkedHashMap<>();
         Node child = getFirstChild();
         while (child != null) {
             if (child instanceof MacroAttribute) {
