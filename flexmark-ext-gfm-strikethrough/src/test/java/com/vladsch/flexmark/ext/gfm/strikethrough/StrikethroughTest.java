@@ -20,7 +20,7 @@ public class StrikethroughTest extends RenderingTestCase {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     @Override
-    protected SpecExample example() {
+    public SpecExample example() {
         return null;
     }
 
@@ -65,7 +65,7 @@ public class StrikethroughTest extends RenderingTestCase {
         assertRendering("~~foo~~~~~~bar~~", "<p><del>foo</del>~~<del>bar</del></p>\n");
         assertRendering("~~foo~~~~~~~bar~~", "<p><del>foo</del>~~~<del>bar</del></p>\n");
     }
-    
+
     @Test
     public void strikethroughWholeParagraphWithOtherDelimiters() {
         assertRendering("~~Paragraph with *emphasis* and __strong emphasis__~~", "<p><del>Paragraph with <em>emphasis</em> and <strong>strong emphasis</strong></del></p>\n");
@@ -85,12 +85,12 @@ public class StrikethroughTest extends RenderingTestCase {
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 }

@@ -395,6 +395,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @Override
+    public String getText() {
+        return out.getText();
+    }
+
     public T flush() {
         out.flush();
         return (T) this;

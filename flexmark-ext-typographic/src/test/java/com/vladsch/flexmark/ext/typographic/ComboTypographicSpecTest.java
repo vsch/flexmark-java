@@ -68,22 +68,22 @@ public class ComboTypographicSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected DataHolder options(String optionSet) {
+    public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
     @Override
-    protected String getSpecResourceName() {
+    public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 }

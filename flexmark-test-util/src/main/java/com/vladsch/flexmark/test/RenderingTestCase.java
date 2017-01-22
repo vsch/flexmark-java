@@ -27,9 +27,9 @@ public abstract class RenderingTestCase {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    protected abstract IParse parser();
-    protected abstract IRender renderer();
-    protected abstract SpecExample example();
+    public abstract IParse parser();
+    public abstract IRender renderer();
+    public abstract SpecExample example();
 
     /**
      * Customize options for an example
@@ -37,7 +37,7 @@ public abstract class RenderingTestCase {
      * @param optionSet name of the options set to use
      * @return options or null to use default
      */
-    protected DataHolder options(String optionSet) {
+    public DataHolder options(String optionSet) {
         assert optionSet == null;
         return null;
     }
@@ -49,7 +49,7 @@ public abstract class RenderingTestCase {
      * @param optionSets comma separate list of option set names
      * @return combined set from applying these options together
      */
-    protected DataHolder getOptions(SpecExample example, String optionSets) {
+    public DataHolder getOptions(SpecExample example, String optionSets) {
         if (optionSets == null) return null;
         String[] optionNames = optionSets.replace('\u00A0', ' ').split(",");
         DataHolder options = null;
@@ -122,8 +122,12 @@ public abstract class RenderingTestCase {
             throw new AssumptionViolatedException("Ignored: example(" + example.getSection() + ": " + example.getExampleNumber() + ") options(" + optionSets + ") is using " + option + " option");
     }
 
-    protected String ast(Node node) {
+    public String ast(Node node) {
         return new AstCollectingVisitor().collectAndGetAstText(node);
+    }
+
+    protected void actualSource(String html, String optionSet) {
+
     }
 
     protected void actualHtml(String html, String optionSet) {

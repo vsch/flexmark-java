@@ -124,7 +124,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                 block.setHadBlankAfterItemParagraph(true);
             }
             hadBlankLine = true;
-            return BlockContinue.atIndex(state.getLineEndIndex());
+            return BlockContinue.atIndex(state.getNextNonSpaceIndex());
         }
 
         ParserEmulationProfile emulationFamily = options.myParserEmulationProfile.family;

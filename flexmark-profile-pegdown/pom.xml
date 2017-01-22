@@ -4,12 +4,12 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.11.9</version>
+        <version>0.11.10</version>
     </parent>
 
-    <artifactId>pegdown-profile</artifactId>
-    <name>flexmark-java extension for pegdown_profile</name>
-    <description>flexmark-java extension for pegdown_profile</description>
+    <artifactId>flexmark-profile-pegdown</artifactId>
+    <name>flexmark-java pegdown profile</name>
+    <description>flexmark-java extension for setting flexmark options by using pegdown extension flags</description>
 
     <dependencies>
         <dependency>

@@ -103,22 +103,22 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    protected DataHolder options(String optionSet) {
+    public DataHolder options(String optionSet) {
         return optionsSet(optionSet);
     }
 
     @Override
-    protected String getSpecResourceName() {
+    public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
     @Override
-    protected IParse parser() {
+    public IParse parser() {
         return PARSER;
     }
 
     @Override
-    protected IRender renderer() {
+    public IRender renderer() {
         return RENDERER;
     }
 }

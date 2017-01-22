@@ -3898,9 +3898,26 @@ Document[0, 44]
 ````````````````````````````````
 
 
-encoding of embedded EOL
+encoding of +
 
 ```````````````````````````````` example(Multi-Line Image URL: 9) options(multi-line-image-url)
+![ref](/url1?
+one = 1 + line
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20%2B%20line%0A" alt="ref" /> trailing text</p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Image[0, 30] textOpen:[0, 2, "!["] text:[2, 5, "ref"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 13, "/url1?"] pageRef:[7, 13, "/url1?"] urlContent:[14, 29, "one = 1 + line\n"] linkClose:[29, 30, ")"]
+      Text[2, 5] chars:[2, 5, "ref"]
+    Text[30, 44] chars:[30, 44, " trai …  text"]
+````````````````````````````````
+
+
+encoding of embedded EOL
+
+```````````````````````````````` example(Multi-Line Image URL: 10) options(multi-line-image-url)
 ![ref](/url1?
 one = 1 & line \\
 line two \\

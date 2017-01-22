@@ -812,7 +812,8 @@ Definition **Term**
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
-  <dd>definition <code>item</code>paragraph
+  <dd>definition <code>item</code>
+  <p>paragraph</p>
     <ul>
       <li>bullet item
         <ul>

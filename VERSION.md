@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.11.10](#01110)
 - [0.11.9](#0119)
 - [0.11.8](#0118)
 - [0.11.7](#0117)
@@ -108,6 +109,12 @@ flexmark-java
 
 &nbsp;</details>
 
+0.11.10
+-------
+
+* Fix: #44, flexmark-profile-pegdown maven, pegdown profile module was misnamed in pom, no
+  errors but was not deploying.
+
 0.11.9
 ------
 
@@ -117,7 +124,7 @@ flexmark-java
 0.11.8
 ------
 
-* Fix: #42, Indext out of bounds when XWiki macro match is rejected because of context mismatch
+* Fix: #42, Index out of bounds when XWiki macro match is rejected because of context mismatch
 
 0.11.7
 ------

@@ -19,12 +19,27 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
         this.example = example;
     }
 
-    protected SpecExample example() {
+    public SpecExample example() {
         return example;
     }
 
     protected abstract String dumpDir();
     protected abstract String dumpHeader();
+
+    @Override
+    protected void actualSource(String source, String optionSet) {
+        //if (dumpDir() != null) {
+        //    File file = new File(dumpDir() + example.getSection() + ".html");
+        //    FileOutputStream outputStream = null;
+        //    try {
+        //        outputStream = new FileOutputStream(file);
+        //        outputStream.write(html.getBytes(Charset.defaultCharset()));
+        //        outputStream.close();
+        //    } catch (IOException e) {
+        //        e.printStackTrace();
+        //    }
+        //}
+    }
 
     @Override
     protected void actualHtml(String html, String optionSet) {

@@ -47,6 +47,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private int myPendingSpaces;
 
     @SuppressWarnings("WeakerAccess")
+    public FormattingAppendableImpl(final boolean allFormatOptions) {
+         this(new StringBuilder(), allFormatOptions);
+    }
+
+    public FormattingAppendableImpl(final int formatOptions) {
+         this(new StringBuilder(), formatOptions);
+    }
+
     public FormattingAppendableImpl(final Appendable appendable, final boolean allFormatOptions) {
         this(appendable, allFormatOptions ? FORMAT_ALL : 0);
     }
@@ -172,7 +180,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 myPendingEOL--;
                 myOffsetAfter++;
 
-                if (myPendingEOL > 0 && !myPrefix.isEmpty()) {
+                if (myPendingEOL > 0 && !myPrefix.isBlank()) {
                     myAppendable.append(myPrefix);
                     myOffsetAfter += myPrefix.length();
                 }
@@ -407,6 +415,13 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public Appendable getAppendable() {
         return myAppendable;
+    }
+
+    @Override
+    public String getText() {
+        Appendable appendable = flush().getAppendable();
+        String result = appendable.toString();
+        return result;
     }
 
     @Override

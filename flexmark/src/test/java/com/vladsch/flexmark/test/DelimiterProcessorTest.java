@@ -32,7 +32,7 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().nodeRendererFactory(new UpperCaseNodeRendererFactory()).build();
 
     @Override
-    protected SpecExample example() {
+    public SpecExample example() {
         return null;
     }
 
@@ -61,12 +61,12 @@ public class DelimiterProcessorTest extends RenderingTestCase {
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 

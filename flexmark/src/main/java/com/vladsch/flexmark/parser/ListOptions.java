@@ -99,20 +99,27 @@ public class ListOptions implements MutableDataSetter {
     }
 
     public boolean isTightListItem(ListItem node) {
-        if (isAutoLoose() && isAutoLooseOneLevelLists()) {
+        boolean autoLoose = isAutoLoose();
+        if (autoLoose && isAutoLooseOneLevelLists()) {
             boolean singleLevel = node.getAncestorOfType(ListItem.class) == null && node.getChildOfType(ListBlock.class) == null;
             return node.getFirstChild() == null || !singleLevel && node.isTight() || singleLevel && node.isInTightList();
         } else {
-            return node.getFirstChild() == null || !isAutoLoose() && node.isTight() || isAutoLoose() && node.isInTightList();
+            return node.getFirstChild() == null || !autoLoose && node.isTight() || autoLoose && node.isInTightList();
         }
     }
 
     public boolean isInTightListItem(Paragraph node) {
         Block parent = node.getParent();
-        if (isAutoLoose() && isAutoLooseOneLevelLists()) {
-            return parent instanceof ListItem && isTightListItem((ListItem) parent);
+        if (!(parent instanceof ListItem)) return false;
+
+        ListItem listItem = (ListItem) parent;
+        if (!listItem.isItemParagraph(node)) return false;
+
+        boolean autoLoose = isAutoLoose();
+        if (autoLoose && isAutoLooseOneLevelLists()) {
+            return isTightListItem(listItem);
         }
-        return parent instanceof ListItem && (!isAutoLoose() && ((ListItem) parent).isParagraphInTightListItem(node) || isAutoLoose() && ((ListItem) parent).isInTightList());
+        return !autoLoose && listItem.isParagraphInTightListItem(node) || autoLoose && listItem.isInTightList();
     }
 
     public boolean canInterrupt(ListBlock a, boolean isEmptyItem, boolean isItemParagraph) {

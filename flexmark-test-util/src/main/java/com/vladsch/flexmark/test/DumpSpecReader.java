@@ -11,8 +11,8 @@ import java.io.InputStream;
 import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
 
 public class DumpSpecReader extends SpecReader {
-    private final StringBuilder sb = new StringBuilder();
-    private final FullSpecTestCase testCase;
+    protected final StringBuilder sb = new StringBuilder();
+    protected final FullSpecTestCase testCase;
 
     public DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
         super(stream);

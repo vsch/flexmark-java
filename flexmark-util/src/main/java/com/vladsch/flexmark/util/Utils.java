@@ -228,9 +228,9 @@ public class Utils {
         return "";
     }
 
-    public static String removeEnd(String receiver, char prefix) {
+    public static String removeEnd(String receiver, char suffix) {
         if (receiver != null) {
-            if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
+            if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
                 return receiver.substring(0, receiver.length() - 1);
             }
             return receiver;
@@ -238,10 +238,10 @@ public class Utils {
         return "";
     }
 
-    public static String removeEnd(String receiver, String prefix) {
+    public static String removeEnd(String receiver, String suffix) {
         if (receiver != null) {
-            if (receiver.startsWith(java.lang.String.valueOf(prefix))) {
-                return receiver.substring(0, receiver.length() - prefix.length());
+            if (receiver.endsWith(java.lang.String.valueOf(suffix))) {
+                return receiver.substring(0, receiver.length() - suffix.length());
             }
             return receiver;
         }

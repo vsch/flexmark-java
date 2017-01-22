@@ -11,27 +11,27 @@ public class FullOrigSpecCoreTest extends FullSpecTestCase {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder().percentEncodeUrls(true).build();
 
     @Override
-    protected SpecExample example() {
+    public SpecExample example() {
         return null;
     }
 
     @Override
-    protected String getSpecResourceName() {
+    public String getSpecResourceName() {
         return SPEC_RESOURCE;
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected boolean includeExampleCoords() {
+    public boolean includeExampleCoords() {
         return false;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 }

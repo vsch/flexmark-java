@@ -563,7 +563,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             if (!node.getUrlContent().isEmpty()) {
                 // reverse URL encoding of =, &
-                String content = Escaping.percentEncodeUrl(node.getUrlContent()).replace("+", "%20").replace("%3D", "=").replace("%26", "&amp;");
+                String content = Escaping.percentEncodeUrl(node.getUrlContent()).replace("+", "%2B").replace("%3D", "=").replace("%26", "&amp;");
                 url += content;
             }
 

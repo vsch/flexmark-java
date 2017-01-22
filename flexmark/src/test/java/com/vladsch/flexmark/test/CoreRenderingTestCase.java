@@ -10,17 +10,17 @@ public class CoreRenderingTestCase extends RenderingTestCase {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().build();
 
     @Override
-    protected SpecExample example() {
+    public SpecExample example() {
         return null;
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 }

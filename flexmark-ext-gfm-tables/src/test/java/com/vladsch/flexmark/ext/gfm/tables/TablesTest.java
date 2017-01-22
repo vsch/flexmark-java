@@ -27,7 +27,7 @@ public class TablesTest extends RenderingTestCase {
     static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     @Override
-    protected SpecExample example() {
+    public SpecExample example() {
         return null;
     }
 
@@ -356,12 +356,12 @@ public class TablesTest extends RenderingTestCase {
     }
 
     @Override
-    protected Parser parser() {
+    public Parser parser() {
         return PARSER;
     }
 
     @Override
-    protected HtmlRenderer renderer() {
+    public HtmlRenderer renderer() {
         return RENDERER;
     }
 }

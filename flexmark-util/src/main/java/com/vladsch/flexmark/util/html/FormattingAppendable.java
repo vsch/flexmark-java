@@ -55,6 +55,13 @@ public interface FormattingAppendable extends Appendable {
      */
     Appendable getAppendable();
 
+    /**
+     * get the resulting text from appendable
+     *
+     * @return appendable toString() result after flushing
+     */
+    String getText();
+
     int CONVERT_TABS = 0x0001;
     int COLLAPSE_WHITESPACE = 0x0002;
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;

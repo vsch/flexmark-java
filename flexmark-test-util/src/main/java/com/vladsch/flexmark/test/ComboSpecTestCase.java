@@ -20,19 +20,18 @@ import static org.junit.Assert.assertEquals;
 public abstract class ComboSpecTestCase extends FullSpecTestCase {
     public static final String SPEC_RESOURCE = "/ast_spec.md";
 
-    private DumpSpecReader dumpSpecReader;
     protected final SpecExample example;
 
     /**
      * @return return resource name for the spec to use for the examples of the test
      */
-    protected abstract String getSpecResourceName();
+    public abstract String getSpecResourceName();
 
     public ComboSpecTestCase(SpecExample example) {
         this.example = example;
     }
 
-    protected SpecExample example() {
+    public SpecExample example() {
         return example;
     }
 
@@ -59,11 +58,11 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     /**
      * @return return true if actual result spec used in comparison should be output to stdout
      */
-    protected boolean outputActualFullSpec() {
+    public boolean outputActualFullSpec() {
         return false;
     }
 
-    protected boolean includeExampleCoords() {
+    public boolean includeExampleCoords() {
         return true;
     }
 

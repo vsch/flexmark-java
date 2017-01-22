@@ -66,6 +66,11 @@ public abstract class ListItem extends Block implements ParagraphItemContainer {
         if (!isTight()) return false;
 
         // see if this is the first paragraph child item
+        return isItemParagraph(node);
+    }
+
+    public boolean isItemParagraph(Paragraph node) {
+        // see if this is the first paragraph child item
         Node child = getFirstChild();
         while (child != null && !(child instanceof Paragraph)) child = child.getNext();
         return child == node;

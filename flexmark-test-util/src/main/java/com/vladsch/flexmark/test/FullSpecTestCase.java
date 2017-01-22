@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 public abstract class FullSpecTestCase extends RenderingTestCase implements SpecReaderFactory {
     public static final String SPEC_RESOURCE = "/ast_spec.md";
 
-    private DumpSpecReader dumpSpecReader;
+    protected DumpSpecReader dumpSpecReader;
 
     @Override
     public SpecReader create(InputStream inputStream) {
@@ -22,23 +22,23 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
     /**
      * @return  return resource name for the spec to use for the examples of the test
      */
-    protected abstract String getSpecResourceName();
+    public abstract String getSpecResourceName();
 
     /**
-     * @return return true if actual html should be used in comparison, else only actual AST will be used in compared  
+     * @return return true if actual html should be used in comparison, else only actual AST will be used in compared
      */
-    protected boolean useActualHtml() {
+    public boolean useActualHtml() {
         return true;
     }
 
     /**
-     * @return return true if actual result spec used in comparison should be output to stdout  
+     * @return return true if actual result spec used in comparison should be output to stdout
      */
-    protected boolean outputActualFullSpec() {
+    public boolean outputActualFullSpec() {
         return false;
     }
 
-    protected boolean includeExampleCoords() {
+    public boolean includeExampleCoords() {
         return true;
     }
 
@@ -48,11 +48,11 @@ public abstract class FullSpecTestCase extends RenderingTestCase implements Spec
         SpecReader.readExamples(specResourcePath, this);
         String fullSpec = SpecReader.readSpec(specResourcePath);
         String actual = dumpSpecReader.getFullSpec();
-        
+
         if (outputActualFullSpec()) {
             System.out.println(actual);
         }
-        
+
         assertEquals(fullSpec, actual);
     }
 }
