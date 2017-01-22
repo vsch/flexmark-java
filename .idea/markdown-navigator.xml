@@ -31,14 +31,14 @@
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
-        <option name="COMMONMARK_LISTS" value="true" />
+        <option name="COMMONMARK_LISTS" value="false" />
         <option name="DUMMY" value="false" />
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
         <option name="GFM_TABLE_RENDERING" value="true" />
         <option name="GITBOOK_URL_ENCODING" value="true" />
         <option name="GITHUB_EMOJI_URL" value="false" />
-        <option name="GITHUB_LISTS" value="false" />
+        <option name="GITHUB_LISTS" value="true" />
         <option name="GITHUB_WIKI_LINKS" value="true" />
         <option name="JEKYLL_FRONT_MATTER" value="true" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />

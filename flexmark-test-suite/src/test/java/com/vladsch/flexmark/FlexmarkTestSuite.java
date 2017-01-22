@@ -1,5 +1,7 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.convert.html.FlexmarkHtmlParser;
+import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
 import com.vladsch.flexmark.ext.aside.ExtAsideTestSuite;
@@ -58,6 +60,7 @@ import org.junit.runners.Suite;
         ExtXWikiMacroTestSuite.class,
         ExtYamlFrontMatterTestSuite.class,
         ExtZzzzzzTestSuite.class,
+        FlexmarkHtmlParserTestSuite.class,
         JiraConverterTestSuite.class,
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,

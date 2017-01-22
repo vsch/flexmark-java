@@ -18,6 +18,12 @@ Motivation for this project was the need to replace [pegdown] parser in my [Mark
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
+### Latest Additions
+
+* [XWiki Macros Extension Module](../../wiki/Extensions#xwiki-macro-extension)
+* [Jekyll tags Extension Module](../../wiki/Extensions#jekyll-tags)
+* [HTML to Markdown Converter Module](../../wiki/Extensions#html-to-markdown)
+
 ### Changes Forced by Downgrade to Java 7
 
 I tried to keep all changes caused by the downgrade in Java language level as mechanical as

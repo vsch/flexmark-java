@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.11.11](#01111)
 - [0.11.10](#01110)
 - [0.11.9](#0119)
 - [0.11.8](#0118)
@@ -108,6 +109,23 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.11.11
+-------
+
+* Add: `flexmark-html-parser` module to convert HTML to markdown, uses `jsoup` for HTML parsing.
+
+  Converts HTML to Markdown, assumes all non-application specific extensions are going to be
+  used:
+
+  * abbreviations
+  * aside
+  * definition
+  * strikethrough
+  * subscript
+  * superscript
+  * tables
+  * will also handle conversion for multi-line URL images
 
 0.11.10
 -------

@@ -1805,17 +1805,12 @@ With multiple lines per definition:
 
 ```````````````````````````````` example Definition Lists: 6
 Term 1
-:   Definition 1 line 1 ...
-Definition 1 line 2
-:   Definition 2 line 1 ...
-Definition 2 line 2
+:   Definition 1 line 1 ... Definition 1 line 2
+:   Definition 2 line 1 ... Definition 2 line 2
 
 Term 2
-:   Definition 3 line 2 ...
-    Definition 3 line 2
-:   Definition 4 line 2 ...
-    Definition 4 line 2
-
+:   Definition 3 line 2 ... Definition 3 line 2
+:   Definition 4 line 2 ... Definition 4 line 2
 .
 <dl>
   <dt>Term 1</dt>
@@ -1842,7 +1837,6 @@ Term 1
 Term 2
 
 :   Definition 2 (paragraph)
-
 .
 <dl>
   <dt>Term 1</dt>
@@ -1862,19 +1856,15 @@ With multiple paragraphs:
 ```````````````````````````````` example Definition Lists: 8
 Term 1
 
-:   Definition 1 paragraph 1 line 1 ...
-    Definition 1 paragraph 1 line 2
+:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2
 
-    Definition 1 paragraph 2 line 1 ...
-    Definition 1 paragraph 2 line 2
+    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2
 
 Term 2
 
-:   Definition 1 paragraph 1 line 1 ...
-    Definition 1 paragraph 1 line 2 (lazy)
+:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2 (lazy)
 
-    Definition 1 paragraph 2 line 1 ...
-    Definition 1 paragraph 2 line 2 (lazy)
+    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2 (lazy)
 .
 <dl>
   <dt>Term 1</dt>
@@ -1901,14 +1891,11 @@ A mix:
 Term 1
 Term 2
 
-:   Definition 1 paragraph 1 line 1 ...
-    Definition 1 paragraph 1 line 2 (lazy)
-    
-    Definition 1 paragraph 2 line 1 ...
-    Definition 1 paragraph 2 line 2
+:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2 (lazy)
 
-:   Definition 2 paragraph 1 line 1 ...
-    Definition 2 paragraph 1 line 2 (lazy)
+    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2
+
+:   Definition 2 paragraph 1 line 1 ... Definition 2 paragraph 1 line 2 (lazy)
 
 Term 3
 
@@ -1916,25 +1903,22 @@ Term 3
 
 :   Definition 4 (no paragraph)
 
-:   Definition 5 line 1 ...
-    Definition 5 line 2 (no paragraph)
+:   Definition 5 line 1 ... Definition 5 line 2 (no paragraph)
 
-:   Definition 6 paragraph 1 line 1 ...
-    Definition 6 paragraph 1 line 2
+:   Definition 6 paragraph 1 line 1 ... Definition 6 paragraph 1 line 2
 
 :   Definition 7 (no paragraph)
 
-:   Definition 8 paragraph 1 line 1 (forced paragraph) ...
-    Definition 8 paragraph 1 line 2
-    
+:   Definition 8 paragraph 1 line 1 (forced paragraph) ... Definition 8 paragraph 1 line 2
+
     Definition 8 paragraph 2 line 1
-    
+
 Term 4
 
-:   Definition 9 paragraph 1 line 1 (forced paragraph) ...
-    Definition 9 paragraph 1 line 2
-    
+:   Definition 9 paragraph 1 line 1 (forced paragraph) ... Definition 9 paragraph 1 line 2
+
     Definition 9 paragraph 2 line 1
+
 :   Definition 10 (no paragraph)
 .
 <dl>
@@ -2036,15 +2020,13 @@ nested elements allowed
 
 ```````````````````````````````` example Definition Lists: 13
 Definition **Term**
-: definition `item` 
-    
-  paragraph
-    
-  - bullet item
-    - sub item
-      
-  > block quote    
-  
+:   definition `item`
+
+    paragraph
+    * bullet item
+      * sub item
+    > 
+    > block quote
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2073,8 +2055,8 @@ Term 1
 :   Definition 1 (paragraph)
 
 Term 2
-:   Definition 2 (paragraph)
 
+:   Definition 2 (paragraph)
 .
 <dl>
   <dt>Term 1</dt>
@@ -2133,6 +2115,148 @@ Definition Term
   <dd>Definition of above term</dd>
   <dd>Another definition of above term</dd>
 </dl>
+````````````````````````````````
+
+
+```````````````````````````````` example Definition Lists: 18
+Definition Term
+:   Definition of above term Another definition of above term
+.
+<dl>
+  <dt>Definition Term</dt>
+  <dd>Definition of above term
+  Another definition of above term</dd>
+</dl>
+````````````````````````````````
+
+
+## Fenced Code
+
+Change language class prefix
+
+```````````````````````````````` example Fenced Code: 1
+```text
+plain text
+```
+.
+<pre><code class="text">plain text
+</code></pre>
+````````````````````````````````
+
+
+empty, no info
+
+```````````````````````````````` example Fenced Code: 2
+```
+
+```
+.
+<pre><code>
+</code></pre>
+````````````````````````````````
+
+
+empty, no info, blank line follows
+
+```````````````````````````````` example Fenced Code: 3
+```
+
+```
+.
+<pre><code>
+</code></pre>
+````````````````````````````````
+
+
+empty, info
+
+```````````````````````````````` example Fenced Code: 4
+```info
+
+```
+.
+<pre><code class="language-info">
+</code></pre>
+````````````````````````````````
+
+
+empty, info, blank line follows
+
+```````````````````````````````` example Fenced Code: 5
+```info
+
+```
+.
+<pre><code class="language-info">
+</code></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 6
+`````java
+some back ticks in the ````code````
+`````
+.
+<pre><code class="java">some back ticks in the ````code````
+</code></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 7
+> `````java
+>     some back ticks in the ````code````
+> `````
+.
+<blockquote>
+<pre><code class="java">    some back ticks in the ````code````
+</code></pre>
+</blockquote>
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 8
+* item
+  > 
+  > `````markdown
+  > some back ticks in the ````code````
+  > * item
+  >   * sub-item
+  >     
+  > `````
+.
+<ul>
+  <li>
+    <p>item</p>
+    <blockquote>
+      <pre><code class="markdown">some back ticks in the ````code````
+* item
+  * sub-item
+    
+</code></pre>
+    </blockquote>
+  </li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 9
+* item
+  >     
+  >     some back ticks in the ````code````
+  >     * item
+  >       * sub-item
+.
+<ul>
+  <li>
+    <p>item</p>
+    <blockquote>
+      <pre><code>some back ticks in the ````code````
+* item
+  * sub-item
+</code></pre>
+    </blockquote>
+  </li>
+</ul>
 ````````````````````````````````
 
 
