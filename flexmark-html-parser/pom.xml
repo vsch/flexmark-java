@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.12.0</version>
+        <version>0.12.1</version>
     </parent>
 
     <artifactId>flexmark-html-parser</artifactId>
@@ -19,6 +19,10 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-emoji</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>

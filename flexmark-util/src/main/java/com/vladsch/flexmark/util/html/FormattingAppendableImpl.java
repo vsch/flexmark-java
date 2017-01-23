@@ -19,6 +19,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private String myWhitespaceEOL;
     private int myOptions;
 
+    // options at time line was issued
+    private int myEolOptions;
+
     // IOExceptions are not thrown, the first one sets this member
     private IOException myIOException;
 
@@ -48,11 +51,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @SuppressWarnings("WeakerAccess")
     public FormattingAppendableImpl(final boolean allFormatOptions) {
-         this(new StringBuilder(), allFormatOptions);
+        this(new StringBuilder(), allFormatOptions);
     }
 
     public FormattingAppendableImpl(final int formatOptions) {
-         this(new StringBuilder(), formatOptions);
+        this(new StringBuilder(), formatOptions);
     }
 
     public FormattingAppendableImpl(final Appendable appendable, final boolean allFormatOptions) {
@@ -79,7 +82,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myPrefix = BasedSequence.NULL;
         myIndentPrefix = BasedSequence.NULL;
         myPreFormattedNesting = 0;
-
+        myEolOptions = myOptions;
         setWhitespace();
     }
 
@@ -102,6 +105,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private boolean haveOptions(int options) {
         return (myOptions & options) != 0;
+    }
+
+    private boolean haveEolOptions(int options) {
+        return (myEolOptions & options) != 0;
     }
 
     private boolean isConvertingTabs() {
@@ -159,6 +166,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private void setPendingEOL(int pendingEOL) {
         if (myPreFormattedNesting == 0 && myModCountOfLastEOL != myModCount && pendingEOL > myPendingEOL) {
             myPendingEOL = pendingEOL;
+            myEolOptions = myOptions;
         }
     }
 
@@ -166,11 +174,12 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myPendingEOL = 0;
         myPendingSpaces = 0;
         myModCountOfLastEOL = myModCount;
+        myEolOptions = myOptions;
     }
 
     private void appendEOL(final boolean withIndent, final boolean withPendingSpaces) throws IOException {
         if (myPendingEOL > 0) {
-            if (myPendingSpaces > 0 && !isSuppressingTrailingWhitespace()) {
+            if (myPendingSpaces > 0 && !haveEolOptions(SUPPRESS_TRAILING_WHITESPACE)) {
                 appendSpaces();
             }
 
@@ -425,6 +434,13 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public String getText(int maxBlankLines) {
+        Appendable appendable = flush(maxBlankLines).getAppendable();
+        String result = appendable.toString();
+        return result;
+    }
+
+    @Override
     public FormattingAppendable flush() {
         return flush(0);
     }
@@ -484,6 +500,12 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public FormattingAppendable line() {
         setPendingEOL(1);
+        return this;
+    }
+
+    @Override
+    public FormattingAppendable addLine() {
+        setPendingEOL(myPendingEOL + 1);
         return this;
     }
 

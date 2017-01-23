@@ -8,74 +8,92 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Emphasis
+## Text
 
 Converts HTML to markdown
 
-```````````````````````````````` example Emphasis: 1
+```````````````````````````````` example Text: 1
 Expected rendered HTML
 .
 <p>Expected rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 2
+```````````````````````````````` example Text: 2
+Expected rendered HTML  
+Another line
+.
+<p>Expected rendered HTML<br>Another line</p>
+````````````````````````````````
+
+
+```````````````````````````````` example Text: 3
+Expected rendered HTML  
+Another line
+.
+<p>Expected rendered HTML<br><br>Another line</p>
+````````````````````````````````
+
+
+## Emphasis
+
+```````````````````````````````` example Emphasis: 1
 **Expected** rendered HTML
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 3
+```````````````````````````````` example Emphasis: 2
 **Expected** rendered HTML
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 4
+```````````````````````````````` example Emphasis: 3
 *Expected* rendered HTML
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 5
+```````````````````````````````` example Emphasis: 4
 *Expected* rendered HTML
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 6
+```````````````````````````````` example Emphasis: 5
 ++Expected++ rendered HTML
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 7
+```````````````````````````````` example Emphasis: 6
 ~~Expected~~ rendered HTML
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 8
+```````````````````````````````` example Emphasis: 7
 ~Expected~ rendered HTML
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 9
+```````````````````````````````` example Emphasis: 8
 ^Expected^ rendered HTML
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 10
+```````````````````````````````` example Emphasis: 9
 `Expected` rendered HTML
 .
 <p><code>Expected</code> rendered HTML</p>
@@ -84,7 +102,7 @@ Expected rendered HTML
 
 ``Expected `a``
 
-```````````````````````````````` example Emphasis: 11
+```````````````````````````````` example Emphasis: 10
 ``Expected `a`` rendered HTML
 .
 <p><code>Expected `a</code> rendered HTML</p>
@@ -1709,6 +1727,48 @@ real life table
 ````````````````````````````````
 
 
+Table with `th` in `tbody`
+
+```````````````````````````````` example Tables: 48
+| Result | Description        | Entity Name |
+|--------|--------------------|-------------|
+|        | non-breaking space | &nbsp;      |
+| <      | less than          | &lt;        |
+| >      | greater than       | &gt;        |
+| &      | ampersand          | &amp;       |
+.
+<table>
+  <tbody>
+    <tr>
+      <th style="padding-left:0">Result</th>
+      <th>Description</th>
+      <th>Entity Name</th>
+    </tr>
+    <tr>
+      <td style="padding-left:0"></td>
+      <td>non-breaking space</td>
+      <td>&amp;nbsp;</td>
+    </tr>
+    <tr>
+      <td style="padding-left:0">&lt;</td>
+      <td>less than</td>
+      <td>&amp;lt;</td>
+    </tr>
+    <tr>
+      <td style="padding-left:0">&gt;</td>
+      <td>greater than</td>
+      <td>&amp;gt;</td>
+    </tr>
+    <tr>
+      <td style="padding-left:0">&amp;</td>
+      <td>ampersand</td>
+      <td>&amp;amp;</td>
+    </tr>
+  </tbody>
+</table>
+````````````````````````````````
+
+
 ## Definition Lists
 
 a definition in a block quote
@@ -2257,6 +2317,47 @@ some back ticks in the ````code````
     </blockquote>
   </li>
 </ul>
+````````````````````````````````
+
+
+## Emoji Shortcuts
+
+```````````````````````````````` example Emoji Shortcuts: 1
+:heavy_check_mark:
+.
+<g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
+````````````````````````````````
+
+
+```````````````````````````````` example Emoji Shortcuts: 2
+:heavy_check_mark:
+.
+<g-emoji fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
+````````````````````````````````
+
+
+```````````````````````````````` example Emoji Shortcuts: 3
+:heavy_check_mark:
+.
+<img src="file:/Users/vlad/Library/Application Support/IdeaIC2017-1-EAP/idea-multimarkdown/emojis/heavy_check_mark.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
+````````````````````````````````
+
+
+```````````````````````````````` example Emoji Shortcuts: 4
+:heavy_check_mark:
+.
+<img src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
+````````````````````````````````
+
+
+## Issue Tests
+
+Infinite loop on unwrap
+
+```````````````````````````````` example Issue Tests: 1
+:heavy_check_mark:
+.
+<g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
 
 

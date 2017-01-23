@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.convert.html;
 
+import com.vladsch.flexmark.ext.emoji.internal.EmojiCheatSheet;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
@@ -42,10 +43,20 @@ public class FlexmarkHtmlParser {
      * @return resulting markdown string
      */
     public static String parse(String html) {
+        return parse(html, 0);
+    }
+
+    /**
+     * Parse HTML append to out
+     *
+     * @param html html to be parsed
+     * @return resulting markdown string
+     */
+    public static String parse(String html, int maxBlankLines) {
         FormattingAppendableImpl out = new FormattingAppendableImpl(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE);
         FlexmarkHtmlParser parser = new FlexmarkHtmlParser();
         parser.parse(out, html);
-        return out.getText();
+        return out.getText(maxBlankLines);
     }
 
     /**
@@ -128,31 +139,36 @@ public class FlexmarkHtmlParser {
         if (tagParam != null) {
             switch (tagParam.tagType) {
                 // @formatter:off
-                case A              : processed = processA(out, (Element) node); break;
-                case ABBR           : processed = processAbbr(out, (Element) node); break;
-                case ASIDE          : processed = processAside(out, (Element) node); break;
-                case BLOCKQUOTE     : processed = processBlockquote(out, (Element) node); break;
-                case CODE           : processed = processCode(out, (Element) node); break;
-                case DEL            : processed = processDel(out, (Element) node); break;
-                case DIV            : processed = processDiv(out, (Element) node); break;
-                case DL             : processed = processDl(out, (Element) node); break;
-                case _EMPHASIS       : processed = processEmphasis(out, (Element) node); break;
-                case HR             : processed = processHr(out, (Element) node); break;
-                case IMG            : processed = processImg(out, (Element) node); break;
-                case INS            : processed = processIns(out, (Element) node); break;
-                case OL             : processed = processOl(out, (Element) node); break;
-                case P              : processed = processP(out, (Element) node); break;
-                case PRE            : processed = processPre(out, (Element) node); break;
-                case _STRONG_EMPHASIS         : processed = processStrong(out, (Element) node); break;
-                case SUB            : processed = processSub(out, (Element) node); break;
-                case SUP            : processed = processSup(out, (Element) node); break;
-                case UL             : processed = processUl(out, (Element) node); break;
-                case TABLE          : processed = processTable(out, (Element) node); break;
-                case _UNWRAPPED      : processed = processUnwrapped(out, (Element) node); break;
-                case _COMMENT        : processed = processComment(out, (Comment)node); break;
-                case _HEADING        : processed = processHeading(out, (Element) node); break;
-                case _TEXT           : processed = processText(out, (TextNode)node); break;
+                case A                       : processed = processA(out, (Element) node); break;
+                case BR                      : processed = processBr(out, (Element) node); break;
+                case ABBR                    : processed = processAbbr(out, (Element) node); break;
+                case ASIDE                   : processed = processAside(out, (Element) node); break;
+                case BLOCKQUOTE              : processed = processBlockquote(out, (Element) node); break;
+                case CODE                    : processed = processCode(out, (Element) node); break;
+                case DEL                     : processed = processDel(out, (Element) node); break;
+                case DIV                     : processed = processDiv(out, (Element) node); break;
+                case DL                      : processed = processDl(out, (Element) node); break;
+                case _EMPHASIS               : processed = processEmphasis(out, (Element) node); break;
+                case HR                      : processed = processHr(out, (Element) node); break;
+                case IMG                     : processed = processImg(out, (Element) node); break;
+                case INS                     : processed = processIns(out, (Element) node); break;
+                case OL                      : processed = processOl(out, (Element) node); break;
+                case P                       : processed = processP(out, (Element) node); break;
+                case PRE                     : processed = processPre(out, (Element) node); break;
+                case _STRONG_EMPHASIS        : processed = processStrong(out, (Element) node); break;
+                case SUB                     : processed = processSub(out, (Element) node); break;
+                case SUP                     : processed = processSup(out, (Element) node); break;
+                case UL                      : processed = processUl(out, (Element) node); break;
+                case TABLE                   : processed = processTable(out, (Element) node); break;
+                case _UNWRAPPED              : processed = processUnwrapped(out, (Element) node); break;
+                case _COMMENT                : processed = processComment(out, (Comment)node); break;
+                case _HEADING                : processed = processHeading(out, (Element) node); break;
+                case _TEXT                   : processed = processText(out, (TextNode)node); break;
                 // @formatter:on
+            }
+        } else {
+            if (node instanceof Element) {
+                processed = processEmoji(out, (Element) node);
             }
         }
 
@@ -222,6 +238,15 @@ public class FlexmarkHtmlParser {
         } else {
             processTextNodes(out, element);
         }
+        return true;
+    }
+
+    private boolean processBr(FormattingAppendable out, Element element) {
+        skip();
+        int options = out.getOptions();
+        out.setOptions(options & ~(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE));
+        out.repeat(' ', 2).line();
+        out.setOptions(options);
         return true;
     }
 
@@ -323,21 +348,26 @@ public class FlexmarkHtmlParser {
 
         // see if it is an anchor or a link
         if (element.hasAttr("src")) {
-            out.append("![");
-            if (element.hasAttr("alt")) out.append(element.attr("alt"));
-            out.append(']');
-            out.append('(');
             String src = element.attr("src");
-            int pos = src.indexOf('?');
-            if (pos > 0) {
-                out.append(src, 0, pos + 1);
-                String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
-                out.line().append(decoded);
+            EmojiCheatSheet.EmojiShortcut shortcut = EmojiCheatSheet.getImageShortcut(src);
+            if (shortcut != null) {
+                out.append(':').append(shortcut.name).append(':');
             } else {
-                out.append(src);
+                out.append("![");
+                if (element.hasAttr("alt")) out.append(element.attr("alt"));
+                out.append(']');
+                out.append('(');
+                int pos = src.indexOf('?');
+                if (pos > 0) {
+                    out.append(src, 0, pos + 1);
+                    String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
+                    out.line().append(decoded);
+                } else {
+                    out.append(src);
+                }
+                if (element.hasAttr("title")) out.append(" \"").append(element.attr("title").replace("\"", "\\\"")).append('"');
+                out.append(")");
             }
-            if (element.hasAttr("title")) out.append(" \"").append(element.attr("title").replace("\"", "\\\"")).append('"');
-            out.append(")");
         }
         return true;
     }
@@ -545,17 +575,39 @@ public class FlexmarkHtmlParser {
 
     private boolean processDiv(FormattingAppendable out, Element element) {
         // unwrap and process content
+        skip();
         processHtmlTree(out, element);
         return true;
     }
 
     private boolean processUnwrapped(FormattingAppendable out, Element element) {
         // unwrap and process content
+        skip();
         processHtmlTree(out, element);
         return true;
     }
 
+    private boolean processEmoji(FormattingAppendable out, Element element) {
+        if (element.tagName().equalsIgnoreCase("g-emoji")) {
+            if (element.hasAttr("alias")) {
+                skip();
+                out.append(':').append(element.attr("alias")).append(':');
+                return true;
+            }
+            if (element.hasAttr("fallback-src")) {
+                EmojiCheatSheet.EmojiShortcut shortcut = EmojiCheatSheet.getImageShortcut(element.attr("fallback-src"));
+                if (shortcut != null) {
+                    skip();
+                    out.append(':').append(shortcut.name).append(':');
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     private boolean processComment(FormattingAppendable out, Comment element) {
+        skip();
         out.append("<!--").append(element.getData()).append("-->");
         return true;
     }
@@ -727,7 +779,9 @@ public class FlexmarkHtmlParser {
                     case TBODY : processTableSection(out, false, (Element) item); break;
                     case THEAD : processTableSection(out, true, (Element) item); break;
                     case TR : {
-                        myTable.isHeading = false;
+                        Element tableRow = (Element)item;
+                        Elements children = tableRow.children();
+                        myTable.isHeading = !children.isEmpty() && children.get(0).tagName().equalsIgnoreCase("th");
                         processTableRow(out, (Element) item);
                     }
                     break;
@@ -842,6 +896,8 @@ public class FlexmarkHtmlParser {
             if (myTable.caption != null) {
                 out.line().append('[').append(myTable.caption).append(']').line();
             }
+
+            out.blankLine();
         }
 
         myTable = oldTable;
@@ -860,7 +916,21 @@ public class FlexmarkHtmlParser {
             if (tagParam != null) {
                 switch (tagParam.tagType) {
                     // @formatter:off
-                    case TR : processTableRow(out, (Element) node); break;
+                    case TR : {
+                        Element tableRow = (Element)node;
+                        Elements children = tableRow.children();
+                        if (!children.isEmpty()) {
+                            Element firstChild = children.get(0);
+                            if (children.get(0).tagName().equalsIgnoreCase("th")) {
+                                myTable.isHeading = true;
+                            }
+                        }
+
+                        processTableRow(out, tableRow);
+                        myTable.isHeading = isHeading;
+
+                        break;
+                    }
                     // @formatter:on
                 }
             } else {
@@ -994,6 +1064,7 @@ public class FlexmarkHtmlParser {
         A,
         ABBR,
         ASIDE,
+        BR,
         BLOCKQUOTE,
         CAPTION,
         CODE,
@@ -1045,6 +1116,7 @@ public class FlexmarkHtmlParser {
         ourTagProcessors.put("a", TagParam.tag(TagType.A, null));
         ourTagProcessors.put("abbr", TagParam.tag(TagType.ABBR, null));
         ourTagProcessors.put("aside", TagParam.tag(TagType.ASIDE, null));
+        ourTagProcessors.put("br", TagParam.tag(TagType.BR, null));
         ourTagProcessors.put("blockquote", TagParam.tag(TagType.BLOCKQUOTE, null));
         ourTagProcessors.put("caption", TagParam.tag(TagType.CAPTION, null));
         ourTagProcessors.put("code", TagParam.tag(TagType.CODE, null));

@@ -348,6 +348,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    public T addLine() {
+        out.addLine();
+        return (T) this;
+    }
+
     public T blankLine() {
         out.blankLine();
         return (T) this;
@@ -398,6 +403,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public String getText() {
         return out.getText();
+    }
+
+    @Override
+    public String getText(int maxBlankLines) {
+        return out.getText(maxBlankLines);
     }
 
     public T flush() {

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.12.1](#0121)
 - [0.12.0](#0120)
 - [0.11.10](#01110)
 - [0.11.9](#0119)
@@ -94,7 +95,7 @@ flexmark-java
 - Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
   - [ ] League/CommonMark
-  - [ ] Jekyll
+  - [x] Jekyll
   - [ ] Php Markdown Extra
   - CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
   - FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
@@ -110,6 +111,18 @@ flexmark-java
 
 &nbsp;</details>
 
+0.12.1
+------
+
+* Fix: `FlexmarkHtmlParser`
+  * infinite loop when handling unknown/unhandled HTML tags.
+  * recognizing emoji shortcuts for GitHub emoji, GitHub emoji URL images and images using
+    EmojiCheatSheet file names.
+  * convert `<br>` to hard break in paragraphs
+  * `th` tags in `tbody` `tr` now create a `thead` row instead of `tbody` row
+
+* Update: Emoji Extension to latest Emoji Cheat Sheet shortcuts
+
 0.12.0
 ------
 
@@ -118,13 +131,13 @@ flexmark-java
 * Add: `flexmark-html-parser` module to convert HTML to markdown, uses `jsoup` for HTML parsing.
 
   Converts HTML to Markdown, assumes all non-application specific extensions are available:
-
   * abbreviations
   * aside
   * block quotes
   * bold, italic, inline code
   * bullet and numbered lists
   * definition
+  * emoji shortcuts
   * fenced code
   * strikethrough
   * subscript

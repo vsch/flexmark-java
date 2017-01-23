@@ -62,6 +62,14 @@ public interface FormattingAppendable extends Appendable {
      */
     String getText();
 
+    /**
+     * get the resulting text from appendable
+     *
+     * @param maxBlankLines maximum trailing blank lines to allow in output
+     * @return appendable toString() result after flushing
+     */
+    String getText(int maxBlankLines);
+
     int CONVERT_TABS = 0x0001;
     int COLLAPSE_WHITESPACE = 0x0002;
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;
@@ -148,6 +156,15 @@ public interface FormattingAppendable extends Appendable {
      * @return this
      */
     FormattingAppendable line();
+
+    /**
+     * Add a new line or blank lines as needed.
+     * <p>
+     * Actual new line character is only appended if there is real data
+     * appended and it did not contain a new line as the last character
+     * @return this
+     */
+    FormattingAppendable addLine();
 
     /**
      * Add a new line, if predicate is true and there was any unterminated text appended
