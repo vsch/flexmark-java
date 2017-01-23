@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.12.2](#0122)
 - [0.12.1](#0121)
 - [0.12.0](#0120)
 - [0.11.10](#01110)
@@ -110,6 +111,13 @@ flexmark-java
 - Add: PDF renderer
 
 &nbsp;</details>
+
+0.12.2
+------
+
+* Fix: HTML to Markdown add blank line before headings. Add a few elements to be unwrapped on
+  conversion and some to wrap but as block elements so they could be easily cleaned up if
+  needed.
 
 0.12.1
 ------

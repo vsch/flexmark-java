@@ -28,6 +28,9 @@ public class FlexmarkHtmlParser {
     private final Stack<State> myStateStack;
     private final Map<String, String> myAbbreviations;
 
+    // for now hardcoded options until options are finalized
+    private boolean setextHeadings = true;
+
     private State myState;
 
     private FlexmarkHtmlParser() {
@@ -159,12 +162,16 @@ public class FlexmarkHtmlParser {
                 case SUB                     : processed = processSub(out, (Element) node); break;
                 case SUP                     : processed = processSup(out, (Element) node); break;
                 case UL                      : processed = processUl(out, (Element) node); break;
+                case LI                      : processed = processList(out, (Element) node, false, true); break;
                 case TABLE                   : processed = processTable(out, (Element) node); break;
                 case _UNWRAPPED              : processed = processUnwrapped(out, (Element) node); break;
+                case _WRAPPED                : processed = processWrapped(out, (Element) node, true); break;
                 case _COMMENT                : processed = processComment(out, (Comment)node); break;
                 case _HEADING                : processed = processHeading(out, (Element) node); break;
                 case _TEXT                   : processed = processText(out, (TextNode)node); break;
                 // @formatter:on
+                default:
+                    int tmp = 0;
             }
         } else {
             if (node instanceof Element) {
@@ -174,26 +181,35 @@ public class FlexmarkHtmlParser {
 
         if (!processed) {
             // wrap markdown in HTML tag
-            if (node instanceof Element && ((Element) node).isBlock()) {
-                String s = node.outerHtml();
-                int pos = s.indexOf(">");
-                out.append(s.substring(0, pos));
-                next();
-
-                processHtmlTree(out, node);
-
-                int endPos = s.lastIndexOf("<");
-                out.append(s.substring(endPos));
-            } else {
-                out.append(node.toString());
-                next();
-            }
+            processWrapped(out, node, null);
         }
+    }
+
+    private boolean processWrapped(final FormattingAppendable out, final Node node, Boolean isBlock) {
+        if (node instanceof Element && (isBlock == null && ((Element) node).isBlock() || isBlock != null && isBlock)) {
+            String s = node.toString();
+            int pos = s.indexOf(">");
+            out.lineIf(isBlock != null).append(s.substring(0, pos + 1)).lineIf(isBlock != null);
+            next();
+
+            processHtmlTree(out, node);
+
+            int endPos = s.lastIndexOf("<");
+            out.lineIf(isBlock != null).append(s.substring(endPos)).lineIf(isBlock != null);
+        } else {
+            out.append(node.toString());
+            next();
+        }
+        return true;
+    }
+
+    private String prepareText(String text) {
+        return text.replace("\u00A0", "&nbsp;");
     }
 
     private boolean processText(FormattingAppendable out, TextNode node) {
         skip();
-        out.append(node.text());
+        out.append(prepareText(node.text()));
         return true;
     }
 
@@ -213,7 +229,7 @@ public class FlexmarkHtmlParser {
             if (child instanceof TextNode) {
                 TextNode textNode = (TextNode) child;
                 if (textPrefix != null && textPrefix.length() > 0) out.append(textPrefix);
-                out.append(((TextNode) child).text());
+                out.append(prepareText(((TextNode) child).text()));
                 if (textSuffix != null && textSuffix.length() > 0) out.append(textSuffix);
                 skip();
             } else if (child instanceof Element) {
@@ -319,15 +335,16 @@ public class FlexmarkHtmlParser {
         if (tagParam != null) {
             int level = (int) tagParam.param;
             if (level >= 1 && level <= 6) {
-                if (level <= 2) {
-                    out.line();
-                    int start = out.getOffsetBefore();
-                    processTextNodes(out, element);
-                    int end = out.getOffsetAfter();
-                    out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(end - start, 3));
+                if (setextHeadings && level <= 2) {
+                    FormattingAppendable text = new FormattingAppendableImpl(out.getOptions());
+                    out.blankLine();
+                    processTextNodes(text, element);
+                    String headingText = text.getText().trim();
+                    out.append(headingText);
+                    out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), 3));
                     out.blankLine();
                 } else {
-                    out.line();
+                    out.blankLine();
                     out.repeat('#', level).append(' ');
                     processTextNodes(out, element);
                     out.blankLine();
@@ -417,45 +434,52 @@ public class FlexmarkHtmlParser {
         pushState(element);
 
         Node next = peek();
+
+        String text;
+        boolean hadCode = false;
+        String className = "";
+
         if (next != null && next.nodeName().equalsIgnoreCase("code")) {
-            skip(1);
+            hadCode = true;
             Element code = (Element) next;
-
-            String text = code.toString();
-            int start = text.indexOf('>');
-            int end = text.lastIndexOf('<');
-            text = text.substring(start + 1, end);
-
-            int backTickCount = getMaxRepeatedChars(text, '`', 3);
-            CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
-
-            String className = Utils.removeStart(code.className(), "language-");
-
-            if (!className.isEmpty() || text.trim().isEmpty()) {
-                out.blankLine().append(backTicks);
-                if (!className.isEmpty()) {
-                    out.append(className);
-                }
-                out.line();
-                out.openPreFormatted(true);
-                out.append(text.isEmpty() ? "\n" : text);
-                out.closePreFormatted();
-                out.line().append(backTicks).blankLine();
-            } else {
-                // we indent the whole thing by 4 spaces
-                addPrefix(out, "    ");
-                out.openPreFormatted(true);
-                out.append(text.isEmpty() ? "\n" : text);
-                out.closePreFormatted();
-                out.line();
-                popPrefix(out);
-            }
-            popState();
-            next();
-            return true;
+            text = code.toString();
+            skip(1);
+            className = Utils.removeStart(code.className(), "language-");
+        } else {
+            text = element.toString();
         }
+
+        int start = text.indexOf('>');
+        int end = text.lastIndexOf('<');
+        text = text.substring(start + 1, end);
+        text = Escaping.unescapeHtml(text);
+
+        int backTickCount = getMaxRepeatedChars(text, '`', 3);
+        CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
+
+        if (!className.isEmpty() || text.trim().isEmpty() || !hadCode) {
+            out.blankLine().append(backTicks);
+            if (!className.isEmpty()) {
+                out.append(className);
+            }
+            out.line();
+            out.openPreFormatted(true);
+            out.append(text.isEmpty() ? "\n" : text);
+            out.closePreFormatted();
+            out.line().append(backTicks).blankLine();
+        } else {
+            // we indent the whole thing by 4 spaces
+            addPrefix(out, "    ");
+            out.openPreFormatted(true);
+            out.append(text.isEmpty() ? "\n" : text);
+            out.closePreFormatted();
+            out.line();
+            popPrefix(out);
+        }
+
         popState();
-        return false;
+        next();
+        return true;
     }
 
     private static class ListState {
@@ -492,9 +516,11 @@ public class FlexmarkHtmlParser {
         popState();
     }
 
-    private boolean processList(FormattingAppendable out, Element element, boolean isNumbered) {
-        skip();
-        pushState(element);
+    private boolean processList(FormattingAppendable out, Element element, boolean isNumbered, boolean isFakeList) {
+        if (!isFakeList) {
+            skip();
+            pushState(element);
+        }
 
         ListState listState = new ListState(isNumbered);
 
@@ -512,16 +538,18 @@ public class FlexmarkHtmlParser {
             }
         }
 
-        popState();
+        if (!isFakeList) {
+            popState();
+        }
         return true;
     }
 
     private boolean processOl(FormattingAppendable out, Element element) {
-        return processList(out, element, true);
+        return processList(out, element, true, false);
     }
 
     private boolean processUl(FormattingAppendable out, Element element) {
-        return processList(out, element, false);
+        return processList(out, element, false, false);
     }
 
     private void processDefinition(FormattingAppendable out, Element item) {
@@ -1093,6 +1121,7 @@ public class FlexmarkHtmlParser {
         UL,
         _HEADING,
         _UNWRAPPED,
+        _WRAPPED,
         _COMMENT,
         _TEXT,
     }
@@ -1161,5 +1190,9 @@ public class FlexmarkHtmlParser {
         ourTagProcessors.put("frameset", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("section", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("span", TagParam.tag(TagType._UNWRAPPED, null));
+        ourTagProcessors.put("small", TagParam.tag(TagType._UNWRAPPED, null));
+        ourTagProcessors.put("header", TagParam.tag(TagType._WRAPPED, null));
+        ourTagProcessors.put("footer", TagParam.tag(TagType._WRAPPED, null));
+        ourTagProcessors.put("iframe", TagParam.tag(TagType._UNWRAPPED, null));
     }
 }

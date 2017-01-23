@@ -16,8 +16,13 @@ public class Escaping {
 
     private static final Pattern BACKSLASH_OR_AMP = Pattern.compile("[\\\\&]");
 
+    private static final Pattern AMP_ONLY = Pattern.compile("[\\&]");
+
     private static final Pattern ENTITY_OR_ESCAPED_CHAR =
             Pattern.compile("\\\\" + ESCAPABLE + '|' + ENTITY, Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern ENTITY_ONLY =
+            Pattern.compile(ENTITY, Pattern.CASE_INSENSITIVE);
 
     private static final String XML_SPECIAL = "[&<>\"]";
 
@@ -94,6 +99,18 @@ public class Escaping {
             } else {
                 textMapper.addReplacedText(s, Html5Entities.entityToSequence(s));
             }
+        }
+    };
+
+    private static final Replacer ENTITY_REPLACER = new Replacer() {
+        @Override
+        public void replace(String s, StringBuilder sb) {
+            sb.append(Html5Entities.entityToString(s));
+        }
+
+        @Override
+        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+            textMapper.addReplacedText(s, Html5Entities.entityToSequence(s));
         }
     };
 
@@ -185,6 +202,36 @@ public class Escaping {
     }
 
     /**
+     * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s string to un-escape
+     * @return un-escaped string
+     */
+    public static String unescapeHtml(CharSequence s) {
+        if (AMP_ONLY.matcher(s).find()) {
+            return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER);
+        } else {
+            return s instanceof String ? (String) s : String.valueOf(s);
+        }
+    }
+
+    /**
+     * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s          based sequence to un-escape
+     * @param textMapper replaced text mapper to update for the changed text
+     * @return un-escaped sequence
+     */
+    public static BasedSequence unescapeHtml(BasedSequence s, ReplacedTextMapper textMapper) {
+        int indexOfAny = s.indexOf('&');
+        if (indexOfAny != -1) {
+            return replaceAll(ENTITY_ONLY, s, ENTITY_REPLACER, textMapper);
+        } else {
+            return s;
+        }
+    }
+
+    /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
@@ -209,7 +256,7 @@ public class Escaping {
     /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
-     * @param s      sequence to convert
+     * @param s          sequence to convert
      * @param endWithEOL true if an EOL is to be appended to the end of the sequence if not already ending with one.
      * @return converted sequence
      */
@@ -243,7 +290,7 @@ public class Escaping {
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
      *
-     * @param s      sequence to convert
+     * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @return converted sequence
      */
@@ -254,7 +301,7 @@ public class Escaping {
     /**
      * Normalize eol: embedded \r and \r\n are converted to \n
      *
-     * @param s      sequence to convert
+     * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @return converted sequence
      */
@@ -267,7 +314,7 @@ public class Escaping {
      * <p>
      * Append EOL sequence if sequence does not already end in EOL
      *
-     * @param s      sequence to convert
+     * @param s          sequence to convert
      * @param textMapper text mapper to update for the replaced text
      * @param endWithEOL whether an EOL is to be appended to the end of the sequence if it does not already end with one.
      * @return converted sequence
@@ -324,7 +371,7 @@ public class Escaping {
     /**
      * Normalize the link reference id
      *
-     * @param s      sequence containing the link reference id
+     * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
      * @return normalized link reference id
      */
@@ -338,7 +385,7 @@ public class Escaping {
      * <p>
      * Will remove leading ![ or [ and trailing ], collapse multiple whitespaces to a space and optionally convert the id to lowercase.
      *
-     * @param s      sequence containing the link reference id
+     * @param s          sequence containing the link reference id
      * @param changeCase if true then reference will be converted to lowercase
      * @return normalized link reference id
      */
@@ -355,8 +402,8 @@ public class Escaping {
     /**
      * Collapse regions of multiple white spaces to a single space
      *
-     * @param s sequence to process
-     * @param trim  true if the sequence should also be trimmed
+     * @param s    sequence to process
+     * @param trim true if the sequence should also be trimmed
      * @return processed sequence
      */
     public static String collapseWhitespace(CharSequence s, boolean trim) {

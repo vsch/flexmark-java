@@ -2361,3 +2361,222 @@ Infinite loop on unwrap
 ````````````````````````````````
 
 
+Headings need blank line
+
+```````````````````````````````` example Issue Tests: 2
+Text&nbsp;
+
+Heading
+=======
+.
+<p>Text&nbsp;</p>
+<h1>Heading</h1>
+````````````````````````````````
+
+
+Headings need blank line
+
+```````````````````````````````` example Issue Tests: 3
+**Attention!&nbsp;**Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+.
+<div class="warning">
+  <strong>Attention!&nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
+</div>
+````````````````````````````````
+
+
+handle `pre` without `code`
+
+```````````````````````````````` example Issue Tests: 4
+```
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+// http://www.allcolor.org/YaHPConverter/
+import org.allcolor.yahp.converter.CYaHPConverter;
+import org.allcolor.yahp.converter.IHtmlToPdfTransformer;
+
+public class HtmlToPdf_yahp {
+  public  static void main(String ... args ) throws Exception {
+    htmlToPdfFile();
+  }
+
+  public static void htmlToPdfFile() throws Exception {
+    CYaHPConverter converter = new CYaHPConverter();
+    File fout = new File("c:/temp/x.pdf");
+    FileOutputStream out = new FileOutputStream(fout);
+    Map properties = new HashMap();
+    List headerFooterList = new ArrayList();
+
+    String str = "<HTML><HEAD></HEAD><BODY><H1>Testing</H1><FORM>" +
+                 "check : <INPUT TYPE='checkbox' checked=checked/><br/>"   +
+                 "</FORM></BODY></HTML>";
+
+    properties.put(IHtmlToPdfTransformer.PDF_RENDERER_CLASS,
+                   IHtmlToPdfTransformer.FLYINGSAUCER_PDF_RENDERER);
+    //properties.put(IHtmlToPdfTransformer.FOP_TTF_FONT_PATH, fontPath);
+    converter.convertToPdf(str,
+          IHtmlToPdfTransformer.A4P,
+          headerFooterList,
+          "file:///temp/", // root for relative external CSS and IMAGE
+          out,
+          properties);
+    out.flush();
+    out.close();
+  }
+}
+```
+.
+<div class="howtocode"><pre>import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+// http://www.allcolor.org/YaHPConverter/
+import org.allcolor.yahp.converter.CYaHPConverter;
+import org.allcolor.yahp.converter.IHtmlToPdfTransformer;
+
+public class HtmlToPdf_yahp {
+  public  static void main(String ... args ) throws Exception {
+    htmlToPdfFile();
+  }
+
+  public static void htmlToPdfFile() throws Exception {
+    CYaHPConverter converter = new CYaHPConverter();
+    File fout = new File("c:/temp/x.pdf");
+    FileOutputStream out = new FileOutputStream(fout);
+    Map properties = new HashMap();
+    List headerFooterList = new ArrayList();
+
+    String str = "&lt;HTML&gt;&lt;HEAD&gt;&lt;/HEAD&gt;&lt;BODY&gt;&lt;H1&gt;Testing&lt;/H1&gt;&lt;FORM&gt;" +
+                 "check : &lt;INPUT TYPE='checkbox' checked=checked/&gt;&lt;br/&gt;"   +
+                 "&lt;/FORM&gt;&lt;/BODY&gt;&lt;/HTML&gt;";
+
+    properties.put(IHtmlToPdfTransformer.PDF_RENDERER_CLASS,
+                   IHtmlToPdfTransformer.FLYINGSAUCER_PDF_RENDERER);
+    //properties.put(IHtmlToPdfTransformer.FOP_TTF_FONT_PATH, fontPath);
+    converter.convertToPdf(str,
+          IHtmlToPdfTransformer.A4P,
+          headerFooterList,
+          "file:///temp/", // root for relative external CSS and IMAGE
+          out,
+          properties);
+    out.flush();
+    out.close();
+  }
+}
+</pre></div>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue Tests: 5
+<header class="comment__header">
+priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")
+</header>
+
+Though i am not getting any error ...no pdf is getting created
+see more
+<footer class="comment__footer">
+<menu class="comment-footer__menu">
+* [ 2 ](# "")
+* •
+* [ Reply](#)
+* •
+* Share ›
+  * <button class="share__button" data-action="share:twitter">Twitter</button>
+  * <button class="share__button" data-action="share:facebook">Facebook</button>
+  * <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly>
+* [](#)
+</menu>
+</footer>
+.
+<div class="post-body">
+  <header class="comment__header">
+<span class="post-byline">
+<span class="author">priyanka</span>
+
+</span>
+
+    <span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391" data-role="relative-time" class="time-ago" title="Monday, September 23, 2013 5:49 AM">3 years ago</a>
+</span>
+
+  </header>
+
+  <div class="post-body-inner">
+    <div class="post-message-container" data-role="message-container">
+      <div class="publisher-anchor-color" data-role="message-content">
+        <div class="post-message " data-role="message" dir="auto">
+          <p>Though i am not getting any error ...no pdf is getting created</p>
+        </div>
+
+        <span class="post-media"><ul data-role="post-media-list"></ul></span>
+      </div>
+    </div>
+    <a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+  </div>
+
+  <footer class="comment__footer">
+    <menu class="comment-footer__menu">
+      <li class="voting" data-role="voting">
+        <a href="#" class="vote-up  count-2" data-action="upvote" title="">
+
+          <span class="updatable count" data-role="likes">2</span>
+          <span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+        </a>
+        <span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+      </li>
+      <li class="bullet" aria-hidden="true">•</li>
+
+      <li class="reply" data-role="reply-link">
+        <a href="#" data-action="reply">
+          <span class="text">Reply</span></a></li>
+      <li class="bullet" aria-hidden="true">•</li>
+
+      <li class="comment__share">
+        <a class="toggle"><span class="text">Share ›</span></a>
+        <ul class="comment-share__buttons">
+          <li class="twitter">
+            <button class="share__button" data-action="share:twitter">Twitter</button>
+          </li>
+          <li class="facebook">
+            <button class="share__button" data-action="share:facebook">Facebook</button>
+          </li>
+          <li class="link">
+            <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+          </li>
+        </ul>
+      </li>
+
+      <li class="realtime" data-role="realtime-notification:1055568391">
+        <span style="display:none;" class="realtime-replies"></span>
+        <a style="display:none;" href="#" class="realtime-button"></a>
+      </li>
+
+    </menu>
+  </footer>
+</div>
+````````````````````````````````
+
+
+Unwrap iframes
+
+```````````````````````````````` example Issue Tests: 6
+.
+<iframe id="dsq-app4" name="dsq-app4" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqusads.com/ads-iframe/taboola/?category=tech&amp;stories_allowed=0&amp;service=dynamic&amp;safetylevel=20&amp;display_allowed=1&amp;video_allowed=0&amp;provider=taboola&amp;thumbnails_allowed=1&amp;experiment=network_default&amp;variant=fallthrough&amp;display_only=0&amp;t=1485117195&amp;links_allowed=1&amp;position=bottom&amp;shortname=realshowto&amp;display_bidding_allowed=0&amp;forum_shortname=realshowto&amp;forum_pk=1341383&amp;anchorColor=%23039be5&amp;colorScheme=light&amp;sourceUrl=http%3A%2F%2Fwww.rgagnon.com%2Fjavadetails%2Fjava-convert-html-to-pdf-using-yahp.html&amp;typeface=sans-serif&amp;disqus_version=9464b90" style="box-sizing: inherit; width: 1px !important; min-width: 100%; border: none !important; overflow: hidden !important; height: 586px !important;"></iframe>
+````````````````````````````````
+
+
