@@ -37,16 +37,26 @@ public class FlexmarkHtmlParser {
     private final Map<String, String> myAbbreviations;
     private final HtmlParserOptions myOptions;
     private State myState;
+    private boolean myTrace;
 
     private FlexmarkHtmlParser(DataHolder options) {
         myIndentStack = new Stack<>();
         myStateStack = new Stack<>();
         myAbbreviations = new HashMap<>();
         myOptions = new HtmlParserOptions(options);
+        //myTrace = true;
     }
 
     public HtmlParserOptions getOptions() {
         return myOptions;
+    }
+
+    public boolean isTrace() {
+        return myTrace;
+    }
+
+    public void setTrace(final boolean trace) {
+        myTrace = trace;
     }
 
     /**
@@ -57,7 +67,17 @@ public class FlexmarkHtmlParser {
      */
     public void parse(FormattingAppendable out, String html) {
         Document document = Jsoup.parse(html);
+
         Element body = document.body();
+
+        if (myTrace) {
+            FormattingAppendableImpl trace = new FormattingAppendableImpl(0);
+            trace.setIndentPrefix("  ");
+            dumpHtmlTree(trace, body);
+            trace.flush();
+            System.out.println(trace.getAppendable());
+        }
+
         processHtmlTree(out, body);
 
         // output abbreviations if any
@@ -87,6 +107,21 @@ public class FlexmarkHtmlParser {
      */
     public FlexmarkHtmlParser build(DataHolder options) {
         return new FlexmarkHtmlParser(options);
+    }
+
+    public void dumpHtmlTree(FormattingAppendable out, Node node) {
+        out.line().append(node.nodeName());
+        for (Attribute attribute : node.attributes().asList()) {
+            out.append(' ').append(attribute.getKey()).append("=\"").append(attribute.getValue()).append("\"");
+        }
+
+        out.line().indent();
+
+        for (Node child : node.childNodes()) {
+            dumpHtmlTree(out, child);
+        }
+
+        out.unIndent();
     }
 
     /**
@@ -258,14 +293,14 @@ public class FlexmarkHtmlParser {
     }
 
     private void processTextNodes(FormattingAppendable out, Node node) {
-        processTextNodes(out, node, null, null, false);
+        processTextNodes(out, node, null, null);
     }
 
-    private void processTextNodes(FormattingAppendable out, Node node, CharSequence wrapText, boolean needSpaceAfter) {
-        processTextNodes(out, node, wrapText, wrapText, needSpaceAfter);
+    private void processTextNodes(FormattingAppendable out, Node node, CharSequence wrapText) {
+        processTextNodes(out, node, wrapText, wrapText);
     }
 
-    private void processTextNodes(FormattingAppendable out, Node node, CharSequence textPrefix, CharSequence textSuffix, boolean needSpaceAfter) {
+    private void processTextNodes(FormattingAppendable out, Node node, CharSequence textPrefix, CharSequence textSuffix) {
         pushState(node);
 
         Node child;
@@ -275,16 +310,9 @@ public class FlexmarkHtmlParser {
                 if (textPrefix != null && textPrefix.length() > 0) out.append(textPrefix);
                 String text = ((TextNode) child).getWholeText();
                 String appendAfter = null;
-                if (needSpaceAfter) {
-                    if ("\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
-                        appendAfter = text.substring(text.length() - 1);
-                        text = text.substring(0, text.length() - 1);
-                    }
-                }
                 String preparedText = prepareText(text);
                 out.append(preparedText);
                 if (textSuffix != null && textSuffix.length() > 0) out.append(textSuffix);
-                if (appendAfter != null) out.append(prepareText(appendAfter));
                 skip();
             } else if (child instanceof Element) {
                 processElement(out, child);
@@ -292,6 +320,70 @@ public class FlexmarkHtmlParser {
         }
 
         popState();
+    }
+
+    private void wrapTextNodes(FormattingAppendable out, Node node, CharSequence wrapText, boolean needSpaceAround) {
+        String text = processTextNodes(node);
+        String prefixBefore = null;
+        String appendAfter = null;
+        boolean addSpaceBefore = false;
+        boolean addSpaceAfter = false;
+
+        if (!text.isEmpty() && needSpaceAround) {
+            if ("\u00A0 \t\n".indexOf(text.charAt(0)) != -1) {
+                prefixBefore = prepareText(text.substring(0, 1));
+                text = text.substring(1);
+            } else if (text.startsWith("&nbsp;")) {
+                prefixBefore = "&nbsp;";
+                text = text.substring(prefixBefore.length());
+            } else {
+                // if we already have space or nothing before us
+                addSpaceBefore = true;
+
+                if (out.isPendingEOL() || out.isPendingSpace() || out.getModCount() == 0) {
+                    addSpaceBefore = false;
+                }
+            }
+
+            if ("\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
+                appendAfter = prepareText(text.substring(text.length() - 1));
+                text = text.substring(0, text.length() - 1);
+            } else if (text.endsWith("&nbsp;")) {
+                appendAfter = "&nbsp;";
+                text = text.substring(0, text.length() - appendAfter.length());
+            } else {
+                // if next is not text space
+                Node next = peek();
+                addSpaceAfter = true;
+
+                if (next instanceof TextNode) {
+                    String nextText = ((TextNode) next).getWholeText();
+                    if (!nextText.isEmpty() && Character.isWhitespace(nextText.charAt(0))) {
+                        addSpaceAfter = false;
+                    }
+                }
+            }
+        }
+
+        if (!text.isEmpty()) {
+            // need to trim end of string
+            int pos = text.length() - 1;
+            while (pos >= 0 && Character.isWhitespace(text.charAt(pos))) pos--;
+            pos++;
+
+            if (pos > 0) {
+                if (prefixBefore != null) out.append(prefixBefore);
+                if (addSpaceBefore) out.append(' ');
+
+                text = text.substring(0, pos);
+                out.append(wrapText);
+                out.append(text);
+                out.append(wrapText);
+
+                if (appendAfter != null) out.append(appendAfter);
+                if (addSpaceAfter) out.append(' ');
+            }
+        }
     }
 
     private String processTextNodes(Node node) {
@@ -380,7 +472,7 @@ public class FlexmarkHtmlParser {
         BasedSequence text = SubSequence.of(element.ownText());
         int backTickCount = getMaxRepeatedChars(text, '`', 1);
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
-        processTextNodes(out, element, backTicks, false);
+        processTextNodes(out, element, backTicks);
         return true;
     }
 
@@ -399,13 +491,13 @@ public class FlexmarkHtmlParser {
 
     private boolean processDel(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "~~", true);
+        wrapTextNodes(out, element, "~~", true);
         return true;
     }
 
     private boolean processEmphasis(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "*", true);
+        wrapTextNodes(out, element, "*", true);
         return true;
     }
 
@@ -455,7 +547,8 @@ public class FlexmarkHtmlParser {
                 out.append(']');
                 out.append('(');
                 int pos = src.indexOf('?');
-                if (pos > 0) {
+                int eol = pos < 0 ? pos : src.indexOf("%0A", pos);
+                if (pos > 0 && eol > 0) {
                     out.append(src, 0, pos + 1);
                     String decoded = Utils.urlDecode(src.substring(pos + 1).replace("+", "%2B"), "UTF8");
                     out.line().append(decoded);
@@ -511,25 +604,25 @@ public class FlexmarkHtmlParser {
 
     private boolean processIns(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "++", true);
+        wrapTextNodes(out, element, "++", true);
         return true;
     }
 
     private boolean processStrong(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "**", true);
+        wrapTextNodes(out, element, "**", true);
         return true;
     }
 
     private boolean processSub(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "~", true);
+        wrapTextNodes(out, element, "~", true);
         return true;
     }
 
     private boolean processSup(FormattingAppendable out, Element element) {
         skip();
-        processTextNodes(out, element, "^", true);
+        wrapTextNodes(out, element, "^", true);
         return true;
     }
 
@@ -650,12 +743,16 @@ public class FlexmarkHtmlParser {
         Node item;
         boolean firstItem = true;
 
-        while ((item = next()) != null) {
+        while ((item = peek()) != null) {
             TagParam tagParam = getTagParam(item);
             if (tagParam != null) {
                 switch (tagParam.tagType) {
                     case LI:
                         processListItem(out, (Element) item, listState);
+                        break;
+                    default:
+                        int tmp = 0;
+                        skip();
                         break;
                 }
             } else {
@@ -732,6 +829,9 @@ public class FlexmarkHtmlParser {
                         processDefinition(out, (Element) item);
                         lastWasDefinition = true;
                         firstItem = false;
+                        break;
+                    default:
+                        int tmp = 0;
                         break;
                 }
             } else {
@@ -1190,7 +1290,7 @@ public class FlexmarkHtmlParser {
     }
 
     private Node peek(int skip) {
-        if (myState.myIndex + skip < myState.myElements.size()) return myState.myElements.get(myState.myIndex + skip);
+        if (myState.myIndex + skip >= 0 && myState.myIndex + skip < myState.myElements.size()) return myState.myElements.get(myState.myIndex + skip);
         return null;
     }
 

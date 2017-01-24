@@ -2596,7 +2596,29 @@ Headings need blank line
 
 Headings need blank line
 
-```````````````````````````````` example(Issue Tests: 5) options(nbsp)
+```````````````````````````````` example Issue Tests: 5
+**Attention!** Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+.
+<div class="warning">
+  <strong>Attention!  &nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
+</div>
+````````````````````````````````
+
+
+Headings need blank line
+
+```````````````````````````````` example(Issue Tests: 6) options(nbsp)
+**Attention!**&nbsp;Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+.
+<div class="warning">
+  <strong>Attention!  &nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
+</div>
+````````````````````````````````
+
+
+Headings need blank line
+
+```````````````````````````````` example(Issue Tests: 7) options(nbsp)
 **Attention!**&nbsp;Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
 .
 <div class="warning">
@@ -2607,7 +2629,7 @@ Headings need blank line
 
 handle `pre` without `code`
 
-```````````````````````````````` example Issue Tests: 6
+```````````````````````````````` example Issue Tests: 8
 ```
 import java.io.File;
 import java.io.FileOutputStream;
@@ -2697,7 +2719,7 @@ public class HtmlToPdf_yahp {
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue Tests: 7
+```````````````````````````````` example Issue Tests: 9
 priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")
 
 Though i am not getting any error ...no pdf is getting created
@@ -2788,7 +2810,7 @@ see more
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue Tests: 8) options(output-unknown)
+```````````````````````````````` example(Issue Tests: 10) options(output-unknown)
 <header class="comment__header"> priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM") </header>
 
 Though i am not getting any error ...no pdf is getting created
@@ -2883,7 +2905,7 @@ see more <footer class="comment__footer"> <menu class="comment-footer__menu">
 
 Unwrap iframes
 
-```````````````````````````````` example Issue Tests: 9
+```````````````````````````````` example Issue Tests: 11
 .
 <iframe id="dsq-app4" name="dsq-app4" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqusads.com/ads-iframe/taboola/?category=tech&amp;stories_allowed=0&amp;service=dynamic&amp;safetylevel=20&amp;display_allowed=1&amp;video_allowed=0&amp;provider=taboola&amp;thumbnails_allowed=1&amp;experiment=network_default&amp;variant=fallthrough&amp;display_only=0&amp;t=1485117195&amp;links_allowed=1&amp;position=bottom&amp;shortname=realshowto&amp;display_bidding_allowed=0&amp;forum_shortname=realshowto&amp;forum_pk=1341383&amp;anchorColor=%23039be5&amp;colorScheme=light&amp;sourceUrl=http%3A%2F%2Fwww.rgagnon.com%2Fjavadetails%2Fjava-convert-html-to-pdf-using-yahp.html&amp;typeface=sans-serif&amp;disqus_version=9464b90" style="box-sizing: inherit; width: 1px !important; min-width: 100%; border: none !important; overflow: hidden !important; height: 586px !important;"></iframe>
 ````````````````````````````````
@@ -2891,7 +2913,7 @@ Unwrap iframes
 
 suppress GitHub anchors and octicon svg
 
-```````````````````````````````` example Issue Tests: 10
+```````````````````````````````` example Issue Tests: 12
 TEST CASES
 ==========
 .
@@ -2901,7 +2923,7 @@ TEST CASES
 
 suppress GitHub anchors and octicon svg
 
-```````````````````````````````` example Issue Tests: 11
+```````````````````````````````` example Issue Tests: 13
 TEST CASES
 ==========
 .
@@ -2911,7 +2933,7 @@ TEST CASES
 
 empty headings
 
-```````````````````````````````` example Issue Tests: 12
+```````````````````````````````` example Issue Tests: 14
 .
 <h1 style="box-sizing: border-box; font-size: 2em; margin: 24px 0px 16px; font-weight: 600; line-height: 1.25; padding-bottom: 0.3em; border-bottom: 1px solid rgb(238, 238, 238); position: relative; padding-right: 0.8em; cursor: pointer; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"> <a id="user-content-changelog" class="anchor" href="https://github.com/danfickle/openhtmltopdf#changelog" aria-hidden="true" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none; float: left; padding-right: 4px; margin-left: -20px; line-height: 1;"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>  </h1><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -2919,9 +2941,8 @@ empty headings
 
 GitHub file list
 
-```````````````````````````````` example Issue Tests: 13
-![@danfickle](https://avatars2.githubusercontent.com/u/1415728?
-v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains…](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") …
+```````````````````````````````` example Issue Tests: 15
+![@danfickle](https://avatars2.githubusercontent.com/u/1415728?v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains…](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") …
 
 |---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 |   | [docs](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs "docs")                                                                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update README and integration guide with RC8 version. [ci skip]](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]")                                                                   | 2 months ago |
@@ -3185,6 +3206,55 @@ Primarily so we stay compatible with Java 7." style="box-sizing: border-box; bac
     </tbody>
   </table>
 </div>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue Tests: 16
+* [Version 0.8.3 - Bug Fix and Improvement Release](https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release)
+* [Version 0.8.2 - Enhanced Paste From History](https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history)
+* [Version 0.8.0 - Mia has come of age!](https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age)
+* [Why Do I Need Mia?](https://github.com/vsch/MissingInActions#why-do-i-need-mia)
+  * [What you didn't know you were missing](https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing)
+  * [Auto Indent Lines after Move Lines Up/Down](https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown)
+  * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
+.
+<ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+  <li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li>
+  <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.2 - Enhanced Paste From History</a></li>
+  <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.0 - Mia has come of age!</a></li>
+  <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#why-do-i-need-mia" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Why Do I Need Mia?</a>
+    <ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 0px;">
+      <li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">What you didn't know you were missing</a></li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Indent Lines after Move Lines Up/Down</a></li>
+      <li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-line-selections" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Line Selections</a></li>
+    </ul>
+  </li>
+</ul>
+<br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+```````````````````````````````` example Issue Tests: 17
+* [Version 0.8.3 - Bug Fix and Improvement Release](https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release)
+* [Version 0.8.2 - Enhanced Paste From History](https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history)
+* [Version 0.8.0 - Mia has come of age!](https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age)
+* [Why Do I Need Mia?](https://github.com/vsch/MissingInActions#why-do-i-need-mia)
+  * [What you didn't know you were missing](https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing)
+  * [Auto Indent Lines after Move Lines Up/Down](https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown)
+  * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
+.
+<ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.2 - Enhanced Paste From History</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.0 - Mia has come of age!</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#why-do-i-need-mia" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Why Do I Need Mia?</a><ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">What you didn't know you were missing</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Indent Lines after Move Lines Up/Down</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-line-selections" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Line Selections</a></li></ul></li></ul><br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+don't create a multi-line image url if no new line after ?
+
+```````````````````````````````` example Issue Tests: 18
+[![](https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?)](https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?)Missing In Actions
+===================================================================================================================================================================================================
+.
+<meta charset='utf-8'><h1 style="box-sizing: border-box; font-size: 2em; margin-top: 0px !important; margin-right: 0px; margin-bottom: 16px; margin-left: 0px; font-weight: 600; line-height: 1.25; padding-bottom: 0.3em; border-bottom: 1px solid rgb(238, 238, 238); position: relative; padding-right: 0.8em; cursor: pointer; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><a href="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" target="_blank" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;"><img src="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" height="32" width="54" border="0" align="absmiddle" style="box-sizing: content-box; border-style: none; max-width: 100%; background-color: rgb(255, 255, 255);"></a>Missing In Actions</h1>
+<br class="Apple-interchange-newline">
 ````````````````````````````````
 
 

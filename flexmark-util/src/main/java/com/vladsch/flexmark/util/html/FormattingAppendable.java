@@ -350,4 +350,18 @@ public interface FormattingAppendable extends Appendable {
      * @return this
      */
     FormattingAppendable closeConditional(ConditionalFormatter closeFormatter);
+
+    /**
+     * see if there is a pending space
+     *
+     * @return true if space is pending
+     */
+    boolean isPendingSpace();
+
+    /**
+     * see if there is a pending space
+     *
+     * @return true if space is pending
+     */
+    boolean isPendingEOL();
 }

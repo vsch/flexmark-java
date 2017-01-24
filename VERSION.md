@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.12.3](#0123)
 - [0.12.2](#0122)
 - [0.12.1](#0121)
 - [0.12.0](#0120)
@@ -112,13 +113,32 @@ flexmark-java
 
 &nbsp;</details>
 
+0.12.3
+------
+
+* Add: Extra extension flags to `com.vladsch.flexmark.profiles.pegdown.Extensions` to allow easy
+  configuration of extensions that don't exist in pegdown:
+  * `Extensions.SUBSCRIPT`
+  * `Extensions.EXTANCHORLINKS_WRAP`
+  * `Extensions.FOOTNOTES`
+  * `Extensions.TOC`
+  * `Extensions.MULTI_LINE_IMAGE_URLS`
+  * `Extensions.SUPERSCRIPT`
+  * `Extensions.INSERTED`
+
+* Fix: HTML to Markdown
+  * skipped list items under some conditions.
+  * style markers now wrapping full text instead of breaking it up into text sections
+  * make sure there is no space before trailing marker or after leading marker and that there
+    are spaces surrounding the style markers
+
 0.12.2
 ------
 
 * Change: HTML to Markdown conversion
   * blank line before headings.
-  * a few elements to be unwrapped on conversion and some to wrap but as block elements so
-    they could be easily cleaned in resulting markdown.
+  * a few elements to be unwrapped on conversion and some to wrap but as block elements so they
+    could be easily cleaned in resulting markdown.
   * text node handling to trim text and escape `\`
   * suppress empty headings
   * task list item when first content of list item is input check box
@@ -139,10 +159,9 @@ flexmark-java
     * `FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_DASHES`, default `3`, min 3, minimum separator
       column width, including alignment colons `:`
     * `FlexmarkHtmlParser.CODE_INDENT`, default 4 spaces, indent to use for indented code
-    * `FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE`, default `" "`, string to use in place of
-      EOL in image and link title attribute.
-    * `FlexmarkHtmlParser.NBSP_TEXT`, default `" "`, string to use in place of
-      non-break-space
+    * `FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE`, default `" "`, string to use in place of EOL
+      in image and link title attribute.
+    * `FlexmarkHtmlParser.NBSP_TEXT`, default `" "`, string to use in place of non-break-space
     * `FlexmarkHtmlParser.THEMATIC_BREAK`, default `"*** ** * ** ***"`, `<hr>` replacement
 * Change: `FormattingAppendableImpl.flush()` no longer forces an EOL, only allows it if it is
   already pending. Also `FormattingAppendableImpl.flush(int)` and

@@ -133,7 +133,7 @@ Paragraph with second line having a reference
 
 `AnchorLink`
 
-```````````````````````````````` example Markdown elements - AnchorLink: 1
+```````````````````````````````` example(Markdown elements - AnchorLink: 1) options(anchor-links)
 Setext Heading 1
 ===
 Setext Heading 2
@@ -1048,7 +1048,7 @@ more text</p>
 
 Setext 1
 
-```````````````````````````````` example Markdown elements - Heading: 1
+```````````````````````````````` example(Markdown elements - Heading: 1) options(anchor-links)
 Heading 1
 ===
 .
@@ -1058,7 +1058,7 @@ Heading 1
 
 Setext 2
 
-```````````````````````````````` example Markdown elements - Heading: 2
+```````````````````````````````` example(Markdown elements - Heading: 2) options(anchor-links)
 Heading 2
 ---
 .
@@ -1068,7 +1068,7 @@ Heading 2
 
 Setext 1 with inlines
 
-```````````````````````````````` example Markdown elements - Heading: 3
+```````````````````````````````` example(Markdown elements - Heading: 3) options(anchor-links)
 Heading 1 **bold** _italic_ `code` 
 ==================================
 .
@@ -1078,7 +1078,7 @@ Heading 1 **bold** _italic_ `code`
 
 Setext 2 with inliines
 
-```````````````````````````````` example Markdown elements - Heading: 4
+```````````````````````````````` example(Markdown elements - Heading: 4) options(anchor-links)
 Heading 2 **bold** _italic_ `code` 
 ----------------------------------
 .
@@ -1088,7 +1088,7 @@ Heading 2 **bold** _italic_ `code`
 
 Atx 1
 
-```````````````````````````````` example Markdown elements - Heading: 5
+```````````````````````````````` example(Markdown elements - Heading: 5) options(anchor-links)
 # Heading 1
 # Heading 1 Tail #
 .
@@ -1099,7 +1099,7 @@ Atx 1
 
 Atx 1 with inlines
 
-```````````````````````````````` example Markdown elements - Heading: 6
+```````````````````````````````` example(Markdown elements - Heading: 6) options(anchor-links)
 # Heading 1 **bold** _italic_ `code`
 .
 <h1><a href="#heading-1-bold-italic-" id="heading-1-bold-italic-">Heading 1 <strong>bold</strong> <em>italic</em> <code>code</code></a></h1>
@@ -1108,7 +1108,7 @@ Atx 1 with inlines
 
 Atx 2
 
-```````````````````````````````` example Markdown elements - Heading: 7
+```````````````````````````````` example(Markdown elements - Heading: 7) options(anchor-links)
 ## Heading 2
 ## Heading 2 Tail #
 .
@@ -1119,7 +1119,7 @@ Atx 2
 
 Atx 3
 
-```````````````````````````````` example Markdown elements - Heading: 8
+```````````````````````````````` example(Markdown elements - Heading: 8) options(anchor-links)
 ### Heading 3
 ### Heading 3 Tail #
 .
@@ -1130,7 +1130,7 @@ Atx 3
 
 Atx 4
 
-```````````````````````````````` example Markdown elements - Heading: 9
+```````````````````````````````` example(Markdown elements - Heading: 9) options(anchor-links)
 #### Heading 4
 #### Heading 4 Tail #
 .
@@ -1141,7 +1141,7 @@ Atx 4
 
 Atx 5
 
-```````````````````````````````` example Markdown elements - Heading: 10
+```````````````````````````````` example(Markdown elements - Heading: 10) options(anchor-links)
 ##### Heading 5
 ##### Heading 5 Tail #
 .
@@ -1152,7 +1152,7 @@ Atx 5
 
 Atx 6
 
-```````````````````````````````` example Markdown elements - Heading: 11
+```````````````````````````````` example(Markdown elements - Heading: 11) options(anchor-links)
 ###### Heading 6
 ###### Heading 6 Tail #
 .
@@ -1680,7 +1680,7 @@ text with [text](/url) embedded
 
 header embedded
 
-```````````````````````````````` example Markdown elements - Link: 6
+```````````````````````````````` example(Markdown elements - Link: 6) options(anchor-links)
 # Heading [text](/url) 
 .
 <h1><a href="#heading-text" id="heading-text">Heading <a href="/url">text</a></a></h1>
@@ -1689,7 +1689,7 @@ header embedded
 
 header embedded
 
-```````````````````````````````` example Markdown elements - Link: 7
+```````````````````````````````` example(Markdown elements - Link: 7) options(anchor-links)
 Heading [text](/url) 
 ---
 .
@@ -1699,7 +1699,7 @@ Heading [text](/url)
 
 header image embedded
 
-```````````````````````````````` example Markdown elements - Link: 8
+```````````````````````````````` example(Markdown elements - Link: 8) options(anchor-links)
 # Heading [![alt](/url2)](/url) 
 .
 <h1><a href="#heading-alt" id="heading-alt">Heading <a href="/url"><img src="/url2" alt="alt" /></a></a></h1>
@@ -1708,7 +1708,7 @@ header image embedded
 
 header image embedded
 
-```````````````````````````````` example Markdown elements - Link: 9
+```````````````````````````````` example(Markdown elements - Link: 9) options(anchor-links)
 Heading [![alt](/url2)](/url) 
 ---
 .
@@ -2043,15 +2043,25 @@ Footnote looking references with footnotes disabled
 Footnote looking references with footnotes disabled
 
 ```````````````````````````````` example Markdown elements - Reference: 3
-this is a footnote[^]. And this is another footnote[^A].
+this is not a footnote[^]. And this is a footnote[^A].
 
 this is an undefined footnote [^undef]
 
 [^]: undefined
+[^A]: footnote A
 
 .
-<p>this is a footnote<a href="undefined">^</a>. And this is another footnote[^A].</p>
+<p>this is not a footnote[^]. And this is a footnote<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup>.</p>
 <p>this is an undefined footnote [^undef]</p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>footnote A</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
 ````````````````````````````````
 
 
@@ -2080,7 +2090,7 @@ text ~italic~ embedded
 ~italic~ embedded 
 text ~italic~ 
 .
-<p>~italic~ text ~italic~ embedded ~italic~ embedded text ~italic~</p>
+<p><sub>italic</sub> text <sub>italic</sub> embedded <sub>italic</sub> embedded text <sub>italic</sub></p>
 ````````````````````````````````
 
 
@@ -2656,6 +2666,190 @@ With text, anchor ref
 [[wiki text|wiki link#anchor-ref]] 
 .
 <p><a href="wiki-link#anchor-ref">wiki text</a></p>
+````````````````````````````````
+
+
+### Multi-Line Image URL
+
+encoding of &, =
+
+```````````````````````````````` example Multi-Line Image URL: 1
+![ref](/url1?
+one = 1 & line
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20&amp;%20line%0A" alt="ref" /> trailing text</p>
+````````````````````````````````
+
+
+encoding of +
+
+```````````````````````````````` example Multi-Line Image URL: 2
+![ref](/url1?
+one = 1 + line
+) trailing text
+.
+<p><img src="/url1?one%20=%201%20%2B%20line%0A" alt="ref" /> trailing text</p>
+````````````````````````````````
+
+
+### Extra Style Elements
+
+```````````````````````````````` example Extra Style Elements: 1
+~subscript~ ^superscript^ ++inserted++
+.
+<p><sub>subscript</sub> <sup>superscript</sup> <ins>inserted</ins></p>
+````````````````````````````````
+
+
+### Gfm Task List Items
+
+```````````````````````````````` example Gfm Task List Items: 1
+- [ ] task item
+- [x] task item
+- [x] task item
+.
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+</ul>
+````````````````````````````````
+
+
+```````````````````````````````` example Gfm Task List Items: 2
+1. [ ] task item
+1. [x] task item
+1. [x] task item
+.
+<ol>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+</ol>
+````````````````````````````````
+
+
+### Table Of Contents
+
+Text and inlines, hierarchy
+
+```````````````````````````````` example Table Of Contents: 1
+[TOC hierarchy] 
+
+# Heading **some bold** 1
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+### Heading 1.1.2  **_some bold italic_**
+
+.
+<ul>
+  <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+    <ul>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
+      <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+    </ul>
+  </li>
+</ul>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
+<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+````````````````````````````````
+
+
+Text only, sorted
+
+```````````````````````````````` example Table Of Contents: 2
+[TOC text sorted] 
+
+## Heading 1.1 _some italic_
+# Heading **some bold** 1
+### Heading 1.1.2  **_some bold italic_**
+### Heading 1.1.1
+
+.
+<ul>
+  <li><a href="#heading-11-some-italic">Heading 1.1 some italic</a>
+    <ul>
+      <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  some bold italic</a></li>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
+    </ul>
+  </li>
+</ul>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+````````````````````````````````
+
+
+Text only, reverse sorted
+
+```````````````````````````````` example Table Of Contents: 3
+[TOC text decreasing] 
+
+## Heading 1.1 _some italic_
+# Heading **some bold** 1
+### Heading 1.1.2  **_some bold italic_**
+### Heading 1.1.1
+
+.
+<ul>
+  <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  some bold italic</a></li>
+  <li><a href="#heading-111">Heading 1.1.1</a></li>
+  <li><a href="#heading-11-some-italic">Heading 1.1 some italic</a></li>
+</ul>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+````````````````````````````````
+
+
+Text and inlines, sorted
+
+```````````````````````````````` example Table Of Contents: 4
+[TOC increasing] 
+
+### Heading 1.1.2  **_some bold italic_**
+### Heading 1.1.1
+## Heading 1.1 _some italic_
+# Heading **some bold** 1
+
+.
+<ul>
+  <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a></li>
+  <li><a href="#heading-111">Heading 1.1.1</a></li>
+  <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+</ul>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+````````````````````````````````
+
+
+Text and inlines, unsorted
+
+```````````````````````````````` example Table Of Contents: 5
+[TOC flat] 
+
+### Heading 1.1.2  **_some bold italic_**
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+# Heading **some bold** 1
+
+.
+<ul>
+  <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+  <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a></li>
+  <li><a href="#heading-111">Heading 1.1.1</a></li>
+</ul>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
+<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
 ````````````````````````````````
 
 

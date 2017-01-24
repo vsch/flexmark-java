@@ -648,6 +648,16 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public boolean isPendingSpace() {
+        return myPendingSpaces > 0;
+    }
+
+    @Override
+    public boolean isPendingEOL() {
+        return myPendingEOL > 0;
+    }
+
+    @Override
     public boolean isPreFormatted() {
         return myPreFormattedNesting > 0;
     }

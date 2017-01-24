@@ -48,12 +48,14 @@
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
     <orderEntry type="module" module-name="flexmark-test-util" />
     <orderEntry type="module" module-name="flexmark-util" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-analysis:5.0.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
+    <orderEntry type="module" module-name="flexmark-ext-ins" />
+    <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-util:5.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm:5.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-core:1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.parboiled:parboiled-java:1.1.7" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.pegdown:pegdown:1.6.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-analysis:5.0.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
   </component>
 </module>

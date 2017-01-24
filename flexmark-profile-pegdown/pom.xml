@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.12.2</version>
+        <version>0.12.3</version>
     </parent>
 
     <artifactId>flexmark-profile-pegdown</artifactId>
@@ -58,11 +58,19 @@
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-ins</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-ext-spec-example</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-ext-superscript</artifactId>
         </dependency>
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>

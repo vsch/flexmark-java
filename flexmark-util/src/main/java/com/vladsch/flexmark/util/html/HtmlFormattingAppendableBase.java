@@ -482,6 +482,16 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
+    public boolean isPendingSpace() {
+        return out.isPendingSpace();
+    }
+
+    @Override
+    public boolean isPendingEOL() {
+        return out.isPendingSpace();
+    }
+
+    @Override
     public int getIndent() { return out.getIndent(); }
 
     @Override

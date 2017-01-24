@@ -14,9 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
+
 public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_extension_compatibility_spec.md";
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((Extensions.ALL & ~Extensions.HARDWRAPS) | Extensions.TASKLISTITEMS).toMutable()
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP))).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
@@ -24,7 +26,8 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCas
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("hard-breaks", new MutableDataSet().set(PegdownParser.PEGDOWN_EXTENSIONS_ADD, Extensions.HARDWRAPS));
+        optionsMap.put("hard-breaks", new MutableDataSet().set(PegdownParser.PEGDOWN_EXTENSIONS_ADD, HARDWRAPS));
+        optionsMap.put("anchor-links", new MutableDataSet().set(PegdownParser.PEGDOWN_EXTENSIONS_ADD, ANCHORLINKS));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

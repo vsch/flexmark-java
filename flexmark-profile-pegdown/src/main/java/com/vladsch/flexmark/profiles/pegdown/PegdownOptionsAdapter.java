@@ -7,16 +7,22 @@ import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.escaped.character.EscapedCharacterExtension;
+import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
+import com.vladsch.flexmark.ext.gfm.strikethrough.SubscriptExtension;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListExtension;
+import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.toc.SimTocExtension;
+import com.vladsch.flexmark.ext.toc.TocExtension;
+import com.vladsch.flexmark.ext.toc.internal.TocOptions;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.parser.MutableListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
@@ -63,13 +69,11 @@ public class PegdownOptionsAdapter {
             MutableDataSet options = myOptions;
             ArrayList<Extension> extensions = new ArrayList<>();
 
-            //DUMMY_REFERENCE_KEY | MULTI_LINE_IMAGE_URLS | INTELLIJ_DUMMY_IDENTIFIER | RELAXED_STRONG_EMPHASIS_RULES
             options.clear();
 
             // Setup List Options for Fixed List Indent profile
             options.setFrom(ParserEmulationProfile.PEGDOWN);
 
-            //options.set(Parser.PARSE_GITHUB_ISSUE_MARKER, true);
             options.set(HtmlRenderer.SUPPRESS_HTML_BLOCKS, haveExtensions(SUPPRESS_HTML_BLOCKS));
             options.set(HtmlRenderer.SUPPRESS_INLINE_HTML, haveExtensions(SUPPRESS_INLINE_HTML));
 
@@ -134,10 +138,6 @@ public class PegdownOptionsAdapter {
                 options.set(Parser.THEMATIC_BREAK_RELAXED_START, false);
             }
 
-            if (haveExtensions(STRIKETHROUGH)) {
-                extensions.add(StrikethroughExtension.create());
-            }
-
             if (haveExtensions(TABLES)) {
                 extensions.add(TablesExtension.create());
                 options.set(TablesExtension.TRIM_CELL_WHITESPACE, false);
@@ -154,6 +154,31 @@ public class PegdownOptionsAdapter {
                 options.set(WikiLinkExtension.LINK_FIRST_SYNTAX, false);
             }
 
+            if (haveExtensions(SUBSCRIPT) && haveExtensions(STRIKETHROUGH)) {
+                // first item is loose if second item is loose
+                extensions.add(StrikethroughSubscriptExtension.create());
+            } else if (haveExtensions(STRIKETHROUGH)) {
+                extensions.add(StrikethroughExtension.create());
+            } else if (haveExtensions(SUBSCRIPT)) {
+                extensions.add(SubscriptExtension.create());
+            }
+
+            if (haveExtensions(SUPERSCRIPT)) {
+                extensions.add(SuperscriptExtension.create());
+            }
+
+            if (haveExtensions(INSERTED)) {
+                extensions.add(InsExtension.create());
+            }
+
+            if (haveExtensions(TOC)) {
+                extensions.add(SimTocExtension.create());
+                options.set(SimTocExtension.BLANK_LINE_SPACER, true);
+
+                extensions.add(TocExtension.create());
+                options.set(TocExtension.LEVELS, TocOptions.getLevels(2, 3));
+            }
+
             // pegdown does not have emoji shortcuts
             if (false) {
                 extensions.add(EmojiExtension.create());
@@ -164,9 +189,13 @@ public class PegdownOptionsAdapter {
                 options.set(EmojiExtension.USE_IMAGE_URLS, true);
             }
 
-            // pegdown does not have multi-line urls
-            if (false) {
+            if (haveExtensions(MULTI_LINE_IMAGE_URLS)) {
                 options.set(Parser.PARSE_MULTI_LINE_IMAGE_URLS, true);
+            }
+
+            if (haveExtensions(FOOTNOTES)) {
+                extensions.add(FootnoteExtension.create());
+                options.set(FootnoteExtension.FOOTNOTES_KEEP, KeepType.LAST);
             }
 
             myOptions.set(Parser.EXTENSIONS, extensions);
