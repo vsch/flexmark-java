@@ -265,6 +265,32 @@ Another line
 ````````````````````````````````
 
 
+## Task List Items
+
+```````````````````````````````` example Task List Items: 1
+* [ ] item
+* [x] item
+.
+<ul>
+<li><input type="checkbox">item</li>
+<li><input type="checkbox" checked>item</li>
+</ul>
+<input type="checkbox">
+````````````````````````````````
+
+
+```````````````````````````````` example Task List Items: 2
+1. [ ] item
+2. [x] item
+.
+<ol>
+<li><input type="checkbox">item</li>
+<li><input type="checkbox" checked>item</li>
+</ol>
+<input type="checkbox">
+````````````````````````````````
+
+
 ## Block Quotes
 
 ```````````````````````````````` example Block Quotes: 1
@@ -657,7 +683,7 @@ Heading
 ## Thematic Break
 
 ```````````````````````````````` example Thematic Break: 1
-*** * ** * ***
+*** ** * ** ***
 .
 <hr>
 ````````````````````````````````
@@ -1576,6 +1602,160 @@ in item
 real life table
 
 ```````````````````````````````` example Tables: 47
+| Feature                                                                                         | Basic | Enhanced |
+|:------------------------------------------------------------------------------------------------|:-----:|:--------:|
+| Works with builds 143.2370 or newer, product version IDEA 15.0.6                                |   X   |    X     |
+| Preview Tab so you can see what the rendered markdown will look like on GitHub.                 |   X   |    X     |
+| Syntax highlighting                                                                             |   X   |    X     |
+| Table syntax highlighting stripes rows and columns                                              |   X   |    X     |
+| Support for Default and Darcula color schemes for preview tab                                   |   X   |    X     |
+| Warning and Error Annotations to help you validate wiki link errors                             |   X   |    X     |
+| Link address completion for wiki links                                                          |   X   |    X     |
+| Quick Fixes for detected wiki link errors                                                       |   X   |    X     |
+| GFM Task list extension `* [ ]` open task item and `* [x]` completed task item                  |   X   |    X     |
+| Line markers, Find usages, Go To Declaration for rapid navigation to wiki link targets          |   X   |    X     |
+| Markdown extensions configuration to customize markdown dialects                                |   X   |    X     |
+| GitHub wiki support makes maintaining GitHub wiki pages easier.                                 |   X   |    X     |
+| GitHub compatible id generation for headers so you can validate your anchor references          |   X   |    X     |
+| Swing and JavaFX WebView based preview.                                                         |   X   |    X     |
+| Supports **JavaFX with JetBrains JRE on OS X**                                                  |   X   |    X     |
+| Supports Highlight JS in WebView preview                                                        |   X   |    X     |
+| **Multi-line Image URLs for embedding [gravizo.com] UML diagrams into markdown**                |   X   |    X     |
+| Live Templates for common markdown elements                                                     |   X   |    X     |
+| **Enhanced Version Benefits**                                                                   |       |    X     |
+| Split Editor with Preview or HTML Text modes to view both source and preview                    |       |    X     |
+| Toolbar for fast access to frequent operations                                                  |       |    X     |
+| Language Injections for fenced code, HTML, Jekyll front matter and multi-line URL content       |       |    X     |
+| Code completions, refactoring, annotations and quick fixes to let you work faster               |       |    X     |
+| Navigation support with Line markers, Find usages, Go To Declaration for rapid navigation       |       |    X     |
+| Inspections to help you validate links, anchor refs, footnote refs                              |       |    X     |
+| Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze         |       |    X     |
+| Jekyll front matter recognition in markdown documents                                           |       |    X     |
+| Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs                    |       |    X     |
+| Wrap on typing and table formatting with column alignment                                       |       |    X     |
+| Character display width used for wrapping and table formatting                                  |       |    X     |
+| Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document           |       |    X     |
+| Document formatting with text wrapping, list renumbering, aranging of elements, etc.            |       |    X     |
+| Table of Contents generation for any markdown parser, with many style options                   |       |    X     |
+| **As you type automation**                                                                      |       |    X     |
+| Double of bold/emphasis markers and remove inserted ones if a space is typed                    |       |    X     |
+| Wrap text blocks to margins and indentation                                                     |       |    X     |
+| ATX headers to match trailing `#` marker                                                        |       |    X     |
+| Setext headers to match marker length to text                                                   |       |    X     |
+| Format tables to pad column width, column alignment and spanning columns                        |       |    X     |
+| Auto insert empty table row on <kbd>ENTER</kbd>                                                 |       |    X     |
+| Auto delete empty table row/column on <kbd>BACKSPACE</kbd>                                      |       |    X     |
+| Auto insert table column when typing before first column or after last column of table          |       |    X     |
+| Actions to insert: table, row or column; delete: row or column                                  |       |    X     |
+| Auto insert list item on <kbd>ENTER</kbd>                                                       |       |    X     |
+| Auto delete empty list item on <kbd>ENTER</kbd>                                                 |       |    X     |
+| Auto delete empty list item on <kbd>BACKSPACE</kbd>                                             |       |    X     |
+| Indent or un-indent list item toolbar buttons and actions                                       |       |    X     |
+| **Code Completions**                                                                            |       |    X     |
+| Absolute link address completions using https:// and file:// formats                            |       |    X     |
+| Explicit and Image links are GitHub wiki aware                                                  |       |    X     |
+| GitHub Issue # Completions after `issues/` link address and in text                             |       |    X     |
+| GitHub special links: Issues, Pull requests, Graphs, and Pulse.                                 |       |    X     |
+| Link address completions for non-markdown files                                                 |       |    X     |
+| Emoji text shortcuts completion                                                                 |       |    X     |
+| Java class, field and method completions in inline code elements                                |       |    X     |
+| **Intention Actions**                                                                           |       |    X     |
+| Change between relative and absolute https:// link addresses via intention action               |       |    X     |
+| Change between wiki links and explicit link                                                     |       |    X     |
+| Intentions for links, wiki links, references and headers                                        |       |    X     |
+| Intention to format Setext Header marker to match marker length to text                         |       |    X     |
+| Intention to swap Setext/Atx header format                                                      |       |    X     |
+| Update table of contents quick fix intention                                                    |       |    X     |
+| Intention to edit Table of Contents style options dialog with preview                           |       |    X     |
+| **Refactoring**                                                                                 |       |    X     |
+| Automatic change from wiki link to explicit link when link target file is moved out of the wiki |       |    X     |
+| File move refactoring of contained links. This completes the refactoring feature set            |       |    X     |
+| Refactoring for /, https:// and file:// absolute link addresses to project files                |       |    X     |
+| Refactoring of header text with update to referencing anchor link references                    |       |    X     |
+| Anchor link reference refactoring with update to referenced header text                         |       |    X     |
+.
+<table>
+  <thead>
+    <tr><th align="left">Feature</th><th align="center">Basic</th><th align="center">Enhanced</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">Works with builds 143.2370 or newer, product version IDEA 15.0.6</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Preview Tab so you can see what the rendered markdown will look like on GitHub.</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Syntax highlighting</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Table syntax highlighting stripes rows and columns</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Support for Default and Darcula color schemes for preview tab</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Warning and Error Annotations to help you validate wiki link errors</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Link address completion for wiki links</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Quick Fixes for detected wiki link errors</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">GFM Task list extension <code>* [ ]</code> open task item and <code>* [x]</code> completed task item</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Line markers, Find usages, Go To Declaration for rapid navigation to wiki link targets</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Markdown extensions configuration to customize markdown dialects</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">GitHub wiki support makes maintaining GitHub wiki pages easier.</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">GitHub compatible id generation for headers so you can validate your anchor references</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Swing and JavaFX WebView based preview.</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Supports <strong>JavaFX with JetBrains JRE on OS X</strong></td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Supports Highlight JS in WebView preview</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>Multi-line Image URLs for embedding [gravizo.com] UML diagrams into markdown</strong></td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left">Live Templates for common markdown elements</td><td align="center">X</td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>Enhanced Version Benefits</strong></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Split Editor with Preview or HTML Text modes to view both source and preview</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Toolbar for fast access to frequent operations</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Language Injections for fenced code, HTML, Jekyll front matter and multi-line URL content</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Code completions, refactoring, annotations and quick fixes to let you work faster</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Navigation support with Line markers, Find usages, Go To Declaration for rapid navigation</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Inspections to help you validate links, anchor refs, footnote refs</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Jekyll front matter recognition in markdown documents</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Wrap on typing and table formatting with column alignment</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Character display width used for wrapping and table formatting</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Document formatting with text wrapping, list renumbering, aranging of elements, etc.</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Table of Contents generation for any markdown parser, with many style options</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>As you type automation</strong></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Double of bold/emphasis markers and remove inserted ones if a space is typed</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Wrap text blocks to margins and indentation</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    ATX headers to match trailing <code>#</code> marker</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Setext headers to match marker length to text</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Format tables to pad column width, column alignment and spanning columns</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto insert empty table row on <kbd>ENTER</kbd></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto delete empty table row/column on <kbd>BACKSPACE</kbd></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto insert table column when typing before first column or after last column of table</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Actions to insert: table, row or column; delete: row or column</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto insert list item on <kbd>ENTER</kbd></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto delete empty list item on <kbd>ENTER</kbd></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Auto delete empty list item on <kbd>BACKSPACE</kbd></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Indent or un-indent list item toolbar buttons and actions</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>Code Completions</strong></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Absolute link address completions using https:// and file:// formats</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Explicit and Image links are GitHub wiki aware</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    GitHub Issue # Completions after <code>issues/</code> link address and in text</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    GitHub special links: Issues, Pull requests, Graphs, and Pulse.</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Link address completions for non-markdown files</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Emoji text shortcuts completion</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Java class, field and method completions in inline code elements</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>Intention Actions</strong></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Change between relative and absolute https:// link addresses via intention action</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Change between wiki links and explicit link</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Intentions for links, wiki links, references and headers</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Intention to format Setext Header marker to match marker length to text</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Intention to swap Setext/Atx header format</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Update table of contents quick fix intention</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Intention to edit Table of Contents style options dialog with preview</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left"><strong>Refactoring</strong></td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Automatic change from wiki link to explicit link when link target file is moved out of the wiki</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    File move refactoring of contained links. This completes the refactoring feature set</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Refactoring for /, https:// and file:// absolute link addresses to project files</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Refactoring of header text with update to referencing anchor link references</td><td align="center"></td><td align="center">X</td></tr>
+    <tr><td align="left">    Anchor link reference refactoring with update to referenced header text</td><td align="center"></td><td align="center">X</td></tr>
+  </tbody>
+</table>
+````````````````````````````````
+
+
+real life table
+
+```````````````````````````````` example(Tables: 48) options(nbsp)
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -1729,7 +1909,7 @@ real life table
 
 Table with `th` in `tbody`
 
-```````````````````````````````` example Tables: 48
+```````````````````````````````` example Tables: 49
 | Result | Description        | Entity Name |
 |--------|--------------------|-------------|
 |        | non-breaking space | &nbsp;      |
@@ -1865,12 +2045,16 @@ With multiple lines per definition:
 
 ```````````````````````````````` example Definition Lists: 6
 Term 1
-:   Definition 1 line 1 ... Definition 1 line 2
-:   Definition 2 line 1 ... Definition 2 line 2
+:   Definition 1 line 1 ...
+    Definition 1 line 2
+:   Definition 2 line 1 ...
+    Definition 2 line 2
 
 Term 2
-:   Definition 3 line 2 ... Definition 3 line 2
-:   Definition 4 line 2 ... Definition 4 line 2
+:   Definition 3 line 2 ...
+    Definition 3 line 2
+:   Definition 4 line 2 ...
+    Definition 4 line 2
 .
 <dl>
   <dt>Term 1</dt>
@@ -1916,15 +2100,19 @@ With multiple paragraphs:
 ```````````````````````````````` example Definition Lists: 8
 Term 1
 
-:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2
+:   Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2
 
-    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2
+    Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2
 
 Term 2
 
-:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2 (lazy)
+:   Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)
 
-    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2 (lazy)
+    Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2 (lazy)
 .
 <dl>
   <dt>Term 1</dt>
@@ -1951,11 +2139,14 @@ A mix:
 Term 1
 Term 2
 
-:   Definition 1 paragraph 1 line 1 ... Definition 1 paragraph 1 line 2 (lazy)
+:   Definition 1 paragraph 1 line 1 ...
+    Definition 1 paragraph 1 line 2 (lazy)
 
-    Definition 1 paragraph 2 line 1 ... Definition 1 paragraph 2 line 2
+    Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2
 
-:   Definition 2 paragraph 1 line 1 ... Definition 2 paragraph 1 line 2 (lazy)
+:   Definition 2 paragraph 1 line 1 ...
+    Definition 2 paragraph 1 line 2 (lazy)
 
 Term 3
 
@@ -1963,19 +2154,23 @@ Term 3
 
 :   Definition 4 (no paragraph)
 
-:   Definition 5 line 1 ... Definition 5 line 2 (no paragraph)
+:   Definition 5 line 1 ...
+    Definition 5 line 2 (no paragraph)
 
-:   Definition 6 paragraph 1 line 1 ... Definition 6 paragraph 1 line 2
+:   Definition 6 paragraph 1 line 1 ...
+    Definition 6 paragraph 1 line 2
 
 :   Definition 7 (no paragraph)
 
-:   Definition 8 paragraph 1 line 1 (forced paragraph) ... Definition 8 paragraph 1 line 2
+:   Definition 8 paragraph 1 line 1 (forced paragraph) ...
+    Definition 8 paragraph 1 line 2
 
     Definition 8 paragraph 2 line 1
 
 Term 4
 
-:   Definition 9 paragraph 1 line 1 (forced paragraph) ... Definition 9 paragraph 1 line 2
+:   Definition 9 paragraph 1 line 1 (forced paragraph) ...
+    Definition 9 paragraph 1 line 2
 
     Definition 9 paragraph 2 line 1
 
@@ -2180,7 +2375,8 @@ Definition Term
 
 ```````````````````````````````` example Definition Lists: 18
 Definition Term
-:   Definition of above term Another definition of above term
+:   Definition of above term
+    Another definition of above term
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2364,6 +2560,19 @@ Infinite loop on unwrap
 Headings need blank line
 
 ```````````````````````````````` example Issue Tests: 2
+Text
+
+Heading
+=======
+.
+<p>Text&nbsp;</p>
+<h1>Heading</h1>
+````````````````````````````````
+
+
+Headings need blank line
+
+```````````````````````````````` example(Issue Tests: 3) options(nbsp)
 Text&nbsp;
 
 Heading
@@ -2376,8 +2585,19 @@ Heading
 
 Headings need blank line
 
-```````````````````````````````` example Issue Tests: 3
-**Attention!&nbsp;**Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+```````````````````````````````` example Issue Tests: 4
+**Attention!** Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+.
+<div class="warning">
+  <strong>Attention!&nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
+</div>
+````````````````````````````````
+
+
+Headings need blank line
+
+```````````````````````````````` example(Issue Tests: 5) options(nbsp)
+**Attention!**&nbsp;Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
 .
 <div class="warning">
   <strong>Attention!&nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
@@ -2387,7 +2607,7 @@ Headings need blank line
 
 handle `pre` without `code`
 
-```````````````````````````````` example Issue Tests: 4
+```````````````````````````````` example Issue Tests: 6
 ```
 import java.io.File;
 import java.io.FileOutputStream;
@@ -2477,26 +2697,115 @@ public class HtmlToPdf_yahp {
 ````````````````````````````````
 
 
-```````````````````````````````` example Issue Tests: 5
-<header class="comment__header">
+```````````````````````````````` example Issue Tests: 7
 priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM")
-</header>
 
 Though i am not getting any error ...no pdf is getting created
+
 see more
-<footer class="comment__footer">
-<menu class="comment-footer__menu">
-* [ 2 ](# "")
+* [2](# "")
 * •
-* [ Reply](#)
+* [Reply](#)
+* •
+* Share ›
+  * Twitter
+  * Facebook
+  *
+
+*
+.
+<div class="post-body">
+  <header class="comment__header">
+<span class="post-byline">
+<span class="author">priyanka</span>
+
+</span>
+
+    <span class="post-meta">
+<span class="bullet time-ago-bullet" aria-hidden="true">•</span>
+
+<a href="http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391" data-role="relative-time" class="time-ago" title="Monday, September 23, 2013 5:49 AM">3 years ago</a>
+</span>
+
+  </header>
+
+  <div class="post-body-inner">
+    <div class="post-message-container" data-role="message-container">
+      <div class="publisher-anchor-color" data-role="message-content">
+        <div class="post-message " data-role="message" dir="auto">
+          <p>Though i am not getting any error ...no pdf is getting created</p>
+        </div>
+
+        <span class="post-media"><ul data-role="post-media-list"></ul></span>
+      </div>
+    </div>
+    <a class="see-more hidden" title="see more" data-action="see-more">see more</a>
+  </div>
+
+  <footer class="comment__footer">
+    <menu class="comment-footer__menu">
+      <li class="voting" data-role="voting">
+        <a href="#" class="vote-up  count-2" data-action="upvote" title="">
+
+          <span class="updatable count" data-role="likes">2</span>
+          <span class="control"><i aria-hidden="true" class="icon icon-arrow-2"></i></span>
+        </a>
+        <span role="button" class="vote-down  count-0" data-action="downvote" title="Vote down">
+
+<span class="control"><i aria-hidden="true" class="icon icon-arrow"></i></span>
+</span>
+      </li>
+      <li class="bullet" aria-hidden="true">•</li>
+
+      <li class="reply" data-role="reply-link">
+        <a href="#" data-action="reply">
+          <span class="text">Reply</span></a></li>
+      <li class="bullet" aria-hidden="true">•</li>
+
+      <li class="comment__share">
+        <a class="toggle"><span class="text">Share ›</span></a>
+        <ul class="comment-share__buttons">
+          <li class="twitter">
+            <button class="share__button" data-action="share:twitter">Twitter</button>
+          </li>
+          <li class="facebook">
+            <button class="share__button" data-action="share:facebook">Facebook</button>
+          </li>
+          <li class="link">
+            <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly="">
+          </li>
+        </ul>
+      </li>
+
+      <li class="realtime" data-role="realtime-notification:1055568391">
+        <span style="display:none;" class="realtime-replies"></span>
+        <a style="display:none;" href="#" class="realtime-button"></a>
+      </li>
+
+    </menu>
+  </footer>
+</div>
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue Tests: 8) options(output-unknown)
+<header class="comment__header"> priyanka • [3 years ago](http://www.rgagnon.com/javadetails/java-convert-html-to-pdf-using-yahp.html#comment-1055568391 "Monday, September 23, 2013 5:49 AM") </header>
+
+Though i am not getting any error ...no pdf is getting created
+
+see more <footer class="comment__footer"> <menu class="comment-footer__menu">
+* [2](# "")
+* •
+* [Reply](#)
 * •
 * Share ›
   * <button class="share__button" data-action="share:twitter">Twitter</button>
   * <button class="share__button" data-action="share:facebook">Facebook</button>
   * <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly>
-* [](#)
-</menu>
-</footer>
+
+*
+
+</menu> </footer>
 .
 <div class="post-body">
   <header class="comment__header">
@@ -2574,9 +2883,308 @@ see more
 
 Unwrap iframes
 
-```````````````````````````````` example Issue Tests: 6
+```````````````````````````````` example Issue Tests: 9
 .
 <iframe id="dsq-app4" name="dsq-app4" allowtransparency="true" frameborder="0" scrolling="no" tabindex="0" title="Disqus" width="100%" src="http://disqusads.com/ads-iframe/taboola/?category=tech&amp;stories_allowed=0&amp;service=dynamic&amp;safetylevel=20&amp;display_allowed=1&amp;video_allowed=0&amp;provider=taboola&amp;thumbnails_allowed=1&amp;experiment=network_default&amp;variant=fallthrough&amp;display_only=0&amp;t=1485117195&amp;links_allowed=1&amp;position=bottom&amp;shortname=realshowto&amp;display_bidding_allowed=0&amp;forum_shortname=realshowto&amp;forum_pk=1341383&amp;anchorColor=%23039be5&amp;colorScheme=light&amp;sourceUrl=http%3A%2F%2Fwww.rgagnon.com%2Fjavadetails%2Fjava-convert-html-to-pdf-using-yahp.html&amp;typeface=sans-serif&amp;disqus_version=9464b90" style="box-sizing: inherit; width: 1px !important; min-width: 100%; border: none !important; overflow: hidden !important; height: 586px !important;"></iframe>
+````````````````````````````````
+
+
+suppress GitHub anchors and octicon svg
+
+```````````````````````````````` example Issue Tests: 10
+TEST CASES
+==========
+.
+<h1><a id="user-content-test-cases" class="anchor" href="#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
+````````````````````````````````
+
+
+suppress GitHub anchors and octicon svg
+
+```````````````````````````````` example Issue Tests: 11
+TEST CASES
+==========
+.
+<h1><a id="user-content-test-cases" class="anchor" href="file#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
+````````````````````````````````
+
+
+empty headings
+
+```````````````````````````````` example Issue Tests: 12
+.
+<h1 style="box-sizing: border-box; font-size: 2em; margin: 24px 0px 16px; font-weight: 600; line-height: 1.25; padding-bottom: 0.3em; border-bottom: 1px solid rgb(238, 238, 238); position: relative; padding-right: 0.8em; cursor: pointer; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"> <a id="user-content-changelog" class="anchor" href="https://github.com/danfickle/openhtmltopdf#changelog" aria-hidden="true" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none; float: left; padding-right: 4px; margin-left: -20px; line-height: 1;"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>  </h1><br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+GitHub file list
+
+```````````````````````````````` example Issue Tests: 13
+![@danfickle](https://avatars2.githubusercontent.com/u/1415728?
+v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains…](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") …
+
+|---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
+|   | [docs](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs "docs")                                                                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update README and integration guide with RC8 version. [ci skip]](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]")                                                                   | 2 months ago |
+|   | [obsolete-archive](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/obsolete-archive "obsolete-archive")                                                    | [Cleanup repository - Move everything obsolete to the obsolete-archive…](https://github.com/danfickle/openhtmltopdf/commit/3ca888aab7c587d16ec25e31db8a5659a0ed75ee "Cleanup repository - Move everything obsolete to the obsolete-archive folder.")                                                                                                                                                                                                                                                                                                | 7 months ago |
+|   | [openhtmltopdf-core](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-core "openhtmltopdf-core")                                              | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-examples](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-examples "openhtmltopdf-examples")                                  | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-jsoup-dom-converter](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-jsoup-dom-converter "openhtmltopdf-jsoup-dom-converter") | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-log4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-log4j "openhtmltopdf-log4j")                                           | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-pdfbox](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-pdfbox "openhtmltopdf-pdfbox")                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains…](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") | 22 days ago  |
+|   | [openhtmltopdf-rtl-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-rtl-support "openhtmltopdf-rtl-support")                         | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-slf4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-slf4j "openhtmltopdf-slf4j")                                           | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-svg-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-svg-support "openhtmltopdf-svg-support")                         | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [tests](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/tests "tests")                                                                                     | [regression snapshot was missing source images, now using Ant to make …](https://github.com/danfickle/openhtmltopdf/commit/927efc50fb4a8870691a168ea86223ebcb70b4fc "regression snapshot was missing source images, now using Ant to make copy of entire source reference tree and including this in snapshot diff. rebuild R8 snapshot so it includes these files. have ref comparison only report failures.")                                                                                                                                     | 8 years ago  |
+|   | [.cvsignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.cvsignore ".cvsignore")                                                                      | [.](https://github.com/danfickle/openhtmltopdf/commit/81951cc933fffdf85a5b5fbe274bd9c181c1daed ".")                                                                                                                                                                                                                                                                                                                                                                                                                                                 | 8 years ago  |
+|   | [.gitignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.gitignore ".gitignore")                                                                      | [For](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.") [#1](https://github.com/danfickle/openhtmltopdf/issues/1) [- Set up Apache PDF-BOX 2 output device module.](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.")                                                                                                                         | a year ago   |
+|   | [.hgignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.hgignore ".hgignore")                                                                         | [Add .hgignore for those using hg-git](https://github.com/danfickle/openhtmltopdf/commit/011613889106579f70d33e6ec78a77168ee54424 "Add .hgignore for those using hg-git --HG-- rename : .gitignore => .hgignore")                                                                                                                                                                                                                                                                                                                                   | 7 years ago  |
+|   | [.travis.yml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.travis.yml ".travis.yml")                                                                   | [Continuous integration with travis.](https://github.com/danfickle/openhtmltopdf/commit/6c79ddb644ecc7ab2617480b4b8207de7adec6f3 "Continuous integration with travis.  Primarily so we stay compatible with Java 7.")                                                                                                                                                                                                                                                                                                                               | 7 months ago |
+|   | [LICENSE](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE "LICENSE")                                                                               | [For](https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a "For #8 - Update LICENSE.") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update LICENSE.](https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a "For #8 - Update LICENSE.")                                                                                                                                                                                                                   | 7 months ago |
+|   | [LICENSE-LGPL-2.1.txt](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-2.1.txt "LICENSE-LGPL-2.1.txt")                                        | [- change (back) license to 2.1 or later](https://github.com/danfickle/openhtmltopdf/commit/21c4dd319d5a7fac397bda10d60bb07a34782f1c "- change (back) license to 2.1 or later - include all LICENSE files in the jars")                                                                                                                                                                                                                                                                                                                             | 2 years ago  |
+|   | [LICENSE-LGPL-3.txt](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-3.txt "LICENSE-LGPL-3.txt")                                              | [- license update LGPL version 2.1 to 3](https://github.com/danfickle/openhtmltopdf/commit/a1ea2f09424b35ad2988453f70dc820872eb5ce0 "- license update LGPL version 2.1 to 3 - added license text of GPLv3 (mandatory) - links updated - added license information in poms - added license includes for jars")                                                                                                                                                                                                                                       | 2 years ago  |
+|   | [LICENSE-W3C-TEST](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-W3C-TEST "LICENSE-W3C-TEST")                                                    | [Added license for W3C tests, as requested on tests website.](https://github.com/danfickle/openhtmltopdf/commit/17e53385724025576684290a62cc05c3183b163e "Added license for W3C tests, as requested on tests website.")                                                                                                                                                                                                                                                                                                                             | 10 years ago |
+|   | [README.md](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/README.md "README.md")                                                                         | [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains…](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") | 22 days ago  |
+|   | [pom.xml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/pom.xml "pom.xml")                                                                               | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+.
+<meta charset='utf-8'>
+<div class="commit-tease js-details-container" style="box-sizing: border-box; position: relative; padding: 10px; margin-bottom: -1px; font-size: 13px; line-height: 20px; color: rgb(104, 119, 125); background-color: rgb(242, 249, 252); border: 1px solid rgb(201, 230, 242); border-radius: 3px 3px 0px 0px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
+  <span class="commit-author-section" style="box-sizing: border-box; color: rgb(51, 51, 51);"><img alt="@danfickle" class="avatar" height="20" src="https://avatars2.githubusercontent.com/u/1415728?v=3&amp;s=40" width="20" style="box-sizing: border-box; border-style: none; display: inline-block; overflow: hidden; line-height: 1; vertical-align: middle; border-radius: 3px; margin-top: -1px;"><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle" class="user-mention" rel="author" style="box-sizing: border-box; background-color: transparent; color: rgb(51, 51, 51); text-decoration: none; font-weight: 600; white-space: nowrap;">danfickle</a><span class="Apple-converted-space"> </span></span><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: inherit; text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/52" class="issue-link js-issue-link" data-id="191574839" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" title="Adobe Reader promts for saving" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">#52</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: inherit; text-decoration: none;">- Do not output acroform dict in case where document contains…</a><span class="Apple-converted-space"> </span><span class="hidden-text-expander inline" style="box-sizing: border-box; display: inline-block; position: relative; top: -1px; margin-left: 5px; line-height: 0;"><button type="button" class="ellipsis-expander js-details-target" style="box-sizing: border-box; font-style: inherit; font-variant: inherit; font-weight: bold; font-stretch: inherit; font-size: 12px; line-height: 6px; font-family: inherit; margin: 0px; overflow: visible; text-transform: none; -webkit-appearance: button; cursor: pointer; display: inline-block; height: 12px; padding: 0px 5px 5px; color: rgb(85, 85, 85); text-decoration: none; vertical-align: middle; background: rgb(221, 221, 221); border: 0px; border-radius: 1px;">…</button></span>
+</div>
+<div class="file-wrap" style="box-sizing: border-box; margin-bottom: 10px; border-width: 0px 1px 1px; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; border-right-color: rgb(221, 221, 221); border-bottom-color: rgb(221, 221, 221); border-left-color: rgb(221, 221, 221); border-image: initial; border-top-style: initial; border-top-color: initial; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">
+  <table class="files js-navigation-container js-active-navigation-container" data-pjax="" style="box-sizing: border-box; border-spacing: 0px; border-collapse: collapse; width: 977.778px; background: rgb(255, 255, 255); border-radius: 2px;">
+    <tbody style="box-sizing: border-box;">
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs" class="js-navigation-open" id="e3e2a9bfd88566b05001b02a3f51d286-b94e3fb3293e2773a2e0cff1140fa924842a3662" title="docs" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">docs</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);">
+          <span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe" class="message" data-pjax="true" title="For #8 - Update README and integration guide with RC8 version. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/8" class="issue-link js-issue-link" data-url="https://github.com/danfickle/openhtmltopdf/issues/8" data-id="131634448" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">#8</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe" class="message" data-pjax="true" title="For #8 - Update README and integration guide with RC8 version. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- Update README and integration guide with RC8 version. [ci skip]</a></span>
+        </td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T11:05:17Z" title="Nov 22, 2016, 6:05 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/obsolete-archive" class="js-navigation-open" id="c68a1d46a8d6446c655338dc04a36187-b659a4b026b17151924c11a94f687d949afa4b5f" title="obsolete-archive" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">obsolete-archive</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/3ca888aab7c587d16ec25e31db8a5659a0ed75ee" class="message" data-pjax="true" title="Cleanup repository - Move everything obsolete to the obsolete-archive folder." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">Cleanup repository - Move everything obsolete to the obsolete-archive…</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-06-25T10:19:05Z" title="Jun 25, 2016, 6:19 AM GMT-4" style="box-sizing: border-box;">7 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-core" class="js-navigation-open" id="43c1644a7dd1cc3e7295e178d19c554a-3293f3b0f6207b4ab1cd264b7adfeecc2df81f22" title="openhtmltopdf-core" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-core</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-examples" class="js-navigation-open" id="70804f5dd080109e48eaad24fc5c4097-8a9fa3a342a5f7f15325c5b19bb25f3b96f6126b" title="openhtmltopdf-examples" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-examples</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-jsoup-dom-converter" class="js-navigation-open" id="1e7db2f9f0762d128f1281dca6239083-77d726435adb235dac254d0b6d68b5583fee50c4" title="openhtmltopdf-jsoup-dom-converter" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-jsoup-dom-converter</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-log4j" class="js-navigation-open" id="680c20366dfd644b5fb886e15c131d0d-16ac99b925ef526d8df63ab6a5d22bab12eeb4f9" title="openhtmltopdf-log4j" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-log4j</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-pdfbox" class="js-navigation-open" id="7d9e5aec22a43aab0ee1c67d71cdccd0-a7ffee83109805cb8ff5f75914c92a9e950944de" title="openhtmltopdf-pdfbox" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-pdfbox</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);">
+          <span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/52" class="issue-link js-issue-link" data-id="191574839" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" title="Adobe Reader promts for saving" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">#52</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- Do not output acroform dict in case where document contains…</a></span>
+        </td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2017-01-02T11:11:16Z" title="Jan 2, 2017, 6:11 AM GMT-5" style="box-sizing: border-box;">22 days ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-rtl-support" class="js-navigation-open" id="4f21e98d89412d75c1a1e723231b1a93-0e3e5145104c719670100d02751ff4d96b03ae71" title="openhtmltopdf-rtl-support" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-rtl-support</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-slf4j" class="js-navigation-open" id="d510b03c0e9243cec05d086a8bc69dc0-7b3045db1f683da0dd9521d9c6dd6ec2c9374aea" title="openhtmltopdf-slf4j" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-slf4j</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-svg-support" class="js-navigation-open" id="0ec99f35d67fead18978c7a2880db8c1-90a1e298cddc2fedd9578556df2bc7d40d4c6568" title="openhtmltopdf-svg-support" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">openhtmltopdf-svg-support</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-directory" height="16" version="1.1" viewBox="0 0 14 16" width="14">
+            <path fill-rule="evenodd" d="M13 4H7V3c0-.66-.31-1-1-1H1c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V5c0-.55-.45-1-1-1zM6 4H1V3h5v1z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/tests" class="js-navigation-open" id="b61a6d542f9036550ba9c401c80f00ef-5f0ca6a61b4fbe07824e4c7aed64c4839042c695" title="tests" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">tests</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/927efc50fb4a8870691a168ea86223ebcb70b4fc" class="message" data-pjax="true" title="regression snapshot was missing source images, now using Ant to make copy of entire source reference tree and including this in snapshot diff. rebuild R8 snapshot so it includes these files. have ref comparison only report failures." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">regression snapshot was missing source images, now using Ant to make …</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2009-04-17T18:14:50Z" title="Apr 17, 2009, 2:14 PM GMT-4" style="box-sizing: border-box;">8 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.cvsignore" class="js-navigation-open" id="6d2b615139fd238e7c7471805068037e-47f0e8c731d42d4b5a30948b26bd9cce93bed18d" title=".cvsignore" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">.cvsignore</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/81951cc933fffdf85a5b5fbe274bd9c181c1daed" class="message" data-pjax="true" title="." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">.</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2009-04-13T13:36:19Z" title="Apr 13, 2009, 9:36 AM GMT-4" style="box-sizing: border-box;">8 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.gitignore" class="js-navigation-open" id="a084b794bc0759e7a6b77810e01874f2-f170b301ac80705855d2b2f7fa7208dae6f95190" title=".gitignore" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">.gitignore</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);">
+          <span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf" class="message" data-pjax="true" title="For #1 - Set up Apache PDF-BOX 2 output device module." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/1" class="issue-link js-issue-link" data-url="https://github.com/danfickle/openhtmltopdf/issues/1" data-id="115005751" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">#1</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf" class="message" data-pjax="true" title="For #1 - Set up Apache PDF-BOX 2 output device module." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- Set up Apache PDF-BOX 2 output device module.</a></span>
+        </td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2015-11-04T09:51:21Z" title="Nov 4, 2015, 4:51 AM GMT-5" style="box-sizing: border-box;">a year ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.hgignore" class="js-navigation-open" id="c8e92ef85cd1579eac1c2ad728e79720-28a4f06ef31cdf35617690a280f8fe45243415d1" title=".hgignore" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">.hgignore</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/011613889106579f70d33e6ec78a77168ee54424" class="message" data-pjax="true" title="Add .hgignore for those using hg-git
+--HG--
+rename : .gitignore => .hgignore" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">Add .hgignore for those using hg-git</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2010-08-07T10:08:31Z" title="Aug 7, 2010, 6:08 AM GMT-4" style="box-sizing: border-box;">7 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.travis.yml" class="js-navigation-open" id="354f30a63fb0907d4ad57269548329e3-7957a820abc3e86f2a0664ee2879d64e77437beb" title=".travis.yml" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">.travis.yml</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/6c79ddb644ecc7ab2617480b4b8207de7adec6f3" class="message" data-pjax="true" title="Continuous integration with travis.
+
+Primarily so we stay compatible with Java 7." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">Continuous integration with travis.</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-06-25T12:59:30Z" title="Jun 25, 2016, 8:59 AM GMT-4" style="box-sizing: border-box;">7 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE" class="js-navigation-open" id="9879d6db96fd29134fc802214163b95a-9756d4317eb74427f88dd3f24b37764cf03dbf72" itemprop="license" title="LICENSE" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">LICENSE</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);">
+          <span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a" class="message" data-pjax="true" title="For #8 - Update LICENSE." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/8" class="issue-link js-issue-link" data-url="https://github.com/danfickle/openhtmltopdf/issues/8" data-id="131634448" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">#8</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/f4dfeb9faf89f4108ed6a50b67392073b9dde02a" class="message" data-pjax="true" title="For #8 - Update LICENSE." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- Update LICENSE.</a></span>
+        </td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-06-25T10:35:55Z" title="Jun 25, 2016, 6:35 AM GMT-4" style="box-sizing: border-box;">7 months ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-2.1.txt" class="js-navigation-open" id="82af9b08b0a2adf5b8dd97639db5a1ff-5ab7695ab8cabe0c5c8a814bb0ab1e8066578fbb" itemprop="license" title="LICENSE-LGPL-2.1.txt" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">LICENSE-LGPL-2.1.txt</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/21c4dd319d5a7fac397bda10d60bb07a34782f1c" class="message" data-pjax="true" title="- change (back) license to 2.1 or later
+- include all LICENSE files in the jars" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- change (back) license to 2.1 or later</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2015-07-15T15:45:49Z" title="Jul 15, 2015, 11:45 AM GMT-4" style="box-sizing: border-box;">2 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-3.txt" class="js-navigation-open" id="71b1628a315fa537b1b8dc7548a5a43b-02bbb60bc49afc2d6a1bedf96288eab236d80fbd" itemprop="license" title="LICENSE-LGPL-3.txt" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">LICENSE-LGPL-3.txt</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/a1ea2f09424b35ad2988453f70dc820872eb5ce0" class="message" data-pjax="true" title="- license update LGPL version 2.1 to 3
+- added license text of GPLv3 (mandatory)
+- links updated
+- added license information in poms
+- added license includes for jars" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- license update LGPL version 2.1 to 3</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2015-07-15T09:34:52Z" title="Jul 15, 2015, 5:34 AM GMT-4" style="box-sizing: border-box;">2 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-W3C-TEST" class="js-navigation-open" id="d04bb24acfc954e4d9d3bca685827fe9-0ee2f1e33aa98a4e15f005e05e0e5abcff7dbd8d" itemprop="license" title="LICENSE-W3C-TEST" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">LICENSE-W3C-TEST</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/17e53385724025576684290a62cc05c3183b163e" class="message" data-pjax="true" title="Added license for W3C tests, as requested on tests website." style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">Added license for W3C tests, as requested on tests website.</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2007-07-10T19:52:36Z" title="Jul 10, 2007, 3:52 PM GMT-4" style="box-sizing: border-box;">10 years ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/README.md" class="js-navigation-open" id="04c6e90faac2675aa89e2176d2eec7d8-1ed0fe7dc9e7c33e8b617c062531b4c3e3abe1a9" title="README.md" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">README.md</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136);">
+          <span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">For</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/issues/52" class="issue-link js-issue-link" data-id="191574839" data-error-text="Failed to load issue title" data-permission-text="Issue title is private" title="Adobe Reader promts for saving" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">#52</a><span class="Apple-converted-space"> </span><a href="https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91" class="message" data-pjax="true" title="For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">- Do not output acroform dict in case where document contains…</a></span>
+        </td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap;"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2017-01-02T11:11:16Z" title="Jan 2, 2017, 6:11 AM GMT-5" style="box-sizing: border-box;">22 days ago</time-ago></span></td>
+      </tr>
+      <tr class="js-navigation-item navigation-focus" style="box-sizing: border-box;">
+        <td class="icon" style="box-sizing: border-box; padding: 6px 2px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 17px; color: rgb(118, 118, 118); background: rgb(245, 245, 245);">
+          <svg aria-hidden="true" class="octicon octicon-file-text" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+            <path d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path>
+          </svg>
+        </td>
+        <td class="content" style="box-sizing: border-box; padding: 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 180px; background: rgb(245, 245, 245);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/pom.xml" class="js-navigation-open" id="600376dffeb79835ede4a0b285078036-3d3378a25a49593f03fbb7f81116ca2ca09e270e" title="pom.xml" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">pom.xml</a></span></td>
+        <td class="message" style="box-sizing: border-box; padding: 6px 3px 6px 10px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); max-width: 442px; overflow: hidden; color: rgb(136, 136, 136); background: rgb(245, 245, 245);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><a href="https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec" class="message" data-pjax="true" title="[maven-release-plugin] prepare for next development iteration" style="box-sizing: border-box; background-color: transparent; color: rgb(136, 136, 136); text-decoration: none;">[maven-release-plugin] prepare for next development iteration</a></span></td>
+        <td class="age" style="box-sizing: border-box; padding: 6px 10px 6px 3px; line-height: 20px; border-top: 1px solid rgb(238, 238, 238); width: 125px; color: rgb(136, 136, 136); text-align: right; white-space: nowrap; background: rgb(245, 245, 245);"><span class="css-truncate css-truncate-target" style="box-sizing: border-box; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top;"><time-ago datetime="2016-11-22T10:43:19Z" title="Nov 22, 2016, 5:43 AM GMT-5" style="box-sizing: border-box;">2 months ago</time-ago></span></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 ````````````````````````````````
 
 

@@ -64,8 +64,7 @@ class HtmlParser extends IParseBase {
     @Override
     public Node parse(BasedSequence input) {
         // here we make the lexer parse the input sequence from start to finish and accumulate everything in custom nodes
-        final int pegdownExtensions = getHtmlExtensions(getOptions());
-        String rootNode = FlexmarkHtmlParser.parse(input.toString());
+        String rootNode = FlexmarkHtmlParser.parse(input.toString(), 0, getOptions());
         return new RootNode(rootNode);
     }
 

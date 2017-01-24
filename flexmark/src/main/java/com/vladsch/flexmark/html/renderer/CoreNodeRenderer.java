@@ -451,8 +451,10 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {
+        html.line();
+
         if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
-            html.line().srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
+            html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("div").indent().line();
         }
 
         if (node.hasChildren()) {
@@ -463,8 +465,10 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
 
         if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
-            html.unIndent().tag("/div").line();
+            html.unIndent().tag("/div");
         }
+
+        html.line();
     }
 
     private void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {

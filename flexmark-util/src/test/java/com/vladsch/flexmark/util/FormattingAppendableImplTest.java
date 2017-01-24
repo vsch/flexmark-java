@@ -17,7 +17,7 @@ public class FormattingAppendableImplTest {
         assertEquals("", sb.toString());
 
         fa.append('a').flush();
-        assertEquals("a\n", sb.toString());
+        assertEquals("a", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -47,9 +47,9 @@ public class FormattingAppendableImplTest {
         assertEquals(0, fa.getOffsetBefore());
         assertEquals(1, fa.getOffsetAfter());
         fa.flush();
-        assertEquals("a\n", sb.toString());
+        assertEquals("a", sb.toString());
         assertEquals(1, fa.getOffsetBefore());
-        assertEquals(2, fa.getOffsetAfter());
+        assertEquals(1, fa.getOffsetAfter());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -84,7 +84,7 @@ public class FormattingAppendableImplTest {
         assertEquals("", sb.toString());
 
         fa.append("a").flush();
-        assertEquals("a\n", sb.toString());
+        assertEquals("a", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -142,9 +142,9 @@ public class FormattingAppendableImplTest {
         assertEquals(0, fa.getOffsetBefore());
         assertEquals(1, fa.getOffsetAfter());
         fa.flush();
-        assertEquals("a\n", sb.toString());
+        assertEquals("a", sb.toString());
         assertEquals(1, fa.getOffsetBefore());
-        assertEquals(2, fa.getOffsetAfter());
+        assertEquals(1, fa.getOffsetAfter());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -246,7 +246,7 @@ public class FormattingAppendableImplTest {
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
         fa.append("ab\n    \t \n\t   \n\n").blankLine().append("c").flush();
-        assertEquals("ab\n\nc\n", sb.toString());
+        assertEquals("ab\n\nc", sb.toString());
     }
 
     @Test
@@ -288,12 +288,12 @@ public class FormattingAppendableImplTest {
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
         fa.append("ab\n    \t \n\t   \n\n").blankLine(1).append("c").flush();
-        assertEquals("ab\n\nc\n", sb.toString());
+        assertEquals("ab\n\nc", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
         fa.append("ab\n    \t \n\t   \n\n").blankLine(2).append("c").flush();
-        assertEquals("ab\n\n\nc\n", sb.toString());
+        assertEquals("ab\n\n\nc", sb.toString());
     }
 
     @Test
@@ -313,7 +313,7 @@ public class FormattingAppendableImplTest {
         assertEquals("", sb.toString());
 
         fa.indent().append("a").unIndent().flush();
-        assertEquals("a\n", sb.toString());
+        assertEquals("a", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -342,7 +342,7 @@ public class FormattingAppendableImplTest {
         assertEquals("", sb.toString());
 
         fa.indent().append("a").unIndent().flush();
-        assertEquals(" a\n", sb.toString());
+        assertEquals(" a", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
@@ -363,7 +363,7 @@ public class FormattingAppendableImplTest {
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);
         fa.indent().append("a").unIndent().flush();
-        assertEquals("  a\n", sb.toString());
+        assertEquals("  a", sb.toString());
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true).setIndentPrefix(indent);

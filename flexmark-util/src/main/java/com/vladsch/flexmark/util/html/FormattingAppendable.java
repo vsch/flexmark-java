@@ -65,7 +65,7 @@ public interface FormattingAppendable extends Appendable {
     /**
      * get the resulting text from appendable
      *
-     * @param maxBlankLines maximum trailing blank lines to allow in output
+     * @param maxBlankLines maximum blank lines to allow at end, -1 will suppress the last EOL
      * @return appendable toString() result after flushing
      */
     String getText(int maxBlankLines);
@@ -104,7 +104,7 @@ public interface FormattingAppendable extends Appendable {
      * <p>
      * All preFormatted and conditional regions should be exited prior to this call
      *
-     * @param maxBlankLines maximum blank lines to allow at end
+     * @param maxBlankLines maximum blank lines to allow at end, -1 will suppress the last EOL
      * @return this
      */
     FormattingAppendable flush(int maxBlankLines);

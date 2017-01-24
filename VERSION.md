@@ -96,7 +96,7 @@ flexmark-java
 - Change: complete parser profiles for variations within a family
   [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
   - [ ] League/CommonMark
-  - [x] Jekyll
+  - [ ] Jekyll
   - [ ] Php Markdown Extra
   - CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
   - FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
@@ -115,9 +115,41 @@ flexmark-java
 0.12.2
 ------
 
-* Fix: HTML to Markdown add blank line before headings. Add a few elements to be unwrapped on
-  conversion and some to wrap but as block elements so they could be easily cleaned up if
-  needed.
+* Change: HTML to Markdown conversion
+  * blank line before headings.
+  * a few elements to be unwrapped on conversion and some to wrap but as block elements so
+    they could be easily cleaned in resulting markdown.
+  * text node handling to trim text and escape `\`
+  * suppress empty headings
+  * task list item when first content of list item is input check box
+  * options for output control, pass via `DataHolder` taking method `parse()` method:
+    * `FlexmarkHtmlParser.LIST_CONTENT_INDENT`, default `true`, continuation lines of list items
+      and definitions indent to content column otherwise 4 spaces
+    * `FlexmarkHtmlParser.SETEXT_HEADINGS`, default `true`, if true then use Setext headings for
+      h1 and h2
+    * `FlexmarkHtmlParser.OUTPUT_UNKNOWN_TAGS`, default `false`, when true unprocessed tags will
+      be output, otherwise they are ignored
+    * `FlexmarkHtmlParser.ORDERED_LIST_DELIMITER`, default `'.'`, delimiter for ordered items
+    * `FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER`, default `'*'`, delimiter for unordered list
+      items
+    * `FlexmarkHtmlParser.DEFINITION_MARKER_SPACES`, default `3`, min spaces after `:` for
+      definitions
+    * `FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_COLUMN_WIDTH`, default `1`, min 1, minimum number
+      of `-` in separator column, excluding alignment colons `:`
+    * `FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_DASHES`, default `3`, min 3, minimum separator
+      column width, including alignment colons `:`
+    * `FlexmarkHtmlParser.CODE_INDENT`, default 4 spaces, indent to use for indented code
+    * `FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE`, default `" "`, string to use in place of
+      EOL in image and link title attribute.
+    * `FlexmarkHtmlParser.NBSP_TEXT`, default `" "`, string to use in place of
+      non-break-space
+    * `FlexmarkHtmlParser.THEMATIC_BREAK`, default `"*** ** * ** ***"`, `<hr>` replacement
+* Change: `FormattingAppendableImpl.flush()` no longer forces an EOL, only allows it if it is
+  already pending. Also `FormattingAppendableImpl.flush(int)` and
+  `FormattingAppendableImpl.getText(int)` allow -1 in which case they will suppress trailing
+  EOL.
+* Change: `HtmlRenderer.render()` methods now add a trailing EOL to resulting HTML if it is
+  missing. Previously this was done by `FormattingAppendableImpl.flush()`
 
 0.12.1
 ------
@@ -383,7 +415,8 @@ flexmark-java
 0.10.1
 ------
 
-- Fix: definitions would loose consecutive definition items without intervening definition terms.
+- Fix: definitions would loose consecutive definition items without intervening definition
+  terms.
 
 0.10.0
 ------

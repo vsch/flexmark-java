@@ -1,11 +1,13 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.Stack;
 
@@ -345,8 +347,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 // spaces and tabs are only output if we don't have a pending EOL and they don't come before an EOL
                 int span = seq.countChars(myWhitespaceEOL, pos, end);
                 if (myPendingEOL == 0) {
-                    if (seq.indexOf(myEOL, pos, pos + span) != -1) {
+                    int eolPos = seq.indexOf(myEOL, pos, pos + span);
+                    if (eolPos != -1) {
                         // we don't output the spaces after the EOL but make EOL pending
+                        if (eolPos > pos && !haveOptions(SUPPRESS_TRAILING_WHITESPACE)) addPendingSpaces(eolPos - pos);
                         setPendingEOL(1);
                     } else {
                         // no eol, make spaces pending
@@ -449,8 +453,6 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     public FormattingAppendable flush(final int maxBlankLines) {
         assert myConditionalFrames.size() == 0;
         assert myPreFormattedNesting == 0;
-
-        setPendingEOL(1);
 
         int blankLines = maxBlankLines >= 0 ? maxBlankLines : 0;
         if (myPendingEOL > blankLines + 1) {

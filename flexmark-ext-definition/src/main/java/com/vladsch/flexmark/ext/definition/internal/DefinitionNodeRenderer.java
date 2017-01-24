@@ -64,7 +64,7 @@ public class DefinitionNodeRenderer implements NodeRenderer {
         }
     }
 
-    private void render(final DefinitionItem node, final NodeRendererContext context, HtmlWriter html) {
+    private void render(final DefinitionItem node, final NodeRendererContext context, final HtmlWriter html) {
         html.srcPosWithEOL(node.getChars()).withAttr().withCondIndent().tagLine("dd", new Runnable() {
             @Override
             public void run() {
