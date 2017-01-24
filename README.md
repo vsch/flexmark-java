@@ -23,6 +23,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 * [XWiki Macros Extension Module](../../wiki/Extensions#xwiki-macro-extension)
 * [Jekyll tags Extension Module](../../wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](../../wiki/Extensions#html-to-markdown)
+* [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
 
 ### Changes Forced by Downgrade to Java 7
 
