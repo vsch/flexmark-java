@@ -523,10 +523,13 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public int getOffsetBefore() { return out.getOffsetBefore(); }
+    public FormattingAppendable lastOffset(final Ref<Integer> refOffset) { return out.lastOffset(refOffset); }
 
     @Override
-    public int getOffsetAfter() { return out.getOffsetAfter(); }
+    public int lastOffset() { return out.lastOffset(); }
+
+    @Override
+    public int offset() { return out.offset(); }
 
     @Override
     public T openPreFormatted(final boolean keepIndent) {

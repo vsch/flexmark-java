@@ -27,6 +27,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
     public static final DataKey<Integer> MIN_TABLE_SEPARATOR_COLUMN_WIDTH = new DataKey<>("MIN_TABLE_SEPARATOR_COLUMN_WIDTH", 3);
     public static final DataKey<Integer> MIN_TABLE_SEPARATOR_DASHES = new DataKey<>("MIN_TABLE_SEPARATOR_DASHES", 1);
+    public static final DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
     public static final DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
     public static final DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
     public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
@@ -336,11 +337,7 @@ public class FlexmarkHtmlParser {
                 text = text.substring(prefixBefore.length());
             } else {
                 // if we already have space or nothing before us
-                addSpaceBefore = true;
-
-                if (out.isPendingEOL() || out.isPendingSpace() || out.getModCount() == 0) {
-                    addSpaceBefore = false;
-                }
+                addSpaceBefore = !(out.isPendingEOL() || out.isPendingSpace() || out.getModCount() == 0);
             }
 
             if ("\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
@@ -514,7 +511,7 @@ public class FlexmarkHtmlParser {
 
                     if (myOptions.setextHeadings && level <= 2) {
                         out.append(headingText);
-                        out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), 3));
+                        out.line().repeat(level == 1 ? '=' : '-', Utils.minLimit(headingText.length(), myOptions.minSetextHeadingMarkerLength));
                     } else {
                         out.repeat('#', level).append(' ');
                         out.append(headingText);

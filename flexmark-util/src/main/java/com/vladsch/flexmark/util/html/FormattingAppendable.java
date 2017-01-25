@@ -315,18 +315,30 @@ public interface FormattingAppendable extends Appendable {
     int getLineCount();
 
     /**
-     * Get total number of characters appended before the last append, but right after pending: EOLs, spaces or indents were added
+     * Get offset before the next append, but right after pending: EOLs, spaces or indents were added
      *
-     * @return character offset
+     * Next append of text (non EOL/spaces) will set the reference, following appends will have not effect
+     *
+     * Unlike {@link #lastOffset()} flush() does not change the value of the reference, only actual character appending.
+     *
+     * @param refOffset reference where to store offset, if no appending was done then value is not changed
+     * @return this
      */
-    int getOffsetBefore();
+    FormattingAppendable lastOffset(Ref<Integer> refOffset);
 
     /**
-     * Get total number of characters appended after the last append, does not include any pending: EOLs, spaces nor indents
+     * Get offset before the last append, but right after pending: EOLs, spaces or indents were added
      *
-     * @return character offset
+     * @return character offset before last append or flush
      */
-    int getOffsetAfter();
+    int lastOffset();
+
+    /**
+     * Get offset after last append, does not include any pending: EOLs, spaces nor indents
+     *
+     * @return character offset after last append or flush
+     */
+    int offset();
 
     /**
      * Open a pre-formatted section. No monitoring of text is done, all text is output as is while nesting count &gt;0

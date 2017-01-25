@@ -38,8 +38,8 @@ public class MarkdownWriter implements MarkdownFormattingAppendable {
     @Override public int getIndent()                                                                                           { return myAppendable.getIndent(); }
     @Override public int getLineCount()                                                                                        { return myAppendable.getLineCount(); }
     @Override public int getModCount()                                                                                         { return myAppendable.getModCount(); }
-    @Override public int getOffsetAfter()                                                                                      { return myAppendable.getOffsetAfter(); }
-    @Override public int getOffsetBefore()                                                                                     { return myAppendable.getOffsetBefore(); }
+    @Override public int offset()                                                                                      { return myAppendable.offset(); }
+    @Override public int lastOffset()                                                                                     { return myAppendable.lastOffset(); }
     @Override public int getOptions()                                                                                          { return myAppendable.getOptions(); }
     @Override public IOException getIOException()                                                                              { return myAppendable.getIOException(); }
     @Override public String getText()                                                                                          { return myAppendable.getText(); }
@@ -57,6 +57,7 @@ public class MarkdownWriter implements MarkdownFormattingAppendable {
     @Override public MarkdownWriter closePreFormatted()                                                                        { myAppendable.closePreFormatted(); return this; }
     @Override public MarkdownWriter flush()                                                                                    { myAppendable.flush(); return this; }
     @Override public MarkdownWriter flush(final int maxBlankLines)                                                             { myAppendable.flush(maxBlankLines); return this; }
+    @Override public MarkdownWriter lastOffset(final Ref<Integer> refOffset)                                              { myAppendable.lastOffset(refOffset); return this; }
     @Override public MarkdownWriter indent()                                                                                   { myAppendable.indent(); return this; }
     @Override public MarkdownWriter line()                                                                                     { myAppendable.line(); return this; }
     @Override public MarkdownWriter line(final Ref<Boolean> lineRef)                                                           { myAppendable.line(lineRef); return this; }

@@ -15,6 +15,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     public int definitionMarkerSpaces;
     public int minTableSeparatorColumnWidth;
     public int minTableSeparatorDashes;
+    public int minSetextHeadingMarkerLength;
     public String codeIndent;
     public String eolInTitleAttribute;
     public String nbspText;
@@ -33,6 +34,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         definitionMarkerSpaces = other.definitionMarkerSpaces;
         minTableSeparatorColumnWidth = other.minTableSeparatorColumnWidth;
         minTableSeparatorDashes = other.minTableSeparatorDashes;
+        minSetextHeadingMarkerLength = other.minSetextHeadingMarkerLength;
         codeIndent = other.codeIndent;
         eolInTitleAttribute = other.eolInTitleAttribute;
         nbspText = other.nbspText;
@@ -48,6 +50,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         definitionMarkerSpaces = FlexmarkHtmlParser.DEFINITION_MARKER_SPACES.getFrom(options);
         minTableSeparatorColumnWidth = Utils.minLimit(FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_COLUMN_WIDTH.getFrom(options), 3);
         minTableSeparatorDashes = Utils.minLimit(FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_DASHES.getFrom(options), 1);
+        minSetextHeadingMarkerLength = Utils.minLimit(FlexmarkHtmlParser.MIN_SETEXT_HEADING_MARKER_LENGTH.getFrom(options), 3);
         codeIndent = FlexmarkHtmlParser.CODE_INDENT.getFrom(options);
         eolInTitleAttribute = FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE.getFrom(options);
         nbspText = FlexmarkHtmlParser.NBSP_TEXT.getFrom(options);
@@ -64,6 +67,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.DEFINITION_MARKER_SPACES, definitionMarkerSpaces);
         dataHolder.set(FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_COLUMN_WIDTH, minTableSeparatorColumnWidth);
         dataHolder.set(FlexmarkHtmlParser.MIN_TABLE_SEPARATOR_DASHES, minTableSeparatorDashes);
+        dataHolder.set(FlexmarkHtmlParser.MIN_SETEXT_HEADING_MARKER_LENGTH, minSetextHeadingMarkerLength);
         dataHolder.set(FlexmarkHtmlParser.CODE_INDENT, codeIndent);
         dataHolder.set(FlexmarkHtmlParser.EOL_IN_TITLE_ATTRIBUTE, eolInTitleAttribute);
         dataHolder.set(FlexmarkHtmlParser.NBSP_TEXT, nbspText);
