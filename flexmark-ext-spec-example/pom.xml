@@ -24,5 +24,9 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-formatter</artifactId>
+        </dependency>
     </dependencies>
 </project>

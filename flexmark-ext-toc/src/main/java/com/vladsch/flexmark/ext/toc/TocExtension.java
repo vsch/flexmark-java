@@ -8,6 +8,7 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -29,6 +30,15 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
     public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
     public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
     public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
+
+    // format options
+    public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
+    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new DataValueFactory<TocOptions>() {
+        @Override
+        public TocOptions create(DataHolder options) {
+            return new TocOptions(options);
+        }
+    });
 
     private TocExtension() {
     }

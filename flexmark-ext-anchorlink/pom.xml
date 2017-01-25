@@ -31,6 +31,9 @@
             <version>0.12.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-formatter</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

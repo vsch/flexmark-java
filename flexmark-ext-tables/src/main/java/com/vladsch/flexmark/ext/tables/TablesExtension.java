@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
+import com.vladsch.flexmark.formatter.options.DiscretionaryText;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
@@ -33,6 +34,17 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<>("HEADER_SEPARATOR_COLUMN_MATCH", false);
     public static final DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
     public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
+
+    // format options
+    public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = new DataKey<>("FORMAT_LEAD_TRAIL_PIPES", true);
+    public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPE = new DataKey<>("FORMAT_SPACE_AROUND_PIPE", true);
+    public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = new DataKey<>("FORMAT_ADJUST_COLUMN_WIDTH", true);
+    public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = new DataKey<>("FORMAT_APPLY_COLUMN_ALIGNMENT", true);
+    public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = new DataKey<>("FORMAT_FILL_MISSING_COLUMNS", true);
+    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_COLUMNS = new DataKey<>("FORMAT_DELETE_EMPTY_COLUMNS", true);
+    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_ROWS = new DataKey<>("FORMAT_DELETE_EMPTY_ROWS", true);
+    public static final DataKey<Boolean> FORMAT_TRIM_CELLS = new DataKey<>("FORMAT_TRIM_CELLS", false);
+    public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = new DataKey<>("FORMAT_LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
 
     public static Extension create() {
         return new TablesExtension();

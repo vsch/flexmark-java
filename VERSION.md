@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.0](#0130)
 - [0.12.3](#0123)
 - [0.12.2](#0122)
 - [0.12.1](#0121)
@@ -109,9 +110,22 @@ flexmark-java
   - Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
   - Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
-- Add: PDF renderer
+- [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.0
+------
+
+* Add: `flexmark-formatter` module and Formatting API that can be used by extensions to
+  customize formatting markdown source of custom elements. This module implements formatting of
+  core nodes, all unknown nodes are pass through as is.
+
+* [ ] Add: `FormattingRenderer.FormatterExtension` implementation to all modules where it makes
+  sense to format custom elements.
+
+* [ ] Change: `flexmark-html-parser` to use the formatting API `MarkdownWriter` for generating
+      formatted markdown results.
 
 0.12.3
 ------
@@ -198,7 +212,7 @@ flexmark-java
   * definition
   * emoji shortcuts
   * fenced code
-  * strikethrough
+  * strike through
   * subscript
   * superscript
   * tables

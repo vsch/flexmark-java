@@ -27,6 +27,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" filepath="$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" filepath="$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" filepath="$PROJECT_DIR$/flexmark-html-parser/flexmark-html-parser.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" filepath="$PROJECT_DIR$/flexmark-integration-test/flexmark-integration-test.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-java.iml" filepath="$PROJECT_DIR$/flexmark-java.iml" />

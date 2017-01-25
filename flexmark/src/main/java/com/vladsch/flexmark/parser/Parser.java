@@ -39,8 +39,8 @@ public class Parser implements IParse {
     public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
     public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", new DataValueFactory<ReferenceRepository>() {
         @Override
-        public ReferenceRepository create(DataHolder options1) {
-            return new ReferenceRepository(options1);
+        public ReferenceRepository create(DataHolder options) {
+            return new ReferenceRepository(options);
         }
     });
 

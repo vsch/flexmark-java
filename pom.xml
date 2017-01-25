@@ -46,6 +46,7 @@
         <module>flexmark-ext-wikilink</module>
         <module>flexmark-ext-yaml-front-matter</module>
         <module>flexmark-ext-zzzzzz</module>
+        <module>flexmark-formatter</module>
         <module>flexmark-html-parser</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-jira-converter</module>
@@ -312,6 +313,11 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-zzzzzz</artifactId>
+                <version>0.12.3</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-formatter</artifactId>
                 <version>0.12.3</version>
             </dependency>
             <dependency>

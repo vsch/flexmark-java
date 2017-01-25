@@ -36,7 +36,7 @@ public abstract class NodeRendererSubContext implements NodeRendererContext {
 
     public void doNotRenderLinks(boolean doNotRenderLinks) {
         if (doNotRenderLinks) doNotRenderLinks();
-        else doNotRenderLinks();
+        else doRenderLinks();
     }
 
     public void doNotRenderLinks() {
