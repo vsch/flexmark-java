@@ -9,7 +9,7 @@ Converts HTML to Markdown, assumes all non-application specific extensions are g
 * bullet and numbered lists
 * definition
 * fenced code
-* strikethrough
+* strike through
 * subscript
 * superscript
 * tables
