@@ -4,8 +4,6 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.zzzzzz.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
@@ -89,14 +87,19 @@ public class ZzzzzzExtension implements Parser.ParserExtension
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        if ("HTML".equals(rendererType)) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzNodeRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
-        } else if ("JIRA".equals(rendererType) || "YOUTRACK".equals(rendererType)) {
-            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() { @Override public NodeRenderer create(DataHolder options) {return new ZzzzzzJiraRenderer(options);} });// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
-            rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+        switch (rendererType) {
+            case "HTML":
+                rendererBuilder.nodeRendererFactory(new ZzzzzzNodeRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+                rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+                rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+
+                break;
+            case "JIRA":
+            case "YOUTRACK":
+                rendererBuilder.nodeRendererFactory(new ZzzzzzJiraRenderer.Factory());// zzzoptionszzz(NODE_RENDERER, PHASED_NODE_RENDERER)
+                rendererBuilder.linkResolverFactory(new ZzzzzzLinkResolver.Factory());// zzzoptionszzz(LINK_RESOLVER, NODE_RENDERER, PHASED_NODE_RENDERER)
+                rendererBuilder.attributeProviderFactory(new ZzzzzzAttributeProvider.Factory());// zzzoptionszzz(ATTRIBUTE_PROVIDER, NODE_RENDERER, PHASED_NODE_RENDERER)
+                break;
         }
     }
 }

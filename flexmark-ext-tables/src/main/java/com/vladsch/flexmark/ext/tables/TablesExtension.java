@@ -6,10 +6,7 @@ import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.formatter.options.DiscretionaryText;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -69,22 +66,12 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new TableNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
                 break;
 
             case "JIRA":
             case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new TableJiraRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new TableJiraRenderer.Factory());
                 break;
         }
     }

@@ -7,10 +7,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
-import com.vladsch.flexmark.html.renderer.PhasedNodeRenderer;
-import com.vladsch.flexmark.html.renderer.RenderingPhase;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
@@ -144,6 +141,13 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                     html.tag("/a");
                 }
             });
+        }
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new FootnoteNodeRenderer(options);
         }
     }
 }

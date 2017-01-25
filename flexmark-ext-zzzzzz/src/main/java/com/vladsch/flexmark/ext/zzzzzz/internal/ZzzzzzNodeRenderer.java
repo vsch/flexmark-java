@@ -58,4 +58,11 @@ public class ZzzzzzNodeRenderer implements NodeRenderer
         html.text(node.getText().unescape());
         html.tag("/a");
     }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new ZzzzzzNodeRenderer(options);
+        }
+    }
 }

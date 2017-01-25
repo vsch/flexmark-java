@@ -1,3 +1,3 @@
-**flexmark-java extension for formatter processing**
+**flexmark-java markdown formatter module**
 
-Converts formatter syntax into blah, blah, blah.
+Outputs AST as Formatted Markdown with user configurable options.

@@ -54,4 +54,11 @@ public class EmojiNodeRenderer implements NodeRenderer {
             html.tagVoid("img");
         }
     }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new EmojiNodeRenderer(options);
+        }
+    }
 }

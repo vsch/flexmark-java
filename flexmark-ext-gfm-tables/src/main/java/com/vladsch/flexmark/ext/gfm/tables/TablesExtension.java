@@ -4,10 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.gfm.tables.internal.TableBlockParser;
 import com.vladsch.flexmark.ext.gfm.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -49,12 +46,7 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new TableNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
                 break;
 
             case "JIRA":

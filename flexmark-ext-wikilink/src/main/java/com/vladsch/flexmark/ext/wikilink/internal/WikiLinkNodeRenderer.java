@@ -5,10 +5,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.HashSet;
@@ -67,6 +64,13 @@ public class WikiLinkNodeRenderer implements NodeRenderer {
                 html.attr("alt", altText);
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
             }
+        }
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new WikiLinkNodeRenderer(options);
         }
     }
 }

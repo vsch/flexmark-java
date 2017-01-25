@@ -35,6 +35,7 @@
       <element id="module-output" name="flexmark-ext-superscript" />
       <element id="module-output" name="flexmark-ext-jekyll-tag" />
       <element id="module-output" name="flexmark-html-parser" />
+      <element id="module-output" name="flexmark-formatter" />
     </root>
   </artifact>
 </component>

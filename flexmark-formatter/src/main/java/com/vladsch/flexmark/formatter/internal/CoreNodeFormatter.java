@@ -248,7 +248,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(Document node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -258,36 +258,32 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     private void render(final Heading node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         if (node.isAtxHeading()) {
-            markdown.raw(node.getOpeningMarker());
+            markdown.append(node.getOpeningMarker());
         }
         // TODO: add ability to add marker and find the # of chars from marker
         context.renderChildren(node);
         if (node.isSetextHeading()) {
             // TODO: equalize length if needed
-            markdown.raw(node.getClosingMarker());
+            markdown.append(node.getClosingMarker());
         }
     }
 
     private void render(final BlockQuote node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.withAttr().tagLineIndent("blockquote", new Runnable() {
-            @Override
-            public void run() {
-                context.renderChildren(node);
-            }
-        });
+        markdown.append("> ");
+        context.renderChildren(node);
     }
 
     private void render(FencedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
         // TODO: add format option for string to use as thematic break
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {
@@ -296,7 +292,6 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     private void render(final OrderedList node, final NodeFormatterContext context, MarkdownWriter markdown) {
         int start = node.getStartNumber();
-        if (listOptions.isOrderedListManualStart() && start != 1) markdown.attr("start", String.valueOf(start));
         context.renderChildren(node);
     }
 
@@ -310,21 +305,11 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     private void renderListItem(final ListItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         if (listOptions.isTightListItem(node)) {
-            markdown.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.TIGHT_LIST_ITEM).withCondIndent().tagLine("li", new Runnable() {
-                @Override
-                public void run() {
-                    markdown.raw(node.getChars());
-                    context.renderChildren(node);
-                }
-            });
+            markdown.append(node.getOpeningMarker());
+            context.renderChildren(node);
         } else {
-            markdown.srcPosWithEOL(node.getChars()).withAttr(CoreNodeRenderer.LOOSE_LIST_ITEM).tagIndent("li", new Runnable() {
-                @Override
-                public void run() {
-                    markdown.text(node.getMarkerSuffix().unescape());
-                    context.renderChildren(node);
-                }
-            });
+            markdown.append(node.getOpeningMarker());
+            context.renderChildren(node);
         }
     }
 
@@ -333,12 +318,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void renderLooseParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
-            @Override
-            public void run() {
-                renderTextBlockParagraphLines(node, context, markdown);
-            }
-        });
+        renderTextBlockParagraphLines(node, context, markdown);
     }
 
     private void render(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
@@ -365,27 +345,27 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(SoftLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getOpeningMarker());
+        markdown.append(node.getOpeningMarker());
         context.renderChildren(node);
-        markdown.raw(node.getOpeningMarker());
+        markdown.append(node.getOpeningMarker());
     }
 
     private void render(StrongEmphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getOpeningMarker());
+        markdown.append(node.getOpeningMarker());
         context.renderChildren(node);
-        markdown.raw(node.getOpeningMarker());
+        markdown.append(node.getOpeningMarker());
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(TextBase node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -393,9 +373,9 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(Code node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getOpeningMarker());
-        markdown.raw(node.getText());
-        markdown.raw(node.getOpeningMarker());
+        markdown.append(node.getOpeningMarker());
+        markdown.append(node.getText());
+        markdown.append(node.getOpeningMarker());
     }
 
     private void render(HtmlBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -403,59 +383,59 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
             // inner blocks handle rendering
             context.renderChildren(node);
         } else {
-            markdown.raw(node.getChars());
+            markdown.append(node.getChars());
         }
     }
 
     private void render(HtmlCommentBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HtmlInnerBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HtmlInnerBlockComment node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HtmlInline node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HtmlInlineComment node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(AutoLink node, NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(MailLink node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 
     private void render(LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.raw(node.getChars());
+        markdown.append(node.getChars());
     }
 }

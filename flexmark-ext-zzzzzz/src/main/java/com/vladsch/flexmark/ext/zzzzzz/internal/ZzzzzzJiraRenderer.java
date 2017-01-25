@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -36,5 +37,12 @@ public class ZzzzzzJiraRenderer implements NodeRenderer {
         html.raw("{}");
         html.raw(node.getText().unescape());
         html.raw("{}");
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new ZzzzzzJiraRenderer(options);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.formatter;
 
-import com.vladsch.flexmark.formatter.internal.FormattingRenderer;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -30,7 +30,7 @@ public class ComboFormatterSpecTest extends ComboSpecTestCase {
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
     // The spec says URL-escaping is optional, but the examples assume that it's enabled.
-    private static final FormattingRenderer RENDERER = FormattingRenderer.builder(OPTIONS).build();
+    private static final Formatter RENDERER = Formatter.builder(OPTIONS).build();
 
     private static DataHolder optionsSet(String optionSet) {
         if (optionSet == null) return null;
@@ -71,7 +71,7 @@ public class ComboFormatterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public FormattingRenderer renderer() {
+    public Formatter renderer() {
         return RENDERER;
     }
 }

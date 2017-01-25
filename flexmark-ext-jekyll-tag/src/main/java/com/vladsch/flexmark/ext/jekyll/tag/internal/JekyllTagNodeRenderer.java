@@ -7,6 +7,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -45,5 +46,12 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
 
     private void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) {
         context.renderChildren(node);
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new JekyllTagNodeRenderer(options);
+        }
     }
 }

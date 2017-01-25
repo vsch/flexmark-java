@@ -121,11 +121,8 @@ flexmark-java
   customize formatting markdown source of custom elements. This module implements formatting of
   core nodes, all unknown nodes are pass through as is.
 
-* [ ] Add: `FormattingRenderer.FormatterExtension` implementation to all modules where it makes
-  sense to format custom elements.
-
-* [ ] Change: `flexmark-html-parser` to use the formatting API `MarkdownWriter` for generating
-      formatted markdown results.
+* [ ] Add: `Formatter.FormatterExtension` implementation to all modules where it
+      makes sense to format custom elements.
 
 0.12.3
 ------

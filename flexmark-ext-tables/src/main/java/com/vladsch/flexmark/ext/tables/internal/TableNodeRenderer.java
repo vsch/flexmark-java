@@ -5,6 +5,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -146,5 +147,12 @@ public class TableNodeRenderer implements NodeRenderer {
                 return "right";
         }
         throw new IllegalStateException("Unknown alignment: " + alignment);
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new TableNodeRenderer(options);
+        }
     }
 }

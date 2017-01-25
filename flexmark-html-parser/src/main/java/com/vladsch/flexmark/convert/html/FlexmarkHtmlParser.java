@@ -32,7 +32,6 @@ public class FlexmarkHtmlParser {
     public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
     public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
 
-    private final Stack<CharSequence> myIndentStack;
     private final Stack<State> myStateStack;
     private final Map<String, String> myAbbreviations;
     private final HtmlParserOptions myOptions;
@@ -40,7 +39,6 @@ public class FlexmarkHtmlParser {
     private boolean myTrace;
 
     private FlexmarkHtmlParser(DataHolder options) {
-        myIndentStack = new Stack<>();
         myStateStack = new Stack<>();
         myAbbreviations = new HashMap<>();
         myOptions = new HtmlParserOptions(options);
@@ -453,17 +451,19 @@ public class FlexmarkHtmlParser {
 
     private boolean processAside(FormattingAppendable out, Element element) {
         skip();
-        addPrefix(out, "| ");
+        out.pushPrefix();
+        out.addPrefix("| ");
         processHtmlTree(out, element);
-        popPrefix(out);
+        out.popPrefix();
         return true;
     }
 
     private boolean processBlockquote(FormattingAppendable out, Element element) {
         skip();
-        addPrefix(out, "> ");
+        out.pushPrefix();
+        out.addPrefix("> ");
         processHtmlTree(out, element);
-        popPrefix(out);
+        out.popPrefix();
         return true;
     }
 
@@ -674,12 +674,13 @@ public class FlexmarkHtmlParser {
         } else {
             // we indent the whole thing by 4 spaces
             out.blankLine();
-            addPrefix(out, myOptions.codeIndent);
+            out.pushPrefix();
+            out.addPrefix(myOptions.codeIndent);
             out.openPreFormatted(true);
             out.append(text.isEmpty() ? "\n" : text);
             out.closePreFormatted();
             out.blankLine();
-            popPrefix(out);
+            out.popPrefix();
         }
 
         popState();
@@ -714,10 +715,11 @@ public class FlexmarkHtmlParser {
         CharSequence childPrefix = RepeatedCharSequence.of(" ", myOptions.listContentIndent ? itemPrefix.length() : 4);
 
         out.line().append(itemPrefix);
-        addPrefix(out, childPrefix);
+        out.pushPrefix();
+        out.addPrefix(childPrefix);
         processHtmlTree(out, item);
         out.line();
-        popPrefix(out);
+        out.popPrefix();
         popState();
     }
 
@@ -795,14 +797,15 @@ public class FlexmarkHtmlParser {
 
         out.line().setOptions(options & ~FormattingAppendable.COLLAPSE_WHITESPACE);
         out.append(':').repeat(' ', myOptions.definitionMarkerSpaces);
-        addPrefix(out, childPrefix);
+        out.pushPrefix();
+        out.addPrefix(childPrefix);
         out.setOptions(options);
         if (firstIsPara) {
             processHtmlTree(out, item);
         } else {
             processTextNodes(out, item);
         }
-        popPrefix(out);
+        out.popPrefix();
         popState();
     }
 
@@ -1267,21 +1270,6 @@ public class FlexmarkHtmlParser {
     private void popState() {
         if (myStateStack.isEmpty()) throw new IllegalStateException("popState with an empty stack");
         myState = myStateStack.pop();
-    }
-
-    private void addPrefix(FormattingAppendable out, CharSequence prefix) {
-        StringBuilder sb = new StringBuilder(out.getPrefix().length() + prefix.length());
-        myIndentStack.push(out.getPrefix());
-        sb.append(out.getPrefix());
-        sb.append(prefix);
-        out.setPrefix(sb.toString());
-    }
-
-    private void popPrefix(FormattingAppendable out) {
-        if (myIndentStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
-
-        CharSequence prefix = myIndentStack.pop();
-        out.setPrefix(prefix);
     }
 
     private Node peek() {

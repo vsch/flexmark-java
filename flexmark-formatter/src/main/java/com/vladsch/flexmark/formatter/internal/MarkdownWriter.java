@@ -1,33 +1,22 @@
 package com.vladsch.flexmark.formatter.internal;
 
-import com.vladsch.flexmark.html.renderer.AttributablePart;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
-import com.vladsch.flexmark.util.html.Attribute;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.html.ConditionalFormatter;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
 
-public class MarkdownWriter extends MarkdownFormattingAppendableBase<MarkdownWriter> {
+import java.io.IOException;
+
+public class MarkdownWriter implements MarkdownFormattingAppendable {
+    private final FormattingAppendable myAppendable;
     private NodeFormatterContext context;
 
     public MarkdownWriter(Appendable out) {
-        super(out);
+        this(out, 0);
     }
 
-    public MarkdownWriter(MarkdownWriter other, Appendable out, boolean inheritIndent) {
-        super(other, out, inheritIndent);
-        context = other.context;
-    }
-
-    public MarkdownWriter(Appendable out, int indentSize) {
-        super(out, indentSize, false);
-    }
-
-    public MarkdownWriter(Appendable out, int indentSize, boolean allFormatOptions) {
-        super(out, indentSize, allFormatOptions);
-    }
-
-    public MarkdownWriter(Appendable out, int indentSize, int formatOptions) {
-        super(out, indentSize, formatOptions);
+    public MarkdownWriter(Appendable out, int formatOptions) {
+        myAppendable = new FormattingAppendableImpl(out, formatOptions);
     }
 
     void setContext(NodeFormatterContext context) {
@@ -38,83 +27,54 @@ public class MarkdownWriter extends MarkdownFormattingAppendableBase<MarkdownWri
         return context;
     }
 
-    public MarkdownWriter srcPos() {
-        return srcPos(context.getCurrentNode().getChars());
-    }
+    // @formatter:off
+    @Override public Appendable getAppendable()                                                                                { return myAppendable.getAppendable(); }
+    @Override public boolean isPendingEOL()                                                                                    { return myAppendable.isPendingEOL(); }
+    @Override public boolean isPendingSpace()                                                                                  { return myAppendable.isPendingSpace(); }
+    @Override public boolean isPreFormatted()                                                                                  { return myAppendable.isPreFormatted(); }
+    @Override public CharSequence getIndentPrefix()                                                                            { return myAppendable.getIndentPrefix(); }
+    @Override public CharSequence getPrefix()                                                                                  { return myAppendable.getPrefix(); }
+    @Override public CharSequence getTotalIndentPrefix()                                                                       { return myAppendable.getTotalIndentPrefix(); }
+    @Override public int getIndent()                                                                                           { return myAppendable.getIndent(); }
+    @Override public int getLineCount()                                                                                        { return myAppendable.getLineCount(); }
+    @Override public int getModCount()                                                                                         { return myAppendable.getModCount(); }
+    @Override public int getOffsetAfter()                                                                                      { return myAppendable.getOffsetAfter(); }
+    @Override public int getOffsetBefore()                                                                                     { return myAppendable.getOffsetBefore(); }
+    @Override public int getOptions()                                                                                          { return myAppendable.getOptions(); }
+    @Override public IOException getIOException()                                                                              { return myAppendable.getIOException(); }
+    @Override public String getText()                                                                                          { return myAppendable.getText(); }
+    @Override public String getText(final int maxBlankLines)                                                                   { return myAppendable.getText(maxBlankLines); }
 
-    public MarkdownWriter srcPosWithEOL() {
-        return srcPosWithEOL(context.getCurrentNode().getChars());
-    }
-
-    public MarkdownWriter srcPosWithTrailingEOL() {
-        return srcPosWithTrailingEOL(context.getCurrentNode().getChars());
-    }
-
-    public MarkdownWriter srcPos(BasedSequence sourceText) {
-        if (sourceText.isNotNull()) {
-            BasedSequence trimmed = sourceText.trimEOL();
-            return srcPos(trimmed.getStartOffset(), trimmed.getEndOffset());
-        }
-        return this;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public MarkdownWriter srcPosWithEOL(BasedSequence sourceText) {
-        if (sourceText.isNotNull()) {
-            return srcPos(sourceText.getStartOffset(), sourceText.getEndOffset());
-        }
-        return this;
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public MarkdownWriter srcPosWithTrailingEOL(BasedSequence sourceText) {
-        if (sourceText.isNotNull()) {
-            int endOffset = sourceText.getEndOffset();
-            BasedSequence base = sourceText.getBaseSequence();
-
-            while (endOffset < base.length()) {
-                char c = base.charAt(endOffset);
-                if (c != ' ' && c != '\t') break;
-                endOffset++;
-            }
-
-            if (endOffset < base.length() && base.charAt(endOffset) == '\r') {
-                endOffset++;
-            }
-
-            if (endOffset < base.length() && base.charAt(endOffset) == '\n') {
-                endOffset++;
-            }
-            return srcPos(sourceText.getStartOffset(), endOffset);
-        }
-        return this;
-    }
-
-    public MarkdownWriter srcPos(int startOffset, int endOffset) {
-        return this;
-    }
-
-    public MarkdownWriter withAttr() {
-        return withAttr(AttributablePart.NODE);
-    }
-
-    public MarkdownWriter withAttr(AttributablePart part) {
-        super.withAttr();
-        return this;
-    }
-
-    public MarkdownWriter withAttr(LinkStatus status) {
-        attr(Attribute.LINK_STATUS_ATTR, status.getName());
-        return withAttr(AttributablePart.LINK);
-    }
-
-    public MarkdownWriter withAttr(ResolvedLink resolvedLink) {
-        return withAttr(resolvedLink.getStatus());
-    }
-
-    @Override
-    public MarkdownWriter tag(CharSequence tagName, boolean voidElement) {
-        super.tag(tagName, voidElement);
-        return this;
-    }
+    @Override public MarkdownWriter addLine()                                                                                  { myAppendable.addLine(); return this; }
+    @Override public MarkdownWriter addPrefix(final CharSequence prefix)                                                       { myAppendable.addPrefix(prefix); return this; }
+    @Override public MarkdownWriter append(final char c)                                                                       { myAppendable.append(c); return this; }
+    @Override public MarkdownWriter append(final CharSequence csq)                                                             { myAppendable.append(csq); return this; }
+    @Override public MarkdownWriter append(final CharSequence csq, final int start, final int end)                             { myAppendable.append(csq, start, end); return this; }
+    @Override public MarkdownWriter blankLine()                                                                                { myAppendable.blankLine(); return this; }
+    @Override public MarkdownWriter blankLine(final int count)                                                                 { myAppendable.blankLine(count); return this; }
+    @Override public MarkdownWriter blankLineIf(final boolean predicate)                                                       { myAppendable.blankLineIf(predicate); return this; }
+    @Override public MarkdownWriter closeConditional(final ConditionalFormatter closeFormatter)                                { myAppendable.closeConditional(closeFormatter); return this; }
+    @Override public MarkdownWriter closePreFormatted()                                                                        { myAppendable.closePreFormatted(); return this; }
+    @Override public MarkdownWriter flush()                                                                                    { myAppendable.flush(); return this; }
+    @Override public MarkdownWriter flush(final int maxBlankLines)                                                             { myAppendable.flush(maxBlankLines); return this; }
+    @Override public MarkdownWriter indent()                                                                                   { myAppendable.indent(); return this; }
+    @Override public MarkdownWriter line()                                                                                     { myAppendable.line(); return this; }
+    @Override public MarkdownWriter line(final Ref<Boolean> lineRef)                                                           { myAppendable.line(lineRef); return this; }
+    @Override public MarkdownWriter lineIf(final boolean predicate)                                                            { myAppendable.lineIf(predicate); return this; }
+    @Override public MarkdownWriter lineIf(final Ref<Boolean> lineRef)                                                         { myAppendable.lineIf(lineRef); return this; }
+    @Override public MarkdownWriter openConditional(final ConditionalFormatter openFormatter)                                  { myAppendable.openConditional(openFormatter); return this; }
+    @Override public MarkdownWriter openPreFormatted(final boolean keepIndent)                                                 { myAppendable.openPreFormatted(keepIndent); return this; }
+    @Override public MarkdownWriter popPrefix()                                                                                { myAppendable.popPrefix(); return this; }
+    @Override public MarkdownWriter pushPrefix()                                                                               { myAppendable.pushPrefix(); return this; }
+    @Override public MarkdownWriter repeat(final char c, final int count)                                                      { myAppendable.repeat(c, count); return this; }
+    @Override public MarkdownWriter repeat(final CharSequence csq, final int count)                                            { myAppendable.repeat(csq, count); return this; }
+    @Override public MarkdownWriter repeat(final CharSequence csq, final int start, final int end, final int count)            { myAppendable.repeat(csq, start, end, count); return this; }
+    @Override public MarkdownWriter setIndentOffset(final int indentOffset)                                                    { myAppendable.setIndentOffset(indentOffset); return this; }
+    @Override public MarkdownWriter setIndentPrefix(final CharSequence prefix)                                                 { myAppendable.setIndentPrefix(prefix); return this; }
+    @Override public MarkdownWriter setOptions(final int options)                                                              { myAppendable.setOptions(options); return this; }
+    @Override public MarkdownWriter setPrefix(final CharSequence prefix)                                                       { myAppendable.setPrefix(prefix); return this; }
+    @Override public MarkdownWriter unIndent()                                                                                 { myAppendable.unIndent(); return this; }
+    @Override public MarkdownWriter willIndent()                                                                               { myAppendable.willIndent(); return this; }
+    // @formatter:on
 }
+

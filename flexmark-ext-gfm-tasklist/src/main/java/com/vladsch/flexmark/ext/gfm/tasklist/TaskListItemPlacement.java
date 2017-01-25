@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.formatter.options;
+package com.vladsch.flexmark.ext.gfm.tasklist;
 
 public enum TaskListItemPlacement {
     AS_IS,

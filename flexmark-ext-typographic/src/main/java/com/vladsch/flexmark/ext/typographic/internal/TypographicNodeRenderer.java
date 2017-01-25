@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -25,17 +26,17 @@ public class TypographicNodeRenderer implements NodeRenderer
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
         set.add(new NodeRenderingHandler<>(TypographicSmarts.class, new CustomNodeRenderer<TypographicSmarts>() {
-                    @Override
-                    public void render(TypographicSmarts node, NodeRendererContext context, HtmlWriter html) {
-                        TypographicNodeRenderer.this.render(node, context, html);
-                    }
-                }));
+            @Override
+            public void render(TypographicSmarts node, NodeRendererContext context, HtmlWriter html) {
+                TypographicNodeRenderer.this.render(node, context, html);
+            }
+        }));
         set.add(new NodeRenderingHandler<>(TypographicQuotes.class, new CustomNodeRenderer<TypographicQuotes>() {
-                    @Override
-                    public void render(TypographicQuotes node, NodeRendererContext context, HtmlWriter html) {
-                        TypographicNodeRenderer.this.render(node, context, html);
-                    }
-                }));
+            @Override
+            public void render(TypographicQuotes node, NodeRendererContext context, HtmlWriter html) {
+                TypographicNodeRenderer.this.render(node, context, html);
+            }
+        }));
         return set;
     }
 
@@ -47,5 +48,12 @@ public class TypographicNodeRenderer implements NodeRenderer
 
     private void render(TypographicSmarts node, NodeRendererContext context, HtmlWriter html) {
         html.raw(node.getTypographicText());
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new TypographicNodeRenderer(options);
+        }
     }
 }

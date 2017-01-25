@@ -22,7 +22,7 @@ import java.util.*;
  * </code></pre>
  */
 @SuppressWarnings("WeakerAccess")
-public class FormattingRenderer implements IRender {
+public class Formatter implements IRender {
     /**
      * output control for FormattingAppendable, see {@link FormattingAppendable#setOptions(int)}
      */
@@ -40,7 +40,7 @@ public class FormattingRenderer implements IRender {
     private final DataHolder options;
     private final Builder builder;
 
-    FormattingRenderer(Builder builder) {
+    Formatter(Builder builder) {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.formatterOptions = new FormatterOptions(this.options);
@@ -58,7 +58,7 @@ public class FormattingRenderer implements IRender {
     }
 
     /**
-     * Create a new builder for configuring an {@link FormattingRenderer}.
+     * Create a new builder for configuring an {@link Formatter}.
      *
      * @return a builder
      */
@@ -67,7 +67,7 @@ public class FormattingRenderer implements IRender {
     }
 
     /**
-     * Create a new builder for configuring an {@link FormattingRenderer}.
+     * Create a new builder for configuring an {@link Formatter}.
      *
      * @param options initialization options
      * @return a builder
@@ -83,7 +83,7 @@ public class FormattingRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, 0, formatterOptions.formatFlags), node.getDocument());
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument());
         renderer.render(node);
         renderer.flush(formatterOptions.maxTrailingBlankLines);
     }
@@ -95,7 +95,7 @@ public class FormattingRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, 0, formatterOptions.formatFlags), node.getDocument());
+        MainNodeFormatter renderer = new MainNodeFormatter(options, new MarkdownWriter(output, formatterOptions.formatFlags), node.getDocument());
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
     }
@@ -112,12 +112,12 @@ public class FormattingRenderer implements IRender {
         return sb.toString();
     }
 
-    public FormattingRenderer withOptions(DataHolder options) {
-        return options == null ? this : new FormattingRenderer(new Builder(builder, options));
+    public Formatter withOptions(DataHolder options) {
+        return options == null ? this : new Formatter(new Builder(builder, options));
     }
 
     /**
-     * Builder for configuring an {@link FormattingRenderer}. See methods for default configuration.
+     * Builder for configuring an {@link Formatter}. See methods for default configuration.
      */
     public static class Builder extends MutableDataSet {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<>();
@@ -173,10 +173,10 @@ public class FormattingRenderer implements IRender {
         }
 
         /**
-         * @return the configured {@link FormattingRenderer}
+         * @return the configured {@link Formatter}
          */
-        public FormattingRenderer build() {
-            return new FormattingRenderer(this);
+        public Formatter build() {
+            return new Formatter(this);
         }
 
         /**
@@ -189,7 +189,7 @@ public class FormattingRenderer implements IRender {
          * @param nodeFormatterFactory the factory for creating a node renderer
          * @return {@code this}
          */
-        public Builder nodeRendererFactory(NodeFormatterFactory nodeFormatterFactory) {
+        public Builder nodeFormatterFactory(NodeFormatterFactory nodeFormatterFactory) {
             this.nodeFormatterFactories.add(nodeFormatterFactory);
             return this;
         }
@@ -223,7 +223,7 @@ public class FormattingRenderer implements IRender {
     }
 
     /**
-     * Extension for {@link FormattingRenderer}.
+     * Extension for {@link Formatter}.
      */
     public interface FormatterExtension extends Extension {
         /**
@@ -232,7 +232,7 @@ public class FormattingRenderer implements IRender {
          */
         void rendererOptions(MutableDataHolder options);
 
-        void extend(Builder rendererBuilder);
+        void extend(Builder builder);
     }
 
     private class MainNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
@@ -301,11 +301,11 @@ public class FormattingRenderer implements IRender {
         }
 
         @Override
-        public NodeFormatterContext getSubContext(Appendable out, boolean inheritIndent) {
-            MarkdownWriter htmlWriter = new MarkdownWriter(getMarkdown(), out, inheritIndent);
-            htmlWriter.setContext(this);
+        public NodeFormatterContext getSubContext(Appendable out) {
+            MarkdownWriter writer = new MarkdownWriter(out, getMarkdown().getOptions());
+            writer.setContext(this);
             //noinspection ReturnOfInnerClass
-            return new SubNodeFormatter(this, htmlWriter);
+            return new SubNodeFormatter(this, writer);
         }
 
         void renderNode(Node node, NodeFormatterSubContext subContext) {
@@ -395,8 +395,8 @@ public class FormattingRenderer implements IRender {
             }
 
             @Override
-            public NodeFormatterContext getSubContext(Appendable out, boolean inheritIndent) {
-                MarkdownWriter htmlWriter = new MarkdownWriter(this.markdown, out, inheritIndent);
+            public NodeFormatterContext getSubContext(Appendable out) {
+                MarkdownWriter htmlWriter = new MarkdownWriter(out, this.markdown.getOptions());
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
                 return new SubNodeFormatter(myMainNodeRenderer, htmlWriter);

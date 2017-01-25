@@ -1,18 +1,16 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Ref;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.CharSubSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.Stack;
 
 public class FormattingAppendableImpl implements FormattingAppendable {
-    private final Appendable myAppendable;
+    private final LengthTrackingAppendable myAppendable;
     private final Stack<ConditionalFrame> myConditionalFrames;
     private final Stack<Integer> myIndentLineCounts;
     private final char myEOL;
@@ -29,8 +27,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     // count of append calls, only useful for checking if real data was output since this value was taken last
     private int myModCount;
+
+    // offset before
     private int myOffsetBefore;
-    private int myOffsetAfter;
 
     // pending new lines, 1+ for every pending blank line
     private int myPendingEOL;
@@ -50,6 +49,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     // accumulated spaces and tabs that we were not sure would need to be output
     private int myPendingSpaces;
+    private final Stack<BasedSequence> myIndentStack;
 
     @SuppressWarnings("WeakerAccess")
     public FormattingAppendableImpl(final boolean allFormatOptions) {
@@ -65,15 +65,15 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     public FormattingAppendableImpl(final Appendable appendable, final int formatOptions) {
-        myAppendable = appendable;
+        myAppendable = new LengthTrackingAppendableImpl(appendable);
         myConditionalFrames = new Stack<>();
         myIndentLineCounts = new Stack<>();
+        myIndentStack = new Stack<>();
         myEOL = '\n';
         myOptions = formatOptions;
         myIOException = null;
         myModCount = 0;
         myOffsetBefore = 0;
-        myOffsetAfter = 0;
         myPendingEOL = 0;
         myPendingPreFormattedPrefix = false;
         myLineCount = 0;
@@ -128,13 +128,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private void appendIndent() throws IOException {
         if (!myPrefix.isEmpty()) {
             myAppendable.append(myPrefix);
-            myOffsetAfter += myPrefix.length();
         }
 
         if (myIndent + myIndentOffset > 0 && !myIndentPrefix.isEmpty()) {
             for (int i = 0; i < myIndent + myIndentOffset; i++) {
                 myAppendable.append(myIndentPrefix);
-                myOffsetAfter += myIndentPrefix.length();
             }
         }
     }
@@ -158,7 +156,6 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             while (myPendingSpaces > 0) {
                 myAppendable.append(' ');
                 myPendingSpaces--;
-                myOffsetAfter++;
             }
 
             myModCount++;
@@ -189,11 +186,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 myAppendable.append(myEOL);
                 myLineCount++;
                 myPendingEOL--;
-                myOffsetAfter++;
 
                 if (myPendingEOL > 0 && !myPrefix.isBlank()) {
                     myAppendable.append(myPrefix);
-                    myOffsetAfter += myPrefix.length();
                 }
             }
 
@@ -255,16 +250,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     private void appendImpl(final char c) throws IOException {
         if (myPreFormattedNesting > 0) {
-            myOffsetBefore = myOffsetAfter;
+            myOffsetBefore = myAppendable.getLength();
 
             if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
                 myAppendable.append(myPrefix);
-                myOffsetAfter += myPrefix.length();
             }
             myPendingPreFormattedPrefix = false;
 
             myAppendable.append(c);
-            myOffsetAfter++;
             myModCount++;
 
             if (c == myEOL) {
@@ -281,9 +274,8 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                     addPendingSpaces(1);
                 } else {
                     beforeAppendText(true, true, true);
-                    myOffsetBefore = myOffsetAfter;
+                    myOffsetBefore = myAppendable.getLength();
                     myAppendable.append(c);
-                    myOffsetAfter++;
                     myModCount++;
                 }
             }
@@ -295,7 +287,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         BasedSequence seq = BasedSequenceImpl.of(csq);
 
         if (myPreFormattedNesting > 0) {
-            myOffsetBefore = myOffsetAfter;
+            myOffsetBefore = myAppendable.getLength();
 
             while (lastPos < end) {
                 int pos = seq.indexOf(myEOL, lastPos, end);
@@ -304,12 +296,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 if (lastPos < endPos) {
                     if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
                         myAppendable.append(myPrefix);
-                        myOffsetAfter += myPrefix.length();
                     }
                     myPendingPreFormattedPrefix = false;
 
                     myAppendable.append(csq, lastPos, endPos);
-                    myOffsetAfter += endPos - lastPos;
                 }
 
                 if (pos == -1) break;
@@ -334,12 +324,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 if (lastPos < spanEnd) {
                     beforeAppendText(true, true, true);
                     if (firstAppend) {
-                        myOffsetBefore = myOffsetAfter;
+                        myOffsetBefore = myAppendable.getLength();
                         firstAppend = false;
                     }
                     myAppendable.append(csq, lastPos, spanEnd);
                     myModCount++;
-                    myOffsetAfter += spanEnd - lastPos;
                 }
 
                 if (pos == -1) break;
@@ -461,7 +450,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
         try {
             if (myIOException == null) {
-                myOffsetBefore = myOffsetAfter;
+                myOffsetBefore = myAppendable.getLength();
                 appendEOL(false, false);
             }
         } catch (IOException e) {
@@ -496,6 +485,27 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public FormattingAppendable setPrefix(final CharSequence prefix) {
         myPrefix = CharSubSequence.of(prefix);
+        return this;
+    }
+
+    @Override
+    public FormattingAppendable addPrefix(final CharSequence prefix) {
+        setPrefix(myPrefix.append(prefix));
+        return this;
+    }
+
+    @Override
+    public FormattingAppendable pushPrefix() {
+        myIndentStack.push(myPrefix);
+        return this;
+    }
+
+    @Override
+    public FormattingAppendable popPrefix() {
+        if (myIndentStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
+
+        BasedSequence prefix = myIndentStack.pop();
+        setPrefix(prefix);
         return this;
     }
 
@@ -619,13 +629,13 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public int getOffsetAfter() {
-        return myOffsetAfter;
+        return myAppendable.getLength();
     }
 
     @Override
     public FormattingAppendable openPreFormatted(final boolean keepIndent) {
         try {
-            myOffsetBefore = myOffsetAfter;
+            myOffsetBefore = myAppendable.getLength();
             if (!keepIndent) {
                 myPendingPreFormattedPrefix = myPendingEOL > 0;
             }

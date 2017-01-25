@@ -493,4 +493,11 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
             }
         }
     }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new YouTrackConverterNodeRenderer(options);
+        }
+    }
 }

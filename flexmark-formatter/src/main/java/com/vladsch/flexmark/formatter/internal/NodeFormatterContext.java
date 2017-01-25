@@ -3,7 +3,6 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.HtmlIdGenerator;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
@@ -20,10 +19,9 @@ public interface NodeFormatterContext {
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
      * @param out           appendable to use for generated html
-     * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
-    NodeFormatterContext getSubContext(Appendable out, boolean inheritIndent);
+    NodeFormatterContext getSubContext(Appendable out);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child

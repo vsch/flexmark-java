@@ -4,6 +4,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.superscript.Superscript;
 import com.vladsch.flexmark.util.options.DataHolder;
@@ -11,8 +12,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SuperscriptNodeRenderer implements NodeRenderer
-{
+public class SuperscriptNodeRenderer implements NodeRenderer {
     public SuperscriptNodeRenderer(DataHolder options) {
     }
 
@@ -29,5 +29,12 @@ public class SuperscriptNodeRenderer implements NodeRenderer
         html.withAttr().tag("sup");
         context.renderChildren(node);
         html.tag("/sup");
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new SuperscriptNodeRenderer(options);
+        }
     }
 }

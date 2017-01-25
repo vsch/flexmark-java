@@ -6,10 +6,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughNodeRend
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughYouTrackRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.SubscriptDelimiterProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -51,28 +48,13 @@ public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new StrikethroughNodeRenderer.Factory());
                 break;
             case "JIRA":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughJiraRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new StrikethroughJiraRenderer.Factory());
                 break;
             case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughYouTrackRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new StrikethroughYouTrackRenderer.Factory());
                 break;
         }
     }

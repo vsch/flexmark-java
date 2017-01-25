@@ -439,6 +439,24 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
+    public FormattingAppendable addPrefix(final CharSequence prefix) {
+        out.addPrefix(prefix);
+        return (T) this;
+    }
+
+    @Override
+    public FormattingAppendable pushPrefix() {
+        out.pushPrefix();
+        return (T) this;
+    }
+
+    @Override
+    public FormattingAppendable popPrefix() {
+        out.popPrefix();
+        return (T) this;
+    }
+
+    @Override
     public CharSequence getTotalIndentPrefix() {
         return out.getTotalIndentPrefix();
     }

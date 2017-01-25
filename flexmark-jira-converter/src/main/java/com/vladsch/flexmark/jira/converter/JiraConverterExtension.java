@@ -2,12 +2,8 @@ package com.vladsch.flexmark.jira.converter;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.jira.converter.internal.JiraConverterNodeRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -53,12 +49,7 @@ public class JiraConverterExtension implements Parser.ParserExtension, HtmlRende
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "JIRA":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new JiraConverterNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new JiraConverterNodeRenderer.Factory());
                 break;
             default:
                 throw new IllegalStateException("Jira Converter Extension used with non Jira Renderer " + rendererType);

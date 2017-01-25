@@ -31,6 +31,7 @@ import java.io.IOException;
  * child text
  * &lt;/li&gt;
  */
+@SuppressWarnings("UnusedReturnValue")
 public interface FormattingAppendable extends Appendable {
     // no IOExceptions are thrown, you can get the first IOException or null if did not have any
     IOException getIOException();
@@ -147,6 +148,31 @@ public interface FormattingAppendable extends Appendable {
      * @return this
      */
     FormattingAppendable setPrefix(CharSequence prefix);
+
+    /**
+     * Set prefix to append after a new line character for every line before the indent prefix in normal
+     * and after a new line in pre-formatted sections
+     *
+     * This appends the sequence to current prefix
+     *
+     * @param prefix prefix characters to add to current prefix for new lines appended after this is set
+     * @return this
+     */
+    FormattingAppendable addPrefix(CharSequence prefix);
+
+    /**
+     * Save the current prefix on the stack
+     *
+     * @return this
+     */
+    FormattingAppendable pushPrefix();
+
+    /**
+     * Pop a prefix from the stack and set the current prefix
+     *
+     * @return this
+     */
+    FormattingAppendable popPrefix();
 
     /**
      * Add a new line, if there was any unterminated text appended

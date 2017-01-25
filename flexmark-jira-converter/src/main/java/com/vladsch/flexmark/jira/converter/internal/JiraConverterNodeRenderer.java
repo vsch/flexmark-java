@@ -475,4 +475,11 @@ public class JiraConverterNodeRenderer implements NodeRenderer
             }
         }
     }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new JiraConverterNodeRenderer(options);
+        }
+    }
 }

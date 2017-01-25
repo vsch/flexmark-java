@@ -7,10 +7,7 @@ import com.vladsch.flexmark.ext.definition.internal.DefinitionListBlockPreProces
 import com.vladsch.flexmark.ext.definition.internal.DefinitionListItemBlockPreProcessor;
 import com.vladsch.flexmark.ext.definition.internal.DefinitionNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -58,10 +55,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(final DataHolder options) {return new DefinitionNodeRenderer(options);}
-                });
+                rendererBuilder.nodeRendererFactory(new DefinitionNodeRenderer.Factory());
                 break;
 
             case "JIRA":

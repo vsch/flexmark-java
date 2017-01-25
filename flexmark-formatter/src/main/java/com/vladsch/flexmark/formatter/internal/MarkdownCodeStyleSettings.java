@@ -29,8 +29,6 @@ public class MarkdownCodeStyleSettings {
     public boolean LIST_ALIGN_CHILD_BLOCKS = true;
     public boolean LIST_RIGHT_ALIGN_NUMERIC = false;
     public boolean LIST_RENUMBER_ITEMS = true;
-    public TaskListItemCase TASK_LIST_ITEM_CASE = TaskListItemCase.AS_IS;
-    public TaskListItemPlacement TASK_LIST_ITEM_PLACEMENT = TaskListItemPlacement.AS_IS;
     public BulletListItemMarker BULLET_LIST_ITEM_MARKER = BulletListItemMarker.ANY;
     public BulletListItemMarker NEW_BULLET_LIST_ITEM_MARKER = BulletListItemMarker.DASH;
     public ListSpacing LIST_SPACING = ListSpacing.AS_IS;

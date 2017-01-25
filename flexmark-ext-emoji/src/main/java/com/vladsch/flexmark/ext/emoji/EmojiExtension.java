@@ -5,10 +5,7 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiDelimiterProcessor;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiJiraRenderer;
 import com.vladsch.flexmark.ext.emoji.internal.EmojiNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -55,21 +52,12 @@ public class EmojiExtension implements Parser.ParserExtension, HtmlRenderer.Html
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new EmojiNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new EmojiNodeRenderer.Factory());
                 break;
+
             case "JIRA":
             case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new EmojiJiraRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new EmojiJiraRenderer.Factory());
                 break;
         }
     }

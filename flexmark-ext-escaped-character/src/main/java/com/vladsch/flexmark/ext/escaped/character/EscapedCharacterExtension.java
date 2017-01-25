@@ -4,10 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodePostProcessor;
 import com.vladsch.flexmark.ext.escaped.character.internal.EscapedCharacterNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -48,12 +45,7 @@ public class EscapedCharacterExtension implements Parser.ParserExtension, HtmlRe
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
         switch (rendererType) {
             case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new EscapedCharacterNodeRenderer(options);
-                    }
-                });
+                rendererBuilder.nodeRendererFactory(new EscapedCharacterNodeRenderer.Factory());
                 break;
 
             case "JIRA":

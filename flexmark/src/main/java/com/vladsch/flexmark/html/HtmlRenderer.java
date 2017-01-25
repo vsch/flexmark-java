@@ -142,12 +142,7 @@ public class HtmlRenderer implements IRender {
         this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
 
         // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeRendererFactories.add(new NodeRendererFactory() {
-            @Override
-            public NodeRenderer create(DataHolder options) {
-                return new CoreNodeRenderer(options);
-            }
-        });
+        this.nodeRendererFactories.add(new CoreNodeRenderer.Factory());
 
         this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);

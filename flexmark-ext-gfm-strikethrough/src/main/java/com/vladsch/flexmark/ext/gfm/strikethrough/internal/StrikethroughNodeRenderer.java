@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
+import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.util.options.DataHolder;
 
@@ -46,5 +47,12 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
         html.srcPos(node.getText()).withAttr().tag("sub");
         context.renderChildren(node);
         html.tag("/sub");
+    }
+
+    public static class Factory implements NodeRendererFactory {
+        @Override
+        public NodeRenderer create(final DataHolder options) {
+            return new StrikethroughNodeRenderer(options);
+        }
     }
 }
