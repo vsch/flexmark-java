@@ -31,7 +31,7 @@ I tried to keep all changes caused by the downgrade in Java language level as me
 possible to make it easier to migrate. The biggest change is the lack of lambda syntax and no
 static extension methods in interfaces.
 
-- All VISIT_HANDLERS in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
+- All `VISIT_HANDLERS` in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
   mechanical search and replace from `.VISIT_HANDLERS` to `Ext.VISIT_HANDLERS` should take care
   of the change.
 
@@ -109,11 +109,11 @@ free to contact me. I am available on a consulting/contracting basis, [All about
 
 ### Pegdown Migration Helper
 
-I added `PegdownOptionsAdapter` class that converts pegdown `Extensions.*` flags to flexmark
-options and extensions list. Pegdown `Extensions.java` is included for convenience. These are
-located in `flexmark-profile-pegdown` module, was added to Maven but you can grab the source
-from this repo: [PegdownOptionsAdapter.java] and if you need it [Extensions.java] and make your
-own version, modified to your project's needs.
+`PegdownOptionsAdapter` class converts pegdown `Extensions.*` flags to flexmark options and
+extensions list. Pegdown `Extensions.java` is included for convenience. These are located in
+`flexmark-profile-pegdown` module, was added to Maven but you can grab the source from this
+repo: [PegdownOptionsAdapter.java] and if you need it [Extensions.java] and make your own
+version, modified to your project's needs.
 
 You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
 can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
@@ -140,118 +140,8 @@ public class PegdownOptions {
 ```
 
 :information_source: [flexmark-java] has many more extensions and configuration options than
-[pegdown] in addition to extensions available in pegdown 1.6.0, the following extensions are
-available:
-
-* `SMARTS`: :warning: Not Implemented. Beautifies `...` `. . .`, `--` and `---` to `…`, `…`, `–`
-  and `—` respectively.
-* `QUOTES`: :warning: Not Implemented. Beautifies single quotes `'`, `"`, `<<` and `>>` to `‘`
-  `’` `‛`, `“` `”` `‟`, `«` and `»`
-* `SMARTYPANTS`: Convenience extension enabling both, `SMARTS` and `QUOTES`, at once.
-* `ABBREVIATIONS`: Abbreviations in the way of [PHP Markdown Extra].
-* `ANCHORLINKS`: Generate anchor links for headers by taking the first range of alphanumerics
-  and spaces.
-* `HARDWRAPS`: Alternative handling of newlines, see [Github-flavoured-Markdown]
-* `AUTOLINKS`: Plain, undelimited autolinks the way [Github-flavoured-Markdown] implements them.
-* `TABLES`: Tables similar to [MultiMarkdown] (which is in turn like the
-  [PHP Markdown Extra: tables] tables, but with colspan support).
-* `DEFINITIONS`: Definition lists in the way of [PHP Markdown Extra: definition list].
-* `FENCED_CODE_BLOCKS`: Fenced Code Blocks in the way of [PHP Markdown Extra: fenced code] or
-  [Github-flavoured-Markdown].
-* `SUPPRESS_HTML_BLOCKS`: Suppresses the output of HTML blocks.
-* `SUPPRESS_INLINE_HTML`: Suppresses the output of inline HTML elements.
-* `WIKILINKS`: Support `[[Wiki-style links]]` with a customizable URL rendering logic.
-* `STRIKETHROUGH`: Support `~~strikethroughs~~` as supported in [Pandoc] and
-  [Github-flavoured-Markdown].
-* `ATXHEADERSPACE`: Require a space between the `#` and the header title text, as per
-  [Github-flavoured-Markdown]. Frees up `#` without a space to be just plain text.
-* `FORCELISTITEMPARA`: Wrap a list item or definition term in `<p>` tags if it contains more
-  than a simple paragraph.
-* `RELAXEDHRULES`: allow horizontal rules without a blank line following them.
-* `TASKLISTITEMS`: parses bullet lists of the form `* [ ]`, `* [x]` and `* [X]` to create
-  [Github-flavoured-Markdown] task list items.
-* `EXTANCHORLINKS`: Generate anchor links for headers using complete contents of the header.
-  * Spaces and non-alphanumerics replaced by `-`, multiple dashes trimmed to one.
-  * Anchor link is added as first element inside the header with empty content: `<h1><a
-    name="header"></a>header</h1>`
-* `EXTANCHORLINKS_WRAP`: used in conjunction with above to create an anchor that wraps header
-  content: `<h1><a name="header">header</a></h1>`
-* `TOC`: used to enable table of contents extension `[TOC]` The TOC tag has the following
-  format: `[TOC style]`. `style` consists of space separated list of options:
-  - `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-    is to include heading levels 2 and 3. Examples:
-    - `levels=4` include levels 2, 3 and 4
-    - `levels=2-4` include levels 2, 3 and 4. same as `levels=4`
-    - `levels=2-4,5` include levels 2, 3, 4 and 5
-    - `levels=1,3` include levels 1 and 3
-  - `text` to only include the text of the heading
-  - `formatted` to include text and inline formatting
-  - `bullet` to use a bullet list for the TOC items
-  - `numbered` to use a numbered list for TOC items
-  - `hierarchy`: hierarchical list of headings
-  - `flat`: flat list of headings
-  - `reversed`: flat reversed list of headings
-  - `increasing`: flat, alphabetically increasing by heading text
-  - `decreasing`: flat, alphabetically decreasing by heading text
-* `MULTI_LINE_IMAGE_URLS`: enables parsing of image urls spanning more than one line the format
-  is strict `![alt text](urladdress?` must be the last non-blank segment on a line. The
-  terminating `)` or `"title")` must be the first non-indented segment on the line. Everything
-  in between is sucked up as part of the URL except for blank lines.
-* `RELAXED_STRONG_EMPHASIS_RULES`: allow Strong/Emphasis marks to start when not preceded by
-  alphanumeric for `_` and as long as not surrounded by spaces for `*` instead of only when
-  preceded by spaces.
-* `FOOTNOTES`: Support MultiMarkdown style footnotes: `[^n] for footnote reference` and `[^n]:
-  Footnote text` for footnotes. Where `n` is one or more digit, letter, `-`, `_` or `.`.
-  Footnotes will be put at the bottom of the page, sequentially numbered in order of appearance
-  of the footnote reference. Footnotes that are not referenced will NOT be included in the HTML
-  output.
-
-  ```markdown
-  This paragraph has a footnote[^1] and another footnote[^two].
-  This one has more but out of sequence[^4] and[^eight]. 
-  [^two]: Footnote 2 with a bit more text
-      and another continuation line
-  [^1]: Footnote 1
-  [^3]: Unused footnote, it will not be added to the end of the page.
-  [^4]: Out of sequence footnote
-  [^eight]: Have one that is used.
-  ```
-
-  will generate:
-
-  ```html
-  <p>This paragraph has a footnote<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup> and another footnote<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>.</p>
-  <p>This one has more but out of sequence<sup id="fnref-3"><a href="#fn-3" class="footnote-ref">3</a></sup> and<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup>. </p>
-  <div class="footnotes">
-  <hr/>
-  <ol>
-  <li id="fn-1"><p>Footnote 1<a href="#fnref-1" class="footnote-backref">&#8617;</a></p></li>
-  <li id="fn-2"><p>Footnote 2 with a bit more text  and another continuation line<a href="#fnref-2" class="footnote-backref">&#8617;</a></p></li>
-  <li id="fn-3"><p>Out of sequence footnote<a href="#fnref-3" class="footnote-backref">&#8617;</a></p></li>
-  <li id="fn-4"><p>Have one that is used.<a href="#fnref-4" class="footnote-backref">&#8617;</a></p></li>
-  </ol>
-  </div>
-  ```
-
-  to look like this:
-
-  <div>
-        <hr/>
-        <p>This paragraph has a footnote<sup id="fnref-1"><a href="#fn-1" class="footnote-ref">1</a></sup> and another footnote<sup id="fnref-2"><a href="#fn-2" class="footnote-ref">2</a></sup>.</p>
-        <p>This one has more but out of sequence<sup id="fnref-3"><a href="#fn-3" class="footnote-ref">3</a></sup> and<sup id="fnref-4"><a href="#fn-4" class="footnote-ref">4</a></sup>. </p>
-        <hr/>
-        <div class="footnotes">
-           <ol style="list-style-type: decimal;">
-               <li id="fn-1"><p>Footnote 1<a href="#fnref-1" class="footnote-backref">&#8617;</a></p></li>
-               <li id="fn-2"><p>Footnote 2 with a bit more text  and another continuation line<a href="#fnref-2" class="footnote-backref">&#8617;</a></p></li>
-               <li id="fn-3"><p>Out of sequence footnote<a href="#fnref-3" class="footnote-backref">&#8617;</a></p></li>
-               <li id="fn-4"><p>Have one that is used.<a href="#fnref-4" class="footnote-backref">&#8617;</a></p></li>
-           </ol>
-        </div>
-    </div>
-* `SUBSCRIPT`: subscript extension `~subscript~`
-* `SUPERSCRIPT`: superscript extension `^superscript^`
-* `INSERTED`: inserted or underlined extension `++inserted++`
+[pegdown] in addition to extensions available in pegdown 1.6.0.
+[Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
 
 ### Markdown Processor Family Emulation
 
@@ -534,16 +424,9 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [GitHub Issues page]: ../../issues
-[Github-flavoured-Markdown]: http://github.github.com/github-flavored-markdown/
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
 [LICENSE.txt]: LICENSE.txt
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
-[MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
-[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
-[PHP Markdown Extra: definition list]: http://michelf.com/projects/php-markdown/extra/#def-list
-[PHP Markdown Extra: fenced code]: http://michelf.com/projects/php-markdown/extra/#fenced-code-blocks
-[PHP Markdown Extra: tables]: http://michelf.com/projects/php-markdown/extra/#table
-[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
@@ -564,6 +447,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [DataGrip]: https://www.jetbrains.com/datagrip
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
+[Github-flavoured-Markdown]: http://github.github.com/github-flavored-markdown/
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [Jekyll]: https://jekyllrb.com
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
@@ -573,6 +457,12 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
 [Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
+[MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
+[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
+[PHP Markdown Extra: definition list]: http://michelf.com/projects/php-markdown/extra/#def-list
+[PHP Markdown Extra: fenced code]: http://michelf.com/projects/php-markdown/extra/#fenced-code-blocks
+[PHP Markdown Extra: tables]: http://michelf.com/projects/php-markdown/extra/#table
+[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
 [PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
 [PhpStorm]: http://www.jetbrains.com/phpstorm
 [Pipe Table Formatter]: https://github.com/anton-dev-ua/PipeTableFormatter
