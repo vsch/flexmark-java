@@ -7,10 +7,17 @@ import java.util.List;
 public class Paragraph extends Block {
     private static int[] EMPTY_INDENTS = new int[0];
     private int[] lineIndents = EMPTY_INDENTS;
+    private boolean trailingBlankLine = false;
 
     @Override
     public BasedSequence[] getSegments() {
         return EMPTY_SEGMENTS;
+    }
+
+    @Override
+    public void getAstExtra(final StringBuilder out) {
+        super.getAstExtra(out);
+        if (trailingBlankLine) out.append(" isTrailingBlankLine");
     }
 
     public Paragraph() {
@@ -98,5 +105,13 @@ public class Paragraph extends Block {
 
     public int[] getLineIndents() {
         return lineIndents;
+    }
+
+    public boolean isTrailingBlankLine() {
+        return trailingBlankLine;
+    }
+
+    public void setTrailingBlankLine(final boolean trailingBlankLine) {
+        this.trailingBlankLine = trailingBlankLine;
     }
 }

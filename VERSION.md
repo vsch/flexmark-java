@@ -117,12 +117,28 @@ flexmark-java
 0.13.0
 ------
 
-* Add: `flexmark-formatter` module and Formatting API that can be used by extensions to
-  customize formatting markdown source of custom elements. This module implements formatting of
-  core nodes, all unknown nodes are pass through as is.
+* Add: #50, Add Email obfuscation?, using pegdown profile e-mail obfuscation is on by default.
+  For CommonMark and other processors you will need to set `HtmlRenderer.OBFUSCATE_EMAIL` to
+  `true`, if you need to have repeatability for testing then set
+  `HtmlRenderer.OBFUSCATE_EMAIL_RANDOM` to `false`.
 
-* [ ] Add: `Formatter.FormatterExtension` implementation to all modules where it
-      makes sense to format custom elements.
+* Add: #47, Add option to have BlankLine nodes in the AST. option `Parser.BLANK_LINES_IN_AST`
+  which results in `BlankLine` nodes to be put into the AST for every blank line in the file.
+
+  :warning: A blank line in terms of Markdown syntax is not necessarily a blank line in the
+  file. Lines prefixed with `>` that are otherwise empty are blank lines inside the block quote
+  and will be in the AST as blank lines.
+
+* Fix: trailing atx heading marker should not require space if `Parser.HEADING_NO_ATX_SPACE` is
+  true.
+
+* Add: #49, Add `flexmark-formatter` module to render AST as markdown with formatting options,
+  and Formatting API that can be used by extensions to customize formatting markdown source of
+  custom elements. This module implements formatting of core nodes, all unknown nodes are pass
+  through as is.
+
+* Add: `Formatter.FormatterExtension` implementation to all modules where it makes sense to
+  format custom elements.
 
 0.12.3
 ------

@@ -179,7 +179,7 @@ This is an Abbr and this is not [Abbr].
 Document[0, 88]
   AbbreviationBlock[0, 21] open:[0, 2] text:[2, 6] close:[6, 8] abbreviation:[9, 21]
   Reference[22, 45] refOpen:[22, 23, "["] ref:[23, 27, "Abbr"] refClose:[27, 29, "]:"] url:[30, 45, "http://test.com"]
-  Paragraph[47, 87]
+  Paragraph[47, 87] isTrailingBlankLine
     TextBase[47, 79] chars:[47, 79, "This  …  not "]
       Text[47, 58] chars:[47, 58, "This  … s an "]
       Abbreviation[58, 62] chars:[58, 62, "Abbr"]
@@ -201,7 +201,7 @@ Paragraph with second line having a reference
 *[test]: test abbreviation</p>
 .
 Document[0, 74]
-  Paragraph[0, 73]
+  Paragraph[0, 73] isTrailingBlankLine
     Text[0, 45] chars:[0, 45, "Parag … rence"]
     SoftLineBreak[45, 46]
     Text[46, 47] chars:[46, 47, "*"]
@@ -222,7 +222,7 @@ text with abbr embedded
 <p>text with <abbr title="abbreviation">abbr</abbr> embedded</p>
 .
 Document[0, 48]
-  Paragraph[0, 24]
+  Paragraph[0, 24] isTrailingBlankLine
     TextBase[0, 23] chars:[0, 23, "text  … edded"]
       Text[0, 10] chars:[0, 10, "text with "]
       Abbreviation[10, 14] chars:[10, 14, "abbr"]
@@ -242,7 +242,7 @@ text with abbr embedded
 <p md-pos="0-24">text with <abbr title="abbreviation" md-pos="10-14">abbr</abbr> embedded</p>
 .
 Document[0, 48]
-  Paragraph[0, 24]
+  Paragraph[0, 24] isTrailingBlankLine
     TextBase[0, 23] chars:[0, 23, "text  … edded"]
       Text[0, 10] chars:[0, 10, "text with "]
       Abbreviation[10, 14] chars:[10, 14, "abbr"]

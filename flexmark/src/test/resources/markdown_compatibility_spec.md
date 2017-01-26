@@ -36,7 +36,7 @@ Document[0, 22]
       Paragraph[9, 14]
         Text[9, 13] chars:[9, 13, "item"]
     BulletListItem[14, 21] open:[14, 15, "*"] isTight hadBlankLineAfter
-      Paragraph[16, 21]
+      Paragraph[16, 21] isTrailingBlankLine
         Text[16, 20] chars:[16, 20, "item"]
 ````````````````````````````````
 
@@ -161,7 +161,7 @@ Test to see how trailing blank after item determines looseness
 Document[0, 40]
   BulletList[0, 40] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
     BulletListItem[10, 20] open:[10, 11, "-"] isLoose
       Paragraph[12, 20]
@@ -199,7 +199,7 @@ Document[0, 40]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
     BulletListItem[9, 19] open:[9, 10, "-"] isLoose hadBlankLineAfter
-      Paragraph[11, 19]
+      Paragraph[11, 19] isTrailingBlankLine
         Text[11, 17] chars:[11, 17, "item 2"]
     BulletListItem[20, 30] open:[20, 21, "-"] isLoose
       Paragraph[22, 30]
@@ -237,7 +237,7 @@ Document[0, 40]
       Paragraph[11, 19]
         Text[11, 17] chars:[11, 17, "item 2"]
     BulletListItem[19, 29] open:[19, 20, "-"] isLoose hadBlankLineAfter
-      Paragraph[21, 29]
+      Paragraph[21, 29] isTrailingBlankLine
         Text[21, 27] chars:[21, 27, "item 3"]
     BulletListItem[30, 40] open:[30, 31, "-"] isLoose
       Paragraph[32, 40]
@@ -351,7 +351,7 @@ Document[0, 102]
 Document[0, 103]
   BulletList[0, 103] isTight
     BulletListItem[0, 25] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       BulletList[14, 25] isTight
         BulletListItem[14, 25] open:[14, 15, "-"] isTight
@@ -424,7 +424,7 @@ Document[0, 103]
         Text[2, 8] chars:[2, 8, "item 1"]
       BulletList[13, 24] isTight
         BulletListItem[13, 24] open:[13, 14, "-"] isTight hadBlankLineAfter
-          Paragraph[15, 24]
+          Paragraph[15, 24] isTrailingBlankLine
             Text[15, 23] chars:[15, 23, "item 1.1"]
     BulletListItem[25, 51] open:[25, 26, "-"] isLoose
       Paragraph[27, 35]
@@ -495,7 +495,7 @@ Document[0, 103]
           Paragraph[15, 24]
             Text[15, 23] chars:[15, 23, "item 1.1"]
     BulletListItem[24, 51] open:[24, 25, "-"] isLoose hadBlankLineAfter
-      Paragraph[26, 34]
+      Paragraph[26, 34] isTrailingBlankLine
         Text[26, 32] chars:[26, 32, "item 2"]
       BulletList[39, 51] isTight
         BulletListItem[39, 51] open:[39, 40, "-"] isTight
@@ -568,7 +568,7 @@ Document[0, 103]
         Text[26, 32] chars:[26, 32, "item 2"]
       BulletList[38, 50] isTight
         BulletListItem[38, 50] open:[38, 39, "-"] isTight hadBlankLineAfter
-          Paragraph[40, 50]
+          Paragraph[40, 50] isTrailingBlankLine
             Text[40, 48] chars:[40, 48, "item 2.1"]
     BulletListItem[51, 77] open:[51, 52, "-"] isLoose
       Paragraph[53, 61]
@@ -639,7 +639,7 @@ Document[0, 103]
           Paragraph[40, 50]
             Text[40, 48] chars:[40, 48, "item 2.1"]
     BulletListItem[50, 77] open:[50, 51, "-"] isLoose hadBlankLineAfter
-      Paragraph[52, 60]
+      Paragraph[52, 60] isTrailingBlankLine
         Text[52, 58] chars:[52, 58, "item 3"]
       BulletList[65, 77] isTight
         BulletListItem[65, 77] open:[65, 66, "-"] isTight
@@ -712,7 +712,7 @@ Document[0, 103]
         Text[52, 58] chars:[52, 58, "item 3"]
       BulletList[64, 76] isTight
         BulletListItem[64, 76] open:[64, 65, "-"] isTight hadBlankLineAfter
-          Paragraph[66, 76]
+          Paragraph[66, 76] isTrailingBlankLine
             Text[66, 74] chars:[66, 74, "item 3.1"]
     BulletListItem[77, 103] open:[77, 78, "-"] isLoose
       Paragraph[79, 87]
@@ -783,7 +783,7 @@ Document[0, 103]
           Paragraph[66, 76]
             Text[66, 74] chars:[66, 74, "item 3.1"]
     BulletListItem[76, 103] open:[76, 77, "-"] isLoose hadBlankLineAfter
-      Paragraph[78, 86]
+      Paragraph[78, 86] isTrailingBlankLine
         Text[78, 84] chars:[78, 84, "item 4"]
       BulletList[91, 103] isTight
         BulletListItem[91, 103] open:[91, 92, "-"] isTight
@@ -836,39 +836,39 @@ Empty Numbered non-one item without space can interrupt paragraph
 <p>Empty Numbered non-one item without space can interrupt paragraph 2.</p>
 .
 Document[0, 547]
-  Paragraph[0, 43]
+  Paragraph[0, 43] isTrailingBlankLine
     Text[0, 35] chars:[0, 35, "Bulle … graph"]
     SoftLineBreak[35, 36]
     Text[36, 42] chars:[36, 42, "* item"]
-  Paragraph[44, 101]
+  Paragraph[44, 101] isTrailingBlankLine
     Text[44, 96] chars:[44, 96, "Empty … graph"]
     SoftLineBreak[97, 98]
     Text[98, 99] chars:[98, 99, "*"]
-  Paragraph[102, 160]
+  Paragraph[102, 160] isTrailingBlankLine
     Text[102, 157] chars:[102, 157, "Empty … graph"]
     SoftLineBreak[157, 158]
     Text[158, 159] chars:[158, 159, "*"]
-  Paragraph[161, 215]
+  Paragraph[161, 215] isTrailingBlankLine
     Text[161, 202] chars:[161, 202, "Numbe … graph"]
     SoftLineBreak[202, 203]
     Text[203, 214] chars:[203, 214, "1. on …  item"]
-  Paragraph[216, 279]
+  Paragraph[216, 279] isTrailingBlankLine
     Text[216, 274] chars:[216, 274, "Empty … graph"]
     SoftLineBreak[274, 275]
     Text[275, 277] chars:[275, 277, "1."]
-  Paragraph[280, 345]
+  Paragraph[280, 345] isTrailingBlankLine
     Text[280, 341] chars:[280, 341, "Empty … graph"]
     SoftLineBreak[341, 342]
     Text[342, 344] chars:[342, 344, "1."]
-  Paragraph[346, 408]
+  Paragraph[346, 408] isTrailingBlankLine
     Text[346, 391] chars:[346, 391, "Numbe … graph"]
     SoftLineBreak[391, 392]
     Text[392, 407] chars:[392, 407, "2. no …  item"]
-  Paragraph[409, 476]
+  Paragraph[409, 476] isTrailingBlankLine
     Text[409, 471] chars:[409, 471, "Empty … graph"]
     SoftLineBreak[471, 472]
     Text[472, 474] chars:[472, 474, "2."]
-  Paragraph[477, 546]
+  Paragraph[477, 546] isTrailingBlankLine
     Text[477, 542] chars:[477, 542, "Empty … graph"]
     SoftLineBreak[542, 543]
     Text[543, 545] chars:[543, 545, "2."]
@@ -967,71 +967,71 @@ Document[0, 858]
       Paragraph[2, 60]
         Text[2, 59] chars:[2, 59, "Bulle …  item"]
     BulletListItem[60, 67] open:[60, 61, "*"] isTight hadBlankLineAfter
-      Paragraph[62, 67]
+      Paragraph[62, 67] isTrailingBlankLine
         Text[62, 66] chars:[62, 66, "item"]
-  Paragraph[68, 79]
+  Paragraph[68, 79] isTrailingBlankLine
     Text[68, 78] chars:[68, 78, "list break"]
   BulletList[80, 160] isTight
     BulletListItem[80, 160] open:[80, 81, "*"] isTight hadBlankLineAfter
-      Paragraph[82, 160]
+      Paragraph[82, 160] isTrailingBlankLine
         Text[82, 156] chars:[82, 156, "Empty …  item"]
         SoftLineBreak[156, 157]
         Text[157, 158] chars:[157, 158, "*"]
-  Paragraph[161, 172]
+  Paragraph[161, 172] isTrailingBlankLine
     Text[161, 171] chars:[161, 171, "list break"]
   BulletList[173, 255] isTight
     BulletListItem[173, 255] open:[173, 174, "*"] isTight hadBlankLineAfter
-      Paragraph[175, 255]
+      Paragraph[175, 255] isTrailingBlankLine
         Text[175, 252] chars:[175, 252, "Empty …  item"]
         SoftLineBreak[252, 253]
         Text[253, 254] chars:[253, 254, "*"]
-  Paragraph[256, 267]
+  Paragraph[256, 267] isTrailingBlankLine
     Text[256, 266] chars:[256, 266, "list break"]
   BulletList[268, 346] isTight
     BulletListItem[268, 334] open:[268, 269, "*"] isTight
       Paragraph[270, 334]
         Text[270, 333] chars:[270, 333, "Numbe …  item"]
     OrderedListItem[334, 346] open:[334, 336, "1."] isTight hadBlankLineAfter
-      Paragraph[337, 346]
+      Paragraph[337, 346] isTrailingBlankLine
         Text[337, 345] chars:[337, 345, "one item"]
-  Paragraph[347, 358]
+  Paragraph[347, 358] isTrailingBlankLine
     Text[347, 357] chars:[347, 357, "list break"]
   BulletList[359, 446] isTight
     BulletListItem[359, 446] open:[359, 360, "*"] isTight hadBlankLineAfter
-      Paragraph[361, 446]
+      Paragraph[361, 446] isTrailingBlankLine
         Text[361, 441] chars:[361, 441, "Empty …  item"]
         SoftLineBreak[441, 442]
         Text[442, 444] chars:[442, 444, "1."]
-  Paragraph[447, 458]
+  Paragraph[447, 458] isTrailingBlankLine
     Text[447, 457] chars:[447, 457, "list break"]
   BulletList[459, 548] isTight
     BulletListItem[459, 548] open:[459, 460, "*"] isTight hadBlankLineAfter
-      Paragraph[461, 548]
+      Paragraph[461, 548] isTrailingBlankLine
         Text[461, 544] chars:[461, 544, "Empty …  item"]
         SoftLineBreak[544, 545]
         Text[545, 547] chars:[545, 547, "1."]
-  Paragraph[549, 560]
+  Paragraph[549, 560] isTrailingBlankLine
     Text[549, 559] chars:[549, 559, "list break"]
   BulletList[561, 647] isTight
     BulletListItem[561, 631] open:[561, 562, "*"] isTight
       Paragraph[563, 631]
         Text[563, 630] chars:[563, 630, "Numbe …  item"]
     OrderedListItem[631, 647] open:[631, 633, "2."] isTight hadBlankLineAfter
-      Paragraph[634, 647]
+      Paragraph[634, 647] isTrailingBlankLine
         Text[634, 646] chars:[634, 646, "non-o …  item"]
-  Paragraph[648, 659]
+  Paragraph[648, 659] isTrailingBlankLine
     Text[648, 658] chars:[648, 658, "list break"]
   BulletList[660, 751] isTight
     BulletListItem[660, 751] open:[660, 661, "*"] isTight hadBlankLineAfter
-      Paragraph[662, 751]
+      Paragraph[662, 751] isTrailingBlankLine
         Text[662, 746] chars:[662, 746, "Empty …  item"]
         SoftLineBreak[746, 747]
         Text[747, 749] chars:[747, 749, "2."]
-  Paragraph[752, 763]
+  Paragraph[752, 763] isTrailingBlankLine
     Text[752, 762] chars:[752, 762, "list break"]
   BulletList[764, 857] isTight
     BulletListItem[764, 857] open:[764, 765, "*"] isTight hadBlankLineAfter
-      Paragraph[766, 857]
+      Paragraph[766, 857] isTrailingBlankLine
         Text[766, 853] chars:[766, 853, "Empty …  item"]
         SoftLineBreak[853, 854]
         Text[854, 856] chars:[854, 856, "2."]
@@ -1130,71 +1130,71 @@ Document[0, 887]
       Paragraph[3, 63]
         Text[3, 62] chars:[3, 62, "Bulle …  item"]
     BulletListItem[63, 70] open:[63, 64, "*"] isTight hadBlankLineAfter
-      Paragraph[65, 70]
+      Paragraph[65, 70] isTrailingBlankLine
         Text[65, 69] chars:[65, 69, "item"]
-  Paragraph[71, 82]
+  Paragraph[71, 82] isTrailingBlankLine
     Text[71, 81] chars:[71, 81, "list break"]
   OrderedList[83, 166] isTight delimiter:'.'
     OrderedListItem[83, 166] open:[83, 85, "1."] isTight hadBlankLineAfter
-      Paragraph[86, 166]
+      Paragraph[86, 166] isTrailingBlankLine
         Text[86, 162] chars:[86, 162, "Empty …  item"]
         SoftLineBreak[162, 163]
         Text[163, 164] chars:[163, 164, "*"]
-  Paragraph[167, 178]
+  Paragraph[167, 178] isTrailingBlankLine
     Text[167, 177] chars:[167, 177, "list break"]
   OrderedList[179, 264] isTight delimiter:'.'
     OrderedListItem[179, 264] open:[179, 181, "1."] isTight hadBlankLineAfter
-      Paragraph[182, 264]
+      Paragraph[182, 264] isTrailingBlankLine
         Text[182, 261] chars:[182, 261, "Empty …  item"]
         SoftLineBreak[261, 262]
         Text[262, 263] chars:[262, 263, "*"]
-  Paragraph[265, 276]
+  Paragraph[265, 276] isTrailingBlankLine
     Text[265, 275] chars:[265, 275, "list break"]
   OrderedList[277, 358] isTight delimiter:'.'
     OrderedListItem[277, 346] open:[277, 279, "1."] isTight
       Paragraph[280, 346]
         Text[280, 345] chars:[280, 345, "Numbe …  item"]
     OrderedListItem[346, 358] open:[346, 348, "1."] isTight hadBlankLineAfter
-      Paragraph[349, 358]
+      Paragraph[349, 358] isTrailingBlankLine
         Text[349, 357] chars:[349, 357, "one item"]
-  Paragraph[359, 370]
+  Paragraph[359, 370] isTrailingBlankLine
     Text[359, 369] chars:[359, 369, "list break"]
   OrderedList[371, 462] isTight delimiter:'.'
     OrderedListItem[371, 462] open:[371, 373, "1."] isTight hadBlankLineAfter
-      Paragraph[374, 462]
+      Paragraph[374, 462] isTrailingBlankLine
         Text[374, 456] chars:[374, 456, "Empty …  item"]
         SoftLineBreak[457, 458]
         Text[458, 460] chars:[458, 460, "1."]
-  Paragraph[463, 474]
+  Paragraph[463, 474] isTrailingBlankLine
     Text[463, 473] chars:[463, 473, "list break"]
   OrderedList[475, 568] isTight delimiter:'.'
     OrderedListItem[475, 568] open:[475, 477, "1."] isTight hadBlankLineAfter
-      Paragraph[478, 568]
+      Paragraph[478, 568] isTrailingBlankLine
         Text[478, 563] chars:[478, 563, "Empty …  item"]
         SoftLineBreak[564, 565]
         Text[565, 567] chars:[565, 567, "1."]
-  Paragraph[569, 580]
+  Paragraph[569, 580] isTrailingBlankLine
     Text[569, 579] chars:[569, 579, "list break"]
   OrderedList[581, 670] isTight delimiter:'.'
     OrderedListItem[581, 654] open:[581, 583, "1."] isTight
       Paragraph[584, 654]
         Text[584, 653] chars:[584, 653, "Numbe …  item"]
     OrderedListItem[654, 670] open:[654, 656, "2."] isTight hadBlankLineAfter
-      Paragraph[657, 670]
+      Paragraph[657, 670] isTrailingBlankLine
         Text[657, 669] chars:[657, 669, "non-o …  item"]
-  Paragraph[671, 682]
+  Paragraph[671, 682] isTrailingBlankLine
     Text[671, 681] chars:[671, 681, "list break"]
   OrderedList[683, 777] isTight delimiter:'.'
     OrderedListItem[683, 777] open:[683, 685, "1."] isTight hadBlankLineAfter
-      Paragraph[686, 777]
+      Paragraph[686, 777] isTrailingBlankLine
         Text[686, 772] chars:[686, 772, "Empty …  item"]
         SoftLineBreak[772, 773]
         Text[773, 775] chars:[773, 775, "2."]
-  Paragraph[778, 789]
+  Paragraph[778, 789] isTrailingBlankLine
     Text[778, 788] chars:[778, 788, "list break"]
   OrderedList[790, 886] isTight delimiter:'.'
     OrderedListItem[790, 886] open:[790, 792, "1."] isTight hadBlankLineAfter
-      Paragraph[793, 886]
+      Paragraph[793, 886] isTrailingBlankLine
         Text[793, 882] chars:[793, 882, "Empty …  item"]
         SoftLineBreak[882, 883]
         Text[883, 885] chars:[883, 885, "2."]
@@ -1417,33 +1417,33 @@ does not affect indentation level.
 Document[0, 181]
   BulletList[0, 181] isTight
     BulletListItem[0, 181] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       BulletList[11, 181] isTight
         BulletListItem[11, 20] open:[11, 12, "*"] isLoose hadBlankLineAfter
-          Paragraph[13, 20]
+          Paragraph[13, 20] isTrailingBlankLine
             Text[13, 19] chars:[13, 19, "item 2"]
         BulletListItem[24, 33] open:[24, 25, "*"] isLoose hadBlankLineAfter
-          Paragraph[26, 33]
+          Paragraph[26, 33] isTrailingBlankLine
             Text[26, 32] chars:[26, 32, "item 3"]
         BulletListItem[39, 48] open:[39, 40, "*"] isLoose hadBlankLineAfter
-          Paragraph[41, 48]
+          Paragraph[41, 48] isTrailingBlankLine
             Text[41, 47] chars:[41, 47, "item 4"]
         BulletListItem[56, 181] open:[56, 57, "*"] isLoose hadBlankLineAfter
-          Paragraph[58, 65]
+          Paragraph[58, 65] isTrailingBlankLine
             Text[58, 64] chars:[58, 64, "item 5"]
           BulletList[75, 181] isTight
             BulletListItem[75, 84] open:[75, 76, "*"] isLoose hadBlankLineAfter
-              Paragraph[77, 84]
+              Paragraph[77, 84] isTrailingBlankLine
                 Text[77, 83] chars:[77, 83, "item 6"]
             BulletListItem[96, 105] open:[96, 97, "*"] isLoose hadBlankLineAfter
-              Paragraph[98, 105]
+              Paragraph[98, 105] isTrailingBlankLine
                 Text[98, 104] chars:[98, 104, "item 7"]
             BulletListItem[119, 128] open:[119, 120, "*"] isLoose hadBlankLineAfter
-              Paragraph[121, 128]
+              Paragraph[121, 128] isTrailingBlankLine
                 Text[121, 127] chars:[121, 127, "item 8"]
             BulletListItem[144, 181] open:[144, 145, "*"] isLoose hadBlankLineAfter
-              Paragraph[146, 153]
+              Paragraph[146, 153] isTrailingBlankLine
                 Text[146, 152] chars:[146, 152, "item 9"]
               BulletList[171, 181] isTight
                 BulletListItem[171, 181] open:[171, 172, "*"] isTight
@@ -1851,7 +1851,7 @@ Document[0, 81]
           Paragraph[12, 19]
             Text[12, 18] chars:[12, 18, "item 2"]
         BulletListItem[21, 30] open:[21, 22, "*"] isTight hadBlankLineAfter
-          Paragraph[23, 30]
+          Paragraph[23, 30] isTrailingBlankLine
             Text[23, 29] chars:[23, 29, "item 3"]
       BlockQuote[37, 81] marker:[37, 38, ">"]
         BulletList[39, 81] isTight
@@ -1911,7 +1911,7 @@ Document[0, 84]
           Paragraph[12, 19]
             Text[12, 18] chars:[12, 18, "item 2"]
         BulletListItem[21, 84] open:[21, 22, "*"] isLoose hadBlankLineAfter
-          Paragraph[23, 30]
+          Paragraph[23, 30] isTrailingBlankLine
             Text[23, 29] chars:[23, 29, "item 3"]
           BlockQuote[38, 84] marker:[38, 39, ">"]
             BulletList[40, 84] isTight
@@ -2004,9 +2004,9 @@ the second is indented code.
 Document[0, 331]
   BulletList[0, 159] isTight
     BulletListItem[0, 56] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[4, 9]
+      Paragraph[4, 9] isTrailingBlankLine
         Text[4, 8] chars:[4, 8, "test"]
-      Paragraph[17, 33]
+      Paragraph[17, 33] isTrailingBlankLine
         Text[17, 32] chars:[17, 32, "item  …  para"]
       IndentedCodeBlock[42, 56]
     BulletListItem[67, 159] open:[67, 68, "-"] isLoose hadBlankLine
@@ -2014,17 +2014,17 @@ Document[0, 331]
         Text[71, 75] chars:[71, 75, "test"]
       BulletList[80, 159] isTight
         BulletListItem[80, 159] open:[80, 81, "-"] isLoose hadBlankLineAfter
-          Paragraph[82, 91]
+          Paragraph[82, 91] isTrailingBlankLine
             Text[82, 90] chars:[82, 90, "sub item"]
-          Paragraph[103, 123]
+          Paragraph[103, 123] isTrailingBlankLine
             Text[103, 122] chars:[103, 122, "sub i …  para"]
           IndentedCodeBlock[136, 159]
   ThematicBreak[170, 173]
   OrderedList[175, 330] isTight delimiter:'.'
     OrderedListItem[175, 236] open:[175, 177, "1."] isLoose hadBlankLineAfter
-      Paragraph[179, 184]
+      Paragraph[179, 184] isTrailingBlankLine
         Text[179, 183] chars:[179, 183, "test"]
-      Paragraph[192, 208]
+      Paragraph[192, 208] isTrailingBlankLine
         Text[192, 207] chars:[192, 207, "item  …  para"]
       IndentedCodeBlock[217, 236]
     OrderedListItem[237, 330] open:[237, 239, "1."] isLoose hadBlankLine
@@ -2032,9 +2032,9 @@ Document[0, 331]
         Text[241, 245] chars:[241, 245, "test"]
       OrderedList[250, 330] isTight delimiter:'.'
         OrderedListItem[250, 330] open:[250, 252, "1."] isLoose hadBlankLineAfter
-          Paragraph[253, 262]
+          Paragraph[253, 262] isTrailingBlankLine
             Text[253, 261] chars:[253, 261, "sub item"]
-          Paragraph[274, 294]
+          Paragraph[274, 294] isTrailingBlankLine
             Text[274, 293] chars:[274, 293, "sub i …  para"]
           IndentedCodeBlock[307, 330]
 ````````````````````````````````
@@ -2189,81 +2189,81 @@ paragraph is a paragraph, the second is indented code
 Document[0, 982]
   BulletList[0, 982] isTight
     BulletListItem[0, 982] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
-      Paragraph[16, 28]
+      Paragraph[16, 28] isTrailingBlankLine
         Text[16, 27] chars:[16, 27, "item  … ara 1"]
-      Paragraph[34, 46]
+      Paragraph[34, 46] isTrailingBlankLine
         Text[34, 45] chars:[34, 45, "item  … ara 2"]
-      Paragraph[54, 66]
+      Paragraph[54, 66] isTrailingBlankLine
         Text[54, 65] chars:[54, 65, "item  … ara 3"]
-      Paragraph[76, 88]
+      Paragraph[76, 88] isTrailingBlankLine
         Text[76, 87] chars:[76, 87, "item  … ara 4"]
-      Paragraph[100, 112]
+      Paragraph[100, 112] isTrailingBlankLine
         Text[100, 111] chars:[100, 111, "item  … ara 5"]
-      Paragraph[126, 138]
+      Paragraph[126, 138] isTrailingBlankLine
         Text[126, 137] chars:[126, 137, "item  … ara 6"]
       IndentedCodeBlock[154, 166]
       BulletList[176, 185] isTight
         BulletListItem[176, 185] open:[176, 177, "*"] isTight hadBlankLineAfter
-          Paragraph[178, 185]
+          Paragraph[178, 185] isTrailingBlankLine
             Text[178, 184] chars:[178, 184, "item 2"]
-      Paragraph[193, 205]
+      Paragraph[193, 205] isTrailingBlankLine
         Text[193, 204] chars:[193, 204, "item  … ara 1"]
-      Paragraph[213, 225]
+      Paragraph[213, 225] isTrailingBlankLine
         Text[213, 224] chars:[213, 224, "item  … ara 2"]
-      Paragraph[235, 247]
+      Paragraph[235, 247] isTrailingBlankLine
         Text[235, 246] chars:[235, 246, "item  … ara 3"]
-      Paragraph[259, 271]
+      Paragraph[259, 271] isTrailingBlankLine
         Text[259, 270] chars:[259, 270, "item  … ara 4"]
-      Paragraph[285, 297]
+      Paragraph[285, 297] isTrailingBlankLine
         Text[285, 296] chars:[285, 296, "item  … ara 5"]
       IndentedCodeBlock[313, 355]
       BulletList[366, 375] isTight
         BulletListItem[366, 375] open:[366, 367, "*"] isTight hadBlankLineAfter
-          Paragraph[368, 375]
+          Paragraph[368, 375] isTrailingBlankLine
             Text[368, 374] chars:[368, 374, "item 3"]
-      Paragraph[384, 396]
+      Paragraph[384, 396] isTrailingBlankLine
         Text[384, 395] chars:[384, 395, "item  … ara 1"]
-      Paragraph[406, 418]
+      Paragraph[406, 418] isTrailingBlankLine
         Text[406, 417] chars:[406, 417, "item  … ara 2"]
-      Paragraph[430, 442]
+      Paragraph[430, 442] isTrailingBlankLine
         Text[430, 441] chars:[430, 441, "item  … ara 3"]
-      Paragraph[456, 468]
+      Paragraph[456, 468] isTrailingBlankLine
         Text[456, 467] chars:[456, 467, "item  … ara 4"]
       IndentedCodeBlock[484, 558]
       BulletList[570, 982] isTight
         BulletListItem[570, 775] open:[570, 571, "*"] isLoose hadBlankLineAfter
-          Paragraph[572, 579]
+          Paragraph[572, 579] isTrailingBlankLine
             Text[572, 578] chars:[572, 578, "item 4"]
-          Paragraph[589, 601]
+          Paragraph[589, 601] isTrailingBlankLine
             Text[589, 600] chars:[589, 600, "item  … ara 1"]
-          Paragraph[613, 625]
+          Paragraph[613, 625] isTrailingBlankLine
             Text[613, 624] chars:[613, 624, "item  … ara 2"]
-          Paragraph[639, 651]
+          Paragraph[639, 651] isTrailingBlankLine
             Text[639, 650] chars:[639, 650, "item  … ara 3"]
-          Paragraph[667, 679]
+          Paragraph[667, 679] isTrailingBlankLine
             Text[667, 678] chars:[667, 678, "item  … ara 4"]
-          Paragraph[697, 709]
+          Paragraph[697, 709] isTrailingBlankLine
             Text[697, 708] chars:[697, 708, "item  … ara 5"]
-          Paragraph[729, 741]
+          Paragraph[729, 741] isTrailingBlankLine
             Text[729, 740] chars:[729, 740, "item  … ara 6"]
-          Paragraph[763, 775]
+          Paragraph[763, 775] isTrailingBlankLine
             Text[763, 774] chars:[763, 774, "item  … ara 7"]
         BulletListItem[788, 982] open:[788, 789, "*"] isLoose hadBlankLineAfter
-          Paragraph[790, 797]
+          Paragraph[790, 797] isTrailingBlankLine
             Text[790, 796] chars:[790, 796, "item 5"]
-          Paragraph[808, 820]
+          Paragraph[808, 820] isTrailingBlankLine
             Text[808, 819] chars:[808, 819, "item  … ara 1"]
-          Paragraph[830, 842]
+          Paragraph[830, 842] isTrailingBlankLine
             Text[830, 841] chars:[830, 841, "item  … ara 2"]
-          Paragraph[854, 866]
+          Paragraph[854, 866] isTrailingBlankLine
             Text[854, 865] chars:[854, 865, "item  … ara 3"]
-          Paragraph[880, 892]
+          Paragraph[880, 892] isTrailingBlankLine
             Text[880, 891] chars:[880, 891, "item  … ara 4"]
-          Paragraph[908, 920]
+          Paragraph[908, 920] isTrailingBlankLine
             Text[908, 919] chars:[908, 919, "item  … ara 5"]
-          Paragraph[938, 950]
+          Paragraph[938, 950] isTrailingBlankLine
             Text[938, 949] chars:[938, 949, "item  … ara 6"]
           IndentedCodeBlock[970, 982]
 ````````````````````````````````
@@ -2362,7 +2362,7 @@ Test how headings in list items are handled, leading space allowed or not
 Document[0, 296]
   BulletList[0, 295] isTight
     BulletListItem[0, 295] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       Heading[12, 23] textOpen:[12, 13, "#"] text:[14, 23, "Heading 1"]
         Text[14, 23] chars:[14, 23, "Heading 1"]
@@ -2370,23 +2370,23 @@ Document[0, 296]
         Text[31, 40] chars:[31, 40, "Heading 2"]
       Heading[46, 59] textOpen:[46, 49, "###"] text:[50, 59, "Heading 3"]
         Text[50, 59] chars:[50, 59, "Heading 3"]
-      Paragraph[66, 81]
+      Paragraph[66, 81] isTrailingBlankLine
         Text[66, 80] chars:[66, 80, "####  … ing 4"]
-      Paragraph[88, 104]
+      Paragraph[88, 104] isTrailingBlankLine
         Text[88, 103] chars:[88, 103, "##### … ing 5"]
-      Paragraph[112, 129]
+      Paragraph[112, 129] isTrailingBlankLine
         Text[112, 128] chars:[112, 128, "##### … ing 6"]
       BulletList[132, 141] isTight
         BulletListItem[132, 141] open:[132, 133, "*"] isTight hadBlankLineAfter
-          Paragraph[134, 141]
+          Paragraph[134, 141] isTrailingBlankLine
             Text[134, 140] chars:[134, 140, "item 2"]
       Heading[146, 157] textOpen:[146, 147, "#"] text:[148, 157, "Heading 1"]
         Text[148, 157] chars:[148, 157, "Heading 1"]
-      Paragraph[168, 181]
+      Paragraph[168, 181] isTrailingBlankLine
         Text[168, 180] chars:[168, 180, "## He … ing 2"]
-      Paragraph[192, 206]
+      Paragraph[192, 206] isTrailingBlankLine
         Text[192, 205] chars:[192, 205, "### H … ing 3"]
-      Paragraph[218, 233]
+      Paragraph[218, 233] isTrailingBlankLine
         Text[218, 232] chars:[218, 232, "####  … ing 3"]
       IndentedCodeBlock[246, 295]
 ````````````````````````````````
@@ -2443,11 +2443,11 @@ Document[0, 178]
         Text[4, 8] chars:[4, 8, "test"]
       BulletList[13, 79] isTight
         BulletListItem[13, 79] open:[13, 14, "-"] isLoose hadBlankLineAfter
-          Paragraph[15, 24]
+          Paragraph[15, 24] isTrailingBlankLine
             Text[15, 23] chars:[15, 23, "sub item"]
-          Paragraph[34, 54]
+          Paragraph[34, 54] isTrailingBlankLine
             Text[34, 53] chars:[34, 53, "sub i …  para"]
-          Paragraph[65, 79]
+          Paragraph[65, 79] isTrailingBlankLine
             Text[65, 78] chars:[65, 78, "inden …  code"]
   ThematicBreak[90, 93]
   OrderedList[95, 177] isTight delimiter:'.'
@@ -2456,11 +2456,11 @@ Document[0, 178]
         Text[99, 103] chars:[99, 103, "test"]
       OrderedList[108, 177] isTight delimiter:'.'
         OrderedListItem[108, 177] open:[108, 110, "1."] isLoose hadBlankLineAfter
-          Paragraph[111, 120]
+          Paragraph[111, 120] isTrailingBlankLine
             Text[111, 119] chars:[111, 119, "sub item"]
-          Paragraph[131, 151]
+          Paragraph[131, 151] isTrailingBlankLine
             Text[131, 150] chars:[131, 150, "sub i …  para"]
-          Paragraph[163, 177]
+          Paragraph[163, 177] isTrailingBlankLine
             Text[163, 176] chars:[163, 176, "inden …  code"]
 ````````````````````````````````
 
@@ -2750,7 +2750,7 @@ paragraph text
 </blockquote>
 .
 Document[0, 36]
-  Paragraph[0, 15]
+  Paragraph[0, 15] isTrailingBlankLine
     Text[0, 14] chars:[0, 14, "parag …  text"]
   BlockQuote[16, 36] marker:[16, 17, ">"]
     Paragraph[18, 36]
@@ -2804,7 +2804,7 @@ Whether blank lines are ignored and treated as if prefixed with block quote
 .
 Document[0, 46]
   BlockQuote[0, 46] marker:[0, 1, ">"]
-    Paragraph[2, 20]
+    Paragraph[2, 20] isTrailingBlankLine
       Text[2, 19] chars:[2, 19, "block …  text"]
     Paragraph[23, 46]
       Text[23, 45] chars:[23, 45, "more  …  text"]
@@ -2826,7 +2826,7 @@ another paragraph
 .
 Document[0, 57]
   BlockQuote[0, 38] marker:[0, 1, ">"]
-    Paragraph[2, 38]
+    Paragraph[2, 38] isTrailingBlankLine
       Text[2, 19] chars:[2, 19, "block …  text"]
       SoftLineBreak[19, 20]
       Text[20, 37] chars:[20, 37, "lazy  … ation"]
@@ -2869,7 +2869,7 @@ Document[0, 87]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[11, 31] marker:[11, 12, ">"]
-        Paragraph[13, 31]
+        Paragraph[13, 31] isTrailingBlankLine
           Text[13, 30] chars:[13, 30, "block …  text"]
   HtmlCommentBlock[32, 52]
   OrderedList[53, 86] isTight delimiter:'.'
@@ -2877,7 +2877,7 @@ Document[0, 87]
       Paragraph[56, 63]
         Text[56, 62] chars:[56, 62, "item 1"]
       BlockQuote[66, 86] marker:[66, 67, ">"]
-        Paragraph[68, 86]
+        Paragraph[68, 86] isTrailingBlankLine
           Text[68, 85] chars:[68, 85, "block …  text"]
 ````````````````````````````````
 
@@ -2917,18 +2917,18 @@ Whether block quotes can interrupt item paragraph
 Document[0, 89]
   BulletList[0, 32] isTight
     BulletListItem[0, 32] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[12, 32] marker:[12, 13, ">"]
-        Paragraph[14, 32]
+        Paragraph[14, 32] isTrailingBlankLine
           Text[14, 31] chars:[14, 31, "block …  text"]
   HtmlCommentBlock[33, 53]
   OrderedList[54, 88] isTight delimiter:'.'
     OrderedListItem[54, 88] open:[54, 56, "1."] isLoose hadBlankLineAfter
-      Paragraph[57, 64]
+      Paragraph[57, 64] isTrailingBlankLine
         Text[57, 63] chars:[57, 63, "item 1"]
       BlockQuote[68, 88] marker:[68, 69, ">"]
-        Paragraph[70, 88]
+        Paragraph[70, 88] isTrailingBlankLine
           Text[70, 87] chars:[70, 87, "block …  text"]
 ````````````````````````````````
 
@@ -2967,7 +2967,7 @@ Document[0, 89]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[12, 32] marker:[12, 13, ">"]
-        Paragraph[14, 32]
+        Paragraph[14, 32] isTrailingBlankLine
           Text[14, 31] chars:[14, 31, "block …  text"]
   HtmlCommentBlock[33, 53]
   OrderedList[54, 88] isTight delimiter:'.'
@@ -2975,7 +2975,7 @@ Document[0, 89]
       Paragraph[57, 64]
         Text[57, 63] chars:[57, 63, "item 1"]
       BlockQuote[68, 88] marker:[68, 69, ">"]
-        Paragraph[70, 88]
+        Paragraph[70, 88] isTrailingBlankLine
           Text[70, 87] chars:[70, 87, "block …  text"]
 ````````````````````````````````
 
@@ -3015,18 +3015,18 @@ Whether block quotes with leading space can interrupt item paragraph
 Document[0, 91]
   BulletList[0, 33] isTight
     BulletListItem[0, 33] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[13, 33] marker:[13, 14, ">"]
-        Paragraph[15, 33]
+        Paragraph[15, 33] isTrailingBlankLine
           Text[15, 32] chars:[15, 32, "block …  text"]
   HtmlCommentBlock[34, 54]
   OrderedList[55, 90] isTight delimiter:'.'
     OrderedListItem[55, 90] open:[55, 57, "1."] isLoose hadBlankLineAfter
-      Paragraph[58, 65]
+      Paragraph[58, 65] isTrailingBlankLine
         Text[58, 64] chars:[58, 64, "item 1"]
       BlockQuote[70, 90] marker:[70, 71, ">"]
-        Paragraph[72, 90]
+        Paragraph[72, 90] isTrailingBlankLine
           Text[72, 89] chars:[72, 89, "block …  text"]
 ````````````````````````````````
 
@@ -3065,7 +3065,7 @@ Document[0, 85]
       Paragraph[2, 9]
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[11, 30] marker:[11, 12, ">"]
-        Paragraph[12, 30]
+        Paragraph[12, 30] isTrailingBlankLine
           Text[12, 29] chars:[12, 29, "block …  text"]
   HtmlCommentBlock[31, 51]
   OrderedList[52, 84] isTight delimiter:'.'
@@ -3073,7 +3073,7 @@ Document[0, 85]
       Paragraph[55, 62]
         Text[55, 61] chars:[55, 61, "item 1"]
       BlockQuote[65, 84] marker:[65, 66, ">"]
-        Paragraph[66, 84]
+        Paragraph[66, 84] isTrailingBlankLine
           Text[66, 83] chars:[66, 83, "block …  text"]
 ````````````````````````````````
 
@@ -3113,18 +3113,18 @@ Whether block quotes without trailing space can interrupt item paragraph
 Document[0, 88]
   BulletList[0, 32] isTight
     BulletListItem[0, 32] open:[0, 1, "*"] isLoose hadBlankLineAfter
-      Paragraph[2, 9]
+      Paragraph[2, 9] isTrailingBlankLine
         Text[2, 8] chars:[2, 8, "item 1"]
       BlockQuote[13, 32] marker:[13, 14, ">"]
-        Paragraph[14, 32]
+        Paragraph[14, 32] isTrailingBlankLine
           Text[14, 31] chars:[14, 31, "block …  text"]
   HtmlCommentBlock[33, 53]
   OrderedList[54, 87] isTight delimiter:'.'
     OrderedListItem[54, 87] open:[54, 56, "1."] isLoose hadBlankLineAfter
-      Paragraph[57, 64]
+      Paragraph[57, 64] isTrailingBlankLine
         Text[57, 63] chars:[57, 63, "item 1"]
       BlockQuote[68, 87] marker:[68, 69, ">"]
-        Paragraph[69, 87]
+        Paragraph[69, 87] isTrailingBlankLine
           Text[69, 86] chars:[69, 86, "block …  text"]
 ````````````````````````````````
 
@@ -3198,7 +3198,7 @@ Document[0, 154]
                       Paragraph[121, 128]
                         Text[121, 127] chars:[121, 127, "item 8"]
                     BulletListItem[144, 153] open:[144, 145, "-"] isTight hadBlankLineAfter
-                      Paragraph[146, 153]
+                      Paragraph[146, 153] isTrailingBlankLine
                         Text[146, 152] chars:[146, 152, "item 9"]
 ````````````````````````````````
 
@@ -3278,7 +3278,7 @@ Document[0, 199]
                               Paragraph[157, 164]
                                 Text[157, 163] chars:[157, 163, "item 8"]
                             OrderedListItem[188, 198] open:[188, 190, "1."] isTight hadBlankLineAfter
-                              Paragraph[191, 198]
+                              Paragraph[191, 198] isTrailingBlankLine
                                 Text[191, 197] chars:[191, 197, "item 9"]
 ````````````````````````````````
 

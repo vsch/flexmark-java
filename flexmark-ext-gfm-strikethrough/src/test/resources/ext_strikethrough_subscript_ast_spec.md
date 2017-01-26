@@ -121,27 +121,27 @@ Document[0, 9]
 <p><del>foo~~~~~~~bar</del></p>
 .
 Document[0, 111]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     Strikethrough[0, 11] textOpen:[0, 2, "~~"] text:[2, 9, "foo~bar"] textClose:[9, 11, "~~"]
       Text[2, 9] chars:[2, 9, "foo~bar"]
-  Paragraph[13, 26]
+  Paragraph[13, 26] isTrailingBlankLine
     Strikethrough[13, 20] textOpen:[13, 15, "~~"] text:[15, 18, "foo"] textClose:[18, 20, "~~"]
       Text[15, 18] chars:[15, 18, "foo"]
     Text[20, 25] chars:[20, 25, "bar~~"]
-  Paragraph[27, 41]
+  Paragraph[27, 41] isTrailingBlankLine
     Strikethrough[27, 34] textOpen:[27, 29, "~~"] text:[29, 32, "foo"] textClose:[32, 34, "~~"]
       Text[29, 32] chars:[29, 32, "foo"]
     Text[34, 40] chars:[34, 40, "~bar~~"]
-  Paragraph[42, 57]
+  Paragraph[42, 57] isTrailingBlankLine
     Strikethrough[42, 56] textOpen:[42, 44, "~~"] text:[44, 54, "foo~~~~bar"] textClose:[54, 56, "~~"]
       Text[44, 54] chars:[44, 54, "foo~~~~bar"]
-  Paragraph[58, 74]
+  Paragraph[58, 74] isTrailingBlankLine
     Strikethrough[58, 65] textOpen:[58, 60, "~~"] text:[60, 63, "foo"] textClose:[63, 65, "~~"]
       Text[60, 63] chars:[60, 63, "foo"]
     Text[65, 66] chars:[65, 66, "~"]
     Strikethrough[66, 73] textOpen:[66, 68, "~~"] text:[68, 71, "bar"] textClose:[71, 73, "~~"]
       Text[68, 71] chars:[68, 71, "bar"]
-  Paragraph[75, 92]
+  Paragraph[75, 92] isTrailingBlankLine
     Strikethrough[75, 82] textOpen:[75, 77, "~~"] text:[77, 80, "foo"] textClose:[80, 82, "~~"]
       Text[77, 80] chars:[77, 80, "foo"]
     Text[82, 91] chars:[82, 91, "~~~~bar~~"]
@@ -316,27 +316,27 @@ Document[0, 9]
 <p><sub>foo</sub>~~~~~<sub>bar</sub></p>
 .
 Document[0, 97]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     Subscript[0, 5] textOpen:[0, 1, "~"] text:[1, 4, "foo"] textClose:[4, 5, "~"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, "bar~"]
-  Paragraph[11, 22]
+  Paragraph[11, 22] isTrailingBlankLine
     Subscript[11, 21] textOpen:[11, 12, "~"] text:[12, 20, "foo~~bar"] textClose:[20, 21, "~"]
       Text[12, 20] chars:[12, 20, "foo~~bar"]
-  Paragraph[23, 35]
+  Paragraph[23, 35] isTrailingBlankLine
     Subscript[23, 28] textOpen:[23, 24, "~"] text:[24, 27, "foo"] textClose:[27, 28, "~"]
       Text[24, 27] chars:[24, 27, "foo"]
     Text[28, 34] chars:[28, 34, "~~bar~"]
-  Paragraph[36, 49]
+  Paragraph[36, 49] isTrailingBlankLine
     Subscript[36, 41] textOpen:[36, 37, "~"] text:[37, 40, "foo"] textClose:[40, 41, "~"]
       Text[37, 40] chars:[37, 40, "foo"]
     Text[41, 43] chars:[41, 43, "~~"]
     Subscript[43, 48] textOpen:[43, 44, "~"] text:[44, 47, "bar"] textClose:[47, 48, "~"]
       Text[44, 47] chars:[44, 47, "bar"]
-  Paragraph[50, 64]
+  Paragraph[50, 64] isTrailingBlankLine
     Subscript[50, 63] textOpen:[50, 51, "~"] text:[51, 62, "foo~~ … ~~~bar"] textClose:[62, 63, "~"]
       Text[51, 62] chars:[51, 62, "foo~~ … ~~bar"]
-  Paragraph[65, 80]
+  Paragraph[65, 80] isTrailingBlankLine
     Subscript[65, 70] textOpen:[65, 66, "~"] text:[66, 69, "foo"] textClose:[69, 70, "~"]
       Text[66, 69] chars:[66, 69, "foo"]
     Text[70, 79] chars:[70, 79, "~~~~~bar~"]

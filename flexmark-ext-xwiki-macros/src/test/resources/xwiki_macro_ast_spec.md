@@ -94,7 +94,7 @@ content
 Document[0, 29]
   MacroBlock[0, 28] macroContent:[10, 18, "content\n"]
     Macro[0, 9] open:[0, 2, "{{"] name:[2, 7, "macro"] close:[7, 9, "}}"] isBlockMacro macroContent:[9, 9]
-    Paragraph[10, 18]
+    Paragraph[10, 18] isTrailingBlankLine
       Text[10, 17] chars:[10, 17, "content"]
     MacroClose[18, 28] nameOpen:[18, 21, "{{/"] name:[21, 26, "macro"] nameClose:[26, 28, "}}"]
 ````````````````````````````````
@@ -115,9 +115,9 @@ with blank line
 Document[0, 46]
   MacroBlock[0, 45] macroContent:[10, 35, "content\n\nwith blank line\n"]
     Macro[0, 9] open:[0, 2, "{{"] name:[2, 7, "macro"] close:[7, 9, "}}"] isBlockMacro macroContent:[9, 9]
-    Paragraph[10, 18]
+    Paragraph[10, 18] isTrailingBlankLine
       Text[10, 17] chars:[10, 17, "content"]
-    Paragraph[19, 35]
+    Paragraph[19, 35] isTrailingBlankLine
       Text[19, 34] chars:[19, 34, "with  …  line"]
     MacroClose[35, 45] nameOpen:[35, 38, "{{/"] name:[38, 43, "macro"] nameClose:[43, 45, "}}"]
 ````````````````````````````````
@@ -147,16 +147,16 @@ with blank line
 Document[0, 106]
   MacroBlock[0, 105] macroContent:[10, 95, "content\n\n{{macro}}\nnested content\n\nnested with blank line\n{{/macro}}\nwith blank line\n"]
     Macro[0, 9] open:[0, 2, "{{"] name:[2, 7, "macro"] close:[7, 9, "}}"] isBlockMacro macroContent:[9, 9]
-    Paragraph[10, 18]
+    Paragraph[10, 18] isTrailingBlankLine
       Text[10, 17] chars:[10, 17, "content"]
     MacroBlock[19, 78] macroContent:[29, 68, "nested content\n\nnested with blank line\n"]
       Macro[19, 28] open:[19, 21, "{{"] name:[21, 26, "macro"] close:[26, 28, "}}"] isBlockMacro macroContent:[28, 28]
-      Paragraph[29, 44]
+      Paragraph[29, 44] isTrailingBlankLine
         Text[29, 43] chars:[29, 43, "neste … ntent"]
-      Paragraph[45, 68]
+      Paragraph[45, 68] isTrailingBlankLine
         Text[45, 67] chars:[45, 67, "neste …  line"]
       MacroClose[68, 78] nameOpen:[68, 71, "{{/"] name:[71, 76, "macro"] nameClose:[76, 78, "}}"]
-    Paragraph[79, 95]
+    Paragraph[79, 95] isTrailingBlankLine
       Text[79, 94] chars:[79, 94, "with  …  line"]
     MacroClose[95, 105] nameOpen:[95, 98, "{{/"] name:[98, 103, "macro"] nameClose:[103, 105, "}}"]
 ````````````````````````````````
@@ -195,16 +195,16 @@ Document[0, 106]
       Text[10, 17] chars:[10, 17, "content"]
     BulletList[18, 39] isTight
       BulletListItem[18, 39] open:[18, 19, "-"] isTight hadBlankLineAfter
-        Paragraph[20, 39]
+        Paragraph[20, 39] isTrailingBlankLine
           Text[20, 31] chars:[20, 31, "bulle …  item"]
           SoftLineBreak[31, 32]
           Text[34, 38] chars:[34, 38, "text"]
     HtmlCommentBlock[40, 60]
     OrderedList[61, 78] isTight delimiter:'.'
       OrderedListItem[61, 78] open:[61, 63, "1."] isTight hadBlankLineAfter
-        Paragraph[64, 78]
+        Paragraph[64, 78] isTrailingBlankLine
           Text[64, 77] chars:[64, 77, "numbe …  item"]
-    Paragraph[79, 95]
+    Paragraph[79, 95] isTrailingBlankLine
       Text[79, 94] chars:[79, 94, "with  …  line"]
     MacroClose[95, 105] nameOpen:[95, 98, "{{/"] name:[98, 103, "macro"] nameClose:[103, 105, "}}"]
 ````````````````````````````````
@@ -530,7 +530,7 @@ Document[0, 134]
     Macro[0, 30] open:[0, 2, "{{"] name:[2, 9, "mymacro"] attributes:[10, 28, "par1=\"val1\" par2=2"] close:[28, 30, "}}"] isBlockMacro macroContent:[30, 30]
       MacroAttribute[10, 21] attribute:[10, 14, "par1"] separator:[14, 15, "="] valueOpen:[15, 16, "\""] value:[16, 20, "val1"] valueClose:[20, 21, "\""]
       MacroAttribute[22, 28] attribute:[22, 26, "par2"] separator:[26, 27, "="] value:[27, 28, "2"]
-    Paragraph[31, 98]
+    Paragraph[31, 98] isTrailingBlankLine
       Text[31, 54] chars:[31, 54, "{{/no … t end"]
       SoftLineBreak[54, 55]
       Text[55, 64] chars:[55, 64, "and even "]
@@ -567,7 +567,7 @@ Document[0, 135]
     Macro[0, 30] open:[0, 2, "{{"] name:[2, 9, "mymacro"] attributes:[10, 28, "par1=\"val1\" par2=2"] close:[28, 30, "}}"] isBlockMacro macroContent:[30, 30]
       MacroAttribute[10, 21] attribute:[10, 14, "par1"] separator:[14, 15, "="] valueOpen:[15, 16, "\""] value:[16, 20, "val1"] valueClose:[20, 21, "\""]
       MacroAttribute[22, 28] attribute:[22, 26, "par2"] separator:[26, 27, "="] value:[27, 28, "2"]
-    Paragraph[31, 112]
+    Paragraph[31, 112] isTrailingBlankLine
       Text[31, 54] chars:[31, 54, "{{/no … t end"]
       SoftLineBreak[54, 55]
       Text[55, 64] chars:[55, 64, "and even "]
@@ -575,7 +575,7 @@ Document[0, 135]
         Text[75, 97] chars:[75, 97, " is j … ntent"]
         SoftLineBreak[97, 98]
         MacroClose[99, 111] nameOpen:[99, 102, "{{/"] name:[102, 109, "mymacro"] nameClose:[109, 111, "}}"]
-    Paragraph[113, 122]
+    Paragraph[113, 122] isTrailingBlankLine
       Text[113, 121] chars:[113, 121, "Markdown"]
     MacroClose[122, 134] nameOpen:[122, 125, "{{/"] name:[125, 132, "mymacro"] nameClose:[132, 134, "}}"]
 ````````````````````````````````

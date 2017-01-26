@@ -21,6 +21,7 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
             //.set(FormattingRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
+            .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             ;
 
@@ -28,11 +29,15 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
+        optionsMap.put("max-blank-lines-1", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 1));
+        optionsMap.put("max-blank-lines-2", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 2));
+        optionsMap.put("max-blank-lines-3", new MutableDataSet().set(Formatter.MAX_BLANK_LINES, 3));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("atx-space-add", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.ADD));
         optionsMap.put("atx-space-remove", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.REMOVE));
         optionsMap.put("setext-no-equalize", new MutableDataSet().set(Formatter.SETEXT_HEADER_EQUALIZE_MARKER, false));
+        optionsMap.put("atx-trailing-as-is", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.AS_IS));
         optionsMap.put("atx-trailing-add", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.ADD));
         optionsMap.put("atx-trailing-equalize", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.EQUALIZE));
         optionsMap.put("atx-trailing-remove", new MutableDataSet().set(Formatter.ATX_HEADER_TRAILING_MARKER, EqualizeTrailingMarker.REMOVE));
@@ -48,8 +53,8 @@ public class ComboCoreFormatterSpecTest extends ComboSpecTestCase {
         optionsMap.put("fenced-code-marker-backtick", new MutableDataSet().set(Formatter.FENCED_CODE_MARKER_TYPE, CodeFenceMarker.BACK_TICK));
         optionsMap.put("fenced-code-marker-tilde", new MutableDataSet().set(Formatter.FENCED_CODE_MARKER_TYPE, CodeFenceMarker.TILDE));
         optionsMap.put("list-add-blank-line-before", new MutableDataSet().set(Formatter.LIST_ADD_BLANK_LINE_BEFORE, true));
-        optionsMap.put("list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, true));
-        optionsMap.put("list-no-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, false));
+        //optionsMap.put("list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, true));
+        //optionsMap.put("list-no-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, false));
         optionsMap.put("list-no-renumber-items", new MutableDataSet().set(Formatter.LIST_RENUMBER_ITEMS, false));
         optionsMap.put("list-bullet-any", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ANY));
         optionsMap.put("list-bullet-dash", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.DASH));

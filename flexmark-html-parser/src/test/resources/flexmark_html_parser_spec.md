@@ -2501,7 +2501,6 @@ some back ticks in the ````code````
   >     some back ticks in the ````code````
   >     * item
   >       * sub-item
-
 .
 <ul>
   <li>

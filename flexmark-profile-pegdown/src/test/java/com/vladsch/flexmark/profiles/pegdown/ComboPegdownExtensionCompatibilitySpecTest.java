@@ -21,6 +21,7 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCas
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP))).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
+            .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
 

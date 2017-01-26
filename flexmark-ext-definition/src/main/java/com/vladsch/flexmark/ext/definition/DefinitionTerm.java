@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Definition block node
  */
-public class DefinitionTerm extends ListItem implements ParagraphItemContainer {
+public class DefinitionTerm extends ListItem {
 
     @Override
     public void getAstExtra(StringBuilder out) {

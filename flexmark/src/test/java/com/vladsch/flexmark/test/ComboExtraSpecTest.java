@@ -20,10 +20,13 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/extra_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
+            .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
     protected static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("obfuscate-email", new MutableDataSet().set(HtmlRenderer.OBFUSCATE_EMAIL, true));
+        optionsMap.put("keep-blank-lines", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));
         optionsMap.put("keep-last", new MutableDataSet().set(Parser.REFERENCES_KEEP, KeepType.LAST));
         optionsMap.put("jekyll-macros-in-urls", new MutableDataSet().set(Parser.PARSE_JEKYLL_MACROS_IN_URLS, true));
         optionsMap.put("hdr-no-atx-space", new MutableDataSet().set(Parser.HEADING_NO_ATX_SPACE, true));

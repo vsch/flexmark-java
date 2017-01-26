@@ -7,7 +7,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 import java.util.Collection;
 import java.util.Map;
 
-public class Document extends Block implements MutableDataHolder {
+public class Document extends Block implements MutableDataHolder, BlankLineContainer {
     private final MutableDataSet dataSet;
 
     @Override

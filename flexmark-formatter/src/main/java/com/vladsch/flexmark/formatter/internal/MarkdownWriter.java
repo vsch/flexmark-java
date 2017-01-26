@@ -9,7 +9,7 @@ import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
 
 import java.io.IOException;
 
-public class MarkdownWriter implements MarkdownFormattingAppendable {
+public class MarkdownWriter implements FormattingAppendable {
     private final FormattingAppendable myAppendable;
     private NodeFormatterContext context;
 

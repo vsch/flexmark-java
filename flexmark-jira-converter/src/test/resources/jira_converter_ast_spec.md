@@ -129,7 +129,7 @@ Text with [link|http://link.com], image !http://link.com/image.png!, mail [vladi
 
 .
 Document[0, 122]
-  Paragraph[0, 62]
+  Paragraph[0, 62] isTrailingBlankLine
     Text[0, 10] chars:[0, 10, "Text with "]
     LinkRef[10, 16] referenceOpen:[10, 11, "["] reference:[11, 15, "link"] referenceClose:[15, 16, "]"]
       Text[11, 15] chars:[11, 15, "link"]
@@ -200,7 +200,7 @@ another block quote paragraph.
 .
 Document[0, 71]
   BlockQuote[0, 71] marker:[0, 1, ">"]
-    Paragraph[2, 34]
+    Paragraph[2, 34] isTrailingBlankLine
       Text[2, 20] chars:[2, 20, "simpl … quote"]
       SoftLineBreak[20, 21]
       Text[23, 33] chars:[23, 33, "paragraph."]
@@ -227,7 +227,7 @@ More Text
 
 .
 Document[0, 25]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "Some text"]
   ThematicBreak[11, 14]
   Paragraph[15, 25]
@@ -421,7 +421,7 @@ lazy continuation
 Document[0, 141]
   OrderedList[0, 140] isTight delimiter:'.'
     OrderedListItem[0, 111] open:[0, 2, "1."] isLoose hadBlankLineAfter
-      Paragraph[3, 28]
+      Paragraph[3, 28] isTrailingBlankLine
         Text[3, 9] chars:[3, 9, "item 1"]
         SoftLineBreak[9, 10]
         Text[10, 27] chars:[10, 27, "lazy  … ation"]
@@ -438,14 +438,14 @@ Document[0, 141]
             Text[76, 86] chars:[76, 86, "sub-item 2"]
           OrderedList[93, 111] isTight delimiter:'.'
             OrderedListItem[93, 111] open:[93, 95, "1."] isTight hadBlankLineAfter
-              Paragraph[96, 111]
+              Paragraph[96, 111] isTrailingBlankLine
                 Text[96, 110] chars:[96, 110, "sub-s … tem 1"]
     OrderedListItem[112, 140] open:[112, 114, "1."] isTight hadBlankLineAfter
-      Paragraph[115, 122]
+      Paragraph[115, 122] isTrailingBlankLine
         Text[115, 121] chars:[115, 121, "item 2"]
       OrderedList[126, 140] isTight delimiter:'.'
         OrderedListItem[126, 140] open:[126, 128, "1."] isTight hadBlankLineAfter
-          Paragraph[129, 140]
+          Paragraph[129, 140] isTrailingBlankLine
             Text[129, 139] chars:[129, 139, "sub-item 1"]
 ````````````````````````````````
 
@@ -530,11 +530,11 @@ paragraph 4
 
 .
 Document[0, 197]
-  Paragraph[0, 35]
+  Paragraph[0, 35] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
     SoftLineBreak[11, 12]
     Text[12, 34] chars:[12, 34, "with  … ation"]
-  Paragraph[36, 71]
+  Paragraph[36, 71] isTrailingBlankLine
     Text[36, 47] chars:[36, 47, "parag … aph 2"]
     SoftLineBreak[47, 48]
     Text[48, 70] chars:[48, 70, "with  … ation"]
@@ -545,19 +545,19 @@ Document[0, 197]
         SoftLineBreak[80, 81]
         Text[81, 103] chars:[81, 103, "with  … ation"]
     BulletListItem[104, 142] open:[104, 105, "*"] isLoose hadBlankLineAfter
-      Paragraph[106, 142]
+      Paragraph[106, 142] isTrailingBlankLine
         Text[106, 118] chars:[106, 118, "loose … tem 2"]
         SoftLineBreak[118, 119]
         Text[119, 141] chars:[119, 141, "with  … ation"]
     BulletListItem[143, 174] open:[143, 144, "*"] isLoose hadBlankLineAfter
-      Paragraph[145, 152]
+      Paragraph[145, 152] isTrailingBlankLine
         Text[145, 151] chars:[145, 151, "item 3"]
       Paragraph[157, 174]
         Text[157, 173] chars:[157, 173, "item  … graph"]
     BulletListItem[174, 183] open:[174, 175, "*"] isLoose hadBlankLineAfter
-      Paragraph[176, 183]
+      Paragraph[176, 183] isTrailingBlankLine
         Text[176, 182] chars:[176, 182, "item 4"]
-  Paragraph[184, 196]
+  Paragraph[184, 196] isTrailingBlankLine
     Text[184, 195] chars:[184, 195, "parag … aph 4"]
 ````````````````````````````````
 
@@ -600,11 +600,11 @@ paragraph 4
 
 .
 Document[0, 197]
-  Paragraph[0, 35]
+  Paragraph[0, 35] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "parag … aph 1"]
     SoftLineBreak[11, 12]
     Text[12, 34] chars:[12, 34, "with  … ation"]
-  Paragraph[36, 71]
+  Paragraph[36, 71] isTrailingBlankLine
     Text[36, 47] chars:[36, 47, "parag … aph 2"]
     SoftLineBreak[47, 48]
     Text[48, 70] chars:[48, 70, "with  … ation"]
@@ -615,19 +615,19 @@ Document[0, 197]
         SoftLineBreak[80, 81]
         Text[81, 103] chars:[81, 103, "with  … ation"]
     BulletListItem[104, 142] open:[104, 105, "*"] isLoose hadBlankLineAfter
-      Paragraph[106, 142]
+      Paragraph[106, 142] isTrailingBlankLine
         Text[106, 118] chars:[106, 118, "loose … tem 2"]
         SoftLineBreak[118, 119]
         Text[119, 141] chars:[119, 141, "with  … ation"]
     BulletListItem[143, 174] open:[143, 144, "*"] isTight hadBlankLineAfter
-      Paragraph[145, 152]
+      Paragraph[145, 152] isTrailingBlankLine
         Text[145, 151] chars:[145, 151, "item 3"]
       Paragraph[157, 174]
         Text[157, 173] chars:[157, 173, "item  … graph"]
     BulletListItem[174, 183] open:[174, 175, "*"] isTight hadBlankLineAfter
-      Paragraph[176, 183]
+      Paragraph[176, 183] isTrailingBlankLine
         Text[176, 182] chars:[176, 182, "item 4"]
-  Paragraph[184, 196]
+  Paragraph[184, 196] isTrailingBlankLine
     Text[184, 195] chars:[184, 195, "parag … aph 4"]
 ````````````````````````````````
 
@@ -734,11 +734,11 @@ Document[0, 382]
           StrongEmphasis[219, 226] textOpen:[219, 221, "**"] text:[221, 224, "13h"] textClose:[224, 226, "**"]
             Text[221, 224] chars:[221, 224, "13h"]
           Text[226, 226]
-  Paragraph[230, 246]
+  Paragraph[230, 246] isTrailingBlankLine
     Text[230, 245] chars:[230, 245, "Some  … raph."]
   Heading[247, 270] text:[247, 258, "Heading Two"] textClose:[259, 270, "-----------"]
     Text[247, 258] chars:[247, 258, "Headi … g Two"]
-  Paragraph[272, 299]
+  Paragraph[272, 299] isTrailingBlankLine
     Text[272, 277] chars:[272, 277, "More "]
     Strikethrough[277, 286] textOpen:[277, 279, "~~"] text:[279, 284, "lines"] textClose:[284, 286, "~~"]
       Text[279, 284] chars:[279, 284, "lines"]
@@ -746,7 +746,7 @@ Document[0, 382]
   BlockQuote[300, 324] marker:[300, 301, ">"]
     Paragraph[302, 324]
       Text[302, 323] chars:[302, 323, "A wis … said…"]
-  Paragraph[325, 342]
+  Paragraph[325, 342] isTrailingBlankLine
     Text[325, 329] chars:[325, 329, "Who "]
     Emphasis[329, 335] textOpen:[329, 330, "_"] text:[330, 334, "said"] textClose:[334, 335, "_"]
       Text[330, 334] chars:[330, 334, "said"]
@@ -1150,7 +1150,7 @@ not a table, followed by a table
 
 .
 Document[0, 199]
-  Paragraph[0, 33]
+  Paragraph[0, 33] isTrailingBlankLine
     Text[0, 32] chars:[0, 32, "not a … table"]
   TableBlock[34, 59]
     TableHead[34, 48]
@@ -1185,7 +1185,7 @@ Document[0, 199]
           Text[87, 92] chars:[87, 92, "data1"]
         TableCell[94, 101] text:[95, 100, "data2"] textClose:[100, 101, "|"]
           Text[95, 100] chars:[95, 100, "data2"]
-  Paragraph[103, 136]
+  Paragraph[103, 136] isTrailingBlankLine
     Text[103, 135] chars:[103, 135, "not a … table"]
   TableBlock[137, 198]
     TableHead[137, 170]
@@ -1236,7 +1236,7 @@ in item
 Document[0, 520]
   BulletList[0, 520] isLoose
     BulletListItem[0, 520] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 40]
+      Paragraph[2, 40] isTrailingBlankLine
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
       TableBlock[43, 520]

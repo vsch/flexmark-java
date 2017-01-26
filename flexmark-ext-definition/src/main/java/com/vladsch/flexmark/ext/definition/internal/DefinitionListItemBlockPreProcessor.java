@@ -15,6 +15,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+
 public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
     private final DefinitionOptions options;
 
@@ -28,11 +30,13 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
             // we chop up the previous paragraph into definition terms and add the definition item to the last one
             // we add all these to the previous DefinitionList or add a new one if there isn't one
             final DefinitionItem definitionItem = (DefinitionItem) block;
-            final Node previous = block.getPrevious();
+            final Node previous = block.getPreviousAnyNot(BlankLine.class);
 
             if (previous instanceof Paragraph) {
                 final Paragraph paragraph = (Paragraph) previous;
-                Node paragraphPrevious = paragraph.getPrevious();
+                Node afterParagraph = previous.getNext();
+
+                Node paragraphPrevious = paragraph.getPreviousAnyNot(BlankLine.class);
                 final Node paragraphParent = paragraph.getParent();
 
                 definitionItem.unlink();
@@ -63,6 +67,16 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
 
                     definitionList.appendChild(definitionTerm);
                     state.blockAdded(definitionTerm);
+                }
+
+                // if have blank lines after paragraph need to move them after the last term
+                if (state.getProperties().get(BLANK_LINES_IN_AST) && afterParagraph instanceof BlankLine) {
+                    while (afterParagraph instanceof BlankLine) {
+                        Node next = afterParagraph.getNext();
+                        afterParagraph.unlink();
+                        definitionList.appendChild(afterParagraph);
+                        afterParagraph = next;
+                    }
                 }
 
                 definitionList.appendChild(definitionItem);

@@ -1413,7 +1413,7 @@ Document[0, 68]
             Text[23, 26] chars:[23, 26, "ref"]
         TableCell[28, 34] text:[28, 34, "`code`"]
           Code[28, 34] textOpen:[28, 29, "`"] text:[29, 33, "code"] textClose:[33, 34, "`"]
-  Paragraph[35, 55]
+  Paragraph[35, 55] isTrailingBlankLine
     Text[35, 54] chars:[35, 54, "table …  over"]
   Reference[56, 67] refOpen:[56, 57, "["] ref:[57, 60, "ref"] refClose:[60, 62, "]:"] url:[63, 67, "/url"]
 ````````````````````````````````
@@ -1471,7 +1471,7 @@ Document[0, 92]
           Code[45, 51] textOpen:[45, 46, "`"] text:[46, 50, "code"] textClose:[50, 51, "`"]
           Text[51, 52] chars:[51, 52, " "]
           Code[52, 58] textOpen:[52, 53, "`"] text:[53, 57, "code"] textClose:[57, 58, "`"]
-  Paragraph[59, 79]
+  Paragraph[59, 79] isTrailingBlankLine
     Text[59, 78] chars:[59, 78, "table …  over"]
   Reference[80, 91] refOpen:[80, 81, "["] ref:[81, 84, "ref"] refClose:[84, 86, "]:"] url:[87, 91, "/url"]
 ````````````````````````````````
@@ -1817,7 +1817,7 @@ not a table, followed by a table
 </table>
 .
 Document[0, 199]
-  Paragraph[0, 33]
+  Paragraph[0, 33] isTrailingBlankLine
     Text[0, 32] chars:[0, 32, "not a … table"]
   TableBlock[34, 59]
     TableHead[34, 48]
@@ -1852,7 +1852,7 @@ Document[0, 199]
           Text[87, 92] chars:[87, 92, "data1"]
         TableCell[94, 101] text:[95, 100, "data2"] textClose:[100, 101, "|"]
           Text[95, 100] chars:[95, 100, "data2"]
-  Paragraph[103, 136]
+  Paragraph[103, 136] isTrailingBlankLine
     Text[103, 135] chars:[103, 135, "not a … table"]
   TableBlock[137, 198]
     TableHead[137, 170]
@@ -2063,7 +2063,7 @@ in item
 Document[0, 564]
   BulletList[0, 564] isLoose
     BulletListItem[0, 564] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 44]
+      Paragraph[2, 44] isTrailingBlankLine
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
       TableBlock[87, 564]
@@ -3130,7 +3130,7 @@ in item
 Document[0, 564]
   BulletList[0, 564] isLoose
     BulletListItem[0, 564] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 44]
+      Paragraph[2, 44] isTrailingBlankLine
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
       TableBlock[87, 564]

@@ -222,13 +222,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 appendSpaces();
             }
 
-
             while (myPendingEOL > 0) {
                 myAppendable.append(myEOL);
                 myLineCount++;
                 runAllAfterEol();
                 myPendingEOL--;
-
 
                 if (myPendingEOL > 0 && !myPrefix.isBlank()) {
                     myAppendable.append(myPrefix);
@@ -306,26 +304,37 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         }
     }
 
+    private void beforePre() throws IOException {
+        while (myPendingEOL > 0) {
+            myAppendable.append('\n');
+            myLineCount++;
+            if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
+                myAppendable.append(myPrefix);
+            }
+            myPendingEOL--;
+        }
+        myPendingPreFormattedPrefix = false;
+    }
+
     private void appendImpl(final char c) throws IOException {
         if (myPreFormattedNesting > 0) {
             setOffsetBefore(myAppendable.getLength());
+
+            beforePre();
 
             if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
                 myAppendable.append(myPrefix);
             }
             myPendingPreFormattedPrefix = false;
 
-            myAppendable.append(c);
-            myModCount++;
-
-            int lineCount = myLineCount;
             if (c == myEOL) {
-                myLineCount++;
+                myPendingEOL = 1;
                 myPendingPreFormattedPrefix = true;
+            } else {
+                myAppendable.append(c);
+                myModCount++;
+                resetPendingEOL();
             }
-
-            resetPendingEOL();
-            myLastEOLCount = myLineCount - lineCount;
         } else {
             if (c == myEOL) {
                 setPendingEOL(1);
@@ -348,10 +357,15 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
         if (myPreFormattedNesting > 0) {
             setOffsetBefore(myAppendable.getLength());
+            int endNoEOL = start + seq.subSequence(start, end).removeSuffix("\n").length();
 
-            while (lastPos < end) {
-                int pos = seq.indexOf(myEOL, lastPos, end);
-                int endPos = pos == -1 ? csq.length() : pos + 1;
+            if (lastPos < end) {
+                beforePre();
+            }
+
+            while (lastPos < endNoEOL) {
+                int pos = seq.indexOf(myEOL, lastPos, endNoEOL);
+                int endPos = pos == -1 ? endNoEOL : pos + 1;
 
                 if (lastPos < endPos) {
                     if (myPendingPreFormattedPrefix && !myPrefix.isEmpty()) {
@@ -360,20 +374,21 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                     myPendingPreFormattedPrefix = false;
 
                     myAppendable.append(csq, lastPos, endPos);
+                    lastPos = endPos;
                 }
 
                 if (pos == -1) break;
 
                 myLineCount++;
                 myPendingPreFormattedPrefix = true;
-
                 lastPos = endPos;
             }
             myModCount++;
+
             // if EOL is last then we reset pending and eol mod count
-            if (lastPos == end) {
-                resetPendingEOL();
-                myLastEOLCount = 1;
+            if (lastPos == endNoEOL && endNoEOL != end) {
+                myPendingEOL = 1;
+                myPendingPreFormattedPrefix = true;
             }
         } else {
             // have to handle \n, white spaces, etc
@@ -506,7 +521,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         assert myConditionalFrames.size() == 0;
         assert myPreFormattedNesting == 0;
 
-        int blankLines = maxBlankLines >= 0 ? maxBlankLines : 0;
+        int blankLines = maxBlankLines >= -1 ? maxBlankLines : -1;
         if (myPendingEOL > blankLines + 1) {
             myPendingEOL = maxBlankLines + 1;
         }

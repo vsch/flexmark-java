@@ -180,6 +180,16 @@ text http://autolink.com embedded
 ````````````````````````````````
 
 
+mail autolink
+
+```````````````````````````````` example Markdown elements - AutoLink: 3
+text example@example.com
+
+.
+<p>text <a href="&#109;&#x61;i&#x6c;&#116;&#x6f;&#58;&#101;xa&#x6d;&#x70;&#x6c;&#x65;&#64;ex&#97;&#109;&#112;&#x6c;&#x65;.&#x63;&#x6f;&#109;">&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;</a></p>
+````````````````````````````````
+
+
 ### Markdown elements - BlockQuote
 
 `BlockQuote`

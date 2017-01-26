@@ -756,7 +756,7 @@ reference following will be a reference
 <p><a href="wiki-link">wiki link</a><a href="/url">ref</a></p>
 .
 Document[0, 32]
-  Paragraph[0, 19]
+  Paragraph[0, 19] isTrailingBlankLine
     WikiLink[0, 13] linkOpen:[0, 2, "[["] link:[2, 11, "wiki link"] pageRef:[2, 11, "wiki link"] linkClose:[11, 13, "]]"]
       Text[2, 11] chars:[2, 11, "wiki link"]
     LinkRef[13, 18] referenceOpen:[13, 14, "["] reference:[14, 17, "ref"] referenceClose:[17, 18, "]"]
@@ -1326,7 +1326,7 @@ reference following will be a reference
 <p><img src="wiki-image" alt="wiki image" /><a href="/url">ref</a></p>
 .
 Document[0, 33]
-  Paragraph[0, 21]
+  Paragraph[0, 21] isTrailingBlankLine
     WikiImage[0, 15] linkOpen:[0, 3, "![["] link:[3, 13, "wiki image"] pageRef:[3, 13, "wiki image"] linkClose:[13, 15, "]]"]
       Text[3, 13] chars:[3, 13, "wiki image"]
     LinkRef[15, 20] referenceOpen:[15, 16, "["] reference:[16, 19, "ref"] referenceClose:[19, 20, "]"]

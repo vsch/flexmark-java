@@ -889,7 +889,7 @@ Converts :warning: to its emoji image
 Document[0, 26736]
   Heading[0, 21] textOpen:[0, 2, "##"] text:[3, 21, "Markdown Navigator"]
     Text[3, 21] chars:[3, 21, "Markd … gator"]
-  Paragraph[23, 61]
+  Paragraph[23, 61] isTrailingBlankLine
     Text[23, 32] chars:[23, 32, "Converts "]
     Emoji[32, 41] textOpen:[32, 33, ":"] text:[33, 40, "warning"] textClose:[40, 41, ":"]
       Text[33, 40] chars:[33, 40, "warning"]
@@ -915,11 +915,11 @@ Document[0, 26736]
         Link[389, 438] textOpen:[389, 390, "["] text:[390, 413, "2.1.0 - Bug Fix Release"] textClose:[413, 414, "]"] linkOpen:[414, 415, "("] url:[415, 437, "#210---bug-fix-release"] pageRef:[415, 415] anchorMarker:[415, 416, "#"] anchorRef:[416, 437, "210---bug-fix-release"] linkClose:[437, 438, ")"]
           Text[390, 413] chars:[390, 413, "2.1.0 … lease"]
     BulletListItem[439, 497] open:[439, 440, "-"] isTight hadBlankLineAfter
-      Paragraph[441, 497]
+      Paragraph[441, 497] isTrailingBlankLine
         Link[441, 496] textOpen:[441, 442, "["] text:[442, 468, "2.0.0 - New Parser Release"] textClose:[468, 469, "]"] linkOpen:[469, 470, "("] url:[470, 495, "#200---new-parser-release"] pageRef:[470, 470] anchorMarker:[470, 471, "#"] anchorRef:[471, 495, "200---new-parser-release"] linkClose:[495, 496, ")"]
           Text[442, 468] chars:[442, 468, "2.0.0 … lease"]
   HtmlCommentBlock[499, 607]
-  Paragraph[608, 667]
+  Paragraph[608, 667] isTrailingBlankLine
     HtmlEntity[608, 614] "&nbsp;"
     HtmlInline[614, 633] chars:[614, 633, "<deta … odo\">"]
     HtmlInline[633, 642] chars:[633, 642, "<summary>"]
@@ -1136,7 +1136,7 @@ Document[0, 26736]
           Text[4270, 4271] chars:[4270, 4271, " "]
   BulletList[4273, 4380] isTight
     BulletListItem[4273, 4380] open:[4273, 4274, "-"] isTight hadBlankLineAfter
-      Paragraph[4275, 4380]
+      Paragraph[4275, 4380] isTrailingBlankLine
         LinkRef[4275, 4278] referenceOpen:[4275, 4276, "["] reference:[4277, 4277] referenceClose:[4277, 4278, "]"]
           Text[4276, 4277] chars:[4276, 4277, " "]
         Text[4278, 4367] chars:[4278, 4367, " Fix: …  text"]
@@ -1244,14 +1244,14 @@ Document[0, 26736]
         Text[6064, 6125] chars:[6064, 6125, " Add: … tings"]
   BulletList[6126, 6214] isTight
     BulletListItem[6126, 6214] open:[6126, 6127, "*"] isTight hadBlankLineAfter
-      Paragraph[6128, 6214]
+      Paragraph[6128, 6214] isTrailingBlankLine
         LinkRef[6128, 6131] referenceOpen:[6128, 6129, "["] reference:[6130, 6130] referenceClose:[6130, 6131, "]"]
           Text[6129, 6130] chars:[6129, 6130, " "]
         Text[6131, 6151] chars:[6131, 6151, " Add: …  for "]
         StrongEmphasis[6151, 6161] textOpen:[6151, 6153, "**"] text:[6153, 6159, "GitHub"] textClose:[6159, 6161, "**"]
           Text[6153, 6159] chars:[6153, 6159, "GitHub"]
         Text[6161, 6213] chars:[6161, 6213, " issu … ined."]
-  Paragraph[6215, 6232]
+  Paragraph[6215, 6232] isTrailingBlankLine
     HtmlEntity[6215, 6221] "&nbsp;"
     HtmlInline[6221, 6231] chars:[6221, 6231, "</details>"]
   Heading[6233, 6283] textOpen:[6233, 6236, "###"] text:[6237, 6283, "2.2.0.12 - Compatibility & Enhancement Release"]
@@ -1500,7 +1500,7 @@ Document[0, 26736]
       Paragraph[12050, 12130]
         Text[12050, 12129] chars:[12050, 12129, "Fix:  … mode."]
     BulletListItem[12130, 12304] open:[12130, 12131, "*"] isTight hadBlankLineAfter
-      Paragraph[12132, 12304]
+      Paragraph[12132, 12304] isTrailingBlankLine
         Text[12132, 12223] chars:[12132, 12223, "Add:  … imple"]
         SoftLineBreak[12223, 12224]
         Text[12226, 12303] chars:[12226, 12303, "names … docs."]
@@ -1582,7 +1582,7 @@ Document[0, 26736]
         SoftLineBreak[13611, 13612]
         Text[13614, 13675] chars:[13614, 13675, "stub  … ient."]
     BulletListItem[13676, 13723] open:[13676, 13677, "-"] isTight hadBlankLineAfter
-      Paragraph[13678, 13723]
+      Paragraph[13678, 13723] isTrailingBlankLine
         Text[13678, 13722] chars:[13678, 13722, "Chang … style"]
   Heading[13724, 13745] textOpen:[13724, 13728, "####"] text:[13729, 13745, "Enhanced Edition"]
     Text[13729, 13745] chars:[13729, 13745, "Enhan … ition"]
@@ -1841,7 +1841,7 @@ Document[0, 26736]
         SoftLineBreak[19332, 19333]
         Text[19335, 19356] chars:[19335, 19356, "after …  code"]
     BulletListItem[19357, 19483] open:[19357, 19358, "*"] isTight hadBlankLineAfter
-      Paragraph[19359, 19483]
+      Paragraph[19359, 19483] isTrailingBlankLine
         Text[19359, 19444] chars:[19359, 19444, "Fix:  … n and"]
         SoftLineBreak[19444, 19445]
         Text[19447, 19482] chars:[19447, 19482, "selec … amed."]
@@ -1868,7 +1868,7 @@ Document[0, 26736]
       Paragraph[19889, 19962]
         Text[19889, 19961] chars:[19889, 19961, "Fix:  … E bug"]
     BulletListItem[19962, 19995] open:[19962, 19963, "-"] isTight hadBlankLineAfter
-      Paragraph[19964, 19995]
+      Paragraph[19964, 19995] isTrailingBlankLine
         Text[19964, 19994] chars:[19964, 19994, "Chang … 1.0.4"]
   Heading[19996, 20017] textOpen:[19996, 20000, "####"] text:[20001, 20017, "Enhanced Edition"]
     Text[20001, 20017] chars:[20001, 20017, "Enhan … ition"]
@@ -1915,7 +1915,7 @@ Document[0, 26736]
       Paragraph[20950, 21022]
         Text[20950, 21021] chars:[20950, 21021, "Add:  …  file"]
     BulletListItem[21022, 21086] open:[21022, 21023, "-"] isTight hadBlankLineAfter
-      Paragraph[21024, 21086]
+      Paragraph[21024, 21086] isTrailingBlankLine
         Text[21024, 21085] chars:[21024, 21085, "Add:  …  file"]
   Heading[21087, 21114] textOpen:[21087, 21090, "###"] text:[21091, 21114, "2.1.0 - Bug Fix Release"]
     Text[21091, 21114] chars:[21091, 21114, "2.1.0 … lease"]
@@ -1944,7 +1944,7 @@ Document[0, 26736]
       Paragraph[21535, 21604]
         Text[21535, 21603] chars:[21535, 21603, "Chang … cies."]
     BulletListItem[21604, 21660] open:[21604, 21605, "-"] isTight hadBlankLineAfter
-      Paragraph[21606, 21660]
+      Paragraph[21606, 21660] isTrailingBlankLine
         Text[21606, 21659] chars:[21606, 21659, "Fix:  … Link\""]
   Heading[21661, 21682] textOpen:[21661, 21665, "####"] text:[21666, 21682, "Enhanced Edition"]
     Text[21666, 21682] chars:[21666, 21682, "Enhan … ition"]
@@ -2008,7 +2008,7 @@ Document[0, 26736]
       Paragraph[22957, 23050]
         Text[22957, 23049] chars:[22957, 23049, "Fix:  … tting"]
     BulletListItem[23050, 23172] open:[23050, 23051, "*"] isTight hadBlankLineAfter
-      Paragraph[23052, 23172]
+      Paragraph[23052, 23172] isTrailingBlankLine
         Text[23052, 23140] chars:[23052, 23140, "Fix:  … s the"]
         SoftLineBreak[23140, 23141]
         Text[23143, 23171] chars:[23143, 23171, "headi …  item"]
@@ -2089,7 +2089,7 @@ Document[0, 26736]
           Paragraph[24834, 24862]
             Text[24834, 24861] chars:[24834, 24861, "Typog … marts"]
         BulletListItem[24866, 24890] open:[24866, 24867, "-"] isTight hadBlankLineAfter
-          Paragraph[24868, 24890]
+          Paragraph[24868, 24890] isTrailingBlankLine
             Text[24868, 24889] chars:[24868, 24889, "Multi …  URLs"]
   Heading[24891, 24912] textOpen:[24891, 24895, "####"] text:[24896, 24912, "Enhanced Edition"]
     Text[24896, 24912] chars:[24896, 24912, "Enhan … ition"]

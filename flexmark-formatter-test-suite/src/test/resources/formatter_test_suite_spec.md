@@ -39,7 +39,6 @@ lazy continuation
 
 paragraph text
 lazy continuation
-
 * list item
 
 > block quote
@@ -76,7 +75,9 @@ Document[0, 304]
       Text[63, 74] chars:[63, 74, "block … quote"]
       SoftLineBreak[74, 75]
       Text[75, 92] chars:[75, 92, "lazy  … ation"]
+  BlankLine[93, 94]
   FencedCodeBlock[94, 181] open:[94, 97, "~~~"] info:[97, 101, "info"] content:[102, 178] lines[3] close:[178, 181, "~~~"]
+  BlankLine[183, 184]
   IndentedCodeBlock[188, 260]
   OrderedList[260, 304] isTight delimiter:'.'
     OrderedListItem[260, 282] open:[260, 262, "1."] isTight
@@ -115,7 +116,6 @@ lazy continuation
 
 paragraph text
 lazy continuation
-
 + list item
 
 >block quote
@@ -196,12 +196,11 @@ indented code
 > 
 > paragraph text
 > lazy continuation
-> 
 > * list item
 > 
 >> block quote
 >> lazy continuation
-
+> 
 > ~~~info
 >         with uneven indent
 >            with uneven indent
@@ -211,10 +210,12 @@ indented code
 >         with uneven indent
 >            with uneven indent
 >      indented code
-
+> 
 > 1. numbered item 1
 > 2. numbered item 2
+
 ````````````````````````````````
+
 
 ## Task List Items
 
@@ -222,53 +223,52 @@ default
 
 ```````````````````````````````` example Task List Items: 1
 * list item 1
-* [ ] list item 1.1
-* [x] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [X] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [X] list item 1.2.1.2
 .
 * list item 1
-* [ ] list item 1.1
-* [x] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [X] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [X] list item 1.2.1.2
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Task List Items: 2) options(task-case-lowercase)
 * list item 1
-* [ ] list item 1.1
-* [x] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [X] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [X] list item 1.2.1.2
 .
 * list item 1
-* [ ] list item 1.1
-* [x] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [x] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [x] list item 1.2.1.2
 ````````````````````````````````
 
 
 ```````````````````````````````` example(Task List Items: 3) options(task-case-uppercase)
 * list item 1
-* [ ] list item 1.1
-* [x] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [X] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [X] list item 1.2.1.2
 .
 * list item 1
-* [ ] list item 1.1
-* [X] list item 1.2
-      * list item 1.2.1
-      * [ ] list item 1.2.1.1
-      * [X] list item 1.2.1.2
+  * [ ] list item 1.1
+  * [X] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.1.1
+        * [X] list item 1.2.1.2
 ````````````````````````````````
-
 
 

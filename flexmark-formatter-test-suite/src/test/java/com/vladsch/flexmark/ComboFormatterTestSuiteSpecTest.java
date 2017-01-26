@@ -64,6 +64,7 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
                     MacroExtension.create(),
                     YamlFrontMatterExtension.create()
             ))
+            .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
@@ -90,8 +91,8 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
         optionsMap.put("fenced-code-marker-backtick", new MutableDataSet().set(Formatter.FENCED_CODE_MARKER_TYPE, CodeFenceMarker.BACK_TICK));
         optionsMap.put("fenced-code-marker-tilde", new MutableDataSet().set(Formatter.FENCED_CODE_MARKER_TYPE, CodeFenceMarker.TILDE));
         optionsMap.put("list-add-blank-line-before", new MutableDataSet().set(Formatter.LIST_ADD_BLANK_LINE_BEFORE, true));
-        optionsMap.put("list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, true));
-        optionsMap.put("list-no-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, false));
+        //optionsMap.put("list-align-first-line-text", new MutableDataSet().set(Formatter.LIST_ALIGN_FIRST_LINE_TEXT, true));
+        //optionsMap.put("list-no-align-child-blocks", new MutableDataSet().set(Formatter.LIST_ALIGN_CHILD_BLOCKS, false));
         optionsMap.put("list-no-renumber-items", new MutableDataSet().set(Formatter.LIST_RENUMBER_ITEMS, false));
         optionsMap.put("list-bullet-any", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.ANY));
         optionsMap.put("list-bullet-dash", new MutableDataSet().set(Formatter.LIST_BULLET_MARKER, ListBulletMarker.DASH));

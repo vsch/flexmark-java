@@ -321,6 +321,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.REFERENCES_KEEP, KeepType.LAST)
                     .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
                     .set(HtmlRenderer.RENDER_HEADER_ID, false)
+                    .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_RESOLVE_DUPES, false)
                     //.set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")

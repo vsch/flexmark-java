@@ -12,7 +12,6 @@ public class MarkdownCodeStyleSettings {
     public boolean KEEP_HARD_BREAKS = true;
     public boolean KEEP_EMBEDDED_SPACES = false;
     public boolean WRAP_TEXT = true;
-    public int KEEP_BLANK_LINES = 2;
     public TrailingSpaces KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_LINE_BREAK;
     public TrailingSpaces FLEXMARK_EXAMPLE_KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_ALL;
     public TrailingSpaces CODE_KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_ALL;

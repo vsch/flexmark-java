@@ -1097,7 +1097,7 @@ Document[0, 68]
             Text[23, 26] chars:[23, 26, "ref"]
         TableCell[28, 34] text:[28, 34, "`code`"]
           Code[28, 34] textOpen:[28, 29, "`"] text:[29, 33, "code"] textClose:[33, 34, "`"]
-  Paragraph[35, 55]
+  Paragraph[35, 55] isTrailingBlankLine
     Text[35, 54] chars:[35, 54, "table …  over"]
   Reference[56, 67] refOpen:[56, 57, "["] ref:[57, 60, "ref"] refClose:[60, 62, "]:"] url:[63, 67, "/url"]
 ````````````````````````````````

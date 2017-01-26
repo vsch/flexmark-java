@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
@@ -247,10 +244,11 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             if (blockParser instanceof DocumentBlockParser) {
                 // if document has paragraph or another definition item at end then we can proceed
                 final Document node = ((DocumentBlockParser) blockParser).getBlock();
-                if (!(node.getLastChild() instanceof Paragraph) && !(node.getLastChild() instanceof DefinitionItem)) {
+                Node lastChildAnyNot = node.getLastChildAnyNot(BlankLine.class);
+                if (!(lastChildAnyNot instanceof Paragraph || lastChildAnyNot instanceof DefinitionItem)) {
                     return BlockStart.none();
                 }
-            } else if (!(blockParser instanceof DefinitionItemBlockParser) && !(blockParser instanceof ParagraphParser)) {
+            } else if (!(blockParser instanceof DefinitionItemBlockParser || blockParser instanceof ParagraphParser)) {
                 return BlockStart.none();
             }
 

@@ -17,6 +17,7 @@ public class TaskListItem extends ListItem {
     public void getAstExtra(StringBuilder out) {
         super.getAstExtra(out);
         if (isOrderedItem) out.append(" isOrderedItem");
+        out.append(isItemDoneMarker() ? " isDone" : " isNotDone");
     }
 
     @Override

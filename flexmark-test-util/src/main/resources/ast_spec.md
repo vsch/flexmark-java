@@ -402,7 +402,7 @@ as indentation with four spaces would:
 Document[0, 14]
   BulletList[2, 14] isLoose
     BulletListItem[2, 14] open:[2, 3, "-"] isLoose hadBlankLineAfter
-      Paragraph[4, 8]
+      Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
       Paragraph[10, 14]
         Text[10, 13] chars:[10, 13, "bar"]
@@ -425,7 +425,7 @@ Document[0, 14]
 Document[0, 13]
   BulletList[0, 13] isLoose
     BulletListItem[0, 13] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "foo"]
       IndentedCodeBlock[9, 13]
 ````````````````````````````````
@@ -776,9 +776,9 @@ a------
 <p>---a---</p>
 .
 Document[0, 28]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "_ _ _ _ a"]
-  Paragraph[11, 19]
+  Paragraph[11, 19] isTrailingBlankLine
     Text[11, 18] chars:[11, 18, "a------"]
   Paragraph[20, 28]
     Text[20, 27] chars:[20, 27, "---a---"]
@@ -999,7 +999,7 @@ headings:
 <p>#hashtag</p>
 .
 Document[0, 18]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Text[0, 7] chars:[0, 7, "#5 bolt"]
   Paragraph[9, 18]
     Text[9, 17] chars:[9, 17, "#hashtag"]
@@ -1441,7 +1441,7 @@ Foo
 <hr />
 .
 Document[0, 19]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
     Text[4, 7] chars:[4, 7, "= ="]
@@ -1499,7 +1499,7 @@ of dashes"/>
 Document[0, 46]
   Heading[0, 9] text:[0, 4, "`Foo"] textClose:[5, 9, "----"]
     Text[0, 4] chars:[0, 4, "`Foo"]
-  Paragraph[10, 12]
+  Paragraph[10, 12] isTrailingBlankLine
     Text[10, 11] chars:[10, 11, "`"]
   Heading[13, 32] text:[13, 28, "<a title=\"a lot"] textClose:[29, 32, "---"]
     Text[13, 28] chars:[13, 28, "<a ti … a lot"]
@@ -1745,7 +1745,7 @@ baz
 <p>baz</p>
 .
 Document[0, 17]
-  Paragraph[0, 4]
+  Paragraph[0, 4] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "Foo"]
   Heading[5, 12] text:[5, 8, "bar"] textClose:[9, 12, "---"]
     Text[5, 8] chars:[5, 8, "bar"]
@@ -1771,7 +1771,7 @@ bar</p>
 <p>baz</p>
 .
 Document[0, 18]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
     Text[4, 7] chars:[4, 7, "bar"]
@@ -1878,7 +1878,7 @@ item][list items], the list item interpretation takes precedence:
 Document[0, 17]
   BulletList[2, 17] isLoose
     BulletListItem[2, 17] open:[2, 3, "-"] isLoose hadBlankLineAfter
-      Paragraph[4, 8]
+      Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
       Paragraph[13, 17]
         Text[13, 16] chars:[13, 16, "bar"]
@@ -1902,7 +1902,7 @@ Document[0, 17]
 Document[0, 19]
   OrderedList[0, 19] isLoose delimiter:'.'
     OrderedListItem[0, 19] open:[0, 2, "1."] isLoose hadBlankLineAfter
-      Paragraph[4, 8]
+      Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
       BulletList[13, 19] isTight
         BulletListItem[13, 19] open:[13, 14, "-"] isTight
@@ -1986,7 +1986,7 @@ Foo
 bar</p>
 .
 Document[0, 13]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
     Text[8, 11] chars:[8, 11, "bar"]
@@ -2721,7 +2721,7 @@ Here we have two HTML blocks with a Markdown paragraph between them:
 .
 Document[0, 38]
   HtmlBlock[0, 18]
-  Paragraph[19, 30]
+  Paragraph[19, 30] isTrailingBlankLine
     Emphasis[19, 29] textOpen:[19, 20, "*"] text:[20, 28, "Markdown"] textClose:[28, 29, "*"]
       Text[20, 28] chars:[20, 28, "Markdown"]
   HtmlBlock[31, 38]
@@ -2967,7 +2967,7 @@ line).  So the contents get interpreted as CommonMark:
 .
 Document[0, 21]
   HtmlBlock[0, 6]
-  Paragraph[7, 13]
+  Paragraph[7, 13] isTrailingBlankLine
     Emphasis[7, 12] textOpen:[7, 8, "*"] text:[8, 11, "foo"] textClose:[11, 12, "*"]
       Text[8, 11] chars:[8, 11, "foo"]
   HtmlBlock[14, 21]
@@ -3418,7 +3418,7 @@ Compare:
 .
 Document[0, 34]
   HtmlBlock[0, 6]
-  Paragraph[7, 26]
+  Paragraph[7, 26] isTrailingBlankLine
     Emphasis[7, 19] textOpen:[7, 8, "*"] text:[8, 18, "Emphasized"] textClose:[18, 19, "*"]
       Text[8, 18] chars:[8, 18, "Emphasized"]
     Text[19, 25] chars:[19, 25, " text."]
@@ -3643,11 +3643,11 @@ with blank line'
 <p>[foo]</p>
 .
 Document[0, 44]
-  Paragraph[0, 19]
+  Paragraph[0, 19] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 18] chars:[5, 18, ": /ur … title"]
-  Paragraph[20, 37]
+  Paragraph[20, 37] isTrailingBlankLine
     Text[20, 36] chars:[20, 36, "with  … line'"]
   Paragraph[38, 44]
     LinkRef[38, 43] referenceOpen:[38, 39, "["] reference:[39, 42, "foo"] referenceClose:[42, 43, "]"]
@@ -3684,7 +3684,7 @@ The link destination may not be omitted:
 <p>[foo]</p>
 .
 Document[0, 14]
-  Paragraph[0, 7]
+  Paragraph[0, 7] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, ":"]
@@ -3722,7 +3722,7 @@ A link can come before its corresponding definition:
 <p><a href="url">foo</a></p>
 .
 Document[0, 18]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[7, 17] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 17, "url"]
@@ -3741,7 +3741,7 @@ precedence:
 <p><a href="first">foo</a></p>
 .
 Document[0, 34]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[7, 19] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 19, "first"]
@@ -3897,7 +3897,7 @@ Foo
 <p>[bar]</p>
 .
 Document[0, 23]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "Foo"]
     SoftLineBreak[3, 4]
     LinkRef[4, 9] referenceOpen:[4, 5, "["] reference:[5, 8, "bar"] referenceClose:[8, 9, "]"]
@@ -3983,7 +3983,7 @@ are defined:
 </blockquote>
 .
 Document[0, 21]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   BlockQuote[7, 21] marker:[7, 8, ">"]
@@ -4011,7 +4011,7 @@ bbb
 <p>bbb</p>
 .
 Document[0, 9]
-  Paragraph[0, 4]
+  Paragraph[0, 4] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "aaa"]
   Paragraph[5, 9]
     Text[5, 8] chars:[5, 8, "bbb"]
@@ -4033,7 +4033,7 @@ bbb</p>
 ddd</p>
 .
 Document[0, 17]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "aaa"]
     SoftLineBreak[3, 4]
     Text[4, 7] chars:[4, 7, "bbb"]
@@ -4056,7 +4056,7 @@ bbb
 <p>bbb</p>
 .
 Document[0, 10]
-  Paragraph[0, 4]
+  Paragraph[0, 4] isTrailingBlankLine
     Text[0, 3] chars:[0, 3, "aaa"]
   Paragraph[6, 10]
     Text[6, 9] chars:[6, 9, "bbb"]
@@ -4176,7 +4176,7 @@ aaa
 <h1>aaa</h1>
 .
 Document[0, 22]
-  Paragraph[4, 8]
+  Paragraph[4, 8] isTrailingBlankLine
     Text[4, 7] chars:[4, 7, "aaa"]
   Heading[12, 17] textOpen:[12, 13, "#"] text:[14, 17, "aaa"]
     Text[14, 17] chars:[14, 17, "aaa"]
@@ -4545,7 +4545,7 @@ A block quote can have initial or final blank lines:
 .
 Document[0, 12]
   BlockQuote[0, 8] marker:[0, 1, ">"]
-    Paragraph[4, 8]
+    Paragraph[4, 8] isTrailingBlankLine
       Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -4614,7 +4614,7 @@ To get a block quote with two paragraphs, use:
 .
 Document[0, 14]
   BlockQuote[0, 14] marker:[0, 1, ">"]
-    Paragraph[2, 6]
+    Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "foo"]
     Paragraph[10, 14]
       Text[10, 13] chars:[10, 13, "bar"]
@@ -4720,7 +4720,7 @@ baz
 .
 Document[0, 12]
   BlockQuote[0, 6] marker:[0, 1, ">"]
-    Paragraph[2, 6]
+    Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "bar"]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "baz"]
@@ -4862,7 +4862,7 @@ with two lines.</p>
 </blockquote>
 .
 Document[0, 65]
-  Paragraph[0, 28]
+  Paragraph[0, 28] isTrailingBlankLine
     Text[0, 11] chars:[0, 11, "A par … graph"]
     SoftLineBreak[11, 12]
     Text[12, 27] chars:[12, 27, "with  … ines."]
@@ -4900,7 +4900,7 @@ with two lines.</p>
 Document[0, 81]
   OrderedList[0, 81] isLoose delimiter:'.'
     OrderedListItem[0, 81] open:[0, 2, "1."] isLoose hadBlankLineAfter
-      Paragraph[4, 36]
+      Paragraph[4, 36] isTrailingBlankLine
         Text[4, 15] chars:[4, 15, "A par … graph"]
         SoftLineBreak[15, 16]
         Text[20, 35] chars:[20, 35, "with  … ines."]
@@ -4935,7 +4935,7 @@ put under the list item:
 Document[0, 12]
   BulletList[0, 6] isTight
     BulletListItem[0, 6] open:[0, 1, "-"] isTight hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "one"]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "two"]
@@ -4957,7 +4957,7 @@ Document[0, 12]
 Document[0, 13]
   BulletList[0, 13] isLoose
     BulletListItem[0, 13] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "one"]
       Paragraph[9, 13]
         Text[9, 12] chars:[9, 12, "two"]
@@ -4978,7 +4978,7 @@ Document[0, 13]
 Document[0, 20]
   BulletList[1, 10] isTight
     BulletListItem[1, 10] open:[1, 2, "-"] isTight hadBlankLineAfter
-      Paragraph[6, 10]
+      Paragraph[6, 10] isTrailingBlankLine
         Text[6, 9] chars:[6, 9, "one"]
   IndentedCodeBlock[15, 20]
 ````````````````````````````````
@@ -4999,7 +4999,7 @@ Document[0, 20]
 Document[0, 21]
   BulletList[1, 21] isLoose
     BulletListItem[1, 21] open:[1, 2, "-"] isLoose hadBlankLineAfter
-      Paragraph[6, 10]
+      Paragraph[6, 10] isTrailingBlankLine
         Text[6, 9] chars:[6, 9, "one"]
       Paragraph[17, 21]
         Text[17, 20] chars:[17, 20, "two"]
@@ -5035,7 +5035,7 @@ Document[0, 29]
     BlockQuote[5, 29] marker:[5, 6, ">"]
       OrderedList[7, 29] isLoose delimiter:'.'
         OrderedListItem[7, 29] open:[7, 9, "1."] isLoose hadBlankLineAfter
-          Paragraph[11, 15]
+          Paragraph[11, 15] isTrailingBlankLine
             Text[11, 14] chars:[11, 14, "one"]
           Paragraph[25, 29]
             Text[25, 28] chars:[25, 28, "two"]
@@ -5070,7 +5070,7 @@ Document[0, 22]
     BlockQuote[1, 22] marker:[1, 2, ">"]
       BulletList[2, 8] isTight
         BulletListItem[2, 8] open:[2, 3, "-"] isTight hadBlankLineAfter
-          Paragraph[4, 8]
+          Paragraph[4, 8] isTrailingBlankLine
             Text[4, 7] chars:[4, 7, "one"]
       Paragraph[18, 22]
         Text[18, 21] chars:[18, 21, "two"]
@@ -5089,7 +5089,7 @@ any following content, so these are not list items:
 <p>2.two</p>
 .
 Document[0, 12]
-  Paragraph[0, 5]
+  Paragraph[0, 5] isTrailingBlankLine
     Text[0, 4] chars:[0, 4, "-one"]
   Paragraph[6, 12]
     Text[6, 11] chars:[6, 11, "2.two"]
@@ -5115,7 +5115,7 @@ one blank line.
 Document[0, 14]
   BulletList[0, 14] isLoose
     BulletListItem[0, 14] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "foo"]
       Paragraph[10, 14]
         Text[10, 13] chars:[10, 13, "bar"]
@@ -5150,10 +5150,10 @@ A list item may contain any kind of block:
 Document[0, 53]
   OrderedList[0, 53] isLoose delimiter:'.'
     OrderedListItem[0, 53] open:[0, 2, "1."] isLoose hadBlankLineAfter
-      Paragraph[4, 8]
+      Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
       FencedCodeBlock[13, 32] open:[13, 16, "```"] content:[21, 25] lines[1] close:[29, 32, "```"]
-      Paragraph[38, 42]
+      Paragraph[38, 42] isTrailingBlankLine
         Text[38, 41] chars:[38, 41, "baz"]
       BlockQuote[47, 53] marker:[47, 48, ">"]
         Paragraph[49, 53]
@@ -5186,7 +5186,7 @@ baz
 Document[0, 29]
   BulletList[0, 29] isLoose
     BulletListItem[0, 29] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "Foo"]
       IndentedCodeBlock[13, 29]
 ````````````````````````````````
@@ -5297,7 +5297,7 @@ In the following case that is 6 spaces:
 Document[0, 17]
   BulletList[0, 17] isLoose
     BulletListItem[0, 17] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "foo"]
       IndentedCodeBlock[13, 17]
 ````````````````````````````````
@@ -5321,7 +5321,7 @@ And in this case it is 11 spaces:
 Document[0, 27]
   OrderedList[2, 27] isLoose start:10 delimiter:'.'
     OrderedListItem[2, 27] open:[2, 5, "10."] isLoose hadBlankLineAfter
-      Paragraph[7, 11]
+      Paragraph[7, 11] isTrailingBlankLine
         Text[7, 10] chars:[7, 10, "foo"]
       IndentedCodeBlock[23, 27]
 ````````````````````````````````
@@ -5346,7 +5346,7 @@ paragraph
 .
 Document[0, 44]
   IndentedCodeBlock[4, 18]
-  Paragraph[19, 29]
+  Paragraph[19, 29] isTrailingBlankLine
     Text[19, 28] chars:[19, 28, "paragraph"]
   IndentedCodeBlock[34, 44]
 ````````````````````````````````
@@ -5373,7 +5373,7 @@ Document[0, 53]
   OrderedList[0, 53] isLoose delimiter:'.'
     OrderedListItem[0, 53] open:[0, 2, "1."] isLoose hadBlankLineAfter
       IndentedCodeBlock[7, 21]
-      Paragraph[25, 35]
+      Paragraph[25, 35] isTrailingBlankLine
         Text[25, 34] chars:[25, 34, "paragraph"]
       IndentedCodeBlock[43, 53]
 ````````````````````````````````
@@ -5403,7 +5403,7 @@ Document[0, 54]
   OrderedList[0, 54] isLoose delimiter:'.'
     OrderedListItem[0, 54] open:[0, 2, "1."] isLoose hadBlankLineAfter
       IndentedCodeBlock[7, 22]
-      Paragraph[26, 36]
+      Paragraph[26, 36] isTrailingBlankLine
         Text[26, 35] chars:[26, 35, "paragraph"]
       IndentedCodeBlock[44, 54]
 ````````````````````````````````
@@ -5426,7 +5426,7 @@ bar
 <p>bar</p>
 .
 Document[0, 12]
-  Paragraph[3, 7]
+  Paragraph[3, 7] isTrailingBlankLine
     Text[3, 6] chars:[3, 6, "foo"]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "bar"]
@@ -5446,7 +5446,7 @@ Document[0, 12]
 Document[0, 16]
   BulletList[0, 9] isTight
     BulletListItem[0, 9] open:[0, 1, "-"] isTight hadBlankLineAfter
-      Paragraph[5, 9]
+      Paragraph[5, 9] isTrailingBlankLine
         Text[5, 8] chars:[5, 8, "foo"]
   Paragraph[12, 16]
     Text[12, 15] chars:[12, 15, "bar"]
@@ -5473,7 +5473,7 @@ the above case:
 Document[0, 15]
   BulletList[0, 15] isLoose
     BulletListItem[0, 15] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[3, 7]
+      Paragraph[3, 7] isTrailingBlankLine
         Text[3, 6] chars:[3, 6, "foo"]
       Paragraph[11, 15]
         Text[11, 14] chars:[11, 14, "bar"]
@@ -5700,7 +5700,7 @@ with two lines.</p>
 Document[0, 85]
   OrderedList[1, 85] isLoose delimiter:'.'
     OrderedListItem[1, 85] open:[1, 3, "1."] isLoose hadBlankLineAfter
-      Paragraph[5, 38]
+      Paragraph[5, 38] isTrailingBlankLine
         Text[5, 16] chars:[5, 16, "A par … graph"]
         SoftLineBreak[16, 17]
         Text[22, 37] chars:[22, 37, "with  … ines."]
@@ -5736,7 +5736,7 @@ with two lines.</p>
 Document[0, 89]
   OrderedList[2, 89] isLoose delimiter:'.'
     OrderedListItem[2, 89] open:[2, 4, "1."] isLoose hadBlankLineAfter
-      Paragraph[6, 40]
+      Paragraph[6, 40] isTrailingBlankLine
         Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
         Text[24, 39] chars:[24, 39, "with  … ines."]
@@ -5772,7 +5772,7 @@ with two lines.</p>
 Document[0, 93]
   OrderedList[3, 93] isLoose delimiter:'.'
     OrderedListItem[3, 93] open:[3, 5, "1."] isLoose hadBlankLineAfter
-      Paragraph[7, 42]
+      Paragraph[7, 42] isTrailingBlankLine
         Text[7, 18] chars:[7, 18, "A par … graph"]
         SoftLineBreak[18, 19]
         Text[26, 41] chars:[26, 41, "with  … ines."]
@@ -5840,7 +5840,7 @@ with two lines.</p>
 Document[0, 83]
   OrderedList[2, 83] isLoose delimiter:'.'
     OrderedListItem[2, 83] open:[2, 4, "1."] isLoose hadBlankLineAfter
-      Paragraph[6, 34]
+      Paragraph[6, 34] isTrailingBlankLine
         Text[6, 17] chars:[6, 17, "A par … graph"]
         SoftLineBreak[17, 18]
         Text[18, 33] chars:[18, 33, "with  … ines."]
@@ -6573,10 +6573,10 @@ There can be any number of blank lines between items:
 Document[0, 21]
   BulletList[0, 21] isLoose
     BulletListItem[0, 6] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[2, 6]
+      Paragraph[2, 6] isTrailingBlankLine
         Text[2, 5] chars:[2, 5, "foo"]
     BulletListItem[7, 13] open:[7, 8, "-"] isLoose hadBlankLineAfter
-      Paragraph[9, 13]
+      Paragraph[9, 13] isTrailingBlankLine
         Text[9, 12] chars:[9, 12, "bar"]
     BulletListItem[15, 21] open:[15, 16, "-"] isLoose
       Paragraph[17, 21]
@@ -6618,7 +6618,7 @@ Document[0, 36]
             Text[10, 13] chars:[10, 13, "bar"]
           BulletList[18, 36] isLoose
             BulletListItem[18, 36] open:[18, 19, "-"] isLoose hadBlankLineAfter
-              Paragraph[20, 24]
+              Paragraph[20, 24] isTrailingBlankLine
                 Text[20, 23] chars:[20, 23, "baz"]
               Paragraph[32, 36]
                 Text[32, 35] chars:[32, 35, "bim"]
@@ -6655,7 +6655,7 @@ Document[0, 35]
       Paragraph[2, 6]
         Text[2, 5] chars:[2, 5, "foo"]
     BulletListItem[6, 12] open:[6, 7, "-"] isTight hadBlankLineAfter
-      Paragraph[8, 12]
+      Paragraph[8, 12] isTrailingBlankLine
         Text[8, 11] chars:[8, 11, "bar"]
   HtmlCommentBlock[13, 22]
   BulletList[23, 35] isTight
@@ -6695,12 +6695,12 @@ Document[0, 35]
 Document[0, 50]
   BulletList[0, 30] isLoose
     BulletListItem[0, 21] open:[0, 1, "-"] isLoose hadBlankLineAfter
-      Paragraph[4, 8]
+      Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
-      Paragraph[13, 21]
+      Paragraph[13, 21] isTrailingBlankLine
         Text[13, 20] chars:[13, 20, "notcode"]
     BulletListItem[22, 30] open:[22, 23, "-"] isLoose hadBlankLineAfter
-      Paragraph[26, 30]
+      Paragraph[26, 30] isTrailingBlankLine
         Text[26, 29] chars:[26, 29, "foo"]
   HtmlCommentBlock[31, 40]
   IndentedCodeBlock[45, 50]
@@ -6789,10 +6789,10 @@ Document[0, 52]
 Document[0, 23]
   OrderedList[0, 23] isLoose delimiter:'.'
     OrderedListItem[0, 5] open:[0, 2, "1."] isLoose hadBlankLineAfter
-      Paragraph[3, 5]
+      Paragraph[3, 5] isTrailingBlankLine
         Text[3, 4] chars:[3, 4, "a"]
     OrderedListItem[8, 13] open:[8, 10, "2."] isLoose hadBlankLineAfter
-      Paragraph[11, 13]
+      Paragraph[11, 13] isTrailingBlankLine
         Text[11, 12] chars:[11, 12, "b"]
     OrderedListItem[18, 23] open:[18, 20, "3."] isLoose
       Paragraph[21, 23]
@@ -6827,7 +6827,7 @@ Document[0, 13]
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
     BulletListItem[4, 8] open:[4, 5, "-"] isLoose hadBlankLineAfter
-      Paragraph[6, 8]
+      Paragraph[6, 8] isTrailingBlankLine
         Text[6, 7] chars:[6, 7, "b"]
     BulletListItem[9, 13] open:[9, 10, "-"] isLoose
       Paragraph[11, 13]
@@ -6895,7 +6895,7 @@ Document[0, 17]
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
     BulletListItem[4, 13] open:[4, 5, "-"] isLoose hadBlankLineAfter
-      Paragraph[6, 8]
+      Paragraph[6, 8] isTrailingBlankLine
         Text[6, 7] chars:[6, 7, "b"]
       Paragraph[11, 13]
         Text[11, 12] chars:[11, 12, "c"]
@@ -6930,7 +6930,7 @@ Document[0, 27]
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
     BulletListItem[4, 23] open:[4, 5, "-"] isLoose hadBlankLineAfter
-      Paragraph[6, 8]
+      Paragraph[6, 8] isTrailingBlankLine
         Text[6, 7] chars:[6, 7, "b"]
       Reference[11, 22] refOpen:[11, 12, "["] ref:[12, 15, "ref"] refClose:[15, 17, "]:"] url:[18, 22, "/url"]
     BulletListItem[23, 27] open:[23, 24, "-"] isLoose
@@ -7004,7 +7004,7 @@ Document[0, 21]
         Text[2, 3] chars:[2, 3, "a"]
       BulletList[6, 17] isLoose
         BulletListItem[6, 17] open:[6, 7, "-"] isLoose hadBlankLineAfter
-          Paragraph[8, 10]
+          Paragraph[8, 10] isTrailingBlankLine
             Text[8, 9] chars:[8, 9, "b"]
           Paragraph[15, 17]
             Text[15, 16] chars:[15, 16, "c"]
@@ -7038,7 +7038,7 @@ Document[0, 18]
       Paragraph[2, 4]
         Text[2, 3] chars:[2, 3, "a"]
       BlockQuote[6, 10] marker:[6, 7, ">"]
-        Paragraph[8, 10]
+        Paragraph[8, 10] isTrailingBlankLine
           Text[8, 9] chars:[8, 9, "b"]
     BulletListItem[14, 18] open:[14, 15, "*"] isTight
       Paragraph[16, 18]
@@ -7176,7 +7176,7 @@ Document[0, 21]
         Text[2, 5] chars:[2, 5, "foo"]
       BulletList[8, 14] isTight
         BulletListItem[8, 14] open:[8, 9, "*"] isTight hadBlankLineAfter
-          Paragraph[10, 14]
+          Paragraph[10, 14] isTrailingBlankLine
             Text[10, 13] chars:[10, 13, "bar"]
       Paragraph[17, 21]
         Text[17, 20] chars:[17, 20, "baz"]
@@ -7219,7 +7219,7 @@ Document[0, 33]
           Paragraph[8, 10]
             Text[8, 9] chars:[8, 9, "b"]
         BulletListItem[12, 16] open:[12, 13, "-"] isTight hadBlankLineAfter
-          Paragraph[14, 16]
+          Paragraph[14, 16] isTrailingBlankLine
             Text[14, 15] chars:[14, 15, "c"]
     BulletListItem[17, 33] open:[17, 18, "-"] isLoose
       Paragraph[19, 21]
@@ -7440,7 +7440,7 @@ Document[0, 24]
 <p><a href="/bar*" title="ti*tle">foo</a></p>
 .
 Document[0, 31]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[7, 30] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 20, "/bar\*"] titleOpen:[21, 22, "\""] title:[22, 29, "ti\*tle"] titleClose:[29, 30, "\""]
@@ -7638,7 +7638,7 @@ Document[0, 38]
 <p><a href="/f%C3%B6%C3%B6" title="föö">foo</a></p>
 .
 Document[0, 45]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[7, 44] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 28, "/f&ouml;&ouml;"] titleOpen:[29, 30, "\""] title:[30, 43, "f&ouml;&ouml;"] titleClose:[43, 44, "\""]
@@ -10281,10 +10281,10 @@ A link can contain fragment identifiers and queries:
 <p><a href="http://example.com?foo=3#frag">link</a></p>
 .
 Document[0, 94]
-  Paragraph[0, 18]
+  Paragraph[0, 18] isTrailingBlankLine
     Link[0, 17] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 16, "#fragment"] pageRef:[7, 7] anchorMarker:[7, 8, "#"] anchorRef:[8, 16, "fragment"] linkClose:[16, 17, ")"]
       Text[1, 5] chars:[1, 5, "link"]
-  Paragraph[19, 55]
+  Paragraph[19, 55] isTrailingBlankLine
     Link[19, 54] textOpen:[19, 20, "["] text:[20, 24, "link"] textClose:[24, 25, "]"] linkOpen:[25, 26, "("] url:[26, 53, "http://example.com#fragment"] pageRef:[26, 44, "http://example.com"] anchorMarker:[44, 45, "#"] anchorRef:[45, 53, "fragment"] linkClose:[53, 54, ")"]
       Text[20, 24] chars:[20, 24, "link"]
   Paragraph[56, 94]
@@ -10730,7 +10730,7 @@ Here is a simple example:
 <p><a href="/url" title="title">foo</a></p>
 .
 Document[0, 32]
-  Paragraph[0, 11]
+  Paragraph[0, 11] isTrailingBlankLine
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] url:[19, 23, "/url"] titleOpen:[24, 25, "\""] title:[25, 30, "title"] titleClose:[30, 31, "\""]
@@ -10751,7 +10751,7 @@ unless they are escaped:
 <p><a href="/uri">link [foo [bar]]</a></p>
 .
 Document[0, 37]
-  Paragraph[0, 24]
+  Paragraph[0, 24] isTrailingBlankLine
     LinkRef[0, 23] textOpen:[0, 1, "["] text:[1, 17, "link [foo [bar]]"] textClose:[17, 18, "]"] referenceOpen:[18, 19, "["] reference:[19, 22, "ref"] referenceClose:[22, 23, "]"]
       Text[1, 17] chars:[1, 17, "link  … bar]]"]
   Reference[25, 36] refOpen:[25, 26, "["] ref:[26, 29, "ref"] refClose:[29, 31, "]:"] url:[32, 36, "/uri"]
@@ -10766,7 +10766,7 @@ Document[0, 37]
 <p><a href="/uri">link [bar</a></p>
 .
 Document[0, 31]
-  Paragraph[0, 18]
+  Paragraph[0, 18] isTrailingBlankLine
     LinkRef[0, 17] textOpen:[0, 1, "["] text:[1, 11, "link \[bar"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 16, "ref"] referenceClose:[16, 17, "]"]
       Text[1, 11] chars:[1, 11, "link \[bar"]
   Reference[19, 30] refOpen:[19, 20, "["] ref:[20, 23, "ref"] refClose:[23, 25, "]:"] url:[26, 30, "/uri"]
@@ -10783,7 +10783,7 @@ The link text may contain inline content:
 <p><a href="/uri">link <em>foo <strong>bar</strong> <code>#</code></em></a></p>
 .
 Document[0, 43]
-  Paragraph[0, 30]
+  Paragraph[0, 30] isTrailingBlankLine
     LinkRef[0, 29] textOpen:[0, 1, "["] text:[1, 23, "link *foo **bar** `#`*"] textClose:[23, 24, "]"] referenceOpen:[24, 25, "["] reference:[25, 28, "ref"] referenceClose:[28, 29, "]"]
       Text[1, 6] chars:[1, 6, "link "]
       Emphasis[6, 23] textOpen:[6, 7, "*"] text:[7, 22, "foo **bar** `#`"] textClose:[22, 23, "*"]
@@ -10804,7 +10804,7 @@ Document[0, 43]
 <p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
 .
 Document[0, 38]
-  Paragraph[0, 25]
+  Paragraph[0, 25] isTrailingBlankLine
     LinkRef[0, 24] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 23, "ref"] referenceClose:[23, 24, "]"]
       Image[1, 18] textOpen:[1, 3, "!["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 17, "moon.jpg"] pageRef:[9, 17, "moon.jpg"] linkClose:[17, 18, ")"]
         Text[3, 7] chars:[3, 7, "moon"]
@@ -10822,7 +10822,7 @@ However, links may not contain other links, at any level of nesting.
 <p>[foo <a href="/uri">bar</a>]<a href="/uri">ref</a></p>
 .
 Document[0, 36]
-  Paragraph[0, 23]
+  Paragraph[0, 23] isTrailingBlankLine
     Text[0, 5] chars:[0, 5, "[foo "]
     Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -10841,7 +10841,7 @@ Document[0, 36]
 <p>[foo <em>bar <a href="/uri">baz</a></em>]<a href="/uri">ref</a></p>
 .
 Document[0, 41]
-  Paragraph[0, 28]
+  Paragraph[0, 28] isTrailingBlankLine
     Text[0, 5] chars:[0, 5, "[foo "]
     Emphasis[5, 21] textOpen:[5, 6, "*"] text:[6, 20, "bar [baz][ref]"] textClose:[20, 21, "*"]
       Text[6, 10] chars:[6, 10, "bar "]
@@ -10868,7 +10868,7 @@ emphasis grouping:
 <p>*<a href="/uri">foo*</a></p>
 .
 Document[0, 26]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     Text[0, 1] chars:[0, 1, "*"]
     LinkRef[1, 12] textOpen:[1, 2, "["] text:[2, 6, "foo*"] textClose:[6, 7, "]"] referenceOpen:[7, 8, "["] reference:[8, 11, "ref"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo*"]
@@ -10884,7 +10884,7 @@ Document[0, 26]
 <p><a href="/uri">foo *bar</a></p>
 .
 Document[0, 29]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     LinkRef[0, 15] textOpen:[0, 1, "["] text:[1, 9, "foo *bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "ref"] referenceClose:[14, 15, "]"]
       Text[1, 9] chars:[1, 9, "foo *bar"]
   Reference[17, 28] refOpen:[17, 18, "["] ref:[18, 21, "ref"] refClose:[21, 23, "]:"] url:[24, 28, "/uri"]
@@ -10902,7 +10902,7 @@ and autolinks over link grouping:
 <p>[foo <bar attr="][ref]"></p>
 .
 Document[0, 38]
-  Paragraph[0, 25]
+  Paragraph[0, 25] isTrailingBlankLine
     Text[0, 5] chars:[0, 5, "[foo "]
     HtmlInline[5, 24] chars:[5, 24, "<bar  … ef]\">"]
   Reference[26, 37] refOpen:[26, 27, "["] ref:[27, 30, "ref"] refClose:[30, 32, "]:"] url:[33, 37, "/uri"]
@@ -10917,7 +10917,7 @@ Document[0, 38]
 <p>[foo<code>][ref]</code></p>
 .
 Document[0, 26]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     Text[0, 4] chars:[0, 4, "[foo"]
     Code[4, 12] textOpen:[4, 5, "`"] text:[5, 11, "][ref]"] textClose:[11, 12, "`"]
   Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] url:[21, 25, "/uri"]
@@ -10932,7 +10932,7 @@ Document[0, 26]
 <p>[foo<a href="http://example.com/?search=%5D%5Bref%5D">http://example.com/?search=][ref]</a></p>
 .
 Document[0, 53]
-  Paragraph[0, 40]
+  Paragraph[0, 40] isTrailingBlankLine
     Text[0, 4] chars:[0, 4, "[foo"]
     AutoLink[4, 39] textOpen:[4, 5, "<"] text:[5, 38, "http://example.com/?search=][ref]"] textClose:[38, 39, ">"]
   Reference[41, 52] refOpen:[41, 42, "["] ref:[42, 45, "ref"] refClose:[45, 47, "]:"] url:[48, 52, "/uri"]
@@ -10949,7 +10949,7 @@ Matching is case-insensitive:
 <p><a href="/url" title="title">foo</a></p>
 .
 Document[0, 32]
-  Paragraph[0, 11]
+  Paragraph[0, 11] isTrailingBlankLine
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "BaR"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[12, 31] refOpen:[12, 13, "["] ref:[13, 16, "bar"] refClose:[16, 18, "]:"] url:[19, 23, "/url"] titleOpen:[24, 25, "\""] title:[25, 30, "title"] titleClose:[30, 31, "\""]
@@ -10966,7 +10966,7 @@ Unicode case fold is used:
 <p><a href="/url">Толпой</a> is a Russian word.</p>
 .
 Document[0, 52]
-  Paragraph[0, 36]
+  Paragraph[0, 36] isTrailingBlankLine
     LinkRef[0, 16] textOpen:[0, 1, "["] text:[1, 7, "Толпой"] textClose:[7, 8, "]"] referenceOpen:[8, 9, "["] reference:[9, 15, "Толпой"] referenceClose:[15, 16, "]"]
       Text[1, 7] chars:[1, 7, "Толпой"]
     Text[16, 35] chars:[16, 35, " is a … word."]
@@ -11004,7 +11004,7 @@ No [whitespace] is allowed between the [link text] and the
 <p>[foo] <a href="/url" title="title">bar</a></p>
 .
 Document[0, 33]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 6] chars:[5, 6, " "]
@@ -11024,7 +11024,7 @@ Document[0, 33]
 <a href="/url" title="title">bar</a></p>
 .
 Document[0, 33]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     SoftLineBreak[5, 6]
@@ -11094,7 +11094,7 @@ labels define equivalent inline content:
 <p>[bar][foo!]</p>
 .
 Document[0, 27]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     LinkRef[0, 12] textOpen:[0, 1, "["] text:[1, 4, "bar"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 11, "foo\!"] referenceClose:[11, 12, "]"]
       Text[1, 4] chars:[1, 4, "bar"]
   Reference[14, 26] refOpen:[14, 15, "["] ref:[15, 19, "foo!"] refClose:[19, 21, "]:"] url:[22, 26, "/url"]
@@ -11113,7 +11113,7 @@ backslash-escaped:
 <p>[ref[]: /uri</p>
 .
 Document[0, 26]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, "[ref"]
@@ -11134,7 +11134,7 @@ Document[0, 26]
 <p>[ref[bar]]: /uri</p>
 .
 Document[0, 34]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, "[ref"]
@@ -11158,7 +11158,7 @@ Document[0, 34]
 <p>[[[foo]]]: /url</p>
 .
 Document[0, 27]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     Text[0, 2] chars:[0, 2, "[["]
     LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
@@ -11179,7 +11179,7 @@ Document[0, 27]
 <p><a href="/uri">foo</a></p>
 .
 Document[0, 28]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     LinkRef[0, 12] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 11, "ref\["] referenceClose:[11, 12, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[14, 27] refOpen:[14, 15, "["] ref:[15, 20, "ref\["] refClose:[20, 22, "]:"] url:[23, 27, "/uri"]
@@ -11214,7 +11214,7 @@ A [link label] must contain at least one [non-whitespace character]:
 <p>[]: /uri</p>
 .
 Document[0, 13]
-  Paragraph[0, 3]
+  Paragraph[0, 3] isTrailingBlankLine
     LinkRef[0, 2] referenceOpen:[0, 1, "["] reference:[1, 1] referenceClose:[1, 2, "]"]
   Paragraph[4, 13]
     LinkRef[4, 6] referenceOpen:[4, 5, "["] reference:[5, 5] referenceClose:[5, 6, "]"]
@@ -11235,7 +11235,7 @@ Document[0, 13]
 ]: /uri</p>
 .
 Document[0, 17]
-  Paragraph[0, 5]
+  Paragraph[0, 5] isTrailingBlankLine
     LinkRef[0, 4] referenceOpen:[0, 1, "["] reference:[3, 3] referenceClose:[3, 4, "]"]
       SoftLineBreak[1, 2]
   Paragraph[6, 17]
@@ -11262,7 +11262,7 @@ provided by the matching reference link definition.  Thus,
 <p><a href="/url" title="title">foo</a></p>
 .
 Document[0, 29]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 7] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"] titleOpen:[21, 22, "\""] title:[22, 27, "title"] titleClose:[27, 28, "\""]
@@ -11277,7 +11277,7 @@ Document[0, 29]
 <p><a href="/url" title="title"><em>foo</em> bar</a></p>
 .
 Document[0, 41]
-  Paragraph[0, 14]
+  Paragraph[0, 14] isTrailingBlankLine
     LinkRef[0, 13] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"] textOpen:[11, 12, "["] textClose:[12, 13, "]"]
       Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
@@ -11296,7 +11296,7 @@ The link labels are case-insensitive:
 <p><a href="/url" title="title">Foo</a></p>
 .
 Document[0, 29]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 7] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
       Text[1, 4] chars:[1, 4, "Foo"]
   Reference[9, 28] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 20, "/url"] titleOpen:[21, 22, "\""] title:[22, 27, "title"] titleClose:[27, 28, "\""]
@@ -11316,7 +11316,7 @@ allowed between the two sets of brackets:
 []</p>
 .
 Document[0, 31]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     SoftLineBreak[6, 7]
@@ -11342,7 +11342,7 @@ Thus, `[foo]` is equivalent to `[foo][]`.
 <p><a href="/url" title="title">foo</a></p>
 .
 Document[0, 27]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 18, "/url"] titleOpen:[19, 20, "\""] title:[20, 25, "title"] titleClose:[25, 26, "\""]
@@ -11357,7 +11357,7 @@ Document[0, 27]
 <p><a href="/url" title="title"><em>foo</em> bar</a></p>
 .
 Document[0, 39]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     LinkRef[0, 11] referenceOpen:[0, 1, "["] reference:[1, 10, "*foo* bar"] referenceClose:[10, 11, "]"]
       Emphasis[1, 6] textOpen:[1, 2, "*"] text:[2, 5, "foo"] textClose:[5, 6, "*"]
         Text[2, 5] chars:[2, 5, "foo"]
@@ -11374,7 +11374,7 @@ Document[0, 39]
 <p>[<a href="/url" title="title"><em>foo</em> bar</a>]</p>
 .
 Document[0, 41]
-  Paragraph[0, 14]
+  Paragraph[0, 14] isTrailingBlankLine
     Text[0, 1] chars:[0, 1, "["]
     LinkRef[1, 12] referenceOpen:[1, 2, "["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
@@ -11393,7 +11393,7 @@ Document[0, 41]
 <p>[[bar <a href="/url">foo</a></p>
 .
 Document[0, 25]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "[[bar "]
     LinkRef[6, 11] referenceOpen:[6, 7, "["] reference:[7, 10, "foo"] referenceClose:[10, 11, "]"]
       Text[7, 10] chars:[7, 10, "foo"]
@@ -11411,7 +11411,7 @@ The link labels are case-insensitive:
 <p><a href="/url" title="title">Foo</a></p>
 .
 Document[0, 27]
-  Paragraph[0, 6]
+  Paragraph[0, 6] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "Foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "Foo"]
   Reference[7, 26] refOpen:[7, 8, "["] ref:[8, 11, "foo"] refClose:[11, 13, "]:"] url:[14, 18, "/url"] titleOpen:[19, 20, "\""] title:[20, 25, "title"] titleClose:[25, 26, "\""]
@@ -11428,7 +11428,7 @@ A space after the link text should be preserved:
 <p><a href="/url">foo</a> bar</p>
 .
 Document[0, 23]
-  Paragraph[0, 10]
+  Paragraph[0, 10] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 9] chars:[5, 9, " bar"]
@@ -11447,7 +11447,7 @@ opening bracket to avoid links:
 <p>[foo]</p>
 .
 Document[0, 28]
-  Paragraph[0, 7]
+  Paragraph[0, 7] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "\[foo]"]
   Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
 ````````````````````````````````
@@ -11484,7 +11484,7 @@ references:
 <p><a href="/url2">foo</a></p>
 .
 Document[0, 38]
-  Paragraph[0, 11]
+  Paragraph[0, 11] isTrailingBlankLine
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[12, 24] refOpen:[12, 13, "["] ref:[13, 16, "foo"] refClose:[16, 18, "]:"] url:[19, 24, "/url1"]
@@ -11500,7 +11500,7 @@ Document[0, 38]
 <p><a href="/url1">foo</a></p>
 .
 Document[0, 22]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 7] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"] textOpen:[5, 6, "["] textClose:[6, 7, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
@@ -11517,7 +11517,7 @@ Inline links also take precedence:
 <p><a href="">foo</a></p>
 .
 Document[0, 22]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Link[0, 7] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] linkOpen:[5, 6, "("] url:[6, 6] pageRef:[6, 6] linkClose:[6, 7, ")"]
       Text[1, 4] chars:[1, 4, "foo"]
   Reference[9, 21] refOpen:[9, 10, "["] ref:[10, 13, "foo"] refClose:[13, 15, "]:"] url:[16, 21, "/url1"]
@@ -11532,7 +11532,7 @@ Document[0, 22]
 <p><a href="/url1">foo</a>(not a link)</p>
 .
 Document[0, 32]
-  Paragraph[0, 18]
+  Paragraph[0, 18] isTrailingBlankLine
     LinkRef[0, 5] referenceOpen:[0, 1, "["] reference:[1, 4, "foo"] referenceClose:[4, 5, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     Text[5, 17] chars:[5, 17, "(not  … link)"]
@@ -11551,7 +11551,7 @@ In the following case `[bar][baz]` is parsed as a reference,
 <p>[foo]<a href="/url">bar</a></p>
 .
 Document[0, 29]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     Text[0, 5] chars:[0, 5, "[foo]"]
     LinkRef[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -11571,7 +11571,7 @@ Here, though, `[foo][bar]` is parsed as a reference, since
 <p><a href="/url2">foo</a><a href="/url1">baz</a></p>
 .
 Document[0, 43]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     LinkRef[0, 10] textOpen:[0, 1, "["] text:[1, 4, "foo"] textClose:[4, 5, "]"] referenceOpen:[5, 6, "["] reference:[6, 9, "bar"] referenceClose:[9, 10, "]"]
       Text[1, 4] chars:[1, 4, "foo"]
     LinkRef[10, 15] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
@@ -11593,7 +11593,7 @@ is followed by a link label (even though `[bar]` is not defined):
 <p>[foo]<a href="/url1">bar</a></p>
 .
 Document[0, 43]
-  Paragraph[0, 16]
+  Paragraph[0, 16] isTrailingBlankLine
     Text[0, 5] chars:[0, 5, "[foo]"]
     LinkRef[5, 15] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 14, "baz"] referenceClose:[14, 15, "]"]
       Text[6, 9] chars:[6, 9, "bar"]
@@ -11635,7 +11635,7 @@ Document[0, 21]
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
 Document[0, 55]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
@@ -11687,7 +11687,7 @@ content is rendered, without formatting.
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
 Document[0, 56]
-  Paragraph[0, 15]
+  Paragraph[0, 15] isTrailingBlankLine
     ImageRef[0, 14] referenceOpen:[0, 2, "!["] reference:[2, 11, "foo *bar*"] referenceClose:[11, 12, "]"] textOpen:[12, 13, "["] textClose:[13, 14, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
@@ -11704,7 +11704,7 @@ Document[0, 56]
 <p><img src="train.jpg" alt="foo bar" title="train &amp; tracks" /></p>
 .
 Document[0, 59]
-  Paragraph[0, 21]
+  Paragraph[0, 21] isTrailingBlankLine
     ImageRef[1, 20] textOpen:[1, 2, "["] text:[2, 11, "foo *bar*"] textClose:[11, 12, "]"] referenceOpen:[12, 13, "["] reference:[13, 19, "foobar"] referenceClose:[19, 20, "]"]
       Text[2, 6] chars:[2, 6, "foo "]
       Emphasis[6, 11] textOpen:[6, 7, "*"] text:[7, 10, "bar"] textClose:[10, 11, "*"]
@@ -11771,7 +11771,7 @@ Reference-style:
 <p><img src="/url" alt="foo" /></p>
 .
 Document[0, 25]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "bar"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
@@ -11786,7 +11786,7 @@ Document[0, 25]
 <p><img src="/url" alt="foo" /></p>
 .
 Document[0, 25]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     ImageRef[1, 11] textOpen:[1, 2, "["] text:[2, 5, "foo"] textClose:[5, 6, "]"] referenceOpen:[6, 7, "["] reference:[7, 10, "bar"] referenceClose:[10, 11, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[13, 24] refOpen:[13, 14, "["] ref:[14, 17, "BAR"] refClose:[17, 19, "]:"] url:[20, 24, "/url"]
@@ -11803,7 +11803,7 @@ Collapsed:
 <p><img src="/url" alt="foo" title="title" /></p>
 .
 Document[0, 30]
-  Paragraph[0, 9]
+  Paragraph[0, 9] isTrailingBlankLine
     ImageRef[0, 8] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"] textOpen:[6, 7, "["] textClose:[7, 8, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
@@ -11818,7 +11818,7 @@ Document[0, 30]
 <p><img src="/url" alt="foo bar" title="title" /></p>
 .
 Document[0, 42]
-  Paragraph[0, 15]
+  Paragraph[0, 15] isTrailingBlankLine
     ImageRef[0, 14] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"] textOpen:[12, 13, "["] textClose:[13, 14, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
@@ -11837,7 +11837,7 @@ The labels are case-insensitive:
 <p><img src="/url" alt="Foo" title="title" /></p>
 .
 Document[0, 30]
-  Paragraph[0, 9]
+  Paragraph[0, 9] isTrailingBlankLine
     ImageRef[0, 8] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"] textOpen:[6, 7, "["] textClose:[7, 8, "]"]
       Text[2, 5] chars:[2, 5, "Foo"]
   Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
@@ -11857,7 +11857,7 @@ between the two sets of brackets:
 []</p>
 .
 Document[0, 32]
-  Paragraph[0, 11]
+  Paragraph[0, 11] isTrailingBlankLine
     ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
     SoftLineBreak[7, 8]
@@ -11876,7 +11876,7 @@ Shortcut:
 <p><img src="/url" alt="foo" title="title" /></p>
 .
 Document[0, 28]
-  Paragraph[0, 7]
+  Paragraph[0, 7] isTrailingBlankLine
     ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "foo"]
   Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
@@ -11891,7 +11891,7 @@ Document[0, 28]
 <p><img src="/url" alt="foo bar" title="title" /></p>
 .
 Document[0, 40]
-  Paragraph[0, 13]
+  Paragraph[0, 13] isTrailingBlankLine
     ImageRef[0, 12] referenceOpen:[0, 2, "!["] reference:[2, 11, "*foo* bar"] referenceClose:[11, 12, "]"]
       Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
         Text[3, 6] chars:[3, 6, "foo"]
@@ -11911,7 +11911,7 @@ Note that link labels cannot contain unescaped brackets:
 <p>[[foo]]: /url &quot;title&quot;</p>
 .
 Document[0, 32]
-  Paragraph[0, 9]
+  Paragraph[0, 9] isTrailingBlankLine
     Text[0, 2] chars:[0, 2, "!["]
     LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
@@ -11934,7 +11934,7 @@ The link labels are case-insensitive:
 <p><img src="/url" alt="Foo" title="title" /></p>
 .
 Document[0, 28]
-  Paragraph[0, 7]
+  Paragraph[0, 7] isTrailingBlankLine
     ImageRef[0, 6] referenceOpen:[0, 2, "!["] reference:[2, 5, "Foo"] referenceClose:[5, 6, "]"]
       Text[2, 5] chars:[2, 5, "Foo"]
   Reference[8, 27] refOpen:[8, 9, "["] ref:[9, 12, "foo"] refClose:[12, 14, "]:"] url:[15, 19, "/url"] titleOpen:[20, 21, "\""] title:[21, 26, "title"] titleClose:[26, 27, "\""]
@@ -11952,7 +11952,7 @@ opening `!` and `[`:
 <p>![foo]</p>
 .
 Document[0, 30]
-  Paragraph[0, 9]
+  Paragraph[0, 9] isTrailingBlankLine
     Text[0, 8] chars:[0, 8, "\!\[foo]"]
   Reference[10, 29] refOpen:[10, 11, "["] ref:[11, 14, "foo"] refClose:[14, 16, "]:"] url:[17, 21, "/url"] titleOpen:[22, 23, "\""] title:[23, 28, "title"] titleClose:[28, 29, "\""]
 ````````````````````````````````
@@ -11969,7 +11969,7 @@ If you want a link after a literal `!`, backslash-escape the
 <p>!<a href="/url" title="title">foo</a></p>
 .
 Document[0, 29]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     Text[0, 2] chars:[0, 2, "\!"]
     LinkRef[2, 7] referenceOpen:[2, 3, "["] reference:[3, 6, "foo"] referenceClose:[6, 7, "]"]
       Text[3, 6] chars:[3, 6, "foo"]
@@ -12521,7 +12521,7 @@ foo <!-- foo--->
 <p>foo &lt;!-- foo---&gt;</p>
 .
 Document[0, 36]
-  Paragraph[0, 18]
+  Paragraph[0, 18] isTrailingBlankLine
     Text[0, 17] chars:[0, 17, "foo < … o -->"]
   Paragraph[19, 36]
     Text[19, 35] chars:[19, 35, "foo < … o--->"]

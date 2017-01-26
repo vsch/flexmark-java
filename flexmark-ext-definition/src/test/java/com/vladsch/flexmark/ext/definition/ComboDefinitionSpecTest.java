@@ -20,6 +20,7 @@ public class ComboDefinitionSpecTest extends ComboSpecTestCase {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
+        optionsMap.put("blank-lines-in-ast", new MutableDataSet().set(Parser.BLANK_LINES_IN_AST, true));
         optionsMap.put("no-auto-loose", new MutableDataSet().set(Parser.LISTS_AUTO_LOOSE, false));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }

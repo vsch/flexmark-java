@@ -10,6 +10,7 @@ public class FormatterOptions {
 
     public final boolean setextHeaderEqualizeMarker;
     public final int formatFlags;
+    public final int maxBlankLines;
     public final int maxTrailingBlankLines;
     public final int minSetextMarkerLength;
     public final DiscretionaryText spaceAfterAtxMarker;
@@ -23,8 +24,8 @@ public class FormatterOptions {
     public final int fencedCodeMarkerLength;
     public final CodeFenceMarker fencedCodeMarkerType;
     public final boolean listAddBlankLineBefore;
-    public final boolean listAlignFirstLineText;
-    public final boolean listAlignChildBlocks;
+    //public final boolean listAlignFirstLineText;
+    //public final boolean listAlignChildBlocks;
     public final boolean listRenumberItems;
     public final ListBulletMarker listBulletMarker;
     public final ListNumberedMarker listNumberedMarker;
@@ -36,6 +37,7 @@ public class FormatterOptions {
 
         setextHeaderEqualizeMarker = Formatter.SETEXT_HEADER_EQUALIZE_MARKER.getFrom(options);
         formatFlags = Formatter.FORMAT_FLAGS.getFrom(options);
+        maxBlankLines = Formatter.MAX_BLANK_LINES.getFrom(options);
         maxTrailingBlankLines = Formatter.MAX_TRAILING_BLANK_LINES.getFrom(options);
         spaceAfterAtxMarker = Formatter.SPACE_AFTER_ATX_MARKER.getFrom(options);
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.getFrom(options);
@@ -49,8 +51,8 @@ public class FormatterOptions {
         fencedCodeMarkerLength = Formatter.FENCED_CODE_MARKER_LENGTH.getFrom(options);
         fencedCodeMarkerType = Formatter.FENCED_CODE_MARKER_TYPE.getFrom(options);
         listAddBlankLineBefore = Formatter.LIST_ADD_BLANK_LINE_BEFORE.getFrom(options);
-        listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.getFrom(options);
-        listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.getFrom(options);
+        //listAlignFirstLineText = Formatter.LIST_ALIGN_FIRST_LINE_TEXT.getFrom(options);
+        //listAlignChildBlocks = Formatter.LIST_ALIGN_CHILD_BLOCKS.getFrom(options);
         listRenumberItems = Formatter.LIST_RENUMBER_ITEMS.getFrom(options);
         listBulletMarker = Formatter.LIST_BULLET_MARKER.getFrom(options);
         listNumberedMarker = Formatter.LIST_NUMBERED_MARKER.getFrom(options);

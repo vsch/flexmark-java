@@ -122,29 +122,29 @@ Document[0, 9]
 <p><del>foo</del>~~~<del>bar</del></p>
 .
 Document[0, 111]
-  Paragraph[0, 12]
+  Paragraph[0, 12] isTrailingBlankLine
     Strikethrough[0, 11] textOpen:[0, 2, "~~"] text:[2, 9, "foo~bar"] textClose:[9, 11, "~~"]
       Text[2, 9] chars:[2, 9, "foo~bar"]
-  Paragraph[13, 26]
+  Paragraph[13, 26] isTrailingBlankLine
     Strikethrough[13, 20] textOpen:[13, 15, "~~"] text:[15, 18, "foo"] textClose:[18, 20, "~~"]
       Text[15, 18] chars:[15, 18, "foo"]
     Text[20, 25] chars:[20, 25, "bar~~"]
-  Paragraph[27, 41]
+  Paragraph[27, 41] isTrailingBlankLine
     Strikethrough[27, 34] textOpen:[27, 29, "~~"] text:[29, 32, "foo"] textClose:[32, 34, "~~"]
       Text[29, 32] chars:[29, 32, "foo"]
     Text[34, 40] chars:[34, 40, "~bar~~"]
-  Paragraph[42, 57]
+  Paragraph[42, 57] isTrailingBlankLine
     Strikethrough[42, 49] textOpen:[42, 44, "~~"] text:[44, 47, "foo"] textClose:[47, 49, "~~"]
       Text[44, 47] chars:[44, 47, "foo"]
     Strikethrough[49, 56] textOpen:[49, 51, "~~"] text:[51, 54, "bar"] textClose:[54, 56, "~~"]
       Text[51, 54] chars:[51, 54, "bar"]
-  Paragraph[58, 74]
+  Paragraph[58, 74] isTrailingBlankLine
     Strikethrough[58, 65] textOpen:[58, 60, "~~"] text:[60, 63, "foo"] textClose:[63, 65, "~~"]
       Text[60, 63] chars:[60, 63, "foo"]
     Text[65, 66] chars:[65, 66, "~"]
     Strikethrough[66, 73] textOpen:[66, 68, "~~"] text:[68, 71, "bar"] textClose:[71, 73, "~~"]
       Text[68, 71] chars:[68, 71, "bar"]
-  Paragraph[75, 92]
+  Paragraph[75, 92] isTrailingBlankLine
     Strikethrough[75, 82] textOpen:[75, 77, "~~"] text:[77, 80, "foo"] textClose:[80, 82, "~~"]
       Text[77, 80] chars:[77, 80, "foo"]
     Text[82, 84] chars:[82, 84, "~~"]

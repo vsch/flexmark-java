@@ -28,7 +28,7 @@ public class HeadingParser extends AbstractBlockParser {
             super(options);
 
             ATX_HEADING = Parser.HEADING_NO_ATX_SPACE.getFrom(options) ? Pattern.compile("^#{1,6}(?:[ \t]*|$)") : Parser.HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE.getFrom(options) ? Pattern.compile("^#{1,6}[ \t]+") : Pattern.compile("^#{1,6}(?:[ \t]+|$)");
-            ATX_TRAILING = Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
+            ATX_TRAILING = Parser.HEADING_NO_ATX_SPACE.getFrom(options) ? Pattern.compile("[ \t]*#+[ \t]*$") : Pattern.compile("(^| |\t)[ \t]*#+[ \t]*$");
 
             int minLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
             SETEXT_HEADING = minLength <= 1 ? Pattern.compile("^(?:=+|-+)[ \t]*$") : Pattern.compile("^(?:={" + minLength + ",}|-{" + minLength + ",})[ \t]*$");
@@ -64,7 +64,7 @@ public class HeadingParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
             set.add(BlockQuoteParser.Factory.class);
             return set;
             //return new HashSet<>(Arrays.asList(

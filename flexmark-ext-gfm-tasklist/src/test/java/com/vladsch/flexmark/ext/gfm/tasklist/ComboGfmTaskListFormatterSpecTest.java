@@ -18,6 +18,7 @@ public class ComboGfmTaskListFormatterSpecTest extends ComboSpecTestCase {
             //.set(FormattingRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+            .set(Parser.BLANK_LINES_IN_AST, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true)
             ;
 

@@ -110,6 +110,8 @@ public class HtmlRenderer implements IRender {
     });
 
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<>("RECHECK_UNDEFINED_REFERENCES", false);
+    public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<>("OBFUSCATE_EMAIL", false);
+    public static final DataKey<Boolean> OBFUSCATE_EMAIL_RANDOM = new DataKey<>("OBFUSCATE_EMAIL_RANDOM", true);
 
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}

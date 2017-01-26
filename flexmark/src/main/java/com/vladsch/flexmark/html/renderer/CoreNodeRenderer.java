@@ -29,6 +29,8 @@ public class CoreNodeRenderer implements NodeRenderer {
     public static final AttributablePart CODE_CONTENT = new AttributablePart("FENCED_CODE_CONTENT");
 
     private final ListOptions listOptions;
+    private final boolean obfuscateEmail;
+    private final boolean obfuscateEmailRandom;
     private ReferenceRepository referenceRepository;
     private boolean recheckUndefinedReferences;
 
@@ -36,6 +38,8 @@ public class CoreNodeRenderer implements NodeRenderer {
         this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = ListOptions.getFrom(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        this.obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.getFrom(options);
+        this.obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.getFrom(options);
     }
 
     @Override
@@ -550,11 +554,23 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.text(text);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
-            html.srcPos(node.getText()).attr("href", "mailto:" + resolvedLink.getUrl())
-                    .withAttr(resolvedLink)
-                    .tag("a")
-                    .text(text)
-                    .tag("/a");
+            if (obfuscateEmail) {
+                String url = Escaping.obfuscate("mailto:" + resolvedLink.getUrl(), obfuscateEmailRandom);
+                text = Escaping.obfuscate(text, true);
+
+                html.srcPos(node.getText()).attr("href", url)
+                        .withAttr(resolvedLink)
+                        .tag("a")
+                        .raw(text)
+                        .tag("/a");
+            } else {
+                String url = resolvedLink.getUrl();
+                html.srcPos(node.getText()).attr("href", "mailto:" + url)
+                        .withAttr(resolvedLink)
+                        .tag("a")
+                        .text(text)
+                        .tag("/a");
+            }
         }
     }
 

@@ -11,18 +11,15 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
+import com.vladsch.flexmark.util.sequence.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.vladsch.flexmark.formatter.options.DiscretionaryText.ADD;
 import static com.vladsch.flexmark.formatter.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
+@SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
 
@@ -30,12 +27,14 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     private final ListOptions listOptions;
     private ReferenceRepository referenceRepository;
     private boolean recheckUndefinedReferences;
+    private int blankLines;
 
     public CoreNodeFormatter(DataHolder options) {
         this.options = new FormatterOptions(options);
         this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = ListOptions.getFrom(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        blankLines = 0;
     }
 
     @Override
@@ -67,15 +66,15 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BlockQuote.class, new CustomNodeFormatter<BlockQuote>() {
+                new NodeFormattingHandler<>(BlankLine.class, new CustomNodeFormatter<BlankLine>() {
                     @Override
-                    public void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
+                    public void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BulletList.class, new CustomNodeFormatter<BulletList>() {
+                new NodeFormattingHandler<>(BlockQuote.class, new CustomNodeFormatter<BlockQuote>() {
                     @Override
-                    public void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
+                    public void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
@@ -187,6 +186,18 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
+                new NodeFormattingHandler<>(BulletList.class, new CustomNodeFormatter<BulletList>() {
+                    @Override
+                    public void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
+                        CoreNodeFormatter.this.render(node, context, markdown);
+                    }
+                }),
+                new NodeFormattingHandler<>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
+                    @Override
+                    public void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
+                        CoreNodeFormatter.this.render(node, context, markdown);
+                    }
+                }),
                 new NodeFormattingHandler<>(BulletListItem.class, new CustomNodeFormatter<BulletListItem>() {
                     @Override
                     public void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -202,12 +213,6 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
                 new NodeFormattingHandler<>(MailLink.class, new CustomNodeFormatter<MailLink>() {
                     @Override
                     public void render(MailLink node, NodeFormatterContext context, MarkdownWriter markdown) {
-                        CoreNodeFormatter.this.render(node, context, markdown);
-                    }
-                }),
-                new NodeFormattingHandler<>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
-                    @Override
-                    public void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
@@ -264,6 +269,14 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
         }
     }
 
+    private void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (!(node.getPrevious() == null || node.getPrevious() instanceof BlankLine)) {
+            blankLines = 0;
+        }
+        blankLines++;
+        if (blankLines <= options.maxBlankLines) markdown.blankLine(blankLines);
+    }
+
     private void render(Document node, NodeFormatterContext context, MarkdownWriter markdown) {
         // No rendering itself
         context.renderChildren(node);
@@ -302,6 +315,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
             Ref<Integer> ref = new Ref<>(markdown.offset());
             markdown.lastOffset(ref);
             context.renderChildren(node);
+            markdown.line();
             if (options.setextHeaderEqualizeMarker) {
                 markdown.repeat(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - ref.value, options.minSetextMarkerLength));
             } else {
@@ -368,7 +382,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
         CharSequence openingMarker = node.getOpeningMarker();
         CharSequence closingMarker = node.getClosingMarker();
         char openingMarkerChar = openingMarker.charAt(0);
-        char closingMarkerChar = closingMarker.charAt(0);
+        char closingMarkerChar = closingMarker.length() > 0 ? closingMarker.charAt(0) : '\0';
         int openingMarkerLen = openingMarker.length();
         int closingMarkerLen = closingMarker.length();
 
@@ -389,7 +403,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
         if (closingMarkerLen < options.fencedCodeMarkerLength) closingMarkerLen = options.fencedCodeMarkerLength;
 
         openingMarker = RepeatedCharSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
-        if (options.fencedCodeMatchClosingMarker) closingMarker = openingMarker;
+        if (options.fencedCodeMatchClosingMarker || closingMarkerChar == '\0') closingMarker = openingMarker;
         else closingMarker = RepeatedCharSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
 
         markdown.append(openingMarker);
@@ -398,7 +412,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
         markdown.line();
 
         markdown.openPreFormatted(true);
-        if (options.indentedCodeMinimizeIndent) {
+        if (options.fencedCodeMinimizeIndent) {
             List<BasedSequence> lines = node.getContentLines();
             int[] leadColumns = new int[lines.size()];
             int minSpaces = Integer.MAX_VALUE;
@@ -408,8 +422,16 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
                 minSpaces = Utils.min(minSpaces, leadColumns[i]);
                 i++;
             }
+            ArrayList<BasedSequence> trimmedLines = new ArrayList<>();
             if (minSpaces > 0) {
                 i = 0;
+                //StringBuilder out = new StringBuilder();
+                //for (BasedSequence line : lines) {
+                //    if (leadColumns[i] > minSpaces) out.append(RepeatedCharSequence.of(' ', leadColumns[i] - minSpaces));
+                //    out.append(line.trimStart());
+                //    i++;
+                //}
+                //markdown.append(out);
                 for (BasedSequence line : lines) {
                     if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
                     markdown.append(line.trimStart());
@@ -442,6 +464,13 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
             }
             if (minSpaces > 0) {
                 i = 0;
+                //StringBuilder out = new StringBuilder();
+                //for (BasedSequence line : lines) {
+                //    if (leadColumns[i] > minSpaces) out.append(RepeatedCharSequence.of(' ', leadColumns[i] - minSpaces));
+                //    out.append(line.trimStart());
+                //    i++;
+                //}
+                //markdown.append(out);
                 for (BasedSequence line : lines) {
                     if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
                     markdown.append(line.trimStart());
@@ -459,18 +488,11 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        if (options.listAddBlankLineBefore && !node.isOrDescendantOfType(ListBlock.class)) {
-            markdown.blankLine();
-        }
-        context.renderChildren(node);
+        renderList(node, context, markdown);
     }
 
     private void render(final OrderedList node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        Document document = context.getDocument();
-        int listItemNumber = document.get(LIST_ITEM_NUMBER);
-        document.set(LIST_ITEM_NUMBER, node.getStartNumber());
-        context.renderChildren(node);
-        document.set(LIST_ITEM_NUMBER, listItemNumber);
+        renderList(node, context, markdown);
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -479,6 +501,30 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
         renderListItem(node, context, markdown, "");
+    }
+
+    public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
+        ArrayList<Node> itemList = new ArrayList<>();
+        Node item = node.getFirstChild();
+        while (item != null) {
+            itemList.add(item);
+            item = item.getNext();
+        }
+        renderList(node, context, markdown, itemList);
+    }
+
+    public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown, List<Node> itemList) {
+        if (context.getFormatterOptions().listAddBlankLineBefore && !node.isOrDescendantOfType(ListItem.class)) {
+            markdown.blankLine();
+        }
+
+        Document document = context.getDocument();
+        int listItemNumber = document.get(CoreNodeFormatter.LIST_ITEM_NUMBER);
+        document.set(CoreNodeFormatter.LIST_ITEM_NUMBER, node instanceof OrderedList ? ((OrderedList) node).getStartNumber() : 1);
+        for (Node item : itemList) {
+            context.render(item);
+        }
+        document.set(CoreNodeFormatter.LIST_ITEM_NUMBER, listItemNumber);
     }
 
     public static void renderListItem(
@@ -562,8 +608,13 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        if (!(node.getParent() instanceof ParagraphItemContainer)
-                || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+        if (!(node.getParent() instanceof ParagraphItemContainer)) {
+            if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
+                renderTextBlockParagraphLines(node, context, markdown);
+            } else {
+                renderLooseParagraph(node, context, markdown);
+            }
+        } else if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
             renderLooseParagraph(node, context, markdown);
         } else {
             renderTextBlockParagraphLines(node, context, markdown);

@@ -14,6 +14,7 @@ import java.util.Locale;
 public interface BasedSequence extends CharSequence {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of("\n");
+    BasedSequence SPACE = CharSubSequence.of(" ");
     List<BasedSequence> EMPTY_LIST = new ArrayList<>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     String WHITESPACE_NO_EOL_CHARS = " \t";

@@ -62,10 +62,10 @@ no spaces between brackets
 <p>[TOC ]</p>
 .
 Document[0, 26]
-  Paragraph[0, 8]
+  Paragraph[0, 8] isTrailingBlankLine
     LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[2, 5, "TOC"] referenceClose:[5, 6, "]"]
       Text[1, 5] chars:[1, 5, " TOC"]
-  Paragraph[9, 18]
+  Paragraph[9, 18] isTrailingBlankLine
     LinkRef[9, 16] referenceOpen:[9, 10, "["] reference:[11, 14, "TOC"] referenceClose:[15, 16, "]"]
       Text[10, 15] chars:[10, 15, " TOC "]
   Paragraph[19, 26]

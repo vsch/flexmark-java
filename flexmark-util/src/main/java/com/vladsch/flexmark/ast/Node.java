@@ -1,9 +1,13 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.Pair;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
+
+import java.util.ListIterator;
 
 public abstract class Node {
     public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
@@ -147,12 +151,12 @@ public abstract class Node {
         return firstChild != null;
     }
 
-    public boolean hasOrMoreChildren(int chidCount) {
+    public boolean hasOrMoreChildren(int childCount) {
         if (firstChild != null) {
             int count = 0;
             for (Node child : getChildren()) {
                 count++;
-                if (count >= chidCount) return true;
+                if (count >= childCount) return true;
             }
         }
         return false;
@@ -191,12 +195,92 @@ public abstract class Node {
         return prev;
     }
 
+    public Node getPreviousAnyNot(Class... classes) {
+        Node node = prev;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) != -1) {
+                node = node.prev;
+            }
+        }
+        return node;
+    }
+
+    public Node getPreviousAny(Class... classes) {
+        Node node = prev;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
+                node = node.prev;
+            }
+        }
+        return node;
+    }
+
+    public Node getNextAnyNot(Class... classes) {
+        Node node = next;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) != -1) {
+                node = node.next;
+            }
+        }
+        return node;
+    }
+
+    public Node getNextAny(Class... classes) {
+        Node node = next;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
+                node = node.next;
+            }
+        }
+        return node;
+    }
+
     public Node getFirstChild() {
         return firstChild;
     }
 
+    public Node getFirstChildAnyNot(Class... classes) {
+        Node node = firstChild;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) != -1) {
+                node = node.next;
+            }
+        }
+        return node;
+    }
+
+    public Node getFirstChildAny(Class... classes) {
+        Node node = firstChild;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
+                node = node.next;
+            }
+        }
+        return node;
+    }
+
     public Node getLastChild() {
         return lastChild;
+    }
+
+    public Node getLastChildAnyNot(Class... classes) {
+        Node node = lastChild;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) != -1) {
+                node = node.prev;
+            }
+        }
+        return node;
+    }
+
+    public Node getLastChildAny(Class... classes) {
+        Node node = lastChild;
+        if (classes.length > 0) {
+            while (node != null && getNodeOfTypeIndex(node, classes) == -1) {
+                node = node.prev;
+            }
+        }
+        return node;
     }
 
     public Node getParent() {
@@ -348,6 +432,11 @@ public abstract class Node {
         }
     }
 
+    public void setCharsFromContentOnly() {
+        chars = SubSequence.NULL;
+        setCharsFromContent();
+    }
+
     public void setCharsFromContent() {
         BasedSequence[] segments = getSegments();
         BasedSequence spanningChars = null;
@@ -383,7 +472,7 @@ public abstract class Node {
         }
 
         if (spanningChars != null) {
-            // see if these are greater than already assigned chars
+             //see if these are greater than already assigned chars
             if (chars.isNull()) {
                 setChars(spanningChars);
             } else {
@@ -540,5 +629,27 @@ public abstract class Node {
         }
 
         return firstChild.getChars().baseSubSequence(firstChild.getStartOffset(), lastChild.getEndOffset());
+    }
+
+    public Node getBlankLineSibling() {
+        // need to find the first node that can contain a blank line that is not the last non-blank line of its parent
+        Node parent = this.parent;
+        Node lastBlankLineSibling = null;
+        Node nextBlankLineSibling = this;
+
+        while (parent.parent != null) {
+            boolean wasLastItem = parent == parent.parent.getLastChildAnyNot(BlankLine.class);
+            if (!wasLastItem) break;
+
+            lastBlankLineSibling = nextBlankLineSibling;
+            if (parent instanceof BlankLineContainer) {
+                nextBlankLineSibling = parent;
+            }
+
+            parent = parent.parent;
+            if (parent == null) break;
+        }
+
+        return lastBlankLineSibling;
     }
 }

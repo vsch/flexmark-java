@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public abstract class ListBlock extends Block {
+public abstract class ListBlock extends Block implements BlankLineContainer {
 
     private boolean tight;
 

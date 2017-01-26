@@ -3,6 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
@@ -14,6 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Matcher;
 
+import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class ListBlockParser extends AbstractBlockParser {
@@ -116,7 +118,32 @@ public class ListBlockParser extends AbstractBlockParser {
     @Override
     public void closeBlock(ParserState state) {
         finalizeListTight(state);
-        myBlock.setCharsFromContent();
+
+        if (state.getProperties().get(BLANK_LINES_IN_AST)) {
+            // need to transfer trailing blank line nodes from last item to parent list
+            ListBlock block = getBlock();
+            Node child = block.getLastChild();
+
+            if (child instanceof ListItem) {
+                // transfer its trailing blank lines to us
+                Node blankLine = child.getLastChild();
+                if (blankLine instanceof BlankLine) {
+                    Node blankLineSibling = child.getBlankLineSibling();
+                    if (blankLineSibling != null) {
+                        while (blankLine instanceof BlankLine) {
+                            Node node = blankLine.getPrevious();
+                            blankLine.unlink();
+                            blankLineSibling.insertAfter(blankLine);
+                            blankLine = node;
+                        }
+                        child.setCharsFromContentOnly();
+                        blankLineSibling.getParent().setCharsFromContentOnly();
+                    }
+                }
+            }
+        }
+
+        myBlock.setCharsFromContentOnly();
     }
 
     @Override
@@ -179,6 +206,7 @@ public class ListBlockParser extends AbstractBlockParser {
                     thisItemHadChildren = true;
                 }
 
+                //noinspection PointlessBooleanExpression
                 thisItemLoose = false
                         || thisItemHadTrueTrailingBlankLine && myOptions.isLooseWhenHasTrailingBlankLine()
                         || thisItemHadBlankAfterItemPara && myOptions.isLooseWhenBlankLineFollowsItemParagraph()
@@ -209,7 +237,7 @@ public class ListBlockParser extends AbstractBlockParser {
                         if (thisItemHadTrueTrailingBlankLine && item.getPrevious() == null && myOptions.isLooseWhenPrevHasTrailingBlankLine()) {
                             isTight = false;
                             thisItemLoose = true;
-                            ((ListItem)item).setLoose(true);
+                            ((ListItem) item).setLoose(true);
                         }
                     }
                 }
@@ -224,7 +252,7 @@ public class ListBlockParser extends AbstractBlockParser {
                                 if (!item1.isTight()) {
                                     thisItemLoose = true;
                                     isTight = false;
-                                    ((ListItem)item).setLoose(true);
+                                    ((ListItem) item).setLoose(true);
                                     break;
                                 }
                             }

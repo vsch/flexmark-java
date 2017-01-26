@@ -345,7 +345,7 @@ A block quote can have initial or final blank lines:
 .
 Document[0, 12]
   AsideBlock[0, 8] marker:[0, 1, "|"]
-    Paragraph[4, 8]
+    Paragraph[4, 8] isTrailingBlankLine
       Text[4, 7] chars:[4, 7, "foo"]
 ````````````````````````````````
 
@@ -412,7 +412,7 @@ To get a block quote with two paragraphs, use:
 .
 Document[0, 14]
   AsideBlock[0, 14] marker:[0, 1, "|"]
-    Paragraph[2, 6]
+    Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "foo"]
     Paragraph[10, 14]
       Text[10, 13] chars:[10, 13, "bar"]
@@ -517,7 +517,7 @@ baz
 .
 Document[0, 12]
   AsideBlock[0, 6] marker:[0, 1, "|"]
-    Paragraph[2, 6]
+    Paragraph[2, 6] isTrailingBlankLine
       Text[2, 5] chars:[2, 5, "bar"]
   Paragraph[8, 12]
     Text[8, 11] chars:[8, 11, "baz"]
@@ -736,10 +736,10 @@ Document[0, 68]
       Paragraph[17, 30]
         Text[17, 29] chars:[17, 29, "Neste … Quote"]
       AsideBlock[32, 67] marker:[32, 33, "|"]
-        Paragraph[34, 48]
+        Paragraph[34, 48] isTrailingBlankLine
           Text[34, 47] chars:[34, 47, "Anoth … Quote"]
         AsideBlock[52, 67] marker:[52, 53, "|"]
-          Paragraph[54, 67]
+          Paragraph[54, 67] isTrailingBlankLine
             Text[54, 66] chars:[54, 66, "Neste … Quote"]
 ````````````````````````````````
 
@@ -763,11 +763,11 @@ this is not
 .
 Document[0, 59]
   AsideBlock[0, 44] marker:[0, 1, "|"]
-    Paragraph[2, 44]
+    Paragraph[2, 44] isTrailingBlankLine
       Text[2, 13] chars:[2, 13, "Block … Quote"]
       SoftLineBreak[14, 15]
       Text[17, 42] chars:[17, 42, "this  … quote"]
-  Paragraph[46, 58]
+  Paragraph[46, 58] isTrailingBlankLine
     Text[46, 57] chars:[46, 57, "this  … s not"]
 ````````````````````````````````
 

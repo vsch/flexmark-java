@@ -6,7 +6,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public abstract class ListItem extends Block implements ParagraphItemContainer {
+public abstract class ListItem extends Block implements ParagraphItemContainer, BlankLineContainer{
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence markerSuffix = BasedSequence.NULL;
     private boolean tight = true;
