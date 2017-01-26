@@ -634,6 +634,32 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         return index == -1 ? endIndex - fromIndex : index - fromIndex;
     }
 
+    public static int columnsToNextTabStop(int column) {
+        // Tab stop is 4
+        return 4 - (column % 4);
+    }
+
+    @Override
+    public int countLeadingColumns(int startColumn, CharSequence chars) {
+        int fromIndex = 0;
+        int endIndex = length();
+        int index = indexOfAnyNot(chars, fromIndex, endIndex);
+
+        // expand tabs
+        int end = index == -1 ? endIndex : index;
+        int columns = index == -1 ? endIndex - fromIndex : index - fromIndex;
+        int tab = indexOf('\t', fromIndex, end);
+        if (tab != -1) {
+            int delta = startColumn;
+            do {
+                delta += tab + columnsToNextTabStop(tab + delta);
+                tab = indexOf('\t', tab + 1);
+            } while (tab >= 0 && tab < endIndex);
+            columns += delta;
+        }
+        return columns;
+    }
+
     @Override
     public int countCharsReversed(CharSequence chars, int startIndex, int fromIndex) {
         if (startIndex < 0) startIndex = 0;

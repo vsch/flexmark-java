@@ -4,19 +4,28 @@ import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.CoreNodeRenderer;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import static com.vladsch.flexmark.formatter.options.DiscretionaryText.ADD;
+import static com.vladsch.flexmark.formatter.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
+    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+
     private final FormatterOptions options;
     private final ListOptions listOptions;
     private ReferenceRepository referenceRepository;
@@ -33,7 +42,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     public Set<FormattingPhase> getFormattingPhases() {
         HashSet<FormattingPhase> set = new HashSet<>();
         set.add(FormattingPhase.COLLECT);
-        return null;
+        return set;
     }
 
     @Override
@@ -248,7 +257,11 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        if (node instanceof Block) {
+            context.renderChildren(node);
+        } else {
+            markdown.append(node.getChars());
+        }
     }
 
     private void render(Document node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -257,68 +270,295 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(final Heading node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+        markdown.blankLine();
         if (node.isAtxHeading()) {
             markdown.append(node.getOpeningMarker());
+            boolean spaceAfterAtx = options.spaceAfterAtxMarker == ADD
+                    || options.spaceAfterAtxMarker == AS_IS && node.getOpeningMarker().getEndOffset() < node.getText().getStartOffset();
+
+            if (spaceAfterAtx) markdown.append(' ');
+            context.renderChildren(node);
+            switch (options.atxHeaderTrailingMarker) {
+                case EQUALIZE:
+                    if (node.getOpeningMarker().isNull()) break;
+                    // fall through
+                case ADD:
+                    if (spaceAfterAtx) markdown.append(' ');
+                    markdown.append(node.getOpeningMarker());
+                    break;
+
+                case REMOVE:
+                    break;
+
+                case AS_IS:
+                default:
+                    if (node.getClosingMarker().isNotNull()) {
+                        if (spaceAfterAtx) markdown.append(' ');
+                        markdown.append(node.getClosingMarker());
+                    }
+                    break;
+            }
+        } else {
+            Ref<Integer> ref = new Ref<>(markdown.offset());
+            markdown.lastOffset(ref);
+            context.renderChildren(node);
+            if (options.setextHeaderEqualizeMarker) {
+                markdown.repeat(node.getClosingMarker().charAt(0), Utils.minLimit(markdown.offset() - ref.value, options.minSetextMarkerLength));
+            } else {
+                markdown.append(node.getClosingMarker());
+            }
         }
-        // TODO: add ability to add marker and find the # of chars from marker
-        context.renderChildren(node);
-        if (node.isSetextHeading()) {
-            // TODO: equalize length if needed
-            markdown.append(node.getClosingMarker());
-        }
+        markdown.tailBlankLine();
     }
 
     private void render(final BlockQuote node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.append("> ");
-        context.renderChildren(node);
-    }
+        String prefix = node.getOpeningMarker().toString();
+        boolean compactPrefix = false;
 
-    private void render(FencedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        switch (options.blockQuoteMarkers) {
+            case AS_IS:
+                prefix = node.getChars().baseSubSequence(node.getOpeningMarker().getStartOffset(), node.getFirstChild().getStartOffset()).toString();
+                break;
+            case ADD_COMPACT:
+                prefix = ">";
+                break;
+            case ADD_COMPACT_WITH_SPACE:
+                prefix = "> ";
+                compactPrefix = true;
+                break;
+            case ADD_SPACED:
+                prefix = "> ";
+                break;
+        }
+
+        markdown.blankLine();
+        markdown.pushPrefix();
+
+        // create combined prefix, compact if needed
+        String combinedPrefix = markdown.getPrefix().toString();
+        if (compactPrefix && combinedPrefix.endsWith("> ")) {
+            combinedPrefix = combinedPrefix.substring(0, combinedPrefix.length() - 1) + prefix;
+        } else {
+            combinedPrefix += prefix;
+        }
+
+        // delay prefix after EOL
+        int options = markdown.getOptions();
+        markdown.setOptions(options | FormattingAppendable.PREFIX_AFTER_PENDING_EOL);
+        markdown.setPrefix(combinedPrefix);
+        markdown.setOptions(options);
+
+        context.renderChildren(node);
+        markdown.popPrefix();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
-        // TODO: add format option for string to use as thematic break
-        markdown.append(node.getChars());
+        markdown.blankLine();
+        if (options.thematicBreak != null) {
+            markdown.append(options.thematicBreak);
+        } else {
+            markdown.append(node.getChars());
+        }
+        markdown.tailBlankLine();
+    }
+
+    private void render(FencedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
+        markdown.blankLine();
+
+        CharSequence openingMarker = node.getOpeningMarker();
+        CharSequence closingMarker = node.getClosingMarker();
+        char openingMarkerChar = openingMarker.charAt(0);
+        char closingMarkerChar = closingMarker.charAt(0);
+        int openingMarkerLen = openingMarker.length();
+        int closingMarkerLen = closingMarker.length();
+
+        switch (options.fencedCodeMarkerType) {
+            case ANY:
+                break;
+            case BACK_TICK:
+                openingMarkerChar = '`';
+                closingMarkerChar = openingMarkerChar;
+                break;
+            case TILDE:
+                openingMarkerChar = '~';
+                closingMarkerChar = openingMarkerChar;
+                break;
+        }
+
+        if (openingMarkerLen < options.fencedCodeMarkerLength) openingMarkerLen = options.fencedCodeMarkerLength;
+        if (closingMarkerLen < options.fencedCodeMarkerLength) closingMarkerLen = options.fencedCodeMarkerLength;
+
+        openingMarker = RepeatedCharSequence.of(String.valueOf(openingMarkerChar), openingMarkerLen);
+        if (options.fencedCodeMatchClosingMarker) closingMarker = openingMarker;
+        else closingMarker = RepeatedCharSequence.of(String.valueOf(closingMarkerChar), closingMarkerLen);
+
+        markdown.append(openingMarker);
+        if (options.fencedCodeSpaceBeforeInfo) markdown.append(' ');
+        markdown.append(node.getInfo());
+        markdown.line();
+
+        markdown.openPreFormatted(true);
+        if (options.indentedCodeMinimizeIndent) {
+            List<BasedSequence> lines = node.getContentLines();
+            int[] leadColumns = new int[lines.size()];
+            int minSpaces = Integer.MAX_VALUE;
+            int i = 0;
+            for (BasedSequence line : lines) {
+                leadColumns[i] = line.countLeadingColumns(0, " \t");
+                minSpaces = Utils.min(minSpaces, leadColumns[i]);
+                i++;
+            }
+            if (minSpaces > 0) {
+                i = 0;
+                for (BasedSequence line : lines) {
+                    if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
+                    markdown.append(line.trimStart());
+                    i++;
+                }
+            } else {
+                markdown.append(node.getContentChars());
+            }
+        } else {
+            markdown.append(node.getContentChars());
+        }
+        markdown.closePreFormatted();
+        markdown.line().append(closingMarker).line();
+        markdown.tailBlankLine();
     }
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        markdown.blankLine();
+        markdown.pushPrefix().addPrefix("    ");
+        markdown.openPreFormatted(true);
+        if (options.indentedCodeMinimizeIndent) {
+            List<BasedSequence> lines = node.getContentLines();
+            int[] leadColumns = new int[lines.size()];
+            int minSpaces = Integer.MAX_VALUE;
+            int i = 0;
+            for (BasedSequence line : lines) {
+                leadColumns[i] = line.countLeadingColumns(0, " \t");
+                minSpaces = Utils.min(minSpaces, leadColumns[i]);
+                i++;
+            }
+            if (minSpaces > 0) {
+                i = 0;
+                for (BasedSequence line : lines) {
+                    if (leadColumns[i] > minSpaces) markdown.repeat(' ', leadColumns[i] - minSpaces);
+                    markdown.append(line.trimStart());
+                    i++;
+                }
+            } else {
+                markdown.append(node.getContentChars());
+            }
+        } else {
+            markdown.append(node.getContentChars());
+        }
+        markdown.closePreFormatted();
+        markdown.popPrefix();
+        markdown.tailBlankLine();
     }
 
     private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {
+        if (options.listAddBlankLineBefore && !node.isOrDescendantOfType(ListBlock.class)) {
+            markdown.blankLine();
+        }
         context.renderChildren(node);
     }
 
     private void render(final OrderedList node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        int start = node.getStartNumber();
+        Document document = context.getDocument();
+        int listItemNumber = document.get(LIST_ITEM_NUMBER);
+        document.set(LIST_ITEM_NUMBER, node.getStartNumber());
         context.renderChildren(node);
+        document.set(LIST_ITEM_NUMBER, listItemNumber);
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown);
+        renderListItem(node, context, markdown, "");
     }
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown);
+        renderListItem(node, context, markdown, "");
     }
 
-    private void renderListItem(final ListItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        if (listOptions.isTightListItem(node)) {
-            markdown.append(node.getOpeningMarker());
-            context.renderChildren(node);
+    public static void renderListItem(
+            final ListItem node,
+            final NodeFormatterContext context,
+            final MarkdownWriter markdown,
+            CharSequence markerSuffix
+    ) {
+        final FormatterOptions options = context.getFormatterOptions();
+        CharSequence openingMarker = node.getOpeningMarker();
+        if (node instanceof OrderedListItem) {
+            char delimiter = openingMarker.charAt(openingMarker.length() - 1);
+            CharSequence number = openingMarker.subSequence(0, openingMarker.length() - 1);
+
+            switch (options.listNumberedMarker) {
+                case ANY:
+                    break;
+                case DOT:
+                    delimiter = '.';
+                    break;
+                case PAREN:
+                    delimiter = ')';
+                    break;
+                default:
+                    throw new IllegalStateException("Missing case for ListNumberedMarker " + options.listNumberedMarker.name());
+            }
+
+            if (options.listRenumberItems) {
+                Document document = context.getDocument();
+                Integer itemNumber = document.get(LIST_ITEM_NUMBER);
+                openingMarker = String.format("%d%c", itemNumber++, delimiter);
+                document.set(LIST_ITEM_NUMBER, itemNumber);
+            } else {
+                openingMarker = String.format("%s%c", number, delimiter);
+            }
         } else {
-            markdown.append(node.getOpeningMarker());
-            context.renderChildren(node);
+            switch (options.listBulletMarker) {
+                case ANY:
+                    break;
+                case DASH:
+                    openingMarker = "-";
+                    break;
+                case ASTERISK:
+                    openingMarker = "*";
+                    break;
+                case PLUS:
+                    openingMarker = "+";
+                    break;
+                default:
+                    throw new IllegalStateException("Missing case for ListBulletMarker " + options.listBulletMarker.name());
+            }
         }
+        markdown.append(openingMarker).append(' ').append(markerSuffix);
+        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + markerSuffix.length() + 1) : "    ");
+        context.renderChildren(node);
+        markdown.popPrefix();
     }
 
+    private void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
+        markdown.append(node.getOpeningMarker());
+        context.renderChildren(node);
+        markdown.append(node.getOpeningMarker());
+    }
+
+    private void render(StrongEmphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
+        markdown.append(node.getOpeningMarker());
+        context.renderChildren(node);
+        markdown.append(node.getOpeningMarker());
+    }
+
+    @SuppressWarnings("WeakerAccess")
     public static void renderTextBlockParagraphLines(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
         context.renderChildren(node);
+        markdown.line();
     }
 
-    private void renderLooseParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+    @SuppressWarnings("WeakerAccess")
+    public static void renderLooseParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         renderTextBlockParagraphLines(node, context, markdown);
+        markdown.tailBlankLine();
     }
 
     private void render(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
@@ -350,18 +590,6 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     private void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.append(node.getChars());
-    }
-
-    private void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getOpeningMarker());
-        context.renderChildren(node);
-        markdown.append(node.getOpeningMarker());
-    }
-
-    private void render(StrongEmphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getOpeningMarker());
-        context.renderChildren(node);
-        markdown.append(node.getOpeningMarker());
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {

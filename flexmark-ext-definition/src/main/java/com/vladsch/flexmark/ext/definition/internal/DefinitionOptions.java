@@ -25,7 +25,7 @@ class DefinitionOptions {
         markerSpaces = DefinitionExtension.MARKER_SPACES.getFrom(options);
         tildeMarker = DefinitionExtension.TILDE_MARKER.getFrom(options);
         colonMarker = DefinitionExtension.COLON_MARKER.getFrom(options);
-        myParserEmulationProfile = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
+        myParserEmulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
         autoLooseOneLevelLists = Parser.LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS.getFrom(options);
         looseOnPrevLooseItem = Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);

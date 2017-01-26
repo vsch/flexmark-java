@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
@@ -27,13 +28,32 @@ public class Formatter implements IRender {
      * output control for FormattingAppendable, see {@link FormattingAppendable#setOptions(int)}
      */
     public static final DataKey<Integer> FORMAT_FLAGS = new DataKey<>("FORMAT_FLAGS", 0);
-    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
 
     // for convenience or these together and set FORMAT_FLAGS key above to the value, to have HtmlWriter apply these when rendering Html
     public static final int FORMAT_CONVERT_TABS = FormattingAppendable.CONVERT_TABS;
     public static final int FORMAT_COLLAPSE_WHITESPACE = FormattingAppendable.COLLAPSE_WHITESPACE;
     public static final int FORMAT_SUPPRESS_TRAILING_WHITESPACE = FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE;
     public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
+
+    public static final DataKey<Integer> MAX_TRAILING_BLANK_LINES = new DataKey<>("MAX_TRAILING_BLANK_LINES", 1);
+    public static final DataKey<DiscretionaryText> SPACE_AFTER_ATX_MARKER = new DataKey<>("SPACE_AFTER_ATX_MARKER", DiscretionaryText.ADD);
+    public static final DataKey<Boolean> SETEXT_HEADER_EQUALIZE_MARKER = new DataKey<>("SETEXT_HEADER_EQUALIZE_MARKER", true);
+    public static final DataKey<EqualizeTrailingMarker> ATX_HEADER_TRAILING_MARKER = new DataKey<>("ATX_HEADER_TRAILING_MARKER", EqualizeTrailingMarker.AS_IS);
+    public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", (String) null);
+    public static final DataKey<BlockQuoteMarker> BLOCK_QUOTE_MARKERS = new DataKey<>("BLOCK_QUOTE_MARKERS", BlockQuoteMarker.AS_IS);
+    public static final DataKey<Boolean> INDENTED_CODE_MINIMIZE_INDENT = new DataKey<>("INDENTED_CODE_MINIMIZE_INDENT", false);
+    public static final DataKey<Boolean> FENCED_CODE_MINIMIZE_INDENT = new DataKey<>("FENCED_CODE_MINIMIZE_INDENT", false);
+    public static final DataKey<Boolean> FENCED_CODE_MATCH_CLOSING_MARKER = new DataKey<>("FENCED_CODE_MATCH_CLOSING_MARKER", false);
+    public static final DataKey<Boolean> FENCED_CODE_SPACE_BEFORE_INFO = new DataKey<>("FENCED_CODE_SPACE_BEFORE_INFO", false);
+    public static final DataKey<Integer> FENCED_CODE_MARKER_LENGTH = new DataKey<>("FENCED_CODE_MARKER_LENGTH", 3);
+    public static final DataKey<CodeFenceMarker> FENCED_CODE_MARKER_TYPE = new DataKey<>("FENCED_CODE_MARKER_TYPE", CodeFenceMarker.ANY);
+    public static final DataKey<Boolean> LIST_ADD_BLANK_LINE_BEFORE = new DataKey<>("LIST_ADD_BLANK_LINE_BEFORE", false);
+    public static final DataKey<Boolean> LIST_ALIGN_FIRST_LINE_TEXT = new DataKey<>("LIST_ALIGN_FIRST_LINE_TEXT", false);
+    public static final DataKey<Boolean> LIST_ALIGN_CHILD_BLOCKS = new DataKey<>("LIST_ALIGN_CHILD_BLOCKS", true);
+    public static final DataKey<Boolean> LIST_RENUMBER_ITEMS = new DataKey<>("LIST_RENUMBER_ITEMS", true);
+    public static final DataKey<ListBulletMarker> LIST_BULLET_MARKER = new DataKey<>("LIST_BULLET_MARKER", ListBulletMarker.ANY);
+    public static final DataKey<ListNumberedMarker> LIST_NUMBERED_MARKER = new DataKey<>("LIST_NUMBERED_MARKER", ListNumberedMarker.ANY);
+    public static final DataKey<ListSpacing> LIST_SPACING = new DataKey<>("LIST_SPACING", ListSpacing.AS_IS);
 
     private final List<NodeFormatterFactory> nodeFormatterFactories;
     private final FormatterOptions formatterOptions;
@@ -54,7 +74,6 @@ public class Formatter implements IRender {
                 return new CoreNodeFormatter(options);
             }
         });
-
     }
 
     /**
@@ -264,8 +283,14 @@ public class Formatter implements IRender {
                 }
 
                 if (nodeFormatter instanceof PhasedNodeFormatter) {
-                    this.renderingPhases.addAll(((PhasedNodeFormatter) nodeFormatter).getFormattingPhases());
-                    this.phasedFormatters.add((PhasedNodeFormatter) nodeFormatter);
+                    Set<FormattingPhase> phases = ((PhasedNodeFormatter) nodeFormatter).getFormattingPhases();
+                    if (phases != null) {
+                        if (phases.isEmpty()) throw new IllegalStateException("PhasedNodeFormatter with empty Phases");
+                        this.renderingPhases.addAll(phases);
+                        this.phasedFormatters.add((PhasedNodeFormatter) nodeFormatter);
+                    } else {
+                        throw new IllegalStateException("PhasedNodeFormatter with null Phases");
+                    }
                 }
             }
         }
@@ -335,7 +360,10 @@ public class Formatter implements IRender {
                 }
             } else {
                 NodeFormattingHandler nodeRenderer = renderers.get(node.getClass());
-                if (nodeRenderer == null) renderers.get(Node.class);
+
+                if (nodeRenderer == null) {
+                    nodeRenderer = renderers.get(Node.class);
+                }
 
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;

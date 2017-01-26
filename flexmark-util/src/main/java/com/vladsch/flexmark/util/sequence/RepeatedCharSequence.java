@@ -70,6 +70,10 @@ public class RepeatedCharSequence implements CharSequence {
         return sb.toString();
     }
 
+    public static RepeatedCharSequence of(final char c, final int count) {
+        return new RepeatedCharSequence(String.valueOf(c), 0, count);
+    }
+
     public static RepeatedCharSequence of(final CharSequence chars, final int count) {
         return new RepeatedCharSequence(chars, 0, chars.length() * count);
     }

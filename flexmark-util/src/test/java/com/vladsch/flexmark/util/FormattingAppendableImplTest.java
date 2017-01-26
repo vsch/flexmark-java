@@ -641,4 +641,7 @@ public class FormattingAppendableImplTest {
         assertEquals(80, fa.lastOffset());
         assertEquals(81, fa.offset());
     }
+
+    // TODO: add delayed prefix tests
+
 }

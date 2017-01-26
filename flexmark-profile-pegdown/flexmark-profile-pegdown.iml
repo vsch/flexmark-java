@@ -57,5 +57,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.pegdown:pegdown:1.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-analysis:5.0.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.ow2.asm:asm-tree:5.0.3" level="project" />
+    <orderEntry type="module" module-name="flexmark-formatter" />
   </component>
 </module>

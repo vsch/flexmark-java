@@ -1,6 +1,6 @@
 package com.vladsch.flexmark.formatter.options;
 
-public enum BulletListItemMarker {
+public enum ListBulletMarker {
     ANY,
     DASH,
     ASTERISK,

@@ -13,6 +13,7 @@ import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
+import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
 import com.vladsch.flexmark.ext.ins.ExtInsTestSuite;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
@@ -24,6 +25,7 @@ import com.vladsch.flexmark.ext.toc.ExtTocTestSuite;
 import com.vladsch.flexmark.ext.typographic.ExtTypographicTestSuite;
 import com.vladsch.flexmark.ext.wikilink.ExtWikiLinkTestSuite;
 import com.vladsch.flexmark.ext.zzzzzz.ExtZzzzzzTestSuite;
+import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
 import com.vladsch.flexmark.integration.IntegrationTestSuite;
 import com.vladsch.flexmark.jira.converter.JiraConverterTestSuite;
 import com.vladsch.flexmark.profiles.pegdown.PegdownProfileTestSuite;
@@ -35,37 +37,37 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UtilsTestSuite.class,
-        CoreTestSuite.class,
-        ExtAbbreviationTestSuite.class,
-        ExtAnchorLinkTestSuite.class,
-        ExtAsideTestSuite.class,
-        ExtAutolinkTestSuite.class,
-        ExtDefinitionTestSuite.class,
-        ExtEmojiTestSuite.class,
-        ExtEscapedCharacterTestSuite.class,
-        ExtFootnotesTestSuite.class,
-        ExtGfmStrikethroughTestSuite.class,
-        ExtGfmTablesTestSuite.class,
-        ExtGfmTaskListTestSuite.class,
-        ExtJekyllFrontMatterTestSuite.class,
-        ExtJekyllTagTestSuite.class,
-        ExtInsTestSuite.class,
-        ExtSuperscriptTestSuite.class,
-        ExtSpecExampleTestSuite.class,
-        ExtTablesTestSuite.class,
-        ExtTocTestSuite.class,
-        ExtTypographicTestSuite.class,
-        ExtWikiLinkTestSuite.class,
-        ExtXWikiMacroTestSuite.class,
-        ExtYamlFrontMatterTestSuite.class,
-        ExtZzzzzzTestSuite.class,
-        FlexmarkHtmlParserTestSuite.class,
-        JiraConverterTestSuite.class,
-        YouTrackConverterTestSuite.class,
-        IntegrationTestSuite.class,
-        PegdownProfileTestSuite.class,
+        //UtilsTestSuite.class,
+        //CoreTestSuite.class,
+        //ExtAbbreviationTestSuite.class,
+        //ExtAnchorLinkTestSuite.class,
+        //ExtAsideTestSuite.class,
+        //ExtAutolinkTestSuite.class,
+        //ExtDefinitionTestSuite.class,
+        //ExtEmojiTestSuite.class,
+        //ExtEscapedCharacterTestSuite.class,
+        //ExtFootnotesTestSuite.class,
+        //ExtGfmStrikethroughTestSuite.class,
+        //ExtGfmTablesTestSuite.class,
+        //ExtJekyllFrontMatterTestSuite.class,
+        //ExtJekyllTagTestSuite.class,
+        //ExtInsTestSuite.class,
+        //ExtSuperscriptTestSuite.class,
+        //ExtSpecExampleTestSuite.class,
+        //ExtTablesTestSuite.class,
+        //ExtTocTestSuite.class,
+        //ExtTypographicTestSuite.class,
+        //ExtWikiLinkTestSuite.class,
+        //ExtXWikiMacroTestSuite.class,
+        //ExtYamlFrontMatterTestSuite.class,
+        //ExtZzzzzzTestSuite.class,
+        //FlexmarkHtmlParserTestSuite.class,
+        //JiraConverterTestSuite.class,
+        //YouTrackConverterTestSuite.class,
+        //IntegrationTestSuite.class,
+        //PegdownProfileTestSuite.class,
+        ComboCoreFormatterSpecTest.class,
         ComboFormatterTestSuiteSpecTest.class,
 })
-public class FlexmarkTestSuite {
+public class FlexmarkFormatterTestSuite {
 }

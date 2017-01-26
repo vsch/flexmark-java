@@ -31,7 +31,7 @@ import java.io.IOException;
  * child text
  * &lt;/li&gt;
  */
-@SuppressWarnings("UnusedReturnValue")
+@SuppressWarnings({ "UnusedReturnValue", "SameParameterValue" })
 public interface FormattingAppendable extends Appendable {
     // no IOExceptions are thrown, you can get the first IOException or null if did not have any
     IOException getIOException();
@@ -74,6 +74,7 @@ public interface FormattingAppendable extends Appendable {
     int CONVERT_TABS = 0x0001;
     int COLLAPSE_WHITESPACE = 0x0002;
     int SUPPRESS_TRAILING_WHITESPACE = 0x0004;
+    int PREFIX_AFTER_PENDING_EOL = 0x0008; // prefix takes effect after pending EOLs are output
     int FORMAT_ALL = CONVERT_TABS | COLLAPSE_WHITESPACE | SUPPRESS_TRAILING_WHITESPACE;
 
     /**
@@ -144,6 +145,8 @@ public interface FormattingAppendable extends Appendable {
      * Set prefix to append after a new line character for every line before the indent prefix in normal
      * and after a new line in pre-formatted sections
      *
+     * if PREFIX_AFTER_PENDING_EOL is enabled then prefix will take effect after pending EOLs are output
+     *
      * @param prefix prefix characters for new lines appended after this is set
      * @return this
      */
@@ -173,6 +176,23 @@ public interface FormattingAppendable extends Appendable {
      * @return this
      */
     FormattingAppendable popPrefix();
+
+    /**
+     * Add runnable to run after the given pending EOL is output to the stream.
+     * if current pendingEOL is N then will run after pendingEOL == atPendingEOL and EOL is output
+     *
+     * @param atPendingEOL pending EOL level
+     * @param runnable  runnable to run once this EOL is output
+     * @return this
+     */
+    FormattingAppendable addAfterEolRunnable(int atPendingEOL, Runnable runnable);
+
+    /**
+     * Pop a prefix from the stack and set the current prefix
+     *
+     * @return count of prefixes on stack
+     */
+    int getPushedPrefixCount();
 
     /**
      * Add a new line, if there was any unterminated text appended
@@ -402,4 +422,11 @@ public interface FormattingAppendable extends Appendable {
      * @return true if space is pending
      */
     boolean isPendingEOL();
+
+    /**
+     * see if there is a pending space
+     *
+     * @return number of pending EOLs
+     */
+    int getPendingEOL();
 }

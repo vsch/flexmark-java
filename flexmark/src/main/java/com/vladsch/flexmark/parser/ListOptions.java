@@ -37,7 +37,7 @@ public class ListOptions implements MutableDataSetter {
     }
 
     private ListOptions(DataHolder options) {
-        myParserEmulationProfile = Parser.PARSER_EMULATION_FAMILY.getFrom(options);
+        myParserEmulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
         itemInterrupt = new ItemInterrupt(options);
 
         autoLoose = Parser.LISTS_AUTO_LOOSE.getFrom(options);
@@ -163,7 +163,7 @@ public class ListOptions implements MutableDataSetter {
     }
 
     public MutableDataHolder setIn(MutableDataHolder options) {
-        options.set(Parser.PARSER_EMULATION_FAMILY, getParserEmulationProfile());
+        options.set(Parser.PARSER_EMULATION_PROFILE, getParserEmulationProfile());
         getItemInterrupt().setIn(options);
 
         options.set(Parser.LISTS_AUTO_LOOSE, autoLoose);

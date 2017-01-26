@@ -353,8 +353,23 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    @Override
+    public int getPushedPrefixCount() {
+        return out.getPushedPrefixCount();
+    }
+
     public T blankLine() {
         out.blankLine();
+        return (T) this;
+    }
+
+    public T blankLine(final int count) {
+        out.blankLine(count);
+        return (T) this;
+    }
+
+    public T blankLineIf(final boolean predicate) {
+        out.blankLineIf(predicate);
         return (T) this;
     }
 
@@ -457,6 +472,12 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
+    public FormattingAppendable addAfterEolRunnable(final int atPendingEOL, final Runnable runnable) {
+        out.addAfterEolRunnable(atPendingEOL, runnable);
+        return (T) this;
+    }
+
+    @Override
     public CharSequence getTotalIndentPrefix() {
         return out.getTotalIndentPrefix();
     }
@@ -468,16 +489,6 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     public T lineIf(final Ref<Boolean> lineRef) {
         out.lineIf(lineRef);
-        return (T) this;
-    }
-
-    public T blankLineIf(final boolean predicate) {
-        out.blankLineIf(predicate);
-        return (T) this;
-    }
-
-    public T blankLine(final int count) {
-        out.blankLine(count);
         return (T) this;
     }
 
@@ -507,6 +518,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     @Override
     public boolean isPendingEOL() {
         return out.isPendingSpace();
+    }
+
+    @Override
+    public int getPendingEOL() {
+        return out.getPendingEOL();
     }
 
     @Override

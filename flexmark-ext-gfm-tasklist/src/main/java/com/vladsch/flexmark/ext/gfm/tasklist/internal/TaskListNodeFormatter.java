@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,7 +33,21 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     private void render(final TaskListItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        BasedSequence markerSuffix = node.getMarkerSuffix();
+        switch (myOptions.listItemCase) {
+            case AS_IS:
+                break;
+            case LOWERCASE:
+                markerSuffix = markerSuffix.toLowerCase();
+                break;
+            case UPPERCASE:
+                markerSuffix = markerSuffix.toUpperCase();
+                break;
+            default:
+                throw new IllegalStateException("Missing case for TaskListItemCase " + myOptions.listItemCase.name());
+        }
+
+        CoreNodeFormatter.renderListItem(node, context, markdown, markerSuffix.append(" "));
     }
 
     public static class Factory implements NodeFormatterFactory {

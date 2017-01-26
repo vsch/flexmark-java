@@ -8,6 +8,8 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Stack;
 
 public class FormattingAppendableImpl implements FormattingAppendable {
@@ -16,6 +18,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private final Stack<Integer> myIndentLineCounts;
     private final char myEOL;
     private final ArrayList<Ref<Integer>> myOffsetBeforeList;
+    private final HashMap<Integer, List<Runnable>> myAfterEolRunnables;
 
     private String myWhitespace;
     private String myWhitespaceEOL;
@@ -38,6 +41,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     private boolean myPendingPreFormattedPrefix;
     private int myLineCount;
     private int myModCountOfLastEOL;
+    private int myLastEOLCount;
 
     // indent level to use after the next \n and before text is appended
     private int myIndent;
@@ -51,7 +55,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     // accumulated spaces and tabs that we were not sure would need to be output
     private int myPendingSpaces;
-    private final Stack<BasedSequence> myIndentStack;
+    private final Stack<BasedSequence> myPrefixStack;
 
     @SuppressWarnings("WeakerAccess")
     public FormattingAppendableImpl(final boolean allFormatOptions) {
@@ -70,8 +74,9 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myAppendable = new LengthTrackingAppendableImpl(appendable);
         myConditionalFrames = new Stack<>();
         myIndentLineCounts = new Stack<>();
-        myIndentStack = new Stack<>();
+        myPrefixStack = new Stack<>();
         myOffsetBeforeList = new ArrayList<>();
+        myAfterEolRunnables = new HashMap<>();
         myEOL = '\n';
         myOptions = formatOptions;
         myIOException = null;
@@ -81,6 +86,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myPendingPreFormattedPrefix = false;
         myLineCount = 0;
         myModCountOfLastEOL = 0;
+        myLastEOLCount = 0;
         myIndent = 0;
         myWillIndent = false;
         myIndentOffset = 0;
@@ -128,6 +134,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         return haveOptions(COLLAPSE_WHITESPACE);
     }
 
+    private boolean isPrefixAfterPendingEol() {
+        return haveOptions(PREFIX_AFTER_PENDING_EOL);
+    }
+
     private void appendIndent() throws IOException {
         if (!myPrefix.isEmpty()) {
             myAppendable.append(myPrefix);
@@ -166,9 +176,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     private void setPendingEOL(int pendingEOL) {
-        if (myPreFormattedNesting == 0 && myModCountOfLastEOL != myModCount && pendingEOL > myPendingEOL) {
-            myPendingEOL = pendingEOL;
-            myEolOptions = myOptions;
+        if (myPreFormattedNesting == 0 && pendingEOL > myPendingEOL) {
+            if (myModCountOfLastEOL != myModCount) {
+                myPendingEOL = pendingEOL;
+                myEolOptions = myOptions;
+            } else if (myLineCount > 0 && pendingEOL > myLastEOLCount) {
+                myPendingEOL = pendingEOL - myLastEOLCount;
+                myEolOptions = myOptions;
+            }
         }
     }
 
@@ -179,16 +194,41 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         myEolOptions = myOptions;
     }
 
+    @Override
+    public FormattingAppendableImpl addAfterEolRunnable(int atPendingEOL, Runnable runnable) {
+        List<Runnable> runnableList = myAfterEolRunnables.get(atPendingEOL);
+        if (runnableList == null) {
+            runnableList = new ArrayList<>();
+            myAfterEolRunnables.put(atPendingEOL, runnableList);
+        }
+        runnableList.add(runnable);
+        return this;
+    }
+
+    private void runAllAfterEol() {
+        List<Runnable> runnableList = myAfterEolRunnables.get(myPendingEOL);
+        if (runnableList != null) {
+            for (Runnable runnable : runnableList) {
+                runnable.run();
+            }
+            myAfterEolRunnables.remove(myPendingEOL);
+        }
+    }
+
     private void appendEOL(final boolean withIndent, final boolean withPendingSpaces) throws IOException {
+        int lineCount = myLineCount;
         if (myPendingEOL > 0) {
             if (myPendingSpaces > 0 && !haveEolOptions(SUPPRESS_TRAILING_WHITESPACE)) {
                 appendSpaces();
             }
 
+
             while (myPendingEOL > 0) {
                 myAppendable.append(myEOL);
                 myLineCount++;
+                runAllAfterEol();
                 myPendingEOL--;
+
 
                 if (myPendingEOL > 0 && !myPrefix.isBlank()) {
                     myAppendable.append(myPrefix);
@@ -196,6 +236,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             }
 
             resetPendingEOL();
+            runAllAfterEol();
 
             if (withIndent) appendIndent();
         } else {
@@ -208,10 +249,12 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                 }
             }
         }
+        myLastEOLCount = myLineCount - lineCount;
     }
 
     @SuppressWarnings("SameParameterValue")
     private void beforeAppendText(final boolean withEOL, final boolean withIndent, final boolean withSpaces) throws IOException {
+        myLastEOLCount = 0;
         if (myConditionalFrames.size() > 0) {
             // have conditional
             ConditionalFrame frame = myConditionalFrames.peek();
@@ -232,6 +275,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
                     myIndent = frame.myIndent;
                     // reset any pending EOLs to allow conditional to apply one if it sees fit
                     myPendingEOL = 0;
+                    runAllAfterEol();
                     int lineCount = myLineCount;
 
                     frame.myOpenFormatter.apply(firstApply, frame.myOnIndent, frame.myOnLine, true);
@@ -274,12 +318,14 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             myAppendable.append(c);
             myModCount++;
 
+            int lineCount = myLineCount;
             if (c == myEOL) {
                 myLineCount++;
                 myPendingPreFormattedPrefix = true;
             }
 
             resetPendingEOL();
+            myLastEOLCount = myLineCount - lineCount;
         } else {
             if (c == myEOL) {
                 setPendingEOL(1);
@@ -325,7 +371,10 @@ public class FormattingAppendableImpl implements FormattingAppendable {
             }
             myModCount++;
             // if EOL is last then we reset pending and eol mod count
-            if (lastPos == end) resetPendingEOL();
+            if (lastPos == end) {
+                resetPendingEOL();
+                myLastEOLCount = 1;
+            }
         } else {
             // have to handle \n, white spaces, etc
             boolean firstAppend = true;
@@ -498,7 +547,17 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public FormattingAppendable setPrefix(final CharSequence prefix) {
-        myPrefix = CharSubSequence.of(prefix);
+        final CharSubSequence fixedPrefix = CharSubSequence.of(prefix);
+        if (myPendingEOL > 0 && isPrefixAfterPendingEol()) {
+            addAfterEolRunnable(0, new Runnable() {
+                @Override
+                public void run() {
+                    myPrefix = fixedPrefix;
+                }
+            });
+        } else {
+            myPrefix = fixedPrefix;
+        }
         return this;
     }
 
@@ -510,17 +569,22 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     @Override
     public FormattingAppendable pushPrefix() {
-        myIndentStack.push(myPrefix);
+        myPrefixStack.push(myPrefix);
         return this;
     }
 
     @Override
     public FormattingAppendable popPrefix() {
-        if (myIndentStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
+        if (myPrefixStack.isEmpty()) throw new IllegalStateException("popPrefix with an empty stack");
 
-        BasedSequence prefix = myIndentStack.pop();
+        BasedSequence prefix = myPrefixStack.pop();
         setPrefix(prefix);
         return this;
+    }
+
+    @Override
+    public int getPushedPrefixCount() {
+        return myPrefixStack.size();
     }
 
     @Override
@@ -618,6 +682,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         int indentLineCount = myIndentLineCounts.pop();
         if (indentLineCount == myLineCount) {
             myPendingEOL = 0;
+            runAllAfterEol();
         } else {
             line();
         }
@@ -665,6 +730,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
         }
         myPendingSpaces = 0;
         myPendingEOL = 0;
+        runAllAfterEol();
         ++myPreFormattedNesting;
         return this;
     }
@@ -685,6 +751,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     @Override
     public boolean isPendingEOL() {
         return myPendingEOL > 0;
+    }
+
+    @Override
+    public int getPendingEOL() {
+        return myPendingEOL;
     }
 
     @Override

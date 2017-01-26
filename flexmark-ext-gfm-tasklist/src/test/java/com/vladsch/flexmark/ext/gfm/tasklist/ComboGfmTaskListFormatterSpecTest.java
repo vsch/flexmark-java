@@ -1,6 +1,7 @@
-package com.vladsch.flexmark.formatter;
+package com.vladsch.flexmark.ext.gfm.tasklist;
 
 import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -9,23 +10,29 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class ComboFormatterSpecTest extends ComboSpecTestCase {
-    private static final String SPEC_RESOURCE = "/formatter_ast_spec.md";
+public class ComboGfmTaskListFormatterSpecTest extends ComboSpecTestCase {
+    private static final String SPEC_RESOURCE = "/ext_gfm_tasklist_formatter_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             //.set(FormattingRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
+            .set(Parser.EXTENSIONS, Collections.singleton(TaskListExtension.create()))
+            .set(Parser.HEADING_NO_ATX_SPACE, true)
             ;
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
+        optionsMap.put("task-case-as-is", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.AS_IS));
+        optionsMap.put("task-case-lowercase", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.LOWERCASE));
+        optionsMap.put("task-case-uppercase", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_CASE, TaskListItemCase.UPPERCASE));
+        optionsMap.put("task-placement-as-is", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.AS_IS));
+        optionsMap.put("task-placement-incomplete-first", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.INCOMPLETE_FIRST));
+        optionsMap.put("task-placement-incomplete-nested-first", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.INCOMPLETE_NESTED_FIRST));
+        optionsMap.put("task-placement-complete-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_TO_NON_TASK));
+        optionsMap.put("task-placement-complete-nested-to-non-task", new MutableDataSet().set(TaskListExtension.FORMAT_LIST_ITEM_PLACEMENT, TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();
@@ -37,7 +44,7 @@ public class ComboFormatterSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboFormatterSpecTest(SpecExample example) {
+    public ComboGfmTaskListFormatterSpecTest(SpecExample example) {
         super(example);
     }
 

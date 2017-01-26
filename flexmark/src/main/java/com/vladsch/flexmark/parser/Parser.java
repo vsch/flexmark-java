@@ -87,7 +87,12 @@ public class Parser implements IParse {
 
     // the meat of differences in emulation
     public static final DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
-    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = new DataKey<>("PARSER_EMULATION_FAMILY", ParserEmulationProfile.COMMONMARK);
+    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_PROFILE = new DataKey<>("PARSER_EMULATION_PROFILE", ParserEmulationProfile.COMMONMARK);
+
+    /**
+     * @deprecated
+     */
+    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = PARSER_EMULATION_PROFILE;
 
     // LISTS_ITEM_INDENT is also the INDENTED CODE INDENT parser emulation family either does not use it or expects the number of columns to next indent item (in this case indented code is the same)
     // LISTS_CODE_INDENT can be the same as LISTS_ITEM_INDENT or double that where indentation counts from first list item indent

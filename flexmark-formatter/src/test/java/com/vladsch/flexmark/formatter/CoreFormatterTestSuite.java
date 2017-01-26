@@ -4,7 +4,7 @@ import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-        ComboFormatterSpecTest.class,
+        ComboCoreFormatterSpecTest.class,
 })
-public class ExtFormatterTestSuite {
+public class CoreFormatterTestSuite {
 }

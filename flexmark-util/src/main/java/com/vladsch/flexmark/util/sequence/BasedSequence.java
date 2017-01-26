@@ -386,6 +386,8 @@ public interface BasedSequence extends CharSequence {
     int countCharsReversed(CharSequence chars, int startIndex, int endIndex);
     int countNotCharsReversed(CharSequence chars, int startIndex, int endIndex);
 
+    int countLeadingColumns(int startColumn, CharSequence chars);
+
     /**
      * Trim, Trim start/end of this sequence, characters to trim are passed in the sequence argument
      * <p>
