@@ -2,8 +2,9 @@ package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.options.DataHolder;
+
+import java.util.Collection;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
@@ -18,7 +19,7 @@ public interface NodeFormatterContext {
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
      * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
      *
-     * @param out           appendable to use for generated html
+     * @param out appendable to use for generated html
      * @return a new rendering context with a given appendable for its output
      */
     NodeFormatterContext getSubContext(Appendable out);
@@ -65,4 +66,33 @@ public interface NodeFormatterContext {
      * @return the current node being rendered
      */
     Node getCurrentNode();
+
+    /**
+     * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.
+     * Only node classes returned by {@link NodeFormatter#getNodeClasses(DataHolder)} of all loaded extensions
+     * will be available to formatters.
+     * <p>
+     * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}
+     * if {@link Formatter#REFERENCE_SORT} is set to
+     * {@link com.vladsch.flexmark.formatter.options.ElementPlacementSort#SORT_UNUSED_LAST} so that
+     *
+     * @param classes node classes to return
+     * @return iterable
+     */
+    Iterable<? extends Node> nodesOfType(Class<?>[] classes);
+    Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes);
+    /**
+     * Get iterable of nodes of given types, in reverse order of their appearance in the document tree, depth first traversal.
+     * Only node classes returned by {@link NodeFormatter#getNodeClasses(DataHolder)} of all loaded extensions
+     * will be available to formatters.
+     * <p>
+     * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}
+     * if {@link Formatter#REFERENCE_SORT} is set to
+     * {@link com.vladsch.flexmark.formatter.options.ElementPlacementSort#SORT_UNUSED_LAST} so that
+     *
+     * @param classes node classes to return
+     * @return iterable
+     */
+    Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes);
+    Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes);
 }

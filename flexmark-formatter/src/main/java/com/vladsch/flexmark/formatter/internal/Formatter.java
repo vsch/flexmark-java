@@ -8,6 +8,9 @@ import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
+import com.vladsch.flexmark.util.collection.SubClassingBag;
+import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterable;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 
@@ -213,6 +216,7 @@ public class Formatter implements IRender {
          * @param nodeFormatterFactory the factory for creating a node renderer
          * @return {@code this}
          */
+        @SuppressWarnings("UnusedReturnValue")
         public Builder nodeFormatterFactory(NodeFormatterFactory nodeFormatterFactory) {
             this.nodeFormatterFactories.add(nodeFormatterFactory);
             return this;
@@ -259,9 +263,34 @@ public class Formatter implements IRender {
         void extend(Builder builder);
     }
 
+    private final static Iterator<? extends Node> NULL_ITERATOR = new Iterator<Node>() {
+        @Override
+        public boolean hasNext() {
+            return false;
+        }
+
+        @Override
+        public Node next() {
+            return null;
+        }
+
+        @Override
+        public void remove() {
+        }
+    };
+
+    private final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
+        @Override
+        public Iterator<Node> iterator() {
+            return null;
+        }
+    };
+
+
     private class MainNodeFormatter extends NodeFormatterSubContext implements NodeFormatterContext {
         private final Document document;
         private final Map<Class<?>, NodeFormattingHandler> renderers;
+        private final SubClassingBag<Node> collectedNodes;
 
         private final List<PhasedNodeFormatter> phasedFormatters;
         private final Set<FormattingPhase> renderingPhases;
@@ -274,6 +303,7 @@ public class Formatter implements IRender {
             this.document = document;
             this.renderers = new HashMap<>(32);
             this.renderingPhases = new HashSet<>(FormattingPhase.values().length);
+            final Set<Class> collectNodeTypes = new HashSet<>(100);
             this.phasedFormatters = new ArrayList<>(nodeFormatterFactories.size());
 
             out.setContext(this);
@@ -287,6 +317,12 @@ public class Formatter implements IRender {
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }
 
+                // get nodes of interest
+                Set<Class<?>> nodeClasses = nodeFormatter.getNodeClasses(this.options);
+                if (nodeClasses != null) {
+                    collectNodeTypes.addAll(nodeClasses);
+                }
+
                 if (nodeFormatter instanceof PhasedNodeFormatter) {
                     Set<FormattingPhase> phases = ((PhasedNodeFormatter) nodeFormatter).getFormattingPhases();
                     if (phases != null) {
@@ -297,6 +333,14 @@ public class Formatter implements IRender {
                         throw new IllegalStateException("PhasedNodeFormatter with null Phases");
                     }
                 }
+            }
+
+            // collect nodes of interest from document
+            if (!collectNodeTypes.isEmpty()) {
+                NodeCollectingVisitor collectingVisitor = new NodeCollectingVisitor(collectNodeTypes);
+                collectedNodes = collectingVisitor.getSubClassingBag();
+            } else {
+                collectedNodes = null;
             }
         }
 
@@ -328,6 +372,28 @@ public class Formatter implements IRender {
         @Override
         public void render(Node node) {
             renderNode(node, this);
+        }
+
+        @Override
+        public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
+            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
+        }
+
+        @Override
+        public final Iterable<? extends Node> nodesOfType(final Collection<Class<?>> classes) {
+            //noinspection unchecked
+            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.itemsOfType(Node.class, classes);
+        }
+
+        @Override
+        public final Iterable<? extends Node> reversedNodesOfType(final Class<?>[] classes) {
+            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
+        }
+
+        @Override
+        public final Iterable<? extends Node> reversedNodesOfType(final Collection<Class<?>> classes) {
+            //noinspection unchecked
+            return collectedNodes == null ? NULL_ITERABLE : collectedNodes.reversedItemsOfType(Node.class, classes);
         }
 
         @Override
@@ -403,6 +469,27 @@ public class Formatter implements IRender {
             public SubNodeFormatter(MainNodeFormatter mainNodeRenderer, MarkdownWriter out) {
                 super(out);
                 myMainNodeRenderer = mainNodeRenderer;
+            }
+
+            @Override
+            public final Iterable<? extends Node> nodesOfType(final Class<?>[] classes) {
+                return myMainNodeRenderer.nodesOfType(classes);
+            }
+
+            @Override
+            public final Iterable<? extends Node> nodesOfType(final Collection<Class<?>> classes) {
+                return myMainNodeRenderer.nodesOfType(classes);
+            }
+
+            @Override
+            public final Iterable<? extends Node> reversedNodesOfType(final Class<?>[] classes) {
+                return myMainNodeRenderer.reversedNodesOfType(classes);
+            }
+
+            @Override
+            public final Iterable<? extends Node> reversedNodesOfType(final Collection<Class<?>> classes) {
+                //noinspection unchecked
+                return myMainNodeRenderer.reversedNodesOfType(classes);
             }
 
             @Override

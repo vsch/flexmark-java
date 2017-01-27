@@ -7,10 +7,11 @@ import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
-import java.util.*;
-import java.util.prefs.BackingStoreException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
@@ -43,6 +44,11 @@ public class TaskListNodeFormatter implements NodeFormatter {
                     }
                 })
         ));
+    }
+
+    @Override
+    public Set<Class<?>> getNodeClasses(final DataHolder options) {
+        return null;
     }
 
     private void render(final TaskListItem node, final NodeFormatterContext context, final MarkdownWriter markdown) {

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
@@ -33,12 +34,14 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     private ReferenceRepository referenceRepository;
     private boolean recheckUndefinedReferences;
     private int blankLines;
+    private final HashSet<Node> unusedReference;
 
     public CoreNodeFormatter(DataHolder options) {
         this.options = new FormatterOptions(options);
         this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = ListOptions.getFrom(options);
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        unusedReference = new HashSet<>();
         blankLines = 0;
     }
 
@@ -48,13 +51,31 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     @Override
+    public Set<Class<?>> getNodeClasses(final DataHolder options) {
+        if (Formatter.REFERENCE_SORT.getFrom(options) != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+        //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
+        return new HashSet<Class<?>>(Arrays.asList(
+                RefNode.class
+        ));
+    }
+
+    @Override
     public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
         switch (phase) {
             case COLLECT:
-                //if (options.referencePlacement) {
-                //
-                //}
+                if (options.referenceSort == ElementPlacementSort.SORT_UNUSED_LAST) {
+                    // get all ref nodes and figure out which ones are unused
+                    unusedReference.addAll(referenceRepository.values());
+                    for (Node node : context.nodesOfType(new Class<?>[] { RefNode.class })) {
+                        if (node instanceof RefNode) {
+                            Reference reference = ((RefNode) node).getReferenceNode(referenceRepository);
+                            if (reference != null) {
+                                unusedReference.remove(reference);
+                            }
+                        }
+                    }
+                }
                 break;
 
             case DOCUMENT_TOP:

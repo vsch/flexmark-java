@@ -129,16 +129,16 @@ flexmark-java
   file. Lines prefixed with `>` that are otherwise empty are blank lines inside the block quote
   and will be in the AST as blank lines.
 
-* Fix: trailing atx heading marker should not require space if `Parser.HEADING_NO_ATX_SPACE` is
-  true.
+* Fix: #48, When `Parser.HEADING_NO_ATX_SPACE` is enabled trailing ### should not require a
+  space
 
 * Add: #49, Add `flexmark-formatter` module to render AST as markdown with formatting options,
   and Formatting API that can be used by extensions to customize formatting markdown source of
   custom elements. This module implements formatting of core nodes, all unknown nodes are pass
   through as is.
 
-* Add: `Formatter.FormatterExtension` implementation to all modules where it makes sense to
-  format custom elements.
+  * `Formatter.FormatterExtension` implementation to all modules where it makes sense to
+    format custom elements.
 
 0.12.3
 ------
