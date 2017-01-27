@@ -27,6 +27,8 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Integer> MARKER_SPACES = new DataKey<>("MARKER_SPACE", 1);
     public static final DataKey<Boolean> TILDE_MARKER = new DataKey<>("TILDE_MARKER", true);
 
+    // TODO: implement formatter for this extension
+
     private DefinitionExtension() {
     }
 

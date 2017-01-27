@@ -38,23 +38,7 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
 
                         if (blankLinesInAST) {
                             // transfer its trailing blank lines to uppermost level
-                            Node blankLine = child.getLastChild();
-                            if (blankLine instanceof BlankLine) {
-                                Node blankLineSibling = child.getBlankLineSibling();
-                                if (blankLineSibling != null) {
-                                    while (blankLine instanceof BlankLine) {
-                                        Node node = blankLine.getPrevious();
-                                        blankLine.unlink();
-                                        blankLineSibling.insertAfter(blankLine);
-                                        blankLine = node;
-                                    }
-                                    //blankLineSibling.setCharsFromContent();
-                                    child.setCharsFromContentOnly();
-                                    blankLineSibling.getParent().setCharsFromContentOnly();
-                                } else {
-                                    int tmp = 0;
-                                }
-                            }
+                            child.moveTrailingBlankLines();
                         }
                     }
                 }

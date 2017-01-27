@@ -22,6 +22,11 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
+    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
+            FormattingPhase.COLLECT,
+            FormattingPhase.DOCUMENT_TOP,
+            FormattingPhase.DOCUMENT_BOTTOM
+    ));
 
     private final FormatterOptions options;
     private final ListOptions listOptions;
@@ -39,14 +44,28 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
 
     @Override
     public Set<FormattingPhase> getFormattingPhases() {
-        HashSet<FormattingPhase> set = new HashSet<>();
-        set.add(FormattingPhase.COLLECT);
-        return set;
+        return FORMATTING_PHASES;
     }
 
     @Override
     public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
         // here non-rendered elements can be collected so that they are rendered in another part of the document
+        switch (phase) {
+            case COLLECT:
+                //if (options.referencePlacement) {
+                //
+                //}
+                break;
+
+            case DOCUMENT_TOP:
+                break;
+
+            case DOCUMENT_BOTTOM:
+                break;
+
+            default:
+                break;
+        }
     }
 
     @Override
@@ -262,10 +281,24 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
+        BasedSequence chars = node.getChars();
         if (node instanceof Block) {
+            BasedSequence contentChars = ((Block) node).getContentChars();
+            if (chars.isNotNull()) {
+                BasedSequence prefix = chars.prefixOf(contentChars);
+                if (!prefix.isEmpty()) {
+                    markdown.append(prefix);
+                }
+            }
             context.renderChildren(node);
+            if (chars.isNotNull()) {
+                BasedSequence suffix = chars.suffixOf(contentChars);
+                if (!suffix.isEmpty()) {
+                    markdown.append(suffix);
+                }
+            }
         } else {
-            markdown.append(node.getChars());
+            markdown.append(chars);
         }
     }
 

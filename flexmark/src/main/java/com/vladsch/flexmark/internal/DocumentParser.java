@@ -611,7 +611,7 @@ public class DocumentParser implements ParserState {
                     matches++;
 
                     if (blankLine != null) {
-                        if (blockParser.canContain(blankLine)) {
+                        if (blockParser.getBlock() instanceof BlankLineContainer) {
                             blankLine.unlink();
                             blockParser.getBlock().appendChild(blankLine);
                         }

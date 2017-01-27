@@ -652,4 +652,22 @@ public abstract class Node {
 
         return lastBlankLineSibling;
     }
+
+    public void moveTrailingBlankLines() {
+        Node blankLine = getLastChild();
+        if (blankLine instanceof BlankLine) {
+            Node blankLineSibling = getBlankLineSibling();
+            if (blankLineSibling != null) {
+                while (blankLine instanceof BlankLine) {
+                    Node node = blankLine.getPrevious();
+                    blankLine.unlink();
+                    blankLineSibling.insertAfter(blankLine);
+                    blankLine = node;
+                }
+
+                setCharsFromContentOnly();
+                blankLineSibling.getParent().setCharsFromContentOnly();
+            }
+        }
+    }
 }

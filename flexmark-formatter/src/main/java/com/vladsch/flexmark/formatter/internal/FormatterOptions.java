@@ -30,6 +30,10 @@ public class FormatterOptions {
     public final ListBulletMarker listBulletMarker;
     public final ListNumberedMarker listNumberedMarker;
     public final ListSpacing listSpacing;
+    public final ElementPlacement referencePlacement;
+    public final ElementPlacementSort referenceSort;
+    public final KeepAtStartOfLine keepImageLinksAtStart;
+    public final KeepAtStartOfLine keepExplicitLinksAtStart;
 
     public FormatterOptions(DataHolder options) {
         ParserEmulationProfile emulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
@@ -57,5 +61,9 @@ public class FormatterOptions {
         listBulletMarker = Formatter.LIST_BULLET_MARKER.getFrom(options);
         listNumberedMarker = Formatter.LIST_NUMBERED_MARKER.getFrom(options);
         listSpacing = Formatter.LIST_SPACING.getFrom(options);
+        referencePlacement = Formatter.REFERENCE_PLACEMENT.getFrom(options);
+        referenceSort = Formatter.REFERENCE_SORT.getFrom(options);
+        keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.getFrom(options);
+        keepExplicitLinksAtStart = Formatter.KEEP_EXPLICIT_LINKS_AT_START.getFrom(options);
     }
 }
