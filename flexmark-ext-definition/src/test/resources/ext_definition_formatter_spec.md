@@ -182,6 +182,7 @@ not a definition in a lazy block quote
 .
 > definition
 > : definition item
+
 ````````````````````````````````
 
 
@@ -193,6 +194,7 @@ a definition in a block quote
 .
 > Definition Term
 > :   definition item
+
 ````````````````````````````````
 
 
