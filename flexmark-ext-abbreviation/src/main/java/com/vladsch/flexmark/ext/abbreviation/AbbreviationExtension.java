@@ -1,10 +1,10 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodePostProcessor;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationNodeRenderer;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationParagraphPreProcessor;
-import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
+import com.vladsch.flexmark.ext.abbreviation.internal.*;
+import com.vladsch.flexmark.formatter.internal.Formatter;
+import com.vladsch.flexmark.formatter.options.ElementPlacement;
+import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
@@ -24,7 +24,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed abbreviations are turned into abbr tags by default or a links as an option by setting the {@link AbbreviationExtension#USE_LINKS} key to true in option used to create the {@link Parser.Builder} via {@code Parser.builder(options)}
  * </p>
  */
-public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension {
+public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
     /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
@@ -45,8 +45,17 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
      */
     public static final DataKey<Boolean> USE_LINKS = new DataKey<>("USE_LINKS", false);
 
+    // format options
+    public static final DataKey<ElementPlacement> ABBREVIATIONS_PLACEMENT = new DataKey<>("ABBREVIATIONS_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> ABBREVIATIONS_SORT = new DataKey<>("ABBREVIATIONS_SORT", ElementPlacementSort.AS_IS);
+
     public static Extension create() {
         return new AbbreviationExtension();
+    }
+
+    @Override
+    public void extend(final Formatter.Builder builder) {
+        builder.nodeFormatterFactory(new AbbreviationNodeFormatter.Factory());
     }
 
     @Override

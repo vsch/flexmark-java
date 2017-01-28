@@ -29,8 +29,8 @@ public class ComboSimTocSpecTest extends ComboSpecTestCase {
         optionsMap.put("flat-reversed", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.FLAT_REVERSED));
         optionsMap.put("sorted", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.SORTED));
         optionsMap.put("sorted-reversed", new MutableDataSet().set(TocExtension.LIST_TYPE, TocOptions.ListType.SORTED_REVERSED));
-        optionsMap.put("with-option-list", new MutableDataSet().set(SimTocExtension.AST_INCLUDE_OPTIONS, true));
-        optionsMap.put("blank-line-spacer", new MutableDataSet().set(SimTocExtension.BLANK_LINE_SPACER, true));
+        optionsMap.put("with-option-list", new MutableDataSet().set(TocExtension.AST_INCLUDE_OPTIONS, true));
+        optionsMap.put("blank-line-spacer", new MutableDataSet().set(TocExtension.BLANK_LINE_SPACER, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.ext.toc.internal;
 
-import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.util.Immutable;
 import com.vladsch.flexmark.util.Mutable;
@@ -86,14 +85,14 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
     public TocOptions(DataHolder options) {
         this(
                 TocExtension.LEVELS.getFrom(options),
-                SimTocExtension.IS_HTML.getFrom(options),
+                TocExtension.IS_HTML.getFrom(options),
                 TocExtension.IS_TEXT_ONLY.getFrom(options),
                 TocExtension.IS_NUMBERED.getFrom(options),
-                SimTocExtension.TITLE_LEVEL.getFrom(options),
-                SimTocExtension.TITLE.getFrom(options),
+                TocExtension.TITLE_LEVEL.getFrom(options),
+                TocExtension.TITLE.getFrom(options),
                 TocExtension.LIST_TYPE.getFrom(options),
-                SimTocExtension.AST_INCLUDE_OPTIONS.getFrom(options),
-                SimTocExtension.BLANK_LINE_SPACER.getFrom(options)
+                TocExtension.AST_INCLUDE_OPTIONS.getFrom(options),
+                TocExtension.BLANK_LINE_SPACER.getFrom(options)
         );
     }
 
@@ -103,11 +102,11 @@ public class TocOptions implements Immutable<TocOptions, TocOptions.AsMutable>, 
         dataHolder.set(TocExtension.IS_TEXT_ONLY, isTextOnly);
         dataHolder.set(TocExtension.IS_NUMBERED, isNumbered);
         dataHolder.set(TocExtension.LIST_TYPE, listType);
-        dataHolder.set(SimTocExtension.IS_HTML, isHtml);
-        dataHolder.set(SimTocExtension.TITLE_LEVEL, titleLevel);
-        dataHolder.set(SimTocExtension.TITLE, title);
-        dataHolder.set(SimTocExtension.AST_INCLUDE_OPTIONS, isAstAddOptions);
-        dataHolder.set(SimTocExtension.BLANK_LINE_SPACER, isBlankLineSpacer);
+        dataHolder.set(TocExtension.IS_HTML, isHtml);
+        dataHolder.set(TocExtension.TITLE_LEVEL, titleLevel);
+        dataHolder.set(TocExtension.TITLE, title);
+        dataHolder.set(TocExtension.AST_INCLUDE_OPTIONS, isAstAddOptions);
+        dataHolder.set(TocExtension.BLANK_LINE_SPACER, isBlankLineSpacer);
         return dataHolder;
     }
 

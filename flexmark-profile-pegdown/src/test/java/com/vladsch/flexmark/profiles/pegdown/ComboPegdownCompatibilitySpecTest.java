@@ -16,8 +16,9 @@ import java.util.Map;
 public class ComboPegdownCompatibilitySpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_profile_compatibility_spec.md";
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.FENCED_CODE_BLOCKS
+            Extensions.FENCED_CODE_BLOCKS | Extensions.AUTOLINKS
     ).toMutable()
+            .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;

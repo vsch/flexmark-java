@@ -1,16 +1,29 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.ReferenceNode;
+import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A block node that contains the abbreviation definition
  */
-public class AbbreviationBlock extends CustomBlock {
+public class AbbreviationBlock extends CustomBlock implements ReferenceNode<AbbreviationRepository, AbbreviationBlock, Abbreviation> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected BasedSequence abbreviation = BasedSequence.NULL;
+
+    @Override
+    public Abbreviation getReferencingNode(final Node node) {
+        return node instanceof Abbreviation ? (Abbreviation) node : null;
+    }
+
+    @Override
+    public int compareTo(final AbbreviationBlock o) {
+        return text.compareTo(o.getText());
+    }
 
     @Override
     public void getAstExtra(StringBuilder out) {

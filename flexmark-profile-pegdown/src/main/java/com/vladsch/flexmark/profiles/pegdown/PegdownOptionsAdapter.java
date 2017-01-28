@@ -173,7 +173,7 @@ public class PegdownOptionsAdapter {
 
             if (haveExtensions(TOC)) {
                 extensions.add(SimTocExtension.create());
-                options.set(SimTocExtension.BLANK_LINE_SPACER, true);
+                options.set(TocExtension.BLANK_LINE_SPACER, true);
 
                 extensions.add(TocExtension.create());
                 options.set(TocExtension.LEVELS, TocOptions.getLevels(2, 3));

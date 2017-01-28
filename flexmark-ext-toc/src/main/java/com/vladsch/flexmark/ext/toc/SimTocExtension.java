@@ -22,15 +22,16 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    // duplicated here for convenience
     public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
     public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
     public static final DataKey<Boolean> IS_NUMBERED = TocExtension.IS_NUMBERED;
     public static final DataKey<TocOptions.ListType> LIST_TYPE = TocExtension.LIST_TYPE;
-    public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
-    public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    public static final DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
-    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
-    public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
+    public static final DataKey<Boolean> IS_HTML = TocExtension.IS_HTML;
+    public static final DataKey<Integer> TITLE_LEVEL = TocExtension.TITLE_LEVEL;
+    public static final DataKey<String> TITLE = TocExtension.TITLE;
+    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = TocExtension.AST_INCLUDE_OPTIONS;
+    public static final DataKey<Boolean> BLANK_LINE_SPACER = TocExtension.BLANK_LINE_SPACER;
 
     // format options
     public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = TocExtension.FORMAT_UPDATE_ON_FORMAT;

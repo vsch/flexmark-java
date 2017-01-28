@@ -2716,3 +2716,20 @@ Document[0, 235]
 ````````````````````````````````
 
 
+## E-Mail Obfuscation
+
+```````````````````````````````` example E-Mail Obfuscation: 1
+text with example@example.com email address
+.
+<p>text with <a href="&#109;&#x61;i&#x6c;&#116;&#x6f;&#58;&#101;xa&#x6d;&#x70;&#x6c;&#x65;&#64;ex&#97;&#109;&#112;&#x6c;&#x65;.&#x63;&#x6f;&#109;">&#x65;&#x78;&#x61;&#x6d;&#112;&#108;&#x65;&#x40;&#x65;&#x78;&#97;&#x6d;&#x70;&#108;&#101;&#46;&#99;&#111;&#x6d;</a> email address</p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    TextBase[0, 43] chars:[0, 43, "text  … dress"]
+      Text[0, 10] chars:[0, 10, "text with "]
+      MailLink[10, 29] text:[10, 29, "example@example.com"]
+        Text[10, 29] chars:[10, 29, "examp … e.com"]
+      Text[29, 43] chars:[29, 43, " emai … dress"]
+````````````````````````````````
+
+

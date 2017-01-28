@@ -1,5 +1,6 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationFormatterSpecTest;
 import com.vladsch.flexmark.ext.definition.ComboDefinitionFormatterSpecTest;
 import com.vladsch.flexmark.ext.footnotes.ComboFootnotesFormatterSpecTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
@@ -10,7 +11,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         //UtilsTestSuite.class,
         //CoreTestSuite.class,
-        //ComboAbbreviationFormatterSpecTest.class,
+        ComboAbbreviationFormatterSpecTest.class,
         //ComboAnchorLinkFormatterSpecTest.class,
         //ComboAsideFormatterSpecTest.class,
         //ComboAutolinkFormatterSpecTest.class,

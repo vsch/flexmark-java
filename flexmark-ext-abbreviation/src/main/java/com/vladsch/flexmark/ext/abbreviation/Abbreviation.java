@@ -1,13 +1,16 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.ReferencingNode;
+import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A node containing the abbreviated text that will be rendered as an abbr tag or a link with title attribute
  */
-public class Abbreviation extends Node implements DoNotDecorate {
+public class Abbreviation extends Node implements DoNotDecorate, ReferencingNode<AbbreviationRepository, AbbreviationBlock> {
     protected final BasedSequence abbreviation;
 
     public Abbreviation(BasedSequence chars, BasedSequence abbreviation) {
@@ -34,4 +37,23 @@ public class Abbreviation extends Node implements DoNotDecorate {
         return "text=" + getChars();
     }
 
+    @Override
+    public boolean isDefined() {
+        return true;
+    }
+
+    @Override
+    public BasedSequence getReference() {
+        return abbreviation;
+    }
+
+    @Override
+    public AbbreviationBlock getReferenceNode(final Document document) {
+        return getReferenceNode(AbbreviationExtension.ABBREVIATIONS.getFrom(document));
+    }
+
+    @Override
+    public AbbreviationBlock getReferenceNode(final AbbreviationRepository repository) {
+        return repository.get(getChars().toString());
+    }
 }
