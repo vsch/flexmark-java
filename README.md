@@ -24,6 +24,8 @@ than ideal and for pathological input either hangs or practically hangs during p
 * [Jekyll tags Extension Module](../../wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](../../wiki/Extensions#html-to-markdown)
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
+* [Markdown Formatter](../../wiki/Markdown-Formatter) module to output AST as markdown with
+  formatting options.
 
 ### Changes Forced by Downgrade to Java 7
 
