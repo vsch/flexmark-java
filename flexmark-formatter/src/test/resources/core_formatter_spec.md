@@ -45,14 +45,14 @@ lazy continuation
 > lazy continuation
 
 ~~~info
-        with uneven indent
-           with uneven indent
-     indented code
+   with uneven indent
+      with uneven indent
+indented code
 ~~~
 
-        with uneven indent
-           with uneven indent
-     indented code
+       with uneven indent
+          with uneven indent
+    indented code
 
 1. numbered item 1
 2. numbered item 2
@@ -673,7 +673,7 @@ list family changing
 > code
 > ~~~
 >     
->      indented code
+>     indented code
 > 
 > 1. numbered item 1
 
@@ -728,14 +728,14 @@ Document[0, 131]
 >> lazy continuation
 > 
 > ~~~info
->         with uneven indent
->            with uneven indent
->      indented code
+>    with uneven indent
+>       with uneven indent
+> indented code
 > ~~~
 >     
->         with uneven indent
->            with uneven indent
->      indented code
+>        with uneven indent
+>           with uneven indent
+>     indented code
 > 
 > 1. numbered item 1
 > 2. numbered item 2
@@ -776,14 +776,14 @@ Document[0, 131]
 > > lazy continuation
 > 
 > ~~~info
->         with uneven indent
->            with uneven indent
->      indented code
+>    with uneven indent
+>       with uneven indent
+> indented code
 > ~~~
 >     
->         with uneven indent
->            with uneven indent
->      indented code
+>        with uneven indent
+>           with uneven indent
+>     indented code
 > 
 > 1. numbered item 1
 > 2. numbered item 2
@@ -1092,10 +1092,10 @@ Heading
 ``````
 .
 ```info
-   indented
-       text
- closing
-``````
+  indented
+      text
+closing
+```
 
 ````````````````````````````````
 
@@ -1108,10 +1108,10 @@ Heading
 ~~~~~~
 .
 ~~~info
-   indented
-       text
- closing
-~~~~~~
+  indented
+      text
+closing
+~~~
 
 ````````````````````````````````
 
@@ -1127,7 +1127,7 @@ Heading
   indented
       text
 closing
-``````
+```
 
 ````````````````````````````````
 
@@ -1143,7 +1143,7 @@ closing
   indented
       text
 closing
-``````
+```
 
 ````````````````````````````````
 
@@ -1159,7 +1159,7 @@ closing
   indented
       text
 closing
-~~~~~~
+~~~
 
 ````````````````````````````````
 
@@ -1172,10 +1172,10 @@ closing
 ~~~~~~
 .
 ```info
-   indented
-       text
- closing
-``````
+  indented
+      text
+closing
+```
 
 ````````````````````````````````
 
@@ -1188,10 +1188,10 @@ closing
 ```````
 .
 ~~~info
-   indented
-       text
- closing
-~~~~~~~
+  indented
+      text
+closing
+~~~
 
 ````````````````````````````````
 
@@ -1204,9 +1204,9 @@ closing
 ~~~~~~
 .
 ~~~info
-   indented
-       text
- closing
+  indented
+      text
+closing
 ~~~
 
 ````````````````````````````````
@@ -1220,9 +1220,9 @@ closing
 ```````
 .
 ```info
-   indented
-       text
- closing
+  indented
+      text
+closing
 ```
 
 ````````````````````````````````
@@ -1236,9 +1236,9 @@ closing
 ~~~~
 .
 ~~~~~~info
-   indented
-       text
- closing
+  indented
+      text
+closing
 ~~~~~~
 
 ````````````````````````````````
@@ -1252,9 +1252,9 @@ closing
 ````
 .
 ``````info
-   indented
-       text
- closing
+  indented
+      text
+closing
 ``````
 
 ````````````````````````````````

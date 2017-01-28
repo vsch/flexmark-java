@@ -64,7 +64,7 @@ import org.junit.runners.Suite;
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,
         PegdownProfileTestSuite.class,
-        ComboFormatterTestSuiteSpecTest.class,
+        FlexmarkFormatterTestSuite.class,
 })
 public class FlexmarkTestSuite {
 }
