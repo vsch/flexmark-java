@@ -135,6 +135,75 @@ indented code
 ````````````````````````````````
 
 
+```````````````````````````````` example(Formatter: 3) options(format-fixed-indent, atx-space-add, atx-trailing-add, list-no-renumber-items, block-quote-compact-with-space, fenced-code-spaced-info, list-bullet-plus, fenced-code-marker-backtick, fenced-code-marker-length, fenced-code-minimize, indented-code-minimize)
+#Heading
+-----
+paragraph text 
+lazy continuation
+* list item
+  > block quote
+  lazy continuation
+
+~~~info
+        with uneven indent
+           with uneven indent
+     indented code
+~~~ 
+
+        with uneven indent
+           with uneven indent
+     indented code
+1. numbered item 1   
+   1. numbered item 2   
+   
+   ~~~info
+           with uneven indent
+              with uneven indent
+        indented code
+   ~~~ 
+   
+           with uneven indent
+              with uneven indent
+        indented code
+.
+# Heading #
+
+-----
+
+paragraph text
+lazy continuation
++ list item
+
+    > block quote
+    > lazy continuation
+
+`````` info
+   with uneven indent
+      with uneven indent
+indented code
+``````
+
+       with uneven indent
+          with uneven indent
+    indented code
+
+1. numbered item 1
+
+    1. numbered item 2
+
+    `````` info
+       with uneven indent
+          with uneven indent
+    indented code
+    ``````
+
+           with uneven indent
+              with uneven indent
+        indented code
+
+````````````````````````````````
+
+
 ### Lists
 
 ```````````````````````````````` example Lists: 1
@@ -254,6 +323,331 @@ indented code
 1) list item 1
    1) list item 1.1
    1) list item 1.2
+````````````````````````````````
+
+
+```````````````````````````````` example Lists: 7
+paragraph
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+paragraph
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example Lists: 8
+paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example Lists: 9
+paragraph
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+paragraph
+1. item 1
+2. item 2
+   1. item 2.1
+   2. item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 10) options(list-add-blank-line-before)
+paragraph
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+paragraph
+
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 11) options(list-add-blank-line-before)
+paragraph
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+paragraph
+
+1. item 1
+2. item 2
+   1. item 2.1
+   2. item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 12) options(list-bullet-asterisk)
++ item 1
++ item 2
+  + item 2.1
+  + item 2.2
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 13) options(list-bullet-plus)
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
++ item 1
++ item 2
+  + item 2.1
+  + item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 14) options(list-bullet-dash)
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+.
+- item 1
+- item 2
+  - item 2.1
+  - item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 15) options(list-no-renumber-items)
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 16) options(list-no-renumber-items, list-numbered-paren)
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+.
+1) item 1
+1) item 2
+   1) item 2.1
+   1) item 2.2
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 17) options(list-no-renumber-items, list-numbered-dot)
+1) item 1
+1) item 2
+   1) item 2.1
+   1) item 2.2
+.
+1. item 1
+1. item 2
+   1. item 2.1
+   1. item 2.2
+````````````````````````````````
+
+
+list spacing
+
+```````````````````````````````` example Lists: 18
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 19) options(list-spacing-loose)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 20) options(list-spacing-tight)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 21) options(list-spacing-loosen)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 22) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 23) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+
+paragraph
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+
+paragraph
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 24) options(list-spacing-tight)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+
+paragraph
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+* item 3
+
+paragraph
+````````````````````````````````
+
+
+list family changing
+
+```````````````````````````````` example(Lists: 25) options(format-fixed-indent)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+    * item 2.1
+
+    * item 2.2
+
+* item 3
+
 ````````````````````````````````
 
 
@@ -831,309 +1225,6 @@ closing
  closing
 ``````
 
-````````````````````````````````
-
-
-### Lists
-
-```````````````````````````````` example Lists: 1
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example Lists: 2
-paragraph
-
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-paragraph
-
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example Lists: 3
-paragraph
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-paragraph
-1. item 1
-2. item 2
-   1. item 2.1
-   2. item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 4) options(list-add-blank-line-before)
-paragraph
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-paragraph
-
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 5) options(list-add-blank-line-before)
-paragraph
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-paragraph
-
-1. item 1
-2. item 2
-   1. item 2.1
-   2. item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 6) options(list-bullet-asterisk)
-+ item 1
-+ item 2
-  + item 2.1
-  + item 2.2
-.
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 7) options(list-bullet-plus)
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-+ item 1
-+ item 2
-  + item 2.1
-  + item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 8) options(list-bullet-dash)
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-.
-- item 1
-- item 2
-  - item 2.1
-  - item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 9) options(list-no-renumber-items)
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 10) options(list-no-renumber-items, list-numbered-paren)
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-.
-1) item 1
-1) item 2
-   1) item 2.1
-   1) item 2.2
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 11) options(list-no-renumber-items, list-numbered-dot)
-1) item 1
-1) item 2
-   1) item 2.1
-   1) item 2.2
-.
-1. item 1
-1. item 2
-   1. item 2.1
-   1. item 2.2
-````````````````````````````````
-
-
-list spacing
-
-```````````````````````````````` example Lists: 12
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-
-* item 2
-
-  * item 2.1
-
-  * item 2.2
-
-* item 3
-
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 13) options(list-spacing-loose)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-
-* item 2
-
-  * item 2.1
-
-  * item 2.2
-
-* item 3
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 14) options(list-spacing-tight)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-* item 3
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 15) options(list-spacing-loosen)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-
-* item 2
-
-  * item 2.1
-
-  * item 2.2
-
-* item 3
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 16) options(list-spacing-tighten)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-.
-* item 1
-* item 2
-  * item 2.1
-
-  * item 2.2
-* item 3
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 17) options(list-spacing-tighten)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-
-paragraph
-.
-* item 1
-* item 2
-  * item 2.1
-
-  * item 2.2
-* item 3
-
-paragraph
-````````````````````````````````
-
-
-```````````````````````````````` example(Lists: 18) options(list-spacing-tight)
-* item 1
-* item 2
-  * item 2.1
-  
-  * item 2.2
-  
-* item 3
-
-paragraph
-.
-* item 1
-* item 2
-  * item 2.1
-  * item 2.2
-* item 3
-
-paragraph
 ````````````````````````````````
 
 

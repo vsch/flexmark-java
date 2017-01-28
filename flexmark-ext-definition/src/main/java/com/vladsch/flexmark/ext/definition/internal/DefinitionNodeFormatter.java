@@ -74,7 +74,9 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         }
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
+        markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : 4));
         context.renderChildren(node);
+        markdown.popPrefix();
     }
 
     public static class Factory implements NodeFormatterFactory {

@@ -38,7 +38,7 @@ public class FormatterOptions {
     //public final TrailingSpaces codeKeepTrailingSpaces;
 
     public FormatterOptions(DataHolder options) {
-        ParserEmulationProfile emulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
+        ParserEmulationProfile emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.getFrom(options);
         itemContentIndent = emulationProfile.family != ParserEmulationProfile.FIXED_INDENT;
 
         setextHeaderEqualizeMarker = Formatter.SETEXT_HEADER_EQUALIZE_MARKER.getFrom(options);

@@ -1,8 +1,11 @@
-package com.vladsch.flexmark.ext.front.matter.internal;
+package com.vladsch.flexmark.ext.yaml.front.matter.internal;
 
 import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterBlock;
-import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterNode;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.Content;
+import com.vladsch.flexmark.ast.ContentNode;
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterBlock;
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.block.*;
@@ -27,6 +30,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     private String currentKey;
     private List<String> currentValues;
     private YamlFrontMatterBlock block;
+    private BlockContent content;
 
     public YamlFrontMatterBlockParser() {
         inYAMLBlock = true;
@@ -34,6 +38,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         currentKey = null;
         currentValues = new ArrayList<>();
         block = new YamlFrontMatterBlock();
+        content = new BlockContent();
     }
 
     @Override
@@ -42,12 +47,20 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
     }
 
     @Override
+    public boolean isContainer() {
+        return false;
+    }
+
+    @Override
     public void addLine(ParserState state, BasedSequence line) {
+        content.add(line, state.getIndent());
     }
 
     @Override
     public void closeBlock(ParserState state) {
+        block.setContent(content.getLines().subList(0, content.getLineCount()));
         block.setCharsFromContent();
+        content = null;
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.vladsch.flexmark.integration;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
-import com.vladsch.flexmark.ext.front.matter.YamlFrontMatterExtension;
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.tables.TablesExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;

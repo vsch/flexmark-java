@@ -180,7 +180,72 @@ Document[0, 664]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 2) options(task-case-lowercase)
+```````````````````````````````` example(Task List Items: 2) options(format-fixed-indent)
+* list item 1
+  * [ ] list item 1.1
+  * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.2
+        * [X] list item 1.2.3
+* list item 2
+  * list item 2.1
+  * [x] list item 2.2
+        * list item 2.2.1
+        * list item 2.2.2
+        * [X] list item 2.2.3
+* list item 3
+  * [ ] list item 3.1
+  * list item 3.2
+    * list item 3.2.1
+    * [ ] list item 3.2.2
+    * list item 3.2.3
+* list item 4
+  * list item 4.1
+  * list item 4.2
+    * list item 4.2.1
+    * list item 4.2.2
+    * list item 4.2.3
+* list item 5
+  * [ ] list item 5.1
+  * [x] list item 5.2
+        * list item 5.2.1
+        * [ ] list item 5.2.2
+        * [X] list item 5.2.3
+.
+* list item 1
+    * [ ] list item 1.1
+    * [x] list item 1.2
+        * list item 1.2.1
+        * [ ] list item 1.2.2
+        * [X] list item 1.2.3
+* list item 2
+    * list item 2.1
+    * [x] list item 2.2
+        * list item 2.2.1
+        * list item 2.2.2
+        * [X] list item 2.2.3
+* list item 3
+    * [ ] list item 3.1
+    * list item 3.2
+        * list item 3.2.1
+        * [ ] list item 3.2.2
+        * list item 3.2.3
+* list item 4
+    * list item 4.1
+    * list item 4.2
+        * list item 4.2.1
+        * list item 4.2.2
+        * list item 4.2.3
+* list item 5
+    * [ ] list item 5.1
+    * [x] list item 5.2
+        * list item 5.2.1
+        * [ ] list item 5.2.2
+        * [X] list item 5.2.3
+````````````````````````````````
+
+
+```````````````````````````````` example(Task List Items: 3) options(task-case-lowercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -245,7 +310,7 @@ Document[0, 664]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Task List Items: 3) options(task-case-uppercase)
+```````````````````````````````` example(Task List Items: 4) options(task-case-uppercase)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -312,7 +377,7 @@ Document[0, 664]
 
 sort undone first
 
-```````````````````````````````` example(Task List Items: 4) options(task-placement-incomplete-first)
+```````````````````````````````` example(Task List Items: 5) options(task-placement-incomplete-first)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -379,7 +444,7 @@ sort undone first
 
 sort undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 5) options(task-placement-complete-to-non-task)
+```````````````````````````````` example(Task List Items: 6) options(task-placement-complete-to-non-task)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -446,7 +511,7 @@ sort undone first, complete to non-tasks
 
 sort undone or has undone first
 
-```````````````````````````````` example(Task List Items: 6) options(task-placement-incomplete-nested-first)
+```````````````````````````````` example(Task List Items: 7) options(task-placement-incomplete-nested-first)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -513,7 +578,7 @@ sort undone or has undone first
 
 sort undone or has undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 7) options(task-placement-complete-nested-to-non-task)
+```````````````````````````````` example(Task List Items: 8) options(task-placement-complete-nested-to-non-task)
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
@@ -580,7 +645,7 @@ sort undone or has undone first, complete to non-tasks
 
 sort undone or has undone first, complete to non-tasks
 
-```````````````````````````````` example(Task List Items: 8) options(task-placement-incomplete-nested-first)
+```````````````````````````````` example(Task List Items: 9) options(task-placement-incomplete-nested-first)
 * list item 2
   * list item 2.1
   * [x] list item 2.2

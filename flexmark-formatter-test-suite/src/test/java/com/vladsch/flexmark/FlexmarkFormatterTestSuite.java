@@ -4,7 +4,9 @@ import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationFormatterSpecTest;
 import com.vladsch.flexmark.ext.definition.ComboDefinitionFormatterSpecTest;
 import com.vladsch.flexmark.ext.footnotes.ComboFootnotesFormatterSpecTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
+import com.vladsch.flexmark.ext.jekyll.front.matter.ComboJekyllFrontMatterFormatterSpecTest;
 import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
+import com.vladsch.flexmark.ext.yaml.front.matter.ComboYamlFrontMatterFormatterSpecTest;
 import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
 import org.junit.runners.Suite;
 
@@ -23,7 +25,7 @@ import org.junit.runners.Suite;
         //ComboGfmStrikethroughFormatterSpecTest.class,
         //ComboGfmTablesFormatterSpecTest.class,
         ComboGfmTaskListFormatterSpecTest.class,
-        //ComboJekyllFrontMatterFormatterSpecTest.class,
+        ComboJekyllFrontMatterFormatterSpecTest.class,
         //ComboJekyllTagFormatterSpecTest.class,
         //ComboInsFormatterSpecTest.class,
         //ComboSuperscriptFormatterSpecTest.class,
@@ -33,7 +35,7 @@ import org.junit.runners.Suite;
         //ComboTypographicFormatterSpecTest.class,
         //ComboWikiLinkFormatterSpecTest.class,
         //ComboXWikiMacroFormatterSpecTest.class,
-        //ComboYamlFrontMatterFormatterSpecTest.class,
+        ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
         ComboFormatterTestSuiteSpecTest.class,
 })

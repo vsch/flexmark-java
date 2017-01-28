@@ -21,7 +21,7 @@ public class MarkdownWriter implements FormattingAppendable {
         myAppendable = new FormattingAppendableImpl(out, formatOptions);
     }
 
-    void setContext(NodeFormatterContext context) {
+    public void setContext(NodeFormatterContext context) {
         this.context = context;
     }
 

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.util.sequence.BasedSequence;

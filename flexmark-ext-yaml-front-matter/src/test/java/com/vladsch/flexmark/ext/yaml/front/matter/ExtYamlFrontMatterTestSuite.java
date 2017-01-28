@@ -1,10 +1,11 @@
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
-    YamlFrontMatterTest.class
+        YamlFrontMatterTest.class,
+        ComboYamlFrontMatterFormatterSpecTest.class,
 })
 public class ExtYamlFrontMatterTestSuite {
 }

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.options.ElementPlacement;
 import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
+import com.vladsch.flexmark.formatter.options.KeepAtStartOfLine;
 import com.vladsch.flexmark.formatter.options.ListSpacing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
@@ -787,10 +788,16 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (options.keepImageLinksAtStart != KeepAtStartOfLine.NONE) {
+
+        }
         markdown.append(node.getChars());
     }
 
     private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (options.keepExplicitLinksAtStart != KeepAtStartOfLine.NONE) {
+
+        }
         markdown.append(node.getChars());
     }
 

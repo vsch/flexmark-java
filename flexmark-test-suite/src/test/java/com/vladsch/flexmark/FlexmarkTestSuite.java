@@ -1,6 +1,5 @@
 package com.vladsch.flexmark;
 
-import com.vladsch.flexmark.convert.html.FlexmarkHtmlParser;
 import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
@@ -10,7 +9,7 @@ import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
 import com.vladsch.flexmark.ext.escaped.character.ExtEscapedCharacterTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
-import com.vladsch.flexmark.ext.front.matter.ExtYamlFrontMatterTestSuite;
+import com.vladsch.flexmark.ext.yaml.front.matter.ExtYamlFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;

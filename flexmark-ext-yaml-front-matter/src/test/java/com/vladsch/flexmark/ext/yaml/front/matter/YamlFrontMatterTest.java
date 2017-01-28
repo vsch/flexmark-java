@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Node;

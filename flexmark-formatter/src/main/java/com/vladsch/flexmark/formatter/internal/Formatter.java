@@ -8,6 +8,9 @@ import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
@@ -64,12 +67,35 @@ public class Formatter implements IRender {
     //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
 
+    // formatter family override
+    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<>(
+            "FORMATTER_EMULATION_PROFILE",
+            new DataValueFactory<ParserEmulationProfile>() {
+                @Override
+                public ParserEmulationProfile create(final DataHolder value) {
+                    return Parser.PARSER_EMULATION_PROFILE.getFrom(value);
+                }
+            }
+    );
+
+    //public boolean USE_ACTUAL_CHAR_WIDTH = true;
+    //
+    //public boolean ESCAPE_SPECIAL_CHARS_ON_WRAP = true;
+    //public boolean UNESCAPE_SPECIAL_CHARS_ON_WRAP = true;
+    //
+    //// text formatting
+    //public boolean KEEP_HARD_BREAKS = true;
+    //public boolean KEEP_EMBEDDED_SPACES = false;
+    //public boolean WRAP_TEXT = true;
+    //public TrailingSpaces FLEXMARK_EXAMPLE_KEEP_TRAILING_SPACES = TrailingSpaces.KEEP_ALL;
+
+
     private final List<NodeFormatterFactory> nodeFormatterFactories;
     private final FormatterOptions formatterOptions;
     private final DataHolder options;
     private final Builder builder;
 
-    Formatter(Builder builder) {
+    private Formatter(Builder builder) {
         this.builder = new Builder(builder); // take a copy to avoid after creation side effects
         this.options = new DataSet(builder);
         this.formatterOptions = new FormatterOptions(this.options);
@@ -313,7 +339,10 @@ public class Formatter implements IRender {
             for (int i = nodeFormatterFactories.size() - 1; i >= 0; i--) {
                 NodeFormatterFactory nodeFormatterFactory = nodeFormatterFactories.get(i);
                 NodeFormatter nodeFormatter = nodeFormatterFactory.create(this.getOptions());
-                for (NodeFormattingHandler nodeType : nodeFormatter.getNodeFormattingHandlers()) {
+                final Set<NodeFormattingHandler<?>> formattingHandlers = nodeFormatter.getNodeFormattingHandlers();
+                if (formattingHandlers == null) continue;
+
+                for (NodeFormattingHandler nodeType : formattingHandlers) {
                     // Overwrite existing renderer
                     renderers.put(nodeType.getNodeType(), nodeType);
                 }

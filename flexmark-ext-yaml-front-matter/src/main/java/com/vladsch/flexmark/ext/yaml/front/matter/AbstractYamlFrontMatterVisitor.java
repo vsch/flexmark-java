@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.yaml.front.matter;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeVisitor;
@@ -25,7 +25,7 @@ public class AbstractYamlFrontMatterVisitor implements YamlFrontMatterVisitor {
     public void visit(Node node) {
         myVisitor.visit(node);
     }
-    
+
     @Override
     public void visit(YamlFrontMatterNode node) {
         data.put(node.getKey(), node.getValues());

@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.ext.front.matter;
+package com.vladsch.flexmark.ext.yaml.front.matter;
 
 public interface YamlFrontMatterVisitor {
     void visit(final YamlFrontMatterNode node);

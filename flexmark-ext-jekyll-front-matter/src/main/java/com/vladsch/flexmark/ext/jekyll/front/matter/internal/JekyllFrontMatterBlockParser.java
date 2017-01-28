@@ -2,7 +2,6 @@ package com.vladsch.flexmark.ext.jekyll.front.matter.internal;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ext.front.matter.internal.YamlFrontMatterBlockParser;
 import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterBlock;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
 import com.vladsch.flexmark.parser.InlineParser;
@@ -87,9 +86,7 @@ public class JekyllFrontMatterBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            HashSet<Class<? extends  CustomBlockParserFactory>> set = new HashSet<>();
-            set.add(YamlFrontMatterBlockParser.Factory.class);
-            return set;
+            return null;
             //return new HashSet<>(Arrays.asList(
             //        YamlFrontMatterBlockParser.Factory.class
             //        //        BlockQuoteParser.Factory.class,

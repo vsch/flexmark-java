@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.12.3</version>
+        <version>0.13.0</version>
     </parent>
 
     <artifactId>flexmark-jira-converter</artifactId>
@@ -43,6 +43,11 @@
         <dependency>
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-formatter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
