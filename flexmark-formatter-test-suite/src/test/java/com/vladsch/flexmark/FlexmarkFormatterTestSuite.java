@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ext.abbreviation.ComboAbbreviationFormatterSpecTest;
 import com.vladsch.flexmark.ext.definition.ComboDefinitionFormatterSpecTest;
 import com.vladsch.flexmark.ext.footnotes.ComboFootnotesFormatterSpecTest;
 import com.vladsch.flexmark.ext.gfm.tasklist.ComboGfmTaskListFormatterSpecTest;
+import com.vladsch.flexmark.ext.tables.ComboTableFormatterSpecTest;
 import com.vladsch.flexmark.formatter.ComboCoreFormatterSpecTest;
 import org.junit.runners.Suite;
 
@@ -27,7 +28,7 @@ import org.junit.runners.Suite;
         //ComboInsFormatterSpecTest.class,
         //ComboSuperscriptFormatterSpecTest.class,
         //ComboSpecExampleFormatterSpecTest.class,
-        //ComboTablesFormatterSpecTest.class,
+        ComboTableFormatterSpecTest.class,
         //ComboTocFormatterSpecTest.class,
         //ComboTypographicFormatterSpecTest.class,
         //ComboWikiLinkFormatterSpecTest.class,

@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized;
 
 import java.util.*;
 
-public class ComboTablesSpecTest extends ComboSpecTestCase {
+public class ComboTableSpecTest extends ComboSpecTestCase {
     static final String SPEC_RESOURCE = "/ext_tables_ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 2)
@@ -44,7 +44,7 @@ public class ComboTablesSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboTablesSpecTest(SpecExample example) {
+    public ComboTableSpecTest(SpecExample example) {
         super(example);
     }
 

@@ -2,8 +2,10 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
+import com.vladsch.flexmark.ext.tables.internal.TableNodeFormatter;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.formatter.options.DiscretionaryText;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -21,7 +23,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed tables are turned into {@link TableBlock} blocks.
  * </p>
  */
-public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     public static final DataKey<Integer> MAX_HEADER_ROWS = new DataKey<>("MAX_HEADER_ROWS", Integer.MAX_VALUE);
     public static final DataKey<Integer> MIN_HEADER_ROWS = new DataKey<>("MIN_HEADER_ROWS", 0);
     public static final DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<>("APPEND_MISSING_COLUMNS", false);
@@ -37,14 +39,20 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPE = new DataKey<>("FORMAT_SPACE_AROUND_PIPE", true);
     public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = new DataKey<>("FORMAT_ADJUST_COLUMN_WIDTH", true);
     public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = new DataKey<>("FORMAT_APPLY_COLUMN_ALIGNMENT", true);
-    public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = new DataKey<>("FORMAT_FILL_MISSING_COLUMNS", true);
-    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_COLUMNS = new DataKey<>("FORMAT_DELETE_EMPTY_COLUMNS", true);
-    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_ROWS = new DataKey<>("FORMAT_DELETE_EMPTY_ROWS", true);
+    public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = new DataKey<>("FORMAT_FILL_MISSING_COLUMNS", false);
+    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_COLUMNS = new DataKey<>("FORMAT_DELETE_EMPTY_COLUMNS", false);
+    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_ROWS = new DataKey<>("FORMAT_DELETE_EMPTY_ROWS", false);
     public static final DataKey<Boolean> FORMAT_TRIM_CELLS = new DataKey<>("FORMAT_TRIM_CELLS", false);
+    public static final DataKey<Boolean> FORMAT_REMOVE_CAPTION = new DataKey<>("FORMAT_REMOVE_CAPTION", false);
     public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = new DataKey<>("FORMAT_LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
 
     public static Extension create() {
         return new TablesExtension();
+    }
+
+    @Override
+    public void extend(final Formatter.Builder builder) {
+        builder.nodeFormatterFactory(new TableNodeFormatter.Factory());
     }
 
     @Override

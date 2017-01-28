@@ -15,6 +15,7 @@ public class TableFormatOptions implements MutableDataSetter {
     public final boolean deleteEmptyColumns;
     public final boolean deleteEmptyRows;
     public final boolean trimCells;
+    public final boolean formatRemoveCaption;
     public final DiscretionaryText leftAlignMarker;
 
     public TableFormatOptions() {
@@ -31,6 +32,7 @@ public class TableFormatOptions implements MutableDataSetter {
         deleteEmptyRows = TablesExtension.FORMAT_DELETE_EMPTY_ROWS.getFrom(options);
         trimCells = TablesExtension.FORMAT_TRIM_CELLS.getFrom(options);
         leftAlignMarker = TablesExtension.FORMAT_LEFT_ALIGN_MARKER.getFrom(options);
+        formatRemoveCaption = TablesExtension.FORMAT_REMOVE_CAPTION.getFrom(options);
     }
 
     @Override
@@ -44,6 +46,7 @@ public class TableFormatOptions implements MutableDataSetter {
         dataHolder.set(TablesExtension.FORMAT_DELETE_EMPTY_ROWS, deleteEmptyRows);
         dataHolder.set(TablesExtension.FORMAT_TRIM_CELLS, trimCells);
         dataHolder.set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, leftAlignMarker);
+        dataHolder.set(TablesExtension.FORMAT_REMOVE_CAPTION, formatRemoveCaption);
         return dataHolder;
     }
 }
