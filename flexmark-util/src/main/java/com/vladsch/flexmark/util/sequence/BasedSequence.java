@@ -11,7 +11,7 @@ import java.util.Locale;
  * a subSequence() returns a sub-sequence from the original base sequence
  */
 @SuppressWarnings("SameParameterValue")
-public interface BasedSequence extends CharSequence {
+public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of("\n");
     BasedSequence SPACE = CharSubSequence.of(" ");
@@ -630,12 +630,63 @@ public interface BasedSequence extends CharSequence {
     boolean matches(CharSequence chars);
 
     /**
+     * Test the sequence for a match to another CharSequence, ignoring case differences
+     *
+     * @param chars characters to match against
+     * @return true if match
+     */
+    boolean matchesIgnoreCase(CharSequence chars);
+
+    /**
+     * Test the sequence for a match to another CharSequence, ignoring case differences
+     *
+     * @param other characters to match against
+     * @return true if match
+     */
+    boolean equalsIgnoreCase(CharSequence other);
+
+    /**
+     * Test the sequence for a match to another CharSequence
+     *
+     * @param chars characters to match against
+     * @param ignoreCase case ignored when true
+     * @return true if match
+     */
+    boolean matches(CharSequence chars, boolean ignoreCase);
+
+    /**
+     * Test the sequence for a match to another CharSequence
+     *
+     * @param other characters to match against
+     * @param ignoreCase case ignored when true
+     * @return true if match
+     */
+    boolean equals(Object other, boolean ignoreCase);
+
+    /**
      * Test the sequence portion for a match to another CharSequence
      *
      * @param chars characters to match against
      * @return true if characters at the start of this sequence match
      */
     boolean matchChars(CharSequence chars);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence, ignoring case differences
+     *
+     * @param chars characters to match against
+     * @return true if characters at the start of this sequence match
+     */
+    boolean matchCharsIgnoreCase(CharSequence chars);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence
+     *
+     * @param chars characters to match against
+     * @param ignoreCase case ignored when true
+     * @return true if characters at the start of this sequence match
+     */
+    boolean matchChars(CharSequence chars, boolean ignoreCase);
 
     /**
      * Test the sequence portion for a match to another CharSequence
@@ -647,6 +698,25 @@ public interface BasedSequence extends CharSequence {
     boolean matchChars(CharSequence chars, int startIndex);
 
     /**
+     * Test the sequence portion for a match to another CharSequence, ignoring case differences
+     *
+     * @param chars      characters to match against
+     * @param startIndex index from which to start the match
+     * @return true if characters at the start index of this sequence match
+     */
+    boolean matchCharsIgnoreCase(CharSequence chars, int startIndex);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence
+     *
+     * @param chars      characters to match against
+     * @param startIndex index from which to start the match
+     * @param ignoreCase case ignored when true
+     * @return true if characters at the start index of this sequence match
+     */
+    boolean matchChars(CharSequence chars, int startIndex, boolean ignoreCase);
+
+    /**
      * Test the sequence portion for a match to another CharSequence, reverse order
      *
      * @param chars    characters to match against
@@ -654,6 +724,25 @@ public interface BasedSequence extends CharSequence {
      * @return true if characters at the start index of this sequence match
      */
     boolean matchCharsReversed(CharSequence chars, int endIndex);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence, reverse order, ignoring case differences
+     *
+     * @param chars    characters to match against
+     * @param endIndex index from which to start the match and proceed to 0
+     * @return true if characters at the start index of this sequence match
+     */
+    boolean matchCharsReversedIgnoreCase(CharSequence chars, int endIndex);
+
+    /**
+     * Test the sequence portion for a match to another CharSequence, reverse order
+     *
+     * @param chars    characters to match against
+     * @param endIndex index from which to start the match and proceed to 0
+     * @param ignoreCase case ignored when true
+     * @return true if characters at the start index of this sequence match
+     */
+    boolean matchCharsReversed(CharSequence chars, int endIndex, boolean ignoreCase);
 
     /**
      * test if this sequence ends with given characters
@@ -664,12 +753,46 @@ public interface BasedSequence extends CharSequence {
     boolean endsWith(CharSequence suffix);
 
     /**
+     * test if this sequence ends with given characters, ignoring case differences
+     *
+     * @param suffix characters to test
+     * @return true if ends with suffix
+     */
+    boolean endsWithIgnoreCase(CharSequence suffix);
+
+    /**
+     * test if this sequence ends with given characters
+     *
+     * @param suffix characters to test
+     * @param ignoreCase case ignored when true
+     * @return true if ends with suffix
+     */
+    boolean endsWith(CharSequence suffix, boolean ignoreCase);
+
+    /**
      * test if this sequence starts with given characters
      *
      * @param prefix characters to test
      * @return true if starts with prefix
      */
     boolean startsWith(CharSequence prefix);
+
+    /**
+     * test if this sequence starts with given characters, ignoring case differences
+     *
+     * @param prefix characters to test
+     * @return true if starts with prefix
+     */
+    boolean startsWithIgnoreCase(CharSequence prefix);
+
+    /**
+     * test if this sequence starts with given characters
+     *
+     * @param prefix characters to test
+     * @param ignoreCase case ignored when true
+     * @return true if starts with prefix
+     */
+    boolean startsWith(CharSequence prefix, boolean ignoreCase);
 
     /**
      * Remove suffix if present
@@ -680,12 +803,46 @@ public interface BasedSequence extends CharSequence {
     BasedSequence removeSuffix(CharSequence suffix);
 
     /**
+     * Remove suffix if present, ignoring case differences
+     *
+     * @param suffix characters to remove
+     * @return sequence with suffix removed, or same sequence if no suffix was present
+     */
+    BasedSequence removeSuffixIgnoreCase(CharSequence suffix);
+
+    /**
+     * Remove suffix if present
+     *
+     * @param suffix characters to remove
+     * @param ignoreCase case ignored when true
+     * @return sequence with suffix removed, or same sequence if no suffix was present
+     */
+    BasedSequence removeSuffix(CharSequence suffix, boolean ignoreCase);
+
+    /**
      * Remove prefix if present
      *
      * @param prefix characters to remove
      * @return sequence with prefix removed, or same sequence if no prefix was present
      */
     BasedSequence removePrefix(CharSequence prefix);
+
+    /**
+     * Remove prefix if present, ignoring case differences
+     *
+     * @param prefix characters to remove
+     * @return sequence with prefix removed, or same sequence if no prefix was present
+     */
+    BasedSequence removePrefixIgnoreCase(CharSequence prefix);
+
+    /**
+     * Remove prefix if present
+     *
+     * @param prefix characters to remove
+     * @param ignoreCase case ignored when true
+     * @return sequence with prefix removed, or same sequence if no prefix was present
+     */
+    BasedSequence removePrefix(CharSequence prefix, boolean ignoreCase);
 
     /**
      * Remove suffix if present but only if this sequence is longer than the suffix
@@ -696,6 +853,23 @@ public interface BasedSequence extends CharSequence {
     BasedSequence removeProperSuffix(CharSequence suffix);
 
     /**
+     * Remove suffix if present but only if this sequence is longer than the suffix, ignoring case differences
+     *
+     * @param suffix characters to remove
+     * @return sequence with suffix removed, or same sequence if no suffix was present
+     */
+    BasedSequence removeProperSuffixIgnoreCase(CharSequence suffix);
+
+    /**
+     * Remove suffix if present but only if this sequence is longer than the suffix
+     *
+     * @param suffix characters to remove
+     * @param ignoreCase case ignored when true
+     * @return sequence with suffix removed, or same sequence if no suffix was present
+     */
+    BasedSequence removeProperSuffix(CharSequence suffix, boolean ignoreCase);
+
+    /**
      * Remove prefix if present but only if this sequence is longer than the suffix
      *
      * @param prefix characters to remove
@@ -704,9 +878,26 @@ public interface BasedSequence extends CharSequence {
     BasedSequence removeProperPrefix(CharSequence prefix);
 
     /**
+     * Remove prefix if present but only if this sequence is longer than the suffix, ignoring case differences
+     *
+     * @param prefix characters to remove
+     * @return sequence with prefix removed, or same sequence if no prefix was present
+     */
+    BasedSequence removeProperPrefixIgnoreCase(CharSequence prefix);
+
+    /**
+     * Remove prefix if present but only if this sequence is longer than the suffix
+     *
+     * @param prefix characters to remove
+     * @param ignoreCase case ignored when true
+     * @return sequence with prefix removed, or same sequence if no prefix was present
+     */
+    BasedSequence removeProperPrefix(CharSequence prefix, boolean ignoreCase);
+
+    /**
      * Map characters of this sequence to: Uppercase, Lowercase or use custom mapping
      *
-     * @return  lowercase version of sequence
+     * @return lowercase version of sequence
      */
     MappedSequence toLowerCase();
     MappedSequence toUpperCase();
@@ -716,7 +907,8 @@ public interface BasedSequence extends CharSequence {
 
     /**
      * Trim leading trailing blank lines in this sequence
-     * @return  return sequence with trailing blank lines trimmed off
+     *
+     * @return return sequence with trailing blank lines trimmed off
      */
     BasedSequence trimTailBlankLines();
     BasedSequence trimLeadBlankLines();
@@ -824,7 +1016,7 @@ public interface BasedSequence extends CharSequence {
     BasedSequence appendTo(StringBuilder out);
     BasedSequence appendTo(StringBuilder out, int start);
     BasedSequence appendTo(StringBuilder out, int start, int end);
-    BasedSequence append(CharSequence...others);
+    BasedSequence append(CharSequence... others);
 
     class EmptyBasedSequence extends BasedSequenceImpl {
         @Override

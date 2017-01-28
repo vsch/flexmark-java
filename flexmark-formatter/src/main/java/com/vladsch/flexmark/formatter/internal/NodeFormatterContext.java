@@ -69,7 +69,7 @@ public interface NodeFormatterContext {
 
     /**
      * Get iterable of nodes of given types, in order of their appearance in the document tree, depth first traversal.
-     * Only node classes returned by {@link NodeFormatter#getNodeClasses(DataHolder)} of all loaded extensions
+     * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions
      * will be available to formatters.
      * <p>
      * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}
@@ -83,7 +83,7 @@ public interface NodeFormatterContext {
     Iterable<? extends Node> nodesOfType(Collection<Class<?>> classes);
     /**
      * Get iterable of nodes of given types, in reverse order of their appearance in the document tree, depth first traversal.
-     * Only node classes returned by {@link NodeFormatter#getNodeClasses(DataHolder)} of all loaded extensions
+     * Only node classes returned by {@link NodeFormatter#getNodeClasses()} of all loaded extensions
      * will be available to formatters.
      * <p>
      * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}

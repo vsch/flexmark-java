@@ -47,7 +47,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
     }
 
     @Override
-    public Set<Class<?>> getNodeClasses(final DataHolder options) {
+    public Set<Class<?>> getNodeClasses() {
         return null;
     }
 

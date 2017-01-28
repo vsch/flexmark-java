@@ -1,10 +1,16 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
+import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.formatter.options.DefinitionMarker;
+import com.vladsch.flexmark.util.options.DataHolder;
 
 public class FormatOptions {
-    // TODO: implement these
-    public int DEFINITION_MARKER_SPACES = 3;
-    public DefinitionMarker DEFINITION_MARKER_TYPE = DefinitionMarker.ANY;
 
+    public final int markerSpaces;
+    public final DefinitionMarker markerType;
+
+    public FormatOptions(DataHolder options) {
+        markerSpaces = DefinitionExtension.FORMAT_MARKER_SPACES.getFrom(options);
+        markerType = DefinitionExtension.FORMAT_MARKER_TYPE.getFrom(options);
+    }
 }

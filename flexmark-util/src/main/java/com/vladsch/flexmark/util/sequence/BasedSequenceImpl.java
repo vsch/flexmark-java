@@ -872,12 +872,12 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean endsWith(CharSequence suffix) {
-        return length() > 0 && matchCharsReversed(suffix, length() - 1);
+        return length() > 0 && matchCharsReversed(suffix, length() - 1, false);
     }
 
     @Override
     public boolean startsWith(CharSequence prefix) {
-        return length() > 0 && matchChars(prefix, 0);
+        return length() > 0 && matchChars(prefix, 0, false);
     }
 
     @Override
@@ -898,6 +898,66 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     @Override
     public BasedSequence removeProperPrefix(CharSequence prefix) {
         return length() <= prefix.length() || !startsWith(prefix) ? this : subSequence(prefix.length(), length());
+    }
+
+    @Override
+    public boolean endsWithIgnoreCase(CharSequence suffix) {
+        return length() > 0 && matchCharsReversed(suffix, length() - 1, true);
+    }
+
+    @Override
+    public boolean startsWithIgnoreCase(CharSequence prefix) {
+        return length() > 0 && matchChars(prefix, 0, true);
+    }
+
+    @Override
+    public BasedSequence removeSuffixIgnoreCase(CharSequence suffix) {
+        return !endsWithIgnoreCase(suffix) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removePrefixIgnoreCase(CharSequence prefix) {
+        return !startsWithIgnoreCase(prefix) ? this : subSequence(prefix.length(), length());
+    }
+
+    @Override
+    public BasedSequence removeProperSuffixIgnoreCase(CharSequence suffix) {
+        return length() <= suffix.length() || !endsWithIgnoreCase(suffix) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removeProperPrefixIgnoreCase(CharSequence prefix) {
+        return length() <= prefix.length() || !startsWithIgnoreCase(prefix) ? this : subSequence(prefix.length(), length());
+    }
+
+    @Override
+    public boolean endsWith(CharSequence suffix, boolean ignoreCase) {
+        return length() > 0 && matchCharsReversed(suffix, length() - 1, ignoreCase);
+    }
+
+    @Override
+    public boolean startsWith(CharSequence prefix, boolean ignoreCase) {
+        return length() > 0 && matchChars(prefix, 0, ignoreCase);
+    }
+
+    @Override
+    public BasedSequence removeSuffix(CharSequence suffix, boolean ignoreCase) {
+        return !endsWith(suffix, ignoreCase) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removePrefix(CharSequence prefix, boolean ignoreCase) {
+        return !startsWith(prefix, ignoreCase) ? this : subSequence(prefix.length(), length());
+    }
+
+    @Override
+    public BasedSequence removeProperSuffix(CharSequence suffix, boolean ignoreCase) {
+        return length() <= suffix.length() || !endsWith(suffix, ignoreCase) ? this : subSequence(0, length() - suffix.length());
+    }
+
+    @Override
+    public BasedSequence removeProperPrefix(CharSequence prefix, boolean ignoreCase) {
+        return length() <= prefix.length() || !startsWith(prefix, ignoreCase) ? this : subSequence(prefix.length(), length());
     }
 
     @Override
@@ -927,28 +987,90 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public boolean matches(CharSequence chars) {
-        return chars.length() == length() && matchChars(chars);
+        return chars.length() == length() && matchChars(chars, 0, false);
+    }
+
+    @Override
+    public boolean matchesIgnoreCase(CharSequence chars) {
+        return chars.length() == length() && matchChars(chars, 0, true);
+    }
+
+    @Override
+    public boolean matches(CharSequence chars, boolean ignoreCase) {
+        return chars.length() == length() && matchChars(chars, 0, ignoreCase);
     }
 
     @Override
     public boolean matchChars(CharSequence chars) {
-        return matchChars(chars, 0);
+        return matchChars(chars, 0, false);
+    }
+
+    @Override
+    public boolean matchCharsIgnoreCase(CharSequence chars) {
+        return matchChars(chars, 0, true);
+    }
+
+    @Override
+    public boolean matchChars(CharSequence chars, boolean ignoreCase) {
+        return matchChars(chars, 0, ignoreCase);
     }
 
     @Override
     public boolean matchChars(CharSequence chars, int startIndex) {
+        return matchChars(chars, startIndex, false);
+    }
+
+    @Override
+    public boolean matchCharsIgnoreCase(CharSequence chars, int startIndex) {
+        return matchChars(chars, startIndex, false);
+    }
+
+    @Override
+    public boolean matchChars(CharSequence chars, int startIndex, boolean ignoreCase) {
         int iMax = chars.length();
         if (iMax > length() - startIndex) return false;
 
-        for (int i = 0; i < iMax; i++) {
-            if (chars.charAt(i) != charAt(i + startIndex)) return false;
+        if (ignoreCase) {
+            for (int i = 0; i < iMax; i++) {
+                final char c1 = chars.charAt(i);
+                final char c2 = charAt(i + startIndex);
+                if (c1 != c2) {
+                    char u1 = Character.toUpperCase(c1);
+                    char u2 = Character.toUpperCase(c2);
+                    if (u1 == u2) {
+                        continue;
+                    }
+                    // Unfortunately, conversion to uppercase does not work properly
+                    // for the Georgian alphabet, which has strange rules about case
+                    // conversion.  So we need to make one last check before
+                    // exiting.
+                    if (Character.toLowerCase(u1) == Character.toLowerCase(u2)) {
+                        continue;
+                    }
+                    return false;
+                }
+            }
+        } else {
+            for (int i = 0; i < iMax; i++) {
+                if (chars.charAt(i) != charAt(i + startIndex)) return false;
+            }
         }
         return true;
     }
 
     @Override
     public boolean matchCharsReversed(CharSequence chars, int endIndex) {
-        return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length());
+        return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), false);
+    }
+
+    @Override
+    public boolean matchCharsReversedIgnoreCase(CharSequence chars, int endIndex) {
+        return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), true);
+    }
+
+    @Override
+    public boolean matchCharsReversed(CharSequence chars, int endIndex, boolean ignoreCase) {
+        return endIndex + 1 >= chars.length() && matchChars(chars, endIndex + 1 - chars.length(), ignoreCase);
     }
 
     @Override
@@ -1317,6 +1439,36 @@ public abstract class BasedSequenceImpl implements BasedSequence {
             return CharSubSequence.of(sb);
         }
         return this;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return (this == other) || other != null && other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, false);
+    }
+
+    @Override
+    public boolean equalsIgnoreCase(CharSequence other) {
+        return (this == other) || (other != null) && other.length() == length() && matchChars(other, 0, true);
+    }
+
+    @Override
+    public boolean equals(Object other, boolean ignoreCase) {
+        return (this == other) || other != null && other instanceof CharSequence && ((CharSequence) other).length() == length() && matchChars((CharSequence) other, 0, ignoreCase);
+    }
+
+    @Override
+    public int compareTo(CharSequence other) {
+        int len1 = length();
+        int len2 = other.length();
+        int iMax = len1 <= len2 ? len1 : len2;
+        for (int i = 0; i < iMax; i++) {
+            char c1 = charAt(i);
+            char c2 = other.charAt(i);
+            if (c1 != c2) {
+                return c1 - c2;
+            }
+        }
+        return len1 - len2;
     }
 
     public static BasedSequence of(CharSequence charSequence) {

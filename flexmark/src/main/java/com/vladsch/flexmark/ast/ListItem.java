@@ -58,6 +58,10 @@ public abstract class ListItem extends Block implements ParagraphItemContainer, 
         return tight && isInTightList();
     }
 
+    public boolean isOwnTight() {
+        return tight;
+    }
+
     public boolean isLoose() {
         return !isTight();
     }

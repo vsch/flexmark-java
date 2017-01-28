@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public class Reference extends Node {
+public class Reference extends Node implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence reference = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
@@ -32,6 +33,16 @@ public class Reference extends Node {
                 title,
                 titleClosingMarker
         };
+    }
+
+    @Override
+    public int compareTo(final Reference other) {
+        return getReference().compareTo(other.getReference());
+    }
+
+    @Override
+    public RefNode getReferencingNode(final Node node) {
+        return node instanceof RefNode ? (RefNode) node : null;
     }
 
     @Override

@@ -993,3 +993,394 @@ paragraph
 ````````````````````````````````
 
 
+list spacing
+
+```````````````````````````````` example Lists: 12
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 13) options(list-spacing-loose)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 14) options(list-spacing-tight)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 15) options(list-spacing-loosen)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+
+* item 2
+
+  * item 2.1
+
+  * item 2.2
+
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 16) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 17) options(list-spacing-tighten)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+
+paragraph
+.
+* item 1
+* item 2
+  * item 2.1
+
+  * item 2.2
+* item 3
+
+paragraph
+````````````````````````````````
+
+
+```````````````````````````````` example(Lists: 18) options(list-spacing-tight)
+* item 1
+* item 2
+  * item 2.1
+  
+  * item 2.2
+  
+* item 3
+
+paragraph
+.
+* item 1
+* item 2
+  * item 2.1
+  * item 2.2
+* item 3
+
+paragraph
+````````````````````````````````
+
+
+### Reference Placement
+
+default
+
+```````````````````````````````` example Reference Placement: 1
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 2) options(references-document-top)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+[ref3]: /ref3
+[ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref1]: /ref1
+
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 3) options(references-document-bottom)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+[ref3]: /ref3
+[ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref1]: /ref1
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 4) options(references-group-with-first)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+[ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref1]: /ref1
+
+paragraph 2
+
+paragraph 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 5) options(references-group-with-last)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+[ref3]: /ref3
+[ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref1]: /ref1
+
+paragraph 3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 6) options(references-document-bottom, references-sort)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+[ref1]: /ref1
+[ref2]: /ref2/1
+[ref2]: /ref2/2
+[ref3]: /ref3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 7) options(references-document-bottom, references-sort-unused-last)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+[ref2]: /ref2/1
+[ref1]: /ref1
+[ref2]: /ref2/2
+[ref3]: /ref3
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Reference Placement: 8) options(references-document-bottom, references-sort-unused-last, references-keep-last)
+paragraph 1 [ref2]
+
+[ref3]: /ref3
+
+[ref2]: /ref2/1
+
+paragraph 2
+
+[ref2]: /ref2/2
+
+[ref1]: /ref1
+
+paragraph 3
+
+.
+paragraph 1 [ref2]
+
+paragraph 2
+
+paragraph 3
+
+[ref2]: /ref2/2
+[ref1]: /ref1
+[ref2]: /ref2/1
+[ref3]: /ref3
+
+````````````````````````````````
+
+

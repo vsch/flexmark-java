@@ -4,7 +4,7 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-public abstract class RefNode extends LinkNode implements LinkRefDerived {
+public abstract class RefNode extends LinkNode implements LinkRefDerived, ReferencingNode<ReferenceRepository, Reference> {
     protected BasedSequence textOpeningMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence textClosingMarker = BasedSequence.NULL;
@@ -116,6 +116,7 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
         return text == BasedSequence.NULL;
     }
 
+    @Override
     public boolean isDefined() {
         return isDefined;
     }
@@ -137,14 +138,17 @@ public abstract class RefNode extends LinkNode implements LinkRefDerived {
         return text;
     }
 
+    @Override
     public BasedSequence getReference() {
         return reference;
     }
 
+    @Override
     public Reference getReferenceNode(Document document) {
         return getReferenceNode(document.get(Parser.REFERENCES));
     }
 
+    @Override
     public Reference getReferenceNode(ReferenceRepository repository) {
         if (repository == null) return null;
         String normalizeRef = repository.normalizeKey(reference);

@@ -1,18 +1,29 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.CustomBlock;
+import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
  */
-public class FootnoteBlock extends CustomBlock {
+public class FootnoteBlock extends CustomBlock implements ReferenceNode<FootnoteRepository, FootnoteBlock, Footnote> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected BasedSequence footnote = BasedSequence.NULL;
     private int footnoteOrdinal = 0;
     private int firstReferenceOffset = Integer.MAX_VALUE;
+
+    @Override
+    public int compareTo(final FootnoteBlock other) {
+        return getText().compareTo(other.getText());
+    }
+
+    @Override
+    public Footnote getReferencingNode(final Node node) {
+        return node instanceof Footnote ? (Footnote) node : null;
+    }
 
     public int getFirstReferenceOffset() {
         return firstReferenceOffset;

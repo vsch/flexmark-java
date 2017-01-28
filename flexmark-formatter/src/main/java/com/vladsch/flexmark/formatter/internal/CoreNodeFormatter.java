@@ -3,8 +3,9 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.formatter.options.ElementPlacement;
 import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
-import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.formatter.options.ListSpacing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Ref;
@@ -12,7 +13,8 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
 
@@ -21,38 +23,24 @@ import static com.vladsch.flexmark.formatter.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 @SuppressWarnings("WeakerAccess")
-public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
+public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
     public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
-            FormattingPhase.COLLECT,
-            FormattingPhase.DOCUMENT_TOP,
-            FormattingPhase.DOCUMENT_BOTTOM
-    ));
+    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
 
     private final FormatterOptions options;
     private final ListOptions listOptions;
-    private ReferenceRepository referenceRepository;
-    private boolean recheckUndefinedReferences;
     private int blankLines;
-    private final HashSet<Node> unusedReference;
 
     public CoreNodeFormatter(DataHolder options) {
+        super(options);
         this.options = new FormatterOptions(options);
-        this.referenceRepository = options.get(Parser.REFERENCES);
         this.listOptions = ListOptions.getFrom(options);
-        this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
-        unusedReference = new HashSet<>();
         blankLines = 0;
     }
 
     @Override
-    public Set<FormattingPhase> getFormattingPhases() {
-        return FORMATTING_PHASES;
-    }
-
-    @Override
-    public Set<Class<?>> getNodeClasses(final DataHolder options) {
-        if (Formatter.REFERENCE_SORT.getFrom(options) != ElementPlacementSort.SORT_UNUSED_LAST) return null;
+    public Set<Class<?>> getNodeClasses() {
+        if (options.referencePlacement != ElementPlacement.AS_IS && options.referenceSort != ElementPlacementSort.SORT_UNUSED_LAST) return null;
         //noinspection unchecked,ArraysAsListWithZeroOrOneArgument
         return new HashSet<Class<?>>(Arrays.asList(
                 RefNode.class
@@ -60,33 +48,23 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     @Override
-    public void renderDocument(final NodeFormatterContext context, final MarkdownWriter markdown, final Document document, final FormattingPhase phase) {
-        // here non-rendered elements can be collected so that they are rendered in another part of the document
-        switch (phase) {
-            case COLLECT:
-                if (options.referenceSort == ElementPlacementSort.SORT_UNUSED_LAST) {
-                    // get all ref nodes and figure out which ones are unused
-                    unusedReference.addAll(referenceRepository.values());
-                    for (Node node : context.nodesOfType(new Class<?>[] { RefNode.class })) {
-                        if (node instanceof RefNode) {
-                            Reference reference = ((RefNode) node).getReferenceNode(referenceRepository);
-                            if (reference != null) {
-                                unusedReference.remove(reference);
-                            }
-                        }
-                    }
-                }
-                break;
+    public ReferenceRepository getRepository(final DataHolder options) {
+        return options.get(Parser.REFERENCES);
+    }
 
-            case DOCUMENT_TOP:
-                break;
+    @Override
+    public ElementPlacement getReferencePlacement() {
+        return options.referencePlacement;
+    }
 
-            case DOCUMENT_BOTTOM:
-                break;
+    @Override
+    public ElementPlacementSort getReferenceSort() {
+        return options.referenceSort;
+    }
 
-            default:
-                break;
-        }
+    @Override
+    public void renderReferenceBlock(final Reference node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+        markdown.append(node.getChars()).line();
     }
 
     @Override
@@ -324,11 +302,13 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (!(node.getPrevious() == null || node.getPrevious() instanceof BlankLine)) {
-            blankLines = 0;
+        if (context.getDocument().get(LIST_ITEM_SPACING) == null) {
+            if (!(node.getPrevious() == null || node.getPrevious() instanceof BlankLine)) {
+                blankLines = 0;
+            }
+            blankLines++;
+            if (blankLines <= options.maxBlankLines) markdown.blankLine(blankLines);
         }
-        blankLines++;
-        if (blankLines <= options.maxBlankLines) markdown.blankLine(blankLines);
     }
 
     private void render(Document node, NodeFormatterContext context, MarkdownWriter markdown) {
@@ -573,12 +553,44 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
         }
 
         Document document = context.getDocument();
-        int listItemNumber = document.get(CoreNodeFormatter.LIST_ITEM_NUMBER);
-        document.set(CoreNodeFormatter.LIST_ITEM_NUMBER, node instanceof OrderedList ? ((OrderedList) node).getStartNumber() : 1);
+        ListSpacing listSpacing = document.get(LIST_ITEM_SPACING);
+        int listItemNumber = document.get(LIST_ITEM_NUMBER);
+        document.set(LIST_ITEM_NUMBER, node instanceof OrderedList ? ((OrderedList) node).getStartNumber() : 1);
+
+        ListSpacing itemSpacing = null;
+        switch (context.getFormatterOptions().listSpacing) {
+            case AS_IS:
+                break;
+            case LOOSE:
+                itemSpacing = ListSpacing.LOOSE;
+                break;
+            case TIGHT:
+                itemSpacing = ListSpacing.TIGHT;
+                break;
+            case LOOSEN:
+                itemSpacing = node.isLoose() ? ListSpacing.LOOSE : ListSpacing.TIGHT;
+                break;
+            case TIGHTEN: {
+                itemSpacing = ListSpacing.LOOSE;
+                for (Node item : itemList) {
+                    if (item instanceof ListItem) {
+                        if (((ListItem) item).isOwnTight() && item.getNext() != null) {
+                            itemSpacing = ListSpacing.TIGHT;
+                            break;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+
+        document.set(LIST_ITEM_SPACING, itemSpacing);
         for (Node item : itemList) {
+            if (itemSpacing == ListSpacing.LOOSE && (listSpacing == null || listSpacing == ListSpacing.LOOSE)) markdown.blankLine();
             context.render(item);
         }
-        document.set(CoreNodeFormatter.LIST_ITEM_NUMBER, listItemNumber);
+        document.set(LIST_ITEM_SPACING, listSpacing);
+        document.set(LIST_ITEM_NUMBER, listItemNumber);
     }
 
     public static void renderListItem(
@@ -668,10 +680,28 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
             } else {
                 renderLooseParagraph(node, context, markdown);
             }
-        } else if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-            renderLooseParagraph(node, context, markdown);
         } else {
-            renderTextBlockParagraphLines(node, context, markdown);
+            boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
+            if (isItemParagraph) {
+                ListSpacing itemSpacing = context.getDocument().get(LIST_ITEM_SPACING);
+                if (itemSpacing == ListSpacing.TIGHT) {
+                    renderTextBlockParagraphLines(node, context, markdown);
+                } else if (itemSpacing == ListSpacing.LOOSE) {
+                    if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
+                        renderTextBlockParagraphLines(node, context, markdown);
+                    } else {
+                        renderLooseParagraph(node, context, markdown);
+                    }
+                } else {
+                    if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
+                        renderLooseParagraph(node, context, markdown);
+                    } else {
+                        renderTextBlockParagraphLines(node, context, markdown);
+                    }
+                }
+            } else {
+                renderLooseParagraph(node, context, markdown);
+            }
         }
     }
 
@@ -741,7 +771,7 @@ public class CoreNodeFormatter implements NodeFormatter, PhasedNodeFormatter {
     }
 
     private void render(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
-        markdown.append(node.getChars());
+        renderReference(node, context, markdown);
     }
 
     private void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {

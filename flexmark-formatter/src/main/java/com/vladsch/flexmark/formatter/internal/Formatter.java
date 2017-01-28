@@ -10,7 +10,6 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
-import com.vladsch.flexmark.util.collection.iteration.ReversibleIndexedIterable;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.*;
 
@@ -62,6 +61,8 @@ public class Formatter implements IRender {
     public static final DataKey<ElementPlacementSort> REFERENCE_SORT = new DataKey<>("REFERENCE_SORT", ElementPlacementSort.AS_IS);
     public static final DataKey<KeepAtStartOfLine> KEEP_IMAGE_LINKS_AT_START = new DataKey<>("KEEP_IMAGE_LINKS_AT_START", KeepAtStartOfLine.JEKYLL);
     public static final DataKey<KeepAtStartOfLine> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", KeepAtStartOfLine.JEKYLL);
+    //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
+    //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
 
     private final List<NodeFormatterFactory> nodeFormatterFactories;
     private final FormatterOptions formatterOptions;
@@ -318,7 +319,7 @@ public class Formatter implements IRender {
                 }
 
                 // get nodes of interest
-                Set<Class<?>> nodeClasses = nodeFormatter.getNodeClasses(this.options);
+                Set<Class<?>> nodeClasses = nodeFormatter.getNodeClasses();
                 if (nodeClasses != null) {
                     collectNodeTypes.addAll(nodeClasses);
                 }
@@ -338,6 +339,7 @@ public class Formatter implements IRender {
             // collect nodes of interest from document
             if (!collectNodeTypes.isEmpty()) {
                 NodeCollectingVisitor collectingVisitor = new NodeCollectingVisitor(collectNodeTypes);
+                collectingVisitor.collect(document);
                 collectedNodes = collectingVisitor.getSubClassingBag();
             } else {
                 collectedNodes = null;

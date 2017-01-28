@@ -4,12 +4,10 @@ import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
+    private final ArrayList<T> nodeList = new ArrayList<>();
     private final Map<String, T> nodeMap = new HashMap<>();
     private final KeepType keepType;
 
@@ -34,6 +32,8 @@ public abstract class NodeRepository<T> implements Map<String, T> {
 
     @Override
     public T put(String s, T t) {
+        nodeList.add(t);
+
         if (keepType == KeepType.LOCKED) throw new IllegalStateException("Not allowed to modify LOCKED repository");
         if (keepType != KeepType.LAST) {
             T another = nodeMap.get(s);
@@ -88,7 +88,7 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     public Set<String> keySet() {return nodeMap.keySet();}
 
     @Override
-    public Collection<T> values() {return nodeMap.values();}
+    public List<T> values() {return nodeList;}
 
     @Override
     public Set<Entry<String, T>> entrySet() {return nodeMap.entrySet();}

@@ -1,25 +1,40 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.CustomNode;
-import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.ast.DoNotDecorate;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Footnote referencing node
  */
-public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class Footnote extends CustomNode implements DelimitedNode, DoNotDecorate, ReferencingNode<FootnoteRepository, FootnoteBlock> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
     protected FootnoteBlock footnoteBlock;
 
+    @Override
+    public BasedSequence getReference() {
+        return text;
+    }
+
+    @Override
+    public FootnoteBlock getReferenceNode(final Document document) {
+        return footnoteBlock;
+    }
+
+    @Override
+    public FootnoteBlock getReferenceNode(final FootnoteRepository repository) {
+        if (footnoteBlock != null || text.isEmpty()) return footnoteBlock;
+        footnoteBlock = getFootnoteBlock(repository);
+        return footnoteBlock;
+    }
+
     public boolean isDefined() {
         return footnoteBlock != null;
     }
 
-    public FootnoteBlock getFootonoteBlock(FootnoteRepository footnoteRepository) {
+    public FootnoteBlock getFootnoteBlock(FootnoteRepository footnoteRepository) {
         return text.isEmpty() ? null : footnoteRepository.get(text.toString());
     }
 

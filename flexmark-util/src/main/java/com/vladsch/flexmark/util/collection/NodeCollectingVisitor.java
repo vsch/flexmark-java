@@ -26,6 +26,12 @@ public class NodeCollectingVisitor {
         myIncluded = new HashSet<>();
         myIncluded.addAll(classes);
 
+        for (Class clazz : classes) {
+            ArrayList<Class> classList = new ArrayList<>(1);
+            classList.add(clazz);
+            mySubClassMap.put(clazz, classList);
+        }
+
         myExcluded = new HashSet<>();
 
         myNodes = new ClassificationBag<>(NODE_CLASSIFIER);
@@ -43,7 +49,6 @@ public class NodeCollectingVisitor {
         Class nodeClass = node.getClass();
         if (myIncluded.contains(nodeClass)) {
             myNodes.add(node);
-            visitChildren(node);
         } else if (!myExcluded.contains(nodeClass)) {
             // see if implements one of the original classes passed in
             for (Class clazz : myClasses) {
@@ -69,6 +74,7 @@ public class NodeCollectingVisitor {
             // not of interest, exclude for next occurrence
             myExcluded.add(nodeClass);
         }
+        visitChildren(node);
     }
 
     private void visitChildren(final Node parent) {

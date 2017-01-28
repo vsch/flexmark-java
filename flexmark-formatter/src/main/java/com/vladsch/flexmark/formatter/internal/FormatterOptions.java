@@ -34,6 +34,8 @@ public class FormatterOptions {
     public final ElementPlacementSort referenceSort;
     public final KeepAtStartOfLine keepImageLinksAtStart;
     public final KeepAtStartOfLine keepExplicitLinksAtStart;
+    //public final TrailingSpaces keepTrailingSpaces;
+    //public final TrailingSpaces codeKeepTrailingSpaces;
 
     public FormatterOptions(DataHolder options) {
         ParserEmulationProfile emulationProfile = Parser.PARSER_EMULATION_PROFILE.getFrom(options);
@@ -65,5 +67,7 @@ public class FormatterOptions {
         referenceSort = Formatter.REFERENCE_SORT.getFrom(options);
         keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.getFrom(options);
         keepExplicitLinksAtStart = Formatter.KEEP_EXPLICIT_LINKS_AT_START.getFrom(options);
+        //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
+        //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
     }
 }
