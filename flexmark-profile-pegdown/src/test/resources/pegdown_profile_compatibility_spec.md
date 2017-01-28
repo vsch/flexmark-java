@@ -2733,3 +2733,143 @@ Document[0, 44]
 ````````````````````````````````
 
 
+## Misc
+
+```````````````````````````````` example Misc: 1
+#Heading
+-----
+paragraph text 
+lazy continuation
+
+* list item
+    > block quote
+    lazy continuation
+
+~~~info
+        with uneven indent
+           with uneven indent
+     indented code
+~~~ 
+
+        with uneven indent
+           with uneven indent
+     indented code
+1. numbered item 1   
+1. numbered item 2   
+1. numbered item 3   
+    - bullet item 1   
+    - bullet item 2   
+    - bullet item 3   
+        1. numbered sub-item 1   
+        1. numbered sub-item 2   
+        1. numbered sub-item 3   
+    
+    ~~~info
+            with uneven indent
+               with uneven indent
+         indented code
+    ~~~ 
+    
+            with uneven indent
+               with uneven indent
+         indented code
+
+.
+<h1>Heading</h1>
+<hr />
+<p>paragraph text lazy continuation</p>
+<ul>
+  <li>list item
+    <blockquote>
+      <p>block quote lazy continuation</p>
+    </blockquote>
+  </li>
+</ul>
+<pre><code class="language-info">        with uneven indent
+           with uneven indent
+     indented code
+</code></pre>
+<pre><code>    with uneven indent
+       with uneven indent
+ indented code
+</code></pre>
+<ol>
+  <li>numbered item 1</li>
+  <li>numbered item 2</li>
+  <li>numbered item 3
+    <ul>
+      <li>bullet item 1</li>
+      <li>bullet item 2</li>
+      <li>bullet item 3
+        <ol>
+          <li>numbered sub-item 1</li>
+          <li>numbered sub-item 2</li>
+          <li>numbered sub-item 3</li>
+        </ol>
+      </li>
+    </ul>
+    <pre><code class="language-info">        with uneven indent
+           with uneven indent
+     indented code
+</code></pre>
+    <pre><code>    with uneven indent
+       with uneven indent
+ indented code
+</code></pre>
+  </li>
+</ol>
+.
+Document[0, 714]
+  Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
+    Text[1, 8] chars:[1, 8, "Heading"]
+  ThematicBreak[9, 14]
+  Paragraph[15, 49] isTrailingBlankLine
+    Text[15, 29] chars:[15, 29, "parag …  text"]
+    SoftLineBreak[30, 31]
+    Text[31, 48] chars:[31, 48, "lazy  … ation"]
+  BulletList[50, 102] isTight
+    BulletListItem[50, 102] open:[50, 51, "*"] isTight
+      Paragraph[52, 62]
+        Text[52, 61] chars:[52, 61, "list item"]
+      BlockQuote[66, 102] marker:[66, 67, ">"]
+        Paragraph[68, 102] isTrailingBlankLine
+          Text[68, 79] chars:[68, 79, "block … quote"]
+          SoftLineBreak[79, 80]
+          Text[84, 101] chars:[84, 101, "lazy  … ation"]
+  FencedCodeBlock[103, 190] open:[103, 106, "~~~"] info:[106, 110, "info"] content:[111, 187] lines[3] close:[187, 190, "~~~"]
+  IndentedCodeBlock[197, 269]
+  OrderedList[269, 713] isTight delimiter:'.'
+    OrderedListItem[269, 291] open:[269, 271, "1."] isTight
+      Paragraph[272, 291]
+        Text[272, 287] chars:[272, 287, "numbe … tem 1"]
+    OrderedListItem[291, 313] open:[291, 293, "1."] isTight
+      Paragraph[294, 313]
+        Text[294, 309] chars:[294, 309, "numbe … tem 2"]
+    OrderedListItem[313, 713] open:[313, 315, "1."] isTight hadBlankLine
+      Paragraph[316, 335]
+        Text[316, 331] chars:[316, 331, "numbe … tem 3"]
+      BulletList[339, 506] isTight
+        BulletListItem[339, 358] open:[339, 340, "-"] isTight
+          Paragraph[341, 358]
+            Text[341, 354] chars:[341, 354, "bulle … tem 1"]
+        BulletListItem[362, 381] open:[362, 363, "-"] isTight
+          Paragraph[364, 381]
+            Text[364, 377] chars:[364, 377, "bulle … tem 2"]
+        BulletListItem[385, 506] open:[385, 386, "-"] isTight
+          Paragraph[387, 404]
+            Text[387, 400] chars:[387, 400, "bulle … tem 3"]
+          OrderedList[412, 506] isTight delimiter:'.'
+            OrderedListItem[412, 438] open:[412, 414, "1."] isTight
+              Paragraph[415, 438]
+                Text[415, 434] chars:[415, 434, "numbe … tem 1"]
+            OrderedListItem[446, 472] open:[446, 448, "1."] isTight
+              Paragraph[449, 472]
+                Text[449, 468] chars:[449, 468, "numbe … tem 2"]
+            OrderedListItem[480, 506] open:[480, 482, "1."] isTight hadBlankLineAfter
+              Paragraph[483, 506] isTrailingBlankLine
+                Text[483, 502] chars:[483, 502, "numbe … tem 3"]
+      FencedCodeBlock[515, 618] open:[515, 518, "~~~"] info:[518, 522, "info"] content:[527, 611] lines[3] close:[615, 618, "~~~"]
+      IndentedCodeBlock[633, 713]
+````````````````````````````````
+
+

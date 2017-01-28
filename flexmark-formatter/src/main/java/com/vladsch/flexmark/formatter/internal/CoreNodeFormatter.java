@@ -380,7 +380,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 break;
         }
 
-        markdown.blankLine();
+        if (options.blockQuoteBlankLines) markdown.blankLine();
         markdown.pushPrefix();
 
         // create combined prefix, compact if needed
@@ -392,13 +392,14 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
 
         // delay prefix after EOL
-        int options = markdown.getOptions();
-        markdown.setOptions(options | FormattingAppendable.PREFIX_AFTER_PENDING_EOL);
+        int markdownOptions = markdown.getOptions();
+        markdown.setOptions(markdownOptions | FormattingAppendable.PREFIX_AFTER_PENDING_EOL);
         markdown.setPrefix(combinedPrefix);
-        markdown.setOptions(options);
+        markdown.setOptions(markdownOptions);
 
         context.renderChildren(node);
         markdown.popPrefix();
+        if (options.blockQuoteBlankLines) markdown.blankLine();
     }
 
     private void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {

@@ -15,6 +15,7 @@ public class FormatterOptions {
     public final int minSetextMarkerLength;
     public final DiscretionaryText spaceAfterAtxMarker;
     public final EqualizeTrailingMarker atxHeaderTrailingMarker;
+    public final boolean blockQuoteBlankLines;
     public final BlockQuoteMarker blockQuoteMarkers;
     public final String thematicBreak;
     public final boolean indentedCodeMinimizeIndent;
@@ -49,6 +50,7 @@ public class FormatterOptions {
         atxHeaderTrailingMarker = Formatter.ATX_HEADER_TRAILING_MARKER.getFrom(options);
         minSetextMarkerLength = Parser.HEADING_SETEXT_MARKER_LENGTH.getFrom(options);
         thematicBreak = Formatter.THEMATIC_BREAK.getFrom(options);
+        blockQuoteBlankLines = Formatter.BLOCK_QUOTE_BLANK_LINES.getFrom(options);
         blockQuoteMarkers = Formatter.BLOCK_QUOTE_MARKERS.getFrom(options);
         indentedCodeMinimizeIndent = Formatter.INDENTED_CODE_MINIMIZE_INDENT.getFrom(options);
         fencedCodeMinimizeIndent = Formatter.FENCED_CODE_MINIMIZE_INDENT.getFrom(options);

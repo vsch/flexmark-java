@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.1](#0131)
 - [0.13.0](#0130)
 - [0.12.3](#0123)
 - [0.12.2](#0122)
@@ -113,6 +114,17 @@ flexmark-java
 - [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.1
+------
+
+* Add: `Formatter.BLOCK_QUOTE_BLANK_LINES` default `true`, to wrap block quotes in blank lines
+
+* Change: defaults for:
+  * `BLOCK_QUOTE_MARKERS` to `BlockQuoteMarker.ADD_COMPACT_WITH_SPACE`
+  * `INDENTED_CODE_MINIMIZE_INDENT` to `true`
+  * `FENCED_CODE_MINIMIZE_INDENT` to `true`
+  * `FENCED_CODE_MATCH_CLOSING_MARKER` to `true`
 
 0.13.0
 ------

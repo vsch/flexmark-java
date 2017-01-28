@@ -39,5 +39,6 @@
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
+    <orderEntry type="module" module-name="flexmark-formatter" />
   </component>
 </module>

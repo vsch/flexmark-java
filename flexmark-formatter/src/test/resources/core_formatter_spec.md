@@ -791,6 +791,38 @@ Document[0, 131]
 ````````````````````````````````
 
 
+```````````````````````````````` example Block Quotes: 4
+paragraph text 
+lazy continuation
+* list item
+  > block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+
+  > block quote
+  > lazy continuation
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Block Quotes: 5) options(no-block-quote-blank-lines)
+paragraph text 
+lazy continuation
+* list item
+  > block quote
+  lazy continuation
+.
+paragraph text
+lazy continuation
+* list item
+  > block quote
+  > lazy continuation
+````````````````````````````````
+
+
 ### Blank Lines
 
 default
