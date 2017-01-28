@@ -788,17 +788,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (options.keepImageLinksAtStart != KeepAtStartOfLine.NONE) {
-
-        }
-        markdown.append(node.getChars());
+        markdown.lineIf(options.keepImageLinksAtStart).append(node.getChars());
     }
 
     private void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (options.keepExplicitLinksAtStart != KeepAtStartOfLine.NONE) {
-
-        }
-        markdown.append(node.getChars());
+        markdown.lineIf(options.keepExplicitLinksAtStart).append(node.getChars());
     }
 
     private void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {

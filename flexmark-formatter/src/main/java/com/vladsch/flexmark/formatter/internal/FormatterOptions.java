@@ -32,8 +32,8 @@ public class FormatterOptions {
     public final ListSpacing listSpacing;
     public final ElementPlacement referencePlacement;
     public final ElementPlacementSort referenceSort;
-    public final KeepAtStartOfLine keepImageLinksAtStart;
-    public final KeepAtStartOfLine keepExplicitLinksAtStart;
+    public final boolean keepImageLinksAtStart;
+    public final boolean keepExplicitLinksAtStart;
     //public final TrailingSpaces keepTrailingSpaces;
     //public final TrailingSpaces codeKeepTrailingSpaces;
 

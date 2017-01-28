@@ -1475,3 +1475,37 @@ paragraph 3
 ````````````````````````````````
 
 
+### Images and links at start of line
+
+```````````````````````````````` example Images and links at start of line: 1
+text with [link](/url) followed by ![alt](/image)
+.
+text with [link](/url) followed by ![alt](/image)
+````````````````````````````````
+
+
+```````````````````````````````` example(Images and links at start of line: 2) options(image-links-at-start)
+text with [link](/url) followed by ![alt](/image)
+.
+text with [link](/url) followed by 
+![alt](/image)
+````````````````````````````````
+
+
+```````````````````````````````` example(Images and links at start of line: 3) options(explicit-links-at-start)
+text with [link](/url) followed by ![alt](/image)
+.
+text with 
+[link](/url) followed by ![alt](/image)
+````````````````````````````````
+
+
+```````````````````````````````` example(Images and links at start of line: 4) options(image-links-at-start, explicit-links-at-start)
+text with [link](/url) followed by ![alt](/image)
+.
+text with 
+[link](/url) followed by 
+![alt](/image)
+````````````````````````````````
+
+
