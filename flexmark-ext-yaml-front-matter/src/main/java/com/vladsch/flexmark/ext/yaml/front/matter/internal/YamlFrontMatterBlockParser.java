@@ -72,6 +72,8 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
                 if (currentKey != null) {
                     block.appendChild(new YamlFrontMatterNode(currentKey, currentValues));
                 }
+                // add the last line
+                addLine(state, line);
                 return BlockContinue.finished();
             }
 

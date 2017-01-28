@@ -600,8 +600,6 @@ public class DocumentParser implements ParserState {
             if (result instanceof BlockContinueImpl) {
                 BlockContinueImpl blockContinue = (BlockContinueImpl) result;
                 if (blockContinue.isFinalize()) {
-                    // add the last line
-                    blockParser.addLine(this, line);
                     finalize(blockParser);
                     return;
                 } else {
