@@ -12,7 +12,7 @@ The API allows granular control of the parsing process and is optimized for pars
 number of installed extensions. The parser and extensions come with plenty of options for parser
 behavior and HTML rendering variations. The end goal is to have the parser and renderer be able
 to mimic other parsers with great degree of accuracy. This is now partially complete with the
-implementation of [Markdown Processor Family Emulation](#markdown-processor-family-emulation)
+implementation of [Markdown Processor Family Emulation](#markdown-processor-emulation)
 
 Motivation for this project was the need to replace [pegdown] parser in my [Markdown Navigator]
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
@@ -57,7 +57,7 @@ static extension methods in interfaces.
 - Android compatibility to be added
 - No attempt is made to keep API backward compatibility to the original project.
 
-  The API has stabilized but some changes may be necessary before 1.0 release.
+  The API is evolving to accommodate new extensions and functionality.
 
 ### Releases, Bug Fixes, Enhancements and Support
 
@@ -145,7 +145,7 @@ public class PegdownOptions {
 [pegdown] in addition to extensions available in pegdown 1.6.0.
 [Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
 
-### Markdown Processor Family Emulation
+### Markdown Processor Emulation
 
 Latest addition was a rewrite of the list parser to better control emulation of other markdown
 processors as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md). Addition of
@@ -165,17 +165,17 @@ If you find a discrepancy please open an issue so it can be addressed.
 
 Major processor families are implemented and some family members also:
 
-- CommonMark (spec 0.27)
-  - [ ] League/CommonMark
-  - GitHub Comments
-- Kramdown
-  - [ ] Jekyll
-- Markdown.pl
-  - [ ] Php Markdown Extra
-  - GitHub Docs
+- [CommonMark] (spec 0.27)
+  - [ ] [League/CommonMark]
+  - [GitHub] Comments
+- [Kramdown]
+  - [ ] [Jekyll]
+- [Markdown.pl][Markdown]
+  - [ ] [Php Markdown Extra]
+  - [GitHub] Docs
 - FixedIndent
-  - MultiMarkdown
-  - Pegdown
+  - [MultiMarkdown]
+  - [Pegdown]
 
 :information_source: profiles to encapsulate configuration details for variants within the
 family were added in 0.11.0:
@@ -319,47 +319,48 @@ suffer for the overhead of features that you will not use.
 Benchmarks
 ----------
 
-After upgrading to spec 0.27 compliance and adding parser emulation for various list processing
-variations:
+Latest, Jan 28, 2017 flexmark-java 0.13.1, intellij-markdown from CE EAP 2017, commonmark-java
+0.8.0:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |         0.425ms |       1.007ms |           1.664ms |  15.210ms |
-| VERSION          |         0.791ms |       1.659ms |           3.871ms |  42.589ms |
-| commonMarkSpec   |        31.163ms |      51.462ms |         608.117ms | 593.732ms |
-| markdown_example |         8.325ms |      10.002ms |         210.672ms | 981.694ms |
-| spec             |         4.685ms |       6.973ms |          34.622ms | 297.876ms |
-| table            |         0.230ms |       0.503ms |           0.654ms |   3.477ms |
-| table-format     |         1.622ms |       2.689ms |           3.792ms |  22.820ms |
-| wrap             |         3.396ms |       7.875ms |          15.658ms |  86.634ms |
+| README-SLOW      |         0.420ms |       0.812ms |           2.027ms |  15.483ms |
+| VERSION          |         0.743ms |       1.425ms |           4.057ms |  42.936ms |
+| commonMarkSpec   |        31.025ms |      44.465ms |         600.654ms | 575.131ms |
+| markdown_example |         8.490ms |      10.502ms |         223.593ms | 983.640ms |
+| spec             |         4.719ms |       6.249ms |          35.883ms | 307.176ms |
+| table            |         0.229ms |       0.623ms |           0.800ms |   3.642ms |
+| table-format     |         1.385ms |       2.881ms |           4.150ms |  23.592ms |
+| wrap             |         3.804ms |       4.589ms |          16.609ms |  86.383ms |
 
 Ratios of above:
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            1.00 |          2.37 |              3.92 |     35.79 |
-| VERSION          |            1.00 |          2.10 |              4.89 |     53.82 |
-| commonMarkSpec   |            1.00 |          1.65 |             19.51 |     19.05 |
-| markdown_example |            1.00 |          1.20 |             25.31 |    117.92 |
-| spec             |            1.00 |          1.49 |              7.39 |     63.59 |
-| table            |            1.00 |          2.19 |              2.85 |     15.14 |
-| table-format     |            1.00 |          1.66 |              2.34 |     14.07 |
-| wrap             |            1.00 |          2.32 |              4.61 |     25.51 |
+| README-SLOW      |            1.00 |          1.93 |              4.83 |     36.88 |
+| VERSION          |            1.00 |          1.92 |              5.46 |     57.78 |
+| commonMarkSpec   |            1.00 |          1.43 |             19.36 |     18.54 |
+| markdown_example |            1.00 |          1.24 |             26.34 |    115.86 |
+| spec             |            1.00 |          1.32 |              7.60 |     65.09 |
+| table            |            1.00 |          2.72 |              3.49 |     15.90 |
+| table-format     |            1.00 |          2.08 |              3.00 |     17.03 |
+| wrap             |            1.00 |          1.21 |              4.37 |     22.71 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.62 |             17.36 |     40.37 |
+| overall          |            1.00 |          1.41 |             17.47 |     40.11 |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
-| README-SLOW      |            0.42 |          1.00 |              1.65 |     15.11 |
-| VERSION          |            0.48 |          1.00 |              2.33 |     25.67 |
-| commonMarkSpec   |            0.61 |          1.00 |             11.82 |     11.54 |
-| markdown_example |            0.83 |          1.00 |             21.06 |     98.15 |
-| spec             |            0.67 |          1.00 |              4.97 |     42.72 |
-| table            |            0.46 |          1.00 |              1.30 |      6.92 |
-| table-format     |            0.60 |          1.00 |              1.41 |      8.49 |
-| wrap             |            0.43 |          1.00 |              1.99 |     11.00 |
+| README-SLOW      |            0.52 |          1.00 |              2.50 |     19.07 |
+| VERSION          |            0.52 |          1.00 |              2.85 |     30.12 |
+| commonMarkSpec   |            0.70 |          1.00 |             13.51 |     12.93 |
+| markdown_example |            0.81 |          1.00 |             21.29 |     93.66 |
+| spec             |            0.76 |          1.00 |              5.74 |     49.15 |
+| table            |            0.37 |          1.00 |              1.28 |      5.85 |
+| table-format     |            0.48 |          1.00 |              1.44 |      8.19 |
+| wrap             |            0.83 |          1.00 |              3.62 |     18.83 |
 | -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.62 |          1.00 |             10.70 |     24.88 |
+| overall          |            0.71 |          1.00 |             12.41 |     28.48 |
+
 
 ---
 
@@ -484,3 +485,6 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 
+
+
+[League/CommonMark]: https://github.com/thephpleague/commonmark
