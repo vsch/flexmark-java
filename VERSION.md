@@ -126,6 +126,8 @@ flexmark-java
   * `FENCED_CODE_MINIMIZE_INDENT` to `true`
   * `FENCED_CODE_MATCH_CLOSING_MARKER` to `true`
 
+* Add: sample for formatter use.
+
 0.13.0
 ------
 
@@ -149,8 +151,8 @@ flexmark-java
   custom elements. This module implements formatting of core nodes, all unknown nodes are pass
   through as is. See [Markdown Formatter](../../wiki/Markdown-Formatter) for options.
 
-  * `Formatter.FormatterExtension` implementation to all modules where it makes sense to
-    format custom elements.
+  * `Formatter.FormatterExtension` implementation to all modules where it makes sense to format
+    custom elements.
 
 0.12.3
 ------
