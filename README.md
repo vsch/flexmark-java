@@ -26,6 +26,31 @@ than ideal and for pathological input either hangs or practically hangs during p
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
 * [Markdown Formatter](../../wiki/Markdown-Formatter) module to output AST as markdown with
   formatting options.
+* [Table Extension](../../wiki/Extensions#tables) for
+  [Markdown Formatter](../../wiki/Markdown-Formatter) with column width and alignment of
+  markdown tables:
+
+  <table>
+  <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+  <tr><td>
+  <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m 
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m 
+  total:|| **13h**
+  </code></pre>
+  </td><td>
+  <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             || **13h** |
+  </code></pre>
+  </td></tr>
+  </table>
+
 
 ### Changes Forced by Downgrade to Java 7
 
@@ -361,7 +386,6 @@ Ratios of above:
 | -----------      |       --------- |     --------- |         --------- | --------- |
 | overall          |            0.71 |          1.00 |             12.41 |     28.48 |
 
-
 ---
 
 Because these two files represent the pathological input for pegdown, I no longer run them as
@@ -426,10 +450,17 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [All about me]: https://vladsch.com/about
 [CommonMark]: http://commonmark.org/
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
+[GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
+[Jekyll]: https://jekyllrb.com
+[Kramdown]: http://kramdown.gettalong.org/
 [LICENSE.txt]: LICENSE.txt
+[League/CommonMark]: https://github.com/thephpleague/commonmark
+[Markdown]: https://daringfireball.net/projects/markdown/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
+[MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
+[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
 [VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
@@ -448,20 +479,14 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CLion]: https://www.jetbrains.com/clion
 [Craig's List]: http://montreal.en.craigslist.ca/
 [DataGrip]: https://www.jetbrains.com/datagrip
-[GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [Github-flavoured-Markdown]: http://github.github.com/github-flavored-markdown/
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
-[Jekyll]: https://jekyllrb.com
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
 [Kotlin]: http://kotlinlang.org
-[Kramdown]: http://kramdown.gettalong.org/
-[Markdown]: https://daringfireball.net/projects/markdown/
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
 [Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
-[MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
-[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
 [PHP Markdown Extra: definition list]: http://michelf.com/projects/php-markdown/extra/#def-list
 [PHP Markdown Extra: fenced code]: http://michelf.com/projects/php-markdown/extra/#fenced-code-blocks
 [PHP Markdown Extra: tables]: http://michelf.com/projects/php-markdown/extra/#table
@@ -485,6 +510,3 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 
-
-
-[League/CommonMark]: https://github.com/thephpleague/commonmark
