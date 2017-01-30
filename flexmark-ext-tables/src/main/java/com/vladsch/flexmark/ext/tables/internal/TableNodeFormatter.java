@@ -1,8 +1,15 @@
 package com.vladsch.flexmark.ext.tables.internal;
 
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.util.format.Table;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
@@ -12,9 +19,7 @@ import java.util.Set;
 public class TableNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
 
-    private int rowNumber;
-    private int columnNumber;
-    private boolean isSeparator;
+    private Table myTable;
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
@@ -69,64 +74,89 @@ public class TableNodeFormatter implements NodeFormatter {
                     public void render(TableCaption node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
+                }),
+                new NodeFormattingHandler<>(Text.class, new CustomNodeFormatter<Text>() {
+                    @Override
+                    public void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
+                        TableNodeFormatter.this.render(node, context, markdown);
+                    }
                 })
         ));
     }
 
     private void render(final TableBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        rowNumber = 0;
+        myTable = new Table(options);
         context.renderChildren(node);
+
+        // output table
+        myTable.finalizeTable();
+        if (myTable.getMaxColumns() > 0) {
+            markdown.blankLine();
+            myTable.appendTable(markdown);
+            markdown.blankLine();
+        }
     }
 
     private void render(final TableHead node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        rowNumber = 0;
-        isSeparator = false;
+        myTable.setSeparator(false);
+        myTable.setHeading(true);
         context.renderChildren(node);
     }
 
     private void render(TableSeparator node, NodeFormatterContext context, MarkdownWriter markdown) {
-        rowNumber = 0;
-        isSeparator = true;
+        myTable.setSeparator(true);
         context.renderChildren(node);
     }
 
     private void render(final TableBody node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        rowNumber = 0;
-        isSeparator = false;
+        myTable.setSeparator(false);
+        myTable.setHeading(false);
         context.renderChildren(node);
     }
 
     private void render(final TableRow node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        rowNumber++;
-        columnNumber = 0;
         context.renderChildren(node);
-        markdown.line();
+        if (!myTable.isSeparator()) myTable.nextRow();
     }
 
     private void render(final TableCaption node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        if (!options.formatRemoveCaption) {
-            markdown.line().append(node.getOpeningMarker());
-            context.renderChildren(node);
-            markdown.append(node.getClosingMarker()).line();
-        }
+        myTable.setCaption(node.getOpeningMarker(), node.getText(), node.getClosingMarker());
+        //if (!options.removeCaption) {
+        //    markdown.line().append(node.getOpeningMarker());
+        //    context.renderChildren(node);
+        //    markdown.append(node.getClosingMarker()).line();
+        //}
     }
 
     private void render(TableCell node, NodeFormatterContext context, MarkdownWriter markdown) {
-        columnNumber++;
-        if (node.getPrevious() == null) {
-            if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');
-            else markdown.append(node.getOpeningMarker());
+        myTable.addCell(new Table.TableCell(node.getOpeningMarker(), node.getText(), node.getClosingMarker(), 1, node.getSpan(), node.getAlignment() == null ? CellAlignment.NONE : node.getAlignment().cellAlignment()));
+        //if (node.getPrevious() == null) {
+        //    if (options.leadTrailPipes && node.getOpeningMarker().isEmpty()) markdown.append('|');
+        //    else markdown.append(node.getOpeningMarker());
+        //} else {
+        //    markdown.append(node.getOpeningMarker());
+        //}
+        //if (!isSeparator && options.spaceAroundPipes && !node.getText().startsWith(" ")) markdown.append(' ');
+        //context.renderChildren(node);
+        //if (!isSeparator && options.spaceAroundPipes && !node.getText().endsWith(" ")) markdown.append(' ');
+        //if (node.getNext() == null) {
+        //    if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) markdown.append('|');
+        //    else markdown.append(node.getClosingMarker());
+        //} else {
+        //    markdown.append(node.getClosingMarker());
+        //}
+    }
+
+    private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
+        if (TableParagraphPreProcessor.TABLE_HEADER_SEPARATOR.matcher(node.getChars()).matches()) {
+            Node parent = node.getAncestorOfType(Paragraph.class);
+            if (parent instanceof Paragraph && ((Paragraph) parent).hasTableSeparator()) {
+                markdown.pushPrefix().addPrefix(" ").append(node.getChars()).popPrefix();
+            } else {
+                markdown.append(node.getChars());
+            }
         } else {
-            markdown.append(node.getOpeningMarker());
-        }
-        if (!isSeparator && options.spaceAroundPipe && !node.getText().startsWith(" ")) markdown.append(' ');
-        context.renderChildren(node);
-        if (!isSeparator && options.spaceAroundPipe && !node.getText().endsWith(" ")) markdown.append(' ');
-        if (node.getNext() == null) {
-            if (options.leadTrailPipes && node.getClosingMarker().isEmpty()) markdown.append('|');
-            else markdown.append(node.getClosingMarker());
-        } else {
-            markdown.append(node.getClosingMarker());
+            markdown.append(node.getChars());
         }
     }
 

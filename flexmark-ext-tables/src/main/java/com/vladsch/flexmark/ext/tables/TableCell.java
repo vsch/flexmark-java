@@ -2,6 +2,7 @@ package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.TextNodeConverter;
+import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
@@ -144,6 +145,15 @@ public class TableCell extends CustomNode implements DelimitedNode {
      * How the cell is aligned horizontally.
      */
     public enum Alignment {
-        LEFT, CENTER, RIGHT
+        LEFT, CENTER, RIGHT;
+
+        public CellAlignment cellAlignment() {
+            switch (this) {
+                case CENTER: return CellAlignment.CENTER;
+                case LEFT: return CellAlignment.LEFT;
+                case RIGHT: return CellAlignment.RIGHT;
+                default: return CellAlignment.NONE;
+            }
+        }
     }
 }

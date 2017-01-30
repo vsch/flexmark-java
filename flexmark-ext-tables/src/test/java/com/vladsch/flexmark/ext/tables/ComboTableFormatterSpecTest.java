@@ -1,9 +1,7 @@
 package com.vladsch.flexmark.ext.tables;
 
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.options.DiscretionaryText;
-import com.vladsch.flexmark.formatter.options.ElementPlacement;
-import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
@@ -33,15 +31,14 @@ public class ComboTableFormatterSpecTest extends ComboSpecTestCase {
                 .set(TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH, true)
         );
         optionsMap.put("no-caption", new MutableDataSet().set(TablesExtension.FORMAT_REMOVE_CAPTION, true));
+        optionsMap.put("no-alignment", new MutableDataSet().set(TablesExtension.FORMAT_APPLY_COLUMN_ALIGNMENT, false));
+        optionsMap.put("no-width", new MutableDataSet().set(TablesExtension.FORMAT_ADJUST_COLUMN_WIDTH, false));
         optionsMap.put("keep-whitespace", new MutableDataSet().set(TablesExtension.TRIM_CELL_WHITESPACE, false));
         optionsMap.put("lead-trail-pipes", new MutableDataSet().set(TablesExtension.FORMAT_LEAD_TRAIL_PIPES, false));
-        optionsMap.put("space-around-pipe", new MutableDataSet().set(TablesExtension.FORMAT_SPACE_AROUND_PIPE, false));
+        optionsMap.put("space-around-pipe", new MutableDataSet().set(TablesExtension.FORMAT_SPACE_AROUND_PIPES, false));
         optionsMap.put("adjust-column-width", new MutableDataSet().set(TablesExtension.FORMAT_ADJUST_COLUMN_WIDTH, false));
         optionsMap.put("apply-column-alignment", new MutableDataSet().set(TablesExtension.FORMAT_APPLY_COLUMN_ALIGNMENT, false));
         optionsMap.put("fill-missing-columns", new MutableDataSet().set(TablesExtension.FORMAT_FILL_MISSING_COLUMNS, true));
-        optionsMap.put("delete-empty-columns", new MutableDataSet().set(TablesExtension.FORMAT_DELETE_EMPTY_COLUMNS, true));
-        optionsMap.put("delete-empty-rows", new MutableDataSet().set(TablesExtension.FORMAT_DELETE_EMPTY_ROWS, true));
-        optionsMap.put("trim-cells", new MutableDataSet().set(TablesExtension.FORMAT_TRIM_CELLS, true));
         optionsMap.put("left-align-marker-as-is", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("left-align-marker-add", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.ADD));
         optionsMap.put("left-align-marker-remove", new MutableDataSet().set(TablesExtension.FORMAT_LEFT_ALIGN_MARKER, DiscretionaryText.REMOVE));

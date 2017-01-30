@@ -2,6 +2,7 @@ package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Collection;
@@ -74,7 +75,7 @@ public interface NodeFormatterContext {
      * <p>
      * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}
      * if {@link Formatter#REFERENCE_SORT} is set to
-     * {@link com.vladsch.flexmark.formatter.options.ElementPlacementSort#SORT_UNUSED_LAST} so that
+     * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
      * @return iterable
@@ -88,7 +89,7 @@ public interface NodeFormatterContext {
      * <p>
      * {@link CoreNodeFormatter} registers {@link com.vladsch.flexmark.ast.RefNode}
      * if {@link Formatter#REFERENCE_SORT} is set to
-     * {@link com.vladsch.flexmark.formatter.options.ElementPlacementSort#SORT_UNUSED_LAST} so that
+     * {@link ElementPlacementSort#SORT_UNUSED_LAST} so that
      *
      * @param classes node classes to return
      * @return iterable

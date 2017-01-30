@@ -17,6 +17,7 @@ lines and table caption.
 -------|-------------
 .
 |-------|-------------|
+
 ````````````````````````````````
 
 
@@ -52,12 +53,14 @@ Abc|Def
 ````````````````````````````````
 
 
+paragraph lines that look like table separator should be left indented
+
 ```````````````````````````````` example Tables Extension: 6
 Abc|Def
  |---|---
 .
 Abc|Def
-|---|---
+ |---|---
 ````````````````````````````````
 
 
@@ -77,7 +80,8 @@ Abc|Def
 ---|---
 .
 | Abc | Def |
-|---|---|
+|-----|-----|
+
 ````````````````````````````````
 
 
@@ -88,7 +92,8 @@ Abc|Def
 :--|---
 .
 | Abc | Def |
-|:--|---|
+|:----|-----|
+
 ````````````````````````````````
 
 
@@ -99,7 +104,8 @@ Abc|Def
 --:|---
 .
 | Abc | Def |
-|--:|---|
+|----:|-----|
+
 ````````````````````````````````
 
 
@@ -108,7 +114,8 @@ Abc|Def
 :-:|---
 .
 | Abc | Def |
-|:-:|---|
+|:---:|-----|
+
 ````````````````````````````````
 
 
@@ -117,7 +124,8 @@ Abc|Def
 |---
 .
 | Abc |
-|---|
+|-----|
+
 ````````````````````````````````
 
 
@@ -126,7 +134,8 @@ Abc|Def
 |---|
 .
 | Abc |
-|---|
+|-----|
+
 ````````````````````````````````
 
 
@@ -135,7 +144,8 @@ Abc|
 ---|
 .
 | Abc |
-|---|
+|-----|
+
 ````````````````````````````````
 
 
@@ -164,8 +174,9 @@ Abc
 |1
 .
 | Abc |
-|---|
-| 1 |
+|-----|
+| 1   |
+
 ````````````````````````````````
 
 
@@ -175,8 +186,9 @@ Abc
 |1|
 .
 | Abc |
-|---|
-| 1 |
+|-----|
+| 1   |
+
 ````````````````````````````````
 
 
@@ -186,8 +198,9 @@ Abc|
 1|
 .
 | Abc |
-|---|
-| 1 |
+|-----|
+| 1   |
+
 ````````````````````````````````
 
 
@@ -209,7 +222,8 @@ Abc|
 1
 .
 | Abc |
-|---|
+|-----|
+
 1
 ````````````````````````````````
 
@@ -220,8 +234,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -231,8 +246,9 @@ Abc|Def|Ghi
 1|2|3
 .
 | Abc | Def | Ghi |
-|---|---|
-| 1 | 2 | 3 |
+|-----|-----|-----|
+| 1   | 2   | 3   |
+
 ````````````````````````````````
 
 
@@ -242,8 +258,9 @@ Abc|Def|Ghi
  1 | 2
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -253,8 +270,9 @@ Abc|Def
     1|2
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -264,8 +282,9 @@ Abc|Def
 |1|2|
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -277,8 +296,9 @@ Abc|Def
 `|`|`|`
 .
 | Abc | Def |
-|---|---|
+|-----|-----|
 | `|` | `|` |
+
 ````````````````````````````````
 
 
@@ -290,8 +310,9 @@ Abc|Def
 `| | abc
 .
 | Abc | Def |
-|---|---|
-| ` |  | abc |
+|-----|-----|-----|
+| `   |     | abc |
+
 ````````````````````````````````
 
 
@@ -302,9 +323,10 @@ Abc|Def
 ---|---
 **def | abc
 .
-| Abc | Def |
-|---|---|
+| Abc   | Def |
+|-------|-----|
 | **def | abc |
+
 ````````````````````````````````
 
 
@@ -314,8 +336,9 @@ Abc|Def
 1|2
 .
 | *Abc* | Def |
-|---|---|
-| 1 | 2 |
+|-------|-----|
+| 1     | 2   |
+
 ````````````````````````````````
 
 
@@ -325,8 +348,9 @@ Abc|Def
 1\\|2|20
 .
 | Abc | Def |
-|---|---|
-| 1\\ | 2 | 20 |
+|-----|-----|----|
+| 1\\ | 2   | 20 |
+
 ````````````````````````````````
 
 
@@ -338,8 +362,9 @@ Abc|Def
 1\\|2|20
 .
 | Abc | Def |
-|---|---|
-| 1\\ | 2 |
+|-----|-----|
+| 1\\ | 2   |
+
 ````````````````````````````````
 
 
@@ -348,9 +373,10 @@ Abc|Def
 ---|---
 1\\\\|2
 .
-| Abc | Def |
-|---|---|
-| 1\\\\ | 2 |
+| Abc   | Def |
+|-------|-----|
+| 1\\\\ | 2   |
+
 ````````````````````````````````
 
 
@@ -360,8 +386,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|:---|---|
-| 1 | 2 |
+|:----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -371,8 +398,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|---:|---|
-| 1 | 2 |
+|----:|-----|
+|   1 | 2   |
+
 ````````````````````````````````
 
 
@@ -382,8 +410,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|:---:|---|
-| 1 | 2 |
+|:---:|-----|
+|  1  | 2   |
+
 ````````````````````````````````
 
 
@@ -393,8 +422,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|---|:---:|
-| 1 | 2 |
+|-----|:---:|
+| 1   |  2  |
+
 ````````````````````````````````
 
 
@@ -404,8 +434,9 @@ Abc|Def
 1|2
 .
 | Abc | Def |
-|:---|---|
-| 1 | 2 |
+|:----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -442,8 +473,9 @@ Abc|Def
 1|2|3
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 | 3 |
+|-----|-----|---|
+| 1   | 2   | 3 |
+
 ````````````````````````````````
 
 
@@ -455,8 +487,9 @@ Abc|Def
 1|2|3
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -466,8 +499,9 @@ Abc|Def|Ghi
 1|2
 .
 | Abc | Def | Ghi |
-|---|---|---|
-| 1 | 2 |
+|-----|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
@@ -477,8 +511,8 @@ Abc|Def|Ghi
 > 1|2
 .
 > | Abc | Def |
-> |---|---|
-> | 1 | 2 |
+> |-----|-----|
+> | 1   | 2   |
 
 ````````````````````````````````
 
@@ -490,8 +524,9 @@ Abc|Def
 table, you are over
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 table, you are over
 ````````````````````````````````
 
@@ -506,9 +541,10 @@ table, you are over
 
 [ref]: /url
 .
-| **Abc** | _Def_ |
-|---|---|
-| [ref] | `code` |
+| **Abc** | _Def_  |
+|---------|--------|
+| [ref]   | `code` |
+
 table, you are over
 
 [ref]: /url
@@ -525,9 +561,10 @@ table, you are over
 
 [ref]: /url
 .
-| **Abc** **test** | _Def_ _Def_ |
-|---|---|
-| [ref] | `code` `code` |
+| **Abc** **test** | _Def_ _Def_   |
+|------------------|---------------|
+| [ref]            | `code` `code` |
+
 table, you are over
 
 [ref]: /url
@@ -542,8 +579,9 @@ Column spans are created with repeated | pipes one for each additional column to
 | span ||
 .
 | Abc | Def |
-|---|---|
-| span ||
+|-----|-----|
+| span     ||
+
 ````````````````````````````````
 
 
@@ -557,8 +595,9 @@ Now we try varying the header lines and make sure we get the right output
 .
 | Abc | Def |
 | Hij | Lmn |
-|---|---|
-| span ||
+|-----|-----|
+| span     ||
+
 ````````````````````````````````
 
 
@@ -568,8 +607,9 @@ No header lines
 |---|---|
 | col1 | col2|
 .
-|---|---|
+|------|------|
 | col1 | col2 |
+
 ````````````````````````````````
 
 
@@ -580,7 +620,8 @@ No body lines
 |---|---|
 .
 | col1 | col2 |
-|---|---|
+|------|------|
+
 ````````````````````````````````
 
 
@@ -592,26 +633,42 @@ With caption
          [Caption **bold** _italic_ `code`]          
 .
 | col1 | col2 |
-|---|---|
+|------|------|
 [Caption **bold** _italic_ `code`]
+
 ````````````````````````````````
 
 
-With caption but no caption parsing
+With caption
 
-```````````````````````````````` example(Tables Extension: 54) options(no-caption)
+```````````````````````````````` example Tables Extension: 54
 | col1 | col2|
 |---|---|
 [Caption]
 .
 | col1 | col2 |
+|------|------|
+[Caption]
+
+````````````````````````````````
+
+
+With caption but no caption output
+
+```````````````````````````````` example(Tables Extension: 55) options(no-caption)
+| col1 | col2|
 |---|---|
+[Caption]
+.
+| col1 | col2 |
+|------|------|
+
 ````````````````````````````````
 
 
 Alignment should be taken from column after span is added
 
-```````````````````````````````` example(Tables Extension: 55) options(keep-whitespace)
+```````````````````````````````` example Tables Extension: 56
 | day         | time  |   spent |
 |:------------|:-----:|--------:|
 | nov. 2. tue | 10:00 |  4h 40m |
@@ -625,12 +682,13 @@ Alignment should be taken from column after span is added
 | nov. 3. thu | 11:00 |      4h |
 | nov. 7. mon | 10:20 |  4h 20m |
 | total:             || **13h** |
+
 ````````````````````````````````
 
 
 multiple tables parsed correctly
 
-```````````````````````````````` example Tables Extension: 56
+```````````````````````````````` example Tables Extension: 57
 not a table, followed by a table
 
 | col1 | col2|
@@ -651,17 +709,17 @@ not a table, followed by a table
 not a table, followed by a table
 
 | col1 | col2 |
-|---|---|
+|------|------|
 
-| col1 | col2 |
-|---|---|
+| col1  | col2  |
+|-------|-------|
 | data1 | data2 |
 
 not a table, followed by a table
 
 | col11 | col12 |
 | col21 | col22 |
-|---|---|
+|-------|-------|
 | data1 | data2 |
 
 ````````````````````````````````
@@ -669,7 +727,7 @@ not a table, followed by a table
 
 multi row/column
 
-```````````````````````````````` example Tables Extension: 57
+```````````````````````````````` example Tables Extension: 58
 | col11 | col12| col13|
 | col21 | col22| col23|
 | col31 | col32| col33|
@@ -679,10 +737,10 @@ multi row/column
 | data31 | data32| data33|
 
 .
-| col11 | col12 | col13 |
-| col21 | col22 | col23 |
-| col31 | col32 | col33 |
-|---|---|---|
+| col11  | col12  | col13  |
+| col21  | col22  | col23  |
+| col31  | col32  | col33  |
+|--------|--------|--------|
 | data11 | data12 | data13 |
 | data21 | data22 | data23 |
 | data31 | data32 | data33 |
@@ -692,31 +750,33 @@ multi row/column
 
 keep cell whitespace
 
-```````````````````````````````` example Tables Extension: 58
+```````````````````````````````` example Tables Extension: 59
  Abc  | Def
  --- | ---
  1 | 2
 .
 | Abc | Def |
-|---|---|
-| 1 | 2 |
+|-----|-----|
+| 1   | 2   |
+
 ````````````````````````````````
 
 
 Custom class name
 
-```````````````````````````````` example Tables Extension: 59
+```````````````````````````````` example Tables Extension: 60
 Abc|Def
 ---|---
 .
 | Abc | Def |
-|---|---|
+|-----|-----|
+
 ````````````````````````````````
 
 
 in item
 
-```````````````````````````````` example(Tables Extension: 60) options(keep-whitespace)
+```````````````````````````````` example Tables Extension: 61
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -727,17 +787,18 @@ in item
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion                                               |
-  |---------------|-----------------|---------------------------------------------------------|
-  | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
-  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
-  | Explicit link | `.link`         | `[]()`                                                  |
+  | Element       | Abbreviation    | Expansion         |
+  |---------------|-----------------|-------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `           |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         | `[]()`            |
+
 ````````````````````````````````
 
 
 real life table
 
-```````````````````````````````` example(Tables Extension: 61) options(keep-whitespace)
+```````````````````````````````` example Tables Extension: 62
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -881,6 +942,7 @@ real life table
 | &nbsp;&nbsp;&nbsp;&nbsp;Refactoring for /, https:// and file:// absolute link addresses to project files                |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Refactoring of header text with update to referencing anchor link references                    |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Anchor link reference refactoring with update to referenced header text                         |       |    X     |
+
 ````````````````````````````````
 
 
@@ -914,7 +976,7 @@ invalid table:
 ````````````````````````````````
 
 
-```````````````````````````````` example(GFM options: 3) options(keep-whitespace)
+```````````````````````````````` example GFM options: 3
 | Feature                                                                                                                 | Basic | Enhanced |
 |:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
 | Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
@@ -924,20 +986,21 @@ invalid table:
 | Support for Default and Darcula color schemes for preview tab                                                           |   X   |    X     |
 | Warning and Error Annotations to help you validate wiki link errors                                                     |   X   |    X     |
 .
-| Feature                                                                                                                 | Basic | Enhanced |
-|:------------------------------------------------------------------------------------------------------------------------|:-----:|:--------:|
-| Works with builds 143.2370 or newer, product version IDEA 15.0.6                                                        |   X   |    X     |
-| Preview Tab so you can see what the rendered markdown will look like on GitHub.                                         |   X   |    X     |
-| Syntax highlighting                                                                                                     |   X   |    X     |
-| Table syntax highlighting stripes rows and columns                                                                      |   X   |    X     |
-| Support for Default and Darcula color schemes for preview tab                                                           |   X   |    X     |
-| Warning and Error Annotations to help you validate wiki link errors                                                     |   X   |    X     |
+| Feature                                                                         | Basic | Enhanced |
+|:--------------------------------------------------------------------------------|:-----:|:--------:|
+| Works with builds 143.2370 or newer, product version IDEA 15.0.6                |   X   |    X     |
+| Preview Tab so you can see what the rendered markdown will look like on GitHub. |   X   |    X     |
+| Syntax highlighting                                                             |   X   |    X     |
+| Table syntax highlighting stripes rows and columns                              |   X   |    X     |
+| Support for Default and Darcula color schemes for preview tab                   |   X   |    X     |
+| Warning and Error Annotations to help you validate wiki link errors             |   X   |    X     |
+
 ````````````````````````````````
 
 
 in item
 
-```````````````````````````````` example(GFM options: 4) options(gfm, keep-whitespace)
+```````````````````````````````` example(GFM options: 4) options(gfm)
 - Add: live templates starting with `.`    
                                         
   | Element       | Abbreviation    | Expansion                                               |
@@ -948,11 +1011,154 @@ in item
 .
 - Add: live templates starting with `.`
 
-  | Element       | Abbreviation    | Expansion                                               |
-  |---------------|-----------------|---------------------------------------------------------|
-  | Abbreviation  | `.abbreviation` | `*[]: `                                                 |
-  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`                                       |
-  | Explicit link | `.link`         | `[]()`                                                  |
+  | Element       | Abbreviation    | Expansion         |
+  |---------------|-----------------|-------------------|
+  | Abbreviation  | `.abbreviation` | `*[]: `           |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         | `[]()`            |
+
+````````````````````````````````
+
+
+default
+
+```````````````````````````````` example GFM options: 5
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                     |
+  |---------------|-----------------|------------------------------:|
+  | Abbreviation  | `.abbreviation` |           `*[]: `             |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`             |
+  | Explicit link | `.link`         |            `[]()`             |
+.
+- Add: live templates starting with `.`
+
+  | Element       | Abbreviation    |         Expansion |
+  |---------------|-----------------|------------------:|
+  | Abbreviation  | `.abbreviation` |           `*[]: ` |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         |            `[]()` |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 6) options(no-alignment)
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                     |
+  |---------------|-----------------|------------------------------:|
+  | Abbreviation  | `.abbreviation` |           `*[]: `             |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`             |
+  | Explicit link | `.link`         |            `[]()`             |
+.
+- Add: live templates starting with `.`
+
+  | Element       | Abbreviation    | Expansion         |
+  |---------------|-----------------|------------------:|
+  | Abbreviation  | `.abbreviation` | `*[]: `           |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\` |
+  | Explicit link | `.link`         | `[]()`            |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 7) options(no-width)
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                     |
+  |---------------|-----------------|------------------------------:|
+  | Abbreviation  | `.abbreviation` |           `*[]: `             |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`             |
+  | Explicit link | `.link`         |            `[]()`             |
+.
+- Add: live templates starting with `.`
+
+  | Element | Abbreviation | Expansion |
+  |---------------|-----------------|------------------:|
+  | Abbreviation | `.abbreviation` | `*[]: ` |
+  | Code fence | `.codefence` | \`\`\` ... \`\`\` |
+  | Explicit link | `.link` | `[]()` |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 8) options(no-alignment, no-width)
+- Add: live templates starting with `.`    
+                                        
+  | Element       | Abbreviation    | Expansion                     |
+  |---------------|-----------------|------------------------------:|
+  | Abbreviation  | `.abbreviation` |           `*[]: `             |
+  | Code fence    | `.codefence`    | \`\`\` ... \`\`\`             |
+  | Explicit link | `.link`         |            `[]()`             |
+.
+- Add: live templates starting with `.`
+
+  | Element | Abbreviation | Expansion |
+  |---------------|-----------------|------------------:|
+  | Abbreviation | `.abbreviation` | `*[]: ` |
+  | Code fence | `.codefence` | \`\`\` ... \`\`\` |
+  | Explicit link | `.link` | `[]()` |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 9) options(fill-missing-columns)
+| col11 | col12|
+| col21 | col22|
+|---|---|
+| data1 | data2|data3
+.
+| col11 | col12 |       |
+| col21 | col22 |       |
+|-------|-------|-------|
+| data1 | data2 | data3 |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 10) options(left-align-marker-add)
+| col11 | col12|
+| col21 | col22|
+|---|:---|
+| data1 | data2|data3
+.
+| col11 | col12 |
+| col21 | col22 |
+|:------|:------|:------|
+| data1 | data2 | data3 |
+
+````````````````````````````````
+
+
+```````````````````````````````` example(GFM options: 11) options(left-align-marker-remove)
+| col11 | col12|
+| col21 | col22|
+|---|:---|
+| data1 | data2|data3
+.
+| col11 | col12 |
+| col21 | col22 |
+|-------|-------|-------|
+| data1 | data2 | data3 |
+
+````````````````````````````````
+
+
+```````````````````````````````` example GFM options: 12
+day|time|spent
+:---|:---:|--:
+nov. 2. tue|10:00|4h 40m 
+nov. 3. thu|11:00|4h
+nov. 7. mon|10:20|4h 20m 
+total:|| **13h**
+.
+| day         | time  |   spent |
+|:------------|:-----:|--------:|
+| nov. 2. tue | 10:00 |  4h 40m |
+| nov. 3. thu | 11:00 |      4h |
+| nov. 7. mon | 10:20 |  4h 20m |
+| total:             || **13h** |
+
 ````````````````````````````````
 
 

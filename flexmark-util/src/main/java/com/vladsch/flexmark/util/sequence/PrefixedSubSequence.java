@@ -45,18 +45,6 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
         this.base = of(baseSeq, start, end);
     }
 
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq) {
-        return of(prefix, baseSeq, 0, baseSeq.length());
-    }
-
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start) {
-        return of(prefix, baseSeq, start, baseSeq.length());
-    }
-
-    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start, int end) {
-        return new PrefixedSubSequence(prefix, baseSeq, start, end, true);
-    }
-
     @Override
     public int length() {
         return prefixLength + base.length();
@@ -118,5 +106,21 @@ public final class PrefixedSubSequence extends BasedSequenceImpl {
     @Override
     public boolean equals(Object obj) {
         return obj == this || (obj instanceof CharSequence && toString().equals(obj.toString()));
+    }
+
+    public static PrefixedSubSequence repeatOf(String prefix, int count, BasedSequence baseSeq) {
+        return of(RepeatedCharSequence.of(prefix, count).toString(), baseSeq, 0, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq) {
+        return of(prefix, baseSeq, 0, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start) {
+        return of(prefix, baseSeq, start, baseSeq.length());
+    }
+
+    public static PrefixedSubSequence of(String prefix, BasedSequence baseSeq, int start, int end) {
+        return new PrefixedSubSequence(prefix, baseSeq, start, end, true);
     }
 }

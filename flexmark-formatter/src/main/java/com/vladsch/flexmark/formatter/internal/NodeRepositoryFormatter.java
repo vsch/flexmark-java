@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.formatter.options.ElementPlacement;
-import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.options.DataHolder;
 

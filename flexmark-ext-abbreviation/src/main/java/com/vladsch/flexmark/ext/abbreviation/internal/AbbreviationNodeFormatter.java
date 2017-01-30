@@ -5,8 +5,8 @@ import com.vladsch.flexmark.ext.abbreviation.AbbreviationBlock;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
-import com.vladsch.flexmark.formatter.options.ElementPlacement;
-import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;

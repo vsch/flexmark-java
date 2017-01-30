@@ -2,9 +2,9 @@ package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.ext.emoji.internal.EmojiCheatSheet;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.html.Escaping;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
-import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
+import com.vladsch.flexmark.util.format.Table;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -13,9 +13,11 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
+import org.jsoup.nodes.Attribute;
 import org.jsoup.select.Elements;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 public class FlexmarkHtmlParser {
@@ -25,13 +27,27 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
     public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
     public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
-    public static final DataKey<Integer> MIN_TABLE_SEPARATOR_COLUMN_WIDTH = new DataKey<>("MIN_TABLE_SEPARATOR_COLUMN_WIDTH", 3);
-    public static final DataKey<Integer> MIN_TABLE_SEPARATOR_DASHES = new DataKey<>("MIN_TABLE_SEPARATOR_DASHES", 1);
     public static final DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
     public static final DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
     public static final DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
     public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
     public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
+
+    public static final DataKey<Integer> TABLE_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
+    public static final DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
+    public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
+    public static final DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
+
+    private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<>();
+    static {
+        tableCellAlignments.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
+        tableCellAlignments.put(Pattern.compile("\\bcenter\\b"), CellAlignment.CENTER);
+        tableCellAlignments.put(Pattern.compile("\\bright\\b"), CellAlignment.RIGHT);
+        tableCellAlignments.put("text-left", CellAlignment.LEFT);
+        tableCellAlignments.put("text-center", CellAlignment.CENTER);
+        tableCellAlignments.put("text-right", CellAlignment.RIGHT);
+    }
+    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
     private final Stack<State> myStateStack;
     private final Map<String, String> myAbbreviations;
@@ -242,13 +258,13 @@ public class FlexmarkHtmlParser {
                 case LI                      : processed = processList(out, (Element) node, false, true); break;
                 case TABLE                   : processed = processTable(out, (Element) node); break;
                 case _UNWRAPPED              : processed = processUnwrapped(out, node); break;
-                case _WRAPPED                : processed = processWrapped(out, (Element) node, tagParam.param == null); break;
+                case _WRAPPED                : processed = processWrapped(out, node, tagParam.param == null); break;
                 case _COMMENT                : processed = processComment(out, (Comment)node); break;
                 case _HEADING                : processed = processHeading(out, (Element) node); break;
                 case _TEXT                   : processed = processText(out, (TextNode)node); break;
                 // @formatter:on
                 default:
-                    int tmp = 0;
+                    break;
             }
         } else {
             if (node instanceof Element) {
@@ -308,7 +324,6 @@ public class FlexmarkHtmlParser {
             if (child instanceof TextNode) {
                 if (textPrefix != null && textPrefix.length() > 0) out.append(textPrefix);
                 String text = ((TextNode) child).getWholeText();
-                String appendAfter = null;
                 String preparedText = prepareText(text);
                 out.append(preparedText);
                 if (textSuffix != null && textSuffix.length() > 0) out.append(textSuffix);
@@ -389,7 +404,6 @@ public class FlexmarkHtmlParser {
 
         while ((child = peek()) != null) {
             if (child instanceof TextNode) {
-                TextNode textNode = (TextNode) child;
                 String text = ((TextNode) child).getWholeText();
                 out.append(prepareText(text));
                 skip();
@@ -740,8 +754,6 @@ public class FlexmarkHtmlParser {
         ListState listState = new ListState(isNumbered);
 
         Node item;
-        boolean firstItem = true;
-
         while ((item = peek()) != null) {
             TagParam tagParam = getTagParam(item);
             if (tagParam != null) {
@@ -750,15 +762,12 @@ public class FlexmarkHtmlParser {
                         processListItem(out, (Element) item, listState);
                         break;
                     default:
-                        int tmp = 0;
                         skip();
                         break;
                 }
             } else {
                 processWrapped(out, item, true);
             }
-
-            firstItem = false;
         }
 
         out.blankLine();
@@ -831,7 +840,6 @@ public class FlexmarkHtmlParser {
                         firstItem = false;
                         break;
                     default:
-                        int tmp = 0;
                         break;
                 }
             } else {
@@ -886,145 +894,7 @@ public class FlexmarkHtmlParser {
         return ourTagProcessors.get(node.nodeName().toLowerCase());
     }
 
-    private enum CellAlignment {
-        NONE,
-        LEFT,
-        CENTER,
-        RIGHT;
-
-        static CellAlignment getAlignment(String alignment) {
-            for (CellAlignment cellAlignment : values()) {
-                if (cellAlignment.name().equalsIgnoreCase(alignment)) {
-                    return cellAlignment;
-                }
-            }
-            return NONE;
-        }
-    }
-
-    private static class TableCell {
-        final String text;
-        final int columnSpan;
-        final CellAlignment alignment;
-
-        public TableCell(final String text, final int columnSpan, final CellAlignment alignment) {
-            this.text = text.isEmpty() ? " " : text;
-            this.columnSpan = columnSpan;
-            this.alignment = alignment != null ? alignment : CellAlignment.NONE;
-        }
-    }
-
-    private static class TableRow {
-        final List<TableCell> cells = new ArrayList<>();
-        int columns = 0;
-
-        void addCell(TableCell cell) {
-            cells.add(cell);
-            columns += cell.columnSpan;
-        }
-
-        int getColumns() {
-            return cells.size();
-        }
-
-        int getSpannedColumns() {
-            int columns = 0;
-            for (TableCell cell : cells) {
-                columns += cell.columnSpan;
-            }
-            return columns;
-        }
-    }
-
-    private static class Table {
-        List<TableRow> heading = new ArrayList<>();
-        List<TableRow> body = new ArrayList<>();
-        boolean isHeading;
-        String caption;
-
-        int getHeadingRows() {
-            return heading.size();
-        }
-
-        int getBodyRows() {
-            return body.size();
-        }
-
-        int getHeadingColumns() {
-            return getMaxColumns(heading);
-        }
-
-        int getBodyColumns() {
-            return getMaxColumns(body);
-        }
-
-        int getMinColumns() {
-            int headingColumns = getMinColumns(heading);
-            int bodyColumns = getMinColumns(body);
-            return headingColumns < bodyColumns ? headingColumns : bodyColumns;
-        }
-
-        int getMaxColumns() {
-            int headingColumns = getMaxColumns(heading);
-            int bodyColumns = getMaxColumns(body);
-            return headingColumns > bodyColumns ? headingColumns : bodyColumns;
-        }
-
-        int getMaxColumns(List<TableRow> rows) {
-            int columns = 0;
-            for (TableRow row : rows) {
-                int spans = row.getSpannedColumns();
-                if (columns < spans) columns = spans;
-            }
-            return columns;
-        }
-
-        int getMinColumns(List<TableRow> rows) {
-            int columns = 0;
-            for (TableRow row : rows) {
-                int spans = row.getSpannedColumns();
-                if (columns > spans || columns == 0) columns = spans;
-            }
-            return columns;
-        }
-    }
-
     private Table myTable;
-
-    private String cellText(String text, int width, CellAlignment alignment) {
-        if (text.length() < width) {
-            if (alignment == null || alignment == CellAlignment.NONE) alignment = CellAlignment.LEFT;
-            int diff = width - text.length();
-
-            switch (alignment) {
-                case LEFT:
-                    text = text + RepeatedCharSequence.of(" ", diff).toString();
-                    break;
-                case RIGHT:
-                    text = RepeatedCharSequence.of(" ", diff).toString() + text;
-                    break;
-                case CENTER:
-                    String leftPad = RepeatedCharSequence.of(" ", diff / 2).toString();
-                    String rightPad = RepeatedCharSequence.of(" ", diff - leftPad.length()).toString();
-                    text = leftPad + text + rightPad;
-                    break;
-            }
-        }
-
-        return text;
-    }
-
-    private int spanWidth(int[] maxWidth, int col, int colSpan, int colPad) {
-        if (colSpan > 1) {
-            int width = 0;
-            for (int i = 0; i < colSpan; i++) {
-                width += maxWidth[i + col] + colPad;
-            }
-            return width - colPad;
-        } else {
-            return maxWidth[col];
-        }
-    }
 
     private boolean processTable(FormattingAppendable out, Element table) {
         Table oldTable = myTable;
@@ -1032,7 +902,7 @@ public class FlexmarkHtmlParser {
         skip();
         pushState(table);
 
-        myTable = new Table();
+        myTable = new Table(myOptions.tableOptions);
 
         Node item;
         while ((item = next()) != null) {
@@ -1043,15 +913,17 @@ public class FlexmarkHtmlParser {
                         processTableCaption(out, (Element) item);
                         break;
                     case TBODY:
-                        processTableSection(out, false, (Element) item);
+                        myTable.setHeading(false);
+                        processTableSection(out, (Element) item);
                         break;
                     case THEAD:
-                        processTableSection(out, true, (Element) item);
+                        myTable.setHeading(true);
+                        processTableSection(out, (Element) item);
                         break;
                     case TR:
                         Element tableRow = (Element) item;
                         Elements children = tableRow.children();
-                        myTable.isHeading = !children.isEmpty() && children.get(0).tagName().equalsIgnoreCase("th");
+                        myTable.setHeading(!children.isEmpty() && children.get(0).tagName().equalsIgnoreCase("th"));
                         processTableRow(out, (Element) item);
                         break;
                 }
@@ -1060,111 +932,12 @@ public class FlexmarkHtmlParser {
             }
         }
 
+        myTable.finalizeTable();
         int sepColumns = myTable.getMaxColumns();
 
         if (sepColumns > 0) {
             out.blankLine();
-
-            // we will prepare the separator based on max columns
-            CellAlignment[] alignments = new CellAlignment[sepColumns];
-            int[] maxColumns = new int[sepColumns];
-            int options = out.getOptions();
-            out.setOptions(options & ~FormattingAppendable.COLLAPSE_WHITESPACE);
-
-            if (myTable.heading.size() > 0) {
-                int i = 0;
-                for (TableRow row : myTable.heading) {
-                    int j = 0;
-                    int jSpan = 0;
-                    for (TableCell cell : row.cells) {
-                        if (i == 0 && cell.alignment != CellAlignment.NONE) {
-                            alignments[jSpan] = cell.alignment;
-                        }
-
-                        String cellText = cellText(cell.text, 0, null);
-                        if (maxColumns[jSpan] < cellText.length()) maxColumns[jSpan] = cellText.length();
-
-                        j++;
-                        jSpan += cell.columnSpan;
-                    }
-                    i++;
-                }
-            }
-
-            if (myTable.body.size() > 0) {
-                int i = 0;
-                for (TableRow row : myTable.body) {
-                    int j = 0;
-                    int jSpan = 0;
-                    for (TableCell cell : row.cells) {
-                        String cellText = cellText(cell.text, 0, null);
-                        if (maxColumns[jSpan] < cellText.length()) maxColumns[jSpan] = cellText.length();
-
-                        j++;
-                        jSpan += cell.columnSpan;
-                    }
-                    i++;
-                }
-            }
-
-            if (myTable.heading.size() > 0) {
-                for (TableRow row : myTable.heading) {
-                    int j = 0;
-                    int jSpan = 0;
-                    for (TableCell cell : row.cells) {
-                        if (j == 0) out.append("| ");
-                        out.append(cellText(cell.text, spanWidth(maxColumns, jSpan, cell.columnSpan, 2), alignments[jSpan]));
-                        out.append(' ').repeat('|', cell.columnSpan).append(' ');
-
-                        j++;
-                        jSpan += cell.columnSpan;
-                    }
-
-                    if (j > 0) out.line();
-                }
-            }
-
-            {
-                int j = 0;
-                for (CellAlignment alignment : alignments) {
-                    int colonCount = alignment == CellAlignment.LEFT || alignment == CellAlignment.RIGHT ? 1 : alignment == CellAlignment.CENTER ? 2 : 0;
-                    int dashCount = maxColumns[j] + 2 - colonCount;
-                    int dashesOnly = Utils.minLimit(dashCount, myOptions.minTableSeparatorColumnWidth - colonCount, myOptions.minTableSeparatorDashes);
-                    if (dashCount < dashesOnly) dashCount = dashesOnly;
-
-                    if (j == 0) out.append('|');
-                    if (alignment == CellAlignment.LEFT || alignment == CellAlignment.CENTER) out.append(':');
-                    out.repeat('-', dashCount);
-                    if (alignment == CellAlignment.RIGHT || alignment == CellAlignment.CENTER) out.append(':');
-                    out.append('|');
-                    j++;
-                }
-                out.line();
-            }
-
-            if (myTable.body.size() > 0) {
-                for (TableRow row : myTable.body) {
-                    int j = 0;
-                    int jSpan = 0;
-                    for (TableCell cell : row.cells) {
-                        if (j == 0) out.append("| ");
-                        out.append(cellText(cell.text, spanWidth(maxColumns, jSpan, cell.columnSpan, 2), alignments[jSpan]));
-                        out.append(' ').repeat('|', cell.columnSpan).append(' ');
-
-                        j++;
-                        jSpan += cell.columnSpan;
-                    }
-
-                    if (j > 0) out.line();
-                }
-            }
-
-            out.setOptions(options);
-
-            if (myTable.caption != null) {
-                out.line().append('[').append(myTable.caption).append(']').line();
-            }
-
+            myTable.appendTable(out);
             out.blankLine();
         }
 
@@ -1173,10 +946,8 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
-    private void processTableSection(FormattingAppendable out, boolean isHeading, Element element) {
+    private void processTableSection(FormattingAppendable out, Element element) {
         pushState(element);
-
-        myTable.isHeading = isHeading;
 
         Node node;
         while ((node = next()) != null) {
@@ -1186,16 +957,16 @@ public class FlexmarkHtmlParser {
                     case TR: {
                         Element tableRow = (Element) node;
                         Elements children = tableRow.children();
+                        boolean wasHeading = myTable.isHeading();
+
                         if (!children.isEmpty()) {
-                            Element firstChild = children.get(0);
                             if (children.get(0).tagName().equalsIgnoreCase("th")) {
-                                myTable.isHeading = true;
+                                myTable.setHeading(true);
                             }
                         }
 
                         processTableRow(out, tableRow);
-                        myTable.isHeading = isHeading;
-
+                        myTable.setHeading(wasHeading);
                         break;
                     }
                 }
@@ -1209,12 +980,6 @@ public class FlexmarkHtmlParser {
 
     private void processTableRow(FormattingAppendable out, Element element) {
         pushState(element);
-
-        if (myTable.isHeading) {
-            myTable.heading.add(new TableRow());
-        } else {
-            myTable.body.add(new TableRow());
-        }
 
         Node node;
         while ((node = next()) != null) {
@@ -1231,22 +996,31 @@ public class FlexmarkHtmlParser {
             }
         }
 
+        myTable.nextRow();
         popState();
     }
 
     private void processTableCaption(FormattingAppendable out, Element element) {
-        myTable.caption = processTextNodes(element).trim();
+        myTable.setCaption(processTextNodes(element).trim());
     }
 
     private void processTableCell(FormattingAppendable out, Element element) {
-        String cellText = processTextNodes(element).trim();
-        TableRow tableRow = myTable.isHeading ? myTable.heading.get(myTable.heading.size() - 1) : myTable.body.get(myTable.body.size() - 1);
-        int span = 1;
+        String cellText = processTextNodes(element).trim().replaceAll("\\s*\n\\s*", " ");
+        int colSpan = 1;
+        int rowSpan = 1;
         CellAlignment alignment = null;
 
         if (element.hasAttr("colSpan")) {
             try {
-                span = Integer.parseInt(element.attr("colSpan"));
+                colSpan = Integer.parseInt(element.attr("colSpan"));
+            } catch (NumberFormatException ignored) {
+
+            }
+        }
+
+        if (element.hasAttr("rowSpan")) {
+            try {
+                rowSpan = Integer.parseInt(element.attr("rowSpan"));
             } catch (NumberFormatException ignored) {
 
             }
@@ -1254,9 +1028,40 @@ public class FlexmarkHtmlParser {
 
         if (element.hasAttr("align")) {
             alignment = CellAlignment.getAlignment(element.attr("align"));
+        } else {
+            // see if has class that matches
+            final Set<String> classNames = element.classNames();
+            if (!classNames.isEmpty()) {
+                for (String clazz : classNames) {
+                    CellAlignment cellAlignment = myOptions.tableCellAlignmentMap.get(clazz);
+                    if (cellAlignment != null) {
+                        alignment = cellAlignment;
+                        break;
+                    }
+                }
+
+                if (alignment == null) {
+                    // see if we have matching patterns
+                    for (Object key : myOptions.tableCellAlignmentMap.keySet()) {
+                        if (key instanceof Pattern) {
+                            Pattern pattern = (Pattern) key;
+                            for (String clazz : classNames) {
+                                if (pattern.matcher(clazz).find()) {
+                                    // have a match
+                                    alignment = myOptions.tableCellAlignmentMap.get(key);
+                                    break;
+                                }
+                            }
+
+                            if (alignment != null) break;
+                        }
+                    }
+                }
+            }
         }
 
-        tableRow.addCell(new TableCell(cellText, span, alignment));
+        // skip cells defined by row spans in previous rows
+        myTable.addCell(new Table.TableCell(SubSequence.NULL, cellText, BasedSequence.NULL, rowSpan, colSpan, alignment));
     }
 
     private void pushState(Node parent) {

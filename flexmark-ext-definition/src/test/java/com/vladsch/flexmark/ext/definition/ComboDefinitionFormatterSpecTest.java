@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.ext.definition;
 
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.options.DefinitionMarker;
+import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;

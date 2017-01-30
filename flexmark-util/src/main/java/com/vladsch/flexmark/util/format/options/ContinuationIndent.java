@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.formatter.options;
+package com.vladsch.flexmark.util.format.options;
 
 public enum ContinuationIndent {
     ALIGN_TO_FIRST,

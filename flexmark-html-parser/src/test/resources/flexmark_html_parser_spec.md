@@ -1358,9 +1358,9 @@ inlines should be processed
 Column spans are created with repeated | pipes one for each additional column to span
 
 ```````````````````````````````` example Tables: 36
-| Abc  | Def |
-|------|-----|
-| span      ||
+| Abc | Def |
+|-----|-----|
+| span     ||
 .
 <table>
   <thead>
@@ -1376,10 +1376,10 @@ Column spans are created with repeated | pipes one for each additional column to
 Now we try varying the header lines and make sure we get the right output
 
 ```````````````````````````````` example Tables: 37
-| Abc  | Def |
-| Hij  | Lmn |
-|------|-----|
-| span      ||
+| Abc | Def |
+| Hij | Lmn |
+|-----|-----|
+| span     ||
 .
 <table>
   <thead>
@@ -1943,6 +1943,63 @@ Table with `th` in `tbody`
       <td style="padding-left:0">&amp;</td>
       <td>ampersand</td>
       <td>&amp;amp;</td>
+    </tr>
+  </tbody>
+</table>
+````````````````````````````````
+
+
+tables with row span cells
+
+```````````````````````````````` example Tables: 50
+| ID | e-mail   | Name     | Visits | Trials |                 Points                 |||| Discount On Next License |
+| ID | e-mail   | Name     | Visits | Trials | Earned | Complimentary | Used | Available | Discount On Next License |
+|----|----------|----------|-------:|-------:|-------:|--------------:|-----:|----------:|:------------------------:|
+| 2  | test 1 1 | test 1 2 |     32 |      0 |      0 |             1 |    0 |         1 |           10%            |
+| 24 | test 2 1 | test 2 2 |      1 |      0 |      0 |             1 |    0 |         1 |           10%            |
+.
+<table class="table table-condensed table-responsive">
+  <thead>
+    <tr>
+      <th rowspan="2">ID</th>
+      <th rowspan="2">e-mail</th>
+      <th rowspan="2">Name</th>
+      <th class="text-right" rowspan="2">Visits</th>
+      <th class="text-right" rowspan="2">Trials</th>
+      <th class="text-center" colspan="4">Points</th>
+      <th class="text-center" rowspan="2">Discount On<br>Next License</th>
+    </tr>
+    <tr>
+      <th class="text-right">Earned</th>
+      <th class="text-right">Complimentary</th>
+      <th class="text-right">Used</th>
+      <th class="text-right">Available</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2</td>
+      <td>test 1 1</td>
+      <td>test 1 2</td>
+      <td class="text-right">32</td>
+      <td class="text-right">0</td>
+      <td class="text-right">0</td>
+      <td class="text-right">1</td>
+      <td class="text-right">0</td>
+      <td class="text-right">1</td>
+      <td class="text-right"> 10%</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>test 2 1</td>
+      <td>test 2 2</td>
+      <td class="text-right">1</td>
+      <td class="text-right">0</td>
+      <td class="text-right">0</td>
+      <td class="text-right">1</td>
+      <td class="text-right">0</td>
+      <td class="text-right">1</td>
+      <td class="text-right"> 10%</td>
     </tr>
   </tbody>
 </table>

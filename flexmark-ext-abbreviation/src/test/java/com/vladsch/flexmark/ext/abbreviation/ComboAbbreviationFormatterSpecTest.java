@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.ext.abbreviation;
 
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.options.ElementPlacement;
-import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;

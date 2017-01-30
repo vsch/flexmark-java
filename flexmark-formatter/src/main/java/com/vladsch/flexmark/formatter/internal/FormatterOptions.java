@@ -1,8 +1,9 @@
 package com.vladsch.flexmark.formatter.internal;
 
-import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.format.options.*;
+import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 public class FormatterOptions {
@@ -35,6 +36,7 @@ public class FormatterOptions {
     public final ElementPlacementSort referenceSort;
     public final boolean keepImageLinksAtStart;
     public final boolean keepExplicitLinksAtStart;
+    public final CharWidthProvider charWidthProvider;
     //public final TrailingSpaces keepTrailingSpaces;
     //public final TrailingSpaces codeKeepTrailingSpaces;
 
@@ -69,6 +71,7 @@ public class FormatterOptions {
         referenceSort = Formatter.REFERENCE_SORT.getFrom(options);
         keepImageLinksAtStart = Formatter.KEEP_IMAGE_LINKS_AT_START.getFrom(options);
         keepExplicitLinksAtStart = Formatter.KEEP_EXPLICIT_LINKS_AT_START.getFrom(options);
+        charWidthProvider = Formatter.CHAR_WIDTH_PROVIDER.getFrom(options);
         //keepTrailingSpaces = Formatter.KEEP_TRAILING_SPACES.getFrom(options);
         //codeKeepTrailingSpaces = Formatter.CODE_KEEP_TRAILING_SPACES.getFrom(options);
     }

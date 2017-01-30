@@ -8,6 +8,7 @@ public class Paragraph extends Block {
     private static int[] EMPTY_INDENTS = new int[0];
     private int[] lineIndents = EMPTY_INDENTS;
     private boolean trailingBlankLine = false;
+    private boolean hasTableSeparator;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -113,5 +114,13 @@ public class Paragraph extends Block {
 
     public void setTrailingBlankLine(final boolean trailingBlankLine) {
         this.trailingBlankLine = trailingBlankLine;
+    }
+
+    public void setHasTableSeparator(final boolean hasTableSeparator) {
+        this.hasTableSeparator = hasTableSeparator;
+    }
+
+    public boolean hasTableSeparator() {
+        return hasTableSeparator;
     }
 }

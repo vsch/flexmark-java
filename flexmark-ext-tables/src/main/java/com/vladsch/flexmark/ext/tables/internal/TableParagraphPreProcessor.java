@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     private static String COL = "(?:" + "\\s*-{3,}\\s*|\\s*:-{2,}\\s*|\\s*-{2,}:\\s*|\\s*:-+:\\s*" + ")";
-    private static Pattern TABLE_HEADER_SEPARATOR = Pattern.compile(
+    static Pattern TABLE_HEADER_SEPARATOR = Pattern.compile(
             // For single column, require at least one pipe, otherwise it's ambiguous with setext headers
             "\\|" + COL + "\\|?\\s*" + "|" +
                     COL + "\\|\\s*" + "|" +
@@ -106,6 +106,7 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
         int blockIndent = block.getLineIndent(0);
         BasedSequence captionLine = null;
 
+        int i = 0;
         for (BasedSequence rowLine : block.getContentLines()) {
             int rowNumber = tableLines.size();
             if (separatorLineNumber == -1 && rowNumber > options.maxHeaderRows) return 0;    // too many header rows
@@ -124,14 +125,18 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
 
             BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
             if (separatorLineNumber == -1 && rowNumber >= options.minHeaderRows
-                    && (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|')
                     && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
                 // must start with | or cell, whitespace means its not a separator line
-                separatorLineNumber = rowNumber;
-                separatorLine = rowLine;
+                if (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
+                    separatorLineNumber = rowNumber;
+                    separatorLine = rowLine;
+                } else if (fullRowLine.charAt(0) == ' ' || fullRowLine.charAt(0) == '\t') {
+                    block.setHasTableSeparator(true);
+                }
             }
 
             tableLines.add(rowLine);
+            i++;
         }
 
         if (separatorLineNumber == -1) return 0;

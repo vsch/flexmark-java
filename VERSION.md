@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.2](#0132)
 - [0.13.1](#0131)
 - [0.13.0](#0130)
 - [0.12.3](#0123)
@@ -114,6 +115,11 @@ flexmark-java
 - [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.2
+------
+
+* Add: table formatting options for column width adjustment and alignment application
 
 0.13.1
 ------

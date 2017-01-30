@@ -4,7 +4,6 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.formatter.options.*;
 import com.vladsch.flexmark.html.*;
 import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
@@ -13,7 +12,10 @@ import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.options.*;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.*;
 
 import java.util.*;
@@ -67,6 +69,7 @@ public class Formatter implements IRender {
     public static final DataKey<Boolean> KEEP_EXPLICIT_LINKS_AT_START = new DataKey<>("KEEP_EXPLICIT_LINKS_AT_START", false);
     //public static final DataKey<TrailingSpaces> KEEP_TRAILING_SPACES = new DataKey<>("KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_LINE_BREAK);
     //public static final DataKey<TrailingSpaces> CODE_KEEP_TRAILING_SPACES = new DataKey<>("CODE_KEEP_TRAILING_SPACES", TrailingSpaces.KEEP_ALL);
+    public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
 
     // formatter family override
     public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<>(

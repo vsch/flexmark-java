@@ -6,9 +6,11 @@ import com.vladsch.flexmark.ext.tables.internal.TableNodeFormatter;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.options.DiscretionaryText;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
@@ -23,6 +25,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * The parsed tables are turned into {@link TableBlock} blocks.
  * </p>
  */
+@SuppressWarnings("WeakerAccess")
 public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     public static final DataKey<Integer> MAX_HEADER_ROWS = new DataKey<>("MAX_HEADER_ROWS", Integer.MAX_VALUE);
     public static final DataKey<Integer> MIN_HEADER_ROWS = new DataKey<>("MIN_HEADER_ROWS", 0);
@@ -34,17 +37,17 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     public static final DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
     public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
 
-    // format options
-    public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = new DataKey<>("FORMAT_LEAD_TRAIL_PIPES", true);
-    public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPE = new DataKey<>("FORMAT_SPACE_AROUND_PIPE", true);
-    public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = new DataKey<>("FORMAT_ADJUST_COLUMN_WIDTH", true);
-    public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = new DataKey<>("FORMAT_APPLY_COLUMN_ALIGNMENT", true);
-    public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = new DataKey<>("FORMAT_FILL_MISSING_COLUMNS", false);
-    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_COLUMNS = new DataKey<>("FORMAT_DELETE_EMPTY_COLUMNS", false);
-    public static final DataKey<Boolean> FORMAT_DELETE_EMPTY_ROWS = new DataKey<>("FORMAT_DELETE_EMPTY_ROWS", false);
-    public static final DataKey<Boolean> FORMAT_TRIM_CELLS = new DataKey<>("FORMAT_TRIM_CELLS", false);
-    public static final DataKey<Boolean> FORMAT_REMOVE_CAPTION = new DataKey<>("FORMAT_REMOVE_CAPTION", false);
-    public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = new DataKey<>("FORMAT_LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
+    // format options copy from TableFormatOptions for convenience
+    public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
+    public static final DataKey<Boolean> FORMAT_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
+    public static final DataKey<Boolean> FORMAT_ADJUST_COLUMN_WIDTH = TableFormatOptions.ADJUST_COLUMN_WIDTH;
+    public static final DataKey<Boolean> FORMAT_APPLY_COLUMN_ALIGNMENT = TableFormatOptions.APPLY_COLUMN_ALIGNMENT;
+    public static final DataKey<Boolean> FORMAT_FILL_MISSING_COLUMNS = TableFormatOptions.FILL_MISSING_COLUMNS;
+    public static final DataKey<Boolean> FORMAT_REMOVE_CAPTION = TableFormatOptions.REMOVE_CAPTION;
+    public static final DataKey<DiscretionaryText> FORMAT_LEFT_ALIGN_MARKER = TableFormatOptions.LEFT_ALIGN_MARKER;
+    public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
+    public static final DataKey<Integer> FORMAT_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
+    public static final DataKey<CharWidthProvider> FORMAT_CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
 
     public static Extension create() {
         return new TablesExtension();

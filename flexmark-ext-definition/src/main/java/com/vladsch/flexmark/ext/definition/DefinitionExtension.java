@@ -4,7 +4,7 @@ package com.vladsch.flexmark.ext.definition;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.definition.internal.*;
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.formatter.options.DefinitionMarker;
+import com.vladsch.flexmark.util.format.options.DefinitionMarker;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;

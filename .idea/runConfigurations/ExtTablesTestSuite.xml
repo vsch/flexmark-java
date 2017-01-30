@@ -2,7 +2,7 @@
   <configuration default="false" name="ExtTablesTestSuite" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.ext.tables.internal.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.util.format.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

@@ -4018,3 +4018,31 @@ Document[0, 199]
 ````````````````````````````````
 
 
+## Issues
+
+#51, GitHub compatibility, setext headings in list items not properly parsed if marker not
+indented
+
+```````````````````````````````` example(Issues: 1) options(FAIL)
+* baz
+
+ Second level heading
+---------------------
+.
+<ul>
+    <li>
+        <p>baz</p>
+        <h2 id="second-level-heading">Second level heading</h2>
+    </li>
+</ul>
+.
+Document[0, 52]
+  BulletList[0, 51] isTight
+    BulletListItem[0, 51] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 6] isTrailingBlankLine
+        Text[2, 5] chars:[2, 5, "baz"]
+      Heading[8, 51] text:[8, 28, "Second level heading"] textClose:[30, 51, "---------------------"]
+        Text[8, 28] chars:[8, 28, "Secon … ading"]
+````````````````````````````````
+
+

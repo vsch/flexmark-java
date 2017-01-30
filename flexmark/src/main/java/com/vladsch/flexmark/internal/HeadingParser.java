@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Heading;
-import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
@@ -165,25 +162,31 @@ public class HeadingParser extends AbstractBlockParser {
 
                 return BlockStart.of(headingParser)
                         .atIndex(line.length());
-            } else if (paragraph != null && ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find())) {
-                // setext heading line
-                int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
-
-                BlockContent content = new BlockContent();
-                content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolLengths());
-                BasedSequence headingText = content.getContents().trim();
-                BasedSequence closingMarker = line.trim();
-
-                HeadingParser headingParser = new HeadingParser(level);
-                headingParser.block.setText(headingText);
-                headingParser.block.setClosingMarker(closingMarker);
-                headingParser.block.setCharsFromContent();
-
-                return BlockStart.of(headingParser)
-                        .atIndex(line.length())
-                        .replaceActiveBlockParser();
             } else {
-                return BlockStart.none();
+                if ((matcher = myParsing.SETEXT_HEADING.matcher(trySequence)).find()) {
+                    if (paragraph != null) {
+                        // setext heading line
+                        int level = matcher.group(0).charAt(0) == '=' ? 1 : 2;
+
+                        BlockContent content = new BlockContent();
+                        content.addAll(matchedBlockParser.getParagraphLines(), matchedBlockParser.getParagraphEolLengths());
+                        BasedSequence headingText = content.getContents().trim();
+                        BasedSequence closingMarker = line.trim();
+
+                        HeadingParser headingParser = new HeadingParser(level);
+                        headingParser.block.setText(headingText);
+                        headingParser.block.setClosingMarker(closingMarker);
+                        headingParser.block.setCharsFromContent();
+
+                        return BlockStart.of(headingParser)
+                                .atIndex(line.length())
+                                .replaceActiveBlockParser();
+                    } else {
+                        return BlockStart.none();
+                    }
+                } else {
+                    return BlockStart.none();
+                }
             }
         }
     }

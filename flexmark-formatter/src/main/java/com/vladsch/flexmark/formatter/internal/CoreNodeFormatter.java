@@ -3,10 +3,9 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
-import com.vladsch.flexmark.formatter.options.ElementPlacement;
-import com.vladsch.flexmark.formatter.options.ElementPlacementSort;
-import com.vladsch.flexmark.formatter.options.KeepAtStartOfLine;
-import com.vladsch.flexmark.formatter.options.ListSpacing;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
+import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.Ref;
@@ -19,8 +18,8 @@ import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.util.*;
 
-import static com.vladsch.flexmark.formatter.options.DiscretionaryText.ADD;
-import static com.vladsch.flexmark.formatter.options.DiscretionaryText.AS_IS;
+import static com.vladsch.flexmark.util.format.options.DiscretionaryText.ADD;
+import static com.vladsch.flexmark.util.format.options.DiscretionaryText.AS_IS;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 @SuppressWarnings("WeakerAccess")

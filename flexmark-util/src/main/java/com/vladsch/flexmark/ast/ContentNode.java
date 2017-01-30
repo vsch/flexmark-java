@@ -3,6 +3,7 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class ContentNode extends Node implements Content {
@@ -85,5 +86,12 @@ public abstract class ContentNode extends Node implements Content {
 
     public void setContentLines(List<BasedSequence> contentLines) {
         this.lineSegments = contentLines;
+    }
+
+    public void setContentLine(int lineIndex, BasedSequence contentLine) {
+        ArrayList<BasedSequence> lines = new ArrayList<>(lineSegments);
+        lines.set(lineIndex, contentLine);
+        this.lineSegments = lines;
+        setCharsFromContent();
     }
 }
