@@ -20,14 +20,14 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Latest Additions
 
-* [XWiki Macros Extension Module](../../wiki/Extensions#xwiki-macro-extension)
-* [Jekyll tags Extension Module](../../wiki/Extensions#jekyll-tags)
-* [HTML to Markdown Converter Module](../../wiki/Extensions#html-to-markdown)
+* [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
+* [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
+* [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
-* [Markdown Formatter](../../wiki/Markdown-Formatter) module to output AST as markdown with
+* [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) module to output AST as markdown with
   formatting options.
-* [Table Extension](../../wiki/Extensions#tables) for
-  [Markdown Formatter](../../wiki/Markdown-Formatter) with column width and alignment of
+* [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with column width and alignment of
   markdown tables:
 
   <table>
@@ -35,9 +35,9 @@ than ideal and for pathological input either hangs or practically hangs during p
   <tr><td>
   <pre><code class="language-markdown">day|time|spent
   :---|:---:|--:
-  nov. 2. tue|10:00|4h 40m 
+  nov. 2. tue|10:00|4h 40m
   nov. 3. thu|11:00|4h
-  nov. 7. mon|10:20|4h 20m 
+  nov. 7. mon|10:20|4h 20m
   total:|| **13h**
   </code></pre>
   </td><td>

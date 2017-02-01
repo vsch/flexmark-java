@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.3](#0133)
 - [0.13.2](#0132)
 - [0.13.1](#0131)
 - [0.13.0](#0130)
@@ -115,6 +116,11 @@ flexmark-java
 - [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.3
+------
+
+* Fix: #53, HTML to Markdown converter does handle pre wrapped text properly
 
 0.13.2
 ------

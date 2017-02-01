@@ -3315,3 +3315,309 @@ don't create a multi-line image url if no new line after ?
 ````````````````````````````````
 
 
+```````````````````````````````` example Issue Tests: 19
+```
+  enum class TestFormatter {
+    FOO, // I am a comment
+    BAR, // I am also a comment
+  }
+```
+.
+<pre class="wikicode prettyprint prettyprinted"><span class="pln">  </span><span class="kwd">enum</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">TestFormatter</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">    FOO</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am a comment</span><br><span class="pln">    BAR</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am also a comment</span><br><span class="pln">  </span><span class="pun">}</span></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue Tests: 20
+```
+  enum class TestFormatter {
+    FOO, // I am a comment BAR, // I am also a comment
+  }
+```
+.
+<pre class="wikicode prettyprint prettyprinted"><span class="pln">  </span><span class="kwd">enum</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">TestFormatter</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">    FOO</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am a comment BAR, // I am also a comment</span><br><span class="pln">  </span><span class="pun">}</span></pre>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue Tests: 21
+<h3>JavaScript is disabled in your browser or not supported!</h3> View Options
+* [Show description](javascript:void(0))
+* [Show comments](javascript:void(0))
+
+[Click To Add a Title](javascript:void(0))
+==========================================
+
+[project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring) Only the first 2500 issues are exported because of the "Max Issues to Export" setting.
+
+Feature
+:   [KT-2615](/issue/KT-2615)
+    — Rename refactoring
+:   [KT-2638](/issue/KT-2638)
+    — Inline function/non-trivial property refactoring
+:   [KT-4478](/issue/KT-4478)
+    — Refactorings
+:   [KT-5201](/issue/KT-5201)
+    — Extract Function: Allow forced extraction by shortcut
+:   [KT-5602](/issue/KT-5602)
+    — move class/method refactoring should be able to move file
+:   [KT-5804](/issue/KT-5804)
+    — Rename refactoring in Eclipse
+:   [KT-5864](/issue/KT-5864)
+    — Refactoring: convert get/set methods to property
+:   [KT-6159](/issue/KT-6159)
+    — Inline Method refactoring
+:   [KT-6215](/issue/KT-6215)
+    — Converter: provide an option to place multiple java files converted to Kotlin in one Kotlin file
+:   [KT-6370](/issue/KT-6370)
+    — Allow inline Java methods by using J2K converter
+:   [KT-7107](/issue/KT-7107)
+    — Rename refactoring for labels
+:   [KT-7973](/issue/KT-7973)
+    — Introduce parameter refactoring
+:   [KT-8178](/issue/KT-8178)
+    — Copy Refactoring
+:   [KT-8514](/issue/KT-8514)
+    — Refactor / Rename: "Rename variables" option could be supported for object declaration
+:   [KT-8545](/issue/KT-8545)
+    — Rename: in-place mode could be supported for Kotlin
+:   [KT-8565](/issue/KT-8565)
+    — Intention to remove default value and inline it in call sites (and vice versa?)
+:   [KT-8954](/issue/KT-8954)
+    — Refactor / Copy could have "Update package directive" option
+:   [KT-9851](/issue/KT-9851)
+    — Create "Extract/Introduce lateinit var" Refactoring
+:   [KT-10346](/issue/KT-10346)
+    — Support `||` in when conditions in "Introduce subject" intention
+:   [KT-10642](/issue/KT-10642)
+    — IntelliJ plugin: Support KDoc syntax for all types of comments
+:   [KT-11050](/issue/KT-11050)
+    — "Extract constant" refactoring
+:   [KT-11882](/issue/KT-11882)
+    — When caret is over a type in Intellij, highlight "var"/"val" which have this type inferred
+:   [KT-11883](/issue/KT-11883)
+    — IntelliJ - Extract Variable refactoring - Specify type explicitly by default
+:   [KT-12165](/issue/KT-12165)
+    — Add inspections for useless collection operations
+:   [KT-12348](/issue/KT-12348)
+    — Rename class refactoring: propose to rename usages in comments
+:   [KT-12471](/issue/KT-12471)
+    — Allow initializing `const` properties with enum constants
+:   [KT-12713](/issue/KT-12713)
+    — Either/ Result to handle errors without exceptions
+:   [KT-12756](/issue/KT-12756)
+    — Support @JvmMultifileClass when @JvmName value matches another file facade class
+:   [KT-13309](/issue/KT-13309)
+    — Create field from local variable intention/refactoring
+:   [KT-13414](/issue/KT-13414)
+    — Indexed properties
+:   [KT-13436](/issue/KT-13436)
+    — Replace 'when' with return: handle case when all branches jump out (return Nothing)
+:   [KT-13458](/issue/KT-13458)
+    — Cascade "replace with return" for if/when expressions
+:   [KT-13623](/issue/KT-13623)
+    — Enhancement for Quick fix: while in a apply-style block, offer "Create member function" without "this." and similarly allow "Extract Method" refactoring
+:   [KT-14137](/issue/KT-14137)
+    — Add intention to convert top level val with object expression to object
+:   [KT-14272](/issue/KT-14272)
+    — Support Move function refactoring when instance is not captured
+:   [KT-14627](/issue/KT-14627)
+    — Inline parameter refactoring
+:   [KT-15638](/issue/KT-15638)
+    — Extract Interface/Superclass: suggest to search and update usages of refactored class (like for Java)
+:   [KT-15664](/issue/KT-15664)
+    — Refactoring: extract header from platform implementation
+:   [KT-15679](/issue/KT-15679)
+    — Rename refactoring for header/impl interface/class/function/typealias
+:   [KT-15867](/issue/KT-15867)
+    — Copy file window imporvements
+
+Feature Group
+:   [KT-2637](/issue/KT-2637)
+    — Inline variable/constant refactoring
+.
+<body class="chrome release-notes ">
+<noscript>
+&lt;h3&gt;JavaScript is disabled in your browser or not supported!&lt;/h3&gt;
+</noscript>
+<div cn="l.R.issuesInHtml" id="id_l.R.issuesInHtml">
+<button cn="l.R.viewOptions" id="id_l.R.viewOptions" class="jt-menu-button ring-link rn-view rn-view__item" data-toggle-onclick="true">
+View Options<span class="ring-font-icon ring-font-icon_caret-down"></span>
+</button>
+<ul class="jt-menu">
+<li>
+<a class="rn-view__item" href="javascript:void(0)">
+<input name="l.R.description" cn="l.R.description" id="id_l.R.description" class="jt-input" type="checkbox">
+<label cn="l.R.descriptionLabel" id="id_l.R.descriptionLabel">Show description</label>
+</a>
+</li>
+<li>
+<a class="rn-view__item" href="javascript:void(0)">
+<input name="l.R.comments" cn="l.R.comments" id="id_l.R.comments" class="jt-input" type="checkbox">
+<label cn="l.R.commentsLabel" id="id_l.R.commentsLabel">Show comments</label>
+</a>
+</li>
+</ul>
+<h1>
+<a cn="l.R.titleLink" p0="set" id="id_l.R.titleLink_set" href="javascript:void(0)">Click To Add a Title</a>
+<span cn="l.R.titleLinkInlineEditor" p0="set" id="id_l.R.titleLinkInlineEditor_set" pid="id_l.R.titleLink_set" eid="id_l.R.titleText_set_title"></span>
+</h1>
+<div class="rn-query">
+<a href="/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring">project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete   type: Feature,{Feature Group}  refactoring</a>
+</div>
+<div cn="l.R.rnc.releaseNotesContent" id="id_l.R.rnc.releaseNotesContent">
+<div cn="l.R.rnc.limitExceedMsg" id="id_l.R.rnc.limitExceedMsg" class="infoNote" style="display: none">
+Only the first <span class="bold">2500</span> issues are exported because of the "Max Issues to Export" setting. 
+</div>
+<dl>
+<dt class="rn-type">Feature</dt>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-2615">KT-2615</a>
+    <span class="rn-sum">— Rename refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-2638">KT-2638</a>
+    <span class="rn-sum">— Inline function/non-trivial property refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-4478">KT-4478</a>
+    <span class="rn-sum">— Refactorings</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-5201">KT-5201</a>
+    <span class="rn-sum">— Extract Function: Allow forced extraction by shortcut</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-5602">KT-5602</a>
+    <span class="rn-sum">— move class/method refactoring should be able to move file</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-5804">KT-5804</a>
+    <span class="rn-sum">— Rename refactoring in Eclipse</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-5864">KT-5864</a>
+    <span class="rn-sum">— Refactoring: convert get/set methods to property</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-6159">KT-6159</a>
+    <span class="rn-sum">— Inline Method refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-6215">KT-6215</a>
+    <span class="rn-sum">— Converter: provide an option to place multiple java files converted to Kotlin in one Kotlin file</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-6370">KT-6370</a>
+    <span class="rn-sum">— Allow inline Java methods by using J2K converter</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-7107">KT-7107</a>
+    <span class="rn-sum">— Rename refactoring for labels</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-7973">KT-7973</a>
+    <span class="rn-sum">— Introduce parameter refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-8178">KT-8178</a>
+    <span class="rn-sum">— Copy Refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-8514">KT-8514</a>
+    <span class="rn-sum">— Refactor / Rename: "Rename variables" option could be supported for object declaration</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-8545">KT-8545</a>
+    <span class="rn-sum">— Rename: in-place mode could be supported for Kotlin</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-8565">KT-8565</a>
+    <span class="rn-sum">— Intention to remove default value and inline it in call sites (and vice versa?)</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-8954">KT-8954</a>
+    <span class="rn-sum">— Refactor / Copy could have "Update package directive" option</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-9851">KT-9851</a>
+    <span class="rn-sum">— Create "Extract/Introduce lateinit var" Refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-10346">KT-10346</a>
+    <span class="rn-sum">— Support `||` in when conditions in "Introduce subject" intention</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-10642">KT-10642</a>
+    <span class="rn-sum">— IntelliJ plugin: Support KDoc syntax for all types of comments</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-11050">KT-11050</a>
+    <span class="rn-sum">— "Extract constant" refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-11882">KT-11882</a>
+    <span class="rn-sum">— When caret is over a type in Intellij, highlight "var"/"val" which have this type inferred</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-11883">KT-11883</a>
+    <span class="rn-sum">— IntelliJ - Extract Variable refactoring - Specify type explicitly by default</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-12165">KT-12165</a>
+    <span class="rn-sum">— Add inspections for useless collection operations</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-12348">KT-12348</a>
+    <span class="rn-sum">— Rename class refactoring: propose to rename usages in comments</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-12471">KT-12471</a>
+    <span class="rn-sum">— Allow initializing `const` properties with enum constants</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-12713">KT-12713</a>
+    <span class="rn-sum">— Either/ Result to handle errors without exceptions</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-12756">KT-12756</a>
+    <span class="rn-sum">— Support @JvmMultifileClass when @JvmName value matches another file facade class</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-13309">KT-13309</a>
+    <span class="rn-sum">— Create field from local variable intention/refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-13414">KT-13414</a>
+    <span class="rn-sum">— Indexed properties</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-13436">KT-13436</a>
+    <span class="rn-sum">— Replace 'when' with return: handle case when all branches jump out (return Nothing)</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-13458">KT-13458</a>
+    <span class="rn-sum">— Cascade "replace with return" for if/when expressions</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-13623">KT-13623</a>
+    <span class="rn-sum">— Enhancement for Quick fix: while in a apply-style block, offer "Create member function" without "this." and similarly allow "Extract Method" refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-14137">KT-14137</a>
+    <span class="rn-sum">— Add intention to convert top level val with object expression to object</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-14272">KT-14272</a>
+    <span class="rn-sum">— Support Move function refactoring when instance is not captured</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-14627">KT-14627</a>
+    <span class="rn-sum">— Inline parameter refactoring</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-15638">KT-15638</a>
+    <span class="rn-sum">— Extract Interface/Superclass: suggest to search and update usages of refactored class (like for Java)</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-15664">KT-15664</a>
+    <span class="rn-sum">— Refactoring: extract header from platform implementation</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-15679">KT-15679</a>
+    <span class="rn-sum">— Rename refactoring for header/impl interface/class/function/typealias</span>
+</dd>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-15867">KT-15867</a>
+    <span class="rn-sum">— Copy file window imporvements</span>
+</dd>
+<dt class="rn-type">Feature Group</dt>
+<dd class="rn-list-item">    <a class="rn-id" href="/issue/KT-2637">KT-2637</a>
+    <span class="rn-sum">— Inline variable/constant refactoring</span>
+</dd>
+</dl>
+</div>
+</div>
+<script type="text/javascript">$(document).ready(function () {
+cr.setTemplatePaths([{name: "CustomReleaseNotesIssueView", paths: [{path: "l.R.rnc.CustomReleaseNotesIssueView"}]},{name: "ReleaseNotesContent", paths: [{path: "l.R.rnc"}]},{name: "ReleaseNotes", paths: [{path: "l.R"}]}]);
+
+});
+
+</script>
+<script type="text/javascript">$(document).ready(function () {
+cr.onDocumentLoad();
+});
+
+</script>
+
+<script type="text/javascript">$(document).ready(function () {
+Webr.HeartBeat.init();
+$("#__RESPONSE_TIME_CONTENT__").replaceWith(document.createTextNode("2974 ms"));
+info("End of the response");
+
+});
+
+</script>
+
+</body>
+````````````````````````````````
+
+

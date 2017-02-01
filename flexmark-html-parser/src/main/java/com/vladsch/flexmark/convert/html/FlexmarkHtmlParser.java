@@ -303,7 +303,11 @@ public class FlexmarkHtmlParser {
 
     private boolean processText(FormattingAppendable out, TextNode node) {
         skip();
-        out.append(prepareText(node.text()));
+        if (out.isPreFormatted()) {
+            out.append(prepareText(node.getWholeText()));
+        } else {
+            out.append(prepareText(node.text()));
+        }
         return true;
     }
 
@@ -442,10 +446,14 @@ public class FlexmarkHtmlParser {
 
     private boolean processBr(FormattingAppendable out, Element element) {
         skip();
-        int options = out.getOptions();
-        out.setOptions(options & ~(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE));
-        out.repeat(' ', 2).line();
-        out.setOptions(options);
+        if (out.isPreFormatted()) {
+            out.append('\n');
+        } else {
+            int options = out.getOptions();
+            out.setOptions(options & ~(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE));
+            out.repeat(' ', 2).line();
+            out.setOptions(options);
+        }
         return true;
     }
 
@@ -657,17 +665,26 @@ public class FlexmarkHtmlParser {
         if (next != null && next.nodeName().equalsIgnoreCase("code")) {
             hadCode = true;
             Element code = (Element) next;
-            text = code.toString();
+            //text = code.toString();
+            FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+            preText.openPreFormatted(false);
+            processHtmlTree(preText, code);
+            preText.closePreFormatted();
+            text = preText.getText(2);
             skip(1);
             className = Utils.removeStart(code.className(), "language-");
         } else {
-            text = element.toString();
+            FormattingAppendable preText = new FormattingAppendableImpl(out.getOptions() & ~(FormattingAppendable.COLLAPSE_WHITESPACE | FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE));
+            preText.openPreFormatted(false);
+            processHtmlTree(preText, element);
+            preText.closePreFormatted();
+            text = preText.getText(2);
         }
 
-        int start = text.indexOf('>');
-        int end = text.lastIndexOf('<');
-        text = text.substring(start + 1, end);
-        text = Escaping.unescapeHtml(text);
+        //int start = text.indexOf('>');
+        //int end = text.lastIndexOf('<');
+        //text = text.substring(start + 1, end);
+        //text = Escaping.unescapeHtml(text);
 
         int backTickCount = getMaxRepeatedChars(text, '`', 3);
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
