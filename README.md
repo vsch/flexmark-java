@@ -24,33 +24,32 @@ than ideal and for pathological input either hangs or practically hangs during p
 * [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
 * [Maven Markdown Page Generator Plugin](https://github.com/vsch/markdown-page-generator-plugin)
-* [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) module to output AST as markdown with
-  formatting options.
+* [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) module to
+  output AST as markdown with formatting options.
 * [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
-  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with column width and alignment of
-  markdown tables:
+  [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
+  column width and alignment of markdown tables:
 
   <table>
-  <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
-  <tr><td>
-  <pre><code class="language-markdown">day|time|spent
-  :---|:---:|--:
-  nov. 2. tue|10:00|4h 40m
-  nov. 3. thu|11:00|4h
-  nov. 7. mon|10:20|4h 20m
-  total:|| **13h**
-  </code></pre>
-  </td><td>
-  <pre><code class="language-markdown">| day         | time  |   spent |
-  |:------------|:-----:|--------:|
-  | nov. 2. tue | 10:00 |  4h 40m |
-  | nov. 3. thu | 11:00 |      4h |
-  | nov. 7. mon | 10:20 |  4h 20m |
-  | total:             || **13h** |
-  </code></pre>
-  </td></tr>
-  </table>
-
+    <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+    <tr><td>
+    <pre><code class="language-markdown">day|time|spent
+    :---|:---:|--:
+    nov. 2. tue|10:00|4h 40m
+    nov. 3. thu|11:00|4h
+    nov. 7. mon|10:20|4h 20m
+    total:|| **13h**
+    </code></pre>
+    </td><td>
+    <pre><code class="language-markdown">| day         | time  |   spent |
+    |:------------|:-----:|--------:|
+    | nov. 2. tue | 10:00 |  4h 40m |
+    | nov. 3. thu | 11:00 |      4h |
+    | nov. 7. mon | 10:20 |  4h 20m |
+    | total:             || **13h** |
+    </code></pre>
+    </td></tr>
+    </table>
 
 ### Changes Forced by Downgrade to Java 7
 
@@ -58,11 +57,11 @@ I tried to keep all changes caused by the downgrade in Java language level as me
 possible to make it easier to migrate. The biggest change is the lack of lambda syntax and no
 static extension methods in interfaces.
 
-- All `VISIT_HANDLERS` in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
+* All `VISIT_HANDLERS` in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
   mechanical search and replace from `.VISIT_HANDLERS` to `Ext.VISIT_HANDLERS` should take care
   of the change.
 
-- Lack of Lambda syntax will only have an effect if your project language level is downgraded.
+* Lack of Lambda syntax will only have an effect if your project language level is downgraded.
   Otherwise, you can keep using lambda syntax.
 
 ### Requirements
@@ -77,10 +76,10 @@ static extension methods in interfaces.
 
 ### Changes from commonmark-java project
 
-- The project is on Maven: `com.vladsch.flexmark`
-- Java compatibility back to 1.7
-- Android compatibility to be added
-- No attempt is made to keep API backward compatibility to the original project.
+* The project is on Maven: `com.vladsch.flexmark`
+* Java compatibility back to 1.7
+* Android compatibility to be added
+* No attempt is made to keep API backward compatibility to the original project.
 
   The API is evolving to accommodate new extensions and functionality.
 
@@ -190,30 +189,30 @@ If you find a discrepancy please open an issue so it can be addressed.
 
 Major processor families are implemented and some family members also:
 
-- [CommonMark] (spec 0.27)
-  - [ ] [League/CommonMark][]
-  - [GitHub] Comments
-- [Kramdown]
-  - [ ] [Jekyll][]
-- [Markdown.pl][Markdown]
-  - [ ] [Php Markdown Extra][]
-  - [GitHub] Docs
-- FixedIndent
-  - [MultiMarkdown]
-  - [Pegdown]
+* [CommonMark] (spec 0.27)
+  * [ ] : [League/CommonMark]
+  * [GitHub] Comments
+* [Kramdown]
+  * [ ] : [Jekyll]
+* [Markdown.pl][Markdown]
+  * [ ] : [Php Markdown Extra][]
+  * [GitHub] Docs
+* FixedIndent
+  * [MultiMarkdown]
+  * [Pegdown]
 
 :information_source: profiles to encapsulate configuration details for variants within the
 family were added in 0.11.0:
 
-- CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
-- FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
-- GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
-- GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
-- Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
-- Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
-- MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
-- Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
-- Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
+* CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
+* FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
+* GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
+* GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
+* Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
+* Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
+* MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
+* Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
+* Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 ### History and Motivation
 
@@ -293,45 +292,45 @@ pegdown pathological input of 17 `[` parses in 650ms, 18 `[` in 1300ms
 Progress
 --------
 
-- Parser options, items marked as a task item are to be implemented the rest are complete:
-  - Typographic
-    - [ ] Quotes
-    - [ ] Smarts
-  - GitHub Extensions
-    - Fenced code blocks
-    - Anchor links for headers with auto id generation
-    - Table Spans option to be implemented for tables extension
-    - Wiki Links with GitHub and Creole syntax
-    - Emoji Shortcuts with use GitHub emoji URL option
-  - GitHub Syntax
-    - Strikethrough
-    - Task Lists
-    - No Atx Header Space
-    - No Header indents
-    - Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
-    - Relaxed HR Rules Option
-    - Wiki links
-  - Publishing
-    - Abbreviations
-    - Footnotes
-    - Definitions
-    - Table of Contents
-  - Suppress
-    - inline HTML: all, non-comments, comments
-    - HTML blocks: all, non-comments, comments
-  - Processor Extensions
-    - Jekyll front matter
-    - Jekyll tag elements, with support for `{% include file %}`,
+* Parser options, items marked as a task item are to be implemented the rest are complete:
+  * Typographic
+    * [ ] Quotes
+    * [ ] Smarts
+  * GitHub Extensions
+    * Fenced code blocks
+    * Anchor links for headers with auto id generation
+    * Table Spans option to be implemented for tables extension
+    * Wiki Links with GitHub and Creole syntax
+    * Emoji Shortcuts with use GitHub emoji URL option
+  * GitHub Syntax
+    * Strikethrough
+    * Task Lists
+    * No Atx Header Space
+    * No Header indents
+    * Hard Wraps (achieved with SOFT_BREAK option changed to `"<br />"`)
+    * Relaxed HR Rules Option
+    * Wiki links
+  * Publishing
+    * Abbreviations
+    * Footnotes
+    * Definitions
+    * Table of Contents
+  * Suppress
+    * inline HTML: all, non-comments, comments
+    * HTML blocks: all, non-comments, comments
+  * Processor Extensions
+    * Jekyll front matter
+    * Jekyll tag elements, with support for `{% include file %}`,
       [Include Markdown and HTML File Content]
-    - GitBook link URL encoding. Not applicable
-    - HTML comment nodes: Block and Inline
-    - Multi-line Image URLs
-    - Spec Example Element
-  - Commonmark Syntax suppression
-    - Manual loose lists
-    - Numbered lists always start with 1.
-    - Fixed list item indent, items must be indented by at least 4 spaces
-    - Relaxed list start option, allow lists to start when not preceded by a blank line.
+    * GitBook link URL encoding. Not applicable
+    * HTML comment nodes: Block and Inline
+    * Multi-line Image URLs
+    * Spec Example Element
+  * Commonmark Syntax suppression
+    * Manual loose lists
+    * Numbered lists always start with 1.
+    * Fixed list item indent, items must be indented by at least 4 spaces
+    * Relaxed list start option, allow lists to start when not preceded by a blank line.
 
 I am very pleased with the decision to switch to [commonmark-java] based parser for my own
 projects. Even though I had to do major surgery on its innards to get full source position
