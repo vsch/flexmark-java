@@ -14,6 +14,10 @@ public class HtmlParserOptions implements MutableDataSetter {
     public boolean listContentIndent;
     public boolean setextHeadings;
     public boolean outputUnknownTags;
+    public boolean typographicQuotes;
+    public boolean typographicSmarts;
+    public boolean wrapAutoLinks;
+    public boolean extractAutoLinks;
     public char orderedListDelimiter;
     public char unorderedListDelimiter;
     public int definitionMarkerSpaces;
@@ -33,6 +37,10 @@ public class HtmlParserOptions implements MutableDataSetter {
         listContentIndent = other.listContentIndent;
         setextHeadings = other.setextHeadings;
         outputUnknownTags = other.outputUnknownTags;
+        typographicQuotes = other.typographicQuotes;
+        typographicSmarts = other.typographicSmarts;
+        wrapAutoLinks = other.wrapAutoLinks;
+        extractAutoLinks = other.extractAutoLinks;
         orderedListDelimiter = other.orderedListDelimiter;
         unorderedListDelimiter = other.unorderedListDelimiter;
         definitionMarkerSpaces = other.definitionMarkerSpaces;
@@ -49,6 +57,10 @@ public class HtmlParserOptions implements MutableDataSetter {
         listContentIndent = FlexmarkHtmlParser.LIST_CONTENT_INDENT.getFrom(options);
         setextHeadings = FlexmarkHtmlParser.SETEXT_HEADINGS.getFrom(options);
         outputUnknownTags = FlexmarkHtmlParser.OUTPUT_UNKNOWN_TAGS.getFrom(options);
+        typographicQuotes = FlexmarkHtmlParser.TYPOGRAPHIC_QUOTES.getFrom(options);
+        typographicSmarts = FlexmarkHtmlParser.TYPOGRAPHIC_SMARTS.getFrom(options);
+        wrapAutoLinks = FlexmarkHtmlParser.WRAP_AUTO_LINKS.getFrom(options);
+        extractAutoLinks = FlexmarkHtmlParser.EXTRACT_AUTO_LINKS.getFrom(options);
         orderedListDelimiter = FlexmarkHtmlParser.ORDERED_LIST_DELIMITER.getFrom(options);
         unorderedListDelimiter = FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER.getFrom(options);
         definitionMarkerSpaces = FlexmarkHtmlParser.DEFINITION_MARKER_SPACES.getFrom(options);
@@ -66,6 +78,10 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.LIST_CONTENT_INDENT, listContentIndent);
         dataHolder.set(FlexmarkHtmlParser.SETEXT_HEADINGS, setextHeadings);
         dataHolder.set(FlexmarkHtmlParser.OUTPUT_UNKNOWN_TAGS, outputUnknownTags);
+        dataHolder.set(FlexmarkHtmlParser.TYPOGRAPHIC_QUOTES, typographicQuotes);
+        dataHolder.set(FlexmarkHtmlParser.TYPOGRAPHIC_SMARTS, typographicSmarts);
+        dataHolder.set(FlexmarkHtmlParser.WRAP_AUTO_LINKS, wrapAutoLinks);
+        dataHolder.set(FlexmarkHtmlParser.EXTRACT_AUTO_LINKS, extractAutoLinks);
         dataHolder.set(FlexmarkHtmlParser.ORDERED_LIST_DELIMITER, orderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER, unorderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.DEFINITION_MARKER_SPACES, definitionMarkerSpaces);

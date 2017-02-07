@@ -9,14 +9,12 @@ import com.vladsch.flexmark.internal.inline.UnderscoreDelimiterProcessor;
 import com.vladsch.flexmark.parser.*;
 import com.vladsch.flexmark.parser.block.CharacterNodeFactory;
 import com.vladsch.flexmark.parser.block.ParagraphPreProcessor;
-import com.vladsch.flexmark.parser.block.ParagraphPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
@@ -849,6 +847,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     @Override
     public boolean parseNewline() {
+        boolean crLf = index > 0 && input.charAt(index - 1) == '\r';
+        int crLfDelta = crLf ? 1 : 0;
         index++; // assume we're at a \n
 
         // We're gonna add a new node in any case and we need to check the last text node, so flush outstanding text.
@@ -857,21 +857,30 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Node lastChild = block.getLastChild();
         // Check previous text for trailing spaces.
         // The "endsWith" is an optimization to avoid an RE match in the common case.
-        if (lastChild != null && lastChild instanceof Text && lastChild.getChars().endsWith(" ")) {
+        if (lastChild != null && lastChild instanceof Text && (lastChild.getChars().endsWith(" ") || crLf && lastChild.getChars().endsWith(" \r"))) {
             Text text = (Text) lastChild;
             BasedSequence literal = text.getChars();
             Matcher matcher = myParsing.FINAL_SPACE.matcher(literal);
-            int spaces = matcher.find() ? matcher.end() - matcher.start() : 0;
-            appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - (options.hardLineBreakLimit ? 3 : spaces + 1), index)) : new SoftLineBreak(input.subSequence(index - 1, index)));
-            if (spaces > 0) {
+            int spaces = matcher.find() ? matcher.end() - matcher.start() - crLfDelta : 0;
+            appendNode(spaces >= 2 ? new HardLineBreak(input.subSequence(index - (options.hardLineBreakLimit ? 3 + crLfDelta : spaces + 1 + crLfDelta), index)) : new SoftLineBreak(input.subSequence(index - 1 - crLfDelta, index)));
+            if (spaces + crLfDelta > 0) {
                 if (literal.length() > spaces) {
-                    lastChild.setChars(literal.subSequence(0, literal.length() - spaces).trimEnd());
+                    lastChild.setChars(literal.subSequence(0, literal.length() - spaces - crLfDelta).trimEnd());
                 } else {
                     lastChild.unlink();
                 }
             }
         } else {
-            appendNode(new SoftLineBreak(input.subSequence(index - 1, index)));
+            if (crLf && lastChild != null && lastChild instanceof Text) {
+                Text text = (Text) lastChild;
+                BasedSequence literal = text.getChars();
+                if (literal.length() > 1) {
+                    lastChild.setChars(literal.subSequence(0, literal.length() - crLfDelta).trimEnd());
+                } else {
+                    lastChild.unlink();
+                }
+            }
+            appendNode(new SoftLineBreak(input.subSequence(index - 1 - crLfDelta, index)));
         }
 
         // gobble leading spaces in next line

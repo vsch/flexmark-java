@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
+import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -17,6 +18,7 @@ import org.jsoup.nodes.Attribute;
 import org.jsoup.select.Elements;
 
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
@@ -24,6 +26,10 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
     public static final DataKey<Boolean> SETEXT_HEADINGS = new DataKey<>("SETEXT_HEADINGS", true);
     public static final DataKey<Boolean> OUTPUT_UNKNOWN_TAGS = new DataKey<>("OUTPUT_UNKNOWN_TAGS", false);
+    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
+    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
+    public static final DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<>("EXTRACT_AUTO_LINKS", true);
+    public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<>("WRAP_AUTO_LINKS", false);
     public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
     public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
     public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
@@ -47,6 +53,32 @@ public class FlexmarkHtmlParser {
         tableCellAlignments.put("text-center", CellAlignment.CENTER);
         tableCellAlignments.put("text-right", CellAlignment.RIGHT);
     }
+
+    private static final Map<String, String> typographicMap = new HashMap<>();
+    private static final String typographicQuotes = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
+    private static final String typographicSmarts = "…|–|—|&hellip;|&endash;|&emdash;";
+    static {
+        typographicMap.put("“", "\"");
+        typographicMap.put("”", "\"");
+        typographicMap.put("&ldquo;", "\"");
+        typographicMap.put("&rdquo;", "\"");
+        typographicMap.put("‘", "'");
+        typographicMap.put("’", "'");
+        typographicMap.put("&lsquo;", "'");
+        typographicMap.put("&rsquo;", "'");
+        typographicMap.put("&apos;", "'");
+        typographicMap.put("«", "<<");
+        typographicMap.put("&laquo;", "<<");
+        typographicMap.put("»", ">>");
+        typographicMap.put("&raquo;", ">>");
+        typographicMap.put("…", "...");
+        typographicMap.put("&hellip;", "...");
+        typographicMap.put("–", "--");
+        typographicMap.put("&endash;", "--");
+        typographicMap.put("—", "---");
+        typographicMap.put("&emdash;", "---");
+    }
+
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
     private final Stack<State> myStateStack;
@@ -54,11 +86,23 @@ public class FlexmarkHtmlParser {
     private final HtmlParserOptions myOptions;
     private State myState;
     private boolean myTrace;
+    private final Pattern typographicPattern;
 
     private FlexmarkHtmlParser(DataHolder options) {
         myStateStack = new Stack<>();
         myAbbreviations = new HashMap<>();
         myOptions = new HtmlParserOptions(options);
+
+        if (myOptions.typographicQuotes && myOptions.typographicSmarts) {
+            typographicPattern = Pattern.compile(typographicQuotes + "|" + typographicSmarts);
+        } else if (myOptions.typographicQuotes) {
+            typographicPattern = Pattern.compile(typographicQuotes);
+        } else if (myOptions.typographicSmarts) {
+            typographicPattern = Pattern.compile(typographicSmarts);
+        } else {
+            typographicPattern = null;
+        }
+
         //myTrace = true;
     }
 
@@ -298,6 +342,26 @@ public class FlexmarkHtmlParser {
     }
 
     private String prepareText(String text) {
+        if (typographicPattern != null) {
+            Matcher matcher = typographicPattern.matcher(text);
+            int length = text.length();
+            StringBuilder sb = new StringBuilder(length * 2);
+            int lastPos = 0;
+
+            while (matcher.find()) {
+                if (lastPos < matcher.start()) {
+                    sb.append(text, lastPos, matcher.start());
+                }
+                sb.append(typographicMap.get(matcher.group()));
+                lastPos = matcher.end();
+            }
+
+            if (lastPos < length) {
+                sb.append(text, lastPos, length);
+            }
+
+            text = sb.toString();
+        }
         return text.replace("\\", "\\\\").replace("\u00A0", myOptions.nbspText);
     }
 
@@ -427,14 +491,21 @@ public class FlexmarkHtmlParser {
         if (element.hasAttr("href")) {
             String text = Utils.removeStart(Utils.removeEnd(processTextNodes(element), '\n'), '\n');
             String href = element.attr("href");
+            String title = element.hasAttr("title") ? element.attr("title") : null;
 
             if (!text.isEmpty() || !href.contains("#")) {
-                out.append('[');
-                out.append(text);
-                out.append(']');
-                out.append('(').append(href);
-                if (element.hasAttr("title")) out.append(" \"").append(element.attr("title").replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
-                out.append(")");
+                if (myOptions.extractAutoLinks && href.equals(text) && (title == null || title.isEmpty())) {
+                    if (myOptions.wrapAutoLinks) out.append('<');
+                    out.append(text);
+                    if (myOptions.wrapAutoLinks) out.append('>');
+                } else {
+                    out.append('[');
+                    out.append(text);
+                    out.append(']');
+                    out.append('(').append(href);
+                    if (title != null) out.append(" \"").append(element.attr("title").replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
+                    out.append(")");
+                }
             } else if (!text.isEmpty()) {
                 out.append(text);
             }

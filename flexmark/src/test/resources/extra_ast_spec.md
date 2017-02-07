@@ -4402,6 +4402,40 @@ Document[0, 20]
 ````````````````````````````````
 
 
+Only attribute two last spaces of a hard line break space sequence
+
+```````````````````````````````` example(Hard Line Break Limit: 2) options(hard-line-break-limit)
+hard    ⏎
+line breaks
+.
+<p>hard<br />
+line breaks</p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    Text[0, 4] chars:[0, 4, "hard"]
+    HardLineBreak[6, 10]
+    Text[10, 21] chars:[10, 21, "line  … reaks"]
+````````````````````````````````
+
+
+EOL with \r should not include \r as part of text
+
+```````````````````````````````` example Hard Line Break Limit: 3
+soft⏎
+line breaks
+.
+<p>soft
+line breaks</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Text[0, 4] chars:[0, 4, "soft"]
+    SoftLineBreak[4, 6]
+    Text[6, 17] chars:[6, 17, "line  … reaks"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

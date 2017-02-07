@@ -190,12 +190,12 @@ If you find a discrepancy please open an issue so it can be addressed.
 Major processor families are implemented and some family members also:
 
 * [CommonMark] (spec 0.27)
-  * [ ] : [League/CommonMark]
+  * [ ] &nbsp;[League/CommonMark]
   * [GitHub] Comments
 * [Kramdown]
-  * [ ] : [Jekyll]
+  * [ ] &nbsp;[Jekyll]
 * [Markdown.pl][Markdown]
-  * [ ] : [Php Markdown Extra][]
+  * [ ] &nbsp;[Php Markdown Extra]
   * [GitHub] Docs
 * FixedIndent
   * [MultiMarkdown]
