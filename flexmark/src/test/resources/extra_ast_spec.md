@@ -4419,9 +4419,43 @@ Document[0, 21]
 ````````````````````````````````
 
 
-EOL with \r should not include \r as part of text
+default, all trailing spaces and eol
 
 ```````````````````````````````` example Hard Line Break Limit: 3
+hard  ⏎
+line breaks
+.
+<p>hard<br />
+line breaks</p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 4] chars:[0, 4, "hard"]
+    HardLineBreak[4, 8]
+    Text[8, 19] chars:[8, 19, "line  … reaks"]
+````````````````````````````````
+
+
+default, all trailing spaces and eol
+
+```````````````````````````````` example Hard Line Break Limit: 4
+hard    ⏎
+line breaks
+.
+<p>hard<br />
+line breaks</p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    Text[0, 4] chars:[0, 4, "hard"]
+    HardLineBreak[4, 10]
+    Text[10, 21] chars:[10, 21, "line  … reaks"]
+````````````````````````````````
+
+
+EOL with \r should not include \r as part of text
+
+```````````````````````````````` example Hard Line Break Limit: 5
 soft⏎
 line breaks
 .

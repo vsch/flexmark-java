@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.5](#0135)
 - [0.13.4](#0134)
 - [0.13.3](#0133)
 - [0.13.2](#0132)
@@ -117,6 +118,11 @@ flexmark-java
 * [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.5
+------
+
+* Fix: #54 when two spaces followed by \r\n would not parse as HARD break.
 
 0.13.4
 ------
