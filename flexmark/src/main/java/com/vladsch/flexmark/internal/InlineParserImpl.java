@@ -458,6 +458,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         int leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
 
         while (leadingSpaces <= 3 && contentChars.length() > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
+            if (leadingSpaces > 0) contentChars = contentChars.subSequence(leadingSpaces, contentChars.length());
             int pos = parseReference(block, contentChars);
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, contentChars.length());

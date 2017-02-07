@@ -4470,6 +4470,23 @@ Document[0, 18]
 ````````````````````````````````
 
 
+EOL with \r should not include \r as part of text
+
+```````````````````````````````` example Hard Line Break Limit: 6
+soft ⏎
+line breaks
+.
+<p>soft
+line breaks</p>
+.
+Document[0, 19]
+  Paragraph[0, 19]
+    Text[0, 4] chars:[0, 4, "soft"]
+    SoftLineBreak[5, 7]
+    Text[7, 18] chars:[7, 18, "line  … reaks"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
@@ -5336,6 +5353,38 @@ Document[0, 69]
   BlankLine[55, 58]
   Paragraph[58, 69]
     Text[58, 67] chars:[58, 67, "paragraph"]
+````````````````````````````````
+
+Issue #55, Indented Link Reference Definitions not parsed correctly
+
+```````````````````````````````` example Blank Lines in AST: 3
+This note demonstrates some of what [Markdown][1] is capable of doing.
+....
+*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
+
+  [1]: http://daringfireball.net/projects/markdown/
+  [2]: http://www.fileformat.info/info/unicode/char/2163/index.htm
+.
+<p>This note demonstrates some of what <a href="http://daringfireball.net/projects/markdown/">Markdown</a> is capable of doing.
+....
+<em>Note: the fourth item uses the Unicode character for <a href="http://www.fileformat.info/info/unicode/char/2163/index.htm">Roman numeral four</a>.</em></p>
+.
+Document[0, 276]
+  Paragraph[0, 156] isTrailingBlankLine
+    Text[0, 36] chars:[0, 36, "This  … what "]
+    LinkRef[36, 49] textOpen:[36, 37, "["] text:[37, 45, "Markdown"] textClose:[45, 46, "]"] referenceOpen:[46, 47, "["] reference:[47, 48, "1"] referenceClose:[48, 49, "]"]
+      Text[37, 45] chars:[37, 45, "Markdown"]
+    Text[49, 70] chars:[49, 70, " is c … oing."]
+    SoftLineBreak[70, 71]
+    Text[71, 75] chars:[71, 75, "...."]
+    SoftLineBreak[75, 76]
+    Emphasis[76, 155] textOpen:[76, 77, "*"] text:[77, 154, "Note: the fourth item uses the Unicode character for [Roman numeral four][2]."] textClose:[154, 155, "*"]
+      Text[77, 130] chars:[77, 130, "Note: …  for "]
+      LinkRef[130, 153] textOpen:[130, 131, "["] text:[131, 149, "Roman numeral four"] textClose:[149, 150, "]"] referenceOpen:[150, 151, "["] reference:[151, 152, "2"] referenceClose:[152, 153, "]"]
+        Text[131, 149] chars:[131, 149, "Roman …  four"]
+      Text[153, 154] chars:[153, 154, "."]
+  Reference[159, 208] refOpen:[159, 160, "["] ref:[160, 161, "1"] refClose:[161, 163, "]:"] url:[164, 208, "http://daringfireball.net/projects/markdown/"]
+  Reference[211, 275] refOpen:[211, 212, "["] ref:[212, 213, "2"] refClose:[213, 215, "]:"] url:[216, 275, "http://www.fileformat.info/info/unicode/char/2163/index.htm"]
 ````````````````````````````````
 
 

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.6](#0136)
 - [0.13.5](#0135)
 - [0.13.4](#0134)
 - [0.13.3](#0133)
@@ -118,6 +119,11 @@ flexmark-java
 * [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.6
+------
+
+* Fix: #55, Indented Link Reference Definitions not parsed correctly
 
 0.13.5
 ------
