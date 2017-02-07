@@ -31,24 +31,22 @@ than ideal and for pathological input either hangs or practically hangs during p
   column width and alignment of markdown tables:
 
   <table>
-    <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
-    <tr><td>
-    <pre><code class="language-markdown">  day|time|spent
-    :---|:---:|--:
-    nov. 2. tue|10:00|4h 40m
-    nov. 3. thu|11:00|4h
-    nov. 7. mon|10:20|4h 20m
-    total:|| **13h**
-    </code></pre>
-    </td><td>
-    <pre><code class="language-markdown">  | day         | time  |   spent |
-    |:------------|:-----:|--------:|
-    | nov. 2. tue | 10:00 |  4h 40m |
-    | nov. 3. thu | 11:00 |      4h |
-    | nov. 7. mon | 10:20 |  4h 20m |
-    | total:             || **13h** |
-    </code></pre>
-    </td></tr>
+      <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
+      <tr><td>
+      <pre><code class="language-markdown">day|time|spent
+  :---|:---:|--:
+  nov. 2. tue|10:00|4h 40m
+  nov. 3. thu|11:00|4h
+  nov. 7. mon|10:20|4h 20m
+  total:|| **13h**</code></pre>
+      </td><td>
+      <pre><code class="language-markdown">| day         | time  |   spent |
+  |:------------|:-----:|--------:|
+  | nov. 2. tue | 10:00 |  4h 40m |
+  | nov. 3. thu | 11:00 |      4h |
+  | nov. 7. mon | 10:20 |  4h 20m |
+  | total:             || **13h** |</code></pre>
+      </td></tr>
   </table>
 
 ### Changes Forced by Downgrade to Java 7
@@ -448,64 +446,64 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 
 [All about me]: https://vladsch.com/about
 [CommonMark]: http://commonmark.org/
+[commonmark-java]: https://github.com/atlassian/commonmark-java
+[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
+[flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
 [GitHub Issues page]: ../../issues
+[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
+[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
 [Include Markdown and HTML File Content]: ../../wiki/Usage#include-markdown-and-html-file-content
+[intellij-markdown]: https://github.com/valich/intellij-markdown
 [Jekyll]: https://jekyllrb.com
 [Kramdown]: http://kramdown.gettalong.org/
-[LICENSE.txt]: LICENSE.txt
 [League/CommonMark]: https://github.com/thephpleague/commonmark
+[LICENSE.txt]: LICENSE.txt
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
-[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
+[pegdown]: http://pegdown.org
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
-[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
-[commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
-[commonmark-java]: https://github.com/atlassian/commonmark-java
-[flexmark-java]: https://github.com/vsch/flexmark-java
-[hang-pegdown.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown.md
-[hang-pegdown2.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/hang-pegdown2.md
-[intellij-markdown]: https://github.com/valich/intellij-markdown
-[pegdown]: http://pegdown.org
+[PHP Markdown Extra]: http://michelf.com/projects/php-markdown/extra/#abbr
 [spec.txt]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/spec.md
+[VERSION.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/VERSION.md
 [wrap.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/wrap.md
 [.gitignore]: http://hsz.mobi
 [Android Studio]: http://developer.android.com/sdk/installing/studio.html
 [AppCode]: http://www.jetbrains.com/objc
+[autolink-java]: https://github.com/robinst/autolink-java
 [CLion]: https://www.jetbrains.com/clion
+[commonmark.js]: https://github.com/jgm/commonmark.js
 [Craig's List]: http://montreal.en.craigslist.ca/
 [DataGrip]: https://www.jetbrains.com/datagrip
+[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
+[flexmark-java wiki]: ../../wiki
+[gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
 [GitHub Flavoured Markdown]: https://help.github.com/articles/basic-writing-and-formatting-syntax/
 [Github-flavoured-Markdown]: http://github.github.com/github-flavored-markdown/
+[idea-markdown]: https://github.com/nicoulaj/idea-markdown
 [IntelliJ IDEA]: http://www.jetbrains.com/idea
 [JetBrains plugin comment and rate page]: https://plugins.jetbrains.com/plugin/writeComment?pr=&pluginId=7896
 [JetBrains plugin page]: https://plugins.jetbrains.com/plugin?pr=&pluginId=7896
 [Kotlin]: http://kotlinlang.org
 [Maven Central]: https://search.maven.org/#search|ga|1|g%3A%22com.atlassian.commonmark%22
 [Maven Central status]: https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg
+[nicoulaj]: https://github.com/nicoulaj
+[nicoulaj/idea-markdown plugin]: https://github.com/nicoulaj/idea-markdown
+[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
 [PHP Markdown Extra: definition list]: http://michelf.com/projects/php-markdown/extra/#def-list
 [PHP Markdown Extra: fenced code]: http://michelf.com/projects/php-markdown/extra/#fenced-code-blocks
 [PHP Markdown Extra: tables]: http://michelf.com/projects/php-markdown/extra/#table
-[Pandoc]: http://pandoc.org/MANUAL.html#pandocs-markdown
 [PhpExtra]: https://michelf.ca/projects/php-markdown/extra/
 [PhpStorm]: http://www.jetbrains.com/phpstorm
 [Pipe Table Formatter]: https://github.com/anton-dev-ua/PipeTableFormatter
 [PyCharm]: http://www.jetbrains.com/pycharm
 [RubyMine]: http://www.jetbrains.com/ruby
 [Semantic Versioning]: http://semver.org/
-[WebStorm]: http://www.jetbrains.com/webstorm
-[autolink-java]: https://github.com/robinst/autolink-java
-[commonmark.js]: https://github.com/jgm/commonmark.js
-[flexmark-java on Maven]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22
-[flexmark-java wiki]: ../../wiki
-[gfm-tables]: https://help.github.com/articles/organizing-information-with-tables/
-[idea-markdown]: https://github.com/nicoulaj/idea-markdown
-[nicoulaj]: https://github.com/nicoulaj
-[nicoulaj/idea-markdown plugin]: https://github.com/nicoulaj/idea-markdown
 [sirthias]: https://github.com/sirthias
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
+[WebStorm]: http://www.jetbrains.com/webstorm
 
