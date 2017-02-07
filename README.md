@@ -33,7 +33,7 @@ than ideal and for pathological input either hangs or practically hangs during p
   <table>
     <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
     <tr><td>
-    <pre><code class="language-markdown">day|time|spent
+    <pre><code class="language-markdown">  day|time|spent
     :---|:---:|--:
     nov. 2. tue|10:00|4h 40m
     nov. 3. thu|11:00|4h
@@ -41,7 +41,7 @@ than ideal and for pathological input either hangs or practically hangs during p
     total:|| **13h**
     </code></pre>
     </td><td>
-    <pre><code class="language-markdown">| day         | time  |   spent |
+    <pre><code class="language-markdown">  | day         | time  |   spent |
     |:------------|:-----:|--------:|
     | nov. 2. tue | 10:00 |  4h 40m |
     | nov. 3. thu | 11:00 |      4h |
@@ -49,7 +49,7 @@ than ideal and for pathological input either hangs or practically hangs during p
     | total:             || **13h** |
     </code></pre>
     </td></tr>
-    </table>
+  </table>
 
 ### Changes Forced by Downgrade to Java 7
 
