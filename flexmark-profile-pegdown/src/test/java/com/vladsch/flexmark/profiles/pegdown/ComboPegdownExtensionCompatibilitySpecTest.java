@@ -27,8 +27,8 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCas
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-        optionsMap.put("hard-breaks", new MutableDataSet().set(PegdownParser.PEGDOWN_EXTENSIONS_ADD, HARDWRAPS));
-        optionsMap.put("anchor-links", new MutableDataSet().set(PegdownParser.PEGDOWN_EXTENSIONS_ADD, ANCHORLINKS));
+        optionsMap.put("hard-breaks", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | HARDWRAPS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
+        optionsMap.put("anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | ANCHORLINKS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

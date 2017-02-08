@@ -2863,3 +2863,14 @@ Text and inlines, unsorted
 ````````````````````````````````
 
 
+```````````````````````````````` example(Table Of Contents: 6) options(hard-breaks)
+paragraph with
+hard breaks
+option
+.
+<p>paragraph with<br />
+hard breaks<br />
+option</p>
+````````````````````````````````
+
+

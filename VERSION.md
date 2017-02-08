@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.13.7](#0137)
 - [0.13.6](#0136)
 - [0.13.5](#0135)
 - [0.13.4](#0134)
@@ -119,6 +120,13 @@ flexmark-java
 * [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.13.7
+------
+
+* Fix: #56, Pegdown HARDWRAPS option adds an additional line break when using trailing spaces
+
+* Add: test for pegdown HARDWRAPS extension.
 
 0.13.6
 ------

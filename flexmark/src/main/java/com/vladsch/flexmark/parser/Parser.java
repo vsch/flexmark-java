@@ -336,15 +336,19 @@ public class Parser implements IParse {
             super(other);
 
             List<Extension> extensions = new ArrayList<Extension>();
+            HashSet<Class> extensionSet = new HashSet<>();
             for (Extension extension : get(EXTENSIONS)) {
                 extensions.add(extension);
+                extensionSet.add(extension.getClass());
             }
 
             if (options != null) {
                 for (DataKey key : options.keySet()) {
                     if (key == EXTENSIONS) {
                         for (Extension extension : options.get(EXTENSIONS)) {
-                            extensions.add(extension);
+                            if (!extensionSet.contains(extension.getClass())) {
+                                extensions.add(extension);
+                            }
                         }
                     } else {
                         set(key, options.get(key));

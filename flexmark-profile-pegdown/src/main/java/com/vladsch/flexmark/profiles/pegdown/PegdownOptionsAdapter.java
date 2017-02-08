@@ -120,7 +120,7 @@ public class PegdownOptionsAdapter {
 
             if (haveExtensions(HARDWRAPS)) {
                 options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
-                options.set(HtmlRenderer.HARD_BREAK, "<br />\n<br />\n");
+                options.set(HtmlRenderer.HARD_BREAK, "<br />\n");
             }
 
             if (!haveExtensions(ATXHEADERSPACE)) {
