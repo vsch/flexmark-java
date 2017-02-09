@@ -12,6 +12,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.html.renderer.NodeRenderingHandler;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
@@ -101,6 +102,11 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
+        public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+            return null;
+        }
+
+        @Override
         public void process(Delimiter opener, Delimiter closer, int delimitersUsed) {
 
         }
@@ -128,6 +134,11 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         @Override
         public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
             return 1;
+        }
+
+        @Override
+        public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+            return null;
         }
 
         @Override

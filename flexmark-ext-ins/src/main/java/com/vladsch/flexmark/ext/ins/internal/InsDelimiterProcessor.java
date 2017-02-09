@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.ext.ins.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.ins.Ins;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -30,6 +32,11 @@ public class InsDelimiterProcessor implements DelimiterProcessor {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        return null;
     }
 
     @Override

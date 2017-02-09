@@ -1,9 +1,11 @@
 package com.vladsch.flexmark.ext.gfm.strikethrough.internal;
 
 import com.vladsch.flexmark.ast.DelimitedNode;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -38,6 +40,11 @@ public class StrikethroughSubscriptDelimiterProcessor implements DelimiterProces
         } else {
             return closer.length() % 2 == 0 ? 2 : 1;
         }
+    }
+
+    @Override
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        return null;
     }
 
     @Override

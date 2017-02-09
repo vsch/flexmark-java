@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.14.0](#0140)
 - [0.13.7](#0137)
 - [0.13.6](#0136)
 - [0.13.5](#0135)
@@ -120,6 +121,21 @@ flexmark-java
 * [ ] Add: PDF renderer
 
 &nbsp;</details>
+
+0.14.0
+------
+
+* Fix: Implement `TypographicExtension` to convert smarts and quotes conversion:
+  * `'` to apostrophe `&apos;` &apos;
+  * `...` and `. . .` to ellipsis `&hellip;` &hellip;
+  * `--` en dash `&ndash;` &ndash;
+  * `---` em dash `&mdash;` &mdash;
+  * single quoted `'some text'` to `&lsquo;some text&rsquo;` &lsquo;some text&rsquo;
+  * double quoted `"some text"` to `&ldquo;some text&rdquo;` &ldquo;some text&rdquo;
+  * double angle quoted `<<some text>>` to `&laquo;some text&raquo;` &laquo;some text&raquo;
+
+* API Change: `DelimiterProcessor.unmatchedDelimiterNode(InlineParser, DelimiterRun)` method
+  added to allow substituting unmatched delimiter text by another node.
 
 0.13.7
 ------

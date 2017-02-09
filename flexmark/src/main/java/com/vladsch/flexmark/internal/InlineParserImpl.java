@@ -649,13 +649,21 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             case ']':
                 res = parseCloseBracket();
                 break;
-            case '<':
-                res = parseAutolink() || parseHtmlInline();
-                break;
+            case '<': {
+                // first we check custom special characters for < delimiters and only allow 2 consecutive ones to allow anchor links and HTML processing
+                boolean isDelimiter = delimiterCharacters.get(c);
+                if (isDelimiter && peek(1) == '<') {
+                    DelimiterProcessor delimiterProcessor = delimiterProcessors.get(c);
+                    res = parseDelimiters(delimiterProcessor, c);
+                } else {
+                    res = parseAutolink() || parseHtmlInline();
+                }
+            }
+            break;
             case '&':
                 res = parseEntity();
                 break;
-            default:
+            default: {
                 // first we check custom special characters
                 boolean isDelimiter = delimiterCharacters.get(c);
                 if (isDelimiter) {
@@ -664,7 +672,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 } else {
                     res = parseString();
                 }
-                break;
+            }
+            break;
         }
 
         if (!res) {
@@ -1779,10 +1788,22 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      */
     @Override
     public void removeDelimiterKeepNode(Delimiter delim) {
-        Text node = delim.node;
+        Node node;
+        DelimiterProcessor delimiterProcessor = delimiterProcessors.get(delim.delimiterChar);
+        node = delimiterProcessor != null ? delimiterProcessor.unmatchedDelimiterNode(this, delim) : null;
+        if (node != null) {
+            if (node != delim.node) {
+                // replace node
+                delim.node.insertAfter(node);
+                delim.node.unlink();
+            }
+        } else {
+            node = delim.node;
+        }
+
         Text previousText = delim.getPreviousNonDelimiterTextNode();
         Text nextText = delim.getNextNonDelimiterTextNode();
-        if (previousText != null || nextText != null) {
+        if (node instanceof Text && (previousText != null || nextText != null)) {
             // Merge adjacent text nodes into one
             if (nextText != null && previousText != null) {
                 node.setChars(input.baseSubSequence(previousText.getStartOffset(), nextText.getEndOffset()));

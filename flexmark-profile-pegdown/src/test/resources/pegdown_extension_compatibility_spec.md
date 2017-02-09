@@ -1402,7 +1402,7 @@ First line
 Second line <!--simple
 Last line
 .
-<p>First line Second line &lt;!--simple Last line</p>
+<p>First line Second line &lt;!&ndash;simple Last line</p>
 ````````````````````````````````
 
 
@@ -2478,7 +2478,7 @@ real life table
 
 basic quotes
 
-```````````````````````````````` example(Markdown elements - TypographicQuotes: 1) options(FAIL)
+```````````````````````````````` example Markdown elements - TypographicQuotes: 1
 Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre'
 .
 <p>Sample &ldquo;double&rdquo; &lsquo;single&rsquo; &laquo;angle&raquo; &ldquo;l&rsquo;ordre&rdquo; &lsquo;l&rsquo;ordre&rsquo;</p>
@@ -2487,10 +2487,10 @@ Sample "double" 'single' <<angle>> "l'ordre" 'l'ordre'
 
 escaped quotes
 
-```````````````````````````````` example(Markdown elements - TypographicQuotes: 2) options(FAIL)
+```````````````````````````````` example Markdown elements - TypographicQuotes: 2
 Sample \"double\" \'single\' \<<angle\>> \"l\'ordre\" \'l\'ordre\'
 .
-<p>Sample &quot;double&quot; &#39;single&#39; &lt;&lt;angle&gt;&gt; &quot;l&#39;ordre&quot; &#39;l&#39;ordre&#39;</p>
+<p>Sample &quot;double&quot; 'single' &lt;&lt;angle&gt;&gt; &quot;l'ordre&quot; 'l'ordre'</p>
 ````````````````````````````````
 
 
@@ -2500,24 +2500,24 @@ Sample \"double\" \'single\' \<<angle\>> \"l\'ordre\" \'l\'ordre\'
 
 basic
 
-```````````````````````````````` example(Markdown elements - TypographicSmarts: 1) options(FAIL)
+```````````````````````````````` example Markdown elements - TypographicSmarts: 1
 Sample with l'existence, from 1...2 and so on. . . 
 
 en--dash and em---dash
 .
-<p>Sample with l&rsquo;existence, from 1&hellip;2 and so on&hellip; </p>
+<p>Sample with l&rsquo;existence, from 1&hellip;2 and so on&hellip;</p>
 <p>en&ndash;dash and em&mdash;dash</p>
 ````````````````````````````````
 
 
 escaped smarts
 
-```````````````````````````````` example(Markdown elements - TypographicSmarts: 2) options(FAIL)
+```````````````````````````````` example Markdown elements - TypographicSmarts: 2
 Sample with l\'existence, from 1\...2 and so on\. . . 
 
 en\--dash and em\---dash
 .
-<p>Sample with l&#39;existence, from 1...2 and so on. . . </p>
+<p>Sample with l'existence, from 1...2 and so on. . .</p>
 <p>en--dash and em-&ndash;dash</p>
 ````````````````````````````````
 

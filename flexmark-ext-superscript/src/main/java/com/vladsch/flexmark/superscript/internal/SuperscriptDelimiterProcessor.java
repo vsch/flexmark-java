@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.superscript.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.superscript.Superscript;
@@ -30,6 +32,11 @@ public class SuperscriptDelimiterProcessor implements DelimiterProcessor {
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        return null;
     }
 
     @Override

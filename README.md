@@ -20,6 +20,8 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Latest Additions
 
+* [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
+  implemented
 * [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
 * [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
@@ -292,8 +294,8 @@ Progress
 
 * Parser options, items marked as a task item are to be implemented the rest are complete:
   * Typographic
-    * [ ] Quotes
-    * [ ] Smarts
+    * Quotes
+    * Smarts
   * GitHub Extensions
     * Fenced code blocks
     * Anchor links for headers with auto id generation

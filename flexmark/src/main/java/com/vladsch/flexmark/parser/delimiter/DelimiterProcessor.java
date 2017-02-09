@@ -2,7 +2,7 @@ package com.vladsch.flexmark.parser.delimiter;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.internal.Delimiter;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.parser.InlineParser;
 
 /**
  * Custom delimiter processor for additional delimiters besides {@code _} and {@code *}.
@@ -52,4 +52,12 @@ public interface DelimiterProcessor {
      */
     void process(Delimiter opener, Delimiter closer, int delimitersUsed);
 
+    /**
+     * Allow delimiter processor to substitute unmatched delimiters by custom nodes
+     *
+     * @param inlineParser inline parser instance
+     * @param delimiter    delimiter run that was not matched
+     * @return node to replace unmatched delimiter, null or delimiter.getNode() to replace with delimiter text
+     */
+    Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter);
 }

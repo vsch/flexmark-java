@@ -130,8 +130,8 @@ public class PegdownOptionsAdapter {
             if (haveExtensions(QUOTES | SMARTS)) {
                 // not implemented yet, have placeholder
                 extensions.add(TypographicExtension.create());
-                options.set(TypographicExtension.TYPOGRAPHIC_SMARTS, haveExtensions(SMARTS));
-                options.set(TypographicExtension.TYPOGRAPHIC_QUOTES, haveExtensions(QUOTES));
+                options.set(TypographicExtension.ENABLE_SMARTS, haveExtensions(SMARTS));
+                options.set(TypographicExtension.ENABLE_QUOTES, haveExtensions(QUOTES));
             }
 
             if (!haveExtensions(RELAXEDHRULES)) {

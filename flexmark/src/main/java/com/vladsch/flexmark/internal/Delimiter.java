@@ -30,8 +30,32 @@ public class Delimiter implements DelimiterRun {
     Delimiter previous;
     Delimiter next;
 
+    @Override
+    public DelimiterRun getPrevious() {
+        return previous;
+    }
+
+    @Override
+    public DelimiterRun getNext() {
+        return next;
+    }
+
+    @Override
+    public char getDelimiterChar() {
+        return delimiterChar;
+    }
+
+    public boolean isMatched() {
+        return matched;
+    }
+
+    public int getNumDelims() {
+        return numDelims;
+    }
+
     int numDelims = 1;
 
+    @Override
     public Text getNode() {
         return node;
     }

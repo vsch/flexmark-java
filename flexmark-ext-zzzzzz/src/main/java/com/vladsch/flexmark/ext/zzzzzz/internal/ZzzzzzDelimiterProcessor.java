@@ -1,7 +1,9 @@
 package com.vladsch.flexmark.ext.zzzzzz.internal;
 
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.zzzzzz.Zzzzzz;
 import com.vladsch.flexmark.internal.Delimiter;
+import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -28,8 +30,13 @@ public class ZzzzzzDelimiterProcessor implements DelimiterProcessor {
         if (opener.length() >= 1 && closer.length() >= 1) {
             return 1;
         } else {
-            return 1;
+            return 0;
         }
+    }
+
+    @Override
+    public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
+        return null;
     }
 
     @Override

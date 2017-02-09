@@ -13,9 +13,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TypographicNodeRenderer implements NodeRenderer
-        // , PhasedNodeRenderer
-{
+public class TypographicNodeRenderer implements NodeRenderer {
     private final TypographicOptions options;
 
     public TypographicNodeRenderer(DataHolder options) {
