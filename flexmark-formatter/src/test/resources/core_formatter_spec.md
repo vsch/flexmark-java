@@ -1864,21 +1864,21 @@ Work with [Markdown] files like you do with other languages in the IDE, by getti
 for:
 
 * completions to reduce typing
-  * link address ⇐ files
-  * ref anchors ⇐ headings
-  * footnote refs ⇐ footnotes
-  * ref links/ref images ⇐ references
-  * link text ⇐ ref anchor/link address
+* link address ⇐ files
+* ref anchors ⇐ headings
+* footnote refs ⇐ footnotes
+* ref links/ref images ⇐ references
+* link text ⇐ ref anchor/link address
 * error and warning annotations to help catch mistakes early
 * intention actions for fast results with less effort
 * wrap on typing to keep it nicely formatted as you edit
 * formatting to change format with a key stroke
 * navigation and find usages to find references without effort
 * refactoring of all referencing elements: to keep it all in sync while evolving
-  * files ⟺ links
-  * headings ⟺ ref anchors
-  * footnotes ⟺ footnote refs
-  * references ⟺ ref links/ref images
+* files ⟺ links
+* headings ⟺ ref anchors
+* footnotes ⟺ footnote refs
+* references ⟺ ref links/ref images
 * GitHub style rendering that you are used to, out of the box
 * Fast typing response for distraction free editing
 * Fully customizable to adjust to your project's needs and your preferences
@@ -1892,13 +1892,13 @@ for:
 * **HTML text** preview and export
 * Soft Wrap **on right margin**
 * **Format** with code style:
-  * **Multi-byte** support with mixed character width
-  * **Table** justification
-  * **Wrap on typing** auto format of element
-  * **Renumbering** of list items
+* **Multi-byte** support with mixed character width
+* **Table** justification
+* **Wrap on typing** auto format of element
+* **Renumbering** of list items
 * **Bidirectional** Source and Preview synchronization
-  * **Scrolls** preview to show source element at caret
-  * **Moves caret** to source line of element clicked in preview
+* **Scrolls** preview to show source element at caret
+* **Moves caret** to source line of element clicked in preview
 * Also does **completions, refactoring, validation, language injections, code folding**
 * **Fully configurable** by project with support for scopes
 * Understands **GitHub wiki** nuances
