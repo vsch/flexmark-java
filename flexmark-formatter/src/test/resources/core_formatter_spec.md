@@ -1541,3 +1541,370 @@ text with
 ````````````````````````````````
 
 
+## Format Conversion
+
+```````````````````````````````` example Format Conversion: 1
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+  automatically.
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+  match case and style of identifier at destination when you paste, undo to get results before
+  MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+  reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+  and **middle** of identifiers.
+
+  Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+  **dash-case**, **dot.case**, **slash/case**
+
+  Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+  fields, getters and setters.
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+  moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+  to **paste full line** selections: **above** or **below** the current line regardless of the
+  caret's column.
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+  same text again.
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+  blank or comment lines so you can edit only code lines.
+* Enhanced Paste from History dialog:
+  * **combine**, **arrange** and **reverse** the order of content entries
+  * **combine multiple** clipboard contents **with caret information intact**
+  * **paste and re-create multiple carets** from information already stored on the clipboard
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+  easy. **Plugin website:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+  **Bug tracking & feature requests:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+.
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+  automatically.
+
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+  match case and style of identifier at destination when you paste, undo to get results before
+  MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+  reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+  and **middle** of identifiers.
+
+  Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+  **dash-case**, **dot.case**, **slash/case**
+
+  Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+  fields, getters and setters.
+
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+  moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+  to **paste full line** selections: **above** or **below** the current line regardless of the
+  caret's column.
+
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+  same text again.
+
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+  blank or comment lines so you can edit only code lines.
+
+* Enhanced Paste from History dialog:
+
+  * **combine**, **arrange** and **reverse** the order of content entries
+  * **combine multiple** clipboard contents **with caret information intact**
+  * **paste and re-create multiple carets** from information already stored on the clipboard
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+  easy. **Plugin website:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+  **Bug tracking & feature requests:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 2) options(parse-github, format-fixed-indent)
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+  automatically.
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+  match case and style of identifier at destination when you paste, undo to get results before
+  MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+  reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+  and **middle** of identifiers.
+
+  Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+  **dash-case**, **dot.case**, **slash/case**
+
+  Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+  fields, getters and setters.
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+  moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+  to **paste full line** selections: **above** or **below** the current line regardless of the
+  caret's column.
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+  same text again.
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+  blank or comment lines so you can edit only code lines.
+* Enhanced Paste from History dialog:
+  * **combine**, **arrange** and **reverse** the order of content entries
+  * **combine multiple** clipboard contents **with caret information intact**
+  * **paste and re-create multiple carets** from information already stored on the clipboard
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+  easy. **Plugin website:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+  **Bug tracking & feature requests:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+.
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+    automatically.
+
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+    match case and style of identifier at destination when you paste, undo to get results before
+    MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+    reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+    and **middle** of identifiers.
+
+    Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+    **dash-case**, **dot.case**, **slash/case**
+
+    Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+    fields, getters and setters.
+
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+    moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+    to **paste full line** selections: **above** or **below** the current line regardless of the
+    caret's column.
+
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+    same text again.
+
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+    blank or comment lines so you can edit only code lines.
+
+* Enhanced Paste from History dialog:
+
+    * **combine**, **arrange** and **reverse** the order of content entries
+    * **combine multiple** clipboard contents **with caret information intact**
+    * **paste and re-create multiple carets** from information already stored on the clipboard
+    * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+        first line** of the block, ready for multi-caret select and paste
+    * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+    easy. **Plugin website:
+    [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+    **Bug tracking & feature requests:
+    [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 3) options(parse-fixed-indent, format-github)
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+    automatically.
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+    match case and style of identifier at destination when you paste, undo to get results before
+    MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+    reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+    and **middle** of identifiers.
+
+    Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+    **dash-case**, **dot.case**, **slash/case**
+
+    Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+    fields, getters and setters.
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+    moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+    to **paste full line** selections: **above** or **below** the current line regardless of the
+    caret's column.
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+    same text again.
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+    blank or comment lines so you can edit only code lines.
+* Enhanced Paste from History dialog:
+    * **combine**, **arrange** and **reverse** the order of content entries
+    * **combine multiple** clipboard contents **with caret information intact**
+    * **paste and re-create multiple carets** from information already stored on the clipboard
+    * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+        first line** of the block, ready for multi-caret select and paste
+    * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+    easy. **Plugin website:
+    [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+    **Bug tracking & feature requests:
+    [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+.
+Adds missing editor actions for end of word navigation but that is just the beginning:
+
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+  automatically.
+
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+  match case and style of identifier at destination when you paste, undo to get results before
+  MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+  reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+  and **middle** of identifiers.
+
+  Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+  **dash-case**, **dot.case**, **slash/case**
+
+  Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields, static
+  fields, getters and setters.
+
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+  moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+  to **paste full line** selections: **above** or **below** the current line regardless of the
+  caret's column.
+
+* Toggle between selection and multiple carets on selected lines to save time re-selecting the
+  same text again.
+
+* Filter multiple carets saves you time when creating multiple carets by removing carets on
+  blank or comment lines so you can edit only code lines.
+
+* Enhanced Paste from History dialog:
+
+  * **combine**, **arrange** and **reverse** the order of content entries
+  * **combine multiple** clipboard contents **with caret information intact**
+  * **paste and re-create multiple carets** from information already stored on the clipboard
+  * **duplicate line/block for each caret** in the clipboard content and **put a caret on the
+    first line** of the block, ready for multi-caret select and paste
+  * see caret information stored on the clipboard for each content entry
+* Many more options and adjustments to make multiple caret text editing fast, efficient and
+  easy. **Plugin website:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Repo</span>](http://github.com/vsch/MissingInActions)**
+  **Bug tracking & feature requests:
+  [<span style="color:#30A0D8">Missing In Actions GitHub Issues</span>](http://github.com/vsch/MissingInActions)**
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 4) options(parse-fixed-indent, format-github, references-as-is)
+![Screenshot](https://raw.githubusercontent.com/vsch/idea-multimarkdown/master/assets/images/plugin_description_img.png)
+
+<img src="https://github.com/vsch/idea-multimarkdown/raw/master/assets/images/MNLogo.png?" height="20" width="20" border="0" style="padding-left:10px;">Markdown Navigator 2.0
+==============================================================================================================================================================================
+
+**[<span style="color:#30A0D8;">Markdown</span>][Markdown] language support for IntelliJ
+platform**
+
+**A Markdown plugin** with GFM and a **matching** preview style.
+
+## Document with pleasure!
+
+Work with [Markdown] files like you do with other languages in the IDE, by getting full support
+for:
+
+* completions to reduce typing
+  * link address ⇐ files
+  * ref anchors ⇐ headings
+  * footnote refs ⇐ footnotes
+  * ref links/ref images ⇐ references
+  * link text ⇐ ref anchor/link address
+* error and warning annotations to help catch mistakes early
+* intention actions for fast results with less effort
+* wrap on typing to keep it nicely formatted as you edit
+* formatting to change format with a key stroke
+* navigation and find usages to find references without effort
+* refactoring of all referencing elements: to keep it all in sync while evolving
+  * files ⟺ links
+  * headings ⟺ ref anchors
+  * footnotes ⟺ footnote refs
+  * references ⟺ ref links/ref images
+* GitHub style rendering that you are used to, out of the box
+* Fast typing response for distraction free editing
+* Fully customizable to adjust to your project's needs and your preferences
+* Copy Markdown as JIRA, YouTrack or HTML formatted text or export as HTML
+* Convert HTML content to Markdown by pasting it into a Markdown document.
+
+## Features
+
+* **<span style="color:#b200c2">Split Editor</span>**
+* **Fast** typing response in large files
+* **HTML text** preview and export
+* Soft Wrap **on right margin**
+* **Format** with code style:
+  * **Multi-byte** support with mixed character width
+  * **Table** justification
+  * **Wrap on typing** auto format of element
+  * **Renumbering** of list items
+* **Bidirectional** Source and Preview synchronization
+  * **Scrolls** preview to show source element at caret
+  * **Moves caret** to source line of element clicked in preview
+* Also does **completions, refactoring, validation, language injections, code folding**
+* **Fully configurable** by project with support for scopes
+* Understands **GitHub wiki** nuances
+* Conversion between HTML and Markdown
+
+[Markdown]: http://daringfireball.net/projects/markdown"
+.
+![Screenshot](https://raw.githubusercontent.com/vsch/idea-multimarkdown/master/assets/images/plugin_description_img.png)
+
+<img src="https://github.com/vsch/idea-multimarkdown/raw/master/assets/images/MNLogo.png?" height="20" width="20" border="0" style="padding-left:10px;">Markdown Navigator 2.0
+==============================================================================================================================================================================
+
+**[<span style="color:#30A0D8;">Markdown</span>][Markdown] language support for IntelliJ
+platform**
+
+**A Markdown plugin** with GFM and a **matching** preview style.
+
+## Document with pleasure!
+
+Work with [Markdown] files like you do with other languages in the IDE, by getting full support
+for:
+
+* completions to reduce typing
+  * link address ⇐ files
+  * ref anchors ⇐ headings
+  * footnote refs ⇐ footnotes
+  * ref links/ref images ⇐ references
+  * link text ⇐ ref anchor/link address
+* error and warning annotations to help catch mistakes early
+* intention actions for fast results with less effort
+* wrap on typing to keep it nicely formatted as you edit
+* formatting to change format with a key stroke
+* navigation and find usages to find references without effort
+* refactoring of all referencing elements: to keep it all in sync while evolving
+  * files ⟺ links
+  * headings ⟺ ref anchors
+  * footnotes ⟺ footnote refs
+  * references ⟺ ref links/ref images
+* GitHub style rendering that you are used to, out of the box
+* Fast typing response for distraction free editing
+* Fully customizable to adjust to your project's needs and your preferences
+* Copy Markdown as JIRA, YouTrack or HTML formatted text or export as HTML
+* Convert HTML content to Markdown by pasting it into a Markdown document.
+
+## Features
+
+* **<span style="color:#b200c2">Split Editor</span>**
+* **Fast** typing response in large files
+* **HTML text** preview and export
+* Soft Wrap **on right margin**
+* **Format** with code style:
+  * **Multi-byte** support with mixed character width
+  * **Table** justification
+  * **Wrap on typing** auto format of element
+  * **Renumbering** of list items
+* **Bidirectional** Source and Preview synchronization
+  * **Scrolls** preview to show source element at caret
+  * **Moves caret** to source line of element clicked in preview
+* Also does **completions, refactoring, validation, language injections, code folding**
+* **Fully configurable** by project with support for scopes
+* Understands **GitHub wiki** nuances
+* Conversion between HTML and Markdown
+
+[Markdown]: http://daringfireball.net/projects/markdown"
+````````````````````````````````
+
+

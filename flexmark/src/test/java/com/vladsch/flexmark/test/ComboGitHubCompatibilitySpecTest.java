@@ -28,7 +28,7 @@ public class ComboGitHubCompatibilitySpecTest extends ComboExtraSpecTest {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<>();
     static {
-
+        optionsMap.put("no-loose-non-list-children", new MutableDataSet().set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, false).set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, false));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

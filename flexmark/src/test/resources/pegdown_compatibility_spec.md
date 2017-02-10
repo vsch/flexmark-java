@@ -2716,3 +2716,130 @@ Document[0, 235]
 ````````````````````````````````
 
 
+## Issues
+
+options for plain text rendering
+
+```````````````````````````````` example Issues: 1
+* Enable Auto Indent Lines after move line/selection up or down actions to have them indented
+  automatically.
+* Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will
+  match case and style of identifier at destination when you paste, undo to get results before
+  MIA adjusted them. Copy `myColumnData` and paste it over `DEFAULT_VALUE` to get `COLUMN_DATA`,
+  reverse the order and get `myDefaultValue`. Works when pasting at the **beginning**, **end**
+  and **middle** of identifiers.
+
+    Supports: **camelCase**, **PascalCase**, **snake_case**, **SCREAMING_SNAKE_CASE**,
+    **dash-case**, **dot.case**, **slash/case**
+
+    Default prefixes: `my`, `our`, `is`, `get`, `set` to allow pasting over member fields,
+    static fields, getters and setters.
+* Enable Auto Line Selections and select full lines without loosing time or column position by
+  moving the caret to the start of line when selecting or pasting. **Choose** whether you want
+  to **paste full line** selections: **above** or **below** the current line regardless of the
+  caret's column.
+.
+<ul>
+    <li>Enable Auto Indent Lines after move line/selection up or down actions to have them indented automatically.</li>
+    <li>Use Smart Paste to eliminate case change and prefix edits when pasting identifiers. MIA will match case and style of identifier at destination when you paste, undo to get results before MIA adjusted them. Copy <code>myColumnData</code> and paste it over <code>DEFAULT_VALUE</code> to get <code>COLUMN_DATA</code>, reverse the order and get <code>myDefaultValue</code>. Works when pasting at the <strong>beginning</strong>, <strong>end</strong> and <strong>middle</strong> of identifiers.
+    <p>Supports: <strong>camelCase</strong>, <strong>PascalCase</strong>, <strong>snake_case</strong>, <strong>SCREAMING_SNAKE_CASE</strong>, <strong>dash-case</strong>, <strong>dot.case</strong>, <strong>slash/case</strong></p>
+    <p>Default prefixes: <code>my</code>, <code>our</code>, <code>is</code>, <code>get</code>, <code>set</code> to allow pasting over member fields, static fields, getters and setters.</p>
+    </li>
+    <li>Enable Auto Line Selections and select full lines without loosing time or column position by moving the caret to the start of line when selecting or pasting. <strong>Choose</strong> whether you want to <strong>paste full line</strong> selections: <strong>above</strong> or <strong>below</strong> the current line regardless of the caret's column.</li>
+</ul>
+.
+Document[0, 1096]
+  BulletList[0, 1096] isTight
+    BulletListItem[0, 111] open:[0, 1, "*"] isTight
+      Paragraph[2, 111]
+        Text[2, 93] chars:[2, 93, "Enabl … ented"]
+        SoftLineBreak[93, 94]
+        Text[96, 110] chars:[96, 110, "autom … ally."]
+    BulletListItem[111, 794] open:[111, 112, "*"] isTight hadBlankLineAfter
+      Paragraph[113, 526] isTrailingBlankLine
+        Text[113, 205] chars:[113, 205, "Use S …  will"]
+        SoftLineBreak[205, 206]
+        Text[208, 300] chars:[208, 300, "match … efore"]
+        SoftLineBreak[300, 301]
+        Text[303, 327] chars:[303, 327, "MIA a … Copy "]
+        Code[327, 341] textOpen:[327, 328, "`"] text:[328, 340, "myCol … umnData"] textClose:[340, 341, "`"]
+        Text[341, 360] chars:[341, 360, " and  … over "]
+        Code[360, 375] textOpen:[360, 361, "`"] text:[361, 374, "DEFAU … LT_VALUE"] textClose:[374, 375, "`"]
+        Text[375, 383] chars:[375, 383, " to get "]
+        Code[383, 396] textOpen:[383, 384, "`"] text:[384, 395, "COLUM … N_DATA"] textClose:[395, 396, "`"]
+        Text[396, 397] chars:[396, 397, ","]
+        SoftLineBreak[397, 398]
+        Text[400, 426] chars:[400, 426, "rever …  get "]
+        Code[426, 442] textOpen:[426, 427, "`"] text:[427, 441, "myDef … aultValue"] textClose:[441, 442, "`"]
+        Text[442, 470] chars:[442, 470, ". Wor …  the "]
+        StrongEmphasis[470, 483] textOpen:[470, 472, "**"] text:[472, 481, "beginning"] textClose:[481, 483, "**"]
+          Text[472, 481] chars:[472, 481, "beginning"]
+        Text[483, 485] chars:[483, 485, ", "]
+        StrongEmphasis[485, 492] textOpen:[485, 487, "**"] text:[487, 490, "end"] textClose:[490, 492, "**"]
+          Text[487, 490] chars:[487, 490, "end"]
+        SoftLineBreak[492, 493]
+        Text[495, 499] chars:[495, 499, "and "]
+        StrongEmphasis[499, 509] textOpen:[499, 501, "**"] text:[501, 507, "middle"] textClose:[507, 509, "**"]
+          Text[501, 507] chars:[501, 507, "middle"]
+        Text[509, 525] chars:[509, 525, " of i … iers."]
+      Paragraph[531, 662] isTrailingBlankLine
+        Text[531, 541] chars:[531, 541, "Supports: "]
+        StrongEmphasis[541, 554] textOpen:[541, 543, "**"] text:[543, 552, "camelCase"] textClose:[552, 554, "**"]
+          Text[543, 552] chars:[543, 552, "camelCase"]
+        Text[554, 556] chars:[554, 556, ", "]
+        StrongEmphasis[556, 570] textOpen:[556, 558, "**"] text:[558, 568, "PascalCase"] textClose:[568, 570, "**"]
+          Text[558, 568] chars:[558, 568, "PascalCase"]
+        Text[570, 572] chars:[570, 572, ", "]
+        StrongEmphasis[572, 586] textOpen:[572, 574, "**"] text:[574, 584, "snake_case"] textClose:[584, 586, "**"]
+          Text[574, 584] chars:[574, 584, "snake_case"]
+        Text[586, 588] chars:[586, 588, ", "]
+        StrongEmphasis[588, 612] textOpen:[588, 590, "**"] text:[590, 610, "SCREAMING_SNAKE_CASE"] textClose:[610, 612, "**"]
+          Text[590, 610] chars:[590, 610, "SCREA … _CASE"]
+        Text[612, 613] chars:[612, 613, ","]
+        SoftLineBreak[613, 614]
+        StrongEmphasis[618, 631] textOpen:[618, 620, "**"] text:[620, 629, "dash-case"] textClose:[629, 631, "**"]
+          Text[620, 629] chars:[620, 629, "dash-case"]
+        Text[631, 633] chars:[631, 633, ", "]
+        StrongEmphasis[633, 645] textOpen:[633, 635, "**"] text:[635, 643, "dot.case"] textClose:[643, 645, "**"]
+          Text[635, 643] chars:[635, 643, "dot.case"]
+        Text[645, 647] chars:[645, 647, ", "]
+        StrongEmphasis[647, 661] textOpen:[647, 649, "**"] text:[649, 659, "slash/case"] textClose:[659, 661, "**"]
+          Text[649, 659] chars:[649, 659, "slash/case"]
+      Paragraph[667, 794]
+        Text[667, 685] chars:[667, 685, "Defau … xes: "]
+        Code[685, 689] textOpen:[685, 686, "`"] text:[686, 688, "my"] textClose:[688, 689, "`"]
+        Text[689, 691] chars:[689, 691, ", "]
+        Code[691, 696] textOpen:[691, 692, "`"] text:[692, 695, "our"] textClose:[695, 696, "`"]
+        Text[696, 698] chars:[696, 698, ", "]
+        Code[698, 702] textOpen:[698, 699, "`"] text:[699, 701, "is"] textClose:[701, 702, "`"]
+        Text[702, 704] chars:[702, 704, ", "]
+        Code[704, 709] textOpen:[704, 705, "`"] text:[705, 708, "get"] textClose:[708, 709, "`"]
+        Text[709, 711] chars:[709, 711, ", "]
+        Code[711, 716] textOpen:[711, 712, "`"] text:[712, 715, "set"] textClose:[715, 716, "`"]
+        Text[716, 753] chars:[716, 753, " to a … elds,"]
+        SoftLineBreak[753, 754]
+        Text[758, 793] chars:[758, 793, "stati … ters."]
+    BulletListItem[794, 1096] open:[794, 795, "*"] isTight
+      Paragraph[796, 1096]
+        Text[796, 888] chars:[796, 888, "Enabl … on by"]
+        SoftLineBreak[888, 889]
+        Text[891, 956] chars:[891, 956, "movin … ing. "]
+        StrongEmphasis[956, 966] textOpen:[956, 958, "**"] text:[958, 964, "Choose"] textClose:[964, 966, "**"]
+          Text[958, 964] chars:[958, 964, "Choose"]
+        Text[966, 983] chars:[966, 983, " whet …  want"]
+        SoftLineBreak[983, 984]
+        Text[986, 989] chars:[986, 989, "to "]
+        StrongEmphasis[989, 1008] textOpen:[989, 991, "**"] text:[991, 1006, "paste full line"] textClose:[1006, 1008, "**"]
+          Text[991, 1006] chars:[991, 1006, "paste …  line"]
+        Text[1008, 1021] chars:[1008, 1021, " sele … ons: "]
+        StrongEmphasis[1021, 1030] textOpen:[1021, 1023, "**"] text:[1023, 1028, "above"] textClose:[1028, 1030, "**"]
+          Text[1023, 1028] chars:[1023, 1028, "above"]
+        Text[1030, 1034] chars:[1030, 1034, " or "]
+        StrongEmphasis[1034, 1043] textOpen:[1034, 1036, "**"] text:[1036, 1041, "below"] textClose:[1041, 1043, "**"]
+          Text[1036, 1041] chars:[1036, 1041, "below"]
+        Text[1043, 1078] chars:[1043, 1078, " the  … f the"]
+        SoftLineBreak[1078, 1079]
+        Text[1081, 1096] chars:[1081, 1096, "caret … lumn."]
+````````````````````````````````
+
+
