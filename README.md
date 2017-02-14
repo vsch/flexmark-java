@@ -22,8 +22,8 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
   [Usage: PDF Output](../../wiki/Usage#pdf-output) using [Open HTML To PDF]
-* Typographic Extension
-  Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic) implemented
+* [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
+  implemented
 * [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
 * [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)

@@ -36,6 +36,7 @@
       <element id="module-output" name="flexmark-ext-jekyll-tag" />
       <element id="module-output" name="flexmark-html-parser" />
       <element id="module-output" name="flexmark-formatter" />
+      <element id="module-output" name="flexmark-pdf-converter" />
     </root>
   </artifact>
 </component>
