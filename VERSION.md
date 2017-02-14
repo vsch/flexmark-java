@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.15.0](#0150)
 - [0.14.0](#0140)
 - [0.13.7](#0137)
 - [0.13.6](#0136)
@@ -118,9 +119,13 @@ flexmark-java
   * Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
-* [ ] Add: PDF renderer
-
 &nbsp;</details>
+
+0.15.0
+------
+
+* Add: PDF converter extension
+  [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output)
 
 0.14.0
 ------

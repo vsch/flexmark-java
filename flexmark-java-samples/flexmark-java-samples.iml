@@ -40,5 +40,11 @@
     <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
     <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-pdf-converter" />
+    <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.io:2.4" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC9" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC9" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC9" level="project" />
+    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC9" level="project" />
   </component>
 </module>

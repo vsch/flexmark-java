@@ -19,13 +19,7 @@ import java.util.Set;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 public class JiraConverterNodeRenderer implements NodeRenderer
-        // , PhasedNodeRenderer
 {
-    private static String fromChars = " +/<>";
-    private static String toChars = "-----";
-
-    // private final JiraConverterOptions options;
-
     private final ReferenceRepository referenceRepository;
     private final ListOptions listOptions;
     private int inBlockQuote = 0;

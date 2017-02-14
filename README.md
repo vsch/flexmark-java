@@ -20,8 +20,10 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Latest Additions
 
-* [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
-  implemented
+* [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
+  [Usage: PDF Output](../../wiki/Usage#pdf-output) using [Open HTML To PDF]
+* Typographic Extension
+  Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic) implemented
 * [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
 * [Jekyll tags Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#jekyll-tags)
 * [HTML to Markdown Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#html-to-markdown)
@@ -508,4 +510,5 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
+[Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
 
