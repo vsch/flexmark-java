@@ -146,7 +146,7 @@ flexmark-java
 ------
 
 * Fix: Implement `TypographicExtension` to convert smarts and quotes conversion:
-  * `'` to apostrophe `&apos;` &apos;
+  * `'` to apostrophe `&apos;` &rsquo;
   * `...` and `. . .` to ellipsis `&hellip;` &hellip;
   * `--` en dash `&ndash;` &ndash;
   * `---` em dash `&mdash;` &mdash;
