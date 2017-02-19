@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.15.2](#0152)
 - [0.15.1](#0151)
 - [0.15.0](#0150)
 - [0.14.0](#0140)
@@ -120,6 +121,11 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.15.2
+------
+
+* Change: flexmark-parent renamed to flexmark-all
 
 0.15.1
 ------

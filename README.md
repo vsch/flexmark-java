@@ -20,6 +20,8 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Latest Additions
 
+* flexmark-all module that includes: core, all extensions, formatter, JIRA and YouTrack
+  converters, pegdown profile module and HTML to Markdown conversion.
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
   [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output) using [Open HTML To PDF]
 * [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" filepath="$PROJECT_DIR$/FlexmarkJavaAssets/Samples/Samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark/flexmark.iml" filepath="$PROJECT_DIR$/flexmark/flexmark.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-all/flexmark-parent.iml" filepath="$PROJECT_DIR$/flexmark-all/flexmark-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" filepath="$PROJECT_DIR$/flexmark-ext-abbreviation/flexmark-ext-abbreviation.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" filepath="$PROJECT_DIR$/flexmark-ext-anchorlink/flexmark-ext-anchorlink.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" filepath="$PROJECT_DIR$/flexmark-ext-aside/flexmark-ext-aside.iml" />
@@ -35,7 +36,6 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" filepath="$PROJECT_DIR$/flexmark-java-samples/flexmark-java-samples.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" filepath="$PROJECT_DIR$/flexmark-jira-converter/flexmark-jira-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" filepath="$PROJECT_DIR$/flexmark-jira-parser/flexmark-jira-parser.iml" />
-      <module fileurl="file://$PROJECT_DIR$/flexmark-parent/flexmark-parent.iml" filepath="$PROJECT_DIR$/flexmark-parent/flexmark-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-pdf-converter/flexmark-pdf-converter.iml" filepath="$PROJECT_DIR$/flexmark-pdf-converter/flexmark-pdf-converter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" filepath="$PROJECT_DIR$/flexmark-profile-pegdown/flexmark-profile-pegdown.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-test-suite/flexmark-test-suite.iml" />
