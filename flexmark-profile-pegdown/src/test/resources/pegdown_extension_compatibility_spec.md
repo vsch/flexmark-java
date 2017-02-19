@@ -471,7 +471,7 @@ nested task item
   <li>item 1</li>
   <li>item 2
     <ul>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2.1</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2.1</li>
       <li>item 2.2</li>
     </ul>
   </li>
@@ -493,7 +493,7 @@ task item, nested
 <ul>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2
     <ul>
       <li>item 2.1</li>
       <li>item 2.2</li>
@@ -517,10 +517,10 @@ task item, nested task item
 <ul>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2
     <ul>
       <li>item 2.1</li>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2.2</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2.2</li>
     </ul>
   </li>
   <li>item 3</li>
@@ -542,12 +542,12 @@ A bullet list after an ordered list
 <ol>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />tem 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;tem 3</li>
 </ol>
 <ul>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
 </ul>
 ````````````````````````````````
 
@@ -1956,12 +1956,12 @@ An ordered list after bullet list
 <ul>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
 </ul>
 <ol>
   <li>item 1</li>
   <li>item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
 </ol>
 ````````````````````````````````
 
@@ -2720,9 +2720,9 @@ one = 1 + line
 - [x] task item
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
 </ul>
 ````````````````````````````````
 
@@ -2733,9 +2733,9 @@ one = 1 + line
 1. [x] task item
 .
 <ol>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
 </ol>
 ````````````````````````````````
 

@@ -123,7 +123,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public HtmlFormattingAppendable withAttr() {
+    public T withAttr() {
         withAttributes = true;
         return (T) this;
     }
@@ -454,25 +454,25 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public FormattingAppendable addPrefix(final CharSequence prefix) {
+    public T addPrefix(final CharSequence prefix) {
         out.addPrefix(prefix);
         return (T) this;
     }
 
     @Override
-    public FormattingAppendable pushPrefix() {
+    public T pushPrefix() {
         out.pushPrefix();
         return (T) this;
     }
 
     @Override
-    public FormattingAppendable popPrefix() {
+    public T popPrefix() {
         out.popPrefix();
         return (T) this;
     }
 
     @Override
-    public FormattingAppendable addAfterEolRunnable(final int atPendingEOL, final Runnable runnable) {
+    public T addAfterEolRunnable(final int atPendingEOL, final Runnable runnable) {
         out.addAfterEolRunnable(atPendingEOL, runnable);
         return (T) this;
     }
@@ -493,19 +493,19 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public FormattingAppendable repeat(final char c, final int count) {
+    public T repeat(final char c, final int count) {
         out.repeat(c, count);
         return (T) this;
     }
 
     @Override
-    public FormattingAppendable repeat(final CharSequence csq, final int count) {
+    public T repeat(final CharSequence csq, final int count) {
         out.repeat(csq, count);
         return (T) this;
     }
 
     @Override
-    public FormattingAppendable repeat(final CharSequence csq, final int start, final int end, final int count) {
+    public T repeat(final CharSequence csq, final int start, final int end, final int count) {
         out.repeat(csq, start, end, count);
         return (T) this;
     }
@@ -539,7 +539,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public FormattingAppendable lastOffset(final Ref<Integer> refOffset) { return out.lastOffset(refOffset); }
+    public T lastOffset(final Ref<Integer> refOffset) { out.lastOffset(refOffset); return (T)this; }
 
     @Override
     public int lastOffset() { return out.lastOffset(); }

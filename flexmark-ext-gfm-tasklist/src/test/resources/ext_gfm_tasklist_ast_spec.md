@@ -35,7 +35,7 @@ task list item
 - [ ]abc
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />abc</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;abc</li>
 </ul>
 .
 Document[0, 9]
@@ -150,19 +150,19 @@ empty task list items
 + [X]
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" /></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;</li>
 </ul>
 .
 Document[0, 62]
@@ -199,25 +199,25 @@ non empty task list items
 + [X] task
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
 Document[0, 103]
@@ -272,25 +272,25 @@ non empty task list items with inlines
 + [X] task **emphasis**
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
 </ul>
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></p>
   </li>
 </ul>
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task <strong>emphasis</strong></li>
 </ul>
 .
 Document[0, 220]
@@ -361,18 +361,18 @@ nested task items
   <li>
     <p>non-task item</p>
     <ul>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
     </ul>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item
     <ul>
-      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item</li>
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item</li>
     </ul>
     </p>
   </li>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task item
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task item
     <ul>
       <li>non task item</li>
     </ul>
@@ -415,8 +415,8 @@ task list item class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
 Document[0, 21]
@@ -439,10 +439,10 @@ task list item class on loose list
 .
 <ul>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
 </ul>
 .
@@ -464,8 +464,8 @@ loose task list item class
 - [x] task
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
 Document[0, 21]
@@ -488,10 +488,10 @@ loose task list item class on loose list
 .
 <ul>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li>
-    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
+    <p><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
 </ul>
 .
@@ -513,8 +513,8 @@ task list item class and p class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
 Document[0, 21]
@@ -537,10 +537,10 @@ task list item class and p class on loose list
 .
 <ul>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
 </ul>
 .
@@ -562,7 +562,7 @@ custom marker task list item class and p class
 - [x] task
 .
 <ul>
-  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
+  <li><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
   <li><span class="taskitem">X</span>task</li>
 </ul>
 .
@@ -586,7 +586,7 @@ task list item class and p class on loose list
 .
 <ul>
   <li>
-    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</p>
+    <p class="task-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</p>
   </li>
   <li>
     <p class="task-item"><span class="taskitem">X</span>task</p>
@@ -660,8 +660,8 @@ task list item on ordered list item
 2. [x] task
 .
 <ol>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ol>
 .
 Document[0, 24]
@@ -710,7 +710,7 @@ content indent is after task marker
 .
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task
     <p>paragraph child item</p>
     </p>
   </li>
@@ -741,7 +741,7 @@ content indent is after task marker
 .
 <ul>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task
     <p>paragraph child item</p>
     </p>
   </li>
@@ -749,7 +749,7 @@ content indent is after task marker
 <!-- -->
 <ol>
   <li class="task-list-item">
-    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task
     <p>paragraph child item</p>
     </p>
   </li>
@@ -836,7 +836,7 @@ when content indent > code indent becomes code
   <pre><code>task
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code> task
 </code></pre>
   </li>
@@ -847,7 +847,7 @@ when content indent > code indent becomes code
   <pre><code>task
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code>task
 </code></pre>
   </li>
@@ -878,13 +878,13 @@ Document[0, 66]
 - [x] task
 .
 <ol>
-  <li class="task-list-item" md-pos="7-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item" md-pos="19-24"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="7-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item" md-pos="19-24"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ol>
 <!-- -->
 <ul>
-  <li class="task-list-item" md-pos="39-44"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />task</li>
-  <li class="task-list-item" md-pos="50-54"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" />task</li>
+  <li class="task-list-item" md-pos="39-44"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;task</li>
+  <li class="task-list-item" md-pos="50-54"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;task</li>
 </ul>
 .
 Document[0, 54]
@@ -918,13 +918,13 @@ with multiple lazy lines
 all should be src pos wrapped
 .
 <ol>
-  <li class="task-list-item" md-pos="0-67"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span>
+  <li class="task-list-item" md-pos="0-67"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="7-11">item</span>
   <span md-pos="12-36">with multiple lazy lines</span>
   <span md-pos="37-66">all should be src pos wrapped</span></li>
 </ol>
 <!-- -->
 <ul>
-  <li class="task-list-item" md-pos="76-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="82-86">item</span>
+  <li class="task-list-item" md-pos="76-141"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="82-86">item</span>
   <span md-pos="87-111">with multiple lazy lines</span>
   <span md-pos="112-141">all should be src pos wrapped</span></li>
 </ul>
@@ -967,10 +967,10 @@ all should be src pos wrapped
 .
 <ol>
   <li class="task-list-item">
-    <p md-pos="0-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="7-11">item</span></p>
+    <p md-pos="0-12"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="7-11">item</span></p>
   </li>
   <li class="task-list-item">
-    <p md-pos="13-80"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="20-24">item</span>
+    <p md-pos="13-80"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="20-24">item</span>
     <span md-pos="25-49">with multiple lazy lines</span>
     <span md-pos="50-79">all should be src pos wrapped</span></p>
   </li>
@@ -978,10 +978,10 @@ all should be src pos wrapped
 <!-- -->
 <ul>
   <li class="task-list-item">
-    <p md-pos="89-100"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="95-99">item</span></p>
+    <p md-pos="89-100"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="95-99">item</span></p>
   </li>
   <li class="task-list-item">
-    <p md-pos="101-166"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><span md-pos="107-111">item</span>
+    <p md-pos="101-166"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;<span md-pos="107-111">item</span>
     <span md-pos="112-136">with multiple lazy lines</span>
     <span md-pos="137-166">all should be src pos wrapped</span></p>
   </li>
@@ -1027,27 +1027,27 @@ Deep indent testing, commonmark
 * [ ]         item 9
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code>item 5
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code> item 6
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code>  item 7
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code>   item 8
 </code></pre>
   </li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;
   <pre><code>    item 9
 </code></pre>
   </li>
@@ -1095,15 +1095,15 @@ Deep indent testing, kramdown
 * [ ]         item 9
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 5</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 6</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 7</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 8</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 9</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 5</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 6</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 7</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 8</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 9</li>
 </ul>
 .
 Document[0, 152]
@@ -1153,15 +1153,15 @@ Deep indent testing, markdown
 * [ ]         item 9
 .
 <ul>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 1</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 2</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 3</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 4</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 5</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 6</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 7</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 8</li>
-  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />item 9</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 3</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 4</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 5</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 6</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 7</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 8</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;item 9</li>
 </ul>
 .
 Document[0, 152]

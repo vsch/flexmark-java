@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="false" type="JAVA_MODULE" version="4">
+  <component name="FlexmarkExt.ModuleBuildProperties">
+    <option name="extensionName" value="JiraConverter" />
+    <option name="extensionPackage" value="com.vladsch.flexmark.jira.converter" />
+    <option name="delimiterProcessor" value="false" />
+    <option name="blockParser" value="false" />
+    <option name="blockPreProcessor" value="false" />
+    <option name="linkRefProcessor" value="false" />
+    <option name="paragraphPreProcessor" value="false" />
+    <option name="nodePostProcessor" value="false" />
+    <option name="documentPostProcessor" value="false" />
+    <option name="customBlockNode" value="false" />
+    <option name="customNode" value="false" />
+    <option name="customNodeRepository" value="false" />
+    <option name="customProperties" value="false" />
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
-    <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -20,33 +34,27 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
+    <orderEntry type="module" module-name="flexmark-ext-ins" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" />
+    <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-tables" />
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" />
-    <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
-    <orderEntry type="module" module-name="flexmark-integration-test" />
-    <orderEntry type="module" module-name="flexmark-jira-converter" />
-    <orderEntry type="module" module-name="flexmark-jira-parser" />
-    <orderEntry type="module" module-name="flexmark-test-util" />
-    <orderEntry type="module" module-name="flexmark-util" />
-    <orderEntry type="module" module-name="flexmark-profile-pegdown" />
-    <orderEntry type="module" module-name="flexmark-test-suite" />
-    <orderEntry type="module" module-name="flexmark-youtrack-converter" />
-    <orderEntry type="module" module-name="flexmark-ext-ins" />
-    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
-    <orderEntry type="module" module-name="flexmark-ext-superscript" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" />
+    <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark-formatter" />
-    <orderEntry type="module" module-name="flexmark-pdf-converter" />
-    <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.io:2.4" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-core:0.0.1-RC9" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-jsoup-dom-converter:0.0.1-RC9" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC9" level="project" />
-    <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC9" level="project" />
+    <orderEntry type="module" module-name="flexmark-formatter-test-suite" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
+    <orderEntry type="module" module-name="flexmark-integration-test" />
     <orderEntry type="module" module-name="flexmark-java" />
+    <orderEntry type="module" module-name="flexmark-java-samples" />
+    <orderEntry type="module" module-name="flexmark-jira-converter" />
+    <orderEntry type="module" module-name="flexmark-pdf-converter" />
+    <orderEntry type="module" module-name="flexmark-profile-pegdown" />
+    <orderEntry type="module" module-name="flexmark-util" />
+    <orderEntry type="module" module-name="flexmark-youtrack-converter" />
   </component>
 </module>

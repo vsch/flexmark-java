@@ -1,5 +1,5 @@
 <component name="MarkdownNavigator.ProfileManager">
-  <settings default="">
+  <settings default="" pdf-export="">
     <scope-profiles>
       <element scope="Flexmark Ext Overview" profile="OVERVIEW" />
     </scope-profiles>

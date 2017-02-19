@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.15.1](#0151)
 - [0.15.0](#0150)
 - [0.14.0](#0140)
 - [0.13.7](#0137)
@@ -87,7 +88,6 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
-
 &nbsp;</details><details id="version-history"><summary>**To Do**</summary>
 
 ## To Do
@@ -120,6 +120,15 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.15.1
+------
+
+* Fix: default gfm task list item to include `&nbsp;` spacer after input check box and add
+  `readonly` attribute
+
+* Add: flexmark-parent artifact with classifier `-lib` to create a jar with all core, extension
+  and conversion modules
 
 0.15.0
 ------
