@@ -174,6 +174,19 @@ public class PegdownOptions {
 
 ### Markdown Processor Emulation
 
+Despite its name, commonmark is neither a superset nor a subset of other markdown flavors.
+Rather, it proposes a standard, unambiguous syntax specification for the original, "core"
+Markdown, thus effectively introducing yet another flavor. While flexmark is by default
+commonmark compliant, its parser can be tweaked in various ways. The sets of tweaks required to
+emulate the most commonly used markdown parsers around are available in flexmark as
+ParserEmulationProfiles.
+
+As the name `ParserEmulationProfile` implies, it's only the parser that is adjusted to the
+specific markdown flavor. Applying the profile does not add features beyond those available in
+commonmark. If you want to use flexmark to fully emulate another markdown processor's behavior,
+you have to adjust the parser and configure the flexmark extensions that provide the additional
+features available in the parser that you want to emulate.
+
 Latest addition was a rewrite of the list parser to better control emulation of other markdown
 processors as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md). Addition of
 processor presets to emulate specific markdown processing behaviour of these parsers is on a
