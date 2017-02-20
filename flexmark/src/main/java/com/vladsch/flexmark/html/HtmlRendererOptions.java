@@ -19,6 +19,7 @@ public class HtmlRendererOptions {
     public final boolean renderHeaderId;
     public final boolean generateHeaderIds;
     public final String languageClassPrefix;
+    public final String noLanguageClass;
     public final String sourcePositionAttribute;
     public final boolean sourcePositionParagraphLines;
     public final boolean sourceWrapHtmlBlocks;
@@ -43,6 +44,7 @@ public class HtmlRendererOptions {
         renderHeaderId = HtmlRenderer.RENDER_HEADER_ID.getFrom(options);
         generateHeaderIds = HtmlRenderer.GENERATE_HEADER_ID.getFrom(options);
         languageClassPrefix = HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX.getFrom(options);
+        noLanguageClass = HtmlRenderer.FENCED_CODE_NO_LANGUAGE_CLASS.getFrom(options);
         sourcePositionAttribute = HtmlRenderer.SOURCE_POSITION_ATTRIBUTE.getFrom(options);
         sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES.getFrom(options);
         sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS.getFrom(options);

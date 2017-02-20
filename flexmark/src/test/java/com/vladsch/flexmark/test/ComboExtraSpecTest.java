@@ -64,6 +64,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("suppress-inline-html", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML, true));
         optionsMap.put("suppress-inline-html-comments", new MutableDataSet().set(HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS, true));
         optionsMap.put("no-class-prefix", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, ""));
+        optionsMap.put("no-language-class", new MutableDataSet().set(HtmlRenderer.FENCED_CODE_NO_LANGUAGE_CLASS, "nohighlight"));
         //optionsMap.put("parse-anchor-links", new MutableDataSet().set(Parser.PARSE_INLINE_ANCHOR_LINKS, true));
         optionsMap.put("parse-inner-comments", new MutableDataSet().set(Parser.PARSE_INNER_HTML_COMMENTS, true));
         optionsMap.put("multi-line-image-url", new MutableDataSet().set(Parser.PARSE_MULTI_LINE_IMAGE_URLS, true));

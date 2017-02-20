@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.15.3](#0153)
 - [0.15.2](#0152)
 - [0.15.1](#0151)
 - [0.15.0](#0150)
@@ -89,6 +90,7 @@ flexmark-java
 - [0.1.1](#011)
 - [0.1.0](#010)
 
+
 &nbsp;</details><details id="version-history"><summary>**To Do**</summary>
 
 ## To Do
@@ -121,6 +123,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.15.3
+------
+
+* Add: default class option for fenced code and indented code
+  `HtmlRenderer.FENCED_CODE_NO_LANGUAGE_CLASS` which can be used to disable highlighting if info
+  not specified for fenced code or in indented code.
 
 0.15.2
 ------

@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.vladsch.flexmark</groupId>
         <artifactId>flexmark-java</artifactId>
-        <version>0.15.2</version>
+        <version>0.15.3</version>
     </parent>
 
     <artifactId>flexmark-ext-toc</artifactId>
@@ -28,10 +28,6 @@
             <groupId>com.vladsch.flexmark</groupId>
             <artifactId>flexmark-test-util</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vladsch.flexmark</groupId>
-            <artifactId>flexmark-formatter</artifactId>
         </dependency>
     </dependencies>
 </project>

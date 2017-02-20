@@ -295,6 +295,11 @@ public class CoreNodeRenderer implements NodeRenderer {
                 language = info.subSequence(0, space);
             }
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
+        } else  {
+            String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
+            if (!noLanguageClass.isEmpty()) {
+                html.attr("class", noLanguageClass);
+            }
         }
 
         html.srcPosWithEOL(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
@@ -311,6 +316,12 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) {
         html.line();
         html.srcPosWithEOL(node.getChars()).withAttr().tag("pre").openPre();
+
+        String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
+        if (!noLanguageClass.isEmpty()) {
+            html.attr("class", noLanguageClass);
+        }
+
         html.srcPosWithEOL(node.getContentChars()).withAttr(CODE_CONTENT).tag("code");
         html.text(node.getContentChars().trimTailBlankLines().normalizeEndWithEOL());
         html.tag("/code");

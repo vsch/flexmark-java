@@ -3609,9 +3609,37 @@ Document[0, 22]
 ````````````````````````````````
 
 
+no info with custom class
+
+```````````````````````````````` example(Fenced Code Options: 2) options(no-language-class)
+```
+plain text
+```
+.
+<pre><code class="nohighlight">plain text
+</code></pre>
+.
+Document[0, 18]
+  FencedCodeBlock[0, 18] open:[0, 3, "```"] content:[4, 15] lines[1] close:[15, 18, "```"]
+````````````````````````````````
+
+
+indented code with custom class
+
+```````````````````````````````` example(Fenced Code Options: 3) options(no-language-class)
+    plain text
+.
+<pre><code class="nohighlight">plain text
+</code></pre>
+.
+Document[0, 14]
+  IndentedCodeBlock[4, 14]
+````````````````````````````````
+
+
 empty, no info
 
-```````````````````````````````` example Fenced Code Options: 2
+```````````````````````````````` example Fenced Code Options: 4
 ```
 
 ```
@@ -3626,7 +3654,7 @@ Document[0, 9]
 
 empty, no info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 3
+```````````````````````````````` example Fenced Code Options: 5
 ```
 
 ```
@@ -3642,7 +3670,7 @@ Document[0, 10]
 
 empty, info
 
-```````````````````````````````` example Fenced Code Options: 4
+```````````````````````````````` example Fenced Code Options: 6
 ```info
 
 ```
@@ -3657,7 +3685,7 @@ Document[0, 13]
 
 empty, info, blank line follows
 
-```````````````````````````````` example Fenced Code Options: 5
+```````````````````````````````` example Fenced Code Options: 7
 ```info
 
 ```
@@ -3673,7 +3701,7 @@ Document[0, 14]
 
 Unclosed Fenced code should take all input to end
 
-```````````````````````````````` example Fenced Code Options: 6
+```````````````````````````````` example Fenced Code Options: 8
 ```
 sample 
 unclosed
@@ -5354,6 +5382,7 @@ Document[0, 69]
   Paragraph[58, 69]
     Text[58, 67] chars:[58, 67, "paragraph"]
 ````````````````````````````````
+
 
 Issue #55, Indented Link Reference Definitions not parsed correctly
 
