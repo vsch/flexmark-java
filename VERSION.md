@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.15.4](#0154)
 - [0.15.3](#0153)
 - [0.15.2](#0152)
 - [0.15.1](#0151)
@@ -124,6 +125,19 @@ flexmark-java
 
 &nbsp;</details>
 
+0.15.4
+------
+
+Fix: #62, Autolinks extension for http:// and https:// links includes trailing spaces
+
+Fix: #60, Kramdown parser discrepancy for mismatched ordered/ unordered list items. Now if both
+`LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST` and `LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST` are set to
+true then a new list will be created if the item had a blank line, otherwise a sub-list is
+created.
+
+Change: `Kramdown` profile to set `LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST` so that parsing of
+mismatched item type starts a new list.
+
 0.15.3
 ------
 
@@ -142,7 +156,7 @@ flexmark-java
 * Fix: default gfm task list item to include `&nbsp;` spacer after input check box and add
   `readonly` attribute
 
-* Add: flexmark-parent artifact with classifier `-lib` to create a jar with all core, extension
+* Add: flexmark-parent artifact with classifier `lib` to create a jar with all core, extension
   and conversion modules
 
 0.15.0

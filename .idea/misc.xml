@@ -56,7 +56,6 @@
         <option value="$PROJECT_DIR$/flexmark-html-parser/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-integration-test/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-jira-converter/pom.xml" />
-        <option value="$PROJECT_DIR$/flexmark-parent/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-pdf-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-profile-pegdown/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-test-util/pom.xml" />

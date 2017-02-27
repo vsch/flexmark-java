@@ -22,6 +22,7 @@ public class EmojiCheatSheet {
     public static final HashMap<String, EmojiShortcut> shortCutMap = new HashMap<>();
     public static final HashMap<String, EmojiShortcut> fileMap = new HashMap<>();
     public static final HashMap<String, EmojiShortcut> gitHubUrlMap = new HashMap<>();
+
     static {
         shortCutMap.put("+1", new EmojiShortcut("+1", "plus1.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png", "people"));
         shortCutMap.put("-1", new EmojiShortcut("-1", "-1.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f44e.png", "people"));

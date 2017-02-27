@@ -219,7 +219,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
         return old;
     }
 
-    public V computeIfAbsent(K k, Function<? super K, ? extends V> runnableValue) {
+    public V computeIfMissing(K k, Function<? super K, ? extends V> runnableValue) {
         int index = keySet.indexOf(k);
         if (index == -1) {
             V v = runnableValue.apply(k);

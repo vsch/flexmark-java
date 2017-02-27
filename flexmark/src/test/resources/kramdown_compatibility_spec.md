@@ -112,6 +112,56 @@ Document[0, 35]
 ````````````````````````````````
 
 
+Test how mismatches in item types are handled
+
+```````````````````````````````` example Mismatched List Item Type Handling: 3
+- Bullet List
+
+1. With Ordered Item
+.
+<ul>
+    <li>Bullet List</li>
+</ul>
+<ol>
+    <li>With Ordered Item</li>
+</ol>
+.
+Document[0, 36]
+  BulletList[0, 14] isTight
+    BulletListItem[0, 14] open:[0, 1, "-"] isTight hadBlankLineAfter
+      Paragraph[2, 14] isTrailingBlankLine
+        Text[2, 13] chars:[2, 13, "Bulle …  List"]
+  OrderedList[15, 36] isTight delimiter:'.'
+    OrderedListItem[15, 36] open:[15, 17, "1."] isTight
+      Paragraph[18, 36]
+        Text[18, 35] chars:[18, 35, "With  …  Item"]
+````````````````````````````````
+
+
+```````````````````````````````` example Mismatched List Item Type Handling: 4
+1. Ordered Item
+
+- With Bullet List
+.
+<ol>
+    <li>Ordered Item</li>
+</ol>
+<ul>
+    <li>With Bullet List</li>
+</ul>
+.
+Document[0, 36]
+  OrderedList[0, 16] isTight delimiter:'.'
+    OrderedListItem[0, 16] open:[0, 2, "1."] isTight hadBlankLineAfter
+      Paragraph[3, 16] isTrailingBlankLine
+        Text[3, 15] chars:[3, 15, "Order …  Item"]
+  BulletList[17, 36] isTight
+    BulletListItem[17, 36] open:[17, 18, "-"] isTight
+      Paragraph[19, 36]
+        Text[19, 35] chars:[19, 35, "With  …  List"]
+````````````````````````````````
+
+
 ## Loose Item Handling
 
 Tests how all tight items are generated

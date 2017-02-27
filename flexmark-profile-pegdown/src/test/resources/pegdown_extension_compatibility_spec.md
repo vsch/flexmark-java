@@ -2435,7 +2435,7 @@ real life table
     <tr><td align="left">     Auto delete empty list item on <kbd>BACKSPACE</kbd>                                             </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Indent or un-indent list item toolbar buttons and actions                                       </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left"> <strong>Code Completions</strong>                                                                                                    </td><td align="center">       </td><td align="center">    X     </td></tr>
-    <tr><td align="left">     Absolute link address completions using <a href="https://%20">https:// </a>and <a href="file://%20">file:// </a>formats                            </td><td align="center">       </td><td align="center">    X     </td></tr>
+    <tr><td align="left">     Absolute link address completions using <a href="https://">https://</a> and <a href="file://">file://</a> formats                            </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Explicit and Image links are GitHub wiki aware                                                  </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     GitHub Issue # Completions after <code>issues/</code> link address and in text                             </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     GitHub special links: Issues, Pull requests, Graphs, and Pulse.                                 </td><td align="center">       </td><td align="center">    X     </td></tr>
@@ -2443,7 +2443,7 @@ real life table
     <tr><td align="left">     Emoji text shortcuts completion                                                                 </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Java class, field and method completions in inline code elements                                </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left"> <strong>Intention Actions</strong>                                                                                                   </td><td align="center">       </td><td align="center">    X     </td></tr>
-    <tr><td align="left">     Change between relative and absolute <a href="https://%20">https:// </a>link addresses via intention action               </td><td align="center">       </td><td align="center">    X     </td></tr>
+    <tr><td align="left">     Change between relative and absolute <a href="https://">https://</a> link addresses via intention action               </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Change between wiki links and explicit link                                                     </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Intentions for links, wiki links, references and headers                                        </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Intention to format Setext Header marker to match marker length to text                         </td><td align="center">       </td><td align="center">    X     </td></tr>
@@ -2453,7 +2453,7 @@ real life table
     <tr><td align="left"> <strong>Refactoring</strong>                                                                                                         </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Automatic change from wiki link to explicit link when link target file is moved out of the wiki </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     File move refactoring of contained links. This completes the refactoring feature set            </td><td align="center">       </td><td align="center">    X     </td></tr>
-    <tr><td align="left">     Refactoring for /, <a href="https://%20">https:// </a>and <a href="file://%20">file:// </a>absolute link addresses to project files                </td><td align="center">       </td><td align="center">    X     </td></tr>
+    <tr><td align="left">     Refactoring for /, <a href="https://">https://</a> and <a href="file://">file://</a> absolute link addresses to project files                </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Refactoring of header text with update to referencing anchor link references                    </td><td align="center">       </td><td align="center">    X     </td></tr>
     <tr><td align="left">     Anchor link reference refactoring with update to referenced header text                         </td><td align="center">       </td><td align="center">    X     </td></tr>
   </tbody>

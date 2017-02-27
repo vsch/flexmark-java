@@ -34,7 +34,8 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
         TextBase textBase = wrapInTextBase ? null : (TextBase) node.getParent();
 
         for (LinkSpan link : links) {
-            BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex());
+            BasedSequence linkText = literal.subSequence(link.getBeginIndex(), link.getEndIndex()).trimEnd();
+
             int startOffset = textMapper.originalOffset(link.getBeginIndex());
 
             if (wrapInTextBase) {
@@ -67,7 +68,7 @@ public class AutolinkNodePostProcessor extends NodePostProcessor {
             textBase.appendChild(linkNode);
             state.nodeAddedWithChildren(linkNode);
 
-            lastEscaped = textMapper.originalOffset(link.getEndIndex());
+            lastEscaped = textMapper.originalOffset(link.getBeginIndex() + linkText.length());
         }
 
         if (lastEscaped > 0) {

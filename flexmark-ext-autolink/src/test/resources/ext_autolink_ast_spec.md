@@ -127,6 +127,48 @@ Document[0, 43]
 ````````````````````````````````
 
 
+Issue #62, Autolinks extension for http:// and https:// links includes trailing spaces
+
+```````````````````````````````` example Autolink: 9
+http:// some text
+
+https:// some text
+
+ftp:// some text
+
+file:// some text
+
+
+.
+<p><a href="http://">http://</a> some text</p>
+<p><a href="https://">https://</a> some text</p>
+<p><a href="ftp://">ftp://</a> some text</p>
+<p><a href="file://">file://</a> some text</p>
+.
+Document[0, 77]
+  Paragraph[0, 18] isTrailingBlankLine
+    TextBase[0, 17] chars:[0, 17, "http: …  text"]
+      AutoLink[0, 7] text:[0, 7, "http://"]
+        Text[0, 7] chars:[0, 7, "http://"]
+      Text[7, 17] chars:[7, 17, " some text"]
+  Paragraph[19, 38] isTrailingBlankLine
+    TextBase[19, 37] chars:[19, 37, "https …  text"]
+      AutoLink[19, 27] text:[19, 27, "https://"]
+        Text[19, 27] chars:[19, 27, "https://"]
+      Text[27, 37] chars:[27, 37, " some text"]
+  Paragraph[39, 56] isTrailingBlankLine
+    TextBase[39, 55] chars:[39, 55, "ftp:/ …  text"]
+      AutoLink[39, 45] text:[39, 45, "ftp://"]
+        Text[39, 45] chars:[39, 45, "ftp://"]
+      Text[45, 55] chars:[45, 55, " some text"]
+  Paragraph[57, 75] isTrailingBlankLine
+    TextBase[57, 74] chars:[57, 74, "file: …  text"]
+      AutoLink[57, 64] text:[57, 64, "file://"]
+        Text[57, 64] chars:[57, 64, "file://"]
+      Text[64, 74] chars:[64, 74, " some text"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

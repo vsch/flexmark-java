@@ -155,7 +155,8 @@ public class ListItemParser extends AbstractBlockParser {
                         return continueAtColumn(state.getColumn() + currentIndent);
                     } else {
                         // here have to see if the item is really a mismatch and we sub-list mismatches
-                        if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                        boolean overrideSubList = myOptions.isItemTypeMismatchToNewList() && myOptions.isItemTypeMismatchToSubList() && myHadBlankLine;
+                        if (!overrideSubList && myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                             // we keep it as our sub-item
                             listBlockParser.setItemHandledNewListLine(state.getLine());
                             return continueAtColumn(state.getColumn() + currentIndent);
@@ -235,7 +236,8 @@ public class ListItemParser extends AbstractBlockParser {
                             return continueAtColumn(state.getColumn() + currentIndent);
                         } else {
                             // here have to see if the item is really a mismatch and we sub-list mismatches
-                            if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                            boolean overrideSubList = myOptions.isItemTypeMismatchToNewList() && myOptions.isItemTypeMismatchToSubList() && myHadBlankLine;
+                            if (!overrideSubList && myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                                 // we keep it as our sub-item
                                 listBlockParser.setItemHandledNewListLine(state.getLine());
                                 return continueAtColumn(state.getColumn() + currentIndent);
@@ -321,7 +323,8 @@ public class ListItemParser extends AbstractBlockParser {
                         } else if (listData != null) {
                             if (currentIndent >= listIndent) {
                                 // here have to see if the item is really a mismatch and we sub-list mismatches
-                                if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                                boolean overrideSubList = myOptions.isItemTypeMismatchToNewList() && myOptions.isItemTypeMismatchToSubList() && myHadBlankLine;
+                                if (!overrideSubList && myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                                     // we keep it as our sub-item
                                     listBlockParser.setItemHandledNewListLine(state.getLine());
                                     return continueAtColumn(state.getColumn() + currentIndent);
@@ -417,7 +420,8 @@ public class ListItemParser extends AbstractBlockParser {
                                 if (listData != null) {
                                     //here have to see if the item is really a mismatch and we sub-list mismatches
                                     //the next line in the list
-                                    if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                                    boolean overrideSubList = myOptions.isItemTypeMismatchToNewList() && myOptions.isItemTypeMismatchToSubList() && myHadBlankLine;
+                                    if (!overrideSubList && myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                                         // we keep it as our sub-item
                                         listBlockParser.setItemHandledNewListLine(state.getLine());
                                         return continueAtColumn(state.getColumn() + contentIndentRemoval);
@@ -526,7 +530,8 @@ public class ListItemParser extends AbstractBlockParser {
                             } else if (listData != null) {
                                 //here have to see if the item is really a mismatch and we sub-list mismatches
                                 //the next line in the list
-                                if (myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
+                                boolean overrideSubList = myOptions.isItemTypeMismatchToNewList() && myOptions.isItemTypeMismatchToSubList() && myHadBlankLine;
+                                if (!overrideSubList && myOptions.startSubList(listBlockParser.getBlock(), listData.listBlock)) {
                                     // we keep it as our sub-item
                                     listBlockParser.setItemHandledNewListLine(state.getLine());
                                     return continueAtColumn(state.getColumn() + currentIndent);
