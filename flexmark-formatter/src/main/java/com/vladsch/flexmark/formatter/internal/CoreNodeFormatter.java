@@ -3,6 +3,7 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
@@ -485,7 +486,16 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        markdown.pushPrefix().addPrefix("    ");
+        String prefix = "    ";
+
+        if (options.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
+            if (node.getParent() instanceof ListItem) {
+                BasedSequence marker = ((ListItem) node.getParent()).getOpeningMarker();
+                prefix = RepeatedCharSequence.of(" ", Utils.minLimit(8 - marker.length() - 1, 4)).toString();
+            }
+        }
+
+        markdown.pushPrefix().addPrefix(prefix);
         markdown.openPreFormatted(true);
         if (options.indentedCodeMinimizeIndent) {
             List<BasedSequence> lines = node.getContentLines();

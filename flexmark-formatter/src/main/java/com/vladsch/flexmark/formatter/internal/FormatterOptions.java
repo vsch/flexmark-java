@@ -9,6 +9,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 public class FormatterOptions {
     public final boolean itemContentIndent;
 
+    public final ParserEmulationProfile emulationProfile;
     public final boolean setextHeaderEqualizeMarker;
     public final int formatFlags;
     public final int maxBlankLines;
@@ -41,7 +42,7 @@ public class FormatterOptions {
     //public final TrailingSpaces codeKeepTrailingSpaces;
 
     public FormatterOptions(DataHolder options) {
-        ParserEmulationProfile emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.getFrom(options);
+        emulationProfile = Formatter.FORMATTER_EMULATION_PROFILE.getFrom(options);
         itemContentIndent = emulationProfile.family != ParserEmulationProfile.FIXED_INDENT;
 
         setextHeaderEqualizeMarker = Formatter.SETEXT_HEADER_EQUALIZE_MARKER.getFrom(options);

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.16.1](#0161)
 - [0.16.0](#0160)
 - [0.15.4](#0154)
 - [0.15.3](#0153)
@@ -125,6 +126,11 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.16.1
+------
+
+Fix: #67, Formatter with GitHubDoc emulation indented code of list items not indented enough
 
 0.16.0
 ------

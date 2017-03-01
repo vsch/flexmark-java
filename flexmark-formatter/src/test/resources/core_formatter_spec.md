@@ -1908,3 +1908,45 @@ for:
 ````````````````````````````````
 
 
+Handle proper GitHub indented code in list items
+
+```````````````````````````````` example(Format Conversion: 5) options(parse-fixed-indent, format-github)
+* item 
+
+        indented code
+        
+    * sub-item 
+    
+            indented sub-item code
+.
+* item
+
+        indented code
+
+  * sub-item
+
+          indented sub-item code
+
+````````````````````````````````
+
+
+```````````````````````````````` example(Format Conversion: 6) options(parse-fixed-indent, format-github)
+1. item 
+
+        indented code
+        
+    1. sub-item 
+    
+            indented sub-item code
+.
+1. item
+
+        indented code
+
+   1. sub-item
+
+           indented sub-item code
+
+````````````````````````````````
+
+
