@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.Utils;
 
+import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
 import static com.vladsch.flexmark.parser.ParserEmulationProfile.*;
 
 public class ListItemParser extends AbstractBlockParser {
@@ -49,7 +50,16 @@ public class ListItemParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
+        // Issue 66, fenced code can only be contained in GitHub Doc mode if it is indented more than list item
+        if (block instanceof FencedCodeBlock) {
+            // see if it indented more than our marker
+            if (state.getProperties().get(PARSER_EMULATION_PROFILE) == GITHUB_DOC) {
+                // Issue #66, if we are in a list item and our indent == list indent then we interrupt the list
+                FencedCodeBlockParser parser = (FencedCodeBlockParser)blockParser;
+                return myListData.markerIndent > parser.getFenceIndent();
+            }
+        }
         return true;
     }
 
@@ -448,8 +458,9 @@ public class ListItemParser extends AbstractBlockParser {
                                             }
                                         }
                                     }
-                                } else if (!myHadBlankLine) {
+                                } else if (!myHadBlankLine || state.getActiveBlockParser() instanceof FencedCodeBlockParser) {
                                     // our lazy continuation or a new element
+                                    // Issue #66, if fenced code follows then need to interrupt the list
                                     listBlockParser.setItemHandledLine(state.getLine());
                                     return continueAtColumn(state.getColumn() + currentIndent);
                                 }

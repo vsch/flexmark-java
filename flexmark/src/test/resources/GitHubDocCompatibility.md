@@ -1599,4 +1599,16 @@ Test to make sure content indented deeply nested lists process correctly
 
 
 
+<!-- -->
+
+* list item
+```
+# test
+# test 2
+
+# some other comment
+
+```
+
 <!-- @formatter:on -->
+

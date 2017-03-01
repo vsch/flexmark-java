@@ -19,10 +19,12 @@ public interface BlockParser {
     boolean isContainer();
 
     /**
-     * @param block new block being started
-     * @return true if this block parser's block can contain the given block type, false if it cannot
+     *
+     * @param state parser state
+     * @param blockParser  block parser
+     *@param block new block being started  @return true if this block parser's block can contain the given block type, false if it cannot
      */
-    boolean canContain(Block block);
+    boolean canContain(ParserState state, BlockParser blockParser, Block block);
 
     /**
      * @return the block parser's block node instance
@@ -81,7 +83,7 @@ public interface BlockParser {
 
     /**
      * Do inline processing for the block content using the given inline parser interface
-     * 
+     *
      * @param inlineParser instance of inline parser
      */
     void parseInlines(InlineParser inlineParser);

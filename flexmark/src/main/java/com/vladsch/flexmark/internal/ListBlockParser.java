@@ -3,7 +3,6 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
@@ -101,7 +100,7 @@ public class ListBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return block instanceof ListItem;
     }
 

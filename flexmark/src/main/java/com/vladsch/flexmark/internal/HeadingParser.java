@@ -116,6 +116,10 @@ public class HeadingParser extends AbstractBlockParser {
                 return BlockStart.none();
             }
 
+            if (state.getActiveBlockParser() instanceof FencedCodeBlockParser) {
+                return BlockStart.none();
+            }
+
             if (!options.canInterruptItemParagraph) {
                 BlockParser matched = matchedBlockParser.getBlockParser();
                 boolean inParagraph = matched.isParagraphParser();

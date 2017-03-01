@@ -67,7 +67,7 @@ public class SimTocBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         if (block instanceof HtmlBlock) {
             if ((haveChildren & ~HAVE_BLANK_LINE) == 0) {
                 haveChildren |= HAVE_HTML;

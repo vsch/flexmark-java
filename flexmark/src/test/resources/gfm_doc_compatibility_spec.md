@@ -4045,6 +4045,7 @@ Document[0, 52]
         Text[8, 28] chars:[8, 28, "Secon … ading"]
 ````````````````````````````````
 
+
 options for plain text rendering
 
 ```````````````````````````````` example(Issues: 2) options(no-loose-non-list-children)
@@ -4168,3 +4169,41 @@ Document[0, 1096]
         SoftLineBreak[1078, 1079]
         Text[1081, 1096] chars:[1081, 1096, "caret … lumn."]
 ````````````````````````````````
+
+
+## Issue #66
+
+#66, GitHub Doc profile incorrect parsing of following markdown
+
+Heading in fenced code interrupts fenced code
+
+```````````````````````````````` example Issue #66: 1
+* list item
+```
+# test
+# test 2
+
+# some other comment
+
+```
+
+.
+<ul>
+    <li>list item</li>
+</ul>
+<pre><code># test
+# test 2
+
+# some other comment
+
+</code></pre>
+.
+Document[0, 60]
+  BulletList[0, 12] isTight
+    BulletListItem[0, 12] open:[0, 1, "*"] isTight
+      Paragraph[2, 12]
+        Text[2, 11] chars:[2, 11, "list item"]
+  FencedCodeBlock[12, 58] open:[12, 15, "```"] content:[16, 55] lines[5] close:[55, 58, "```"]
+````````````````````````````````
+
+

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.16.0](#0160)
 - [0.15.4](#0154)
 - [0.15.3](#0153)
 - [0.15.2](#0152)
@@ -124,6 +125,15 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.16.0
+------
+
+API Change: To fix #66 it was necessary to add more parameters to
+`BlockParser.canContain(ParserState, BlockParser, Block)` to allow for more testing whether a
+fenced code block can be contained by a list item.
+
+Fix: #66, GitHub Doc profile incorrect parsing of following markdown
 
 0.15.4
 ------

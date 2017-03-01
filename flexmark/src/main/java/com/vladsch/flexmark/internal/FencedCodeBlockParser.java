@@ -3,7 +3,9 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -14,6 +16,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
+import static com.vladsch.flexmark.parser.ParserEmulationProfile.GITHUB_DOC;
 
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
@@ -37,6 +42,10 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     @Override
     public Block getBlock() {
         return block;
+    }
+
+    public int getFenceIndent() {
+        return fenceIndent;
     }
 
     @Override

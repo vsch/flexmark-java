@@ -4,6 +4,7 @@ import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.parser.block.AbstractBlockParser;
 import com.vladsch.flexmark.parser.block.BlockContinue;
+import com.vladsch.flexmark.parser.block.BlockParser;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -25,7 +26,7 @@ public class DocumentBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return true;
     }
 

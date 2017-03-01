@@ -37,7 +37,7 @@ public class AsideBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return true;
     }
 

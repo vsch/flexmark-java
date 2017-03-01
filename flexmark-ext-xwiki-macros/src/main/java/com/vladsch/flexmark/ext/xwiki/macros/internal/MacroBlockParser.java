@@ -91,7 +91,7 @@ public class MacroBlockParser extends AbstractBlockParser {
     }
 
     @Override
-    public boolean canContain(final Block block) {
+    public boolean canContain(ParserState state, BlockParser blockParser, final Block block) {
         return true;
     }
 

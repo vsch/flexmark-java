@@ -865,7 +865,7 @@ public class DocumentParser implements ParserState {
      * @return block parser instance added as a child.
      */
     private <T extends BlockParser> T addChild(T blockParser) {
-        while (!getActiveBlockParser().canContain(blockParser.getBlock())) {
+        while (!getActiveBlockParser().canContain(this, blockParser, blockParser.getBlock())) {
             finalize(getActiveBlockParser());
         }
 
