@@ -35,10 +35,11 @@ than ideal and for pathological input either hangs or practically hangs during p
 * [Table Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#tables) for
   [Markdown Formatter](https://github.com/vsch/flexmark-java/wiki/Markdown-Formatter) with
   column width and alignment of markdown tables:
+
   <table>
       <thead> <tr><th>Input</th> <th>Output</th> </tr> </thead>
       <tr><td>
-      <pre><code class="language-markdown">  day|time|spent
+      <pre><code class="language-markdown">day|time|spent
   :---|:---:|--:
   nov. 2. tue|10:00|4h 40m
   nov. 3. thu|11:00|4h
