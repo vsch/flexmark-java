@@ -449,10 +449,15 @@ public class Parser implements IParse {
 
     /**
      * Extension for {@link Parser}.
+     *
+     * Implementations of this interface should done by all Extensions that extend the core parser
+     *
+     * Each will be called via {@link ParserExtension#extend(Builder)} method giving it a chance to call back
+     * on the builder methods to register parser extension points
      */
     public interface ParserExtension extends Extension {
         /**
-         * This method is called first on all extensions so that they can adjust the options.
+         * This method is called first on all extensions so that they can adjust the options that must be common to all extensions.
          *
          * @param options option set that will be used for the builder
          */
@@ -462,11 +467,25 @@ public class Parser implements IParse {
          * This method is called on all extensions so that they can register their custom processors
          *
          * @param parserBuilder parser builder with which to register extensions
+         *
+         * @see Builder#customBlockParserFactory(CustomBlockParserFactory)
+         * @see Builder#customInlineParserExtensionFactory(InlineParserExtensionFactory)
+         * @see Builder#customInlineParserFactory(InlineParserFactory)
+         * @see Builder#customDelimiterProcessor(DelimiterProcessor)
+         * @see Builder#postProcessorFactory(PostProcessorFactory)
+         * @see Builder#paragraphPreProcessorFactory(ParagraphPreProcessorFactory)
+         * @see Builder#blockPreProcessorFactory(BlockPreProcessorFactory)
+         * @see Builder#linkRefProcessorFactory(LinkRefProcessorFactory)
          */
         void extend(Builder parserBuilder);
     }
 
     /**
+     * Should be implemented by all extensions that create a node repository or other references in the
+     * document. It is used by the parser to transfer references from included document to the document
+     * that is doing the inclusion so that during rendering references in the included document will
+     * appear as local references to the document being rendered.
+     *
      * Extension for {@link Parser}.
      */
     public interface ReferenceHoldingExtension extends Extension {
@@ -475,7 +494,7 @@ public class Parser implements IParse {
          *
          * @param document destination document for references
          * @param included source document for references
-         * @return true if references were transfered
+         * @return true if there were references to transfer
          */
         boolean transferReferences(MutableDataHolder document, DataHolder included);
     }

@@ -423,14 +423,33 @@ public class HtmlRenderer implements IRender {
 
     /**
      * Extension for {@link HtmlRenderer}.
+     *
+     * This should be implemented by all extensions that have HtmlRenderer extension code.
+     *
+     * Each extension will have its {@link HtmlRendererExtension#extend(Builder, String)} method called.
+     * and should call back on the builder argument to register all extension points
+     *
      */
     public interface HtmlRendererExtension extends Extension {
         /**
-         * This method is called first on all extensions so that they can adjust the options.
+         * This method is called first on all extensions so that they can adjust the options that must be
+         * common to all extensions.
+         *
          * @param options option set that will be used for the builder
          */
         void rendererOptions(MutableDataHolder options);
 
+        /**
+         * Called to give each extension to register extension points that it contains
+         *
+         * @param rendererBuilder builder to call back for extension point registration
+         * @param rendererType type of rendering being performed. For now "HTML", "JIRA" or "YOUTRACK"
+         *
+         * @see Builder#attributeProviderFactory(AttributeProviderFactory)
+         * @see Builder#nodeRendererFactory(NodeRendererFactory)
+         * @see Builder#linkResolverFactory(LinkResolverFactory)
+         * @see Builder#htmlIdGeneratorFactory(HeaderIdGeneratorFactory)
+         */
         void extend(Builder rendererBuilder, String rendererType);
     }
 

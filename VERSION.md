@@ -132,6 +132,9 @@ flexmark-java
 
 Fix: #67, Formatter with GitHubDoc emulation indented code of list items not indented enough
 
+Fix: #65, Add some comments to `Extension`, `Parser.ParserExtension`,
+`Parser.ReferenceHoldingExtension` and `HtmlRenderer.HtmlRendererExtension`
+
 0.16.0
 ------
 
