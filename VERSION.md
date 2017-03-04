@@ -6,7 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
-- [0.16.2](#0162)
+- [0.17.0](#0170)
 - [0.16.1](#0161)
 - [0.16.0](#0160)
 - [0.15.4](#0154)
@@ -82,8 +82,10 @@ flexmark-java
 
 &nbsp;</details>
 
-0.16.2
+0.17.0
 ------
+
+Change: language level 6 for source and byte code, still requires JDK7 for BitSet functionality.
 
 Add: `Parser.CODE_CONTENT_BLOCK`, default `false`. If set to true will create an AST `CodeBlock`
 node as a child node of `FencedCodeBlock` and `IndentedCodeBlock`. Allows custom rendering of
