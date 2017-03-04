@@ -19,7 +19,7 @@ public class ComboEmojiSpecTest extends ComboSpecTestCase {
             .set(Parser.EXTENSIONS, Collections.singleton(EmojiExtension.create()))
             .set(EmojiExtension.ROOT_IMAGE_PATH, "/img/");
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("url", new MutableDataSet().set(EmojiExtension.USE_IMAGE_URLS, true));
@@ -43,7 +43,7 @@ public class ComboEmojiSpecTest extends ComboSpecTestCase {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });

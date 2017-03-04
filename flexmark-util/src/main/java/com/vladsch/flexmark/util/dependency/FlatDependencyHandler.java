@@ -22,11 +22,11 @@ public class FlatDependencyHandler<T extends Dependent<T>> extends DependencyHan
 
     @Override
     protected FlatDependencies<T> createResolvedDependencies(List<FlatDependencyStage<T>> stages) {
-        return new FlatDependencies<>(stages);
+        return new FlatDependencies<T>(stages);
     }
 
     public static <T extends Dependent<T>> List<T> computeDependencies(List<T> dependentsList) {
-        FlatDependencyHandler<T> resolver = new FlatDependencyHandler<>();
+        FlatDependencyHandler<T> resolver = new FlatDependencyHandler<T>();
         return resolver.resolvedDependencies(dependentsList);
     }
 }

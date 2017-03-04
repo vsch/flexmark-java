@@ -26,19 +26,19 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Integer> LEVELS = new DataKey<>("LEVELS", TocOptions.DEFAULT_LEVELS);
-    public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<>("IS_TEXT_ONLY", false);
-    public static final DataKey<Boolean> IS_NUMBERED = new DataKey<>("IS_NUMBERED", false);
-    public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
-    public static final DataKey<Boolean> IS_HTML = new DataKey<>("IS_HTML", false);
-    public static final DataKey<Integer> TITLE_LEVEL = new DataKey<>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
-    public static final DataKey<String> TITLE = new DataKey<>("TITLE", TocOptions.DEFAULT_TITLE);
-    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<>("AST_INCLUDE_OPTIONS", false);
-    public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<>("BLANK_LINE_SPACER", false);
+    public static final DataKey<Integer> LEVELS = new DataKey<Integer>("LEVELS", TocOptions.DEFAULT_LEVELS);
+    public static final DataKey<Boolean> IS_TEXT_ONLY = new DataKey<Boolean>("IS_TEXT_ONLY", false);
+    public static final DataKey<Boolean> IS_NUMBERED = new DataKey<Boolean>("IS_NUMBERED", false);
+    public static final DataKey<TocOptions.ListType> LIST_TYPE = new DataKey<TocOptions.ListType>("LIST_TYPE", TocOptions.ListType.HIERARCHY);
+    public static final DataKey<Boolean> IS_HTML = new DataKey<Boolean>("IS_HTML", false);
+    public static final DataKey<Integer> TITLE_LEVEL = new DataKey<Integer>("TITLE_LEVEL", TocOptions.DEFAULT_TITLE_LEVEL);
+    public static final DataKey<String> TITLE = new DataKey<String>("TITLE", TocOptions.DEFAULT_TITLE);
+    public static final DataKey<Boolean> AST_INCLUDE_OPTIONS = new DataKey<Boolean>("AST_INCLUDE_OPTIONS", false);
+    public static final DataKey<Boolean> BLANK_LINE_SPACER = new DataKey<Boolean>("BLANK_LINE_SPACER", false);
 
     // format options
-    public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
-    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<>("FORMAT_OPTIONS", new DataValueFactory<TocOptions>() {
+    public static final DataKey<SimTocGenerateOnFormat> FORMAT_UPDATE_ON_FORMAT = new DataKey<SimTocGenerateOnFormat>("FORMAT_UPDATE_ON_FORMAT", SimTocGenerateOnFormat.UPDATE);
+    public static final DataKey<TocOptions> FORMAT_OPTIONS = new DataKey<TocOptions>("FORMAT_OPTIONS", new DataValueFactory<TocOptions>() {
         @Override
         public TocOptions create(DataHolder options) {
             return new TocOptions(options);
@@ -69,19 +69,14 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new TocNodeRenderer(options);
-                    }
-                });
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new TocNodeRenderer(options);
+                }
+            });
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         }
     }
 }

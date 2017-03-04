@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class TemplateEntry {
     private final int entryNumber;
     private final String source;
-    private final HashSet<String> params = new HashSet<>();
+    private final HashSet<String> params = new HashSet<String>();
 
     private static final Pattern PARAMETER_PATTERN = Pattern.compile("\\$[a-zA-Z_]+\\$");
 
@@ -19,7 +19,6 @@ public class TemplateEntry {
 
         // parse out the parameters
         Matcher m = PARAMETER_PATTERN.matcher(source);
-        int pos = 0;
         while (m.find()) {
             String param = m.group().substring(1, m.group().length() - 1);
             params.add(param);

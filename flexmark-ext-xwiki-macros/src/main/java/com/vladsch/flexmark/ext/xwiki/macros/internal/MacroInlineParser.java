@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ext.xwiki.macros.internal;
 
-import com.vladsch.flexmark.ast.Document;
-import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.xwiki.macros.Macro;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroAttribute;
 import com.vladsch.flexmark.ext.xwiki.macros.MacroClose;
@@ -21,7 +19,7 @@ public class MacroInlineParser implements InlineParserExtension {
 
     public MacroInlineParser(final InlineParser inlineParser) {
         this.parsing = new MacroParsing(inlineParser.getParsing());
-        this.openMacros = new ArrayList<>();
+        this.openMacros = new ArrayList<Macro>();
     }
 
     @Override

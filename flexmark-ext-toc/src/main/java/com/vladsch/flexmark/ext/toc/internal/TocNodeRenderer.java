@@ -29,9 +29,9 @@ public class TocNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         set.add(
-                new NodeRenderingHandler<>(TocBlock.class, new CustomNodeRenderer<TocBlock>() {
+                new NodeRenderingHandler<TocBlock>(TocBlock.class, new CustomNodeRenderer<TocBlock>() {
                     @Override
                     public void render(TocBlock node, NodeRendererContext context, HtmlWriter html) {
                         TocNodeRenderer.this.render(node, context, html);

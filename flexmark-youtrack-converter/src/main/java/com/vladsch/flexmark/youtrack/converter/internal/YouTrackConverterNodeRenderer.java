@@ -37,132 +37,132 @@ public class YouTrackConverterNodeRenderer implements NodeRenderer
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(AutoLink.class, new CustomNodeRenderer<AutoLink>() {
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
+                new NodeRenderingHandler<AutoLink>(AutoLink.class, new CustomNodeRenderer<AutoLink>() {
                     @Override
                     public void render(AutoLink node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(BlockQuote.class, new CustomNodeRenderer<BlockQuote>() {
+                new NodeRenderingHandler<BlockQuote>(BlockQuote.class, new CustomNodeRenderer<BlockQuote>() {
                     @Override
                     public void render(BlockQuote node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(BulletList.class, new CustomNodeRenderer<BulletList>() {
+                new NodeRenderingHandler<BulletList>(BulletList.class, new CustomNodeRenderer<BulletList>() {
                     @Override
                     public void render(BulletList node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(BulletListItem.class, new CustomNodeRenderer<BulletListItem>() {
+                new NodeRenderingHandler<BulletListItem>(BulletListItem.class, new CustomNodeRenderer<BulletListItem>() {
                     @Override
                     public void render(BulletListItem node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Code.class, new CustomNodeRenderer<Code>() {
+                new NodeRenderingHandler<Code>(Code.class, new CustomNodeRenderer<Code>() {
                     @Override
                     public void render(Code node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Document.class, new CustomNodeRenderer<Document>() {
+                new NodeRenderingHandler<Document>(Document.class, new CustomNodeRenderer<Document>() {
                     @Override
                     public void render(Document node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Emphasis.class, new CustomNodeRenderer<Emphasis>() {
+                new NodeRenderingHandler<Emphasis>(Emphasis.class, new CustomNodeRenderer<Emphasis>() {
                     @Override
                     public void render(Emphasis node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(FencedCodeBlock.class, new CustomNodeRenderer<FencedCodeBlock>() {
+                new NodeRenderingHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeRenderer<FencedCodeBlock>() {
                     @Override
                     public void render(FencedCodeBlock node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HardLineBreak.class, new CustomNodeRenderer<HardLineBreak>() {
+                new NodeRenderingHandler<HardLineBreak>(HardLineBreak.class, new CustomNodeRenderer<HardLineBreak>() {
                     @Override
                     public void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Heading.class, new CustomNodeRenderer<Heading>() {
+                new NodeRenderingHandler<Heading>(Heading.class, new CustomNodeRenderer<Heading>() {
                     @Override
                     public void render(Heading node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlBlock.class, new CustomNodeRenderer<HtmlBlock>() {
+                new NodeRenderingHandler<HtmlBlock>(HtmlBlock.class, new CustomNodeRenderer<HtmlBlock>() {
                     @Override
                     public void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlCommentBlock.class, new CustomNodeRenderer<HtmlCommentBlock>() {
+                new NodeRenderingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, new CustomNodeRenderer<HtmlCommentBlock>() {
                     @Override
                     public void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlEntity.class, new CustomNodeRenderer<HtmlEntity>() {
+                new NodeRenderingHandler<HtmlEntity>(HtmlEntity.class, new CustomNodeRenderer<HtmlEntity>() {
                     @Override
                     public void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlInline.class, new CustomNodeRenderer<HtmlInline>() {
+                new NodeRenderingHandler<HtmlInline>(HtmlInline.class, new CustomNodeRenderer<HtmlInline>() {
                     @Override
                     public void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlInlineComment.class, new CustomNodeRenderer<HtmlInlineComment>() {
+                new NodeRenderingHandler<HtmlInlineComment>(HtmlInlineComment.class, new CustomNodeRenderer<HtmlInlineComment>() {
                     @Override
                     public void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlInnerBlock.class, new CustomNodeRenderer<HtmlInnerBlock>() {
+                new NodeRenderingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new CustomNodeRenderer<HtmlInnerBlock>() {
                     @Override
                     public void render(HtmlInnerBlock node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(HtmlInnerBlockComment.class, new CustomNodeRenderer<HtmlInnerBlockComment>() {
+                new NodeRenderingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, new CustomNodeRenderer<HtmlInnerBlockComment>() {
                     @Override
                     public void render(HtmlInnerBlockComment node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Image.class, new CustomNodeRenderer<Image>() {
+                new NodeRenderingHandler<Image>(Image.class, new CustomNodeRenderer<Image>() {
                     @Override
                     public void render(Image node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(ImageRef.class, new CustomNodeRenderer<ImageRef>() {
+                new NodeRenderingHandler<ImageRef>(ImageRef.class, new CustomNodeRenderer<ImageRef>() {
                     @Override
                     public void render(ImageRef node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(IndentedCodeBlock.class, new CustomNodeRenderer<IndentedCodeBlock>() {
+                new NodeRenderingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, new CustomNodeRenderer<IndentedCodeBlock>() {
                     @Override
                     public void render(IndentedCodeBlock node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Link.class, new CustomNodeRenderer<Link>() {
+                new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
                     @Override
                     public void render(Link node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(LinkRef.class, new CustomNodeRenderer<LinkRef>() {
+                new NodeRenderingHandler<LinkRef>(LinkRef.class, new CustomNodeRenderer<LinkRef>() {
                     @Override
                     public void render(LinkRef node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(MailLink.class, new CustomNodeRenderer<MailLink>() {
+                new NodeRenderingHandler<MailLink>(MailLink.class, new CustomNodeRenderer<MailLink>() {
                     @Override
                     public void render(MailLink node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(OrderedList.class, new CustomNodeRenderer<OrderedList>() {
+                new NodeRenderingHandler<OrderedList>(OrderedList.class, new CustomNodeRenderer<OrderedList>() {
                     @Override
                     public void render(OrderedList node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(OrderedListItem.class, new CustomNodeRenderer<OrderedListItem>() {
+                new NodeRenderingHandler<OrderedListItem>(OrderedListItem.class, new CustomNodeRenderer<OrderedListItem>() {
                     @Override
                     public void render(OrderedListItem node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Paragraph.class, new CustomNodeRenderer<Paragraph>() {
+                new NodeRenderingHandler<Paragraph>(Paragraph.class, new CustomNodeRenderer<Paragraph>() {
                     @Override
                     public void render(Paragraph node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Reference.class, new CustomNodeRenderer<Reference>() {
+                new NodeRenderingHandler<Reference>(Reference.class, new CustomNodeRenderer<Reference>() {
                     @Override
                     public void render(Reference node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(SoftLineBreak.class, new CustomNodeRenderer<SoftLineBreak>() {
+                new NodeRenderingHandler<SoftLineBreak>(SoftLineBreak.class, new CustomNodeRenderer<SoftLineBreak>() {
                     @Override
                     public void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(StrongEmphasis.class, new CustomNodeRenderer<StrongEmphasis>() {
+                new NodeRenderingHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeRenderer<StrongEmphasis>() {
                     @Override
                     public void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(Text.class, new CustomNodeRenderer<Text>() {
+                new NodeRenderingHandler<Text>(Text.class, new CustomNodeRenderer<Text>() {
                     @Override
                     public void render(Text node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(TextBase.class, new CustomNodeRenderer<TextBase>() {
+                new NodeRenderingHandler<TextBase>(TextBase.class, new CustomNodeRenderer<TextBase>() {
                     @Override
                     public void render(TextBase node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 }),
-                new NodeRenderingHandler<>(ThematicBreak.class, new CustomNodeRenderer<ThematicBreak>() {
+                new NodeRenderingHandler<ThematicBreak>(ThematicBreak.class, new CustomNodeRenderer<ThematicBreak>() {
                     @Override
                     public void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) { YouTrackConverterNodeRenderer.this.render(node, context, html); }
                 })

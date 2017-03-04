@@ -1,9 +1,6 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.IndentedCodeBlock;
-import com.vladsch.flexmark.ast.Paragraph;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.collection.iteration.Reverse;
@@ -11,18 +8,17 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class IndentedCodeBlockParser extends AbstractBlockParser {
-
-    private static final Pattern TRAILING_BLANK_LINES = Pattern.compile("(?:\n[ \t]*)+$");
 
     private final IndentedCodeBlock block = new IndentedCodeBlock();
     private BlockContent content = new BlockContent();
     private boolean trimTrailingBlankLines;
+    private final boolean codeContentBlock;
 
     public IndentedCodeBlockParser(DataHolder options) {
         trimTrailingBlankLines = options.get(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES);
+        this.codeContentBlock = options.get(Parser.CODE_CONTENT_BLOCK);
     }
 
     @Override
@@ -52,7 +48,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
         if (trimTrailingBlankLines) {
             int trailingBlankLines = 0;
             List<BasedSequence> lines = content.getLines();
-            for (BasedSequence line : new Reverse<>(lines)) {
+            for (BasedSequence line : new Reverse<BasedSequence>(lines)) {
                 if (!line.isBlank()) break;
                 trailingBlankLines++;
             }
@@ -62,13 +58,18 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
         } else {
             block.setContent(content);
         }
+
+        if (codeContentBlock) {
+            CodeBlock codeBlock = new CodeBlock(block.getChars(), block.getContentLines());
+            block.appendChild(codeBlock);
+        }
         content = null;
     }
 
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,

@@ -35,60 +35,61 @@ import java.util.*;
  * </code></pre>
  */
 public class Parser implements IParse {
-    public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<>("EXTENSIONS", Extension.EMPTY_LIST);
-    public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<>("REFERENCES_KEEP", KeepType.FIRST);
-    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<>("REFERENCES", new DataValueFactory<ReferenceRepository>() {
+    public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<Iterable<Extension>>("EXTENSIONS", Extension.EMPTY_LIST);
+    public static final DataKey<KeepType> REFERENCES_KEEP = new DataKey<KeepType>("REFERENCES_KEEP", KeepType.FIRST);
+    public static final DataKey<ReferenceRepository> REFERENCES = new DataKey<ReferenceRepository>("REFERENCES", new DataValueFactory<ReferenceRepository>() {
         @Override
         public ReferenceRepository create(DataHolder options) {
             return new ReferenceRepository(options);
         }
     });
 
-    public static final DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<>("ASTERISK_DELIMITER_PROCESSOR", true);
+    public static final DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<Boolean>("ASTERISK_DELIMITER_PROCESSOR", true);
 
-    public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<>("BLOCK_QUOTE_PARSER", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_TO_BLANK_LINE", false);
-    public static final DataKey<Boolean> BLOCK_QUOTE_IGNORE_BLANK_LINE = new DataKey<>("BLOCK_QUOTE_IGNORE_BLANK_LINE", false);
-    public static final DataKey<Boolean> BLOCK_QUOTE_ALLOW_LEADING_SPACE = new DataKey<>("BLOCK_QUOTE_ALLOW_LEADING_SPACE", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_INTERRUPTS_PARAGRAPH", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<Boolean>("BLOCK_QUOTE_PARSER", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<Boolean>("BLOCK_QUOTE_TO_BLANK_LINE", false);
+    public static final DataKey<Boolean> BLOCK_QUOTE_IGNORE_BLANK_LINE = new DataKey<Boolean>("BLOCK_QUOTE_IGNORE_BLANK_LINE", false);
+    public static final DataKey<Boolean> BLOCK_QUOTE_ALLOW_LEADING_SPACE = new DataKey<Boolean>("BLOCK_QUOTE_ALLOW_LEADING_SPACE", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("BLOCK_QUOTE_INTERRUPTS_PARAGRAPH", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("BLOCK_QUOTE_WITH_LEAD_SPACES_INTERRUPTS_ITEM_PARAGRAPH", true);
 
-    public static final DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<>("FENCED_CODE_BLOCK_PARSER", true);
-    public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<>("MATCH_CLOSING_FENCE_CHARACTERS", true);
+    public static final DataKey<Boolean> FENCED_CODE_BLOCK_PARSER = new DataKey<Boolean>("FENCED_CODE_BLOCK_PARSER", true);
+    public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<Boolean>("MATCH_CLOSING_FENCE_CHARACTERS", true);
+    public static final DataKey<Boolean> CODE_CONTENT_BLOCK = new DataKey<Boolean>("CODE_CONTENT_BLOCK", false);
 
-    public static final DataKey<Boolean> HARD_LINE_BREAK_LIMIT = new DataKey<>("HARD_LINE_BREAK_LIMIT", false);
+    public static final DataKey<Boolean> HARD_LINE_BREAK_LIMIT = new DataKey<Boolean>("HARD_LINE_BREAK_LIMIT", false);
 
-    public static final DataKey<Boolean> HEADING_PARSER = new DataKey<>("HEADING_PARSER", true);
-    public static final DataKey<Integer> HEADING_SETEXT_MARKER_LENGTH = new DataKey<>("HEADING_SETEXT_MARKER_LENGTH", 1);
-    public static final DataKey<Boolean> HEADING_NO_ATX_SPACE = new DataKey<>("HEADING_NO_ATX_SPACE", false);
-    public static final DataKey<Boolean> HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE = new DataKey<>("HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE", false);
-    public static final DataKey<Boolean> HEADING_NO_LEAD_SPACE = new DataKey<>("HEADING_NO_LEAD_SPACE", false);
-    public static final DataKey<Boolean> HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH = new DataKey<>("HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> HEADING_PARSER = new DataKey<Boolean>("HEADING_PARSER", true);
+    public static final DataKey<Integer> HEADING_SETEXT_MARKER_LENGTH = new DataKey<Integer>("HEADING_SETEXT_MARKER_LENGTH", 1);
+    public static final DataKey<Boolean> HEADING_NO_ATX_SPACE = new DataKey<Boolean>("HEADING_NO_ATX_SPACE", false);
+    public static final DataKey<Boolean> HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE = new DataKey<Boolean>("HEADING_NO_EMPTY_HEADING_WITHOUT_SPACE", false);
+    public static final DataKey<Boolean> HEADING_NO_LEAD_SPACE = new DataKey<Boolean>("HEADING_NO_LEAD_SPACE", false);
+    public static final DataKey<Boolean> HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH = new DataKey<Boolean>("HEADING_CAN_INTERRUPT_ITEM_PARAGRAPH", true);
 
-    public static final DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<>("HTML_BLOCK_PARSER", true);
-    public static final DataKey<Boolean> HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH = new DataKey<>("HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH", true);
+    public static final DataKey<Boolean> HTML_BLOCK_PARSER = new DataKey<Boolean>("HTML_BLOCK_PARSER", true);
+    public static final DataKey<Boolean> HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH = new DataKey<Boolean>("HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH", true);
 
-    public static final DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<>("INDENTED_CODE_BLOCK_PARSER", true);
-    public static final DataKey<Boolean> INDENTED_CODE_NO_TRAILING_BLANK_LINES = new DataKey<>("INDENTED_CODE_NO_TRAILING_BLANK_LINES", true);
+    public static final DataKey<Boolean> INDENTED_CODE_BLOCK_PARSER = new DataKey<Boolean>("INDENTED_CODE_BLOCK_PARSER", true);
+    public static final DataKey<Boolean> INDENTED_CODE_NO_TRAILING_BLANK_LINES = new DataKey<Boolean>("INDENTED_CODE_NO_TRAILING_BLANK_LINES", true);
 
-    public static final DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<>("INTELLIJ_DUMMY_IDENTIFIER", false);
+    public static final DataKey<Boolean> INTELLIJ_DUMMY_IDENTIFIER = new DataKey<Boolean>("INTELLIJ_DUMMY_IDENTIFIER", false);
 
-    public static final DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<>("MATCH_NESTED_LINK_REFS_FIRST", true);
-    public static final DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<>("PARSE_INNER_HTML_COMMENTS", false);
-    public static final DataKey<Boolean> PARSE_MULTI_LINE_IMAGE_URLS = new DataKey<>("PARSE_MULTI_LINE_IMAGE_URLS", false);
-    public static final DataKey<Boolean> PARSE_JEKYLL_MACROS_IN_URLS = new DataKey<>("PARSE_JEKYLL_MACROS_IN_URLS", false);
+    public static final DataKey<Boolean> MATCH_NESTED_LINK_REFS_FIRST = new DataKey<Boolean>("MATCH_NESTED_LINK_REFS_FIRST", true);
+    public static final DataKey<Boolean> PARSE_INNER_HTML_COMMENTS = new DataKey<Boolean>("PARSE_INNER_HTML_COMMENTS", false);
+    public static final DataKey<Boolean> PARSE_MULTI_LINE_IMAGE_URLS = new DataKey<Boolean>("PARSE_MULTI_LINE_IMAGE_URLS", false);
+    public static final DataKey<Boolean> PARSE_JEKYLL_MACROS_IN_URLS = new DataKey<Boolean>("PARSE_JEKYLL_MACROS_IN_URLS", false);
 
-    public static final DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
-    public static final DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<>("THEMATIC_BREAK_PARSER", true);
-    public static final DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<>("THEMATIC_BREAK_RELAXED_START", true);
+    public static final DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<Boolean>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
+    public static final DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<Boolean>("THEMATIC_BREAK_PARSER", true);
+    public static final DataKey<Boolean> THEMATIC_BREAK_RELAXED_START = new DataKey<Boolean>("THEMATIC_BREAK_RELAXED_START", true);
 
-    public static final DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<>("UNDERSCORE_DELIMITER_PROCESSOR", true);
-    public static final DataKey<Boolean> BLANK_LINES_IN_AST = new DataKey<>("BLANK_LINES_IN_AST", false);
+    public static final DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<Boolean>("UNDERSCORE_DELIMITER_PROCESSOR", true);
+    public static final DataKey<Boolean> BLANK_LINES_IN_AST = new DataKey<Boolean>("BLANK_LINES_IN_AST", false);
 
     // the meat of differences in emulation
-    public static final DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<>("LIST_BLOCK_PARSER", true);
-    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_PROFILE = new DataKey<>("PARSER_EMULATION_PROFILE", ParserEmulationProfile.COMMONMARK);
+    public static final DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<Boolean>("LIST_BLOCK_PARSER", true);
+    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_PROFILE = new DataKey<ParserEmulationProfile>("PARSER_EMULATION_PROFILE", ParserEmulationProfile.COMMONMARK);
 
     /**
      * @deprecated
@@ -97,35 +98,35 @@ public class Parser implements IParse {
 
     // LISTS_ITEM_INDENT is also the INDENTED CODE INDENT parser emulation family either does not use it or expects the number of columns to next indent item (in this case indented code is the same)
     // LISTS_CODE_INDENT can be the same as LISTS_ITEM_INDENT or double that where indentation counts from first list item indent
-    public static final DataKey<Integer> LISTS_CODE_INDENT = new DataKey<>("LISTS_CODE_INDENT", 4);
-    public static final DataKey<Integer> LISTS_ITEM_INDENT = new DataKey<>("LISTS_ITEM_INDENT", 4);
+    public static final DataKey<Integer> LISTS_CODE_INDENT = new DataKey<Integer>("LISTS_CODE_INDENT", 4);
+    public static final DataKey<Integer> LISTS_ITEM_INDENT = new DataKey<Integer>("LISTS_ITEM_INDENT", 4);
 
     // new item with content indent >= this value cause an empty item with code indent child, weird standard, so far CommonMark only
-    public static final DataKey<Integer> LISTS_NEW_ITEM_CODE_INDENT = new DataKey<>("LISTS_NEW_ITEM_CODE_INDENT", 4);
+    public static final DataKey<Integer> LISTS_NEW_ITEM_CODE_INDENT = new DataKey<Integer>("LISTS_NEW_ITEM_CODE_INDENT", 4);
 
     // space must follow a list item marker to be recognized as such
-    public static final DataKey<Boolean> LISTS_ITEM_MARKER_SPACE = new DataKey<>("LISTS_ITEM_MARKER_SPACE", false);
+    public static final DataKey<Boolean> LISTS_ITEM_MARKER_SPACE = new DataKey<Boolean>("LISTS_ITEM_MARKER_SPACE", false);
 
     // strings for list marker suffixes which offset the content, to properly support gfm task lists with content offset matching the suffix end
     // LIST_ITEM_MARKER_SPACE is applied after the suffix if it is present, and before. Spaces around the suffix are implicitly allowed
-    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
-    public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
+    public static final DataKey<String[]> LISTS_ITEM_MARKER_SUFFIXES = new DataKey<String[]>("LISTS_ITEM_MARKER_SUFFIXES", new String[] { });
+    public static final DataKey<Boolean> LISTS_NUMBERED_ITEM_MARKER_SUFFIXED = new DataKey<Boolean>("LISTS_NUMBERED_ITEM_MARKER_SUFFIXED", true);
 
     // List parsing options beyond major parser family
-    public static final DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<>("LISTS_AUTO_LOOSE", true);
-    public static final DataKey<Boolean> LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS = new DataKey<>("LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS", false);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE = new DataKey<>("LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE", false);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN = new DataKey<>("LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN", false);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH = new DataKey<>("LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH", false);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM = new DataKey<>("LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM", false);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE = new DataKey<>("LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE", true);
-    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE = new DataKey<>("LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE", false);
-    public static final DataKey<Boolean> LISTS_DELIMITER_MISMATCH_TO_NEW_LIST = new DataKey<>("LISTS_DELIMITER_MISMATCH_TO_NEW_LIST", true);
-    public static final DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<>("LISTS_END_ON_DOUBLE_BLANK", false);
-    public static final DataKey<Boolean> LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST = new DataKey<>("LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST", true);
-    public static final DataKey<Boolean> LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST = new DataKey<>("LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST", false);
-    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_DOT_ONLY = new DataKey<>("LISTS_ORDERED_ITEM_DOT_ONLY", false);
-    public static final DataKey<Boolean> LISTS_ORDERED_LIST_MANUAL_START = new DataKey<>("LISTS_ORDERED_LIST_MANUAL_START", true);
+    public static final DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<Boolean>("LISTS_AUTO_LOOSE", true);
+    public static final DataKey<Boolean> LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS = new DataKey<Boolean>("LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE = new DataKey<Boolean>("LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN = new DataKey<Boolean>("LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM = new DataKey<Boolean>("LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE = new DataKey<Boolean>("LISTS_LOOSE_WHEN_HAS_TRAILING_BLANK_LINE", true);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE = new DataKey<Boolean>("LISTS_LOOSE_WHEN_CONTAINS_BLANK_LINE", false);
+    public static final DataKey<Boolean> LISTS_DELIMITER_MISMATCH_TO_NEW_LIST = new DataKey<Boolean>("LISTS_DELIMITER_MISMATCH_TO_NEW_LIST", true);
+    public static final DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<Boolean>("LISTS_END_ON_DOUBLE_BLANK", false);
+    public static final DataKey<Boolean> LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST = new DataKey<Boolean>("LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST", true);
+    public static final DataKey<Boolean> LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST = new DataKey<Boolean>("LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST", false);
+    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_DOT_ONLY = new DataKey<Boolean>("LISTS_ORDERED_ITEM_DOT_ONLY", false);
+    public static final DataKey<Boolean> LISTS_ORDERED_LIST_MANUAL_START = new DataKey<Boolean>("LISTS_ORDERED_LIST_MANUAL_START", true);
 
     // List Item paragraph interruption capabilities
     // in general:
@@ -136,28 +137,28 @@ public class Parser implements IParse {
     // so disabling the ordered flag, also disable the corresponding ordered-non-one ones
     //
 
-    public static final DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_BULLET_ITEM_INTERRUPTS_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_ORDERED_ITEM_INTERRUPTS_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
 
-    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH", false);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH", false);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_PARAGRAPH", false);
 
-    public static final DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
 
     // must also be able to interrupt with corresponding non empty list item type (bullet, ordered, ordered non-one)
-    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_BULLET_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_NON_ONE_ITEM_INTERRUPTS_ITEM_PARAGRAPH", true);
 
     // whether these can start sub-lists when they are not preceded by a blank line and are indented to be interpreted as sub listk
     // must also be able to interrupt item paragraphs of corresponding list item type (bullet, ordered, ordered non-one)
-    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
-    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<>("LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_BULLET_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
+    public static final DataKey<Boolean> LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH", false);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;
@@ -297,15 +298,15 @@ public class Parser implements IParse {
      * Builder for configuring a {@link Parser}.
      */
     public static class Builder extends MutableDataSet {
-        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<>();
-        private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<>();
-        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<>();
-        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<>();
-        private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<>();
-        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<>();
-        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<>();
+        private final List<CustomBlockParserFactory> blockParserFactories = new ArrayList<CustomBlockParserFactory>();
+        private final List<DelimiterProcessor> delimiterProcessors = new ArrayList<DelimiterProcessor>();
+        private final List<PostProcessorFactory> postProcessorFactories = new ArrayList<PostProcessorFactory>();
+        private final List<ParagraphPreProcessorFactory> paragraphPreProcessorFactories = new ArrayList<ParagraphPreProcessorFactory>();
+        private final List<BlockPreProcessorFactory> blockPreProcessorFactories = new ArrayList<BlockPreProcessorFactory>();
+        private final List<LinkRefProcessorFactory> linkRefProcessors = new ArrayList<LinkRefProcessorFactory>();
+        private final List<InlineParserExtensionFactory> inlineParserExtensionFactories = new ArrayList<InlineParserExtensionFactory>();
         private InlineParserFactory inlineParserFactory = null;
-        private final HashSet<ParserExtension> loadedExtensions = new HashSet<>();
+        private final HashSet<ParserExtension> loadedExtensions = new HashSet<ParserExtension>();
 
         public Builder(DataHolder options) {
             super(options);
@@ -336,7 +337,7 @@ public class Parser implements IParse {
             super(other);
 
             List<Extension> extensions = new ArrayList<Extension>();
-            HashSet<Class> extensionSet = new HashSet<>();
+            HashSet<Class> extensionSet = new HashSet<Class>();
             for (Extension extension : get(EXTENSIONS)) {
                 extensions.add(extension);
                 extensionSet.add(extension.getClass());

@@ -48,13 +48,13 @@ public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepos
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<>(Footnote.class, new CustomNodeFormatter<Footnote>() {
+                new NodeFormattingHandler<Footnote>(Footnote.class, new CustomNodeFormatter<Footnote>() {
                     @Override
                     public void render(Footnote node, NodeFormatterContext context, MarkdownWriter markdown) {
                         FootnoteNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(FootnoteBlock.class, new CustomNodeFormatter<FootnoteBlock>() {
+                new NodeFormattingHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeFormatter<FootnoteBlock>() {
                     @Override
                     public void render(FootnoteBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         FootnoteNodeFormatter.this.render(node, context, markdown);

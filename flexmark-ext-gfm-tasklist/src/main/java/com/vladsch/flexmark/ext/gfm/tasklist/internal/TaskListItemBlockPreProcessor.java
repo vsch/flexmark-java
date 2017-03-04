@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.ext.gfm.tasklist.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BulletListItem;
+import com.vladsch.flexmark.ast.ListItem;
+import com.vladsch.flexmark.ast.OrderedListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
@@ -39,7 +42,7 @@ public class TaskListItemBlockPreProcessor implements BlockPreProcessor {
     public static class Factory implements BlockPreProcessorFactory {
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<>();
+            HashSet<Class<? extends Block>> set = new HashSet<Class<? extends Block>>();
             set.add(BulletListItem.class);
             set.add(OrderedListItem.class);
             return set;

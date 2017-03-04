@@ -216,8 +216,8 @@ public class DelimiterProcessorTest extends RenderingTestCase {
 
         @Override
         public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-            HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-            set.add(new NodeRenderingHandler<>(UpperCaseNode.class, new CustomNodeRenderer<UpperCaseNode>() {
+            HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+            set.add(new NodeRenderingHandler<UpperCaseNode>(UpperCaseNode.class, new CustomNodeRenderer<UpperCaseNode>() {
                 @Override
                 public void render(UpperCaseNode node, NodeRendererContext context, HtmlWriter html) {
                     UpperCaseNodeRenderer.this.render(node, context, html);

@@ -23,7 +23,7 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
             //.set(HtmlRenderer.RENDER_HEADER_ID, true)
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
 
     }
@@ -43,7 +43,7 @@ public class ComboMarkdownCompatibilitySpecTest extends ComboExtraSpecTest {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });

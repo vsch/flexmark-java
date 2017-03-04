@@ -15,7 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
-    private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<>();
+    private ArrayList<ZzzzzzBlock> referencedZzzzzzBlocks = new ArrayList<ZzzzzzBlock>();
 
     public void addZzzzzzReference(ZzzzzzBlock zzzzzzBlock, Zzzzzz zzzzzz) {
         if (!zzzzzzBlock.isReferenced()) {

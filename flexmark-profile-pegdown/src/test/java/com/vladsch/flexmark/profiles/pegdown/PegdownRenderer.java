@@ -4,7 +4,6 @@ import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.spec.IRenderBase;
 import com.vladsch.flexmark.util.options.DataHolder;
-import org.pegdown.FastEncoder;
 import org.pegdown.LinkRenderer;
 import org.pegdown.ToHtmlSerializer;
 import org.pegdown.ast.RootNode;

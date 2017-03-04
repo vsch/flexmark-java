@@ -34,9 +34,9 @@ public class TaskListNodeRenderer implements NodeRenderer {
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
         //noinspection unchecked
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         set.add(
-                new NodeRenderingHandler<>(TaskListItem.class, new CustomNodeRenderer<TaskListItem>() {
+                new NodeRenderingHandler<TaskListItem>(TaskListItem.class, new CustomNodeRenderer<TaskListItem>() {
                     @Override
                     public void render(TaskListItem node, NodeRendererContext context, HtmlWriter html) {
                         TaskListNodeRenderer.this.render(node, context, html);

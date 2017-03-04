@@ -57,7 +57,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     public static Map<Character, List<InlineParserExtensionFactory>> calculateInlineParserExtensions(DataHolder options, List<InlineParserExtensionFactory> extensionFactories) {
-        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<>();
+        Map<Character, List<InlineParserExtensionFactory>> extensionMap = new HashMap<Character, List<InlineParserExtensionFactory>>();
 
         for (InlineParserExtensionFactory factory : extensionFactories) {
             CharSequence chars = factory.getCharacters();
@@ -65,7 +65,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 char c = chars.charAt(i);
                 List<InlineParserExtensionFactory> list = extensionMap.get(c);
                 if (list == null) {
-                    list = new ArrayList<>();
+                    list = new ArrayList<InlineParserExtensionFactory>();
                     extensionMap.put(c, list);
                 }
 
@@ -74,14 +74,14 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         InlineParserExtensionDependencyHandler resolver = new InlineParserExtensionDependencyHandler();
-        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<>();
+        Map<Character, List<InlineParserExtensionFactory>> extensions = new HashMap<Character, List<InlineParserExtensionFactory>>();
         for (Character c : extensionMap.keySet()) {
             List<InlineParserExtensionFactory> list = extensionMap.get(c);
             List<InlineParserExtensionFactory> resolvedList = list;
 
             if (list.size() > 1) {
                 InlineParserExtensionDependencies dependencies = resolver.resolveDependencies(list);
-                resolvedList = new ArrayList<>(list.size());
+                resolvedList = new ArrayList<InlineParserExtensionFactory>(list.size());
                 for (InlineParserDependencyStage stage : dependencies.getDependentStages()) {
                     resolvedList.addAll(stage.dependents);
                 }
@@ -140,7 +140,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         this.referenceRepository = document.get(Parser.REFERENCES);
         this.myParsing = parsing;
 
-        linkRefProcessors = new ArrayList<>(linkRefProcessorsData.processors.size());
+        linkRefProcessors = new ArrayList<LinkRefProcessor>(linkRefProcessorsData.processors.size());
         for (LinkRefProcessorFactory factory : linkRefProcessorsData.processors) {
             linkRefProcessors.add(factory.create(document));
         }
@@ -148,9 +148,9 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         // create custom processors
         if (inlineParserExtensionFactories != null) {
             Map<Character, List<InlineParserExtensionFactory>> extensions = calculateInlineParserExtensions(document, inlineParserExtensionFactories);
-            inlineParserExtensions = new HashMap<>(extensions.size());
+            inlineParserExtensions = new HashMap<Character, List<InlineParserExtension>>(extensions.size());
             for (Map.Entry<Character, List<InlineParserExtensionFactory>> entry : extensions.entrySet()) {
-                List<InlineParserExtension> extensionList = new ArrayList<>(entry.getValue().size());
+                List<InlineParserExtension> extensionList = new ArrayList<InlineParserExtension>(entry.getValue().size());
                 for (InlineParserExtensionFactory factory : entry.getValue()) {
                     extensionList.add(factory.create(this));
                 }
@@ -178,7 +178,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     public ArrayList<BasedSequence> getCurrentText() {
         if (currentText == null) {
-            currentText = new ArrayList<>();
+            currentText = new ArrayList<BasedSequence>();
         }
 
         return currentText;
@@ -227,7 +227,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     }
 
     public static Map<Character, DelimiterProcessor> calculateDelimiterProcessors(DataHolder options, List<DelimiterProcessor> delimiterProcessors) {
-        Map<Character, DelimiterProcessor> map = new HashMap<>();
+        Map<Character, DelimiterProcessor> map = new HashMap<Character, DelimiterProcessor>();
         //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
         if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
             addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor()), map);
@@ -243,7 +243,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     // nothing to add, this is for extensions.
     public static LinkRefProcessorData calculateLinkRefProcessors(final DataHolder options, List<LinkRefProcessorFactory> linkRefProcessors) {
         if (linkRefProcessors.size() > 1) {
-            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<>(linkRefProcessors.size());
+            List<LinkRefProcessorFactory> sortedLinkProcessors = new ArrayList<LinkRefProcessorFactory>(linkRefProcessors.size());
             sortedLinkProcessors.addAll(linkRefProcessors);
 
             final int[] maxNestingLevelRef = new int[] { 0 };
@@ -432,7 +432,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
     @Override
     public void mergeIfNeeded(Text first, Text last) {
         if (first != null && last != null && first != last) {
-            ArrayList<BasedSequence> sb = new ArrayList<>();
+            ArrayList<BasedSequence> sb = new ArrayList<BasedSequence>();
             sb.add(first.getChars());
             Node node = first.getNext();
             Node stop = last.getNext();
@@ -714,7 +714,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         }
 
         appendNode(node);
-        if (customSpecialCharacterNodes == null) customSpecialCharacterNodes = new ArrayList<>();
+        if (customSpecialCharacterNodes == null) customSpecialCharacterNodes = new ArrayList<Node>();
         customSpecialCharacterNodes.add(node);
 
         int pos = index + 1;
@@ -1650,7 +1650,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
     @Override
     public void processDelimiters(Delimiter stackBottom) {
-        Map<Character, Delimiter> openersBottom = new HashMap<>();
+        Map<Character, Delimiter> openersBottom = new HashMap<Character, Delimiter>();
 
         // find first closer above stackBottom:
         Delimiter closer = lastDelimiter;

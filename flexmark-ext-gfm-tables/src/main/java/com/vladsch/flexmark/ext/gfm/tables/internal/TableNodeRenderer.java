@@ -19,38 +19,38 @@ public class TableNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(TableBlock.class, new CustomNodeRenderer<TableBlock>() {
+        return new HashSet<NodeRenderingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+                new NodeRenderingHandler<TableBlock>(TableBlock.class, new CustomNodeRenderer<TableBlock>() {
                     @Override
                     public void render(TableBlock tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(TableHead.class, new CustomNodeRenderer<TableHead>() {
+                new NodeRenderingHandler<TableHead>(TableHead.class, new CustomNodeRenderer<TableHead>() {
                     @Override
                     public void render(TableHead tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(TableSeparator.class, new CustomNodeRenderer<TableSeparator>() {
+                new NodeRenderingHandler<TableSeparator>(TableSeparator.class, new CustomNodeRenderer<TableSeparator>() {
                     @Override
                     public void render(TableSeparator tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(TableBody.class, new CustomNodeRenderer<TableBody>() {
+                new NodeRenderingHandler<TableBody>(TableBody.class, new CustomNodeRenderer<TableBody>() {
                     @Override
                     public void render(TableBody tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(TableRow.class, new CustomNodeRenderer<TableRow>() {
+                new NodeRenderingHandler<TableRow>(TableRow.class, new CustomNodeRenderer<TableRow>() {
                     @Override
                     public void render(TableRow tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(TableCell.class, new CustomNodeRenderer<TableCell>() {
+                new NodeRenderingHandler<TableCell>(TableCell.class, new CustomNodeRenderer<TableCell>() {
                     @Override
                     public void render(TableCell tableCell, NodeRendererContext context, HtmlWriter html) {
                         TableNodeRenderer.this.render(tableCell, context, html);

@@ -1,24 +1,15 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ast.AutoLink;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTag;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
-import com.vladsch.flexmark.html.AttributeProvider;
-import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.IndependentAttributeProviderFactory;
-import com.vladsch.flexmark.html.renderer.AttributablePart;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -79,7 +70,7 @@ public class JekyllIncludeFileSample {
     }
 
     public static void main(String[] args) {
-        Map<String, String> included = new HashMap<>();
+        Map<String, String> included = new HashMap<String, String>();
         included.put("test.md", "## Included Heading\n" +
                 "\n" +
                 "Included paragraph\n" +

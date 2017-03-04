@@ -18,7 +18,7 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
             .set(MacroExtension.ENABLE_RENDERING, true)
             .set(Parser.EXTENSIONS, Collections.singleton(MacroExtension.create()));
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("no-rendering", new MutableDataSet().set(MacroExtension.ENABLE_RENDERING, false));
         optionsMap.put("no-inlines", new MutableDataSet().set(MacroExtension.ENABLE_INLINE_MACROS, false));
@@ -41,7 +41,7 @@ public class ComboMacroSpecTest extends ComboSpecTestCase {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });

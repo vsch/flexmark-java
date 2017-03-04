@@ -19,7 +19,7 @@ public class ComboPegdownSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(PegdownParser.PEGDOWN_EXTENSIONS, Extensions.FENCED_CODE_BLOCKS);
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
 
     }
@@ -39,7 +39,7 @@ public class ComboPegdownSpecTest extends ComboSpecTestCase {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });

@@ -3,14 +3,14 @@ package com.vladsch.flexmark.formatter.internal;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.ParserEmulationProfile;
+import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
-import com.vladsch.flexmark.parser.ListOptions;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.Ref;
-import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -25,8 +25,8 @@ import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceRepository, Reference, RefNode> {
-    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<>("LIST_ITEM_NUMBER", 0);
-    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<>("LIST_ITEM_SPACING", (ListSpacing) null);
+    public static final DataKey<Integer> LIST_ITEM_NUMBER = new DataKey<Integer>("LIST_ITEM_NUMBER", 0);
+    public static final DataKey<ListSpacing> LIST_ITEM_SPACING = new DataKey<ListSpacing>("LIST_ITEM_SPACING", (ListSpacing) null);
 
     private final FormatterOptions options;
     private final ListOptions listOptions;
@@ -70,208 +70,208 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<>(Arrays.asList(
+        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
                 // Generic unknown node formatter
-                new NodeFormattingHandler<>(Node.class, new CustomNodeFormatter<Node>() {
+                new NodeFormattingHandler<Node>(Node.class, new CustomNodeFormatter<Node>() {
                     @Override
                     public void render(Node node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
 
-                new NodeFormattingHandler<>(AutoLink.class, new CustomNodeFormatter<AutoLink>() {
+                new NodeFormattingHandler<AutoLink>(AutoLink.class, new CustomNodeFormatter<AutoLink>() {
                     @Override
                     public void render(AutoLink node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BlankLine.class, new CustomNodeFormatter<BlankLine>() {
+                new NodeFormattingHandler<BlankLine>(BlankLine.class, new CustomNodeFormatter<BlankLine>() {
                     @Override
                     public void render(BlankLine node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BlockQuote.class, new CustomNodeFormatter<BlockQuote>() {
+                new NodeFormattingHandler<BlockQuote>(BlockQuote.class, new CustomNodeFormatter<BlockQuote>() {
                     @Override
                     public void render(BlockQuote node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Code.class, new CustomNodeFormatter<Code>() {
+                new NodeFormattingHandler<Code>(Code.class, new CustomNodeFormatter<Code>() {
                     @Override
                     public void render(Code node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Document.class, new CustomNodeFormatter<Document>() {
+                new NodeFormattingHandler<Document>(Document.class, new CustomNodeFormatter<Document>() {
                     @Override
                     public void render(Document node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Emphasis.class, new CustomNodeFormatter<Emphasis>() {
+                new NodeFormattingHandler<Emphasis>(Emphasis.class, new CustomNodeFormatter<Emphasis>() {
                     @Override
                     public void render(Emphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(FencedCodeBlock.class, new CustomNodeFormatter<FencedCodeBlock>() {
+                new NodeFormattingHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeFormatter<FencedCodeBlock>() {
                     @Override
                     public void render(FencedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HardLineBreak.class, new CustomNodeFormatter<HardLineBreak>() {
+                new NodeFormattingHandler<HardLineBreak>(HardLineBreak.class, new CustomNodeFormatter<HardLineBreak>() {
                     @Override
                     public void render(HardLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Heading.class, new CustomNodeFormatter<Heading>() {
+                new NodeFormattingHandler<Heading>(Heading.class, new CustomNodeFormatter<Heading>() {
                     @Override
                     public void render(Heading node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlBlock.class, new CustomNodeFormatter<HtmlBlock>() {
+                new NodeFormattingHandler<HtmlBlock>(HtmlBlock.class, new CustomNodeFormatter<HtmlBlock>() {
                     @Override
                     public void render(HtmlBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlCommentBlock.class, new CustomNodeFormatter<HtmlCommentBlock>() {
+                new NodeFormattingHandler<HtmlCommentBlock>(HtmlCommentBlock.class, new CustomNodeFormatter<HtmlCommentBlock>() {
                     @Override
                     public void render(HtmlCommentBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlInnerBlock.class, new CustomNodeFormatter<HtmlInnerBlock>() {
+                new NodeFormattingHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new CustomNodeFormatter<HtmlInnerBlock>() {
                     @Override
                     public void render(HtmlInnerBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlInnerBlockComment.class, new CustomNodeFormatter<HtmlInnerBlockComment>() {
+                new NodeFormattingHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, new CustomNodeFormatter<HtmlInnerBlockComment>() {
                     @Override
                     public void render(HtmlInnerBlockComment node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlEntity.class, new CustomNodeFormatter<HtmlEntity>() {
+                new NodeFormattingHandler<HtmlEntity>(HtmlEntity.class, new CustomNodeFormatter<HtmlEntity>() {
                     @Override
                     public void render(HtmlEntity node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlInline.class, new CustomNodeFormatter<HtmlInline>() {
+                new NodeFormattingHandler<HtmlInline>(HtmlInline.class, new CustomNodeFormatter<HtmlInline>() {
                     @Override
                     public void render(HtmlInline node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(HtmlInlineComment.class, new CustomNodeFormatter<HtmlInlineComment>() {
+                new NodeFormattingHandler<HtmlInlineComment>(HtmlInlineComment.class, new CustomNodeFormatter<HtmlInlineComment>() {
                     @Override
                     public void render(HtmlInlineComment node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Image.class, new CustomNodeFormatter<Image>() {
+                new NodeFormattingHandler<Image>(Image.class, new CustomNodeFormatter<Image>() {
                     @Override
                     public void render(Image node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(ImageRef.class, new CustomNodeFormatter<ImageRef>() {
+                new NodeFormattingHandler<ImageRef>(ImageRef.class, new CustomNodeFormatter<ImageRef>() {
                     @Override
                     public void render(ImageRef node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(IndentedCodeBlock.class, new CustomNodeFormatter<IndentedCodeBlock>() {
+                new NodeFormattingHandler<IndentedCodeBlock>(IndentedCodeBlock.class, new CustomNodeFormatter<IndentedCodeBlock>() {
                     @Override
                     public void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Link.class, new CustomNodeFormatter<Link>() {
+                new NodeFormattingHandler<Link>(Link.class, new CustomNodeFormatter<Link>() {
                     @Override
                     public void render(Link node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(LinkRef.class, new CustomNodeFormatter<LinkRef>() {
+                new NodeFormattingHandler<LinkRef>(LinkRef.class, new CustomNodeFormatter<LinkRef>() {
                     @Override
                     public void render(LinkRef node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BulletList.class, new CustomNodeFormatter<BulletList>() {
+                new NodeFormattingHandler<BulletList>(BulletList.class, new CustomNodeFormatter<BulletList>() {
                     @Override
                     public void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
+                new NodeFormattingHandler<OrderedList>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
                     @Override
                     public void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BulletListItem.class, new CustomNodeFormatter<BulletListItem>() {
+                new NodeFormattingHandler<BulletListItem>(BulletListItem.class, new CustomNodeFormatter<BulletListItem>() {
                     @Override
                     public void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(OrderedListItem.class, new CustomNodeFormatter<OrderedListItem>() {
+                new NodeFormattingHandler<OrderedListItem>(OrderedListItem.class, new CustomNodeFormatter<OrderedListItem>() {
                     @Override
                     public void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(MailLink.class, new CustomNodeFormatter<MailLink>() {
+                new NodeFormattingHandler<MailLink>(MailLink.class, new CustomNodeFormatter<MailLink>() {
                     @Override
                     public void render(MailLink node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Paragraph.class, new CustomNodeFormatter<Paragraph>() {
+                new NodeFormattingHandler<Paragraph>(Paragraph.class, new CustomNodeFormatter<Paragraph>() {
                     @Override
                     public void render(Paragraph node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Reference.class, new CustomNodeFormatter<Reference>() {
+                new NodeFormattingHandler<Reference>(Reference.class, new CustomNodeFormatter<Reference>() {
                     @Override
                     public void render(Reference node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(SoftLineBreak.class, new CustomNodeFormatter<SoftLineBreak>() {
+                new NodeFormattingHandler<SoftLineBreak>(SoftLineBreak.class, new CustomNodeFormatter<SoftLineBreak>() {
                     @Override
                     public void render(SoftLineBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(StrongEmphasis.class, new CustomNodeFormatter<StrongEmphasis>() {
+                new NodeFormattingHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeFormatter<StrongEmphasis>() {
                     @Override
                     public void render(StrongEmphasis node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Text.class, new CustomNodeFormatter<Text>() {
+                new NodeFormattingHandler<Text>(Text.class, new CustomNodeFormatter<Text>() {
                     @Override
                     public void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TextBase.class, new CustomNodeFormatter<TextBase>() {
+                new NodeFormattingHandler<TextBase>(TextBase.class, new CustomNodeFormatter<TextBase>() {
                     @Override
                     public void render(TextBase node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(ThematicBreak.class, new CustomNodeFormatter<ThematicBreak>() {
+                new NodeFormattingHandler<ThematicBreak>(ThematicBreak.class, new CustomNodeFormatter<ThematicBreak>() {
                     @Override
                     public void render(ThematicBreak node, NodeFormatterContext context, MarkdownWriter markdown) {
                         CoreNodeFormatter.this.render(node, context, markdown);
@@ -347,7 +347,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     break;
             }
         } else {
-            Ref<Integer> ref = new Ref<>(markdown.offset());
+            Ref<Integer> ref = new Ref<Integer>(markdown.offset());
             markdown.lastOffset(ref);
             context.renderChildren(node);
             markdown.line();
@@ -458,7 +458,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                 minSpaces = Utils.min(minSpaces, leadColumns[i]);
                 i++;
             }
-            ArrayList<BasedSequence> trimmedLines = new ArrayList<>();
+            ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
             if (minSpaces > 0) {
                 i = 0;
                 //StringBuilder out = new StringBuilder();
@@ -549,7 +549,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
-        ArrayList<Node> itemList = new ArrayList<>();
+        ArrayList<Node> itemList = new ArrayList<Node>();
         Node item = node.getFirstChild();
         while (item != null) {
             itemList.add(item);

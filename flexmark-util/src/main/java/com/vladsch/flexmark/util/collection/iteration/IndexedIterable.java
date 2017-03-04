@@ -16,7 +16,7 @@ public class IndexedIterable<R, S, I extends ReversibleIterable<Integer>> implem
 
     @Override
     public ReversibleIndexedIterator<R> iterator() {
-        return new IndexedIterator<>(myItems, myIterable.iterator());
+        return new IndexedIterator<R, S, ReversibleIterator<Integer>>(myItems, myIterable.iterator());
     }
 
     @Override

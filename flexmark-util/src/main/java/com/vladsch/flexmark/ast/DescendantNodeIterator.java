@@ -3,7 +3,6 @@ package com.vladsch.flexmark.ast;
 import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 
-import java.util.Objects;
 import java.util.Stack;
 
 public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
@@ -41,7 +40,7 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
         if (result.getFirstChild() != null) {
             // push the current iterator on to the stack and make the node's children the iterator
             if (iterator.hasNext()) {
-                if (iteratorStack == null) iteratorStack = new Stack<>();
+                if (iteratorStack == null) iteratorStack = new Stack<ReversiblePeekingIterator<Node>>();
                 iteratorStack.push(iterator);
             }
 
@@ -71,7 +70,8 @@ public class DescendantNodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     public void forEachRemaining(Consumer<? super Node> consumer) {
-        Objects.requireNonNull(consumer);
+        if ( consumer == null)
+            throw new NullPointerException();
 
         while (hasNext()) {
             consumer.accept(next());

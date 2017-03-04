@@ -10,7 +10,7 @@ import java.util.List;
 public class TextNodeConverter {
     private final BasedSequence nodeChars;
     private BasedSequence remainingChars;
-    private ArrayList<Node> list = new ArrayList<>();
+    private ArrayList<Node> list = new ArrayList<Node>();
 
     public TextNodeConverter(BasedSequence nodeChars) {
         this.nodeChars = nodeChars;

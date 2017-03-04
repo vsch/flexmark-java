@@ -19,7 +19,7 @@ public class JekyllFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
     @Override
     public Set<FormattingPhase> getFormattingPhases() {
-        return new HashSet<>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
+        return new HashSet<FormattingPhase>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class JekyllFrontMatterNodeFormatter implements PhasedNodeFormatter {
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<>(JekyllFrontMatterBlock.class, new CustomNodeFormatter<JekyllFrontMatterBlock>() {
+                new NodeFormattingHandler<JekyllFrontMatterBlock>(JekyllFrontMatterBlock.class, new CustomNodeFormatter<JekyllFrontMatterBlock>() {
                     @Override
                     public void render(JekyllFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         JekyllFrontMatterNodeFormatter.this.render(node, context, markdown);

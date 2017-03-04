@@ -1,6 +1,9 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.Heading;
+import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.ast.util.Parsing;
 import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.Parser;
@@ -61,7 +64,7 @@ public class HeadingParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
             set.add(BlockQuoteParser.Factory.class);
             return set;
             //return new HashSet<>(Arrays.asList(
@@ -78,7 +81,7 @@ public class HeadingParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,

@@ -122,7 +122,7 @@ public class TocLevelsOptionParser implements OptionParser<TocOptions> {
 
         if (newLevels != 0) result = result.withLevels(newLevels);
 
-        return new Pair<>(result, (List<ParsedOption<TocOptions>>)Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
+        return new Pair<TocOptions, List<ParsedOption<TocOptions>>>(result, (List<ParsedOption<TocOptions>>)Collections.<ParsedOption<TocOptions>>singletonList(new ParsedOption(optionText, this, parserParams.status, parserParams.messages)));
     }
 
     @Override

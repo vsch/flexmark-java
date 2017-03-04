@@ -50,7 +50,7 @@ public class HtmlRendererTest {
     }
 
     @Test
-    public void percendEncodeUrlDisabled() {
+    public void percentEncodeUrlDisabled() {
         assertEquals("<p><a href=\"foo&amp;bar\">a</a></p>\n", defaultRenderer().render(parse("[a](foo&amp;bar)")));
         assertEquals("<p><a href=\"ä\">a</a></p>\n", defaultRenderer().render(parse("[a](ä)")));
         assertEquals("<p><a href=\"foo%20bar\">a</a></p>\n", defaultRenderer().render(parse("[a](foo%20bar)")));
@@ -140,8 +140,8 @@ public class HtmlRendererTest {
                 return new NodeRenderer() {
                     @Override
                     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-                        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-                        set.add(new NodeRenderingHandler<>(Link.class, new CustomNodeRenderer<Link>() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
                             @Override
                             public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                                 context.getHtmlWriter().text("test");

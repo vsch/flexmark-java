@@ -161,7 +161,7 @@ public class TocUtils {
     }
 
     public static List<Heading> filteredHeadings(List<Heading> headings, TocOptions tocOptions) {
-        ArrayList<Heading> filteredHeadings = new ArrayList<>(headings.size());
+        ArrayList<Heading> filteredHeadings = new ArrayList<Heading>(headings.size());
 
         for (Heading header : headings) {
             if (tocOptions.isLevelIncluded(header.getLevel()) && !(header.getParent() instanceof SimTocContent)) {
@@ -173,7 +173,7 @@ public class TocUtils {
     }
 
     public static Paired<List<Heading>, List<String>> htmlHeadingTexts(NodeRendererContext context, List<Heading> headings, TocOptions tocOptions) {
-        final List<String> headingContents = new ArrayList<>(headings.size());
+        final List<String> headingContents = new ArrayList<String>(headings.size());
         final boolean isReversed = tocOptions.listType == TocOptions.ListType.SORTED_REVERSED || tocOptions.listType == TocOptions.ListType.FLAT_REVERSED;
         final boolean isSorted = tocOptions.listType == TocOptions.ListType.SORTED || tocOptions.listType == TocOptions.ListType.SORTED_REVERSED;
         final  boolean needText = isReversed || isSorted;
@@ -227,7 +227,7 @@ public class TocUtils {
                 }
             }
 
-            headings = new ArrayList<>();
+            headings = new ArrayList<Heading>();
             for (String headingContent : headingContents) {
                 headings.add(headingNodes.get(headingContent));
             }

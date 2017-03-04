@@ -16,7 +16,7 @@ public class ItemFactoryMap<I, P> implements Map<ComputableFactory<I, P>, I> {
     }
 
     public ItemFactoryMap(P param, int capacity) {
-        this.itemMap = new HashMap<>(capacity);
+        this.itemMap = new HashMap<ComputableFactory<I, P>, I>(capacity);
         this.param = param;
     }
 

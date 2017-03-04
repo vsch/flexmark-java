@@ -10,7 +10,10 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 import org.junit.runners.Parameterized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pdf_converter_ast_spec.md";
@@ -19,7 +22,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
 
-    private static final Map<String, DataHolder> optionsMap = new HashMap<>();
+    private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("ltr-text", new MutableDataSet().set(PdfConverterExtension.DEFAULT_TEXT_DIRECTION, PdfRendererBuilder.TextDirection.LTR));
@@ -42,7 +45,7 @@ public class ComboPdfConverterSpecTest extends ComboSpecTestCase {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples(SPEC_RESOURCE);
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });

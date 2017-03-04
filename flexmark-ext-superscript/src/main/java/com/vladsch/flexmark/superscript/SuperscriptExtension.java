@@ -44,15 +44,10 @@ public class SuperscriptExtension implements Parser.ParserExtension, HtmlRendere
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new SuperscriptNodeRenderer.Factory());
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new SuperscriptJiraRenderer.Factory());
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new SuperscriptNodeRenderer.Factory());
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new SuperscriptJiraRenderer.Factory());
         }
     }
 }

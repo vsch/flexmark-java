@@ -19,9 +19,9 @@ public class EmojiCheatSheet {
         }
     }
 
-    public static final HashMap<String, EmojiShortcut> shortCutMap = new HashMap<>();
-    public static final HashMap<String, EmojiShortcut> fileMap = new HashMap<>();
-    public static final HashMap<String, EmojiShortcut> gitHubUrlMap = new HashMap<>();
+    public static final HashMap<String, EmojiShortcut> shortCutMap = new HashMap<String, EmojiShortcut>();
+    public static final HashMap<String, EmojiShortcut> fileMap = new HashMap<String, EmojiShortcut>();
+    public static final HashMap<String, EmojiShortcut> gitHubUrlMap = new HashMap<String, EmojiShortcut>();
 
     static {
         shortCutMap.put("+1", new EmojiShortcut("+1", "plus1.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png", "people"));

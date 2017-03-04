@@ -25,8 +25,8 @@ public class EmojiNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(Emoji.class, new CustomNodeRenderer<Emoji>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<Emoji>(Emoji.class, new CustomNodeRenderer<Emoji>() {
             @Override
             public void render(Emoji node, NodeRendererContext context, HtmlWriter html) {
                 EmojiNodeRenderer.this.render(node, context, html);

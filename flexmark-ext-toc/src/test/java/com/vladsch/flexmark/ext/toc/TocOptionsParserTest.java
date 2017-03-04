@@ -31,8 +31,8 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
             //.set(Parser.EXTENSIONS, Collections.singletonList(SimTocExtension.create()))
             ;
 
-    private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<>("TOC_OPTIONS", TocOptions.DEFAULT);
-    private static DataKey<Boolean> SIM_TOC = new DataKey<>("SIM_TOC", false);
+    private static DataKey<TocOptions> TOC_OPTIONS = new DataKey<TocOptions>("TOC_OPTIONS", TocOptions.DEFAULT);
+    private static DataKey<Boolean> SIM_TOC = new DataKey<Boolean>("SIM_TOC", false);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
@@ -55,7 +55,7 @@ public class TocOptionsParserTest extends ComboSpecTestCase {
     static class ParserVisitorExt {
         static <V extends ParserVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
             return new VisitHandler<?>[] {
-                    new VisitHandler<>(ParserNode.class, new Visitor<ParserNode>() {
+                    new VisitHandler<ParserNode>(ParserNode.class, new Visitor<ParserNode>() {
                         @Override
                         public void visit(ParserNode node) {visitor.visit(node);
                         }

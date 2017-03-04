@@ -6,10 +6,10 @@ import com.vladsch.flexmark.ext.tables.internal.TableNodeFormatter;
 import com.vladsch.flexmark.ext.tables.internal.TableNodeRenderer;
 import com.vladsch.flexmark.ext.tables.internal.TableParagraphPreProcessor;
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.format.TableFormatOptions;
+import com.vladsch.flexmark.util.format.options.DiscretionaryText;
 import com.vladsch.flexmark.util.mappers.CharWidthProvider;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -27,15 +27,15 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 @SuppressWarnings("WeakerAccess")
 public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
-    public static final DataKey<Integer> MAX_HEADER_ROWS = new DataKey<>("MAX_HEADER_ROWS", Integer.MAX_VALUE);
-    public static final DataKey<Integer> MIN_HEADER_ROWS = new DataKey<>("MIN_HEADER_ROWS", 0);
-    public static final DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<>("APPEND_MISSING_COLUMNS", false);
-    public static final DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<>("DISCARD_EXTRA_COLUMNS", false);
-    public static final DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<>("TRIM_CELL_WHITESPACE", true);
-    public static final DataKey<Boolean> COLUMN_SPANS = new DataKey<>("COLUMN_SPANS", true);
-    public static final DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<>("HEADER_SEPARATOR_COLUMN_MATCH", false);
-    public static final DataKey<String> CLASS_NAME = new DataKey<>("CLASS_NAME", "");
-    public static final DataKey<Boolean> WITH_CAPTION = new DataKey<>("WITH_CAPTION", true);
+    public static final DataKey<Integer> MAX_HEADER_ROWS = new DataKey<Integer>("MAX_HEADER_ROWS", Integer.MAX_VALUE);
+    public static final DataKey<Integer> MIN_HEADER_ROWS = new DataKey<Integer>("MIN_HEADER_ROWS", 0);
+    public static final DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<Boolean>("APPEND_MISSING_COLUMNS", false);
+    public static final DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<Boolean>("DISCARD_EXTRA_COLUMNS", false);
+    public static final DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<Boolean>("TRIM_CELL_WHITESPACE", true);
+    public static final DataKey<Boolean> COLUMN_SPANS = new DataKey<Boolean>("COLUMN_SPANS", true);
+    public static final DataKey<Boolean> HEADER_SEPARATOR_COLUMN_MATCH = new DataKey<Boolean>("HEADER_SEPARATOR_COLUMN_MATCH", false);
+    public static final DataKey<String> CLASS_NAME = new DataKey<String>("CLASS_NAME", "");
+    public static final DataKey<Boolean> WITH_CAPTION = new DataKey<Boolean>("WITH_CAPTION", true);
 
     // format options copy from TableFormatOptions for convenience
     public static final DataKey<Boolean> FORMAT_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
@@ -75,15 +75,10 @@ public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new TableJiraRenderer.Factory());
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new TableNodeRenderer.Factory());
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new TableJiraRenderer.Factory());
         }
     }
 }

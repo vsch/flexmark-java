@@ -280,7 +280,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class
                     //FencedCodeBlockParser.Factory.class
@@ -293,7 +293,7 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,
@@ -325,7 +325,6 @@ public class SpecExampleBlockParser extends AbstractBlockParser {
 
         @Override
         public BlockStart tryStart(ParserState state, MatchedBlockParser matchedBlockParser) {
-            int nextNonSpace = state.getNextNonSpaceIndex();
             BasedSequence line = state.getLine();
             if (state.getIndex() == 0) {
                 int breakLength = myOptions.exampleBreak.length();

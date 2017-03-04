@@ -27,9 +27,8 @@ public class ParserTest {
 
         InputStream input1 = SpecReader.getSpecInputStream();
         Node document1;
-        try (InputStreamReader reader = new InputStreamReader(input1)) {
-            document1 = parser.parseReader(reader);
-        }
+        InputStreamReader reader = new InputStreamReader(input1);
+        document1 = parser.parseReader(reader);
 
         String spec = SpecReader.readSpec();
         Node document2 = parser.parse(spec);

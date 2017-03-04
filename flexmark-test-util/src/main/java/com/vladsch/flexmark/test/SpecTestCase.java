@@ -22,7 +22,7 @@ public abstract class SpecTestCase extends RenderingTestCase {
     @Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples();
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
         for (SpecExample example : examples) {
             data.add(new Object[] { example });
         }

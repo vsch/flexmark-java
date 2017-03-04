@@ -99,7 +99,7 @@ public class MacroBlockParser extends AbstractBlockParser {
     public void closeBlock(ParserState state) {
         // first line is macro open and possibly close
         if (oneLine) {
-            List<BasedSequence> lines = new ArrayList<>();
+            List<BasedSequence> lines = new ArrayList<BasedSequence>();
             Macro macro = (Macro) block.getFirstChild();
             Node node = block.getLastChild();
             BasedSequence contentLine;

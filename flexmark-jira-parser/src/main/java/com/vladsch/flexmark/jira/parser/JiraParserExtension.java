@@ -2,11 +2,7 @@ package com.vladsch.flexmark.jira.parser;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.NodeRenderer;
-import com.vladsch.flexmark.html.renderer.NodeRendererFactory;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -44,19 +40,14 @@ public class JiraParserExtension implements Parser.ParserExtension, HtmlRenderer
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                //rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                //    @Override
-                //    public NodeRenderer create(DataHolder options) {
-                //        return new AbbreviationNodeRenderer(options);
-                //    }
-                //});
-                break;
+        if (rendererType.equals("HTML")) {//rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+            //    @Override
+            //    public NodeRenderer create(DataHolder options) {
+            //        return new AbbreviationNodeRenderer(options);
+            //    }
+            //});
 
-            case "JIRA":
-            case "YOUTRACK":
-                break;
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         }
     }
 }

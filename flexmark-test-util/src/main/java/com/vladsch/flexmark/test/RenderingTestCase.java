@@ -20,9 +20,9 @@ public abstract class RenderingTestCase {
     public static final String FAIL_OPTION_NAME = "FAIL";
     public static final String NO_FILE_EOL_OPTION_NAME = "NO_FILE_EOL";
     public static final String FILE_EOL_OPTION_NAME = "FILE_EOL";
-    public static DataKey<Boolean> FAIL = new DataKey<>(FAIL_OPTION_NAME, false);
-    public static DataKey<Boolean> IGNORE = new DataKey<>(IGNORE_OPTION_NAME, false);
-    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<>(NO_FILE_EOL_OPTION_NAME, true);
+    public static DataKey<Boolean> FAIL = new DataKey<Boolean>(FAIL_OPTION_NAME, false);
+    public static DataKey<Boolean> IGNORE = new DataKey<Boolean>(IGNORE_OPTION_NAME, false);
+    public static DataKey<Boolean> NO_FILE_EOL = new DataKey<Boolean>(NO_FILE_EOL_OPTION_NAME, true);
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -58,58 +58,51 @@ public abstract class RenderingTestCase {
             String option = optionName.trim();
             if (option.isEmpty() || option.startsWith("-")) continue;
 
-            switch (option) {
-                case IGNORE_OPTION_NAME:
+            if (option.equals(IGNORE_OPTION_NAME)) {//noinspection ConstantConditions
+                throwIgnoredOption(example, optionSets, option);
+            } else if (option.equals(FAIL_OPTION_NAME)) {
+                if (options == null) {
+                    options = new MutableDataSet().set(FAIL, true);
+                } else {
+                    options = new MutableDataSet(options).set(FAIL, true);
+                }
+            } else if (option.equals(NO_FILE_EOL_OPTION_NAME)) {
+                if (options == null) {
+                    options = new MutableDataSet().set(NO_FILE_EOL, true);
+                } else {
+                    options = new MutableDataSet(options).set(NO_FILE_EOL, true);
+                }
+            } else if (option.equals(FILE_EOL_OPTION_NAME)) {
+                if (options == null) {
+                    options = new MutableDataSet().set(NO_FILE_EOL, false);
+                } else {
+                    options = new MutableDataSet(options).set(NO_FILE_EOL, true);
+                }
+            } else {
+                if (options == null) {
+                    options = options(option);
+
+                    if (options == null) {
+                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                    }
+                } else {
+                    DataHolder dataSet = options(option);
+
+                    if (dataSet != null) {
+                        if (isFirst) {
+                            options = new MutableDataSet(options);
+                            isFirst = false;
+                        }
+                        ((MutableDataSet) options).setAll(dataSet);
+                    } else {
+                        throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
+                    }
+                }
+
+                if (IGNORE.getFrom(options)) {
                     //noinspection ConstantConditions
                     throwIgnoredOption(example, optionSets, option);
-                    break;
-                case FAIL_OPTION_NAME:
-                    if (options == null) {
-                        options = new MutableDataSet().set(FAIL, true);
-                    } else {
-                        options = new MutableDataSet(options).set(FAIL, true);
-                    }
-                    break;
-                case NO_FILE_EOL_OPTION_NAME:
-                    if (options == null) {
-                        options = new MutableDataSet().set(NO_FILE_EOL, true);
-                    } else {
-                        options = new MutableDataSet(options).set(NO_FILE_EOL, true);
-                    }
-                    break;
-                case FILE_EOL_OPTION_NAME:
-                    if (options == null) {
-                        options = new MutableDataSet().set(NO_FILE_EOL, false);
-                    } else {
-                        options = new MutableDataSet(options).set(NO_FILE_EOL, true);
-                    }
-                    break;
-                default:
-                    if (options == null) {
-                        options = options(option);
-
-                        if (options == null) {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
-                        }
-                    } else {
-                        DataHolder dataSet = options(option);
-
-                        if (dataSet != null) {
-                            if (isFirst) {
-                                options = new MutableDataSet(options);
-                                isFirst = false;
-                            }
-                            ((MutableDataSet) options).setAll(dataSet);
-                        } else {
-                            throw new IllegalStateException("Option " + option + " is not implemented in the RenderingTestCase subclass");
-                        }
-                    }
-
-                    if (IGNORE.getFrom(options)) {
-                        //noinspection ConstantConditions
-                        throwIgnoredOption(example, optionSets, option);
-                    }
-                    break;
+                }
             }
         }
         return options;

@@ -41,45 +41,50 @@ public class Escaping {
 
     private static final Pattern WHITESPACE = Pattern.compile("[ \t\r\n]+");
 
+    private static final Pattern COLLAPSE_WHITESPACE = Pattern.compile("[ \t]{2,}");
+
     private static final Replacer UNSAFE_CHAR_REPLACER = new Replacer() {
         @Override
         public void replace(String s, StringBuilder sb) {
-            switch (s) {
-                case "&":
-                    sb.append("&amp;");
-                    break;
-                case "<":
-                    sb.append("&lt;");
-                    break;
-                case ">":
-                    sb.append("&gt;");
-                    break;
-                case "\"":
-                    sb.append("&quot;");
-                    break;
-                default:
-                    sb.append(s);
+            if (s.equals("&")) {
+                sb.append("&amp;");
+            } else if (s.equals("<")) {
+                sb.append("&lt;");
+            } else if (s.equals(">")) {
+                sb.append("&gt;");
+            } else if (s.equals("\"")) {
+                sb.append("&quot;");
+            } else {
+                sb.append(s);
             }
         }
 
         @Override
         public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
-            switch (s.toString()) {
-                case "&":
-                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
-                    break;
-                case "<":
-                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
-                    break;
-                case ">":
-                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
-                    break;
-                case "\"":
-                    textMapper.addReplacedText(s, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
-                    break;
-                default:
-                    textMapper.addOriginalText(s);
+            String s1 = s.toString();
+            if (s1.equals("&")) {
+                textMapper.addReplacedText(s, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
+            } else if (s1.equals("<")) {
+                textMapper.addReplacedText(s, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
+            } else if (s1.equals(">")) {
+                textMapper.addReplacedText(s, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
+            } else if (s1.equals("\"")) {
+                textMapper.addReplacedText(s, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
+            } else {
+                textMapper.addOriginalText(s);
             }
+        }
+    };
+
+    private static final Replacer COLLAPSE_WHITESPACE_REPLACER = new Replacer() {
+        @Override
+        public void replace(String s, StringBuilder sb) {
+            sb.append(" ");
+        }
+
+        @Override
+        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+            textMapper.addReplacedText(s, s.subSequence(0, 1));
         }
     };
 
@@ -472,6 +477,10 @@ public class Escaping {
         }
         if (hadSpace && !trim) sb.append(' ');
         return sb.toString();
+    }
+
+    public static BasedSequence collapseWhitespace(BasedSequence s, ReplacedTextMapper textMapper) {
+        return replaceAll(COLLAPSE_WHITESPACE, s, COLLAPSE_WHITESPACE_REPLACER, textMapper);
     }
 
     private static String replaceAll(Pattern p, CharSequence s, Replacer replacer) {

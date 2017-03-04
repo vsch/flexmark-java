@@ -4,17 +4,17 @@ import com.vladsch.flexmark.ext.emoji.internal.EmojiCheatSheet;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.format.Table;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
-import com.vladsch.flexmark.util.html.*;
+import com.vladsch.flexmark.util.html.CellAlignment;
+import com.vladsch.flexmark.util.html.FormattingAppendable;
+import com.vladsch.flexmark.util.html.FormattingAppendableImpl;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
-import com.vladsch.flexmark.util.options.DelimitedBuilder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
-import org.jsoup.nodes.Attribute;
 import org.jsoup.select.Elements;
 
 import java.util.*;
@@ -23,28 +23,28 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings({ "WeakerAccess", "SameParameterValue" })
 public class FlexmarkHtmlParser {
-    public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<>("LIST_CONTENT_INDENT", true);
-    public static final DataKey<Boolean> SETEXT_HEADINGS = new DataKey<>("SETEXT_HEADINGS", true);
-    public static final DataKey<Boolean> OUTPUT_UNKNOWN_TAGS = new DataKey<>("OUTPUT_UNKNOWN_TAGS", false);
-    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<>("TYPOGRAPHIC_QUOTES", true);
-    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<>("TYPOGRAPHIC_SMARTS", true);
-    public static final DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<>("EXTRACT_AUTO_LINKS", true);
-    public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<>("WRAP_AUTO_LINKS", false);
-    public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<>("ORDERED_LIST_DELIMITER", '.');
-    public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<>("UNORDERED_LIST_DELIMITER", '*');
-    public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<>("DEFINITION_MARKER_SPACES", 3);
-    public static final DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
-    public static final DataKey<String> CODE_INDENT = new DataKey<>("CODE_INDENT", "    ");
-    public static final DataKey<String> NBSP_TEXT = new DataKey<>("NBSP_TEXT", " ");
-    public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<>("EOL_IN_TITLE_ATTRIBUTE", " ");
-    public static final DataKey<String> THEMATIC_BREAK = new DataKey<>("THEMATIC_BREAK", "*** ** * ** ***");
+    public static final DataKey<Boolean> LIST_CONTENT_INDENT = new DataKey<Boolean>("LIST_CONTENT_INDENT", true);
+    public static final DataKey<Boolean> SETEXT_HEADINGS = new DataKey<Boolean>("SETEXT_HEADINGS", true);
+    public static final DataKey<Boolean> OUTPUT_UNKNOWN_TAGS = new DataKey<Boolean>("OUTPUT_UNKNOWN_TAGS", false);
+    public static final DataKey<Boolean> TYPOGRAPHIC_QUOTES = new DataKey<Boolean>("TYPOGRAPHIC_QUOTES", true);
+    public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<Boolean>("TYPOGRAPHIC_SMARTS", true);
+    public static final DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<Boolean>("EXTRACT_AUTO_LINKS", true);
+    public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<Boolean>("WRAP_AUTO_LINKS", false);
+    public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<Character>("ORDERED_LIST_DELIMITER", '.');
+    public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<Character>("UNORDERED_LIST_DELIMITER", '*');
+    public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<Integer>("DEFINITION_MARKER_SPACES", 3);
+    public static final DataKey<Integer> MIN_SETEXT_HEADING_MARKER_LENGTH = new DataKey<Integer>("MIN_SETEXT_HEADING_MARKER_LENGTH", 3);
+    public static final DataKey<String> CODE_INDENT = new DataKey<String>("CODE_INDENT", "    ");
+    public static final DataKey<String> NBSP_TEXT = new DataKey<String>("NBSP_TEXT", " ");
+    public static final DataKey<String> EOL_IN_TITLE_ATTRIBUTE = new DataKey<String>("EOL_IN_TITLE_ATTRIBUTE", " ");
+    public static final DataKey<String> THEMATIC_BREAK = new DataKey<String>("THEMATIC_BREAK", "*** ** * ** ***");
 
     public static final DataKey<Integer> TABLE_MIN_SEPARATOR_COLUMN_WIDTH = TableFormatOptions.MIN_SEPARATOR_COLUMN_WIDTH;
     public static final DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
     public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
     public static final DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
 
-    private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<>();
+    private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<Object, CellAlignment>();
     static {
         tableCellAlignments.put(Pattern.compile("\\bleft\\b"), CellAlignment.LEFT);
         tableCellAlignments.put(Pattern.compile("\\bcenter\\b"), CellAlignment.CENTER);
@@ -54,7 +54,7 @@ public class FlexmarkHtmlParser {
         tableCellAlignments.put("text-right", CellAlignment.RIGHT);
     }
 
-    private static final Map<String, String> typographicMap = new HashMap<>();
+    private static final Map<String, String> typographicMap = new HashMap<String, String>();
     private static final String typographicQuotes = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
     private static final String typographicSmarts = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
@@ -79,7 +79,7 @@ public class FlexmarkHtmlParser {
         typographicMap.put("&emdash;", "---");
     }
 
-    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
+    public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
     private final Stack<State> myStateStack;
     private final Map<String, String> myAbbreviations;
@@ -89,8 +89,8 @@ public class FlexmarkHtmlParser {
     private final Pattern typographicPattern;
 
     private FlexmarkHtmlParser(DataHolder options) {
-        myStateStack = new Stack<>();
-        myAbbreviations = new HashMap<>();
+        myStateStack = new Stack<State>();
+        myAbbreviations = new HashMap<String, String>();
         myOptions = new HtmlParserOptions(options);
 
         if (myOptions.typographicQuotes && myOptions.typographicSmarts) {
@@ -596,7 +596,7 @@ public class FlexmarkHtmlParser {
 
         TagParam tagParam = getTagParam(element);
         if (tagParam != null) {
-            int level = (int) tagParam.param;
+            int level = (Integer) tagParam.param;
             if (level >= 1 && level <= 6) {
                 String headingText = processTextNodes(element).trim();
                 if (!headingText.isEmpty()) {
@@ -1254,7 +1254,7 @@ public class FlexmarkHtmlParser {
         }
     }
 
-    private final static Map<String, TagParam> ourTagProcessors = new HashMap<>();
+    private final static Map<String, TagParam> ourTagProcessors = new HashMap<String, TagParam>();
     static {
         ourTagProcessors.put("a", TagParam.tag(TagType.A, null));
         ourTagProcessors.put("abbr", TagParam.tag(TagType.ABBR, null));

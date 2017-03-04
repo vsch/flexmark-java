@@ -27,7 +27,7 @@ import java.io.OutputStream;
  * </p>
  */
 public class PdfConverterExtension {
-    public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
+    public static final DataKey<PdfRendererBuilder.TextDirection> DEFAULT_TEXT_DIRECTION = new DataKey<PdfRendererBuilder.TextDirection>("DEFAULT_TEXT_DIRECTION", (PdfRendererBuilder.TextDirection) null);
 
     public static void exportToPdf(String out, String html, String url, DataHolder options) {
         exportToPdf(out, html, url, options.get(DEFAULT_TEXT_DIRECTION));

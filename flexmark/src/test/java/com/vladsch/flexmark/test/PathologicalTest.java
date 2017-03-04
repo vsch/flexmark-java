@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PathologicalTest extends CoreRenderingTestCase {
 
-    private int x = 100_000;
+    private int x = 100000;
 
     @Rule
     public Timeout timeout = new Timeout(3, TimeUnit.SECONDS);
@@ -97,5 +97,4 @@ public class PathologicalTest extends CoreRenderingTestCase {
                 Strings.repeat("<blockquote>\n", x) + "<p>a</p>\n" +
                         Strings.repeat("</blockquote>\n", x));
     }
-
 }

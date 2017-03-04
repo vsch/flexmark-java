@@ -5,12 +5,12 @@ import com.vladsch.flexmark.ast.*;
 import java.util.ArrayList;
 
 public class HeadingCollectingVisitor {
-    private final ArrayList<Heading> headings = new ArrayList<>();
+    private final ArrayList<Heading> headings = new ArrayList<Heading>();
     private final NodeVisitor myVisitor;
 
     public HeadingCollectingVisitor() {
         myVisitor = new BlockNodeVisitor(
-                new VisitHandler<>(Heading.class, new Visitor<Heading>() {
+                new VisitHandler<Heading>(Heading.class, new Visitor<Heading>() {
                     @Override
                     public void visit(Heading e) {headings.add(e);}
                 })

@@ -9,7 +9,6 @@ import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.util.format.Table;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
-import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.Arrays;
@@ -32,50 +31,50 @@ public class TableNodeFormatter implements NodeFormatter {
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeFormattingHandler<>(TableBlock.class, new CustomNodeFormatter<TableBlock>() {
+        return new HashSet<NodeFormattingHandler<? extends Node>>(Arrays.asList(
+                new NodeFormattingHandler<TableBlock>(TableBlock.class, new CustomNodeFormatter<TableBlock>() {
                     @Override
                     public void render(TableBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableHead.class, new CustomNodeFormatter<TableHead>() {
+                new NodeFormattingHandler<TableHead>(TableHead.class, new CustomNodeFormatter<TableHead>() {
                     @Override
                     public void render(TableHead node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableSeparator.class, new CustomNodeFormatter<TableSeparator>() {
+                new NodeFormattingHandler<TableSeparator>(TableSeparator.class, new CustomNodeFormatter<TableSeparator>() {
                     @Override
                     public void render(TableSeparator node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableBody.class, new CustomNodeFormatter<TableBody>() {
+                new NodeFormattingHandler<TableBody>(TableBody.class, new CustomNodeFormatter<TableBody>() {
                     @Override
                     public void render(TableBody node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableRow.class, new CustomNodeFormatter<TableRow>() {
+                new NodeFormattingHandler<TableRow>(TableRow.class, new CustomNodeFormatter<TableRow>() {
                     @Override
                     public void render(TableRow node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableCell.class, new CustomNodeFormatter<TableCell>() {
+                new NodeFormattingHandler<TableCell>(TableCell.class, new CustomNodeFormatter<TableCell>() {
                     @Override
                     public void render(TableCell node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(TableCaption.class, new CustomNodeFormatter<TableCaption>() {
+                new NodeFormattingHandler<TableCaption>(TableCaption.class, new CustomNodeFormatter<TableCaption>() {
                     @Override
                     public void render(TableCaption node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(Text.class, new CustomNodeFormatter<Text>() {
+                new NodeFormattingHandler<Text>(Text.class, new CustomNodeFormatter<Text>() {
                     @Override
                     public void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TableNodeFormatter.this.render(node, context, markdown);

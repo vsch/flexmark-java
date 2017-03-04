@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.16.2](#0162)
 - [0.16.1](#0161)
 - [0.16.0](#0160)
 - [0.15.4](#0154)
@@ -46,52 +47,6 @@ flexmark-java
 - [0.9.2](#092)
 - [0.9.1](#091)
 - [0.9.0](#090)
-- [0.8.0](#080)
-- [0.7.0](#070)
-- [0.6.1](#061)
-- [0.6.0](#060)
-- [0.5.0](#050)
-- [0.4.17](#0417)
-- [0.4.16](#0416)
-- [0.4.15](#0415)
-- [0.4.14](#0414)
-- [0.4.13](#0413)
-- [0.4.12](#0412)
-- [0.4.11](#0411)
-- [0.4.10](#0410)
-- [0.4.9](#049)
-- [0.4.8](#048)
-- [0.4.7](#047)
-- [0.4.6](#046)
-- [0.4.5](#045)
-- [0.4.4](#044)
-- [0.4.3](#043)
-- [0.4.2](#042)
-- [0.4.1](#041)
-- [0.4.0](#040)
-- [0.3.2](#032)
-- [0.3.1](#031)
-- [0.3.0](#030)
-- [0.2.9](#029)
-- [0.2.8](#028)
-- [0.2.7](#027)
-- [0.2.6](#026)
-- [0.2.5](#025)
-- [0.2.4](#024)
-- [0.2.3](#023)
-- [0.2.2](#022)
-- [0.2.1](#021)
-- [0.2.0](#020)
-- [0.1.9](#019)
-- [0.1.8](#018)
-- [0.1.7](#017)
-- [0.1.6](#016)
-- [0.1.5](#015)
-- [0.1.4](#014)
-- [0.1.3](#013)
-- [0.1.2](#012)
-- [0.1.1](#011)
-- [0.1.0](#010)
 
 
 &nbsp;</details><details id="version-history"><summary>**To Do**</summary>
@@ -126,6 +81,19 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.16.2
+------
+
+Add: `Parser.CODE_CONTENT_BLOCK`, default `false`. If set to true will create an AST `CodeBlock`
+node as a child node of `FencedCodeBlock` and `IndentedCodeBlock`. Allows custom rendering of
+`CodeBlock` content code while leaving rendering of fenced code and indented code blocks
+standard.
+
+Change: `PhasedNodeRenderer.renderDocument(NodeRendererContext, HtmlWriter, Document,
+RenderingPhase)` is now also called for `RenderingPhase.BODY` but no rendering should be done
+for this phase. All rendering for the body phase should be done through regular node renderer
+API.
 
 0.16.1
 ------

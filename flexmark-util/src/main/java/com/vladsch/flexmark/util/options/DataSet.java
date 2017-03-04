@@ -8,11 +8,11 @@ public class DataSet implements DataHolder {
     protected final HashMap<DataKey, Object> dataSet;
 
     public DataSet() {
-        dataSet = new HashMap<>();
+        dataSet = new HashMap<DataKey, Object>();
     }
 
     public DataSet(DataHolder other) {
-        dataSet = new HashMap<>();
+        dataSet = new HashMap<DataKey, Object>();
         dataSet.putAll(other.getAll());
     }
 

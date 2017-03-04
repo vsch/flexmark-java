@@ -16,21 +16,21 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             //noinspection unchecked
             return createResolvedDependencies((List<S>) Collections.EMPTY_LIST);
         } else if (dependentsList.size() == 1) {
-            HashMap<Class<? extends Block>, List<D>> nodeMap = new HashMap<>();
+            HashMap<Class<? extends Block>, List<D>> nodeMap = new HashMap<Class<? extends Block>, List<D>>();
             D dependent = dependentsList.get(0);
             List<D> dependents = Collections.singletonList(dependent);
             return createResolvedDependencies(Collections.singletonList(createStage(dependents)));
         } else {
             // resolve dependencies and node processing lists
             int dependentCount = dependentsList.size();
-            DependentItemMap<D> dependentItemMap = new DependentItemMap<>(dependentCount);
+            DependentItemMap<D> dependentItemMap = new DependentItemMap<D>(dependentCount);
 
             for (D dependent : dependentsList) {
                 Class<? extends D> dependentClass = getDependentClass(dependent);
                 if (dependentItemMap.containsKey(dependentClass)) {
                     throw new IllegalStateException("Dependent class " + dependentClass + " is duplicated. Only one instance can be present in the list");
                 }
-                DependentItem<D> item = new DependentItem<>(dependentItemMap.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
+                DependentItem<D> item = new DependentItem<D>(dependentItemMap.size(), dependent, getDependentClass(dependent), dependent.affectsGlobalScope());
                 dependentItemMap.put(dependentClass, item);
             }
 
@@ -64,7 +64,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             dependentCount = dependentItemMap.size();
 
             BitSet newReady = new BitSet(dependentCount);
-            final Ref<BitSet> newReadyRef = new Ref<>(newReady);
+            final Ref<BitSet> newReadyRef = new Ref<BitSet>(newReady);
             ReversibleIndexedIterator<DependentItem<D>> iterator = dependentItemMap.valueIterator();
             while (iterator.hasNext()) {
                 DependentItem<D> item = iterator.next();
@@ -76,11 +76,11 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             BitSet dependents = new BitSet(dependentCount);
             dependents.set(0, dependentItemMap.size());
 
-            ArrayList<S> dependencyStages = new ArrayList<>();
+            ArrayList<S> dependencyStages = new ArrayList<S>();
 
             while (newReady.nextSetBit(0) != -1) {
                 // process these independents in unspecified order since they do not have dependencies
-                ArrayList<D> stageDependents = new ArrayList<>();
+                ArrayList<D> stageDependents = new ArrayList<D>();
                 BitSet nextDependents = new BitSet();
 
                 // collect block processors ready for processing, any non-globals go into independents

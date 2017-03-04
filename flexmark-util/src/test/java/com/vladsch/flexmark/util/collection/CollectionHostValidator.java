@@ -7,14 +7,14 @@ import org.junit.Assert;
 import java.util.ArrayList;
 
 public class CollectionHostValidator<T> {
-    private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<>();
+    private final ArrayList<Paired<String, Object[]>> expectedCallBacks = new ArrayList<Paired<String, Object[]>>();
     private int nextCallbackIndex;
     private int modificationCount;
-    
+
     private boolean trace;
-    
+
     private String id;
-    
+
     private boolean conditional;
     private int repeat;
 
@@ -30,7 +30,7 @@ public class CollectionHostValidator<T> {
         hadExpect();
         return this;
     }
-    
+
     public CollectionHostValidator<T> repeat(int repeat) {
         this.repeat = repeat;
         return this;
@@ -39,11 +39,11 @@ public class CollectionHostValidator<T> {
     public CollectionHostValidator<T> notrace() {
         return trace(false);
     }
-    
+
     public CollectionHostValidator<T> trace() {
         return trace(true);
     }
-    
+
     public CollectionHostValidator<T> trace(boolean trace) {
         this.trace = trace;
         return this;
@@ -84,7 +84,7 @@ public class CollectionHostValidator<T> {
         if (conditional) {
             int i = 0;
             while (i++ < repeat) {
-                expectedCallBacks.add(new Pair<>(callBack, params));
+                expectedCallBacks.add(new Pair<String, Object[]>(callBack, params));
             }
         }
         hadExpect();
@@ -94,7 +94,7 @@ public class CollectionHostValidator<T> {
         if (trace) {
             System.out.println(expectations());
         }
-        
+
         test.run();
         validate();
         start();
@@ -237,7 +237,7 @@ public class CollectionHostValidator<T> {
         int index = nextCallbackIndex;
 
         if (trace) {
-            System.out.println(id() + "actual callback[" + index + "] " + actual); 
+            System.out.println(id() + "actual callback[" + index + "] " + actual);
         }
 
         if (nextCallbackIndex >= expectedCallBacks.size()) {

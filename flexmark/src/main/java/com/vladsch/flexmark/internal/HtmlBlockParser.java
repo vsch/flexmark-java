@@ -148,7 +148,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class
@@ -161,7 +161,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
                     //FencedCodeBlockParser.Factory.class,

@@ -1,13 +1,13 @@
 package com.vladsch.flexmark.ext.definition.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Block;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.definition.DefinitionItem;
 import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.parser.block.BlockPreProcessor;
 import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -51,14 +51,14 @@ public class DefinitionListBlockPreProcessor implements BlockPreProcessor {
     public static class Factory implements BlockPreProcessorFactory {
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<>();
+            HashSet<Class<? extends Block>> set = new HashSet<Class<? extends Block>>();
             set.add(DefinitionList.class);
             return set;
         }
 
         @Override
         public Set<Class<? extends BlockPreProcessorFactory>> getAfterDependents() {
-            HashSet<Class<? extends BlockPreProcessorFactory>> set = new HashSet<>();
+            HashSet<Class<? extends BlockPreProcessorFactory>> set = new HashSet<Class<? extends BlockPreProcessorFactory>>();
             set.add(DefinitionListItemBlockPreProcessor.Factory.class);
             return set;
         }

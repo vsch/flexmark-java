@@ -5,7 +5,10 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.html.CellAlignment;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.sequence.*;
+import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
+import com.vladsch.flexmark.util.sequence.SubSequence;
 
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -260,8 +263,8 @@ public class Table {
         alignments = new CellAlignment[sepColumns];
         columnWidths = new int[sepColumns];
         BitSet spanAlignment = new BitSet(sepColumns);
-        List<ColumnSpan> columnSpans = new ArrayList<>();
-        Ref<Integer> delta = new Ref<>(0);
+        List<ColumnSpan> columnSpans = new ArrayList<ColumnSpan>();
+        Ref<Integer> delta = new Ref<Integer>(0);
 
         if (separator.rows.size() > 0) {
             TableRow row = separator.rows.get(0);
@@ -363,7 +366,7 @@ public class Table {
             // now need to distribute extra width from spans to contained columns
             int[] additionalWidths = new int[sepColumns];
             BitSet unfixedColumns = new BitSet(sepColumns);
-            List<ColumnSpan> newColumnSpans = new ArrayList<>(columnSpans.size());
+            List<ColumnSpan> newColumnSpans = new ArrayList<ColumnSpan>(columnSpans.size());
 
             for (ColumnSpan columnSpan : columnSpans) {
                 int spanWidth = spanWidth(columnSpan.startColumn, columnSpan.columnSpan);
@@ -429,7 +432,7 @@ public class Table {
         // we will prepare the separator based on max columns
         int formatterOptions = out.getOptions();
         out.setOptions(formatterOptions & ~FormattingAppendable.COLLAPSE_WHITESPACE);
-        Ref<Integer> delta = new Ref<>(0);
+        Ref<Integer> delta = new Ref<Integer>(0);
 
         if (heading.rows.size() > 0) {
             for (TableRow row : heading.rows) {
@@ -582,7 +585,7 @@ public class Table {
         public final List<TableCell> cells;
 
         TableRow() {
-            cells = new ArrayList<>();
+            cells = new ArrayList<TableCell>();
         }
 
         public int getColumns() {
@@ -626,7 +629,7 @@ public class Table {
 
     @SuppressWarnings("WeakerAccess")
     public static class TableSection {
-        public final List<TableRow> rows = new ArrayList<>();
+        public final List<TableRow> rows = new ArrayList<TableRow>();
         public int row;
         public int column;
 

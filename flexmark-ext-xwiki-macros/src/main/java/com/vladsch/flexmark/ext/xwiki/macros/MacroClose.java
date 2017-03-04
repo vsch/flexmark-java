@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.ext.xwiki.macros;
 
 import com.vladsch.flexmark.ast.CustomNode;
-import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**

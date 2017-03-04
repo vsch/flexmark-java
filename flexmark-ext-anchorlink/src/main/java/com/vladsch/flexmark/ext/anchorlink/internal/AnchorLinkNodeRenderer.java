@@ -21,8 +21,8 @@ public class AnchorLinkNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(AnchorLink.class, new CustomNodeRenderer<AnchorLink>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<AnchorLink>(AnchorLink.class, new CustomNodeRenderer<AnchorLink>() {
             @Override
             public void render(AnchorLink node, NodeRendererContext context, HtmlWriter html) {
                 AnchorLinkNodeRenderer.this.render(node, context, html);

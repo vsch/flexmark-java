@@ -29,14 +29,14 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(Footnote.class, new CustomNodeRenderer<Footnote>() {
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
+                new NodeRenderingHandler<Footnote>(Footnote.class, new CustomNodeRenderer<Footnote>() {
                     @Override
                     public void render(Footnote node, NodeRendererContext context, HtmlWriter html) {
                         FootnoteNodeRenderer.this.render(node, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(FootnoteBlock.class, new CustomNodeRenderer<FootnoteBlock>() {
+                new NodeRenderingHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeRenderer<FootnoteBlock>() {
                     @Override
                     public void render(FootnoteBlock node, NodeRendererContext context, HtmlWriter html) {
                         FootnoteNodeRenderer.this.render(node, context, html);
@@ -47,7 +47,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
 
     @Override
     public Set<RenderingPhase> getRenderingPhases() {
-        Set<RenderingPhase> set = new HashSet<>();
+        Set<RenderingPhase> set = new HashSet<RenderingPhase>();
         set.add(RenderingPhase.BODY_TOP);
         set.add(RenderingPhase.BODY_BOTTOM);
         return set;
@@ -60,7 +60,7 @@ public class FootnoteNodeRenderer implements PhasedNodeRenderer {
                 // need to see if have undefined footnotes that were defined after parsing
                 final boolean[] hadNewFootnotes = { false };
                 NodeVisitor visitor = new NodeVisitor(
-                        new VisitHandler<>(Footnote.class, new Visitor<Footnote>() {
+                        new VisitHandler<Footnote>(Footnote.class, new Visitor<Footnote>() {
                             @Override
                             public void visit(Footnote node) {
                                 if (!node.isDefined()) {

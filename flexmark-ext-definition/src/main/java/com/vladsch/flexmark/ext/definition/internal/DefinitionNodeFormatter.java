@@ -29,19 +29,19 @@ public class DefinitionNodeFormatter implements NodeFormatter {
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<>(DefinitionList.class, new CustomNodeFormatter<DefinitionList>() {
+                new NodeFormattingHandler<DefinitionList>(DefinitionList.class, new CustomNodeFormatter<DefinitionList>() {
                     @Override
                     public void render(DefinitionList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         DefinitionNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(DefinitionTerm.class, new CustomNodeFormatter<DefinitionTerm>() {
+                new NodeFormattingHandler<DefinitionTerm>(DefinitionTerm.class, new CustomNodeFormatter<DefinitionTerm>() {
                     @Override
                     public void render(DefinitionTerm node, NodeFormatterContext context, MarkdownWriter markdown) {
                         DefinitionNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(DefinitionItem.class, new CustomNodeFormatter<DefinitionItem>() {
+                new NodeFormattingHandler<DefinitionItem>(DefinitionItem.class, new CustomNodeFormatter<DefinitionItem>() {
                     @Override
                     public void render(DefinitionItem node, NodeFormatterContext context, MarkdownWriter markdown) {
                         DefinitionNodeFormatter.this.render(node, context, markdown);

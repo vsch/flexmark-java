@@ -3,6 +3,8 @@ package com.vladsch.flexmark.util.sequence;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.MIN_VALUE;
+
 /**
  * A CharSequence that references original char sequence and maps '\0' to '\uFFFD'
  * a subSequence() returns a sub-sequence from the original base sequence
@@ -51,6 +53,27 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         return iMax > 0 ? baseOffsets[baseStartOffset + length - 1] + 1 : 0;
     }
 
+    @Override
+    public Range getIndexRange(final int startOffset, final int endOffset) {
+        // we assume that start/end is within our range
+        int start = MIN_VALUE;
+        int end = MIN_VALUE;
+        for (int i = 0; i < baseOffsets.length; i++) {
+            if (baseOffsets[i] == startOffset) {
+                start = i;
+            }
+            if (baseOffsets[i] == endOffset) {
+                end = i;
+            }
+            if (start != MIN_VALUE && end != MIN_VALUE) break;
+        }
+
+        if (start < 0) start = 0;
+        if (end < start) end = start;
+        if (start > end) start = end;
+        return Range.of(start, end);
+    }
+
     public int[] getBaseOffsets() {
         return baseOffsets;
     }
@@ -88,7 +111,7 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         BasedSequence lastSegment = null;
         BasedSequence firstSegment = segments.get(0);
         BasedSequence base = firstSegment.getBaseSequence();
-        ArrayList<BasedSequence> mergedSequences = new ArrayList<>();
+        ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
 
         for (BasedSequence basedSequence : segments) {
             assert base == basedSequence.getBaseSequence() : "all segments must come from the same base sequence";
@@ -136,7 +159,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         this.baseStartOffset = 0;
         this.length = length;
         this.baseOffsets = new int[length];
-        int i = 0;
         length = 0;
         StringBuilder sb = null;
 
@@ -155,7 +177,6 @@ public final class SegmentedSequence extends BasedSequenceImpl {
             }
 
             length += ciMax;
-            i++;
         }
 
         if (sb != null) {

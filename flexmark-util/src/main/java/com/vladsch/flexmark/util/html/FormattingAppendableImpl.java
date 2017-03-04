@@ -72,11 +72,11 @@ public class FormattingAppendableImpl implements FormattingAppendable {
 
     public FormattingAppendableImpl(final Appendable appendable, final int formatOptions) {
         myAppendable = new LengthTrackingAppendableImpl(appendable);
-        myConditionalFrames = new Stack<>();
-        myIndentLineCounts = new Stack<>();
-        myPrefixStack = new Stack<>();
-        myOffsetBeforeList = new ArrayList<>();
-        myAfterEolRunnables = new HashMap<>();
+        myConditionalFrames = new Stack<ConditionalFrame>();
+        myIndentLineCounts = new Stack<Integer>();
+        myPrefixStack = new Stack<BasedSequence>();
+        myOffsetBeforeList = new ArrayList<Ref<Integer>>();
+        myAfterEolRunnables = new HashMap<Integer, List<Runnable>>();
         myEOL = '\n';
         myOptions = formatOptions;
         myIOException = null;
@@ -198,7 +198,7 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     public FormattingAppendableImpl addAfterEolRunnable(int atPendingEOL, Runnable runnable) {
         List<Runnable> runnableList = myAfterEolRunnables.get(atPendingEOL);
         if (runnableList == null) {
-            runnableList = new ArrayList<>();
+            runnableList = new ArrayList<Runnable>();
             myAfterEolRunnables.put(atPendingEOL, runnableList);
         }
         runnableList.add(runnable);

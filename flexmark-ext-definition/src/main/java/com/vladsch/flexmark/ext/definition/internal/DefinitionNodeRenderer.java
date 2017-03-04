@@ -24,20 +24,20 @@ public class DefinitionNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(DefinitionList.class, new CustomNodeRenderer<DefinitionList>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<DefinitionList>(DefinitionList.class, new CustomNodeRenderer<DefinitionList>() {
             @Override
             public void render(DefinitionList node, NodeRendererContext context, HtmlWriter html) {
                 DefinitionNodeRenderer.this.render(node, context, html);
             }
         }));
-        set.add(new NodeRenderingHandler<>(DefinitionTerm.class, new CustomNodeRenderer<DefinitionTerm>() {
+        set.add(new NodeRenderingHandler<DefinitionTerm>(DefinitionTerm.class, new CustomNodeRenderer<DefinitionTerm>() {
             @Override
             public void render(DefinitionTerm node, NodeRendererContext context, HtmlWriter html) {
                 DefinitionNodeRenderer.this.render(node, context, html);
             }
         }));
-        set.add(new NodeRenderingHandler<>(DefinitionItem.class, new CustomNodeRenderer<DefinitionItem>() {
+        set.add(new NodeRenderingHandler<DefinitionItem>(DefinitionItem.class, new CustomNodeRenderer<DefinitionItem>() {
             @Override
             public void render(DefinitionItem node, NodeRendererContext context, HtmlWriter html) {
                 DefinitionNodeRenderer.this.render(node, context, html);

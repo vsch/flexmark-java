@@ -46,13 +46,10 @@ public class YouTrackConverterExtension implements Parser.ParserExtension, HtmlR
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new YouTrackConverterNodeRenderer.Factory());
-                break;
-
-            default:
-                throw new IllegalStateException("YouTrack Converter Extension used with non YouTrack Renderer " + rendererType);
+        if (rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new YouTrackConverterNodeRenderer.Factory());
+        } else {
+            throw new IllegalStateException("YouTrack Converter Extension used with non YouTrack Renderer " + rendererType);
         }
     }
 }

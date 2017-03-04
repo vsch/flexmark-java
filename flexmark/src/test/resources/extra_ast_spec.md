@@ -3729,6 +3729,40 @@ Document[0, 38]
 ````````````````````````````````
 
 
+Wrap content in CodeBlock
+
+```````````````````````````````` example(Fenced Code Options: 9) options(code-content-block)
+```info
+code content
+   indented code line
+```
+.
+<pre><code class="language-info">code content
+   indented code line
+</code></pre>
+.
+Document[0, 46]
+  FencedCodeBlock[0, 46] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 43] lines[2] close:[43, 46, "```"]
+    CodeBlock[8, 43]
+````````````````````````````````
+
+
+Wrap content in CodeBlock
+
+```````````````````````````````` example(Fenced Code Options: 10) options(code-content-block)
+    code content
+       indented code line
+.
+<pre><code>code content
+   indented code line
+</code></pre>
+.
+Document[0, 42]
+  IndentedCodeBlock[4, 42]
+    CodeBlock[4, 42]
+````````````````````````````````
+
+
 ## Anchor links option
 
 Change language class prefix

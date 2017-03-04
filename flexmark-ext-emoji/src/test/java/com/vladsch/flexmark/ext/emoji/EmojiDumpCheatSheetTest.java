@@ -10,13 +10,13 @@ public class EmojiDumpCheatSheetTest extends TemplateTestCase {
 
     @Override
     public void getExpandedEntry(TemplateEntry entry, StringBuilder sb) {
-        HashMap<String, String> params = new HashMap<>();
+        HashMap<String, String> params = new HashMap<String, String>();
         for (String emojiShortcut : EmojiCheatSheetRaw.aliasMap.keySet()) {
             params.put("name", emojiShortcut);
             params.put("image", EmojiCheatSheetRaw.aliasMap.get(emojiShortcut));
             params.put("url", EmojiCheatSheetRaw.urlMap.get(emojiShortcut));
             params.put("category", EmojiCheatSheetRaw.categoryMap.get(emojiShortcut));
-            
+
             entry.replaceParams(params, sb);
         }
     }

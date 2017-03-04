@@ -23,17 +23,17 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<>("ALLOW_INLINES", false);
-    public static final DataKey<Boolean> ALLOW_ANCHORS = new DataKey<>("ALLOW_ANCHORS", false);
-    public static final DataKey<Boolean> ALLOW_ANCHOR_ESCAPE = new DataKey<>("ALLOW_ANCHOR_ESCAPE", false);
-    public static final DataKey<Boolean> ALLOW_PIPE_ESCAPE = new DataKey<>("ALLOW_PIPE_ESCAPE", false);
-    public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<>("DISABLE_RENDERING", false);
-    public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<>("LINK_FIRST_SYNTAX", false);
-    public static final DataKey<String> LINK_PREFIX = new DataKey<>("LINK_PREFIX", "");
-    public static final DataKey<String> IMAGE_PREFIX = new DataKey<>("IMAGE_PREFIX", "");
-    public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<>("IMAGE_LINKS", false);
-    public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<>("LINK_FILE_EXTENSION", "");
-    public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<>("IMAGE_FILE_EXTENSION", "");
+    public static final DataKey<Boolean> ALLOW_INLINES = new DataKey<Boolean>("ALLOW_INLINES", false);
+    public static final DataKey<Boolean> ALLOW_ANCHORS = new DataKey<Boolean>("ALLOW_ANCHORS", false);
+    public static final DataKey<Boolean> ALLOW_ANCHOR_ESCAPE = new DataKey<Boolean>("ALLOW_ANCHOR_ESCAPE", false);
+    public static final DataKey<Boolean> ALLOW_PIPE_ESCAPE = new DataKey<Boolean>("ALLOW_PIPE_ESCAPE", false);
+    public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<Boolean>("DISABLE_RENDERING", false);
+    public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<Boolean>("LINK_FIRST_SYNTAX", false);
+    public static final DataKey<String> LINK_PREFIX = new DataKey<String>("LINK_PREFIX", "");
+    public static final DataKey<String> IMAGE_PREFIX = new DataKey<String>("IMAGE_PREFIX", "");
+    public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<Boolean>("IMAGE_LINKS", false);
+    public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<String>("LINK_FILE_EXTENSION", "");
+    public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<String>("IMAGE_FILE_EXTENSION", "");
     public static final LinkType WIKI_LINK = new LinkType("WIKI");
 
     private WikiLinkExtension() {
@@ -60,17 +60,12 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new WikiLinkNodeRenderer.Factory());
-                rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new WikiLinkJiraRenderer.Factory());
-                rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new WikiLinkNodeRenderer.Factory());
+            rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new WikiLinkJiraRenderer.Factory());
+            rendererBuilder.linkResolverFactory(new WikiLinkLinkResolver.Factory());
         }
     }
 }

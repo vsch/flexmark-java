@@ -24,14 +24,14 @@ public class AbbreviationNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(Abbreviation.class, new CustomNodeRenderer<Abbreviation>() {
+        return new HashSet<NodeRenderingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+                new NodeRenderingHandler<Abbreviation>(Abbreviation.class, new CustomNodeRenderer<Abbreviation>() {
                     @Override
                     public void render(Abbreviation node, NodeRendererContext context, HtmlWriter html) {
                         AbbreviationNodeRenderer.this.render(node, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(AbbreviationBlock.class, new CustomNodeRenderer<AbbreviationBlock>() {
+                new NodeRenderingHandler<AbbreviationBlock>(AbbreviationBlock.class, new CustomNodeRenderer<AbbreviationBlock>() {
                     @Override
                     public void render(AbbreviationBlock node, NodeRendererContext context, HtmlWriter html) {
                         AbbreviationNodeRenderer.this.render(node, context, html);

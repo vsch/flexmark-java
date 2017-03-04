@@ -21,8 +21,8 @@ public class EscapedCharacterNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(EscapedCharacter.class, new CustomNodeRenderer<EscapedCharacter>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<EscapedCharacter>(EscapedCharacter.class, new CustomNodeRenderer<EscapedCharacter>() {
             @Override
             public void render(EscapedCharacter node, NodeRendererContext context, HtmlWriter html) {
                 EscapedCharacterNodeRenderer.this.render(node, context, html);

@@ -1,15 +1,14 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.NodeVisitor;
 import com.vladsch.flexmark.ext.xwiki.macros.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({ "unchecked", "WeakerAccess" })

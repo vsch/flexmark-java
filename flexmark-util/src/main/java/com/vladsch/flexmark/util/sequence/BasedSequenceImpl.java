@@ -19,7 +19,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     private static int[] EMPTY_INDICES = { };
     private static final Map<Character, String> visibleSpacesMap;
     static {
-        HashMap<Character, String> charMap = new HashMap<>();
+        HashMap<Character, String> charMap = new HashMap<Character, String>();
         visibleSpacesMap = charMap;
         charMap.put('\n', "\\n");
         charMap.put('\r', "\\r");
@@ -36,6 +36,16 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     static boolean isVisibleWhitespace(char c) {
         return visibleSpacesMap.containsKey(c);
+    }
+
+    @Override
+    public Range getIndexRange(final int startOffset, final int endOffset) {
+        // we assume that start/end is within our range
+        int baseOffset = getStartOffset();
+        if (startOffset > getEndOffset() || endOffset < baseOffset) {
+            throw new IllegalArgumentException("getIndexRange(" + startOffset + ", " + endOffset + ") not in range [" + baseOffset + ", " + getEndOffset() + "]");
+        }
+        return Range.of(startOffset - baseOffset, endOffset - baseOffset);
     }
 
     @Override
@@ -1263,7 +1273,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? 1 : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<BasedSequence> items = new ArrayList<>();
+        ArrayList<BasedSequence> items = new ArrayList<BasedSequence>();
 
         int lastPos = 0;
         int length = length();
@@ -1309,7 +1319,7 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         int includeDelimiter = !includeDelimiterParts && (flags & SPLIT_INCLUDE_DELIMS) != 0 ? delimiter.length() : 0;
         boolean trimParts = (flags & SPLIT_TRIM_PARTS) != 0;
         boolean skipEmpty = (flags & SPLIT_SKIP_EMPTY) != 0;
-        ArrayList<BasedSequence> items = new ArrayList<>();
+        ArrayList<BasedSequence> items = new ArrayList<BasedSequence>();
 
         int lastPos = 0;
         int length = length();

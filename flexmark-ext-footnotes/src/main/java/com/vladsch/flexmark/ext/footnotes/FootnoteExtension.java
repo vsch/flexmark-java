@@ -3,12 +3,12 @@ package com.vladsch.flexmark.ext.footnotes;
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.footnotes.internal.*;
 import com.vladsch.flexmark.formatter.internal.Formatter;
-import com.vladsch.flexmark.util.format.options.ElementPlacement;
-import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
+import com.vladsch.flexmark.util.format.options.ElementPlacement;
+import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -26,13 +26,13 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
-    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
+    public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<FootnoteRepository>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
         @Override
         public FootnoteRepository create(DataHolder options) {
             return new FootnoteRepository(options);
         }
     });
-    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<>("FOOTNOTES_KEEP", KeepType.FIRST);
+    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<KeepType>("FOOTNOTES_KEEP", KeepType.FIRST);
     public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
     public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
     public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");
@@ -40,8 +40,8 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> FOOTNOTE_BACK_LINK_REF_CLASS = new DataKey<String>("FOOTNOTE_BACK_LINK_REF_CLASS", "footnote-backref");
 
     // formatter options
-    public static final DataKey<ElementPlacement> FOOTNOTE_PLACEMENT = new DataKey<>("FOOTNOTE_PLACEMENT", ElementPlacement.AS_IS);
-    public static final DataKey<ElementPlacementSort> FOOTNOTE_SORT = new DataKey<>("FOOTNOTE_SORT", ElementPlacementSort.AS_IS);
+    public static final DataKey<ElementPlacement> FOOTNOTE_PLACEMENT = new DataKey<ElementPlacement>("FOOTNOTE_PLACEMENT", ElementPlacement.AS_IS);
+    public static final DataKey<ElementPlacementSort> FOOTNOTE_SORT = new DataKey<ElementPlacementSort>("FOOTNOTE_SORT", ElementPlacementSort.AS_IS);
 
     private FootnoteExtension() {
     }
@@ -81,14 +81,9 @@ public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.H
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new FootnoteNodeRenderer.Factory());
-                break;
-
-            case "JIRA":
-            case "YOUTRACK":
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new FootnoteNodeRenderer.Factory());
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
         }
     }
 }

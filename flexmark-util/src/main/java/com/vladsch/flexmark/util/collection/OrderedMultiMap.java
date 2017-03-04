@@ -140,7 +140,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInValueUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.adding(index, new Pair<>(k, (V) v), null);
+            myHost.adding(index, new Pair<K, V>(k, (V) v), null);
         }
         if (v == null) myValueSet.addNulls(index);
         else myValueSet.add((V) v);
@@ -176,7 +176,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInKeyUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.adding(index, new Pair<>((K) k, v), null);
+            myHost.adding(index, new Pair<K, V>((K) k, v), null);
         }
         if (k == null) myKeySet.addNulls(index);
         else myKeySet.add((K) k);
@@ -199,7 +199,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
 
         myInKeyUpdate = true;
         if (myHost != null && !myHost.skipHostUpdate()) {
-            myHost.removing(index, new Pair<>((K)null, v));
+            myHost.removing(index, new Pair<K, V>((K)null, v));
         }
         Object r = myKeySet.removeIndexHosted(index);
         myInKeyUpdate = false;
@@ -298,7 +298,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             myInKeyUpdate = true;
             myInValueUpdate = true;
             if (myHost != null && !myHost.skipHostUpdate()) {
-                myHost.adding(myKeySet.getValueList().size(), new Pair<>(k, v), null);
+                myHost.adding(myKeySet.getValueList().size(), new Pair<K, V>(k, v), null);
             }
 
             if (k == null) myKeySet.addNull();
@@ -317,7 +317,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             myInKeyUpdate = true;
             myInValueUpdate = true;
             if (myHost != null && !myHost.skipHostUpdate()) {
-                myHost.adding(valueIndex, new Pair<>(k, v), null);
+                myHost.adding(valueIndex, new Pair<K, V>(k, v), null);
             }
 
             if (k == null) myKeySet.removeIndex(valueIndex);
@@ -332,7 +332,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             myInKeyUpdate = true;
             myInValueUpdate = true;
             if (myHost != null && !myHost.skipHostUpdate()) {
-                myHost.adding(keyIndex, new Pair<>(k, v), null);
+                myHost.adding(keyIndex, new Pair<K, V>(k, v), null);
             }
 
             if (k == null) myValueSet.removeIndex(valueIndex);
@@ -380,7 +380,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             myInKeyUpdate = true;
             myInValueUpdate = true;
             if (myHost != null && !myHost.skipHostUpdate()) {
-                myHost.removing(keyIndex, new Pair<>(k, v));
+                myHost.removing(keyIndex, new Pair<K, V>(k, v));
             }
             myKeySet.removeHosted(k);
             myValueSet.removeHosted(v);
@@ -396,7 +396,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         if (myHost != null && !myHost.skipHostUpdate()) {
             int index = myKeySet.indexOf(o);
             if (index != -1) {
-                myHost.removing(index, new Pair<>((K) o, myValueSet.isValidIndex(index) ? myValueSet.getValue(index) : null));
+                myHost.removing(index, new Pair<K, V>((K) o, myValueSet.isValidIndex(index) ? myValueSet.getValue(index) : null));
             }
         }
         V r = (V) myKeySet.removeHosted(o);
@@ -409,7 +409,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         int index = myValueSet.indexOf(o);
         if (myHost != null && !myHost.skipHostUpdate()) {
             if (index != -1) {
-                myHost.removing(index, new Pair<>(myKeySet.isValidIndex(index) ? myKeySet.getValue(index) : null, (V) o));
+                myHost.removing(index, new Pair<K, V>(myKeySet.isValidIndex(index) ? myKeySet.getValue(index) : null, (V) o));
             }
         }
         K r = (K) myValueSet.removeHosted(o);
@@ -509,11 +509,11 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     public ReversibleIterable<V> valueIterable() {
-        return new IndexedIterable<>(myValueSet.getIndexedProxy(), myValueSet.indexIterable());
+        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(myValueSet.getIndexedProxy(), myValueSet.indexIterable());
     }
 
     public ReversibleIterable<V> reversedValueIterable() {
-        return new IndexedIterable<>(myValueSet.getIndexedProxy(), myValueSet.reversedIndexIterable());
+        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(myValueSet.getIndexedProxy(), myValueSet.reversedIndexIterable());
     }
 
     public ReversibleIndexedIterator<K> keyIterator() {
@@ -525,31 +525,31 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
     }
 
     public ReversibleIterable<K> keyIterable() {
-        return new IndexedIterable<>(myKeySet.getIndexedProxy(), myKeySet.indexIterable());
+        return new IndexedIterable<K, K, ReversibleIterable<Integer>>(myKeySet.getIndexedProxy(), myKeySet.indexIterable());
     }
 
     public ReversibleIterable<K> reversedKeyIterable() {
-        return new IndexedIterable<>(myKeySet.getIndexedProxy(), myKeySet.reversedIndexIterable());
+        return new IndexedIterable<K, K, ReversibleIterable<Integer>>(myKeySet.getIndexedProxy(), myKeySet.reversedIndexIterable());
     }
 
     public ReversibleIndexedIterator<Entry<K, V>> entrySetIterator() {
         BitSet bitSet = getKeyValueUnionSet();
-        return new IndexedIterator<>(getIndexedProxy(), new BitSetIterator(bitSet));
+        return new IndexedIterator<Entry<K, V>, Entry<K, V>, BitSetIterator>(getIndexedProxy(), new BitSetIterator(bitSet));
     }
 
     public ReversibleIndexedIterator<Entry<K, V>> reversedEntrySetIterator() {
         BitSet bitSet = getKeyValueUnionSet();
-        return new IndexedIterator<>(getIndexedProxy(), new BitSetIterator(bitSet, true));
+        return new IndexedIterator<Entry<K, V>, Entry<K, V>, BitSetIterator>(getIndexedProxy(), new BitSetIterator(bitSet, true));
     }
 
     public ReversibleIterable<Entry<K, V>> entrySetIterable() {
         BitSet bitSet = getKeyValueUnionSet();
-        return new IndexedIterable<>(getIndexedProxy(), new BitSetIterable(bitSet));
+        return new IndexedIterable<Entry<K, V>, Entry<K, V>, BitSetIterable>(getIndexedProxy(), new BitSetIterable(bitSet));
     }
 
     public ReversibleIterable<Entry<K, V>> reversedEntrySetIterable() {
         BitSet bitSet = getKeyValueUnionSet();
-        return new IndexedIterable<>(getIndexedProxy(), new BitSetIterable(bitSet));
+        return new IndexedIterable<Entry<K, V>, Entry<K, V>, BitSetIterable>(getIndexedProxy(), new BitSetIterable(bitSet));
     }
 
     private BitSet getKeyValueUnionSet() {
@@ -587,7 +587,7 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
         myInValueUpdate = true;
         myInKeyUpdate = true;
 
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(myKeySet.size(), new CollectionHost<Map.Entry<K, V>>() {
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<Entry<K, V>>(myKeySet.size(), new CollectionHost<Map.Entry<K, V>>() {
             @Override
             public void adding(int index, Map.Entry<K, V> entry, Object v) {
                 assert v == null;
@@ -621,7 +621,6 @@ public class OrderedMultiMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V
             }
         });
 
-        BitSet bitSet = getKeyValueUnionSet();
         Iterator<Map.Entry<K, V>> iterator = entrySetIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());

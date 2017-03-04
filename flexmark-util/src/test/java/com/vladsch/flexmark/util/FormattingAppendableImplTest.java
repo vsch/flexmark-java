@@ -34,8 +34,8 @@ public class FormattingAppendableImplTest {
     public void test_charOffset() throws Exception {
         StringBuilder sb = new StringBuilder();
         FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
-        Ref<Integer> ref = new Ref<>(0);
-        Ref<Integer> ref1 = new Ref<>(0);
+        Ref<Integer> ref = new Ref<Integer>(0);
+        Ref<Integer> ref1 = new Ref<Integer>(0);
 
         fa.append(' ');
         ref.value = -1;
@@ -227,8 +227,8 @@ public class FormattingAppendableImplTest {
 
     @Test
     public void test_lineIf() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+        StringBuilder sb;
+        FormattingAppendable fa;
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -243,8 +243,8 @@ public class FormattingAppendableImplTest {
 
     @Test
     public void test_BlankLine() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+        StringBuilder sb;
+        FormattingAppendable fa;
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -269,8 +269,8 @@ public class FormattingAppendableImplTest {
 
     @Test
     public void test_BlankLineIf() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+        StringBuilder sb;
+        FormattingAppendable fa;
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -285,8 +285,8 @@ public class FormattingAppendableImplTest {
 
     @Test
     public void test_BlankLines() throws Exception {
-        StringBuilder sb = new StringBuilder();
-        FormattingAppendable fa = new FormattingAppendableImpl(sb, true);
+        StringBuilder sb;
+        FormattingAppendable fa;
 
         sb = new StringBuilder();
         fa = new FormattingAppendableImpl(sb, true);
@@ -439,7 +439,7 @@ public class FormattingAppendableImplTest {
                 if (onIndent) fa2.line();
             }
         });
-        Ref<Boolean> paraLine = new Ref<>(false);
+        Ref<Boolean> paraLine = new Ref<Boolean>(false);
         fa.line(paraLine).append("<p>para</p>").lineIf(paraLine);
         fa.closeConditional(new ConditionalFormatter() {
             @Override

@@ -19,7 +19,7 @@ public class SpecReader {
     public static final String EXAMPLE_START_NBSP = EXAMPLE_BREAK + "\u00A0" + EXAMPLE_KEYWORD;
     public static final String EXAMPLE_TEST_BREAK = "````````````````";
     public static final String EXAMPLE_TEST_START = EXAMPLE_TEST_BREAK + " " + EXAMPLE_KEYWORD;
-    public static final String OPTIONS_KEYWORD= "options";
+    public static final String OPTIONS_KEYWORD = "options";
     public static final String OPTIONS_STRING = " " + OPTIONS_KEYWORD;
     public static final Pattern OPTIONS_PATTERN = Pattern.compile(".*(?:\\s|\u00A0)\\Q" + OPTIONS_KEYWORD + "\\E(?:\\s|\u00A0)*\\((?:\\s|\u00A0)*(.*)(?:\\s|\u00A0)*\\)(?:\\s|\u00A0)*");
     public static final String TYPE_BREAK = ".";
@@ -36,7 +36,7 @@ public class SpecReader {
     protected StringBuilder ast;
     protected int exampleNumber = 0;
 
-    protected List<SpecExample> examples = new ArrayList<>();
+    protected List<SpecExample> examples = new ArrayList<SpecExample>();
 
     protected SpecReader(InputStream stream) {
         this.inputStream = stream;
@@ -55,8 +55,9 @@ public class SpecReader {
     }
 
     public static List<SpecExample> readExamples(String specResource, SpecReaderFactory readerFactory) {
-        try (InputStream stream = getSpecInputStream(specResource)) {
+        try {
             SpecReader reader;
+            InputStream stream = getSpecInputStream(specResource);
             if (readerFactory == null) reader = new SpecReader(stream);
             else reader = readerFactory.create(stream);
             return reader.read();
@@ -75,7 +76,7 @@ public class SpecReader {
 
     public static List<String> readExamplesAsString(String specResource, SpecReaderFactory readerFactory) {
         List<SpecExample> examples = SpecReader.readExamples(specResource, readerFactory);
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         for (SpecExample example : examples) {
             result.add(example.getSource());
         }
@@ -88,8 +89,9 @@ public class SpecReader {
 
     public static String readSpec(String specResource) {
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(specResource), Charset.forName("UTF-8")))) {
+        try {
             String line;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(specResource), Charset.forName("UTF-8")));
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");
@@ -117,12 +119,10 @@ public class SpecReader {
     protected List<SpecExample> read() throws IOException {
         resetContents();
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream, Charset.forName("UTF-8")))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                processLine(line);
-            }
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        while ((line = reader.readLine()) != null) {
+            processLine(line);
         }
 
         return examples;

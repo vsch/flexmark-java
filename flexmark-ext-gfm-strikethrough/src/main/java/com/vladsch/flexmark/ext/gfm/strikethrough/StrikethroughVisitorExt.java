@@ -6,7 +6,7 @@ import com.vladsch.flexmark.ast.Visitor;
 public class StrikethroughVisitorExt {
     public static <V extends StrikethroughVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<>(Strikethrough.class, new Visitor<Strikethrough>() {
+                new VisitHandler<Strikethrough>(Strikethrough.class, new Visitor<Strikethrough>() {
                     @Override
                     public void visit(Strikethrough node) {
                         visitor.visit(node);

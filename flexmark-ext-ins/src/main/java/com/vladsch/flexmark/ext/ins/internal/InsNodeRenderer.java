@@ -18,8 +18,8 @@ public class InsNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(Ins.class, new CustomNodeRenderer<Ins>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<Ins>(Ins.class, new CustomNodeRenderer<Ins>() {
             @Override
             public void render(Ins node, NodeRendererContext context, HtmlWriter html) { InsNodeRenderer.this.render(node, context, html); }
         }));

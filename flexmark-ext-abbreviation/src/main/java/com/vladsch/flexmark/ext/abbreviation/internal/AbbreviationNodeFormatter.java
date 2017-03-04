@@ -44,14 +44,14 @@ public class AbbreviationNodeFormatter extends NodeRepositoryFormatter<Abbreviat
 
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeFormattingHandler<>(Abbreviation.class, new CustomNodeFormatter<Abbreviation>() {
+        return new HashSet<NodeFormattingHandler<? extends com.vladsch.flexmark.ast.Node>>(Arrays.asList(
+                new NodeFormattingHandler<Abbreviation>(Abbreviation.class, new CustomNodeFormatter<Abbreviation>() {
                     @Override
                     public void render(Abbreviation node, NodeFormatterContext context, MarkdownWriter markdown) {
                         AbbreviationNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(AbbreviationBlock.class, new CustomNodeFormatter<AbbreviationBlock>() {
+                new NodeFormattingHandler<AbbreviationBlock>(AbbreviationBlock.class, new CustomNodeFormatter<AbbreviationBlock>() {
                     @Override
                     public void render(AbbreviationBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         AbbreviationNodeFormatter.this.render(node, context, markdown);

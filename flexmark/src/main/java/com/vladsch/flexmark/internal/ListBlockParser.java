@@ -401,7 +401,7 @@ public class ListBlockParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class,
                     FencedCodeBlockParser.Factory.class,
@@ -414,7 +414,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<>();
+            HashSet<Class<? extends CustomBlockParserFactory>> set = new HashSet<Class<? extends CustomBlockParserFactory>>();
             set.add(IndentedCodeBlockParser.Factory.class);
             return set;
             //return new HashSet<>(Arrays.asList(

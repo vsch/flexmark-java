@@ -30,26 +30,26 @@ public class SimTocNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        return new HashSet<>(Arrays.asList(
-                new NodeRenderingHandler<>(SimTocBlock.class, new CustomNodeRenderer<SimTocBlock>() {
+        return new HashSet<NodeRenderingHandler<? extends Node>>(Arrays.asList(
+                new NodeRenderingHandler<SimTocBlock>(SimTocBlock.class, new CustomNodeRenderer<SimTocBlock>() {
                     @Override
                     public void render(SimTocBlock node, NodeRendererContext context, HtmlWriter html) {
                         SimTocNodeRenderer.this.render(node, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(SimTocContent.class, new CustomNodeRenderer<SimTocContent>() {
+                new NodeRenderingHandler<SimTocContent>(SimTocContent.class, new CustomNodeRenderer<SimTocContent>() {
                     @Override
                     public void render(SimTocContent node, NodeRendererContext context, HtmlWriter html) {
                         SimTocNodeRenderer.this.render(node, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(SimTocOptionList.class, new CustomNodeRenderer<SimTocOptionList>() {
+                new NodeRenderingHandler<SimTocOptionList>(SimTocOptionList.class, new CustomNodeRenderer<SimTocOptionList>() {
                     @Override
                     public void render(SimTocOptionList node, NodeRendererContext context, HtmlWriter html) {
                         SimTocNodeRenderer.this.render(node, context, html);
                     }
                 }),
-                new NodeRenderingHandler<>(SimTocOption.class, new CustomNodeRenderer<SimTocOption>() {
+                new NodeRenderingHandler<SimTocOption>(SimTocOption.class, new CustomNodeRenderer<SimTocOption>() {
                     @Override
                     public void render(SimTocOption node, NodeRendererContext context, HtmlWriter html) {
                         SimTocNodeRenderer.this.render(node, context, html);

@@ -18,20 +18,20 @@ import com.vladsch.flexmark.util.options.DataKey;
 import java.util.*;
 
 public class PostProcessorManager {
-    private static HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<>();
+    private static final HashMap<DataKey<Boolean>, PostProcessorFactory> CORE_POST_PROCESSORS = new HashMap<DataKey<Boolean>, PostProcessorFactory>();
     static {
         //CORE_POST_PROCESSORS.put(Parser.REFERENCE_PARAGRAPH_PRE_PROCESSOR, new ReferencePreProcessorFactory());
     }
 
     private final PostProcessorDependencies postProcessorDependencies;
-    private OrderedSet<Node> allPostProcessNodes = new OrderedSet<>();
+    private OrderedSet<Node> allPostProcessNodes = new OrderedSet<Node>();
 
     public PostProcessorManager(PostProcessorDependencies postProcessorDependencies) {
         this.postProcessorDependencies = postProcessorDependencies;
     }
 
     public static PostProcessorDependencies calculatePostProcessors(DataHolder options, List<PostProcessorFactory> postProcessorFactories) {
-        List<PostProcessorFactory> list = new ArrayList<>();
+        List<PostProcessorFactory> list = new ArrayList<PostProcessorFactory>();
         // By having the custom factories come first, extensions are able to change behavior of core syntax.
         list.addAll(postProcessorFactories);
 
@@ -129,7 +129,7 @@ public class PostProcessorManager {
 
         public PostProcessorDependencyStage(List<PostProcessorFactory> dependents) {
             // compute mappings
-            HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<>();
+            HashMap<Class<? extends Node>, Set<Class<?>>> nodeMap = new HashMap<Class<? extends Node>, Set<Class<?>>>();
             final boolean[] haveExclusions = { false };
 
             for (PostProcessorFactory dependent : dependents) {
@@ -212,7 +212,7 @@ public class PostProcessorManager {
                 return dependentMap;
             }
 
-            DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<>(prioritized.size());
+            DependentItemMap<PostProcessorFactory> prioritizedMap = new DependentItemMap<PostProcessorFactory>(prioritized.size());
             prioritizedMap.addAll(prioritized);
 
             return prioritizedMap;

@@ -2,9 +2,9 @@ package com.vladsch.flexmark.integration;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;
-import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
 import com.vladsch.flexmark.ext.gfm.tables.TablesExtension;
+import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -62,7 +62,7 @@ public class SpecIntegrationTest extends SpecTestCase {
     }
 
     private static Map<String, String> getOverriddenExamples() {
-        Map<String, String> m = new HashMap<>();
+        Map<String, String> m = new HashMap<String, String>();
 
         // Not a spec autolink because of space, but the resulting text contains a valid URL
         m.put("<http://foo.bar/baz bim>\n", "<p>&lt;<a href=\"http://foo.bar/baz\">http://foo.bar/baz</a> bim&gt;</p>\n");

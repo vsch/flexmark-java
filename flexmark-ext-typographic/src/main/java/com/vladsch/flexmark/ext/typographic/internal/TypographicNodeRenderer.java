@@ -22,14 +22,14 @@ public class TypographicNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(TypographicSmarts.class, new CustomNodeRenderer<TypographicSmarts>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<TypographicSmarts>(TypographicSmarts.class, new CustomNodeRenderer<TypographicSmarts>() {
             @Override
             public void render(TypographicSmarts node, NodeRendererContext context, HtmlWriter html) {
                 TypographicNodeRenderer.this.render(node, context, html);
             }
         }));
-        set.add(new NodeRenderingHandler<>(TypographicQuotes.class, new CustomNodeRenderer<TypographicQuotes>() {
+        set.add(new NodeRenderingHandler<TypographicQuotes>(TypographicQuotes.class, new CustomNodeRenderer<TypographicQuotes>() {
             @Override
             public void render(TypographicQuotes node, NodeRendererContext context, HtmlWriter html) {
                 TypographicNodeRenderer.this.render(node, context, html);

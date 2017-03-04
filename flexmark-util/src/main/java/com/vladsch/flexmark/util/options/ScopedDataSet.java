@@ -29,7 +29,7 @@ public class ScopedDataSet extends DataSet {
     @Override
     public Map<DataKey, Object> getAll() {
         if (parent != null) {
-            HashMap<DataKey, Object> all = new HashMap<>();
+            HashMap<DataKey, Object> all = new HashMap<DataKey, Object>();
 
             all.putAll(super.getAll());
 
@@ -48,7 +48,7 @@ public class ScopedDataSet extends DataSet {
     @Override
     public Collection<DataKey> keySet() {
         if (parent != null) {
-            ArrayList<DataKey> all = new ArrayList<>();
+            ArrayList<DataKey> all = new ArrayList<DataKey>();
 
             all.addAll(super.keySet());
 

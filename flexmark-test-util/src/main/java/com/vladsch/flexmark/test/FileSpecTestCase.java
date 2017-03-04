@@ -92,7 +92,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     }
 
     public static List<Object[]> dataFromSeparateFiles(String[] fileNames, String prefix, boolean dumpHtml, boolean dumpAst) {
-        ArrayList<SpecExample> examples = new ArrayList<>();
+        ArrayList<SpecExample> examples = new ArrayList<SpecExample>();
 
         for (String name : fileNames) {
             String source = readResource(prefix + name + ".md");
@@ -117,7 +117,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
             }
         }
 
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });
@@ -129,7 +129,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     }
 
     public static List<Object[]> dataFromFiles(String[] fileNames, String prefix) {
-        ArrayList<SpecExample> examples = new ArrayList<>();
+        ArrayList<SpecExample> examples = new ArrayList<SpecExample>();
 
         for (String name : fileNames) {
             List<SpecExample> fileExamples = SpecReader.readExamples(prefix + name + "_ast_spec.md");
@@ -139,7 +139,7 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
             }
         }
 
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         for (SpecExample example : examples) {
             data.add(new Object[] { example });
@@ -155,17 +155,15 @@ public abstract class FileSpecTestCase extends RenderingTestCase {
     }
 
     protected static String readResource(String resourcePath) {
-        try (InputStream stream = FileSpecTestCase.class.getResourceAsStream(resourcePath)) {
-            return readStream(stream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        InputStream stream = FileSpecTestCase.class.getResourceAsStream(resourcePath);
+        return readStream(stream);
     }
 
     protected static String readStream(InputStream stream) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")))) {
+        try {
             String line;
             StringBuilder out = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
             while ((line = reader.readLine()) != null) {
                 out.append(line).append('\n');
             }

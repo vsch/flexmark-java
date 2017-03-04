@@ -4,7 +4,6 @@ import com.vladsch.flexmark.util.collection.Consumer;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
 
 public class NodeIterator implements ReversiblePeekingIterator<Node> {
     final Node firstNode;
@@ -44,7 +43,8 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
      * @param reversed true/false if the nodes are to be traversed in reverse order. If true the nodes previous sibling will be used instead of next sibling
      */
     public NodeIterator(Node firstNode, Node lastNode, boolean reversed) {
-        Objects.requireNonNull(firstNode);
+        if ( firstNode == null)
+            throw new NullPointerException();
 
         this.firstNode = firstNode;
         this.lastNode = lastNode;
@@ -108,7 +108,8 @@ public class NodeIterator implements ReversiblePeekingIterator<Node> {
     }
 
     public void forEachRemaining(Consumer<? super Node> consumer) {
-        Objects.requireNonNull(consumer);
+        if ( consumer == null)
+            throw new NullPointerException();
 
         while (hasNext()) {
             consumer.accept(next());

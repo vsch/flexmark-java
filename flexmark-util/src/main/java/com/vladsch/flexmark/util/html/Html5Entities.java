@@ -71,11 +71,14 @@ public class Html5Entities {
     }
 
     private static Map<String, String> readEntities() {
-        Map<String, String> entities = new HashMap<>();
+        Map<String, String> entities = new HashMap<String, String>();
         InputStream stream = Html5Entities.class.getResourceAsStream(ENTITY_PATH);
         Charset charset = Charset.forName("UTF-8");
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream, charset))) {
+        try {
             String line;
+            InputStreamReader streamReader = new InputStreamReader(stream, charset);
+            BufferedReader bufferedReader = new BufferedReader(streamReader);
+
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.length() == 0) {
                     continue;

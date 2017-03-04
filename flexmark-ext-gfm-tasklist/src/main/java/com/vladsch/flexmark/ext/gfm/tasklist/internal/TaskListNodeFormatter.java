@@ -25,19 +25,19 @@ public class TaskListNodeFormatter implements NodeFormatter {
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         //noinspection unchecked
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<>(TaskListItem.class, new CustomNodeFormatter<TaskListItem>() {
+                new NodeFormattingHandler<TaskListItem>(TaskListItem.class, new CustomNodeFormatter<TaskListItem>() {
                     @Override
                     public void render(TaskListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TaskListNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(BulletList.class, new CustomNodeFormatter<BulletList>() {
+                new NodeFormattingHandler<BulletList>(BulletList.class, new CustomNodeFormatter<BulletList>() {
                     @Override
                     public void render(BulletList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TaskListNodeFormatter.this.render(node, context, markdown);
                     }
                 }),
-                new NodeFormattingHandler<>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
+                new NodeFormattingHandler<OrderedList>(OrderedList.class, new CustomNodeFormatter<OrderedList>() {
                     @Override
                     public void render(OrderedList node, NodeFormatterContext context, MarkdownWriter markdown) {
                         TaskListNodeFormatter.this.render(node, context, markdown);
@@ -115,12 +115,12 @@ public class TaskListNodeFormatter implements NodeFormatter {
             MarkdownWriter markdown,
             FormatOptions formatOptions
     ) {
-        ArrayList<Node> itemList = new ArrayList<>();
+        ArrayList<Node> itemList = new ArrayList<Node>();
 
         TaskListItemPlacement taskListItemPlacement = formatOptions.taskListItemPlacement;
         if (taskListItemPlacement != TaskListItemPlacement.AS_IS) {
-            ArrayList<Node> incompleteTasks = new ArrayList<>();
-            ArrayList<Node> completeItems = new ArrayList<>();
+            ArrayList<Node> incompleteTasks = new ArrayList<Node>();
+            ArrayList<Node> completeItems = new ArrayList<Node>();
             boolean incompleteDescendants = taskListItemPlacement == TaskListItemPlacement.INCOMPLETE_NESTED_FIRST || taskListItemPlacement == TaskListItemPlacement.COMPLETE_NESTED_TO_NON_TASK;
 
             Node item = node.getFirstChild();

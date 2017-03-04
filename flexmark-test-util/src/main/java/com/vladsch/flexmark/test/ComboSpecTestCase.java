@@ -38,7 +38,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     @Parameterized.Parameters(name = "{0}")
     public static List<Object[]> data() {
         List<SpecExample> examples = SpecReader.readExamples();
-        List<Object[]> data = new ArrayList<>();
+        List<Object[]> data = new ArrayList<Object[]>();
 
         // NULL example runs full spec test
         data.add(new Object[] { SpecExample.NULL });
@@ -67,17 +67,15 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     protected String readResource(String resourcePath) {
-        try (InputStream stream = ComboSpecTestCase.class.getResourceAsStream(resourcePath)) {
-            return readStream(stream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        InputStream stream = ComboSpecTestCase.class.getResourceAsStream(resourcePath);
+        return readStream(stream);
     }
 
     protected String readStream(InputStream stream) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")))) {
+        try  {
             String line;
             StringBuilder out = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
             while ((line = reader.readLine()) != null) {
                 out.append(line).append('\n');
             }

@@ -19,6 +19,6 @@ import java.util.Set;
  * @see com.vladsch.flexmark.html.HtmlRenderer.HtmlRendererExtension
  */
 public interface Extension {
-    Set<Extension> EMPTY_SET = new HashSet<>();
-    Iterable<Extension> EMPTY_LIST = new ArrayList<>();
+    Set<Extension> EMPTY_SET = new HashSet<Extension>();
+    Iterable<Extension> EMPTY_LIST = new ArrayList<Extension>();
 }

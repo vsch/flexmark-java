@@ -4,7 +4,6 @@ import com.vladsch.flexmark.ast.CustomBlock;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

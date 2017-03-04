@@ -9,16 +9,16 @@ import com.vladsch.flexmark.util.options.MutableDataSetter;
 
 @SuppressWarnings("WeakerAccess")
 public class TableFormatOptions implements MutableDataSetter {
-    public static final DataKey<Boolean> LEAD_TRAIL_PIPES = new DataKey<>("LEAD_TRAIL_PIPES", true);
-    public static final DataKey<Boolean> SPACE_AROUND_PIPES = new DataKey<>("SPACE_AROUND_PIPES", true);
-    public static final DataKey<Boolean> ADJUST_COLUMN_WIDTH = new DataKey<>("ADJUST_COLUMN_WIDTH", true);
-    public static final DataKey<Boolean> APPLY_COLUMN_ALIGNMENT = new DataKey<>("APPLY_COLUMN_ALIGNMENT", true);
-    public static final DataKey<Boolean> FILL_MISSING_COLUMNS = new DataKey<>("FILL_MISSING_COLUMNS", false);
-    public static final DataKey<Boolean> REMOVE_CAPTION = new DataKey<>("REMOVE_CAPTION", false);
-    public static final DataKey<DiscretionaryText> LEFT_ALIGN_MARKER = new DataKey<>("LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
-    public static final DataKey<Integer> MIN_SEPARATOR_COLUMN_WIDTH = new DataKey<>("MIN_SEPARATOR_COLUMN_WIDTH", 3);
-    public static final DataKey<Integer> MIN_SEPARATOR_DASHES = new DataKey<>("MIN_SEPARATOR_DASHES", 1);
-    public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = new DataKey<>("CHAR_WIDTH_PROVIDER", CharWidthProvider.NULL);
+    public static final DataKey<Boolean> LEAD_TRAIL_PIPES = new DataKey<Boolean>("LEAD_TRAIL_PIPES", true);
+    public static final DataKey<Boolean> SPACE_AROUND_PIPES = new DataKey<Boolean>("SPACE_AROUND_PIPES", true);
+    public static final DataKey<Boolean> ADJUST_COLUMN_WIDTH = new DataKey<Boolean>("ADJUST_COLUMN_WIDTH", true);
+    public static final DataKey<Boolean> APPLY_COLUMN_ALIGNMENT = new DataKey<Boolean>("APPLY_COLUMN_ALIGNMENT", true);
+    public static final DataKey<Boolean> FILL_MISSING_COLUMNS = new DataKey<Boolean>("FILL_MISSING_COLUMNS", false);
+    public static final DataKey<Boolean> REMOVE_CAPTION = new DataKey<Boolean>("REMOVE_CAPTION", false);
+    public static final DataKey<DiscretionaryText> LEFT_ALIGN_MARKER = new DataKey<DiscretionaryText>("LEFT_ALIGN_MARKER", DiscretionaryText.AS_IS);
+    public static final DataKey<Integer> MIN_SEPARATOR_COLUMN_WIDTH = new DataKey<Integer>("MIN_SEPARATOR_COLUMN_WIDTH", 3);
+    public static final DataKey<Integer> MIN_SEPARATOR_DASHES = new DataKey<Integer>("MIN_SEPARATOR_DASHES", 1);
+    public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = new DataKey<CharWidthProvider>("CHAR_WIDTH_PROVIDER", CharWidthProvider.NULL);
 
     public final boolean leadTrailPipes;
     public final boolean spaceAroundPipes;

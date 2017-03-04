@@ -13,7 +13,7 @@ public class ZzzzzzInlineParserExtension implements InlineParserExtension {
     private List<Zzzzzz> openZzzzzzs;
 
     public ZzzzzzInlineParserExtension(final InlineParser inlineParser) {
-        this.openZzzzzzs = new ArrayList<>();
+        this.openZzzzzzs = new ArrayList<Zzzzzz>();
     }
 
     @Override

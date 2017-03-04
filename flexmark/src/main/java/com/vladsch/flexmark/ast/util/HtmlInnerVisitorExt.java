@@ -8,13 +8,13 @@ import com.vladsch.flexmark.ast.Visitor;
 public class HtmlInnerVisitorExt {
     public static <V extends HtmlInnerVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<>(HtmlInnerBlock.class, new Visitor<HtmlInnerBlock>() {
+                new VisitHandler<HtmlInnerBlock>(HtmlInnerBlock.class, new Visitor<HtmlInnerBlock>() {
                     @Override
                     public void visit(HtmlInnerBlock node) {
                         visitor.visit(node);
                     }
                 }),
-                new VisitHandler<>(HtmlInnerBlockComment.class, new Visitor<HtmlInnerBlockComment>() {
+                new VisitHandler<HtmlInnerBlockComment>(HtmlInnerBlockComment.class, new Visitor<HtmlInnerBlockComment>() {
                     @Override
                     public void visit(HtmlInnerBlockComment node) {
                         visitor.visit(node);

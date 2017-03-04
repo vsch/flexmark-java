@@ -20,14 +20,14 @@ public class StrikethroughYouTrackRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(Strikethrough.class, new CustomNodeRenderer<Strikethrough>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<Strikethrough>(Strikethrough.class, new CustomNodeRenderer<Strikethrough>() {
             @Override
             public void render(Strikethrough node, NodeRendererContext context, HtmlWriter html) {
                 StrikethroughYouTrackRenderer.this.render(node, context, html);
             }
         }));
-        set.add(new NodeRenderingHandler<>(Subscript.class, new CustomNodeRenderer<Subscript>() {
+        set.add(new NodeRenderingHandler<Subscript>(Subscript.class, new CustomNodeRenderer<Subscript>() {
             @Override
             public void render(Subscript node, NodeRendererContext context, HtmlWriter html) {
                 StrikethroughYouTrackRenderer.this.render(node, context, html);

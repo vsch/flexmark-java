@@ -18,7 +18,7 @@ public class TemplateReader {
     protected StringBuilder source;
     protected int entryNumber = 0;
 
-    protected List<TemplateEntry> examples = new ArrayList<>();
+    protected List<TemplateEntry> examples = new ArrayList<TemplateEntry>();
 
     protected TemplateReader(InputStream stream) {
         this.inputStream = stream;
@@ -33,8 +33,9 @@ public class TemplateReader {
     }
 
     public static List<TemplateEntry> readEntries(String resource, TemplateReaderFactory readerFactory) {
-        try (InputStream stream = getSpecInputStream(resource)) {
+        try {
             TemplateReader reader;
+            InputStream stream = getSpecInputStream(resource);
             if (readerFactory == null) reader = new TemplateReader(stream);
             else reader = readerFactory.create(stream);
             return reader.read();
@@ -53,7 +54,7 @@ public class TemplateReader {
 
     public static List<String> readExamplesAsString(String resource, TemplateReaderFactory readerFactory) {
         List<TemplateEntry> examples = TemplateReader.readEntries(resource, readerFactory);
-        List<String> result = new ArrayList<>();
+        List<String> result = new ArrayList<String>();
         for (TemplateEntry example : examples) {
             result.add(example.getSource());
         }
@@ -66,8 +67,9 @@ public class TemplateReader {
 
     public static String readSpec(String resource) {
         StringBuilder sb = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(resource), Charset.forName("UTF-8")))) {
+        try {
             String line;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getSpecInputStream(resource), Charset.forName("UTF-8")));
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");
@@ -95,12 +97,10 @@ public class TemplateReader {
     protected List<TemplateEntry> read() throws IOException {
         resetContents();
 
-        try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(inputStream, Charset.forName("UTF-8")))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                processLine(line);
-            }
+        String line;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        while ((line = reader.readLine()) != null) {
+            processLine(line);
         }
 
         return examples;

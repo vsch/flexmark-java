@@ -24,7 +24,7 @@ public class ZzzzzzBlockPreProcessor implements BlockPreProcessor {
     public static class Factory implements BlockPreProcessorFactory {
         @Override
         public Set<Class<? extends Block>> getBlockTypes() {
-            HashSet<Class<? extends Block>> set = new HashSet<>();
+            HashSet<Class<? extends Block>> set = new HashSet<Class<? extends Block>>();
             set.add(Heading.class);
             return set;
         }

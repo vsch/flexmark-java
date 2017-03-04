@@ -10,7 +10,7 @@ public class VisitorSample {
     // example of visitor for a node or nodes, just add VisitHandlers<> to the list
     // any node type not handled by the visitor will default to visiting its children
     NodeVisitor visitor = new NodeVisitor(
-            new VisitHandler<>(Text.class, new Visitor<Text>() {
+            new VisitHandler<Text>(Text.class, new Visitor<Text>() {
                 @Override
                 public void visit(Text text) {
                     VisitorSample.this.visit(text);

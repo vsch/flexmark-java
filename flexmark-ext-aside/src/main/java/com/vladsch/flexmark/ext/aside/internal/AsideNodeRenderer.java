@@ -21,8 +21,8 @@ public class AsideNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(AsideBlock.class, new CustomNodeRenderer<AsideBlock>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<AsideBlock>(AsideBlock.class, new CustomNodeRenderer<AsideBlock>() {
             @Override
             public void render(AsideBlock node, NodeRendererContext context, HtmlWriter html) {
                 AsideNodeRenderer.this.render(node, context, html);

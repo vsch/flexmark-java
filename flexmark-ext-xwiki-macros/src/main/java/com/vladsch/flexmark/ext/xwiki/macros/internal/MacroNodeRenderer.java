@@ -25,20 +25,20 @@ public class MacroNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(Macro.class, new CustomNodeRenderer<Macro>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<Macro>(Macro.class, new CustomNodeRenderer<Macro>() {
             @Override
             public void render(Macro node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
         }));
-        set.add(new NodeRenderingHandler<>(MacroAttribute.class, new CustomNodeRenderer<MacroAttribute>() {
+        set.add(new NodeRenderingHandler<MacroAttribute>(MacroAttribute.class, new CustomNodeRenderer<MacroAttribute>() {
             @Override
             public void render(MacroAttribute node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
         }));
-        set.add(new NodeRenderingHandler<>(MacroClose.class, new CustomNodeRenderer<MacroClose>() {
+        set.add(new NodeRenderingHandler<MacroClose>(MacroClose.class, new CustomNodeRenderer<MacroClose>() {
             @Override
             public void render(MacroClose node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
         }));
-        set.add(new NodeRenderingHandler<>(MacroBlock.class, new CustomNodeRenderer<MacroBlock>() {
+        set.add(new NodeRenderingHandler<MacroBlock>(MacroBlock.class, new CustomNodeRenderer<MacroBlock>() {
             @Override
             public void render(MacroBlock node, NodeRendererContext context, HtmlWriter html) { MacroNodeRenderer.this.render(node, context, html); }
         }));

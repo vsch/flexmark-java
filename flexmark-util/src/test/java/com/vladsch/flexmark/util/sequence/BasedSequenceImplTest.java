@@ -201,7 +201,7 @@ public class BasedSequenceImplTest {
     public void testSplitBasic() throws Exception {
         BasedSequence sequence = SubSequence.of(" 1,2 , 3 ,4,5,   ");
         BasedSequence[] list = sequence.split(',', 0, BasedSequence.SPLIT_TRIM_PARTS | BasedSequence.SPLIT_SKIP_EMPTY);
-        ArrayList<String> sl = new ArrayList<>(list.length);
+        ArrayList<String> sl = new ArrayList<String>(list.length);
         for (BasedSequence basedSequence : list) sl.add(basedSequence.toString());
 
         assertArrayEquals(new String[] { "1", "2", "3", "4", "5" }, sl.toArray(new String[0]));

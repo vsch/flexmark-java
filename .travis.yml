@@ -1,5 +1,5 @@
 jdk:
-  - oraclejdk7
+  - oraclejdk6
 
 env:
   - TEST=java

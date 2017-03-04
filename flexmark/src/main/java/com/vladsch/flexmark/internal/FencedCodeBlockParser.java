@@ -2,10 +2,9 @@ package com.vladsch.flexmark.internal;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
+import com.vladsch.flexmark.ast.CodeBlock;
 import com.vladsch.flexmark.ast.FencedCodeBlock;
-import com.vladsch.flexmark.ast.ListItem;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -16,9 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.vladsch.flexmark.parser.Parser.PARSER_EMULATION_PROFILE;
-import static com.vladsch.flexmark.parser.ParserEmulationProfile.GITHUB_DOC;
 
 public class FencedCodeBlockParser extends AbstractBlockParser {
 
@@ -31,12 +27,14 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     private int fenceLength;
     private int fenceIndent;
     private final boolean matchingCloser;
+    private final boolean codeContentBlock;
 
     public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent) {
         this.fenceChar = fenceChar;
         this.fenceLength = fenceLength;
         this.fenceIndent = fenceIndent;
         this.matchingCloser = options.get(Parser.MATCH_CLOSING_FENCE_CHARACTERS);
+        this.codeContentBlock = options.get(Parser.CODE_CONTENT_BLOCK);
     }
 
     @Override
@@ -105,7 +103,14 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
             if (lines.size() > 1) {
                 // have more lines
-                block.setContent(spanningChars, lines.subList(1, lines.size()));
+                List<BasedSequence> segments = lines.subList(1, lines.size());
+                block.setContent(spanningChars, segments);
+                if (codeContentBlock) {
+                    CodeBlock codeBlock = new CodeBlock();
+                    codeBlock.setContent(segments);
+                    codeBlock.setCharsFromContent();
+                    block.appendChild(codeBlock);
+                }
             } else {
                 block.setContent(spanningChars, BasedSequence.EMPTY_LIST);
             }
@@ -120,7 +125,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     public static class Factory implements CustomBlockParserFactory {
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getAfterDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     BlockQuoteParser.Factory.class,
                     HeadingParser.Factory.class
                     //FencedCodeBlockParser.Factory.class,
@@ -133,7 +138,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
         @Override
         public Set<Class<? extends CustomBlockParserFactory>> getBeforeDependents() {
-            return new HashSet<>(Arrays.asList(
+            return new HashSet<Class<? extends CustomBlockParserFactory>>(Arrays.asList(
                     //BlockQuoteParser.Factory.class,
                     //HeadingParser.Factory.class,
                     //FencedCodeBlockParser.Factory.class,

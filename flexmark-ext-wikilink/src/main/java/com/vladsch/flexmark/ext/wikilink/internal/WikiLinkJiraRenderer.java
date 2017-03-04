@@ -19,8 +19,8 @@ public class WikiLinkJiraRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        HashSet<NodeRenderingHandler<?>> set = new HashSet<>();
-        set.add(new NodeRenderingHandler<>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {
+        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+        set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {
             @Override
             public void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
                 WikiLinkJiraRenderer.this.render(node, context, html);

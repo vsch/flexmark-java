@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.formatter.internal;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.format.options.ElementPlacement;
 import com.vladsch.flexmark.util.format.options.ElementPlacementSort;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 import java.util.*;
 
 public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B extends Node & ReferenceNode<R, B, N>, N extends Node & ReferencingNode<R, B>> implements PhasedNodeFormatter {
-    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<>(Arrays.asList(
+    public static final HashSet<FormattingPhase> FORMATTING_PHASES = new HashSet<FormattingPhase>(Arrays.asList(
             FormattingPhase.COLLECT,
             FormattingPhase.DOCUMENT_TOP,
             FormattingPhase.DOCUMENT_BOTTOM
@@ -36,7 +36,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
         referenceRepository = getRepository(options);
         referenceList = referenceRepository.values();
         lastReference = referenceList.isEmpty() ? null : referenceList.get(referenceList.size() - 1);
-        unusedReferences = new HashSet<>();
+        unusedReferences = new HashSet<Node>();
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         repositoryNodesDone = false;
 
@@ -94,7 +94,7 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
     }
 
     private void formatReferences(final NodeFormatterContext context, MarkdownWriter markdown) {
-        ArrayList<B> references = new ArrayList<>(referenceList);
+        ArrayList<B> references = new ArrayList<B>(referenceList);
 
         switch (getReferenceSort()) {
             case AS_IS:
@@ -105,8 +105,8 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
                 break;
 
             case SORT_UNUSED_LAST:
-                ArrayList<B> used = new ArrayList<>();
-                ArrayList<B> unused = new ArrayList<>();
+                ArrayList<B> used = new ArrayList<B>();
+                ArrayList<B> unused = new ArrayList<B>();
                 for (B footnote : references) {
                     if (unusedReferences.contains(footnote)) {
                         unused.add(footnote);

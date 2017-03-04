@@ -46,16 +46,12 @@ public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new StrikethroughNodeRenderer.Factory());
-                break;
-            case "JIRA":
-                rendererBuilder.nodeRendererFactory(new StrikethroughJiraRenderer.Factory());
-                break;
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new StrikethroughYouTrackRenderer.Factory());
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new StrikethroughNodeRenderer.Factory());
+        } else if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(new StrikethroughJiraRenderer.Factory());
+        } else if (rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new StrikethroughYouTrackRenderer.Factory());
         }
     }
 }

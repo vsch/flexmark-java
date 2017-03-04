@@ -15,7 +15,7 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence NULL = new EmptyBasedSequence();
     BasedSequence EOL = CharSubSequence.of("\n");
     BasedSequence SPACE = CharSubSequence.of(" ");
-    List<BasedSequence> EMPTY_LIST = new ArrayList<>();
+    List<BasedSequence> EMPTY_LIST = new ArrayList<BasedSequence>();
     BasedSequence[] EMPTY_ARRAY = new BasedSequence[0];
     String WHITESPACE_NO_EOL_CHARS = " \t";
     String WHITESPACE_CHARS = " \t\r\n";
@@ -71,6 +71,14 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      * @return offset of index of this sequence in original text
      */
     int getIndexOffset(int index);
+
+    /**
+     * Get the range of indices that map into {@link #getBaseSequence()} with startOffset and endOffset
+     * @param startOffset start offset into base sequence
+     * @param endOffset end offset into base sequence
+     * @return range into this sequence that spans start and end offset.
+     */
+    Range getIndexRange(int startOffset, int endOffset);
 
     /**
      * Get the range of this sequence in original {@link #getBaseSequence()} and {@link #getBase()} original text source.

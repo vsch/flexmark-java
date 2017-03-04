@@ -6,25 +6,25 @@ import com.vladsch.flexmark.ast.Visitor;
 public class SimTocVisitorExt {
     public static <V extends SimTocVisitor> VisitHandler<?>[] VISIT_HANDLERS(final V visitor) {
         return new VisitHandler<?>[] {
-                new VisitHandler<>(SimTocBlock.class, new Visitor<SimTocBlock>() {
+                new VisitHandler<SimTocBlock>(SimTocBlock.class, new Visitor<SimTocBlock>() {
                     @Override
                     public void visit(SimTocBlock node) {
                         visitor.visit(node);
                     }
                 }),
-                new VisitHandler<>(SimTocOptionList.class, new Visitor<SimTocOptionList>() {
+                new VisitHandler<SimTocOptionList>(SimTocOptionList.class, new Visitor<SimTocOptionList>() {
                     @Override
                     public void visit(SimTocOptionList node) {
                         visitor.visit(node);
                     }
                 }),
-                new VisitHandler<>(SimTocOption.class, new Visitor<SimTocOption>() {
+                new VisitHandler<SimTocOption>(SimTocOption.class, new Visitor<SimTocOption>() {
                     @Override
                     public void visit(SimTocOption node) {
                         visitor.visit(node);
                     }
                 }),
-                new VisitHandler<>(SimTocContent.class, new Visitor<SimTocContent>() {
+                new VisitHandler<SimTocContent>(SimTocContent.class, new Visitor<SimTocContent>() {
                     @Override
                     public void visit(SimTocContent node) {
                         visitor.visit(node);

@@ -9,7 +9,7 @@ import java.util.Map;
  * @param <H> subclass of {@link NodeAdaptingVisitHandler}
  */
 public abstract class NodeAdaptedVisitor<H extends NodeAdaptingVisitHandler<?, ?>> {
-    protected final Map<Class<?>, H> myCustomHandlersMap = new HashMap<>();
+    protected final Map<Class<?>, H> myCustomHandlersMap = new HashMap<Class<?>, H>();
 
     // Usage:
     //myVisitor = new NodeVisitor(

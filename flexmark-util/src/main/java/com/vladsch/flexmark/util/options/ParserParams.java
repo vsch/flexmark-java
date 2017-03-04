@@ -9,7 +9,7 @@ public class ParserParams {
     public ParsedOptionStatus status = ParsedOptionStatus.VALID;
 
     public ParserParams add(ParserMessage message) {
-        if (messages == null) messages = new ArrayList<>();
+        if (messages == null) messages = new ArrayList<ParserMessage>();
         messages.add(message);
         escalate(message.getStatus());
         return this;

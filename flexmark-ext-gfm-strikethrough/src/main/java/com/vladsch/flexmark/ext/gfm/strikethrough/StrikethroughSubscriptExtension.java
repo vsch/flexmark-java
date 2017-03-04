@@ -49,31 +49,27 @@ public class StrikethroughSubscriptExtension implements Parser.ParserExtension, 
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughNodeRenderer(options);
-                    }
-                });
-                break;
-            case "JIRA":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughJiraRenderer(options);
-                    }
-                });
-                break;
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
-                    @Override
-                    public NodeRenderer create(DataHolder options) {
-                        return new StrikethroughYouTrackRenderer(options);
-                    }
-                });
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughNodeRenderer(options);
+                }
+            });
+        } else if (rendererType.equals("JIRA")) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughJiraRenderer(options);
+                }
+            });
+        } else if (rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new NodeRendererFactory() {
+                @Override
+                public NodeRenderer create(DataHolder options) {
+                    return new StrikethroughYouTrackRenderer(options);
+                }
+            });
         }
     }
 }

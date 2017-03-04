@@ -19,7 +19,7 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
 
     @Override
     public Set<FormattingPhase> getFormattingPhases() {
-        return new HashSet<>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
+        return new HashSet<FormattingPhase>(Collections.singleton(FormattingPhase.DOCUMENT_FIRST));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class YamlFrontMatterNodeFormatter implements PhasedNodeFormatter {
     @Override
     public Set<NodeFormattingHandler<?>> getNodeFormattingHandlers() {
         return new HashSet<NodeFormattingHandler<?>>(Arrays.asList(
-                new NodeFormattingHandler<>(YamlFrontMatterBlock.class, new CustomNodeFormatter<YamlFrontMatterBlock>() {
+                new NodeFormattingHandler<YamlFrontMatterBlock>(YamlFrontMatterBlock.class, new CustomNodeFormatter<YamlFrontMatterBlock>() {
                     @Override
                     public void render(YamlFrontMatterBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
                         YamlFrontMatterNodeFormatter.this.render(node, context, markdown);

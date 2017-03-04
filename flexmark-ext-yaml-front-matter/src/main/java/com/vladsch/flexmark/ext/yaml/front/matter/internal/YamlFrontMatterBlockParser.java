@@ -2,8 +2,6 @@ package com.vladsch.flexmark.ext.yaml.front.matter.internal;
 
 import com.vladsch.flexmark.ast.Block;
 import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.Content;
-import com.vladsch.flexmark.ast.ContentNode;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterBlock;
 import com.vladsch.flexmark.ext.yaml.front.matter.YamlFrontMatterNode;
 import com.vladsch.flexmark.internal.DocumentBlockParser;
@@ -36,7 +34,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
         inYAMLBlock = true;
         inLiteral = false;
         currentKey = null;
-        currentValues = new ArrayList<>();
+        currentValues = new ArrayList<String>();
         block = new YamlFrontMatterBlock();
         content = new BlockContent();
     }
@@ -85,7 +83,7 @@ public class YamlFrontMatterBlockParser extends AbstractBlockParser {
 
                 inLiteral = false;
                 currentKey = matcher.group(1);
-                currentValues = new ArrayList<>();
+                currentValues = new ArrayList<String>();
                 if ("|".equals(matcher.group(2))) {
                     inLiteral = true;
                 } else if (!"".equals(matcher.group(2))) {

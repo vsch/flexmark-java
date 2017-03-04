@@ -8,8 +8,8 @@ import java.util.List;
 
 public class BlockContent {
     // list of line text
-    private final ArrayList<BasedSequence> lines = new ArrayList<>();
-    private final ArrayList<Integer> lineIndents = new ArrayList<>();
+    private final ArrayList<BasedSequence> lines = new ArrayList<BasedSequence>();
+    private final ArrayList<Integer> lineIndents = new ArrayList<Integer>();
 
     public BasedSequence getLine(int line) {
         return lines.get(line);

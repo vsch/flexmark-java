@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ReplacedTextMapper {
     private final BasedSequence original;
-    private ArrayList<ReplacedTextRegion> regions = new ArrayList<>();
-    private ArrayList<BasedSequence> replacedSegments = new ArrayList<>();
+    private ArrayList<ReplacedTextRegion> regions = new ArrayList<ReplacedTextRegion>();
+    private ArrayList<BasedSequence> replacedSegments = new ArrayList<BasedSequence>();
     private int replacedLength = 0;
 
     public ReplacedTextMapper(BasedSequence original) {

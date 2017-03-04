@@ -89,7 +89,7 @@ public abstract class ContentNode extends Node implements Content {
     }
 
     public void setContentLine(int lineIndex, BasedSequence contentLine) {
-        ArrayList<BasedSequence> lines = new ArrayList<>(lineSegments);
+        ArrayList<BasedSequence> lines = new ArrayList<BasedSequence>(lineSegments);
         lines.set(lineIndex, contentLine);
         this.lineSegments = lines;
         setCharsFromContent();

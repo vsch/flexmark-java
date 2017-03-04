@@ -44,14 +44,10 @@ public class InsExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-                rendererBuilder.nodeRendererFactory(new InsNodeRenderer.Factory());
-                break;
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new InsJiraRenderer.Factory());
-                break;
+        if (rendererType.equals("HTML")) {
+            rendererBuilder.nodeRendererFactory(new InsNodeRenderer.Factory());
+        } else if (rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new InsJiraRenderer.Factory());
         }
     }
 }

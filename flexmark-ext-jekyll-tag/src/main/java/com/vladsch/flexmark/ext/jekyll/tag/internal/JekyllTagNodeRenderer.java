@@ -26,10 +26,10 @@ public class JekyllTagNodeRenderer implements NodeRenderer {
 
     @Override
     public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
-        Set<NodeRenderingHandler<?>> set = new HashSet<>();
+        Set<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
         // @formatter:off
-        set.add(new NodeRenderingHandler<>(JekyllTag.class, new CustomNodeRenderer<JekyllTag>() { @Override public void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
-        set.add(new NodeRenderingHandler<>(JekyllTagBlock.class, new CustomNodeRenderer<JekyllTagBlock>() { @Override public void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
+        set.add(new NodeRenderingHandler<JekyllTag>(JekyllTag.class, new CustomNodeRenderer<JekyllTag>() { @Override public void render(JekyllTag node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
+        set.add(new NodeRenderingHandler<JekyllTagBlock>(JekyllTagBlock.class, new CustomNodeRenderer<JekyllTagBlock>() { @Override public void render(JekyllTagBlock node, NodeRendererContext context, HtmlWriter html) { JekyllTagNodeRenderer.this.render(node, context, html); } }));
         // @formatter:on
         return set;
     }

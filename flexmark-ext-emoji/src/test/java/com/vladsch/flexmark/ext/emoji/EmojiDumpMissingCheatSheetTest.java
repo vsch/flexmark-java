@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.ext.emoji;
 
 import com.vladsch.flexmark.ext.emoji.internal.EmojiCheatSheet;
-import org.junit.Test;
 
 import java.util.*;
 
@@ -19,7 +18,7 @@ public class EmojiDumpMissingCheatSheetTest {
         }
 
         System.out.println("\n## No Category\n");
-        Set<String> categories = new HashSet<>();
+        Set<String> categories = new HashSet<String>();
 
         for (Map.Entry<String, EmojiCheatSheet.EmojiShortcut> entry : EmojiCheatSheet.shortCutMap.entrySet()) {
             EmojiCheatSheet.EmojiShortcut shortcut = entry.getValue();
@@ -39,12 +38,12 @@ public class EmojiDumpMissingCheatSheetTest {
         }
 
         System.out.println("\n## Categorized\n");
-        List<String> categoryList = new ArrayList<>(categories);
+        List<String> categoryList = new ArrayList<String>(categories);
         Collections.sort(categoryList);
 
         for (String category : categoryList) {
             System.out.println("\n### " + category + "\n");
-            List<String> shortcuts = new ArrayList<>();
+            List<String> shortcuts = new ArrayList<String>();
 
             for (Map.Entry<String, EmojiCheatSheet.EmojiShortcut> entry : EmojiCheatSheet.shortCutMap.entrySet()) {
                 EmojiCheatSheet.EmojiShortcut shortcut = entry.getValue();
@@ -67,7 +66,7 @@ public class EmojiDumpMissingCheatSheetTest {
     //shortCutMap.put("bee", new EmojiShortcut("honeybee", "bee.png", null, "nature"));
     //shortCutMap.put("donut", new EmojiShortcut("doughnut", "donut.png", "https://assets-cdn.github.com/images/icons/emoji/unicode/1f369.png", "objects"));
 
-    static String[] files = {
+    public static final String[] files = {
             "+1.png",
             "-1.png",
             "100.png",

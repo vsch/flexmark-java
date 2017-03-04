@@ -15,7 +15,7 @@ import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
-    private ArrayList<FootnoteBlock> referencedFootnoteBlocks = new ArrayList<>();
+    private ArrayList<FootnoteBlock> referencedFootnoteBlocks = new ArrayList<FootnoteBlock>();
 
     public void addFootnoteReference(FootnoteBlock footnoteBlock, Footnote footnote) {
         if (!footnoteBlock.isReferenced()) {
@@ -33,7 +33,7 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
                 return f1.getFirstReferenceOffset() - f2.getFirstReferenceOffset();
             }
         });
-        
+
         int ordinal = 0;
         for (FootnoteBlock footnoteBlock : referencedFootnoteBlocks) {
             footnoteBlock.setFootnoteOrdinal(++ordinal);

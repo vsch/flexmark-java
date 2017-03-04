@@ -12,8 +12,8 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
     private final OrderedMap<Class<?>, Set<Class<?>>> myExclusionMap;
     private final OrderedSet<Class<?>> myExclusionSet;
     private final HashMap<Integer, BitSet> myNodeAncestryMap;
-    private final Stack<BitSet> myNodeAncestryBitSetStack = new Stack<>();
-    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<>(new BitSet(), new Computable<BitSet, BitSet>() {
+    private final Stack<BitSet> myNodeAncestryBitSetStack = new Stack<BitSet>();
+    private final CopyOnWriteRef<BitSet> myNodeAncestryBitSet = new CopyOnWriteRef<BitSet>(new BitSet(), new Computable<BitSet, BitSet>() {
         @Override
         public BitSet compute(BitSet value) {return value != null ? (BitSet) value.clone() : new BitSet();}
     });

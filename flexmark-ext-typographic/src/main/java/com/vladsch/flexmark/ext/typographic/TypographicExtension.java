@@ -19,8 +19,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class TypographicExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
-    public static final DataKey<Boolean> ENABLE_QUOTES = new DataKey<>("ENABLE_QUOTES", true);
-    public static final DataKey<Boolean> ENABLE_SMARTS = new DataKey<>("ENABLE_SMARTS", true);
+    public static final DataKey<Boolean> ENABLE_QUOTES = new DataKey<Boolean>("ENABLE_QUOTES", true);
+    public static final DataKey<Boolean> ENABLE_SMARTS = new DataKey<Boolean>("ENABLE_SMARTS", true);
     /**
      * @deprecated use {@link #ENABLE_QUOTES}
      */
@@ -29,19 +29,19 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
      * @deprecated use {@link #ENABLE_SMARTS}
      */
     public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = ENABLE_SMARTS;
-    public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<>("ANGLE_QUOTE_CLOSE", "&raquo;");
-    public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<>("ANGLE_QUOTE_OPEN", "&laquo;");
-    public static final DataKey<String> ANGLE_QUOTE_UNMATCHED = new DataKey<>("ANGLE_QUOTE_UNMATCHED", (String) null);
-    public static final DataKey<String> DOUBLE_QUOTE_CLOSE = new DataKey<>("DOUBLE_QUOTE_CLOSE", "&rdquo;");
-    public static final DataKey<String> DOUBLE_QUOTE_OPEN = new DataKey<>("DOUBLE_QUOTE_OPEN", "&ldquo;");
-    public static final DataKey<String> DOUBLE_QUOTE_UNMATCHED = new DataKey<>("DOUBLE_QUOTE_UNMATCHED", (String) null);
-    public static final DataKey<String> ELLIPSIS = new DataKey<>("ELLIPSIS", "&hellip;");
-    public static final DataKey<String> ELLIPSIS_SPACED = new DataKey<>("ELLIPSIS_SPACED", "&hellip;");
-    public static final DataKey<String> EM_DASH = new DataKey<>("EM_DASH", "&mdash;");
-    public static final DataKey<String> EN_DASH = new DataKey<>("EN_DASH", "&ndash;");
-    public static final DataKey<String> SINGLE_QUOTE_CLOSE = new DataKey<>("SINGLE_QUOTE_CLOSE", "&rsquo;");
-    public static final DataKey<String> SINGLE_QUOTE_OPEN = new DataKey<>("SINGLE_QUOTE_OPEN", "&lsquo;");
-    public static final DataKey<String> SINGLE_QUOTE_UNMATCHED = new DataKey<>("SINGLE_QUOTE_UNMATCHED", "&rsquo;");
+    public static final DataKey<String> ANGLE_QUOTE_CLOSE = new DataKey<String>("ANGLE_QUOTE_CLOSE", "&raquo;");
+    public static final DataKey<String> ANGLE_QUOTE_OPEN = new DataKey<String>("ANGLE_QUOTE_OPEN", "&laquo;");
+    public static final DataKey<String> ANGLE_QUOTE_UNMATCHED = new DataKey<String>("ANGLE_QUOTE_UNMATCHED", (String) null);
+    public static final DataKey<String> DOUBLE_QUOTE_CLOSE = new DataKey<String>("DOUBLE_QUOTE_CLOSE", "&rdquo;");
+    public static final DataKey<String> DOUBLE_QUOTE_OPEN = new DataKey<String>("DOUBLE_QUOTE_OPEN", "&ldquo;");
+    public static final DataKey<String> DOUBLE_QUOTE_UNMATCHED = new DataKey<String>("DOUBLE_QUOTE_UNMATCHED", (String) null);
+    public static final DataKey<String> ELLIPSIS = new DataKey<String>("ELLIPSIS", "&hellip;");
+    public static final DataKey<String> ELLIPSIS_SPACED = new DataKey<String>("ELLIPSIS_SPACED", "&hellip;");
+    public static final DataKey<String> EM_DASH = new DataKey<String>("EM_DASH", "&mdash;");
+    public static final DataKey<String> EN_DASH = new DataKey<String>("EN_DASH", "&ndash;");
+    public static final DataKey<String> SINGLE_QUOTE_CLOSE = new DataKey<String>("SINGLE_QUOTE_CLOSE", "&rsquo;");
+    public static final DataKey<String> SINGLE_QUOTE_OPEN = new DataKey<String>("SINGLE_QUOTE_OPEN", "&lsquo;");
+    public static final DataKey<String> SINGLE_QUOTE_UNMATCHED = new DataKey<String>("SINGLE_QUOTE_UNMATCHED", "&rsquo;");
 
     private TypographicExtension() {
     }
@@ -73,12 +73,8 @@ public class TypographicExtension implements Parser.ParserExtension, HtmlRendere
 
     @Override
     public void extend(HtmlRenderer.Builder rendererBuilder, String rendererType) {
-        switch (rendererType) {
-            case "HTML":
-            case "JIRA":
-            case "YOUTRACK":
-                rendererBuilder.nodeRendererFactory(new TypographicNodeRenderer.Factory());
-                break;
+        if (rendererType.equals("HTML") || rendererType.equals("JIRA") || rendererType.equals("YOUTRACK")) {
+            rendererBuilder.nodeRendererFactory(new TypographicNodeRenderer.Factory());
         }
     }
 }

@@ -287,7 +287,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     public OrderedSet<Map.Entry<K, V>> entrySet() {
         // create it with inHostUpdate already set so we can populate it without callbacks
         inUpdate = true;
-        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<>(keySet.size(), new EntryCollectionHost<K, V>());
+        OrderedSet<Map.Entry<K, V>> values = new OrderedSet<Entry<K, V>>(keySet.size(), new EntryCollectionHost<K, V>());
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
@@ -301,7 +301,7 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
 
     public List<Entry<K, V>> entries() {
         // create it with inHostUpdate already set so we can populate it without callbacks
-        List<Map.Entry<K, V>> values = new ArrayList<>();
+        List<Map.Entry<K, V>> values = new ArrayList<Entry<K, V>>();
         Iterator<Map.Entry<K, V>> iterator = entryIterator();
         while (iterator.hasNext()) {
             values.add(iterator.next());
@@ -315,11 +315,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIndexedIterator<V> valueIterator() {
-        return new IndexedIterator<>(getIndexedValueProxy(), keySet.indexIterator());
+        return new IndexedIterator<V, V, ReversibleIterator<Integer>>(getIndexedValueProxy(), keySet.indexIterator());
     }
 
     public ReversibleIndexedIterator<V> reversedValueIterator() {
-        return new IndexedIterator<>(getIndexedValueProxy(), keySet.reversedIndexIterator());
+        return new IndexedIterator<V, V, ReversibleIterator<Integer>>(getIndexedValueProxy(), keySet.reversedIndexIterator());
     }
 
     public ReversibleIndexedIterator<K> keyIterator() {
@@ -331,11 +331,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> entryIterator() {
-        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.indexIterator());
+        return new IndexedIterator<Entry<K, V>, Entry<K, V>, ReversibleIterator<Integer>>(getIndexedEntryProxy(), keySet.indexIterator());
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> reversedEntryIterator() {
-        return new IndexedIterator<>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
+        return new IndexedIterator<Entry<K, V>, Entry<K, V>, ReversibleIterator<Integer>>(getIndexedEntryProxy(), keySet.reversedIndexIterator());
     }
 
     public ReversibleIndexedIterator<Map.Entry<K, V>> reversedIterator() {
@@ -343,11 +343,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIterable<V> valueIterable() {
-        return new IndexedIterable<>(getIndexedValueProxy(), keySet.indexIterable());
+        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(getIndexedValueProxy(), keySet.indexIterable());
     }
 
     public ReversibleIterable<V> reversedValueIterable() {
-        return new IndexedIterable<>(getIndexedValueProxy(), keySet.reversedIndexIterable());
+        return new IndexedIterable<V, V, ReversibleIterable<Integer>>(getIndexedValueProxy(), keySet.reversedIndexIterable());
     }
 
     public ReversibleIterable<K> keyIterable() {
@@ -359,11 +359,11 @@ public class OrderedMap<K, V> implements Map<K, V>, Iterable<Map.Entry<K, V>> {
     }
 
     public ReversibleIterable<Map.Entry<K, V>> entryIterable() {
-        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.indexIterable());
+        return new IndexedIterable<Entry<K, V>, Entry<K, V>, ReversibleIterable<Integer>>(getIndexedEntryProxy(), keySet.indexIterable());
     }
 
     public ReversibleIterable<Entry<K, V>> reversedEntryIterable() {
-        return new IndexedIterable<>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
+        return new IndexedIterable<Entry<K, V>, Entry<K, V>, ReversibleIterable<Integer>>(getIndexedEntryProxy(), keySet.reversedIndexIterable());
     }
 
     public ReversibleIterable<Map.Entry<K, V>> reversedIterable() {
