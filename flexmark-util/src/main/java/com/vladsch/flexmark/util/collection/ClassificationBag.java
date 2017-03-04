@@ -116,7 +116,6 @@ public class ClassificationBag<K, V> {
         myItems.clear();
     }
 
-    @SafeVarargs
     public final <X> ReversibleIterable<X> getCategoryItems(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), false));
     }
@@ -129,7 +128,6 @@ public class ClassificationBag<K, V> {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(bitSet, false));
     }
 
-    @SafeVarargs
     public final <X> ReversibleIterable<X> getCategoryItemsReversed(Class<? extends X> xClass, K... categories) {
         return new IndexedIterable<X, V, ReversibleIterable<Integer>>(myItems.getConcurrentModsIndexedProxy(), new BitSetIterable(categoriesBitSet(categories), true));
     }
@@ -143,7 +141,6 @@ public class ClassificationBag<K, V> {
     }
 
     @SuppressWarnings("WeakerAccess")
-    @SafeVarargs
     public final BitSet categoriesBitSet(K... categories) {
         BitSet bitSet = new BitSet();
         for (K category : categories) {

@@ -48,7 +48,7 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
     }
 
     public BitSet differenceBitSet(Iterable<? extends E> items) {
-       return differenceBitSet(items.iterator());
+        return differenceBitSet(items.iterator());
     }
 
     public BitSet differenceBitSet(Iterator<? extends E> items) {
@@ -431,6 +431,27 @@ public class OrderedSet<E> implements Set<E>, Iterable<E> {
             }
         }
 
+        // Java6
+        //int index = myValueList.size();
+        //if (index == 0) return false;
+        //int[] indices = new int[removeSet.cardinality()];
+        //index = -1;
+        //int i = 0;
+        //
+        //while (true) {
+        //    index = removeSet.nextSetBit(index + 1);
+        //    if (index == -1) break;
+        //    indices[i++] = index;
+        //}
+        //
+        //boolean changed = false;
+        //while (i-- > 0) {
+        //    index = indices[i];
+        //    remove(myValueList.get(index));
+        //    changed = true;
+        //}
+
+        // Java7
         int index = myValueList.size();
         if (index == 0) return false;
         boolean changed = false;
