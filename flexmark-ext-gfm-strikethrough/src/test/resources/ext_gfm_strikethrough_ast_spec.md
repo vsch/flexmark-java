@@ -12,8 +12,7 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 Converts ~~text~~ to strikethrough of text
 
-The tests here are converted to commonmark spec.txt format and AST
-expected results added.
+The tests here are converted to commonmark spec.txt format and AST expected results added.
 
 ```````````````````````````````` example Gfm Strikethrough Extension: 1
 ~foo~
@@ -208,6 +207,26 @@ Document[0, 53]
       Text[27, 32] chars:[27, 32, " and "]
       StrongEmphasis[32, 51] textOpen:[32, 34, "__"] text:[34, 49, "strong emphasis"] textClose:[49, 51, "__"]
         Text[34, 49] chars:[34, 49, "stron … hasis"]
+````````````````````````````````
+
+
+## Custom Style HTML
+
+```````````````````````````````` example(Custom Style HTML: 1) options(style-strikethrough)
+~~strikethrough~~
+
+~subscript~
+
+.
+<p><span class="text-strike">strikethrough</span></p>
+<p>~subscript~</p>
+.
+Document[0, 32]
+  Paragraph[0, 18] isTrailingBlankLine
+    Strikethrough[0, 17] textOpen:[0, 2, "~~"] text:[2, 15, "strik … ethrough"] textClose:[15, 17, "~~"]
+      Text[2, 15] chars:[2, 15, "strik … rough"]
+  Paragraph[19, 31] isTrailingBlankLine
+    Text[19, 30] chars:[19, 30, "~subs … ript~"]
 ````````````````````````````````
 
 

@@ -234,3 +234,18 @@ Document[0, 57]
 ````````````````````````````````
 
 
+## Custom Style HTML
+
+```````````````````````````````` example(Custom Style HTML: 1) options(style-superscript)
+^superscript^
+
+.
+<p><span class="text-sup">superscript</span></p>
+.
+Document[0, 15]
+  Paragraph[0, 14] isTrailingBlankLine
+    Superscript[0, 13] textOpen:[0, 1, "^"] text:[1, 12, "superscript"] textClose:[12, 13, "^"]
+      Text[1, 12] chars:[1, 12, "super … cript"]
+````````````````````````````````
+
+

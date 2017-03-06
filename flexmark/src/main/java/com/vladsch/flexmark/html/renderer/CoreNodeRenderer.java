@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
@@ -464,15 +465,30 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(Emphasis node, NodeRendererContext context, HtmlWriter html) {
-        html.srcPos(node.getText()).withAttr().tag("em");
-        context.renderChildren(node);
-        html.tag("/em");
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        if (htmlOptions.emphasisStyleHtmlOpen == null || htmlOptions.emphasisStyleHtmlClose == null) {
+            html.srcPos(node.getText()).withAttr().tag("em");
+            context.renderChildren(node);
+            html.tag("/em");
+
+        } else {
+            html.raw(htmlOptions.emphasisStyleHtmlOpen);
+            context.renderChildren(node);
+            html.raw(htmlOptions.emphasisStyleHtmlClose);
+        }
     }
 
     private void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) {
-        html.srcPos(node.getText()).withAttr().tag("strong");
-        context.renderChildren(node);
-        html.tag("/strong");
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        if (htmlOptions.strongEmphasisStyleHtmlOpen == null || htmlOptions.strongEmphasisStyleHtmlClose == null) {
+            html.srcPos(node.getText()).withAttr().tag("strong");
+            context.renderChildren(node);
+            html.tag("/strong");
+        } else {
+            html.raw(htmlOptions.strongEmphasisStyleHtmlOpen);
+            context.renderChildren(node);
+            html.raw(htmlOptions.strongEmphasisStyleHtmlClose);
+        }
     }
 
     private void render(Text node, NodeRendererContext context, HtmlWriter html) {
@@ -484,9 +500,16 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(Code node, NodeRendererContext context, HtmlWriter html) {
-        html.srcPos(node.getText()).withAttr().tag("code");
-        html.text(Escaping.collapseWhitespace(node.getText(), true));
-        html.tag("/code");
+        HtmlRendererOptions htmlOptions = context.getHtmlOptions();
+        if (htmlOptions.codeStyleHtmlOpen == null || htmlOptions.codeStyleHtmlClose == null) {
+            html.srcPos(node.getText()).withAttr().tag("code");
+            html.text(Escaping.collapseWhitespace(node.getText(), true));
+            html.tag("/code");
+        } else {
+            html.raw(htmlOptions.codeStyleHtmlOpen);
+            html.text(Escaping.collapseWhitespace(node.getText(), true));
+            html.raw(htmlOptions.codeStyleHtmlClose);
+        }
     }
 
     private void render(HtmlBlock node, NodeRendererContext context, HtmlWriter html) {

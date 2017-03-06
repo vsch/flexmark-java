@@ -6,6 +6,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.internal.SuperscriptDelimiterProcessor;
 import com.vladsch.flexmark.superscript.internal.SuperscriptJiraRenderer;
 import com.vladsch.flexmark.superscript.internal.SuperscriptNodeRenderer;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -20,6 +21,9 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class SuperscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_OPEN = new DataKey<String>("SUPERSCRIPT_STYLE_HTML_OPEN", (String)null);
+    public static final DataKey<String> SUPERSCRIPT_STYLE_HTML_CLOSE = new DataKey<String>("SUPERSCRIPT_STYLE_HTML_CLOSE", (String)null);
+
     private SuperscriptExtension() {
     }
 

@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.internal.StrikethroughYouTrack
 import com.vladsch.flexmark.ext.gfm.strikethrough.internal.SubscriptDelimiterProcessor;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 
 /**
@@ -21,6 +22,8 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class SubscriptExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_OPEN = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN;
+    public static final DataKey<String> SUBSCRIPT_STYLE_HTML_CLOSE = StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE;
 
     private SubscriptExtension() {
     }

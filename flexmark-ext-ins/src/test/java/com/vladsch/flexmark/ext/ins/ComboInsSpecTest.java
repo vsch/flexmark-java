@@ -21,6 +21,7 @@ public class ComboInsSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("style-ins", new MutableDataSet().set(InsExtension.INS_STYLE_HTML_OPEN, "<span class=\"text-ins\">").set(InsExtension.INS_STYLE_HTML_CLOSE, "</span>"));
         // optionsMap.put("option1", new MutableDataSet().set(InsExtension.INS_OPTION1, true));
     }
 

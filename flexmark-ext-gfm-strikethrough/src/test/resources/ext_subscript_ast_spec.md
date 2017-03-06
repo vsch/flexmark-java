@@ -219,3 +219,25 @@ Document[0, 51]
 ````````````````````````````````
 
 
+## Custom Style HTML
+
+```````````````````````````````` example(Custom Style HTML: 1) options(style-subscript)
+~~strikethrough~~
+
+~subscript~
+
+.
+<p><span class="text-sub"><span class="text-sub">strikethrough</span></span></p>
+<p><span class="text-sub">subscript</span></p>
+.
+Document[0, 32]
+  Paragraph[0, 18] isTrailingBlankLine
+    Subscript[0, 17] textOpen:[0, 1, "~"] text:[1, 16, "~stri … kethrough~"] textClose:[16, 17, "~"]
+      Subscript[1, 16] textOpen:[1, 2, "~"] text:[2, 15, "strik … ethrough"] textClose:[15, 16, "~"]
+        Text[2, 15] chars:[2, 15, "strik … rough"]
+  Paragraph[19, 31] isTrailingBlankLine
+    Subscript[19, 30] textOpen:[19, 20, "~"] text:[20, 29, "subscript"] textClose:[29, 30, "~"]
+      Text[20, 29] chars:[20, 29, "subscript"]
+````````````````````````````````
+
+

@@ -243,3 +243,18 @@ Document[0, 79]
 ````````````````````````````````
 
 
+## Custom Style HTML
+
+```````````````````````````````` example(Custom Style HTML: 1) options(style-ins)
+++inserted++
+
+.
+<p><span class="text-ins">inserted</span></p>
+.
+Document[0, 14]
+  Paragraph[0, 13] isTrailingBlankLine
+    Ins[0, 12] textOpen:[0, 2, "++"] text:[2, 10, "inserted"] textClose:[10, 12, "++"]
+      Text[2, 10] chars:[2, 10, "inserted"]
+````````````````````````````````
+
+

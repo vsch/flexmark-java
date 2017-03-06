@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.ins.internal;
 
 import com.vladsch.flexmark.ext.ins.Ins;
+import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.html.renderer.NodeRenderer;
@@ -13,7 +14,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class InsNodeRenderer implements NodeRenderer {
+    private final String insStyleHtmlOpen;
+    private final String insStyleHtmlClose;
+
     public InsNodeRenderer(DataHolder options) {
+        insStyleHtmlOpen = InsExtension.INS_STYLE_HTML_OPEN.getFrom(options);
+        insStyleHtmlClose = InsExtension.INS_STYLE_HTML_CLOSE.getFrom(options);
     }
 
     @Override
@@ -27,9 +33,15 @@ public class InsNodeRenderer implements NodeRenderer {
     }
 
     private void render(Ins node, NodeRendererContext context, HtmlWriter html) {
-        html.withAttr().tag("ins");
-        context.renderChildren(node);
-        html.tag("/ins");
+        if (insStyleHtmlOpen == null || insStyleHtmlClose == null) {
+            html.withAttr().tag("ins");
+            context.renderChildren(node);
+            html.tag("/ins");
+        } else {
+            html.raw(insStyleHtmlOpen);
+            context.renderChildren(node);
+            html.raw(insStyleHtmlClose);
+        }
     }
 
     public static class Factory implements NodeRendererFactory {

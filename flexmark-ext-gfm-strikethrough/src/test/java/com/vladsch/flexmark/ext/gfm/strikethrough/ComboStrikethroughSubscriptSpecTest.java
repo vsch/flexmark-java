@@ -21,6 +21,8 @@ public class ComboStrikethroughSubscriptSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
+        optionsMap.put("style-strikethrough", new MutableDataSet().set(StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_OPEN, "<span class=\"text-strike\">").set(StrikethroughSubscriptExtension.STRIKETHROUGH_STYLE_HTML_CLOSE, "</span>"));
+        optionsMap.put("style-subscript", new MutableDataSet().set(StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_OPEN, "<span class=\"text-sub\">").set(StrikethroughSubscriptExtension.SUBSCRIPT_STYLE_HTML_CLOSE, "</span>"));
         //optionsMap.put("custom", new MutableDataSet().set(StrikethroughExtension.STRIKETHROUGH, value));
     }
 

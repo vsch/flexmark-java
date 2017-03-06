@@ -5,6 +5,12 @@ import com.vladsch.flexmark.util.options.DataHolder;
 public class HtmlRendererOptions {
     public final String softBreak;
     public final String hardBreak;
+    public final String strongEmphasisStyleHtmlOpen;
+    public final String strongEmphasisStyleHtmlClose;
+    public final String emphasisStyleHtmlOpen;
+    public final String emphasisStyleHtmlClose;
+    public final String codeStyleHtmlOpen;
+    public final String codeStyleHtmlClose;
     public final boolean escapeHtmlBlocks;
     public final boolean escapeHtmlCommentBlocks;
     public final boolean escapeInlineHtml;
@@ -30,6 +36,12 @@ public class HtmlRendererOptions {
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
         hardBreak = HtmlRenderer.HARD_BREAK.getFrom(options);
+        strongEmphasisStyleHtmlOpen = HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_OPEN.getFrom(options);
+        strongEmphasisStyleHtmlClose = HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_CLOSE.getFrom(options);
+        emphasisStyleHtmlOpen = HtmlRenderer.EMPHASIS_STYLE_HTML_OPEN.getFrom(options);
+        emphasisStyleHtmlClose = HtmlRenderer.EMPHASIS_STYLE_HTML_CLOSE.getFrom(options);
+        codeStyleHtmlOpen = HtmlRenderer.CODE_STYLE_HTML_OPEN.getFrom(options);
+        codeStyleHtmlClose = HtmlRenderer.CODE_STYLE_HTML_CLOSE.getFrom(options);
         escapeHtmlBlocks = HtmlRenderer.ESCAPE_HTML_BLOCKS.getFrom(options);
         escapeHtmlCommentBlocks = HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS.getFrom(options);
         escapeInlineHtml = HtmlRenderer.ESCAPE_INLINE_HTML.getFrom(options);
