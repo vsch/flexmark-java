@@ -85,7 +85,9 @@ flexmark-java
 0.17.0
 ------
 
-Change: language level 6 for source and byte code, still requires JDK7 for BitSet functionality.
+Change: language level 6 for source and byte code in attempt to get compatibility for Doxia.
+Code still requires JDK7 for BitSet functionality and org.nibor.autolink is JDK 1.7 bytecode
+level. So no success but the source is JDK 1.6.
 
 Add: `Parser.CODE_CONTENT_BLOCK`, default `false`. If set to true will create an AST `CodeBlock`
 node as a child node of `FencedCodeBlock` and `IndentedCodeBlock`. Allows custom rendering of
