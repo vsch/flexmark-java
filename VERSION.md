@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.17.2](#0172)
 - [0.17.1](#0171)
 - [0.17.0](#0170)
 - [0.16.1](#0161)
@@ -129,6 +130,13 @@ flexmark-java
 
 &nbsp;</details>
 
+0.17.2
+------
+
+* Fix: #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
+  carriage return. Actual error was in `flexmark-ext-typographic` in
+  `QuoteDelimiterProcessorBase` not checking for sequence length.
+
 0.17.1
 ------
 
@@ -162,7 +170,7 @@ flexmark-java
 ------
 
 Change: language level 6 for source and byte code in attempt to get compatibility for Doxia.
-Code still requires JDK7 for BitSet functionality and org.nibor.autolink is JDK 1.7 bytecode
+Code still requires JDK7 for BitSet functionality and `org.nibor.autolink` is JDK 1.7 bytecode
 level. So no success but the source is JDK 1.6.
 
 Add: `Parser.CODE_CONTENT_BLOCK`, default `false`. If set to true will create an AST `CodeBlock`

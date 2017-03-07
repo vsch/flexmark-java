@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true">
+    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true">
       <PanelProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
@@ -61,38 +61,25 @@
       <ScriptProviders>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
       </ScriptProviders>
-      <cssText>kbd {
-    border: solid 1px #ccc;
-    box-shadow: inset 0 -1px 0 #bbb;
-    color: rgba(19, 0, 68, 0.75);
-    background-color: rgba(0, 0, 0, 0.06);
+      <cssText>code {
+    background-color: rgba(255, 0, 102, 0.06);
+    color: #b00042;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
-var {
+.search-highlight {
+    border: solid 1px #000;
+    padding: 1px;
+    background-color: #ffff00;
     color: #000;
 }
 
-code {
-    background-color: rgba(255, 0, 102, 0.06);
-    color: #b00042;
-}
-
-dl {
-    margin: 16px 0;
-    padding: 0;
-}
-
-dl dt {
-    font-size: 1em;
-    font-style: italic;
-    font-weight: bold;
-    margin-top: 16px;
-    padding: 0;
-}
-
-dl dd {
-    margin-top: 0;
-    padding: 0 16px;
+.selection-highlight {
+    color:#000;
+    padding:1px 0 1px 0;
+    border: solid 1px #52CC7A;
+    background-color: #B5FFCE;
 }</cssText>
     </CssSettings>
     <HtmlExportSettings updateOnSave="false" parentDir="$ProjectFileDir$" targetDir="$ProjectFileDir$/out" cssDir="$ProjectFileDir$/out/export/css" scriptDir="$ProjectFileDir$/out/export/js" plainHtml="false" imageDir="$ProjectFileDir$/out/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="false" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" />

@@ -2843,3 +2843,61 @@ Document[0, 1097]
 ````````````````````````````````
 
 
+## Issue #70 
+
+Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
+carriage return
+
+```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+<<test>>
+.
+<p>&lt;<test>&gt;</p>
+.
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 1] chars:[0, 1, "<"]
+    HtmlInline[1, 7] chars:[1, 7, "<test>"]
+    Text[7, 8] chars:[7, 8, ">"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+<<test>>⏎
+.
+<p>&lt;<test>&gt;</p>
+.
+Document[0, 9]
+  Paragraph[0, 9]
+    Text[0, 1] chars:[0, 1, "<"]
+    HtmlInline[1, 7] chars:[1, 7, "<test>"]
+    Text[7, 8] chars:[7, 8, ">"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+<<test>>⏎
+.
+<p>&lt;<test>&gt;</p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Text[0, 1] chars:[0, 1, "<"]
+    HtmlInline[1, 7] chars:[1, 7, "<test>"]
+    Text[7, 8] chars:[7, 8, ">"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+<<test>>
+
+.
+<p>&lt;<test>&gt;</p>
+.
+Document[0, 10]
+  Paragraph[0, 9] isTrailingBlankLine
+    Text[0, 1] chars:[0, 1, "<"]
+    HtmlInline[1, 7] chars:[1, 7, "<test>"]
+    Text[7, 8] chars:[7, 8, ">"]
+````````````````````````````````
+
+

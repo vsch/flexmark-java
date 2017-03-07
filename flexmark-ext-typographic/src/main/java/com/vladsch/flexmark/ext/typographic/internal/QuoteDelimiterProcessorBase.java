@@ -69,7 +69,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     protected boolean canClose(final DelimiterRun closer, final int minLength) {
         if (closer.canClose()) {
             BasedSequence closerChars = closer.getNode().getChars();
-            if (closer.getNext() != null && closerChars.isContinuationOf(closer.getNext().getNode().getChars()) || closerChars.getEndOffset() >= closerChars.getBaseSequence().length() || isAllowed(closerChars.getBaseSequence().charAt(closerChars.getEndOffset() + minLength - 1))) {
+            if (closer.getNext() != null && closerChars.isContinuationOf(closer.getNext().getNode().getChars()) || closerChars.getEndOffset() >= closerChars.getBaseSequence().length() || isAllowed(closerChars.getBaseSequence(), closerChars.getEndOffset() + minLength - 1)) {
                 return true;
             }
         }
@@ -79,7 +79,7 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     protected boolean canOpen(final DelimiterRun opener, final int minLength) {
         if (opener.canOpen()) {
             BasedSequence openerChars = opener.getNode().getChars();
-            if (opener.getPrevious() != null && opener.getPrevious().getNode().getChars().isContinuationOf(openerChars) || openerChars.getStartOffset() == 0 || isAllowed(openerChars.getBaseSequence().charAt(openerChars.getStartOffset() - minLength))) {
+            if (opener.getPrevious() != null && opener.getPrevious().getNode().getChars().isContinuationOf(openerChars) || openerChars.getStartOffset() == 0 || isAllowed(openerChars.getBaseSequence(), openerChars.getStartOffset() - minLength)) {
                 return true;
             }
         }
@@ -89,6 +89,11 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
     @SuppressWarnings("WeakerAccess")
     protected boolean isAllowed(char c) {
         return !Character.isLetterOrDigit(c);
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    protected boolean isAllowed(CharSequence seq, int index) {
+        return index < 0 || index >= seq.length() || !Character.isLetterOrDigit(seq.charAt(index));
     }
 
     @Override
