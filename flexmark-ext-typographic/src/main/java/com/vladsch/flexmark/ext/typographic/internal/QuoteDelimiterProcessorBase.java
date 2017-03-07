@@ -98,14 +98,14 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
 
     @Override
     public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
-        if (haveNextCloser(closer)) {
-            // have one that is enclosed
-            return 0;
-        }
-        if (havePreviousOpener(opener)) {
-            // have one that is enclosed
-            return 0;
-        }
+        //if (haveNextCloser(closer)) {
+        //    // have one that is enclosed
+        //    return 0;
+        //}
+        //if (havePreviousOpener(opener)) {
+        //    // have one that is enclosed
+        //    return 0;
+        //}
 
         int minLength = getMinLength();
         if (opener.length() >= minLength && closer.length() >= minLength) {

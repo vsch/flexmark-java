@@ -412,7 +412,6 @@ Document[0, 75]
 ````````````````````````````````
 
 
-
 ## Issue #70 
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
@@ -466,5 +465,82 @@ Document[0, 10]
       Text[2, 6] chars:[2, 6, "test"]
 ````````````````````````````````
 
+
+## Issue 72
+
+Issue #72, Multiple angle quotes not being handled correctly
+
+```````````````````````````````` example Issue 72: 1
+<<test>><<test1>>
+
+.
+<p>&laquo;test&raquo;&laquo;test1&raquo;</p>
+.
+Document[0, 19]
+  Paragraph[0, 18] isTrailingBlankLine
+    TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
+      Text[2, 6] chars:[2, 6, "test"]
+    TypographicQuotes[8, 17] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[8, 10, "<<"] text:[10, 15, "test1"] textClose:[15, 17, ">>"]
+      Text[10, 15] chars:[10, 15, "test1"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 72: 2) options(FILE_EOL)
+<<test>>
+abcd
+<<test>>
+.
+<p>&laquo;test&raquo;
+abcd
+&laquo;test&raquo;</p>
+.
+Document[0, 23]
+  Paragraph[0, 23]
+    TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
+      Text[2, 6] chars:[2, 6, "test"]
+    SoftLineBreak[8, 9]
+    Text[9, 13] chars:[9, 13, "abcd"]
+    SoftLineBreak[13, 14]
+    TypographicQuotes[14, 22] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[14, 16, "<<"] text:[16, 20, "test"] textClose:[20, 22, ">>"]
+      Text[16, 20] chars:[16, 20, "test"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 72: 3) options(FILE_EOL)
+<<test>>abcd
+
+<<test>>
+.
+<p>&laquo;test&raquo;abcd</p>
+<p>&laquo;test&raquo;</p>
+.
+Document[0, 23]
+  Paragraph[0, 13] isTrailingBlankLine
+    TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
+      Text[2, 6] chars:[2, 6, "test"]
+    Text[8, 12] chars:[8, 12, "abcd"]
+  Paragraph[14, 23]
+    TypographicQuotes[14, 22] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[14, 16, "<<"] text:[16, 20, "test"] textClose:[20, 22, ">>"]
+      Text[16, 20] chars:[16, 20, "test"]
+````````````````````````````````
+
+
+test handling of double quotes and angle quotes
+
+```````````````````````````````` example Issue 72: 4
+"<<test>>""<<test1>>"
+
+.
+<p>&ldquo;&laquo;test&raquo;&rdquo;&ldquo;&laquo;test1&raquo;&rdquo;</p>
+.
+Document[0, 23]
+  Paragraph[0, 22] isTrailingBlankLine
+    TypographicQuotes[0, 10] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[0, 1, "\""] text:[1, 9, "<<test>>"] textClose:[9, 10, "\""]
+      TypographicQuotes[1, 9] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[1, 3, "<<"] text:[3, 7, "test"] textClose:[7, 9, ">>"]
+        Text[3, 7] chars:[3, 7, "test"]
+    TypographicQuotes[10, 21] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[10, 11, "\""] text:[11, 20, "<<test1>>"] textClose:[20, 21, "\""]
+      TypographicQuotes[11, 20] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[11, 13, "<<"] text:[13, 18, "test1"] textClose:[18, 20, ">>"]
+        Text[13, 18] chars:[13, 18, "test1"]
+````````````````````````````````
 
 

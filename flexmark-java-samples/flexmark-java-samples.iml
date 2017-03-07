@@ -29,7 +29,6 @@
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" />
     <orderEntry type="module" module-name="flexmark-integration-test" />
     <orderEntry type="module" module-name="flexmark-jira-converter" />
-    <orderEntry type="module" module-name="flexmark-jira-parser" />
     <orderEntry type="module" module-name="flexmark-test-util" />
     <orderEntry type="module" module-name="flexmark-util" />
     <orderEntry type="module" module-name="flexmark-profile-pegdown" />

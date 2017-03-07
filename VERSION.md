@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.17.3](#0173)
 - [0.17.2](#0172)
 - [0.17.1](#0171)
 - [0.17.0](#0170)
@@ -129,6 +130,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.17.3
+------
+
+* Fix: remove unused `flexmark-jira-parser` module from repo.
+
+* Fix: #72, Multiple angle quotes not being handled correctly
 
 0.17.2
 ------
