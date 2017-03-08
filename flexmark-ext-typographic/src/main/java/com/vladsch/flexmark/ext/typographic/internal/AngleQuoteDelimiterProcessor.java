@@ -12,6 +12,16 @@ public class AngleQuoteDelimiterProcessor extends QuoteDelimiterProcessorBase {
         return 2;
     }
 
+    @Override
+    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return true;
+    }
+
+    @Override
+    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return true;
+    }
+
     protected boolean isAllowed(CharSequence seq, int index) {
         return true;
     }

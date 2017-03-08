@@ -3830,3 +3830,70 @@ info("End of the response");
 ````````````````````````````````
 
 
+## Issue MN-408
+
+Issue #MN-408
+
+```````````````````````````````` example Issue MN-408: 1
+*
+* Equipment
+*
+* Chemicals
+*
+* Consumables
+*
+* Enzymes
+*
+* GMO
+*
+* Antibodies
+*
+* DNA Constructs
+*
+* RNA Constructs
+*
+* Vectors
+*
+* Oligos
+.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+→<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+→<title></title>
+→<meta name="generator" content="LibreOffice 5.2.3.3 (MacOSX)"/>
+→<style type="text/css">
+→→@page { margin: 2cm }
+→→p { margin-bottom: 0.25cm; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+→</style>
+</head>
+<body lang="de-DE" dir="ltr">
+<ul>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Equipment</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Chemicals</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Consumables</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Enzymes</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">GMO</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Antibodies</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">DNA
+→Constructs</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">RNA
+→Constructs</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Vectors</span></p>
+→<li/>
+<p style="margin-bottom: 0cm; line-height: 100%"><span lang="en-US">Oligos</span></p>
+</ul>
+</body>
+</html>
+````````````````````````````````
+
+

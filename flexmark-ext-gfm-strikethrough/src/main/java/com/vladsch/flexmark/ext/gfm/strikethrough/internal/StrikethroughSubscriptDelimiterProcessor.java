@@ -28,6 +28,16 @@ public class StrikethroughSubscriptDelimiterProcessor implements DelimiterProces
     }
 
     @Override
+    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return leftFlanking;
+    }
+
+    @Override
+    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return rightFlanking;
+    }
+
+    @Override
     public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
         // "multiple of 3" rule for internal delimiter runs
         if ((opener.canClose() || closer.canOpen()) && (opener.length() + closer.length()) % 3 == 0) {

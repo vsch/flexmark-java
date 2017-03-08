@@ -1636,13 +1636,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean canOpen;
         boolean canClose;
 
-        if (delimiterChar == '_') {
-            canOpen = leftFlanking && (!rightFlanking || beforeIsPunctuation);
-            canClose = rightFlanking && (!leftFlanking || afterIsPunctuation);
-        } else {
-            canOpen = leftFlanking && delimiterChar == delimiterProcessor.getOpeningCharacter();
-            canClose = rightFlanking && delimiterChar == delimiterProcessor.getClosingCharacter();
-        }
+        canOpen = delimiterChar == delimiterProcessor.getOpeningCharacter() && delimiterProcessor.canBeOpener(leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
+        canClose = delimiterChar == delimiterProcessor.getClosingCharacter() && delimiterProcessor.canBeCloser(leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
 
         index = startIndex;
         return new DelimiterData(delimiterCount, canOpen, canClose);

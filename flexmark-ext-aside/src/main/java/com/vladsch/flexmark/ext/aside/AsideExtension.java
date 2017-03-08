@@ -23,7 +23,6 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public class AsideExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
     public static final DataKey<Boolean> EXTEND_TO_BLANK_LINE = new DataKey<Boolean>("EXTEND_TO_BLANK_LINE", false);
     public static final DataKey<Boolean> IGNORE_BLANK_LINE = new DataKey<Boolean>("IGNORE_BLANK_LINE", false);
-    public static final LinkStatus LOCAL_ONLY = new LinkStatus("LOCAL_ONLY");
 
     private AsideExtension() {
     }

@@ -60,4 +60,30 @@ public interface DelimiterProcessor {
      * @return node to replace unmatched delimiter, null or delimiter.getNode() to replace with delimiter text
      */
     Node unmatchedDelimiterNode(InlineParser inlineParser, DelimiterRun delimiter);
+
+    /**
+     * Decide whether this delimiter can be an open delimiter
+     * 
+     * @param leftFlanking                  is left flanking delimiter
+     * @param rightFlanking                 is right flanking delimiter
+     * @param beforeIsPunctuation           is punctuation before
+     * @param afterIsPunctuation            is punctuation after
+     * @param beforeIsWhitespace            is whitespace before
+     * @param afterIsWhiteSpace             is whitespace after
+     * @return true if can be open delimiter
+     */
+    boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
+    
+    /**
+     * Decide whether this delimiter can be a close delimiter
+     *
+     * @param leftFlanking                  is left flanking delimiter
+     * @param rightFlanking                 is right flanking delimiter
+     * @param beforeIsPunctuation           is punctuation before
+     * @param afterIsPunctuation            is punctuation after
+     * @param beforeIsWhitespace            is whitespace before
+     * @param afterIsWhiteSpace             is whitespace after
+     * @return true if can be open delimiter
+     */
+    boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace);
 }

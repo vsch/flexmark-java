@@ -849,6 +849,9 @@ public class FlexmarkHtmlParser {
                     case LI:
                         processListItem(out, (Element) item, listState);
                         break;
+                    case P:
+                        processListItem(out, (Element) item, listState);
+                        break;
                     default:
                         skip();
                         break;

@@ -26,6 +26,16 @@ public class InsDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
+    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return leftFlanking;
+    }
+
+    @Override
+    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return rightFlanking;
+    }
+
+    @Override
     public int getDelimiterUse(DelimiterRun opener, DelimiterRun closer) {
         if (opener.length() >= 2 && closer.length() >= 2) {
             return 2;

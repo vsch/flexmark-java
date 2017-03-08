@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.0](#0180)
 - [0.17.4](#0174)
 - [0.17.3](#0173)
 - [0.17.2](#0172)
@@ -131,6 +132,17 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.0
+------
+
+* Fix: HTML to Markdown converter to not ignore text in lists which is not included in a list
+  item but instead to put this text into a new list item.
+
+* API Change: add `DelimiterProcessor.canBeOpener(boolean, boolean, boolean, boolean, boolean,
+  boolean)` and `DelimiterProcessor.canBeCloser(boolean, boolean, boolean, boolean, boolean,
+  boolean)` to allow customization of when a delimiter can be an opener or closer. Default
+  CommonMark does not work for `<<` and `>>` which can open and close anywhere.
 
 0.17.4
 ------

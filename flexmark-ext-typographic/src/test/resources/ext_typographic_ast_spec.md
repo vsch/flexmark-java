@@ -544,3 +544,37 @@ Document[0, 23]
 ````````````````````````````````
 
 
+## Issue 74
+
+Issue #74, Angle quotes again :)
+
+```````````````````````````````` example(Issue 74: 1) options(NO_FILE_EOL)
+<<test>>abcd<</test1>>
+.
+<p>&laquo;test&raquo;abcd&laquo;/test1&raquo;</p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
+      Text[2, 6] chars:[2, 6, "test"]
+    Text[8, 12] chars:[8, 12, "abcd"]
+    TypographicQuotes[12, 22] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[12, 14, "<<"] text:[14, 20, "/test1"] textClose:[20, 22, ">>"]
+      Text[14, 20] chars:[14, 20, "/test1"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 74: 2) options(NO_FILE_EOL)
+<<test>>abcd<<:test1>>
+.
+<p>&laquo;test&raquo;abcd&laquo;:test1&raquo;</p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
+      Text[2, 6] chars:[2, 6, "test"]
+    Text[8, 12] chars:[8, 12, "abcd"]
+    TypographicQuotes[12, 22] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[12, 14, "<<"] text:[14, 20, ":test1"] textClose:[20, 22, ">>"]
+      Text[14, 20] chars:[14, 20, ":test1"]
+````````````````````````````````
+
+

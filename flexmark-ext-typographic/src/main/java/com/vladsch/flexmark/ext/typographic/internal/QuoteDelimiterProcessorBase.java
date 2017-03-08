@@ -41,6 +41,16 @@ public class QuoteDelimiterProcessorBase implements DelimiterProcessor {
         return 1;
     }
 
+    @Override
+    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return leftFlanking;
+    }
+
+    @Override
+    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return rightFlanking;
+    }
+
     protected boolean havePreviousOpener(DelimiterRun opener) {
         DelimiterRun previous = opener.getPrevious();
         int minLength = getMinLength();

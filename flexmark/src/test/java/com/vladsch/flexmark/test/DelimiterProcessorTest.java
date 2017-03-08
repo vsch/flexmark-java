@@ -102,6 +102,16 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         }
 
         @Override
+        public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+            return leftFlanking;
+        }
+
+        @Override
+        public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+            return rightFlanking;
+        }
+
+        @Override
         public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
             return null;
         }
@@ -139,6 +149,16 @@ public class DelimiterProcessorTest extends RenderingTestCase {
         @Override
         public Node unmatchedDelimiterNode(InlineParser inlineParser, final DelimiterRun delimiter) {
             return null;
+        }
+
+        @Override
+        public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+            return leftFlanking;
+        }
+
+        @Override
+        public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+            return rightFlanking;
         }
 
         @Override

@@ -10,6 +10,7 @@
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="true" />
         <option name="ANCHORLINKS" value="false" />
+        <option name="ASIDE" value="true" />
         <option name="ATXHEADERSPACE" value="true" />
         <option name="AUTOLINKS" value="true" />
         <option name="DEFINITIONS" value="true" />
@@ -25,7 +26,7 @@
         <option name="SUPERSCRIPT" value="true" />
         <option name="SUPPRESS_HTML_BLOCKS" value="false" />
         <option name="SUPPRESS_INLINE_HTML" value="false" />
-        <option name="TABLES" value="true" />
+        <option name="TABLES" value="false" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="true" />
         <option name="WIKILINKS" value="true" />
