@@ -4171,13 +4171,13 @@ Document[0, 1096]
 ````````````````````````````````
 
 
-## Issue #66
+## Issue 66
 
 #66, GitHub Doc profile incorrect parsing of following markdown
 
 Heading in fenced code interrupts fenced code
 
-```````````````````````````````` example Issue #66: 1
+```````````````````````````````` example Issue 66: 1
 * list item
 ```
 # test
@@ -4204,6 +4204,62 @@ Document[0, 60]
       Paragraph[2, 12]
         Text[2, 11] chars:[2, 11, "list item"]
   FencedCodeBlock[12, 58] open:[12, 15, "```"] content:[16, 55] lines[5] close:[55, 58, "```"]
+````````````````````````````````
+
+
+## Issue 73
+
+#73, Can't nest code blocks in ordered list
+
+```````````````````````````````` example Issue 73: 1
+* list item
+
+  ```
+  fenced code
+   more code
+  ```
+.
+<ul>
+    <li>
+        <p>list item</p>
+        <pre><code>fenced code
+ more code
+</code></pre>
+    </li>
+</ul>
+.
+Document[0, 52]
+  BulletList[0, 51] isTight
+    BulletListItem[0, 51] open:[0, 1, "*"] isLoose hadBlankLineAfter
+      Paragraph[2, 12] isTrailingBlankLine
+        Text[2, 11] chars:[2, 11, "list item"]
+      FencedCodeBlock[15, 51] open:[15, 18, "```"] content:[21, 46] lines[2] close:[48, 51, "```"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 73: 2
+1. list item
+
+   ```
+   fenced code
+    more code
+   ```
+.
+<ol>
+    <li>
+        <p>list item</p>
+        <pre><code>fenced code
+ more code
+</code></pre>
+    </li>
+</ol>
+.
+Document[0, 57]
+  OrderedList[0, 56] isTight delimiter:'.'
+    OrderedListItem[0, 56] open:[0, 2, "1."] isLoose hadBlankLineAfter
+      Paragraph[3, 13] isTrailingBlankLine
+        Text[3, 12] chars:[3, 12, "list item"]
+      FencedCodeBlock[17, 56] open:[17, 20, "```"] content:[24, 50] lines[2] close:[53, 56, "```"]
 ````````````````````````````````
 
 

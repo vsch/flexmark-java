@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.17.4](#0174)
 - [0.17.3](#0173)
 - [0.17.2](#0172)
 - [0.17.1](#0171)
@@ -130,6 +131,12 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.17.4
+------
+
+* Fix: #73, Can't nest code blocks in ordered list. GitHub Doc compatibility error in parsing
+  fenced code nested in list items.
 
 0.17.3
 ------

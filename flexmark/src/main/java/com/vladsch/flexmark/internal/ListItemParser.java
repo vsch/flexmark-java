@@ -57,7 +57,7 @@ public class ListItemParser extends AbstractBlockParser {
             if (state.getProperties().get(PARSER_EMULATION_PROFILE) == GITHUB_DOC) {
                 // Issue #66, if we are in a list item and our indent == list indent then we interrupt the list
                 FencedCodeBlockParser parser = (FencedCodeBlockParser)blockParser;
-                return myListData.markerIndent > parser.getFenceIndent();
+                return myListData.markerIndent < parser.getFenceMarkerIndent();
             }
         }
         return true;

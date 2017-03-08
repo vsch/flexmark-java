@@ -26,13 +26,15 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
     private char fenceChar;
     private int fenceLength;
     private int fenceIndent;
+    private int fenceMarkerIndent;
     private final boolean matchingCloser;
     private final boolean codeContentBlock;
 
-    public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent) {
+    public FencedCodeBlockParser(DataHolder options, char fenceChar, int fenceLength, int fenceIndent, int fenceMarkerIndent) {
         this.fenceChar = fenceChar;
         this.fenceLength = fenceLength;
         this.fenceIndent = fenceIndent;
+        this.fenceMarkerIndent = fenceIndent + fenceMarkerIndent;
         this.matchingCloser = options.get(Parser.MATCH_CLOSING_FENCE_CHARACTERS);
         this.codeContentBlock = options.get(Parser.CODE_CONTENT_BLOCK);
     }
@@ -44,6 +46,10 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
 
     public int getFenceIndent() {
         return fenceIndent;
+    }
+
+    public int getFenceMarkerIndent() {
+        return fenceMarkerIndent;
     }
 
     @Override
@@ -175,7 +181,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                 if ((matcher = OPENING_FENCE.matcher(trySequence)).find()) {
                     int fenceLength = matcher.group(0).length();
                     char fenceChar = matcher.group(0).charAt(0);
-                    FencedCodeBlockParser blockParser = new FencedCodeBlockParser(state.getProperties(), fenceChar, fenceLength, state.getIndent());
+                    FencedCodeBlockParser blockParser = new FencedCodeBlockParser(state.getProperties(), fenceChar, fenceLength, state.getIndent(), nextNonSpace);
                     blockParser.block.setOpeningMarker(trySequence.subSequence(0, fenceLength));
                     return BlockStart.of(blockParser).atIndex(nextNonSpace + fenceLength);
                 }
