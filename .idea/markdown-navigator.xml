@@ -26,7 +26,7 @@
         <option name="SUPERSCRIPT" value="true" />
         <option name="SUPPRESS_HTML_BLOCKS" value="false" />
         <option name="SUPPRESS_INLINE_HTML" value="false" />
-        <option name="TABLES" value="false" />
+        <option name="TABLES" value="true" />
         <option name="TASKLISTITEMS" value="true" />
         <option name="TOC" value="true" />
         <option name="WIKILINKS" value="true" />
@@ -37,7 +37,7 @@
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
         <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
-        <option name="GFM_TABLE_RENDERING" value="true" />
+        <option name="GFM_TABLE_RENDERING" value="false" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_EMOJI_URL" value="true" />
         <option name="GITHUB_LISTS" value="true" />
