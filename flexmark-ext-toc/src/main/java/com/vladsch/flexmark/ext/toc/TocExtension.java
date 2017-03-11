@@ -54,7 +54,13 @@ public class TocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRe
 
     @Override
     public void rendererOptions(final MutableDataHolder options) {
-
+        // set header id options if not already set
+        if (!options.contains(HtmlRenderer.GENERATE_HEADER_ID)) {
+            options.set(HtmlRenderer.GENERATE_HEADER_ID, true);
+        }
+        if (!options.contains(HtmlRenderer.RENDER_HEADER_ID)) {
+            options.set(HtmlRenderer.RENDER_HEADER_ID, true);
+        }
     }
 
     @Override

@@ -378,6 +378,17 @@ public abstract class Node {
         }
     }
 
+    public static void astChars(StringBuilder out, CharSequence chars, String name) {
+        if (chars.length() > 0) {
+            if (chars.length() <= 10) {
+                out.append(' ').append(name).append(" \"").append(chars).append("\"");
+            } else {
+                // give the first 5 and last 5
+                out.append(' ').append(name).append(" \"").append(chars.subSequence(0, 5)).append(SPLICE).append(chars.subSequence(chars.length() - 5, chars.length())).append("\"");
+            }
+        }
+    }
+
     protected String toStringAttributes() {
         return "";
     }

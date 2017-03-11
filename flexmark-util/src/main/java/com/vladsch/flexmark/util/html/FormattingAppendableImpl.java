@@ -517,6 +517,16 @@ public class FormattingAppendableImpl implements FormattingAppendable {
     }
 
     @Override
+    public FormattingAppendable flushWhitespaces() {
+        try {
+            appendSpaces();
+        } catch (IOException e) {
+            setIOException(e);
+        }
+        return this;
+    }
+
+    @Override
     public FormattingAppendable flush(final int maxBlankLines) {
         assert myConditionalFrames.size() == 0;
         assert myPreFormattedNesting == 0;

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.1](#0181)
 - [0.18.0](#0180)
 - [0.17.4](#0174)
 - [0.17.3](#0173)
@@ -132,6 +133,18 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.1
+------
+
+* Fix: `TocExtension` and `SimTocExtension` to set `HtmlRenderer.GENERATE_HEADER_ID` to `true`
+  and `HtmlRenderer.RENDER_HEADER_ID` to `true` if they are not already explicitly set.
+
+* Fix: HTML to Markdown converter to add a space after empty list items
+
+* Fix: #75, Incorrect footnote link. `\r\n` sequence was not properly recognized in `Parsing`
+  patterns used by the parser, causing parsing discrepancies when EOL was not `\n` in many
+  elements.
 
 0.18.0
 ------

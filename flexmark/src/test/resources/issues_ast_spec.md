@@ -184,3 +184,45 @@ Document[0, 10]
 ````````````````````````````````
 
 
+## Issue 75
+
+Issue #75, Incorrect footnote link
+
+Actually it is incorrect reference parsing with `\r\n`
+
+```````````````````````````````` example Issue 75: 1
+Incorrect: [amazon][2]⏎
+
+[1]: http://www.google.com/⏎
+[2]: http://www.amazon.com/
+.
+<p>Incorrect: <a href="http://www.amazon.com/">amazon</a></p>
+.
+Document[0, 82]
+  Paragraph[0, 24] isTrailingBlankLine
+    Text[0, 11] chars:[0, 11, "Incor … ect: "]
+    LinkRef[11, 22] textOpen:[11, 12, "["] text:[12, 18, "amazon"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 21, "2"] referenceClose:[21, 22, "]"]
+      Text[12, 18] chars:[12, 18, "amazon"]
+  Reference[25, 52] refOpen:[25, 26, "["] ref:[26, 27, "1"] refClose:[27, 29, "]:"] url:[30, 52, "http://www.google.com/"]
+  Reference[54, 81] refOpen:[54, 55, "["] ref:[55, 56, "2"] refClose:[56, 58, "]:"] url:[59, 81, "http://www.amazon.com/"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 75: 2
+Incorrect: [amazon][2]
+
+[1]: http://www.google.com/
+[2]: http://www.amazon.com/
+.
+<p>Incorrect: <a href="http://www.amazon.com/">amazon</a></p>
+.
+Document[0, 80]
+  Paragraph[0, 23] isTrailingBlankLine
+    Text[0, 11] chars:[0, 11, "Incor … ect: "]
+    LinkRef[11, 22] textOpen:[11, 12, "["] text:[12, 18, "amazon"] textClose:[18, 19, "]"] referenceOpen:[19, 20, "["] reference:[20, 21, "2"] referenceClose:[21, 22, "]"]
+      Text[12, 18] chars:[12, 18, "amazon"]
+  Reference[24, 51] refOpen:[24, 25, "["] ref:[25, 26, "1"] refClose:[26, 28, "]:"] url:[29, 51, "http://www.google.com/"]
+  Reference[52, 79] refOpen:[52, 53, "["] ref:[53, 54, "2"] refClose:[54, 56, "]:"] url:[57, 79, "http://www.amazon.com/"]
+````````````````````````````````
+
+

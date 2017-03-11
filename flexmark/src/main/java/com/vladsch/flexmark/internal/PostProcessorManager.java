@@ -83,7 +83,7 @@ public class PostProcessorManager {
                         classifyingNodeTracker = new NodeClassifierVisitor(stage.myNodeMap).classify(document);
                     }
 
-                    Map<Class<? extends Node>, Set<Class<?>>> dependentNodeTypes = dependent.getNodeTypes();
+                    Map<Class<?>, Set<Class<?>>> dependentNodeTypes = dependent.getNodeTypes();
                     PostProcessor postProcessor = dependent.create(document);
                     BitSet exclusionSet = new BitSet();
                     for (Set<Class<?>> excluded : dependentNodeTypes.values()) {
@@ -133,21 +133,25 @@ public class PostProcessorManager {
             final boolean[] haveExclusions = { false };
 
             for (PostProcessorFactory dependent : dependents) {
-                Map<Class<? extends Node>, Set<Class<?>>> types = dependent.getNodeTypes();
+                Map<Class<?>, Set<Class<?>>> types = dependent.getNodeTypes();
                 if ((types == null || types.isEmpty()) && !dependent.affectsGlobalScope()) {
                     throw new IllegalStateException("PostProcessorFactory " + dependent + " is not document post processor and has empty node map, does nothing, should not be registered.");
                 }
 
                 if (types != null) {
-                    for (Map.Entry<Class<? extends Node>, Set<Class<?>>> entry : types.entrySet()) {
-                        Set<Class<?>> classes = nodeMap.get(entry.getKey());
-                        if (classes == null) {
-                             classes = entry.getValue();
-                             nodeMap.put(entry.getKey(), classes);
-                        } else {
-                            classes.addAll(entry.getValue());
+                    for (Map.Entry<Class<?>, Set<Class<?>>> entry : types.entrySet()) {
+                        if (Node.class.isAssignableFrom(entry.getKey())) {
+                            //noinspection SuspiciousMethodCalls
+                            Set<Class<?>> classes = nodeMap.get(entry.getKey());
+                            if (classes == null) {
+                                classes = entry.getValue();
+                                //noinspection unchecked
+                                nodeMap.put((Class<? extends Node>) entry.getKey(), classes);
+                            } else {
+                                classes.addAll(entry.getValue());
+                            }
+                            if (!classes.isEmpty()) haveExclusions[0] = true;
                         }
-                        if (!classes.isEmpty()) haveExclusions[0] = true;
                     }
                 }
             }

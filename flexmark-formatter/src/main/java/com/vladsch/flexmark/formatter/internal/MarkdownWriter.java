@@ -83,6 +83,7 @@ public class MarkdownWriter implements FormattingAppendable {
     @Override public MarkdownWriter closeConditional(final ConditionalFormatter closeFormatter)                                 { myAppendable.closeConditional(closeFormatter); return this; }
     @Override public MarkdownWriter closePreFormatted()                                                                         { myAppendable.closePreFormatted(); return this; }
     @Override public MarkdownWriter flush()                                                                                     { myAppendable.flush(); return this; }
+    @Override public MarkdownWriter flushWhitespaces()                                                                          { myAppendable.flushWhitespaces(); return this; }
     @Override public MarkdownWriter flush(final int maxBlankLines)                                                              { myAppendable.flush(maxBlankLines); return this; }
     @Override public MarkdownWriter lastOffset(final Ref<Integer> refOffset)                                                    { myAppendable.lastOffset(refOffset); return this; }
     @Override public MarkdownWriter indent()                                                                                    { myAppendable.indent(); return this; }

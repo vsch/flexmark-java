@@ -15,7 +15,7 @@ public interface PostProcessorFactory extends ComputableFactory<PostProcessor, D
      *
      * @return a map of desired node types mapped to a set of ancestors under which the post processor does not process the block
      */
-    Map<Class<? extends Node>, Set<Class<?>>> getNodeTypes();
+    Map<Class<?>, Set<Class<?>>> getNodeTypes();
 
     /**
      * @param document for which to create the post processor

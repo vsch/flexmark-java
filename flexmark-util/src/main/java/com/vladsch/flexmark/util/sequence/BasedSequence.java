@@ -440,6 +440,17 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      */
     int eolLength();
 
+    /**
+     * Get the length of EOL character at the given index of this sequence, if present.
+     * <p>
+     * \n - 1
+     * \r - 1
+     * \r\n - 2
+     *
+     * @return 0, 1, or 2 depending on the EOL suffix of this sequence
+     */
+    int eolLength(int eolStart);
+
     boolean isEmpty();
     boolean isBlank();
     boolean isNull();

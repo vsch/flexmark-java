@@ -20,10 +20,11 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Latest Additions
 
-* flexmark-all module that includes: core, all extensions, formatter, JIRA and YouTrack
+* `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
   converters, pegdown profile module and HTML to Markdown conversion.
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
-  [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output) using [Open HTML To PDF]
+  [Usage: PDF Output](https://github.com/vsch/flexmark-java/wiki/Usage#pdf-output) using
+  [Open HTML To PDF]
 * [Typographic Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#typographic)
   implemented
 * [XWiki Macros Extension Module](https://github.com/vsch/flexmark-java/wiki/Extensions#xwiki-macro-extension)
@@ -482,6 +483,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [Markdown]: https://daringfireball.net/projects/markdown/
 [Markdown Navigator]: http://vladsch.com/product/markdown-navigator
 [MultiMarkdown]: http://fletcherpenney.net/multimarkdown/
+[Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
 [pegdown]: http://pegdown.org
 [Pegdown - Achilles heel of the Markdown Navigator plugin]: http://vladsch.com/blog/15
 [PegdownOptionsAdapter.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/PegdownOptionsAdapter.java
@@ -525,5 +527,4 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [table.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/table.md
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
-[Open HTML To PDF]: https://github.com/danfickle/openhtmltopdf
 

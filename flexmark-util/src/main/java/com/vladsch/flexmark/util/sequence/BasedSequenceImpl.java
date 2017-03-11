@@ -755,7 +755,44 @@ public abstract class BasedSequenceImpl implements BasedSequence {
 
     @Override
     public int eolLength() {
-        return countCharsReversed(EOL_CHARS, 0, length());
+        int startIndex = length() - 1;
+        int pos = startIndex;
+        if (pos >= 0) {
+            char c = charAt(pos);
+            if (c == '\r') {
+                pos--;
+                if (pos >= 0) {
+                    if (charAt(pos) == '\n') {
+                        pos--;
+                    }
+                }
+            } else if (c == '\n') {
+                pos--;
+            }
+        }
+
+        return startIndex - pos;
+    }
+
+    @Override
+    public int eolLength(int eolStart) {
+        int pos = eolStart;
+        int length = length();
+        if (pos >= 0 && pos < length) {
+            char c = charAt(pos);
+            if (c == '\r') {
+                pos++;
+                if (pos < length) {
+                    if (charAt(pos) == '\n') {
+                        pos++;
+                    }
+                }
+            } else if (c == '\n') {
+                pos++;
+            }
+        }
+
+        return pos - eolStart;
     }
 
     @Override

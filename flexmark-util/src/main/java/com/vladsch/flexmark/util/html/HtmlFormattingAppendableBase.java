@@ -430,6 +430,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return (T) this;
     }
 
+    public T flushWhitespaces() {
+        out.flush();
+        return (T) this;
+    }
+
     public T flush(final int maxBlankLines) {
         out.flush(maxBlankLines);
         return (T) this;

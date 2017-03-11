@@ -13,6 +13,7 @@ public class Parsing {
     public final String ADDITIONAL_CHARS;
     public final String EXCLUDED_0_TO_SPACE;
 
+    public final String EOL;
     public final String ESCAPED_CHAR;
     public final Pattern LINK_LABEL;
     public final Pattern LINK_DESTINATION_ANGLES;
@@ -70,6 +71,7 @@ public class Parsing {
     public Parsing(DataHolder options) {
         this.intellijDummyIdentifier = Parser.INTELLIJ_DUMMY_IDENTIFIER.getFrom(options);
 
+        this.EOL = "(?:\r\n|\r|\n)";
         this.ADDITIONAL_CHARS = ADDITIONAL_CHARS();
         this.EXCLUDED_0_TO_SPACE = EXCLUDED_0_TO_SPACE();
 
@@ -108,15 +110,15 @@ public class Parsing {
                 "^<([a-zA-Z0-9" + ADDITIONAL_CHARS + ".!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?(?:\\.[a-zA-Z0-9" + ADDITIONAL_CHARS + "](?:[a-zA-Z0-9" + ADDITIONAL_CHARS + "-]{0,61}[a-zA-Z0-9" + ADDITIONAL_CHARS + "])?)*)>");
         this.AUTOLINK = Pattern.compile(
                 "^<[a-zA-Z][a-zA-Z0-9" + ADDITIONAL_CHARS + ".+-]{1,31}:[^<>" + EXCLUDED_0_TO_SPACE + "]*>");
-        this.SPNL = Pattern.compile("^(?: |\t)*(?:\n(?: |\t)*)?");
-        this.SPNL_URL = Pattern.compile("^(?: |\t)*\n");
+        this.SPNL = Pattern.compile("^(?:[ \t])*(?:" + EOL + "(?:[ \t])*)?");
+        this.SPNL_URL = Pattern.compile("^(?:[ \t])*" + EOL);
         this.SPNI = Pattern.compile("^ {0,3}");
-        this.SP = Pattern.compile("^(?: |\t)*");
-        this.REST_OF_LINE = Pattern.compile("^.*\n");
+        this.SP = Pattern.compile("^(?:[ \t])*");
+        this.REST_OF_LINE = Pattern.compile("^.*" + EOL);
         this.UNICODE_WHITESPACE_CHAR = Pattern.compile("^[\\p{Zs}\t\r\n\f]");
         this.WHITESPACE = Pattern.compile("\\s+");
         this.FINAL_SPACE = Pattern.compile(" *\r?$");
-        this.LINE_END = Pattern.compile("^ *(?:\n|$)");
+        this.LINE_END = Pattern.compile("^[ \t]*(?:" + EOL + "|$)");
         this.TAGNAME = "[A-Za-z" + ADDITIONAL_CHARS + "][A-Za-z0-9" + ADDITIONAL_CHARS + "-]*";
         this.ATTRIBUTENAME = "[a-zA-Z" + ADDITIONAL_CHARS + "_:][a-zA-Z0-9" + ADDITIONAL_CHARS + ":._-]*";
         this.UNQUOTEDVALUE = "[^\"'=<>`" + EXCLUDED_0_TO_SPACE + "]+";
@@ -135,9 +137,9 @@ public class Parsing {
 
         if (LISTS_ITEM_MARKER_SPACE.getFrom(options)) {
             if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t)|^(\\d{1,9})([.])(?= |\t)");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
             } else {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t)|^(\\d{1,9})([.)])(?= |\t)");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
             }
         } else {
             if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {

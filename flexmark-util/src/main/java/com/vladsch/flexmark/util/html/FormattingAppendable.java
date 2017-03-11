@@ -102,6 +102,15 @@ public interface FormattingAppendable extends Appendable {
     FormattingAppendable flush();
 
     /**
+     * Flush all pending whitespaces
+     * <p>
+     * All preFormatted and conditional regions should be exited prior to this call
+     *
+     * @return this
+     */
+    FormattingAppendable flushWhitespaces();
+
+    /**
      * Flush all pending new lines and blank lines, if these are desired at the end of the output.
      * <p>
      * All preFormatted and conditional regions should be exited prior to this call

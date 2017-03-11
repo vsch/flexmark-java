@@ -456,12 +456,18 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
 
         // try parsing the beginning as link reference definitions:
         int leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+        int length = contentChars.length();
 
-        while (leadingSpaces <= 3 && contentChars.length() > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
-            if (leadingSpaces > 0) contentChars = contentChars.subSequence(leadingSpaces, contentChars.length());
+        while (leadingSpaces <= 3 && length > 3 + leadingSpaces && contentChars.charAt(leadingSpaces) == '[') {
+            if (leadingSpaces > 0) {
+                contentChars = contentChars.subSequence(leadingSpaces, length);
+                length -= leadingSpaces;
+            }
+            
             int pos = parseReference(block, contentChars);
             if (pos == 0) break;
-            contentChars = contentChars.subSequence(pos, contentChars.length());
+            contentChars = contentChars.subSequence(pos, length);
+            length = contentChars.length();
             leadingSpaces = contentChars.countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
         }
 

@@ -2826,9 +2826,9 @@ see more
 * Share ›
   * Twitter
   * Facebook
-  *
+  * 
 
-*
+* 
 .
 <div class="post-body">
   <header class="comment__header">
@@ -2919,7 +2919,7 @@ see more <footer class="comment__footer"> <menu class="comment-footer__menu">
   * <button class="share__button" data-action="share:facebook">Facebook</button>
   * <input class="share__button" value="http://disq.us/p/hgghs7" name="Link" title="Click to copy post link" data-action="copy-link" readonly>
 
-*
+* 
 
 </menu> </footer>
 .
@@ -3835,25 +3835,52 @@ info("End of the response");
 Issue #MN-408
 
 ```````````````````````````````` example Issue MN-408: 1
-*
+* 
+* test
+* 
+.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+→<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+→<title></title>
+→<meta name="generator" content="LibreOffice 5.2.3.3 (MacOSX)"/>
+→<style type="text/css">
+→→@page { margin: 2cm }
+→→p { margin-bottom: 0.25cm; direction: ltr; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+→</style>
+</head>
+<body lang="de-DE" dir="ltr">
+<ul>
+→<li/>
+→<li>test</li>
+→<li></li>
+</ul>
+</body>
+</html>
+````````````````````````````````
+
+
+```````````````````````````````` example Issue MN-408: 2
+* 
 * Equipment
-*
+* 
 * Chemicals
-*
+* 
 * Consumables
-*
+* 
 * Enzymes
-*
+* 
 * GMO
-*
+* 
 * Antibodies
-*
+* 
 * DNA Constructs
-*
+* 
 * RNA Constructs
-*
+* 
 * Vectors
-*
+* 
 * Oligos
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">

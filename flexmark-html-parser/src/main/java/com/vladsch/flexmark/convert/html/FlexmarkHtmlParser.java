@@ -816,7 +816,13 @@ public class FlexmarkHtmlParser {
         out.line().append(itemPrefix);
         out.pushPrefix();
         out.addPrefix(childPrefix);
+        int offset = out.offset();
         processHtmlTree(out, item);
+        if (offset == out.offset()) {
+            // completely empty, add space and make sure it is not suppressed
+            out.append(' ');
+            out.flushWhitespaces();
+        }
         out.line();
         out.popPrefix();
         popState();

@@ -925,3 +925,73 @@ Document[0, 77]
 ````````````````````````````````
 
 
+## Issue 75
+
+Issue #75, Incorrect footnote link
+
+Actually it is incorrect reference parsing with `\r\n`
+
+```````````````````````````````` example Issue 75: 1
+Incorrect: amazon[^2]⏎
+
+[^1]: http://www.google.com/⏎
+⏎
+[^2]: http://www.amazon.com/
+.
+<p>Incorrect: amazon<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>http://www.amazon.com/</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 85]
+  Paragraph[0, 23] isTrailingBlankLine
+    Text[0, 17] chars:[0, 17, "Incor … mazon"]
+    Footnote[17, 21] ordinal: 1  textOpen:[17, 19, "[^"] text:[19, 20, "2"] textClose:[20, 21, "]"]
+      Text[19, 20] chars:[19, 20, "2"]
+  FootnoteBlock[24, 54] ordinal: 0  open:[24, 26] text:[26, 27] close:[27, 29] footnote:[30, 54]
+    Paragraph[30, 54] isTrailingBlankLine
+      Text[30, 52] chars:[30, 52, "http: … .com/"]
+  FootnoteBlock[56, 85] ordinal: 1  open:[56, 58] text:[58, 59] close:[59, 61] footnote:[62, 85]
+    Paragraph[62, 85]
+      Text[62, 84] chars:[62, 84, "http: … .com/"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 75: 2
+Incorrect: amazon[^2]
+
+[^1]: http://www.google.com/
+
+[^2]: http://www.amazon.com/
+.
+<p>Incorrect: amazon<sup id="fnref-1"><a class="footnote-ref" href="#fn-1">1</a></sup></p>
+<div class="footnotes">
+  <hr />
+  <ol>
+    <li id="fn-1">
+      <p>http://www.amazon.com/</p>
+      <a href="#fnref-1" class="footnote-backref">&#8617;</a>
+    </li>
+  </ol>
+</div>
+.
+Document[0, 82]
+  Paragraph[0, 22] isTrailingBlankLine
+    Text[0, 17] chars:[0, 17, "Incor … mazon"]
+    Footnote[17, 21] ordinal: 1  textOpen:[17, 19, "[^"] text:[19, 20, "2"] textClose:[20, 21, "]"]
+      Text[19, 20] chars:[19, 20, "2"]
+  FootnoteBlock[23, 52] ordinal: 0  open:[23, 25] text:[25, 26] close:[26, 28] footnote:[29, 52]
+    Paragraph[29, 52] isTrailingBlankLine
+      Text[29, 51] chars:[29, 51, "http: … .com/"]
+  FootnoteBlock[53, 82] ordinal: 1  open:[53, 55] text:[55, 56] close:[56, 58] footnote:[59, 82]
+    Paragraph[59, 82]
+      Text[59, 81] chars:[59, 81, "http: … .com/"]
+````````````````````````````````
+
+
