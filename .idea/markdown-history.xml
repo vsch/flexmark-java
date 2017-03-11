@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MarkdownNavigatorHistory">
+    <PasteImageHistory filename="image" directory="" onPasteImageTargetRef="3" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="0" transparentColor="16777215" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="false" scale="50" scalingInterpolation="1" transparentTolerance="0" linkFormat="0" nonImageFormat="0">
+      <directories />
+      <filenames />
+    </PasteImageHistory>
+    <CopyImageHistory filename="image" directory="$PROJECT_DIR$/assets/images" onPasteImageTargetRef="3" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="false" cropped="false" hideInapplicableOperations="false" scale="50" scalingInterpolation="1" transparentTolerance="0" linkFormat="0" nonImageFormat="0">
+      <directories>
+        <option name="$PROJECT_DIR$/assets/images" />
+        <option name="$PROJECT_DIR$/FlexmarkJavaAssets/issues" />
+        <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
+        <option name="$PROJECT_DIR$" />
+      </directories>
+      <filenames />
+    </CopyImageHistory>
+  </component>
+</project>

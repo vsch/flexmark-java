@@ -251,3 +251,85 @@ Document[0, 48]
 ````````````````````````````````
 
 
+## Typographic quotes interaction 
+
+Typographic quotes and smarts will break up text and make it not match abbreviations
+
+```````````````````````````````` example Typographic quotes interaction: 1
+Some text about HTML, SGML and HTML4.
+
+Let's talk about the U.S.A., (É.U. or É.-U. d'A. in French).
+
+*[HTML4]: Hyper Text Markup Language version 4
+*[HTML]: Hyper Text Markup Language
+*[SGML]: Standard Generalized Markup Language
+*[U.S.A.]: United States of America
+*[É.U.]: États-Unis d'Amérique
+*[É.-U. d'A.]: États-Unis d'Amérique
+
+And here we have a CD, some CDs, and some other CD's.
+
+*[CD]: Compact Disk
+
+Let's transfert documents through TCP/IP, using TCP packets.
+
+*[IP]: Internet Protocol
+*[TCP]: Transmission Control Protocol
+.
+<p>Some text about <abbr title="Hyper Text Markup Language">HTML</abbr>, <abbr title="Standard Generalized Markup Language">SGML</abbr> and <abbr title="Hyper Text Markup Language version 4">HTML4</abbr>.</p>
+<p>Let&rsquo;s talk about the <abbr title="United States of America">U.S.A.</abbr>, (<abbr title="États-Unis d'Amérique">É.U.</abbr> or É.-U. d&rsquo;A. in French).</p>
+<p>And here we have a <abbr title="Compact Disk">CD</abbr>, some CDs, and some other <abbr title="Compact Disk">CD</abbr>&rsquo;s.</p>
+<p>Let&rsquo;s transfert documents through <abbr title="Transmission Control Protocol">TCP</abbr>/<abbr title="Internet Protocol">IP</abbr>, using <abbr title="Transmission Control Protocol">TCP</abbr> packets.</p>
+.
+Document[0, 536]
+  Paragraph[0, 38] isTrailingBlankLine
+    TextBase[0, 37] chars:[0, 37, "Some  … TML4."]
+      Text[0, 16] chars:[0, 16, "Some  … bout "]
+      Abbreviation[16, 20] chars:[16, 20, "HTML"]
+      Text[20, 22] chars:[20, 22, ", "]
+      Abbreviation[22, 26] chars:[22, 26, "SGML"]
+      Text[26, 31] chars:[26, 31, " and "]
+      Abbreviation[31, 36] chars:[31, 36, "HTML4"]
+      Text[36, 37] chars:[36, 37, "."]
+  Paragraph[39, 100] isTrailingBlankLine
+    Text[39, 42] chars:[39, 42, "Let"]
+    TypographicSmarts[42, 43] typographic: &rsquo; 
+    TextBase[43, 84] chars:[43, 84, "s tal … -U. d"]
+      Text[43, 60] chars:[43, 60, "s tal …  the "]
+      Abbreviation[60, 66] chars:[60, 66, "U.S.A."]
+      Text[66, 69] chars:[66, 69, ", ("]
+      Abbreviation[69, 73] chars:[69, 73, "É.U."]
+      Text[73, 84] chars:[73, 84, " or É … -U. d"]
+    TypographicSmarts[84, 85] typographic: &rsquo; 
+    Text[85, 99] chars:[85, 99, "A. in … nch)."]
+  AbbreviationBlock[101, 147] open:[101, 103] text:[103, 108] close:[108, 110] abbreviation:[111, 147]
+  AbbreviationBlock[148, 183] open:[148, 150] text:[150, 154] close:[154, 156] abbreviation:[157, 183]
+  AbbreviationBlock[184, 229] open:[184, 186] text:[186, 190] close:[190, 192] abbreviation:[193, 229]
+  AbbreviationBlock[230, 265] open:[230, 232] text:[232, 238] close:[238, 240] abbreviation:[241, 265]
+  AbbreviationBlock[266, 296] open:[266, 268] text:[268, 272] close:[272, 274] abbreviation:[275, 296]
+  AbbreviationBlock[297, 333] open:[297, 299] text:[299, 309] close:[309, 311] abbreviation:[312, 333]
+  Paragraph[335, 389] isTrailingBlankLine
+    TextBase[335, 385] chars:[335, 385, "And h … er CD"]
+      Text[335, 354] chars:[335, 354, "And h … ve a "]
+      Abbreviation[354, 356] chars:[354, 356, "CD"]
+      Text[356, 383] chars:[356, 383, ", som … ther "]
+      Abbreviation[383, 385] chars:[383, 385, "CD"]
+    TypographicSmarts[385, 386] typographic: &rsquo; 
+    Text[386, 388] chars:[386, 388, "s."]
+  AbbreviationBlock[390, 409] open:[390, 392] text:[392, 394] close:[394, 396] abbreviation:[397, 409]
+  Paragraph[411, 472] isTrailingBlankLine
+    Text[411, 414] chars:[411, 414, "Let"]
+    TypographicSmarts[414, 415] typographic: &rsquo; 
+    TextBase[415, 471] chars:[415, 471, "s tra … kets."]
+      Text[415, 445] chars:[415, 445, "s tra … ough "]
+      Abbreviation[445, 448] chars:[445, 448, "TCP"]
+      Text[448, 449] chars:[448, 449, "/"]
+      Abbreviation[449, 451] chars:[449, 451, "IP"]
+      Text[451, 459] chars:[451, 459, ", using "]
+      Abbreviation[459, 462] chars:[459, 462, "TCP"]
+      Text[462, 471] chars:[462, 471, " packets."]
+  AbbreviationBlock[473, 497] open:[473, 475] text:[475, 477] close:[477, 479] abbreviation:[480, 497]
+  AbbreviationBlock[498, 535] open:[498, 500] text:[500, 503] close:[503, 505] abbreviation:[506, 535]
+````````````````````````````````
+
+

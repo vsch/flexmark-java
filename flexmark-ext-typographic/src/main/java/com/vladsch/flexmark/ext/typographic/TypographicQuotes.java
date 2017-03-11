@@ -2,13 +2,12 @@ package com.vladsch.flexmark.ext.typographic;
 
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A TypographicQuotes node
  */
-public class TypographicQuotes extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class TypographicQuotes extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

@@ -18,6 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class AbbreviationNodePostProcessor extends NodePostProcessor {
+    //public static final String SINGLE_QUOTES = "'’‘";
+    //public static final String DOUBLE_QUOTES = "\"“”";
+    //private static final Pattern QUOTES = Pattern.compile("(?:[" + SINGLE_QUOTES + DOUBLE_QUOTES + "])");
+
     private Pattern abbreviations = null;
     private HashMap<String, BasedSequence> abbreviationMap = null;
 
@@ -28,7 +32,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
             abbreviationMap = new HashMap<String, BasedSequence>();
             StringBuilder sb = new StringBuilder();
 
-            // sort reverse aphabetical order so longer ones match first. for sdk7
+            // sort reverse alphabetical order so longer ones match first. for sdk7
             ArrayList<String> abbreviations = new ArrayList<String>(abbrRepository.keySet());
             Collections.sort(abbreviations, new Comparator<String>() {
                 @Override
@@ -46,6 +50,29 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                     if (sb.length() > 0) sb.append("|");
 
                     if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
+                    // Too simplistic. Typographic nodes need to be handled separately since they prefix/suffix text
+                    //int length = abbr.length();
+                    //int lastPos = 0;
+                    //Matcher matcher = QUOTES.matcher(abbr);
+                    //
+                    //while (lastPos < length && matcher.find()) {
+                    //    int pos = matcher.start();
+                    //    if (lastPos < pos) {
+                    //        sb.append("\\Q").append(abbr, lastPos, pos).append("\\E");
+                    //    }
+                    //
+                    //    char c = matcher.group().charAt(0);
+                    //    if (SINGLE_QUOTES.indexOf(c) != -1) {
+                    //        sb.append("[").append(SINGLE_QUOTES).append("]");
+                    //    } else if (DOUBLE_QUOTES.indexOf(c) != -1) {
+                    //        sb.append("[").append(DOUBLE_QUOTES).append("]");
+                    //    }
+                    //    
+                    //    lastPos = matcher.end();
+                    //}
+                    //if (lastPos < length) {
+                    //    sb.append("\\Q").append(abbr, lastPos, length).append("\\E");
+                    //}
                     sb.append("\\Q").append(abbr).append("\\E");
                     if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
                 }
@@ -127,7 +154,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         public Factory() {
             super(false);
 
-            addNodeWithExclusions(Text.class, DoNotDecorate.class);
+            addNodeWithExclusions(Text.class, DoNotLinkDecorate.class);
         }
 
         @Override

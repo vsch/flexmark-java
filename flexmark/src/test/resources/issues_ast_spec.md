@@ -126,7 +126,7 @@ Document[0, 276]
 ````````````````````````````````
 
 
-## Issue #70 
+## Issue #70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.2](#0182)
 - [0.18.1](#0181)
 - [0.18.0](#0180)
 - [0.17.4](#0174)
@@ -133,6 +134,32 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.2
+------
+
+* Fix: #76, HTML to Markdown hangs if comments included in Text nodes
+
+* Add: MS-Word generated HTML list basic recognition: `1.`, `1)`, `A.`, `A)`, `a.`, `a)`, `IV.`,
+  `IV)`, `iv.`, `iv)`
+
+* Fix: MS-Excel generated HTML table parsing bug
+
+* Add: `FlexmarkHtmlParser.RENDER_COMMENTS`, default `false`. When set to true HTML comments
+  will be rendered in the Markdown.
+
+* Add: `FlexmarkHtmlParser.DOT_ONLY_NUMERIC_LISTS`, default `true`. When set to false closing
+  parenthesis as a list delimiter will be used in Markdown if present in MS-Word style list.
+  Otherwise parenthesis delimited list will be converted to dot `.`.
+
+* Add: `DoNotLinkDecorate` interface to distinguish text decoration from link text decoration
+  for flexibility.
+
+* Fix: `TypographicQuotes` and `TypographicSmarts` to not implement `DoNotDecorate` interface so
+  `AbbreviationExtension` will text in quotes.
+
+* Fix: replace regex used for extracting HTML comments from HTML blocks to manual search. RegEx
+  would go into an infinite loop on MS Word created HTML.
 
 0.18.1
 ------

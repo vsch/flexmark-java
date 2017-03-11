@@ -2,6 +2,7 @@ package com.vladsch.flexmark.convert.html;
 
 import com.vladsch.flexmark.ext.emoji.internal.EmojiCheatSheet;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.format.RomanNumeral;
 import com.vladsch.flexmark.util.format.Table;
 import com.vladsch.flexmark.util.format.TableFormatOptions;
 import com.vladsch.flexmark.util.html.CellAlignment;
@@ -30,6 +31,8 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> TYPOGRAPHIC_SMARTS = new DataKey<Boolean>("TYPOGRAPHIC_SMARTS", true);
     public static final DataKey<Boolean> EXTRACT_AUTO_LINKS = new DataKey<Boolean>("EXTRACT_AUTO_LINKS", true);
     public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<Boolean>("WRAP_AUTO_LINKS", false);
+    public static final DataKey<Boolean> RENDER_COMMENTS = new DataKey<Boolean>("RENDER_COMMENTS", false);
+    public static final DataKey<Boolean> DOT_ONLY_NUMERIC_LISTS = new DataKey<Boolean>("DOT_ONLY_NUMERIC_LISTS", true);
     public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<Character>("ORDERED_LIST_DELIMITER", '.');
     public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<Character>("UNORDERED_LIST_DELIMITER", '*');
     public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<Integer>("DEFINITION_MARKER_SPACES", 3);
@@ -78,6 +81,11 @@ public class FlexmarkHtmlParser {
         typographicMap.put("—", "---");
         typographicMap.put("&emdash;", "---");
     }
+
+    private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^\\d+\\.$");
+    private static final Pattern NUMERIC_PAREN_LIST = Pattern.compile("^\\d+\\)$");
+    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^(?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern()+")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern()+")|[a-z]+|[A-Z]+)\\.$");
+    private static final Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^(?:[a-z]+|[A-Z]+)\\)$");
 
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
@@ -302,6 +310,7 @@ public class FlexmarkHtmlParser {
                 case LI                      : processed = processList(out, (Element) node, false, true); break;
                 case TABLE                   : processed = processTable(out, (Element) node); break;
                 case _UNWRAPPED              : processed = processUnwrapped(out, node); break;
+                case _SPAN                   : processed = processSpan(out, (Element) node); break;
                 case _WRAPPED                : processed = processWrapped(out, node, tagParam.param == null); break;
                 case _COMMENT                : processed = processComment(out, (Comment)node); break;
                 case _HEADING                : processed = processHeading(out, (Element) node); break;
@@ -398,6 +407,8 @@ public class FlexmarkHtmlParser {
                 skip();
             } else if (child instanceof Element) {
                 processElement(out, child);
+            } else {
+                skip();
             }
         }
 
@@ -962,6 +973,43 @@ public class FlexmarkHtmlParser {
         return true;
     }
 
+    private boolean processSpan(FormattingAppendable out, Element element) {
+        // unwrap and process content
+        if (element.hasAttr("style")) {
+            String style = element.attr("style");
+            if (style.equals("mso-list:Ignore")) {
+                skip();
+                String text = processTextNodes(element);
+                if (NUMERIC_DOT_LIST.matcher(text).matches()) {
+                    out.append(text).append(' ');
+                } else if (NUMERIC_PAREN_LIST.matcher(text).matches()) {
+                    if (myOptions.dotOnlyNumericLists) {
+                        out.append(text, 0, text.length() - 1).append(". ");
+                    } else {
+                        out.append(text).append(' ');
+                    }
+                } else if (NON_NUMERIC_DOT_LIST.matcher(text).matches()) {
+                    out.append("1. ");
+                } else if (NON_NUMERIC_PAREN_LIST.matcher(text).matches()) {
+                    if (myOptions.dotOnlyNumericLists) {
+                        out.append("1. ");
+                    } else {
+                        out.append("1) ");
+                    }
+                } else if (text.equals("·")) {
+                    out.append("* ");
+                } else {
+                    out.append("* ").append(text);
+                }
+                return true;
+            }
+        }
+
+        skip();
+        processHtmlTree(out, element);
+        return true;
+    }
+
     private boolean processEmoji(FormattingAppendable out, Element element) {
         if (element.tagName().equalsIgnoreCase("g-emoji")) {
             if (element.hasAttr("alias")) {
@@ -983,7 +1031,9 @@ public class FlexmarkHtmlParser {
 
     private boolean processComment(FormattingAppendable out, Comment element) {
         skip();
-        out.append("<!--").append(element.getData()).append("-->");
+        if (myOptions.renderComments) {
+            out.append("<!--").append(element.getData()).append("-->");
+        }
         return true;
     }
 
@@ -1025,7 +1075,8 @@ public class FlexmarkHtmlParser {
                         break;
                 }
             } else {
-                processWrapped(out, item, true);
+                // nothing
+                //processWrapped(out, item, null);
             }
         }
 
@@ -1244,6 +1295,7 @@ public class FlexmarkHtmlParser {
         UL,
         _HEADING,
         _UNWRAPPED,
+        _SPAN,
         _WRAPPED,
         _COMMENT,
         _TEXT,
@@ -1319,7 +1371,7 @@ public class FlexmarkHtmlParser {
         ourTagProcessors.put("article", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("frameset", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("section", TagParam.tag(TagType._UNWRAPPED, null));
-        ourTagProcessors.put("span", TagParam.tag(TagType._UNWRAPPED, null));
+        ourTagProcessors.put("span", TagParam.tag(TagType._SPAN, null));
         ourTagProcessors.put("small", TagParam.tag(TagType._UNWRAPPED, null));
         ourTagProcessors.put("iframe", TagParam.tag(TagType._UNWRAPPED, null));
     }

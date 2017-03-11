@@ -3003,7 +3003,7 @@ Document[0, 1097]
 ````````````````````````````````
 
 
-## Issue #70 
+## Issue #70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
@@ -3055,6 +3055,4 @@ Document[0, 10]
     TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
       Text[2, 6] chars:[2, 6, "test"]
 ````````````````````````````````
-
-
 

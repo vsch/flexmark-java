@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 @org.junit.runner.RunWith(Suite.class)
 @Suite.SuiteClasses({
         ComboFlexmarkHtmlParserTest.class,
+        ComboAppHtmlParserTest.class,
 })
 public class FlexmarkHtmlParserTestSuite {
 }

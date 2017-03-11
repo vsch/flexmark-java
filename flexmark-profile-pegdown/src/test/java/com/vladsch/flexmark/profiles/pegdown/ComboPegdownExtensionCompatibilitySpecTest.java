@@ -17,7 +17,7 @@ import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_extension_compatibility_spec.md";
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP))).toMutable()
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | ABBREVIATIONS | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP))).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)

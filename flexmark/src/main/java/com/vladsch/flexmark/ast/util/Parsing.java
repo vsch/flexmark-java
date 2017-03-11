@@ -33,7 +33,7 @@ public class Parsing {
     public final String ASCII_PUNCTUATION;
     public final Pattern PUNCTUATION;
 
-    public final Pattern HTML_COMMENT;
+    //public final Pattern HTML_COMMENT;
     public final Pattern ESCAPABLE;
     public final Pattern TICKS;
     public final Pattern TICKS_HERE;
@@ -102,7 +102,7 @@ public class Parsing {
         this.PUNCTUATION = Pattern.compile(
                 "^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
 
-        this.HTML_COMMENT = Pattern.compile(HTMLCOMMENT);
+        //this.HTML_COMMENT = Pattern.compile(HTMLCOMMENT);
         this.ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);
         this.TICKS = Pattern.compile("`+");
         this.TICKS_HERE = Pattern.compile("^`+");

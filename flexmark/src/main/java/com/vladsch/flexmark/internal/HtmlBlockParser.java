@@ -15,6 +15,9 @@ import java.util.regex.Pattern;
 
 public class HtmlBlockParser extends AbstractBlockParser {
 
+    public static final String HTML_COMMENT_OPEN = "<!--";
+    public static final String HTML_COMMENT_CLOSE = "-->";
+
     private static class Patterns {
         public final int COMMENT_PATTERN_INDEX;
         public final Pattern[][] BLOCK_PATTERNS;
@@ -28,8 +31,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
                             Pattern.compile("</(?:script|pre|style)>", Pattern.CASE_INSENSITIVE)
                     },
                     {
-                            Pattern.compile("^<!--"),
-                            Pattern.compile("-->")
+                            Pattern.compile("^" + HTML_COMMENT_OPEN),
+                            Pattern.compile(HTML_COMMENT_CLOSE)
                     },
                     {
                             Pattern.compile("^<[?]"),
@@ -123,15 +126,37 @@ public class HtmlBlockParser extends AbstractBlockParser {
             int lastIndex = 0;
             BasedSequence chars = block.getContentChars();
             if (chars.eolLength() > 0) chars = chars.midSequence(0, -1);
-            Matcher matcher = state.getParsing().HTML_COMMENT.matcher(chars);
-            while (matcher.find()) {
-                int index = matcher.start();
+            // RegEx for HTML can go into an infinite loop, we do manual search to avoid this
+            //Matcher matcher = state.getParsing().HTML_COMMENT.matcher(chars);
+            //while (matcher.find()) {
+            //    int index = matcher.start();
+            //    if (lastIndex < index) {
+            //        HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, index));
+            //        block.appendChild(html);
+            //    }
+            //
+            //    lastIndex = matcher.end();
+            //    HtmlInnerBlockComment htmlComment = new HtmlInnerBlockComment(chars.subSequence(index, lastIndex));
+            //    block.appendChild(htmlComment);
+            //}
+            int length = chars.length();
+            while (lastIndex < length) {
+                // find the opening HTML comment
+                int index = chars.indexOf(HTML_COMMENT_OPEN, lastIndex);
+                if (index < 0) break;
+
+                // now lets find -->
+                int end = chars.indexOf(HTML_COMMENT_CLOSE, index + HTML_COMMENT_OPEN.length());
+
+                // if unterminated, ignore
+                if (end < 0) break;
+
                 if (lastIndex < index) {
                     HtmlInnerBlock html = new HtmlInnerBlock(chars.subSequence(lastIndex, index));
                     block.appendChild(html);
                 }
 
-                lastIndex = matcher.end();
+                lastIndex = end + HTML_COMMENT_CLOSE.length();
                 HtmlInnerBlockComment htmlComment = new HtmlInnerBlockComment(chars.subSequence(index, lastIndex));
                 block.appendChild(htmlComment);
             }
@@ -186,6 +211,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     private static class BlockFactory extends AbstractBlockParserFactory {
         private Patterns myPatterns = null;
         private final boolean myHtmlCommentBlocksInterruptParagraph;
+
         private BlockFactory(DataHolder options) {
             super(options);
             myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.getFrom(options);
