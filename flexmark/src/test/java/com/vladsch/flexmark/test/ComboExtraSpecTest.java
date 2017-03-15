@@ -84,6 +84,7 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
         optionsMap.put("style-strong-emphasis", new MutableDataSet().set(HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_OPEN, "<span class=\"text-bold\">").set(HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_CLOSE, "</span>"));
         optionsMap.put("style-emphasis", new MutableDataSet().set(HtmlRenderer.EMPHASIS_STYLE_HTML_OPEN, "<span class=\"text-italic\">").set(HtmlRenderer.EMPHASIS_STYLE_HTML_CLOSE, "</span>"));
         optionsMap.put("style-code", new MutableDataSet().set(HtmlRenderer.CODE_STYLE_HTML_OPEN, "<span class=\"text-code\">").set(HtmlRenderer.CODE_STYLE_HTML_CLOSE, "</span>"));
+        optionsMap.put("link-spaces", new MutableDataSet().set(Parser.SPACE_IN_LINK_URLS, true));
         //optionsMap.put("src-wrap-inline", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_INLINE_HTML, true));
         optionsMap.put("list-markdown-navigator", new MutableDataSet()
                 .set(Parser.LISTS_AUTO_LOOSE, false)

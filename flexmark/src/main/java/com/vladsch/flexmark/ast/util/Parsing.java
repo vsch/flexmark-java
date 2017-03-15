@@ -20,6 +20,7 @@ public class Parsing {
     public final String LINK_TITLE_STRING;
     public final Pattern LINK_TITLE;
     public final String REG_CHAR;
+    public final String REG_CHAR_SP;
     public final String IN_PARENS_NOSP;
     public final String IN_BRACES_W_SP;
     public final Pattern LINK_DESTINATION;
@@ -78,8 +79,9 @@ public class Parsing {
         this.ESCAPED_CHAR = "\\\\" + Escaping.ESCAPABLE;
         this.LINK_LABEL = Pattern
                 .compile("^\\[(?:[^\\\\\\[\\]]|" + ESCAPED_CHAR + "|\\\\){0,999}\\]");
-        this.LINK_DESTINATION_ANGLES = Pattern.compile(
-                "^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
+        this.LINK_DESTINATION_ANGLES = Parser.SPACE_IN_LINK_URLS.getFrom(options)
+                ? Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\| (?![\"]))*[>])")
+                : Pattern.compile("^(?:[<](?:[^<> \\t\\n\\\\\\x00]" + '|' + ESCAPED_CHAR + '|' + "\\\\)*[>])");
         this.LINK_TITLE_STRING = "(?:\"(" + ESCAPED_CHAR + "|[^\"\\x00])*\"" +
                 '|' +
                 "'(" + ESCAPED_CHAR + "|[^'\\x00])*'" +
@@ -87,10 +89,11 @@ public class Parsing {
                 "\\((" + ESCAPED_CHAR + "|[^)\\x00])*\\))";
         this.LINK_TITLE = Pattern.compile("^" + LINK_TITLE_STRING);
         this.REG_CHAR = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]";
+        this.REG_CHAR_SP = "[^\\\\()" + EXCLUDED_0_TO_SPACE + "]| (?!\")";
         this.IN_PARENS_NOSP = "\\((" + REG_CHAR + '|' + ESCAPED_CHAR + ")*\\)";
         this.IN_BRACES_W_SP = "\\{\\{(?:[^{}\\\\" + EXCLUDED_0_TO_SPACE + "]| |\t)*\\}\\}";
         this.LINK_DESTINATION = Pattern.compile(
-                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") + REG_CHAR + "+|" + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
+                "^(?:" + (Parser.PARSE_JEKYLL_MACROS_IN_URLS.getFrom(options) ? IN_BRACES_W_SP + "|" : "") + (Parser.SPACE_IN_LINK_URLS.getFrom(options) ? "(?:" + REG_CHAR_SP + ")+|" : REG_CHAR + "+|") + ESCAPED_CHAR + "|\\\\|" + IN_PARENS_NOSP + ")*");
         this.HTMLCOMMENT = "<!---->|<!--(?:-?[^>-])(?:-?[^-])*-->";
         this.PROCESSINGINSTRUCTION = "[<][?].*?[?][>]";
         this.DECLARATION = "<![A-Z" + ADDITIONAL_CHARS + "]+\\s+[^>]*>";

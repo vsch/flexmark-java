@@ -4188,6 +4188,189 @@ Document[0, 26]
 ````````````````````````````````
 
 
+spaces in links allowed
+
+```````````````````````````````` example(Links: 6) options(link-spaces)
+[Sample Link Spaces](link with spaces.html)
+.
+<p><a href="link%20with%20spaces.html">Sample Link Spaces</a></p>
+.
+Document[0, 43]
+  Paragraph[0, 43]
+    Link[0, 43] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 42, "link with spaces.html"] pageRef:[21, 42, "link with spaces.html"] linkClose:[42, 43, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+spaces in links allowed with title
+
+```````````````````````````````` example(Links: 7) options(link-spaces)
+[Sample Link Spaces](link with spaces.html "title")
+.
+<p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 51]
+  Paragraph[0, 51]
+    Link[0, 51] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 42, "link with spaces.html"] pageRef:[21, 42, "link with spaces.html"] titleOpen:[43, 44, "\""] title:[44, 49, "title"] titleClose:[49, 50, "\""] linkClose:[50, 51, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 8) options(link-spaces)
+[Sample Link Spaces](link with spaces.html 
+"title")
+.
+<p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 52]
+  Paragraph[0, 52]
+    Link[0, 52] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 42, "link with spaces.html"] pageRef:[21, 42, "link with spaces.html"] titleOpen:[44, 45, "\""] title:[45, 50, "title"] titleClose:[50, 51, "\""] linkClose:[51, 52, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+embed double quotes
+
+```````````````````````````````` example(Links: 9) options(link-spaces)
+[Sample Link Spaces](link" with spaces.html 
+"title")
+.
+<p><a href="link%22%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 53]
+  Paragraph[0, 53]
+    Link[0, 53] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] url:[21, 43, "link\" with spaces.html"] pageRef:[21, 43, "link\" with spaces.html"] titleOpen:[45, 46, "\""] title:[46, 51, "title"] titleClose:[51, 52, "\""] linkClose:[52, 53, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 10) options(link-spaces)
+[Sample Link Spaces](<link with spaces.html> "title")
+.
+<p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 53]
+  Paragraph[0, 53]
+    Link[0, 53] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] urlOpen:[21, 22, "<"] url:[22, 43, "link with spaces.html"] urlClose:[43, 44, ">"] pageRef:[22, 43, "link with spaces.html"] titleOpen:[45, 46, "\""] title:[46, 51, "title"] titleClose:[51, 52, "\""] linkClose:[52, 53, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 11) options(link-spaces)
+[Sample Link Spaces](<link with spaces.html>  
+"title")
+.
+<p><a href="link%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Link[0, 55] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] urlOpen:[21, 22, "<"] url:[22, 43, "link with spaces.html"] urlClose:[43, 44, ">"] pageRef:[22, 43, "link with spaces.html"] titleOpen:[47, 48, "\""] title:[48, 53, "title"] titleClose:[53, 54, "\""] linkClose:[54, 55, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+embed double quotes
+
+```````````````````````````````` example(Links: 12) options(link-spaces)
+[Sample Link Spaces](<link" with spaces.html> 
+"title")
+.
+<p><a href="link%22%20with%20spaces.html" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Link[0, 55] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] urlOpen:[21, 22, "<"] url:[22, 44, "link\" with spaces.html"] urlClose:[44, 45, ">"] pageRef:[22, 44, "link\" with spaces.html"] titleOpen:[47, 48, "\""] title:[48, 53, "title"] titleClose:[53, 54, "\""] linkClose:[54, 55, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+no trailing space before >
+
+```````````````````````````````` example(Links: 13) options(link-spaces)
+[Sample Link Spaces](<link with spaces.html >  
+"title")
+.
+<p><a href="link%20with%20spaces.html%20" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Link[0, 56] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] urlOpen:[21, 22, "<"] url:[22, 44, "link with spaces.html "] urlClose:[44, 45, ">"] pageRef:[22, 44, "link with spaces.html "] titleOpen:[48, 49, "\""] title:[49, 54, "title"] titleClose:[54, 55, "\""] linkClose:[55, 56, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+embed double quotes
+
+```````````````````````````````` example(Links: 14) options(link-spaces)
+[Sample Link Spaces](<link" with spaces.html > 
+"title")
+.
+<p><a href="link%22%20with%20spaces.html%20" title="title">Sample Link Spaces</a></p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Link[0, 56] textOpen:[0, 1, "["] text:[1, 19, "Sample Link Spaces"] textClose:[19, 20, "]"] linkOpen:[20, 21, "("] urlOpen:[21, 22, "<"] url:[22, 45, "link\" with spaces.html "] urlClose:[45, 46, ">"] pageRef:[22, 45, "link\" with spaces.html "] titleOpen:[48, 49, "\""] title:[49, 54, "title"] titleClose:[54, 55, "\""] linkClose:[55, 56, ")"]
+      Text[1, 19] chars:[1, 19, "Sampl … paces"]
+````````````````````````````````
+
+
+```````````````````````````````` example Links: 15
+<http://example.com/linkWithoutSpaces.html> 
+.
+<p><a href="http://example.com/linkWithoutSpaces.html">http://example.com/linkWithoutSpaces.html</a></p>
+.
+Document[0, 45]
+  Paragraph[0, 45]
+    AutoLink[0, 43] textOpen:[0, 1, "<"] text:[1, 42, "http://example.com/linkWithoutSpaces.html"] textClose:[42, 43, ">"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 16) options(link-spaces)
+<http://example.com/link with spaces.html> 
+.
+<p>&lt;http://example.com/link with spaces.html&gt;</p>
+.
+Document[0, 43]
+  Paragraph[0, 43]
+    Text[0, 42] chars:[0, 42, "<http … html>"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 17) options(link-spaces)
+<http://example.com/link with spaces.html > 
+.
+<p>&lt;http://example.com/link with spaces.html &gt;</p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Text[0, 43] chars:[0, 43, "<http … tml >"]
+````````````````````````````````
+
+
+embed double quotes
+
+```````````````````````````````` example(Links: 18) options(link-spaces)
+<http://example.com/link" with spaces.html>
+.
+<p>&lt;http://example.com/link&quot; with spaces.html&gt;</p>
+.
+Document[0, 43]
+  Paragraph[0, 43]
+    Text[0, 43] chars:[0, 43, "<http … html>"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Links: 19) options(link-spaces)
+<http://example.com/link" with spaces.html >
+.
+<p>&lt;http://example.com/link&quot; with spaces.html &gt;</p>
+.
+Document[0, 44]
+  Paragraph[0, 44]
+    Text[0, 44] chars:[0, 44, "<http … tml >"]
+````````````````````````````````
+
+
 ## LinkRefs and ImageRefs
 
 empty link ref

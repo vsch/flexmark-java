@@ -463,7 +463,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 contentChars = contentChars.subSequence(leadingSpaces, length);
                 length -= leadingSpaces;
             }
-            
+
             int pos = parseReference(block, contentChars);
             if (pos == 0) break;
             contentChars = contentChars.subSequence(pos, length);
@@ -1482,7 +1482,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (res != null) {
             return res;
         } else {
-            return match(myParsing.LINK_DESTINATION);
+            final BasedSequence matched = match(myParsing.LINK_DESTINATION);
+            return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE): matched;
         }
     }
 
