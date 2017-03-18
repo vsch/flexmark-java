@@ -32,12 +32,12 @@ import java.util.*;
 public class HtmlRenderer implements IRender {
     public static final DataKey<String> SOFT_BREAK = new DataKey<String>("SOFT_BREAK", "\n");
     public static final DataKey<String> HARD_BREAK = new DataKey<String>("HARD_BREAK", "<br />\n");
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_CLOSE", (String)null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("EMPHASIS_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("EMPHASIS_STYLE_HTML_CLOSE", (String)null);
-    public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<String>("CODE_STYLE_HTML_OPEN", (String)null);
-    public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<String>("CODE_STYLE_HTML_CLOSE", (String)null);
+    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> STRONG_EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("STRONG_EMPHASIS_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> EMPHASIS_STYLE_HTML_OPEN = new DataKey<String>("EMPHASIS_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("EMPHASIS_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<String>("CODE_STYLE_HTML_OPEN", (String) null);
+    public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<String>("CODE_STYLE_HTML_CLOSE", (String) null);
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<Boolean>("ESCAPE_HTML", false);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<Integer>("INDENT", 0);
     public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<Boolean>("ESCAPE_HTML", false);
@@ -119,6 +119,8 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<Boolean>("RECHECK_UNDEFINED_REFERENCES", false);
     public static final DataKey<Boolean> OBFUSCATE_EMAIL = new DataKey<Boolean>("OBFUSCATE_EMAIL", false);
     public static final DataKey<Boolean> OBFUSCATE_EMAIL_RANDOM = new DataKey<Boolean>("OBFUSCATE_EMAIL_RANDOM", true);
+    public static final DataKey<Boolean> HTML_BLOCK_OPEN_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_OPEN_TAG_EOL", true);
+    public static final DataKey<Boolean> HTML_BLOCK_CLOSE_TAG_EOL = new DataKey<Boolean>("HTML_BLOCK_CLOSE_TAG_EOL", true);
 
     /**
      * output control for FormattingAppendable, see {@link com.vladsch.flexmark.util.html.FormattingAppendable#setOptions(int)}
@@ -183,7 +185,7 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flush(htmlOptions.maxTrailingBlankLines);
     }
@@ -195,7 +197,7 @@ public class HtmlRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, Appendable output, int maxTrailingBlankLines) {
-        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags), node.getDocument());
+        MainNodeRenderer renderer = new MainNodeRenderer(options, new HtmlWriter(output, htmlOptions.indentSize, htmlOptions.formatFlags, !htmlOptions.htmlBlockOpenTagEol, !htmlOptions.htmlBlockCloseTagEol), node.getDocument());
         renderer.render(node);
         renderer.flush(maxTrailingBlankLines);
     }

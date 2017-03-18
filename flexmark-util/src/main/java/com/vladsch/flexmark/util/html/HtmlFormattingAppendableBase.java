@@ -13,6 +13,8 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean indentIndentingChildren = false;
     private boolean lineOnChildText = false;
     private boolean withAttributes = false;
+    private boolean suppressOpenTagLine = false;
+    private boolean suppressCloseTagLine = false;
 
     public HtmlFormattingAppendableBase(Appendable out) {
         this(out, 0, false);
@@ -30,6 +32,23 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     public HtmlFormattingAppendableBase(Appendable out, int indentSize, final int formatOptions) {
         this.out = new FormattingAppendableImpl(out, formatOptions);
         this.out.setIndentPrefix(RepeatedCharSequence.of(" ", indentSize).toString());
+    }
+
+    public boolean isSuppressOpenTagLine() {
+        return suppressOpenTagLine;
+    }
+
+    public void setSuppressOpenTagLine(boolean suppressOpenTagLine) {
+        this.suppressOpenTagLine = suppressOpenTagLine;
+    }
+
+    public boolean isSuppressCloseTagLine() {
+        return suppressCloseTagLine;
+    }
+
+    public T setSuppressCloseTagLine(boolean suppressCloseTagLine) {
+        this.suppressCloseTagLine = suppressCloseTagLine;
+        return (T) this;
     }
 
     @Override
@@ -224,7 +243,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     @Override
     public T tag(CharSequence tagName, final boolean withIndent, final boolean withLine, Runnable runnable) {
-        if (withIndent) {
+        if (withIndent && !suppressOpenTagLine) {
             out.willIndent();
             out.line();
         }
@@ -276,36 +295,36 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         if (withIndent) out.unIndent();
 
         // don't rely on unIndent() doing a line, it will only do so if there was text since indent()
-        if (withLine) out.line();
+        if (withLine && !suppressCloseTagLine) out.line();
 
         closeTag(tagName);
 
-        if (withIndent) line();
+        if (withIndent && !suppressCloseTagLine) line();
 
         return (T) this;
     }
 
     @Override
     public T tagVoidLine(final CharSequence tagName) {
-        line().tagVoid(tagName).line();
+        lineIf(!suppressOpenTagLine).tagVoid(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName) {
-        line().tag(tagName).line();
+        lineIf(!suppressOpenTagLine).tag(tagName).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName, final boolean voidElement) {
-        line().tag(tagName, voidElement).line();
+        lineIf(!suppressOpenTagLine).tag(tagName, voidElement).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
     @Override
     public T tagLine(final CharSequence tagName, final Runnable runnable) {
-        line().tag(tagName, false, false, runnable).line();
+        lineIf(!suppressOpenTagLine).tag(tagName, false, false, runnable).lineIf(!suppressCloseTagLine);
         return (T) this;
     }
 
@@ -544,7 +563,10 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     }
 
     @Override
-    public T lastOffset(final Ref<Integer> refOffset) { out.lastOffset(refOffset); return (T)this; }
+    public T lastOffset(final Ref<Integer> refOffset) {
+        out.lastOffset(refOffset);
+        return (T) this;
+    }
 
     @Override
     public int lastOffset() { return out.lastOffset(); }

@@ -304,7 +304,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 language = info.subSequence(0, space);
             }
             html.attr("class", context.getHtmlOptions().languageClassPrefix + language.unescape());
-        } else  {
+        } else {
             String noLanguageClass = context.getHtmlOptions().noLanguageClass.trim();
             if (!noLanguageClass.isEmpty()) {
                 html.attr("class", noLanguageClass);
@@ -319,7 +319,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
         html.tag("/code");
         html.tag("/pre").closePre();
-        html.line();
+        html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
 
     private void render(ThematicBreak node, NodeRendererContext context, HtmlWriter html) {
@@ -343,7 +343,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
         html.tag("/code");
         html.tag("/pre").closePre();
-        html.line();
+        html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
 
     private void render(CodeBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -470,7 +470,6 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.srcPos(node.getText()).withAttr().tag("em");
             context.renderChildren(node);
             html.tag("/em");
-
         } else {
             html.raw(htmlOptions.emphasisStyleHtmlOpen);
             context.renderChildren(node);
@@ -530,7 +529,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.unIndent().tag("/div");
         }
 
-        html.line();
+        html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
 
     private void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {
@@ -548,13 +547,17 @@ public class CoreNodeRenderer implements NodeRenderer {
     public void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape) {
         if (suppress) return;
 
-        if (node instanceof HtmlBlock) html.line();
+        if (node instanceof HtmlBlock)
+            html.line();
+        
         if (escape) {
             html.text(node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL());
         } else {
             html.rawPre((node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL()));
         }
-        if (node instanceof HtmlBlock) html.line();
+        
+        if (node instanceof HtmlBlock)
+            html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
 
     private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {

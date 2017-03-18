@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.4](#0184)
 - [0.18.3](#0183)
 - [0.18.2](#0182)
 - [0.18.1](#0181)
@@ -135,6 +136,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.4
+------
+
+* Add: `HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL` and `HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL`,
+  default `true`. When `false` will suppress EOL before/after HTML block tags which are
+  automatically generated during html rendering. Used for doxia compatibility.
 
 0.18.3
 ------

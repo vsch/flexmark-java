@@ -5681,3 +5681,28 @@ Document[0, 28]
 ````````````````````````````````
 
 
+## Suppress HTML Block EOL
+
+```````````````````````````````` example(Suppress HTML Block EOL: 1) options(suppress-format-eol)
+
+---
+
+# Heading
+
+> block quote
+
+.
+<hr /><h1>Heading</h1><blockquote>
+<p>block quote</p>
+</blockquote>
+.
+Document[0, 32]
+  ThematicBreak[1, 4]
+  Heading[6, 15] textOpen:[6, 7, "#"] text:[8, 15, "Heading"]
+    Text[8, 15] chars:[8, 15, "Heading"]
+  BlockQuote[17, 31] marker:[17, 18, ">"]
+    Paragraph[19, 31]
+      Text[19, 30] chars:[19, 30, "block … quote"]
+````````````````````````````````
+
+

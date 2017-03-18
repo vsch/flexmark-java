@@ -37,6 +37,12 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
         super(out, indentSize, formatOptions);
     }
 
+    public HtmlWriter(Appendable out, int indentSize, int formatOptions, boolean suppressOpenTagLine, boolean suppressCloseTagLine) {
+        super(out, indentSize, formatOptions);
+        setSuppressOpenTagLine(suppressOpenTagLine);
+        setSuppressCloseTagLine(suppressCloseTagLine);
+    }
+
     void setContext(NodeRendererContext context) {
         this.context = context;
     }

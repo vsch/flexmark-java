@@ -31,7 +31,8 @@ public class HtmlRendererOptions {
     public final boolean sourceWrapHtmlBlocks;
     public final int formatFlags;
     public final int maxTrailingBlankLines;
-    //public final boolean sourceWrapInlineHtml;
+    public final boolean htmlBlockOpenTagEol;
+    public final boolean htmlBlockCloseTagEol;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
@@ -60,8 +61,9 @@ public class HtmlRendererOptions {
         sourcePositionAttribute = HtmlRenderer.SOURCE_POSITION_ATTRIBUTE.getFrom(options);
         sourcePositionParagraphLines = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_POSITION_PARAGRAPH_LINES.getFrom(options);
         sourceWrapHtmlBlocks = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS.getFrom(options);
-        //sourceWrapInlineHtml = !sourcePositionAttribute.isEmpty() && HtmlRenderer.SOURCE_WRAP_INLINE_HTML.getFrom(options);
         formatFlags = HtmlRenderer.FORMAT_FLAGS.getFrom(options);
         maxTrailingBlankLines = HtmlRenderer.MAX_TRAILING_BLANK_LINES.getFrom(options);
+        htmlBlockOpenTagEol = HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL.getFrom(options);
+        htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.getFrom(options);
     }
 }

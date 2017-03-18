@@ -1193,4 +1193,117 @@ Document[0, 815]
         Text[787, 815] chars:[787, 815, "Defin … raph)"]
 ````````````````````````````````
 
+## Suppress HTML block tag EOL
+
+```````````````````````````````` example(Suppress HTML block tag EOL: 1) options(suppress-format-eol)
+Term 1
+Term 2
+
+:   Definition 1 paragraph 1 line 1 ...
+Definition 1 paragraph 1 line 2 (lazy)
+    
+    Definition 1 paragraph 2 line 1 ...
+    Definition 1 paragraph 2 line 2
+
+:   Definition 2 paragraph 1 line 1 ...
+Definition 2 paragraph 1 line 2 (lazy)
+
+Term 3
+:   Definition 3 (no paragraph)
+:   Definition 4 (no paragraph)
+:   Definition 5 line 1 ...
+    Definition 5 line 2 (no paragraph)
+
+:   Definition 6 paragraph 1 line 1 ...
+Definition 6 paragraph 1 line 2
+:   Definition 7 (no paragraph)
+:   Definition 8 paragraph 1 line 1 (forced paragraph) ...
+    Definition 8 paragraph 1 line 2
+    
+    Definition 8 paragraph 2 line 1
+    
+Term 4
+:   Definition 9 paragraph 1 line 1 (forced paragraph) ...
+    Definition 9 paragraph 1 line 2
+    
+    Definition 9 paragraph 2 line 1
+:   Definition 10 (no paragraph)
+.
+<dl>
+<dt>Term 1</dt><dt>Term 2</dt><dd><p>Definition 1 paragraph 1 line 1 ...
+Definition 1 paragraph 1 line 2 (lazy)</p><p>Definition 1 paragraph 2 line 1 ...
+Definition 1 paragraph 2 line 2</p></dd><dd><p>Definition 2 paragraph 1 line 1 ...
+Definition 2 paragraph 1 line 2 (lazy)</p></dd><dt>Term 3</dt><dd><p>Definition 3 (no paragraph)</p></dd><dd><p>Definition 4 (no paragraph)</p></dd><dd><p>Definition 5 line 1 ...
+Definition 5 line 2 (no paragraph)</p></dd><dd><p>Definition 6 paragraph 1 line 1 ...
+Definition 6 paragraph 1 line 2</p></dd><dd><p>Definition 7 (no paragraph)</p></dd><dd><p>Definition 8 paragraph 1 line 1 (forced paragraph) ...
+Definition 8 paragraph 1 line 2</p><p>Definition 8 paragraph 2 line 1</p></dd><dt>Term 4</dt><dd><p>Definition 9 paragraph 1 line 1 (forced paragraph) ...
+Definition 9 paragraph 1 line 2</p><p>Definition 9 paragraph 2 line 1</p></dd><dd><p>Definition 10 (no paragraph)</p></dd>
+</dl>
+.
+Document[0, 815]
+  DefinitionList[0, 815] isLoose
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionTerm[7, 14]
+      Paragraph[7, 14]
+        Text[7, 13] chars:[7, 13, "Term 2"]
+    DefinitionItem[15, 175] open:[15, 16, ":"] isLoose hadBlankLineAfter
+      Paragraph[19, 94] isTrailingBlankLine
+        Text[19, 54] chars:[19, 54, "Defin … 1 ..."]
+        SoftLineBreak[54, 55]
+        Text[55, 93] chars:[55, 93, "Defin … lazy)"]
+      Paragraph[103, 175] isTrailingBlankLine
+        Text[103, 138] chars:[103, 138, "Defin … 1 ..."]
+        SoftLineBreak[138, 139]
+        Text[143, 174] chars:[143, 174, "Defin … ine 2"]
+    DefinitionItem[176, 255] open:[176, 177, ":"] isLoose hadBlankLineAfter
+      Paragraph[180, 255] isTrailingBlankLine
+        Text[180, 215] chars:[180, 215, "Defin … 1 ..."]
+        SoftLineBreak[215, 216]
+        Text[216, 254] chars:[216, 254, "Defin … lazy)"]
+    DefinitionTerm[256, 263]
+      Paragraph[256, 263]
+        Text[256, 262] chars:[256, 262, "Term 3"]
+    DefinitionItem[263, 295] open:[263, 264, ":"] isLoose
+      Paragraph[267, 295]
+        Text[267, 294] chars:[267, 294, "Defin … raph)"]
+    DefinitionItem[295, 327] open:[295, 296, ":"] isLoose
+      Paragraph[299, 327]
+        Text[299, 326] chars:[299, 326, "Defin … raph)"]
+    DefinitionItem[327, 394] open:[327, 328, ":"] isLoose hadBlankLineAfter
+      Paragraph[331, 394] isTrailingBlankLine
+        Text[331, 354] chars:[331, 354, "Defin … 1 ..."]
+        SoftLineBreak[354, 355]
+        Text[359, 393] chars:[359, 393, "Defin … raph)"]
+    DefinitionItem[395, 467] open:[395, 396, ":"] isLoose
+      Paragraph[399, 467]
+        Text[399, 434] chars:[399, 434, "Defin … 1 ..."]
+        SoftLineBreak[434, 435]
+        Text[435, 466] chars:[435, 466, "Defin … ine 2"]
+    DefinitionItem[467, 499] open:[467, 468, ":"] isLoose
+      Paragraph[471, 499]
+        Text[471, 498] chars:[471, 498, "Defin … raph)"]
+    DefinitionItem[499, 635] open:[499, 500, ":"] isLoose hadBlankLineAfter
+      Paragraph[503, 594] isTrailingBlankLine
+        Text[503, 557] chars:[503, 557, "Defin … ) ..."]
+        SoftLineBreak[557, 558]
+        Text[562, 593] chars:[562, 593, "Defin … ine 2"]
+      Paragraph[603, 635] isTrailingBlankLine
+        Text[603, 634] chars:[603, 634, "Defin … ine 1"]
+    DefinitionTerm[640, 647]
+      Paragraph[640, 647]
+        Text[640, 646] chars:[640, 646, "Term 4"]
+    DefinitionItem[647, 783] open:[647, 648, ":"] isLoose hadBlankLineAfter
+      Paragraph[651, 742] isTrailingBlankLine
+        Text[651, 705] chars:[651, 705, "Defin … ) ..."]
+        SoftLineBreak[705, 706]
+        Text[710, 741] chars:[710, 741, "Defin … ine 2"]
+      Paragraph[751, 783]
+        Text[751, 782] chars:[751, 782, "Defin … ine 1"]
+    DefinitionItem[783, 815] open:[783, 784, ":"] isLoose
+      Paragraph[787, 815]
+        Text[787, 815] chars:[787, 815, "Defin … raph)"]
+````````````````````````````````
+
 
