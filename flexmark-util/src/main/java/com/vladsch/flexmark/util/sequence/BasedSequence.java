@@ -603,6 +603,14 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
      * @return unescaped text
      */
     String unescape();
+
+    /**
+     * Get the unescaped string of this sequence content without unescaping entities
+     *
+     * @return unescaped text
+     */
+    String unescapeNoEntities();
+
     /**
      * Get the unescaped string of this sequence content
      *

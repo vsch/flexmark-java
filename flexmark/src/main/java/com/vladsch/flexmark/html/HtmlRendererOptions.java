@@ -33,6 +33,7 @@ public class HtmlRendererOptions {
     public final int maxTrailingBlankLines;
     public final boolean htmlBlockOpenTagEol;
     public final boolean htmlBlockCloseTagEol;
+    public final boolean unescapeHtmlEntities;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
@@ -65,5 +66,6 @@ public class HtmlRendererOptions {
         maxTrailingBlankLines = HtmlRenderer.MAX_TRAILING_BLANK_LINES.getFrom(options);
         htmlBlockOpenTagEol = HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL.getFrom(options);
         htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.getFrom(options);
+        unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
     }
 }

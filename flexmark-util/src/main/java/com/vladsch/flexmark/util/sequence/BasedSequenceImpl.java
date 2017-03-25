@@ -1180,6 +1180,11 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     }
 
     @Override
+    public String unescapeNoEntities() {
+        return Escaping.unescapeString(this, false);
+    }
+
+    @Override
     public BasedSequence unescape(ReplacedTextMapper textMapper) {
         return Escaping.unescape(this, textMapper);
     }

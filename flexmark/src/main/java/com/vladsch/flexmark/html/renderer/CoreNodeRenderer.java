@@ -549,13 +549,13 @@ public class CoreNodeRenderer implements NodeRenderer {
 
         if (node instanceof HtmlBlock)
             html.line();
-        
+
         if (escape) {
             html.text(node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL());
         } else {
             html.rawPre((node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL()));
         }
-        
+
         if (node instanceof HtmlBlock)
             html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
     }
@@ -589,7 +589,11 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlEntity node, NodeRendererContext context, HtmlWriter html) {
-        html.text(node.getChars().unescape());
+        if (context.getHtmlOptions().unescapeHtmlEntities) {
+            html.text(node.getChars().unescape());
+        } else {
+            html.raw(node.getChars().unescapeNoEntities());
+        }
     }
 
     private void render(AutoLink node, NodeRendererContext context, final HtmlWriter html) {

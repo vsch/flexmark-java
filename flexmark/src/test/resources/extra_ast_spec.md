@@ -5706,3 +5706,20 @@ Document[0, 32]
 ````````````````````````````````
 
 
+## Unescape Entities
+
+do not unescape entities
+
+```````````````````````````````` example(Unescape Entities: 1) options(no-unescape-entities)
+stuff &Aacute; stuff
+.
+<p>stuff &Aacute; stuff</p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Text[0, 6] chars:[0, 6, "stuff "]
+    HtmlEntity[6, 14] "&Aacute;"
+    Text[14, 20] chars:[14, 20, " stuff"]
+````````````````````````````````
+
+

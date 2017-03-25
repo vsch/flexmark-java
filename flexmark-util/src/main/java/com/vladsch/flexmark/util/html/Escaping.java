@@ -15,6 +15,11 @@ public class Escaping {
 
     private static final String ENTITY = "&(?:#x[a-f0-9]{1,8}|#[0-9]{1,8}|[a-z][a-z0-9]{1,31});";
 
+    private static final Pattern BACKSLASH_ONLY = Pattern.compile("[\\\\]");
+
+    private static final Pattern ESCAPED_CHAR =
+            Pattern.compile("\\\\" + ESCAPABLE, Pattern.CASE_INSENSITIVE);
+
     private static final Pattern BACKSLASH_OR_AMP = Pattern.compile("[\\\\&]");
 
     private static final Pattern AMP_ONLY = Pattern.compile("[\\&]");
@@ -188,6 +193,29 @@ public class Escaping {
             return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
         } else {
             return s instanceof String ? (String) s : String.valueOf(s);
+        }
+    }
+
+    /**
+     * Replace entities and backslash escapes with literal characters.
+     *
+     * @param s                string to un-escape
+     * @param unescapeEntities true if HTML entities are to be unescaped
+     * @return un-escaped string
+     */
+    public static String unescapeString(CharSequence s, boolean unescapeEntities) {
+        if (unescapeEntities) {
+            if (BACKSLASH_OR_AMP.matcher(s).find()) {
+                return replaceAll(ESCAPED_CHAR, s, UNESCAPE_REPLACER);
+            } else {
+                return s instanceof String ? (String) s : String.valueOf(s);
+            }
+        } else {
+            if (BACKSLASH_ONLY.matcher(s).find()) {
+                return replaceAll(ENTITY_OR_ESCAPED_CHAR, s, UNESCAPE_REPLACER);
+            } else {
+                return s instanceof String ? (String) s : String.valueOf(s);
+            }
         }
     }
 

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.5](#0185)
 - [0.18.4](#0184)
 - [0.18.3](#0183)
 - [0.18.2](#0182)
@@ -136,6 +137,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.5
+------
+
+* Fix: #83, Question: is there any way to keep every html entities as-is?, add
+  `HtmlRenderer.UNESCAPE_HTML_ENTITIES`, default `true`. Set to `false` to leave HTML entities
+  as is in the rendered HTML.
 
 0.18.4
 ------

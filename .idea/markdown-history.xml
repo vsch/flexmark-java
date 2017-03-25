@@ -3,8 +3,8 @@
   <component name="MarkdownNavigatorHistory">
     <PasteImageHistory filename="image" directory="$PROJECT_DIR$/assets/images" onPasteImageTargetRef="3" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="2" onPasteReferenceElement="2" cornerRadius="20" borderColor="-16777216" transparentColor="-1" borderWidth="1" trimTop="0" trimBottom="0" trimLeft="0" trimRight="0" transparent="false" roundCorners="false" showPreview="true" bordered="false" scaled="true" cropped="false" hideInapplicableOperations="false" scale="50" scalingInterpolation="1" transparentTolerance="0" linkFormat="0">
       <directories>
-        <option name="$PROJECT_DIR$/assets/images" />
         <option name="$PROJECT_DIR$/FlexmarkJavaAssets/issues" />
+        <option name="$PROJECT_DIR$/assets/images" />
         <option name="$PROJECT_DIR$/flexmark-java.wiki/resources" />
         <option name="$PROJECT_DIR$" />
       </directories>
@@ -19,6 +19,6 @@
       </directories>
       <filenames />
     </CopyImageHistory>
-    <PasteLinkHistory onPasteImageTargetRef="3" onPasteTargetRef="1" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteReferenceElement="2" hideInapplicableOperations="false" linkFormat="0" />
+    <PasteLinkHistory onPasteImageTargetRef="3" onPasteTargetRef="2" onPasteLinkText="0" onPasteImageElement="1" onPasteLinkElement="1" onPasteReferenceElement="2" hideInapplicableOperations="false" linkFormat="2" />
   </component>
 </project>
