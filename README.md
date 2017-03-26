@@ -493,7 +493,7 @@ License
 
 Copyright (c) 2015-2016 Atlassian and others.
 
-Copyright (c) 2016, Vladimir Schneider,
+Copyright (c) 2016-2017, Vladimir Schneider,
 
 BSD (2-clause) licensed, see [LICENSE.txt] file.
 
