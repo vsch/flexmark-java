@@ -18,6 +18,111 @@ Motivation for this project was the need to replace [pegdown] parser in my [Mark
 plugin for JetBrains IDEs. [pegdown] has a great feature set but its speed in general is less
 than ideal and for pathological input either hangs or practically hangs during parsing.
 
+[![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
+[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
+
+<!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
+
+### Requirements
+
+* Java 7 or above
+* Android compatibility to be added
+* The project is on Maven: `com.vladsch.flexmark`
+* The core has no dependencies; for extensions, see below
+
+  The API is still evolving to accommodate new extensions and functionality.
+
+### Quick Start
+
+You need to add `flexmark-all` as a dependency which includes core and all modules to the
+following sample:
+
+```xml
+<dependency>
+    <groupId>com.vladsch.flexmark</groupId>
+    <artifactId>flexmark-all</artifactId>
+    <version>0.18.5</version>
+</dependency>
+```
+
+Source:
+[BasicSample.java](flexmark-java-samples/src/com/vladsch/flexmark/samples/BasicSample.java)
+
+```java
+package com.vladsch.flexmark.samples;
+
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughExtension;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.options.MutableDataSet;
+
+import java.util.Arrays;
+
+public class BasicSample {
+    public static void main(String[] args) {
+        MutableDataSet options = new MutableDataSet();
+
+        // uncomment to set optional extensions
+        //options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()));
+
+        // uncomment to convert soft-breaks to hard breaks
+        //options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
+
+        Parser parser = Parser.builder(options).build();
+        HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+
+        // You can re-use parser and renderer instances
+        Node document = parser.parse("This is *Sparta*");
+        String html = renderer.render(document);  // "<p>This is <em>Sparta</em></p>\n"
+        System.out.println(html);
+    }
+}
+```
+
+More information can be found in the documentation:  
+[Wiki Home](../../wiki)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Usage Examples](../../wiki/Usage)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Extension Details](../../wiki/Extensions)  
+&nbsp;&nbsp;&nbsp;&nbsp;[Writing Extensions](../../wiki/Writing-Extensions)
+
+### Pegdown Migration Helper
+
+`PegdownOptionsAdapter` class converts pegdown `Extensions.*` flags to flexmark options and
+extensions list. Pegdown `Extensions.java` is included for convenience and new options not found
+in pegdown 1.6.0. These are located in `flexmark-profile-pegdown` module but you can grab the
+source from this repo: [PegdownOptionsAdapter.java], [Extensions.java] and
+make your own version, modified to your project's needs.
+
+You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
+can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
+extension flags. `PegdownOptionsAdapter.getFlexmarkOptions()` will return a fresh copy of
+`DataHolder` every time with the options reflecting pegdown extension flags.
+
+```java
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.profiles.pegdown.Extensions;
+import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.options.DataHolder;
+
+public class PegdownOptions {
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
+            Extensions.ALL
+    );
+
+    static final Parser PARSER = Parser.builder(OPTIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+
+    // use the PARSER to parse and RENDERER to render with pegdown compatibility
+}
+```
+
+:information_source: [flexmark-java] has many more extensions and configuration options than
+[pegdown] in addition to extensions available in pegdown 1.6.0.
+[Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
+
 ### Latest Additions
 
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
@@ -55,38 +160,6 @@ than ideal and for pathological input either hangs or practically hangs during p
   | total:             ||     13h |</code></pre>
       </td></tr>
   </table>
-
-### Changes Forced by Downgrade to Java 7
-
-I tried to keep all changes caused by the downgrade in Java language level as mechanical as
-possible to make it easier to migrate. The biggest change is the lack of lambda syntax and no
-static extension methods in interfaces.
-
-* All `VISIT_HANDLERS` in *GroupName*Visitor were moved to *GroupName*VisitorExt class. A
-  mechanical search and replace from `.VISIT_HANDLERS` to `Ext.VISIT_HANDLERS` should take care
-  of the change.
-
-* Lack of Lambda syntax will only have an effect if your project language level is downgraded.
-  Otherwise, you can keep using lambda syntax.
-
-### Requirements
-
-* Java 7 or above
-* The core has no dependencies; for extensions, see below
-
-[![Build status](https://travis-ci.org/vsch/flexmark-java.svg?branch=master)](https://travis-ci.org/vsch/flexmark-java)
-[![Maven Central status](https://img.shields.io/maven-central/v/com.vladsch.flexmark/flexmark.svg)](https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.vladsch.flexmark%22)
-
-<!-- [![codecov](https://codecov.io/gh/vsch/flexmark-java/branch/master/graph/badge.svg)](https://codecov.io/gh/vsch/flexmark-java) -->
-
-### Changes from commonmark-java project
-
-* The project is on Maven: `com.vladsch.flexmark`
-* Java compatibility back to 1.7
-* Android compatibility to be added
-* No attempt is made to keep API backward compatibility to the original project.
-
-  The API is evolving to accommodate new extensions and functionality.
 
 ### Releases, Bug Fixes, Enhancements and Support
 
@@ -137,42 +210,6 @@ and documentation because I cannot transfer what I know to you, without your wil
 If you have a commercial application and don't want to write the extension(s) yourself or want
 to reduce the time and effort of implementing extensions and integrating flexmark-java, feel
 free to contact me. I am available on a consulting/contracting basis, [All about me].
-
-### Pegdown Migration Helper
-
-`PegdownOptionsAdapter` class converts pegdown `Extensions.*` flags to flexmark options and
-extensions list. Pegdown `Extensions.java` is included for convenience. These are located in
-`flexmark-profile-pegdown` module, was added to Maven but you can grab the source from this
-repo: [PegdownOptionsAdapter.java] and if you need it [Extensions.java] and make your own
-version, modified to your project's needs.
-
-You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
-can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
-extension flags. `PegdownOptionsAdapter.getFlexmarkOptions()` will return a fresh copy of
-`DataHolder` every time with the options reflecting pegdown extension flags.
-
-```java
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profiles.pegdown.Extensions;
-import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
-import com.vladsch.flexmark.util.options.DataHolder;
-
-public class PegdownOptions {
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL
-    );
-
-    static final Parser PARSER = Parser.builder(OPTIONS).build();
-    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
-
-    // use the PARSER to parse and RENDERER to render with pegdown compatibility
-}
-```
-
-:information_source: [flexmark-java] has many more extensions and configuration options than
-[pegdown] in addition to extensions available in pegdown 1.6.0.
-[Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
 
 ### Markdown Processor Emulation
 
@@ -387,8 +424,7 @@ Ratios of above:
 | table            |            1.00 |          2.72 |              3.49 |     15.90 |
 | table-format     |            1.00 |          2.08 |              3.00 |     17.03 |
 | wrap             |            1.00 |          1.21 |              4.37 |     22.71 |
-| -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            1.00 |          1.41 |             17.47 |     40.11 |
+| **overall**      |        **1.00** |      **1.41** |         **17.47** | **40.11** |
 
 | File             | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
 |:-----------------|----------------:|--------------:|------------------:|----------:|
@@ -400,8 +436,7 @@ Ratios of above:
 | table            |            0.37 |          1.00 |              1.28 |      5.85 |
 | table-format     |            0.48 |          1.00 |              1.44 |      8.19 |
 | wrap             |            0.83 |          1.00 |              3.62 |     18.83 |
-| -----------      |       --------- |     --------- |         --------- | --------- |
-| overall          |            0.71 |          1.00 |             12.41 |     28.48 |
+| **overall**      |        **0.71** |      **1.00** |         **12.41** | **28.48** |
 
 ---
 
@@ -415,19 +450,17 @@ part of the benchmark to prevent skewing of the results. The results are here fo
 
 Ratios of above:
 
-| File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
-|:--------------|----------------:|--------------:|------------------:|----------:|
-| hang-pegdown  |            1.00 |          3.98 |              4.17 |   8048.38 |
-| hang-pegdown2 |            1.00 |          4.86 |              4.10 |  27207.32 |
-| -----------   |       --------- |     --------- |         --------- | --------- |
-| overall       |            1.00 |          4.30 |              4.15 |  15151.91 |
+| File          | commonmark-java | flexmark-java | intellij-markdown |      pegdown |
+|:--------------|----------------:|--------------:|------------------:|-------------:|
+| hang-pegdown  |            1.00 |          3.98 |              4.17 |      8048.38 |
+| hang-pegdown2 |            1.00 |          4.86 |              4.10 |     27207.32 |
+| **overall**   |        **1.00** |      **4.30** |          **4.15** | **15151.91** |
 
-| File          | commonmark-java | flexmark-java | intellij-markdown |   pegdown |
-|:--------------|----------------:|--------------:|------------------:|----------:|
-| hang-pegdown  |            0.25 |          1.00 |              1.05 |   2024.27 |
-| hang-pegdown2 |            0.21 |          1.00 |              0.84 |   5594.73 |
-| -----------   |       --------- |     --------- |         --------- | --------- |
-| overall       |            0.23 |          1.00 |              0.96 |   3519.73 |
+| File          | commonmark-java | flexmark-java | intellij-markdown |     pegdown |
+|:--------------|----------------:|--------------:|------------------:|------------:|
+| hang-pegdown  |            0.25 |          1.00 |              1.05 |     2024.27 |
+| hang-pegdown2 |            0.21 |          1.00 |              0.84 |     5594.73 |
+| **overall**   |        **0.23** |      **1.00** |          **0.96** | **3519.73** |
 
 * [VERSION.md] is the version log file I use for Markdown Navigator
 * [commonMarkSpec.md] is a 33k line file used in [intellij-markdown] test suite for performance
