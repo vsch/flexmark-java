@@ -100,7 +100,6 @@ public class SyntheticLinkSample {
             public NodePostProcessor create(Document document) {
                 return new SyntheticLinkPostProcessor(document);
             }
-
         }
     }
 
@@ -186,5 +185,4 @@ public class SyntheticLinkSample {
         String html = renderer.render(document);
         System.out.println(html);
     }
-
 }
