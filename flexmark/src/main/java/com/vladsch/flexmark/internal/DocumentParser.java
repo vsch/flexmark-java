@@ -479,6 +479,8 @@ public class DocumentParser implements ParserState {
 
         while (true) {
             int charsRead = bufferedReader.read(buffer);
+            // issue #91
+            if (charsRead < 0) break;
             file.append(buffer, 0, charsRead);
             if (charsRead < buffer.length) break;
         }

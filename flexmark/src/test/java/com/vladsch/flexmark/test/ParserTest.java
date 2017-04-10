@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -20,6 +21,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class ParserTest {
+
+    @Test
+    public void emptyReaderTest() throws IOException {
+        Parser parser = Parser.builder().build();
+        Node document1 = parser.parseReader(new StringReader(""));
+        assertEquals(false, document1.hasChildren());
+    }
+
 
     @Test
     public void ioReaderTest() throws IOException {

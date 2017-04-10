@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.7](#0187)
 - [0.18.6](#0186)
 - [0.18.5](#0185)
 - [0.18.4](#0184)
@@ -138,6 +139,11 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.7
+------
+
+* Fix: #91, DocumentParser Exception on Empty Documents
 
 0.18.6
 ------
