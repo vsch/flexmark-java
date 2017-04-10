@@ -116,15 +116,7 @@ public class SyntheticLinkSample {
             BasedSequence insertedText = PrefixedSubSequence.of("Some inserted text with a link [flexmark-java](https://github.com/vsch/flexmark-java) in paragraph.", document.getChars().subSequence(document.getChars().length()));
 
             // parse using the same options as the document but remove the SyntheticLinkExtension to prevent infinite recursion
-            MutableDataHolder options = new MutableDataSet(document);
-            ArrayList<Extension> extensions = new ArrayList<Extension>();
-            for (Extension extension : document.get(Parser.EXTENSIONS)) {
-                if (!(extension instanceof SyntheticLinkExtension)) {
-                    extensions.add(extension);
-                }
-            }
-
-            options.set(Parser.EXTENSIONS, extensions);
+            MutableDataHolder options = Parser.removeExtensions(new MutableDataSet(document), SyntheticLinkExtension.class);
             Node insertedDocument = Parser.builder(options).build().parse(insertedText);
 
             // now can append nodes from inserted to document

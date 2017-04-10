@@ -983,7 +983,12 @@ public class DocumentParser implements ParserState {
                             if (block.getLineChars(i).getEndOffset() > contentChars.getStartOffset()) break;
                         }
 
-                        if (block.getLineChars(i).getEndOffset() == contentChars.getStartOffset()) {
+                        if (i >= iMax) {
+                            // all used up
+                            block.unlink();
+                            blockRemoved(block);
+                            return;
+                        } else if (block.getLineChars(i).getEndOffset() == contentChars.getStartOffset()) {
                             // full lines removed
                             block.setContent(block, i, iMax);
                         } else {

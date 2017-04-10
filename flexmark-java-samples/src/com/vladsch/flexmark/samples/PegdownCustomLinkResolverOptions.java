@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.ext.wikilink.WikiLink;
@@ -15,26 +14,11 @@ import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class PegdownCustomLinkResolverOptions {
-    static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL
-    ).toMutable();
-
-    static {
-        ArrayList<Extension> extensions = new ArrayList<Extension>();
-        extensions.add(CustomExtension.create());
-
-        for (Extension extension : OPTIONS.get(Parser.EXTENSIONS)) {
-            extensions.add(extension);
-        }
-
-        OPTIONS.set(Parser.EXTENSIONS, extensions);
-    }
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(Extensions.ALL, CustomExtension.create());
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();
     static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
@@ -113,5 +97,4 @@ public class PegdownCustomLinkResolverOptions {
         String html = RENDERER.render(document);  // "<p>This is <em>Sparta</em> <a href="document.html">document</a></p>\n"
         System.out.println(html);
     }
-
 }

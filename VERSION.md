@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.6](#0186)
 - [0.18.5](#0185)
 - [0.18.4](#0184)
 - [0.18.3](#0183)
@@ -137,6 +138,15 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.6
+------
+
+* Add: vararg argument to `PegdownOptionsAdapter.getFlexmarkOptions(Extension[])` and
+  `PegdownOptionsAdapter.flexmarkOptions(int, Extension[])` for additional extensions to add.
+* Add: helper functions to `Parser.addExtensions(MutableDataHolder, Extension[])` and
+  `Parser.removeExtensions(MutableDataHolder, Extension[])`
+* Fix: IndexOutOfBoundsException on paragraph pre-processing under some conditions
 
 0.18.5
 ------

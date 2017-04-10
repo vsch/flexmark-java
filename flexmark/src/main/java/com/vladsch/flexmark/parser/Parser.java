@@ -451,9 +451,9 @@ public class Parser implements IParse {
 
     /**
      * Extension for {@link Parser}.
-     *
+     * <p>
      * Implementations of this interface should done by all Extensions that extend the core parser
-     *
+     * <p>
      * Each will be called via {@link ParserExtension#extend(Builder)} method giving it a chance to call back
      * on the builder methods to register parser extension points
      */
@@ -469,7 +469,6 @@ public class Parser implements IParse {
          * This method is called on all extensions so that they can register their custom processors
          *
          * @param parserBuilder parser builder with which to register extensions
-         *
          * @see Builder#customBlockParserFactory(CustomBlockParserFactory)
          * @see Builder#customInlineParserExtensionFactory(InlineParserExtensionFactory)
          * @see Builder#customInlineParserFactory(InlineParserFactory)
@@ -487,7 +486,7 @@ public class Parser implements IParse {
      * document. It is used by the parser to transfer references from included document to the document
      * that is doing the inclusion so that during rendering references in the included document will
      * appear as local references to the document being rendered.
-     *
+     * <p>
      * Extension for {@link Parser}.
      */
     public interface ReferenceHoldingExtension extends Extension {
@@ -499,5 +498,52 @@ public class Parser implements IParse {
          * @return true if there were references to transfer
          */
         boolean transferReferences(MutableDataHolder document, DataHolder included);
+    }
+
+    /**
+     * Add extension(s) to the extension list
+     *
+     * @param options    mutable options holding existing extensions
+     * @param extensions extension to add
+     * @return mutable options
+     */
+    public static MutableDataHolder addExtensions(MutableDataHolder options, Extension... extensions) {
+        Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
+        ArrayList<Extension> extensionList = new ArrayList<Extension>();
+
+        extensionList.addAll(Arrays.asList(extensions));
+        for (Extension extension : extensionIterable) {
+            extensionList.add(extension);
+        }
+        options.set(Parser.EXTENSIONS, extensionList);
+        return options;
+    }
+
+    /**
+     * Remove extension(s) of given class from the extension list
+     *
+     * @param options    mutable options holding existing extensions
+     * @param extensions extension classes to remove
+     * @return mutable options
+     */
+    public static MutableDataHolder removeExtensions(MutableDataHolder options, Class... extensions) {
+        Iterable<Extension> extensionIterable = options.get(Parser.EXTENSIONS);
+        HashSet<Extension> extensionList = new HashSet<Extension>();
+
+        for (Extension extension : extensionIterable) {
+            boolean keep = true;
+            for (Class clazz : extensions) {
+                if (clazz.isInstance(extension)) {
+                    keep = false;
+                    break;
+                }
+            }
+            if (keep) {
+                extensionList.add(extension);
+            }
+        }
+
+        options.set(Parser.EXTENSIONS, extensionList);
+        return options;
     }
 }

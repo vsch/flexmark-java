@@ -28,6 +28,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
@@ -50,9 +51,9 @@ public class PegdownOptionsAdapter {
         myIsUpdateNeeded = true;
     }
 
-    public static DataHolder flexmarkOptions(int pegdownExtensions) {
+    public static DataHolder flexmarkOptions(int pegdownExtensions, Extension... extensions) {
         PegdownOptionsAdapter optionsAdapter = new PegdownOptionsAdapter(pegdownExtensions);
-        return optionsAdapter.getFlexmarkOptions();
+        return optionsAdapter.getFlexmarkOptions(extensions);
     }
 
     public boolean haveExtensions(int mask) {
@@ -63,13 +64,15 @@ public class PegdownOptionsAdapter {
         return (myPegdownExtensions & mask) == mask;
     }
 
-    public DataHolder getFlexmarkOptions() {
+    public DataHolder getFlexmarkOptions(Extension... additionalExtensions) {
         if (myIsUpdateNeeded) {
             myIsUpdateNeeded = false;
             MutableDataSet options = myOptions;
             ArrayList<Extension> extensions = new ArrayList<Extension>();
 
             options.clear();
+
+            extensions.addAll(Arrays.asList(additionalExtensions));
 
             // Setup List Options for Fixed List Indent profile
             options.setFrom(ParserEmulationProfile.PEGDOWN);
