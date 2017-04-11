@@ -119,6 +119,10 @@ public class PegdownOptions {
 }
 ```
 
+A sample with a
+[custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
+is also available.
+
 :information_source: [flexmark-java] has many more extensions and configuration options than
 [pegdown] in addition to extensions available in pegdown 1.6.0.
 [Available Extensions via PegdownOptionsAdapter](../../wiki/Pegdown-Migration#available-extensions-via-pegdownoptionsadapter)
