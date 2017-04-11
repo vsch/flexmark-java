@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.block.BlockPreProcessorFactory;
 import com.vladsch.flexmark.parser.block.ParserState;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.HashSet;
 import java.util.List;
@@ -43,7 +44,15 @@ public class DefinitionListItemBlockPreProcessor implements BlockPreProcessor {
                 paragraph.unlink();
                 state.blockRemovedWithChildren(paragraph);
 
-                final boolean hadPreviousList = paragraphPrevious instanceof DefinitionList;
+                final boolean hadPreviousList;
+                if (options.doubleBlankLineBreaksList) {
+                    // intervening characters between previous paragraph and definition terms
+                    final BasedSequence interSpace = paragraphPrevious == null ? BasedSequence.NULL : BasedSequenceImpl.of(paragraphPrevious.getChars().baseSubSequence(paragraphPrevious.getChars().getEndOffset(), paragraph.getChars().getStartOffset()).normalizeEOL());
+                    hadPreviousList = paragraphPrevious instanceof DefinitionList && interSpace.countChars('\n') < 2;
+                } else {
+                    hadPreviousList = paragraphPrevious instanceof DefinitionList;
+                }
+
                 final DefinitionList definitionList = new DefinitionList();
                 definitionList.setTight(true);
 

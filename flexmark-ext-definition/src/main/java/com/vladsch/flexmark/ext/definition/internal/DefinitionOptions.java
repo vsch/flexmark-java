@@ -17,6 +17,7 @@ class DefinitionOptions {
     public final boolean looseWhenHasLooseSubItem;
     public final boolean looseWhenHasTrailingBlankLine;
     public final boolean looseWhenBlankFollowsItemParagraph;
+    public final boolean doubleBlankLineBreaksList;
     public final int codeIndent;
     public final int itemIndent;
     public final int newItemCodeIndent;
@@ -35,5 +36,6 @@ class DefinitionOptions {
         codeIndent = Parser.LISTS_CODE_INDENT.getFrom(options);
         itemIndent = Parser.LISTS_ITEM_INDENT.getFrom(options);
         newItemCodeIndent = Parser.LISTS_NEW_ITEM_CODE_INDENT.getFrom(options);
+        doubleBlankLineBreaksList = DefinitionExtension.DOUBLE_BLANK_LINE_BREAKS_LIST.getFrom(options);
     }
 }

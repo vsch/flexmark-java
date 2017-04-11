@@ -25,6 +25,7 @@ public class DefinitionExtension implements Parser.ParserExtension, HtmlRenderer
     public static final DataKey<Boolean> COLON_MARKER = new DataKey<Boolean>("COLON_MARKER", true);
     public static final DataKey<Integer> MARKER_SPACES = new DataKey<Integer>("MARKER_SPACE", 1);
     public static final DataKey<Boolean> TILDE_MARKER = new DataKey<Boolean>("TILDE_MARKER", true);
+    public static final DataKey<Boolean> DOUBLE_BLANK_LINE_BREAKS_LIST = new DataKey<Boolean>("DOUBLE_BLANK_LINE_BREAKS_LIST", false);
 
     // TODO: implement formatter for this extension
     public static final DataKey<Integer> FORMAT_MARKER_SPACES = new DataKey<Integer>("MARKER_SPACE", 3);
