@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.18.9](#0189)
 - [0.18.8](#0188)
 - [0.18.7](#0187)
 - [0.18.6](#0186)
@@ -140,6 +141,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.18.9
+------
+
+* Add: #86, how can use definition extension correctly ?, definition item spaced two or more
+  blank lines from previous element when `DefinitionExtension.DOUBLE_BLANK_LINE_BREAKS_LIST` is
+  true to not parse as definition item.
 
 0.18.8
 ------

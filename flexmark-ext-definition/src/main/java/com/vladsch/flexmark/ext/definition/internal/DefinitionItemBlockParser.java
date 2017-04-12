@@ -10,6 +10,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 
 import java.util.Set;
 
@@ -244,9 +245,19 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
             if (blockParser instanceof DocumentBlockParser) {
                 // if document has paragraph or another definition item at end then we can proceed
                 final Document node = ((DocumentBlockParser) blockParser).getBlock();
-                Node lastChildAnyNot = node.getLastChildAnyNot(BlankLine.class);
+                Block lastChildAnyNot = (Block) node.getLastChildAnyNot(BlankLine.class);
                 if (!(lastChildAnyNot instanceof Paragraph || lastChildAnyNot instanceof DefinitionItem)) {
                     return BlockStart.none();
+                }
+
+                // check if we break list on double blank
+                if (options.doubleBlankLineBreaksList) {
+                    // intervening characters between previous paragraph and definition terms
+                    lastChildAnyNot.setCharsFromContent();
+                    final BasedSequence interSpace = BasedSequenceImpl.of(state.getLine().baseSubSequence(lastChildAnyNot.getEndOffset(), state.getLine().getStartOffset()).normalizeEOL());
+                    if (interSpace.countChars('\n') >= 2) {
+                        return BlockStart.none();
+                    }
                 }
             } else if (!(blockParser instanceof DefinitionItemBlockParser || blockParser instanceof ParagraphParser)) {
                 return BlockStart.none();
