@@ -1,13 +1,11 @@
 package com.vladsch.flexmark.internal;
 
-import com.vladsch.flexmark.ast.Block;
-import com.vladsch.flexmark.ast.BlockContent;
-import com.vladsch.flexmark.ast.CodeBlock;
-import com.vladsch.flexmark.ast.FencedCodeBlock;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -36,7 +34,7 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
         this.fenceIndent = fenceIndent;
         this.fenceMarkerIndent = fenceIndent + fenceMarkerIndent;
         this.matchingCloser = options.get(Parser.MATCH_CLOSING_FENCE_CHARACTERS);
-        this.codeContentBlock = options.get(Parser.CODE_CONTENT_BLOCK);
+        this.codeContentBlock = options.get(Parser.FENCED_CODE_CONTENT_BLOCK);
     }
 
     @Override
@@ -115,6 +113,9 @@ public class FencedCodeBlockParser extends AbstractBlockParser {
                     CodeBlock codeBlock = new CodeBlock();
                     codeBlock.setContent(segments);
                     codeBlock.setCharsFromContent();
+                    block.appendChild(codeBlock);
+                } else {
+                    Text codeBlock = new Text(SegmentedSequence.of(segments, chars.subSequence(0,0)));
                     block.appendChild(codeBlock);
                 }
             } else {

@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.test;
 
+import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
+import com.vladsch.flexmark.ast.util.TextCollectingVisitorTest;
 import org.junit.runners.Suite;
 
 @org.junit.runner.RunWith(Suite.class)
@@ -23,6 +25,7 @@ import org.junit.runners.Suite;
         ComboGitHubCompatibilitySpecTest.class,
         ComboPegdownCompatibilitySpecTest.class,
         ComboIssuesSpecTest.class,
+        TextCollectingVisitorTest.class,
 })
 public class CoreTestSuite {
 }

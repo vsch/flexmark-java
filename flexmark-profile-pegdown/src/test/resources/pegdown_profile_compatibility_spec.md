@@ -2837,6 +2837,7 @@ Document[0, 714]
           SoftLineBreak[79, 80]
           Text[84, 101] chars:[84, 101, "lazy  … ation"]
   FencedCodeBlock[103, 190] open:[103, 106, "~~~"] info:[106, 110, "info"] content:[111, 187] lines[3] close:[187, 190, "~~~"]
+    Text[111, 187] chars:[111, 187, "      … code\n"]
   IndentedCodeBlock[197, 269]
   OrderedList[269, 713] isTight delimiter:'.'
     OrderedListItem[269, 291] open:[269, 271, "1."] isTight
@@ -2869,6 +2870,7 @@ Document[0, 714]
               Paragraph[483, 506] isTrailingBlankLine
                 Text[483, 502] chars:[483, 502, "numbe … tem 3"]
       FencedCodeBlock[515, 618] open:[515, 518, "~~~"] info:[518, 522, "info"] content:[527, 611] lines[3] close:[615, 618, "~~~"]
+        Text[527, 611] chars:[527, 611, "      … code\n"]
       IndentedCodeBlock[633, 713]
 ````````````````````````````````
 

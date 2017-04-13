@@ -2146,6 +2146,7 @@ Here is a simple example with backticks:
 .
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] content:[4, 9] lines[2] close:[9, 12, "```"]
+    Text[4, 9] chars:[4, 9, "<\n >\n"]
 ````````````````````````````````
 
 
@@ -2163,6 +2164,7 @@ With tildes:
 .
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[2] close:[9, 12, "~~~"]
+    Text[4, 9] chars:[4, 9, "<\n >\n"]
 ````````````````````````````````
 
 
@@ -2181,6 +2183,7 @@ aaa
 .
 Document[0, 16]
   FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[2] close:[12, 15, "```"]
+    Text[4, 12] chars:[4, 12, "aaa\n~~~\n"]
 ````````````````````````````````
 
 
@@ -2196,6 +2199,7 @@ aaa
 .
 Document[0, 16]
   FencedCodeBlock[0, 15] open:[0, 3, "~~~"] content:[4, 12] lines[2] close:[12, 15, "~~~"]
+    Text[4, 12] chars:[4, 12, "aaa\n```\n"]
 ````````````````````````````````
 
 
@@ -2213,6 +2217,7 @@ aaa
 .
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 4, "````"] content:[5, 13] lines[2] close:[13, 19, "``````"]
+    Text[5, 13] chars:[5, 13, "aaa\n```\n"]
 ````````````````````````````````
 
 
@@ -2228,6 +2233,7 @@ aaa
 .
 Document[0, 18]
   FencedCodeBlock[0, 17] open:[0, 4, "~~~~"] content:[5, 13] lines[2] close:[13, 17, "~~~~"]
+    Text[5, 13] chars:[5, 13, "aaa\n~~~\n"]
 ````````````````````````````````
 
 
@@ -2257,6 +2263,7 @@ aaa
 .
 Document[0, 15]
   FencedCodeBlock[0, 15] open:[0, 5, "`````"] content:[6, 15] lines[3]
+    Text[6, 15] chars:[6, 15, "\n```\naaa\n"]
 ````````````````````````````````
 
 
@@ -2275,6 +2282,7 @@ bbb
 Document[0, 17]
   BlockQuote[0, 12] marker:[0, 1, ">"]
     FencedCodeBlock[2, 12] open:[2, 5, "```"] content:[8, 12] lines[1]
+      Text[8, 12] chars:[8, 12, "aaa\n"]
   Paragraph[13, 17]
     Text[13, 16] chars:[13, 16, "bbb"]
 ````````````````````````````````
@@ -2294,6 +2302,7 @@ A code block can have all empty lines as its content:
 .
 Document[0, 12]
   FencedCodeBlock[0, 11] open:[0, 3, "```"] content:[4, 8] lines[2] close:[8, 11, "```"]
+    Text[4, 8] chars:[4, 8, "\n  \n"]
 ````````````````````````````````
 
 
@@ -2326,6 +2335,7 @@ aaa
 .
 Document[0, 18]
   FencedCodeBlock[1, 17] open:[1, 4, "```"] content:[6, 14] lines[2] close:[14, 17, "```"]
+    Text[6, 14] chars:[6, 14, "aaa\naaa\n"]
 ````````````````````````````````
 
 
@@ -2343,6 +2353,7 @@ aaa
 .
 Document[0, 26]
   FencedCodeBlock[2, 25] open:[2, 5, "```"] content:[6, 20] lines[3] close:[22, 25, "```"]
+    Text[6, 20] chars:[6, 20, "aaa\na … \naaa\n"]
 ````````````````````````````````
 
 
@@ -2360,6 +2371,7 @@ aaa
 .
 Document[0, 35]
   FencedCodeBlock[3, 34] open:[3, 6, "```"] content:[10, 28] lines[3] close:[31, 34, "```"]
+    Text[10, 28] chars:[10, 28, "aaa\n  … \naaa\n"]
 ````````````````````````````````
 
 
@@ -2393,6 +2405,7 @@ aaa
 .
 Document[0, 14]
   FencedCodeBlock[0, 13] open:[0, 3, "```"] content:[4, 8] lines[1] close:[10, 13, "```"]
+    Text[4, 8] chars:[4, 8, "aaa\n"]
 ````````````````````````````````
 
 
@@ -2406,6 +2419,7 @@ aaa
 .
 Document[0, 17]
   FencedCodeBlock[3, 16] open:[3, 6, "```"] content:[7, 11] lines[1] close:[13, 16, "```"]
+    Text[7, 11] chars:[7, 11, "aaa\n"]
 ````````````````````````````````
 
 
@@ -2422,6 +2436,7 @@ aaa
 .
 Document[0, 16]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] content:[4, 16] lines[2]
+    Text[4, 16] chars:[4, 16, "aaa\n  …  ```\n"]
 ````````````````````````````````
 
 
@@ -2437,6 +2452,7 @@ aaa</p>
 Document[0, 12]
   Paragraph[0, 12]
     Code[0, 7] textOpen:[0, 3, "```"] text:[3, 4, " "] textClose:[4, 7, "```"]
+      Text[3, 4] chars:[3, 4, " "]
     SoftLineBreak[7, 8]
     Text[8, 11] chars:[8, 11, "aaa"]
 ````````````````````````````````
@@ -2453,6 +2469,7 @@ aaa
 .
 Document[0, 18]
   FencedCodeBlock[0, 18] open:[0, 6, "~~~~~~"] content:[7, 18] lines[2]
+    Text[7, 18] chars:[7, 18, "aaa\n~ … ~ ~~\n"]
 ````````````````````````````````
 
 
@@ -2475,6 +2492,7 @@ Document[0, 20]
   Paragraph[0, 4]
     Text[0, 3] chars:[0, 3, "foo"]
   FencedCodeBlock[4, 15] open:[4, 7, "```"] content:[8, 12] lines[1] close:[12, 15, "```"]
+    Text[8, 12] chars:[8, 12, "bar\n"]
   Paragraph[16, 20]
     Text[16, 19] chars:[16, 19, "baz"]
 ````````````````````````````````
@@ -2500,6 +2518,7 @@ Document[0, 26]
   Heading[0, 7] text:[0, 3, "foo"] textClose:[4, 7, "---"]
     Text[0, 3] chars:[0, 3, "foo"]
   FencedCodeBlock[8, 19] open:[8, 11, "~~~"] content:[12, 16] lines[1] close:[16, 19, "~~~"]
+    Text[12, 16] chars:[12, 16, "bar\n"]
   Heading[20, 25] textOpen:[20, 21, "#"] text:[22, 25, "baz"]
     Text[22, 25] chars:[22, 25, "baz"]
 ````````````````````````````````
@@ -2524,6 +2543,7 @@ end
 .
 Document[0, 38]
   FencedCodeBlock[0, 37] open:[0, 3, "```"] info:[3, 7, "ruby"] content:[8, 34] lines[3] close:[34, 37, "```"]
+    Text[8, 34] chars:[8, 34, "def f … \nend\n"]
 ````````````````````````````````
 
 
@@ -2541,6 +2561,7 @@ end
 .
 Document[0, 65]
   FencedCodeBlock[0, 64] open:[0, 4, "~~~~"] info:[8, 30, "ruby startline=3 $%@#$"] content:[31, 57] lines[3] close:[57, 64, "~~~~~~~"]
+    Text[31, 57] chars:[31, 57, "def f … \nend\n"]
 ````````````````````````````````
 
 
@@ -2567,6 +2588,7 @@ foo</p>
 Document[0, 15]
   Paragraph[0, 15]
     Code[0, 10] textOpen:[0, 3, "```"] text:[3, 7, " aa "] textClose:[7, 10, "```"]
+      Text[3, 7] chars:[3, 7, " aa "]
     SoftLineBreak[10, 11]
     Text[11, 14] chars:[11, 14, "foo"]
 ````````````````````````````````
@@ -2584,6 +2606,7 @@ Closing code fences cannot have [info strings]:
 .
 Document[0, 16]
   FencedCodeBlock[0, 15] open:[0, 3, "```"] content:[4, 12] lines[1] close:[12, 15, "```"]
+    Text[4, 12] chars:[4, 12, "``` aaa\n"]
 ````````````````````````````````
 
 
@@ -3878,6 +3901,7 @@ a code block:
 .
 Document[0, 27]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[1] close:[16, 19, "```"]
+    Text[4, 16] chars:[4, 16, "[foo] … /url\n"]
   Paragraph[21, 27]
     LinkRef[21, 26] referenceOpen:[21, 22, "["] reference:[22, 25, "foo"] referenceClose:[25, 26, "]"]
       Text[22, 25] chars:[22, 25, "foo"]
@@ -5153,6 +5177,7 @@ Document[0, 53]
       Paragraph[4, 8] isTrailingBlankLine
         Text[4, 7] chars:[4, 7, "foo"]
       FencedCodeBlock[13, 32] open:[13, 16, "```"] content:[21, 25] lines[1] close:[29, 32, "```"]
+        Text[21, 25] chars:[21, 25, "bar\n"]
       Paragraph[38, 42] isTrailingBlankLine
         Text[38, 41] chars:[38, 41, "baz"]
       BlockQuote[47, 53] marker:[47, 48, ">"]
@@ -5523,6 +5548,7 @@ Document[0, 40]
         Text[4, 7] chars:[4, 7, "foo"]
     BulletListItem[8, 27] open:[8, 9, "-"] isTight
       FencedCodeBlock[12, 27] open:[12, 15, "```"] content:[18, 22] lines[1] close:[24, 27, "```"]
+        Text[18, 22] chars:[18, 22, "bar\n"]
     BulletListItem[28, 40] open:[28, 29, "-"] isTight
       IndentedCodeBlock[36, 40]
 ````````````````````````````````
@@ -6968,6 +6994,7 @@ Document[0, 26]
         Text[2, 3] chars:[2, 3, "a"]
     BulletListItem[4, 21] open:[4, 5, "-"] isTight hadBlankLineAfter
       FencedCodeBlock[6, 21] open:[6, 9, "```"] content:[12, 16] lines[3] close:[18, 21, "```"]
+        Text[12, 16] chars:[12, 16, "b\n\n\n"]
     BulletListItem[22, 26] open:[22, 23, "-"] isTight
       Paragraph[24, 26]
         Text[24, 25] chars:[24, 25, "c"]
@@ -7077,6 +7104,7 @@ Document[0, 30]
         Paragraph[8, 10]
           Text[8, 9] chars:[8, 9, "b"]
       FencedCodeBlock[12, 25] open:[12, 15, "```"] content:[18, 20] lines[1] close:[22, 25, "```"]
+        Text[18, 20] chars:[18, 20, "c\n"]
     BulletListItem[26, 30] open:[26, 27, "-"] isTight
       Paragraph[28, 30]
         Text[28, 29] chars:[28, 29, "d"]
@@ -7146,6 +7174,7 @@ Document[0, 29]
   OrderedList[0, 29] isLoose delimiter:'.'
     OrderedListItem[0, 29] open:[0, 2, "1."] isLoose hadBlankLineAfter
       FencedCodeBlock[3, 20] open:[3, 6, "```"] content:[10, 14] lines[1] close:[17, 20, "```"]
+        Text[10, 14] chars:[10, 14, "foo\n"]
       Paragraph[25, 29]
         Text[25, 28] chars:[25, 28, "bar"]
 ````````````````````````````````
@@ -7248,6 +7277,7 @@ Thus, for example, in
 Document[0, 8]
   Paragraph[0, 8]
     Code[0, 4] textOpen:[0, 1, "`"] text:[1, 3, "hi"] textClose:[3, 4, "`"]
+      Text[1, 3] chars:[1, 3, "hi"]
     Text[4, 7] chars:[4, 7, "lo`"]
 ````````````````````````````````
 
@@ -7369,6 +7399,7 @@ raw HTML:
 Document[0, 11]
   Paragraph[0, 11]
     Code[0, 10] textOpen:[0, 2, "``"] text:[2, 8, " \[\` "] textClose:[8, 10, "``"]
+      Text[2, 8] chars:[2, 8, " \[\` "]
 ````````````````````````````````
 
 
@@ -7393,6 +7424,7 @@ Document[0, 9]
 .
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "~~~"] content:[4, 9] lines[1] close:[9, 12, "~~~"]
+    Text[4, 9] chars:[4, 9, "\[\]\n"]
 ````````````````````````````````
 
 
@@ -7457,6 +7489,7 @@ foo
 .
 Document[0, 21]
   FencedCodeBlock[0, 20] open:[0, 3, "```"] info:[4, 12, "foo\+bar"] content:[13, 17] lines[1] close:[17, 20, "```"]
+    Text[13, 17] chars:[13, 17, "foo\n"]
 ````````````````````````````````
 
 
@@ -7655,6 +7688,7 @@ foo
 .
 Document[0, 26]
   FencedCodeBlock[0, 25] open:[0, 3, "```"] info:[4, 17, "f&ouml;&ouml;"] content:[18, 22] lines[1] close:[22, 25, "```"]
+    Text[18, 22] chars:[18, 22, "foo\n"]
 ````````````````````````````````
 
 
@@ -7669,6 +7703,7 @@ text in code spans and code blocks:
 Document[0, 16]
   Paragraph[0, 16]
     Code[0, 15] textOpen:[0, 1, "`"] text:[1, 14, "f&oum … l;&ouml;"] textClose:[14, 15, "`"]
+      Text[1, 14] chars:[1, 14, "f&oum … ouml;"]
 ````````````````````````````````
 
 
@@ -7705,6 +7740,7 @@ This is a simple code span:
 Document[0, 6]
   Paragraph[0, 6]
     Code[0, 5] textOpen:[0, 1, "`"] text:[1, 4, "foo"] textClose:[4, 5, "`"]
+      Text[1, 4] chars:[1, 4, "foo"]
 ````````````````````````````````
 
 
@@ -7719,6 +7755,7 @@ This example also illustrates stripping of leading and trailing spaces:
 Document[0, 17]
   Paragraph[0, 17]
     Code[0, 16] textOpen:[0, 2, "``"] text:[2, 14, " foo  … ` bar  "] textClose:[14, 16, "``"]
+      Text[2, 14] chars:[2, 14, " foo  … bar  "]
 ````````````````````````````````
 
 
@@ -7733,6 +7770,7 @@ spaces:
 Document[0, 7]
   Paragraph[0, 7]
     Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5, " `` "] textClose:[5, 6, "`"]
+      Text[1, 5] chars:[1, 5, " `` "]
 ````````````````````````````````
 
 
@@ -7748,6 +7786,7 @@ foo
 Document[0, 10]
   Paragraph[0, 10]
     Code[0, 9] textOpen:[0, 2, "``"] text:[2, 7, "\nfoo\n"] textClose:[7, 9, "``"]
+      Text[2, 7] chars:[2, 7, "\nfoo\n"]
 ````````````````````````````````
 
 
@@ -7793,6 +7832,7 @@ targeted.)
 Document[0, 13]
   Paragraph[0, 13]
     Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "foo `` bar"] textClose:[11, 12, "`"]
+      Text[1, 11] chars:[1, 11, "foo `` bar"]
 ````````````````````````````````
 
 
@@ -7807,6 +7847,7 @@ are treated literally:
 Document[0, 11]
   Paragraph[0, 11]
     Code[0, 6] textOpen:[0, 1, "`"] text:[1, 5, "foo\"] textClose:[5, 6, "`"]
+      Text[1, 5] chars:[1, 5, "foo\"]
     Text[6, 10] chars:[6, 10, "bar`"]
 ````````````````````````````````
 
@@ -7829,6 +7870,7 @@ Document[0, 8]
   Paragraph[0, 8]
     Text[0, 4] chars:[0, 4, "*foo"]
     Code[4, 7] textOpen:[4, 5, "`"] text:[5, 6, "*"] textClose:[6, 7, "`"]
+      Text[5, 6] chars:[5, 6, "*"]
 ````````````````````````````````
 
 
@@ -7843,6 +7885,7 @@ Document[0, 21]
   Paragraph[0, 21]
     Text[0, 7] chars:[0, 7, "[not a "]
     Code[7, 19] textOpen:[7, 8, "`"] text:[8, 18, "link](/foo"] textClose:[18, 19, "`"]
+      Text[8, 18] chars:[8, 18, "link](/foo"]
     Text[19, 20] chars:[19, 20, ")"]
 ````````````````````````````````
 
@@ -7858,6 +7901,7 @@ Thus, this is code:
 Document[0, 15]
   Paragraph[0, 15]
     Code[0, 11] textOpen:[0, 1, "`"] text:[1, 10, "<a href=\""] textClose:[10, 11, "`"]
+      Text[1, 10] chars:[1, 10, "<a href=\""]
     Text[11, 14] chars:[11, 14, "\">`"]
 ````````````````````````````````
 
@@ -7886,6 +7930,7 @@ And this is code:
 Document[0, 24]
   Paragraph[0, 24]
     Code[0, 18] textOpen:[0, 1, "`"] text:[1, 17, "<http … ://foo.bar."] textClose:[17, 18, "`"]
+      Text[1, 17] chars:[1, 17, "<http … .bar."]
     Text[18, 23] chars:[18, 23, "baz>`"]
 ````````````````````````````````
 
@@ -9957,6 +10002,7 @@ Document[0, 8]
     Emphasis[0, 7] textOpen:[0, 1, "*"] text:[1, 6, "a `*`"] textClose:[6, 7, "*"]
       Text[1, 3] chars:[1, 3, "a "]
       Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5, "*"] textClose:[5, 6, "`"]
+        Text[4, 5] chars:[4, 5, "*"]
 ````````````````````````````````
 
 
@@ -9970,6 +10016,7 @@ Document[0, 8]
     Emphasis[0, 7] textOpen:[0, 1, "_"] text:[1, 6, "a `_`"] textClose:[6, 7, "_"]
       Text[1, 3] chars:[1, 3, "a "]
       Code[3, 6] textOpen:[3, 4, "`"] text:[4, 5, "_"] textClose:[5, 6, "`"]
+        Text[4, 5] chars:[4, 5, "_"]
 ````````````````````````````````
 
 
@@ -10544,6 +10591,7 @@ Document[0, 31]
           Text[13, 16] chars:[13, 16, "bar"]
         Text[18, 19] chars:[18, 19, " "]
         Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21, "#"] textClose:[21, 22, "`"]
+          Text[20, 21] chars:[20, 21, "#"]
 ````````````````````````````````
 
 
@@ -10679,6 +10727,7 @@ Document[0, 14]
   Paragraph[0, 14]
     Text[0, 4] chars:[0, 4, "[foo"]
     Code[4, 13] textOpen:[4, 5, "`"] text:[5, 12, "](/uri)"] textClose:[12, 13, "`"]
+      Text[5, 12] chars:[5, 12, "](/uri)"]
 ````````````````````````````````
 
 
@@ -10792,6 +10841,7 @@ Document[0, 43]
           Text[13, 16] chars:[13, 16, "bar"]
         Text[18, 19] chars:[18, 19, " "]
         Code[19, 22] textOpen:[19, 20, "`"] text:[20, 21, "#"] textClose:[21, 22, "`"]
+          Text[20, 21] chars:[20, 21, "#"]
   Reference[31, 42] refOpen:[31, 32, "["] ref:[32, 35, "ref"] refClose:[35, 37, "]:"] url:[38, 42, "/uri"]
 ````````````````````````````````
 
@@ -10920,6 +10970,7 @@ Document[0, 26]
   Paragraph[0, 13] isTrailingBlankLine
     Text[0, 4] chars:[0, 4, "[foo"]
     Code[4, 12] textOpen:[4, 5, "`"] text:[5, 11, "][ref]"] textClose:[11, 12, "`"]
+      Text[5, 11] chars:[5, 11, "][ref]"]
   Reference[14, 25] refOpen:[14, 15, "["] ref:[15, 18, "ref"] refClose:[18, 20, "]:"] url:[21, 25, "/uri"]
 ````````````````````````````````
 
@@ -12745,6 +12796,7 @@ span`
 Document[0, 14]
   Paragraph[0, 14]
     Code[0, 13] textOpen:[0, 1, "`"] text:[1, 12, "code  …  \nspan"] textClose:[12, 13, "`"]
+      Text[1, 12] chars:[1, 12, "code  … \nspan"]
 ````````````````````````````````
 
 
@@ -12757,6 +12809,7 @@ span`
 Document[0, 13]
   Paragraph[0, 13]
     Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "code\\nspan"] textClose:[11, 12, "`"]
+      Text[1, 11] chars:[1, 11, "code\\nspan"]
 ````````````````````````````````
 
 

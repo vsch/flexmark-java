@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.0](#0190)
 - [0.18.9](#0189)
 - [0.18.8](#0188)
 - [0.18.7](#0187)
@@ -141,6 +142,18 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.0
+------
+
+* Fix: #93, Adding TextCollectingVisitor class handlers
+
+* Change: add `Parser.FENCED_CODE_BLOCK_PARSER` as replacement for `Parser.CODE_CONTENT_BLOCK`
+  with the latter marked as deprecated.
+
+* API Change: add child `Text` nodes to `Code` and `FencedCodeBlock` that contain the text of
+  the element. NOTE: text node is only added to `FencedCodeBlock` if
+  `Parser.FENCED_CODE_CONTENT_BLOCK` is `false`, otherwise `CodeContent` block is used.
 
 0.18.9
 ------

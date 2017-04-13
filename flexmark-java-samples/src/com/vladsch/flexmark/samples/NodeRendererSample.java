@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.samples;
 
-import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.abbreviation.internal.AbbreviationOptions;
 import com.vladsch.flexmark.ext.autolink.AutolinkExtension;

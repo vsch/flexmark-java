@@ -77,6 +77,7 @@ Document[0, 304]
       Text[75, 92] chars:[75, 92, "lazy  … ation"]
   BlankLine[93, 94]
   FencedCodeBlock[94, 181] open:[94, 97, "~~~"] info:[97, 101, "info"] content:[102, 178] lines[3] close:[178, 181, "~~~"]
+    Text[102, 178] chars:[102, 178, "      … code\n"]
   BlankLine[183, 184]
   IndentedCodeBlock[188, 260]
   OrderedList[260, 304] isTight delimiter:'.'

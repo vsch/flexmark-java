@@ -52,6 +52,7 @@ Code fence starting with setext header marker
 .
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
+    Text[12, 16] chars:[12, 16, "---\n"]
 ````````````````````````````````
 
 
@@ -65,6 +66,7 @@ Document[0, 20]
 .
 Document[0, 20]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 16] lines[1] close:[16, 19, "```"]
+    Text[12, 16] chars:[12, 16, "===\n"]
 ````````````````````````````````
 
 
@@ -233,6 +235,7 @@ Document[0, 159]
       Text[33, 39] chars:[33, 39, "italic"]
     Text[40, 45] chars:[40, 45, " and "]
     Code[45, 51] textOpen:[45, 46, "`"] text:[46, 50, "code"] textClose:[50, 51, "`"]
+      Text[46, 50] chars:[46, 50, "code"]
   Heading[53, 158] text:[53, 105, "Setext Heading with **bold** and _italic_ and `code`"] textClose:[106, 158, "----------------------------------------------------"]
     Text[53, 73] chars:[53, 73, "Setex … with "]
     StrongEmphasis[73, 81] textOpen:[73, 75, "**"] text:[75, 79, "bold"] textClose:[79, 81, "**"]
@@ -242,6 +245,7 @@ Document[0, 159]
       Text[87, 93] chars:[87, 93, "italic"]
     Text[94, 99] chars:[94, 99, " and "]
     Code[99, 105] textOpen:[99, 100, "`"] text:[100, 104, "code"] textClose:[104, 105, "`"]
+      Text[100, 104] chars:[100, 104, "code"]
 ````````````````````````````````
 
 
@@ -3429,12 +3433,17 @@ Document[0, 82]
   Paragraph[0, 82]
     Text[0, 12] chars:[0, 12, "pleas … add  "]
     Code[12, 24] textOpen:[12, 13, "`"] text:[13, 23, "add_gtest("] textClose:[23, 24, "`"]
+      Text[13, 23] chars:[13, 23, "add_gtest("]
     StrongEmphasis[24, 43] textOpen:[24, 26, "**"] text:[26, 41, "`your_unittest`"] textClose:[41, 43, "**"]
       Code[26, 41] textOpen:[26, 27, "`"] text:[27, 40, "your_ … unittest"] textClose:[40, 41, "`"]
+        Text[27, 40] chars:[27, 40, "your_ … ttest"]
     Code[43, 46] textOpen:[43, 44, "`"] text:[44, 45, " "] textClose:[45, 46, "`"]
+      Text[44, 45] chars:[44, 45, " "]
     StrongEmphasis[46, 77] textOpen:[46, 48, "**"] text:[48, 75, "`your_unittest_unittest.cc`"] textClose:[75, 77, "**"]
       Code[48, 75] textOpen:[48, 49, "`"] text:[49, 74, "your_ … unittest_unittest.cc"] textClose:[74, 75, "`"]
+        Text[49, 74] chars:[49, 74, "your_ … st.cc"]
     Code[77, 81] textOpen:[77, 78, "`"] text:[78, 80, " )"] textClose:[80, 81, "`"]
+      Text[78, 80] chars:[78, 80, " )"]
 ````````````````````````````````
 
 
@@ -3586,9 +3595,12 @@ code mixed with emphasis:
 Document[0, 32]
   Paragraph[0, 32]
     Code[0, 12] textOpen:[0, 1, "`"] text:[1, 11, "code with "] textClose:[11, 12, "`"]
+      Text[1, 11] chars:[1, 11, "code with "]
     StrongEmphasis[12, 22] textOpen:[12, 14, "**"] text:[14, 20, "`bold`"] textClose:[20, 22, "**"]
       Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "bold"] textClose:[19, 20, "`"]
+        Text[15, 19] chars:[15, 19, "bold"]
     Code[22, 31] textOpen:[22, 23, "`"] text:[23, 30, " inside"] textClose:[30, 31, "`"]
+      Text[23, 30] chars:[23, 30, " inside"]
 ````````````````````````````````
 
 
@@ -3606,6 +3618,7 @@ plain text
 .
 Document[0, 22]
   FencedCodeBlock[0, 22] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 19] lines[1] close:[19, 22, "```"]
+    Text[8, 19] chars:[8, 19, "plain … text\n"]
 ````````````````````````````````
 
 
@@ -3621,6 +3634,7 @@ plain text
 .
 Document[0, 18]
   FencedCodeBlock[0, 18] open:[0, 3, "```"] content:[4, 15] lines[1] close:[15, 18, "```"]
+    Text[4, 15] chars:[4, 15, "plain … text\n"]
 ````````````````````````````````
 
 
@@ -3649,6 +3663,7 @@ empty, no info
 .
 Document[0, 9]
   FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
+    Text[4, 5] chars:[4, 5, "\n"]
 ````````````````````````````````
 
 
@@ -3665,6 +3680,7 @@ empty, no info, blank line follows
 .
 Document[0, 10]
   FencedCodeBlock[0, 8] open:[0, 3, "```"] content:[4, 5] lines[1] close:[5, 8, "```"]
+    Text[4, 5] chars:[4, 5, "\n"]
 ````````````````````````````````
 
 
@@ -3680,6 +3696,7 @@ empty, info
 .
 Document[0, 13]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
+    Text[8, 9] chars:[8, 9, "\n"]
 ````````````````````````````````
 
 
@@ -3696,6 +3713,7 @@ empty, info, blank line follows
 .
 Document[0, 14]
   FencedCodeBlock[0, 12] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 9] lines[1] close:[9, 12, "```"]
+    Text[8, 9] chars:[8, 9, "\n"]
 ````````````````````````````````
 
 
@@ -3726,6 +3744,7 @@ code
 .
 Document[0, 38]
   FencedCodeBlock[0, 38] open:[0, 3, "```"] content:[4, 38] lines[9]
+    Text[4, 38] chars:[4, 38, "sampl … e\n\n\n\n"]
 ````````````````````````````````
 
 
@@ -4009,6 +4028,7 @@ proper unmatched fenced code
 .
 Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "```"] content:[4, 33] lines[1] close:[33, 36, "~~~"]
+    Text[4, 33] chars:[4, 33, "prope … code\n"]
 ````````````````````````````````
 
 
@@ -4022,6 +4042,7 @@ proper unmatched fenced code
 .
 Document[0, 36]
   FencedCodeBlock[0, 36] open:[0, 3, "~~~"] content:[4, 33] lines[1] close:[33, 36, "```"]
+    Text[4, 33] chars:[4, 33, "prope … code\n"]
 ````````````````````````````````
 
 
@@ -4038,6 +4059,7 @@ some text
 .
 Document[0, 23]
   FencedCodeBlock[0, 21] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 18] lines[1] close:[18, 21, "~~~"]
+    Text[8, 18] chars:[8, 18, "some text\n"]
 ````````````````````````````````
 
 
@@ -4799,6 +4821,7 @@ Document[0, 230]
     AutoLink[0, 12] textOpen:[0, 1, "<"] text:[1, 11, "http://url"] textClose:[11, 12, ">"]
     SoftLineBreak[13, 14]
     Code[14, 20] textOpen:[14, 15, "`"] text:[15, 19, "code"] textClose:[19, 20, "`"]
+      Text[15, 19] chars:[15, 19, "code"]
     SoftLineBreak[21, 22]
     Emphasis[22, 28] textOpen:[22, 23, "_"] text:[23, 27, "text"] textClose:[27, 28, "_"]
       Text[23, 27] chars:[23, 27, "text"]
@@ -4858,6 +4881,7 @@ text
 .
 Document[0, 18]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
+    Text[8, 13] chars:[8, 13, "text\n"]
 ````````````````````````````````
 
 
@@ -4876,6 +4900,7 @@ test
 .
 Document[0, 24]
   FencedCodeBlock[0, 16] open:[0, 3, "```"] info:[3, 7, "text"] content:[8, 13] lines[1] close:[13, 16, "```"]
+    Text[8, 13] chars:[8, 13, "text\n"]
   Paragraph[20, 24]
     Text[20, 24] chars:[20, 24, "test"]
 ````````````````````````````````
@@ -5626,6 +5651,7 @@ Document[0, 28]
       Text[11, 17] chars:[11, 17, "italic"]
   Paragraph[20, 27] isTrailingBlankLine
     Code[20, 26] textOpen:[20, 21, "`"] text:[21, 25, "code"] textClose:[25, 26, "`"]
+      Text[21, 25] chars:[21, 25, "code"]
 ````````````````````````````````
 
 
@@ -5652,6 +5678,7 @@ Document[0, 28]
       Text[11, 17] chars:[11, 17, "italic"]
   Paragraph[20, 27] isTrailingBlankLine
     Code[20, 26] textOpen:[20, 21, "`"] text:[21, 25, "code"] textClose:[25, 26, "`"]
+      Text[21, 25] chars:[21, 25, "code"]
 ````````````````````````````````
 
 
@@ -5678,6 +5705,7 @@ Document[0, 28]
       Text[11, 17] chars:[11, 17, "italic"]
   Paragraph[20, 27] isTrailingBlankLine
     Code[20, 26] textOpen:[20, 21, "`"] text:[21, 25, "code"] textClose:[25, 26, "`"]
+      Text[21, 25] chars:[21, 25, "code"]
 ````````````````````````````````
 
 

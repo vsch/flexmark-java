@@ -95,6 +95,7 @@ Document[0, 63]
       Text[30, 45] chars:[30, 45, "stron … hasis"]
     Text[47, 49] chars:[47, 49, ", "]
     Code[49, 62] textOpen:[49, 50, "`"] text:[50, 61, "inlin … e code"] textClose:[61, 62, "`"]
+      Text[50, 61] chars:[50, 61, "inlin …  code"]
 ````````````````````````````````
 
 
@@ -461,6 +462,7 @@ fenced code
 .
 Document[0, 21]
   FencedCodeBlock[0, 19] open:[0, 3, "```"] content:[4, 16] lines[1] close:[16, 19, "```"]
+    Text[4, 16] chars:[4, 16, "fence … code\n"]
 ````````````````````````````````
 
 
@@ -479,6 +481,7 @@ fenced code
 .
 Document[0, 27]
   FencedCodeBlock[0, 25] open:[0, 3, "```"] info:[3, 9, "kotlin"] content:[10, 22] lines[1] close:[22, 25, "```"]
+    Text[10, 22] chars:[10, 22, "fence … code\n"]
 ````````````````````````````````
 
 
@@ -976,6 +979,7 @@ Document[0, 48]
             Text[23, 26] chars:[23, 26, "ref"]
         TableCell[28, 34] text:[28, 34, "`code`"]
           Code[28, 34] textOpen:[28, 29, "`"] text:[29, 33, "code"] textClose:[33, 34, "`"]
+            Text[29, 33] chars:[29, 33, "code"]
   Reference[36, 47] refOpen:[36, 37, "["] ref:[37, 40, "ref"] refClose:[40, 42, "]:"] url:[43, 47, "/url"]
 ````````````````````````````````
 
@@ -1229,6 +1233,7 @@ Document[0, 322]
       Paragraph[2, 41] isTrailingBlankLine
         Text[2, 36] chars:[2, 36, "Add:  … with "]
         Code[36, 39] textOpen:[36, 37, "`"] text:[37, 38, "."] textClose:[38, 39, "`"]
+          Text[37, 38] chars:[37, 38, "."]
   TableBlock[43, 322]
     TableHead[43, 98]
       TableRow[43, 98] rowNumber=1
@@ -1253,11 +1258,13 @@ Document[0, 322]
         TableCell[172, 190] text:[172, 189, " `.abbreviation` "] textClose:[189, 190, "|"]
           Text[172, 173] chars:[172, 173, " "]
           Code[173, 188] textOpen:[173, 174, "`"] text:[174, 187, ".abbr … eviation"] textClose:[187, 188, "`"]
+            Text[174, 187] chars:[174, 187, ".abbr … ation"]
           Text[188, 188]
           Text[188, 189] chars:[188, 189, " "]
         TableCell[190, 210] text:[190, 209, " `*[]: `           "] textClose:[209, 210, "|"]
           Text[190, 191] chars:[190, 191, " "]
           Code[191, 198] textOpen:[191, 192, "`"] text:[192, 197, "*[]: "] textClose:[197, 198, "`"]
+            Text[192, 197] chars:[192, 197, "*[]: "]
           Text[198, 198]
           Text[198, 209] chars:[198, 209, "      …      "]
       TableRow[211, 266] rowNumber=2
@@ -1266,6 +1273,7 @@ Document[0, 322]
         TableCell[228, 246] text:[228, 245, " `.codefence`    "] textClose:[245, 246, "|"]
           Text[228, 229] chars:[228, 229, " "]
           Code[229, 241] textOpen:[229, 230, "`"] text:[230, 240, ".codefence"] textClose:[240, 241, "`"]
+            Text[230, 240] chars:[230, 240, ".codefence"]
           Text[241, 241]
           Text[241, 245] chars:[241, 245, "    "]
         TableCell[246, 266] text:[246, 265, " \`\`\` ... \`\`\` "] textClose:[265, 266, "|"]
@@ -1276,11 +1284,13 @@ Document[0, 322]
         TableCell[284, 302] text:[284, 301, " `.link`         "] textClose:[301, 302, "|"]
           Text[284, 285] chars:[284, 285, " "]
           Code[285, 292] textOpen:[285, 286, "`"] text:[286, 291, ".link"] textClose:[291, 292, "`"]
+            Text[286, 291] chars:[286, 291, ".link"]
           Text[292, 292]
           Text[292, 301] chars:[292, 301, "         "]
         TableCell[302, 322] text:[302, 321, " `[]()`            "] textClose:[321, 322, "|"]
           Text[302, 303] chars:[302, 303, " "]
           Code[303, 309] textOpen:[303, 304, "`"] text:[304, 308, "[]()"] textClose:[308, 309, "`"]
+            Text[304, 308] chars:[304, 308, "[]()"]
           Text[309, 309]
           Text[309, 321] chars:[309, 321, "      …      "]
 ````````````````````````````````
@@ -1512,8 +1522,10 @@ Document[0, 10153]
         TableCell[1430, 1553] LEFT textOpen:[1430, 1431, "|"] text:[1432, 1510, "GFM Task list extension `* [ ]` open task item and `* [x]` completed task item"] textClose:[1552, 1553, "|"]
           Text[1432, 1456] chars:[1432, 1456, "GFM T … sion "]
           Code[1456, 1463] textOpen:[1456, 1457, "`"] text:[1457, 1462, "* [ ]"] textClose:[1462, 1463, "`"]
+            Text[1457, 1462] chars:[1457, 1462, "* [ ]"]
           Text[1463, 1483] chars:[1463, 1483, " open …  and "]
           Code[1483, 1490] textOpen:[1483, 1484, "`"] text:[1484, 1489, "* [x]"] textClose:[1489, 1490, "`"]
+            Text[1484, 1489] chars:[1484, 1489, "* [x]"]
           Text[1490, 1510] chars:[1490, 1510, " comp …  item"]
         TableCell[1553, 1561] CENTER text:[1556, 1557, "X"] textClose:[1560, 1561, "|"]
           Text[1556, 1557] chars:[1556, 1557, "X"]
@@ -1777,6 +1789,7 @@ Document[0, 10153]
           HtmlEntity[5454, 5460] "&nbsp;"
           Text[5460, 5490] chars:[5460, 5490, "ATX h … ling "]
           Code[5490, 5493] textOpen:[5490, 5491, "`"] text:[5491, 5492, "#"] textClose:[5492, 5493, "`"]
+            Text[5491, 5492] chars:[5491, 5492, "#"]
           Text[5493, 5500] chars:[5493, 5500, " marker"]
         TableCell[5557, 5565] CENTER textClose:[5564, 5565, "|"]
         TableCell[5565, 5576] CENTER text:[5569, 5570, "X"] textClose:[5575, 5576, "|"]
@@ -1937,6 +1950,7 @@ Document[0, 10153]
           HtmlEntity[7456, 7462] "&nbsp;"
           Text[7462, 7495] chars:[7462, 7495, "GitHu … fter "]
           Code[7495, 7504] textOpen:[7495, 7496, "`"] text:[7496, 7503, "issues/"] textClose:[7503, 7504, "`"]
+            Text[7496, 7503] chars:[7496, 7503, "issues/"]
           Text[7504, 7529] chars:[7504, 7529, " link …  text"]
         TableCell[7559, 7567] CENTER textClose:[7566, 7567, "|"]
         TableCell[7567, 7578] CENTER text:[7571, 7572, "X"] textClose:[7577, 7578, "|"]

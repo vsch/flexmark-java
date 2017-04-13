@@ -114,7 +114,10 @@ public final class SegmentedSequence extends BasedSequenceImpl {
         ArrayList<BasedSequence> mergedSequences = new ArrayList<BasedSequence>();
 
         for (BasedSequence basedSequence : segments) {
-            assert base == basedSequence.getBaseSequence() : "all segments must come from the same base sequence";
+            if (base.getBase() != basedSequence.getBase()) {
+                int tmp = 0;
+            }
+            assert base.getBase() == basedSequence.getBase() : "all segments must come from the same base sequence";
 
             if (basedSequence instanceof PrefixedSubSequence || basedSequence instanceof SegmentedSequence) {
                 if (lastSegment != null) mergedSequences.add(lastSegment);
@@ -148,10 +151,13 @@ public final class SegmentedSequence extends BasedSequenceImpl {
 
         int length = 0;
 
-        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : null;
+        BasedSequence base = segments.size() > 0 ? segments.get(0).getBaseSequence() : SubSequence.NULL;
 
         for (BasedSequence basedSequence : segments) {
-            assert base == basedSequence.getBaseSequence() : "all segments must come from the same base sequence";
+            if (base.getBase() != basedSequence.getBase()) {
+                int tmp = 0;
+            }
+            assert base.getBase() == basedSequence.getBase() : "all segments must come from the same base sequence";
             assert basedSequence.getStartOffset() >= length : "segments must be in increasing index order from base sequence start=" + basedSequence.getStartOffset() + ", length=" + length;
             length += basedSequence.length();
         }

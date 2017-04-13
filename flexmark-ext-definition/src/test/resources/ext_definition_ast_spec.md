@@ -201,6 +201,7 @@ some stuff
 .
 Document[0, 47]
   FencedCodeBlock[0, 26] open:[0, 3, "```"] info:[3, 11, "markdown"] content:[12, 23] lines[1] close:[23, 26, "```"]
+    Text[12, 23] chars:[12, 23, "some  … tuff\n"]
   Paragraph[28, 47]
     Text[28, 45] chars:[28, 45, ": def …  item"]
 ````````````````````````````````
@@ -898,6 +899,7 @@ Document[0, 41]
       Paragraph[22, 41]
         Text[22, 33] chars:[22, 33, "defin … tion "]
         Code[33, 39] textOpen:[33, 34, "`"] text:[34, 38, "item"] textClose:[38, 39, "`"]
+          Text[34, 38] chars:[34, 38, "item"]
 ````````````````````````````````
 
 
@@ -926,6 +928,7 @@ Document[0, 66]
       Paragraph[48, 66]
         Text[48, 59] chars:[48, 59, "defin … tion "]
         Code[59, 65] textOpen:[59, 60, "`"] text:[60, 64, "item"] textClose:[64, 65, "`"]
+          Text[60, 64] chars:[60, 64, "item"]
 ````````````````````````````````
 
 
@@ -1003,6 +1006,7 @@ Document[0, 124]
       Paragraph[22, 41] isTrailingBlankLine
         Text[22, 33] chars:[22, 33, "defin … tion "]
         Code[33, 39] textOpen:[33, 34, "`"] text:[34, 38, "item"] textClose:[38, 39, "`"]
+          Text[34, 38] chars:[34, 38, "item"]
       Paragraph[48, 58] isTrailingBlankLine
         Text[48, 57] chars:[48, 57, "paragraph"]
       BulletList[65, 94] isTight

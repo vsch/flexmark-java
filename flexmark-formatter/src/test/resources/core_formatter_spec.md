@@ -76,6 +76,7 @@ Document[0, 304]
       Text[75, 92] chars:[75, 92, "lazy  … ation"]
   BlankLine[93, 94]
   FencedCodeBlock[94, 181] open:[94, 97, "~~~"] info:[97, 101, "info"] content:[102, 178] lines[3] close:[178, 181, "~~~"]
+    Text[102, 178] chars:[102, 178, "      … code\n"]
   BlankLine[183, 184]
   IndentedCodeBlock[188, 260]
   OrderedList[260, 304] isTight delimiter:'.'
@@ -686,6 +687,7 @@ Document[0, 131]
         SoftLineBreak[15, 16]
         Text[18, 35] chars:[18, 35, "lazy  … ation"]
     FencedCodeBlock[41, 85] open:[41, 44, "~~~"] info:[44, 48, "info"] content:[51, 80] lines[2] close:[82, 85, "~~~"]
+      Text[51, 80] chars:[51, 80, "      … code\n"]
     IndentedCodeBlock[96, 111]
     OrderedList[113, 131] isTight delimiter:'.'
       OrderedListItem[113, 131] open:[113, 115, "1."] isTight

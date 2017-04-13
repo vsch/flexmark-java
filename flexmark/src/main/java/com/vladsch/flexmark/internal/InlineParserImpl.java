@@ -943,7 +943,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             if (matched.equals(ticks)) {
                 int ticksLength = ticks.length();
                 BasedSequence content = input.subSequence(afterOpenTicks - ticksLength, index - ticksLength);
-                Code node = new Code(input.subSequence(afterOpenTicks - ticksLength, afterOpenTicks), input.subSequence(afterOpenTicks, index - ticksLength), input.subSequence(index - ticksLength, index));
+                final BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
+                final Text textNode = new Text(codeText);
+                Code node = new Code(input.subSequence(afterOpenTicks - ticksLength, afterOpenTicks), codeText, input.subSequence(index - ticksLength, index));
+                node.appendChild(textNode);
                 appendNode(node);
                 return true;
             }

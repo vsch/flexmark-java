@@ -47,23 +47,24 @@ public class Html5Entities {
 
     public static BasedSequence entityToSequence(BasedSequence input) {
         Matcher matcher = NUMERIC_PATTERN.matcher(input);
+        final BasedSequence baseSeq = input.subSequence(0, 0);
 
         if (matcher.find()) {
             int base = matcher.end() == 2 ? 10 : 16;
             try {
                 int codePoint = Integer.parseInt(input.subSequence(matcher.end(), input.length() - 1).toString(), base);
                 if (codePoint == 0) {
-                    return PrefixedSubSequence.of("\uFFFD", BasedSequence.NULL);
+                    return PrefixedSubSequence.of("\uFFFD", baseSeq);
                 }
-                return PrefixedSubSequence.of(Arrays.toString(Character.toChars(codePoint)), BasedSequence.NULL);
+                return PrefixedSubSequence.of(Arrays.toString(Character.toChars(codePoint)), baseSeq);
             } catch (IllegalArgumentException e) {
-                return PrefixedSubSequence.of("\uFFFD", BasedSequence.NULL);
+                return PrefixedSubSequence.of("\uFFFD", baseSeq);
             }
         } else {
             String name = input.subSequence(1, input.length() - 1).toString();
             String s = NAMED_CHARACTER_REFERENCES.get(name);
             if (s != null) {
-                return PrefixedSubSequence.of(s, BasedSequence.NULL);
+                return PrefixedSubSequence.of(s, baseSeq);
             } else {
                 return input;
             }

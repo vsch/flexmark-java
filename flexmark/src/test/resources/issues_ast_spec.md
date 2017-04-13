@@ -226,3 +226,51 @@ Document[0, 80]
 ````````````````````````````````
 
 
+emphasis should have text child
+
+```````````````````````````````` example Issue 75: 3
+Test text **emphasis**
+.
+<p>Test text <strong>emphasis</strong></p>
+.
+Document[0, 23]
+  Paragraph[0, 23]
+    Text[0, 10] chars:[0, 10, "Test text "]
+    StrongEmphasis[10, 22] textOpen:[10, 12, "**"] text:[12, 20, "emphasis"] textClose:[20, 22, "**"]
+      Text[12, 20] chars:[12, 20, "emphasis"]
+````````````````````````````````
+
+
+inline code should have text child
+
+```````````````````````````````` example Issue 75: 4
+Test text `inline code`
+.
+<p>Test text <code>inline code</code></p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 10] chars:[0, 10, "Test text "]
+    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "inlin … e code"] textClose:[22, 23, "`"]
+      Text[11, 22] chars:[11, 22, "inlin …  code"]
+````````````````````````````````
+
+
+fenced code should have text child
+
+```````````````````````````````` example Issue 75: 5
+```info
+fenced code
+lines
+```
+.
+<pre><code class="language-info">fenced code
+lines
+</code></pre>
+.
+Document[0, 30]
+  FencedCodeBlock[0, 29] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 26] lines[2] close:[26, 29, "```"]
+    Text[8, 26] chars:[8, 26, "fence … ines\n"]
+````````````````````````````````
+
+

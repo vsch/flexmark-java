@@ -35,7 +35,7 @@ public class ReplacedTextMapper {
     }
 
     public BasedSequence getReplacedSequence() {
-        return SegmentedSequence.of(replacedSegments, BasedSequence.NULL);
+        return SegmentedSequence.of(replacedSegments, original.subSequence(0, 0));
     }
 
     public int getReplacedLength() {

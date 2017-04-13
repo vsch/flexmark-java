@@ -572,7 +572,7 @@ public class Table {
         ) {
             BasedSequence chars = BasedSequenceImpl.of(text);
             this.openMarker = BasedSequenceImpl.of(openMarker);
-            this.text = chars.isEmpty() ? BasedSequence.SPACE : chars;
+            this.text = chars.isEmpty() ? PrefixedSubSequence.of(" ", this.openMarker.subSequence(this.openMarker.length(), this.openMarker.length())) : chars;
             this.closeMarker = BasedSequenceImpl.of(closeMarker);
             this.rowSpan = rowSpan;
             this.columnSpan = columnSpan;

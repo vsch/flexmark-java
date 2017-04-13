@@ -18,7 +18,7 @@ public class IndentedCodeBlockParser extends AbstractBlockParser {
 
     public IndentedCodeBlockParser(DataHolder options) {
         trimTrailingBlankLines = options.get(Parser.INDENTED_CODE_NO_TRAILING_BLANK_LINES);
-        this.codeContentBlock = options.get(Parser.CODE_CONTENT_BLOCK);
+        this.codeContentBlock = options.get(Parser.FENCED_CODE_CONTENT_BLOCK);
     }
 
     @Override

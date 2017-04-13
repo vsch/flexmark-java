@@ -1,18 +1,14 @@
 package com.vladsch.flexmark.samples;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.Document;
+import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.ast.Text;
+import com.vladsch.flexmark.ast.TextBase;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.parser.PostProcessor;
-import com.vladsch.flexmark.parser.PostProcessorFactory;
-import com.vladsch.flexmark.parser.block.DocumentPostProcessor;
-import com.vladsch.flexmark.parser.block.DocumentPostProcessorFactory;
-import com.vladsch.flexmark.parser.block.NodePostProcessor;
-import com.vladsch.flexmark.parser.block.NodePostProcessorFactory;
-import com.vladsch.flexmark.util.NodeTracker;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
@@ -20,9 +16,7 @@ import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.ReplacedTextMapper;
-import com.vladsch.flexmark.util.sequence.SubSequence;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

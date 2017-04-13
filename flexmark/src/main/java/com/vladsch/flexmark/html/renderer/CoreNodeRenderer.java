@@ -42,7 +42,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         this.recheckUndefinedReferences = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
         this.obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.getFrom(options);
         this.obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.getFrom(options);
-        this.codeContentBlock = Parser.CODE_CONTENT_BLOCK.getFrom(options);
+        this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
     }
 
     @Override
