@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.1](#0191)
 - [0.19.0](#0190)
 - [0.18.9](#0189)
 - [0.18.8](#0188)
@@ -142,6 +143,11 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.1
+------
+
+* Fix: #97, Use UnsupportedOperationException
 
 0.19.0
 ------
