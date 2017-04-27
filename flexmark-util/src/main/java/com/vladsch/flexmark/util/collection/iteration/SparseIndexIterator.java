@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.util.collection.iteration;
 
 import com.vladsch.flexmark.util.collection.Consumer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.NoSuchElementException;
 
@@ -64,7 +63,7 @@ public class SparseIndexIterator implements ReversibleIterator<Integer> {
 
     @Override
     public void remove() {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     public void forEachRemaining(Consumer<? super Integer> consumer) {
