@@ -3211,4 +3211,88 @@ Document[0, 564]
               Text[513, 563] chars:[513, 563, "      …      "]
 ````````````````````````````````
 
+Issue #95, TextCollectingVisitor collects 2nd row of table heading
+
+```````````````````````````````` example Source Position Attribute: 3
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :---         |     :---:      |          ---: |
+| git status   | git status     | git status    |
+| git diff     | git diff       | git diff      |
+.
+<table>
+  <thead>
+    <tr><th>First Header</th><th>Second Header</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Content Cell</td><td>Content Cell</td></tr>
+  </tbody>
+</table>
+<table>
+  <thead>
+    <tr><th align="left">Left-aligned</th><th align="center">Center-aligned</th><th align="right">Right-aligned</th></tr>
+  </thead>
+  <tbody>
+    <tr><td align="left">git status</td><td align="center">git status</td><td align="right">git status</td></tr>
+    <tr><td align="left">git diff</td><td align="center">git diff</td><td align="right">git diff</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 303]
+  TableBlock[0, 102]
+    TableHead[0, 33]
+      TableRow[0, 33] rowNumber=1
+        TableCell[0, 17] header textOpen:[0, 1, "|"] text:[2, 14, "First Header"] textClose:[16, 17, "|"]
+          Text[2, 14] chars:[2, 14, "First … eader"]
+        TableCell[17, 33] header text:[18, 31, "Second Header"] textClose:[32, 33, "|"]
+          Text[18, 31] chars:[18, 31, "Secon … eader"]
+    TableSeparator[34, 67]
+      TableRow[34, 67]
+        TableCell[34, 51] textOpen:[34, 35, "|"] text:[36, 49, "-------------"] textClose:[50, 51, "|"]
+          Text[36, 49] chars:[36, 49, "----- … -----"]
+        TableCell[51, 67] text:[52, 65, "-------------"] textClose:[66, 67, "|"]
+          Text[52, 65] chars:[52, 65, "----- … -----"]
+    TableBody[68, 101]
+      TableRow[68, 101] rowNumber=1
+        TableCell[68, 85] textOpen:[68, 69, "|"] text:[70, 82, "Content Cell"] textClose:[84, 85, "|"]
+          Text[70, 82] chars:[70, 82, "Conte …  Cell"]
+        TableCell[85, 101] text:[86, 98, "Content Cell"] textClose:[100, 101, "|"]
+          Text[86, 98] chars:[86, 98, "Conte …  Cell"]
+  TableBlock[103, 303]
+    TableHead[103, 152]
+      TableRow[103, 152] rowNumber=1
+        TableCell[103, 119] LEFT header textOpen:[103, 104, "|"] text:[105, 117, "Left-aligned"] textClose:[118, 119, "|"]
+          Text[105, 117] chars:[105, 117, "Left- … igned"]
+        TableCell[119, 136] CENTER header text:[120, 134, "Center-aligned"] textClose:[135, 136, "|"]
+          Text[120, 134] chars:[120, 134, "Cente … igned"]
+        TableCell[136, 152] RIGHT header text:[137, 150, "Right-aligned"] textClose:[151, 152, "|"]
+          Text[137, 150] chars:[137, 150, "Right … igned"]
+    TableSeparator[153, 202]
+      TableRow[153, 202]
+        TableCell[153, 169] LEFT textOpen:[153, 154, "|"] text:[155, 159, ":---"] textClose:[168, 169, "|"]
+          Text[155, 159] chars:[155, 159, ":---"]
+        TableCell[169, 186] CENTER text:[174, 179, ":---:"] textClose:[185, 186, "|"]
+          Text[174, 179] chars:[174, 179, ":---:"]
+        TableCell[186, 202] RIGHT text:[196, 200, "---:"] textClose:[201, 202, "|"]
+          Text[196, 200] chars:[196, 200, "---:"]
+    TableBody[203, 302]
+      TableRow[203, 252] rowNumber=1
+        TableCell[203, 219] LEFT textOpen:[203, 204, "|"] text:[205, 215, "git status"] textClose:[218, 219, "|"]
+          Text[205, 215] chars:[205, 215, "git status"]
+        TableCell[219, 236] CENTER text:[220, 230, "git status"] textClose:[235, 236, "|"]
+          Text[220, 230] chars:[220, 230, "git status"]
+        TableCell[236, 252] RIGHT text:[237, 247, "git status"] textClose:[251, 252, "|"]
+          Text[237, 247] chars:[237, 247, "git status"]
+      TableRow[253, 302] rowNumber=2
+        TableCell[253, 269] LEFT textOpen:[253, 254, "|"] text:[255, 263, "git diff"] textClose:[268, 269, "|"]
+          Text[255, 263] chars:[255, 263, "git diff"]
+        TableCell[269, 286] CENTER text:[270, 278, "git diff"] textClose:[285, 286, "|"]
+          Text[270, 278] chars:[270, 278, "git diff"]
+        TableCell[286, 302] RIGHT text:[287, 295, "git diff"] textClose:[301, 302, "|"]
+          Text[287, 295] chars:[287, 295, "git diff"]
+````````````````````````````````
+
 

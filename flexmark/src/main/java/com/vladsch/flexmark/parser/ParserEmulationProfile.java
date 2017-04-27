@@ -33,16 +33,6 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         .setCodeIndent(8)
                         .setEndOnDoubleBlank(false)
                         .setItemIndent(4)
-                        .setItemMarkerSpace(false)
-                        .setItemTypeMismatchToNewList(false)
-                        .setItemTypeMismatchToSubList(false)
-                        .setLooseWhenBlankLineFollowsItemParagraph(true)
-                        .setLooseWhenHasTrailingBlankLine(false)
-                        .setLooseWhenHasNonListChildren(true)
-                        .setNewItemCodeIndent(Integer.MAX_VALUE)
-                        .setOrderedItemDotOnly(true)
-                        .setOrderedListManualStart(false)
-
                         .setItemInterrupt(new ListOptions.MutableItemInterrupt()
                                 .setBulletItemInterruptsParagraph(false)
                                 .setOrderedItemInterruptsParagraph(false)
@@ -63,7 +53,17 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                                 .setEmptyBulletSubItemInterruptsItemParagraph(true)
                                 .setEmptyOrderedSubItemInterruptsItemParagraph(true)
                                 .setEmptyOrderedNonOneSubItemInterruptsItemParagraph(true)
-                        );
+                        )
+                        .setItemMarkerSpace(false)
+                        .setItemTypeMismatchToNewList(false)
+                        .setItemTypeMismatchToSubList(false)
+                        .setLooseWhenBlankLineFollowsItemParagraph(true)
+                        .setLooseWhenHasTrailingBlankLine(false)
+                        .setLooseWhenHasNonListChildren(true)
+                        .setNewItemCodeIndent(Integer.MAX_VALUE)
+                        .setOrderedItemDotOnly(true)
+                        .setOrderedListManualStart(false)
+                        ;
             }
             if (this == PEGDOWN) {
                 return new MutableListOptions().setParserEmulationFamily(this)

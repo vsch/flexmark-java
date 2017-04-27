@@ -104,6 +104,34 @@ Document[0, 35]
 ````````````````````````````````
 
 
+```````````````````````````````` example(Mismatched List Item Type Handling: 3) options(FAIL)
+1. First ordered list item
+2. Another item 
+  * Unordered sub-list.
+.
+<ol>
+    <li>First ordered list item</li>
+    <li>Another item</li>
+</ol>
+<ul>
+    <li>Unordered sub-list.</li>
+</ul>
+.
+Document[0, 68]
+  OrderedList[0, 68] isTight delimiter:'.'
+    OrderedListItem[0, 27] open:[0, 2, "1."] isTight
+      Paragraph[3, 27]
+        Text[3, 26] chars:[3, 26, "First …  item"]
+    OrderedListItem[27, 68] open:[27, 29, "2."] isTight
+      Paragraph[30, 44]
+        Text[30, 42] chars:[30, 42, "Anoth …  item"]
+  BulletList[46, 68] isTight
+    BulletListItem[46, 68] open:[46, 47, "*"] isTight
+      Paragraph[48, 68]
+        Text[48, 67] chars:[48, 67, "Unord … list."]
+````````````````````````````````
+
+
 ## Loose Item Handling
 
 Tests how all tight items are generated
