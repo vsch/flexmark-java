@@ -17,6 +17,7 @@ import com.vladsch.flexmark.ext.jekyll.front.matter.JekyllFrontMatterExtension;
 import com.vladsch.flexmark.ext.jekyll.tag.JekyllTagExtension;
 import com.vladsch.flexmark.ext.spec.example.SpecExampleExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.typographic.TypographicExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
@@ -59,12 +60,14 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
                     TablesExtension.create(),
                     TaskListExtension.create(),
                     TocExtension.create(),
+                    SimTocExtension.create(),
                     TypographicExtension.create(),
                     WikiLinkExtension.create(),
                     MacroExtension.create(),
                     YamlFrontMatterExtension.create()
             ))
             .set(Parser.BLANK_LINES_IN_AST, true)
+            .set(SimTocExtension.BLANK_LINE_SPACER, true)
             .set(Parser.HEADING_NO_ATX_SPACE, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();

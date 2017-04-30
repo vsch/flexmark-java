@@ -273,3 +273,28 @@ default
 ````````````````````````````````
 
 
+## Table of Contents
+
+```````````````````````````````` example Table of Contents: 1
+## Header 2
+### Header 3
+
+[TOC levels=1-3]:# "title\"s"
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+.
+## Header 2
+
+### Header 3
+
+[TOC levels=1-3]:# "title\"s"
+
+### title"s
+- [Header 2](#header-2)
+    - [Header 3](#header-3)
+
+````````````````````````````````
+
+

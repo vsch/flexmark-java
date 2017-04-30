@@ -6,7 +6,7 @@
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
     </PreviewSettings>
-    <ParserSettings>
+    <ParserSettings gitHubSyntaxChange="false">
       <PegdownExtensions>
         <option name="ABBREVIATIONS" value="true" />
         <option name="ANCHORLINKS" value="false" />
@@ -14,6 +14,7 @@
         <option name="ATXHEADERSPACE" value="true" />
         <option name="AUTOLINKS" value="true" />
         <option name="DEFINITIONS" value="true" />
+        <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
         <option name="FENCED_CODE_BLOCKS" value="true" />
         <option name="FOOTNOTES" value="true" />
         <option name="HARDWRAPS" value="false" />
@@ -32,7 +33,7 @@
         <option name="WIKILINKS" value="true" />
       </PegdownExtensions>
       <ParserOptions>
-        <option name="COMMONMARK_LISTS" value="false" />
+        <option name="COMMONMARK_LISTS" value="true" />
         <option name="DUMMY" value="false" />
         <option name="EMOJI_SHORTCUTS" value="true" />
         <option name="FLEXMARK_FRONT_MATTER" value="true" />
@@ -40,7 +41,7 @@
         <option name="GFM_TABLE_RENDERING" value="false" />
         <option name="GITBOOK_URL_ENCODING" value="false" />
         <option name="GITHUB_EMOJI_URL" value="true" />
-        <option name="GITHUB_LISTS" value="true" />
+        <option name="GITHUB_LISTS" value="false" />
         <option name="GITHUB_WIKI_LINKS" value="true" />
         <option name="JEKYLL_FRONT_MATTER" value="true" />
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />

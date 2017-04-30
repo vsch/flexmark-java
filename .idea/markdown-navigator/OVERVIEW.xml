@@ -6,7 +6,7 @@
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
       </PreviewSettings>
-      <ParserSettings>
+      <ParserSettings gitHubSyntaxChange="false">
         <PegdownExtensions>
           <option name="ABBREVIATIONS" value="true" />
           <option name="ANCHORLINKS" value="false" />

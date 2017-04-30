@@ -2,8 +2,10 @@ package com.vladsch.flexmark.ext.toc;
 
 import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.ext.toc.internal.SimTocBlockParser;
+import com.vladsch.flexmark.ext.toc.internal.SimTocNodeFormatter;
 import com.vladsch.flexmark.ext.toc.internal.SimTocNodeRenderer;
 import com.vladsch.flexmark.ext.toc.internal.TocOptions;
+import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.options.DataKey;
@@ -21,7 +23,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * Rendered into table of contents based on the headings in the document
  * </p>
  */
-public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension {
+public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     // duplicated here for convenience
     public static final DataKey<Integer> LEVELS = TocExtension.LEVELS;
     public static final DataKey<Boolean> IS_TEXT_ONLY = TocExtension.IS_TEXT_ONLY;
@@ -40,6 +42,10 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
     private SimTocExtension() {
     }
 
+    public static Extension create() {
+        return new SimTocExtension();
+    }
+
     @Override
     public void rendererOptions(final MutableDataHolder options) {
         // set header id options if not already set
@@ -56,8 +62,9 @@ public class SimTocExtension implements Parser.ParserExtension, HtmlRenderer.Htm
 
     }
 
-    public static Extension create() {
-        return new SimTocExtension();
+    @Override
+    public void extend(final Formatter.Builder builder) {
+        builder.nodeFormatterFactory(new SimTocNodeFormatter.Factory());
     }
 
     @Override

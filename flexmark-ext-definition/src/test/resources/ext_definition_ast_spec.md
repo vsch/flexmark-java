@@ -517,9 +517,70 @@ Document[0, 51]
 ````````````````````````````````
 
 
+With multiple terms, broken into two lists:
+
+```````````````````````````````` example(Definition List Extension: 15) options(break-list)
+Term 1
+:   Definition 1 (paragraph)
+
+
+:   Text out of definition (paragraph)
+.
+<dl>
+  <dt>Term 1</dt>
+  <dd>Definition 1 (paragraph)</dd>
+</dl>
+<p>:   Text out of definition (paragraph)</p>
+.
+Document[0, 76]
+  DefinitionList[0, 36] isTight
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionItem[7, 36] open:[7, 8, ":"] isTight hadBlankLineAfter
+      Paragraph[11, 36] isTrailingBlankLine
+        Text[11, 35] chars:[11, 35, "Defin … raph)"]
+  Paragraph[38, 76]
+    Text[38, 76] chars:[38, 76, ":   T … raph)"]
+````````````````````````````````
+
+
+With multiple terms, not broken into two lists:
+
+```````````````````````````````` example Definition List Extension: 16
+Term 1
+:   Definition 1 (paragraph)
+
+
+:   Text out of definition (paragraph)
+.
+<dl>
+  <dt>Term 1</dt>
+  <dd>
+  <p>Definition 1 (paragraph)</p>
+  </dd>
+  <dd>
+  <p>Text out of definition (paragraph)</p>
+  </dd>
+</dl>
+.
+Document[0, 77]
+  DefinitionList[0, 77] isLoose
+    DefinitionTerm[0, 7]
+      Paragraph[0, 7]
+        Text[0, 6] chars:[0, 6, "Term 1"]
+    DefinitionItem[7, 36] open:[7, 8, ":"] isLoose hadBlankLineAfter
+      Paragraph[11, 36] isTrailingBlankLine
+        Text[11, 35] chars:[11, 35, "Defin … raph)"]
+    DefinitionItem[38, 77] open:[38, 39, ":"] isLoose
+      Paragraph[42, 77]
+        Text[42, 76] chars:[42, 76, "Text  … raph)"]
+````````````````````````````````
+
+
 With multiple definitions:
 
-```````````````````````````````` example Definition List Extension: 15
+```````````````````````````````` example Definition List Extension: 17
 Term 1
 :   Definition 1
 :   Definition 2
@@ -563,7 +624,7 @@ Document[0, 84]
 
 With multiple lines per definition:
 
-```````````````````````````````` example Definition List Extension: 16
+```````````````````````````````` example Definition List Extension: 18
 Term 1
 :   Definition 1 line 1 ...
 Definition 1 line 2
@@ -623,7 +684,7 @@ Document[0, 216]
 
 With paragraphs:
 
-```````````````````````````````` example Definition List Extension: 17
+```````````````````````````````` example Definition List Extension: 19
 Term 1
 
 :   Definition 1 (paragraph)
@@ -663,7 +724,7 @@ Document[0, 76]
 
 With multiple paragraphs:
 
-```````````````````````````````` example Definition List Extension: 18
+```````````````````````````````` example Definition List Extension: 20
 Term 1
 
 :   Definition 1 paragraph 1 line 1 ...
@@ -729,7 +790,7 @@ Document[0, 327]
 
 A mix:
 
-```````````````````````````````` example Definition List Extension: 19
+```````````````````````````````` example Definition List Extension: 21
 Term 1
 Term 2
 
@@ -879,7 +940,7 @@ Document[0, 816]
 
 inlines allowed
 
-```````````````````````````````` example Definition List Extension: 20
+```````````````````````````````` example Definition List Extension: 22
 Definition **Term**
 : definition `item` 
 .
@@ -905,7 +966,7 @@ Document[0, 41]
 
 inlines will be split
 
-```````````````````````````````` example Definition List Extension: 21
+```````````````````````````````` example Definition List Extension: 23
 Definition **Term 
 Another** Definition Term 
 : definition `item`
@@ -934,7 +995,7 @@ Document[0, 66]
 
 don't include preceding blank lines
 
-```````````````````````````````` example Definition List Extension: 22
+```````````````````````````````` example Definition List Extension: 24
 - bullet item
 
 
@@ -966,7 +1027,7 @@ Document[0, 51]
 
 nested elements allowed
 
-```````````````````````````````` example Definition List Extension: 23
+```````````````````````````````` example Definition List Extension: 25
 Definition **Term**
 : definition `item` 
     
@@ -1025,7 +1086,7 @@ Document[0, 124]
 
 With disparate looseness with auto-loose
 
-```````````````````````````````` example Definition List Extension: 24
+```````````````````````````````` example Definition List Extension: 26
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1064,7 +1125,7 @@ Document[0, 75]
 
 With disparate looseness without auto-loose
 
-```````````````````````````````` example(Definition List Extension: 25) options(no-auto-loose)
+```````````````````````````````` example(Definition List Extension: 27) options(no-auto-loose)
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1099,7 +1160,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 26
+```````````````````````````````` example Definition List Extension: 28
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -1124,7 +1185,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 27
+```````````````````````````````` example Definition List Extension: 29
 Definition Term
 : Definition of above term
 : Another definition of above term
