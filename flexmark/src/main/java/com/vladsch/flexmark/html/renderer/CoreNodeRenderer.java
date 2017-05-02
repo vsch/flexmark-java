@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 /**
@@ -678,13 +679,30 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(ImageRef node, NodeRendererContext context, HtmlWriter html) {
+        ResolvedLink resolvedLink = null;
+
         if (!node.isDefined() && recheckUndefinedReferences) {
             if (node.getReferenceNode(referenceRepository) != null) {
                 node.setDefined(true);
             }
         }
 
-        if (!node.isDefined()) {
+        if (node.isDefined()) {
+            Reference reference = node.getReferenceNode(referenceRepository);
+            String url = reference.getUrl().unescape();
+            String title = reference.getTitle().isNull() ? null : reference.getTitle().unescape();
+
+            resolvedLink = context.resolveLink(LinkType.IMAGE, url, title, null);
+        } else {
+            // see if have reference resolver and this is resolved
+            String normalizeRef = referenceRepository.normalizeKey(node.getReference());
+            resolvedLink = context.resolveLink(LinkType.IMAGE_REF, normalizeRef, null, null);
+            if (resolvedLink.getStatus() == UNKNOWN) {
+                resolvedLink = null;
+            }
+        }
+
+        if (resolvedLink == null) {
             // empty ref, we treat it as text
             html.text(node.getChars().unescape());
         } else {
@@ -693,12 +711,10 @@ public class CoreNodeRenderer implements NodeRenderer {
                 assert reference != null;
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
 
-                ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, reference.getUrl().unescape(), null);
-
                 html.attr("src", resolvedLink.getUrl());
                 html.attr("alt", altText);
-                if (reference.getTitle().isNotNull()) {
-                    html.attr("title", reference.getTitle().unescape());
+                if (resolvedLink.getTitle() != null) {
+                    html.attr("title", resolvedLink.getTitle());
                 }
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
             }
@@ -706,13 +722,30 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(LinkRef node, NodeRendererContext context, HtmlWriter html) {
+        ResolvedLink resolvedLink = null;
+
         if (!node.isDefined() && recheckUndefinedReferences) {
             if (node.getReferenceNode(referenceRepository) != null) {
                 node.setDefined(true);
             }
         }
 
-        if (!node.isDefined()) {
+        if (node.isDefined()) {
+            Reference reference = node.getReferenceNode(referenceRepository);
+            String url = reference.getUrl().unescape();
+            String title = reference.getTitle().isNull() ? null : reference.getTitle().unescape();
+
+            resolvedLink = context.resolveLink(LinkType.LINK, url, title, null);
+        } else {
+            // see if have reference resolver and this is resolved
+            String normalizeRef = node.getReference().unescape();
+            resolvedLink = context.resolveLink(LinkType.LINK_REF, normalizeRef, null, null);
+            if (resolvedLink.getStatus() == UNKNOWN) {
+                resolvedLink = null;
+            }
+        }
+
+        if (resolvedLink == null) {
             // empty ref, we treat it as text
             assert !node.isDefined();
             if (!node.hasChildren()) {
@@ -726,14 +759,9 @@ public class CoreNodeRenderer implements NodeRenderer {
             if (context.isDoNotRenderLinks()) {
                 context.renderChildren(node);
             } else {
-                Reference reference = node.getReferenceNode(referenceRepository);
-                assert reference != null;
-
-                ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, reference.getUrl().unescape(), null);
-
                 html.attr("href", resolvedLink.getUrl());
-                if (reference.getTitle().isNotNull()) {
-                    html.attr("title", reference.getTitle().unescape());
+                if (resolvedLink.getTitle() != null) {
+                    html.attr("title", resolvedLink.getTitle());
                 }
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
                 context.renderChildren(node);

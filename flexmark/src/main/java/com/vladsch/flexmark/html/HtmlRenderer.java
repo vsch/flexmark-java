@@ -519,6 +519,11 @@ public class HtmlRenderer implements IRender {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
+            return resolveLink(linkType, url, null, urlEncode);
+        }
+
+        @Override
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, CharSequence title, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
             if (resolvedLinks == null) {
                 resolvedLinks = new HashMap<String, ResolvedLink>();
@@ -528,7 +533,8 @@ public class HtmlRenderer implements IRender {
             String urlSeq = url instanceof String ? (String) url : String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             if (resolvedLink == null) {
-                resolvedLink = new ResolvedLink(linkType, urlSeq);
+                String titleSeq = title == null ? null : title instanceof String ? (String) title : String.valueOf(title);
+                resolvedLink = new ResolvedLink(linkType, urlSeq, titleSeq);
 
                 if (!urlSeq.isEmpty()) {
                     Node currentNode = getCurrentNode();
@@ -726,7 +732,12 @@ public class HtmlRenderer implements IRender {
 
             @Override
             public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
-                return myMainNodeRenderer.resolveLink(linkType, url, null);
+                return myMainNodeRenderer.resolveLink(linkType, url, urlEncode);
+            }
+
+            @Override
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, CharSequence title, Boolean urlEncode) {
+                return myMainNodeRenderer.resolveLink(linkType, url, title, urlEncode);
             }
 
             @Override

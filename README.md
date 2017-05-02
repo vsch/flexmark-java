@@ -41,7 +41,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.19.1</version>
+    <version>0.19.3</version>
 </dependency>
 ```
 
@@ -206,7 +206,7 @@ fruitless effort into it.
 
 I do ask that you realize that I am chief cook and bottle washer on this project, without an
 iota of Vulcan Mind Melding skills. I do ask that you describe what you want to implement
-because I can't read your mind and do some reconaissance background work around the source code
+because I can't read your mind and do some reconnaissance background work around the source code
 and documentation because I cannot transfer what I know to you, without your willing effort.
 
 #### Consulting is available

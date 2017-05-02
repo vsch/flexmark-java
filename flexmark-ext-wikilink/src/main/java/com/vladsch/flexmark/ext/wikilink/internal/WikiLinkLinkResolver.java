@@ -56,9 +56,9 @@ public class WikiLinkLinkResolver implements LinkResolver {
             }
 
             if (isWikiImage) {
-                return new ResolvedLink(LinkType.IMAGE, sb.toString(), LinkStatus.UNCHECKED);
+                return new ResolvedLink(LinkType.IMAGE, sb.toString(), null, LinkStatus.UNCHECKED);
             } else {
-                return new ResolvedLink(LinkType.LINK, sb.toString(), LinkStatus.UNCHECKED);
+                return new ResolvedLink(LinkType.LINK, sb.toString(), null, LinkStatus.UNCHECKED);
             }
         }
 

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.4](#0194)
 - [0.19.3](#0193)
 - [0.19.2](#0192)
 - [0.19.1](#0191)
@@ -145,6 +146,13 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.4
+------
+
+* Add: `LinkType.LINK_REF`, `LinkType.IMAGE_REF` and `ResolvedLink.getTitle()` to allow link
+  resolvers to specify/modify link title and also to allow link resolvers to provide url and
+  title for unresolved `LinkRef` and `ImageRef` nodes.
 
 0.19.3
 ------
