@@ -29,9 +29,8 @@ public class EscapedCharacterNodePostProcessor extends NodePostProcessor {
         ArrayList<ReplacedTextRegion> replacedRegions = textMapper.getRegions();
 
         for (ReplacedTextRegion region : replacedRegions) {
-            //String found = m.group();
-            int startOffset = region.getOriginalRange().getStart() - original.getStartOffset();
-            int endOffset = region.getOriginalRange().getEnd() - original.getStartOffset();
+            int startOffset = region.getOriginalRange().getStart();
+            int endOffset = region.getOriginalRange().getEnd();
 
             if (original.charAt(startOffset) == '\\' && region.getReplacedRange().length() == 1
                     // fix for #19, ArrayIndexOutOfBounds while parsing markdown with backslash as last character of text block

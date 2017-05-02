@@ -85,3 +85,19 @@ Document[0, 83]
 ````````````````````````````````
 
 
+Don't process fenced code blocks
+
+```````````````````````````````` example Issues: 2
+```
+this is not escaped \. 
+```
+.
+<pre><code>this is not escaped \. 
+</code></pre>
+.
+Document[0, 32]
+  FencedCodeBlock[0, 31] open:[0, 3, "```"] content:[4, 28] lines[1] close:[28, 31, "```"]
+    Text[4, 28] chars:[4, 28, "this  …  \. \n"]
+````````````````````````````````
+
+

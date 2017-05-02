@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
         ComboPegdownCompatibilitySpecTest.class,
         ComboPegdownExtensionCompatibilitySpecTest.class,
         ComboStackOverflowSpecTest.class,
+        ComboIssueMn236ExceptionSpecTest.class,
 })
 public class PegdownProfileTestSuite {
 }

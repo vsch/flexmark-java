@@ -1,17 +1,18 @@
 package com.vladsch.flexmark.util.sequence;
 
 public class ReplacedTextRegion {
+    private final Range base;
     private final Range original;
     private final Range replaced;
 
-    public ReplacedTextRegion(Range original, Range replaced) {
+    public ReplacedTextRegion(Range base, Range original, Range replaced) {
+        this.base = base;
         this.original = original;
         this.replaced = replaced;
     }
 
-    public ReplacedTextRegion(int originalStart, int originalEnd, int replacedStart, int replacedEnd) {
-        this.original = new Range(originalStart, originalEnd);
-        this.replaced = new Range(replacedStart, replacedEnd);
+    public Range getBaseRange() {
+        return base;
     }
 
     public Range getOriginalRange() {
@@ -24,6 +25,10 @@ public class ReplacedTextRegion {
 
     public boolean containsReplacedIndex(int replacedIndex) {
         return replaced.contains(replacedIndex);
+    }
+
+    public boolean containsBaseIndex(int originalIndex) {
+        return base.contains(originalIndex);
     }
 
     public boolean containsOriginalIndex(int originalIndex) {

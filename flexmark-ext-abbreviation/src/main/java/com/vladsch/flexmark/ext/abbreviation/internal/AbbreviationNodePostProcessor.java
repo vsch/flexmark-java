@@ -67,7 +67,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                     //    } else if (DOUBLE_QUOTES.indexOf(c) != -1) {
                     //        sb.append("[").append(DOUBLE_QUOTES).append("]");
                     //    }
-                    //    
+                    //
                     //    lastPos = matcher.end();
                     //}
                     //if (lastPos < length) {
@@ -154,7 +154,7 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
         public Factory() {
             super(false);
 
-            addNodeWithExclusions(Text.class, DoNotLinkDecorate.class);
+            addNodeWithExclusions(Text.class, DoNotDecorate.class, DoNotLinkDecorate.class);
         }
 
         @Override

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.3](#0193)
 - [0.19.2](#0192)
 - [0.19.1](#0191)
 - [0.19.0](#0190)
@@ -144,6 +145,20 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.3
+------
+
+* Fix: index out of bounds exception in `flexmark-ext-escaped-character` processing elements
+  embedded in other elements with prefix text removed.
+
+* Fix: `flexmark-ext-escaped-character` erroneously processing fenced code content
+
+* Fix: change `ReplacedTextMapper` original range to base range and add real original offset
+  range. Otherwise processing `SegmentedSequence` would be wrong and cause index out of bounds
+  exceptions.
+
+* Fix: `flexmark-ext-autolink` erroneously processing fenced code content
 
 0.19.2
 ------

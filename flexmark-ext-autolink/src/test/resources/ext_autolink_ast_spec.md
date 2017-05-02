@@ -170,6 +170,22 @@ Document[0, 77]
 ````````````````````````````````
 
 
+Don't process fenced code blocks
+
+```````````````````````````````` example Autolink: 10
+```
+http://example.com 
+```
+.
+<pre><code>http://example.com 
+</code></pre>
+.
+Document[0, 28]
+  FencedCodeBlock[0, 27] open:[0, 3, "```"] content:[4, 24] lines[1] close:[24, 27, "```"]
+    Text[4, 24] chars:[4, 24, "http: … com \n"]
+````````````````````````````````
+
+
 ## Source Position Attribute
 
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)

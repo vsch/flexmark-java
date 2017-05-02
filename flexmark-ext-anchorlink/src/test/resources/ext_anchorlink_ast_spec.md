@@ -139,8 +139,7 @@ Document[0, 18]
 ````````````````````````````````
 
 
-Set name, no id, with prefix/suffix, anchor links do not wrap header
-text
+Set name, no id, with prefix/suffix, anchor links do not wrap header text
 
 ```````````````````````````````` example(AnchorLinks: 9) options(no-wrap, prefix-suffix, no-class, set-name, no-id)
 # Enhanced Edition

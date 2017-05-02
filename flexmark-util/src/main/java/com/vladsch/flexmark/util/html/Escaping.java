@@ -65,18 +65,18 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
-            String s1 = s.toString();
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            String s1 = original.subSequence(startIndex, endIndex).toString();
             if (s1.equals("&")) {
-                textMapper.addReplacedText(s, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&amp;", BasedSequence.NULL));
             } else if (s1.equals("<")) {
-                textMapper.addReplacedText(s, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&lt;", BasedSequence.NULL));
             } else if (s1.equals(">")) {
-                textMapper.addReplacedText(s, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&gt;", BasedSequence.NULL));
             } else if (s1.equals("\"")) {
-                textMapper.addReplacedText(s, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of("&quot;", BasedSequence.NULL));
             } else {
-                textMapper.addOriginalText(s);
+                textMapper.addOriginalText(startIndex, endIndex);
             }
         }
     };
@@ -88,8 +88,8 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
-            textMapper.addReplacedText(s, s.subSequence(0, 1));
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            textMapper.addReplacedText(startIndex, endIndex, original.subSequence(startIndex, startIndex + 1));
         }
     };
 
@@ -104,11 +104,11 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
-            if (s.charAt(0) == '\\') {
-                textMapper.addReplacedText(s, s.subSequence(1, s.length()));
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            if (original.charAt(startIndex) == '\\') {
+                textMapper.addReplacedText(startIndex, endIndex, original.subSequence(startIndex + 1, endIndex));
             } else {
-                textMapper.addReplacedText(s, Html5Entities.entityToSequence(s));
+                textMapper.addReplacedText(startIndex, endIndex, Html5Entities.entityToSequence(original.subSequence(startIndex, endIndex)));
             }
         }
     };
@@ -120,8 +120,8 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
-            textMapper.addReplacedText(s, Html5Entities.entityToSequence(s));
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            textMapper.addReplacedText(startIndex, endIndex, Html5Entities.entityToSequence(original.subSequence(startIndex, endIndex)));
         }
     };
 
@@ -148,15 +148,16 @@ public class Escaping {
         }
 
         @Override
-        public void replace(BasedSequence s, ReplacedTextMapper textMapper) {
+        public void replace(BasedSequence original, int startIndex, int endIndex, ReplacedTextMapper textMapper) {
+            BasedSequence s = original.subSequence(startIndex, endIndex);
             if (s.startsWith("%")) {
                 if (s.length() == 3) {
                     // Already percent-encoded, preserve
-                    textMapper.addOriginalText(s);
+                    textMapper.addOriginalText(startIndex, endIndex);
                 } else {
                     // %25 is the percent-encoding for %
-                    textMapper.addReplacedText(s.subSequence(0, 1), PrefixedSubSequence.of("%25", BasedSequence.NULL));
-                    textMapper.addOriginalText(s.subSequence(1, s.length()));
+                    textMapper.addReplacedText(startIndex, startIndex + 1, PrefixedSubSequence.of("%25", BasedSequence.NULL));
+                    textMapper.addOriginalText(startIndex + 1, endIndex);
                 }
             } else {
                 byte[] bytes = s.toString().getBytes(Charset.forName("UTF-8"));
@@ -167,7 +168,7 @@ public class Escaping {
                     sbItem.append(HEX_DIGITS[(b >> 4) & 0xF]);
                     sbItem.append(HEX_DIGITS[b & 0xF]);
                 }
-                textMapper.addReplacedText(s, PrefixedSubSequence.of(sbItem.toString(), BasedSequence.NULL));
+                textMapper.addReplacedText(startIndex, endIndex, PrefixedSubSequence.of(sbItem.toString(), BasedSequence.NULL));
             }
         }
     };
@@ -366,15 +367,15 @@ public class Escaping {
             } else if (c == '\n') {
                 if (hadCR) {
                     // previous was CR, need to take preceding chars
-                    if (lastPos < i - 1) textMapper.addOriginalText(s.subSequence(lastPos, i - 1));
+                    if (lastPos < i - 1) textMapper.addOriginalText(lastPos, i - 1);
                     lastPos = i;
                     hadCR = false;
                     hadEOL = true;
                 }
             } else {
                 if (hadCR) {
-                    if (lastPos < i - 1) textMapper.addOriginalText(s.subSequence(lastPos, i + 1));
-                    textMapper.addReplacedText(s.subSequence(i - 1, i), BasedSequence.EOL);
+                    if (lastPos < i - 1) textMapper.addOriginalText(lastPos, i + 1);
+                    textMapper.addReplacedText(i - 1, i, BasedSequence.EOL);
                     lastPos = i;
                     hadCR = false;
                     hadEOL = false;
@@ -387,8 +388,8 @@ public class Escaping {
             //    if (lastPos < iMax - 1) textMapper.addOriginalText(input.subSequence(lastPos, iMax - 1));
             //    textMapper.addReplacedText(input.subSequence(iMax - 1, iMax), SubSequence.EOL);
             //} else {
-            if (lastPos < iMax) textMapper.addOriginalText(s.subSequence(lastPos, iMax));
-            if (!hadEOL && endWithEOL) textMapper.addReplacedText(s.subSequence(iMax - 1, iMax), BasedSequence.EOL);
+            if (lastPos < iMax) textMapper.addOriginalText(lastPos, iMax);
+            if (!hadEOL && endWithEOL) textMapper.addReplacedText(iMax - 1, iMax, BasedSequence.EOL);
         }
 
         return textMapper.getReplacedSequence();
@@ -536,19 +537,19 @@ public class Escaping {
         Matcher matcher = p.matcher(s);
 
         if (!matcher.find()) {
-            textMapper.addOriginalText(s);
+            textMapper.addOriginalText(0, s.length());
             return s;
         }
 
         int lastEnd = 0;
         do {
-            textMapper.addOriginalText(s.subSequence(lastEnd, matcher.start()));
-            replacer.replace(s.subSequence(matcher.start(), matcher.end()), textMapper);
+            textMapper.addOriginalText(lastEnd, matcher.start());
+            replacer.replace(s, matcher.start(), matcher.end(), textMapper);
             lastEnd = matcher.end();
         } while (matcher.find());
 
         if (lastEnd != s.length()) {
-            textMapper.addOriginalText(s.subSequence(lastEnd, s.length()));
+            textMapper.addOriginalText(lastEnd, s.length());
         }
 
         return textMapper.getReplacedSequence();
@@ -556,6 +557,6 @@ public class Escaping {
 
     interface Replacer {
         void replace(String s, StringBuilder sb);
-        void replace(BasedSequence s, ReplacedTextMapper replacedTextMapper);
+        void replace(BasedSequence s, int startIndex, int endIndex, ReplacedTextMapper replacedTextMapper);
     }
 }

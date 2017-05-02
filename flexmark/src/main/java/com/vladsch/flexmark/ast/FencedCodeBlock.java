@@ -4,7 +4,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.List;
 
-public class FencedCodeBlock extends Block {
+public class FencedCodeBlock extends Block implements DoNotDecorate {
     private int fenceIndent;
     private BasedSequence openingMarker = BasedSequence.NULL;
     private BasedSequence info = BasedSequence.NULL;
