@@ -8,13 +8,13 @@ license: '[CC-BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)'
 
 ---
 
-## Issue #13
+## Issue 13
 
 #13, Hard line breaks do not work if markdown text/files uses CR LF as line separator
 
 Escape crlf
 
-```````````````````````````````` example Issue #13: 1
+```````````````````````````````` example Issue 13: 1
 test\⏎
 line after hard break
 .
@@ -29,13 +29,13 @@ Document[0, 29]
 ````````````````````````````````
 
 
-### Issue #17
+### Issue 17
 
 #17, IndentedCodeBlock endOffset too large?
 
 one line blank after code should not be kept as part of the code block
 
-```````````````````````````````` example Issue #17: 1
+```````````````````````````````` example Issue 17: 1
 →code
 
 some text
@@ -53,7 +53,7 @@ Document[0, 17]
 
 Blank lines before and after should not be kept
 
-```````````````````````````````` example Issue #17: 2
+```````````````````````````````` example Issue 17: 2
 →code
 
 
@@ -76,13 +76,13 @@ Document[0, 26]
 ````````````````````````````````
 
 
-## Issue #39
+## Issue 39
 
 #39, `[Question]` `@` is missed
 
 not a flexmark-java issue.
 
-```````````````````````````````` example Issue #39: 1
+```````````````````````````````` example Issue 39: 1
 @someone
 .
 <p>@someone</p>
@@ -93,9 +93,11 @@ Document[0, 9]
 ````````````````````````````````
 
 
+## Issue 55
+
 Issue #55, Indented Link Reference Definitions not parsed correctly
 
-```````````````````````````````` example Issue #39: 2
+```````````````````````````````` example Issue 55: 1
 This note demonstrates some of what [Markdown][1] is capable of doing.
 ....
 *Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
@@ -126,12 +128,12 @@ Document[0, 276]
 ````````````````````````````````
 
 
-## Issue #70
+## Issue 70
 
 Issue #70, parse failed for angle quotes if the end angle quote follows with a line feed or a
 carriage return
 
-```````````````````````````````` example(Issue #70: 1) options(FILE_EOL)
+```````````````````````````````` example(Issue 70: 1) options(FILE_EOL)
 <<test>>
 .
 <p>&lt;<test>&gt;</p>
@@ -144,7 +146,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 2) options(NO_FILE_EOL)
+```````````````````````````````` example(Issue 70: 2) options(NO_FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -157,7 +159,7 @@ Document[0, 9]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 3) options(FILE_EOL)
+```````````````````````````````` example(Issue 70: 3) options(FILE_EOL)
 <<test>>⏎
 .
 <p>&lt;<test>&gt;</p>
@@ -170,7 +172,7 @@ Document[0, 10]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Issue #70: 4) options(FILE_EOL)
+```````````````````````````````` example(Issue 70: 4) options(FILE_EOL)
 <<test>>
 
 .
@@ -271,6 +273,187 @@ lines
 Document[0, 30]
   FencedCodeBlock[0, 29] open:[0, 3, "```"] info:[3, 7, "info"] content:[8, 26] lines[2] close:[26, 29, "```"]
     Text[8, 26] chars:[8, 26, "fence … ines\n"]
+````````````````````````````````
+
+
+## Issue 101
+
+Block quote erroneously parsed on closing inline HTML.
+
+Block parsing is done before inline parsing. Therefore at the time a block quote prefix is
+detected when the paragraph text is not parsed for inline HTML. Therefore it is not possible to
+with the CommonMark architecture to correctly parse.
+
+The only workarounds are to either disable block quotes interrupting paragraphs, requiring block
+quotes to be at the start of a block or to not leave dangling `>` at the start of a line.
+
+```````````````````````````````` example(Issue 101: 1) options(FAIL)
+<span
+class="abc"
+data-role="example"
+>
+some content here 
+</span>
+.
+<p><span
+class="abc"
+data-role="example">
+some content here
+</span></p>
+.
+Document[0, 66]
+  Paragraph[0, 66]
+    HtmlInline[0, 38] chars:[0, 38, "<span … ple\">"]
+    SoftLineBreak[38, 39]
+    Text[39, 56] chars:[39, 56, "some  …  here"]
+    SoftLineBreak[57, 58]
+    HtmlInline[58, 65] chars:[58, 65, "</span>"]
+````````````````````````````````
+
+
+Block quote workaround
+
+```````````````````````````````` example(Issue 101: 2) options(block-no-interrupt-paragraph)
+<span
+class="abc"
+data-role="example"
+>
+some content here 
+</span>
+.
+<p><span
+class="abc"
+data-role="example"
+>
+some content here
+</span></p>
+.
+Document[0, 66]
+  Paragraph[0, 66]
+    HtmlInline[0, 39] chars:[0, 39, "<span … le\"\n>"]
+    SoftLineBreak[39, 40]
+    Text[40, 57] chars:[40, 57, "some  …  here"]
+    SoftLineBreak[58, 59]
+    HtmlInline[59, 66] chars:[59, 66, "</span>"]
+````````````````````````````````
+
+
+Block quote workaround
+
+```````````````````````````````` example Issue 101: 3
+<span
+class="abc"
+data-role="example">
+some content here 
+</span>
+.
+<p><span
+class="abc"
+data-role="example">
+some content here
+</span></p>
+.
+Document[0, 66]
+  Paragraph[0, 66]
+    HtmlInline[0, 38] chars:[0, 38, "<span … ple\">"]
+    SoftLineBreak[38, 39]
+    Text[39, 56] chars:[39, 56, "some  …  here"]
+    SoftLineBreak[57, 58]
+    HtmlInline[58, 65] chars:[58, 65, "</span>"]
+````````````````````````````````
+
+
+HTML block parsing
+
+```````````````````````````````` example Issue 101: 4
+<!--
+-->
+<div>
+    <p>test</p>
+</div>
+<div>
+    <p>test2</p>
+</div>
+.
+<!--
+-->
+<div>
+    <p>test</p>
+</div>
+<div>
+    <p>test2</p>
+</div>
+.
+Document[0, 68]
+  HtmlCommentBlock[0, 9]
+  HtmlBlock[9, 68]
+````````````````````````````````
+
+
+HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following it
+
+```````````````````````````````` example Issue 101: 5
+<div><![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+    
+    </div>
+    ]]></div>
+.
+<div><![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+<pre><code>&lt;/div&gt;
+]]&gt;&lt;/div&gt;
+</code></pre>
+.
+Document[0, 91]
+  HtmlBlock[0, 61]
+  IndentedCodeBlock[70, 91]
+````````````````````````````````
+
+
+HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following it
+
+```````````````````````````````` example Issue 101: 6
+<div>
+<![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+    
+    </div>
+]]></div>
+.
+<div>
+<![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+<pre><code>&lt;/div&gt;
+</code></pre>
+<p>]]&gt;</div></p>
+.
+Document[0, 88]
+  HtmlBlock[0, 62]
+  IndentedCodeBlock[71, 78]
+  Paragraph[78, 88]
+    Text[78, 81] chars:[78, 81, "]]>"]
+    HtmlInline[81, 87] chars:[81, 87, "</div>"]
+````````````````````````````````
+
+
+HTML block parsing, error only detects `<div>` and not the `<![CDATA[` following it
+
+```````````````````````````````` example Issue 101: 7
+<![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+    
+    </div>
+]]>
+.
+<![CDATA[
+    <div xmlns="http://www.w3.org/1999/html">
+    
+    </div>
+]]>
+.
+Document[0, 76]
+  HtmlBlock[0, 76]
 ````````````````````````````````
 
 

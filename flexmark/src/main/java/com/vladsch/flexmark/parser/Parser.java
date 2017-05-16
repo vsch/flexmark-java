@@ -85,6 +85,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> PARSE_MULTI_LINE_IMAGE_URLS = new DataKey<Boolean>("PARSE_MULTI_LINE_IMAGE_URLS", false);
     public static final DataKey<Boolean> PARSE_JEKYLL_MACROS_IN_URLS = new DataKey<Boolean>("PARSE_JEKYLL_MACROS_IN_URLS", false);
     public static final DataKey<Boolean> SPACE_IN_LINK_URLS = new DataKey<Boolean>("SPACE_IN_LINK_URLS", false);
+    public static final DataKey<Boolean> SPACE_IN_LINK_ELEMENTS = new DataKey<Boolean>("SPACE_IN_LINK_ELEMENTS", false);
 
     public static final DataKey<Boolean> REFERENCE_PARAGRAPH_PRE_PROCESSOR = new DataKey<Boolean>("REFERENCE_BLOCK_PRE_PROCESSOR", true);
     public static final DataKey<Boolean> THEMATIC_BREAK_PARSER = new DataKey<Boolean>("THEMATIC_BREAK_PARSER", true);

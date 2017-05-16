@@ -320,6 +320,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
                     .set(Parser.REFERENCES_KEEP, KeepType.LAST)
                     .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
+                    .set(Parser.SPACE_IN_LINK_ELEMENTS, true)
                     .set(HtmlRenderer.RENDER_HEADER_ID, false)
                     .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)

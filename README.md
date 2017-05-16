@@ -255,7 +255,7 @@ Major processor families are implemented and some family members also:
   * [ ] &nbsp;[Jekyll]
 * [Markdown.pl][Markdown]
   * [ ] &nbsp;[Php Markdown Extra]
-  * [GitHub] Docs
+  * [GitHub] Docs (old GitHub markdown parser)
 * FixedIndent
   * [MultiMarkdown]
   * [Pegdown]
@@ -266,7 +266,7 @@ family were added in 0.11.0:
 * CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
 * FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
 * GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
-* GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
+* Old GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
 * Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
 * Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
 * MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`

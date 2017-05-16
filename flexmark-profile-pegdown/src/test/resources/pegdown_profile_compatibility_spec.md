@@ -2875,3 +2875,33 @@ Document[0, 714]
 ````````````````````````````````
 
 
+## Links
+
+Spaces in link elements
+
+```````````````````````````````` example Links: 1
+[Test Text]       (/url)
+.
+<p><a href="/url">Test Text</a></p>
+.
+Document[0, 25]
+  Paragraph[0, 25]
+    Link[0, 24] textOpen:[0, 1, "["] text:[1, 10, "Test Text"] textClose:[10, 11, "]"] linkOpen:[18, 19, "("] url:[19, 23, "/url"] pageRef:[19, 23, "/url"] linkClose:[23, 24, ")"]
+      Text[1, 10] chars:[1, 10, "Test Text"]
+````````````````````````````````
+
+
+Spaces in image elements
+
+```````````````````````````````` example Links: 2
+![Test Text]        (/url)
+.
+<p><img src="/url" alt="Test Text" /></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Image[0, 26] textOpen:[0, 2, "!["] text:[2, 11, "Test Text"] textClose:[11, 12, "]"] linkOpen:[20, 21, "("] url:[21, 25, "/url"] pageRef:[21, 25, "/url"] linkClose:[25, 26, ")"]
+      Text[2, 11] chars:[2, 11, "Test Text"]
+````````````````````````````````
+
+

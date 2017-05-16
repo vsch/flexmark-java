@@ -1145,6 +1145,13 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         BasedSequence imageUrlContent = null;
 
         // Inline link?
+        int preSpaceIndex = index;
+
+        // May need to skip spaces
+        if (options.spaceInLinkElements && peek() == ' ') {
+            sp();
+        }
+
         if (peek() == '(') {
             int savedIndex = index;
 
@@ -1195,6 +1202,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     }
                 }
             }
+        } else {
+            index = preSpaceIndex;
         }
 
         if (!isLinkOrImage) {
@@ -1486,7 +1495,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
             return res;
         } else {
             final BasedSequence matched = match(myParsing.LINK_DESTINATION);
-            return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE): matched;
+            return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
         }
     }
 

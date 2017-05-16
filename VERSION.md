@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.5](#0195)
 - [0.19.4](#0194)
 - [0.19.3](#0193)
 - [0.19.2](#0192)
@@ -138,7 +139,8 @@ flexmark-java
   * CommonMark (default for family): `ParserEmulationProfile.COMMONMARK`
   * FixedIndent (default for family): `ParserEmulationProfile.FIXED_INDENT`
   * GitHub Comments (just CommonMark): `ParserEmulationProfile.COMMONMARK`
-  * GitHub Docs: `ParserEmulationProfile.GITHUB_DOC`
+  * GitHub Docs: (Now CommonMark): `ParserEmulationProfile.COMMONMARK`, old parsing was
+    `ParserEmulationProfile.GITHUB_DOC`
   * Kramdown (default for family): `ParserEmulationProfile.KRAMDOWN`
   * Markdown.pl (default for family): `ParserEmulationProfile.MARKDOWN`
   * MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
@@ -146,6 +148,14 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.5
+------
+
+* Add: `Parser.SPACE_IN_LINK_ELEMENTS`, default `false`, to allow whitespace between `![]` or
+  `[]` and `()` of links or images.
+
+* Add: `Parser.SPACE_IN_LINK_ELEMENTS` setting to `true` when pegdown profile is selected.
 
 0.19.4
 ------
