@@ -1104,3 +1104,56 @@ Document[0, 68]
 ````````````````````````````````
 
 
+## Issue 106
+
+Issue #106, Table placed after code block does not parsed
+
+```````````````````````````````` example Issue 106: 1
+`test test test`
+
+|  1 |  2 |  3 |
+|----|----|----|
+|  1 |  2 |  3 |
+.
+<p><code>test test test</code></p>
+<table>
+  <thead>
+    <tr><th>1</th><th>2</th><th>3</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td><td>3</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 69]
+  Paragraph[0, 17] isTrailingBlankLine
+    Code[0, 16] textOpen:[0, 1, "`"] text:[1, 15, "test  … test test"] textClose:[15, 16, "`"]
+      Text[1, 15] chars:[1, 15, "test  …  test"]
+  TableBlock[18, 69]
+    TableHead[18, 34]
+      TableRow[18, 34]
+        TableCell[21, 22] header text:[21, 22, "1"]
+          Text[21, 22] chars:[21, 22, "1"]
+        TableCell[26, 27] header text:[26, 27, "2"]
+          Text[26, 27] chars:[26, 27, "2"]
+        TableCell[31, 32] header text:[31, 32, "3"]
+          Text[31, 32] chars:[31, 32, "3"]
+    TableSeparator[35, 51]
+      TableRow[35, 51]
+        TableCell[36, 40] text:[36, 40, "----"]
+          Text[36, 40] chars:[36, 40, "----"]
+        TableCell[41, 45] text:[41, 45, "----"]
+          Text[41, 45] chars:[41, 45, "----"]
+        TableCell[46, 50] text:[46, 50, "----"]
+          Text[46, 50] chars:[46, 50, "----"]
+    TableBody[52, 68]
+      TableRow[52, 68]
+        TableCell[55, 56] text:[55, 56, "1"]
+          Text[55, 56] chars:[55, 56, "1"]
+        TableCell[60, 61] text:[60, 61, "2"]
+          Text[60, 61] chars:[60, 61, "2"]
+        TableCell[65, 66] text:[65, 66, "3"]
+          Text[65, 66] chars:[65, 66, "3"]
+````````````````````````````````
+
+

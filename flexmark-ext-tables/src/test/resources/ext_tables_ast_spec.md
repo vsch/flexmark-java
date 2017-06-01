@@ -3296,3 +3296,90 @@ Document[0, 303]
 ````````````````````````````````
 
 
+## Issue 106
+
+Issue #106, Table placed after code block does not parsed
+
+```````````````````````````````` example Issue 106: 1
+Place specified block in the specified point.
+`BLOCK_SET <Block> <Location> [Physics]`
+
+| Parameter | Parameter value | Description |
+|-----------|-----------------|-------------|
+|`<Block>` |`block:<BlockType>` | Block defined using item format (block types and material data supported) |
+|`<Location>` | `loc:<Location>` | Location where block will be placed |
+|`[Physics]` |`physics:<true\|false>` |Apply physic to block nearby. Default - true. |
+.
+<p>Place specified block in the specified point.
+<code>BLOCK_SET &lt;Block&gt; &lt;Location&gt; [Physics]</code></p>
+<table>
+  <thead>
+    <tr><th>Parameter</th><th>Parameter value</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>&lt;Block&gt;</code></td><td><code>block:&lt;BlockType&gt;</code></td><td>Block defined using item format (block types and material data supported)</td></tr>
+    <tr><td><code>&lt;Location&gt;</code></td><td><code>loc:&lt;Location&gt;</code></td><td>Location where block will be placed</td></tr>
+    <tr><td><code>[Physics]</code></td><td><code>physics:&lt;true\|false&gt;</code></td><td>Apply physic to block nearby. Default - true.</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 450]
+  Paragraph[0, 87] isTrailingBlankLine
+    Text[0, 45] chars:[0, 45, "Place … oint."]
+    SoftLineBreak[45, 46]
+    Code[46, 86] textOpen:[46, 47, "`"] text:[47, 85, "BLOCK … _SET <Block> <Location> [Physics]"] textClose:[85, 86, "`"]
+      Text[47, 85] chars:[47, 85, "BLOCK … sics]"]
+  TableBlock[88, 450]
+    TableHead[88, 133]
+      TableRow[88, 133] rowNumber=1
+        TableCell[88, 101] header textOpen:[88, 89, "|"] text:[90, 99, "Parameter"] textClose:[100, 101, "|"]
+          Text[90, 99] chars:[90, 99, "Parameter"]
+        TableCell[101, 119] header text:[102, 117, "Parameter value"] textClose:[118, 119, "|"]
+          Text[102, 117] chars:[102, 117, "Param … value"]
+        TableCell[119, 133] header text:[120, 131, "Description"] textClose:[132, 133, "|"]
+          Text[120, 131] chars:[120, 131, "Descr … ption"]
+    TableSeparator[134, 179]
+      TableRow[134, 179]
+        TableCell[134, 147] textOpen:[134, 135, "|"] text:[135, 146, "-----------"] textClose:[146, 147, "|"]
+          Text[135, 146] chars:[135, 146, "----- … -----"]
+        TableCell[147, 165] text:[147, 164, "-----------------"] textClose:[164, 165, "|"]
+          Text[147, 164] chars:[147, 164, "----- … -----"]
+        TableCell[165, 179] text:[165, 178, "-------------"] textClose:[178, 179, "|"]
+          Text[165, 178] chars:[165, 178, "----- … -----"]
+    TableBody[180, 449]
+      TableRow[180, 289] rowNumber=1
+        TableCell[180, 192] textOpen:[180, 181, "|"] text:[181, 190, "`<Block>`"] textClose:[191, 192, "|"]
+          Code[181, 190] textOpen:[181, 182, "`"] text:[182, 189, "<Block>"] textClose:[189, 190, "`"]
+            Text[182, 189] chars:[182, 189, "<Block>"]
+          Text[190, 190]
+        TableCell[192, 213] text:[192, 211, "`block:<BlockType>`"] textClose:[212, 213, "|"]
+          Code[192, 211] textOpen:[192, 193, "`"] text:[193, 210, "block … :<BlockType>"] textClose:[210, 211, "`"]
+            Text[193, 210] chars:[193, 210, "block … Type>"]
+          Text[211, 211]
+        TableCell[213, 289] text:[214, 287, "Block defined using item format (block types and material data supported)"] textClose:[288, 289, "|"]
+          Text[214, 287] chars:[214, 287, "Block … rted)"]
+      TableRow[290, 362] rowNumber=2
+        TableCell[290, 305] textOpen:[290, 291, "|"] text:[291, 303, "`<Location>`"] textClose:[304, 305, "|"]
+          Code[291, 303] textOpen:[291, 292, "`"] text:[292, 302, "<Location>"] textClose:[302, 303, "`"]
+            Text[292, 302] chars:[292, 302, "<Location>"]
+          Text[303, 303]
+        TableCell[305, 324] text:[306, 322, "`loc:<Location>`"] textClose:[323, 324, "|"]
+          Code[306, 322] textOpen:[306, 307, "`"] text:[307, 321, "loc:< … Location>"] textClose:[321, 322, "`"]
+            Text[307, 321] chars:[307, 321, "loc:< … tion>"]
+          Text[322, 322]
+        TableCell[324, 362] text:[325, 360, "Location where block will be placed"] textClose:[361, 362, "|"]
+          Text[325, 360] chars:[325, 360, "Locat … laced"]
+      TableRow[363, 449] rowNumber=3
+        TableCell[363, 377] textOpen:[363, 364, "|"] text:[364, 375, "`[Physics]`"] textClose:[376, 377, "|"]
+          Code[364, 375] textOpen:[364, 365, "`"] text:[365, 374, "[Physics]"] textClose:[374, 375, "`"]
+            Text[365, 374] chars:[365, 374, "[Physics]"]
+          Text[375, 375]
+        TableCell[377, 402] text:[377, 400, "`physics:<true\|false>`"] textClose:[401, 402, "|"]
+          Code[377, 400] textOpen:[377, 378, "`"] text:[378, 399, "physi … cs:<true\|false>"] textClose:[399, 400, "`"]
+            Text[378, 399] chars:[378, 399, "physi … alse>"]
+          Text[400, 400]
+        TableCell[402, 449] text:[402, 447, "Apply physic to block nearby. Default - true."] textClose:[448, 449, "|"]
+          Text[402, 447] chars:[402, 447, "Apply … true."]
+````````````````````````````````
+
+

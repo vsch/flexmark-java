@@ -644,7 +644,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (!context.isDoNotRenderLinks()) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
 
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), node.getTitle().ifNull(null), null);
             String url = resolvedLink.getUrl();
 
             if (!node.getUrlContent().isEmpty()) {
@@ -707,8 +707,6 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.text(node.getChars().unescape());
         } else {
             if (!context.isDoNotRenderLinks()) {
-                Reference reference = node.getReferenceNode(referenceRepository);
-                assert reference != null;
                 String altText = new TextCollectingVisitor().collectAndGetText(node);
 
                 html.attr("src", resolvedLink.getUrl());

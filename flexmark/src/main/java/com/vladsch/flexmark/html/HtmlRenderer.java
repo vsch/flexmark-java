@@ -553,6 +553,11 @@ public class HtmlRenderer implements IRender {
                 resolvedLinks.put(urlSeq, resolvedLink);
             }
 
+            // use provided non-null title to override cached value
+            if (resolvedLink != null && title != null) {
+                resolvedLink = resolvedLink.withTitle(title);
+            }
+
             return resolvedLink;
         }
 

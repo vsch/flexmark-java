@@ -32,7 +32,7 @@ public class ResolvedLink {
 
     public ResolvedLink withTitle(CharSequence title) {
         String useTitle = title == null ? null : title instanceof String ? (String) title : String.valueOf(title);
-        return this.myTitle == useTitle || this.myTitle.equals(useTitle) ? this : new ResolvedLink(myLinkType, myUrl, useTitle, myStatus);
+        return this.myTitle == useTitle || this.myTitle != null && this.myTitle.equals(useTitle) ? this : new ResolvedLink(myLinkType, myUrl, useTitle, myStatus);
     }
 
     public LinkType getLinkType() {

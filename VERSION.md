@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.6](#0196)
 - [0.19.5](#0195)
 - [0.19.4](#0194)
 - [0.19.3](#0193)
@@ -148,6 +149,14 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.6
+------
+
+* Fix: #109, Image Ref missing title tag in rendered HTML, this bug also affects title tag of
+  link ref elements.
+
+* Fix: assertion error in `ImageRef` rendering.
 
 0.19.5
 ------

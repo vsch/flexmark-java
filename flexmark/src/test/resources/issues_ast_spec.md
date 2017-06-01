@@ -457,3 +457,167 @@ Document[0, 76]
 ````````````````````````````````
 
 
+## Issue 109 
+
+Issue #109, Image Ref missing title tag in rendered HTML
+
+```````````````````````````````` example Issue 109: 1
+![alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
+.
+Document[0, 55]
+  Paragraph[0, 16] isTrailingBlankLine
+    ImageRef[1, 15] textOpen:[1, 2, "["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+      Text[2, 10] chars:[2, 10, "alt text"]
+  Reference[17, 54] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 46, "/images/icons/up_16.gif"] titleOpen:[47, 48, "\""] title:[48, 53, "Title"] titleClose:[53, 54, "\""]
+````````````````````````````````
+
+
+Minimal case of url resolver bug.
+
+```````````````````````````````` example Issue 109: 2
+![alt text](/images/icons/up_16.gif "Title")
+
+![alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
+<p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
+.
+Document[0, 101]
+  Paragraph[0, 45] isTrailingBlankLine
+    Image[0, 44] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] titleOpen:[36, 37, "\""] title:[37, 42, "Title"] titleClose:[42, 43, "\""] linkClose:[43, 44, ")"]
+      Text[2, 10] chars:[2, 10, "alt text"]
+  Paragraph[46, 62] isTrailingBlankLine
+    ImageRef[47, 61] textOpen:[47, 48, "["] text:[48, 56, "alt text"] textClose:[56, 57, "]"] referenceOpen:[57, 58, "["] reference:[58, 60, "id"] referenceClose:[60, 61, "]"]
+      Text[48, 56] chars:[48, 56, "alt text"]
+  Reference[63, 100] refOpen:[63, 64, "["] ref:[64, 66, "id"] refClose:[66, 68, "]:"] url:[69, 92, "/images/icons/up_16.gif"] titleOpen:[93, 94, "\""] title:[94, 99, "Title"] titleClose:[99, 100, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 109: 3
+![alt text](/images/icons/up_16.gif)
+
+![alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><img src="/images/icons/up_16.gif" alt="alt text" /></p>
+<p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
+.
+Document[0, 93]
+  Paragraph[0, 37] isTrailingBlankLine
+    Image[0, 36] textOpen:[0, 2, "!["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 35, "/images/icons/up_16.gif"] pageRef:[12, 35, "/images/icons/up_16.gif"] linkClose:[35, 36, ")"]
+      Text[2, 10] chars:[2, 10, "alt text"]
+  Paragraph[38, 54] isTrailingBlankLine
+    ImageRef[39, 53] textOpen:[39, 40, "["] text:[40, 48, "alt text"] textClose:[48, 49, "]"] referenceOpen:[49, 50, "["] reference:[50, 52, "id"] referenceClose:[52, 53, "]"]
+      Text[40, 48] chars:[40, 48, "alt text"]
+  Reference[55, 92] refOpen:[55, 56, "["] ref:[56, 58, "id"] refClose:[58, 60, "]:"] url:[61, 84, "/images/icons/up_16.gif"] titleOpen:[85, 86, "\""] title:[86, 91, "Title"] titleClose:[91, 92, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 109: 4
+![alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+
+![alt text](/images/icons/up_16.gif)
+.
+<p><img src="/images/icons/up_16.gif" alt="alt text" title="Title" /></p>
+<p><img src="/images/icons/up_16.gif" alt="alt text" /></p>
+.
+Document[0, 93]
+  Paragraph[0, 16] isTrailingBlankLine
+    ImageRef[1, 15] textOpen:[1, 2, "["] text:[2, 10, "alt text"] textClose:[10, 11, "]"] referenceOpen:[11, 12, "["] reference:[12, 14, "id"] referenceClose:[14, 15, "]"]
+      Text[2, 10] chars:[2, 10, "alt text"]
+  Reference[17, 54] refOpen:[17, 18, "["] ref:[18, 20, "id"] refClose:[20, 22, "]:"] url:[23, 46, "/images/icons/up_16.gif"] titleOpen:[47, 48, "\""] title:[48, 53, "Title"] titleClose:[53, 54, "\""]
+  Paragraph[56, 93]
+    Image[56, 92] textOpen:[56, 58, "!["] text:[58, 66, "alt text"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 91, "/images/icons/up_16.gif"] pageRef:[68, 91, "/images/icons/up_16.gif"] linkClose:[91, 92, ")"]
+      Text[58, 66] chars:[58, 66, "alt text"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 109: 5
+[alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
+.
+Document[0, 54]
+  Paragraph[0, 15] isTrailingBlankLine
+    LinkRef[0, 14] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 13, "id"] referenceClose:[13, 14, "]"]
+      Text[1, 9] chars:[1, 9, "alt text"]
+  Reference[16, 53] refOpen:[16, 17, "["] ref:[17, 19, "id"] refClose:[19, 21, "]:"] url:[22, 45, "/images/icons/up_16.gif"] titleOpen:[46, 47, "\""] title:[47, 52, "Title"] titleClose:[52, 53, "\""]
+````````````````````````````````
+
+
+Minimal case of url resolver bug.
+
+```````````````````````````````` example Issue 109: 6
+[alt text](/images/icons/up_16.gif "Title")
+
+[alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
+<p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
+.
+Document[0, 99]
+  Paragraph[0, 44] isTrailingBlankLine
+    Link[0, 43] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 34, "/images/icons/up_16.gif"] pageRef:[11, 34, "/images/icons/up_16.gif"] titleOpen:[35, 36, "\""] title:[36, 41, "Title"] titleClose:[41, 42, "\""] linkClose:[42, 43, ")"]
+      Text[1, 9] chars:[1, 9, "alt text"]
+  Paragraph[45, 60] isTrailingBlankLine
+    LinkRef[45, 59] textOpen:[45, 46, "["] text:[46, 54, "alt text"] textClose:[54, 55, "]"] referenceOpen:[55, 56, "["] reference:[56, 58, "id"] referenceClose:[58, 59, "]"]
+      Text[46, 54] chars:[46, 54, "alt text"]
+  Reference[61, 98] refOpen:[61, 62, "["] ref:[62, 64, "id"] refClose:[64, 66, "]:"] url:[67, 90, "/images/icons/up_16.gif"] titleOpen:[91, 92, "\""] title:[92, 97, "Title"] titleClose:[97, 98, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 109: 7
+[alt text](/images/icons/up_16.gif)
+
+[alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+.
+<p><a href="/images/icons/up_16.gif">alt text</a></p>
+<p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
+.
+Document[0, 91]
+  Paragraph[0, 36] isTrailingBlankLine
+    Link[0, 35] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 34, "/images/icons/up_16.gif"] pageRef:[11, 34, "/images/icons/up_16.gif"] linkClose:[34, 35, ")"]
+      Text[1, 9] chars:[1, 9, "alt text"]
+  Paragraph[37, 52] isTrailingBlankLine
+    LinkRef[37, 51] textOpen:[37, 38, "["] text:[38, 46, "alt text"] textClose:[46, 47, "]"] referenceOpen:[47, 48, "["] reference:[48, 50, "id"] referenceClose:[50, 51, "]"]
+      Text[38, 46] chars:[38, 46, "alt text"]
+  Reference[53, 90] refOpen:[53, 54, "["] ref:[54, 56, "id"] refClose:[56, 58, "]:"] url:[59, 82, "/images/icons/up_16.gif"] titleOpen:[83, 84, "\""] title:[84, 89, "Title"] titleClose:[89, 90, "\""]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 109: 8
+[alt text][id]
+
+[id]: /images/icons/up_16.gif "Title"
+
+[alt text](/images/icons/up_16.gif)
+.
+<p><a href="/images/icons/up_16.gif" title="Title">alt text</a></p>
+<p><a href="/images/icons/up_16.gif">alt text</a></p>
+.
+Document[0, 91]
+  Paragraph[0, 15] isTrailingBlankLine
+    LinkRef[0, 14] textOpen:[0, 1, "["] text:[1, 9, "alt text"] textClose:[9, 10, "]"] referenceOpen:[10, 11, "["] reference:[11, 13, "id"] referenceClose:[13, 14, "]"]
+      Text[1, 9] chars:[1, 9, "alt text"]
+  Reference[16, 53] refOpen:[16, 17, "["] ref:[17, 19, "id"] refClose:[19, 21, "]:"] url:[22, 45, "/images/icons/up_16.gif"] titleOpen:[46, 47, "\""] title:[47, 52, "Title"] titleClose:[52, 53, "\""]
+  Paragraph[55, 91]
+    Link[55, 90] textOpen:[55, 56, "["] text:[56, 64, "alt text"] textClose:[64, 65, "]"] linkOpen:[65, 66, "("] url:[66, 89, "/images/icons/up_16.gif"] pageRef:[66, 89, "/images/icons/up_16.gif"] linkClose:[89, 90, ")"]
+      Text[56, 64] chars:[56, 64, "alt text"]
+````````````````````````````````
+
+
