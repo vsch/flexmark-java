@@ -23,7 +23,7 @@ public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
-
+        optionsMap.put("lists-item-indent", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

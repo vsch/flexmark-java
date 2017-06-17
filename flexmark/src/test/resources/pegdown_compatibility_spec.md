@@ -2910,3 +2910,70 @@ Document[0, 10]
 ````````````````````````````````
 
 
+## Issue 108
+
+Issue #108, problem of the list of some Space in front, misunderstanding of
+`Parser.LISTS_ITEM_INDENT` setting to 2
+
+```````````````````````````````` example(Issue 108: 1) options(lists-item-indent)
+  1. **download**  
+  2. **abc**  →→
+  3. **999**
+
+.
+<ol>
+  <li><strong>download</strong>
+    <ol>
+      <li><strong>abc</strong></li>
+      <li><strong>999</strong></li>
+    </ol>
+  </li>
+</ol>
+.
+Document[0, 51]
+  OrderedList[2, 50] isTight delimiter:'.'
+    OrderedListItem[2, 50] open:[2, 4, "1."] isTight
+      Paragraph[5, 20]
+        StrongEmphasis[5, 17] textOpen:[5, 7, "**"] text:[7, 15, "download"] textClose:[15, 17, "**"]
+          Text[7, 15] chars:[7, 15, "download"]
+      OrderedList[22, 50] isTight start:2 delimiter:'.'
+        OrderedListItem[22, 37] open:[22, 24, "2."] isTight
+          Paragraph[25, 37]
+            StrongEmphasis[25, 32] textOpen:[25, 27, "**"] text:[27, 30, "abc"] textClose:[30, 32, "**"]
+              Text[27, 30] chars:[27, 30, "abc"]
+        OrderedListItem[39, 50] open:[39, 41, "3."] isTight hadBlankLineAfter
+          Paragraph[42, 50] isTrailingBlankLine
+            StrongEmphasis[42, 49] textOpen:[42, 44, "**"] text:[44, 47, "999"] textClose:[47, 49, "**"]
+              Text[44, 47] chars:[44, 47, "999"]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 108: 2
+  1. **download**  
+  2. **abc**  →→
+  3. **999**
+
+.
+<ol>
+  <li><strong>download</strong></li>
+  <li><strong>abc</strong></li>
+  <li><strong>999</strong></li>
+</ol>
+.
+Document[0, 51]
+  OrderedList[2, 50] isTight delimiter:'.'
+    OrderedListItem[2, 20] open:[2, 4, "1."] isTight
+      Paragraph[5, 20]
+        StrongEmphasis[5, 17] textOpen:[5, 7, "**"] text:[7, 15, "download"] textClose:[15, 17, "**"]
+          Text[7, 15] chars:[7, 15, "download"]
+    OrderedListItem[22, 37] open:[22, 24, "2."] isTight
+      Paragraph[25, 37]
+        StrongEmphasis[25, 32] textOpen:[25, 27, "**"] text:[27, 30, "abc"] textClose:[30, 32, "**"]
+          Text[27, 30] chars:[27, 30, "abc"]
+    OrderedListItem[39, 50] open:[39, 41, "3."] isTight hadBlankLineAfter
+      Paragraph[42, 50] isTrailingBlankLine
+        StrongEmphasis[42, 49] textOpen:[42, 44, "**"] text:[44, 47, "999"] textClose:[47, 49, "**"]
+          Text[44, 47] chars:[44, 47, "999"]
+````````````````````````````````
+
+

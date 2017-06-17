@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.19.8](#0198)
 - [0.19.6](#0196)
 - [0.19.5](#0195)
 - [0.19.4](#0194)
@@ -149,6 +150,12 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.19.8
+------
+
+* Fix: #112, Potential bug: Node.getChildOfType always returns null unless parent is an instance
+  of the desired class. Affected some list parsing in Old Gfm compatibility, which were bugs.
 
 0.19.6
 ------

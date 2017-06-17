@@ -99,6 +99,10 @@ public class ListOptions implements MutableDataSetter {
     }
 
     public boolean isTightListItem(ListItem node) {
+        if (node.isLoose()) {
+            return false;
+        }
+
         boolean autoLoose = isAutoLoose();
         if (autoLoose && isAutoLooseOneLevelLists()) {
             boolean singleLevel = node.getAncestorOfType(ListItem.class) == null && node.getChildOfType(ListBlock.class) == null;

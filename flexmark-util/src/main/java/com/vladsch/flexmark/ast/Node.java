@@ -50,7 +50,7 @@ public abstract class Node {
         Node child = getFirstChild();
         while (child != null) {
             for (Class nodeType : classes) {
-                if (nodeType.isInstance(parent)) return child;
+                if (nodeType.isInstance(child)) return child;
             }
             child = child.getNext();
         }
