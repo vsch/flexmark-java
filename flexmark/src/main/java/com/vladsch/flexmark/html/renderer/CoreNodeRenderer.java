@@ -669,6 +669,9 @@ public class CoreNodeRenderer implements NodeRenderer {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
 
             html.attr("href", resolvedLink.getUrl());
+            if (resolvedLink.getTarget() != null) {
+                html.attr("target", resolvedLink.getTarget());
+            }
             if (node.getTitle().isNotNull()) {
                 html.attr("title", node.getTitle().unescape());
             }
@@ -758,6 +761,9 @@ public class CoreNodeRenderer implements NodeRenderer {
                 context.renderChildren(node);
             } else {
                 html.attr("href", resolvedLink.getUrl());
+                if (resolvedLink.getTarget() != null) {
+                    html.attr("target", resolvedLink.getTarget());
+                }
                 if (resolvedLink.getTitle() != null) {
                     html.attr("title", resolvedLink.getTitle());
                 }
