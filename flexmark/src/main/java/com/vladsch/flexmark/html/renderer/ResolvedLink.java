@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.sun.tools.javac.comp.Attr;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 
