@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.20.0](#0200)
 - [0.19.8](#0198)
 - [0.19.6](#0196)
 - [0.19.5](#0195)
@@ -150,6 +151,14 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.20.0
+------
+
+* API Change: #117, Add target attribute support to ResolvedLink and updates to the associated
+  core renderer code. Now `LinkResolver` can also set any attribute of the link via
+  `ResolvedLink.getAttributes()` and `ResolvedLink.getNonNullAttributes()` methods and
+  manipulate the desired attributes of the link.
 
 0.19.8
 ------

@@ -45,5 +45,7 @@
     <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>

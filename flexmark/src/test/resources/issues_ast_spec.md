@@ -621,3 +621,43 @@ Document[0, 91]
 ````````````````````````````````
 
 
+## Issue MN-456
+
+Issue MN-456
+
+```````````````````````````````` example Issue MN-456: 1
+```{r, echo=FALSE}
+summary(cars)
+```
+.
+<pre><code class="language-{r,">summary(cars)
+</code></pre>
+.
+Document[0, 37]
+  FencedCodeBlock[0, 36] open:[0, 3, "```"] info:[3, 18, "{r, echo=FALSE}"] content:[19, 33] lines[1] close:[33, 36, "```"]
+    Text[19, 33] chars:[19, 33, "summa … ars)\n"]
+````````````````````````````````
+
+
+## Issue 116
+
+Issue #116, Can I use flexmark to turn a Markdown string into a List of Texts for use in a
+JavaFX TextFlow?
+
+```````````````````````````````` example Issue 116: 1
+So _this_ is italic and **this** is bold
+.
+<p>So <em>this</em> is italic and <strong>this</strong> is bold</p>
+.
+Document[0, 41]
+  Paragraph[0, 41]
+    Text[0, 3] chars:[0, 3, "So "]
+    Emphasis[3, 9] textOpen:[3, 4, "_"] text:[4, 8, "this"] textClose:[8, 9, "_"]
+      Text[4, 8] chars:[4, 8, "this"]
+    Text[9, 24] chars:[9, 24, " is i …  and "]
+    StrongEmphasis[24, 32] textOpen:[24, 26, "**"] text:[26, 30, "this"] textClose:[30, 32, "**"]
+      Text[26, 30] chars:[26, 30, "this"]
+    Text[32, 40] chars:[32, 40, " is bold"]
+````````````````````````````````
+
+

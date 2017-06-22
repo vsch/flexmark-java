@@ -165,11 +165,11 @@ public interface NodeRendererContext {
      * <p>
      * Core processing will simply pass the link as is. It is up to extension LinkResolvers and AttributeProviders to make sense of the link and applicable attributes based on status.
      *
-     * @param linkType  type of link being rendered. Core defined links are Link, Image. Extensions can define their own
-     * @param url       link url text
-     * @param title     link title text
-     * @param urlEncode whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
+     * @param linkType   type of link being rendered. Core defined links are Link, Image. Extensions can define their own
+     * @param url        link url text
+     * @param attributes link attributes
+     * @param urlEncode  whether the link should be url encoded, if null then the value of {@link HtmlRenderer#PERCENT_ENCODE_URLS} will be used to determine whether the resolved URL is to be encoded.
      * @return resolved link url for this link and its resolved status
      */
-    ResolvedLink resolveLink(LinkType linkType, CharSequence url, CharSequence title, Boolean urlEncode);
+    ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode);
 }

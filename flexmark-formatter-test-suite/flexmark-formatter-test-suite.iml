@@ -44,5 +44,7 @@
     <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
     <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>

@@ -12,6 +12,8 @@ public interface Attribute extends Immutable<Attribute, MutableAttribute> {
     String LINK_STATUS_ATTR = "Link Status";
     String NAME_ATTR = "name";
     String STYLE_ATTR = "style";
+    String TITLE_ATTR = "title";
+    String TARGET_ATTR = "target";
     Attribute NO_FOLLOW = AttributeImpl.of("rel", "nofollow");
     Set<String> NON_RENDERING_WHEN_EMPTY = new HashSet<String>(Arrays.asList(CLASS_ATTR, ID_ATTR, NAME_ATTR, STYLE_ATTR));
     char NUL = '\0';

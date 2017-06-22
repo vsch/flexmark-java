@@ -44,5 +44,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.openjdk.jmh:jmh-generator-annprocess:1.13" level="project" />
     <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>

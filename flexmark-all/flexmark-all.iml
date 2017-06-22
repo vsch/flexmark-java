@@ -56,5 +56,7 @@
     <orderEntry type="module" module-name="flexmark-profile-pegdown" />
     <orderEntry type="module" module-name="flexmark-util" />
     <orderEntry type="module" module-name="flexmark-youtrack-converter" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
   </component>
 </module>

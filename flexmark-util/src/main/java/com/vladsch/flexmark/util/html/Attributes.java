@@ -15,7 +15,7 @@ public class Attributes {
     }
 
     public Attributes(Attributes attributes) {
-        myAttributes = attributes.myAttributes == null ? null : new LinkedHashMap<String, Attribute>(attributes.myAttributes);
+        myAttributes = attributes == null || attributes.myAttributes == null ? null : new LinkedHashMap<String, Attribute>(attributes.myAttributes);
     }
 
     protected LinkedHashMap<String, Attribute> getAttributes() {

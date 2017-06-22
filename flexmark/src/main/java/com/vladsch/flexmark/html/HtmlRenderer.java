@@ -11,6 +11,7 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
+import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
@@ -519,11 +520,11 @@ public class HtmlRenderer implements IRender {
 
         @Override
         public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Boolean urlEncode) {
-            return resolveLink(linkType, url, null, urlEncode);
+            return resolveLink(linkType, url, (Attributes) null, urlEncode);
         }
 
         @Override
-        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, CharSequence title, Boolean urlEncode) {
+        public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
             HashMap<String, ResolvedLink> resolvedLinks = resolvedLinkMap.get(linkType);
             if (resolvedLinks == null) {
                 resolvedLinks = new HashMap<String, ResolvedLink>();
@@ -533,8 +534,7 @@ public class HtmlRenderer implements IRender {
             String urlSeq = url instanceof String ? (String) url : String.valueOf(url);
             ResolvedLink resolvedLink = resolvedLinks.get(urlSeq);
             if (resolvedLink == null) {
-                String titleSeq = title == null ? null : title instanceof String ? (String) title : String.valueOf(title);
-                resolvedLink = new ResolvedLink(linkType, urlSeq, titleSeq);
+                resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
 
                 if (!urlSeq.isEmpty()) {
                     Node currentNode = getCurrentNode();
@@ -551,11 +551,6 @@ public class HtmlRenderer implements IRender {
 
                 // put it in the map
                 resolvedLinks.put(urlSeq, resolvedLink);
-            }
-
-            // use provided non-null title to override cached value
-            if (resolvedLink != null && title != null) {
-                resolvedLink = resolvedLink.withTitle(title);
             }
 
             return resolvedLink;
@@ -741,8 +736,8 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
-            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, CharSequence title, Boolean urlEncode) {
-                return myMainNodeRenderer.resolveLink(linkType, url, title, urlEncode);
+            public ResolvedLink resolveLink(LinkType linkType, CharSequence url, Attributes attributes, Boolean urlEncode) {
+                return myMainNodeRenderer.resolveLink(linkType, url, attributes, urlEncode);
             }
 
             @Override

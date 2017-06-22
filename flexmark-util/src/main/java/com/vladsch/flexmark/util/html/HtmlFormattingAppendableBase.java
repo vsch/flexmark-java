@@ -131,7 +131,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
 
     @Override
     public T attr(Attributes attributes) {
-        if (!attributes.isEmpty()) {
+        if (attributes != null && !attributes.isEmpty()) {
             if (currentAttributes == null) {
                 currentAttributes = new Attributes(attributes);
             } else {

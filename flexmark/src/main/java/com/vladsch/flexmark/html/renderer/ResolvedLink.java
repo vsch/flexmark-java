@@ -1,54 +1,99 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.sun.tools.javac.comp.Attr;
+import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.Attributes;
+
 public class ResolvedLink {
     private final LinkType myLinkType;
     private final String myUrl;
-    private final String myTitle;
     private final LinkStatus myStatus;
+    private Attributes myAttributes;
 
     public ResolvedLink(LinkType linkType, CharSequence url) {
         this(linkType, url, null, LinkStatus.UNKNOWN);
     }
 
-    public ResolvedLink(LinkType linkType, CharSequence url, CharSequence title) {
-        this(linkType, url, title, LinkStatus.UNKNOWN);
+    public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes) {
+        this(linkType, url, attributes, LinkStatus.UNKNOWN);
     }
 
-    public ResolvedLink(LinkType linkType, CharSequence url, CharSequence title, LinkStatus status) {
+    public Attributes getAttributes() {
+        return myAttributes;
+    }
+
+    public Attributes getNonNullAttributes() {
+        if (myAttributes == null) {
+            myAttributes = new Attributes();
+        }
+        return myAttributes;
+    }
+
+    public ResolvedLink(LinkType linkType, CharSequence url, Attributes attributes, LinkStatus status) {
         myLinkType = linkType;
         myUrl = url instanceof String ? (String) url : String.valueOf(url);
-        myTitle = title == null ? null : title instanceof String ? (String) title : String.valueOf(title);
         myStatus = status;
+        if (attributes != null) {
+            getNonNullAttributes().addValues(attributes);
+        }
     }
 
     // @formatter:off
-    public ResolvedLink withLinkType(LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myTitle, myStatus); }
-    public ResolvedLink withStatus(LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myTitle, status); }
+    public ResolvedLink withLinkType(LinkType linkType) { return linkType == this.myLinkType ? this : new ResolvedLink(linkType, myUrl, myAttributes, myStatus); }
+    public ResolvedLink withStatus(LinkStatus status) { return status == this.myStatus ? this : new ResolvedLink(myLinkType, myUrl, myAttributes, status); }
     // @formatter:on
-    public ResolvedLink withUrl(CharSequence url) {
-        String useUrl = url instanceof String ? (String) url : String.valueOf(url);
-        return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myTitle, myStatus);
-    }
-
-    public ResolvedLink withTitle(CharSequence title) {
-        String useTitle = title == null ? null : title instanceof String ? (String) title : String.valueOf(title);
-        return this.myTitle == useTitle || this.myTitle != null && this.myTitle.equals(useTitle) ? this : new ResolvedLink(myLinkType, myUrl, useTitle, myStatus);
-    }
 
     public LinkType getLinkType() {
         return myLinkType;
+    }
+
+    public LinkStatus getStatus() {
+        return myStatus;
+    }
+
+    public ResolvedLink withUrl(CharSequence url) {
+        String useUrl = url instanceof String ? (String) url : String.valueOf(url);
+        return this.myUrl.equals(useUrl) ? this : new ResolvedLink(myLinkType, useUrl, myAttributes, myStatus);
     }
 
     public String getUrl() {
         return myUrl;
     }
 
-    public String getTitle() {
-        return myTitle;
+    public ResolvedLink withTitle(CharSequence title) {
+        String haveTitle = myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
+        if (title == haveTitle || haveTitle != null && haveTitle.equals(title)) return this;
+
+        Attributes attributes = new Attributes(myAttributes);
+        if (title == null) {
+            attributes.remove(Attribute.TITLE_ATTR);
+            if (attributes.isEmpty()) attributes = null;
+        } else {
+            attributes.replaceValue(Attribute.TITLE_ATTR, title);
+        }
+        return new ResolvedLink(myLinkType, myUrl, attributes, myStatus);
     }
 
-    public LinkStatus getStatus() {
-        return myStatus;
+    public String getTitle() {
+        return myAttributes == null ? null : myAttributes.getValue(Attribute.TITLE_ATTR);
+    }
+
+    public ResolvedLink withTarget(CharSequence target) {
+        String haveTarget = myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
+        if (target == haveTarget || haveTarget != null && haveTarget.equals(target)) return this;
+
+        Attributes attributes = new Attributes(myAttributes);
+        if (target == null) {
+            attributes.remove(Attribute.TARGET_ATTR);
+            if (attributes.isEmpty()) attributes = null;
+        } else {
+            attributes.replaceValue(Attribute.TARGET_ATTR, target);
+        }
+        return new ResolvedLink(myLinkType, myUrl, attributes, myStatus);
+    }
+
+    public String getTarget() {
+        return myAttributes == null ? null : myAttributes.getValue(Attribute.TARGET_ATTR);
     }
 
     @Override

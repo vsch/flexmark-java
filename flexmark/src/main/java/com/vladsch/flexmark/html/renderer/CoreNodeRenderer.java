@@ -9,6 +9,8 @@ import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
@@ -643,8 +645,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(Image node, NodeRendererContext context, HtmlWriter html) {
         if (!context.isDoNotRenderLinks()) {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
-
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), node.getTitle().ifNull(null), null);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.IMAGE, node.getUrl().unescape(), null, null);
             String url = resolvedLink.getUrl();
 
             if (!node.getUrlContent().isEmpty()) {
@@ -655,9 +656,15 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             html.attr("src", url);
             html.attr("alt", altText);
+
+            // we have a title part, use that
             if (node.getTitle().isNotNull()) {
-                html.attr("title", node.getTitle().unescape());
+                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
+            } else {
+                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
             }
+
+            html.attr(resolvedLink.getAttributes());
             html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
         }
     }
@@ -666,12 +673,18 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (context.isDoNotRenderLinks()) {
             context.renderChildren(node);
         } else {
-            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null);
+            ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, node.getUrl().unescape(), null, null);
 
             html.attr("href", resolvedLink.getUrl());
+
+            // we have a title part, use that
             if (node.getTitle().isNotNull()) {
-                html.attr("title", node.getTitle().unescape());
+                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, node.getTitle().unescape());
+            } else {
+                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
             }
+
+            html.attr(resolvedLink.getAttributes());
             html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
             context.renderChildren(node);
             html.tag("/a");
@@ -690,9 +703,13 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (node.isDefined()) {
             Reference reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
-            String title = reference.getTitle().isNull() ? null : reference.getTitle().unescape();
 
-            resolvedLink = context.resolveLink(LinkType.IMAGE, url, title, null);
+            resolvedLink = context.resolveLink(LinkType.IMAGE, url, null, null);
+            if (reference.getTitle().isNotNull()) {
+                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
+            } else {
+                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+            }
         } else {
             // see if have reference resolver and this is resolved
             String normalizeRef = referenceRepository.normalizeKey(node.getReference());
@@ -711,9 +728,7 @@ public class CoreNodeRenderer implements NodeRenderer {
 
                 html.attr("src", resolvedLink.getUrl());
                 html.attr("alt", altText);
-                if (resolvedLink.getTitle() != null) {
-                    html.attr("title", resolvedLink.getTitle());
-                }
+                html.attr(resolvedLink.getAttributes());
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tagVoid("img");
             }
         }
@@ -731,9 +746,13 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (node.isDefined()) {
             Reference reference = node.getReferenceNode(referenceRepository);
             String url = reference.getUrl().unescape();
-            String title = reference.getTitle().isNull() ? null : reference.getTitle().unescape();
 
-            resolvedLink = context.resolveLink(LinkType.LINK, url, title, null);
+            resolvedLink = context.resolveLink(LinkType.LINK, url, null, null);
+            if (reference.getTitle().isNotNull()) {
+                resolvedLink.getNonNullAttributes().replaceValue(Attribute.TITLE_ATTR, reference.getTitle().unescape());
+            } else {
+                resolvedLink.getNonNullAttributes().remove(Attribute.TITLE_ATTR);
+            }
         } else {
             // see if have reference resolver and this is resolved
             String normalizeRef = node.getReference().unescape();
@@ -758,9 +777,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 context.renderChildren(node);
             } else {
                 html.attr("href", resolvedLink.getUrl());
-                if (resolvedLink.getTitle() != null) {
-                    html.attr("title", resolvedLink.getTitle());
-                }
+                html.attr(resolvedLink.getAttributes());
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
                 context.renderChildren(node);
                 html.tag("/a");
