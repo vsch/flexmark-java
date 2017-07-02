@@ -14,35 +14,35 @@ Converts `[TOC style]` text to TocBlock nodes.
 
 1. `style` consists of space separated list of options:
 
-    - `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-      is to include heading levels 2 and 3. Examples:
-        - `levels=4` include levels 2,3 and 4
-        - `levels=2-4` include levels 2,3 and 4. same as `levels=4`
-        - `levels=2-4,5` include levels 2,3,4 and 5
-        - `levels=1,3` include levels 1 and 3
+   * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
+     is to include heading levels 2 and 3. Examples:
+     * `levels=4` include levels 2,3 and 4
+     * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
+     * `levels=2-4,5` include levels 2,3,4 and 5
+     * `levels=1,3` include levels 1 and 3
 
-    - `html` generate HTML version of the TOC
+   * `html` generate HTML version of the TOC
 
-    - `markdown` generate Markdown version of the TOC
+   * `markdown` generate Markdown version of the TOC
 
-    - `text` to only include the text of the heading
+   * `text` to only include the text of the heading
 
-    - `formatted` to include text and inline formatting
+   * `formatted` to include text and inline formatting
 
-    - `hierarchy` to render as hierarchical list in order of appearance in the document
+   * `hierarchy` to render as hierarchical list in order of appearance in the document
 
-    - `flat` to render as a flat list in order of appearance in the document
+   * `flat` to render as a flat list in order of appearance in the document
 
-    - `reversed` to render as a flat list in order of appearance in the document
+   * `reversed` to render as a flat list in order of appearance in the document
 
-    - `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
+   * `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
 
-    - `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
-      no inlines
+   * `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
+     no inlines
 
-    - `bullet` to use a bullet list for the TOC items
+   * `bullet` to use a bullet list for the TOC items
 
-    - `numbered` to use a numbered list for TOC items
+   * `numbered` to use a numbered list for TOC items
 
 2. `"Title"` specifies the text for the table of contents heading. If omitted or blank then no
    heading will be generated for the table of contents. `#` prefix in the title will specify the
@@ -1052,6 +1052,87 @@ Document[0, 40]
   Heading[12, 24] textOpen:[12, 15, "###"] text:[16, 24, "Header 3"]
     Text[16, 24] chars:[16, 24, "Header 3"]
   TocBlock[26, 40] openingMarker:[26, 27] tocKeyword:[27, 30] style:[31, 39] closingMarker:[39, 40]
+````````````````````````````````
+
+
+## Test unordered skipped headings
+
+```````````````````````````````` example Test unordered skipped headings: 1
+# Test 1
+
+### test 0.0.1
+
+### test 0.0.2
+
+## test 1.1
+
+### test 1.1.1
+
+#### test 1.1.1.1
+
+#### test 1.1.1.2
+
+## test 1.2
+
+### test 1.2.1
+
+#### test 1.2.1.1
+
+#### test 1.2.1.2
+
+[TOC levels=2,4]
+
+.
+<h1 id="test-1">Test 1</h1>
+<h3 id="test-001">test 0.0.1</h3>
+<h3 id="test-002">test 0.0.2</h3>
+<h2 id="test-11">test 1.1</h2>
+<h3 id="test-111">test 1.1.1</h3>
+<h4 id="test-1111">test 1.1.1.1</h4>
+<h4 id="test-1112">test 1.1.1.2</h4>
+<h2 id="test-12">test 1.2</h2>
+<h3 id="test-121">test 1.2.1</h3>
+<h4 id="test-1211">test 1.2.1.1</h4>
+<h4 id="test-1212">test 1.2.1.2</h4>
+<ul>
+  <li><a href="#test-11">test 1.1</a>
+    <ul>
+      <li><a href="#test-1111">test 1.1.1.1</a></li>
+      <li><a href="#test-1112">test 1.1.1.2</a></li>
+    </ul>
+  </li>
+  <li><a href="#test-12">test 1.2</a>
+    <ul>
+      <li><a href="#test-1211">test 1.2.1.1</a></li>
+      <li><a href="#test-1212">test 1.2.1.2</a></li>
+    </ul>
+  </li>
+</ul>
+.
+Document[0, 194]
+  Heading[0, 8] textOpen:[0, 1, "#"] text:[2, 8, "Test 1"]
+    Text[2, 8] chars:[2, 8, "Test 1"]
+  Heading[10, 24] textOpen:[10, 13, "###"] text:[14, 24, "test 0.0.1"]
+    Text[14, 24] chars:[14, 24, "test 0.0.1"]
+  Heading[26, 40] textOpen:[26, 29, "###"] text:[30, 40, "test 0.0.2"]
+    Text[30, 40] chars:[30, 40, "test 0.0.2"]
+  Heading[42, 53] textOpen:[42, 44, "##"] text:[45, 53, "test 1.1"]
+    Text[45, 53] chars:[45, 53, "test 1.1"]
+  Heading[55, 69] textOpen:[55, 58, "###"] text:[59, 69, "test 1.1.1"]
+    Text[59, 69] chars:[59, 69, "test 1.1.1"]
+  Heading[71, 88] textOpen:[71, 75, "####"] text:[76, 88, "test 1.1.1.1"]
+    Text[76, 88] chars:[76, 88, "test  … 1.1.1"]
+  Heading[90, 107] textOpen:[90, 94, "####"] text:[95, 107, "test 1.1.1.2"]
+    Text[95, 107] chars:[95, 107, "test  … 1.1.2"]
+  Heading[109, 120] textOpen:[109, 111, "##"] text:[112, 120, "test 1.2"]
+    Text[112, 120] chars:[112, 120, "test 1.2"]
+  Heading[122, 136] textOpen:[122, 125, "###"] text:[126, 136, "test 1.2.1"]
+    Text[126, 136] chars:[126, 136, "test 1.2.1"]
+  Heading[138, 155] textOpen:[138, 142, "####"] text:[143, 155, "test 1.2.1.1"]
+    Text[143, 155] chars:[143, 155, "test  … 2.1.1"]
+  Heading[157, 174] textOpen:[157, 161, "####"] text:[162, 174, "test 1.2.1.2"]
+    Text[162, 174] chars:[162, 174, "test  … 2.1.2"]
+  TocBlock[176, 193] openingMarker:[176, 177] tocKeyword:[177, 180] style:[181, 191] closingMarker:[191, 192]
 ````````````````````````````````
 
 

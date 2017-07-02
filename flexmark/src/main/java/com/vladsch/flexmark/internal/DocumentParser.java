@@ -998,7 +998,9 @@ public class DocumentParser implements ParserState {
                             ArrayList<BasedSequence> lines = new ArrayList<BasedSequence>(iMax - i);
                             lines.addAll(block.getContentLines().subList(i, iMax));
                             int start = contentChars.getStartOffset() - lines.get(0).getStartOffset();
-                            lines.set(0, lines.get(0).subSequence(start));
+                            if (start > 0 && start < lines.get(0).length()) {
+                                lines.set(0, lines.get(0).subSequence(start));
+                            }
 
                             // now we copy the indents
                             int[] indents = new int[iMax - i];
