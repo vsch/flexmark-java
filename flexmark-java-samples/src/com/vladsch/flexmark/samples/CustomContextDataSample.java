@@ -14,12 +14,17 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.util.Set;
 
 public class CustomContextDataSample {
+    class XhtmlContent {
+
+    }
+
     public static final DataKey<XhtmlContent> XHTML_CONTENT = new DataKey<XhtmlContent>("XHTML_CONTENT", (XhtmlContent)null);
 
     static class CustomExtension implements HtmlRenderer.HtmlRendererExtension {
@@ -49,7 +54,7 @@ public class CustomContextDataSample {
         @Override
         public ResolvedLink resolveLink(final Node node, final NodeRendererContext context, final ResolvedLink link) {
             Document document = context.getDocument();
-            XhtmlContent xhtmlContent = document.get(XhtmlContent);
+            XhtmlContent xhtmlContent = document.get(XHTML_CONTENT);
 
             if (node instanceof WikiImage) {
                 // resolve wiki image link
@@ -97,6 +102,8 @@ public class CustomContextDataSample {
 
         Parser parser = Parser.builder(options).build();
         HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+        String markdown = "";
+        XhtmlContent xhtmlContent = null;
 
         // You can re-use parser and renderer instances
         Document document = (Document) parser.parse(markdown);
