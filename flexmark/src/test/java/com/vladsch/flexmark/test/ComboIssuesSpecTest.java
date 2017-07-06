@@ -4,6 +4,7 @@ import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.KeepType;
@@ -75,6 +76,7 @@ public class ComboIssuesSpecTest extends ComboSpecTestCase {
         optionsMap.put("src-wrap-html", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_HTML, true));
         optionsMap.put("src-wrap-blocks", new MutableDataSet().set(HtmlRenderer.SOURCE_WRAP_HTML_BLOCKS, true));
         optionsMap.put("hard-line-break-limit", new MutableDataSet().set(Parser.HARD_LINE_BREAK_LIMIT, true));
+        optionsMap.put("fixed-indent", new MutableDataSet().setFrom(ParserEmulationProfile.FIXED_INDENT));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

@@ -112,6 +112,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .setLooseWhenHasLooseSubItem(false)
                     .setLooseWhenHasTrailingBlankLine(true)
                     .setLooseWhenPrevHasTrailingBlankLine(false)
+                    .setLooseWhenLastItemPrevHasTrailingBlankLine(true)
                     .setOrderedListManualStart(false)
                     .setDelimiterMismatchToNewList(false)
                     .setItemTypeMismatchToNewList(false)

@@ -29,10 +29,10 @@ import java.util.*;
  * Parses input text to a tree of nodes.
  * <p>
  * Start with the {@link #builder} method, configure the parser and build it. Example:
- * <pre><code>
+ * <pre>{@code
  * Parser parser = Parser.builder().build();
  * Node document = parser.parse("input text");
- * </code></pre>
+ * }</pre>
  */
 public class Parser implements IParse {
     public static final DataKey<Iterable<Extension>> EXTENSIONS = new DataKey<Iterable<Extension>>("EXTENSIONS", Extension.EMPTY_LIST);
@@ -123,6 +123,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> LISTS_AUTO_LOOSE = new DataKey<Boolean>("LISTS_AUTO_LOOSE", true);
     public static final DataKey<Boolean> LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS = new DataKey<Boolean>("LISTS_AUTO_LOOSE_ONE_LEVEL_LISTS", false);
     public static final DataKey<Boolean> LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE = new DataKey<Boolean>("LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE", false);
+    public static final DataKey<Boolean> LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE = new DataKey<Boolean>("LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE", false);
     public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN = new DataKey<Boolean>("LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN", false);
     public static final DataKey<Boolean> LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH = new DataKey<Boolean>("LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH", false);
     public static final DataKey<Boolean> LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM = new DataKey<Boolean>("LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM", false);
@@ -216,7 +217,7 @@ public class Parser implements IParse {
      * @param input the text to parse
      * @return the root node
      */
-    public Node parse(BasedSequence input) {
+    public Document parse(BasedSequence input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
@@ -231,7 +232,7 @@ public class Parser implements IParse {
      * @param input the text to parse
      * @return the root node
      */
-    public Node parse(String input) {
+    public Document parse(String input) {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(CharSubSequence.of(input));
@@ -247,14 +248,14 @@ public class Parser implements IParse {
      * @return the root node
      * @throws IOException when reading throws an exception
      */
-    public Node parseReader(Reader input) throws IOException {
+    public Document parseReader(Reader input) throws IOException {
         DocumentParser documentParser = new DocumentParser(options, blockParserFactories, paragraphPreProcessorFactories,
                 blockPreProcessorDependencies, inlineParserFactory.inlineParser(options, specialCharacters, delimiterCharacters, delimiterProcessors, linkRefProcessors, inlineParserExtensionFactories));
         Document document = documentParser.parse(input);
         return postProcess(document);
     }
 
-    private Node postProcess(Document document) {
+    private Document postProcess(Document document) {
         document = PostProcessorManager.processDocument(document, postProcessorDependencies);
         return document;
     }

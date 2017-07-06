@@ -19,6 +19,7 @@ public class ListOptions implements MutableDataSetter {
     protected boolean itemTypeMismatchToNewList;
     protected boolean itemTypeMismatchToSubList;
     protected boolean looseWhenPrevHasTrailingBlankLine;
+    protected boolean looseWhenLastItemPrevHasTrailingBlankLine;
     protected boolean looseWhenHasNonListChildren;
     protected boolean looseWhenBlankLineFollowsItemParagraph;
     protected boolean looseWhenHasLooseSubItem;
@@ -48,6 +49,7 @@ public class ListOptions implements MutableDataSetter {
         itemTypeMismatchToNewList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST.getFrom(options);
         itemTypeMismatchToSubList = Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST.getFrom(options);
         looseWhenPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);
+        looseWhenLastItemPrevHasTrailingBlankLine = Parser.LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE.getFrom(options);
         looseWhenHasNonListChildren = Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN.getFrom(options);
         looseWhenBlankLineFollowsItemParagraph = Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH.getFrom(options);
         looseWhenHasLooseSubItem = Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM.getFrom(options);
@@ -75,6 +77,7 @@ public class ListOptions implements MutableDataSetter {
         itemTypeMismatchToNewList = other.isItemTypeMismatchToNewList();
         itemTypeMismatchToSubList = other.isItemTypeMismatchToSubList();
         looseWhenPrevHasTrailingBlankLine = other.isLooseWhenPrevHasTrailingBlankLine();
+        looseWhenLastItemPrevHasTrailingBlankLine = other.isLooseWhenLastItemPrevHasTrailingBlankLine();
         looseWhenHasNonListChildren = other.isLooseWhenHasNonListChildren();
         looseWhenBlankLineFollowsItemParagraph = other.isLooseWhenBlankLineFollowsItemParagraph();
         looseWhenHasLooseSubItem = other.isLooseWhenHasLooseSubItem();
@@ -178,6 +181,7 @@ public class ListOptions implements MutableDataSetter {
         options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_NEW_LIST, itemTypeMismatchToNewList);
         options.set(Parser.LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST, itemTypeMismatchToSubList);
         options.set(Parser.LISTS_LOOSE_WHEN_PREV_HAS_TRAILING_BLANK_LINE, looseWhenPrevHasTrailingBlankLine);
+        options.set(Parser.LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE, looseWhenLastItemPrevHasTrailingBlankLine);
         options.set(Parser.LISTS_LOOSE_WHEN_HAS_NON_LIST_CHILDREN, looseWhenHasNonListChildren);
         options.set(Parser.LISTS_LOOSE_WHEN_BLANK_LINE_FOLLOWS_ITEM_PARAGRAPH, looseWhenBlankLineFollowsItemParagraph);
         options.set(Parser.LISTS_LOOSE_WHEN_HAS_LOOSE_SUB_ITEM, looseWhenHasLooseSubItem);
@@ -265,6 +269,10 @@ public class ListOptions implements MutableDataSetter {
 
     public boolean isLooseWhenPrevHasTrailingBlankLine() {
         return looseWhenPrevHasTrailingBlankLine;
+    }
+
+    public boolean isLooseWhenLastItemPrevHasTrailingBlankLine() {
+        return looseWhenLastItemPrevHasTrailingBlankLine;
     }
 
     public boolean isLooseWhenHasNonListChildren() {
@@ -575,6 +583,7 @@ public class ListOptions implements MutableDataSetter {
         if (itemTypeMismatchToNewList != that.itemTypeMismatchToNewList) return false;
         if (itemTypeMismatchToSubList != that.itemTypeMismatchToSubList) return false;
         if (looseWhenPrevHasTrailingBlankLine != that.looseWhenPrevHasTrailingBlankLine) return false;
+        if (looseWhenLastItemPrevHasTrailingBlankLine != that.looseWhenLastItemPrevHasTrailingBlankLine) return false;
         if (looseWhenHasNonListChildren != that.looseWhenHasNonListChildren) return false;
         if (looseWhenBlankLineFollowsItemParagraph != that.looseWhenBlankLineFollowsItemParagraph) return false;
         if (looseWhenHasLooseSubItem != that.looseWhenHasLooseSubItem) return false;
@@ -602,6 +611,7 @@ public class ListOptions implements MutableDataSetter {
         result = 31 * result + (itemTypeMismatchToNewList ? 1 : 0);
         result = 31 * result + (itemTypeMismatchToSubList ? 1 : 0);
         result = 31 * result + (looseWhenPrevHasTrailingBlankLine ? 1 : 0);
+        result = 31 * result + (looseWhenLastItemPrevHasTrailingBlankLine ? 1 : 0);
         result = 31 * result + (looseWhenHasNonListChildren ? 1 : 0);
         result = 31 * result + (looseWhenBlankLineFollowsItemParagraph ? 1 : 0);
         result = 31 * result + (looseWhenHasLooseSubItem ? 1 : 0);

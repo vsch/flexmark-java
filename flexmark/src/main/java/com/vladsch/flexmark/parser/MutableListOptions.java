@@ -34,6 +34,7 @@ public class MutableListOptions extends ListOptions {
     public MutableListOptions setItemTypeMismatchToNewList(boolean itemTypeMatchToNewList) { this.itemTypeMismatchToNewList = itemTypeMatchToNewList; return this; }
     public MutableListOptions setItemTypeMismatchToSubList(boolean itemTypeMismatchToSubList) { this.itemTypeMismatchToSubList = itemTypeMismatchToSubList; return this; }
     public MutableListOptions setLooseWhenPrevHasTrailingBlankLine(boolean looseWhenPrevHasTrailingBlankLine) { this.looseWhenPrevHasTrailingBlankLine = looseWhenPrevHasTrailingBlankLine; return this; }
+    public MutableListOptions setLooseWhenLastItemPrevHasTrailingBlankLine(boolean looseWhenLastItemPrevHasTrailingBlankLine) { this.looseWhenLastItemPrevHasTrailingBlankLine = looseWhenLastItemPrevHasTrailingBlankLine; return this; }
     public MutableListOptions setLooseWhenHasNonListChildren(boolean looseWhenHasNonListChildren) { this.looseWhenHasNonListChildren = looseWhenHasNonListChildren; return this; }
     public MutableListOptions setLooseWhenBlankLineFollowsItemParagraph(boolean looseWhenLineBlankFollowsItemParagraph) { this.looseWhenBlankLineFollowsItemParagraph = looseWhenLineBlankFollowsItemParagraph; return this; }
     public MutableListOptions setLooseWhenHasLooseSubItem(boolean looseWhenHasLooseSubItem) { this.looseWhenHasLooseSubItem = looseWhenHasLooseSubItem; return this; }

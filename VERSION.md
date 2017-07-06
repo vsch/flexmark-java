@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.20.2](#0202)
 - [0.20.0](#0200)
 - [0.19.8](#0198)
 - [0.19.6](#0196)
@@ -151,6 +152,17 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.20.2
+------
+
+* Fix: #120, Fixed Indent mode always has the last list item as tight. Fixed Spaces parsing
+  ignores blank line after last list item and does not check if previous item is loose either.
+  Making it impossible to make the last item loose.
+
+  Added new `Parser.LISTS_LOOSE_WHEN_LAST_ITEM_PREV_HAS_TRAILING_BLANK_LINE`, default `false`.
+  When true the last item in a list will be loose if previous item has a trailing blank line.
+  `ParserEmulationProfile.FIXED_INDENT` to allow last item to be loose.
 
 0.20.0
 ------

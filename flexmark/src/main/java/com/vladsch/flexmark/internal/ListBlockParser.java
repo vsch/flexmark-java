@@ -198,7 +198,8 @@ public class ListBlockParser extends AbstractBlockParser {
                         || thisItemHadBlankAfterItemPara && myOptions.isLooseWhenBlankLineFollowsItemParagraph()
                         || thisItemContainsBlankLine && myOptions.isLooseWhenContainsBlankLine()
                         || thisItemHadChildren && myOptions.isLooseWhenHasNonListChildren()
-                        || (thisItemHadTrueTrailingBlankLine && item.getPrevious() == null || prevItemHadTrueTrailingBlankLine) && myOptions.isLooseWhenPrevHasTrailingBlankLine()
+                        || (thisItemHadTrueTrailingBlankLine && item.getPrevious() == null || prevItemHadTrueTrailingBlankLine) &&
+                        (myOptions.isLooseWhenPrevHasTrailingBlankLine() || (myOptions.isLooseWhenLastItemPrevHasTrailingBlankLine() && item.getNext() == null))
                 ;
 
                 if (thisItemLoose) {

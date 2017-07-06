@@ -661,3 +661,111 @@ Document[0, 41]
 ````````````````````````````````
 
 
+## Issue xxx
+
+Fixed Spaces parsing ignores blank line after last list item and does not check if previous item
+is loose either. Making it impossible to make the last item loose.
+
+```````````````````````````````` example(Issue xxx: 1) options(fixed-indent)
+### Logic
+
+1. If no parameters,
+    1. then remove the current cart item entirely
+
+2. If only count,
+    1. and current cart item exists,
+    1. reduce quantity from the current item,
+    1. and remove entirely if below 1.
+
+3. If item has product, it is a cart item qualifier
+    1. If remove exists, remove those options from the qualified cart item
+    1. Else if count and cart item exists, reduce quantity of cart item
+    1. Else no cart item found
+
+4. If item has no product,
+    1. And current cart item exists, remove options from cart item
+    1. Else no cart item exists, or options don't match product, nothing was removed
+.
+<h3>Logic</h3>
+<ol>
+  <li>
+    <p>If no parameters,</p>
+    <ol>
+      <li>then remove the current cart item entirely</li>
+    </ol>
+  </li>
+  <li>
+    <p>If only count,</p>
+    <ol>
+      <li>and current cart item exists,</li>
+      <li>reduce quantity from the current item,</li>
+      <li>and remove entirely if below 1.</li>
+    </ol>
+  </li>
+  <li>
+    <p>If item has product, it is a cart item qualifier</p>
+    <ol>
+      <li>If remove exists, remove those options from the qualified cart item</li>
+      <li>Else if count and cart item exists, reduce quantity of cart item</li>
+      <li>Else no cart item found</li>
+    </ol>
+  </li>
+  <li>
+    <p>If item has no product,</p>
+    <ol>
+      <li>And current cart item exists, remove options from cart item</li>
+      <li>Else no cart item exists, or options don't match product, nothing was removed</li>
+    </ol>
+  </li>
+</ol>
+.
+Document[0, 633]
+  Heading[0, 9] textOpen:[0, 3, "###"] text:[4, 9, "Logic"]
+    Text[4, 9] chars:[4, 9, "Logic"]
+  OrderedList[11, 633] isTight delimiter:'.'
+    OrderedListItem[11, 82] open:[11, 13, "1."] isLoose
+      Paragraph[14, 32]
+        Text[14, 31] chars:[14, 31, "If no … ters,"]
+      OrderedList[36, 82] isTight delimiter:'.'
+        OrderedListItem[36, 82] open:[36, 38, "1."] isTight hadBlankLineAfter
+          Paragraph[39, 82] isTrailingBlankLine
+            Text[39, 81] chars:[39, 81, "then  … irely"]
+    OrderedListItem[83, 223] open:[83, 85, "2."] isLoose
+      Paragraph[86, 101]
+        Text[86, 100] chars:[86, 100, "If on … ount,"]
+      OrderedList[105, 223] isTight delimiter:'.'
+        OrderedListItem[105, 138] open:[105, 107, "1."] isTight
+          Paragraph[108, 138]
+            Text[108, 137] chars:[108, 137, "and c … ists,"]
+        OrderedListItem[142, 184] open:[142, 144, "1."] isTight
+          Paragraph[145, 184]
+            Text[145, 183] chars:[145, 183, "reduc … item,"]
+        OrderedListItem[188, 223] open:[188, 190, "1."] isTight hadBlankLineAfter
+          Paragraph[191, 223] isTrailingBlankLine
+            Text[191, 222] chars:[191, 222, "and r … ow 1."]
+    OrderedListItem[224, 454] open:[224, 226, "3."] isLoose
+      Paragraph[227, 276]
+        Text[227, 275] chars:[227, 275, "If it … ifier"]
+      OrderedList[280, 454] isTight delimiter:'.'
+        OrderedListItem[280, 351] open:[280, 282, "1."] isTight
+          Paragraph[283, 351]
+            Text[283, 350] chars:[283, 350, "If re …  item"]
+        OrderedListItem[355, 423] open:[355, 357, "1."] isTight
+          Paragraph[358, 423]
+            Text[358, 422] chars:[358, 422, "Else  …  item"]
+        OrderedListItem[427, 454] open:[427, 429, "1."] isTight hadBlankLineAfter
+          Paragraph[430, 454] isTrailingBlankLine
+            Text[430, 453] chars:[430, 453, "Else  … found"]
+    OrderedListItem[455, 633] open:[455, 457, "4."] isLoose
+      Paragraph[458, 482]
+        Text[458, 481] chars:[458, 481, "If it … duct,"]
+      OrderedList[486, 633] isTight delimiter:'.'
+        OrderedListItem[486, 549] open:[486, 488, "1."] isTight
+          Paragraph[489, 549]
+            Text[489, 548] chars:[489, 548, "And c …  item"]
+        OrderedListItem[553, 633] open:[553, 555, "1."] isTight
+          Paragraph[556, 633]
+            Text[556, 633] chars:[556, 633, "Else  … moved"]
+````````````````````````````````
+
+
