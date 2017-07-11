@@ -944,9 +944,42 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 int ticksLength = ticks.length();
                 BasedSequence content = input.subSequence(afterOpenTicks - ticksLength, index - ticksLength);
                 final BasedSequence codeText = input.subSequence(afterOpenTicks, index - ticksLength);
-                final Text textNode = new Text(codeText);
                 Code node = new Code(input.subSequence(afterOpenTicks - ticksLength, afterOpenTicks), codeText, input.subSequence(index - ticksLength, index));
-                node.appendChild(textNode);
+
+                if (options.codeSoftLineBreaks) {
+                    // add softbreaks to code ast
+                    final int length = codeText.length();
+                    int lastPos = 0;
+                    while (lastPos < length) {
+                        int softBreak = codeText.indexOfAny("\n\r", lastPos);
+                        int pos = softBreak == -1 ? length : softBreak;
+                        int lineBreak = pos;
+
+                        final Text textNode = new Text(codeText.subSequence(lastPos, pos));
+                        node.appendChild(textNode);
+
+                        lastPos = pos;
+                        if (lastPos >= length) break;
+                        if (codeText.charAt(lastPos) == '\r') {
+                            lastPos++;
+                            if (lastPos >= length) break;
+                            if (codeText.charAt(lastPos) == '\n') lastPos++;
+                        } else {
+                            lastPos++;
+                        }
+
+                        if (lastPos >= length) break;
+
+                        if (lineBreak < lastPos) {
+                            SoftLineBreak softLineBreak = new SoftLineBreak(codeText.subSequence(softBreak, lastPos));
+                            node.appendChild(softLineBreak);
+                        }
+                    }
+                } else {
+                    final Text textNode = new Text(codeText);
+                    node.appendChild(textNode);
+                }
+
                 appendNode(node);
                 return true;
             }

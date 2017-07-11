@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.util.html;
 
+import java.util.List;
+import java.util.Stack;
+
 /**
  * Used to help with HTML output generation and formatting of HTML
  */
@@ -18,6 +21,12 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     HtmlFormattingAppendable attr(Attribute... attribute);
     HtmlFormattingAppendable attr(Attributes attributes);
     HtmlFormattingAppendable withAttr();
+
+    // tag tracking
+    public Stack<String> getOpenTags();
+    public List<String> getOpenTagsAfterLast(CharSequence latestTag);
+    public void tagOpened(CharSequence tagName);
+    public void tagClosed(CharSequence tagName);
 
     HtmlFormattingAppendable withCondLine();
     HtmlFormattingAppendable withCondIndent();

@@ -33,7 +33,11 @@ public class SuperscriptNodeRenderer implements NodeRenderer {
 
     private void render(Superscript node, NodeRendererContext context, HtmlWriter html) {
         if (superscriptStyleHtmlOpen == null || superscriptStyleHtmlClose == null) {
-            html.withAttr().tag("sup");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("sup");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("sup");
+            }
             context.renderChildren(node);
             html.tag("/sup");
         } else {

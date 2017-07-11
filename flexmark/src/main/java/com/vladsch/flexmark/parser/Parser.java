@@ -58,6 +58,8 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<Boolean>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     public static final DataKey<Boolean> FENCED_CODE_CONTENT_BLOCK = new DataKey<Boolean>("FENCED_CODE_CONTENT_BLOCK", false);
 
+
+    public static final DataKey<Boolean> CODE_SOFT_LINE_BREAKS = new DataKey<Boolean>("CODE_SOFT_LINE_BREAKS", false);
     /**
      * @deprecated use FENCED_CODE_CONTENT_BLOCK
      */

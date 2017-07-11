@@ -5179,9 +5179,91 @@ Document[0, 70]
 ````````````````````````````````
 
 
-Wrap individual paragraph lines in source position marked spans tight list items
+Wrap individual paragraph lines in source position marked spans with spanning inlines
 
 ```````````````````````````````` example(Source Position Attribute: 9) options(src-pos, src-pos-lines)
+paragraph `test 
+ with` multiple lazy **lines
+paragraph `test
+with` multiple lazy **lines
+  all** should be src pos *wrapped
+lines*
+.
+<p md-pos="0-131"><span md-pos="0-15">paragraph <code>test </code></span><span md-pos="18-45"><code>with</code> multiple lazy **lines</span>
+<span md-pos="46-61">paragraph <code>test </code></span><span md-pos="62-89"><code>with</code> multiple lazy <strong>lines</strong></span>
+<span md-pos="92-124"><strong>all</strong> should be src pos <em>wrapped</em></span>
+<span md-pos="125-130"><em>lines</em></span></p>
+.
+Document[0, 131]
+  Paragraph[0, 131]
+    Text[0, 10] chars:[0, 10, "paragraph "]
+    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test \nwith"] textClose:[22, 23, "`"]
+      Text[11, 16] chars:[11, 16, "test "]
+      SoftLineBreak[16, 17]
+      Text[18, 22] chars:[18, 22, "with"]
+    Text[23, 45] chars:[23, 45, " mult … lines"]
+    SoftLineBreak[45, 46]
+    Text[46, 56] chars:[46, 56, "paragraph "]
+    Code[56, 67] textOpen:[56, 57, "`"] text:[57, 66, "test\nwith"] textClose:[66, 67, "`"]
+      Text[57, 61] chars:[57, 61, "test"]
+      SoftLineBreak[61, 62]
+      Text[62, 66] chars:[62, 66, "with"]
+    Text[67, 82] chars:[67, 82, " mult … lazy "]
+    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\nall"] textClose:[95, 97, "**"]
+      Text[84, 89] chars:[84, 89, "lines"]
+      SoftLineBreak[89, 90]
+      Text[92, 95] chars:[92, 95, "all"]
+    Text[97, 116] chars:[97, 116, " shou …  pos "]
+    Emphasis[116, 131] textOpen:[116, 117, "*"] text:[117, 130, "wrapped\nlines"] textClose:[130, 131, "*"]
+      Text[117, 124] chars:[117, 124, "wrapped"]
+      SoftLineBreak[124, 125]
+      Text[125, 130] chars:[125, 130, "lines"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Source Position Attribute: 10) options(src-pos, src-pos-lines-splice)
+paragraph `test 
+ with` multiple lazy **lines
+paragraph `test
+with` multiple lazy **lines
+  all** should be src pos *wrapped
+lines*
+.
+<p md-pos="0-131"><span md-pos="0-15">paragraph <code>test </code></span><span md-pos="18-45"><code class="line-spliced">with</code> multiple lazy **lines</span>
+<span md-pos="46-61">paragraph <code>test </code></span><span md-pos="62-89"><code class="line-spliced">with</code> multiple lazy <strong>lines</strong></span>
+<span md-pos="92-124"><strong>all</strong> should be src pos <em>wrapped</em></span>
+<span md-pos="125-130"><em>lines</em></span></p>
+.
+Document[0, 131]
+  Paragraph[0, 131]
+    Text[0, 10] chars:[0, 10, "paragraph "]
+    Code[10, 23] textOpen:[10, 11, "`"] text:[11, 22, "test \nwith"] textClose:[22, 23, "`"]
+      Text[11, 16] chars:[11, 16, "test "]
+      SoftLineBreak[16, 17]
+      Text[18, 22] chars:[18, 22, "with"]
+    Text[23, 45] chars:[23, 45, " mult … lines"]
+    SoftLineBreak[45, 46]
+    Text[46, 56] chars:[46, 56, "paragraph "]
+    Code[56, 67] textOpen:[56, 57, "`"] text:[57, 66, "test\nwith"] textClose:[66, 67, "`"]
+      Text[57, 61] chars:[57, 61, "test"]
+      SoftLineBreak[61, 62]
+      Text[62, 66] chars:[62, 66, "with"]
+    Text[67, 82] chars:[67, 82, " mult … lazy "]
+    StrongEmphasis[82, 97] textOpen:[82, 84, "**"] text:[84, 95, "lines\nall"] textClose:[95, 97, "**"]
+      Text[84, 89] chars:[84, 89, "lines"]
+      SoftLineBreak[89, 90]
+      Text[92, 95] chars:[92, 95, "all"]
+    Text[97, 116] chars:[97, 116, " shou …  pos "]
+    Emphasis[116, 131] textOpen:[116, 117, "*"] text:[117, 130, "wrapped\nlines"] textClose:[130, 131, "*"]
+      Text[117, 124] chars:[117, 124, "wrapped"]
+      SoftLineBreak[124, 125]
+      Text[125, 130] chars:[125, 130, "lines"]
+````````````````````````````````
+
+
+Wrap individual paragraph lines in source position marked spans tight list items
+
+```````````````````````````````` example(Source Position Attribute: 11) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -5228,7 +5310,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Source Position Attribute: 10) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 12) options(src-pos, src-pos-lines)
 - item
 
 - item

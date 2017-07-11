@@ -27,6 +27,7 @@ public class HtmlRendererOptions {
     public final String languageClassPrefix;
     public final String noLanguageClass;
     public final String sourcePositionAttribute;
+    public final String inlineCodeSpliceClass;
     public final boolean sourcePositionParagraphLines;
     public final boolean sourceWrapHtmlBlocks;
     public final int formatFlags;
@@ -67,5 +68,6 @@ public class HtmlRendererOptions {
         htmlBlockOpenTagEol = HtmlRenderer.HTML_BLOCK_OPEN_TAG_EOL.getFrom(options);
         htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.getFrom(options);
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
+        inlineCodeSpliceClass = HtmlRenderer.INLINE_CODE_SPLICE_CLASS.getFrom(options);
     }
 }

@@ -50,7 +50,11 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
 
     private void render(Strikethrough node, NodeRendererContext context, HtmlWriter html) {
         if (strikethroughStyleHtmlOpen == null || strikethroughStyleHtmlClose == null) {
-            html.srcPos(node.getText()).withAttr().tag("del");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("del");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("del");
+            }
             context.renderChildren(node);
             html.tag("/del");
         } else {
@@ -62,7 +66,11 @@ public class StrikethroughNodeRenderer implements NodeRenderer {
 
     private void render(Subscript node, NodeRendererContext context, HtmlWriter html) {
         if (subscriptStyleHtmlOpen == null || subscriptStyleHtmlClose == null) {
-            html.srcPos(node.getText()).withAttr().tag("sub");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("sub");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("sub");
+            }
             context.renderChildren(node);
             html.tag("/sub");
         } else {

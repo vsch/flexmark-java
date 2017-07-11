@@ -68,10 +68,6 @@ public class TextCollectingVisitor {
         return out.toBasedSequence();
     }
 
-    private void visit(HtmlEntity node) {
-        out.append(node.getChars().unescape());
-    }
-
     private void visit(SoftLineBreak node) {
         out.append(node.getChars());
     }
@@ -79,6 +75,10 @@ public class TextCollectingVisitor {
     private void visit(HardLineBreak node) {
         final BasedSequence chars = node.getChars();
         out.append(chars.subSequence(chars.length()-1, chars.length()));
+    }
+
+    private void visit(HtmlEntity node) {
+        out.append(node.getChars().unescape());
     }
 
     private void visit(Text node) {

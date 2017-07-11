@@ -34,7 +34,11 @@ public class InsNodeRenderer implements NodeRenderer {
 
     private void render(Ins node, NodeRendererContext context, HtmlWriter html) {
         if (insStyleHtmlOpen == null || insStyleHtmlClose == null) {
-            html.withAttr().tag("ins");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("ins");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("ins");
+            }
             context.renderChildren(node);
             html.tag("/ins");
         } else {

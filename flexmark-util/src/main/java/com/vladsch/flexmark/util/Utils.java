@@ -134,9 +134,17 @@ public class Utils {
     public static boolean endsWith(String receiver, boolean ignoreCase, String... needles) {
         if (receiver == null) return false;
 
-        for (String needle : needles) {
-            if (endsWith(receiver, ignoreCase, needle)) {
-                return true;
+        if (ignoreCase) {
+            for (String needle : needles) {
+                if (receiver.length() >= needle.length() && receiver.substring(receiver.length() - needle.length()).equalsIgnoreCase(needle)) {
+                    return true;
+                }
+            }
+        } else {
+            for (String needle : needles) {
+                if (receiver.endsWith(needle)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -149,9 +157,17 @@ public class Utils {
     public static boolean startsWith(String receiver, boolean ignoreCase, String... needles) {
         if (receiver == null) return false;
 
-        for (String needle : needles) {
-            if (startsWith(receiver, ignoreCase, needle)) {
-                return true;
+        if (ignoreCase) {
+            for (String needle : needles) {
+                if (receiver.length() >= needle.length() && receiver.substring(0, needle.length()).equalsIgnoreCase(needle)) {
+                    return true;
+                }
+            }
+        } else {
+            for (String needle : needles) {
+                if (receiver.startsWith(needle)) {
+                    return true;
+                }
             }
         }
         return false;

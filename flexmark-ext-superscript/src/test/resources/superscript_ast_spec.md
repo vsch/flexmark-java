@@ -219,7 +219,7 @@ Document[0, 11]
 ```````````````````````````````` example(Source Position Attribute: 1) options(src-pos)
 Normal^Paragraph with *emphasis* and __strong emphasis__^
 .
-<p md-pos="0-57">Normal<sup>Paragraph with <em md-pos="23-31">emphasis</em> and <strong md-pos="39-54">strong emphasis</strong></sup></p>
+<p md-pos="0-57">Normal<sup md-pos="7-56">Paragraph with <em md-pos="23-31">emphasis</em> and <strong md-pos="39-54">strong emphasis</strong></sup></p>
 .
 Document[0, 57]
   Paragraph[0, 57]

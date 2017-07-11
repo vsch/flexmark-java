@@ -231,7 +231,7 @@ Document[0, 80]
 > underline ++that++                                                           
 .
 <blockquote>
-  <p md-pos="2-79">underline <ins>that</ins></p>
+  <p md-pos="2-79">underline <ins md-pos="14-18">that</ins></p>
 </blockquote>
 .
 Document[0, 79]

@@ -1,9 +1,14 @@
 package com.vladsch.flexmark.util.html;
 
 import com.vladsch.flexmark.util.Ref;
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Stack;
 
 @SuppressWarnings("unchecked")
 public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase> implements HtmlFormattingAppendable {
@@ -15,6 +20,7 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
     private boolean withAttributes = false;
     private boolean suppressOpenTagLine = false;
     private boolean suppressCloseTagLine = false;
+    private final Stack<String> myOpenTags = new Stack<String>();
 
     public HtmlFormattingAppendableBase(Appendable out) {
         this(out, 0, false);
@@ -180,12 +186,52 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         return tag(tagName, true);
     }
 
-    protected void tagOpened(CharSequence tagName) {
-
+    protected String getOpenTagText() {
+        return Utils.splice(myOpenTags, ", ", true);
     }
 
-    protected void tagClosed(CharSequence tagName) {
+    protected void pushTag(CharSequence tagName) {
+        myOpenTags.push(tagName instanceof String ? (String) tagName : String.valueOf(tagName));
+    }
 
+    protected void popTag(CharSequence tagName) {
+        if (myOpenTags.isEmpty()) throw new IllegalStateException("Close tag '" + tagName + "' with no tags open");
+        String openTag = myOpenTags.peek();
+        if (!openTag.equals(tagName instanceof String ? (String) tagName : String.valueOf(tagName)))
+            throw new IllegalStateException("Close tag '" + tagName + "' does not match '" + openTag + "' in " + getOpenTagText());
+        myOpenTags.pop();
+    }
+
+    @Override
+    public void tagOpened(CharSequence tagName) {
+        pushTag(tagName);
+    }
+
+    @Override
+    public void tagClosed(CharSequence tagName) {
+        popTag(tagName);
+    }
+
+    @Override
+    public Stack<String> getOpenTags() {
+        return myOpenTags;
+    }
+
+    @Override
+    public List<String> getOpenTagsAfterLast(final CharSequence latestTag) {
+        if (myOpenTags.isEmpty()) return Collections.EMPTY_LIST;
+
+        List<String> tagList = new ArrayList<String>(myOpenTags);
+        int iMax = tagList.size();
+        int lastPos = iMax;
+        String lastTag = latestTag instanceof String ? (String) latestTag : String.valueOf(latestTag);
+        for (int i = iMax; i-- > 0; ) {
+            if (tagList.get(i).equals(lastTag)) {
+                lastPos = i + 1;
+                break;
+            }
+        }
+        return tagList.subList(lastPos, iMax);
     }
 
     @Override

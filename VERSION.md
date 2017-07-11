@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.21.0](#0210)
 - [0.20.2](#0202)
 - [0.20.0](#0200)
 - [0.19.8](#0198)
@@ -152,6 +153,28 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.21.0
+------
+
+* API Change: add open tag tracking to `HtmlFormattingAppendable` to allow generating correct
+  HTML when generating src line position `span` wrapping of individual paragraph lines
+
+      public Stack<String> getOpenTags();
+      public List<String> getOpenTagsAfterLast(CharSequence latestTag);
+      public void tagOpened(CharSequence tagName);
+      public void tagClosed(CharSequence tagName);
+
+* Add: `Parser.CODE_SOFT_LINE_BREAKS` to generate `SoftLineBreak` nodes inside `Code` nodes.
+  Needed when generating line based src pos and inline code spans lines.
+
+* Fix: src line position information rendering now properly closes and re-opens any inline tags
+  spanning lines of source.
+
+* Fix: when src line position option is enabled, inline tags no longer contain source position
+  since they are wrapped in `<span>` tags with line source position.
+
+* Fix: add src position information to superscript, insert nodes.
 
 0.20.2
 ------

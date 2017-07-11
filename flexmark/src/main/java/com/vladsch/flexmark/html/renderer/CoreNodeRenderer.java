@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.util.LineCollectingVisitor;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
 import com.vladsch.flexmark.html.CustomNodeRenderer;
@@ -10,17 +11,17 @@ import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.html.Attribute;
-import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.Range;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
-import static com.vladsch.flexmark.util.sequence.BasedSequence.NULL;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
@@ -35,9 +36,15 @@ public class CoreNodeRenderer implements NodeRenderer {
     private final ListOptions listOptions;
     private final boolean obfuscateEmail;
     private final boolean obfuscateEmailRandom;
-    private ReferenceRepository referenceRepository;
-    private boolean recheckUndefinedReferences;
-    private boolean codeContentBlock;
+    private final ReferenceRepository referenceRepository;
+    private final boolean recheckUndefinedReferences;
+    private final boolean codeContentBlock;
+    private final boolean codeSoftLineBreaks;
+
+    private List<Range> myLines;
+    private List<Integer> myEOLs;
+    private int myNextLine;
+    private int nextLineStartOffset;
 
     public CoreNodeRenderer(DataHolder options) {
         this.referenceRepository = options.get(Parser.REFERENCES);
@@ -46,6 +53,11 @@ public class CoreNodeRenderer implements NodeRenderer {
         this.obfuscateEmail = HtmlRenderer.OBFUSCATE_EMAIL.getFrom(options);
         this.obfuscateEmailRandom = HtmlRenderer.OBFUSCATE_EMAIL_RANDOM.getFrom(options);
         this.codeContentBlock = Parser.FENCED_CODE_CONTENT_BLOCK.getFrom(options);
+        codeSoftLineBreaks = Parser.CODE_SOFT_LINE_BREAKS.getFrom(options);
+        myLines = null;
+        myEOLs = null;
+        myNextLine = 0;
+        nextLineStartOffset = 0;
     }
 
     @Override
@@ -405,11 +417,25 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    public static void renderTextBlockParagraphLines(Node node, NodeRendererContext context, HtmlWriter html) {
+    public void renderTextBlockParagraphLines(Paragraph node, NodeRendererContext context, HtmlWriter html) {
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
-            BasedSequence nextLine = getSoftLineBreakSpan(node.getFirstChild());
-            if (nextLine.isNotNull()) {
-                html.srcPos(nextLine).withAttr(PARAGRAPH_LINE).tag("span");
+            if (node.hasChildren()) {
+                LineCollectingVisitor breakCollectingVisitor = new LineCollectingVisitor();
+                myLines = breakCollectingVisitor.collectAndGetRanges(node);
+                myEOLs = breakCollectingVisitor.getEOLs();
+                myNextLine = 0;
+                int startOffset = node.getFirstChild().getStartOffset();
+                final Range range = myLines.get(myNextLine);
+                int eolLength = myEOLs.get(myNextLine);
+                myNextLine++;
+
+                // remove trailing spaces from text
+                eolLength += node.getChars().baseSubSequence(startOffset, range.getEnd() - eolLength).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+
+                html.srcPos(startOffset, range.getEnd() - eolLength).withAttr(PARAGRAPH_LINE).tag("span");
+                nextLineStartOffset = range.getEnd();
+                nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+
                 context.renderChildren(node);
                 html.tag("/span");
                 return;
@@ -436,41 +462,83 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    public static BasedSequence getSoftLineBreakSpan(Node node) {
-        if (node == null) return NULL;
+    private boolean renderLineBreak(String breakText, final String suppressInTag, final Node node, NodeRendererContext context, HtmlWriter html) {
+        if (myNextLine < myLines.size()) {
+            // here we may need to close tags opened since the span tag
+            List<String> openTags = html.getOpenTagsAfterLast("span");
+            int iMax = openTags.size();
+            final boolean outputBreakText = iMax == 0 || suppressInTag == null || !suppressInTag.equalsIgnoreCase(openTags.get(iMax - 1));
 
-        Node lastNode = node;
-        Node nextNode = node.getNext();
+            if (!outputBreakText && !html.isPendingSpace()) {
+                // we add a space for EOL
+                html.raw(" ");
+            }
 
-        while (nextNode != null && !(nextNode instanceof SoftLineBreak)) {
-            lastNode = nextNode;
-            nextNode = nextNode.getNext();
+            for (int i = iMax; i-- > 0; ) {
+                html.closeTag(openTags.get(i));
+            }
+            html.tag("/span");
+
+            if (outputBreakText) {
+                html.raw(breakText);
+            }
+
+            final Range range = myLines.get(myNextLine);
+            int eolLength = myEOLs.get(myNextLine);
+            myNextLine++;
+
+            // remove trailing spaces from text
+            int countTrailing = node.getChars().baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
+            if (!outputBreakText && countTrailing > 0) {
+                countTrailing--;
+            }
+            eolLength += countTrailing;
+
+            html.srcPos(nextLineStartOffset, range.getEnd() - eolLength).withAttr(PARAGRAPH_LINE).tag("span");
+            nextLineStartOffset = range.getEnd();
+
+            // remove leading spaces
+            nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+
+            for (int i = 0; i < iMax; i++) {
+                if (!outputBreakText && context.getHtmlOptions().inlineCodeSpliceClass != null && !context.getHtmlOptions().inlineCodeSpliceClass.isEmpty()) {
+                    html.attr(Attribute.CLASS_ATTR, context.getHtmlOptions().inlineCodeSpliceClass).withAttr().tag(openTags.get(i));
+                } else {
+                    html.tag(openTags.get(i));
+                }
+            }
+            return true;
         }
-
-        return Node.spanningChars(node.getChars(), lastNode.getChars());
+        return false;
     }
 
     private void render(SoftLineBreak node, NodeRendererContext context, HtmlWriter html) {
+        final String softBreak = context.getHtmlOptions().softBreak;
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
-            BasedSequence nextLine = getSoftLineBreakSpan(node.getNext());
-            if (nextLine.isNotNull()) {
-                html.tag("/span");
-                html.raw(context.getHtmlOptions().softBreak);
-                html.srcPos(nextLine).withAttr(PARAGRAPH_LINE).tag("span");
+            if (renderLineBreak(softBreak, softBreak.equals("\n") || softBreak.equals("\r\n") || softBreak.equals("\r") ? "code" : null, node, context, html)) {
                 return;
             }
         }
-        html.raw(context.getHtmlOptions().softBreak);
+        html.raw(softBreak);
     }
 
     private void render(HardLineBreak node, NodeRendererContext context, HtmlWriter html) {
+        if (context.getHtmlOptions().sourcePositionParagraphLines) {
+            if (renderLineBreak(context.getHtmlOptions().hardBreak, null, node, context, html)) {
+                return;
+            }
+        }
         html.raw(context.getHtmlOptions().hardBreak);
     }
 
     private void render(Emphasis node, NodeRendererContext context, HtmlWriter html) {
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (htmlOptions.emphasisStyleHtmlOpen == null || htmlOptions.emphasisStyleHtmlClose == null) {
-            html.srcPos(node.getText()).withAttr().tag("em");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("em");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("em");
+            }
             context.renderChildren(node);
             html.tag("/em");
         } else {
@@ -483,7 +551,11 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(StrongEmphasis node, NodeRendererContext context, HtmlWriter html) {
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (htmlOptions.strongEmphasisStyleHtmlOpen == null || htmlOptions.strongEmphasisStyleHtmlClose == null) {
-            html.srcPos(node.getText()).withAttr().tag("strong");
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("strong");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("strong");
+            }
             context.renderChildren(node);
             html.tag("/strong");
         } else {
@@ -504,8 +576,16 @@ public class CoreNodeRenderer implements NodeRenderer {
     private void render(Code node, NodeRendererContext context, HtmlWriter html) {
         HtmlRendererOptions htmlOptions = context.getHtmlOptions();
         if (htmlOptions.codeStyleHtmlOpen == null || htmlOptions.codeStyleHtmlClose == null) {
-            html.srcPos(node.getText()).withAttr().tag("code");
-            html.text(Escaping.collapseWhitespace(node.getText(), true));
+            if (context.getHtmlOptions().sourcePositionParagraphLines) {
+                html.withAttr().tag("code");
+            } else {
+                html.srcPos(node.getText()).withAttr().tag("code");
+            }
+            if (codeSoftLineBreaks) {
+                context.renderChildren(node);
+            } else {
+                html.text(Escaping.collapseWhitespace(node.getText(), true));
+            }
             html.tag("/code");
         } else {
             html.raw(htmlOptions.codeStyleHtmlOpen);

@@ -39,6 +39,7 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<String> EMPHASIS_STYLE_HTML_CLOSE = new DataKey<String>("EMPHASIS_STYLE_HTML_CLOSE", (String) null);
     public static final DataKey<String> CODE_STYLE_HTML_OPEN = new DataKey<String>("CODE_STYLE_HTML_OPEN", (String) null);
     public static final DataKey<String> CODE_STYLE_HTML_CLOSE = new DataKey<String>("CODE_STYLE_HTML_CLOSE", (String) null);
+    public static final DataKey<String> INLINE_CODE_SPLICE_CLASS = new DataKey<String>("INLINE_CODE_SPLICE_CLASS", (String) null);
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<Boolean>("ESCAPE_HTML", false);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<Integer>("INDENT", 0);
     public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<Boolean>("ESCAPE_HTML", false);
