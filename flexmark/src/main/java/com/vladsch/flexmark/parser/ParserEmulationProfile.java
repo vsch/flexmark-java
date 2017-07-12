@@ -322,6 +322,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.REFERENCES_KEEP, KeepType.LAST)
                     .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
                     .set(Parser.SPACE_IN_LINK_ELEMENTS, true)
+
+                    // deep HTML parsing for pegdown compatibility
+                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
+
                     .set(HtmlRenderer.RENDER_HEADER_ID, false)
                     .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)

@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.0](#0220)
 - [0.21.0](#0210)
 - [0.20.2](#0202)
 - [0.20.0](#0200)
@@ -153,6 +154,32 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.0
+------
+
+* API Change: remove `tagOpened` and `tagClosed` from `HtmlFormattingAppendable`. These methods
+  are part of implementation. Moved `HtmlFormattingAppendableBase` and made `protected`.
+
+* API Change: add `BlockParser.isInterruptible()` and
+  `BlockParser.canInterruptBy(BlockParserFactory)` to allow block parser control over which
+  blocks can interrupt them.
+
+* Add: `HtmlDeepParser` class to handle chunkwise parsing of HTML blocks to allow better HTML
+  block parsing behaviour and pegdown compatibility.
+  * `Parser.HTML_BLOCK_DEEP_PARSER` default `false` - enable deep HTML block parsing
+  * `Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK` default 'true', parse non-block tags inside HTML
+    blocks
+  * `Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS` default `true`, when true Blank line
+    interrupts HTML block when not in raw tag, otherwise only when closed
+  * `Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED` default false, when true Other
+    markdown elements can interrupt a closed HTML block without an intervening blank line
+  * `Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG` default true, when true
+    blank line interrupts partially open tag ie. `<TAG` without a corresponding `>` and having a
+    blank line before `>`
+
+* Fix: `ParserEmulationProfile.PEGDOWN` now will do deep HTML parsing by default with greater
+  pegdown compatibility.
 
 0.21.0
 ------

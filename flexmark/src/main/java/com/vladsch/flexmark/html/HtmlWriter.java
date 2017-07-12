@@ -114,16 +114,6 @@ public class HtmlWriter extends HtmlFormattingAppendableBase<HtmlWriter> {
         return withAttr(AttributablePart.NODE);
     }
 
-    @Override
-    public void tagOpened(final CharSequence tagName) {
-        super.tagOpened(tagName);
-    }
-
-    @Override
-    public void tagClosed(final CharSequence tagName) {
-        super.tagClosed(tagName);
-    }
-
     public HtmlWriter withAttr(AttributablePart part) {
         super.withAttr();
         useAttributes = part;

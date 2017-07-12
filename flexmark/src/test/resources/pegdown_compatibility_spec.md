@@ -2977,3 +2977,149 @@ Document[0, 51]
 ````````````````````````````````
 
 
+## Deep HTML Parsing
+
+```````````````````````````````` example Deep HTML Parsing: 1
+<div>
+
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 63]
+  HtmlBlock[0, 35]
+  Paragraph[36, 63]
+    Text[36, 62] chars:[36, 62, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example Deep HTML Parsing: 2
+<div><strong>
+
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div><strong>
+
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 71]
+  HtmlBlock[0, 43]
+  Paragraph[44, 71]
+    Text[44, 70] chars:[44, 70, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example Deep HTML Parsing: 3
+<div>
+  <!--
+
+  This is comment
+
+  -->
+  
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+  <!--
+
+  This is comment
+
+  -->
+  
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 98]
+  HtmlBlock[0, 70]
+    HtmlInnerBlock[0, 8] chars:[0, 8, "<div>\n  "]
+    HtmlInnerBlockComment[8, 38] chars:[8, 38, "<!--\n …   -->"]
+    HtmlInnerBlock[38, 69] chars:[38, 69, "\n  \n  … /div>"]
+  Paragraph[71, 98]
+    Text[71, 97] chars:[71, 97, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example Deep HTML Parsing: 4
+<hr>
+# Heading
+.
+<hr>
+<h1>Heading</h1>
+.
+Document[0, 15]
+  HtmlBlock[0, 5]
+  Heading[5, 14] textOpen:[5, 6, "#"] text:[7, 14, "Heading"]
+    Text[7, 14] chars:[7, 14, "Heading"]
+````````````````````````````````
+
+
+```````````````````````````````` example Deep HTML Parsing: 5
+<div attr
+    attr1="test"
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+>
+
+    html text
+    
+</div>    
+.
+Document[0, 61]
+  HtmlBlock[0, 60]
+````````````````````````````````
+
+
+```````````````````````````````` example Deep HTML Parsing: 6
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+.
+Document[0, 66]
+  HtmlBlock[0, 65]
+````````````````````````````````
+
+

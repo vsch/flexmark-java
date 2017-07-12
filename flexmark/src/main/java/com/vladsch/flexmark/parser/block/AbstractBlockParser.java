@@ -22,6 +22,11 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
+    public boolean isInterruptible() {
+        return false;
+    }
+
+    @Override
     public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return false;
     }
@@ -63,6 +68,11 @@ public abstract class AbstractBlockParser implements BlockParser {
     public final void finalizeClosedBlock() {
         mutableData = null;
         isClosed = true;
+    }
+
+    @Override
+    public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
+        return true;
     }
 
     @Override

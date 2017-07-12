@@ -63,7 +63,7 @@ public class Parser implements IParse {
     /**
      * @deprecated use FENCED_CODE_CONTENT_BLOCK
      */
-    public static final DataKey<Boolean> CODE_CONTENT_BLOCK = FENCED_CODE_CONTENT_BLOCK;
+    @Deprecated public static final DataKey<Boolean> CODE_CONTENT_BLOCK = FENCED_CODE_CONTENT_BLOCK;
 
     public static final DataKey<Boolean> HARD_LINE_BREAK_LIMIT = new DataKey<Boolean>("HARD_LINE_BREAK_LIMIT", false);
 
@@ -100,10 +100,29 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<Boolean>("LIST_BLOCK_PARSER", true);
     public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_PROFILE = new DataKey<ParserEmulationProfile>("PARSER_EMULATION_PROFILE", ParserEmulationProfile.COMMONMARK);
 
+    // deep HTML block parsing
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSER = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSER", false);
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
+
+    /**
+     * Blank line interrupts HTML block when not in raw tag, otherwise only when closed
+     */
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS = new DataKey<Boolean>("HTML_BL OCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS", true);
+
+    /**
+     * Other markdown elements can interrupt a closed block without an intervening blank line
+     */
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED", false);
+
+    /**
+     * blank line interrupts partially open tag ie. &lt;TAG without a corresponding &gt;
+     */
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG", true);
+
     /**
      * @deprecated
      */
-    public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = PARSER_EMULATION_PROFILE;
+    @Deprecated public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = PARSER_EMULATION_PROFILE;
 
     // LISTS_ITEM_INDENT is also the INDENTED CODE INDENT parser emulation family either does not use it or expects the number of columns to next indent item (in this case indented code is the same)
     // LISTS_CODE_INDENT can be the same as LISTS_ITEM_INDENT or double that where indentation counts from first list item indent

@@ -5861,3 +5861,182 @@ Document[0, 20]
 ````````````````````````````````
 
 
+## Deep HTML Parsing
+
+```````````````````````````````` example(Deep HTML Parsing: 1) options(deep-html-parsing)
+<div>
+
+  This is markdown text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+<p>This is markdown text</p>
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 66]
+  HtmlBlock[0, 6]
+  Paragraph[9, 31] isTrailingBlankLine
+    Text[9, 30] chars:[9, 30, "This  …  text"]
+  HtmlBlock[32, 39]
+  Paragraph[40, 66]
+    Text[40, 66] chars:[40, 66, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 2) options(deep-html-parsing)
+<div><strong>
+
+  This is markdown text
+
+</div>
+
+This is markdown paragraph
+.
+<div><strong>
+<p>This is markdown text</p>
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 74]
+  HtmlBlock[0, 14]
+  Paragraph[17, 39] isTrailingBlankLine
+    Text[17, 38] chars:[17, 38, "This  …  text"]
+  HtmlBlock[40, 47]
+  Paragraph[48, 74]
+    Text[48, 74] chars:[48, 74, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 3) options(deep-html-parsing)
+<div><!--
+
+  This is comment
+
+  -->
+  
+  This is markdown text
+
+</div>
+
+This is markdown paragraph
+.
+<div><!--
+
+  This is comment
+
+  -->
+<p>This is markdown text</p>
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 98]
+  HtmlCommentBlock[0, 36]
+  Paragraph[41, 63] isTrailingBlankLine
+    Text[41, 62] chars:[41, 62, "This  …  text"]
+  HtmlBlock[64, 71]
+  Paragraph[72, 98]
+    Text[72, 98] chars:[72, 98, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 4) options(deep-html-parsing)
+<div>
+  <!--
+
+  This is comment
+
+  -->
+  
+  This is markdown text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+  <!--
+
+  This is comment
+
+  -->
+<p>This is markdown text</p>
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 101]
+  HtmlBlock[0, 39]
+  Paragraph[44, 66] isTrailingBlankLine
+    Text[44, 65] chars:[44, 65, "This  …  text"]
+  HtmlBlock[67, 74]
+  Paragraph[75, 101]
+    Text[75, 101] chars:[75, 101, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 5) options(deep-html-parsing)
+<hr>
+# Heading
+.
+<hr>
+# Heading
+.
+Document[0, 14]
+  HtmlBlock[0, 14]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 6) options(deep-html-parsing)
+<div attr
+    attr1="test"
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+>
+<pre><code>html text
+</code></pre>
+</div>    
+.
+Document[0, 61]
+  HtmlBlock[0, 29]
+  IndentedCodeBlock[34, 44]
+  HtmlBlock[49, 60]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 7) options(deep-html-parsing)
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+<blockquote>
+</blockquote>
+<pre><code>html text
+</code></pre>
+</div>    
+.
+Document[0, 66]
+  HtmlBlock[0, 27]
+  BlockQuote[32, 33] marker:[32, 33, ">"]
+  IndentedCodeBlock[39, 49]
+  HtmlBlock[54, 65]
+````````````````````````````````
+
+

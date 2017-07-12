@@ -637,7 +637,7 @@ public class DocumentParser implements ParserState {
 
         // Unless last matched container is a code block, try new container starts,
         // adding children to the last matched container:
-        boolean tryBlockStarts = blockParser.isParagraphParser() || blockParser.isContainer();
+        boolean tryBlockStarts = blockParser.isInterruptible() || blockParser.isContainer();
         while (tryBlockStarts) {
             findNextNonSpace();
 
@@ -793,9 +793,11 @@ public class DocumentParser implements ParserState {
     private BlockStartImpl findBlockStart(BlockParser blockParser) {
         MatchedBlockParser matchedBlockParser = new MatchedBlockParserImpl(blockParser);
         for (BlockParserFactory blockParserFactory : blockParserFactories) {
-            BlockStart result = blockParserFactory.tryStart(this, matchedBlockParser);
-            if (result instanceof BlockStartImpl) {
-                return (BlockStartImpl) result;
+            if (blockParser.canInterruptBy(blockParserFactory)) {
+                BlockStart result = blockParserFactory.tryStart(this, matchedBlockParser);
+                if (result instanceof BlockStartImpl) {
+                    return (BlockStartImpl) result;
+                }
             }
         }
         return null;

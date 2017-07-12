@@ -25,8 +25,6 @@ public interface HtmlFormattingAppendable extends FormattingAppendable {
     // tag tracking
     public Stack<String> getOpenTags();
     public List<String> getOpenTagsAfterLast(CharSequence latestTag);
-    public void tagOpened(CharSequence tagName);
-    public void tagClosed(CharSequence tagName);
 
     HtmlFormattingAppendable withCondLine();
     HtmlFormattingAppendable withCondIndent();

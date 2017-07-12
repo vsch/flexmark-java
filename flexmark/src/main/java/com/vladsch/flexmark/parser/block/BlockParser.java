@@ -89,6 +89,22 @@ public interface BlockParser {
     void parseInlines(InlineParser inlineParser);
 
     /**
+     * Allows block parsers to be interrupted by other block parsers
+     *
+     * @return true if block starts should be tried when this block parser is active
+     */
+    public boolean isInterruptible();
+
+    /**
+     * Allows block parsers to determine if they can be interrupted by other block parsers
+     *
+     * @param blockParserFactory  interrupting block parser
+     *
+     * @return true if can interrupt.
+     */
+    boolean canInterruptBy(BlockParserFactory blockParserFactory);
+
+    /**
      * @return the data holder for a block parser instance. Implemented by {@link AbstractBlockParser}
      */
     MutableDataHolder getDataHolder();

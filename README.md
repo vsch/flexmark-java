@@ -41,7 +41,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.21.0</version>
+    <version>0.22.0</version>
 </dependency>
 ```
 
@@ -129,6 +129,8 @@ is also available.
 
 ### Latest Additions
 
+* Deep HTML block parsing for better handling of raw text tags that come after other tags and
+  for pegdown HTML block parsing compatibility.
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
   converters, pegdown profile module and HTML to Markdown conversion.
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)

@@ -3,9 +3,7 @@ package com.vladsch.flexmark.internal;
 import com.vladsch.flexmark.ast.BlockContent;
 import com.vladsch.flexmark.ast.Paragraph;
 import com.vladsch.flexmark.parser.InlineParser;
-import com.vladsch.flexmark.parser.block.AbstractBlockParser;
-import com.vladsch.flexmark.parser.block.BlockContinue;
-import com.vladsch.flexmark.parser.block.ParserState;
+import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public class ParagraphParser extends AbstractBlockParser {
@@ -43,6 +41,11 @@ public class ParagraphParser extends AbstractBlockParser {
     }
 
     @Override
+    public boolean isInterruptible() {
+        return true;
+    }
+
+    @Override
     public void closeBlock(ParserState state) {
         block.setContent(content);
         content = null;
@@ -51,5 +54,12 @@ public class ParagraphParser extends AbstractBlockParser {
     @Override
     public void parseInlines(InlineParser inlineParser) {
         inlineParser.parse(getBlock().getContentChars(), getBlock());
+    }
+
+    public static class Factory implements BlockParserFactory {
+        @Override
+        public BlockStart tryStart(final ParserState state, final MatchedBlockParser matchedBlockParser) {
+            return null;
+        }
     }
 }

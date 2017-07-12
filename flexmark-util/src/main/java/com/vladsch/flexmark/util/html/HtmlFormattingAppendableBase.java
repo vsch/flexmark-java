@@ -202,13 +202,11 @@ public class HtmlFormattingAppendableBase<T extends HtmlFormattingAppendableBase
         myOpenTags.pop();
     }
 
-    @Override
-    public void tagOpened(CharSequence tagName) {
+    protected void tagOpened(CharSequence tagName) {
         pushTag(tagName);
     }
 
-    @Override
-    public void tagClosed(CharSequence tagName) {
+    protected void tagClosed(CharSequence tagName) {
         popTag(tagName);
     }
 
