@@ -130,20 +130,23 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public void addLine(ParserState state, BasedSequence line) {
-        content.add(line, state.getIndent());
-
         if (deepParser != null) {
-            deepParser.parseHtmlChunk(line, false, htmlBlockDeepParseNonBlock);
+            if (content.getLineCount() > 0) {
+                // not the first line, which is already parsed
+                deepParser.parseHtmlChunk(line, false, htmlBlockDeepParseNonBlock);
+            }
         } else {
             if (closingPattern != null && closingPattern.matcher(line).find()) {
                 finished = true;
             }
         }
+
+        content.add(line, state.getIndent());
     }
 
     @Override
     public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
-        return htmlBlockDeepParseMarkdownInterruptsClosed && (!(blockParserFactory instanceof HtmlBlockParser.Factory || blockParserFactory instanceof ParagraphParser) && deepParser == null || deepParser.isHtmlClosed());
+        return htmlBlockDeepParseMarkdownInterruptsClosed && (!(blockParserFactory instanceof HtmlBlockParser.Factory) && deepParser == null || deepParser.isHtmlClosed());
     }
 
     @Override

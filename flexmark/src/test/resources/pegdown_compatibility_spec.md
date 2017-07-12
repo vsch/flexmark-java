@@ -3123,3 +3123,30 @@ Document[0, 66]
 ````````````````````````````````
 
 
+```````````````````````````````` example Deep HTML Parsing: 7
+<div>
+  <div>
+
+    <div>nested-2-levels</div>
+
+    <div>nested-2-levels</div>
+  
+  </div>
+</div>
+
+.
+<div>
+  <div>
+
+    <div>nested-2-levels</div>
+
+    <div>nested-2-levels</div>
+  
+  </div>
+</div>
+.
+Document[0, 98]
+  HtmlBlock[0, 97]
+````````````````````````````````
+
+

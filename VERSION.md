@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.2](#0222)
 - [0.22.0](#0220)
 - [0.21.0](#0210)
 - [0.20.2](#0202)
@@ -154,6 +155,11 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.2
+------
+
+* Fix: Deep HTML parser double parsing the first line of the HTML
 
 0.22.0
 ------

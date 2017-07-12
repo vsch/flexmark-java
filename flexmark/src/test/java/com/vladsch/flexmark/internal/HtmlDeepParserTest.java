@@ -80,7 +80,7 @@ public class HtmlDeepParserTest {
 
     @Test
     public void test_closedBlock2() throws Exception {
-        HtmlDeepParser deepParser = parseHtml("<div><div attr\n>\n<p>asdfasdfsadf\nasdfsadfdsaf\n</p>\n</div>", true, true);
+        HtmlDeepParser deepParser = parseHtml("<div attr\n>\n<p>asdfasdfsadf\nasdfsadfdsaf\n</p>\n</div>", true, true);
         assertEquals(true, deepParser.hadHtml());
         assertEquals(true, deepParser.isHtmlClosed());
         assertEquals(true, deepParser.isBlankLineIterruptible());

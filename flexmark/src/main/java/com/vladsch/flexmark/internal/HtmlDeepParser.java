@@ -191,7 +191,7 @@ class HtmlDeepParser {
                     blockTagsOnly = false;
 
                     // if not void or self-closed then add it to the stack
-                    if (VOID_TAGS.contains(group)) {
+                    if (htmlMatch == HtmlMatch.OPEN_TAG && VOID_TAGS.contains(group)) {
                         // no closing pattern and we don't push tag
                         myHtmlMatch = htmlMatch;
                         myHtmlCount++;
@@ -213,7 +213,9 @@ class HtmlDeepParser {
                             final String openTag = myOpenTags.get(j);
                             if (openTag.equals(group)) {
                                 // drop all to end of stack
-                                myOpenTags.removeAll(myOpenTags.subList(j, jMax));
+                                for (int k = jMax; k-- > j; ) {
+                                    myOpenTags.remove(j);
+                                }
                                 break;
                             }
 
