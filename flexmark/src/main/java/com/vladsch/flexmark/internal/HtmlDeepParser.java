@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.vladsch.flexmark.internal.HtmlDeepParser.HtmlMatch.OPEN_TAG;
+
 class HtmlDeepParser {
     public enum HtmlMatch {
         NONE(null, null, false),
@@ -111,21 +113,24 @@ class HtmlDeepParser {
     }
 
     public boolean isBlankLineIterruptible() {
-        return (myOpenTags.isEmpty() && myClosingPattern == null || myHtmlMatch == HtmlMatch.OPEN_TAG && myClosingPattern != null && myOpenTags.size() == 1);
+        return (myOpenTags.isEmpty() && myClosingPattern == null || myHtmlMatch == OPEN_TAG && myClosingPattern != null && myOpenTags.size() == 1);
     }
 
     public boolean haveOpenRawTag() {
-        return myClosingPattern != null && myHtmlMatch != HtmlMatch.OPEN_TAG;
+        return myClosingPattern != null && myHtmlMatch != OPEN_TAG;
     }
 
     public boolean hadHtml() {
         return myHtmlCount > 0 || !isHtmlClosed();
     }
 
-    public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, final boolean parseNonBlock) {
+    public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, final boolean parseNonBlock, final boolean firstOpenTagOnOneLine) {
         if (myHtmlCount == 0 && myHtmlMatch != null) {
             myHtmlCount++;
         }
+
+        String pendingOpen = null;
+        boolean useFirstOpenTagOnOneLine = firstOpenTagOnOneLine;
 
         while (html.length() != 0) {
             if (myClosingPattern != null) {
@@ -133,22 +138,43 @@ class HtmlDeepParser {
                 Matcher matcher = myClosingPattern.matcher(html);
                 if (!matcher.find()) break;
 
-                if (myHtmlMatch == HtmlMatch.OPEN_TAG) {
+                if (myHtmlMatch == OPEN_TAG) {
                     if (matcher.group().equals("<")) {
                         // previous open tag not closed, drop it and re-parse from <
-                        myOpenTags.remove(myOpenTags.size() - 1);
+                        if (pendingOpen == null) {
+                            myOpenTags.remove(myOpenTags.size() - 1);
+                        } else {
+                            if (useFirstOpenTagOnOneLine) {
+                                // not recognized as html, skip the line
+                                pendingOpen = null;
+                                myClosingPattern = null;
+                                break;
+                            }
+                        }
                     } else {
+                        useFirstOpenTagOnOneLine = false;
                         if (matcher.group().endsWith("/>")) {
                             // drop the tag, it is self closed
-                            myOpenTags.remove(myOpenTags.size() - 1);
+                            if (pendingOpen == null) {
+                                myOpenTags.remove(myOpenTags.size() - 1);
+                            }
+                            if (myHtmlCount == 0) myHtmlCount++;
+                        } else {
+                            if (pendingOpen != null) {
+                                // now we have it
+                                if (!VOID_TAGS.contains(pendingOpen)) {
+                                    myOpenTags.add(pendingOpen);
+                                }
+                                myHtmlCount++;
+                            }
                         }
-                        if (myHtmlCount == 0) myHtmlCount++;
                         html = html.subSequence(matcher.end(), html.length());
                     }
                 } else {
                     html = html.subSequence(matcher.end(), html.length());
                 }
 
+                pendingOpen = null;
                 myClosingPattern = null;
             } else {
                 // start pattern
@@ -174,11 +200,12 @@ class HtmlDeepParser {
                     }
 
                     // see if self closed and if void or block
-                    if (htmlMatch != HtmlMatch.OPEN_TAG && htmlMatch != htmlMatch.CLOSE_TAG) {
+                    if (htmlMatch != OPEN_TAG && htmlMatch != htmlMatch.CLOSE_TAG) {
                         // block and has closing tag sequence
                         myClosingPattern = htmlMatch.close;
                         myHtmlMatch = htmlMatch;
                         myHtmlCount++;
+                        useFirstOpenTagOnOneLine = false;
                         break;
                     }
 
@@ -191,19 +218,27 @@ class HtmlDeepParser {
                     blockTagsOnly = false;
 
                     // if not void or self-closed then add it to the stack
-                    if (htmlMatch == HtmlMatch.OPEN_TAG && VOID_TAGS.contains(group)) {
+                    if (htmlMatch == OPEN_TAG && VOID_TAGS.contains(group)) {
                         // no closing pattern and we don't push tag
-                        myHtmlMatch = htmlMatch;
-                        myHtmlCount++;
+                        if (useFirstOpenTagOnOneLine) {
+                            pendingOpen = group;
+                        } else {
+                            myHtmlMatch = htmlMatch;
+                            myHtmlCount++;
+                        }
                         break;
                     }
 
-                    if (htmlMatch == HtmlMatch.OPEN_TAG) {
+                    if (htmlMatch == OPEN_TAG) {
                         // open tag, push to the stack
-                        myOpenTags.add(group);
-                        myClosingPattern = htmlMatch.close;
                         myHtmlMatch = htmlMatch;
-                        if (myHtmlCount != 0) myHtmlCount++;
+                        myClosingPattern = htmlMatch.close;
+                        if (useFirstOpenTagOnOneLine) {
+                           pendingOpen = group;
+                        } else {
+                            myOpenTags.add(group);
+                            if (myHtmlCount != 0) myHtmlCount++;
+                        }
                     } else {
                         // closing tag, pop it if in the stack, or pop intervening ones if have match higher up
                         int jMax = myOpenTags.size();
@@ -231,6 +266,11 @@ class HtmlDeepParser {
 
                 html = nextHtml;
             }
+        }
+
+        if (pendingOpen != null && myHtmlMatch == OPEN_TAG) {
+            // didn't close, forget it
+            myClosingPattern = null;
         }
     }
 }

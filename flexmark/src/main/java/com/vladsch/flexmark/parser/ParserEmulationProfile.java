@@ -283,6 +283,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, false)
                     .set(HtmlRenderer.RENDER_HEADER_ID, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
+
+                    // deep HTML parsing for multi-markdown compatibility
+                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
             ;
         } else if (this == MARKDOWN) {
             getOptions().setIn(dataHolder);
@@ -290,6 +298,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
                     .set(Parser.BLOCK_QUOTE_IGNORE_BLANK_LINE, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
+
+                    // deep HTML parsing for markdown compatibility
+                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, true)
             ;
         } else if (this == GITHUB_DOC) {
             getOptions().setIn(dataHolder);
@@ -298,6 +314,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_PARAGRAPH, true)
                     .set(Parser.BLOCK_QUOTE_INTERRUPTS_ITEM_PARAGRAPH, false)
                     .set(Parser.HEADING_NO_LEAD_SPACE, true)
+
+                    // deep HTML parsing for markdown compatibility
+                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions().setIn(dataHolder);
@@ -309,6 +333,14 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
+
+                    // deep HTML parsing for multi-markdown compatibility
+                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
             ;
         } else if (this == PEGDOWN) {
             getOptions().setIn(dataHolder);
@@ -326,6 +358,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     // deep HTML parsing for pegdown compatibility
                     .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)

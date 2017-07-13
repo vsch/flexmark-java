@@ -110,6 +110,11 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS = new DataKey<Boolean>("HTML_BL OCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS", true);
 
     /**
+     * open tags must be contained on one line
+     */
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE = new DataKey<Boolean>("HTML_BL HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE", false);
+
+    /**
      * Other markdown elements can interrupt a closed block without an intervening blank line
      */
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED", false);

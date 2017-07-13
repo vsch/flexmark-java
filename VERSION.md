@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.4](#0224)
 - [0.22.2](#0222)
 - [0.22.0](#0220)
 - [0.21.0](#0210)
@@ -155,6 +156,17 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.4
+------
+
+* Add: `Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE` to not parse open tags unless they
+  are contained on one line. Parsers like MultiMarkdown 6.0 more compatible with this mode on.
+
+* Add: html deep block parsing for non-commonmark parsers. Need to add HTML block parsing tests
+  to parser emulation family tests.
+
+* [ ] Add: parser family specific HTML block test cases
 
 0.22.2
 ------

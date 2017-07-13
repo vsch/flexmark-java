@@ -82,10 +82,11 @@ public class HtmlBlockParser extends AbstractBlockParser {
     private BlockContent content = new BlockContent();
     private final boolean parseInnerHtmlComments;
     //private final boolean htmlBlockDeepParser;
-    private final boolean htmlBlockDeepParseNonBlock;
-    private final boolean htmlBlockDeepParseBlankLineInterrupts;
-    private final boolean htmlBlockDeepParseMarkdownInterruptsClosed;
-    private final boolean htmlBlockDeepParseBlankLineInterruptsPartialTag;
+    private final boolean myHtmlBlockDeepParseNonBlock;
+    private final boolean myHtmlBlockDeepParseBlankLineInterrupts;
+    private final boolean myHtmlBlockDeepParseMarkdownInterruptsClosed;
+    private final boolean myHtmlBlockDeepParseBlankLineInterruptsPartialTag;
+    //private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
 
     private HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
         this.closingPattern = closingPattern;
@@ -93,10 +94,11 @@ public class HtmlBlockParser extends AbstractBlockParser {
         this.deepParser = deepParser;
         this.parseInnerHtmlComments = options.get(Parser.PARSE_INNER_HTML_COMMENTS);
         //this.htmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
-        this.htmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
-        this.htmlBlockDeepParseBlankLineInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS);
-        this.htmlBlockDeepParseMarkdownInterruptsClosed = options.get(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED);
-        this.htmlBlockDeepParseBlankLineInterruptsPartialTag = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG);
+        this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
+        this.myHtmlBlockDeepParseBlankLineInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS);
+        this.myHtmlBlockDeepParseMarkdownInterruptsClosed = options.get(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED);
+        this.myHtmlBlockDeepParseBlankLineInterruptsPartialTag = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG);
+        //this.myHtmlBlockDeepParseOpenTagsOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
     }
 
     @Override
@@ -108,7 +110,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     public BlockContinue tryContinue(ParserState state) {
         if (deepParser != null) {
             if (state.isBlank()) {
-                if (deepParser.isHtmlClosed() || htmlBlockDeepParseBlankLineInterrupts && !deepParser.haveOpenRawTag() || (htmlBlockDeepParseBlankLineInterruptsPartialTag && deepParser.isBlankLineIterruptible())) {
+                if (deepParser.isHtmlClosed() || myHtmlBlockDeepParseBlankLineInterrupts && !deepParser.haveOpenRawTag() || (myHtmlBlockDeepParseBlankLineInterruptsPartialTag && deepParser.isBlankLineIterruptible())) {
                     return BlockContinue.none();
                 }
             }
@@ -133,7 +135,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
         if (deepParser != null) {
             if (content.getLineCount() > 0) {
                 // not the first line, which is already parsed
-                deepParser.parseHtmlChunk(line, false, htmlBlockDeepParseNonBlock);
+                deepParser.parseHtmlChunk(line, false, myHtmlBlockDeepParseNonBlock, false);
             }
         } else {
             if (closingPattern != null && closingPattern.matcher(line).find()) {
@@ -146,7 +148,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
-        return htmlBlockDeepParseMarkdownInterruptsClosed && (!(blockParserFactory instanceof HtmlBlockParser.Factory) && deepParser == null || deepParser.isHtmlClosed());
+        return myHtmlBlockDeepParseMarkdownInterruptsClosed && (!(blockParserFactory instanceof HtmlBlockParser.Factory) && deepParser == null || deepParser.isHtmlClosed());
     }
 
     @Override
@@ -156,7 +158,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean isInterruptible() {
-        return htmlBlockDeepParseMarkdownInterruptsClosed && deepParser != null && deepParser.isHtmlClosed();
+        return myHtmlBlockDeepParseMarkdownInterruptsClosed && deepParser != null && deepParser.isHtmlClosed();
     }
 
     @Override
@@ -257,12 +259,14 @@ public class HtmlBlockParser extends AbstractBlockParser {
         private final boolean myHtmlCommentBlocksInterruptParagraph;
         private final boolean myHtmlBlockDeepParser;
         private final boolean myHtmlBlockDeepParseNonBlock;
+        private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
 
         private BlockFactory(DataHolder options) {
             super(options);
             myHtmlCommentBlocksInterruptParagraph = Parser.HTML_COMMENT_BLOCKS_INTERRUPT_PARAGRAPH.getFrom(options);
             this.myHtmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
             this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
+            this.myHtmlBlockDeepParseFirstOpenTagOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
         }
 
         @Override
@@ -273,7 +277,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<' && !(matchedBlockParser.getBlockParser() instanceof HtmlBlockParser)) {
                 if (myHtmlBlockDeepParser) {
                     HtmlDeepParser deepParser = new HtmlDeepParser();
-                    deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), true, myHtmlBlockDeepParseNonBlock);
+                    deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), true, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
                     if (deepParser.hadHtml()) {
                         // have our html block start
                         if (((deepParser.getHtmlMatch() == OPEN_TAG || (!myHtmlCommentBlocksInterruptParagraph && deepParser.getHtmlMatch() == COMMENT)) && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
