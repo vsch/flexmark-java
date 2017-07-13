@@ -148,7 +148,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
-        return myHtmlBlockDeepParseMarkdownInterruptsClosed && (!(blockParserFactory instanceof HtmlBlockParser.Factory) && deepParser == null || deepParser.isHtmlClosed());
+        return myHtmlBlockDeepParseMarkdownInterruptsClosed && !(blockParserFactory instanceof HtmlBlockParser.Factory || blockParserFactory instanceof IndentedCodeBlockParser.BlockFactory) && deepParser != null && deepParser.isHtmlClosed();
     }
 
     @Override
@@ -159,6 +159,11 @@ public class HtmlBlockParser extends AbstractBlockParser {
     @Override
     public boolean isInterruptible() {
         return myHtmlBlockDeepParseMarkdownInterruptsClosed && deepParser != null && deepParser.isHtmlClosed();
+    }
+
+    @Override
+    public boolean isRawText() {
+        return true;
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final String SPEC_RESOURCE = "/pegdown_compatibility_spec.md";
-    static final DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN)
+    static final DataHolder OPTIONS = new MutableDataSet().setFrom(ParserEmulationProfile.PEGDOWN_STRICT)
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
@@ -24,6 +24,7 @@ public class ComboPegdownCompatibilitySpecTest extends ComboExtraSpecTest {
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         optionsMap.put("lists-item-indent", new MutableDataSet().set(Parser.LISTS_ITEM_INDENT, 2));
+        optionsMap.put("blank-line-interrupts-html", new MutableDataSet().set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, true));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

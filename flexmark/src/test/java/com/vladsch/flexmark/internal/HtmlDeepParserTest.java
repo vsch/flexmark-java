@@ -319,4 +319,22 @@ public class HtmlDeepParserTest {
         assertEquals(true, deepParser.isBlankLineIterruptible());
         assertEquals(false, deepParser.haveOpenRawTag());
     }
+
+    @Test
+    public void test_optialOpen() throws Exception {
+        HtmlDeepParser deepParser = parseHtml("<p>par 1\n<p>par 2\n<p>par 3", true, true, false);
+        assertEquals(true, deepParser.hadHtml());
+        assertEquals(false, deepParser.isHtmlClosed());
+        assertEquals(false, deepParser.isBlankLineIterruptible());
+        assertEquals(false, deepParser.haveOpenRawTag());
+    }
+
+    @Test
+    public void test_optialClosed() throws Exception {
+        HtmlDeepParser deepParser = parseHtml("<p>par 1\n<p>par 2\n<p>par 3</p>\n", true, true, false);
+        assertEquals(true, deepParser.hadHtml());
+        assertEquals(true, deepParser.isHtmlClosed());
+        assertEquals(true, deepParser.isBlankLineIterruptible());
+        assertEquals(false, deepParser.haveOpenRawTag());
+    }
 }

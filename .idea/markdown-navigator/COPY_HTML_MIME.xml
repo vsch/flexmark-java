@@ -18,6 +18,7 @@
           <option name="FENCED_CODE_BLOCKS" value="true" />
           <option name="FOOTNOTES" value="true" />
           <option name="HARDWRAPS" value="false" />
+          <option name="HTML_DEEP_PARSER" value="false" />
           <option name="INSERTED" value="true" />
           <option name="QUOTES" value="true" />
           <option name="RELAXEDHRULES" value="true" />

@@ -52,8 +52,12 @@ public class PegdownOptionsAdapter {
     }
 
     public static DataHolder flexmarkOptions(int pegdownExtensions, Extension... extensions) {
+        return flexmarkOptions(false, pegdownExtensions, extensions);
+    }
+
+    public static DataHolder flexmarkOptions(boolean strictHtml, int pegdownExtensions, Extension... extensions) {
         PegdownOptionsAdapter optionsAdapter = new PegdownOptionsAdapter(pegdownExtensions);
-        return optionsAdapter.getFlexmarkOptions(extensions);
+        return optionsAdapter.getFlexmarkOptions(strictHtml, extensions);
     }
 
     public boolean haveExtensions(int mask) {
@@ -65,6 +69,10 @@ public class PegdownOptionsAdapter {
     }
 
     public DataHolder getFlexmarkOptions(Extension... additionalExtensions) {
+        return getFlexmarkOptions(false,additionalExtensions);
+    }
+
+    public DataHolder getFlexmarkOptions(boolean strictHtml, Extension... additionalExtensions) {
         if (myIsUpdateNeeded) {
             myIsUpdateNeeded = false;
             MutableDataSet options = myOptions;
@@ -75,7 +83,7 @@ public class PegdownOptionsAdapter {
             extensions.addAll(Arrays.asList(additionalExtensions));
 
             // Setup List Options for Fixed List Indent profile
-            options.setFrom(ParserEmulationProfile.PEGDOWN);
+            options.setFrom(strictHtml ? ParserEmulationProfile.PEGDOWN_STRICT : ParserEmulationProfile.PEGDOWN);
 
             options.set(HtmlRenderer.SUPPRESS_HTML_BLOCKS, haveExtensions(SUPPRESS_HTML_BLOCKS));
             options.set(HtmlRenderer.SUPPRESS_INLINE_HTML, haveExtensions(SUPPRESS_INLINE_HTML));

@@ -13,7 +13,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
     MARKDOWN(3, null),
     GITHUB_DOC(4, MARKDOWN),
     MULTI_MARKDOWN(5, FIXED_INDENT),
-    PEGDOWN(6, FIXED_INDENT),;
+    PEGDOWN(6, FIXED_INDENT),
+    PEGDOWN_STRICT(7, FIXED_INDENT),;
 
     public final int intValue;
     public final ParserEmulationProfile family;
@@ -65,7 +66,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         .setOrderedListManualStart(false)
                         ;
             }
-            if (this == PEGDOWN) {
+            if (this == PEGDOWN || this == PEGDOWN_STRICT) {
                 return new MutableListOptions().setParserEmulationFamily(this)
                         .setAutoLoose(false)
                         .setAutoLooseOneLevelLists(false)
@@ -342,7 +343,7 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
             ;
-        } else if (this == PEGDOWN) {
+        } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
             getOptions().setIn(dataHolder);
             dataHolder
                     .set(Parser.BLOCK_QUOTE_TO_BLANK_LINE, true)
@@ -355,14 +356,6 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.PARSE_INNER_HTML_COMMENTS, true)
                     .set(Parser.SPACE_IN_LINK_ELEMENTS, true)
 
-                    // deep HTML parsing for pegdown compatibility
-                    .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
-                    .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
-                    .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
-                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
-                    .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
-                    .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
-
                     .set(HtmlRenderer.RENDER_HEADER_ID, false)
                     .set(HtmlRenderer.OBFUSCATE_EMAIL, true)
                     .set(HtmlRenderer.GENERATE_HEADER_ID, true)
@@ -371,6 +364,27 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
             ;
+
+            if (this == PEGDOWN_STRICT) {
+                // deep HTML parsing for pegdown compatibility
+                dataHolder
+                        .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, false)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
+                ;
+            } else {
+                dataHolder
+                        .set(Parser.HTML_BLOCK_DEEP_PARSER, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE, false)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
+                        .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
+                ;
+            }
         }
         return dataHolder;
     }

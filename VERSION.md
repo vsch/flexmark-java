@@ -160,13 +160,26 @@ flexmark-java
 0.22.4
 ------
 
-* Add: `Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE` to not parse open tags unless they
-  are contained on one line. Parsers like MultiMarkdown 6.0 more compatible with this mode on.
+* [ ] Add: parser family specific HTML block test cases
+
+* Add: `ParserEmulationProfile.PEGDOWN_STRICT` profile to emulate HTML block parsing according
+  to pegdown rules. `ParserEmulationProfile.PEGDOWN` uses less strict HTML block parsing which
+  will end an HTML block on a blank line.
+
+* Add: `Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE` to not parse open tags unless
+  they are contained on one line. Parsers like MultiMarkdown 6.0 more compatible with this mode
+  on.
 
 * Add: html deep block parsing for non-commonmark parsers. Need to add HTML block parsing tests
   to parser emulation family tests.
 
-* [ ] Add: parser family specific HTML block test cases
+* API Change: `BlockParser.isRawText()` used for interruptible blocks, when this method returns
+  `true` then indenting spaces are passed to the block. Used by `HtmlBlockParser` to keep
+  indents on continuation lines that could be interrupted by another markdown element.
+
+* Fix: add optional tag logic to `HtmlDeepParser` so that optional end tags when omitted do not
+  cause nesting of tags as per
+  [8.1.2.4. Optional tags](https://www.w3.org/TR/html51/syntax.html#optional-tags)
 
 0.22.2
 ------

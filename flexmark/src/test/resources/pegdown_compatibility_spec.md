@@ -3150,3 +3150,47 @@ Document[0, 98]
 ````````````````````````````````
 
 
+```````````````````````````````` example Deep HTML Parsing: 8
+<p>par</p>
+    <ul>
+      <li>list item</li>
+    </ul>
+.
+<p>par</p>
+    <ul>
+      <li>list item</li>
+    </ul>
+.
+Document[0, 55]
+  HtmlBlock[0, 55]
+````````````````````````````````
+
+
+allow blank line interruption of unclosed HTML blocks
+
+```````````````````````````````` example(Deep HTML Parsing: 9) options(blank-line-interrupts-html)
+<div>
+<a href="http://somelink.com/poster.pdf">
+
+![Download Poster](http://someimg.com/poster.png)
+
+</a>
+</div>
+.
+<div>
+<a href="http://somelink.com/poster.pdf">
+<p><img src="http://someimg.com/poster.png" alt="Download Poster" /></p>
+<p></a></p>
+</div>
+.
+Document[0, 111]
+  HtmlBlock[0, 48]
+  Paragraph[49, 99] isTrailingBlankLine
+    Image[49, 98] textOpen:[49, 51, "!["] text:[51, 66, "Download Poster"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 97, "http://someimg.com/poster.png"] pageRef:[68, 97, "http://someimg.com/poster.png"] linkClose:[97, 98, ")"]
+      Text[51, 66] chars:[51, 66, "Downl … oster"]
+  Paragraph[100, 105]
+    HtmlInline[100, 104] chars:[100, 104, "</a>"]
+  HtmlBlock[105, 111]
+````````````````````````````````
+
+

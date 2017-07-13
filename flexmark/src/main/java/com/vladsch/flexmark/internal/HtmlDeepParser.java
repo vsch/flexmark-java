@@ -16,8 +16,7 @@ class HtmlDeepParser {
         NON_TAG("<(![A-Z])", ">", false),
         TEMPLATE("<([?])", "\\?>", false),
         COMMENT("<(!--)", "-->", false),
-        CDATA("<!\\[(CDATA)\\[", "\\]\\]>", false),
-        ;
+        CDATA("<!\\[(CDATA)\\[", "\\]\\]>", false),;
 
         public final Pattern open;
         public final Pattern close;
@@ -32,6 +31,7 @@ class HtmlDeepParser {
 
     public static final Set<String> BLOCK_TAGS;
     public static final Set<String> VOID_TAGS;
+    public static final Map<String, Set<String>> OPTIONAL_TAGS;
     public static final Pattern START_PATTERN;
     private static final HtmlMatch[] PATTERN_MAP;
     static {
@@ -57,6 +57,23 @@ class HtmlDeepParser {
 
         String[] voidTags = ("area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr").split("\\|");
         VOID_TAGS.addAll(Arrays.asList(voidTags));
+
+        OPTIONAL_TAGS = new HashMap<String, Set<String>>();
+        OPTIONAL_TAGS.put("li", new HashSet<String>(Arrays.asList(new String[] { "li" })));
+        OPTIONAL_TAGS.put("dt", new HashSet<String>(Arrays.asList(new String[] { "dt", "dd" })));
+        OPTIONAL_TAGS.put("dd", new HashSet<String>(Arrays.asList(new String[] { "dd", "dt" })));
+        OPTIONAL_TAGS.put("p", new HashSet<String>(Arrays.asList(new String[] { "address", "article", "aside", "blockquote", "details", "div", "dl", "fieldset", "figcaption", "figure", "footer", "form", "h1", "h2", "h3", "h4", "h5", "h6", "header", "hr", "main", "menu", "nav", "ol", "p", "pre", "section", "table", "ul" })));
+        OPTIONAL_TAGS.put("rt", new HashSet<String>(Arrays.asList(new String[] { "rt", "rp" })));
+        OPTIONAL_TAGS.put("rp", new HashSet<String>(Arrays.asList(new String[] { "rt", "rp" })));
+        OPTIONAL_TAGS.put("optgroup", new HashSet<String>(Arrays.asList(new String[] { "optgroup" })));
+        OPTIONAL_TAGS.put("option", new HashSet<String>(Arrays.asList(new String[] { "option", "optgroup" })));
+        OPTIONAL_TAGS.put("colgroup", new HashSet<String>(Arrays.asList(new String[] { "colgroup" })));
+        OPTIONAL_TAGS.put("thead", new HashSet<String>(Arrays.asList(new String[] { "tbody", "tfoot" })));
+        OPTIONAL_TAGS.put("tbody", new HashSet<String>(Arrays.asList(new String[] { "tbody", "tfoot" })));
+        OPTIONAL_TAGS.put("tfoot", new HashSet<String>(Arrays.asList(new String[] { "tbody" })));
+        OPTIONAL_TAGS.put("tr", new HashSet<String>(Arrays.asList(new String[] { "tr" })));
+        OPTIONAL_TAGS.put("td", new HashSet<String>(Arrays.asList(new String[] { "td", "th" })));
+        OPTIONAL_TAGS.put("th", new HashSet<String>(Arrays.asList(new String[] { "td", "th" })));
 
         // combine all patterns and create map by pattern number
         PATTERN_MAP = new HtmlMatch[HtmlMatch.values().length];
@@ -124,6 +141,21 @@ class HtmlDeepParser {
         return myHtmlCount > 0 || !isHtmlClosed();
     }
 
+    // handle optional closing tags
+    private void openTag(final String tagName) {
+        if (!myOpenTags.isEmpty()) {
+            String lastTag = myOpenTags.get(myOpenTags.size() - 1);
+
+            if (OPTIONAL_TAGS.containsKey(lastTag)) {
+                if (OPTIONAL_TAGS.get(lastTag).contains(tagName)) {
+                    myOpenTags.set(myOpenTags.size() - 1, tagName);
+                    return;
+                }
+            }
+        }
+        myOpenTags.add(tagName);
+    }
+
     public void parseHtmlChunk(CharSequence html, boolean blockTagsOnly, final boolean parseNonBlock, final boolean firstOpenTagOnOneLine) {
         if (myHtmlCount == 0 && myHtmlMatch != null) {
             myHtmlCount++;
@@ -163,7 +195,7 @@ class HtmlDeepParser {
                             if (pendingOpen != null) {
                                 // now we have it
                                 if (!VOID_TAGS.contains(pendingOpen)) {
-                                    myOpenTags.add(pendingOpen);
+                                    openTag(pendingOpen);
                                 }
                                 myHtmlCount++;
                             }
@@ -234,9 +266,9 @@ class HtmlDeepParser {
                         myHtmlMatch = htmlMatch;
                         myClosingPattern = htmlMatch.close;
                         if (useFirstOpenTagOnOneLine) {
-                           pendingOpen = group;
+                            pendingOpen = group;
                         } else {
-                            myOpenTags.add(group);
+                            openTag(group);
                             if (myHtmlCount != 0) myHtmlCount++;
                         }
                     } else {

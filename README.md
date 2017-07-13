@@ -92,8 +92,8 @@ More information can be found in the documentation:
 `PegdownOptionsAdapter` class converts pegdown `Extensions.*` flags to flexmark options and
 extensions list. Pegdown `Extensions.java` is included for convenience and new options not found
 in pegdown 1.6.0. These are located in `flexmark-profile-pegdown` module but you can grab the
-source from this repo: [PegdownOptionsAdapter.java], [Extensions.java] and
-make your own version, modified to your project's needs.
+source from this repo: [PegdownOptionsAdapter.java], [Extensions.java] and make your own
+version, modified to your project's needs.
 
 You can pass your extension flags to static `PegdownOptionsAdapter.flexmarkOptions(int)` or you
 can instantiate `PegdownOptionsAdapter` and use convenience methods to set, add and remove
@@ -119,6 +119,32 @@ public class PegdownOptions {
 }
 ```
 
+Default flexmark-java pegdown emulation uses less strict HTML block parsing which interrupts an
+HTML block on a blank line. Pegdown only interrupts an HTML block on a blank line if all tags in
+the HTML block are closed.
+
+To get closer to original pegdown HTML block parsing behavior use the method which takes a
+`boolean strictHtml` argument:
+
+```java
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.profiles.pegdown.Extensions;
+import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
+import com.vladsch.flexmark.util.options.DataHolder;
+
+public class PegdownOptions {
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(true,
+            Extensions.ALL
+    );
+
+    static final Parser PARSER = Parser.builder(OPTIONS).build();
+    static final HtmlRenderer RENDERER = HtmlRenderer.builder(OPTIONS).build();
+
+    // use the PARSER to parse and RENDERER to render with pegdown compatibility
+}
+```
+
 A sample with a
 [custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
 is also available.
@@ -129,8 +155,8 @@ is also available.
 
 ### Latest Additions
 
-* Deep HTML block parsing for better handling of raw text tags that come after other tags and
-  for pegdown HTML block parsing compatibility.
+* Deep HTML block parsing option for better handling of raw text tags that come after other tags
+  and for [pegdown] HTML block parsing compatibility.
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack
   converters, pegdown profile module and HTML to Markdown conversion.
 * [PDF converter module](https://github.com/vsch/flexmark-java/wiki/Extensions#pdf-output-module)
@@ -232,8 +258,8 @@ commonmark. If you want to use flexmark to fully emulate another markdown proces
 you have to adjust the parser and configure the flexmark extensions that provide the additional
 features available in the parser that you want to emulate.
 
-Latest addition was a rewrite of the list parser to better control emulation of other markdown
-processors as per [Markdown Processors Emulation](MarkdownProcessorsEmulation.md). Addition of
+A rewrite of the list parser to better control emulation of other markdown processors as per
+[Markdown Processors Emulation](MarkdownProcessorsEmulation.md) is complete. Addition of
 processor presets to emulate specific markdown processing behaviour of these parsers is on a
 short to do list.
 
@@ -253,11 +279,11 @@ Major processor families are implemented and some family members also:
 * [CommonMark] (spec 0.27)
   * [ ] &nbsp;[League/CommonMark]
   * [GitHub] Comments
-* [Kramdown]
-  * [ ] &nbsp;[Jekyll]
+* [ ] [Jekyll]
 * [Markdown.pl][Markdown]
   * [ ] &nbsp;[Php Markdown Extra]
   * [GitHub] Docs (old GitHub markdown parser)
+* [Kramdown]
 * FixedIndent
   * [MultiMarkdown]
   * [Pegdown]

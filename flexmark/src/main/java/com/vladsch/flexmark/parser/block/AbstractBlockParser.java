@@ -27,6 +27,11 @@ public abstract class AbstractBlockParser implements BlockParser {
     }
 
     @Override
+    public boolean isRawText() {
+        return false;
+    }
+
+    @Override
     public boolean canContain(ParserState state, BlockParser blockParser, Block block) {
         return false;
     }

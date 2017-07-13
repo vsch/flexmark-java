@@ -6040,3 +6040,19 @@ Document[0, 66]
 ````````````````````````````````
 
 
+```````````````````````````````` example(Deep HTML Parsing: 8) options(deep-html-parsing)
+<p>par</p>
+    <ul>
+      <li>list item</li>
+    </ul>
+.
+<p>par</p>
+    <ul>
+      <li>list item</li>
+    </ul>
+.
+Document[0, 54]
+  HtmlBlock[0, 54]
+````````````````````````````````
+
+

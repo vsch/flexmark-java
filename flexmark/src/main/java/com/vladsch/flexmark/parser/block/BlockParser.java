@@ -96,6 +96,13 @@ public interface BlockParser {
     public boolean isInterruptible();
 
     /**
+     * Allows block parsers to keep indenting spaces for those blocks that are interruptible but don't want indenting spaces removed.
+     *
+     * @return true if block wants to keep indenting spaces
+     */
+    public boolean isRawText();
+
+    /**
      * Allows block parsers to determine if they can be interrupted by other block parsers
      *
      * @param blockParserFactory  interrupting block parser
