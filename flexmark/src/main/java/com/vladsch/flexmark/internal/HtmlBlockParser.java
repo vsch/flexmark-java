@@ -86,6 +86,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     private final boolean myHtmlBlockDeepParseBlankLineInterrupts;
     private final boolean myHtmlBlockDeepParseMarkdownInterruptsClosed;
     private final boolean myHtmlBlockDeepParseBlankLineInterruptsPartialTag;
+    private final boolean myHtmlBlockDeepParseIndentedCodeInterrupts;
     //private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
 
     private HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
@@ -98,6 +99,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
         this.myHtmlBlockDeepParseBlankLineInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS);
         this.myHtmlBlockDeepParseMarkdownInterruptsClosed = options.get(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED);
         this.myHtmlBlockDeepParseBlankLineInterruptsPartialTag = options.get(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG);
+        this.myHtmlBlockDeepParseIndentedCodeInterrupts = options.get(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS);
         //this.myHtmlBlockDeepParseOpenTagsOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
     }
 
@@ -148,7 +150,11 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
     @Override
     public boolean canInterruptBy(final BlockParserFactory blockParserFactory) {
-        return myHtmlBlockDeepParseMarkdownInterruptsClosed && !(blockParserFactory instanceof HtmlBlockParser.Factory || blockParserFactory instanceof IndentedCodeBlockParser.BlockFactory) && deepParser != null && deepParser.isHtmlClosed();
+        return myHtmlBlockDeepParseMarkdownInterruptsClosed
+                && deepParser != null
+                && !(blockParserFactory instanceof HtmlBlockParser.Factory
+                || (!myHtmlBlockDeepParseIndentedCodeInterrupts && blockParserFactory instanceof IndentedCodeBlockParser.BlockFactory))
+                && deepParser.isHtmlClosed();
     }
 
     @Override

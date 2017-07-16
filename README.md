@@ -34,7 +34,7 @@ than ideal and for pathological input either hangs or practically hangs during p
 
 ### Quick Start
 
-You need to add `flexmark-all` as a dependency which includes core and all modules to the
+For Maven, add `flexmark-all` as a dependency which includes core and all modules to the
 following sample:
 
 ```xml
@@ -78,6 +78,24 @@ public class BasicSample {
         String html = renderer.render(document);  // "<p>This is <em>Sparta</em></p>\n"
         System.out.println(html);
     }
+}
+```
+
+#### Building via Gradle
+
+```shell
+compile 'com.vladsch.flexmark:flexmark-all:0.22.4'
+```
+
+#### Building with Android Studio
+
+Additional settings due to duplicate files:
+
+```
+packagingOptions {
+    exclude 'META-INF/LICENSE-LGPL-2.1.txt'
+    exclude 'META-INF/LICENSE-LGPL-3.txt'
+    exclude 'META-INF/LICENSE-W3C-TEST'
 }
 ```
 
@@ -300,6 +318,8 @@ family were added in 0.11.0:
 * MultiMarkdown: `ParserEmulationProfile.MULTI_MARKDOWN`
 * Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
 * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
+* Pegdown HTML block parsing rules, without pegdown extensions
+  `ParserEmulationProfile.PEGDOWN_STRICT`
 
 ### History and Motivation
 

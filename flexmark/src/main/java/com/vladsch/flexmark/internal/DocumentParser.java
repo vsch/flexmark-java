@@ -649,7 +649,7 @@ public class DocumentParser implements ParserState {
 
             BlockStartImpl blockStart = findBlockStart(blockParser);
             if (blockStart == null) {
-                if (!blockParser.isRawText()) setNewIndex(nextNonSpace);
+                if (!(blockParser.isRawText() && blockParser.isInterruptible())) setNewIndex(nextNonSpace);
                 break;
             }
 

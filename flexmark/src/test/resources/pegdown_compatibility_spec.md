@@ -2977,9 +2977,9 @@ Document[0, 51]
 ````````````````````````````````
 
 
-## Deep HTML Parsing
+## HTML Parsing
 
-```````````````````````````````` example Deep HTML Parsing: 1
+```````````````````````````````` example HTML Parsing: 1
 <div>
 
   This is html text
@@ -3002,7 +3002,7 @@ Document[0, 63]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 2
+```````````````````````````````` example HTML Parsing: 2
 <div><strong>
 
   This is html text
@@ -3025,7 +3025,7 @@ Document[0, 71]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 3
+```````````````````````````````` example HTML Parsing: 3
 <div>
   <!--
 
@@ -3061,7 +3061,7 @@ Document[0, 98]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 4
+```````````````````````````````` example HTML Parsing: 4
 <hr>
 # Heading
 .
@@ -3075,7 +3075,7 @@ Document[0, 15]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 5
+```````````````````````````````` example HTML Parsing: 5
 <div attr
     attr1="test"
 >
@@ -3098,7 +3098,7 @@ Document[0, 61]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 6
+```````````````````````````````` example HTML Parsing: 6
 <div attr
     attr1="test"
     
@@ -3123,7 +3123,7 @@ Document[0, 66]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 7
+```````````````````````````````` example HTML Parsing: 7
 <div>
   <div>
 
@@ -3150,7 +3150,7 @@ Document[0, 98]
 ````````````````````````````````
 
 
-```````````````````````````````` example Deep HTML Parsing: 8
+```````````````````````````````` example HTML Parsing: 8
 <p>par</p>
     <ul>
       <li>list item</li>
@@ -3168,7 +3168,7 @@ Document[0, 55]
 
 allow blank line interruption of unclosed HTML blocks
 
-```````````````````````````````` example(Deep HTML Parsing: 9) options(blank-line-interrupts-html)
+```````````````````````````````` example(HTML Parsing: 9) options(blank-line-interrupts-html)
 <div>
 <a href="http://somelink.com/poster.pdf">
 

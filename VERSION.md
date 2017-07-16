@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.6](#0226)
 - [0.22.4](#0224)
 - [0.22.2](#0222)
 - [0.22.0](#0220)
@@ -157,10 +158,16 @@ flexmark-java
 
 &nbsp;</details>
 
-0.22.4
+0.22.6
 ------
 
-* [ ] Add: parser family specific HTML block test cases
+* Add: parser family specific HTML block test cases
+
+* Add `Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS` default `false`, when `true`
+  Indented code can interrupt HTML block without a preceding blank line.
+
+0.22.4
+------
 
 * Add: `ParserEmulationProfile.PEGDOWN_STRICT` profile to emulate HTML block parsing according
   to pegdown rules. `ParserEmulationProfile.PEGDOWN` uses less strict HTML block parsing which

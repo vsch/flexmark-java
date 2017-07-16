@@ -2401,3 +2401,238 @@ Document[0, 235]
 ````````````````````````````````
 
 
+## HTML Parsing
+
+```````````````````````````````` example HTML Parsing: 1
+<div>
+
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 63]
+  HtmlBlock[0, 35]
+  Paragraph[36, 63]
+    Text[36, 62] chars:[36, 62, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Parsing: 2
+<div><strong>
+
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div><strong>
+
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 71]
+  HtmlBlock[0, 43]
+  Paragraph[44, 71]
+    Text[44, 70] chars:[44, 70, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Parsing: 3
+<div>
+  <!--
+
+  This is comment
+
+  -->
+  
+  This is html text
+
+</div>
+
+This is markdown paragraph
+.
+<div>
+  <!--
+
+  This is comment
+
+  -->
+  
+  This is html text
+
+</div>
+<p>This is markdown paragraph</p>
+.
+Document[0, 98]
+  HtmlBlock[0, 70]
+  Paragraph[71, 98]
+    Text[71, 97] chars:[71, 97, "This  … graph"]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Parsing: 4) options(FAIL)
+<hr>
+# Heading
+.
+<p>
+    <hr>
+</p>
+
+<h1 id="heading">Heading</h1>
+.
+Document[0, 15]
+  HtmlBlock[0, 5]
+  Heading[5, 14] textOpen:[5, 6, "#"] text:[7, 14, "Heading"]
+    Text[7, 14] chars:[7, 14, "Heading"]
+````````````````````````````````
+
+
+this is how we generate it
+
+```````````````````````````````` example HTML Parsing: 5
+<hr>
+# Heading
+.
+<hr>
+<h1 id="heading">Heading</h1>
+.
+Document[0, 15]
+  HtmlBlock[0, 5]
+  Heading[5, 14] textOpen:[5, 6, "#"] text:[7, 14, "Heading"]
+    Text[7, 14] chars:[7, 14, "Heading"]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Parsing: 6
+<div attr
+    attr1="test"
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+>
+
+    html text
+    
+</div>    
+.
+Document[0, 61]
+  HtmlBlock[0, 60]
+````````````````````````````````
+
+
+```````````````````````````````` example(HTML Parsing: 7) options(FAIL)
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+
+.
+<p>
+    <div attr attr1="test">
+</p>
+<pre><code>html text
+</code></pre>
+
+<p>
+    </div>
+</p>
+.
+Document[0, 66]
+  HtmlBlock[0, 65]
+````````````````````````````````
+
+
+How it is actually parsed
+
+```````````````````````````````` example HTML Parsing: 8
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+
+.
+<div attr
+    attr1="test"
+    
+>
+
+    html text
+    
+</div>    
+.
+Document[0, 66]
+  HtmlBlock[0, 65]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Parsing: 9
+<div>
+  <div>
+
+    <div>nested-2-levels</div>
+
+    <div>nested-2-levels</div>
+  
+  </div>
+</div>
+
+.
+<div>
+  <div>
+
+    <div>nested-2-levels</div>
+
+    <div>nested-2-levels</div>
+  
+  </div>
+</div>
+.
+Document[0, 98]
+  HtmlBlock[0, 97]
+````````````````````````````````
+
+
+```````````````````````````````` example HTML Parsing: 10
+<p>par</p>
+    <ul>
+      <li>list item</li>
+    </ul>
+.
+<p>par</p>
+<pre><code>&lt;ul&gt;
+  &lt;li&gt;list item&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+.
+Document[0, 55]
+  HtmlBlock[0, 11]
+  IndentedCodeBlock[15, 55]
+````````````````````````````````
+
+

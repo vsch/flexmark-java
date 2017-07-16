@@ -125,6 +125,11 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG", true);
 
     /**
+     * Indented code can interrupt HTML block
+     */
+    public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS", false);
+
+    /**
      * @deprecated
      */
     @Deprecated public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_FAMILY = PARSER_EMULATION_PROFILE;
