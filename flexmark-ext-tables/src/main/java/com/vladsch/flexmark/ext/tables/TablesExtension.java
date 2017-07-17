@@ -29,6 +29,7 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
 public class TablesExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Formatter.FormatterExtension {
     public static final DataKey<Integer> MAX_HEADER_ROWS = new DataKey<Integer>("MAX_HEADER_ROWS", Integer.MAX_VALUE);
     public static final DataKey<Integer> MIN_HEADER_ROWS = new DataKey<Integer>("MIN_HEADER_ROWS", 0);
+    public static final DataKey<Integer> MIN_SEPARATOR_DASHES = new DataKey<Integer>("MIN_SEPARATOR_DASHES", 3);
     public static final DataKey<Boolean> APPEND_MISSING_COLUMNS = new DataKey<Boolean>("APPEND_MISSING_COLUMNS", false);
     public static final DataKey<Boolean> DISCARD_EXTRA_COLUMNS = new DataKey<Boolean>("DISCARD_EXTRA_COLUMNS", false);
     public static final DataKey<Boolean> TRIM_CELL_WHITESPACE = new DataKey<Boolean>("TRIM_CELL_WHITESPACE", true);

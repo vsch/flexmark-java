@@ -14,14 +14,17 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class TableNodeFormatter implements NodeFormatter {
     private final TableFormatOptions options;
+    Pattern TABLE_HEADER_SEPARATOR;
 
     private Table myTable;
 
     public TableNodeFormatter(DataHolder options) {
         this.options = new TableFormatOptions(options);
+        this.TABLE_HEADER_SEPARATOR = TableParagraphPreProcessor.getTableHeaderSeparator(TablesExtension.MIN_SEPARATOR_DASHES.getFrom(options));
     }
 
     @Override
@@ -147,7 +150,7 @@ public class TableNodeFormatter implements NodeFormatter {
     }
 
     private void render(Text node, NodeFormatterContext context, MarkdownWriter markdown) {
-        if (TableParagraphPreProcessor.TABLE_HEADER_SEPARATOR.matcher(node.getChars()).matches()) {
+        if (TABLE_HEADER_SEPARATOR.matcher(node.getChars()).matches()) {
             Node parent = node.getAncestorOfType(Paragraph.class);
             if (parent instanceof Paragraph && ((Paragraph) parent).hasTableSeparator()) {
                 markdown.pushPrefix().addPrefix(" ").append(node.getChars()).popPrefix();

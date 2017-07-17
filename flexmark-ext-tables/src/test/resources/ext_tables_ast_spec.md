@@ -3211,6 +3211,7 @@ Document[0, 564]
               Text[513, 563] chars:[513, 563, "      …      "]
 ````````````````````````````````
 
+
 Issue #95, TextCollectingVisitor collects 2nd row of table heading
 
 ```````````````````````````````` example Source Position Attribute: 3
@@ -3380,6 +3381,98 @@ Document[0, 450]
           Text[400, 400]
         TableCell[402, 449] text:[402, 447, "Apply physic to block nearby. Default - true."] textClose:[448, 449, "|"]
           Text[402, 447] chars:[402, 447, "Apply … true."]
+````````````````````````````````
+
+
+## Issue 125
+
+Min Column Dashes
+
+```````````````````````````````` example(Issue 125: 1) options(min-dashes-2)
+|Vowels|dd|
+|------|--|
+|aeiou |a |
+|AEIOU |e |
+.
+<table>
+  <thead>
+    <tr><th>Vowels</th><th>dd</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>aeiou</td><td>a</td></tr>
+    <tr><td>AEIOU</td><td>e</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 47]
+  TableBlock[0, 47]
+    TableHead[0, 11]
+      TableRow[0, 11] rowNumber=1
+        TableCell[0, 8] header textOpen:[0, 1, "|"] text:[1, 7, "Vowels"] textClose:[7, 8, "|"]
+          Text[1, 7] chars:[1, 7, "Vowels"]
+        TableCell[8, 11] header text:[8, 10, "dd"] textClose:[10, 11, "|"]
+          Text[8, 10] chars:[8, 10, "dd"]
+    TableSeparator[12, 23]
+      TableRow[12, 23]
+        TableCell[12, 20] textOpen:[12, 13, "|"] text:[13, 19, "------"] textClose:[19, 20, "|"]
+          Text[13, 19] chars:[13, 19, "------"]
+        TableCell[20, 23] text:[20, 22, "--"] textClose:[22, 23, "|"]
+          Text[20, 22] chars:[20, 22, "--"]
+    TableBody[24, 47]
+      TableRow[24, 35] rowNumber=1
+        TableCell[24, 32] textOpen:[24, 25, "|"] text:[25, 30, "aeiou"] textClose:[31, 32, "|"]
+          Text[25, 30] chars:[25, 30, "aeiou"]
+        TableCell[32, 35] text:[32, 33, "a"] textClose:[34, 35, "|"]
+          Text[32, 33] chars:[32, 33, "a"]
+      TableRow[36, 47] rowNumber=2
+        TableCell[36, 44] textOpen:[36, 37, "|"] text:[37, 42, "AEIOU"] textClose:[43, 44, "|"]
+          Text[37, 42] chars:[37, 42, "AEIOU"]
+        TableCell[44, 47] text:[44, 45, "e"] textClose:[46, 47, "|"]
+          Text[44, 45] chars:[44, 45, "e"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 125: 2) options(min-dashes-1)
+|Vowels|d|
+|------|-|
+|aeiou |a |
+|AEIOU |e |
+.
+<table>
+  <thead>
+    <tr><th>Vowels</th><th>d</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>aeiou</td><td>a</td></tr>
+    <tr><td>AEIOU</td><td>e</td></tr>
+  </tbody>
+</table>
+.
+Document[0, 45]
+  TableBlock[0, 45]
+    TableHead[0, 10]
+      TableRow[0, 10] rowNumber=1
+        TableCell[0, 8] header textOpen:[0, 1, "|"] text:[1, 7, "Vowels"] textClose:[7, 8, "|"]
+          Text[1, 7] chars:[1, 7, "Vowels"]
+        TableCell[8, 10] header text:[8, 9, "d"] textClose:[9, 10, "|"]
+          Text[8, 9] chars:[8, 9, "d"]
+    TableSeparator[11, 21]
+      TableRow[11, 21]
+        TableCell[11, 19] textOpen:[11, 12, "|"] text:[12, 18, "------"] textClose:[18, 19, "|"]
+          Text[12, 18] chars:[12, 18, "------"]
+        TableCell[19, 21] text:[19, 20, "-"] textClose:[20, 21, "|"]
+          Text[19, 20] chars:[19, 20, "-"]
+    TableBody[22, 45]
+      TableRow[22, 33] rowNumber=1
+        TableCell[22, 30] textOpen:[22, 23, "|"] text:[23, 28, "aeiou"] textClose:[29, 30, "|"]
+          Text[23, 28] chars:[23, 28, "aeiou"]
+        TableCell[30, 33] text:[30, 31, "a"] textClose:[32, 33, "|"]
+          Text[30, 31] chars:[30, 31, "a"]
+      TableRow[34, 45] rowNumber=2
+        TableCell[34, 42] textOpen:[34, 35, "|"] text:[35, 40, "AEIOU"] textClose:[41, 42, "|"]
+          Text[35, 40] chars:[35, 40, "AEIOU"]
+        TableCell[42, 45] text:[42, 43, "e"] textClose:[44, 45, "|"]
+          Text[42, 43] chars:[42, 43, "e"]
 ````````````````````````````````
 
 

@@ -18,12 +18,12 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class TableParagraphPreProcessor implements ParagraphPreProcessor {
-    private static String COL = "(?:" + "\\s*-{3,}\\s*|\\s*:-{2,}\\s*|\\s*-{2,}:\\s*|\\s*:-+:\\s*" + ")";
-    static Pattern TABLE_HEADER_SEPARATOR = Pattern.compile(
+    private static final String COL3 = "(?:" + "\\s*-{3,}\\s*|\\s*:-{2,}\\s*|\\s*-{2,}:\\s*|\\s*:-+:\\s*" + ")";
+    private static final Pattern TABLE_HEADER_SEPARATOR3 = Pattern.compile(
             // For single column, require at least one pipe, otherwise it's ambiguous with setext headers
-            "\\|" + COL + "\\|?\\s*" + "|" +
-                    COL + "\\|\\s*" + "|" +
-                    "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
+            "\\|" + COL3 + "\\|?\\s*" + "|" +
+                    COL3 + "\\|\\s*" + "|" +
+                    "\\|?" + "(?:" + COL3 + "\\|)+" + COL3 + "\\|?\\s*");
 
     private static BitSet pipeCharacters = new BitSet(1);
     private static BitSet separatorCharacters = new BitSet(3);
@@ -87,9 +87,26 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
     }
 
     private final TableParserOptions options;
+    Pattern TABLE_HEADER_SEPARATOR;
+
+    public static Pattern getTableHeaderSeparator(int minColumnDashes) {
+        int minCol = minColumnDashes >= 1 ? minColumnDashes : 1;
+        if (minCol == 3) {
+            return TABLE_HEADER_SEPARATOR3;
+        } else {
+            int minColDash = minColumnDashes >= 2 ? minColumnDashes - 1 : 1;
+            int minColDashes = minColumnDashes >= 3 ? minColumnDashes - 2 : 1;
+            String COL = String.format("(?:" + "\\s*-{%d,}\\s*|\\s*:-{%d,}\\s*|\\s*-{%d,}:\\s*|\\s*:-{%d,}:\\s*" + ")", minCol, minColDash, minColDash, minColDashes);
+            return Pattern.compile(
+                    "\\|" + COL + "\\|?\\s*" + "|" +
+                            COL + "\\|\\s*" + "|" +
+                            "\\|?" + "(?:" + COL + "\\|)+" + COL + "\\|?\\s*");
+        }
+    }
 
     private TableParagraphPreProcessor(DataHolder options) {
         this.options = new TableParserOptions(options);
+        this.TABLE_HEADER_SEPARATOR = getTableHeaderSeparator(this.options.minSeparatorDashes);
     }
 
     private TableParagraphPreProcessor(TableParserOptions options) {

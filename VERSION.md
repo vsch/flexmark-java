@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.8](#0228)
 - [0.22.6](#0226)
 - [0.22.4](#0224)
 - [0.22.2](#0222)
@@ -157,6 +158,12 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.8
+------
+
+* Add: `TablesExtension.MIN_SEPARATOR_DASHES` to control how many dashes minimum before
+  separator column is recognized as a table separator.
 
 0.22.6
 ------

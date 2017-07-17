@@ -3194,3 +3194,42 @@ Document[0, 111]
 ````````````````````````````````
 
 
+## Issue 124
+
+Don't make items loose
+
+```````````````````````````````` example(Issue 124: 1) options(lists-no-loose)
+* list1
+* list2
+
+- [ ] task1
+- [ ] task2
+.
+<ul>
+  <li>list1</li>
+  <li>list2</li>
+  <li>[ ] task1</li>
+  <li>[ ] task2</li>
+</ul>
+.
+Document[0, 40]
+  BulletList[0, 40] isTight
+    BulletListItem[0, 8] open:[0, 1, "*"] isTight
+      Paragraph[2, 8]
+        Text[2, 7] chars:[2, 7, "list1"]
+    BulletListItem[8, 16] open:[8, 9, "*"] isTight hadBlankLineAfter
+      Paragraph[10, 16] isTrailingBlankLine
+        Text[10, 15] chars:[10, 15, "list2"]
+    BulletListItem[17, 29] open:[17, 18, "-"] isTight
+      Paragraph[19, 29]
+        LinkRef[19, 22] referenceOpen:[19, 20, "["] reference:[21, 21] referenceClose:[21, 22, "]"]
+          Text[20, 21] chars:[20, 21, " "]
+        Text[22, 28] chars:[22, 28, " task1"]
+    BulletListItem[29, 40] open:[29, 30, "-"] isTight
+      Paragraph[31, 40]
+        LinkRef[31, 34] referenceOpen:[31, 32, "["] reference:[33, 33] referenceClose:[33, 34, "]"]
+          Text[32, 33] chars:[32, 33, " "]
+        Text[34, 40] chars:[34, 40, " task2"]
+````````````````````````````````
+
+
