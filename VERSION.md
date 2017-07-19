@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.10](#02210)
 - [0.22.8](#0228)
 - [0.22.6](#0226)
 - [0.22.4](#0224)
@@ -133,7 +134,7 @@ flexmark-java
       when descriptions can benefit form complex formatting
 
 * [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
-      extra entries. Update description for better understanding.
+      extra entries. Update description for better understanding **foo**a.
 
 * [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
       to HTML offset for the element(s). This is needed to allow synchronization with source
@@ -158,6 +159,43 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.10
+-------
+
+* Add: `Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS` default `false`, when `true` allows
+  delimiters to start after opening brackets `([{<` and end after closing brackets `)}]>`
+  without needing to have whitespace characters on the other side of delimiter.
+
+  Currently `aa**foo**aa` will parse bold but `aa**foo()**aa` will not because bracket direction
+  is not taken into account. With above option set to `true` the second case will also parse
+  bold but `aa**foo(**` and `aa**)foo**` will not.
+
+* Add: `FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS`, default `false`. When `true` will
+  preserve inline emphasis tags (`<strong>`, `<em>`, `<del>`, `<ins>`, `<sub>`, `<sup>`) and convert them to
+  markdown syntax inside `<pre><code>` HTML blocks. Otherwise will strip these out of generated
+  markdown.
+
+      <pre><code class="html">&lt;div&gt;
+        <strong>test</strong>
+      &lt;/div&gt;
+      </code></pre>
+      
+  By default will strip out emphasis and convert to:
+
+      ```html
+      <div>
+        test
+      </div>
+      ```
+
+  With option set to true will preserve emphasis and convert to:
+
+      ```html
+      <div>
+        **test**
+      </div>
+      ```
 
 0.22.8
 ------

@@ -32,7 +32,14 @@ public class Parsing {
 
     public final Pattern ENTITY_HERE;
     public final String ASCII_PUNCTUATION;
+    public final String ASCII_OPEN_PUNCTUATION;
+    public final String ASCII_CLOSE_PUNCTUATION;
     public final Pattern PUNCTUATION;
+    public final Pattern PUNCTUATION_OPEN;
+    public final Pattern PUNCTUATION_CLOSE;
+    public final Pattern PUNCTUATION_ONLY;
+    public final Pattern PUNCTUATION_OPEN_ONLY;
+    public final Pattern PUNCTUATION_CLOSE_ONLY;
 
     //public final Pattern HTML_COMMENT;
     public final Pattern ESCAPABLE;
@@ -101,9 +108,21 @@ public class Parsing {
         this.ENTITY = "&(?:#x[a-f0-9" + ADDITIONAL_CHARS + "]{1,8}|#[0-9]{1,8}|[a-z" + ADDITIONAL_CHARS + "][a-z0-9" + ADDITIONAL_CHARS + "]{1,31});";
 
         this.ENTITY_HERE = Pattern.compile('^' + ENTITY, Pattern.CASE_INSENSITIVE);
-        this.ASCII_PUNCTUATION = "'!\"#\\$%&\\(\\)\\*\\+,\\-\\./:;<=>\\?@\\[\\\\\\]\\^_`\\{\\|\\}~";
+        this.ASCII_PUNCTUATION = "'!\"#\\$%&\\*\\+,\\-\\./:;=\\?@\\\\\\^_`\\|~";
+        this.ASCII_OPEN_PUNCTUATION = "\\(<\\[\\{";
+        this.ASCII_CLOSE_PUNCTUATION = "\\)>\\]\\}";
         this.PUNCTUATION = Pattern.compile(
-                "^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
+                "^[" + ASCII_PUNCTUATION + ASCII_OPEN_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]");
+        this.PUNCTUATION_OPEN = Pattern.compile(
+                "^[" + ASCII_PUNCTUATION + ASCII_OPEN_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^"+ ASCII_CLOSE_PUNCTUATION +"]");
+        this.PUNCTUATION_CLOSE = Pattern.compile(
+                "^[" + ASCII_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "]|[\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^"+ ASCII_OPEN_PUNCTUATION +"]");
+        this.PUNCTUATION_ONLY = Pattern.compile(
+                "^[" + ASCII_PUNCTUATION + "\\p{Pc}\\p{Pd}\\p{Pe}\\p{Pf}\\p{Pi}\\p{Po}\\p{Ps}]&&[^" + ASCII_OPEN_PUNCTUATION + ASCII_CLOSE_PUNCTUATION + "]");
+        this.PUNCTUATION_OPEN_ONLY = Pattern.compile(
+                "^[" + ASCII_OPEN_PUNCTUATION + "]");
+        this.PUNCTUATION_CLOSE_ONLY = Pattern.compile(
+                "^[" + ASCII_CLOSE_PUNCTUATION + "]");
 
         //this.HTML_COMMENT = Pattern.compile(HTMLCOMMENT);
         this.ESCAPABLE = Pattern.compile('^' + Escaping.ESCAPABLE);

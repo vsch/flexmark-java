@@ -6056,3 +6056,117 @@ Document[0, 54]
 ````````````````````````````````
 
 
+## Directional punctuations
+
+Directional punctuation delimiter parsing
+
+```````````````````````````````` example Directional punctuations: 1
+可以**foo()**可以
+.
+<p>可以**foo()**可以</p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13] chars:[0, 13, "可以**f … )**可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example Directional punctuations: 2
+可以**()foo()**可以
+.
+<p>可以**()foo()**可以</p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 15] chars:[0, 15, "可以**( … )**可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example Directional punctuations: 3
+可以**()foo**可以
+.
+<p>可以**()foo**可以</p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Text[0, 13] chars:[0, 13, "可以**( … o**可以"]
+````````````````````````````````
+
+
+Directional punctuation delimiter parsing
+
+```````````````````````````````` example(Directional punctuations: 4) options(directional-punctuation)
+可以**foo()**可以
+.
+<p>可以<strong>foo()</strong>可以</p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 2] chars:[0, 2, "可以"]
+    StrongEmphasis[2, 11] textOpen:[2, 4, "**"] text:[4, 9, "foo()"] textClose:[9, 11, "**"]
+      Text[4, 9] chars:[4, 9, "foo()"]
+    Text[11, 13] chars:[11, 13, "可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Directional punctuations: 5) options(directional-punctuation)
+可以**()foo()**可以
+.
+<p>可以<strong>()foo()</strong>可以</p>
+.
+Document[0, 15]
+  Paragraph[0, 15]
+    Text[0, 2] chars:[0, 2, "可以"]
+    StrongEmphasis[2, 13] textOpen:[2, 4, "**"] text:[4, 11, "()foo()"] textClose:[11, 13, "**"]
+      Text[4, 11] chars:[4, 11, "()foo()"]
+    Text[13, 15] chars:[13, 15, "可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Directional punctuations: 6) options(directional-punctuation)
+可以**()foo**可以
+.
+<p>可以<strong>()foo</strong>可以</p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 2] chars:[0, 2, "可以"]
+    StrongEmphasis[2, 11] textOpen:[2, 4, "**"] text:[4, 9, "()foo"] textClose:[9, 11, "**"]
+      Text[4, 9] chars:[4, 9, "()foo"]
+    Text[11, 13] chars:[11, 13, "可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Directional punctuations: 7) options(directional-punctuation)
+可以**foo(**可以
+.
+<p>可以**foo(**可以</p>
+.
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 12] chars:[0, 12, "可以**f … (**可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Directional punctuations: 8) options(directional-punctuation)
+可以**)foo(**可以
+.
+<p>可以**)foo(**可以</p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    Text[0, 13] chars:[0, 13, "可以**) … (**可以"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Directional punctuations: 9) options(directional-punctuation)
+可以**)foo**可以
+.
+<p>可以**)foo**可以</p>
+.
+Document[0, 12]
+  Paragraph[0, 12]
+    Text[0, 12] chars:[0, 12, "可以**) … o**可以"]
+````````````````````````````````
+
+

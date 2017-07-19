@@ -2610,6 +2610,74 @@ some back ticks in the ````code````
 ````````````````````````````````
 
 
+code with emphasis preserved
+
+```````````````````````````````` example(Fenced Code: 10) options(code-emphasis)
+```html
+<html>
+<body>
+<div>
+**strong**
+*emphasis*
+~~del~~
+~sub~
+^sub^
+++sub++
+</div>
+</body>
+</html>
+```
+.
+<pre><code class="html">&lt;html&gt;
+&lt;body&gt;
+&lt;div&gt;
+<strong>strong</strong>
+<em>emphasis</em>
+<del>del</del>
+<sub>sub</sub>
+<sup>sub</sup>
+<ins>sub</ins>
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+````````````````````````````````
+
+
+code with emphasis not preserved
+
+```````````````````````````````` example Fenced Code: 11
+```html
+<html>
+<body>
+<div>
+strong
+emphasis
+del
+sub
+sub
+sub
+</div>
+</body>
+</html>
+```
+.
+<pre><code class="html">&lt;html&gt;
+&lt;body&gt;
+&lt;div&gt;
+<strong>strong</strong>
+<em>emphasis</em>
+<del>del</del>
+<sub>sub</sub>
+<sup>sub</sup>
+<ins>sub</ins>
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+````````````````````````````````
+
+
 ## Emoji Shortcuts
 
 ```````````````````````````````` example Emoji Shortcuts: 1

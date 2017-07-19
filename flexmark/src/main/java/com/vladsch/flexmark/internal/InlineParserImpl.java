@@ -1675,15 +1675,31 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         String after = charAfter == '\0' ? "\n" : String.valueOf(charAfter);
 
         // We could be more lazy here, in most cases we don't need to do every match case.
-        boolean beforeIsPunctuation = myParsing.PUNCTUATION.matcher(before).matches();
+        boolean beforeIsPunctuation;
+        boolean afterIsPunctuation;
+        boolean leftFlanking;
+        boolean rightFlanking;
         boolean beforeIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(before).matches();
-        boolean afterIsPunctuation = myParsing.PUNCTUATION.matcher(after).matches();
         boolean afterIsWhitespace = myParsing.UNICODE_WHITESPACE_CHAR.matcher(after).matches();
 
-        boolean leftFlanking = !afterIsWhitespace &&
-                !(afterIsPunctuation && !beforeIsWhitespace && !beforeIsPunctuation);
-        boolean rightFlanking = !beforeIsWhitespace &&
-                !(beforeIsPunctuation && !afterIsWhitespace && !afterIsPunctuation);
+        if (options.inlineDelimiterDirectionalPunctuations) {
+            beforeIsPunctuation = myParsing.PUNCTUATION_OPEN.matcher(before).matches();
+            afterIsPunctuation = myParsing.PUNCTUATION_CLOSE.matcher(after).matches();
+
+            leftFlanking = !afterIsWhitespace &&
+                    (!afterIsPunctuation || beforeIsWhitespace || beforeIsPunctuation);
+            rightFlanking = !beforeIsWhitespace &&
+                    (!beforeIsPunctuation || afterIsWhitespace || afterIsPunctuation);
+        }
+        else {
+            beforeIsPunctuation = myParsing.PUNCTUATION.matcher(before).matches();
+            afterIsPunctuation = myParsing.PUNCTUATION.matcher(after).matches();
+
+            leftFlanking = !afterIsWhitespace &&
+                    !(afterIsPunctuation && !beforeIsWhitespace && !beforeIsPunctuation);
+            rightFlanking = !beforeIsWhitespace &&
+                    !(beforeIsPunctuation && !afterIsWhitespace && !afterIsPunctuation);
+        }
 
         boolean canOpen;
         boolean canClose;

@@ -20,6 +20,7 @@ public class HtmlParserOptions implements MutableDataSetter {
     public boolean extractAutoLinks;
     public boolean renderComments;
     public boolean dotOnlyNumericLists;
+    public boolean preCodePreserveEmphasis;
     public char orderedListDelimiter;
     public char unorderedListDelimiter;
     public int definitionMarkerSpaces;
@@ -45,6 +46,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         extractAutoLinks = other.extractAutoLinks;
         renderComments = other.renderComments;
         dotOnlyNumericLists = other.dotOnlyNumericLists;
+        preCodePreserveEmphasis = other.preCodePreserveEmphasis;
         orderedListDelimiter = other.orderedListDelimiter;
         unorderedListDelimiter = other.unorderedListDelimiter;
         definitionMarkerSpaces = other.definitionMarkerSpaces;
@@ -67,6 +69,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         extractAutoLinks = FlexmarkHtmlParser.EXTRACT_AUTO_LINKS.getFrom(options);
         renderComments = FlexmarkHtmlParser.RENDER_COMMENTS.getFrom(options);
         dotOnlyNumericLists = FlexmarkHtmlParser.DOT_ONLY_NUMERIC_LISTS.getFrom(options);
+        preCodePreserveEmphasis = FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS.getFrom(options);
         orderedListDelimiter = FlexmarkHtmlParser.ORDERED_LIST_DELIMITER.getFrom(options);
         unorderedListDelimiter = FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER.getFrom(options);
         definitionMarkerSpaces = FlexmarkHtmlParser.DEFINITION_MARKER_SPACES.getFrom(options);
@@ -90,6 +93,7 @@ public class HtmlParserOptions implements MutableDataSetter {
         dataHolder.set(FlexmarkHtmlParser.EXTRACT_AUTO_LINKS, extractAutoLinks);
         dataHolder.set(FlexmarkHtmlParser.RENDER_COMMENTS, renderComments);
         dataHolder.set(FlexmarkHtmlParser.DOT_ONLY_NUMERIC_LISTS, dotOnlyNumericLists);
+        dataHolder.set(FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS, preCodePreserveEmphasis);
         dataHolder.set(FlexmarkHtmlParser.ORDERED_LIST_DELIMITER, orderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.UNORDERED_LIST_DELIMITER, unorderedListDelimiter);
         dataHolder.set(FlexmarkHtmlParser.DEFINITION_MARKER_SPACES, definitionMarkerSpaces);

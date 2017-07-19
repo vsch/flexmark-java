@@ -33,6 +33,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> WRAP_AUTO_LINKS = new DataKey<Boolean>("WRAP_AUTO_LINKS", false);
     public static final DataKey<Boolean> RENDER_COMMENTS = new DataKey<Boolean>("RENDER_COMMENTS", false);
     public static final DataKey<Boolean> DOT_ONLY_NUMERIC_LISTS = new DataKey<Boolean>("DOT_ONLY_NUMERIC_LISTS", true);
+    public static final DataKey<Boolean> PRE_CODE_PRESERVE_EMPHASIS = new DataKey<Boolean>("PRE_CODE_PRESERVE_EMPHASIS", false);
     public static final DataKey<Character> ORDERED_LIST_DELIMITER = new DataKey<Character>("ORDERED_LIST_DELIMITER", '.');
     public static final DataKey<Character> UNORDERED_LIST_DELIMITER = new DataKey<Character>("UNORDERED_LIST_DELIMITER", '*');
     public static final DataKey<Integer> DEFINITION_MARKER_SPACES = new DataKey<Integer>("DEFINITION_MARKER_SPACES", 3);
@@ -84,7 +85,7 @@ public class FlexmarkHtmlParser {
 
     private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^\\d+\\.$");
     private static final Pattern NUMERIC_PAREN_LIST = Pattern.compile("^\\d+\\)$");
-    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^(?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern()+")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern()+")|[a-z]+|[A-Z]+)\\.$");
+    private static final Pattern NON_NUMERIC_DOT_LIST = Pattern.compile("^(?:(?:" + RomanNumeral.ROMAN_NUMERAL.pattern() + ")|(?:" + RomanNumeral.LOWERCASE_ROMAN_NUMERAL.pattern() + ")|[a-z]+|[A-Z]+)\\.$");
     private static final Pattern NON_NUMERIC_PAREN_LIST = Pattern.compile("^(?:[a-z]+|[A-Z]+)\\)$");
 
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
@@ -592,13 +593,21 @@ public class FlexmarkHtmlParser {
 
     private boolean processDel(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "~~", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "~~", true);
+        }
         return true;
     }
 
     private boolean processEmphasis(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "*", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "*", true);
+        }
         return true;
     }
 
@@ -705,25 +714,41 @@ public class FlexmarkHtmlParser {
 
     private boolean processIns(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "++", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "++", true);
+        }
         return true;
     }
 
     private boolean processStrong(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "**", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "**", true);
+        }
         return true;
     }
 
     private boolean processSub(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "~", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "~", true);
+        }
         return true;
     }
 
     private boolean processSup(FormattingAppendable out, Element element) {
         skip();
-        wrapTextNodes(out, element, "^", true);
+        if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
+            wrapTextNodes(out, element, "", false);
+        } else {
+            wrapTextNodes(out, element, "^", true);
+        }
         return true;
     }
 

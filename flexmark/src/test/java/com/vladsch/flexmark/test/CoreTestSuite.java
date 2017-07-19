@@ -16,6 +16,7 @@ import org.junit.runners.Suite;
         PrefixedSubSequenceTest.class,
         FullOrigSpecCoreTest.class,
         ComboCoreSpecTest.class,
+        ComboCoreDirectionalSpecTest.class,
         ComboExtraSpecTest.class,
         SpecialInputTest.class,
         UsageExampleTest.class,

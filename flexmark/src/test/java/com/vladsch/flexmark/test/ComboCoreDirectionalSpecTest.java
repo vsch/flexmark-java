@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ComboCoreSpecTest extends ComboSpecTestCase {
+public class ComboCoreDirectionalSpecTest extends ComboSpecTestCase {
     static final String SPEC_RESOURCE = "/ast_spec.md";
     private static final DataHolder OPTIONS = new MutableDataSet()
             .set(HtmlRenderer.INDENT_SIZE, 0)
-            .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, false)
+            .set(Parser.INLINE_DELIMITER_DIRECTIONAL_PUNCTUATIONS, true)
             .set(HtmlRenderer.PERCENT_ENCODE_URLS, true);
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
@@ -35,7 +35,7 @@ public class ComboCoreSpecTest extends ComboSpecTestCase {
         return optionsMap.get(optionSet);
     }
 
-    public ComboCoreSpecTest(SpecExample example) {
+    public ComboCoreDirectionalSpecTest(SpecExample example) {
         super(example);
     }
 
