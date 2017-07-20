@@ -13,9 +13,11 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" filepath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" filepath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" filepath="$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-issues/flexmark-ext-gfm-issues.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-issues/flexmark-ext-gfm-issues.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/flexmark-ext-gfm-strikethrough.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tables/flexmark-ext-gfm-tables.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/flexmark-ext-gfm-tasklist.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-users/flexmark-ext-gfm-users.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-users/flexmark-ext-gfm-users.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" filepath="$PROJECT_DIR$/flexmark-ext-ins/flexmark-ext-ins.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/flexmark-ext-jekyll-front-matter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" filepath="$PROJECT_DIR$/flexmark-ext-jekyll-tag/flexmark-ext-jekyll-tag.iml" />

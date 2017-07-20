@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.22.4</version>
+    <version>0.22.12</version>
 </dependency>
 ```
 
@@ -174,6 +174,9 @@ is also available.
 
 ### Latest Additions
 
+* [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
+  [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
+  parsing and rendering `#123` and `@user-name` respectively.
 * Deep HTML block parsing option for better handling of raw text tags that come after other tags
   and for [pegdown] HTML block parsing compatibility.
 * `flexmark-all` module that includes: core, all extensions, formatter, JIRA and YouTrack

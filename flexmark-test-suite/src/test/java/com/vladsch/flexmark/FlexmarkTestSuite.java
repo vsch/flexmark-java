@@ -9,9 +9,11 @@ import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
 import com.vladsch.flexmark.ext.escaped.character.ExtEscapedCharacterTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
+import com.vladsch.flexmark.ext.gfm.issues.ExtGfmIssuesTestSuite;
 import com.vladsch.flexmark.ext.gfm.strikethrough.ExtGfmStrikethroughTestSuite;
 import com.vladsch.flexmark.ext.gfm.tables.ExtGfmTablesTestSuite;
 import com.vladsch.flexmark.ext.gfm.tasklist.ExtGfmTaskListTestSuite;
+import com.vladsch.flexmark.ext.gfm.users.ExtGfmUsersTestSuite;
 import com.vladsch.flexmark.ext.ins.ExtInsTestSuite;
 import com.vladsch.flexmark.ext.jekyll.front.matter.ExtJekyllFrontMatterTestSuite;
 import com.vladsch.flexmark.ext.jekyll.tag.ExtJekyllTagTestSuite;
@@ -44,9 +46,11 @@ import org.junit.runners.Suite;
         ExtEmojiTestSuite.class,
         ExtEscapedCharacterTestSuite.class,
         ExtFootnotesTestSuite.class,
+        ExtGfmIssuesTestSuite.class,
         ExtGfmStrikethroughTestSuite.class,
         ExtGfmTablesTestSuite.class,
         ExtGfmTaskListTestSuite.class,
+        ExtGfmUsersTestSuite.class,
         ExtJekyllFrontMatterTestSuite.class,
         ExtJekyllTagTestSuite.class,
         ExtInsTestSuite.class,

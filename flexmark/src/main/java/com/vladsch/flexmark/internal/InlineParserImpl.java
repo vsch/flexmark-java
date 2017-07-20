@@ -764,6 +764,39 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
      * If RE matches at current index in the input, advance index and return the match; otherwise return null.
      *
      * @param re pattern to match
+     * @return sequence matched or null
+     */
+    @Override
+    public BasedSequence[] matchWithGroups(Pattern re) {
+        if (index >= input.length()) {
+            return null;
+        }
+        Matcher matcher = re.matcher(input);
+        matcher.region(index, input.length());
+        boolean m = matcher.find();
+        if (m) {
+            index = matcher.end();
+            MatchResult result = matcher.toMatchResult();
+            final int iMax = matcher.groupCount() + 1;
+            BasedSequence[] results = new BasedSequence[iMax];
+            results[0] = input.subSequence(result.start(), result.end());
+            for (int i = 1; i < iMax; i++) {
+                if (matcher.group(i) != null) {
+                    results[i] = input.subSequence(result.start(i), result.end(i));
+                } else {
+                    results[i] = null;
+                }
+            }
+            return results;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * If RE matches at current index in the input, advance index and return the match; otherwise return null.
+     *
+     * @param re pattern to match
      * @return matched matcher or null
      */
     @Override

@@ -7,7 +7,12 @@
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="pegdown-1.6.7" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="module" module-name="flexmark" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
@@ -17,35 +22,32 @@
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-issues" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-users" />
+    <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-spec-example" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-tables" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-toc" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-wikilink" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-yaml-front-matter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-zzzzzz" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
-    <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-profile-pegdown" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-html-parser" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-formatter-test-suite" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-html-parser" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-integration-test" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-jira-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-pdf-converter" />
-    <orderEntry type="library" name="R User Library" level="project" />
-    <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="module" module-name="flexmark-profile-pegdown" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-test-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-util" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
   </component>
 </module>

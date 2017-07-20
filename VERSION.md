@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.12](#02212)
 - [0.22.10](#02210)
 - [0.22.8](#0228)
 - [0.22.6](#0226)
@@ -160,6 +161,13 @@ flexmark-java
 
 &nbsp;</details>
 
+0.22.12
+-------
+
+* Add: `GfmUsersExtension` to parse Gfm style user refs `@user-name`
+
+* Add: `GfmIssuesExtension` to parse Gfm style issue refs `#123`
+
 0.22.10
 -------
 
@@ -180,7 +188,7 @@ flexmark-java
         <strong>test</strong>
       &lt;/div&gt;
       </code></pre>
-      
+
   By default will strip out emphasis and convert to:
 
       ```html

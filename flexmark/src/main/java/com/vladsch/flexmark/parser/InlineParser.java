@@ -49,6 +49,7 @@ public interface InlineParser {
     Text appendSeparateText(BasedSequence text);
     void flushTextNode();
     BasedSequence match(Pattern re);
+    BasedSequence[] matchWithGroups(Pattern re);
     Matcher matcher(Pattern re);
     char peek();
     char peek(int ahead);
