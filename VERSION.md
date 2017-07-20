@@ -169,7 +169,7 @@ flexmark-java
 
   Currently `aa**foo**aa` will parse bold but `aa**foo()**aa` will not because bracket direction
   is not taken into account. With above option set to `true` the second case will also parse
-  bold but `aa**foo(**` and `aa**)foo**` will not.
+  bold but `aa**foo(**aa` and `aa**)foo**aa` will not.
 
 * Add: `FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS`, default `false`. When `true` will
   preserve inline emphasis tags (`<strong>`, `<em>`, `<del>`, `<ins>`, `<sub>`, `<sup>`) and convert them to
