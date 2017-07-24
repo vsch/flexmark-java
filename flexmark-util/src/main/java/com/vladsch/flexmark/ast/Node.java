@@ -480,7 +480,7 @@ public abstract class Node {
         }
 
         if (spanningChars != null) {
-             //see if these are greater than already assigned chars
+            //see if these are greater than already assigned chars
             if (chars.isNull()) {
                 setChars(spanningChars);
             } else {
@@ -677,5 +677,18 @@ public abstract class Node {
                 blankLineSibling.getParent().setCharsFromContentOnly();
             }
         }
+    }
+
+    public int getLineNumber() {
+        return getStartLineNumber();
+    }
+
+    public int getStartLineNumber() {
+        return getDocument().getLineNumber(chars.getStartOffset());
+    }
+
+    public int getEndLineNumber() {
+        final int endOffset = chars.getEndOffset();
+        return getDocument().getLineNumber(endOffset > 0 ? endOffset - 1 : endOffset);
     }
 }

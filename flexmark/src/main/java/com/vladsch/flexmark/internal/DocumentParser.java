@@ -28,6 +28,7 @@ import java.io.Reader;
 import java.util.*;
 
 import static com.vladsch.flexmark.parser.Parser.BLANK_LINES_IN_AST;
+import static com.vladsch.flexmark.parser.Parser.TRACK_DOCUMENT_LINES;
 
 public class DocumentParser implements ParserState {
 
@@ -126,10 +127,17 @@ public class DocumentParser implements ParserState {
     private final InlineParser inlineParser;
     private final DocumentBlockParser documentBlockParser;
     private final boolean blankLinesInAst;
+    private final boolean trackDocumentLines;
+    private final List<BasedSequence> lineSegments = new ArrayList<BasedSequence>();
 
     private List<BlockParser> activeBlockParsers = new ArrayList<BlockParser>();
 
     private final ClassifyingBlockTracker blockTracker = new ClassifyingBlockTracker();
+
+    @Override
+    public List<BasedSequence> getLineSegments() {
+        return lineSegments;
+    }
 
     public void blockParserAdded(BlockParser blockParser) {
         blockTracker.blockParserAdded(blockParser);
@@ -333,6 +341,7 @@ public class DocumentParser implements ParserState {
         activateBlockParser(this.documentBlockParser);
         this.currentPhase = ParserPhase.STARTING;
         this.blankLinesInAst = options.get(BLANK_LINES_IN_AST);
+        this.trackDocumentLines = options.get(TRACK_DOCUMENT_LINES);
     }
 
     @Override
@@ -570,6 +579,9 @@ public class DocumentParser implements ParserState {
         index = 0;
         column = 0;
         columnIsInTab = false;
+
+        // track lines of document
+        if (trackDocumentLines) lineSegments.add(lineWithEOL);
 
         // For each containing block, try to parse the associated line start.
         // Bail out on failure: container will point to the last matching block.
@@ -816,7 +828,6 @@ public class DocumentParser implements ParserState {
         }
 
         blockParser.closeBlock(this);
-
         blockParser.finalizeClosedBlock();
     }
 

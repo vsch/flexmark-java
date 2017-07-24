@@ -81,7 +81,7 @@ public class LineCollectingVisitor {
         myLines = new ArrayList<Range>();
         myEOLs = new ArrayList<Integer>();
         myStartOffset = node.getStartOffset();
-        myEndOffset = node.getStartOffset();
+        myEndOffset = node.getEndOffset();
         myVisitor.visit(node);
     }
 

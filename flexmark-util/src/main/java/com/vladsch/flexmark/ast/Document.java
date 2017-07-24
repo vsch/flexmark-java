@@ -4,8 +4,7 @@ import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 public class Document extends Block implements MutableDataHolder, BlankLineContainer {
     private final MutableDataSet dataSet;
@@ -39,6 +38,18 @@ public class Document extends Block implements MutableDataHolder, BlankLineConta
         return dataSet.setIn(dataHolder);
     }
 
+    public int getLineNumber(int offset) {
+        final List<BasedSequence> lines = getContentLines();
+        final int iMax = lines.size();
+        for (int i = 0; i < iMax; i++) {
+            if (offset < lines.get(i).getEndOffset()) {
+                return i;
+            }
+        }
+
+        return iMax;
+    }
+
     @Override
     public <T> T getOrCompute(DataKey<T> key, DataValueFactory<T> factory) { return dataSet.getOrCompute(key, factory); }
 
@@ -52,7 +63,10 @@ public class Document extends Block implements MutableDataHolder, BlankLineConta
     public MutableDataHolder setFrom(MutableDataSetter dataSetter) { return dataSet.setFrom(dataSetter); }
 
     @Override
-    public MutableDataHolder setAll(DataHolder other) { dataSet.setAll(other); return dataSet; }
+    public MutableDataHolder setAll(DataHolder other) {
+        dataSet.setAll(other);
+        return dataSet;
+    }
 
     @Override
     public MutableDataHolder toMutable() { return dataSet.toMutable(); }

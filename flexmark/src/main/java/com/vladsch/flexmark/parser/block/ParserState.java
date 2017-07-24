@@ -128,4 +128,12 @@ public interface ParserState extends BlockTracker, BlockParserTracker {
      * @return strings and patterns class adjusted for options {@link Parsing}
      */
     Parsing getParsing();
+
+    /**
+     * Returns a list of document lines encountered this far in the parsing process
+     *
+     * @return list of line sequences (including EOLs)
+     */
+    List<BasedSequence> getLineSegments();
 }
+

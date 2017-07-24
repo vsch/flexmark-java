@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.14](#02214)
 - [0.22.12](#02212)
 - [0.22.10](#02210)
 - [0.22.8](#0228)
@@ -127,6 +128,7 @@ flexmark-java
 - [0.1.0](#010)
 
 
+
 &nbsp;</details><details id="version-history"><summary>**To Do**</summary>
 
 ## To Do
@@ -160,6 +162,28 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.14
+-------
+
+* Fix: potential exception when generating source position in HTML for individual lines
+
+* Add: `Parser.TRACK_DOCUMENT_LINES` default `false`. When `true` document lines are tracked in
+  the document's `lineSegments` list and offset to line method can be used to get the 0-based
+  line number for the given offset. When `false` these functions return `0`.
+
+* Add: line number API functions to `Node` and `Document`, set`Parser.TRACK_DOCUMENT_LINES` to
+  true to have these functions return other than 0.
+
+  * `Node.getLineNumber()` and `Node.getStartLineNumber()` returns 0-based line number for
+    node's start offset.
+
+  * `Node.getEndLineNumber()` returns 0-based line number for node's end offset - 1.
+
+  * `Document.getLineCount()` returns number of lines in the document
+
+  * `Document.getLineNumber(int offset)` returns 0-based line number for the given offset or
+    `Document.getLineCount()` if offset is outside the document text range.
 
 0.22.12
 -------

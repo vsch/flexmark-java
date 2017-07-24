@@ -66,7 +66,7 @@ public abstract class ContentNode extends Node implements Content {
 
     @Override
     public List<BasedSequence> getContentLines() {
-        return getContentLines(0, lineSegments.size());
+        return lineSegments;
     }
 
     @Override

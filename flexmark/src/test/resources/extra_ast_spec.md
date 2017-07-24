@@ -4913,9 +4913,39 @@ Document[0, 18]
 ````````````````````````````````
 
 
+single line paragraph lines
+
+```````````````````````````````` example(Source Position Attribute: 3) options(src-pos, src-pos-lines)
+text
+.
+<p md-pos="0-4"><span md-pos="0-4">text</span></p>
+.
+Document[0, 4]
+  Paragraph[0, 4]
+    Text[0, 4] chars:[0, 4, "text"]
+````````````````````````````````
+
+
+list item
+
+```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
+* a 
+.
+<ul>
+  <li md-pos="0-4"><span md-pos="2-3">a</span></li>
+</ul>
+.
+Document[0, 4]
+  BulletList[0, 4] isTight
+    BulletListItem[0, 4] open:[0, 1, "*"] isTight
+      Paragraph[2, 4]
+        Text[2, 3] chars:[2, 3, "a"]
+````````````````````````````````
+
+
 fenced code with trailing spaces and tabs on close
 
-```````````````````````````````` example(Source Position Attribute: 3) options(src-pos)
+```````````````````````````````` example(Source Position Attribute: 5) options(src-pos)
 ```text
 text
 ``` →
@@ -4936,7 +4966,7 @@ Document[0, 24]
 
 no source wrap HTML
 
-```````````````````````````````` example(Source Position Attribute: 4) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines)
 <div>
 <p>HTML Block</p>
 </div>
@@ -4960,7 +4990,7 @@ Document[0, 64]
 
 source wrap HTML
 
-```````````````````````````````` example(Source Position Attribute: 5) options(src-pos, src-pos-lines, src-wrap-html)
+```````````````````````````````` example(Source Position Attribute: 7) options(src-pos, src-pos-lines, src-wrap-html)
 <div>
 <p>HTML Block</p>
 </div>
@@ -4986,7 +5016,7 @@ Document[0, 64]
 
 source wrap HTML blocks
 
-```````````````````````````````` example(Source Position Attribute: 6) options(src-pos, src-pos-lines, src-wrap-blocks)
+```````````````````````````````` example(Source Position Attribute: 8) options(src-pos, src-pos-lines, src-wrap-blocks)
 <div>
 <p>HTML Block</p>
 </div>
@@ -5012,7 +5042,7 @@ Document[0, 64]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute: 7) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 9) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5160,7 +5190,7 @@ Document[0, 455]
 
 Wrap individual paragraph lines in source position marked spans
 
-```````````````````````````````` example(Source Position Attribute: 8) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 10) options(src-pos, src-pos-lines)
 paragraph test 
 with multiple lazy lines
 all should be src pos wrapped
@@ -5181,7 +5211,7 @@ Document[0, 70]
 
 Wrap individual paragraph lines in source position marked spans with spanning inlines
 
-```````````````````````````````` example(Source Position Attribute: 9) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 11) options(src-pos, src-pos-lines)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5221,7 +5251,7 @@ Document[0, 131]
 ````````````````````````````````
 
 
-```````````````````````````````` example(Source Position Attribute: 10) options(src-pos, src-pos-lines-splice)
+```````````````````````````````` example(Source Position Attribute: 12) options(src-pos, src-pos-lines-splice)
 paragraph `test 
  with` multiple lazy **lines
 paragraph `test
@@ -5263,7 +5293,7 @@ Document[0, 131]
 
 Wrap individual paragraph lines in source position marked spans tight list items
 
-```````````````````````````````` example(Source Position Attribute: 11) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 13) options(src-pos, src-pos-lines)
 - item
 with multiple lazy lines
 all should be src pos wrapped
@@ -5310,7 +5340,7 @@ Document[0, 137]
 
 Wrap individual paragraph lines in source position marked spans loose list items
 
-```````````````````````````````` example(Source Position Attribute: 12) options(src-pos, src-pos-lines)
+```````````````````````````````` example(Source Position Attribute: 14) options(src-pos, src-pos-lines)
 - item
 
 - item

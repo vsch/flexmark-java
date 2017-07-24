@@ -6,6 +6,8 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.junit.Test;
 
@@ -28,7 +30,6 @@ public class ParserTest {
         Node document1 = parser.parseReader(new StringReader(""));
         assertEquals(false, document1.hasChildren());
     }
-
 
     @Test
     public void ioReaderTest() throws IOException {
@@ -62,21 +63,57 @@ public class ParserTest {
     public void indentation() {
         String given = " - 1 space\n   - 3 spaces\n     - 5 spaces\n\t - tab + space";
         Parser parser = Parser.builder().build();
-        Node document = parser.parse(given);
+        Document document = parser.parse(given);
 
         assertThat(document.getFirstChild(), instanceOf(BulletList.class));
+        assertEquals("Document line count", 0, document.getLineCount());
 
         Node list = document.getFirstChild(); // first level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("1 space", firstText(list.getFirstChild()));
+        assertEquals("node start line number", 0, list.getStartLineNumber());
+        assertEquals("node end line number", 0, list.getEndLineNumber());
 
         list = list.getFirstChild().getLastChild(); // second level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("3 spaces", firstText(list.getFirstChild()));
+        assertEquals("node start line number", 0, list.getStartLineNumber());
+        assertEquals("node end line number", 0, list.getEndLineNumber());
 
         list = list.getFirstChild().getLastChild(); // third level list
         assertEquals("5 spaces", firstText(list.getFirstChild()));
         assertEquals("tab + space", firstText(list.getFirstChild().getNext()));
+        assertEquals("node start line number", 0, list.getStartLineNumber());
+        assertEquals("node end line number", 0, list.getEndLineNumber());
+    }
+
+    @Test
+    public void indentationWithLines() {
+        String given = " - 1 space\n   - 3 spaces\n     - 5 spaces\n\t - tab + space";
+        MutableDataHolder options = new MutableDataSet().set(Parser.TRACK_DOCUMENT_LINES, true);
+        Parser parser = Parser.builder(options).build();
+        Document document = parser.parse(given);
+
+        assertThat(document.getFirstChild(), instanceOf(BulletList.class));
+        assertEquals("Document line count", 4, document.getLineCount());
+
+        Node list = document.getFirstChild(); // first level list
+        assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
+        assertEquals("1 space", firstText(list.getFirstChild()));
+        assertEquals("node start line number", 0, list.getStartLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
+
+        list = list.getFirstChild().getLastChild(); // second level list
+        assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
+        assertEquals("3 spaces", firstText(list.getFirstChild()));
+        assertEquals("node start line number", 1, list.getStartLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
+
+        list = list.getFirstChild().getLastChild(); // third level list
+        assertEquals("5 spaces", firstText(list.getFirstChild()));
+        assertEquals("tab + space", firstText(list.getFirstChild().getNext()));
+        assertEquals("node start line number", 2, list.getStartLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
     }
 
     private String firstText(Node n) {

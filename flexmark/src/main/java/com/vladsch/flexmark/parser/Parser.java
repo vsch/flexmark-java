@@ -46,6 +46,8 @@ public class Parser implements IParse {
 
     public static final DataKey<Boolean> ASTERISK_DELIMITER_PROCESSOR = new DataKey<Boolean>("ASTERISK_DELIMITER_PROCESSOR", true);
 
+    public static final DataKey<Boolean> TRACK_DOCUMENT_LINES = new DataKey<Boolean>("TRACK_DOCUMENT_LINES", false);
+
     public static final DataKey<Boolean> BLOCK_QUOTE_PARSER = new DataKey<Boolean>("BLOCK_QUOTE_PARSER", true);
     public static final DataKey<Boolean> BLOCK_QUOTE_TO_BLANK_LINE = new DataKey<Boolean>("BLOCK_QUOTE_TO_BLANK_LINE", false);
     public static final DataKey<Boolean> BLOCK_QUOTE_IGNORE_BLANK_LINE = new DataKey<Boolean>("BLOCK_QUOTE_IGNORE_BLANK_LINE", false);
