@@ -634,13 +634,24 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.line();
 
         if (escape) {
-            html.text(node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL());
+            if (node instanceof HtmlBlock) {
+                String normalizeEOL = node.getContentChars().normalizeEOL();
+                if (normalizeEOL.length() > 0 && normalizeEOL.charAt(normalizeEOL.length()-1) == '\n') {
+                    // leave off the trailing EOL
+                    normalizeEOL = normalizeEOL.substring(0, normalizeEOL.length()-1);
+                }
+                html.raw("<p>").text(normalizeEOL).raw("</p>");
+            }
+            else {
+                html.text(node.getChars().normalizeEOL());
+            }
         } else {
             html.rawPre((node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL()));
         }
 
-        if (node instanceof HtmlBlock)
+        if (node instanceof HtmlBlock) {
             html.lineIf(context.getHtmlOptions().htmlBlockCloseTagEol);
+        }
     }
 
     private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {

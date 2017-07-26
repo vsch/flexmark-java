@@ -66,25 +66,25 @@ public class ParserTest {
         Document document = parser.parse(given);
 
         assertThat(document.getFirstChild(), instanceOf(BulletList.class));
-        assertEquals("Document line count", 0, document.getLineCount());
+        assertEquals("Document line count", 4, document.getLineCount());
 
         Node list = document.getFirstChild(); // first level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("1 space", firstText(list.getFirstChild()));
         assertEquals("node start line number", 0, list.getStartLineNumber());
-        assertEquals("node end line number", 0, list.getEndLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
 
         list = list.getFirstChild().getLastChild(); // second level list
         assertEquals("expect one child", list.getFirstChild(), list.getLastChild());
         assertEquals("3 spaces", firstText(list.getFirstChild()));
-        assertEquals("node start line number", 0, list.getStartLineNumber());
-        assertEquals("node end line number", 0, list.getEndLineNumber());
+        assertEquals("node start line number", 1, list.getStartLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
 
         list = list.getFirstChild().getLastChild(); // third level list
         assertEquals("5 spaces", firstText(list.getFirstChild()));
         assertEquals("tab + space", firstText(list.getFirstChild().getNext()));
-        assertEquals("node start line number", 0, list.getStartLineNumber());
-        assertEquals("node end line number", 0, list.getEndLineNumber());
+        assertEquals("node start line number", 2, list.getStartLineNumber());
+        assertEquals("node end line number", 3, list.getEndLineNumber());
     }
 
     @Test

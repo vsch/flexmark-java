@@ -40,7 +40,7 @@ public class HtmlRendererTest {
     @Test
     public void htmlEscapingShouldEscapeHtmlBlocks() {
         String rendered = htmlEscapingRenderer().render(parse("<div id='foo' class=\"bar\">block &amp;</div>"));
-        assertEquals("&lt;div id='foo' class=&quot;bar&quot;&gt;block &amp;amp;&lt;/div&gt;\n", rendered);
+        assertEquals("<p>&lt;div id='foo' class=&quot;bar&quot;&gt;block &amp;amp;&lt;/div&gt;</p>\n", rendered);
     }
 
     @Test

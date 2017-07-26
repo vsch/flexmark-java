@@ -1,10 +1,13 @@
 package com.vladsch.flexmark.ast;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.options.*;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 import java.util.*;
+
+import static com.vladsch.flexmark.util.sequence.BasedSequence.EMPTY_LIST;
 
 public class Document extends Block implements MutableDataHolder, BlankLineContainer {
     private final MutableDataSet dataSet;
@@ -38,16 +41,37 @@ public class Document extends Block implements MutableDataHolder, BlankLineConta
         return dataSet.setIn(dataHolder);
     }
 
-    public int getLineNumber(int offset) {
-        final List<BasedSequence> lines = getContentLines();
-        final int iMax = lines.size();
-        for (int i = 0; i < iMax; i++) {
-            if (offset < lines.get(i).getEndOffset()) {
-                return i;
-            }
+    @Override
+    public int getLineCount() {
+        if (lineSegments == EMPTY_LIST) {
+            final char c = getChars().lastChar();
+            return (c == '\n' || c == '\r' ? 0 : 1) + getLineNumber(getChars().length());
+        } else {
+            return lineSegments.size();
         }
+    }
 
-        return iMax;
+    public int getLineNumber(int offset) {
+        if (lineSegments == EMPTY_LIST) {
+            BasedSequence preText = getChars().baseSubSequence(0, Utils.maxLimit(offset, getChars().length()));
+            if (preText.isEmpty()) return 0;
+            int lineNumber = 0;
+            int nextLineEnd = preText.endOfLineAnyEOL(0);
+            final int length = preText.length();
+            while (nextLineEnd < length) {
+                lineNumber++;
+                nextLineEnd = preText.endOfLineAnyEOL(nextLineEnd + 1);
+            }
+            return lineNumber;
+        } else {
+            final int iMax = lineSegments.size();
+            for (int i = 0; i < iMax; i++) {
+                if (offset < lineSegments.get(i).getEndOffset()) {
+                    return i;
+                }
+            }
+            return iMax;
+        }
     }
 
     @Override

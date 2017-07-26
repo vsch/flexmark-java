@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.16](#02216)
 - [0.22.14](#02214)
 - [0.22.12](#02212)
 - [0.22.10](#02210)
@@ -162,6 +163,20 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.16
+-------
+
+* Fix: #133, The pom.xml file's url should be update
+
+* Add: extra wiki link tests for combination with `TypographicExtension`
+
+* Fix: escaped HTML blocks should be wrapped in `<p>...</p>`
+
+* Fix: allow `Document.getLineNumber(int offset)` to return line number when
+  `Parser.TRACK_DOCUMENT_LINES` is false, less efficient because it counts EOL in document char
+  sequence. Useful when line number is needed for error reporting without incurring storage
+  overhead of storing individual line character sequences.
 
 0.22.14
 -------

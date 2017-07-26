@@ -2975,11 +2975,11 @@ Encode all html
 
 This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
 .
-&lt;div&gt;
+<p>&lt;div&gt;
 &lt;p&gt;paragraph&lt;/p&gt;
-&lt;/div&gt;
+&lt;/div&gt;</p>
 &lt;!-- html comment block --&gt;
-&lt;p&gt;paragraph&lt;/p&gt;
+<p>&lt;p&gt;paragraph&lt;/p&gt;</p>
 <p>This is a paragraph with html &lt;span style=&quot;color:red;&quot;&gt;Test&lt;/span&gt; and an html comment &lt;!-- comment --&gt; embedded in it.</p>
 .
 Document[0, 196]
@@ -3009,11 +3009,11 @@ Encode html blocks
 
 This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.
 .
-&lt;div&gt;
+<p>&lt;div&gt;
 &lt;p&gt;paragraph&lt;/p&gt;
-&lt;/div&gt;
+&lt;/div&gt;</p>
 &lt;!-- html comment block --&gt;
-&lt;p&gt;paragraph&lt;/p&gt;
+<p>&lt;p&gt;paragraph&lt;/p&gt;</p>
 <p>This is a paragraph with html <span style="color:red;">Test</span> and an html comment <!-- comment --> embedded in it.</p>
 .
 Document[0, 196]
