@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.18](#02218)
 - [0.22.16](#02216)
 - [0.22.14](#02214)
 - [0.22.12](#02212)
@@ -163,6 +164,17 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.18
+-------
+
+* Change: when `Parser.CODE_SOFT_LINE_BREAKS` is `true` and `HtmlRenderer.SOFT_BREAK` is not all
+  spaces or tabs then inline code will render soft line breaks as per `HtmlRenderer.SOFT_BREAK`
+  definition. A side-effect of this is white-space collapsing only occurs for inline code line
+  segments.
+
+* Change: add `Parser.CODE_BLOCK_INDENT` defaults to value of `Parser.LISTS_ITEM_INDENT`, allows
+  for separate control of indented block setting from list item settings.
 
 0.22.16
 -------

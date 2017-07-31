@@ -3476,3 +3476,98 @@ Document[0, 45]
 ````````````````````````````````
 
 
+## Issue 135
+
+Issue #135, Render problem when there is a line below the table that can be interpreted as
+setext heading.
+
+```````````````````````````````` example(Issue 135: 1) options(FAIL)
+|a|b|c|
+|---|---|---|
+|1|2|3|
+---
+.
+<table>
+  <thead>
+    <tr><th>a</th><th>b</th><th>c</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>2</td><td>3</td></tr>
+  </tbody>
+</table>
+<hr />
+.
+Document[0, 34]
+  TableBlock[0, 30]
+    TableHead[0, 7]
+      TableRow[0, 7]
+        TableCell[1, 2] header text:[1, 2, "a"]
+          Text[1, 2] chars:[1, 2, "a"]
+        TableCell[3, 4] header text:[3, 4, "b"]
+          Text[3, 4] chars:[3, 4, "b"]
+        TableCell[5, 6] header text:[5, 6, "c"]
+          Text[5, 6] chars:[5, 6, "c"]
+    TableSeparator[8, 21]
+      TableRow[8, 21]
+        TableCell[9, 12] text:[9, 12, "---"]
+          Text[9, 12] chars:[9, 12, "---"]
+        TableCell[13, 16] text:[13, 16, "---"]
+          Text[13, 16] chars:[13, 16, "---"]
+        TableCell[17, 20] text:[17, 20, "---"]
+          Text[17, 20] chars:[17, 20, "---"]
+    TableBody[22, 29]
+      TableRow[22, 29]
+        TableCell[23, 24] text:[23, 24, "1"]
+          Text[23, 24] chars:[23, 24, "1"]
+        TableCell[25, 26] text:[25, 26, "2"]
+          Text[25, 26] chars:[25, 26, "2"]
+        TableCell[27, 28] text:[27, 28, "3"]
+          Text[27, 28] chars:[27, 28, "3"]
+  ThematicBreak[30, 33]
+````````````````````````````````
+
+
+parsed as heading because table processing occurs on paragraphs only
+
+```````````````````````````````` example Issue 135: 2
+|a|b|c|
+|---|---|---|
+|1|2|3|
+---
+.
+<h2>|a|b|c|
+|---|---|---|
+|1|2|3|</h2>
+.
+Document[0, 34]
+  Heading[0, 33] text:[0, 29, "|a|b|c|\n|---|---|---|\n|1|2|3|"] textClose:[30, 33, "---"]
+    Text[0, 7] chars:[0, 7, "|a|b|c|"]
+    SoftLineBreak[7, 8]
+    Text[8, 21] chars:[8, 21, "|---| … |---|"]
+    SoftLineBreak[21, 22]
+    Text[22, 29] chars:[22, 29, "|1|2|3|"]
+````````````````````````````````
+
+
+parsed as heading because table processing occurs on paragraphs only
+
+```````````````````````````````` example Issue 135: 3
+|a|b|c|
+|---|---|---|
+|1|2|3|
+===
+.
+<h1>|a|b|c|
+|---|---|---|
+|1|2|3|</h1>
+.
+Document[0, 34]
+  Heading[0, 33] text:[0, 29, "|a|b|c|\n|---|---|---|\n|1|2|3|"] textClose:[30, 33, "==="]
+    Text[0, 7] chars:[0, 7, "|a|b|c|"]
+    SoftLineBreak[7, 8]
+    Text[8, 21] chars:[8, 21, "|---| … |---|"]
+    SoftLineBreak[21, 22]
+    Text[22, 29] chars:[22, 29, "|1|2|3|"]
+````````````````````````````````
+
+

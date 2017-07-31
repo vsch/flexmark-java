@@ -6200,3 +6200,75 @@ Document[0, 12]
 ````````````````````````````````
 
 
+## Soft-Breaks in code
+
+Multi-line code span in paragraph
+
+```````````````````````````````` example(Soft-Breaks in code: 1) options(code-soft-breaks)
+line ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+.
+<p>line <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: [
+&quot;xxx&quot;,
+&quot;zzz&quot;
+]
+}</code></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Text[0, 5] chars:[0, 5, "line "]
+    Code[5, 55] textOpen:[5, 8, "```"] text:[8, 52, "{\n\"ke … y1\": \"xxx\",\n\"key2\": [\n\"xxx\",\n\"zzz\"\n]\n} "] textClose:[52, 55, "```"]
+      Text[8, 9] chars:[8, 9, "{"]
+      SoftLineBreak[9, 10]
+      Text[10, 24] chars:[10, 24, "\"key1 … xxx\","]
+      SoftLineBreak[24, 25]
+      Text[25, 34] chars:[25, 34, "\"key2\": ["]
+      SoftLineBreak[34, 35]
+      Text[35, 41] chars:[35, 41, "\"xxx\","]
+      SoftLineBreak[41, 42]
+      Text[42, 47] chars:[42, 47, "\"zzz\""]
+      SoftLineBreak[47, 48]
+      Text[48, 49] chars:[48, 49, "]"]
+      SoftLineBreak[49, 50]
+      Text[50, 52] chars:[50, 52, "} "]
+````````````````````````````````
+
+
+```````````````````````````````` example(Soft-Breaks in code: 2) options(code-soft-break-spaces)
+line ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+.
+<p>line <code>{ &quot;key1&quot;: &quot;xxx&quot;, &quot;key2&quot;: [ &quot;xxx&quot;, &quot;zzz&quot; ] }</code></p>
+.
+Document[0, 55]
+  Paragraph[0, 55]
+    Text[0, 5] chars:[0, 5, "line "]
+    Code[5, 55] textOpen:[5, 8, "```"] text:[8, 52, "{\n\"ke … y1\": \"xxx\",\n\"key2\": [\n\"xxx\",\n\"zzz\"\n]\n} "] textClose:[52, 55, "```"]
+      Text[8, 9] chars:[8, 9, "{"]
+      SoftLineBreak[9, 10]
+      Text[10, 24] chars:[10, 24, "\"key1 … xxx\","]
+      SoftLineBreak[24, 25]
+      Text[25, 34] chars:[25, 34, "\"key2\": ["]
+      SoftLineBreak[34, 35]
+      Text[35, 41] chars:[35, 41, "\"xxx\","]
+      SoftLineBreak[41, 42]
+      Text[42, 47] chars:[42, 47, "\"zzz\""]
+      SoftLineBreak[47, 48]
+      Text[48, 49] chars:[48, 49, "]"]
+      SoftLineBreak[49, 50]
+      Text[50, 52] chars:[50, 52, "} "]
+````````````````````````````````
+
+

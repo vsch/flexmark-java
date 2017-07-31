@@ -1517,3 +1517,60 @@ PegdownParser$PegdownRootNode[0, 0]
 ````````````````````````````````
 
 
+## Table 
+
+Multi-line code span
+
+```````````````````````````````` example Table: 1
+|header1|header2|header3|
+|-------|----|------|
+| line | ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+| ```{
+"key1": "xxx",
+"key2": "xxx"
+}```|
+.
+<p>|header1|header2|header3| |-------|----|------| | line | <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: [
+&quot;xxx&quot;,
+&quot;zzz&quot;
+]
+}</code> | <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: &quot;xxx&quot;
+}</code>|</p>
+.
+PegdownParser$PegdownRootNode[0, 0]
+````````````````````````````````
+
+
+Multi-line code span in paragraph
+
+```````````````````````````````` example Table: 2
+line ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+.
+<p>line <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: [
+&quot;xxx&quot;,
+&quot;zzz&quot;
+]
+}</code></p>
+.
+PegdownParser$PegdownRootNode[0, 0]
+````````````````````````````````
+
+

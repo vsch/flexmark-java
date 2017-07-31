@@ -56,6 +56,15 @@ public class Utils {
         return receiver == null || receiver.trim().isEmpty();
     }
 
+    public static boolean isWhiteSpaceNoEOL(String receiver) {
+        int iMax = receiver.length();
+        for (int i = 0; i < iMax; i++) {
+            char c = receiver.charAt(i);
+            if (c != ' ' && c != '\t') return false;
+        }
+        return true;
+    }
+
     public static String orEmpty(String receiver) {
         return receiver == null ? "" : receiver;
     }

@@ -1,9 +1,11 @@
 package com.vladsch.flexmark.html;
 
+import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 public class HtmlRendererOptions {
     public final String softBreak;
+    public final boolean isSoftBreakAllSpaces;
     public final String hardBreak;
     public final String strongEmphasisStyleHtmlOpen;
     public final String strongEmphasisStyleHtmlClose;
@@ -38,6 +40,7 @@ public class HtmlRendererOptions {
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
+        isSoftBreakAllSpaces = Utils.isWhiteSpaceNoEOL(softBreak);
         hardBreak = HtmlRenderer.HARD_BREAK.getFrom(options);
         strongEmphasisStyleHtmlOpen = HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_OPEN.getFrom(options);
         strongEmphasisStyleHtmlClose = HtmlRenderer.STRONG_EMPHASIS_STYLE_HTML_CLOSE.getFrom(options);

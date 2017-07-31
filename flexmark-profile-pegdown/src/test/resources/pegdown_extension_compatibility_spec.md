@@ -2461,6 +2461,157 @@ real life table
 ````````````````````````````````
 
 
+Multi-line code span
+
+```````````````````````````````` example Markdown elements - TableBlock: 10
+|header1|header2|header3|
+|-------|----|------|
+| line | ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+| ```{
+"key1": "xxx",
+"key2": "xxx"
+}```|
+.
+<table>
+  <thead>
+    <tr><th>header1</th><th>header2</th><th>header3</th></tr>
+  </thead>
+  <tbody>
+    <tr><td> line </td><td> ```{</td></tr>
+  </tbody>
+</table>
+<p>&ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: [ &ldquo;xxx&rdquo;, &ldquo;zzz&rdquo; ] } <code>|</code>{ &ldquo;key1&rdquo;: &ldquo;xxx&rdquo;, &ldquo;key2&rdquo;: &ldquo;xxx&rdquo; }```|</p>
+.
+Document[0, 150]
+  TableBlock[0, 62]
+    TableHead[0, 25]
+      TableRow[0, 25] rowNumber=1
+        TableCell[0, 9] header textOpen:[0, 1, "|"] text:[1, 8, "header1"] textClose:[8, 9, "|"]
+          Text[1, 8] chars:[1, 8, "header1"]
+        TableCell[9, 17] header text:[9, 16, "header2"] textClose:[16, 17, "|"]
+          Text[9, 16] chars:[9, 16, "header2"]
+        TableCell[17, 25] header text:[17, 24, "header3"] textClose:[24, 25, "|"]
+          Text[17, 24] chars:[17, 24, "header3"]
+    TableSeparator[26, 47]
+      TableRow[26, 47]
+        TableCell[26, 35] textOpen:[26, 27, "|"] text:[27, 34, "-------"] textClose:[34, 35, "|"]
+          TypographicSmarts[27, 30] typographic: &mdash; 
+          TypographicSmarts[30, 33] typographic: &mdash; 
+          Text[33, 34] chars:[33, 34, "-"]
+        TableCell[35, 40] text:[35, 39, "----"] textClose:[39, 40, "|"]
+          TypographicSmarts[35, 38] typographic: &mdash; 
+          Text[38, 39] chars:[38, 39, "-"]
+        TableCell[40, 47] text:[40, 46, "------"] textClose:[46, 47, "|"]
+          TypographicSmarts[40, 43] typographic: &mdash; 
+          TypographicSmarts[43, 46] typographic: &mdash; 
+    TableBody[48, 61]
+      TableRow[48, 61] rowNumber=1
+        TableCell[48, 56] textOpen:[48, 49, "|"] text:[49, 55, " line "] textClose:[55, 56, "|"]
+          Text[49, 55] chars:[49, 55, " line "]
+        TableCell[56, 61] text:[56, 61, " ```{"]
+          Text[56, 61] chars:[56, 61, " ```{"]
+  Paragraph[62, 150]
+    TypographicQuotes[62, 68] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[62, 63, "\""] text:[63, 67, "key1"] textClose:[67, 68, "\""]
+      Text[63, 67] chars:[63, 67, "key1"]
+    Text[68, 70] chars:[68, 70, ": "]
+    TypographicQuotes[70, 75] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[70, 71, "\""] text:[71, 74, "xxx"] textClose:[74, 75, "\""]
+      Text[71, 74] chars:[71, 74, "xxx"]
+    Text[75, 76] chars:[75, 76, ","]
+    SoftLineBreak[76, 77]
+    TypographicQuotes[77, 83] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[77, 78, "\""] text:[78, 82, "key2"] textClose:[82, 83, "\""]
+      Text[78, 82] chars:[78, 82, "key2"]
+    Text[83, 85] chars:[83, 85, ": "]
+    LinkRef[85, 101] referenceOpen:[85, 86, "["] reference:[87, 99, "\"xxx\",\n\"zzz\""] referenceClose:[100, 101, "]"]
+      SoftLineBreak[86, 87]
+      TypographicQuotes[87, 92] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[87, 88, "\""] text:[88, 91, "xxx"] textClose:[91, 92, "\""]
+        Text[88, 91] chars:[88, 91, "xxx"]
+      Text[92, 93] chars:[92, 93, ","]
+      SoftLineBreak[93, 94]
+      TypographicQuotes[94, 99] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[94, 95, "\""] text:[95, 98, "zzz"] textClose:[98, 99, "\""]
+        Text[95, 98] chars:[95, 98, "zzz"]
+      SoftLineBreak[99, 100]
+    SoftLineBreak[101, 102]
+    Text[102, 104] chars:[102, 104, "} "]
+    Code[104, 113] textOpen:[104, 107, "```"] text:[107, 110, "\n| "] textClose:[110, 113, "```"]
+      Text[107, 110] chars:[107, 110, "\n| "]
+    Text[113, 114] chars:[113, 114, "{"]
+    SoftLineBreak[114, 115]
+    TypographicQuotes[115, 121] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[115, 116, "\""] text:[116, 120, "key1"] textClose:[120, 121, "\""]
+      Text[116, 120] chars:[116, 120, "key1"]
+    Text[121, 123] chars:[121, 123, ": "]
+    TypographicQuotes[123, 128] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[123, 124, "\""] text:[124, 127, "xxx"] textClose:[127, 128, "\""]
+      Text[124, 127] chars:[124, 127, "xxx"]
+    Text[128, 129] chars:[128, 129, ","]
+    SoftLineBreak[129, 130]
+    TypographicQuotes[130, 136] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[130, 131, "\""] text:[131, 135, "key2"] textClose:[135, 136, "\""]
+      Text[131, 135] chars:[131, 135, "key2"]
+    Text[136, 138] chars:[136, 138, ": "]
+    TypographicQuotes[138, 143] typographicOpening: &ldquo;  typographicClosing: &rdquo;  textOpen:[138, 139, "\""] text:[139, 142, "xxx"] textClose:[142, 143, "\""]
+      Text[139, 142] chars:[139, 142, "xxx"]
+    SoftLineBreak[143, 144]
+    Text[144, 149] chars:[144, 149, "}```|"]
+````````````````````````````````
+
+
+Multi-line code span with multi-line table rows
+
+```````````````````````````````` example(Markdown elements - TableBlock: 11) options(FAIL)
+|header1|header2|header3|
+|-------|----|------|
+| line | ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+| ```{
+"key1": "xxx",
+"key2": "xxx"
+}```|
+.
+<p>|header1|header2|header3| |-------|----|------| | line | <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: [
+&quot;xxx&quot;,
+&quot;zzz&quot;
+]
+}</code> | <code>{
+&quot;key1&quot;: &quot;xxx&quot;,
+&quot;key2&quot;: &quot;xxx&quot;
+}</code>|</p>
+.
+PegdownParser$PegdownRootNode[0, 0]
+````````````````````````````````
+
+
+Multi-line code span in paragraph
+
+```````````````````````````````` example Markdown elements - TableBlock: 12
+line ```{
+"key1": "xxx",
+"key2": [
+"xxx",
+"zzz"
+]
+} ```
+.
+<p>line <code>{ &quot;key1&quot;: &quot;xxx&quot;, &quot;key2&quot;: [ &quot;xxx&quot;, &quot;zzz&quot; ] }</code></p>
+.
+Document[0, 56]
+  Paragraph[0, 56]
+    Text[0, 5] chars:[0, 5, "line "]
+    Code[5, 55] textOpen:[5, 8, "```"] text:[8, 52, "{\n\"ke … y1\": \"xxx\",\n\"key2\": [\n\"xxx\",\n\"zzz\"\n]\n} "] textClose:[52, 55, "```"]
+      Text[8, 52] chars:[8, 52, "{\n\"ke … \n]\n} "]
+````````````````````````````````
+
+
 ### Markdown elements - ThematicBreak
 
 `ThematicBreak`

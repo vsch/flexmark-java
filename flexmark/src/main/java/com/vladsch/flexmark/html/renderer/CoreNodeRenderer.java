@@ -581,15 +581,31 @@ public class CoreNodeRenderer implements NodeRenderer {
             } else {
                 html.srcPos(node.getText()).withAttr().tag("code");
             }
-            if (codeSoftLineBreaks) {
-                context.renderChildren(node);
+            if (codeSoftLineBreaks && !htmlOptions.isSoftBreakAllSpaces) {
+                for (Node child : node.getChildren()) {
+                    if (child instanceof Text) {
+                        html.text(Escaping.collapseWhitespace(child.getChars(), true));
+                    } else {
+                        context.render(child);
+                    }
+                }
             } else {
                 html.text(Escaping.collapseWhitespace(node.getText(), true));
             }
             html.tag("/code");
         } else {
             html.raw(htmlOptions.codeStyleHtmlOpen);
-            html.text(Escaping.collapseWhitespace(node.getText(), true));
+            if (codeSoftLineBreaks && !htmlOptions.isSoftBreakAllSpaces) {
+                for (Node child : node.getChildren()) {
+                    if (child instanceof Text) {
+                        html.text(Escaping.collapseWhitespace(child.getChars(), true));
+                    } else {
+                        context.render(child);
+                    }
+                }
+            } else {
+                html.text(Escaping.collapseWhitespace(node.getText(), true));
+            }
             html.raw(htmlOptions.codeStyleHtmlClose);
         }
     }
@@ -636,13 +652,12 @@ public class CoreNodeRenderer implements NodeRenderer {
         if (escape) {
             if (node instanceof HtmlBlock) {
                 String normalizeEOL = node.getContentChars().normalizeEOL();
-                if (normalizeEOL.length() > 0 && normalizeEOL.charAt(normalizeEOL.length()-1) == '\n') {
+                if (normalizeEOL.length() > 0 && normalizeEOL.charAt(normalizeEOL.length() - 1) == '\n') {
                     // leave off the trailing EOL
-                    normalizeEOL = normalizeEOL.substring(0, normalizeEOL.length()-1);
+                    normalizeEOL = normalizeEOL.substring(0, normalizeEOL.length() - 1);
                 }
                 html.raw("<p>").text(normalizeEOL).raw("</p>");
-            }
-            else {
+            } else {
                 html.text(node.getChars().normalizeEOL());
             }
         } else {

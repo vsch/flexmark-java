@@ -14,6 +14,7 @@ class TableParserOptions {
     public final boolean headerSeparatorColumnMatch;
     public final String className;
     public final boolean withCaption;
+    public final boolean multiLineRows;
 
     TableParserOptions(DataHolder options) {
         this.maxHeaderRows = TablesExtension.MAX_HEADER_ROWS.getFrom(options);
@@ -26,5 +27,6 @@ class TableParserOptions {
         this.headerSeparatorColumnMatch = TablesExtension.HEADER_SEPARATOR_COLUMN_MATCH.getFrom(options);
         this.className = TablesExtension.CLASS_NAME.getFrom(options);
         this.withCaption = TablesExtension.WITH_CAPTION.getFrom(options);
+        this.multiLineRows = TablesExtension.MULTI_LINE_ROWS.getFrom(options);
     }
 }

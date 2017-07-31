@@ -172,7 +172,7 @@ public class Parsing {
         }
 
         // make sure this is consistent with lists settings
-        this.CODE_BLOCK_INDENT = Parser.LISTS_ITEM_INDENT.getFrom(options);
+        this.CODE_BLOCK_INDENT = Parser.CODE_BLOCK_INDENT.getFrom(options);
 
         // list of characters not allowed in link URL
         this.INVALID_LINK_CHARS = " \t";

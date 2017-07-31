@@ -141,15 +141,19 @@ public class TableParagraphPreProcessor implements ParagraphPreProcessor {
             }
 
             BasedSequence fullRowLine = block.getLineIndent(rowNumber) <= blockIndent ? rowLine.trimEOL() : rowLine.baseSubSequence(rowLine.getStartOffset() - (block.getLineIndent(rowNumber) - blockIndent), rowLine.getEndOffset() - rowLine.eolLength());
-            if (separatorLineNumber == -1 && rowNumber >= options.minHeaderRows
-                    && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
-                // must start with | or cell, whitespace means its not a separator line
-                if (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
-                    separatorLineNumber = rowNumber;
-                    separatorLine = rowLine;
-                } else if (fullRowLine.charAt(0) == ' ' || fullRowLine.charAt(0) == '\t') {
-                    block.setHasTableSeparator(true);
+            if (separatorLineNumber == -1) {
+                if (rowNumber >= options.minHeaderRows
+                        && TABLE_HEADER_SEPARATOR.matcher(rowLine).matches()) {
+                    // must start with | or cell, whitespace means its not a separator line
+                    if (fullRowLine.charAt(0) != ' ' && fullRowLine.charAt(0) != '\t' || rowLine.charAt(0) != '|') {
+                        separatorLineNumber = rowNumber;
+                        separatorLine = rowLine;
+                    } else if (fullRowLine.charAt(0) == ' ' || fullRowLine.charAt(0) == '\t') {
+                        block.setHasTableSeparator(true);
+                    }
                 }
+            } else if (options.multiLineRows) {
+                // TODO: need to do inline parsing here to determine whether we have open element constructs which need to include the next line
             }
 
             tableLines.add(rowLine);
