@@ -2,20 +2,12 @@ package com.vladsch.flexmark.ast;
 
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 
-public class Reference extends Node implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
+public class Reference extends LinkNodeBase implements ReferenceNode<ReferenceRepository, Reference, RefNode> {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence reference = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
-    protected BasedSequence urlOpeningMarker = BasedSequence.NULL;
-    protected BasedSequence url = BasedSequence.NULL;
-    protected BasedSequence pageRef = BasedSequence.NULL;
-    protected BasedSequence anchorMarker = BasedSequence.NULL;
-    protected BasedSequence anchorRef = BasedSequence.NULL;
-    protected BasedSequence urlClosingMarker = BasedSequence.NULL;
-    protected BasedSequence titleOpeningMarker = BasedSequence.NULL;
-    protected BasedSequence title = BasedSequence.NULL;
-    protected BasedSequence titleClosingMarker = BasedSequence.NULL;
 
     @Override
     public BasedSequence[] getSegments() {
@@ -25,6 +17,24 @@ public class Reference extends Node implements ReferenceNode<ReferenceRepository
                 closingMarker,
                 urlOpeningMarker,
                 url,
+                pageRef,
+                anchorMarker,
+                anchorRef,
+                urlClosingMarker,
+                titleOpeningMarker,
+                title,
+                titleClosingMarker
+        };
+    }
+
+    @Override
+    public BasedSequence[] getSegmentsForChars() {
+        return new BasedSequence[] {
+                openingMarker,
+                reference,
+                closingMarker,
+                PrefixedSubSequence.of(" ", closingMarker.subSequence(closingMarker.length())),
+                urlOpeningMarker,
                 pageRef,
                 anchorMarker,
                 anchorRef,
@@ -59,26 +69,7 @@ public class Reference extends Node implements ReferenceNode<ReferenceRepository
         this.reference = label.subSequence(1, label.length() - 2).trim();
         this.closingMarker = label.subSequence(label.length() - 2, label.length());
 
-        if (url != null) {
-            // strip off <> wrapping
-            if (url.startsWith("<") && url.endsWith(">")) {
-                urlOpeningMarker = url.subSequence(0, 1);
-                this.url = url.subSequence(1, url.length() - 1);
-                urlClosingMarker = url.subSequence(url.length() - 1);
-            } else {
-                this.url = url;
-            }
-
-            // parse out the anchor marker and ref
-            int pos = this.url.indexOf('#');
-            if (pos < 0) {
-                this.pageRef = this.url;
-            } else {
-                this.pageRef = this.url.subSequence(0, pos);
-                this.anchorMarker = this.url.subSequence(pos, pos + 1);
-                this.anchorRef = this.url.subSequence(pos + 1);
-            }
-        }
+        setUrlChars(url);
 
         if (title != null) {
             this.titleOpeningMarker = title.subSequence(0, 1);

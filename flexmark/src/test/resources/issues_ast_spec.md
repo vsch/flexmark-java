@@ -769,3 +769,167 @@ Document[0, 633]
 ````````````````````````````````
 
 
+## Issue 136
+
+Issue #136, Tasklist display issue
+
+```````````````````````````````` example Issue 136: 1
+Task List
+- [x] Task 1
+- [ ] Task 2
+- [x] Task 3
+.
+<p>Task List</p>
+<ul>
+  <li>[x] Task 1</li>
+  <li>[ ] Task 2</li>
+  <li>[x] Task 3</li>
+</ul>
+.
+Document[0, 49]
+  Paragraph[0, 10]
+    Text[0, 9] chars:[0, 9, "Task List"]
+  BulletList[10, 49] isTight
+    BulletListItem[10, 23] open:[10, 11, "-"] isTight
+      Paragraph[12, 23]
+        LinkRef[12, 15] referenceOpen:[12, 13, "["] reference:[13, 14, "x"] referenceClose:[14, 15, "]"]
+          Text[13, 14] chars:[13, 14, "x"]
+        Text[15, 22] chars:[15, 22, " Task 1"]
+    BulletListItem[23, 36] open:[23, 24, "-"] isTight
+      Paragraph[25, 36]
+        LinkRef[25, 28] referenceOpen:[25, 26, "["] reference:[27, 27] referenceClose:[27, 28, "]"]
+          Text[26, 27] chars:[26, 27, " "]
+        Text[28, 35] chars:[28, 35, " Task 2"]
+    BulletListItem[36, 49] open:[36, 37, "-"] isTight
+      Paragraph[38, 49]
+        LinkRef[38, 41] referenceOpen:[38, 39, "["] reference:[39, 40, "x"] referenceClose:[40, 41, "]"]
+          Text[39, 40] chars:[39, 40, "x"]
+        Text[41, 48] chars:[41, 48, " Task 3"]
+````````````````````````````````
+
+
+## Issue 132
+
+Issue #132, order list <ol> without "start=" ?
+
+```````````````````````````````` example Issue 132: 1
+**Ordered**
+1. Item 1
+2. Item 2
+3. Item 3
+<!-- -->
+1. [Example.com](http://www.example.com)
+2. [Google](http://www.google.com)
+3. [Yahoo!](http://www.yahoo.com)
+4. [Another Example.com](http://www.example.com)
+.
+<p><strong>Ordered</strong></p>
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ol>
+<!-- -->
+<ol>
+  <li><a href="http://www.example.com">Example.com</a></li>
+  <li><a href="http://www.google.com">Google</a></li>
+  <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+  <li><a href="http://www.example.com">Another Example.com</a></li>
+</ol>
+.
+Document[0, 210]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "Ordered"] textClose:[9, 11, "**"]
+      Text[2, 9] chars:[2, 9, "Ordered"]
+  OrderedList[12, 42] isTight delimiter:'.'
+    OrderedListItem[12, 22] open:[12, 14, "1."] isTight
+      Paragraph[15, 22]
+        Text[15, 21] chars:[15, 21, "Item 1"]
+    OrderedListItem[22, 32] open:[22, 24, "2."] isTight
+      Paragraph[25, 32]
+        Text[25, 31] chars:[25, 31, "Item 2"]
+    OrderedListItem[32, 42] open:[32, 34, "3."] isTight
+      Paragraph[35, 42]
+        Text[35, 41] chars:[35, 41, "Item 3"]
+  HtmlCommentBlock[42, 51]
+  OrderedList[51, 210] isTight delimiter:'.'
+    OrderedListItem[51, 92] open:[51, 53, "1."] isTight
+      Paragraph[54, 92]
+        Link[54, 91] textOpen:[54, 55, "["] text:[55, 66, "Example.com"] textClose:[66, 67, "]"] linkOpen:[67, 68, "("] url:[68, 90, "http://www.example.com"] pageRef:[68, 90, "http://www.example.com"] linkClose:[90, 91, ")"]
+          Text[55, 66] chars:[55, 66, "Examp … e.com"]
+    OrderedListItem[92, 127] open:[92, 94, "2."] isTight
+      Paragraph[95, 127]
+        Link[95, 126] textOpen:[95, 96, "["] text:[96, 102, "Google"] textClose:[102, 103, "]"] linkOpen:[103, 104, "("] url:[104, 125, "http://www.google.com"] pageRef:[104, 125, "http://www.google.com"] linkClose:[125, 126, ")"]
+          Text[96, 102] chars:[96, 102, "Google"]
+    OrderedListItem[127, 161] open:[127, 129, "3."] isTight
+      Paragraph[130, 161]
+        Link[130, 160] textOpen:[130, 131, "["] text:[131, 137, "Yahoo!"] textClose:[137, 138, "]"] linkOpen:[138, 139, "("] url:[139, 159, "http://www.yahoo.com"] pageRef:[139, 159, "http://www.yahoo.com"] linkClose:[159, 160, ")"]
+          Text[131, 137] chars:[131, 137, "Yahoo!"]
+    OrderedListItem[161, 210] open:[161, 163, "4."] isTight
+      Paragraph[164, 210]
+        Link[164, 209] textOpen:[164, 165, "["] text:[165, 184, "Another Example.com"] textClose:[184, 185, "]"] linkOpen:[185, 186, "("] url:[186, 208, "http://www.example.com"] pageRef:[186, 208, "http://www.example.com"] linkClose:[208, 209, ")"]
+          Text[165, 184] chars:[165, 184, "Anoth … e.com"]
+````````````````````````````````
+
+
+end on double blank line
+
+```````````````````````````````` example(Issue 132: 2) options(list-break)
+**Ordered**
+1. Item 1
+2. Item 2
+3. Item 3
+
+
+1. [Example.com](http://www.example.com)
+2. [Google](http://www.google.com)
+3. [Yahoo!](http://www.yahoo.com)
+4. [Another Example.com](http://www.example.com)
+.
+<p><strong>Ordered</strong></p>
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ol>
+<ol>
+  <li><a href="http://www.example.com">Example.com</a></li>
+  <li><a href="http://www.google.com">Google</a></li>
+  <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+  <li><a href="http://www.example.com">Another Example.com</a></li>
+</ol>
+.
+Document[0, 202]
+  Paragraph[0, 12]
+    StrongEmphasis[0, 11] textOpen:[0, 2, "**"] text:[2, 9, "Ordered"] textClose:[9, 11, "**"]
+      Text[2, 9] chars:[2, 9, "Ordered"]
+  OrderedList[12, 42] isTight delimiter:'.'
+    OrderedListItem[12, 22] open:[12, 14, "1."] isTight
+      Paragraph[15, 22]
+        Text[15, 21] chars:[15, 21, "Item 1"]
+    OrderedListItem[22, 32] open:[22, 24, "2."] isTight
+      Paragraph[25, 32]
+        Text[25, 31] chars:[25, 31, "Item 2"]
+    OrderedListItem[32, 42] open:[32, 34, "3."] isTight hadBlankLineAfter
+      Paragraph[35, 42] isTrailingBlankLine
+        Text[35, 41] chars:[35, 41, "Item 3"]
+  OrderedList[44, 202] isTight delimiter:'.'
+    OrderedListItem[44, 85] open:[44, 46, "1."] isTight
+      Paragraph[47, 85]
+        Link[47, 84] textOpen:[47, 48, "["] text:[48, 59, "Example.com"] textClose:[59, 60, "]"] linkOpen:[60, 61, "("] url:[61, 83, "http://www.example.com"] pageRef:[61, 83, "http://www.example.com"] linkClose:[83, 84, ")"]
+          Text[48, 59] chars:[48, 59, "Examp … e.com"]
+    OrderedListItem[85, 120] open:[85, 87, "2."] isTight
+      Paragraph[88, 120]
+        Link[88, 119] textOpen:[88, 89, "["] text:[89, 95, "Google"] textClose:[95, 96, "]"] linkOpen:[96, 97, "("] url:[97, 118, "http://www.google.com"] pageRef:[97, 118, "http://www.google.com"] linkClose:[118, 119, ")"]
+          Text[89, 95] chars:[89, 95, "Google"]
+    OrderedListItem[120, 154] open:[120, 122, "3."] isTight
+      Paragraph[123, 154]
+        Link[123, 153] textOpen:[123, 124, "["] text:[124, 130, "Yahoo!"] textClose:[130, 131, "]"] linkOpen:[131, 132, "("] url:[132, 152, "http://www.yahoo.com"] pageRef:[132, 152, "http://www.yahoo.com"] linkClose:[152, 153, ")"]
+          Text[124, 130] chars:[124, 130, "Yahoo!"]
+    OrderedListItem[154, 202] open:[154, 156, "4."] isTight
+      Paragraph[157, 202]
+        Link[157, 202] textOpen:[157, 158, "["] text:[158, 177, "Another Example.com"] textClose:[177, 178, "]"] linkOpen:[178, 179, "("] url:[179, 201, "http://www.example.com"] pageRef:[179, 201, "http://www.example.com"] linkClose:[201, 202, ")"]
+          Text[158, 177] chars:[158, 177, "Anoth … e.com"]
+````````````````````````````````
+
+

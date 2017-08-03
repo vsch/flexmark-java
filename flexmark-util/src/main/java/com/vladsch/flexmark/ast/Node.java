@@ -691,4 +691,8 @@ public abstract class Node {
         final int endOffset = chars.getEndOffset();
         return getDocument().getLineNumber(endOffset > 0 ? endOffset - 1 : endOffset);
     }
+
+    public BasedSequence[] getSegmentsForChars() {
+        return getSegments();
+    }
 }

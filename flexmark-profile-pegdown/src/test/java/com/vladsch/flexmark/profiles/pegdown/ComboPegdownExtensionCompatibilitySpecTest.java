@@ -18,7 +18,7 @@ import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCase {
     private static final String SPEC_RESOURCE = "/pegdown_extension_compatibility_spec.md";
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | ABBREVIATIONS | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP))).toMutable()
+    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions((ALL & ~(HARDWRAPS | ANCHORLINKS)) | (ALL_OPTIONALS & ~(EXTANCHORLINKS_WRAP)) | ABBREVIATIONS | EXTANCHORLINKS).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             .set(HtmlRenderer.FENCED_CODE_LANGUAGE_CLASS_PREFIX, "")
             .set(HtmlRenderer.OBFUSCATE_EMAIL_RANDOM, false)
@@ -29,6 +29,7 @@ public class ComboPegdownExtensionCompatibilitySpecTest extends ComboSpecTestCas
     static {
         optionsMap.put("hard-breaks", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | HARDWRAPS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
         optionsMap.put("anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~HARDWRAPS) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)) | ANCHORLINKS)/*.toMutable().remove(Parser.EXTENSIONS)*/);
+        optionsMap.put("no-anchor-links", PegdownOptionsAdapter.flexmarkOptions((ALL & ~(HARDWRAPS | ANCHORLINKS)) | (ALL_OPTIONALS & ~(EXTANCHORLINKS | EXTANCHORLINKS_WRAP)))/*.toMutable().remove(Parser.EXTENSIONS)*/);
         optionsMap.put("code-soft-breaks", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, "\n"));
         optionsMap.put("code-soft-break-spaces", new MutableDataSet().set(Parser.CODE_SOFT_LINE_BREAKS, true).set(HtmlRenderer.SOFT_BREAK, " \t"));
     }

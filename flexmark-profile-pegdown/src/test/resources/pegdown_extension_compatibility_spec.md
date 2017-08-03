@@ -584,7 +584,7 @@ Bullet items can have headings as children
 .
 <ul>
   <li>Some Lists
-  <h1><a href="#test" id="test">Test</a></h1>
+  <h1><a href="#test" id="test"></a>Test</h1>
   </li>
 </ul>
 ````````````````````````````````
@@ -2912,10 +2912,10 @@ Text and inlines, hierarchy
     </ul>
   </li>
 </ul>
-<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
-<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
-<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
-<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1"></a>Heading <strong>some bold</strong> 1</h1>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic"></a>Heading 1.1 <em>some italic</em></h2>
+<h3><a href="#heading-111" id="heading-111"></a>Heading 1.1.1</h3>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic"></a>Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
 ````````````````````````````````
 
 
@@ -2938,10 +2938,10 @@ Text only, sorted
     </ul>
   </li>
 </ul>
-<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
-<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
-<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
-<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic"></a>Heading 1.1 <em>some italic</em></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1"></a>Heading <strong>some bold</strong> 1</h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic"></a>Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h3><a href="#heading-111" id="heading-111"></a>Heading 1.1.1</h3>
 ````````````````````````````````
 
 
@@ -2961,10 +2961,10 @@ Text only, reverse sorted
   <li><a href="#heading-111">Heading 1.1.1</a></li>
   <li><a href="#heading-11-some-italic">Heading 1.1 some italic</a></li>
 </ul>
-<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
-<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
-<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
-<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic"></a>Heading 1.1 <em>some italic</em></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1"></a>Heading <strong>some bold</strong> 1</h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic"></a>Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h3><a href="#heading-111" id="heading-111"></a>Heading 1.1.1</h3>
 ````````````````````````````````
 
 
@@ -2984,10 +2984,10 @@ Text and inlines, sorted
   <li><a href="#heading-111">Heading 1.1.1</a></li>
   <li><a href="#heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
 </ul>
-<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
-<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
-<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
-<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic"></a>Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h3><a href="#heading-111" id="heading-111"></a>Heading 1.1.1</h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic"></a>Heading 1.1 <em>some italic</em></h2>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1"></a>Heading <strong>some bold</strong> 1</h1>
 ````````````````````````````````
 
 
@@ -3007,10 +3007,10 @@ Text and inlines, unsorted
   <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a></li>
   <li><a href="#heading-111">Heading 1.1.1</a></li>
 </ul>
-<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></h3>
-<h2><a href="#heading-11-some-italic" id="heading-11-some-italic">Heading 1.1 <em>some italic</em></a></h2>
-<h3><a href="#heading-111" id="heading-111">Heading 1.1.1</a></h3>
-<h1><a href="#heading-some-bold-1" id="heading-some-bold-1">Heading <strong>some bold</strong> 1</a></h1>
+<h3><a href="#heading-112-some-bold-italic" id="heading-112-some-bold-italic"></a>Heading 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h2><a href="#heading-11-some-italic" id="heading-11-some-italic"></a>Heading 1.1 <em>some italic</em></h2>
+<h3><a href="#heading-111" id="heading-111"></a>Heading 1.1.1</h3>
+<h1><a href="#heading-some-bold-1" id="heading-some-bold-1"></a>Heading <strong>some bold</strong> 1</h1>
 ````````````````````````````````
 
 
@@ -3214,6 +3214,69 @@ Document[0, 10]
   Paragraph[0, 9] isTrailingBlankLine
     TypographicQuotes[0, 8] typographicOpening: &laquo;  typographicClosing: &raquo;  textOpen:[0, 2, "<<"] text:[2, 6, "test"] textClose:[6, 8, ">>"]
       Text[2, 6] chars:[2, 6, "test"]
+````````````````````````````````
+
+
+## Issue 136
+
+Issue #136, Tasklist display issue
+
+```````````````````````````````` example(Issue 136: 1) options(no-anchor-links)
+Task List
+
+- [x] Task 1
+- [ ] Task 2
+- [x] Task 3
+.
+<p>Task List</p>
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;Task 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Task 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;Task 3</li>
+</ul>
+.
+Document[0, 49]
+  Paragraph[0, 10] isTrailingBlankLine
+    Text[0, 9] chars:[0, 9, "Task List"]
+  BulletList[11, 49] isTight
+    TaskListItem[11, 24] open:[11, 12, "-"] openSuffix:[13, 16, "[x]"] isTight isDone
+      Paragraph[17, 24]
+        Text[17, 23] chars:[17, 23, "Task 1"]
+    TaskListItem[24, 37] open:[24, 25, "-"] openSuffix:[26, 29, "[ ]"] isTight isNotDone
+      Paragraph[30, 37]
+        Text[30, 36] chars:[30, 36, "Task 2"]
+    TaskListItem[37, 49] open:[37, 38, "-"] openSuffix:[39, 42, "[x]"] isTight isDone
+      Paragraph[43, 49]
+        Text[43, 49] chars:[43, 49, "Task 3"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 136: 2) options(no-anchor-links)
+# Task List
+- [x] Task 1
+- [ ] Task 2
+- [x] Task 3
+.
+<h1>Task List</h1>
+<ul>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;Task 1</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" readonly="readonly" />&nbsp;Task 2</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="checked" disabled="disabled" readonly="readonly" />&nbsp;Task 3</li>
+</ul>
+.
+Document[0, 50]
+  Heading[0, 11] textOpen:[0, 1, "#"] text:[2, 11, "Task List"]
+    Text[2, 11] chars:[2, 11, "Task List"]
+  BulletList[12, 50] isTight
+    TaskListItem[12, 25] open:[12, 13, "-"] openSuffix:[14, 17, "[x]"] isTight isDone
+      Paragraph[18, 25]
+        Text[18, 24] chars:[18, 24, "Task 1"]
+    TaskListItem[25, 38] open:[25, 26, "-"] openSuffix:[27, 30, "[ ]"] isTight isNotDone
+      Paragraph[31, 38]
+        Text[31, 37] chars:[31, 37, "Task 2"]
+    TaskListItem[38, 50] open:[38, 39, "-"] openSuffix:[40, 43, "[x]"] isTight isDone
+      Paragraph[44, 50]
+        Text[44, 50] chars:[44, 50, "Task 3"]
 ````````````````````````````````
 
 

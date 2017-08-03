@@ -2905,3 +2905,43 @@ Document[0, 27]
 ````````````````````````````````
 
 
+## Issue 136
+
+Issue #136, Tasklist display issue
+
+```````````````````````````````` example Issue 136: 1
+Task List
+
+- [x] Task 1
+- [ ] Task 2
+- [x] Task 3
+.
+<p>Task List</p>
+<ul>
+  <li>[x] Task 1</li>
+  <li>[ ] Task 2</li>
+  <li>[x] Task 3</li>
+</ul>
+.
+Document[0, 50]
+  Paragraph[0, 10] isTrailingBlankLine
+    Text[0, 9] chars:[0, 9, "Task List"]
+  BulletList[11, 50] isTight
+    BulletListItem[11, 24] open:[11, 12, "-"] isTight
+      Paragraph[13, 24]
+        LinkRef[13, 16] referenceOpen:[13, 14, "["] reference:[14, 15, "x"] referenceClose:[15, 16, "]"]
+          Text[14, 15] chars:[14, 15, "x"]
+        Text[16, 23] chars:[16, 23, " Task 1"]
+    BulletListItem[24, 37] open:[24, 25, "-"] isTight
+      Paragraph[26, 37]
+        LinkRef[26, 29] referenceOpen:[26, 27, "["] reference:[28, 28] referenceClose:[28, 29, "]"]
+          Text[27, 28] chars:[27, 28, " "]
+        Text[29, 36] chars:[29, 36, " Task 2"]
+    BulletListItem[37, 50] open:[37, 38, "-"] isTight
+      Paragraph[39, 50]
+        LinkRef[39, 42] referenceOpen:[39, 40, "["] reference:[40, 41, "x"] referenceClose:[41, 42, "]"]
+          Text[40, 41] chars:[40, 41, "x"]
+        Text[42, 49] chars:[42, 49, " Task 3"]
+````````````````````````````````
+
+

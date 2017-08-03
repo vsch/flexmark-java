@@ -31,6 +31,7 @@ public class VisitorSample {
     void countWords() {
         Parser parser = Parser.builder().build();
         Node document = parser.parse("Example\n=======\n\nSome more text");
+        visitor.visit(document);
 
         System.out.println(wordCount);  // 4
     }

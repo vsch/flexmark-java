@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.20](#02220)
 - [0.22.18](#02218)
 - [0.22.16](#02216)
 - [0.22.14](#02214)
@@ -130,7 +131,6 @@ flexmark-java
 - [0.1.0](#010)
 
 
-
 &nbsp;</details><details id="version-history"><summary>**To Do**</summary>
 
 ## To Do
@@ -164,6 +164,16 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.20
+-------
+
+* Change: refactor link and reference nodes for common access to url, pageref, anchor and title
+  fields. Also add convenience `Node.getSegmentsForChars()` which returns only sequences which
+  when appended into `SegmentedSequence` will result in the chars for the node.
+
+* Add: sample for url change in AST and output via formatter:
+  [FormatterWithMods.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/FormatterWithMods.java)
 
 0.22.18
 -------
@@ -231,9 +241,9 @@ flexmark-java
   bold but `aa**foo(**aa` and `aa**)foo**aa` will not.
 
 * Add: `FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS`, default `false`. When `true` will
-  preserve inline emphasis tags (`<strong>`, `<em>`, `<del>`, `<ins>`, `<sub>`, `<sup>`) and convert them to
-  markdown syntax inside `<pre><code>` HTML blocks. Otherwise will strip these out of generated
-  markdown.
+  preserve inline emphasis tags (`<strong>`, `<em>`, `<del>`, `<ins>`, `<sub>`, `<sup>`) and
+  convert them to markdown syntax inside `<pre><code>` HTML blocks. Otherwise will strip these
+  out of generated markdown.
 
       <pre><code class="html">&lt;div&gt;
         <strong>test</strong>
