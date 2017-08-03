@@ -4003,3 +4003,63 @@ Missing link text
 ````````````````````````````````
 
 
+## Issue 138
+
+Issue #138, HTML to Markdown converter missing list end for two consecutive lists
+
+```````````````````````````````` example Issue 132: 1
+**Ordered**
+1. Item 1
+2. Item 2
+3. Item 3
+
+<!-- -->
+1. [Example.com](http://www.example.com)
+2. [Google](http://www.google.com)
+3. [Yahoo!](http://www.yahoo.com)
+4. [Another Example.com](http://www.example.com)
+.
+<p><strong>Ordered</strong></p>
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ol>
+<ol>
+  <li><a href="http://www.example.com">Example.com</a></li>
+  <li><a href="http://www.google.com">Google</a></li>
+  <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+  <li><a href="http://www.example.com">Another Example.com</a></li>
+</ol>
+````````````````````````````````
+
+
+end on double blank line
+
+```````````````````````````````` example(Issue 132: 2) options(list-break)
+**Ordered**
+1. Item 1
+2. Item 2
+3. Item 3
+
+
+1. [Example.com](http://www.example.com)
+2. [Google](http://www.google.com)
+3. [Yahoo!](http://www.yahoo.com)
+4. [Another Example.com](http://www.example.com)
+.
+<p><strong>Ordered</strong></p>
+<ol>
+  <li>Item 1</li>
+  <li>Item 2</li>
+  <li>Item 3</li>
+</ol>
+<ol>
+  <li><a href="http://www.example.com">Example.com</a></li>
+  <li><a href="http://www.google.com">Google</a></li>
+  <li><a href="http://www.yahoo.com">Yahoo!</a></li>
+  <li><a href="http://www.example.com">Another Example.com</a></li>
+</ol>
+````````````````````````````````
+
+

@@ -47,6 +47,7 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Integer> TABLE_MIN_SEPARATOR_DASHES = TableFormatOptions.MIN_SEPARATOR_DASHES;
     public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
     public static final DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
+    public static final DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<Boolean>("LISTS_END_ON_DOUBLE_BLANK", false);
 
     private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<Object, CellAlignment>();
     static {
@@ -879,6 +880,16 @@ public class FlexmarkHtmlParser {
         if (!isFakeList) {
             skip();
             pushState(element);
+        }
+
+        final Element previousElementSibling = element.previousElementSibling();
+        final String tag = previousElementSibling == null ? null : previousElementSibling.tagName().toUpperCase();
+        if (tag != null && tag.equals(element.tagName().toUpperCase()) &&  (tag.equals("UL") || tag.equals("OL"))) {
+            if (myOptions.listsEndOnDoubleBlank) {
+                out.blankLine(2);
+            } else {
+                out.line().append("<!-- -->").line();
+            }
         }
 
         ListState listState = new ListState(isNumbered);

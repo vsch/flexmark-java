@@ -4,6 +4,7 @@ import com.vladsch.flexmark.IParse;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
@@ -40,9 +41,9 @@ public class ComboFlexmarkHtmlParserTest extends ComboSpecTestCase {
         optionsMap.put("no-smarts", new MutableDataSet().set(FlexmarkHtmlParser.TYPOGRAPHIC_SMARTS, false));
         optionsMap.put("wrap-autolinks", new MutableDataSet().set(FlexmarkHtmlParser.WRAP_AUTO_LINKS, true));
         optionsMap.put("no-autolinks", new MutableDataSet().set(FlexmarkHtmlParser.EXTRACT_AUTO_LINKS, false));
+        optionsMap.put("list-break", new MutableDataSet().set(FlexmarkHtmlParser.LISTS_END_ON_DOUBLE_BLANK, true));
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         optionsMap.put("code-emphasis", new MutableDataSet().set(FlexmarkHtmlParser.PRE_CODE_PRESERVE_EMPHASIS, true));
-        // optionsMap.put("option1", new MutableDataSet().set(FlexmarkHtmlParserExtension.FLEXMARK_HTML_PARSER_OPTION1, true));
     }
 
     private static final IParse PARSER = new HtmlParser(OPTIONS);

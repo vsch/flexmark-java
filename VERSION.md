@@ -175,6 +175,11 @@ flexmark-java
 * Add: sample for url change in AST and output via formatter:
   [FormatterWithMods.java](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/FormatterWithMods.java)
 
+* Fix: #138, HTML to Markdown converter missing list end for two consecutive lists
+
+* Add: `FlexmarkHtmlParser.LISTS_END_ON_DOUBLE_BLANK` default `false`, when set to `true`
+  consecutive lists are separated by double blank line, otherwise by an empty HTML comment line.
+
 0.22.18
 -------
 
