@@ -3,23 +3,15 @@ package com.vladsch.flexmark.samples;
 import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.formatter.internal.Formatter;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.profiles.pegdown.Extensions;
-import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import com.vladsch.flexmark.util.sequence.PrefixedSubSequence;
 import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class FormatterWithMods {
-    static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL
-    );
+    static final DataHolder OPTIONS = new MutableDataSet();
 
     static final MutableDataSet FORMAT_OPTIONS = new MutableDataSet();
     static {
