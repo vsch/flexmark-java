@@ -4007,7 +4007,7 @@ Missing link text
 
 Issue #138, HTML to Markdown converter missing list end for two consecutive lists
 
-```````````````````````````````` example Issue 132: 1
+```````````````````````````````` example Issue 138: 1
 **Ordered**
 1. Item 1
 2. Item 2
@@ -4036,7 +4036,7 @@ Issue #138, HTML to Markdown converter missing list end for two consecutive list
 
 end on double blank line
 
-```````````````````````````````` example(Issue 132: 2) options(list-break)
+```````````````````````````````` example(Issue 138: 2) options(list-break)
 **Ordered**
 1. Item 1
 2. Item 2
