@@ -41,7 +41,6 @@
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-tasklist" />
     <orderEntry type="module" module-name="flexmark-ext-jekyll-front-matter" />
-    <orderEntry type="module" module-name="flexmark-ext-spec-example" />
     <orderEntry type="module" module-name="flexmark-ext-tables" />
     <orderEntry type="module" module-name="flexmark-ext-toc" />
     <orderEntry type="module" module-name="flexmark-ext-typographic" />
