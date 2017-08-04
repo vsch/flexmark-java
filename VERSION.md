@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.22.22](#02222)
 - [0.22.20](#02220)
 - [0.22.18](#02218)
 - [0.22.16](#02216)
@@ -164,6 +165,12 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.22.22
+-------
+
+* Fix: remove `flexmark-ext-spec-example` module from `flexmark-all` dependencies because it
+  would cause junit to be included in runtime scope.
 
 0.22.20
 -------
