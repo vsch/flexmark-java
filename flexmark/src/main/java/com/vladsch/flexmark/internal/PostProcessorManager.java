@@ -201,10 +201,10 @@ public class PostProcessorManager {
         @Override
         protected DependentItemMap<PostProcessorFactory> prioritize(final DependentItemMap<PostProcessorFactory> dependentMap) {
             // put globals last
-            List<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
-            Collections.sort(prioritized, new Comparator<DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>>>() {
+            List<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>> prioritized = dependentMap.entries();
+            Collections.sort(prioritized, new Comparator<DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>>>() {
                 @Override
-                public int compare(DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class<? extends PostProcessorFactory>, DependentItem<PostProcessorFactory>> e2) {
+                public int compare(DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>> e1, DependentItemMap.Entry<Class, DependentItem<PostProcessorFactory>> e2) {
                     int g1 = e1.getValue().isGlobalScope ? 1 : 0;
                     int g2 = e2.getValue().isGlobalScope ? 1 : 0;
                     return g1 - g2;

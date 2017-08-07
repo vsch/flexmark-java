@@ -108,13 +108,7 @@ public class NodeRendererSample {
         }
 
         private void render(HtmlInline node, NodeRendererContext context, HtmlWriter html) {
-            //if (context.getHtmlOptions().sourceWrapInlineHtml) {
-            //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
-            //}
             renderInlineHtml(node, context, html, context.getHtmlOptions().suppressInlineHtml, context.getHtmlOptions().escapeInlineHtml);
-            //if (context.getHtmlOptions().sourceWrapInlineHtml) {
-            //    html.tag("/span");
-            //}
         }
 
         private void render(HtmlInlineComment node, NodeRendererContext context, HtmlWriter html) {

@@ -10,8 +10,9 @@ import com.vladsch.flexmark.html.renderer.*;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.collection.DataValueFactory;
 import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
+import com.vladsch.flexmark.util.dependency.DependencyHandler;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
-import com.vladsch.flexmark.util.html.Attribute;
+import com.vladsch.flexmark.util.dependency.ResolvedDependencies;
 import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.html.FormattingAppendable;
@@ -138,7 +139,7 @@ public class HtmlRenderer implements IRender {
     public static final int FORMAT_ALL_OPTIONS = FormattingAppendable.FORMAT_ALL;
 
     private final List<AttributeProviderFactory> attributeProviderFactories;
-    private final List<NodeRendererFactory> nodeRendererFactories;
+    private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
     private final List<LinkResolverFactory> linkResolverFactories;
     private final HeaderIdGeneratorFactory htmlIdGeneratorFactory;
     private final HtmlRendererOptions htmlOptions;
@@ -152,11 +153,22 @@ public class HtmlRenderer implements IRender {
 
         this.htmlIdGeneratorFactory = builder.htmlIdGeneratorFactory;
 
-        this.nodeRendererFactories = new ArrayList<NodeRendererFactory>(builder.nodeRendererFactories.size() + 1);
-        this.nodeRendererFactories.addAll(builder.nodeRendererFactories);
+        // resolve renderer dependencies
+        final List<DelegatingNodeRendererFactoryWrapper> nodeRenderers = new ArrayList<DelegatingNodeRendererFactoryWrapper>(builder.nodeRendererFactories.size());
 
-        // Add as last. This means clients can override the rendering of core nodes if they want.
-        this.nodeRendererFactories.add(new CoreNodeRenderer.Factory());
+        for (int i = builder.nodeRendererFactories.size() - 1; i >= 0; i--) {
+            final NodeRendererFactory nodeRendererFactory = builder.nodeRendererFactories.get(i);
+            final Set<Class<? extends DelegatingNodeRendererFactoryWrapper>>[] myDelegates = new Set[] { null };
+
+            nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
+        }
+
+        // Add as last. This means clients can override the rendering of core nodes if they want by default
+        final CoreNodeRenderer.Factory nodeRendererFactory = new CoreNodeRenderer.Factory();
+        nodeRenderers.add(new DelegatingNodeRendererFactoryWrapper(nodeRenderers, nodeRendererFactory));
+
+        RendererDependencyHandler resolver = new RendererDependencyHandler();
+        nodeRendererFactories = resolver.resolveDependencies(nodeRenderers).getNodeRendererFactories();
 
         this.attributeProviderFactories = FlatDependencyHandler.computeDependencies(builder.attributeProviderFactories);
         this.linkResolverFactories = FlatDependencyHandler.computeDependencies(builder.linkResolverFactories);
@@ -462,9 +474,51 @@ public class HtmlRenderer implements IRender {
         void extend(Builder rendererBuilder, String rendererType);
     }
 
+    public static class RendererDependencyStage {
+        private final List<DelegatingNodeRendererFactoryWrapper> dependents;
+
+        public RendererDependencyStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
+            this.dependents = dependents;
+        }
+    }
+
+    public static class RendererDependencies extends ResolvedDependencies<RendererDependencyStage> {
+        private final List<DelegatingNodeRendererFactoryWrapper> nodeRendererFactories;
+
+        public RendererDependencies(List<RendererDependencyStage> dependentStages) {
+            super(dependentStages);
+            List<DelegatingNodeRendererFactoryWrapper> blockPreProcessorFactories = new ArrayList<DelegatingNodeRendererFactoryWrapper>();
+            for (RendererDependencyStage stage : dependentStages) {
+                blockPreProcessorFactories.addAll(stage.dependents);
+            }
+            this.nodeRendererFactories = blockPreProcessorFactories;
+        }
+
+        public List<DelegatingNodeRendererFactoryWrapper> getNodeRendererFactories() {
+            return nodeRendererFactories;
+        }
+    }
+
+    private static class RendererDependencyHandler extends DependencyHandler<DelegatingNodeRendererFactoryWrapper, RendererDependencyStage, RendererDependencies> {
+        @Override
+        protected Class getDependentClass(DelegatingNodeRendererFactoryWrapper dependent) {
+            return dependent.getFactory().getClass();
+        }
+
+        @Override
+        protected RendererDependencies createResolvedDependencies(List<RendererDependencyStage> stages) {
+            return new RendererDependencies(stages);
+        }
+
+        @Override
+        protected RendererDependencyStage createStage(List<DelegatingNodeRendererFactoryWrapper> dependents) {
+            return new RendererDependencyStage(dependents);
+        }
+    }
+
     private class MainNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
         private final Document document;
-        private final Map<Class<?>, NodeRenderingHandler> renderers;
+        private final Map<Class<?>, NodeRenderingHandlerWrapper> renderers;
 
         private final List<PhasedNodeRenderer> phasedRenderers;
         private final LinkResolver[] myLinkResolvers;
@@ -479,7 +533,7 @@ public class HtmlRenderer implements IRender {
             super(htmlWriter);
             this.options = new ScopedDataSet(options, document);
             this.document = document;
-            this.renderers = new HashMap<Class<?>, NodeRenderingHandler>(32);
+            this.renderers = new HashMap<Class<?>, NodeRenderingHandlerWrapper>(32);
             this.renderingPhases = new HashSet<RenderingPhase>(RenderingPhase.values().length);
             this.phasedRenderers = new ArrayList<PhasedNodeRenderer>(nodeRendererFactories.size());
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
@@ -489,13 +543,13 @@ public class HtmlRenderer implements IRender {
 
             htmlWriter.setContext(this);
 
-            // The first node renderer for a node type "wins".
             for (int i = nodeRendererFactories.size() - 1; i >= 0; i--) {
                 NodeRendererFactory nodeRendererFactory = nodeRendererFactories.get(i);
                 NodeRenderer nodeRenderer = nodeRendererFactory.create(this.getOptions());
                 for (NodeRenderingHandler nodeType : nodeRenderer.getNodeRenderingHandlers()) {
                     // Overwrite existing renderer
-                    renderers.put(nodeType.getNodeType(), nodeType);
+                    NodeRenderingHandlerWrapper handlerWrapper = new NodeRenderingHandlerWrapper(nodeType, renderers.get(nodeType.getNodeType()));
+                    renderers.put(nodeType.getNodeType(), handlerWrapper);
                 }
 
                 if (nodeRenderer instanceof PhasedNodeRenderer) {
@@ -617,11 +671,45 @@ public class HtmlRenderer implements IRender {
         }
 
         @Override
+        public void delegateRender() {
+            renderByPreviousHandler(this);
+        }
+
+        void renderByPreviousHandler(NodeRendererSubContext subContext) {
+            if (subContext.renderingNode != null) {
+                NodeRenderingHandlerWrapper nodeRenderer = subContext.renderingHandlerWrapper.myPreviousRenderingHandler;
+                if (nodeRenderer != null) {
+                    Node oldNode = subContext.renderingNode;
+                    int oldDoNotRenderLinksNesting = subContext.doNotRenderLinksNesting;
+                    NodeRenderingHandlerWrapper prevWrapper = subContext.renderingHandlerWrapper;
+                    try {
+                        subContext.renderingHandlerWrapper = nodeRenderer;
+                        nodeRenderer.myRenderingHandler.render(oldNode, subContext, subContext.htmlWriter);
+                    } finally {
+                        subContext.renderingNode = oldNode;
+                        subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
+                        subContext.renderingHandlerWrapper = prevWrapper;
+                    }
+                }
+            } else {
+                throw new IllegalStateException("renderingByPreviousHandler called outside node rendering code");
+            }
+        }
+
+        @Override
         public NodeRendererContext getSubContext(Appendable out, boolean inheritIndent) {
             HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), out, inheritIndent);
             htmlWriter.setContext(this);
             //noinspection ReturnOfInnerClass
-            return new SubNodeRenderer(this, htmlWriter);
+            return new SubNodeRenderer(this, htmlWriter, false);
+        }
+
+        @Override
+        public NodeRendererContext getDelegatedSubContext(final Appendable out, final boolean inheritIndent) {
+            HtmlWriter htmlWriter = new HtmlWriter(getHtmlWriter(), out, inheritIndent);
+            htmlWriter.setContext(this);
+            //noinspection ReturnOfInnerClass
+            return new SubNodeRenderer(this, htmlWriter, true);
         }
 
         void renderNode(Node node, NodeRendererSubContext subContext) {
@@ -648,25 +736,37 @@ public class HtmlRenderer implements IRender {
                     }
 
                     if (getRenderingPhase() == RenderingPhase.BODY) {
-                        NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
+                        NodeRenderingHandlerWrapper nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             subContext.doNotRenderLinksNesting = documentDoNotRenderLinksNesting;
-                            subContext.renderingNode = node;
-                            nodeRenderer.render(node, subContext, subContext.htmlWriter);
-                            subContext.renderingNode = null;
-                            subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
+                            NodeRenderingHandlerWrapper prevWrapper = subContext.renderingHandlerWrapper;
+                            try {
+                                subContext.renderingNode = node;
+                                subContext.renderingHandlerWrapper = nodeRenderer;
+                                nodeRenderer.myRenderingHandler.render(node, subContext, subContext.htmlWriter);
+                            } finally {
+                                subContext.renderingHandlerWrapper = prevWrapper;
+                                subContext.renderingNode = null;
+                                subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
+                            }
                         }
                     }
                 }
             } else {
-                NodeRenderingHandler nodeRenderer = renderers.get(node.getClass());
+                NodeRenderingHandlerWrapper nodeRenderer = renderers.get(node.getClass());
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;
                     int oldDoNotRenderLinksNesting = subContext.doNotRenderLinksNesting;
-                    subContext.renderingNode = node;
-                    nodeRenderer.render(node, subContext, subContext.htmlWriter);
-                    subContext.renderingNode = oldNode;
-                    subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
+                    NodeRenderingHandlerWrapper prevWrapper = subContext.renderingHandlerWrapper;
+                    try {
+                        subContext.renderingNode = node;
+                        subContext.renderingHandlerWrapper = nodeRenderer;
+                        nodeRenderer.myRenderingHandler.render(node, subContext, subContext.htmlWriter);
+                    } finally {
+                        subContext.renderingNode = oldNode;
+                        subContext.doNotRenderLinksNesting = oldDoNotRenderLinksNesting;
+                        subContext.renderingHandlerWrapper = prevWrapper;
+                    }
                 }
             }
         }
@@ -689,10 +789,14 @@ public class HtmlRenderer implements IRender {
         private class SubNodeRenderer extends NodeRendererSubContext implements NodeRendererContext {
             private final MainNodeRenderer myMainNodeRenderer;
 
-            public SubNodeRenderer(MainNodeRenderer mainNodeRenderer, HtmlWriter htmlWriter) {
+            public SubNodeRenderer(MainNodeRenderer mainNodeRenderer, HtmlWriter htmlWriter, final boolean inheritCurrentHandler) {
                 super(htmlWriter);
                 myMainNodeRenderer = mainNodeRenderer;
                 doNotRenderLinksNesting = mainNodeRenderer.getHtmlOptions().doNotRenderLinksInDocument ? 1 : 0;
+                if (inheritCurrentHandler) {
+                    renderingNode = mainNodeRenderer.renderingNode;
+                    renderingHandlerWrapper = mainNodeRenderer.renderingHandlerWrapper;
+                }
             }
 
             @Override
@@ -727,6 +831,11 @@ public class HtmlRenderer implements IRender {
             }
 
             @Override
+            public void delegateRender() {
+                myMainNodeRenderer.renderByPreviousHandler(this);
+            }
+
+            @Override
             public Node getCurrentNode() {
                 return myMainNodeRenderer.getCurrentNode();
             }
@@ -746,7 +855,15 @@ public class HtmlRenderer implements IRender {
                 HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, out, inheritIndent);
                 htmlWriter.setContext(this);
                 //noinspection ReturnOfInnerClass
-                return new SubNodeRenderer(myMainNodeRenderer, htmlWriter);
+                return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, false);
+            }
+
+            @Override
+            public NodeRendererContext getDelegatedSubContext(final Appendable out, final boolean inheritIndent) {
+                HtmlWriter htmlWriter = new HtmlWriter(this.htmlWriter, out, inheritIndent);
+                htmlWriter.setContext(this);
+                //noinspection ReturnOfInnerClass
+                return new SubNodeRenderer(myMainNodeRenderer, htmlWriter, true);
             }
 
             @Override

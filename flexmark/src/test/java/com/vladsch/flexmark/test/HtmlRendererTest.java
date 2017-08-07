@@ -11,6 +11,7 @@ import com.vladsch.flexmark.util.html.Attributes;
 import com.vladsch.flexmark.util.options.DataHolder;
 import org.junit.Test;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -157,6 +158,223 @@ public class HtmlRendererTest {
         HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
         String rendered = renderer.render(parse("foo [bar](/url)"));
         assertEquals("<p>foo test</p>\n", rendered);
+    }
+
+    @Test
+    public void overrideInheritNodeRender() {
+        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("test");
+
+                                } else {
+                                    context.delegateRender();
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+        };
+
+        HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
+        String rendered = renderer.render(parse("foo [bar](/url)"));
+        assertEquals("<p>foo test</p>\n", rendered);
+
+        rendered = renderer.render(parse("foo [bars](/url)"));
+        assertEquals("<p>foo <a href=\"/url\">bars</a></p>\n", rendered);
+    }
+
+    @Test
+    public void overrideInheritNodeRenderSubContext() {
+        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("test");
+
+                                } else {
+                                    StringBuilder out = new StringBuilder();
+                                    NodeRendererContext subContext = context.getDelegatedSubContext(out,true);
+                                    if (node.getText().equals("raw")) {
+                                       subContext.doNotRenderLinks();
+                                    }
+                                    subContext.delegateRender();
+                                    html.raw(out);
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+        };
+
+        HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).build();
+        String rendered = renderer.render(parse("foo [bar](/url)"));
+        assertEquals("<p>foo test</p>\n", rendered);
+
+        rendered = renderer.render(parse("foo [bars](/url)"));
+        assertEquals("<p>foo <a href=\"/url\">bars</a></p>\n", rendered);
+
+        rendered = renderer.render(parse("foo [raw](/url)"));
+        assertEquals("<p>foo raw</p>\n", rendered);
+
+        rendered = renderer.render(parse("[bar](/url) foo [raw](/url) [bars](/url)"));
+        assertEquals("<p>test foo raw <a href=\"/url\">bars</a></p>\n", rendered);
+    }
+
+    @Test
+    public void overrideInheritDependentNodeRender() {
+        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("test");
+                                } else if (node.getText().equals("bars")) {
+                                    context.getHtmlWriter().text("tests");
+                                } else {
+                                    context.delegateRender();
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+        };
+
+        final NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("testing");
+                                } else {
+                                    context.delegateRender();
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+
+            @Override
+            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                set.add(nodeRendererFactory.getClass());
+                return set;
+            }
+        };
+
+        HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory).nodeRendererFactory(nodeRendererFactory2).build();
+        String rendered = renderer.render(parse("foo [bar](/url)"));
+        assertEquals("<p>foo testing</p>\n", rendered);
+
+        rendered = renderer.render(parse("foo [bars](/url)"));
+        assertEquals("<p>foo tests</p>\n", rendered);
+    }
+
+    @Test
+    public void overrideInheritDependentNodeRenderReversed() {
+        final NodeRendererFactory nodeRendererFactory = new NodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("test");
+                                } else if (node.getText().equals("bars")) {
+                                    context.getHtmlWriter().text("tests");
+                                } else {
+                                    context.delegateRender();
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+        };
+
+        final NodeRendererFactory nodeRendererFactory2 = new DelegatingNodeRendererFactory() {
+            @Override
+            public NodeRenderer create(final DataHolder options) {
+                return new NodeRenderer() {
+                    @Override
+                    public Set<NodeRenderingHandler<?>> getNodeRenderingHandlers() {
+                        HashSet<NodeRenderingHandler<?>> set = new HashSet<NodeRenderingHandler<?>>();
+                        set.add(new NodeRenderingHandler<Link>(Link.class, new CustomNodeRenderer<Link>() {
+                            @Override
+                            public void render(Link node, NodeRendererContext context, HtmlWriter html) {
+                                if (node.getText().equals("bar")) {
+                                    context.getHtmlWriter().text("testing");
+                                } else {
+                                    context.delegateRender();
+                                }
+                            }
+                        }));
+
+                        return set;
+                    }
+                };
+            }
+
+            @Override
+            public Set<Class<? extends NodeRendererFactory>> getDelegates() {
+                Set<Class<? extends NodeRendererFactory>> set = new HashSet<Class<? extends NodeRendererFactory>>();
+                set.add(nodeRendererFactory.getClass());
+                return set;
+            }
+        };
+
+        // reverse the renderer order
+        HtmlRenderer renderer = HtmlRenderer.builder().nodeRendererFactory(nodeRendererFactory2).nodeRendererFactory(nodeRendererFactory).build();
+        String rendered = renderer.render(parse("foo [bar](/url)"));
+        assertEquals("<p>foo testing</p>\n", rendered);
+
+        rendered = renderer.render(parse("foo [bars](/url)"));
+        assertEquals("<p>foo tests</p>\n", rendered);
     }
 
     @Test

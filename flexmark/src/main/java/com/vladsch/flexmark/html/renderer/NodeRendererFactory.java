@@ -1,5 +1,7 @@
 package com.vladsch.flexmark.html.renderer;
 
+import com.vladsch.flexmark.util.ComputableFactory;
+import com.vladsch.flexmark.util.dependency.Dependent;
 import com.vladsch.flexmark.util.options.DataHolder;
 
 /**

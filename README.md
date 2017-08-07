@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.22.24</version>
+    <version>0.24.0</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.22.24'
+compile 'com.vladsch.flexmark:flexmark-all:0.24.0'
 ```
 
 #### Building with Android Studio
@@ -166,7 +166,8 @@ public class PegdownOptions {
 
 A sample with a
 [custom link resolver](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
-is also available.
+is also available, which includes link resolver for changing URLs or attributes of links and a
+custom node renderer if you need to override the generated link HTML.
 
 :information_source: [flexmark-java] has many more extensions and configuration options than
 [pegdown] in addition to extensions available in pegdown 1.6.0.
@@ -174,6 +175,10 @@ is also available.
 
 ### Latest Additions
 
+* Custom node rendering API with ability to invoke standard rendering for an overridden node,
+  allowing custom node renders that only handle special cases and let the rest be rendered as
+  usual. See:
+  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java#L94-L132)
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.

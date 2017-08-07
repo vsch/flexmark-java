@@ -6,6 +6,7 @@ import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 public abstract class NodeRendererSubContext implements NodeRendererContext {
     final HtmlWriter htmlWriter;
     Node renderingNode;
+    NodeRenderingHandlerWrapper renderingHandlerWrapper;
     int doNotRenderLinksNesting;
 
     public NodeRendererSubContext(HtmlWriter htmlWriter) {

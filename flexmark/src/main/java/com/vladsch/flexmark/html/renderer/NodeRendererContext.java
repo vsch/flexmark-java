@@ -35,13 +35,23 @@ public interface NodeRendererContext {
 
     /**
      * Creates a child rendering context that can be used to collect rendered html text. The child context inherits
-     * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
+     * everything but the HtmlRenderer, renderedNode, renderingHandler and doNotRenderLinksNesting from the parent.
      *
      * @param out           appendable to use for generated html
      * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
      * @return a new rendering context with a given appendable for its output
      */
     NodeRendererContext getSubContext(Appendable out, boolean inheritIndent);
+
+    /**
+     * Creates a child rendering context that can be used to collect rendered html text of the previously registered node renderer. The child context inherits
+     * everything but the HtmlRenderer and doNotRenderLinksNesting from the parent.
+     *
+     * @param out           appendable to use for generated html
+     * @param inheritIndent whether the html writer of the sub-context should inherit the current context's indentation level or start with 0 indentation
+     * @return a new rendering context with a given appendable for its output
+     */
+    NodeRendererContext getDelegatedSubContext(Appendable out, boolean inheritIndent);
 
     /**
      * Render the specified node and its children using the configured renderers. This should be used to render child
@@ -57,6 +67,11 @@ public interface NodeRendererContext {
      * @param parent node the children of which are to be rendered
      */
     void renderChildren(Node parent);
+
+    /**
+     * pass node rendering to previously registered handler
+     */
+    void delegateRender();
 
     /**
      * Get the id attribute for the given node.

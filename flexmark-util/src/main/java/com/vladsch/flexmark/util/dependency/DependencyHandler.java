@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class DependencyHandler<D extends Dependent<D>, S, R extends ResolvedDependencies<S>> {
     protected abstract S createStage(List<D> dependents);
-    protected abstract Class<? extends D> getDependentClass(D dependent);
+    protected abstract Class getDependentClass(D dependent);
     protected abstract R createResolvedDependencies(List<S> stages);
 
     public R resolveDependencies(List<D> dependentsList) {
@@ -26,7 +26,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
             DependentItemMap<D> dependentItemMap = new DependentItemMap<D>(dependentCount);
 
             for (D dependent : dependentsList) {
-                Class<? extends D> dependentClass = getDependentClass(dependent);
+                Class dependentClass = getDependentClass(dependent);
                 if (dependentItemMap.containsKey(dependentClass)) {
                     throw new IllegalStateException("Dependent class " + dependentClass + " is duplicated. Only one instance can be present in the list");
                 }
@@ -34,9 +34,9 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                 dependentItemMap.put(dependentClass, item);
             }
 
-            for (Map.Entry<Class<? extends D>, DependentItem<D>> entry : dependentItemMap) {
+            for (Map.Entry<Class, DependentItem<D>> entry : dependentItemMap) {
                 DependentItem<D> item = entry.getValue();
-                Set<Class<? extends D>> afterDependencies = item.dependent.getAfterDependents();
+                Set<? extends Class> afterDependencies = item.dependent.getAfterDependents();
 
                 if (afterDependencies != null && afterDependencies.size() > 0) {
                     for (Class<? extends D> dependentClass : afterDependencies) {
@@ -48,7 +48,7 @@ public abstract class DependencyHandler<D extends Dependent<D>, S, R extends Res
                     }
                 }
 
-                Set<Class<? extends D>> beforeDependents = item.dependent.getBeforeDependents();
+                Set<? extends Class> beforeDependents = item.dependent.getBeforeDependents();
                 if (beforeDependents != null && beforeDependents.size() > 0) {
                     for (Class<? extends D> dependentClass : beforeDependents) {
                         DependentItem<D> dependentItem = dependentItemMap.get(dependentClass);

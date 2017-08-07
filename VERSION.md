@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.24.0](#0240)
 - [0.22.24](#02224)
 - [0.22.22](#02222)
 - [0.22.20](#02220)
@@ -166,6 +167,24 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.24.0
+------
+
+* API Change: add node renderer API for delegating rendering to previously registered node
+  renderer stack, allowing partial node rendering customizations with non-customized rendering
+  passed to previous renderer.
+
+  * `NodeRendererContext.delegateRender()` to delegate current node rendering to previously
+    registered handler for the current node. Should only be called from handler's `render()`
+    method. If there is no renderer to which to delegate then the node will not be rendered.
+  * `NodeRendererContext.getDelegatedSubContext(Appendable, boolean)` to get a sub-context to be
+    used in delegated rendering, this context inherits current node rendering handler and node
+    information needed for `delegateRender()` method.
+  * Added `DelegatingNodeRendererFactory` which should be implemented by custom renderers which
+    rely on delegating some rendering of their nodes to existing renderers. It provides a set of
+    `NodeRendererFactory` classes to which this renderer may delegate to provide a controlled
+    ordering of renderers independent of registration order.
 
 0.22.24
 -------
