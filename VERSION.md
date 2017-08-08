@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.26.0](#0260)
 - [0.24.0](#0240)
 - [0.22.24](#02224)
 - [0.22.22](#02222)
@@ -167,6 +168,30 @@ flexmark-java
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
 &nbsp;</details>
+
+0.26.0
+------
+
+* Fix: Update parser to CommonMark Spec 0.28, the only effect on parsing is:
+
+  * `***foo***` is now parsed as `italic(bold())` whereas previously it was `bold(italic())`. 
+
+    Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the `Parser.STRONG_WRAPS_EMPHASIS`
+    to `true` to get old parsing behaviour.
+  
+  * Matched Nested parentheses in link URLs now do not need to be escaped. `[foo](fun(bar))`
+    will now be parsed as a link, previously it would be a `[foo]` reference followed by text
+    `(fun(bar))`. 
+
+    Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the
+    `Parser.LINKS_ALLOW_MATCHED_PARENTHESES` to `false` to get old parsing behaviour.
+
+* Add: profiles for `COMMONMARK_0_26`, `COMMONMARK_0_27`, `COMMONMARK_0_28`, with `COMMONMARK`
+  defaulting to the most recent implemented spec: 0.28 for now. The 0.26 profile only differs
+  from the 0.27 by using double blank lines to terminate lists. Delimiter parsing is not
+  downgraded from 0.27
+
+* Add: spec tests for 0.27 and 0.28 which use the version specific emulation profiles.
 
 0.24.0
 ------

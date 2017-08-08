@@ -101,6 +101,16 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> UNDERSCORE_DELIMITER_PROCESSOR = new DataKey<Boolean>("UNDERSCORE_DELIMITER_PROCESSOR", true);
     public static final DataKey<Boolean> BLANK_LINES_IN_AST = new DataKey<Boolean>("BLANK_LINES_IN_AST", false);
 
+    /**
+     * STRONG_WRAPS_EMPHASIS default false, when true makes parsing CommonMark Spec 0.27 compliant
+     */
+    public static final DataKey<Boolean> STRONG_WRAPS_EMPHASIS = new DataKey<Boolean>("STRONG_WRAPS_EMPHASIS", false);
+
+    /**
+     * LINKS_ALLOW_MATCHED_PARENTHESES default true, when false makes parsing CommonMark Spec 0.27 compliant
+     */
+    public static final DataKey<Boolean> LINKS_ALLOW_MATCHED_PARENTHESES = new DataKey<Boolean>("LINKS_ALLOW_MATCHED_PARENTHESES", true);
+
     // the meat of differences in emulation
     public static final DataKey<Boolean> LIST_BLOCK_PARSER = new DataKey<Boolean>("LIST_BLOCK_PARSER", true);
     public static final DataKey<ParserEmulationProfile> PARSER_EMULATION_PROFILE = new DataKey<ParserEmulationProfile>("PARSER_EMULATION_PROFILE", ParserEmulationProfile.COMMONMARK);

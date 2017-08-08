@@ -6272,3 +6272,273 @@ Document[0, 55]
 ````````````````````````````````
 
 
+## Spec 0.28 Changes
+
+```````````````````````````````` example Spec 0.28 Changes: 1
+***foo***
+.
+<p><em><strong>foo</strong></em></p>
+.
+Document[0, 10]
+  Paragraph[0, 10]
+    Emphasis[0, 9] textOpen:[0, 1, "*"] text:[1, 8, "**foo**"] textClose:[8, 9, "*"]
+      StrongEmphasis[1, 8] textOpen:[1, 3, "**"] text:[3, 6, "foo"] textClose:[6, 8, "**"]
+        Text[3, 6] chars:[3, 6, "foo"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 2
+_____foo_____
+.
+<p><em><strong><strong>foo</strong></strong></em></p>
+.
+Document[0, 14]
+  Paragraph[0, 14]
+    Emphasis[0, 13] textOpen:[0, 1, "_"] text:[1, 12, "____foo____"] textClose:[12, 13, "_"]
+      StrongEmphasis[1, 12] textOpen:[1, 3, "__"] text:[3, 10, "__foo__"] textClose:[10, 12, "__"]
+        StrongEmphasis[3, 10] textOpen:[3, 5, "__"] text:[5, 8, "foo"] textClose:[8, 10, "__"]
+          Text[5, 8] chars:[5, 8, "foo"]
+````````````````````````````````
+
+
+spec 0.27 compatibility
+
+```````````````````````````````` example(Spec 0.28 Changes: 3) options(spec-027)
+***foo***
+.
+<p><strong><em>foo</em></strong></p>
+.
+Document[0, 9]
+  Paragraph[0, 9]
+    StrongEmphasis[0, 9] textOpen:[0, 2, "**"] text:[2, 7, "*foo*"] textClose:[7, 9, "**"]
+      Emphasis[2, 7] textOpen:[2, 3, "*"] text:[3, 6, "foo"] textClose:[6, 7, "*"]
+        Text[3, 6] chars:[3, 6, "foo"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Spec 0.28 Changes: 4) options(spec-027)
+_____foo_____
+.
+<p><strong><strong><em>foo</em></strong></strong></p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    StrongEmphasis[0, 13] textOpen:[0, 2, "__"] text:[2, 11, "___foo___"] textClose:[11, 13, "__"]
+      StrongEmphasis[2, 11] textOpen:[2, 4, "__"] text:[4, 9, "_foo_"] textClose:[9, 11, "__"]
+        Emphasis[4, 9] textOpen:[4, 5, "_"] text:[5, 8, "foo"] textClose:[8, 9, "_"]
+          Text[5, 8] chars:[5, 8, "foo"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 5
+[link](foo(and(bar)))
+.
+<p><a href="foo(and(bar))">link</a></p>
+.
+Document[0, 22]
+  Paragraph[0, 22]
+    Link[0, 21] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 20, "foo(and(bar))"] pageRef:[7, 20, "foo(and(bar))"] linkClose:[20, 21, ")"]
+      Text[1, 5] chars:[1, 5, "link"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 6
+[link](foo(and(bar))
+.
+<p>[link](foo(and(bar))</p>
+.
+Document[0, 21]
+  Paragraph[0, 21]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 20] chars:[6, 20, "(foo( … bar))"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 7
+*foo [bar](/url)*
+.
+<p><em>foo <a href="/url">bar</a></em></p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    Emphasis[0, 17] textOpen:[0, 1, "*"] text:[1, 16, "foo [bar](/url)"] textClose:[16, 17, "*"]
+      Text[1, 5] chars:[1, 5, "foo "]
+      Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/url"] pageRef:[11, 15, "/url"] linkClose:[15, 16, ")"]
+        Text[6, 9] chars:[6, 9, "bar"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 8
+[link](/my uri)
+.
+<p>[link](/my uri)</p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 15] chars:[6, 15, "(/my uri)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 9
+[link](</my uri>)
+.
+<p>[link](&lt;/my uri&gt;)</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 17] chars:[6, 17, "(</my … uri>)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 10
+[link](foo
+bar)
+.
+<p>[link](foo
+bar)</p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 10] chars:[6, 10, "(foo"]
+    SoftLineBreak[10, 11]
+    Text[11, 15] chars:[11, 15, "bar)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 11
+[link](<foo
+bar>)
+.
+<p>[link](<foo
+bar>)</p>
+.
+Document[0, 18]
+  Paragraph[0, 18]
+    LinkRef[0, 6] referenceOpen:[0, 1, "["] reference:[1, 5, "link"] referenceClose:[5, 6, "]"]
+      Text[1, 5] chars:[1, 5, "link"]
+    Text[6, 7] chars:[6, 7, "("]
+    HtmlInline[7, 16] chars:[7, 16, "<foo\nbar>"]
+    Text[16, 17] chars:[16, 17, ")"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 12
+[link](<foo(and(bar)>)
+.
+<p><a href="foo(and(bar)">link</a></p>
+.
+Document[0, 23]
+  Paragraph[0, 23]
+    Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 20, "foo(and(bar)"] urlClose:[20, 21, ">"] pageRef:[8, 20, "foo(and(bar)"] linkClose:[21, 22, ")"]
+      Text[1, 5] chars:[1, 5, "link"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 13
+![foo ![bar](/url)](/url2)
+.
+<p><img src="/url2" alt="foo bar" /></p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Image[0, 26] textOpen:[0, 2, "!["] text:[2, 18, "foo ![bar](/url)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 25, "/url2"] pageRef:[20, 25, "/url2"] linkClose:[25, 26, ")"]
+      Text[2, 6] chars:[2, 6, "foo "]
+      Image[6, 18] textOpen:[6, 8, "!["] text:[8, 11, "bar"] textClose:[11, 12, "]"] linkOpen:[12, 13, "("] url:[13, 17, "/url"] pageRef:[13, 17, "/url"] linkClose:[17, 18, ")"]
+        Text[8, 11] chars:[8, 11, "bar"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 14
+![foo [bar](/url)](/url2)
+.
+<p><img src="/url2" alt="foo bar" /></p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    Image[0, 25] textOpen:[0, 2, "!["] text:[2, 17, "foo [bar](/url)"] textClose:[17, 18, "]"] linkOpen:[18, 19, "("] url:[19, 24, "/url2"] pageRef:[19, 24, "/url2"] linkClose:[24, 25, ")"]
+      Text[2, 6] chars:[2, 6, "foo "]
+      Link[6, 17] textOpen:[6, 7, "["] text:[7, 10, "bar"] textClose:[10, 11, "]"] linkOpen:[11, 12, "("] url:[12, 16, "/url"] pageRef:[12, 16, "/url"] linkClose:[16, 17, ")"]
+        Text[7, 10] chars:[7, 10, "bar"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 15
+[![moon](moon.jpg)](/uri)
+.
+<p><a href="/uri"><img src="moon.jpg" alt="moon" /></a></p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    Link[0, 25] textOpen:[0, 1, "["] text:[1, 18, "![moon](moon.jpg)"] textClose:[18, 19, "]"] linkOpen:[19, 20, "("] url:[20, 24, "/uri"] pageRef:[20, 24, "/uri"] linkClose:[24, 25, ")"]
+      Image[1, 18] textOpen:[1, 3, "!["] text:[3, 7, "moon"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 17, "moon.jpg"] pageRef:[9, 17, "moon.jpg"] linkClose:[17, 18, ")"]
+        Text[3, 7] chars:[3, 7, "moon"]
+````````````````````````````````
+
+
+However, links may not contain other links, at any level of nesting.
+
+```````````````````````````````` example Spec 0.28 Changes: 16
+[foo [bar](/uri)](/uri)
+.
+<p>[foo <a href="/uri">bar</a>](/uri)</p>
+.
+Document[0, 24]
+  Paragraph[0, 24]
+    Text[0, 5] chars:[0, 5, "[foo "]
+    Link[5, 16] textOpen:[5, 6, "["] text:[6, 9, "bar"] textClose:[9, 10, "]"] linkOpen:[10, 11, "("] url:[11, 15, "/uri"] pageRef:[11, 15, "/uri"] linkClose:[15, 16, ")"]
+      Text[6, 9] chars:[6, 9, "bar"]
+    Text[16, 23] chars:[16, 23, "](/uri)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 17
+[foo *[bar [baz](/uri)](/uri)*](/uri)
+.
+<p>[foo <em>[bar <a href="/uri">baz</a>](/uri)</em>](/uri)</p>
+.
+Document[0, 38]
+  Paragraph[0, 38]
+    Text[0, 5] chars:[0, 5, "[foo "]
+    Emphasis[5, 30] textOpen:[5, 6, "*"] text:[6, 29, "[bar [baz](/uri)](/uri)"] textClose:[29, 30, "*"]
+      Text[6, 7] chars:[6, 7, "["]
+      Text[7, 11] chars:[7, 11, "bar "]
+      Link[11, 22] textOpen:[11, 12, "["] text:[12, 15, "baz"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 21, "/uri"] pageRef:[17, 21, "/uri"] linkClose:[21, 22, ")"]
+        Text[12, 15] chars:[12, 15, "baz"]
+      Text[22, 29] chars:[22, 29, "](/uri)"]
+    Text[30, 37] chars:[30, 37, "](/uri)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 18
+![[[foo](uri1)](uri2)](uri3)
+.
+<p><img src="uri3" alt="[foo](uri2)" /></p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    Image[0, 28] textOpen:[0, 2, "!["] text:[2, 21, "[[foo](uri1)](uri2)"] textClose:[21, 22, "]"] linkOpen:[22, 23, "("] url:[23, 27, "uri3"] pageRef:[23, 27, "uri3"] linkClose:[27, 28, ")"]
+      Text[2, 3] chars:[2, 3, "["]
+      Link[3, 14] textOpen:[3, 4, "["] text:[4, 7, "foo"] textClose:[7, 8, "]"] linkOpen:[8, 9, "("] url:[9, 13, "uri1"] pageRef:[9, 13, "uri1"] linkClose:[13, 14, ")"]
+        Text[4, 7] chars:[4, 7, "foo"]
+      Text[14, 21] chars:[14, 21, "](uri2)"]
+````````````````````````````````
+
+
+```````````````````````````````` example Spec 0.28 Changes: 19
+[link](<foo(and(bar)>)
+.
+<p><a href="foo(and(bar)">link</a></p>
+.
+Document[0, 23]
+  Paragraph[0, 23]
+    Link[0, 22] textOpen:[0, 1, "["] text:[1, 5, "link"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] urlOpen:[7, 8, "<"] url:[8, 20, "foo(and(bar)"] urlClose:[20, 21, ">"] pageRef:[8, 20, "foo(and(bar)"] linkClose:[21, 22, ")"]
+      Text[1, 5] chars:[1, 5, "link"]
+````````````````````````````````
+

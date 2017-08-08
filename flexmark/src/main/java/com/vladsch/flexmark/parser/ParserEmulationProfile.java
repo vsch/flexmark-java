@@ -4,24 +4,32 @@ import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataHolder;
+import com.vladsch.flexmark.util.options.MutableDataSet;
 import com.vladsch.flexmark.util.options.MutableDataSetter;
 
 public enum ParserEmulationProfile implements MutableDataSetter {
-    COMMONMARK(0, null),
-    FIXED_INDENT(1, null),
-    KRAMDOWN(2, null),
-    MARKDOWN(3, null),
-    GITHUB_DOC(4, MARKDOWN),
-    MULTI_MARKDOWN(5, FIXED_INDENT),
-    PEGDOWN(6, FIXED_INDENT),
-    PEGDOWN_STRICT(7, FIXED_INDENT),;
+    COMMONMARK(null),
+    COMMONMARK_0_26(COMMONMARK),
+    COMMONMARK_0_27(COMMONMARK),
+    COMMONMARK_0_28(COMMONMARK),
+    FIXED_INDENT(null),
+    KRAMDOWN(null),
+    MARKDOWN(null),
+    GITHUB_DOC(MARKDOWN),
+    MULTI_MARKDOWN(FIXED_INDENT),
+    PEGDOWN(FIXED_INDENT),
+    PEGDOWN_STRICT(FIXED_INDENT),;
 
-    public final int intValue;
     public final ParserEmulationProfile family;
 
-    ParserEmulationProfile(int intValue, ParserEmulationProfile family) {
-        this.intValue = intValue;
+    ParserEmulationProfile(ParserEmulationProfile family) {
         this.family = family == null ? this : family;
+    }
+
+    public MutableDataHolder getProfileOptions() {
+        MutableDataHolder options = new MutableDataSet();
+        setIn(options);
+        return options;
     }
 
     public MutableListOptions getOptions() {
@@ -270,13 +278,16 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     );
         }
 
-        return new MutableListOptions((DataHolder) null);
+        return this == COMMONMARK_0_26 ? new MutableListOptions((DataHolder) null).setEndOnDoubleBlank(true) : new MutableListOptions((DataHolder) null);
     }
 
     @Override
     public MutableDataHolder setIn(final MutableDataHolder dataHolder) {
         if (this == FIXED_INDENT) {
-            getOptions().setIn(dataHolder);
+            getOptions().setIn(dataHolder)
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
+            ;
         } else if (this == KRAMDOWN) {
             getOptions().setIn(dataHolder);
             dataHolder
@@ -293,6 +304,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, true)
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == MARKDOWN) {
             getOptions().setIn(dataHolder);
@@ -309,6 +322,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, true)
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == GITHUB_DOC) {
             getOptions().setIn(dataHolder);
@@ -326,6 +341,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, false)
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == MULTI_MARKDOWN) {
             getOptions().setIn(dataHolder);
@@ -346,6 +363,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_MARKDOWN_INTERRUPTS_CLOSED, true)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_BLANK_LINE_INTERRUPTS_PARTIAL_TAG, false)
                     .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, true)
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
         } else if (this == PEGDOWN || this == PEGDOWN_STRICT) {
             getOptions().setIn(dataHolder);
@@ -367,6 +386,8 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                     //.set(HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS, "")
                     .set(HtmlRenderer.HEADER_ID_GENERATOR_NO_DUPED_DASHES, true)
                     .set(HtmlRenderer.SOFT_BREAK, " ")
+                    .set(Parser.STRONG_WRAPS_EMPHASIS, true)
+                    .set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false)
             ;
 
             if (this == PEGDOWN_STRICT) {
@@ -391,7 +412,12 @@ public enum ParserEmulationProfile implements MutableDataSetter {
                         .set(Parser.HTML_BLOCK_DEEP_PARSE_INDENTED_CODE_INTERRUPTS, false)
                 ;
             }
+        } else if (this == COMMONMARK_0_26 || this == COMMONMARK_0_27) {
+            // set previous parsing rule options
+            dataHolder.set(Parser.STRONG_WRAPS_EMPHASIS, true);
+            dataHolder.set(Parser.LINKS_ALLOW_MATCHED_PARENTHESES, false);
         }
+
         return dataHolder;
     }
 }

@@ -1,8 +1,8 @@
 package com.vladsch.flexmark.internal.inline;
 
 public class UnderscoreDelimiterProcessor extends EmphasisDelimiterProcessor {
-    public UnderscoreDelimiterProcessor() {
-        super('_');
+    public UnderscoreDelimiterProcessor(boolean strongWrapsEmphasis) {
+        super('_', strongWrapsEmphasis);
     }
 
     @Override

@@ -1,7 +1,7 @@
 ![Flexmark Icon Logo](/assets/images/flexmark-icon-logo%402x.png) flexmark-java
 ===============================================================================
 
-**flexmark-java** is a Java implementation of CommonMark 0.27 spec parser using the blocks
+**flexmark-java** is a Java implementation of **CommonMark 0.28** spec parser using the blocks
 first, inlines after Markdown parsing architecture.
 
 Its strengths are speed, flexibility, Markdown source element based AST with details of the
@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.24.0</version>
+    <version>0.26.0</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.24.0'
+compile 'com.vladsch.flexmark:flexmark-all:0.26.0'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* Update library to be [CommonMark (spec 0.28)] compliant and add
+  `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
+  selecting a specific spec version options.
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
   usual. See:
@@ -303,7 +306,9 @@ If you find a discrepancy please open an issue so it can be addressed.
 
 Major processor families are implemented and some family members also:
 
-* [CommonMark] (spec 0.27)
+* [CommonMark] for latest implemented spec, currently [CommonMark (spec 0.28)]
+  * [CommonMark (spec 0.27)] for specific version compatibility
+  * [CommonMark (spec 0.28)] for specific version compatibility
   * [ ] &nbsp;[League/CommonMark]
   * [GitHub] Comments
 * [ ] [Jekyll]
@@ -560,6 +565,8 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 
 [All about me]: https://vladsch.com/about
 [CommonMark]: http://commonmark.org/
+[CommonMark (spec 0.27)]: http://spec.commonmark.org/0.27/
+[CommonMark (spec 0.28)]: http://spec.commonmark.org/0.28/
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java

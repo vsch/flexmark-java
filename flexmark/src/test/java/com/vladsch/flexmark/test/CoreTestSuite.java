@@ -15,6 +15,8 @@ import org.junit.runners.Suite;
         PathologicalTest.class,
         PrefixedSubSequenceTest.class,
         FullOrigSpecCoreTest.class,
+        FullOrigSpec027CoreTest.class,
+        FullOrigSpec028CoreTest.class,
         ComboCoreSpecTest.class,
         ComboCoreDirectionalSpecTest.class,
         ComboExtraSpecTest.class,

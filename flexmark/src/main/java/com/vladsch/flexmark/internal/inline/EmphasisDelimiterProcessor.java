@@ -9,14 +9,16 @@ import com.vladsch.flexmark.parser.InlineParser;
 import com.vladsch.flexmark.parser.delimiter.DelimiterProcessor;
 import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
 import com.vladsch.flexmark.util.Utils;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
-
     private final char delimiterChar;
+    private final int multipleUse;
 
-    protected EmphasisDelimiterProcessor(char delimiterChar) {
+    protected EmphasisDelimiterProcessor(char delimiterChar, boolean strongWrapsEmphasis) {
         this.delimiterChar = delimiterChar;
+        this.multipleUse = strongWrapsEmphasis ? 1 : 2;
     }
 
     @Override
@@ -60,7 +62,8 @@ public abstract class EmphasisDelimiterProcessor implements DelimiterProcessor {
         if (opener.length() < 3 || closer.length() < 3) {
             return Utils.min(closer.length(), opener.length());
         } else {
-            return closer.length() % 2 == 0 ? 2 : 1;
+            // default to latest spec
+            return closer.length() % 2 == 0 ? 2 : multipleUse;
         }
     }
 

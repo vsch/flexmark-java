@@ -30,35 +30,35 @@ document.
 
 1. `style` consists of space separated list of options:
 
-    - `levels=levelList` where level list is a comma separated list of levels or ranges. Default
-      is to include heading levels 2 and 3. Examples:
-        - `levels=4` include levels 2,3 and 4
-        - `levels=2-4` include levels 2,3 and 4. same as `levels=4`
-        - `levels=2-4,5` include levels 2,3,4 and 5
-        - `levels=1,3` include levels 1 and 3
+   * `levels=levelList` where level list is a comma separated list of levels or ranges. Default
+     is to include heading levels 2 and 3. Examples:
+     * `levels=4` include levels 2,3 and 4
+     * `levels=2-4` include levels 2,3 and 4. same as `levels=4`
+     * `levels=2-4,5` include levels 2,3,4 and 5
+     * `levels=1,3` include levels 1 and 3
 
-    - `html` generate HTML version of the TOC
+   * `html` generate HTML version of the TOC
 
-    - `markdown` generate Markdown version of the TOC
+   * `markdown` generate Markdown version of the TOC
 
-    - `text` to only include the text of the heading
+   * `text` to only include the text of the heading
 
-    - `formatted` to include text and inline formatting
+   * `formatted` to include text and inline formatting
 
-    - `hierarchy` to render as hierarchical list in order of appearance in the document
+   * `hierarchy` to render as hierarchical list in order of appearance in the document
 
-    - `flat` to render as a flat list in order of appearance in the document
+   * `flat` to render as a flat list in order of appearance in the document
 
-    - `reversed` to render as a flat list in order of appearance in the document
+   * `reversed` to render as a flat list in order of appearance in the document
 
-    - `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
+   * `sort-up` to render as a flat list sorted alphabetically by heading text only, no inlines
 
-    - `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
-      no inlines
+   * `sort-down` to render as a flat list sorted reversed alphabetically by heading text only,
+     no inlines
 
-    - `bullet` to use a bullet list for the TOC items
+   * `bullet` to use a bullet list for the TOC items
 
-    - `numbered` to use a numbered list for TOC items
+   * `numbered` to use a numbered list for TOC items
 
 2. `"Title"` specifies the text for the table of contents heading. If omitted or blank then no
    heading will be generated for the table of contents. `#` prefix in the title will specify the
@@ -1585,7 +1585,7 @@ Document[0, 126]
 ````````````````````````````````
 
 
-Text and inlines, sorted
+Text and inlines, sorted reversed
 
 ```````````````````````````````` example(SimToc: 54) options(sorted-reversed)
 [TOC]:#
@@ -1677,6 +1677,106 @@ Document[0, 136]
     StrongEmphasis[119, 132] textOpen:[119, 121, "**"] text:[121, 130, "some bold"] textClose:[130, 132, "**"]
       Text[121, 130] chars:[121, 130, "some bold"]
     Text[132, 134] chars:[132, 134, " 1"]
+````````````````````````````````
+
+
+Typographic chars included
+
+```````````````````````````````` example(SimToc: 56) options(sorted)
+[TOC hierarchy]:#
+
+
+### Heading's 1.1.2  **_some bold italic_**
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+# Heading **some bold** 1
+
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#headings-112--some-bold-italic">Heading's 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<h3 id="headings-112--some-bold-italic">Heading's 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+.
+Document[0, 138]
+  SimTocBlock[0, 18] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 14] closingMarker:[14, 16] anchorMarker:[16, 17, "#"]
+  Heading[20, 63] textOpen:[20, 23, "###"] text:[24, 63, "Heading's 1.1.2  **_some bold italic_**"]
+    Text[24, 41] chars:[24, 41, "Headi … 1.2  "]
+    StrongEmphasis[41, 63] textOpen:[41, 43, "**"] text:[43, 61, "_some bold italic_"] textClose:[61, 63, "**"]
+      Emphasis[43, 61] textOpen:[43, 44, "_"] text:[44, 60, "some bold italic"] textClose:[60, 61, "_"]
+        Text[44, 60] chars:[44, 60, "some  … talic"]
+  Heading[64, 92] textOpen:[64, 66, "##"] text:[67, 92, "Heading 1.1 _some italic_"]
+    Text[67, 79] chars:[67, 79, "Headi …  1.1 "]
+    Emphasis[79, 92] textOpen:[79, 80, "_"] text:[80, 91, "some italic"] textClose:[91, 92, "_"]
+      Text[80, 91] chars:[80, 91, "some  … talic"]
+  Heading[93, 110] textOpen:[93, 96, "###"] text:[97, 110, "Heading 1.1.1"]
+    Text[97, 110] chars:[97, 110, "Headi … 1.1.1"]
+  Heading[111, 136] textOpen:[111, 112, "#"] text:[113, 136, "Heading **some bold** 1"]
+    Text[113, 121] chars:[113, 121, "Heading "]
+    StrongEmphasis[121, 134] textOpen:[121, 123, "**"] text:[123, 132, "some bold"] textClose:[132, 134, "**"]
+      Text[123, 132] chars:[123, 132, "some bold"]
+    Text[134, 136] chars:[134, 136, " 1"]
+````````````````````````````````
+
+
+With Typographic extension included
+
+```````````````````````````````` example(SimToc: 57) options(typographic)
+[TOC hierarchy]:#
+
+
+### Heading's 1.1.2  **_some bold italic_**
+## Heading 1.1 _some italic_
+### Heading 1.1.1
+# Heading **some bold** 1
+
+.
+<div>
+  <h1>Table of Contents</h1>
+  <ul>
+    <li><a href="#headings-112--some-bold-italic">Heading&rsquo;s 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+    <li><a href="#heading-11-some-italic">Heading 1.1 <em>some italic</em></a>
+      <ul>
+        <li><a href="#heading-111">Heading 1.1.1</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<h3 id="headings-112--some-bold-italic">Heading&rsquo;s 1.1.2  <strong><em>some bold italic</em></strong></h3>
+<h2 id="heading-11-some-italic">Heading 1.1 <em>some italic</em></h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h1 id="heading-some-bold-1">Heading <strong>some bold</strong> 1</h1>
+.
+Document[0, 138]
+  SimTocBlock[0, 18] openingMarker:[0, 1] tocKeyword:[1, 4] style:[5, 14] closingMarker:[14, 16] anchorMarker:[16, 17, "#"]
+  Heading[20, 63] textOpen:[20, 23, "###"] text:[24, 63, "Heading's 1.1.2  **_some bold italic_**"]
+    Text[24, 31] chars:[24, 31, "Heading"]
+    TypographicSmarts[31, 32] typographic: &rsquo; 
+    Text[32, 41] chars:[32, 41, "s 1.1.2  "]
+    StrongEmphasis[41, 63] textOpen:[41, 43, "**"] text:[43, 61, "_some bold italic_"] textClose:[61, 63, "**"]
+      Emphasis[43, 61] textOpen:[43, 44, "_"] text:[44, 60, "some bold italic"] textClose:[60, 61, "_"]
+        Text[44, 60] chars:[44, 60, "some  … talic"]
+  Heading[64, 92] textOpen:[64, 66, "##"] text:[67, 92, "Heading 1.1 _some italic_"]
+    Text[67, 79] chars:[67, 79, "Headi …  1.1 "]
+    Emphasis[79, 92] textOpen:[79, 80, "_"] text:[80, 91, "some italic"] textClose:[91, 92, "_"]
+      Text[80, 91] chars:[80, 91, "some  … talic"]
+  Heading[93, 110] textOpen:[93, 96, "###"] text:[97, 110, "Heading 1.1.1"]
+    Text[97, 110] chars:[97, 110, "Headi … 1.1.1"]
+  Heading[111, 136] textOpen:[111, 112, "#"] text:[113, 136, "Heading **some bold** 1"]
+    Text[113, 121] chars:[113, 121, "Heading "]
+    StrongEmphasis[121, 134] textOpen:[121, 123, "**"] text:[123, 132, "some bold"] textClose:[132, 134, "**"]
+      Text[123, 132] chars:[123, 132, "some bold"]
+    Text[134, 136] chars:[134, 136, " 1"]
 ````````````````````````````````
 
 

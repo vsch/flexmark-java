@@ -30,5 +30,6 @@
     <orderEntry type="module" module-name="flexmark-formatter" />
     <orderEntry type="library" name="R User Library" level="project" />
     <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="module" module-name="flexmark-ext-typographic" scope="TEST" />
   </component>
 </module>

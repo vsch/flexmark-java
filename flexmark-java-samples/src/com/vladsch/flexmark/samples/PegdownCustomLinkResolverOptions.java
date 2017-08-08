@@ -119,13 +119,27 @@ public class PegdownCustomLinkResolverOptions {
                 public void render(Link node, NodeRendererContext context, HtmlWriter html) {
                     // test the node to see if it needs overriding
                     if (node.getText().equals("bar")) {
-                        context.getHtmlWriter().text("(eliminated)");
+                        html.text("(eliminated)");
                     } else {
                         // otherwise pass it for default rendering
                         context.delegateRender();
                     }
                 }
             }));
+            //set.add(new NodeRenderingHandler<WikiLink>(WikiLink.class, new CustomNodeRenderer<WikiLink>() {
+            //    @Override
+            //    public void render(WikiLink node, NodeRendererContext context, HtmlWriter html) {
+            //        // test the node to see if it needs overriding
+            //        Matcher matcher = CONFLUENCE_WIKI_LINK.matcher(node.getChars());
+            //        if (matcher.find()) {
+            //            String link = "...";
+            //            html.raw(link);
+            //        } else {
+            //            // otherwise pass it for default rendering
+            //            context.delegateRender();
+            //        }
+            //    }
+            //}));
 
             return set;
         }

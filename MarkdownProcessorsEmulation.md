@@ -24,7 +24,7 @@ determining whether a text line is:
 * current item's sub-item
 
 Some processors, like Kramdown and Markdown, use the list's first item indent to determine when
-text is an item, lazy continuation or indented code. CommonMark (spec.txt 0.27), uses the last
+text is an item, lazy continuation or indented code. CommonMark, uses the last
 item's content indent for this determination. MultiMarkdown, uses a fixed indent of 4 spaces
 from left edge or last block quote marker to make that determination.
 
@@ -57,7 +57,7 @@ The following definitions are used:
 
 Family type rough behavior, details are in the code for `ListBlockParser` and `ListItemParser`:
 
-* CommonMark: version 0.27 of the spec, all common mark parsers
+* CommonMark: of the spec, all common mark parsers
   * Definitions/Defaults:
     * `ITEM_INDENT` = 4 <!-- not used -->
     * `CODE_INDENT` = 4

@@ -230,10 +230,10 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         Map<Character, DelimiterProcessor> map = new HashMap<Character, DelimiterProcessor>();
         //addDelimiterProcessors(Arrays.asList(new AsteriskDelimiterProcessor(), new UnderscoreDelimiterProcessor()), map);
         if (options.get(Parser.ASTERISK_DELIMITER_PROCESSOR)) {
-            addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor()), map);
+            addDelimiterProcessors(Collections.singletonList(new AsteriskDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
         }
         if (options.get(Parser.UNDERSCORE_DELIMITER_PROCESSOR)) {
-            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor()), map);
+            addDelimiterProcessors(Collections.singletonList(new UnderscoreDelimiterProcessor(Parser.STRONG_WRAPS_EMPHASIS.getFrom(options))), map);
         }
 
         addDelimiterProcessors(delimiterProcessors, map);
@@ -1267,6 +1267,8 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                         index = savedIndex;
                     }
                 }
+            } else {
+                index = savedIndex;
             }
         } else {
             index = preSpaceIndex;
@@ -1560,8 +1562,39 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         if (res != null) {
             return res;
         } else {
-            final BasedSequence matched = match(myParsing.LINK_DESTINATION);
-            return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+            if (options.linksAllowMatchedParentheses) {
+                // allow matched parenthesis
+                BasedSequence matched = match(myParsing.LINK_DESTINATION_MATCHED_PARENS);
+                if (matched != null) {
+                    int openCount = 0;
+                    int iMax = matched.length();
+                    for (int i = 0; i < iMax; i++) {
+                        char c = matched.charAt(i);
+                        if (c == '\\') {
+                            // escape
+                            i++;
+                        } else if (c == '(') {
+                            openCount++;
+                        } else if (c == ')') {
+                            if (openCount == 0) {
+                                // truncate to this and leave ')' to be parsed
+                                index -= iMax - i;
+                                matched = matched.subSequence(0, i);
+                                break;
+                            }
+                            openCount--;
+                        }
+                    }
+
+                    return options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+                }
+
+                return null;
+            } else {
+                // spec 0.27 compatibility
+                final BasedSequence matched = match(myParsing.LINK_DESTINATION);
+                return matched != null && options.spaceInLinkUrls ? matched.trimEnd(BasedSequence.SPACE) : matched;
+            }
         }
     }
 
@@ -1723,8 +1756,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                     (!afterIsPunctuation || beforeIsWhitespace || beforeIsPunctuation);
             rightFlanking = !beforeIsWhitespace &&
                     (!beforeIsPunctuation || afterIsWhitespace || afterIsPunctuation);
-        }
-        else {
+        } else {
             beforeIsPunctuation = myParsing.PUNCTUATION.matcher(before).matches();
             afterIsPunctuation = myParsing.PUNCTUATION.matcher(after).matches();
 
@@ -1775,6 +1807,7 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
                 if (opener.canOpen && opener.delimiterChar == openingDelimiterChar) {
                     potentialOpenerFound = true;
                     useDelims = delimiterProcessor.getDelimiterUse(opener, closer);
+
                     if (useDelims > 0) {
                         openerFound = true;
                         break;

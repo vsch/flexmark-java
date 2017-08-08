@@ -40,6 +40,7 @@ public class OptionsParser<T> implements OptionParser<T> {
         for (BasedSequence optionText : optionsList) {
             OptionParser<T> matched = null;
             DelimitedBuilder message = null;
+
             BasedSequence[] optionList = optionText.split(myOptionValueDelimiter, 2, BasedSequence.SPLIT_SKIP_EMPTY);
             if (optionList.length == 0) continue;
             BasedSequence optionName = optionList[0];
