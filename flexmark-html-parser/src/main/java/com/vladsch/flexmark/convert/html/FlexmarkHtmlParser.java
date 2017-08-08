@@ -164,7 +164,7 @@ public class FlexmarkHtmlParser {
      *
      * @return html parser instance
      */
-    public FlexmarkHtmlParser build() {
+    public static FlexmarkHtmlParser build() {
         return new FlexmarkHtmlParser(null);
     }
 
@@ -174,7 +174,7 @@ public class FlexmarkHtmlParser {
      * @param options parser options
      * @return html parser instance
      */
-    public FlexmarkHtmlParser build(DataHolder options) {
+    public static FlexmarkHtmlParser build(DataHolder options) {
         return new FlexmarkHtmlParser(options);
     }
 
