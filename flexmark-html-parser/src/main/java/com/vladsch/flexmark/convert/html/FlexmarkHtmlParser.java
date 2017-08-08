@@ -91,16 +91,15 @@ public class FlexmarkHtmlParser {
 
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
-    private final Stack<State> myStateStack;
-    private final Map<String, String> myAbbreviations;
     private final HtmlParserOptions myOptions;
-    private State myState;
-    private boolean myTrace;
     private final Pattern typographicPattern;
 
+    private Stack<State> myStateStack;
+    private Map<String, String> myAbbreviations;
+    private State myState;
+    private boolean myTrace;
+
     private FlexmarkHtmlParser(DataHolder options) {
-        myStateStack = new Stack<State>();
-        myAbbreviations = new HashMap<String, String>();
         myOptions = new HtmlParserOptions(options);
 
         if (myOptions.typographicQuotes && myOptions.typographicSmarts) {
@@ -114,6 +113,13 @@ public class FlexmarkHtmlParser {
         }
 
         //myTrace = true;
+        resetForParse();
+    }
+
+    private void resetForParse() {
+        myStateStack = new Stack<State>();
+        myAbbreviations = new HashMap<String, String>();
+        myState = null;
     }
 
     public HtmlParserOptions getOptions() {
@@ -135,6 +141,8 @@ public class FlexmarkHtmlParser {
      * @param html html to be parsed
      */
     public void parse(FormattingAppendable out, String html) {
+        resetForParse();
+
         Document document = Jsoup.parse(html);
 
         Element body = document.body();

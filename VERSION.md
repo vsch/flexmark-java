@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.26.2](#0262)
 - [0.26.0](#0260)
 - [0.24.0](#0240)
 - [0.22.24](#02224)
@@ -169,19 +170,26 @@ flexmark-java
 
 &nbsp;</details>
 
+0.26.2
+------
+
+* Fix: #143, FlexmarkHtmlParser builders not static, merged #144, Update FlexmarkHtmlParser.java
+
+* Fix: make html parser instance re-usable, now resets state for each parse invocation 
+
 0.26.0
 ------
 
 * Fix: Update parser to CommonMark Spec 0.28, the only effect on parsing is:
 
-  * `***foo***` is now parsed as `italic(bold())` whereas previously it was `bold(italic())`. 
+  * `***foo***` is now parsed as `italic(bold())` whereas previously it was `bold(italic())`.
 
     Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the `Parser.STRONG_WRAPS_EMPHASIS`
     to `true` to get old parsing behaviour.
-  
+
   * Matched Nested parentheses in link URLs now do not need to be escaped. `[foo](fun(bar))`
     will now be parsed as a link, previously it would be a `[foo]` reference followed by text
-    `(fun(bar))`. 
+    `(fun(bar))`.
 
     Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the
     `Parser.LINKS_ALLOW_MATCHED_PARENTHESES` to `false` to get old parsing behaviour.
