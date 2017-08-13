@@ -56,6 +56,7 @@ indented code
 
 1. numbered item 1
 2. numbered item 2
+
 .
 Document[0, 304]
   Heading[0, 8] textOpen:[0, 1, "#"] text:[1, 8, "Heading"]
@@ -134,6 +135,7 @@ indented code
 
 1. numbered item 1
 1. numbered item 2
+
 ````````````````````````````````
 
 
@@ -165,6 +167,7 @@ indented code
   * list item 2.2.1
   * list item 2.2.1.1
   * list item 2.2.1.2
+
 ````````````````````````````````
 
 
@@ -236,6 +239,7 @@ default
         * list item 1.2.1
         * [ ] list item 1.2.1.1
         * [X] list item 1.2.1.2
+
 ````````````````````````````````
 
 
@@ -253,6 +257,7 @@ default
         * list item 1.2.1
         * [ ] list item 1.2.1.1
         * [x] list item 1.2.1.2
+
 ````````````````````````````````
 
 
@@ -270,6 +275,7 @@ default
         * list item 1.2.1
         * [ ] list item 1.2.1.1
         * [X] list item 1.2.1.2
+
 ````````````````````````````````
 
 

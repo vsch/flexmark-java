@@ -4,7 +4,10 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterable;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
+import com.vladsch.flexmark.util.sequence.SegmentedSequence;
 import com.vladsch.flexmark.util.sequence.SubSequence;
+
+import java.util.Arrays;
 
 public abstract class Node {
     public static final BasedSequence[] EMPTY_SEGMENTS = BasedSequence.EMPTY_ARRAY;
@@ -507,7 +510,7 @@ public abstract class Node {
     public static void segmentSpanChars(StringBuilder out, int startOffset, int endOffset, String name, String chars1, String splice, String chars2) {
         if (name != null && !name.trim().isEmpty()) out.append(" ").append(name).append(":");
         out.append("[").append(startOffset).append(", ").append(endOffset);
-        if (startOffset < endOffset) {
+        if (!chars1.isEmpty() || !chars2.isEmpty()) {
             out.append(", \"");
             escapeJavaString(out, chars1);
             out.append(splice);
@@ -692,7 +695,34 @@ public abstract class Node {
         return getDocument().getLineNumber(endOffset > 0 ? endOffset - 1 : endOffset);
     }
 
+    /**
+     * Get the segments making up the node's characters.
+     * <p>
+     * Used to get segments after the some of the node's elements were modified
+     *
+     * @return array of segments
+     */
     public BasedSequence[] getSegmentsForChars() {
         return getSegments();
+    }
+
+    /**
+     * Get the char sequence from segments making up the node's characters.
+     * <p>
+     * Used to get segments after the some of the node's elements were modified
+     *
+     * @return concatenated string of all segments
+     */
+    public BasedSequence getCharsFromSegments() {
+        return SegmentedSequence.of(Arrays.asList(getSegmentsForChars()), chars.subSequence(0, 0));
+    }
+
+    /**
+     * Set the node's char string from segments making up the node's characters.
+     * <p>
+     * Used to get segments after the some of the node's elements were modified
+     */
+    public void setCharsFromSegments() {
+        setChars(getCharsFromSegments());
     }
 }

@@ -17,6 +17,7 @@ in text into abbr tags with titles consisting of the expansion of the abbreviati
 *[Abbr]:Abbreviation
 .
 *[Abbr]: Abbreviation
+
 ````````````````````````````````
 
 
@@ -26,6 +27,7 @@ Should work without trailing EOL
 *[Abbr]:Abbreviation
 .
 *[Abbr]: Abbreviation
+
 ````````````````````````````````
 
 
@@ -70,6 +72,7 @@ This has an Abbr embedded in it.
 .
 *[Abbr]: Abbreviation 1
 *[Abbre]: Abbreviation 2
+
 ````````````````````````````````
 
 
@@ -124,6 +127,7 @@ This is an Abbr and this is not [Abbr].
 
 .
 *[Abbr]: Abbreviation
+
 [Abbr]: http://test.com
 
 This is an Abbr and this is not [Abbr].
@@ -168,6 +172,7 @@ text with abbr3 embedded
 text with abbr1 embedded
 
 *[abbr1]: abbreviation1
+
 ````````````````````````````````
 
 

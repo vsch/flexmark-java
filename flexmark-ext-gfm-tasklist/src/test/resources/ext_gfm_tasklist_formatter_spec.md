@@ -74,6 +74,7 @@ default
         * list item 5.2.1
         * [ ] list item 5.2.2
         * [X] list item 5.2.3
+
 .
 Document[0, 664]
   BulletList[0, 664] isTight
@@ -242,6 +243,7 @@ Document[0, 664]
         * list item 5.2.1
         * [ ] list item 5.2.2
         * [X] list item 5.2.3
+
 ````````````````````````````````
 
 
@@ -307,6 +309,7 @@ Document[0, 664]
         * list item 5.2.1
         * [ ] list item 5.2.2
         * [x] list item 5.2.3
+
 ````````````````````````````````
 
 
@@ -372,6 +375,7 @@ Document[0, 664]
         * list item 5.2.1
         * [ ] list item 5.2.2
         * [X] list item 5.2.3
+
 ````````````````````````````````
 
 
@@ -439,6 +443,7 @@ sort undone first
         * [ ] list item 5.2.2
         * list item 5.2.1
         * [X] list item 5.2.3
+
 ````````````````````````````````
 
 
@@ -506,6 +511,7 @@ sort undone first, complete to non-tasks
     * [ ] list item 5.2.2
     * list item 5.2.1
     * list item 5.2.3
+
 ````````````````````````````````
 
 
@@ -573,6 +579,7 @@ sort undone or has undone first
     * list item 4.2.1
     * list item 4.2.2
     * list item 4.2.3
+
 ````````````````````````````````
 
 
@@ -640,6 +647,7 @@ sort undone or has undone first, complete to non-tasks
     * list item 4.2.1
     * list item 4.2.2
     * list item 4.2.3
+
 ````````````````````````````````
 
 
@@ -671,6 +679,7 @@ sort undone or has undone first, complete to non-tasks
         * list item 2.2.1
         * list item 2.2.2
         * [X] list item 2.2.3
+
 .
 Document[0, 259]
   BulletList[0, 259] isTight

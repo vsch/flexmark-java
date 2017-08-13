@@ -2,7 +2,7 @@
   <configuration default="false" name="FlexmarkFormatterTestSuite" type="JUnit" factoryName="JUnit" folderName="Format" singleton="true" nameIsGenerated="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.formatter.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

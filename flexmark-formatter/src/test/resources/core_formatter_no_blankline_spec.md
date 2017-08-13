@@ -75,10 +75,8 @@ Document[0, 304]
       Text[63, 74] chars:[63, 74, "block … quote"]
       SoftLineBreak[74, 75]
       Text[75, 92] chars:[75, 92, "lazy  … ation"]
-  BlankLine[93, 94]
   FencedCodeBlock[94, 181] open:[94, 97, "~~~"] info:[97, 101, "info"] content:[102, 178] lines[3] close:[178, 181, "~~~"]
     Text[102, 178] chars:[102, 178, "      … code\n"]
-  BlankLine[183, 184]
   IndentedCodeBlock[188, 260]
   OrderedList[260, 304] isTight delimiter:'.'
     OrderedListItem[260, 282] open:[260, 262, "1."] isTight
@@ -739,7 +737,6 @@ Document[0, 131]
       OrderedListItem[113, 131] open:[113, 115, "1."] isTight
         Paragraph[116, 131]
           Text[116, 131] chars:[116, 131, "numbe … tem 1"]
-  BlankLine[36, 39]
 ````````````````````````````````
 
 
@@ -885,15 +882,11 @@ another paragraph
 .
 paragraph
 
-
 another paragraph
 .
 Document[0, 31]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
-  BlankLine[12, 13]
   Paragraph[13, 31]
     Text[13, 30] chars:[13, 30, "anoth … graph"]
 ````````````````````````````````
@@ -916,10 +909,6 @@ another paragraph
 Document[0, 31]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
-  BlankLine[12, 13]
-  BlankLine[13, 14]
   Paragraph[14, 31]
     Text[14, 31] chars:[14, 31, "anoth … graph"]
 ````````````````````````````````
@@ -935,16 +924,11 @@ another paragraph
 .
 paragraph
 
-
 another paragraph
 .
 Document[0, 31]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
-  BlankLine[12, 13]
-  BlankLine[13, 14]
   Paragraph[14, 31]
     Text[14, 31] chars:[14, 31, "anoth … graph"]
 ````````````````````````````````
@@ -960,17 +944,11 @@ another paragraph
 .
 paragraph
 
-
-
 another paragraph
 .
 Document[0, 31]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
-  BlankLine[12, 13]
-  BlankLine[13, 14]
   Paragraph[14, 31]
     Text[14, 31] chars:[14, 31, "anoth … graph"]
 ````````````````````````````````
@@ -989,8 +967,6 @@ paragraph
 Document[0, 12]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
 ````````````````````````````````
 
 
@@ -1006,8 +982,6 @@ paragraph
 Document[0, 12]
   Paragraph[0, 10] isTrailingBlankLine
     Text[0, 9] chars:[0, 9, "paragraph"]
-  BlankLine[10, 11]
-  BlankLine[11, 12]
 ````````````````````````````````
 
 
@@ -1332,13 +1306,11 @@ paragraph 3
 paragraph 1 [ref2]
 
 [ref3]: /ref3
-
 [ref2]: /ref2/1
 
 paragraph 2
 
 [ref2]: /ref2/2
-
 [ref1]: /ref1
 
 paragraph 3
@@ -2018,9 +1990,7 @@ line 2
 Document[0, 36]
   Paragraph[0, 7] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "line 1"]
-  BlankLine[7, 8]
   HtmlBlock[8, 28]
-  BlankLine[28, 29]
   Paragraph[29, 36]
     Text[29, 35] chars:[29, 35, "line 2"]
 ````````````````````````````````
@@ -2042,9 +2012,7 @@ line 2
 Document[0, 34]
   Paragraph[0, 7] isTrailingBlankLine
     Text[0, 6] chars:[0, 6, "line 1"]
-  BlankLine[7, 8]
   HtmlBlock[8, 26]
-  BlankLine[26, 27]
   Paragraph[27, 34]
     Text[27, 33] chars:[27, 33, "line 2"]
 ````````````````````````````````

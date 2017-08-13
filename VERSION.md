@@ -6,6 +6,7 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.26.4](#0264)
 - [0.26.2](#0262)
 - [0.26.0](#0260)
 - [0.24.0](#0240)
@@ -170,19 +171,35 @@ flexmark-java
 
 &nbsp;</details>
 
+0.26.4
+------
+
+* Fix: #146, Formatter missing blank line after HTML blocks. General formatter issue if
+  `Parser.BLANK_LINES_IN_AST` was false. Affected elements:
+  
+  * Abbreviations
+  * Definitions
+  * Html Blocks
+  * Lists
+  
+* Fix: `Node.segmentSpanChars(StringBuilder, int, int, String, String, String, String)` would
+  not output the segment if `startOffset >= endOffset`, which would be the case if the node's
+  segment was replaced with a string. Now dumping the AST using `AstCollectingVisitor` will
+  reflect replaced segments. 
+
 0.26.2
 ------
 
 * Fix: #143, FlexmarkHtmlParser builders not static, merged #144, Update FlexmarkHtmlParser.java
 
-* Fix: make html parser instance re-usable, now resets state for each parse invocation 
+* Fix: make html parser instance re-usable, now resets state for each parse invocation
 
 0.26.0
 ------
 
 * Fix: Update parser to CommonMark Spec 0.28, the only effect on parsing is:
 
-  * `***foo***` is now parsed as `italic(bold())` whereas previously it was `bold(italic())`.
+  * `***foo***` is now parsed as `italic(bold(foo))` whereas previously it was `bold(italic(foo))`.
 
     Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the `Parser.STRONG_WRAPS_EMPHASIS`
     to `true` to get old parsing behaviour.

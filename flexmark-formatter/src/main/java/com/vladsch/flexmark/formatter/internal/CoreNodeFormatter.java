@@ -602,6 +602,10 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
         }
         document.set(LIST_ITEM_SPACING, listSpacing);
         document.set(LIST_ITEM_NUMBER, listItemNumber);
+
+        if (!node.isOrDescendantOfType(ListItem.class)) {
+            markdown.blankLine();
+        }
     }
 
     public static void renderListItem(
@@ -757,7 +761,9 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             // inner blocks handle rendering
             context.renderChildren(node);
         } else {
+            markdown.blankLine();
             markdown.append(node.getChars());
+            markdown.blankLine();
         }
     }
 

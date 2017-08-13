@@ -131,6 +131,7 @@ not a definition
 .
 - bullet item
   : definition item
+
 ````````````````````````````````
 
 
@@ -142,6 +143,7 @@ not a definition
 .
 1. numbered item
    : definition item
+
 ````````````````````````````````
 
 

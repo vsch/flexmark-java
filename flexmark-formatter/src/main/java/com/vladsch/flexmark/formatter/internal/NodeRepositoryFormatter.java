@@ -135,6 +135,9 @@ public abstract class NodeRepositoryFormatter<R extends NodeRepository<B>, B ext
             switch (getReferencePlacement()) {
                 case AS_IS:
                     renderReferenceBlock(node, context, markdown);
+                    if (node.getNext() == null || node.getNext().getClass() != node.getClass()) {
+                        markdown.blankLine();
+                    }
                     break;
 
                 case GROUP_WITH_FIRST:
