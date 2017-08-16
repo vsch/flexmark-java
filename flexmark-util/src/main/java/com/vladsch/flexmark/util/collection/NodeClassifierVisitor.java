@@ -58,13 +58,15 @@ public class NodeClassifierVisitor extends NodeVisitorBase implements NodeTracke
                 throw new IllegalStateException("Node must be inserted into the document before calling node tracker nodeAdded functions");
             }
 
-            int parentIndex = myClassifyingNodeTracker.getItems().indexOf(node.getParent());
-            if (parentIndex == -1) {
-                throw new IllegalStateException("Parent node: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
+            if (!(node.getParent() instanceof Document)) {
+                int parentIndex = myClassifyingNodeTracker.getItems().indexOf(node.getParent());
+                if (parentIndex == -1) {
+                    throw new IllegalStateException("Parent node: " + node.getParent() + " of " + node + " is not tracked, some post processor forgot to call tracker.nodeAdded().");
+                }
+    
+                BitSet ancestorBitSet = myNodeAncestryMap.get(parentIndex);
+                myNodeAncestryBitSet.setValue(ancestorBitSet);
             }
-
-            BitSet ancestorBitSet = myNodeAncestryMap.get(parentIndex);
-            myNodeAncestryBitSet.setValue(ancestorBitSet);
 
             // let'er rip to update the descendants
             myNodeAncestryBitSetStack.clear();
