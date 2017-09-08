@@ -1,7 +1,7 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
     <option name="myName" value="COPY_HTML_MIME" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="COPY_HTML_MIME">
-      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true">
+      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
@@ -63,7 +63,7 @@
         </StylesheetProvider>
         <ScriptProviders />
         <cssText>aside                        { margin:0;padding:0 0 0 10pt;border-left:2pt solid #C80010; }
-blockquote                   { margin:0;padding:0 0 0 10pt;border-left:2pt solid #bbb;color:#666; }
+blockquote                   { margin:0;padding:0 0 0 10;border-left:2pt solid #bbb;color:#666; }
 blockquote h1                { margin:1.3em 0 1em;padding:0;font-weight:bold;font-size:1.6em;border-bottom:1pt solid #ddd;color:#666; }
 blockquote h2                { margin:1.3em 0 1em;padding:0;font-weight:bold;font-size:1.5em;border-bottom:1px solid #eee;color:#666; }
 blockquote h3                { margin:1.0em 0 1em;padding:0;font-weight:bold;font-size:1.4em;color:#666; }

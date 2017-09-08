@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="MarkdownProjectSettings">
-    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true">
+    <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="0.8" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="false" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
       <PanelProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
       </PanelProvider>
@@ -48,7 +48,7 @@
         <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
       </ParserOptions>
     </ParserSettings>
-    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true">
+    <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false">
       <GeneratorProvider>
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
       </GeneratorProvider>
@@ -62,7 +62,6 @@
         <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
       </StylesheetProvider>
       <ScriptProviders>
-        <provider providerId="com.vladsch.idea.multimarkdown.editor.github-collapse-in-comment.html.script" providerName="Details tag opener" />
         <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
       </ScriptProviders>
       <cssText>code {

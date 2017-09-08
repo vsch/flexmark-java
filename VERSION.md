@@ -6,6 +6,8 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+- [0.27.0](#0270)
+- [0.26.6](#0266)
 - [0.26.4](#0264)
 - [0.26.2](#0262)
 - [0.26.0](#0260)
@@ -171,21 +173,42 @@ flexmark-java
 
 &nbsp;</details>
 
+0.27.0
+------
+
+* Fix: add `<strike>` to HTML Parser as equivalent to `<del>` for OfficeLibre compatibility
+
+* Fix: HTML to Markdown conversion should treat text wrapped in `<div>` as having an EOL at the end
+  of the div to keep the text on separate lines.
+
+* API Change: `NodeRendererContext` parameter for `LinkResolver` and `LinkResolverFactory` was
+  changed to `LinkResolverContext` to allow for non-html renderer usage of link resolvers (DocX
+  Converter). Methods that did not relate to HTMLRendering are now part of the link resolver
+  context. The rest are not accessible. If you have an issue with the change please open an issue.
+
+* Add: `flexmark-docx-converter` module to render Markdown documents to docx using docx4j API.
+
+0.26.6
+------
+
+* Fix: Source Line based position HTML rendering would break links with text spanning multiple
+  lines.
+
 0.26.4
 ------
 
 * Fix: #146, Formatter missing blank line after HTML blocks. General formatter issue if
   `Parser.BLANK_LINES_IN_AST` was false. Affected elements:
-  
+
   * Abbreviations
   * Definitions
   * Html Blocks
   * Lists
-  
+
 * Fix: `Node.segmentSpanChars(StringBuilder, int, int, String, String, String, String)` would
   not output the segment if `startOffset >= endOffset`, which would be the case if the node's
   segment was replaced with a string. Now dumping the AST using `AstCollectingVisitor` will
-  reflect replaced segments. 
+  reflect replaced segments.
 
 0.26.2
 ------

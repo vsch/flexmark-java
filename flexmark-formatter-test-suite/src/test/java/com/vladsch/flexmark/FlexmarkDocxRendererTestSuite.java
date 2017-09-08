@@ -37,7 +37,7 @@ import org.junit.runners.Suite;
         //ComboXWikiMacroFormatterSpecTest.class,
         ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
-        ComboFormatterTestSuiteSpecTest.class,
+        ComboDocxRendererTestSuiteSpecTest.class,
 })
-public class FlexmarkFormatterTestSuite {
+public class FlexmarkDocxRendererTestSuite {
 }

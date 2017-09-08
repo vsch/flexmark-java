@@ -6542,3 +6542,40 @@ Document[0, 23]
       Text[1, 5] chars:[1, 5, "link"]
 ````````````````````````````````
 
+
+Line source tracing should not split links and should chunk text content into their own spans
+
+```````````````````````````````` example(Spec 0.28 Changes: 20) options(src-pos, src-pos-lines)
+[hello
+world](#test)
+.
+<p md-pos="0-20"><span md-pos="0-6"><a href="#test" md-pos="0-20"><span md-pos="0-6">hello</span>
+<span md-pos="7-12">world</span></a></span></p>
+.
+Document[0, 20]
+  Paragraph[0, 20]
+    Link[0, 20] textOpen:[0, 1, "["] text:[1, 12, "hello\nworld"] textClose:[12, 13, "]"] linkOpen:[13, 14, "("] url:[14, 19, "#test"] pageRef:[14, 14] anchorMarker:[14, 15, "#"] anchorRef:[15, 19, "test"] linkClose:[19, 20, ")"]
+      Text[1, 6] chars:[1, 6, "hello"]
+      SoftLineBreak[6, 7]
+      Text[7, 12] chars:[7, 12, "world"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Spec 0.28 Changes: 21) options(src-pos, src-pos-lines)
+[hello **bold
+  world**](#test)
+.
+<p md-pos="0-31"><span md-pos="0-13"><a href="#test" md-pos="0-31"><span md-pos="0-13">hello <strong>bold</strong></span>
+<span md-pos="16-21"><strong>world</strong></span></a></span></p>
+.
+Document[0, 31]
+  Paragraph[0, 31]
+    Link[0, 31] textOpen:[0, 1, "["] text:[1, 23, "hello **bold\nworld**"] textClose:[23, 24, "]"] linkOpen:[24, 25, "("] url:[25, 30, "#test"] pageRef:[25, 25] anchorMarker:[25, 26, "#"] anchorRef:[26, 30, "test"] linkClose:[30, 31, ")"]
+      Text[1, 7] chars:[1, 7, "hello "]
+      StrongEmphasis[7, 23] textOpen:[7, 9, "**"] text:[9, 21, "bold\nworld"] textClose:[21, 23, "**"]
+        Text[9, 13] chars:[9, 13, "bold"]
+        SoftLineBreak[13, 14]
+        Text[16, 21] chars:[16, 21, "world"]
+````````````````````````````````
+
+

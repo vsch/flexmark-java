@@ -2,6 +2,7 @@ package com.vladsch.flexmark.test;
 
 import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -72,7 +73,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
     }
 
     protected String readStream(InputStream stream) {
-        try  {
+        try {
             String line;
             StringBuilder out = new StringBuilder();
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
@@ -83,6 +84,17 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
             return out.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    @Test
+    public void testHtmlRendering() {
+        if (!example.isSpecExample()) return;
+
+        if (example.getAst() != null) {
+            assertRenderingAst(example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
+        } else {
+            assertRendering(example.getSource(), example.getHtml(), example.getOptionsSet());
         }
     }
 
@@ -100,16 +112,5 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         }
 
         assertEquals(fullSpec, actual);
-    }
-
-    @Test
-    public void testHtmlRendering() {
-        if (!example.isSpecExample()) return;
-
-        if (example.getAst() != null) {
-            assertRenderingAst(example.getSource(), example.getHtml(), example.getAst(), example.getOptionsSet());
-        } else {
-            assertRendering(example.getSource(), example.getHtml(), example.getOptionsSet());
-        }
     }
 }

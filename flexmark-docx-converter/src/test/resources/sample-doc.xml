@@ -1,0 +1,1007 @@
+<w:document mc:Ignorable="w14 wp14">
+    <w:body>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading1"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:spacing w:before="240" w:after="120"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">Heading 1 </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:i/>
+                    <w:iCs/>
+                </w:rPr>
+                <w:t>italic</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading2"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">Heading 2 </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:b/>
+                    <w:bCs/>
+                </w:rPr>
+                <w:t>bold</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading3"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">Heading 3 </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:strike/>
+                </w:rPr>
+                <w:t>strike-though</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading4"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">Heading 4 </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="SourceText"/>
+                    <w:bdr w:val="single" w:color="EEC5E1" w:sz="2" w:space="1"/>
+                </w:rPr>
+                <w:t>inline-code</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading5"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>Heading 5</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Heading6"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="0"/>
+                </w:numPr>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>Heading 6</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="HorizontalLine"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="ParagraphTextBody"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">Sample paragraph with </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="StrongEmphasis"/>
+                </w:rPr>
+                <w:t>bold</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Emphasis"/>
+                </w:rPr>
+                <w:t>italic</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Emphasis"/>
+                    <w:b/>
+                    <w:bCs/>
+                </w:rPr>
+                <w:t>bold-italic</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Style3"/>
+                    <w:u w:val="single"/>
+                </w:rPr>
+                <w:t>underline</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="Style3"/>
+                    <w:strike/>
+                </w:rPr>
+                <w:t>strike-through</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:position w:val="8"/>
+                    <w:sz w:val="19"/>
+                </w:rPr>
+                <w:t>superscript</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:sz w:val="19"/>
+                </w:rPr>
+                <w:t>subscript</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rStyle w:val="SourceText"/>
+                    <w:bdr w:val="single" w:color="EEC5E1" w:sz="2" w:space="1"/>
+                </w:rPr>
+                <w:t>inline-code</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:rPr>
+                    <w:rStyle w:val="SourceText"/>
+                    <w:bdr w:val="single" w:color="EEC5E1" w:sz="2" w:space="1"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>list 1</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="1"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 2 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="2"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 3 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="3"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 4 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="4"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 5 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="5"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 6 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="6"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 7 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="7"/>
+                    <w:numId w:val="2"/>
+                </w:numPr>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">list 8 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 1 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="1"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 2 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="2"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 3 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="3"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 4 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="4"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 5 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="5"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 6 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="6"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 7 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="7"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve">num list 8 </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="0"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>num list 1 item 2</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:numPr>
+                    <w:ilvl w:val="1"/>
+                    <w:numId w:val="3"/>
+                </w:numPr>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>num list 1 item 2 sub item 1</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="TextBody"/>
+                <w:tabs>
+                    <w:tab w:val="left" w:leader="none" w:pos="0"/>
+                </w:tabs>
+                <w:spacing w:before="0" w:after="0"/>
+                <w:ind w:left="707" w:right="0" w:hanging="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:bidi w:val="false"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>block quote 1</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="CCCCCC" w:sz="16" w:space="9"/>
+                </w:pBdr>
+                <w:bidi w:val="false"/>
+                <w:ind w:left="1134" w:right="567" w:hanging="0"/>
+                <w:jc w:val="left"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>block quote 2</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="1701" w:right="1701" w:hanging="0"/>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 3</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="2268" w:right="2268" w:hanging="0"/>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 4</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="2835" w:right="2835" w:hanging="0"/>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 5</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="3402" w:right="3402" w:hanging="0"/>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 6</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="3969" w:right="3969" w:hanging="0"/>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 7</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Quotations"/>
+                <w:pBdr>
+                    <w:left w:val="single" w:color="BBBBBB" w:sz="16" w:space="10"/>
+                </w:pBdr>
+                <w:ind w:left="4536" w:right="4536" w:hanging="0"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:color w:val="666666"/>
+                </w:rPr>
+                <w:t>block quote 8</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="PreformattedText"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>pre-formatted code</w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="PreformattedText"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+                <w:t>next code line</w:t>
+            </w:r>
+        </w:p>
+        <w:tbl>
+            <w:tblPr>
+                <w:tblW w:w="9972" w:type="dxa"/>
+                <w:jc w:val="left"/>
+                <w:tblInd w:w="34" w:type="dxa"/>
+                <w:tblBorders>
+                    <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                    <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                    <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                    <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                    <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                    <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                </w:tblBorders>
+                <w:tblCellMar>
+                    <w:top w:w="55" w:type="dxa"/>
+                    <w:left w:w="27" w:type="dxa"/>
+                    <w:bottom w:w="55" w:type="dxa"/>
+                    <w:right w:w="55" w:type="dxa"/>
+                </w:tblCellMar>
+            </w:tblPr>
+            <w:tblGrid>
+                <w:gridCol w:w="4986"/>
+                <w:gridCol w:w="4986"/>
+            </w:tblGrid>
+            <w:tr>
+                <w:trPr>
+                    <w:tblHeader w:val="true"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="9972" w:type="dxa"/>
+                        <w:gridSpan w:val="2"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableHeading"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t xml:space="preserve">Combined header </w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr>
+                <w:trPr>
+                    <w:tblHeader w:val="true"/>
+                </w:trPr>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="4986" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableHeading"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t>Header 1</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="4986" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableHeading"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t>Header 2</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr>
+                <w:trPr/>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="4986" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableContents"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t>Data 1</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="4986" w:type="dxa"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableContents"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t>Data 2</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+            <w:tr>
+                <w:trPr/>
+                <w:tc>
+                    <w:tcPr>
+                        <w:tcW w:w="9972" w:type="dxa"/>
+                        <w:gridSpan w:val="2"/>
+                        <w:tcBorders>
+                            <w:top w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:left w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:right w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideH w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                            <w:insideV w:val="single" w:color="000001" w:sz="2" w:space="0"/>
+                        </w:tcBorders>
+                        <w:shd w:val="clear" w:fill="FFFFFF"/>
+                        <w:tcMar>
+                            <w:left w:w="27" w:type="dxa"/>
+                        </w:tcMar>
+                    </w:tcPr>
+                    <w:p>
+                        <w:pPr>
+                            <w:pStyle w:val="TableContents"/>
+                            <w:rPr/>
+                        </w:pPr>
+                        <w:r>
+                            <w:rPr/>
+                            <w:t>Combined data</w:t>
+                        </w:r>
+                    </w:p>
+                </w:tc>
+            </w:tr>
+        </w:tbl>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:hyperlink r:id="rId2">
+                <w:r>
+                    <w:rPr>
+                        <w:rStyle w:val="InternetLink"/>
+                    </w:rPr>
+                    <w:t>www.sample.com</w:t>
+                </w:r>
+            </w:hyperlink>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:hyperlink r:id="rId3">
+                <w:r>
+                    <w:rPr>
+                        <w:rStyle w:val="InternetLink"/>
+                    </w:rPr>
+                    <w:t>mailto:me@sample.com</w:t>
+                </w:r>
+            </w:hyperlink>
+            <w:r>
+                <w:rPr/>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr/>
+            </w:pPr>
+            <w:hyperlink r:id="rId4">
+                <w:r>
+                    <w:rPr>
+                        <w:rStyle w:val="InternetLink"/>
+                        <w:b w:val="false"/>
+                        <w:bCs w:val="false"/>
+                    </w:rPr>
+                    <w:t xml:space="preserve">Sample Link </w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+                        <w:rStyle w:val="InternetLink"/>
+                        <w:b/>
+                        <w:bCs/>
+                    </w:rPr>
+                    <w:t>Bold</w:t>
+                </w:r>
+            </w:hyperlink>
+        </w:p>
+        <w:p>
+            <w:pPr>
+                <w:pStyle w:val="Normal"/>
+                <w:rPr>
+                    <w:b/>
+                    <w:bCs/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr/>
+            </w:r>
+        </w:p>
+        <w:sectPr>
+            <w:type w:val="nextPage"/>
+            <w:pgSz w:w="12240" w:h="15840"/>
+            <w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="0" w:footer="0" w:gutter="0"/>
+            <w:pgNumType w:fmt="decimal"/>
+            <w:formProt w:val="false"/>
+            <w:textDirection w:val="lrTb"/>
+            <w:docGrid w:type="default" w:linePitch="240" w:charSpace="4294961151"/>
+        </w:sectPr>
+    </w:body>
+</w:document>

@@ -41,9 +41,13 @@
     <orderEntry type="module" module-name="flexmark-ext-ins" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-superscript" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-xwiki-macros" scope="TEST" />
-    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" />
-    <orderEntry type="module" module-name="flexmark-html-parser" />
-    <orderEntry type="module" module-name="flexmark-formatter" />
+    <orderEntry type="module" module-name="flexmark-ext-jekyll-tag" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-html-parser" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-formatter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-docx-converter" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-issues" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-gfm-users" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-pdf-converter" scope="TEST" />
     <orderEntry type="library" name="R User Library" level="project" />
     <orderEntry type="library" name="R Skeletons" level="application" />
   </component>

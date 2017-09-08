@@ -1,5 +1,5 @@
 ---
-title: Formatter Extension Spec
+title: DocxRenderer
 author:
 version:
 date: '2016-06-06'

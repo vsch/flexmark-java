@@ -2977,7 +2977,8 @@ see more
 
 Though i am not getting any error ...no pdf is getting created
 
-see more <footer class="comment__footer"> <menu class="comment-footer__menu">
+see more
+<footer class="comment__footer"> <menu class="comment-footer__menu">
 * [2](# "")
 * •
 * [Reply](#)
@@ -3451,7 +3452,8 @@ don't create a multi-line image url if no new line after ?
 [Click To Add a Title](javascript:void(0))
 ==========================================
 
-[project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring) Only the first 2500 issues are exported because of the "Max Issues to Export" setting.
+[project: Kotlin State: -Fixed,-Duplicate,-Rejected,-{As Designed},-Obsolete type: Feature,{Feature Group} refactoring](/issues?q=project%3A+Kotlin+State%3A+-Fixed%2C-Duplicate%2C-Rejected%2C-%7BAs+Designed%7D%2C-Obsolete+++type%3A+Feature%2C%7BFeature+Group%7D++refactoring)
+Only the first 2500 issues are exported because of the "Max Issues to Export" setting.
 
 Feature
 :   [KT-2615](/issue/KT-2615)

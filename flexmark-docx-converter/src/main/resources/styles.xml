@@ -1,0 +1,388 @@
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+    <w:docDefaults>
+        <w:rPrDefault>
+            <w:rPr>
+                <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+                <w:sz w:val="20"/>
+                <w:szCs w:val="24"/>
+                <w:lang w:val="en-CA" w:eastAsia="zh-CN" w:bidi="hi-IN"/>
+            </w:rPr>
+        </w:rPrDefault>
+        <w:pPrDefault>
+            <w:pPr/>
+        </w:pPrDefault>
+    </w:docDefaults>
+    <w:style w:type="paragraph" w:styleId="Normal">
+        <w:name w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:widowControl/>
+            <w:kinsoku w:val="true"/>
+            <w:overflowPunct w:val="true"/>
+            <w:autoSpaceDE w:val="true"/>
+            <w:bidi w:val="false"/>
+            <w:jc w:val="left"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:color w:val="00000A"/>
+            <w:sz w:val="24"/>
+            <w:szCs w:val="24"/>
+            <w:lang w:val="en-CA" w:eastAsia="zh-CN" w:bidi="hi-IN"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading1">
+        <w:name w:val="Heading 1"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="1"/>
+            </w:pBdr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="240" w:after="120"/>
+            <w:jc w:val="left"/>
+            <w:outlineLvl w:val="0"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs/>
+            <w:sz w:val="48"/>
+            <w:szCs w:val="48"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading2">
+        <w:name w:val="Heading 2"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="1"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:bottom w:val="single" w:color="000001" w:sz="2" w:space="1"/>
+            </w:pBdr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="200" w:after="120"/>
+            <w:jc w:val="left"/>
+            <w:outlineLvl w:val="1"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs/>
+            <w:sz w:val="36"/>
+            <w:szCs w:val="36"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading3">
+        <w:name w:val="Heading 3"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="2"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:spacing w:before="140" w:after="120"/>
+            <w:outlineLvl w:val="2"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading4">
+        <w:name w:val="Heading 4"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="3"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:spacing w:before="120" w:after="120"/>
+            <w:outlineLvl w:val="3"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs/>
+            <w:sz w:val="24"/>
+            <w:szCs w:val="24"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading5">
+        <w:name w:val="Heading 5"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="4"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:spacing w:before="120" w:after="60"/>
+            <w:outlineLvl w:val="4"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs/>
+            <w:sz w:val="20"/>
+            <w:szCs w:val="20"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading6">
+        <w:name w:val="Heading 6"/>
+        <w:basedOn w:val="Heading"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:numPr>
+                <w:ilvl w:val="5"/>
+                <w:numId w:val="1"/>
+            </w:numPr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="60" w:after="60"/>
+            <w:outlineLvl w:val="5"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Serif" w:hAnsi="Liberation Serif" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:b/>
+            <w:bCs w:val="false"/>
+            <w:i/>
+            <w:color w:val="666666"/>
+            <w:sz w:val="20"/>
+            <w:szCs w:val="14"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="StrongEmphasis">
+        <w:name w:val="Strong Emphasis"/>
+        <w:qFormat/>
+        <w:rPr>
+            <w:b/>
+            <w:bCs/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Emphasis">
+        <w:name w:val="Emphasis"/>
+        <w:qFormat/>
+        <w:rPr>
+            <w:i/>
+            <w:iCs/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="SourceText">
+        <w:name w:val="Source Text"/>
+        <w:qFormat/>
+        <w:rPr>
+            <w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:eastAsia="Courier New" w:cs="Liberation Mono"/>
+            <w:color w:val="BB002F"/>
+            <w:shd w:val="clear" w:color="auto" w:fill="FFF8E6"/>
+            <w:bdr w:val="single" w:color="EEC5E1" w:sz="2" w:space="1" w:frame="true"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="Bullets">
+        <w:name w:val="Bullets"/>
+        <w:qFormat/>
+        <w:rPr>
+            <w:rFonts w:ascii="OpenSymbol" w:hAnsi="OpenSymbol" w:eastAsia="OpenSymbol" w:cs="OpenSymbol"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="character" w:styleId="NumberingSymbols">
+        <w:name w:val="Numbering Symbols"/>
+        <w:qFormat/>
+        <w:rPr/>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Heading">
+        <w:name w:val="Heading"/>
+        <w:basedOn w:val="Normal"/>
+        <w:next w:val="TextBody"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:keepNext/>
+            <w:spacing w:before="240" w:after="120"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Liberation Sans" w:hAnsi="Liberation Sans" w:eastAsia="SimSun" w:cs="Lucida Sans"/>
+            <w:sz w:val="28"/>
+            <w:szCs w:val="28"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TextBody">
+        <w:name w:val="Body Text"/>
+        <w:basedOn w:val="Normal"/>
+        <w:pPr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="0" w:after="0" w:line="288" w:lineRule="auto"/>
+        </w:pPr>
+        <w:rPr/>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="List">
+        <w:name w:val="List"/>
+        <w:basedOn w:val="TextBody"/>
+        <w:pPr/>
+        <w:rPr>
+            <w:rFonts w:cs="Lucida Sans"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Caption">
+        <w:name w:val="Caption"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:suppressLineNumbers/>
+            <w:spacing w:before="120" w:after="120"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:cs="Lucida Sans"/>
+            <w:i/>
+            <w:iCs/>
+            <w:sz w:val="24"/>
+            <w:szCs w:val="24"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Index">
+        <w:name w:val="Index"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:suppressLineNumbers/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:cs="Lucida Sans"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="HorizontalLine">
+        <w:name w:val="Horizontal Line"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:suppressLineNumbers/>
+            <w:pBdr>
+                <w:bottom w:val="single" w:color="808080" w:sz="6" w:space="0"/>
+            </w:pBdr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="0" w:after="283"/>
+            <w:jc w:val="left"/>
+        </w:pPr>
+        <w:rPr>
+            <w:sz w:val="12"/>
+            <w:szCs w:val="12"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="Quotations">
+        <w:name w:val="Quotations"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:pBdr>
+                <w:left w:val="single" w:color="CCCCCC" w:sz="16" w:space="9"/>
+            </w:pBdr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="0" w:after="283"/>
+            <w:ind w:left="240" w:right="0" w:hanging="0"/>
+            <w:jc w:val="left"/>
+        </w:pPr>
+        <w:rPr>
+            <w:color w:val="666666"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="PreformattedText">
+        <w:name w:val="Preformatted Text"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:pBdr>
+                <w:top w:val="single" w:color="B2B2B2" w:sz="2" w:space="1"/>
+                <w:left w:val="single" w:color="B2B2B2" w:sz="2" w:space="1"/>
+                <w:bottom w:val="single" w:color="B2B2B2" w:sz="2" w:space="1"/>
+                <w:right w:val="single" w:color="B2B2B2" w:sz="2" w:space="1"/>
+            </w:pBdr>
+            <w:shd w:val="clear" w:fill="EEEEEE"/>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="240" w:after="240"/>
+            <w:contextualSpacing/>
+            <w:jc w:val="left"/>
+        </w:pPr>
+        <w:rPr>
+            <w:rFonts w:ascii="Courier New" w:hAnsi="Courier New" w:eastAsia="Courier New" w:cs="Liberation Mono"/>
+            <w:sz w:val="20"/>
+            <w:szCs w:val="20"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TableContents">
+        <w:name w:val="Table Contents"/>
+        <w:basedOn w:val="Normal"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:suppressLineNumbers/>
+        </w:pPr>
+        <w:rPr/>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="TableHeading">
+        <w:name w:val="Table Heading"/>
+        <w:basedOn w:val="TableContents"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:suppressLineNumbers/>
+            <w:shd w:val="clear" w:fill="EEEEEE"/>
+            <w:bidi w:val="false"/>
+            <w:jc w:val="center"/>
+        </w:pPr>
+        <w:rPr>
+            <w:b/>
+            <w:bCs w:val="false"/>
+        </w:rPr>
+    </w:style>
+    <w:style w:type="paragraph" w:styleId="ParagraphTextBody">
+        <w:name w:val="Paragraph Text Body"/>
+        <w:basedOn w:val="TextBody"/>
+        <w:qFormat/>
+        <w:pPr>
+            <w:bidi w:val="false"/>
+            <w:spacing w:before="240" w:after="120"/>
+        </w:pPr>
+        <w:rPr/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="List1">
+        <w:name w:val="List 1"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="List2">
+        <w:name w:val="List 2"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="List3">
+        <w:name w:val="List 3"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="List4">
+        <w:name w:val="List 4"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="List5">
+        <w:name w:val="List 5"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="Numbering1">
+        <w:name w:val="Numbering 1"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="Numbering2">
+        <w:name w:val="Numbering 2"/>
+        <w:qFormat/>
+    </w:style>
+    <w:style w:type="numbering" w:styleId="Numbering3">
+        <w:name w:val="Numbering 3"/>
+        <w:qFormat/>
+    </w:style>
+</w:styles>

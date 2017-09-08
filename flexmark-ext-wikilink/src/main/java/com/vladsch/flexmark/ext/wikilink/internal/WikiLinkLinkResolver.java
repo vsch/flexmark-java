@@ -4,10 +4,7 @@ import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.LinkStatus;
-import com.vladsch.flexmark.html.renderer.LinkType;
-import com.vladsch.flexmark.html.renderer.NodeRendererContext;
-import com.vladsch.flexmark.html.renderer.ResolvedLink;
+import com.vladsch.flexmark.html.renderer.*;
 
 import java.util.Set;
 
@@ -18,12 +15,12 @@ public class WikiLinkLinkResolver implements LinkResolver {
     private static String toChars = "-----";
     private final WikiLinkOptions options;
 
-    public WikiLinkLinkResolver(NodeRendererContext context) {
+    public WikiLinkLinkResolver(LinkResolverContext context) {
         this.options = new WikiLinkOptions(context.getOptions());
     }
 
     @Override
-    public ResolvedLink resolveLink(Node node, NodeRendererContext context, ResolvedLink link) {
+    public ResolvedLink resolveLink(Node node, LinkResolverContext context, ResolvedLink link) {
         if (link.getLinkType() == WIKI_LINK) {
             StringBuilder sb = new StringBuilder();
             final boolean isWikiImage = node instanceof WikiImage;
@@ -82,7 +79,7 @@ public class WikiLinkLinkResolver implements LinkResolver {
         }
 
         @Override
-        public LinkResolver create(NodeRendererContext context) {
+        public LinkResolver create(LinkResolverContext context) {
             return new WikiLinkLinkResolver(context);
         }
     }

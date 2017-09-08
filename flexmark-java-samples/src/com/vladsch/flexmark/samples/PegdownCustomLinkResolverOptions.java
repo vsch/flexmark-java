@@ -40,14 +40,14 @@ public class PegdownCustomLinkResolverOptions {
     }
 
     static class CustomLinkResolver implements LinkResolver {
-        public CustomLinkResolver(final NodeRendererContext context) {
+        public CustomLinkResolver(final LinkResolverContext context) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final NodeRendererContext context, final ResolvedLink link) {
+        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
             // you can also set/clear/modify attributes through ResolvedLink.getAttributes() and ResolvedLink.getNonNullAttributes()
 
             if (node instanceof WikiImage) {
@@ -85,7 +85,7 @@ public class PegdownCustomLinkResolverOptions {
             }
 
             @Override
-            public LinkResolver create(final NodeRendererContext context) {
+            public LinkResolver create(final LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }

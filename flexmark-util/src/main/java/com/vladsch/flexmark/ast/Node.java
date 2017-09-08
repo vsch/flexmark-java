@@ -38,6 +38,18 @@ public abstract class Node {
         return null;
     }
 
+    public int countAncestorsOfType(Class... classes) {
+        Node parent = getParent();
+        int count = 0;
+        while (parent != null) {
+            for (Class nodeType : classes) {
+                if (nodeType.isInstance(parent)) count++;
+            }
+            parent = parent.getParent();
+        }
+        return count;
+    }
+
     public Node getOldestAncestorOfTypeAfter(final Class ancestor, final Class after) {
         Node parent = getParent();
         Node oldestAncestor = null;

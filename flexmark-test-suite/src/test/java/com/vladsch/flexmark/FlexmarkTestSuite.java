@@ -1,6 +1,7 @@
 package com.vladsch.flexmark;
 
 import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
+import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
 import com.vladsch.flexmark.ext.aside.ExtAsideTestSuite;
@@ -68,7 +69,8 @@ import org.junit.runners.Suite;
         YouTrackConverterTestSuite.class,
         IntegrationTestSuite.class,
         PegdownProfileTestSuite.class,
-        FlexmarkFormatterTestSuite.class,
+        FlexmarkDocxRendererTestSuite.class,
+        DocxConverterTestSuite.class,
 })
 public class FlexmarkTestSuite {
 }

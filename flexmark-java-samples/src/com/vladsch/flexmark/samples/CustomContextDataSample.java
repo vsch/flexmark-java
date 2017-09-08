@@ -7,6 +7,7 @@ import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
 import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.NodeRendererContext;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
@@ -45,15 +46,15 @@ public class CustomContextDataSample {
 
     static class CustomLinkResolver implements LinkResolver {
 
-        public CustomLinkResolver(final NodeRendererContext context) {
+        public CustomLinkResolver(final LinkResolverContext options) {
             // can use context for custom settings
             // context.getDocument();
             // context.getHtmlOptions();
         }
 
         @Override
-        public ResolvedLink resolveLink(final Node node, final NodeRendererContext context, final ResolvedLink link) {
-            Document document = context.getDocument();
+        public ResolvedLink resolveLink(final Node node, final LinkResolverContext context, final ResolvedLink link) {
+            Document document = node.getDocument();
             XhtmlContent xhtmlContent = document.get(XHTML_CONTENT);
 
             if (node instanceof WikiImage) {
@@ -91,7 +92,7 @@ public class CustomContextDataSample {
             }
 
             @Override
-            public LinkResolver create(final NodeRendererContext context) {
+            public LinkResolver create(final LinkResolverContext context) {
                 return new CustomLinkResolver(context);
             }
         }

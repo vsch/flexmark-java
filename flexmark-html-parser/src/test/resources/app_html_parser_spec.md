@@ -3935,4 +3935,44 @@ td
 ````````````````````````````````
 
 
+## Apple Mail
+
+text wrapped in div should be treated as having a hard break at the end.
+
+```````````````````````````````` example Apple Mail: 1
+P.S. I will focus on the conversion of elements you listed in your prioritized list but will
+implement all markdown elements for the final version of the module. I like orthogonal solutions
+that require as little effort in use as much as possible.
+.
+<div style="color: rgb(0, 0, 0); font-family: 'American Typewriter'; font-size: 14px; font-style: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: auto; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: auto; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;"><div><div>P.S. I will focus on the conversion of elements you listed in your prioritized list but will</div><div>implement all markdown elements for the final version of the module. I like orthogonal solutions</div><div>that require as little effort in use as much as possible.</div></div></div><br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+## Office Libre 
+
+Uses `<strike>` tags instead of del.
+
+```````````````````````````````` example Office Libre: 1
+~~strike-through~~
+.
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+→<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+→<title></title>
+→<meta name="generator" content="LibreOffice 5.2.3.3 (MacOSX)"/>
+→<style type="text/css">
+→→@page { margin: 2cm }
+→→p { margin-bottom: 0.25cm; direction: ltr; color: #00000a; line-height: 120%; text-align: left; orphans: 2; widows: 2 }
+→→p.western { font-family: "Liberation Serif", serif; font-size: 12pt; so-language: en-CA }
+→→p.cjk { font-family: "SimSun"; font-size: 12pt; so-language: zh-CN }
+→→p.ctl { font-family: "Lucida Sans"; font-size: 12pt; so-language: hi-IN }
+→</style>
+</head>
+<body lang="en-CA" text="#00000a" dir="ltr">
+<p class="western"><strike>strike-through</strike></p>
+</body>
+</html>
+````````````````````````````````
+
 

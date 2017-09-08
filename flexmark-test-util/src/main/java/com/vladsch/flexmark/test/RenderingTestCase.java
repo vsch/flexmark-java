@@ -123,6 +123,10 @@ public abstract class RenderingTestCase {
 
     }
 
+    protected void testCase(Node node, DataHolder options) {
+
+    }
+
     protected void actualHtml(String html, String optionSet) {
 
     }
@@ -156,6 +160,7 @@ public abstract class RenderingTestCase {
 
         Node node = parser().withOptions(options).parse(parseSource);
         String html = renderer().withOptions(options).render(node);
+        testCase(node, options);
         actualHtml(html, optionsSet);
         boolean useActualHtml = useActualHtml();
 
@@ -197,6 +202,7 @@ public abstract class RenderingTestCase {
 
         Node node = parser().withOptions(options).parse(parseSource);
         String html = renderer().withOptions(options).render(node);
+        testCase(node, options);
         actualHtml(html, optionsSet);
         String ast = ast(node);
         actualAst(ast, optionsSet);

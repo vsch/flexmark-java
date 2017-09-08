@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="FrameworkDetectionExcludesConfiguration" detection-enabled="false">
-    <file type="android" url="file://$PROJECT_DIR$/flexmark-android-test" />
-  </component>
   <component name="JavadocGenerationManager">
     <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/out/javadoc" />
     <option name="OPTION_SCOPE" value="protected" />
@@ -29,6 +26,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/flexmark-all/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" />
@@ -37,9 +35,11 @@
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-gfm-issues/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-strikethrough/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-tables/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-tasklist/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-gfm-users/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-ins/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-front-matter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-jekyll-tag/pom.xml" />

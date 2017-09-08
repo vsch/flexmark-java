@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
+import static com.vladsch.flexmark.util.sequence.BasedSequence.EOL_CHARS;
 
 /**
  * The node renderer that renders all the core nodes (comes last in the order of node renderers).
@@ -424,24 +425,56 @@ public class CoreNodeRenderer implements NodeRenderer {
                 myLines = breakCollectingVisitor.collectAndGetRanges(node);
                 myEOLs = breakCollectingVisitor.getEOLs();
                 myNextLine = 0;
-                int startOffset = node.getFirstChild().getStartOffset();
-                final Range range = myLines.get(myNextLine);
-                int eolLength = myEOLs.get(myNextLine);
-                myNextLine++;
 
-                // remove trailing spaces from text
-                eolLength += node.getChars().baseSubSequence(startOffset, range.getEnd() - eolLength).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
-
-                html.srcPos(startOffset, range.getEnd() - eolLength).withAttr(PARAGRAPH_LINE).tag("span");
-                nextLineStartOffset = range.getEnd();
-                nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
-
+                outputSourceLineSpan(node, node.getFirstChild(), node, html);
                 context.renderChildren(node);
                 html.tag("/span");
                 return;
             }
         }
         context.renderChildren(node);
+    }
+
+    private void outputSourceLineSpan(final Node parentNode, final Node startNode, final Node endNode, final HtmlWriter html) {
+        int startOffset = startNode.getStartOffset();
+        final Range range = myLines.get(myNextLine);
+        int eolLength = myEOLs.get(myNextLine);
+
+        // remove trailing spaces from text
+        int endOffset = endNode.getEndOffset();
+        if (range.getEnd() <= endOffset) {
+            endOffset = range.getEnd();
+            endOffset -= eolLength;
+            endOffset -= parentNode.getChars().baseSubSequence(startOffset, endOffset).countTrailing(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            myNextLine++;
+            nextLineStartOffset = range.getEnd();
+            nextLineStartOffset += parentNode.getChars().baseSubSequence(nextLineStartOffset, parentNode.getChars().getEndOffset()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+        }
+
+        if (range.getStart() > startOffset) {
+            startOffset = range.getStart();
+        }
+
+        html.srcPos(startOffset, endOffset).withAttr(PARAGRAPH_LINE).tag("span");
+    }
+
+    private void outputNextLineBreakSpan(final Node node, final HtmlWriter html, final boolean outputBreakText) {
+        final Range range = myLines.get(myNextLine);
+        int eolLength = myEOLs.get(myNextLine);
+        myNextLine++;
+
+        // remove trailing spaces from text
+        int countTrailing = node.getChars().baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
+        if (!outputBreakText && countTrailing > 0) {
+            countTrailing--;
+        }
+        eolLength += countTrailing;
+
+        html.srcPos(nextLineStartOffset, range.getEnd() - eolLength).withAttr(PARAGRAPH_LINE).tag("span");
+        nextLineStartOffset = range.getEnd();
+
+        // remove leading spaces
+        nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
     }
 
     private void renderLooseParagraph(final Paragraph node, final NodeRendererContext context, final HtmlWriter html) {
@@ -477,28 +510,14 @@ public class CoreNodeRenderer implements NodeRenderer {
             for (int i = iMax; i-- > 0; ) {
                 html.closeTag(openTags.get(i));
             }
+
             html.tag("/span");
 
             if (outputBreakText) {
                 html.raw(breakText);
             }
 
-            final Range range = myLines.get(myNextLine);
-            int eolLength = myEOLs.get(myNextLine);
-            myNextLine++;
-
-            // remove trailing spaces from text
-            int countTrailing = node.getChars().baseSubSequence(nextLineStartOffset, range.getEnd() - eolLength).countTrailing(" \t");
-            if (!outputBreakText && countTrailing > 0) {
-                countTrailing--;
-            }
-            eolLength += countTrailing;
-
-            html.srcPos(nextLineStartOffset, range.getEnd() - eolLength).withAttr(PARAGRAPH_LINE).tag("span");
-            nextLineStartOffset = range.getEnd();
-
-            // remove leading spaces
-            nextLineStartOffset += node.getChars().baseSubSequence(nextLineStartOffset, node.getChars().getBaseSequence().length()).countLeading(BasedSequence.WHITESPACE_NO_EOL_CHARS);
+            outputNextLineBreakSpan(node, html, outputBreakText);
 
             for (int i = 0; i < iMax; i++) {
                 if (!outputBreakText && context.getHtmlOptions().inlineCodeSpliceClass != null && !context.getHtmlOptions().inlineCodeSpliceClass.isEmpty()) {
@@ -792,8 +811,28 @@ public class CoreNodeRenderer implements NodeRenderer {
 
             html.attr(resolvedLink.getAttributes());
             html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
-            context.renderChildren(node);
+            renderChildrenSourceLineWrapped(node, node.getText(), context, html);
             html.tag("/a");
+        }
+    }
+
+    private void renderChildrenSourceLineWrapped(
+            final Node node,
+            final BasedSequence nodeChildText,
+            final NodeRendererContext context,
+            final HtmlWriter html
+    ) {
+        // if have SOFT BREAK or HARD BREAK as child then we open our own span
+        if (context.getHtmlOptions().sourcePositionParagraphLines && nodeChildText.indexOfAny(EOL_CHARS) >= 0) {
+            if (myNextLine > 0) {
+                myNextLine--;
+            }
+
+            outputSourceLineSpan(node, node, node, html);
+            context.renderChildren(node);
+            html.tag("/span");
+        } else {
+            context.renderChildren(node);
         }
     }
 
@@ -875,7 +914,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 html.text(node.getChars().unescape());
             } else {
                 html.text(node.getChars().prefixOf(node.getChildChars()).unescape());
-                context.renderChildren(node);
+                renderChildrenSourceLineWrapped(node, node.getText(), context, html);
                 html.text(node.getChars().suffixOf(node.getChildChars()).unescape());
             }
         } else {
@@ -885,7 +924,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 html.attr("href", resolvedLink.getUrl());
                 html.attr(resolvedLink.getAttributes());
                 html.srcPos(node.getChars()).withAttr(resolvedLink).tag("a");
-                context.renderChildren(node);
+                renderChildrenSourceLineWrapped(node, node.getText(), context, html);
                 html.tag("/a");
             }
         }

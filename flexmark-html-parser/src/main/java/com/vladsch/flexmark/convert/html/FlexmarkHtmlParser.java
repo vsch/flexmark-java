@@ -1007,6 +1007,7 @@ public class FlexmarkHtmlParser {
         // unwrap and process content
         skip();
         processHtmlTree(out, element);
+        out.append('\n');
         return true;
     }
 
@@ -1392,6 +1393,7 @@ public class FlexmarkHtmlParser {
         ourTagProcessors.put("pre", TagParam.tag(TagType.PRE, null));
         ourTagProcessors.put("b", TagParam.tag(TagType._STRONG_EMPHASIS, null));
         ourTagProcessors.put("strong", TagParam.tag(TagType._STRONG_EMPHASIS, null));
+        ourTagProcessors.put("strike", TagParam.tag(TagType.DEL, null));
         ourTagProcessors.put("sub", TagParam.tag(TagType.SUB, null));
         ourTagProcessors.put("sup", TagParam.tag(TagType.SUP, null));
         ourTagProcessors.put("svg", TagParam.tag(TagType.SVG, null));
