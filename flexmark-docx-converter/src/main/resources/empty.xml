@@ -370,7 +370,7 @@
                     <w:qFormat/>
                     <w:pPr>
                         <w:suppressLineNumbers/>
-                        <w:shd w:fill="EEEEEE" w:val="clear"/>
+                        <w:shd w:fill="DDDDDD" w:val="clear"/>
                         <w:bidi w:val="false"/>
                         <w:jc w:val="center"/>
                     </w:pPr>

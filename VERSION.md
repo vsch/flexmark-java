@@ -156,7 +156,7 @@ flexmark-java
 * [ ] Add: Latex extension
 
 * Change: complete parser profiles for variations within a family
-  [Markdown Parser Emulation](MarkdownProcessorsEmulation.md).
+  [Markdown Parser Emulation](https://github.com/vsch/flexmark-java/blob/master/MarkdownProcessorsEmulation.md).
   * [ ] League/CommonMark
   * [ ] Jekyll
   * [ ] Php Markdown Extra
@@ -187,6 +187,43 @@ flexmark-java
   context. The rest are not accessible. If you have an issue with the change please open an issue.
 
 * Add: `flexmark-docx-converter` module to render Markdown documents to docx using docx4j API.
+
+* Add: `Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX`, default `false`, set to `true` to treat the
+  item suffix as part of the list item marker after which the content begins for indentation
+  purposes. Gfm Task List uses the default setting.
+
+* [ ] Add: `DocxRenderer` options:
+  * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
+  * [ ] `BULLET_LIST_NUM_ID` and `ORDERED_LIST_NUM_ID` for list style ids
+      
+* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths 
+
+* [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
+      handler. 
+
+* [ ] Add: finish missing elements from docx converter
+    * [x] Paragraph
+    * [x] Headings
+    * [x] Bold and italic text
+    * [x] Tables
+      * [x] multiple header rows, column spans, markdown alignments
+      * [ ] Table captions are not yet supported by docx4j API
+    * [x] Ordered and unordered lists
+      * [ ] restart numbering on a short to do list
+    * [x] Links
+    * [x] Images
+      * [x] Images get embedded into the document, even remote ones (using http: or https: links)
+      * [x] Max Image width property available in options
+    * [ ] Footnootes
+    * [x] Inline Code
+    * [x] Fenced Code 
+    * [x] Block Quotes
+    * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
+    * [ ] Table of Contents 
+
+* Fix: complete conditional indent/border style propagation from parent to child based on parent
+  and child types. Some child types already incorporate their parent's indentation such as list
+  item styles and manually propagated indents for `Quotations` style.
 
 0.26.6
 ------

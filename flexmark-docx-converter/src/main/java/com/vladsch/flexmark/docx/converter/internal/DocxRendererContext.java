@@ -15,6 +15,9 @@ import java.util.Collection;
  * The context for node rendering, including configuration and functionality for the node renderer to use.
  */
 public interface DocxRendererContext extends LinkResolverContext {
+
+    DocxHelper getDocxHelper();
+
     /**
      * @return the Wordprocessing package
      */
@@ -70,6 +73,22 @@ public interface DocxRendererContext extends LinkResolverContext {
     void clearAdopterR(ValueRunnable<R> adopter);
 
     /**
+     * Set the runnable to handle adopting newly created P to a parent
+     *
+     * Default adopter is current P element add content
+     * @param adopter adopter code
+     */
+    void setAdopterP(ValueRunnable<P> adopter);
+
+    /**
+     * Remove the runnable to handle adopting newly created P to a parent
+     *
+     * Default adopter is current P element add content
+     * @param adopter adopter code
+     */
+    void clearAdopterP(ValueRunnable<P> adopter);
+
+    /**
      * Create and add wrapped Text element to R element
      *
      * @param r R element to which to add wrapped text
@@ -97,15 +116,15 @@ public interface DocxRendererContext extends LinkResolverContext {
      * @param left    left indent (null for none)
      * @param right   right indent (null for none)
      * @param hanging hanging indent (null for none)
-     * @param flags
+     * @param flags   combination flags
      * @return resulting indent
      */
     PPrBase.Ind setPPrIndent(PPr pPr, BigInteger left, BigInteger right, BigInteger hanging, final int flags);
 
     /**
      * Add text to current P, create R and add wrapped text
-     * @param text
-     * @return
+     * @param text  text to add
+     * @return text element
      */
     Text text(String text);
 
@@ -125,31 +144,39 @@ public interface DocxRendererContext extends LinkResolverContext {
 
     /**
      * Add initializer for defaults for newly created R elements
+     * @param initializer initializer to push on stack
      */
     void pushRPrInitializer(ValueRunnable<RPr> initializer);
 
     /**
      * Add initializer for defaults for newly created R elements
+     * @param initializer initializer to pop off stack, must be top most
      */
     void popRPrInitializer(ValueRunnable<RPr> initializer);
 
     /**
      * run given runnable with passed in initializer
+     * @param initializer initializer to push on stack
+     * @param runnable code to run
      */
     void withRPrInitializer(ValueRunnable<RPr> initializer, Runnable runnable);
 
     /**
      * Add initializer for defaults for newly created R elements
+     * @param initializer initializer to push on stack
      */
     void pushPPrInitializer(ValueRunnable<PPr> initializer);
 
     /**
      * Add initializer for defaults for newly created R elements
+     * @param initializer initializer to pop off stack, must be top most
      */
     void popPPrInitializer(ValueRunnable<PPr> initializer);
 
     /**
      * run given runnable with passed in initializer
+     * @param initializer initializer to push on stack
+     * @param runnable code to run
      */
     void withPPrInitializer(ValueRunnable<PPr> initializer, Runnable runnable);
 

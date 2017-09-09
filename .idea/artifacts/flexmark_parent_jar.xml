@@ -36,7 +36,6 @@
       <element id="module-output" name="flexmark-formatter" />
       <element id="module-output" name="flexmark-pdf-converter" />
       <element id="module-output" name="flexmark-ext-gfm-issues" />
-      <element id="library" level="application" name="R Skeletons" />
       <element id="module-output" name="flexmark-ext-gfm-users" />
     </root>
   </artifact>

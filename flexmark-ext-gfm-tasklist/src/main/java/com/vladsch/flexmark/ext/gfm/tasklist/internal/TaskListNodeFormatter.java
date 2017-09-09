@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItem;
 import com.vladsch.flexmark.ext.gfm.tasklist.TaskListItemPlacement;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
@@ -16,9 +17,11 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 public class TaskListNodeFormatter implements NodeFormatter {
     private final FormatOptions myOptions;
+    private final ListOptions listOptions;
 
     public TaskListNodeFormatter(DataHolder options) {
         myOptions = new FormatOptions(options);
+        listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class TaskListNodeFormatter implements NodeFormatter {
             }
         }
 
-        CoreNodeFormatter.renderListItem(node, context, markdown, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "));
+        CoreNodeFormatter.renderListItem(node, context, markdown, listOptions, markerSuffix.isEmpty() ? markerSuffix : markerSuffix.append(" "));
     }
 
     private void render(final BulletList node, final NodeFormatterContext context, MarkdownWriter markdown) {

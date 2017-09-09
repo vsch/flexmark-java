@@ -9,16 +9,16 @@ import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
 import com.vladsch.flexmark.ext.ins.Ins;
-import com.vladsch.flexmark.ext.tables.TableBlock;
+import com.vladsch.flexmark.ext.tables.*;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.Superscript;
 import com.vladsch.flexmark.util.Function;
+import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.ValueRunnable;
-import com.vladsch.flexmark.util.collection.BitIntegerSet;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
@@ -37,6 +37,7 @@ import javax.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.math.BigInteger;
+import java.nio.charset.Charset;
 import java.util.*;
 
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
@@ -351,7 +352,43 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }),
                 new NodeDocxRendererHandler<TableBlock>(TableBlock.class, new CustomNodeDocxRenderer<TableBlock>() {
                     @Override
-                    public void render(final TableBlock node, final DocxRendererContext docx) {
+                    public void render(TableBlock node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableHead>(TableHead.class, new CustomNodeDocxRenderer<TableHead>() {
+                    @Override
+                    public void render(TableHead node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableSeparator>(TableSeparator.class, new CustomNodeDocxRenderer<TableSeparator>() {
+                    @Override
+                    public void render(TableSeparator node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableBody>(TableBody.class, new CustomNodeDocxRenderer<TableBody>() {
+                    @Override
+                    public void render(TableBody node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableRow>(TableRow.class, new CustomNodeDocxRenderer<TableRow>() {
+                    @Override
+                    public void render(TableRow node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableCell>(TableCell.class, new CustomNodeDocxRenderer<TableCell>() {
+                    @Override
+                    public void render(TableCell node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TableCaption>(TableCaption.class, new CustomNodeDocxRenderer<TableCaption>() {
+                    @Override
+                    public void render(TableCaption node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 })
@@ -474,6 +511,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 HpsMeasure hpsmeasure = docx.getObjectFactory().createHpsMeasure();
                 value.setSz(hpsmeasure);
                 hpsmeasure.setVal(BigInteger.valueOf(19));
+
+                // Create object for position
+                CTSignedHpsMeasure signedhpsmeasure = docx.getObjectFactory().createCTSignedHpsMeasure();
+                value.setPosition(signedhpsmeasure);
+                signedhpsmeasure.setVal(BigInteger.valueOf(-4));
             }
         };
         docx.pushRPrInitializer(initializer);
@@ -1024,20 +1066,20 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             // inner blocks handle rendering
             docx.renderChildren(node);
         } else {
-            renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, docx.getDocxRendererOptions().escapeHtmlBlocks);
+            renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true || docx.getDocxRendererOptions().escapeHtmlBlocks);
         }
     }
 
     private void render(HtmlCommentBlock node, final DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
     }
 
     private void render(HtmlInnerBlock node, final DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, docx.getDocxRendererOptions().escapeHtmlBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlBlocks, true || docx.getDocxRendererOptions().escapeHtmlBlocks);
     }
 
     private void render(HtmlInnerBlockComment node, final DocxRendererContext docx) {
-        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, docx, docx.getDocxRendererOptions().suppressHtmlCommentBlocks, true || docx.getDocxRendererOptions().escapeHtmlCommentBlocks);
     }
 
     public void renderHtmlBlock(final HtmlBlockBase node, final DocxRendererContext docx, boolean suppress, boolean escape) {
@@ -1053,10 +1095,22 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
             }
 
+            P p = docx.createP();
+            PPr ppr = p.getPPr();
+
+            // Create object for rPr
+            ParaRPr pararpr = docx.getObjectFactory().createParaRPr();
+            ppr.setRPr(pararpr);
+
+            // Create object for pStyle
+            PPrBase.PStyle pprbasepstyle = docx.getObjectFactory().createPPrBasePStyle();
+            ppr.setPStyle(pprbasepstyle);
+            pprbasepstyle.setVal(LOOSE_PARAGRAPH_STYLE);
+
             docx.text(normalizeEOL);
         } else {
             try {
-                docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes());
+                docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes(Charset.forName("UTF-8")));
             } catch (Docx4JException e) {
                 e.printStackTrace();
             }
@@ -1067,14 +1121,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         //if (docx.getDocxRendererOptions().sourceWrapInlineHtml) {
         //    html.srcPos(node.getChars()).withAttr(AttributablePart.NODE_POSITION).tag("span");
         //}
-        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtml, docx.getDocxRendererOptions().escapeInlineHtml);
+        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtml, true || docx.getDocxRendererOptions().escapeInlineHtml);
         //if (docx.getDocxRendererOptions().sourceWrapInlineHtml) {
         //    html.tag("/span");
         //}
     }
 
     private void render(final HtmlInlineComment node, final DocxRendererContext docx) {
-        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtmlComments, docx.getDocxRendererOptions().escapeInlineHtmlComments);
+        renderInlineHtml(node, docx, docx.getDocxRendererOptions().suppressInlineHtmlComments, true || docx.getDocxRendererOptions().escapeInlineHtmlComments);
     }
 
     public void renderInlineHtml(final HtmlInlineBase node, final DocxRendererContext docx, boolean suppress, boolean escape) {
@@ -1270,9 +1324,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
-    /**
-     * Create image, without specifying width
-     */
     public void newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, String altText, int id1, int id2, long cx) {
         try {
             BinaryPartAbstractImage imagePart = null;
@@ -1290,152 +1341,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             e.printStackTrace();
         }
     }
-
-    //private void renderImage(final DocxRendererContext docx, byte[] imageBytes) {
-    //    // The image to add
-    //    String filenameHint = null;
-    //    String altText = null;
-    //    int id1 = 0;
-    //    int id2 = 1;
-    //
-    //    // Image no width specified
-    //    newImage(docx, imageBytes, filenameHint, altText, id1, id2);
-    //
-    //    // Create object for r
-    //    R r = docx.getObjectFactory().createR();
-    //    p.getContent().add(r);
-    //    // Create object for rPr
-    //    RPr rpr = docx.getObjectFactory().createRPr();
-    //    r.setRPr(rpr);
-    //    // Create object for drawing (wrapped in JAXBElement)
-    //    Drawing drawing = docx.getObjectFactory().createDrawing();
-    //    JAXBElement<org.docx4j.wml.Drawing> drawingWrapped = docx.getObjectFactory().createRDrawing(drawing);
-    //    r.getContent().add(drawingWrapped);
-    //    org.docx4j.dml.wordprocessingDrawing.ObjectFactory dmlwordprocessingDrawingObjectFactory = new org.docx4j.dml.wordprocessingDrawing.ObjectFactory();
-    //    // Create object for anchor
-    //    Anchor anchor = dmlwordprocessingDrawingObjectFactory.createAnchor();
-    //    drawing.getAnchorOrInline().add(anchor);
-    //    org.docx4j.dml.ObjectFactory dmlObjectFactory = new org.docx4j.dml.ObjectFactory();
-    //    // Create object for simplePos
-    //    CTPoint2D point2d = dmlObjectFactory.createCTPoint2D();
-    //    anchor.setSimplePos(point2d);
-    //    point2d.setY(0);
-    //    point2d.setX(0);
-    //    // Create object for positionH
-    //    CTPosH posh = dmlwordprocessingDrawingObjectFactory.createCTPosH();
-    //    anchor.setPositionH(posh);
-    //    posh.setAlign(org.docx4j.dml.wordprocessingDrawing.STAlignH.LEFT);
-    //    posh.setRelativeFrom(org.docx4j.dml.wordprocessingDrawing.STRelFromH.COLUMN);
-    //    // Create object for positionV
-    //    CTPosV posv = dmlwordprocessingDrawingObjectFactory.createCTPosV();
-    //    anchor.setPositionV(posv);
-    //    posv.setPosOffset(new Integer(635));
-    //    posv.setRelativeFrom(org.docx4j.dml.wordprocessingDrawing.STRelFromV.PARAGRAPH);
-    //    // Create object for extent
-    //    CTPositiveSize2D positivesize2d = dmlObjectFactory.createCTPositiveSize2D();
-    //    anchor.setExtent(positivesize2d);
-    //    positivesize2d.setCx(541655);
-    //    positivesize2d.setCy(541655);
-    //    // Create object for effectExtent
-    //    CTEffectExtent effectextent = dmlwordprocessingDrawingObjectFactory.createCTEffectExtent();
-    //    anchor.setEffectExtent(effectextent);
-    //    effectextent.setB(0);
-    //    effectextent.setT(0);
-    //    effectextent.setR(0);
-    //    effectextent.setL(0);
-    //    // Create object for wrapSquare
-    //    CTWrapSquare wrapsquare = dmlwordprocessingDrawingObjectFactory.createCTWrapSquare();
-    //    anchor.setWrapSquare(wrapsquare);
-    //    wrapsquare.setWrapText(org.docx4j.dml.wordprocessingDrawing.STWrapText.LARGEST);
-    //    // Create object for docPr
-    //    CTNonVisualDrawingProps nonvisualdrawingprops = dmlObjectFactory.createCTNonVisualDrawingProps();
-    //    anchor.setDocPr(nonvisualdrawingprops);
-    //    nonvisualdrawingprops.setDescr("");
-    //    nonvisualdrawingprops.setName("Image1");
-    //    nonvisualdrawingprops.setId(1);
-    //    // Create object for cNvGraphicFramePr
-    //    CTNonVisualGraphicFrameProperties nonvisualgraphicframeproperties = dmlObjectFactory.createCTNonVisualGraphicFrameProperties();
-    //    anchor.setCNvGraphicFramePr(nonvisualgraphicframeproperties);
-    //    // Create object for graphicFrameLocks
-    //    CTGraphicalObjectFrameLocking graphicalobjectframelocking = dmlObjectFactory.createCTGraphicalObjectFrameLocking();
-    //    nonvisualgraphicframeproperties.setGraphicFrameLocks(graphicalobjectframelocking);
-    //    // Create object for graphic
-    //    Graphic graphic = dmlObjectFactory.createGraphic();
-    //    anchor.setGraphic(graphic);
-    //    // Create object for graphicData
-    //    GraphicData graphicdata = dmlObjectFactory.createGraphicData();
-    //    graphic.setGraphicData(graphicdata);
-    //    graphicdata.setUri("http://schemas.openxmlformats.org/drawingml/2006/picture");
-    //    org.docx4j.dml.picture.ObjectFactory dmlpictureObjectFactory = new org.docx4j.dml.picture.ObjectFactory();
-    //    // Create object for pic (wrapped in JAXBElement)
-    //    Pic pic = dmlpictureObjectFactory.createPic();
-    //    JAXBElement<org.docx4j.dml.picture.Pic> picWrapped = dmlpictureObjectFactory.createPic(pic);
-    //    graphicdata.getAny().add(picWrapped);
-    //    // Create object for blipFill
-    //    CTBlipFillProperties blipfillproperties = dmlObjectFactory.createCTBlipFillProperties();
-    //    pic.setBlipFill(blipfillproperties);
-    //    // Create object for blip
-    //    CTBlip blip = dmlObjectFactory.createCTBlip();
-    //    blipfillproperties.setBlip(blip);
-    //    blip.setEmbed("rId5");
-    //    blip.setCstate(org.docx4j.dml.STBlipCompression.NONE);
-    //    blip.setLink("");
-    //    // Create object for stretch
-    //    CTStretchInfoProperties stretchinfoproperties = dmlObjectFactory.createCTStretchInfoProperties();
-    //    blipfillproperties.setStretch(stretchinfoproperties);
-    //    // Create object for fillRect
-    //    CTRelativeRect relativerect = dmlObjectFactory.createCTRelativeRect();
-    //    stretchinfoproperties.setFillRect(relativerect);
-    //    relativerect.setB(new Integer(0));
-    //    relativerect.setT(new Integer(0));
-    //    relativerect.setR(new Integer(0));
-    //    relativerect.setL(new Integer(0));
-    //    // Create object for nvPicPr
-    //    CTPictureNonVisual picturenonvisual = dmlpictureObjectFactory.createCTPictureNonVisual();
-    //    pic.setNvPicPr(picturenonvisual);
-    //    // Create object for cNvPr
-    //    CTNonVisualDrawingProps nonvisualdrawingprops2 = dmlObjectFactory.createCTNonVisualDrawingProps();
-    //    picturenonvisual.setCNvPr(nonvisualdrawingprops2);
-    //    nonvisualdrawingprops2.setDescr("");
-    //    nonvisualdrawingprops2.setName("Image1");
-    //    nonvisualdrawingprops2.setId(1);
-    //    // Create object for cNvPicPr
-    //    CTNonVisualPictureProperties nonvisualpictureproperties = dmlObjectFactory.createCTNonVisualPictureProperties();
-    //    picturenonvisual.setCNvPicPr(nonvisualpictureproperties);
-    //    // Create object for picLocks
-    //    CTPictureLocking picturelocking = dmlObjectFactory.createCTPictureLocking();
-    //    nonvisualpictureproperties.setPicLocks(picturelocking);
-    //    // Create object for spPr
-    //    CTShapeProperties shapeproperties = dmlObjectFactory.createCTShapeProperties();
-    //    pic.setSpPr(shapeproperties);
-    //    // Create object for prstGeom
-    //    CTPresetGeometry2D presetgeometry2d = dmlObjectFactory.createCTPresetGeometry2D();
-    //    shapeproperties.setPrstGeom(presetgeometry2d);
-    //    // Create object for avLst
-    //    CTGeomGuideList geomguidelist = dmlObjectFactory.createCTGeomGuideList();
-    //    presetgeometry2d.setAvLst(geomguidelist);
-    //    presetgeometry2d.setPrst(org.docx4j.dml.STShapeType.RECT);
-    //    shapeproperties.setBwMode(org.docx4j.dml.STBlackWhiteMode.AUTO);
-    //    // Create object for xfrm
-    //    CTTransform2D transform2d = dmlObjectFactory.createCTTransform2D();
-    //    shapeproperties.setXfrm(transform2d);
-    //    // Create object for off
-    //    CTPoint2D point2d2 = dmlObjectFactory.createCTPoint2D();
-    //    transform2d.setOff(point2d2);
-    //    point2d2.setY(0);
-    //    point2d2.setX(0);
-    //    // Create object for ext
-    //    CTPositiveSize2D positivesize2d2 = dmlObjectFactory.createCTPositiveSize2D();
-    //    transform2d.setExt(positivesize2d2);
-    //    positivesize2d2.setCx(541655);
-    //    positivesize2d2.setCy(541655);
-    //    transform2d.setRot(new Integer(0));
-    //    anchor.setDistT(new Long(0));
-    //    anchor.setDistB(new Long(0));
-    //    anchor.setDistL(new Long(0));
-    //    anchor.setDistR(new Long(0));
-    //    anchor.setRelativeHeight(2);
-    //}
 
     private void render(final Image node, final DocxRendererContext docx) {
         String altText = new TextCollectingVisitor().collectAndGetText(node);
@@ -1530,9 +1435,237 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         }
     }
 
+    private Tbl myTbl;
+    private Tr myTr;
+
     private void render(final TableBlock node, final DocxRendererContext docx) {
-        final JAXBElement element = GenTbl.createIt();
-        docx.getDocxDocument().getContent().add(element);
+        myTbl = docx.getObjectFactory().createTbl();
+        JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getObjectFactory().createHdrTbl(myTbl);
+        docx.getDocxDocument().getContent().add(tblWrapped);
+
+        // Create object for tblPr
+        TblPr tblpr = docx.getObjectFactory().createTblPr();
+        myTbl.setTblPr(tblpr);
+
+        // Create object for jc
+        Jc jc = docx.getObjectFactory().createJc();
+        tblpr.setJc(jc);
+        jc.setVal(org.docx4j.wml.JcEnumeration.LEFT);
+
+        // Create object for tblW
+        TblWidth tblwidth = docx.getObjectFactory().createTblWidth();
+        tblpr.setTblW(tblwidth);
+        tblwidth.setType("auto");
+        tblwidth.setW(BigInteger.valueOf(0));
+
+        // Create object for tblInd
+        TblWidth tblwidth2 = docx.getObjectFactory().createTblWidth();
+        tblpr.setTblInd(tblwidth2);
+        tblwidth2.setType("dxa");
+        tblwidth2.setW(BigInteger.valueOf(30));
+        // Create object for tblBorders
+        TblBorders tblborders = docx.getObjectFactory().createTblBorders();
+        tblpr.setTblBorders(tblborders);
+        // Create object for left
+        CTBorder border = docx.getObjectFactory().createCTBorder();
+        tblborders.setLeft(border);
+        border.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border.setSz(BigInteger.valueOf(2));
+        border.setColor("000001");
+        border.setSpace(BigInteger.valueOf(0));
+        // Create object for right
+        CTBorder border2 = docx.getObjectFactory().createCTBorder();
+        tblborders.setRight(border2);
+        border2.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border2.setSz(BigInteger.valueOf(2));
+        border2.setColor("000001");
+        border2.setSpace(BigInteger.valueOf(0));
+        // Create object for top
+        CTBorder border3 = docx.getObjectFactory().createCTBorder();
+        tblborders.setTop(border3);
+        border3.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border3.setSz(BigInteger.valueOf(2));
+        border3.setColor("000001");
+        border3.setSpace(BigInteger.valueOf(0));
+        // Create object for bottom
+        CTBorder border4 = docx.getObjectFactory().createCTBorder();
+        tblborders.setBottom(border4);
+        border4.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border4.setSz(BigInteger.valueOf(2));
+        border4.setColor("000001");
+        border4.setSpace(BigInteger.valueOf(0));
+        // Create object for insideH
+        CTBorder border5 = docx.getObjectFactory().createCTBorder();
+        tblborders.setInsideH(border5);
+        border5.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border5.setSz(BigInteger.valueOf(2));
+        border5.setColor("000001");
+        border5.setSpace(BigInteger.valueOf(0));
+        // Create object for insideV
+        CTBorder border6 = docx.getObjectFactory().createCTBorder();
+        tblborders.setInsideV(border6);
+        border6.setVal(org.docx4j.wml.STBorder.SINGLE);
+        border6.setSz(BigInteger.valueOf(2));
+        border6.setColor("000001");
+        border6.setSpace(BigInteger.valueOf(0));
+
+        // Create object for tblCellMar
+        CTTblCellMar tblcellmar = docx.getObjectFactory().createCTTblCellMar();
+        tblpr.setTblCellMar(tblcellmar);
+        // Create object for left
+        TblWidth tblwidth3 = docx.getObjectFactory().createTblWidth();
+        tblcellmar.setLeft(tblwidth3);
+        tblwidth3.setType("dxa");
+        tblwidth3.setW(BigInteger.valueOf(80));
+        // Create object for right
+        TblWidth tblwidth4 = docx.getObjectFactory().createTblWidth();
+        tblcellmar.setRight(tblwidth4);
+        tblwidth4.setType("dxa");
+        tblwidth4.setW(BigInteger.valueOf(80));
+        // Create object for top
+        TblWidth tblwidth5 = docx.getObjectFactory().createTblWidth();
+        tblcellmar.setTop(tblwidth5);
+        tblwidth5.setType("dxa");
+        tblwidth5.setW(BigInteger.valueOf(80));
+        // Create object for bottom
+        TblWidth tblwidth6 = docx.getObjectFactory().createTblWidth();
+        tblcellmar.setBottom(tblwidth6);
+        tblwidth6.setType("dxa");
+        tblwidth6.setW(BigInteger.valueOf(80));
+        // Create object for tblLook
+        CTTblLook tbllook = docx.getObjectFactory().createCTTblLook();
+        tblpr.setTblLook(tbllook);
+        tbllook.setVal("04a0");
+        tbllook.setLastRow(org.docx4j.sharedtypes.STOnOff.ZERO);
+        tbllook.setLastColumn(org.docx4j.sharedtypes.STOnOff.ZERO);
+        tbllook.setNoHBand(org.docx4j.sharedtypes.STOnOff.ZERO);
+        tbllook.setNoVBand(org.docx4j.sharedtypes.STOnOff.ONE);
+        tbllook.setFirstRow(org.docx4j.sharedtypes.STOnOff.ONE);
+        tbllook.setFirstColumn(org.docx4j.sharedtypes.STOnOff.ONE);
+
+        docx.renderChildren(node);
+        myTbl = null;
     }
 
+    private void render(final TableHead node, final DocxRendererContext docx) {
+        docx.renderChildren(node);
+    }
+
+    private void render(TableSeparator tableSeparator, final DocxRendererContext docx) {
+
+    }
+
+    private void render(final TableBody node, final DocxRendererContext docx) {
+        docx.renderChildren(node);
+    }
+
+    private void render(final TableRow node, final DocxRendererContext docx) {
+        myTr = docx.getObjectFactory().createTr();
+        myTbl.getContent().add(myTr);
+
+        // Create object for trPr
+        TrPr trpr = docx.getObjectFactory().createTrPr();
+        myTr.setTrPr(trpr);
+
+        if (node.getParent() instanceof TableHead) {
+            // Create object for tblHeader (wrapped in JAXBElement)
+            BooleanDefaultTrue booleandefaulttrue = docx.getObjectFactory().createBooleanDefaultTrue();
+            JAXBElement<org.docx4j.wml.BooleanDefaultTrue> booleandefaulttrueWrapped = docx.getObjectFactory().createCTTrPrBaseTblHeader(booleandefaulttrue);
+            trpr.getCnfStyleOrDivIdOrGridBefore().add(booleandefaulttrueWrapped);
+        }
+
+        docx.renderChildren(node);
+        myTr = null;
+    }
+
+    private void render(final TableCaption node, final DocxRendererContext docx) {
+        // TODO: figure out how to set caption
+        // table caption not yet supported by docx4j API
+        //final TblPr tblPr = myTbl.getTblPr();
+        //docx.getObjectFactory().createCTCaption();
+    }
+
+    private void render(TableCell node, final DocxRendererContext docx) {
+        String style = node.isHeader() ? "TableHeading" : "TableContents";
+
+        // Create object for tc (wrapped in JAXBElement)
+        final Tc tc = docx.getObjectFactory().createTc();
+        JAXBElement<org.docx4j.wml.Tc> tcWrapped = docx.getObjectFactory().createTrTc(tc);
+        myTr.getContent().add(tcWrapped);
+        // Create object for tcPr
+        TcPr tcpr = docx.getObjectFactory().createTcPr();
+        tc.setTcPr(tcpr);
+
+        final ValueRunnable<P> adopter = new ValueRunnable<P>() {
+            @Override
+            public void run(final P value) {
+                tc.getContent().add(value);
+            }
+        };
+
+        docx.setAdopterP(adopter);
+
+        if (node.getSpan() > 1) {
+            // Create object for gridSpan
+            TcPrInner.GridSpan tcprinnergridspan = docx.getObjectFactory().createTcPrInnerGridSpan();
+            tcpr.setGridSpan(tcprinnergridspan);
+            tcprinnergridspan.setVal(BigInteger.valueOf(node.getSpan()));
+        }
+
+        // Create object for p
+        P p = docx.createP();
+        PPr ppr = p.getPPr();
+
+        // Create object for jc
+        JcEnumeration alignValue = null;
+
+        if (node.getAlignment() != null) {
+            alignValue = getAlignValue(node.getAlignment());
+        } else if (node.isHeader()) {
+            alignValue = JcEnumeration.CENTER;
+        }
+        if (alignValue != null) {
+            Jc jc3 = docx.getObjectFactory().createJc();
+            ppr.setJc(jc3);
+            jc3.setVal(alignValue);
+        }
+
+        // Create object for rPr
+        ParaRPr pararpr = docx.getObjectFactory().createParaRPr();
+        ppr.setRPr(pararpr);
+
+        // Create object for pStyle
+        PPrBase.PStyle pprbasepstyle = docx.getObjectFactory().createPPrBasePStyle();
+        ppr.setPStyle(pprbasepstyle);
+        pprbasepstyle.setVal(style);
+
+        // Create object for r
+        //R r = docx.getObjectFactory().createR();
+        //p.getContent().add(r);
+        //// Create object for rPr
+        //RPr rpr = docx.getObjectFactory().createRPr();
+        //r.setRPr(rpr);
+        //
+        //// Create object for t (wrapped in JAXBElement)
+        //org.docx4j.wml.Text text = docx.getObjectFactory().createText();
+        //JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getObjectFactory().createRT(text);
+        //r.getContent().add(textWrapped);
+        //text.setValue("Combined header ");
+        //text.setSpace("preserve");
+
+        docx.renderChildren(node);
+        docx.clearAdopterP(adopter);
+    }
+
+    private static org.docx4j.wml.JcEnumeration getAlignValue(TableCell.Alignment alignment) {
+        switch (alignment) {
+            case LEFT:
+                return JcEnumeration.LEFT;
+            case CENTER:
+                return JcEnumeration.CENTER;
+            case RIGHT:
+                return JcEnumeration.RIGHT;
+        }
+        throw new IllegalStateException("Unknown alignment: " + alignment);
+    }
 }

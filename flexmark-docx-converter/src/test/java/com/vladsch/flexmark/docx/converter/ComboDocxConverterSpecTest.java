@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.docx.converter.internal.XmlFormatter;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
@@ -46,7 +47,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                     TocExtension.create(),
                     WikiLinkExtension.create()
             ))
-            //.set(DocxRenderer.XHTML_IMPORT, true)
+            .set(DocxRenderer.RENDER_BODY_ONLY, true)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
 
@@ -59,7 +60,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
-        optionsMap.put("IGNORES", new MutableDataSet().set(IGNORE, true));
+        optionsMap.put("IGNORES", new MutableDataSet().set(IGNORE, false));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_URL, "file:///Users/vlad/src/flexmark-java"));
 
         // Set up a simple configuration that logs on the console.
@@ -111,42 +112,38 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     }
 
     @Override
-    public void testFullSpec() throws Exception {
-
-    }
-
-    @Override
     protected void testCase(final Node node, final DataHolder options) {
-        final SpecExample specExample = example();
-        if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
-            // write it out to file, hard-coded for now                    IGNORE
-            File file = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d.docx", specExample.getSection(), specExample.getExampleNumber()));
-            File file2 = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d.xml", specExample.getSection(), specExample.getExampleNumber()));
-            File expfile = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d_exp.docx", specExample.getSection(), specExample.getExampleNumber()));
-            File expfile2 = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d_exp.xml", specExample.getSection(), specExample.getExampleNumber()));
-            WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate();
-            RENDERER.withOptions(options).render(node, mlPackage);
+        if (false) {
+            final SpecExample specExample = example();
+            if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
+                // write it out to file, hard-coded for now                    IGNORE
+                File file = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d.docx", specExample.getSection(), specExample.getExampleNumber()));
+                File file2 = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/" + String.format("%s_%d.xml", specExample.getSection(), specExample.getExampleNumber()));
+                WordprocessingMLPackage mlPackage = DocxRenderer.getDefaultTemplate();
+                RENDERER.withOptions(options).render(node, mlPackage);
 
-            try {
-                boolean importing = options != null && options.contains(DocxRenderer.XHTML_IMPORT) ? options.get(DocxRenderer.XHTML_IMPORT) : OPTIONS.get(DocxRenderer.XHTML_IMPORT);
-                mlPackage.save(importing ? expfile : file, Docx4J.FLAG_SAVE_ZIP_FILE);
-                mlPackage.save(importing ? expfile2 : file2, Docx4J.FLAG_SAVE_FLAT_XML);
-            } catch (Docx4JException e) {
-                e.printStackTrace();
+                try {
+                    mlPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);
+                    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                    try {
+                        mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
+                        final String xml = outputStream.toString("UTF-8");
+                        final String s = XmlFormatter.format(xml);
+                        FileWriter fileWriter = new FileWriter(file2);
+                        fileWriter.append(s);
+                        fileWriter.append('\n');
+                        fileWriter.close();
+                    } catch (Docx4JException e) {
+                        e.printStackTrace();
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } catch (Docx4JException e) {
+                    e.printStackTrace();
+                }
             }
         }
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        //// dump main case
-        //File file = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/AllCases.docx");
-        //File file2 = new File("/Users/vlad/src/flexmark-java/flexmark-docx-converter/src/test/resources/test_cases/AllCases.xml");
-        //try {
-        //    ourPackage.save(file, Docx4J.FLAG_SAVE_ZIP_FILE);
-        //    ourPackage.save(file2, Docx4J.FLAG_SAVE_FLAT_XML);
-        //} catch (Docx4JException e) {
-        //    e.printStackTrace();
-        //}
     }
 }

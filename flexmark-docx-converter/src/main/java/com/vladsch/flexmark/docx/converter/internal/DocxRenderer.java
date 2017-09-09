@@ -24,7 +24,6 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.*;
 import org.docx4j.Docx4J;
 import org.docx4j.XmlUtils;
-import org.docx4j.convert.in.xhtml.XHTMLImporterImpl;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -48,68 +47,24 @@ public class DocxRenderer implements IRender {
     public static final DataKey<String> STYLES_XML = new DataKey<String>("STYLES_XML", getResourceString("/styles.xml"));
     public static final DataKey<String> NUMBERING_XML = new DataKey<String>("NUMBERING_XML", getResourceString("/numbering.xml"));
 
+    public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<Boolean>("RENDER_BODY_ONLY", false);
     public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<Integer>("MAX_IMAGE_WIDTH", 0);
 
-    public static final DataKey<Boolean> XHTML_IMPORT = new DataKey<Boolean>("XHTML_IMPORT", false);
-    public static final DataKey<String> XHTML_IMPORT_PREFIX = new DataKey<String>("XHTML_IMPORT_PREFIX", "" +
-            "\n" +
-            "<body>\n");
-    public static final DataKey<String> XHTML_IMPORT_SUFFIX = new DataKey<String>("XHTML_IMPORT_SUFFIX", "\n</body>");
     public static final DataKey<String> DOC_URL = new DataKey<String>("DOC_URL", "");
 
-    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = new DataKey<Boolean>("RECHECK_UNDEFINED_REFERENCES", false);
-    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<Boolean>("PERCENT_ENCODE_URLS", false);
-    public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<Boolean>("ESCAPE_HTML", false);
-    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML.getFrom(holder);
-        }
-    });
-
-    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML_BLOCKS.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("ESCAPE_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_INLINE_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<Boolean>("SUPPRESS_HTML", false);
-    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return holder != null && (holder.contains(SUPPRESS_HTML) || holder.contains(SUPPRESS_HTML_BLOCKS)) ? SUPPRESS_HTML_BLOCKS.getFrom(holder) : true;
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return holder != null && (holder.contains(SUPPRESS_HTML) || holder.contains(SUPPRESS_INLINE_HTML)) ? SUPPRESS_INLINE_HTML.getFrom(holder) : true;
-        }
-    });
+    // same keys, same function also available here for convenience
+    public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
+    public static final DataKey<Boolean> PERCENT_ENCODE_URLS = HtmlRenderer.PERCENT_ENCODE_URLS;
+    public static final DataKey<Boolean> ESCAPE_HTML = HtmlRenderer.ESCAPE_HTML;
+    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = HtmlRenderer.ESCAPE_HTML_BLOCKS;
+    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = HtmlRenderer.ESCAPE_HTML_COMMENT_BLOCKS;
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = HtmlRenderer.ESCAPE_INLINE_HTML;
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = HtmlRenderer.ESCAPE_INLINE_HTML_COMMENTS;
+    public static final DataKey<Boolean> SUPPRESS_HTML = HtmlRenderer.SUPPRESS_HTML;
+    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = HtmlRenderer.SUPPRESS_HTML_BLOCKS;
+    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS;
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = HtmlRenderer.SUPPRESS_INLINE_HTML;
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS;
 
     private final List<NodeDocxRendererFactory> nodeFormatterFactories;
     private final DocxRendererOptions rendererOptions;
@@ -152,26 +107,6 @@ public class DocxRenderer implements IRender {
      */
     public static Builder builder(DataHolder options) {
         return new Builder(options);
-    }
-
-    public static String exportToDocx(String html, String url) {
-        return "";
-    }
-
-    public static void exportToDocx(final OutputStream os, final String html, final String url, final DataHolder options) {
-        //exportToDocx(os, html, url, options.get(DEFAULT_TEXT_DIRECTION));
-    }
-
-    public static void exportToDocx(final WordprocessingMLPackage out, final DataHolder options, final String html, final String url) {
-        try {
-            setDefaultStyleAndNumbering(out, options);
-            MainDocumentPart documentPart = out.getMainDocumentPart();
-            XHTMLImporterImpl importer = new XHTMLImporterImpl(out);
-            importer.convert(html, url);
-        } catch (Exception e) {
-            e.printStackTrace();
-            // LOG exception
-        }
     }
 
     public static WordprocessingMLPackage getDefaultTemplate() {
@@ -229,17 +164,8 @@ public class DocxRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, WordprocessingMLPackage output) {
-        if (XHTML_IMPORT.getFrom(options)) {
-            String html = HtmlRenderer.builder(options).build().render(node);
-            StringBuilder sb = new StringBuilder();
-            sb.append(XHTML_IMPORT_PREFIX.getFrom(options));
-            sb.append(html);
-            sb.append(XHTML_IMPORT_SUFFIX.getFrom(options));
-            exportToDocx(output, options, sb.toString(), DOC_URL.getFrom(options));
-        } else {
-            MainDocxRenderer renderer = new MainDocxRenderer(options, output, node.getDocument());
-            renderer.render(node);
-        }
+        MainDocxRenderer renderer = new MainDocxRenderer(options, output, node.getDocument());
+        renderer.render(node);
     }
 
     /**
@@ -254,7 +180,9 @@ public class DocxRenderer implements IRender {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-            return outputStream.toString("UTF-8") + "\n";
+            final String s = options.get(RENDER_BODY_ONLY) ?  XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
+                    : XmlFormatter.format(outputStream.toString("UTF-8"));
+            return s;
         } catch (Docx4JException e) {
             e.printStackTrace();
         } catch (UnsupportedEncodingException e) {
@@ -441,10 +369,12 @@ public class DocxRenderer implements IRender {
         private final MainDocumentPart mainDocumentPart;
         private final Body body;
         private final ObjectFactory wmlObjectFactory;
+        private final DocxHelper myDocxHelper;
         private ArrayList<ValueRunnable<PPr>> pInitializerList;
         private ArrayList<ValueRunnable<RPr>> rInitializerList;
         private P p;
         private ValueRunnable<R> rAdopter;
+        private ValueRunnable<P> pAdopter;
         private Stack<Runnable> beforeP;
         private Stack<Runnable> afterP;
         private boolean inBeforeAfterP;
@@ -463,12 +393,13 @@ public class DocxRenderer implements IRender {
             this.afterP = new Stack<Runnable>();
 
             this.wmlObjectFactory = new ObjectFactory();
+            this.myDocxHelper = new DocxHelper(wmlObjectFactory);
             this.wordprocessingPackage = out;
 
             setDefaultStyleAndNumbering(out, this.options);
 
             this.mainDocumentPart = out.getMainDocumentPart();
-            this.body = ((org.docx4j.wml.Document)this.mainDocumentPart.getJaxbElement()).getBody();
+            this.body = ((org.docx4j.wml.Document) this.mainDocumentPart.getJaxbElement()).getBody();
             this.rInitializerList = new ArrayList<ValueRunnable<RPr>>();
             this.pInitializerList = new ArrayList<ValueRunnable<PPr>>();
 
@@ -514,6 +445,11 @@ public class DocxRenderer implements IRender {
             } else {
                 collectedNodes = null;
             }
+        }
+
+        @Override
+        public DocxHelper getDocxHelper() {
+            return myDocxHelper;
         }
 
         @Override
@@ -605,7 +541,12 @@ public class DocxRenderer implements IRender {
             }
 
             P p = wmlObjectFactory.createP();
-            mainDocumentPart.getContent().add(p);
+            if (pAdopter != null) {
+                pAdopter.run(p);
+            } else {
+                mainDocumentPart.getContent().add(p);
+            }
+
             PPr pPr = wmlObjectFactory.createPPr();
             p.setPPr(pPr);
 
@@ -723,6 +664,25 @@ public class DocxRenderer implements IRender {
                 throw new IllegalStateException("clearAdopterR called for " + adopter + " when one is set to " + rAdopter);
             }
             rAdopter = null;
+        }
+
+        @Override
+        public void setAdopterP(final ValueRunnable<P> adopter) {
+            if (pAdopter != null) {
+                throw new IllegalStateException("setAdopterP called for " + adopter + " when one is already set to " + pAdopter);
+            }
+            pAdopter = adopter;
+        }
+
+        @Override
+        public void clearAdopterP(final ValueRunnable<P> adopter) {
+            if (pAdopter == null) {
+                throw new IllegalStateException("cleapAdopterP called for " + adopter + " when one is not set");
+            }
+            if (pAdopter != adopter) {
+                throw new IllegalStateException("cleapAdopterP called for " + adopter + " when one is set to " + pAdopter);
+            }
+            pAdopter = null;
         }
 
         @Override

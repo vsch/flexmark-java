@@ -541,11 +541,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
     }
 
     private void render(BulletListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, "");
+        renderListItem(node, context, markdown, listOptions, "");
     }
 
     private void render(OrderedListItem node, NodeFormatterContext context, MarkdownWriter markdown) {
-        renderListItem(node, context, markdown, "");
+        renderListItem(node, context, markdown, listOptions, "");
     }
 
     public static void renderList(final ListBlock node, final NodeFormatterContext context, MarkdownWriter markdown) {
@@ -612,7 +612,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             final ListItem node,
             final NodeFormatterContext context,
             final MarkdownWriter markdown,
-            CharSequence markerSuffix
+            final ListOptions listOptions, CharSequence markerSuffix
     ) {
         final FormatterOptions options = context.getFormatterOptions();
         CharSequence openingMarker = node.getOpeningMarker();
@@ -659,7 +659,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
         markdown.append(openingMarker).append(' ').append(markerSuffix);
-        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + markerSuffix.length() + 1) : "    ");
+        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix()  ? markerSuffix.length() : 0) + 1) : "    ");
         context.renderChildren(node);
         markdown.popPrefix();
     }

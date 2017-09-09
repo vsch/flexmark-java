@@ -32,12 +32,12 @@ public class ListItemParser extends AbstractBlockParser {
 
     @SuppressWarnings({ "WeakerAccess", "unused" })
     int getContentColumn() {
-        return myListData.markerColumn + myListData.listMarker.length() + myListData.contentOffset;
+        return myListData.markerColumn + myListData.listMarker.length() + (myOptions.isItemContentAfterSuffix() ? myListData.contentOffset : myListData.markerSuffixOffset);
     }
 
     @SuppressWarnings("WeakerAccess")
     int getContentIndent() {
-        return myListData.markerIndent + myListData.listMarker.length() + myListData.contentOffset;
+        return myListData.markerIndent + myListData.listMarker.length() + (myOptions.isItemContentAfterSuffix() ? myListData.contentOffset : myListData.markerSuffixOffset);
     }
 
     int getMarkerContentIndent() {

@@ -329,7 +329,7 @@ public class ListBlockParser extends AbstractBlockParser {
 
         if (!hasContent || contentOffset > newItemCodeIndent) {
             // If this line is blank or has a code block, default to 1 space after marker
-            contentOffset = 1;
+            markerSuffixOffset = contentOffset = 1;
         } else if (!isNumberedList || options.isNumberedItemMarkerSuffixed()) {
             // see if we have optional suffix strings on the marker
             String[] markerSuffixes = options.getItemMarkerSuffixes();

@@ -16,15 +16,15 @@ default
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -40,22 +40,22 @@ default
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -71,113 +71,113 @@ default
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 
 .
-Document[0, 664]
-  BulletList[0, 664] isTight
-    BulletListItem[0, 144] open:[0, 1, "*"] isTight
+Document[0, 628]
+  BulletList[0, 628] isTight
+    BulletListItem[0, 132] open:[0, 1, "*"] isTight
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 1"]
-      BulletList[16, 144] isTight
+      BulletList[16, 132] isTight
         TaskListItem[16, 36] open:[16, 17, "*"] openSuffix:[18, 21, "[ ]"] isTight isNotDone
           Paragraph[22, 36]
             Text[22, 35] chars:[22, 35, "list  … m 1.1"]
-        TaskListItem[38, 144] open:[38, 39, "*"] openSuffix:[40, 43, "[x]"] isTight isDone
+        TaskListItem[38, 132] open:[38, 39, "*"] openSuffix:[40, 43, "[x]"] isTight isDone
           Paragraph[44, 58]
             Text[44, 57] chars:[44, 57, "list  … m 1.2"]
-          BulletList[66, 144] isTight
-            BulletListItem[66, 84] open:[66, 67, "*"] isTight
-              Paragraph[68, 84]
-                Text[68, 83] chars:[68, 83, "list  … 1.2.1"]
-            TaskListItem[92, 114] open:[92, 93, "*"] openSuffix:[94, 97, "[ ]"] isTight isNotDone
-              Paragraph[98, 114]
-                Text[98, 113] chars:[98, 113, "list  … 1.2.2"]
-            TaskListItem[122, 144] open:[122, 123, "*"] openSuffix:[124, 127, "[X]"] isTight isDone
-              Paragraph[128, 144]
-                Text[128, 143] chars:[128, 143, "list  … 1.2.3"]
-    BulletListItem[144, 280] open:[144, 145, "*"] isTight
-      Paragraph[146, 158]
-        Text[146, 157] chars:[146, 157, "list  … tem 2"]
-      BulletList[160, 280] isTight
-        BulletListItem[160, 176] open:[160, 161, "*"] isTight
-          Paragraph[162, 176]
-            Text[162, 175] chars:[162, 175, "list  … m 2.1"]
-        TaskListItem[178, 280] open:[178, 179, "*"] openSuffix:[180, 183, "[x]"] isTight isDone
-          Paragraph[184, 198]
-            Text[184, 197] chars:[184, 197, "list  … m 2.2"]
-          BulletList[206, 280] isTight
-            BulletListItem[206, 224] open:[206, 207, "*"] isTight
-              Paragraph[208, 224]
-                Text[208, 223] chars:[208, 223, "list  … 2.2.1"]
-            BulletListItem[232, 250] open:[232, 233, "*"] isTight
-              Paragraph[234, 250]
-                Text[234, 249] chars:[234, 249, "list  … 2.2.2"]
-            TaskListItem[258, 280] open:[258, 259, "*"] openSuffix:[260, 263, "[X]"] isTight isDone
-              Paragraph[264, 280]
-                Text[264, 279] chars:[264, 279, "list  … 2.2.3"]
-    BulletListItem[280, 404] open:[280, 281, "*"] isTight
-      Paragraph[282, 294]
-        Text[282, 293] chars:[282, 293, "list  … tem 3"]
-      BulletList[296, 404] isTight
-        TaskListItem[296, 316] open:[296, 297, "*"] openSuffix:[298, 301, "[ ]"] isTight isNotDone
-          Paragraph[302, 316]
-            Text[302, 315] chars:[302, 315, "list  … m 3.1"]
-        BulletListItem[318, 404] open:[318, 319, "*"] isTight
-          Paragraph[320, 334]
-            Text[320, 333] chars:[320, 333, "list  … m 3.2"]
-          BulletList[338, 404] isTight
-            BulletListItem[338, 356] open:[338, 339, "*"] isTight
-              Paragraph[340, 356]
-                Text[340, 355] chars:[340, 355, "list  … 3.2.1"]
-            TaskListItem[360, 382] open:[360, 361, "*"] openSuffix:[362, 365, "[ ]"] isTight isNotDone
-              Paragraph[366, 382]
-                Text[366, 381] chars:[366, 381, "list  … 3.2.2"]
-            BulletListItem[386, 404] open:[386, 387, "*"] isTight
-              Paragraph[388, 404]
-                Text[388, 403] chars:[388, 403, "list  … 3.2.3"]
-    BulletListItem[404, 520] open:[404, 405, "*"] isTight
-      Paragraph[406, 418]
-        Text[406, 417] chars:[406, 417, "list  … tem 4"]
-      BulletList[420, 520] isTight
-        BulletListItem[420, 436] open:[420, 421, "*"] isTight
-          Paragraph[422, 436]
-            Text[422, 435] chars:[422, 435, "list  … m 4.1"]
-        BulletListItem[438, 520] open:[438, 439, "*"] isTight
-          Paragraph[440, 454]
-            Text[440, 453] chars:[440, 453, "list  … m 4.2"]
-          BulletList[458, 520] isTight
-            BulletListItem[458, 476] open:[458, 459, "*"] isTight
-              Paragraph[460, 476]
-                Text[460, 475] chars:[460, 475, "list  … 4.2.1"]
-            BulletListItem[480, 498] open:[480, 481, "*"] isTight
-              Paragraph[482, 498]
-                Text[482, 497] chars:[482, 497, "list  … 4.2.2"]
-            BulletListItem[502, 520] open:[502, 503, "*"] isTight
-              Paragraph[504, 520]
-                Text[504, 519] chars:[504, 519, "list  … 4.2.3"]
-    BulletListItem[520, 664] open:[520, 521, "*"] isTight
-      Paragraph[522, 534]
-        Text[522, 533] chars:[522, 533, "list  … tem 5"]
-      BulletList[536, 664] isTight
-        TaskListItem[536, 556] open:[536, 537, "*"] openSuffix:[538, 541, "[ ]"] isTight isNotDone
-          Paragraph[542, 556]
-            Text[542, 555] chars:[542, 555, "list  … m 5.1"]
-        TaskListItem[558, 664] open:[558, 559, "*"] openSuffix:[560, 563, "[x]"] isTight isDone
-          Paragraph[564, 578]
-            Text[564, 577] chars:[564, 577, "list  … m 5.2"]
-          BulletList[586, 664] isTight
-            BulletListItem[586, 604] open:[586, 587, "*"] isTight
-              Paragraph[588, 604]
-                Text[588, 603] chars:[588, 603, "list  … 5.2.1"]
-            TaskListItem[612, 634] open:[612, 613, "*"] openSuffix:[614, 617, "[ ]"] isTight isNotDone
-              Paragraph[618, 634]
-                Text[618, 633] chars:[618, 633, "list  … 5.2.2"]
-            TaskListItem[642, 664] open:[642, 643, "*"] openSuffix:[644, 647, "[X]"] isTight isDone
-              Paragraph[648, 664]
-                Text[648, 663] chars:[648, 663, "list  … 5.2.3"]
+          BulletList[62, 132] isTight
+            BulletListItem[62, 80] open:[62, 63, "*"] isTight
+              Paragraph[64, 80]
+                Text[64, 79] chars:[64, 79, "list  … 1.2.1"]
+            TaskListItem[84, 106] open:[84, 85, "*"] openSuffix:[86, 89, "[ ]"] isTight isNotDone
+              Paragraph[90, 106]
+                Text[90, 105] chars:[90, 105, "list  … 1.2.2"]
+            TaskListItem[110, 132] open:[110, 111, "*"] openSuffix:[112, 115, "[X]"] isTight isDone
+              Paragraph[116, 132]
+                Text[116, 131] chars:[116, 131, "list  … 1.2.3"]
+    BulletListItem[132, 256] open:[132, 133, "*"] isTight
+      Paragraph[134, 146]
+        Text[134, 145] chars:[134, 145, "list  … tem 2"]
+      BulletList[148, 256] isTight
+        BulletListItem[148, 164] open:[148, 149, "*"] isTight
+          Paragraph[150, 164]
+            Text[150, 163] chars:[150, 163, "list  … m 2.1"]
+        TaskListItem[166, 256] open:[166, 167, "*"] openSuffix:[168, 171, "[x]"] isTight isDone
+          Paragraph[172, 186]
+            Text[172, 185] chars:[172, 185, "list  … m 2.2"]
+          BulletList[190, 256] isTight
+            BulletListItem[190, 208] open:[190, 191, "*"] isTight
+              Paragraph[192, 208]
+                Text[192, 207] chars:[192, 207, "list  … 2.2.1"]
+            BulletListItem[212, 230] open:[212, 213, "*"] isTight
+              Paragraph[214, 230]
+                Text[214, 229] chars:[214, 229, "list  … 2.2.2"]
+            TaskListItem[234, 256] open:[234, 235, "*"] openSuffix:[236, 239, "[X]"] isTight isDone
+              Paragraph[240, 256]
+                Text[240, 255] chars:[240, 255, "list  … 2.2.3"]
+    BulletListItem[256, 380] open:[256, 257, "*"] isTight
+      Paragraph[258, 270]
+        Text[258, 269] chars:[258, 269, "list  … tem 3"]
+      BulletList[272, 380] isTight
+        TaskListItem[272, 292] open:[272, 273, "*"] openSuffix:[274, 277, "[ ]"] isTight isNotDone
+          Paragraph[278, 292]
+            Text[278, 291] chars:[278, 291, "list  … m 3.1"]
+        BulletListItem[294, 380] open:[294, 295, "*"] isTight
+          Paragraph[296, 310]
+            Text[296, 309] chars:[296, 309, "list  … m 3.2"]
+          BulletList[314, 380] isTight
+            BulletListItem[314, 332] open:[314, 315, "*"] isTight
+              Paragraph[316, 332]
+                Text[316, 331] chars:[316, 331, "list  … 3.2.1"]
+            TaskListItem[336, 358] open:[336, 337, "*"] openSuffix:[338, 341, "[ ]"] isTight isNotDone
+              Paragraph[342, 358]
+                Text[342, 357] chars:[342, 357, "list  … 3.2.2"]
+            BulletListItem[362, 380] open:[362, 363, "*"] isTight
+              Paragraph[364, 380]
+                Text[364, 379] chars:[364, 379, "list  … 3.2.3"]
+    BulletListItem[380, 496] open:[380, 381, "*"] isTight
+      Paragraph[382, 394]
+        Text[382, 393] chars:[382, 393, "list  … tem 4"]
+      BulletList[396, 496] isTight
+        BulletListItem[396, 412] open:[396, 397, "*"] isTight
+          Paragraph[398, 412]
+            Text[398, 411] chars:[398, 411, "list  … m 4.1"]
+        BulletListItem[414, 496] open:[414, 415, "*"] isTight
+          Paragraph[416, 430]
+            Text[416, 429] chars:[416, 429, "list  … m 4.2"]
+          BulletList[434, 496] isTight
+            BulletListItem[434, 452] open:[434, 435, "*"] isTight
+              Paragraph[436, 452]
+                Text[436, 451] chars:[436, 451, "list  … 4.2.1"]
+            BulletListItem[456, 474] open:[456, 457, "*"] isTight
+              Paragraph[458, 474]
+                Text[458, 473] chars:[458, 473, "list  … 4.2.2"]
+            BulletListItem[478, 496] open:[478, 479, "*"] isTight
+              Paragraph[480, 496]
+                Text[480, 495] chars:[480, 495, "list  … 4.2.3"]
+    BulletListItem[496, 628] open:[496, 497, "*"] isTight
+      Paragraph[498, 510]
+        Text[498, 509] chars:[498, 509, "list  … tem 5"]
+      BulletList[512, 628] isTight
+        TaskListItem[512, 532] open:[512, 513, "*"] openSuffix:[514, 517, "[ ]"] isTight isNotDone
+          Paragraph[518, 532]
+            Text[518, 531] chars:[518, 531, "list  … m 5.1"]
+        TaskListItem[534, 628] open:[534, 535, "*"] openSuffix:[536, 539, "[x]"] isTight isDone
+          Paragraph[540, 554]
+            Text[540, 553] chars:[540, 553, "list  … m 5.2"]
+          BulletList[558, 628] isTight
+            BulletListItem[558, 576] open:[558, 559, "*"] isTight
+              Paragraph[560, 576]
+                Text[560, 575] chars:[560, 575, "list  … 5.2.1"]
+            TaskListItem[580, 602] open:[580, 581, "*"] openSuffix:[582, 585, "[ ]"] isTight isNotDone
+              Paragraph[586, 602]
+                Text[586, 601] chars:[586, 601, "list  … 5.2.2"]
+            TaskListItem[606, 628] open:[606, 607, "*"] openSuffix:[608, 611, "[X]"] isTight isDone
+              Paragraph[612, 628]
+                Text[612, 627] chars:[612, 627, "list  … 5.2.3"]
 ````````````````````````````````
 
 
@@ -185,15 +185,15 @@ Document[0, 664]
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -209,9 +209,9 @@ Document[0, 664]
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
     * [ ] list item 1.1
@@ -251,15 +251,15 @@ Document[0, 664]
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -275,22 +275,22 @@ Document[0, 664]
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [x] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [x] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [x] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [x] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -306,9 +306,9 @@ Document[0, 664]
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [x] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [x] list item 5.2.3
 
 ````````````````````````````````
 
@@ -317,15 +317,15 @@ Document[0, 664]
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -341,22 +341,22 @@ Document[0, 664]
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
   * [X] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [X] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -372,9 +372,9 @@ Document[0, 664]
 * list item 5
   * [ ] list item 5.1
   * [X] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 
 ````````````````````````````````
 
@@ -385,15 +385,15 @@ sort undone first
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -409,22 +409,22 @@ sort undone first
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * [ ] list item 1.2.2
-        * list item 1.2.1
-        * [X] list item 1.2.3
+    * [ ] list item 1.2.2
+    * list item 1.2.1
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -440,9 +440,9 @@ sort undone first
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * [ ] list item 5.2.2
-        * list item 5.2.1
-        * [X] list item 5.2.3
+    * [ ] list item 5.2.2
+    * list item 5.2.1
+    * [X] list item 5.2.3
 
 ````````````````````````````````
 
@@ -453,15 +453,15 @@ sort undone first, complete to non-tasks
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -477,9 +477,9 @@ sort undone first, complete to non-tasks
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
@@ -521,15 +521,15 @@ sort undone or has undone first
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -545,16 +545,16 @@ sort undone or has undone first
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * [ ] list item 1.2.2
-        * list item 1.2.1
-        * [X] list item 1.2.3
+    * [ ] list item 1.2.2
+    * list item 1.2.1
+    * [X] list item 1.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -564,15 +564,15 @@ sort undone or has undone first
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * [ ] list item 5.2.2
-        * list item 5.2.1
-        * [X] list item 5.2.3
+    * [ ] list item 5.2.2
+    * list item 5.2.1
+    * [X] list item 5.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 4
   * list item 4.1
   * list item 4.2
@@ -589,15 +589,15 @@ sort undone or has undone first, complete to non-tasks
 * list item 1
   * [ ] list item 1.1
   * [x] list item 1.2
-        * list item 1.2.1
-        * [ ] list item 1.2.2
-        * [X] list item 1.2.3
+    * list item 1.2.1
+    * [ ] list item 1.2.2
+    * [X] list item 1.2.3
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -613,9 +613,9 @@ sort undone or has undone first, complete to non-tasks
 * list item 5
   * [ ] list item 5.1
   * [x] list item 5.2
-        * list item 5.2.1
-        * [ ] list item 5.2.2
-        * [X] list item 5.2.3
+    * list item 5.2.1
+    * [ ] list item 5.2.2
+    * [X] list item 5.2.3
 .
 * list item 1
   * [ ] list item 1.1
@@ -657,9 +657,9 @@ sort undone or has undone first, complete to non-tasks
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 * list item 3
   * [ ] list item 3.1
   * list item 3.2
@@ -676,53 +676,94 @@ sort undone or has undone first, complete to non-tasks
 * list item 2
   * list item 2.1
   * [x] list item 2.2
-        * list item 2.2.1
-        * list item 2.2.2
-        * [X] list item 2.2.3
+    * list item 2.2.1
+    * list item 2.2.2
+    * [X] list item 2.2.3
 
 .
-Document[0, 259]
-  BulletList[0, 259] isTight
-    BulletListItem[0, 136] open:[0, 1, "*"] isTight
+Document[0, 247]
+  BulletList[0, 247] isTight
+    BulletListItem[0, 124] open:[0, 1, "*"] isTight
       Paragraph[2, 14]
         Text[2, 13] chars:[2, 13, "list  … tem 2"]
-      BulletList[16, 136] isTight
+      BulletList[16, 124] isTight
         BulletListItem[16, 32] open:[16, 17, "*"] isTight
           Paragraph[18, 32]
             Text[18, 31] chars:[18, 31, "list  … m 2.1"]
-        TaskListItem[34, 136] open:[34, 35, "*"] openSuffix:[36, 39, "[x]"] isTight isDone
+        TaskListItem[34, 124] open:[34, 35, "*"] openSuffix:[36, 39, "[x]"] isTight isDone
           Paragraph[40, 54]
             Text[40, 53] chars:[40, 53, "list  … m 2.2"]
-          BulletList[62, 136] isTight
-            BulletListItem[62, 80] open:[62, 63, "*"] isTight
-              Paragraph[64, 80]
-                Text[64, 79] chars:[64, 79, "list  … 2.2.1"]
-            BulletListItem[88, 106] open:[88, 89, "*"] isTight
-              Paragraph[90, 106]
-                Text[90, 105] chars:[90, 105, "list  … 2.2.2"]
-            TaskListItem[114, 136] open:[114, 115, "*"] openSuffix:[116, 119, "[X]"] isTight isDone
-              Paragraph[120, 136]
-                Text[120, 135] chars:[120, 135, "list  … 2.2.3"]
-    BulletListItem[136, 259] open:[136, 137, "*"] isTight
-      Paragraph[138, 150]
-        Text[138, 149] chars:[138, 149, "list  … tem 3"]
-      BulletList[152, 259] isTight
-        TaskListItem[152, 172] open:[152, 153, "*"] openSuffix:[154, 157, "[ ]"] isTight isNotDone
-          Paragraph[158, 172]
-            Text[158, 171] chars:[158, 171, "list  … m 3.1"]
-        BulletListItem[174, 259] open:[174, 175, "*"] isTight
-          Paragraph[176, 190]
-            Text[176, 189] chars:[176, 189, "list  … m 3.2"]
-          BulletList[194, 259] isTight
-            BulletListItem[194, 212] open:[194, 195, "*"] isTight
-              Paragraph[196, 212]
-                Text[196, 211] chars:[196, 211, "list  … 3.2.1"]
-            TaskListItem[216, 238] open:[216, 217, "*"] openSuffix:[218, 221, "[ ]"] isTight isNotDone
-              Paragraph[222, 238]
-                Text[222, 237] chars:[222, 237, "list  … 3.2.2"]
-            BulletListItem[242, 259] open:[242, 243, "*"] isTight
-              Paragraph[244, 259]
-                Text[244, 259] chars:[244, 259, "list  … 3.2.3"]
+          BulletList[58, 124] isTight
+            BulletListItem[58, 76] open:[58, 59, "*"] isTight
+              Paragraph[60, 76]
+                Text[60, 75] chars:[60, 75, "list  … 2.2.1"]
+            BulletListItem[80, 98] open:[80, 81, "*"] isTight
+              Paragraph[82, 98]
+                Text[82, 97] chars:[82, 97, "list  … 2.2.2"]
+            TaskListItem[102, 124] open:[102, 103, "*"] openSuffix:[104, 107, "[X]"] isTight isDone
+              Paragraph[108, 124]
+                Text[108, 123] chars:[108, 123, "list  … 2.2.3"]
+    BulletListItem[124, 247] open:[124, 125, "*"] isTight
+      Paragraph[126, 138]
+        Text[126, 137] chars:[126, 137, "list  … tem 3"]
+      BulletList[140, 247] isTight
+        TaskListItem[140, 160] open:[140, 141, "*"] openSuffix:[142, 145, "[ ]"] isTight isNotDone
+          Paragraph[146, 160]
+            Text[146, 159] chars:[146, 159, "list  … m 3.1"]
+        BulletListItem[162, 247] open:[162, 163, "*"] isTight
+          Paragraph[164, 178]
+            Text[164, 177] chars:[164, 177, "list  … m 3.2"]
+          BulletList[182, 247] isTight
+            BulletListItem[182, 200] open:[182, 183, "*"] isTight
+              Paragraph[184, 200]
+                Text[184, 199] chars:[184, 199, "list  … 3.2.1"]
+            TaskListItem[204, 226] open:[204, 205, "*"] openSuffix:[206, 209, "[ ]"] isTight isNotDone
+              Paragraph[210, 226]
+                Text[210, 225] chars:[210, 225, "list  … 3.2.2"]
+            BulletListItem[230, 247] open:[230, 231, "*"] isTight
+              Paragraph[232, 247]
+                Text[232, 247] chars:[232, 247, "list  … 3.2.3"]
 ````````````````````````````````
 
+
+## No Suffix Content
+
+```````````````````````````````` example(No Suffix Content: 1) options(no-suffix-content)
+* [ ] task
+        * item 2
+.
+* [ ] task
+      * item 2
+
+.
+Document[0, 27]
+  BulletList[0, 27] isTight
+    TaskListItem[0, 27] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 11]
+        Text[6, 10] chars:[6, 10, "task"]
+      BulletList[19, 27] isTight
+        BulletListItem[19, 27] open:[19, 20, "*"] isTight
+          Paragraph[21, 27]
+            Text[21, 27] chars:[21, 27, "item 2"]
+````````````````````````````````
+
+
+```````````````````````````````` example No Suffix Content: 2
+* [ ] task
+    * item 2
+.
+* [ ] task
+  * item 2
+
+.
+Document[0, 24]
+  BulletList[0, 24] isTight
+    TaskListItem[0, 24] open:[0, 1, "*"] openSuffix:[2, 5, "[ ]"] isTight isNotDone
+      Paragraph[6, 11]
+        Text[6, 10] chars:[6, 10, "task"]
+      BulletList[15, 24] isTight
+        BulletListItem[15, 24] open:[15, 16, "*"] isTight
+          Paragraph[17, 24]
+            Text[17, 23] chars:[17, 23, "item 2"]
+````````````````````````````````
 

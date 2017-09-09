@@ -181,6 +181,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST = new DataKey<Boolean>("LISTS_ITEM_TYPE_MISMATCH_TO_SUB_LIST", false);
     public static final DataKey<Boolean> LISTS_ORDERED_ITEM_DOT_ONLY = new DataKey<Boolean>("LISTS_ORDERED_ITEM_DOT_ONLY", false);
     public static final DataKey<Boolean> LISTS_ORDERED_LIST_MANUAL_START = new DataKey<Boolean>("LISTS_ORDERED_LIST_MANUAL_START", true);
+    public static final DataKey<Boolean> LISTS_ITEM_CONTENT_AFTER_SUFFIX = new DataKey<Boolean>("LISTS_ITEM_CONTENT_AFTER_SUFFIX", false);
 
     // List Item paragraph interruption capabilities
     // in general:

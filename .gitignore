@@ -13,3 +13,4 @@ target/
 /FlexmarkJavaAssets/
 /lib/autolink-0.6.0.jar
 /lib/autolink-0.6.0-sources.jar
+/flexmark-docx-converter/src/test/resources/test_cases/
