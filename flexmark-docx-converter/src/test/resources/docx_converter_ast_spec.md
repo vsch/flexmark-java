@@ -45,6 +45,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
@@ -70,6 +71,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
@@ -95,6 +97,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
                 <w:b/>
                 <w:bCs/>
                 <w:i/>
@@ -122,6 +125,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Strikethrough"/>
                 <w:strike/>
             </w:rPr>
             <w:t xml:space="preserve">strike-through</w:t>
@@ -146,6 +150,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Superscript"/>
                 <w:position w:val="-4"/>
                 <w:sz w:val="19"/>
             </w:rPr>
@@ -171,6 +176,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Subscript"/>
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
@@ -196,6 +202,7 @@ Sample text
         </w:pPr>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Underlined"/>
                 <w:u w:val="single"/>
             </w:rPr>
             <w:t xml:space="preserve">underline</w:t>
@@ -239,8 +246,7 @@ Sample text
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="227"/>
+            <w:ind w:left="227"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -265,8 +271,7 @@ Sample text
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="454"/>
+            <w:ind w:left="454"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -475,6 +480,110 @@ with some text
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:rPr/>
         </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
+                    <wp:extent cx="541871" cy="541871"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic>
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="541871" cy="541871"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">with some text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Root Path
+
+```````````````````````````````` example(Images: 4) options(url, IGNORES)
+![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png) 
+
+with some text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:drawing>
+                <wp:inline distB="0" distL="0" distR="0" distT="0">
+                    <wp:extent cx="541871" cy="541871"/>
+                    <wp:effectExtent b="0" l="0" r="0" t="0"/>
+                    <wp:docPr descr="flexmark-icon-logo" id="0" name="Image1"/>
+                    <wp:cNvGraphicFramePr>
+                        <a:graphicFrameLocks noChangeAspect="true"/>
+                    </wp:cNvGraphicFramePr>
+                    <a:graphic>
+                        <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+                            <pic:pic>
+                                <pic:nvPicPr>
+                                    <pic:cNvPr id="1" name="Image1"/>
+                                    <pic:cNvPicPr/>
+                                </pic:nvPicPr>
+                                <pic:blipFill>
+                                    <a:blip r:embed="rId3"/>
+                                    <a:stretch>
+                                    <a:fillRect/>
+                                    </a:stretch>
+                                </pic:blipFill>
+                                <pic:spPr>
+                                    <a:xfrm>
+                                    <a:off x="0" y="0"/>
+                                    <a:ext cx="541871" cy="541871"/>
+                                    </a:xfrm>
+                                    <a:prstGeom prst="rect">
+                                    <a:avLst/>
+                                    </a:prstGeom>
+                                </pic:spPr>
+                            </pic:pic>
+                        </a:graphicData>
+                    </a:graphic>
+                </wp:inline>
+            </w:drawing>
+        </w:r>
     </w:p>
     <w:p>
         <w:pPr>
@@ -501,8 +610,17 @@ with hard break
 <w:body>
     <w:p>
         <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -513,7 +631,6 @@ with hard break
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -543,6 +660,16 @@ with hard break
                 <w:fldChar w:fldCharType="end"/>
             </w:r>
         </w:hyperlink>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
     </w:p>
 </w:body>
 ````````````````````````````````
@@ -558,8 +685,17 @@ with child paragraphs
 <w:body>
     <w:p>
         <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -570,8 +706,6 @@ with child paragraphs
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -599,6 +733,16 @@ with child paragraphs
             </w:r>
         </w:hyperlink>
     </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
 </w:body>
 ````````````````````````````````
 
@@ -613,8 +757,17 @@ with child block quote
 <w:body>
     <w:p>
         <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -625,12 +778,22 @@ with child block quote
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="240" w:right="0"/>
+            <w:ind w:left="480"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
             <w:rPr/>
             <w:t xml:space="preserve">another block quote</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
         </w:r>
     </w:p>
 </w:body>
@@ -648,8 +811,17 @@ with child paragraphs
 <w:body>
     <w:p>
         <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -660,8 +832,6 @@ with child paragraphs
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -692,12 +862,319 @@ with child paragraphs
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="240" w:right="0"/>
+            <w:ind w:left="480"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
             <w:rPr/>
             <w:t xml:space="preserve">another block quote</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+with bullet list
+
+```````````````````````````````` example Block Quotes: 5
+> some quote
+>
+> * a list item 
+> * another list item
+>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Quotations"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">some quote</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="TextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
+                    w:space="9" w:sz="16" w:val="single"/>
+            </w:pBdr>
+            <w:ind w:hanging="227" w:left="467" w:right="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">a list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="TextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
+                    w:space="9" w:sz="16" w:val="single"/>
+            </w:pBdr>
+            <w:ind w:hanging="227" w:left="467" w:right="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">another list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+with ordered list
+
+```````````````````````````````` example Block Quotes: 6
+> some quote
+>
+> 1. a list item 
+> 1. another list item
+>
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Quotations"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">some quote</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="TextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="4"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
+                    w:space="9" w:sz="16" w:val="single"/>
+            </w:pBdr>
+            <w:ind w:hanging="283" w:left="523" w:right="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">a list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="TextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="3"/>
+            </w:numPr>
+            <w:pBdr>
+                <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"
+                    w:space="9" w:sz="16" w:val="single"/>
+            </w:pBdr>
+            <w:ind w:hanging="283" w:left="523" w:right="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">another list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+## Fenced Code
+
+```````````````````````````````` example Fenced Code: 1
+```
+pre-formatted code
+code
+```
+
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="PreformattedText"/>
+            <w:spacing w:after="0" w:before="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">pre-formatted code</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="PreformattedText"/>
+            <w:spacing w:after="0" w:before="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">code</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Fenced Code: 2
+text before
+
+```
+pre-formatted code
+code
+```
+
+text after
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">text before</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="PreformattedText"/>
+            <w:spacing w:after="0" w:before="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">pre-formatted code</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="PreformattedText"/>
+            <w:spacing w:after="0" w:before="0"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">code</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+            <w:t xml:space="preserve">text after</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -713,10 +1190,7 @@ with child paragraphs
 .
 <w:body>
     <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-            <w:rPr/>
-        </w:pPr>
+        <w:pPr/>
         <w:r>
             <w:rPr/>
             <w:t xml:space="preserve">&lt;h1&gt;This is a heading&lt;/h1&gt;
@@ -832,6 +1306,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
@@ -863,6 +1338,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
@@ -894,6 +1370,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Strikethrough"/>
                 <w:strike/>
             </w:rPr>
             <w:t xml:space="preserve">strike-through</w:t>
@@ -1007,6 +1484,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
                 <w:b/>
                 <w:bCs/>
             </w:rPr>
@@ -1018,6 +1496,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
                 <w:i/>
                 <w:iCs/>
             </w:rPr>
@@ -1029,6 +1508,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
                 <w:b/>
                 <w:bCs/>
                 <w:i/>
@@ -1042,6 +1522,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Underlined"/>
                 <w:u w:val="single"/>
             </w:rPr>
             <w:t xml:space="preserve">underline</w:t>
@@ -1052,12 +1533,14 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Strikethrough"/>
                 <w:strike/>
             </w:rPr>
             <w:t xml:space="preserve">strike-through</w:t>
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Subscript"/>
                 <w:position w:val="8"/>
                 <w:sz w:val="19"/>
             </w:rPr>
@@ -1069,6 +1552,7 @@ code
         </w:r>
         <w:r>
             <w:rPr>
+                <w:rStyle w:val="Superscript"/>
                 <w:position w:val="-4"/>
                 <w:sz w:val="19"/>
             </w:rPr>
@@ -1102,8 +1586,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="227"/>
+            <w:ind w:left="227"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1148,8 +1631,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="227"/>
+            <w:ind w:left="227"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1174,8 +1656,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="454"/>
+            <w:ind w:left="454"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1240,10 +1721,7 @@ code
         </w:r>
     </w:p>
     <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-            <w:rPr/>
-        </w:pPr>
+        <w:pPr/>
         <w:r>
             <w:rPr/>
             <w:t xml:space="preserve">&lt;!-- HTML Comment  --&gt;
@@ -1255,7 +1733,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="4"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1269,7 +1747,7 @@ code
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="5"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1283,7 +1761,7 @@ code
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="2"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="6"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1297,7 +1775,7 @@ code
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="3"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="7"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1311,7 +1789,7 @@ code
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="4"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="8"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1339,7 +1817,7 @@ code
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="1"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="9"/>
             </w:numPr>
             <w:rPr/>
         </w:pPr>
@@ -1360,8 +1838,17 @@ code
     </w:p>
     <w:p>
         <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="280" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1372,8 +1859,6 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:spacing w:after="120" w:before="240"/>
-            <w:ind w:hanging="0" w:left="0" w:right="0"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1404,7 +1889,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="240" w:right="0"/>
+            <w:ind w:left="480"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1415,7 +1900,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="480" w:right="0"/>
+            <w:ind w:left="720"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1426,7 +1911,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="720" w:right="0"/>
+            <w:ind w:left="960"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1437,7 +1922,7 @@ code
     <w:p>
         <w:pPr>
             <w:pStyle w:val="Quotations"/>
-            <w:ind w:hanging="0" w:left="960" w:right="0"/>
+            <w:ind w:left="1200"/>
             <w:rPr/>
         </w:pPr>
         <w:r>
@@ -1447,7 +1932,17 @@ code
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="TextBody"/>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+            <w:rPr/>
+        </w:pPr>
+        <w:r>
+            <w:rPr/>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
             <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
             <w:rPr/>
         </w:pPr>
@@ -1479,7 +1974,7 @@ code
     </w:p>
     <w:p>
         <w:pPr>
-            <w:pStyle w:val="TextBody"/>
+            <w:pStyle w:val="Normal"/>
             <w:spacing w:after="0" w:before="0" w:line="240" w:lineRule="exact"/>
             <w:rPr/>
         </w:pPr>
@@ -1529,6 +2024,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Emphasis"/>
                             <w:i/>
                             <w:iCs/>
                         </w:rPr>
@@ -1573,6 +2069,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="StrongEmphasis"/>
                             <w:b/>
                             <w:bCs/>
                         </w:rPr>
@@ -1612,6 +2109,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Underlined"/>
                             <w:u w:val="single"/>
                         </w:rPr>
                         <w:t xml:space="preserve">Align</w:t>
@@ -1708,6 +2206,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="StrongEmphasis"/>
                             <w:b/>
                             <w:bCs/>
                         </w:rPr>
@@ -1779,6 +2278,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Emphasis"/>
                             <w:i/>
                             <w:iCs/>
                         </w:rPr>
@@ -1850,6 +2350,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Subscript"/>
                             <w:position w:val="8"/>
                             <w:sz w:val="19"/>
                         </w:rPr>
@@ -1879,6 +2380,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Strikethrough"/>
                             <w:strike/>
                         </w:rPr>
                         <w:t xml:space="preserve">Data</w:t>
@@ -1935,6 +2437,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Superscript"/>
                             <w:position w:val="-4"/>
                             <w:sz w:val="19"/>
                         </w:rPr>
@@ -2008,6 +2511,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Emphasis"/>
                             <w:i/>
                             <w:iCs/>
                         </w:rPr>
@@ -2052,6 +2556,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="StrongEmphasis"/>
                             <w:b/>
                             <w:bCs/>
                         </w:rPr>
@@ -2091,6 +2596,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Underlined"/>
                             <w:u w:val="single"/>
                         </w:rPr>
                         <w:t xml:space="preserve">Align</w:t>
@@ -2187,6 +2693,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="StrongEmphasis"/>
                             <w:b/>
                             <w:bCs/>
                         </w:rPr>
@@ -2258,6 +2765,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Emphasis"/>
                             <w:i/>
                             <w:iCs/>
                         </w:rPr>
@@ -2329,6 +2837,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Subscript"/>
                             <w:position w:val="8"/>
                             <w:sz w:val="19"/>
                         </w:rPr>
@@ -2358,6 +2867,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Strikethrough"/>
                             <w:strike/>
                         </w:rPr>
                         <w:t xml:space="preserve">Data</w:t>
@@ -2414,6 +2924,7 @@ code
                     </w:r>
                     <w:r>
                         <w:rPr>
+                            <w:rStyle w:val="Superscript"/>
                             <w:position w:val="-4"/>
                             <w:sz w:val="19"/>
                         </w:rPr>

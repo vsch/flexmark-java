@@ -1,12 +1,17 @@
 package com.vladsch.flexmark.docx.converter;
 
 import org.docx4j.wml.PPr;
-import org.docx4j.wml.PPrBase;
 import org.docx4j.wml.ParaRPr;
-import org.docx4j.wml.Style;
 
-public interface BlockFormatProvider extends ParaContainer {
-    /*
+public interface BlockFormatProvider extends FormatProvider {
+    public static final String DEFAULT_STYLE = "Normal";
+    public static final String LOOSE_PARAGRAPH_STYLE = "ParagraphTextBody";
+    public static final String TIGHT_PARAGRAPH_STYLE = "TextBody";
+    public static final String PREFORMATTED_TEXT_STYLE = "PreformattedText";
+    public static final String BLOCK_QUOTE_STYLE = "Quotations";
+    public static final String HORIZONTAL_LINE_STYLE = "HorizontalLine";
+
+/*
 
     Provides containment of other format blocks to allow
     inheritance of formatting from parent to child
@@ -36,23 +41,14 @@ public interface BlockFormatProvider extends ParaContainer {
     // PPrBase.PBdr getPBdr();
     // PShading getPShading();
 
-    // initialize internal stuff based on the parent for future use
-    // optionally add elements to doc before main elements
-    // any P creates will call the getPPr(), getParaRPr() and addP() for this provider
-    // so don't create elements until you are ready to handle these calls
-    void open();
-
-    // finalize, add elements to the document after main part as needed
-    // after this method returns no more calls will be made to this provider
-    void close();
-
-    // these are the hard-coded styles on which this block is based
-    // used for reference purposes by children to figure out what they need to inherit
-    Style getBaseStyle();
-
     // get the final PPr for the next P of this provider
-    PPrBase getPPr();
+    void getPPr(final PPr pPr);
 
     // get the final ParaRPr for the next P of this provider
-    ParaRPr getParaRPr();
+    void getParaRPr(final ParaRPr rPr);
+
+    // to allow formatter to track first P formatting
+    void pFormatted();
+
+    BlockFormatProvider getParent();
 }

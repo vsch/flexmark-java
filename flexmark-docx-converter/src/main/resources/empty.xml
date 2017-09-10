@@ -216,6 +216,36 @@
                         <w:iCs/>
                     </w:rPr>
                 </w:style>
+                <w:style w:styleId="Superscript" w:type="character">
+                    <w:name w:val="Superscript"/>
+                    <w:qFormat/>
+                    <w:rPr>
+                        <w:position w:val="8"/>
+                        <w:sz w:val="19"/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:styleId="Subscript" w:type="character">
+                    <w:name w:val="Subscript"/>
+                    <w:qFormat/>
+                    <w:rPr>
+                        <w:position w:val="-4"/>
+                        <w:sz w:val="19"/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:styleId="Strikethrough" w:type="character">
+                    <w:name w:val="Strikethrough"/>
+                    <w:qFormat/>
+                    <w:rPr>
+                        <w:strike/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:styleId="Underlined" w:type="character">
+                    <w:name w:val="Underlined"/>
+                    <w:qFormat/>
+                    <w:rPr>
+                        <w:u w:val="single"/>
+                    </w:rPr>
+                </w:style>
                 <w:style w:styleId="SourceText" w:type="character">
                     <w:name w:val="Source Text"/>
                     <w:qFormat/>

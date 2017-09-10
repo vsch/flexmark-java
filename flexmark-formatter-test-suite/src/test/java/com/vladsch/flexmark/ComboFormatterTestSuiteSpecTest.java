@@ -41,7 +41,7 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
     private static final DataHolder OPTIONS = new MutableDataSet()
             //.set(FormattingRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
-            //.set(Parser.EXTENSIONS, Collections.singleton(FormatterExtension.create()))
+            //.set(Parser.EXTENSIONS, Collections.singleton(RendererExtension.create()))
             .set(Parser.EXTENSIONS, Arrays.asList(
                     AbbreviationExtension.create(),
                     AnchorLinkExtension.create(),
@@ -73,7 +73,7 @@ public class ComboFormatterTestSuiteSpecTest extends ComboSpecTestCase {
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
-        //optionsMap.put("option1", new MutableDataSet().set(FormatterExtension.FORMATTER_OPTION1, true));
+        //optionsMap.put("option1", new MutableDataSet().set(RendererExtension.FORMATTER_OPTION1, true));
         optionsMap.put("no-tailing-blanks", new MutableDataSet().set(Formatter.MAX_TRAILING_BLANK_LINES, 0));
         optionsMap.put("atx-space-as-is", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.AS_IS));
         optionsMap.put("atx-space-add", new MutableDataSet().set(Formatter.SPACE_AFTER_ATX_MARKER, DiscretionaryText.ADD));

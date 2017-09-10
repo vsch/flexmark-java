@@ -5,7 +5,7 @@ import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Text;
 import com.vladsch.flexmark.ast.util.ReferenceRepository;
 import com.vladsch.flexmark.ast.util.TextCollectingVisitor;
-import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
+import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
 import com.vladsch.flexmark.ext.ins.Ins;
@@ -15,10 +15,8 @@ import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.superscript.Superscript;
-import com.vladsch.flexmark.util.Function;
 import com.vladsch.flexmark.util.ImageUtils;
 import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.format.options.ListSpacing;
 import com.vladsch.flexmark.util.html.Attribute;
 import com.vladsch.flexmark.util.html.Escaping;
@@ -30,6 +28,7 @@ import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
 import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 
@@ -40,6 +39,7 @@ import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.*;
 
+import static com.vladsch.flexmark.docx.converter.BlockFormatProvider.*;
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
 import static java.lang.Character.isLetter;
 
@@ -52,14 +52,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             DocxRendererPhase.DOCUMENT_TOP,
             DocxRendererPhase.DOCUMENT_BOTTOM
     ));
-
-    public static final String LOOSE_PARAGRAPH_STYLE = "ParagraphTextBody";
-    public static final String TIGHT_PARAGRAPH_STYLE = "TextBody";
-    public static final String PREFORMATTED_TEXT_STYLE = "PreformattedText";
-    public static final String BLOCK_QUOTE_STYLE = "Quotations";
-    public static final String HORIZONTAL_LINE_STYLE = "HorizontalLine";
-    public static final String INLINE_CODE_STYLE = "SourceText";
-    public static final String HYPERLINK_STYLE = "Hyperlink";
 
     protected final ReferenceRepository referenceRepository;
 
@@ -399,29 +391,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         BasedSequence chars = node.getChars();
         MainDocumentPart mdp = docx.getDocxDocument();
         if (node instanceof Block) {
-            final ValueRunnable<PPr> initializer = new ValueRunnable<PPr>() {
-                @Override
-                public void run(final PPr value) {
-                    // Create object for rPr
-                    ParaRPr pararpr = value.getRPr();
-                    if (pararpr == null) {
-                        pararpr = docx.getObjectFactory().createParaRPr();
-                        value.setRPr(pararpr);
-                    }
-
-                    // Create object for pStyle if one does not already exist
-                    if (value.getPStyle() == null) {
-                        PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                        value.setPStyle(basePStyle);
-                        basePStyle.setVal(LOOSE_PARAGRAPH_STYLE);
-                    }
-                }
-            };
-
-            docx.pushPPrInitializer(initializer);
+            docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, BlockFormatProvider.LOOSE_PARAGRAPH_STYLE));
             docx.createP();
             docx.renderChildren(node);
-            docx.popPPrInitializer(initializer);
         } else {
             docx.text(chars.unescape());
         }
@@ -437,36 +409,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final Paragraph node, final DocxRendererContext docx) {
-        if (!(node.getParent() instanceof ParagraphItemContainer)) {
-            //if (!node.isTrailingBlankLine() && (node.getNext() == null || node.getNext() instanceof ListBlock)) {
-            //    renderTextBlockParagraphLines(node, docx, TIGHT_PARAGRAPH_STYLE);
-            //} else {
-            //    renderLooseParagraph(node, docx);
-            //}
-            renderLooseParagraph(node, docx);
-        } else {
-            boolean isItemParagraph = ((ParagraphItemContainer) node.getParent()).isItemParagraph(node);
-            if (isItemParagraph) {
-                ListSpacing itemSpacing = docx.getDocument().get(LIST_ITEM_SPACING);
-                if (itemSpacing == ListSpacing.TIGHT) {
-                    renderTextBlockParagraphLines(node, docx, TIGHT_PARAGRAPH_STYLE);
-                } else if (itemSpacing == ListSpacing.LOOSE) {
-                    if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
-                        renderTextBlockParagraphLines(node, docx, TIGHT_PARAGRAPH_STYLE);
-                    } else {
-                        renderLooseParagraph(node, docx);
-                    }
-                } else {
-                    if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, docx.getOptions())) {
-                        renderLooseParagraph(node, docx);
-                    } else {
-                        renderTextBlockParagraphLines(node, docx, TIGHT_PARAGRAPH_STYLE);
-                    }
-                }
+        if (!(node.getParent() instanceof ParagraphItemContainer) || !((ParagraphItemContainer) node.getParent()).isItemParagraph(node)) {
+            if (node.getParent() instanceof BlockQuote) {
+
             } else {
-                renderLooseParagraph(node, docx);
+                docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, LOOSE_PARAGRAPH_STYLE));
             }
+        } else {
+            // the parent handles our formatting
         }
+        docx.createP();
+        docx.renderChildren(node);
     }
 
     private void render(final Text node, final DocxRendererContext docx) {
@@ -478,499 +431,251 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final Emphasis node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.ITALIC_STYLE) {
             @Override
-            public void run(final RPr value) {
-                value.setI(docx.getBooleanDefaultTrue());
-                value.setICs(docx.getBooleanDefaultTrue());
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+                rPr.setI(docx.getBooleanDefaultTrue());
+                rPr.setICs(docx.getBooleanDefaultTrue());
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final StrongEmphasis node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.BOLD_STYLE) {
             @Override
-            public void run(final RPr value) {
-                value.setB(docx.getBooleanDefaultTrue());
-                value.setBCs(docx.getBooleanDefaultTrue());
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+                rPr.setB(docx.getBooleanDefaultTrue());
+                rPr.setBCs(docx.getBooleanDefaultTrue());
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Subscript node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.SUBSCRIPT_STYLE) {
             @Override
-            public void run(final RPr value) {
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+
                 // Create object for sz
-                HpsMeasure hpsmeasure = docx.getObjectFactory().createHpsMeasure();
-                value.setSz(hpsmeasure);
+                HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
+                rPr.setSz(hpsmeasure);
                 hpsmeasure.setVal(BigInteger.valueOf(19));
 
                 // Create object for position
-                CTSignedHpsMeasure signedhpsmeasure = docx.getObjectFactory().createCTSignedHpsMeasure();
-                value.setPosition(signedhpsmeasure);
+                CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
+                rPr.setPosition(signedhpsmeasure);
                 signedhpsmeasure.setVal(BigInteger.valueOf(-4));
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Superscript node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.SUPERSCRIPT_STYLE) {
             @Override
-            public void run(final RPr value) {
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+
                 // Create object for sz
-                HpsMeasure hpsmeasure = docx.getObjectFactory().createHpsMeasure();
-                value.setSz(hpsmeasure);
+                HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
+                rPr.setSz(hpsmeasure);
                 hpsmeasure.setVal(BigInteger.valueOf(19));
 
                 // Create object for position
-                CTSignedHpsMeasure signedhpsmeasure = docx.getObjectFactory().createCTSignedHpsMeasure();
-                value.setPosition(signedhpsmeasure);
+                CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
+                rPr.setPosition(signedhpsmeasure);
                 signedhpsmeasure.setVal(BigInteger.valueOf(8));
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Strikethrough node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.STRIKE_THROUGH_STYLE) {
             @Override
-            public void run(final RPr value) {
-                value.setStrike(docx.getObjectFactory().createBooleanDefaultTrue());
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+                rPr.setStrike(docx.getFactory().createBooleanDefaultTrue());
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Ins node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.INS_STYLE) {
             @Override
-            public void run(final RPr value) {
-                U u = docx.getObjectFactory().createU();
-                value.setU(u);
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+                U u = docx.getFactory().createU();
+                rPr.setU(u);
                 u.setVal(org.docx4j.wml.UnderlineEnumeration.SINGLE);
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Code node, final DocxRendererContext docx) {
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.INLINE_CODE_STYLE) {
             @Override
-            public void run(final RPr value) {
-                // Create object for rStyle
-                RStyle rstyle = docx.getObjectFactory().createRStyle();
-                value.setRStyle(rstyle);
-                rstyle.setVal(INLINE_CODE_STYLE);
+            public void getRPr(final RPr rPr) {
+                super.getRPr(rPr);
+                //// Create object for rStyle
+                //RStyle rstyle = docx.getFactory().createRStyle();
+                //rPr.setRStyle(rstyle);
+                //rstyle.setVal(INLINE_CODE_STYLE);
             }
-        };
-        docx.pushRPrInitializer(initializer);
+        });
         docx.renderChildren(node);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final Heading node, final DocxRendererContext docx) {
-        P p = docx.createP();
-        PPr ppr = p.getPPr();
-
-        // Create object for rPr
-        ParaRPr paraRPr = docx.getObjectFactory().createParaRPr();
-        ppr.setRPr(paraRPr);
-
-        // Create object for numPr
-        PPrBase.NumPr baseNumPr = docx.getObjectFactory().createPPrBaseNumPr();
-        ppr.setNumPr(baseNumPr);
-
-        // Create object for numId
-        PPrBase.NumPr.NumId prNumId = docx.getObjectFactory().createPPrBaseNumPrNumId();
-        baseNumPr.setNumId(prNumId);
-        prNumId.setVal(BigInteger.valueOf(0));
-
-        // Create object for ilvl
-        PPrBase.NumPr.Ilvl prIlvl = docx.getObjectFactory().createPPrBaseNumPrIlvl();
-        baseNumPr.setIlvl(prIlvl);
-        prIlvl.setVal(BigInteger.valueOf(node.getLevel() - 1));
-
-        // Create object for pStyle
-        PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-        ppr.setPStyle(basePStyle);
-
         final String styleId = String.format("Heading%d", node.getLevel());
-        basePStyle.setVal(styleId);
 
-        docx.renderChildren(node);
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderTextBlockParagraphLines(final Paragraph node, final DocxRendererContext docx, final String styleName) {
-        final boolean isListItemChild = node.getParent() instanceof ListItem && !((ListItem) node.getParent()).isItemParagraph((Paragraph) node);
-        final int idNum = node.getParent() instanceof OrderedListItem ? 3 : 2;
-        final int nesting = node.countAncestorsOfType(BulletList.class, OrderedList.class);
-
-        final ValueRunnable<PPr> initializer = new ValueRunnable<PPr>() {
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, styleId) {
             @Override
-            public void run(final PPr value) {
-                ParaRPr pararpr = value.getRPr();
-                if (pararpr == null) {
-                    // Create object for rPr
-                    pararpr = docx.getObjectFactory().createParaRPr();
-                    value.setRPr(pararpr);
-                }
+            public void getPPr(final PPr pPr) {
+                // Create object for numPr
+                PPrBase.NumPr baseNumPr = docx.getFactory().createPPrBaseNumPr();
+                pPr.setNumPr(baseNumPr);
 
-                if (value.getPStyle() == null) {
-                    // Create object for pStyle if one does not already exist
-                    PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                    value.setPStyle(basePStyle);
-                    basePStyle.setVal(styleName);
-                } else {
-                    // take the given styles before/after and set spacing on the PPr if we are not the first child
-                    if (node.getParent().getFirstChild() != node) {
-                        Style style = docx.getStyle(styleName);
-                        if (style != null) {
-                            BigInteger before = safeSpacingBefore(style.getPPr());
-                            BigInteger after = safeSpacingAfter(style.getPPr());
+                // Create object for numId
+                PPrBase.NumPr.NumId prNumId = docx.getFactory().createPPrBaseNumPrNumId();
+                baseNumPr.setNumId(prNumId);
+                prNumId.setVal(BigInteger.valueOf(0));
 
-                            PPrBase.Spacing spacing = docx.getObjectFactory().createPPrBaseSpacing();
-                            value.setSpacing(spacing);
-                            spacing.setBefore(before);
-                            spacing.setAfter(after);
-                        }
-                    }
-                }
+                // Create object for ilvl
+                PPrBase.NumPr.Ilvl prIlvl = docx.getFactory().createPPrBaseNumPrIlvl();
+                baseNumPr.setIlvl(prIlvl);
+                prIlvl.setVal(BigInteger.valueOf(node.getLevel() - 1));
 
-                if (isListItemChild) {
-                    // need to set indent
-                    final PPrBase.Ind ind = docx.getDocxDocument().getNumberingDefinitionsPart().getInd(String.valueOf(idNum), String.valueOf(nesting - 1));
-                    docx.setPPrIndent(value, ind.getLeft(), ind.getRight(), BigInteger.ZERO, DocxRendererContext.ADD_HANGING_TO_LEFT);
-                }
+                // handle inheritance
+                super.getPPr(pPr);
             }
-        };
+        });
 
-        docx.pushPPrInitializer(initializer);
-        docx.createP();
+        P p = docx.createP();
         docx.renderChildren(node);
-        docx.popPPrInitializer(initializer);
-    }
-
-    @SuppressWarnings("WeakerAccess")
-    public static void renderLooseParagraph(final Paragraph node, final DocxRendererContext docx) {
-        renderTextBlockParagraphLines(node, docx, LOOSE_PARAGRAPH_STYLE);
     }
 
     private void render(final BlockQuote node, final DocxRendererContext docx) {
-        final boolean isNested = node.getAncestorOfType(BlockQuote.class) != null;
+        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class)+1;
         final BigInteger left;
         final BigInteger right;
+        boolean force = false;
+
+        final Style style = docx.getStyle(BLOCK_QUOTE_STYLE);
+        if (style != null) {
+            // Should always be true
+            left = docx.getHelper().safeIndLeft(style.getPPr(), 240);
+        } else {
+            force = true;
+            left = BigInteger.valueOf(240);
+        }
+
+        final BigInteger quoteLevel = BigInteger.valueOf(level);
+        final boolean forceInd = force;
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, BLOCK_QUOTE_STYLE) {
+            @Override
+            public void getPPr(final PPr pPr) {
+                if (level > 1 || forceInd) {
+                    myDocx.getHelper().ensureInd(pPr).setLeft(left.multiply(quoteLevel));
+                }
+                super.getPPr(pPr);
+            }
+
+            @Override
+            protected BlockFormatProvider getStyleParent() {
+                BlockFormatProvider parent = myParent;
+                while (parent != null && parent.getNode().getNodeOfTypeIndex(BlockQuote.class) != -1) {
+                    parent = parent.getParent();
+                }
+                return parent;
+            }
+        });
+        final BigInteger before;
+        final BigInteger after;
 
         final Style paragraphStyle = docx.getStyle(BLOCK_QUOTE_STYLE);
         if (paragraphStyle != null) {
             // Should always be true
-            left = safeAccess(safeInd(safePPr(paragraphStyle)), BigInteger.valueOf(240), new Function<PPrBase.Ind, BigInteger>() {
-                @Override
-                public BigInteger apply(final PPrBase.Ind ind) {
-                    return ind.getLeft();
-                }
-            });
-            right = safeAccess(safeInd(safePPr(paragraphStyle)), BigInteger.ZERO, new Function<PPrBase.Ind, BigInteger>() {
-                @Override
-                public BigInteger apply(final PPrBase.Ind ind) {
-                    return ind.getRight();
-                }
-            });
-        } else {
-            left = BigInteger.valueOf(240);
-            right = BigInteger.ZERO;
-        }
-
-        final ValueRunnable<PPr> prInitializer = new ValueRunnable<PPr>() {
-            @Override
-            public void run(final PPr value) {
-                // Create object for rPr
-                ParaRPr pararpr = value.getRPr();
-                if (pararpr == null) {
-                    pararpr = docx.getObjectFactory().createParaRPr();
-                    value.setRPr(pararpr);
-                }
-
-                // Create object for pStyle
-                PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                value.setPStyle(basePStyle);
-                basePStyle.setVal(BLOCK_QUOTE_STYLE);
-
-                if (isNested) {
-                    docx.setPPrIndent(value, left, right, BigInteger.ZERO, DocxRendererContext.ADD_LEFT_RIGHT);
-                } else {
-                    docx.setPPrIndent(value, BigInteger.ZERO, BigInteger.ZERO, BigInteger.ZERO, DocxRendererContext.ADD_LEFT_RIGHT);
-                }
-            }
-        };
-
-        docx.pushPPrInitializer(prInitializer);
-        docx.renderChildren(node);
-        docx.popPPrInitializer(prInitializer);
-    }
-
-    private void render(final ThematicBreak node, final DocxRendererContext docx) {
-        // Create object for p
-        P p = docx.createP();
-
-        // Create object for pPr
-        PPr ppr = p.getPPr();
-
-        // Create object for rPr
-        ParaRPr paraRPr = docx.getObjectFactory().createParaRPr();
-        ppr.setRPr(paraRPr);
-
-        // Create object for pStyle
-        PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-        ppr.setPStyle(basePStyle);
-        basePStyle.setVal(HORIZONTAL_LINE_STYLE);
-
-        // Create object for r
-        R r = docx.createR();
-    }
-
-    private static <T, R> R safeAccess(T instance, R defValue, Function<T, R> access) {
-        if (instance != null) {
-            return access.apply(instance);
-        }
-        return defValue;
-    }
-
-    private static PPr safePPr(Style style) {
-        return style == null ? null : style.getPPr();
-    }
-
-    private static PPrBase.Spacing safeSpacing(PPr ppr) {
-        return ppr == null ? null : ppr.getSpacing();
-    }
-
-    private static BigInteger safeSpacingBefore(PPrBase.Spacing spacing) {
-        return safeSpacingAfter(spacing, null);
-    }
-
-    private static BigInteger safeSpacingBefore(PPrBase.Spacing spacing, BigInteger defValue) {
-        if (spacing != null) {
-            BigInteger value = spacing.getBefore();
-            if (value != null) {
-                return value;
-            }
-        }
-        return defValue;
-    }
-
-    private static BigInteger safeSpacingAfter(PPrBase.Spacing spacing) {
-        return safeSpacingAfter(spacing, null);
-    }
-
-    private static BigInteger safeSpacingAfter(PPrBase.Spacing spacing, BigInteger defValue) {
-        if (spacing != null) {
-            BigInteger value = spacing.getAfter();
-            if (value != null) {
-                return value;
-            }
-        }
-        return defValue;
-    }
-
-    private static BigInteger safeSpacingBefore(PPr pPr) {
-        return pPr == null ? null : safeSpacingBefore(pPr.getSpacing(), null);
-    }
-
-    private static BigInteger safeSpacingBefore(PPr pPr, BigInteger defValue) {
-        return pPr == null ? defValue : safeSpacingBefore(pPr.getSpacing(), defValue);
-    }
-
-    private static BigInteger safeSpacingAfter(PPr pPr) {
-        return pPr == null ? null : safeSpacingAfter(pPr.getSpacing(), null);
-    }
-
-    private static BigInteger safeSpacingAfter(PPr pPr, BigInteger defValue) {
-        return pPr == null ? defValue : safeSpacingAfter(pPr.getSpacing(), defValue);
-    }
-
-    private static PPrBase.Ind safeInd(PPr ppr) {
-        return ppr == null ? null : ppr.getInd();
-    }
-
-    private void wrapBeforeAfterSpacing(final DocxRendererContext docx, final String style, final boolean wrapOnce, final Runnable runnable) {
-        final BigInteger before;
-        final BigInteger after;
-
-        final Style paragraphStyle = docx.getStyle(style);
-        if (paragraphStyle != null) {
-            // Should always be true
-            before = safeSpacingBefore(paragraphStyle.getPPr());
-            after = safeSpacingAfter(paragraphStyle.getPPr());
+            before = docx.getHelper().safeSpacingBefore(paragraphStyle.getPPr());
+            after = docx.getHelper().safeSpacingAfter(paragraphStyle.getPPr());
         } else {
             before = BigInteger.ZERO;
             after = BigInteger.ZERO;
         }
 
-        final Runnable afterP = new Runnable() {
-            @Override
-            public void run() {
-                // now add empty for spacing
-                P p = docx.createP();
-                PPr pPr = p.getPPr();
+        if (level == 1) docx.addBlankLine(before, BlockFormatProvider.DEFAULT_STYLE);
+        docx.renderChildren(node);
+        if (level == 1) docx.addBlankLine(after, BlockFormatProvider.DEFAULT_STYLE);
+    }
 
-                // Create object for pStyle
-                PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                pPr.setPStyle(basePStyle);
-                basePStyle.setVal(TIGHT_PARAGRAPH_STYLE);
+    private void render(final ThematicBreak node, final DocxRendererContext docx) {
+        // Create object for p
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, HORIZONTAL_LINE_STYLE));
+        P p = docx.createP();
 
-                ParaRPr paraRPr = docx.getObjectFactory().createParaRPr();
-                pPr.setRPr(paraRPr);
-
-                // Create Spacing
-                PPrBase.Spacing spacing = docx.getObjectFactory().createPPrBaseSpacing();
-                pPr.setSpacing(spacing);
-
-                spacing.setBefore(BigInteger.ZERO);
-                spacing.setAfter(BigInteger.ZERO);
-                spacing.setLine(after);
-                spacing.setLineRule(STLineSpacingRule.EXACT);
-
-                R r = docx.createR();
-                RPr rPr = r.getRPr();
-
-                if (!wrapOnce) {
-                    docx.clearAfterP(this);
-                }
-            }
-        };
-
-        final Runnable beforeP = new Runnable() {
-            @Override
-            public void run() {
-                if (before.compareTo(BigInteger.ZERO) > 0) {
-                    // now add empty for spacing
-                    P p = docx.createP();
-                    PPr pPr = p.getPPr();
-
-                    // Create object for pStyle
-                    PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                    pPr.setPStyle(basePStyle);
-                    basePStyle.setVal(TIGHT_PARAGRAPH_STYLE);
-
-                    ParaRPr paraRPr = docx.getObjectFactory().createParaRPr();
-                    pPr.setRPr(paraRPr);
-
-                    // Create Spacing
-                    PPrBase.Spacing spacing = docx.getObjectFactory().createPPrBaseSpacing();
-                    pPr.setSpacing(spacing);
-
-                    spacing.setBefore(BigInteger.ZERO);
-                    spacing.setAfter(BigInteger.ZERO);
-                    spacing.setLine(before);
-                    spacing.setLineRule(STLineSpacingRule.EXACT);
-
-                    R r = docx.createR();
-                    RPr rPr = r.getRPr();
-                }
-
-                if (!wrapOnce) {
-                    docx.clearBeforeP(this);
-
-                    if (after.compareTo(BigInteger.ZERO) > 0) {
-                        docx.setAfterP(afterP);
-                    }
-                }
-            }
-        };
-
-        if (wrapOnce) {
-            beforeP.run();
-        } else {
-            docx.setBeforeP(beforeP);
-        }
-
-        final ValueRunnable<PPr> pInitializer = new ValueRunnable<PPr>() {
-            @Override
-            public void run(final PPr value) {
-                ParaRPr paraRPr = value.getRPr();
-                if (paraRPr == null) {
-                    // Create object for rPr
-                    paraRPr = docx.getObjectFactory().createParaRPr();
-                    value.setRPr(paraRPr);
-                }
-
-                PPrBase.Spacing spacing = value.getSpacing();
-                if (spacing == null) {
-                    // Create Spacing
-                    spacing = docx.getObjectFactory().createPPrBaseSpacing();
-                    value.setSpacing(spacing);
-                }
-
-                spacing.setBefore(BigInteger.ZERO);
-                spacing.setAfter(BigInteger.ZERO);
-
-                // Create object for pStyle
-                PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                value.setPStyle(basePStyle);
-                basePStyle.setVal(style);
-            }
-        };
-
-        docx.pushPPrInitializer(pInitializer);
-        runnable.run();
-        docx.popPPrInitializer(pInitializer);
-
-        if (docx.getBeforeP() == before) {
-            // did not run, remove it
-            docx.setBeforeP(beforeP);
-        }
-
-        if (wrapOnce && after.compareTo(BigInteger.ZERO) > 0) {
-            afterP.run();
-        }
+        // Create object for r
+        R r = docx.createR();
     }
 
     private void renderCodeLines(final DocxRendererContext docx, final List<BasedSequence> lines) {
-        wrapBeforeAfterSpacing(docx, PREFORMATTED_TEXT_STYLE, true, new Runnable() {
+        final BigInteger before;
+        final BigInteger after;
+
+        final Style paragraphStyle = docx.getStyle(PREFORMATTED_TEXT_STYLE);
+        if (paragraphStyle != null) {
+            // Should always be true
+            before = docx.getHelper().safeSpacingBefore(paragraphStyle.getPPr());
+            after = docx.getHelper().safeSpacingAfter(paragraphStyle.getPPr());
+        } else {
+            before = BigInteger.ZERO;
+            after = BigInteger.ZERO;
+        }
+
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, PREFORMATTED_TEXT_STYLE) {
             @Override
-            public void run() {
-                int[] leadColumns = new int[lines.size()];
-                int minSpaces = Integer.MAX_VALUE;
-                int i = 0;
-                for (BasedSequence line : lines) {
-                    leadColumns[i] = line.countLeadingColumns(0, " \t");
-                    minSpaces = Utils.min(minSpaces, leadColumns[i]);
-                    i++;
-                }
-
-                ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
-                i = 0;
-                for (BasedSequence line : lines) {
-                    StringBuilder sb = new StringBuilder();
-
-                    int spaces = leadColumns[i] - minSpaces;
-                    while (spaces-- > 0) sb.append(' ');
-                    sb.append(line.trim());
-
-                    // Create object for p
-                    P p = docx.createP();
-                    docx.text(sb.toString());
-
-                    i++;
-                }
+            public void getPPr(final PPr pPr) {
+                docx.getHelper().ensureSpacing(pPr);
+                final PPrBase.Spacing spacing = pPr.getSpacing();
+                spacing.setBefore(BigInteger.ZERO);
+                spacing.setAfter(BigInteger.ZERO);
+                super.getPPr(pPr);
             }
         });
+
+        docx.addBlankLine(before, BlockFormatProvider.DEFAULT_STYLE);
+
+        int[] leadColumns = new int[lines.size()];
+        int minSpaces = Integer.MAX_VALUE;
+        int i = 0;
+        for (BasedSequence line : lines) {
+            leadColumns[i] = line.countLeadingColumns(0, " \t");
+            minSpaces = Utils.min(minSpaces, leadColumns[i]);
+            i++;
+        }
+
+        ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
+        i = 0;
+        for (BasedSequence line : lines) {
+            StringBuilder sb = new StringBuilder();
+
+            int spaces = leadColumns[i] - minSpaces;
+            while (spaces-- > 0) sb.append(' ');
+            sb.append(line.trim());
+
+            // Create object for p
+            P p = docx.createP();
+            docx.text(sb.toString());
+
+            i++;
+        }
+
+        docx.addBlankLine(after, BlockFormatProvider.DEFAULT_STYLE);
     }
 
     private void render(final FencedCodeBlock node, final DocxRendererContext docx) {
@@ -1008,48 +713,64 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void renderListItem(final ListItem node, final DocxRendererContext docx) {
-        final boolean[] firstP = new boolean[] { true };
-        final int idNum = node instanceof OrderedListItem ? 3 : 2;
-        final int nesting = node.countAncestorsOfType(BulletList.class, OrderedList.class);
+        final int nesting = node.countDirectAncestorsOfType(ListItem.class, BulletList.class, OrderedList.class);
+        final String listStyle = listOptions.isTightListItem(node) ? TIGHT_PARAGRAPH_STYLE : LOOSE_PARAGRAPH_STYLE;
 
-        final ValueRunnable<PPr> pInitializer = new ValueRunnable<PPr>() {
+        final NumberingDefinitionsPart ndp = docx.getDocxDocument().getNumberingDefinitionsPart();
+
+        long numId = node instanceof OrderedListItem ? 3 : 2;
+        int newNum = 1;
+        final int listLevel = nesting - 1;
+
+        if (node.getParent() instanceof OrderedList && node == node.getParent().getFirstChild()) {
+            newNum = ((OrderedList) node.getParent()).getStartNumber();
+            numId = ndp.restart(numId, listLevel, newNum);
+        }
+
+        final long idNum = numId;
+
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, listStyle) {
             @Override
-            public void run(final PPr value) {
-                // Create object for rPr
-                ParaRPr pararpr = value.getRPr();
-                if (pararpr == null) {
-                    pararpr = docx.getObjectFactory().createParaRPr();
-                    value.setRPr(pararpr);
-                }
-
-                // Create object for pStyle
-                PPrBase.PStyle basePStyle = docx.getObjectFactory().createPPrBasePStyle();
-                value.setPStyle(basePStyle);
-                basePStyle.setVal(listOptions.isTightListItem(node) ? TIGHT_PARAGRAPH_STYLE : LOOSE_PARAGRAPH_STYLE);
-
-                if (firstP[0]) {
-                    firstP[0] = false;
-
+            public void getPPr(final PPr pPr) {
+                if (myPCount == 0) {
                     // Create object for numPr
-                    PPrBase.NumPr numPr = docx.getObjectFactory().createPPrBaseNumPr();
-                    value.setNumPr(numPr);
+                    PPrBase.NumPr numPr = docx.getFactory().createPPrBaseNumPr();
+                    pPr.setNumPr(numPr);
 
                     // Create object for numId
-                    PPrBase.NumPr.NumId numId = docx.getObjectFactory().createPPrBaseNumPrNumId();
+                    PPrBase.NumPr.NumId numId = docx.getFactory().createPPrBaseNumPrNumId();
                     numPr.setNumId(numId);
                     numId.setVal(BigInteger.valueOf(idNum)); //listNumId));
 
                     // Create object for ilvl
-                    PPrBase.NumPr.Ilvl ilvl = docx.getObjectFactory().createPPrBaseNumPrIlvl();
+                    PPrBase.NumPr.Ilvl ilvl = docx.getFactory().createPPrBaseNumPrIlvl();
                     numPr.setIlvl(ilvl);
-                    ilvl.setVal(BigInteger.valueOf(nesting - 1));
+                    ilvl.setVal(BigInteger.valueOf(listLevel));
+                } else {
+                    // need to inherit indent from our base style
+                    PPrBase.Ind ind = ndp.getInd(String.valueOf(idNum), String.valueOf(listLevel));
+                    if (ind != null) {
+                        final DocxHelper helper = docx.getHelper();
+                        helper.ensureInd(pPr);
+                        pPr.getInd().setLeft(helper.safeIndLeft(ind));
+                        pPr.getInd().setHanging(BigInteger.ZERO);
+                    }
                 }
-            }
-        };
 
-        docx.pushPPrInitializer(pInitializer);
+                super.getPPr(pPr);
+            }
+
+            @Override
+            protected BlockFormatProvider getStyleParent() {
+                BlockFormatProvider parent = myParent;
+                while (parent != null && parent.getNode().getNodeOfTypeIndex(ListBlock.class, ListItem.class) != -1) {
+                    parent = parent.getParent();
+                }
+                return parent;
+            }
+        });
+
         docx.renderChildren(node);
-        docx.popPPrInitializer(pInitializer);
     }
 
     private void render(final SoftLineBreak node, final DocxRendererContext docx) {
@@ -1057,8 +778,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final HardLineBreak node, final DocxRendererContext docx) {
-        P p = docx.createP();
-        R r = docx.createR();
+        // start a new paragraph
+        docx.createP();
+        docx.createR();
     }
 
     private void render(HtmlBlock node, final DocxRendererContext docx) {
@@ -1096,17 +818,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
 
             P p = docx.createP();
-            PPr ppr = p.getPPr();
-
-            // Create object for rPr
-            ParaRPr pararpr = docx.getObjectFactory().createParaRPr();
-            ppr.setRPr(pararpr);
-
-            // Create object for pStyle
-            PPrBase.PStyle pprbasepstyle = docx.getObjectFactory().createPPrBasePStyle();
-            ppr.setPStyle(pprbasepstyle);
-            pprbasepstyle.setVal(LOOSE_PARAGRAPH_STYLE);
-
             docx.text(normalizeEOL);
         } else {
             try {
@@ -1172,62 +883,50 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         Relationship rel = docx.getHyperlinkRelationship(linkUrl);
 
         // Create object for hyperlink (wrapped in JAXBElement)
-        final P.Hyperlink hyperlink = docx.getObjectFactory().createPHyperlink();
-        JAXBElement<P.Hyperlink> wrappedHyperlink = docx.getObjectFactory().createPHyperlink(hyperlink);
+        final P.Hyperlink hyperlink = docx.getFactory().createPHyperlink();
+        JAXBElement<P.Hyperlink> wrappedHyperlink = docx.getFactory().createPHyperlink(hyperlink);
         p.getContent().add(wrappedHyperlink);
 
         hyperlink.setId(rel.getId());
 
-        final ValueRunnable<RPr> initializer = new ValueRunnable<RPr>() {
+        docx.setRunFormatProvider(new RunFormatProviderBase(docx, RunFormatProvider.HYPERLINK_STYLE));
+        docx.setRunContainer(new RunContainer() {
             @Override
-            public void run(final RPr value) {
-                // Create object for rStyle
-                RStyle rstyle = docx.getObjectFactory().createRStyle();
-                value.setRStyle(rstyle);
-                rstyle.setVal(HYPERLINK_STYLE);
+            public void addR(final R r) {
+                hyperlink.getContent().add(r);
             }
-        };
-        docx.pushRPrInitializer(initializer);
-
-        final ValueRunnable<R> adopter = new ValueRunnable<R>() {
-            @Override
-            public void run(final R value) {
-                hyperlink.getContent().add(value);
-            }
-        };
-
-        docx.setAdopterR(adopter);
+        });
 
         if (linkTitle != null && !linkTitle.isEmpty()) {
             // Create object for instrText (wrapped in JAXBElement)
             // Create object for r
-            R r = docx.getObjectFactory().createR();
+            R r = docx.getFactory().createR();
             hyperlink.getContent().add(r);
 
             // Create object for fldChar (wrapped in JAXBElement)
-            FldChar fldchar = docx.getObjectFactory().createFldChar();
-            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped = docx.getObjectFactory().createRFldChar(fldchar);
+            FldChar fldchar = docx.getFactory().createFldChar();
+            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped = docx.getFactory().createRFldChar(fldchar);
             r.getContent().add(fldcharWrapped);
             fldchar.setFldCharType(org.docx4j.wml.STFldCharType.BEGIN);
 
             // Create object for r
-            R r2 = docx.getObjectFactory().createR();
+            R r2 = docx.getFactory().createR();
             hyperlink.getContent().add(r2);
 
             // Create object for instrText (wrapped in JAXBElement)
-            org.docx4j.wml.Text text = docx.getObjectFactory().createText();
-            JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getObjectFactory().createRInstrText(text);
+            org.docx4j.wml.Text text = docx.getFactory().createText();
+            JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getFactory().createRInstrText(text);
             r2.getContent().add(textWrapped);
             text.setValue(String.format(" HYPERLINK \"%s\" \\o \"%s\" ", linkUrl, linkTitle));
             text.setSpace("preserve");
 
             // Create object for r
-            R r3 = docx.getObjectFactory().createR();
+            R r3 = docx.getFactory().createR();
             hyperlink.getContent().add(r3);
 
             // Create object for fldChar (wrapped in JAXBElement)
-            FldChar fldchar2 = docx.getObjectFactory().createFldChar();
-            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped2 = docx.getObjectFactory().createRFldChar(fldchar2);
+            FldChar fldchar2 = docx.getFactory().createFldChar();
+            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped2 = docx.getFactory().createRFldChar(fldchar2);
             r3.getContent().add(fldcharWrapped2);
             fldchar2.setFldCharType(org.docx4j.wml.STFldCharType.SEPARATE);
         }
@@ -1236,17 +935,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         if (linkTitle != null && !linkTitle.isEmpty()) {
             // Create object for r
-            R r3 = docx.getObjectFactory().createR();
+            R r3 = docx.getFactory().createR();
             hyperlink.getContent().add(r3);
 
             // Create object for fldChar (wrapped in JAXBElement)
-            FldChar fldchar2 = docx.getObjectFactory().createFldChar();
-            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped2 = docx.getObjectFactory().createRFldChar(fldchar2);
+            FldChar fldchar2 = docx.getFactory().createFldChar();
+            JAXBElement<org.docx4j.wml.FldChar> fldcharWrapped2 = docx.getFactory().createRFldChar(fldchar2);
             r3.getContent().add(fldcharWrapped2);
             fldchar2.setFldCharType(STFldCharType.END);
         }
-        docx.clearAdopterR(adopter);
-        docx.popRPrInitializer(initializer);
     }
 
     private void render(final AutoLink node, final DocxRendererContext docx) {
@@ -1327,14 +1024,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     public void newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, String altText, int id1, int id2, long cx) {
         try {
             BinaryPartAbstractImage imagePart = null;
-            imagePart = BinaryPartAbstractImage.createImagePart(docx.getWordprocessingPackage(), bytes);
+            imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), bytes);
             Inline inline = null;
             inline = cx > 0 ? imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false)
                     : imagePart.createImageInline(filenameHint, altText, id1, id2, false);
 
             // Now add the inline in w:p/w:r/w:drawing
             org.docx4j.wml.R run = docx.createR();
-            org.docx4j.wml.Drawing drawing = docx.getObjectFactory().createDrawing();
+            org.docx4j.wml.Drawing drawing = docx.getFactory().createDrawing();
             run.getContent().add(drawing);
             drawing.getAnchorOrInline().add(inline);
         } catch (Exception e) {
@@ -1439,70 +1136,70 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private Tr myTr;
 
     private void render(final TableBlock node, final DocxRendererContext docx) {
-        myTbl = docx.getObjectFactory().createTbl();
-        JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getObjectFactory().createHdrTbl(myTbl);
+        myTbl = docx.getFactory().createTbl();
+        JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getFactory().createHdrTbl(myTbl);
         docx.getDocxDocument().getContent().add(tblWrapped);
 
         // Create object for tblPr
-        TblPr tblpr = docx.getObjectFactory().createTblPr();
+        TblPr tblpr = docx.getFactory().createTblPr();
         myTbl.setTblPr(tblpr);
 
         // Create object for jc
-        Jc jc = docx.getObjectFactory().createJc();
+        Jc jc = docx.getFactory().createJc();
         tblpr.setJc(jc);
         jc.setVal(org.docx4j.wml.JcEnumeration.LEFT);
 
         // Create object for tblW
-        TblWidth tblwidth = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth = docx.getFactory().createTblWidth();
         tblpr.setTblW(tblwidth);
         tblwidth.setType("auto");
         tblwidth.setW(BigInteger.valueOf(0));
 
         // Create object for tblInd
-        TblWidth tblwidth2 = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth2 = docx.getFactory().createTblWidth();
         tblpr.setTblInd(tblwidth2);
         tblwidth2.setType("dxa");
         tblwidth2.setW(BigInteger.valueOf(30));
         // Create object for tblBorders
-        TblBorders tblborders = docx.getObjectFactory().createTblBorders();
+        TblBorders tblborders = docx.getFactory().createTblBorders();
         tblpr.setTblBorders(tblborders);
         // Create object for left
-        CTBorder border = docx.getObjectFactory().createCTBorder();
+        CTBorder border = docx.getFactory().createCTBorder();
         tblborders.setLeft(border);
         border.setVal(org.docx4j.wml.STBorder.SINGLE);
         border.setSz(BigInteger.valueOf(2));
         border.setColor("000001");
         border.setSpace(BigInteger.valueOf(0));
         // Create object for right
-        CTBorder border2 = docx.getObjectFactory().createCTBorder();
+        CTBorder border2 = docx.getFactory().createCTBorder();
         tblborders.setRight(border2);
         border2.setVal(org.docx4j.wml.STBorder.SINGLE);
         border2.setSz(BigInteger.valueOf(2));
         border2.setColor("000001");
         border2.setSpace(BigInteger.valueOf(0));
         // Create object for top
-        CTBorder border3 = docx.getObjectFactory().createCTBorder();
+        CTBorder border3 = docx.getFactory().createCTBorder();
         tblborders.setTop(border3);
         border3.setVal(org.docx4j.wml.STBorder.SINGLE);
         border3.setSz(BigInteger.valueOf(2));
         border3.setColor("000001");
         border3.setSpace(BigInteger.valueOf(0));
         // Create object for bottom
-        CTBorder border4 = docx.getObjectFactory().createCTBorder();
+        CTBorder border4 = docx.getFactory().createCTBorder();
         tblborders.setBottom(border4);
         border4.setVal(org.docx4j.wml.STBorder.SINGLE);
         border4.setSz(BigInteger.valueOf(2));
         border4.setColor("000001");
         border4.setSpace(BigInteger.valueOf(0));
         // Create object for insideH
-        CTBorder border5 = docx.getObjectFactory().createCTBorder();
+        CTBorder border5 = docx.getFactory().createCTBorder();
         tblborders.setInsideH(border5);
         border5.setVal(org.docx4j.wml.STBorder.SINGLE);
         border5.setSz(BigInteger.valueOf(2));
         border5.setColor("000001");
         border5.setSpace(BigInteger.valueOf(0));
         // Create object for insideV
-        CTBorder border6 = docx.getObjectFactory().createCTBorder();
+        CTBorder border6 = docx.getFactory().createCTBorder();
         tblborders.setInsideV(border6);
         border6.setVal(org.docx4j.wml.STBorder.SINGLE);
         border6.setSz(BigInteger.valueOf(2));
@@ -1510,30 +1207,30 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         border6.setSpace(BigInteger.valueOf(0));
 
         // Create object for tblCellMar
-        CTTblCellMar tblcellmar = docx.getObjectFactory().createCTTblCellMar();
+        CTTblCellMar tblcellmar = docx.getFactory().createCTTblCellMar();
         tblpr.setTblCellMar(tblcellmar);
         // Create object for left
-        TblWidth tblwidth3 = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth3 = docx.getFactory().createTblWidth();
         tblcellmar.setLeft(tblwidth3);
         tblwidth3.setType("dxa");
         tblwidth3.setW(BigInteger.valueOf(80));
         // Create object for right
-        TblWidth tblwidth4 = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth4 = docx.getFactory().createTblWidth();
         tblcellmar.setRight(tblwidth4);
         tblwidth4.setType("dxa");
         tblwidth4.setW(BigInteger.valueOf(80));
         // Create object for top
-        TblWidth tblwidth5 = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth5 = docx.getFactory().createTblWidth();
         tblcellmar.setTop(tblwidth5);
         tblwidth5.setType("dxa");
         tblwidth5.setW(BigInteger.valueOf(80));
         // Create object for bottom
-        TblWidth tblwidth6 = docx.getObjectFactory().createTblWidth();
+        TblWidth tblwidth6 = docx.getFactory().createTblWidth();
         tblcellmar.setBottom(tblwidth6);
         tblwidth6.setType("dxa");
         tblwidth6.setW(BigInteger.valueOf(80));
         // Create object for tblLook
-        CTTblLook tbllook = docx.getObjectFactory().createCTTblLook();
+        CTTblLook tbllook = docx.getFactory().createCTTblLook();
         tblpr.setTblLook(tbllook);
         tbllook.setVal("04a0");
         tbllook.setLastRow(org.docx4j.sharedtypes.STOnOff.ZERO);
@@ -1560,17 +1257,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final TableRow node, final DocxRendererContext docx) {
-        myTr = docx.getObjectFactory().createTr();
+        myTr = docx.getFactory().createTr();
         myTbl.getContent().add(myTr);
 
         // Create object for trPr
-        TrPr trpr = docx.getObjectFactory().createTrPr();
+        TrPr trpr = docx.getFactory().createTrPr();
         myTr.setTrPr(trpr);
 
         if (node.getParent() instanceof TableHead) {
             // Create object for tblHeader (wrapped in JAXBElement)
-            BooleanDefaultTrue booleandefaulttrue = docx.getObjectFactory().createBooleanDefaultTrue();
-            JAXBElement<org.docx4j.wml.BooleanDefaultTrue> booleandefaulttrueWrapped = docx.getObjectFactory().createCTTrPrBaseTblHeader(booleandefaulttrue);
+            BooleanDefaultTrue booleandefaulttrue = docx.getFactory().createBooleanDefaultTrue();
+            JAXBElement<org.docx4j.wml.BooleanDefaultTrue> booleandefaulttrueWrapped = docx.getFactory().createCTTrPrBaseTblHeader(booleandefaulttrue);
             trpr.getCnfStyleOrDivIdOrGridBefore().add(booleandefaulttrueWrapped);
         }
 
@@ -1582,32 +1279,30 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         // TODO: figure out how to set caption
         // table caption not yet supported by docx4j API
         //final TblPr tblPr = myTbl.getTblPr();
-        //docx.getObjectFactory().createCTCaption();
+        //docx.getFactory().createCTCaption();
     }
 
     private void render(TableCell node, final DocxRendererContext docx) {
         String style = node.isHeader() ? "TableHeading" : "TableContents";
 
         // Create object for tc (wrapped in JAXBElement)
-        final Tc tc = docx.getObjectFactory().createTc();
-        JAXBElement<org.docx4j.wml.Tc> tcWrapped = docx.getObjectFactory().createTrTc(tc);
+        final Tc tc = docx.getFactory().createTc();
+        JAXBElement<org.docx4j.wml.Tc> tcWrapped = docx.getFactory().createTrTc(tc);
         myTr.getContent().add(tcWrapped);
         // Create object for tcPr
-        TcPr tcpr = docx.getObjectFactory().createTcPr();
+        TcPr tcpr = docx.getFactory().createTcPr();
         tc.setTcPr(tcpr);
 
-        final ValueRunnable<P> adopter = new ValueRunnable<P>() {
+        docx.setParaContainer(new ParaContainer() {
             @Override
-            public void run(final P value) {
-                tc.getContent().add(value);
+            public void addP(final P p) {
+                tc.getContent().add(p);
             }
-        };
-
-        docx.setAdopterP(adopter);
+        });
 
         if (node.getSpan() > 1) {
             // Create object for gridSpan
-            TcPrInner.GridSpan tcprinnergridspan = docx.getObjectFactory().createTcPrInnerGridSpan();
+            TcPrInner.GridSpan tcprinnergridspan = docx.getFactory().createTcPrInnerGridSpan();
             tcpr.setGridSpan(tcprinnergridspan);
             tcprinnergridspan.setVal(BigInteger.valueOf(node.getSpan()));
         }
@@ -1625,36 +1320,35 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             alignValue = JcEnumeration.CENTER;
         }
         if (alignValue != null) {
-            Jc jc3 = docx.getObjectFactory().createJc();
+            Jc jc3 = docx.getFactory().createJc();
             ppr.setJc(jc3);
             jc3.setVal(alignValue);
         }
 
         // Create object for rPr
-        ParaRPr pararpr = docx.getObjectFactory().createParaRPr();
+        ParaRPr pararpr = docx.getFactory().createParaRPr();
         ppr.setRPr(pararpr);
 
         // Create object for pStyle
-        PPrBase.PStyle pprbasepstyle = docx.getObjectFactory().createPPrBasePStyle();
+        PPrBase.PStyle pprbasepstyle = docx.getFactory().createPPrBasePStyle();
         ppr.setPStyle(pprbasepstyle);
         pprbasepstyle.setVal(style);
 
         // Create object for r
-        //R r = docx.getObjectFactory().createR();
+        //R r = docx.getFactory().createR();
         //p.getContent().add(r);
         //// Create object for rPr
-        //RPr rpr = docx.getObjectFactory().createRPr();
+        //RPr rpr = docx.getFactory().createRPr();
         //r.setRPr(rpr);
         //
         //// Create object for t (wrapped in JAXBElement)
-        //org.docx4j.wml.Text text = docx.getObjectFactory().createText();
-        //JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getObjectFactory().createRT(text);
+        //org.docx4j.wml.Text text = docx.getFactory().createText();
+        //JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getFactory().createRT(text);
         //r.getContent().add(textWrapped);
         //text.setValue("Combined header ");
         //text.setSpace("preserve");
 
         docx.renderChildren(node);
-        docx.clearAdopterP(adopter);
     }
 
     private static org.docx4j.wml.JcEnumeration getAlignValue(TableCell.Alignment alignment) {

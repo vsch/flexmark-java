@@ -1,4 +1,4 @@
-<w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+<w:numbering xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" xmlns:b="http://schemas.openxmlformats.org/officeDocument/2006/bibliography" xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:dgm="http://schemas.openxmlformats.org/drawingml/2006/diagram" xmlns:dsp="http://schemas.microsoft.com/office/drawing/2008/diagram" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:ns13="http://schemas.openxmlformats.org/drawingml/2006/chartDrawing" xmlns:ns20="urn:schemas-microsoft-com:office:excel" xmlns:ns22="urn:schemas-microsoft-com:office:powerpoint" xmlns:ns24="http://schemas.microsoft.com/office/2006/coverPageProps" xmlns:ns34="http://schemas.openxmlformats.org/drawingml/2006/compatibility" xmlns:ns35="http://schemas.openxmlformats.org/drawingml/2006/lockedCanvas" xmlns:ns9="http://schemas.openxmlformats.org/schemaLibrary/2006/main" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:oda="http://opendope.org/answers" xmlns:odc="http://opendope.org/conditions" xmlns:odgm="http://opendope.org/SmartArt/DataHierarchy" xmlns:odi="http://opendope.org/components" xmlns:odq="http://opendope.org/questions" xmlns:odx="http://opendope.org/xpaths" xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml" xmlns:w15="http://schemas.microsoft.com/office/word/2012/wordml" xmlns:we="http://schemas.microsoft.com/office/webextensions/webextension/2010/11" xmlns:wetp="http://schemas.microsoft.com/office/webextensions/taskpanes/2010/11" xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing" xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing" xmlns:xdr="http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing">
     <w:abstractNum w:abstractNumId="1">
         <w:lvl w:ilvl="0">
             <w:start w:val="1"/>
@@ -8,7 +8,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="1">
@@ -19,7 +19,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="2">
@@ -30,7 +30,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="3">
@@ -41,7 +41,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="4">
@@ -52,7 +52,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="5">
@@ -63,7 +63,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="6">
@@ -73,7 +73,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="7">
@@ -83,7 +83,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
         <w:lvl w:ilvl="8">
@@ -93,7 +93,7 @@
             <w:lvlText w:val=""/>
             <w:lvlJc w:val="left"/>
             <w:pPr>
-                <w:ind w:left="0" w:hanging="0"/>
+                <w:ind w:hanging="0" w:left="0"/>
             </w:pPr>
         </w:lvl>
     </w:abstractNum>
@@ -105,9 +105,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="227"/>
+                    <w:tab w:pos="227" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="227" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="227"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -120,9 +120,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="454"/>
+                    <w:tab w:pos="454" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="454" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="454"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -135,9 +135,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="680"/>
+                    <w:tab w:pos="680" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="680" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="680"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -150,9 +150,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="907"/>
+                    <w:tab w:pos="907" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="907" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="907"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -165,9 +165,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1134"/>
+                    <w:tab w:pos="1134" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1134" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="1134"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -180,9 +180,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1361"/>
+                    <w:tab w:pos="1361" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1361" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="1361"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -195,9 +195,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1587"/>
+                    <w:tab w:pos="1587" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1587" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="1587"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -210,9 +210,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1814"/>
+                    <w:tab w:pos="1814" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1814" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="1814"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -225,9 +225,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="2041"/>
+                    <w:tab w:pos="2041" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="2041" w:hanging="227"/>
+                <w:ind w:hanging="227" w:left="2041"/>
             </w:pPr>
             <w:rPr>
                 <w:rFonts w:cs="OpenSymbol"/>
@@ -242,9 +242,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="283"/>
+                    <w:tab w:pos="283" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="283" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="283"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -255,9 +255,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="567"/>
+                    <w:tab w:pos="567" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="567" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="567"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -268,9 +268,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="850"/>
+                    <w:tab w:pos="850" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="850" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="850"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -281,9 +281,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1134"/>
+                    <w:tab w:pos="1134" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1134" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="1134"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -294,9 +294,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1417"/>
+                    <w:tab w:pos="1417" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1417" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="1417"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -307,9 +307,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1701"/>
+                    <w:tab w:pos="1701" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1701" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="1701"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -320,9 +320,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="1984"/>
+                    <w:tab w:pos="1984" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="1984" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="1984"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -333,9 +333,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="2268"/>
+                    <w:tab w:pos="2268" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="2268" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="2268"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>
@@ -346,9 +346,9 @@
             <w:lvlJc w:val="left"/>
             <w:pPr>
                 <w:tabs>
-                    <w:tab w:val="num" w:pos="2551"/>
+                    <w:tab w:pos="2551" w:val="num"/>
                 </w:tabs>
-                <w:ind w:left="2551" w:hanging="283"/>
+                <w:ind w:hanging="283" w:left="2551"/>
             </w:pPr>
             <w:rPr/>
         </w:lvl>

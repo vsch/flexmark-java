@@ -1,5 +1,6 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
+import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 
 public class DocxWriter {

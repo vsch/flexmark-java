@@ -4,6 +4,7 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
+import com.vladsch.flexmark.docx.converter.*;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.LinkResolver;
@@ -13,9 +14,6 @@ import com.vladsch.flexmark.html.renderer.LinkStatus;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.ValueRunnable;
-import com.vladsch.flexmark.util.collection.DataValueFactory;
-import com.vladsch.flexmark.util.collection.DynamicDefaultKey;
 import com.vladsch.flexmark.util.collection.NodeCollectingVisitor;
 import com.vladsch.flexmark.util.collection.SubClassingBag;
 import com.vladsch.flexmark.util.dependency.FlatDependencyHandler;
@@ -50,7 +48,8 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<Boolean>("RENDER_BODY_ONLY", false);
     public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<Integer>("MAX_IMAGE_WIDTH", 0);
 
-    public static final DataKey<String> DOC_URL = new DataKey<String>("DOC_URL", "");
+    public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<String>("DOC_RELATIVE_URL", "");
+    public static final DataKey<String> DOC_ROOT_URL = new DataKey<String>("DOC_ROOT_URL", "");
 
     // same keys, same function also available here for convenience
     public static final DataKey<Boolean> RECHECK_UNDEFINED_REFERENCES = HtmlRenderer.RECHECK_UNDEFINED_REFERENCES;
@@ -180,7 +179,7 @@ public class DocxRenderer implements IRender {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
             mlPackage.save(outputStream, Docx4J.FLAG_SAVE_FLAT_XML);
-            final String s = options.get(RENDER_BODY_ONLY) ?  XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
+            final String s = options.get(RENDER_BODY_ONLY) ? XmlFormatter.formatDocumentBody(outputStream.toString("UTF-8"))
                     : XmlFormatter.format(outputStream.toString("UTF-8"));
             return s;
         } catch (Docx4JException e) {
@@ -212,7 +211,7 @@ public class DocxRenderer implements IRender {
         List<AttributeProviderFactory> attributeProviderFactories = new ArrayList<AttributeProviderFactory>();
         List<NodeDocxRendererFactory> nodeDocxRendererFactories = new ArrayList<NodeDocxRendererFactory>();
         List<LinkResolverFactory> linkResolverFactories = new ArrayList<LinkResolverFactory>();
-        private final HashSet<FormatterExtension> loadedExtensions = new HashSet<FormatterExtension>();
+        private final HashSet<RendererExtension> loadedExtensions = new HashSet<RendererExtension>();
         HeaderIdGeneratorFactory htmlIdGeneratorFactory = null;
 
         public Builder() {
@@ -285,26 +284,41 @@ public class DocxRenderer implements IRender {
         }
 
         /**
+         * Add a factory for instantiating a node renderer (done when rendering). This allows to override the rendering
+         * of node types or define rendering for custom node types.
+         * <p>
+         * If multiple node renderers for the same node type are created, the one from the factory that was added first
+         * "wins". (This is how the rendering for core node types can be overridden; the default rendering comes last.)
+         *
+         * @param linkResolverFactory the factory for creating a node renderer
+         * @return {@code this}
+         */
+        public Builder linkResolverFactory(LinkResolverFactory linkResolverFactory) {
+            this.linkResolverFactories.add(linkResolverFactory);
+            return this;
+        }
+
+        /**
          * @param extensions extensions to use on this HTML renderer
          * @return {@code this}
          */
         public Builder extensions(Iterable<? extends Extension> extensions) {
             // first give extensions a chance to modify options
             for (Extension extension : extensions) {
-                if (extension instanceof FormatterExtension) {
+                if (extension instanceof RendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
-                        FormatterExtension formatterExtension = (FormatterExtension) extension;
-                        formatterExtension.rendererOptions(this);
+                        RendererExtension rendererExtension = (RendererExtension) extension;
+                        rendererExtension.rendererOptions(this);
                     }
                 }
             }
 
             for (Extension extension : extensions) {
-                if (extension instanceof FormatterExtension) {
+                if (extension instanceof RendererExtension) {
                     if (!loadedExtensions.contains(extension)) {
-                        FormatterExtension formatterExtension = (FormatterExtension) extension;
-                        formatterExtension.extend(this);
-                        loadedExtensions.add(formatterExtension);
+                        RendererExtension rendererExtension = (RendererExtension) extension;
+                        rendererExtension.extend(this);
+                        loadedExtensions.add(rendererExtension);
                     }
                 }
             }
@@ -315,7 +329,7 @@ public class DocxRenderer implements IRender {
     /**
      * Extension for {@link DocxRenderer}.
      */
-    public interface FormatterExtension extends Extension {
+    public interface RendererExtension extends Extension {
         /**
          * This method is called first on all extensions so that they can adjust the options.
          *
@@ -349,7 +363,7 @@ public class DocxRenderer implements IRender {
         }
     };
 
-    private class MainDocxRenderer implements DocxRendererContext {
+    private class MainDocxRenderer implements DocxRendererContext, BlockFormatProvider, ParaContainer, RunFormatProvider, RunContainer {
         private final Document document;
         private final Map<Class<?>, NodeDocxRendererHandler> renderers;
         private final SubClassingBag<Node> collectedNodes;
@@ -368,16 +382,16 @@ public class DocxRenderer implements IRender {
         private final WordprocessingMLPackage wordprocessingPackage;
         private final MainDocumentPart mainDocumentPart;
         private final Body body;
-        private final ObjectFactory wmlObjectFactory;
+        private final ObjectFactory myFactory;
         private final DocxHelper myDocxHelper;
-        private ArrayList<ValueRunnable<PPr>> pInitializerList;
-        private ArrayList<ValueRunnable<RPr>> rInitializerList;
         private P p;
-        private ValueRunnable<R> rAdopter;
-        private ValueRunnable<P> pAdopter;
-        private Stack<Runnable> beforeP;
-        private Stack<Runnable> afterP;
-        private boolean inBeforeAfterP;
+
+        private HashMap<Node, BlockFormatProvider> blockFormatProviders;
+        private BlockFormatProvider renderingBlockFormatProvider;
+        private ParaContainer renderingParaContainer;
+        private HashMap<Node, RunFormatProvider> runFormatProviders;
+        private RunFormatProvider renderingRunFormatProvider;
+        private RunContainer renderingRunContainer;
 
         MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document) {
             this.options = new ScopedDataSet(options, document);
@@ -389,19 +403,26 @@ public class DocxRenderer implements IRender {
             this.styles = new HashMap<String, Style>();
             this.hyperlinks = new HashMap<String, Relationship>();
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
-            this.beforeP = new Stack<Runnable>();
-            this.afterP = new Stack<Runnable>();
 
-            this.wmlObjectFactory = new ObjectFactory();
-            this.myDocxHelper = new DocxHelper(wmlObjectFactory);
+            this.myFactory = new ObjectFactory();
+            this.myDocxHelper = new DocxHelper(this, myFactory);
             this.wordprocessingPackage = out;
 
             setDefaultStyleAndNumbering(out, this.options);
 
             this.mainDocumentPart = out.getMainDocumentPart();
             this.body = ((org.docx4j.wml.Document) this.mainDocumentPart.getJaxbElement()).getBody();
-            this.rInitializerList = new ArrayList<ValueRunnable<RPr>>();
-            this.pInitializerList = new ArrayList<ValueRunnable<PPr>>();
+
+            this.blockFormatProviders = new HashMap<Node, BlockFormatProvider>();
+            this.runFormatProviders = new HashMap<Node, RunFormatProvider>();
+
+            // we are top level provider
+            this.blockFormatProviders.put(document, this);
+            this.runFormatProviders.put(document, this);
+            this.renderingBlockFormatProvider = this;
+            this.renderingRunFormatProvider = this;
+            this.renderingParaContainer = this;
+            this.renderingRunContainer = this;
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
                 myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
@@ -448,128 +469,127 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public DocxHelper getDocxHelper() {
-            return myDocxHelper;
+        public void setParaContainer(final ParaContainer container) {
+            renderingParaContainer = container;
         }
 
         @Override
-        public String encodeUrl(CharSequence url) {
-            if (rendererOptions.percentEncodeUrls) {
-                return Escaping.percentEncodeUrl(url);
-            } else {
-                return url instanceof String ? (String) url : String.valueOf(url);
-            }
+        public void setBlockFormatProvider(final BlockFormatProvider formatProvider) {
+            blockFormatProviders.put(getCurrentNode(), formatProvider);
+            renderingBlockFormatProvider = formatProvider;
+
+            // let it initialize, closing done after rendering
+            formatProvider.open();
         }
 
         @Override
-        public ObjectFactory getObjectFactory() {
-            return wmlObjectFactory;
+        public BlockFormatProvider getBlockFormatProvider(final Node node) {
+            return blockFormatProviders.get(node);
         }
 
         @Override
-        public void pushRPrInitializer(ValueRunnable<RPr> runnable) {
-            if (rInitializerList == null) {
-                rInitializerList = new ArrayList<ValueRunnable<RPr>>();
-            }
-            rInitializerList.add(runnable);
+        public BlockFormatProvider getBlockFormatProvider() {
+            return renderingBlockFormatProvider;
         }
 
         @Override
-        public void popRPrInitializer(ValueRunnable<RPr> runnable) {
-            if (rInitializerList == null || rInitializerList.isEmpty()) {
-                throw new IllegalStateException("popRPrInitializer called with empty initializer list");
-            }
-            if (rInitializerList.get(rInitializerList.size() - 1) != runnable) {
-                throw new IllegalStateException("popRPrInitializer called with " + runnable + " when last initializer is " + rInitializerList.get(rInitializerList.size() - 1));
-            }
-            rInitializerList.remove(rInitializerList.size() - 1);
-        }
-
-        void initializeRPr(RPr rPr) {
-            for (ValueRunnable<RPr> initializer : rInitializerList) {
-                initializer.run(rPr);
-            }
+        public void setRunContainer(final RunContainer container) {
+            renderingRunContainer = container;
         }
 
         @Override
-        public void pushPPrInitializer(ValueRunnable<PPr> runnable) {
-            if (pInitializerList == null) {
-                pInitializerList = new ArrayList<ValueRunnable<PPr>>();
-            }
-            pInitializerList.add(runnable);
-            startNewP();
+        public void setRunFormatProvider(final RunFormatProvider formatProvider) {
+            runFormatProviders.put(getCurrentNode(), formatProvider);
+            renderingRunFormatProvider = formatProvider;
+
+            // let it initialize, closing done after rendering
+            formatProvider.open();
         }
 
         @Override
-        public void popPPrInitializer(ValueRunnable<PPr> runnable) {
-            if (pInitializerList == null || pInitializerList.isEmpty()) {
-                throw new IllegalStateException("popPPrInitializer called with empty initializer list");
-            }
-            if (pInitializerList.get(pInitializerList.size() - 1) != runnable) {
-                throw new IllegalStateException("popPPrInitializer called with " + runnable + " when last initializer is " + pInitializerList.get(pInitializerList.size() - 1));
-            }
-            pInitializerList.remove(pInitializerList.size() - 1);
-            startNewP();
+        public RunFormatProvider getRunFormatProvider(final Node node) {
+            return runFormatProviders.get(node);
         }
 
-        void initializePPr(PPr pPr) {
-            for (ValueRunnable<PPr> initializer : pInitializerList) {
-                initializer.run(pPr);
-            }
+        @Override
+        public RunFormatProvider getRunFormatProvider() {
+            return renderingRunFormatProvider;
         }
 
-        public boolean haveRPrInitializers() {
-            return !rInitializerList.isEmpty();
+        // document format provider
+        @Override
+        public void open() {
+
         }
 
-        public boolean havePPrInitializers() {
-            return !pInitializerList.isEmpty();
+        @Override
+        public void close() {
+
+        }
+
+        @Override
+        public BlockFormatProvider getParent() {
+            return null;
+        }
+
+        @Override
+        public String getStyleId() {
+            return BlockFormatProvider.DEFAULT_STYLE;
+        }
+
+        @Override
+        public Style getStyle() {
+            return getStyle(getStyleId());
+        }
+
+        @Override
+        public void pFormatted() {
+
+        }
+
+        @Override
+        public void getPPr(final PPr pPr) {
+
+        }
+
+        @Override
+        public void getParaRPr(final ParaRPr rPr) {
+
+        }
+
+        @Override
+        public void addP(final P p) {
+            mainDocumentPart.getContent().add(p);
+        }
+
+        @Override
+        public void addR(final R r) {
+            p.getContent().add(r);
+        }
+
+        @Override
+        public void getRPr(final RPr rPr) {
+
+        }
+
+        @Override
+        public Node getNode() {
+            return document;
         }
 
         @Override
         public P createP() {
-            // reset all rInitializers, if we are in a new paragraph with one previously existing
-            if (this.p != null) startNewP();
+            P p = myFactory.createP();
+            PPr pPr = myFactory.createPPr();
 
-            if (!beforeP.isEmpty() && !inBeforeAfterP) {
-                try {
-                    inBeforeAfterP = true;
-                    beforeP.peek().run();
-                } finally {
-                    inBeforeAfterP = false;
-                }
-            }
-
-            P p = wmlObjectFactory.createP();
-            if (pAdopter != null) {
-                pAdopter.run(p);
-            } else {
-                mainDocumentPart.getContent().add(p);
-            }
-
-            PPr pPr = wmlObjectFactory.createPPr();
             p.setPPr(pPr);
 
-            if (havePPrInitializers()) {
-                initializePPr(pPr);
-            }
+            renderingParaContainer.addP(p);
+            renderingBlockFormatProvider.getPPr(pPr);
+            renderingBlockFormatProvider.pFormatted();
 
             this.p = p;
             return p;
-        }
-
-        private void startNewP() {
-            if (this.p != null && !afterP.isEmpty() && !inBeforeAfterP) {
-                try {
-                    inBeforeAfterP = true;
-                    afterP.peek().run();
-                } finally {
-                    inBeforeAfterP = false;
-                    this.p = null;
-                }
-            }
-            rInitializerList.clear();
-            rAdopter = null;
         }
 
         @Override
@@ -583,162 +603,84 @@ public class DocxRenderer implements IRender {
         @Override
         public R createR() {
             P p = getP();
-            R r = wmlObjectFactory.createR();
-            RPr rPr = wmlObjectFactory.createRPr();
+            R r = myFactory.createR();
+            RPr rPr = myFactory.createRPr();
             r.setRPr(rPr);
 
-            if (haveRPrInitializers()) {
-                initializeRPr(rPr);
-            }
-            if (rAdopter != null) {
-                rAdopter.run(r);
-            } else {
-                p.getContent().add(r);
-            }
+            renderingRunContainer.addR(r);
+            renderingRunFormatProvider.getRPr(rPr);
+
             return r;
         }
 
         @Override
-        public PPrBase.Ind setPPrIndent(final PPr pPr, final BigInteger left, final BigInteger right, final BigInteger hanging, final int flags) {
-            PPrBase.Ind prInd = pPr.getInd();
+        public DocxHelper getHelper() {
+            return myDocxHelper;
+        }
 
-            if (left != null || right != null || hanging != null) {
-                if (prInd == null) {
-                    prInd = wmlObjectFactory.createPPrBaseInd();
-                    pPr.setInd(prInd);
-                }
+        @Override
+        public ObjectFactory getFactory() {
+            return myFactory;
+        }
 
-                if (left != null) {
-                    BigInteger value = prInd.getLeft();
-                    if ((flags & ADD_HANGING_TO_LEFT) != 0) {
-                        BigInteger hang = prInd.getHanging();
-                        if (hang != null) {
-                            value = value == null ? hang : value.add(hang);
-                        }
-                        if (hanging != null) {
-                            value = value == null ? hanging : value.add(hang);
-                        }
+        @Override
+        public void addBlankLine(final int size, final String styleId) {
+            addBlankLine(BigInteger.valueOf(size), styleId);
+        }
+
+        @Override
+        public void addBlankLine(final long size, final String styleId) {
+            addBlankLine(BigInteger.valueOf(size), styleId);
+        }
+
+        @Override
+        public void addBlankLine(final BigInteger size, final String styleId) {
+            if (size.compareTo(BigInteger.ZERO) > 0) {
+                // now add empty for spacing
+                P p = createP();
+                PPr pPr = p.getPPr();
+
+                if (styleId != null && !styleId.isEmpty()) {
+                    if (pPr.getPStyle() == null) {
+                        PPrBase.PStyle pStyle = myDocxHelper.myFactory.createPPrBasePStyle();
+                        pPr.setPStyle(pStyle);
                     }
-                    prInd.setLeft((flags & ADD_LEFT) == 0 || value == null ? left : left.add(value));
+                    pPr.getPStyle().setVal(styleId);
                 }
 
-                if (right != null) {
-                    final BigInteger value = prInd.getRight();
-                    prInd.setRight((flags & ADD_LEFT) == 0 || value == null ? right : right.add(value));
-                }
+                // Create new Spacing which we override
+                PPrBase.Spacing spacing = getFactory().createPPrBaseSpacing();
+                pPr.setSpacing(spacing);
 
-                if ((flags & ADD_HANGING_TO_LEFT) == 0) {
-                    if (hanging != null) {
-                        final BigInteger value = prInd.getHanging();
-                        prInd.setHanging((flags & ADD_HANGING) == 0 || value == null ? hanging : hanging.add(value));
-                    }
-                } else {
-                    prInd.setHanging(BigInteger.ZERO);
-                }
+                spacing.setBefore(BigInteger.ZERO);
+                spacing.setAfter(BigInteger.ZERO);
+                spacing.setLine(size);
+                spacing.setLineRule(STLineSpacingRule.EXACT);
+
+                R r = createR();
             }
-
-            return prInd;
         }
 
         @Override
-        public void withRPrInitializer(final ValueRunnable<RPr> initializer, final Runnable runnable) {
-            pushRPrInitializer(initializer);
-            runnable.run();
-            popRPrInitializer(initializer);
-        }
+        public void addBlankLines(final int count) {
+            if (count > 0) {
+                // now add empty for spacing
+                PPr pPr = myFactory.createPPr();
+                renderingBlockFormatProvider.getPPr(pPr);
 
-        @Override
-        public void setAdopterR(final ValueRunnable<R> adopter) {
-            if (rAdopter != null) {
-                throw new IllegalStateException("setAdopterR called for " + adopter + " when one is already set to " + rAdopter);
+                PPr explicitPPr = myDocxHelper.getExplicitPPr(pPr, true);
+                final ParaRPr rPr = explicitPPr.getRPr();
+                BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
+
+                addBlankLine(size.multiply(BigInteger.valueOf(count)), null);
             }
-            rAdopter = adopter;
-        }
-
-        @Override
-        public void clearAdopterR(final ValueRunnable<R> adopter) {
-            if (rAdopter == null) {
-                throw new IllegalStateException("clearAdopterR called for " + adopter + " when one is not set");
-            }
-            if (rAdopter != adopter) {
-                throw new IllegalStateException("clearAdopterR called for " + adopter + " when one is set to " + rAdopter);
-            }
-            rAdopter = null;
-        }
-
-        @Override
-        public void setAdopterP(final ValueRunnable<P> adopter) {
-            if (pAdopter != null) {
-                throw new IllegalStateException("setAdopterP called for " + adopter + " when one is already set to " + pAdopter);
-            }
-            pAdopter = adopter;
-        }
-
-        @Override
-        public void clearAdopterP(final ValueRunnable<P> adopter) {
-            if (pAdopter == null) {
-                throw new IllegalStateException("cleapAdopterP called for " + adopter + " when one is not set");
-            }
-            if (pAdopter != adopter) {
-                throw new IllegalStateException("cleapAdopterP called for " + adopter + " when one is set to " + pAdopter);
-            }
-            pAdopter = null;
-        }
-
-        @Override
-        public void setBeforeP(final Runnable runnable) {
-            beforeP.push(runnable);
-        }
-
-        @Override
-        public void clearBeforeP(final Runnable runnable) {
-            if (beforeP.isEmpty()) {
-                throw new IllegalStateException("clearBeforeP called with empty list");
-            }
-            if (beforeP.peek() != runnable) {
-                throw new IllegalStateException("clearBeforeP called with " + runnable + " when last is " + beforeP.peek());
-            }
-            beforeP.pop();
-        }
-
-        @Override
-        public Runnable getBeforeP() {
-            return beforeP.isEmpty() ? null : beforeP.peek();
-        }
-
-        @Override
-        public Runnable getAfterP() {
-            return afterP.isEmpty() ? null : afterP.peek();
-        }
-
-        @Override
-        public void setAfterP(final Runnable runnable) {
-            afterP.push(runnable);
-        }
-
-        @Override
-        public void clearAfterP(final Runnable runnable) {
-            if (afterP.isEmpty()) {
-                throw new IllegalStateException("clearAfterP called with empty list");
-            }
-            if (afterP.peek() != runnable) {
-                throw new IllegalStateException("clearAfterP called with " + runnable + " when last is " + afterP.peek());
-            }
-            afterP.pop();
-        }
-
-        @Override
-        public void withPPrInitializer(final ValueRunnable<PPr> initializer, final Runnable runnable) {
-            pushPPrInitializer(initializer);
-            runnable.run();
-            popPPrInitializer(initializer);
         }
 
         @Override
         public org.docx4j.wml.Text addWrappedText(final R r) {
             // Create object for t (wrapped in JAXBElement)
-            org.docx4j.wml.Text text = wmlObjectFactory.createText();
-            JAXBElement<org.docx4j.wml.Text> textWrapped = wmlObjectFactory.createRT(text);
+            org.docx4j.wml.Text text = myFactory.createText();
+            JAXBElement<org.docx4j.wml.Text> textWrapped = myFactory.createRT(text);
             r.getContent().add(textWrapped);
             return text;
         }
@@ -754,16 +696,16 @@ public class DocxRenderer implements IRender {
 
         @Override
         public BooleanDefaultTrue getBooleanDefaultTrue() {
-            return wmlObjectFactory.createBooleanDefaultTrue();
+            return myFactory.createBooleanDefaultTrue();
         }
 
         @Override
         public BooleanDefaultFalse getBooleanDefaultFalse() {
-            return wmlObjectFactory.createBooleanDefaultFalse();
+            return myFactory.createBooleanDefaultFalse();
         }
 
         @Override
-        public WordprocessingMLPackage getWordprocessingPackage() {
+        public WordprocessingMLPackage getPackage() {
             return wordprocessingPackage;
         }
 
@@ -801,6 +743,15 @@ public class DocxRenderer implements IRender {
             mainDocumentPart.getRelationshipsPart().addRelationship(rel);
             hyperlinks.put(url, rel);
             return rel;
+        }
+
+        @Override
+        public String encodeUrl(CharSequence url) {
+            if (rendererOptions.percentEncodeUrls) {
+                return Escaping.percentEncodeUrl(url);
+            } else {
+                return url instanceof String ? (String) url : String.valueOf(url);
+            }
         }
 
         @Override
@@ -924,7 +875,31 @@ public class DocxRenderer implements IRender {
                 if (nodeRenderer != null) {
                     Node oldNode = this.renderingNode;
                     renderingNode = node;
+
+                    blockFormatProviders.put(renderingNode, renderingBlockFormatProvider);
+                    runFormatProviders.put(renderingNode, renderingRunFormatProvider);
+                    BlockFormatProvider oldRenderingBlockFormatProvider = renderingBlockFormatProvider;
+                    RunFormatProvider oldRenderingRunFormatProvider = renderingRunFormatProvider;
+                    ParaContainer oldRenderingParaContainer = renderingParaContainer;
+                    RunContainer oldRenderingRunContainer = renderingRunContainer;
+
                     nodeRenderer.render(node, this);
+
+                    RunFormatProvider runFormatProvider = runFormatProviders.remove(renderingNode);
+
+                    if (runFormatProvider != oldRenderingRunFormatProvider) {
+                        runFormatProvider.close();
+                    }
+                    renderingRunFormatProvider = oldRenderingRunFormatProvider;
+
+                    BlockFormatProvider blockFormatProvider = blockFormatProviders.remove(renderingNode);
+                    if (blockFormatProvider != oldRenderingBlockFormatProvider) {
+                        blockFormatProvider.close();
+                    }
+                    renderingBlockFormatProvider = oldRenderingBlockFormatProvider;
+                    renderingRunContainer = oldRenderingRunContainer;
+                    renderingParaContainer = oldRenderingParaContainer;
+
                     renderingNode = oldNode;
                 } else {
                     // default behavior is controlled by generic Node.class that is implemented in CoreNodeDocxRenderer

@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
+import com.vladsch.flexmark.docx.converter.internal.DocxRendererExtension;
 import com.vladsch.flexmark.docx.converter.internal.XmlFormatter;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
@@ -20,13 +21,11 @@ import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.junit.After;
 import org.junit.runners.Parameterized;
 
 import java.io.*;
@@ -45,9 +44,12 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                     SuperscriptExtension.create(),
                     TablesExtension.create(),
                     TocExtension.create(),
-                    WikiLinkExtension.create()
+                    WikiLinkExtension.create(),
+                    DocxRendererExtension.create()
             ))
             .set(DocxRenderer.RENDER_BODY_ONLY, true)
+            .set(DocxRenderer.DOC_RELATIVE_URL, "file:///Users/vlad/src/flexmark-java/")
+            .set(DocxRenderer.DOC_ROOT_URL, "file:///Users/vlad/src/flexmark-java/assets")
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             ;
 
@@ -61,7 +63,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
         optionsMap.put("IGNORES", new MutableDataSet().set(IGNORE, false));
-        optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_URL, "file:///Users/vlad/src/flexmark-java"));
+        optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, "file:///Users/vlad/src/flexmark-java"));
 
         // Set up a simple configuration that logs on the console.
         //BasicConfigurator.configure();
@@ -113,7 +115,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
 
     @Override
     protected void testCase(final Node node, final DataHolder options) {
-        if (false) {
+        if (true) {
             final SpecExample specExample = example();
             if (!specExample.isFullSpecExample() && !specExample.getSection().isEmpty()) {
                 // write it out to file, hard-coded for now                    IGNORE

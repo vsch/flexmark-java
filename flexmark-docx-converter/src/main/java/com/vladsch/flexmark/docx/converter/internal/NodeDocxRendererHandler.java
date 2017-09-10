@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ast.NodeAdaptingVisitHandler;
 import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
+import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 
 public class NodeDocxRendererHandler<N extends Node> extends NodeAdaptingVisitHandler<N, CustomNodeDocxRenderer<N>> implements CustomNodeDocxRenderer<Node> {
     public NodeDocxRendererHandler(Class<? extends N> aClass, CustomNodeDocxRenderer<N> adapter) {

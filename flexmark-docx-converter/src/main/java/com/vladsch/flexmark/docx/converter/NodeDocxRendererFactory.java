@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.docx.converter.internal;
+package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.util.options.DataHolder;
 

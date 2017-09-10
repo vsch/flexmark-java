@@ -43,7 +43,34 @@ public abstract class Node {
         int count = 0;
         while (parent != null) {
             for (Class nodeType : classes) {
-                if (nodeType.isInstance(parent)) count++;
+                if (nodeType.isInstance(parent)) {
+                    count++;
+                    break;
+                }
+            }
+            parent = parent.getParent();
+        }
+        return count;
+    }
+
+    public int countDirectAncestorsOfType(Class skip, Class... classes) {
+        Node parent = getParent();
+        int count = 0;
+        while (parent != null) {
+            boolean hadMatch = false;
+            for (Class nodeType : classes) {
+                if (nodeType.isInstance(parent)) {
+                    count++;
+                    hadMatch = true;
+                    break;
+                }
+                if (skip != null && skip.isInstance(parent)) {
+                    hadMatch = true;
+                    break;
+                }
+            }
+            if (!hadMatch) {
+                break;
             }
             parent = parent.getParent();
         }

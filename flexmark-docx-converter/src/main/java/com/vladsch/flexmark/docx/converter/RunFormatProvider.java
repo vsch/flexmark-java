@@ -1,12 +1,18 @@
 package com.vladsch.flexmark.docx.converter;
 
-import com.vladsch.flexmark.docx.converter.internal.DocxRendererContext;
-import org.docx4j.wml.R;
 import org.docx4j.wml.RPr;
-import org.docx4j.wml.Style;
 
-public interface RunFormatProvider {
-    /*
+public interface RunFormatProvider extends FormatProvider {
+    public static final String BOLD_STYLE = "StrongEmphasis";
+    public static final String ITALIC_STYLE = "Emphasis";
+    public static final String STRIKE_THROUGH_STYLE = "Strikethrough";
+    public static final String SUBSCRIPT_STYLE = "Superscript";
+    public static final String SUPERSCRIPT_STYLE = "Subscript";
+    public static final String INS_STYLE = "Underlined";
+    public static final String INLINE_CODE_STYLE = "SourceText";
+    public static final String HYPERLINK_STYLE = "Hyperlink";
+
+/*
 
     Provides containment of other format runs to allow
     inheritance of formatting from parent to child
@@ -26,23 +32,6 @@ public interface RunFormatProvider {
     // these are extracted and combined using format merge by each run formatter
     // using the docx context for helping with the mash-up of formatting
 
-    // initialize internal stuff based on the parent and store the docx context for future use
-    // optionally add elements to doc before main elements
-    // any R creates will call the getRPr() and addR() for this provider
-    // so don't create elements until you are ready to handle these calls
-    void open();
-
-    // finalize, add elements to the document after main part as needed
-    // after this method returns no more calls will be made to this provider
-    void close();
-
-    // these are the hard-coded styles on which this block is based
-    // used for reference purposes by children to figure out what they need to inherit
-    Style getBaseStyle();
-
-    // get the final PPr for the next P of this provider
-    RPr getRPr();
-
-    // add a new R and set it's RPr to proper format, action can be different for first r and subsequent ones
-    void addR(R r);
+    // set the final PPr for the next P of this provider, that is different from what the style provides
+    void getRPr(final RPr rPr);
 }
