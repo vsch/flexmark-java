@@ -419,7 +419,7 @@ with some text
 
 Local File
 
-```````````````````````````````` example Images: 2
+```````````````````````````````` example(Images: 2) options(IGNORED)
 ![flexmark-icon-logo](file:///Users/vlad/src/flexmark-java/assets/images/flexmark-icon-logo@2x.png "Title: flexmark-java logo") 
 
 with some text
@@ -481,7 +481,7 @@ with some text
 
 Relative Path
 
-```````````````````````````````` example(Images: 3) options(url)
+```````````````````````````````` example(Images: 3) options(url, IGNORED)
 ![flexmark-icon-logo](assets/images/flexmark-icon-logo@2x.png) 
 
 with some text
@@ -543,7 +543,7 @@ with some text
 
 Root Path
 
-```````````````````````````````` example(Images: 4) options(url)
+```````````````````````````````` example(Images: 4) options(url, IGNORED)
 ![flexmark-icon-logo](/images/flexmark-icon-logo@2x.png) 
 
 with some text

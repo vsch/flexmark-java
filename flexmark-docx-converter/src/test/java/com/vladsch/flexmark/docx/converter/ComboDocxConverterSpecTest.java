@@ -80,7 +80,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
-        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, false));
+        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, true));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY)));
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
 
