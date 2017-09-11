@@ -114,8 +114,16 @@ public class DocxRenderer implements IRender {
     }
 
     public static WordprocessingMLPackage getDefaultTemplate() {
+        return getDefaultTemplate("/empty.xml");
+    }
+
+    public static WordprocessingMLPackage getDefaultTemplate(String emptyXMLResourcePath) {
+        final InputStream inputStream = getResourceInputStream(emptyXMLResourcePath);
+        return getDefaultTemplate(inputStream);
+    }
+
+    public static WordprocessingMLPackage getDefaultTemplate(InputStream inputStream) {
         try {
-            final InputStream inputStream = getResourceInputStream("/empty.xml");
             final WordprocessingMLPackage mlPackage = WordprocessingMLPackage.load(inputStream);
             return mlPackage;
         } catch (Docx4JException e) {

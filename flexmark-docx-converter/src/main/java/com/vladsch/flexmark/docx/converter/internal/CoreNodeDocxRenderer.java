@@ -820,7 +820,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final SoftLineBreak node, final DocxRendererContext docx) {
-
+        docx.text(" ");
     }
 
     private void render(final HardLineBreak node, final DocxRendererContext docx) {

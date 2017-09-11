@@ -178,13 +178,14 @@ flexmark-java
 
 * Fix: add `<strike>` to HTML Parser as equivalent to `<del>` for OfficeLibre compatibility
 
-* Fix: HTML to Markdown conversion should treat text wrapped in `<div>` as having an EOL at the end
-  of the div to keep the text on separate lines.
+* Fix: HTML to Markdown conversion should treat text wrapped in `<div>` as having an EOL at the
+  end of the div to keep the text on separate lines.
 
 * API Change: `NodeRendererContext` parameter for `LinkResolver` and `LinkResolverFactory` was
   changed to `LinkResolverContext` to allow for non-html renderer usage of link resolvers (DocX
   Converter). Methods that did not relate to HTMLRendering are now part of the link resolver
-  context. The rest are not accessible. If you have an issue with the change please open an issue.
+  context. The rest are not accessible. If you have an issue with the change please open an
+  issue.
 
 * Add: `flexmark-docx-converter` module to render Markdown documents to docx using docx4j API.
 
@@ -195,35 +196,42 @@ flexmark-java
 * [ ] Add: `DocxRenderer` options:
   * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
   * [ ] `BULLET_LIST_NUM_ID` and `ORDERED_LIST_NUM_ID` for list style ids
-      
-* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths 
+
+* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths
 
 * [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
-      handler. 
+      handler.
 
 * [ ] Add: finish missing elements from docx converter
-    * [x] Paragraph
-    * [x] Headings
-    * [x] Bold and italic text
-    * [x] Tables
-      * [x] multiple header rows, column spans, markdown alignments
-      * [ ] Table captions are not yet supported by docx4j API
+  * [x] Paragraph
+  * [x] Headings
+  * [x] Bold and italic text
+  * [x] Tables
+    * [x] multiple header rows, column spans, markdown alignments
+    * [x] Table captions are not yet supported by docx4j API. Captions are converted to
+          "TableCaption" styled paragraphs if `DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH` is set
+          to `true`, which it is by default. `DocxRenderer.TABLE_CAPTION_BEFORE_TABLE`, default
+          `false`, when set to `true` the caption is inserted before the table.
     * [x] Ordered and unordered lists
       * [x] restart numbering on a short to do list
     * [x] Links
     * [x] Images
-      * [x] Images get embedded into the document, even remote ones (using http: or https: links)
+      * [x] Images get embedded into the document, even remote ones (using http: or https:
+            links)
       * [x] Max Image width property available in options
     * [ ] Footnootes
     * [x] Inline Code
-    * [x] Fenced Code 
+    * [x] Fenced Code
     * [x] Block Quotes
     * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
-    * [ ] Table of Contents 
+    * [ ] Table of Contents
 
 * Fix: complete conditional indent/border style propagation from parent to child based on parent
   and child types. Some child types already incorporate their parent's indentation such as list
   item styles and manually propagated indents for `Quotations` style.
+
+* Add: Numbering definitions: 1 - heading, 2 - bullet lists, 3 - ordered lists, 4 - bullet lists
+  in block quotes, 5 - ordered lists in block quotes
 
 0.26.6
 ------
@@ -259,7 +267,8 @@ flexmark-java
 
 * Fix: Update parser to CommonMark Spec 0.28, the only effect on parsing is:
 
-  * `***foo***` is now parsed as `italic(bold(foo))` whereas previously it was `bold(italic(foo))`.
+  * `***foo***` is now parsed as `italic(bold(foo))` whereas previously it was
+    `bold(italic(foo))`.
 
     Use `ParserEmulationProfile.COMMONMARK_0_27` or just set the `Parser.STRONG_WRAPS_EMPHASIS`
     to `true` to get old parsing behaviour.

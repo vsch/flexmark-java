@@ -24,8 +24,8 @@ public class DocxConverter {
             .set(DocxRenderer.SUPPRESS_HTML, true)
             // the DocxLinkResolver is added automatically, or alternately set it to false and add your own link resolver
             //.set(DocxRenderer.DEFAULT_LINK_RESOLVER, true)
-            .set(DocxRenderer.DOC_RELATIVE_URL, "file:///some/absolute/url/or/uri/path") // this will be used for URLs like 'images/...' or './' or '../'
-            .set(DocxRenderer.DOC_ROOT_URL, "file:///some/absolute/url/or/uri/path") // this will be used for URLs like: '/...'
+            .set(DocxRenderer.DOC_RELATIVE_URL, "file:///Users/vlad/src/pdf") // this will be used for URLs like 'images/...' or './' or '../'
+            .set(DocxRenderer.DOC_ROOT_URL, "file:///Users/vlad/src/pdf") // this will be used for URLs like: '/...'
             ;
 
     static String getResourceFileContent(String resourcePath) {

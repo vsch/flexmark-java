@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.26.4</version>
+    <version>0.27.0</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.26.4'
+compile 'com.vladsch.flexmark:flexmark-all:0.27.0'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,8 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
+  using the [docx4j] library. How to use: [DocxConverter Sample]
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
@@ -629,3 +631,9 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
 
+
+
+[docx4j]: https://www.docx4java.org/trac/docx4j
+
+
+[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverter.java

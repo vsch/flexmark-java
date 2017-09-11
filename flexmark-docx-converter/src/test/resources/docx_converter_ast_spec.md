@@ -605,9 +605,60 @@ with some text
 
 ## Block Quotes
 
-with hyperlink
+lazy continuation
 
 ```````````````````````````````` example Block Quotes: 1
+* list item
+    > block quote
+    lazy continuation
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="TextBody"/>
+            <w:numPr>
+                <w:ilvl w:val="0"/>
+                <w:numId w:val="2"/>
+            </w:numPr>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">list item</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+        </w:pPr>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Quotations"/>
+            <w:ind w:left="467"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">block quote</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">lazy continuation</w:t>
+        </w:r>
+    </w:p>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="Normal"/>
+            <w:spacing w:after="0" w:before="0" w:line="140" w:lineRule="exact"/>
+        </w:pPr>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+with hyperlink
+
+```````````````````````````````` example Block Quotes: 2
 > [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
 <w:body>
@@ -654,7 +705,7 @@ with hyperlink
 
 with hard break
 
-```````````````````````````````` example Block Quotes: 2
+```````````````````````````````` example Block Quotes: 3
 > block quote 1  
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
 .
@@ -711,7 +762,7 @@ with hard break
 
 with child paragraphs
 
-```````````````````````````````` example Block Quotes: 3
+```````````````````````````````` example Block Quotes: 4
 > block quote 1  
 >
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -771,7 +822,7 @@ with child paragraphs
 
 with child block quote
 
-```````````````````````````````` example Block Quotes: 4
+```````````````````````````````` example Block Quotes: 5
 > block quote 1  
 >
 >> another block quote
@@ -824,7 +875,7 @@ with child block quote
 
 with child paragraphs
 
-```````````````````````````````` example Block Quotes: 5
+```````````````````````````````` example Block Quotes: 6
 > block quote 1  
 >
 > with a link [flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
@@ -1302,6 +1353,9 @@ code
                 <w:rStyle w:val="Strikethrough"/>
             </w:rPr>
             <w:t xml:space="preserve">strike-through</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
         </w:r>
         <w:r>
             <w:rPr>
