@@ -59,12 +59,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private final ListOptions listOptions;
     protected boolean recheckUndefinedReferences;
     protected boolean repositoryNodesDone;
+    protected final boolean linebreakOnInlineHtmlBr;
+    protected final boolean tableCaptionToParagraph;
+    protected final boolean tableCaptionBeforeTable;
     private int listNumId;
     private int imageId;
 
     public CoreNodeDocxRenderer(DataHolder options) {
         this.referenceRepository = getRepository(options);
         this.recheckUndefinedReferences = DocxRenderer.RECHECK_UNDEFINED_REFERENCES.getFrom(options);
+        this.linebreakOnInlineHtmlBr = DocxRenderer.LINEBREAK_ON_INLINE_HTML_BR.getFrom(options);
+        this.tableCaptionToParagraph = DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH.getFrom(options);
+        this.tableCaptionBeforeTable = DocxRenderer.TABLE_CAPTION_BEFORE_TABLE.getFrom(options);
         this.repositoryNodesDone = false;
 
         this.options = new DocxRendererOptions(options);
@@ -424,6 +430,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void render(final Text node, final DocxRendererContext docx) {
         docx.text(node.getChars().unescape());
+
+/*
+        // add text to last R
+        R r = docx.getR();
+        final org.docx4j.wml.Text text = docx.addWrappedText(r);
+        text.setValue(node.getChars().unescape());
+        text.setSpace(RunFormatProvider.SPACE_PRESERVE);
+*/
     }
 
     private void render(final TextBase node, final DocxRendererContext docx) {
@@ -435,8 +449,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-                rPr.setI(docx.getBooleanDefaultTrue());
-                rPr.setICs(docx.getBooleanDefaultTrue());
+                //rPr.setI(docx.getBooleanDefaultTrue());
+                //rPr.setICs(docx.getBooleanDefaultTrue());
             }
         });
         docx.renderChildren(node);
@@ -447,8 +461,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-                rPr.setB(docx.getBooleanDefaultTrue());
-                rPr.setBCs(docx.getBooleanDefaultTrue());
+                //rPr.setB(docx.getBooleanDefaultTrue());
+                //rPr.setBCs(docx.getBooleanDefaultTrue());
             }
         });
         docx.renderChildren(node);
@@ -459,16 +473,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-
-                // Create object for sz
-                HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
-                rPr.setSz(hpsmeasure);
-                hpsmeasure.setVal(BigInteger.valueOf(19));
-
-                // Create object for position
-                CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
-                rPr.setPosition(signedhpsmeasure);
-                signedhpsmeasure.setVal(BigInteger.valueOf(-4));
+                //
+                //// Create object for sz
+                //HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
+                //rPr.setSz(hpsmeasure);
+                //hpsmeasure.setVal(BigInteger.valueOf(19));
+                //
+                //// Create object for position
+                //CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
+                //rPr.setPosition(signedhpsmeasure);
+                //signedhpsmeasure.setVal(BigInteger.valueOf(-4));
             }
         });
         docx.renderChildren(node);
@@ -479,16 +493,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-
-                // Create object for sz
-                HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
-                rPr.setSz(hpsmeasure);
-                hpsmeasure.setVal(BigInteger.valueOf(19));
-
-                // Create object for position
-                CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
-                rPr.setPosition(signedhpsmeasure);
-                signedhpsmeasure.setVal(BigInteger.valueOf(8));
+                //
+                //// Create object for sz
+                //HpsMeasure hpsmeasure = docx.getFactory().createHpsMeasure();
+                //rPr.setSz(hpsmeasure);
+                //hpsmeasure.setVal(BigInteger.valueOf(19));
+                //
+                //// Create object for position
+                //CTSignedHpsMeasure signedhpsmeasure = docx.getFactory().createCTSignedHpsMeasure();
+                //rPr.setPosition(signedhpsmeasure);
+                //signedhpsmeasure.setVal(BigInteger.valueOf(8));
             }
         });
         docx.renderChildren(node);
@@ -499,7 +513,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-                rPr.setStrike(docx.getFactory().createBooleanDefaultTrue());
+                //rPr.setStrike(docx.getFactory().createBooleanDefaultTrue());
             }
         });
         docx.renderChildren(node);
@@ -510,9 +524,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-                U u = docx.getFactory().createU();
-                rPr.setU(u);
-                u.setVal(org.docx4j.wml.UnderlineEnumeration.SINGLE);
+                //U u = docx.getFactory().createU();
+                //rPr.setU(u);
+                //u.setVal(org.docx4j.wml.UnderlineEnumeration.SINGLE);
             }
         });
         docx.renderChildren(node);
@@ -523,10 +537,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             @Override
             public void getRPr(final RPr rPr) {
                 super.getRPr(rPr);
-                //// Create object for rStyle
-                //RStyle rstyle = docx.getFactory().createRStyle();
-                //rPr.setRStyle(rstyle);
-                //rstyle.setVal(INLINE_CODE_STYLE);
             }
         });
         docx.renderChildren(node);
@@ -562,56 +572,82 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final BlockQuote node, final DocxRendererContext docx) {
-        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class)+1;
+        final int level = node.countDirectAncestorsOfType(null, BlockQuote.class) + 1;
         final BigInteger left;
         final BigInteger right;
+        final BigInteger before;
+        final BigInteger after;
         boolean force = false;
 
         final Style style = docx.getStyle(BLOCK_QUOTE_STYLE);
         if (style != null) {
             // Should always be true
             left = docx.getHelper().safeIndLeft(style.getPPr(), 240);
+            before = docx.getHelper().safeSpacingBefore(style.getPPr());
+            after = docx.getHelper().safeSpacingAfter(style.getPPr());
         } else {
             force = true;
             left = BigInteger.valueOf(240);
+            before = BigInteger.ZERO;
+            after = BigInteger.ZERO;
         }
 
         final BigInteger quoteLevel = BigInteger.valueOf(level);
         final boolean forceInd = force;
+        final BigInteger leftInd = left.multiply(quoteLevel);
+
+        final Style paragraphStyle = docx.getStyle(PREFORMATTED_TEXT_STYLE);
+        if (paragraphStyle != null) {
+            // Should always be true
+        } else {
+        }
+
+        if (node.getChars().equals("> last block quote\n")) {
+            int tmp = 0;
+        }
+
         docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, BLOCK_QUOTE_STYLE) {
             @Override
             public void getPPr(final PPr pPr) {
-                if (level > 1 || forceInd) {
-                    myDocx.getHelper().ensureInd(pPr).setLeft(left.multiply(quoteLevel));
-                }
+                //if (level > 1 || forceInd) {
+                //    myDocx.getHelper().ensureInd(pPr).setLeft(leftInd);
+                //}
                 super.getPPr(pPr);
             }
 
             @Override
             protected BlockFormatProvider getStyleParent() {
-                BlockFormatProvider parent = myParent;
-                while (parent != null && parent.getNode().getNodeOfTypeIndex(BlockQuote.class) != -1) {
-                    parent = parent.getParent();
+                return myParent;
+                //BlockFormatProvider parent = myParent;
+                //while (parent != null && parent.getNode().getNodeOfTypeIndex(BlockQuote.class) != -1) {
+                //    parent = parent.getParent();
+                //}
+                //return parent;
+            }
+
+            @Override
+            public void adjustPPrForFormatting(PPr pPr) {
+                // here we need to adjust for inherited left margin
+                final BigInteger newLeftInd = docx.getHelper().safeIndLeft(pPr);
+                final PPr styledPPr = docx.getHelper().getExplicitPPr(pPr);
+                if (styledPPr.getPBdr() != null && newLeftInd.compareTo(leftInd) > 0) {
+                    // it grew, word has the border hanging and we want the we shift it by our left border spacing
+                    CTBorder leftBorder = styledPPr.getPBdr().getLeft();
+                    if (leftBorder.getSpace() != null && leftBorder.getSpace().compareTo(BigInteger.ZERO) > 0) {
+                        //pPr.getInd().setLeft(newLeftInd.add(leftBorder.getSpace().multiply(BigInteger.valueOf(20))));
+
+                        final Node currentNode = docx.getCurrentNode();
+                        if (currentNode instanceof Paragraph) {
+                            int tmp = 0;
+                        }
+                    }
                 }
-                return parent;
             }
         });
-        final BigInteger before;
-        final BigInteger after;
 
-        final Style paragraphStyle = docx.getStyle(BLOCK_QUOTE_STYLE);
-        if (paragraphStyle != null) {
-            // Should always be true
-            before = docx.getHelper().safeSpacingBefore(paragraphStyle.getPPr());
-            after = docx.getHelper().safeSpacingAfter(paragraphStyle.getPPr());
-        } else {
-            before = BigInteger.ZERO;
-            after = BigInteger.ZERO;
-        }
-
-        if (level == 1) docx.addBlankLine(before, BlockFormatProvider.DEFAULT_STYLE);
+        docx.addBlankLine(before, BlockFormatProvider.DEFAULT_STYLE);
         docx.renderChildren(node);
-        if (level == 1) docx.addBlankLine(after, BlockFormatProvider.DEFAULT_STYLE);
+        docx.addBlankLine(after, BlockFormatProvider.DEFAULT_STYLE);
     }
 
     private void render(final ThematicBreak node, final DocxRendererContext docx) {
@@ -649,6 +685,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         });
 
         docx.addBlankLine(before, BlockFormatProvider.DEFAULT_STYLE);
+        docx.createP();
 
         int[] leadColumns = new int[lines.size()];
         int minSpaces = Integer.MAX_VALUE;
@@ -669,8 +706,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             sb.append(line.trim());
 
             // Create object for p
-            P p = docx.createP();
             docx.text(sb.toString());
+            docx.addLineBreak();
 
             i++;
         }
@@ -722,7 +759,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         int newNum = 1;
         final int listLevel = nesting - 1;
 
-        if (node.getParent() instanceof OrderedList && node == node.getParent().getFirstChild()) {
+        if (listOptions.isOrderedListManualStart() && node.getParent() instanceof OrderedList && node == node.getParent().getFirstChild()) {
             newNum = ((OrderedList) node.getParent()).getStartNumber();
             numId = ndp.restart(numId, listLevel, newNum);
         }
@@ -768,6 +805,11 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 }
                 return parent;
             }
+
+            @Override
+            protected void inheritBdr(final PPr pPr, final PPr parentPPr) {
+                super.inheritBdr(pPr, parentPPr);
+            }
         });
 
         docx.renderChildren(node);
@@ -778,9 +820,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final HardLineBreak node, final DocxRendererContext docx) {
-        // start a new paragraph
-        docx.createP();
-        docx.createR();
+        // add a line break
+        docx.addLineBreak();
     }
 
     private void render(HtmlBlock node, final DocxRendererContext docx) {
@@ -843,15 +884,20 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     public void renderInlineHtml(final HtmlInlineBase node, final DocxRendererContext docx, boolean suppress, boolean escape) {
-        if (suppress) return;
-
-        if (escape) {
-            docx.text(node.getChars().normalizeEOL());
+        if (linebreakOnInlineHtmlBr && node.getChars().unescape().matches("<br\\s*/?>")) {
+            // start a new hard-break
+            docx.addLineBreak();
         } else {
-            try {
-                docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes());
-            } catch (Docx4JException e) {
-                e.printStackTrace();
+            if (suppress) return;
+
+            if (escape) {
+                docx.text(node.getChars().normalizeEOL());
+            } else {
+                try {
+                    docx.getDocxDocument().addAltChunk(AltChunkType.Html, node.getChars().toString().getBytes());
+                } catch (Docx4JException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -918,7 +964,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             JAXBElement<org.docx4j.wml.Text> textWrapped = docx.getFactory().createRInstrText(text);
             r2.getContent().add(textWrapped);
             text.setValue(String.format(" HYPERLINK \"%s\" \\o \"%s\" ", linkUrl, linkTitle));
-            text.setSpace("preserve");
+            text.setSpace(RunFormatProvider.SPACE_PRESERVE);
 
             // Create object for r
             R r3 = docx.getFactory().createR();
@@ -1136,6 +1182,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private Tr myTr;
 
     private void render(final TableBlock node, final DocxRendererContext docx) {
+
+        // if we have a caption and it goes before the table, we add it here
+        final Node caption = node.getFirstChildAny(TableCaption.class);
+        if (caption != null && tableCaptionBeforeTable) {
+            renderTableCaption((TableCaption) caption, docx);
+        }
+
         myTbl = docx.getFactory().createTbl();
         JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getFactory().createHdrTbl(myTbl);
         docx.getDocxDocument().getContent().add(tblWrapped);
@@ -1155,11 +1208,43 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         tblwidth.setType("auto");
         tblwidth.setW(BigInteger.valueOf(0));
 
+        final int cellMargin = 80;
+        final int leftInd = 30;
         // Create object for tblInd
-        TblWidth tblwidth2 = docx.getFactory().createTblWidth();
-        tblpr.setTblInd(tblwidth2);
-        tblwidth2.setType("dxa");
-        tblwidth2.setW(BigInteger.valueOf(30));
+        //TblWidth tblwidth2 = docx.getFactory().createTblWidth();
+        //tblpr.setTblInd(tblwidth2);
+        //tblwidth2.setType("dxa");
+        //tblwidth2.setW(BigInteger.valueOf(30));
+
+        PPr pPr = docx.getFactory().createPPr();
+        docx.getHelper().ensureInd(pPr);
+        PPrBase.Ind ind = pPr.getInd();
+        ind.setLeft(null);
+
+        PPr parentPPr = docx.getFactory().createPPr();
+        docx.getBlockFormatProvider().getPPr(parentPPr);
+        PPr styledPPr = docx.getHelper().getExplicitPPr(parentPPr);
+        docx.getHelper().inheritInd(pPr, styledPPr);
+
+        // add inherited indent
+        TblWidth tblInd = docx.getFactory().createTblWidth();
+        tblpr.setTblInd(tblInd);
+        tblInd.setType("dxa");
+        final BigInteger tableInd = BigInteger.valueOf(cellMargin + leftInd).add(docx.getHelper().safeIndLeft(pPr.getInd()));
+        tblInd.setW(tableInd);
+
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, BlockFormatProvider.DEFAULT_STYLE) {
+            @Override
+            protected void inheritBdr(final PPr pPr, final PPr parentPPr) {
+
+            }
+
+            @Override
+            protected void inheritIndent(final PPr pPrBase, final PPr parentPrBase) {
+
+            }
+        });
+
         // Create object for tblBorders
         TblBorders tblborders = docx.getFactory().createTblBorders();
         tblpr.setTblBorders(tblborders);
@@ -1213,22 +1298,22 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         TblWidth tblwidth3 = docx.getFactory().createTblWidth();
         tblcellmar.setLeft(tblwidth3);
         tblwidth3.setType("dxa");
-        tblwidth3.setW(BigInteger.valueOf(80));
+        tblwidth3.setW(BigInteger.valueOf(cellMargin));
         // Create object for right
         TblWidth tblwidth4 = docx.getFactory().createTblWidth();
         tblcellmar.setRight(tblwidth4);
         tblwidth4.setType("dxa");
-        tblwidth4.setW(BigInteger.valueOf(80));
+        tblwidth4.setW(BigInteger.valueOf(cellMargin));
         // Create object for top
         TblWidth tblwidth5 = docx.getFactory().createTblWidth();
         tblcellmar.setTop(tblwidth5);
         tblwidth5.setType("dxa");
-        tblwidth5.setW(BigInteger.valueOf(80));
+        tblwidth5.setW(BigInteger.valueOf(cellMargin));
         // Create object for bottom
         TblWidth tblwidth6 = docx.getFactory().createTblWidth();
         tblcellmar.setBottom(tblwidth6);
         tblwidth6.setType("dxa");
-        tblwidth6.setW(BigInteger.valueOf(80));
+        tblwidth6.setW(BigInteger.valueOf(cellMargin));
         // Create object for tblLook
         CTTblLook tbllook = docx.getFactory().createCTTblLook();
         tblpr.setTblLook(tbllook);
@@ -1280,6 +1365,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         // table caption not yet supported by docx4j API
         //final TblPr tblPr = myTbl.getTblPr();
         //docx.getFactory().createCTCaption();
+        // convert to Caption text
+        if (!tableCaptionBeforeTable) {
+            renderTableCaption(node, docx);
+        }
+    }
+
+    private void renderTableCaption(final TableCaption node, final DocxRendererContext docx) {
+        if (tableCaptionToParagraph) {
+            docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, TABLE_CAPTION));
+            docx.createP();
+            docx.text(node.getText().unescape());
+        }
     }
 
     private void render(TableCell node, final DocxRendererContext docx) {
@@ -1292,6 +1389,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         // Create object for tcPr
         TcPr tcpr = docx.getFactory().createTcPr();
         tc.setTcPr(tcpr);
+
+        Style style1 = docx.getStyle(style);
+        if (style1 != null) {
+            if (style1.getPPr() != null) {
+                if (style1.getPPr().getShd() != null) {
+                    CTShd shd = docx.getHelper().getCopy(style1.getPPr().getShd(), false);
+                    tcpr.setShd(shd);
+                }
+            }
+        }
 
         docx.setParaContainer(new ParaContainer() {
             @Override

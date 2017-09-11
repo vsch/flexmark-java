@@ -115,7 +115,7 @@ public class DocxLinkResolver implements LinkResolver {
         return link;
     }
 
-    static class Factory implements LinkResolverFactory {
+    public static class Factory implements LinkResolverFactory {
         @Override
         public Set<Class<? extends LinkResolverFactory>> getAfterDependents() {
             return null;

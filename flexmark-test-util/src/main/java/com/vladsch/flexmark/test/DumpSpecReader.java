@@ -13,6 +13,7 @@ import static com.vladsch.flexmark.test.RenderingTestCase.FAIL;
 public class DumpSpecReader extends SpecReader {
     protected final StringBuilder sb = new StringBuilder();
     protected final FullSpecTestCase testCase;
+    protected StringBuilder exampleComment;
 
     public DumpSpecReader(InputStream stream, FullSpecTestCase testCase) {
         super(stream);
@@ -49,8 +50,13 @@ public class DumpSpecReader extends SpecReader {
         }
 
         Node node = testCase.parser().withOptions(options).parse(parseSource);
-        String html = !ignoredCase && testCase.useActualHtml() ? testCase.renderer().withOptions(options).render(node) : example.getHtml();
-        String ast = example.getAst() == null ? null : (!ignoredCase ? testCase.ast(node) : example.getAst());
+        final String actualHTML = testCase.renderer().withOptions(options).render(node);
+        final String actualAST = testCase.ast(node);
+        String html = !ignoredCase && testCase.useActualHtml() ? actualHTML : example.getHtml();
+        String ast = example.getAst() == null ? null : (!ignoredCase ? actualAST : example.getAst());
+
+        // allow other formats to accumulate
+        testCase.addSpecExample(example, node, options, ignoredCase, actualHTML, actualAST);
 
         // include source so that diff can be used to update spec
         addSpecExample(sb, example.getSource(), html, ast, example.getOptionsSet(), testCase.includeExampleCoords(), example.getSection(), example.getExampleNumber());

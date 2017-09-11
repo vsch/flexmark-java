@@ -34,6 +34,7 @@ public class SpecReader {
     protected StringBuilder source;
     protected StringBuilder html;
     protected StringBuilder ast;
+    protected StringBuilder comment;
     protected int exampleNumber = 0;
 
     protected List<SpecExample> examples = new ArrayList<SpecExample>();
@@ -139,12 +140,14 @@ public class SpecReader {
 
     protected void processLine(String line) {
         boolean lineAbsorbed = false;
+        boolean lineProcessed = false;
 
         switch (state) {
             case BEFORE:
                 Matcher matcher = SECTION_PATTERN.matcher(line);
                 if (matcher.matches()) {
                     section = matcher.group(1);
+                    lineProcessed = true;
                     exampleNumber = 0;
                 } else if (line.startsWith(EXAMPLE_START) || line.startsWith(EXAMPLE_START_NBSP)) {
                     Matcher option_matcher = OPTIONS_PATTERN.matcher(line.subSequence(EXAMPLE_START.length(), line.length()));
@@ -171,7 +174,7 @@ public class SpecReader {
             case HTML:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), null, comment == null ? null : comment.toString()));
                     resetContents();
                     lineAbsorbed = true;
                 } else if (line.equals(TYPE_BREAK)) {
@@ -186,7 +189,7 @@ public class SpecReader {
             case AST:
                 if (line.equals(EXAMPLE_BREAK)) {
                     state = State.BEFORE;
-                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString()));
+                    addSpecExample(new SpecExample(optionsSet, section, exampleNumber, source.toString(), html.toString(), ast.toString(), comment == null ? null : comment.toString()));
                     resetContents();
                     lineAbsorbed = true;
                 } else {
@@ -197,6 +200,12 @@ public class SpecReader {
         }
 
         if (!lineAbsorbed) {
+            if (lineProcessed)  {
+                comment = null;
+            } else if (section != null) {
+                if (comment == null) comment = new StringBuilder();
+                comment.append(line).append('\n');
+            }
             addSpecLine(line);
         }
     }
@@ -206,6 +215,7 @@ public class SpecReader {
         source = new StringBuilder();
         html = new StringBuilder();
         ast = new StringBuilder();
+        comment = null;
     }
 
     protected enum State {

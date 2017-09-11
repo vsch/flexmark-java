@@ -9,17 +9,23 @@ public class SpecExample {
     private final String source;
     private final String html;
     private final String ast;
+    private final String comment;
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html) {
         this(optionsSet, section, exampleNumber, source, html, null);
     }
 
     public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast) {
+        this(optionsSet, section, exampleNumber, source, html, null, null);
+
+    }
+    public SpecExample(String optionsSet, String section, int exampleNumber, String source, String html, String ast, String comment) {
         this.section = section;
         this.exampleNumber = exampleNumber;
         this.source = source;
         this.html = html;
         this.ast = ast;
+        this.comment = comment == null ? null : comment.trim();
 
         if (optionsSet == null) {
             this.optionsSet = null;
@@ -30,12 +36,12 @@ public class SpecExample {
     }
 
     // @formatter:off
-    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
-    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
-    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
-    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
-    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
-    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast); }
+    public SpecExample withOptionsSet(String optionsSet) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withSection(String section) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withExampleNumber(int exampleNumber) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withSource(String source) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withHtml(String html) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
+    public SpecExample withAst(String ast) { return new SpecExample(optionsSet, section, exampleNumber, source, html, ast, comment); }
     // @formatter:on
 
     public boolean isFullSpecExample() {
@@ -76,6 +82,14 @@ public class SpecExample {
 
     public int getExampleNumber() {
         return exampleNumber;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public boolean hasComment() {
+        return comment != null && !comment.isEmpty();
     }
 
     @Override

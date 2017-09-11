@@ -98,9 +98,19 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
         }
     }
 
+    protected void fullTestSpecStarting() {
+
+    }
+
+    protected void fullTestSpecComplete() {
+
+    }
+
     @Test
     public void testFullSpec() throws Exception {
         if (!example.isFullSpecExample()) return;
+
+        fullTestSpecStarting();
 
         String specResourcePath = getSpecResourceName();
         String fullSpec = SpecReader.readSpec(specResourcePath);
@@ -111,6 +121,7 @@ public abstract class ComboSpecTestCase extends FullSpecTestCase {
             System.out.println(actual);
         }
 
+        fullTestSpecComplete();
         assertEquals(fullSpec, actual);
     }
 }

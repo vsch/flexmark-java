@@ -81,6 +81,13 @@ public interface DocxRendererContext extends LinkResolverContext {
     R createR();
 
     /**
+     * Get last R element of current P or create a new one
+     *
+     * @return R element
+     */
+    R getR();
+
+    /**
      * Create and add wrapped Text element to R element
      *
      * @param r R element to which to add wrapped text
@@ -88,6 +95,8 @@ public interface DocxRendererContext extends LinkResolverContext {
      */
     org.docx4j.wml.Text addWrappedText(R r);
 
+    void addPageBreak();
+    void addBreak(STBrType breakType);
     /**
      * Add text to current P, create R and add wrapped text
      * @param text  text to add
@@ -156,4 +165,9 @@ public interface DocxRendererContext extends LinkResolverContext {
      */
     Iterable<? extends Node> reversedNodesOfType(Class<?>[] classes);
     Iterable<? extends Node> reversedNodesOfType(Collection<Class<?>> classes);
+
+    /**
+     * Add a line break to current R
+     */
+    void addLineBreak();
 }

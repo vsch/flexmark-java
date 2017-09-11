@@ -10,6 +10,7 @@ public interface BlockFormatProvider extends FormatProvider {
     public static final String PREFORMATTED_TEXT_STYLE = "PreformattedText";
     public static final String BLOCK_QUOTE_STYLE = "Quotations";
     public static final String HORIZONTAL_LINE_STYLE = "HorizontalLine";
+    public static final String TABLE_CAPTION = "TableCaption";
 
 /*
 
@@ -48,7 +49,7 @@ public interface BlockFormatProvider extends FormatProvider {
     void getParaRPr(final ParaRPr rPr);
 
     // to allow formatter to track first P formatting
-    void pFormatted();
+    void adjustPPrForFormatting(final PPr pP);
 
     BlockFormatProvider getParent();
 }

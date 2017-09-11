@@ -209,7 +209,7 @@ flexmark-java
       * [x] multiple header rows, column spans, markdown alignments
       * [ ] Table captions are not yet supported by docx4j API
     * [x] Ordered and unordered lists
-      * [ ] restart numbering on a short to do list
+      * [x] restart numbering on a short to do list
     * [x] Links
     * [x] Images
       * [x] Images get embedded into the document, even remote ones (using http: or https: links)

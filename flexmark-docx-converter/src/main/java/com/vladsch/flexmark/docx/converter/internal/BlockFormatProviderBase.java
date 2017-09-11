@@ -24,7 +24,7 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
     }
 
     @Override
-    public void pFormatted() {
+    public void adjustPPrForFormatting(final PPr pP) {
         myPCount++;
     }
 
@@ -75,15 +75,19 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
         return myParent;
     }
 
-    protected void inheritIndent(PPrBase pPrBase, PPrBase parentPrBase) {
+    protected void inheritIndent(PPr pPrBase, PPr parentPrBase) {
         if (parentPrBase != null) {
             myDocx.getHelper().inheritInd(pPrBase, parentPrBase);
         }
     }
 
-    protected void inheritParentFormat(PPrBase pPr, PPrBase parentPPr) {
+    protected void inheritParentFormat(PPr pPr, PPr parentPPr) {
         inheritIndent(pPr, parentPPr);
         inheritBdr(pPr, parentPPr);
+    }
+
+    protected void adjustPPr(PPr pPrBase) {
+
     }
 
     /**
@@ -91,12 +95,12 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
      * <p>
      * must be called after ind has been determined
      *
-     * @param pPrBase   ppr to set
+     * @param pPr   ppr to set
      * @param parentPPr parent ppr
      */
-    protected void inheritBdr(PPrBase pPrBase, PPrBase parentPPr) {
+    protected void inheritBdr(PPr pPr, PPr parentPPr) {
         // combine indent with parent
-        myDocx.getHelper().inheritPBdr(pPrBase, parentPPr);
+        myDocx.getHelper().inheritPBdr(pPr, parentPPr);
     }
 
     @Override
@@ -117,14 +121,21 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
         BlockFormatProvider parent = getStyleParent();
         if (parent != null) {
             PPr ppr = myDocx.getFactory().createPPr();
-            Style parentStyle = myDocx.getStyle(parent.getStyleId());
-            if (parentStyle != null) {
-                myDocx.getHelper().setPPrBase(ppr, parentStyle.getPPr(), false);
-            }
             parent.getPPr(ppr);
+            ppr = myDocx.getHelper().getExplicitPPr(ppr);
+
+            //PPr ppr = myDocx.getFactory().createPPr();
+            //Style parentStyle = myDocx.getStyle(parent.getStyleId());
+            //if (parentStyle != null) {
+            //    myDocx.getHelper().setPPrBase(ppr, parentStyle.getPPr(), false);
+            //}
+            //parent.getPPr(ppr);
 
             inheritParentFormat(pPr, ppr);
         }
+
+        // allow adjustments
+        adjustPPr(pPr);
     }
 
     @Override

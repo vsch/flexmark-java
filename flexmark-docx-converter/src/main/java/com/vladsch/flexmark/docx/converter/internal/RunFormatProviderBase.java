@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 import com.vladsch.flexmark.docx.converter.RunFormatProvider;
+import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.wml.*;
 
 /*
@@ -56,42 +57,34 @@ public class RunFormatProviderBase implements RunFormatProvider {
     }
 
     protected void inheritParentStyle(RPr rPr, RPr parentRPr) {
-        Style style = getStyle();
+        RPr styledRPr = myDocx.getHelper().getExplicitRPr(parentRPr);
+        RPr styledThisRPr = myDocx.getHelper().getExplicitRPr(rPr);
 
-        if (style != null && style.getRPr() != null) {
-            RPr diff = myDocx.getHelper().getCopy(parentRPr, false);
-            myDocx.getHelper().setRPr(diff, rPr, false);
-            myDocx.getHelper().keepDiff(diff, myDocx.getHelper().getExplicitRPr(style.getRPr(), false));
-            myDocx.getHelper().setRPr(rPr, diff, false);
-        } else {
-            myDocx.getHelper().setRPr(rPr, parentRPr, false);
-        }
+        StyleUtil.apply(styledThisRPr, styledRPr);
+        StyleUtil.apply(rPr, styledRPr);
+        StyleUtil.apply(styledRPr, rPr);
     }
 
     @Override
     public void getRPr(final RPr rPr) {
-        // handle inheritance
-        RunFormatProvider parent = getStyleParent();
-        if (parent != null) {
-            RPr rpr1 = myDocx.getFactory().createRPr();
-            Style parentStyle = myDocx.getStyle(parent.getStyleId());
-            if (parentStyle != null) {
-                myDocx.getHelper().setRPr(rpr1, parentStyle.getRPr(), false);
-            }
-
-            inheritParentStyle(rPr, rpr1);
-
-            parent.getRPr(rPr);
-        }
-
         // Create object for rStyle
         RStyle rstyle = myDocx.getFactory().createRStyle();
         rPr.setRStyle(rstyle);
         rstyle.setVal(myBaseStyleId);
 
+        // handle inheritance
+        RunFormatProvider parent = myParent;
+        if (parent != null) {
+            RPr rpr1 = myDocx.getFactory().createRPr();
+            parent.getRPr(rpr1);
+
+            inheritParentStyle(rPr, rpr1);
+        }
+
         Style thisStyle = myDocx.getStyle(myBaseStyleId);
         if (thisStyle != null) {
-            myDocx.getHelper().keepDiff(rPr, thisStyle.getRPr());
+            final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr(), myDocx.getP().getPPr());
+            myDocx.getHelper().keepDiff(rPr, pr);
         }
     }
 }

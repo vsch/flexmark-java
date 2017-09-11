@@ -39,7 +39,7 @@
                     <w:rPrDefault>
                         <w:rPr>
                             <w:rFonts w:ascii="Liberation Serif" w:cs="Lucida Sans" w:eastAsia="SimSun" w:hAnsi="Liberation Serif"/>
-                            <w:sz w:val="20"/>
+                            <w:sz w:val="24"/>
                             <w:szCs w:val="24"/>
                             <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
                         </w:rPr>
@@ -354,7 +354,7 @@
                             <w:left w:color="CCCCCC" w:space="9" w:sz="16" w:val="single"/>
                         </w:pBdr>
                         <w:bidi w:val="false"/>
-                        <w:spacing w:after="140" w:before="280" />
+                        <w:spacing w:after="140" w:before="140" />
                         <w:ind w:hanging="0" w:left="240" w:right="0"/>
                         <w:jc w:val="left"/>
                     </w:pPr>
@@ -407,6 +407,20 @@
                     <w:rPr>
                         <w:b/>
                         <w:bCs w:val="false"/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:styleId="TableCaption" w:type="paragraph">
+                    <w:name w:val="Table Caption"/>
+                    <w:basedOn w:val="TableContents"/>
+                    <w:qFormat/>
+                    <w:pPr>
+                        <w:spacing w:after="240" w:before="240"/>
+                        <w:suppressLineNumbers/>
+                        <w:jc w:val="left"/>
+                    </w:pPr>
+                    <w:rPr>
+                        <w:b/>
+                        <w:bCs w:val="true"/>
                     </w:rPr>
                 </w:style>
                 <w:style w:styleId="ParagraphTextBody" w:type="paragraph">

@@ -6,11 +6,12 @@ public interface RunFormatProvider extends FormatProvider {
     public static final String BOLD_STYLE = "StrongEmphasis";
     public static final String ITALIC_STYLE = "Emphasis";
     public static final String STRIKE_THROUGH_STYLE = "Strikethrough";
-    public static final String SUBSCRIPT_STYLE = "Superscript";
-    public static final String SUPERSCRIPT_STYLE = "Subscript";
+    public static final String SUBSCRIPT_STYLE = "Subscript";
+    public static final String SUPERSCRIPT_STYLE = "Superscript";
     public static final String INS_STYLE = "Underlined";
     public static final String INLINE_CODE_STYLE = "SourceText";
     public static final String HYPERLINK_STYLE = "Hyperlink";
+    public static final String SPACE_PRESERVE = "preserve";
 
 /*
 

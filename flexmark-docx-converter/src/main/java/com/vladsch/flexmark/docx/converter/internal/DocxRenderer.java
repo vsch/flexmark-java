@@ -48,6 +48,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> RENDER_BODY_ONLY = new DataKey<Boolean>("RENDER_BODY_ONLY", false);
     public static final DataKey<Integer> MAX_IMAGE_WIDTH = new DataKey<Integer>("MAX_IMAGE_WIDTH", 0);
 
+    public static final DataKey<Boolean> DEFAULT_LINK_RESOLVER = new DataKey<Boolean>("DEFAULT_LINK_RESOLVER", true);
     public static final DataKey<String> DOC_RELATIVE_URL = new DataKey<String>("DOC_RELATIVE_URL", "");
     public static final DataKey<String> DOC_ROOT_URL = new DataKey<String>("DOC_ROOT_URL", "");
 
@@ -64,6 +65,9 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = HtmlRenderer.SUPPRESS_HTML_COMMENT_BLOCKS;
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = HtmlRenderer.SUPPRESS_INLINE_HTML;
     public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = HtmlRenderer.SUPPRESS_INLINE_HTML_COMMENTS;
+    public static final DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<Boolean>("LINEBREAK_ON_INLINE_HTML_BR", true);
+    public static final DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<Boolean>("TABLE_CAPTION_TO_PARAGRAPH", true);
+    public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<Boolean>("TABLE_CAPTION_BEFORE_TABLE", false);
 
     private final List<NodeDocxRendererFactory> nodeFormatterFactories;
     private final DocxRendererOptions rendererOptions;
@@ -381,7 +385,6 @@ public class DocxRenderer implements IRender {
         final HashMap<String, Relationship> hyperlinks;
         private final WordprocessingMLPackage wordprocessingPackage;
         private final MainDocumentPart mainDocumentPart;
-        private final Body body;
         private final ObjectFactory myFactory;
         private final DocxHelper myDocxHelper;
         private P p;
@@ -402,16 +405,15 @@ public class DocxRenderer implements IRender {
             this.phasedFormatters = new ArrayList<PhasedNodeDocxRenderer>(nodeFormatterFactories.size());
             this.styles = new HashMap<String, Style>();
             this.hyperlinks = new HashMap<String, Relationship>();
-            this.myLinkResolvers = new LinkResolver[linkResolverFactories.size()];
+            final Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
+            this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
 
-            this.myFactory = new ObjectFactory();
-            this.myDocxHelper = new DocxHelper(this, myFactory);
             this.wordprocessingPackage = out;
+            this.myFactory = new ObjectFactory();
+            this.mainDocumentPart = out.getMainDocumentPart();
+            this.myDocxHelper = new DocxHelper(wordprocessingPackage, myFactory);
 
             setDefaultStyleAndNumbering(out, this.options);
-
-            this.mainDocumentPart = out.getMainDocumentPart();
-            this.body = ((org.docx4j.wml.Document) this.mainDocumentPart.getJaxbElement()).getBody();
 
             this.blockFormatProviders = new HashMap<Node, BlockFormatProvider>();
             this.runFormatProviders = new HashMap<Node, RunFormatProvider>();
@@ -426,6 +428,11 @@ public class DocxRenderer implements IRender {
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
                 myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
+            }
+
+            if (defaultLinkResolver) {
+                // add the default link resolver
+                myLinkResolvers[linkResolverFactories.size()] = new DocxLinkResolver.Factory().create(this);
             }
 
             // The first node renderer for a node type "wins".
@@ -543,7 +550,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void pFormatted() {
+        public void adjustPPrForFormatting(final PPr pP) {
 
         }
 
@@ -586,7 +593,7 @@ public class DocxRenderer implements IRender {
 
             renderingParaContainer.addP(p);
             renderingBlockFormatProvider.getPPr(pPr);
-            renderingBlockFormatProvider.pFormatted();
+            renderingBlockFormatProvider.adjustPPrForFormatting(pPr);
 
             this.p = p;
             return p;
@@ -611,6 +618,15 @@ public class DocxRenderer implements IRender {
             renderingRunFormatProvider.getRPr(rPr);
 
             return r;
+        }
+
+        @Override
+        public R getR() {
+            if (p == null || p.getContent().isEmpty() || !(p.getContent().get(p.getContent().size() - 1) instanceof R)) {
+                return createR();
+            } else {
+                return (R) p.getContent().get(p.getContent().size() - 1);
+            }
         }
 
         @Override
@@ -668,7 +684,7 @@ public class DocxRenderer implements IRender {
                 PPr pPr = myFactory.createPPr();
                 renderingBlockFormatProvider.getPPr(pPr);
 
-                PPr explicitPPr = myDocxHelper.getExplicitPPr(pPr, true);
+                PPr explicitPPr = myDocxHelper.getExplicitPPr(pPr);
                 final ParaRPr rPr = explicitPPr.getRPr();
                 BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
 
@@ -686,11 +702,30 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
+        public void addLineBreak() {
+            addBreak(null);
+        }
+
+        @Override
+        public void addPageBreak() {
+            addBreak(STBrType.PAGE);
+        }
+
+        @Override
+        public void addBreak(STBrType breakType) {
+            // Create object for br
+            R r = createR();
+            Br br = myFactory.createBr();
+            if (breakType != null) br.setType(breakType);
+            r.getContent().add(br);
+        }
+
+        @Override
         public org.docx4j.wml.Text text(final String text) {
             R r = createR();
             org.docx4j.wml.Text textElem = addWrappedText(r);
             textElem.setValue(text);
-            textElem.setSpace("preserve");
+            textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
             return textElem;
         }
 
