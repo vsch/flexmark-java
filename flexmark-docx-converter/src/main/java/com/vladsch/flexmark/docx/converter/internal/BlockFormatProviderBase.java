@@ -3,6 +3,7 @@ package com.vladsch.flexmark.docx.converter.internal;
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.docx.converter.BlockFormatProvider;
 import com.vladsch.flexmark.docx.converter.DocxRendererContext;
+import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.wml.*;
 
 /*
@@ -95,7 +96,7 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
      * <p>
      * must be called after ind has been determined
      *
-     * @param pPr   ppr to set
+     * @param pPr       ppr to set
      * @param parentPPr parent ppr
      */
     protected void inheritBdr(PPr pPr, PPr parentPPr) {
@@ -139,10 +140,15 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
     }
 
     @Override
-    public void getParaRPr(final ParaRPr rPr) {
+    public void getParaRPr(final RPr rPr) {
         BlockFormatProvider parent = getStyleParent();
         if (parent != null) {
             parent.getParaRPr(rPr);
+        }
+
+        final Style style = getStyle();
+        if (style != null && style.getRPr()  != null) {
+            StyleUtil.apply(myDocx.getHelper().getExplicitRPr(style.getRPr()), rPr);
         }
     }
 }

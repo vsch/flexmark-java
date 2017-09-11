@@ -707,9 +707,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
             // Create object for p
             docx.text(sb.toString());
-            docx.addLineBreak();
 
             i++;
+
+            if (i < lines.size()) {
+                docx.addLineBreak();
+            }
         }
 
         docx.addBlankLine(after, BlockFormatProvider.DEFAULT_STYLE);
@@ -755,7 +758,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         final NumberingDefinitionsPart ndp = docx.getDocxDocument().getNumberingDefinitionsPart();
 
-        long numId = node instanceof OrderedListItem ? 3 : 2;
+        final boolean inBlockQuote = node.getAncestorOfType(BlockQuote.class) != null;
+        long numId = (node instanceof OrderedListItem ? 3 : 2) + (inBlockQuote ? 2 : 0);
         int newNum = 1;
         final int listLevel = nesting - 1;
 
@@ -1373,14 +1377,19 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     private void renderTableCaption(final TableCaption node, final DocxRendererContext docx) {
         if (tableCaptionToParagraph) {
-            docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, TABLE_CAPTION));
-            docx.createP();
-            docx.text(node.getText().unescape());
+            docx.contextFramed(new Runnable() {
+                @Override
+                public void run() {
+                    docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, TABLE_CAPTION));
+                    docx.createP();
+                    docx.text(node.getText().unescape());
+                }
+            });
         }
     }
 
     private void render(TableCell node, final DocxRendererContext docx) {
-        String style = node.isHeader() ? "TableHeading" : "TableContents";
+        String style = node.isHeader() ? TABLE_HEADING : TABLE_CONTENTS;
 
         // Create object for tc (wrapped in JAXBElement)
         final Tc tc = docx.getFactory().createTc();
@@ -1400,6 +1409,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             }
         }
 
+        docx.setBlockFormatProvider(new BlockFormatProviderBase(docx, style));
         docx.setParaContainer(new ParaContainer() {
             @Override
             public void addP(final P p) {
@@ -1432,14 +1442,14 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             jc3.setVal(alignValue);
         }
 
-        // Create object for rPr
-        ParaRPr pararpr = docx.getFactory().createParaRPr();
-        ppr.setRPr(pararpr);
-
-        // Create object for pStyle
-        PPrBase.PStyle pprbasepstyle = docx.getFactory().createPPrBasePStyle();
-        ppr.setPStyle(pprbasepstyle);
-        pprbasepstyle.setVal(style);
+        //// Create object for rPr
+        //ParaRPr pararpr = docx.getFactory().createParaRPr();
+        //ppr.setRPr(pararpr);
+        //
+        //// Create object for pStyle
+        //PPrBase.PStyle pprbasepstyle = docx.getFactory().createPPrBasePStyle();
+        //ppr.setPStyle(pprbasepstyle);
+        //pprbasepstyle.setVal(style);
 
         // Create object for r
         //R r = docx.getFactory().createR();

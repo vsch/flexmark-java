@@ -472,7 +472,7 @@
                     <w:unhideWhenUsed/>
                     <w:rsid w:val="00FC1E75"/>
                     <w:rPr>
-                        <w:color w:val="0000FF" w:themeColor="hyperlink"/>
+                        <w:color w:val="0366D6" w:themeColor="hyperlink"/>
                         <w:u w:val="single"/>
                     </w:rPr>
                 </w:style>
@@ -836,6 +836,290 @@
                         <w:rPr/>
                     </w:lvl>
                 </w:abstractNum>
+
+                <w:abstractNum w:abstractNumId="4">
+                    <w:lvl w:ilvl="0">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="227" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="227"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="1">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="454" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="454"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="2">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="680" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="680"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="3">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="907" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="907"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="4">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1134" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="1134"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="5">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1361" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="1361"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="6">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1587" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="1587"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="7">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1814" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="1814"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="8">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="bullet"/>
+                        <w:lvlText w:val="•"/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="2041" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="227" w:left="2041"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:rFonts w:cs="OpenSymbol"/>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                </w:abstractNum>
+                <w:abstractNum w:abstractNumId="5">
+                    <w:lvl w:ilvl="0">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%1."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="283" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="283"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="1">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%2."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="567" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="567"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="2">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%3."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="850" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="850"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="3">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%4."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1134" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="1134"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="4">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%5."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1417" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="1417"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="5">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%6."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1701" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="1701"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="6">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%7."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="1984" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="1984"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="7">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%8."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="2268" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="2268"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                    <w:lvl w:ilvl="8">
+                        <w:start w:val="1"/>
+                        <w:numFmt w:val="decimal"/>
+                        <w:lvlText w:val="%9."/>
+                        <w:lvlJc w:val="left"/>
+                        <w:pPr>
+                            <w:tabs>
+                                <w:tab w:pos="2551" w:val="num"/>
+                            </w:tabs>
+                            <w:ind w:hanging="283" w:left="2551"/>
+                        </w:pPr>
+                        <w:rPr>
+                            <w:color w:val="666666"/>
+                        </w:rPr>
+                    </w:lvl>
+                </w:abstractNum>
                 <w:num w:numId="1">
                     <w:abstractNumId w:val="1"/>
                 </w:num>
@@ -844,6 +1128,12 @@
                 </w:num>
                 <w:num w:numId="3">
                     <w:abstractNumId w:val="3"/>
+                </w:num>
+                <w:num w:numId="4">
+                    <w:abstractNumId w:val="4"/>
+                </w:num>
+                <w:num w:numId="5">
+                    <w:abstractNumId w:val="5"/>
                 </w:num>
             </w:numbering>
         </pkg:xmlData>

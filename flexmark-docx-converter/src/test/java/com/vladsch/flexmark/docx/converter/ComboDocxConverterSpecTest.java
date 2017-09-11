@@ -44,8 +44,8 @@ import static com.vladsch.flexmark.docx.converter.BlockFormatProvider.PREFORMATT
 
 public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     // set to true to dump DOCX and XML files to pre-dermined location
-    private static final boolean DUMP_TEST_CASE_FILES = true;
-    private static final boolean DUMP_ALL_TESTS_FILES = true;
+    private static final boolean DUMP_TEST_CASE_FILES = false;
+    private static final boolean DUMP_ALL_TESTS_FILES = false;
     private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/flexmark-java";
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/AllTests";
@@ -80,7 +80,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
-        optionsMap.put("IGNORES", new MutableDataSet().set(IGNORE, false));
+        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, false));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY)));
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
 
@@ -358,13 +358,15 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             // Create object for p
 
             text(sb.toString());
-            if (trimmed.isEmpty()) {
-                addLineBreak();
-            } else {
-                addVisibleLineBreak();
-            }
-
             i++;
+
+            if (i < lines.length) {
+                if (trimmed.isEmpty()) {
+                    addLineBreak();
+                } else {
+                    addVisibleLineBreak();
+                }
+            }
         }
 
         addBlankLine(myAfter, BlockFormatProvider.DEFAULT_STYLE);

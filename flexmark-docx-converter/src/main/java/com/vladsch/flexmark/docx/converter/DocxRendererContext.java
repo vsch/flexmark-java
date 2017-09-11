@@ -31,6 +31,7 @@ public interface DocxRendererContext extends LinkResolverContext {
 
     /**
      * Get current format provider
+     *
      * @return format provider
      */
     BlockFormatProvider getBlockFormatProvider();
@@ -99,7 +100,8 @@ public interface DocxRendererContext extends LinkResolverContext {
     void addBreak(STBrType breakType);
     /**
      * Add text to current P, create R and add wrapped text
-     * @param text  text to add
+     *
+     * @param text text to add
      * @return text element
      */
     Text text(String text);
@@ -140,7 +142,6 @@ public interface DocxRendererContext extends LinkResolverContext {
      * Get an external hyperlink relationship for the given url
      *
      * @param url url
-     *
      * @return relationship
      */
     Relationship getHyperlinkRelationship(String url);
@@ -150,6 +151,7 @@ public interface DocxRendererContext extends LinkResolverContext {
      * Only node classes returned by {@link NodeDocxRenderer#getNodeClasses()} of all loaded extensions
      * will be available to formatters.
      * <p>
+     *
      * @param classes node classes to return
      * @return iterable
      */
@@ -170,4 +172,14 @@ public interface DocxRendererContext extends LinkResolverContext {
      * Add a line break to current R
      */
     void addLineBreak();
+
+    /**
+     * Run within a context, after run the format providers and containers will be restored.
+     * <p>
+     * Use when you need to create a container or format provider but only for a part of the
+     * node rendering process.
+     *
+     * @param runnable code to run
+     */
+    void contextFramed(Runnable runnable);
 }

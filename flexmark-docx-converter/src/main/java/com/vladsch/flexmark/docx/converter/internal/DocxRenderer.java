@@ -22,6 +22,7 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.*;
 import org.docx4j.Docx4J;
 import org.docx4j.XmlUtils;
+import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -70,7 +71,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<Boolean>("TABLE_CAPTION_BEFORE_TABLE", false);
 
     private final List<NodeDocxRendererFactory> nodeFormatterFactories;
-    private final DocxRendererOptions rendererOptions;
+    final DocxRendererOptions rendererOptions;
     private final DataHolder options;
     private final Builder builder;
     private final List<LinkResolverFactory> linkResolverFactories;
@@ -167,7 +168,7 @@ public class DocxRenderer implements IRender {
      * @param output appendable to use for the output
      */
     public void render(Node node, WordprocessingMLPackage output) {
-        MainDocxRenderer renderer = new MainDocxRenderer(options, output, node.getDocument());
+        DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument());
         renderer.render(node);
     }
 
@@ -360,7 +361,7 @@ public class DocxRenderer implements IRender {
         }
     };
 
-    private final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
+    final static Iterable<? extends Node> NULL_ITERABLE = new Iterable<Node>() {
         @Override
         public Iterator<Node> iterator() {
             return null;
@@ -376,7 +377,7 @@ public class DocxRenderer implements IRender {
         private final Set<DocxRendererPhase> renderingPhases;
         private final DataHolder options;
         private DocxRendererPhase phase;
-        private Node renderingNode;
+        Node renderingNode;
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
 
@@ -546,7 +547,7 @@ public class DocxRenderer implements IRender {
 
         @Override
         public Style getStyle() {
-            return getStyle(getStyleId());
+            return getStyle(BlockFormatProvider.DEFAULT_STYLE);
         }
 
         @Override
@@ -560,7 +561,7 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void getParaRPr(final ParaRPr rPr) {
+        public void getParaRPr(final RPr rPr) {
 
         }
 
@@ -592,10 +593,17 @@ public class DocxRenderer implements IRender {
             p.setPPr(pPr);
 
             renderingParaContainer.addP(p);
+            this.p = p;
+
             renderingBlockFormatProvider.getPPr(pPr);
             renderingBlockFormatProvider.adjustPPrForFormatting(pPr);
 
-            this.p = p;
+            if (StyleUtil.isEmpty(p.getPPr())) {
+                p.setPPr(null);
+            } else if (StyleUtil.isEmpty(p.getPPr().getRPr())) {
+                p.getPPr().setRPr(null);
+            }
+
             return p;
         }
 
@@ -615,8 +623,41 @@ public class DocxRenderer implements IRender {
             r.setRPr(rPr);
 
             renderingRunContainer.addR(r);
-            renderingRunFormatProvider.getRPr(rPr);
 
+            RPr blockRPr = myFactory.createRPr();
+            renderingBlockFormatProvider.getParaRPr(blockRPr);
+
+            renderingRunFormatProvider.getRPr(rPr);
+            StyleUtil.apply(rPr, blockRPr);
+            StyleUtil.apply(blockRPr, rPr);
+
+            // minimize the rPr
+            final RStyle rStyle = rPr.getRStyle();
+            if (rStyle != null && rStyle.getVal() != null) {
+                Style style = getStyle(rStyle.getVal());
+                if (style != null) {
+                    RPr styleRPr = myDocxHelper.getExplicitRPr(style.getRPr(), p.getPPr());
+                    myDocxHelper.keepDiff(rPr, styleRPr);
+                }
+            }
+
+            final PPrBase.PStyle pStyle = p.getPPr().getPStyle();
+            if (pStyle != null && pStyle.getVal() != null) {
+                Style style = getStyle(pStyle.getVal());
+                if (style != null) {
+                    RPr styleRPr = myDocxHelper.getExplicitRPr(style.getRPr(), p.getPPr());
+                    myDocxHelper.keepDiff(rPr, styleRPr);
+                }
+            }
+
+            if (StyleUtil.isEmpty(rPr.getRFonts())) {
+                // Style util adds empty destination before checking if there is anything to copy
+                rPr.setRFonts(null);
+            }
+
+            if (StyleUtil.isEmpty(rPr)) {
+                r.setRPr(null);
+            }
             return r;
         }
 
@@ -653,8 +694,12 @@ public class DocxRenderer implements IRender {
         public void addBlankLine(final BigInteger size, final String styleId) {
             if (size.compareTo(BigInteger.ZERO) > 0) {
                 // now add empty for spacing
-                P p = createP();
-                PPr pPr = p.getPPr();
+                P p = myFactory.createP();
+                PPr pPr = myFactory.createPPr();
+                p.setPPr(pPr);
+
+                renderingParaContainer.addP(p);
+                this.p = p;
 
                 if (styleId != null && !styleId.isEmpty()) {
                     if (pPr.getPStyle() == null) {
@@ -665,15 +710,13 @@ public class DocxRenderer implements IRender {
                 }
 
                 // Create new Spacing which we override
-                PPrBase.Spacing spacing = getFactory().createPPrBaseSpacing();
+                PPrBase.Spacing spacing = myFactory.createPPrBaseSpacing();
                 pPr.setSpacing(spacing);
 
                 spacing.setBefore(BigInteger.ZERO);
                 spacing.setAfter(BigInteger.ZERO);
                 spacing.setLine(size);
                 spacing.setLineRule(STLineSpacingRule.EXACT);
-
-                R r = createR();
             }
         }
 
@@ -714,10 +757,12 @@ public class DocxRenderer implements IRender {
         @Override
         public void addBreak(STBrType breakType) {
             // Create object for br
-            R r = createR();
+            R r = myFactory.createR();
             Br br = myFactory.createBr();
             if (breakType != null) br.setType(breakType);
             r.getContent().add(br);
+
+            renderingRunContainer.addR(r);
         }
 
         @Override
@@ -855,7 +900,7 @@ public class DocxRenderer implements IRender {
                 resolvedLink = new ResolvedLink(linkType, urlSeq, attributes);
 
                 if (!urlSeq.isEmpty()) {
-                    Node currentNode = getCurrentNode();
+                    Node currentNode = renderingNode;
 
                     for (LinkResolver linkResolver : myLinkResolvers) {
                         resolvedLink = linkResolver.resolveLink(currentNode, this, resolvedLink);
@@ -875,14 +920,14 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void render(Node node) {
+        public void render(final Node node) {
             if (node instanceof Document) {
                 // here we render multiple phases
                 for (DocxRendererPhase phase : DocxRendererPhase.values()) {
                     if (phase != DocxRendererPhase.DOCUMENT && !renderingPhases.contains(phase)) { continue; }
                     this.phase = phase;
                     // here we render multiple phases
-                    if (getPhase() == DocxRendererPhase.DOCUMENT) {
+                    if (this.phase == DocxRendererPhase.DOCUMENT) {
                         NodeDocxRendererHandler nodeRenderer = renderers.get(node.getClass());
                         if (nodeRenderer != null) {
                             renderingNode = node;
@@ -908,39 +953,57 @@ public class DocxRenderer implements IRender {
                 }
 
                 if (nodeRenderer != null) {
-                    Node oldNode = this.renderingNode;
+                    final NodeDocxRendererHandler finalNodeRenderer = nodeRenderer;
+                    final Node oldNode = MainDocxRenderer.this.renderingNode;
                     renderingNode = node;
 
-                    blockFormatProviders.put(renderingNode, renderingBlockFormatProvider);
-                    runFormatProviders.put(renderingNode, renderingRunFormatProvider);
-                    BlockFormatProvider oldRenderingBlockFormatProvider = renderingBlockFormatProvider;
-                    RunFormatProvider oldRenderingRunFormatProvider = renderingRunFormatProvider;
-                    ParaContainer oldRenderingParaContainer = renderingParaContainer;
-                    RunContainer oldRenderingRunContainer = renderingRunContainer;
+                    contextFramed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finalNodeRenderer.render(renderingNode, MainDocxRenderer.this);
 
-                    nodeRenderer.render(node, this);
+                            renderingNode = oldNode;
+                        }
+                    });
 
-                    RunFormatProvider runFormatProvider = runFormatProviders.remove(renderingNode);
-
-                    if (runFormatProvider != oldRenderingRunFormatProvider) {
-                        runFormatProvider.close();
-                    }
-                    renderingRunFormatProvider = oldRenderingRunFormatProvider;
-
-                    BlockFormatProvider blockFormatProvider = blockFormatProviders.remove(renderingNode);
-                    if (blockFormatProvider != oldRenderingBlockFormatProvider) {
-                        blockFormatProvider.close();
-                    }
-                    renderingBlockFormatProvider = oldRenderingBlockFormatProvider;
-                    renderingRunContainer = oldRenderingRunContainer;
-                    renderingParaContainer = oldRenderingParaContainer;
-
-                    renderingNode = oldNode;
                 } else {
                     // default behavior is controlled by generic Node.class that is implemented in CoreNodeDocxRenderer
                     throw new IllegalStateException("Core Node DocxRenderer should implement generic Node renderer");
                 }
             }
+        }
+
+        @Override
+        public void contextFramed(Runnable runnable) {
+            blockFormatProviders.put(renderingNode, renderingBlockFormatProvider);
+            runFormatProviders.put(renderingNode, renderingRunFormatProvider);
+            BlockFormatProvider oldRenderingBlockFormatProvider = renderingBlockFormatProvider;
+            RunFormatProvider oldRenderingRunFormatProvider = renderingRunFormatProvider;
+            ParaContainer oldRenderingParaContainer = renderingParaContainer;
+            RunContainer oldRenderingRunContainer = renderingRunContainer;
+            Node oldNode = renderingNode;
+
+            runnable.run();
+
+            if (oldNode != renderingNode) {
+                RunFormatProvider runFormatProvider = runFormatProviders.remove(oldNode);
+
+                if (runFormatProvider != oldRenderingRunFormatProvider) {
+                    runFormatProvider.close();
+                }
+            }
+            renderingRunFormatProvider = oldRenderingRunFormatProvider;
+
+            if (oldNode != renderingNode) {
+                BlockFormatProvider blockFormatProvider = blockFormatProviders.remove(oldNode);
+                if (blockFormatProvider != oldRenderingBlockFormatProvider) {
+                    blockFormatProvider.close();
+                }
+            }
+
+            renderingBlockFormatProvider = oldRenderingBlockFormatProvider;
+            renderingRunContainer = oldRenderingRunContainer;
+            renderingParaContainer = oldRenderingParaContainer;
         }
 
         public void renderChildren(Node parent) {
@@ -958,7 +1021,7 @@ public class DocxRenderer implements IRender {
             InputStream stream = getResourceInputStream(resourcePath);
             StringBuilder sb = new StringBuilder();
             String line;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getResourceInputStream(resourcePath), Charset.forName("UTF-8")));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream, Charset.forName("UTF-8")));
             while ((line = reader.readLine()) != null) {
                 sb.append(line);
                 sb.append("\n");

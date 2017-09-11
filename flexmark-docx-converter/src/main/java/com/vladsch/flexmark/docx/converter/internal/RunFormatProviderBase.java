@@ -57,12 +57,16 @@ public class RunFormatProviderBase implements RunFormatProvider {
     }
 
     protected void inheritParentStyle(RPr rPr, RPr parentRPr) {
-        RPr styledRPr = myDocx.getHelper().getExplicitRPr(parentRPr);
-        RPr styledThisRPr = myDocx.getHelper().getExplicitRPr(rPr);
+        RPr parentStyledRPr = myDocx.getHelper().getExplicitRPr(parentRPr);
+        StyleUtil.apply(rPr, parentStyledRPr);
+        StyleUtil.apply(parentStyledRPr, rPr);
 
-        StyleUtil.apply(styledThisRPr, styledRPr);
-        StyleUtil.apply(rPr, styledRPr);
-        StyleUtil.apply(styledRPr, rPr);
+        Style style = getStyle();
+        if (style != null) {
+            RPr styleRPr = myDocx.getHelper().getExplicitRPr(style.getRPr());
+            StyleUtil.apply(rPr, styleRPr);
+            StyleUtil.apply(styleRPr, rPr);
+        }
     }
 
     @Override
@@ -81,10 +85,12 @@ public class RunFormatProviderBase implements RunFormatProvider {
             inheritParentStyle(rPr, rpr1);
         }
 
-        Style thisStyle = myDocx.getStyle(myBaseStyleId);
-        if (thisStyle != null) {
-            final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr(), myDocx.getP().getPPr());
-            myDocx.getHelper().keepDiff(rPr, pr);
-        }
+        //Style thisStyle = myDocx.getStyle(myBaseStyleId);
+        //if (thisStyle != null) {
+        //    final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
+        //    final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
+        //    myDocx.getHelper().keepDiff(rPr, pr);
+        //    myDocx.getHelper().keepDiff(rPr, paraRPr);
+        //}
     }
 }

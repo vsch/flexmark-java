@@ -1,7 +1,7 @@
 package com.vladsch.flexmark.docx.converter;
 
 import org.docx4j.wml.PPr;
-import org.docx4j.wml.ParaRPr;
+import org.docx4j.wml.RPr;
 
 public interface BlockFormatProvider extends FormatProvider {
     public static final String DEFAULT_STYLE = "Normal";
@@ -11,6 +11,8 @@ public interface BlockFormatProvider extends FormatProvider {
     public static final String BLOCK_QUOTE_STYLE = "Quotations";
     public static final String HORIZONTAL_LINE_STYLE = "HorizontalLine";
     public static final String TABLE_CAPTION = "TableCaption";
+    public static final String TABLE_CONTENTS = "TableContents";
+    public static final String TABLE_HEADING = "TableHeading";
 
 /*
 
@@ -46,7 +48,7 @@ public interface BlockFormatProvider extends FormatProvider {
     void getPPr(final PPr pPr);
 
     // get the final ParaRPr for the next P of this provider
-    void getParaRPr(final ParaRPr rPr);
+    void getParaRPr(final RPr rPr);
 
     // to allow formatter to track first P formatting
     void adjustPPrForFormatting(final PPr pP);
