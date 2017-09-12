@@ -2,9 +2,11 @@ package com.vladsch.flexmark.docx.converter;
 
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.internal.DocxHelper;
 import com.vladsch.flexmark.docx.converter.internal.DocxRenderer;
-import com.vladsch.flexmark.docx.converter.internal.XmlFormatter;
+import com.vladsch.flexmark.docx.converter.util.BlockFormatProvider;
+import com.vladsch.flexmark.docx.converter.util.DocxContextImpl;
+import com.vladsch.flexmark.docx.converter.util.RunFormatProvider;
+import com.vladsch.flexmark.docx.converter.util.XmlFormatter;
 import com.vladsch.flexmark.ext.definition.DefinitionExtension;
 import com.vladsch.flexmark.ext.emoji.EmojiExtension;
 import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
@@ -19,33 +21,24 @@ import com.vladsch.flexmark.spec.SpecExample;
 import com.vladsch.flexmark.spec.SpecReader;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.test.ComboSpecTestCase;
-import com.vladsch.flexmark.util.Utils;
-import com.vladsch.flexmark.util.ValueRunnable;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.options.MutableDataSet;
-import com.vladsch.flexmark.util.sequence.BasedSequence;
-import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.apache.log4j.Logger;
 import org.apache.log4j.varia.NullAppender;
 import org.docx4j.Docx4J;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.wml.*;
+import org.docx4j.wml.Text;
 import org.junit.runners.Parameterized;
 
-import javax.xml.bind.JAXBElement;
 import java.io.*;
-import java.math.BigInteger;
 import java.util.*;
 
-import static com.vladsch.flexmark.docx.converter.BlockFormatProvider.HORIZONTAL_LINE_STYLE;
-import static com.vladsch.flexmark.docx.converter.BlockFormatProvider.PREFORMATTED_TEXT_STYLE;
-
 public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
-    // set to true to dump DOCX and XML files to pre-dermined location
-    private static final boolean DUMP_TEST_CASE_FILES = false;
-    private static final boolean DUMP_ALL_TESTS_FILES = false;
+    // set to true to dump DOCX and XML files to pre-determined location
+    static final boolean SKIP_IGNORED_TESTS = true;
+    private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
+    private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;
     private static final String PROJECT_ROOT_DIRECTORY = "/Users/vlad/src/flexmark-java";
     private static final String FILE_TEST_CASE_DUMP_LOCATION = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/";
     private static final String FILE_ALL_TESTS_DUMP_NAME = "/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/AllTests";
@@ -80,7 +73,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     static {
         //optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
         //optionsMap.put("option1", new MutableDataSet().set(DocxConverterExtension.DOCX_CONVERTER_OPTION1, true));
-        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, true));
+        optionsMap.put("IGNORED", new MutableDataSet().set(IGNORE, SKIP_IGNORED_TESTS));
         optionsMap.put("url", new MutableDataSet().set(DocxRenderer.DOC_RELATIVE_URL, String.format("file://%s", PROJECT_ROOT_DIRECTORY)));
         optionsMap.put("caption-before", new MutableDataSet().set(DocxRenderer.TABLE_CAPTION_BEFORE_TABLE, true));
 
@@ -172,55 +165,31 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     public void addSpecExample(SpecExample example, Node node, DataHolder options, boolean ignoredCase, String actualHTML, String actualAST) {
         if (!DUMP_ALL_TESTS_FILES) return;
 
-        // add source information
-        myPrValueRunnable = mySectionPPr;
-        createP();
-
         final boolean failed = !ignoredCase && !actualHTML.equals(example.getHtml());
+
+        // add source information
+        myDocxContext.createP("Heading3");
 
         if (ignoredCase) {
             // does not match, need more stuff
-            R r = createR();
-            RPr rPr = myFactory.createRPr();
-            r.setRPr(rPr);
 
-            Color color = myFactory.createColor();
-            color.setVal("BB002F");
-            rPr.setColor(color);
-            rPr.setB(myFactory.createBooleanDefaultTrue());
-            rPr.setBCs(myFactory.createBooleanDefaultTrue());
-
-            Text text = addWrappedText(r);
+            myDocxContext.createColor().setVal("BB002F");
+            myDocxContext.addBold();
+            Text text = myDocxContext.addWrappedText();
             text.setValue("Ignored ");
             text.setSpace(RunFormatProvider.SPACE_PRESERVE);
         } else if (failed) {
             // does not match, need more stuff
-            R r = createR();
-            RPr rPr = myFactory.createRPr();
-            r.setRPr(rPr);
-
-            Color color = myFactory.createColor();
-            color.setVal("BB002F");
-            rPr.setColor(color);
-            rPr.setB(myFactory.createBooleanDefaultTrue());
-            rPr.setBCs(myFactory.createBooleanDefaultTrue());
-
-            Text text = addWrappedText(r);
+            myDocxContext.createColor().setVal("BB002F");
+            myDocxContext.addBold();
+            Text text = myDocxContext.addWrappedText();
             text.setValue("Failed ");
             text.setSpace(RunFormatProvider.SPACE_PRESERVE);
         } else {
             // does not match, need more stuff
-            R r = createR();
-            RPr rPr = myFactory.createRPr();
-            r.setRPr(rPr);
-
-            Color color = myFactory.createColor();
-            color.setVal("008000");
-            rPr.setColor(color);
-            rPr.setB(myFactory.createBooleanDefaultTrue());
-            rPr.setBCs(myFactory.createBooleanDefaultTrue());
-
-            Text text = addWrappedText(r);
+            myDocxContext.createColor().setVal("008000");
+            myDocxContext.addBold();
+            Text text = myDocxContext.addWrappedText();
             text.setValue("Passed ");
             text.setSpace(RunFormatProvider.SPACE_PRESERVE);
         }
@@ -230,33 +199,19 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
 
         header.append(section == null ? "" : section.trim()).append(": ").append(example.getExampleNumber());
         final String optionsSet = example.getOptionsSet();
-        text(header.toString());
+        myDocxContext.text(header.toString());
 
         if (optionsSet != null) {
-            R r = createR();
-            RPr rPr = myFactory.createRPr();
-            r.setRPr(rPr);
-
-            // Create object for sz
-            HpsMeasure hpsmeasure = myFactory.createHpsMeasure();
-            rPr.setSz(hpsmeasure);
-            hpsmeasure.setVal(BigInteger.valueOf(28));
-
-            Color color = myFactory.createColor();
-            //color.setVal("7500C5");
-            color.setVal("7B56A0");
-            rPr.setColor(color);
-
-            Text text = addWrappedText(r);
+            myDocxContext.createHpsMeasure(28);
+            myDocxContext.createColor().setVal("7B56A0");
+            Text text = myDocxContext.addWrappedText();
             text.setValue((SpecReader.OPTIONS_STRING + "(") + optionsSet + ")");
             text.setSpace(RunFormatProvider.SPACE_PRESERVE);
         }
 
-        P p = createP(HORIZONTAL_LINE_STYLE);
-        R r = createR();
+        myDocxContext.createHorizontalLine();
         RENDERER.withOptions(options).render(node, myPackage);
-        p = createP(HORIZONTAL_LINE_STYLE);
-        r = createR();
+        myDocxContext.createHorizontalLine();
 
         if (example.hasComment()) {
             final String comment = example.getComment();
@@ -264,238 +219,24 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
             for (String line : lines) {
                 String trimmed = line.trim();
                 if (!trimmed.isEmpty()) {
-                    p = createP(BlockFormatProvider.LOOSE_PARAGRAPH_STYLE);
-                    r = createR();
-                    RPr rPr = myFactory.createRPr();
-                    r.setRPr(rPr);
-
-                    Color color = myFactory.createColor();
-                    //color.setVal("7500C5");
-                    color.setVal("808080");
-                    rPr.setColor(color);
-
-                    Text text = addWrappedText(r);
+                    myDocxContext.createP(BlockFormatProvider.LOOSE_PARAGRAPH_STYLE);
+                    myDocxContext.createColor().setVal("808080");
+                    Text text = myDocxContext.addWrappedText();
                     text.setValue(trimmed);
                 }
             }
         }
 
-        myPrValueRunnable = myFencedCodePPr;
-        renderCodeLines(example.getSource());
+        myDocxContext.renderFencedCodeLines(example.getSource().split("\n"));
+
+        //noinspection StatementWithEmptyBody
         if (failed) {
-            // add expected and actual text but that would be too much
-        }
-        myPrValueRunnable = null;
-    }
-
-    public void addLineBreak() {
-        addBreak(null);
-    }
-
-    public void addVisibleLineBreak() {
-        addLineBreak();
-        //R r = createR();
-        //RPr rPr = myFactory.createRPr();
-        //r.setRPr(rPr);
-        //
-        //// Create object for sz
-        //HpsMeasure hpsmeasure = myFactory.createHpsMeasure();
-        //rPr.setSz(hpsmeasure);
-        //hpsmeasure.setVal(BigInteger.valueOf(12));
-        //
-        //// Create object for position
-        //CTSignedHpsMeasure signedhpsmeasure = myFactory.createCTSignedHpsMeasure();
-        //rPr.setPosition(signedhpsmeasure);
-        //signedhpsmeasure.setVal(BigInteger.valueOf(6));
-        //
-        //Color color = myFactory.createColor();
-        //color.setVal("0366D6");
-        //rPr.setColor(color);
-        //
-        //Text text = addWrappedText(r);
-        //text.setValue(myVisibleLineBreak);
-        //addBreak(null);
-    }
-
-    public void addPageBreak() {
-        addBreak(STBrType.PAGE);
-    }
-
-    public void addBreak(STBrType breakType) {
-        // Create object for br
-        R r = getR();
-        Br br = myFactory.createBr();
-        if (breakType != null) br.setType(breakType);
-        r.getContent().add(br);
-    }
-
-    private void renderCodeLines(CharSequence source) {
-        addBlankLine(myBefore, BlockFormatProvider.DEFAULT_STYLE);
-
-        BasedSequence basedSequence = BasedSequenceImpl.of(source);
-        BasedSequence[] lines = basedSequence.split("\n");
-        int[] leadColumns = new int[lines.length];
-        int minSpaces = Integer.MAX_VALUE;
-        int i = 0;
-        for (BasedSequence line : lines) {
-            leadColumns[i] = line.countLeadingColumns(0, " \t");
-            minSpaces = Utils.min(minSpaces, leadColumns[i]);
-            i++;
-        }
-
-        createP();
-
-        ArrayList<BasedSequence> trimmedLines = new ArrayList<BasedSequence>();
-        i = 0;
-        for (BasedSequence line : lines) {
-            StringBuilder sb = new StringBuilder();
-
-            int spaces = leadColumns[i] - minSpaces;
-            while (spaces-- > 0) sb.append(' ');
-            final BasedSequence trimmed = line.trim();
-            sb.append(trimmed);
-
-            // Create object for p
-
-            text(sb.toString());
-            i++;
-
-            if (i < lines.length) {
-                if (trimmed.isEmpty()) {
-                    addLineBreak();
-                } else {
-                    addVisibleLineBreak();
-                }
-            }
-        }
-
-        addBlankLine(myAfter, BlockFormatProvider.DEFAULT_STYLE);
-    }
-
-    public org.docx4j.wml.Text addWrappedText(final R r) {
-        // Create object for t (wrapped in JAXBElement)
-        org.docx4j.wml.Text text = myFactory.createText();
-        JAXBElement<Text> textWrapped = myFactory.createRT(text);
-        r.getContent().add(textWrapped);
-        return text;
-    }
-
-    public org.docx4j.wml.Text text(final String text) {
-        R r = createR();
-        org.docx4j.wml.Text textElem = addWrappedText(r);
-        textElem.setValue(text);
-        textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
-        return textElem;
-    }
-
-    public void createPStyle(PPr pPr, String style) {
-        // Create object for pStyle if one does not already exist
-        PPrBase.PStyle basePStyle = myFactory.createPPrBasePStyle();
-        pPr.setPStyle(basePStyle);
-        basePStyle.setVal(style);
-    }
-
-    public P createP() {
-        return createP(null);
-    }
-
-    public P createP(String style) {
-        P p = myFactory.createP();
-        PPr pPr = myFactory.createPPr();
-
-        p.setPPr(pPr);
-        myDocumentPart.getContent().add(p);
-        this.p = p;
-
-        if (style == null) {
-            if (myPrValueRunnable != null) {
-                myPrValueRunnable.run(pPr);
-            } else {
-                // Create object for pStyle if one does not already exist
-                createPStyle(pPr, BlockFormatProvider.DEFAULT_STYLE);
-            }
-        } else {
-            createPStyle(pPr, style);
-        }
-
-        // Create object for rPr
-        ParaRPr pararpr = pPr.getRPr();
-        if (pararpr == null) {
-            pararpr = myFactory.createParaRPr();
-            pPr.setRPr(pararpr);
-        }
-
-        return p;
-    }
-
-    public P getP() {
-        if (p != null) {
-            return p;
-        }
-        return createP();
-    }
-
-    public R createR() {
-        P p = getP();
-        R r = myFactory.createR();
-        RPr rPr = myFactory.createRPr();
-        r.setRPr(rPr);
-
-        p.getContent().add(r);
-
-        return r;
-    }
-
-    public R getR() {
-        if (p == null || p.getContent().isEmpty() || !(p.getContent().get(p.getContent().size() - 1) instanceof R)) {
-            return createR();
-        } else {
-            return (R) p.getContent().get(p.getContent().size() - 1);
+            // could add expected and actual text but that would be too much
         }
     }
 
-    public Style getStyle(final String styleName) {
-        return myDocumentPart.getStyleDefinitionsPart().getStyleById(styleName);
-    }
-
-    private void addBlankLine(final BigInteger size, final String styleId) {
-        if (size.compareTo(BigInteger.ZERO) > 0) {
-            // now add empty for spacing
-            P p = createP();
-            PPr pPr = p.getPPr();
-
-            if (styleId != null && !styleId.isEmpty()) {
-                if (pPr.getPStyle() == null) {
-                    PPrBase.PStyle pStyle = myFactory.createPPrBasePStyle();
-                    pPr.setPStyle(pStyle);
-                }
-                pPr.getPStyle().setVal(styleId);
-            }
-
-            // Create new Spacing which we override
-            PPrBase.Spacing spacing = myFactory.createPPrBaseSpacing();
-            pPr.setSpacing(spacing);
-
-            spacing.setBefore(BigInteger.ZERO);
-            spacing.setAfter(BigInteger.ZERO);
-            spacing.setLine(size);
-            spacing.setLineRule(STLineSpacingRule.EXACT);
-
-            R r = createR();
-        }
-    }
-
+    private DocxContextImpl<Node> myDocxContext;
     private WordprocessingMLPackage myPackage;
-    private MainDocumentPart myDocumentPart;
-    ObjectFactory myFactory;
-    private BigInteger myBefore;
-    private BigInteger myAfter;
-    private Style myStyle;
-    private P p;
-    DocxHelper myHelper;
-    private ValueRunnable<PPr> myPrValueRunnable;
-    private ValueRunnable<PPr> myFencedCodePPr;
-    private ValueRunnable<PPr> mySectionPPr;
     private String myVisibleLineBreak;
 
     @Override
@@ -505,69 +246,8 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
         myPackage = DocxRenderer.getDefaultTemplate();
         if (myPackage == null) return;
 
-        myDocumentPart = myPackage.getMainDocumentPart();
-        myFactory = new ObjectFactory();
-        myStyle = getStyle(PREFORMATTED_TEXT_STYLE);
-        myHelper = new DocxHelper(myPackage, myFactory);
+        myDocxContext = new DocxContextImpl<Node>(myPackage);
         myVisibleLineBreak = "¶";
-
-        if (myStyle != null) {
-            // Should always be true
-            myBefore = myHelper.safeSpacingBefore(myStyle.getPPr());
-            myAfter = myHelper.safeSpacingAfter(myStyle.getPPr());
-        } else {
-            myBefore = BigInteger.ZERO;
-            myAfter = BigInteger.ZERO;
-        }
-
-        myFencedCodePPr = new ValueRunnable<PPr>() {
-            @Override
-            public void run(final PPr pPr) {
-                createPStyle(pPr, BlockFormatProvider.PREFORMATTED_TEXT_STYLE);
-
-                myHelper.ensureSpacing(pPr);
-                final PPrBase.Spacing spacing = pPr.getSpacing();
-                spacing.setBefore(BigInteger.ZERO);
-                spacing.setAfter(BigInteger.ZERO);
-
-                ParaRPr rPr = myFactory.createParaRPr();
-                pPr.setRPr(rPr);
-
-                // Create object for sz
-                HpsMeasure hpsmeasure = myFactory.createHpsMeasure();
-                rPr.setSz(hpsmeasure);
-                hpsmeasure.setVal(BigInteger.valueOf(19));
-            }
-        };
-
-        mySectionPPr = new ValueRunnable<PPr>() {
-            @Override
-            public void run(final PPr pPr) {
-                // Create object for pStyle if one does not already exist
-                createPStyle(pPr, "Heading3");
-
-                // Create object for rPr
-                ParaRPr pararpr = pPr.getRPr();
-                if (pararpr == null) {
-                    pararpr = myFactory.createParaRPr();
-                    pPr.setRPr(pararpr);
-                }
-
-                // Create object for numPr
-                PPrBase.NumPr baseNumPr = myFactory.createPPrBaseNumPr();
-                pPr.setNumPr(baseNumPr);
-
-                // Create object for numId
-                PPrBase.NumPr.NumId prNumId = myFactory.createPPrBaseNumPrNumId();
-                baseNumPr.setNumId(prNumId);
-                prNumId.setVal(BigInteger.valueOf(0));
-
-                // Create object for ilvl
-                PPrBase.NumPr.Ilvl prIlvl = myFactory.createPPrBaseNumPrIlvl();
-                baseNumPr.setIlvl(prIlvl);
-                prIlvl.setVal(BigInteger.valueOf(3));
-            }
-        };
     }
 
     @Override

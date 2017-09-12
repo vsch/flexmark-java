@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.docx.converter;
+package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.wml.R;
 
@@ -10,4 +10,10 @@ public interface RunContainer {
      * @param r to be added to its parent container
      */
     void addR(R r);
+
+    /**
+     * Get the last R of the container or null if there is none
+     * @return last R or none
+     */
+    R getLastR();
 }

@@ -4,7 +4,11 @@ import com.vladsch.flexmark.Extension;
 import com.vladsch.flexmark.IRender;
 import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.*;
+import com.vladsch.flexmark.docx.converter.DocxRendererContext;
+import com.vladsch.flexmark.docx.converter.NodeDocxRenderer;
+import com.vladsch.flexmark.docx.converter.NodeDocxRendererFactory;
+import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
+import com.vladsch.flexmark.docx.converter.util.*;
 import com.vladsch.flexmark.html.AttributeProviderFactory;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.LinkResolver;
@@ -22,19 +26,15 @@ import com.vladsch.flexmark.util.html.Escaping;
 import com.vladsch.flexmark.util.options.*;
 import org.docx4j.Docx4J;
 import org.docx4j.XmlUtils;
-import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.exceptions.InvalidFormatException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
 import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.openpackaging.parts.relationships.Namespaces;
-import org.docx4j.relationships.Relationship;
-import org.docx4j.wml.*;
+import org.docx4j.wml.Numbering;
+import org.docx4j.wml.Styles;
 
-import javax.xml.bind.JAXBElement;
 import java.io.*;
-import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -376,7 +376,7 @@ public class DocxRenderer implements IRender {
         }
     };
 
-    private class MainDocxRenderer implements DocxRendererContext, BlockFormatProvider, ParaContainer, RunFormatProvider, RunContainer {
+    private class MainDocxRenderer extends DocxContextImpl<Node> implements DocxRendererContext {
         private final Document document;
         private final Map<Class<?>, NodeDocxRendererHandler> renderers;
         private final SubClassingBag<Node> collectedNodes;
@@ -389,51 +389,23 @@ public class DocxRenderer implements IRender {
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
 
-        // docx stuff
-        final HashMap<String, Style> styles;
-        final HashMap<String, Relationship> hyperlinks;
-        private final WordprocessingMLPackage wordprocessingPackage;
-        private final MainDocumentPart mainDocumentPart;
-        private final ObjectFactory myFactory;
-        private final DocxHelper myDocxHelper;
-        private P p;
-
-        private HashMap<Node, BlockFormatProvider> blockFormatProviders;
-        private BlockFormatProvider renderingBlockFormatProvider;
-        private ParaContainer renderingParaContainer;
-        private HashMap<Node, RunFormatProvider> runFormatProviders;
-        private RunFormatProvider renderingRunFormatProvider;
-        private RunContainer renderingRunContainer;
-
         MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document) {
+            super(out);
+
             this.options = new ScopedDataSet(options, document);
             this.document = document;
             this.renderers = new HashMap<Class<?>, NodeDocxRendererHandler>(32);
             this.renderingPhases = new HashSet<DocxRendererPhase>(DocxRendererPhase.values().length);
             final Set<Class> collectNodeTypes = new HashSet<Class>(100);
             this.phasedFormatters = new ArrayList<PhasedNodeDocxRenderer>(nodeFormatterFactories.size());
-            this.styles = new HashMap<String, Style>();
-            this.hyperlinks = new HashMap<String, Relationship>();
             final Boolean defaultLinkResolver = DEFAULT_LINK_RESOLVER.getFrom(options);
             this.myLinkResolvers = new LinkResolver[linkResolverFactories.size() + (defaultLinkResolver ? 1 : 0)];
 
-            this.wordprocessingPackage = out;
-            this.myFactory = new ObjectFactory();
-            this.mainDocumentPart = out.getMainDocumentPart();
-            this.myDocxHelper = new DocxHelper(wordprocessingPackage, myFactory);
-
             setDefaultStyleAndNumbering(out, this.options);
 
-            this.blockFormatProviders = new HashMap<Node, BlockFormatProvider>();
-            this.runFormatProviders = new HashMap<Node, RunFormatProvider>();
-
             // we are top level provider
-            this.blockFormatProviders.put(document, this);
-            this.runFormatProviders.put(document, this);
-            this.renderingBlockFormatProvider = this;
-            this.renderingRunFormatProvider = this;
-            this.renderingParaContainer = this;
-            this.renderingRunContainer = this;
+            this.myBlockFormatProviders.put(document, this);
+            this.myRunFormatProviders.put(document, this);
 
             for (int i = 0; i < linkResolverFactories.size(); i++) {
                 myLinkResolvers[i] = linkResolverFactories.get(i).create(this);
@@ -485,355 +457,6 @@ public class DocxRenderer implements IRender {
         }
 
         @Override
-        public void setParaContainer(final ParaContainer container) {
-            renderingParaContainer = container;
-        }
-
-        @Override
-        public void setBlockFormatProvider(final BlockFormatProvider formatProvider) {
-            blockFormatProviders.put(getCurrentNode(), formatProvider);
-            renderingBlockFormatProvider = formatProvider;
-
-            // let it initialize, closing done after rendering
-            formatProvider.open();
-        }
-
-        @Override
-        public BlockFormatProvider getBlockFormatProvider(final Node node) {
-            return blockFormatProviders.get(node);
-        }
-
-        @Override
-        public BlockFormatProvider getBlockFormatProvider() {
-            return renderingBlockFormatProvider;
-        }
-
-        @Override
-        public void setRunContainer(final RunContainer container) {
-            renderingRunContainer = container;
-        }
-
-        @Override
-        public void setRunFormatProvider(final RunFormatProvider formatProvider) {
-            runFormatProviders.put(getCurrentNode(), formatProvider);
-            renderingRunFormatProvider = formatProvider;
-
-            // let it initialize, closing done after rendering
-            formatProvider.open();
-        }
-
-        @Override
-        public RunFormatProvider getRunFormatProvider(final Node node) {
-            return runFormatProviders.get(node);
-        }
-
-        @Override
-        public RunFormatProvider getRunFormatProvider() {
-            return renderingRunFormatProvider;
-        }
-
-        // document format provider
-        @Override
-        public void open() {
-
-        }
-
-        @Override
-        public void close() {
-
-        }
-
-        @Override
-        public BlockFormatProvider getParent() {
-            return null;
-        }
-
-        @Override
-        public String getStyleId() {
-            return BlockFormatProvider.DEFAULT_STYLE;
-        }
-
-        @Override
-        public Style getStyle() {
-            return getStyle(BlockFormatProvider.DEFAULT_STYLE);
-        }
-
-        @Override
-        public void adjustPPrForFormatting(final PPr pP) {
-
-        }
-
-        @Override
-        public void getPPr(final PPr pPr) {
-
-        }
-
-        @Override
-        public void getParaRPr(final RPr rPr) {
-
-        }
-
-        @Override
-        public void addP(final P p) {
-            mainDocumentPart.getContent().add(p);
-        }
-
-        @Override
-        public void addR(final R r) {
-            p.getContent().add(r);
-        }
-
-        @Override
-        public void getRPr(final RPr rPr) {
-
-        }
-
-        @Override
-        public Node getNode() {
-            return document;
-        }
-
-        @Override
-        public P createP() {
-            P p = myFactory.createP();
-            PPr pPr = myFactory.createPPr();
-
-            p.setPPr(pPr);
-
-            renderingParaContainer.addP(p);
-            this.p = p;
-
-            renderingBlockFormatProvider.getPPr(pPr);
-            renderingBlockFormatProvider.adjustPPrForFormatting(pPr);
-
-            if (StyleUtil.isEmpty(p.getPPr())) {
-                p.setPPr(null);
-            } else if (StyleUtil.isEmpty(p.getPPr().getRPr())) {
-                p.getPPr().setRPr(null);
-            }
-
-            return p;
-        }
-
-        @Override
-        public P getP() {
-            if (p != null) {
-                return p;
-            }
-            return createP();
-        }
-
-        @Override
-        public R createR() {
-            P p = getP();
-            R r = myFactory.createR();
-            RPr rPr = myFactory.createRPr();
-            r.setRPr(rPr);
-
-            renderingRunContainer.addR(r);
-
-            RPr blockRPr = myFactory.createRPr();
-            renderingBlockFormatProvider.getParaRPr(blockRPr);
-
-            renderingRunFormatProvider.getRPr(rPr);
-            StyleUtil.apply(rPr, blockRPr);
-            StyleUtil.apply(blockRPr, rPr);
-
-            // minimize the rPr
-            final RStyle rStyle = rPr.getRStyle();
-            if (rStyle != null && rStyle.getVal() != null) {
-                Style style = getStyle(rStyle.getVal());
-                if (style != null) {
-                    RPr styleRPr = myDocxHelper.getExplicitRPr(style.getRPr(), p.getPPr());
-                    myDocxHelper.keepDiff(rPr, styleRPr);
-                }
-            }
-
-            final PPrBase.PStyle pStyle = p.getPPr().getPStyle();
-            if (pStyle != null && pStyle.getVal() != null) {
-                Style style = getStyle(pStyle.getVal());
-                if (style != null) {
-                    RPr styleRPr = myDocxHelper.getExplicitRPr(style.getRPr(), p.getPPr());
-                    myDocxHelper.keepDiff(rPr, styleRPr);
-                }
-            }
-
-            if (StyleUtil.isEmpty(rPr.getRFonts())) {
-                // Style util adds empty destination before checking if there is anything to copy
-                rPr.setRFonts(null);
-            }
-
-            if (StyleUtil.isEmpty(rPr)) {
-                r.setRPr(null);
-            }
-            return r;
-        }
-
-        @Override
-        public R getR() {
-            if (p == null || p.getContent().isEmpty() || !(p.getContent().get(p.getContent().size() - 1) instanceof R)) {
-                return createR();
-            } else {
-                return (R) p.getContent().get(p.getContent().size() - 1);
-            }
-        }
-
-        @Override
-        public DocxHelper getHelper() {
-            return myDocxHelper;
-        }
-
-        @Override
-        public ObjectFactory getFactory() {
-            return myFactory;
-        }
-
-        @Override
-        public void addBlankLine(final int size, final String styleId) {
-            addBlankLine(BigInteger.valueOf(size), styleId);
-        }
-
-        @Override
-        public void addBlankLine(final long size, final String styleId) {
-            addBlankLine(BigInteger.valueOf(size), styleId);
-        }
-
-        @Override
-        public void addBlankLine(final BigInteger size, final String styleId) {
-            if (size.compareTo(BigInteger.ZERO) > 0) {
-                // now add empty for spacing
-                P p = myFactory.createP();
-                PPr pPr = myFactory.createPPr();
-                p.setPPr(pPr);
-
-                renderingParaContainer.addP(p);
-                this.p = p;
-
-                if (styleId != null && !styleId.isEmpty()) {
-                    if (pPr.getPStyle() == null) {
-                        PPrBase.PStyle pStyle = myDocxHelper.myFactory.createPPrBasePStyle();
-                        pPr.setPStyle(pStyle);
-                    }
-                    pPr.getPStyle().setVal(styleId);
-                }
-
-                // Create new Spacing which we override
-                PPrBase.Spacing spacing = myFactory.createPPrBaseSpacing();
-                pPr.setSpacing(spacing);
-
-                spacing.setBefore(BigInteger.ZERO);
-                spacing.setAfter(BigInteger.ZERO);
-                spacing.setLine(size);
-                spacing.setLineRule(STLineSpacingRule.EXACT);
-            }
-        }
-
-        @Override
-        public void addBlankLines(final int count) {
-            if (count > 0) {
-                // now add empty for spacing
-                PPr pPr = myFactory.createPPr();
-                renderingBlockFormatProvider.getPPr(pPr);
-
-                PPr explicitPPr = myDocxHelper.getExplicitPPr(pPr);
-                final ParaRPr rPr = explicitPPr.getRPr();
-                BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
-
-                addBlankLine(size.multiply(BigInteger.valueOf(count)), null);
-            }
-        }
-
-        @Override
-        public org.docx4j.wml.Text addWrappedText(final R r) {
-            // Create object for t (wrapped in JAXBElement)
-            org.docx4j.wml.Text text = myFactory.createText();
-            JAXBElement<org.docx4j.wml.Text> textWrapped = myFactory.createRT(text);
-            r.getContent().add(textWrapped);
-            return text;
-        }
-
-        @Override
-        public void addLineBreak() {
-            addBreak(null);
-        }
-
-        @Override
-        public void addPageBreak() {
-            addBreak(STBrType.PAGE);
-        }
-
-        @Override
-        public void addBreak(STBrType breakType) {
-            // Create object for br
-            R r = myFactory.createR();
-            Br br = myFactory.createBr();
-            if (breakType != null) br.setType(breakType);
-            r.getContent().add(br);
-
-            renderingRunContainer.addR(r);
-        }
-
-        @Override
-        public org.docx4j.wml.Text text(final String text) {
-            R r = createR();
-            org.docx4j.wml.Text textElem = addWrappedText(r);
-            textElem.setValue(text);
-            textElem.setSpace(RunFormatProvider.SPACE_PRESERVE);
-            return textElem;
-        }
-
-        @Override
-        public BooleanDefaultTrue getBooleanDefaultTrue() {
-            return myFactory.createBooleanDefaultTrue();
-        }
-
-        @Override
-        public BooleanDefaultFalse getBooleanDefaultFalse() {
-            return myFactory.createBooleanDefaultFalse();
-        }
-
-        @Override
-        public WordprocessingMLPackage getPackage() {
-            return wordprocessingPackage;
-        }
-
-        @Override
-        public MainDocumentPart getDocxDocument() {
-            return mainDocumentPart;
-        }
-
-        @Override
-        public Style getStyle(final String styleName) {
-            Style style = styles.get(styleName);
-            if (style != null) return style;
-
-            style = mainDocumentPart.getStyleDefinitionsPart().getStyleById(styleName);
-            styles.put(styleName, style);
-            return style;
-        }
-
-        @Override
-        public Relationship getHyperlinkRelationship(String url) {
-            Relationship rel = hyperlinks.get(url);
-            if (rel != null) return rel;
-
-            // We need to add a relationship to word/_rels/document.xml.rels
-            // but since its external, we don't use the
-            // usual wordMLPackage.getMainDocumentPart().addTargetPart
-            // mechanism
-            org.docx4j.relationships.ObjectFactory factory = new org.docx4j.relationships.ObjectFactory();
-
-            rel = factory.createRelationship();
-            rel.setType(Namespaces.HYPERLINK);
-            rel.setTarget(url);
-            rel.setTargetMode("External");
-
-            mainDocumentPart.getRelationshipsPart().addRelationship(rel);
-            hyperlinks.put(url, rel);
-            return rel;
-        }
-
-        @Override
         public String encodeUrl(CharSequence url) {
             if (rendererOptions.percentEncodeUrls) {
                 return Escaping.percentEncodeUrl(url);
@@ -844,6 +467,11 @@ public class DocxRenderer implements IRender {
 
         @Override
         public Node getCurrentNode() {
+            return renderingNode;
+        }
+
+        @Override
+        public Node getContextFrame() {
             return renderingNode;
         }
 
@@ -981,39 +609,6 @@ public class DocxRenderer implements IRender {
             }
         }
 
-        @Override
-        public void contextFramed(Runnable runnable) {
-            blockFormatProviders.put(renderingNode, renderingBlockFormatProvider);
-            runFormatProviders.put(renderingNode, renderingRunFormatProvider);
-            BlockFormatProvider oldRenderingBlockFormatProvider = renderingBlockFormatProvider;
-            RunFormatProvider oldRenderingRunFormatProvider = renderingRunFormatProvider;
-            ParaContainer oldRenderingParaContainer = renderingParaContainer;
-            RunContainer oldRenderingRunContainer = renderingRunContainer;
-            Node oldNode = renderingNode;
-
-            runnable.run();
-
-            if (oldNode != renderingNode) {
-                RunFormatProvider runFormatProvider = runFormatProviders.remove(oldNode);
-
-                if (runFormatProvider != oldRenderingRunFormatProvider) {
-                    runFormatProvider.close();
-                }
-            }
-            renderingRunFormatProvider = oldRenderingRunFormatProvider;
-
-            if (oldNode != renderingNode) {
-                BlockFormatProvider blockFormatProvider = blockFormatProviders.remove(oldNode);
-                if (blockFormatProvider != oldRenderingBlockFormatProvider) {
-                    blockFormatProvider.close();
-                }
-            }
-
-            renderingBlockFormatProvider = oldRenderingBlockFormatProvider;
-            renderingRunContainer = oldRenderingRunContainer;
-            renderingParaContainer = oldRenderingParaContainer;
-        }
-
         public void renderChildren(Node parent) {
             Node node = parent.getFirstChild();
             while (node != null) {
@@ -1021,6 +616,11 @@ public class DocxRenderer implements IRender {
                 render(node);
                 node = next;
             }
+        }
+
+        @Override
+        public Node getProviderFrame() {
+            return document;
         }
     }
 

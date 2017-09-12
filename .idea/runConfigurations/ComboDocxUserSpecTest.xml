@@ -2,7 +2,7 @@
   <configuration default="false" name="ComboDocxUserSpecTest" type="JUnit" factoryName="JUnit" singleton="true" nameIsGenerated="true">
     <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
       <pattern>
-        <option name="PATTERN" value="com.vladsch.flexmark.docx.converter.*" />
+        <option name="PATTERN" value="com.vladsch.flexmark.docx.converter.util.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

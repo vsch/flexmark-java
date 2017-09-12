@@ -1,8 +1,6 @@
 package com.vladsch.flexmark.docx.converter.internal;
 
 import com.vladsch.flexmark.ast.*;
-import com.vladsch.flexmark.ext.wikilink.WikiImage;
-import com.vladsch.flexmark.ext.wikilink.WikiLink;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
 import com.vladsch.flexmark.html.renderer.LinkResolverContext;

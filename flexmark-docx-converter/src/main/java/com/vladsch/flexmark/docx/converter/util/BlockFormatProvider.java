@@ -1,18 +1,18 @@
-package com.vladsch.flexmark.docx.converter;
+package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.wml.PPr;
 import org.docx4j.wml.RPr;
 
-public interface BlockFormatProvider extends FormatProvider {
-    public static final String DEFAULT_STYLE = "Normal";
-    public static final String LOOSE_PARAGRAPH_STYLE = "ParagraphTextBody";
-    public static final String TIGHT_PARAGRAPH_STYLE = "TextBody";
-    public static final String PREFORMATTED_TEXT_STYLE = "PreformattedText";
-    public static final String BLOCK_QUOTE_STYLE = "Quotations";
-    public static final String HORIZONTAL_LINE_STYLE = "HorizontalLine";
-    public static final String TABLE_CAPTION = "TableCaption";
-    public static final String TABLE_CONTENTS = "TableContents";
-    public static final String TABLE_HEADING = "TableHeading";
+public interface BlockFormatProvider<T> extends FormatProvider<T> {
+    String DEFAULT_STYLE = "Normal";
+    String LOOSE_PARAGRAPH_STYLE = "ParagraphTextBody";
+    String TIGHT_PARAGRAPH_STYLE = "TextBody";
+    String PREFORMATTED_TEXT_STYLE = "PreformattedText";
+    String BLOCK_QUOTE_STYLE = "Quotations";
+    String HORIZONTAL_LINE_STYLE = "HorizontalLine";
+    String TABLE_CAPTION = "TableCaption";
+    String TABLE_CONTENTS = "TableContents";
+    String TABLE_HEADING = "TableHeading";
 
 /*
 
@@ -53,5 +53,5 @@ public interface BlockFormatProvider extends FormatProvider {
     // to allow formatter to track first P formatting
     void adjustPPrForFormatting(final PPr pP);
 
-    BlockFormatProvider getParent();
+    BlockFormatProvider<T> getBlockParent();
 }

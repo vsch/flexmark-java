@@ -1,24 +1,22 @@
-package com.vladsch.flexmark.docx.converter.internal;
+package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.BlockFormatProvider;
-import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.wml.*;
 
 /*
     Base Implementation for all BlockFormatProviders
  */
-public class BlockFormatProviderBase implements BlockFormatProvider {
-    protected final DocxRendererContext myDocx;
-    protected final Node myNode;
-    protected final BlockFormatProvider myParent;
+@SuppressWarnings("CallToSimpleGetterFromWithinClass")
+public class BlockFormatProviderBase<T> implements BlockFormatProvider<T> {
+    protected final DocxContext<T> myDocx;
+    protected final T myFrame;
+    protected final BlockFormatProvider<T> myParent;
     protected final String myBaseStyleId;
     protected int myPCount;
 
-    public BlockFormatProviderBase(final DocxRendererContext docx, final String baseStyleId) {
+    public BlockFormatProviderBase(final DocxContext<T> docx, final String baseStyleId) {
         myDocx = docx;
-        myNode = docx.getCurrentNode();
+        myFrame = docx.getContextFrame();
         myParent = docx.getBlockFormatProvider();
         myBaseStyleId = baseStyleId;
         myPCount = 0;
@@ -30,8 +28,8 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
     }
 
     @Override
-    public Node getNode() {
-        return myNode;
+    public T getProviderFrame() {
+        return myFrame;
     }
 
     @Override
@@ -67,12 +65,12 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
      *
      * @return parent to use for style inheritance
      */
-    protected BlockFormatProvider getStyleParent() {
+    protected BlockFormatProvider<T> getStyleParent() {
         return myParent;
     }
 
     @Override
-    public BlockFormatProvider getParent() {
+    public BlockFormatProvider<T> getBlockParent() {
         return myParent;
     }
 
@@ -119,7 +117,7 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
         }
 
         // handle inheritance
-        BlockFormatProvider parent = getStyleParent();
+        BlockFormatProvider<T> parent = getStyleParent();
         if (parent != null) {
             PPr ppr = myDocx.getFactory().createPPr();
             parent.getPPr(ppr);
@@ -141,7 +139,7 @@ public class BlockFormatProviderBase implements BlockFormatProvider {
 
     @Override
     public void getParaRPr(final RPr rPr) {
-        BlockFormatProvider parent = getStyleParent();
+        BlockFormatProvider<T> parent = getStyleParent();
         if (parent != null) {
             parent.getParaRPr(rPr);
         }

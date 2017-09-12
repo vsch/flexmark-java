@@ -1,17 +1,17 @@
-package com.vladsch.flexmark.docx.converter;
+package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.wml.RPr;
 
-public interface RunFormatProvider extends FormatProvider {
-    public static final String BOLD_STYLE = "StrongEmphasis";
-    public static final String ITALIC_STYLE = "Emphasis";
-    public static final String STRIKE_THROUGH_STYLE = "Strikethrough";
-    public static final String SUBSCRIPT_STYLE = "Subscript";
-    public static final String SUPERSCRIPT_STYLE = "Superscript";
-    public static final String INS_STYLE = "Underlined";
-    public static final String INLINE_CODE_STYLE = "SourceText";
-    public static final String HYPERLINK_STYLE = "Hyperlink";
-    public static final String SPACE_PRESERVE = "preserve";
+public interface RunFormatProvider<T> extends FormatProvider<T> {
+    String BOLD_STYLE = "StrongEmphasis";
+    String ITALIC_STYLE = "Emphasis";
+    String STRIKE_THROUGH_STYLE = "Strikethrough";
+    String SUBSCRIPT_STYLE = "Subscript";
+    String SUPERSCRIPT_STYLE = "Superscript";
+    String INS_STYLE = "Underlined";
+    String INLINE_CODE_STYLE = "SourceText";
+    String HYPERLINK_STYLE = "Hyperlink";
+    String SPACE_PRESERVE = "preserve";
 
 /*
 
@@ -35,4 +35,6 @@ public interface RunFormatProvider extends FormatProvider {
 
     // set the final PPr for the next P of this provider, that is different from what the style provides
     void getRPr(final RPr rPr);
+
+    RunFormatProvider<T> getRunParent();
 }

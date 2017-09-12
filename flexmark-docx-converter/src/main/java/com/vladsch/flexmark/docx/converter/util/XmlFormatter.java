@@ -1,4 +1,4 @@
-package com.vladsch.flexmark.docx.converter.internal;
+package com.vladsch.flexmark.docx.converter.util;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

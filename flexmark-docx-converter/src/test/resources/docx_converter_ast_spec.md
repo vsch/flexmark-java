@@ -17,7 +17,7 @@ Converts markdown to docx
 basic text
 
 ```````````````````````````````` example Paragraphs: 1
-Sample text
+plain text
 .
 <w:body>
     <w:p>
@@ -25,7 +25,7 @@ Sample text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:t xml:space="preserve">Sample text</w:t>
+            <w:t xml:space="preserve">plain text</w:t>
         </w:r>
     </w:p>
 </w:body>
@@ -33,13 +33,16 @@ Sample text
 
 
 ```````````````````````````````` example Paragraphs: 2
-**Bold** text
+plain **Bold** text
 .
 <w:body>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="StrongEmphasis"/>
@@ -55,13 +58,16 @@ Sample text
 
 
 ```````````````````````````````` example Paragraphs: 3
-*Italic* text
+plain *Italic* text
 .
 <w:body>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Emphasis"/>
@@ -77,7 +83,7 @@ Sample text
 
 
 ```````````````````````````````` example Paragraphs: 4
-***Bold-Italic*** text
+plain ~~strike-through~~ text
 .
 <w:body>
     <w:p>
@@ -85,29 +91,8 @@ Sample text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
-            <w:rPr>
-                <w:rStyle w:val="StrongEmphasis"/>
-                <w:i/>
-                <w:iCs/>
-            </w:rPr>
-            <w:t xml:space="preserve">Bold-Italic</w:t>
+            <w:t xml:space="preserve">plain </w:t>
         </w:r>
-        <w:r>
-            <w:t xml:space="preserve"> text</w:t>
-        </w:r>
-    </w:p>
-</w:body>
-````````````````````````````````
-
-
-```````````````````````````````` example Paragraphs: 5
-~~strike-through~~ text
-.
-<w:body>
-    <w:p>
-        <w:pPr>
-            <w:pStyle w:val="ParagraphTextBody"/>
-        </w:pPr>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Strikethrough"/>
@@ -122,14 +107,17 @@ Sample text
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 6
-~subscript~ text
+```````````````````````````````` example Paragraphs: 5
+plain ~subscript~ text H~2~O
 .
 <w:body>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Subscript"/>
@@ -137,21 +125,33 @@ Sample text
             <w:t xml:space="preserve">subscript</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve"> text</w:t>
+            <w:t xml:space="preserve"> text H</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Subscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">2</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">O</w:t>
         </w:r>
     </w:p>
 </w:body>
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 7
-^superscript^ text
+```````````````````````````````` example Paragraphs: 6
+plain ^superscript^ text e^*i*pi^ = -1
 .
 <w:body>
     <w:p>
         <w:pPr>
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
         <w:r>
             <w:rPr>
                 <w:rStyle w:val="Superscript"/>
@@ -159,15 +159,44 @@ Sample text
             <w:t xml:space="preserve">superscript</w:t>
         </w:r>
         <w:r>
-            <w:t xml:space="preserve"> text</w:t>
+            <w:t xml:space="preserve"> text e</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
+                <w:position w:val="8"/>
+                <w:sz w:val="19"/>
+            </w:rPr>
+            <w:t xml:space="preserve">i</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Superscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">pi</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> = -1</w:t>
         </w:r>
     </w:p>
 </w:body>
+.
+Document[0, 39]
+  Paragraph[0, 39]
+    Text[0, 6] chars:[0, 6, "plain "]
+    Superscript[6, 19] textOpen:[6, 7, "^"] text:[7, 18, "superscript"] textClose:[18, 19, "^"]
+      Text[7, 18] chars:[7, 18, "super … cript"]
+    Text[19, 26] chars:[19, 26, " text e"]
+    Superscript[26, 33] textOpen:[26, 27, "^"] text:[27, 32, "*i*pi"] textClose:[32, 33, "^"]
+      Emphasis[27, 30] textOpen:[27, 28, "*"] text:[28, 29, "i"] textClose:[29, 30, "*"]
+        Text[28, 29] chars:[28, 29, "i"]
+      Text[30, 32] chars:[30, 32, "pi"]
+    Text[33, 38] chars:[33, 38, " = -1"]
 ````````````````````````````````
 
 
-```````````````````````````````` example Paragraphs: 8
-++underline++ text
+```````````````````````````````` example Paragraphs: 7
+plain ^superscript^ text e^ipi^ = -1
 .
 <w:body>
     <w:p>
@@ -175,10 +204,228 @@ Sample text
             <w:pStyle w:val="ParagraphTextBody"/>
         </w:pPr>
         <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Superscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">superscript</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text e</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Superscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">ipi</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> = -1</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Paragraphs: 8
+plain ++underline++ text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
             <w:rPr>
                 <w:rStyle w:val="Underlined"/>
             </w:rPr>
             <w:t xml:space="preserve">underline</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+permutations of formatting
+
+```````````````````````````````` example Paragraphs: 9
+plain **Bold *Bold-Italic*** text
+plain *Italic **Bold-Italic*** text
+plain **Bold ++Bold-Underline++** text
+plain **Bold ^Bold-Superscript^** text e^*i*𝛑^ = -1
+plain **Bold ~Bold-Subscript~** text H~2~O
+plain **Bold ~~Bold-strike-through~~** text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
+                <w:b/>
+                <w:bCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-Italic</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Italic </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+                <w:i/>
+                <w:iCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-Italic</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Underlined"/>
+                <w:b/>
+                <w:bCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-Underline</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Superscript"/>
+                <w:b/>
+                <w:bCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-Superscript</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text e</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Emphasis"/>
+                <w:position w:val="8"/>
+                <w:sz w:val="19"/>
+            </w:rPr>
+            <w:t xml:space="preserve">i</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Superscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">&#x1d6d1;</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> = -1</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Subscript"/>
+                <w:b/>
+                <w:bCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-Subscript</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text H</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Subscript"/>
+            </w:rPr>
+            <w:t xml:space="preserve">2</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">O</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> </w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="StrongEmphasis"/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="Strikethrough"/>
+                <w:b/>
+                <w:bCs/>
+            </w:rPr>
+            <w:t xml:space="preserve">Bold-strike-through</w:t>
         </w:r>
         <w:r>
             <w:t xml:space="preserve"> text</w:t>
@@ -1143,15 +1390,15 @@ code
 ```
 
 
-| Combined _header_                                ||||
-| Default       | Left **Align** | Center | Right ++Align++ |
-|---------------|:-----------|:------:|------------:|
-| Data 1 `Longer` | Data 2     | Data 3 |      Data 4 |
-| Combined **data**             || Data 5 |      Data 6 |
-| Data 7        | Combined _Data_      ||      Data 8 |
-| Data 9        | Data 10    |    Combined ^Data^    ||
-| Combined ~~Data~~                     |||      Data 7 |
-| Data 8        | Combined ~Data~                   |||
+| Combined _header_                                        ||||
+| Default         | Left **Align** | Center | Right ++Align++ |
+|-----------------|:---------------|:------:|----------------:|
+| Data 1 `Longer` | Data 2         | Data 3 |          Data 4 |
+| Combined **data**               || Data 5 |          Data 6 |
+| Data 7          | Combined _Data_        ||          Data 8 |
+| Data 9          | Data 10        |     Combined ^Data^     ||
+| Combined ~~Data~~                       |||          Data 7 |
+| Data 8          | Combined ~Data~                         |||
 
 .
 <w:body>
@@ -3339,15 +3586,15 @@ code
 All the fixings
 
 ```````````````````````````````` example Tables: 1
-| Combined _header_                                ||||
-| Default       | Left **Align** | Center | Right ++Align++ |
-|---------------|:-----------|:------:|------------:|
-| Data 1 `Longer` | Data 2     | Data 3 |      Data 4 |
-| Combined **data**             || Data 5 |      Data 6 |
-| Data 7        | Combined _Data_      ||      Data 8 |
-| Data 9        | Data 10    |    Combined ^Data^    ||
-| Combined ~~Data~~                     |||      Data 7 |
-| Data 8        | Combined ~Data~                   |||
+| Combined _header_                                        ||||
+| Default         | Left **Align** | Center | Right ++Align++ |
+|-----------------|:---------------|:------:|----------------:|
+| Data 1 `Longer` | Data 2         | Data 3 |          Data 4 |
+| Combined **data**               || Data 5 |          Data 6 |
+| Data 7          | Combined _Data_        ||          Data 8 |
+| Data 9          | Data 10        |     Combined ^Data^     ||
+| Combined ~~Data~~                       |||          Data 7 |
+| Data 8          | Combined ~Data~                         |||
 [Table Caption]
 .
 <w:body>

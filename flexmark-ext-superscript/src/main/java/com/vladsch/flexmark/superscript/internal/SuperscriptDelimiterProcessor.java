@@ -27,12 +27,12 @@ public class SuperscriptDelimiterProcessor implements DelimiterProcessor {
 
     @Override
     public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return leftFlanking;
+        return true;//leftFlanking;
     }
 
     @Override
     public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return rightFlanking;
+        return true;//rightFlanking;
     }
 
     @Override

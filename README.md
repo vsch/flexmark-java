@@ -175,8 +175,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
-  using the [docx4j] library. How to use: [DocxConverter Sample]
+* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter) 
+  using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
+  [Customizing Docx Rendering](../../wiki/Customizing-Docx-Rendering)
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
@@ -571,6 +572,8 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [CommonMark (spec 0.28)]: http://spec.commonmark.org/0.28/
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
+[docx4j]: https://www.docx4java.org/trac/docx4j
+[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverter.java
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
@@ -631,9 +634,3 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [vsch/pegdown]: https://github.com/vsch/pegdown/tree/develop
 [WebStorm]: http://www.jetbrains.com/webstorm
 
-
-
-[docx4j]: https://www.docx4java.org/trac/docx4j
-
-
-[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverter.java

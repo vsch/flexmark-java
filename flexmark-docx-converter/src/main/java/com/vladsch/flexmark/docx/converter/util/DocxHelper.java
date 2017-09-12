@@ -1,8 +1,5 @@
-package com.vladsch.flexmark.docx.converter.internal;
+package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.docx.converter.BlockFormatProvider;
-import com.vladsch.flexmark.docx.converter.DocxRendererContext;
-import com.vladsch.flexmark.util.Function;
 import org.docx4j.model.PropertyResolver;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;

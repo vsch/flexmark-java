@@ -1,30 +1,29 @@
-package com.vladsch.flexmark.docx.converter.internal;
+package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.docx.converter.DocxRendererContext;
-import com.vladsch.flexmark.docx.converter.RunFormatProvider;
 import org.docx4j.model.styles.StyleUtil;
-import org.docx4j.wml.*;
+import org.docx4j.wml.RPr;
+import org.docx4j.wml.RStyle;
+import org.docx4j.wml.Style;
 
 /*
     Base Implementation for all RunFormatProviders
  */
-public class RunFormatProviderBase implements RunFormatProvider {
-    protected final DocxRendererContext myDocx;
-    protected final Node myNode;
-    protected final RunFormatProvider myParent;
+public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
+    protected final DocxContext<T> myDocx;
+    protected final T myFrame;
+    protected final RunFormatProvider<T> myParent;
     protected final String myBaseStyleId;
 
-    public RunFormatProviderBase(final DocxRendererContext docx, final String baseStyleId) {
+    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId) {
         myDocx = docx;
-        myNode = docx.getCurrentNode();
+        myFrame = docx.getContextFrame();
         myParent = docx.getRunFormatProvider();
         myBaseStyleId = baseStyleId;
     }
 
     @Override
-    public Node getNode() {
-        return myNode;
+    public T getProviderFrame() {
+        return myFrame;
     }
 
     @Override
@@ -47,12 +46,17 @@ public class RunFormatProviderBase implements RunFormatProvider {
         return myBaseStyleId;
     }
 
+    @Override
+    public RunFormatProvider<T> getRunParent() {
+        return myParent;
+    }
+
     /**
      * Get the style parent for the next P of this block
      *
      * @return parent to use for style inheritance
      */
-    protected RunFormatProvider getStyleParent() {
+    protected RunFormatProvider<T> getStyleParent() {
         return myParent;
     }
 
@@ -77,7 +81,7 @@ public class RunFormatProviderBase implements RunFormatProvider {
         rstyle.setVal(myBaseStyleId);
 
         // handle inheritance
-        RunFormatProvider parent = myParent;
+        RunFormatProvider<T> parent = myParent;
         if (parent != null) {
             RPr rpr1 = myDocx.getFactory().createRPr();
             parent.getRPr(rpr1);

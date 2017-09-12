@@ -147,7 +147,7 @@ flexmark-java
       when descriptions can benefit form complex formatting
 
 * [ ] Fix: clean up and verify the Extensions wiki options lists for name changes, missing or
-      extra entries. Update description for better understanding **foo**a.
+      extra entries. Update description for better understanding
 
 * [ ] Add: generated HTML element positions to `TagRanges` to allow mapping from source offset
       to HTML offset for the element(s). This is needed to allow synchronization with source
@@ -171,10 +171,60 @@ flexmark-java
   * Pegdown, with pegdown extensions use `PegdownOptionsAdapter` in `flexmark-profile-pegdown`
   * Pegdown, without pegdown extensions `ParserEmulationProfile.PEGDOWN`
 
+* [ ] Add hierarchical anchor id generation for headings: will splice parent heading id with
+      child id to create unique ids based on header hierarchy.
+
+* [ ] Add attribute extension parser module to allow adding arbitrary attributes to any block or
+      inline element in markdown
+  * [ ] use these attributes to control docx rendering and html rendering.
+
+* [ ] Add macro module that would allow inserting arbitrary markdown into table cells. This
+      would be less readable but would give complete flexibility to generate tables with complex
+      content without changing the table syntax because the macro expansion would be done during
+      rendering not parsing.
+
 &nbsp;</details>
 
 0.27.0
 ------
+
+* [ ] Fix: superscript is now allowed without regard for surrounding characters. The markers are
+      rare enough in text not to warrant concern. If you don't want it treated as special,
+      escape it.
+
+* [ ] Add: `DocxRenderer` options:
+  * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
+  * [ ] `BULLET_LIST_NUM_ID` and `ORDERED_LIST_NUM_ID` for list style ids
+
+* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths
+
+* [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
+      handler.
+
+* [ ] Add: finish missing elements from docx converter
+  * [x] Tables
+    * [ ] Footnootes
+    * [ ] Table of Contents
+    * [x] multiple header rows, column spans, markdown alignments
+    * [x] Table captions are not yet supported by docx4j API. Captions are converted to
+          "TableCaption" styled paragraphs if `DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH` is set
+          to `true`, which it is by default. `DocxRenderer.TABLE_CAPTION_BEFORE_TABLE`, default
+          `false`, when set to `true` the caption is inserted before the table.
+    * [x] Ordered and unordered lists
+      * [x] restart numbering on a short to do list
+    * [x] Links
+    * [x] Images
+      * [x] Images get embedded into the document, even remote ones (using http: or https:
+            links)
+      * [x] Max Image width property available in options
+    * [x] Inline Code
+    * [x] Fenced Code
+    * [x] Block Quotes
+    * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
+
+  * [x] Paragraph
+  * [x] Headings
+  * [x] Bold and italic text
 
 * Fix: add `<strike>` to HTML Parser as equivalent to `<del>` for OfficeLibre compatibility
 
@@ -192,39 +242,6 @@ flexmark-java
 * Add: `Parser.LISTS_ITEM_CONTENT_AFTER_SUFFIX`, default `false`, set to `true` to treat the
   item suffix as part of the list item marker after which the content begins for indentation
   purposes. Gfm Task List uses the default setting.
-
-* [ ] Add: `DocxRenderer` options:
-  * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
-  * [ ] `BULLET_LIST_NUM_ID` and `ORDERED_LIST_NUM_ID` for list style ids
-
-* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths
-
-* [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
-      handler.
-
-* [ ] Add: finish missing elements from docx converter
-  * [x] Paragraph
-  * [x] Headings
-  * [x] Bold and italic text
-  * [x] Tables
-    * [x] multiple header rows, column spans, markdown alignments
-    * [x] Table captions are not yet supported by docx4j API. Captions are converted to
-          "TableCaption" styled paragraphs if `DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH` is set
-          to `true`, which it is by default. `DocxRenderer.TABLE_CAPTION_BEFORE_TABLE`, default
-          `false`, when set to `true` the caption is inserted before the table.
-    * [x] Ordered and unordered lists
-      * [x] restart numbering on a short to do list
-    * [x] Links
-    * [x] Images
-      * [x] Images get embedded into the document, even remote ones (using http: or https:
-            links)
-      * [x] Max Image width property available in options
-    * [ ] Footnootes
-    * [x] Inline Code
-    * [x] Fenced Code
-    * [x] Block Quotes
-    * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
-    * [ ] Table of Contents
 
 * Fix: complete conditional indent/border style propagation from parent to child based on parent
   and child types. Some child types already incorporate their parent's indentation such as list
