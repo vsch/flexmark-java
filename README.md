@@ -175,9 +175,12 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter) 
+* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
   using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
   [Customizing Docx Rendering](../../wiki/Customizing-Docx-Rendering)
+
+  Development of this module was sponsored by
+  [Johner Institut GmbH](http://www.johner-institut.de/).
 * Update library to be [CommonMark (spec 0.28)] compliant and add
   `ParserEmulationProfile.COMMONMARK_0_27` and `ParserEmulationProfile.COMMONMARK_0_28` to allow
   selecting a specific spec version options.
@@ -310,9 +313,9 @@ If you find a discrepancy please open an issue so it can be addressed.
 Major processor families are implemented and some family members also:
 
 * [CommonMark] for latest implemented spec, currently [CommonMark (spec 0.28)]
+  * [ ] &nbsp;[League/CommonMark]
   * [CommonMark (spec 0.27)] for specific version compatibility
   * [CommonMark (spec 0.28)] for specific version compatibility
-  * [ ] &nbsp;[League/CommonMark]
   * [GitHub] Comments
 * [ ] [Jekyll]
 * [Markdown.pl][Markdown]
