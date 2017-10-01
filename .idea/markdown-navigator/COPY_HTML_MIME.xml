@@ -10,7 +10,7 @@
         <PegdownExtensions>
           <option name="ABBREVIATIONS" value="true" />
           <option name="ANCHORLINKS" value="false" />
-          <option name="ASIDE" value="true" />
+          <option name="ASIDE" value="false" />
           <option name="ATXHEADERSPACE" value="true" />
           <option name="AUTOLINKS" value="true" />
           <option name="DEFINITIONS" value="true" />
@@ -18,14 +18,14 @@
           <option name="FENCED_CODE_BLOCKS" value="true" />
           <option name="FOOTNOTES" value="true" />
           <option name="HARDWRAPS" value="false" />
-          <option name="HTML_DEEP_PARSER" value="true" />
-          <option name="INSERTED" value="true" />
+          <option name="HTML_DEEP_PARSER" value="false" />
+          <option name="INSERTED" value="false" />
           <option name="QUOTES" value="true" />
           <option name="RELAXEDHRULES" value="true" />
           <option name="SMARTS" value="true" />
           <option name="STRIKETHROUGH" value="true" />
-          <option name="SUBSCRIPT" value="true" />
-          <option name="SUPERSCRIPT" value="true" />
+          <option name="SUBSCRIPT" value="false" />
+          <option name="SUPERSCRIPT" value="false" />
           <option name="SUPPRESS_HTML_BLOCKS" value="false" />
           <option name="SUPPRESS_INLINE_HTML" value="false" />
           <option name="TABLES" value="true" />
@@ -48,7 +48,7 @@
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
-      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="true" embedHttpImages="false">
+      <HtmlSettings headerTopEnabled="false" headerBottomEnabled="false" bodyTopEnabled="false" bodyBottomEnabled="false" embedUrlContent="false" addPageHeader="true" embedImages="false" embedHttpImages="false">
         <GeneratorProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.generator" providerName="JavaFx HTML Generator" />
         </GeneratorProvider>

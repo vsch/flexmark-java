@@ -8,7 +8,7 @@ import com.vladsch.flexmark.util.sequence.BasedSequence;
 /**
  * A Superscript node
  */
-public class Superscript extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class Superscript extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;

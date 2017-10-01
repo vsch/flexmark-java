@@ -932,3 +932,86 @@ Document[0, 202]
           Text[158, 177] chars:[158, 177, "Anoth … e.com"]
 ````````````````````````````````
 
+
+## Issue 156
+
+Issue #156, Render image embedded inside a link when using a base URL
+
+without the custom URL extension it works
+
+```````````````````````````````` example Issue 156: 1
+[![Build Status](https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu)](https://ci.tensorflow.org/job/tensorflow-master-cpu) 
+.
+<p><a href="https://ci.tensorflow.org/job/tensorflow-master-cpu"><img src="https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu" alt="Build Status" /></a></p>
+.
+Document[0, 142]
+  Paragraph[0, 142]
+    Link[0, 140] textOpen:[0, 1, "["] text:[1, 86, "![Build Status](https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu)"] textClose:[86, 87, "]"] linkOpen:[87, 88, "("] url:[88, 139, "https://ci.tensorflow.org/job/tensorflow-master-cpu"] pageRef:[88, 139, "https://ci.tensorflow.org/job/tensorflow-master-cpu"] linkClose:[139, 140, ")"]
+      Image[1, 86] textOpen:[1, 3, "!["] text:[3, 15, "Build Status"] textClose:[15, 16, "]"] linkOpen:[16, 17, "("] url:[17, 85, "https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu"] pageRef:[17, 85, "https://ci.tensorflow.org/buildStatus/icon?job=tensorflow-master-cpu"] linkClose:[85, 86, ")"]
+        Text[3, 15] chars:[3, 15, "Build … tatus"]
+````````````````````````````````
+
+
+## Issue 158
+
+Issue #158, HTML comments parse as blocks despite having following text
+
+```````````````````````````````` example Issue 158: 1
+<!--Comment--> Markdown text.
+.
+<!--Comment--> Markdown text.
+.
+Document[0, 30]
+  HtmlCommentBlock[0, 30]
+````````````````````````````````
+
+
+```````````````````````````````` example(Issue 158: 2) options(html-comment-full-lines)
+<!--Comment--> Markdown text.
+.
+<p><!--Comment--> Markdown text.</p>
+.
+Document[0, 29]
+  Paragraph[0, 29]
+    HtmlInlineComment[0, 14] chars:[0, 14, "<!--C … nt-->"]
+    Text[14, 29] chars:[14, 29, " Mark … text."]
+````````````````````````````````
+
+
+The opening tag can be indented 1-3 spaces, but not 4:
+
+```````````````````````````````` example Issue 158: 3
+  <!-- foo -->
+
+    <!-- foo -->
+.
+  <!-- foo -->
+<pre><code>&lt;!-- foo --&gt;
+</code></pre>
+.
+Document[0, 33]
+  HtmlCommentBlock[0, 15]
+  IndentedCodeBlock[20, 33]
+````````````````````````````````
+
+
+```````````````````````````````` example Issue 158: 4
+<!-- Foo
+
+bar
+   baz -->
+okay
+.
+<!-- Foo
+
+bar
+   baz -->
+<p>okay</p>
+.
+Document[0, 30]
+  HtmlCommentBlock[0, 25]
+  Paragraph[25, 30]
+    Text[25, 29] chars:[25, 29, "okay"]
+````````````````````````````````
+
+

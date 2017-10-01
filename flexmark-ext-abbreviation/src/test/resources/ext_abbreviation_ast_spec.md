@@ -333,3 +333,61 @@ Document[0, 536]
 ````````````````````````````````
 
 
+## Ins extension interaction
+
+```````````````````````````````` example Ins extension interaction: 1
+++TCP++
+.
+<p><ins>TCP</ins></p>
+.
+Document[0, 8]
+  Paragraph[0, 8]
+    Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "TCP"] textClose:[5, 7, "++"]
+      Text[2, 5] chars:[2, 5, "TCP"]
+````````````````````````````````
+
+
+```````````````````````````````` example Ins extension interaction: 2
+~~TCP~~
+.
+<p><del>TCP</del></p>
+.
+Document[0, 8]
+  Paragraph[0, 8]
+    Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "TCP"] textClose:[5, 7, "~~"]
+      Text[2, 5] chars:[2, 5, "TCP"]
+````````````````````````````````
+
+
+```````````````````````````````` example Ins extension interaction: 3
+++TCP++
+
+*[TCP]: Transmission Control Protocol
+.
+<p><ins><abbr title="Transmission Control Protocol">TCP</abbr></ins></p>
+.
+Document[0, 47]
+  Paragraph[0, 8] isTrailingBlankLine
+    Ins[0, 7] textOpen:[0, 2, "++"] text:[2, 5, "TCP"] textClose:[5, 7, "++"]
+      TextBase[2, 5] chars:[2, 5, "TCP"]
+        Abbreviation[2, 5] chars:[2, 5, "TCP"]
+  AbbreviationBlock[9, 46] open:[9, 11] text:[11, 14] close:[14, 16] abbreviation:[17, 46]
+````````````````````````````````
+
+
+```````````````````````````````` example Ins extension interaction: 4
+~~TCP~~
+
+*[TCP]: Transmission Control Protocol
+.
+<p><del><abbr title="Transmission Control Protocol">TCP</abbr></del></p>
+.
+Document[0, 47]
+  Paragraph[0, 8] isTrailingBlankLine
+    Strikethrough[0, 7] textOpen:[0, 2, "~~"] text:[2, 5, "TCP"] textClose:[5, 7, "~~"]
+      TextBase[2, 5] chars:[2, 5, "TCP"]
+        Abbreviation[2, 5] chars:[2, 5, "TCP"]
+  AbbreviationBlock[9, 46] open:[9, 11] text:[11, 14] close:[14, 16] abbreviation:[17, 46]
+````````````````````````````````
+
+

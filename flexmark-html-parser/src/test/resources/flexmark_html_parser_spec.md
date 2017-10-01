@@ -14,6 +14,7 @@ Converts HTML to markdown
 
 ```````````````````````````````` example Text: 1
 Expected rendered HTML
+
 .
 <p>Expected rendered HTML</p>
 ````````````````````````````````
@@ -22,6 +23,7 @@ Expected rendered HTML
 ```````````````````````````````` example Text: 2
 Expected rendered HTML  
 Another line
+
 .
 <p>Expected rendered HTML<br>Another line</p>
 ````````````````````````````````
@@ -29,7 +31,9 @@ Another line
 
 ```````````````````````````````` example Text: 3
 Expected rendered HTML  
+
 Another line
+
 .
 <p>Expected rendered HTML<br><br>Another line</p>
 ````````````````````````````````
@@ -39,6 +43,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 1
 **Expected** rendered HTML
+
 .
 <p><strong>Expected</strong> rendered HTML</p>
 ````````````````````````````````
@@ -46,6 +51,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 2
 **Expected** rendered HTML
+
 .
 <p><b>Expected</b> rendered HTML</p>
 ````````````````````````````````
@@ -53,6 +59,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 3
 *Expected* rendered HTML
+
 .
 <p><em>Expected</em> rendered HTML</p>
 ````````````````````````````````
@@ -60,6 +67,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 4
 *Expected* rendered HTML
+
 .
 <p><i>Expected</i> rendered HTML</p>
 ````````````````````````````````
@@ -67,6 +75,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 5
 ++Expected++ rendered HTML
+
 .
 <p><ins>Expected</ins> rendered HTML</p>
 ````````````````````````````````
@@ -74,6 +83,7 @@ Another line
 
 ```````````````````````````````` example Emphasis: 6
 ~~Expected~~ rendered HTML
+
 .
 <p><del>Expected</del> rendered HTML</p>
 ````````````````````````````````
@@ -81,20 +91,39 @@ Another line
 
 ```````````````````````````````` example Emphasis: 7
 ~Expected~ rendered HTML
+
 .
 <p><sub>Expected</sub> rendered HTML</p>
 ````````````````````````````````
 
 
 ```````````````````````````````` example Emphasis: 8
+H~2~O
+
+.
+<p>H<sub>2</sub>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example Emphasis: 9
 ^Expected^ rendered HTML
+
 .
 <p><sup>Expected</sup> rendered HTML</p>
 ````````````````````````````````
 
 
-```````````````````````````````` example Emphasis: 9
+```````````````````````````````` example Emphasis: 10
+H^2^O
+
+.
+<p>H<sup>2</sup>O</p>
+````````````````````````````````
+
+
+```````````````````````````````` example Emphasis: 11
 `Expected` rendered HTML
+
 .
 <p><code>Expected</code> rendered HTML</p>
 ````````````````````````````````
@@ -102,8 +131,9 @@ Another line
 
 ``Expected `a``
 
-```````````````````````````````` example Emphasis: 10
+```````````````````````````````` example Emphasis: 12
 ``Expected `a`` rendered HTML
+
 .
 <p><code>Expected `a</code> rendered HTML</p>
 ````````````````````````````````
@@ -113,6 +143,7 @@ Another line
 
 ```````````````````````````````` example Bullet Lists: 1
 * item
+
 .
 <ul>
 <li>item</li>
@@ -125,6 +156,7 @@ Another line
 * item 2
 * item 3
 * item 4
+
 .
 <ul>
 <li>item 1</li>
@@ -143,6 +175,7 @@ Another line
 * item 3
 
 * item 4
+
 .
 <ul>
 <li><p>item 1</p></li>
@@ -169,6 +202,7 @@ Another line
 * item 3
 
 * item 4
+
 .
 <ul>
 <li>
@@ -191,6 +225,7 @@ Another line
 
 ```````````````````````````````` example Numbered Lists: 1
 1. item
+
 .
 <ol>
 <li>item</li>
@@ -203,6 +238,7 @@ Another line
 2. item 2
 3. item 3
 4. item 4
+
 .
 <ol>
 <li>item 1</li>
@@ -221,6 +257,7 @@ Another line
 3. item 3
 
 4. item 4
+
 .
 <ol>
 <li><p>item 1</p></li>
@@ -247,6 +284,7 @@ Another line
 3. item 3
 
 4. item 4
+
 .
 <ol>
 <li>
@@ -270,6 +308,7 @@ Another line
 ```````````````````````````````` example Task List Items: 1
 * [ ] item
 * [x] item
+
 .
 <ul>
 <li><input type="checkbox">item</li>
@@ -282,6 +321,7 @@ Another line
 ```````````````````````````````` example Task List Items: 2
 1. [ ] item
 2. [x] item
+
 .
 <ol>
 <li><input type="checkbox">item</li>
@@ -295,6 +335,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 1
 > Expected rendered HTML
+
 .
 <blockquote>
   <p>Expected rendered HTML</p>
@@ -304,6 +345,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 2
 > **Expected** rendered HTML
+
 .
 <blockquote>
   <p><strong>Expected</strong> rendered HTML</p>
@@ -313,6 +355,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 3
 > **Expected** rendered HTML
+
 .
 <blockquote>
   <p><b>Expected</b> rendered HTML</p>
@@ -322,6 +365,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 4
 > *Expected* rendered HTML
+
 .
 <blockquote>
   <p><em>Expected</em> rendered HTML</p>
@@ -331,6 +375,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 5
 > *Expected* rendered HTML
+
 .
 <blockquote>
   <p><i>Expected</i> rendered HTML</p>
@@ -340,6 +385,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 6
 > ++Expected++ rendered HTML
+
 .
 <blockquote>
   <p><ins>Expected</ins> rendered HTML</p>
@@ -349,6 +395,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 7
 > ~~Expected~~ rendered HTML
+
 .
 <blockquote>
   <p><del>Expected</del> rendered HTML</p>
@@ -358,6 +405,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 8
 > ~Expected~ rendered HTML
+
 .
 <blockquote>
   <p><sub>Expected</sub> rendered HTML</p>
@@ -367,6 +415,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 9
 > ^Expected^ rendered HTML
+
 .
 <blockquote>
   <p><sup>Expected</sup> rendered HTML</p>
@@ -376,6 +425,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 10
 > `Expected` rendered HTML
+
 .
 <blockquote>
   <p><code>Expected</code> rendered HTML</p>
@@ -387,6 +437,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 11
 > ``Expected `a`` rendered HTML
+
 .
 <blockquote>
   <p><code>Expected `a</code> rendered HTML</p>
@@ -396,6 +447,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 12
 > * item
+
 .
 <blockquote>
  <ul>
@@ -410,6 +462,7 @@ Another line
 > * item 2
 > * item 3
 > * item 4
+
 .
 <blockquote>
 <ul>
@@ -430,6 +483,7 @@ Another line
 > * item 3
 > 
 > * item 4
+
 .
 <blockquote>
 <ul>
@@ -458,6 +512,7 @@ Another line
 * item 3
 
 * item 4
+
 .
 <ul>
 <li>
@@ -494,6 +549,7 @@ Another line
 > * item 3
 > 
 > * item 4
+
 .
 <blockquote>
 <ul>
@@ -516,6 +572,7 @@ Another line
 
 ```````````````````````````````` example Block Quotes: 17
 > 1. item
+
 .
 <blockquote>
 <ol>
@@ -530,6 +587,7 @@ Another line
 > 2. item 2
 > 3. item 3
 > 4. item 4
+
 .
 <blockquote>
 <ol>
@@ -550,6 +608,7 @@ Another line
 > 3. item 3
 > 
 > 4. item 4
+
 .
 <blockquote>
 <ol>
@@ -578,6 +637,7 @@ Another line
 3. item 3
 
 4. item 4
+
 .
 <ol>
 <li>
@@ -614,6 +674,7 @@ Another line
 > 3. item 3
 > 
 > 4. item 4
+
 .
 <blockquote>
 <ol>
@@ -639,6 +700,7 @@ Another line
 ```````````````````````````````` example Headings: 1
 Heading
 =======
+
 .
 <h1>Heading</h1>
 ````````````````````````````````
@@ -647,6 +709,7 @@ Heading
 ```````````````````````````````` example Headings: 2
 Heading
 -------
+
 .
 <h2>Heading</h2>
 ````````````````````````````````
@@ -654,6 +717,7 @@ Heading
 
 ```````````````````````````````` example Headings: 3
 ### Heading
+
 .
 <h3>Heading</h3>
 ````````````````````````````````
@@ -661,6 +725,7 @@ Heading
 
 ```````````````````````````````` example Headings: 4
 #### Heading
+
 .
 <h4>Heading</h4>
 ````````````````````````````````
@@ -668,6 +733,7 @@ Heading
 
 ```````````````````````````````` example Headings: 5
 ##### Heading
+
 .
 <h5>Heading</h5>
 ````````````````````````````````
@@ -675,6 +741,7 @@ Heading
 
 ```````````````````````````````` example Headings: 6
 ###### Heading
+
 .
 <h6>Heading</h6>
 ````````````````````````````````
@@ -684,6 +751,7 @@ Heading
 
 ```````````````````````````````` example Thematic Break: 1
 *** ** * ** ***
+
 .
 <hr>
 ````````````````````````````````
@@ -695,6 +763,7 @@ not links
 
 ```````````````````````````````` example Links: 1
 Text
+
 .
 <a id="http://example.com">Text</a>
 ````````````````````````````````
@@ -702,6 +771,7 @@ Text
 
 ```````````````````````````````` example Links: 2
 Text **Bold**
+
 .
 <a id="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -711,6 +781,7 @@ links
 
 ```````````````````````````````` example Links: 3
 [](http://example.com)
+
 .
 <a href="http://example.com"></a>
 ````````````````````````````````
@@ -718,6 +789,7 @@ links
 
 ```````````````````````````````` example Links: 4
 [Text](http://example.com)
+
 .
 <a href="http://example.com">Text</a>
 ````````````````````````````````
@@ -725,6 +797,7 @@ links
 
 ```````````````````````````````` example Links: 5
 [Text](http://example.com "Title")
+
 .
 <a href="http://example.com" title="Title">Text</a>
 ````````````````````````````````
@@ -732,6 +805,7 @@ links
 
 ```````````````````````````````` example Links: 6
 [Text **Bold**](http://example.com)
+
 .
 <a href="http://example.com">Text <b>Bold</b></a>
 ````````````````````````````````
@@ -741,6 +815,7 @@ auto links
 
 ```````````````````````````````` example Links: 7
 http://example.com
+
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -748,6 +823,7 @@ http://example.com
 
 ```````````````````````````````` example(Links: 8) options(wrap-autolinks)
 <http://example.com>
+
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -755,6 +831,7 @@ http://example.com
 
 ```````````````````````````````` example Links: 9
 [http://example.com](http://example.com "Title")
+
 .
 <a href="http://example.com" title="Title">http://example.com</a>
 ````````````````````````````````
@@ -762,6 +839,7 @@ http://example.com
 
 ```````````````````````````````` example Links: 10
 http://example.com
+
 .
 <a href="http://example.com" title="">http://example.com</a>
 ````````````````````````````````
@@ -769,6 +847,7 @@ http://example.com
 
 ```````````````````````````````` example(Links: 11) options(no-autolinks)
 [http://example.com](http://example.com)
+
 .
 <a href="http://example.com">http://example.com</a>
 ````````````````````````````````
@@ -786,6 +865,7 @@ Not images
 
 ```````````````````````````````` example Images: 2
 ![](http://example.com)
+
 .
 <img src="http://example.com">
 ````````````````````````````````
@@ -793,6 +873,7 @@ Not images
 
 ```````````````````````````````` example Images: 3
 ![](http://example.com)
+
 .
 <img src="http://example.com" alt="">
 ````````````````````````````````
@@ -800,6 +881,7 @@ Not images
 
 ```````````````````````````````` example Images: 4
 ![Alt](http://example.com)
+
 .
 <img src="http://example.com" alt="Alt">
 ````````````````````````````````
@@ -807,6 +889,7 @@ Not images
 
 ```````````````````````````````` example Images: 5
 ![](http://example.com "Title")
+
 .
 <img src="http://example.com" title="Title">
 ````````````````````````````````
@@ -814,6 +897,7 @@ Not images
 
 ```````````````````````````````` example Images: 6
 ![](http://example.com "Title")
+
 .
 <img src="http://example.com" alt="" title="Title">
 ````````````````````````````````
@@ -821,6 +905,7 @@ Not images
 
 ```````````````````````````````` example Images: 7
 ![Alt](http://example.com "Title")
+
 .
 <img src="http://example.com" alt="Alt" title="Title">
 ````````````````````````````````
@@ -835,6 +920,7 @@ x^2 + y^2 &= 1 \\
 y &= \sqrt{1 - x^2} \\
 \end{align*}
 "title")
+
 .
 <img src="http://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%0Ax%5E2%20%2B%20y%5E2%20&amp;=%201%20%5C%5C%0Ay%20&amp;=%20%5Csqrt%7B1%20-%20x%5E2%7D%20%5C%5C%0A%5Cend%7Balign*%7D%0A" alt="alt" title="title" />
 ````````````````````````````````
@@ -854,6 +940,7 @@ y &= \sqrt{1 - x^2} \\
 ```````````````````````````````` example Tables: 2
 | Abc | Def |
 |-----|-----|
+
 .
 <table>
   <thead>
@@ -869,6 +956,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 3
 | Abc | Def |
 |:----|-----|
+
 .
 <table>
   <thead>
@@ -884,6 +972,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 4
 | Abc | Def |
 |----:|-----|
+
 .
 <table>
   <thead>
@@ -897,6 +986,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 5
 | Abc | Def |
 |:---:|-----|
+
 .
 <table>
   <thead>
@@ -910,6 +1000,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 6
 | Abc |
 |-----|
+
 .
 <table>
   <thead>
@@ -923,6 +1014,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 7
 | Abc |
 |-----|
+
 .
 <table>
   <thead>
@@ -936,6 +1028,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 8
 | Abc |
 |-----|
+
 .
 <table>
   <thead>
@@ -950,6 +1043,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc |
 |-----|
 | 1   |
+
 .
 <table>
   <thead>
@@ -966,6 +1060,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc |
 |-----|
 | 1   |
+
 .
 <table>
   <thead>
@@ -982,6 +1077,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc |
 |-----|
 | 1   |
+
 .
 <table>
   <thead>
@@ -997,6 +1093,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 ```````````````````````````````` example Tables: 12
 | Abc |
 |-----|
+
 .
 <table>
   <thead>
@@ -1011,6 +1108,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1027,6 +1125,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc | Def | Ghi |
 |-----|-----|-----|
 | 1   | 2   | 3   |
+
 .
 <table>
   <thead>
@@ -1043,6 +1142,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1059,6 +1159,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1075,6 +1176,7 @@ Separator columns need to be at least 3 characters, not 3 dashes
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1093,6 +1195,7 @@ Embedded pipes in inline elements
 | Abc | Def |
 |-----|-----|
 | `|` | `|` |
+
 .
 <table>
   <thead>
@@ -1111,6 +1214,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |-----|-----|-----|
 | `   |     | abc |
+
 .
 <table>
   <thead>
@@ -1129,6 +1233,7 @@ unclosed delimiters in cells
 | Abc   | Def |
 |-------|-----|
 | **def | abc |
+
 .
 <table>
   <thead>
@@ -1145,6 +1250,7 @@ unclosed delimiters in cells
 | *Abc* | Def |
 |-------|-----|
 | 1     | 2   |
+
 .
 <table>
   <thead>
@@ -1161,6 +1267,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |-----|-----|----|
 | 1\\ | 2   | 20 |
+
 .
 <table>
   <thead>
@@ -1177,6 +1284,7 @@ unclosed delimiters in cells
 | Abc   | Def |
 |-------|-----|
 | 1\\\\ | 2   |
+
 .
 <table>
   <thead>
@@ -1193,6 +1301,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |:----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1209,6 +1318,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |----:|-----|
 |   1 | 2   |
+
 .
 <table>
   <thead>
@@ -1225,6 +1335,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |:---:|-----|
 |  1  | 2   |
+
 .
 <table>
   <thead>
@@ -1241,6 +1352,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |-----|:---:|
 | 1   |  2  |
+
 .
 <table>
   <thead>
@@ -1257,6 +1369,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |:----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1273,6 +1386,7 @@ unclosed delimiters in cells
 | Abc | Def |
 |-----|-----|---|
 | 1   | 2   | 3 |
+
 .
 <table>
   <thead>
@@ -1291,6 +1405,7 @@ Extra columns truncated with GFM compatibility on.
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1307,6 +1422,7 @@ Extra columns truncated with GFM compatibility on.
 | Abc | Def | Ghi |
 |-----|-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1323,6 +1439,7 @@ Extra columns truncated with GFM compatibility on.
 > | Abc | Def |
 > |-----|-----|
 > | 1   | 2   |
+
 .
 <blockquote>
   <table>
@@ -1343,6 +1460,7 @@ Extra columns truncated with GFM compatibility on.
 | 1   | 2   |
 
 table, you are over
+
 .
 <table>
   <thead>
@@ -1362,6 +1480,7 @@ inlines should be processed
 | **Abc**     | *Def*  |
 |-------------|--------|
 | [ref](/url) | `code` |
+
 .
 <table>
   <thead>
@@ -1380,6 +1499,7 @@ inlines should be processed
 | **Abc** **test** | *Def* *Def*   |
 |------------------|---------------|
 | [ref](/url)      | `code` `code` |
+
 .
 <table>
   <thead>
@@ -1398,6 +1518,7 @@ Column spans are created with repeated | pipes one for each additional column to
 | Abc | Def |
 |-----|-----|
 | span     ||
+
 .
 <table>
   <thead>
@@ -1417,6 +1538,7 @@ Now we try varying the header lines and make sure we get the right output
 | Hij | Lmn |
 |-----|-----|
 | span     ||
+
 .
 <table>
   <thead>
@@ -1435,6 +1557,7 @@ No header lines
 ```````````````````````````````` example Tables: 38
 |------|------|
 | col1 | col2 |
+
 .
 <table>
   <thead></thead>
@@ -1450,6 +1573,7 @@ No body lines
 ```````````````````````````````` example Tables: 39
 | col1 | col2 |
 |------|------|
+
 .
 <table>
   <thead>
@@ -1466,6 +1590,7 @@ With caption
 | col1 | col2 |
 |------|------|
 [Caption **bold** *italic* `code`]
+
 .
 <table>
   <thead>
@@ -1486,6 +1611,7 @@ Alignment should be taken from column after span is added
 | nov. 3. thu | 11:00 |      4h |
 | nov. 7. mon | 10:20 |  4h 20m |
 | total:             || **13h** |
+
 .
 <table>
   <thead>
@@ -1519,6 +1645,7 @@ not a table, followed by a table
 | col21 | col22 |
 |-------|-------|
 | data1 | data2 |
+
 .
 <p>not a table, followed by a table</p>
 <table>
@@ -1558,6 +1685,7 @@ multi row/column
 | data11 | data12 | data13 |
 | data21 | data22 | data23 |
 | data31 | data32 | data33 |
+
 .
 <table>
   <thead>
@@ -1580,6 +1708,7 @@ keep cell whitespace
 | Abc | Def |
 |-----|-----|
 | 1   | 2   |
+
 .
 <table>
   <thead>
@@ -1597,6 +1726,7 @@ Custom class name
 ```````````````````````````````` example Tables: 45
 | Abc | Def |
 |-----|-----|
+
 .
 <table class="table-class">
   <thead>
@@ -1617,6 +1747,7 @@ in item
   | Abbreviation  | `.abbreviation` | `*[]:`      |
   | Code fence    | `.codefence`    | ``` ... ``` |
   | Explicit link | `.link`         | `[]()`      |
+
 .
 <ul>
   <li>
@@ -1710,6 +1841,7 @@ real life table
 | Refactoring for /, https:// and file:// absolute link addresses to project files                |       |    X     |
 | Refactoring of header text with update to referencing anchor link references                    |       |    X     |
 | Anchor link reference refactoring with update to referenced header text                         |       |    X     |
+
 .
 <table>
   <thead>
@@ -1864,6 +1996,7 @@ real life table
 | &nbsp;&nbsp;&nbsp;&nbsp;Refactoring for /, https:// and file:// absolute link addresses to project files                |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Refactoring of header text with update to referencing anchor link references                    |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Anchor link reference refactoring with update to referenced header text                         |       |    X     |
+
 .
 <table>
   <thead>
@@ -1953,6 +2086,7 @@ Table with `th` in `tbody`
 | <      | less than          | &lt;        |
 | >      | greater than       | &gt;        |
 | &      | ampersand          | &amp;       |
+
 .
 <table>
   <tbody>
@@ -1994,6 +2128,7 @@ tables with row span cells
 |----|----------|----------|-------:|-------:|-------:|--------------:|-----:|----------:|:------------------------:|
 | 2  | test 1 1 | test 1 2 |     32 |      0 |      0 |             1 |    0 |         1 |           10%            |
 | 24 | test 2 1 | test 2 2 |      1 |      0 |      0 |             1 |    0 |         1 |           10%            |
+
 .
 <table class="table table-condensed table-responsive">
   <thead>
@@ -2050,6 +2185,7 @@ a definition in a block quote
 ```````````````````````````````` example Definition Lists: 1
 > Definition Term
 > :   definition item
+
 .
 <blockquote>
   <dl>
@@ -2065,6 +2201,7 @@ simple list
 ```````````````````````````````` example Definition Lists: 2
 Definition Term
 :   definition item
+
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2081,6 +2218,7 @@ Term 1
 
 Term 2
 :   Definition 2
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2101,6 +2239,7 @@ Term 2
 Term 3
 Term 4
 :   Definition 2
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2123,6 +2262,7 @@ Term 1
 Term 2
 :   Definition 3
 :   Definition 4
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2149,6 +2289,7 @@ Term 2
     Definition 3 line 2
 :   Definition 4 line 2 ...
     Definition 4 line 2
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2175,6 +2316,7 @@ Term 1
 Term 2
 
 :   Definition 2 (paragraph)
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2207,6 +2349,7 @@ Term 2
 
     Definition 1 paragraph 2 line 1 ...
     Definition 1 paragraph 2 line 2 (lazy)
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2269,6 +2412,7 @@ Term 4
     Definition 9 paragraph 2 line 1
 
 :   Definition 10 (no paragraph)
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2324,6 +2468,7 @@ inlines allowed
 ```````````````````````````````` example Definition Lists: 10
 Definition **Term**
 :   definition `item`
+
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2338,6 +2483,7 @@ inlines will be split
 Definition **Term
 Another** Definition Term
 :   definition `item`
+
 .
 <dl>
   <dt>Definition **Term</dt>
@@ -2354,6 +2500,7 @@ don't include preceding blank lines
 
 Definition Term
 :   definition item
+
 .
 <ul>
   <li>bullet item</li>
@@ -2376,6 +2523,7 @@ Definition **Term**
       * sub item
     > 
     > block quote
+
 .
 <dl>
   <dt>Definition <strong>Term</strong></dt>
@@ -2406,6 +2554,7 @@ Term 1
 Term 2
 
 :   Definition 2 (paragraph)
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2429,6 +2578,7 @@ Term 1
 
 Term 2
 :   Definition 2 (paragraph)
+
 .
 <dl>
   <dt>Term 1</dt>
@@ -2445,6 +2595,7 @@ Term 2
 Definition Term
 :   Definition of above term
 :   Another definition of above term
+
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2458,6 +2609,7 @@ Definition Term
 Definition Term
 :   Definition of above term
 :   Another definition of above term
+
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2471,6 +2623,7 @@ Definition Term
 Definition Term
 :   Definition of above term
     Another definition of above term
+
 .
 <dl>
   <dt>Definition Term</dt>
@@ -2488,6 +2641,7 @@ Change language class prefix
 ```text
 plain text
 ```
+
 .
 <pre><code class="text">plain text
 </code></pre>
@@ -2500,6 +2654,7 @@ empty, no info
 ```
 
 ```
+
 .
 <pre><code>
 </code></pre>
@@ -2512,6 +2667,7 @@ empty, no info, blank line follows
 ```
 
 ```
+
 .
 <pre><code>
 </code></pre>
@@ -2524,6 +2680,7 @@ empty, info
 ```info
 
 ```
+
 .
 <pre><code class="language-info">
 </code></pre>
@@ -2536,6 +2693,7 @@ empty, info, blank line follows
 ```info
 
 ```
+
 .
 <pre><code class="language-info">
 </code></pre>
@@ -2546,6 +2704,7 @@ empty, info, blank line follows
 `````java
 some back ticks in the ````code````
 `````
+
 .
 <pre><code class="java">some back ticks in the ````code````
 </code></pre>
@@ -2556,6 +2715,7 @@ some back ticks in the ````code````
 > `````java
 >     some back ticks in the ````code````
 > `````
+
 .
 <blockquote>
 <pre><code class="java">    some back ticks in the ````code````
@@ -2573,6 +2733,7 @@ some back ticks in the ````code````
   >   * sub-item
   >     
   > `````
+
 .
 <ul>
   <li>
@@ -2595,6 +2756,7 @@ some back ticks in the ````code````
   >     some back ticks in the ````code````
   >     * item
   >       * sub-item
+
 .
 <ul>
   <li>
@@ -2627,6 +2789,7 @@ code with emphasis preserved
 </body>
 </html>
 ```
+
 .
 <pre><code class="html">&lt;html&gt;
 &lt;body&gt;
@@ -2661,6 +2824,7 @@ sub
 </body>
 </html>
 ```
+
 .
 <pre><code class="html">&lt;html&gt;
 &lt;body&gt;
@@ -2682,6 +2846,7 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 1
 :heavy_check_mark:
+
 .
 <g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2689,6 +2854,7 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 2
 :heavy_check_mark:
+
 .
 <g-emoji fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2696,6 +2862,7 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 3
 :heavy_check_mark:
+
 .
 <img src="file:/Users/vlad/Library/Application Support/IdeaIC2017-1-EAP/idea-multimarkdown/emojis/heavy_check_mark.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
@@ -2703,6 +2870,7 @@ sub
 
 ```````````````````````````````` example Emoji Shortcuts: 4
 :heavy_check_mark:
+
 .
 <img src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" alt="emoji symbols:heavy_check_mark" height="20" width="20" align="absmiddle" />
 ````````````````````````````````
@@ -2714,6 +2882,7 @@ Infinite loop on unwrap
 
 ```````````````````````````````` example Issue Tests: 1
 :heavy_check_mark:
+
 .
 <g-emoji alias="heavy_check_mark" fallback-src="https://assets-cdn.github.com/images/icons/emoji/unicode/2714.png" ios-version="6.0">✔️</g-emoji>
 ````````````````````````````````
@@ -2726,6 +2895,7 @@ Text
 
 Heading
 =======
+
 .
 <p>Text&nbsp;</p>
 <h1>Heading</h1>
@@ -2739,6 +2909,7 @@ Text&nbsp;
 
 Heading
 =======
+
 .
 <p>Text&nbsp;</p>
 <h1>Heading</h1>
@@ -2749,6 +2920,7 @@ Headings need blank line
 
 ```````````````````````````````` example Issue Tests: 4
 **Attention!** Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+
 .
 <div class="warning">
   <strong>Attention!&nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
@@ -2760,6 +2932,7 @@ Headings need blank line
 
 ```````````````````````````````` example Issue Tests: 5
 **Attention!** Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+
 .
 <div class="warning">
   <strong>Attention!  &nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
@@ -2771,6 +2944,7 @@ Headings need blank line
 
 ```````````````````````````````` example(Issue Tests: 6) options(nbsp)
 **Attention!**&nbsp;Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+
 .
 <div class="warning">
   <strong>Attention!  &nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
@@ -2782,6 +2956,7 @@ Headings need blank line
 
 ```````````````````````````````` example(Issue Tests: 7) options(nbsp)
 **Attention!**&nbsp;Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple [form](https://tech.yandex.com/key/form.xml?service=trnsl).
+
 .
 <div class="warning">
   <strong>Attention!&nbsp;</strong>Starting from version 1.5, access to all API methods requires a free API key, which you can get by submitting a simple <a target="_blank" href="https://tech.yandex.com/key/form.xml?service=trnsl">form</a>.
@@ -2835,6 +3010,7 @@ public class HtmlToPdf_yahp {
   }
 }
 ```
+
 .
 <div class="howtocode"><pre>import java.io.File;
 import java.io.FileOutputStream;
@@ -2897,6 +3073,7 @@ see more
   * 
 
 * 
+
 .
 <div class="post-body">
   <header class="comment__header">
@@ -2991,6 +3168,7 @@ see more
 * 
 
 </menu> </footer>
+
 .
 <div class="post-body">
   <header class="comment__header">
@@ -3079,6 +3257,7 @@ suppress GitHub anchors and octicon svg
 ```````````````````````````````` example Issue Tests: 12
 TEST CASES
 ==========
+
 .
 <h1><a id="user-content-test-cases" class="anchor" href="#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
 ````````````````````````````````
@@ -3089,6 +3268,7 @@ suppress GitHub anchors and octicon svg
 ```````````````````````````````` example Issue Tests: 13
 TEST CASES
 ==========
+
 .
 <h1><a id="user-content-test-cases" class="anchor" href="file#test-cases" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>TEST CASES</h1>
 ````````````````````````````````
@@ -3129,6 +3309,7 @@ GitHub file list
 |   | [LICENSE-W3C-TEST](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-W3C-TEST "LICENSE-W3C-TEST")                                                    | [Added license for W3C tests, as requested on tests website.](https://github.com/danfickle/openhtmltopdf/commit/17e53385724025576684290a62cc05c3183b163e "Added license for W3C tests, as requested on tests website.")                                                                                                                                                                                                                                                                                                                               | 10 years ago |
 |   | [README.md](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/README.md "README.md")                                                                         | [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") | 22 days ago  |
 |   | [pom.xml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/pom.xml "pom.xml")                                                                               | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
+
 .
 <meta charset='utf-8'>
 <div class="commit-tease js-details-container" style="box-sizing: border-box; position: relative; padding: 10px; margin-bottom: -1px; font-size: 13px; line-height: 20px; color: rgb(104, 119, 125); background-color: rgb(242, 249, 252); border: 1px solid rgb(201, 230, 242); border-radius: 3px 3px 0px 0px; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
@@ -3380,6 +3561,9 @@ Primarily so we stay compatible with Java 7." style="box-sizing: border-box; bac
   * [What you didn't know you were missing](https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing)
   * [Auto Indent Lines after Move Lines Up/Down](https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown)
   * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
+
+<br />
+
 .
 <ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">
   <li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li>
@@ -3405,6 +3589,9 @@ Primarily so we stay compatible with Java 7." style="box-sizing: border-box; bac
   * [What you didn't know you were missing](https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing)
   * [Auto Indent Lines after Move Lines Up/Down](https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown)
   * [Auto Line Selections](https://github.com/vsch/MissingInActions#auto-line-selections)
+
+<br />
+
 .
 <ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 16px; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#version-083---bug-fix-and-improvement-release" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.3 - Bug Fix and Improvement Release</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-082---enhanced-paste-from-history" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.2 - Enhanced Paste From History</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#version-080---mia-has-come-of-age" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Version 0.8.0 - Mia has come of age!</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#why-do-i-need-mia" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Why Do I Need Mia?</a><ul style="box-sizing: border-box; padding-left: 2em; margin-top: 0px; margin-bottom: 0px;"><li style="box-sizing: border-box;"><a href="https://github.com/vsch/MissingInActions#what-you-didnt-know-you-were-missing" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">What you didn't know you were missing</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-indent-lines-after-move-lines-updown" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Indent Lines after Move Lines Up/Down</a></li><li style="box-sizing: border-box; margin-top: 0.25em;"><a href="https://github.com/vsch/MissingInActions#auto-line-selections" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;">Auto Line Selections</a></li></ul></li></ul><br class="Apple-interchange-newline">
 ````````````````````````````````
@@ -3415,6 +3602,9 @@ don't create a multi-line image url if no new line after ?
 ```````````````````````````````` example Issue Tests: 18
 [![](https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?)](https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?)Missing In Actions
 ===================================================================================================================================================================================================
+
+<br />
+
 .
 <meta charset='utf-8'><h1 style="box-sizing: border-box; font-size: 2em; margin-top: 0px !important; margin-right: 0px; margin-bottom: 16px; margin-left: 0px; font-weight: 600; line-height: 1.25; padding-bottom: 0.3em; border-bottom: 1px solid rgb(238, 238, 238); position: relative; padding-right: 0.8em; cursor: pointer; color: rgb(51, 51, 51); font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Helvetica, Arial, sans-serif, &quot;Apple Color Emoji&quot;, &quot;Segoe UI Emoji&quot;, &quot;Segoe UI Symbol&quot;; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;"><a href="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" target="_blank" style="box-sizing: border-box; background-color: transparent; color: rgb(64, 120, 192); text-decoration: none;"><img src="https://github.com/vsch/MissingInActions/raw/master/resources/icons/Mia_logo@2x.png?" height="32" width="54" border="0" align="absmiddle" style="box-sizing: content-box; border-style: none; max-width: 100%; background-color: rgb(255, 255, 255);"></a>Missing In Actions</h1>
 <br class="Apple-interchange-newline">
@@ -3428,6 +3618,7 @@ don't create a multi-line image url if no new line after ?
     BAR, // I am also a comment
   }
 ```
+
 .
 <pre class="wikicode prettyprint prettyprinted"><span class="pln">  </span><span class="kwd">enum</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">TestFormatter</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">    FOO</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am a comment</span><br><span class="pln">    BAR</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am also a comment</span><br><span class="pln">  </span><span class="pun">}</span></pre>
 ````````````````````````````````
@@ -3439,6 +3630,7 @@ don't create a multi-line image url if no new line after ?
     FOO, // I am a comment BAR, // I am also a comment
   }
 ```
+
 .
 <pre class="wikicode prettyprint prettyprinted"><span class="pln">  </span><span class="kwd">enum</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">TestFormatter</span><span class="pln"> </span><span class="pun">{</span><br><span class="pln">    FOO</span><span class="pun">,</span><span class="pln"> </span><span class="com">// I am a comment BAR, // I am also a comment</span><br><span class="pln">  </span><span class="pun">}</span></pre>
 ````````````````````````````````
@@ -3540,6 +3732,7 @@ Feature
 Feature Group
 :   [KT-2637](/issue/KT-2637)
     --- Inline variable/constant refactoring
+
 .
 <body class="chrome release-notes ">
 <noscript>
@@ -3748,6 +3941,7 @@ info("End of the response");
 …  
 –  
 —
+
 .
 &ldquo;<br>
 &rdquo;<br>
@@ -3791,6 +3985,7 @@ info("End of the response");
 ...  
 --  
 ---
+
 .
 &ldquo;<br>
 &rdquo;<br>
@@ -3834,6 +4029,7 @@ info("End of the response");
 …  
 –  
 —
+
 .
 &ldquo;<br>
 &rdquo;<br>
@@ -3877,6 +4073,7 @@ info("End of the response");
 ...  
 --  
 ---
+
 .
 &ldquo;<br>
 &rdquo;<br>
@@ -3908,6 +4105,7 @@ Issue #MN-408
 * 
 * test
 * 
+
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -3952,6 +4150,7 @@ Issue #MN-408
 * Vectors
 * 
 * Oligos
+
 .
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
@@ -4000,6 +4199,7 @@ Missing link text
 
 ```````````````````````````````` example Issue: 1
 [Vladimir Reznichenko](https://intellij-support.jetbrains.com/hc/en-us/profiles/1010800390-Vladimir-Reznichenko)
+
 .
 <meta charset='utf-8'><a class="_color-black" href="https://intellij-support.jetbrains.com/hc/en-us/profiles/1010800390-Vladimir-Reznichenko" style="background-color: rgb(255, 255, 255); margin: 0px; padding: 0px; border: 0px; font-size: 14px; vertical-align: baseline; cursor: pointer; text-decoration: none; color: rgb(22, 22, 22); font-family: &quot;Gotham SSm A&quot;, &quot;Gotham SSm B&quot;, Helvetica, Arial, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: bold; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">Vladimir Reznichenko</a>
 ````````````````````````````````
@@ -4020,6 +4220,7 @@ Issue #138, HTML to Markdown converter missing list end for two consecutive list
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)
 4. [Another Example.com](http://www.example.com)
+
 .
 <p><strong>Ordered</strong></p>
 <ol>
@@ -4049,6 +4250,7 @@ end on double blank line
 2. [Google](http://www.google.com)
 3. [Yahoo!](http://www.yahoo.com)
 4. [Another Example.com](http://www.example.com)
+
 .
 <p><strong>Ordered</strong></p>
 <ol>
@@ -4062,6 +4264,18 @@ end on double blank line
   <li><a href="http://www.yahoo.com">Yahoo!</a></li>
   <li><a href="http://www.example.com">Another Example.com</a></li>
 </ol>
+````````````````````````````````
+
+
+## Issue  149
+
+Issue #149
+
+```````````````````````````````` example Issue  149: 1
+.
+<div>
+<strong>→</strong>
+</div>
 ````````````````````````````````
 
 

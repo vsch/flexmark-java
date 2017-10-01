@@ -14,3 +14,5 @@ target/
 /lib/autolink-0.6.0.jar
 /lib/autolink-0.6.0-sources.jar
 /flexmark-docx-converter/src/test/resources/test_cases/
+/flexmark-docx-converter/src/test/resources/docx_converter_ast_spec/
+/flexmark-docx-converter/src/test/resources/docx_user_ast_spec/

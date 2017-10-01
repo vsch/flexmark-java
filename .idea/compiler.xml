@@ -20,6 +20,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="flexmark" />
+        <module name="flexmark-all" />
+        <module name="flexmark-docx-converter" />
         <module name="flexmark-ext-abbreviation" />
         <module name="flexmark-ext-anchorlink" />
         <module name="flexmark-ext-aside" />
@@ -28,27 +30,75 @@
         <module name="flexmark-ext-emoji" />
         <module name="flexmark-ext-escaped-character" />
         <module name="flexmark-ext-footnotes" />
+        <module name="flexmark-ext-gfm-issues" />
         <module name="flexmark-ext-gfm-strikethrough" />
         <module name="flexmark-ext-gfm-tables" />
         <module name="flexmark-ext-gfm-tasklist" />
+        <module name="flexmark-ext-gfm-users" />
         <module name="flexmark-ext-ins" />
         <module name="flexmark-ext-jekyll-front-matter" />
+        <module name="flexmark-ext-jekyll-tag" />
         <module name="flexmark-ext-spec-example" />
+        <module name="flexmark-ext-superscript" />
         <module name="flexmark-ext-tables" />
         <module name="flexmark-ext-toc" />
         <module name="flexmark-ext-typographic" />
         <module name="flexmark-ext-wikilink" />
+        <module name="flexmark-ext-xwiki-macros" />
         <module name="flexmark-ext-yaml-front-matter" />
         <module name="flexmark-ext-zzzzzz" />
+        <module name="flexmark-formatter" />
+        <module name="flexmark-html-parser" />
         <module name="flexmark-integration-test" />
         <module name="flexmark-jira-converter" />
+        <module name="flexmark-pdf-converter" />
+        <module name="flexmark-profile-pegdown" />
         <module name="flexmark-test-suite" />
         <module name="flexmark-test-util" />
         <module name="flexmark-util" />
         <module name="flexmark-youtrack-converter" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.6" />
+    <bytecodeTargetLevel target="1.6">
+      <module name="flexmark" target="6" />
+      <module name="flexmark-all" target="6" />
+      <module name="flexmark-docx-converter" target="6" />
+      <module name="flexmark-ext-abbreviation" target="6" />
+      <module name="flexmark-ext-anchorlink" target="6" />
+      <module name="flexmark-ext-aside" target="6" />
+      <module name="flexmark-ext-autolink" target="6" />
+      <module name="flexmark-ext-definition" target="6" />
+      <module name="flexmark-ext-emoji" target="6" />
+      <module name="flexmark-ext-escaped-character" target="6" />
+      <module name="flexmark-ext-footnotes" target="6" />
+      <module name="flexmark-ext-gfm-issues" target="6" />
+      <module name="flexmark-ext-gfm-strikethrough" target="6" />
+      <module name="flexmark-ext-gfm-tables" target="6" />
+      <module name="flexmark-ext-gfm-tasklist" target="6" />
+      <module name="flexmark-ext-gfm-users" target="6" />
+      <module name="flexmark-ext-ins" target="6" />
+      <module name="flexmark-ext-jekyll-front-matter" target="6" />
+      <module name="flexmark-ext-jekyll-tag" target="6" />
+      <module name="flexmark-ext-spec-example" target="6" />
+      <module name="flexmark-ext-superscript" target="6" />
+      <module name="flexmark-ext-tables" target="6" />
+      <module name="flexmark-ext-toc" target="6" />
+      <module name="flexmark-ext-typographic" target="6" />
+      <module name="flexmark-ext-wikilink" target="6" />
+      <module name="flexmark-ext-xwiki-macros" target="6" />
+      <module name="flexmark-ext-yaml-front-matter" target="6" />
+      <module name="flexmark-ext-zzzzzz" target="6" />
+      <module name="flexmark-formatter" target="6" />
+      <module name="flexmark-html-parser" target="6" />
+      <module name="flexmark-integration-test" target="6" />
+      <module name="flexmark-java" target="6" />
+      <module name="flexmark-jira-converter" target="6" />
+      <module name="flexmark-pdf-converter" target="6" />
+      <module name="flexmark-profile-pegdown" target="6" />
+      <module name="flexmark-test-util" target="6" />
+      <module name="flexmark-util" target="6" />
+      <module name="flexmark-youtrack-converter" target="6" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="PREFER_TARGET_JDK_COMPILER" value="false" />

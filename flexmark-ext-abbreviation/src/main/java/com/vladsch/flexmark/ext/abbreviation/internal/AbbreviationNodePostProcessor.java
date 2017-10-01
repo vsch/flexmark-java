@@ -50,29 +50,6 @@ public class AbbreviationNodePostProcessor extends NodePostProcessor {
                     if (sb.length() > 0) sb.append("|");
 
                     if (Character.isLetterOrDigit(abbr.charAt(0))) sb.append("\\b");
-                    // Too simplistic. Typographic nodes need to be handled separately since they prefix/suffix text
-                    //int length = abbr.length();
-                    //int lastPos = 0;
-                    //Matcher matcher = QUOTES.matcher(abbr);
-                    //
-                    //while (lastPos < length && matcher.find()) {
-                    //    int pos = matcher.start();
-                    //    if (lastPos < pos) {
-                    //        sb.append("\\Q").append(abbr, lastPos, pos).append("\\E");
-                    //    }
-                    //
-                    //    char c = matcher.group().charAt(0);
-                    //    if (SINGLE_QUOTES.indexOf(c) != -1) {
-                    //        sb.append("[").append(SINGLE_QUOTES).append("]");
-                    //    } else if (DOUBLE_QUOTES.indexOf(c) != -1) {
-                    //        sb.append("[").append(DOUBLE_QUOTES).append("]");
-                    //    }
-                    //
-                    //    lastPos = matcher.end();
-                    //}
-                    //if (lastPos < length) {
-                    //    sb.append("\\Q").append(abbr, lastPos, length).append("\\E");
-                    //}
                     sb.append("\\Q").append(abbr).append("\\E");
                     if (Character.isLetterOrDigit(abbr.charAt(abbr.length() - 1))) sb.append("\\b");
                 }

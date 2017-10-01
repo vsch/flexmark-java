@@ -175,9 +175,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
+* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions.md#docx-converter)
   using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
-  [Customizing Docx Rendering](../../wiki/Customizing-Docx-Rendering)
+  [Customizing Docx Rendering](https://github.com/vsch/flexmark-java/wiki/Customizing-Docx-Rendering)
 
   Development of this module was sponsored by
   [Johner Institut GmbH](http://www.johner-institut.de/).
@@ -186,8 +186,8 @@ custom node renderer if you need to override the generated link HTML.
   selecting a specific spec version options.
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
-  usual. See:
-  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java#L94-L132)
+  usual. 
+  [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for
   parsing and rendering `#123` and `@user-name` respectively.

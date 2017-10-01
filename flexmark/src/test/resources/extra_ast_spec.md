@@ -3418,6 +3418,47 @@ Document[0, 36]
 ````````````````````````````````
 
 
+non-blocks cannot start HTML block
+
+```````````````````````````````` example(Inline HTML: 2) options(html-block-start-only-on-block-tags)
+Best regards,
+
+<br />
+Vladimir.
+.
+<p>Best regards,</p>
+<p><br />
+Vladimir.</p>
+.
+Document[0, 31]
+  Paragraph[0, 14] isTrailingBlankLine
+    Text[0, 13] chars:[0, 13, "Best  … ards,"]
+  Paragraph[15, 31]
+    HtmlInline[15, 21] chars:[15, 21, "<br />"]
+    SoftLineBreak[21, 22]
+    Text[22, 31] chars:[22, 31, "Vladimir."]
+````````````````````````````````
+
+
+non-blocks start HTML block
+
+```````````````````````````````` example Inline HTML: 3
+Best regards,
+
+<br />
+Vladimir.
+.
+<p>Best regards,</p>
+<br />
+Vladimir.
+.
+Document[0, 32]
+  Paragraph[0, 14] isTrailingBlankLine
+    Text[0, 13] chars:[0, 13, "Best  … ards,"]
+  HtmlBlock[15, 32]
+````````````````````````````````
+
+
 ## GFM compatibility
 
 ### GFM Emphasis
@@ -6083,6 +6124,18 @@ Document[0, 66]
 .
 Document[0, 54]
   HtmlBlock[0, 54]
+````````````````````````````````
+
+
+```````````````````````````````` example(Deep HTML Parsing: 9) options(deep-html-parsing)
+<br>some text
+.
+<p><br>some text</p>
+.
+Document[0, 13]
+  Paragraph[0, 13]
+    HtmlInline[0, 4] chars:[0, 4, "<br>"]
+    Text[4, 13] chars:[4, 13, "some text"]
 ````````````````````````````````
 
 

@@ -6,6 +6,9 @@ flexmark-java
 [TOC]: # " "
 
 - [To Do](#to-do)
+    - [Docx Converter](#docx-converter)
+- [0.27.4](#0274)
+- [0.27.2](#0272)
 - [0.27.0](#0270)
 - [0.26.6](#0266)
 - [0.26.4](#0264)
@@ -183,27 +186,17 @@ flexmark-java
       content without changing the table syntax because the macro expansion would be done during
       rendering not parsing.
 
-&nbsp;</details>
-
-0.27.0
-------
-
-* [ ] Fix: superscript is now allowed without regard for surrounding characters. The markers are
-      rare enough in text not to warrant concern. If you don't want it treated as special,
-      escape it.
+### Docx Converter
 
 * [ ] Add: `DocxRenderer` options:
   * [ ] `TABLE_WIDTH_TYPE` and `TABLE_WIDTH_VALUE` for table width control
-  * [ ] `BULLET_LIST_NUM_ID` and `ORDERED_LIST_NUM_ID` for list style ids
-
-* [ ] Add: default link resolvers to handle `URL` relative paths and file system relative paths
 
 * [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
       handler.
 
 * [ ] Add: finish missing elements from docx converter
   * [x] Tables
-    * [ ] Footnootes
+    * [ ] Footnotes
     * [ ] Table of Contents
     * [x] multiple header rows, column spans, markdown alignments
     * [x] Table captions are not yet supported by docx4j API. Captions are converted to
@@ -221,10 +214,52 @@ flexmark-java
     * [x] Fenced Code
     * [x] Block Quotes
     * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
-
   * [x] Paragraph
   * [x] Headings
   * [x] Bold and italic text
+
+&nbsp;</details>
+
+0.27.4
+------
+
+* Fix: `flexmark-html-parser` to generate markdown that will render closer to the HTML being
+  converted.
+  * now will allow 1 trailing blank line when using default parse methods.
+  * `FlexmarkHtmlParser.DIV_AS_PARAGRAPH` default `false`, when true will treat `<div>` wrapped
+    text as if it was `<p>` wrapped by adding a blank line after the text.
+  * `FlexmarkHtmlParser.BR_AS_PARA_BREAKS` default `true`, when true `<br>` encountered at the
+    beginning of a new line will be treated as a paragraph break
+  * `FlexmarkHtmlParser.BR_AS_EXTRA_BLANK_LINES` default `true`, when true `<br>` encountered
+    after a blank line is already in output or current output ends in `<br>` then will insert an
+    inline HTML `<br>` into output to create extra blank lines in rendered result.
+  * now does not force spaces around subscript and superscript markers
+
+* Fix: `Ins` and `Superscript` nodes were marked `DoNotDecorate` which prevented abbreviation
+  processing on text contained within them.
+
+* Add: `Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS`, default for deep html parser is `true` and
+  regular parser `false`, but you can set your desired specific value and override the default.
+  When `true` will not start an HTML block on a non-block tag, when `false` any tag will start
+  an HTML block.
+
+0.27.2
+------
+
+* Fix: #158, HTML comments followed by plain text parse as HTML comment blocks. Add
+  `Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE` default `false`, when true html comments parse as
+  html block only when they are contained in one line and have no other text following them.
+
+* Fix: #149, StringIndexOutOfBoundsException when parsing "<strong>\t</strong>"
+
+0.27.0
+------
+
+* Fix: superscript is now allowed without regard for surrounding characters. The markers are
+  rare enough in text not to warrant concern. If you don't want it treated as special, escape
+  it.
+
+* Add: default link resolvers to handle `URL` relative paths and file system relative paths
 
 * Fix: add `<strike>` to HTML Parser as equivalent to `<del>` for OfficeLibre compatibility
 

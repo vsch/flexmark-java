@@ -7,7 +7,10 @@ import com.vladsch.flexmark.parser.block.*;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.internal.HtmlDeepParser.HtmlMatch.COMMENT;
@@ -89,7 +92,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
     private final boolean myHtmlBlockDeepParseIndentedCodeInterrupts;
     //private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
 
-    private HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
+    HtmlBlockParser(DataHolder options, Pattern closingPattern, boolean isComment, HtmlDeepParser deepParser) {
         this.closingPattern = closingPattern;
         this.block = isComment ? new HtmlCommentBlock() : new HtmlBlock();
         this.deepParser = deepParser;
@@ -271,6 +274,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
         private final boolean myHtmlBlockDeepParser;
         private final boolean myHtmlBlockDeepParseNonBlock;
         private final boolean myHtmlBlockDeepParseFirstOpenTagOnOneLine;
+        private final boolean myHtmlBlockCommentOnlyFullLine;
+        private final boolean myHtmlBlockStartOnlyOnBlockTags;
 
         private BlockFactory(DataHolder options) {
             super(options);
@@ -278,6 +283,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
             this.myHtmlBlockDeepParser = options.get(Parser.HTML_BLOCK_DEEP_PARSER);
             this.myHtmlBlockDeepParseNonBlock = options.get(Parser.HTML_BLOCK_DEEP_PARSE_NON_BLOCK);
             this.myHtmlBlockDeepParseFirstOpenTagOnOneLine = options.get(Parser.HTML_BLOCK_DEEP_PARSE_FIRST_OPEN_TAG_ON_ONE_LINE);
+            this.myHtmlBlockCommentOnlyFullLine = options.get(Parser.HTML_BLOCK_COMMENT_ONLY_FULL_LINE);
+            this.myHtmlBlockStartOnlyOnBlockTags = options.get(Parser.HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS);
         }
 
         @Override
@@ -288,7 +295,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
             if (state.getIndent() < 4 && line.charAt(nextNonSpace) == '<' && !(matchedBlockParser.getBlockParser() instanceof HtmlBlockParser)) {
                 if (myHtmlBlockDeepParser) {
                     HtmlDeepParser deepParser = new HtmlDeepParser();
-                    deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), true, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
+                    deepParser.parseHtmlChunk(line.subSequence(nextNonSpace, line.length()), myHtmlBlockStartOnlyOnBlockTags, myHtmlBlockDeepParseNonBlock, myHtmlBlockDeepParseFirstOpenTagOnOneLine);
                     if (deepParser.hadHtml()) {
                         // have our html block start
                         if (((deepParser.getHtmlMatch() == OPEN_TAG || (!myHtmlCommentBlocksInterruptParagraph && deepParser.getHtmlMatch() == COMMENT)) && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
@@ -299,8 +306,8 @@ public class HtmlBlockParser extends AbstractBlockParser {
                     }
                 } else {
                     for (int blockType = 1; blockType <= 7; blockType++) {
-                        // Type 7 can not interrupt a paragraph
-                        if (blockType == 7 && matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph) {
+                        // Type 7 can not interrupt a paragraph or may not start a block altogether
+                        if (blockType == 7 && (myHtmlBlockStartOnlyOnBlockTags || matchedBlockParser.getBlockParser().getBlock() instanceof Paragraph)) {
                             continue;
                         }
 
@@ -310,14 +317,25 @@ public class HtmlBlockParser extends AbstractBlockParser {
 
                         Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];
                         Pattern closer = myPatterns.BLOCK_PATTERNS[blockType][1];
-                        boolean matches = opener.matcher(line.subSequence(nextNonSpace, line.length())).find();
+                        final Matcher matcher = opener.matcher(line.subSequence(nextNonSpace, line.length()));
+                        boolean matches = matcher.find();
 
                         // TEST: non-interrupting of paragraphs by HTML comments
                         if (matches && (myHtmlCommentBlocksInterruptParagraph || blockType != myPatterns.COMMENT_PATTERN_INDEX || !(matchedBlockParser.getBlockParser() instanceof ParagraphParser))) {
+                            // Issue #158, HTML Comment followed by text
+                            if (blockType == myPatterns.COMMENT_PATTERN_INDEX && myHtmlBlockCommentOnlyFullLine) {
+                                final Matcher endMatcher = myPatterns.BLOCK_PATTERNS[myPatterns.COMMENT_PATTERN_INDEX][1].matcher(line.subSequence(matcher.end(), line.length()));
+                                if (endMatcher.find()) {
+                                    // see if nothing follows
+                                    BasedSequence trailing = line.subSequence(endMatcher.end(), line.length()).trim();
+                                    if (!trailing.equals("-->")) {
+                                        return BlockStart.none();
+                                    }
+                                }
+                            }
                             return BlockStart.of(new HtmlBlockParser(state.getProperties(), closer, blockType == myPatterns.COMMENT_PATTERN_INDEX, null)).atIndex(state.getIndex());
                         }
                     }
-
                 }
             }
             return BlockStart.none();

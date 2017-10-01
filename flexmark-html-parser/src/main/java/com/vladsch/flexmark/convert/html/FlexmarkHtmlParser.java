@@ -48,6 +48,9 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Boolean> TABLE_LEAD_TRAIL_PIPES = TableFormatOptions.LEAD_TRAIL_PIPES;
     public static final DataKey<Boolean> TABLE_SPACE_AROUND_PIPES = TableFormatOptions.SPACE_AROUND_PIPES;
     public static final DataKey<Boolean> LISTS_END_ON_DOUBLE_BLANK = new DataKey<Boolean>("LISTS_END_ON_DOUBLE_BLANK", false);
+    public static final DataKey<Boolean> DIV_AS_PARAGRAPH = new DataKey<Boolean>("DIV_AS_PARAGRAPH", false);
+    public static final DataKey<Boolean> BR_AS_PARA_BREAKS = new DataKey<Boolean>("BR_AS_PARA_BREAKS", true);
+    public static final DataKey<Boolean> BR_AS_EXTRA_BLANK_LINES = new DataKey<Boolean>("BR_AS_EXTRA_BLANK_LINES", true);
 
     private static final Map<Object, CellAlignment> tableCellAlignments = new LinkedHashMap<Object, CellAlignment>();
     static {
@@ -208,7 +211,7 @@ public class FlexmarkHtmlParser {
      * @return resulting markdown string
      */
     public static String parse(String html) {
-        return parse(html, 0);
+        return parse(html, 1);
     }
 
     /**
@@ -444,7 +447,7 @@ public class FlexmarkHtmlParser {
                 addSpaceBefore = !(out.isPendingEOL() || out.isPendingSpace() || out.getModCount() == 0);
             }
 
-            if ("\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
+            if (!text.isEmpty() && "\u00A0 \t\n".indexOf(text.charAt(text.length() - 1)) != -1) {
                 appendAfter = prepareText(text.substring(text.length() - 1));
                 text = text.substring(0, text.length() - 1);
             } else if (text.endsWith("&nbsp;")) {
@@ -543,7 +546,30 @@ public class FlexmarkHtmlParser {
         } else {
             int options = out.getOptions();
             out.setOptions(options & ~(FormattingAppendable.SUPPRESS_TRAILING_WHITESPACE | FormattingAppendable.COLLAPSE_WHITESPACE));
-            out.repeat(' ', 2).line();
+            if (out.getPendingEOL() == 0) {
+                // hard break
+                out.repeat(' ', 2).line();
+            } else {
+                if (out.getPendingEOL() == 1) {
+                    final String s = out.getAppendable().toString();
+                    if (!s.endsWith("<br />")) {
+                        // this is a paragraph break
+                        if (myOptions.brAsParaBreaks) {
+                            out.blankLine();
+                        }
+                    } else {
+                        // this is blank line insertion via <br />
+                        if (myOptions.brAsExtraBlankLines) {
+                            out.append("<br />").line();
+                        }
+                    }
+                } else {
+                    // this is blank line insertion via <br />
+                    if (myOptions.brAsExtraBlankLines) {
+                        out.append("<br />").line();
+                    }
+                }
+            }
             out.setOptions(options);
         }
         return true;
@@ -746,7 +772,7 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "~", true);
+            wrapTextNodes(out, element, "~", false);
         }
         return true;
     }
@@ -756,7 +782,7 @@ public class FlexmarkHtmlParser {
         if (!myOptions.preCodePreserveEmphasis && out.isPreFormatted()) {
             wrapTextNodes(out, element, "", false);
         } else {
-            wrapTextNodes(out, element, "^", true);
+            wrapTextNodes(out, element, "^", false);
         }
         return true;
     }
@@ -892,7 +918,7 @@ public class FlexmarkHtmlParser {
 
         final Element previousElementSibling = element.previousElementSibling();
         final String tag = previousElementSibling == null ? null : previousElementSibling.tagName().toUpperCase();
-        if (tag != null && tag.equals(element.tagName().toUpperCase()) &&  (tag.equals("UL") || tag.equals("OL"))) {
+        if (tag != null && tag.equals(element.tagName().toUpperCase()) && (tag.equals("UL") || tag.equals("OL"))) {
             if (myOptions.listsEndOnDoubleBlank) {
                 out.blankLine(2);
             } else {
@@ -1007,7 +1033,8 @@ public class FlexmarkHtmlParser {
         // unwrap and process content
         skip();
         processHtmlTree(out, element);
-        out.append('\n');
+        out.line();
+        if (myOptions.divAsParagraph) out.blankLine();
         return true;
     }
 

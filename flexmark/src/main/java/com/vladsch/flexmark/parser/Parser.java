@@ -118,6 +118,13 @@ public class Parser implements IParse {
     // deep HTML block parsing
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSER = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSER", false);
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
+    public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<Boolean>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
+    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", new DataValueFactory<Boolean>() {
+        @Override
+        public Boolean create(final DataHolder value) {
+            return HTML_BLOCK_DEEP_PARSER.getFrom(value);
+        }
+    });
 
     /**
      * Blank line interrupts HTML block when not in raw tag, otherwise only when closed

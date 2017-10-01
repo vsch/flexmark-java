@@ -640,7 +640,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             // inner blocks handle rendering
             context.renderChildren(node);
         } else {
-            renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+            renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks, false);
         }
 
         if (context.getHtmlOptions().sourceWrapHtmlBlocks) {
@@ -651,36 +651,41 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private void render(HtmlCommentBlock node, NodeRendererContext context, HtmlWriter html) {
-        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks, false);
     }
 
     private void render(HtmlInnerBlock node, NodeRendererContext context, HtmlWriter html) {
-        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks);
+        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlBlocks, context.getHtmlOptions().escapeHtmlBlocks, false);
     }
 
     private void render(HtmlInnerBlockComment node, NodeRendererContext context, HtmlWriter html) {
-        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks);
+        renderHtmlBlock(node, context, html, context.getHtmlOptions().suppressHtmlCommentBlocks, context.getHtmlOptions().escapeHtmlCommentBlocks, false);
     }
 
-    public void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape) {
+    public void renderHtmlBlock(HtmlBlockBase node, NodeRendererContext context, HtmlWriter html, boolean suppress, boolean escape, final boolean trimSpaces) {
         if (suppress) return;
 
         if (node instanceof HtmlBlock)
             html.line();
 
+        String normalizeEOL = node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL();
+
+        if (trimSpaces) {
+            normalizeEOL = normalizeEOL.trim();
+        }
+
         if (escape) {
             if (node instanceof HtmlBlock) {
-                String normalizeEOL = node.getContentChars().normalizeEOL();
                 if (normalizeEOL.length() > 0 && normalizeEOL.charAt(normalizeEOL.length() - 1) == '\n') {
                     // leave off the trailing EOL
                     normalizeEOL = normalizeEOL.substring(0, normalizeEOL.length() - 1);
                 }
                 html.raw("<p>").text(normalizeEOL).raw("</p>");
             } else {
-                html.text(node.getChars().normalizeEOL());
+                html.text(normalizeEOL);
             }
         } else {
-            html.rawPre((node instanceof HtmlBlock ? node.getContentChars().normalizeEOL() : node.getChars().normalizeEOL()));
+            html.rawPre((normalizeEOL));
         }
 
         if (node instanceof HtmlBlock) {

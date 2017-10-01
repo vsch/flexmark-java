@@ -1,7 +1,7 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
     <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="false" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
-      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="false" showSelectionInPreview="true" openRemoteLinks="true">
+      <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
         </PanelProvider>
@@ -19,13 +19,13 @@
           <option name="FOOTNOTES" value="true" />
           <option name="HARDWRAPS" value="false" />
           <option name="HTML_DEEP_PARSER" value="false" />
-          <option name="INSERTED" value="true" />
+          <option name="INSERTED" value="false" />
           <option name="QUOTES" value="false" />
           <option name="RELAXEDHRULES" value="true" />
           <option name="SMARTS" value="false" />
           <option name="STRIKETHROUGH" value="true" />
-          <option name="SUBSCRIPT" value="true" />
-          <option name="SUPERSCRIPT" value="true" />
+          <option name="SUBSCRIPT" value="false" />
+          <option name="SUPERSCRIPT" value="false" />
           <option name="SUPPRESS_HTML_BLOCKS" value="false" />
           <option name="SUPPRESS_INLINE_HTML" value="false" />
           <option name="TABLES" value="true" />

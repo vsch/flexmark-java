@@ -2,13 +2,12 @@ package com.vladsch.flexmark.ext.ins;
 
 import com.vladsch.flexmark.ast.CustomNode;
 import com.vladsch.flexmark.ast.DelimitedNode;
-import com.vladsch.flexmark.ast.DoNotDecorate;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Ins node
  */
-public class Ins extends CustomNode implements DelimitedNode, DoNotDecorate {
+public class Ins extends CustomNode implements DelimitedNode {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
