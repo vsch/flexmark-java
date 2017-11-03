@@ -1038,8 +1038,21 @@ public interface BasedSequence extends CharSequence, Comparable<CharSequence> {
     BasedSequence[] split(CharSequence delimiter, int limit, int flags);
     BasedSequence[] split(CharSequence delimiter, int limit, int flags, String trimChars);
 
+    /**
+     * Get indices of all occurrences of a sequence
+     * @param s sequence whose indices to find
+     * @return array of indices
+     */
     int[] indexOfAll(CharSequence s);
+
+    /**
+     * Replace all occurrences of one sequence with another
+     * @param find sequence to find
+     * @param replace replacement sequence
+     * @return array of indices
+     */
     BasedSequence replace(CharSequence find, CharSequence replace);
+
     BasedSequence appendTo(StringBuilder out);
     BasedSequence appendTo(StringBuilder out, int start);
     BasedSequence appendTo(StringBuilder out, int start, int end);

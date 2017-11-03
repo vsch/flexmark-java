@@ -1264,15 +1264,15 @@ public abstract class BasedSequenceImpl implements BasedSequence {
     public BasedSequence prefixOf(final BasedSequence other) {
         if (getBase() != other.getBase()) return SubSequence.NULL;
         else if (other.getStartOffset() <= getStartOffset()) return subSequence(0, 0);
-        else if (other.getStartOffset() >= getEndOffset()) return subSequence(0, 0);
+        else if (other.getStartOffset() >= getEndOffset()) return this;
         else return this.baseSubSequence(getStartOffset(), other.getStartOffset());
     }
 
     @Override
     public BasedSequence suffixOf(final BasedSequence other) {
         if (getBase() != other.getBase()) return SubSequence.NULL;
-        else if (other.getStartOffset() <= getStartOffset()) return subSequence(length(), length());
-        else if (other.getStartOffset() >= getEndOffset()) return subSequence(length(), length());
+        else if (other.getEndOffset() >= getEndOffset()) return subSequence(length(), length());
+        else if (other.getEndOffset() <= getStartOffset()) return this;
         else return this.baseSubSequence(other.getEndOffset(), getEndOffset());
     }
 
@@ -1466,12 +1466,13 @@ public abstract class BasedSequenceImpl implements BasedSequence {
         int lastPos = 0;
         while (i < iMax) {
             int pos = indices[i++];
-            int endPos = pos == -1 ? length() : pos;
-
-            if (lastPos < endPos) appendTo(sb, lastPos, pos);
-            if (pos == -1) break;
+            if (lastPos < pos) appendTo(sb, lastPos, pos);
             lastPos = pos + find.length();
             basedReplace.appendTo(sb);
+        }
+
+        if (lastPos < length()) {
+            appendTo(sb, lastPos, length());
         }
 
         return CharSubSequence.of(sb);

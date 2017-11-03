@@ -1,7 +1,5 @@
 package com.vladsch.flexmark.ext.typographic.internal;
 
-import com.vladsch.flexmark.parser.delimiter.DelimiterRun;
-
 public class AngleQuoteDelimiterProcessor extends QuoteDelimiterProcessorBase {
     public AngleQuoteDelimiterProcessor(final TypographicOptions options) {
         super(options, '<', '>', options.angleQuoteOpen, options.angleQuoteClose, options.angleQuoteUnmatched);
@@ -13,12 +11,12 @@ public class AngleQuoteDelimiterProcessor extends QuoteDelimiterProcessorBase {
     }
 
     @Override
-    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return true;
     }
 
     @Override
-    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+    public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
         return true;
     }
 

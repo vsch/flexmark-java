@@ -7,6 +7,8 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.2](#0282)
+- [0.28.0](#0280)
 - [0.27.4](#0274)
 - [0.27.2](#0272)
 - [0.27.0](#0270)
@@ -218,10 +220,42 @@ flexmark-java
   * [x] Headings
   * [x] Bold and italic text
 
+0.28.2
+------
+
+* Implement DOCX conversion for missing elements:
+    * [ ] Footnotes
+    * [ ] Table of Contents
+
+* [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
+
 &nbsp;</details>
+
+0.28.0
+------
+
+* API Change: before/after string parameters added to delimiter canBeOpener/canBeCloser to allow
+  context based delimiter processing.
+
+* API Change: add `DelimiterProcessor.skipNonOpenerCloser()`, for old behavior return false.
+  When true then a delimiter occurrence is not an opener or closer will be skipped.
+
+* Fix: #168, Text with colons is incorrectly interpreted as an invalid emoji shortcut. Now
+      invalid emoji shortcuts only allow characters which can make up a valid shortcut:
+      `[a-z0-9_+-]` and if the `:` is not preceded or followed by a digit. The latter eliminates
+      time strings as erroneously interpreted as an invalid emoji shortcut.
+
+* Fix: #163, BasedSequenceImpl.prefix seems broken. Unable to handle zero length string as
+  other. Add tests for this function
+
+* Fix: `BasedSequence.suffixOf` and add tests for this function
+
+* Fix: #162, BasedSequenceImpl.replace is broken. Add tests for this function
 
 0.27.4
 ------
+
+* Fix: #149, StringIndexOutOfBoundsException when parsing "<strong>\t</strong>"
 
 * Fix: `flexmark-html-parser` to generate markdown that will render closer to the HTML being
   converted.

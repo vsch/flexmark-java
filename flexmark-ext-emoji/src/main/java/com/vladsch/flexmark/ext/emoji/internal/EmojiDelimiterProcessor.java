@@ -26,13 +26,18 @@ public class EmojiDelimiterProcessor implements DelimiterProcessor {
     }
 
     @Override
-    public boolean canBeOpener(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return leftFlanking;
+    public boolean canBeOpener(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return leftFlanking && !"0123456789".contains(before);
     }
 
     @Override
-    public boolean canBeCloser(boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
-        return rightFlanking;
+    public boolean canBeCloser(final String before, final String after, boolean leftFlanking, boolean rightFlanking, boolean beforeIsPunctuation, boolean afterIsPunctuation, boolean beforeIsWhitespace, boolean afterIsWhiteSpace) {
+        return rightFlanking && !"0123456789".contains(after);
+    }
+
+    @Override
+    public boolean skipNonOpenerCloser() {
+        return true;
     }
 
     @Override

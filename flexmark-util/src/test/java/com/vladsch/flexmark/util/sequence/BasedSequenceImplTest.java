@@ -206,4 +206,43 @@ public class BasedSequenceImplTest {
 
         assertArrayEquals(new String[] { "1", "2", "3", "4", "5" }, sl.toArray(new String[0]));
     }
+
+    @Test
+    public void testPrefixOf() {
+        BasedSequence of = BasedSequenceImpl.of("123");
+        assertEquals(of.subSequence(0, 0), of.baseSubSequence(0, 0).prefixOf(of.subSequence(0, 0)));
+        assertEquals(of.subSequence(0, 0), of.baseSubSequence(0, 0).prefixOf(of.subSequence(0, 1)));
+
+        assertEquals(of.subSequence(0, 0), of.baseSubSequence(0, 1).prefixOf(of.subSequence(0, 1)));
+        assertEquals(of.subSequence(0, 1), of.baseSubSequence(0, 1).prefixOf(of.subSequence(1, 1)));
+
+        assertEquals(of.subSequence(0, 1), of.baseSubSequence(0, 3).prefixOf(of.subSequence(1, 1)));
+
+        assertEquals(of.subSequence(0, 1), of.baseSubSequence(0, 2).prefixOf(of.subSequence(1, 2)));
+        assertEquals(of.subSequence(0, 1), of.baseSubSequence(0, 1).prefixOf(of.subSequence(1, 1)));
+    }
+
+    @Test
+    public void testSuffixOf() {
+        BasedSequence of = BasedSequenceImpl.of("123");
+        assertEquals(of.subSequence(3, 3), of.baseSubSequence(3, 3).suffixOf(of.subSequence(3, 3)));
+        assertEquals(of.subSequence(3, 3), of.baseSubSequence(3, 3).suffixOf(of.subSequence(2, 3)));
+
+        assertEquals(of.subSequence(3, 3), of.baseSubSequence(2, 3).suffixOf(of.subSequence(2, 3)));
+        assertEquals(of.subSequence(2, 3), of.baseSubSequence(2, 3).suffixOf(of.subSequence(2, 2)));
+
+        assertEquals(of.subSequence(1, 3), of.baseSubSequence(0, 3).suffixOf(of.subSequence(1, 1)));
+
+        assertEquals(of.subSequence(2, 2), of.baseSubSequence(0, 2).suffixOf(of.subSequence(1, 2)));
+        assertEquals(of.subSequence(1, 1), of.baseSubSequence(0, 1).suffixOf(of.subSequence(1, 1)));
+    }
+
+    @Test
+    public void testReplace() {
+        BasedSequence text = BasedSequenceImpl.of("[foo]");
+        assertEquals(BasedSequenceImpl.of("[bar]"), text.replace("foo", "bar"));
+        assertEquals(BasedSequenceImpl.of("[foo]"), text.replace("food", "bars"));
+        assertEquals(BasedSequenceImpl.of("(foo]"), text.replace("[", "("));
+        assertEquals(BasedSequenceImpl.of("[foo)"), text.replace("]", ")"));
+    }
 }

@@ -1769,11 +1769,16 @@ public class InlineParserImpl implements InlineParser, ParagraphPreProcessor {
         boolean canOpen;
         boolean canClose;
 
-        canOpen = delimiterChar == delimiterProcessor.getOpeningCharacter() && delimiterProcessor.canBeOpener(leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
-        canClose = delimiterChar == delimiterProcessor.getClosingCharacter() && delimiterProcessor.canBeCloser(leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
+        canOpen = delimiterChar == delimiterProcessor.getOpeningCharacter() && delimiterProcessor.canBeOpener(before, after, leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
+        canClose = delimiterChar == delimiterProcessor.getClosingCharacter() && delimiterProcessor.canBeCloser(before, after, leftFlanking, rightFlanking, beforeIsPunctuation, afterIsPunctuation, beforeIsWhitespace, afterIsWhitespace);
 
         index = startIndex;
-        return new DelimiterData(delimiterCount, canOpen, canClose);
+
+        if (canOpen || canClose || !delimiterProcessor.skipNonOpenerCloser()) {
+            return new DelimiterData(delimiterCount, canOpen, canClose);
+        } else {
+            return null;
+        }
     }
 
     @Override
