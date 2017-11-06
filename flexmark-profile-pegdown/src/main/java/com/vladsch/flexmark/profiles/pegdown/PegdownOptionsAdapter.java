@@ -25,6 +25,7 @@ import com.vladsch.flexmark.parser.ParserEmulationProfile;
 import com.vladsch.flexmark.superscript.SuperscriptExtension;
 import com.vladsch.flexmark.util.KeepType;
 import com.vladsch.flexmark.util.options.DataHolder;
+import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.options.MutableDataSet;
 
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ import java.util.Arrays;
 import static com.vladsch.flexmark.profiles.pegdown.Extensions.*;
 
 public class PegdownOptionsAdapter {
+    public static final DataKey<Integer> PEGDOWN_EXTENSIONS = new DataKey<Integer>("PEGDOWN_EXTENSIONS", ALL);
+
     private final MutableDataSet myOptions;
     private int myPegdownExtensions = 0;
     private boolean myIsUpdateNeeded = false;
@@ -79,6 +82,9 @@ public class PegdownOptionsAdapter {
             ArrayList<Extension> extensions = new ArrayList<Extension>();
 
             options.clear();
+
+            // add this for extension use if needed
+            options.set(PEGDOWN_EXTENSIONS, myPegdownExtensions);
 
             extensions.addAll(Arrays.asList(additionalExtensions));
 

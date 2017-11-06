@@ -965,7 +965,6 @@ public class FlexmarkHtmlParser {
     }
 
     private void processDefinition(FormattingAppendable out, Element item) {
-        skip();
         pushState(item);
         int options = out.getOptions();
         Elements children = item.children();

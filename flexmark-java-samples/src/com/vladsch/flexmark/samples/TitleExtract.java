@@ -75,16 +75,24 @@ public class TitleExtract {
             }
         }
 
+        static boolean haveExtension(int extensions, int flags) {
+            return (extensions & flags) != 0;
+        }
+
+        static boolean haveAllExtensions(int extensions, int flags) {
+            return (extensions & flags) == flags;
+        }
+
         void render(final Heading node, final NodeRendererContext context, final HtmlWriter html) {
             if (node.getLevel() == 1) {
                 // render without anchor link
-                // PEGDOWN_EXTENSIONS is only available in version 0.28.2
-                //if (context.getHtmlOptions().renderHeaderId || (context.getOptions().get(PegdownOptionsAdapter.PEGDOWN_EXTENSIONS) & (Extensions.ANCHORLINKS)) != 0) {
+                final int extensions = context.getOptions().get(PegdownOptionsAdapter.PEGDOWN_EXTENSIONS);
+                if (context.getHtmlOptions().renderHeaderId || haveExtension(extensions,Extensions.ANCHORLINKS) || haveAllExtensions(extensions,Extensions.EXTANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP) ) {
                     String id = context.getNodeId(node);
                     if (id != null) {
                         html.attr("id", id);
                     }
-                //}
+                }
 
                 if (context.getHtmlOptions().sourcePositionParagraphLines) {
                     html.srcPos(node.getChars()).withAttr().tagLine("h" + node.getLevel(), new Runnable() {

@@ -4279,3 +4279,81 @@ Issue #149
 ````````````````````````````````
 
 
+```````````````````````````````` example Issue  149: 2
+#### G2 & G3: Controlled Arc Move[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")]
+
+**Implemented in beta in 1.17c+2**
+
+Usage
+:   G2 Xnnn Ynnn Innn Jnnn Ennn Fnnn *(Clockwise Arc)*
+:   G3 Xnnn Ynnn Innn Jnnn Ennn Fnnn *(Counter-Clockwise Arc)*
+
+Parameters
+:   **Xnnn** The position to move to on the X axis.
+:   **Ynnn** The position to move to on the Y axis.
+:   **Innn** The point in X space from the current X position to maintain a constant distance from.
+:   **Jnnn** The point in Y space from the current Y position to maintain a constant distance from.
+:   **Ennn** The amount to extrude between the starting point and ending point.
+:   **Fnnn** The feedrate per minute of the move between the starting point and ending point (if supplied).
+
+Examples
+:   G2 X90.6 Y13.8 I5 J10 E22.4 *(Move in a Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)*
+:   G3 X90.6 Y13.8 I5 J10 E22.4 *(Move in a Counter-Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)*
+
+*** ** * ** ***
+
+<br />
+
+.
+<meta charset='utf-8'><h4 style="box-sizing: border-box; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.1; color: rgb(10, 10, 10); margin-top: 10px; margin-bottom: 10px; font-size: 28px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><span class="mw-headline" id="G2_.26_G3:_Controlled_Arc_Move" style="box-sizing: border-box;">G2 &amp; G3: Controlled Arc Move</span><span class="mw-editsection" style="box-sizing: border-box; user-select: none; font-size: small; font-weight: normal; margin-left: 1em; vertical-align: baseline; line-height: 1em; display: inline-block;"><span class="mw-editsection-bracket" style="box-sizing: border-box;">[</span><a
+    href="https://duet3d.com/w2/index.php?title=G-code&amp;action=edit&amp;section=12" title="Edit section: G2 &amp; G3: Controlled Arc Move" style="box-sizing: border-box; background: transparent; color: rgb(35, 107, 155); text-decoration: none; transition: color 250ms ease-out, background-color 250ms ease-out, border-color 250ms ease-out; cursor: pointer;">edit</a><span class="mw-editsection-bracket" style="box-sizing: border-box;">]</span></span></h4><p
+    style="box-sizing: border-box; margin: 0px 0px 10px; line-height: 1.5; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><b style="box-sizing: border-box; font-weight: bold;">Implemented in beta in 1.17c+2</b></p>
+<dl style="box-sizing: border-box; margin-top: 0px; margin-bottom: 20px; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">
+  <dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Usage</dt>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Clockwise Arc)</i></dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Counter-Clockwise Arc)</i></dd>
+  <dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Parameters</dt>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Xnnn</b><span> </span>The position to move to on the X axis.</dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ynnn</b><span> </span>The position to move to on the Y axis.</dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Innn</b><span> </span>The point in X space from the current X position to maintain a constant distance from.</dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Jnnn</b><span> </span>The point in Y space from the current Y position to maintain a constant distance from.</dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ennn</b><span> </span>The amount to extrude between the starting point and ending point.</dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Fnnn</b><span> </span>The feedrate per minute of the move between the starting point and ending point (if supplied).</dd>
+  <dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Examples</dt>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd>
+  <dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Counter-Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd>
+</dl>
+<hr style="box-sizing: content-box; height: 0px; margin-top: 20px; margin-bottom: 20px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(238, 238, 238); color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><br class="Apple-interchange-newline">
+````````````````````````````````
+
+
+```````````````````````````````` example Issue  149: 3
+#### G2 & G3: Controlled Arc Move[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")]
+
+**Implemented in beta in 1.17c+2**
+
+Usage
+:   G2 Xnnn Ynnn Innn Jnnn Ennn Fnnn *(Clockwise Arc)*
+:   G3 Xnnn Ynnn Innn Jnnn Ennn Fnnn *(Counter-Clockwise Arc)*
+
+Parameters
+:   **Xnnn** The position to move to on the X axis.
+:   **Ynnn** The position to move to on the Y axis.
+:   **Innn** The point in X space from the current X position to maintain a constant distance from.
+:   **Jnnn** The point in Y space from the current Y position to maintain a constant distance from.
+:   **Ennn** The amount to extrude between the starting point and ending point.
+:   **Fnnn** The feedrate per minute of the move between the starting point and ending point (if supplied).
+
+Examples
+:   G2 X90.6 Y13.8 I5 J10 E22.4 *(Move in a Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)*
+:   G3 X90.6 Y13.8 I5 J10 E22.4 *(Move in a Counter-Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)*
+
+*** ** * ** ***
+
+<br />
+
+.
+<meta charset='utf-8'><h4 style="box-sizing: border-box; font-family: Lato, Helvetica, Arial, sans-serif; font-weight: 300; line-height: 1.1; color: rgb(10, 10, 10); margin-top: 10px; margin-bottom: 10px; font-size: 28px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><span class="mw-headline" id="G2_.26_G3:_Controlled_Arc_Move" style="box-sizing: border-box;">G2 &amp; G3: Controlled Arc Move</span><span class="mw-editsection" style="box-sizing: border-box; user-select: none; font-size: small; font-weight: normal; margin-left: 1em; vertical-align: baseline; line-height: 1em; display: inline-block;"><span class="mw-editsection-bracket" style="box-sizing: border-box;">[</span><a href="https://duet3d.com/w2/index.php?title=G-code&amp;action=edit&amp;section=12" title="Edit section: G2 &amp; G3: Controlled Arc Move" style="box-sizing: border-box; background: transparent; color: rgb(35, 107, 155); text-decoration: none; transition: color 250ms ease-out, background-color 250ms ease-out, border-color 250ms ease-out; cursor: pointer;">edit</a><span class="mw-editsection-bracket" style="box-sizing: border-box;">]</span></span></h4><p style="box-sizing: border-box; margin: 0px 0px 10px; line-height: 1.5; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><b style="box-sizing: border-box; font-weight: bold;">Implemented in beta in 1.17c+2</b></p><dl style="box-sizing: border-box; margin-top: 0px; margin-bottom: 20px; color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Usage</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Clockwise Arc)</i></dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 Xnnn Ynnn Innn Jnnn Ennn Fnnn<span> </span><i style="box-sizing: border-box;">(Counter-Clockwise Arc)</i></dd><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Parameters</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Xnnn</b><span> </span>The position to move to on the X axis.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ynnn</b><span> </span>The position to move to on the Y axis.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Innn</b><span> </span>The point in X space from the current X position to maintain a constant distance from.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Jnnn</b><span> </span>The point in Y space from the current Y position to maintain a constant distance from.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Ennn</b><span> </span>The amount to extrude between the starting point and ending point.</dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;"><b style="box-sizing: border-box; font-weight: bold;">Fnnn</b><span> </span>The feedrate per minute of the move between the starting point and ending point (if supplied).</dd><dt style="box-sizing: border-box; line-height: 1.25; font-weight: bold;">Examples</dt><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G2 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd><dd style="box-sizing: border-box; line-height: 1.25; margin-left: 1.6em; margin-right: 0px;">G3 X90.6 Y13.8 I5 J10 E22.4<span> </span><i style="box-sizing: border-box;">(Move in a Counter-Clockwise arc from the current point to point (X=90.6,Y=13.8), with a center point at (X=current_X+5, Y=current_Y+10), extruding 22.4mm of material between starting and stopping)</i></dd></dl><hr style="box-sizing: content-box; height: 0px; margin-top: 20px; margin-bottom: 20px; border-width: 1px 0px 0px; border-right-style: initial; border-bottom-style: initial; border-left-style: initial; border-right-color: initial; border-bottom-color: initial; border-left-color: initial; border-image: initial; border-top-style: solid; border-top-color: rgb(238, 238, 238); color: rgb(10, 10, 10); font-family: Lato, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 300; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><br class="Apple-interchange-newline">
+````````````````````````````````
+
+

@@ -272,7 +272,7 @@ public class DefinitionItemBlockParser extends AbstractBlockParser {
                 ItemData itemData = parseItemMarker(options, state, state.getActiveBlockParser() instanceof ParagraphParser);
                 if (itemData != null) {
                     final BlockStart blockStart = BlockStart.of(new DefinitionItemBlockParser(state.getProperties(), itemData))
-                            .atIndex(itemData.markerIndex + itemData.contentOffset);
+                            .atColumn(itemData.markerColumn + itemData.contentOffset);
                     return blockStart;
                 }
             }

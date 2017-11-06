@@ -274,9 +274,31 @@ Document[0, 35]
 ````````````````````````````````
 
 
-A simple definition list:
+simple list with a tab
 
 ```````````````````````````````` example Definition List Extension: 9
+Definition Term
+:→definition item 
+.
+<dl>
+  <dt>Definition Term</dt>
+  <dd>definition item</dd>
+</dl>
+.
+Document[0, 35]
+  DefinitionList[0, 35] isTight
+    DefinitionTerm[0, 16]
+      Paragraph[0, 16]
+        Text[0, 15] chars:[0, 15, "Defin …  Term"]
+    DefinitionItem[16, 35] open:[16, 17, ":"] isTight
+      Paragraph[18, 35]
+        Text[18, 33] chars:[18, 33, "defin …  item"]
+````````````````````````````````
+
+
+A simple definition list:
+
+```````````````````````````````` example Definition List Extension: 10
 Term 1
 :   Definition 1
 
@@ -310,7 +332,7 @@ Document[0, 50]
 
 With multiple terms:
 
-```````````````````````````````` example Definition List Extension: 10
+```````````````````````````````` example Definition List Extension: 11
 Term 1
 Term 2
 :   Definition 1
@@ -354,7 +376,7 @@ Document[0, 64]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 11) options(break-list)
+```````````````````````````````` example(Definition List Extension: 12) options(break-list)
 Term 1
 Term 2
 :   Definition 1
@@ -401,7 +423,7 @@ Document[0, 65]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 12) options(break-list)
+```````````````````````````````` example(Definition List Extension: 13) options(break-list)
 Term 1
 Term 2
 :   Definition 1
@@ -435,7 +457,7 @@ Document[0, 51]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 13
+```````````````````````````````` example Definition List Extension: 14
 Term 1
 Term 2
 :   Definition 1
@@ -480,7 +502,7 @@ Document[0, 65]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 14
+```````````````````````````````` example Definition List Extension: 15
 Term 1
 Term 2
 :   Definition 1
@@ -519,7 +541,7 @@ Document[0, 51]
 
 With multiple terms, broken into two lists:
 
-```````````````````````````````` example(Definition List Extension: 15) options(break-list)
+```````````````````````````````` example(Definition List Extension: 16) options(break-list)
 Term 1
 :   Definition 1 (paragraph)
 
@@ -547,7 +569,7 @@ Document[0, 76]
 
 With multiple terms, not broken into two lists:
 
-```````````````````````````````` example Definition List Extension: 16
+```````````````````````````````` example Definition List Extension: 17
 Term 1
 :   Definition 1 (paragraph)
 
@@ -580,7 +602,7 @@ Document[0, 77]
 
 With multiple definitions:
 
-```````````````````````````````` example Definition List Extension: 17
+```````````````````````````````` example Definition List Extension: 18
 Term 1
 :   Definition 1
 :   Definition 2
@@ -624,7 +646,7 @@ Document[0, 84]
 
 With multiple lines per definition:
 
-```````````````````````````````` example Definition List Extension: 18
+```````````````````````````````` example Definition List Extension: 19
 Term 1
 :   Definition 1 line 1 ...
 Definition 1 line 2
@@ -684,7 +706,7 @@ Document[0, 216]
 
 With paragraphs:
 
-```````````````````````````````` example Definition List Extension: 19
+```````````````````````````````` example Definition List Extension: 20
 Term 1
 
 :   Definition 1 (paragraph)
@@ -724,7 +746,7 @@ Document[0, 76]
 
 With multiple paragraphs:
 
-```````````````````````````````` example Definition List Extension: 20
+```````````````````````````````` example Definition List Extension: 21
 Term 1
 
 :   Definition 1 paragraph 1 line 1 ...
@@ -790,7 +812,7 @@ Document[0, 327]
 
 A mix:
 
-```````````````````````````````` example Definition List Extension: 21
+```````````````````````````````` example Definition List Extension: 22
 Term 1
 Term 2
 
@@ -940,7 +962,7 @@ Document[0, 816]
 
 inlines allowed
 
-```````````````````````````````` example Definition List Extension: 22
+```````````````````````````````` example Definition List Extension: 23
 Definition **Term**
 : definition `item` 
 .
@@ -966,7 +988,7 @@ Document[0, 41]
 
 inlines will be split
 
-```````````````````````````````` example Definition List Extension: 23
+```````````````````````````````` example Definition List Extension: 24
 Definition **Term 
 Another** Definition Term 
 : definition `item`
@@ -995,7 +1017,7 @@ Document[0, 66]
 
 don't include preceding blank lines
 
-```````````````````````````````` example Definition List Extension: 24
+```````````````````````````````` example Definition List Extension: 25
 - bullet item
 
 
@@ -1027,7 +1049,7 @@ Document[0, 51]
 
 nested elements allowed
 
-```````````````````````````````` example Definition List Extension: 25
+```````````````````````````````` example Definition List Extension: 26
 Definition **Term**
 : definition `item` 
     
@@ -1086,7 +1108,7 @@ Document[0, 124]
 
 With disparate looseness with auto-loose
 
-```````````````````````````````` example Definition List Extension: 26
+```````````````````````````````` example Definition List Extension: 27
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1125,7 +1147,7 @@ Document[0, 75]
 
 With disparate looseness without auto-loose
 
-```````````````````````````````` example(Definition List Extension: 27) options(no-auto-loose)
+```````````````````````````````` example(Definition List Extension: 28) options(no-auto-loose)
 Term 1
 
 :   Definition 1 (paragraph)
@@ -1160,7 +1182,7 @@ Document[0, 75]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 28
+```````````````````````````````` example Definition List Extension: 29
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -1185,7 +1207,7 @@ Document[0, 78]
 ````````````````````````````````
 
 
-```````````````````````````````` example Definition List Extension: 29
+```````````````````````````````` example Definition List Extension: 30
 Definition Term
 : Definition of above term
 : Another definition of above term
@@ -1535,6 +1557,131 @@ Document[0, 815]
     DefinitionItem[783, 815] open:[783, 784, ":"] isLoose
       Paragraph[787, 815]
         Text[787, 815] chars:[787, 815, "Defin … raph)"]
+````````````````````````````````
+
+
+## Issue
+
+Issue #172, Markdown parser cutting words out
+
+```````````````````````````````` example Issue: 1
+Commit Message Length Configuration 
+===================================
+                                                                                                                                          
+The maximum lengths of the subject and message body can be
+configured in the standard Gerrit config file `gerrit.config`.
+The defaults are 50 characters for the summary and 72 characters
+for the description, as recommended by the
+[git tutorial](https://kernel.googlesource.com/pub/scm/git/git/+/927a503cd07718ea0f700052043f383253904a56/Documentation/tutorial.txt#64)
+and [expanded upon by Tim Pope](http://www.tpope.net/node/106).
+                                                                                                                                          
+commitmessage.maxSubjectLength
+:→Maximum length of the commit message's subject line. Defaults
+→to 50 if not specified or less than 0.
+                                                                                                                                          
+commitmessage.maxLineLength
+:→Maximum length of a line in the commit message's body. Defaults
+→to 72 if not specified or less than 0.
+                                                                                                                                          
+commitmessage.longLinesThreshold
+:→Percentage of commit message lines allowed to exceed the
+→maximum length before a warning or error is generated. Defaults
+→to 33 if not specified or less than 0.
+                                                                                                                                          
+commitmessage.rejectTooLong
+:→If set to `true`, reject commits whose subject or line
+→length exceeds the maximum allowed length. If not
+→specified, defaults to `false`.
+.
+<h1>Commit Message Length Configuration</h1>
+<p>The maximum lengths of the subject and message body can be
+configured in the standard Gerrit config file <code>gerrit.config</code>.
+The defaults are 50 characters for the summary and 72 characters
+for the description, as recommended by the
+<a href="https://kernel.googlesource.com/pub/scm/git/git/+/927a503cd07718ea0f700052043f383253904a56/Documentation/tutorial.txt#64">git tutorial</a>
+and <a href="http://www.tpope.net/node/106">expanded upon by Tim Pope</a>.</p>
+<dl>
+  <dt>commitmessage.maxSubjectLength</dt>
+  <dd>Maximum length of the commit message's subject line. Defaults
+  to 50 if not specified or less than 0.</dd>
+  <dt>commitmessage.maxLineLength</dt>
+  <dd>Maximum length of a line in the commit message's body. Defaults
+  to 72 if not specified or less than 0.</dd>
+  <dt>commitmessage.longLinesThreshold</dt>
+  <dd>Percentage of commit message lines allowed to exceed the
+  maximum length before a warning or error is generated. Defaults
+  to 33 if not specified or less than 0.</dd>
+  <dt>commitmessage.rejectTooLong</dt>
+  <dd>If set to <code>true</code>, reject commits whose subject or line
+  length exceeds the maximum allowed length. If not
+  specified, defaults to <code>false</code>.</dd>
+</dl>
+.
+Document[0, 1834]
+  Heading[0, 72] text:[0, 35, "Commit Message Length Configuration"] textClose:[37, 72, "==================================="]
+    Text[0, 35] chars:[0, 35, "Commi … ation"]
+  Paragraph[212, 643] isTrailingBlankLine
+    Text[212, 270] chars:[212, 270, "The m … an be"]
+    SoftLineBreak[270, 271]
+    Text[271, 317] chars:[271, 317, "confi … file "]
+    Code[317, 332] textOpen:[317, 318, "`"] text:[318, 331, "gerri … t.config"] textClose:[331, 332, "`"]
+      Text[318, 331] chars:[318, 331, "gerri … onfig"]
+    Text[332, 333] chars:[332, 333, "."]
+    SoftLineBreak[333, 334]
+    Text[334, 398] chars:[334, 398, "The d … cters"]
+    SoftLineBreak[398, 399]
+    Text[399, 441] chars:[399, 441, "for t … y the"]
+    SoftLineBreak[441, 442]
+    Link[442, 578] textOpen:[442, 443, "["] text:[443, 455, "git tutorial"] textClose:[455, 456, "]"] linkOpen:[456, 457, "("] url:[457, 577, "https://kernel.googlesource.com/pub/scm/git/git/+/927a503cd07718ea0f700052043f383253904a56/Documentation/tutorial.txt#64"] pageRef:[457, 574, "https://kernel.googlesource.com/pub/scm/git/git/+/927a503cd07718ea0f700052043f383253904a56/Documentation/tutorial.txt"] anchorMarker:[574, 575, "#"] anchorRef:[575, 577, "64"] linkClose:[577, 578, ")"]
+      Text[443, 455] chars:[443, 455, "git t … orial"]
+    SoftLineBreak[578, 579]
+    Text[579, 583] chars:[579, 583, "and "]
+    Link[583, 641] textOpen:[583, 584, "["] text:[584, 609, "expanded upon by Tim Pope"] textClose:[609, 610, "]"] linkOpen:[610, 611, "("] url:[611, 640, "http://www.tpope.net/node/106"] pageRef:[611, 640, "http://www.tpope.net/node/106"] linkClose:[640, 641, ")"]
+      Text[584, 609] chars:[584, 609, "expan …  Pope"]
+    Text[641, 642] chars:[641, 642, "."]
+  DefinitionList[782, 1834] isTight
+    DefinitionTerm[782, 813]
+      Paragraph[782, 813]
+        Text[782, 812] chars:[782, 812, "commi … ength"]
+    DefinitionItem[813, 917] open:[813, 814, ":"] isTight hadBlankLineAfter
+      Paragraph[815, 917] isTrailingBlankLine
+        Text[815, 876] chars:[815, 876, "Maxim … aults"]
+        SoftLineBreak[876, 877]
+        Text[878, 916] chars:[878, 916, "to 50 … an 0."]
+    DefinitionTerm[1056, 1084]
+      Paragraph[1056, 1084]
+        Text[1056, 1083] chars:[1056, 1083, "commi … ength"]
+    DefinitionItem[1084, 1190] open:[1084, 1085, ":"] isTight hadBlankLineAfter
+      Paragraph[1086, 1190] isTrailingBlankLine
+        Text[1086, 1149] chars:[1086, 1149, "Maxim … aults"]
+        SoftLineBreak[1149, 1150]
+        Text[1151, 1189] chars:[1151, 1189, "to 72 … an 0."]
+    DefinitionTerm[1329, 1362]
+      Paragraph[1329, 1362]
+        Text[1329, 1361] chars:[1329, 1361, "commi … shold"]
+    DefinitionItem[1362, 1526] open:[1362, 1363, ":"] isTight hadBlankLineAfter
+      Paragraph[1364, 1526] isTrailingBlankLine
+        Text[1364, 1420] chars:[1364, 1420, "Perce … d the"]
+        SoftLineBreak[1420, 1421]
+        Text[1422, 1485] chars:[1422, 1485, "maxim … aults"]
+        SoftLineBreak[1485, 1486]
+        Text[1487, 1525] chars:[1487, 1525, "to 33 … an 0."]
+    DefinitionTerm[1665, 1693]
+      Paragraph[1665, 1693]
+        Text[1665, 1692] chars:[1665, 1692, "commi … oLong"]
+    DefinitionItem[1693, 1834] open:[1693, 1694, ":"] isTight
+      Paragraph[1695, 1834]
+        Text[1695, 1705] chars:[1695, 1705, "If set to "]
+        Code[1705, 1711] textOpen:[1705, 1706, "`"] text:[1706, 1710, "true"] textClose:[1710, 1711, "`"]
+          Text[1706, 1710] chars:[1706, 1710, "true"]
+        Text[1711, 1749] chars:[1711, 1749, ", rej …  line"]
+        SoftLineBreak[1749, 1750]
+        Text[1751, 1800] chars:[1751, 1800, "lengt … f not"]
+        SoftLineBreak[1800, 1801]
+        Text[1802, 1825] chars:[1802, 1825, "speci … s to "]
+        Code[1825, 1832] textOpen:[1825, 1826, "`"] text:[1826, 1831, "false"] textClose:[1831, 1832, "`"]
+          Text[1826, 1831] chars:[1826, 1831, "false"]
+        Text[1832, 1833] chars:[1832, 1833, "."]
 ````````````````````````````````
 
 

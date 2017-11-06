@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.4](#0284)
 - [0.28.2](#0282)
 - [0.28.0](#0280)
 - [0.27.4](#0274)
@@ -220,8 +221,11 @@ flexmark-java
   * [x] Headings
   * [x] Bold and italic text
 
-0.28.2
+0.28.4
 ------
+
+* [ ] Fix: when converting link text from HTML should escape special characters `[`, `]` and any
+      others that would be interpreted as markdown inlines.
 
 * Implement DOCX conversion for missing elements:
     * [ ] Footnotes
@@ -230,6 +234,20 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.2
+------
+
+* Fix: #169, HTML to Markdown Converter skips every second definition if there is no line break
+  between definitions
+
+* Fix: #172, Markdown parser cutting words out. Definition items used index instead of column
+  based API for skipping leading spaces/tabs. If tabs were used then offset was wrong causing
+  characters to be skipped.
+
+* Add: `PegdownOptionsAdapter.PEGDOWN_EXTENSIONS` data key which reflect the extensions used to
+  generate the options. This allows custom extensions to have access to pegdown based flags for
+  their logic.
 
 0.28.0
 ------
