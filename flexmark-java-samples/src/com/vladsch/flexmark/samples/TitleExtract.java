@@ -13,7 +13,9 @@ import com.vladsch.flexmark.util.options.DataHolder;
 public class TitleExtract {
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL
-    ).toMutable();
+    ).toMutable()
+            .set(HtmlRenderer.INDENT_SIZE, 2)
+            ;
 
     private static String findTitle(Node root) {
         if (root instanceof Heading) {
