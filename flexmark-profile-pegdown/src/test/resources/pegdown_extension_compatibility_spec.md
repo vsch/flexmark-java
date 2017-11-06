@@ -3280,3 +3280,24 @@ Document[0, 50]
 ````````````````````````````````
 
 
+## Issue
+
+Issue markdown page generator
+
+
+```````````````````````````````` example Issue: 1
+### hello `<html>` and `<body>`
+.
+<h3><a href="#hello-html-and-body" id="hello-html-and-body"></a>hello <code>&lt;html&gt;</code> and <code>&lt;body&gt;</code></h3>
+.
+Document[0, 32]
+  Heading[0, 31] textOpen:[0, 3, "###"] text:[4, 31, "hello `<html>` and `<body>`"]
+    AnchorLink[4, 4]
+    Text[4, 10] chars:[4, 10, "hello "]
+    Code[10, 18] textOpen:[10, 11, "`"] text:[11, 17, "<html>"] textClose:[17, 18, "`"]
+      Text[11, 17] chars:[11, 17, "<html>"]
+    Text[18, 23] chars:[18, 23, " and "]
+    Code[23, 31] textOpen:[23, 24, "`"] text:[24, 30, "<body>"] textClose:[30, 31, "`"]
+      Text[24, 30] chars:[24, 30, "<body>"]
+````````````````````````````````
+
