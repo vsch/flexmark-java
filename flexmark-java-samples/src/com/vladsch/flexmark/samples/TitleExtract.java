@@ -9,7 +9,6 @@ import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.profiles.pegdown.Extensions;
 import com.vladsch.flexmark.profiles.pegdown.PegdownOptionsAdapter;
 import com.vladsch.flexmark.util.options.DataHolder;
-import com.vladsch.flexmark.util.options.MutableDataSet;
 
 public class TitleExtract {
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
@@ -40,12 +39,6 @@ public class TitleExtract {
     }
 
     public static void main(String[] args) {
-        // uncomment to set optional extensions
-        //options.set(Parser.EXTENSIONS, Arrays.asList(TablesExtension.create(), StrikethroughExtension.create()));
-
-        // uncomment to convert soft-breaks to hard breaks
-        //options.set(HtmlRenderer.SOFT_BREAK, "<br />\n");
-
         Parser parser = Parser.builder(OPTIONS).build();
         HtmlRenderer renderer = HtmlRenderer.builder(OPTIONS).build();
 
@@ -66,6 +59,7 @@ public class TitleExtract {
                 "## Documentation\n" +
                 "\n" +
                 "* [Commit Message Length Configuration](config.md)\n" +
+                "* More Items\n" +
                 "\n" +
                 "");
 
