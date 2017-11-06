@@ -12,7 +12,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 
 public class TitleExtract {
     static final DataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
-            Extensions.ALL
+            Extensions.ALL & ~(Extensions.HARDWRAPS)
     ).toMutable()
             .set(HtmlRenderer.INDENT_SIZE, 2)
             ;
@@ -53,6 +53,10 @@ public class TitleExtract {
                 "\n" +
                 "Version\n" +
                 ":  v2.15-rc2\n" +
+                "\n" +
+                "commitmessage.maxSubjectLength\n" +
+                ":       Maximum length of the commit message's subject line.  Defaults\n" +
+                "        to 50 if not specified or less than 0.\n" +
                 "\n" +
                 "## About\n" +
                 "\n" +
