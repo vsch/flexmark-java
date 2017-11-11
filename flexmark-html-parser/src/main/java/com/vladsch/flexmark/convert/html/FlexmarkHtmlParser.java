@@ -62,29 +62,29 @@ public class FlexmarkHtmlParser {
         tableCellAlignments.put("text-right", CellAlignment.RIGHT);
     }
 
-    private static final Map<String, String> typographicMap = new HashMap<String, String>();
+    private static final Map<String, String> specialCharsMap = new HashMap<String, String>();
     private static final String typographicQuotes = "“|”|‘|’|«|»|&ldquo;|&rdquo;|&lsquo;|&rsquo;|&apos;|&laquo;|&raquo;";
     private static final String typographicSmarts = "…|–|—|&hellip;|&endash;|&emdash;";
     static {
-        typographicMap.put("“", "\"");
-        typographicMap.put("”", "\"");
-        typographicMap.put("&ldquo;", "\"");
-        typographicMap.put("&rdquo;", "\"");
-        typographicMap.put("‘", "'");
-        typographicMap.put("’", "'");
-        typographicMap.put("&lsquo;", "'");
-        typographicMap.put("&rsquo;", "'");
-        typographicMap.put("&apos;", "'");
-        typographicMap.put("«", "<<");
-        typographicMap.put("&laquo;", "<<");
-        typographicMap.put("»", ">>");
-        typographicMap.put("&raquo;", ">>");
-        typographicMap.put("…", "...");
-        typographicMap.put("&hellip;", "...");
-        typographicMap.put("–", "--");
-        typographicMap.put("&endash;", "--");
-        typographicMap.put("—", "---");
-        typographicMap.put("&emdash;", "---");
+        specialCharsMap.put("“", "\"");
+        specialCharsMap.put("”", "\"");
+        specialCharsMap.put("&ldquo;", "\"");
+        specialCharsMap.put("&rdquo;", "\"");
+        specialCharsMap.put("‘", "'");
+        specialCharsMap.put("’", "'");
+        specialCharsMap.put("&lsquo;", "'");
+        specialCharsMap.put("&rsquo;", "'");
+        specialCharsMap.put("&apos;", "'");
+        specialCharsMap.put("«", "<<");
+        specialCharsMap.put("&laquo;", "<<");
+        specialCharsMap.put("»", ">>");
+        specialCharsMap.put("&raquo;", ">>");
+        specialCharsMap.put("…", "...");
+        specialCharsMap.put("&hellip;", "...");
+        specialCharsMap.put("–", "--");
+        specialCharsMap.put("&endash;", "--");
+        specialCharsMap.put("—", "---");
+        specialCharsMap.put("&emdash;", "---");
     }
 
     private static final Pattern NUMERIC_DOT_LIST = Pattern.compile("^\\d+\\.$");
@@ -95,24 +95,25 @@ public class FlexmarkHtmlParser {
     public static final DataKey<Map<Object, CellAlignment>> TABLE_CELL_ALIGNMENT_MAP = new DataKey<Map<Object, CellAlignment>>("TABLE_CELL_ALIGNMENT_MAP", tableCellAlignments);
 
     private final HtmlParserOptions myOptions;
-    private final Pattern typographicPattern;
+    private final Pattern specialCharsPattern;
 
     private Stack<State> myStateStack;
     private Map<String, String> myAbbreviations;
     private State myState;
     private boolean myTrace;
+    private boolean myInlineCode;
 
     private FlexmarkHtmlParser(DataHolder options) {
         myOptions = new HtmlParserOptions(options);
 
         if (myOptions.typographicQuotes && myOptions.typographicSmarts) {
-            typographicPattern = Pattern.compile(typographicQuotes + "|" + typographicSmarts);
+            specialCharsPattern = Pattern.compile(typographicQuotes + "|" + typographicSmarts);
         } else if (myOptions.typographicQuotes) {
-            typographicPattern = Pattern.compile(typographicQuotes);
+            specialCharsPattern = Pattern.compile(typographicQuotes);
         } else if (myOptions.typographicSmarts) {
-            typographicPattern = Pattern.compile(typographicSmarts);
+            specialCharsPattern = Pattern.compile(typographicSmarts);
         } else {
-            typographicPattern = null;
+            specialCharsPattern = null;
         }
 
         //myTrace = true;
@@ -364,8 +365,8 @@ public class FlexmarkHtmlParser {
     }
 
     private String prepareText(String text) {
-        if (typographicPattern != null) {
-            Matcher matcher = typographicPattern.matcher(text);
+        if (specialCharsPattern != null) {
+            Matcher matcher = specialCharsPattern.matcher(text);
             int length = text.length();
             StringBuilder sb = new StringBuilder(length * 2);
             int lastPos = 0;
@@ -374,7 +375,7 @@ public class FlexmarkHtmlParser {
                 if (lastPos < matcher.start()) {
                     sb.append(text, lastPos, matcher.start());
                 }
-                sb.append(typographicMap.get(matcher.group()));
+                sb.append(specialCharsMap.get(matcher.group()));
                 lastPos = matcher.end();
             }
 
@@ -384,7 +385,13 @@ public class FlexmarkHtmlParser {
 
             text = sb.toString();
         }
-        return text.replace("\\", "\\\\").replace("\u00A0", myOptions.nbspText);
+        text = text.replace("\\", "\\\\").replace("\u00A0", myOptions.nbspText);
+        if (!myInlineCode) {
+            // replace [ ] by escaped versions
+            text = text.replace("[", "\\[").replace("]", "\\]");
+        }
+
+        return text;
     }
 
     private boolean processText(FormattingAppendable out, TextNode node) {
@@ -530,8 +537,6 @@ public class FlexmarkHtmlParser {
                     if (title != null) out.append(" \"").append(element.attr("title").replace("\n", myOptions.eolInTitleAttribute).replace("\"", "\\\"")).append('"');
                     out.append(")");
                 }
-            } else if (!text.isEmpty()) {
-                out.append(text);
             }
         } else {
             processTextNodes(out, element);
@@ -609,7 +614,10 @@ public class FlexmarkHtmlParser {
         BasedSequence text = SubSequence.of(element.ownText());
         int backTickCount = getMaxRepeatedChars(text, '`', 1);
         CharSequence backTicks = RepeatedCharSequence.of("`", backTickCount);
+        boolean oldInlineCode = myInlineCode;
+        myInlineCode = true;
         processTextNodes(out, element, backTicks);
+        myInlineCode = oldInlineCode;
         return true;
     }
 

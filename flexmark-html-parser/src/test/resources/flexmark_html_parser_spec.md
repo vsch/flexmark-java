@@ -811,9 +811,17 @@ links
 ````````````````````````````````
 
 
+```````````````````````````````` example Links: 7
+[\[Text **Bold** \]](http://example.com)
+
+.
+<a href="http://example.com">[Text <b>Bold</b>]</a>
+````````````````````````````````
+
+
 auto links
 
-```````````````````````````````` example Links: 7
+```````````````````````````````` example Links: 8
 http://example.com
 
 .
@@ -821,7 +829,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 8) options(wrap-autolinks)
+```````````````````````````````` example(Links: 9) options(wrap-autolinks)
 <http://example.com>
 
 .
@@ -829,7 +837,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 9
+```````````````````````````````` example Links: 10
 [http://example.com](http://example.com "Title")
 
 .
@@ -837,7 +845,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example Links: 10
+```````````````````````````````` example Links: 11
 http://example.com
 
 .
@@ -845,7 +853,7 @@ http://example.com
 ````````````````````````````````
 
 
-```````````````````````````````` example(Links: 11) options(no-autolinks)
+```````````````````````````````` example(Links: 12) options(no-autolinks)
 [http://example.com](http://example.com)
 
 .
@@ -1788,7 +1796,7 @@ real life table
 | Swing and JavaFX WebView based preview.                                                         |   X   |    X     |
 | Supports **JavaFX with JetBrains JRE on OS X**                                                  |   X   |    X     |
 | Supports Highlight JS in WebView preview                                                        |   X   |    X     |
-| **Multi-line Image URLs for embedding [gravizo.com] UML diagrams into markdown**                |   X   |    X     |
+| **Multi-line Image URLs for embedding \[gravizo.com\] UML diagrams into markdown**              |   X   |    X     |
 | Live Templates for common markdown elements                                                     |   X   |    X     |
 | **Enhanced Version Benefits**                                                                   |       |    X     |
 | Split Editor with Preview or HTML Text modes to view both source and preview                    |       |    X     |
@@ -1799,7 +1807,7 @@ real life table
 | Inspections to help you validate links, anchor refs, footnote refs                              |       |    X     |
 | Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze         |       |    X     |
 | Jekyll front matter recognition in markdown documents                                           |       |    X     |
-| Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs                    |       |    X     |
+| Emoji text to icon conversion using \[Emoji Cheat Sheet\] or GitHub emoji URLs                  |       |    X     |
 | Wrap on typing and table formatting with column alignment                                       |       |    X     |
 | Character display width used for wrapping and table formatting                                  |       |    X     |
 | Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document           |       |    X     |
@@ -1943,7 +1951,7 @@ real life table
 | Swing and JavaFX WebView based preview.                                                                                 |   X   |    X     |
 | Supports **JavaFX with JetBrains JRE on OS X**                                                                          |   X   |    X     |
 | Supports Highlight JS in WebView preview                                                                                |   X   |    X     |
-| **Multi-line Image URLs for embedding [gravizo.com] UML diagrams into markdown**                                        |   X   |    X     |
+| **Multi-line Image URLs for embedding \[gravizo.com\] UML diagrams into markdown**                                      |   X   |    X     |
 | Live Templates for common markdown elements                                                                             |   X   |    X     |
 | **Enhanced Version Benefits**                                                                                           |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Split Editor with Preview or HTML Text modes to view both source and preview                    |       |    X     |
@@ -1954,7 +1962,7 @@ real life table
 | &nbsp;&nbsp;&nbsp;&nbsp;Inspections to help you validate links, anchor refs, footnote refs                              |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Complete GitHub wiki support for all links makes maintaining GitHub wiki pages a breeze         |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Jekyll front matter recognition in markdown documents                                           |       |    X     |
-| &nbsp;&nbsp;&nbsp;&nbsp;Emoji text to icon conversion using [Emoji Cheat Sheet] or GitHub emoji URLs                    |       |    X     |
+| &nbsp;&nbsp;&nbsp;&nbsp;Emoji text to icon conversion using \[Emoji Cheat Sheet\] or GitHub emoji URLs                  |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Wrap on typing and table formatting with column alignment                                       |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Character display width used for wrapping and table formatting                                  |       |    X     |
 | &nbsp;&nbsp;&nbsp;&nbsp;Structure view for Abbreviations, Headers, Tables, Footnotes, References and Document           |       |    X     |
@@ -3288,16 +3296,16 @@ GitHub file list
 ![@danfickle](https://avatars2.githubusercontent.com/u/1415728?v=3&s=40) [danfickle](https://github.com/danfickle) [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") ...
 
 |---|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
-|   | [docs](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs "docs")                                                                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update README and integration guide with RC8 version. [ci skip]](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]")                                                                     | 2 months ago |
+|   | [docs](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/docs "docs")                                                                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]") [#8](https://github.com/danfickle/openhtmltopdf/issues/8) [- Update README and integration guide with RC8 version. \[ci skip\]](https://github.com/danfickle/openhtmltopdf/commit/d41eb81c246083b521f3e63f8685ace3620be3fe "For #8 - Update README and integration guide with RC8 version. [ci skip]")                                                                   | 2 months ago |
 |   | [obsolete-archive](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/obsolete-archive "obsolete-archive")                                                    | [Cleanup repository - Move everything obsolete to the obsolete-archive...](https://github.com/danfickle/openhtmltopdf/commit/3ca888aab7c587d16ec25e31db8a5659a0ed75ee "Cleanup repository - Move everything obsolete to the obsolete-archive folder.")                                                                                                                                                                                                                                                                                                | 7 months ago |
-|   | [openhtmltopdf-core](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-core "openhtmltopdf-core")                                              | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
-|   | [openhtmltopdf-examples](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-examples "openhtmltopdf-examples")                                  | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
-|   | [openhtmltopdf-jsoup-dom-converter](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-jsoup-dom-converter "openhtmltopdf-jsoup-dom-converter") | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
-|   | [openhtmltopdf-log4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-log4j "openhtmltopdf-log4j")                                           | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
+|   | [openhtmltopdf-core](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-core "openhtmltopdf-core")                                              | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-examples](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-examples "openhtmltopdf-examples")                                  | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-jsoup-dom-converter](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-jsoup-dom-converter "openhtmltopdf-jsoup-dom-converter") | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-log4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-log4j "openhtmltopdf-log4j")                                           | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
 |   | [openhtmltopdf-pdfbox](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-pdfbox "openhtmltopdf-pdfbox")                                        | [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") | 22 days ago  |
-|   | [openhtmltopdf-rtl-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-rtl-support "openhtmltopdf-rtl-support")                         | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
-|   | [openhtmltopdf-slf4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-slf4j "openhtmltopdf-slf4j")                                           | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
-|   | [openhtmltopdf-svg-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-svg-support "openhtmltopdf-svg-support")                         | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
+|   | [openhtmltopdf-rtl-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-rtl-support "openhtmltopdf-rtl-support")                         | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-slf4j](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-slf4j "openhtmltopdf-slf4j")                                           | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
+|   | [openhtmltopdf-svg-support](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/openhtmltopdf-svg-support "openhtmltopdf-svg-support")                         | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
 |   | [tests](https://github.com/danfickle/openhtmltopdf/tree/open-dev-v1/tests "tests")                                                                                     | [regression snapshot was missing source images, now using Ant to make ...](https://github.com/danfickle/openhtmltopdf/commit/927efc50fb4a8870691a168ea86223ebcb70b4fc "regression snapshot was missing source images, now using Ant to make copy of entire source reference tree and including this in snapshot diff. rebuild R8 snapshot so it includes these files. have ref comparison only report failures.")                                                                                                                                     | 8 years ago  |
 |   | [.cvsignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.cvsignore ".cvsignore")                                                                      | [.](https://github.com/danfickle/openhtmltopdf/commit/81951cc933fffdf85a5b5fbe274bd9c181c1daed ".")                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 8 years ago  |
 |   | [.gitignore](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/.gitignore ".gitignore")                                                                      | [For](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.") [#1](https://github.com/danfickle/openhtmltopdf/issues/1) [- Set up Apache PDF-BOX 2 output device module.](https://github.com/danfickle/openhtmltopdf/commit/04742bbc076613fc809fe05ca254269598f996bf "For #1 - Set up Apache PDF-BOX 2 output device module.")                                                                                                                           | a year ago   |
@@ -3308,7 +3316,7 @@ GitHub file list
 |   | [LICENSE-LGPL-3.txt](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-LGPL-3.txt "LICENSE-LGPL-3.txt")                                              | [- license update LGPL version 2.1 to 3](https://github.com/danfickle/openhtmltopdf/commit/a1ea2f09424b35ad2988453f70dc820872eb5ce0 "- license update LGPL version 2.1 to 3 - added license text of GPLv3 (mandatory) - links updated - added license information in poms - added license includes for jars")                                                                                                                                                                                                                                         | 2 years ago  |
 |   | [LICENSE-W3C-TEST](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/LICENSE-W3C-TEST "LICENSE-W3C-TEST")                                                    | [Added license for W3C tests, as requested on tests website.](https://github.com/danfickle/openhtmltopdf/commit/17e53385724025576684290a62cc05c3183b163e "Added license for W3C tests, as requested on tests website.")                                                                                                                                                                                                                                                                                                                               | 10 years ago |
 |   | [README.md](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/README.md "README.md")                                                                         | [For](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") [#52](https://github.com/danfickle/openhtmltopdf/issues/52 "Adobe Reader promts for saving") [- Do not output acroform dict in case where document contains...](https://github.com/danfickle/openhtmltopdf/commit/bfdc7c96401bbedc36455b6ea086e310abe60e91 "For #52 - Do not output acroform dict in case where document contains no forms. [ci skip]") | 22 days ago  |
-|   | [pom.xml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/pom.xml "pom.xml")                                                                               | [[maven-release-plugin] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                           | 2 months ago |
+|   | [pom.xml](https://github.com/danfickle/openhtmltopdf/blob/open-dev-v1/pom.xml "pom.xml")                                                                               | [\[maven-release-plugin\] prepare for next development iteration](https://github.com/danfickle/openhtmltopdf/commit/d2e1430111e69d959dd0134d0b3aec50d1a4e9ec "[maven-release-plugin] prepare for next development iteration")                                                                                                                                                                                                                                                                                                                         | 2 months ago |
 
 .
 <meta charset='utf-8'>
@@ -4280,7 +4288,7 @@ Issue #149
 
 
 ```````````````````````````````` example Issue  149: 2
-#### G2 & G3: Controlled Arc Move[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")]
+#### G2 & G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
 
 **Implemented in beta in 1.17c+2**
 
@@ -4328,7 +4336,7 @@ Examples
 
 
 ```````````````````````````````` example Issue  149: 3
-#### G2 & G3: Controlled Arc Move[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")]
+#### G2 & G3: Controlled Arc Move\[[edit](https://duet3d.com/w2/index.php?title=G-code&action=edit&section=12 "Edit section: G2 & G3: Controlled Arc Move")\]
 
 **Implemented in beta in 1.17c+2**
 

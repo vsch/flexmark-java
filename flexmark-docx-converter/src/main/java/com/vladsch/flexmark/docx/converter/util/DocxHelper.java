@@ -312,7 +312,7 @@ public class DocxHelper {
                 }
             }
 
-            combine(cInd, pInd, CombineBigInt.ADD_OTHER, CombineBigInt.NONE);
+            combine(cInd, pInd, CombineBigInt.ADD, CombineBigInt.NONE);
             cInd = keepDiff(cInd, styledChild.getInd());
             child.setInd(cInd);
         }

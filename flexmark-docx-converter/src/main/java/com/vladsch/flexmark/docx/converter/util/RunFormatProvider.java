@@ -12,6 +12,8 @@ public interface RunFormatProvider<T> extends FormatProvider<T> {
     String INLINE_CODE_STYLE = "SourceText";
     String HYPERLINK_STYLE = "Hyperlink";
     String SPACE_PRESERVE = "preserve";
+    String FOOTNOTE_ANCHOR_STYLE = "FootnoteAnchor";
+    String ENDNOTE_ANCHOR_STYLE = "EndnoteAnchor";
 
 /*
 

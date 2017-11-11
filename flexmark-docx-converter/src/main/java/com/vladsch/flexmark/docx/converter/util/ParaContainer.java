@@ -1,7 +1,6 @@
 package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.wml.P;
-import org.docx4j.wml.R;
 
 public interface ParaContainer {
 
@@ -17,4 +16,5 @@ public interface ParaContainer {
      * @return last P or none
      */
     P getLastP();
+
 }

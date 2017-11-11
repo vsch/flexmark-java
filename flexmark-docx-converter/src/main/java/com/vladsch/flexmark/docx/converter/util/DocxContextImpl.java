@@ -4,13 +4,19 @@ import com.vladsch.flexmark.util.Utils;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.docx4j.model.styles.StyleUtil;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.DocumentSettingsPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.FootnotesPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.relationships.Namespaces;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 import org.docx4j.wml.PPrBase.PStyle;
 import org.docx4j.wml.PPrBase.Spacing;
+import org.docx4j.wml.R.ContinuationSeparator;
+import org.docx4j.wml.R.FootnoteRef;
+import org.docx4j.wml.R.Separator;
 
 import javax.xml.bind.JAXBElement;
 import java.math.BigInteger;
@@ -19,7 +25,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer {
+import static java.math.BigInteger.valueOf;
+
+public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer, ContentContainer {
     protected final WordprocessingMLPackage myPackage;
     protected final MainDocumentPart myDocumentPart;
     protected final ObjectFactory myFactory;
@@ -32,8 +40,10 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     protected BlockFormatProvider<T> myBlockFormatProvider;
     protected RunFormatProvider<T> myRunFormatProvider;
+    protected ContentContainer myContentContainer;
     protected ParaContainer myParaContainer;
     protected RunContainer myRunContainer;
+    protected int myFootnoteRef;
 
     public DocxContextImpl(WordprocessingMLPackage out) {
         myPackage = out;
@@ -43,10 +53,12 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         myRunContainer = this;
         myHyperlinks = new HashMap<String, Relationship>();
         myParaContainer = this;
+        myContentContainer = this;
         myDocumentPart = out.getMainDocumentPart();
         myBlockFormatProviders = new HashMap<T, BlockFormatProvider<T>>();
         myRunFormatProviders = new HashMap<T, RunFormatProvider<T>>();
         myBlockFormatProvider = this;
+        myFootnoteRef = 1;
     }
 
     @Override
@@ -57,6 +69,16 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     @Override
     public T getProviderFrame() {
         return getContextFrame();
+    }
+
+    @Override
+    public List<Object> getContent() {
+        return myContentContainer == this ? myDocumentPart.getContent() : myContentContainer.getContent();
+    }
+
+    @Override
+    public void setContentContainer(final ContentContainer container) {
+        myContentContainer = container;
     }
 
     @Override
@@ -155,7 +177,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public void addP(final P p) {
-        myDocumentPart.getContent().add(p);
+        myContentContainer.getContent().add(p);
     }
 
     @Override
@@ -170,10 +192,10 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public P getLastP() {
-        final List<Object> content = myDocumentPart.getContent();
+        final List<Object> content = myContentContainer.getContent();
         if (content == null || content.size() == 0) return null;
         final Object o = content.get(content.size() - 1);
-        return o instanceof P ? (P) o :null;
+        return o instanceof P ? (P) o : null;
     }
 
     @Override
@@ -183,7 +205,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         final List<Object> content = p.getContent();
         if (content == null || content.size() == 0) return null;
         final Object o = content.get(content.size() - 1);
-        return o instanceof R ? (R) o :null;
+        return o instanceof R ? (R) o : null;
     }
 
     @Override
@@ -192,7 +214,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         PPr pPr = p.getPPr();
 
         // Create object for pStyle if one does not already exist
-        PPrBase.PStyle basePStyle = myFactory.createPPrBasePStyle();
+        PStyle basePStyle = myFactory.createPPrBasePStyle();
         pPr.setPStyle(basePStyle);
         basePStyle.setVal(style);
         return basePStyle;
@@ -318,12 +340,12 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public void addBlankLine(final int size, final String styleId) {
-        addBlankLine(BigInteger.valueOf(size), styleId);
+        addBlankLine(valueOf(size), styleId);
     }
 
     @Override
     public void addBlankLine(final long size, final String styleId) {
-        addBlankLine(BigInteger.valueOf(size), styleId);
+        addBlankLine(valueOf(size), styleId);
     }
 
     @Override
@@ -366,7 +388,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
             final ParaRPr rPr = explicitPPr.getRPr();
             BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
 
-            addBlankLine(size.multiply(BigInteger.valueOf(count)), null);
+            addBlankLine(size.multiply(valueOf(count)), null);
         }
     }
 
@@ -390,6 +412,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         myRunFormatProviders.put(getContextFrame(), myRunFormatProvider);
         BlockFormatProvider<T> oldRenderingBlockFormatProvider = myBlockFormatProvider;
         RunFormatProvider<T> oldRenderingRunFormatProvider = myRunFormatProvider;
+        ContentContainer oldRenderingContentContainer = myContentContainer;
         ParaContainer oldRenderingParaContainer = myParaContainer;
         RunContainer oldRenderingRunContainer = myRunContainer;
         T oldNode = getContextFrame();
@@ -415,6 +438,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         myBlockFormatProvider = oldRenderingBlockFormatProvider;
         myRunContainer = oldRenderingRunContainer;
         myParaContainer = oldRenderingParaContainer;
+        myContentContainer = oldRenderingContentContainer;
     }
 
     @Override
@@ -455,7 +479,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         RPr rPr = getRPr();
         HpsMeasure hpsmeasure = myFactory.createHpsMeasure();
         rPr.setSz(hpsmeasure);
-        hpsmeasure.setVal(BigInteger.valueOf(val));
+        hpsmeasure.setVal(valueOf(val));
         return hpsmeasure;
     }
 
@@ -552,4 +576,215 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
             }
         });
     }
+
+    // @formatter:off
+    //static String footnotePartXML = "<w:footnotes mc:Ignorable=\"w14 wp14\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:xml=\"http://www.w3.org/XML/1998/namespace\" xmlns:mc=\"http://schemas.openxmlformats.org/markup-compatibility/2006\">"
+    //        + "<w:footnote w:id=\"-1\" w:type=\"separator\">"  // matching CTFtnDocProps below
+    //            + "<w:p>"
+    //                + "<w:pPr>"
+    //                    + "<w:spacing w:after=\"0\" w:line=\"240\" w:lineRule=\"auto\"/>"
+    //                +"</w:pPr>"
+    //                + "<w:r>"
+    //                    + "<w:separator/>"
+    //                +"</w:r>"
+    //            +"</w:p>"
+    //        +"</w:footnote>"
+    //        + "<w:footnote w:id=\"0\" w:type=\"continuationSeparator\">"
+    //            + "<w:p>"
+    //                + "<w:pPr>"
+    //                    + "<w:spacing w:after=\"0\" w:line=\"240\" w:lineRule=\"auto\"/>"
+    //                +"</w:pPr>"
+    //                + "<w:r>"
+    //                    + "<w:continuationSeparator/>"
+    //                +"</w:r>"
+    //            +"</w:p>"
+    //        +"</w:footnote>"
+    //    +"</w:footnotes>";
+    // @formatter:on
+
+    @Override
+    public FootnotesPart getFootnotesPart() throws Docx4JException {
+        // Setup FootnotesPart if necessary,
+        // along with DocumentSettings
+        FootnotesPart footnotesPart = myDocumentPart.getFootnotesPart();
+        if (footnotesPart == null) { // that'll be the case in this example
+            // initialise it
+            footnotesPart = new FootnotesPart();
+            myDocumentPart.addTargetPart(footnotesPart);
+
+            //CTFootnotes footnotes = null;
+            //footnotes = (CTFootnotes) XmlUtils.unwrap(XmlUtils.unmarshalString(footnotePartXML));
+            //footnotesPart.setJaxbElement(footnotes);
+
+            CTFootnotes footnotes = myFactory.createCTFootnotes();
+            //JAXBElement<CTFootnotes> footnotesWrapped = myFactory.createFootnotes(footnotes);
+
+            // Create object for footnote
+            CTFtnEdn ftnedn = myFactory.createCTFtnEdn();
+            footnotes.getFootnote().add(ftnedn);
+            ftnedn.setId(valueOf(-1));
+            ftnedn.setType(org.docx4j.wml.STFtnEdn.SEPARATOR);
+            // Create object for p
+            P p = myFactory.createP();
+            ftnedn.getContent().add(p);
+            // Create object for r
+            R r = myFactory.createR();
+            p.getContent().add(r);
+            // Create object for separator (wrapped in JAXBElement)
+            Separator rseparator = myFactory.createRSeparator();
+            JAXBElement<Separator> rseparatorWrapped = myFactory.createRSeparator(rseparator);
+            r.getContent().add(rseparatorWrapped);
+            // Create object for footnote
+            CTFtnEdn ftnedn2 = myFactory.createCTFtnEdn();
+            footnotes.getFootnote().add(ftnedn2);
+            ftnedn2.setId(valueOf(0));
+            ftnedn2.setType(org.docx4j.wml.STFtnEdn.CONTINUATION_SEPARATOR);
+            // Create object for p
+            P p2 = myFactory.createP();
+            ftnedn2.getContent().add(p2);
+            // Create object for r
+            R r2 = myFactory.createR();
+            p2.getContent().add(r2);
+            // Create object for continuationSeparator (wrapped in JAXBElement)
+            ContinuationSeparator rcontinuationseparator = myFactory.createRContinuationSeparator();
+            JAXBElement<ContinuationSeparator> rcontinuationseparatorWrapped = myFactory.createRContinuationSeparator(rcontinuationseparator);
+            r2.getContent().add(rcontinuationseparatorWrapped);
+
+            footnotesPart.setJaxbElement(footnotes);
+
+            // Usually the settings part contains footnote properties;
+            // so add these if not present
+            DocumentSettingsPart dsp = myDocumentPart.getDocumentSettingsPart();
+            if (dsp == null) {
+                // create it
+                dsp = new DocumentSettingsPart();
+                myDocumentPart.addTargetPart(dsp);
+            }
+
+            CTSettings settings = dsp.getContents();
+            if (settings == null) {
+                settings = myFactory.createCTSettings();
+                dsp.setJaxbElement(settings);
+            }
+
+            CTFtnDocProps ftndocprops = settings.getFootnotePr();
+            if (ftndocprops == null) {
+                //String openXML = "<w:footnotePr xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\">"
+                //        + "<w:footnote w:id=\"-1\"/>" // these 2 numbers are special, and correspond with string footnotePartXML above
+                //        + "<w:footnote w:id=\"0\"/>"
+                //        + "</w:footnotePr>";
+                //settings.setFootnotePr((CTFtnDocProps) XmlUtils.unmarshalString(openXML, Context.jc, CTFtnDocProps.class));
+
+                ftndocprops = myFactory.createCTFtnDocProps();
+                CTFtnEdnSepRef sepRef = myFactory.createCTFtnEdnSepRef();
+                sepRef.setId(valueOf(-1));
+                ftndocprops.getFootnote().add(sepRef);
+                sepRef = myFactory.createCTFtnEdnSepRef();
+                sepRef.setId(valueOf(0));
+                ftndocprops.getFootnote().add(sepRef);
+                settings.setFootnotePr(ftndocprops);
+            }
+        }
+
+        return footnotesPart;
+    }
+
+    @Override
+    public CTFtnEdn addFootnote(final int footnoteID) throws Docx4JException {
+        // Add the note number in the run
+        CTFtnEdnRef ftnednref = myFactory.createCTFtnEdnRef();
+        JAXBElement<CTFtnEdnRef> ftnednrefWrapped = myFactory.createRFootnoteReference(ftnednref);
+        R ftnR = myFactory.createR();
+        getP().getContent().add(ftnR);
+
+        ftnR.getContent().add(ftnednrefWrapped);
+
+        RPr ftnRPr = myFactory.createRPr();
+        ftnR.setRPr(ftnRPr);
+
+        RStyle ftnRStyle = myFactory.createRStyle();
+        ftnRPr.setRStyle(ftnRStyle);
+
+        ftnRStyle.setVal(FOOTNOTE_ANCHOR_STYLE);
+
+        // see if we need to create a new footnote id or can re-use existing one
+        int i = footnoteID > 0 ? footnoteID : myFootnoteRef++;
+        ftnednref.setId(valueOf(i));
+
+        if (footnoteID > 0) {
+            for (CTFtnEdn ftnEdn : getFootnotesPart().getContents().getFootnote()) {
+                if (ftnEdn.getId().compareTo(valueOf(footnoteID)) == 0) {
+                    return ftnEdn;
+                }
+            }
+        }
+
+        // Create a footnote in the footnotesPart
+        // @formatter:off
+        //String openXML = "<w:footnote w:id=\"" + i + "\" xmlns:w=\"http://schemas.openxmlformats.org/wordprocessingml/2006/main\" xmlns:xml=\"http://www.w3.org/XML/1998/namespace\">"
+        //        + "<w:p>"
+        //            + "<w:pPr>"
+        //                + "<w:pStyle w:val=\"Footnote\"/>"
+        //                //+ "<w:rPr>"
+        //                //    + "<w:lang w:val=\"en-AU\"/>"
+        //                //+"</w:rPr>"
+        //            +"</w:pPr>"
+        //            + "<w:r>"
+        //                + "<w:rPr>"
+        //                    + "<w:rStyle w:val=\"FootnoteAnchor\"/>"
+        //                +"</w:rPr>"
+        //                + "<w:footnoteRef/>"
+        //            +"</w:r>"
+        //            + "<w:r>"
+        //                + "<w:t xml:space=\"preserve\"> </w:t>"
+        //            +"</w:r>"
+        //            + "<w:r>"
+        //                //+ "<w:rPr>"
+        //                //    + "<w:lang w:val=\"en-AU\"/>"
+        //                //+"</w:rPr>"
+        //                + "<w:t>" + text +"</w:t>"
+        //            +"</w:r>"
+        //        +"</w:p>"
+        //    +"</w:footnote>";
+        //// @formatter:on
+        //CTFtnEdn ftnedn = (CTFtnEdn) XmlUtils.unmarshalString(openXML, Context.jc, CTFtnEdn.class);
+
+        CTFtnEdn ftnEdn = myFactory.createCTFtnEdn();
+        ftnEdn.setId(valueOf(i));
+
+        P p = myFactory.createP();
+        ftnEdn.getContent().add(p);
+
+        PPr pPr = myFactory.createPPr();
+        p.setPPr(pPr);
+
+        PStyle pStyle = myFactory.createPPrBasePStyle();
+        pPr.setPStyle(pStyle);
+
+        pStyle.setVal(FOOTNOTE_STYLE);
+
+        R r1 = myFactory.createR();
+        p.getContent().add(r1);
+        RPr rPr = myFactory.createRPr();
+        r1.setRPr(rPr);
+        RStyle rStyle = myFactory.createRStyle();
+        rPr.setRStyle(rStyle);
+        rStyle.setVal(FOOTNOTE_ANCHOR_STYLE);
+
+        final FootnoteRef footnoteRef = myFactory.createRFootnoteRef();
+        r1.getContent().add(footnoteRef);
+
+        R r2 = myFactory.createR();
+        Text text1 = myFactory.createText();
+        JAXBElement<Text> textWrapped = myFactory.createRT(text1);
+        r2.getContent().add(textWrapped);
+        text1.setSpace(RunFormatProvider.SPACE_PRESERVE);
+        text1.setValue("\t");
+        p.getContent().add(r2);
+
+        getFootnotesPart().getContents().getFootnote().add(ftnEdn);
+        return ftnEdn;
+    }
 }
+
+

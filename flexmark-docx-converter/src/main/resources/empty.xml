@@ -433,6 +433,39 @@
                     </w:pPr>
                     <w:rPr/>
                 </w:style>
+                <w:style w:type="character" w:styleId="FootnoteAnchor">
+                    <w:name w:val="Footnote Anchor"/>
+                    <w:rPr>
+                        <w:vertAlign w:val="superscript"/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:type="character" w:styleId="EndnoteAnchor">
+                    <w:name w:val="Endnote Anchor"/>
+                    <w:rPr>
+                        <w:vertAlign w:val="superscript"/>
+                    </w:rPr>
+                </w:style>
+                <w:style w:type="paragraph" w:styleId="Index">
+                    <w:name w:val="Index"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:qFormat/>
+                    <w:pPr>
+                        <w:suppressLineNumbers/>
+                    </w:pPr>
+                    <w:rPr/>
+                </w:style>
+                <w:style w:type="paragraph" w:styleId="Footnote">
+                    <w:name w:val="Footnote Text"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:pPr>
+                        <w:suppressLineNumbers/>
+                        <w:ind w:left="240" w:hanging="240"/>
+                    </w:pPr>
+                    <w:rPr>
+                        <w:sz w:val="20"/>
+                        <w:szCs w:val="20"/>
+                    </w:rPr>
+                </w:style>
                 <w:style w:styleId="List1" w:type="numbering">
                     <w:name w:val="List 1"/>
                     <w:qFormat/>

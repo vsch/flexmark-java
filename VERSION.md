@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.6](#0286)
 - [0.28.4](#0284)
 - [0.28.2](#0282)
 - [0.28.0](#0280)
@@ -221,19 +222,26 @@ flexmark-java
   * [x] Headings
   * [x] Bold and italic text
 
-0.28.4
+0.28.6
 ------
 
-* [ ] Fix: when converting link text from HTML should escape special characters `[`, `]` and any
-      others that would be interpreted as markdown inlines.
-
 * Implement DOCX conversion for missing elements:
-    * [ ] Footnotes
     * [ ] Table of Contents
 
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.4
+------
+
+* Fix: when converting link text from HTML should escape special characters `[`, `]` 
+
+* Fix: DOCX conversion used to add hanging indent of parent to child's left indent value. Now
+  only parent's left indent is added to child's left indent.
+
+* Implement DOCX conversion for missing elements:
+    * Footnotes
 
 0.28.2
 ------

@@ -1,6 +1,5 @@
 package com.vladsch.flexmark.docx.converter.util;
 
-import com.vladsch.flexmark.ast.Node;
 import org.docx4j.wml.Style;
 
 public interface FormatProvider<T> {

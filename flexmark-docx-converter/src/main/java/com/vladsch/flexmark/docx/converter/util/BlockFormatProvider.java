@@ -13,6 +13,7 @@ public interface BlockFormatProvider<T> extends FormatProvider<T> {
     String TABLE_CAPTION = "TableCaption";
     String TABLE_CONTENTS = "TableContents";
     String TABLE_HEADING = "TableHeading";
+    String FOOTNOTE_STYLE = "Footnote";
 
 /*
 

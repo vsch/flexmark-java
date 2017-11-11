@@ -36,6 +36,7 @@ import java.util.*;
 
 public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
     // set to true to dump DOCX and XML files to pre-determined location
+    // RELEASE : change to true for release
     static final boolean SKIP_IGNORED_TESTS = true;
     private static final boolean DUMP_TEST_CASE_FILES = !SKIP_IGNORED_TESTS;
     private static final boolean DUMP_ALL_TESTS_FILES = !SKIP_IGNORED_TESTS;

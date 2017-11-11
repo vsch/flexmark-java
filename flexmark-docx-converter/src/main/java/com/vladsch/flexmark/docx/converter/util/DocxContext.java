@@ -1,6 +1,8 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.FootnotesPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
@@ -13,6 +15,7 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     DocxHelper getHelper();
     void setBlockFormatProvider(BlockFormatProvider<T> formatProvider);
     void setRunFormatProvider(RunFormatProvider<T> formatProvider);
+    void setContentContainer(ContentContainer container);
     void setParaContainer(ParaContainer container);
     void setRunContainer(RunContainer container);
     BlockFormatProvider<T> getBlockFormatProvider(T node);
@@ -85,6 +88,8 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     void addPageBreak();
     void addBreak(STBrType breakType);
 
+    List<Object> getContent();
+
     RPr addBold();
     RPr getRPr();
     Color createColor();
@@ -129,4 +134,21 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
     void contextFramed(Runnable runnable);
     void renderFencedCodeLines(CharSequence... lines);
     void renderFencedCodeLines(List<? extends CharSequence> lines);
+
+    /**
+     * Get or create FootnotesPart for the document
+     *
+     * @return footnotes part
+     * @throws Docx4JException if cannot create part
+     */
+    FootnotesPart getFootnotesPart() throws Docx4JException;
+
+    /**
+     * Add footnote and return it
+     *
+     * @param footnoteID re-use footnote id or 0 if new footnote
+     * @return footnote element
+     * @throws Docx4JException thrown if cannot get or create footnotes part of the document
+     */
+    CTFtnEdn addFootnote(final int footnoteID) throws Docx4JException;
 }

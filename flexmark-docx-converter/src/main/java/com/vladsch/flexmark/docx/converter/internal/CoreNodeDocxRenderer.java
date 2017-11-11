@@ -9,6 +9,8 @@ import com.vladsch.flexmark.docx.converter.CustomNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.DocxRendererContext;
 import com.vladsch.flexmark.docx.converter.PhasedNodeDocxRenderer;
 import com.vladsch.flexmark.docx.converter.util.*;
+import com.vladsch.flexmark.ext.footnotes.Footnote;
+import com.vladsch.flexmark.ext.footnotes.FootnoteBlock;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
 import com.vladsch.flexmark.ext.ins.Ins;
@@ -27,10 +29,7 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
-import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
-import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
-import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.*;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 
@@ -65,6 +64,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final boolean tableCaptionToParagraph;
     protected final boolean tableCaptionBeforeTable;
     private int imageId;
+    private final HashMap<Node, Integer> footnoteIDs;
 
     public CoreNodeDocxRenderer(DataHolder options) {
         this.referenceRepository = getRepository(options);
@@ -76,6 +76,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         this.options = new DocxRendererOptions(options);
         this.listOptions = ListOptions.getFrom(options);
+        this.footnoteIDs = new HashMap<Node, Integer>();
     }
 
     @Override
@@ -120,7 +121,6 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
-
                 new NodeDocxRendererHandler<AutoLink>(AutoLink.class, new CustomNodeDocxRenderer<AutoLink>() {
                     @Override
                     public void render(final AutoLink node, final DocxRendererContext docx) {
@@ -190,6 +190,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 new NodeDocxRendererHandler<FencedCodeBlock>(FencedCodeBlock.class, new CustomNodeDocxRenderer<FencedCodeBlock>() {
                     @Override
                     public void render(final FencedCodeBlock node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<Footnote>(Footnote.class, new CustomNodeDocxRenderer<Footnote>() {
+                    @Override
+                    public void render(final Footnote node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<FootnoteBlock>(FootnoteBlock.class, new CustomNodeDocxRenderer<FootnoteBlock>() {
+                    @Override
+                    public void render(final FootnoteBlock node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
@@ -422,10 +434,16 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             } else {
                 docx.setBlockFormatProvider(new BlockFormatProviderBase<Node>(docx, LOOSE_PARAGRAPH_STYLE));
             }
+            docx.createP();
         } else {
             // the parent handles our formatting
+            if (node.getParent() instanceof FootnoteBlock) {
+                // there is already an open paragraph, re-use it
+            } else {
+                docx.createP();
+            }
         }
-        docx.createP();
+
         docx.renderChildren(node);
     }
 
@@ -694,7 +712,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 final List<Object> content = hyperlink.getContent();
                 if (content == null || content.size() == 0) return null;
                 final Object o = content.get(content.size() - 1);
-                return o instanceof R ? (R) o :null;
+                return o instanceof R ? (R) o : null;
             }
         });
 
@@ -946,7 +964,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         myTbl = docx.getFactory().createTbl();
         JAXBElement<org.docx4j.wml.Tbl> tblWrapped = docx.getFactory().createHdrTbl(myTbl);
-        docx.getDocxDocument().getContent().add(tblWrapped);
+        docx.getContent().add(tblWrapped);
 
         // Create object for tblPr
         TblPr tblpr = docx.getFactory().createTblPr();
@@ -1162,7 +1180,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 final List<Object> content = tc.getContent();
                 if (content == null || content.size() == 0) return null;
                 final Object o = content.get(content.size() - 1);
-                return o instanceof P ? (P) o :null;
+                return o instanceof P ? (P) o : null;
             }
         });
 
@@ -1229,4 +1247,41 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         throw new IllegalStateException("Unknown alignment: " + alignment);
     }
 
+    private void render(FootnoteBlock node, final DocxRendererContext docx) {
+
+    }
+
+    private void render(Footnote node, final DocxRendererContext docx) {
+        final FootnoteBlock footnoteBlock = node.getFootnoteBlock();
+        if (footnoteBlock == null) {
+            //just text
+            final org.docx4j.wml.Text text = docx.addWrappedText();
+            text.setValue("[^");
+            docx.renderChildren(node);
+            final org.docx4j.wml.Text text1 = docx.addWrappedText();
+            text1.setValue("]");
+        } else {
+            try {
+                int footnoteId = footnoteIDs.containsKey(footnoteBlock) ? footnoteIDs.get(footnoteBlock) : 0;
+                final CTFtnEdn ftnEdn = docx.addFootnote(footnoteId);
+                if (ftnEdn.getId().compareTo(BigInteger.valueOf(footnoteId)) != 0) {
+                    docx.contextFramed(new Runnable() {
+                        @Override
+                        public void run() {
+                            docx.setBlockFormatProvider(new FootnoteBlockFormatProvider<Node>(docx));
+                            docx.setContentContainer(new ContentContainer() {
+                                @Override
+                                public List<Object> getContent() {
+                                    return ftnEdn.getContent();
+                                }
+                            });
+                            docx.renderChildren(footnoteBlock);
+                        }
+                    });
+                }
+            } catch (Docx4JException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -1,15 +1,15 @@
 package com.vladsch.flexmark.ext.footnotes;
 
-import com.vladsch.flexmark.ast.CustomBlock;
-import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.ast.ReferenceNode;
+import com.vladsch.flexmark.ast.*;
 import com.vladsch.flexmark.ext.footnotes.internal.FootnoteRepository;
+import com.vladsch.flexmark.parser.ListOptions;
+import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
 /**
  * A Footnote definition node containing text and other inline nodes nodes as children.
  */
-public class FootnoteBlock extends CustomBlock implements ReferenceNode<FootnoteRepository, FootnoteBlock, Footnote> {
+public class FootnoteBlock extends CustomBlock implements ReferenceNode<FootnoteRepository, FootnoteBlock, Footnote>, ParagraphItemContainer {
     protected BasedSequence openingMarker = BasedSequence.NULL;
     protected BasedSequence text = BasedSequence.NULL;
     protected BasedSequence closingMarker = BasedSequence.NULL;
@@ -102,5 +102,15 @@ public class FootnoteBlock extends CustomBlock implements ReferenceNode<Footnote
 
     public void setFootnote(BasedSequence footnote) {
         this.footnote = footnote;
+    }
+
+    @Override
+    public boolean isItemParagraph(final Paragraph node) {
+        return node == getFirstChild();
+    }
+
+    @Override
+    public boolean isParagraphWrappingDisabled(final Paragraph node, final ListOptions listOptions, final DataHolder options) {
+        return false;
     }
 }

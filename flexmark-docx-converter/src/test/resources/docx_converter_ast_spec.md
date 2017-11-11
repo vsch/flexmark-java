@@ -6545,3 +6545,63 @@ list with block quote
 ````````````````````````````````
 
 
+## Footnotes
+
+```````````````````````````````` example Footnotes: 1
+Paragraph text[^1]
+
+[^1]: Footnote text
+
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Paragraph text</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteAnchor"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example Footnotes: 2
+Paragraph text[^1]
+
+[^1]: Footnote text that will be wrapped and should have a hanging indent to align the overflow
+      to the level of the text after the footnote anchor at the left margin.
+
+      * list as part of footnote
+      * another item
+      
+      | table |
+      |-------|
+      | data  |
+
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Paragraph text</w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteAnchor"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
