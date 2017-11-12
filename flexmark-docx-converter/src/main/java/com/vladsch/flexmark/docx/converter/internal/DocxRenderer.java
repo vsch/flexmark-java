@@ -69,6 +69,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> LINEBREAK_ON_INLINE_HTML_BR = new DataKey<Boolean>("LINEBREAK_ON_INLINE_HTML_BR", true);
     public static final DataKey<Boolean> TABLE_CAPTION_TO_PARAGRAPH = new DataKey<Boolean>("TABLE_CAPTION_TO_PARAGRAPH", true);
     public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<Boolean>("TABLE_CAPTION_BEFORE_TABLE", false);
+    public static final DataKey<String> TOC_INSTRUCTION = new DataKey<String>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
 
     private final List<NodeDocxRendererFactory> nodeFormatterFactories;
     final DocxRendererOptions rendererOptions;

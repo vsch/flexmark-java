@@ -13,6 +13,7 @@ import com.vladsch.flexmark.ext.footnotes.FootnoteExtension;
 import com.vladsch.flexmark.ext.gfm.strikethrough.StrikethroughSubscriptExtension;
 import com.vladsch.flexmark.ext.ins.InsExtension;
 import com.vladsch.flexmark.ext.tables.TablesExtension;
+import com.vladsch.flexmark.ext.toc.SimTocExtension;
 import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.ext.wikilink.WikiLinkExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
@@ -56,6 +57,7 @@ public class ComboDocxConverterSpecTest extends ComboSpecTestCase {
                     SuperscriptExtension.create(),
                     TablesExtension.create(),
                     TocExtension.create(),
+                    SimTocExtension.create(),
                     WikiLinkExtension.create()
             ))
             .set(DocxRenderer.RENDER_BODY_ONLY, true)

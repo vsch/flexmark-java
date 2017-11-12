@@ -150,5 +150,5 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return footnote element
      * @throws Docx4JException thrown if cannot get or create footnotes part of the document
      */
-    CTFtnEdn addFootnote(final int footnoteID) throws Docx4JException;
+    CTFtnEdn addFootnote(final BigInteger footnoteID) throws Docx4JException;
 }

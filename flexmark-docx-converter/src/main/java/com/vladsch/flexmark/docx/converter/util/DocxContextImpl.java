@@ -25,8 +25,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import static java.math.BigInteger.valueOf;
-
 public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T>, RunFormatProvider<T>, ParaContainer, RunContainer, ContentContainer {
     protected final WordprocessingMLPackage myPackage;
     protected final MainDocumentPart myDocumentPart;
@@ -340,12 +338,12 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public void addBlankLine(final int size, final String styleId) {
-        addBlankLine(valueOf(size), styleId);
+        addBlankLine(BigInteger.valueOf(size), styleId);
     }
 
     @Override
     public void addBlankLine(final long size, final String styleId) {
-        addBlankLine(valueOf(size), styleId);
+        addBlankLine(BigInteger.valueOf(size), styleId);
     }
 
     @Override
@@ -388,7 +386,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
             final ParaRPr rPr = explicitPPr.getRPr();
             BigInteger size = rPr.getSz().getVal().max(rPr.getSzCs().getVal());
 
-            addBlankLine(size.multiply(valueOf(count)), null);
+            addBlankLine(size.multiply(BigInteger.valueOf(count)), null);
         }
     }
 
@@ -479,7 +477,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         RPr rPr = getRPr();
         HpsMeasure hpsmeasure = myFactory.createHpsMeasure();
         rPr.setSz(hpsmeasure);
-        hpsmeasure.setVal(valueOf(val));
+        hpsmeasure.setVal(BigInteger.valueOf(val));
         return hpsmeasure;
     }
 
@@ -622,7 +620,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
             // Create object for footnote
             CTFtnEdn ftnedn = myFactory.createCTFtnEdn();
             footnotes.getFootnote().add(ftnedn);
-            ftnedn.setId(valueOf(-1));
+            ftnedn.setId(BigInteger.valueOf(-1));
             ftnedn.setType(org.docx4j.wml.STFtnEdn.SEPARATOR);
             // Create object for p
             P p = myFactory.createP();
@@ -637,7 +635,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
             // Create object for footnote
             CTFtnEdn ftnedn2 = myFactory.createCTFtnEdn();
             footnotes.getFootnote().add(ftnedn2);
-            ftnedn2.setId(valueOf(0));
+            ftnedn2.setId(BigInteger.valueOf(0));
             ftnedn2.setType(org.docx4j.wml.STFtnEdn.CONTINUATION_SEPARATOR);
             // Create object for p
             P p2 = myFactory.createP();
@@ -677,10 +675,10 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
                 ftndocprops = myFactory.createCTFtnDocProps();
                 CTFtnEdnSepRef sepRef = myFactory.createCTFtnEdnSepRef();
-                sepRef.setId(valueOf(-1));
+                sepRef.setId(BigInteger.valueOf(-1));
                 ftndocprops.getFootnote().add(sepRef);
                 sepRef = myFactory.createCTFtnEdnSepRef();
-                sepRef.setId(valueOf(0));
+                sepRef.setId(BigInteger.valueOf(0));
                 ftndocprops.getFootnote().add(sepRef);
                 settings.setFootnotePr(ftndocprops);
             }
@@ -690,7 +688,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     }
 
     @Override
-    public CTFtnEdn addFootnote(final int footnoteID) throws Docx4JException {
+    public CTFtnEdn addFootnote(final BigInteger footnoteID) throws Docx4JException {
         // Add the note number in the run
         CTFtnEdnRef ftnednref = myFactory.createCTFtnEdnRef();
         JAXBElement<CTFtnEdnRef> ftnednrefWrapped = myFactory.createRFootnoteReference(ftnednref);
@@ -708,12 +706,13 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         ftnRStyle.setVal(FOOTNOTE_ANCHOR_STYLE);
 
         // see if we need to create a new footnote id or can re-use existing one
-        int i = footnoteID > 0 ? footnoteID : myFootnoteRef++;
-        ftnednref.setId(valueOf(i));
+        final boolean haveID = footnoteID.compareTo(BigInteger.ZERO) > 0;
+        BigInteger i = haveID ? footnoteID : BigInteger.valueOf(myFootnoteRef++);
+        ftnednref.setId(i);
 
-        if (footnoteID > 0) {
+        if (haveID) {
             for (CTFtnEdn ftnEdn : getFootnotesPart().getContents().getFootnote()) {
-                if (ftnEdn.getId().compareTo(valueOf(footnoteID)) == 0) {
+                if (ftnEdn.getId().compareTo(footnoteID) == 0) {
                     return ftnEdn;
                 }
             }
@@ -750,7 +749,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         //CTFtnEdn ftnedn = (CTFtnEdn) XmlUtils.unmarshalString(openXML, Context.jc, CTFtnEdn.class);
 
         CTFtnEdn ftnEdn = myFactory.createCTFtnEdn();
-        ftnEdn.setId(valueOf(i));
+        ftnEdn.setId(i);
 
         P p = myFactory.createP();
         ftnEdn.getContent().add(p);

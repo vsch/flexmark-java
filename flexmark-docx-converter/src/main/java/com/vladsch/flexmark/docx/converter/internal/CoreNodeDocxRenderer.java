@@ -15,6 +15,9 @@ import com.vladsch.flexmark.ext.gfm.strikethrough.Strikethrough;
 import com.vladsch.flexmark.ext.gfm.strikethrough.Subscript;
 import com.vladsch.flexmark.ext.ins.Ins;
 import com.vladsch.flexmark.ext.tables.*;
+import com.vladsch.flexmark.ext.toc.SimTocBlock;
+import com.vladsch.flexmark.ext.toc.TocBlock;
+import com.vladsch.flexmark.ext.toc.TocBlockBase;
 import com.vladsch.flexmark.html.renderer.LinkType;
 import com.vladsch.flexmark.html.renderer.ResolvedLink;
 import com.vladsch.flexmark.parser.ListOptions;
@@ -31,6 +34,8 @@ import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.parts.WordprocessingML.*;
 import org.docx4j.relationships.Relationship;
+import org.docx4j.toc.TocException;
+import org.docx4j.toc.TocGenerator;
 import org.docx4j.wml.*;
 
 import javax.xml.bind.JAXBElement;
@@ -64,7 +69,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     protected final boolean tableCaptionToParagraph;
     protected final boolean tableCaptionBeforeTable;
     private int imageId;
-    private final HashMap<Node, Integer> footnoteIDs;
+    private final HashMap<Node, BigInteger> footnoteIDs;
+    private TocBlockBase lastTocBlock;
 
     public CoreNodeDocxRenderer(DataHolder options) {
         this.referenceRepository = getRepository(options);
@@ -76,7 +82,8 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         this.options = new DocxRendererOptions(options);
         this.listOptions = ListOptions.getFrom(options);
-        this.footnoteIDs = new HashMap<Node, Integer>();
+        this.footnoteIDs = new HashMap<Node, BigInteger>();
+        this.lastTocBlock = null;
     }
 
     @Override
@@ -95,6 +102,28 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 break;
 
             case DOCUMENT_BOTTOM:
+                if (lastTocBlock != null) {
+                    TocGenerator tocGenerator = null;
+                    try {
+                        tocGenerator = new TocGenerator(docx.getPackage());
+                        //tocGenerator.generateToc( 0,    "TOC \\o \"1-3\" \\h \\z \\u ", true);
+                        tocGenerator.generateToc( 0,    options.tocInstruction, true);
+                    } catch (TocException e) {
+                        if (tocGenerator != null && e.getMessage().contains("use updateToc instead")) {
+                            try {
+                                tocGenerator.updateToc(true);
+                            } catch (TocException e1) {
+                                e1.printStackTrace();
+                            }
+                        } else {
+                            e.printStackTrace();
+                        }
+                    }
+                    // to generate page numbers, you should install your own local instance of Plutext PDF Converter,
+                    // and point to that in docx4j.properties
+
+                    //tocGenerator.generateToc( 0,    "TOC \\h \\z \\t \"comh1,1,comh2,2,comh3,3,comh4,4\" ", true);
+                }
                 break;
 
             default:
@@ -400,6 +429,18 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 new NodeDocxRendererHandler<TableCaption>(TableCaption.class, new CustomNodeDocxRenderer<TableCaption>() {
                     @Override
                     public void render(TableCaption node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<TocBlock>(TocBlock.class, new CustomNodeDocxRenderer<TocBlock>() {
+                    @Override
+                    public void render(TocBlock node, final DocxRendererContext docx) {
+                        CoreNodeDocxRenderer.this.render(node, docx);
+                    }
+                }),
+                new NodeDocxRendererHandler<SimTocBlock>(SimTocBlock.class, new CustomNodeDocxRenderer<SimTocBlock>() {
+                    @Override
+                    public void render(SimTocBlock node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 })
@@ -1262,9 +1303,12 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             text1.setValue("]");
         } else {
             try {
-                int footnoteId = footnoteIDs.containsKey(footnoteBlock) ? footnoteIDs.get(footnoteBlock) : 0;
+                BigInteger footnoteId = footnoteIDs.containsKey(footnoteBlock) ? footnoteIDs.get(footnoteBlock) : BigInteger.ZERO;
                 final CTFtnEdn ftnEdn = docx.addFootnote(footnoteId);
-                if (ftnEdn.getId().compareTo(BigInteger.valueOf(footnoteId)) != 0) {
+                final BigInteger ftnEdnId = ftnEdn.getId();
+                if (ftnEdnId.compareTo(footnoteId) != 0) {
+                    // Word does not like re-using footnotes, so we create a new one for every reference
+                    //footnoteIDs.put(footnoteBlock, ftnEdnId);
                     docx.contextFramed(new Runnable() {
                         @Override
                         public void run() {
@@ -1283,5 +1327,13 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 e.printStackTrace();
             }
         }
+    }
+
+    private void render(TocBlock node, final DocxRendererContext docx) {
+        lastTocBlock = node;
+    }
+
+    private void render(SimTocBlock node, final DocxRendererContext docx) {
+        lastTocBlock = node;
     }
 }

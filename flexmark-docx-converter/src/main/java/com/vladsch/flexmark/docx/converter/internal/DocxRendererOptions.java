@@ -13,6 +13,7 @@ public class DocxRendererOptions {
     public final boolean suppressInlineHtml;
     public final boolean suppressInlineHtmlComments;
     public final int maxImageWidth;
+    public final String tocInstruction;
 
     public DocxRendererOptions(DataHolder options) {
         escapeHtmlBlocks = DocxRenderer.ESCAPE_HTML_BLOCKS.getFrom(options);
@@ -25,5 +26,6 @@ public class DocxRendererOptions {
         suppressInlineHtml = DocxRenderer.SUPPRESS_INLINE_HTML.getFrom(options);
         suppressInlineHtmlComments = DocxRenderer.SUPPRESS_INLINE_HTML_COMMENTS.getFrom(options);
         maxImageWidth = DocxRenderer.MAX_IMAGE_WIDTH.getFrom(options);
+        tocInstruction = DocxRenderer.TOC_INSTRUCTION.getFrom(options);
     }
 }

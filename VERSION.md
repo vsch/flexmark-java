@@ -198,39 +198,17 @@ flexmark-java
 * [ ] Add: Base64 image embedding in `HtmlRenderer` as an option with images processed by a
       handler.
 
-* [ ] Add: finish missing elements from docx converter
-  * [x] Tables
-    * [ ] Footnotes
-    * [ ] Table of Contents
-    * [x] multiple header rows, column spans, markdown alignments
-    * [x] Table captions are not yet supported by docx4j API. Captions are converted to
-          "TableCaption" styled paragraphs if `DocxRenderer.TABLE_CAPTION_TO_PARAGRAPH` is set
-          to `true`, which it is by default. `DocxRenderer.TABLE_CAPTION_BEFORE_TABLE`, default
-          `false`, when set to `true` the caption is inserted before the table.
-    * [x] Ordered and unordered lists
-      * [x] restart numbering on a short to do list
-    * [x] Links
-    * [x] Images
-      * [x] Images get embedded into the document, even remote ones (using http: or https:
-            links)
-      * [x] Max Image width property available in options
-    * [x] Inline Code
-    * [x] Fenced Code
-    * [x] Block Quotes
-    * [x] Strike-through, Subscript, Superscript, Underline (Ins) text
-  * [x] Paragraph
-  * [x] Headings
-  * [x] Bold and italic text
+* [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
+
+&nbsp;</details>
 
 0.28.6
 ------
 
 * Implement DOCX conversion for missing elements:
-    * [ ] Table of Contents
-
-* [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
-
-&nbsp;</details>
+  * Table of Contents, `DocxRenderer.TOC_INSTRUCTION` controls TOC generation. see
+    [Docx4j GettingStarted](https://www.docx4java.org/docx4j/docx4j-3_3_0/documentation/Docx4j_GettingStarted.pdf)
+    under the heading `TOC Content Control`
 
 0.28.4
 ------

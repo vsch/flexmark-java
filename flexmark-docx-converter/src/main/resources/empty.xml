@@ -67,6 +67,20 @@
                         <w:lang w:bidi="hi-IN" w:eastAsia="zh-CN" w:val="en-CA"/>
                     </w:rPr>
                 </w:style>
+                <w:style w:styleId="Default" w:type="paragraph">
+                    <w:name w:val="Default"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:qFormat/>
+                    <w:pPr />
+                    <w:rPr />
+                </w:style>
+                <w:style w:styleId="Heading" w:type="paragraph">
+                    <w:name w:val="Heading"/>
+                    <w:basedOn w:val="Normal"/>
+                    <w:qFormat/>
+                    <w:pPr />
+                    <w:rPr />
+                </w:style>
                 <w:style w:styleId="Heading1" w:type="paragraph">
                     <w:name w:val="Heading 1"/>
                     <w:basedOn w:val="Heading"/>
@@ -199,6 +213,24 @@
                         <w:sz w:val="24"/>
                         <w:szCs w:val="24"/>
                     </w:rPr>
+                </w:style>
+                <w:style w:styleId="TOCHeading" w:type="paragraph">
+                    <w:name w:val="TOC Heading"/>
+                    <w:basedOn w:val="Heading3"/>
+                    <w:uiPriority w:val="39"/>
+                    <w:semiHidden/>
+                    <w:unhideWhenUsed/>
+                    <w:qFormat/>
+                    <w:pPr>
+                        <w:keepNext/>
+                        <w:keepLines/>
+                        <w:numPr>
+                            <w:numId w:val="0"/>
+                        </w:numPr>
+                        <w:spacing w:after="0" w:before="480"/>
+                        <w:outlineLvl w:val="9"/>
+                    </w:pPr>
+                    <w:rPr />
                 </w:style>
                 <w:style w:styleId="StrongEmphasis" w:type="character">
                     <w:name w:val="Strong Emphasis"/>

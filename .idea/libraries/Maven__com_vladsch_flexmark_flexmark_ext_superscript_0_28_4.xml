@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vladsch.flexmark:flexmark-ext-superscript:0.28.4">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-superscript/0.28.4/flexmark-ext-superscript-0.28.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-superscript/0.28.4/flexmark-ext-superscript-0.28.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-superscript/0.28.4/flexmark-ext-superscript-0.28.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
