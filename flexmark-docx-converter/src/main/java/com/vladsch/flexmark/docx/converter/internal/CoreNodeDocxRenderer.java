@@ -102,7 +102,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 break;
 
             case DOCUMENT_BOTTOM:
-                if (lastTocBlock != null) {
+                if (options.tocGenerate || lastTocBlock != null) {
                     TocGenerator tocGenerator = null;
                     try {
                         tocGenerator = new TocGenerator(docx.getPackage());

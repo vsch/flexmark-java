@@ -206,9 +206,12 @@ flexmark-java
 ------
 
 * Implement DOCX conversion for missing elements:
-  * Table of Contents, `DocxRenderer.TOC_INSTRUCTION` controls TOC generation. see
-    [Docx4j GettingStarted](https://www.docx4java.org/docx4j/docx4j-3_3_0/documentation/Docx4j_GettingStarted.pdf)
-    under the heading `TOC Content Control`
+  * Table of Contents, 
+    * `DocxRenderer.TOC_INSTRUCTION` controls TOC generation. see
+      [Docx4j GettingStarted](https://www.docx4java.org/docx4j/docx4j-3_3_0/documentation/Docx4j_GettingStarted.pdf)
+      under the heading `TOC Content Control`
+    * `DocxRenderer.TOC_GENERATE`, set to true to generate TOC even if no markdown TOC element
+      is present in the document.
 
 0.28.4
 ------
