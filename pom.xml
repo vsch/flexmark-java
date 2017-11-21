@@ -59,6 +59,7 @@
         <module>flexmark-profile-pegdown</module>
         <module>flexmark-test-util</module>
         <module>flexmark-util</module>
+        <module>flexmark-ext-youtube-embedded</module>
     </modules>
 
     <properties>
