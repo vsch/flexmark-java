@@ -30,6 +30,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" filepath="$PROJECT_DIR$/flexmark-ext-wikilink/flexmark-ext-wikilink.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" filepath="$PROJECT_DIR$/flexmark-ext-xwiki-macros/flexmark-ext-xwiki-macros.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" filepath="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/flexmark-ext-yaml-front-matter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" filepath="$PROJECT_DIR$/flexmark-ext-youtube-embedded/flexmark-ext-youtube-embedded.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" filepath="$PROJECT_DIR$/flexmark-ext-zzzzzz/flexmark-ext-zzzzzz.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" filepath="$PROJECT_DIR$/flexmark-formatter/flexmark-formatter.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" filepath="$PROJECT_DIR$/flexmark-formatter-test-suite/flexmark-formatter-test-suite.iml" />

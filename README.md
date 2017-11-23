@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.28.6</version>
+    <version>0.28.8</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.28.6'
+compile 'com.vladsch.flexmark:flexmark-all:0.28.8'
 ```
 
 #### Building with Android Studio
@@ -175,7 +175,10 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
-* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions.md#docx-converter)
+* [YouTube Embedded Link Transformer](https://github.com/vsch/flexmark-java/wiki/Extensions#youtube-embedded-link-transformer)
+  thanks to Vyacheslav N. Boyko (GitHub @bvn13) transforms simple links to youtube videos to
+  embedded video iframe HTML.
+* [Docx Converter Module](https://github.com/vsch/flexmark-java/wiki/Extensions#docx-converter)
   using the [docx4j] library. How to use: [DocxConverter Sample], how to customize:
   [Customizing Docx Rendering](https://github.com/vsch/flexmark-java/wiki/Customizing-Docx-Rendering)
 

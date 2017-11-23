@@ -46,8 +46,6 @@
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC9" level="project" />
     <orderEntry type="library" name="com.openhtmltopdf:openhtmltopdf-rtl-support:0.0.1-RC9" level="project" />
     <orderEntry type="module" module-name="flexmark-html-parser" />
-    <orderEntry type="library" name="R User Library" level="project" />
-    <orderEntry type="library" name="R Skeletons" level="application" />
     <orderEntry type="module" module-name="flexmark-docx-converter" />
     <orderEntry type="library" name="org.docx4j:docx4j:3.3.4" level="project" />
   </component>
