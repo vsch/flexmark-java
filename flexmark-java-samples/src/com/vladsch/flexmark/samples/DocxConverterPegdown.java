@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 
-public class DocxConverter {
+public class DocxConverterPegdown {
     // don't need to use pegdown options adapter. You can setup the options as you like. I find this is a quick way to add all the fixings
     static final MutableDataHolder OPTIONS = PegdownOptionsAdapter.flexmarkOptions(
             Extensions.ALL & ~(Extensions.ANCHORLINKS | Extensions.EXTANCHORLINKS_WRAP)
@@ -35,7 +35,7 @@ public class DocxConverter {
     }
 
     private static void getResourceFileContent(final StringWriter writer, final String resourcePath) {
-        InputStream inputStream = DocxConverter.class.getResourceAsStream(resourcePath);
+        InputStream inputStream = DocxConverterPegdown.class.getResourceAsStream(resourcePath);
         try {
             IOUtils.copy(inputStream, writer, "UTF-8");
             inputStream.close();
