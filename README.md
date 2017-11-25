@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.28.8</version>
+    <version>0.28.10</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.28.8'
+compile 'com.vladsch.flexmark:flexmark-all:0.28.10'
 ```
 
 #### Building with Android Studio
@@ -189,7 +189,7 @@ custom node renderer if you need to override the generated link HTML.
   selecting a specific spec version options.
 * Custom node rendering API with ability to invoke standard rendering for an overridden node,
   allowing custom node renders that only handle special cases and let the rest be rendered as
-  usual. 
+  usual.
   [PegdownCustomLinkResolverOptions](https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/PegdownCustomLinkResolverOptions.java)
 * [Gfm Issues](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-issues) and
   [Gfm Users](https://github.com/vsch/flexmark-java/wiki/Extensions#gfm-users) extensions for

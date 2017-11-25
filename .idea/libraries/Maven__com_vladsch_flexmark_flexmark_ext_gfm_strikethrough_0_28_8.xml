@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.28.8">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.28.8/flexmark-ext-gfm-strikethrough-0.28.8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.28.8/flexmark-ext-gfm-strikethrough-0.28.8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/vladsch/flexmark/flexmark-ext-gfm-strikethrough/0.28.8/flexmark-ext-gfm-strikethrough-0.28.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

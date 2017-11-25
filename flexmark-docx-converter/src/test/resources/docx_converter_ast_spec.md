@@ -1829,7 +1829,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -2940,7 +2940,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -3938,7 +3938,7 @@ code
             <w:pStyle w:val="ParagraphTextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="6"/>
             </w:numPr>
         </w:pPr>
         <w:r>
@@ -5783,7 +5783,7 @@ block quote with ordered list
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="5"/>
+                <w:numId w:val="6"/>
             </w:numPr>
             <w:pBdr>
                 <w:left w:color="CCCCCC" w:frame="true" w:shadow="true"

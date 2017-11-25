@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.10](#02810)
 - [0.28.8](#0288)
 - [0.28.6](#0286)
 - [0.28.4](#0284)
@@ -202,6 +203,13 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.10
+-------
+
+* Fix: #176, docx-converter pandoc emulation mode, LibreOffice could not handle numbered lists
+  which worked with Word. LibreOffice needs to have the list numID preserved for the list
+  whereas Word only needs it for the first list item, thereafter regular numID could be used.
 
 0.28.8
 ------

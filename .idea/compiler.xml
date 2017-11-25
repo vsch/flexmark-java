@@ -46,6 +46,7 @@
         <module name="flexmark-ext-wikilink" />
         <module name="flexmark-ext-xwiki-macros" />
         <module name="flexmark-ext-yaml-front-matter" />
+        <module name="flexmark-ext-youtube-embedded" />
         <module name="flexmark-ext-zzzzzz" />
         <module name="flexmark-formatter" />
         <module name="flexmark-html-parser" />
@@ -87,6 +88,7 @@
       <module name="flexmark-ext-wikilink" target="6" />
       <module name="flexmark-ext-xwiki-macros" target="6" />
       <module name="flexmark-ext-yaml-front-matter" target="6" />
+      <module name="flexmark-ext-youtube-embedded" target="6" />
       <module name="flexmark-ext-zzzzzz" target="6" />
       <module name="flexmark-formatter" target="6" />
       <module name="flexmark-html-parser" target="6" />

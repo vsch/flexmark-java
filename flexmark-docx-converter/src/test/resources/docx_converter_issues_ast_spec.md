@@ -19,7 +19,7 @@ Issue #176, docx-converter pandoc emulation mode
 ```````````````````````````````` example Issue 176: 1
 ### header
 1. List item started from 1
-### header 
+### header
 1. List item started from 1
 1. List item continued 2
 ### test
@@ -79,7 +79,7 @@ Issue #176, docx-converter pandoc emulation mode
             <w:pStyle w:val="TextBody"/>
             <w:numPr>
                 <w:ilvl w:val="0"/>
-                <w:numId w:val="3"/>
+                <w:numId w:val="7"/>
             </w:numPr>
         </w:pPr>
         <w:r>

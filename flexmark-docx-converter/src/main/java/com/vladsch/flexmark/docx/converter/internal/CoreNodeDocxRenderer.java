@@ -32,7 +32,10 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
-import org.docx4j.openpackaging.parts.WordprocessingML.*;
+import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
+import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.toc.TocException;
 import org.docx4j.toc.TocGenerator;
@@ -71,6 +74,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private int imageId;
     private final HashMap<Node, BigInteger> footnoteIDs;
     private TocBlockBase lastTocBlock;
+    private long[] numberedLists = new long[128];
+
+    private void ensureNumberedListLength(int level) {
+        if (numberedLists.length < level) {
+            long[] newList = new long[(level / 128 + 1) * 128];
+            System.arraycopy(numberedLists, 0, newList, 0, numberedLists.length);
+            numberedLists = newList;
+        }
+    }
 
     public CoreNodeDocxRenderer(DataHolder options) {
         this.referenceRepository = getRepository(options);
@@ -107,7 +119,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                     try {
                         tocGenerator = new TocGenerator(docx.getPackage());
                         //tocGenerator.generateToc( 0,    "TOC \\o \"1-3\" \\h \\z \\u ", true);
-                        tocGenerator.generateToc( 0,    options.tocInstruction, true);
+                        tocGenerator.generateToc(0, options.tocInstruction, true);
                     } catch (TocException e) {
                         if (tocGenerator != null && e.getMessage().contains("use updateToc instead")) {
                             try {
@@ -601,9 +613,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         int newNum = 1;
         final int listLevel = nesting - 1;
 
-        if (listOptions.isOrderedListManualStart() && node.getParent() instanceof OrderedList && node == node.getParent().getFirstChild()) {
-            newNum = ((OrderedList) node.getParent()).getStartNumber();
-            numId = ndp.restart(numId, listLevel, newNum);
+        if (node.getParent() instanceof OrderedList) {
+            if (node == node.getParent().getFirstChild()) {
+                newNum = listOptions.isOrderedListManualStart() ? ((OrderedList) node.getParent()).getStartNumber() : 1;
+                numId = ndp.restart(numId, listLevel, newNum);
+                ensureNumberedListLength(listLevel);
+                numberedLists[listLevel] = numId;
+            } else {
+                numId = numberedLists[listLevel];
+            }
         }
 
         final long idNum = numId;

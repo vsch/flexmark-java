@@ -72,7 +72,7 @@ import org.junit.runners.Suite;
         PegdownProfileTestSuite.class,
         FlexmarkFormatterTestSuite.class,
         DocxConverterTestSuite.class,
-        ComboDocxUserSpecTest.class
+        //ComboDocxUserSpecTest.class
 })
 public class FlexmarkTestSuite {
 }
