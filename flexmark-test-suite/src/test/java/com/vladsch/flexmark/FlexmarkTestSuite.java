@@ -1,7 +1,6 @@
 package com.vladsch.flexmark;
 
 import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
-import com.vladsch.flexmark.docx.converter.ComboDocxUserSpecTest;
 import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
 import com.vladsch.flexmark.ext.anchorlink.ExtAnchorLinkTestSuite;
