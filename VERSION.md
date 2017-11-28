@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.12](#02812)
 - [0.28.10](#02810)
 - [0.28.8](#0288)
 - [0.28.6](#0286)
@@ -203,6 +204,15 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.12
+-------
+
+* Add: `DocumentContentHandler` interface and `DocxRenderer` API to allow control rendering
+  multiple markdown documents into a single docx documents.
+
+* Change: `ContentContainer` to allow adding content anywhere in the container instead of only
+  appending to the end of the container.
 
 0.28.10
 -------

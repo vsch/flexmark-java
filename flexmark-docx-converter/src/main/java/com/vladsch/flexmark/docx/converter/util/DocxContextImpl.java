@@ -75,6 +75,26 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     }
 
     @Override
+    public Object getLastContentElement() {
+        if (myContentContainer == this) {
+            final List<Object> content = getContent();
+            return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
+
+        } else {
+            return myContentContainer.getLastContentElement();
+        }
+    }
+
+    @Override
+    public void addContentElement(final Object element) {
+        if (myContentContainer == this) {
+            getContent().add(element);
+        } else {
+            myContentContainer.addContentElement(element);
+        }
+    }
+
+    @Override
     public void setContentContainer(final ContentContainer container) {
         myContentContainer = container;
     }
@@ -175,7 +195,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public void addP(final P p) {
-        myContentContainer.getContent().add(p);
+        myContentContainer.addContentElement(p);
     }
 
     @Override
@@ -190,9 +210,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
 
     @Override
     public P getLastP() {
-        final List<Object> content = myContentContainer.getContent();
-        if (content == null || content.size() == 0) return null;
-        final Object o = content.get(content.size() - 1);
+        final Object o = getLastContentElement();
         return o instanceof P ? (P) o : null;
     }
 

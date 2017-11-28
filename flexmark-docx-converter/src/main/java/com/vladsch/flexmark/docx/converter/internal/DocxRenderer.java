@@ -172,14 +172,33 @@ public class DocxRenderer implements IRender {
     }
 
     /**
-     * Render a node to the appendable
+     * Render a node to the given word processing package
      *
      * @param node   node to render
      * @param output appendable to use for the output
      */
     public void render(Node node, WordprocessingMLPackage output) {
-        DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument());
+        DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument(), null);
         renderer.render(node);
+    }
+
+    /**
+     * Render a node to the given word processing package
+     *
+     * @param node   node to render
+     * @param output appendable to use for the output
+     */
+    public void render(Node node, WordprocessingMLPackage output, DocumentContentHandler contentContainer) {
+        DocxRenderer.MainDocxRenderer renderer = new DocxRenderer.MainDocxRenderer(options, output, node.getDocument(), contentContainer);
+        if (contentContainer != null) {
+            contentContainer.startDocumentRendering(renderer);
+        }
+
+        renderer.render(node);
+
+        if (contentContainer != null) {
+            contentContainer.endDocumentRendering(renderer);
+        }
     }
 
     /**
@@ -391,7 +410,7 @@ public class DocxRenderer implements IRender {
         private final LinkResolver[] myLinkResolvers;
         private final HashMap<LinkType, HashMap<String, ResolvedLink>> resolvedLinkMap = new HashMap<LinkType, HashMap<String, ResolvedLink>>();
 
-        MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document) {
+        MainDocxRenderer(DataHolder options, WordprocessingMLPackage out, Document document, DocumentContentHandler contentContainer) {
             super(out);
 
             this.options = new ScopedDataSet(options, document);
@@ -455,6 +474,11 @@ public class DocxRenderer implements IRender {
                 collectedNodes = collectingVisitor.getSubClassingBag();
             } else {
                 collectedNodes = null;
+            }
+
+            // allow override of content container by caller
+            if (contentContainer != null) {
+                setContentContainer(contentContainer);
             }
         }
 

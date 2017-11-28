@@ -1336,6 +1336,17 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                                 public List<Object> getContent() {
                                     return ftnEdn.getContent();
                                 }
+
+                                @Override
+                                public Object getLastContentElement() {
+                                    final List<Object> content = getContent();
+                                    return content != null && content.size() > 0 ? content.get(content.size() - 1) : null;
+                                }
+
+                                @Override
+                                public void addContentElement(final Object element) {
+                                    getContent().add(element);
+                                }
                             });
                             docx.renderChildren(footnoteBlock);
                         }

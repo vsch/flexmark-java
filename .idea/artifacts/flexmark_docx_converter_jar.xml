@@ -1,0 +1,51 @@
+<component name="ArtifactManager">
+  <artifact name="flexmark-docx-converter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/flexmark_docx_converter_jar</output-path>
+    <root id="root">
+      <element id="archive" name="flexmark-docx-converter.jar">
+        <element id="module-output" name="flexmark-docx-converter" />
+      </element>
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.7.3" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-gfm-strikethrough:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-toc:0.28.10" />
+      <element id="library" level="project" name="Maven: net.arnx:wmf2svg:0.9.8" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-emoji:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-formatter:0.28.10" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" />
+      <element id="library" level="project" name="Maven: org.apache.avalon.framework:avalon-framework-api:4.3.1" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-wikilink:0.28.10" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-ins:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-tables:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-definition:0.28.10" />
+      <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-util:0.28.10" />
+      <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+      <element id="library" level="project" name="Maven: org.antlr:stringtemplate:3.2.1" />
+      <element id="library" level="project" name="Maven: org.plutext:jaxb-svg11:1.0.2" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.7.3" />
+      <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" />
+      <element id="library" level="project" name="Maven: antlr:antlr:2.7.7" />
+      <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.21" />
+      <element id="library" level="project" name="Maven: org.apache.xmlgraphics:xmlgraphics-commons:2.1" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-superscript:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark:0.28.10" />
+      <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.4" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-ext-footnotes:0.28.10" />
+      <element id="library" level="project" name="Maven: com.vladsch.flexmark:flexmark-jira-converter:0.28.10" />
+      <element id="library" level="project" name="Maven: com.thedeanda:lorem:2.0" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.21" />
+      <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+      <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
+      <element id="library" level="project" name="Maven: xalan:serializer:2.7.2" />
+      <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+      <element id="library" level="project" name="Maven: xalan:xalan:2.7.2" />
+      <element id="library" level="project" name="Maven: org.docx4j:docx4j:3.3.4" />
+      <element id="library" level="project" name="Maven: org.antlr:antlr-runtime:3.5.2" />
+      <element id="library" level="project" name="Maven: net.engio:mbassador:1.2.4.2" />
+      <element id="library" level="project" name="org.docx4j:docx4j:3.3.4" />
+      <element id="library" level="project" name="Maven: org.apache.avalon.framework:avalon-framework-impl:4.3.1" />
+      <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.7.0" />
+    </root>
+  </artifact>
+</component>
