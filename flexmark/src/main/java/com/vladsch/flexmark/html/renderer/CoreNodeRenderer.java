@@ -735,7 +735,7 @@ public class CoreNodeRenderer implements NodeRenderer {
             html.text(text);
         } else {
             ResolvedLink resolvedLink = context.resolveLink(LinkType.LINK, text, null);
-            html.srcPos(node.getText()).attr("href", resolvedLink.getUrl())
+            html.srcPos(node.getText()).attr("href", resolvedLink.getUrl().startsWith("www.") ? context.getHtmlOptions().autolinkWwwPrefix + resolvedLink.getUrl() : resolvedLink.getUrl())
                     .withAttr(resolvedLink)
                     .tag("a", false, false, new Runnable() {
                         @Override

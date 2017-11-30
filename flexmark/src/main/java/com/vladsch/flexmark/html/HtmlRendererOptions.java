@@ -37,6 +37,7 @@ public class HtmlRendererOptions {
     public final boolean htmlBlockOpenTagEol;
     public final boolean htmlBlockCloseTagEol;
     public final boolean unescapeHtmlEntities;
+    public final String autolinkWwwPrefix;
 
     public HtmlRendererOptions(DataHolder options) {
         softBreak = HtmlRenderer.SOFT_BREAK.getFrom(options);
@@ -72,5 +73,6 @@ public class HtmlRendererOptions {
         htmlBlockCloseTagEol = HtmlRenderer.HTML_BLOCK_CLOSE_TAG_EOL.getFrom(options);
         unescapeHtmlEntities = HtmlRenderer.UNESCAPE_HTML_ENTITIES.getFrom(options);
         inlineCodeSpliceClass = HtmlRenderer.INLINE_CODE_SPLICE_CLASS.getFrom(options);
+        autolinkWwwPrefix = HtmlRenderer.AUTOLINK_WWW_PREFIX.getFrom(options);
     }
 }

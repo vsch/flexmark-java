@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         ComboDocxConverterSpecTest.class,
         ComboDocxConverterIssuesSpecTest.class,
-        //ComboDocxUserSpecTest.class, // added to test suite so it runs locally but not  on the travis
+        //ComboDocxUserSpecDisabled.class, // added to test suite so it runs locally but not  on the travis
 })
 public class DocxConverterTestSuite {
 }

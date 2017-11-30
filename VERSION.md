@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.14](#02814)
 - [0.28.12](#02812)
 - [0.28.10](#02810)
 - [0.28.8](#0288)
@@ -204,6 +205,14 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.14
+-------
+
+* Fix: #178, AutolinkExtension does not add `http://` to simple urls starting with `www.`
+
+* Fix: #176, docx converter creates a single long bullet list instead of starting a new list
+      when top level list items are interrupted.
 
 0.28.12
 -------

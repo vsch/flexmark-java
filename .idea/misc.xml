@@ -27,6 +27,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/flexmark-all/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-docx-converter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" />
@@ -51,6 +52,7 @@
         <option value="$PROJECT_DIR$/flexmark-ext-wikilink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-xwiki-macros/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-yaml-front-matter/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-youtube-embedded/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-zzzzzz/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-formatter/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-html-parser/pom.xml" />
@@ -66,7 +68,7 @@
       </set>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" project-jdk-name="1.7" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" default="false" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC10" type="repository">
+    <properties maven-id="com.openhtmltopdf:openhtmltopdf-pdfbox:0.0.1-RC10" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-pdfbox-0.0.1-RC10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pdfbox-2.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/fontbox-2.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/openhtmltopdf-core-0.0.1-RC10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/graphics2d-0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

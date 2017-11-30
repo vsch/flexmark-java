@@ -75,12 +75,21 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     private final HashMap<Node, BigInteger> footnoteIDs;
     private TocBlockBase lastTocBlock;
     private long[] numberedLists = new long[128];
+    private long[] bulletLists = new long[128];
 
     private void ensureNumberedListLength(int level) {
         if (numberedLists.length < level) {
             long[] newList = new long[(level / 128 + 1) * 128];
             System.arraycopy(numberedLists, 0, newList, 0, numberedLists.length);
             numberedLists = newList;
+        }
+    }
+
+    private void ensureBulletListLength(int level) {
+        if (bulletLists.length < level) {
+            long[] newList = new long[(level / 128 + 1) * 128];
+            System.arraycopy(bulletLists, 0, newList, 0, bulletLists.length);
+            bulletLists = newList;
         }
     }
 
@@ -621,6 +630,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 numberedLists[listLevel] = numId;
             } else {
                 numId = numberedLists[listLevel];
+            }
+        } else if (node.getParent() instanceof BulletList) {
+            if (node == node.getParent().getFirstChild()) {
+                newNum = 1;
+                numId = ndp.restart(numId, listLevel, newNum);
+                ensureBulletListLength(listLevel);
+                bulletLists[listLevel] = numId;
+            } else {
+                numId = bulletLists[listLevel];
             }
         }
 

@@ -207,3 +207,21 @@ Document[0, 34]
 ````````````````````````````````
 
 
+## Issue 178
+
+Issue #178, AutolinkExtension does not add http:// to simple urls starting with www.
+
+```````````````````````````````` example Issue 178: 1
+auto link www.example.com
+.
+<p>auto link <a href="http://www.example.com">www.example.com</a></p>
+.
+Document[0, 26]
+  Paragraph[0, 26]
+    TextBase[0, 25] chars:[0, 25, "auto  … e.com"]
+      Text[0, 10] chars:[0, 10, "auto link "]
+      AutoLink[10, 25] text:[10, 25, "www.example.com"]
+        Text[10, 25] chars:[10, 25, "www.e … e.com"]
+````````````````````````````````
+
+
