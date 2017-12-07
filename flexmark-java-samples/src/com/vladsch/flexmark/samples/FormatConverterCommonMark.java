@@ -36,7 +36,10 @@ public class FormatConverterCommonMark {
                     SimTocExtension.create(),
                     WikiLinkExtension.create()
             ));
-            ;
+    ;
+
+    private static final DataHolder FORMATTER_OPTIONS = new MutableDataSet(OPTIONS)
+            .set(Parser.LISTS_ITEM_INDENT, 4);
 
     public static void main(String[] args) {
         final String markdown = "Text\n" +
@@ -53,9 +56,9 @@ public class FormatConverterCommonMark {
         System.out.println(markdown);
         System.out.println("\n--------------------------------------------------------------------------------\n");
 
-
         final Parser PARSER = Parser.builder(OPTIONS).build();
         final Formatter RENDERER = Formatter.builder(OPTIONS).build();
+        final Formatter RENDERER_FIXED4 = Formatter.builder(FORMATTER_OPTIONS).build();
 
         Node document = PARSER.parse(markdown);
 
@@ -65,8 +68,15 @@ public class FormatConverterCommonMark {
         String formatted = RENDERER.render(document);
 
         // or to control the package
-        System.out.println("\nFormatted: --------------------------------------------------------------------------------\n");
+        System.out.println("\nFormatted as is: --------------------------------------------------------------------------------\n");
         System.out.println(formatted);
+        System.out.println("\n--------------------------------------------------------------------------------\n");
+
+        String formattedFixed4 = RENDERER_FIXED4.render(document);
+
+        // or to control the package
+        System.out.println("\nFormatted fixed 4: --------------------------------------------------------------------------------\n");
+        System.out.println(formattedFixed4);
         System.out.println("\n--------------------------------------------------------------------------------\n");
     }
 }
