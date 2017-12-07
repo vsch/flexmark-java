@@ -486,7 +486,7 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     private void render(IndentedCodeBlock node, NodeFormatterContext context, MarkdownWriter markdown) {
         markdown.blankLine();
-        String prefix = "    ";
+        String prefix =  RepeatedCharSequence.of(" ", listOptions.getCodeIndent()).toString();
 
         if (options.emulationProfile == ParserEmulationProfile.GITHUB_DOC) {
             if (node.getParent() instanceof ListItem) {
@@ -659,7 +659,8 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
             }
         }
         markdown.append(openingMarker).append(' ').append(markerSuffix);
-        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix()  ? markerSuffix.length() : 0) + 1) : "    ");
+        markdown.pushPrefix().addPrefix(options.itemContentIndent ? RepeatedCharSequence.of(' ', openingMarker.length() + (listOptions.isItemContentAfterSuffix()  ? markerSuffix.length() : 0) + 1)
+                : RepeatedCharSequence.of(" ", listOptions.getItemIndent()).toString());
         context.renderChildren(node);
         markdown.popPrefix();
     }
@@ -684,6 +685,13 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
 
     @SuppressWarnings("WeakerAccess")
     public static void renderLooseParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
+        markdown.blankLine();
+        renderTextBlockParagraphLines(node, context, markdown);
+        markdown.tailBlankLine();
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    public static void renderLooseItemParagraph(final Paragraph node, final NodeFormatterContext context, final MarkdownWriter markdown) {
         renderTextBlockParagraphLines(node, context, markdown);
         markdown.tailBlankLine();
     }
@@ -705,11 +713,11 @@ public class CoreNodeFormatter extends NodeRepositoryFormatter<ReferenceReposito
                     if (node.getParent().getNextAnyNot(BlankLine.class) == null) {
                         renderTextBlockParagraphLines(node, context, markdown);
                     } else {
-                        renderLooseParagraph(node, context, markdown);
+                        renderLooseItemParagraph(node, context, markdown);
                     }
                 } else {
                     if (!((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
-                        renderLooseParagraph(node, context, markdown);
+                        renderLooseItemParagraph(node, context, markdown);
                     } else {
                         renderTextBlockParagraphLines(node, context, markdown);
                     }

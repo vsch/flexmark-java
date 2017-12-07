@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.16](#02816)
 - [0.28.14](#02814)
 - [0.28.12](#02812)
 - [0.28.10](#02810)
@@ -205,6 +206,17 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.16
+-------
+
+* Fix: #180, Formatter vs HtmlRenderer
+  * Formatter ignored `Parser.LISTS_CODE_INDENT` and
+    `Parser.LISTS_ITEM_INDENT` settings when rendering markdown from AST and used default of 4
+    spaces for code indent and 4 spaces for list item indent if parser family for formatter was
+    `FIXED_INDENT`.
+  * Formatter did not force a blank line before a non-item paragraph, assuming it was already
+    there
 
 0.28.14
 -------

@@ -5,6 +5,7 @@ import com.vladsch.flexmark.ext.definition.DefinitionList;
 import com.vladsch.flexmark.ext.definition.DefinitionTerm;
 import com.vladsch.flexmark.formatter.CustomNodeFormatter;
 import com.vladsch.flexmark.formatter.internal.*;
+import com.vladsch.flexmark.parser.ListOptions;
 import com.vladsch.flexmark.util.options.DataHolder;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import com.vladsch.flexmark.util.sequence.RepeatedCharSequence;
@@ -16,9 +17,11 @@ import java.util.Set;
 
 public class DefinitionNodeFormatter implements NodeFormatter {
     private final FormatOptions options;
+    private final ListOptions listOptions;
 
     public DefinitionNodeFormatter(DataHolder options) {
         this.options = new FormatOptions(options);
+        this.listOptions = ListOptions.getFrom(options);
     }
 
     @Override
@@ -74,7 +77,7 @@ public class DefinitionNodeFormatter implements NodeFormatter {
         }
 
         markdown.line().append(openMarker).append(openMarkerSpaces);
-        markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : 4));
+        markdown.pushPrefix().addPrefix(RepeatedCharSequence.of(' ', context.getFormatterOptions().itemContentIndent ? openMarker.length() + openMarkerSpaces.length() : listOptions.getItemIndent()));
         context.renderChildren(node);
         markdown.popPrefix();
     }

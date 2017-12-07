@@ -38,6 +38,7 @@ import org.junit.runners.Suite;
         ComboYamlFrontMatterFormatterSpecTest.class,
         ComboCoreFormatterSpecTest.class,
         ComboFormatterTestSuiteSpecTest.class,
+        ComboFormatterIssueSpecTest.class,
 })
 public class FlexmarkFormatterTestSuite {
 }

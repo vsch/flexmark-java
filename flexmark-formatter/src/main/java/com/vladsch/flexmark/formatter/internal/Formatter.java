@@ -160,10 +160,10 @@ public class Formatter implements IRender {
     }
 
     /**
-     * Render the tree of nodes to HTML.
+     * Render the tree of nodes to markdown
      *
      * @param node the root node
-     * @return the rendered HTML
+     * @return the formatted markdown
      */
     public String render(Node node) {
         StringBuilder sb = new StringBuilder();
