@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.18](#02818)
 - [0.28.16](#02816)
 - [0.28.14](#02814)
 - [0.28.12](#02812)
@@ -207,6 +208,12 @@ flexmark-java
 
 &nbsp;</details>
 
+0.28.18
+-------
+
+* Fix: #182, Disable parsing of certain elements, add `Parser.LISTS_ITEM_PREFIX_CHARS`, default
+  `"*-+"` to specify which characters start a list item.
+
 0.28.16
 -------
 
@@ -221,7 +228,7 @@ flexmark-java
 0.28.14
 -------
 
-* Fix: #178, AutolinkExtension does not add `http://` to simple urls starting with `www.`
+* Fix: #178, `AutolinkExtension` does not add `http://` to simple urls starting with `www.`
 
 * Fix: #176, docx converter creates a single long bullet list instead of starting a new list
       when top level list items are interrupted.

@@ -7,6 +7,7 @@ import com.vladsch.flexmark.util.options.DataHolder;
 import java.util.regex.Pattern;
 
 import static com.vladsch.flexmark.parser.Parser.LISTS_ITEM_MARKER_SPACE;
+import static com.vladsch.flexmark.parser.Parser.LISTS_ITEM_PREFIX_CHARS;
 import static com.vladsch.flexmark.parser.Parser.LISTS_ORDERED_ITEM_DOT_ONLY;
 
 public class Parsing {
@@ -174,17 +175,18 @@ public class Parsing {
                 + "|" + PROCESSINGINSTRUCTION + "|" + DECLARATION + "|" + CDATA + ")";
         this.HTML_TAG = Pattern.compile('^' + HTMLTAG, Pattern.CASE_INSENSITIVE);
 
+        final String itemPrefixChars = LISTS_ITEM_PREFIX_CHARS.getFrom(options);
         if (LISTS_ITEM_MARKER_SPACE.getFrom(options)) {
             if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.])(?=[ \t])");
             } else {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?=[ \t])|^(\\d{1,9})([.)])(?=[ \t])");
             }
         } else {
             if (LISTS_ORDERED_ITEM_DOT_ONLY.getFrom(options)) {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.])(?= |\t|$)");
             } else {
-                this.LIST_ITEM_MARKER = Pattern.compile("^([*+-])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
+                this.LIST_ITEM_MARKER = Pattern.compile("^([\\Q" + itemPrefixChars + "\\E])(?= |\t|$)|^(\\d{1,9})([.)])(?= |\t|$)");
             }
         }
 

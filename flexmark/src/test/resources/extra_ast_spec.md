@@ -6632,3 +6632,56 @@ Document[0, 31]
 ````````````````````````````````
 
 
+## Custom List Markers
+
+```````````````````````````````` example(Custom List Markers: 1) options(custom-list-marker)
+* list item
++ lazy continuation 
+- lazy continuation 
+.
+<ul>
+  <li>list item
+  + lazy continuation
+  - lazy continuation</li>
+</ul>
+.
+Document[0, 53]
+  BulletList[0, 53] isTight
+    BulletListItem[0, 53] open:[0, 1, "*"] isTight
+      Paragraph[2, 53]
+        Text[2, 11] chars:[2, 11, "list item"]
+        SoftLineBreak[11, 12]
+        Text[12, 31] chars:[12, 31, "+ laz … ation"]
+        SoftLineBreak[32, 33]
+        Text[33, 52] chars:[33, 52, "- laz … ation"]
+````````````````````````````````
+
+
+```````````````````````````````` example(Custom List Markers: 2) options(custom-list-marker)
+* list item
+/ another list item
+/ another list item 2
+.
+<ul>
+  <li>list item</li>
+</ul>
+<ul>
+  <li>another list item</li>
+  <li>another list item 2</li>
+</ul>
+.
+Document[0, 53]
+  BulletList[0, 12] isTight
+    BulletListItem[0, 12] open:[0, 1, "*"] isTight
+      Paragraph[2, 12]
+        Text[2, 11] chars:[2, 11, "list item"]
+  BulletList[12, 53] isTight
+    OrderedListItem[12, 32] open:[12, 13, "/"] isTight
+      Paragraph[14, 32]
+        Text[14, 31] chars:[14, 31, "anoth …  item"]
+    OrderedListItem[32, 53] open:[32, 33, "/"] isTight
+      Paragraph[34, 53]
+        Text[34, 53] chars:[34, 53, "anoth … tem 2"]
+````````````````````````````````
+
+
