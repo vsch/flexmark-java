@@ -159,10 +159,13 @@ public class ImageUtils {
         return null;
     }
 
-    public static BufferedImage loadImageFromURL(String imageURL) {
+    public static BufferedImage loadImageFromURL(String imageURL, boolean logImageProcessing) {
         try {
             return toBufferedImage(new ImageIcon(new URL(imageURL)).getImage());
-        } catch (MalformedURLException ignored) {
+        } catch (MalformedURLException e) {
+            if (logImageProcessing) {
+                e.printStackTrace();
+            }
         }
 
         return null;

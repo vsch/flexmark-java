@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact name="flexmark-docx-converter:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/flexmark_docx_converter_jar</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/flexmark_docx_converter</output-path>
     <root id="root">
       <element id="archive" name="flexmark-docx-converter.jar">
         <element id="module-output" name="flexmark-docx-converter" />

@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.20](#02820)
 - [0.28.18](#02818)
 - [0.28.16](#02816)
 - [0.28.14](#02814)
@@ -207,6 +208,11 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.20
+-------
+
+* Fix: docx converter image embedding when with `file:` URI and a space in the path.
 
 0.28.18
 -------

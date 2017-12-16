@@ -946,8 +946,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
             url += content;
         }
 
-        String alt = node.getText().unescape();
-
+        //String alt = node.getText().unescape();
         renderImage(docx, altText, url);
     }
 
@@ -982,6 +981,10 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         if (resolvedLink == null) {
             // empty ref, we treat it as text
             docx.text(node.getChars().unescape());
+
+            if (options.logImageProcessing) {
+                System.out.println("render image ref of " + referenceRepository.normalizeKey(node.getReference()) + " skipped because it was not defined");
+            }
         } else {
             String altText = new TextCollectingVisitor().collectAndGetText(node);
             String url = resolvedLink.getUrl();
@@ -996,24 +999,15 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
         String filenameHint = String.format("Image%d", id1 / 2 + 1);
         int cx = -1;
 
-        if (url.startsWith("http:") || url.startsWith("https:")) {
-            // hyperlinked image
-            image = ImageUtils.loadImageFromURL(url);
-        } else if (url.startsWith("file:")) {
-            // hyperlinked image
-            String path = url.substring("file:".length());
-            if (path.startsWith("///")) {
-                path = path.substring(2);
-            } else if (path.startsWith("//")) {
-                path = path.substring(1);
-            }
+        if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
+            // hyperlinked image  or file
+            image = ImageUtils.loadImageFromURL(url, options.logImageProcessing);
 
-            if (path.length() > 3 && path.charAt(0) == '/' && isLetter(path.charAt(1)) && path.charAt(2) == ':') {
-                // windows path, remove the leading '/'
-                path = path.substring(1);
+            if (image == null && options.logImageProcessing) {
+                System.out.println("loadImageFromURL(" + url + ") returned null");
             }
-
-            image = ImageUtils.loadImageFromFile(new File(path));
+        } else if (options.logImageProcessing) {
+            System.out.println("renderImage of \"" + url + "\") skipped (not file:, http: or https:)");
         }
 
         if (image != null) {

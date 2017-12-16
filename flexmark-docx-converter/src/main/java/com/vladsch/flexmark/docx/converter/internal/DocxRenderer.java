@@ -71,6 +71,7 @@ public class DocxRenderer implements IRender {
     public static final DataKey<Boolean> TABLE_CAPTION_BEFORE_TABLE = new DataKey<Boolean>("TABLE_CAPTION_BEFORE_TABLE", false);
     public static final DataKey<Boolean> TOC_GENERATE = new DataKey<Boolean>("TOC_GENERATE", false);
     public static final DataKey<String> TOC_INSTRUCTION = new DataKey<String>("TOC_INSTRUCTION", "TOC \\o \"1-3\" \\h \\z \\u ");
+    public static final DataKey<Boolean> LOG_IMAGE_PROCESSING = new DataKey<Boolean>("LOG_IMAGE_PROCESSING", false);
 
     private final List<NodeDocxRendererFactory> nodeFormatterFactories;
     final DocxRendererOptions rendererOptions;

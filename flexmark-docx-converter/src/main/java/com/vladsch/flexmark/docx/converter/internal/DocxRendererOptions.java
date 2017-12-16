@@ -13,6 +13,7 @@ public class DocxRendererOptions {
     public final boolean suppressInlineHtml;
     public final boolean suppressInlineHtmlComments;
     public final boolean tocGenerate;
+    public final boolean logImageProcessing;
     public final int maxImageWidth;
     public final String tocInstruction;
 
@@ -29,5 +30,6 @@ public class DocxRendererOptions {
         maxImageWidth = DocxRenderer.MAX_IMAGE_WIDTH.getFrom(options);
         tocInstruction = DocxRenderer.TOC_INSTRUCTION.getFrom(options);
         tocGenerate = DocxRenderer.TOC_GENERATE.getFrom(options);
+        logImageProcessing = DocxRenderer.LOG_IMAGE_PROCESSING.getFrom(options);
     }
 }
