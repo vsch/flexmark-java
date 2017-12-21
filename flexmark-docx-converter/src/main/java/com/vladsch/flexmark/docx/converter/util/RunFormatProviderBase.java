@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.model.styles.StyleUtil;
+import org.docx4j.wml.ParaRPr;
 import org.docx4j.wml.RPr;
 import org.docx4j.wml.RStyle;
 import org.docx4j.wml.Style;
@@ -13,12 +14,14 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     protected final T myFrame;
     protected final RunFormatProvider<T> myParent;
     protected final String myBaseStyleId;
+    protected final boolean myNoCharacterStyles;
 
-    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId) {
+    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId, final boolean noCharacterStyles) {
         myDocx = docx;
         myFrame = docx.getContextFrame();
         myParent = docx.getRunFormatProvider();
         myBaseStyleId = baseStyleId;
+        myNoCharacterStyles = noCharacterStyles;
     }
 
     @Override
@@ -76,9 +79,11 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     @Override
     public void getRPr(final RPr rPr) {
         // Create object for rStyle
-        RStyle rstyle = myDocx.getFactory().createRStyle();
-        rPr.setRStyle(rstyle);
-        rstyle.setVal(myBaseStyleId);
+        if (!myNoCharacterStyles) {
+            RStyle rstyle = myDocx.getFactory().createRStyle();
+            rPr.setRStyle(rstyle);
+            rstyle.setVal(myBaseStyleId);
+        }
 
         // handle inheritance
         RunFormatProvider<T> parent = myParent;
@@ -89,12 +94,14 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
             inheritParentStyle(rPr, rpr1);
         }
 
-        //Style thisStyle = myDocx.getStyle(myBaseStyleId);
-        //if (thisStyle != null) {
-        //    final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
-        //    final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
-        //    myDocx.getHelper().keepDiff(rPr, pr);
-        //    myDocx.getHelper().keepDiff(rPr, paraRPr);
-        //}
+        if (myNoCharacterStyles) {
+            Style thisStyle = myDocx.getStyle(myBaseStyleId);
+            if (thisStyle != null) {
+                final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
+                final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
+                //myDocx.getHelper().keepDiff(rPr, pr);
+                myDocx.getHelper().keepDiff(rPr, paraRPr);
+            }
+        }
     }
 }

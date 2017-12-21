@@ -64,7 +64,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
     protected final ReferenceRepository referenceRepository;
 
-    private final DocxRendererOptions options;
+    final DocxRendererOptions options;
     private final ListOptions listOptions;
     protected boolean recheckUndefinedReferences;
     protected boolean repositoryNodesDone;
@@ -207,9 +207,9 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
-                new NodeDocxRendererHandler<Emphasis>(Emphasis.class, new CustomNodeDocxRenderer<Emphasis>() {
+                new NodeDocxRendererHandler<StrongEmphasis>(StrongEmphasis.class, new CustomNodeDocxRenderer<StrongEmphasis>() {
                     @Override
-                    public void render(final Emphasis node, final DocxRendererContext docx) {
+                    public void render(final StrongEmphasis node, final DocxRendererContext docx) {
                         CoreNodeDocxRenderer.this.render(node, docx);
                     }
                 }),
@@ -526,37 +526,37 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final Emphasis node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new ItalicRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new ItalicRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final StrongEmphasis node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new BoldRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new BoldRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final Subscript node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new SubscriptRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new SubscriptRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final Superscript node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new SuperscriptRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new SuperscriptRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final Strikethrough node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new StrikethroughRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new StrikethroughRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final Ins node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new UnderlineRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new UnderlineRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
     private void render(final Code node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx));
+        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles));
         docx.renderChildren(node);
     }
 
@@ -730,7 +730,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 docx.contextFramed(new Runnable() {
                     @Override
                     public void run() {
-                        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx));
+                        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles));
                         docx.text(node.getChars().normalizeEOL());
                     }
                 });
@@ -777,7 +777,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         hyperlink.setId(rel.getId());
 
-        docx.setRunFormatProvider(new RunFormatProviderBase<Node>(docx, RunFormatProvider.HYPERLINK_STYLE));
+        docx.setRunFormatProvider(new RunFormatProviderBase<Node>(docx, RunFormatProvider.HYPERLINK_STYLE, options.noCharacterStyles));
         docx.setRunContainer(new RunContainer() {
             @Override
             public void addR(final R r) {

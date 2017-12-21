@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.28.20</version>
+    <version>0.28.22</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.28.20'
+compile 'com.vladsch.flexmark:flexmark-all:0.28.22'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,9 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Attributes Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#attributes) to
+  parse attributes of the form `{name name=value name='value' name="value" #id .class-name}`
+  attributes.
 * [YouTube Embedded Link Transformer](https://github.com/vsch/flexmark-java/wiki/Extensions#youtube-embedded-link-transformer)
   thanks to Vyacheslav N. Boyko (GitHub @bvn13) transforms simple links to youtube videos to
   embedded video iframe HTML.

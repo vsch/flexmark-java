@@ -3,8 +3,8 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.RPr;
 
 public class SuperscriptRunFormatProvider<T> extends RunFormatProviderBase<T> {
-    public SuperscriptRunFormatProvider(final DocxContext<T> docx) {
-        super(docx, RunFormatProvider.SUPERSCRIPT_STYLE);
+    public SuperscriptRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
+        super(docx, RunFormatProvider.SUPERSCRIPT_STYLE, noCharacterStyles);
     }
 
     @Override

@@ -112,6 +112,7 @@ public class MacroInlineParser implements InlineParserExtension {
                     return true;
                 }
 
+                // did not process, reset to where we started
                 inlineParser.setIndex(index);
             }
         }

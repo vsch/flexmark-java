@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.22](#02822)
 - [0.28.20](#02820)
 - [0.28.18](#02818)
 - [0.28.16](#02816)
@@ -208,6 +209,19 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.22
+-------
+
+* Add: docx converter option not to set character styles but use explicit attributes,
+  `DocxRenderer.NO_CHARACTER_STYLES` default `false`, set to true to disable use of character
+  style.
+
+* Add: `HtmlRenderer.WRAP_TIGHT_ITEM_PARAGRAPH_IN_SPAN` default `false`, When `true` will wrap
+  tight paragraph text in a span.
+
+* Add: attributes extension to parse `{name name=value name='value' name="value" #id
+  .class-name}` attributes. See: [Extensions: Attributes](../../wiki/Extensions#attributes)
 
 0.28.20
 -------

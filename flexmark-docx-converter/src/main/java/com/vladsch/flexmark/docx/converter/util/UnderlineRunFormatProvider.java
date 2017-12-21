@@ -3,8 +3,8 @@ package com.vladsch.flexmark.docx.converter.util;
 import org.docx4j.wml.RPr;
 
 public class UnderlineRunFormatProvider<T> extends RunFormatProviderBase<T> {
-    public UnderlineRunFormatProvider(final DocxContext<T> docx) {
-        super(docx, RunFormatProvider.INS_STYLE);
+    public UnderlineRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
+        super(docx, RunFormatProvider.INS_STYLE, noCharacterStyles);
     }
 
     @Override

@@ -418,7 +418,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         }
     }
 
-    public void renderTextBlockParagraphLines(Paragraph node, NodeRendererContext context, HtmlWriter html) {
+    public void renderTextBlockParagraphLines(final Paragraph node, final NodeRendererContext context, final HtmlWriter html, final boolean wrapTextInSpan) {
         if (context.getHtmlOptions().sourcePositionParagraphLines) {
             if (node.hasChildren()) {
                 LineCollectingVisitor breakCollectingVisitor = new LineCollectingVisitor();
@@ -432,7 +432,16 @@ public class CoreNodeRenderer implements NodeRenderer {
                 return;
             }
         }
-        context.renderChildren(node);
+        if (wrapTextInSpan) {
+            html.withAttr().tag("span", false, false, new Runnable() {
+                @Override
+                public void run() {
+                    context.renderChildren(node);
+                }
+            });
+        } else {
+            context.renderChildren(node);
+        }
     }
 
     private void outputSourceLineSpan(final Node parentNode, final Node startNode, final Node endNode, final HtmlWriter html) {
@@ -481,7 +490,7 @@ public class CoreNodeRenderer implements NodeRenderer {
         html.srcPosWithEOL(node.getChars()).withAttr().tagLine("p", new Runnable() {
             @Override
             public void run() {
-                renderTextBlockParagraphLines(node, context, html);
+                renderTextBlockParagraphLines(node, context, html, false);
             }
         });
     }
@@ -491,7 +500,7 @@ public class CoreNodeRenderer implements NodeRenderer {
                 || !((ParagraphItemContainer) node.getParent()).isParagraphWrappingDisabled(node, listOptions, context.getOptions())) {
             renderLooseParagraph(node, context, html);
         } else {
-            renderTextBlockParagraphLines(node, context, html);
+            renderTextBlockParagraphLines(node, context, html, context.getHtmlOptions().wrapTightItemParagraphInSpan);
         }
     }
 

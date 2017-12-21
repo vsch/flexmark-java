@@ -7,9 +7,9 @@ import com.vladsch.flexmark.util.options.DataKey;
 import java.util.*;
 
 public abstract class NodeRepository<T> implements Map<String, T> {
-    private final ArrayList<T> nodeList = new ArrayList<T>();
-    private final Map<String, T> nodeMap = new HashMap<String, T>();
-    private final KeepType keepType;
+    protected final ArrayList<T> nodeList = new ArrayList<T>();
+    protected final Map<String, T> nodeMap = new HashMap<String, T>();
+    protected final KeepType keepType;
 
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();
     public abstract DataKey<KeepType> getKeepDataKey();
