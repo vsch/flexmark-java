@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-autolink/flexmark-ext-autolink.iml" filepath="$PROJECT_DIR$/flexmark-ext-autolink/flexmark-ext-autolink.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" filepath="$PROJECT_DIR$/flexmark-ext-definition/flexmark-ext-definition.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" filepath="$PROJECT_DIR$/flexmark-ext-emoji/flexmark-ext-emoji.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flexmark-ext-enumerated-reference/flexmark-ext-enumerated-reference.iml" filepath="$PROJECT_DIR$/flexmark-ext-enumerated-reference/flexmark-ext-enumerated-reference.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" filepath="$PROJECT_DIR$/flexmark-ext-escaped-character/flexmark-ext-escaped-character.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" filepath="$PROJECT_DIR$/flexmark-ext-footnotes/flexmark-ext-footnotes.iml" />
       <module fileurl="file://$PROJECT_DIR$/flexmark-ext-gfm-issues/flexmark-ext-gfm-issues.iml" filepath="$PROJECT_DIR$/flexmark-ext-gfm-issues/flexmark-ext-gfm-issues.iml" />

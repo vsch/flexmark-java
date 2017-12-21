@@ -26,9 +26,11 @@
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" />
     <orderEntry type="module" module-name="flexmark-ext-aside" />
+    <orderEntry type="module" module-name="flexmark-ext-attributes" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" />
     <orderEntry type="module" module-name="flexmark-ext-definition" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" />
+    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
     <orderEntry type="module" module-name="flexmark-ext-escaped-character" />
     <orderEntry type="module" module-name="flexmark-ext-footnotes" />
     <orderEntry type="module" module-name="flexmark-ext-gfm-strikethrough" />

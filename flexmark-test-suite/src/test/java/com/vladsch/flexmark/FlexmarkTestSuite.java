@@ -1,5 +1,6 @@
 package com.vladsch.flexmark;
 
+import com.vladsch.flexmark.ext.attributes.ExtAttributesTestSuite;
 import com.vladsch.flexmark.convert.html.FlexmarkHtmlParserTestSuite;
 import com.vladsch.flexmark.docx.converter.DocxConverterTestSuite;
 import com.vladsch.flexmark.ext.abbreviation.ExtAbbreviationTestSuite;
@@ -42,6 +43,7 @@ import org.junit.runners.Suite;
         ExtAbbreviationTestSuite.class,
         ExtAnchorLinkTestSuite.class,
         ExtAsideTestSuite.class,
+        ExtAttributesTestSuite.class,
         ExtAutolinkTestSuite.class,
         ExtDefinitionTestSuite.class,
         ExtEmojiTestSuite.class,

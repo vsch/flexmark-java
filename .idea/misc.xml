@@ -31,9 +31,11 @@
         <option value="$PROJECT_DIR$/flexmark-ext-abbreviation/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-anchorlink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-aside/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-attributes/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-autolink/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-definition/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-emoji/pom.xml" />
+        <option value="$PROJECT_DIR$/flexmark-ext-enumerated-reference/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-escaped-character/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-footnotes/pom.xml" />
         <option value="$PROJECT_DIR$/flexmark-ext-gfm-issues/pom.xml" />

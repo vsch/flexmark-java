@@ -26,13 +26,14 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  * </p>
  */
 public class FootnoteExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
+    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<KeepType>("FOOTNOTES_KEEP", KeepType.FIRST);
+
     public static final DataKey<FootnoteRepository> FOOTNOTES = new DataKey<FootnoteRepository>("FOOTNOTES", new DataValueFactory<FootnoteRepository>() {
         @Override
         public FootnoteRepository create(DataHolder options) {
             return new FootnoteRepository(options);
         }
     });
-    public static final DataKey<KeepType> FOOTNOTES_KEEP = new DataKey<KeepType>("FOOTNOTES_KEEP", KeepType.FIRST);
     public static final DataKey<String> FOOTNOTE_REF_PREFIX = new DataKey<String>("FOOTNOTE_REF_PREFIX", "");
     public static final DataKey<String> FOOTNOTE_REF_SUFFIX = new DataKey<String>("FOOTNOTE_REF_SUFFIX", "");
     public static final DataKey<String> FOOTNOTE_BACK_REF_STRING = new DataKey<String>("FOOTNOTE_BACK_REF_STRING", "&#8617;");

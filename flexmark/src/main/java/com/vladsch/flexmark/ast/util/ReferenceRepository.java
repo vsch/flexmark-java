@@ -10,7 +10,7 @@ import com.vladsch.flexmark.util.options.DataKey;
 
 public class ReferenceRepository extends NodeRepository<Reference> {
     public ReferenceRepository(DataHolder options) {
-        super(options);
+        super(Parser.REFERENCES_KEEP.getFrom(options));
     }
 
     @Override

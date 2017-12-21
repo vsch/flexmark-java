@@ -14,11 +14,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FootnoteNodeFormatter extends NodeRepositoryFormatter<FootnoteRepository, FootnoteBlock, Footnote> {
-    private final FormatOptions options;
+    private final FootnoteFormatOptions options;
 
     public FootnoteNodeFormatter(DataHolder options) {
         super(options);
-        this.options = new FormatOptions(options);
+        this.options = new FootnoteFormatOptions(options);
     }
 
     @Override

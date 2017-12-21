@@ -45,7 +45,7 @@ public class FootnoteRepository extends NodeRepository<FootnoteBlock> {
     }
 
     public FootnoteRepository(DataHolder options) {
-        super(options);
+        super(FootnoteExtension.FOOTNOTES_KEEP.getFrom(options));
     }
 
     @Override

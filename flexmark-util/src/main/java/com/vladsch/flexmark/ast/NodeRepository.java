@@ -14,8 +14,8 @@ public abstract class NodeRepository<T> implements Map<String, T> {
     public abstract DataKey<? extends NodeRepository<T>> getDataKey();
     public abstract DataKey<KeepType> getKeepDataKey();
 
-    public NodeRepository(DataHolder options) {
-        this.keepType = options == null ? KeepType.LOCKED : options.get(getKeepDataKey());
+    public NodeRepository(KeepType keepType) {
+        this.keepType = keepType == null ? KeepType.LOCKED : keepType;
     }
 
     public String normalizeKey(CharSequence key) {

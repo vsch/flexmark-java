@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.24](#02824)
 - [0.28.22](#02822)
 - [0.28.20](#02820)
 - [0.28.18](#02818)
@@ -209,6 +210,13 @@ flexmark-java
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
 &nbsp;</details>
+
+0.28.24
+-------
+
+* Fix: attributes module was not in parent pom and had wrong version number.
+
+* Add: Enumerated Reference Link and Enumerated Reference Text. 
 
 0.28.22
 -------

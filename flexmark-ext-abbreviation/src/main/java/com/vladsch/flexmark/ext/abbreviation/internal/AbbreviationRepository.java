@@ -11,7 +11,7 @@ import com.vladsch.flexmark.util.options.DataKey;
 public class AbbreviationRepository extends NodeRepository<AbbreviationBlock> {
 
     public AbbreviationRepository(DataHolder options) {
-        super(options);
+        super(AbbreviationExtension.ABBREVIATIONS_KEEP.getFrom(options));
     }
 
     @Override

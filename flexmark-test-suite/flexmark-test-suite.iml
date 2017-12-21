@@ -15,6 +15,7 @@
     <orderEntry type="module" module-name="flexmark-ext-abbreviation" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-anchorlink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-aside" scope="TEST" />
+    <orderEntry type="module" module-name="flexmark-ext-attributes" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-autolink" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-definition" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-ext-emoji" scope="TEST" />
@@ -49,5 +50,6 @@
     <orderEntry type="module" module-name="flexmark-youtrack-converter" scope="TEST" />
     <orderEntry type="module" module-name="flexmark-docx-converter" />
     <orderEntry type="module" module-name="flexmark-ext-attributes" />
+    <orderEntry type="module" module-name="flexmark-ext-enumerated-reference" />
   </component>
 </module>

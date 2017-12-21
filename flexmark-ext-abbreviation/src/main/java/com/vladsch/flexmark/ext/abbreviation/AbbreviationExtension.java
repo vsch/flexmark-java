@@ -26,6 +26,11 @@ import com.vladsch.flexmark.util.options.MutableDataHolder;
  */
 public class AbbreviationExtension implements Parser.ParserExtension, HtmlRenderer.HtmlRendererExtension, Parser.ReferenceHoldingExtension, Formatter.FormatterExtension {
     /**
+     * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
+     */
+    public static final DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<KeepType>("ABBREVIATIONS_KEEP", KeepType.FIRST);
+
+    /**
      * A {@link DataKey} that is used to get the document's Node repository holding all the abbreviations defined in the current document.
      */
     public static final DataKey<AbbreviationRepository> ABBREVIATIONS = new DataKey<AbbreviationRepository>("ABBREVIATIONS", new DataValueFactory<AbbreviationRepository>() {
@@ -34,11 +39,6 @@ public class AbbreviationExtension implements Parser.ParserExtension, HtmlRender
             return new AbbreviationRepository(options);
         }
     });
-
-    /**
-     * A {@link DataKey} that is used to set the behavior of the abbreviations repository when duplicates are defined. {@link KeepType}
-     */
-    public static final DataKey<KeepType> ABBREVIATIONS_KEEP = new DataKey<KeepType>("ABBREVIATIONS_KEEP", KeepType.FIRST);
 
     /**
      * A {@link DataKey} that is used to set the use links option when true, default is false and abbr tag will be used in the rendered HTML.

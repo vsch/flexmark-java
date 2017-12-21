@@ -42,7 +42,7 @@ following sample:
 <dependency>
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-all</artifactId>
-    <version>0.28.22</version>
+    <version>0.28.24</version>
 </dependency>
 ```
 
@@ -85,7 +85,7 @@ public class BasicSample {
 #### Building via Gradle
 
 ```shell
-compile 'com.vladsch.flexmark:flexmark-all:0.28.22'
+compile 'com.vladsch.flexmark:flexmark-all:0.28.24'
 ```
 
 #### Building with Android Studio
@@ -175,6 +175,8 @@ custom node renderer if you need to override the generated link HTML.
 
 ### Latest Additions
 
+* [Enumerated Reference](https://github.com/vsch/flexmark-java/wiki/Extensions#enumerated-reference)
+  to create enumerated references for figures, tables and other markdown elements.
 * [Attributes Extension](https://github.com/vsch/flexmark-java/wiki/Extensions#attributes) to
   parse attributes of the form `{name name=value name='value' name="value" #id .class-name}`
   attributes.

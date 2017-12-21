@@ -16,8 +16,10 @@
                 <include>com.vladsch.flexmark:flexmark-ext-anchorlink</include>
                 <include>com.vladsch.flexmark:flexmark-ext-aside</include>
                 <include>com.vladsch.flexmark:flexmark-ext-autolink</include>
+                <include>com.vladsch.flexmark:flexmark-ext-attributes</include>
                 <include>com.vladsch.flexmark:flexmark-ext-definition</include>
                 <include>com.vladsch.flexmark:flexmark-ext-emoji</include>
+                <include>com.vladsch.flexmark:flexmark-ext-enumerated-reference</include>
                 <include>com.vladsch.flexmark:flexmark-ext-escaped-character</include>
                 <include>com.vladsch.flexmark:flexmark-ext-footnotes</include>
                 <include>com.vladsch.flexmark:flexmark-ext-gfm-issues</include>

@@ -44,7 +44,7 @@ public class ZzzzzzRepository extends NodeRepository<ZzzzzzBlock> {
     }
 
     public ZzzzzzRepository(DataHolder options) {
-        super(options);
+        super(ZzzzzzExtension.ZZZZZZS_KEEP.getFrom(options));
     }
 
     @Override

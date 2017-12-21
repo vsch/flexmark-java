@@ -13,7 +13,7 @@
 
     <groupId>com.vladsch.flexmark</groupId>
     <artifactId>flexmark-java</artifactId>
-    <version>0.28.22</version>
+    <version>0.28.24</version>
     <name>flexmark-java</name>
     <description>
         Java re-implementation of commonmark-java based parser, with AST reflecting source elements, full source position tracking, greater parser extensibility.
@@ -28,9 +28,11 @@
         <module>flexmark-ext-abbreviation</module>
         <module>flexmark-ext-anchorlink</module>
         <module>flexmark-ext-aside</module>
+        <module>flexmark-ext-attributes</module>
         <module>flexmark-ext-autolink</module>
         <module>flexmark-ext-definition</module>
         <module>flexmark-ext-emoji</module>
+        <module>flexmark-ext-enumerated-reference</module>
         <module>flexmark-ext-escaped-character</module>
         <module>flexmark-ext-footnotes</module>
         <module>flexmark-ext-gfm-issues</module>
@@ -38,28 +40,28 @@
         <module>flexmark-ext-gfm-tables</module>
         <module>flexmark-ext-gfm-tasklist</module>
         <module>flexmark-ext-gfm-users</module>
+        <module>flexmark-ext-ins</module>
         <module>flexmark-ext-jekyll-front-matter</module>
         <module>flexmark-ext-jekyll-tag</module>
-        <module>flexmark-ext-ins</module>
-        <module>flexmark-ext-xwiki-macros</module>
         <module>flexmark-ext-spec-example</module>
         <module>flexmark-ext-superscript</module>
         <module>flexmark-ext-tables</module>
         <module>flexmark-ext-toc</module>
         <module>flexmark-ext-typographic</module>
         <module>flexmark-ext-wikilink</module>
+        <module>flexmark-ext-xwiki-macros</module>
         <module>flexmark-ext-yaml-front-matter</module>
+        <module>flexmark-ext-youtube-embedded</module>
         <module>flexmark-ext-zzzzzz</module>
         <module>flexmark-formatter</module>
         <module>flexmark-html-parser</module>
         <module>flexmark-integration-test</module>
         <module>flexmark-jira-converter</module>
         <module>flexmark-pdf-converter</module>
-        <module>flexmark-youtrack-converter</module>
         <module>flexmark-profile-pegdown</module>
         <module>flexmark-test-util</module>
         <module>flexmark-util</module>
-        <module>flexmark-ext-youtube-embedded</module>
+        <module>flexmark-youtrack-converter</module>
     </modules>
 
     <properties>
@@ -214,197 +216,197 @@
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-docx-converter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-abbreviation</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-anchorlink</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-aside</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-attributes</artifactId>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-autolink</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-definition</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-emoji</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
+            </dependency>
+            <dependency>
+                <groupId>com.vladsch.flexmark</groupId>
+                <artifactId>flexmark-ext-enumerated-reference</artifactId>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-escaped-character</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-footnotes</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-issues</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-strikethrough</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tables</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-tasklist</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-gfm-users</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-jekyll-front-matter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-jekyll-tag</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-ins</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-xwiki-macros</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-spec-example</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-superscript</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-tables</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-toc</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-typographic</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-wikilink</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-yaml-front-matter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-youtube-embedded</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-ext-zzzzzz</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-formatter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-html-parser</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-jira-converter</artifactId>
-                <version>0.28.22</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vladsch.flexmark</groupId>
-                <artifactId>flexmark-jira-converter</artifactId>
-                <version>0.28.22</version>
-            </dependency>
-            <dependency>
-                <groupId>com.vladsch.flexmark</groupId>
-                <artifactId>flexmark-docx-converter</artifactId>
-                <version>0.26.6</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-pdf-converter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-profile-pegdown</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-test-util</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-util</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-youtrack-converter</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
             <dependency>
                 <groupId>com.vladsch.flexmark</groupId>
                 <artifactId>flexmark-all</artifactId>
-                <version>0.28.22</version>
+                <version>0.28.24</version>
             </dependency>
 
             <!-- Common test dependencies -->
