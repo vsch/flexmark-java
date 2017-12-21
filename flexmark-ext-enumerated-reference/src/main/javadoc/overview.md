@@ -44,6 +44,7 @@ See [@tbl:test]
 
 Will render as:
 
+```
 <p><img src="http://example.com/test.png" alt="Fig" id="fig:test" /><br />
 <span>Figure 1.</span></p>
 <p><img src="http://example.com/test.png" alt="Fig" id="fig:test2" /><br />
@@ -61,4 +62,6 @@ Will render as:
 <p>See <a href="#fig:test2"><span>Figure 2.</span></a></p>
 <p>See <a href="#fig:test"><span>Figure 1.</span></a></p>
 <p>See <a href="#tbl:test"><span>Table 1.</span></a></p>
+```
+
 
