@@ -11,7 +11,7 @@ import java.util.*;
 
 @SuppressWarnings("WeakerAccess")
 public class NodeAttributeRepository implements Map<Node, ArrayList<AttributesNode>> {
-    protected final HashMap<Node, ArrayList<AttributesNode>> nodeAttributesHashMap = new HashMap<>();
+    protected final HashMap<Node, ArrayList<AttributesNode>> nodeAttributesHashMap = new HashMap<Node, ArrayList<AttributesNode>>();
 
     public NodeAttributeRepository(DataHolder options) {
     }
