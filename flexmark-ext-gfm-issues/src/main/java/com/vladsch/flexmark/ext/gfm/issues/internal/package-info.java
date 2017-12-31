@@ -1,1 +1,1 @@
-package com.vladsch.flexmark.ext.gfm.issues.Internal;
+package com.vladsch.flexmark.ext.gfm.issues.internal;
