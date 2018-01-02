@@ -37,7 +37,7 @@ public class ParserTest {
 
         InputStream input1 = SpecReader.getSpecInputStream();
         Node document1;
-        InputStreamReader reader = new InputStreamReader(input1);
+        InputStreamReader reader = new InputStreamReader(input1, "utf-8");
         document1 = parser.parseReader(reader);
 
         String spec = SpecReader.readSpec();
