@@ -23,9 +23,10 @@ public class AttributeNode extends CustomNode implements DoNotDecorate {
 
     @Override
     public void getAstExtra(StringBuilder out) {
-        if (name.isNotNull()) out.append(" name: ").append(name);
-        if (attributeSeparator.isNotNull()) out.append(attributeSeparator);
+        segmentSpanChars(out, name, "name");
+        segmentSpanChars(out, attributeSeparator, "sep");
         delimitedSegmentSpanChars(out, openingMarker, value, closingMarker, "value");
+        if (isImplicitName()) out.append(" isImplicit");
         if (isClass()) out.append(" isClass");
         if (isId()) out.append(" isId");
     }
@@ -46,24 +47,20 @@ public class AttributeNode extends CustomNode implements DoNotDecorate {
         this.closingMarker = closingMarker != null ? closingMarker : BasedSequence.NULL;
     }
 
-    public static boolean isImplicitName(CharSequence name) {
-        return name.length() > 0 && (name.charAt(0) == '.' || name.charAt(0) == '#');
+    public static boolean isImplicitName(CharSequence text) {
+        return text.length() > 0 && (text.charAt(0) == '.' || text.charAt(0) == '#');
     }
 
     public boolean isImplicitName() {
-        return (value.isNotNull() && name.isNull() && isImplicitName(value));
+        return (value.isNotNull() && attributeSeparator.isNull() && name.isNotNull());
     }
 
     public boolean isClass() {
-        return (value.isNotNull() && name.isNull() && value.startsWith(".")) || name.equals(Attribute.CLASS_ATTR);
+        return (isImplicitName() && name.equals(".")) || (!isImplicitName() && name.equals(Attribute.CLASS_ATTR));
     }
 
     public boolean isId() {
-        return (value.isNotNull() && name.isNull() && value.startsWith("#")) || name.equals(Attribute.ID_ATTR);
-    }
-
-    public BasedSequence getImplicitNameValue() {
-        return isImplicitName() ? value.subSequence(1) : value;
+        return (isImplicitName() && name.equals("#")) || (!isImplicitName() && name.equals(Attribute.ID_ATTR));
     }
 
     public BasedSequence getName() {

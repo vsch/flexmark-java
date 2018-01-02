@@ -1,6 +1,6 @@
 <component name="MarkdownNavigator.ProfileManager">
   <profile>
-    <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="false" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
+    <option name="myName" value="OVERVIEW" havePreviewSettings="true" haveParserSettings="true" haveHtmlSettings="true" haveCssSettings="true" haveHtmlExportSettings="true" haveLinkMapSettings="true" profileName="OVERVIEW">
       <PreviewSettings splitEditorLayout="FIRST" splitEditorPreview="PREVIEW" useGrayscaleRendering="false" zoomFactor="1.0" maxImageWidth="0" showGitHubPageIfSynced="false" allowBrowsingInPreview="false" synchronizePreviewPosition="true" highlightPreviewType="LINE" highlightFadeOut="10" highlightOnTyping="true" synchronizeSourcePosition="true" verticallyAlignSourceAndPreviewSyncPosition="true" showSearchHighlightsInPreview="true" showSelectionInPreview="true" openRemoteLinks="true">
         <PanelProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.panel" providerName="JavaFX WebView" />
@@ -16,7 +16,7 @@
           <option name="DEFINITIONS" value="false" />
           <option name="DEFINITION_BREAK_DOUBLE_BLANK_LINE" value="false" />
           <option name="FENCED_CODE_BLOCKS" value="true" />
-          <option name="FOOTNOTES" value="true" />
+          <option name="FOOTNOTES" value="false" />
           <option name="HARDWRAPS" value="false" />
           <option name="HTML_DEEP_PARSER" value="false" />
           <option name="INSERTED" value="false" />
@@ -30,13 +30,15 @@
           <option name="SUPPRESS_INLINE_HTML" value="false" />
           <option name="TABLES" value="true" />
           <option name="TASKLISTITEMS" value="true" />
-          <option name="TOC" value="true" />
+          <option name="TOC" value="false" />
           <option name="WIKILINKS" value="true" />
         </PegdownExtensions>
         <ParserOptions>
+          <option name="ATTRIBUTES_EXT" value="false" />
           <option name="COMMONMARK_LISTS" value="false" />
           <option name="DUMMY" value="false" />
           <option name="EMOJI_SHORTCUTS" value="true" />
+          <option name="ENUMERATED_REFERENCES_EXT" value="false" />
           <option name="FLEXMARK_FRONT_MATTER" value="true" />
           <option name="GFM_LOOSE_BLANK_LINE_AFTER_ITEM_PARA" value="false" />
           <option name="GFM_TABLE_RENDERING" value="false" />
@@ -44,7 +46,7 @@
           <option name="GITHUB_EMOJI_URL" value="false" />
           <option name="GITHUB_LISTS" value="false" />
           <option name="GITHUB_WIKI_LINKS" value="true" />
-          <option name="JEKYLL_FRONT_MATTER" value="true" />
+          <option name="JEKYLL_FRONT_MATTER" value="false" />
           <option name="SIM_TOC_BLANK_LINE_SPACER" value="true" />
         </ParserOptions>
       </ParserSettings>
@@ -61,9 +63,7 @@
         <StylesheetProvider>
           <provider providerId="com.vladsch.idea.multimarkdown.editor.javafx.html.css" providerName="Default JavaFx Stylesheet" />
         </StylesheetProvider>
-        <ScriptProviders>
-          <provider providerId="com.vladsch.idea.multimarkdown.editor.hljs.html.script" providerName="HighlightJS Script" />
-        </ScriptProviders>
+        <ScriptProviders />
         <cssText />
       </CssSettings>
       <HtmlExportSettings updateOnSave="true" parentDir="$ModuleFileDir$/src/main/javadoc" targetDir="$ModuleFileDir$/src/main/javadoc" cssDir="$ModuleFileDir$/src/main/javadoc/css" scriptDir="$ModuleFileDir$/src/main/javadoc/js" plainHtml="false" imageDir="$ModuleFileDir$/src/main/javadoc/img" copyLinkedImages="false" imageUniquifyType="0" targetExt="" useTargetExt="false" noCssNoScripts="true" linkToExportedHtml="true" exportOnSettingsChange="true" regenerateOnProjectOpen="false" linkFormatType="HTTP_ABSOLUTE" />

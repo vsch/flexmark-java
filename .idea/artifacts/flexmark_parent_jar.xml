@@ -37,6 +37,8 @@
       <element id="module-output" name="flexmark-pdf-converter" />
       <element id="module-output" name="flexmark-ext-gfm-issues" />
       <element id="module-output" name="flexmark-ext-gfm-users" />
+      <element id="module-output" name="flexmark-ext-attributes" />
+      <element id="module-output" name="flexmark-ext-enumerated-reference" />
     </root>
   </artifact>
 </component>

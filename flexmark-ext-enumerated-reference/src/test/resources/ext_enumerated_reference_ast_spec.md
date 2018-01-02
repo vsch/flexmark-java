@@ -17,7 +17,7 @@ reference definition of the form:
 
 Where [#] is replaced by the ordinal for the actual reference in the document. [@] is equivalent
 to [@] when there is no id. It is treated as a placeholder for the ordinal number for the given
-type. Outside of a enumerated reference definition it will render `0` 
+type. Outside of a enumerated reference definition it will render `0`
 
 no spaces between brackets
 
@@ -69,7 +69,7 @@ Document[0, 285]
     Image[0, 35] textOpen:[0, 2, "!["] text:[2, 5, "Fig"] textClose:[5, 6, "]"] linkOpen:[6, 7, "("] url:[7, 34, "http://example.com/test.png"] pageRef:[7, 34, "http://example.com/test.png"] linkClose:[34, 35, ")"]
       Text[2, 5] chars:[2, 5, "Fig"]
     AttributesNode[35, 46] textOpen:[35, 36, "{"] text:[36, 45, "#fig:test"] textClose:[45, 46, "}"]
-      AttributeNode[36, 45] value:[36, 45, "#fig:test"] isId
+      AttributeNode[36, 45] name:[36, 37, "#"] value:[37, 45, "fig:test"] isImplicit isId
     HardLineBreak[46, 49]
     EnumeratedReferenceText[49, 60] textOpen:[49, 51, "[#"] text:[51, 59, "fig:test"] textClose:[59, 60, "]"]
       Text[51, 59] chars:[51, 59, "fig:test"]
@@ -77,7 +77,7 @@ Document[0, 285]
     Image[62, 97] textOpen:[62, 64, "!["] text:[64, 67, "Fig"] textClose:[67, 68, "]"] linkOpen:[68, 69, "("] url:[69, 96, "http://example.com/test.png"] pageRef:[69, 96, "http://example.com/test.png"] linkClose:[96, 97, ")"]
       Text[64, 67] chars:[64, 67, "Fig"]
     AttributesNode[97, 109] textOpen:[97, 98, "{"] text:[98, 108, "#fig:test2"] textClose:[108, 109, "}"]
-      AttributeNode[98, 108] value:[98, 108, "#fig:test2"] isId
+      AttributeNode[98, 108] name:[98, 99, "#"] value:[99, 108, "fig:test2"] isImplicit isId
     HardLineBreak[109, 112]
     EnumeratedReferenceText[112, 124] textOpen:[112, 114, "[#"] text:[114, 123, "fig:test2"] textClose:[123, 124, "]"]
       Text[114, 123] chars:[114, 123, "fig:test2"]
@@ -100,7 +100,7 @@ Document[0, 285]
       Text[168, 176] chars:[168, 176, " caption"]
   Paragraph[178, 190] isTrailingBlankLine
     AttributesNode[178, 189] textOpen:[178, 179, "{"] text:[179, 188, "#tbl:test"] textClose:[188, 189, "}"]
-      AttributeNode[179, 188] value:[179, 188, "#tbl:test"] isId
+      AttributeNode[179, 188] name:[179, 180, "#"] value:[180, 188, "tbl:test"] isImplicit isId
   Paragraph[191, 208] isTrailingBlankLine
     Text[191, 195] chars:[191, 195, "See "]
     EnumeratedReferenceLink[195, 207] textOpen:[195, 197, "[@"] text:[197, 206, "fig:test2"] textClose:[206, 207, "]"]

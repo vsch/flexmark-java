@@ -24,7 +24,7 @@ public class EnumeratedReferenceNodePostProcessor extends NodePostProcessor {
             for (Node attributeNode : attributesNode.getChildren()) {
                 if (attributeNode instanceof AttributeNode) {
                     if (((AttributeNode) attributeNode).isId()) {
-                        final String text = ((AttributeNode) attributeNode).getImplicitNameValue().toString();
+                        final String text = ((AttributeNode) attributeNode).getValue().toString();
                         enumeratedReferences.add(text);
                     }
                 }

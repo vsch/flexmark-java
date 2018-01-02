@@ -63,7 +63,7 @@ public class AttributesInlineParserExtension implements InlineParserExtension {
 
                         AttributeNode attribute;
                         if (attributeSeparator.isNull() && attributeSeparator.isNull() && attributeValue.isNull() && AttributeNode.isImplicitName(attributeName)) {
-                            attribute = new AttributeNode(BasedSequence.NULL, attributeSeparator, attributeOpen, attributeName, attributeClose);
+                            attribute = new AttributeNode(attributeName.subSequence(0, 1), attributeSeparator, attributeOpen, attributeName.subSequence(1), attributeClose);
                         } else {
                             attribute = new AttributeNode(attributeName, attributeSeparator, attributeOpen, attributeValue, attributeClose);
                         }

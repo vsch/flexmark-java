@@ -4,17 +4,19 @@
 </head>
 <body>
 <p><strong>flexmark-java extension for enumerated reference processing</strong></p>
-<p>Converts <code>[@type:reference]</code> to enumerated reference link based on type pattern defined in enumerated
-reference definition.</p>
-<p>Converts <code>[#type:reference]</code> to enumerated reference text based on type pattern defined in enumerated
-reference definition.</p>
-<p>Enumerated reference definition defines the text to be used by an enumerated reference.</p>
-<p>[@type]: Type content [#]</p>
-<p>Where [#] is replaced by the ordinal for the actual reference in the document. [@] is equivalent
-to [@] when there is no id. It is treated as a placeholder for the ordinal number for the given
-type. Outside of a enumerated reference definition it will render <code>0</code></p>
+<p>Converts <code>[@type:reference]</code> to enumerated reference link based on type pattern defined in
+enumerated reference definition.</p>
+<p>Converts <code>[#type:reference]</code> to enumerated reference text based on type pattern defined in
+enumerated reference definition.</p>
+<p>Enumerated reference format definition defines the text to be used by an enumerated reference.</p>
+<pre><code>[@type]: Type content [#]
+</code></pre>
+<p>Where <code>[#]</code> is replaced by the ordinal for the actual reference in the document in order of
+appearance of this reference in an id attribute value. <code>[@]</code> is equivalent to <code>[@]</code> when there
+is no id. It is treated as a placeholder for the ordinal number for the given type. Outside of a
+enumerated reference definition it will render <code>0</code></p>
 <p>For example:</p>
-<pre><code class="nohighlight">![Fig](http://example.com/test.png){#fig:test}  
+<pre><code>![Fig](http://example.com/test.png){#fig:test}  
 [#fig:test]
 
 ![Fig](http://example.com/test.png){#fig:test2}  
@@ -38,22 +40,23 @@ See [@tbl:test]
 [@tbl]: Table [#].
 </code></pre>
 <p>Will render as:</p>
-<p><img src="http://example.com/test.png" alt="Fig" id="fig:test" /><br />
-<span>Figure 1.</span></p>
-<p><img src="http://example.com/test.png" alt="Fig" id="fig:test2" /><br />
-<span>Figure 2.</span></p>
-<table id="tbl:test">
-  <thead>
-    <tr><th>table</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>data</td></tr>
-  </tbody>
-  <caption><span>Table 1.</span> caption</caption>
-</table>
-<p></p>
-<p>See <a href="#fig:test2"><span>Figure 2.</span></a></p>
-<p>See <a href="#fig:test"><span>Figure 1.</span></a></p>
-<p>See <a href="#tbl:test"><span>Table 1.</span></a></p>
+<pre><code>&lt;p&gt;&lt;img src=&quot;http://example.com/test.png&quot; alt=&quot;Fig&quot; id=&quot;fig:test&quot; /&gt;&lt;br /&gt;
+&lt;span&gt;Figure 1.&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://example.com/test.png&quot; alt=&quot;Fig&quot; id=&quot;fig:test2&quot; /&gt;&lt;br /&gt;
+&lt;span&gt;Figure 2.&lt;/span&gt;&lt;/p&gt;
+&lt;table id=&quot;tbl:test&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;table&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;data&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;caption&gt;&lt;span&gt;Table 1.&lt;/span&gt; caption&lt;/caption&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&quot;#fig:test2&quot;&gt;&lt;span&gt;Figure 2.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&quot;#fig:test&quot;&gt;&lt;span&gt;Figure 1.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&quot;#tbl:test&quot;&gt;&lt;span&gt;Table 1.&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;
+</code></pre>
 </body>
 </html>

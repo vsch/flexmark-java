@@ -48,10 +48,10 @@ public class AttributesAttributeProvider implements AttributeProvider {
                     } else {
                         // implicit
                         if (attributeNode.isClass()) {
-                            attributes.addValue(CLASS_ATTR, attributeNode.getImplicitNameValue());
+                            attributes.addValue(CLASS_ATTR, attributeNode.getValue());
                         } else if (attributeNode.isId()) {
                             attributes.remove(Attribute.ID_ATTR);
-                            attributes.addValue(Attribute.ID_ATTR, attributeNode.getImplicitNameValue());
+                            attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
                         } else {
                             // unknown
                             throw new IllegalStateException("Implicit attribute yet not class or id");

@@ -9,6 +9,7 @@ import com.vladsch.flexmark.ext.aside.ExtAsideTestSuite;
 import com.vladsch.flexmark.ext.autolink.ExtAutolinkTestSuite;
 import com.vladsch.flexmark.ext.definition.ExtDefinitionTestSuite;
 import com.vladsch.flexmark.ext.emoji.ExtEmojiTestSuite;
+import com.vladsch.flexmark.ext.enumerated.reference.ExtEnumeratedReferenceTestSuite;
 import com.vladsch.flexmark.ext.escaped.character.ExtEscapedCharacterTestSuite;
 import com.vladsch.flexmark.ext.footnotes.ExtFootnotesTestSuite;
 import com.vladsch.flexmark.ext.gfm.issues.ExtGfmIssuesTestSuite;
@@ -47,6 +48,7 @@ import org.junit.runners.Suite;
         ExtAutolinkTestSuite.class,
         ExtDefinitionTestSuite.class,
         ExtEmojiTestSuite.class,
+        ExtEnumeratedReferenceTestSuite.class,
         ExtEscapedCharacterTestSuite.class,
         ExtFootnotesTestSuite.class,
         ExtGfmIssuesTestSuite.class,

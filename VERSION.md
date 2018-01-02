@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.26](#02826)
 - [0.28.24](#02824)
 - [0.28.22](#02822)
 - [0.28.20](#02820)
@@ -211,12 +212,25 @@ flexmark-java
 
 &nbsp;</details>
 
+0.28.26
+-------
+
+* Add: Two new configuration options are introduced. `LINK_ESCAPE_CHARS` gives the link
+  characters to escape and `LINK_REPLACE_CHARS` give the corresponding replacement characters.
+  This allows disabling the escaping of the `/` character enabling wiki links like
+  `[[virtual-dir/my-page]]`.
+
+* Fix: `AttributeNode` ast dump to show name and separator with range.
+
+* Change: `AttributeNode` now uses the implicit prefix of `.` or `#` as the attribute name and
+  the value is always the actual value.
+
 0.28.24
 -------
 
 * Fix: attributes module was not in parent pom and had wrong version number.
 
-* Add: Enumerated Reference Link and Enumerated Reference Text. 
+* Add: Enumerated Reference Link and Enumerated Reference Text.
 
 0.28.22
 -------
