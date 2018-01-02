@@ -1162,6 +1162,42 @@ Document[0, 24]
 ````````````````````````````````
 
 
+Custom link escape
+
+With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to change the link escaping. `LINK_ESCAPE_CHARS` gives the character to escape in links. `LINK_REPLACE_CHARS` gives the correponding replacement characters.
+
+```````````````````````````````` example(WikiLinks: 60) options(custom-link-escape)
+See [[My Page]].
+.
+<p>See <a href="My_Page">My Page</a>.</p>
+.
+Document[0, 16]
+  Paragraph[0, 16]
+    Text[0, 4] chars:[0, 4, "See "]
+    WikiLink[4, 15] linkOpen:[4, 6, "[["] link:[6, 13, "My Page"] pageRef:[6, 13, "My Page"] linkClose:[13, 15, "]]"]
+      Text[6, 13] chars:[6, 13, "My Page"]
+    Text[15, 16] chars:[15, 16, "."]
+````````````````````````````````
+
+
+Links to virtual directories
+
+With configuration options `LINK_ESCAPE_CHARS` and `LINK_REPLACE_CHARS` it is possible to create wiki links to virtual directories (links containing the `/` character.
+
+```````````````````````````````` example(WikiLinks: 61) options(custom-link-escape)
+See [[directory/WikiPage]].
+.
+<p>See <a href="directory/WikiPage">directory/WikiPage</a>.</p>
+.
+Document[0, 27]
+  Paragraph[0, 27]
+    Text[0, 4] chars:[0, 4, "See "]
+    WikiLink[4, 26] linkOpen:[4, 6, "[["] link:[6, 24, "directory/WikiPage"] pageRef:[6, 24, "directory/WikiPage"] linkClose:[24, 26, "]]"]
+      Text[6, 24] chars:[6, 24, "direc … iPage"]
+    Text[26, 27] chars:[26, 27, "."]
+````````````````````````````````
+
+
 ## Wiki Typographic Text
 
 With empty anchor ref

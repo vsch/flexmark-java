@@ -32,6 +32,7 @@ public class ComboWikiLinkSpecTest extends ComboSpecTestCase {
         optionsMap.put("allow-anchors", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHORS, true));
         optionsMap.put("allow-pipe-escape", new MutableDataSet().set(WikiLinkExtension.ALLOW_PIPE_ESCAPE, true));
         optionsMap.put("allow-anchor-escape", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHOR_ESCAPE, true));
+        optionsMap.put("custom-link-escape", new MutableDataSet().set(WikiLinkExtension.LINK_ESCAPE_CHARS, " +<>").set(WikiLinkExtension.LINK_REPLACE_CHARS, "____"));
     }
 
     static final Parser PARSER = Parser.builder(OPTIONS).build();

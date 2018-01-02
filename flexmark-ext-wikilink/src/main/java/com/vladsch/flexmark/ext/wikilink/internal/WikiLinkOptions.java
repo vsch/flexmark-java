@@ -15,6 +15,8 @@ public class WikiLinkOptions {
     public final String imagePrefix;
     public final String linkFileExtension;
     public final String linkPrefix;
+	public final String linkReplaceChars;
+	public final String linkEscapeChars;
 
     public WikiLinkOptions(DataHolder options) {
         this.allowInlines = WikiLinkExtension.ALLOW_INLINES.getFrom(options);
@@ -28,5 +30,7 @@ public class WikiLinkOptions {
         this.imagePrefix = WikiLinkExtension.IMAGE_PREFIX.getFrom(options);
         this.linkFileExtension = WikiLinkExtension.LINK_FILE_EXTENSION.getFrom(options);
         this.linkPrefix = WikiLinkExtension.LINK_PREFIX.getFrom(options);
+        this.linkEscapeChars = WikiLinkExtension.LINK_ESCAPE_CHARS.getFrom(options);
+        this.linkReplaceChars = WikiLinkExtension.LINK_REPLACE_CHARS.getFrom(options);
     }
 }

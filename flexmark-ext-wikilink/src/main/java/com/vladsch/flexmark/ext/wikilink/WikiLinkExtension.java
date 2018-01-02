@@ -34,6 +34,25 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<Boolean>("IMAGE_LINKS", false);
     public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<String>("LINK_FILE_EXTENSION", "");
     public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<String>("IMAGE_FILE_EXTENSION", "");
+
+    /**
+	 * Characters to escape in wiki links.
+	 * 
+	 * <p>
+	 * Each character in the configuration string is replaced with a character
+	 * at the corresponding index in the string given by the configuration
+	 * option {@link #LINK_REPLACE_CHARS}.
+	 * </p>
+	 */
+    public static final DataKey<String> LINK_ESCAPE_CHARS = new DataKey<String>("LINK_ESCAPE_CHARS", " +/<>");
+    
+    /**
+     * Characters to replace {@link #LINK_ESCAPE_CHARS} with.
+     * 
+     * @see #LINK_ESCAPE_CHARS
+     */
+    public static final DataKey<String> LINK_REPLACE_CHARS = new DataKey<String>("LINK_REPLACE_CHARS", "-----");
+
     public static final LinkType WIKI_LINK = new LinkType("WIKI");
 
     private WikiLinkExtension() {

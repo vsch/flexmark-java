@@ -11,8 +11,6 @@ import java.util.Set;
 import static com.vladsch.flexmark.ext.wikilink.WikiLinkExtension.WIKI_LINK;
 
 public class WikiLinkLinkResolver implements LinkResolver {
-    private static String fromChars = " +/<>";
-    private static String toChars = "-----";
     private final WikiLinkOptions options;
 
     public WikiLinkLinkResolver(LinkResolverContext context) {
@@ -30,6 +28,8 @@ public class WikiLinkLinkResolver implements LinkResolver {
 
             boolean hadAnchorRef = false;
 
+            String linkEscapeChars = options.linkEscapeChars;
+            String linkReplaceChars = options.linkReplaceChars;
             for (int i = 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
 
@@ -39,12 +39,12 @@ public class WikiLinkLinkResolver implements LinkResolver {
                     hadAnchorRef = true;
                 }
 
-                int pos = fromChars.indexOf(c);
+				int pos = linkEscapeChars.indexOf(c);
 
                 if (pos < 0) {
                     sb.append(c);
                 } else {
-                    sb.append(toChars.charAt(pos));
+					sb.append(linkReplaceChars.charAt(pos));
                 }
             }
 
