@@ -44,6 +44,30 @@ See [@tbl:test]
 [@tbl]: Table [#].
 ```
 
+is equivalent to the following without having to manually keep track of numbering of individual
+elements:
+
+```
+![Fig](http://example.com/test.png){#fig:test}
+Figure 1.
+
+![Fig](http://example.com/test.png){#fig:test2}
+Figure 2.
+
+| table |
+|-------|
+| data  |
+[Table 1. caption]
+{#tbl:test}
+
+See [Figure 2.](#fig:test2)
+
+See [Figure 1.](#fig:test)
+
+See [Table 1.](#tbl:test)
+
+```
+
 Will render as:
 
 ```
