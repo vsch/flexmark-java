@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.ext.attributes;
 
 import com.vladsch.flexmark.Extension;
-import com.vladsch.flexmark.ext.attributes.internal.AttributesAttributeProvider;
-import com.vladsch.flexmark.ext.attributes.internal.AttributesInlineParserExtension;
-import com.vladsch.flexmark.ext.attributes.internal.AttributesNodePostProcessor;
-import com.vladsch.flexmark.ext.attributes.internal.NodeAttributeRepository;
+import com.vladsch.flexmark.ext.attributes.internal.*;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.util.KeepType;
@@ -62,6 +59,7 @@ public class AttributesExtension implements Parser.ParserExtension
 
     @Override
     public void extend(final HtmlRenderer.Builder rendererBuilder, final String rendererType) {
+        //rendererBuilder.nodeRendererFactory(new AttributesNodeRenderer.Factory());
         rendererBuilder.attributeProviderFactory(new AttributesAttributeProvider.Factory());
     }
 }

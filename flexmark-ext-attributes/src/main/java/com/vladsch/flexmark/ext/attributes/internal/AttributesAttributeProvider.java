@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
-import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ast.AnchorRefTarget;
+import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
@@ -50,8 +51,12 @@ public class AttributesAttributeProvider implements AttributeProvider {
                         if (attributeNode.isClass()) {
                             attributes.addValue(CLASS_ATTR, attributeNode.getValue());
                         } else if (attributeNode.isId()) {
-                            attributes.remove(Attribute.ID_ATTR);
-                            attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
+                            if (node instanceof AnchorRefTarget) {
+                                // was already provided via setAnchorRefId
+                            } else {
+                                attributes.remove(Attribute.ID_ATTR);
+                                attributes.addValue(Attribute.ID_ATTR, attributeNode.getValue());
+                            }
                         } else {
                             // unknown
                             throw new IllegalStateException("Implicit attribute yet not class or id");

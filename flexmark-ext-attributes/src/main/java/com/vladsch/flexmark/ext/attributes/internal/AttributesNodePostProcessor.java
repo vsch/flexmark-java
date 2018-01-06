@@ -1,6 +1,7 @@
 package com.vladsch.flexmark.ext.attributes.internal;
 
 import com.vladsch.flexmark.ast.*;
+import com.vladsch.flexmark.ext.attributes.AttributeNode;
 import com.vladsch.flexmark.ext.attributes.AttributesExtension;
 import com.vladsch.flexmark.ext.attributes.AttributesNode;
 import com.vladsch.flexmark.parser.block.NodePostProcessor;
@@ -39,6 +40,17 @@ public class AttributesNodePostProcessor extends NodePostProcessor {
             }
 
             nodeAttributeRepository.put(attributeOwner, attributesNode);
+
+            // set the heading id for this node so the correct id will be used
+            if (attributeOwner instanceof AnchorRefTarget) {
+                for (Node attributeNode : attributesNode.getChildren()) {
+                    if (attributeNode instanceof AttributeNode) {
+                        if (((AttributeNode) attributeNode).isId()) {
+                            ((AnchorRefTarget) attributeOwner).setAnchorRefId(((AttributeNode) attributeNode).getValue().toString());
+                        }
+                    }
+                }
+            }
         }
     }
 

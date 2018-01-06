@@ -1,12 +1,9 @@
 package com.vladsch.flexmark.html.renderer;
 
-import com.vladsch.flexmark.ast.Document;
 import com.vladsch.flexmark.ast.Node;
-import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.html.HtmlRendererOptions;
 import com.vladsch.flexmark.html.HtmlWriter;
 import com.vladsch.flexmark.util.html.Attributes;
-import com.vladsch.flexmark.util.options.DataHolder;
 
 /**
  * The context for node rendering, including configuration and functionality for the node renderer to use.
@@ -17,7 +14,7 @@ public interface NodeRendererContext extends LinkResolverContext {
      * Extend the attributes by extensions for the node being currently rendered.
      *
      * @param part       the tag of the node being rendered, some nodes render multiple tags with attributes
-     * @param attributes the attributes that were calculated by the renderer, these may be modified. To preserve originals pass a copy.
+     * @param attributes the attributes that were calculated by the renderer or null, these may be modified. To preserve originals pass a copy.
      * @return the extended attributes with added/updated/removed entries
      */
     Attributes extendRenderingNodeAttributes(AttributablePart part, Attributes attributes);

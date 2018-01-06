@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.ext.attributes;
 
+import com.vladsch.flexmark.ext.anchorlink.AnchorLinkExtension;
+import com.vladsch.flexmark.ext.emoji.EmojiExtension;
+import com.vladsch.flexmark.ext.toc.TocExtension;
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
 import com.vladsch.flexmark.spec.SpecExample;
@@ -17,10 +20,15 @@ public class ComboExtAttributesSpecTest extends ComboSpecTestCase {
             .set(HtmlRenderer.INDENT_SIZE, 2)
             //.set(HtmlRenderer.PERCENT_ENCODE_URLS, true)
             .set(HtmlRenderer.RENDER_HEADER_ID, true)
-            .set(Parser.EXTENSIONS, Collections.singleton(AttributesExtension.create()));
+            .set(Parser.EXTENSIONS, Arrays.asList(AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()));
 
     private static final Map<String, DataHolder> optionsMap = new HashMap<String, DataHolder>();
     static {
+        optionsMap.put("anchors", new MutableDataSet()
+                .set(Parser.EXTENSIONS, Arrays.asList(AnchorLinkExtension.create(), AttributesExtension.create(), TocExtension.create(), EmojiExtension.create()))
+                .set(AnchorLinkExtension.ANCHORLINKS_WRAP_TEXT, false)
+                .set(HtmlRenderer.RENDER_HEADER_ID, false)
+        );
         optionsMap.put("src-pos", new MutableDataSet().set(HtmlRenderer.SOURCE_POSITION_ATTRIBUTE, "md-pos"));
     }
 

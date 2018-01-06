@@ -11,7 +11,8 @@ class AttributeParsing {
 
     public AttributeParsing(Parsing parsing) {
         this.myParsing = parsing;
-        this.ATTRIBUTE = Pattern.compile("\\s*([#.]?" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?");
-        this.ATTRIBUTES_TAG = Pattern.compile("\\{((?:" + "\\s*([#.]?" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?" + ")+" + ")\\}");
+        this.ATTRIBUTE = Pattern.compile("\\s*([#.]" + myParsing.UNQUOTEDVALUE + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?");
+        this.ATTRIBUTES_TAG = Pattern.compile("\\{((?:" + "\\s*([#.]" + myParsing.UNQUOTEDVALUE + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?" + ")" +
+                "(?:" + "\\s+([#.]" + myParsing.UNQUOTEDVALUE + "|" + myParsing.ATTRIBUTENAME + ")\\s*(?:=\\s*(" + myParsing.ATTRIBUTEVALUE + ")?" + ")?" + ")*" + ")\\}");
     }
 }

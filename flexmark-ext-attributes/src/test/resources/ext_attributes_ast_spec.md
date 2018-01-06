@@ -142,7 +142,21 @@ Document[0, 23]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes: 8
+```````````````````````````````` example(Attributes: 8) options(anchors)
+# Heading {#custom-id}
+.
+<h1><a href="#custom-id" id="custom-id"></a>Heading </h1>
+.
+Document[0, 22]
+  Heading[0, 22] textOpen:[0, 1, "#"] text:[2, 22, "Heading {#custom-id}"]
+    AnchorLink[2, 2]
+    Text[2, 10] chars:[2, 10, "Heading "]
+    AttributesNode[10, 22] textOpen:[10, 11, "{"] text:[11, 21, "#custom-id"] textClose:[21, 22, "}"]
+      AttributeNode[11, 21] name:[11, 12, "#"] value:[12, 21, "custom-id"] isImplicit isId
+````````````````````````````````
+
+
+```````````````````````````````` example Attributes: 9
 # Heading # {#custom-id}
 .
 <h1 id="custom-id">Heading # </h1>
@@ -155,7 +169,7 @@ Document[0, 25]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes: 9
+```````````````````````````````` example Attributes: 10
 Heading {#custom-id}
 ======================
 .
@@ -169,7 +183,21 @@ Document[0, 44]
 ````````````````````````````````
 
 
-```````````````````````````````` example Attributes: 10
+```````````````````````````````` example Attributes: 11
+Heading {#123-heading}
+======================
+.
+<h1 id="123-heading">Heading </h1>
+.
+Document[0, 46]
+  Heading[0, 45] text:[0, 22, "Heading {#123-heading}"] textClose:[23, 45, "======================"]
+    Text[0, 8] chars:[0, 8, "Heading "]
+    AttributesNode[8, 22] textOpen:[8, 9, "{"] text:[9, 21, "#123-heading"] textClose:[21, 22, "}"]
+      AttributeNode[9, 21] name:[9, 10, "#"] value:[10, 21, "123-heading"] isImplicit isId
+````````````````````````````````
+
+
+```````````````````````````````` example Attributes: 12
 Heading
 =======
 .
@@ -178,6 +206,74 @@ Heading
 Document[0, 16]
   Heading[0, 15] text:[0, 7, "Heading"] textClose:[8, 15, "======="]
     Text[0, 7] chars:[0, 7, "Heading"]
+````````````````````````````````
+
+
+```````````````````````````````` example Attributes: 13
+Heading with emoji :+1:
+=======================
+.
+<h1 id="heading-with-emoji">Heading with emoji <img src="/img/plus1.png" alt="emoji people:+1" height="20" width="20" align="absmiddle" /></h1>
+.
+Document[0, 48]
+  Heading[0, 47] text:[0, 23, "Heading with emoji :+1:"] textClose:[24, 47, "======================="]
+    Text[0, 19] chars:[0, 19, "Headi … moji "]
+    Emoji[19, 23] textOpen:[19, 20, ":"] text:[20, 22, "+1"] textClose:[22, 23, ":"]
+      Text[20, 22] chars:[20, 22, "+1"]
+````````````````````````````````
+
+
+## TOC
+
+Default rendering with emphasis
+
+```````````````````````````````` example TOC: 1
+[TOC] 
+
+# Heading **some bold** 1 {#heading-1}
+## Heading 1.1 _some italic_ {#heading-2}
+### Heading 1.1.1
+### Heading 1.1.2  **_some bold italic_** {#heading-3}
+.
+<ul>
+  <li><a href="#heading-2">Heading 1.1 <em>some italic</em></a>
+    <ul>
+      <li><a href="#heading-111">Heading 1.1.1</a></li>
+      <li><a href="#heading-3">Heading 1.1.2  <strong><em>some bold italic</em></strong></a></li>
+    </ul>
+  </li>
+</ul>
+<h1 id="heading-1">Heading <strong>some bold</strong> 1 </h1>
+<h2 id="heading-2">Heading 1.1 <em>some italic</em> </h2>
+<h3 id="heading-111">Heading 1.1.1</h3>
+<h3 id="heading-3">Heading 1.1.2  <strong><em>some bold italic</em></strong> </h3>
+.
+Document[0, 162]
+  TocBlock[0, 7] openingMarker:[0, 1] tocKeyword:[1, 4] closingMarker:[4, 5]
+  Heading[8, 46] textOpen:[8, 9, "#"] text:[10, 46, "Heading **some bold** 1 {#heading-1}"]
+    Text[10, 18] chars:[10, 18, "Heading "]
+    StrongEmphasis[18, 31] textOpen:[18, 20, "**"] text:[20, 29, "some bold"] textClose:[29, 31, "**"]
+      Text[20, 29] chars:[20, 29, "some bold"]
+    Text[31, 34] chars:[31, 34, " 1 "]
+    AttributesNode[34, 46] textOpen:[34, 35, "{"] text:[35, 45, "#heading-1"] textClose:[45, 46, "}"]
+      AttributeNode[35, 45] name:[35, 36, "#"] value:[36, 45, "heading-1"] isImplicit isId
+  Heading[47, 88] textOpen:[47, 49, "##"] text:[50, 88, "Heading 1.1 _some italic_ {#heading-2}"]
+    Text[50, 62] chars:[50, 62, "Headi …  1.1 "]
+    Emphasis[62, 75] textOpen:[62, 63, "_"] text:[63, 74, "some italic"] textClose:[74, 75, "_"]
+      Text[63, 74] chars:[63, 74, "some  … talic"]
+    Text[75, 76] chars:[75, 76, " "]
+    AttributesNode[76, 88] textOpen:[76, 77, "{"] text:[77, 87, "#heading-2"] textClose:[87, 88, "}"]
+      AttributeNode[77, 87] name:[77, 78, "#"] value:[78, 87, "heading-2"] isImplicit isId
+  Heading[89, 106] textOpen:[89, 92, "###"] text:[93, 106, "Heading 1.1.1"]
+    Text[93, 106] chars:[93, 106, "Headi … 1.1.1"]
+  Heading[107, 161] textOpen:[107, 110, "###"] text:[111, 161, "Heading 1.1.2  **_some bold italic_** {#heading-3}"]
+    Text[111, 126] chars:[111, 126, "Headi … 1.2  "]
+    StrongEmphasis[126, 148] textOpen:[126, 128, "**"] text:[128, 146, "_some bold italic_"] textClose:[146, 148, "**"]
+      Emphasis[128, 146] textOpen:[128, 129, "_"] text:[129, 145, "some bold italic"] textClose:[145, 146, "_"]
+        Text[129, 145] chars:[129, 145, "some  … talic"]
+    Text[148, 149] chars:[148, 149, " "]
+    AttributesNode[149, 161] textOpen:[149, 150, "{"] text:[150, 160, "#heading-3"] textClose:[160, 161, "}"]
+      AttributeNode[150, 160] name:[150, 151, "#"] value:[151, 160, "heading-3"] isImplicit isId
 ````````````````````````````````
 
 

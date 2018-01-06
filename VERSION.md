@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.28](#02828)
 - [0.28.26](#02826)
 - [0.28.24](#02824)
 - [0.28.22](#02822)
@@ -210,7 +211,37 @@ flexmark-java
 
 * [ ] Fix: #99, YamlFrontMatterBlockParser ignores multi-key list items
 
+* Add: GitLab compatibility extensions
+  * [ ] Add: video link renderer to convert links to video files to embedded content. The valid
+        video extensions are `.mp4`, `.m4v`, `.mov`, `.webm`, and `.ogv`.
+
+    ```
+    <div class="video-container">
+    <video src="video.mp4" width="400" controls="true"></video>
+    <p><a href="video.mp4" target="_blank" rel="noopener noreferrer" title="Download 'Sample Video'">Sample Video</a></p>
+    </div>
+    ```
+  * [ ] Multiline Block quote delimiters `>>>`
+  * [ ] Deleted text markers `{- -}` or `[- -]`
+  * [ ] Inserted text markers `{+ +}` or `[+ +]`
+  * [ ] Header ids with emoji shortcuts generate an extra `-` because of two spaces around the emoji shortcut while GitLab only generates a single `-`.
+  * [ ] Math, inline via ```$``$``` or as fenced code with `math` info string requiring
+        inclusion of Katex in the rendered HTML page.
+  * [ ] Graphing via Mermaid as fenced code with `mermaid` info string, via Mermaid inclusion
+        similar to Math solution above.
+
 &nbsp;</details>
+
+0.28.28
+-------
+
+* Fix: regex error in Attributes extension.
+
+* Fix: Attributes extension to set the id of anchor ref targets directly instead of providing
+  the id as an attribute. Corrects the working of the anchor link and TOC extensions.
+
+* Fix: Emoji node now marked as `DoNotCollectText` so that its shortcut is not used for
+  generating heading id.
 
 0.28.26
 -------

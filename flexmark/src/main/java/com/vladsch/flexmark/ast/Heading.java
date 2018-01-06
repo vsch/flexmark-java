@@ -24,7 +24,7 @@ public class Heading extends Block implements AnchorRefTarget {
 
     @Override
     public String getAnchorRefText() {
-        return new TextCollectingVisitor().collectAndGetText(this);
+        return new TextCollectingVisitor().collectAndGetText(this).trim();
     }
 
     @Override

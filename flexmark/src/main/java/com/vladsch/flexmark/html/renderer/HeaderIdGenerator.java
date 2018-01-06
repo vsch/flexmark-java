@@ -19,24 +19,26 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
         new AnchorRefTargetBlockVisitor() {
             @Override
             protected void visit(AnchorRefTarget node) {
-                String text = node.getAnchorRefText();
+                if (node.getAnchorRefId().isEmpty()) {
+                    String text = node.getAnchorRefText();
 
-                if (!text.isEmpty()) {
-                    String baseRefId = generateId(text, toDashChars, noDupedDashes);
+                    if (!text.isEmpty()) {
+                        String baseRefId = generateId(text, toDashChars, noDupedDashes);
 
-                    if (resolveDupes) {
-                        if (headerBaseIds.containsKey(baseRefId)) {
-                            int index = headerBaseIds.get(baseRefId);
+                        if (resolveDupes) {
+                            if (headerBaseIds.containsKey(baseRefId)) {
+                                int index = headerBaseIds.get(baseRefId);
 
-                            index++;
-                            headerBaseIds.put(baseRefId, index);
-                            baseRefId += "-" + index;
-                        } else {
-                            headerBaseIds.put(baseRefId, 0);
+                                index++;
+                                headerBaseIds.put(baseRefId, index);
+                                baseRefId += "-" + index;
+                            } else {
+                                headerBaseIds.put(baseRefId, 0);
+                            }
                         }
-                    }
 
-                    node.setAnchorRefId(baseRefId);
+                        node.setAnchorRefId(baseRefId);
+                    }
                 }
             }
         }.visit(document);
@@ -51,7 +53,7 @@ public class HeaderIdGenerator implements HtmlIdGenerator {
     public static String generateId(CharSequence headerText, String toDashChars, boolean noDupedDashes) {
         int iMax = headerText.length();
         StringBuilder baseRefId = new StringBuilder(iMax);
-        if (toDashChars == null) toDashChars = " -_";
+        if (toDashChars == null) toDashChars = HtmlRenderer.HEADER_ID_GENERATOR_TO_DASH_CHARS.getFrom(null);
 
         for (int i = 0; i < iMax; i++) {
             char c = headerText.charAt(i);

@@ -82,7 +82,9 @@ public class TextCollectingVisitor {
     }
 
     private void visit(Text node) {
-        out.append(node.getChars());
+        if (!node.isOrDescendantOfType(DoNotCollectText.class)) {
+            out.append(node.getChars());
+        }
     }
 
     private void visit(TextBase node) {
