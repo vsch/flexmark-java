@@ -248,11 +248,15 @@ accumulate thinking no one is affected by what is already fixed.
 
 #### Extension points in the API are many and numerous
 
-There are many extension options in the API with their intended use. If your extension lines up
-with the right API, the task is usually very short and sweet. If your extension uses the API in
-an unintended fashion or does not follow expected housekeeping protocols, you may find it an
-uphill battle with a rat's nest of if/else condition handling and fixing one bug only leading to
-creating another one.
+There are many extension options in the API with their intended use. A good soft-start is the
+[`flexmark-java-samples`](https://github.com/vsch/flexmark-java/tree/master/flexmark-java-samples)
+module which has simple samples for asked for extensions. The next best place is the source of
+an existing extension that has similar syntax to what you want to add.
+
+If your extension lines up with the right API, the task is usually very short and sweet. If your
+extension uses the API in an unintended fashion or does not follow expected housekeeping
+protocols, you may find it an uphill battle with a rat's nest of if/else condition handling and
+fixing one bug only leading to creating another one.
 
 Generally, if it takes more than a few dozen lines to add a simple extension, then either you
 are going about it wrong or the API is missing an extension point. If you look at all the
@@ -265,8 +269,8 @@ both is around 200 lines of code. You can use them as a guide post for size esti
 extension.
 
 My own experience adding extensions shows that sometimes a new type of extension is best
-addressed with an API enhancement to make its implementation seamless, or a by fixing a bug that
-was not visible before the extension excersized the API in just the right way. Your intended
+addressed with an API enhancement to make its implementation seamless, or by fixing a bug that
+was not visible before the extension stressed the API in just the right way. Your intended
 extension may just be the one requiring such an approach.
 
 #### Don't hesitate to open an issue if you can't find the answer
@@ -278,8 +282,9 @@ fruitless effort into it.
 
 I do ask that you realize that I am chief cook and bottle washer on this project, without an
 iota of Vulcan Mind Melding skills. I do ask that you describe what you want to implement
-because I can't read your mind and do some reconnaissance background work around the source code
-and documentation because I cannot transfer what I know to you, without your willing effort.
+because I can't read your mind. Please do some reconnaissance background work around the source
+code and documentation because I cannot transfer what I know to you, without your willing
+effort.
 
 #### Consulting is available
 
@@ -294,7 +299,7 @@ Rather, it proposes a standard, unambiguous syntax specification for the origina
 Markdown, thus effectively introducing yet another flavor. While flexmark is by default
 commonmark compliant, its parser can be tweaked in various ways. The sets of tweaks required to
 emulate the most commonly used markdown parsers around are available in flexmark as
-ParserEmulationProfiles.
+`ParserEmulationProfiles`.
 
 As the name `ParserEmulationProfile` implies, it's only the parser that is adjusted to the
 specific markdown flavor. Applying the profile does not add features beyond those available in
@@ -573,7 +578,7 @@ License
 
 Copyright (c) 2015-2016 Atlassian and others.
 
-Copyright (c) 2016-2017, Vladimir Schneider,
+Copyright (c) 2016-2018, Vladimir Schneider,
 
 BSD (2-clause) licensed, see [LICENSE.txt] file.
 
@@ -584,7 +589,7 @@ BSD (2-clause) licensed, see [LICENSE.txt] file.
 [commonmark-java]: https://github.com/atlassian/commonmark-java
 [commonMarkSpec.md]: https://github.com/vsch/idea-multimarkdown/blob/master/test/data/performance/commonMarkSpec.md
 [docx4j]: https://www.docx4java.org/trac/docx4j
-[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverter.java
+[DocxConverter Sample]: https://github.com/vsch/flexmark-java/blob/master/flexmark-java-samples/src/com/vladsch/flexmark/samples/DocxConverterCommonMark.java
 [Extensions.java]: flexmark-profile-pegdown/src/main/java/com/vladsch/flexmark/profiles/pegdown/Extensions.java
 [flexmark-java]: https://github.com/vsch/flexmark-java
 [GitHub]: https://github.com/vsch/laravel-translation-manager
