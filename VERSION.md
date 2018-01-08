@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.30](#02830)
 - [0.28.28](#02828)
 - [0.28.26](#02826)
 - [0.28.24](#02824)
@@ -231,6 +232,16 @@ flexmark-java
         similar to Math solution above.
 
 &nbsp;</details>
+
+0.28.30
+-------
+
+* Add: `DocxRenderer.CODE_HIGHLIGHT_SHADING` default `""`, when non-empty will use this color as
+  highlight when converting inline code element and remove any shading associated with
+  `SourceText` character style. If the color is set to `"shade"` then will use the closest named
+  color taken from the `SourceText` shade fill color.
+
+  NOTE: non-empty string will also override `DocxRenderer.NO_CHARACTER_STYLES` to `true`
 
 0.28.28
 -------

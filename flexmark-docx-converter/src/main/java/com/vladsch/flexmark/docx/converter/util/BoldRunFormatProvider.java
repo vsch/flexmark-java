@@ -4,7 +4,7 @@ import org.docx4j.wml.RPr;
 
 public class BoldRunFormatProvider<T> extends RunFormatProviderBase<T> {
     public BoldRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
-        super(docx, RunFormatProvider.BOLD_STYLE, noCharacterStyles);
+        super(docx, RunFormatProvider.BOLD_STYLE, noCharacterStyles, null);
     }
 
     @Override

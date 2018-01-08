@@ -1,10 +1,7 @@
 package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.model.styles.StyleUtil;
-import org.docx4j.wml.ParaRPr;
-import org.docx4j.wml.RPr;
-import org.docx4j.wml.RStyle;
-import org.docx4j.wml.Style;
+import org.docx4j.wml.*;
 
 /*
     Base Implementation for all RunFormatProviders
@@ -15,13 +12,15 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     protected final RunFormatProvider<T> myParent;
     protected final String myBaseStyleId;
     protected final boolean myNoCharacterStyles;
+    protected final String myHighlightShadingColor;
 
-    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId, final boolean noCharacterStyles) {
+    public RunFormatProviderBase(final DocxContext<T> docx, final String baseStyleId, final boolean noCharacterStyles, final String highlightShadingColor) {
         myDocx = docx;
         myFrame = docx.getContextFrame();
         myParent = docx.getRunFormatProvider();
         myBaseStyleId = baseStyleId;
         myNoCharacterStyles = noCharacterStyles;
+        myHighlightShadingColor = highlightShadingColor == null ? "" : highlightShadingColor;
     }
 
     @Override
@@ -79,7 +78,7 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
     @Override
     public void getRPr(final RPr rPr) {
         // Create object for rStyle
-        if (!myNoCharacterStyles) {
+        if (!(myNoCharacterStyles || !myHighlightShadingColor.isEmpty())) {
             RStyle rstyle = myDocx.getFactory().createRStyle();
             rPr.setRStyle(rstyle);
             rstyle.setVal(myBaseStyleId);
@@ -94,11 +93,37 @@ public class RunFormatProviderBase<T> implements RunFormatProvider<T> {
             inheritParentStyle(rPr, rpr1);
         }
 
-        if (myNoCharacterStyles) {
+        if (myNoCharacterStyles || !myHighlightShadingColor.isEmpty()) {
             Style thisStyle = myDocx.getStyle(myBaseStyleId);
             if (thisStyle != null) {
-                final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
                 final ParaRPr paraRPr = myDocx.getP().getPPr().getRPr();
+                final RPr pr = myDocx.getHelper().getExplicitRPr(thisStyle.getRPr());
+                if (!myHighlightShadingColor.isEmpty()) {
+                    String color = myHighlightShadingColor;
+
+                    final CTShd shd = rPr.getShd();
+                    if (shd != null) {
+                        final String shdFill = shd.getFill();
+                        if (shdFill != null && !shdFill.isEmpty() && !shdFill.equals("auto") && color.equals("shade")) {
+                            if (ColorNameMapper.isNamedColor(shdFill) || ColorNameMapper.isHexColor(shdFill)) {
+                                color = shdFill;
+                            }
+                        }
+                        rPr.setShd(null);
+                    }
+
+                    if (ColorNameMapper.isNamedColor(color)) {
+                        final Highlight highlight = myDocx.getFactory().createHighlight();
+                        highlight.setVal(color);
+                        rPr.setHighlight(highlight);
+                    } else if (ColorNameMapper.isHexColor(color)) {
+                        final Highlight highlight = myDocx.getFactory().createHighlight();
+                        highlight.setVal(ColorNameMapper.findClosestNamedColor(color));
+                        rPr.setHighlight(highlight);
+                    } else {
+                        // not valid color
+                    }
+                }
                 //myDocx.getHelper().keepDiff(rPr, pr);
                 myDocx.getHelper().keepDiff(rPr, paraRPr);
             }

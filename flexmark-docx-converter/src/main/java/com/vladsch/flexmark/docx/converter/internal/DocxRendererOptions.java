@@ -17,6 +17,7 @@ public class DocxRendererOptions {
     public final boolean noCharacterStyles;
     public final int maxImageWidth;
     public final String tocInstruction;
+    public final String codeHighlightShading;
 
     public DocxRendererOptions(DataHolder options) {
         escapeHtmlBlocks = DocxRenderer.ESCAPE_HTML_BLOCKS.getFrom(options);
@@ -33,5 +34,6 @@ public class DocxRendererOptions {
         tocGenerate = DocxRenderer.TOC_GENERATE.getFrom(options);
         logImageProcessing = DocxRenderer.LOG_IMAGE_PROCESSING.getFrom(options);
         noCharacterStyles = DocxRenderer.NO_CHARACTER_STYLES.getFrom(options);
+        codeHighlightShading = DocxRenderer.CODE_HIGHLIGHT_SHADING.getFrom(options);
     }
 }

@@ -254,9 +254,92 @@ plain ++underline++ text
 ````````````````````````````````
 
 
+```````````````````````````````` example Paragraphs: 9
+plain `inline code` text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="SourceText"/>
+            </w:rPr>
+            <w:t xml:space="preserve">inline code</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(Paragraphs: 10) options(highlight-code)
+plain `inline code` highlight text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
+                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:color w:val="BB002F"/>
+                <w:highlight w:val="yellow"/>
+                <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
+            </w:rPr>
+            <w:t xml:space="preserve">inline code</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> highlight text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+```````````````````````````````` example(Paragraphs: 11) options(highlight-shade)
+plain `inline code` highlight text
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">plain </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rFonts w:ascii="Courier New" w:cs="Liberation Mono"
+                    w:eastAsia="Courier New" w:hAnsi="Courier New"/>
+                <w:color w:val="BB002F"/>
+                <w:highlight w:val="white"/>
+                <w:bdr w:color="EEC5E1" w:space="1" w:sz="2" w:val="single"/>
+            </w:rPr>
+            <w:t xml:space="preserve">inline code</w:t>
+        </w:r>
+        <w:r>
+            <w:t xml:space="preserve"> highlight text</w:t>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
 permutations of formatting
 
-```````````````````````````````` example Paragraphs: 9
+```````````````````````````````` example Paragraphs: 12
 plain **Bold *Bold-Italic*** text
 plain *Italic **Bold-Italic*** text
 plain **Bold ++Bold-Underline++** text

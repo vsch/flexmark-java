@@ -43,14 +43,12 @@ import org.docx4j.wml.*;
 
 import javax.xml.bind.JAXBElement;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.*;
 
 import static com.vladsch.flexmark.docx.converter.util.BlockFormatProvider.*;
 import static com.vladsch.flexmark.html.renderer.LinkStatus.UNKNOWN;
-import static java.lang.Character.isLetter;
 
 @SuppressWarnings("WeakerAccess")
 public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
@@ -556,7 +554,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     }
 
     private void render(final Code node, final DocxRendererContext docx) {
-        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles));
+        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles, options.codeHighlightShading));
         docx.renderChildren(node);
     }
 
@@ -730,7 +728,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                 docx.contextFramed(new Runnable() {
                     @Override
                     public void run() {
-                        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles));
+                        docx.setRunFormatProvider(new SourceCodeRunFormatProvider<Node>(docx, options.noCharacterStyles, options.codeHighlightShading));
                         docx.text(node.getChars().normalizeEOL());
                     }
                 });
@@ -777,7 +775,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
 
         hyperlink.setId(rel.getId());
 
-        docx.setRunFormatProvider(new RunFormatProviderBase<Node>(docx, RunFormatProvider.HYPERLINK_STYLE, options.noCharacterStyles));
+        docx.setRunFormatProvider(new RunFormatProviderBase<Node>(docx, RunFormatProvider.HYPERLINK_STYLE, options.noCharacterStyles, null));
         docx.setRunContainer(new RunContainer() {
             @Override
             public void addR(final R r) {

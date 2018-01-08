@@ -4,7 +4,7 @@ import org.docx4j.wml.RPr;
 
 public class UnderlineRunFormatProvider<T> extends RunFormatProviderBase<T> {
     public UnderlineRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
-        super(docx, RunFormatProvider.INS_STYLE, noCharacterStyles);
+        super(docx, RunFormatProvider.INS_STYLE, noCharacterStyles, null);
     }
 
     @Override

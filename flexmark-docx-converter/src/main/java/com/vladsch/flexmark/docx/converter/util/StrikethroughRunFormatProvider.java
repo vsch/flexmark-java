@@ -4,7 +4,7 @@ import org.docx4j.wml.RPr;
 
 public class StrikethroughRunFormatProvider<T> extends RunFormatProviderBase<T> {
     public StrikethroughRunFormatProvider(final DocxContext<T> docx, boolean noCharacterStyles) {
-        super(docx, RunFormatProvider.STRIKE_THROUGH_STYLE, noCharacterStyles);
+        super(docx, RunFormatProvider.STRIKE_THROUGH_STYLE, noCharacterStyles, null);
     }
 
     @Override
