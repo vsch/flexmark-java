@@ -1,14 +1,17 @@
 package com.vladsch.flexmark.ext.wikilink.internal;
 
+import static com.vladsch.flexmark.ext.wikilink.WikiLinkExtension.*;
+
+import java.util.Set;
+
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.wikilink.WikiImage;
 import com.vladsch.flexmark.html.LinkResolver;
 import com.vladsch.flexmark.html.LinkResolverFactory;
-import com.vladsch.flexmark.html.renderer.*;
-
-import java.util.Set;
-
-import static com.vladsch.flexmark.ext.wikilink.WikiLinkExtension.WIKI_LINK;
+import com.vladsch.flexmark.html.renderer.LinkResolverContext;
+import com.vladsch.flexmark.html.renderer.LinkStatus;
+import com.vladsch.flexmark.html.renderer.LinkType;
+import com.vladsch.flexmark.html.renderer.ResolvedLink;
 
 public class WikiLinkLinkResolver implements LinkResolver {
     private final WikiLinkOptions options;
@@ -24,13 +27,14 @@ public class WikiLinkLinkResolver implements LinkResolver {
             final boolean isWikiImage = node instanceof WikiImage;
             String wikiLink = link.getUrl();
             int iMax = wikiLink.length();
-            sb.append(isWikiImage ? options.imagePrefix : options.linkPrefix);
+            boolean absolute = iMax > 0 && wikiLink.charAt(0) == '/';
+            sb.append(isWikiImage ? options.getImagePrefix(absolute) : options.getLinkPrefix(absolute));
 
             boolean hadAnchorRef = false;
 
             String linkEscapeChars = options.linkEscapeChars;
             String linkReplaceChars = options.linkReplaceChars;
-            for (int i = 0; i < iMax; i++) {
+            for (int i = absolute ? 1 : 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
 
                 if (c == '#') {
