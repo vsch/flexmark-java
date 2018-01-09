@@ -14,6 +14,21 @@ public class DataKey<T> {
         this.factory = factory;
     }
 
+    /**
+     * Creates a {@link DataKey} with a dynamic fallback to the value of another key.
+     *
+     * @param name See {@link #getName()}.
+     * @param defaultKey The {@link DataKey} to take the default value from.
+     */
+    public DataKey(String name, final DataKey<? extends T> defaultKey) {
+    	this(name, new DataValueFactory<T>() {
+    		@Override
+    		public T create(DataHolder value) {
+    			return defaultKey.getFrom(value);
+    		}
+    	});
+    }
+    
     public DataKey(String name, final T defaultValue) {
         this.name = name;
         this.defaultValue = defaultValue;

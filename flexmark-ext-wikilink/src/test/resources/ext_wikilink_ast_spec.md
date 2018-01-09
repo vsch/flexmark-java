@@ -1198,6 +1198,70 @@ Document[0, 27]
 ````````````````````````````````
 
 
+Absolute link prefix
+
+```````````````````````````````` example(WikiLinks: 62) options(custom-link-escape,link-prefix-absolute)
+[[Page]]
+
+[[dir/Page]]
+
+[[/Page]]
+
+[[/dir/Page]]
+.
+<p><a href="/relative/Page">Page</a></p>
+<p><a href="/relative/dir/Page">dir/Page</a></p>
+<p><a href="/absolute/Page">/Page</a></p>
+<p><a href="/absolute/dir/Page">/dir/Page</a></p>
+.
+Document[0, 48]
+  Paragraph[0, 9] isTrailingBlankLine
+    WikiLink[0, 8] linkOpen:[0, 2, "[["] link:[2, 6, "Page"] pageRef:[2, 6, "Page"] linkClose:[6, 8, "]]"]
+      Text[2, 6] chars:[2, 6, "Page"]
+  Paragraph[10, 23] isTrailingBlankLine
+    WikiLink[10, 22] linkOpen:[10, 12, "[["] link:[12, 20, "dir/Page"] pageRef:[12, 20, "dir/Page"] linkClose:[20, 22, "]]"]
+      Text[12, 20] chars:[12, 20, "dir/Page"]
+  Paragraph[24, 34] isTrailingBlankLine
+    WikiLink[24, 33] linkOpen:[24, 26, "[["] link:[26, 31, "/Page"] pageRef:[26, 31, "/Page"] linkClose:[31, 33, "]]"]
+      Text[26, 31] chars:[26, 31, "/Page"]
+  Paragraph[35, 48]
+    WikiLink[35, 48] linkOpen:[35, 37, "[["] link:[37, 46, "/dir/Page"] pageRef:[37, 46, "/dir/Page"] linkClose:[46, 48, "]]"]
+      Text[37, 46] chars:[37, 46, "/dir/Page"]
+````````````````````````````````
+
+
+Absolute image prefix
+
+```````````````````````````````` example(WikiLinks: 63) options(wiki-images,custom-link-escape,image-prefix-absolute)
+![[Img]]
+
+![[dir/Img]]
+
+![[/Img]]
+
+![[/dir/Img]]
+.
+<p><img src="/relative/images/Img" alt="Img" /></p>
+<p><img src="/relative/images/dir/Img" alt="dir/Img" /></p>
+<p><img src="/absolute/images/Img" alt="/Img" /></p>
+<p><img src="/absolute/images/dir/Img" alt="/dir/Img" /></p>
+.
+Document[0, 48]
+  Paragraph[0, 9] isTrailingBlankLine
+    WikiImage[0, 8] linkOpen:[0, 3, "![["] link:[3, 6, "Img"] pageRef:[3, 6, "Img"] linkClose:[6, 8, "]]"]
+      Text[3, 6] chars:[3, 6, "Img"]
+  Paragraph[10, 23] isTrailingBlankLine
+    WikiImage[10, 22] linkOpen:[10, 13, "![["] link:[13, 20, "dir/Img"] pageRef:[13, 20, "dir/Img"] linkClose:[20, 22, "]]"]
+      Text[13, 20] chars:[13, 20, "dir/Img"]
+  Paragraph[24, 34] isTrailingBlankLine
+    WikiImage[24, 33] linkOpen:[24, 27, "![["] link:[27, 31, "/Img"] pageRef:[27, 31, "/Img"] linkClose:[31, 33, "]]"]
+      Text[27, 31] chars:[27, 31, "/Img"]
+  Paragraph[35, 48]
+    WikiImage[35, 48] linkOpen:[35, 38, "![["] link:[38, 46, "/dir/Img"] pageRef:[38, 46, "/dir/Img"] linkClose:[46, 48, "]]"]
+      Text[38, 46] chars:[38, 46, "/dir/Img"]
+````````````````````````````````
+
+
 ## Wiki Typographic Text
 
 With empty anchor ref

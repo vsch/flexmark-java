@@ -30,7 +30,27 @@ public class WikiLinkExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<Boolean> DISABLE_RENDERING = new DataKey<Boolean>("DISABLE_RENDERING", false);
     public static final DataKey<Boolean> LINK_FIRST_SYNTAX = new DataKey<Boolean>("LINK_FIRST_SYNTAX", false);
     public static final DataKey<String> LINK_PREFIX = new DataKey<String>("LINK_PREFIX", "");
+    
+    /**
+     * Link prefix to use for absolute wiki links starting with the <code>'/'</code> character.
+     * 
+     * <p>
+     * The default value is value of option {@link #LINK_PREFIX}.
+     * </p>
+     */
+    public static final DataKey<String> LINK_PREFIX_ABSOLUTE = new DataKey<String>("LINK_PREFIX_ABSOLUTE", LINK_PREFIX);
+    
     public static final DataKey<String> IMAGE_PREFIX = new DataKey<String>("IMAGE_PREFIX", "");
+    
+    /**
+     * Image prefix to use for absolute wiki image sources starting with the <code>'/'</code> character.
+     * 
+     * <p>
+     * The default value is value of option {@link #IMAGE_PREFIX}.
+     * </p>
+     */
+    public static final DataKey<String> IMAGE_PREFIX_ABSOLUTE = new DataKey<String>("IMAGE_PREFIX_ABSOLUTE", IMAGE_PREFIX);
+    
     public static final DataKey<Boolean> IMAGE_LINKS = new DataKey<Boolean>("IMAGE_LINKS", false);
     public static final DataKey<String> LINK_FILE_EXTENSION = new DataKey<String>("LINK_FILE_EXTENSION", "");
     public static final DataKey<String> IMAGE_FILE_EXTENSION = new DataKey<String>("IMAGE_FILE_EXTENSION", "");

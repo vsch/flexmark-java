@@ -25,8 +25,10 @@ public class ComboWikiLinkSpecTest extends ComboSpecTestCase {
         optionsMap.put("links-first", new MutableDataSet().set(WikiLinkExtension.LINK_FIRST_SYNTAX, true));
         optionsMap.put("link-ext", new MutableDataSet().set(WikiLinkExtension.LINK_FILE_EXTENSION, ".html"));
         optionsMap.put("link-prefix", new MutableDataSet().set(WikiLinkExtension.LINK_PREFIX, "/prefix/"));
+        optionsMap.put("link-prefix-absolute", new MutableDataSet().set(WikiLinkExtension.LINK_PREFIX, "/relative/").set(WikiLinkExtension.LINK_PREFIX_ABSOLUTE, "/absolute/"));
         optionsMap.put("image-ext", new MutableDataSet().set(WikiLinkExtension.IMAGE_FILE_EXTENSION, ".png"));
         optionsMap.put("image-prefix", new MutableDataSet().set(WikiLinkExtension.IMAGE_PREFIX, "/images/"));
+        optionsMap.put("image-prefix-absolute", new MutableDataSet().set(WikiLinkExtension.IMAGE_PREFIX, "/relative/images/").set(WikiLinkExtension.IMAGE_PREFIX_ABSOLUTE, "/absolute/images/"));
         optionsMap.put("wiki-images", new MutableDataSet().set(WikiLinkExtension.IMAGE_LINKS, true));
         optionsMap.put("allow-inlines", new MutableDataSet().set(WikiLinkExtension.ALLOW_INLINES, true));
         optionsMap.put("allow-anchors", new MutableDataSet().set(WikiLinkExtension.ALLOW_ANCHORS, true));

@@ -24,13 +24,14 @@ public class WikiLinkLinkResolver implements LinkResolver {
             final boolean isWikiImage = node instanceof WikiImage;
             String wikiLink = link.getUrl();
             int iMax = wikiLink.length();
-            sb.append(isWikiImage ? options.imagePrefix : options.linkPrefix);
+            boolean absolute = iMax > 0 && wikiLink.charAt(0) == '/';
+            sb.append(isWikiImage ? options.getImagePrefix(absolute) : options.getLinkPrefix(absolute));
 
             boolean hadAnchorRef = false;
 
             String linkEscapeChars = options.linkEscapeChars;
             String linkReplaceChars = options.linkReplaceChars;
-            for (int i = 0; i < iMax; i++) {
+            for (int i = absolute ? 1 : 0; i < iMax; i++) {
                 char c = wikiLink.charAt(i);
 
                 if (c == '#') {

@@ -13,8 +13,10 @@ public class WikiLinkOptions {
     public final boolean allowPipeEscape;
     public final String imageFileExtension;
     public final String imagePrefix;
+    public final String imagePrefixAbsolute;
     public final String linkFileExtension;
     public final String linkPrefix;
+    public final String linkPrefixAbsolute;
 	public final String linkReplaceChars;
 	public final String linkEscapeChars;
 
@@ -28,9 +30,19 @@ public class WikiLinkOptions {
         this.allowPipeEscape = WikiLinkExtension.ALLOW_PIPE_ESCAPE.getFrom(options);
         this.imageFileExtension = WikiLinkExtension.IMAGE_FILE_EXTENSION.getFrom(options);
         this.imagePrefix = WikiLinkExtension.IMAGE_PREFIX.getFrom(options);
+        this.imagePrefixAbsolute = WikiLinkExtension.IMAGE_PREFIX_ABSOLUTE.getFrom(options);
         this.linkFileExtension = WikiLinkExtension.LINK_FILE_EXTENSION.getFrom(options);
         this.linkPrefix = WikiLinkExtension.LINK_PREFIX.getFrom(options);
+        this.linkPrefixAbsolute = WikiLinkExtension.LINK_PREFIX_ABSOLUTE.getFrom(options);
         this.linkEscapeChars = WikiLinkExtension.LINK_ESCAPE_CHARS.getFrom(options);
         this.linkReplaceChars = WikiLinkExtension.LINK_REPLACE_CHARS.getFrom(options);
     }
+
+	public Object getLinkPrefix(boolean absolute) {
+		return absolute ? linkPrefixAbsolute : linkPrefix;
+	}
+
+	public Object getImagePrefix(boolean absolute) {
+		return absolute ? imagePrefixAbsolute : imagePrefix;
+	}
 }
