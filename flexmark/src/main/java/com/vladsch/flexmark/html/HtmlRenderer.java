@@ -44,62 +44,17 @@ public class HtmlRenderer implements IRender {
     public static final DataKey<Boolean> PERCENT_ENCODE_URLS = new DataKey<Boolean>("PERCENT_ENCODE_URLS", false);
     public static final DataKey<Integer> INDENT_SIZE = new DataKey<Integer>("INDENT_SIZE", 0);
     public static final DataKey<Boolean> ESCAPE_HTML = new DataKey<Boolean>("ESCAPE_HTML", false);
-    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML_BLOCKS.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("ESCAPE_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return ESCAPE_INLINE_HTML.getFrom(holder);
-        }
-    });
+    public static final DataKey<Boolean> ESCAPE_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
+    public static final DataKey<Boolean> ESCAPE_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_COMMENT_BLOCKS", ESCAPE_HTML_BLOCKS);
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML = new DynamicDefaultKey<Boolean>("ESCAPE_HTML_BLOCKS", ESCAPE_HTML);
+    public static final DataKey<Boolean> ESCAPE_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("ESCAPE_INLINE_HTML_COMMENTS", ESCAPE_INLINE_HTML);
     public static final DataKey<Boolean> SUPPRESS_HTML = new DataKey<Boolean>("SUPPRESS_HTML", false);
-    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_COMMENT_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_HTML_BLOCKS.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_HTML.getFrom(holder);
-        }
-    });
-    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML_COMMENTS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SUPPRESS_INLINE_HTML.getFrom(holder);
-        }
-    });
+    public static final DataKey<Boolean> SUPPRESS_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_BLOCKS", SUPPRESS_HTML);
+    public static final DataKey<Boolean> SUPPRESS_HTML_COMMENT_BLOCKS = new DynamicDefaultKey<Boolean>("SUPPRESS_HTML_COMMENT_BLOCKS", SUPPRESS_HTML_BLOCKS);
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML", SUPPRESS_HTML);
+    public static final DataKey<Boolean> SUPPRESS_INLINE_HTML_COMMENTS = new DynamicDefaultKey<Boolean>("SUPPRESS_INLINE_HTML_COMMENTS", SUPPRESS_INLINE_HTML);
     public static final DataKey<Boolean> SOURCE_WRAP_HTML = new DataKey<Boolean>("SOURCE_WRAP_HTML", false);
-    public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SOURCE_WRAP_HTML_BLOCKS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(DataHolder holder) {
-            return SOURCE_WRAP_HTML.getFrom(holder);
-        }
-    });
+    public static final DataKey<Boolean> SOURCE_WRAP_HTML_BLOCKS = new DynamicDefaultKey<Boolean>("SOURCE_WRAP_HTML_BLOCKS", SOURCE_WRAP_HTML);
     //public static final DataKey<Boolean> SOURCE_WRAP_INLINE_HTML = new DynamicDefaultKey<>("SOURCE_WRAP_INLINE_HTML", SOURCE_WRAP_HTML::getFrom);
     public static final DataKey<Boolean> HEADER_ID_GENERATOR_RESOLVE_DUPES = new DataKey<Boolean>("HEADER_ID_GENERATOR_RESOLVE_DUPES", true);
     public static final DataKey<String> HEADER_ID_GENERATOR_TO_DASH_CHARS = new DataKey<String>("HEADER_ID_GENERATOR_TO_DASH_CHARS", " -_");

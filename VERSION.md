@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.32](#02832)
 - [0.28.30](#02830)
 - [0.28.28](#02828)
 - [0.28.26](#02826)
@@ -232,6 +233,11 @@ flexmark-java
         similar to Math solution above.
 
 &nbsp;</details>
+
+0.28.32
+-------
+
+* Add: merge request #191, adding absolute wiki link and wiki image prefix options
 
 0.28.30
 -------

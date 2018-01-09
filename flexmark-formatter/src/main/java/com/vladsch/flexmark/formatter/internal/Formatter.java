@@ -73,15 +73,7 @@ public class Formatter implements IRender {
     public static final DataKey<CharWidthProvider> CHAR_WIDTH_PROVIDER = TableFormatOptions.CHAR_WIDTH_PROVIDER;
 
     // formatter family override
-    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>(
-            "FORMATTER_EMULATION_PROFILE",
-            new DataValueFactory<ParserEmulationProfile>() {
-                @Override
-                public ParserEmulationProfile create(final DataHolder value) {
-                    return Parser.PARSER_EMULATION_PROFILE.getFrom(value);
-                }
-            }
-    );
+    public static final DataKey<ParserEmulationProfile> FORMATTER_EMULATION_PROFILE = new DynamicDefaultKey<ParserEmulationProfile>("FORMATTER_EMULATION_PROFILE", Parser.PARSER_EMULATION_PROFILE);
 
     //public boolean USE_ACTUAL_CHAR_WIDTH = true;
     //

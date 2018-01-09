@@ -40,12 +40,12 @@ public class WikiLinkLinkResolver implements LinkResolver {
                     hadAnchorRef = true;
                 }
 
-				int pos = linkEscapeChars.indexOf(c);
+                int pos = linkEscapeChars.indexOf(c);
 
                 if (pos < 0) {
                     sb.append(c);
                 } else {
-					sb.append(linkReplaceChars.charAt(pos));
+                    sb.append(linkReplaceChars.charAt(pos));
                 }
             }
 

@@ -119,12 +119,7 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSER = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSER", false);
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
     public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<Boolean>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
-    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", new DataValueFactory<Boolean>() {
-        @Override
-        public Boolean create(final DataHolder value) {
-            return HTML_BLOCK_DEEP_PARSER.getFrom(value);
-        }
-    });
+    public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
 
     /**
      * Blank line interrupts HTML block when not in raw tag, otherwise only when closed
@@ -224,12 +219,7 @@ public class Parser implements IParse {
     public static final DataKey<String> LISTS_ITEM_PREFIX_CHARS = new DataKey<String>("LISTS_ITEM_PREFIX_CHARS", "*-+");
 
     // separate setting for CODE_BLOCK_INDENT
-    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DynamicDefaultKey<Integer>("CODE_BLOCK_INDENT", new DataValueFactory<Integer>() {
-        @Override
-        public Integer create(final DataHolder options) {
-            return LISTS_ITEM_INDENT.getFrom(options);
-        }
-    });
+    public static final DataKey<Integer> CODE_BLOCK_INDENT = new DynamicDefaultKey<Integer>("CODE_BLOCK_INDENT", LISTS_ITEM_INDENT);
 
     private final List<CustomBlockParserFactory> blockParserFactories;
     private final Map<Character, DelimiterProcessor> delimiterProcessors;

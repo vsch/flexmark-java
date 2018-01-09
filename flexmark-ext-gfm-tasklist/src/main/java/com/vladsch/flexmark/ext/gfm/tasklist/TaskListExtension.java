@@ -33,12 +33,7 @@ public class TaskListExtension implements Parser.ParserExtension, HtmlRenderer.H
     public static final DataKey<String> ITEM_DONE_MARKER = new DataKey<String>("ITEM_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" checked=\"checked\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> ITEM_NOT_DONE_MARKER = new DataKey<String>("ITEM_NOT_DONE_MARKER", "<input type=\"checkbox\" class=\"task-list-item-checkbox\" disabled=\"disabled\" readonly=\"readonly\" />&nbsp;");
     public static final DataKey<String> ITEM_CLASS = new DataKey<String>("ITEM_CLASS", "task-list-item");
-    public static final DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<String>("LOOSE_ITEM_CLASS", new DataValueFactory<String>() {
-        @Override
-        public String create(DataHolder holder) {
-            return ITEM_CLASS.getFrom(holder);
-        }
-    });
+    public static final DataKey<String> LOOSE_ITEM_CLASS = new DynamicDefaultKey<String>("LOOSE_ITEM_CLASS", ITEM_CLASS);
     public static final DataKey<String> PARAGRAPH_CLASS = new DataKey<String>("PARAGRAPH_CLASS", "");
 
     // formatting options

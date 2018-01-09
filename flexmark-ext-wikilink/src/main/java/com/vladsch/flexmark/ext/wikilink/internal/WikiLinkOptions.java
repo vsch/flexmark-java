@@ -17,8 +17,8 @@ public class WikiLinkOptions {
     public final String linkFileExtension;
     public final String linkPrefix;
     public final String linkPrefixAbsolute;
-	public final String linkReplaceChars;
-	public final String linkEscapeChars;
+    public final String linkReplaceChars;
+    public final String linkEscapeChars;
 
     public WikiLinkOptions(DataHolder options) {
         this.allowInlines = WikiLinkExtension.ALLOW_INLINES.getFrom(options);
@@ -38,11 +38,11 @@ public class WikiLinkOptions {
         this.linkReplaceChars = WikiLinkExtension.LINK_REPLACE_CHARS.getFrom(options);
     }
 
-	public Object getLinkPrefix(boolean absolute) {
-		return absolute ? linkPrefixAbsolute : linkPrefix;
-	}
+    public Object getLinkPrefix(boolean absolute) {
+        return absolute ? linkPrefixAbsolute : linkPrefix;
+    }
 
-	public Object getImagePrefix(boolean absolute) {
-		return absolute ? imagePrefixAbsolute : imagePrefix;
-	}
+    public Object getImagePrefix(boolean absolute) {
+        return absolute ? imagePrefixAbsolute : imagePrefix;
+    }
 }
