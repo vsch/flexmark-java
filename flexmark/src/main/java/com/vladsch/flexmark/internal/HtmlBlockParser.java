@@ -25,8 +25,21 @@ public class HtmlBlockParser extends AbstractBlockParser {
         public final int COMMENT_PATTERN_INDEX;
         public final Pattern[][] BLOCK_PATTERNS;
 
-        public Patterns(Parsing parsing) {
+        public Patterns(Parsing parsing, DataHolder options) {
             this.COMMENT_PATTERN_INDEX = 2;
+
+            // dynamic block tags
+            StringBuilder sb = new StringBuilder();
+            String delimiter = "";
+            for (String tag : Parser.HTML_BLOCK_TAGS.getFrom(options)) {
+                sb.append(delimiter)
+                        .append("\\Q")
+                        .append(tag)
+                        .append("\\E");
+                delimiter = "|";
+            }
+            String blockTags = sb.toString();
+
             this.BLOCK_PATTERNS = new Pattern[][] {
                     { null, null }, // not used (no type 0)
                     {
@@ -50,23 +63,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                             Pattern.compile("\\]\\]>")
                     },
                     {
-                            Pattern.compile("^</?(?:" +
-                                    "address|article|aside|" +
-                                    "base|basefont|blockquote|body|" +
-                                    "caption|center|col|colgroup|" +
-                                    "dd|details|dialog|dir|div|dl|dt|" +
-                                    "fieldset|figcaption|figure|footer|form|frame|frameset|" +
-                                    "h1|h2|h3|h4|h5|h6|head|header|hr|html|" +
-                                    "iframe|" +
-                                    "legend|li|link|" +
-                                    "main|menu|menuitem|meta|" +
-                                    "nav|noframes|" +
-                                    "ol|optgroup|option|" +
-                                    "p|param|" +
-                                    "section|source|summary|" +
-                                    "table|tbody|td|tfoot|th|thead|title|tr|track|" +
-                                    "ul" +
-                                    ")(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
+                            Pattern.compile("^</?(?:" + blockTags + ")(?:\\s|[/]?[>]|$)", Pattern.CASE_INSENSITIVE),
                             null // terminated by blank line
                     },
                     {
@@ -312,7 +309,7 @@ public class HtmlBlockParser extends AbstractBlockParser {
                         }
 
                         if (myPatterns == null) {
-                            myPatterns = new Patterns(state.getParsing());
+                            myPatterns = new Patterns(state.getParsing(), state.getProperties());
                         }
 
                         Pattern opener = myPatterns.BLOCK_PATTERNS[blockType][0];

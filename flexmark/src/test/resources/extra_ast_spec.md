@@ -3399,6 +3399,32 @@ Document[0, 34]
 ````````````````````````````````
 
 
+## Block HTML
+
+math tag
+
+```````````````````````````````` example Block HTML: 1
+<math></math>
+.
+<math></math>
+.
+Document[0, 14]
+  HtmlBlock[0, 14]
+````````````````````````````````
+
+
+user tag
+
+```````````````````````````````` example(Block HTML: 2) options(user-block-tags)
+<tag></tag>
+.
+<tag></tag>
+.
+Document[0, 11]
+  HtmlBlock[0, 11]
+````````````````````````````````
+
+
 ## Inline HTML
 
 kbd tag

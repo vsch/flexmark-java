@@ -123,6 +123,10 @@ public class ComboExtraSpecTest extends ComboSpecTestCase {
                 .set(Parser.LISTS_EMPTY_ORDERED_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
                 .set(Parser.LISTS_EMPTY_ORDERED_NON_ONE_SUB_ITEM_INTERRUPTS_ITEM_PARAGRAPH, true)
         );
+
+        ArrayList<String> userTags = new ArrayList<>(Parser.HTML_BLOCK_TAGS.getFrom(null));
+        userTags.add("tag");
+        optionsMap.put("user-block-tags", new MutableDataSet().set(Parser.HTML_BLOCK_TAGS, userTags));
     }
 
     private static final Parser PARSER = Parser.builder(OPTIONS).build();

@@ -61,7 +61,6 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> MATCH_CLOSING_FENCE_CHARACTERS = new DataKey<Boolean>("MATCH_CLOSING_FENCE_CHARACTERS", true);
     public static final DataKey<Boolean> FENCED_CODE_CONTENT_BLOCK = new DataKey<Boolean>("FENCED_CODE_CONTENT_BLOCK", false);
 
-
     public static final DataKey<Boolean> CODE_SOFT_LINE_BREAKS = new DataKey<Boolean>("CODE_SOFT_LINE_BREAKS", false);
     /**
      * @deprecated use FENCED_CODE_CONTENT_BLOCK
@@ -120,6 +119,77 @@ public class Parser implements IParse {
     public static final DataKey<Boolean> HTML_BLOCK_DEEP_PARSE_NON_BLOCK = new DataKey<Boolean>("HTML_BLOCK_DEEP_PARSE_NON_BLOCK", true);
     public static final DataKey<Boolean> HTML_BLOCK_COMMENT_ONLY_FULL_LINE = new DataKey<Boolean>("HTML_BLOCK_COMMENT_ONLY_FULL_LINE", false);
     public static final DataKey<Boolean> HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS = new DynamicDefaultKey<Boolean>("HTML_BLOCK_START_ONLY_ON_BLOCK_TAGS", HTML_BLOCK_DEEP_PARSER);
+    public static final DataKey<List<String>> HTML_BLOCK_TAGS = new DataKey<List<String>>("HTML_BLOCK_TAGS", new DataValueFactory<List<String>>() {
+        @Override
+        public List<String> create(final DataHolder value) {
+            return Arrays.asList(
+                    "address",
+                    "article",
+                    "aside",
+                    "base",
+                    "basefont",
+                    "blockquote",
+                    "body",
+                    "caption",
+                    "center",
+                    "col",
+                    "colgroup",
+                    "dd",
+                    "details",
+                    "dialog",
+                    "dir",
+                    "div",
+                    "dl",
+                    "dt",
+                    "fieldset",
+                    "figcaption",
+                    "figure",
+                    "footer",
+                    "form",
+                    "frame",
+                    "frameset",
+                    "h1",
+                    "h2",
+                    "h3",
+                    "h4",
+                    "h5",
+                    "h6",
+                    "head",
+                    "header",
+                    "hr",
+                    "html",
+                    "iframe",
+                    "legend",
+                    "li",
+                    "link",
+                    "main",
+                    "math",
+                    "menu",
+                    "menuitem",
+                    "meta",
+                    "nav",
+                    "noframes",
+                    "ol",
+                    "optgroup",
+                    "option",
+                    "p",
+                    "param",
+                    "section",
+                    "source",
+                    "summary",
+                    "table",
+                    "tbody",
+                    "td",
+                    "tfoot",
+                    "th",
+                    "thead",
+                    "title",
+                    "tr",
+                    "track",
+                    "ul"
+            );
+        }
+    });
 
     /**
      * Blank line interrupts HTML block when not in raw tag, otherwise only when closed
