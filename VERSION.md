@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.34](#02834)
 - [0.28.32](#02832)
 - [0.28.30](#02830)
 - [0.28.28](#02828)
@@ -233,6 +234,11 @@ flexmark-java
         similar to Math solution above.
 
 &nbsp;</details>
+
+0.28.34
+-------
+
+* Fix: core node renderer renderLineBreak could cause NPE
 
 0.28.32
 -------

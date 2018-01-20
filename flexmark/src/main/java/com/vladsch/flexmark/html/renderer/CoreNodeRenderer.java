@@ -505,7 +505,7 @@ public class CoreNodeRenderer implements NodeRenderer {
     }
 
     private boolean renderLineBreak(String breakText, final String suppressInTag, final Node node, NodeRendererContext context, HtmlWriter html) {
-        if (myNextLine < myLines.size()) {
+        if (myLines != null && myNextLine < myLines.size()) {
             // here we may need to close tags opened since the span tag
             List<String> openTags = html.getOpenTagsAfterLast("span");
             int iMax = openTags.size();
