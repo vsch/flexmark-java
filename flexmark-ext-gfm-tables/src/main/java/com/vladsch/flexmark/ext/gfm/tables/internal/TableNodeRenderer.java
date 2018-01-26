@@ -69,6 +69,10 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(final TableHead tableHead, final NodeRendererContext context, HtmlWriter html) {
+        if(!tableHead.hasChildren()) {
+            return;
+        }
+
         html.withAttr().withCondLine().tagIndent("thead", new Runnable() {
             @Override
             public void run() {
@@ -82,6 +86,10 @@ public class TableNodeRenderer implements NodeRenderer {
     }
 
     private void render(final TableBody tableBody, final NodeRendererContext context, HtmlWriter html) {
+        if(!tableBody.hasChildren()) {
+            return;
+        }
+
         html.withAttr().withCondLine().tagIndent("tbody", new Runnable() {
             @Override
             public void run() {

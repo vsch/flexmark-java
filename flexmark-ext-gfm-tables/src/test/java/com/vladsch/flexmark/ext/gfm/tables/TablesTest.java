@@ -59,7 +59,6 @@ public class TablesTest extends RenderingTestCase {
                 "<thead>\n" +
                 "<tr><th>Abc</th><th>Def</th></tr>\n" +
                 "</thead>\n" +
-                "<tbody></tbody>\n" +
                 "</table>\n");
     }
 
@@ -69,7 +68,6 @@ public class TablesTest extends RenderingTestCase {
                 "<thead>\n" +
                 "<tr><th>Abc</th></tr>\n" +
                 "</thead>\n" +
-                "<tbody></tbody>\n" +
                 "</table>\n";
         assertRendering("|Abc\n|---\n", expected);
         assertRendering("|Abc|\n|---|\n", expected);
@@ -103,7 +101,6 @@ public class TablesTest extends RenderingTestCase {
                 "<thead>\n" +
                 "<tr><th>Abc</th></tr>\n" +
                 "</thead>\n" +
-                "<tbody></tbody>\n" +
                 "</table>\n" +
                 "<p>1</p>\n");
     }

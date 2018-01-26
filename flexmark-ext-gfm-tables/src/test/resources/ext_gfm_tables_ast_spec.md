@@ -109,7 +109,6 @@ Abc|Def
   <thead>
     <tr><th>Abc</th><th>Def</th></tr>
   </thead>
-  <tbody></tbody>
 </table>
 .
 Document[0, 16]
@@ -138,7 +137,6 @@ Document[0, 16]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -163,7 +161,6 @@ Document[0, 10]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody></tbody>
 </table>
 .
 Document[0, 12]
@@ -188,7 +185,6 @@ Abc|
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody></tbody>
 </table>
 .
 Document[0, 10]
@@ -350,7 +346,6 @@ Document[0, 12]
   <thead>
     <tr><th>Abc</th></tr>
   </thead>
-  <tbody></tbody>
 </table>
 <p>1</p>
 .
