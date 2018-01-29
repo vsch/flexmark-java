@@ -59,7 +59,7 @@ public class QuoteBlockFormatProvider<T> extends BlockFormatProviderBase<T> {
         // here we need to adjust for inherited left margin
         final BigInteger newLeftInd = myDocx.getHelper().safeIndLeft(pPr);
         final PPr styledPPr = myDocx.getHelper().getExplicitPPr(pPr);
-        if (styledPPr.getPBdr() != null && newLeftInd.compareTo(myLeftInd) > 0) {
+        if (styledPPr.getPBdr() != null && newLeftInd != null && newLeftInd.compareTo(myLeftInd) > 0) {
             // it grew, word has the border hanging and we want the we shift it by our left border spacing
             CTBorder leftBorder = styledPPr.getPBdr().getLeft();
             if (leftBorder.getSpace() != null && leftBorder.getSpace().compareTo(BigInteger.ZERO) > 0) {

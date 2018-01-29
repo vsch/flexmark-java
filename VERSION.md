@@ -7,6 +7,8 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.38](#02838)
+- [0.28.36](#02836)
 - [0.28.34](#02834)
 - [0.28.32](#02832)
 - [0.28.30](#02830)
@@ -234,6 +236,22 @@ flexmark-java
         similar to Math solution above.
 
 &nbsp;</details>
+
+0.28.38
+-------
+
+* [ ] Add option to HTML Generator to convert resolved image links base64 encoded image data.
+
+  **NOTE:** this requires that your link resolver resolves image links so that the link is
+  either an absolute URI (`file://`, `http://` or `https://`) or a relative link which is the
+  relative path from current working directory to a valid image file.
+
+0.28.36
+-------
+
+* Fix: NPE in docx converter block quotes if `Quotations` style is missing from templates.
+
+* Fix: do not render empty table tbody/thead tags.
 
 0.28.34
 -------
