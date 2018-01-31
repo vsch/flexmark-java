@@ -465,14 +465,15 @@
                     </w:pPr>
                     <w:rPr/>
                 </w:style>
-                <w:style w:type="character" w:styleId="FootnoteAnchor">
+                <w:style w:type="character" w:styleId="FootnoteReference">
                     <w:name w:val="Footnote Anchor"/>
                     <w:rPr>
                         <w:vertAlign w:val="superscript"/>
                     </w:rPr>
                 </w:style>
-                <w:style w:type="character" w:styleId="EndnoteAnchor">
+                <w:style w:type="character" w:styleId="EndnoteReference">
                     <w:name w:val="Endnote Anchor"/>
+                    <w:unhideWhenUsed/>
                     <w:rPr>
                         <w:vertAlign w:val="superscript"/>
                     </w:rPr>

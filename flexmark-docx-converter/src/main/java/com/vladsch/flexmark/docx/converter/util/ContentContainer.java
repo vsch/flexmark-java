@@ -1,5 +1,8 @@
 package com.vladsch.flexmark.docx.converter.util;
 
+import org.docx4j.openpackaging.parts.Part;
+import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
+
 import java.util.List;
 
 public interface ContentContainer {
@@ -8,6 +11,18 @@ public interface ContentContainer {
      * @return list of content
      */
     List<Object> getContent();
+
+    /**
+     * Get the containers relationship. Needed for footnotes that contain links and probably images
+     *
+     * @return relationship part for the container.
+     */
+    RelationshipsPart getRelationshipsPart();
+
+    /*
+    * Get the part
+     */
+    Part getContainerPart();
 
     /**
      * Get the last added content element.

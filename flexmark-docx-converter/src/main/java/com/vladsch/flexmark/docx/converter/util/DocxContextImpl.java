@@ -6,10 +6,12 @@ import com.vladsch.flexmark.util.sequence.BasedSequenceImpl;
 import org.docx4j.model.styles.StyleUtil;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.DocumentSettingsPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.FootnotesPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.relationships.Namespaces;
+import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 import org.docx4j.wml.PPrBase.PStyle;
@@ -529,6 +531,16 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
     }
 
     @Override
+    public RelationshipsPart getRelationshipsPart() {
+        return myContentContainer == this ? myDocumentPart.getRelationshipsPart() : myContentContainer.getRelationshipsPart();
+    }
+
+    @Override
+    public Part getContainerPart() {
+        return myContentContainer == this ? myDocumentPart : myContentContainer.getContainerPart();
+    }
+
+    @Override
     public Relationship getHyperlinkRelationship(String url) {
         Relationship rel = myHyperlinks.get(url);
         if (rel != null) return rel;
@@ -544,7 +556,7 @@ public class DocxContextImpl<T> implements DocxContext<T>, BlockFormatProvider<T
         rel.setTarget(url);
         rel.setTargetMode("External");
 
-        myDocumentPart.getRelationshipsPart().addRelationship(rel);
+        myContentContainer.getRelationshipsPart().addRelationship(rel);
         myHyperlinks.put(url, rel);
         return rel;
     }

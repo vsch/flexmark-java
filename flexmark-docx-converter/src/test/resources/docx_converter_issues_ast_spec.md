@@ -114,3 +114,57 @@ Issue #176, docx-converter pandoc emulation mode
 ````````````````````````````````
 
 
+## Issue - Footnote relationship parts
+
+Hyperlinks in footnotes would cause invalid document
+
+```````````````````````````````` example Issue - Footnote relationship parts: 1
+Footnote [^1]
+
+[^1]: Link [www.example](http://www.example.com) 
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Footnote </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+
+Images in footnotes would cause invalid document
+
+```````````````````````````````` example(Issue - Footnote relationship parts: 2) options(IGNORED)
+Footnote [^1]
+
+[^1]: Link ![flexmark-icon-logo](https://raw.githubusercontent.com/vsch/flexmark-java/master/assets/images/flexmark-icon-logo%402x.png "Title: flexmark-java logo") 
+.
+<w:body>
+    <w:p>
+        <w:pPr>
+            <w:pStyle w:val="ParagraphTextBody"/>
+        </w:pPr>
+        <w:r>
+            <w:t xml:space="preserve">Footnote </w:t>
+        </w:r>
+        <w:r>
+            <w:rPr>
+                <w:rStyle w:val="FootnoteReference"/>
+            </w:rPr>
+            <w:footnoteReference w:id="1"/>
+        </w:r>
+    </w:p>
+</w:body>
+````````````````````````````````
+
+

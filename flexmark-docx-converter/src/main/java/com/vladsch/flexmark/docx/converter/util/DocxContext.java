@@ -2,8 +2,10 @@ package com.vladsch.flexmark.docx.converter.util;
 
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.FootnotesPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.wml.*;
 
@@ -117,6 +119,11 @@ public interface DocxContext<T> extends DocxContextFrameProvider<T> {
      * @return relationship
      */
     Relationship getHyperlinkRelationship(String url);
+
+    /*
+     * Get the current part (main document or footnotes)
+     */
+    Part getContainerPart();
 
     /**
      * Add a line break to current R

@@ -251,14 +251,16 @@ public class DocxHelper {
                 NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
                 if (ndp != null) {
                     final PPrBase.Ind ndpInd = ndp.getInd(numPr);
-                    if (cInd.getLeft() == null) {
-                        cInd.setLeft(ndpInd.getLeft());
-                    }
-                    if (cInd.getRight() == null) {
-                        cInd.setRight(ndpInd.getRight());
-                    }
-                    if (cInd.getHanging() == null) {
-                        cInd.setHanging(ndpInd.getHanging());
+                    if (ndpInd != null) {
+                        if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
+                            cInd.setLeft(ndpInd.getLeft());
+                        }
+                        if (cInd.getRight() == null && ndpInd.getRight() != null) {
+                            cInd.setRight(ndpInd.getRight());
+                        }
+                        if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
+                            cInd.setHanging(ndpInd.getHanging());
+                        }
                     }
                 }
             }
@@ -300,14 +302,16 @@ public class DocxHelper {
                 NumberingDefinitionsPart ndp = myDocumentPart.getNumberingDefinitionsPart();
                 if (ndp != null) {
                     final PPrBase.Ind ndpInd = ndp.getInd(numPr);
-                    if (cInd.getLeft() == null) {
-                        cInd.setLeft(ndpInd.getLeft());
-                    }
-                    if (cInd.getRight() == null) {
-                        cInd.setRight(ndpInd.getRight());
-                    }
-                    if (cInd.getHanging() == null) {
-                        cInd.setHanging(ndpInd.getHanging());
+                    if (ndpInd != null) {
+                        if (cInd.getLeft() == null && ndpInd.getLeft() != null) {
+                            cInd.setLeft(ndpInd.getLeft());
+                        }
+                        if (cInd.getRight() == null && ndpInd.getRight() != null) {
+                            cInd.setRight(ndpInd.getRight());
+                        }
+                        if (cInd.getHanging() == null && ndpInd.getHanging() != null) {
+                            cInd.setHanging(ndpInd.getHanging());
+                        }
                     }
                 }
             }

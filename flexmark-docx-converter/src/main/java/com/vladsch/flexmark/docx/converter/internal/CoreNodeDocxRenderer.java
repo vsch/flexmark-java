@@ -32,10 +32,12 @@ import com.vladsch.flexmark.util.options.DataKey;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 import org.docx4j.dml.wordprocessingDrawing.Inline;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.parts.Part;
 import org.docx4j.openpackaging.parts.WordprocessingML.AltChunkType;
 import org.docx4j.openpackaging.parts.WordprocessingML.BinaryPartAbstractImage;
 import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.openpackaging.parts.WordprocessingML.NumberingDefinitionsPart;
+import org.docx4j.openpackaging.parts.relationships.RelationshipsPart;
 import org.docx4j.relationships.Relationship;
 import org.docx4j.toc.TocException;
 import org.docx4j.toc.TocGenerator;
@@ -918,7 +920,7 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
     public void newImage(final DocxRendererContext docx, byte[] bytes, String filenameHint, String altText, int id1, int id2, long cx) {
         try {
             BinaryPartAbstractImage imagePart = null;
-            imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), bytes);
+            imagePart = BinaryPartAbstractImage.createImagePart(docx.getPackage(), docx.getContainerPart(), bytes);
             Inline inline = null;
             inline = cx > 0 ? imagePart.createImageInline(filenameHint, altText, id1, id2, cx, false)
                     : imagePart.createImageInline(filenameHint, altText, id1, id2, false);
@@ -1342,6 +1344,26 @@ public class CoreNodeDocxRenderer implements PhasedNodeDocxRenderer {
                         public void run() {
                             docx.setBlockFormatProvider(new FootnoteBlockFormatProvider<Node>(docx));
                             docx.setContentContainer(new ContentContainer() {
+                                @Override
+                                public RelationshipsPart getRelationshipsPart() {
+                                    try {
+                                        return docx.getFootnotesPart().getRelationshipsPart();
+                                    } catch (Docx4JException e) {
+                                        e.printStackTrace();
+                                        return docx.getDocxDocument().getRelationshipsPart();
+                                    }
+                                }
+
+                                @Override
+                                public Part getContainerPart() {
+                                    try {
+                                        return docx.getFootnotesPart();
+                                    } catch (Docx4JException e) {
+                                        e.printStackTrace();
+                                        return docx.getDocxDocument();
+                                    }
+                                }
+
                                 @Override
                                 public List<Object> getContent() {
                                     return ftnEdn.getContent();

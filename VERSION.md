@@ -7,6 +7,7 @@ flexmark-java
 
 - [To Do](#to-do)
     - [Docx Converter](#docx-converter)
+- [0.28.40](#02840)
 - [0.28.38](#02838)
 - [0.28.36](#02836)
 - [0.28.34](#02834)
@@ -237,14 +238,19 @@ flexmark-java
 
 &nbsp;</details>
 
+0.28.40
+-------
+
+* [ ] Fix: DocxConverter self referencing ref anchors should be converted to bookmark references in the
+      docx
+* [ ] Add: DocxConverter options to re-map standard style names to user defined ones. 
+
 0.28.38
 -------
 
-* [ ] Add option to HTML Generator to convert resolved image links base64 encoded image data.
+* Fix: DocxConverter images and hyperlinks in footnotes would create invalid document.
 
-  **NOTE:** this requires that your link resolver resolves image links so that the link is
-  either an absolute URI (`file://`, `http://` or `https://`) or a relative link which is the
-  relative path from current working directory to a valid image file.
+* Fix: DocxConverter changed style for footnote ref from `FootnoteAnchor` to `FootnoteReference`
 
 0.28.36
 -------
